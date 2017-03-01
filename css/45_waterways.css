@@ -1,0 +1,64 @@
+/* waterways */
+
+.preset-icon .icon.tag-waterway.other-line {
+    color: #77d3de;
+    fill: #77d3de;
+}
+.preset-icon .icon.category-water,
+.preset-icon .icon.tag-route-ferry,
+.preset-icon .icon.tag-waterway {
+    color: #77d3de;
+    fill: #fff;
+}
+
+path.fill.tag-waterway {
+    stroke: rgba(119, 211, 222, 0.3);
+    fill: rgba(119, 211, 222, 0.3);
+}
+
+path.stroke.tag-waterway {
+    stroke: #77d3de;
+    stroke-width: 2;
+}
+path.casing.tag-waterway {
+    stroke: #77d3de;
+    stroke-width: 4;
+}
+
+path.stroke.tag-waterway-river {
+    stroke-width: 4;
+}
+path.casing.tag-waterway-river {
+    stroke-width: 6;
+}
+
+.preset-icon .icon.tag-waterway-ditch {
+    color: #6591ff;
+}
+path.stroke.tag-waterway-ditch {
+    stroke: #6591ff;
+    stroke-width: 1;
+}
+path.casing.tag-waterway-ditch {
+    stroke: #6591ff;
+    stroke-width: 3;
+}
+
+path.area.stroke.tag-waterway-dock,
+path.area.stroke.tag-waterway-boatyard,
+path.area.stroke.tag-waterway-fuel {
+    stroke: white;
+    stroke-width: 1;
+}
+path.area.casing.tag-waterway-dock,
+path.area.casing.tag-waterway-boatyard,
+path.area.casing.tag-waterway-fuel {
+    stroke: none;
+}
+path.area.fill.tag-waterway-dock,
+path.area.fill.tag-waterway-boatyard,
+path.area.fill.tag-waterway-fuel {
+    stroke: rgba(255, 255, 255, 0.3);
+    fill: rgba(255, 255, 255, 0.3);
+}
+

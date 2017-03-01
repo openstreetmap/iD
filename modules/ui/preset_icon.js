@@ -18,6 +18,7 @@ export function uiPresetIcon() {
             p = preset.apply(this, arguments),
             geom = geometry.apply(this, arguments),
             picon = p.icon || (geom === 'line' ? 'other-line' : 'marker-stroked'),
+            isPoi = picon.match(/^poi-/) !== null,
             isMaki = dataFeatureIcons.indexOf(picon) !== -1;
 
         function tag_classes(p) {
@@ -68,7 +69,7 @@ export function uiPresetIcon() {
 
         icon
             .attr('class', 'preset-icon preset-icon-' +
-                (isMaki ? (geom === 'area' ? '24' : '28') : (geom === 'area' ? '44' : '60'))
+                ((isMaki || isPoi) ? (geom === 'area' ? '24' : '28') : (geom === 'area' ? '44' : '60'))
             );
 
         icon.selectAll('svg')

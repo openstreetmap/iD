@@ -15,8 +15,7 @@ export function operationMerge(selectedIDs, context) {
         mergePolygon = actionMergePolygon(selectedIDs);
 
     var operation = function() {
-        var annotation = t('operations.merge.annotation', {n: selectedIDs.length}),
-            action;
+        var action;
 
         if (!join.disabled(context.graph())) {
             action = join;
@@ -26,12 +25,12 @@ export function operationMerge(selectedIDs, context) {
             action = mergePolygon;
         }
 
-        context.perform(action, annotation);
+        context.perform(action, operation.annotation());
         var ids = selectedIDs.filter(function(id) {
             var entity = context.hasEntity(id);
             return entity && entity.type !== 'node';
         });
-        context.enter(modeSelect(context, ids).suppressMenu(true));
+        context.enter(modeSelect(context, ids));
     };
 
 
@@ -66,6 +65,11 @@ export function operationMerge(selectedIDs, context) {
         }
 
         return t('operations.merge.description');
+    };
+
+
+    operation.annotation = function() {
+        return t('operations.merge.annotation', { n: selectedIDs.length });
     };
 
 

@@ -4624,7 +4624,7 @@
             "name": "Defibrillator"
         },
         "emergency/fire_hydrant": {
-            "icon": "fire-station",
+            "icon": "poi-fire-hydrant",
             "fields": [
                 "fire_hydrant/type",
                 "fire_hydrant/position"
@@ -4964,6 +4964,7 @@
             "name": "Street Crossing"
         },
         "highway/crosswalk": {
+            "icon": "poi-foot",
             "fields": [
                 "crossing",
                 "kerb",
@@ -5028,6 +5029,7 @@
             "name": "Foot Path"
         },
         "highway/give_way": {
+            "icon": "poi-yield",
             "fields": [
                 "parallel_direction"
             ],
@@ -5511,6 +5513,7 @@
             "name": "Service Area"
         },
         "highway/steps": {
+            "icon": "highway-steps",
             "fields": [
                 "surface",
                 "lit",
@@ -5519,7 +5522,6 @@
                 "handrail",
                 "step_count"
             ],
-            "icon": "highway-steps",
             "geometry": [
                 "line"
             ],
@@ -5533,6 +5535,7 @@
             "name": "Steps"
         },
         "highway/stop": {
+            "icon": "poi-stop",
             "fields": [
                 "stop",
                 "parallel_direction"
@@ -5684,6 +5687,7 @@
             "name": "Traffic Mirror"
         },
         "highway/traffic_signals": {
+            "icon": "poi-traffic-signals",
             "geometry": [
                 "vertex"
             ],
@@ -5956,6 +5960,30 @@
             ],
             "name": "Community Garden"
         },
+        "landuse/aquaculture": {
+            "icon": "aquarium",
+            "fields": [
+                "operator",
+                "produce"
+            ],
+            "geometry": [
+                "area"
+            ],
+            "tags": {
+                "landuse": "aquaculture"
+            },
+            "terms": [
+                "fish farm",
+                "crustacean",
+                "algae",
+                "aquafarming",
+                "shrimp farm",
+                "oyster farm",
+                "mariculture",
+                "algaculture"
+            ],
+            "name": "Aquaculture"
+        },
         "landuse/basin": {
             "icon": "water",
             "geometry": [
@@ -6025,7 +6053,8 @@
             "icon": "farm",
             "fields": [
                 "operator",
-                "crop"
+                "crop",
+                "produce"
             ],
             "geometry": [
                 "area"
@@ -6063,7 +6092,8 @@
             "icon": "park-alt1",
             "fields": [
                 "leaf_type",
-                "leaf_cycle"
+                "leaf_cycle",
+                "produce"
             ],
             "geometry": [
                 "area"
@@ -12028,6 +12058,7 @@
             "name": "Zoo"
         },
         "traffic_calming": {
+            "icon": "poi-warning",
             "fields": [
                 "traffic_calming",
                 "parallel_direction"
@@ -12048,6 +12079,7 @@
             "name": "Traffic Calming"
         },
         "traffic_calming/bump": {
+            "icon": "poi-warning",
             "fields": [
                 "surface",
                 "parallel_direction"
@@ -12067,6 +12099,7 @@
             "name": "Speed Bump"
         },
         "traffic_calming/chicane": {
+            "icon": "poi-warning",
             "fields": [
                 "parallel_direction"
             ],
@@ -12085,6 +12118,7 @@
             "name": "Traffic Chicane"
         },
         "traffic_calming/choker": {
+            "icon": "poi-warning",
             "fields": [
                 "parallel_direction"
             ],
@@ -12102,6 +12136,7 @@
             "name": "Traffic Choker"
         },
         "traffic_calming/cushion": {
+            "icon": "poi-warning",
             "fields": [
                 "surface",
                 "parallel_direction"
@@ -12122,6 +12157,7 @@
             "name": "Speed Cushion"
         },
         "traffic_calming/dip": {
+            "icon": "poi-warning",
             "fields": [
                 "surface",
                 "parallel_direction"
@@ -12140,6 +12176,7 @@
             "name": "Dip"
         },
         "traffic_calming/hump": {
+            "icon": "poi-warning",
             "fields": [
                 "surface",
                 "parallel_direction"
@@ -12159,7 +12196,7 @@
             "name": "Speed Hump"
         },
         "traffic_calming/island": {
-            "icon": "circle",
+            "icon": "poi-warning",
             "geometry": [
                 "vertex"
             ],
@@ -12174,6 +12211,7 @@
             "name": "Traffic Island"
         },
         "traffic_calming/rumble_strip": {
+            "icon": "poi-warning",
             "fields": [
                 "parallel_direction"
             ],
@@ -12192,6 +12230,7 @@
             "name": "Rumble Strip"
         },
         "traffic_calming/table": {
+            "icon": "poi-warning",
             "fields": [
                 "surface"
             ],

@@ -504,12 +504,12 @@
         },
         "save": {
             "title": "Kaydet",
-            "help": "Diğer kullanıcıların yaptığın değişiklikleri görmesi için OpenStreetMap'e kaydet.",
+            "help": "Yaptığın değişiklikleri diğer kullanıcıların görebilmesi için değişikliklerini OpenStreetMap'e yükle ve kaydet.",
             "no_changes": "Kaydedilecek bir değişiklik yok.",
             "error": "Kaydederken bir hata oluştu",
             "status_code": "Sunucu {code} gönderdi",
             "unknown_error_details": "Lütfen internete bağlı olduğundan emin ol.",
-            "uploading": "Değişiklikler OpenStreetMap'e yükleniyor.",
+            "uploading": "Değişiklikler OpenStreetMap'e yükleniyor...",
             "unsaved_changes": "Kaydedilmemiş değişikliklerin var",
             "conflict": {
                 "header": "Çelişkili değişiklikleri düzelt",
@@ -2128,6 +2128,9 @@
                     "name": "Gece Kulübü",
                     "terms": "Gece Kulübü"
                 },
+                "amenity/nursing_home": {
+                    "name": "Bakım Evi"
+                },
                 "amenity/parking": {
                     "name": "Otopark",
                     "terms": "Otopark, Araç Parkı"
@@ -2242,6 +2245,10 @@
                 "amenity/social_facility/homeless_shelter": {
                     "name": "Evsizler Barınağı",
                     "terms": "Evsizler Barınağı"
+                },
+                "amenity/social_facility/nursing_home": {
+                    "name": "Bakım Evi",
+                    "terms": "Bakım Evi"
                 },
                 "amenity/studio": {
                     "name": "Stüdyo",
@@ -3589,6 +3596,10 @@
                     "name": "Ormanlık Alan",
                     "terms": "Ormanlık Alan, Orman"
                 },
+                "noexit/yes": {
+                    "name": "Çıkış Yok",
+                    "terms": "Çıkış Yok"
+                },
                 "office": {
                     "name": "Ofis",
                     "terms": "Ofis, Büro"
@@ -3648,6 +3659,10 @@
                 "office/lawyer": {
                     "name": "Hukuk Bürosu",
                     "terms": "Hukuk Bürosu"
+                },
+                "office/lawyer/notary": {
+                    "name": "Noter",
+                    "terms": "Noter"
                 },
                 "office/newspaper": {
                     "name": "Gazete",
@@ -4300,6 +4315,10 @@
                 "shop/video_games": {
                     "name": "Bilgisayar Oyun Mağazası",
                     "terms": "Bilgisayar Oyun Mağazası"
+                },
+                "shop/watches": {
+                    "name": "Saatçi",
+                    "terms": "Saatçi"
                 },
                 "shop/water_sports": {
                     "name": "Su Sporları Mağazası",

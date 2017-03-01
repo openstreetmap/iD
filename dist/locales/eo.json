@@ -503,12 +503,12 @@
         },
         "save": {
             "title": "Konservi",
-            "help": "Konservi ŝanĝojn al OpenStreetMap kaj igi ilin videblaj por aliaj uzantoj.",
+            "help": "Revizii viajn ŝanĝojn, alŝuti ilin al OpenStreetMap kaj igi ilin videblaj por aliaj uzantoj.",
             "no_changes": "Neniuj ŝanĝoj por konservi.",
             "error": "Eraroj okazis dum provado de konservado",
             "status_code": "Servilo revenigis statan kodon {code}",
             "unknown_error_details": "Bonvolu certiĝi, ke vi estas konektita al la Interreto.",
-            "uploading": "Alŝutado de ŝanĝoj al OpenStreetMap.",
+            "uploading": "Alŝutado de ŝanĝoj al OpenStreetMap...",
             "unsaved_changes": "Vi havas nekonservitajn ŝanĝojn",
             "conflict": {
                 "header": "Solvi konfliktajn redaktojn",
@@ -742,7 +742,7 @@
             },
             "fields": {
                 "access": {
-                    "label": "Aliro permesata",
+                    "label": "Aliro permesata al",
                     "options": {
                         "designated": {
                             "description": "Aliro permesata laŭ signoj aŭ specifaj lokaj leĝoj",
@@ -791,51 +791,413 @@
                 "address": {
                     "label": "Adreso",
                     "placeholders": {
-                        "city": "Urbo",
+                        "block_number": "Dombloko",
+                        "block_number!jp": "Dombloko n-ro",
+                        "city": "Urbego",
+                        "city!jp": "Urbego/Urbo/Vilaĝo/Kvartalo de Tokio",
+                        "city!vn": "Urbo/Urbego",
                         "conscriptionnumber": "123",
                         "country": "Lando",
+                        "county": "Distrikto",
+                        "county!jp": "Distrikto",
                         "district": "Distrikto",
+                        "district!vn": "Arondismento/Urbo/Distrikto",
+                        "floor": "Etaĝo",
+                        "hamlet": "Vilaĝeto",
+                        "housename": "Nomo de domo",
                         "housenumber": "123",
+                        "housenumber!jp": "N-ro de konstruaĵo/parcelo",
+                        "neighbourhood": "Najbaraĵo",
+                        "neighbourhood!jp": "Chōme/Aza/Koaza",
+                        "place": "Ejo",
+                        "postcode": "Poŝtkodo",
                         "province": "Provinco",
-                        "street": "Strato"
+                        "province!jp": "Gubernio",
+                        "quarter": "Kvartalo",
+                        "quarter!jp": "Ōaza/Machi",
+                        "state": "Ŝtato",
+                        "street": "Strato",
+                        "subdistrict": "Subdistrikto",
+                        "subdistrict!vn": "Kvartalo/Komunumo/Urbeto",
+                        "suburb": "Suburbo",
+                        "suburb!jp": "Kvartalo"
                     }
                 },
+                "admin_level": {
+                    "label": "Administra nivelo"
+                },
+                "aerialway": {
+                    "label": "Speco"
+                },
+                "aerialway/access": {
+                    "label": "Aliro",
+                    "options": {
+                        "both": "Ambaŭ",
+                        "entry": "Eniro",
+                        "exit": "Eliro"
+                    }
+                },
+                "aerialway/bubble": {
+                    "label": "Tegmenteto"
+                },
                 "aerialway/capacity": {
+                    "label": "Kiom da homoj (hore)",
                     "placeholder": "500, 2500, 5000..."
                 },
                 "aerialway/duration": {
+                    "label": "Daŭro (en minutoj)",
                     "placeholder": "1, 2, 3..."
                 },
+                "aerialway/heating": {
+                    "label": "Hejtata"
+                },
                 "aerialway/occupancy": {
+                    "label": "Kiom da homoj en vagoneto/seĝo",
                     "placeholder": "2, 4, 8..."
+                },
+                "aerialway/summer/access": {
+                    "label": "Aliro (somere)",
+                    "options": {
+                        "both": "Ambaŭ",
+                        "entry": "Eniro",
+                        "exit": "Eliro"
+                    }
+                },
+                "aeroway": {
+                    "label": "Speco"
+                },
+                "amenity": {
+                    "label": "Speco"
+                },
+                "area/highway": {
+                    "label": "Speco"
                 },
                 "artist": {
                     "label": "Artisto"
                 },
+                "artwork_type": {
+                    "label": "Speco"
+                },
+                "atm": {
+                    "label": "Bankaŭtomato"
+                },
+                "backrest": {
+                    "label": "Seĝodorso"
+                },
+                "barrier": {
+                    "label": "Speco"
+                },
+                "bath/open_air": {
+                    "label": "Eksterdome"
+                },
+                "bath/sand_bath": {
+                    "label": "Polva/sabla bano"
+                },
+                "bath/type": {
+                    "label": "Speco",
+                    "options": {
+                        "foot_bath": "Piedbano",
+                        "hot_spring": "Tervarma akvofonto",
+                        "onsen": "Japana onsen-o"
+                    }
+                },
+                "beauty": {
+                    "label": "Speco de vendejo"
+                },
+                "bench": {
+                    "label": "Benko"
+                },
+                "bicycle_parking": {
+                    "label": "Speco"
+                },
+                "bin": {
+                    "label": "Rubujo"
+                },
+                "blood_components": {
+                    "label": "Sang-konsistaĵoj",
+                    "options": {
+                        "plasma": "plasmo",
+                        "platelets": "trombocitoj (sangoplatetoj)",
+                        "stemcells": "praĉeloj (stamĉeloj)",
+                        "whole": "sango"
+                    }
+                },
+                "board_type": {
+                    "label": "Speco"
+                },
+                "boundary": {
+                    "label": "Speco"
+                },
+                "brand": {
+                    "label": "Marko"
+                },
+                "building": {
+                    "label": "Konstruaĵo"
+                },
+                "building_area": {
+                    "label": "Konstruaĵo"
+                },
+                "bunker_type": {
+                    "label": "Speco"
+                },
+                "camera/direction": {
+                    "label": "Direkto (horloĝdirekte en gradoj)",
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "camera/mount": {
+                    "label": "Fiksigaĵo de kamerao"
+                },
+                "camera/type": {
+                    "label": "Speco de kamerao",
+                    "options": {
+                        "dome": "Kupola",
+                        "fixed": "Fiksigita",
+                        "panning": "Turnebla"
+                    }
+                },
+                "capacity": {
+                    "label": "Enhaveco",
+                    "placeholder": "50, 100, 200..."
+                },
+                "cardinal_direction": {
+                    "label": "Direkto",
+                    "options": {
+                        "E": "Orienta",
+                        "ENE": "Orient-nord-orienta",
+                        "ESE": "Orient-sud-orienta",
+                        "N": "Norda",
+                        "NE": "Nord-orienta",
+                        "NNE": "Nord-nord-orienta",
+                        "NNW": "Nord-nord-okcidenta",
+                        "NW": "Nord-okcidenta",
+                        "S": "Suda",
+                        "SE": "Sud-orienta",
+                        "SSE": "Sud-sud-orienta",
+                        "SSW": "Sud-sud-okcidenta",
+                        "SW": "Sud-okcidenta",
+                        "W": "Okcidenta",
+                        "WNW": "Okcident-nord-okcidenta",
+                        "WSW": "Okcident-sud-okcidenta"
+                    }
+                },
+                "castle_type": {
+                    "label": "Speco"
+                },
+                "clock_direction": {
+                    "label": "Direkto",
+                    "options": {
+                        "anticlockwise": "Malhorloĝdirekte",
+                        "clockwise": "Horloĝdirekte"
+                    }
+                },
+                "collection_times": {
+                    "label": "Sendaĵoj ricevataj je"
+                },
+                "construction": {
+                    "label": "Speco"
+                },
+                "contact/webcam": {
+                    "label": "Retkameraa URL",
+                    "placeholder": "http://ekzemplo.com/"
+                },
+                "content": {
+                    "label": "Enhavo"
+                },
                 "country": {
                     "label": "Lando"
+                },
+                "covered": {
+                    "label": "Kovrita"
+                },
+                "craft": {
+                    "label": "Speco"
+                },
+                "crop": {
+                    "label": "Rikoltaĵo"
+                },
+                "crossing": {
+                    "label": "Speco"
+                },
+                "cuisine": {
+                    "label": "Kuirarto"
+                },
+                "currency_multi": {
+                    "label": "Valut-tipoj"
+                },
+                "cycle_network": {
+                    "label": "Reto"
+                },
+                "cycleway": {
+                    "label": "Bicikl-koridoroj",
+                    "options": {
+                        "lane": {
+                            "description": "Bicikla koridoro aparta de aŭtomobila trafiko per pentrita linio",
+                            "title": "Norma bicikl-koridoro"
+                        },
+                        "none": {
+                            "description": "Neniu bicikl-koridoro",
+                            "title": "Neniu"
+                        },
+                        "opposite": {
+                            "description": "Bicikla koridoro, kiu ebligas moviĝi en ambaŭ direktoj sur unudirekta strato",
+                            "title": "Kontraŭflua bicikl-koridoro (sur unudirekta strato)"
+                        },
+                        "opposite_lane": {
+                            "description": "Bicikla koridoro, kiu ebligas moviĝi en kontraŭa direkto ol direkto de koridoro ĉe kiu ĝi troviĝas",
+                            "title": "Kontraŭflua bicikl-koridoro (sur dudirekta strato)"
+                        },
+                        "share_busway": {
+                            "description": "Bicikla koridoro kunhavigata kun aŭtobusa koridoro",
+                            "title": "Aŭtobusa kaj bicikla koridoro"
+                        },
+                        "shared_lane": {
+                            "description": "Bicikla koridoro ne aparta de aŭtomobila trafiko",
+                            "title": "Komuna bicikl-koridoro"
+                        },
+                        "track": {
+                            "description": "Bicikla koridoro apartigita de aŭtomobila trafiko per fizika barilo",
+                            "title": "Bicikla vojo"
+                        }
+                    },
+                    "placeholder": "neniu",
+                    "types": {
+                        "cycleway:left": "Maldekstra flanko",
+                        "cycleway:right": "Dekstra flanko"
+                    }
+                },
+                "date": {
+                    "label": "Dato"
+                },
+                "delivery": {
+                    "label": "Hejmliverado"
+                },
+                "denomination": {
+                    "label": "Konfesio"
+                },
+                "denotation": {
+                    "label": "Signifo"
                 },
                 "description": {
                     "label": "Priskribo"
                 },
+                "diaper": {
+                    "label": "Tablo por travindotukado"
+                },
+                "display": {
+                    "label": "Vidigilo"
+                },
+                "dock": {
+                    "label": "Speco"
+                },
+                "drive_through": {
+                    "label": "Sen-elaŭtiga servo (drive-through)"
+                },
                 "electrified": {
+                    "label": "Elektra sistemo",
                     "options": {
-                        "no": "Ne"
-                    }
+                        "contact_line": "Lineo supertera",
+                        "no": "Ne",
+                        "rail": "Kontaktrelo (tria relo)",
+                        "yes": "Jes (nedifinita)"
+                    },
+                    "placeholder": "Lineo supertera, kontaktrelo..."
+                },
+                "elevation": {
+                    "label": "Altitudo"
+                },
+                "email": {
+                    "label": "Retpoŝtadreso",
+                    "placeholder": "ekzemplo@ekzemplo.com"
+                },
+                "emergency": {
+                    "label": "Je danĝero"
+                },
+                "entrance": {
+                    "label": "Speco"
+                },
+                "except": {
+                    "label": "Esceptoj"
                 },
                 "fax": {
-                    "placeholder": "+31 42 123 4567"
+                    "label": "Telekopiilo",
+                    "placeholder": "+31 42 123 45 67"
+                },
+                "fee": {
+                    "label": "Pago"
+                },
+                "fence_type": {
+                    "label": "Speco"
+                },
+                "fire_hydrant/position": {
+                    "label": "Pozicio",
+                    "options": {
+                        "green": "Herbotapiŝo",
+                        "lane": "Strato",
+                        "parking_lot": "Parkumejo",
+                        "sidewalk": "Irejo"
+                    }
+                },
+                "fire_hydrant/type": {
+                    "label": "Speco",
+                    "options": {
+                        "pillar": "Supertera",
+                        "pond": "Lageto",
+                        "underground": "Subtera",
+                        "wall": "Muro"
+                    }
+                },
+                "fixme": {
+                    "label": "Riparu min!"
+                },
+                "fuel": {
+                    "label": "Brulaĵo"
+                },
+                "fuel_multi": {
+                    "label": "Specoj de brulaĵoj"
+                },
+                "gauge": {
+                    "label": "Fervoj-larĝo (ŝpuro)"
                 },
                 "gender": {
+                    "label": "Sekso",
+                    "options": {
+                        "female": "Ina",
+                        "male": "Vira",
+                        "unisex": "Gea"
+                    },
                     "placeholder": "Nekonata"
                 },
+                "generator/method": {
+                    "label": "Metodo"
+                },
+                "generator/source": {
+                    "label": "Energi-fonto"
+                },
+                "generator/type": {
+                    "label": "Tipo"
+                },
                 "golf_hole": {
-                    "label": "Referenco"
+                    "label": "Referenco",
+                    "placeholder": "Numero de truo (1-18)"
                 },
                 "handicap": {
+                    "label": "Handikapo",
                     "placeholder": "1-18"
                 },
+                "handrail": {
+                    "label": "Apogrelo"
+                },
+                "height": {
+                    "label": "Alto (metroj)"
+                },
+                "highway": {
+                    "label": "Speco"
+                },
+                "historic": {
+                    "label": "Speco"
+                },
                 "hoops": {
+                    "label": "Korboj",
                     "placeholder": "1, 2, 4..."
                 },
                 "iata": {
@@ -844,71 +1206,495 @@
                 "icao": {
                     "label": "ICAO"
                 },
+                "incline": {
+                    "label": "Klino"
+                },
+                "incline_steps": {
+                    "label": "Klino",
+                    "options": {
+                        "down": "Malsupren",
+                        "up": "Supren"
+                    }
+                },
+                "indoor": {
+                    "label": "Interno"
+                },
+                "information": {
+                    "label": "Speco"
+                },
                 "internet_access": {
+                    "label": "Interret-aliro",
                     "options": {
                         "no": "Ne",
+                        "terminal": "Terminalo",
+                        "wired": "Drata",
                         "wlan": "Sendrata",
                         "yes": "Jes"
                     }
                 },
+                "internet_access/fee": {
+                    "label": "Pagenda Interret-aliro"
+                },
+                "internet_access/ssid": {
+                    "label": "SSID (nomo de reto)"
+                },
+                "kerb": {
+                    "label": "Trotuar-randaĵo"
+                },
+                "lamp_type": {
+                    "label": "Speco"
+                },
+                "landuse": {
+                    "label": "Speco"
+                },
                 "lanes": {
+                    "label": "Vetur-koridoroj",
                     "placeholder": "1, 2, 3..."
                 },
+                "layer": {
+                    "label": "Tavolo"
+                },
+                "leaf_cycle": {
+                    "label": "Foli-ciklo",
+                    "options": {
+                        "deciduous": "Falfoliaj (deciduaj)",
+                        "evergreen": "Ĉiamverdaj",
+                        "mixed": "Plurspecaj",
+                        "semi_deciduous": "Duonfalfoliaj",
+                        "semi_evergreen": "Duonĉiamfoliaj"
+                    }
+                },
+                "leaf_cycle_singular": {
+                    "label": "Foli-ciklo",
+                    "options": {
+                        "deciduous": "Falfolia (decidua)",
+                        "evergreen": "Ĉiamverda",
+                        "semi_deciduous": "Duonfalfolia",
+                        "semi_evergreen": "Duonĉiamfolia"
+                    }
+                },
+                "leaf_type": {
+                    "label": "Foli-speco",
+                    "options": {
+                        "broadleaved": "Folihavaj",
+                        "leafless": "Senfoliaj",
+                        "mixed": "Plurspecaj",
+                        "needleleaved": "Pinglofoliaj"
+                    }
+                },
+                "leaf_type_singular": {
+                    "label": "Foli-speco",
+                    "options": {
+                        "broadleaved": "Folihava",
+                        "leafless": "Senfolia",
+                        "needleleaved": "Pinglofolia"
+                    }
+                },
+                "leisure": {
+                    "label": "Speco"
+                },
+                "length": {
+                    "label": "Longo (metroj)"
+                },
+                "level": {
+                    "label": "Etaĝo"
+                },
                 "levels": {
+                    "label": "Kiom da etaĝoj",
                     "placeholder": "2, 4, 6..."
                 },
+                "lit": {
+                    "label": "Prilumado"
+                },
+                "location": {
+                    "label": "Loko"
+                },
+                "man_made": {
+                    "label": "Speco"
+                },
+                "map_size": {
+                    "label": "Mapkovro"
+                },
+                "map_type": {
+                    "label": "Tipo"
+                },
+                "maxheight": {
+                    "label": "Maksimuma alto",
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
+                },
                 "maxspeed": {
+                    "label": "Rapidlimo",
                     "placeholder": "40, 50, 60..."
                 },
+                "maxstay": {
+                    "label": "Maksimuma restad-tempo"
+                },
                 "mtb/scale": {
+                    "label": "Montbicikla malfacileco",
+                    "options": {
+                        "0": "0: firma sablega aŭ tera pavimo, neniuj baraĵoj, larĝaj kurbiĝoj",
+                        "1": "1: iomete da malfirma pavimo, etaj baraĵoj, larĝaj kurbiĝoj",
+                        "2": "2: malfirma pavimo, grandaj baraĵoj, kurbiĝoj",
+                        "3": "3: glitiga pavimo, grandaj baraĵoj, mallarĝaj kurbiĝoj",
+                        "4": "4: malfirma pavimo aŭ ŝtonegoj, danĝeraj kurbiĝoj",
+                        "5": "5: ege malfacila, ŝtonegoj, rokoj, terfaloj",
+                        "6": "6: preskaŭ malbiciklebla, escepte de plej bonaj montbiciklistoj"
+                    },
                     "placeholder": "0, 1, 2, 3..."
                 },
                 "mtb/scale/imba": {
+                    "label": "Montbicikla malfacileca skalo de IMBA",
                     "options": {
-                        "1": "Facila (verda rondo)"
-                    }
+                        "0": "Facilega (blanka cirklo)",
+                        "1": "Facila (verda cirklo)",
+                        "2": "Meza (blua kvadrato)",
+                        "3": "Malfacila (nigra rombo)",
+                        "4": "Malfacilega (duobla nigra rombo)"
+                    },
+                    "placeholder": "Facila, meza, malfacila..."
+                },
+                "mtb/scale/uphill": {
+                    "label": "Supren-bicikla malfacileca skalo",
+                    "options": {
+                        "0": "0: mez. klineco <10%, sablego/firma teraĵo, sen baraĵoj",
+                        "1": "1: mez. klineco <15%, ŝtonego/firma teraĵo, kelkaj etaj baraĵoj",
+                        "2": "2: mez. klineco <20%, firma pavimo, pugn-grandaj ŝtonoj/radikoj",
+                        "3": "3: mez. klineco <25%, diversa pavimo, pugn-grandaj ŝtonoj/branĉoj",
+                        "4": "4: mez. klineco <30%, aĉa pavimo, grandaj ŝtonoj/branĉoj",
+                        "5": "5: tre kruta, biciklo kutime devas esti kondukata"
+                    },
+                    "placeholder": "0, 1, 2, 3..."
                 },
                 "name": {
-                    "label": "Nomo"
+                    "label": "Nomo",
+                    "placeholder": "Komuna nomo (se ekzistas)"
+                },
+                "natural": {
+                    "label": "Natura"
+                },
+                "network": {
+                    "label": "Reto"
+                },
+                "network_bicycle": {
+                    "label": "Speco de reto",
+                    "options": {
+                        "icn": "Interŝtata",
+                        "lcn": "Loka",
+                        "ncn": "Ŝtata",
+                        "rcn": "Regiona"
+                    },
+                    "placeholder": "Loka, regiona, ŝtata, interŝtata"
+                },
+                "network_foot": {
+                    "label": "Speco de reto",
+                    "options": {
+                        "iwn": "Interŝtata",
+                        "lwn": "Loka",
+                        "nwn": "Ŝtata",
+                        "rwn": "Regiona"
+                    },
+                    "placeholder": "Loka, regiona, ŝtata, interŝtata"
+                },
+                "network_horse": {
+                    "label": "Speco de reto",
+                    "options": {
+                        "ihn": "Interŝtata",
+                        "lhn": "Loka",
+                        "nhn": "Ŝtata",
+                        "rhn": "Regiona"
+                    },
+                    "placeholder": "Loka, regiona, ŝtata, interŝtata"
+                },
+                "network_road": {
+                    "label": "Reto"
                 },
                 "note": {
                     "label": "Rimarko"
                 },
+                "office": {
+                    "label": "Speco"
+                },
                 "oneway": {
+                    "label": "Unudirekta",
                     "options": {
                         "no": "Ne",
+                        "undefined": "Implicite ne",
                         "yes": "Jes"
                     }
                 },
                 "oneway_yes": {
+                    "label": "Unudirekta",
                     "options": {
                         "no": "Ne",
+                        "undefined": "Implicite jes",
                         "yes": "Jes"
                     }
                 },
                 "opening_hours": {
                     "label": "Malfermaj horoj"
                 },
+                "operator": {
+                    "label": "Administranto"
+                },
+                "outdoor_seating": {
+                    "label": "Seĝoj ekstere"
+                },
                 "par": {
+                    "label": "Par",
                     "placeholder": "3, 4, 5..."
+                },
+                "parallel_direction": {
+                    "label": "Direkto",
+                    "options": {
+                        "backward": "Malantaŭen",
+                        "forward": "Antaŭen"
+                    }
+                },
+                "park_ride": {
+                    "label": "Parkumu kaj veturu (P+R)"
+                },
+                "parking": {
+                    "label": "Speco",
+                    "options": {
+                        "carports": "Tegmentitaj duonbudoj",
+                        "garage_boxes": "Parkumeja domo",
+                        "lane": "Apudvoja",
+                        "multi-storey": "Pluretaĝa",
+                        "sheds": "Garaĝ-budoj privataj",
+                        "surface": "Supraĵa",
+                        "underground": "Subtera"
+                    }
+                },
+                "payment_multi": {
+                    "label": "Pagmanieroj"
                 },
                 "phone": {
                     "label": "Telefono",
                     "placeholder": "+31 42 1231 4567"
                 },
+                "piste/difficulty": {
+                    "label": "Malfacileco",
+                    "options": {
+                        "advanced": "Malfacila (nigra rombo)",
+                        "easy": "Facila (verda cirklo)",
+                        "expert": "Malfacilega (duobla nigra rombo)",
+                        "extreme": "Ekstrema (grimpada ilaro bezonata)",
+                        "freeride": "Tre malfacilega (eksterskivoje)",
+                        "intermediate": "Meza (blua kvadrato)",
+                        "novice": "Facilega (por novuloj)"
+                    },
+                    "placeholder": "Facila, meza, malfacila..."
+                },
+                "piste/grooming": {
+                    "label": "Skivoja preparado",
+                    "options": {
+                        "backcountry": "Nenia",
+                        "classic": "Klasika",
+                        "classic+skating": "Klasika kaj neĝtabulada",
+                        "mogul": "Ĝibetara",
+                        "scooter": "Motorsleda",
+                        "skating": "Neĝtabulada"
+                    }
+                },
+                "piste/type": {
+                    "label": "Speco",
+                    "options": {
+                        "downhill": "Alpa, malsuprenira (downhill)",
+                        "hike": "Skikurada",
+                        "ice_skate": "Glitkurada",
+                        "nordic": "Nordia (skikurada)",
+                        "playground": "Infanludeja (por lernado)",
+                        "skitour": "Ski-ekskursuma (skitour)",
+                        "sled": "Glitveturila (tirata de hundoj)",
+                        "sleigh": "Glitveturila",
+                        "snow_park": "Neĝ-parka"
+                    }
+                },
+                "place": {
+                    "label": "Speco"
+                },
+                "plant": {
+                    "label": "Vegetaĵo"
+                },
+                "population": {
+                    "label": "Loĝantaro"
+                },
+                "power": {
+                    "label": "Tipo"
+                },
+                "power_supply": {
+                    "label": "Energi-fonto"
+                },
+                "produce": {
+                    "label": "Produktaĵo"
+                },
+                "product": {
+                    "label": "Produktaĵo"
+                },
+                "railway": {
+                    "label": "Tipo"
+                },
+                "recycling_accepts": {
+                    "label": "Akceptanta"
+                },
+                "recycling_type": {
+                    "label": "Speco de recikligo",
+                    "options": {
+                        "centre": "Centro de recikligo",
+                        "container": "Rubujego"
+                    }
+                },
                 "ref": {
                     "label": "Referenco"
+                },
+                "relation": {
+                    "label": "Speco"
                 },
                 "religion": {
                     "label": "Religio"
                 },
+                "restriction": {
+                    "label": "Speco"
+                },
+                "restrictions": {
+                    "label": "Turnaj limigoj"
+                },
+                "rooms": {
+                    "label": "Ĉambroj"
+                },
+                "route": {
+                    "label": "Speco"
+                },
+                "route_master": {
+                    "label": "Speco"
+                },
+                "sac_scale": {
+                    "label": "Piedirada malfacileco",
+                    "options": {
+                        "alpine_hiking": "T4: alt-montara piedirado",
+                        "demanding_alpine_hiking": "T5: postulema alt-montara piedirado",
+                        "demanding_mountain_hiking": "T3: postulema montara piedirado",
+                        "difficult_alpine_hiking": "T6: malfacila alt-montara piedirado",
+                        "hiking": "T1: piedirado",
+                        "mountain_hiking": "T2: montara piedirado"
+                    },
+                    "placeholder": "Montara piedirado, alt-montara piedirado"
+                },
+                "sanitary_dump_station": {
+                    "label": "Forigado de fekaĵoj"
+                },
+                "seasonal": {
+                    "label": "Sezona"
+                },
+                "second_hand": {
+                    "label": "Brokantado",
+                    "options": {
+                        "no": "Ne",
+                        "only": "Nur",
+                        "yes": "Jes"
+                    },
+                    "placeholder": "Jes, ne, nur"
+                },
+                "service": {
+                    "label": "Speco"
+                },
+                "service/bicycle": {
+                    "label": "Servoj"
+                },
+                "service_rail": {
+                    "label": "Speco de servo",
+                    "options": {
+                        "crossover": "Trakforko",
+                        "siding": "Preterpasejo",
+                        "spur": "Branĉtrako",
+                        "yard": "Ranĝadstaciaj trakoj"
+                    }
+                },
+                "shelter": {
+                    "label": "Ŝirmejo"
+                },
+                "shelter_type": {
+                    "label": "Speco"
+                },
+                "shop": {
+                    "label": "Speco"
+                },
+                "site": {
+                    "label": "Speco"
+                },
+                "smoking": {
+                    "label": "Fumado",
+                    "options": {
+                        "dedicated": "Dediĉata por fumantoj (ekz. fumista klubejo)",
+                        "isolated": "En fumĉambroj, reale apartigitaj",
+                        "no": "Fumado malpermesata ĉie",
+                        "outside": "Permesata ekstere",
+                        "separated": "En fumĉambroj, ne reale apartigitaj",
+                        "yes": "Permesata ĉie"
+                    },
+                    "placeholder": "Ne, dise, jes..."
+                },
+                "smoothness": {
+                    "label": "Glateco",
+                    "options": {
+                        "bad": "Firmaj radoj: montbiciklo, aŭtomobilo, rikiŝo",
+                        "excellent": "Mallarĝaj radetoj: vicradaj glitiloj, rultabulo",
+                        "good": "Mallarĝaj radoj: vetkura biciklo",
+                        "horrible": "Ekstervojilo: peza ĉiuterena veturilo",
+                        "impassable": "Malveturebla per radveturiloj",
+                        "intermediate": "Radoj: urba biciklo, rulseĝo, motorcikleto",
+                        "very_bad": "Alta subekipaĵo: malpeza ĉiuterena veturilo",
+                        "very_horrible": "Speciala ekstervojilo: traktoro, kvado"
+                    },
+                    "placeholder": "Mallarĝaj radetoj, radoj, ekstervojoilo..."
+                },
+                "social_facility": {
+                    "label": "Speco"
+                },
+                "social_facility_for": {
+                    "label": "Alcela grupo"
+                },
                 "source": {
                     "label": "Fonto"
                 },
-                "structure": {
+                "sport": {
+                    "label": "Sporto"
+                },
+                "sport_ice": {
+                    "label": "Sporto"
+                },
+                "sport_racing": {
+                    "label": "Sporto"
+                },
+                "stars": {
+                    "label": "Steloj"
+                },
+                "step_count": {
+                    "label": "Kiom da ŝtupoj"
+                },
+                "stop": {
+                    "label": "Stop-signo al",
                     "options": {
-                        "bridge": "Ponto"
+                        "all": "Ĉiuj vojoj",
+                        "minor": "Neĉefa vojo"
                     }
+                },
+                "structure": {
+                    "label": "Strukturo",
+                    "options": {
+                        "bridge": "Ponto",
+                        "cutting": "Vojfosaĵo",
+                        "embankment": "Surŝutaĵo",
+                        "ford": "Travadejo",
+                        "tunnel": "Tunelo"
+                    },
+                    "placeholder": "Nekonata"
+                },
+                "studio": {
+                    "label": "Speco"
+                },
+                "substation": {
+                    "label": "Speco"
                 },
                 "trail_visibility": {
                     "placeholder": "Bonega, bona, malbona..."

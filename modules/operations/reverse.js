@@ -7,7 +7,7 @@ export function operationReverse(selectedIDs, context) {
     var entityId = selectedIDs[0];
 
     var operation = function() {
-        context.perform(actionReverse(entityId), t('operations.reverse.annotation'));
+        context.perform(actionReverse(entityId), operation.annotation());
     };
 
 
@@ -23,6 +23,11 @@ export function operationReverse(selectedIDs, context) {
 
     operation.tooltip = function() {
         return t('operations.reverse.description');
+    };
+
+
+    operation.annotation = function() {
+        return t('operations.reverse.annotation');
     };
 
 

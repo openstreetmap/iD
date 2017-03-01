@@ -504,12 +504,12 @@
         },
         "save": {
             "title": "Speichern",
-            "help": "Änderungen auf OpenStreetMap speichern, wodurch sie für andere Nutzer sichtbar werden.",
+            "help": "Überprüfe deine Änderungen und uploade sie auf OpenStreetMap damit sie für alle sichtbar werden.",
             "no_changes": "Keine zu speichernden Änderungen.",
             "error": "Beim Speichern sind Fehler aufgetreten",
             "status_code": "Server hat folgenden Status zurückgegeben: {code}",
             "unknown_error_details": "Bitte stelle sicher, dass dein Gerät mit dem Internet verbunden ist.",
-            "uploading": "Änderungen werden zu OpenStreetMap hochgeladen.",
+            "uploading": "Änderungen werden zu OpenStreetMap hochgeladen...",
             "unsaved_changes": "Ungesicherte Änderungen vorhanden",
             "conflict": {
                 "header": "Bearbeitungskonflikte auflösen",
@@ -1527,6 +1527,9 @@
                 "power_supply": {
                     "label": "Stromversorgung"
                 },
+                "produce": {
+                    "label": "Erzeugnisse"
+                },
                 "product": {
                     "label": "Produkt"
                 },
@@ -2128,6 +2131,9 @@
                     "name": "Nachtklub",
                     "terms": "Nachtklub, Etablissement, Nachtlokal"
                 },
+                "amenity/nursing_home": {
+                    "name": "Pflegeheim"
+                },
                 "amenity/parking": {
                     "name": "Autoparkplatz",
                     "terms": "Autoparkplatz, Parkplatz, Parkhaus, Garage, Parkgarage"
@@ -2242,6 +2248,10 @@
                 "amenity/social_facility/homeless_shelter": {
                     "name": "Obdachlosenheim",
                     "terms": "Obdachlosenheim, Obdachlosenasyl"
+                },
+                "amenity/social_facility/nursing_home": {
+                    "name": "Seniorenpflegeheim",
+                    "terms": "Pflegeheim, Seniorenpflegeheim, Behindertenpflegeheim"
                 },
                 "amenity/studio": {
                     "name": "Ton-/Fernsehstudio",
@@ -3071,6 +3081,10 @@
                     "name": "Gemeinschaftsgarten",
                     "terms": "Gemeinsamer Garten"
                 },
+                "landuse/aquaculture": {
+                    "name": "Aquakultur",
+                    "terms": "Aquakultur, Wasserkultur, Gewässerbewirtschaftung"
+                },
                 "landuse/basin": {
                     "name": "Becken",
                     "terms": "Becken, Kessel"
@@ -3588,6 +3602,10 @@
                 "natural/wood": {
                     "name": "Naturwald",
                     "terms": "Urwald, Naturwald, Wald"
+                },
+                "noexit/yes": {
+                    "name": "Wegende",
+                    "terms": "Wegende"
                 },
                 "office": {
                     "name": "Büro",
@@ -4305,6 +4323,10 @@
                     "name": "Videospielgeschäft",
                     "terms": "Videospielladen,Videospielgeschäft"
                 },
+                "shop/watches": {
+                    "name": "Uhrengeschäft",
+                    "terms": "Uhrengeschäft, Uhrenladen"
+                },
                 "shop/water_sports": {
                     "name": "Wassersportgeschäft",
                     "terms": "Wassersportladen,Schwimmbedarf"
@@ -4358,8 +4380,8 @@
                     "terms": "Ferienhaus, Chalet"
                 },
                 "tourism/gallery": {
-                    "name": "Kunstgallerie",
-                    "terms": "Kunstgallerie, Bildergallerie, Gemäldegallerie, Kunsthalle, Kunsthandlung"
+                    "name": "Kunstgalerie",
+                    "terms": "Kunstgalerie, Bildergalerie, Gemäldegalerie, Kunsthalle, Kunsthandlung"
                 },
                 "tourism/guest_house": {
                     "name": "Gästehaus",

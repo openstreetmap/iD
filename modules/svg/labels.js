@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import rbush from 'rbush';
+import { dataFeatureIcons } from '../../data/index';
 import { textDirection } from '../util/locale';
 
 import {
@@ -226,8 +227,15 @@ export function svgLabels(projection, context) {
         icons
             .attr('transform', get(labels, 'transform'))
             .attr('xlink:href', function(labelData) {
-                var icon = context.presets().match(labelData[0], context.graph()).icon;
-                return '#' + icon + '-15';
+                var preset = context.presets().match(labelData[0], context.graph()),
+                    picon = preset && preset.icon;
+
+                if (!picon)
+                    return '';
+                else {
+                    var isMaki = dataFeatureIcons.indexOf(picon) !== -1;
+                    return '#' + picon + (isMaki ? '-15' : '');
+                }
             });
     }
 

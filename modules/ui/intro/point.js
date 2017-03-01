@@ -31,7 +31,7 @@ export function uiIntroPoint(context, reveal) {
             t('intro.points.add', { button: icon('#icon-point', 'pre-text') }),
             { tooltipClass: 'intro-points-add' });
 
-        var corner = [-85.632481,41.944094];
+        var corner = [-85.632481, 41.944094];
 
         context.on('enter.intro', addPoint);
 
@@ -125,11 +125,11 @@ export function uiIntroPoint(context, reveal) {
             context.on('enter.intro', enterDelete);
 
             var pointBox = pad(corner, 150, context);
-            reveal(pointBox, t('intro.points.reselect_delete'));
+            reveal(pointBox, t('intro.points.rightclick'));
 
             context.map().on('move.intro', function() {
                 pointBox = pad(corner, 150, context);
-                reveal(pointBox, t('intro.points.reselect_delete'), {duration: 0});
+                reveal(pointBox, t('intro.points.rightclick'), {duration: 0});
             });
         }
 
@@ -143,10 +143,15 @@ export function uiIntroPoint(context, reveal) {
             context.history().on('change.intro', deleted);
 
             setTimeout(function() {
-                var node = d3.select('.radial-menu-item-delete').node();
-                var pointBox = pad(node.getBoundingClientRect(), 50, context);
-                reveal(pointBox,
-                    t('intro.points.delete', { button: icon('#operation-delete', 'pre-text') }));
+                // deprecation warning - Radial Menu to be removed in iD v3
+                var node = d3.select('.edit-menu-item-delete, .radial-menu-item-delete').node();
+                if (!node) {
+                    deletePoint();
+                } else {
+                    var pointBox = pad(node.getBoundingClientRect(), 50, context);
+                    reveal(pointBox,
+                        t('intro.points.delete', { button: icon('#operation-delete', 'pre-text') }));
+                }
             }, 300);
         }
 

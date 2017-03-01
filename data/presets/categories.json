@@ -52,6 +52,7 @@
                 "landuse/farmyard",
                 "landuse/forest",
                 "landuse/meadow",
+                "landuse/aquaculture",
                 "landuse/cemetery",
                 "landuse/military"
             ]

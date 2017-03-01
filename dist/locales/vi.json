@@ -504,12 +504,12 @@
         },
         "save": {
             "title": "Lưu",
-            "help": "Lưu các thay đổi vào OpenStreetMap để cho mọi người xem.",
+            "help": "Hãy xem lại các thay đổi của bạn và tải các thay đổi lên OpenStreetMap để cho mọi người xem.",
             "no_changes": "Không có thay đổi nào để lưu.",
             "error": "Đã xuất hiện lỗi khi lưu",
             "status_code": "Máy chủ phản hồi với mã lỗi {code}",
             "unknown_error_details": "Xin vui lòng chắc chắn rằng bạn được kết nối với Internet.",
-            "uploading": "Đang tải các thay đổi lên OpenStreetMap.",
+            "uploading": "Đang tải các thay đổi lên OpenStreetMap…",
             "unsaved_changes": "Bạn có Thay đổi Chưa lưu",
             "conflict": {
                 "header": "Giải quyết sửa đổi mâu thuẫn",
@@ -1527,6 +1527,9 @@
                 "power_supply": {
                     "label": "Nguồn Điện"
                 },
+                "produce": {
+                    "label": "Nông sản"
+                },
                 "product": {
                     "label": "Sản phẩm"
                 },
@@ -2128,6 +2131,9 @@
                     "name": "Câu lạc bộ Giải trí",
                     "terms": "câu lạc bộ giải trí, clb giải trí, câu lạc bộ đêm, clb đêm, vũ trường, hộp đêm, câu lạc bộ, sàn nhảy về đêm, cau lac bo giai tri, clb giai tri, cau lac bo dem, clb dem, vu truong, hop dem, cau lac bo, san nhay ve dem"
                 },
+                "amenity/nursing_home": {
+                    "name": "Nhà Dưỡng lão"
+                },
                 "amenity/parking": {
                     "name": "Bãi Đậu xe",
                     "terms": "bãi đậu xe, sân đậu xe, đậu xe, bãi đỗ xe, sân đỗ xe, đỗ xe, bai dau xe, san dau xe, dau xe, bai do xe, san do xe, do xe"
@@ -2242,6 +2248,10 @@
                 "amenity/social_facility/homeless_shelter": {
                     "name": "Cứu trợ Người Vô gia cư",
                     "terms": "trung tâm cứu trợ người vô gia cư, trung tâm cho người vô gia cư, nhà tạm trú cho người vô gia cư, trung tam cuu tro nguoi vo gia cu, trung tam cho nguoi vo gia cu, nha tam tru cho nguoi vo gia cu"
+                },
+                "amenity/social_facility/nursing_home": {
+                    "name": "Nhà Dưỡng lão",
+                    "terms": "nhà dưỡng lão, nhà an dưỡng, nơi an dưỡng, chăm sóc người già, nha duong lao, nha an duong, noi an duong, cham soc nguoi gia"
                 },
                 "amenity/studio": {
                     "name": "Studio",
@@ -3070,6 +3080,10 @@
                 "landuse/allotments": {
                     "name": "Khu Vườn Gia đình",
                     "terms": "khu vườn gia đình, khu vườn cộng đồng, khu vuon gia dinh, khu vuon cong dong"
+                },
+                "landuse/aquaculture": {
+                    "name": "Nuôi trồng Thủy sản",
+                    "terms": "nuôi trồng thủy sản, nuôi trồng thuỷ sản, nuôi thủy sản, nuôi thuỷ sản, trồng thủy sản, trồng thuỷ sản, nuoi trong thuy san, nuoi thuy san, trong thuy san"
                 },
                 "landuse/basin": {
                     "name": "Lưu vực",

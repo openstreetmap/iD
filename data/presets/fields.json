@@ -1255,6 +1255,11 @@
             "type": "typeCombo",
             "label": "Type"
         },
+        "produce": {
+            "key": "produce",
+            "type": "combo",
+            "label": "Produce"
+        },
         "product": {
             "key": "product",
             "type": "combo",

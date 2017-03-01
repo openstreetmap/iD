@@ -504,12 +504,12 @@
         },
         "save": {
             "title": "Spara",
-            "help": "Spara ändringar till OpenStreetMap så att andra användare kan se dem.",
+            "help": "Granska dina ändringar och ladda upp dem till OpenStreetMap för att göra dem synliga för andra användare.",
             "no_changes": "Inga ändringar att spara.",
             "error": "Något gick fel vid sparandet",
             "status_code": "Server returnerade statuskoden {code}",
             "unknown_error_details": "Kontrollera att du är ansluten till Internet.",
-            "uploading": "Dina ändringar sparas nu till OpenStreetMap.",
+            "uploading": "Laddar upp ändringar till OpenStreetMap...",
             "unsaved_changes": "Du har icke-sparade ändringar.",
             "conflict": {
                 "header": "Lös motstridiga ändringar",
@@ -1527,6 +1527,9 @@
                 "power_supply": {
                     "label": "Strömförsörjning"
                 },
+                "produce": {
+                    "label": "Naturprodukt"
+                },
                 "product": {
                     "label": "Produkt"
                 },
@@ -2128,6 +2131,9 @@
                     "name": "Nattklubb",
                     "terms": "Nattklubb, disko*, diskotek, klubb, nöjeslokal, dansställe, bar, disco, dans, dansklubb"
                 },
+                "amenity/nursing_home": {
+                    "name": "Vårdhem"
+                },
                 "amenity/parking": {
                     "name": "Bilparkering",
                     "terms": "Parkering, parkeringsplats, p-plats, parkeringsområde"
@@ -2242,6 +2248,10 @@
                 "amenity/social_facility/homeless_shelter": {
                     "name": "Härbärge",
                     "terms": "Härbärge, hemlös, bostadslös, sovsal"
+                },
+                "amenity/social_facility/nursing_home": {
+                    "name": "Seniorboende",
+                    "terms": "Vårdhem, ålderdomshem, assistansboende, \npensionärshem, servicehus, servicehem, hem för gamla, äldreboende, hem för vård och boende, HVB-hem, seniorboende, pensionär, senior"
                 },
                 "amenity/studio": {
                     "name": "Studio",
@@ -3070,6 +3080,10 @@
                 "landuse/allotments": {
                     "name": "Koloniområde",
                     "terms": "Kolonilott, lott, täppa, koloniträdgård, odlingslott, koloniområde"
+                },
+                "landuse/aquaculture": {
+                    "name": "Akvakultur",
+                    "terms": "Fiskodling, vattenbruk, akvakultur, fisk, skaldjur, alger, vattenväxter, utplantering av fisk, Ostronodling, musselodling,  pärlodling, räkor"
                 },
                 "landuse/basin": {
                     "name": "Avrinningsområde",

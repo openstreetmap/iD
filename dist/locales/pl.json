@@ -509,7 +509,7 @@
             "error": "Wystąpiły błędy podczas zapisywania. ",
             "status_code": "Serwer zwrócił kod {code}",
             "unknown_error_details": "Proszę upewnić się, że połączono z Internetem.",
-            "uploading": "Wysyłanie zmian do OpenStreetMap.",
+            "uploading": "Wysyłanie zmian do OpenStreetMap...",
             "unsaved_changes": "Istnieją niezapisane zmiany.",
             "conflict": {
                 "header": "Rozwiąż konflikt edycji",
@@ -1158,7 +1158,7 @@
                     "label": "Rodzaje paliw"
                 },
                 "gauge": {
-                    "label": "Wskaźnik"
+                    "label": "Rozstaw szyn"
                 },
                 "gender": {
                     "label": "Płeć",
@@ -1183,7 +1183,7 @@
                     "placeholder": "Numer dołka (1-18)"
                 },
                 "handicap": {
-                    "label": "Dla niepełnosprawnych",
+                    "label": "Handicap",
                     "placeholder": "1-18"
                 },
                 "handrail": {
@@ -2128,6 +2128,9 @@
                     "name": "Klub nocny",
                     "terms": "Klub nocny,"
                 },
+                "amenity/nursing_home": {
+                    "name": "Dom spokojnej starości"
+                },
                 "amenity/parking": {
                     "name": "Parking samochodowy",
                     "terms": "Parking dla samochodów"
@@ -2242,6 +2245,10 @@
                 "amenity/social_facility/homeless_shelter": {
                     "name": "Schronisko dla bezdomnych",
                     "terms": "przytułek dla bezdomnych"
+                },
+                "amenity/social_facility/nursing_home": {
+                    "name": "Dom spokojnej starości",
+                    "terms": "Dom starców"
                 },
                 "amenity/studio": {
                     "name": "Studio",
@@ -3589,6 +3596,10 @@
                     "name": "Las/puszcza",
                     "terms": "las,puszcza,zalesienie"
                 },
+                "noexit/yes": {
+                    "name": "Brak przejścia/przejazdu",
+                    "terms": "Brak przejścia/przejazdu"
+                },
                 "office": {
                     "name": "Biuro",
                     "terms": "Biuro,"
@@ -4304,6 +4315,10 @@
                 "shop/video_games": {
                     "name": "Sklep z grami wideo",
                     "terms": "gry wideo"
+                },
+                "shop/watches": {
+                    "name": "Zegarmistrz",
+                    "terms": "Zegarmistrz"
                 },
                 "shop/water_sports": {
                     "name": "Sklep ze sprzętem do sportów wodnych",

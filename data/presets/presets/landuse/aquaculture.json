@@ -1,0 +1,24 @@
+{
+    "icon": "aquarium",
+    "fields": [
+        "operator",
+        "produce"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "landuse": "aquaculture"
+    },
+    "terms": [
+        "fish farm",
+        "crustacean",
+        "algae",
+        "aquafarming",
+        "shrimp farm",
+        "oyster farm",
+        "mariculture",
+        "algaculture"
+    ],
+    "name": "Aquaculture"
+}

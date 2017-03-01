@@ -297,10 +297,8 @@
         },
         "save": {
             "title": "Vista",
-            "help": "Vista breytingar á OpenStreetMap, þær verða sýnilegar öðrum notendum.",
             "no_changes": "Engar breytingar til að vista.",
             "unknown_error_details": "Aðgættu hvort að nettengingin er í lagi.",
-            "uploading": "Hleð breytingum inn á OpenStreetMap.",
             "unsaved_changes": "Þú átt óvistaðar breytingar",
             "conflict": {
                 "next": "Næst >"

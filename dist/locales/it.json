@@ -504,12 +504,12 @@
         },
         "save": {
             "title": "Salva",
-            "help": "Salva i cambiamenti su OpenStreetMap, rendendoli visibili ad altri utenti.",
+            "help": "Revisiona le tue modifiche e caricale su OpenStreetMap, rendendole visibili ad altri utenti.",
             "no_changes": "Nessuna modifica da salvare.",
             "error": "Si sono verificati errori nel tentato di salvataggio",
             "status_code": "Il server ha risposto con codice {code}",
             "unknown_error_details": "Assicurati di essere connesso ad internet.",
-            "uploading": "Caricamento delle modifiche su OpenStreetMap.",
+            "uploading": "Caricamento delle modifiche su OpenStreetMap...",
             "unsaved_changes": "Hai modifiche non salvate",
             "conflict": {
                 "header": "Risolvi conflitti di modifica",
@@ -1504,6 +1504,9 @@
                 "power_supply": {
                     "label": "Alimentazione"
                 },
+                "produce": {
+                    "label": "Produzione"
+                },
                 "product": {
                     "label": "Prodotto"
                 },
@@ -2101,6 +2104,9 @@
                     "name": "Discoteca",
                     "terms": "discoteca,night,locale notturno,balera"
                 },
+                "amenity/nursing_home": {
+                    "name": "Residenza Sanitaria Assistenziale (RSA)"
+                },
                 "amenity/parking": {
                     "name": "Parcheggio",
                     "terms": "parcheggio auto,autorimessa"
@@ -2211,6 +2217,10 @@
                 "amenity/social_facility/homeless_shelter": {
                     "name": "Dormitorio",
                     "terms": "ricovero,senzadimora,barboni,senza fissa dimora,senza dimora,senza casa"
+                },
+                "amenity/social_facility/nursing_home": {
+                    "name": "Residenza Sanitaria Assistenziale (RSA)",
+                    "terms": "casa di riposo,rsa,ricovero,ospizio,pensionato"
                 },
                 "amenity/studio": {
                     "name": "Studio radiotelevisivo",
@@ -3040,6 +3050,10 @@
                     "name": "Orti in concessione",
                     "terms": "orti,orto,pubblico,concessione,comune,giardino,lotto"
                 },
+                "landuse/aquaculture": {
+                    "name": "Acquacoltura",
+                    "terms": "pesci,crostacei,alghe,gamber*,maricoltura,algacoltura"
+                },
                 "landuse/basin": {
                     "name": "Bacino",
                     "terms": "Bacino"
@@ -3557,6 +3571,10 @@
                 "natural/wood": {
                     "name": "Foresta",
                     "terms": "Bosco"
+                },
+                "noexit/yes": {
+                    "name": "Senza uscita",
+                    "terms": "strada,senza,uscita,fine,punto,mort*"
                 },
                 "office": {
                     "name": "Uffici",
@@ -4273,6 +4291,10 @@
                 "shop/video_games": {
                     "name": "Negozio di Videogiochi",
                     "terms": "giochi,pc,console,videogiochi"
+                },
+                "shop/watches": {
+                    "name": "Negozio di orologi",
+                    "terms": "orolog*"
                 },
                 "shop/water_sports": {
                     "name": "Negozio per sport acquatici",

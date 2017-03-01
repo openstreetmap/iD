@@ -504,7 +504,6 @@
         },
         "save": {
             "title": "Зберегти",
-            "help": "Зберегти зміни надіславши їх до OpenStreetMap, що зробить їх доступними усім іншим.",
             "no_changes": "Зміни для збереження відсутні.",
             "error": "Під час збереження виникла помилка",
             "status_code": "Сервер повернув код стану {code}",
@@ -2128,6 +2127,9 @@
                     "name": "Нічний клуб",
                     "terms": "Nightclub, ysxybq rke, нічний клуб, розваги, дискотека, бар"
                 },
+                "amenity/nursing_home": {
+                    "name": "Будинок престарілих"
+                },
                 "amenity/parking": {
                     "name": "Автостоянка",
                     "terms": "стоянка, паркування, парковка, fdnjcnjzyrf"
@@ -2242,6 +2244,10 @@
                 "amenity/social_facility/homeless_shelter": {
                     "name": "Притулок для бездомних",
                     "terms": "Homeless shelter, ghbnekjr lkz tpljvyb, притулок для безхатченків, бомж"
+                },
+                "amenity/social_facility/nursing_home": {
+                    "name": "Будинок престарілих",
+                    "terms": "будинок,люди,літні,престарілі,похилий,вік,догляд,пансіон"
                 },
                 "amenity/studio": {
                     "name": "Студія",

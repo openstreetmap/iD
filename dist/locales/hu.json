@@ -509,7 +509,7 @@
             "error": "Mentés közben több hiba történt",
             "status_code": "A kiszolgáló a(z) {code} státuszkóddal válaszolt",
             "unknown_error_details": "Győződj meg arról, hogy csatlakozik-e az internethez.",
-            "uploading": "Változtatások mentése OpenStreetMapre.",
+            "uploading": "Változtatások feltöltése az OpenStreetMapre…",
             "unsaved_changes": "Elmentetlen változtatásaid vannak",
             "conflict": {
                 "header": "Ütköző módosítások feloldása",
@@ -588,6 +588,7 @@
         "full_screen": "Váltás teljes képernyőre",
         "gpx": {
             "local_layer": "Helyi fájl",
+            "drag_drop": "Húzzon és ejtsen egy .gpx, .geojson vagy .kml fájlt az oldalra, vagy kattintson a jobb oldalon lévő gombra a tallózáshoz",
             "zoom": "Nagyítás a rétegre",
             "browse": "Tallózzon egy fájlt"
         },
@@ -792,22 +793,33 @@
                 "address": {
                     "label": "Cím",
                     "placeholders": {
+                        "block_number": "Tömbszám",
+                        "block_number!jp": "Tömbszám",
                         "city": "Város",
+                        "city!jp": "Város/falu/kerület",
+                        "city!vn": "Város",
                         "conscriptionnumber": "123",
                         "country": "Ország",
                         "county": "Megye",
+                        "county!jp": "Kerület",
                         "district": "Kerület",
+                        "district!vn": "Város/kerület",
                         "floor": "Padló",
                         "hamlet": "Falucska",
                         "housename": "Háznév",
                         "housenumber": "123",
+                        "housenumber!jp": "Épületszám",
+                        "neighbourhood": "Szomszédság",
                         "place": "Hely",
                         "postcode": "Irányítószám",
                         "province": "Tartomány",
+                        "province!jp": "Prefektúra",
+                        "quarter": "Negyed",
                         "state": "Régió",
                         "street": "Utca",
                         "subdistrict": "Városrész",
-                        "suburb": "Külváros"
+                        "suburb": "Külváros",
+                        "suburb!jp": "Kerület"
                     }
                 },
                 "admin_level": {
@@ -1724,6 +1736,9 @@
                         "pitlatrine": "Emésztőgödrös"
                     }
                 },
+                "toll": {
+                    "label": "Díj"
+                },
                 "tourism": {
                     "label": "Típus"
                 },
@@ -1829,13 +1844,25 @@
                     "name": "Ülőlift",
                     "terms": "libegő"
                 },
+                "aerialway/drag_lift": {
+                    "name": "Felvonó",
+                    "terms": "sífelvonó"
+                },
                 "aerialway/gondola": {
                     "name": "Gondola",
                     "terms": "gondolakabinos felvonó"
                 },
+                "aerialway/goods": {
+                    "name": "Teherfelvonó",
+                    "terms": "teherfelvonó"
+                },
                 "aerialway/magic_carpet": {
                     "name": "Szállítószalag-felvonó",
                     "terms": "varázsszőnyeg"
+                },
+                "aerialway/mixed_lift": {
+                    "name": "Vegyes felvonó",
+                    "terms": "vegyes felvonó,hibrid felvonó"
                 },
                 "aerialway/platter": {
                     "name": "Tányéros felvonó",
@@ -1868,6 +1895,10 @@
                     "name": "Forgalmi előtér",
                     "terms": "Forgalmi előtér"
                 },
+                "aeroway/gate": {
+                    "name": "Repülőtéri kapu",
+                    "terms": "reptérkapu,légikapu"
+                },
                 "aeroway/hangar": {
                     "name": "Hangár",
                     "terms": "hangár"
@@ -1883,6 +1914,9 @@
                 "aeroway/taxiway": {
                     "name": "Gurulóút",
                     "terms": "Gurulóút"
+                },
+                "aeroway/terminal": {
+                    "name": "Repülőtéri terminál"
                 },
                 "amenity": {
                     "name": "Ismeretlen típusú szolgáltatás"
@@ -2086,6 +2120,9 @@
                     "name": "Night club - Éjszakai bár - diszkó",
                     "terms": "Night Club, Éjszakai bár, Diszkó"
                 },
+                "amenity/nursing_home": {
+                    "name": "Idősek Otthona"
+                },
                 "amenity/parking": {
                     "name": "Parkoló",
                     "terms": "parkolóház"
@@ -2201,6 +2238,9 @@
                     "name": "Hajléktalanszálló",
                     "terms": "Hajléktalan menedék"
                 },
+                "amenity/social_facility/nursing_home": {
+                    "name": "Idősek Otthona"
+                },
                 "amenity/studio": {
                     "name": "Stúdió",
                     "terms": "Stúdió"
@@ -2311,6 +2351,9 @@
                 "barrier/bollard": {
                     "name": "Oszlop",
                     "terms": "Oszlop"
+                },
+                "barrier/border_control": {
+                    "name": "Határ ellenőrzés"
                 },
                 "barrier/cattle_grid": {
                     "name": "Marharács",
@@ -3592,6 +3635,9 @@
                     "name": "Jogász",
                     "terms": "ügyvéd, bíróság, közjegyző, ügyész"
                 },
+                "office/lawyer/notary": {
+                    "name": "Közjegyzői iroda"
+                },
                 "office/newspaper": {
                     "name": "Újságszekesztőség",
                     "terms": "Újság"
@@ -3657,6 +3703,9 @@
                 "place/neighbourhood": {
                     "name": "Környék",
                     "terms": "Környék, Negyed"
+                },
+                "place/square": {
+                    "name": "Tér"
                 },
                 "place/suburb": {
                     "name": "Településrész, városrész",

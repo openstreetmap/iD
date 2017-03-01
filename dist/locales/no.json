@@ -338,9 +338,7 @@
         },
         "save": {
             "title": "Lagre",
-            "help": "Lagre endringene i OpenStreetMap, slik at de blir synlige for andre brukere.",
             "no_changes": "Ingen endringer å lagre.",
-            "uploading": "Laster opp endringer til OpenStreetMap.",
             "unsaved_changes": "Du har ulagrede endringer",
             "conflict": {
                 "previous": "< Forrige",

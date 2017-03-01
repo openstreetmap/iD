@@ -399,12 +399,10 @@
         },
         "save": {
             "title": "Simpan",
-            "help": "Simpan perubahan ke OpenStreetMap, jadikan mereka terlihat oleh pengguna lain.",
             "no_changes": "Tak ada perubahan yang bisa disimpan.",
             "error": "Kesalahan terjadi saat mencoba menyimpan",
             "status_code": "Server mengembalikan kode status {code}",
             "unknown_error_details": "Mohon pastikan Anda terhubung dengan internet.",
-            "uploading": "Mengunggah perubahan ke OpenStreetMap.",
             "unsaved_changes": "Anda mememiliki perubahan yang belum tersimpan",
             "conflict": {
                 "header": "Menyelesaikan suntingan bertentangan",

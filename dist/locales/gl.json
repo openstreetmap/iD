@@ -504,12 +504,12 @@
         },
         "save": {
             "title": "Gardar",
-            "help": "Gardar os cambios en OpenStreetMap, facéndoos visibles aos demáis usuarios.",
+            "help": "Revisa os trocos e súbeos a OpenStreetMap, facéndoos visibles a outros/as usuarios/as.",
             "no_changes": "Non hai cambios para gardar.",
             "error": "Houbo erros ao se intentar gardar. ",
             "status_code": "O servidor devolveu a referencia de estado {code}",
             "unknown_error_details": "Asegúrse de que está conectado a internet.",
-            "uploading": "Subindo cambios a OpenStreetMap.",
+            "uploading": "Subindo trocos a OpenStreetMap...",
             "unsaved_changes": "Tes cambios sen gardar",
             "conflict": {
                 "header": "Resolvendo os conflitos de edición",
@@ -978,8 +978,8 @@
                         "SSW": "Sur-suroeste",
                         "SW": "Suroeste",
                         "W": "Oeste",
-                        "WNW": "Oés-noroeste",
-                        "WSW": "Oés-suroeste"
+                        "WNW": "Oeste-noroeste",
+                        "WSW": "Oeste-suroeste"
                     }
                 },
                 "castle_type": {
@@ -1180,7 +1180,7 @@
                 },
                 "golf_hole": {
                     "label": "Referencia",
-                    "placeholder": "Número de buraco"
+                    "placeholder": "Número de buraco (1-18)"
                 },
                 "handicap": {
                     "label": "Hándicap",
@@ -1378,7 +1378,7 @@
                     "label": "Rede"
                 },
                 "network_bicycle": {
-                    "label": "Tipo de Redc",
+                    "label": "Tipo de Rede",
                     "options": {
                         "icn": "Internacional",
                         "lcn": "Local",
@@ -1526,6 +1526,9 @@
                 },
                 "power_supply": {
                     "label": "Fonte de Alimentación"
+                },
+                "produce": {
+                    "label": "Produce"
                 },
                 "product": {
                     "label": "Produto"
@@ -1793,9 +1796,9 @@
                 "visibility": {
                     "label": "Visibilidade",
                     "options": {
-                        "area": "Sobre 20m (65ft)",
-                        "house": "Ata 5m (16ft)",
-                        "street": "5 a 20m (16 a 65ft)"
+                        "area": "Sobre 20m (65pés)",
+                        "house": "Ata 5m (16pés)",
+                        "street": "5 a 20m (16 a 65pés)"
                     }
                 },
                 "wall": {
@@ -1979,7 +1982,7 @@
                 },
                 "amenity/cafe": {
                     "name": "Cafetería",
-                    "terms": "cafetería, café, bar"
+                    "terms": "<translate with synonyms or related terms for 'Cafe', separated by commas>"
                 },
                 "amenity/car_rental": {
                     "name": "Aluguer de automóbiles",
@@ -2128,6 +2131,9 @@
                     "name": "Puticlub",
                     "terms": "<translate with synonyms or related terms for 'Nightclub', separated by commas>"
                 },
+                "amenity/nursing_home": {
+                    "name": "Residencia de Anciáns"
+                },
                 "amenity/parking": {
                     "name": "Aparcadoiro de automóviles",
                     "terms": "<translate with synonyms or related terms for 'Car Parking', separated by commas>"
@@ -2242,6 +2248,10 @@
                 "amenity/social_facility/homeless_shelter": {
                     "name": "Refuxio para Indixentes",
                     "terms": "<translate with synonyms or related terms for 'Homeless Shelter', separated by commas>"
+                },
+                "amenity/social_facility/nursing_home": {
+                    "name": "Residencia de Anciáns",
+                    "terms": "<translate with synonyms or related terms for 'Nursing Home', separated by commas>"
                 },
                 "amenity/studio": {
                     "name": "Estudio",
@@ -2944,7 +2954,7 @@
                     "terms": "<translate with synonyms or related terms for 'Secondary Link', separated by commas>"
                 },
                 "highway/service": {
-                    "name": "Vía de Servicio",
+                    "name": "Vía de Servizo",
                     "terms": "<translate with synonyms or related terms for 'Service Road', separated by commas>"
                 },
                 "highway/service/alley": {
@@ -3070,6 +3080,10 @@
                 "landuse/allotments": {
                     "name": "Xardín Comunitario",
                     "terms": "<translate with synonyms or related terms for 'Community Garden', separated by commas>"
+                },
+                "landuse/aquaculture": {
+                    "name": "Acuacultura",
+                    "terms": "<translate with synonyms or related terms for 'Aquaculture', separated by commas>"
                 },
                 "landuse/basin": {
                     "name": "Cunca",
@@ -3589,6 +3603,10 @@
                     "name": "Bosque",
                     "terms": "<translate with synonyms or related terms for 'Wood', separated by commas>"
                 },
+                "noexit/yes": {
+                    "name": "Sen Saída",
+                    "terms": "<translate with synonyms or related terms for 'No Exit', separated by commas>"
+                },
                 "office": {
                     "name": "Oficina",
                     "terms": "<translate with synonyms or related terms for 'Office', separated by commas>"
@@ -3770,7 +3788,7 @@
                     "terms": "<translate with synonyms or related terms for 'Substation', separated by commas>"
                 },
                 "power/tower": {
-                    "name": "Torre de alta tensión",
+                    "name": "Torre de Alta Tensión",
                     "terms": "<translate with synonyms or related terms for 'High-Voltage Tower', separated by commas>"
                 },
                 "power/transformer": {
@@ -4304,6 +4322,10 @@
                 "shop/video_games": {
                     "name": "Video Xogos Tenda",
                     "terms": "<translate with synonyms or related terms for 'Video Game Store', separated by commas>"
+                },
+                "shop/watches": {
+                    "name": "Reloxería",
+                    "terms": "<translate with synonyms or related terms for 'Watches Shop', separated by commas>"
                 },
                 "shop/water_sports": {
                     "name": "Deportes acuáticos/tenda de natación",

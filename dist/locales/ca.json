@@ -212,14 +212,35 @@
                         "single": "S'ha reflectit una característica pel seu eix curt.",
                         "multiple": "S'han reflectit diverses característiques pels seus eixos curts."
                     }
+                },
+                "incomplete_relation": {
+                    "single": "Aquesta característica no és disponible perquè no s'ha baixat completament.",
+                    "multiple": "Aquestes característiques no són disponibles perquè no s'han baixat completament."
+                },
+                "too_large": {
+                    "single": "Aquesta característica no és disponible perquè no hi ha suficient visibilitat d'aquesta. ",
+                    "multiple": "Aquestes característiques no són disponibles perquè no hi ha suficient visibilitat d'aquestes. "
+                },
+                "connected_to_hidden": {
+                    "single": "Aquesta característica no és disponible perquè no hi ha suficient visibilitat d'aquesta. ",
+                    "multiple": "Aquestes característiques no són disponibles perquè no hi ha suficient visibilitat d'aquestes. "
                 }
             },
             "rotate": {
                 "title": "Girar-ho",
+                "description": {
+                    "single": "Gira aquesta característica al voltant del seu punt central.",
+                    "multiple": "Gira aquestes característiques al voltant del seu punt central."
+                },
                 "key": "R",
                 "annotation": {
                     "line": "Heu girat una línia.",
-                    "area": "Heu girat una àrea."
+                    "area": "Heu girat una àrea.",
+                    "multiple": "Gira diverses característiques."
+                },
+                "incomplete_relation": {
+                    "single": "Aquesta característica no es pot girar perquè no s'ha baixat completament. ",
+                    "multiple": "Aquestes característiques no es poden girar perquè no s'han baixat completament. "
                 }
             },
             "reverse": {
@@ -291,9 +312,12 @@
             "rateLimit": "L'API està limitant connexions anònimes. Pots arreglar això iniciant sessió."
         },
         "commit": {
+            "title": "Puja a l'OpenStreetMap",
             "description_placeholder": "Breu descripció de les teves contribucions (necessari)",
+            "message_label": "Comentari del conjunt de canvis",
             "upload_explanation": "Els canvis que deseu seran visibles a tots els mapes que utilitzin dades d'OpenStreetMap.",
             "upload_explanation_with_user": "Els canvis que deseu com a {user} seran visibles en tots els mapes que utilitzin dades d'OpenStreetMap.",
+            "save": "Puja",
             "cancel": "Cancel·lar",
             "changes": "{count} canvis",
             "warnings": "Avisos",
@@ -382,6 +406,7 @@
             "switch": "Senyals de trànsit ",
             "custom": "Personalitzar",
             "custom_button": "Editar el fons personalitzat",
+            "custom_prompt": "Introduïu una plantilla d'URL de tessel·les. Els identificadors vàlids són {zoom}, {x}, {y} per a un esquem a Z/X/Y i {u} per a un esquema de tessel·les quadrades.",
             "fix_misalignment": "Ajusta la alineació de la imatgeria",
             "imagery_source_faq": "D'on prové aquesta imatgeria?",
             "reset": "reiniciar",
@@ -471,12 +496,11 @@
         },
         "save": {
             "title": "Desa",
-            "help": "Desa els canvis a l'OpenStreetMap, fent-los visibles per als altres usuaris.",
             "no_changes": "No hi ha canvis a desar.",
             "error": "Ha hagut un error en intentar desar",
             "status_code": "El servidor ha expedit el codi d'estat {code}",
             "unknown_error_details": "Assegureu-vos d'estar connectats a Internet",
-            "uploading": "Pujant els canvis a l'OpenStreetMap.",
+            "uploading": "S'estan pujant els canvis a l'OpenStreetMap...",
             "unsaved_changes": "Teniu canvis sense desar.",
             "conflict": {
                 "header": "Resoldre les edicions conflictives",
@@ -532,14 +556,18 @@
             "used_with": "utilitzat amb {type}"
         },
         "validations": {
+            "disconnected_highway": "Via desconnectada",
+            "disconnected_highway_tooltip": "Les carreteres haurien d'estar connectades amb altres carreteres",
             "untagged_point": "Punt sense etiquetar",
             "untagged_line": "Línia sense etiquetar",
             "untagged_area": "Àrea sense etiquetar",
+            "untagged_relation": "Relació sense etiquetar",
             "many_deletions": "Estàs eliminant  {n} característiques. Segur que ho vols fer? Això les eliminarà del mapa que tothom veu a openstreetmap.org",
             "tag_suggests_area": "L'etiqueta {tag} suggereix que la línia hauria de ser una àrea, però no és una àrea",
             "untagged_point_tooltip": "Seleccioneu un tipus de característica que descrigui aquest punt.",
             "untagged_line_tooltip": "Seleccioneu un tipus de característica que descrigui aquesta línia.",
             "untagged_area_tooltip": "Seleccioneu un tipus de característica que descrigui aquesta àrea.",
+            "untagged_relation_tooltip": "Seleccioneu un tipus de característica que descrigui què és aquesta relació.",
             "deprecated_tags": "Etiquetes obsoletes : {tags}"
         },
         "zoom": {
@@ -548,6 +576,12 @@
         },
         "cannot_zoom": "No es pot allunyar més la vista al mode actual.",
         "full_screen": "Passar a pantalla completa",
+        "gpx": {
+            "local_layer": "Fitxer local",
+            "drag_drop": "Arrossegueu i deixeu anar un fitxer .gpx, .geojon o .kml a la pàgina, o feuclic al botó de la dreta per a ubicar-lo",
+            "zoom": "Escala a la capa",
+            "browse": "Navega cap a un fitxer"
+        },
         "mapillary_images": {
             "tooltip": "Fotos a peu de carrer de Mapillary",
             "title": "Superposició de fotos (Mapillary)"
@@ -561,7 +595,7 @@
         },
         "help": {
             "title": "Ajuda",
-            "help": "# Ajuda\n\nAixò és un editor per al [OpenStreetMap](http://www.openstreetmap.org/), el mapa lliure i editable del món. Podeu utilitzar-lo per afegir i actualitzar\nles dades a la vostra àrea, contibuint així a fer un mapa de codi obert i amb dades lliures del món\nmillor per a tothom.\n\nLes edicions que feu en aquest mapa seran visibles per tothom que faci servir OpenStreetMap. per tal de començar a editar, necessitareu\n[iniciar sessió](https://www.openstreetmap.org/login).\n\nL'[Editor iD](http://ideditor.com/) és un projecte cooperatiu que té el [codi font\ndisponible a GitHub](https://github.com/openstreetmap/iD).\n",
+            "help": "# Ajuda\n\nAixò és un editor per al [OpenStreetMap](http://www.openstreetmap.org/), el mapa lliure i editable del món. Podeu utilitzar-lo per afegir i actualitzar\nles dades a la vostra àrea, contibuint així a fer un mapa de codi obert i amb dades lliures del món\nmillor per a tothom.\n\nLes edicions que feu en aquest mapa seran visibles per tothom que faci servir OpenStreetMap. Per tal de començar a editar, necessitareu\n[iniciar sessió](https://www.openstreetmap.org/login).\n\nL'[Editor iD](http://ideditor.com/) és un projecte cooperatiu que té el [codi font\ndisponible a GitHub](https://github.com/openstreetmap/iD).\n",
             "editing_saving": "# Edició i desat\n\nAquest editor està dissenyat per treballar principalment en línia, i hi heu accedit mitjançant una pàgina web.\n\n### Selecció de característiques\n\nPer selecionar una característica del mapa, com ara una carretera o un punt d'interès, cliqueu-hi a sobre.\nAixò ressaltarà la característica seleccionada, obrirà un panell amb els detalls sobre aquesta, i un menú amb les coses que hi podeu fer.\n\nPer seleccionar múltiples característiques, premeu la tecla 'Shift' i cliqueu-les per separat, o bé clicant i arrossegant el cursor dibuixeu un rectangle per sobre de totes. Això seleccionarà totes les característiques que englobi el rectangle que es dibuixarà i permetrà modificar totes les característiques seleccionades en un sol cop.\n\n### Desant les edicions\n\nQuan feu canvis com ara editar carreteres, edificis, o llocs, aquests canvis es desen localment fins que els deseu al servidor. No us preocupeu si cometeu algun error- podeu desfer els canvis clicant el botó de desfer, i podeu refer els canvis clicant el botó de refer.\n\nCliqueu 'Desa' per acabar un grup d'edicions - per exemple, si heu acabat de delimitar l'àrea d'una ciutat i voleu començar a fer-ne una altra. Tindreu la oportunitat de revisar la feina feta, i l'editor proporcionarà suggeriments que us podran ajudar com també mostrarà alertes si alguna cosa no està del tot bé als vostres canvis.\n\nSi tot sembla correcte, podeu escriure un breu comentari explicant el canvis que heu fet, i clicar desa un altre cop per publicar els canvis a [OpenStreetMap.org](http://www.openstreetmap.org/), on seran visibles per a tots els altres usuaris i disponibles per a altres per refer-los o bé millorar-los. Si no podeu acabar les vostres edicions en una sessió, podeu sortir de la finestra d'edició i tornar més tard (al mateix navegador i ordinador), i l'aplicació d'edició preguntarà si voleu restaurar els canvis anteriors.\n\n### Fent servir l'editor\n\nHi ha una llista de dreceres de teclat disponible [aquí](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
             "roads": "# Carreteres\n\nPodeu crear, ajustar i eliminar carreteres amb aquest editor. Les carreteres poden ser\nde molts tipus: pistes, autovies, camins, carrils bici, i molts més - tots els segments\nmés comuns han de ser cartografiables.\n\n### Selecció\n\nCliqueu a la carretera per seleccionar-la. Al fer això els seus contorns es faran visibles,\ncom també un petit menú d'eines i una barra lateral que mostrarà més informació\nsobre la carretera.\n\n### Modificació\n\nDe vegades veureu carreteres que no estan alineades amb la imatge del darrere\no amb una traça de GPS. Podeu ajustar aquestes carreteres per tal que estiguin al lloc\ncorrecte.\n\nPrimer cliqueu a la carretera que voleu canviar. Això la ressaltarà i mostrarà els punts de control\nque podeu arrossegar a les ubicacions desitjades. Si el que\nvoleu és afegir nous punts per obtenir un grau de detall més alt, feu doble clic en una part de la carretera sense cap punt, i se'n afegirà un.\n\nSi la carretera es connecta amb una altra, però no es reflecteix al mapa,\npodeu arrossegar un dels punts de control cap a l'altra carretera\nper tal d'unir-les. Fer que les carreteres es connectin és molt important\nper al mapa i essencial per proveir direccions per a la conducció.\n\nTambé podeu clicar l'eina «Moure» o prémer la tecla «M» per moure la carretera sencera, tota de cop, i llavors clicar altra vegada per guardar aquest moviment.\n\n### Eliminació\n\nSi una carretera està totalment malament -podeu apreciar que no existeix a la imatge per satèl·lit\ni a més a més, els veïns ens han confirmat que no existeix - la podeu eliminar, cosa que la treurà del mapa. Aneu amb molt de compte a l'hora d'eliminar característiques -\ncom ara altres edicions; els resultats podran ser vistos per tothom i moltes vegades la imatgeria per satèl·lit no està actualitzada, per tant la carretera es pot haver estat construida recentment.\n\nPodeu eliminar una carretera clicant-la, i llavors clicant la icona de la paperera o bé prement la tecla «Suprimir».\n\n### Creació\n\nHeu trobat que en algun lloc hi hauria d'haver una carretera però no hi és? Cliqueu la icona «Línia»\nal marge superior esquerre de la zona del mapa o bé prem la tecla «2» per començar a dibuixar\nuna línia.\n\nCliqueu a l'inici de la carretera al mapa per començar a dibuixar. Si la carretera comença amb una bifurcació en una carretera existent, cliqueu al lloc a on connecten.\n\nA continuació cliqueu a diferents punts al llarg de la carretera per tal que segueixi el traçat correcte, d'acord  amb la imatge del satèl·lit o la traça del GPS. Si la carretera que esteu dibuixant s'encreua amb una altra carretera, connecteu-les clicant al punt d'intersecció. Quan acabeu el dibuix, feu doble clic o premeu «Retorn» del teclat.\n",
             "gps": "# GPS\n\nLes dades de GPS són una font fiable de dades per a l'OpenStreetMap. Aquest editor és compatible amb les traces locals - fitxers`.gpx`al vostre ordinador. Pots recollir aquest tipus de traça GPS amb algunes aplicacions per a smartphones com també dispositius personals de GPS.\n\nPer a més informació sobre com recollir dades amb GPS, llegeix [Recollir dades amb GPS](http://learnosm.org/en/mobile-mapping/).\n\nPer fer servir una traça GPX per editar el mapa, arrossega i deixa el fitxer GPX a l'editor. Si es detecta, s'afegirà el mapa com una línia lila llampant. Clica al menú 'Dades del mapa' al cantó dret per activar, desactivar, o per ajustar la vista a aquesta capa GPX.\n\nLa traça GPX no és pujada directament a OpenStreetMap - la millor manera de fer-la servir és dibuixar tu el mapa, fent-la servir com a guia per a les noves característiques que afegiràs. També les pots [pujar a l'OpenStreetMap] (http://www.openstreetmap.org/trace/create) perquè d'altres persones les utilitzin.\n",

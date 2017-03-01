@@ -504,12 +504,12 @@
         },
         "save": {
             "title": "Spremi",
-            "help": "Spremi promjene na OpenStreetMap, čime će biti vidljive drugim korisnicima.",
+            "help": "Pregledaj svoje promjene i postavi ih na OpenStreetMap, tako će postati vidljive drugim korisnicima.",
             "no_changes": "Nema promjena za spremiti.",
             "error": "Došlo je do grešaka pri pokušaju spremanja",
             "status_code": "Poslužitelj je vratio status kôd {code}",
             "unknown_error_details": "Molim provjeri jesi li spojen na internet.",
-            "uploading": "Postavljanje promjena na OpenStreetMap.",
+            "uploading": "Postavljam promjene na OpenStreetMap...",
             "unsaved_changes": "Imaš nespremljenih promjena.",
             "conflict": {
                 "header": "Riješi konfliktna uređivanja",

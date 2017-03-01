@@ -1,5 +1,17 @@
 :warning: = Breaking change, may affect downstream projects or sites that embed iD.
 
+## 2.1.3
+##### Feb 24, 2017
+* Bugfixes:
+  * Check all blacklist regexs in API imagery blacklist (#3858, thanks @tyrasd)
+  * Remove autocorrect/spellcheck features from inputs (#3839)
+  * Better detection of culture-specific locale in language list (#3842)
+* Presets:
+  * Adjust aeroway runway, taxiway, apron styles for visibility (#3845)
+  * Add preset for landuse=aquaculture (#3849, thanks @willemarcel)
+  * Update UK/IE placeholders (#3837, thanks @boothym)
+  * Add social_facility=nursing_home preset
+
 ## 2.1.2
 ##### Feb 7, 2017
 * Bugfixes:

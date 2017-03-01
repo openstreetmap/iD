@@ -1,0 +1,61 @@
+/* railways */
+
+.preset-icon .icon.tag-railway.other-line {
+    color: #fff;
+    fill: #777;
+}
+.preset-icon .icon.tag-railway {
+    color: #555;
+    fill: #eee;
+}
+path.stroke.tag-railway {
+    stroke: #eee;
+    stroke-width: 2;
+    stroke-linecap: butt;
+    stroke-dasharray: 12,12;
+}
+path.casing.tag-railway {
+    stroke: #555;
+    stroke-width: 4;
+}
+
+.preset-icon .icon.tag-railway-disused,
+.preset-icon .icon.tag-railway-abandoned {
+    color: #999;
+    fill: #eee;
+}
+path.stroke.tag-railway-abandoned {
+    stroke: #eee;
+}
+path.casing.tag-railway-abandoned {
+    stroke: #999;
+}
+
+.preset-icon .icon.tag-railway-subway {
+    color: #222;
+    fill: #bbb;
+}
+path.stroke.tag-railway-subway {
+    stroke: #bbb;
+}
+path.casing.tag-railway-subway {
+    stroke: #222;
+}
+
+path.stroke.tag-railway-platform {
+    stroke: #999;
+    stroke-width: 4;
+    stroke-dasharray: none;
+}
+path.casing.tag-railway-platform {
+    stroke: none;
+}
+
+.area.stroke.tag-railway {
+    stroke: white;
+    stroke-width: 1;
+    stroke-dasharray: none;
+}
+.area.casing.tag-railway {
+    stroke: none;
+}

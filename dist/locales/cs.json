@@ -429,12 +429,10 @@
         },
         "save": {
             "title": "Uložit",
-            "help": "Uložit změny do OpenStreetMap, aby je viděli ostatní uživatelé.",
             "no_changes": "Není co uložit.",
             "error": "Při pokusu o uložení se vyskytly chyby",
             "status_code": "Server vrátil stavový kód {code}",
             "unknown_error_details": "Ujistěte se, prosím, že jste připojen k internetu.",
-            "uploading": "Ukládám úpravy na OpenStreetMap.",
             "unsaved_changes": "Vaše úpravy nebyly uloženy",
             "conflict": {
                 "header": "Vyřešit konflikty mezi editacemi",

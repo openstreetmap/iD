@@ -18,7 +18,7 @@ export function operationDisconnect(selectedIDs, context) {
 
 
     var operation = function() {
-        context.perform(action, t('operations.disconnect.annotation'));
+        context.perform(action, operation.annotation());
     };
 
 
@@ -41,6 +41,11 @@ export function operationDisconnect(selectedIDs, context) {
         return disable ?
             t('operations.disconnect.' + disable) :
             t('operations.disconnect.description');
+    };
+
+
+    operation.annotation = function() {
+        return t('operations.disconnect.annotation');
     };
 
 

@@ -350,12 +350,10 @@
         },
         "save": {
             "title": "Salvesta",
-            "help": "Salvesta muudatused OpenStreetMap'i, tehes need teistele kasutajatele nähtavaks.",
             "no_changes": "Salvestamist vajavad muudatused puuduvad.",
             "error": "Salvestamise tekkisid vead",
             "status_code": "Server vastas olekukoodiga {code}",
             "unknown_error_details": "Palun kontrolli Internetiühendust.",
-            "uploading": "Muudatuste üleslaadimine OpenStreetMap'i.",
             "unsaved_changes": "Sul on salvestamata muudatusi",
             "conflict": {
                 "header": "Lahenda konfliktsed muudatused",

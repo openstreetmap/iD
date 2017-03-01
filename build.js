@@ -17,9 +17,6 @@ const suggestions = require('name-suggestion-index/name-suggestions.json');
 const symlinks = {
     'land.html': 'dist/land.html',
     'img': 'dist/img',
-    'css/img': '../dist/img',
-    'test/css': '../css',
-    'test/img': '../dist/img'
 };
 
 for (var target of Object.keys(symlinks)) {

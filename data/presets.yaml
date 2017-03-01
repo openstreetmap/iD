@@ -954,6 +954,9 @@ en:
       power_supply:
         # power_supply=*
         label: Power Supply
+      produce:
+        # produce=*
+        label: Produce
       product:
         # product=*
         label: Product
@@ -2702,6 +2705,11 @@ en:
         name: Community Garden
         # 'terms: allotment,garden'
         terms: '<translate with synonyms or related terms for ''Community Garden'', separated by commas>'
+      landuse/aquaculture:
+        # landuse=aquaculture
+        name: Aquaculture
+        # 'terms: fish farm,crustacean,algae,aquafarming,shrimp farm,oyster farm,mariculture,algaculture'
+        terms: '<translate with synonyms or related terms for ''Aquaculture'', separated by commas>'
       landuse/basin:
         # landuse=basin
         name: Basin
