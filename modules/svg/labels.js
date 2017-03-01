@@ -111,10 +111,12 @@ export function svgLabels(projection, context) {
     }
 
 
-    function drawLinePaths(selection, entities, filter, classes, labels) {
+    function drawLinePaths(selection, labelDataList, filter, classes, labels) {
         var paths = selection.selectAll('path')
             .filter(filter)
-            .data(entities, osmEntity.key);
+            .data(labelDataList, function (labelData) {
+                return osmEntity.key(labelData[0]);
+            });
 
         paths.exit()
             .remove();
@@ -122,24 +124,28 @@ export function svgLabels(projection, context) {
         paths.enter()
             .append('path')
             .style('stroke-width', get(labels, 'font-size'))
-            .attr('id', function(d) { return 'labelpath-' + d.id; })
+            .attr('id', function(labelData) { return 'labelpath-' + labelData[0].id; })
             .attr('class', classes)
             .merge(paths)
             .attr('d', get(labels, 'lineString'));
     }
 
 
-    function drawLineLabels(selection, entities, filter, classes, labels) {
+    function drawLineLabels(selection, labelDataList, filter, classes, labels) {
         var texts = selection.selectAll('text.' + classes)
             .filter(filter)
-            .data(entities, osmEntity.key);
+            .data(labelDataList, function (labelData) {
+                return osmEntity.key(labelData[0]);
+            });
 
         texts.exit()
             .remove();
 
         texts.enter()
             .append('text')
-            .attr('class', function(d, i) { return classes + ' ' + labels[i].classes + ' ' + d.id; })
+            .attr('class', function(labelData, i) {
+                return classes + ' ' + labels[i].classes + ' ' + labelData[0].id;
+            })
             .attr('dy', baselineHack ? '0.35em' : null)
             .append('textPath')
             .attr('class', 'textpath');
@@ -148,25 +154,31 @@ export function svgLabels(projection, context) {
 
         texts.selectAll('.textpath')
             .filter(filter)
-            .data(entities, osmEntity.key)
+            .data(labelDataList, function (labelData) {
+                return osmEntity.key(labelData[0]);
+            })
             .attr('startOffset', '50%')
-            .attr('xlink:href', function(d) { return '#labelpath-' + d.id; })
-            .text(utilDisplayNameForPath);
+            .attr('xlink:href', function(labelData) { return '#labelpath-' + labelData[0].id; })
+            .text(function (labelData) {
+                return labelData[1];
+            });
     }
 
 
-    function drawPointLabels(selection, entities, filter, classes, labels) {
+    function drawPointLabels(selection, labelDataList, filter, classes, labels) {
         var texts = selection.selectAll('text.' + classes)
             .filter(filter)
-            .data(entities, osmEntity.key);
+            .data(labelDataList, function (labelData) {
+                return osmEntity.key(labelData[0]);
+            });
 
         texts.exit()
             .remove();
 
         texts = texts.enter()
             .append('text')
-            .attr('class', function(d, i) {
-                return classes + ' ' + labels[i].classes + ' ' + d.id;
+            .attr('class', function(labelData, i) {
+                return classes + ' ' + labels[i].classes + ' ' + labelData[0].id;
             })
             .merge(texts);
 
@@ -174,17 +186,19 @@ export function svgLabels(projection, context) {
             .attr('x', get(labels, 'x'))
             .attr('y', get(labels, 'y'))
             .style('text-anchor', get(labels, 'textAnchor'))
-            .text(utilDisplayName)
-            .each(function(d, i) {
-                textWidth(utilDisplayName(d), labels[i].height, this);
+            .text(function (labelData) {
+                return labelData[1];
+            })
+            .each(function(labelData, i) {
+                textWidth(labelData[1], labels[i].height, this);
             });
     }
 
 
-    function drawAreaLabels(selection, entities, filter, classes, labels) {
-        entities = entities.filter(hasText);
+    function drawAreaLabels(selection, labelDataList, filter, classes, labels) {
+        labelDataList = labelDataList.filter(hasText);
         labels = labels.filter(hasText);
-        drawPointLabels(selection, entities, filter, classes, labels);
+        drawPointLabels(selection, labelDataList, filter, classes, labels);
 
         function hasText(d, i) {
             return labels[i].hasOwnProperty('x') && labels[i].hasOwnProperty('y');
@@ -192,10 +206,12 @@ export function svgLabels(projection, context) {
     }
 
 
-    function drawAreaIcons(selection, entities, filter, classes, labels) {
+    function drawAreaIcons(selection, labelDataList, filter, classes, labels) {
         var icons = selection.selectAll('use.' + classes)
             .filter(filter)
-            .data(entities, osmEntity.key);
+            .data(labelDataList, function (labelData) {
+                return osmEntity.key(labelData[0]);
+            });
 
         icons.exit()
             .remove();
@@ -209,8 +225,8 @@ export function svgLabels(projection, context) {
 
         icons
             .attr('transform', get(labels, 'transform'))
-            .attr('xlink:href', function(d) {
-                var icon = context.presets().match(d, context.graph()).icon;
+            .attr('xlink:href', function(labelData) {
+                var icon = context.presets().match(labelData[0], context.graph()).icon;
                 return '#' + icon + '-15';
             });
     }
@@ -261,11 +277,19 @@ export function svgLabels(projection, context) {
 
 
     function drawLabels(selection, graph, entities, filter, dimensions, fullRedraw) {
-        var lowZoom = context.surface().classed('low-zoom');
+        var lowZoom = context.surface().classed('low-zoom'),
+            i, j, k, entity, geometry, name;
 
-        var labelable = [], i, j, k, entity, geometry;
+        /**
+         * @typedef {Array} NameLabelData
+         * @property {osmEntity} NameLabelData[0] - Entity
+         * @property {String}    NameLabelData[1] - Display name
+         *
+         * @type {Array.<NameLabelData>} - Labelable names from highest to lowest priority
+         */
+        var labelableNames = [];
         for (i = 0; i < nameLabelStack.length; i++) {
-            labelable.push([]);
+            labelableNames.push([]);
         }
 
         if (fullRedraw) {
@@ -299,9 +323,12 @@ export function svgLabels(projection, context) {
             }
 
             var preset = geometry === 'area' && context.presets().match(entity, graph),
-                icon = preset && !blacklisted(preset) && preset.icon;
+                icon = preset && !blacklisted(preset) && preset.icon,
+                getName = (geometry === 'line') ? utilDisplayNameForPath : utilDisplayName;
 
-            if (!icon && !utilDisplayName(entity))
+            name = getName(entity);
+
+            if (!icon && !name)
                 continue;
 
             for (k = 0; k < nameLabelStack.length; k++) {
@@ -311,7 +338,7 @@ export function svgLabels(projection, context) {
                     hasVal = entity.tags[matchKey];
 
                 if (geometry === matchGeom && hasVal && (matchVal === '*' || matchVal === hasVal)) {
-                    labelable[k].push(entity);
+                    labelableNames[k].push([entity, name]);
                     break;
                 }
             }
@@ -323,6 +350,9 @@ export function svgLabels(projection, context) {
             area: []
         };
 
+        /**
+         * @type {{point: Array.<NameLabelData>, line: Array.<NameLabelData>, area: Array.<NameLabelData>}}
+         */
         var labelled = {
             point: [],
             line: [],
@@ -330,15 +360,14 @@ export function svgLabels(projection, context) {
         };
 
         // Try and find a valid label for labellable entities
-        for (k = 0; k < labelable.length; k++) {
+        for (k = 0; k < labelableNames.length; k++) {
             var fontSize = nameLabelStack[k][3];
-            for (i = 0; i < labelable[k].length; i++) {
-                entity = labelable[k][i];
+            for (i = 0; i < labelableNames[k].length; i++) {
+                entity = labelableNames[k][i][0];
+                name = labelableNames[k][i][1];
                 geometry = entity.geometry(graph);
 
-                var getName = (geometry === 'line') ? utilDisplayNameForPath : utilDisplayName,
-                    name = getName(entity),
-                    width = name && textWidth(name, fontSize),
+                var width = textWidth(name, fontSize),
                     p;
 
                 switch (geometry) {
@@ -358,7 +387,7 @@ export function svgLabels(projection, context) {
                     if (geometry === 'vertex') { geometry = 'point'; }  // treat vertex like point
                     p.classes = geometry + ' tag-' + nameLabelStack[k][1];
                     positions[geometry].push(p);
-                    labelled[geometry].push(entity);
+                    labelled[geometry].push(labelableNames[k][i]);
                 }
             }
         }
