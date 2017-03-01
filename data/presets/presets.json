@@ -6126,6 +6126,22 @@
             "terms": [],
             "name": "Grass"
         },
+        "landuse/harbour": {
+            "icon": "harbor",
+            "fields": [
+                "operator"
+            ],
+            "geometry": [
+                "area"
+            ],
+            "terms": [
+                "boat"
+            ],
+            "tags": {
+                "landuse": "harbour"
+            },
+            "name": "Harbor"
+        },
         "landuse/industrial": {
             "icon": "industry",
             "geometry": [

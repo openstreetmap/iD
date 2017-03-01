@@ -2756,6 +2756,11 @@ en:
         # landuse=grass
         name: Grass
         terms: '<translate with synonyms or related terms for ''Grass'', separated by commas>'
+      landuse/harbour:
+        # landuse=harbour
+        name: Harbor
+        # 'terms: boat'
+        terms: '<translate with synonyms or related terms for ''Harbor'', separated by commas>'
       landuse/industrial:
         # landuse=industrial
         name: Industrial Area

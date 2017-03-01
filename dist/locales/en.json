@@ -3174,6 +3174,10 @@
                     "name": "Grass",
                     "terms": ""
                 },
+                "landuse/harbour": {
+                    "name": "Harbor",
+                    "terms": "boat"
+                },
                 "landuse/industrial": {
                     "name": "Industrial Area",
                     "terms": ""

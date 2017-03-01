@@ -1338,6 +1338,10 @@
         },
         {
             "key": "landuse",
+            "value": "harbour"
+        },
+        {
+            "key": "landuse",
             "value": "industrial"
         },
         {

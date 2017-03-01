@@ -1,0 +1,16 @@
+{
+    "icon": "harbor",
+    "fields": [
+        "operator"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "terms": [
+        "boat"
+    ],
+    "tags": {
+        "landuse": "harbour"
+    },
+    "name": "Harbor"
+}
