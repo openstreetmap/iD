@@ -749,6 +749,11 @@
             "type": "typeCombo",
             "label": "Type"
         },
+        "historic/civilization": {
+            "key": "historic:civilization",
+            "type": "combo",
+            "label": "Historic Civilization"
+        },
         "hoops": {
             "key": "hoops",
             "type": "number",

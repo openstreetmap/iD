@@ -2,7 +2,8 @@
     "icon": "castle",
     "fields": [
         "castle_type",
-        "building_area"
+        "building_area",
+        "historic/civilization"
     ],
     "geometry": [
         "point",

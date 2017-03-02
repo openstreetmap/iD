@@ -1204,6 +1204,9 @@
                 "historic": {
                     "label": "Type"
                 },
+                "historic/civilization": {
+                    "label": "Historic Civilization"
+                },
                 "hoops": {
                     "label": "Hoops",
                     "placeholder": "1, 2, 4..."

@@ -5818,6 +5818,9 @@
             "name": "Historic Site"
         },
         "historic/archaeological_site": {
+            "fields": [
+                "historic/civilization"
+            ],
             "geometry": [
                 "point",
                 "vertex",
@@ -5842,7 +5845,8 @@
             "icon": "castle",
             "fields": [
                 "castle_type",
-                "building_area"
+                "building_area",
+                "historic/civilization"
             ],
             "geometry": [
                 "point",
@@ -5878,6 +5882,9 @@
             "name": "Monument"
         },
         "historic/ruins": {
+            "fields": [
+                "historic/civilization"
+            ],
             "geometry": [
                 "point",
                 "vertex",

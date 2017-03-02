@@ -1,4 +1,7 @@
 {
+    "fields": [
+        "historic/civilization"
+    ],
     "geometry": [
         "point",
         "vertex",
