@@ -273,10 +273,53 @@ export function uiMapData(context) {
             // replacing the window.prompt with an in-browser window
             var urlEntry = body.append('div')
                 .attr('class', 'topurl');
-            urlEntry.append('input')
+            var urlInput = urlEntry.append('input')
                 .attr('type', 'text')
                 .attr('placeholder', 'GeoService URL')
-                .attr('value', context.storage('geoserviceLayerUrl') || '');
+                .attr('value', context.storage('geoserviceLayerUrl') || '')
+                .on('input', function(e, loadFromLocalStorage) {
+                    // reformat URL ending to /layerID/metadata?f=json
+                    var metadata_url = loadFromLocalStorage ? context.storage('geoserviceLayerUrl') : this.value;
+                    metadata_url = metadata_url.split('/');
+                    if (metadata_url.length < 2 || metadata_url[0].indexOf('http') === -1) {
+                        return;
+                    }
+                    
+                    // if it just ends /0, we need to keep /0 around
+                    var last = metadata_url.pop();
+                    if (!isNaN(last * 1)) {
+                        metadata_url.push(last);
+                    }
+                    metadata_url = metadata_url.join('/') + '/metadata?f=json';
+                    
+                    console.log(metadata_url);
+                    d3.text(metadata_url, function(err, data) {
+                        if (err) {
+                            return console.log(err);
+                        }
+                        data = JSON.parse(data);
+                        if (!data.fields || !data.fields.length) {
+                            return;
+                        }
+                        var fields = data.fields.map(function(field) {
+                            return field.name;
+                        });
+                        if (data.extent) {
+                            
+                        }
+                        d3.selectAll('.field-list').text('Fields: ' + fields.join(', '));
+                    });
+                });
+            
+            urlEntry.append('div')
+                .attr('class', 'field-list');
+            
+            // load initial GeoService URL
+            if (context.storage('geoserviceLayerUrl')) {
+                setTimeout(function() {
+                    urlInput.on('input')(null, true);
+                }, 500);
+            }
 
             // known iD presets
             var preset = urlEntry.append('div')
