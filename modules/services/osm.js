@@ -319,7 +319,8 @@ export default {
           // find a referenced relation in the current changeset
           function resolve(item){
             return _.find(relations, function(relation) {
-              return item.keyAttributes.ref === relation['@id'];
+              return item.keyAttributes.type === 'relation'
+                && item.keyAttributes.ref === relation['@id'];
             });
           }
           // a new item is an item that has not been already processed

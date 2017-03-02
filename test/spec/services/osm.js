@@ -365,8 +365,8 @@ describe('iD.serviceOsm', function () {
         it('includes creations ordered by dependencies', function() {
           var n = iD.Node({loc: [0, 0]}),
               w = iD.Way({nodes: [n.id]}),
-              r1 = iD.Relation({members: [{id: w.id}]}),
-              r2 = iD.Relation({members: [{id: r1.id}]}),
+              r1 = iD.Relation({members: [{id: w.id, type: 'way'}]}),
+              r2 = iD.Relation({members: [{id: r1.id, type: 'relation'}]}),
               changes = {created: [r2, r1, w, n], modified: [], deleted: []},
               jxon = connection.osmChangeJXON('1234', changes);
 
@@ -381,8 +381,8 @@ describe('iD.serviceOsm', function () {
           var r1 = iD.Relation(),
               r2 = iD.Relation(),
               changes, jxon;
-          r1.addMember({id: r2.id});
-          r2.addMember({id: r1.id});
+          r1.addMember({id: r2.id, type: 'relation'});
+          r2.addMember({id: r1.id, type: 'relation'});
           changes = {created: [r1,r2], modified: [], deleted: []};
           jxon = connection.osmChangeJXON('1234', changes);
 
