@@ -3,7 +3,8 @@
     "fields": [
         "denomination",
         "building_area",
-        "address"
+        "address",
+        "service_times"
     ],
     "geometry": [
         "point",

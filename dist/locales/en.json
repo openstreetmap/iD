@@ -1612,6 +1612,9 @@
                         "crossover": "Crossover"
                     }
                 },
+                "service_times": {
+                    "label": "Service Times"
+                },
                 "service": {
                     "label": "Type"
                 },

@@ -1388,6 +1388,11 @@
                 }
             }
         },
+        "service_times": {
+            "key": "service_times",
+            "type": "text",
+            "label": "Service Times"
+        },
         "service": {
             "key": "service",
             "type": "combo",

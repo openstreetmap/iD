@@ -1057,6 +1057,9 @@ en:
           spur: Spur
           # service=yard
           yard: Yard
+      service_times:
+        # service_times=*
+        label: Service Times
       shelter:
         # shelter=*
         label: Shelter

@@ -1658,7 +1658,8 @@
                 "religion",
                 "denomination",
                 "address",
-                "building_area"
+                "building_area",
+                "service_times"
             ],
             "geometry": [
                 "point",
@@ -1699,7 +1700,8 @@
             "fields": [
                 "denomination",
                 "building_area",
-                "address"
+                "address",
+                "service_times"
             ],
             "geometry": [
                 "point",
@@ -1725,7 +1727,8 @@
             "fields": [
                 "denomination",
                 "building_area",
-                "address"
+                "address",
+                "service_times"
             ],
             "geometry": [
                 "point",
@@ -1765,7 +1768,8 @@
             "fields": [
                 "denomination",
                 "building_area",
-                "address"
+                "address",
+                "service_times"
             ],
             "geometry": [
                 "point",
@@ -1785,7 +1789,8 @@
             "fields": [
                 "denomination",
                 "building_area",
-                "address"
+                "address",
+                "service_times"
             ],
             "geometry": [
                 "point",
@@ -9898,7 +9903,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "second_hand"
+                "second_hand",
+                "service/vehicle"
             ],
             "geometry": [
                 "point",
@@ -37541,7 +37547,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "second_hand"
+                "second_hand",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -37561,7 +37568,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "second_hand"
+                "second_hand",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -37581,7 +37589,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "second_hand"
+                "second_hand",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -37601,7 +37610,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "second_hand"
+                "second_hand",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -37621,7 +37631,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "second_hand"
+                "second_hand",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -37641,7 +37652,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "second_hand"
+                "second_hand",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -37661,7 +37673,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "second_hand"
+                "second_hand",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -37681,7 +37694,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "second_hand"
+                "second_hand",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -37701,7 +37715,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "second_hand"
+                "second_hand",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -37721,7 +37736,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "second_hand"
+                "second_hand",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -37741,7 +37757,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "second_hand"
+                "second_hand",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -37761,7 +37778,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "second_hand"
+                "second_hand",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -37781,7 +37799,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "second_hand"
+                "second_hand",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -37801,7 +37820,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "second_hand"
+                "second_hand",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -37821,7 +37841,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "second_hand"
+                "second_hand",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -37841,7 +37862,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "second_hand"
+                "second_hand",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -37861,7 +37883,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "second_hand"
+                "second_hand",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -37881,7 +37904,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "second_hand"
+                "second_hand",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -37901,7 +37925,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "second_hand"
+                "second_hand",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -37921,7 +37946,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "second_hand"
+                "second_hand",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -37941,7 +37967,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "second_hand"
+                "second_hand",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -37961,7 +37988,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "second_hand"
+                "second_hand",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -37981,7 +38009,8 @@
                 "address",
                 "building_area",
                 "opening_hours",
-                "second_hand"
+                "second_hand",
+                "service/vehicle"
             ],
             "suggestion": true
         },
