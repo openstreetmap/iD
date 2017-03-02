@@ -362,6 +362,35 @@ describe('iD.serviceOsm', function () {
             ]);
         });
 
+        it('includes creations ordered by dependencies', function() {
+          var n = iD.Node({loc: [0, 0]}),
+              w = iD.Way({nodes: [n.id]}),
+              r1 = iD.Relation({members: [{id: w.id}]}),
+              r2 = iD.Relation({members: [{id: r1.id}]}),
+              changes = {created: [r2, r1, w, n], modified: [], deleted: []},
+              jxon = connection.osmChangeJXON('1234', changes);
+
+          expect(d3.entries(jxon.osmChange.create)).to.eql([
+              {key: 'node', value: [n.asJXON('1234').node]},
+              {key: 'way', value: [w.asJXON('1234').way]},
+              {key: 'relation', value: [r1.asJXON('1234').relation, r2.asJXON('1234').relation]},
+          ]);
+        });
+
+        it('includes creations ignoring circular dependencies', function() {
+          var r1 = iD.Relation(),
+              r2 = iD.Relation(),
+              changes, jxon;
+          r1.addMember({id: r2.id});
+          r2.addMember({id: r1.id});
+          changes = {created: [r1,r2], modified: [], deleted: []};
+          jxon = connection.osmChangeJXON('1234', changes);
+
+          expect(d3.entries(jxon.osmChange.create)).to.eql([
+              {key: 'relation', value: [r1.asJXON('1234').relation, r2.asJXON('1234').relation]},
+          ]);
+        });
+
         it('includes modifications', function() {
             var n = iD.Node({loc: [0, 0]}),
                 w = iD.Way(),
