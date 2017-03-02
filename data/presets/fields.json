@@ -406,6 +406,11 @@
             "type": "text",
             "label": "Collection Times"
         },
+        "communication_multi": {
+            "key": "communication:",
+            "type": "multiCombo",
+            "label": "Communication Types"
+        },
         "construction": {
             "key": "construction",
             "type": "combo",

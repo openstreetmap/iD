@@ -7561,7 +7561,8 @@
             "fields": [
                 "tower/type",
                 "tower/construction",
-                "height"
+                "height",
+                "communication_multi"
             ],
             "geometry": [
                 "point"
@@ -7581,7 +7582,7 @@
             "tags": {
                 "man_made": "mast"
             },
-            "name": "Radio Mast"
+            "name": "Mast"
         },
         "man_made/observation": {
             "geometry": [

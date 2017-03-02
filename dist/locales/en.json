@@ -998,6 +998,9 @@
                 "collection_times": {
                     "label": "Collection Times"
                 },
+                "communication_multi": {
+                    "label": "Communication Types"
+                },
                 "construction": {
                     "label": "Type"
                 },
@@ -3483,7 +3486,7 @@
                     "terms": ""
                 },
                 "man_made/mast": {
-                    "name": "Radio Mast",
+                    "name": "Mast",
                     "terms": "broadcast tower,cell phone tower,cell tower,guyed tower,mobile phone tower,radio tower,television tower,transmission mast,transmission tower,tv tower"
                 },
                 "man_made/observation": {
