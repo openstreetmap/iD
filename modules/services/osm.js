@@ -9,9 +9,7 @@ import { utilDetect } from '../util/detect';
 import { utilRebind } from '../util/rebind';
 
 var dispatch = d3.dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded'),
-    useHttps = window.location.protocol === 'https:',
-    protocol = useHttps ? 'https:' : 'http:',
-    urlroot = protocol + '//www.openstreetmap.org',
+    urlroot = 'https://www.openstreetmap.org',
     blacklists = ['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*'],
     inflight = {},
     loadedTiles = {},
