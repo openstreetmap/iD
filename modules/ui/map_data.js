@@ -7,6 +7,7 @@ import { uiTooltipHtml } from './tooltipHtml';
 
 import { tooltip } from '../util/tooltip';
 
+
 export function uiMapData(context) {
     var key = t('map_data.key'),
         geoserviceLayerUrl = context.storage('geoserviceLayerUrl') || '',
@@ -360,12 +361,6 @@ export function uiMapData(context) {
                 .property('checked', false);
             ml.append('span')
                 .text('Add data to roads');
-            
-            /*
-            // test having an import function
-            urlEntry.append('pre').append('code').text('function(osm) {\n  return "hello world";\n}');
-            hljs.initHighlightingOnLoad();
-            */
             
             // radio buttons to decide how data is finalized on OSM
             var approvalPhase = urlEntry.append('div')
