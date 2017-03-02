@@ -1686,6 +1686,9 @@
                 "stars": {
                     "label": "Stars"
                 },
+                "start_date": {
+                    "label": "Start Date"
+                },
                 "step_count": {
                     "label": "Number of Steps"
                 },
