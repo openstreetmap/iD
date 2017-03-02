@@ -3909,9 +3909,13 @@
                     "name": "Subway",
                     "terms": ""
                 },
+                "railway/tram_stop": {
+                    "name": "Tram Stop",
+                    "terms": "light rail,streetcar,tram,trolley"
+                },
                 "railway/tram": {
                     "name": "Tram",
-                    "terms": "streetcar"
+                    "terms": "light rail,streetcar,tram,trolley"
                 },
                 "relation": {
                     "name": "Relation",

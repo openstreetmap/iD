@@ -9322,6 +9322,26 @@
             "terms": [],
             "name": "Subway"
         },
+        "railway/tram_stop": {
+            "icon": "rail-light",
+            "fields": [
+                "network",
+                "operator"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "railway": "tram_stop"
+            },
+            "terms": [
+                "light rail",
+                "streetcar",
+                "tram",
+                "trolley"
+            ],
+            "name": "Tram Stop"
+        },
         "railway/tram": {
             "icon": "railway-light-rail",
             "geometry": [
@@ -9337,7 +9357,10 @@
                 "service_rail"
             ],
             "terms": [
-                "streetcar"
+                "light rail",
+                "streetcar",
+                "tram",
+                "trolley"
             ],
             "name": "Tram"
         },

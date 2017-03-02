@@ -2057,6 +2057,10 @@
         },
         {
             "key": "railway",
+            "value": "tram_stop"
+        },
+        {
+            "key": "railway",
             "value": "tram"
         },
         {

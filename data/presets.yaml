@@ -3582,8 +3582,13 @@ en:
       railway/tram:
         # railway=tram
         name: Tram
-        # 'terms: streetcar'
+        # 'terms: light rail,streetcar,tram,trolley'
         terms: '<translate with synonyms or related terms for ''Tram'', separated by commas>'
+      railway/tram_stop:
+        # railway=tram_stop
+        name: Tram Stop
+        # 'terms: light rail,streetcar,tram,trolley'
+        terms: '<translate with synonyms or related terms for ''Tram Stop'', separated by commas>'
       relation:
         name: Relation
         terms: '<translate with synonyms or related terms for ''Relation'', separated by commas>'
