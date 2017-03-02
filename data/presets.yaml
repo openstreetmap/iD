@@ -2990,6 +2990,10 @@ en:
         # 'leisure=pitch, sport=bowls'
         name: Bowling Green
         terms: '<translate with synonyms or related terms for ''Bowling Green'', separated by commas>'
+      leisure/pitch/cricket:
+        # 'leisure=pitch, sport=cricket'
+        name: Cricket Field
+        terms: '<translate with synonyms or related terms for ''Cricket Field'', separated by commas>'
       leisure/pitch/rugby_league:
         # 'leisure=pitch, sport=rugby_league'
         name: Rugby League Field

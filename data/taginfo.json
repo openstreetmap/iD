@@ -1533,6 +1533,10 @@
         },
         {
             "key": "sport",
+            "value": "cricket"
+        },
+        {
+            "key": "sport",
             "value": "rugby_league"
         },
         {

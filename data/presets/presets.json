@@ -7141,6 +7141,23 @@
             "terms": [],
             "name": "Bowling Green"
         },
+        "leisure/pitch/cricket": {
+            "icon": "cricket",
+            "fields": [
+                "surface",
+                "lit"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "pitch",
+                "sport": "cricket"
+            },
+            "terms": [],
+            "name": "Cricket Field"
+        },
         "leisure/pitch/rugby_league": {
             "icon": "america-football",
             "fields": [
