@@ -8,6 +8,7 @@ export { uiConfirm } from './confirm';
 export { uiConflicts } from './conflicts';
 export { uiContributors } from './contributors';
 export { uiDisclosure } from './disclosure';
+export { uiEditMenu } from './edit_menu';
 export { uiEntityEditor } from './entity_editor';
 export { uiFeatureInfo } from './feature_info';
 export { uiFeatureList } from './feature_list';
@@ -45,7 +46,6 @@ export { uiTagReference } from './tag_reference';
 export { uiToggle } from './toggle';
 export { uiTooltipHtml } from './tooltipHtml';
 export { uiUndoRedo } from './undo_redo';
+export { uiVersion } from './version';
 export { uiViewOnOSM } from './view_on_osm';
 export { uiZoom } from './zoom';
-
-export { uiEditMenu } from './edit_menu';

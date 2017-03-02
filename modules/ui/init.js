@@ -29,6 +29,7 @@ import { uiSpinner } from './spinner';
 import { uiSplash } from './splash';
 import { uiStatus } from './status';
 import { uiUndoRedo } from './undo_redo';
+import { uiVersion } from './version';
 import { uiZoom } from './zoom';
 import { uiCmd } from './cmd';
 
@@ -190,16 +191,13 @@ export function uiInit(context) {
             .attr('id', 'about-list');
 
         if (!context.embed()) {
-            aboutList.call(uiAccount(context));
+            aboutList
+                .call(uiAccount(context));
         }
 
         aboutList
             .append('li')
-            .append('a')
-            .attr('target', '_blank')
-            .attr('tabindex', -1)
-            .attr('href', 'https://github.com/openstreetmap/iD')
-            .text(context.version);
+            .call(uiVersion(context));
 
         var issueLinks = aboutList
             .append('li');
