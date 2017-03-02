@@ -2,11 +2,12 @@
     "icon": "highway-service",
     "fields": [
         "oneway",
+        "covered",
+        "maxheight",
         "maxspeed",
         "structure",
         "access",
-        "surface",
-        "maxheight"
+        "surface"
     ],
     "geometry": [
         "line"
