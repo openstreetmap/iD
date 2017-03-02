@@ -1561,13 +1561,23 @@ text.geoservice {
     margin-bottom: 6px;
 }
 
+.geoservice-pane button.url.final {
+    margin-top: 10px;
+}
+
 .geoservice-pane .topurl input[type='text'] {
     margin-top: 10px;
 }
 
 .geoservice-pane .preset {
-  margin-top: 50px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   font-weight: bold;
+}
+
+.geoservice-pane .preset button {
+  margin-left: 12px;
+  height: 35px;
 }
 
 .geoservice-pane .import-approval {
@@ -1626,12 +1636,16 @@ text.geoservice {
 }
 
 .geoservice-pane .preset-icon-fill {
-    margin-bottom: -20px;
+    margin-bottom: -15px;
 }
 
 .geoservice-pane .preset-icon {
     margin-left: -36px;
     margin-right: 20px;
+}
+
+.geoservice-pane .preset-icon svg {
+    margin-top: -5px;
 }
 
 .geoservice-pane .point-in-polygon, .geoservice-pane .merge-lines {

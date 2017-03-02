@@ -629,7 +629,8 @@ export function svgGeoService(projection, context, dispatch) {
                 if (data.exceededTransferLimit) {
                     window.alert('Service returned first ' + data.features.length + ' results (maximum)');
                 }
-
+                
+                /*
                 that.pane().selectAll('h3').text('Set import attributes');
                 var geoserviceTable = d3.selectAll('.geoservice-table');
                 
@@ -707,6 +708,7 @@ export function svgGeoService(projection, context, dispatch) {
                 } else {
                     console.log('no feature to build table from');
                 }
+                */
                                 
                 _.map(jsondl.features, function(selectfeature) {
                     return processGeoFeature(selectfeature, that.preset());

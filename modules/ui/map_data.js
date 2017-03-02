@@ -6,7 +6,7 @@ import { svgIcon } from '../svg/index';
 import { uiTooltipHtml } from './tooltipHtml';
 
 import { tooltip } from '../util/tooltip';
-
+import { d3combobox } from '../lib/d3.combobox.js';
 
 export function uiMapData(context) {
     var key = t('map_data.key'),
@@ -276,6 +276,7 @@ export function uiMapData(context) {
                 .attr('class', 'topurl');
             var urlInput = urlEntry.append('input')
                 .attr('type', 'text')
+                .attr('class', 'geoservice')
                 .attr('placeholder', 'GeoService URL')
                 .attr('value', context.storage('geoserviceLayerUrl') || '')
                 .on('input', function(e, loadFromLocalStorage) {
@@ -293,7 +294,28 @@ export function uiMapData(context) {
                     }
                     metadata_url = metadata_url.join('/') + '/metadata?f=json';
                     
-                    console.log(metadata_url);
+                    // console.log(metadata_url);
+                    
+                    var setPreset = geoserviceLayer.preset();
+                    var fetcher = function(value, cb) {
+                        var v = value.toLowerCase();
+                        var suggestedTags = [];
+                        if (setPreset) {
+                            _.map(setPreset.fields, function(field) {
+                                if (field.keys) {
+                                    suggestedTags = suggestedTags.concat(_.map(field.keys, function(key) {
+                                        return { value: key };
+                                    }));
+                                } else if (field.key) {
+                                    suggestedTags.push({ value: field.key });
+                                }
+                            });
+                        }
+                        cb(suggestedTags.filter(function(d) {
+                            return d.value.toLowerCase().indexOf(v) >= 0;
+                        }));
+                    };
+                    
                     d3.text(metadata_url, function(err, data) {
                         if (err) {
                             return console.log(err);
@@ -302,13 +324,45 @@ export function uiMapData(context) {
                         if (!data.fields || !data.fields.length) {
                             return;
                         }
-                        var fields = data.fields.map(function(field) {
-                            return field.name;
+                        
+                        var geoserviceTable = d3.selectAll('.geoservice-table');
+                        geoserviceTable.html('<thead class="tag-row"><th>Include?</th><th>GeoService field</th><th>(optional) OSM tag</th></thead>');
+                        
+                        data.fields.map(function(field) {
+                            // don't allow user to change how OBJECTID works
+                            if (field.name === 'OBJECTID') {
+                                return;
+                            }
+        
+                            var row = geoserviceTable.append('tr')
+                                .attr('class', 'preview');
+                            row.append('td')
+                                .append('input')
+                                    .attr('class', field.name.replace(/\s/g, '_'))
+                                    .attr('type', 'checkbox')
+                                    .property('checked', !window.layerUnchecked[field.name])
+                                    .on('change', function() {
+                                        window.layerUnchecked[field.name] = !this.checked;
+                                    });
+                            row.append('td').text(field.name);
+                            // row.append('td').text(samplefeature.properties[keys[r]] || '');
+                        
+                            var suggestedKeys = d3combobox().fetcher(fetcher).minItems(0);
+                            var outfield = row.append('td').append('input');
+                            outfield.attr('type', 'text')
+                                .attr('name', field.name)
+                                .call(suggestedKeys)
+                                .on('change', function() {
+                                    // properties with this.name renamed to this.value
+                                    window.layerImports[this.name] = this.value;
+                                });
                         });
+                        d3.selectAll('.geoservice-table').classed('hide', false);
+                        
                         if (data.extent) {
-                            
+                            // can I get an extent in 4326?
                         }
-                        d3.selectAll('.field-list').text('Fields: ' + fields.join(', '));
+                        // d3.selectAll('.field-list').text('Fields: ' + fields.join(', '));
                     });
                 });
             
@@ -384,22 +438,6 @@ export function uiMapData(context) {
                 .attr('value', 'all');
             allApproval.append('span').text('Import all features by default');
             
-            urlEntry.append('button')
-                .attr('class', 'url')
-                .text('Load In View')
-                .on('click', function() {
-                    geoserviceDownloadAll = false;
-                    setGeoService(this.parentElement.firstChild.value, geoserviceDownloadAll);
-                });
-            urlEntry.append('button')
-                .attr('class', 'url')
-                .attr('style', 'margin-right: 10px')
-                .text('Load Globally')
-                .on('click', function() {
-                    geoserviceDownloadAll = true;
-                    setGeoService(this.parentElement.firstChild.value, geoserviceDownloadAll);
-                });
-            
             body.append('table')
                     .attr('border', '1')
                     .attr('class', 'geoservice-table hide') // tag-list
@@ -458,6 +496,22 @@ export function uiMapData(context) {
                 .attr('class', 'no-float hide')
                 .call(svgIcon('#icon-save', 'icon light'))
                 .text('Save');
+                
+            this.pane.append('button')
+                .attr('class', 'url final')
+                .text('Load In View')
+                .on('click', function() {
+                    geoserviceDownloadAll = false;
+                    setGeoService(d3.select('.topurl input.geoservice').property('value'), geoserviceDownloadAll);
+                });
+            this.pane.append('button')
+                .attr('class', 'url final')
+                .attr('style', 'margin-right: 10px')
+                .text('Load Globally')
+                .on('click', function() {
+                    geoserviceDownloadAll = true;
+                    setGeoService(d3.select('.topurl input.geoservice').property('value'), geoserviceDownloadAll);
+                });
             
             // TODO: make the sidebar fill itself up with things
             // not working
@@ -514,11 +568,11 @@ export function uiMapData(context) {
                 .selectAll('.hide').classed('hide', false);
 
             // hide GeoService URL input
-            gsLayer.pane().selectAll('.topurl').classed('hide', true);
+            gsLayer.pane().selectAll('.topurl, .url.final').classed('hide', true);
             d3.selectAll('.editor-overwrite').classed('editor-overwrite', false);
             
             // if there is an OSM preset, add it to set tags
-            window.layerImports = {};
+            // window.layerImports = {};
             var setPreset = context.layers().layer('geoservice').preset();
             if (setPreset) {
                 // set standard tags
