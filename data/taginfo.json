@@ -1549,6 +1549,10 @@
         },
         {
             "key": "sport",
+            "value": "table_tennis"
+        },
+        {
+            "key": "sport",
             "value": "tennis"
         },
         {

@@ -3389,6 +3389,10 @@
                     "name": "Soccer Field",
                     "terms": ""
                 },
+                "leisure/pitch/table_tennis": {
+                    "name": "Ping Pong Table",
+                    "terms": "table tennis,ping pong"
+                },
                 "leisure/pitch/tennis": {
                     "name": "Tennis Court",
                     "terms": ""
