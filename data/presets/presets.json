@@ -9874,7 +9874,8 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "service/vehicle"
             ],
             "geometry": [
                 "point",
@@ -36305,7 +36306,8 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -36324,7 +36326,8 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -36343,7 +36346,8 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -36362,7 +36366,8 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -36381,7 +36386,8 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -36400,7 +36406,8 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -36419,7 +36426,8 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -36438,7 +36446,8 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -36457,7 +36466,8 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -36476,7 +36486,8 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -36495,7 +36506,8 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -36514,7 +36526,8 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -36533,7 +36546,8 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -36552,7 +36566,8 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -36571,7 +36586,8 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -36590,7 +36606,8 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -36609,7 +36626,8 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "service/vehicle"
             ],
             "suggestion": true
         },
@@ -36628,7 +36646,8 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "service/vehicle"
             ],
             "suggestion": true
         },

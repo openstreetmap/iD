@@ -1618,6 +1618,9 @@
                 "service/bicycle": {
                     "label": "Services"
                 },
+                "service/vehicle": {
+                    "label": "Services"
+                },
                 "shelter_type": {
                     "label": "Type"
                 },

@@ -1042,6 +1042,9 @@ en:
       service/bicycle:
         # 'service:bicycle:=*'
         label: Services
+      service/vehicle:
+        # 'service:vehicle:=*'
+        label: Services
       service_rail:
         # service=*
         label: Service Type

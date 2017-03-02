@@ -1405,6 +1405,11 @@
             "type": "multiCombo",
             "label": "Services"
         },
+        "service/vehicle": {
+            "key": "service:vehicle:",
+            "type": "multiCombo",
+            "label": "Services"
+        },
         "shelter_type": {
             "key": "shelter_type",
             "type": "combo",
