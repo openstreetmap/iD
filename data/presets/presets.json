@@ -6602,6 +6602,24 @@
             "terms": [],
             "name": "Quarry"
         },
+        "landuse/railway": {
+            "icon": "rail",
+            "fields": [
+                "operator"
+            ],
+            "geometry": [
+                "area"
+            ],
+            "tags": {
+                "landuse": "railway"
+            },
+            "terms": [
+                "rail",
+                "train",
+                "track"
+            ],
+            "name": "Railway Corridor"
+        },
         "landuse/recreation_ground": {
             "icon": "pitch",
             "geometry": [

@@ -157,17 +157,20 @@ path.fill.tag-power-plant {
 
 path.stroke.tag-natural-bare_rock,
 path.stroke.tag-natural-scree,
+path.stroke.tag-landuse-railway,
 path.stroke.tag-landuse-quarry {
     stroke: rgb(166, 149, 123);
 }
 path.fill.tag-natural-bare_rock,
 path.fill.tag-natural-scree,
+path.fill.tag-landuse-railway,
 path.fill.tag-landuse-quarry {
     stroke: rgba(166, 149, 123, 0.2);
     fill: rgba(166, 149, 123, 0.2);
 }
 .preset-icon-fill-area.tag-natural-bare_rock,
 .preset-icon-fill-area.tag-natural-scree,
+.preset-icon-fill-area.tag-landuse-railway,
 .preset-icon-fill-area.tag-landuse-quarry {
     border-color: rgb(166, 149, 123);
     background-color: rgba(166, 149, 123, 0.2);
@@ -281,7 +284,7 @@ path.fill.tag-landuse-farmyard {
     fill: rgba(245, 220, 186, 0.3);
 }
 .preset-icon-fill-area.tag-landuse-farmyard {
-    border-color: rgb(245, 220, 186);
+    border-color: rgb(226, 177, 111);
     background: rgba(245, 220, 186, 0.3);
 }
 

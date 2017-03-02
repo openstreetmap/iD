@@ -2847,6 +2847,11 @@ en:
         # landuse=quarry
         name: Quarry
         terms: '<translate with synonyms or related terms for ''Quarry'', separated by commas>'
+      landuse/railway:
+        # landuse=railway
+        name: Railway Corridor
+        # 'terms: rail,train,track'
+        terms: '<translate with synonyms or related terms for ''Railway Corridor'', separated by commas>'
       landuse/recreation_ground:
         # landuse=recreation_ground
         name: Recreation Ground
