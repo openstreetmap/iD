@@ -1,35 +1,60 @@
 import { t } from '../util/locale';
 import {
+    actionChangePreset,
     actionJoin,
     actionMerge,
     actionMergePolygon
-} from '../actions/index';
+} from '../actions';
 
-import { behaviorOperation } from '../behavior/index';
-import { modeSelect } from '../modes/index';
+import { behaviorOperation } from '../behavior';
+import { modeSelect } from '../modes';
 
 
 export function operationMerge(selectedIDs, context) {
+
+    function updatePresetTags(oldGraph, newGraph, ids) {
+        var id = ids[0],
+            oldEntity = oldGraph.hasEntity(id),
+            newEntity = newGraph.hasEntity(id);
+
+        if (!oldEntity || !newEntity) return;
+
+        var oldPreset = context.presets().match(oldEntity, oldGraph),
+            newPreset = context.presets().match(newEntity, newGraph);
+
+        context.replace(actionChangePreset(id, oldPreset, newPreset));
+    }
+
+
     var join = actionJoin(selectedIDs),
         merge = actionMerge(selectedIDs),
         mergePolygon = actionMergePolygon(selectedIDs);
 
-    var operation = function() {
-        var action;
 
-        if (!join.disabled(context.graph())) {
+    var operation = function() {
+        var origGraph = context.graph(),
+            action;
+
+        if (!join.disabled(origGraph)) {
             action = join;
-        } else if (!merge.disabled(context.graph())) {
+        } else if (!merge.disabled(origGraph)) {
             action = merge;
         } else {
             action = mergePolygon;
         }
 
         context.perform(action, operation.annotation());
+
         var ids = selectedIDs.filter(function(id) {
             var entity = context.hasEntity(id);
             return entity && entity.type !== 'node';
         });
+
+        // if we merged tags, rematch preset and update tags if necessary (#3851)
+        if (action === merge) {
+            updatePresetTags(origGraph, context.graph(), ids);
+        }
+
         context.enter(modeSelect(context, ids));
     };
 
