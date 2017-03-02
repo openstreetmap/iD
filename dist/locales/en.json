@@ -1757,6 +1757,9 @@
                 "toll": {
                     "label": "Toll"
                 },
+                "tomb": {
+                    "label": "Type"
+                },
                 "tourism": {
                     "label": "Type"
                 },
@@ -3113,6 +3116,10 @@
                 },
                 "historic/ruins": {
                     "name": "Ruins",
+                    "terms": ""
+                },
+                "historic/tomb": {
+                    "name": "Tomb",
                     "terms": ""
                 },
                 "historic/wayside_cross": {

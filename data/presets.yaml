@@ -1221,6 +1221,9 @@ en:
       toll:
         # toll=*
         label: Toll
+      tomb:
+        # tomb=*
+        label: Type
       tourism:
         # tourism=*
         label: Type
@@ -2693,6 +2696,10 @@ en:
         # historic=ruins
         name: Ruins
         terms: '<translate with synonyms or related terms for ''Ruins'', separated by commas>'
+      historic/tomb:
+        # historic=tomb
+        name: Tomb
+        terms: '<translate with synonyms or related terms for ''Tomb'', separated by commas>'
       historic/wayside_cross:
         # historic=wayside_cross
         name: Wayside Cross

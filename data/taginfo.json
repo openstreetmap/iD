@@ -1271,6 +1271,10 @@
         },
         {
             "key": "historic",
+            "value": "tomb"
+        },
+        {
+            "key": "historic",
             "value": "wayside_cross"
         },
         {

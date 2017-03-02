@@ -5888,6 +5888,21 @@
             },
             "name": "Ruins"
         },
+        "historic/tomb": {
+            "icon": "cemetery",
+            "fields": [
+                "tomb",
+                "building_area"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "historic": "tomb"
+            },
+            "name": "Tomb"
+        },
         "historic/wayside_cross": {
             "icon": "religious-christian",
             "geometry": [

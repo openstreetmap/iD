@@ -1642,6 +1642,11 @@
             "type": "check",
             "label": "Toll"
         },
+        "tomb": {
+            "key": "tomb",
+            "type": "typeCombo",
+            "label": "Type"
+        },
         "tourism": {
             "key": "tourism",
             "type": "typeCombo",
