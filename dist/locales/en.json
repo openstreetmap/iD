@@ -3044,6 +3044,10 @@
                     "name": "Service Area",
                     "terms": "services,travel plaza,service station"
                 },
+                "highway/speed_camera": {
+                    "name": "Speed Camera",
+                    "terms": ""
+                },
                 "highway/steps": {
                     "name": "Steps",
                     "terms": "stairs,staircase"

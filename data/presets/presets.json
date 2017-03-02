@@ -5517,6 +5517,20 @@
             ],
             "name": "Service Area"
         },
+        "highway/speed_camera": {
+            "icon": "attraction",
+            "geometry": [
+                "point"
+            ],
+            "fields": [
+                "ref"
+            ],
+            "tags": {
+                "highway": "speed_camera"
+            },
+            "terms": [],
+            "name": "Speed Camera"
+        },
         "highway/steps": {
             "icon": "highway-steps",
             "fields": [

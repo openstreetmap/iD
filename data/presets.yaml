@@ -2612,6 +2612,10 @@ en:
         name: Service Area
         # 'terms: services,travel plaza,service station'
         terms: '<translate with synonyms or related terms for ''Service Area'', separated by commas>'
+      highway/speed_camera:
+        # highway=speed_camera
+        name: Speed Camera
+        terms: '<translate with synonyms or related terms for ''Speed Camera'', separated by commas>'
       highway/steps:
         # highway=steps
         name: Steps
