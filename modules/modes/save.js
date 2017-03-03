@@ -212,12 +212,14 @@ export function modeSave(context) {
                                 success(e, changeset_id);
                                 // Add delay to allow for postgres replication #1646 #2678
                                 window.setTimeout(function() {
+                                    d3.select('.inspector-wrap *').remove();
                                     loading.close();
                                     context.flush();
                                 }, 2500);
                             }
                         });
                 } else {        // changes were insignificant or reverted by user
+                    d3.select('.inspector-wrap *').remove();
                     loading.close();
                     context.flush();
                     cancel();
