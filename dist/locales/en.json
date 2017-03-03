@@ -398,7 +398,8 @@
             "edit": "Edit feature",
             "check": {
                 "yes": "Yes",
-                "no": "No"
+                "no": "No",
+                "reverser": "Change Direction"
             },
             "add": "Add",
             "none": "None",

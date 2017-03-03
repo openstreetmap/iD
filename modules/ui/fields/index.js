@@ -14,7 +14,8 @@ export * from './wikipedia';
 
 import {
     uiFieldCheck,
-    uiFieldDefaultCheck
+    uiFieldDefaultCheck,
+    uiFieldOnewayCheck
 } from './check';
 
 import {
@@ -47,22 +48,23 @@ export var uiFields = {
     access: uiFieldAccess,
     address: uiFieldAddress,
     check: uiFieldCheck,
-    defaultCheck: uiFieldDefaultCheck,
     combo: uiFieldCombo,
-    typeCombo: uiFieldTypeCombo,
+    cycleway: uiFieldCycleway,
+    defaultCheck: uiFieldDefaultCheck,
+    email: uiFieldEmail,
+    lanes: uiFieldLanes,
+    localized: uiFieldLocalized,
+    maxspeed: uiFieldMaxspeed,
     multiCombo: uiFieldMultiCombo,
     networkCombo: uiFieldNetworkCombo,
-    cycleway: uiFieldCycleway,
-    text: uiFieldText,
-    url: uiFieldUrl,
     number: uiFieldNumber,
-    email: uiFieldEmail,
-    tel: uiFieldTel,
-    localized: uiFieldLocalized,
-    lanes: uiFieldLanes,
-    maxspeed: uiFieldMaxspeed,
+    onewayCheck: uiFieldOnewayCheck,
     radio: uiFieldRadio,
     restrictions: uiFieldRestrictions,
+    tel: uiFieldTel,
+    text: uiFieldText,
     textarea: uiFieldTextarea,
+    typeCombo: uiFieldTypeCombo,
+    url: uiFieldUrl,
     wikipedia: uiFieldWikipedia
 };

@@ -320,6 +320,7 @@ en:
     check:
       "yes": "Yes"
       "no": "No"
+      reverser: "Change Direction"
     add: Add
     none: None
     node: Node

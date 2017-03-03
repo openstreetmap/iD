@@ -1102,7 +1102,7 @@
         },
         "oneway_yes": {
             "key": "oneway",
-            "type": "check",
+            "type": "onewayCheck",
             "label": "One Way",
             "strings": {
                 "options": {
@@ -1114,7 +1114,7 @@
         },
         "oneway": {
             "key": "oneway",
-            "type": "check",
+            "type": "onewayCheck",
             "label": "One Way",
             "strings": {
                 "options": {

@@ -679,8 +679,6 @@ button.save.has-count .count::before {
 }
 
 
-
-
 .feature-list-pane .inspector-body {
     top: 120px;
 }
@@ -1365,6 +1363,18 @@ input[type=number] {
 
 .checkselect label:not(.set) input[type="checkbox"] {
     opacity: .5;
+}
+
+.checkselect .reverser.button {
+    display: block;
+    float: right;
+    background: #7092ff;
+    border-radius: 2px;
+    padding: 0px 8px;
+    color: white;
+}
+.checkselect .reverser.button.hide {
+    display: none;
 }
 
 /* Preset form radio button */

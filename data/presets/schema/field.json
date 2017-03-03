@@ -61,6 +61,7 @@
                 "multiCombo",
                 "networkCombo",
                 "number",
+                "onewayCheck",
                 "radio",
                 "restrictions",
                 "tel",

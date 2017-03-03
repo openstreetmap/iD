@@ -115,6 +115,7 @@ The complete JSON schema for fields can be found in [`data/presets/schema/field.
 **Checkboxes**
 * `check` - 3-state checkbox: `yes`, `no`, unknown (no tag)
 * `defaultCheck` - 2-state checkbox where checked produces `yes` and unchecked produces no tag
+* `onewayCheck` - 3-state checkbox for `oneway` fields, with extra button for direction switching
 
 **Radio Buttons**
 * `radio` - Multiple choice radio button field
