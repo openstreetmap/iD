@@ -1,8 +1,9 @@
 import * as d3 from 'd3';
 import { utilRebind } from '../../util/rebind';
-import { t } from '../../util/locale';
+import { t, textDirection } from '../../util/locale';
 import { actionReverse } from '../../actions';
 import { osmOneWayTags } from '../../osm';
+import { svgIcon } from '../../svg';
 
 export { uiFieldCheck as uiFieldDefaultCheck };
 export { uiFieldCheck as uiFieldOnewayCheck };
@@ -17,9 +18,10 @@ export function uiFieldCheck(field, context) {
         text = d3.select(null),
         label = d3.select(null),
         reverser = d3.select(null),
-        impliedYes = (field.id === 'oneway_yes'),
-        entity,
+        impliedYes,
+        entityId,
         value;
+
 
     if (options) {
         for (var k in options) {
@@ -36,10 +38,14 @@ export function uiFieldCheck(field, context) {
     }
 
 
-    var check = function(selection) {
+    // Checks tags to see whether an undefined value is "Assumed to be Yes"
+    function checkImpliedYes() {
+        impliedYes = (field.id === 'oneway_yes');
+
         // hack: pretend `oneway` field is a `oneway_yes` field
         // where implied oneway tag exists (e.g. `junction=roundabout`) #2220, #1841
         if (field.id === 'oneway') {
+            var entity = context.entity(entityId);
             for (var key in entity.tags) {
                 if (key in osmOneWayTags && (entity.tags[key] in osmOneWayTags[key])) {
                     impliedYes = true;
@@ -48,7 +54,34 @@ export function uiFieldCheck(field, context) {
                 }
             }
         }
+    }
 
+
+    function reverserHidden() {
+        if (!d3.select('div.inspector-hover').empty()) return true;
+        return !(value === 'yes' || (impliedYes && !value));
+    }
+
+
+    function reverserSetText(selection) {
+        if (reverserHidden()) return selection;
+
+        var entity = context.entity(entityId),
+            first = entity.first(),
+            last = entity.isClosed() ? entity.nodes[entity.nodes.length - 2] : entity.last(),
+            pseudoDirection = first < last,
+            icon = pseudoDirection ? '#icon-forward' : '#icon-backward';
+
+        selection.selectAll('.reverser-span')
+            .text(t('inspector.check.reverser'))
+            .call(svgIcon(icon, 'inline'));
+
+        return selection;
+    }
+
+
+    var check = function(selection) {
+        checkImpliedYes();
         selection.classed('checkselect', 'true');
 
         label = selection.selectAll('.preset-input-wrap')
@@ -70,13 +103,13 @@ export function uiFieldCheck(field, context) {
             .attr('class', 'value');
 
         if (field.type === 'onewayCheck') {
-            var isHidden = !(value === 'yes' || (impliedYes && !value));
             enter
                 .append('a')
                 .attr('id', 'preset-input-' + field.id + '-reverser')
-                .attr('class', 'reverser button' + (isHidden ? ' hide' : ''))
-                .text(t('inspector.check.reverser'))
-                .attr('href', '#');
+                .attr('class', 'reverser button' + (reverserHidden() ? ' hide' : ''))
+                .attr('href', '#')
+                .append('span')
+                .attr('class', 'reverser-span');
         }
 
         label = label.merge(enter);
@@ -93,25 +126,29 @@ export function uiFieldCheck(field, context) {
             });
 
         reverser
+            .call(reverserSetText)
             .on('click', function() {
                 d3.event.preventDefault();
                 d3.event.stopPropagation();
                 context.perform(
-                    actionReverse(entity.id),
+                    actionReverse(entityId),
                     t('operations.reverse.annotation')
                 );
+                d3.select(this)
+                    .call(reverserSetText);
             });
     };
 
 
     check.entity = function(_) {
-        if (!arguments.length) return entity;
-        entity = _;
+        if (!arguments.length) return context.hasEntity(entityId);
+        entityId = _.id;
         return check;
     };
 
 
     check.tags = function(tags) {
+        checkImpliedYes();
         value = tags[field.key];
 
         input
@@ -125,7 +162,8 @@ export function uiFieldCheck(field, context) {
             .classed('set', !!value);
 
         reverser
-            .classed('hide', !(value === 'yes' || (impliedYes && !value)));
+            .classed('hide', reverserHidden())
+            .call(reverserSetText);
     };
 
 
