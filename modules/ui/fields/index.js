@@ -14,7 +14,7 @@ export * from './wikipedia';
 
 import {
     uiFieldCheck,
-    uiFieldDefaultcheck
+    uiFieldDefaultCheck
 } from './check';
 
 import {
@@ -47,7 +47,7 @@ export var uiFields = {
     access: uiFieldAccess,
     address: uiFieldAddress,
     check: uiFieldCheck,
-    defaultcheck: uiFieldDefaultcheck,
+    defaultCheck: uiFieldDefaultCheck,
     combo: uiFieldCombo,
     typeCombo: uiFieldTypeCombo,
     multiCombo: uiFieldMultiCombo,

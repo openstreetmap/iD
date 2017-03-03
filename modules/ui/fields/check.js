@@ -3,7 +3,7 @@ import { utilRebind } from '../../util/rebind';
 import { t } from '../../util/locale';
 import { osmOneWayTags } from '../../osm/index';
 
-export { uiFieldCheck as uiFieldDefaultcheck };
+export { uiFieldCheck as uiFieldDefaultCheck };
 
 
 export function uiFieldCheck(field) {
