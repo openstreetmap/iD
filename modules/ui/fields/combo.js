@@ -157,8 +157,9 @@ export function uiFieldCombo(field, context) {
         if (hasCountryPrefix) {
             query = country + ':';
         }
+
         taginfo[fn]({
-            debounce: true,
+            debounce: (q !== ''),
             key: field.key,
             geometry: context.geometry(entity.id),
             query: query
@@ -169,6 +170,7 @@ export function uiFieldCombo(field, context) {
                     return d.value.toLowerCase().indexOf(country + ':') === 0;
                 });
             }
+
             comboData = _.map(data, function(d) {
                 var k = d.value;
                 if (isMulti) k = k.replace(field.key, '');
@@ -179,6 +181,7 @@ export function uiFieldCombo(field, context) {
                     title: isMulti ? v : d.title
                 };
             });
+
             comboData = objectDifference(comboData, multiData);
             if (callback) callback(comboData);
         });
