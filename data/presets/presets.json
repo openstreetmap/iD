@@ -7637,6 +7637,7 @@
             "name": "Lighthouse"
         },
         "man_made/mast": {
+            "icon": "poi-mast",
             "fields": [
                 "tower/type",
                 "tower/construction",
@@ -9034,6 +9035,7 @@
             "searchable": false
         },
         "power/generator": {
+            "icon": "poi-power",
             "fields": [
                 "operator",
                 "generator/source",
@@ -9110,6 +9112,7 @@
             "name": "Power Pole"
         },
         "power/substation": {
+            "icon": "poi-power",
             "fields": [
                 "substation",
                 "operator",
@@ -9134,6 +9137,7 @@
             "name": "High-Voltage Tower"
         },
         "power/transformer": {
+            "icon": "poi-power",
             "geometry": [
                 "point",
                 "vertex",

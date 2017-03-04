@@ -1,4 +1,5 @@
 {
+    "icon": "poi-power",
     "geometry": [
         "point",
         "vertex",
