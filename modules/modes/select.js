@@ -158,8 +158,10 @@ export function modeSelect(context, selectedIDs) {
             var point = context.mouse(),
                 viewport = geoExtent(context.projection.clipExtent()).polygon();
 
-            if (geoPointInPolygon(point, viewport)) {
+            if (point && geoPointInPolygon(point, viewport)) {
                 editMenu.center(point);
+            } else {
+                suppressMenu = true;
             }
         }
     }
