@@ -40,7 +40,7 @@ export function svgDefs(context) {
             .attr('d', 'M 5 3 L 0 3 L 0 2 L 5 2 L 5 0 L 10 2.5 L 5 5 z')
             .attr('stroke', 'none')
             .attr('fill', '#000')
-            .attr('opacity', '0.5');
+            .attr('opacity', '0.75');
 
         // patterns
         var patterns = defs.selectAll('pattern')
