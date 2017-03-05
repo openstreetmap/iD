@@ -6802,6 +6802,7 @@
             "name": "Common"
         },
         "leisure/dance": {
+            "icon": "music",
             "fields": [
                 "operator",
                 "address",
@@ -7968,6 +7969,7 @@
             "name": "Factory"
         },
         "natural": {
+            "icon": "natural",
             "fields": [
                 "natural"
             ],
