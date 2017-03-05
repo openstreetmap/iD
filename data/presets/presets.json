@@ -680,6 +680,7 @@
             "name": "Barbecue/Grill"
         },
         "amenity/bench": {
+            "icon": "poi-bench",
             "fields": [
                 "backrest"
             ],
