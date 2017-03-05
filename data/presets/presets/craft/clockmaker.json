@@ -1,4 +1,5 @@
 {
+    "icon": "poi-clock",
     "fields": [
         "operator",
         "address",

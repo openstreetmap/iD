@@ -1,7 +1,7 @@
 {
+    "icon": "category-roads",
     "geometry": "line",
     "name": "Road Features",
-    "icon": "category-roads",
     "members": [
         "highway/residential",
         "highway/motorway",

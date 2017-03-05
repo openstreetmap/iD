@@ -1,7 +1,7 @@
 {
+    "icon": "roadblock",
     "geometry": "line",
     "name": "Barrier Features",
-    "icon": "roadblock",
     "members": [
         "barrier/fence",
         "barrier/wall",

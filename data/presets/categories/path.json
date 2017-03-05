@@ -1,7 +1,7 @@
 {
+    "icon": "category-path",
     "geometry": "line",
     "name": "Path Features",
-    "icon": "category-path",
     "members": [
         "highway/pedestrian",
         "footway/crosswalk",

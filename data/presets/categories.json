@@ -1,9 +1,9 @@
 {
     "categories": {
         "category-barrier": {
+            "icon": "roadblock",
             "geometry": "line",
             "name": "Barrier Features",
-            "icon": "roadblock",
             "members": [
                 "barrier/fence",
                 "barrier/wall",
@@ -13,9 +13,9 @@
             ]
         },
         "category-building": {
+            "icon": "building",
             "geometry": "area",
             "name": "Building Features",
-            "icon": "building",
             "members": [
                 "building",
                 "building/house",
@@ -26,9 +26,9 @@
             ]
         },
         "category-golf": {
+            "icon": "golf",
             "geometry": "area",
             "name": "Golf Features",
-            "icon": "golf",
             "members": [
                 "golf/fairway",
                 "golf/green",
@@ -40,9 +40,9 @@
             ]
         },
         "category-landuse": {
+            "icon": "landuse",
             "geometry": "area",
             "name": "Land Use Features",
-            "icon": "landuse",
             "members": [
                 "landuse/residential",
                 "landuse/industrial",
@@ -58,9 +58,9 @@
             ]
         },
         "category-natural-area": {
+            "icon": "natural",
             "geometry": "area",
             "name": "Natural Features",
-            "icon": "natural",
             "members": [
                 "natural/water",
                 "natural/wood",
@@ -75,18 +75,18 @@
             ]
         },
         "category-natural-line": {
+            "icon": "natural",
             "geometry": "line",
             "name": "Natural Features",
-            "icon": "natural",
             "members": [
                 "natural/coastline",
                 "natural/tree_row"
             ]
         },
         "category-natural-point": {
+            "icon": "natural",
             "geometry": "point",
             "name": "Natural Features",
-            "icon": "natural",
             "members": [
                 "natural/peak",
                 "natural/cliff",
@@ -95,9 +95,9 @@
             ]
         },
         "category-path": {
+            "icon": "category-path",
             "geometry": "line",
             "name": "Path Features",
-            "icon": "category-path",
             "members": [
                 "highway/pedestrian",
                 "footway/crosswalk",
@@ -110,9 +110,9 @@
             ]
         },
         "category-rail": {
+            "icon": "category-rail",
             "geometry": "line",
             "name": "Rail Features",
-            "icon": "category-rail",
             "members": [
                 "railway/rail",
                 "railway/subway",
@@ -123,9 +123,9 @@
             ]
         },
         "category-restriction": {
+            "icon": "restriction",
             "geometry": "relation",
             "name": "Restriction Features",
-            "icon": "restriction",
             "members": [
                 "type/restriction/no_left_turn",
                 "type/restriction/no_right_turn",
@@ -138,9 +138,9 @@
             ]
         },
         "category-road": {
+            "icon": "category-roads",
             "geometry": "line",
             "name": "Road Features",
-            "icon": "category-roads",
             "members": [
                 "highway/residential",
                 "highway/motorway",
@@ -161,9 +161,9 @@
             ]
         },
         "category-route": {
+            "icon": "route",
             "geometry": "relation",
             "name": "Route Features",
-            "icon": "route",
             "members": [
                 "type/route/road",
                 "type/route/bicycle",
@@ -182,9 +182,9 @@
             ]
         },
         "category-water-area": {
+            "icon": "water",
             "geometry": "area",
             "name": "Water Features",
-            "icon": "water",
             "members": [
                 "natural/water/lake",
                 "natural/water/pond",
@@ -193,9 +193,9 @@
             ]
         },
         "category-water-line": {
+            "icon": "category-water",
             "geometry": "line",
             "name": "Water Features",
-            "icon": "category-water",
             "members": [
                 "waterway/river",
                 "waterway/stream",

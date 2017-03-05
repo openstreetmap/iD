@@ -1,7 +1,7 @@
 {
+    "icon": "category-rail",
     "geometry": "line",
     "name": "Rail Features",
-    "icon": "category-rail",
     "members": [
         "railway/rail",
         "railway/subway",
