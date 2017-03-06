@@ -1,5 +1,5 @@
 {
-    "icon": "marker-stroked",
+    "icon": "poi-tool",
     "fields": [
         "operator",
         "address",

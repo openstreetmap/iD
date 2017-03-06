@@ -1,5 +1,5 @@
 {
-    "icon": "logging",
+    "icon": "poi-tool",
     "fields": [
         "operator",
         "address",

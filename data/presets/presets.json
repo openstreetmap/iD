@@ -3651,7 +3651,7 @@
             "name": "Camp Pitch"
         },
         "craft": {
-            "icon": "marker-stroked",
+            "icon": "poi-tool",
             "fields": [
                 "craft",
                 "operator",
@@ -3780,7 +3780,7 @@
             "name": "Beekeeper"
         },
         "craft/blacksmith": {
-            "icon": "farm",
+            "icon": "poi-tool",
             "fields": [
                 "operator",
                 "address",
@@ -3797,7 +3797,7 @@
             "name": "Blacksmith"
         },
         "craft/boatbuilder": {
-            "icon": "marker-stroked",
+            "icon": "poi-tool",
             "fields": [
                 "operator",
                 "address",
@@ -3855,7 +3855,7 @@
             "name": "Brewery"
         },
         "craft/carpenter": {
-            "icon": "logging",
+            "icon": "poi-tool",
             "fields": [
                 "operator",
                 "address",
@@ -3875,7 +3875,7 @@
             "name": "Carpenter"
         },
         "craft/carpet_layer": {
-            "icon": "square",
+            "icon": "poi-tool",
             "fields": [
                 "operator",
                 "address",
@@ -4049,7 +4049,7 @@
             "name": "Handicraft"
         },
         "craft/hvac": {
-            "icon": "marker-stroked",
+            "icon": "poi-tool",
             "fields": [
                 "operator",
                 "address",
@@ -4105,7 +4105,7 @@
             "name": "Key Cutter"
         },
         "craft/metal_construction": {
-            "icon": "marker-stroked",
+            "icon": "poi-tool",
             "fields": [
                 "operator",
                 "address",
@@ -4176,7 +4176,7 @@
             "name": "Photographic Laboratory"
         },
         "craft/plasterer": {
-            "icon": "marker-stroked",
+            "icon": "poi-tool",
             "fields": [
                 "operator",
                 "address",
@@ -4193,7 +4193,7 @@
             "name": "Plasterer"
         },
         "craft/plumber": {
-            "icon": "marker-stroked",
+            "icon": "poi-tool",
             "fields": [
                 "operator",
                 "address",
@@ -4233,7 +4233,7 @@
             "name": "Pottery"
         },
         "craft/rigger": {
-            "icon": "marker-stroked",
+            "icon": "poi-tool",
             "fields": [
                 "operator",
                 "address",
@@ -4250,7 +4250,7 @@
             "name": "Rigger"
         },
         "craft/roofer": {
-            "icon": "marker-stroked",
+            "icon": "poi-tool",
             "fields": [
                 "operator",
                 "address",
@@ -4267,7 +4267,7 @@
             "name": "Roofer"
         },
         "craft/saddler": {
-            "icon": "marker-stroked",
+            "icon": "poi-tool",
             "fields": [
                 "operator",
                 "address",
@@ -4284,7 +4284,7 @@
             "name": "Saddler"
         },
         "craft/sailmaker": {
-            "icon": "marker-stroked",
+            "icon": "poi-tool",
             "fields": [
                 "operator",
                 "address",
@@ -4321,7 +4321,7 @@
             "name": "Sawmill"
         },
         "craft/scaffolder": {
-            "icon": "marker-stroked",
+            "icon": "poi-tool",
             "fields": [
                 "operator",
                 "address",
@@ -4355,7 +4355,7 @@
             "name": "Sculpter"
         },
         "craft/shoemaker": {
-            "icon": "marker-stroked",
+            "icon": "poi-tool",
             "fields": [
                 "operator",
                 "address",
@@ -4375,7 +4375,7 @@
             "name": "Shoemaker"
         },
         "craft/stonemason": {
-            "icon": "marker-stroked",
+            "icon": "poi-tool",
             "fields": [
                 "operator",
                 "address",
@@ -4412,7 +4412,7 @@
             "name": "Chimney Sweep"
         },
         "craft/tiler": {
-            "icon": "marker-stroked",
+            "icon": "poi-tool",
             "fields": [
                 "operator",
                 "address",
@@ -4429,7 +4429,7 @@
             "name": "Tiler"
         },
         "craft/tinsmith": {
-            "icon": "marker-stroked",
+            "icon": "poi-tool",
             "fields": [
                 "operator",
                 "address",
@@ -4446,7 +4446,7 @@
             "name": "Tinsmith"
         },
         "craft/upholsterer": {
-            "icon": "marker-stroked",
+            "icon": "poi-tool",
             "fields": [
                 "operator",
                 "address",
@@ -4480,7 +4480,7 @@
             "name": "Watchmaker"
         },
         "craft/window_construction": {
-            "icon": "marker-stroked",
+            "icon": "poi-tool",
             "fields": [
                 "operator",
                 "address",
@@ -10317,7 +10317,7 @@
             "name": "Department Store"
         },
         "shop/doityourself": {
-            "icon": "shop",
+            "icon": "poi-tool",
             "fields": [
                 "operator",
                 "address",
@@ -10666,7 +10666,7 @@
             "name": "Hairdresser"
         },
         "shop/hardware": {
-            "icon": "shop",
+            "icon": "poi-tool",
             "fields": [
                 "operator",
                 "address",
@@ -36891,7 +36891,7 @@
                 "shop": "doityourself"
             },
             "name": "Hornbach",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -36910,7 +36910,7 @@
                 "shop": "doityourself"
             },
             "name": "B&Q",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -36929,7 +36929,7 @@
                 "shop": "doityourself"
             },
             "name": "Hubo",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -36948,7 +36948,7 @@
                 "shop": "doityourself"
             },
             "name": "Mr Bricolage",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -36967,7 +36967,7 @@
                 "shop": "doityourself"
             },
             "name": "Gamma",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -36986,7 +36986,7 @@
                 "shop": "doityourself"
             },
             "name": "OBI",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37005,7 +37005,7 @@
                 "shop": "doityourself"
             },
             "name": "Lowes",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37024,7 +37024,7 @@
                 "shop": "doityourself"
             },
             "name": "Wickes",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37043,7 +37043,7 @@
                 "shop": "doityourself"
             },
             "name": "Hagebau",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37062,7 +37062,7 @@
                 "shop": "doityourself"
             },
             "name": "Max Bahr",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37081,7 +37081,7 @@
                 "shop": "doityourself"
             },
             "name": "Castorama",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37100,7 +37100,7 @@
                 "shop": "doityourself"
             },
             "name": "Rona",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37119,7 +37119,7 @@
                 "shop": "doityourself"
             },
             "name": "Home Depot",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37138,7 +37138,7 @@
                 "shop": "doityourself"
             },
             "name": "Toom Baumarkt",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37157,7 +37157,7 @@
                 "shop": "doityourself"
             },
             "name": "Homebase",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37176,7 +37176,7 @@
                 "shop": "doityourself"
             },
             "name": "Baumax",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37195,7 +37195,7 @@
                 "shop": "doityourself"
             },
             "name": "Lagerhaus",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37214,7 +37214,7 @@
                 "shop": "doityourself"
             },
             "name": "Bauhaus",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37233,7 +37233,7 @@
                 "shop": "doityourself"
             },
             "name": "Canadian Tire",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37252,7 +37252,7 @@
                 "shop": "doityourself"
             },
             "name": "Leroy Merlin",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37271,7 +37271,7 @@
                 "shop": "doityourself"
             },
             "name": "Hellweg",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37290,7 +37290,7 @@
                 "shop": "doityourself"
             },
             "name": "Brico",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37309,7 +37309,7 @@
                 "shop": "doityourself"
             },
             "name": "Bricomarché",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37328,7 +37328,7 @@
                 "shop": "doityourself"
             },
             "name": "Toom",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37347,7 +37347,7 @@
                 "shop": "doityourself"
             },
             "name": "Hagebaumarkt",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37366,7 +37366,7 @@
                 "shop": "doityourself"
             },
             "name": "Praktiker",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37385,7 +37385,7 @@
                 "shop": "doityourself"
             },
             "name": "Menards",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37404,7 +37404,7 @@
                 "shop": "doityourself"
             },
             "name": "Weldom",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37423,7 +37423,7 @@
                 "shop": "doityourself"
             },
             "name": "Bunnings Warehouse",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37442,7 +37442,7 @@
                 "shop": "doityourself"
             },
             "name": "Ace Hardware",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37461,7 +37461,7 @@
                 "shop": "doityourself"
             },
             "name": "Home Hardware",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37480,7 +37480,7 @@
                 "shop": "doityourself"
             },
             "name": "Стройматериалы",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37499,7 +37499,7 @@
                 "shop": "doityourself"
             },
             "name": "Bricorama",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -37518,7 +37518,7 @@
                 "shop": "doityourself"
             },
             "name": "Point P",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -42252,7 +42252,7 @@
                 "shop": "hardware"
             },
             "name": "1000 мелочей",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
@@ -42271,7 +42271,7 @@
                 "shop": "hardware"
             },
             "name": "Хозтовары",
-            "icon": "shop",
+            "icon": "poi-tool",
             "geometry": [
                 "point",
                 "area"
