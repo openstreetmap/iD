@@ -1305,6 +1305,7 @@
             "name": "Food Court"
         },
         "amenity/fountain": {
+            "icon": "poi-fountain",
             "geometry": [
                 "point",
                 "area"
