@@ -1,4 +1,5 @@
 {
+    "icon": "poi-dice",
     "fields": [
         "operator",
         "address",

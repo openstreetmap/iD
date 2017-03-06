@@ -910,6 +910,7 @@
             "name": "Car Wash"
         },
         "amenity/casino": {
+            "icon": "poi-dice",
             "fields": [
                 "operator",
                 "address",
@@ -6742,6 +6743,7 @@
             "name": "Leisure"
         },
         "leisure/adult_gaming_centre": {
+            "icon": "poi-dice",
             "fields": [
                 "operator",
                 "address",
