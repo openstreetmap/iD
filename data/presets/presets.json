@@ -7392,6 +7392,7 @@
             "name": "Running Track"
         },
         "leisure/slipway": {
+            "icon": "poi-beach",
             "geometry": [
                 "point",
                 "line"
@@ -8020,6 +8021,7 @@
             "name": "Bay"
         },
         "natural/beach": {
+            "icon": "poi-beach",
             "fields": [
                 "surface"
             ],
