@@ -134,7 +134,9 @@ export function svgLabels(projection, context) {
 
     function drawLineLabels(selection, labelDataList, filter, classes, labels) {
         var texts = selection.selectAll('text.' + classes)
-            .filter(filter)
+            .filter(function (labelData) {
+                return filter(labelData[0]);
+            })
             .data(labelDataList, function (labelData) {
                 return osmEntity.key(labelData[0]);
             });
@@ -168,7 +170,9 @@ export function svgLabels(projection, context) {
 
     function drawPointLabels(selection, labelDataList, filter, classes, labels) {
         var texts = selection.selectAll('text.' + classes)
-            .filter(filter)
+            .filter(function (labelData) {
+                return filter(labelData[0]);
+            })
             .data(labelDataList, function (labelData) {
                 return osmEntity.key(labelData[0]);
             });
@@ -209,7 +213,9 @@ export function svgLabels(projection, context) {
 
     function drawAreaIcons(selection, labelDataList, filter, classes, labels) {
         var icons = selection.selectAll('use.' + classes)
-            .filter(filter)
+            .filter(function (labelData) {
+                return filter(labelData[0]);
+            })
             .data(labelDataList, function (labelData) {
                 return osmEntity.key(labelData[0]);
             });
