@@ -5590,6 +5590,7 @@
             "name": "Stop Sign"
         },
         "highway/street_lamp": {
+            "icon": "poi-street-lamp",
             "geometry": [
                 "point",
                 "vertex"
