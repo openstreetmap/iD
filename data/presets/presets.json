@@ -7550,6 +7550,7 @@
             "searchable": false
         },
         "man_made/adit": {
+            "icon": "triangle",
             "geometry": [
                 "point",
                 "area"
@@ -8033,6 +8034,7 @@
             "name": "Beach"
         },
         "natural/cave_entrance": {
+            "icon": "triangle",
             "geometry": [
                 "point",
                 "area"
