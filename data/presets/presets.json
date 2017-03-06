@@ -2452,6 +2452,7 @@
             "name": "University Grounds"
         },
         "amenity/vending_machine/cigarettes": {
+            "icon": "poi-vending-machine",
             "fields": [
                 "operator",
                 "payment_multi",
@@ -2470,6 +2471,7 @@
             "name": "Cigarette Vending Machine"
         },
         "amenity/vending_machine/condoms": {
+            "icon": "poi-vending-machine",
             "fields": [
                 "operator",
                 "payment_multi",
@@ -2488,6 +2490,7 @@
             "name": "Condom Vending Machine"
         },
         "amenity/vending_machine/drinks": {
+            "icon": "poi-vending-machine",
             "fields": [
                 "operator",
                 "payment_multi",
@@ -2510,6 +2513,7 @@
             "name": "Drink Vending Machine"
         },
         "amenity/vending_machine/excrement_bags": {
+            "icon": "poi-vending-machine",
             "fields": [
                 "operator",
                 "fee",
@@ -2533,6 +2537,7 @@
             "name": "Excrement Bag Vending Machine"
         },
         "amenity/vending_machine/news_papers": {
+            "icon": "poi-vending-machine",
             "fields": [
                 "operator",
                 "fee",
@@ -2552,6 +2557,7 @@
             "name": "Newspaper Vending Machine"
         },
         "amenity/vending_machine/parcel_pickup_dropoff": {
+            "icon": "poi-vending-machine",
             "fields": [
                 "operator",
                 "payment_multi",
@@ -2572,6 +2578,7 @@
             "name": "Parcel Pickup/Dropoff Vending Machine"
         },
         "amenity/vending_machine/parking_tickets": {
+            "icon": "poi-vending-machine",
             "fields": [
                 "operator",
                 "payment_multi",
@@ -2591,6 +2598,7 @@
             "name": "Parking Ticket Vending Machine"
         },
         "amenity/vending_machine/public_transport_tickets": {
+            "icon": "poi-vending-machine",
             "fields": [
                 "operator",
                 "payment_multi",
@@ -2614,6 +2622,7 @@
             "name": "Transit Ticket Vending Machine"
         },
         "amenity/vending_machine/sweets": {
+            "icon": "poi-vending-machine",
             "fields": [
                 "operator",
                 "payment_multi",
@@ -2637,6 +2646,7 @@
             "name": "Snack Vending Machine"
         },
         "amenity/vending_machine/vending_machine": {
+            "icon": "poi-vending-machine",
             "fields": [
                 "vending",
                 "operator",
