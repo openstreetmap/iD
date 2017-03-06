@@ -283,12 +283,14 @@
     "poi-beach":                { "viewBox": "430 335 15 15" },
     "poi-fountain":             { "viewBox": "445 335 15 15" },
     "poi-storage-tank":         { "viewBox": "460 335 15 15" },
+    "poi-silo":                 { "viewBox": "475 335 15 15" },
 
     "poi-vending-machine-shape":   { "fill": "currentColor" },
     "poi-dice-shape":              { "fill": "currentColor" },
     "poi-beach-shape":             { "fill": "currentColor" },
     "poi-fountain-shape":          { "fill": "currentColor" },
     "poi-storage-tank-shape":      { "fill": "currentColor" },
+    "poi-silo-shape":              { "fill": "currentColor" },
 
     "turn-yes":                 { "viewBox": "200 320 44 24" },
     "turn-no":                  { "viewBox": "244 320 44 24" },

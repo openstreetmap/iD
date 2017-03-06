@@ -7765,6 +7765,7 @@
             "name": "Pumping Station"
         },
         "man_made/silo": {
+            "icon": "poi-silo",
             "fields": [
                 "building_area",
                 "crop"
