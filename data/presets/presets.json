@@ -6851,6 +6851,7 @@
             "name": "Dog Park"
         },
         "leisure/firepit": {
+            "icon": "fire-station",
             "geometry": [
                 "point",
                 "area"
@@ -7529,6 +7530,7 @@
             "matchScore": 0.1
         },
         "man_made": {
+            "icon": "poi-storage-tank",
             "fields": [
                 "man_made"
             ],
@@ -7622,6 +7624,7 @@
             "name": "Flagpole"
         },
         "man_made/gasometer": {
+            "icon": "poi-storage-tank",
             "geometry": [
                 "point",
                 "area"
@@ -7781,6 +7784,7 @@
             "name": "Silo"
         },
         "man_made/storage_tank": {
+            "icon": "poi-storage-tank",
             "fields": [
                 "building_area",
                 "content"
