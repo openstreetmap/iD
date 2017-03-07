@@ -1450,6 +1450,7 @@
             "name": "Ice Cream Shop"
         },
         "amenity/internet_cafe": {
+            "icon": "poi-mast",
             "fields": [
                 "operator",
                 "address",
@@ -5323,6 +5324,7 @@
             "name": "Residential Road"
         },
         "highway/rest_area": {
+            "icon": "car",
             "geometry": [
                 "point",
                 "vertex",
@@ -5521,6 +5523,7 @@
             "name": "Parking Aisle"
         },
         "highway/services": {
+            "icon": "car",
             "geometry": [
                 "point",
                 "vertex",
@@ -6799,6 +6802,7 @@
             "name": "Bird Hide"
         },
         "leisure/bowling_alley": {
+            "icon": "poi-bowling",
             "fields": [
                 "operator",
                 "address",
@@ -7376,6 +7380,7 @@
             "name": "Playground"
         },
         "leisure/resort": {
+            "icon": "lodging",
             "fields": [
                 "operator",
                 "address",
@@ -7727,6 +7732,7 @@
             "name": "Observation Tower"
         },
         "man_made/petroleum_well": {
+            "icon": "poi-storage-tank",
             "geometry": [
                 "point"
             ],
@@ -7773,6 +7779,7 @@
             "name": "Pipeline"
         },
         "man_made/pumping_station": {
+            "icon": "water",
             "geometry": [
                 "point",
                 "area"
@@ -8035,6 +8042,7 @@
             "name": "Bare Rock"
         },
         "natural/bay": {
+            "icon": "poi-beach",
             "geometry": [
                 "point",
                 "area"
@@ -8253,6 +8261,7 @@
             "name": "Scrub"
         },
         "natural/spring": {
+            "icon": "water",
             "geometry": [
                 "point",
                 "vertex"
@@ -8946,6 +8955,7 @@
             "name": "Hamlet"
         },
         "place/island": {
+            "icon": "mountain",
             "geometry": [
                 "point",
                 "area"
@@ -8966,6 +8976,7 @@
             "name": "Island"
         },
         "place/isolated_dwelling": {
+            "icon": "home",
             "geometry": [
                 "point",
                 "area"
@@ -8976,7 +8987,7 @@
             "name": "Isolated Dwelling"
         },
         "place/locality": {
-            "icon": "marker",
+            "icon": "triangle-stroked",
             "geometry": [
                 "point",
                 "area"
