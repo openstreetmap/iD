@@ -288,6 +288,7 @@
     "poi-tool":                 { "viewBox": "505 335 15 15" },
     "poi-tower":                { "viewBox": "520 335 15 15" },
     "poi-military":             { "viewBox": "535 335 15 15" },
+    "poi-chimney":              { "viewBox": "550 335 15 15" },
 
     "poi-vending-machine-shape":   { "fill": "currentColor" },
     "poi-dice-shape":              { "fill": "currentColor" },
@@ -299,6 +300,7 @@
     "poi-tool-shape":              { "fill": "currentColor" },
     "poi-tower-shape":             { "fill": "currentColor" },
     "poi-military-shape":          { "fill": "currentColor" },
+    "poi-chimney-shape":           { "fill": "currentColor" },
 
     "turn-yes":                 { "viewBox": "200 320 44 24" },
     "turn-no":                  { "viewBox": "244 320 44 24" },
