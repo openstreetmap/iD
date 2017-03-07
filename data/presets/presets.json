@@ -6238,6 +6238,7 @@
             "name": "Meadow"
         },
         "landuse/military": {
+            "icon": "poi-military",
             "geometry": [
                 "area"
             ],
@@ -6289,6 +6290,7 @@
             "name": "Military Airfield"
         },
         "landuse/military/barracks": {
+            "icon": "poi-military",
             "fields": [
                 "building_area"
             ],
@@ -6322,6 +6324,7 @@
             "name": "Barracks"
         },
         "landuse/military/bunker": {
+            "icon": "poi-military",
             "fields": [
                 "bunker_type",
                 "building_area"
@@ -6424,6 +6427,7 @@
             "name": "Danger Area"
         },
         "landuse/military/naval_base": {
+            "icon": "poi-military",
             "geometry": [
                 "point",
                 "area"
@@ -6483,7 +6487,7 @@
             "name": "Nuclear Explosion Site"
         },
         "landuse/military/obstacle_course": {
-            "icon": "pitch",
+            "icon": "poi-military",
             "geometry": [
                 "point",
                 "area"
@@ -6512,6 +6516,7 @@
             "name": "Obstacle Course"
         },
         "landuse/military/office": {
+            "icon": "poi-military",
             "fields": [
                 "building_area"
             ],
@@ -6547,6 +6552,7 @@
             "name": "Military Office"
         },
         "landuse/military/range": {
+            "icon": "poi-military",
             "geometry": [
                 "point",
                 "area"
@@ -6583,6 +6589,7 @@
             "name": "Military Range"
         },
         "landuse/military/training_area": {
+            "icon": "poi-military",
             "geometry": [
                 "point",
                 "area"
