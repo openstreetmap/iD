@@ -286,6 +286,7 @@
     "poi-silo":                 { "viewBox": "475 335 15 15" },
     "poi-street-lamp":          { "viewBox": "490 335 15 15" },
     "poi-tool":                 { "viewBox": "505 335 15 15" },
+    "poi-tower":                { "viewBox": "520 335 15 15" },
 
     "poi-vending-machine-shape":   { "fill": "currentColor" },
     "poi-dice-shape":              { "fill": "currentColor" },
@@ -295,6 +296,7 @@
     "poi-silo-shape":              { "fill": "currentColor" },
     "poi-street-lamp-shape":       { "fill": "currentColor" },
     "poi-tool-shape":              { "fill": "currentColor" },
+    "poi-tower-shape":             { "fill": "currentColor" },
 
     "turn-yes":                 { "viewBox": "200 320 44 24" },
     "turn-no":                  { "viewBox": "244 320 44 24" },
