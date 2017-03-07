@@ -1,4 +1,5 @@
 {
+    "icon": "poi-bowling",
     "fields": [
         "operator",
         "address",
