@@ -1522,6 +1522,7 @@
             "name": "Library"
         },
         "amenity/marketplace": {
+            "icon": "shop",
             "fields": [
                 "operator",
                 "address",
@@ -2109,6 +2110,7 @@
             "name": "Restaurant"
         },
         "amenity/sanitary_dump_station": {
+            "icon": "poi-storage-tank",
             "fields": [
                 "operator",
                 "access_toilets",
@@ -4071,7 +4073,7 @@
             "name": "HVAC"
         },
         "craft/insulator": {
-            "icon": "marker-stroked",
+            "icon": "poi-tool",
             "fields": [
                 "operator",
                 "address",
@@ -6481,6 +6483,7 @@
             "name": "Nuclear Explosion Site"
         },
         "landuse/military/obstacle_course": {
+            "icon": "pitch",
             "geometry": [
                 "point",
                 "area"
@@ -6731,6 +6734,7 @@
             "name": "Vineyard"
         },
         "leisure": {
+            "icon": "pitch",
             "fields": [
                 "leisure"
             ],
@@ -6802,7 +6806,7 @@
             "name": "Bowling Alley"
         },
         "leisure/common": {
-            "icon": "pitch",
+            "icon": "poi-foot",
             "geometry": [
                 "point",
                 "area"
@@ -7695,6 +7699,7 @@
             "name": "Mast"
         },
         "man_made/observation": {
+            "icon": "poi-tower",
             "geometry": [
                 "point",
                 "area"
@@ -7884,6 +7889,7 @@
             "name": "Survey Point"
         },
         "man_made/tower": {
+            "icon": "poi-tower",
             "fields": [
                 "tower/type",
                 "tower/construction",
@@ -8986,6 +8992,7 @@
             "name": "Neighborhood"
         },
         "place/square": {
+            "icon": "poi-foot",
             "geometry": [
                 "point",
                 "area"
@@ -11759,6 +11766,7 @@
             "name": "Wine Shop"
         },
         "tourism": {
+            "icon": "attraction",
             "fields": [
                 "tourism"
             ],
@@ -12207,6 +12215,7 @@
             "name": "Theme Park"
         },
         "tourism/viewpoint": {
+            "icon": "attraction",
             "geometry": [
                 "point",
                 "vertex"
@@ -12973,6 +12982,7 @@
             "name": "Riverbank"
         },
         "waterway/sanitary_dump_station": {
+            "icon": "poi-storage-tank",
             "fields": [
                 "operator",
                 "access_toilets",

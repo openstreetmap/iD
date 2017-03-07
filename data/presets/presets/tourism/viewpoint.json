@@ -1,4 +1,5 @@
 {
+    "icon": "attraction",
     "geometry": [
         "point",
         "vertex"
