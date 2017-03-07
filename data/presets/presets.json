@@ -5838,6 +5838,7 @@
             "name": "Minor/Unclassified Road"
         },
         "historic": {
+            "icon": "poi-ruins",
             "fields": [
                 "historic"
             ],
@@ -5852,6 +5853,7 @@
             "name": "Historic Site"
         },
         "historic/archaeological_site": {
+            "icon": "poi-ruins",
             "fields": [
                 "historic/civilization"
             ],
@@ -5866,6 +5868,7 @@
             "name": "Archaeological Site"
         },
         "historic/boundary_stone": {
+            "icon": "poi-monument",
             "geometry": [
                 "point",
                 "vertex"
@@ -5916,6 +5919,7 @@
             "name": "Monument"
         },
         "historic/ruins": {
+            "icon": "poi-ruins",
             "fields": [
                 "historic/civilization"
             ],
