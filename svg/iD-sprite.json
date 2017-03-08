@@ -267,7 +267,7 @@
     "poi-bench":                { "viewBox": "520 320 15 15" },
     "poi-clock":                { "viewBox": "535 320 15 15" },
     "poi-ruins":                { "viewBox": "550 320 15 15" },
-    "poi-exit":                 { "viewBox": "565 320 15 15" },
+    "poi-junction":             { "viewBox": "565 320 15 15" },
 
     "poi-foot-shape":              { "fill": "currentColor" },
     "poi-traffic-signals-shape":   { "fill": "currentColor" },
@@ -280,7 +280,7 @@
     "poi-bench-shape":             { "fill": "currentColor" },
     "poi-clock-shape":             { "fill": "currentColor" },
     "poi-ruins-shape":             { "fill": "currentColor" },
-    "poi-exit-shape":              { "fill": "currentColor" },
+    "poi-junction-shape":          { "fill": "currentColor" },
 
     "poi-vending-machine":      { "viewBox": "400 335 15 15" },
     "poi-dice":                 { "viewBox": "415 335 15 15" },

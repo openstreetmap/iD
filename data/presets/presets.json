@@ -5104,7 +5104,7 @@
             "name": "Mini-Roundabout"
         },
         "highway/motorway_junction": {
-            "icon": "poi-exit",
+            "icon": "poi-junction",
             "geometry": [
                 "vertex"
             ],
@@ -5977,6 +5977,7 @@
             "name": "Wayside Shrine"
         },
         "junction": {
+            "icon": "poi-junction",
             "geometry": [
                 "vertex",
                 "area"
