@@ -99,14 +99,14 @@
             "geometry": "line",
             "name": "Path Features",
             "members": [
-                "highway/pedestrian",
                 "footway/crosswalk",
                 "footway/sidewalk",
                 "highway/steps",
                 "highway/path",
                 "highway/footway",
                 "highway/cycleway",
-                "highway/bridleway"
+                "highway/bridleway",
+                "highway/pedestrian"
             ]
         },
         "category-rail": {
