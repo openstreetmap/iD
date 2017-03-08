@@ -312,6 +312,10 @@
     "poi-bowling-shape":           { "fill": "currentColor" },
     "poi-binoculars-shape":        { "fill": "currentColor" },
 
+    "poi-vertex":               { "viewBox": "400 350 15 15" },
+
+    "poi-vertex-shape":         { "fill": "currentColor" },
+
     "turn-yes":                 { "viewBox": "200 320 44 24" },
     "turn-no":                  { "viewBox": "244 320 44 24" },
     "turn-only":                { "viewBox": "288 320 44 24" },

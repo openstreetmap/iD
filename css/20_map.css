@@ -82,6 +82,18 @@ g.vertex.vertex-hover {
     display: none;
 }
 
+.preset-icon-fill-vertex {
+    height: 40px;
+    width: 40px;
+    margin: auto;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    border: 1.5px solid #333;
+    border-radius: 20px;
+    background-color: #efefef;
+}
+
 .mode-draw-area g.vertex.vertex-hover,
 .mode-draw-line g.vertex.vertex-hover,
 .mode-add-area  g.vertex.vertex-hover,
