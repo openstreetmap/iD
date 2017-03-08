@@ -2181,6 +2181,7 @@
             "name": "Shelter"
         },
         "amenity/social_facility": {
+            "icon": "poi-social-facility",
             "fields": [
                 "operator",
                 "address",
@@ -2201,6 +2202,7 @@
             "name": "Social Facility"
         },
         "amenity/social_facility/food_bank": {
+            "icon": "poi-social-facility",
             "fields": [
                 "operator",
                 "address",
@@ -2221,6 +2223,7 @@
             "name": "Food Bank"
         },
         "amenity/social_facility/group_home": {
+            "icon": "wheelchair",
             "fields": [
                 "operator",
                 "address",
@@ -2247,6 +2250,7 @@
             "name": "Elderly Group Home"
         },
         "amenity/social_facility/homeless_shelter": {
+            "icon": "poi-social-facility",
             "fields": [
                 "operator",
                 "address",

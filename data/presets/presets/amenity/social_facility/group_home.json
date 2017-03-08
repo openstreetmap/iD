@@ -1,4 +1,5 @@
 {
+    "icon": "wheelchair",
     "fields": [
         "operator",
         "address",
