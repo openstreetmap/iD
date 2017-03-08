@@ -1,5 +1,5 @@
 {
-    "icon": "attraction",
+    "icon": "poi-binoculars",
     "geometry": [
         "point",
         "vertex"

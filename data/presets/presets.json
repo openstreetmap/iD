@@ -1404,6 +1404,7 @@
             "name": "Hospital Grounds"
         },
         "amenity/hunting_stand": {
+            "icon": "poi-binoculars",
             "geometry": [
                 "point",
                 "vertex",
@@ -6791,6 +6792,7 @@
             "name": "Adult Gaming Center"
         },
         "leisure/bird_hide": {
+            "icon": "poi-binoculars",
             "fields": [
                 "building_area"
             ],
@@ -12244,7 +12246,7 @@
             "name": "Theme Park"
         },
         "tourism/viewpoint": {
-            "icon": "attraction",
+            "icon": "poi-binoculars",
             "geometry": [
                 "point",
                 "vertex"

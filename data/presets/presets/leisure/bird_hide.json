@@ -1,4 +1,5 @@
 {
+    "icon": "poi-binoculars",
     "fields": [
         "building_area"
     ],

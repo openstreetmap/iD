@@ -296,6 +296,7 @@
     "poi-military":             { "viewBox": "535 335 15 15" },
     "poi-chimney":              { "viewBox": "550 335 15 15" },
     "poi-bowling":              { "viewBox": "565 335 15 15" },
+    "poi-binoculars":           { "viewBox": "580 335 15 15" },
 
     "poi-vending-machine-shape":   { "fill": "currentColor" },
     "poi-dice-shape":              { "fill": "currentColor" },
@@ -309,6 +310,7 @@
     "poi-military-shape":          { "fill": "currentColor" },
     "poi-chimney-shape":           { "fill": "currentColor" },
     "poi-bowling-shape":           { "fill": "currentColor" },
+    "poi-binoculars-shape":        { "fill": "currentColor" },
 
     "turn-yes":                 { "viewBox": "200 320 44 24" },
     "turn-no":                  { "viewBox": "244 320 44 24" },
