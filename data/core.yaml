@@ -1017,6 +1017,8 @@ en:
       save: "Don't forget to regularly save your changes!"
       start: "Start mapping!"
   shortcuts:
+    modal:
+      title: "Keyboard shortcuts"
     display:
       desc: "Display"
       pan_map: "Pan map"

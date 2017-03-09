@@ -1,4 +1,4 @@
-{ "shortcuts": [
+{ "dataShortcuts": [
     {
         "key": "display",
         "desc": "shortcuts.display.desc",
