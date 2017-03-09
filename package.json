@@ -16,7 +16,7 @@
     "dist": "npm-run-all -p dist:**",
     "dist:css": "shx cat css/*.css > dist/iD.css",
     "dist:mapillary": "shx mkdir -p dist/mapillary-js && shx cp -R node_modules/mapillary-js/dist/* dist/mapillary-js/",
-    "dist:min": "uglifyjs dist/iD.js -c -m -o dist/iD.min.js",
+    "dist:min": "uglifyjs dist/iD.js -c 'warnings=false' -m -o dist/iD.min.js",
     "dist:svg:maki": "svg-sprite --symbol --symbol-dest . --symbol-sprite dist/img/maki-sprite.svg node_modules/@mapbox/maki/icons/*.svg",
     "dist:svg:id": "node svg/spriteify.js --svg svg/iD-sprite.src.svg --json svg/iD-sprite.json > dist/img/iD-sprite.svg",
     "imagery": "node data/update_imagery",
