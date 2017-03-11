@@ -26,7 +26,7 @@ osmEntity.id = function(type) {
 
 
 osmEntity.id.next = {
-    node: -1, way: -1, relation: -1
+    changeset: -1, node: -1, way: -1, relation: -1
 };
 
 
@@ -41,7 +41,7 @@ osmEntity.id.toOSM = function(id) {
 
 
 osmEntity.id.type = function(id) {
-    return { 'n': 'node', 'w': 'way', 'r': 'relation' }[id[0]];
+    return { 'c': 'changeset', 'n': 'node', 'w': 'way', 'r': 'relation' }[id[0]];
 };
 
 
