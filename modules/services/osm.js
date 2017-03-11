@@ -312,6 +312,53 @@ export default {
             });
             return ordered;
         }
+        // sort relations in a changeset by dependencies
+        function sort(changes) {
+          // find a referenced relation in the current changeset
+          function resolve(item){
+            return _.find(relations, function(relation) {
+              return item.keyAttributes.type === 'relation'
+                && item.keyAttributes.ref === relation['@id'];
+            });
+          }
+          // a new item is an item that has not been already processed
+          function isNew(item) {
+            return !sorted[ item['@id'] ] && !_.find(processing, function(proc){
+             return proc['@id'] === item['@id'];
+            });
+          }
+          var processing = [],
+              sorted = {},
+              relations = changes.relation;
+
+          if (!relations) return changes;
+
+          for (var i = 0; i < relations.length; i++) {
+
+            var relation = relations[i];
+
+            // skip relation if already sorted
+            if ( !sorted[relation['@id']] ) {
+              processing.push( relation );
+            }
+
+            while ( processing.length > 0 ){
+              var next = processing[0],
+                  deps = _.filter( _.compact(next.member.map(resolve)), isNew);
+
+              if ( deps.length === 0 ){
+                sorted[ next['@id'] ] = next;
+                processing.shift();
+              } else {
+                processing = deps.concat( processing );
+              }
+            }
+
+          }
+
+          changes.relation = _.values(sorted);
+          return changes;
+        }
 
         function rep(entity) {
             return entity.asJXON(changeset_id);
@@ -321,7 +368,7 @@ export default {
             osmChange: {
                 '@version': 0.6,
                 '@generator': 'iD',
-                'create': nest(changes.created.map(rep), ['node', 'way', 'relation']),
+                'create': sort(nest(changes.created.map(rep), ['node', 'way', 'relation'])),
                 'modify': nest(changes.modified.map(rep), ['node', 'way', 'relation']),
                 'delete': _.extend(nest(changes.deleted.map(rep), ['relation', 'way', 'node']), {'@if-unused': true})
             }
