@@ -468,7 +468,10 @@ export default {
                         function (changeset) {
                             return { tags: getTags(changeset) };
                         }
-                    );
+                    ).filter(function (changeset) {
+                        var comment = changeset.tags.comment;
+                        return comment && comment !== '';
+                    });
                     callback(undefined, userChangesets);
                 }
             }

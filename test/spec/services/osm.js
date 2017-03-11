@@ -421,15 +421,9 @@ describe('iD.serviceOsm', function () {
         });
     });
 
+
     describe('#userChangesets', function() {
-        var server,
-            userDetailsFn,
-            changesetsXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
-                '<changeset id="36777543" user="Steve" uid="1" created_at="2016-01-24T15:02:06Z" closed_at="2016-01-24T15:02:07Z" open="false" min_lat="39.3823819" min_lon="-104.8639728" max_lat="39.3834184" max_lon="-104.8618622" comments_count="0">' +
-                '<tag k="comment" v="Caprice Court has been extended"/>' +
-                '<tag k="created_by" v="iD 2.0.0"/>' +
-                '</changeset>' +
-                '</osm>';
+        var server, userDetailsFn;
 
         beforeEach(function() {
             server = sinon.fakeServer.create();
@@ -444,14 +438,17 @@ describe('iD.serviceOsm', function () {
             connection.userDetails = userDetailsFn;
         });
 
+
         it('loads user changesets', function(done) {
-            // preauthenticate, otherwise callback will be called with "not authenticated" err
-            connection.switch({
-                oauth_consumer_key: '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
-                oauth_secret: 'aB3jKq1TRsCOUrfOIZ6oQMEDmv2ptV76PA54NGLL',
-                oauth_token: 'foo',
-                oauth_token_secret: 'foo'
-            });
+            var changesetsXML = '<?xml version="1.0" encoding="UTF-8"?>' +
+                '<osm>' +
+                '<changeset id="36777543" user="Steve" uid="1" created_at="2016-01-24T15:02:06Z" closed_at="2016-01-24T15:02:07Z" open="false" min_lat="39.3823819" min_lon="-104.8639728" max_lat="39.3834184" max_lon="-104.8618622" comments_count="0">' +
+                '  <tag k="comment" v="Caprice Court has been extended"/>' +
+                '  <tag k="created_by" v="iD 2.0.0"/>' +
+                '</changeset>' +
+                '</osm>';
+
+            login();
             connection.userChangesets(function(err, changesets) {
                 expect(changesets).to.deep.equal([{
                     tags: {
@@ -467,13 +464,75 @@ describe('iD.serviceOsm', function () {
                 [200, { 'Content-Type': 'text/xml' }, changesetsXML]);
             server.respond();
         });
+
+        it('excludes changesets without comment tag', function(done) {
+            var changesetsXML = '<?xml version="1.0" encoding="UTF-8"?>' +
+                '<osm>' +
+                '<changeset id="36777543" user="Steve" uid="1" created_at="2016-01-24T15:02:06Z" closed_at="2016-01-24T15:02:07Z" open="false" min_lat="39.3823819" min_lon="-104.8639728" max_lat="39.3834184" max_lon="-104.8618622" comments_count="0">' +
+                '  <tag k="comment" v="Caprice Court has been extended"/>' +
+                '  <tag k="created_by" v="iD 2.0.0"/>' +
+                '</changeset>' +
+                '<changeset id="36777544" user="Steve" uid="1" created_at="2016-01-24T15:02:06Z" closed_at="2016-01-24T15:02:07Z" open="false" min_lat="39.3823819" min_lon="-104.8639728" max_lat="39.3834184" max_lon="-104.8618622" comments_count="0">' +
+                '  <tag k="created_by" v="iD 2.0.0"/>' +
+                '</changeset>' +
+                '</osm>';
+
+            login();
+            connection.userChangesets(function(err, changesets) {
+                expect(changesets).to.deep.equal([{
+                    tags: {
+                        comment: 'Caprice Court has been extended',
+                        created_by: 'iD 2.0.0'
+                    }
+                }]);
+                connection.logout();
+                done();
+            });
+
+            server.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/changesets?user=1',
+                [200, { 'Content-Type': 'text/xml' }, changesetsXML]);
+            server.respond();
+        });
+
+        it('excludes changesets with empty comment', function(done) {
+            var changesetsXML = '<?xml version="1.0" encoding="UTF-8"?>' +
+                '<osm>' +
+                '<changeset id="36777543" user="Steve" uid="1" created_at="2016-01-24T15:02:06Z" closed_at="2016-01-24T15:02:07Z" open="false" min_lat="39.3823819" min_lon="-104.8639728" max_lat="39.3834184" max_lon="-104.8618622" comments_count="0">' +
+                '  <tag k="comment" v="Caprice Court has been extended"/>' +
+                '  <tag k="created_by" v="iD 2.0.0"/>' +
+                '</changeset>' +
+                '<changeset id="36777544" user="Steve" uid="1" created_at="2016-01-24T15:02:06Z" closed_at="2016-01-24T15:02:07Z" open="false" min_lat="39.3823819" min_lon="-104.8639728" max_lat="39.3834184" max_lon="-104.8618622" comments_count="0">' +
+                '  <tag k="comment" v=""/>' +
+                '  <tag k="created_by" v="iD 2.0.0"/>' +
+                '</changeset>' +
+                '</osm>';
+
+            login();
+            connection.userChangesets(function(err, changesets) {
+                expect(changesets).to.deep.equal([{
+                    tags: {
+                        comment: 'Caprice Court has been extended',
+                        created_by: 'iD 2.0.0'
+                    }
+                }]);
+                connection.logout();
+                done();
+            });
+
+            server.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/changesets?user=1',
+                [200, { 'Content-Type': 'text/xml' }, changesetsXML]);
+            server.respond();
+        });
+
     });
+
 
     describe('#changesetTags', function() {
         it('omits comment when empty', function() {
             expect(connection.changesetTags('2.0.0', '', [])).not.to.have.property('comment');
         });
     });
+
 
     describe('API capabilities', function() {
         var server,
