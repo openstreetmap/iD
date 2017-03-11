@@ -1,15 +1,18 @@
 import _ from 'lodash';
 import { t } from '../util/locale';
-import { actionDeleteMultiple } from '../actions/index';
-import { behaviorOperation } from '../behavior/index';
-import { geoSphericalDistance } from '../geo/index';
-import { modeBrowse, modeSelect } from '../modes/index';
-import { uiCmd } from '../ui/index';
+import { actionDeleteMultiple } from '../actions';
+import { behaviorOperation } from '../behavior';
+import { geoExtent, geoSphericalDistance } from '../geo';
+import { modeBrowse, modeSelect } from '../modes';
+import { uiCmd } from '../ui';
 
 
 export function operationDelete(selectedIDs, context) {
     var multi = (selectedIDs.length === 1 ? 'single' : 'multiple'),
-        action = actionDeleteMultiple(selectedIDs);
+        action = actionDeleteMultiple(selectedIDs),
+        extent = selectedIDs.reduce(function(extent, id) {
+                return extent.extend(context.entity(id).extent(context.graph()));
+            }, geoExtent());
 
 
     var operation = function() {
@@ -59,7 +62,9 @@ export function operationDelete(selectedIDs, context) {
 
     operation.disabled = function() {
         var reason;
-        if (_.some(selectedIDs, context.hasHiddenConnections)) {
+        if (extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
+            reason = 'too_large';
+        } else if (_.some(selectedIDs, context.hasHiddenConnections)) {
             reason = 'connected_to_hidden';
         } else if (_.some(selectedIDs, protectedMember)) {
             reason = 'part_of_relation';
