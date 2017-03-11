@@ -4,9 +4,17 @@ import osmAuth from 'osm-auth';
 import { JXON } from '../util/jxon';
 import { d3geoTile } from '../lib/d3.geo.tile';
 import { geoExtent } from '../geo/index';
-import { osmEntity, osmNode, osmRelation, osmWay } from '../osm/index';
+import {
+    osmChangeset,
+    osmEntity,
+    osmNode,
+    osmRelation,
+    osmWay
+} from '../osm/index';
+
 import { utilDetect } from '../util/detect';
 import { utilRebind } from '../util/rebind';
+
 
 var dispatch = d3.dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded'),
     urlroot = 'https://www.openstreetmap.org',
@@ -280,22 +288,6 @@ export default {
     },
 
 
-    // Generate Changeset XML. Returns a string.
-    changesetJXON: function(tags) {
-        return {
-            osm: {
-                changeset: {
-                    tag: _.map(tags, function(value, key) {
-                        return { '@k': key, '@v': value };
-                    }),
-                    '@version': 0.6,
-                    '@generator': 'iD'
-                }
-            }
-        };
-    },
-
-
     // Generate [osmChange](http://wiki.openstreetmap.org/wiki/OsmChange)
     // XML. Returns a string.
     osmChangeJXON: function(changeset_id, changes) {
@@ -394,12 +386,14 @@ export default {
 
 
     putChangeset: function(changes, version, comment, imageryUsed, callback) {
-        var that = this;
+        var that = this,
+            changeset = new osmChangeset({ tags: this.changesetTags(version, comment, imageryUsed) });
+
         oauth.xhr({
                 method: 'PUT',
                 path: '/api/0.6/changeset/create',
                 options: { header: { 'Content-Type': 'text/xml' } },
-                content: JXON.stringify(that.changesetJXON(that.changesetTags(version, comment, imageryUsed)))
+                content: JXON.stringify(changeset.asJXON())
             }, function(err, changeset_id) {
                 if (err) return callback(err);
                 oauth.xhr({
