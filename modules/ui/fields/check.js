@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import { utilRebind } from '../../util/rebind';
-import { t, textDirection } from '../../util/locale';
+import { t } from '../../util/locale';
 import { actionReverse } from '../../actions';
 import { osmOneWayTags } from '../../osm';
 import { svgIcon } from '../../svg';
