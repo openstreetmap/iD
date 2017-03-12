@@ -7414,7 +7414,8 @@
             ],
             "geometry": [
                 "point",
-                "line"
+                "line",
+                "area"
             ],
             "tags": {
                 "leisure": "track",
@@ -7523,12 +7524,13 @@
             ],
             "geometry": [
                 "point",
-                "line"
+                "line",
+                "area"
             ],
             "tags": {
                 "leisure": "track"
             },
-            "name": "Racetrack (non-Motorsport)"
+            "name": "Racetrack (Non-Motorsport)"
         },
         "leisure/water_park": {
             "icon": "swimming",

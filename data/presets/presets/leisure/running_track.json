@@ -9,7 +9,8 @@
     ],
     "geometry": [
         "point",
-        "line"
+        "line",
+        "area"
     ],
     "tags": {
         "leisure": "track",

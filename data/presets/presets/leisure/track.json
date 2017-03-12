@@ -9,10 +9,11 @@
     ],
     "geometry": [
         "point",
-        "line"
+        "line",
+        "area"
     ],
     "tags": {
         "leisure": "track"
     },
-    "name": "Racetrack (non-Motorsport)"
+    "name": "Racetrack (Non-Motorsport)"
 }

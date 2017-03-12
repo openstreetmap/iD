@@ -3084,8 +3084,8 @@ en:
         terms: '<translate with synonyms or related terms for ''Swimming Pool'', separated by commas>'
       leisure/track:
         # leisure=track
-        name: Racetrack (non-Motorsport)
-        terms: '<translate with synonyms or related terms for ''Racetrack (non-Motorsport)'', separated by commas>'
+        name: Racetrack (Non-Motorsport)
+        terms: '<translate with synonyms or related terms for ''Racetrack (Non-Motorsport)'', separated by commas>'
       leisure/water_park:
         # leisure=water_park
         name: Water Park
