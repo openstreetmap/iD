@@ -56,9 +56,14 @@ export function presetCollection(collection) {
             var leading_name = _.filter(searchable, function(a) {
                     return leading(a.name().toLowerCase());
                 }).sort(function(a, b) {
-                    var i = a.name().toLowerCase().indexOf(value) - b.name().toLowerCase().indexOf(value);
-                    if (i === 0) return a.name().length - b.name().length;
-                    else return i;
+                    var i;
+                    i = b.originalScore - a.originalScore;
+                    if (i !== 0) return i;
+
+                    i = a.name().toLowerCase().indexOf(value) - b.name().toLowerCase().indexOf(value);
+                    if (i !== 0) return i;
+
+                    return a.name().length - b.name().length;
                 });
 
             // matches value to preset.terms values

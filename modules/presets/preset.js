@@ -21,16 +21,18 @@ export function presetPreset(id, preset, fields) {
     };
 
 
-    var matchScore = preset.matchScore || 1;
+    preset.originalScore = preset.matchScore || 1;
+
+
     preset.matchScore = function(entity) {
         var tags = preset.tags,
             score = 0;
 
         for (var t in tags) {
             if (entity.tags[t] === tags[t]) {
-                score += matchScore;
+                score += preset.originalScore;
             } else if (tags[t] === '*' && t in entity.tags) {
-                score += matchScore / 2;
+                score += preset.originalScore / 2;
             } else {
                 return -1;
             }
