@@ -43,23 +43,7 @@ export function modeSave(context) {
     }
 
 
-    function save(e, tryAgain) {
-        function withChildNodes(ids, graph) {
-            return _.uniq(_.reduce(ids, function(result, id) {
-                var e = graph.entity(id);
-                if (e.type === 'way') {
-                    try {
-                        var cn = graph.childNodes(e);
-                        result.push.apply(result, _.map(_.filter(cn, 'version'), 'id'));
-                    } catch (err) {
-                        /* eslint-disable no-console */
-                        if (typeof console !== 'undefined') console.error(err);
-                        /* eslint-enable no-console */
-                    }
-                }
-                return result;
-            }, _.clone(ids)));
-        }
+    function save(changeset, tryAgain) {
 
         var loading = uiLoading(context).message(t('save.uploading')).blocking(true),
             history = context.history(),
@@ -72,13 +56,34 @@ export function modeSave(context) {
             conflicts = [],
             errors = [];
 
-        if (!tryAgain) history.perform(actionNoop());  // checkpoint
+        if (!tryAgain) {
+            history.perform(actionNoop());  // checkpoint
+        }
+
         context.container().call(loading);
 
         if (toCheck.length) {
             context.connection().loadMultiple(toLoad, loaded);
         } else {
             finalize();
+        }
+
+
+        function withChildNodes(ids, graph) {
+            return _.uniq(_.reduce(ids, function(result, id) {
+                var entity = graph.entity(id);
+                if (entity.type === 'way') {
+                    try {
+                        var cn = graph.childNodes(entity);
+                        result.push.apply(result, _.map(_.filter(cn, 'version'), 'id'));
+                    } catch (err) {
+                        /* eslint-disable no-console */
+                        if (typeof console !== 'undefined') console.error(err);
+                        /* eslint-enable no-console */
+                    }
+                }
+                return result;
+            }, _.clone(ids)));
         }
 
 
@@ -198,7 +203,7 @@ export function modeSave(context) {
                     context.connection().putChangeset(
                         changes,
                         context.version,
-                        e.comment,
+                        changeset.tags.comment,
                         history.imageryUsed(),
                         function(err, changeset_id) {
                             if (err) {
@@ -209,7 +214,7 @@ export function modeSave(context) {
                                 showErrors();
                             } else {
                                 history.clearSaved();
-                                success(e, changeset_id);
+                                success(changeset, changeset_id);
                                 // Add delay to allow for postgres replication #1646 #2678
                                 window.setTimeout(function() {
                                     d3.select('.inspector-wrap *').remove();
@@ -262,7 +267,7 @@ export function modeSave(context) {
                     }
 
                     selection.remove();
-                    save(e, true);
+                    save(changeset, true);
                 })
             );
         }
@@ -335,12 +340,12 @@ export function modeSave(context) {
     }
 
 
-    function success(e, changeset_id) {
+    function success(changeset, changeset_id) {
         context.enter(modeBrowse(context)
             .sidebar(uiSuccess(context)
                 .changeset({
                     id: changeset_id,
-                    comment: e.comment
+                    comment: changeset.tags.comment
                 })
                 .on('cancel', function() {
                     context.ui().sidebar.hide();

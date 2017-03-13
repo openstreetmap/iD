@@ -2,16 +2,22 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { t } from '../util/locale';
 import { d3combobox } from '../lib/d3.combobox.js';
-import { modeSelect } from '../modes/index';
-import { svgIcon } from '../svg/index';
+import { osmChangeset } from '../osm';
+import { modeSelect } from '../modes';
+import { svgIcon } from '../svg';
 import { tooltip } from '../util/tooltip';
+import { uiRawTagEditor } from './raw_tag_editor';
+import { utilDetect } from '../util/detect';
 import {
     utilDisplayName,
     utilDisplayType,
-    utilEntityOrMemberSelector
-} from '../util/index';
-import { utilRebind } from '../util/rebind';
-import { utilTriggerEvent } from '../util/trigger_event';
+    utilEntityOrMemberSelector,
+    utilRebind,
+    utilTriggerEvent
+} from '../util';
+
+
+var changeset;
 
 
 export function uiCommit(context) {
@@ -19,8 +25,22 @@ export function uiCommit(context) {
 
 
     function commit(selection) {
+        if (!changeset) {
+            var detected = utilDetect(),
+                tags = {
+                    created_by: ('iD ' + context.version).substr(0, 255),
+                    imagery_used: context.history().imageryUsed().join(';').substr(0, 255),
+                    host: detected.host.substr(0, 255),
+                    locale: detected.locale.substr(0, 255)
+                };
+
+            changeset = new osmChangeset({ tags: tags });
+        }
+
+
         var changes = context.history().changes(),
-            summary = context.history().difference().summary();
+            summary = context.history().difference().summary(),
+            rawTagEditor = uiRawTagEditor(context).on('change', changeTags);
 
         selection
             .append('div')
@@ -43,6 +63,7 @@ export function uiCommit(context) {
 
         var commentField = commentSection
             .append('textarea')
+            .attr('class', 'commit-form-comment')
             .attr('placeholder', t('commit.description_placeholder'))
             .attr('maxlength', 255)
             .property('value', context.storage('comment') || '')
@@ -169,12 +190,14 @@ export function uiCommit(context) {
         // Buttons
         var buttonSection = saveSection
             .append('div')
-            .attr('class','buttons fillL cf');
+            .attr('class', 'buttons fillL cf');
 
         var cancelButton = buttonSection
             .append('button')
             .attr('class', 'secondary-action col5 button cancel-button')
-            .on('click.cancel', function() { dispatch.call('cancel'); });
+            .on('click.cancel', function() {
+                dispatch.call('cancel');
+            });
 
         cancelButton
             .append('span')
@@ -189,15 +212,24 @@ export function uiCommit(context) {
                 return (n && n.value.length) ? null : true;
             })
             .on('click.save', function() {
-                dispatch.call('save', this, {
-                    comment: commentField.node().value
-                });
+                dispatch.call('save', this, changeset);
+                changeset = null;
             });
 
         saveButton
             .append('span')
             .attr('class', 'label')
             .text(t('commit.save'));
+
+
+        // Raw Tag Editor
+        var tagSection = body
+            .append('div')
+            .attr('class', 'modal-section tag-section raw-tag-editor')
+            .call(rawTagEditor
+                .expanded(false)
+                .tags(_.clone(changeset.tags))
+            );
 
 
         // Changes
@@ -291,13 +323,15 @@ export function uiCommit(context) {
 
 
         function checkComment() {
+            var comment = this.value;
+
             d3.selectAll('.save-section .save-button')
-                .attr('disabled', (this.value.length ? null : true));
+                .attr('disabled', (comment.length ? null : true));
 
             var googleWarning = clippyArea
                .html('')
                .selectAll('a')
-               .data(this.value.match(/google/i) ? [true] : []);
+               .data(comment.match(/google/i) ? [true] : []);
 
             googleWarning.exit()
                 .remove();
@@ -310,7 +344,34 @@ export function uiCommit(context) {
                .attr('href', t('commit.google_warning_link'))
                .append('span')
                .text(t('commit.google_warning'));
+
+            updateChangeset({ comment: comment });
         }
+
+
+        function changeTags(changed) {
+            if (changed.hasOwnProperty('comment')) {
+                selection.selectAll('.commit-form-comment')
+                    .property('value', changed.comment);
+            }
+            updateChangeset(changed);
+        }
+
+
+        function updateChangeset(changed) {
+            var tags = _.clone(changeset.tags);
+
+            _.forEach(changed, function(v, k) {
+                if (v !== undefined || tags.hasOwnProperty(k)) {
+                    tags[k] = v;
+                }
+            });
+
+            if (!_.isEqual(changeset.tags, tags)) {
+                changeset = changeset.update({ tags: tags });
+            }
+        }
+
     }
 
     return utilRebind(commit, dispatch, 'on');
