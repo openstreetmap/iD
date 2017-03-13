@@ -5,7 +5,6 @@
         "fire_hydrant/position",
         "ref",
         "operator",
-        "survey/date",
         "fire_hydrant/diameter",
         "fire_hydrant/pressure",
         "fire_hydrant/flow_capacity",
