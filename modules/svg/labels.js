@@ -5,6 +5,7 @@ import { dataFeatureIcons } from '../../data/index';
 import { textDirection } from '../util/locale';
 
 import {
+    geoChooseEdge,
     geoExtent,
     geoEuclideanDistance,
     geoInterp,
@@ -75,6 +76,8 @@ export function svgLabels(projection, context) {
         ['area', 'name', '*', 12],
         ['point', 'name', '*', 10]
     ];
+
+    var housenumberFontSize = 10;
 
 
     function blacklisted(preset) {
@@ -265,7 +268,10 @@ export function svgLabels(projection, context) {
 
     function drawLabels(selection, graph, entities, filter, dimensions, fullRedraw) {
         var lowZoom = context.surface().classed('low-zoom'),
-            i, j, k, entity, geometry, name;
+            i, j, k,
+            entity, geometry, originalGeometry,
+            name, housenumber, street,
+            width, p;
 
         /**
          * @typedef {Object} NameLabelData
@@ -278,6 +284,9 @@ export function svgLabels(projection, context) {
         for (i = 0; i < nameLabelStack.length; i++) {
             labelableNames.push([]);
         }
+
+        var labelableHousenumbers = [];
+        var streetsWaysNodes = {};
 
         if (fullRedraw) {
             rdrawn.clear();
@@ -297,36 +306,53 @@ export function svgLabels(projection, context) {
             }
         }
 
-        // Split entities into groups specified by nameLabelStack
         for (i = 0; i < entities.length; i++) {
             entity = entities[i];
-            geometry = entity.geometry(graph);
-            if (geometry === 'vertex') {
-                if (lowZoom) {
-                    continue; // don't label vertices at low zoom because they don't have icons
-                } else {
-                    geometry = 'point'; // treat vertex like point
-                }
-            }
+            originalGeometry = entity.geometry(graph);
+            geometry = originalGeometry === 'vertex' ? 'point' : originalGeometry;
 
+            // Split entities into groups specified by nameLabelStack
             var preset = geometry === 'area' && context.presets().match(entity, graph),
                 icon = preset && !blacklisted(preset) && preset.icon,
                 getName = (geometry === 'line') ? utilDisplayNameForPath : utilDisplayName;
 
             name = getName(entity);
 
-            if (!icon && !name)
-                continue;
+            if (!(originalGeometry === 'vertex' && lowZoom) // don't label vertices at low zoom because they don't have icons
+                && (icon || name)) {
+                for (k = 0; k < nameLabelStack.length; k++) {
+                    var matchGeom = nameLabelStack[k][0],
+                        matchKey = nameLabelStack[k][1],
+                        matchVal = nameLabelStack[k][2],
+                        hasVal = entity.tags[matchKey];
 
-            for (k = 0; k < nameLabelStack.length; k++) {
-                var matchGeom = nameLabelStack[k][0],
-                    matchKey = nameLabelStack[k][1],
-                    matchVal = nameLabelStack[k][2],
-                    hasVal = entity.tags[matchKey];
+                    if (geometry === matchGeom && hasVal && (matchVal === '*' || matchVal === hasVal)) {
+                        labelableNames[k].push({ entity: entity, name: name });
+                        break;
+                    }
+                }
+            }
 
-                if (geometry === matchGeom && hasVal && (matchVal === '*' || matchVal === hasVal)) {
-                    labelableNames[k].push({ entity: entity, name: name });
-                    break;
+            // Collect entities with housenumbers
+            housenumber = utilDisplayHousenumber(entity);
+            street = entity.tags['addr:street'];
+
+            // TODO: include vertexes and points in building areas
+            if (geometry === 'area' && housenumber && street) {
+                labelableHousenumbers.push({
+                    entity: entity,
+                    housenumber: housenumber,
+                    street: street
+                });
+            }
+
+            // Collect street ways for best position of housenumbers
+            street = entity.tags.name;
+            if (geometry === 'line' && street) {
+                if (streetsWaysNodes[street]) {
+                    streetsWaysNodes[street].push(graph.childNodes(entity));
+                } else {
+                    streetsWaysNodes[street] = [ graph.childNodes(entity) ];
                 }
             }
         }
@@ -355,8 +381,8 @@ export function svgLabels(projection, context) {
                 name = labelableNames[k][i].name;
                 geometry = entity.geometry(graph);
 
-                var width = textWidth(name, fontSize),
-                    p, classes;
+                width = textWidth(name, fontSize);
+                p = null;
 
                 switch (geometry) {
                     case 'point':
@@ -364,7 +390,7 @@ export function svgLabels(projection, context) {
                         p = getPointLabel(entity, width, fontSize, geometry);
                         break;
                     case 'line':
-                        p = getLineLabel(entity, width, fontSize);
+                        p = getLineLabel(getLinestring(entity), entity.id, width, fontSize);
                         break;
                     case 'area':
                         p = getAreaLabel(entity, width, fontSize);
@@ -373,10 +399,59 @@ export function svgLabels(projection, context) {
 
                 if (p) {
                     if (geometry === 'vertex') { geometry = 'point'; }  // treat vertex like point
-                    classes = geometry + ' tag-' + nameLabelStack[k][1];
-                    labelled[geometry].push({ entity: entity, name: name, classes: classes, position: p });
+                    labelled[geometry].push({
+                        entity: entity,
+                        name: name,
+                        classes: geometry + ' tag-' + nameLabelStack[k][1],
+                        position: p
+                    });
                 }
             }
+        }
+
+        for (k = 0; k < labelableHousenumbers.length; k++) {
+            entity = labelableHousenumbers[k].entity;
+            housenumber = labelableHousenumbers[k].housenumber;
+            street = labelableHousenumbers[k].street;
+
+            width = textWidth(housenumber, housenumberFontSize);
+            p = null;
+
+            var nodes = getLinestring(entity),
+                streetWaysNodes = streetsWaysNodes[street],
+                nearestEdge, midpoint, distance, bestDistance = Infinity;
+
+            if (!streetWaysNodes) {
+                nearestEdge = nodes;
+            } else {
+                // Search for nearest edge
+                for (i = 0; i < nodes.length -1; i++) {
+                    midpoint = [ (nodes[i][0] + nodes[i+1][0]) / 2, (nodes[i][1] + nodes[i+1][1]) / 2 ];
+
+                    for (j = 0; j < streetWaysNodes.length; j++) {
+                        distance = geoChooseEdge(streetWaysNodes[j], midpoint, projection).distance;
+
+                        if (distance < bestDistance) {
+                            nearestEdge = [nodes[i], nodes[i+1]];
+                            bestDistance = distance;
+                        }
+                    }
+                }
+            }
+
+            p = getLineLabel(nearestEdge, entity.id + 'H', width, housenumberFontSize);
+
+            if (p) {
+                labelled.line.push({ entity: entity, name: housenumber, classes: 'housenumber', position: p });
+            }
+
+        }
+
+
+        function getLinestring (way) {
+            return graph.childNodes(way).map(function (node) {
+                return projection(node.loc);
+            });
         }
 
 
@@ -427,9 +502,8 @@ export function svgLabels(projection, context) {
         /**
          * @returns {LineLabelPosition}
          */
-        function getLineLabel(entity, width, height) {
+        function getLineLabel(nodes, id, width, height) {
             var viewport = geoExtent(context.projection.clipExtent()).polygon(),
-                nodes = _.map(graph.childNodes(entity), 'loc').map(projection),
                 length = geoPathLength(nodes);
 
             if (length < width + 20) return;
@@ -481,7 +555,7 @@ export function svgLabels(projection, context) {
                     }
                 }
 
-                if (tryInsert(bboxes, entity.id, false)) {
+                if (tryInsert(bboxes, id, false)) {
                     return {
                         'font-size': height + 2,
                         lineString: lineString(sub),
