@@ -67,8 +67,8 @@ export function uiCommit(context) {
             .attr('placeholder', t('commit.description_placeholder'))
             .attr('maxlength', 255)
             .property('value', context.storage('comment') || '')
-            .on('input.save', checkComment)
-            .on('change.save', checkComment)
+            .on('input.save', change(true))
+            .on('change.save', change())
             .on('blur.save', function() {
                 context.storage('comment', this.value);
             });
@@ -225,11 +225,7 @@ export function uiCommit(context) {
         // Raw Tag Editor
         var tagSection = body
             .append('div')
-            .attr('class', 'modal-section tag-section raw-tag-editor')
-            .call(rawTagEditor
-                .expanded(false)
-                .tags(_.clone(changeset.tags))
-            );
+            .attr('class', 'modal-section tag-section raw-tag-editor');
 
 
         // Changes
@@ -283,7 +279,7 @@ export function uiCommit(context) {
             .style('opacity', 1);
 
 
-        // Call checkComment off the bat, in case a changeset
+        // Call change() off the bat, in case a changeset
         // comment is recovered from localStorage
         utilTriggerEvent(commentField, 'input');
 
@@ -322,39 +318,56 @@ export function uiCommit(context) {
         }
 
 
-        function checkComment() {
-            var comment = this.value;
+        function change(onInput) {
+            return function() {
+                var comment = commentField.property('value').trim();
+                if (!onInput) {
+                    commentField.property('value', comment);
+                }
 
-            d3.selectAll('.save-section .save-button')
-                .attr('disabled', (comment.length ? null : true));
+                d3.selectAll('.save-section .save-button')
+                    .attr('disabled', (comment.length ? null : true));
 
-            var googleWarning = clippyArea
-               .html('')
-               .selectAll('a')
-               .data(comment.match(/google/i) ? [true] : []);
+                var googleWarning = clippyArea
+                   .html('')
+                   .selectAll('a')
+                   .data(comment.match(/google/i) ? [true] : []);
 
-            googleWarning.exit()
-                .remove();
+                googleWarning.exit()
+                    .remove();
 
-            googleWarning.enter()
-               .append('a')
-               .attr('target', '_blank')
-               .attr('tabindex', -1)
-               .call(svgIcon('#icon-alert', 'inline'))
-               .attr('href', t('commit.google_warning_link'))
-               .append('span')
-               .text(t('commit.google_warning'));
+                googleWarning.enter()
+                   .append('a')
+                   .attr('target', '_blank')
+                   .attr('tabindex', -1)
+                   .call(svgIcon('#icon-alert', 'inline'))
+                   .attr('href', t('commit.google_warning_link'))
+                   .append('span')
+                   .text(t('commit.google_warning'));
 
-            updateChangeset({ comment: comment });
+                updateChangeset({ comment: comment });
+
+                var expanded = !tagSection.selectAll('a.hide-toggle.expanded').empty();
+
+                tagSection
+                    .call(rawTagEditor
+                        .expanded(expanded)
+                        .tags(_.clone(changeset.tags))
+                    );
+            }
         }
 
 
         function changeTags(changed) {
             if (changed.hasOwnProperty('comment')) {
-                selection.selectAll('.commit-form-comment')
-                    .property('value', changed.comment);
+                if (changed.comment === undefined) {
+                    changed.comment = '';
+                }
+                changed.comment = changed.comment.trim();
+                commentField.property('value', changed.comment);
             }
             updateChangeset(changed);
+            utilTriggerEvent(commentField, 'input');
         }
 
 
