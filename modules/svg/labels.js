@@ -297,7 +297,8 @@ export function svgLabels(projection, context) {
                 entity = entities[i];
                 var toRemove = []
                     .concat(entitybboxes[entity.id] || [])
-                    .concat(entitybboxes[entity.id + 'I'] || []);
+                    .concat(entitybboxes[entity.id + 'I'] || [])
+                    .concat(entitybboxes[entity.id + 'H'] || []);
 
                 for (j = 0; j < toRemove.length; j++) {
                     rdrawn.remove(toRemove[j]);
