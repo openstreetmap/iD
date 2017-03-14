@@ -18,6 +18,7 @@ import {
 
 
 var changeset;
+var readOnlyTags = ['created_by', 'imagery_used', 'host', 'locale'];
 
 
 export function uiCommit(context) {
@@ -318,6 +319,31 @@ export function uiCommit(context) {
         }
 
 
+        function checkComment(comment) {
+            // Save button disabled if there is no comment..
+            d3.selectAll('.save-section .save-button')
+                .attr('disabled', (comment.length ? null : true));
+
+            // Warn if comment mentions Google..
+            var googleWarning = clippyArea
+               .html('')
+               .selectAll('a')
+               .data(comment.match(/google/i) ? [true] : []);
+
+            googleWarning.exit()
+                .remove();
+
+            googleWarning.enter()
+               .append('a')
+               .attr('target', '_blank')
+               .attr('tabindex', -1)
+               .call(svgIcon('#icon-alert', 'inline'))
+               .attr('href', t('commit.google_warning_link'))
+               .append('span')
+               .text(t('commit.google_warning'));
+        }
+
+
         function change(onInput) {
             return function() {
                 var comment = commentField.property('value').trim();
@@ -325,36 +351,18 @@ export function uiCommit(context) {
                     commentField.property('value', comment);
                 }
 
-                d3.selectAll('.save-section .save-button')
-                    .attr('disabled', (comment.length ? null : true));
+                checkComment(comment);
 
-                var googleWarning = clippyArea
-                   .html('')
-                   .selectAll('a')
-                   .data(comment.match(/google/i) ? [true] : []);
-
-                googleWarning.exit()
-                    .remove();
-
-                googleWarning.enter()
-                   .append('a')
-                   .attr('target', '_blank')
-                   .attr('tabindex', -1)
-                   .call(svgIcon('#icon-alert', 'inline'))
-                   .attr('href', t('commit.google_warning_link'))
-                   .append('span')
-                   .text(t('commit.google_warning'));
-
-                updateChangeset({ comment: comment });
-
+                var changeset = updateChangeset({ comment: comment });
                 var expanded = !tagSection.selectAll('a.hide-toggle.expanded').empty();
 
                 tagSection
                     .call(rawTagEditor
                         .expanded(expanded)
+                        .readOnlyTags(readOnlyTags)
                         .tags(_.clone(changeset.tags))
                     );
-            }
+            };
         }
 
 
@@ -375,14 +383,21 @@ export function uiCommit(context) {
             var tags = _.clone(changeset.tags);
 
             _.forEach(changed, function(v, k) {
-                if (v !== undefined || tags.hasOwnProperty(k)) {
-                    tags[k] = v;
+                k = k.trim();
+                if (readOnlyTags.indexOf(k) !== -1) return;
+
+                if (k !== '' && v !== undefined) {
+                    tags[k] = v.trim();
+                } else {
+                    delete tags[k];
                 }
             });
 
             if (!_.isEqual(changeset.tags, tags)) {
                 changeset = changeset.update({ tags: tags });
             }
+
+            return changeset;
         }
 
     }

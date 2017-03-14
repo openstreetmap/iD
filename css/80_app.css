@@ -1601,6 +1601,15 @@ div.combobox {
     clear: both;
 }
 
+.tag-row.readonly,
+.tag-row.readonly input.key,
+.tag-row.readonly input.value,
+.tag-row.readonly button.remove {
+    color: #777777;
+    background-color: #eee;
+    cursor: not-allowed;
+}
+
 .tag-row input {
     height: 31px;
     border: 0;

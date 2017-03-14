@@ -16,6 +16,7 @@ export function uiRawTagEditor(context) {
     var taginfo = services.taginfo,
         dispatch = d3.dispatch('change'),
         expanded = context.storage('raw_tag_editor.expanded') === 'true',
+        readOnlyTags = [],
         updatePreference = true,
         showBlank = false,
         state,
@@ -82,7 +83,8 @@ export function uiRawTagEditor(context) {
 
         var enter = items.enter()
             .append('li')
-            .attr('class', 'tag-row cf');
+            .attr('class', 'tag-row cf')
+            .classed('readonly', isReadOnly);
 
         enter
             .append('div')
@@ -154,14 +156,24 @@ export function uiRawTagEditor(context) {
 
         items.selectAll('input.key')
             .attr('title', function(d) { return d.key; })
-            .call(utilGetSetValue, function(d) { return d.key; });
+            .call(utilGetSetValue, function(d) { return d.key; })
+            .property('disabled', isReadOnly);
+            // .classed('deemphasize', isReadOnly);
 
         items.selectAll('input.value')
             .attr('title', function(d) { return d.value; })
-            .call(utilGetSetValue, function(d) { return d.value; });
+            .call(utilGetSetValue, function(d) { return d.value; })
+            .property('disabled', isReadOnly);
+            // .classed('deemphasize', isReadOnly);
 
         items.selectAll('button.remove')
             .on('click', removeTag);
+
+
+
+        function isReadOnly(d) {
+            return readOnlyTags.indexOf(d.key) !== -1;
+        }
 
 
         function pushMore() {
@@ -173,20 +185,7 @@ export function uiRawTagEditor(context) {
 
 
         function bindTypeahead(key, value) {
-
-            function sort(value, data) {
-                var sameletter = [],
-                    other = [];
-                for (var i = 0; i < data.length; i++) {
-                    if (data[i].value.substring(0, value.length) === value) {
-                        sameletter.push(data[i]);
-                    } else {
-                        other.push(data[i]);
-                    }
-                }
-                return sameletter.concat(other);
-            }
-
+            if (isReadOnly({ key: key })) return;
             var geometry = context.geometry(id);
 
             key.call(d3combobox()
@@ -211,6 +210,20 @@ export function uiRawTagEditor(context) {
                         if (!err) callback(sort(value, data));
                     });
                 }));
+
+
+            function sort(value, data) {
+                var sameletter = [],
+                    other = [];
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].value.substring(0, value.length) === value) {
+                        sameletter.push(data[i]);
+                    } else {
+                        other.push(data[i]);
+                    }
+                }
+                return sameletter.concat(other);
+            }
         }
 
 
@@ -230,6 +243,12 @@ export function uiRawTagEditor(context) {
                 kNew = this.value.trim(),
                 tag = {};
 
+
+            if (isReadOnly({ key: kNew })) {
+                this.value = kOld;
+                return;
+            }
+
             if (kNew && kNew !== kOld) {
                 var match = kNew.match(/^(.*?)(?:_(\d+))?$/),
                     base = match[1],
@@ -247,6 +266,7 @@ export function uiRawTagEditor(context) {
 
 
         function valueChange(d) {
+            if (isReadOnly(d)) return;
             var tag = {};
             tag[d.key] = this.value;
             dispatch.call('change', this, tag);
@@ -254,6 +274,7 @@ export function uiRawTagEditor(context) {
 
 
         function removeTag(d) {
+            if (isReadOnly(d)) return;
             var tag = {};
             tag[d.key] = undefined;
             dispatch.call('change', this, tag);
@@ -313,6 +334,13 @@ export function uiRawTagEditor(context) {
         if (!arguments.length) return expanded;
         expanded = _;
         updatePreference = false;
+        return rawTagEditor;
+    };
+
+
+    rawTagEditor.readOnlyTags = function(_) {
+        if (!arguments.length) return readOnlyTags;
+        readOnlyTags = _;
         return rawTagEditor;
     };
 
