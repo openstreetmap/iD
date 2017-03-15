@@ -2,7 +2,15 @@
     "icon": "poi-fire-hydrant",
     "fields": [
         "fire_hydrant/type",
-        "fire_hydrant/position"
+        "fire_hydrant/position",
+        "ref",
+        "operator",
+        "fire_hydrant/diameter",
+        "fire_hydrant/pressure",
+        "fire_hydrant/flow_capacity",
+        "fire_hydrant/coupling_type",
+        "fire_hydrant/couplings",
+        "description"
     ],
     "geometry": [
         "point",
