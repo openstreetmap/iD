@@ -181,11 +181,20 @@ input[type=email] {
     background-color: white;
     color: #333;
     border:1px solid #ccc;
-    padding:5px 10px;
+    padding:5px 25px 5px 10px;
     height:30px;
     width: 100%;
     border-radius:4px;
     text-overflow: ellipsis;
+}
+[dir='rtl'] textarea,
+input[type=text],
+input[type=search],
+input[type=number],
+input[type=url],
+input[type=tel],
+input[type=email] {
+    padding:5px 10px 5px 25px;
 }
 
 textarea:focus,
