@@ -214,7 +214,6 @@ export function uiCommit(context) {
             })
             .on('click.save', function() {
                 dispatch.call('save', this, changeset);
-                changeset = null;
             });
 
         saveButton
@@ -383,11 +382,11 @@ export function uiCommit(context) {
             var tags = _.clone(changeset.tags);
 
             _.forEach(changed, function(v, k) {
-                k = k.trim();
+                k = k.trim().substr(0, 255);
                 if (readOnlyTags.indexOf(k) !== -1) return;
 
                 if (k !== '' && v !== undefined) {
-                    tags[k] = v.trim();
+                    tags[k] = v.trim().substr(0, 255);
                 } else {
                     delete tags[k];
                 }
@@ -401,6 +400,12 @@ export function uiCommit(context) {
         }
 
     }
+
+
+    commit.reset = function() {
+        changeset = null;
+    };
+
 
     return utilRebind(commit, dispatch, 'on');
 }
