@@ -333,95 +333,6 @@ describe('iD.serviceOsm', function () {
     });
 
 
-    describe('#osmChangeJXON', function() {
-        it('converts change data to JXON', function() {
-            var jxon = connection.osmChangeJXON('1234', {created: [], modified: [], deleted: []});
-
-            expect(jxon).to.eql({
-                osmChange: {
-                    '@version': 0.6,
-                    '@generator': 'iD',
-                    'create': {},
-                    'modify': {},
-                    'delete': {'@if-unused': true}
-                }
-            });
-        });
-
-        it('includes creations ordered by nodes, ways, relations', function() {
-            var n = iD.Node({loc: [0, 0]}),
-                w = iD.Way(),
-                r = iD.Relation(),
-                changes = {created: [r, w, n], modified: [], deleted: []},
-                jxon = connection.osmChangeJXON('1234', changes);
-
-            expect(d3.entries(jxon.osmChange.create)).to.eql([
-                {key: 'node', value: [n.asJXON('1234').node]},
-                {key: 'way', value: [w.asJXON('1234').way]},
-                {key: 'relation', value: [r.asJXON('1234').relation]}
-            ]);
-        });
-
-        it('includes creations ordered by dependencies', function() {
-          var n = iD.Node({loc: [0, 0]}),
-              w = iD.Way({nodes: [n.id]}),
-              r1 = iD.Relation({members: [{id: w.id, type: 'way'}]}),
-              r2 = iD.Relation({members: [{id: r1.id, type: 'relation'}]}),
-              changes = {created: [r2, r1, w, n], modified: [], deleted: []},
-              jxon = connection.osmChangeJXON('1234', changes);
-
-          expect(d3.entries(jxon.osmChange.create)).to.eql([
-              {key: 'node', value: [n.asJXON('1234').node]},
-              {key: 'way', value: [w.asJXON('1234').way]},
-              {key: 'relation', value: [r1.asJXON('1234').relation, r2.asJXON('1234').relation]},
-          ]);
-        });
-
-        it('includes creations ignoring circular dependencies', function() {
-          var r1 = iD.Relation(),
-              r2 = iD.Relation(),
-              changes, jxon;
-          r1.addMember({id: r2.id, type: 'relation'});
-          r2.addMember({id: r1.id, type: 'relation'});
-          changes = {created: [r1,r2], modified: [], deleted: []};
-          jxon = connection.osmChangeJXON('1234', changes);
-
-          expect(d3.entries(jxon.osmChange.create)).to.eql([
-              {key: 'relation', value: [r1.asJXON('1234').relation, r2.asJXON('1234').relation]},
-          ]);
-        });
-
-        it('includes modifications', function() {
-            var n = iD.Node({loc: [0, 0]}),
-                w = iD.Way(),
-                r = iD.Relation(),
-                changes = {created: [], modified: [r, w, n], deleted: []},
-                jxon = connection.osmChangeJXON('1234', changes);
-
-            expect(jxon.osmChange.modify).to.eql({
-                node: [n.asJXON('1234').node],
-                way: [w.asJXON('1234').way],
-                relation: [r.asJXON('1234').relation]
-            });
-        });
-
-        it('includes deletions ordered by relations, ways, nodes', function() {
-            var n = iD.Node({loc: [0, 0]}),
-                w = iD.Way(),
-                r = iD.Relation(),
-                changes = {created: [], modified: [], deleted: [n, w, r]},
-                jxon = connection.osmChangeJXON('1234', changes);
-
-            expect(d3.entries(jxon.osmChange.delete)).to.eql([
-                {key: 'relation', value: [r.asJXON('1234').relation]},
-                {key: 'way', value: [w.asJXON('1234').way]},
-                {key: 'node', value: [n.asJXON('1234').node]},
-                {key: '@if-unused', value: true}
-            ]);
-        });
-    });
-
-
     describe('#userChangesets', function() {
         var server, userDetailsFn;
 
@@ -524,13 +435,6 @@ describe('iD.serviceOsm', function () {
             server.respond();
         });
 
-    });
-
-
-    describe('#changesetTags', function() {
-        it('omits comment when empty', function() {
-            expect(connection.changesetTags('2.0.0', '', [])).not.to.have.property('comment');
-        });
     });
 
 

@@ -11,9 +11,6 @@ export function uiSuccess(context) {
 
 
     function success(selection) {
-        var message = (changeset.comment || t('success.edited_osm')).substring(0, 130) +
-            ' ' + context.connection().changesetURL(changeset.id);
-
         var header = selection
             .append('div')
             .attr('class', 'header fillL');
@@ -54,6 +51,10 @@ export function uiSuccess(context) {
             .attr('target', '_blank')
             .attr('href', changesetURL)
             .text(t('success.view_on_osm'));
+
+
+        var message = (changeset.tags.comment || t('success.edited_osm')).substring(0, 130) +
+            ' ' + context.connection().changesetURL(changeset.id);
 
         var sharing = {
             facebook: 'https://facebook.com/sharer/sharer.php?u=' + encodeURIComponent(changesetURL),
