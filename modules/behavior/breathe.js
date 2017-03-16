@@ -94,8 +94,8 @@ export function behaviorBreathe() {
                 p.tag = tag;
                 p.from.opacity = opacity * 0.6;
                 p.to.opacity = opacity * 1.25;
-                p.from.width = width * 0.9;
-                p.to.width = width * (tag === 'circle' ? 1.5 : 1.25);
+                p.from.width = width * 0.7;
+                p.to.width = width * (tag === 'circle' ? 1.5 : 1);
                 params[d.id] = p;
             });
     }

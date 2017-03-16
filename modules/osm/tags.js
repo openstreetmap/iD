@@ -35,6 +35,9 @@ export var osmOneWayTags = {
         'yes': true
     },
     'waterway': {
+        'canal': true,
+        'ditch': true,
+        'drain': true,
         'river': true,
         'stream': true
     }
