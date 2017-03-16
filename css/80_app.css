@@ -188,12 +188,12 @@ input[type=email] {
     text-overflow: ellipsis;
 }
 [dir='rtl'] textarea,
-input[type=text],
-input[type=search],
-input[type=number],
-input[type=url],
-input[type=tel],
-input[type=email] {
+[dir='rtl'] input[type=text],
+[dir='rtl'] input[type=search],
+[dir='rtl'] input[type=number],
+[dir='rtl'] input[type=url],
+[dir='rtl'] input[type=tel],
+[dir='rtl'] input[type=email] {
     padding:5px 10px 5px 25px;
 }
 
