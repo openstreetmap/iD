@@ -3408,6 +3408,10 @@
                     "name": "Cricket Field",
                     "terms": ""
                 },
+                "leisure/pitch/equestrian": {
+                    "name": "Riding Arena",
+                    "terms": "dressage,equestrian,horse,horseback,riding"
+                },
                 "leisure/pitch/rugby_league": {
                     "name": "Rugby League Field",
                     "terms": ""

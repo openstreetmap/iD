@@ -3017,6 +3017,11 @@ en:
         # 'leisure=pitch, sport=cricket'
         name: Cricket Field
         terms: '<translate with synonyms or related terms for ''Cricket Field'', separated by commas>'
+      leisure/pitch/equestrian:
+        # 'leisure=pitch, sport=equestrian'
+        name: Riding Arena
+        # 'terms: dressage,equestrian,horse,horseback,riding'
+        terms: '<translate with synonyms or related terms for ''Riding Arena'', separated by commas>'
       leisure/pitch/rugby_league:
         # 'leisure=pitch, sport=rugby_league'
         name: Rugby League Field

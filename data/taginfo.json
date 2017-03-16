@@ -1545,6 +1545,10 @@
         },
         {
             "key": "sport",
+            "value": "equestrian"
+        },
+        {
+            "key": "sport",
             "value": "rugby_league"
         },
         {

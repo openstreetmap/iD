@@ -7253,6 +7253,30 @@
             "terms": [],
             "name": "Cricket Field"
         },
+        "leisure/pitch/equestrian": {
+            "icon": "horse-riding",
+            "fields": [
+                "surface",
+                "lit",
+                "building"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "pitch",
+                "sport": "equestrian"
+            },
+            "terms": [
+                "dressage",
+                "equestrian",
+                "horse",
+                "horseback",
+                "riding"
+            ],
+            "name": "Riding Arena"
+        },
         "leisure/pitch/rugby_league": {
             "icon": "america-football",
             "fields": [
