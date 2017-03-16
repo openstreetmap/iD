@@ -273,6 +273,10 @@
         },
         {
             "key": "amenity",
+            "value": "driving_school"
+        },
+        {
+            "key": "amenity",
             "value": "embassy"
         },
         {

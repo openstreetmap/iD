@@ -2128,6 +2128,10 @@
                     "name": "Drinking Water",
                     "terms": "fountain,potable"
                 },
+                "amenity/driving_school": {
+                    "name": "Driving School",
+                    "terms": ""
+                },
                 "amenity/embassy": {
                     "name": "Embassy",
                     "terms": ""

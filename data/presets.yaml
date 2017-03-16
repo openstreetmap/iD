@@ -1589,6 +1589,10 @@ en:
         name: Drinking Water
         # 'terms: fountain,potable'
         terms: '<translate with synonyms or related terms for ''Drinking Water'', separated by commas>'
+      amenity/driving_school:
+        # amenity=driving_school
+        name: Driving School
+        terms: '<translate with synonyms or related terms for ''Driving School'', separated by commas>'
       amenity/embassy:
         # amenity=embassy
         name: Embassy
