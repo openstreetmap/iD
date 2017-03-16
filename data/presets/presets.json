@@ -564,6 +564,98 @@
             "name": "Swimming Pool",
             "searchable": false
         },
+        "amenity/animal_boarding": {
+            "icon": "veterinary",
+            "fields": [
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "boarding",
+                "cat",
+                "dog",
+                "horse",
+                "kitten",
+                "pet boarding",
+                "pet care",
+                "pet hotel",
+                "puppy",
+                "reptile"
+            ],
+            "tags": {
+                "amenity": "animal_boarding"
+            },
+            "name": "Animal Boarding Facility"
+        },
+        "amenity/animal_breeding": {
+            "icon": "veterinary",
+            "fields": [
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "breeding",
+                "bull",
+                "cat",
+                "cow",
+                "dog",
+                "horse",
+                "husbandry",
+                "kitten",
+                "livestock",
+                "pet breeding",
+                "puppy",
+                "reptile"
+            ],
+            "tags": {
+                "amenity": "animal_breeding"
+            },
+            "name": "Animal Breeding Facility"
+        },
+        "amenity/animal_shelter": {
+            "icon": "veterinary",
+            "fields": [
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "adoption",
+                "aspca",
+                "cat",
+                "dog",
+                "horse",
+                "kitten",
+                "pet care",
+                "pet rescue",
+                "puppy",
+                "raptor",
+                "reptile",
+                "rescue",
+                "spca"
+            ],
+            "tags": {
+                "amenity": "animal_shelter"
+            },
+            "name": "Animal Shelter"
+        },
         "amenity/arts_centre": {
             "icon": "theatre",
             "fields": [
@@ -11344,9 +11436,13 @@
                 "area"
             ],
             "terms": [
+                "animal",
                 "cat",
                 "dog",
-                "fish"
+                "fish",
+                "kitten",
+                "puppy",
+                "reptile"
             ],
             "tags": {
                 "shop": "pet"

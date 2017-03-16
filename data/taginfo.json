@@ -145,6 +145,18 @@
         },
         {
             "key": "amenity",
+            "value": "animal_boarding"
+        },
+        {
+            "key": "amenity",
+            "value": "animal_breeding"
+        },
+        {
+            "key": "amenity",
+            "value": "animal_shelter"
+        },
+        {
+            "key": "amenity",
             "value": "arts_centre"
         },
         {

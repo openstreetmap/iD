@@ -2000,6 +2000,18 @@
                     "name": "Swimming Pool",
                     "terms": ""
                 },
+                "amenity/animal_boarding": {
+                    "name": "Animal Boarding Facility",
+                    "terms": "boarding,cat,dog,horse,kitten,pet boarding,pet care,pet hotel,puppy,reptile"
+                },
+                "amenity/animal_breeding": {
+                    "name": "Animal Breeding Facility",
+                    "terms": "breeding,bull,cat,cow,dog,horse,husbandry,kitten,livestock,pet breeding,puppy,reptile"
+                },
+                "amenity/animal_shelter": {
+                    "name": "Animal Shelter",
+                    "terms": "adoption,aspca,cat,dog,horse,kitten,pet care,pet rescue,puppy,raptor,reptile,rescue,spca"
+                },
                 "amenity/arts_centre": {
                     "name": "Arts Center",
                     "terms": ""
@@ -4334,7 +4346,7 @@
                 },
                 "shop/pet": {
                     "name": "Pet Store",
-                    "terms": "cat,dog,fish"
+                    "terms": "animal,cat,dog,fish,kitten,puppy,reptile"
                 },
                 "shop/photo": {
                     "name": "Photography Store",

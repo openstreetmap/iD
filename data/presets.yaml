@@ -1435,6 +1435,21 @@ en:
       amenity:
         # amenity=*
         name: Amenity
+      amenity/animal_boarding:
+        # amenity=animal_boarding
+        name: Animal Boarding Facility
+        # 'terms: boarding,cat,dog,horse,kitten,pet boarding,pet care,pet hotel,puppy,reptile'
+        terms: '<translate with synonyms or related terms for ''Animal Boarding Facility'', separated by commas>'
+      amenity/animal_breeding:
+        # amenity=animal_breeding
+        name: Animal Breeding Facility
+        # 'terms: breeding,bull,cat,cow,dog,horse,husbandry,kitten,livestock,pet breeding,puppy,reptile'
+        terms: '<translate with synonyms or related terms for ''Animal Breeding Facility'', separated by commas>'
+      amenity/animal_shelter:
+        # amenity=animal_shelter
+        name: Animal Shelter
+        # 'terms: adoption,aspca,cat,dog,horse,kitten,pet care,pet rescue,puppy,raptor,reptile,rescue,spca'
+        terms: '<translate with synonyms or related terms for ''Animal Shelter'', separated by commas>'
       amenity/arts_centre:
         # amenity=arts_centre
         name: Arts Center
@@ -4043,7 +4058,7 @@ en:
       shop/pet:
         # shop=pet
         name: Pet Store
-        # 'terms: cat,dog,fish'
+        # 'terms: animal,cat,dog,fish,kitten,puppy,reptile'
         terms: '<translate with synonyms or related terms for ''Pet Store'', separated by commas>'
       shop/photo:
         # shop=photo

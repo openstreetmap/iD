@@ -1,5 +1,5 @@
 {
-    "icon": "dog-park",
+    "icon": "veterinary",
     "fields": [
         "operator",
         "address",
@@ -11,16 +11,19 @@
         "area"
     ],
     "terms": [
-        "animal",
+        "boarding",
         "cat",
         "dog",
-        "fish",
+        "horse",
         "kitten",
+        "pet boarding",
+        "pet care",
+        "pet hotel",
         "puppy",
         "reptile"
     ],
     "tags": {
-        "shop": "pet"
+        "amenity": "animal_boarding"
     },
-    "name": "Pet Store"
+    "name": "Animal Boarding Facility"
 }
