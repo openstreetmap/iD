@@ -1,0 +1,12 @@
+{
+    "icon": "drinking-water",
+    "geometry": [
+        "area",
+        "vertex",
+        "point"
+    ],
+    "tags": {
+        "amenity": "watering_place"
+    },
+    "name": "Animal Watering Place"
+}

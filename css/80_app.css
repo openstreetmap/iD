@@ -1610,6 +1610,15 @@ div.combobox {
     clear: both;
 }
 
+.tag-row.readonly,
+.tag-row.readonly input.key,
+.tag-row.readonly input.value,
+.tag-row.readonly button.remove {
+    color: #777777;
+    background-color: #eee;
+    cursor: not-allowed;
+}
+
 .tag-row input {
     height: 31px;
     border: 0;
@@ -1682,7 +1691,7 @@ div.combobox {
 
 /* Adding form fields to tag editor */
 
-.inspector-inner .add-tag {
+.raw-tag-editor .add-tag {
     width: 40%;
     height: 30px;
     border-top: 0;
@@ -1690,11 +1699,11 @@ div.combobox {
     border-radius: 0 0 4px 4px;
 }
 
-.inspector-inner .add-tag:hover {
+.raw-tag-editor .add-tag:hover {
     background: rgba(0,0,0,.8);
 }
 
-.inspector-inner .add-tag .label {
+.raw-tag-editor .add-tag .label {
     display: none;
 }
 

@@ -3,17 +3,15 @@ import _ from 'lodash';
 import osmAuth from 'osm-auth';
 import { JXON } from '../util/jxon';
 import { d3geoTile } from '../lib/d3.geo.tile';
-import { geoExtent } from '../geo/index';
+import { geoExtent } from '../geo';
 import {
-    osmChangeset,
     osmEntity,
     osmNode,
     osmRelation,
     osmWay
-} from '../osm/index';
+} from '../osm';
 
-import { utilDetect } from '../util/detect';
-import { utilRebind } from '../util/rebind';
+import { utilRebind } from '../util';
 
 
 var dispatch = d3.dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded'),
@@ -288,132 +286,47 @@ export default {
     },
 
 
-    // Generate [osmChange](http://wiki.openstreetmap.org/wiki/OsmChange)
-    // XML. Returns a string.
-    osmChangeJXON: function(changeset_id, changes) {
-        function nest(x, order) {
-            var groups = {};
-            for (var i = 0; i < x.length; i++) {
-                var tagName = Object.keys(x[i])[0];
-                if (!groups[tagName]) groups[tagName] = [];
-                groups[tagName].push(x[i][tagName]);
-            }
-            var ordered = {};
-            order.forEach(function(o) {
-                if (groups[o]) ordered[o] = groups[o];
-            });
-            return ordered;
-        }
-        // sort relations in a changeset by dependencies
-        function sort(changes) {
-          // find a referenced relation in the current changeset
-          function resolve(item){
-            return _.find(relations, function(relation) {
-              return item.keyAttributes.type === 'relation'
-                && item.keyAttributes.ref === relation['@id'];
-            });
-          }
-          // a new item is an item that has not been already processed
-          function isNew(item) {
-            return !sorted[ item['@id'] ] && !_.find(processing, function(proc){
-             return proc['@id'] === item['@id'];
-            });
-          }
-          var processing = [],
-              sorted = {},
-              relations = changes.relation;
+    putChangeset: function(changeset, changes, callback) {
 
-          if (!relations) return changes;
-
-          for (var i = 0; i < relations.length; i++) {
-
-            var relation = relations[i];
-
-            // skip relation if already sorted
-            if ( !sorted[relation['@id']] ) {
-              processing.push( relation );
-            }
-
-            while ( processing.length > 0 ){
-              var next = processing[0],
-                  deps = _.filter( _.compact(next.member.map(resolve)), isNew);
-
-              if ( deps.length === 0 ){
-                sorted[ next['@id'] ] = next;
-                processing.shift();
-              } else {
-                processing = deps.concat( processing );
-              }
-            }
-
-          }
-
-          changes.relation = _.values(sorted);
-          return changes;
-        }
-
-        function rep(entity) {
-            return entity.asJXON(changeset_id);
-        }
-
-        return {
-            osmChange: {
-                '@version': 0.6,
-                '@generator': 'iD',
-                'create': sort(nest(changes.created.map(rep), ['node', 'way', 'relation'])),
-                'modify': nest(changes.modified.map(rep), ['node', 'way', 'relation']),
-                'delete': _.extend(nest(changes.deleted.map(rep), ['relation', 'way', 'node']), {'@if-unused': true})
-            }
-        };
-    },
-
-
-    changesetTags: function(version, comment, imageryUsed) {
-        var detected = utilDetect(),
-            tags = {
-                created_by: ('iD ' + version).substr(0, 255),
-                imagery_used: imageryUsed.join(';').substr(0, 255),
-                host: detected.host.substr(0, 255),
-                locale: detected.locale.substr(0, 255)
-            };
-
-        if (comment) {
-            tags.comment = comment.substr(0, 255);
-        }
-
-        return tags;
-    },
-
-
-    putChangeset: function(changes, version, comment, imageryUsed, callback) {
-        var that = this,
-            changeset = new osmChangeset({ tags: this.changesetTags(version, comment, imageryUsed) });
-
+        // Create the changeset..
         oauth.xhr({
-                method: 'PUT',
-                path: '/api/0.6/changeset/create',
+            method: 'PUT',
+            path: '/api/0.6/changeset/create',
+            options: { header: { 'Content-Type': 'text/xml' } },
+            content: JXON.stringify(changeset.asJXON())
+        }, createdChangeset);
+
+
+        function createdChangeset(err, changeset_id) {
+            if (err) return callback(err);
+            changeset = changeset.update({ id: changeset_id });
+
+            // Upload the changeset..
+            oauth.xhr({
+                method: 'POST',
+                path: '/api/0.6/changeset/' + changeset_id + '/upload',
                 options: { header: { 'Content-Type': 'text/xml' } },
-                content: JXON.stringify(changeset.asJXON())
-            }, function(err, changeset_id) {
-                if (err) return callback(err);
-                oauth.xhr({
-                    method: 'POST',
-                    path: '/api/0.6/changeset/' + changeset_id + '/upload',
-                    options: { header: { 'Content-Type': 'text/xml' } },
-                    content: JXON.stringify(that.osmChangeJXON(changeset_id, changes))
-                }, function(err) {
-                    if (err) return callback(err);
-                    // POST was successful, safe to call the callback.
-                    // Still attempt to close changeset, but ignore response because #2667
-                    // Add delay to allow for postgres replication #1646 #2678
-                    window.setTimeout(function() { callback(null, changeset_id); }, 2500);
-                    oauth.xhr({
-                        method: 'PUT',
-                        path: '/api/0.6/changeset/' + changeset_id + '/close',
-                        options: { header: { 'Content-Type': 'text/xml' } }
-                    }, function() { return true; });
-                });
-            });
+                content: JXON.stringify(changeset.osmChangeJXON(changes))
+            }, uploadedChangeset);
+        }
+
+
+        function uploadedChangeset(err) {
+            if (err) return callback(err);
+
+            // Upload was successful, safe to call the callback.
+            // Add delay to allow for postgres replication #1646 #2678
+            window.setTimeout(function() {
+                callback(null, changeset);
+            }, 2500);
+
+            // Still attempt to close changeset, but ignore response because #2667
+            oauth.xhr({
+                method: 'PUT',
+                path: '/api/0.6/changeset/' + changeset.id + '/close',
+                options: { header: { 'Content-Type': 'text/xml' } }
+            }, function() { return true; });
+        }
     },
 
 

@@ -1,5 +1,5 @@
 {
-    "icon": "dog-park",
+    "icon": "veterinary",
     "fields": [
         "operator",
         "address",
@@ -11,16 +11,22 @@
         "area"
     ],
     "terms": [
-        "animal",
+        "adoption",
+        "aspca",
         "cat",
         "dog",
-        "fish",
+        "horse",
         "kitten",
+        "pet care",
+        "pet rescue",
         "puppy",
-        "reptile"
+        "raptor",
+        "reptile",
+        "rescue",
+        "spca"
     ],
     "tags": {
-        "shop": "pet"
+        "amenity": "animal_shelter"
     },
-    "name": "Pet Store"
+    "name": "Animal Shelter"
 }

@@ -145,6 +145,18 @@
         },
         {
             "key": "amenity",
+            "value": "animal_boarding"
+        },
+        {
+            "key": "amenity",
+            "value": "animal_breeding"
+        },
+        {
+            "key": "amenity",
+            "value": "animal_shelter"
+        },
+        {
+            "key": "amenity",
             "value": "arts_centre"
         },
         {
@@ -270,6 +282,10 @@
         {
             "key": "amenity",
             "value": "drinking_water"
+        },
+        {
+            "key": "amenity",
+            "value": "driving_school"
         },
         {
             "key": "amenity",
@@ -548,6 +564,10 @@
             "value": "water_point"
         },
         {
+            "key": "amenity",
+            "value": "watering_place"
+        },
+        {
             "key": "area",
             "value": "yes"
         },
@@ -775,6 +795,9 @@
         {
             "key": "camp_site",
             "value": "camp_pitch"
+        },
+        {
+            "key": "club"
         },
         {
             "key": "craft"
@@ -1545,6 +1568,10 @@
         },
         {
             "key": "sport",
+            "value": "equestrian"
+        },
+        {
+            "key": "sport",
             "value": "rugby_league"
         },
         {
@@ -1961,6 +1988,10 @@
         },
         {
             "key": "place",
+            "value": "quarter"
+        },
+        {
+            "key": "place",
             "value": "square"
         },
         {
@@ -2308,6 +2339,10 @@
         },
         {
             "key": "shop",
+            "value": "gas"
+        },
+        {
+            "key": "shop",
             "value": "gift"
         },
         {
@@ -2433,6 +2468,10 @@
         {
             "key": "shop",
             "value": "pawnbroker"
+        },
+        {
+            "key": "shop",
+            "value": "perfumery"
         },
         {
             "key": "shop",

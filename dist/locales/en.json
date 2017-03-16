@@ -1003,6 +1003,9 @@
                         "anticlockwise": "Counterclockwise"
                     }
                 },
+                "club": {
+                    "label": "Type"
+                },
                 "collection_times": {
                     "label": "Collection Times"
                 },
@@ -2000,6 +2003,18 @@
                     "name": "Swimming Pool",
                     "terms": ""
                 },
+                "amenity/animal_boarding": {
+                    "name": "Animal Boarding Facility",
+                    "terms": "boarding,cat,dog,horse,kitten,pet boarding,pet care,pet hotel,puppy,reptile"
+                },
+                "amenity/animal_breeding": {
+                    "name": "Animal Breeding Facility",
+                    "terms": "breeding,bull,cat,cow,dog,horse,husbandry,kitten,livestock,pet breeding,puppy,reptile"
+                },
+                "amenity/animal_shelter": {
+                    "name": "Animal Shelter",
+                    "terms": "adoption,aspca,cat,dog,horse,kitten,pet care,pet rescue,puppy,raptor,reptile,rescue,spca"
+                },
                 "amenity/arts_centre": {
                     "name": "Arts Center",
                     "terms": ""
@@ -2127,6 +2142,10 @@
                 "amenity/drinking_water": {
                     "name": "Drinking Water",
                     "terms": "fountain,potable"
+                },
+                "amenity/driving_school": {
+                    "name": "Driving School",
+                    "terms": ""
                 },
                 "amenity/embassy": {
                     "name": "Embassy",
@@ -2404,6 +2423,10 @@
                     "name": "RV Drinking Water",
                     "terms": ""
                 },
+                "amenity/watering_place": {
+                    "name": "Animal Watering Place",
+                    "terms": ""
+                },
                 "area": {
                     "name": "Area",
                     "terms": ""
@@ -2635,6 +2658,10 @@
                 "camp_site/camp_pitch": {
                     "name": "Camp Pitch",
                     "terms": "tent,rv"
+                },
+                "club": {
+                    "name": "Club",
+                    "terms": "social"
                 },
                 "craft": {
                     "name": "Craft",
@@ -3408,6 +3435,10 @@
                     "name": "Cricket Field",
                     "terms": ""
                 },
+                "leisure/pitch/equestrian": {
+                    "name": "Riding Arena",
+                    "terms": "dressage,equestrian,horse,horseback,riding"
+                },
                 "leisure/pitch/rugby_league": {
                     "name": "Rugby League Field",
                     "terms": ""
@@ -3832,13 +3863,17 @@
                     "name": "Neighborhood",
                     "terms": "neighbourhood"
                 },
+                "place/quarter": {
+                    "name": "Sub-Borough / Quarter",
+                    "terms": "boro,borough,quarter"
+                },
                 "place/square": {
                     "name": "Square",
                     "terms": ""
                 },
                 "place/suburb": {
-                    "name": "Borough",
-                    "terms": "Boro,Quarter"
+                    "name": "Borough / Suburb",
+                    "terms": "boro,borough,quarter"
                 },
                 "place/town": {
                     "name": "Town",
@@ -4188,6 +4223,10 @@
                     "name": "Garden Center",
                     "terms": "landscape,mulch,shrub,tree"
                 },
+                "shop/gas": {
+                    "name": "Bottled Gas Shop",
+                    "terms": "cng,lpg,natural gas,propane,refill,tank"
+                },
                 "shop/gift": {
                     "name": "Gift Shop",
                     "terms": "souvenir"
@@ -4316,9 +4355,13 @@
                     "name": "Pawn Shop",
                     "terms": ""
                 },
+                "shop/perfumery": {
+                    "name": "Perfume Store",
+                    "terms": ""
+                },
                 "shop/pet": {
                     "name": "Pet Store",
-                    "terms": "cat,dog,fish"
+                    "terms": "animal,cat,dog,fish,kitten,puppy,reptile"
                 },
                 "shop/photo": {
                     "name": "Photography Store",

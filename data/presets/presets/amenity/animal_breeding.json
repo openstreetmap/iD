@@ -1,5 +1,5 @@
 {
-    "icon": "dog-park",
+    "icon": "veterinary",
     "fields": [
         "operator",
         "address",
@@ -11,16 +11,21 @@
         "area"
     ],
     "terms": [
-        "animal",
+        "breeding",
+        "bull",
         "cat",
+        "cow",
         "dog",
-        "fish",
+        "horse",
+        "husbandry",
         "kitten",
+        "livestock",
+        "pet breeding",
         "puppy",
         "reptile"
     ],
     "tags": {
-        "shop": "pet"
+        "amenity": "animal_breeding"
     },
-    "name": "Pet Store"
+    "name": "Animal Breeding Facility"
 }
