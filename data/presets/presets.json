@@ -9173,6 +9173,25 @@
             ],
             "name": "Neighborhood"
         },
+        "place/quarter": {
+            "icon": "triangle-stroked",
+            "fields": [
+                "population"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "place": "quarter"
+            },
+            "terms": [
+                "boro",
+                "borough",
+                "quarter"
+            ],
+            "name": "Sub-Borough / Quarter"
+        },
         "place/square": {
             "icon": "poi-foot",
             "geometry": [
@@ -9197,10 +9216,11 @@
                 "place": "suburb"
             },
             "terms": [
-                "Boro",
-                "Quarter"
+                "boro",
+                "borough",
+                "quarter"
             ],
-            "name": "Borough"
+            "name": "Borough / Suburb"
         },
         "place/town": {
             "icon": "town",

@@ -3511,15 +3511,20 @@ en:
         name: Neighborhood
         # 'terms: neighbourhood'
         terms: '<translate with synonyms or related terms for ''Neighborhood'', separated by commas>'
+      place/quarter:
+        # place=quarter
+        name: Sub-Borough / Quarter
+        # 'terms: boro,borough,quarter'
+        terms: '<translate with synonyms or related terms for ''Sub-Borough / Quarter'', separated by commas>'
       place/square:
         # place=square
         name: Square
         terms: '<translate with synonyms or related terms for ''Square'', separated by commas>'
       place/suburb:
         # place=suburb
-        name: Borough
-        # 'terms: Boro,Quarter'
-        terms: '<translate with synonyms or related terms for ''Borough'', separated by commas>'
+        name: Borough / Suburb
+        # 'terms: boro,borough,quarter'
+        terms: '<translate with synonyms or related terms for ''Borough / Suburb'', separated by commas>'
       place/town:
         # place=town
         name: Town

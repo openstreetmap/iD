@@ -3856,13 +3856,17 @@
                     "name": "Neighborhood",
                     "terms": "neighbourhood"
                 },
+                "place/quarter": {
+                    "name": "Sub-Borough / Quarter",
+                    "terms": "boro,borough,quarter"
+                },
                 "place/square": {
                     "name": "Square",
                     "terms": ""
                 },
                 "place/suburb": {
-                    "name": "Borough",
-                    "terms": "Boro,Quarter"
+                    "name": "Borough / Suburb",
+                    "terms": "boro,borough,quarter"
                 },
                 "place/town": {
                     "name": "Town",

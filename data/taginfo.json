@@ -1985,6 +1985,10 @@
         },
         {
             "key": "place",
+            "value": "quarter"
+        },
+        {
+            "key": "place",
             "value": "square"
         },
         {
