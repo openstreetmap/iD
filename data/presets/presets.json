@@ -2885,6 +2885,18 @@
             },
             "name": "RV Drinking Water"
         },
+        "amenity/watering_place": {
+            "icon": "drinking-water",
+            "geometry": [
+                "area",
+                "vertex",
+                "point"
+            ],
+            "tags": {
+                "amenity": "watering_place"
+            },
+            "name": "Animal Watering Place"
+        },
         "area": {
             "name": "Area",
             "tags": {

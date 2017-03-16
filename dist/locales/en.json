@@ -2420,6 +2420,10 @@
                     "name": "RV Drinking Water",
                     "terms": ""
                 },
+                "amenity/watering_place": {
+                    "name": "Animal Watering Place",
+                    "terms": ""
+                },
                 "area": {
                     "name": "Area",
                     "terms": ""

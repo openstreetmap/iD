@@ -564,6 +564,10 @@
             "value": "water_point"
         },
         {
+            "key": "amenity",
+            "value": "watering_place"
+        },
+        {
             "key": "area",
             "value": "yes"
         },

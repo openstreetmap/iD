@@ -1948,6 +1948,10 @@ en:
         # amenity=water_point
         name: RV Drinking Water
         terms: '<translate with synonyms or related terms for ''RV Drinking Water'', separated by commas>'
+      amenity/watering_place:
+        # amenity=watering_place
+        name: Animal Watering Place
+        terms: '<translate with synonyms or related terms for ''Animal Watering Place'', separated by commas>'
       area:
         # area=yes
         name: Area
