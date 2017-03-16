@@ -3885,6 +3885,11 @@ en:
         name: Garden Center
         # 'terms: landscape,mulch,shrub,tree'
         terms: '<translate with synonyms or related terms for ''Garden Center'', separated by commas>'
+      shop/gas:
+        # shop=gas
+        name: Bottled Gas Shop
+        # 'terms: cng,lpg,natural gas,propane,refill,tank'
+        terms: '<translate with synonyms or related terms for ''Bottled Gas Shop'', separated by commas>'
       shop/gift:
         # shop=gift
         name: Gift Shop
@@ -4027,6 +4032,10 @@ en:
         # shop=pawnbroker
         name: Pawn Shop
         terms: '<translate with synonyms or related terms for ''Pawn Shop'', separated by commas>'
+      shop/perfumery:
+        # shop=perfumery
+        name: Perfume Store
+        terms: '<translate with synonyms or related terms for ''Perfume Store'', separated by commas>'
       shop/pet:
         # shop=pet
         name: Pet Store

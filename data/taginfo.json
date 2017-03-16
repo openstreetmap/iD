@@ -2312,6 +2312,10 @@
         },
         {
             "key": "shop",
+            "value": "gas"
+        },
+        {
+            "key": "shop",
             "value": "gift"
         },
         {
@@ -2437,6 +2441,10 @@
         {
             "key": "shop",
             "value": "pawnbroker"
+        },
+        {
+            "key": "shop",
+            "value": "perfumery"
         },
         {
             "key": "shop",

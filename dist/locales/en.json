@@ -4192,6 +4192,10 @@
                     "name": "Garden Center",
                     "terms": "landscape,mulch,shrub,tree"
                 },
+                "shop/gas": {
+                    "name": "Bottled Gas Shop",
+                    "terms": "cng,lpg,natural gas,propane,refill,tank"
+                },
                 "shop/gift": {
                     "name": "Gift Shop",
                     "terms": "souvenir"
@@ -4318,6 +4322,10 @@
                 },
                 "shop/pawnbroker": {
                     "name": "Pawn Shop",
+                    "terms": ""
+                },
+                "shop/perfumery": {
+                    "name": "Perfume Store",
                     "terms": ""
                 },
                 "shop/pet": {

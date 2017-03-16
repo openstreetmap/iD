@@ -1,0 +1,25 @@
+{
+    "icon": "shop",
+    "fields": [
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "cng",
+        "lpg",
+        "natural gas",
+        "propane",
+        "refill",
+        "tank"
+    ],
+    "tags": {
+        "shop": "gas"
+    },
+    "name": "Bottled Gas Shop"
+}

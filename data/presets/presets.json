@@ -10672,6 +10672,31 @@
             },
             "name": "Garden Center"
         },
+        "shop/gas": {
+            "icon": "shop",
+            "fields": [
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "cng",
+                "lpg",
+                "natural gas",
+                "propane",
+                "refill",
+                "tank"
+            ],
+            "tags": {
+                "shop": "gas"
+            },
+            "name": "Bottled Gas Shop"
+        },
         "shop/gift": {
             "icon": "gift",
             "fields": [
@@ -11271,6 +11296,23 @@
                 "shop": "pawnbroker"
             },
             "name": "Pawn Shop"
+        },
+        "shop/perfumery": {
+            "icon": "shop",
+            "fields": [
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "shop": "perfumery"
+            },
+            "name": "Perfume Store"
         },
         "shop/pet": {
             "icon": "dog-park",
