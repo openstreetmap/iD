@@ -3781,6 +3781,27 @@
             },
             "name": "Camp Pitch"
         },
+        "club": {
+            "icon": "heart",
+            "fields": [
+                "club",
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "club": "*"
+            },
+            "terms": [
+                "social"
+            ],
+            "name": "Club"
+        },
         "craft": {
             "icon": "poi-tool",
             "fields": [

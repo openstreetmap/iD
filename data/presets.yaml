@@ -316,6 +316,9 @@ en:
           anticlockwise: Counterclockwise
           # direction=clockwise
           clockwise: Clockwise
+      club:
+        # club=*
+        label: Type
       collection_times:
         # collection_times=*
         label: Collection Times
@@ -2189,6 +2192,11 @@ en:
         name: Camp Pitch
         # 'terms: tent,rv'
         terms: '<translate with synonyms or related terms for ''Camp Pitch'', separated by commas>'
+      club:
+        # club=*
+        name: Club
+        # 'terms: social'
+        terms: '<translate with synonyms or related terms for ''Club'', separated by commas>'
       craft:
         # craft=*
         name: Craft

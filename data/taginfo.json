@@ -797,6 +797,9 @@
             "value": "camp_pitch"
         },
         {
+            "key": "club"
+        },
+        {
             "key": "craft"
         },
         {

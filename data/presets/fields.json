@@ -401,6 +401,11 @@
                 }
             }
         },
+        "club": {
+            "key": "club",
+            "type": "typeCombo",
+            "label": "Type"
+        },
         "collection_times": {
             "key": "collection_times",
             "type": "text",

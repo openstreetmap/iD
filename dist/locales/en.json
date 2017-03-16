@@ -1003,6 +1003,9 @@
                         "anticlockwise": "Counterclockwise"
                     }
                 },
+                "club": {
+                    "label": "Type"
+                },
                 "collection_times": {
                     "label": "Collection Times"
                 },
@@ -2655,6 +2658,10 @@
                 "camp_site/camp_pitch": {
                     "name": "Camp Pitch",
                     "terms": "tent,rv"
+                },
+                "club": {
+                    "name": "Club",
+                    "terms": "social"
                 },
                 "craft": {
                     "name": "Craft",
