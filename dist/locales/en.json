@@ -1041,7 +1041,7 @@
                     "label": "Type"
                 },
                 "crop": {
-                    "label": "Crop"
+                    "label": "Crops"
                 },
                 "crossing": {
                     "label": "Type"
@@ -1207,6 +1207,9 @@
                 "golf_hole": {
                     "label": "Reference",
                     "placeholder": "Hole number (1-18)"
+                },
+                "grape_variety": {
+                    "label": "Grape Varieties"
                 },
                 "handicap": {
                     "label": "Handicap",
@@ -1560,7 +1563,7 @@
                     "label": "Produce"
                 },
                 "product": {
-                    "label": "Product"
+                    "label": "Products"
                 },
                 "railway": {
                     "label": "Type"

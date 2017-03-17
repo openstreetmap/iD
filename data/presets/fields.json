@@ -465,8 +465,8 @@
         },
         "crop": {
             "key": "crop",
-            "type": "combo",
-            "label": "Crop"
+            "type": "semiCombo",
+            "label": "Crops"
         },
         "crossing": {
             "key": "crossing",
@@ -742,6 +742,11 @@
             "type": "text",
             "label": "Reference",
             "placeholder": "Hole number (1-18)"
+        },
+        "grape_variety": {
+            "key": "grape_variety",
+            "type": "semiCombo",
+            "label": "Grape Varieties"
         },
         "handicap": {
             "key": "handicap",
@@ -1287,13 +1292,13 @@
         },
         "produce": {
             "key": "produce",
-            "type": "combo",
+            "type": "semiCombo",
             "label": "Produce"
         },
         "product": {
             "key": "product",
-            "type": "combo",
-            "label": "Product"
+            "type": "semiCombo",
+            "label": "Products"
         },
         "railway": {
             "key": "railway",
@@ -1738,7 +1743,7 @@
         },
         "trees": {
             "key": "trees",
-            "type": "combo",
+            "type": "semiCombo",
             "label": "Trees"
         },
         "tunnel": {

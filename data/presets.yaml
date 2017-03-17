@@ -356,7 +356,7 @@ en:
         label: Type
       crop:
         # crop=*
-        label: Crop
+        label: Crops
       crossing:
         # crossing=*
         label: Type
@@ -537,6 +537,9 @@ en:
         label: Reference
         # golf_hole field placeholder
         placeholder: Hole number (1-18)
+      grape_variety:
+        # grape_variety=*
+        label: Grape Varieties
       handicap:
         # handicap=*
         label: Handicap
@@ -977,7 +980,7 @@ en:
         label: Produce
       product:
         # product=*
-        label: Product
+        label: Products
       railway:
         # railway=*
         label: Type
