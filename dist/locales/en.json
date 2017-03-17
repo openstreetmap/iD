@@ -1698,10 +1698,13 @@
                     "label": "Source"
                 },
                 "sport_ice": {
-                    "label": "Sport"
+                    "label": "Sports"
                 },
-                "sport_racing": {
-                    "label": "Sport"
+                "sport_racing_motor": {
+                    "label": "Sports"
+                },
+                "sport_racing_nonmotor": {
+                    "label": "Sports"
                 },
                 "sport": {
                     "label": "Sports"
@@ -3040,8 +3043,8 @@
                     "terms": ""
                 },
                 "highway/raceway": {
-                    "name": "Motor Raceway",
-                    "terms": "auto*,race*,nascar"
+                    "name": "Racetrack (Motorsport)",
+                    "terms": "auto*,formula one,kart,motocross,nascar,race*,track"
                 },
                 "highway/residential": {
                     "name": "Residential Road",
@@ -3488,8 +3491,8 @@
                     "terms": ""
                 },
                 "leisure/running_track": {
-                    "name": "Running Track",
-                    "terms": ""
+                    "name": "Racetrack (Running)",
+                    "terms": "race*,running,sprint,track"
                 },
                 "leisure/slipway": {
                     "name": "Slipway",
@@ -3513,7 +3516,7 @@
                 },
                 "leisure/track": {
                     "name": "Racetrack (Non-Motorsport)",
-                    "terms": ""
+                    "terms": "cycle,dog,greyhound,horse,race*,track"
                 },
                 "leisure/water_park": {
                     "name": "Water Park",

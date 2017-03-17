@@ -5437,11 +5437,16 @@
             "fields": [
                 "oneway",
                 "surface",
-                "sport_racing",
-                "structure"
+                "sport_racing_motor",
+                "structure",
+                "lit",
+                "width",
+                "lanes"
             ],
             "geometry": [
-                "line"
+                "point",
+                "line",
+                "area"
             ],
             "tags": {
                 "highway": "raceway"
@@ -5452,10 +5457,14 @@
             },
             "terms": [
                 "auto*",
+                "formula one",
+                "kart",
+                "motocross",
+                "nascar",
                 "race*",
-                "nascar"
+                "track"
             ],
-            "name": "Motor Raceway"
+            "name": "Racetrack (Motorsport)"
         },
         "highway/residential": {
             "icon": "highway-residential",
@@ -7590,7 +7599,7 @@
             "icon": "pitch",
             "fields": [
                 "surface",
-                "sport_racing",
+                "sport_racing_nonmotor",
                 "lit",
                 "width",
                 "lanes"
@@ -7604,7 +7613,13 @@
                 "leisure": "track",
                 "sport": "running"
             },
-            "name": "Running Track"
+            "terms": [
+                "race*",
+                "running",
+                "sprint",
+                "track"
+            ],
+            "name": "Racetrack (Running)"
         },
         "leisure/slipway": {
             "icon": "poi-beach",
@@ -7700,7 +7715,7 @@
             "icon": "highway-road",
             "fields": [
                 "surface",
-                "sport_racing",
+                "sport_racing_nonmotor",
                 "lit",
                 "width",
                 "lanes"
@@ -7713,6 +7728,14 @@
             "tags": {
                 "leisure": "track"
             },
+            "terms": [
+                "cycle",
+                "dog",
+                "greyhound",
+                "horse",
+                "race*",
+                "track"
+            ],
             "name": "Racetrack (Non-Motorsport)"
         },
         "leisure/water_park": {

@@ -2,7 +2,7 @@
     "icon": "highway-road",
     "fields": [
         "surface",
-        "sport_racing",
+        "sport_racing_nonmotor",
         "lit",
         "width",
         "lanes"
@@ -15,5 +15,13 @@
     "tags": {
         "leisure": "track"
     },
+    "terms": [
+        "cycle",
+        "dog",
+        "greyhound",
+        "horse",
+        "race*",
+        "track"
+    ],
     "name": "Racetrack (Non-Motorsport)"
 }

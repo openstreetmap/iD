@@ -1144,10 +1144,13 @@ en:
         label: Sports
       sport_ice:
         # sport=*
-        label: Sport
-      sport_racing:
+        label: Sports
+      sport_racing_motor:
         # sport=*
-        label: Sport
+        label: Sports
+      sport_racing_nonmotor:
+        # sport=*
+        label: Sports
       stars:
         # stars=*
         label: Stars
@@ -2601,9 +2604,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Primary Link'', separated by commas>'
       highway/raceway:
         # highway=raceway
-        name: Motor Raceway
-        # 'terms: auto*,race*,nascar'
-        terms: '<translate with synonyms or related terms for ''Motor Raceway'', separated by commas>'
+        name: Racetrack (Motorsport)
+        # 'terms: auto*,formula one,kart,motocross,nascar,race*,track'
+        terms: '<translate with synonyms or related terms for ''Racetrack (Motorsport)'', separated by commas>'
       highway/residential:
         # highway=residential
         name: Residential Road
@@ -3105,8 +3108,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Resort'', separated by commas>'
       leisure/running_track:
         # 'leisure=track, sport=running'
-        name: Running Track
-        terms: '<translate with synonyms or related terms for ''Running Track'', separated by commas>'
+        name: Racetrack (Running)
+        # 'terms: race*,running,sprint,track'
+        terms: '<translate with synonyms or related terms for ''Racetrack (Running)'', separated by commas>'
       leisure/slipway:
         # leisure=slipway
         name: Slipway
@@ -3133,6 +3137,7 @@ en:
       leisure/track:
         # leisure=track
         name: Racetrack (Non-Motorsport)
+        # 'terms: cycle,dog,greyhound,horse,race*,track'
         terms: '<translate with synonyms or related terms for ''Racetrack (Non-Motorsport)'', separated by commas>'
       leisure/water_park:
         # leisure=water_park

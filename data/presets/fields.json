@@ -1518,8 +1518,8 @@
         },
         "sport_ice": {
             "key": "sport",
-            "type": "combo",
-            "label": "Sport",
+            "type": "semiCombo",
+            "label": "Sports",
             "options": [
                 "skating",
                 "hockey",
@@ -1528,17 +1528,25 @@
                 "ice_stock"
             ]
         },
-        "sport_racing": {
+        "sport_racing_motor": {
             "key": "sport",
-            "type": "combo",
-            "label": "Sport",
+            "type": "semiCombo",
+            "label": "Sports",
             "options": [
+                "motor",
+                "karting",
+                "motocross"
+            ]
+        },
+        "sport_racing_nonmotor": {
+            "key": "sport",
+            "type": "semiCombo",
+            "label": "Sports",
+            "options": [
+                "bmx",
                 "cycling",
                 "dog_racing",
                 "horse_racing",
-                "karting",
-                "motor",
-                "motocross",
                 "running"
             ]
         },

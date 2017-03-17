@@ -3,10 +3,8 @@
     "type": "semiCombo",
     "label": "Sports",
     "options": [
-        "skating",
-        "hockey",
-        "multi",
-        "curling",
-        "ice_stock"
+        "motor",
+        "karting",
+        "motocross"
     ]
 }
