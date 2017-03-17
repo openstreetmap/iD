@@ -60,7 +60,9 @@ export function uiBackground(context) {
         function setTooltips(selection) {
             selection.each(function(d, i, nodes) {
                 var item = d3.select(this).select('label'),
-                    placement = (i < nodes.length / 2) ? 'bottom' : 'top';
+                    span = item.select('span'),
+                    placement = (i < nodes.length / 2) ? 'bottom' : 'top',
+                    isOverflowing = (span.property('clientWidth') !== span.property('scrollWidth'));
 
                 if (d === previous) {
                     item.call(tooltip()
@@ -71,10 +73,10 @@ export function uiBackground(context) {
                             return uiTooltipHtml(tip, uiCmd('⌘B'));
                         })
                     );
-                } else if (d.description) {
+                } else if (d.description || isOverflowing) {
                     item.call(tooltip()
                         .placement(placement)
-                        .title(d.description)
+                        .title(d.description || d.name())
                     );
                 } else {
                     item.call(tooltip().destroy);
@@ -326,15 +328,21 @@ export function uiBackground(context) {
                 shown = show;
 
                 if (show) {
-                    selection.on('mousedown.background-inside', function() {
-                        d3.event.stopPropagation();
-                    });
+                    selection
+                        .on('mousedown.background-inside', function() {
+                            d3.event.stopPropagation();
+                        });
+
                     content
                         .style('display', 'block')
                         .style('right', '-300px')
                         .transition()
                         .duration(200)
                         .style('right', '0px');
+
+                    content.selectAll('.layer, .custom_layer')
+                        .call(setTooltips);
+
                 } else {
                     content
                         .style('display', 'block')
@@ -345,7 +353,9 @@ export function uiBackground(context) {
                         .on('end', function() {
                             d3.select(this).style('display', 'none');
                         });
-                    selection.on('mousedown.background-inside', null);
+
+                    selection
+                        .on('mousedown.background-inside', null);
                 }
             }
         }
