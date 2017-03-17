@@ -10,11 +10,15 @@ export function validationDisconnectedHighway() {
 
         return graph.childNodes(entity)
             .every(function(vertex) {
-                return graph.parentWays(vertex)
-                    .filter(function(parent) {
-                        return parent.tags.highway && parent !== entity;
-                    })
-                    .length === 0;
+                var parents = graph.parentWays(vertex);
+                if (parents.length === 1) {  // standalone vertex
+                    return true;
+                } else {                     // shared vertex
+                    return !vertex.tags.entrance &&
+                        parents.filter(function(parent) {
+                            return parent.tags.highway && parent !== entity;
+                        }).length === 0;
+                }
             });
     }
 
@@ -26,7 +30,7 @@ export function validationDisconnectedHighway() {
 
             if (isDisconnectedHighway(entity, graph)) {
                 warnings.push({
-                    id: 'missing_tag',
+                    id: 'disconnected_highway',
                     message: t('validations.disconnected_highway'),
                     tooltip: t('validations.disconnected_highway_tooltip'),
                     entity: entity

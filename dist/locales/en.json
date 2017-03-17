@@ -578,7 +578,7 @@
         },
         "validations": {
             "disconnected_highway": "Disconnected highway",
-            "disconnected_highway_tooltip": "Roads should be connected to other roads.",
+            "disconnected_highway_tooltip": "Roads should be connected to other roads or building entrances.",
             "untagged_point": "Untagged point",
             "untagged_line": "Untagged line",
             "untagged_area": "Untagged area",
