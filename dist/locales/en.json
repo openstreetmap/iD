@@ -1047,7 +1047,7 @@
                     "label": "Type"
                 },
                 "cuisine": {
-                    "label": "Cuisine"
+                    "label": "Cuisines"
                 },
                 "currency_multi": {
                     "label": "Currency Types"

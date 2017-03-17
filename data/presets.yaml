@@ -362,7 +362,7 @@ en:
         label: Type
       cuisine:
         # cuisine=*
-        label: Cuisine
+        label: Cuisines
       currency_multi:
         # 'currency:=*'
         label: Currency Types
