@@ -236,8 +236,9 @@ export function uiFieldCombo(field, context) {
         if (isMulti) {
             t[d.key] = undefined;
         } else if (isSemi) {
+            _.remove(multiData, function(md) { return md.key === d.key; });
             var arr = multiData.map(function(md) { return md.key; });
-            arr = _.compact(_.uniq(_.without(arr, d.key)));
+            arr = _.compact(_.uniq(arr));
             t[field.key] = arr.length ? arr.join(';') : undefined;
         }
         dispatch.call('change', this, t);
