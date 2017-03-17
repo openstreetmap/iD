@@ -570,7 +570,8 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "animal_boarding"
             ],
             "geometry": [
                 "point",
@@ -599,7 +600,8 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "animal_breeding"
             ],
             "geometry": [
                 "point",
@@ -630,7 +632,8 @@
                 "operator",
                 "address",
                 "building_area",
-                "opening_hours"
+                "opening_hours",
+                "animal_shelter"
             ],
             "geometry": [
                 "point",

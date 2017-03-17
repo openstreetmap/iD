@@ -882,6 +882,15 @@
                 "amenity": {
                     "label": "Type"
                 },
+                "animal_boarding": {
+                    "label": "For Animals"
+                },
+                "animal_breeding": {
+                    "label": "For Animals"
+                },
+                "animal_shelter": {
+                    "label": "For Animals"
+                },
                 "area/highway": {
                     "label": "Type"
                 },

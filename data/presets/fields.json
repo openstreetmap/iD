@@ -214,6 +214,21 @@
             "type": "typeCombo",
             "label": "Type"
         },
+        "animal_boarding": {
+            "key": "animal_boarding",
+            "type": "semiCombo",
+            "label": "For Animals"
+        },
+        "animal_breeding": {
+            "key": "animal_breeding",
+            "type": "semiCombo",
+            "label": "For Animals"
+        },
+        "animal_shelter": {
+            "key": "animal_shelter",
+            "type": "semiCombo",
+            "label": "For Animals"
+        },
         "area/highway": {
             "key": "area:highway",
             "type": "typeCombo",

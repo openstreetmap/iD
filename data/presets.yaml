@@ -170,6 +170,15 @@ en:
       amenity:
         # amenity=*
         label: Type
+      animal_boarding:
+        # animal_boarding=*
+        label: For Animals
+      animal_breeding:
+        # animal_breeding=*
+        label: For Animals
+      animal_shelter:
+        # animal_shelter=*
+        label: For Animals
       area/highway:
         # 'area:highway=*'
         label: Type
