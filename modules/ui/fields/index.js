@@ -22,6 +22,7 @@ import {
     uiFieldCombo,
     uiFieldMultiCombo,
     uiFieldNetworkCombo,
+    uiFieldSemiCombo,
     uiFieldTypeCombo
 } from './combo';
 
@@ -61,6 +62,7 @@ export var uiFields = {
     onewayCheck: uiFieldOnewayCheck,
     radio: uiFieldRadio,
     restrictions: uiFieldRestrictions,
+    semiCombo: uiFieldSemiCombo,
     tel: uiFieldTel,
     text: uiFieldText,
     textarea: uiFieldTextarea,

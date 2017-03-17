@@ -1129,7 +1129,7 @@ en:
         label: Source
       sport:
         # sport=*
-        label: Sport
+        label: Sports
       sport_ice:
         # sport=*
         label: Sport
