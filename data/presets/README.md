@@ -121,6 +121,7 @@ The complete JSON schema for fields can be found in [`data/presets/schema/field.
 
 **Radio Buttons**
 * `radio` - Multiple choice radio button field
+* `structureRadio` - Multiple choice structure radio button field, with extra input for bridge/tunnel level
 
 **Special**
 * `access` - Block of dropdowns for defining the `access=*` tags on a highway

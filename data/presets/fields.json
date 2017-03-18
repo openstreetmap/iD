@@ -1583,7 +1583,7 @@
             }
         },
         "structure": {
-            "type": "radio",
+            "type": "structureRadio",
             "keys": [
                 "bridge",
                 "tunnel",
