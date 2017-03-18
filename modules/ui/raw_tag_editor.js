@@ -158,13 +158,11 @@ export function uiRawTagEditor(context) {
             .attr('title', function(d) { return d.key; })
             .call(utilGetSetValue, function(d) { return d.key; })
             .property('disabled', isReadOnly);
-            // .classed('deemphasize', isReadOnly);
 
         items.selectAll('input.value')
             .attr('title', function(d) { return d.value; })
             .call(utilGetSetValue, function(d) { return d.value; })
             .property('disabled', isReadOnly);
-            // .classed('deemphasize', isReadOnly);
 
         items.selectAll('button.remove')
             .on('click', removeTag);

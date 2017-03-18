@@ -1,5 +1,8 @@
 import * as d3 from 'd3';
 import { t } from '../../util/locale';
+import { d3combobox } from '../../lib/d3.combobox.js';
+import { services } from '../../services/index';
+
 import {
     utilGetSetValue,
     utilNoAuto,
@@ -12,12 +15,20 @@ export { uiFieldRadio as uiFieldStructureRadio };
 
 export function uiFieldRadio(field) {
     var dispatch = d3.dispatch('change'),
+        taginfo = services.taginfo,
         placeholder = d3.select(null),
         wrap = d3.select(null),
         labels = d3.select(null),
         radios = d3.select(null),
         typeInput = d3.select(null),
         layerInput = d3.select(null);
+
+
+    function selectedKey() {
+        var selector = '.form-field-structure .toggle-list label.active input',
+            node = d3.selectAll(selector);
+        return node && node.datum();
+    }
 
 
     function radio(selection) {
@@ -112,9 +123,17 @@ export function uiFieldRadio(field) {
         typeItem = typeItem
             .merge(typeEnter);
 
-        typeInput = typeItem.selectAll('.structure-input-type')
-            .on('change', changeRadio)
-            .on('blur', changeRadio);
+        typeInput = typeItem.selectAll('.structure-input-type');
+
+        if (taginfo) {
+            typeInput
+                .call(d3combobox().fetcher(typeFetcher));
+        }
+
+        typeInput
+            .on('change', changeType)
+            .on('blur', changeType);
+
 
 
         // Layer
@@ -178,7 +197,44 @@ export function uiFieldRadio(field) {
     }
 
 
+    function typeFetcher(q, callback) {
+        taginfo.values({
+            debounce: (q !== ''),
+            key: selectedKey(),
+            query: q
+        }, function(err, data) {
+            if (err) return;
+            var comboData = data.map(function(d) {
+                // var k = d.value;
+                // var v = snake_case ? unsnake(k) : k;
+                // return {
+                //     key: k,
+                //     value: v,
+                //     title: d.title
+                // };
+                return {
+                    key: d.value,
+                    value: d.value,
+                    title: d.title
+                };
+            });
+            if (callback) callback(comboData);
+        });
+    }
+
+
+    function changeType() {
+        var key = selectedKey(),
+            t = {};
+
+        if (!key) return;
+        t[key] = utilGetSetValue(typeInput);
+        dispatch.call('change', this, t);
+    }
+
+
     function changeLayer() {
+        // note: don't use utilGetSetValue here because we want 0 to be falsy.
         var t = { layer: layerInput.node().value || undefined };
         dispatch.call('change', this, t);
     }
