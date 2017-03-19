@@ -21,13 +21,23 @@ export function uiFieldRadio(field) {
         labels = d3.select(null),
         radios = d3.select(null),
         typeInput = d3.select(null),
-        layerInput = d3.select(null);
+        layerInput = d3.select(null),
+        oldType = {},
+        entity;
 
 
     function selectedKey() {
         var selector = '.form-field-structure .toggle-list label.active input',
             node = d3.selectAll(selector);
-        return node && node.datum();
+        return !node.empty() && node.datum();
+    }
+
+    function snake(s) {
+        return s.replace(/\s+/g, '_');
+    }
+
+    function unsnake(s) {
+        return s.replace(/_+/g, ' ');
     }
 
 
@@ -76,13 +86,14 @@ export function uiFieldRadio(field) {
     }
 
 
-    function structureExtras(selection, tags) {
-        function checked(d) {
-            return !!(tags[d] && tags[d] !== 'no');
-        }
+    function structureExtras(selection) {
+        var selected = selectedKey();
 
         var extrasWrap = selection.selectAll('.structure-extras-wrap')
-            .data([0]);
+                .data(selected ? [0] : []);
+
+        extrasWrap.exit()
+            .remove();
 
         extrasWrap = extrasWrap.enter()
             .append('div')
@@ -135,9 +146,9 @@ export function uiFieldRadio(field) {
             .on('blur', changeType);
 
 
-
         // Layer
-        var showLayer = checked('bridge') || checked('tunnel');
+        var showLayer = (selected === 'bridge' || selected === 'tunnel');
+
         var layerItem = list.selectAll('.structure-layer-item')
             .data(showLayer ? [0] : []);
 
@@ -205,16 +216,9 @@ export function uiFieldRadio(field) {
         }, function(err, data) {
             if (err) return;
             var comboData = data.map(function(d) {
-                // var k = d.value;
-                // var v = snake_case ? unsnake(k) : k;
-                // return {
-                //     key: k,
-                //     value: v,
-                //     title: d.title
-                // };
                 return {
                     key: d.value,
-                    value: d.value,
+                    value: unsnake(d.value),
                     title: d.title
                 };
             });
@@ -228,7 +232,7 @@ export function uiFieldRadio(field) {
             t = {};
 
         if (!key) return;
-        t[key] = utilGetSetValue(typeInput);
+        t[key] = oldType[key] = snake(utilGetSetValue(typeInput)) || 'yes';
         dispatch.call('change', this, t);
     }
 
@@ -241,29 +245,29 @@ export function uiFieldRadio(field) {
 
 
     function changeRadio() {
-        function checked(d) {
-            return !!(t[d] && t[d] !== 'no');
-        }
+        var t = {},
+            activeKey;
 
-        var t = {};
         if (field.key) {
             t[field.key] = undefined;
         }
 
         radios.each(function(d) {
             var active = d3.select(this).property('checked');
+            if (active) activeKey = d;
+
             if (field.key) {
                 if (active) t[field.key] = d;
             } else {
-                var val = utilGetSetValue(typeInput) || 'yes';
+                var val = oldType[activeKey] || 'yes';
                 t[d] = active ? val : undefined;
             }
         });
 
         if (field.type === 'structureRadio') {
-            if (checked('bridge')) {
+            if (activeKey === 'bridge') {
                 t.layer = '1';
-            } else if (checked('tunnel')) {
+            } else if (activeKey === 'tunnel') {
                 t.layer = '-1';
             } else {
                 t.layer = undefined;
@@ -293,11 +297,12 @@ export function uiFieldRadio(field) {
         } else {
             placeholder.text(selection.attr('value'));
             typeVal = tags[selection.datum()];
+            oldType[selection.datum()] = typeVal;
         }
 
         if (field.type === 'structureRadio') {
-            wrap.call(structureExtras, tags);
-            utilGetSetValue(typeInput, typeVal || '');
+            wrap.call(structureExtras);
+            utilGetSetValue(typeInput, unsnake(typeVal) || '');
             utilGetSetValue(layerInput, tags.layer || '');
         }
     };
@@ -305,6 +310,14 @@ export function uiFieldRadio(field) {
 
     radio.focus = function() {
         radios.node().focus();
+    };
+
+
+    radio.entity = function(_) {
+        if (!arguments.length) return entity;
+        entity = _;
+        oldType = {};
+        return radio;
     };
 
 
