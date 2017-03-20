@@ -1,5 +1,5 @@
 {
-    "key": "phone",
+    "key": "contact:phone",
     "type": "tel",
     "icon": "telephone",
     "universal": true,
