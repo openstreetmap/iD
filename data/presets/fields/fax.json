@@ -1,5 +1,5 @@
 {
-    "key": "fax",
+    "key": "contact:fax",
     "type": "tel",
     "label": "Fax",
     "universal": true,
