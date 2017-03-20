@@ -324,6 +324,11 @@ en:
       "yes": "Yes"
       "no": "No"
       reverser: "Change Direction"
+    radio:
+      structure:
+        type: Type
+        default: Default
+        layer: Layer
     add: Add
     none: None
     node: Node

@@ -26,10 +26,23 @@ export function uiFieldRadio(field) {
         entity;
 
 
+
     function selectedKey() {
         var selector = '.form-field-structure .toggle-list label.active input',
             node = d3.selectAll(selector);
         return !node.empty() && node.datum();
+    }
+
+    // returns the tag value for a display value
+    function tagValue(dispVal) {
+        dispVal = snake(clean(dispVal || ''));
+        return dispVal.toLowerCase() || 'yes';
+    }
+
+    // returns the display value for a tag value
+    function displayValue(tagVal) {
+        tagVal = tagVal || '';
+        return tagVal.toLowerCase() === 'yes' ? '' : unsnake(tagVal);
     }
 
     function snake(s) {
@@ -38,6 +51,12 @@ export function uiFieldRadio(field) {
 
     function unsnake(s) {
         return s.replace(/_+/g, ' ');
+    }
+
+    function clean(s) {
+        return s.split(';')
+            .map(function(s) { return s.trim(); })
+            .join(';');
     }
 
 
@@ -120,7 +139,7 @@ export function uiFieldRadio(field) {
             .append('span')
             .attr('class', 'col6 label structure-label-type')
             .attr('for', 'structure-input-type')
-            .text('Type');
+            .text(t('inspector.radio.structure.type'));
 
         typeEnter
             .append('div')
@@ -128,7 +147,7 @@ export function uiFieldRadio(field) {
             .append('input')
             .attr('type', 'text')
             .attr('class', 'structure-input-type')
-            .attr('placeholder', t('inspector.unknown'))
+            .attr('placeholder', t('inspector.radio.structure.default'))
             .call(utilNoAuto);
 
         typeItem = typeItem
@@ -163,7 +182,7 @@ export function uiFieldRadio(field) {
             .append('span')
             .attr('class', 'col6 label structure-label-layer')
             .attr('for', 'structure-input-layer')
-            .text('Layer');
+            .text(t('inspector.radio.structure.layer'));
 
         layerEnter
             .append('div')
@@ -210,7 +229,7 @@ export function uiFieldRadio(field) {
 
     function typeFetcher(q, callback) {
         taginfo.values({
-            debounce: (q !== ''),
+            debounce: true,
             key: selectedKey(),
             query: q
         }, function(err, data) {
@@ -232,7 +251,9 @@ export function uiFieldRadio(field) {
             t = {};
 
         if (!key) return;
-        t[key] = oldType[key] = snake(utilGetSetValue(typeInput)) || 'yes';
+        var val = tagValue(utilGetSetValue(typeInput));
+        t[key] = val;
+        if (val !== 'no') oldType[key] = val;
         dispatch.call('change', this, t);
     }
 
@@ -283,12 +304,13 @@ export function uiFieldRadio(field) {
             if (field.key) {
                 return tags[field.key] === d;
             } else {
-                return !!(tags[d] && tags[d] !== 'no');
+                return !!(tags[d] && tags[d].toLowerCase() !== 'no');
             }
         }
 
         labels.classed('active', checked);
         radios.property('checked', checked);
+
         var selection = radios.filter(function() { return this.checked; });
         var typeVal = '';
 
@@ -296,13 +318,12 @@ export function uiFieldRadio(field) {
             placeholder.text(t('inspector.none'));
         } else {
             placeholder.text(selection.attr('value'));
-            typeVal = tags[selection.datum()];
-            oldType[selection.datum()] = typeVal;
+            typeVal = oldType[selection.datum()] = tags[selection.datum()];
         }
 
         if (field.type === 'structureRadio') {
             wrap.call(structureExtras);
-            utilGetSetValue(typeInput, unsnake(typeVal) || '');
+            utilGetSetValue(typeInput, displayValue(typeVal) || '');
             utilGetSetValue(layerInput, tags.layer || '');
         }
     };
