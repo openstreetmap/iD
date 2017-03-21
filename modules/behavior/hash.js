@@ -28,20 +28,17 @@ export function behaviorHash(context) {
             q = _.omit(utilStringQs(window.location.hash.substring(1)), 'comment'),
             newParams = {};
 
-        if (mode && mode.id === 'browse') {
-            delete q.id;
-        } else {
-            var selected = context.selectedIDs().filter(function(id) {
-                return !context.entity(id).isNew();
-            });
-            if (selected.length) {
-                newParams.id = selected.join(',');
-            }
+        delete q.id;
+        var selected = context.selectedIDs().filter(function(id) {
+            return !context.entity(id).isNew();
+        });
+        if (selected.length) {
+            newParams.id = selected.join(',');
         }
 
         newParams.map = zoom.toFixed(2) +
-                '/' + center[1].toFixed(precision) +
-                '/' + center[0].toFixed(precision);
+            '/' + center[1].toFixed(precision) +
+            '/' + center[0].toFixed(precision);
 
         return '#' + utilQsString(_.assign(q, newParams), true);
     };
