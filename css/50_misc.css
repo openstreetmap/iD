@@ -55,13 +55,13 @@ path.casing.tag-bridge {
 }
 
 path.shadow.tag-bridge {
-    stroke-width: 22;
+    stroke-width: 24;
 }
 path.casing.tag-bridge {
     stroke-width: 16;
 }
 .low-zoom path.shadow.tag-bridge {
-    stroke-width: 14;
+    stroke-width: 16;
 }
 .low-zoom path.casing.tag-bridge {
     stroke-width: 10;
@@ -78,7 +78,7 @@ path.shadow.tag-highway-steps.tag-bridge,
 path.shadow.tag-highway-footway.tag-bridge,
 path.shadow.tag-highway-cycleway.tag-bridge,
 path.shadow.tag-highway-bridleway.tag-bridge {
-    stroke-width: 17;
+    stroke-width: 18;
 }
 path.casing.line.tag-railway.tag-bridge,
 path.casing.tag-highway-living_street.tag-bridge,
