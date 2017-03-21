@@ -174,9 +174,7 @@ export function uiEntityEditor(context) {
 
         function cleanVal(k, v) {
             function keepSpaces(k) {
-                var whitelist = ['opening_hours', 'service_times', 'collection_times',
-                    'operating_times', 'smoking_hours', 'happy_hours'];
-                return _.some(whitelist, function(s) { return k.indexOf(s) !== -1; });
+                return k.match(/_hours|_times/) !== null;
             }
 
             var blacklist = ['description', 'note', 'fixme'];
@@ -188,7 +186,6 @@ export function uiEntityEditor(context) {
 
             // The code below is not intended to validate websites and emails.
             // It is only intended to prevent obvious copy-paste errors. (#2323)
-
             // clean website- and email-like tags
             if (k.indexOf('website') !== -1 ||
                 k.indexOf('email') !== -1 ||
