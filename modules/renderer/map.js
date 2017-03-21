@@ -42,7 +42,7 @@ export function rendererMap(context) {
         drawLayers = svgLayers(projection, context),
         drawPoints = svgPoints(projection, context),
         drawVertices = svgVertices(projection, context),
-        drawLines = svgLines(projection),
+        drawLines = svgLines(projection, context),
         drawAreas = svgAreas(projection, context),
         drawMidpoints = svgMidpoints(projection, context),
         drawLabels = svgLabels(projection, context),
