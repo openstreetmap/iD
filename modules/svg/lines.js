@@ -7,7 +7,7 @@ import {
     svgTagClasses
 } from './index';
 
-import { osmEntity, osmSimpleMultipolygonOuterMember } from '../osm/index';
+import { osmEntity, osmSimpleMultipolygonOuterMember } from '../osm';
 import { utilDetect } from '../util/detect';
 
 
@@ -30,25 +30,25 @@ export function svgLines(projection, context) {
     };
 
 
-    function waystack(a, b) {
-        var selected = context.selectedIDs(),
-            scoreA = selected.indexOf(a.id) !== -1 ? 20 : 0,
-            scoreB = selected.indexOf(b.id) !== -1 ? 20 : 0;
-
-        if (a.tags.highway) { scoreA -= highway_stack[a.tags.highway]; }
-        if (b.tags.highway) { scoreB -= highway_stack[b.tags.highway]; }
-        return scoreA - scoreB;
-    }
+    function drawLines(selection, graph, entities, filter) {
 
 
-    return function drawLines(selection, graph, entities, filter) {
+        function waystack(a, b) {
+            var selected = context.selectedIDs(),
+                scoreA = selected.indexOf(a.id) !== -1 ? 20 : 0,
+                scoreB = selected.indexOf(b.id) !== -1 ? 20 : 0;
+
+            if (a.tags.highway) { scoreA -= highway_stack[a.tags.highway]; }
+            if (b.tags.highway) { scoreB -= highway_stack[b.tags.highway]; }
+            return scoreA - scoreB;
+        }
 
 
-        function drawLineGroup(selection, klass, data) {
+        function drawLineGroup(selection, klass, isSelected) {
             var lines = selection
                 .selectAll('path')
                 .filter(filter)
-                .data(data, osmEntity.key);
+                .data(getPathData(isSelected), osmEntity.key);
 
             lines.exit()
                 .remove();
@@ -68,8 +68,24 @@ export function svgLines(projection, context) {
         }
 
 
-        var ways = [], pathdata = {}, onewaydata = {},
-            getPath = svgPath(projection, graph);
+        function getPathData(isSelected) {
+            return function() {
+                var layer = this.parentNode.__data__;
+                var data = pathdata[layer] || [];
+                return data.filter(function(d) {
+                    if (isSelected)
+                        return context.selectedIDs().indexOf(d.id) !== -1;
+                    else
+                        return context.selectedIDs().indexOf(d.id) === -1;
+                });
+            };
+        }
+
+
+        var getPath = svgPath(projection, graph),
+            ways = [],
+            pathdata = {},
+            onewaydata = {};
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i],
@@ -82,7 +98,6 @@ export function svgLines(projection, context) {
         }
 
         ways = ways.filter(getPath);
-
         pathdata = _.groupBy(ways, function(way) { return way.layer(); });
 
         _.forOwn(pathdata, function(v, k) {
@@ -92,6 +107,7 @@ export function svgLines(projection, context) {
                 .flatten()
                 .valueOf();
         });
+
 
         var layer = selection.selectAll('.layer-lines');
 
@@ -104,75 +120,27 @@ export function svgLines(projection, context) {
             .attr('class', function(d) { return 'layergroup layer' + String(d); })
             .merge(layergroup);
 
-
-        var linegroup = layergroup
+        layergroup
             .selectAll('g.linegroup')
-            .data(['shadow', 'casing', 'stroke', 'shadow2', 'casing2', 'stroke2']);
-
-        linegroup = linegroup.enter()
+            .data(['shadow', 'casing', 'stroke', 'shadow-highlighted', 'casing-highlighted', 'stroke-highlighted'])
+            .enter()
             .append('g')
-            .attr('class', function(d) { return 'linegroup line-' + d; })
-            .merge(linegroup);
+            .attr('class', function(d) { return 'linegroup line-' + d; });
 
 
         layergroup.selectAll('g.line-shadow')
-            .call(drawLineGroup, 'shadow', function() {
-                var data = pathdata[this.parentNode.__data__] || [];
-                return data.filter(function(d) { return context.selectedIDs().indexOf(d.id) === -1; });
-            });
+            .call(drawLineGroup, 'shadow', false);
         layergroup.selectAll('g.line-casing')
-            .call(drawLineGroup, 'casing', function() {
-                var data = pathdata[this.parentNode.__data__] || [];
-                return data.filter(function(d) { return context.selectedIDs().indexOf(d.id) === -1; });
-            });
+            .call(drawLineGroup, 'casing', false);
         layergroup.selectAll('g.line-stroke')
-            .call(drawLineGroup, 'stroke', function() {
-                var data = pathdata[this.parentNode.__data__] || [];
-                return data.filter(function(d) { return context.selectedIDs().indexOf(d.id) === -1; });
-            });
-        layergroup.selectAll('g.line-shadow2')
-            .call(drawLineGroup, 'shadow', function() {
-                var data = pathdata[this.parentNode.__data__] || [];
-                return data.filter(function(d) { return context.selectedIDs().indexOf(d.id) !== -1; });
-            });
-        layergroup.selectAll('g.line-casing2')
-            .call(drawLineGroup, 'casing', function() {
-                var data = pathdata[this.parentNode.__data__] || [];
-                return data.filter(function(d) { return context.selectedIDs().indexOf(d.id) !== -1; });
-            });
-        layergroup.selectAll('g.line-stroke2')
-            .call(drawLineGroup, 'stroke', function() {
-                var data = pathdata[this.parentNode.__data__] || [];
-                return data.filter(function(d) { return context.selectedIDs().indexOf(d.id) !== -1; });
-            });
+            .call(drawLineGroup, 'stroke', false);
 
-
-        // var lines = linegroup
-        //     .selectAll('path')
-        //     .filter(filter)
-        //     .data(
-        //         function() {
-        //             var data = pathdata[this.parentNode.__data__] || [];
-        //             return data.filter(function(d) { return context.selectedIDs().indexOf(d.id) === -1; });
-        //         },
-        //         osmEntity.key
-        //     );
-
-        // lines.exit()
-        //     .remove();
-
-        // // Optimization: call simple TagClasses only on enter selection. This
-        // // works because osmEntity.key is defined to include the entity v attribute.
-        // lines.enter()
-        //     .append('path')
-        //     .attr('class', function(d) { return 'way line ' + this.parentNode.__data__ + ' ' + d.id; })
-        //     .call(svgTagClasses())
-        //     .merge(lines)
-        //     .sort(waystack)
-        //     .attr('d', getPath)
-        //     .call(svgTagClasses().tags(svgRelationMemberTags(graph)));
-
-
+        layergroup.selectAll('g.line-shadow-highlighted')
+            .call(drawLineGroup, 'shadow', true);
+        layergroup.selectAll('g.line-casing-highlighted')
+            .call(drawLineGroup, 'casing', true);
+        layergroup.selectAll('g.line-stroke-highlighted')
+            .call(drawLineGroup, 'stroke', true);
 
 
         var onewaygroup = layergroup
@@ -183,7 +151,6 @@ export function svgLines(projection, context) {
             .append('g')
             .attr('class', 'onewaygroup')
             .merge(onewaygroup);
-
 
         var oneways = onewaygroup
             .selectAll('path')
@@ -206,5 +173,8 @@ export function svgLines(projection, context) {
         if (detected.ie) {
             oneways.each(function() { this.parentNode.insertBefore(this, this); });
         }
-    };
+    }
+
+
+    return drawLines;
 }

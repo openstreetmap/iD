@@ -477,8 +477,8 @@ export function modeSelect(context, selectedIDs) {
 
             var loc = extent.center();
             context.map().centerEase(loc);
-        } else {
-            context.map().pan([0,0]);
+        } else if (singular() && singular().type === 'way') {
+            context.map().pan([0,0]);  // full redraw, to adjust z-sorting #2914
         }
 
         timeout = window.setTimeout(function() {
