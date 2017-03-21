@@ -22,7 +22,7 @@ describe('iD.uiFieldWikipedia', function() {
             }
         };
 
-        sinon.stub(context, 'selectedIDs', function() { return [selectedId]; });
+        sinon.stub(context, 'selectedIDs').callsFake(function() { return [selectedId]; });
     });
 
     afterEach(function() {
