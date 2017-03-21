@@ -57,7 +57,9 @@ export function svgLines(projection, context) {
             // works because osmEntity.key is defined to include the entity v attribute.
             lines.enter()
                 .append('path')
-                .attr('class', function(d) { return 'way line ' + klass + ' ' + d.id; })
+                .attr('class', function(d) {
+                    return 'way line ' + klass + ' ' + d.id + (isSelected ? ' selected' : '');
+                })
                 .call(svgTagClasses())
                 .merge(lines)
                 .sort(waystack)
