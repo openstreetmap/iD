@@ -477,6 +477,8 @@ export function modeSelect(context, selectedIDs) {
 
             var loc = extent.center();
             context.map().centerEase(loc);
+        } else {
+            context.map().pan([0,0]);
         }
 
         timeout = window.setTimeout(function() {
