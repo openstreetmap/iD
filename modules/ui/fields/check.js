@@ -149,7 +149,11 @@ export function uiFieldCheck(field, context) {
 
     check.tags = function(tags) {
         checkImpliedYes();
-        value = tags[field.key];
+        value = tags[field.key] && tags[field.key].toLowerCase();
+
+        if (field.type === 'onewayCheck' && (value === '1' || value === '-1')) {
+            value = 'yes';
+        }
 
         input
             .property('indeterminate', field.type !== 'defaultCheck' && !value)
