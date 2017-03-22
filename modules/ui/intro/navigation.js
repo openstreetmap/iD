@@ -26,52 +26,63 @@ export function uiIntroNavigation(context, reveal) {
 
 
     chapter.enter = function() {
-        var rect = context.surfaceRect(),
-            map = {
-                left: rect.left + 10,
-                top: rect.top + 70,
-                width: rect.width - 70,
-                height: rect.height - 170
-            };
+        dragMap();
 
-        context.map().centerZoom([-85.63591, 41.94285], 19);
+        function dragMap() {
+            var dragged = false,
+                rect = context.surfaceRect(),
+                map = {
+                    left: rect.left + 10,
+                    top: rect.top + 70,
+                    width: rect.width - 70,
+                    height: rect.height - 170
+                };
 
-        reveal(map, t('intro.navigation.drag'));
-
-        context.map().on('move.intro', _.debounce(function() {
-            context.map().on('move.intro', null);
-            townhall();
-            context.on('enter.intro', inspectTownHall);
-        }, 400));
-
-
-        function townhall() {
-            var hall = [-85.63645945147184, 41.942986488012565];
-            var point = context.projection(hall);
-
-            if (point[0] < 0 || point[0] > rect.width ||
-                point[1] < 0 || point[1] > rect.height) {
-                context.map().center(hall);
-            }
-
-            var box = pointBox(hall, context);
-            reveal(box, t('intro.navigation.select'));
+            context.map().centerZoom([-85.63591, 41.94285], 19);
+            reveal(map, t('intro.navigation.drag'));
 
             context.map().on('move.intro', function() {
-                var box = pointBox(hall, context);
-                reveal(box, t('intro.navigation.select'), {duration: 0});
+                dragged = true;
             });
+
+            d3.select(window).on('mouseup.intro', function() {
+                if (!dragged) return;
+                d3.select(window).on('mouseup.intro', null, true);
+                context.map().on('move.intro', null);
+                clickTownHall();
+            }, true);
+        }
+
+
+        function clickTownHall() {
+            var hall = context.hasEntity('n2140018997');
+            if (!hall) chapter.restart();
+
+            context.on('enter.intro', inspectTownHall);
+            context.map().centerEase(hall.loc, 250);
+
+            set(function() {
+                var box = pointBox(hall.loc, context);
+                reveal(box, t('intro.navigation.select'));
+                context.map().on('move.intro', function() {
+                    var box = pointBox(hall.loc, context);
+                    reveal(box, t('intro.navigation.select'), { duration: 0 });
+                });
+            }, 260);
         }
 
 
         function inspectTownHall(mode) {
             if (mode.id !== 'select') return;
+
             context.on('enter.intro', null);
             context.map().on('move.intro', null);
+            context.on('exit.intro', streetSearch);
+
             set(function() {
                 reveal('.entity-editor-pane',
-                    t('intro.navigation.pane', { button: icon('#icon-close', 'pre-text') }));
-                context.on('exit.intro', streetSearch);
+                    t('intro.navigation.pane', { button: icon('#icon-close', 'pre-text') })
+                );
             }, 700);
         }
 
@@ -102,7 +113,8 @@ export function uiIntroNavigation(context, reveal) {
 
         function selectedStreet() {
             var springSt = [-85.63585099140167, 41.942506848938926];
-            context.map().center(springSt);
+
+            context.map().centerEase(springSt);
             context.on('exit.intro', function() {
                 dispatch.call('done');
             });
@@ -112,7 +124,8 @@ export function uiIntroNavigation(context, reveal) {
                     t('intro.navigation.chosen', {
                         name: t('intro.graph.spring_st'),
                         button: icon('#icon-close', 'pre-text')
-                    }));
+                    })
+                );
             }, 400);
         }
     };
@@ -120,12 +133,19 @@ export function uiIntroNavigation(context, reveal) {
 
     chapter.exit = function() {
         timeouts.forEach(window.clearTimeout);
+        d3.select(window).on('mouseup.intro', null, true);
         context.map().on('move.intro', null);
         context.on('enter.intro', null);
         context.on('exit.intro', null);
         d3.select('.search-header input')
             .on('keydown.intro', null)
             .on('keyup.intro', null);
+    };
+
+
+    chapter.restart = function() {
+        chapter.exit();
+        chapter.enter();
     };
 
 
