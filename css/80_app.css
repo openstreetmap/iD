@@ -181,7 +181,7 @@ input[type=email] {
     background-color: white;
     color: #333;
     border:1px solid #ccc;
-    padding:5px 25px 5px 10px;
+    padding:5px 20px 5px 10px;
     height:30px;
     width: 100%;
     border-radius:4px;
@@ -194,7 +194,7 @@ input[type=email] {
 [dir='rtl'] input[type=url],
 [dir='rtl'] input[type=tel],
 [dir='rtl'] input[type=email] {
-    padding:5px 10px 5px 25px;
+    padding:5px 10px 5px 20px;
 }
 
 textarea:focus,
@@ -1203,6 +1203,9 @@ button.save.has-count .count::before {
     margin-left: 10px;
     width: 50%;
 }
+[dir='rtl'] .more-fields input {
+    margin-left: 5px;
+}
 
 /* preset form access */
 
@@ -1223,6 +1226,10 @@ button.save.has-count .count::before {
     border-radius: 0;
     border-width: 0;
     border-left-width: 1px;
+}
+[dir='rtl'] .preset-input-access-wrap input {
+    border-left: 0;
+    border-right-width: 1px;
 }
 
 .preset-input-wrap li:last-child input {
@@ -1433,10 +1440,18 @@ input[type=number] {
     border-radius: 0 0 0 4px;
     width: 80%;
 }
+[dir='rtl'] #preset-input-maxspeed {
+    border-right: 1px solid #ccc;
+    border-radius: 0 0 4px 0;
+}
 
 .form-field .maxspeed-unit {
     border-radius: 0 0 4px 0;
     width: 20%;
+}
+[dir='rtl'] .form-field .maxspeed-unit {
+    border-right: 0;
+    border-radius: 0 0 0 4px;
 }
 
 /* Name + translate form */
@@ -1462,8 +1477,10 @@ input[type=number] {
     vertical-align: top;
 }
 [dir='rtl'] .form-field .button-input-action {
-  margin-left: 0;
-  margin-right: -10%;
+    margin-left: 0;
+    margin-right: -10%;
+    border-right-width: 1px;
+    border-radius: 0 0 0 4px;
 }
 
 .form-field .localized-wrap {
@@ -1508,6 +1525,10 @@ input[type=number] {
     border-right: 0;
     border-bottom: 0;
 }
+[dir='rtl'] .addr-row input {
+    border-right: 1px solid #ccc;
+    border-left: 0;
+}
 
 .addr-row:first-of-type input {
     border-top: 0;
@@ -1515,6 +1536,9 @@ input[type=number] {
 
 .addr-row input:first-of-type {
     border-left: 0;
+}
+[dir='rtl'] .addr-row input:first-of-type {
+    border-right: 0;
 }
 
 .addr-row input {
@@ -1524,9 +1548,15 @@ input[type=number] {
 .addr-row:last-of-type input:first-of-type {
     border-radius: 0 0 0 4px;
 }
+[dir='rtl'] .addr-row:last-of-type input:first-of-type {
+    border-radius: 0 0 4px 0;
+}
 
 .addr-row:last-of-type input:last-of-type {
     border-radius: 0 0 4px 0;
+}
+[dir='rtl'] .addr-row:last-of-type input:last-of-type {
+    border-radius: 0 0 0 4px;
 }
 
 /* Restrictions editor */
@@ -3709,10 +3739,6 @@ img.tile-removing {
 
 [dir='rtl'] .preset-list-button-wrap .preset-icon-24 {
   right: 18px;
-}
-
-[dir='rtl'] .form-field .maxspeed-unit {
-  border-radius: 0 0 0 4px;
 }
 
 [dir='rtl'] input[type="checkbox"], [dir='rtl'] input[type="radio"] {
