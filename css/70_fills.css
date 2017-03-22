@@ -10,15 +10,15 @@
 
 .low-zoom.fill-wireframe path.shadow,
 .fill-wireframe path.shadow {
-    stroke-width: 8 !important;
+    stroke-width: 12;
 }
 
 .fill-wireframe path.shadow.related:not(.selected),
 .fill-wireframe path.shadow.hover:not(.selected) {
-    stroke-opacity: 0.4 !important;
+    stroke-opacity: 0.4;
 }
 .fill-wireframe path.shadow.selected {
-    stroke-opacity: 0.6 !important;
+    stroke-opacity: 0.6;
 }
 
 .fill-wireframe .point,

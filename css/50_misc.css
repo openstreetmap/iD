@@ -48,7 +48,6 @@ path.stroke.tag-barrier {
 
 /* bridges */
 path.casing.tag-bridge {
-    stroke-width: 16;
     stroke-opacity: 0.6;
     stroke: #000;
     stroke-linecap: butt;
@@ -57,6 +56,29 @@ path.casing.tag-bridge {
 
 path.shadow.tag-bridge {
     stroke-width: 22;
+}
+path.casing.tag-bridge {
+    stroke-width: 16;
+}
+.low-zoom path.shadow.tag-bridge {
+    stroke-width: 14;
+}
+.low-zoom path.casing.tag-bridge {
+    stroke-width: 10;
+}
+
+path.shadow.line.tag-railway.tag-bridge,
+path.shadow.tag-highway-living_street.tag-bridge,
+path.shadow.tag-highway-path.tag-bridge,
+path.shadow.tag-highway-corridor.tag-bridge,
+path.shadow.line.tag-highway-pedestrian.tag-bridge,
+path.shadow.tag-highway-service.tag-bridge,
+path.shadow.tag-highway-track.tag-bridge,
+path.shadow.tag-highway-steps.tag-bridge,
+path.shadow.tag-highway-footway.tag-bridge,
+path.shadow.tag-highway-cycleway.tag-bridge,
+path.shadow.tag-highway-bridleway.tag-bridge {
+    stroke-width: 17;
 }
 path.casing.line.tag-railway.tag-bridge,
 path.casing.tag-highway-living_street.tag-bridge,
@@ -71,39 +93,6 @@ path.casing.tag-highway-cycleway.tag-bridge,
 path.casing.tag-highway-bridleway.tag-bridge {
     stroke-width: 10;
 }
-path.shadow.line.tag-railway.tag-bridge,
-path.shadow.tag-highway-living_street.tag-bridge,
-path.shadow.tag-highway-path.tag-bridge,
-path.shadow.tag-highway-corridor.tag-bridge,
-path.shadow.line.tag-highway-pedestrian.tag-bridge,
-path.shadow.tag-highway-service.tag-bridge,
-path.shadow.tag-highway-track.tag-bridge,
-path.shadow.tag-highway-steps.tag-bridge,
-path.shadow.tag-highway-footway.tag-bridge,
-path.shadow.tag-highway-cycleway.tag-bridge,
-path.shadow.tag-highway-bridleway.tag-bridge {
-    stroke-width: 17;
-}
-.low-zoom path.casing.tag-bridge {
-    stroke-width: 10;
-}
-.low-zoom path.shadow.tag-bridge {
-    stroke-width: 14;
-}
-
-.low-zoom path.casing.line.tag-railway.tag-bridge,
-.low-zoom path.casing.tag-highway-living_street.tag-bridge,
-.low-zoom path.casing.tag-highway-path.tag-bridge,
-.low-zoom path.casing.tag-highway-corridor.tag-bridge,
-.low-zoom path.casing.line.tag-highway-pedestrian.tag-bridge,
-.low-zoom path.casing.tag-highway-service.tag-bridge,
-.low-zoom path.casing.tag-highway-track.tag-bridge,
-.low-zoom path.casing.tag-highway-steps.tag-bridge,
-.low-zoom path.casing.tag-highway-footway.tag-bridge,
-.low-zoom path.casing.tag-highway-cycleway.tag-bridge,
-.low-zoom path.casing.tag-highway-bridleway.tag-bridge {
-    stroke-width: 6;
-}
 
 .low-zoom path.shadow.line.tag-railway.tag-bridge,
 .low-zoom path.shadow.tag-highway-living_street.tag-bridge,
@@ -116,7 +105,20 @@ path.shadow.tag-highway-bridleway.tag-bridge {
 .low-zoom path.shadow.tag-highway-footway.tag-bridge,
 .low-zoom path.shadow.tag-highway-cycleway.tag-bridge,
 .low-zoom path.shadow.tag-highway-bridleway.tag-bridge {
-    stroke-width: 13;
+    stroke-width: 14;
+}
+.low-zoom path.casing.line.tag-railway.tag-bridge,
+.low-zoom path.casing.tag-highway-living_street.tag-bridge,
+.low-zoom path.casing.tag-highway-path.tag-bridge,
+.low-zoom path.casing.tag-highway-corridor.tag-bridge,
+.low-zoom path.casing.line.tag-highway-pedestrian.tag-bridge,
+.low-zoom path.casing.tag-highway-service.tag-bridge,
+.low-zoom path.casing.tag-highway-track.tag-bridge,
+.low-zoom path.casing.tag-highway-steps.tag-bridge,
+.low-zoom path.casing.tag-highway-footway.tag-bridge,
+.low-zoom path.casing.tag-highway-cycleway.tag-bridge,
+.low-zoom path.casing.tag-highway-bridleway.tag-bridge {
+    stroke-width: 6;
 }
 
 
@@ -132,6 +134,10 @@ path.casing.tag-tunnel {
 
 
 /* embankments / cuttings */
+path.shadow.tag-embankment,
+path.shadow.tag-cutting {
+    stroke-width: 28;
+}
 path.casing.tag-embankment,
 path.casing.tag-cutting {
     stroke-opacity: 0.5;
@@ -141,19 +147,13 @@ path.casing.tag-cutting {
     stroke-linecap: butt;
 }
 
-path.shadow.tag-embankment,
-path.shadow.tag-cutting {
-    stroke-width: 28;
-}
-
-.low-zoom path.casing.tag-embankment,
-.low-zoom path.casing.tag-cutting {
-    stroke-width: 10;
-}
-
 .low-zoom path.shadow.tag-embankment,
 .low-zoom path.shadow.tag-cutting {
     stroke-width: 14;
+}
+.low-zoom path.casing.tag-embankment,
+.low-zoom path.casing.tag-cutting {
+    stroke-width: 10;
 }
 
 

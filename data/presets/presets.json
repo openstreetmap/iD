@@ -564,6 +564,98 @@
             "name": "Swimming Pool",
             "searchable": false
         },
+        "amenity/animal_boarding": {
+            "icon": "veterinary",
+            "fields": [
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "boarding",
+                "cat",
+                "dog",
+                "horse",
+                "kitten",
+                "pet boarding",
+                "pet care",
+                "pet hotel",
+                "puppy",
+                "reptile"
+            ],
+            "tags": {
+                "amenity": "animal_boarding"
+            },
+            "name": "Animal Boarding Facility"
+        },
+        "amenity/animal_breeding": {
+            "icon": "veterinary",
+            "fields": [
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "breeding",
+                "bull",
+                "cat",
+                "cow",
+                "dog",
+                "horse",
+                "husbandry",
+                "kitten",
+                "livestock",
+                "pet breeding",
+                "puppy",
+                "reptile"
+            ],
+            "tags": {
+                "amenity": "animal_breeding"
+            },
+            "name": "Animal Breeding Facility"
+        },
+        "amenity/animal_shelter": {
+            "icon": "veterinary",
+            "fields": [
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "adoption",
+                "aspca",
+                "cat",
+                "dog",
+                "horse",
+                "kitten",
+                "pet care",
+                "pet rescue",
+                "puppy",
+                "raptor",
+                "reptile",
+                "rescue",
+                "spca"
+            ],
+            "tags": {
+                "amenity": "animal_shelter"
+            },
+            "name": "Animal Shelter"
+        },
         "amenity/arts_centre": {
             "icon": "theatre",
             "fields": [
@@ -1200,6 +1292,23 @@
                 "potable"
             ],
             "name": "Drinking Water"
+        },
+        "amenity/driving_school": {
+            "icon": "car",
+            "fields": [
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "amenity": "driving_school"
+            },
+            "name": "Driving School"
         },
         "amenity/embassy": {
             "icon": "embassy",
@@ -2776,6 +2885,18 @@
             },
             "name": "RV Drinking Water"
         },
+        "amenity/watering_place": {
+            "icon": "drinking-water",
+            "geometry": [
+                "area",
+                "vertex",
+                "point"
+            ],
+            "tags": {
+                "amenity": "watering_place"
+            },
+            "name": "Animal Watering Place"
+        },
         "area": {
             "name": "Area",
             "tags": {
@@ -3659,6 +3780,27 @@
                 "camp_site": "camp_pitch"
             },
             "name": "Camp Pitch"
+        },
+        "club": {
+            "icon": "heart",
+            "fields": [
+                "club",
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "club": "*"
+            },
+            "terms": [
+                "social"
+            ],
+            "name": "Club"
         },
         "craft": {
             "icon": "poi-tool",
@@ -7253,6 +7395,30 @@
             "terms": [],
             "name": "Cricket Field"
         },
+        "leisure/pitch/equestrian": {
+            "icon": "horse-riding",
+            "fields": [
+                "surface",
+                "lit",
+                "building"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "pitch",
+                "sport": "equestrian"
+            },
+            "terms": [
+                "dressage",
+                "equestrian",
+                "horse",
+                "horseback",
+                "riding"
+            ],
+            "name": "Riding Arena"
+        },
         "leisure/pitch/rugby_league": {
             "icon": "america-football",
             "fields": [
@@ -9028,6 +9194,25 @@
             ],
             "name": "Neighborhood"
         },
+        "place/quarter": {
+            "icon": "triangle-stroked",
+            "fields": [
+                "population"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "place": "quarter"
+            },
+            "terms": [
+                "boro",
+                "borough",
+                "quarter"
+            ],
+            "name": "Sub-Borough / Quarter"
+        },
         "place/square": {
             "icon": "poi-foot",
             "geometry": [
@@ -9052,10 +9237,11 @@
                 "place": "suburb"
             },
             "terms": [
-                "Boro",
-                "Quarter"
+                "boro",
+                "borough",
+                "quarter"
             ],
-            "name": "Borough"
+            "name": "Borough / Suburb"
         },
         "place/town": {
             "icon": "town",
@@ -10648,6 +10834,31 @@
             },
             "name": "Garden Center"
         },
+        "shop/gas": {
+            "icon": "shop",
+            "fields": [
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "cng",
+                "lpg",
+                "natural gas",
+                "propane",
+                "refill",
+                "tank"
+            ],
+            "tags": {
+                "shop": "gas"
+            },
+            "name": "Bottled Gas Shop"
+        },
         "shop/gift": {
             "icon": "gift",
             "fields": [
@@ -11248,6 +11459,23 @@
             },
             "name": "Pawn Shop"
         },
+        "shop/perfumery": {
+            "icon": "shop",
+            "fields": [
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "shop": "perfumery"
+            },
+            "name": "Perfume Store"
+        },
         "shop/pet": {
             "icon": "dog-park",
             "fields": [
@@ -11261,9 +11489,13 @@
                 "area"
             ],
             "terms": [
+                "animal",
                 "cat",
                 "dog",
-                "fish"
+                "fish",
+                "kitten",
+                "puppy",
+                "reptile"
             ],
             "tags": {
                 "shop": "pet"

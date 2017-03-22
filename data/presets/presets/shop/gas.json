@@ -1,5 +1,5 @@
 {
-    "icon": "dog-park",
+    "icon": "shop",
     "fields": [
         "operator",
         "address",
@@ -11,16 +11,15 @@
         "area"
     ],
     "terms": [
-        "animal",
-        "cat",
-        "dog",
-        "fish",
-        "kitten",
-        "puppy",
-        "reptile"
+        "cng",
+        "lpg",
+        "natural gas",
+        "propane",
+        "refill",
+        "tank"
     ],
     "tags": {
-        "shop": "pet"
+        "shop": "gas"
     },
-    "name": "Pet Store"
+    "name": "Bottled Gas Shop"
 }

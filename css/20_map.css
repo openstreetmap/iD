@@ -32,7 +32,7 @@ g.point .stroke {
 g.point .shadow {
     fill: none;
     stroke: #f6634f;
-    stroke-width: 8;
+    stroke-width: 16;
     stroke-opacity: 0;
 }
 
@@ -74,6 +74,7 @@ g.midpoint .fill {
 
 g.vertex .shadow,
 g.midpoint .shadow {
+    stroke-width: 16;
     fill: #f6634f;
     fill-opacity: 0;
 }
@@ -141,7 +142,7 @@ path.stroke {
 
 path.shadow {
     stroke: #f6634f;
-    stroke-width: 10;
+    stroke-width: 16;
     stroke-opacity: 0;
 }
 
