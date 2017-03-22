@@ -191,6 +191,7 @@ export function uiFieldCombo(field, context) {
 
     function setPlaceholder(d) {
         var ph;
+
         if (isMulti || isSemi) {
             ph = field.placeholder() || t('inspector.add');
         } else {
@@ -199,8 +200,12 @@ export function uiFieldCombo(field, context) {
             ph = field.placeholder() || placeholders.slice(0, 3).join(', ');
         }
 
+        if (ph.match(/(…|\.\.\.)$/) === null) {
+            ph += '…';
+        }
+
         container.selectAll('input')
-            .attr('placeholder', ph + '…');
+            .attr('placeholder', ph);
     }
 
 
