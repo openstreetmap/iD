@@ -7,6 +7,7 @@ export { uiCommit } from './commit';
 export { uiConfirm } from './confirm';
 export { uiConflicts } from './conflicts';
 export { uiContributors } from './contributors';
+export { uiCurtain } from './curtain';
 export { uiDisclosure } from './disclosure';
 export { uiEditMenu } from './edit_menu';
 export { uiEntityEditor } from './entity_editor';

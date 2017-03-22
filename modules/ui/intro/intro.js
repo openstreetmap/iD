@@ -1,10 +1,10 @@
 import * as d3 from 'd3';
 import { t } from '../../util/locale';
 import { coreGraph } from '../../core/graph';
-import { modeBrowse } from '../../modes/index';
+import { modeBrowse } from '../../modes/browse';
 import { osmEntity } from '../../osm/entity';
-import { d3curtain } from '../../util/curtain';
 import { dataIntroGraph } from '../../../data/intro_graph.json';
+import { uiCurtain } from '../curtain';
 
 import { uiIntroNavigation } from './navigation';
 import { uiIntroPoint } from './point';
@@ -104,24 +104,13 @@ export function uiIntro(context) {
         // Load semi-real data used in intro
         context.connection().toggle(false).reset();
         context.history().reset();
-
         context.history().merge(d3.values(coreGraph().load(introGraph).entities));
         context.background().bing();
 
         d3.selectAll('#map .layer-background').style('opacity', 1);
 
-        var curtain = d3curtain();
+        var curtain = uiCurtain();
         selection.call(curtain);
-
-
-        function reveal(box, text, options) {
-            options = options || {};
-            curtain.reveal(box,
-                text || '',
-                options.tooltipClass || '',
-                options.duration
-            );
-        }
 
         var steps = ['navigation', 'point', 'area', 'line', 'startEditing'].map(function(step, i) {
             var s = sampleIntros[step](context, reveal)
@@ -173,6 +162,16 @@ export function uiIntro(context) {
             .text(' - ' + t('intro.done'));
 
         enter(steps[0]);
+
+
+        function reveal(box, text, options) {
+            options = options || {};
+            curtain.reveal(box,
+                text || '',
+                options.tooltipClass || '',
+                options.duration
+            );
+        }
 
 
         function enter(newStep) {

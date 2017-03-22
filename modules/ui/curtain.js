@@ -1,14 +1,12 @@
 import * as d3 from 'd3';
-import { utilGetDimensions } from './dimensions';
-import { utilRebind } from './rebind';
-import { uiToggle } from '../ui/toggle';
+import { utilGetDimensions } from '../util/dimensions';
+import { uiToggle } from './toggle';
 
 
 // Tooltips and svg mask used to highlight certain features
-export function d3curtain() {
+export function uiCurtain() {
 
-    var dispatch = d3.dispatch(),
-        surface = d3.select(null),
+    var surface = d3.select(null),
         tooltip = d3.select(null),
         darkness = d3.select(null);
 
@@ -145,8 +143,9 @@ export function d3curtain() {
     curtain.remove = function() {
         surface.remove();
         tooltip.remove();
+        d3.select(window).on('resize.curtain', null);
     };
 
 
-    return utilRebind(curtain, dispatch, 'on');
+    return curtain;
 }
