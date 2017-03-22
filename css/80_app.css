@@ -1485,30 +1485,6 @@ input[type=number] {
     content: none;
 }
 
-.form-field .wiki-lang {
-    border-radius: 0;
-}
-
-.form-field .wiki-title {
-    padding-right: 10%;
-}
-
-.form-field .wiki-title ~ .combobox-caret {
-    margin-left: -18%;
-    margin-right: 9%;
-}
-
-.form-field .wiki-link {
-    float: right;
-    background: #fafafa;
-    padding: 5px;
-    text-align: center;
-}
-
-.form-field .wiki-link:hover {
-    background: #f1f1f1;
-}
-
 #preset-input-maxspeed {
     border-right: none;
     border-radius: 0 0 0 4px;
@@ -1528,13 +1504,32 @@ input[type=number] {
     border-radius: 0 0 0 4px;
 }
 
-/* Name + translate form */
+/* Wikipedia field */
+.form-field .wiki-lang {
+    border-radius: 0;
+}
+.form-field .wiki-title {
+    padding-right: 20%;
+}
+[dir='rtl'] .form-field .wiki-title {
+    padding-left: 20%;
+    padding-right: 10px;
+}
 
+.form-field .wiki-title ~ .combobox-caret {
+    right: 10%;
+}
+[dir='rtl'] .form-field .wiki-title ~ .combobox-caret {
+    right: auto;
+    left: 10%;
+}
+
+/* Localized field */
 .form-field .localized-main {
-    padding-right: 40px;
+    padding-right: 12%;
 }
 [dir='rtl'] .form-field .localized-main {
-    padding-left: 40px;
+    padding-left: 12%;
     padding-right: 10px;
 }
 
