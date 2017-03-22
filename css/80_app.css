@@ -1442,7 +1442,11 @@ input[type=number] {
 /* Name + translate form */
 
 .form-field .localized-main {
-    padding-right: 10%;
+    padding-right: 40px;
+}
+[dir='rtl'] .form-field .localized-main {
+    padding-left: 40px;
+    padding-right: 10px;
 }
 
 .form-field .button-input-action {
@@ -1456,6 +1460,10 @@ input[type=number] {
     border-radius: 0 0 4px 0;
     height: 30px;
     vertical-align: top;
+}
+[dir='rtl'] .form-field .button-input-action {
+  margin-left: 0;
+  margin-right: -10%;
 }
 
 .form-field .localized-wrap {
@@ -3655,19 +3663,9 @@ img.tile-removing {
   right: auto;
 }
 
-[dir='rtl'] .form-field .localized-main {
-  padding-left: 10%;
-  padding-right: 10px;
-}
-
 [dir='rtl'] .combobox-caret {
   margin-left: 0;
   margin-right: -30px;
-}
-
-[dir='rtl'] .form-field .button-input-action {
-  margin-left: 0;
-  margin-right: -10%;
 }
 
 [dir='rtl'] .icon.pre-text {
