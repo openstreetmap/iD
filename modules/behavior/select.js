@@ -74,7 +74,7 @@ export function behaviorSelect(context) {
             mode = context.mode();
 
 
-        if (!datum || datum.type === 'midpoint') {
+        if (datum && datum.type === 'midpoint') {
             // do nothing..
 
         } else if (!(datum instanceof osmEntity)) {
