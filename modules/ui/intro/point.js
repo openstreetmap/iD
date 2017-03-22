@@ -9,7 +9,7 @@ export function uiIntroPoint(context, reveal) {
     var dispatch = d3.dispatch('done'),
         timeouts = [];
 
-    var step = {
+    var chapter = {
         title: 'intro.points.title'
     };
 
@@ -25,7 +25,7 @@ export function uiIntroPoint(context, reveal) {
     }
 
 
-    step.enter = function() {
+    chapter.enter = function() {
         context.map().centerZoom([-85.63279, 41.94394], 19);
         reveal('button.add-point',
             t('intro.points.add', { button: icon('#icon-point', 'pre-text') }),
@@ -165,7 +165,7 @@ export function uiIntroPoint(context, reveal) {
     };
 
 
-    step.exit = function() {
+    chapter.exit = function() {
         timeouts.forEach(window.clearTimeout);
         context.on('exit.intro', null);
         context.on('enter.intro', null);
@@ -176,5 +176,5 @@ export function uiIntroPoint(context, reveal) {
             .on('keydown.intro', null);
     };
 
-    return utilRebind(step, dispatch, 'on');
+    return utilRebind(chapter, dispatch, 'on');
 }

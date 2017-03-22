@@ -10,7 +10,7 @@ export function uiIntroStartEditing(context, reveal) {
         modalSelection,
         timeouts = [];
 
-    var step = {
+    var chapter = {
         title: 'intro.startediting.title'
     };
 
@@ -20,7 +20,7 @@ export function uiIntroStartEditing(context, reveal) {
     }
 
 
-    step.enter = function() {
+    chapter.enter = function() {
         reveal('.map-control.help-control',
             t('intro.startediting.help', { button: icon('#icon-help', 'pre-text') }));
 
@@ -61,11 +61,11 @@ export function uiIntroStartEditing(context, reveal) {
     };
 
 
-    step.exit = function() {
+    chapter.exit = function() {
         if (modalSelection) { modalSelection.remove(); }
         timeouts.forEach(window.clearTimeout);
     };
 
 
-    return utilRebind(step, dispatch, 'on');
+    return utilRebind(chapter, dispatch, 'on');
 }

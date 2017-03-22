@@ -9,7 +9,7 @@ export function uiIntroNavigation(context, reveal) {
     var dispatch = d3.dispatch('done'),
         timeouts = [];
 
-    var step = {
+    var chapter = {
         title: 'intro.navigation.title'
     };
 
@@ -25,7 +25,7 @@ export function uiIntroNavigation(context, reveal) {
     }
 
 
-    step.enter = function() {
+    chapter.enter = function() {
         var rect = context.surfaceRect(),
             map = {
                 left: rect.left + 10,
@@ -118,7 +118,7 @@ export function uiIntroNavigation(context, reveal) {
     };
 
 
-    step.exit = function() {
+    chapter.exit = function() {
         timeouts.forEach(window.clearTimeout);
         context.map().on('move.intro', null);
         context.on('enter.intro', null);
@@ -129,5 +129,5 @@ export function uiIntroNavigation(context, reveal) {
     };
 
 
-    return utilRebind(step, dispatch, 'on');
+    return utilRebind(chapter, dispatch, 'on');
 }

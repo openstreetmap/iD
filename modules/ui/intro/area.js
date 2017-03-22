@@ -9,12 +9,12 @@ export function uiIntroArea(context, reveal) {
     var dispatch = d3.dispatch('done'),
         timeout;
 
-    var step = {
+    var chapter = {
         title: 'intro.areas.title'
     };
 
 
-    step.enter = function() {
+    chapter.enter = function() {
         var playground = [-85.63552, 41.94159],
             corner = [-85.63565411045074, 41.9417715536927];
         context.map().centerZoom(playground, 19);
@@ -91,7 +91,7 @@ export function uiIntroArea(context, reveal) {
     };
 
 
-    step.exit = function() {
+    chapter.exit = function() {
         window.clearTimeout(timeout);
         context.on('enter.intro', null);
         context.on('exit.intro', null);
@@ -101,5 +101,5 @@ export function uiIntroArea(context, reveal) {
     };
 
 
-    return utilRebind(step, dispatch, 'on');
+    return utilRebind(chapter, dispatch, 'on');
 }

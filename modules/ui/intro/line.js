@@ -18,7 +18,7 @@ export function uiIntroLine(context, reveal) {
         drawId = null;
 
 
-    var step = {
+    var chapter = {
         title: 'intro.lines.title'
     };
 
@@ -34,7 +34,7 @@ export function uiIntroLine(context, reveal) {
     }
 
 
-    step.enter = function() {
+    chapter.enter = function() {
         context.map().centerZoom(start, 18);
         reveal('button.add-line',
             t('intro.lines.add', { button: icon('#icon-line', 'pre-text') }),
@@ -86,7 +86,7 @@ export function uiIntroLine(context, reveal) {
             reveal(pointBox, t('intro.lines.restart', {name: t('intro.graph.flower_st')}));
             d3.select(window).on('mousedown.intro', eventCancel, true);
 
-            timeout(step.restart, 3000);
+            timeout(chapter.restart, 3000);
         }
 
 
@@ -95,7 +95,7 @@ export function uiIntroLine(context, reveal) {
             function joinedTargetWay() {
                 var drawEntity = drawId && context.hasEntity(drawId);
                 if (!drawEntity) {
-                    step.restart();
+                    chapter.restart();
                     return false;
                 }
 
@@ -175,13 +175,13 @@ export function uiIntroLine(context, reveal) {
     };
 
 
-    step.restart = function() {
-        step.exit();
-        step.enter();
+    chapter.restart = function() {
+        chapter.exit();
+        chapter.enter();
     };
 
 
-    step.exit = function() {
+    chapter.exit = function() {
         d3.select(window).on('mousedown.intro', null, true);
         d3.select('#curtain').style('pointer-events', 'none');
         timeouts.forEach(window.clearTimeout);
@@ -195,5 +195,5 @@ export function uiIntroLine(context, reveal) {
         }
     };
 
-    return utilRebind(step, dispatch, 'on');
+    return utilRebind(chapter, dispatch, 'on');
 }

@@ -3609,20 +3609,20 @@ img.tile-removing {
     z-index: 1001;
 }
 
-.intro-nav-wrap button.step {
+.intro-nav-wrap button.chapter {
     width: 20%;
 }
 
-.intro-nav-wrap button.step.finished {
+.intro-nav-wrap button.chapter.finished {
     background: #8cd05f;
 }
 
-.intro-nav-wrap button.step .status {
+.intro-nav-wrap button.chapter .status {
     margin-left: 3px;
     display: none;
 }
 
-.intro-nav-wrap button.step.finished .status {
+.intro-nav-wrap button.chapter.finished .status {
     display: inline-block;
 }
 

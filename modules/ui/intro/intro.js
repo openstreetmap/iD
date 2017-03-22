@@ -23,7 +23,7 @@ var sampleIntros = {
 
 
 export function uiIntro(context) {
-    var step;
+    var chapter;
 
     function localizedName(id) {
         var features = {
@@ -112,18 +112,18 @@ export function uiIntro(context) {
         var curtain = uiCurtain();
         selection.call(curtain);
 
-        var steps = ['navigation', 'point', 'area', 'line', 'startEditing'].map(function(step, i) {
-            var s = sampleIntros[step](context, reveal)
+        var chapters = ['navigation', 'point', 'area', 'line', 'startEditing'].map(function(chapter, i) {
+            var s = sampleIntros[chapter](context, reveal)
                 .on('done', function() {
                     entered.filter(function(d) {
                         return d.title === s.title;
                     }).classed('finished', true);
-                    enter(steps[i + 1]);
+                    enter(chapters[i + 1]);
                 });
             return s;
         });
 
-        steps[steps.length - 1].on('startEditing', function() {
+        chapters[chapters.length - 1].on('startEditing', function() {
             curtain.remove();
             navwrap.remove();
             d3.selectAll('#map .layer-background').style('opacity', opacity);
@@ -143,13 +143,13 @@ export function uiIntro(context) {
         var buttonwrap = navwrap
             .append('div')
             .attr('class', 'joined')
-            .selectAll('button.step');
+            .selectAll('button.chapter');
 
         var entered = buttonwrap
-            .data(steps)
+            .data(chapters)
             .enter()
             .append('button')
-            .attr('class', 'step')
+            .attr('class', 'chapter')
             .on('click', enter);
 
         entered
@@ -161,7 +161,7 @@ export function uiIntro(context) {
             .attr('class', 'status')
             .text(' - ' + t('intro.done'));
 
-        enter(steps[0]);
+        enter(chapters[0]);
 
 
         function reveal(box, text, options) {
@@ -174,16 +174,16 @@ export function uiIntro(context) {
         }
 
 
-        function enter(newStep) {
-            if (step) { step.exit(); }
+        function enter(newChapter) {
+            if (chapter) { chapter.exit(); }
 
             context.enter(modeBrowse(context));
 
-            step = newStep;
-            step.enter();
+            chapter = newChapter;
+            chapter.enter();
 
             entered.classed('active', function(d) {
-                return d.title === step.title;
+                return d.title === chapter.title;
             });
         }
 
