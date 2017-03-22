@@ -76,6 +76,9 @@ body {
     opacity: .5;
     float: right;
 }
+[dir='rtl'] .spinner {
+    float: left;
+}
 
 .spinner img {
     height: 40px;
@@ -84,6 +87,17 @@ body {
     margin-right: 10px;
     background: black;
 }
+[dir='rtl'] .spinner img {
+    margin-left: 10px;
+    margin-right: auto;
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
+
 
 div, textarea, label, input, form, span, ul, li, ol, a, button, h1, h2, h3, h4, h5, p, img {
     -moz-box-sizing: border-box;
@@ -165,7 +179,7 @@ a:hover {
 
 textarea  {
     resize: vertical;
-    font:normal 12px/20px -apple-system, BlinkMacSystemFont,
+    font:normal 12px/20px "-apple-system", BlinkMacSystemFont,
         "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
         "Fira Sans", "Droid Sans", "Helvetica Neue", "Arial",
         sans-serif;
@@ -412,6 +426,9 @@ button.minor {
     width: 10%;
     border-radius: 0;
     background-color: #fafafa;
+}
+[dir='rtl'] button.minor {
+    right: auto;
 }
 
 button.minor .icon {
@@ -835,6 +852,24 @@ button.save.has-count .count::before {
     top: 10px;
 }
 
+.preset-icon-fill-vertex {
+    height: 40px;
+    width: 40px;
+    margin: auto;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    border: 1.5px solid #333;
+    border-radius: 20px;
+    background-color: #efefef;
+}
+
+[dir='rtl'] .preset-icon-fill-vertex,
+[dir='rtl'] .preset-icon-fill-area {
+  left: auto;
+  right: 10px;
+}
+
 .preset-icon-frame {
     position: absolute;
     top: 7px;
@@ -842,6 +877,10 @@ button.save.has-count .count::before {
     height: 42px;
     width: 42px;
     margin: auto;
+}
+[dir='rtl'] .preset-icon-frame {
+  left: auto;
+  right: 7px;
 }
 
 .preset-icon-frame .icon {
@@ -1023,6 +1062,9 @@ button.save.has-count .count::before {
     border-radius: 4px 4px 0 0;
     overflow: hidden;
 }
+[dir='rtl'] .form-label {
+    padding: 5px 10px 5px 0;
+}
 
 .form-label-button-wrap {
     position: absolute;
@@ -1032,6 +1074,9 @@ button.save.has-count .count::before {
     width: 100%;
     background: transparent;
     text-align: right;
+}
+[dir='rtl'] .form-label-button-wrap {
+    text-align: left;
 }
 
 .form-label-button-wrap .tag-reference-button {
@@ -1048,6 +1093,11 @@ button.save.has-count .count::before {
     height: 100%;
     border-radius: 0;
     background: #f6f6f6;
+}
+[dir='rtl'] .form-label button {
+    border-left: none;
+    border-right: 1px solid #CCC;
+    border-radius: 4px 0 0 0;
 }
 .form-label button:hover {
     background: #f1f1f1;
@@ -1145,13 +1195,25 @@ button.save.has-count .count::before {
 .inspector-hover .tag-row:first-child input.value {
     border-top-right-radius: 4px;
 }
+[dir='rtl'] .inspector-hover .tag-row:first-child input.value {
+    border-top-right-radius: 0;
+    border-top-left-radius: 4px;
+}
 
 .inspector-hover .tag-row:last-child input.value {
     border-bottom-right-radius: 4px;
 }
+[dir='rtl'] .inspector-hover .tag-row:last-child input.value {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 4px;
+}
 
 .inspector-hover .tag-row:last-child input.key {
     border-bottom-left-radius: 4px;
+}
+[dir='rtl'] .inspector-hover .tag-row:last-child input.key {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 4px;
 }
 
 .inspector-hover .more-fields {
@@ -1214,6 +1276,10 @@ button.save.has-count .count::before {
     padding: 5px 10px;
 }
 
+[dir='rtl'] .more-fields label {
+    padding: 5px 0 5px 10px;
+}
+
 
 /* preset form access */
 /* preset form cycleway */
@@ -1236,8 +1302,11 @@ button.save.has-count .count::before {
     border-width: 0;
     border-left-width: 1px;
 }
+[dir='rtl'] .structure-input-type-wrap input,
+[dir='rtl'] .structure-input-layer-wrap input,
+[dir='rtl'] .preset-input-cycleway-wrap input,
 [dir='rtl'] .preset-input-access-wrap input {
-    border-left: 0;
+    border-left-width: 0;
     border-right-width: 1px;
 }
 
@@ -1669,12 +1738,20 @@ div.combobox {
     border-bottom: 1px solid #CCC;
     border-left: 1px solid #CCC;
 }
+[dir='rtl'] .tag-row input {
+    border-left: none;
+    border-right: 1px solid #CCC;
+}
 
 .tag-row .key-wrap,
 .tag-row .input-wrap-position {
     width: 40%;
     float: left;
     height: 30px;
+}
+[dir='rtl'] .tag-row .key-wrap,
+[dir='rtl'] .tag-row .input-wrap-position {
+    float: right;
 }
 
 .tag-row input.key {
@@ -1685,10 +1762,17 @@ div.combobox {
 .tag-row input.value {
     border-right: 1px solid #CCC;
 }
+[dir='rtl'] .tag-row input.value {
+    border-left: 1px solid #CCC;
+}
 
 .tag-row:first-child input.key {
     border-top: 1px solid #CCC;
     border-top-left-radius: 4px;
+}
+[dir='rtl'] .tag-row:first-child input.key {
+    border-top-left-radius: 0;
+    border-top-right-radius: 4px;
 }
 
 .tag-row:first-child input.value {
@@ -1702,6 +1786,11 @@ div.combobox {
     border: 1px solid #CCC;
     border-top-width: 0;
     border-left-width: 0;
+}
+[dir='rtl'] .tag-row button {
+    left: 10%;
+    border-left-width: 1px;
+    border-right-width: 0;
 }
 
 .tag-row button:hover {
@@ -1719,9 +1808,17 @@ div.combobox {
 .tag-row:first-child .tag-reference-button {
     border-top-right-radius: 4px;
 }
+[dir='rtl'] .tag-row:first-child .tag-reference-button {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 0;
+}
 
 .tag-row:last-child .tag-reference-button {
     border-bottom-right-radius: 4px;
+}
+[dir='rtl'] .tag-row:last-child .tag-reference-button {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 0;
 }
 
 .tag-row .tag-reference-button {
@@ -1730,6 +1827,13 @@ div.combobox {
     width: 10%;
     top: 0;
     background: #fafafa;
+}
+[dir='rtl'] .tag-row .tag-reference-button {
+    left: auto;
+    right: auto;
+    margin-right: 35px;
+    border-left-width: 1px;
+    border-right-width: 0;
 }
 
 /* Adding form fields to tag editor */
@@ -3650,11 +3754,6 @@ img.tile-removing {
   right: auto;
 }
 
-[dir='rtl'] .preset-icon-fill-area {
-  left: auto;
-  right: 10px;
-}
-
 [dir='rtl'] .map-data-control .layer-list button, [dir='rtl'] .background-control .layer-list button {
   float: left;
   border-left: none;
@@ -3676,27 +3775,6 @@ img.tile-removing {
 }
 
 /* preset form */
-[dir='rtl'] .form-label {
-  padding: 5px 10px 5px 0;
-}
-
-[dir='rtl'] .form-label button {
-  border-left: none;
-  border-right: 1px solid #CCC;
-}
-
-[dir='rtl'] .more-fields label {
-  padding: 5px 0 5px 10px;
-}
-
-[dir='rtl'] .form-label-button-wrap {
-  text-align: left;
-}
-
-[dir='rtl'] button.minor {
-  left: 0;
-  right: auto;
-}
 
 [dir='rtl'] .combobox-caret {
   margin-left: 0;
@@ -3720,11 +3798,6 @@ img.tile-removing {
   border-left: none;
   border-right: 1px solid rgba(0, 0, 0, .1);
   border-radius: 3px 0 0 3px;
-}
-
-[dir='rtl'] .preset-icon-frame {
-  left: auto;
-  right: 7px;
 }
 
 [dir='rtl'] .preset-list-item button.tag-reference-button {
@@ -3754,45 +3827,6 @@ img.tile-removing {
 
 [dir='rtl'] .preset-input-wrap .col6 {
   float: right;
-}
-
-/* tags form */
-[dir='rtl'] .tag-row .key-wrap,
-[dir='rtl'] .tag-row .input-wrap-position {
-  float: right;
-}
-
-[dir='rtl'] .tag-row input {
-  border-left: none;
-  border-right: 1px solid #CCC;
-}
-
-[dir='rtl'] .tag-row:first-child input.key {
-  border-top-left-radius: 0;
-  border-top-right-radius: 4px;
-}
-
-[dir='rtl'] .tag-row button {
-  left: 10%;
-  border-left-width: 1px;
-}
-
-[dir='rtl'] .tag-row .tag-reference-button {
-  left: auto;
-  right: auto;
-  margin-right: 35px;
-  border-left-width: 1px;
-  border-right-width: 0;
-}
-
-[dir='rtl'] .tag-row:first-child .tag-reference-button {
-  border-top-left-radius: 4px;
-  border-top-right-radius: 0;
-}
-
-[dir='rtl'] .tag-row:last-child .tag-reference-button {
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 0;
 }
 
 /* map control buttons */
@@ -3883,21 +3917,6 @@ img.tile-removing {
 
 [dir='rtl'] .joined button:last-child {
   border-radius: 4px 0 0 4px;
-}
-
-[dir='rtl'] .spinner {
-  float: left;
-}
-
-[dir='rtl'] .spinner img {
-  margin-left: 10px;
-  margin-right: auto;
-  -moz-transform: scaleX(-1);
-  -o-transform: scaleX(-1);
-  -webkit-transform: scaleX(-1);
-  transform: scaleX(-1);
-  filter: FlipH;
-  -ms-filter: "FlipH";
 }
 
 
