@@ -21,8 +21,7 @@ export function behaviorHash(context) {
 
 
     var formatter = function(map) {
-        var mode = context.mode(),
-            center = map.center(),
+        var center = map.center(),
             zoom = map.zoom(),
             precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2)),
             q = _.omit(utilStringQs(window.location.hash.substring(1)), 'comment'),
