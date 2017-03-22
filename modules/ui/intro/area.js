@@ -17,7 +17,10 @@ export function uiIntroArea(context, reveal) {
     chapter.enter = function() {
         var playground = [-85.63552, 41.94159],
             corner = [-85.63565411045074, 41.9417715536927];
-        context.map().centerZoom(playground, 19);
+
+        // context.map().centerZoom(playground, 19);
+        context.map().zoom(19).centerEase(playground);
+
         reveal('button.add-area',
             t('intro.areas.add', { button: icon('#icon-area', 'pre-text') }),
             { tooltipClass: 'intro-areas-add' });
@@ -33,7 +36,7 @@ export function uiIntroArea(context, reveal) {
             var pointBox = pad(corner, padding, context);
             reveal(pointBox, t('intro.areas.corner'));
 
-            context.map().on('move.intro', function() {
+            context.map().on('move.intro drawn.intro', function() {
                 padding = 120 * Math.pow(2, context.map().zoom() - 19);
                 pointBox = pad(corner, padding, context);
                 reveal(pointBox, t('intro.areas.corner'), {duration: 0});
@@ -49,7 +52,7 @@ export function uiIntroArea(context, reveal) {
             var pointBox = pad(playground, padding, context);
             reveal(pointBox, t('intro.areas.place'));
 
-            context.map().on('move.intro', function() {
+            context.map().on('move.intro drawn.intro', function() {
                 padding = 150 * Math.pow(2, context.map().zoom() - 19);
                 pointBox = pad(playground, padding, context);
                 reveal(pointBox, t('intro.areas.place'), {duration: 0});
@@ -59,7 +62,7 @@ export function uiIntroArea(context, reveal) {
 
         function enterSelect(mode) {
             if (mode.id !== 'select') return;
-            context.map().on('move.intro', null);
+            context.map().on('move.intro drawn.intro', null);
             context.on('enter.intro', null);
 
             timeout = setTimeout(function() {
@@ -96,7 +99,7 @@ export function uiIntroArea(context, reveal) {
         context.on('enter.intro', null);
         context.on('exit.intro', null);
         context.history().on('change.intro', null);
-        context.map().on('move.intro', null);
+        context.map().on('move.intro drawn.intro', null);
         d3.select('.preset-search-input').on('keyup.intro', null);
     };
 

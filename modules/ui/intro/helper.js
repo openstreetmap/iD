@@ -1,6 +1,6 @@
-export function pointBox(point, context) {
+export function pointBox(loc, context) {
     var rect = context.surfaceRect();
-    point = context.projection(point);
+    var point = context.curtainProjection(loc);
     return {
         left: point[0] + rect.left - 30,
         top: point[1] + rect.top - 50,
@@ -10,15 +10,19 @@ export function pointBox(point, context) {
 }
 
 
-export function pad(box, padding, context) {
-    if (box instanceof Array) {
+export function pad(locOrBox, padding, context) {
+    var box;
+    if (locOrBox instanceof Array) {
         var rect = context.surfaceRect();
-        box = context.projection(box);
+        var point = context.curtainProjection(locOrBox);
         box = {
-            left: box[0] + rect.left,
-            top: box[1] + rect.top
+            left: point[0] + rect.left,
+            top: point[1] + rect.top
         };
+    } else {
+        box = locOrBox;
     }
+
     return {
         left: box.left - padding,
         top: box.top - padding,
@@ -31,4 +35,4 @@ export function pad(box, padding, context) {
 export function icon(name, svgklass) {
     return '<svg class="icon ' + (svgklass || '') + '">' +
          '<use xlink:href="' + name + '"></use></svg>';
- }
+}

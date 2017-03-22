@@ -383,6 +383,7 @@ export function coreContext() {
     context.version = '2.1.3';
 
     context.projection = geoRawMercator();
+    context.curtainProjection = geoRawMercator();
 
     locale = utilDetect().locale;
     if (locale && !dataLocales.hasOwnProperty(locale)) {

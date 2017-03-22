@@ -26,7 +26,9 @@ export function uiIntroPoint(context, reveal) {
 
 
     chapter.enter = function() {
-        context.map().centerZoom([-85.63279, 41.94394], 19);
+        // context.map().centerZoom([-85.63279, 41.94394], 19);
+        context.map().zoom(19).centerEase([-85.63279, 41.94394]);
+
         reveal('button.add-point',
             t('intro.points.add', { button: icon('#icon-point', 'pre-text') }),
             { tooltipClass: 'intro-points-add' });
@@ -43,7 +45,7 @@ export function uiIntroPoint(context, reveal) {
             var pointBox = pad(corner, 150, context);
             reveal(pointBox, t('intro.points.place'));
 
-            context.map().on('move.intro', function() {
+            context.map().on('move.intro drawn.intro', function() {
                 pointBox = pad(corner, 150, context);
                 reveal(pointBox, t('intro.points.place'), {duration: 0});
             });
@@ -52,7 +54,7 @@ export function uiIntroPoint(context, reveal) {
 
         function enterSelect(mode) {
             if (mode.id !== 'select') return;
-            context.map().on('move.intro', null);
+            context.map().on('move.intro drawn.intro', null);
             context.on('enter.intro', null);
 
             setTimeout(function() {
@@ -100,7 +102,7 @@ export function uiIntroPoint(context, reveal) {
             var pointBox = pad(corner, 150, context);
             reveal(pointBox, t('intro.points.reselect'));
 
-            context.map().on('move.intro', function() {
+            context.map().on('move.intro drawn.intro', function() {
                 pointBox = pad(corner, 150, context);
                 reveal(pointBox, t('intro.points.reselect'), {duration: 0});
             });
@@ -109,7 +111,7 @@ export function uiIntroPoint(context, reveal) {
 
         function enterReselect(mode) {
             if (mode.id !== 'select') return;
-            context.map().on('move.intro', null);
+            context.map().on('move.intro drawn.intro', null);
             context.on('enter.intro', null);
 
             setTimeout(function() {
@@ -127,7 +129,7 @@ export function uiIntroPoint(context, reveal) {
             var pointBox = pad(corner, 150, context);
             reveal(pointBox, t('intro.points.rightclick'));
 
-            context.map().on('move.intro', function() {
+            context.map().on('move.intro drawn.intro', function() {
                 pointBox = pad(corner, 150, context);
                 reveal(pointBox, t('intro.points.rightclick'), {duration: 0});
             });
@@ -136,10 +138,10 @@ export function uiIntroPoint(context, reveal) {
 
         function enterDelete(mode) {
             if (mode.id !== 'select') return;
-            context.map().on('move.intro', null);
+            context.map().on('move.intro drawn.intro', null);
             context.on('enter.intro', null);
             context.on('exit.intro', deletePoint);
-            context.map().on('move.intro', deletePoint);
+            context.map().on('move.intro drawn.intro', deletePoint);
             context.history().on('change.intro', deleted);
 
             setTimeout(function() {
@@ -169,7 +171,7 @@ export function uiIntroPoint(context, reveal) {
         timeouts.forEach(window.clearTimeout);
         context.on('exit.intro', null);
         context.on('enter.intro', null);
-        context.map().on('move.intro', null);
+        context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
         d3.select('.preset-search-input')
             .on('keyup.intro', null)

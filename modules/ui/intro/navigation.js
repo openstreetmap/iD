@@ -1,5 +1,4 @@
 import * as d3 from 'd3';
-import _ from 'lodash';
 import { t } from '../../util/locale';
 import { utilRebind } from '../../util/rebind';
 import { icon, pointBox } from './helper';
@@ -64,7 +63,7 @@ export function uiIntroNavigation(context, reveal) {
             set(function() {
                 var box = pointBox(hall.loc, context);
                 reveal(box, t('intro.navigation.select'));
-                context.map().on('move.intro', function() {
+                context.map().on('move.intro drawn.intro', function() {
                     var box = pointBox(hall.loc, context);
                     reveal(box, t('intro.navigation.select'), { duration: 0 });
                 });
@@ -76,7 +75,7 @@ export function uiIntroNavigation(context, reveal) {
             if (mode.id !== 'select') return;
 
             context.on('enter.intro', null);
-            context.map().on('move.intro', null);
+            context.map().on('move.intro drawn.intro', null);
             context.on('exit.intro', streetSearch);
 
             set(function() {
@@ -134,7 +133,7 @@ export function uiIntroNavigation(context, reveal) {
     chapter.exit = function() {
         timeouts.forEach(window.clearTimeout);
         d3.select(window).on('mouseup.intro', null, true);
-        context.map().on('move.intro', null);
+        context.map().on('move.intro drawn.intro', null);
         context.on('enter.intro', null);
         context.on('exit.intro', null);
         d3.select('.search-header input')

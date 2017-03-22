@@ -35,7 +35,9 @@ export function uiIntroLine(context, reveal) {
 
 
     chapter.enter = function() {
-        context.map().centerZoom(start, 18);
+        // context.map().centerZoom(start, 18);
+        context.map().zoom(18).centerEase(start);
+
         reveal('button.add-line',
             t('intro.lines.add', { button: icon('#icon-line', 'pre-text') }),
             { tooltipClass: 'intro-lines-add' });
@@ -52,7 +54,7 @@ export function uiIntroLine(context, reveal) {
             var pointBox = pad(start, padding, context);
             reveal(pointBox, t('intro.lines.start'));
 
-            context.map().on('move.intro', function() {
+            context.map().on('move.intro drawn.intro', function() {
                 padding = 150 * Math.pow(2, context.map().zoom() - 18);
                 pointBox = pad(start, padding, context);
                 reveal(pointBox, t('intro.lines.start'), {duration: 0});
@@ -70,7 +72,7 @@ export function uiIntroLine(context, reveal) {
             var pointBox = pad(midpoint, padding, context);
             reveal(pointBox, t('intro.lines.intersect', {name: t('intro.graph.flower_st')}));
 
-            context.map().on('move.intro', function() {
+            context.map().on('move.intro drawn.intro', function() {
                 padding = 300 * Math.pow(2, context.map().zoom() - 19);
                 pointBox = pad(midpoint, padding, context);
                 reveal(pointBox, t('intro.lines.intersect', {name: t('intro.graph.flower_st')}), {duration: 0});
@@ -115,7 +117,7 @@ export function uiIntroLine(context, reveal) {
                 var pointBox = pad(centroid, padding, context);
                 reveal(pointBox, t('intro.lines.finish'));
 
-                context.map().on('move.intro', function() {
+                context.map().on('move.intro drawn.intro', function() {
                     padding = 900 * Math.pow(2, context.map().zoom() - 19);
                     pointBox = pad(centroid, padding, context);
                     reveal(pointBox, t('intro.lines.finish'), {duration: 0});
@@ -126,7 +128,7 @@ export function uiIntroLine(context, reveal) {
 
         function enterSelect(mode) {
             if (mode.id !== 'select') return;
-            context.map().on('move.intro', null);
+            context.map().on('move.intro drawn.intro', null);
             context.on('enter.intro', null);
             d3.select('#curtain').style('pointer-events', 'all');
             presetCategory();
@@ -187,7 +189,7 @@ export function uiIntroLine(context, reveal) {
         timeouts.forEach(window.clearTimeout);
         context.on('enter.intro', null);
         context.on('exit.intro', null);
-        context.map().on('move.intro', null);
+        context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
         if (drawId) {
             context.replace(actionDeleteMultiple([drawId]));

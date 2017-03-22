@@ -33,6 +33,7 @@ export function rendererMap(context) {
     var dimensions = [1, 1],
         dispatch = d3.dispatch('move', 'drawn'),
         projection = context.projection,
+        curtainProjection = context.curtainProjection,
         dblclickEnabled = true,
         redrawEnabled = true,
         transformStart = projection.transform(),
@@ -323,6 +324,14 @@ export function rendererMap(context) {
             tX = (eventTransform.x / scale - transformStart.x) * scale,
             tY = (eventTransform.y / scale - transformStart.y) * scale;
 
+        if (context.inIntro()) {
+            curtainProjection.transform({
+                x: eventTransform.x - tX,
+                y: eventTransform.y - tY,
+                k: eventTransform.k
+            });
+        }
+
         transformed = true;
         transformLast = eventTransform;
         utilSetTransform(supersurface, tX, tY, scale);
@@ -339,6 +348,9 @@ export function rendererMap(context) {
         surface.selectAll('.edit-menu, .radial-menu').interrupt().remove();
         utilSetTransform(supersurface, 0, 0);
         transformed = false;
+        if (context.inIntro()) {
+            curtainProjection.transform(projection.transform());
+        }
         return true;
     }
 
