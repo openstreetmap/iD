@@ -1,5 +1,7 @@
 import * as d3 from 'd3';
 import { t } from '../../util/locale';
+import { localNames } from './helper';
+
 import { coreGraph } from '../../core/graph';
 import { modeBrowse } from '../../modes/browse';
 import { osmEntity } from '../../osm/entity';
@@ -13,7 +15,7 @@ import { uiIntroLine } from './line';
 import { uiIntroStartEditing } from './start_editing';
 
 
-var sampleIntros = {
+var chapterUi = {
     navigation: uiIntroNavigation,
     point: uiIntroPoint,
     area: uiIntroArea,
@@ -21,64 +23,23 @@ var sampleIntros = {
     startEditing: uiIntroStartEditing
 };
 
+var chapterFlow = [
+    'navigation',
+    'point',
+    'area',
+    'line',
+    'startEditing'
+];
+
 
 export function uiIntro(context) {
-    var chapter;
+    var introGraph = {},
+        currChapter;
 
-    function localizedName(id) {
-        var features = {
-            n2140018997: 'city_hall',
-            n367813436: 'fire_department',
-            w203988286: 'memory_isle_park',
-            w203972937: 'riverwalk_trail',
-            w203972938: 'riverwalk_trail',
-            w203972940: 'riverwalk_trail',
-            w41785752: 'w_michigan_ave',
-            w134150789: 'w_michigan_ave',
-            w134150795: 'w_michigan_ave',
-            w134150800: 'w_michigan_ave',
-            w134150811: 'w_michigan_ave',
-            w134150802: 'e_michigan_ave',
-            w134150836: 'e_michigan_ave',
-            w41074896: 'e_michigan_ave',
-            w17965834: 'spring_st',
-            w203986457: 'scidmore_park',
-            w203049587: 'petting_zoo',
-            w17967397: 'n_andrews_st',
-            w17967315: 's_andrews_st',
-            w17967326: 'n_constantine_st',
-            w17966400: 's_constantine_st',
-            w170848823: 'rocky_river',
-            w170848824: 'rocky_river',
-            w170848331: 'rocky_river',
-            w17967752: 'railroad_dr',
-            w17965998: 'conrail_rr',
-            w134150845: 'conrail_rr',
-            w170989131: 'st_joseph_river',
-            w143497377: 'n_main_st',
-            w134150801: 's_main_st',
-            w134150830: 's_main_st',
-            w17966462: 's_main_st',
-            w17967734: 'water_st',
-            w17964996: 'foster_st',
-            w170848330: 'portage_river',
-            w17965351: 'flower_st',
-            w17965502: 'elm_st',
-            w17965402: 'walnut_st',
-            w17964793: 'morris_ave',
-            w17967444: 'east_st',
-            w17966984: 'portage_ave'
-        };
-
-        return features[id] && t('intro.graph.' + features[id]);
-    }
-
-
-    var introGraph = {};
-
+    // create entities for intro graph and localize names
     for (var key in dataIntroGraph) {
         introGraph[key] = osmEntity(dataIntroGraph[key]);
-        var name = localizedName(key);
+        var name = localNames[id] && t('intro.graph.' + localNames[id]);
         if (name) {
             introGraph[key].tags.name = name;
         }
@@ -113,8 +74,8 @@ export function uiIntro(context) {
         var curtain = uiCurtain();
         selection.call(curtain);
 
-        var chapters = ['navigation', 'point', 'area', 'line', 'startEditing'].map(function(chapter, i) {
-            var s = sampleIntros[chapter](context, reveal)
+        var chapters = chapterFlow.map(function(chapter, i) {
+            var s = chapterUi[chapter](context, reveal)
                 .on('done', function() {
                     entered.filter(function(d) {
                         return d.title === s.title;
@@ -176,18 +137,17 @@ export function uiIntro(context) {
 
 
         function enter(newChapter) {
-            if (chapter) { chapter.exit(); }
+            if (currChapter) { currChapter.exit(); }
 
             context.enter(modeBrowse(context));
 
-            chapter = newChapter;
-            chapter.enter();
+            currChapter = newChapter;
+            currChapter.enter();
 
             entered.classed('active', function(d) {
-                return d.title === chapter.title;
+                return d.title === currChapter.title;
             });
         }
-
     }
 
 
