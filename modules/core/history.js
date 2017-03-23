@@ -15,6 +15,7 @@ export function coreHistory(context) {
         dispatch = d3.dispatch('change', 'undone', 'redone'),
         lock = utilSessionMutex('lock'),
         duration = 150,
+        checkpoints = {},
         stack, index, tree;
 
 
@@ -278,10 +279,27 @@ export function coreHistory(context) {
         },
 
 
-        reset: function() {
-            stack = [{graph: coreGraph()}];
-            index = 0;
-            tree = coreTree(stack[0].graph);
+        // save the current history state
+        checkpoint: function(key) {
+            checkpoints[key] = {
+                stack: _.cloneDeep(stack),
+                index: index
+            };
+            return history;
+        },
+
+
+        // restore history state to a given checkpoint or reset completely
+        reset: function(key) {
+            if (key !== undefined) {
+                stack = _.cloneDeep(checkpoints[key].stack);
+                index = checkpoints[key].index;
+            } else {
+                stack = [{graph: coreGraph()}];
+                index = 0;
+                tree = coreTree(stack[0].graph);
+                checkpoints = {};
+            }
             dispatch.call('change');
             return history;
         },
