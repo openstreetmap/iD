@@ -25,6 +25,7 @@ export function uiIntroNavigation(context, reveal) {
 
 
     chapter.enter = function() {
+        context.history().reset('initial');
         dragMap();
 
         function dragMap() {

@@ -18,7 +18,7 @@ export function uiIntroArea(context, reveal) {
         var playground = [-85.63552, 41.94159],
             corner = [-85.63565411045074, 41.9417715536927];
 
-        // context.map().centerZoom(playground, 19);
+        context.history().reset('initial');
         context.map().zoom(19).centerEase(playground);
 
         reveal('button.add-area',
@@ -101,6 +101,12 @@ export function uiIntroArea(context, reveal) {
         context.history().on('change.intro', null);
         context.map().on('move.intro drawn.intro', null);
         d3.select('.preset-search-input').on('keyup.intro', null);
+    };
+
+
+    chapter.restart = function() {
+        chapter.exit();
+        chapter.enter();
     };
 
 

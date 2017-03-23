@@ -105,6 +105,7 @@ export function uiIntro(context) {
         context.connection().toggle(false).reset();
         context.history().reset();
         context.history().merge(d3.values(coreGraph().load(introGraph).entities));
+        context.history().checkpoint('initial');
         context.background().bing();
 
         d3.selectAll('#map .layer-background').style('opacity', 1);

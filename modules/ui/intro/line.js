@@ -35,7 +35,7 @@ export function uiIntroLine(context, reveal) {
 
 
     chapter.enter = function() {
-        // context.map().centerZoom(start, 18);
+        context.history().reset('initial');
         context.map().zoom(18).centerEase(start);
 
         reveal('button.add-line',
@@ -177,12 +177,6 @@ export function uiIntroLine(context, reveal) {
     };
 
 
-    chapter.restart = function() {
-        chapter.exit();
-        chapter.enter();
-    };
-
-
     chapter.exit = function() {
         d3.select(window).on('mousedown.intro', null, true);
         d3.select('#curtain').style('pointer-events', 'none');
@@ -196,6 +190,13 @@ export function uiIntroLine(context, reveal) {
             drawId = null;
         }
     };
+
+
+    chapter.restart = function() {
+        chapter.exit();
+        chapter.enter();
+    };
+
 
     return utilRebind(chapter, dispatch, 'on');
 }

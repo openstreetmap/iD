@@ -26,7 +26,7 @@ export function uiIntroPoint(context, reveal) {
 
 
     chapter.enter = function() {
-        // context.map().centerZoom([-85.63279, 41.94394], 19);
+        context.history().reset('initial');
         context.map().zoom(19).centerEase([-85.63279, 41.94394]);
 
         reveal('button.add-point',
@@ -177,6 +177,13 @@ export function uiIntroPoint(context, reveal) {
             .on('keyup.intro', null)
             .on('keydown.intro', null);
     };
+
+
+    chapter.restart = function() {
+        chapter.exit();
+        chapter.enter();
+    };
+
 
     return utilRebind(chapter, dispatch, 'on');
 }
