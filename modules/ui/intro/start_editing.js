@@ -10,6 +10,7 @@ export function uiIntroStartEditing(context, reveal) {
         modalSelection,
         timeouts = [];
 
+
     var chapter = {
         title: 'intro.startediting.title'
     };
