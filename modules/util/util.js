@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import { t, textDirection } from './locale';
 import { utilDetect } from './detect';
 import { remove as removeDiacritics } from 'diacritics';
-import { fixArabicScriptTextForSvg } from './svg_paths_arabic_fix';
+import { fixRTLTextForSvg, rtlRegex } from './svg_paths_rtl_fix';
 
 
 export function utilTagText(entity) {
@@ -76,10 +76,9 @@ export function utilDisplayName(entity) {
 export function utilDisplayNameForPath(entity) {
     var name = utilDisplayName(entity);
     var isFirefox = utilDetect().browser.toLowerCase().indexOf('firefox') > -1;
-    var arabicRegex = /[\u0600-\u06FF]/g;
 
-    if (!isFirefox && name && arabicRegex.test(name)) {
-        name = fixArabicScriptTextForSvg(name);
+    if (!isFirefox && name && rtlRegex.test(name)) {
+        name = fixRTLTextForSvg(name);
     }
 
     return name;
