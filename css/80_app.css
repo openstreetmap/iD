@@ -3594,6 +3594,8 @@ img.tile-removing {
 }
 
 .intro-nav-wrap {
+    display: flex;
+    flex-direction: row;
     position: absolute;
     left: 0;
     right: 0;
@@ -3602,8 +3604,24 @@ img.tile-removing {
     z-index: 1001;
 }
 
+.intro-nav-wrap .intro-nav-wrap-logo {
+    flex: 0 0 auto;
+    height: 40px;
+    width: 40px;
+    color: white;
+    margin: 0px 20px;
+    vertical-align: middle;
+}
+
+.intro-nav-wrap .joined {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: row;
+}
+
 .intro-nav-wrap button.chapter {
-    width: 20%;
+    flex: 1 1 100%;
+    padding: 0px 20px;
 }
 
 .intro-nav-wrap button.chapter.finished {

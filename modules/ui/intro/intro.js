@@ -103,10 +103,11 @@ export function uiIntro(context) {
             .append('div')
             .attr('class', 'intro-nav-wrap fillD');
 
-        // navwrap
-        //     .append('div')
-        //     .attr('class', 'intro-nav-wrap-icon fillD')
-        //     .call(svgIcon('#logo-walkthrough', 'pre-text light'));
+        navwrap
+            .append('svg')
+            .attr('class', 'intro-nav-wrap-logo')
+            .append('use')
+            .attr('xlink:href', '#logo-walkthrough');
 
         var buttonwrap = navwrap
             .append('div')
