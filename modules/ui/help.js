@@ -129,7 +129,7 @@ export function uiHelp(context) {
 
 
         function clickWalkthrough() {
-            d3.select(document.body).call(uiIntro(context));
+            context.container().call(uiIntro(context));
             setVisible(false);
         }
 

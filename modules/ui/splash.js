@@ -44,7 +44,7 @@ export function uiSplash(context) {
             .append('button')
             .attr('class', 'walkthrough col6')
             .on('click', function() {
-                d3.select(document.body).call(uiIntro(context));
+                context.container().call(uiIntro(context));
                 modalSelection.close();
             });
 
