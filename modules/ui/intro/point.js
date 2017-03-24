@@ -28,9 +28,15 @@ export function uiIntroPoint(context, reveal) {
 
 
     function addPoint() {
-        reveal('button.add-point',
+        var tooltip = reveal('button.add-point',
             t('intro.points.add', { button: icon('#icon-point', 'pre-text') }),
             { tooltipClass: 'intro-points-add' });
+
+        tooltip.selectAll('.tooltip-inner')
+            .insert('svg', 'span')
+            .attr('class', 'tooltip-illustration')
+            .append('use')
+            .attr('xlink:href', '#poi-images');
 
         context.on('enter.intro', placePoint);
     }

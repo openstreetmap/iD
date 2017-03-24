@@ -35,9 +35,14 @@ export function uiIntroLine(context, reveal) {
 
 
     function addLine() {
-        reveal('button.add-line',
-            t('intro.lines.add', { button: icon('#icon-line', 'pre-text') }),
-            { tooltipClass: 'intro-lines-add' });
+        var tooltip = reveal('button.add-line',
+            t('intro.lines.add', { button: icon('#icon-line', 'pre-text') }));
+
+        tooltip.selectAll('.tooltip-inner')
+            .insert('svg', 'span')
+            .attr('class', 'tooltip-illustration')
+            .append('use')
+            .attr('xlink:href', '#feature-images');
 
         context.on('enter.intro', startLine);
     }

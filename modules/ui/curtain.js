@@ -51,11 +51,12 @@ export function uiCurtain() {
     }
 
 
-    curtain.reveal = function(box, text, tooltipclass, duration) {
+    curtain.reveal = function(box, text, options) {
         if (typeof box === 'string') box = d3.select(box).node();
         if (box.getBoundingClientRect) box = box.getBoundingClientRect();
 
-        curtain.cut(box, duration);
+        options = options || {};
+        curtain.cut(box, options.duration);
 
         if (text) {
             // pseudo markdown bold text hack
@@ -104,18 +105,20 @@ export function uiCurtain() {
                 Math.min(Math.max(10, pos[1]), h - dimensions[1] - 10)
             ];
 
-            if (duration !== 0 || !tooltip.classed(side)) {
+            if (options.duration !== 0 || !tooltip.classed(side)) {
                 tooltip.call(uiToggle(true));
             }
 
             tooltip
                 .style('top', pos[1] + 'px')
                 .style('left', pos[0] + 'px')
-                .attr('class', 'curtain-tooltip tooltip in ' + side + ' ' + tooltipclass);
+                .attr('class', 'curtain-tooltip tooltip in ' + side + ' ' + (options.tooltipClass || ''));
 
         } else {
             tooltip.call(uiToggle(false));
         }
+
+        return tooltip;
     };
 
 
@@ -123,7 +126,17 @@ export function uiCurtain() {
         darkness.datum(datum)
             .interrupt();
 
-        (duration === 0 ? darkness : darkness.transition().duration(duration || 600))
+        var selection;
+        if (duration === 0) {
+            selection = darkness;
+        } else {
+            selection = darkness
+                .transition()
+                .duration(duration || 600)
+                .ease(d3.easeLinear);
+        }
+
+        selection
             .attr('d', function(d) {
                 var string = 'M 0,0 L 0,' + window.innerHeight + ' L ' +
                     window.innerWidth + ',' + window.innerHeight + 'L' +

@@ -23,9 +23,14 @@ export function uiIntroArea(context, reveal) {
 
 
     function addArea() {
-        reveal('button.add-area',
-            t('intro.areas.add', { button: icon('#icon-area', 'pre-text') }),
-            { tooltipClass: 'intro-areas-add' });
+        var tooltip = reveal('button.add-area',
+            t('intro.areas.add', { button: icon('#icon-area', 'pre-text') }));
+
+        tooltip.selectAll('.tooltip-inner')
+            .insert('svg', 'span')
+            .attr('class', 'tooltip-illustration')
+            .append('use')
+            .attr('xlink:href', '#landuse-images');
 
         context.on('enter.intro', startArea);
     }

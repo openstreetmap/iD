@@ -50,8 +50,10 @@ export function uiIntroStartEditing(context, reveal) {
                     });
 
                 startbutton
-                    .append('div')
-                    .attr('class','illustration');
+                    .append('svg')
+                    .attr('class', 'illustration')
+                    .append('use')
+                    .attr('xlink:href', '#logo-walkthrough');
 
                 startbutton
                     .append('h2')

@@ -45,11 +45,21 @@ export function uiSuccess(context) {
 
         var changesetURL = context.connection().changesetURL(changeset.id);
 
-        body
+
+        var viewOnOsm = body
             .append('a')
             .attr('class', 'button col12 osm')
             .attr('target', '_blank')
-            .attr('href', changesetURL)
+            .attr('href', changesetURL);
+
+        viewOnOsm
+            .append('svg')
+            .attr('class', 'logo logo-osm')
+            .append('use')
+            .attr('xlink:href', '#logo-osm');
+
+        viewOnOsm
+            .append('div')
             .text(t('success.view_on_osm'));
 
 

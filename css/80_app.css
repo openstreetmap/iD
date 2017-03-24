@@ -2420,6 +2420,7 @@ div.full-screen > button:hover {
     margin-top: 10px;
     border-bottom: 1px solid #ccc;
     border-radius: 4px;
+    text-align: center;
 }
 
 .help-wrap .nav {
@@ -3016,20 +3017,14 @@ img.tile-removing {
     background-color: #ececec;
 }
 
-.modal-actions button:before,
-.save-success a.button.osm:before,
-.walkthrough a:before {
-    display: block;
-    content: '';
+.logo {
     height: 100px;
     width: 100%;
     max-width: 100px;
     margin: auto;
-    margin-bottom: 10px;
-    background:transparent url(img/iD-sprite.svg) no-repeat -200px -460px;
 }
 
-.modal-actions :first-child {
+.modal-actions > :first-child {
     border-right: 1px solid #CCC;
 }
 
@@ -3039,57 +3034,48 @@ img.tile-removing {
 
 /* Restore Modal
 ------------------------------------------------------- */
-
-.modal-actions .restore:before {
-    background-position: -500px -460px;
+.modal-actions .logo-restore {
+    color: #7092FF;
 }
-
-.modal-actions .reset:before {
-    background-position: -600px -460px;
+.modal-actions .logo-reset {
+    color: #E06C5E;
 }
 
 /* Success Modal
 ------------------------------------------------------- */
-
 .save-success p {
     padding: 15px 15px 0 15px;
 }
 .save-success a.details {
-  padding-left: 15px;
+    padding-left: 15px;
 }
 .save-success .button {
     padding-top: 15px;
 }
-
+.save-success .logo-osm {
+    color: #7092FF;
+    margin-bottom: 10px;
+}
 .save-success a.button.social {
     height: auto;
+    border-bottom: none;
 }
-
 .save-success .icon.social {
     height: 80px;
     width: 80px;
     color: #7092FF;
 }
 
-.save-success .button.osm:before {
-    background-position: -200px -460px;
-}
-
 /* Splash Modal
 ------------------------------------------------------- */
-
-.modal-actions .walkthrough:before,
-.walkthrough a:before {
-    background-position: -300px -460px;
+.modal-actions .logo-walkthrough,
+.modal-actions .logo-features {
+    color: #7092FF;
 }
 
-.modal-actions .start:before {
-    background-position: -400px -460px;
-}
 
-/* Commit Modal
+/* Save Mode
 ------------------------------------------------------- */
-
 .mode-save a.user-info {
     display: inline-block;
 }
@@ -3452,6 +3438,13 @@ img.tile-removing {
 .add-point .tooltip .tooltip-arrow {
     left: 60px;
 }
+[dir='rtl'] .add-point .tooltip .tooltip-arrow {
+    left: auto;
+    right: 60px;
+}
+[dir='rtl'] .curtain-tooltip.intro-points-add .tooltip-arrow {
+    left: 50%;
+}
 
 /* radial menu (deprecated) */
 
@@ -3656,25 +3649,11 @@ img.tile-removing {
     top: 133px !important;
 }
 
-/* Tooltip illustrations */
-
-.intro-points-add .tooltip-inner::before,
-.intro-areas-add .tooltip-inner::before,
-.intro-lines-add .tooltip-inner::before {
-    margin-left: -20px;
-    display: block;
-    content: "";
+.tooltip-illustration {
     height: 80px;
     width: 200px;
-    background:transparent url(img/iD-sprite.svg) no-repeat 0 -320px;
-}
-
-.intro-areas-add .tooltip-inner::before {
-    background-position: 0 -400px;
-}
-
-.intro-lines-add .tooltip-inner::before {
-    background-position: 0 -480px;
+    margin-left: -20px;
+    margin-top: -10px;
 }
 
 .huge-modal-button {
@@ -3686,8 +3665,7 @@ img.tile-removing {
 .huge-modal-button .illustration {
     height: 100px;
     width: 100px;
-    background: rgba(0, 0, 0, 0) url(img/iD-sprite.svg) no-repeat -300px -460px;
-    margin: auto;
+    color: #7092FF;
 }
 
 .mapillary-wrap {

@@ -37,20 +37,38 @@ export function uiRestore(context) {
         var restore = buttonWrap
             .append('button')
             .attr('class', 'restore col6')
-            .text(t('restore.restore'))
             .on('click', function() {
                 context.history().restore();
                 modalSelection.remove();
             });
 
-        buttonWrap
+        restore
+            .append('svg')
+            .attr('class', 'logo logo-restore')
+            .append('use')
+            .attr('xlink:href', '#logo-restore');
+
+        restore
+            .append('div')
+            .text(t('restore.restore'));
+
+        var reset = buttonWrap
             .append('button')
             .attr('class', 'reset col6')
-            .text(t('restore.reset'))
             .on('click', function() {
                 context.history().clearSaved();
                 modalSelection.remove();
             });
+
+        reset
+            .append('svg')
+            .attr('class', 'logo logo-reset')
+            .append('use')
+            .attr('xlink:href', '#logo-reset');
+
+        reset
+            .append('div')
+            .text(t('restore.reset'));
 
         restore.node().focus();
     };

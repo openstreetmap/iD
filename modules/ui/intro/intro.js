@@ -3,9 +3,10 @@ import { t } from '../../util/locale';
 import { localNames } from './helper';
 
 import { coreGraph } from '../../core/graph';
+import { dataIntroGraph } from '../../../data/intro_graph.json';
 import { modeBrowse } from '../../modes/browse';
 import { osmEntity } from '../../osm/entity';
-import { dataIntroGraph } from '../../../data/intro_graph.json';
+import { svgIcon } from '../../svg/icon';
 import { uiCurtain } from '../curtain';
 
 import { uiIntroNavigation } from './navigation';
@@ -39,7 +40,7 @@ export function uiIntro(context) {
     // create entities for intro graph and localize names
     for (var key in dataIntroGraph) {
         introGraph[key] = osmEntity(dataIntroGraph[key]);
-        var name = localNames[id] && t('intro.graph.' + localNames[id]);
+        var name = localNames[key] && t('intro.graph.' + localNames[key]);
         if (name) {
             introGraph[key].tags.name = name;
         }
@@ -75,7 +76,7 @@ export function uiIntro(context) {
         selection.call(curtain);
 
         var chapters = chapterFlow.map(function(chapter, i) {
-            var s = chapterUi[chapter](context, reveal)
+            var s = chapterUi[chapter](context, curtain.reveal)
                 .on('done', function() {
                     entered.filter(function(d) {
                         return d.title === s.title;
@@ -102,6 +103,11 @@ export function uiIntro(context) {
             .append('div')
             .attr('class', 'intro-nav-wrap fillD');
 
+        // navwrap
+        //     .append('div')
+        //     .attr('class', 'intro-nav-wrap-icon fillD')
+        //     .call(svgIcon('#logo-walkthrough', 'pre-text light'));
+
         var buttonwrap = navwrap
             .append('div')
             .attr('class', 'joined')
@@ -124,16 +130,6 @@ export function uiIntro(context) {
             .text(' - ' + t('intro.done'));
 
         enter(chapters[0]);
-
-
-        function reveal(box, text, options) {
-            options = options || {};
-            curtain.reveal(box,
-                text || '',
-                options.tooltipClass || '',
-                options.duration
-            );
-        }
 
 
         function enter(newChapter) {
