@@ -3673,6 +3673,10 @@ img.tile-removing {
     margin-left: -20px;
     margin-top: -10px;
 }
+[dir='rtl'] .tooltip-illustration {
+    margin-left: auto;
+    margin-right: -20px;
+}
 
 .huge-modal-button {
     width: 100%;

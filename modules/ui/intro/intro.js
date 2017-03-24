@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { t } from '../../util/locale';
+import { t, textDirection } from '../../util/locale';
 import { localNames } from './helper';
 
 import { coreGraph } from '../../core/graph';
@@ -128,7 +128,7 @@ export function uiIntro(context) {
         entered
             .append('span')
             .attr('class', 'status')
-            .text(' - ' + t('intro.done'));
+            .call(svgIcon((textDirection === 'rtl' ? '#icon-backward' : '#icon-forward'), 'inline'));
 
         enter(chapters[0]);
 
