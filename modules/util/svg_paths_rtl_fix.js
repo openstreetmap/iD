@@ -62,61 +62,87 @@ var chars = {
     5000: { initial: 'ﻻ', isolated: 'ﻻ', medial: '', final: 'ﻼ' }
 };
 
+export var rtlRegex = /[\u0590-\u05FF\u0600-\u06FF\u0780-\u07BF]/;
 
-export function fixArabicScriptTextForSvg(inputText) {
+export function fixRTLTextForSvg(inputText) {
     var context = true;
     var ret = '';
     var rtlBuffer = [];
+    var arabicRegex = /[\u0600-\u06FF]/g;
+    var arabicTashkil = /[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06DC\u06DF-\u06E4\u06E7\u06E8\u06EA-\u06ED]/;
+    var thaanaVowel = /[\u07A6-\u07B0]/;
+    var hebrewSign = /[\u0591-\u05bd\u05bf\u05c1-\u05c5\u05c7]/;
 
-    for (var i = 0, l = inputText.length; i < l; i++) {
-        var code = inputText[i].charCodeAt(0);
-        var nextCode = inputText[i + 1] ? inputText[i + 1].charCodeAt(0) : 0;
-
-        if (!chars[code]) {
-            if (code === 32 && rtlBuffer.length) {
-              // whitespace
-              rtlBuffer = [rtlBuffer.reverse().join('') + ' '];
+    if (!arabicRegex.test(inputText)) {
+        // Hebrew or Thaana RTL script
+        for (var n = 0; n < inputText.length; n++) {
+            var c = inputText[n];
+            if ((thaanaVowel.test(c) || hebrewSign.test(c)) && rtlBuffer.length) {
+                rtlBuffer[rtlBuffer.length - 1] += c;
+            } else if (rtlRegex.test(c)) {
+                rtlBuffer.push(c);
+            } else if (c === ' ' && rtlBuffer.length) {
+                // whitespace within RTL text
+                rtlBuffer = [rtlBuffer.reverse().join('') + ' '];
             } else {
-              // non-RTL character
-              ret += rtlBuffer.reverse().join('') + inputText[i];
-              rtlBuffer = [];
+                // non-RTL character
+                ret += rtlBuffer.reverse().join('') + c;
+                rtlBuffer = [];
             }
-            continue;
         }
-        if (context) {
-            if (i === l - 1 || nextCode === 32) {
-                rtlBuffer.push(chars[code].isolated);
-            } else {
-                // special case for لا
-                if (code === 1604 && nextCode === 1575) {
-                    rtlBuffer.push(chars[5000].initial);
-                    i++;
-                    context = true;
-                    continue;
+    } else {
+        for (var i = 0, l = inputText.length; i < l; i++) {
+            var code = inputText[i].charCodeAt(0);
+            var nextCode = inputText[i + 1] ? inputText[i + 1].charCodeAt(0) : 0;
+
+            if (!chars[code]) {
+                if (code === 32 && rtlBuffer.length) {
+                    // whitespace
+                    rtlBuffer = [rtlBuffer.reverse().join('') + ' '];
+                } else if (arabicTashkil.test(inputText[i]) && rtlBuffer.length) {
+                    // tashkil mark
+                    rtlBuffer[rtlBuffer.length - 1] += inputText[i];
+                } else {
+                    // non-RTL character
+                    ret += rtlBuffer.reverse().join('') + inputText[i];
+                    rtlBuffer = [];
                 }
-                rtlBuffer.push(chars[code].initial);
+                continue;
             }
-        } else {
-            if (i === l - 1 || nextCode === 32){
-                rtlBuffer.push(chars[code].final);
-            } else {
-                // special case for ﻼ
-                if (code === 1604 && nextCode === 1575){
-                    rtlBuffer.push(chars[5000].final);
-                    i++;
-                    context = true;
-                    continue;
+            if (context) {
+                if (i === l - 1 || nextCode === 32) {
+                    rtlBuffer.push(chars[code].isolated);
+                } else {
+                    // special case for لا
+                    if (code === 1604 && nextCode === 1575) {
+                        rtlBuffer.push(chars[5000].initial);
+                        i++;
+                        context = true;
+                        continue;
+                    }
+                    rtlBuffer.push(chars[code].initial);
                 }
-                if (chars[code].medial === ''){
+            } else {
+                if (i === l - 1 || nextCode === 32){
                     rtlBuffer.push(chars[code].final);
                 } else {
-                    rtlBuffer.push(chars[code].medial);
+                    // special case for ﻼ
+                    if (code === 1604 && nextCode === 1575){
+                        rtlBuffer.push(chars[5000].final);
+                        i++;
+                        context = true;
+                        continue;
+                    }
+                    if (chars[code].medial === ''){
+                        rtlBuffer.push(chars[code].final);
+                    } else {
+                        rtlBuffer.push(chars[code].medial);
+                    }
                 }
             }
+            context = (chars[code].medial === '') || nextCode === 32;
         }
-        context = (chars[code].medial === '') || nextCode === 32;
     }
-
     ret += rtlBuffer.reverse().join('');
     return ret;
 }
