@@ -29,8 +29,7 @@ export function uiIntroPoint(context, reveal) {
 
     function addPoint() {
         var tooltip = reveal('button.add-point',
-            t('intro.points.add', { button: icon('#icon-point', 'pre-text') }),
-            { tooltipClass: 'intro-points-add' });
+            t('intro.points.add', { button: icon('#icon-point', 'pre-text') }));
 
         tooltip.selectAll('.tooltip-inner')
             .insert('svg', 'span')

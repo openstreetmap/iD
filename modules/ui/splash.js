@@ -1,4 +1,3 @@
-import * as d3 from 'd3';
 import { t } from '../util/locale';
 import { uiIntro } from './intro/index';
 import { uiModal } from './modal';

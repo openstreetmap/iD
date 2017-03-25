@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { utilGetDimensions } from '../util/dimensions';
+import { textDirection } from '../util/locale';
 import { uiToggle } from './toggle';
 
 
@@ -64,14 +64,18 @@ export function uiCurtain() {
             var html = parts[0] ? '<span>' + parts[0] + '</span>' : '';
             if (parts[1]) html += '<span class="bold">' + parts[1] + '</span>';
 
-            var selection = tooltip
-                .classed('in', true)
+            var classes = 'curtain-tooltip tooltip in ' + (options.tooltipClass || '');
+            tooltip
+                .classed(classes, true)
                 .selectAll('.tooltip-inner')
                 .html(html);
 
-            var dimensions = utilGetDimensions(selection, true),
+            // var dimensions = utilGetDimensions(selection, true),
+            var tip = tooltip.node().getBoundingClientRect(),
                 w = window.innerWidth,
                 h = window.innerHeight,
+                tooltipWidth = 200,
+                tooltipArrow = 5,
                 side, pos;
 
             // trim box dimensions to just the portion that fits in the window..
@@ -83,32 +87,42 @@ export function uiCurtain() {
             }
 
             // determine tooltip placement..
-            if (box.top + box.height < Math.min(100, box.width + box.left)) {
+
+            if (box.top + box.height < 100) {
+                // tooltip below box..
                 side = 'bottom';
-                pos = [box.left + box.width / 2 - dimensions[0] / 2, box.top + box.height];
+                pos = [box.left + box.width / 2 - tip.width / 2, box.top + box.height];
 
-            } else if (box.left + box.width + 300 < w) {
-                side = 'right';
-                pos = [box.left + box.width, box.top + box.height / 2 - dimensions[1] / 2];
-
-            } else if (box.left > 300) {
-                side = 'left';
-                pos = [box.left - 200, box.top + box.height / 2 - dimensions[1] / 2];
+            } else if (box.top > h - 140) {
+                // tooltip above box..
+                side = 'top';
+                pos = [box.left + box.width / 2 - tip.width / 2, box.top - tip.height];
 
             } else {
-                // need real tooltip height to calculate "top" placement
-                tooltip
-                    .attr('class', 'curtain-tooltip tooltip in')
-                    .call(uiToggle(true));
-                var tip = tooltip.node().getBoundingClientRect();
-                side = 'top';
-                pos = [box.left + box.width / 2 - dimensions[0] / 2, box.top - tip.height];
-            }
+                // tooltip to the side of the box..
+                var tipY = box.top + box.height / 2 - tip.height / 2;
 
-            pos = [
-                Math.min(Math.max(10, pos[0]), w - dimensions[0] - 10),
-                Math.min(Math.max(10, pos[1]), h - dimensions[1] - 10)
-            ];
+                if (textDirection === 'rtl') {
+                    if (box.left - tooltipWidth - tooltipArrow < 70) {
+                        side = 'right';
+                        pos = [box.left + box.width + tooltipArrow, tipY];
+
+                    } else {
+                        side = 'left';
+                        pos = [box.left - tooltipWidth - tooltipArrow, tipY];
+                    }
+
+                } else {
+                    if (box.left + box.width + tooltipArrow + tooltipWidth > w - 70) {
+                        side = 'left';
+                        pos = [box.left - tooltipWidth - tooltipArrow, tipY];
+                    }
+                    else {
+                        side = 'right';
+                        pos = [box.left + box.width + tooltipArrow, tipY];
+                    }
+                }
+            }
 
             if (options.duration !== 0 || !tooltip.classed(side)) {
                 tooltip.call(uiToggle(true));
@@ -117,7 +131,22 @@ export function uiCurtain() {
             tooltip
                 .style('top', pos[1] + 'px')
                 .style('left', pos[0] + 'px')
-                .attr('class', 'curtain-tooltip tooltip in ' + side + ' ' + (options.tooltipClass || ''));
+                .attr('class', classes + ' ' + side);
+
+
+            // shift tooltip-inner if it is very close to the top or bottom edge
+            // (doesn't affect the placement of the tooltip-arrow)
+            var shiftY = 0;
+            if (side === 'left' || side === 'right') {
+                if (pos[1] < 60) {
+                    shiftY = 60 - pos[1];
+                }
+                else if (pos[1] + tip.height > h - 100) {
+                    shiftY = h - pos[1] - tip.height - 100;
+                }
+            }
+            tooltip.selectAll('.tooltip-inner')
+                .style('top', shiftY + 'px');
 
         } else {
             tooltip.call(uiToggle(false));

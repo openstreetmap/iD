@@ -3235,7 +3235,6 @@ img.tile-removing {
     position: absolute;
     display: none;
     color:#333;
-    text-align: left;
     font-size: 12px;
 }
 
@@ -3253,6 +3252,7 @@ img.tile-removing {
 
 .tooltip.right {
     margin-left: 20px;
+    text-align: left;
 }
 
 .tooltip.bottom {
@@ -3429,12 +3429,11 @@ img.tile-removing {
 .map-control .tooltip {
     min-width: 160px;
 }
+
 /* Move over tooltips that are near the edge of screen */
 .add-point .tooltip {
     left: 33.3333% !important;
 }
-
-.curtain-tooltip.intro-points-add .tooltip-arrow,
 .add-point .tooltip .tooltip-arrow {
     left: 60px;
 }
@@ -3442,9 +3441,7 @@ img.tile-removing {
     left: auto;
     right: 60px;
 }
-[dir='rtl'] .curtain-tooltip.intro-points-add .tooltip-arrow {
-    left: 50%;
-}
+
 
 /* radial menu (deprecated) */
 
@@ -3629,7 +3626,6 @@ img.tile-removing {
 }
 
 .intro-nav-wrap button.chapter .status {
-    margin-left: 3px;
     display: none;
 }
 
@@ -3637,14 +3633,17 @@ img.tile-removing {
     display: inline-block;
 }
 
-
-.curtain-tooltip .tooltip-inner {
+.curtain-tooltip.tooltip {
     text-align: left;
-    padding: 20px;
+}
+[dir='rtl'] .curtain-tooltip.tooltip {
+    text-align: right;
 }
 
 .curtain-tooltip .tooltip-inner {
     font-size: 15px;
+    position: relative;
+    padding: 20px;
 }
 
 .curtain-tooltip .tooltip-inner .bold {

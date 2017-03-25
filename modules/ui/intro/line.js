@@ -1,7 +1,6 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { t } from '../../util/locale';
-import { actionDeleteMultiple } from '../../actions/index';
 import { utilRebind } from '../../util/rebind';
 import { utilBindOnce } from '../../util/bind_once';
 import { icon, pad } from './helper';
@@ -194,10 +193,6 @@ export function uiIntroLine(context, reveal) {
         context.on('exit.intro', null);
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
-        if (drawId) {
-            context.replace(actionDeleteMultiple([drawId]));
-            drawId = null;
-        }
     };
 
 

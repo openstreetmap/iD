@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { t } from '../../util/locale';
+import { t, textDirection } from '../../util/locale';
 import { utilRebind } from '../../util/rebind';
 import { icon, pointBox } from './helper';
 
@@ -25,11 +25,19 @@ export function uiIntroNavigation(context, reveal) {
     }
 
 
+    function welcome() {
+        reveal('.intro-nav-wrap', 'This walkthrough will teach you the basics of editing on OpenStreetMap.');
+        timeout(function() {
+            dragMap();
+        }, 5000);
+    }
+
+
     function dragMap() {
         var dragged = false,
             rect = context.surfaceRect(),
             map = {
-                left: rect.left + 10,
+                left: rect.left + (textDirection === 'rtl' ? 60 : 10),
                 top: rect.top + 70,
                 width: rect.width - 70,
                 height: rect.height - 170
@@ -129,7 +137,7 @@ export function uiIntroNavigation(context, reveal) {
 
     chapter.enter = function() {
         context.history().reset('initial');
-        dragMap();
+        welcome();
     };
 
 
