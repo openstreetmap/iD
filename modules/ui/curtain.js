@@ -96,8 +96,13 @@ export function uiCurtain() {
                 pos = [box.left - 200, box.top + box.height / 2 - dimensions[1] / 2];
 
             } else {
-                side = 'bottom';
-                pos = [box.left, box.top + box.height];
+                // need real tooltip height to calculate "top" placement
+                tooltip
+                    .attr('class', 'curtain-tooltip tooltip in')
+                    .call(uiToggle(true));
+                var tip = tooltip.node().getBoundingClientRect();
+                side = 'top';
+                pos = [box.left + box.width / 2 - dimensions[0] / 2, box.top - tip.height];
             }
 
             pos = [
