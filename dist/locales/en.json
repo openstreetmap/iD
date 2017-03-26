@@ -666,6 +666,9 @@
                 "east_st": "East Street",
                 "portage_ave": "Portage Avenue"
             },
+            "welcome": {
+                "title": "Welcome"
+            },
             "navigation": {
                 "title": "Navigation",
                 "drag": "The main map area shows OpenStreetMap data on top of a background. You can navigate by dragging and scrolling, just like any web map. **Drag the map!**",

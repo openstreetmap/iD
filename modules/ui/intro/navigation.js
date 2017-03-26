@@ -25,14 +25,6 @@ export function uiIntroNavigation(context, reveal) {
     }
 
 
-    function welcome() {
-        reveal('.intro-nav-wrap',
-            'Welcome!  This walkthrough will teach you the basics of editing on OpenStreetMap.',
-            { buttonText: t('intro.ok'), buttonCallback: dragMap }
-        );
-    }
-
-
     function dragMap() {
         var dragged = false,
             rect = context.surfaceRect(),
@@ -120,9 +112,6 @@ export function uiIntroNavigation(context, reveal) {
     function selectedStreet() {
         var springSt = [-85.63585099140167, 41.942506848938926];
         context.map().centerEase(springSt);
-        context.on('exit.intro', function() {
-            dispatch.call('done');
-        });
 
         timeout(function() {
             reveal('.entity-editor-pane',
@@ -131,13 +120,16 @@ export function uiIntroNavigation(context, reveal) {
                     button: icon('#icon-close', 'pre-text')
                 })
             );
+            context.on('exit.intro', function() {
+                dispatch.call('done');
+            });
         }, 400);
     }
 
 
     chapter.enter = function() {
         context.history().reset('initial');
-        welcome();
+        dragMap();
     };
 
 

@@ -9,6 +9,7 @@ import { osmEntity } from '../../osm/entity';
 import { svgIcon } from '../../svg/icon';
 import { uiCurtain } from '../curtain';
 
+import { uiIntroWelcome } from './welcome';
 import { uiIntroNavigation } from './navigation';
 import { uiIntroPoint } from './point';
 import { uiIntroArea } from './area';
@@ -17,6 +18,7 @@ import { uiIntroStartEditing } from './start_editing';
 
 
 var chapterUi = {
+    welcome: uiIntroWelcome,
     navigation: uiIntroNavigation,
     point: uiIntroPoint,
     area: uiIntroArea,
@@ -25,6 +27,7 @@ var chapterUi = {
 };
 
 var chapterFlow = [
+    'welcome',
     'navigation',
     'point',
     'area',
@@ -78,10 +81,10 @@ export function uiIntro(context) {
         var chapters = chapterFlow.map(function(chapter, i) {
             var s = chapterUi[chapter](context, curtain.reveal)
                 .on('done', function() {
-                    entered.filter(function(d) {
+                    buttons.filter(function(d) {
                         return d.title === s.title;
                     }).classed('finished', true);
-                    enter(chapters[i + 1]);
+                    enterChapter(chapters[i + 1]);
                 });
             return s;
         });
@@ -114,34 +117,33 @@ export function uiIntro(context) {
             .attr('class', 'joined')
             .selectAll('button.chapter');
 
-        var entered = buttonwrap
+        var buttons = buttonwrap
             .data(chapters)
             .enter()
             .append('button')
             .attr('class', 'chapter')
-            .on('click', enter);
+            .on('click', enterChapter);
 
-        entered
+        buttons
             .append('label')
             .text(function(d) { return t(d.title); });
 
-        entered
+        buttons
             .append('span')
             .attr('class', 'status')
             .call(svgIcon((textDirection === 'rtl' ? '#icon-backward' : '#icon-forward'), 'inline'));
 
-        enter(chapters[0]);
+        enterChapter(chapters[0]);
 
 
-        function enter(newChapter) {
+        function enterChapter(newChapter) {
             if (currChapter) { currChapter.exit(); }
-
             context.enter(modeBrowse(context));
 
             currChapter = newChapter;
             currChapter.enter();
 
-            entered.classed('active', function(d) {
+            buttons.classed('active', function(d) {
                 return d.title === currChapter.title;
             });
         }
