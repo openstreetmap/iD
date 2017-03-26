@@ -778,6 +778,7 @@ en:
       click the "Merge" (+) button.
   intro:
     done: done
+    ok: OK
     graph:
       city_hall: Three Rivers City Hall
       fire_department: Three Rivers Fire Department

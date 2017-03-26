@@ -3646,6 +3646,7 @@ img.tile-removing {
     padding: 20px;
 }
 
+.curtain-tooltip .tooltip-inner .button-section,
 .curtain-tooltip .tooltip-inner .bold {
     font-weight: bold;
     display: block;

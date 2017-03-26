@@ -26,10 +26,10 @@ export function uiIntroNavigation(context, reveal) {
 
 
     function welcome() {
-        reveal('.intro-nav-wrap', 'This walkthrough will teach you the basics of editing on OpenStreetMap.');
-        timeout(function() {
-            dragMap();
-        }, 5000);
+        reveal('.intro-nav-wrap',
+            'Welcome!  This walkthrough will teach you the basics of editing on OpenStreetMap.',
+            { buttonText: t('intro.ok'), buttonCallback: dragMap }
+        );
     }
 
 

@@ -62,13 +62,32 @@ export function uiCurtain() {
             // pseudo markdown bold text hack
             var parts = text.split('**');
             var html = parts[0] ? '<span>' + parts[0] + '</span>' : '';
-            if (parts[1]) html += '<span class="bold">' + parts[1] + '</span>';
+            if (parts[1]) {
+                html += '<span class="bold">' + parts[1] + '</span>';
+            }
+
+            if (options.buttonText && options.buttonCallback) {
+                html += '<div class="button-section">' +
+                    '<button href="#" class="button action col8">' + options.buttonText + '</button></div>';
+            }
 
             var classes = 'curtain-tooltip tooltip in ' + (options.tooltipClass || '');
             tooltip
                 .classed(classes, true)
                 .selectAll('.tooltip-inner')
                 .html(html);
+
+            if (options.buttonText && options.buttonCallback) {
+                var button = tooltip.selectAll('.button-section .button.action');
+
+                button
+                    .on('click', function() {
+                        d3.event.preventDefault();
+                        options.buttonCallback();
+                    });
+
+                button.node().focus();
+            }
 
             // var dimensions = utilGetDimensions(selection, true),
             var tip = tooltip.node().getBoundingClientRect(),
