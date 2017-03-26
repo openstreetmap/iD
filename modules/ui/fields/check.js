@@ -64,10 +64,10 @@ export function uiFieldCheck(field, context) {
 
 
     function reverserSetText(selection) {
-        if (reverserHidden()) return selection;
+        var entity = context.hasEntity(entityId);
+        if (reverserHidden() || !entity) return selection;
 
-        var entity = context.entity(entityId),
-            first = entity.first(),
+        var first = entity.first(),
             last = entity.isClosed() ? entity.nodes[entity.nodes.length - 2] : entity.last(),
             pseudoDirection = first < last,
             icon = pseudoDirection ? '#icon-forward' : '#icon-backward';
@@ -115,7 +115,6 @@ export function uiFieldCheck(field, context) {
         label = label.merge(enter);
         input = label.selectAll('input');
         text = label.selectAll('span.value');
-        reverser = label.selectAll('.reverser');
 
         input
             .on('click', function() {
@@ -125,18 +124,22 @@ export function uiFieldCheck(field, context) {
                 d3.event.stopPropagation();
             });
 
-        reverser
-            .call(reverserSetText)
-            .on('click', function() {
-                d3.event.preventDefault();
-                d3.event.stopPropagation();
-                context.perform(
-                    actionReverse(entityId),
-                    t('operations.reverse.annotation')
-                );
-                d3.select(this)
-                    .call(reverserSetText);
-            });
+        if (field.type === 'onewayCheck') {
+            reverser = label.selectAll('.reverser');
+
+            reverser
+                .call(reverserSetText)
+                .on('click', function() {
+                    d3.event.preventDefault();
+                    d3.event.stopPropagation();
+                    context.perform(
+                        actionReverse(entityId),
+                        t('operations.reverse.annotation')
+                    );
+                    d3.select(this)
+                        .call(reverserSetText);
+                });
+        }
     };
 
 
@@ -165,9 +168,11 @@ export function uiFieldCheck(field, context) {
         label
             .classed('set', !!value);
 
-        reverser
-            .classed('hide', reverserHidden())
-            .call(reverserSetText);
+        if (field.type === 'onewayCheck') {
+            reverser
+                .classed('hide', reverserHidden())
+                .call(reverserSetText);
+        }
     };
 
 
