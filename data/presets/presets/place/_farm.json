@@ -7,5 +7,6 @@
     "tags": {
         "place": "farm"
     },
-    "name": "Farm"
+    "name": "Farm",
+    "searchable": false
 }
