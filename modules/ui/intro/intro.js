@@ -84,6 +84,12 @@ export function uiIntro(context) {
                     buttons.filter(function(d) {
                         return d.title === s.title;
                     }).classed('finished', true);
+
+                    if (i < chapterFlow.length - 1) {
+                        var next = chapterFlow[i + 1];
+                        d3.select('button.chapter-' + next)
+                            .classed('next', true);
+                    }
                     // enterChapter(chapters[i + 1]);
                 });
             return s;
@@ -143,9 +149,11 @@ export function uiIntro(context) {
             currChapter = newChapter;
             currChapter.enter();
 
-            buttons.classed('active', function(d) {
-                return d.title === currChapter.title;
-            });
+            buttons
+                .classed('next', false)
+                .classed('active', function(d) {
+                    return d.title === currChapter.title;
+                });
         }
     }
 

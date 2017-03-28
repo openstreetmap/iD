@@ -3621,6 +3621,17 @@ img.tile-removing {
     padding: 0px 20px;
 }
 
+.intro-nav-wrap button.chapter.next {
+    animation-duration: 1s;
+    animation-name: pulse;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+@keyframes pulse {
+    from  { background: #7092ff; }
+    to    { background: #c6d4ff; }
+}
+
 .intro-nav-wrap button.chapter.finished {
     background: #8cd05f;
 }

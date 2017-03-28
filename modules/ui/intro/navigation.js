@@ -76,11 +76,12 @@ export function uiIntroNavigation(context, reveal) {
         timeout(function() {
             var box = pointBox(hall.loc, context);
             reveal(box, t('intro.navigation.select'));
+
             context.map().on('move.intro drawn.intro', function() {
                 var box = pointBox(hall.loc, context);
                 reveal(box, t('intro.navigation.select'), { duration: 0 });
             });
-        }, 260);
+        }, 260); // after centerEase
 
         function advance() {
             context.on('enter.intro', null);
@@ -96,14 +97,16 @@ export function uiIntroNavigation(context, reveal) {
         var hall = context.entity('n2140018997');
         var box = pointBox(hall.loc, context);
 
-        reveal(box, t('intro.navigation.selected'));
+        reveal(box, t('intro.navigation.selected'),
+            { buttonText: t('intro.ok'), buttonCallback: advance }
+        );
 
         context.map().on('move.intro drawn.intro', function() {
             var box = pointBox(hall.loc, context);
-            reveal(box, t('intro.navigation.selected'), { duration: 0 });
+            reveal(box, t('intro.navigation.selected'),
+                { duration: 0, buttonText: t('intro.ok'), buttonCallback: advance }
+            );
         });
-
-        timeout(advance, 4000);
 
         function advance() {
             context.map().on('move.intro drawn.intro', null);
@@ -186,7 +189,7 @@ export function uiIntroNavigation(context, reveal) {
 
     function play() {
         reveal('.intro-nav-wrap .chapter-point',
-            t('intro.navigation.play', { chapter: t('intro.points.title') }), {
+            t('intro.navigation.play', { next: t('intro.points.title') }), {
                 buttonText: t('intro.ok'),
                 buttonCallback: function() {
                     dispatch.call('done');

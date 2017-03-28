@@ -172,9 +172,28 @@ export function uiIntroLine(context, reveal) {
     function roadDetails() {
         reveal('.pane',
             t('intro.lines.describe', { button: icon('#icon-apply', 'pre-text') }));
+
         context.on('exit.intro', function() {
-            dispatch.call('done');
+            advance();
         });
+
+        function advance() {
+            context.on('exit.intro', null);
+            play();
+        }
+    }
+
+
+    function play() {
+        reveal('.intro-nav-wrap .chapter-startEditing',
+            t('intro.line.play', { next: t('intro.startediting.title') }), {
+                buttonText: t('intro.ok'),
+                buttonCallback: function() {
+                    dispatch.call('done');
+                    reveal('#id-container');
+                }
+            }
+        );
     }
 
 

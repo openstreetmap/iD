@@ -127,30 +127,44 @@ export function uiIntroPoint(context, reveal) {
 
     function deletePoint() {
         context.on('exit.intro', null);
-        context.on('enter.intro', enterDelete);
+        context.on('enter.intro', function(mode) {
+            if (mode.id !== 'select') return;
+
+            var node = d3.select('.edit-menu-item-delete, .radial-menu-item-delete').node();
+            if (!node) return;
+
+            advance();
+        });
 
         var pointBox = pad(corner, 150, context);
         reveal(pointBox, t('intro.points.rightclick'));
 
         context.map().on('move.intro drawn.intro', function() {
             pointBox = pad(corner, 150, context);
-            reveal(pointBox, t('intro.points.rightclick'), {duration: 0});
+            reveal(pointBox, t('intro.points.rightclick'), { duration: 0 });
         });
+
+        function advance() {
+            context.on('enter.intro', null);
+            context.map().on('move.intro drawn.intro', null);
+            enterDelete()
+        }
     }
 
 
-    function enterDelete(mode) {
-        if (mode.id !== 'select') return;
-        context.map().on('move.intro drawn.intro', null);
-        context.on('enter.intro', null);
+    function enterDelete() {
         context.on('exit.intro', deletePoint);
-        context.map().on('move.intro drawn.intro', deletePoint);
-        context.history().on('change.intro', deleted);
+        context.history().on('change.intro', function(changed) {
+            if (changed.deleted().length)
+                advance();
+        });
 
         timeout(function() {
             // deprecation warning - Radial Menu to be removed in iD v3
             var node = d3.select('.edit-menu-item-delete, .radial-menu-item-delete').node();
             if (!node) {
+                context.history().on('change.intro', null);
+                context.on('exit.intro', null);
                 deletePoint();
             } else {
                 var pointBox = pad(node.getBoundingClientRect(), 50, context);
@@ -158,13 +172,25 @@ export function uiIntroPoint(context, reveal) {
                     t('intro.points.delete', { button: icon('#operation-delete', 'pre-text') }));
             }
         }, 300);
+
+        function advance() {
+            context.history().on('change.intro', null);
+            context.on('exit.intro', null);
+            play()
+        }
     }
 
 
-    function deleted(changed) {
-        if (changed.deleted().length) {
-            dispatch.call('done');
-        }
+    function play() {
+        reveal('.intro-nav-wrap .chapter-area',
+            t('intro.point.play', { next: t('intro.area.title') }), {
+                buttonText: t('intro.ok'),
+                buttonCallback: function() {
+                    dispatch.call('done');
+                    reveal('#id-container');
+                }
+            }
+        );
     }
 
 

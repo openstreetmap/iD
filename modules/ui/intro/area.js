@@ -95,9 +95,28 @@ export function uiIntroArea(context, reveal) {
     function selectedPreset() {
         reveal('.pane',
             t('intro.areas.describe', { button: icon('#icon-apply', 'pre-text') }));
+
         context.on('exit.intro', function() {
-            dispatch.call('done');
+            advance();
         });
+
+        function advance() {
+            context.on('exit.intro', null);
+            play();
+        }
+    }
+
+
+    function play() {
+        reveal('.intro-nav-wrap .chapter-line',
+            t('intro.area.play', { next: t('intro.line.title') }), {
+                buttonText: t('intro.ok'),
+                buttonCallback: function() {
+                    dispatch.call('done');
+                    reveal('#id-container');
+                }
+            }
+        );
     }
 
 

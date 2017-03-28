@@ -21,10 +21,10 @@ export function uiIntroWelcome(context, reveal) {
     }
 
     function chapters() {
-        reveal('.intro-nav-wrap',
-            t('intro.welcome.chapters'),
-            { buttonText: t('intro.ok'), buttonCallback: function() { dispatch.call('done'); } }
+        reveal('.intro-nav-wrap .chapter-navigation',
+            t('intro.welcome.chapters', { next: t('intro.navigation.title') })
         );
+        dispatch.call('done');
     }
 
 

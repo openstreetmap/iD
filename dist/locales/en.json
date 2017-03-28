@@ -669,7 +669,7 @@
             "welcome": {
                 "title": "Welcome",
                 "welcome": "Welcome!  This walkthrough will teach you the basics of editing on OpenStreetMap.",
-                "chapters": "You can use the buttons below to skip chapters at any time, or restart a chapter if you get stuck.  Let's begin!"
+                "chapters": "You can use the buttons below to skip chapters at any time, or restart a chapter if you get stuck.  Let's begin! **Click '{next}' to continue.**"
             },
             "navigation": {
                 "title": "Navigation",
@@ -680,7 +680,7 @@
                 "search": "You can also search for features in the current view, or worldwide. **Search for '{name}'**",
                 "choose": "**Choose {name} from the list to select it.**",
                 "chosen": "Great! {name} is now selected. See how the fields displayed for a street are different than the fields displayed for the town hall.  **Close the feature editor by pressing the {button} button.**",
-                "play": "Try moving the map and clicking on some other features.  **When you are ready to continue to the next chapter, click '{chapter}'.**"
+                "play": "Try moving the map and clicking on some other features.  **When you are ready to continue to the next chapter, click '{next}'.**"
             },
             "points": {
                 "title": "Points",
@@ -693,7 +693,8 @@
                 "reselect": "Often points will already exist, but have mistakes or be incomplete. We can edit existing points. **Click to select the point you just created.**",
                 "fixname": "**Change the name, then click the {button} button to close the feature editor.**",
                 "rightclick": "You can right-click on features to see the list of operations that can be performed on them. **Right-click to select the point you created.**",
-                "delete": "**Click on the {button} button to delete the point.**"
+                "delete": "**Click on the {button} button to delete the point.**",
+                "play": "Try adding a few more points.  **When you are ready to continue to the next chapter, click '{next}'.**"
             },
             "areas": {
                 "title": "Areas",
@@ -702,7 +703,8 @@
                 "place": "Draw the area by placing more nodes. Finish the area by clicking on the starting node. **Draw an area for the playground.**",
                 "search": "**Search for '{name}'.**",
                 "choose": "**Choose Playground from the list.**",
-                "describe": "**Add a name, then click the {button} button to close the feature editor**"
+                "describe": "**Add a name, then click the {button} button to close the feature editor**",
+                "play": "Try drawing a few more areas.  **When you are ready to continue to the next chapter, click '{next}'.**"
             },
             "lines": {
                 "title": "Lines",
@@ -714,7 +716,8 @@
                 "residential": "There are different types of roads, the most common of which is Residential. **Choose the Residential road type**",
                 "describe": "**Name the road, then click the {button} button to close the feature editor.**",
                 "restart": "The road needs to intersect {name}.",
-                "wrong_preset": "You didn't select the Residential road type. **Click here to choose again**"
+                "wrong_preset": "You didn't select the Residential road type. **Click here to choose again**",
+                "play": "Try drawing a few more lines.  **When you are ready to continue to the next chapter, click '{next}'.**"
             },
             "startediting": {
                 "title": "Start Editing",
