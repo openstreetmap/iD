@@ -15,14 +15,14 @@ export function uiIntroWelcome(context, reveal) {
     function welcome() {
         context.map().centerZoom([-85.63591, 41.94285], 19);
         reveal('.intro-nav-wrap',
-            'Welcome!  This walkthrough will teach you the basics of editing on OpenStreetMap.',
-            { buttonText: t('intro.ok'), buttonCallback: buttons }
+            t('intro.welcome.welcome'),
+            { buttonText: t('intro.ok'), buttonCallback: chapters }
         );
     }
 
-    function buttons() {
+    function chapters() {
         reveal('.intro-nav-wrap',
-            'You can use the buttons along bottom to skip sections or restart a section if you get stuck.',
+            t('intro.welcome.chapters'),
             { buttonText: t('intro.ok'), buttonCallback: function() { dispatch.call('done'); } }
         );
     }

@@ -667,16 +667,20 @@
                 "portage_ave": "Portage Avenue"
             },
             "welcome": {
-                "title": "Welcome"
+                "title": "Welcome",
+                "welcome": "Welcome!  This walkthrough will teach you the basics of editing on OpenStreetMap.",
+                "chapters": "You can use the buttons below to skip chapters at any time, or restart a chapter if you get stuck.  Let's begin!"
             },
             "navigation": {
                 "title": "Navigation",
                 "drag": "The main map area shows OpenStreetMap data on top of a background. You can navigate by dragging and scrolling, just like any web map. **Drag the map!**",
                 "select": "Map features are represented three ways: using points, lines or areas. All features can be selected by clicking on them. **Click on the point to select it.**",
+                "selected": "Great!  The point is now selected. Selected items are drawn with a pulsing glow.",
                 "pane": "When a feature is selected, the feature editor is displayed. The header shows us the feature type and the main pane shows the feature's attributes, such as its name and address. **Close the feature editor by pressing the {button} button in the top right.**",
                 "search": "You can also search for features in the current view, or worldwide. **Search for '{name}'**",
                 "choose": "**Choose {name} from the list to select it.**",
-                "chosen": "Great! {name} is now selected. **Close the feature editor by pressing the {button} button.**"
+                "chosen": "Great! {name} is now selected. See how the fields displayed for a street are different than the fields displayed for the town hall.  **Close the feature editor by pressing the {button} button.**",
+                "play": "Try moving the map and clicking on some other features.  **When you are ready to continue to the next chapter, click '{chapter}'.**"
             },
             "points": {
                 "title": "Points",

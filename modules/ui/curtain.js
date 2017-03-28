@@ -168,7 +168,9 @@ export function uiCurtain() {
                 .style('top', shiftY + 'px');
 
         } else {
-            tooltip.call(uiToggle(false));
+            tooltip
+                .classed('in', false)
+                .call(uiToggle(false));
         }
 
         return tooltip;

@@ -6,6 +6,7 @@ import { icon, pointBox } from './helper';
 
 export function uiIntroNavigation(context, reveal) {
     var dispatch = d3.dispatch('done'),
+        hallId = 'n2140018997',
         timeouts = [];
 
 
@@ -22,6 +23,12 @@ export function uiIntroNavigation(context, reveal) {
     function eventCancel() {
         d3.event.stopPropagation();
         d3.event.preventDefault();
+    }
+
+
+    function isTownHallSelected() {
+        var ids = context.selectedIDs();
+        return ids.length === 1 && ids[0] === hallId;
     }
 
 
@@ -43,20 +50,28 @@ export function uiIntroNavigation(context, reveal) {
         });
 
         d3.select(window).on('mouseup.intro', function() {
-            if (!dragged) return;
-            d3.select(window).on('mouseup.intro', null, true);
-            context.map().on('move.intro', null);
-            clickTownHall();
+            if (dragged) advance();
         }, true);
+
+        function advance() {
+            context.map().on('move.intro', null);
+            d3.select(window).on('mouseup.intro', null, true);
+            clickTownHall();
+        }
     }
 
 
     function clickTownHall() {
-        context.history().reset('initial');  // ensure townhall exists
-        var hall = context.entity('n2140018997');
+        if (!context.hasEntity(hallId)) {
+            context.history().reset('initial');
+        }
 
-        context.on('enter.intro', inspectTownHall);
+        var hall = context.entity(hallId);
         context.map().centerEase(hall.loc, 250);
+
+        context.on('enter.intro', function() {
+            if (isTownHallSelected()) advance();
+        });
 
         timeout(function() {
             var box = pointBox(hall.loc, context);
@@ -66,45 +81,84 @@ export function uiIntroNavigation(context, reveal) {
                 reveal(box, t('intro.navigation.select'), { duration: 0 });
             });
         }, 260);
+
+        function advance() {
+            context.on('enter.intro', null);
+            context.map().on('move.intro drawn.intro', null);
+            selectedTownHall();
+        }
+    }
+
+
+    function selectedTownHall() {
+        if (!isTownHallSelected()) return clickTownHall();
+
+        var hall = context.entity('n2140018997');
+        var box = pointBox(hall.loc, context);
+
+        reveal(box, t('intro.navigation.selected'));
+
+        context.map().on('move.intro drawn.intro', function() {
+            var box = pointBox(hall.loc, context);
+            reveal(box, t('intro.navigation.selected'), { duration: 0 });
+        });
+
+        timeout(advance, 4000);
+
+        function advance() {
+            context.map().on('move.intro drawn.intro', null);
+            inspectTownHall();
+        }
     }
 
 
     function inspectTownHall(mode) {
-        if (mode.id !== 'select') return;
+        if (!isTownHallSelected()) return clickTownHall();
 
-        context.on('enter.intro', null);
-        context.map().on('move.intro drawn.intro', null);
-        context.on('exit.intro', streetSearch);
+        context.on('exit.intro', advance);
 
         timeout(function() {
             reveal('.entity-editor-pane',
                 t('intro.navigation.pane', { button: icon('#icon-close', 'pre-text') })
             );
         }, 700);
+
+        function advance() {
+            context.on('exit.intro', null);
+            streetSearch();
+        }
     }
 
 
     function streetSearch() {
         context.history().reset('initial');  // ensure spring street exists
-        context.on('exit.intro', null);
+
         reveal('.search-header input',
             t('intro.navigation.search', { name: t('intro.graph.spring_st') }));
+
         d3.select('.search-header input')
-            .on('keyup.intro', searchResult);
+            .on('keyup.intro', checkSearchResult);
     }
 
 
-    function searchResult() {
-        var first = d3.select('.feature-list-item:nth-child(0n+2)'),  // skip No Results item
+    function checkSearchResult() {
+        var first = d3.select('.feature-list-item:nth-child(0n+2)'),  // skip "No Results" item
             firstName = first.select('.entity-name'),
             name = t('intro.graph.spring_st');
 
         if (!firstName.empty() && firstName.text() === name) {
             reveal(first.node(), t('intro.navigation.choose', { name: name }));
-            context.on('exit.intro', selectedStreet);
+
+            context.on('exit.intro', advance);
+
             d3.select('.search-header input')
                 .on('keydown.intro', eventCancel, true)
                 .on('keyup.intro', null);
+        }
+
+        function advance() {
+            context.on('exit.intro', null);
+            selectedStreet();
         }
     }
 
@@ -120,10 +174,26 @@ export function uiIntroNavigation(context, reveal) {
                     button: icon('#icon-close', 'pre-text')
                 })
             );
-            context.on('exit.intro', function() {
-                dispatch.call('done');
-            });
+            context.on('exit.intro', advance);
         }, 400);
+
+        function advance() {
+            context.on('exit.intro', null);
+            play();
+        }
+    }
+
+
+    function play() {
+        reveal('.intro-nav-wrap .chapter-point',
+            t('intro.navigation.play', { chapter: t('intro.points.title') }), {
+                buttonText: t('intro.ok'),
+                buttonCallback: function() {
+                    dispatch.call('done');
+                    reveal('#id-container');
+                }
+            }
+        );
     }
 
 

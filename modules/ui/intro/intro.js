@@ -84,7 +84,7 @@ export function uiIntro(context) {
                     buttons.filter(function(d) {
                         return d.title === s.title;
                     }).classed('finished', true);
-                    enterChapter(chapters[i + 1]);
+                    // enterChapter(chapters[i + 1]);
                 });
             return s;
         });
@@ -121,7 +121,7 @@ export function uiIntro(context) {
             .data(chapters)
             .enter()
             .append('button')
-            .attr('class', 'chapter')
+            .attr('class', function(d, i) { return 'chapter chapter-' + chapterFlow[i]; })
             .on('click', enterChapter);
 
         buttons
