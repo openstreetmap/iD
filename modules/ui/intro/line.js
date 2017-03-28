@@ -186,7 +186,7 @@ export function uiIntroLine(context, reveal) {
 
     function play() {
         reveal('.intro-nav-wrap .chapter-startEditing',
-            t('intro.line.play', { next: t('intro.startediting.title') }), {
+            t('intro.lines.play', { next: t('intro.startediting.title') }), {
                 buttonText: t('intro.ok'),
                 buttonCallback: function() {
                     dispatch.call('done');

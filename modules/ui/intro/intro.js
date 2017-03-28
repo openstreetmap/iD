@@ -90,7 +90,6 @@ export function uiIntro(context) {
                         d3.select('button.chapter-' + next)
                             .classed('next', true);
                     }
-                    // enterChapter(chapters[i + 1]);
                 });
             return s;
         });

@@ -35,7 +35,7 @@ export function uiIntroNavigation(context, reveal) {
     function dragMap() {
         var dragged = false,
             rect = context.surfaceRect(),
-            map = {
+            box = {
                 left: rect.left + (textDirection === 'rtl' ? 60 : 10),
                 top: rect.top + 70,
                 width: rect.width - 70,
@@ -43,20 +43,20 @@ export function uiIntroNavigation(context, reveal) {
             };
 
         context.map().centerZoom([-85.63591, 41.94285], 19);
-        reveal(map, t('intro.navigation.drag'));
+        reveal(box, t('intro.navigation.drag'));
 
         context.map().on('move.intro', function() {
             dragged = true;
         });
 
         d3.select(window).on('mouseup.intro', function() {
-            if (dragged) advance();
+            if (dragged) continueTo(clickTownHall);
         }, true);
 
-        function advance() {
+        function continueTo(nextStep) {
             context.map().on('move.intro', null);
             d3.select(window).on('mouseup.intro', null, true);
-            clickTownHall();
+            nextStep();
         }
     }
 
@@ -70,7 +70,7 @@ export function uiIntroNavigation(context, reveal) {
         context.map().centerEase(hall.loc, 250);
 
         context.on('enter.intro', function() {
-            if (isTownHallSelected()) advance();
+            if (isTownHallSelected()) continueTo(selectedTownHall);
         });
 
         timeout(function() {
@@ -83,10 +83,10 @@ export function uiIntroNavigation(context, reveal) {
             });
         }, 260); // after centerEase
 
-        function advance() {
+        function continueTo(nextStep) {
             context.on('enter.intro', null);
             context.map().on('move.intro drawn.intro', null);
-            selectedTownHall();
+            nextStep();
         }
     }
 
@@ -96,6 +96,7 @@ export function uiIntroNavigation(context, reveal) {
 
         var hall = context.entity('n2140018997');
         var box = pointBox(hall.loc, context);
+        var advance = function() { continueTo(inspectTownHall); };
 
         reveal(box, t('intro.navigation.selected'),
             { buttonText: t('intro.ok'), buttonCallback: advance }
@@ -108,9 +109,9 @@ export function uiIntroNavigation(context, reveal) {
             );
         });
 
-        function advance() {
+        function continueTo(nextStep) {
             context.map().on('move.intro drawn.intro', null);
-            inspectTownHall();
+            nextStep();
         }
     }
 
@@ -118,7 +119,9 @@ export function uiIntroNavigation(context, reveal) {
     function inspectTownHall(mode) {
         if (!isTownHallSelected()) return clickTownHall();
 
-        context.on('exit.intro', advance);
+        context.on('exit.intro', function() {
+            continueTo(streetSearch);
+        });
 
         timeout(function() {
             reveal('.entity-editor-pane',
@@ -126,9 +129,9 @@ export function uiIntroNavigation(context, reveal) {
             );
         }, 700);
 
-        function advance() {
+        function continueTo(nextStep) {
             context.on('exit.intro', null);
-            streetSearch();
+            nextStep();
         }
     }
 
@@ -152,16 +155,18 @@ export function uiIntroNavigation(context, reveal) {
         if (!firstName.empty() && firstName.text() === name) {
             reveal(first.node(), t('intro.navigation.choose', { name: name }));
 
-            context.on('exit.intro', advance);
+            context.on('exit.intro', function() {
+                continueTo(selectedStreet);
+            });
 
             d3.select('.search-header input')
                 .on('keydown.intro', eventCancel, true)
                 .on('keyup.intro', null);
         }
 
-        function advance() {
+        function continueTo(nextStep) {
             context.on('exit.intro', null);
-            selectedStreet();
+            nextStep();
         }
     }
 
@@ -177,12 +182,14 @@ export function uiIntroNavigation(context, reveal) {
                     button: icon('#icon-close', 'pre-text')
                 })
             );
-            context.on('exit.intro', advance);
+            context.on('exit.intro', function() {
+                continueTo(play);
+            });
         }, 400);
 
-        function advance() {
+        function continueTo(nextStep) {
             context.on('exit.intro', null);
-            play();
+            nextStep();
         }
     }
 

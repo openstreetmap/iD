@@ -109,7 +109,7 @@ export function uiIntroArea(context, reveal) {
 
     function play() {
         reveal('.intro-nav-wrap .chapter-line',
-            t('intro.area.play', { next: t('intro.line.title') }), {
+            t('intro.areas.play', { next: t('intro.lines.title') }), {
                 buttonText: t('intro.ok'),
                 buttonCallback: function() {
                     dispatch.call('done');

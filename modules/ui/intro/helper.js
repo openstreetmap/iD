@@ -2,11 +2,11 @@ export function pointBox(loc, context) {
     var rect = context.surfaceRect();
     var point = context.curtainProjection(loc);
     return {
-        left: point[0] + rect.left - 30,
-        top: point[1] + rect.top - 50,
-        width: 60,
-        height: 70
-     };
+        left: point[0] + rect.left - 40,
+        top: point[1] + rect.top - 60,
+        width: 80,
+        height: 90
+    };
 }
 
 
