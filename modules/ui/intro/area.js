@@ -108,13 +108,11 @@ export function uiIntroArea(context, reveal) {
 
 
     function play() {
+        dispatch.call('done');
         reveal('.intro-nav-wrap .chapter-line',
             t('intro.areas.play', { next: t('intro.lines.title') }), {
                 buttonText: t('intro.ok'),
-                buttonCallback: function() {
-                    dispatch.call('done');
-                    reveal('#id-container');
-                }
+                buttonCallback: function() { reveal('#id-container'); }
             }
         );
     }

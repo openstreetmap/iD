@@ -195,13 +195,11 @@ export function uiIntroNavigation(context, reveal) {
 
 
     function play() {
+        dispatch.call('done');
         reveal('.intro-nav-wrap .chapter-point',
             t('intro.navigation.play', { next: t('intro.points.title') }), {
                 buttonText: t('intro.ok'),
-                buttonCallback: function() {
-                    dispatch.call('done');
-                    reveal('#id-container');
-                }
+                buttonCallback: function() { reveal('#id-container'); }
             }
         );
     }

@@ -21,10 +21,10 @@ export function uiIntroWelcome(context, reveal) {
     }
 
     function chapters() {
+        dispatch.call('done');
         reveal('.intro-nav-wrap .chapter-navigation',
             t('intro.welcome.chapters', { next: t('intro.navigation.title') })
         );
-        dispatch.call('done');
     }
 
 

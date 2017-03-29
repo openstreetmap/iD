@@ -295,13 +295,11 @@ export function uiIntroPoint(context, reveal) {
 
 
     function play() {
+        dispatch.call('done');
         reveal('.intro-nav-wrap .chapter-area',
             t('intro.points.play', { next: t('intro.areas.title') }), {
                 buttonText: t('intro.ok'),
-                buttonCallback: function() {
-                    dispatch.call('done');
-                    reveal('#id-container');
-                }
+                buttonCallback: function() { reveal('#id-container'); }
             }
         );
     }

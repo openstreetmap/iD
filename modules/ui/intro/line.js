@@ -185,13 +185,11 @@ export function uiIntroLine(context, reveal) {
 
 
     function play() {
+        dispatch.call('done');
         reveal('.intro-nav-wrap .chapter-startEditing',
             t('intro.lines.play', { next: t('intro.startediting.title') }), {
                 buttonText: t('intro.ok'),
-                buttonCallback: function() {
-                    dispatch.call('done');
-                    reveal('#id-container');
-                }
+                buttonCallback: function() { reveal('#id-container'); }
             }
         );
     }
