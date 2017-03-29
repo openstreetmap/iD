@@ -26,25 +26,25 @@ export function uiZoom(context) {
 
     function zoomIn() {
         d3.event.preventDefault();
-        if (!context.inIntro()) context.zoomIn();
+        context.zoomIn();
     }
 
 
     function zoomOut() {
         d3.event.preventDefault();
-        if (!context.inIntro()) context.zoomOut();
+        context.zoomOut();
     }
 
 
     function zoomInFurther() {
         d3.event.preventDefault();
-        if (!context.inIntro()) context.zoomInFurther();
+        context.zoomInFurther();
     }
 
 
     function zoomOutFurther() {
         d3.event.preventDefault();
-        if (!context.inIntro()) context.zoomOutFurther();
+        context.zoomOutFurther();
     }
 
 

@@ -33,7 +33,7 @@ export function behaviorOperation(context) {
 
 
     var behavior = function () {
-        if (which && which.available() && !context.inIntro()) {
+        if (which && which.available()) {
             keybinding = d3keybinding('behavior.key.' + which.id);
             keybinding.on(which.keys, function() {
                 d3.event.preventDefault();

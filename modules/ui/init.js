@@ -255,9 +255,7 @@ export function uiInit(context) {
         function pan(d) {
             return function() {
                 d3.event.preventDefault();
-                if (!context.inIntro()) {
-                    context.pan(d, 100);
-                }
+                context.pan(d, 100);
             };
         }
 
