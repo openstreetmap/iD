@@ -116,7 +116,7 @@ export function uiIntroNavigation(context, reveal) {
     }
 
 
-    function inspectTownHall(mode) {
+    function inspectTownHall() {
         if (!isTownHallSelected()) return clickTownHall();
 
         context.on('exit.intro', function() {

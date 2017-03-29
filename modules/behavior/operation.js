@@ -4,7 +4,7 @@ import { uiFlash } from '../ui';
 
 
 /* Creates a keybinding behavior for an operation */
-export function behaviorOperation(context) {
+export function behaviorOperation() {
     var which, keybinding;
 
 

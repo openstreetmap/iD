@@ -1,6 +1,5 @@
 import * as d3 from 'd3';
 import { t } from '../../util/locale';
-import { utilBindOnce } from '../../util/bind_once';
 import { utilRebind } from '../../util/rebind';
 import { icon, pointBox, pad } from './helper';
 
@@ -127,7 +126,7 @@ export function uiIntroPoint(context, reveal) {
 
 
     function selectedPreset() {
-        context.on('exit.intro', function(mode) {
+        context.on('exit.intro', function() {
             return chapter.restart();
         });
 
@@ -201,7 +200,7 @@ export function uiIntroPoint(context, reveal) {
     function updatePoint() {
         if (context.mode().id !== 'select') return continueTo(selectPoint);
 
-        context.on('exit.intro', function(mode) {
+        context.on('exit.intro', function() {
             continueTo(rightClickPoint);
         });
 
@@ -248,7 +247,7 @@ export function uiIntroPoint(context, reveal) {
         function continueTo(nextStep) {
             context.on('enter.intro', null);
             context.map().on('move.intro drawn.intro', null);
-            nextStep()
+            nextStep();
         }
     }
 
@@ -289,7 +288,7 @@ export function uiIntroPoint(context, reveal) {
         function continueTo(nextStep) {
             context.history().on('change.intro', null);
             context.on('exit.intro', null);
-            nextStep()
+            nextStep();
         }
     }
 
