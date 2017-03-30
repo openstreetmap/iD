@@ -53,10 +53,9 @@ export function uiCurtain() {
 
     curtain.reveal = function(box, text, options) {
         if (typeof box === 'string') box = d3.select(box).node();
-        if (box.getBoundingClientRect) box = box.getBoundingClientRect();
+        if (box.getBoundingClientRect) box = copyBox(box.getBoundingClientRect());
 
         options = options || {};
-        curtain.cut(box, options.duration);
 
         if (text) {
             // pseudo markdown bold text hack
@@ -90,7 +89,7 @@ export function uiCurtain() {
             }
 
             // var dimensions = utilGetDimensions(selection, true),
-            var tip = tooltip.node().getBoundingClientRect(),
+            var tip = copyBox(tooltip.node().getBoundingClientRect()),
                 w = window.innerWidth,
                 h = window.innerHeight,
                 tooltipWidth = 200,
@@ -173,6 +172,8 @@ export function uiCurtain() {
                 .call(uiToggle(false));
         }
 
+        curtain.cut(box, options.duration);
+
         return tooltip;
     };
 
@@ -213,6 +214,20 @@ export function uiCurtain() {
         tooltip.remove();
         d3.select(window).on('resize.curtain', null);
     };
+
+
+    // ClientRects are immutable, so copy them to an object,
+    // in case we need to trim the height/width.
+    function copyBox(src) {
+        return {
+            top: src.top,
+            right: src.right,
+            bottom: src.bottom,
+            left: src.left,
+            width: src.width,
+            height: src.height
+        };
+    }
 
 
     return curtain;
