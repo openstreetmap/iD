@@ -2,19 +2,17 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { t } from '../../util/locale';
 import { utilRebind } from '../../util/rebind';
-import { utilBindOnce } from '../../util/bind_once';
 import { icon, pad } from './helper';
 
 
 export function uiIntroLine(context, reveal) {
     var dispatch = d3.dispatch('done'),
         timeouts = [],
-        centroid = [-85.62830, 41.95699],
         midpoint = [-85.62975395449628, 41.95787501510204],
         start = [-85.6297754121684, 41.95805253325314],
         intersection = [-85.62974496187628, 41.95742515554585],
         targetId = 'w17965351',
-        drawId = null;
+        lineId = null;
 
 
     var chapter = {
@@ -43,143 +41,244 @@ export function uiIntroLine(context, reveal) {
             .append('use')
             .attr('xlink:href', '#feature-images');
 
-        context.on('enter.intro', startLine);
-    }
-
-
-    function startLine(mode) {
-        if (mode.id !== 'add-line') return;
-        drawId = null;
-        context.on('enter.intro', drawLine);
-
-        var padding = 150 * Math.pow(2, context.map().zoom() - 18);
-        var pointBox = pad(start, padding, context);
-        reveal(pointBox, t('intro.lines.start'));
-
-        context.map().on('move.intro drawn.intro', function() {
-            padding = 150 * Math.pow(2, context.map().zoom() - 18);
-            pointBox = pad(start, padding, context);
-            reveal(pointBox, t('intro.lines.start'), {duration: 0});
+        context.on('enter.intro', function(mode) {
+            if (mode.id !== 'add-line') return;
+            continueTo(startLine);
         });
+
+        function continueTo(nextStep) {
+            context.on('enter.intro', null);
+            nextStep();
+        }
     }
 
 
-    function drawLine(mode) {
-        if (mode.id !== 'draw-line') return;
-        drawId = mode.selectedIDs()[0];
-        context.history().on('change.intro', checkIntersection);
-        context.on('enter.intro', retry);
-
-        var padding = 300 * Math.pow(2, context.map().zoom() - 19);
-        var pointBox = pad(midpoint, padding, context);
-        reveal(pointBox, t('intro.lines.intersect', {name: t('intro.graph.flower_st')}));
-
-        context.map().on('move.intro drawn.intro', function() {
-            padding = 300 * Math.pow(2, context.map().zoom() - 19);
-            pointBox = pad(midpoint, padding, context);
-            reveal(pointBox, t('intro.lines.intersect', {name: t('intro.graph.flower_st')}), {duration: 0});
-        });
-    }
-
-
-    // ended line before creating intersection
-    function retry(mode) {
-        if (mode.id !== 'select') return;
-        context.history().on('change.intro', null);
-        var pointBox = pad(intersection, 30, context);
-        reveal(pointBox, t('intro.lines.restart', {name: t('intro.graph.flower_st')}));
-        d3.select(window).on('mousedown.intro', eventCancel, true);
-
-        timeout(chapter.restart, 3000);
-    }
-
-
-    function checkIntersection() {
-
-        function joinedTargetWay() {
-            var drawEntity = drawId && context.hasEntity(drawId);
-            if (!drawEntity) {
-                chapter.restart();
-                return false;
-            }
-
-            var drawNodes = context.graph().childNodes(drawEntity);
-            return _.some(drawNodes, function(node) {
-                return _.some(context.graph().parentWays(node), function(parent) {
-                    return parent.id === targetId;
-                });
-            });
+    function startLine() {
+        if (context.mode().id !== 'add-line') {
+            return chapter.restart();
         }
 
-        if (joinedTargetWay()) {
-            context.history().on('change.intro', null);
-            context.on('enter.intro', enterSelect);
+        lineId = null;
 
-            var padding = 900 * Math.pow(2, context.map().zoom() - 19);
-            var pointBox = pad(centroid, padding, context);
-            reveal(pointBox, t('intro.lines.finish'));
+        var padding = 100 * Math.pow(2, context.map().zoom() - 18);
+        var box = pad(start, padding, context);
+        box.height = box.height + 100;
+        reveal(box, t('intro.lines.start'));
+
+        context.map().on('move.intro drawn.intro', function() {
+            padding = 100 * Math.pow(2, context.map().zoom() - 18);
+            box = pad(start, padding, context);
+            box.height = box.height + 100;
+            reveal(box, t('intro.lines.start'), { duration: 0 });
+        });
+
+        context.on('enter.intro', function(mode) {
+            if (mode.id !== 'draw-line') return chapter.restart();
+            continueTo(drawLine);
+        });
+
+        function continueTo(nextStep) {
+            context.map().on('move.intro drawn.intro', null);
+            context.on('enter.intro', null);
+            nextStep();
+        }
+    }
+
+
+    function drawLine() {
+        if (context.mode().id !== 'draw-line') {
+            return chapter.restart();
+        }
+
+        lineId = context.mode().selectedIDs()[0];
+        context.map().centerEase(midpoint);
+
+        timeout(function() {
+            var padding = 200 * Math.pow(2, context.map().zoom() - 18.5);
+            var box = pad(midpoint, padding, context);
+            box.height = box.height * 2;
+            reveal(box,
+                t('intro.lines.intersect', { name: t('intro.graph.flower_st') })
+            );
 
             context.map().on('move.intro drawn.intro', function() {
-                padding = 900 * Math.pow(2, context.map().zoom() - 19);
-                pointBox = pad(centroid, padding, context);
-                reveal(pointBox, t('intro.lines.finish'), {duration: 0});
+                padding = 200 * Math.pow(2, context.map().zoom() - 18.5);
+                box = pad(midpoint, padding, context);
+                box.height = box.height * 2;
+                reveal(box,
+                    t('intro.lines.intersect', { name: t('intro.graph.flower_st') }),
+                    { duration: 0 }
+                );
             });
+        }, 260);  // after easing..
+
+        context.history().on('change.intro', function() {
+            var entity = lineId && context.hasEntity(lineId);
+            if (!entity) return chapter.restart();
+
+            if (isLineConnected()) {
+                continueTo(finishLine);
+            }
+        });
+
+        context.on('enter.intro', function(mode) {
+            if (mode.id === 'draw-line')
+                return;
+            else if (mode.id === 'select') {
+                var box = pad(intersection, 80, context);
+                reveal(box, t('intro.lines.restart', { name: t('intro.graph.flower_st') }));
+                d3.select(window).on('mousedown.intro', eventCancel, true);
+                timeout(chapter.restart, 3000);
+                return;
+            }
+            else
+                return chapter.restart();
+        });
+
+        function continueTo(nextStep) {
+            context.map().on('move.intro drawn.intro', null);
+            context.history().on('change.intro', null);
+            context.on('enter.intro', null);
+            nextStep();
         }
     }
 
 
-    function enterSelect(mode) {
-        if (mode.id !== 'select') return;
-        context.map().on('move.intro drawn.intro', null);
-        context.on('enter.intro', null);
-        d3.select('#curtain').style('pointer-events', 'all');
-        presetCategory();
+    function isLineConnected() {
+        var entity = lineId && context.hasEntity(lineId);
+        if (!entity) return false;
+
+        var drawNodes = context.graph().childNodes(entity);
+        return _.some(drawNodes, function(node) {
+            return _.some(context.graph().parentWays(node), function(parent) {
+                return parent.id === targetId;
+            });
+        });
     }
 
 
-    function presetCategory() {
+    function finishLine() {
+        if (context.mode().id !== 'draw-line') return chapter.restart();
+        var entity = lineId && context.hasEntity(lineId);
+        if (!entity) return chapter.restart();
+
+        context.map().centerEase(intersection);
+
+        reveal('#surface', t('intro.lines.finish'));
+
+        context.on('enter.intro', function(mode) {
+            if (mode.id === 'draw-line')
+                return;
+            else if (mode.id === 'select')
+                return continueTo(enterSelect);
+            else
+                return chapter.restart();
+        });
+
+        function continueTo(nextStep) {
+            context.on('enter.intro', null);
+            nextStep();
+        }
+    }
+
+
+    function enterSelect() {
+        if (context.mode().id !== 'select') {
+            return chapter.restart();
+        }
+
+        context.on('exit.intro', function() {
+            return chapter.restart();
+        });
+
+        var button = d3.select('.preset-category-road .preset-list-button');
+        if (button.empty()) return chapter.restart();
+
         timeout(function() {
-            d3.select('#curtain').style('pointer-events', 'none');
-            var road = d3.select('.preset-category-road .preset-list-button');
-            reveal(road.node(), t('intro.lines.road'));
-            utilBindOnce(road, 'click.intro', roadCategory);
+            reveal(button.node(), t('intro.lines.road'));
+            button.on('click.intro', function() { continueTo(roadCategory); });
         }, 500);
+
+        function continueTo(nextStep) {
+            d3.select('.preset-list-button').on('click.intro', null);
+            context.on('exit.intro', null);
+            nextStep();
+        }
     }
 
 
     function roadCategory() {
+        if (context.mode().id !== 'select') {
+            return chapter.restart();
+        }
+
+        context.on('exit.intro', function() {
+            return chapter.restart();
+        });
+
+        var subgrid = d3.select('.preset-category-road .subgrid');
+        if (subgrid.empty()) return chapter.restart();
+
+        subgrid.selectAll(':not(.preset-highway-residential) .preset-list-button')
+            .on('click.intro', function() {
+                continueTo(retryPreset);
+            });
+
+        subgrid.selectAll('.preset-highway-residential .preset-list-button')
+            .on('click.intro', function() {
+                continueTo(roadDetails);
+            });
+
         timeout(function() {
-            var grid = d3.select('.subgrid');
-            reveal(grid.node(), t('intro.lines.residential'));
-            utilBindOnce(grid.selectAll(':not(.preset-highway-residential) .preset-list-button'),
-                'click.intro', retryPreset);
-            utilBindOnce(grid.selectAll('.preset-highway-residential .preset-list-button'),
-                'click.intro', roadDetails);
+            reveal(subgrid.node(), t('intro.lines.residential'));
         }, 500);
+
+        function continueTo(nextStep) {
+            d3.select('.preset-list-button').on('click.intro', null);
+            context.on('exit.intro', null);
+            nextStep();
+        }
     }
 
 
     // selected wrong road type
     function retryPreset() {
+        if (context.mode().id !== 'select') {
+            return chapter.restart();
+        }
+
+        context.on('exit.intro', function() {
+            return chapter.restart();
+        });
+
         timeout(function() {
-            var preset = d3.select('.entity-editor-pane .preset-list-button');
-            reveal(preset.node(), t('intro.lines.wrong_preset'));
-            utilBindOnce(preset, 'click.intro', presetCategory);
+            var button = d3.select('.entity-editor-pane .preset-list-button');
+            reveal(button.node(), t('intro.lines.wrong_preset'));
+            button.on('click.intro', function() {
+                continueTo(enterSelect);
+            });
         }, 500);
+
+        function continueTo(nextStep) {
+            d3.select('.preset-list-button').on('click.intro', null);
+            context.on('exit.intro', null);
+            nextStep();
+        }
     }
 
 
     function roadDetails() {
-        reveal('.pane',
-            t('intro.lines.describe', { button: icon('#icon-apply', 'pre-text') }));
-
         context.on('exit.intro', function() {
-            advance();
+            continueTo(play);
         });
 
-        function advance() {
+        reveal('.pane',
+            t('intro.lines.describe', { button: icon('#icon-apply', 'pre-text') })
+        );
+
+        function continueTo(nextStep) {
             context.on('exit.intro', null);
-            play();
+            nextStep();
         }
     }
 
@@ -197,7 +296,7 @@ export function uiIntroLine(context, reveal) {
 
     chapter.enter = function() {
         context.history().reset('initial');
-        context.map().zoom(18).centerEase(start);
+        context.map().zoom(18.5).centerEase(start);
         addLine();
     };
 
@@ -205,11 +304,11 @@ export function uiIntroLine(context, reveal) {
     chapter.exit = function() {
         timeouts.forEach(window.clearTimeout);
         d3.select(window).on('mousedown.intro', null, true);
-        d3.select('#curtain').style('pointer-events', 'none');
         context.on('enter.intro', null);
         context.on('exit.intro', null);
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
+        d3.select('.preset-list-button').on('click.intro', null);
     };
 
 
