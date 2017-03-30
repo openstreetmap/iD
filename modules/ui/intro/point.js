@@ -317,9 +317,7 @@ export function uiIntroPoint(context, reveal) {
         context.on('enter.intro', null);
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
-        d3.select('.preset-search-input')
-            .on('keyup.intro', null)
-            .on('keydown.intro', null);
+        d3.select('.preset-search-input').on('keydown.intro keyup.intro', null);
     };
 
 
