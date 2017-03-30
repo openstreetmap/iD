@@ -47,6 +47,8 @@ export function rendererBackground(context) {
 
 
     background.updateImagery = function() {
+        if (context.inIntro()) return;
+
         var b = background.baseLayerSource(),
             o = overlayLayers
                 .filter(function (d) { return !d.source().isLocatorOverlay(); })
