@@ -130,7 +130,7 @@ export function uiIntro(context) {
             .on('click', enterChapter);
 
         buttons
-            .append('label')
+            .append('span')
             .text(function(d) { return t(d.title); });
 
         buttons
