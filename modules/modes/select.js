@@ -301,9 +301,7 @@ export function modeSelect(context, selectedIDs) {
 
 
         function esc() {
-            if (!context.inIntro()) {
-                context.enter(modeBrowse(context));
-            }
+            context.enter(modeBrowse(context));
         }
 
 
