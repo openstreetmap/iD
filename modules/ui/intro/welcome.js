@@ -16,6 +16,13 @@ export function uiIntroWelcome(context, reveal) {
         context.map().centerZoom([-85.63591, 41.94285], 19);
         reveal('.intro-nav-wrap',
             t('intro.welcome.welcome'),
+            { buttonText: t('intro.ok'), buttonCallback: practice }
+        );
+    }
+
+    function practice() {
+        reveal('.intro-nav-wrap',
+            t('intro.welcome.practice'),
             { buttonText: t('intro.ok'), buttonCallback: chapters }
         );
     }

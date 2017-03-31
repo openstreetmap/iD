@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { t } from '../../util/locale';
+import { t, textDirection } from '../../util/locale';
 import { utilRebind } from '../../util/rebind';
 import { icon, pointBox, pad } from './helper';
 
@@ -66,7 +66,7 @@ export function uiIntroPoint(context, reveal) {
 
         context.on('enter.intro', function(mode) {
             if (mode.id !== 'select') return chapter.restart();
-            continueTo(enterSelect);
+            continueTo(searchPreset);
         });
 
         function continueTo(nextStep) {
@@ -77,7 +77,7 @@ export function uiIntroPoint(context, reveal) {
     }
 
 
-    function enterSelect() {
+    function searchPreset() {
         if (context.mode().id !== 'select') {
             return chapter.restart();
         }
@@ -112,7 +112,7 @@ export function uiIntroPoint(context, reveal) {
                 .on('keyup.intro', null);
 
             context.history().on('change.intro', function() {
-                continueTo(selectedPreset);
+                continueTo(aboutFeatureEditor);
             });
         }
 
@@ -125,7 +125,27 @@ export function uiIntroPoint(context, reveal) {
     }
 
 
-    function selectedPreset() {
+    function aboutFeatureEditor() {
+        context.on('exit.intro', function() {
+            return chapter.restart();
+        });
+
+        timeout(function() {
+            reveal('.entity-editor-pane', t('intro.points.feature_editor'), {
+                tooltipClass: 'intro-points-describe',
+                buttonText: t('intro.ok'),
+                buttonCallback: function() { continueTo(addName); }
+            });
+        }, 400);
+
+        function continueTo(nextStep) {
+            context.on('exit.intro', null);
+            nextStep();
+        }
+    }
+
+
+    function addName() {
         context.on('exit.intro', function() {
             return chapter.restart();
         });
@@ -135,8 +155,7 @@ export function uiIntroPoint(context, reveal) {
         });
 
         timeout(function() {
-            reveal('.entity-editor-pane',
-                t('intro.points.describe'),
+            reveal('.entity-editor-pane', t('intro.points.add_name'),
                 { tooltipClass: 'intro-points-describe' }
             );
         }, 400);
@@ -151,7 +170,7 @@ export function uiIntroPoint(context, reveal) {
 
     function closeEditor() {
         context.on('exit.intro', function() {
-            continueTo(selectPoint);
+            continueTo(reselectPoint);
         });
 
         reveal('.entity-editor-pane',
@@ -165,7 +184,7 @@ export function uiIntroPoint(context, reveal) {
     }
 
 
-    function selectPoint() {
+    function reselectPoint() {
         if (!pointId) return chapter.restart();
         var entity = context.hasEntity(pointId);
         if (!entity) return chapter.restart();
@@ -198,7 +217,32 @@ export function uiIntroPoint(context, reveal) {
 
 
     function updatePoint() {
-        if (context.mode().id !== 'select') return continueTo(selectPoint);
+        context.on('exit.intro', function() {
+            continueTo(reselectPoint);
+        });
+
+        context.history().on('change.intro', function() {
+            continueTo(closeEditor2);
+        });
+
+        timeout(function() {
+            reveal('.entity-editor-pane', t('intro.points.update'),
+                { tooltipClass: 'intro-points-describe' }
+            );
+        }, 400);
+
+        function continueTo(nextStep) {
+            context.on('exit.intro', null);
+            context.history().on('change.intro', null);
+            nextStep();
+        }
+    }
+
+
+    function closeEditor2() {
+        if (context.mode().id !== 'select') {
+            return continueTo(reselectPoint);
+        }
 
         context.on('exit.intro', function() {
             continueTo(rightClickPoint);
@@ -206,7 +250,7 @@ export function uiIntroPoint(context, reveal) {
 
         timeout(function() {
             reveal('.entity-editor-pane',
-                t('intro.points.fixname', { button: icon('#icon-apply', 'pre-text') })
+                t('intro.points.close2', { button: icon('#icon-apply', 'pre-text') })
             );
         }, 500);
 
@@ -282,12 +326,29 @@ export function uiIntroPoint(context, reveal) {
 
         context.history().on('change.intro', function(changed) {
             if (changed.deleted().length)
-                continueTo(play);
+                continueTo(undo);
         });
 
         function continueTo(nextStep) {
             context.history().on('change.intro', null);
             context.on('exit.intro', null);
+            nextStep();
+        }
+    }
+
+
+    function undo() {
+        context.history().on('change.intro', function() {
+            continueTo(play);
+        });
+
+        var iconName = '#icon-' + (textDirection === 'rtl' ? 'redo' : 'undo');
+        reveal('#bar button.undo-button',
+            t('intro.points.undo', { button: icon(iconName, 'pre-text') })
+        );
+
+        function continueTo(nextStep) {
+            context.history().on('change.intro', null);
             nextStep();
         }
     }
