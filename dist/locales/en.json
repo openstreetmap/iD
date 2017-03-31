@@ -703,7 +703,9 @@
                 "place": "Draw the area by placing more nodes. Finish the area by clicking on the starting node. **Draw an area for the playground.**",
                 "search": "**Search for '{name}'.**",
                 "choose": "**Choose Playground from the list.**",
-                "describe": "**Add a name, then click the {button} button to close the feature editor**",
+                "add_field": "This playground doesn't have an official name, so we won't add anything in the Name field.  Instead let's add some additional details about the playground to the Description field. **Open the Add Field list.**",
+                "choose_field": "**Choose Description from the list.**",
+                "describe": "**Add a description, then click the {button} button to close the feature editor.**",
                 "play": "Good job! Try drawing a few more areas. Explore the presets and see what other kinds of areas you can add to OpenStreetMap. **When you are ready to continue to the next chapter, click '{next}'.**"
             },
             "lines": {

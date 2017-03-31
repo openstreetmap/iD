@@ -95,7 +95,7 @@ export function uiIntroArea(context, reveal) {
             if (mode.id === 'draw-area')
                 return;
             else if (mode.id === 'select')
-                return continueTo(enterSelect);
+                return continueTo(searchPresets);
             else
                 return chapter.restart();
         });
@@ -108,7 +108,7 @@ export function uiIntroArea(context, reveal) {
     }
 
 
-    function enterSelect() {
+    function searchPresets() {
         if (context.mode().id !== 'select') {
             return chapter.restart();
         }
@@ -142,7 +142,7 @@ export function uiIntroArea(context, reveal) {
                 .on('keyup.intro', null);
 
             context.history().on('change.intro', function() {
-                continueTo(selectedPreset);
+                continueTo(clickAddField);
             });
         }
 
@@ -155,12 +155,54 @@ export function uiIntroArea(context, reveal) {
     }
 
 
-    function selectedPreset() {
+    function clickAddField() {
+        context.on('exit.intro', function() {
+            return chapter.restart();
+        });
+
+        timeout(function() {
+            reveal('.more-fields .combobox-input', t('intro.areas.add_field'));
+
+            d3.select('.more-fields .combobox-input')
+                .on('click.intro', function() {
+                    continueTo(chooseDescriptionField);
+                });
+        }, 500);
+
+        function continueTo(nextStep) {
+            d3.select('.more-fields .combobox-input').on('click.intro', null);
+            context.on('exit.intro', null);
+            nextStep();
+        }
+    }
+
+
+    function chooseDescriptionField() {
+        context.on('exit.intro', function() {
+            return chapter.restart();
+        });
+
+        reveal('div.combobox', t('intro.areas.choose_field'));
+
+        d3.select('div.combobox')
+            .on('click.intro', function() {
+                continueTo(addDescription);
+            });
+
+        function continueTo(nextStep) {
+            d3.select('div.combobox').on('click.intro', null);
+            context.on('exit.intro', null);
+            nextStep();
+        }
+    }
+
+
+    function addDescription() {
         context.on('exit.intro', function() {
             continueTo(play);
         });
 
-        reveal('.pane',
+        reveal('.entity-editor-pane',
             t('intro.areas.describe', { button: icon('#icon-apply', 'pre-text') })
         );
 
@@ -196,6 +238,7 @@ export function uiIntroArea(context, reveal) {
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
         d3.select('.preset-search-input').on('keydown.intro keyup.intro', null);
+        d3.select('.more-fields .combobox-input').on('click.intro', null);
     };
 
 

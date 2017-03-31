@@ -272,7 +272,7 @@ export function uiIntroLine(context, reveal) {
             continueTo(play);
         });
 
-        reveal('.pane',
+        reveal('.entity-editor-pane',
             t('intro.lines.describe', { button: icon('#icon-apply', 'pre-text') })
         );
 
