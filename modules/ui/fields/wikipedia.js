@@ -27,6 +27,7 @@ export function uiFieldWikipedia(field, context) {
 
     function wiki(selection) {
         var langcombo = d3combobox()
+            .container(context.container())
             .fetcher(function(value, cb) {
                 var v = value.toLowerCase();
 
@@ -40,6 +41,7 @@ export function uiFieldWikipedia(field, context) {
             });
 
         var titlecombo = d3combobox()
+            .container(context.container())
             .fetcher(function(value, cb) {
                 if (!value) {
                     value = context.entity(entity.id).tags.name || '';

@@ -289,13 +289,14 @@ export function coreContext() {
 
 
     /* Container */
-    var container, embed;
+    var container = d3.select(document.body);
     context.container = function(_) {
         if (!arguments.length) return container;
         container = _;
         container.classed('id-container', true);
         return context;
     };
+    var embed;
     context.embed = function(_) {
         if (!arguments.length) return embed;
         embed = _;

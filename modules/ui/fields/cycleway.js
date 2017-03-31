@@ -7,7 +7,7 @@ import {
 } from '../../util';
 
 
-export function uiFieldCycleway(field) {
+export function uiFieldCycleway(field, context) {
     var dispatch = d3.dispatch('change'),
         items = d3.select(null);
 
@@ -57,7 +57,11 @@ export function uiFieldCycleway(field) {
             .attr('class', function(d) { return 'preset-input-cycleway preset-input-' + stripcolon(d); })
             .call(utilNoAuto)
             .each(function(d) {
-                d3.select(this).call(d3combobox().data(cycleway.options(d)));
+                d3.select(this)
+                    .call(d3combobox()
+                        .container(context.container())
+                        .data(cycleway.options(d))
+                    );
             });
 
 

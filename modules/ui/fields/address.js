@@ -178,10 +178,12 @@ export function uiFieldAddress(field, context) {
 
             wrap.selectAll('input.addr-' + tag)
                 .call(d3combobox()
+                    .container(context.container())
                     .minItems(1)
                     .fetcher(function(value, callback) {
                         callback(nearValues('addr:' + tag));
-                    }));
+                    })
+                );
         });
 
         wrap.selectAll('input')

@@ -255,9 +255,12 @@ export function uiPreset(context) {
                 }
                 return placeholder.slice(0,3).join(', ') + ((placeholder.length > 3) ? '…' : '');
             })
-            .call(d3combobox().data(notShown)
+            .call(d3combobox()
+                .container(context.container())
+                .data(notShown)
                 .minItems(1)
-                .on('accept', show));
+                .on('accept', show)
+            );
 
 
         function show(field) {
