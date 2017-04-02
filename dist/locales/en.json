@@ -725,6 +725,10 @@
                 "wrong_preset": "You didn't select the Residential road type. **Click here to choose again**",
                 "play": "You added a new road! Try drawing a few more lines, and see what other kinds of lines you can add to OpenStreetMap. **When you are ready to continue to the next chapter, click '{next}'.**"
             },
+            "buildings": {
+                "title": "Buildings",
+                "play": "Great Job! Try tracing a few more buildings. **When you are ready to continue to the next chapter, click '{next}'.**"
+            },
             "startediting": {
                 "title": "Start Editing",
                 "help": "You can replay this walkthrough or view more documentation by clicking the {button} Help button.",

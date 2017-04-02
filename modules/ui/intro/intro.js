@@ -14,6 +14,7 @@ import { uiIntroNavigation } from './navigation';
 import { uiIntroPoint } from './point';
 import { uiIntroArea } from './area';
 import { uiIntroLine } from './line';
+import { uiIntroBuilding } from './building';
 import { uiIntroStartEditing } from './start_editing';
 
 
@@ -23,6 +24,7 @@ var chapterUi = {
     point: uiIntroPoint,
     area: uiIntroArea,
     line: uiIntroLine,
+    building: uiIntroBuilding,
     startEditing: uiIntroStartEditing
 };
 
@@ -32,6 +34,7 @@ var chapterFlow = [
     'point',
     'area',
     'line',
+    'building',
     'startEditing'
 ];
 

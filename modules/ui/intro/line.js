@@ -285,8 +285,8 @@ export function uiIntroLine(context, reveal) {
 
     function play() {
         dispatch.call('done');
-        reveal('.intro-nav-wrap .chapter-startEditing',
-            t('intro.lines.play', { next: t('intro.startediting.title') }), {
+        reveal('.intro-nav-wrap .chapter-buildings',
+            t('intro.lines.play', { next: t('intro.buildings.title') }), {
                 buttonText: t('intro.ok'),
                 buttonCallback: function() { reveal('#id-container'); }
             }
