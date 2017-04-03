@@ -12,11 +12,10 @@ import polygonArea from 'area-polygon';
 import polygonIntersect from 'turf-intersect';
 import polygonBuffer from 'turf-buffer';
 import pointInside from 'turf-inside';
-import { d3combobox } from '../lib/d3.combobox.js';
 
 // dictionary matching geo-properties to OpenStreetMap tags 1:1
 window.layerImports = {};
-window.layerUnchecked = {};
+window.layerChecked = {};
 
 // prevent re-downloading and re-adding the same feature
 window.knownObjectIds = {};
@@ -38,20 +37,6 @@ export function svgGeoService(projection, context, dispatch) {
             d3.event.preventDefault();
             d3.event.dataTransfer.dropEffect = 'copy';
         }
-        
-        /*
-        d3.select('body')
-            .attr('dropzone', 'copy')
-            .on('drop.localgeoservice', function() {
-                d3.event.stopPropagation();
-                d3.event.preventDefault();
-                if (!detected.filedrop) return;
-                drawGeoService.files(d3.event.dataTransfer.files);
-            })
-            .on('dragenter.localgeoservice', over)
-            .on('dragexit.localgeoservice', over)
-            .on('dragover.localgeoservice', over);
-        */
 
         svgGeoService.initialized = true;
     }
@@ -459,9 +444,9 @@ export function svgGeoService(projection, context, dispatch) {
                 osmv = window.layerImports[convertedKeys[k]];
             } else {
                 var originalKey = convertedKeys[k];
-                var approval = !window.layerUnchecked[originalKey];
+                var approval = window.layerChecked[originalKey];
                 if (!approval) {
-                    // user unchecked box, does not want this imported
+                    // left unchecked, do not import
                     continue;
                 }
                 
@@ -642,86 +627,6 @@ export function svgGeoService(projection, context, dispatch) {
                 if (data.exceededTransferLimit) {
                     window.alert('Service returned first ' + data.features.length + ' results (maximum)');
                 }
-                
-                /*
-                that.pane().selectAll('h3').text('Set import attributes');
-                var geoserviceTable = d3.selectAll('.geoservice-table');
-                
-                var convertedKeys = Object.keys(window.layerImports);
-                
-                console.log('downloaded ' + jsondl.features.length + ' features');
-                if (jsondl.features.length) {
-                    // make a row for each GeoJSON property
-                    // existing name appears as a label
-                    // sample data appears as a text input placeholder
-                    // adding text over the sample data makes it into an OSM tag
-                    var samplefeature = jsondl.features[0];
-                    var keys = Object.keys(samplefeature.properties);
-                    geoserviceTable.html('<thead class="tag-row"><th>Include?</th><th>GeoService field</th><th>Sample Value</th><th>(optional) OSM tag</th></thead>');
-                    
-                    // suggested keys
-                    var setPreset = that.preset();
-                    var fetcher = function(value, cb) {
-                        var v = value.toLowerCase();
-                        var suggestedTags = [];
-                        if (setPreset) {
-                            _.map(setPreset.fields, function(field) {
-                                if (field.keys) {
-                                    suggestedTags = suggestedTags.concat(_.map(field.keys, function(key) {
-                                        return { value: key };
-                                    }));
-                                } else if (field.key) {
-                                    suggestedTags.push({ value: field.key });
-                                }
-                            });
-                        }
-                        cb(suggestedTags.filter(function(d) {
-                            return d.value.toLowerCase().indexOf(v) >= 0;
-                        }));
-                    };
-
-                    // iterate through keys, adding a row describing each
-                    // user can set a new property name for each row
-                    var doKey = function(r) {
-                        if (r >= keys.length) {
-                            return;
-                        }
-
-                        // don't allow user to change how OBJECTID works
-                        if (keys[r] === 'OBJECTID') {
-                            return doKey(r + 1);
-                        }
-        
-                        var row = geoserviceTable.append('tr');
-                        row.append('td')
-                            .append('input')
-                                .attr('class', keys[r].replace(/\s/g, '_'))
-                                .attr('type', 'checkbox')
-                                .property('checked', !window.layerUnchecked[keys[r]])
-                                .on('change', function() {
-                                    window.layerUnchecked[keys[r]] = !this.checked;
-                                });
-                        row.append('td').text(keys[r]); // .attr('class', 'key-wrap');
-                        row.append('td').text(samplefeature.properties[keys[r]] || '');
-                        
-                        var suggestedKeys = d3combobox().fetcher(fetcher).minItems(0);
-                        var outfield = row.append('td').append('input');
-                        outfield.attr('type', 'text')
-                            .attr('name', keys[r])
-                            .attr('placeholder', (window.layerImports[keys[r]] || ''))
-                            .call(suggestedKeys)
-                            .on('change', function() {
-                                // properties with this.name renamed to this.value
-                                window.layerImports[this.name] = this.value;
-                            });
-                        doKey(r + 1);
-                    };
-                        
-                    doKey(0);
-                } else {
-                    console.log('no feature to build table from');
-                }
-                */
                                 
                 _.map(jsondl.features, function(selectfeature) {
                     return processGeoFeature(selectfeature, that.preset());

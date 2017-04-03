@@ -230,21 +230,6 @@ export function uiMapData(context) {
                 return;
             }
             
-            /*
-            <div class="shaded" style="opacity: 1;">
-              <div class="modal fillL col6">
-                <div class="cf">
-                  <div class="modal-section">
-                    <h3>Title</h3>
-                  </div>
-                  <div class="modal-section">
-                    <p>Body</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            */
-            
             // based on the help pane            
             this.pane = d3.selectAll('#content').append('div')
                 .attr('class', 'shaded hide geoservice-pane')
@@ -340,9 +325,20 @@ export function uiMapData(context) {
                                 .append('input')
                                     .attr('class', field.name.replace(/\s/g, '_'))
                                     .attr('type', 'checkbox')
-                                    .property('checked', !window.layerUnchecked[field.name])
+                                    .property('checked', window.layerChecked[field.name])
+                                    .on('click', function() {
+                                        if (d3.event.ctrlKey || d3.event.metaKey) {
+                                            // control click toggles all
+                                            var allSet = this.checked;
+                                            d3.selectAll('.geoservice-table input[type="checkbox"]')
+                                                .property('checked', allSet)
+                                                .each(function() {
+                                                    window.layerChecked[this.className] = allSet;
+                                                });
+                                        }
+                                    })
                                     .on('change', function() {
-                                        window.layerUnchecked[field.name] = !this.checked;
+                                        window.layerChecked[field.name] = this.checked;
                                     });
                             row.append('td').text(field.name);
                             // row.append('td').text(samplefeature.properties[keys[r]] || '');
