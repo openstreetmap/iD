@@ -873,7 +873,7 @@ en:
       continue_building: "Continue adding more nodes to trace the outline of the building. Remember that you can zoom in if you want to add more details. Finish the building shape by clicking on the starting node. **Continue tracing the building.**"
       choose_building: "**Select Building from the list**"
       choose_house: "There are many different types of buildings, but this one is clearly a house. If you're not sure of the type, it's OK to just pick the generic Building preset. **Choose the House building type**"
-      close: "**Hit escape, return, or click the {button} button to close the feature editor**"
+      close: "**Hit escape, or click the {button} button to close the feature editor**"
       rightclick_building: "**Right-click to select the building you created.**"
       square_building: "The house that you just added will look even better with perfectly square corners. **Click on the {button} button to square the building shape.**"
       done_square: "See how the corners of the building moved into place?  Let's learn another useful trick."

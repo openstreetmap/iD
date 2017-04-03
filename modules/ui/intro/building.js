@@ -54,20 +54,25 @@ export function uiIntroBuilding(context, reveal) {
             return chapter.restart();
         }
 
-        var padding = 120 * Math.pow(2, context.map().zoom() - 19);
-        var box = pad(house, padding, context);
-        reveal(box, t('intro.buildings.start_building'));
+        context.map().zoomEase(20, 500);
 
-        context.map().on('move.intro drawn.intro', function() {
-            padding = 120 * Math.pow(2, context.map().zoom() - 19);
-            box = pad(house, padding, context);
-            reveal(box, t('intro.buildings.start_building'), { duration: 0 });
-        });
+        timeout(function() {
+            var padding = 160 * Math.pow(2, context.map().zoom() - 20);
+            var box = pad(house, padding, context);
+            reveal(box, t('intro.buildings.start_building'));
 
-        context.on('enter.intro', function(mode) {
-            if (mode.id !== 'draw-area') return chapter.restart();
-            continueTo(drawBuilding);
-        });
+            context.map().on('move.intro drawn.intro', function() {
+                padding = 160 * Math.pow(2, context.map().zoom() - 20);
+                box = pad(house, padding, context);
+                reveal(box, t('intro.buildings.start_building'), { duration: 0 });
+            });
+
+            context.on('enter.intro', function(mode) {
+                if (mode.id !== 'draw-area') return chapter.restart();
+                continueTo(drawBuilding);
+            });
+
+        }, 520);  // after easing
 
         function continueTo(nextStep) {
             context.map().on('move.intro drawn.intro', null);
@@ -82,12 +87,12 @@ export function uiIntroBuilding(context, reveal) {
             return chapter.restart();
         }
 
-        var padding = 150 * Math.pow(2, context.map().zoom() - 19);
+        var padding = 160 * Math.pow(2, context.map().zoom() - 20);
         var box = pad(house, padding, context);
         reveal(box, t('intro.buildings.continue_building'));
 
         context.map().on('move.intro drawn.intro', function() {
-            padding = 150 * Math.pow(2, context.map().zoom() - 19);
+            padding = 160 * Math.pow(2, context.map().zoom() - 20);
             box = pad(house, padding, context);
             reveal(box, t('intro.buildings.continue_building'), {duration: 0});
         });
@@ -96,7 +101,7 @@ export function uiIntroBuilding(context, reveal) {
             if (mode.id === 'draw-area')
                 return;
             else if (mode.id === 'select')
-                return continueTo(play);
+                return continueTo(chooseBuildingCategory);
             else
                 return chapter.restart();
         });
@@ -104,6 +109,79 @@ export function uiIntroBuilding(context, reveal) {
         function continueTo(nextStep) {
             context.map().on('move.intro drawn.intro', null);
             context.on('enter.intro', null);
+            nextStep();
+        }
+    }
+
+
+    function chooseBuildingCategory() {
+        if (context.mode().id !== 'select') {
+            return chapter.restart();
+        }
+
+        context.on('exit.intro', function() {
+            return chapter.restart();
+        });
+
+        var button = d3.select('.preset-category-building .preset-list-button');
+        if (button.empty()) return chapter.restart();
+
+        timeout(function() {
+            reveal(button.node(), t('intro.buildings.choose_building'));
+            button.on('click.intro', function() { continueTo(chooseHouse); });
+        }, 500);
+
+        function continueTo(nextStep) {
+            d3.select('.preset-list-button').on('click.intro', null);
+            context.on('exit.intro', null);
+            nextStep();
+        }
+    }
+
+
+    function chooseHouse() {
+        if (context.mode().id !== 'select') {
+            return chapter.restart();
+        }
+
+        context.on('exit.intro', function() {
+            return chapter.restart();
+        });
+
+        var button = d3.select('.preset-building-house .preset-list-button');
+        if (button.empty()) return chapter.restart();
+
+
+        timeout(function() {
+            reveal(button.node(), t('intro.buildings.choose_house'));
+            button.on('click.intro', function() { continueTo(closeEditor); });
+        }, 500);
+
+        function continueTo(nextStep) {
+            d3.select('.preset-list-button').on('click.intro', null);
+            context.on('exit.intro', null);
+            nextStep();
+        }
+    }
+
+
+    function closeEditor() {
+        if (context.mode().id !== 'select') {
+            return chapter.restart();
+        }
+
+        context.on('exit.intro', function() {
+            continueTo(play);
+        });
+
+        timeout(function() {
+            reveal('.entity-editor-pane',
+                t('intro.buildings.close', { button: icon('#icon-apply', 'pre-text') })
+            );
+        }, 500);
+
+        function continueTo(nextStep) {
+            context.on('exit.intro', null);
             nextStep();
         }
     }
@@ -122,8 +200,8 @@ export function uiIntroBuilding(context, reveal) {
 
     chapter.enter = function() {
         context.history().reset('initial');
-        context.map().zoom(19).centerEase(house);
-        addBuilding();
+        context.map().zoom(19).centerEase(house, 500);
+        timeout(addBuilding, 520);
     };
 
 
