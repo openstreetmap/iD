@@ -278,7 +278,7 @@ export function uiMapData(context) {
                 .attr('type', 'text')
                 .attr('class', 'geoservice')
                 .attr('placeholder', 'GeoService URL')
-                .attr('value', context.storage('geoserviceLayerUrl') || '')
+                // .attr('value', context.storage('geoserviceLayerUrl') || '')
                 .on('input', function(e, loadFromLocalStorage) {
                     // reformat URL ending to /layerID/metadata?f=json
                     var metadata_url = loadFromLocalStorage ? context.storage('geoserviceLayerUrl') : this.value;
@@ -370,11 +370,13 @@ export function uiMapData(context) {
                 .attr('class', 'field-list');
             
             // load initial GeoService URL
+            /*
             if (context.storage('geoserviceLayerUrl')) {
                 setTimeout(function() {
                     urlInput.on('input')(null, true);
                 }, 500);
             }
+            */
 
             // known iD presets
             var preset = urlEntry.append('div')
@@ -487,8 +489,6 @@ export function uiMapData(context) {
                     window.importedEntities = [];
                     window.onOSMreload = function() {
                         window.onOSMreload = null;
-                        console.log('refreshing ' + context.storage('geoserviceLayerUrl'));
-                        console.log('download all? ' + geoserviceDownloadAll);
                         refreshGeoService(context.storage('geoserviceLayerUrl'), geoserviceDownloadAll);
                         toggle();
                     };

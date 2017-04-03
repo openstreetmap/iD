@@ -272,7 +272,8 @@ export function rendererBackground(context) {
                 background.toggleOverlayLayer(overlay);
             }
         });
-
+        
+        /*
         if (q.geoservice) {
             setTimeout(function() {
                 var gsLayer = context.layers().layer('geoservice');
@@ -281,6 +282,7 @@ export function rendererBackground(context) {
                 }
             }, 500);
         }
+        */
 
         if (q.gpx) {
             var gpx = context.layers().layer('gpx');
