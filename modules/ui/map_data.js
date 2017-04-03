@@ -20,6 +20,28 @@ export function uiMapData(context) {
 
 
     function map_data(selection) {
+        function getFetcher() {
+            var geoserviceLayer = context.layers().layer('geoservice');
+            return function(value, cb) {
+                var setPreset = geoserviceLayer.preset();
+                var v = value.toLowerCase();
+                var suggestedTags = [];
+                if (setPreset) {
+                    _.map(setPreset.fields, function(field) {
+                        if (field.keys) {
+                            suggestedTags = suggestedTags.concat(_.map(field.keys, function(key) {
+                                return { value: key };
+                            }));
+                        } else if (field.key) {
+                            suggestedTags.push({ value: field.key });
+                        }
+                    });
+                }
+                cb(suggestedTags.filter(function(d) {
+                    return d.value.toLowerCase().indexOf(v) >= 0;
+                }));
+            };
+        }
 
         function showsFeature(d) {
             return context.features().enabled(d);
@@ -279,28 +301,6 @@ export function uiMapData(context) {
                     }
                     metadata_url = metadata_url.join('/') + '/metadata?f=json';
                     
-                    // console.log(metadata_url);
-                    
-                    var setPreset = geoserviceLayer.preset();
-                    var fetcher = function(value, cb) {
-                        var v = value.toLowerCase();
-                        var suggestedTags = [];
-                        if (setPreset) {
-                            _.map(setPreset.fields, function(field) {
-                                if (field.keys) {
-                                    suggestedTags = suggestedTags.concat(_.map(field.keys, function(key) {
-                                        return { value: key };
-                                    }));
-                                } else if (field.key) {
-                                    suggestedTags.push({ value: field.key });
-                                }
-                            });
-                        }
-                        cb(suggestedTags.filter(function(d) {
-                            return d.value.toLowerCase().indexOf(v) >= 0;
-                        }));
-                    };
-                    
                     d3.text(metadata_url, function(err, data) {
                         if (err) {
                             return console.log(err);
@@ -343,7 +343,7 @@ export function uiMapData(context) {
                             row.append('td').text(field.name);
                             // row.append('td').text(samplefeature.properties[keys[r]] || '');
                         
-                            var suggestedKeys = d3combobox().fetcher(fetcher).minItems(0);
+                            var suggestedKeys = d3combobox().fetcher(getFetcher()).minItems(0);
                             var outfield = row.append('td').append('input');
                             outfield.attr('type', 'text')
                                 .attr('name', field.name)
@@ -443,19 +443,34 @@ export function uiMapData(context) {
             
             // this button adds a new field to data brought in from the GeoService
             // for example you can add addr:state=VA to a city's addresses which otherwise wouldn't have this repeated field
+            
+            d3.selectAll('.geoservice-table').append('hr').attr('class', 'import-table-switch');
+            
             body.append('div')
                 .attr('class', 'inspector-inner hide')
                 .append('button')
                     .attr('class', 'add-tag')
+                    .html('Add key:value to all features')
                     .call(svgIcon('#icon-plus', 'icon light'))
                     .on('click', function() {
+                        d3.selectAll('.import-table-switch').classed('import-table-switch', false);
                         var row = d3.selectAll('.geoservice-table').append('tr');
                         var uniqNum = Math.floor(Math.random() * 10000);
+                        
+                        // the checkbox
+                        row.append('td').append('input')
+                            .attr('type', 'checkbox')
+                            .property('checked', true)
+                            .property('disabled', true);
 
                         // the 'key' field, showing the new OSM tag key
-                        row.append('td').append('input')
-                            //.attr('type', 'text')
+                        var suggestedKeys = d3combobox().fetcher(getFetcher()).minItems(0);
+                        
+                        var keyField = row.append('td').append('input')
+                            .attr('type', 'text')
+                            .attr('placeholder', 'new OSM key')
                             .attr('class', 'import-key-' + uniqNum)
+                            .call(suggestedKeys)
                             .on('change', function() {
                                 if (this.name) {
                                     window.layerImports['add_' + this.value] = window.layerImports['add_' + this.name];
@@ -470,6 +485,7 @@ export function uiMapData(context) {
                         // the 'value' field setting the new OSM tag default value
                         row.append('td').append('input')
                             .attr('type', 'text')
+                            .attr('placeholder', 'new OSM value')
                             .attr('class', 'osm-key-' + uniqNum)
                             .on('change', function() {
                                 // properties with this.name renamed to this.value

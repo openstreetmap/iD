@@ -425,8 +425,6 @@ export function svgGeoService(projection, context, dispatch) {
                 convertedKeys.push(additionalKeys[a]);
             }
         }
-        console.log('use these keys');
-        console.log(convertedKeys);
                 
         // keep the OBJECTID to make sure we don't download the same data multiple times
         var outprops = {

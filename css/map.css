@@ -1552,6 +1552,11 @@ text.geoservice {
 
 .geoservice-pane button.add-tag {
     margin-top: 0;
+    color: #fff;
+}
+
+.geoservice-pane .add-tag svg {
+    float: left;
 }
 
 .geoservice-pane button.url {
@@ -1589,6 +1594,10 @@ text.geoservice {
 
 .geoservice-pane .import-approval label {
     display: block;
+}
+
+.geoservice-pane .import-table-switch {
+    display: none;
 }
 
 .editor-overwrite.feature-list-pane {
