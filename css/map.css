@@ -1600,40 +1600,17 @@ text.geoservice {
     display: none;
 }
 
-.editor-overwrite.feature-list-pane {
-    height: 0;
-    width: 0;
-    overflow: hidden;
-    opacity: 0 !important;
-    border-width: 0;
-    margin: 0;
-    padding: 0;
-    display: none;
-}
-
-.editor-overwrite.inspector-wrap {
-    width: 100%;
-    height: 100%;
-    opacity: 1 !important;
-    display: block;
-}
-
-.editor-overwrite.preset-list-pane {
-    left: auto !important;
-    right: 0;
-}
-
-.editor-overwrite.entity-editor-pane {
-    left: 0;
-    right: auto !important;
-}
-
 .geoservice-table.hide, .geoservice-pane .hide {
     display: none !important;
 }
 
 .geoservice-pane.shaded {
     z-index: 9 !important;
+}
+
+.geoservice-pane .preset .combobox-input {
+    width: 50%;
+    margin-left: 10%;
 }
 
 .geoservice-pane .preset-icon-fill, .geoservice-pane .preset-icon {

@@ -82,18 +82,12 @@ export function uiInspector(context) {
 
 
         function setPreset(preset) {
-            var gsLayer = context.layers().layer('geoservice');
-            if (!gsLayer.hasData() && gsLayer.windowOpen()) {
-                // appear to be calling for this to be my preset
-                gsLayer.preset(preset);
-            } else {
-                // standard preset behavior
-                wrap.transition()
-                    .styleTween('right', function() { return d3.interpolate('-100%', '0%'); });
+            // standard preset behavior
+            wrap.transition()
+                .styleTween('right', function() { return d3.interpolate('-100%', '0%'); });
 
-                editorPane
-                    .call(entityEditor.preset(preset));
-            }
+            editorPane
+                .call(entityEditor.preset(preset));
         }
     }
 

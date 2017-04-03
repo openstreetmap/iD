@@ -505,7 +505,7 @@ export function svgGeoService(projection, context, dispatch) {
             }
             var tag = preset.icon + ' tag-' + preset.id.split('/')[0] + ' tag-' + preset.id.replace('/', '-');
             
-            presetBox.selectAll('label.preset-prompt').text('OpenStreetMap preset: ');
+            presetBox.selectAll('label.preset-prompt').text('OSM preset: ');
             presetBox.selectAll('span.preset-prompt').text(preset.id);
             presetBox.selectAll('.preset-icon-fill')
                 .attr('class', 'preset-icon-fill preset-icon-fill-area preset-icon-fill-line' + tag);
@@ -529,7 +529,7 @@ export function svgGeoService(projection, context, dispatch) {
         } else if (preset === null) {
             // removing preset status
             presetBox.selectAll('.preset label.preset-prompt')
-                .text('OpenStreetMap preset (select from left)');
+                .text('Optional: match features to a OSM preset');
             presetBox.selectAll('.preset span.preset-prompt, .preset svg')
                 .html('');
             presetBox.selectAll('.preset button, .preset-icon-fill, .preset-icon')

@@ -29,15 +29,7 @@ export function uiPresetList(context) {
         }
 
         var presets = context.presets();
-        var gsLayer = context.layers().layer('geoservice');
-        
-        // when the import menu is activated, show every kind of preset, regardless of geometry
-        if (!seeAllGeos && (!gsLayer.windowOpen() || !gsLayer.awaitingUrl())) {
-            presets = presets.matchGeometry(geometry);
-        }
-        window.presetReloadFunction = function(seeAllGeos) {
-            presetList(selection, seeAllGeos);
-        };
+        presets = presets.matchGeometry(geometry);
 
         selection.html('');
 

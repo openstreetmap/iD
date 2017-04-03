@@ -379,18 +379,39 @@ export function uiMapData(context) {
                 .attr('class', 'preset');
             preset.append('label')
                 .attr('class', 'preset-prompt')
-                .text('Optional: preset type (search in left sidebar)');
+                .text('Optional: match features to a OSM preset');
             preset.append('div').attr('class', 'preset-icon-fill preset-icon-fill-area hide');
             preset.append('div').attr('class', 'preset-icon preset-icon-32 hide').append('svg');
             preset.append('span').attr('class', 'preset-prompt');
-            
+
             // click to remove a preset
             preset.append('button')
                 .attr('class', 'hide')
                 .attr('style', 'float: none !important')
                 .text('x')
                 .on('click', function() {
-                    context.layers().layer('geoservice').preset(null);
+                    geoserviceLayer.preset(null);
+                });
+            
+            var presetList = _.map(context.presets().collection, function(preset) {
+                return { value: preset.id };
+            });
+            var presetComboBox = function(value, cb) {
+                var v = value.toLowerCase();
+                cb(presetList.filter(function(d) {
+                    return d.value.indexOf(v) >= 0;
+                }));
+            };
+            preset.append('input')
+                .attr('type', 'text')
+                .attr('placeholder', 'feature type')
+                .call(d3combobox().fetcher(presetComboBox).minItems(0))
+                .on('change', function() {
+                   var v = this.value;
+                   var selection = context.presets().collection.filter(function(d) {
+                       return d.id === v;
+                   })[0];
+                   geoserviceLayer.preset(selection);
                 });
             
             // point-in-polygon, merge line options
@@ -524,10 +545,6 @@ export function uiMapData(context) {
                     geoserviceDownloadAll = true;
                     setGeoService(d3.select('.topurl input.geoservice').property('value'), geoserviceDownloadAll);
                 });
-            
-            // TODO: make the sidebar fill itself up with things
-            // not working
-            context.ui().sidebar.boot();
         }
         
         function toggle() {
@@ -535,37 +552,12 @@ export function uiMapData(context) {
             var geoservicePane = layers.layer('geoservice').pane();
             var hideMe = !geoservicePane.classed('hide');
             geoservicePane.classed('hide', hideMe);
-            
-            // show autocomplete of presets
-            var geoserviceLayer = layers.layer('geoservice');
-            if (!geoserviceLayer.hasData()) {
-                d3.selectAll('.feature-list-pane').classed('inspector-hidden editor-overwrite', !hideMe);
-                if (!hideMe) {
-                    //console.log('show GeoService, remove inspector-hidden, add editor-overwrite');
-                    d3.selectAll('.inspector-wrap, .preset-list-pane, .entity-editor-pane')
-                        .classed('inspector-hidden', false)
-                        .classed('editor-overwrite', true);
-                    if (window.presetReloadFunction) {
-                        (window.presetReloadFunction)(true);
-                    }
-                }
-            }
-            if (hideMe) {
-                //console.log('hide GeoService, remove editor-overwrite');
-                // allow normal menu use
-                d3.selectAll('.editor-overwrite').classed('editor-overwrite', false);
-            }
         }
         
         function editGeoService() {
             // window allows user to enter a GeoService layer
             d3.event.preventDefault();
             toggle();
-            
-            // test that function has all geo-s
-            if (window.presetReloadFunction) {
-                (window.presetReloadFunction)(true);
-            }
         }
 
         function setGeoService(template, downloadMax) {
@@ -581,7 +573,6 @@ export function uiMapData(context) {
 
             // hide GeoService URL input
             gsLayer.pane().selectAll('.topurl, .url.final').classed('hide', true);
-            d3.selectAll('.editor-overwrite').classed('editor-overwrite', false);
             
             // if there is an OSM preset, add it to set tags
             // window.layerImports = {};
