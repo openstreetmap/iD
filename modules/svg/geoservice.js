@@ -579,6 +579,19 @@ export function svgGeoService(projection, context, dispatch) {
     
         // add necessary URL parameters to the user's URL
         var url = true_url;
+        if (url.indexOf('/query') === -1) {
+            if (url[url.length - 1] !== '/') {
+                url += '/';
+            }
+            url += 'query?';
+        }
+        if (url.indexOf('?') === -1) {
+            url += '?';
+        }
+        if (downloadMax && url.indexOf('where') === -1) {
+            // if there is no spatial query, need a SQL query here
+            url += '&where=1>0';
+        }
         if (url.indexOf('outSR') === -1) {
             url += '&outSR=4326';
         }
