@@ -272,9 +272,11 @@ export function uiIntroLine(context, reveal) {
             continueTo(play);
         });
 
-        reveal('.entity-editor-pane',
-            t('intro.lines.describe', { button: icon('#icon-apply', 'pre-text') })
-        );
+        timeout(function() {
+            reveal('.entity-editor-pane',
+                t('intro.lines.describe', { button: icon('#icon-apply', 'pre-text') })
+            );
+        }, 500);
 
         function continueTo(nextStep) {
             context.on('exit.intro', null);
@@ -285,7 +287,7 @@ export function uiIntroLine(context, reveal) {
 
     function play() {
         dispatch.call('done');
-        reveal('.intro-nav-wrap .chapter-buildings',
+        reveal('.intro-nav-wrap .chapter-building',
             t('intro.lines.play', { next: t('intro.buildings.title') }), {
                 buttonText: t('intro.ok'),
                 buttonCallback: function() { reveal('#id-container'); }
