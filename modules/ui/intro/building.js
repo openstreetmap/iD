@@ -328,8 +328,9 @@ export function uiIntroBuilding(context, reveal) {
 
 
     function addTank() {
-        var tooltip = reveal('button.add-area',
-            t('intro.buildings.add_tank', { button: icon('#icon-area', 'pre-text') }));
+        reveal('button.add-area',
+            t('intro.buildings.add_tank', { button: icon('#icon-area', 'pre-text') })
+        );
 
         tankId = null;
         context.history().reset('doneSquare');
