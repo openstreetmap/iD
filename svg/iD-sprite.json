@@ -401,5 +401,6 @@
 
     "poi-images":               { "viewBox": "0 320 200 80" },
     "landuse-images":           { "viewBox": "0 400 200 80" },
-    "feature-images":           { "viewBox": "0 480 200 80" }
+    "feature-images":           { "viewBox": "0 480 200 80" },
+    "building-images":          { "viewBox": "700 480 200 80" }
 }

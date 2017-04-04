@@ -47,11 +47,11 @@ export function uiIntroBuilding(context, reveal) {
         var tooltip = reveal('button.add-area',
             t('intro.buildings.add_building', { button: icon('#icon-area', 'pre-text') }));
 
-        // tooltip.selectAll('.tooltip-inner')
-        //     .insert('svg', 'span')
-        //     .attr('class', 'tooltip-illustration')
-        //     .append('use')
-        //     .attr('xlink:href', '#landuse-images');
+        tooltip.selectAll('.tooltip-inner')
+            .insert('svg', 'span')
+            .attr('class', 'tooltip-illustration')
+            .append('use')
+            .attr('xlink:href', '#building-images');
 
         houseId = null;
         context.history().reset('initial');
