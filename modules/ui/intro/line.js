@@ -60,13 +60,13 @@ export function uiIntroLine(context, reveal) {
 
         lineId = null;
 
-        var padding = 100 * Math.pow(2, context.map().zoom() - 18);
+        var padding = 70 * Math.pow(2, context.map().zoom() - 18);
         var box = pad(start, padding, context);
         box.height = box.height + 100;
         reveal(box, t('intro.lines.start'));
 
         context.map().on('move.intro drawn.intro', function() {
-            padding = 100 * Math.pow(2, context.map().zoom() - 18);
+            padding = 70 * Math.pow(2, context.map().zoom() - 18);
             box = pad(start, padding, context);
             box.height = box.height + 100;
             reveal(box, t('intro.lines.start'), { duration: 0 });
@@ -98,7 +98,7 @@ export function uiIntroLine(context, reveal) {
             var box = pad(midpoint, padding, context);
             box.height = box.height * 2;
             reveal(box,
-                t('intro.lines.intersect', { name: t('intro.graph.flower_st') })
+                t('intro.lines.intersect', { name: t('intro.graph.name.flower-street') })
             );
 
             context.map().on('move.intro drawn.intro', function() {
@@ -106,7 +106,7 @@ export function uiIntroLine(context, reveal) {
                 box = pad(midpoint, padding, context);
                 box.height = box.height * 2;
                 reveal(box,
-                    t('intro.lines.intersect', { name: t('intro.graph.flower_st') }),
+                    t('intro.lines.intersect', { name: t('intro.graph.name.flower-street') }),
                     { duration: 0 }
                 );
             });
@@ -126,7 +126,7 @@ export function uiIntroLine(context, reveal) {
                 return;
             else if (mode.id === 'select') {
                 var box = pad(intersection, 80, context);
-                reveal(box, t('intro.lines.restart', { name: t('intro.graph.flower_st') }));
+                reveal(box, t('intro.lines.restart', { name: t('intro.graph.name.flower-street') }));
                 d3.select(window).on('mousedown.intro', eventCancel, true);
                 timeout(chapter.restart, 3000);
                 return;

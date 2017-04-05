@@ -140,7 +140,7 @@ export function uiIntroNavigation(context, reveal) {
         context.history().reset('initial');  // ensure spring street exists
 
         reveal('.search-header input',
-            t('intro.navigation.search', { name: t('intro.graph.spring_st') }));
+            t('intro.navigation.search', { name: t('intro.graph.name.spring-street') }));
 
         d3.select('.search-header input')
             .on('keyup.intro', checkSearchResult);
@@ -150,7 +150,7 @@ export function uiIntroNavigation(context, reveal) {
     function checkSearchResult() {
         var first = d3.select('.feature-list-item:nth-child(0n+2)'),  // skip "No Results" item
             firstName = first.select('.entity-name'),
-            name = t('intro.graph.spring_st');
+            name = t('intro.graph.name.spring-street');
 
         if (!firstName.empty() && firstName.text() === name) {
             reveal(first.node(), t('intro.navigation.choose', { name: name }));
@@ -178,7 +178,7 @@ export function uiIntroNavigation(context, reveal) {
         timeout(function() {
             reveal('.entity-editor-pane',
                 t('intro.navigation.chosen', {
-                    name: t('intro.graph.spring_st'),
+                    name: t('intro.graph.name.spring-street'),
                     button: icon('#icon-close', 'pre-text')
                 })
             );
