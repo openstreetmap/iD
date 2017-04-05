@@ -6,7 +6,7 @@ import { icon, pointBox } from './helper';
 
 export function uiIntroNavigation(context, reveal) {
     var dispatch = d3.dispatch('done'),
-        hallId = 'n2140018997',
+        hallId = 'n2061',
         timeouts = [];
 
 
@@ -94,7 +94,7 @@ export function uiIntroNavigation(context, reveal) {
     function selectedTownHall() {
         if (!isTownHallSelected()) return clickTownHall();
 
-        var hall = context.entity('n2140018997');
+        var hall = context.entity(hallId);
         var box = pointBox(hall.loc, context);
         var advance = function() { continueTo(inspectTownHall); };
 

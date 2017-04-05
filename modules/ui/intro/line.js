@@ -11,7 +11,7 @@ export function uiIntroLine(context, reveal) {
         midpoint = [-85.62975395449628, 41.95787501510204],
         start = [-85.6297754121684, 41.95805253325314],
         intersection = [-85.62974496187628, 41.95742515554585],
-        targetId = 'w17965351',
+        targetId = 'w646',
         lineId = null;
 
 

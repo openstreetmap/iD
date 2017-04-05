@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import _ from 'lodash';
 import { t, textDirection } from '../../util/locale';
 import { localNames } from './helper';
 

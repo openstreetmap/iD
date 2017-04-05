@@ -7,7 +7,8 @@ import { icon, pointBox, pad } from './helper';
 export function uiIntroPoint(context, reveal) {
     var dispatch = d3.dispatch('done'),
         timeouts = [],
-        corner = [-85.632481, 41.944094],
+        intersection = [-85.63279, 41.94394],
+        building = [-85.632422, 41.944045],
         pointId = null;
 
 
@@ -56,11 +57,11 @@ export function uiIntroPoint(context, reveal) {
             return chapter.restart();
         }
 
-        var pointBox = pad(corner, 150, context);
+        var pointBox = pad(building, 150, context);
         reveal(pointBox, t('intro.points.place'));
 
         context.map().on('move.intro drawn.intro', function() {
-            pointBox = pad(corner, 150, context);
+            pointBox = pad(building, 150, context);
             reveal(pointBox, t('intro.points.place'), { duration: 0 });
         });
 
@@ -367,7 +368,7 @@ export function uiIntroPoint(context, reveal) {
 
     chapter.enter = function() {
         context.history().reset('initial');
-        context.map().zoom(19).centerEase([-85.63279, 41.94394]);
+        context.map().zoom(19).centerEase(intersection);
         addPoint();
     };
 
