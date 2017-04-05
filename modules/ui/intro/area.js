@@ -186,7 +186,12 @@ export function uiIntroArea(context, reveal) {
 
         d3.select('div.combobox')
             .on('click.intro', function() {
-                continueTo(addDescription);
+                timeout(function() {
+                    if (d3.select('.form-field-description').empty())
+                        continueTo(retryChooseDescription);
+                    else
+                        continueTo(addDescription);
+                }, 100);
             });
 
         function continueTo(nextStep) {
@@ -208,6 +213,22 @@ export function uiIntroArea(context, reveal) {
 
         function continueTo(nextStep) {
             context.on('exit.intro', null);
+            nextStep();
+        }
+    }
+
+
+    function retryChooseDescription() {
+        context.on('exit.intro', function() {
+            return chapter.restart();
+        });
+
+        reveal('.entity-editor-pane', t('intro.areas.retry_add_field'), {
+            buttonText: t('intro.ok'),
+            buttonCallback: function() { continueTo(clickAddField); }
+        });
+
+        function continueTo(nextStep) {
             nextStep();
         }
     }

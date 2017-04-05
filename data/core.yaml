@@ -934,6 +934,7 @@ en:
       choose: "**Choose Playground from the list.**"
       add_field: "This playground doesn't have an official name, so we won't add anything in the Name field.  Instead let's add some additional details about the playground to the Description field. **Open the Add Field list.**"
       choose_field: "**Choose Description from the list.**"
+      retry_add_field: "You didn't select the Description field.  Let's try again."
       describe: "**Add a description, then click the {button} button to close the feature editor.**"
       play: "Good job! Try drawing a few more areas. Explore the presets and see what other kinds of areas you can add to OpenStreetMap. **When you are ready to continue to the next chapter, click '{next}'.**"
     lines:
