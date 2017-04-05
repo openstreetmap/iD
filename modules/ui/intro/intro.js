@@ -1,7 +1,6 @@
 import * as d3 from 'd3';
-import _ from 'lodash';
 import { t, textDirection } from '../../util/locale';
-import { localNames } from './helper';
+import { localize } from './helper';
 
 import { coreGraph } from '../../core/graph';
 import { dataIntroGraph } from '../../../data/intro_graph.json';
@@ -44,13 +43,10 @@ export function uiIntro(context) {
     var introGraph = {},
         currChapter;
 
+
     // create entities for intro graph and localize names
-    for (var key in dataIntroGraph) {
-        introGraph[key] = osmEntity(dataIntroGraph[key]);
-        var name = localNames[key] && t('intro.graph.' + localNames[key]);
-        if (name) {
-            introGraph[key].tags.name = name;
-        }
+    for (var id in dataIntroGraph) {
+        introGraph[id] = osmEntity(localize(dataIntroGraph[id]));
     }
 
 

@@ -1,3 +1,5 @@
+import { t } from '../../util/locale';
+
 export function pointBox(loc, context) {
     var rect = context.surfaceRect();
     var point = context.curtainProjection(loc);
@@ -38,52 +40,55 @@ export function icon(name, svgklass) {
 }
 
 
-export var localNames = {
-    w17967809: 'azaleamum_drive',
-    n2140018997: 'city_hall',
-    w17965998: 'conrail_rr',
-    w134150845: 'conrail_rr',
-    w134150802: 'e_michigan_ave',
-    w134150836: 'e_michigan_ave',
-    w41074896: 'e_michigan_ave',
-    w17967444: 'east_st',
-    w17965502: 'elm_st',
-    n367813436: 'fire_department',
-    n354031352: 'first_baptist_church',
-    w17965351: 'flower_st',
-    w17964996: 'foster_st',
-    w203988286: 'memory_isle_park',
-    w17966942: 'millard_st',
-    w17964793: 'morris_ave',
-    w17967397: 'n_andrews_st',
-    w17967326: 'n_constantine_st',
-    w143497377: 'n_main_st',
-    w203049587: 'petting_zoo',
-    w17966984: 'portage_ave',
-    w170848330: 'portage_river',
-    w17967752: 'railroad_dr',
-    w203972937: 'riverwalk_trail',
-    w203972938: 'riverwalk_trail',
-    w203972940: 'riverwalk_trail',
-    w170848823: 'rocky_river',
-    w170848824: 'rocky_river',
-    w170848331: 'rocky_river',
-    w17967315: 's_andrews_st',
-    w17966400: 's_constantine_st',
-    w17964497: 's_constantine_st',
-    w134150801: 's_main_st',
-    w134150830: 's_main_st',
-    w17966462: 's_main_st',
-    w203986457: 'scidmore_park',
-    w17966102: 'south_st',
-    w17965834: 'spring_st',
-    w170989131: 'st_joseph_river',
-    w41785752: 'w_michigan_ave',
-    w134150789: 'w_michigan_ave',
-    w134150795: 'w_michigan_ave',
-    w134150800: 'w_michigan_ave',
-    w134150811: 'w_michigan_ave',
-    w17965402: 'walnut_st',
-    w17967734: 'water_st'
-};
+function slugify(text) {
+    return text.toString().toLowerCase()
+        .replace(/\s+/g, '-')           // Replace spaces with -
+        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+        .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+        .replace(/^-+/, '')             // Trim - from start of text
+        .replace(/-+$/, '');            // Trim - from end of text
+}
+
+
+export var missingStrings = {};
+function checkKey(key, text) {
+    if (t(key, { default: undefined}) === undefined) {
+        if (missingStrings.hasOwnProperty(key)) return;  // warn once
+        missingStrings[key] = text;
+        var missing = key + ': ' + text;
+        if (typeof console !== 'undefined') console.log(missing); // eslint-disable-line
+    }
+}
+
+
+export function localize(obj) {
+    var key;
+
+    var name = obj.tags && obj.tags.name;
+    if (name) {
+        key = 'intro.graph.name.' + slugify(name);
+        obj.tags.name = t(key, { default: name });
+        checkKey(key, name);
+    }
+    var city = obj.tags && obj.tags['addr:city'];
+    if (city) {
+        key = 'intro.graph.city';
+        obj.tags['addr:city'] = t(key, { default: city });
+        checkKey(key, city);
+    }
+    var state = obj.tags && obj.tags['addr:state'];
+    if (state) {
+        key = 'intro.graph.state';
+        obj.tags['addr:state'] = t(key, { default: state });
+        checkKey(key, state);
+    }
+    var postcode = obj.tags && obj.tags['addr:postcode'];
+    if (postcode) {
+        key = 'intro.graph.postcode';
+        obj.tags['addr:postcode'] = t(key, { default: postcode });
+        checkKey(key, postcode);
+    }
+
+    return obj;
+}
 
