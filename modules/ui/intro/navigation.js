@@ -6,8 +6,9 @@ import { icon, pointBox } from './helper';
 
 export function uiIntroNavigation(context, reveal) {
     var dispatch = d3.dispatch('done'),
+        timeouts = [],
         hallId = 'n2061',
-        timeouts = [];
+        springSt = [-85.63585099140167, 41.942506848938926];
 
 
     var chapter = {
@@ -174,7 +175,6 @@ export function uiIntroNavigation(context, reveal) {
 
 
     function selectedStreet() {
-        var springSt = [-85.63585099140167, 41.942506848938926];
         context.map().centerEase(springSt);
 
         timeout(function() {

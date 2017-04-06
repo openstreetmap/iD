@@ -808,7 +808,13 @@
                 "choose_preset_residential": "There are many different types of roads, but this one is a residential road. **Choose the {name} type**",
                 "retry_preset_residential": "You didn't select the {name} type. **Click here to choose again**",
                 "name_road": "**Give this road a name, then hit escape, return, or click the {button} button to close the feature editor.**",
-                "play": "You added a new road! Try drawing a few more lines, and see what other kinds of lines you can add to OpenStreetMap. **When you are ready to continue to the next chapter, click '{next}'.**"
+                "update_line": "Sometimes you will need to change the shape of an existing line. Here is a road that doesn't look quite right.",
+                "add_node": "We can add some nodes to this line to improve its shape. One way to add a node is to double-click the line where you want to add a node. **Double-click on the line to create a new node.**",
+                "start_drag_endpoint": "When a line is selected, you can drag any of its nodes by clicking and holding down the left mouse button while you drag. **Drag the endpoint to the place where these roads should intersect.**",
+                "finish_drag_endpoint": "This spot looks good. **Finish dragging by releasing the left mouse button**",
+                "start_drag_midpoint": "Small triangles are drawn at the midpoints between nodes. Another way to create a new node is to drag a midpoint to a new location. **Drag the midpoint triangle to create a new node along the curve of the road.**",
+                "continue_drag_midpoint": "This line is looking much better! Continue to adjust this line by double-clicking or dragging midpoints until the curve matches the road shape. **When you're happy with how the line looks, click OK.**",
+                "play": "Great! Use the skills that you've learned in this chapter to practice editing some more lines. **When you are ready to continue to the next chapter, click '{next}'.**"
             },
             "buildings": {
                 "title": "Buildings",
