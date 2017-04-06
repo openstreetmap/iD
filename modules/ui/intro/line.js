@@ -387,6 +387,9 @@ export function uiIntroLine(context, reveal) {
         if (!context.hasEntity(woodRoadId) || !context.hasEntity(woodRoadEndId)) {
             return continueTo(updateLine);
         }
+        if (context.selectedIDs().indexOf(woodRoadId) === -1) {
+            context.enter(modeSelect(context, [woodRoadId]));
+        }
 
         var padding = 100 * Math.pow(2, context.map().zoom() - 19);
 
@@ -407,8 +410,16 @@ export function uiIntroLine(context, reveal) {
             }
         });
 
+        context.on('enter.intro', function(mode) {
+            if (mode.id !== 'select') {
+                // keep Wood Road selected so endpoint stays draggable..
+                context.enter(modeSelect(context, [woodRoadId]));
+            }
+        });
+
         function continueTo(nextStep) {
             context.map().on('move.intro drawn.intro', null);
+            context.on('enter.intro', null);
             nextStep();
         }
     }
@@ -452,6 +463,9 @@ export function uiIntroLine(context, reveal) {
     function startDragMidpoint() {
         if (!context.hasEntity(woodRoadId) || !context.hasEntity(woodRoadEndId)) {
             return continueTo(updateLine);
+        }
+        if (context.selectedIDs().indexOf(woodRoadId) === -1) {
+            context.enter(modeSelect(context, [woodRoadId]));
         }
 
         var padding = 80 * Math.pow(2, context.map().zoom() - 19);

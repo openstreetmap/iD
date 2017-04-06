@@ -8,7 +8,7 @@ export function uiIntroNavigation(context, reveal) {
     var dispatch = d3.dispatch('done'),
         timeouts = [],
         hallId = 'n2061',
-        springSt = [-85.63585099140167, 41.942506848938926];
+        springStreet = [-85.63585099140167, 41.942506848938926];
 
 
     var chapter = {
@@ -175,7 +175,7 @@ export function uiIntroNavigation(context, reveal) {
 
 
     function selectedStreet() {
-        context.map().centerEase(springSt);
+        context.map().centerEase(springStreet);
 
         timeout(function() {
             reveal('.entity-editor-pane',

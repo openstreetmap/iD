@@ -937,7 +937,7 @@ en:
     lines:
       title: "Lines"
       add_line: "Lines are used to represent features such as roads, railroads, and rivers. **Click the {button} Line button to add a new line.**"
-      start_line: "Here is a road that is missing. Let's add it! In OpenStreetMap, lines should be drawn down the center of the road. You can drag the map while drawing if necessary. **Start a new line by clicking on the end of the road.**"
+      start_line: "Here is a road that is missing. Let's add it! In OpenStreetMap, lines should be drawn down the center of the road. You can drag and zoom the map while drawing if necessary. **Start a new line by clicking at the top end of this missing road.**"
       intersect: "Click or press spacebar to add more nodes to the line. Roads, and many other types of lines, are part of a larger network. It is important for these lines to be connected properly in order for routing applications to work. **Click on {name} to create an intersection connecting the two lines.**"
       retry_intersect: "The road needs to intersect {name}. Let's try again!"
       continue_line: "Continue drawing the line for the new road. Remember that you can drag and zoom the map if needed. When you are finished drawing, click on the last node again. **Finish drawing the road.**"
