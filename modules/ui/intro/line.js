@@ -11,6 +11,8 @@ export function uiIntroLine(context, reveal) {
         midpoint = [-85.62975395449628, 41.95787501510204],
         start = [-85.6297754121684, 41.95805253325314],
         intersection = [-85.62974496187628, 41.95742515554585],
+        roadCategory = context.presets().item('category-road'),
+        residentialPreset = context.presets().item('highway/residential'),
         targetId = 'w646',
         lineId = null;
 
@@ -33,7 +35,7 @@ export function uiIntroLine(context, reveal) {
 
     function addLine() {
         var tooltip = reveal('button.add-line',
-            t('intro.lines.add', { button: icon('#icon-line', 'pre-text') }));
+            t('intro.lines.add_line', { button: icon('#icon-line', 'pre-text') }));
 
         tooltip.selectAll('.tooltip-inner')
             .insert('svg', 'span')
@@ -63,13 +65,13 @@ export function uiIntroLine(context, reveal) {
         var padding = 70 * Math.pow(2, context.map().zoom() - 18);
         var box = pad(start, padding, context);
         box.height = box.height + 100;
-        reveal(box, t('intro.lines.start'));
+        reveal(box, t('intro.lines.start_line'));
 
         context.map().on('move.intro drawn.intro', function() {
             padding = 70 * Math.pow(2, context.map().zoom() - 18);
             box = pad(start, padding, context);
             box.height = box.height + 100;
-            reveal(box, t('intro.lines.start'), { duration: 0 });
+            reveal(box, t('intro.lines.start_line'), { duration: 0 });
         });
 
         context.on('enter.intro', function(mode) {
@@ -117,7 +119,7 @@ export function uiIntroLine(context, reveal) {
             if (!entity) return chapter.restart();
 
             if (isLineConnected()) {
-                continueTo(finishLine);
+                continueTo(continueLine);
             }
         });
 
@@ -125,10 +127,7 @@ export function uiIntroLine(context, reveal) {
             if (mode.id === 'draw-line')
                 return;
             else if (mode.id === 'select') {
-                var box = pad(intersection, 80, context);
-                reveal(box, t('intro.lines.restart', { name: t('intro.graph.name.flower-street') }));
-                d3.select(window).on('mousedown.intro', eventCancel, true);
-                timeout(chapter.restart, 3000);
+                continueTo(retryIntersect);
                 return;
             }
             else
@@ -157,20 +156,32 @@ export function uiIntroLine(context, reveal) {
     }
 
 
-    function finishLine() {
+    function retryIntersect() {
+        d3.select(window).on('mousedown.intro', eventCancel, true);
+
+        var box = pad(intersection, 80, context);
+        reveal(box,
+            t('intro.lines.retry_intersect', { name: t('intro.graph.name.flower-street') })
+        );
+
+        timeout(chapter.restart, 3000);
+    }
+
+
+    function continueLine() {
         if (context.mode().id !== 'draw-line') return chapter.restart();
         var entity = lineId && context.hasEntity(lineId);
         if (!entity) return chapter.restart();
 
         context.map().centerEase(intersection);
 
-        reveal('#surface', t('intro.lines.finish'));
+        reveal('#surface', t('intro.lines.continue_line'));
 
         context.on('enter.intro', function(mode) {
             if (mode.id === 'draw-line')
                 return;
             else if (mode.id === 'select')
-                return continueTo(enterSelect);
+                return continueTo(chooseCategoryRoad);
             else
                 return chapter.restart();
         });
@@ -182,7 +193,7 @@ export function uiIntroLine(context, reveal) {
     }
 
 
-    function enterSelect() {
+    function chooseCategoryRoad() {
         if (context.mode().id !== 'select') {
             return chapter.restart();
         }
@@ -195,8 +206,10 @@ export function uiIntroLine(context, reveal) {
         if (button.empty()) return chapter.restart();
 
         timeout(function() {
-            reveal(button.node(), t('intro.lines.road'));
-            button.on('click.intro', function() { continueTo(roadCategory); });
+            reveal(button.node(),
+                t('intro.lines.choose_category_road', { name: roadCategory.name() })
+            );
+            button.on('click.intro', function() { continueTo(choosePresetResidential); });
         }, 500);
 
         function continueTo(nextStep) {
@@ -207,7 +220,7 @@ export function uiIntroLine(context, reveal) {
     }
 
 
-    function roadCategory() {
+    function choosePresetResidential() {
         if (context.mode().id !== 'select') {
             return chapter.restart();
         }
@@ -221,17 +234,20 @@ export function uiIntroLine(context, reveal) {
 
         subgrid.selectAll(':not(.preset-highway-residential) .preset-list-button')
             .on('click.intro', function() {
-                continueTo(retryPreset);
+                continueTo(retryPresetResidential);
             });
 
         subgrid.selectAll('.preset-highway-residential .preset-list-button')
             .on('click.intro', function() {
-                continueTo(roadDetails);
+                continueTo(nameRoad);
             });
 
         timeout(function() {
-            reveal(subgrid.node(), t('intro.lines.residential'));
-        }, 500);
+            reveal(subgrid.node(),
+                t('intro.lines.choose_preset_residential', { name: residentialPreset.name() }),
+                { duration: 300 }
+            );
+        }, 300);
 
         function continueTo(nextStep) {
             d3.select('.preset-list-button').on('click.intro', null);
@@ -242,7 +258,7 @@ export function uiIntroLine(context, reveal) {
 
 
     // selected wrong road type
-    function retryPreset() {
+    function retryPresetResidential() {
         if (context.mode().id !== 'select') {
             return chapter.restart();
         }
@@ -253,9 +269,11 @@ export function uiIntroLine(context, reveal) {
 
         timeout(function() {
             var button = d3.select('.entity-editor-pane .preset-list-button');
-            reveal(button.node(), t('intro.lines.wrong_preset'));
+            reveal(button.node(),
+                t('intro.lines.retry_preset_residential', { name: residentialPreset.name() })
+            );
             button.on('click.intro', function() {
-                continueTo(enterSelect);
+                continueTo(chooseCategoryRoad);
             });
         }, 500);
 
@@ -267,14 +285,14 @@ export function uiIntroLine(context, reveal) {
     }
 
 
-    function roadDetails() {
+    function nameRoad() {
         context.on('exit.intro', function() {
             continueTo(play);
         });
 
         timeout(function() {
             reveal('.entity-editor-pane',
-                t('intro.lines.describe', { button: icon('#icon-apply', 'pre-text') })
+                t('intro.lines.name_road', { button: icon('#icon-apply', 'pre-text') })
             );
         }, 500);
 

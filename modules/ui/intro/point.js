@@ -9,6 +9,7 @@ export function uiIntroPoint(context, reveal) {
         timeouts = [],
         intersection = [-85.63279, 41.94394],
         building = [-85.632422, 41.944045],
+        cafePreset = context.presets().item('amenity/cafe'),
         pointId = null;
 
 
@@ -30,7 +31,7 @@ export function uiIntroPoint(context, reveal) {
 
     function addPoint() {
         var tooltip = reveal('button.add-point',
-            t('intro.points.add', { button: icon('#icon-point', 'pre-text') }));
+            t('intro.points.add_point', { button: icon('#icon-point', 'pre-text') }));
 
         pointId = null;
 
@@ -58,11 +59,11 @@ export function uiIntroPoint(context, reveal) {
         }
 
         var pointBox = pad(building, 150, context);
-        reveal(pointBox, t('intro.points.place'));
+        reveal(pointBox, t('intro.points.place_point'));
 
         context.map().on('move.intro drawn.intro', function() {
             pointBox = pad(building, 150, context);
-            reveal(pointBox, t('intro.points.place'), { duration: 0 });
+            reveal(pointBox, t('intro.points.place_point'), { duration: 0 });
         });
 
         context.on('enter.intro', function(mode) {
@@ -94,7 +95,7 @@ export function uiIntroPoint(context, reveal) {
 
         timeout(function() {
             reveal('.preset-search-input',
-                t('intro.points.search', { name: context.presets().item('amenity/cafe').name() })
+                t('intro.points.search_cafe', { name: cafePreset.name() })
             );
         }, 500);
     }
@@ -105,7 +106,8 @@ export function uiIntroPoint(context, reveal) {
 
         if (first.classed('preset-amenity-cafe')) {
             reveal(first.select('.preset-list-button').node(),
-                t('intro.points.choose')
+                t('intro.points.choose_cafe', { name: cafePreset.name() }),
+                { duration: 300 }
             );
 
             d3.select('.preset-search-input')
@@ -152,7 +154,7 @@ export function uiIntroPoint(context, reveal) {
         });
 
         context.history().on('change.intro', function() {
-            continueTo(closeEditor);
+            continueTo(addCloseEditor);
         });
 
         timeout(function() {
@@ -169,13 +171,13 @@ export function uiIntroPoint(context, reveal) {
     }
 
 
-    function closeEditor() {
+    function addCloseEditor() {
         context.on('exit.intro', function() {
             continueTo(reselectPoint);
         });
 
         reveal('.entity-editor-pane',
-            t('intro.points.close', { button: icon('#icon-apply', 'pre-text') })
+            t('intro.points.add_close', { button: icon('#icon-apply', 'pre-text') })
         );
 
         function continueTo(nextStep) {
@@ -223,7 +225,7 @@ export function uiIntroPoint(context, reveal) {
         });
 
         context.history().on('change.intro', function() {
-            continueTo(closeEditor2);
+            continueTo(updateCloseEditor);
         });
 
         timeout(function() {
@@ -240,7 +242,7 @@ export function uiIntroPoint(context, reveal) {
     }
 
 
-    function closeEditor2() {
+    function updateCloseEditor() {
         if (context.mode().id !== 'select') {
             return continueTo(reselectPoint);
         }
@@ -251,7 +253,7 @@ export function uiIntroPoint(context, reveal) {
 
         timeout(function() {
             reveal('.entity-editor-pane',
-                t('intro.points.close2', { button: icon('#icon-apply', 'pre-text') })
+                t('intro.points.update_close', { button: icon('#icon-apply', 'pre-text') })
             );
         }, 500);
 

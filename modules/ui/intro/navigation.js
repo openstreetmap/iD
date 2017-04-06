@@ -123,11 +123,9 @@ export function uiIntroNavigation(context, reveal) {
             continueTo(streetSearch);
         });
 
-        timeout(function() {
-            reveal('.entity-editor-pane',
-                t('intro.navigation.pane', { button: icon('#icon-close', 'pre-text') })
-            );
-        }, 700);
+        reveal('.entity-editor-pane',
+            t('intro.navigation.pane', { button: icon('#icon-close', 'pre-text') })
+        );
 
         function continueTo(nextStep) {
             context.on('exit.intro', null);
@@ -140,7 +138,8 @@ export function uiIntroNavigation(context, reveal) {
         context.history().reset('initial');  // ensure spring street exists
 
         reveal('.search-header input',
-            t('intro.navigation.search', { name: t('intro.graph.name.spring-street') }));
+            t('intro.navigation.search', { name: t('intro.graph.name.spring-street') })
+        );
 
         d3.select('.search-header input')
             .on('keyup.intro', checkSearchResult);
@@ -153,7 +152,10 @@ export function uiIntroNavigation(context, reveal) {
             name = t('intro.graph.name.spring-street');
 
         if (!firstName.empty() && firstName.text() === name) {
-            reveal(first.node(), t('intro.navigation.choose', { name: name }));
+            reveal(first.node(),
+                t('intro.navigation.choose', { name: name }),
+                { duration: 300 }
+            );
 
             context.on('exit.intro', function() {
                 continueTo(selectedStreet);

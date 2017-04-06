@@ -9,6 +9,9 @@ export function uiIntroBuilding(context, reveal) {
     var dispatch = d3.dispatch('done'),
         house = [-85.62815, 41.95638],
         tank = [-85.62732, 41.95347],
+        buildingCatetory = context.presets().item('category-building'),
+        housePreset = context.presets().item('building/house'),
+        tankPreset = context.presets().item('man_made/storage_tank'),
         timeouts = [],
         houseId = null,
         tankId = null;
@@ -140,7 +143,9 @@ export function uiIntroBuilding(context, reveal) {
         if (button.empty()) return chapter.restart();
 
         timeout(function() {
-            reveal(button.node(), t('intro.buildings.choose_building'));
+            reveal(button.node(),
+                t('intro.buildings.choose_category_building', { name: buildingCatetory.name() })
+            );
             button.on('click.intro', function() { continueTo(choosePresetHouse); });
         }, 500);
 
@@ -165,9 +170,12 @@ export function uiIntroBuilding(context, reveal) {
         if (button.empty()) return chapter.restart();
 
         timeout(function() {
-            reveal(button.node(), t('intro.buildings.choose_house'));
+            reveal(button.node(),
+                t('intro.buildings.choose_preset_house', { name: housePreset.name() }),
+                { duration: 300 }
+            );
             button.on('click.intro', function() { continueTo(closeEditorHouse); });
-        }, 500);
+        }, 300);
 
         function continueTo(nextStep) {
             d3.select('.preset-list-button').on('click.intro', null);
@@ -392,7 +400,7 @@ export function uiIntroBuilding(context, reveal) {
             if (mode.id === 'draw-area')
                 return;
             else if (mode.id === 'select')
-                return continueTo(searchPreset);
+                return continueTo(searchPresetTank);
             else
                 return continueTo(addTank);
         });
@@ -405,7 +413,7 @@ export function uiIntroBuilding(context, reveal) {
     }
 
 
-    function searchPreset() {
+    function searchPresetTank() {
         if (context.mode().id !== 'select') {
             return continueTo(addTank);
         }
@@ -419,7 +427,7 @@ export function uiIntroBuilding(context, reveal) {
 
         timeout(function() {
             reveal('.preset-search-input',
-                t('intro.buildings.search_tank', { name: context.presets().item('man_made/storage_tank').name() })
+                t('intro.buildings.search_tank', { name: tankPreset.name() })
             );
         }, 500);
 
@@ -436,7 +444,8 @@ export function uiIntroBuilding(context, reveal) {
 
         if (first.classed('preset-man_made-storage_tank')) {
             reveal(first.select('.preset-list-button').node(),
-                t('intro.buildings.choose_tank')
+                t('intro.buildings.choose_tank', { name: tankPreset.name() }),
+                { duration: 300 }
             );
 
             d3.select('.preset-search-input')

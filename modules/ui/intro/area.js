@@ -7,6 +7,8 @@ import { icon, pad } from './helper';
 export function uiIntroArea(context, reveal) {
     var dispatch = d3.dispatch('done'),
         playground = [-85.63552, 41.94159],
+        playgroundPreset = context.presets().item('leisure/playground'),
+        descriptionField = context.presets().field('description'),
         timeouts = [];
 
 
@@ -28,7 +30,7 @@ export function uiIntroArea(context, reveal) {
 
     function addArea() {
         var tooltip = reveal('button.add-area',
-            t('intro.areas.add', { button: icon('#icon-area', 'pre-text') }));
+            t('intro.areas.add_playground', { button: icon('#icon-area', 'pre-text') }));
 
         tooltip.selectAll('.tooltip-inner')
             .insert('svg', 'span')
@@ -38,7 +40,7 @@ export function uiIntroArea(context, reveal) {
 
         context.on('enter.intro', function(mode) {
             if (mode.id !== 'add-area') return;
-            continueTo(startArea);
+            continueTo(startPlayground);
         });
 
         function continueTo(nextStep) {
@@ -48,24 +50,24 @@ export function uiIntroArea(context, reveal) {
     }
 
 
-    function startArea() {
+    function startPlayground() {
         if (context.mode().id !== 'add-area') {
             return chapter.restart();
         }
 
         var padding = 120 * Math.pow(2, context.map().zoom() - 19);
         var box = pad(playground, padding, context);
-        reveal(box, t('intro.areas.corner'));
+        reveal(box, t('intro.areas.start_playground'));
 
         context.map().on('move.intro drawn.intro', function() {
             padding = 120 * Math.pow(2, context.map().zoom() - 19);
             box = pad(playground, padding, context);
-            reveal(box, t('intro.areas.corner'), { duration: 0 });
+            reveal(box, t('intro.areas.start_playground'), { duration: 0 });
         });
 
         context.on('enter.intro', function(mode) {
             if (mode.id !== 'draw-area') return chapter.restart();
-            continueTo(drawArea);
+            continueTo(continuePlayground);
         });
 
         function continueTo(nextStep) {
@@ -76,19 +78,19 @@ export function uiIntroArea(context, reveal) {
     }
 
 
-    function drawArea() {
+    function continuePlayground() {
         if (context.mode().id !== 'draw-area') {
             return chapter.restart();
         }
 
         var padding = 150 * Math.pow(2, context.map().zoom() - 19);
         var box = pad(playground, padding, context);
-        reveal(box, t('intro.areas.place'));
+        reveal(box, t('intro.areas.continue_playground'));
 
         context.map().on('move.intro drawn.intro', function() {
             padding = 150 * Math.pow(2, context.map().zoom() - 19);
             box = pad(playground, padding, context);
-            reveal(box, t('intro.areas.place'), {duration: 0});
+            reveal(box, t('intro.areas.continue_playground'), {duration: 0});
         });
 
         context.on('enter.intro', function(mode) {
@@ -122,8 +124,7 @@ export function uiIntroArea(context, reveal) {
 
         timeout(function() {
             reveal('.preset-search-input',
-                t('intro.areas.search',
-                { name: context.presets().item('leisure/playground').name() })
+                t('intro.areas.search_playground', { name: playgroundPreset.name() })
             );
         }, 500);
     }
@@ -134,7 +135,8 @@ export function uiIntroArea(context, reveal) {
 
         if (first.classed('preset-leisure-playground')) {
             reveal(first.select('.preset-list-button').node(),
-                t('intro.areas.choose')
+                t('intro.areas.choose_playground', { name: playgroundPreset.name() }),
+                { duration: 300 }
             );
 
             d3.select('.preset-search-input')
@@ -182,7 +184,10 @@ export function uiIntroArea(context, reveal) {
             return chapter.restart();
         });
 
-        reveal('div.combobox', t('intro.areas.choose_field'));
+        reveal('div.combobox',
+            t('intro.areas.choose_field', { name: descriptionField.label() }),
+            { duration: 300 }
+        );
 
         d3.select('div.combobox')
             .on('click.intro', function() {
@@ -190,7 +195,7 @@ export function uiIntroArea(context, reveal) {
                     if (d3.select('.form-field-description').empty())
                         continueTo(retryChooseDescription);
                     else
-                        continueTo(addDescription);
+                        continueTo(describePlayground);
                 }, 100);
             });
 
@@ -202,13 +207,13 @@ export function uiIntroArea(context, reveal) {
     }
 
 
-    function addDescription() {
+    function describePlayground() {
         context.on('exit.intro', function() {
             continueTo(play);
         });
 
         reveal('.entity-editor-pane',
-            t('intro.areas.describe', { button: icon('#icon-apply', 'pre-text') })
+            t('intro.areas.describe_playground', { button: icon('#icon-apply', 'pre-text') })
         );
 
         function continueTo(nextStep) {
@@ -223,12 +228,14 @@ export function uiIntroArea(context, reveal) {
             return chapter.restart();
         });
 
-        reveal('.entity-editor-pane', t('intro.areas.retry_add_field'), {
+        reveal('.entity-editor-pane',
+            t('intro.areas.retry_add_field', { name: descriptionField.label() }), {
             buttonText: t('intro.ok'),
             buttonCallback: function() { continueTo(clickAddField); }
         });
 
         function continueTo(nextStep) {
+            context.on('exit.intro', null);
             nextStep();
         }
     }

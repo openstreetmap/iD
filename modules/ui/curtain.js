@@ -78,14 +78,11 @@ export function uiCurtain() {
 
             if (options.buttonText && options.buttonCallback) {
                 var button = tooltip.selectAll('.button-section .button.action');
-
                 button
                     .on('click', function() {
                         d3.event.preventDefault();
                         options.buttonCallback();
                     });
-
-                button.node().focus();
             }
 
             // var dimensions = utilGetDimensions(selection, true),
