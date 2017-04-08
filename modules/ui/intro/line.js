@@ -25,7 +25,10 @@ export function uiIntroLine(context, reveal) {
         washingtonStreetId = 'w522',
         twelfthAvenueId = 'w1',
         eleventhAvenueEndId = 'n3550',
-        twelfthAvenue = [-85.6211739802704, 41.95194238444386];
+        washingtonSegmentId = null,
+        eleventhAvenueEnd = context.entity(eleventhAvenueEndId).loc,
+        deleteLinesLoc = [-85.6219395542764, 41.95228033922477],
+        twelfthAvenue = [-85.62219310052491, 41.952505413152956];
 
 
     var chapter = {
@@ -333,6 +336,7 @@ export function uiIntroLine(context, reveal) {
             );
 
             context.map().on('move.intro drawn.intro', function() {
+                var padding = 250 * Math.pow(2, context.map().zoom() - 19);
                 var box = pad(woodRoadDragMidpoint, padding, context);
                 reveal(box, t('intro.lines.update_line'),
                     { duration: 0, buttonText: t('intro.ok'), buttonCallback: advance }
@@ -354,11 +358,11 @@ export function uiIntroLine(context, reveal) {
         }
 
         var padding = 40 * Math.pow(2, context.map().zoom() - 19);
-
         var box = pad(woodRoadAddNode, padding, context);
         reveal(box, t('intro.lines.add_node'));
 
         context.map().on('move.intro drawn.intro', function() {
+            var padding = 40 * Math.pow(2, context.map().zoom() - 19);
             var box = pad(woodRoadAddNode, padding, context);
             reveal(box, t('intro.lines.add_node'), { duration: 0 });
         });
@@ -396,7 +400,6 @@ export function uiIntroLine(context, reveal) {
         }
 
         var padding = 100 * Math.pow(2, context.map().zoom() - 19);
-
         var box = pad(woodRoadDragEndpoint, padding, context);
         reveal(box, t('intro.lines.start_drag_endpoint'));
 
@@ -404,7 +407,7 @@ export function uiIntroLine(context, reveal) {
             if (!context.hasEntity(woodRoadId) || !context.hasEntity(woodRoadEndId)) {
                 return continueTo(updateLine);
             }
-
+            var padding = 100 * Math.pow(2, context.map().zoom() - 19);
             var box = pad(woodRoadDragEndpoint, padding, context);
             reveal(box, t('intro.lines.start_drag_endpoint'), { duration: 0 });
 
@@ -435,7 +438,6 @@ export function uiIntroLine(context, reveal) {
         }
 
         var padding = 100 * Math.pow(2, context.map().zoom() - 19);
-
         var box = pad(woodRoadDragEndpoint, padding, context);
         reveal(box, t('intro.lines.finish_drag_endpoint'));
 
@@ -443,6 +445,7 @@ export function uiIntroLine(context, reveal) {
             if (!context.hasEntity(woodRoadId) || !context.hasEntity(woodRoadEndId)) {
                 return continueTo(updateLine);
             }
+            var padding = 100 * Math.pow(2, context.map().zoom() - 19);
             var box = pad(woodRoadDragEndpoint, padding, context);
             reveal(box, t('intro.lines.finish_drag_endpoint'), { duration: 0 });
 
@@ -473,7 +476,6 @@ export function uiIntroLine(context, reveal) {
         }
 
         var padding = 80 * Math.pow(2, context.map().zoom() - 19);
-
         var box = pad(woodRoadDragMidpoint, padding, context);
         reveal(box, t('intro.lines.start_drag_midpoint'));
 
@@ -481,6 +483,7 @@ export function uiIntroLine(context, reveal) {
             if (!context.hasEntity(woodRoadId) || !context.hasEntity(woodRoadEndId)) {
                 return continueTo(updateLine);
             }
+            var padding = 80 * Math.pow(2, context.map().zoom() - 19);
             var box = pad(woodRoadDragMidpoint, padding, context);
             reveal(box, t('intro.lines.start_drag_midpoint'), { duration: 0 });
         });
@@ -513,7 +516,6 @@ export function uiIntroLine(context, reveal) {
         }
 
         var padding = 100 * Math.pow(2, context.map().zoom() - 19);
-
         var box = pad(woodRoadDragEndpoint, padding, context);
         box.height += 400;
 
@@ -530,6 +532,7 @@ export function uiIntroLine(context, reveal) {
             if (!context.hasEntity(woodRoadId) || !context.hasEntity(woodRoadEndId)) {
                 return continueTo(updateLine);
             }
+            var padding = 100 * Math.pow(2, context.map().zoom() - 19);
             var box = pad(woodRoadDragEndpoint, padding, context);
             box.height += 400;
             reveal(box, t('intro.lines.continue_drag_midpoint'),
@@ -554,11 +557,11 @@ export function uiIntroLine(context, reveal) {
             return chapter.restart();
         }
 
-        context.map().zoom(17).centerEase(twelfthAvenue, 500);
+        context.map().zoom(18).centerEase(deleteLinesLoc, 500);
 
         timeout(function() {
-            var padding = 200 * Math.pow(2, context.map().zoom() - 17);
-            var box = pad(twelfthAvenue, padding, context);
+            var padding = 200 * Math.pow(2, context.map().zoom() - 18);
+            var box = pad(deleteLinesLoc, padding, context);
             box.top -= 200;
             box.height += 400;
             var advance = function() { continueTo(rightClickIntersection); };
@@ -568,7 +571,8 @@ export function uiIntroLine(context, reveal) {
             );
 
             context.map().on('move.intro drawn.intro', function() {
-                var box = pad(twelfthAvenue, padding, context);
+                var padding = 200 * Math.pow(2, context.map().zoom() - 18);
+                var box = pad(deleteLinesLoc, padding, context);
                 box.top -= 200;
                 box.height += 400;
                 reveal(box, t('intro.lines.delete_lines', { street: t('intro.graph.name.12th-avenue') }),
@@ -586,44 +590,46 @@ export function uiIntroLine(context, reveal) {
 
     function rightClickIntersection() {
         context.history().reset('doneUpdateLine');
+        context.map().zoom(18).centerEase(eleventhAvenueEnd, 500);
 
-        if (!context.hasEntity(washingtonStreetId) ||
-            !context.hasEntity(twelfthAvenueId) ||
-            !context.hasEntity(eleventhAvenueEndId)) {
-            return chapter.restart();
-        }
-
-        var entity = context.entity(eleventhAvenueEndId);
-        var padding = 60 * Math.pow(2, context.map().zoom() - 17);
-
-        var box = pad(entity.loc, padding, context);
-        reveal(box, t('intro.lines.rightclick_intersection',
-            { street1: t('intro.graph.name.11th-avenue'), street2: t('intro.graph.name.washington-street') })
-        );
-
-        context.map().on('move.intro drawn.intro', function() {
-            var box = pad(entity.loc, padding, context);
+        timeout(function() {
+            var padding = 60 * Math.pow(2, context.map().zoom() - 18);
+            var box = pad(eleventhAvenueEnd, padding, context);
             reveal(box, t('intro.lines.rightclick_intersection',
-                { street1: t('intro.graph.name.11th-avenue'), street2: t('intro.graph.name.washington-street') }),
-                { duration: 0 }
+                { street1: t('intro.graph.name.11th-avenue'), street2: t('intro.graph.name.washington-street') })
             );
-        });
 
-        context.on('enter.intro', function(mode) {
-            if (mode.id !== 'select') return;
-            var ids = context.selectedIDs();
-            if (ids.length !== 1 || ids[0] !== eleventhAvenueEndId) return;
+            context.map().on('move.intro drawn.intro', function() {
+                var padding = 60 * Math.pow(2, context.map().zoom() - 18);
+                var box = pad(eleventhAvenueEnd, padding, context);
+                reveal(box, t('intro.lines.rightclick_intersection',
+                    { street1: t('intro.graph.name.11th-avenue'), street2: t('intro.graph.name.washington-street') }),
+                    { duration: 0 }
+                );
+            });
 
-            timeout(function() {
-                var node = d3.select('.edit-menu-item-split, .radial-menu-item-split').node();
-                if (!node) return;
-                continueTo(splitIntersection);
-            }, 300);  // after menu visible
-        });
+            context.on('enter.intro', function(mode) {
+                if (mode.id !== 'select') return;
+                var ids = context.selectedIDs();
+                if (ids.length !== 1 || ids[0] !== eleventhAvenueEndId) return;
+
+                timeout(function() {
+                    var node = d3.select('.edit-menu-item-split, .radial-menu-item-split').node();
+                    if (!node) return;
+                    continueTo(splitIntersection);
+                }, 300);  // after menu visible
+            });
+
+            context.history().on('change.intro', function() {
+                context.history().reset('doneUpdateLine');
+            });
+
+        }, 550);
 
         function continueTo(nextStep) {
             context.map().on('move.intro drawn.intro', null);
             context.on('enter.intro', null);
+            context.history().on('change.intro', null);
             nextStep();
         }
     }
@@ -640,10 +646,10 @@ export function uiIntroLine(context, reveal) {
         if (!node) { return continueTo(rightClickIntersection); }
 
         var wasChanged = false;
-        var entity = context.entity(eleventhAvenueEndId);
-        var padding = 60 * Math.pow(2, context.map().zoom() - 17);
+        washingtonSegmentId = null;
 
-        var box = pad(entity.loc, padding, context);
+        var padding = 60 * Math.pow(2, context.map().zoom() - 18);
+        var box = pad(eleventhAvenueEnd, padding, context);
         box.width += 100;
         box.height += 120;
 
@@ -655,7 +661,8 @@ export function uiIntroLine(context, reveal) {
             var node = d3.select('.edit-menu-item-split, .radial-menu-item-split').node();
             if (!wasChanged && !node) { return continueTo(rightClickIntersection); }
 
-            var box = pad(entity.loc, padding, context);
+            var padding = 60 * Math.pow(2, context.map().zoom() - 18);
+            var box = pad(eleventhAvenueEnd, padding, context);
             box.width += 100;
             box.height += 120;
             reveal(box, t('intro.lines.split_intersection',
@@ -667,20 +674,21 @@ export function uiIntroLine(context, reveal) {
         context.on('enter.intro', function(mode) {
             if (mode.id === 'browse') {
                 continueTo(rightClickIntersection);
-            } else if (mode.id === 'move' || mode.id === 'rotate') {
-                continueTo(retrySplit);
             }
         });
 
-        context.history().on('change.intro', function() {
+        context.history().on('change.intro', function(changed) {
             wasChanged = true;
             context.history().on('change.intro', null);
+            context.on('enter.intro', null);
 
             // Something changed.  Wait for transition to complete and check undo annotation.
             timeout(function() {
                 if (context.history().undoAnnotation() === t('operations.split.annotation.line')) {
-                    continueTo(play);
+                    washingtonSegmentId = changed.created()[0].id;
+                    continueTo(singleSelect);
                 } else {
+                    washingtonSegmentId = null;
                     continueTo(retrySplit);
                 }
             }, 500);  // after transitioned actions
@@ -697,15 +705,256 @@ export function uiIntroLine(context, reveal) {
 
     function retrySplit() {
         context.enter(modeBrowse(context));
+        var advance = function() { continueTo(rightClickIntersection); };
 
-        var padding = 60 * Math.pow(2, context.map().zoom() - 17);
-        var box = pad(entity.loc, padding, context);
-        box.width += 100;
-        box.height += 120;
+        var padding = 60 * Math.pow(2, context.map().zoom() - 18);
+        var box = pad(eleventhAvenueEnd, padding, context);
+        reveal(box, t('intro.lines.retry_split'),
+            { buttonText: t('intro.ok'), buttonCallback: advance }
+        );
 
-        reveal(box, t('intro.lines.retry_split'), {
+        context.map().on('move.intro drawn.intro', function() {
+            var padding = 60 * Math.pow(2, context.map().zoom() - 18);
+            var box = pad(eleventhAvenueEnd, padding, context);
+            reveal(box, t('intro.lines.retry_split'),
+                { duration: 0, buttonText: t('intro.ok'), buttonCallback: advance }
+            );
+        });
+
+        function continueTo(nextStep) {
+            context.map().on('move.intro drawn.intro', null);
+            nextStep();
+        }
+    }
+
+
+    function singleSelect() {
+        if (!washingtonSegmentId ||
+            !context.hasEntity(washingtonSegmentId) ||
+            !context.hasEntity(washingtonStreetId) ||
+            !context.hasEntity(twelfthAvenueId) ||
+            !context.hasEntity(eleventhAvenueEndId)) {
+            return continueTo(rightClickIntersection);
+        }
+
+        context.map().zoom(18).centerEase(twelfthAvenue, 400);
+
+        timeout(function() {
+            var ids = context.selectedIDs();
+            var string = 'intro.lines.select_segment_' + (ids.length > 1 ? 'multi' : 'single');
+
+            var street = t('intro.graph.name.washington-street');
+            var padding = 200 * Math.pow(2, context.map().zoom() - 18);
+            var box = pad(twelfthAvenue, padding, context);
+            box.width = box.width / 2;
+            reveal(box, t(string, { street1: street, street2: street }));
+
+            context.map().on('move.intro drawn.intro', function() {
+                var padding = 200 * Math.pow(2, context.map().zoom() - 18);
+                var box = pad(twelfthAvenue, padding, context);
+                box.width = box.width / 2;
+                reveal(box, t(string, { street1: street, street2: street }),
+                    { duration: 0 }
+                );
+            });
+
+            context.on('enter.intro', function() {
+                var ids = context.selectedIDs();
+                if (ids.length === 1 && ids[0] === washingtonSegmentId) {
+                    continueTo(multiSelect);
+                }
+            });
+
+            context.history().on('change.intro', function() {
+                if (!washingtonSegmentId ||
+                    !context.hasEntity(washingtonSegmentId) ||
+                    !context.hasEntity(washingtonStreetId) ||
+                    !context.hasEntity(twelfthAvenueId) ||
+                    !context.hasEntity(eleventhAvenueEndId)) {
+                    return continueTo(rightClickIntersection);
+                }
+            });
+
+        }, 450);
+
+
+        function continueTo(nextStep) {
+            context.map().on('move.intro drawn.intro', null);
+            context.on('enter.intro', null);
+            context.history().on('change.intro', null);
+            nextStep();
+        }
+    }
+
+
+    function multiSelect() {
+        if (!washingtonSegmentId ||
+            !context.hasEntity(washingtonSegmentId) ||
+            !context.hasEntity(washingtonStreetId) ||
+            !context.hasEntity(twelfthAvenueId) ||
+            !context.hasEntity(eleventhAvenueEndId)) {
+            return continueTo(rightClickIntersection);
+        }
+
+        context.map().zoom(18).centerEase(twelfthAvenue, 400);
+
+        timeout(function() {
+            var street = t('intro.graph.name.12th-avenue');
+            var padding = 200 * Math.pow(2, context.map().zoom() - 18);
+            var box = pad(twelfthAvenue, padding, context);
+            reveal(box, t('intro.lines.multi_select', { street1: street, street2: street }));
+
+            context.map().on('move.intro drawn.intro', function() {
+                var padding = 200 * Math.pow(2, context.map().zoom() - 18);
+                var box = pad(twelfthAvenue, padding, context);
+                reveal(box, t('intro.lines.multi_select', { street1: street, street2: street }),
+                    { duration: 0 }
+                );
+            });
+
+            context.on('enter.intro', function() {
+                var ids = context.selectedIDs();
+                if (ids.length === 2 &&
+                    ids.indexOf(twelfthAvenueId) !== -1 &&
+                    ids.indexOf(washingtonSegmentId) !== -1) {
+                    return continueTo(multiRightClick);
+                } else {
+                    return continueTo(singleSelect);
+                }
+            });
+
+            context.history().on('change.intro', function() {
+                if (!washingtonSegmentId ||
+                    !context.hasEntity(washingtonSegmentId) ||
+                    !context.hasEntity(washingtonStreetId) ||
+                    !context.hasEntity(twelfthAvenueId) ||
+                    !context.hasEntity(eleventhAvenueEndId)) {
+                    return continueTo(rightClickIntersection);
+                }
+            });
+        }, 450);
+
+        function continueTo(nextStep) {
+            context.map().on('move.intro drawn.intro', null);
+            context.on('enter.intro', null);
+            context.history().on('change.intro', null);
+            nextStep();
+        }
+    }
+
+
+    function multiRightClick() {
+        if (!washingtonSegmentId ||
+            !context.hasEntity(washingtonSegmentId) ||
+            !context.hasEntity(washingtonStreetId) ||
+            !context.hasEntity(twelfthAvenueId) ||
+            !context.hasEntity(eleventhAvenueEndId)) {
+            return continueTo(rightClickIntersection);
+        }
+
+        var padding = 200 * Math.pow(2, context.map().zoom() - 18);
+        var box = pad(twelfthAvenue, padding, context);
+        reveal(box, t('intro.lines.multi_rightclick'));
+
+        context.map().on('move.intro drawn.intro', function() {
+            var padding = 200 * Math.pow(2, context.map().zoom() - 18);
+            var box = pad(twelfthAvenue, padding, context);
+            reveal(box, t('intro.lines.multi_rightclick'), { duration: 0 });
+        });
+
+        d3.select(window).on('click.intro contextmenu.intro', function() {
+            d3.select(window).on('click.intro contextmenu.intro', null, true);
+            var ids = context.selectedIDs();
+            if (ids.length === 2 &&
+                ids.indexOf(twelfthAvenueId) !== -1 &&
+                ids.indexOf(washingtonSegmentId) !== -1) {
+                timeout(function() {
+                    var node = d3.select('.edit-menu-item-delete, .radial-menu-item-delete').node();
+                    if (!node) return;
+                    continueTo(multiDelete);
+                }, 300);  // after menu visible
+            } else if (ids.length === 1 &&
+                ids.indexOf(washingtonSegmentId) !== -1) {
+                return continueTo(multiSelect);
+            } else {
+                return continueTo(singleSelect);
+            }
+        }, true);
+
+        context.history().on('change.intro', function() {
+            if (!washingtonSegmentId ||
+                !context.hasEntity(washingtonSegmentId) ||
+                !context.hasEntity(washingtonStreetId) ||
+                !context.hasEntity(twelfthAvenueId) ||
+                !context.hasEntity(eleventhAvenueEndId)) {
+                return continueTo(rightClickIntersection);
+            }
+        });
+
+        function continueTo(nextStep) {
+            context.map().on('move.intro drawn.intro', null);
+            d3.select(window).on('click.intro contextmenu.intro', null, true);
+            context.history().on('change.intro', null);
+            nextStep();
+        }
+    }
+
+
+    function multiDelete() {
+        if (!washingtonSegmentId ||
+            !context.hasEntity(washingtonSegmentId) ||
+            !context.hasEntity(washingtonStreetId) ||
+            !context.hasEntity(twelfthAvenueId) ||
+            !context.hasEntity(eleventhAvenueEndId)) {
+            return continueTo(rightClickIntersection);
+        }
+
+        var node = d3.select('.edit-menu-item-delete, .radial-menu-item-delete').node();
+        if (!node) return continueTo(multiRightClick);
+
+        var padding = 200 * Math.pow(2, context.map().zoom() - 18);
+        var box = pad(twelfthAvenue, padding, context);
+        reveal(box, t('intro.lines.multi_delete'));
+
+        context.map().on('move.intro drawn.intro', function() {
+            var padding = 200 * Math.pow(2, context.map().zoom() - 18);
+            var box = pad(twelfthAvenue, padding, context);
+            reveal(box, t('intro.lines.multi_delete'), { duration: 0 });
+        });
+
+        context.on('exit.intro', function() {
+            if (!washingtonSegmentId) {
+                return continueTo(rightClickIntersection);
+            }
+            if (context.hasEntity(washingtonSegmentId) || context.hasEntity(twelfthAvenueId)) {
+                return continueTo(multiRightClick);  // roads still exist
+            }
+        });
+
+        context.history().on('change.intro', function(changed) {
+            if (changed.deleted().length === 2)
+                continueTo(play);
+            else
+                continueTo(retryDelete);
+        });
+
+        function continueTo(nextStep) {
+            context.map().on('move.intro drawn.intro', null);
+            context.on('exit.intro', null);
+            context.history().on('change.intro', null);
+            nextStep();
+        }
+    }
+
+
+    function retryDelete() {
+        context.enter(modeBrowse(context));
+
+        var padding = 200 * Math.pow(2, context.map().zoom() - 18);
+        var box = pad(twelfthAvenue, padding, context);
+        reveal(box, t('intro.lines.retry_delete'), {
             buttonText: t('intro.ok'),
-            buttonCallback: function() { continueTo(rightClickIntersection); }
+            buttonCallback: function() { continueTo(multiRightClick); }
         });
 
         function continueTo(nextStep) {
@@ -727,8 +976,12 @@ export function uiIntroLine(context, reveal) {
 
     chapter.enter = function() {
         context.history().reset('initial');
-        context.map().zoom(18.5).centerEase(tulipRoadStart);
-        addLine();
+        // context.map().zoom(18.5).centerEase(tulipRoadStart);
+        // addLine();
+
+// for testing:
+context.history().checkpoint('doneUpdateLine');
+deleteLines();
     };
 
 
