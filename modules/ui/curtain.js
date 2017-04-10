@@ -53,7 +53,7 @@ export function uiCurtain() {
 
     curtain.reveal = function(box, text, options) {
         if (typeof box === 'string') box = d3.select(box).node();
-        if (box.getBoundingClientRect) box = copyBox(box.getBoundingClientRect());
+        if (box && box.getBoundingClientRect) box = copyBox(box.getBoundingClientRect());
 
         options = options || {};
 
