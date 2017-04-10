@@ -1,3 +1,4 @@
+import * as d3 from 'd3';
 import { t } from '../../util/locale';
 
 export function pointBox(loc, context) {
@@ -92,3 +93,9 @@ export function localize(obj) {
     return obj;
 }
 
+
+export function selectMenuItem(operation) {
+    var selector = '.edit-menu .edit-menu-item-' + operation +
+        ', .radial-menu .radial-menu-item-' + operation;
+    return d3.select(selector);
+}

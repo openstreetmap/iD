@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import { t, textDirection } from '../../util/locale';
 import { utilRebind } from '../../util/rebind';
-import { icon, pointBox, pad } from './helper';
+import { icon, pointBox, pad, selectMenuItem } from './helper';
 
 
 export function uiIntroPoint(context, reveal) {
@@ -285,7 +285,7 @@ export function uiIntroPoint(context, reveal) {
             if (ids.length !== 1 || ids[0] !== pointId) return;
 
             timeout(function() {
-                var node = d3.select('.edit-menu-item-delete, .radial-menu-item-delete').node();
+                var node = selectMenuItem('delete').node();
                 if (!node) return;
                 continueTo(enterDelete);
             }, 300);  // after menu visible

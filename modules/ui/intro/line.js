@@ -4,7 +4,7 @@ import { t } from '../../util/locale';
 import { geoSphericalDistance } from '../../geo';
 import { modeBrowse, modeSelect } from '../../modes';
 import { utilRebind } from '../../util/rebind';
-import { icon, pad } from './helper';
+import { icon, pad, selectMenuItem } from './helper';
 
 
 export function uiIntroLine(context, reveal) {
@@ -25,8 +25,10 @@ export function uiIntroLine(context, reveal) {
         washingtonStreetId = 'w522',
         twelfthAvenueId = 'w1',
         eleventhAvenueEndId = 'n3550',
+        twelfthAvenueEndId = 'n5',
         washingtonSegmentId = null,
         eleventhAvenueEnd = context.entity(eleventhAvenueEndId).loc,
+        twelfthAvenueEnd = context.entity(twelfthAvenueEndId).loc,
         deleteLinesLoc = [-85.6219395542764, 41.95228033922477],
         twelfthAvenue = [-85.62219310052491, 41.952505413152956];
 
@@ -579,10 +581,18 @@ export function uiIntroLine(context, reveal) {
                     { duration: 0, buttonText: t('intro.ok'), buttonCallback: advance }
                 );
             });
+
+            context.history().on('change.intro', function() {
+                timeout(function() {
+                    continueTo(deleteLines);
+                }, 500);  // after any transition (e.g. if user deleted intersection)
+            });
+
         }, 550);
 
         function continueTo(nextStep) {
             context.map().on('move.intro drawn.intro', null);
+            context.history().on('change.intro', null);
             nextStep();
         }
     }
@@ -590,6 +600,7 @@ export function uiIntroLine(context, reveal) {
 
     function rightClickIntersection() {
         context.history().reset('doneUpdateLine');
+        context.enter(modeBrowse(context));
         context.map().zoom(18).centerEase(eleventhAvenueEnd, 500);
 
         timeout(function() {
@@ -614,14 +625,16 @@ export function uiIntroLine(context, reveal) {
                 if (ids.length !== 1 || ids[0] !== eleventhAvenueEndId) return;
 
                 timeout(function() {
-                    var node = d3.select('.edit-menu-item-split, .radial-menu-item-split').node();
+                    var node = selectMenuItem('split').node();
                     if (!node) return;
                     continueTo(splitIntersection);
                 }, 300);  // after menu visible
             });
 
             context.history().on('change.intro', function() {
-                context.history().reset('doneUpdateLine');
+                timeout(function() {
+                    continueTo(deleteLines);
+                }, 300);  // after any transition (e.g. if user deleted intersection)
             });
 
         }, 550);
@@ -642,7 +655,7 @@ export function uiIntroLine(context, reveal) {
             return continueTo(deleteLines);
         }
 
-        var node = d3.select('.edit-menu-item-split, .radial-menu-item-split').node();
+        var node = selectMenuItem('split').node();
         if (!node) { return continueTo(rightClickIntersection); }
 
         var wasChanged = false;
@@ -658,7 +671,7 @@ export function uiIntroLine(context, reveal) {
         );
 
         context.map().on('move.intro drawn.intro', function() {
-            var node = d3.select('.edit-menu-item-split, .radial-menu-item-split').node();
+            var node = selectMenuItem('split').node();
             if (!wasChanged && !node) { return continueTo(rightClickIntersection); }
 
             var padding = 60 * Math.pow(2, context.map().zoom() - 18);
@@ -671,31 +684,20 @@ export function uiIntroLine(context, reveal) {
             );
         });
 
-        context.on('enter.intro', function(mode) {
-            if (mode.id === 'browse') {
-                continueTo(rightClickIntersection);
-            }
-        });
-
         context.history().on('change.intro', function(changed) {
             wasChanged = true;
-            context.history().on('change.intro', null);
-            context.on('enter.intro', null);
-
-            // Something changed.  Wait for transition to complete and check undo annotation.
             timeout(function() {
                 if (context.history().undoAnnotation() === t('operations.split.annotation.line')) {
                     washingtonSegmentId = changed.created()[0].id;
-                    continueTo(singleSelect);
+                    continueTo(didSplit);
                 } else {
                     washingtonSegmentId = null;
                     continueTo(retrySplit);
                 }
-            }, 500);  // after transitioned actions
+            }, 300);  // after any transition (e.g. if user deleted intersection)
         });
 
         function continueTo(nextStep) {
-            context.on('enter.intro', null);
             context.map().on('move.intro drawn.intro', null);
             context.history().on('change.intro', null);
             nextStep();
@@ -705,6 +707,7 @@ export function uiIntroLine(context, reveal) {
 
     function retrySplit() {
         context.enter(modeBrowse(context));
+        context.map().zoom(18).centerEase(eleventhAvenueEnd, 500);
         var advance = function() { continueTo(rightClickIntersection); };
 
         var padding = 60 * Math.pow(2, context.map().zoom() - 18);
@@ -728,7 +731,7 @@ export function uiIntroLine(context, reveal) {
     }
 
 
-    function singleSelect() {
+    function didSplit() {
         if (!washingtonSegmentId ||
             !context.hasEntity(washingtonSegmentId) ||
             !context.hasEntity(washingtonStreetId) ||
@@ -739,44 +742,40 @@ export function uiIntroLine(context, reveal) {
 
         context.map().zoom(18).centerEase(twelfthAvenue, 400);
 
-        timeout(function() {
-            var ids = context.selectedIDs();
-            var string = 'intro.lines.select_segment_' + (ids.length > 1 ? 'multi' : 'single');
+        var ids = context.selectedIDs();
+        var string = 'intro.lines.did_split_' + (ids.length > 1 ? 'multi' : 'single');
 
-            var street = t('intro.graph.name.washington-street');
+        var street = t('intro.graph.name.washington-street');
+        var padding = 200 * Math.pow(2, context.map().zoom() - 18);
+        var box = pad(twelfthAvenue, padding, context);
+        box.width = box.width / 2;
+        reveal(box, t(string, { street1: street, street2: street }));
+
+        context.map().on('move.intro drawn.intro', function() {
             var padding = 200 * Math.pow(2, context.map().zoom() - 18);
             var box = pad(twelfthAvenue, padding, context);
             box.width = box.width / 2;
-            reveal(box, t(string, { street1: street, street2: street }));
+            reveal(box, t(string, { street1: street, street2: street }),
+                { duration: 0 }
+            );
+        });
 
-            context.map().on('move.intro drawn.intro', function() {
-                var padding = 200 * Math.pow(2, context.map().zoom() - 18);
-                var box = pad(twelfthAvenue, padding, context);
-                box.width = box.width / 2;
-                reveal(box, t(string, { street1: street, street2: street }),
-                    { duration: 0 }
-                );
-            });
+        context.on('enter.intro', function() {
+            var ids = context.selectedIDs();
+            if (ids.length === 1 && ids[0] === washingtonSegmentId) {
+                continueTo(multiSelect);
+            }
+        });
 
-            context.on('enter.intro', function() {
-                var ids = context.selectedIDs();
-                if (ids.length === 1 && ids[0] === washingtonSegmentId) {
-                    continueTo(multiSelect);
-                }
-            });
-
-            context.history().on('change.intro', function() {
-                if (!washingtonSegmentId ||
-                    !context.hasEntity(washingtonSegmentId) ||
-                    !context.hasEntity(washingtonStreetId) ||
-                    !context.hasEntity(twelfthAvenueId) ||
-                    !context.hasEntity(eleventhAvenueEndId)) {
-                    return continueTo(rightClickIntersection);
-                }
-            });
-
-        }, 450);
-
+        context.history().on('change.intro', function() {
+            if (!washingtonSegmentId ||
+                !context.hasEntity(washingtonSegmentId) ||
+                !context.hasEntity(washingtonStreetId) ||
+                !context.hasEntity(twelfthAvenueId) ||
+                !context.hasEntity(eleventhAvenueEndId)) {
+                return continueTo(rightClickIntersection);
+            }
+        });
 
         function continueTo(nextStep) {
             context.map().on('move.intro drawn.intro', null);
@@ -796,31 +795,61 @@ export function uiIntroLine(context, reveal) {
             return continueTo(rightClickIntersection);
         }
 
+        var ids = context.selectedIDs();
+        var hasWashington = ids.indexOf(washingtonSegmentId) !== -1;
+        var hasTwelfth = ids.indexOf(twelfthAvenueId) !== -1;
+
+        if (hasWashington && hasTwelfth) {
+            return continueTo(multiRightClick);
+        } else if (!hasWashington && !hasTwelfth) {
+            return continueTo(didSplit);
+        }
+
         context.map().zoom(18).centerEase(twelfthAvenue, 400);
 
         timeout(function() {
-            var street = t('intro.graph.name.12th-avenue');
-            var padding = 200 * Math.pow(2, context.map().zoom() - 18);
-            var box = pad(twelfthAvenue, padding, context);
-            reveal(box, t('intro.lines.multi_select', { street1: street, street2: street }));
+            var selected, other, padding, box;
+            if (hasWashington) {
+                selected = t('intro.graph.name.washington-street');
+                other = t('intro.graph.name.12th-avenue');
+                padding = 60 * Math.pow(2, context.map().zoom() - 18);
+                box = pad(twelfthAvenueEnd, padding, context);
+                box.width *= 3;
+            } else {
+                selected = t('intro.graph.name.12th-avenue');
+                other = t('intro.graph.name.washington-street');
+                padding = 200 * Math.pow(2, context.map().zoom() - 18);
+                box = pad(twelfthAvenue, padding, context);
+                box.width /= 2;
+            }
+
+            reveal(box,
+                t('intro.lines.multi_select', { selected: selected, other1: other, other2: other })
+            );
 
             context.map().on('move.intro drawn.intro', function() {
-                var padding = 200 * Math.pow(2, context.map().zoom() - 18);
-                var box = pad(twelfthAvenue, padding, context);
-                reveal(box, t('intro.lines.multi_select', { street1: street, street2: street }),
+                if (hasWashington) {
+                    selected = t('intro.graph.name.washington-street');
+                    other = t('intro.graph.name.12th-avenue');
+                    padding = 60 * Math.pow(2, context.map().zoom() - 18);
+                    box = pad(twelfthAvenueEnd, padding, context);
+                    box.width *= 3;
+                } else {
+                    selected = t('intro.graph.name.12th-avenue');
+                    other = t('intro.graph.name.washington-street');
+                    padding = 200 * Math.pow(2, context.map().zoom() - 18);
+                    box = pad(twelfthAvenue, padding, context);
+                    box.width /= 2;
+                }
+
+                reveal(box,
+                    t('intro.lines.multi_select', { selected: selected, other1: other, other2: other }),
                     { duration: 0 }
                 );
             });
 
             context.on('enter.intro', function() {
-                var ids = context.selectedIDs();
-                if (ids.length === 2 &&
-                    ids.indexOf(twelfthAvenueId) !== -1 &&
-                    ids.indexOf(washingtonSegmentId) !== -1) {
-                    return continueTo(multiRightClick);
-                } else {
-                    return continueTo(singleSelect);
-                }
+                continueTo(multiSelect);
             });
 
             context.history().on('change.intro', function() {
@@ -863,22 +892,21 @@ export function uiIntroLine(context, reveal) {
         });
 
         d3.select(window).on('click.intro contextmenu.intro', function() {
-            d3.select(window).on('click.intro contextmenu.intro', null, true);
-            var ids = context.selectedIDs();
-            if (ids.length === 2 &&
-                ids.indexOf(twelfthAvenueId) !== -1 &&
-                ids.indexOf(washingtonSegmentId) !== -1) {
-                timeout(function() {
-                    var node = d3.select('.edit-menu-item-delete, .radial-menu-item-delete').node();
-                    if (!node) return;
-                    continueTo(multiDelete);
-                }, 300);  // after menu visible
-            } else if (ids.length === 1 &&
-                ids.indexOf(washingtonSegmentId) !== -1) {
-                return continueTo(multiSelect);
-            } else {
-                return continueTo(singleSelect);
-            }
+            timeout(function() {
+                var ids = context.selectedIDs();
+                if (ids.length === 2 &&
+                    ids.indexOf(twelfthAvenueId) !== -1 &&
+                    ids.indexOf(washingtonSegmentId) !== -1) {
+                        var node = selectMenuItem('delete').node();
+                        if (!node) return;
+                        continueTo(multiDelete);
+                } else if (ids.length === 1 &&
+                    ids.indexOf(washingtonSegmentId) !== -1) {
+                    return continueTo(multiSelect);
+                } else {
+                    return continueTo(didSplit);
+                }
+            }, 300);  // after edit menu visible
         }, true);
 
         context.history().on('change.intro', function() {
@@ -909,33 +937,36 @@ export function uiIntroLine(context, reveal) {
             return continueTo(rightClickIntersection);
         }
 
-        var node = d3.select('.edit-menu-item-delete, .radial-menu-item-delete').node();
+        var node = selectMenuItem('delete').node();
         if (!node) return continueTo(multiRightClick);
 
         var padding = 200 * Math.pow(2, context.map().zoom() - 18);
         var box = pad(twelfthAvenue, padding, context);
-        reveal(box, t('intro.lines.multi_delete'));
+        reveal(box,
+            t('intro.lines.multi_delete', { button: icon('#operation-delete', 'pre-text') })
+        );
 
         context.map().on('move.intro drawn.intro', function() {
             var padding = 200 * Math.pow(2, context.map().zoom() - 18);
             var box = pad(twelfthAvenue, padding, context);
-            reveal(box, t('intro.lines.multi_delete'), { duration: 0 });
+            reveal(box,
+                t('intro.lines.multi_delete', { button: icon('#operation-delete', 'pre-text') }),
+                { duration: 0 }
+            );
         });
 
         context.on('exit.intro', function() {
-            if (!washingtonSegmentId) {
-                return continueTo(rightClickIntersection);
-            }
             if (context.hasEntity(washingtonSegmentId) || context.hasEntity(twelfthAvenueId)) {
-                return continueTo(multiRightClick);  // roads still exist
+                return continueTo(multiSelect);  // left select mode but roads still exist
             }
         });
 
-        context.history().on('change.intro', function(changed) {
-            if (changed.deleted().length === 2)
+        context.history().on('change.intro', function() {
+            if (context.hasEntity(washingtonSegmentId) || context.hasEntity(twelfthAvenueId)) {
+                continueTo(retryDelete);         // changed something but roads still exist
+            } else {
                 continueTo(play);
-            else
-                continueTo(retryDelete);
+            }
         });
 
         function continueTo(nextStep) {
@@ -954,7 +985,7 @@ export function uiIntroLine(context, reveal) {
         var box = pad(twelfthAvenue, padding, context);
         reveal(box, t('intro.lines.retry_delete'), {
             buttonText: t('intro.ok'),
-            buttonCallback: function() { continueTo(multiRightClick); }
+            buttonCallback: function() { continueTo(multiSelect); }
         });
 
         function continueTo(nextStep) {
@@ -976,12 +1007,8 @@ export function uiIntroLine(context, reveal) {
 
     chapter.enter = function() {
         context.history().reset('initial');
-        // context.map().zoom(18.5).centerEase(tulipRoadStart);
-        // addLine();
-
-// for testing:
-context.history().checkpoint('doneUpdateLine');
-deleteLines();
+        context.map().zoom(18.5).centerEase(tulipRoadStart);
+        addLine();
     };
 
 

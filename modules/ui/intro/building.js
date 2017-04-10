@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import { t } from '../../util/locale';
 import { modeBrowse } from '../../modes/browse';
 import { utilRebind } from '../../util/rebind';
-import { icon, pad } from './helper';
+import { icon, pad, selectMenuItem } from './helper';
 
 
 export function uiIntroBuilding(context, reveal) {
@@ -229,7 +229,7 @@ export function uiIntroBuilding(context, reveal) {
             if (ids.length !== 1 || ids[0] !== houseId) return;
 
             timeout(function() {
-                var node = d3.select('.edit-menu-item-orthogonalize, .radial-menu-item-orthogonalize').node();
+                var node = selectMenuItem('orthogonalize').node();
                 if (!node) return;
                 continueTo(clickSquare);
             }, 300);  // after menu visible
@@ -257,7 +257,7 @@ export function uiIntroBuilding(context, reveal) {
         var entity = context.hasEntity(houseId);
         if (!entity) return continueTo(rightClickHouse);
 
-        var node = d3.select('.edit-menu-item-orthogonalize, .radial-menu-item-orthogonalize').node();
+        var node = selectMenuItem('orthogonalize').node();
         if (!node) { return continueTo(rightClickHouse); }
 
         var wasChanged = false;
@@ -275,7 +275,7 @@ export function uiIntroBuilding(context, reveal) {
         });
 
         context.map().on('move.intro drawn.intro', function() {
-            var node = d3.select('.edit-menu-item-orthogonalize, .radial-menu-item-orthogonalize').node();
+            var node = selectMenuItem('orthogonalize').node();
             if (!wasChanged && !node) { return continueTo(rightClickHouse); }
 
             revealHouse(house,
@@ -510,7 +510,7 @@ export function uiIntroBuilding(context, reveal) {
             if (ids.length !== 1 || ids[0] !== tankId) return;
 
             timeout(function() {
-                var node = d3.select('.edit-menu-item-circularize, .radial-menu-item-circularize').node();
+                var node = selectMenuItem('circularize').node();
                 if (!node) return;
                 continueTo(clickCircle);
             }, 300);  // after menu visible
@@ -538,7 +538,7 @@ export function uiIntroBuilding(context, reveal) {
         var entity = context.hasEntity(tankId);
         if (!entity) return continueTo(rightClickTank);
 
-        var node = d3.select('.edit-menu-item-circularize, .radial-menu-item-circularize').node();
+        var node = selectMenuItem('circularize').node();
         if (!node) { return continueTo(rightClickTank); }
 
         var wasChanged = false;
@@ -556,7 +556,7 @@ export function uiIntroBuilding(context, reveal) {
         });
 
         context.map().on('move.intro drawn.intro', function() {
-            var node = d3.select('.edit-menu-item-circularize, .radial-menu-item-circularize').node();
+            var node = selectMenuItem('circularize').node();
             if (!wasChanged && !node) { return continueTo(rightClickTank); }
 
             revealTank(tank,
