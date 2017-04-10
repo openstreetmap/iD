@@ -3674,6 +3674,12 @@ img.tile-removing {
     margin: 0;
 }
 
+.curtain-tooltip .tooltip-inner .icon.pre-text {
+    vertical-align: text-top;
+    margin-right: 0;
+    display: inline-block;
+}
+
 .curtain-tooltip.intro-points-describe {
     top: 133px !important;
 }

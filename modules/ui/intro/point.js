@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import { t, textDirection } from '../../util/locale';
 import { utilRebind } from '../../util/rebind';
-import { icon, pointBox, pad, selectMenuItem } from './helper';
+import { icon, pointBox, pad, selectMenuItem, transitionTime } from './helper';
 
 
 export function uiIntroPoint(context, reveal) {
@@ -30,21 +30,29 @@ export function uiIntroPoint(context, reveal) {
 
 
     function addPoint() {
-        var tooltip = reveal('button.add-point',
-            t('intro.points.add_point', { button: icon('#icon-point', 'pre-text') }));
+        context.history().reset('initial');
 
-        pointId = null;
+        var msec = transitionTime(intersection, context.map().center());
+        if (msec) { reveal(null, null, { duration: 0 }); }
+        context.map().zoom(19).centerEase(intersection, msec);
 
-        tooltip.selectAll('.tooltip-inner')
-            .insert('svg', 'span')
-            .attr('class', 'tooltip-illustration')
-            .append('use')
-            .attr('xlink:href', '#poi-images');
+        timeout(function() {
+            var tooltip = reveal('button.add-point',
+                t('intro.points.add_point', { button: icon('#icon-point', 'pre-text') }));
 
-        context.on('enter.intro', function(mode) {
-            if (mode.id !== 'add-point') return;
-            continueTo(placePoint);
-        });
+            pointId = null;
+
+            tooltip.selectAll('.tooltip-inner')
+                .insert('svg', 'span')
+                .attr('class', 'tooltip-illustration')
+                .append('use')
+                .attr('xlink:href', '#poi-images');
+
+            context.on('enter.intro', function(mode) {
+                if (mode.id !== 'add-point') return;
+                continueTo(placePoint);
+            });
+        }, msec + 100);
 
         function continueTo(nextStep) {
             context.on('enter.intro', null);
@@ -95,7 +103,7 @@ export function uiIntroPoint(context, reveal) {
 
         timeout(function() {
             reveal('.preset-search-input',
-                t('intro.points.search_cafe', { name: cafePreset.name() })
+                t('intro.points.search_cafe', { preset: cafePreset.name() })
             );
         }, 500);
     }
@@ -106,7 +114,7 @@ export function uiIntroPoint(context, reveal) {
 
         if (first.classed('preset-amenity-cafe')) {
             reveal(first.select('.preset-list-button').node(),
-                t('intro.points.choose_cafe', { name: cafePreset.name() }),
+                t('intro.points.choose_cafe', { preset: cafePreset.name() }),
                 { duration: 300 }
             );
 
@@ -192,12 +200,9 @@ export function uiIntroPoint(context, reveal) {
         var entity = context.hasEntity(pointId);
         if (!entity) return chapter.restart();
 
-        context.map().centerEase(entity.loc, 250);
-
-        context.on('enter.intro', function(mode) {
-            if (mode.id !== 'select') return;
-            continueTo(updatePoint);
-        });
+        var msec = transitionTime(entity.loc, context.map().center());
+        if (msec) { reveal(null, null, { duration: 0 }); }
+        context.map().centerEase(entity.loc, msec);
 
         timeout(function() {
             var box = pointBox(entity.loc, context);
@@ -209,7 +214,13 @@ export function uiIntroPoint(context, reveal) {
                 var box = pointBox(entity.loc, context);
                 reveal(box, t('intro.points.reselect'), { duration: 0 });
             });
-        }, 260);  // after centerEase
+
+            context.on('enter.intro', function(mode) {
+                if (mode.id !== 'select') return;
+                continueTo(updatePoint);
+            });
+
+        }, msec + 100);
 
         function continueTo(nextStep) {
             context.map().on('move.intro drawn.intro', null);
@@ -358,19 +369,19 @@ export function uiIntroPoint(context, reveal) {
 
 
     function play() {
-        dispatch.call('done');
         reveal('.intro-nav-wrap .chapter-area',
             t('intro.points.play', { next: t('intro.areas.title') }), {
                 buttonText: t('intro.ok'),
-                buttonCallback: function() { reveal('#id-container'); }
+                buttonCallback: function() {
+                    dispatch.call('done');
+                    reveal('#id-container');
+                }
             }
         );
     }
 
 
     chapter.enter = function() {
-        context.history().reset('initial');
-        context.map().zoom(19).centerEase(intersection);
         addPoint();
     };
 

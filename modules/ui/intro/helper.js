@@ -1,5 +1,7 @@
 import * as d3 from 'd3';
 import { t } from '../../util/locale';
+import { geoSphericalDistance } from '../../geo';
+
 
 export function pointBox(loc, context) {
     var rect = context.surfaceRect();
@@ -98,4 +100,17 @@ export function selectMenuItem(operation) {
     var selector = '.edit-menu .edit-menu-item-' + operation +
         ', .radial-menu .radial-menu-item-' + operation;
     return d3.select(selector);
+}
+
+
+export function transitionTime(point1, point2) {
+    var distance = geoSphericalDistance(point1, point2);
+    if (distance === 0)
+        return 0;
+    else if (distance < 80)
+        return 500;
+    else if (distance < 160)
+        return 1000;
+    else
+        return 3000;
 }

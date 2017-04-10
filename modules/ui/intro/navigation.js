@@ -1,13 +1,14 @@
 import * as d3 from 'd3';
 import { t, textDirection } from '../../util/locale';
 import { utilRebind } from '../../util/rebind';
-import { icon, pointBox } from './helper';
+import { icon, pointBox, transitionTime } from './helper';
 
 
 export function uiIntroNavigation(context, reveal) {
     var dispatch = d3.dispatch('done'),
         timeouts = [],
         hallId = 'n2061',
+        townHall = [-85.63591, 41.94285],
         springStreet = [-85.63585099140167, 41.942506848938926];
 
 
@@ -34,25 +35,34 @@ export function uiIntroNavigation(context, reveal) {
 
 
     function dragMap() {
-        var dragged = false,
-            rect = context.surfaceRect(),
-            box = {
-                left: rect.left + (textDirection === 'rtl' ? 60 : 10),
-                top: rect.top + 70,
-                width: rect.width - 70,
-                height: rect.height - 170
-            };
+        context.history().reset('initial');
 
-        context.map().centerZoom([-85.63591, 41.94285], 19);
-        reveal(box, t('intro.navigation.drag'));
+        var msec = transitionTime(townHall, context.map().center());
+        if (msec) { reveal(null, null, { duration: 0 }); }
+        context.map().zoom(19).centerEase(townHall, msec);
 
-        context.map().on('move.intro', function() {
-            dragged = true;
-        });
+        timeout(function() {
+            var dragged = false,
+                rect = context.surfaceRect(),
+                box = {
+                    left: rect.left + (textDirection === 'rtl' ? 60 : 10),
+                    top: rect.top + 70,
+                    width: rect.width - 70,
+                    height: rect.height - 170
+                };
 
-        d3.select(window).on('mouseup.intro', function() {
-            if (dragged) continueTo(clickTownHall);
-        }, true);
+            context.map().centerZoom([-85.63591, 41.94285], 19);
+            reveal(box, t('intro.navigation.drag'));
+
+            context.map().on('move.intro', function() {
+                dragged = true;
+            });
+
+            d3.select(window).on('mouseup.intro', function() {
+                if (dragged) continueTo(clickTownHall);
+            }, true);
+
+        }, msec + 100);
 
         function continueTo(nextStep) {
             context.map().on('move.intro', null);
@@ -68,7 +78,7 @@ export function uiIntroNavigation(context, reveal) {
         }
 
         var hall = context.entity(hallId);
-        context.map().centerEase(hall.loc, 250);
+        context.map().centerEase(hall.loc, 600);
 
         context.on('enter.intro', function() {
             if (isTownHallSelected()) continueTo(selectedTownHall);
@@ -82,7 +92,7 @@ export function uiIntroNavigation(context, reveal) {
                 var box = pointBox(hall.loc, context);
                 reveal(box, t('intro.navigation.select'), { duration: 0 });
             });
-        }, 260); // after centerEase
+        }, 700); // after centerEase
 
         function continueTo(nextStep) {
             context.on('enter.intro', null);
@@ -197,18 +207,19 @@ export function uiIntroNavigation(context, reveal) {
 
 
     function play() {
-        dispatch.call('done');
         reveal('.intro-nav-wrap .chapter-point',
             t('intro.navigation.play', { next: t('intro.points.title') }), {
                 buttonText: t('intro.ok'),
-                buttonCallback: function() { reveal('#id-container'); }
+                buttonCallback: function() {
+                    dispatch.call('done');
+                    reveal('#id-container');
+                }
             }
         );
     }
 
 
     chapter.enter = function() {
-        context.history().reset('initial');
         dragMap();
     };
 

@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import { t } from '../../util/locale';
 import { modeBrowse } from '../../modes/browse';
 import { utilRebind } from '../../util/rebind';
-import { icon, pad, selectMenuItem } from './helper';
+import { icon, pad, selectMenuItem, transitionTime } from './helper';
 
 
 export function uiIntroBuilding(context, reveal) {
@@ -39,6 +39,7 @@ export function uiIntroBuilding(context, reveal) {
         reveal(box, text, options);
     }
 
+
     function revealTank(center, text, options) {
         var padding = 190 * Math.pow(2, context.map().zoom() - 19.5);
         var box = pad(center, padding, context);
@@ -47,22 +48,32 @@ export function uiIntroBuilding(context, reveal) {
 
 
     function addHouse() {
-        var tooltip = reveal('button.add-area',
-            t('intro.buildings.add_building', { button: icon('#icon-area', 'pre-text') }));
-
-        tooltip.selectAll('.tooltip-inner')
-            .insert('svg', 'span')
-            .attr('class', 'tooltip-illustration')
-            .append('use')
-            .attr('xlink:href', '#building-images');
-
         houseId = null;
+        tankId = null;
         context.history().reset('initial');
 
-        context.on('enter.intro', function(mode) {
-            if (mode.id !== 'add-area') return;
-            continueTo(startHouse);
-        });
+        var msec = transitionTime(house, context.map().center());
+        if (msec) { reveal(null, null, { duration: 0 }); }
+        context.map().zoom(19).centerEase(house, msec);
+
+        timeout(function() {
+            var tooltip = reveal('button.add-area',
+                t('intro.buildings.add_building', { button: icon('#icon-area', 'pre-text') }));
+
+            tooltip.selectAll('.tooltip-inner')
+                .insert('svg', 'span')
+                .attr('class', 'tooltip-illustration')
+                .append('use')
+                .attr('xlink:href', '#building-images');
+
+            houseId = null;
+            context.history().reset('initial');
+
+            context.on('enter.intro', function(mode) {
+                if (mode.id !== 'add-area') return;
+                continueTo(startHouse);
+            });
+        }, msec + 100);
 
         function continueTo(nextStep) {
             context.on('enter.intro', null);
@@ -144,7 +155,7 @@ export function uiIntroBuilding(context, reveal) {
 
         timeout(function() {
             reveal(button.node(),
-                t('intro.buildings.choose_category_building', { name: buildingCatetory.name() })
+                t('intro.buildings.choose_category_building', { category: buildingCatetory.name() })
             );
             button.on('click.intro', function() { continueTo(choosePresetHouse); });
         }, 500);
@@ -171,7 +182,7 @@ export function uiIntroBuilding(context, reveal) {
 
         timeout(function() {
             reveal(button.node(),
-                t('intro.buildings.choose_preset_house', { name: housePreset.name() }),
+                t('intro.buildings.choose_preset_house', { preset: housePreset.name() }),
                 { duration: 300 }
             );
             button.on('click.intro', function() { continueTo(closeEditorHouse); });
@@ -336,18 +347,23 @@ export function uiIntroBuilding(context, reveal) {
 
 
     function addTank() {
-        reveal('button.add-area',
-            t('intro.buildings.add_tank', { button: icon('#icon-area', 'pre-text') })
-        );
-
         tankId = null;
         context.history().reset('doneSquare');
-        context.map().zoom(19.5).centerEase(tank, 500);
 
-        context.on('enter.intro', function(mode) {
-            if (mode.id !== 'add-area') return;
-            continueTo(startTank);
-        });
+        var msec = transitionTime(tank, context.map().center());
+        if (msec) { reveal(null, null, { duration: 0 }); }
+        context.map().zoom(19.5).centerEase(tank, msec);
+
+        timeout(function() {
+            reveal('button.add-area',
+                t('intro.buildings.add_tank', { button: icon('#icon-area', 'pre-text') })
+            );
+
+            context.on('enter.intro', function(mode) {
+                if (mode.id !== 'add-area') return;
+                continueTo(startTank);
+            });
+        }, msec + 100);
 
         function continueTo(nextStep) {
             context.on('enter.intro', null);
@@ -427,7 +443,7 @@ export function uiIntroBuilding(context, reveal) {
 
         timeout(function() {
             reveal('.preset-search-input',
-                t('intro.buildings.search_tank', { name: tankPreset.name() })
+                t('intro.buildings.search_tank', { preset: tankPreset.name() })
             );
         }, 500);
 
@@ -444,7 +460,7 @@ export function uiIntroBuilding(context, reveal) {
 
         if (first.classed('preset-man_made-storage_tank')) {
             reveal(first.select('.preset-list-button').node(),
-                t('intro.buildings.choose_tank', { name: tankPreset.name() }),
+                t('intro.buildings.choose_tank', { preset: tankPreset.name() }),
                 { duration: 300 }
             );
 
@@ -499,30 +515,28 @@ export function uiIntroBuilding(context, reveal) {
         context.map().centerEase(tank, 500);
 
         timeout(function() {
-            if (context.map().zoom() < 19.5) {
-                context.map().zoomEase(19.5, 500);
-            }
-        }, 520);
+            context.on('enter.intro', function(mode) {
+                if (mode.id !== 'select') return;
+                var ids = context.selectedIDs();
+                if (ids.length !== 1 || ids[0] !== tankId) return;
 
-        context.on('enter.intro', function(mode) {
-            if (mode.id !== 'select') return;
-            var ids = context.selectedIDs();
-            if (ids.length !== 1 || ids[0] !== tankId) return;
+                timeout(function() {
+                    var node = selectMenuItem('circularize').node();
+                    if (!node) return;
+                    continueTo(clickCircle);
+                }, 300);  // after menu visible
+            });
 
-            timeout(function() {
-                var node = selectMenuItem('circularize').node();
-                if (!node) return;
-                continueTo(clickCircle);
-            }, 300);  // after menu visible
-        });
+            revealTank(tank, t('intro.buildings.rightclick_tank'));
+            context.map().on('move.intro drawn.intro', function() {
+                revealTank(tank, t('intro.buildings.rightclick_tank'), { duration: 0 });
+            });
 
-        context.map().on('move.intro drawn.intro', function() {
-            revealTank(tank, t('intro.buildings.rightclick_tank'), { duration: 0 });
-        });
+            context.history().on('change.intro', function() {
+                continueTo(rightClickTank);
+            });
 
-        context.history().on('change.intro', function() {
-            continueTo(rightClickTank);
-        });
+        }, 600);
 
         function continueTo(nextStep) {
             context.on('enter.intro', null);
@@ -603,22 +617,20 @@ export function uiIntroBuilding(context, reveal) {
 
 
     function play() {
-        dispatch.call('done');
         reveal('.intro-nav-wrap .chapter-startEditing',
             t('intro.buildings.play', { next: t('intro.startediting.title') }), {
                 buttonText: t('intro.ok'),
-                buttonCallback: function() { reveal('#id-container'); }
+                buttonCallback: function() {
+                    dispatch.call('done');
+                    reveal('#id-container');
+                }
             }
         );
     }
 
 
     chapter.enter = function() {
-        houseId = null;
-        tankId = null;
-        context.history().reset('initial');
-        context.map().zoom(19).centerEase(house, 500);
-        timeout(addHouse, 520);
+        addHouse();
     };
 
 
