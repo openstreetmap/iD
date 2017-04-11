@@ -1725,7 +1725,7 @@ en:
         name: Parking Space
         terms: '<translate with synonyms or related terms for ''Parking Space'', separated by commas>'
       amenity/pavilion:
-        # 'amenity=shelter, shelter_type=pavilion, building=yes'
+        # 'amenity=shelter, shelter_type=pavilion'
         name: Pavilion
         terms: '<translate with synonyms or related terms for ''Pavilion'', separated by commas>'
       amenity/pharmacy:

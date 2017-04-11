@@ -372,8 +372,8 @@
             "value": "parking"
         },
         {
-            "key": "building",
-            "value": "yes"
+            "key": "shelter_type",
+            "value": "pavilion"
         },
         {
             "key": "amenity",

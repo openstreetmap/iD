@@ -1762,8 +1762,7 @@
             ],
             "tags": {
                 "amenity": "shelter",
-                "shelter_type": "pavilion",
-                "building": "yes"
+                "shelter_type": "pavilion"
             },
             "name": "Pavilion"
         },
