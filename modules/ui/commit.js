@@ -27,14 +27,13 @@ export function uiCommit(context) {
 
     function commit(selection) {
         if (!changeset) {
-            var detected = utilDetect(),
-                tags = {
-                    created_by: ('iD ' + context.version).substr(0, 255),
-                    imagery_used: context.history().imageryUsed().join(';').substr(0, 255),
-                    host: detected.host.substr(0, 255),
-                    locale: detected.locale.substr(0, 255)
-                };
-
+            var detected = utilDetect();
+            var tags = new Map();
+            tags.set('created_by', ('iD ' + context.version).substr(0, 255));
+            tags.set('imagery_used', context.history().imageryUsed().join(';').substr(0, 255));
+            tags.set('host', detected.host.substr(0, 255));
+            tags.set('locale', detected.locale.substr(0, 255));
+        };
             changeset = new osmChangeset({ tags: tags });
         }
 

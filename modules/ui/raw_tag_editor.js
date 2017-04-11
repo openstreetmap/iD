@@ -5,6 +5,7 @@ import { services } from '../services/index';
 import { svgIcon } from '../svg/index';
 import { uiDisclosure } from './disclosure';
 import { uiTagReference } from './tag_reference';
+import { getKeys, d3MapEntries } from '../util/map_collection';
 import {
     utilGetSetValue,
     utilNoAuto,
@@ -26,7 +27,8 @@ export function uiRawTagEditor(context) {
 
 
     function rawTagEditor(selection) {
-        var count = Object.keys(tags).filter(function(d) { return d; }).length;
+        window.ifNotMap(tags);
+        var count = getKeys(tags).filter(function(d) { return d; }).length;
 
         selection.call(uiDisclosure()
             .title(t('inspector.all_tags') + ' (' + count + ')')
@@ -47,7 +49,7 @@ export function uiRawTagEditor(context) {
 
 
     function content(wrap) {
-        var entries = d3.entries(tags);
+        var entries = d3MapEntries(tags);
 
         if (!entries.length || showBlank) {
             showBlank = false;
@@ -239,7 +241,7 @@ export function uiRawTagEditor(context) {
         function keyChange(d) {
             var kOld = d.key,
                 kNew = this.value.trim(),
-                tag = {};
+                tag = new Map();
 
 
             if (isReadOnly({ key: kNew })) {
@@ -255,8 +257,8 @@ export function uiRawTagEditor(context) {
                     kNew = base + '_' + suffix++;
                 }
             }
-            tag[kOld] = undefined;
-            tag[kNew] = d.value;
+            tag.set(kOld, undefined);
+            tag.set(kNew, d.value);
             d.key = kNew; // Maintain DOM identity through the subsequent update.
             this.value = kNew;
             dispatch.call('change', this, tag);
@@ -265,16 +267,16 @@ export function uiRawTagEditor(context) {
 
         function valueChange(d) {
             if (isReadOnly(d)) return;
-            var tag = {};
-            tag[d.key] = this.value;
+            var tag = new Map();
+            tag.set(d.key, this.value);
             dispatch.call('change', this, tag);
         }
 
 
         function removeTag(d) {
             if (isReadOnly(d)) return;
-            var tag = {};
-            tag[d.key] = undefined;
+            var tag = new Map();
+            tag.set(d.key, undefined);
             dispatch.call('change', this, tag);
             d3.select(this.parentNode).remove();
         }

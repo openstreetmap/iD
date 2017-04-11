@@ -27,3 +27,17 @@ export function getKeys(mapObj) {
      console.error('not map');
      return Object.keys(mapObj);
 }
+
+export function d3MapEntries(mapObj) {
+    if (mapObj instanceof Map) {
+         var entries = [];
+         mapObj.forEach(function (v, k) {
+             entries.push({
+                key: k,
+                value: v
+             });
+         });
+         return entries;
+     }
+     console.error('not map');
+}
