@@ -33,7 +33,6 @@ export function uiCommit(context) {
             tags.set('imagery_used', context.history().imageryUsed().join(';').substr(0, 255));
             tags.set('host', detected.host.substr(0, 255));
             tags.set('locale', detected.locale.substr(0, 255));
-        };
             changeset = new osmChangeset({ tags: tags });
         }
 
@@ -80,9 +79,10 @@ export function uiCommit(context) {
             if (err) return;
 
             var comments = changesets.map(function(changeset) {
+                window.ifNotMap(changeset.tags);
                 return {
-                    title: changeset.tags.comment,
-                    value: changeset.tags.comment
+                    title: changeset.tags.get('comment'),
+                    value: changeset.tags.get('comment')
                 };
             });
 
@@ -378,16 +378,17 @@ export function uiCommit(context) {
 
 
         function updateChangeset(changed) {
+            window.ifNotMap(changed);
             var tags = _.clone(changeset.tags);
 
-            _.forEach(changed, function(v, k) {
+            changed.forEach(function(v, k) {
                 k = k.trim().substr(0, 255);
                 if (readOnlyTags.indexOf(k) !== -1) return;
 
                 if (k !== '' && v !== undefined) {
-                    tags[k] = v.trim().substr(0, 255);
+                    tags.set(k, v.trim().substr(0, 255));
                 } else {
-                    delete tags[k];
+                    tags.delete(k);
                 }
             });
 
