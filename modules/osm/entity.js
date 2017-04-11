@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { debug } from '../index';
 import { osmIsInterestingTag } from './tags';
 import { dataDeprecated } from '../../data/index';
-
+import { freezeMap, getKeys } from '../util/map_collection';
 export function osmEntity(attrs) {
     // For prototypal inheritance.
     if (this instanceof osmEntity) return;
@@ -52,7 +52,7 @@ osmEntity.key = function(entity) {
 
 osmEntity.prototype = {
 
-    tags: {},
+    tags: new Map(),
 
 
     initialize: function(sources) {
@@ -78,7 +78,8 @@ osmEntity.prototype = {
 
         if (debug) {
             Object.freeze(this);
-            Object.freeze(this.tags);
+            window.ifNotMap(this.tags);
+            freezeMap(this.tags);
 
             if (this.loc) Object.freeze(this.loc);
             if (this.nodes) Object.freeze(this.nodes);
@@ -116,18 +117,19 @@ osmEntity.prototype = {
 
 
     mergeTags: function(tags) {
+        window.ifNotMap(tags);
         var merged = _.clone(this.tags), changed = false;
-        for (var k in tags) {
-            var t1 = merged[k],
-                t2 = tags[k];
+        tags.forEach(function (v, k) {
+            var t1 = merged.get(k),
+                t2 = tags.get(k);
             if (!t1) {
                 changed = true;
-                merged[k] = t2;
+                merged.set(k, t2);
             } else if (t1 !== t2) {
                 changed = true;
-                merged[k] = _.union(t1.split(/;\s*/), t2.split(/;\s*/)).join(';');
+                merged.set(k, _.union(t1.split(/;\s*/), t2.split(/;\s*/)).join(';'));
             }
-        }
+        });
         return changed ? this.update({tags: merged}) : this;
     },
 
@@ -138,13 +140,15 @@ osmEntity.prototype = {
 
 
     isUsed: function(resolver) {
-        return _.without(Object.keys(this.tags), 'area').length > 0 ||
+        window.ifNotMap(this.tags);
+        return _.without(getKeys(this.tags), 'area').length > 0 ||
             resolver.parentRelations(this).length > 0;
     },
 
 
     hasInterestingTags: function() {
-        return _.keys(this.tags).some(osmIsInterestingTag);
+        window.ifNotMap(this.tags);
+        return getKeys(this.tags).some(osmIsInterestingTag);
     },
 
 
@@ -157,15 +161,16 @@ osmEntity.prototype = {
     },
 
     deprecatedTags: function() {
+        window.ifNotMap(this.tags);
         var tags = _.toPairs(this.tags);
-        var deprecated = {};
+        var deprecated = new Map();
 
         dataDeprecated.forEach(function(d) {
             var match = _.toPairs(d.old)[0];
             tags.forEach(function(t) {
                 if (t[0] === match[0] &&
                     (t[1] === match[1] || match[1] === '*')) {
-                    deprecated[t[0]] = t[1];
+                    deprecated.set(t[0], t[1]);
                 }
             });
         });
