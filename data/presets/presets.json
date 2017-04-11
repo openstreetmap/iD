@@ -1749,6 +1749,24 @@
             "terms": [],
             "name": "Car Parking"
         },
+        "amenity/pavilion": {
+            "icon": "shelter",
+            "fields": [
+                "bin",
+                "bench"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "amenity": "shelter",
+                "shelter_type": "pavilion",
+                "building": "yes"
+            },
+            "name": "Pavilion"
+        },
         "amenity/pharmacy": {
             "icon": "pharmacy",
             "fields": [
@@ -9131,6 +9149,18 @@
             },
             "name": "Piste/Ski Trail"
         },
+        "place/farm": {
+            "icon": "farm",
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "place": "farm"
+            },
+            "name": "Farm",
+            "searchable": false
+        },
         "place/city": {
             "icon": "city",
             "fields": [
@@ -9144,17 +9174,6 @@
                 "place": "city"
             },
             "name": "City"
-        },
-        "place/farm": {
-            "icon": "farm",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "tags": {
-                "place": "farm"
-            },
-            "name": "Farm"
         },
         "place/hamlet": {
             "icon": "triangle-stroked",
