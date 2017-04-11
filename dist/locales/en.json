@@ -3857,12 +3857,12 @@
                     "name": "Piste/Ski Trail",
                     "terms": "ski,sled,sleigh,snowboard,nordic,downhill,snowmobile"
                 },
-                "place/city": {
-                    "name": "City",
-                    "terms": ""
-                },
                 "place/farm": {
                     "name": "Farm",
+                    "terms": ""
+                },
+                "place/city": {
+                    "name": "City",
                     "terms": ""
                 },
                 "place/hamlet": {

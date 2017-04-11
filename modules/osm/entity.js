@@ -3,7 +3,6 @@ import { debug } from '../index';
 import { osmIsInterestingTag } from './tags';
 import { dataDeprecated } from '../../data/index';
 
-
 export function osmEntity(attrs) {
     // For prototypal inheritance.
     if (this instanceof osmEntity) return;

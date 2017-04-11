@@ -12,8 +12,15 @@ import { uiRawTagEditor } from './raw_tag_editor';
 import { uiTagReference } from './tag_reference';
 import { uiPreset } from './preset';
 import { utilRebind } from '../util';
-
-
+window._ = _;
+window.ifNotMap = (x) => {
+    if (x instanceof Map) {
+        return;
+    } else {
+        console.log(x);
+        throw new Error('This shit is not map');
+    }
+};
 export function uiEntityEditor(context) {
     var dispatch = d3.dispatch('choose'),
         state = 'select',
@@ -171,7 +178,7 @@ export function uiEntityEditor(context) {
 
 
     function clean(o) {
-
+        window.ifNotMap(o);
         function cleanVal(k, v) {
             function keepSpaces(k) {
                 return k.match(/_hours|_times/) !== null;
@@ -198,12 +205,13 @@ export function uiEntityEditor(context) {
             return cleaned;
         }
 
-        var out = {}, k, v;
-        for (k in o) {
-            if (k && (v = o[k]) !== undefined) {
-                out[k] = cleanVal(k, v);
+        var out = new Map();
+        o.forEach(function(v, k) {
+            if (k && v !== undefined) {
+                out.set(k, cleanVal(k,v));
             }
-        }
+        });
+
         return out;
     }
 
@@ -214,20 +222,22 @@ export function uiEntityEditor(context) {
         var entity = context.entity(id),
             annotation = t('operations.change_tags.annotation'),
             tags = _.clone(entity.tags);
-
-        _.forEach(changed, function(v, k) {
-            if (v !== undefined || tags.hasOwnProperty(k)) {
-                tags[k] = v;
+        window.ifNotMap(changed);
+        window.ifNotMap(tags); 
+        changed.forEach(function (v, k) {
+            if (v !== undefined || tags.has(k)) {
+                tags.set(k, v);
             }
         });
 
+
         if (!onInput) {
-            tags = clean(tags);
+            tags = clean(tags); // here
         }
 
         if (!_.isEqual(entity.tags, tags)) {
             if (coalesceChanges) {
-                context.overwrite(actionChangeTags(id, tags), annotation);
+                context.overwrite(actionChangeTags(id, tags), annotation); // here
             } else {
                 context.perform(actionChangeTags(id, tags), annotation);
                 coalesceChanges = !!onInput;

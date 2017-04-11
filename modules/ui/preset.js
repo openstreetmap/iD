@@ -39,35 +39,43 @@ export function uiPreset(context) {
         field.show = show;
 
         field.shown = function() {
-            return field.id === 'name' || field.show || _.some(field.keys, function(key) { return !!tags[key]; });
+            return field.id === 'name' || field.show || _.some(field.keys, function(key) { return !!tags.get(key); });
         };
 
         field.modified = function() {
             var original = context.graph().base().entities[entity.id];
+            if (original) {
+                window.ifNotMap(original.tags);
+            }
+            window.ifNotMap(tags);
             return _.some(field.keys, function(key) {
-                return original ? tags[key] !== original.tags[key] : tags[key];
+                return original ? tags.get(key) !== original.tags.get(key) : tags.get(key);
             });
         };
 
         field.revert = function() {
             var original = context.graph().base().entities[entity.id],
-                t = {};
+                t = new Map();
             field.keys.forEach(function(key) {
-                t[key] = original ? original.tags[key] : undefined;
+                if (original) {
+                    window.ifNotMap(original.tags);
+                }
+                t.set(key, original ? original.tags.get(key) : undefined);
             });
             return t;
         };
 
         field.present = function() {
             return _.some(field.keys, function(key) {
-                return tags[key];
+                window.ifNotMap(tags);
+                return tags.get(key);
             });
         };
 
         field.remove = function() {
-            var t = {};
+            var t = new Map();
             field.keys.forEach(function(key) {
-                t[key] = undefined;
+                t.set(key, undefined);
             });
             return t;
         };
