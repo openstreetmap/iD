@@ -57,7 +57,7 @@ development, see [CONTRIBUTING.md](CONTRIBUTING.md).
 ## License
 
 iD is available under the [ISC License](https://opensource.org/licenses/ISC).
-It includes [d3.js](http://d3js.org/), which BSD-licensed.
+See the [LICENSE.md](LICENSE.md) file for more details.
 
 ## Thank you
 
