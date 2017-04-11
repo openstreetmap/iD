@@ -27,17 +27,19 @@ export function presetPreset(id, preset, fields) {
     preset.matchScore = function(entity) {
         var tags = preset.tags,
             score = 0;
-
-        for (var t in tags) {
-            if (entity.tags[t] === tags[t]) {
+        window.ifNotMap(tags);
+        tags.forEach(function(v, k) {
+            if (score === -1) { // kind of hack to use forEach
+                return;
+            }
+            if (v === entity.tags.get(k)) {
                 score += preset.originalScore;
-            } else if (tags[t] === '*' && t in entity.tags) {
+            } else if (v === '*' && entity.tags.has(k)) {
                 score += preset.originalScore / 2;
             } else {
-                return -1;
+                score = -1;
             }
-        }
-
+        });
         return score;
     };
 
@@ -64,19 +66,24 @@ export function presetPreset(id, preset, fields) {
 
 
     preset.isFallback = function() {
-        var tagCount = Object.keys(preset.tags).length;
-        return tagCount === 0 || (tagCount === 1 && preset.tags.hasOwnProperty('area'));
+        window.ifNotMap(preset.tags);
+        var tagCount = preset.tags.size;
+        return tagCount === 0 || (tagCount === 1 && preset.tags.has('area'));
     };
 
 
     preset.reference = function(geometry) {
-        var key = Object.keys(preset.tags)[0],
-            value = preset.tags[key];
+        var key;
+        window.ifNotMap(preset.tags);
+        preset.tags.forEach(function (v, k) {
+            key = k;
+        });
+        var value = preset.tags.get(key);
 
         if (geometry === 'relation' && key === 'type') {
-            if (value in preset.tags) {
+            if (preset.tags.has(value)) {
                 key = value;
-                value = preset.tags[key];
+                value = preset.tags.get(key);
             } else {
                 return { rtype: value };
             }
@@ -92,32 +99,41 @@ export function presetPreset(id, preset, fields) {
 
     var removeTags = preset.removeTags || preset.tags;
     preset.removeTags = function(tags, geometry) {
-        tags = _.omit(tags, _.keys(removeTags));
-
+        window.ifNotMap(tags);
+        window.ifNotMap(removeTags);
+        if (removeTags instanceof  Map) {
+            removeTags.forEach(function (v, k) {
+                tags.delete(k); // here
+            });
+        }
         for (var f in preset.fields) {
             var field = preset.fields[f];
-            if (field.matchGeometry(geometry) && field.default === tags[field.key]) {
-                delete tags[field.key];
+            if (field.matchGeometry(geometry) && field.default === tags.get(field.key)) {
+                tags.delete(field.key);
             }
         }
 
-        delete tags.area;
+        tags.delete('area');
         return tags;
     };
 
 
     var applyTags = preset.addTags || preset.tags;
     preset.applyTags = function(tags, geometry) {
-        var k;
+        window.ifNotMap(tags);
+        window.ifNotMap(applyTags);
 
         tags = _.clone(tags);
-
-        for (k in applyTags) {
-            if (applyTags[k] === '*') {
-                tags[k] = 'yes';
-            } else {
-                tags[k] = applyTags[k];
-            }
+        var applyTagsKeys = [];
+        if (applyTags instanceof  Map) {
+            applyTags.forEach(function (v, k) {
+                applyTagsKeys.push(k);
+                if (applyTags.get(k) === '*') {
+                    tags.set(k, 'yes');
+                } else {
+                    tags.set(k, applyTags.get(k));
+                }
+            });
         }
 
         // Add area=yes if necessary.
@@ -127,7 +143,8 @@ export function presetPreset(id, preset, fields) {
         if (geometry === 'area') {
             var needsAreaTag = true;
             if (preset.geometry.indexOf('line') === -1) {
-                for (k in applyTags) {
+                for (var i = 0; i < applyTagsKeys.length; i++) {
+                    var k = applyTagsKeys[i];
                     if (k in areaKeys) {
                         needsAreaTag = false;
                         break;
@@ -135,14 +152,14 @@ export function presetPreset(id, preset, fields) {
                 }
             }
             if (needsAreaTag) {
-                tags.area = 'yes';
+                tags.set('area', 'yes');
             }
         }
 
         for (var f in preset.fields) {
             var field = preset.fields[f];
-            if (field.matchGeometry(geometry) && field.key && !tags[field.key] && field.default) {
-                tags[field.key] = field.default;
+            if (field.matchGeometry(geometry) && field.key && !tags.get(field.key) && field.default) {
+                tags.set(field.key, field.default);
             }
         }
 
