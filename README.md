@@ -10,7 +10,7 @@
 * It supports all popular modern desktop browsers: Chrome, Firefox, Safari,
   Opera, Edge, and IE11.
 * iD is not yet designed for mobile browsers, but this is something we hope to add!
-* Data is rendered with [d3.js](http://d3js.org/).
+* Data is rendered with [d3.js](https://d3js.org/).
 
 ## Participate!
 
@@ -31,7 +31,7 @@ Come on in, the water's lovely. More help? Ping `jfire` or `bhousel` on:
 
 ## Prerequisites
 
-* [Node.js](http://nodejs.org/) version 4 or newer
+* [Node.js](https://nodejs.org/) version 4 or newer
 * [`git`](https://www.atlassian.com/git/tutorials/install-git/) for your platform
   * Note for Windows users:
     * Edit `$HOME\.gitconfig`:<br/>
@@ -61,4 +61,4 @@ See the [LICENSE.md](LICENSE.md) file for more details.
 
 ## Thank you
 
-Initial development of iD was made possible by a [grant of the Knight Foundation](http://www.mapbox.com/blog/knight-invests-openstreetmap/).
+Initial development of iD was made possible by a [grant of the Knight Foundation](https://www.mapbox.com/blog/knight-invests-openstreetmap/).
