@@ -53,53 +53,77 @@ export function uiIntroNavigation(context, reveal) {
         context.map().zoom(19).centerEase(townHall, msec);
 
         timeout(function() {
-            var dragged = false;
+            var centerStart = context.map().center();
 
             reveal(trimmedMap(), t('intro.navigation.drag'));
-
             context.map().on('drawn.intro', function() {
                 reveal(trimmedMap(), t('intro.navigation.drag'), { duration: 0 });
             });
 
             context.map().on('move.intro', function() {
-                dragged = true;
+                var centerNow = context.map().center();
+                if (centerStart[0] !== centerNow[0] || centerStart[1] !== centerNow[1]) {
+                    context.map().on('move.intro', null);
+                    timeout(function() { continueTo(zoomMap); }, 1500);
+                }
             });
 
-            d3.select(window).on('mouseup.intro', function() {
-                if (dragged) continueTo(clickTownHall);
-            }, true);
-
-        }, msec + 100 );
+        }, msec + 100);
 
         function continueTo(nextStep) {
             context.map().on('move.intro drawn.intro', null);
-            d3.select(window).on('mouseup.intro', null, true);
+            nextStep();
+        }
+    }
+
+
+    function zoomMap() {
+        var zoomStart = context.map().zoom();
+
+        reveal(trimmedMap(), t('intro.navigation.zoom'));
+        context.map().on('drawn.intro', function() {
+            reveal(trimmedMap(), t('intro.navigation.zoom'), { duration: 0 });
+        });
+
+        context.map().on('move.intro', function() {
+            if (context.map().zoom() !== zoomStart) {
+                context.map().on('move.intro', null);
+                timeout(function() { continueTo(clickTownHall); }, 1500);
+            }
+        });
+
+        function continueTo(nextStep) {
+            context.map().on('move.intro drawn.intro', null);
             nextStep();
         }
     }
 
 
     function clickTownHall() {
-        if (!context.hasEntity(hallId)) {
-            context.history().reset('initial');
-        }
-
+        context.history().reset('initial');
         var hall = context.entity(hallId);
-        context.map().centerEase(hall.loc, 600);
 
-        context.on('enter.intro', function() {
-            if (isTownHallSelected()) continueTo(selectedTownHall);
-        });
+        reveal(null, null, { duration: 0 });
+        context.map().zoomEase(19, 250);
 
         timeout(function() {
-            var box = pointBox(hall.loc, context);
-            reveal(box, t('intro.navigation.select'));
+            context.map().centerEase(hall.loc, 250);
 
-            context.map().on('move.intro drawn.intro', function() {
+            timeout(function() {
                 var box = pointBox(hall.loc, context);
-                reveal(box, t('intro.navigation.select'), { duration: 0 });
-            });
-        }, 700); // after centerEase
+                reveal(box, t('intro.navigation.select'));
+
+                context.map().on('move.intro drawn.intro', function() {
+                    var box = pointBox(hall.loc, context);
+                    reveal(box, t('intro.navigation.select'), { duration: 0 });
+                });
+
+                context.on('enter.intro', function() {
+                    if (isTownHallSelected()) continueTo(selectedTownHall);
+                });
+            }, 300);  // after centerEase
+
+        }, 300); // after zoomEase
 
         function continueTo(nextStep) {
             context.on('enter.intro', null);
@@ -155,12 +179,18 @@ export function uiIntroNavigation(context, reveal) {
     function streetSearch() {
         context.history().reset('initial');  // ensure spring street exists
 
-        reveal('.search-header input',
-            t('intro.navigation.search', { name: t('intro.graph.name.spring-street') })
-        );
+        var msec = transitionTime(townHall, context.map().center());
+        if (msec) { reveal(null, null, { duration: 0 }); }
+        context.map().zoom(19).centerEase(townHall, msec);  // ..and user can see it
 
-        d3.select('.search-header input')
-            .on('keyup.intro', checkSearchResult);
+        timeout(function() {
+            reveal('.search-header input',
+                t('intro.navigation.search', { name: t('intro.graph.name.spring-street') })
+            );
+
+            d3.select('.search-header input')
+                .on('keyup.intro', checkSearchResult);
+        }, msec + 100);
     }
 
 

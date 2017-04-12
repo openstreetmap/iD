@@ -759,6 +759,7 @@
             "navigation": {
                 "title": "Navigation",
                 "drag": "The main map area shows OpenStreetMap data on top of a background. You can navigate by dragging and scrolling, just like any web map. **Drag the map!**",
+                "zoom": "You can zoom in or out by scrolling with the mouse wheel or trackpad. **Zoom the map!**",
                 "select": "Map features are represented three ways: using points, lines or areas. All features can be selected by clicking on them. **Click on the point to select it.**",
                 "selected": "Great! The point is now selected. Selected items are drawn with a pulsing glow.",
                 "pane": "When a feature is selected, the feature editor is displayed. The header shows us the feature type and the main pane shows the feature's attributes, such as its name and address. **Close the feature editor by hitting escape or pressing the {button} button in the upper corner.**",
