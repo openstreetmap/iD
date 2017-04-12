@@ -34,6 +34,17 @@ export function uiIntroNavigation(context, reveal) {
     }
 
 
+    function trimmedMap() {
+        var rect = d3.select('#map').node().getBoundingClientRect();
+        return {
+            left: rect.left + (textDirection === 'rtl' ? 60 : 10),
+            top: rect.top + 70,
+            width: rect.width - 60,
+            height: rect.height - 170
+        };
+    }
+
+
     function dragMap() {
         context.history().reset('initial');
 
@@ -42,17 +53,13 @@ export function uiIntroNavigation(context, reveal) {
         context.map().zoom(19).centerEase(townHall, msec);
 
         timeout(function() {
-            var dragged = false,
-                rect = context.surfaceRect(),
-                box = {
-                    left: rect.left + (textDirection === 'rtl' ? 60 : 10),
-                    top: rect.top + 70,
-                    width: rect.width - 70,
-                    height: rect.height - 170
-                };
+            var dragged = false;
 
-            context.map().centerZoom([-85.63591, 41.94285], 19);
-            reveal(box, t('intro.navigation.drag'));
+            reveal(trimmedMap(), t('intro.navigation.drag'));
+
+            context.map().on('drawn.intro', function() {
+                reveal(trimmedMap(), t('intro.navigation.drag'), { duration: 0 });
+            });
 
             context.map().on('move.intro', function() {
                 dragged = true;
@@ -62,10 +69,10 @@ export function uiIntroNavigation(context, reveal) {
                 if (dragged) continueTo(clickTownHall);
             }, true);
 
-        }, msec + 100);
+        }, msec + 100 );
 
         function continueTo(nextStep) {
-            context.map().on('move.intro', null);
+            context.map().on('move.intro drawn.intro', null);
             d3.select(window).on('mouseup.intro', null, true);
             nextStep();
         }
