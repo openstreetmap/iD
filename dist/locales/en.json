@@ -770,7 +770,7 @@
             "points": {
                 "title": "Points",
                 "add_point": "Points can be used to represent features such as shops, restaurants, and monuments. They mark a specific location, and describe what's there. **Click the {button} Point button to add a new point.**",
-                "place_point": "The point can be placed by clicking on the map or pressing the spacebar. **Click the map or press spacebar to place the new point on top of the building.**",
+                "place_point": "To place the new point on the map, position your mouse cursor where the point should go, then left-click or press the spacebar. **Move the mouse pointer over this building, then left-click or press the spacebar.**",
                 "search_cafe": "There are many different features that can be represented by points. The point you just added is a cafe. **Search for '{preset}'**",
                 "choose_cafe": "**Choose {preset} from the list.**",
                 "feature_editor": "The point is now marked as a cafe. Using the feature editor, we can add more information about the cafe.",
