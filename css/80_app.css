@@ -3644,6 +3644,9 @@ img.tile-removing {
     display: inline-block;
 }
 
+.curtain-tooltip.tooltip.in {
+    opacity: 1;
+}
 .curtain-tooltip.tooltip {
     text-align: left;
 }
