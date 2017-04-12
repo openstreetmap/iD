@@ -81,6 +81,8 @@ export function uiIntro(context) {
         var chapters = chapterFlow.map(function(chapter, i) {
             var s = chapterUi[chapter](context, curtain.reveal)
                 .on('done', function() {
+                    context.presets().init();  // clear away "recent" presets
+
                     buttons.filter(function(d) {
                         return d.title === s.title;
                     }).classed('finished', true);
