@@ -257,12 +257,8 @@ export function coreContext() {
     context.layers = function() { return map.layers; };
     context.surface = function() { return map.surface; };
     context.editable = function() { return map.editable(); };
-
     context.surfaceRect = function() {
-        // Work around a bug in Firefox.
-        //   http://stackoverflow.com/questions/18153989/
-        //   https://bugzilla.mozilla.org/show_bug.cgi?id=530985
-        return context.surface().node().parentNode.getBoundingClientRect();
+        return map.surface.node().getBoundingClientRect();
     };
 
 
