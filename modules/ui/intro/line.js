@@ -20,7 +20,7 @@ export function uiIntroLine(context, reveal) {
         woodRoadId = 'w525',
         woodRoadEndId = 'n2862',
         woodRoadAddNode = [-85.62390110349587, 41.95397111462291],
-        woodRoadDragEndpoint = [-85.62383958913921, 41.9546607846611],
+        woodRoadDragEndpoint = [-85.623867390213, 41.95466987786487],
         woodRoadDragMidpoint = [-85.62386254803509, 41.95430395953872],
         washingtonStreetId = 'w522',
         twelfthAvenueId = 'w1',
@@ -439,7 +439,7 @@ export function uiIntroLine(context, reveal) {
             reveal(box, t('intro.lines.start_drag_endpoint'), { duration: 0 });
 
             var entity = context.entity(woodRoadEndId);
-            if (geoSphericalDistance(entity.loc, woodRoadDragEndpoint) <= 2) {
+            if (geoSphericalDistance(entity.loc, woodRoadDragEndpoint) <= 4) {
                 continueTo(finishDragEndpoint);
             }
         });
@@ -477,7 +477,7 @@ export function uiIntroLine(context, reveal) {
             reveal(box, t('intro.lines.finish_drag_endpoint'), { duration: 0 });
 
             var entity = context.entity(woodRoadEndId);
-            if (geoSphericalDistance(entity.loc, woodRoadDragEndpoint) > 2.5) {
+            if (geoSphericalDistance(entity.loc, woodRoadDragEndpoint) > 4) {
                 continueTo(startDragEndpoint);
             }
         });
