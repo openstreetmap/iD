@@ -107,6 +107,12 @@ export function presetIndex() {
     all.init = function() {
         var d = data.presets;
 
+        all.collection = [];
+        recent.collection = [];
+        fields = {};
+        universal = [];
+        index = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
+
         if (d.fields) {
             _.forEach(d.fields, function(d, id) {
                 fields[id] = presetField(id, d);
