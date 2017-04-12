@@ -4,7 +4,7 @@ import { presetCategory } from './category';
 import { presetCollection } from './collection';
 import { presetField } from './field';
 import { presetPreset } from './preset';
-
+import { getKeys } from '../util/map_collection';
 export { presetCategory };
 export { presetCollection };
 export { presetField };
@@ -41,19 +41,23 @@ export function presetIndex() {
         var geometryMatches = index[geometry],
             best = -1,
             match;
-
-        for (var k in entity.tags) {
+        
+        window.ifNotMap(entity.tags);
+        entity.tags.forEach(function (v, k) {
             var keyMatches = geometryMatches[k];
-            if (!keyMatches) continue;
-
-            for (var i = 0; i < keyMatches.length; i++) {
-                var score = keyMatches[i].matchScore(entity);
-                if (score > best) {
-                    best = score;
-                    match = keyMatches[i];
+            if (!keyMatches) {
+                // noop
+            }
+            else {
+                for (var i = 0; i < keyMatches.length; i++) {
+                    var score = keyMatches[i].matchScore(entity);
+                    if (score > best) {
+                        best = score;
+                        match = keyMatches[i];
+                    }
                 }
             }
-        }
+        });
 
         return match || all.item(geometry);
     };
@@ -77,22 +81,30 @@ export function presetIndex() {
 
         // whitelist
         presets.forEach(function(d) {
-            for (var key in d.tags) break;
+            window.ifNotMap(d.tags);
+            var key;
+            d.tags.forEach(function (v, k) {
+                key = k;
+            });
             if (!key) return;
             if (ignore.indexOf(key) !== -1) return;
 
             if (d.geometry.indexOf('area') !== -1) {    // probably an area..
-                areaKeys[key] = areaKeys[key] || {};
+                areaKeys[key] = areaKeys[key] || {}; // TODO: might need to make this a Map aswell
             }
         });
 
         // blacklist
         presets.forEach(function(d) {
-            for (var key in d.tags) break;
+            window.ifNotMap(d.tags);
+            var key;
+            d.tags.forEach(function (v, k) {
+                key = k;
+            });
             if (!key) return;
             if (ignore.indexOf(key) !== -1) return;
 
-            var value = d.tags[key];
+            var value = d.tags.get(key);
             if (key in areaKeys &&                      // probably an area...
                 d.geometry.indexOf('line') !== -1 &&    // but sometimes a line
                 value !== '*') {
@@ -141,10 +153,12 @@ export function presetIndex() {
             var preset = all.collection[i],
                 geometry = preset.geometry;
 
+            var keys = getKeys(preset.tags);
             for (var j = 0; j < geometry.length; j++) {
                 var g = index[geometry[j]];
-                for (var k in preset.tags) {
-                    (g[k] = g[k] || []).push(preset);
+                for (var k = 0; k < keys.length; k++) {
+                    var key = keys[k];
+                    (g[key] = g[key] || []).push(preset);
                 }
             }
         }
