@@ -109,8 +109,6 @@ export function transitionTime(point1, point2) {
         return 0;
     else if (distance < 80)
         return 500;
-    else if (distance < 160)
-        return 1000;
     else
-        return 3000;
+        return 1000;
 }
