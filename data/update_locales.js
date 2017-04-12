@@ -120,16 +120,18 @@ function getLanguages(resource, callback) {
 
 
 function asyncMap(inputs, func, callback) {
-    var remaining = inputs.length,
-        results = [],
-        error;
+    setTimeout(function() {
+        var remaining = inputs.length,
+            results = [],
+            error;
 
-    inputs.forEach(function(d, i) {
-        func(d, function done(err, data) {
-            if (err) error = err;
-            results[i] = data;
-            remaining --;
-            if (!remaining) callback(error, results);
+        inputs.forEach(function(d, i) {
+            func(d, function done(err, data) {
+                if (err) error = err;
+                results[i] = data;
+                remaining --;
+                if (!remaining) callback(error, results);
+            });
         });
-    });
+    }, 300);
 }
