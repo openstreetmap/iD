@@ -80,10 +80,11 @@ _.extend(osmNode.prototype, {
     isIntersection: function(resolver) {
         return resolver.transient(this, 'isIntersection', function() {
             return resolver.parentWays(this).filter(function(parent) {
-                return (parent.tags.highway ||
-                    parent.tags.waterway ||
-                    parent.tags.railway ||
-                    parent.tags.aeroway) &&
+                window.ifNotMap(parent.tags);
+                return (parent.tags.get('highway') ||
+                    parent.tags.get('waterway') ||
+                    parent.tags.get('railway') ||
+                    parent.tags.get('aeroway')) &&
                     parent.geometry(resolver) === 'line';
             }).length > 1;
         });
@@ -93,16 +94,17 @@ _.extend(osmNode.prototype, {
     isHighwayIntersection: function(resolver) {
         return resolver.transient(this, 'isHighwayIntersection', function() {
             return resolver.parentWays(this).filter(function(parent) {
-                return parent.tags.highway && parent.geometry(resolver) === 'line';
+                return parent.tags.get('highway') && parent.geometry(resolver) === 'line';
             }).length > 1;
         });
     },
 
 
     isOnAddressLine: function(resolver) {
+        window.ifNotMap(this.tags);
         return resolver.transient(this, 'isOnAddressLine', function() {
             return resolver.parentWays(this).filter(function(parent) {
-                return parent.tags.hasOwnProperty('addr:interpolation') &&
+                return parent.tags.has('addr:interpolation') &&
                     parent.geometry(resolver) === 'line';
             }).length > 0;
         });
@@ -110,15 +112,18 @@ _.extend(osmNode.prototype, {
 
 
     asJXON: function(changeset_id) {
+        window.ifNotMap(this.tags);
+         var tags = [];
+         this.tags.forEach(function (v, k) {
+             tags.push({ keyAttributes: { k: k, v: v } });
+         });
         var r = {
             node: {
                 '@id': this.osmId(),
                 '@lon': this.loc[0],
                 '@lat': this.loc[1],
                 '@version': (this.version || 0),
-                tag: _.map(this.tags, function(v, k) {
-                    return { keyAttributes: { k: k, v: v } };
-                })
+                tag: tags
             }
         };
         if (changeset_id) r.node['@changeset'] = changeset_id;

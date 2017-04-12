@@ -32,12 +32,14 @@ _.extend(osmChangeset.prototype, {
 
 
     asJXON: function() {
+        var tag = [];
+        this.tags.forEach(function (value, key) {
+            tag.push({ '@k': key, '@v': value });
+        });
         return {
             osm: {
                 changeset: {
-                    tag: _.map(this.tags, function(value, key) {
-                        return { '@k': key, '@v': value };
-                    }),
+                    tag: tag,
                     '@version': 0.6,
                     '@generator': 'iD'
                 }

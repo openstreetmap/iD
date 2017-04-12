@@ -69,10 +69,10 @@ function getNodes(obj) {
 
 function getTags(obj) {
     var elems = obj.getElementsByTagName('tag'),
-        tags = {};
+        tags = new Map();
     for (var i = 0, l = elems.length; i < l; i++) {
         var attrs = elems[i].attributes;
-        tags[attrs.k.value] = attrs.v.value;
+        tags.set(attrs.k.value, attrs.v.value);
     }
 
     return tags;
@@ -382,7 +382,8 @@ export default {
                             return { tags: getTags(changeset) };
                         }
                     ).filter(function (changeset) {
-                        var comment = changeset.tags.comment;
+                        window.ifNotMap(changeset.tags);
+                        var comment = changeset.tags.get('comment');
                         return comment && comment !== '';
                     });
                     callback(undefined, userChangesets);
