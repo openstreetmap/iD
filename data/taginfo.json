@@ -372,6 +372,10 @@
             "value": "parking"
         },
         {
+            "key": "shelter_type",
+            "value": "pavilion"
+        },
+        {
             "key": "amenity",
             "value": "pharmacy"
         },
@@ -1960,11 +1964,11 @@
         },
         {
             "key": "place",
-            "value": "city"
+            "value": "farm"
         },
         {
             "key": "place",
-            "value": "farm"
+            "value": "city"
         },
         {
             "key": "place",

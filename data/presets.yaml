@@ -1724,6 +1724,10 @@ en:
         # amenity=parking_space
         name: Parking Space
         terms: '<translate with synonyms or related terms for ''Parking Space'', separated by commas>'
+      amenity/pavilion:
+        # 'amenity=shelter, shelter_type=pavilion'
+        name: Pavilion
+        terms: '<translate with synonyms or related terms for ''Pavilion'', separated by commas>'
       amenity/pharmacy:
         # amenity=pharmacy
         name: Pharmacy
@@ -3513,7 +3517,6 @@ en:
       place/farm:
         # place=farm
         name: Farm
-        terms: '<translate with synonyms or related terms for ''Farm'', separated by commas>'
       place/hamlet:
         # place=hamlet
         name: Hamlet
