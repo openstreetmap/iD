@@ -39,7 +39,7 @@ export function uiFieldTextarea(field) {
 
 
     textarea.tags = function(tags) {
-        utilGetSetValue(input, tags[field.key] || '');
+        utilGetSetValue(input, tags.get(field.key) || '');
     };
 
 

@@ -125,6 +125,8 @@ export function coreDifference(base, head) {
                 addEntity(change.base, base, 'deleted');
 
             } else if (change.base && change.head) { // modified vertex
+                window.ifNotMap(change.base.tags);
+                window.ifNotMap(change.head.tags);
                 var moved    = !_.isEqual(change.base.loc,  change.head.loc),
                     retagged = !_.isEqual(change.base.tags, change.head.tags);
 

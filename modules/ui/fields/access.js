@@ -69,8 +69,8 @@ export function uiFieldAccess(field) {
 
 
     function change(d) {
-        var tag = {};
-        tag[d] = utilGetSetValue(d3.select(this)) || undefined;
+        var tag = new Map();
+        tag.set(d, utilGetSetValue(d3.select(this)) || undefined);
         dispatch.call('change', this, tag);
     }
 
@@ -201,18 +201,19 @@ export function uiFieldAccess(field) {
 
 
     access.tags = function(tags) {
+        window.ifNotMap(tags);
         utilGetSetValue(items.selectAll('.preset-input-access'),
-            function(d) { return tags[d] || ''; })
+            function(d) { return tags.get(d) || ''; })
             .attr('placeholder', function() {
-                return tags.access ? tags.access : field.placeholder();
+                return tags.get('access') ? tags.get('access') : field.placeholder();
             });
 
         items.selectAll('#preset-input-access-access')
             .attr('placeholder', 'yes');
 
-        _.forEach(placeholders[tags.highway], function(v, k) {
+        _.forEach(placeholders[tags.get('highway')], function(v, k) {
             items.selectAll('#preset-input-access-' + k)
-                .attr('placeholder', function() { return (tags.access || v); });
+                .attr('placeholder', function() { return (tags.get('access') || v); });
         });
     };
 

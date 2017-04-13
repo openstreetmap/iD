@@ -16,6 +16,7 @@ export function actionMerge(ids) {
             points = geometries.point;
 
         points.forEach(function(point) {
+            window.ifNotMap(point.tags);
             target = target.mergeTags(point.tags);
             graph = graph.replace(target);
 
@@ -36,7 +37,7 @@ export function actionMerge(ids) {
 
                 // Found an uninteresting child node on the target way.
                 // Move orig point into its place to preserve point's history. #3683
-                graph = graph.replace(point.update({ tags: {}, loc: node.loc }));
+                graph = graph.replace(point.update({ tags: new Map(), loc: node.loc }));
                 target = target.replaceNode(node.id, point.id);
                 graph = graph.replace(target);
                 removeNode = node;

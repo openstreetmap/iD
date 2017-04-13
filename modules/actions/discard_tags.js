@@ -1,19 +1,22 @@
 import _ from 'lodash';
 import { dataDiscarded } from '../../data/index';
-
+import { omit } from '../util/map_collection';
 
 export function actionDiscardTags(difference) {
 
     return function(graph) {
         function discardTags(entity) {
-            if (!_.isEmpty(entity.tags)) {
-                var tags = {};
-                _.each(entity.tags, function(v, k) {
-                    if (v) tags[k] = v;
+            window.ifNotMap(entity.tags);
+            if (entity.tags.size > 0) {
+                var tags = new Map();
+                entity.tags.forEach(function (v, k) {
+                    if (v) {
+                        tags.set(k, v);
+                    }
                 });
 
                 graph = graph.replace(entity.update({
-                    tags: _.omit(tags, dataDiscarded)
+                    tags: omit(tags, dataDiscarded)
                 }));
             }
         }

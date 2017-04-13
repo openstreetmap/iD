@@ -1,10 +1,11 @@
 import _ from 'lodash';
+window._ = _;
 import { data } from '../../data/index';
 import { presetCategory } from './category';
 import { presetCollection } from './collection';
 import { presetField } from './field';
 import { presetPreset } from './preset';
-import { getKeys } from '../util/map_collection';
+import { getKeys, convertToMap } from '../util/map_collection';
 export { presetCategory };
 export { presetCollection };
 export { presetField };
@@ -81,8 +82,9 @@ export function presetIndex() {
 
         // whitelist
         presets.forEach(function(d) {
-            window.ifNotMap(d.tags);
+            if (!d.tags) return;
             var key;
+            window.ifNotMap(d.tags);
             d.tags.forEach(function (v, k) {
                 key = k;
             });
@@ -96,6 +98,7 @@ export function presetIndex() {
 
         // blacklist
         presets.forEach(function(d) {
+            if (!d.tags) return;
             window.ifNotMap(d.tags);
             var key;
             d.tags.forEach(function (v, k) {
@@ -128,6 +131,7 @@ export function presetIndex() {
 
         if (d.presets) {
             _.forEach(d.presets, function(d, id) {
+                d.tags = convertToMap(d.tags);
                 all.collection.push(presetPreset(id, d, fields));
             });
         }
@@ -153,9 +157,9 @@ export function presetIndex() {
             var preset = all.collection[i],
                 geometry = preset.geometry;
 
-            var keys = getKeys(preset.tags);
             for (var j = 0; j < geometry.length; j++) {
                 var g = index[geometry[j]];
+                var keys = getKeys(preset.tags || new Map());
                 for (var k = 0; k < keys.length; k++) {
                     var key = keys[k];
                     (g[key] = g[key] || []).push(preset);

@@ -13,7 +13,8 @@ export function osmIsSimpleMultipolygonOuterMember(entity, graph) {
         return false;
 
     var parent = parents[0];
-    if (!parent.isMultipolygon() || Object.keys(parent.tags).length > 1)
+    window.ifNotMap(parent.tags);
+    if (!parent.isMultipolygon() || parent.tags.size > 1)
         return false;
 
     var members = parent.members, member;
@@ -38,7 +39,7 @@ export function osmSimpleMultipolygonOuterMember(entity, graph) {
         return false;
 
     var parent = parents[0];
-    if (!parent.isMultipolygon() || Object.keys(parent.tags).length > 1)
+    if (!parent.isMultipolygon() || parent.tags.size > 1)
         return false;
 
     var members = parent.members, member, outerMember;

@@ -27,10 +27,13 @@ export function svgAreas(projection, context) {
 
     function setPattern(d) {
         for (var i = 0; i < patternKeys.length; i++) {
-            if (d.tags.building && d.tags.building !== 'no') continue;
+            if (d.tags) {
+                window.ifNotMap(d.tags);
+            }
+            if (d.tags.get('building') && d.tags.get('building') !== 'no') continue;
 
-            if (patterns.hasOwnProperty(d.tags[patternKeys[i]])) {
-                this.style.fill = this.style.stroke = 'url("#pattern-' + patterns[d.tags[patternKeys[i]]] + '")';
+            if (patterns.hasOwnProperty(d.tags.get(patternKeys[i]))) {
+                this.style.fill = this.style.stroke = 'url("#pattern-' + patterns[d.tags.get(patternKeys[i])] + '")';
                 return;
             }
         }

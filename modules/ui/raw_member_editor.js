@@ -170,7 +170,7 @@ export function uiRawMemberEditor(context) {
 
                 role.call(d3combobox()
                     .fetcher(function(role, callback) {
-                        var rtype = entity.tags.type;
+                        var rtype = entity.tags.get('type');
                         taginfo.roles({
                             debounce: true,
                             rtype: rtype || '',

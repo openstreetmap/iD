@@ -17,7 +17,9 @@ export function svgTagClasses() {
             'surface', 'tracktype', 'crossing'
         ],
         tagClassRe = /^tag-/,
-        tags = function(entity) { return entity.tags; };
+        tags = function(entity) { 
+            window.ifNotMap(entity.tags);
+            return entity.tags; };
 
 
     var tagClasses = function(selection) {
@@ -36,7 +38,7 @@ export function svgTagClasses() {
             // pick at most one primary classification tag..
             for (i = 0; i < primaries.length; i++) {
                 k = primaries[i];
-                v = t[k];
+                v = t.get(k);
                 if (!v || v === 'no') continue;
 
                 primary = k;
@@ -54,7 +56,7 @@ export function svgTagClasses() {
             if (!status) {
                 for (i = 0; i < statuses.length; i++) {
                     k = statuses[i];
-                    v = t[k];
+                    v = t.get(k);
                     if (!v || v === 'no') continue;
 
                     if (v === 'yes') {   // e.g. `railway=rail + abandoned=yes`
@@ -79,21 +81,21 @@ export function svgTagClasses() {
             // add any secondary (structure) tags
             for (i = 0; i < secondaries.length; i++) {
                 k = secondaries[i];
-                v = t[k];
+                v = t.get(k);
                 if (!v || v === 'no') continue;
                 classes += ' tag-' + k + ' tag-' + k + '-' + v;
             }
 
             // For highways, look for surface tagging..
             if (primary === 'highway') {
-                var paved = (t.highway !== 'track');
-                for (k in t) {
-                    v = t[k];
-                    if (k in osmPavedTags) {
+                var paved = (t.get('highway') !== 'track');
+                var flag = true;
+                t.forEach(function (v, k) {
+                    if (flag && k in osmPavedTags) {
                         paved = !!osmPavedTags[k][v];
-                        break;
+                        flag = false;
                     }
-                }
+                });
                 if (!paved) {
                     classes += ' tag-unpaved';
                 }

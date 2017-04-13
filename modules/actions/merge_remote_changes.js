@@ -154,7 +154,12 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
         function ignoreKey(k) {
             return _.includes(dataDiscarded, k);
         }
-
+        window.ifNotMap(target.tags);
+        window.ifNotMap(remote.tags);
+        if (base.tags) {
+            window.ifNotMap(base.tags);
+        }
+        
         if (option === 'force_local' || _.isEqual(target.tags, remote.tags)) {
             return target;
         }
@@ -163,9 +168,9 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
         }
 
         var ccount = conflicts.length,
-            o = base.tags || {},
-            a = target.tags || {},
-            b = remote.tags || {},
+            o = base.tags || new Map(),
+            a = target.tags || new Map(),
+            b = remote.tags || new Map(),
             keys = _.reject(_.union(_.keys(o), _.keys(a), _.keys(b)), ignoreKey),
             tags = _.clone(a),
             changed = false;
@@ -173,16 +178,16 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
         for (var i = 0; i < keys.length; i++) {
             var k = keys[i];
 
-            if (o[k] !== b[k] && a[k] !== b[k]) {    // changed remotely..
-                if (o[k] !== a[k]) {      // changed locally..
+            if (o.get(k) !== b.get(k) && a.get(k) !== b.get(k)) {    // changed remotely..
+                if (o.get(k) !== a.get(k)) {      // changed locally..
                     conflicts.push(t('merge_remote_changes.conflict.tags',
-                        { tag: k, local: a[k], remote: b[k], user: user(remote.user) }));
+                        { tag: k, local: a.get(k), remote: b.get(k), user: user(remote.user) }));
 
                 } else {                  // unchanged locally, accept remote change..
-                    if (b.hasOwnProperty(k)) {
-                        tags[k] = b[k];
+                    if (b.has(k)) {
+                        tags.set(k, b.get(k));
                     } else {
-                        delete tags[k];
+                        tags.delete(k);
                     }
                     changed = true;
                 }

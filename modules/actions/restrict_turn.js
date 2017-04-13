@@ -5,7 +5,7 @@ import {
     osmRelation,
     osmWay
 } from '../osm/index';
-
+import { convertToMap } from '../util/map_collection';
 
 // Create a restriction relation for `turn`, which must have the following structure:
 //
@@ -78,7 +78,7 @@ export function actionRestrictTurn(turn, projection, restrictionId) {
 
         return graph.replace(osmRelation({
             id: restrictionId,
-            tags: {
+            tags: convertToMap({
                 type: 'restriction',
                 restriction: turn.restriction ||
                     osmInferRestriction(
@@ -87,7 +87,7 @@ export function actionRestrictTurn(turn, projection, restrictionId) {
                         turn.via,
                         turn.to,
                         projection)
-            },
+            }),
             members: [
                 {id: from.id, type: 'way',  role: 'from'},
                 {id: via.id,  type: 'node', role: 'via'},

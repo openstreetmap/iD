@@ -292,7 +292,7 @@ export function uiRawMembershipEditor(context) {
 
                 role.call(d3combobox()
                     .fetcher(function(role, callback) {
-                        var rtype = d.relation.tags.type;
+                        var rtype = d.relation.tags.get('type');
                         taginfo.roles({
                             debounce: true,
                             rtype: rtype || '',

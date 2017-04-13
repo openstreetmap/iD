@@ -24,6 +24,7 @@ export function actionDisconnect(nodeId, newNodeId) {
             connections = action.connections(graph);
 
         connections.forEach(function(connection) {
+            window.ifNotMap(node.tags);
             var way = graph.entity(connection.wayID),
                 newNode = osmNode({id: newNodeId, loc: node.loc, tags: node.tags});
 

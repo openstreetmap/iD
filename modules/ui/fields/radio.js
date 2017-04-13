@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import { t } from '../../util/locale';
 import { d3combobox } from '../../lib/d3.combobox.js';
 import { services } from '../../services/index';
-
+import { convertToMap } from '../../util/map_collection'
 import {
     utilGetSetValue,
     utilNoAuto,
@@ -22,7 +22,7 @@ export function uiFieldRadio(field) {
         radios = d3.select(null),
         typeInput = d3.select(null),
         layerInput = d3.select(null),
-        oldType = {},
+        oldType = new Map(),
         entity;
 
 
@@ -248,29 +248,29 @@ export function uiFieldRadio(field) {
 
     function changeType() {
         var key = selectedKey(),
-            t = {};
+            t = new Map();
 
         if (!key) return;
         var val = tagValue(utilGetSetValue(typeInput));
-        t[key] = val;
-        if (val !== 'no') oldType[key] = val;
+        t(key,val);
+        if (val !== 'no') oldType.set(key, val);
         dispatch.call('change', this, t);
     }
 
 
     function changeLayer() {
         // note: don't use utilGetSetValue here because we want 0 to be falsy.
-        var t = { layer: layerInput.node().value || undefined };
+        var t = convertToMap({ layer: layerInput.node().value || undefined }); // whats this?
         dispatch.call('change', this, t);
     }
 
 
     function changeRadio() {
-        var t = {},
+        var t = new Map(),
             activeKey;
 
         if (field.key) {
-            t[field.key] = undefined;
+            t.set(field.key, undefined);
         }
 
         radios.each(function(d) {
@@ -278,20 +278,20 @@ export function uiFieldRadio(field) {
             if (active) activeKey = d;
 
             if (field.key) {
-                if (active) t[field.key] = d;
+                if (active) t.set(field.key, d);
             } else {
-                var val = oldType[activeKey] || 'yes';
-                t[d] = active ? val : undefined;
+                var val = oldType.get(activeKey) || 'yes';
+                t.set(d, active ? val : undefined);
             }
         });
 
         if (field.type === 'structureRadio') {
             if (activeKey === 'bridge') {
-                t.layer = '1';
+                t.set('layer', '1');
             } else if (activeKey === 'tunnel') {
-                t.layer = '-1';
+                t.set('layer', '-1');
             } else {
-                t.layer = undefined;
+                t.set('layer', undefined);
             }
         }
 
@@ -300,11 +300,12 @@ export function uiFieldRadio(field) {
 
 
     radio.tags = function(tags) {
+        window.ifNotMap(tags);
         function checked(d) {
             if (field.key) {
-                return tags[field.key] === d;
+                return tags.get(field.key) === d;
             } else {
-                return !!(tags[d] && tags[d].toLowerCase() !== 'no');
+                return !!(tags.get(d) && tags.get(d).toLowerCase() !== 'no');
             }
         }
 
@@ -318,13 +319,14 @@ export function uiFieldRadio(field) {
             placeholder.text(t('inspector.none'));
         } else {
             placeholder.text(selection.attr('value'));
-            typeVal = oldType[selection.datum()] = tags[selection.datum()];
+            oldType.set(selection.datum(), tags.get(selection.datum()));
+            typeVal = tags.get(selection.datum());
         }
 
         if (field.type === 'structureRadio') {
             wrap.call(structureExtras);
             utilGetSetValue(typeInput, displayValue(typeVal) || '');
-            utilGetSetValue(layerInput, tags.layer || '');
+            utilGetSetValue(layerInput, tags.get('layer') || '');
         }
     };
 
@@ -337,7 +339,7 @@ export function uiFieldRadio(field) {
     radio.entity = function(_) {
         if (!arguments.length) return entity;
         entity = _;
-        oldType = {};
+        oldType = new Map();
         return radio;
     };
 

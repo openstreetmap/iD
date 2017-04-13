@@ -42,7 +42,7 @@ export function uiFieldWikipedia(field, context) {
         var titlecombo = d3combobox()
             .fetcher(function(value, cb) {
                 if (!value) {
-                    value = context.entity(entity.id).tags.name || '';
+                    value = context.entity(entity.id).tags.get('name') || '';
                 }
 
                 var searchfn = value.length > 7 ? wikipedia.search : wikipedia.suggestions;
@@ -137,7 +137,7 @@ export function uiFieldWikipedia(field, context) {
             m = value.match(/https?:\/\/([-a-z]+)\.wikipedia\.org\/(?:wiki|\1-[-a-z]+)\/([^#]+)(?:#(.+))?/),
             l = m && _.find(dataWikipedia, function(d) { return m[1] === d[2]; }),
             anchor,
-            syncTags = {};
+            syncTags = new Map();
 
         if (l) {
             // Normalize title http://www.mediawiki.org/wiki/API:Query#Title_normalization
@@ -156,9 +156,9 @@ export function uiFieldWikipedia(field, context) {
             utilGetSetValue(title, value);
         }
 
-        syncTags.wikipedia = value ? language()[2] + ':' + value : undefined;
+        syncTags.set('wikipedia', value ? language()[2] + ':' + value : undefined);
         if (!skipWikidata) {
-            syncTags.wikidata = undefined;
+            syncTags.set('wikidata', undefined);
         }
 
         dispatch.call('change', this, syncTags);
@@ -168,7 +168,7 @@ export function uiFieldWikipedia(field, context) {
 
         // attempt asynchronous update of wikidata tag..
         var initEntityId = entity.id,
-            initWikipedia = context.entity(initEntityId).tags.wikipedia;
+            initWikipedia = context.entity(initEntityId).tags.get('wikipedia');
 
         wikidata.itemsByTitle(language()[2], value, function(title, data) {
             if (!data || !Object.keys(data).length) return;
@@ -186,12 +186,12 @@ export function uiFieldWikipedia(field, context) {
 
             // 3. wikipedia value has not changed
             var currTags = _.clone(context.entity(currEntityId).tags);
-            if (initWikipedia !== currTags.wikipedia) return;
+            if (initWikipedia !== currTags.get('wikipedia')) return;
 
             // ok to coalesce the update of wikidata tag into the previous tag change
-            currTags.wikidata = qids && _.find(qids, function(id) {
+            currTags.set('wikidata', qids && _.find(qids, function(id) {
                 return id.match(/^Q\d+$/);
-            });
+            }));
 
             context.overwrite(actionChangeTags(currEntityId, currTags), annotation);
             dispatch.call('change', this, currTags);
@@ -200,7 +200,7 @@ export function uiFieldWikipedia(field, context) {
 
 
     wiki.tags = function(tags) {
-        var value = tags[field.key] || '',
+        var value = tags.get(field.key) || '',
             m = value.match(/([^:]+):([^#]+)(?:#(.+))?/),
             l = m && _.find(dataWikipedia, function(d) { return m[1] === d[2]; }),
             anchor = m && m[3];

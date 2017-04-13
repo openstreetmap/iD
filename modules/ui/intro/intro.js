@@ -80,7 +80,7 @@ export function uiIntro(context) {
         introGraph[key] = osmEntity(dataIntroGraph[key]);
         var name = localizedName(key);
         if (name) {
-            introGraph[key].tags.name = name;
+            introGraph[key].tags.set('name', name);
         }
     }
 

@@ -28,7 +28,10 @@ export function osmIntersection(graph, vertexId) {
     // order to add a restriction. The real split will
     // happen when the restriction is added.
     parentWays.forEach(function(way) {
-        if (!way.tags.highway || way.isArea() || way.isDegenerate())
+        if (way.tags) {
+            window.ifNotMap(way.tags);
+        }
+        if (!way.tags.get('highway') || way.isArea() || way.isDegenerate())
             return;
 
         var isFirst = (vertexId === way.first()),
@@ -87,14 +90,14 @@ export function osmIntersection(graph, vertexId) {
         if (!start)
             return [];
 
-        if (start.first() === vertex.id && start.tags.oneway === 'yes')
+        if (start.first() === vertex.id && start.tags.get('oneway') === 'yes')
             return [];
-        if (start.last() === vertex.id && start.tags.oneway === '-1')
+        if (start.last() === vertex.id && start.tags.get('oneway') === '-1')
             return [];
 
         function withRestriction(turn) {
             graph.parentRelations(graph.entity(turn.from.way)).forEach(function(relation) {
-                if (relation.tags.type !== 'restriction')
+                if (relation.tags.get('type') !== 'restriction')
                     return;
 
                 var f = relation.memberByRole('from'),
@@ -105,7 +108,7 @@ export function osmIntersection(graph, vertexId) {
                     v && v.id === turn.via.node &&
                     t && t.id === turn.to.way) {
                     turn.restriction = relation.id;
-                } else if (/^only_/.test(relation.tags.restriction) &&
+                } else if (/^only_/.test(relation.tags.get('restriction')) &&
                     f && f.id === turn.from.way &&
                     v && v.id === turn.via.node &&
                     t && t.id !== turn.to.way) {
@@ -130,7 +133,7 @@ export function osmIntersection(graph, vertexId) {
                 return;
 
             // backward
-            if (end.first() !== vertex.id && end.tags.oneway !== 'yes') {
+            if (end.first() !== vertex.id && end.tags.get('oneway') !== 'yes') {
                 turns.push(withRestriction({
                     from: from,
                     via: via,
@@ -142,7 +145,7 @@ export function osmIntersection(graph, vertexId) {
             }
 
             // forward
-            if (end.last() !== vertex.id && end.tags.oneway !== '-1') {
+            if (end.last() !== vertex.id && end.tags.get('oneway') !== '-1') {
                 turns.push(withRestriction({
                     from: from,
                     via: via,
@@ -156,7 +159,7 @@ export function osmIntersection(graph, vertexId) {
         });
 
         // U-turn
-        if (start.tags.oneway !== 'yes' && start.tags.oneway !== '-1') {
+        if (start.tags.get('oneway') !== 'yes' && start.tags.get('oneway') !== '-1') {
             turns.push(withRestriction({
                 from: from,
                 via: via,
@@ -178,10 +181,10 @@ export function osmInferRestriction(graph, from, via, to, projection) {
         toWay = graph.entity(to.way),
         toNode = graph.entity(to.node),
         viaNode = graph.entity(via.node),
-        fromOneWay = (fromWay.tags.oneway === 'yes' && fromWay.last() === via.node) ||
-            (fromWay.tags.oneway === '-1' && fromWay.first() === via.node),
-        toOneWay = (toWay.tags.oneway === 'yes' && toWay.first() === via.node) ||
-            (toWay.tags.oneway === '-1' && toWay.last() === via.node),
+        fromOneWay = (fromWay.tags.get('oneway') === 'yes' && fromWay.last() === via.node) ||
+            (fromWay.tags.get('oneway') === '-1' && fromWay.first() === via.node),
+        toOneWay = (toWay.tags.get('oneway') === 'yes' && toWay.first() === via.node) ||
+            (toWay.tags.get('oneway') === '-1' && toWay.last() === via.node),
         angle = geoAngle(viaNode, fromNode, projection) -
                 geoAngle(viaNode, toNode, projection);
 

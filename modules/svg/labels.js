@@ -301,7 +301,7 @@ export function svgLabels(projection, context) {
                 var matchGeom = labelStack[k][0],
                     matchKey = labelStack[k][1],
                     matchVal = labelStack[k][2],
-                    hasVal = entity.tags[matchKey];
+                    hasVal = entity.tags.get(matchKey);
 
                 if (geometry === matchGeom && hasVal && (matchVal === '*' || matchVal === hasVal)) {
                     labelable[k].push(entity);

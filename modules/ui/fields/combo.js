@@ -211,7 +211,7 @@ export function uiFieldCombo(field, context) {
 
     function change() {
         var val = tagValue(utilGetSetValue(input)),
-            t = {};
+            t = new Map();
 
         if (isMulti || isSemi) {
             if (!val) return;
@@ -219,16 +219,16 @@ export function uiFieldCombo(field, context) {
             utilGetSetValue(input, '');
             if (isMulti) {
                 field.keys.push(field.key + val);
-                t[field.key + val] = 'yes';
+                t.set(field.key + val, 'yes');
             } else if (isSemi) {
                 var arr = multiData.map(function(d) { return d.key; });
                 arr.push(val);
-                t[field.key] = _.compact(_.uniq(arr)).join(';');
+                t.set(field.key, _.compact(_.uniq(arr)).join(';'));
             }
             window.setTimeout(function() { input.node().focus(); }, 10);
 
         } else {
-            t[field.key] = val;
+            t.set(field.key, val);
         }
 
         dispatch.call('change', this, t);
@@ -237,14 +237,14 @@ export function uiFieldCombo(field, context) {
 
     function removeMultikey(d) {
         d3.event.stopPropagation();
-        var t = {};
+        var t = new Map();
         if (isMulti) {
-            t[d.key] = undefined;
+            t.set(d.key, undefined);
         } else if (isSemi) {
             _.remove(multiData, function(md) { return md.key === d.key; });
             var arr = multiData.map(function(md) { return md.key; });
             arr = _.compact(_.uniq(arr));
-            t[field.key] = arr.length ? arr.join(';') : undefined;
+            t.set(field.key,  arr.length ? arr.join(';') : undefined);
         }
         dispatch.call('change', this, t);
     }
@@ -302,13 +302,14 @@ export function uiFieldCombo(field, context) {
 
 
     combo.tags = function(tags) {
+        window.ifNotMap(tags);
         if (isMulti || isSemi) {
             multiData = [];
 
             if (isMulti) {
                 // Build multiData array containing keys already set..
-                Object.keys(tags).forEach(function(key) {
-                    if (key.indexOf(field.key) !== 0 || tags[key].toLowerCase() !== 'yes') return;
+                tags.forEach(function(v, key) {
+                    if (key.indexOf(field.key) !== 0 || tags.get(key).toLowerCase() !== 'yes') return;
 
                     var suffix = key.substring(field.key.length);
                     multiData.push({
@@ -321,7 +322,7 @@ export function uiFieldCombo(field, context) {
                 field.keys = _.map(multiData, 'key');
 
             } else if (isSemi) {
-                var arr = _.compact(_.uniq((tags[field.key] || '').split(';')));
+                var arr = _.compact(_.uniq((tags.get(field.key) || '').split(';')));
                 multiData = arr.map(function(key) {
                     return {
                         key: key,
@@ -365,7 +366,7 @@ export function uiFieldCombo(field, context) {
                 .text('×');
 
         } else {
-            utilGetSetValue(input, displayValue(tags[field.key]));
+            utilGetSetValue(input, displayValue(tags.get(field.key)));
         }
     };
 

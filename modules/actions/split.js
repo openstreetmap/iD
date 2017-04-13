@@ -3,7 +3,7 @@ import { osmIsSimpleMultipolygonOuterMember, osmRelation, osmWay } from '../osm/
 import { geoSphericalDistance } from '../geo/index';
 import { actionAddMember } from './add_member';
 import { utilWrap } from '../util/index';
-
+import { convertToMap } from '../util/map_collection';
 
 // Split a way at the given node.
 //
@@ -75,6 +75,7 @@ export function actionSplit(nodeId, newWayIds) {
 
 
     function split(graph, wayA, newWayId) {
+        window.ifNotMap(wayA.tags);
         var wayB = osmWay({id: newWayId, tags: wayA.tags}),
             nodesA,
             nodesB,
@@ -115,8 +116,8 @@ export function actionSplit(nodeId, newWayIds) {
             } else {
                 if (relation === isOuter) {
                     graph = graph.replace(relation.mergeTags(wayA.tags));
-                    graph = graph.replace(wayA.update({tags: {}}));
-                    graph = graph.replace(wayB.update({tags: {}}));
+                    graph = graph.replace(wayA.update({tags: new Map()}));
+                    graph = graph.replace(wayB.update({tags: new Map()}));
                 }
 
                 var member = {
@@ -130,16 +131,17 @@ export function actionSplit(nodeId, newWayIds) {
         });
 
         if (!isOuter && isArea) {
+            // TOFIX
             var multipolygon = osmRelation({
-                tags: _.extend({}, wayA.tags, {type: 'multipolygon'}),
+                tags: convertToMap(_.extend({}, wayA.tags, {type: 'multipolygon'})),
                 members: [
                     {id: wayA.id, role: 'outer', type: 'way'},
                     {id: wayB.id, role: 'outer', type: 'way'}
                 ]});
 
             graph = graph.replace(multipolygon);
-            graph = graph.replace(wayA.update({tags: {}}));
-            graph = graph.replace(wayB.update({tags: {}}));
+            graph = graph.replace(wayA.update({tags: new Map()}));
+            graph = graph.replace(wayB.update({tags: new Map()}));
         }
 
         return graph;

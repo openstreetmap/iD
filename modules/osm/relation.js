@@ -179,6 +179,11 @@ _.extend(osmRelation.prototype, {
 
 
     asJXON: function(changeset_id) {
+         window.ifNotMap(this.tags);
+         var tags = [];
+         this.tags.forEach(function (v, k) {
+             tags.push({ keyAttributes: { k: k, v: v } });
+         });
         var r = {
             relation: {
                 '@id': this.osmId(),
@@ -192,9 +197,7 @@ _.extend(osmRelation.prototype, {
                         }
                     };
                 }),
-                tag: _.map(this.tags, function(v, k) {
-                    return { keyAttributes: { k: k, v: v } };
-                })
+                tag: tags
             }
         };
         if (changeset_id) r.relation['@changeset'] = changeset_id;
@@ -230,7 +233,7 @@ _.extend(osmRelation.prototype, {
 
 
     isMultipolygon: function() {
-        return this.tags.type === 'multipolygon';
+        return this.tags.get('type') === 'multipolygon';
     },
 
 
@@ -245,7 +248,7 @@ _.extend(osmRelation.prototype, {
 
 
     isRestriction: function() {
-        return !!(this.tags.type && this.tags.type.match(/^restriction:?/));
+        return !!(this.tags.get('type') && this.tags.get('type').match(/^restriction:?/));
     },
 
 

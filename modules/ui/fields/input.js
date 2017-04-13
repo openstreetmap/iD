@@ -104,7 +104,8 @@ export function uiFieldText(field, context) {
 
 
     i.tags = function(tags) {
-        utilGetSetValue(input, tags[field.key] || '');
+        window.ifNotMap(tags);
+        utilGetSetValue(input, tags.get(field.key) || '');
     };
 
 

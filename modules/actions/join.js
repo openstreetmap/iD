@@ -43,7 +43,7 @@ export function actionJoin(ids) {
             graph.parentRelations(way).forEach(function(parent) {
                 graph = graph.replace(parent.replaceMember(way, survivor));
             });
-
+            window.ifNotMap(way.tags);
             survivor = survivor.mergeTags(way.tags);
 
             graph = graph.replace(survivor);
@@ -65,7 +65,7 @@ export function actionJoin(ids) {
 
         var nodeIds = _.map(joined[0].nodes, 'id').slice(1, -1),
             relation,
-            tags = {},
+            tags = new Map(),
             conflicting = false;
 
         joined[0].forEach(function(way) {
@@ -74,14 +74,14 @@ export function actionJoin(ids) {
                 if (parent.isRestriction() && parent.members.some(function(m) { return nodeIds.indexOf(m.id) >= 0; }))
                     relation = parent;
             });
-
-            for (var k in way.tags) {
-                if (!(k in tags)) {
-                    tags[k] = way.tags[k];
-                } else if (tags[k] && osmIsInterestingTag(k) && tags[k] !== way.tags[k]) {
+            window.ifNotMap(way.tags);
+            way.tags.forEach(function (v, k) {
+                if (!(tags.has(k))) {
+                    tags.set(k, way.tags.get(k));
+                } else if (tags.get(k) && osmIsInterestingTag(k) && tags.get(k) !== way.tags.get(k)) {
                     conflicting = true;
                 }
-            }
+            });
         });
 
         if (relation)

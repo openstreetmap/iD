@@ -245,9 +245,10 @@ export function uiFieldLocalized(field, context) {
 
     localized.tags = function(tags) {
         // Fetch translations from wikipedia
-        if (tags.wikipedia && !wikiTitles) {
+        window.ifNotMap(tags);
+        if (tags.get(wikipedia) && !wikiTitles) {
             wikiTitles = {};
-            var wm = tags.wikipedia.match(/([^:]+):(.+)/);
+            var wm = tags.get('wikipedia').match(/([^:]+):(.+)/);
             if (wm && wm[0] && wm[1]) {
                 wikipedia.translations(wm[1], wm[2], function(d) {
                     wikiTitles = d;
@@ -255,15 +256,15 @@ export function uiFieldLocalized(field, context) {
             }
         }
 
-        utilGetSetValue(input, tags[field.key] || '');
+        utilGetSetValue(input, tags.get(field.key) || '');
 
-        var postfixed = [], k, m;
-        for (k in tags) {
+        var postfixed = [], m;
+        tags.forEach(function (v, k) {
             m = k.match(/^(.*):([a-zA-Z_-]+)$/);
             if (m && m[1] === field.key && m[2]) {
-                postfixed.push({ lang: m[2], value: tags[k] });
+                postfixed.push({ lang: m[2], value: v });
             }
-        }
+        });
 
         localizedInputs.call(render, postfixed.reverse());
     };

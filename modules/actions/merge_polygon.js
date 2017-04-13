@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { geoPolygonContainsPolygon } from '../geo/index';
 import { osmJoinWays, osmRelation } from '../osm/index';
-
+import { convertToMap, omit } from '../util/map_collection';
 
 export function actionMergePolygon(ids, newRelationId) {
 
@@ -85,26 +85,28 @@ export function actionMergePolygon(ids, newRelationId) {
 
         // Move all tags to one relation
         var relation = entities.multipolygon[0] ||
-            osmRelation({ id: newRelationId, tags: { type: 'multipolygon' }});
+            osmRelation({ id: newRelationId, tags: convertToMap({ type: 'multipolygon' }) });
 
         entities.multipolygon.slice(1).forEach(function(m) {
+            window.ifNotMap(m.tags);
             relation = relation.mergeTags(m.tags);
             graph = graph.remove(m);
         });
 
         entities.closedWay.forEach(function(way) {
+            window.ifNotMap(way);
             function isThisOuter(m) {
                 return m.id === way.id && m.role !== 'inner';
             }
             if (members.some(isThisOuter)) {
                 relation = relation.mergeTags(way.tags);
-                graph = graph.replace(way.update({ tags: {} }));
+                graph = graph.replace(way.update({ tags: new Map() }));
             }
         });
 
         return graph.replace(relation.update({
             members: members,
-            tags: _.omit(relation.tags, 'area')
+            tags: omit(relation.tags, 'area')
         }));
     };
 

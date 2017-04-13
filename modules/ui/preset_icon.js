@@ -37,12 +37,13 @@ export function uiPresetIcon() {
 
         function tag_classes(p) {
             var s = '';
-            for (var i in p.tags) {
+            window.ifNotMap(p.tags);
+            p.tags.forEach(function (v, i) {
                 s += ' tag-' + i;
-                if (p.tags[i] !== '*') {
-                    s += ' tag-' + i + '-' + p.tags[i];
+                if (v !== '*') {
+                    s += ' tag-' + i + '-' + v;
                 }
-            }
+            });
             return s;
         }
 

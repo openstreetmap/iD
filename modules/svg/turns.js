@@ -13,7 +13,7 @@ export function svgTurns(projection) {
             var u = turn.u ? '-u' : '';
             if (!turn.restriction)
                 return '#turn-yes' + u;
-            var restriction = graph.entity(turn.restriction).tags.restriction;
+            var restriction = graph.entity(turn.restriction).tags.get('restriction');
             return '#turn-' +
                 (!turn.indirect_restriction && /^only_/.test(restriction) ? 'only' : 'no') + u;
         }

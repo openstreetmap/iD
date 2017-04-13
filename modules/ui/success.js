@@ -53,7 +53,7 @@ export function uiSuccess(context) {
             .text(t('success.view_on_osm'));
 
 
-        var message = (changeset.tags.comment || t('success.edited_osm')).substring(0, 130) +
+        var message = (changeset.tags.get('comment') || t('success.edited_osm')).substring(0, 130) +
             ' ' + context.connection().changesetURL(changeset.id);
 
         var sharing = {

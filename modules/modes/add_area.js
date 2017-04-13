@@ -8,7 +8,7 @@ import {
 import { behaviorAddWay } from '../behavior/index';
 import { modeDrawArea } from './index';
 import { osmNode, osmWay } from '../osm/index';
-
+import { convertToMap } from '../util/map_collection';
 
 export function modeAddArea(context) {
     var mode = {
@@ -24,7 +24,7 @@ export function modeAddArea(context) {
             .on('start', start)
             .on('startFromWay', startFromWay)
             .on('startFromNode', startFromNode),
-        defaultTags = { area: 'yes' };
+        defaultTags = convertToMap({ area: 'yes' });
 
 
     function actionClose(wayId) {

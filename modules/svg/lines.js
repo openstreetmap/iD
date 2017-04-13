@@ -38,8 +38,8 @@ export function svgLines(projection, context) {
                 scoreA = selected.indexOf(a.id) !== -1 ? 20 : 0,
                 scoreB = selected.indexOf(b.id) !== -1 ? 20 : 0;
 
-            if (a.tags.highway) { scoreA -= highway_stack[a.tags.highway]; }
-            if (b.tags.highway) { scoreB -= highway_stack[b.tags.highway]; }
+            if (a.tags.get('highway')) { scoreA -= highway_stack[a.tags.get('highway')]; }
+            if (b.tags.get('highway')) { scoreB -= highway_stack[b.tags.get('highway')]; }
             return scoreA - scoreB;
         }
 

@@ -46,13 +46,15 @@ export function uiFieldCheck(field, context) {
         // where implied oneway tag exists (e.g. `junction=roundabout`) #2220, #1841
         if (field.id === 'oneway') {
             var entity = context.entity(entityId);
-            for (var key in entity.tags) {
-                if (key in osmOneWayTags && (entity.tags[key] in osmOneWayTags[key])) {
+            window.ifNotMap(entity.tags);
+            var flag = true;
+            entity.tags.forEach(function (v, key) {
+                if (flag && key in osmOneWayTags && (entity.tags.get(key) in osmOneWayTags[key])) {
                     impliedYes = true;
                     texts[0] = t('presets.fields.oneway_yes.options.undefined');
-                    break;
+                    flag = false;
                 }
-            }
+            });
         }
     }
 
@@ -152,7 +154,8 @@ export function uiFieldCheck(field, context) {
 
     check.tags = function(tags) {
         checkImpliedYes();
-        value = tags[field.key] && tags[field.key].toLowerCase();
+        window.ifNotMap(tags);
+        value = tags.get(field.key) && tags.get(field.key).toLowerCase();
 
         if (field.type === 'onewayCheck' && (value === '1' || value === '-1')) {
             value = 'yes';

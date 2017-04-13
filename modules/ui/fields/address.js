@@ -37,8 +37,8 @@ export function uiFieldAddress(field, context) {
                     (extent[0][1] + extent[1][1]) / 2]),
                     choice = geoChooseEdge(context.childNodes(d), loc, context.projection);
                 return {
-                    title: d.tags.name,
-                    value: d.tags.name,
+                    title: d.tags.get('name'),
+                    value: d.tags.get('name'),
                     dist: choice.distance
                 };
             })
@@ -49,7 +49,7 @@ export function uiFieldAddress(field, context) {
         return _.uniqBy(streets, 'value');
 
         function isAddressable(d) {
-            return d.tags.highway && d.tags.name && d.type === 'way';
+            return d.tags.get('highway') && d.tags.get('name') && d.type === 'way';
         }
     }
 
@@ -63,8 +63,8 @@ export function uiFieldAddress(field, context) {
             .filter(isAddressable)
             .map(function(d) {
                 return {
-                    title: d.tags['addr:city'] || d.tags.name,
-                    value: d.tags['addr:city'] || d.tags.name,
+                    title: d.tags.get('addr:city') || d.tags.get('name'),
+                    value: d.tags.get('addr:city') || d.tags.get('name'),
                     dist: geoSphericalDistance(d.extent(context.graph()).center(), l)
                 };
             })
@@ -76,17 +76,18 @@ export function uiFieldAddress(field, context) {
 
 
         function isAddressable(d) {
-            if (d.tags.name &&
-                (d.tags.admin_level === '8' || d.tags.border_type === 'city'))
+            window.ifNotMap(d.tags);
+            if (d.tags.get('name') &&
+                (d.tags.get('admin_level') === '8' || d.tags.get('border_type') === 'city'))
                 return true;
 
-            if (d.tags.place && d.tags.name && (
-                    d.tags.place === 'city' ||
-                    d.tags.place === 'town' ||
-                    d.tags.place === 'village'))
+            if (d.tags.get('place') && d.tags.get('name') && (
+                    d.tags.get('place') === 'city' ||
+                    d.tags.get('place') === 'town' ||
+                    d.tags.get('place') === 'village'))
                 return true;
 
-            if (d.tags['addr:city']) return true;
+            if (d.tags.get('addr:city')) return true;
 
             return false;
         }
@@ -99,12 +100,12 @@ export function uiFieldAddress(field, context) {
 
         var results = context.intersects(box)
             .filter(function hasTag(d) {
-                return d.tags[key];
+                return d.tags.get(key);
             })
             .map(function(d) {
                 return {
-                    title: d.tags[key],
-                    value: d.tags[key],
+                    title: d.tags.get(key),
+                    value: d.tags.get(key),
                     dist: geoSphericalDistance(d.extent(context.graph()).center(), l)
                 };
             })
@@ -216,11 +217,11 @@ export function uiFieldAddress(field, context) {
 
     function change(onInput) {
         return function() {
-            var tags = {};
+            var tags = new Map();
 
             wrap.selectAll('input')
                 .each(function (field) {
-                    tags['addr:' + field.id] = this.value || undefined;
+                    tags.set('addr:' + field.id, this.value || undefined);
                 });
 
             dispatch.call('change', this, tags, onInput);
@@ -230,7 +231,7 @@ export function uiFieldAddress(field, context) {
 
     function updateTags(tags) {
         utilGetSetValue(wrap.selectAll('input'), function (field) {
-            return tags['addr:' + field.id] || '';
+            return tags.get('addr:' + field.id) || '';
         });
     }
 

@@ -15,10 +15,13 @@ import { utilRebind } from '../util';
 window._ = _;
 window.ifNotMap = (x) => {
     if (x instanceof Map) {
+        if (Object.keys(x).length > 0) {
+            throw new Error(' some body is thinking it is object');
+        }
         return;
     } else {
         console.log(x);
-        throw new Error('This shit is not map');
+        throw new Error('This is not map');
     }
 };
 export function uiEntityEditor(context) {

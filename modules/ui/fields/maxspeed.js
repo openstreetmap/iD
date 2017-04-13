@@ -90,15 +90,15 @@ export function uiFieldMaxspeed(field, context) {
 
 
     function change() {
-        var tag = {},
+        var tag = new Map(),
             value = utilGetSetValue(input);
 
         if (!value) {
-            tag[field.key] = undefined;
+            tag.set(field.key, undefined);
         } else if (isNaN(value) || !isImperial) {
-            tag[field.key] = value;
+            tag.set(field.key, value);
         } else {
-            tag[field.key] = value + ' mph';
+            tag.set(field.key, value + ' mph');
         }
 
         dispatch.call('change', this, tag);
@@ -106,7 +106,8 @@ export function uiFieldMaxspeed(field, context) {
 
 
     maxspeed.tags = function(tags) {
-        var value = tags[field.key];
+        window.ifNotMap(tags);
+        var value = tags.get(field.key);
 
         if (value && value.indexOf('mph') >= 0) {
             value = parseInt(value, 10);

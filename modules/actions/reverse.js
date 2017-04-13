@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { convertToMap } from '../util/map_collection'
 /*
   Order the nodes of a way in reverse order and reverse any direction dependent tags
   other than `oneway`. (We assume that correcting a backwards oneway is the primary
@@ -83,7 +84,9 @@ export function actionReverse(wayId, options) {
 
     function reverseDirectionTags(node) {
         // Update the direction based tags as appropriate then return an updated node
-        return node.update({tags: _.transform(node.tags, function(acc, tagValue, tagKey) {
+        // TO-FIX
+        window.ifNotMap(node.tags);
+        return node.update({tags: convertToMap(_.transform(node.tags, function(acc, tagValue, tagKey) {
             // See if this is a direction tag and reverse (or use existing value if not recognised)
             if (tagKey === 'direction') {
                 acc[tagKey] = {forward: 'backward', backward: 'forward', left: 'right', right: 'left'}[tagValue] || tagValue;
@@ -93,7 +96,7 @@ export function actionReverse(wayId, options) {
                 acc[reverseKey(tagKey)] = tagValue;
             }
             return acc;
-        }, {})});
+        }, {}))});
     }
 
 
@@ -114,10 +117,10 @@ export function actionReverse(wayId, options) {
     return function(graph) {
         var way = graph.entity(wayId),
             nodes = way.nodes.slice().reverse(),
-            tags = {}, key, role;
+            tags = new Map(), key, role;
 
         for (key in way.tags) {
-            tags[reverseKey(key)] = reverseValue(key, way.tags[key]);
+            tags.set(reverseKey(key), reverseValue(key, way.tags.get(key)));
         }
 
         graph.parentRelations(way).forEach(function(relation) {

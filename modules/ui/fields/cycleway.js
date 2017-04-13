@@ -5,7 +5,7 @@ import {
     utilNoAuto,
     utilRebind
 } from '../../util';
-
+import { convertToMap } from '../../util/map_collection';
 
 export function uiFieldCycleway(field) {
     var dispatch = d3.dispatch('change'),
@@ -71,26 +71,26 @@ export function uiFieldCycleway(field) {
     function change() {
         var left = utilGetSetValue(d3.select('.preset-input-cyclewayleft')),
             right = utilGetSetValue(d3.select('.preset-input-cyclewayright')),
-            tag = {};
+            tag = new Map();
 
         if (left === 'none' || left === '') { left = undefined; }
         if (right === 'none' || right === '') { right = undefined; }
 
         // Always set both left and right as changing one can affect the other
-        tag = {
+        tag = convertToMap({
             cycleway: undefined,
             'cycleway:left': left,
             'cycleway:right': right
-        };
+        });
 
         // If the left and right tags match, use the cycleway tag to tag both
         // sides the same way
         if (left === right) {
-            tag = {
+            tag = convertToMap({
                 cycleway: left,
                 'cycleway:left': undefined,
                 'cycleway:right': undefined
-            };
+            });
         }
 
         dispatch.call('change', this, tag);
@@ -108,12 +108,13 @@ export function uiFieldCycleway(field) {
 
 
     cycleway.tags = function(tags) {
+        window.ifNotMap(tags);
         utilGetSetValue(items.selectAll('.preset-input-cycleway'), function(d) {
                 // If cycleway is set, always return that
-                if (tags.cycleway) {
-                    return tags.cycleway;
+                if (tags.get('cycleway')) {
+                    return tags.get('cycleway');
                 }
-                return tags[d] || '';
+                return tags.get(d) || '';
             })
             .attr('placeholder', field.placeholder());
     };
