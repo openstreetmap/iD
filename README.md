@@ -10,17 +10,18 @@
 * It supports all popular modern desktop browsers: Chrome, Firefox, Safari,
   Opera, Edge, and IE11.
 * iD is not yet designed for mobile browsers, but this is something we hope to add!
-* Data is rendered with [d3.js](http://d3js.org/).
+* Data is rendered with [d3.js](https://d3js.org/).
 
 ## Participate!
 
 * Read the project [Code of Conduct](CODE_OF_CONDUCT.md) and remember to be nice to one another.
 * Read up on [Contributing and the code style of iD](CONTRIBUTING.md).
-* See [open issues in the issue tracker](https://github.com/openstreetmap/iD/issues?state=open) if you're looking for something to do.
+* See [open issues in the issue tracker](https://github.com/openstreetmap/iD/issues?state=open)
+if you're looking for something to do.
 * [Translate!](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating)
 * Test a prerelease version of iD:
-  * Stable mirror of `release` branch:  http://openstreetmap.us/iD/release
-  * Development mirror of `master` branch:  http://openstreetmap.us/iD/master
+  * Stable mirror of `release` branch:  http://preview.ideditor.com/release
+  * Development mirror of `master` branch + latest translations:  http://preview.ideditor.com/master
 
 Come on in, the water's lovely. More help? Ping `jfire` or `bhousel` on:
 * [OpenStreetMap US Slack](https://osmus-slack.herokuapp.com/)
@@ -31,7 +32,7 @@ Come on in, the water's lovely. More help? Ping `jfire` or `bhousel` on:
 
 ## Prerequisites
 
-* [Node.js](http://nodejs.org/) version 4 or newer
+* [Node.js](https://nodejs.org/) version 4 or newer
 * [`git`](https://www.atlassian.com/git/tutorials/install-git/) for your platform
   * Note for Windows users:
     * Edit `$HOME\.gitconfig`:<br/>
@@ -57,8 +58,8 @@ development, see [CONTRIBUTING.md](CONTRIBUTING.md).
 ## License
 
 iD is available under the [ISC License](https://opensource.org/licenses/ISC).
-It includes [d3.js](http://d3js.org/), which BSD-licensed.
+See the [LICENSE.md](LICENSE.md) file for more details.
 
 ## Thank you
 
-Initial development of iD was made possible by a [grant of the Knight Foundation](http://www.mapbox.com/blog/knight-invests-openstreetmap/).
+Initial development of iD was made possible by a [grant of the Knight Foundation](https://www.mapbox.com/blog/knight-invests-openstreetmap/).
