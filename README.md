@@ -16,11 +16,12 @@
 
 * Read the project [Code of Conduct](CODE_OF_CONDUCT.md) and remember to be nice to one another.
 * Read up on [Contributing and the code style of iD](CONTRIBUTING.md).
-* See [open issues in the issue tracker](https://github.com/openstreetmap/iD/issues?state=open) if you're looking for something to do.
+* See [open issues in the issue tracker](https://github.com/openstreetmap/iD/issues?state=open)
+if you're looking for something to do.
 * [Translate!](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating)
 * Test a prerelease version of iD:
-  * Stable mirror of `release` branch:  http://openstreetmap.us/iD/release
-  * Development mirror of `master` branch:  http://openstreetmap.us/iD/master
+  * Stable mirror of `release` branch:  http://preview.ideditor.com/release
+  * Development mirror of `master` branch + latest translations:  http://preview.ideditor.com/master
 
 Come on in, the water's lovely. More help? Ping `jfire` or `bhousel` on:
 * [OpenStreetMap US Slack](https://osmus-slack.herokuapp.com/)

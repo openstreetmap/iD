@@ -38,10 +38,11 @@ To request a feature:
 
 ## Verifying Bug Fixes
 
-To verify a bug fix (or test a new feature), use the [master deployment](http://www.openstreetmap.us/iD/master/)
-(http://www.openstreetmap.us/iD/master/), which is updated every 10 minutes with the latest code.
+To verify a bug fix (or test a new feature), use the [master deployment](http://preview.ideditor.com/master/)
+(http://preview.ideditor.com/master/), which is updated every 10 minutes with the
+latest code and translation strings.
 
-The deployments on openstreetmap.org and http://www.openstreetmap.us/iD/release/ are updated only
+The deployments on openstreetmap.org and http://preview.ideditor.com/release/ are updated only
 with stable releases. Issues that are marked fixed in the tracker may still be present.
 
 ## Translating
@@ -64,8 +65,11 @@ preset fields, and lists of search terms. You do _not_ need to translate the
 search terms literally -- use a set of synonyms and related terms appropriate
 to the target language, separated by commas.
 
-[iD translation project on
-Transifex](https://www.transifex.com/ideditor/id-editor/)
+You can check your translations in the [master deployment](http://preview.ideditor.com/master/)
+(http://preview.ideditor.com/master/), which is updated every 10 minutes with the
+latest code and translation strings.
+
+[iD translation project on Transifex](https://www.transifex.com/ideditor/id-editor/)
 
 To get notifications when translation source files change, click **Watch
 project** button near the bottom of the project page. You can edit your
@@ -107,7 +111,7 @@ Use `npm run build` to build the translations with the local changes.
 
 Documentation is maintained as a series of [Markdown](http://daringfireball.net/projects/markdown/)
 documents in [core.yaml](/data/core.yaml). The documentation
-is in the `help` section (currently starting at line 258). The first line
+is in the `help` section. The first line
 of each new section of documentation should be of the form
 
 ```markdown

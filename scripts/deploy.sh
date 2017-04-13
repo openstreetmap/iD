@@ -3,8 +3,8 @@
 # This is an example script that shows how to pull the latest version
 # of iD and replace the version string with a git short hash.
 #
-# We use this script to maintain the iD mirror at: http://openstreetmap.us/iD/master
-# It runs via cron job every 15 minutes.
+# We use this script to maintain the iD mirror at: http://preview.ideditor.com/master
+# It runs via cron job every 10 minutes.
 #
 # To use this on your own site, you'll want to change the `cp` and `chgrp`
 # lines at the end to match your web server's documentroot folder and security group.
