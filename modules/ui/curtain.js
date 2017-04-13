@@ -58,12 +58,16 @@ export function uiCurtain() {
         options = options || {};
 
         if (text) {
-            // pseudo markdown bold text hack
+            // pseudo markdown hacks
             var parts = text.split('**');
             var html = parts[0] ? '<span>' + parts[0] + '</span>' : '';
             if (parts[1]) {
-                html += '<span class="bold">' + parts[1] + '</span>';
+                html += '<span class="instruction">' + parts[1] + '</span>';
             }
+
+            // pseudo markdown bold text hack
+            html = html.replace(/\*(.*)\*/, '<em>$1</em>');
+
 
             if (options.buttonText && options.buttonCallback) {
                 html += '<div class="button-section">' +

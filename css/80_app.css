@@ -3660,8 +3660,11 @@ img.tile-removing {
     padding: 20px;
 }
 
-.curtain-tooltip .tooltip-inner .button-section,
 .curtain-tooltip .tooltip-inner .bold {
+}
+
+.curtain-tooltip .tooltip-inner .button-section,
+.curtain-tooltip .tooltip-inner .instruction {
     font-weight: bold;
     display: block;
     border-top: 1px solid #CCC;
@@ -3671,7 +3674,7 @@ img.tile-removing {
     padding: 10px 20px 0 20px;
 }
 
-.curtain-tooltip .tooltip-inner .bold:only-child {
+.curtain-tooltip .tooltip-inner .instruction:only-child {
     border: 0;
     padding: 0;
     margin: 0;
