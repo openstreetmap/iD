@@ -207,7 +207,7 @@ export function uiIntroArea(context, reveal) {
                         continueTo(retryChooseDescription);
                     else
                         continueTo(describePlayground);
-                }, 100);
+                }, 300);
             });
 
         function continueTo(nextStep) {
