@@ -75,9 +75,10 @@ export function behaviorSelect(context) {
 
 
         if (datum && datum.type === 'midpoint') {
-            // do nothing..
+            datum = datum.parents[0];
+        }
 
-        } else if (!(datum instanceof osmEntity)) {
+        if (!(datum instanceof osmEntity)) {
             // clicked nothing..
             if (!isMultiselect && mode.id !== 'browse') {
                 context.enter(modeBrowse(context));
