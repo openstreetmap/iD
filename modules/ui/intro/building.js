@@ -1,8 +1,9 @@
 import * as d3 from 'd3';
+import _ from 'lodash';
 import { t } from '../../util/locale';
 import { modeBrowse } from '../../modes/browse';
 import { utilRebind } from '../../util/rebind';
-import { icon, pad, selectMenuItem, transitionTime } from './helper';
+import { icon, pad, isMostlySquare, selectMenuItem, transitionTime } from './helper';
 
 
 export function uiIntroBuilding(context, reveal) {
@@ -125,17 +126,49 @@ export function uiIntroBuilding(context, reveal) {
         });
 
         context.on('enter.intro', function(mode) {
-            if (mode.id === 'draw-area')
+            if (mode.id === 'draw-area') {
                 return;
-            else if (mode.id === 'select')
-                return continueTo(chooseCategoryBuilding);
-            else
+            } else if (mode.id === 'select') {
+                var graph = context.graph(),
+                    way = context.entity(context.selectedIDs()[0]),
+                    nodes = graph.childNodes(way),
+                    points = _.uniq(nodes).map(function(n) { return context.projection(n.loc); });
+
+                if (isMostlySquare(points)) {
+                    houseId = way.id;
+                    return continueTo(chooseCategoryBuilding);
+                } else {
+                    return continueTo(retryHouse);
+                }
+
+            } else {
                 return chapter.restart();
+            }
         });
 
         function continueTo(nextStep) {
             context.map().on('move.intro drawn.intro', null);
             context.on('enter.intro', null);
+            nextStep();
+        }
+    }
+
+
+    function retryHouse() {
+        var onClick = function() { continueTo(addHouse); };
+
+        revealHouse(house, t('intro.buildings.retry_building'),
+            { buttonText: t('intro.ok'), buttonCallback: onClick }
+        );
+
+        context.map().on('move.intro drawn.intro', function() {
+            revealHouse(house, t('intro.buildings.retry_building'),
+                { duration: 0, buttonText: t('intro.ok'), buttonCallback: onClick }
+            );
+        });
+
+        function continueTo(nextStep) {
+            context.map().on('move.intro drawn.intro', null);
             nextStep();
         }
     }
@@ -201,7 +234,6 @@ export function uiIntroBuilding(context, reveal) {
             return chapter.restart();
         }
 
-        houseId = context.mode().selectedIDs()[0];
         context.history().checkpoint('hasHouse');
 
         context.on('exit.intro', function() {

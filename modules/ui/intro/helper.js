@@ -96,6 +96,55 @@ export function localize(obj) {
 }
 
 
+// Used to detect squareness.. some duplicataion of code from actionOrthogonalize.
+export function isMostlySquare(points) {
+    // note: uses 15 here instead of the 12 from actionOrthogonalize because
+    // actionOrthogonalize can actually straighten some larger angles as it iterates
+    var threshold = 15, // degrees within right or straight
+        lowerBound = Math.cos((90 - threshold) * Math.PI / 180),  // near right
+        upperBound = Math.cos(threshold * Math.PI / 180),         // near straight
+        mag;
+
+    for (var i = 0; i < points.length; i++) {
+        mag = Math.abs(normalizedDotProduct(i, points));
+        if (mag > lowerBound && mag < upperBound) {
+            return false;
+        }
+    }
+
+    return true;
+
+
+    function normalizedDotProduct(i, points) {
+        var a = points[(i - 1 + points.length) % points.length],
+            b = points[i],
+            c = points[(i + 1) % points.length],
+            p = subtractPoints(a, b),
+            q = subtractPoints(c, b);
+
+        p = normalizePoint(p);
+        q = normalizePoint(q);
+
+        return p[0] * q[0] + p[1] * q[1];
+
+
+        function subtractPoints(a, b) {
+            return [a[0] - b[0], a[1] - b[1]];
+        }
+
+        function normalizePoint(point) {
+            var vector = [0, 0];
+            var length = Math.sqrt(point[0] * point[0] + point[1] * point[1]);
+            if (length !== 0) {
+                vector[0] = point[0] / length;
+                vector[1] = point[1] / length;
+            }
+            return vector;
+        }
+    }
+}
+
+
 export function selectMenuItem(operation) {
     var selector = '.edit-menu .edit-menu-item-' + operation +
         ', .radial-menu .radial-menu-item-' + operation;
