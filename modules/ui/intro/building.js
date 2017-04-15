@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { t } from '../../util/locale';
-import { modeBrowse } from '../../modes/browse';
+import { modeBrowse, modeSelect } from '../../modes';
 import { utilRebind } from '../../util/rebind';
 import { icon, pad, isMostlySquare, selectMenuItem, transitionTime } from './helper';
 
@@ -49,9 +49,9 @@ export function uiIntroBuilding(context, reveal) {
 
 
     function addHouse() {
-        houseId = null;
-        tankId = null;
+        context.enter(modeBrowse(context));
         context.history().reset('initial');
+        houseId = null;
 
         var msec = transitionTime(house, context.map().center());
         if (msec) { reveal(null, null, { duration: 0 }); }
@@ -66,9 +66,6 @@ export function uiIntroBuilding(context, reveal) {
                 .attr('class', 'tooltip-illustration')
                 .append('use')
                 .attr('xlink:href', '#building-images');
-
-            houseId = null;
-            context.history().reset('initial');
 
             context.on('enter.intro', function(mode) {
                 if (mode.id !== 'add-area') return;
@@ -85,7 +82,7 @@ export function uiIntroBuilding(context, reveal) {
 
     function startHouse() {
         if (context.mode().id !== 'add-area') {
-            return chapter.restart();
+            return continueTo(addHouse);
         }
 
         houseId = null;
@@ -100,7 +97,7 @@ export function uiIntroBuilding(context, reveal) {
 
             context.on('enter.intro', function(mode) {
                 if (mode.id !== 'draw-area') return chapter.restart();
-                continueTo(drawHouse);
+                continueTo(continueHouse);
             });
 
         }, 550);  // after easing
@@ -113,12 +110,13 @@ export function uiIntroBuilding(context, reveal) {
     }
 
 
-    function drawHouse() {
+    function continueHouse() {
         if (context.mode().id !== 'draw-area') {
-            return chapter.restart();
+            return continueTo(addHouse);
         }
 
         houseId = null;
+
         revealHouse(house, t('intro.buildings.continue_building'));
 
         context.map().on('move.intro drawn.intro', function() {
@@ -175,51 +173,83 @@ export function uiIntroBuilding(context, reveal) {
 
 
     function chooseCategoryBuilding() {
-        if (context.mode().id !== 'select') {
-            return chapter.restart();
+        if (!houseId || !context.hasEntity(houseId)) {
+            return addHouse();
+        }
+        var ids = context.selectedIDs();
+        if (context.mode().id !== 'select' || !ids.length || ids[0] !== houseId) {
+            context.enter(modeSelect(context, [houseId]));
         }
 
-        context.on('exit.intro', function() {
-            return chapter.restart();
-        });
-
-        var button = d3.select('.preset-category-building .preset-list-button');
-        if (button.empty()) return chapter.restart();
-
         timeout(function() {
+            // reset pane, in case user somehow happened to change it..
+            d3.select('.inspector-wrap .panewrap').style('right', '-100%');
+
+            var button = d3.select('.preset-category-building .preset-list-button');
+
             reveal(button.node(),
                 t('intro.buildings.choose_category_building', { category: buildingCatetory.name() })
             );
-            button.on('click.intro', function() { continueTo(choosePresetHouse); });
-        }, 500);
+
+            button.on('click.intro', function() {
+                continueTo(choosePresetHouse);
+            });
+
+        }, 400);  // after preset list pane visible..
+
+
+        context.on('enter.intro', function(mode) {
+            if (!houseId || !context.hasEntity(houseId)) {
+                return continueTo(addHouse);
+            }
+            var ids = context.selectedIDs();
+            if (mode.id !== 'select' || !ids.length || ids[0] !== houseId) {
+                return continueTo(chooseCategoryBuilding);
+            }
+        });
 
         function continueTo(nextStep) {
             d3.select('.preset-list-button').on('click.intro', null);
-            context.on('exit.intro', null);
+            context.on('enter.intro', null);
             nextStep();
         }
     }
 
 
     function choosePresetHouse() {
-        if (context.mode().id !== 'select') {
-            return chapter.restart();
+        if (!houseId || !context.hasEntity(houseId)) {
+            return addHouse();
+        }
+        var ids = context.selectedIDs();
+        if (context.mode().id !== 'select' || !ids.length || ids[0] !== houseId) {
+            context.enter(modeSelect(context, [houseId]));
         }
 
-        context.on('exit.intro', function() {
-            return chapter.restart();
-        });
-
-        var button = d3.select('.preset-building-house .preset-list-button');
-        if (button.empty()) return chapter.restart();
-
         timeout(function() {
+            // reset pane, in case user somehow happened to change it..
+            d3.select('.inspector-wrap .panewrap').style('right', '-100%');
+
+            var button = d3.select('.preset-building-house .preset-list-button');
+
             reveal(button.node(),
                 t('intro.buildings.choose_preset_house', { preset: housePreset.name() }),
                 { duration: 300 }
             );
-            button.on('click.intro', function() { continueTo(closeEditorHouse); });
-        }, 300);
+
+            button.on('click.intro', function() {
+                continueTo(closeEditorHouse);
+            });
+        }, 400);  // after preset list pane visible..
+
+        context.on('enter.intro', function(mode) {
+            if (!houseId || !context.hasEntity(houseId)) {
+                return continueTo(addHouse);
+            }
+            var ids = context.selectedIDs();
+            if (mode.id !== 'select' || !ids.length || ids[0] !== houseId) {
+                return continueTo(chooseCategoryBuilding);
+            }
+        });
 
         function continueTo(nextStep) {
             d3.select('.preset-list-button').on('click.intro', null);
@@ -230,8 +260,12 @@ export function uiIntroBuilding(context, reveal) {
 
 
     function closeEditorHouse() {
-        if (context.mode().id !== 'select') {
-            return chapter.restart();
+        if (!houseId || !context.hasEntity(houseId)) {
+            return addHouse();
+        }
+        var ids = context.selectedIDs();
+        if (context.mode().id !== 'select' || !ids.length || ids[0] !== houseId) {
+            context.enter(modeSelect(context, [houseId]));
         }
 
         context.history().checkpoint('hasHouse');
@@ -379,8 +413,9 @@ export function uiIntroBuilding(context, reveal) {
 
 
     function addTank() {
-        tankId = null;
+        context.enter(modeBrowse(context));
         context.history().reset('doneSquare');
+        tankId = null;
 
         var msec = transitionTime(tank, context.map().center());
         if (msec) { reveal(null, null, { duration: 0 }); }
@@ -420,7 +455,7 @@ export function uiIntroBuilding(context, reveal) {
 
             context.on('enter.intro', function(mode) {
                 if (mode.id !== 'draw-area') return chapter.restart();
-                continueTo(drawTank);
+                continueTo(continueTank);
             });
 
         }, 550);  // after easing
@@ -433,10 +468,12 @@ export function uiIntroBuilding(context, reveal) {
     }
 
 
-    function drawTank() {
+    function continueTank() {
         if (context.mode().id !== 'draw-area') {
             return continueTo(addTank);
         }
+
+        tankId = null;
 
         revealTank(tank, t('intro.buildings.continue_tank'));
 
@@ -445,12 +482,14 @@ export function uiIntroBuilding(context, reveal) {
         });
 
         context.on('enter.intro', function(mode) {
-            if (mode.id === 'draw-area')
+            if (mode.id === 'draw-area') {
                 return;
-            else if (mode.id === 'select')
+            } else if (mode.id === 'select') {
+                tankId = context.selectedIDs()[0];
                 return continueTo(searchPresetTank);
-            else
+            } else {
                 return continueTo(addTank);
+            }
         });
 
         function continueTo(nextStep) {
@@ -462,64 +501,89 @@ export function uiIntroBuilding(context, reveal) {
 
 
     function searchPresetTank() {
-        if (context.mode().id !== 'select') {
-            return continueTo(addTank);
+        if (!tankId || !context.hasEntity(tankId)) {
+            return addTank();
+        }
+        var ids = context.selectedIDs();
+        if (context.mode().id !== 'select' || !ids.length || ids[0] !== tankId) {
+            context.enter(modeSelect(context, [tankId]));
         }
 
-        context.on('exit.intro', function() {
-            return continueTo(addTank);
-        });
-
-        d3.select('.preset-search-input')
-            .on('keyup.intro', checkPresetSearch);
-
         timeout(function() {
+            // reset pane, in case user somehow happened to change it..
+            d3.select('.inspector-wrap .panewrap').style('right', '-100%');
+
+            d3.select('.preset-search-input')
+                .on('keydown.intro', null)
+                .on('keyup.intro', checkPresetSearch);
+
             reveal('.preset-search-input',
                 t('intro.buildings.search_tank', { preset: tankPreset.name() })
             );
-        }, 500);
+        }, 400);  // after preset list pane visible..
+
+        context.on('enter.intro', function(mode) {
+            if (!tankId || !context.hasEntity(tankId)) {
+                return continueTo(addTank);
+            }
+
+            var ids = context.selectedIDs();
+            if (mode.id !== 'select' || !ids.length || ids[0] !== tankId) {
+                // keep the user's area selected..
+                context.enter(modeSelect(context, [tankId]));
+
+                // reset pane, in case user somehow happened to change it..
+                d3.select('.inspector-wrap .panewrap').style('right', '-100%');
+
+                d3.select('.preset-search-input')
+                    .on('keydown.intro', null)
+                    .on('keyup.intro', checkPresetSearch);
+
+                reveal('.preset-search-input',
+                    t('intro.buildings.search_tank', { preset: tankPreset.name() })
+                );
+
+                context.history().on('change.intro', null);
+            }
+        });
+
+        function checkPresetSearch() {
+            var first = d3.select('.preset-list-item:first-child');
+
+            if (first.classed('preset-man_made-storage_tank')) {
+                reveal(first.select('.preset-list-button').node(),
+                    t('intro.buildings.choose_tank', { preset: tankPreset.name() }),
+                    { duration: 300 }
+                );
+
+                d3.select('.preset-search-input')
+                    .on('keydown.intro', eventCancel, true)
+                    .on('keyup.intro', null);
+
+                context.history().on('change.intro', function() {
+                    continueTo(closeEditorTank);
+                });
+            }
+        }
 
         function continueTo(nextStep) {
-            context.on('exit.intro', null);
-            d3.select('.preset-search-input').on('keyup.intro', null);
-            nextStep();
-        }
-    }
-
-
-    function checkPresetSearch() {
-        var first = d3.select('.preset-list-item:first-child');
-
-        if (first.classed('preset-man_made-storage_tank')) {
-            reveal(first.select('.preset-list-button').node(),
-                t('intro.buildings.choose_tank', { preset: tankPreset.name() }),
-                { duration: 300 }
-            );
-
-            d3.select('.preset-search-input')
-                .on('keydown.intro', eventCancel, true)
-                .on('keyup.intro', null);
-
-            context.history().on('change.intro', function() {
-                continueTo(closeEditorTank);
-            });
-        }
-
-        function continueTo(nextStep) {
-            context.on('exit.intro', null);
+            context.on('enter.intro', null);
             context.history().on('change.intro', null);
-            d3.select('.preset-search-input').on('keydown.intro', null);
+            d3.select('.preset-search-input').on('keydown.intro keyup.intro', null);
             nextStep();
         }
     }
 
 
     function closeEditorTank() {
-        if (context.mode().id !== 'select') {
-            return continueTo(addTank);
+        if (!tankId || !context.hasEntity(tankId)) {
+            return addTank();
+        }
+        var ids = context.selectedIDs();
+        if (context.mode().id !== 'select' || !ids.length || ids[0] !== tankId) {
+            context.enter(modeSelect(context, [tankId]));
         }
 
-        tankId = context.mode().selectedIDs()[0];
         context.history().checkpoint('hasTank');
 
         context.on('exit.intro', function() {
@@ -560,6 +624,7 @@ export function uiIntroBuilding(context, reveal) {
             });
 
             revealTank(tank, t('intro.buildings.rightclick_tank'));
+
             context.map().on('move.intro drawn.intro', function() {
                 revealTank(tank, t('intro.buildings.rightclick_tank'), { duration: 0 });
             });
@@ -668,8 +733,7 @@ export function uiIntroBuilding(context, reveal) {
 
     chapter.exit = function() {
         timeouts.forEach(window.clearTimeout);
-        context.on('enter.intro', null);
-        context.on('exit.intro', null);
+        context.on('enter.intro exit.intro', null);
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
         d3.select('.preset-search-input').on('keydown.intro keyup.intro', null);

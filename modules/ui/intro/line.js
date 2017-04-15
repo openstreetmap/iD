@@ -50,6 +50,7 @@ export function uiIntroLine(context, reveal) {
 
 
     function addLine() {
+        context.enter(modeBrowse(context));
         context.history().reset('initial');
 
         var msec = transitionTime(tulipRoadStart, context.map().center());
@@ -1047,8 +1048,7 @@ export function uiIntroLine(context, reveal) {
     chapter.exit = function() {
         timeouts.forEach(window.clearTimeout);
         d3.select(window).on('mousedown.intro', null, true);
-        context.on('enter.intro', null);
-        context.on('exit.intro', null);
+        context.on('enter.intro exit.intro', null);
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
         d3.select('.preset-list-button').on('click.intro', null);

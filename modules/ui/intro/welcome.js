@@ -14,14 +14,14 @@ export function uiIntroWelcome(context, reveal) {
 
     function welcome() {
         context.map().centerZoom([-85.63591, 41.94285], 19);
-        reveal('.intro-nav-wrap',
+        reveal('.intro-nav-wrap .chapter-welcome',
             t('intro.welcome.welcome'),
             { buttonText: t('intro.ok'), buttonCallback: practice }
         );
     }
 
     function practice() {
-        reveal('.intro-nav-wrap',
+        reveal('.intro-nav-wrap .chapter-welcome',
             t('intro.welcome.practice'),
             { buttonText: t('intro.ok'), buttonCallback: chapters }
         );

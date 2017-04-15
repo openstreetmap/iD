@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
 import { t, textDirection } from '../../util/locale';
+import { modeBrowse, modeSelect } from '../../modes';
 import { utilRebind } from '../../util/rebind';
 import { icon, pointBox, pad, selectMenuItem, transitionTime } from './helper';
 
@@ -30,6 +31,7 @@ export function uiIntroPoint(context, reveal) {
 
 
     function addPoint() {
+        context.enter(modeBrowse(context));
         context.history().reset('initial');
 
         var msec = transitionTime(intersection, context.map().center());
@@ -76,6 +78,7 @@ export function uiIntroPoint(context, reveal) {
 
         context.on('enter.intro', function(mode) {
             if (mode.id !== 'select') return chapter.restart();
+            pointId = context.mode().selectedIDs()[0];
             continueTo(searchPreset);
         });
 
@@ -88,58 +91,73 @@ export function uiIntroPoint(context, reveal) {
 
 
     function searchPreset() {
-        if (context.mode().id !== 'select') {
-            return chapter.restart();
+        if (context.mode().id !== 'select' || !pointId || !context.hasEntity(pointId)) {
+            return addPoint();
         }
 
-        pointId = context.mode().selectedIDs()[0];
-
-        context.on('exit.intro', function() {
-            return chapter.restart();
-        });
-
         d3.select('.preset-search-input')
+            .on('keydown.intro', null)
             .on('keyup.intro', checkPresetSearch);
 
-        timeout(function() {
-            reveal('.preset-search-input',
-                t('intro.points.search_cafe', { preset: cafePreset.name() })
-            );
-        }, 500);
-    }
+        reveal('.preset-search-input',
+            t('intro.points.search_cafe', { preset: cafePreset.name() })
+        );
+
+        context.on('enter.intro', function(mode) {
+            if (!pointId || !context.hasEntity(pointId)) {
+                return continueTo(addPoint);
+            }
+
+            var ids = context.selectedIDs();
+            if (mode.id !== 'select' || !ids.length || ids[0] !== pointId) {
+                // keep the user's point selected..
+                context.enter(modeSelect(context, [pointId]));
+
+                d3.select('.preset-search-input')
+                    .on('keydown.intro', null)
+                    .on('keyup.intro', checkPresetSearch);
+
+                reveal('.preset-search-input',
+                    t('intro.points.search_cafe', { preset: cafePreset.name() })
+                );
+
+                context.history().on('change.intro', null);
+            }
+        });
 
 
-    function checkPresetSearch() {
-        var first = d3.select('.preset-list-item:first-child');
+        function checkPresetSearch() {
+            var first = d3.select('.preset-list-item:first-child');
 
-        if (first.classed('preset-amenity-cafe')) {
-            reveal(first.select('.preset-list-button').node(),
-                t('intro.points.choose_cafe', { preset: cafePreset.name() }),
-                { duration: 300 }
-            );
+            if (first.classed('preset-amenity-cafe')) {
+                d3.select('.preset-search-input')
+                    .on('keydown.intro', eventCancel, true)
+                    .on('keyup.intro', null);
 
-            d3.select('.preset-search-input')
-                .on('keydown.intro', eventCancel, true)
-                .on('keyup.intro', null);
+                reveal(first.select('.preset-list-button').node(),
+                    t('intro.points.choose_cafe', { preset: cafePreset.name() }),
+                    { duration: 300 }
+                );
 
-            context.history().on('change.intro', function() {
-                continueTo(aboutFeatureEditor);
-            });
+                context.history().on('change.intro', function() {
+                    continueTo(aboutFeatureEditor);
+                });
+            }
         }
 
         function continueTo(nextStep) {
-            context.on('exit.intro', null);
+            context.on('enter.intro', null);
             context.history().on('change.intro', null);
-            d3.select('.preset-search-input').on('keydown.intro', null);
+            d3.select('.preset-search-input').on('keydown.intro keyup.intro', null);
             nextStep();
         }
     }
 
 
     function aboutFeatureEditor() {
-        context.on('exit.intro', function() {
-            return chapter.restart();
-        });
+        if (context.mode().id !== 'select' || !pointId || !context.hasEntity(pointId)) {
+            return addPoint();
+        }
 
         timeout(function() {
             reveal('.entity-editor-pane', t('intro.points.feature_editor'), {
@@ -149,6 +167,11 @@ export function uiIntroPoint(context, reveal) {
             });
         }, 400);
 
+        context.on('exit.intro', function() {
+            // if user leaves select mode here, just continue with the tutorial.
+            continueTo(reselectPoint);
+        });
+
         function continueTo(nextStep) {
             context.on('exit.intro', null);
             nextStep();
@@ -157,19 +180,27 @@ export function uiIntroPoint(context, reveal) {
 
 
     function addName() {
-        context.on('exit.intro', function() {
-            return chapter.restart();
-        });
+        if (context.mode().id !== 'select' || !pointId || !context.hasEntity(pointId)) {
+            return addPoint();
+        }
 
-        context.history().on('change.intro', function() {
-            continueTo(addCloseEditor);
-        });
+        // reset pane, in case user happened to change it..
+        d3.select('.inspector-wrap .panewrap').style('right', '0%');
 
         timeout(function() {
             reveal('.entity-editor-pane', t('intro.points.add_name'),
                 { tooltipClass: 'intro-points-describe' }
             );
         }, 400);
+
+        context.history().on('change.intro', function() {
+            continueTo(addCloseEditor);
+        });
+
+        context.on('exit.intro', function() {
+            // if user leaves select mode here, just continue with the tutorial.
+            continueTo(reselectPoint);
+        });
 
         function continueTo(nextStep) {
             context.on('exit.intro', null);
@@ -180,12 +211,18 @@ export function uiIntroPoint(context, reveal) {
 
 
     function addCloseEditor() {
+        // reset pane, in case user happened to change it..
+        d3.select('.inspector-wrap .panewrap').style('right', '0%');
+
+        var selector = '.entity-editor-pane button.preset-close svg use';
+        var href = d3.select(selector).attr('href') || '#icon-close';
+
         context.on('exit.intro', function() {
             continueTo(reselectPoint);
         });
 
         reveal('.entity-editor-pane',
-            t('intro.points.add_close', { button: icon('#icon-apply', 'pre-text') })
+            t('intro.points.add_close', { button: icon(href, 'pre-text') })
         );
 
         function continueTo(nextStep) {
@@ -199,6 +236,8 @@ export function uiIntroPoint(context, reveal) {
         if (!pointId) return chapter.restart();
         var entity = context.hasEntity(pointId);
         if (!entity) return chapter.restart();
+
+        context.enter(modeBrowse(context));
 
         var msec = transitionTime(entity.loc, context.map().center());
         if (msec) { reveal(null, null, { duration: 0 }); }
@@ -231,6 +270,13 @@ export function uiIntroPoint(context, reveal) {
 
 
     function updatePoint() {
+        if (context.mode().id !== 'select' || !pointId || !context.hasEntity(pointId)) {
+            return continueTo(reselectPoint);
+        }
+
+        // reset pane, in case user happened to untag the point..
+        d3.select('.inspector-wrap .panewrap').style('right', '0%');
+
         context.on('exit.intro', function() {
             continueTo(reselectPoint);
         });
@@ -254,9 +300,12 @@ export function uiIntroPoint(context, reveal) {
 
 
     function updateCloseEditor() {
-        if (context.mode().id !== 'select') {
+        if (context.mode().id !== 'select' || !pointId || !context.hasEntity(pointId)) {
             return continueTo(reselectPoint);
         }
+
+        // reset pane, in case user happened to change it..
+        d3.select('.inspector-wrap .panewrap').style('right', '0%');
 
         context.on('exit.intro', function() {
             continueTo(rightClickPoint);
@@ -279,6 +328,8 @@ export function uiIntroPoint(context, reveal) {
         if (!pointId) return chapter.restart();
         var entity = context.hasEntity(pointId);
         if (!entity) return chapter.restart();
+
+        context.enter(modeBrowse(context));
 
         var box = pointBox(entity.loc, context);
         reveal(box, t('intro.points.rightclick'));
@@ -339,8 +390,9 @@ export function uiIntroPoint(context, reveal) {
         });
 
         context.history().on('change.intro', function(changed) {
-            if (changed.deleted().length)
+            if (changed.deleted().length) {
                 continueTo(undo);
+            }
         });
 
         function continueTo(nextStep) {
@@ -388,8 +440,7 @@ export function uiIntroPoint(context, reveal) {
 
     chapter.exit = function() {
         timeouts.forEach(window.clearTimeout);
-        context.on('exit.intro', null);
-        context.on('enter.intro', null);
+        context.on('enter.intro exit.intro', null);
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
         d3.select('.preset-search-input').on('keydown.intro keyup.intro', null);

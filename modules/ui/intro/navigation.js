@@ -10,7 +10,6 @@ export function uiIntroNavigation(context, reveal) {
         timeouts = [],
         hallId = 'n2061',
         townHall = [-85.63591, 41.94285],
-        townHallPreset = context.presets().item('amenity/townhall'),
         springStreetId = 'w397',
         springStreetEndId = 'n1834',
         springStreet = [-85.63582, 41.94255];
@@ -50,6 +49,7 @@ export function uiIntroNavigation(context, reveal) {
 
 
     function dragMap() {
+        context.enter(modeBrowse(context));
         context.history().reset('initial');
 
         var msec = transitionTime(townHall, context.map().center());
@@ -212,6 +212,11 @@ export function uiIntroNavigation(context, reveal) {
 
         var onClick = function() { continueTo(presetTownHall); };
 
+        reveal('.entity-editor-pane',
+            t('intro.navigation.editor_townhall'),
+            { buttonText: t('intro.ok'), buttonCallback: onClick }
+        );
+
         context.on('exit.intro', function() {
             continueTo(clickTownHall);
         });
@@ -221,11 +226,6 @@ export function uiIntroNavigation(context, reveal) {
                 continueTo(clickTownHall);
             }
         });
-
-        reveal('.entity-editor-pane',
-            t('intro.navigation.editor_townhall'),
-            { buttonText: t('intro.ok'), buttonCallback: onClick }
-        );
 
         function continueTo(nextStep) {
             context.on('exit.intro', null);
@@ -237,6 +237,13 @@ export function uiIntroNavigation(context, reveal) {
 
     function presetTownHall() {
         if (!isTownHallSelected()) return clickTownHall();
+
+        // reset pane, in case user happened to change it..
+        d3.select('.inspector-wrap .panewrap').style('right', '0%');
+
+        // preset match, in case the user happened to change it.
+        var entity = context.entity(context.selectedIDs()[0]);
+        var preset = context.presets().match(entity, context.graph());
 
         var onClick = function() { continueTo(fieldsTownHall); };
 
@@ -251,7 +258,7 @@ export function uiIntroNavigation(context, reveal) {
         });
 
         reveal('.inspector-body .preset-list-item.inspector-inner',
-            t('intro.navigation.preset_townhall', { preset: townHallPreset.name() }),
+            t('intro.navigation.preset_townhall', { preset: preset.name() }),
             { buttonText: t('intro.ok'), buttonCallback: onClick }
         );
 
@@ -266,7 +273,15 @@ export function uiIntroNavigation(context, reveal) {
     function fieldsTownHall() {
         if (!isTownHallSelected()) return clickTownHall();
 
+        // reset pane, in case user happened to change it..
+        d3.select('.inspector-wrap .panewrap').style('right', '0%');
+
         var onClick = function() { continueTo(closeTownHall); };
+
+        reveal('.inspector-body .inspector-preset',
+            t('intro.navigation.fields_townhall'),
+            { buttonText: t('intro.ok'), buttonCallback: onClick }
+        );
 
         context.on('exit.intro', function() {
             continueTo(clickTownHall);
@@ -277,11 +292,6 @@ export function uiIntroNavigation(context, reveal) {
                 continueTo(clickTownHall);
             }
         });
-
-        reveal('.inspector-body .inspector-preset',
-            t('intro.navigation.fields_townhall'),
-            { buttonText: t('intro.ok'), buttonCallback: onClick }
-        );
 
         function continueTo(nextStep) {
             context.on('exit.intro', null);
@@ -294,16 +304,6 @@ export function uiIntroNavigation(context, reveal) {
     function closeTownHall() {
         if (!isTownHallSelected()) return clickTownHall();
 
-        context.on('exit.intro', function() {
-            continueTo(searchStreet);
-        });
-
-        context.history().on('change.intro', function() {
-            if (!context.hasEntity(hallId)) {
-                continueTo(clickTownHall);
-            }
-        });
-
         var selector = '.entity-editor-pane button.preset-close svg use';
         var href = d3.select(selector).attr('href') || '#icon-close';
 
@@ -311,9 +311,12 @@ export function uiIntroNavigation(context, reveal) {
             t('intro.navigation.close_townhall', { button: icon(href, 'pre-text') })
         );
 
+        context.on('exit.intro', function() {
+            continueTo(searchStreet);
+        });
+
         function continueTo(nextStep) {
             context.on('exit.intro', null);
-            context.history().on('change.intro', null);
             nextStep();
         }
     }
@@ -395,7 +398,11 @@ export function uiIntroNavigation(context, reveal) {
         });
 
         context.on('enter.intro', function(mode) {
-            if (mode.id !== 'select') {
+            if (!context.hasEntity(springStreetId)) {
+                return continueTo(searchStreet);
+            }
+            var ids = context.selectedIDs();
+            if (mode.id !== 'select' || !ids.length || ids[0] !== springStreetId) {
                 // keep Spring Street selected..
                 context.enter(modeSelect(context, [springStreetId]));
             }
@@ -457,13 +464,10 @@ export function uiIntroNavigation(context, reveal) {
 
     chapter.exit = function() {
         timeouts.forEach(window.clearTimeout);
-        d3.select(window).on('mouseup.intro', null, true);
+        context.on('enter.intro exit.intro', null);
         context.map().on('move.intro drawn.intro', null);
-        context.on('enter.intro', null);
-        context.on('exit.intro', null);
-        d3.select('.search-header input')
-            .on('keydown.intro', null)
-            .on('keyup.intro', null);
+        context.history().on('change.intro', null);
+        d3.select('.search-header input').on('keydown.intro keyup.intro', null);
     };
 
 
