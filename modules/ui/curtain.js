@@ -51,13 +51,24 @@ export function uiCurtain() {
     }
 
 
+    /**
+     * Reveal cuts the curtain to highlight the given box,
+     * and shows a tooltip with instructions next to the box.
+     *
+     * @param  {String|ClientRect} [box]   box to focus on
+     * @param  {String}    [text]  text for a tooltip
+     * @param  {Object}    [options]
+     * @param  {integer}   [options.duration]  transition time in milliseconds
+     * @param  {string}    [options.buttonText]  if set, create a button with this text label
+     * @param  {function}  [options.buttonCallback]  if set, the callback for the button
+     */
     curtain.reveal = function(box, text, options) {
         if (typeof box === 'string') box = d3.select(box).node();
         if (box && box.getBoundingClientRect) box = copyBox(box.getBoundingClientRect());
 
         options = options || {};
 
-        if (text) {
+        if (box && text) {
             // pseudo markdown hacks
             var parts = text.split('**');
             var html = parts[0] ? '<span>' + parts[0] + '</span>' : '';
@@ -66,7 +77,7 @@ export function uiCurtain() {
             }
 
             // pseudo markdown bold text hack
-            html = html.replace(/\*(.*)\*/, '<em>$1</em>');
+            html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
 
 
             if (options.buttonText && options.buttonCallback) {
