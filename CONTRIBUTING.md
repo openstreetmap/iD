@@ -94,7 +94,7 @@ These are separate translations for uniformity reasons and because some language
  may translate "type" differently in "type of aeroway" and "type of amenity", for
  example.
 
-## Adding New Strings for Translation
+## Adding New Strings for Translation or Updating Existing Strings
 
 iD translates strings with a `t` function - `t('foo.bar')` translate the key
 `foo.bar` into the current language. If you introduce new translatable strings
@@ -102,6 +102,10 @@ to iD, only display them in the interface through the `t()` function.
 
 Then, add the new string to `data/core.yaml`. The translation system, Transifex,
 will automatically detect the change.
+
+If you are updating an existing string, update it in `data/core/yaml` and run 
+`npm run build` to generate the `en.json` file automatically, then commit both 
+modified files.
 
 Use `npm run build` to build the translations with the local changes.
 
