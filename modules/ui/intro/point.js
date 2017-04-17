@@ -25,6 +25,24 @@ export function uiIntroPoint(context, reveal) {
     }
 
 
+    function revealEditMenu(loc, text, options) {
+        var rect = context.surfaceRect();
+        var point = context.curtainProjection(loc);
+        var pad = 40;
+        var width = 250 + (2 * pad);
+        var height = 250;
+        var startX = rect.left + point[0];
+        var left = (textDirection === 'rtl') ? (startX - width + pad) : (startX - pad);
+        var box = {
+            left: left,
+            top: point[1] + rect.top - 60,
+            width: width,
+            height: height
+        };
+        reveal(box, text, options);
+    }
+
+
     function eventCancel() {
         d3.event.stopPropagation();
         d3.event.preventDefault();
@@ -382,22 +400,21 @@ export function uiIntroPoint(context, reveal) {
         var entity = context.hasEntity(pointId);
         if (!entity) return chapter.restart();
 
-        var node = d3.select('.edit-menu-item-delete, .radial-menu-item-delete').node();
-        if (!node) {
-            return continueTo(rightClickPoint);
-        } else {
-            var rect = context.surfaceRect();
-            var point = context.curtainProjection(entity.loc);
-            var box = {
-                left: point[0] + rect.left - 40,
-                top: point[1] + rect.top - 60,
-                width: 150,
-                height: 150
-            };
-            reveal(box,
-                t('intro.points.delete', { button: icon('#operation-delete', 'pre-text') })
-            );
-        }
+        var node = selectMenuItem('delete').node();
+        if (!node) { return continueTo(rightClickPoint); }
+
+        revealEditMenu(entity.loc,
+            t('intro.points.delete', { button: icon('#operation-delete', 'pre-text') })
+        );
+
+        timeout(function() {
+            context.map().on('move.intro drawn.intro', function() {
+                revealEditMenu(entity.loc,
+                    t('intro.points.delete', { button: icon('#operation-delete', 'pre-text') }),
+                    { duration: 0}
+                );
+            });
+        }, 300); // after menu visible
 
         context.on('exit.intro', function() {
             if (!pointId) return chapter.restart();
@@ -412,6 +429,7 @@ export function uiIntroPoint(context, reveal) {
         });
 
         function continueTo(nextStep) {
+            context.map().on('move.intro drawn.intro', null);
             context.history().on('change.intro', null);
             context.on('exit.intro', null);
             nextStep();

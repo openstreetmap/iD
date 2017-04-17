@@ -3660,9 +3660,6 @@ img.tile-removing {
     padding: 20px;
 }
 
-.curtain-tooltip .tooltip-inner .bold {
-}
-
 .curtain-tooltip .tooltip-inner .button-section,
 .curtain-tooltip .tooltip-inner .instruction {
     font-weight: bold;
@@ -3674,6 +3671,10 @@ img.tile-removing {
     padding: 10px 20px 0 20px;
 }
 
+[dir='rtl'] .curtain-tooltip .tooltip-inner .button-section button.col8 {
+    float: right;
+}
+
 .curtain-tooltip .tooltip-inner .instruction:only-child {
     border: 0;
     padding: 0;
@@ -3683,6 +3684,7 @@ img.tile-removing {
 .curtain-tooltip .tooltip-inner .icon.pre-text {
     vertical-align: text-top;
     margin-right: 0;
+    margin-left: 0;
     display: inline-block;
 }
 

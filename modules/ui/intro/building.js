@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { t } from '../../util/locale';
+import { t, textDirection } from '../../util/locale';
 import { modeBrowse, modeSelect } from '../../modes';
 import { utilRebind } from '../../util/rebind';
 import { icon, pad, isMostlySquare, selectMenuItem, transitionTime } from './helper';
@@ -44,6 +44,24 @@ export function uiIntroBuilding(context, reveal) {
     function revealTank(center, text, options) {
         var padding = 190 * Math.pow(2, context.map().zoom() - 19.5);
         var box = pad(center, padding, context);
+        reveal(box, text, options);
+    }
+
+
+    function revealEditMenu(loc, text, options) {
+        var rect = context.surfaceRect();
+        var point = context.curtainProjection(loc);
+        var pad = 40;
+        var width = 250 + (2 * pad);
+        var height = 350;
+        var startX = rect.left + point[0];
+        var left = (textDirection === 'rtl') ? (startX - width + pad) : (startX - pad);
+        var box = {
+            left: left,
+            top: point[1] + rect.top - 60,
+            width: width,
+            height: height
+        };
         reveal(box, text, options);
     }
 
@@ -192,6 +210,7 @@ export function uiIntroBuilding(context, reveal) {
             );
 
             button.on('click.intro', function() {
+                button.on('click.intro', null);
                 continueTo(choosePresetHouse);
             });
 
@@ -237,6 +256,7 @@ export function uiIntroBuilding(context, reveal) {
             );
 
             button.on('click.intro', function() {
+                button.on('click.intro', null);
                 continueTo(closeEditorHouse);
             });
         }, 400);  // after preset list pane visible..
@@ -253,7 +273,7 @@ export function uiIntroBuilding(context, reveal) {
 
         function continueTo(nextStep) {
             d3.select('.preset-list-button').on('click.intro', null);
-            context.on('exit.intro', null);
+            context.on('enter.intro', null);
             nextStep();
         }
     }
@@ -338,8 +358,9 @@ export function uiIntroBuilding(context, reveal) {
         if (!node) { return continueTo(rightClickHouse); }
 
         var wasChanged = false;
+        var menuCoords = context.map().mouseCoordinates();
 
-        revealHouse(house,
+        revealEditMenu(menuCoords,
             t('intro.buildings.square_building', { button: icon('#operation-orthogonalize', 'pre-text') })
         );
 
@@ -355,7 +376,7 @@ export function uiIntroBuilding(context, reveal) {
             var node = selectMenuItem('orthogonalize').node();
             if (!wasChanged && !node) { return continueTo(rightClickHouse); }
 
-            revealHouse(house,
+            revealEditMenu(menuCoords,
                 t('intro.buildings.square_building', { button: icon('#operation-orthogonalize', 'pre-text') }),
                 { duration: 0 }
             );
@@ -653,8 +674,9 @@ export function uiIntroBuilding(context, reveal) {
         if (!node) { return continueTo(rightClickTank); }
 
         var wasChanged = false;
+        var menuCoords = context.map().mouseCoordinates();
 
-        revealTank(tank,
+        revealEditMenu(menuCoords,
             t('intro.buildings.circle_tank', { button: icon('#operation-circularize', 'pre-text') })
         );
 
@@ -670,7 +692,7 @@ export function uiIntroBuilding(context, reveal) {
             var node = selectMenuItem('circularize').node();
             if (!wasChanged && !node) { return continueTo(rightClickTank); }
 
-            revealTank(tank,
+            revealEditMenu(menuCoords,
                 t('intro.buildings.circle_tank', { button: icon('#operation-circularize', 'pre-text') }),
                 { duration: 0 }
             );
