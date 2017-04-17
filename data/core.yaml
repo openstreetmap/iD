@@ -988,7 +988,7 @@ en:
       done_square: "See how the corners of the building moved into place? Let's learn another useful trick."
       add_tank: "Next we'll trace this circular storage tank. **Click the {button} Area button to add a new area.**"
       start_tank: "Don't worry, you won't need to draw a perfect circle. Just draw an area inside the tank that touches its edge. **Click or press spacebar to place a starting node on the edge of the tank.**"
-      continue_tank: "Add a few more points around the edge. The circle will be created outside the points that you draw. Finish the area by pressing return, or clicking again on either the first or last node. **Finish tracing the tank.**"
+      continue_tank: "Add a few more nodes around the edge. The circle will be created outside the nodes that you draw. Finish the area by pressing return, or clicking again on either the first or last node. **Finish tracing the tank.**"
       search_tank: "**Search for '{preset}'**"
       choose_tank: "**Choose {preset} from the list.**"
       rightclick_tank: "**Right-click to select the storage tank you created and show the edit menu.**"
