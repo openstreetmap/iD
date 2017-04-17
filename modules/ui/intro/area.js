@@ -216,6 +216,13 @@ export function uiIntroArea(context, reveal) {
             // reset pane, in case user somehow happened to change it..
             d3.select('.inspector-wrap .panewrap').style('right', '0%');
 
+            // It's possible for the user to add a description in a previous step..
+            // If they did this already, just continue to next step.
+            var entity = context.entity(areaId);
+            if (entity.tags.description) {
+                return continueTo(play);
+            }
+
             reveal('.more-fields .combobox-input',
                 t('intro.areas.add_field'),
                 { duration: 300 }
@@ -248,13 +255,15 @@ export function uiIntroArea(context, reveal) {
             return searchPresets();
         }
 
-        reveal('div.combobox',
-            t('intro.areas.choose_field', { field: descriptionField.label() }),
-            { duration: 300 }
-        );
-
-        d3.select('div.combobox')
-            .on('click.intro', function() {
+        // Make sure combobox is ready..
+        if (d3.select('div.combobox').empty()) {
+            return continueTo(clickAddField);
+        }
+        // Watch for the combobox to go away..
+        var watcher;
+        watcher = window.setInterval(function() {
+            if (d3.select('div.combobox').empty()) {
+                window.clearInterval(watcher);
                 timeout(function() {
                     if (d3.select('.form-field-description').empty()) {
                         continueTo(retryChooseDescription);
@@ -262,14 +271,20 @@ export function uiIntroArea(context, reveal) {
                         continueTo(describePlayground);
                     }
                 }, 300);  // after description field added.
-            });
+            }
+        }, 300);
+
+        reveal('div.combobox',
+            t('intro.areas.choose_field', { field: descriptionField.label() }),
+            { duration: 300 }
+        );
 
         context.on('exit.intro', function() {
             return continueTo(searchPresets);
         });
 
         function continueTo(nextStep) {
-            d3.select('div.combobox').on('click.intro', null);
+            if (watcher) window.clearInterval(watcher);
             context.on('exit.intro', null);
             nextStep();
         }
@@ -287,6 +302,10 @@ export function uiIntroArea(context, reveal) {
 
         // reset pane, in case user happened to change it..
         d3.select('.inspector-wrap .panewrap').style('right', '0%');
+
+        if (d3.select('.form-field-description').empty()) {
+            return continueTo(retryChooseDescription);
+        }
 
         context.on('exit.intro', function() {
             continueTo(play);

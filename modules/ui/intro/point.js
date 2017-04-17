@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
 import { t, textDirection } from '../../util/locale';
+import { actionChangePreset } from '../../actions';
 import { modeBrowse, modeSelect } from '../../modes';
 import { utilRebind } from '../../util/rebind';
 import { icon, pointBox, pad, selectMenuItem, transitionTime } from './helper';
@@ -187,6 +188,13 @@ export function uiIntroPoint(context, reveal) {
         // reset pane, in case user happened to change it..
         d3.select('.inspector-wrap .panewrap').style('right', '0%');
 
+        // It's possible for the user to add a name in a previous step..
+        // If they did this already, just continue to next step.
+        var entity = context.entity(pointId);
+        if (entity.tags.name) {
+            return continueTo(addCloseEditor);
+        }
+
         timeout(function() {
             reveal('.entity-editor-pane', t('intro.points.add_name'),
                 { tooltipClass: 'intro-points-describe' }
@@ -236,6 +244,10 @@ export function uiIntroPoint(context, reveal) {
         if (!pointId) return chapter.restart();
         var entity = context.hasEntity(pointId);
         if (!entity) return chapter.restart();
+
+        // make sure it's still a cafe, in case user somehow changed it..
+        var oldPreset = context.presets().match(entity, context.graph());
+        context.replace(actionChangePreset(pointId, oldPreset, cafePreset));
 
         context.enter(modeBrowse(context));
 
