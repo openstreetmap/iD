@@ -257,14 +257,16 @@ export function uiIntroPoint(context, reveal) {
 
         timeout(function() {
             var box = pointBox(entity.loc, context);
-            reveal(box, t('intro.points.reselect'));
+            reveal(box, t('intro.points.reselect'), { duration: 600 });
 
-            context.map().on('move.intro drawn.intro', function() {
-                var entity = context.hasEntity(pointId);
-                if (!entity) return chapter.restart();
-                var box = pointBox(entity.loc, context);
-                reveal(box, t('intro.points.reselect'), { duration: 0 });
-            });
+            timeout(function() {
+                context.map().on('move.intro drawn.intro', function() {
+                    var entity = context.hasEntity(pointId);
+                    if (!entity) return chapter.restart();
+                    var box = pointBox(entity.loc, context);
+                    reveal(box, t('intro.points.reselect'), { duration: 0 });
+                });
+            }, 600); // after reveal..
 
             context.on('enter.intro', function(mode) {
                 if (mode.id !== 'select') return;
@@ -344,14 +346,16 @@ export function uiIntroPoint(context, reveal) {
         context.enter(modeBrowse(context));
 
         var box = pointBox(entity.loc, context);
-        reveal(box, t('intro.points.rightclick'));
+        reveal(box, t('intro.points.rightclick'), { duration: 600 });
 
-        context.map().on('move.intro drawn.intro', function() {
-            var entity = context.hasEntity(pointId);
-            if (!entity) return chapter.restart();
-            var box = pointBox(entity.loc, context);
-            reveal(box, t('intro.points.rightclick'), { duration: 0 });
-        });
+        timeout(function() {
+            context.map().on('move.intro drawn.intro', function() {
+                var entity = context.hasEntity(pointId);
+                if (!entity) return chapter.restart();
+                var box = pointBox(entity.loc, context);
+                reveal(box, t('intro.points.rightclick'), { duration: 0 });
+            });
+        }, 600); // after reveal
 
         context.on('enter.intro', function(mode) {
             if (mode.id !== 'select') return;

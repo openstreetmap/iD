@@ -101,13 +101,15 @@ export function uiIntroArea(context, reveal) {
 
         var padding = 120 * Math.pow(2, context.map().zoom() - 19);
         var box = pad(playground, padding, context);
-        reveal(box, t('intro.areas.continue_playground'));
+        reveal(box, t('intro.areas.continue_playground'), { duration: 250 });
 
-        context.map().on('move.intro drawn.intro', function() {
-            padding = 120 * Math.pow(2, context.map().zoom() - 19);
-            box = pad(playground, padding, context);
-            reveal(box, t('intro.areas.continue_playground'), {duration: 0});
-        });
+        timeout(function() {
+            context.map().on('move.intro drawn.intro', function() {
+                padding = 120 * Math.pow(2, context.map().zoom() - 19);
+                box = pad(playground, padding, context);
+                reveal(box, t('intro.areas.continue_playground'), { duration: 0 });
+            });
+        }, 250);  // after reveal
 
         context.on('enter.intro', function(mode) {
             if (mode.id === 'draw-area') {

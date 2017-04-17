@@ -118,7 +118,7 @@ export function uiIntroLine(context, reveal) {
         }
 
         tulipRoadId = context.mode().selectedIDs()[0];
-        context.map().centerEase(tulipRoadMidpoint);
+        context.map().centerEase(tulipRoadMidpoint, 500);
 
         timeout(function() {
             var padding = 200 * Math.pow(2, context.map().zoom() - 18.5);
@@ -137,7 +137,7 @@ export function uiIntroLine(context, reveal) {
                     { duration: 0 }
                 );
             });
-        }, 260);  // after easing..
+        }, 550);  // after easing..
 
         context.history().on('change.intro', function() {
             var entity = tulipRoadId && context.hasEntity(tulipRoadId);
@@ -198,7 +198,7 @@ export function uiIntroLine(context, reveal) {
         var entity = tulipRoadId && context.hasEntity(tulipRoadId);
         if (!entity) return chapter.restart();
 
-        context.map().centerEase(tulipRoadIntersection);
+        context.map().centerEase(tulipRoadIntersection, 500);
 
         reveal('#surface', t('intro.lines.continue_line'));
 

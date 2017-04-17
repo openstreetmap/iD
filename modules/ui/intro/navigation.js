@@ -420,19 +420,21 @@ export function uiIntroNavigation(context, reveal) {
 
         reveal(box,
             t('intro.navigation.selected_street', { name: t('intro.graph.name.spring-street') }),
-            { buttonText: t('intro.ok'), buttonCallback: onClick }
+            { duration: 600, buttonText: t('intro.ok'), buttonCallback: onClick }
         );
 
-        context.map().on('move.intro drawn.intro', function() {
-            var entity = context.hasEntity(springStreetEndId);
-            if (!entity) return;
-            var box = pointBox(entity.loc, context);
-            box.height = 500;
-            reveal(box,
-                t('intro.navigation.selected_street', { name: t('intro.graph.name.spring-street') }),
-                { duration: 0, buttonText: t('intro.ok'), buttonCallback: onClick }
-            );
-        });
+        timeout(function() {
+            context.map().on('move.intro drawn.intro', function() {
+                var entity = context.hasEntity(springStreetEndId);
+                if (!entity) return;
+                var box = pointBox(entity.loc, context);
+                box.height = 500;
+                reveal(box,
+                    t('intro.navigation.selected_street', { name: t('intro.graph.name.spring-street') }),
+                    { duration: 0, buttonText: t('intro.ok'), buttonCallback: onClick }
+                );
+            });
+        }, 600);  // after reveal.
 
         context.on('enter.intro', function(mode) {
             if (!context.hasEntity(springStreetId)) {
