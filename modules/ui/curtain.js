@@ -55,28 +55,47 @@ export function uiCurtain() {
      * Reveal cuts the curtain to highlight the given box,
      * and shows a tooltip with instructions next to the box.
      *
-     * @param  {String|ClientRect} [box]   box to focus on
-     * @param  {String}    [text]  text for a tooltip
+     * @param  {String|ClientRect} [box]   box used to cut the curtain
+     * @param  {String}    [text]          text for a tooltip
      * @param  {Object}    [options]
-     * @param  {integer}   [options.duration]  transition time in milliseconds
-     * @param  {string}    [options.buttonText]  if set, create a button with this text label
+     * @param  {string}    [options.tooltipClass]    optional class to add to the tooltip
+     * @param  {integer}   [options.duration]        transition time in milliseconds
+     * @param  {string}    [options.buttonText]      if set, create a button with this text label
      * @param  {function}  [options.buttonCallback]  if set, the callback for the button
+     * @param  {String|ClientRect} [options.tooltipBox]  box for tooltip position, if different from box for the curtain
      */
     curtain.reveal = function(box, text, options) {
-        if (typeof box === 'string') box = d3.select(box).node();
-        if (box && box.getBoundingClientRect) box = copyBox(box.getBoundingClientRect());
+        if (typeof box === 'string') {
+            box = d3.select(box).node();
+        }
+        if (box && box.getBoundingClientRect) {
+            box = copyBox(box.getBoundingClientRect());
+        }
 
         options = options || {};
 
-        if (box && text) {
-            // pseudo markdown hacks
+        var tooltipBox;
+        if (options.tooltipBox) {
+            tooltipBox = options.tooltipBox;
+            if (typeof tooltipBox === 'string') {
+                tooltipBox = d3.select(tooltipBox).node();
+            }
+            if (tooltipBox && tooltipBox.getBoundingClientRect) {
+                tooltipBox = copyBox(tooltipBox.getBoundingClientRect());
+            }
+        } else {
+            tooltipBox = box;
+        }
+
+        if (tooltipBox && text) {
+            // pseudo markdown bold text for the instruction section..
             var parts = text.split('**');
             var html = parts[0] ? '<span>' + parts[0] + '</span>' : '';
             if (parts[1]) {
                 html += '<span class="instruction">' + parts[1] + '</span>';
             }
 
-            // pseudo markdown bold text hack
+            // pseudo markdown emphasis text..
             html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
 
 
@@ -100,7 +119,6 @@ export function uiCurtain() {
                     });
             }
 
-            // var dimensions = utilGetDimensions(selection, true),
             var tip = copyBox(tooltip.node().getBoundingClientRect()),
                 w = window.innerWidth,
                 h = window.innerHeight,
@@ -109,47 +127,53 @@ export function uiCurtain() {
                 side, pos;
 
             // trim box dimensions to just the portion that fits in the window..
-            if (box.top + box.height > h) {
-                box.height -= (box.top + box.height - h);
+            if (tooltipBox.top + tooltipBox.height > h) {
+                tooltipBox.height -= (tooltipBox.top + tooltipBox.height - h);
             }
-            if (box.left + box.width > w) {
-                box.width -= (box.left + box.width - w);
+            if (tooltipBox.left + tooltipBox.width > w) {
+                tooltipBox.width -= (tooltipBox.left + tooltipBox.width - w);
             }
 
             // determine tooltip placement..
 
-            if (box.top + box.height < 100) {
+            if (tooltipBox.top + tooltipBox.height < 100) {
                 // tooltip below box..
                 side = 'bottom';
-                pos = [box.left + box.width / 2 - tip.width / 2, box.top + box.height];
+                pos = [
+                    tooltipBox.left + tooltipBox.width / 2 - tip.width / 2,
+                    tooltipBox.top + tooltipBox.height
+                ];
 
-            } else if (box.top > h - 140) {
+            } else if (tooltipBox.top > h - 140) {
                 // tooltip above box..
                 side = 'top';
-                pos = [box.left + box.width / 2 - tip.width / 2, box.top - tip.height];
+                pos = [
+                    tooltipBox.left + tooltipBox.width / 2 - tip.width / 2,
+                    tooltipBox.top - tip.height
+                ];
 
             } else {
-                // tooltip to the side of the box..
-                var tipY = box.top + box.height / 2 - tip.height / 2;
+                // tooltip to the side of the tooltipBox..
+                var tipY = tooltipBox.top + tooltipBox.height / 2 - tip.height / 2;
 
                 if (textDirection === 'rtl') {
-                    if (box.left - tooltipWidth - tooltipArrow < 70) {
+                    if (tooltipBox.left - tooltipWidth - tooltipArrow < 70) {
                         side = 'right';
-                        pos = [box.left + box.width + tooltipArrow, tipY];
+                        pos = [tooltipBox.left + tooltipBox.width + tooltipArrow, tipY];
 
                     } else {
                         side = 'left';
-                        pos = [box.left - tooltipWidth - tooltipArrow, tipY];
+                        pos = [tooltipBox.left - tooltipWidth - tooltipArrow, tipY];
                     }
 
                 } else {
-                    if (box.left + box.width + tooltipArrow + tooltipWidth > w - 70) {
+                    if (tooltipBox.left + tooltipBox.width + tooltipArrow + tooltipWidth > w - 70) {
                         side = 'left';
-                        pos = [box.left - tooltipWidth - tooltipArrow, tipY];
+                        pos = [tooltipBox.left - tooltipWidth - tooltipArrow, tipY];
                     }
                     else {
                         side = 'right';
-                        pos = [box.left + box.width + tooltipArrow, tipY];
+                        pos = [tooltipBox.left + tooltipBox.width + tooltipArrow, tipY];
                     }
                 }
             }

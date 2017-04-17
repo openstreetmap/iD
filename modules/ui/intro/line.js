@@ -1035,16 +1035,15 @@ export function uiIntroLine(context, reveal) {
 
 
     function play() {
-        reveal('.intro-nav-wrap .chapter-building',
+        dispatch.call('done');
+        reveal('#id-container',
             t('intro.lines.play', { next: t('intro.buildings.title') }), {
+                tooltipBox: '.intro-nav-wrap .chapter-building',
                 buttonText: t('intro.ok'),
-                buttonCallback: function() {
-                    dispatch.call('done');
-                    reveal('#id-container');
-                }
+                buttonCallback: function() { reveal('#id-container'); }
             }
         );
-    }
+   }
 
 
     chapter.enter = function() {

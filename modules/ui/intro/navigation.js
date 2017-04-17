@@ -12,7 +12,9 @@ export function uiIntroNavigation(context, reveal) {
         townHall = [-85.63591, 41.94285],
         springStreetId = 'w397',
         springStreetEndId = 'n1834',
-        springStreet = [-85.63582, 41.94255];
+        springStreet = [-85.63582, 41.94255],
+        onewayField = context.presets().field('oneway'),
+        maxspeedField = context.presets().field('maxspeed');
 
 
     var chapter = {
@@ -352,8 +354,20 @@ export function uiIntroNavigation(context, reveal) {
             continueTo(searchStreet);
         });
 
+        context.history().on('change.intro', function() {
+            // update the close icon in the tooltip if the user edits something.
+            var selector = '.entity-editor-pane button.preset-close svg use';
+            var href = d3.select(selector).attr('href') || '#icon-close';
+
+            reveal('.entity-editor-pane',
+                t('intro.navigation.close_townhall', { button: icon(href, 'pre-text') }),
+                { duration: 0 }
+            );
+        });
+
         function continueTo(nextStep) {
             context.on('exit.intro', null);
+            context.history().on('change.intro', null);
             nextStep();
         }
     }
@@ -469,28 +483,46 @@ export function uiIntroNavigation(context, reveal) {
         var href = d3.select(selector).attr('href') || '#icon-close';
 
         reveal('.entity-editor-pane',
-            t('intro.navigation.editor_street', { button: icon(href, 'pre-text') })
+            t('intro.navigation.editor_street', {
+                button: icon(href, 'pre-text'),
+                field1: onewayField.label().toLowerCase(),
+                field2: maxspeedField.label().toLowerCase()
+            })
         );
 
         context.on('exit.intro', function() {
             continueTo(play);
         });
 
+        context.history().on('change.intro', function() {
+            // update the close icon in the tooltip if the user edits something.
+            var selector = '.entity-editor-pane button.preset-close svg use';
+            var href = d3.select(selector).attr('href') || '#icon-close';
+
+            reveal('.entity-editor-pane',
+                t('intro.navigation.editor_street', {
+                    button: icon(href, 'pre-text'),
+                    field1: onewayField.label().toLowerCase(),
+                    field2: maxspeedField.label().toLowerCase()
+                }), { duration: 0 }
+            );
+        });
+
         function continueTo(nextStep) {
             context.on('exit.intro', null);
+            context.history().on('change.intro', null);
             nextStep();
         }
     }
 
 
     function play() {
-        reveal('.intro-nav-wrap .chapter-point',
+        dispatch.call('done');
+        reveal('#id-container',
             t('intro.navigation.play', { next: t('intro.points.title') }), {
+                tooltipBox: '.intro-nav-wrap .chapter-point',
                 buttonText: t('intro.ok'),
-                buttonCallback: function() {
-                    dispatch.call('done');
-                    reveal('#id-container');
-                }
+                buttonCallback: function() { reveal('#id-container'); }
             }
         );
     }

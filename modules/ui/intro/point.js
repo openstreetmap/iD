@@ -455,13 +455,12 @@ export function uiIntroPoint(context, reveal) {
 
 
     function play() {
-        reveal('.intro-nav-wrap .chapter-area',
+        dispatch.call('done');
+        reveal('#id-container',
             t('intro.points.play', { next: t('intro.areas.title') }), {
+                tooltipBox: '.intro-nav-wrap .chapter-area',
                 buttonText: t('intro.ok'),
-                buttonCallback: function() {
-                    dispatch.call('done');
-                    reveal('#id-container');
-                }
+                buttonCallback: function() { reveal('#id-container'); }
             }
         );
     }

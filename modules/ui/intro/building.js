@@ -736,13 +736,12 @@ export function uiIntroBuilding(context, reveal) {
 
 
     function play() {
-        reveal('.intro-nav-wrap .chapter-startEditing',
+        dispatch.call('done');
+        reveal('#id-container',
             t('intro.buildings.play', { next: t('intro.startediting.title') }), {
+                tooltipBox: '.intro-nav-wrap .chapter-startEditing',
                 buttonText: t('intro.ok'),
-                buttonCallback: function() {
-                    dispatch.call('done');
-                    reveal('#id-container');
-                }
+                buttonCallback: function() { reveal('#id-container'); }
             }
         );
     }

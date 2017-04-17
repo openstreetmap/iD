@@ -561,7 +561,7 @@
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
         "confirm": {
-            "okay": "Okay",
+            "okay": "OK",
             "cancel": "Cancel"
         },
         "splash": {
@@ -769,12 +769,12 @@
                 "selected_townhall": "Great! The point is now selected. Selected features are drawn with a pulsing glow.",
                 "editor_townhall": "When a feature is selected, the *feature editor* is displayed alongside the map.",
                 "preset_townhall": "The top part of the feature editor shows the feature's type. This point is a {preset}.",
-                "fields_townhall": "The middle part of the feature editor shows *fields* containing the feature's attributes, such as its name and address.",
+                "fields_townhall": "The middle part of the feature editor contains *fields* showing the feature's attributes, such as its name and address.",
                 "close_townhall": "**Close the feature editor by hitting escape or pressing the {button} button in the upper corner.**",
                 "search_street": "You can also search for features in the current view, or worldwide. **Search for '{name}'**",
                 "choose_street": "**Choose {name} from the list to select it.**",
                 "selected_street": "Great! {name} is now selected.",
-                "editor_street": "The fields displayed for a street are different than the fields displayed for the town hall. **Close the feature editor by hitting escape or pressing the {button} button.**",
+                "editor_street": "The fields shown for a street are different than the fields that were shown for the town hall. Now we see fields like {field1} and {field2}. **Close the feature editor by hitting escape or pressing the {button} button.**",
                 "play": "Try moving the map and clicking on some other features to see what kinds of things can be added to OpenStreetMap. **When you are ready to continue to the next chapter, click '{next}'.**"
             },
             "points": {
@@ -784,13 +784,13 @@
                 "search_cafe": "There are many different features that can be represented by points. The point you just added is a cafe. **Search for '{preset}'**",
                 "choose_cafe": "**Choose {preset} from the list.**",
                 "feature_editor": "The point is now marked as a cafe. Using the feature editor, we can add more information about the cafe.",
-                "add_name": "In OpenStreetMap, all of the fields are optional, and it's ok to leave a field blank if you are unsure.  Let's pretend that you have local knowledge of this cafe, and you know its name.  **Add a name for the cafe**",
+                "add_name": "In OpenStreetMap, all of the fields are optional, and it's OK to leave a field blank if you are unsure.  Let's pretend that you have local knowledge of this cafe, and you know its name.  **Add a name for the cafe**",
                 "add_close": "The feature editor will remember all of your changes automatically. **When you are finished adding the name, hit escape, return, or click the {button} button to close the feature editor**",
                 "reselect": "Often points will already exist, but have mistakes or be incomplete. We can edit existing points. **Click to select the cafe you just created.**",
                 "update": "Let's fill in some more details for this cafe. You can change its name, add a cuisine, or add an address. **Change the cafe details**",
                 "update_close": "**When you are finished updating the cafe, hit escape, return, or click the {button} button to close the feature editor**",
                 "rightclick": "You can right-click on any feature to see the *edit menu*, which shows a list of editing operations that can be performed. **Right-click to select the point you created and show the edit menu.**",
-                "delete": "It's ok to delete features that don't exist in the real world. Deleting a feature from OpenStreetMap removes it from the map that everyone uses, so you should make sure a feature is really gone before you delete it. **Click on the {button} button to delete the point.**",
+                "delete": "It's OK to delete features that don't exist in the real world. Deleting a feature from OpenStreetMap removes it from the map that everyone uses, so you should make sure a feature is really gone before you delete it. **Click on the {button} button to delete the point.**",
                 "undo": "You can always undo any changes up until you save your edits to OpenStreetMap. **Click on the {button} button to undo the delete and get the point back.**",
                 "play": "Now that you know how to create and edit points, try creating a few more points for practice! **When you are ready to continue to the next chapter, click '{next}'.**"
             },
@@ -825,7 +825,7 @@
                 "finish_drag_endpoint": "This spot looks good. **Release the left mouse button to finish dragging.**",
                 "start_drag_midpoint": "Small triangles are drawn at the *midpoints* between nodes. Another way to create a new node is to drag a midpoint to a new location. **Drag the midpoint triangle to create a new node along the curve of the road.**",
                 "continue_drag_midpoint": "This line is looking much better! Continue to adjust this line by double-clicking or dragging midpoints until the curve matches the road shape. **When you're happy with how the line looks, click OK.**",
-                "delete_lines": "It is ok to delete lines for roads that don't exist in the real world. Here's an example where the city planned a {street} but never built it. We can improve this part of the map by deleting the extra lines.",
+                "delete_lines": "It's OK to delete lines for roads that don't exist in the real world. Here's an example where the city planned a {street} but never built it. We can improve this part of the map by deleting the extra lines.",
                 "rightclick_intersection": "The last real street is {street1}, so we will *split* {street2} at this intersection and remove everything above it. **Right click on the intersection node**",
                 "split_intersection": "**Click on the {button} button to split {street}.**",
                 "retry_split": "You didn't click the Split button. Try again.",
