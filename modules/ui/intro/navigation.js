@@ -104,7 +104,7 @@ export function uiIntroNavigation(context, reveal) {
 
 
     function features() {
-        var onClick = function() { continueTo(clickTownHall); };
+        var onClick = function() { continueTo(pointsLinesAreas); };
 
         reveal(trimmedMap(), t('intro.navigation.features'),
             { buttonText: t('intro.ok'), buttonCallback: onClick }
@@ -122,6 +122,43 @@ export function uiIntroNavigation(context, reveal) {
         }
     }
 
+    function pointsLinesAreas() {
+        var onClick = function() { continueTo(nodesWays); };
+
+        reveal(trimmedMap(), t('intro.navigation.points_lines_areas'),
+            { buttonText: t('intro.ok'), buttonCallback: onClick }
+        );
+
+        context.map().on('drawn.intro', function() {
+            reveal(trimmedMap(), t('intro.navigation.points_lines_areas'),
+                { duration: 0, buttonText: t('intro.ok'), buttonCallback: onClick }
+            );
+        });
+
+        function continueTo(nextStep) {
+            context.map().on('drawn.intro', null);
+            nextStep();
+        }
+    }
+
+    function nodesWays() {
+        var onClick = function() { continueTo(clickTownHall); };
+
+        reveal(trimmedMap(), t('intro.navigation.nodes_ways'),
+            { buttonText: t('intro.ok'), buttonCallback: onClick }
+        );
+
+        context.map().on('drawn.intro', function() {
+            reveal(trimmedMap(), t('intro.navigation.nodes_ways'),
+                { duration: 0, buttonText: t('intro.ok'), buttonCallback: onClick }
+            );
+        });
+
+        function continueTo(nextStep) {
+            context.map().on('drawn.intro', null);
+            nextStep();
+        }
+    }
 
     function clickTownHall() {
         context.enter(modeBrowse(context));

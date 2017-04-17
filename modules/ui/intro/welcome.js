@@ -23,6 +23,13 @@ export function uiIntroWelcome(context, reveal) {
     function practice() {
         reveal('.intro-nav-wrap .chapter-welcome',
             t('intro.welcome.practice'),
+            { buttonText: t('intro.ok'), buttonCallback: words }
+        );
+    }
+
+    function words() {
+        reveal('.intro-nav-wrap .chapter-welcome',
+            t('intro.welcome.words'),
             { buttonText: t('intro.ok'), buttonCallback: chapters }
         );
     }
