@@ -30,6 +30,13 @@ export function uiIntroArea(context, reveal) {
     }
 
 
+    function revealPlayground(center, text, options) {
+        var padding = 180 * Math.pow(2, context.map().zoom() - 19.5);
+        var box = pad(center, padding, context);
+        reveal(box, text, options);
+    }
+
+
     function addArea() {
         context.enter(modeBrowse(context));
         context.history().reset('initial');
@@ -68,21 +75,26 @@ export function uiIntroArea(context, reveal) {
         }
 
         areaId = null;
+        context.map().zoomEase(19.5, 500);
 
-        var padding = 120 * Math.pow(2, context.map().zoom() - 19);
-        var box = pad(playground, padding, context);
-        reveal(box, t('intro.areas.start_playground'));
+        timeout(function() {
+            revealPlayground(playground,
+                t('intro.areas.start_playground'), { duration: 250 }
+            );
 
-        context.map().on('move.intro drawn.intro', function() {
-            padding = 120 * Math.pow(2, context.map().zoom() - 19);
-            box = pad(playground, padding, context);
-            reveal(box, t('intro.areas.start_playground'), { duration: 0 });
-        });
+            timeout(function() {
+                context.map().on('move.intro drawn.intro', function() {
+                    revealPlayground(playground,
+                        t('intro.areas.start_playground'), { duration: 0 }
+                    );
+                });
+                context.on('enter.intro', function(mode) {
+                    if (mode.id !== 'draw-area') return chapter.restart();
+                    continueTo(continuePlayground);
+                });
+            }, 250);  // after reveal
 
-        context.on('enter.intro', function(mode) {
-            if (mode.id !== 'draw-area') return chapter.restart();
-            continueTo(continuePlayground);
-        });
+        }, 550);  // after easing
 
         function continueTo(nextStep) {
             context.map().on('move.intro drawn.intro', null);
@@ -98,16 +110,57 @@ export function uiIntroArea(context, reveal) {
         }
 
         areaId = null;
-
-        var padding = 120 * Math.pow(2, context.map().zoom() - 19);
-        var box = pad(playground, padding, context);
-        reveal(box, t('intro.areas.continue_playground'), { duration: 250 });
+        revealPlayground(playground,
+            t('intro.areas.continue_playground'), { duration: 250 }
+        );
 
         timeout(function() {
             context.map().on('move.intro drawn.intro', function() {
-                padding = 120 * Math.pow(2, context.map().zoom() - 19);
-                box = pad(playground, padding, context);
-                reveal(box, t('intro.areas.continue_playground'), { duration: 0 });
+                revealPlayground(playground,
+                    t('intro.areas.continue_playground'), { duration: 0 }
+                );
+            });
+        }, 250);  // after reveal
+
+        context.on('enter.intro', function(mode) {
+            if (mode.id === 'draw-area') {
+                var entity = context.hasEntity(context.selectedIDs()[0]);
+                if (entity && entity.nodes.length >= 6) {
+                    return continueTo(finishPlayground);
+                } else {
+                    return;
+                }
+            } else if (mode.id === 'select') {
+                areaId = context.selectedIDs()[0];
+                return continueTo(searchPresets);
+            } else {
+                return chapter.restart();
+            }
+        });
+
+        function continueTo(nextStep) {
+            context.map().on('move.intro drawn.intro', null);
+            context.on('enter.intro', null);
+            nextStep();
+        }
+    }
+
+
+    function finishPlayground() {
+        if (context.mode().id !== 'draw-area') {
+            return chapter.restart();
+        }
+
+        areaId = null;
+        revealPlayground(playground,
+            t('intro.areas.finish_playground'), { duration: 250 }
+        );
+
+        timeout(function() {
+            context.map().on('move.intro drawn.intro', function() {
+                revealPlayground(playground,
+                    t('intro.areas.finish_playground'), { duration: 0 }
+                );
             });
         }, 250);  // after reveal
 

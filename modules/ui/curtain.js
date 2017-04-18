@@ -95,9 +95,8 @@ export function uiCurtain() {
                 html += '<span class="instruction">' + parts[1] + '</span>';
             }
 
-            // pseudo markdown emphasis text..
-            html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
-
+            html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');   // emphasis
+            html = html.replace(/\{br\}/g, '<br/><br/>');       // linebreak
 
             if (options.buttonText && options.buttonCallback) {
                 html += '<div class="button-section">' +

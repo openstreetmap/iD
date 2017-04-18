@@ -206,17 +206,24 @@ export function uiIntroPoint(context, reveal) {
         // reset pane, in case user happened to change it..
         d3.select('.inspector-wrap .panewrap').style('right', '0%');
 
-        // It's possible for the user to add a name in a previous step..
-        // If they did this already, just continue to next step.
-        var entity = context.entity(pointId);
-        if (entity.tags.name) {
-            return continueTo(addCloseEditor);
-        }
-
         timeout(function() {
-            reveal('.entity-editor-pane', t('intro.points.add_name'),
-                { tooltipClass: 'intro-points-describe' }
-            );
+            // It's possible for the user to add a name in a previous step..
+            // If so, don't tell them to add the name in this step.
+            // Give them an OK button instead.
+            var entity = context.entity(pointId);
+            if (entity.tags.name) {
+                var tooltip = reveal('.entity-editor-pane', t('intro.points.add_name'), {
+                    tooltipClass: 'intro-points-describe',
+                    buttonText: t('intro.ok'),
+                    buttonCallback: function() { continueTo(addCloseEditor); }
+                });
+                tooltip.select('.instruction').style('display', 'none');
+
+            } else {
+                reveal('.entity-editor-pane', t('intro.points.add_name'),
+                    { tooltipClass: 'intro-points-describe' }
+                );
+            }
         }, 400);
 
         context.history().on('change.intro', function() {
