@@ -283,6 +283,36 @@ describe('iD.History', function () {
         });
     });
 
+    describe('#checkpoint', function () {
+        it('saves and resets to checkpoints', function () {
+            history.perform(action, 'annotation1');
+            history.perform(action, 'annotation2');
+            history.perform(action, 'annotation3');
+            history.checkpoint('check1');
+            history.perform(action, 'annotation4');
+            history.perform(action, 'annotation5');
+            history.checkpoint('check2');
+            history.perform(action, 'annotation6');
+            history.perform(action, 'annotation7');
+            history.perform(action, 'annotation8');
+
+            history.reset('check1');
+            expect(history.undoAnnotation()).to.equal('annotation3');
+
+            history.reset('check2');
+            expect(history.undoAnnotation()).to.equal('annotation5');
+
+            history.reset('check1');
+            expect(history.undoAnnotation()).to.equal('annotation3');
+        });
+
+        it('emits a change event', function () {
+            history.on('change', spy);
+            history.reset();
+            expect(spy).to.have.been.called;
+        });
+    });
+
     describe('#toJSON', function() {
         it('doesn\'t generate unsaveable changes', function() {
             var node_1 = iD.Node({id: 'n-1'});

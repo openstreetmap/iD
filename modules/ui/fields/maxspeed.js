@@ -23,8 +23,12 @@ export function uiFieldMaxspeed(field, context) {
 
 
     function maxspeed(selection) {
-        combobox = d3combobox();
-        var unitCombobox = d3combobox().data(['km/h', 'mph'].map(comboValues));
+        combobox = d3combobox()
+            .container(context.container());
+
+        var unitCombobox = d3combobox()
+            .container(context.container())
+            .data(['km/h', 'mph'].map(comboValues));
 
         input = selection.selectAll('#preset-input-' + field.id)
             .data([0]);

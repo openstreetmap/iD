@@ -42,7 +42,6 @@ export function behaviorCopy(context) {
 
     function doCopy() {
         d3.event.preventDefault();
-        if (context.inIntro()) return;
 
         var graph = context.graph(),
             selected = groupEntities(context.selectedIDs(), graph),

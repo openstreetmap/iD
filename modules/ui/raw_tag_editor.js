@@ -187,6 +187,7 @@ export function uiRawTagEditor(context) {
             var geometry = context.geometry(id);
 
             key.call(d3combobox()
+                .container(context.container())
                 .fetcher(function(value, callback) {
                     taginfo.keys({
                         debounce: true,
@@ -198,6 +199,7 @@ export function uiRawTagEditor(context) {
                 }));
 
             value.call(d3combobox()
+                .container(context.container())
                 .fetcher(function(value, callback) {
                     taginfo.values({
                         debounce: true,

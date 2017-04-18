@@ -15,6 +15,7 @@ export function coreHistory(context) {
         dispatch = d3.dispatch('change', 'undone', 'redone'),
         lock = utilSessionMutex('lock'),
         duration = 150,
+        checkpoints = {},
         stack, index, tree;
 
 
@@ -278,12 +279,93 @@ export function coreHistory(context) {
         },
 
 
-        reset: function() {
-            stack = [{graph: coreGraph()}];
-            index = 0;
-            tree = coreTree(stack[0].graph);
+        // save the current history state
+        checkpoint: function(key) {
+            checkpoints[key] = {
+                stack: _.cloneDeep(stack),
+                index: index
+            };
+            return history;
+        },
+
+
+        // restore history state to a given checkpoint or reset completely
+        reset: function(key) {
+            if (key !== undefined && checkpoints.hasOwnProperty(key)) {
+                stack = _.cloneDeep(checkpoints[key].stack);
+                index = checkpoints[key].index;
+            } else {
+                stack = [{graph: coreGraph()}];
+                index = 0;
+                tree = coreTree(stack[0].graph);
+                checkpoints = {};
+            }
             dispatch.call('change');
             return history;
+        },
+
+
+        toIntroGraph: function() {
+            var nextId = { n: 0, r: 0, w: 0 },
+                permIds = {},
+                graph = this.graph(),
+                baseEntities = {};
+
+            // clone base entities..
+            _.forEach(graph.base().entities, function(entity) {
+                var copy = _.cloneDeepWith(entity, customizer);
+                baseEntities[copy.id] = copy;
+            });
+
+            // replace base entities with head entities..
+            _.forEach(graph.entities, function(entity, id) {
+                if (entity) {
+                    var copy = _.cloneDeepWith(entity, customizer);
+                    baseEntities[copy.id] = copy;
+                } else {
+                    delete baseEntities[id];
+                }
+            });
+
+            // swap temporary for permanent ids..
+            _.forEach(baseEntities, function(entity) {
+                if (Array.isArray(entity.nodes)) {
+                    entity.nodes = entity.nodes.map(function(node) {
+                        return permIds[node] || node;
+                    });
+                }
+                if (Array.isArray(entity.members)) {
+                    entity.members = entity.members.map(function(member) {
+                        member.id = permIds[member.id] || member.id;
+                        return member;
+                    });
+                }
+            });
+
+            return JSON.stringify({ dataIntroGraph: baseEntities });
+
+
+            function customizer(src) {
+                var copy = _.omit(_.cloneDeep(src), ['type', 'user', 'v', 'version', 'visible']);
+                if (_.isEmpty(copy.tags)) {
+                    delete copy.tags;
+                }
+
+                if (Array.isArray(copy.loc)) {
+                    copy.loc[0] = +copy.loc[0].toFixed(6);
+                    copy.loc[1] = +copy.loc[1].toFixed(6);
+                }
+
+                var match = src.id.match(/([nrw])-\d*/);  // temporary id
+                if (match !== null) {
+                    var nrw = match[1], permId;
+                    do { permId = nrw + (++nextId[nrw]); }
+                    while (baseEntities.hasOwnProperty(permId));
+
+                    copy.id = permIds[src.id] = permId;
+                }
+                return copy;
+            }
         },
 
 

@@ -39,9 +39,11 @@ export function uiFieldLocalized(field, context) {
 
         if (field.id === 'name') {
             var preset = context.presets().match(entity, context.graph());
-            input.call(d3combobox().fetcher(
-                utilSuggestNames(preset, dataSuggestions)
-            ));
+            input
+                .call(d3combobox()
+                    .container(context.container())
+                    .fetcher(utilSuggestNames(preset, dataSuggestions))
+                );
         }
 
         input
@@ -171,7 +173,10 @@ export function uiFieldLocalized(field, context) {
         innerWrap.attr('class', 'entry')
             .each(function() {
                 var wrap = d3.select(this);
-                var langcombo = d3combobox().fetcher(fetcher).minItems(0);
+                var langcombo = d3combobox()
+                    .container(context.container())
+                    .fetcher(fetcher)
+                    .minItems(0);
 
                 var label = wrap
                     .append('label')

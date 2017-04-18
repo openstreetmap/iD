@@ -13,6 +13,7 @@ export function uiGeolocate(context) {
 
 
     function click() {
+        if (context.inIntro()) return;
         context.enter(modeBrowse(context));
         context.container().call(locating);
         navigator.geolocation.getCurrentPosition(success, error, geoOptions);

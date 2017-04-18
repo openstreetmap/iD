@@ -8,7 +8,7 @@ import {
 } from '../../util';
 
 
-export function uiFieldAccess(field) {
+export function uiFieldAccess(field, context) {
     var dispatch = d3.dispatch('change'),
         items;
 
@@ -55,7 +55,9 @@ export function uiFieldAccess(field) {
             .each(function(d) {
                 d3.select(this)
                     .call(d3combobox()
-                        .data(access.options(d)));
+                        .container(context.container())
+                        .data(access.options(d))
+                    );
             });
 
 

@@ -89,6 +89,7 @@ export function uiCommit(context) {
 
             commentField
                 .call(d3combobox()
+                    .container(context.container())
                     .caseSensitive(true)
                     .data(_.uniqBy(comments, 'title'))
                 );

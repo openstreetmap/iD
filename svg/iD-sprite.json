@@ -383,5 +383,30 @@
 
     "logo-twitter-shape":       { "fill": "currentColor" },
     "logo-facebook-shape":      { "fill": "currentColor" },
-    "logo-google-shape":        { "fill": "currentColor" }
+    "logo-google-shape":        { "fill": "currentColor" },
+
+    "logo-osm":                 { "viewBox": "200 460 100 100" },
+    "logo-walkthrough":         { "viewBox": "300 460 100 100" },
+    "logo-features":            { "viewBox": "400 460 100 100" },
+    "logo-restore":             { "viewBox": "500 460 100 100" },
+    "logo-reset":               { "viewBox": "600 460 100 100" },
+
+    "logo-osm-shape":           { "fill": "currentColor" },
+    "logo-walkthrough-shape":   { "fill": "currentColor" },
+    "logo-features-shape1":     { "fill": "currentColor" },
+    "logo-features-shape2":     { "fill": "currentColor" },
+    "logo-features-shape3":     { "fill": "currentColor" },
+    "logo-restore-shape":       { "fill": "currentColor" },
+    "logo-reset-shape":         { "fill": "currentColor" },
+
+    "poi-images":               { "viewBox": "0 320 200 80" },
+    "landuse-images":           { "viewBox": "0 400 200 80" },
+    "feature-images":           { "viewBox": "0 480 200 80" },
+    "building-images":          { "viewBox": "700 480 200 80" },
+
+    "walkthrough-mouse":        { "viewBox": "400 411 25 43" },
+
+    "walkthrough-mouse-shape":  { "fill": "#000000" },
+    "walkthrough-mouse-left":   { "fill": "inherit" },
+    "walkthrough-mouse-right":  { "fill": "currentColor" }
 }

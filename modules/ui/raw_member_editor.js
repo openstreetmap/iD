@@ -169,6 +169,7 @@ export function uiRawMemberEditor(context) {
                 }
 
                 role.call(d3combobox()
+                    .container(context.container())
                     .fetcher(function(role, callback) {
                         var rtype = entity.tags.type;
                         taginfo.roles({

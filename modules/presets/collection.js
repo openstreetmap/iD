@@ -12,14 +12,14 @@ export function presetCollection(collection) {
 
 
         item: function(id) {
-            return _.find(collection, function(d) {
+            return _.find(this.collection, function(d) {
                 return d.id === id;
             });
         },
 
 
         matchGeometry: function(geometry) {
-            return presetCollection(collection.filter(function(d) {
+            return presetCollection(this.collection.filter(function(d) {
                 return d.matchGeometry(geometry);
             }));
         },
@@ -44,10 +44,10 @@ export function presetCollection(collection) {
 
             value = value.toLowerCase();
 
-            var searchable = _.filter(collection, function(a) {
+            var searchable = _.filter(this.collection, function(a) {
                     return a.searchable !== false && a.suggestion !== true;
                 }),
-                suggestions = _.filter(collection, function(a) {
+                suggestions = _.filter(this.collection, function(a) {
                     return a.suggestion === true;
                 });
 

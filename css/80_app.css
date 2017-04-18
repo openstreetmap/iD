@@ -2420,6 +2420,7 @@ div.full-screen > button:hover {
     margin-top: 10px;
     border-bottom: 1px solid #ccc;
     border-radius: 4px;
+    text-align: center;
 }
 
 .help-wrap .nav {
@@ -3016,20 +3017,14 @@ img.tile-removing {
     background-color: #ececec;
 }
 
-.modal-actions button:before,
-.save-success a.button.osm:before,
-.walkthrough a:before {
-    display: block;
-    content: '';
+.logo {
     height: 100px;
     width: 100%;
     max-width: 100px;
     margin: auto;
-    margin-bottom: 10px;
-    background:transparent url(img/iD-sprite.svg) no-repeat -200px -460px;
 }
 
-.modal-actions :first-child {
+.modal-actions > :first-child {
     border-right: 1px solid #CCC;
 }
 
@@ -3039,57 +3034,48 @@ img.tile-removing {
 
 /* Restore Modal
 ------------------------------------------------------- */
-
-.modal-actions .restore:before {
-    background-position: -500px -460px;
+.modal-actions .logo-restore {
+    color: #7092FF;
 }
-
-.modal-actions .reset:before {
-    background-position: -600px -460px;
+.modal-actions .logo-reset {
+    color: #E06C5E;
 }
 
 /* Success Modal
 ------------------------------------------------------- */
-
 .save-success p {
     padding: 15px 15px 0 15px;
 }
 .save-success a.details {
-  padding-left: 15px;
+    padding-left: 15px;
 }
 .save-success .button {
     padding-top: 15px;
 }
-
+.save-success .logo-osm {
+    color: #7092FF;
+    margin-bottom: 10px;
+}
 .save-success a.button.social {
     height: auto;
+    border-bottom: none;
 }
-
 .save-success .icon.social {
     height: 80px;
     width: 80px;
     color: #7092FF;
 }
 
-.save-success .button.osm:before {
-    background-position: -200px -460px;
-}
-
 /* Splash Modal
 ------------------------------------------------------- */
-
-.modal-actions .walkthrough:before,
-.walkthrough a:before {
-    background-position: -300px -460px;
+.modal-actions .logo-walkthrough,
+.modal-actions .logo-features {
+    color: #7092FF;
 }
 
-.modal-actions .start:before {
-    background-position: -400px -460px;
-}
 
-/* Commit Modal
+/* Save Mode
 ------------------------------------------------------- */
-
 .mode-save a.user-info {
     display: inline-block;
 }
@@ -3249,7 +3235,6 @@ img.tile-removing {
     position: absolute;
     display: none;
     color:#333;
-    text-align: left;
     font-size: 12px;
 }
 
@@ -3267,6 +3252,7 @@ img.tile-removing {
 
 .tooltip.right {
     margin-left: 20px;
+    text-align: left;
 }
 
 .tooltip.bottom {
@@ -3443,15 +3429,19 @@ img.tile-removing {
 .map-control .tooltip {
     min-width: 160px;
 }
+
 /* Move over tooltips that are near the edge of screen */
 .add-point .tooltip {
     left: 33.3333% !important;
 }
-
-.curtain-tooltip.intro-points-add .tooltip-arrow,
 .add-point .tooltip .tooltip-arrow {
     left: 60px;
 }
+[dir='rtl'] .add-point .tooltip .tooltip-arrow {
+    left: auto;
+    right: 60px;
+}
+
 
 /* radial menu (deprecated) */
 
@@ -3601,6 +3591,8 @@ img.tile-removing {
 }
 
 .intro-nav-wrap {
+    display: flex;
+    flex-direction: row;
     position: absolute;
     left: 0;
     right: 0;
@@ -3609,34 +3601,67 @@ img.tile-removing {
     z-index: 1001;
 }
 
-.intro-nav-wrap button.step {
-    width: 20%;
+.intro-nav-wrap .intro-nav-wrap-logo {
+    flex: 0 0 auto;
+    height: 40px;
+    width: 40px;
+    color: white;
+    margin: 0px 20px;
+    vertical-align: middle;
 }
 
-.intro-nav-wrap button.step.finished {
+.intro-nav-wrap .joined {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.intro-nav-wrap button.chapter {
+    flex: 1 1 100%;
+    padding: 0px 20px;
+}
+
+.intro-nav-wrap button.chapter.next {
+    animation-duration: 1s;
+    animation-name: pulse;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+@keyframes pulse {
+    from  { background: #7092ff; }
+    to    { background: #c6d4ff; }
+}
+
+.intro-nav-wrap button.chapter.finished {
     background: #8cd05f;
 }
 
-.intro-nav-wrap button.step .status {
-    margin-left: 3px;
+.intro-nav-wrap button.chapter .status {
     display: none;
 }
 
-.intro-nav-wrap button.step.finished .status {
+.intro-nav-wrap button.chapter.finished .status {
     display: inline-block;
 }
 
-
-.curtain-tooltip .tooltip-inner {
+.curtain-tooltip.tooltip.in {
+    opacity: 1;
+}
+.curtain-tooltip.tooltip {
     text-align: left;
-    padding: 20px;
+}
+[dir='rtl'] .curtain-tooltip.tooltip {
+    text-align: right;
 }
 
 .curtain-tooltip .tooltip-inner {
     font-size: 15px;
+    position: relative;
+    padding: 20px;
 }
 
-.curtain-tooltip .tooltip-inner .bold {
+.curtain-tooltip .tooltip-inner .button-section,
+.curtain-tooltip .tooltip-inner .instruction {
     font-weight: bold;
     display: block;
     border-top: 1px solid #CCC;
@@ -3646,35 +3671,65 @@ img.tile-removing {
     padding: 10px 20px 0 20px;
 }
 
-.curtain-tooltip .tooltip-inner .bold:only-child {
+[dir='rtl'] .curtain-tooltip .tooltip-inner .button-section button.col8 {
+    float: right;
+}
+
+.curtain-tooltip .tooltip-inner .instruction:only-child {
     border: 0;
     padding: 0;
     margin: 0;
+}
+
+.curtain-tooltip .tooltip-inner .icon.pre-text {
+    vertical-align: text-top;
+    margin-right: 0;
+    margin-left: 0;
+    display: inline-block;
 }
 
 .curtain-tooltip.intro-points-describe {
     top: 133px !important;
 }
 
-/* Tooltip illustrations */
-
-.intro-points-add .tooltip-inner::before,
-.intro-areas-add .tooltip-inner::before,
-.intro-lines-add .tooltip-inner::before {
-    margin-left: -20px;
-    display: block;
-    content: "";
+.tooltip-illustration {
     height: 80px;
     width: 200px;
-    background:transparent url(img/iD-sprite.svg) no-repeat 0 -320px;
+    margin-left: -20px;
+    margin-top: -10px;
+}
+[dir='rtl'] .tooltip-illustration {
+    margin-left: auto;
+    margin-right: -20px;
 }
 
-.intro-areas-add .tooltip-inner::before {
-    background-position: 0 -400px;
+.curtain-tooltip.intro-mouse {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
-.intro-lines-add .tooltip-inner::before {
-    background-position: 0 -480px;
+.curtain-tooltip.intro-mouse .counter {
+    position: absolute;
+    display: block;
+    top: 50px;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+    z-index: 1003;
+}
+
+.curtain-tooltip.intro-mouse .tooltip-illustration use {
+    fill: rgba(112, 146, 255, 0);
+    color: rgba(112, 146, 255, 0);
+}
+.curtain-tooltip.intro-mouse.leftclick .tooltip-illustration use {
+    fill: rgba(112, 146, 255, 1);
+}
+.curtain-tooltip.intro-mouse.rightclick .tooltip-illustration use {
+    color: rgba(112, 146, 255, 1);
 }
 
 .huge-modal-button {
@@ -3686,8 +3741,7 @@ img.tile-removing {
 .huge-modal-button .illustration {
     height: 100px;
     width: 100px;
-    background: rgba(0, 0, 0, 0) url(img/iD-sprite.svg) no-repeat -300px -460px;
-    margin: auto;
+    color: #7092FF;
 }
 
 .mapillary-wrap {

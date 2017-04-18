@@ -244,6 +244,7 @@ export function uiRawMembershipEditor(context) {
 
             newrow.selectAll('.member-entity-input')
                 .call(d3combobox()
+                    .container(context.container())
                     .minItems(1)
                     .fetcher(function(value, callback) { callback(relations(value)); })
                     .on('accept', onAccept)
@@ -291,6 +292,7 @@ export function uiRawMembershipEditor(context) {
                 }
 
                 role.call(d3combobox()
+                    .container(context.container())
                     .fetcher(function(role, callback) {
                         var rtype = d.relation.tags.type;
                         taginfo.roles({

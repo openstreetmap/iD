@@ -257,12 +257,8 @@ export function coreContext() {
     context.layers = function() { return map.layers; };
     context.surface = function() { return map.surface; };
     context.editable = function() { return map.editable(); };
-
     context.surfaceRect = function() {
-        // Work around a bug in Firefox.
-        //   http://stackoverflow.com/questions/18153989/
-        //   https://bugzilla.mozilla.org/show_bug.cgi?id=530985
-        return context.surface().node().parentNode.getBoundingClientRect();
+        return map.surface.node().getBoundingClientRect();
     };
 
 
@@ -289,13 +285,14 @@ export function coreContext() {
 
 
     /* Container */
-    var container, embed;
+    var container = d3.select(document.body);
     context.container = function(_) {
         if (!arguments.length) return container;
         container = _;
         container.classed('id-container', true);
         return context;
     };
+    var embed;
     context.embed = function(_) {
         if (!arguments.length) return embed;
         embed = _;
@@ -383,6 +380,7 @@ export function coreContext() {
     context.version = '2.1.3';
 
     context.projection = geoRawMercator();
+    context.curtainProjection = geoRawMercator();
 
     locale = utilDetect().locale;
     if (locale && !dataLocales.hasOwnProperty(locale)) {

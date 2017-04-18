@@ -129,7 +129,8 @@ export function uiHelp(context) {
 
 
         function clickWalkthrough() {
-            d3.select(document.body).call(uiIntro(context));
+            if (context.inIntro()) return;
+            context.container().call(uiIntro(context));
             setVisible(false);
         }
 
@@ -159,11 +160,22 @@ export function uiHelp(context) {
             .html(function(d) { return d.title; })
             .on('click', clickHelp);
 
-        toc.append('li')
-            .attr('class','walkthrough')
+        var walkthrough = toc
+            .append('li')
+            .attr('class', 'walkthrough')
             .append('a')
-            .text(t('splash.walkthrough'))
             .on('click', clickWalkthrough);
+
+        walkthrough
+            .append('svg')
+            .attr('class', 'logo logo-walkthrough')
+            .append('use')
+            .attr('xlink:href', '#logo-walkthrough');
+
+        walkthrough
+            .append('div')
+            .text(t('splash.walkthrough'));
+
 
         var content = pane.append('div')
             .attr('class', 'left-content');

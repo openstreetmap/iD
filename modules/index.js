@@ -40,6 +40,7 @@ export { utilDetect as Detect } from './util/detect';
 export var debug = false;
 
 import * as d3 from 'd3';
+import * as _ from 'lodash';
 import * as lib from './lib/index';
 
-export { d3, lib };
+export { d3, _, lib };
