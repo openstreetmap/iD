@@ -126,6 +126,13 @@ export function uiCurtain() {
                 tooltipArrow = 5,
                 side, pos;
 
+
+            // hack: this will have bottom placement,
+            // so need to reserve extra space for the tooltip illustration.
+            if (options.tooltipClass === 'intro-mouse') {
+                tip.height += 80;
+            }
+
             // trim box dimensions to just the portion that fits in the window..
             if (tooltipBox.top + tooltipBox.height > h) {
                 tooltipBox.height -= (tooltipBox.top + tooltipBox.height - h);

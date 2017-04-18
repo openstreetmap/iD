@@ -897,7 +897,10 @@ en:
       welcome: "Welcome! This walkthrough will teach you the basics of editing on OpenStreetMap."
       practice: "All of the data in this walkthrough is just for practicing, and any edits that you make in the walkthrough will not be saved."
       words: "This walkthrough will introduce some new words and concepts. When we introduce a new word, we'll use *italics*."
-      chapters: "You can use the buttons below to skip chapters at any time or to restart a chapter if you get stuck. Let's begin! **Click '{next}' to continue.**"
+      mouse: "You can use any input device to edit the map, but this walkthrough assumes you have a mouse with left and right buttons. **If you want to attach a mouse, do so now, then click OK.**"
+      leftclick: "When this tutorial asks you to click or double-click, we mean with the left button. On a trackpad it might be a single-click or single-finger tap. **Left-click {num} times.**"
+      rightclick: "Sometimes we'll also ask you to right-click. This might be the same as control-click, or two-finger tap on a trackpad. Your keyboard might even have a 'menu' key that works like right-click. **Right-click {num} times.**"
+      chapters: "So far, so good! You can use the buttons below to skip chapters at any time or to restart a chapter if you get stuck. Let's begin! **Click '{next}' to continue.**"
     navigation:
       title: "Navigation"
       drag: "The main map area shows OpenStreetMap data on top of a background. You can navigate by dragging and scrolling, just like any web map. **Drag the map!**"
