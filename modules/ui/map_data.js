@@ -310,12 +310,35 @@ export function uiMapData(context) {
                             return;
                         }
                         
+                        // handle OSM / ODBL license approval
+                        window.metadata = metadata_url;
+                        window.license = data.copyrightText.replace(/\s/g, '');
+                        if (data.copyrightText && data.copyrightText.trim().length) {
+                            if (context.storage('license-' + window.license)) {
+                                // user has seen and approved this license before
+                                d3.selectAll('.copyright-text').text('Copyright info (previously approved): ' + data.copyrightText);
+                                copyapproval.property('checked', true);
+                            } else {
+                                // new license
+                                d3.selectAll('.copyright-text').text('Copyright info: ' + data.copyrightText);
+                                copylabel.classed('hide', false);
+                            }
+                        } else if (context.storage('license-' + metadata_url)) {
+                            // user has seen and approved this URL before
+                            d3.selectAll('.copyright-text').text('No copyright info provided. (previously approved)');
+                            copyapproval.property('checked', true);
+                        } else {
+                            // new URL, no license
+                            d3.selectAll('.copyright-text').text('No copyright info provided.');
+                            copylabel.classed('hide', false);
+                        }
+                        
                         var geoserviceTable = d3.selectAll('.geoservice-table');
                         geoserviceTable.html('<thead class="tag-row"><th>Include?</th><th>GeoService field</th><th>(optional) OSM tag</th></thead>');
                         
                         data.fields.map(function(field) {
                             // don't allow user to change how OBJECTID works
-                            if (field.name === 'OBJECTID') {
+                            if (field.name === 'OBJECTID' || field.alias === 'OBJECTID') {
                                 return;
                             }
         
@@ -340,7 +363,7 @@ export function uiMapData(context) {
                                     .on('change', function() {
                                         window.layerChecked[field.name] = this.checked;
                                     });
-                            row.append('td').text(field.name);
+                            row.append('td').text(field.alias || field.name);
                             // row.append('td').text(samplefeature.properties[keys[r]] || '');
                         
                             var suggestedKeys = d3combobox().fetcher(getFetcher()).minItems(0);
@@ -358,12 +381,18 @@ export function uiMapData(context) {
                         if (data.extent) {
                             // can I get an extent in 4326?
                         }
-                        // d3.selectAll('.field-list').text('Fields: ' + fields.join(', '));
                     });
                 });
             
-            urlEntry.append('div')
-                .attr('class', 'field-list');
+            var copyrightable = urlEntry.append('div');
+            copyrightable.append('div').attr('class', 'copyright-text');
+            var copylabel = copyrightable.append('label')
+                .attr('class', 'hide');
+            var copyapproval = copylabel.append('input')
+                .attr('type', 'checkbox')
+                .attr('class', 'copyright-approved')
+                .property('checked', false)
+            copylabel.append('span').text('This data is permitted to include on OpenStreetMap under their ODbL license');
             
             // load initial GeoService URL
             /*
@@ -529,22 +558,27 @@ export function uiMapData(context) {
                 .attr('class', 'no-float hide')
                 .call(svgIcon('#icon-save', 'icon light'))
                 .text('Save');
-                
+            
+            // actual download buttons, with license check and memory step
+            var startLoad = function(geoserviceDownloadAll) {
+                if (!copyapproval.property('checked')) {
+                    alert('This is your first time using this data source or license. Please confirm that this data can be added to OpenStreetMap');
+                    return;
+                }
+                if (window.license || window.metadata) {
+                    context.storage('license-' + (window.license || window.metadata), 'approved');
+                }
+                setGeoService(d3.select('.topurl input.geoservice').property('value'), geoserviceDownloadAll);
+            };
             this.pane.append('button')
                 .attr('class', 'url final')
                 .text('Load In View')
-                .on('click', function() {
-                    geoserviceDownloadAll = false;
-                    setGeoService(d3.select('.topurl input.geoservice').property('value'), geoserviceDownloadAll);
-                });
+                .on('click', function() { startLoad(false); });
             this.pane.append('button')
                 .attr('class', 'url final')
                 .attr('style', 'margin-right: 10px')
                 .text('Load Globally')
-                .on('click', function() {
-                    geoserviceDownloadAll = true;
-                    setGeoService(d3.select('.topurl input.geoservice').property('value'), geoserviceDownloadAll);
-                });
+                .on('click', function() { startLoad(true); });
         }
         
         function toggle() {
