@@ -1642,6 +1642,14 @@ text.geoservice {
     display: block !important;
 }
 
+.geoservice-pane .layer-select {
+    float: left;
+}
+
+.geoservice-pane .layer-select button {
+    margin-right: 8px;
+}
+
 /* more importer stuff */
 
 .import-approve {

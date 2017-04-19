@@ -286,9 +286,9 @@ export function uiMapData(context) {
                 .attr('class', 'geoservice')
                 .attr('placeholder', 'GeoService URL')
                 // .attr('value', context.storage('geoserviceLayerUrl') || '')
-                .on('input', function(e, loadFromLocalStorage) {
+                .on('input', function(e, fixedURL) {
                     // reformat URL ending to /layerID/metadata?f=json
-                    var metadata_url = loadFromLocalStorage ? context.storage('geoserviceLayerUrl') : this.value;
+                    var metadata_url = fixedURL ? fixedURL : this.value;
                     metadata_url = metadata_url.split('/');
                     if (metadata_url.length < 2 || metadata_url[0].indexOf('http') === -1) {
                         return;
@@ -296,16 +296,31 @@ export function uiMapData(context) {
                     
                     // if it just ends /0, we need to keep /0 around
                     var last = metadata_url.pop();
-                    if (!isNaN(last * 1)) {
+                    if ((!isNaN(last * 1)) || (last.toLowerCase().indexOf('server') > -1)) {
                         metadata_url.push(last);
                     }
-                    metadata_url = metadata_url.join('/') + '/metadata?f=json';
+                    metadata_url = (metadata_url.join('/') + '/metadata?f=json').replace(/\/\//g, '/').replace(':/', '://');
                     
                     d3.text(metadata_url, function(err, data) {
                         if (err) {
                             return console.log(err);
                         }
                         data = JSON.parse(data);
+                        if (data.layers && data.layers.length) {
+                            // MapServer field
+                            layerSelect.html('');
+                            _.map(data.layers, function(optLayer) {
+                                layerSelect.append('button')
+                                    .text(optLayer.name)
+                                    .on('click', function() {
+                                        layerSelect.html('');
+                                        var mdatax = metadata_url.split('/metadata')[0] + '/' + optLayer.id;
+                                        urlInput.property('value', mdatax);
+                                        urlInput.on('input')(null, mdatax);
+                                    });
+                            });
+                            return;
+                        }
                         if (!data.fields || !data.fields.length) {
                             return;
                         }
@@ -394,11 +409,14 @@ export function uiMapData(context) {
                 .property('checked', false)
             copylabel.append('span').text('This data is permitted to include on OpenStreetMap under their ODbL license');
             
+            var layerSelect = urlEntry.append('div')
+                .attr('class', 'layer-select');
+            
             // load initial GeoService URL
             /*
             if (context.storage('geoserviceLayerUrl')) {
                 setTimeout(function() {
-                    urlInput.on('input')(null, true);
+                    urlInput.on('input')(null, context.storage('geoserviceLayerUrl'));
                 }, 500);
             }
             */
