@@ -115,7 +115,8 @@ export function svgGeoService(projection, context, dispatch) {
                     visible: true
                 };
             
-                // don't bring the service's OBJECTID any further
+                // store the OBJECTID as source_oid
+                props.tags['geoservice:objectid'] = props.tags.OBJECTID;
                 delete props.tags.OBJECTID;
                 
                 // allows this helper method to work on nodes and ways
