@@ -5,6 +5,7 @@ import { utilQsString } from '../util/index';
 
 var endpoint = 'https://taginfo.openstreetmap.org/api/4/',
     taginfoCache = {},
+    popularKeys = {},
     tag_sorts = {
         point: 'count_nodes',
         vertex: 'count_nodes',
@@ -152,7 +153,29 @@ function request(url, debounce, callback) {
 
 export default {
 
-    init: function() { taginfoCache = {}; },
+    init: function() {
+        taginfoCache = {};
+        popularKeys = {};
+
+        // Fetch popular keys.  We'll exclude these from `values`
+        // lookups because they stress taginfo, and they aren't likely
+        // to yield meaningful autocomplete results.. see #3955
+        this.keys({
+            rp: 100,
+            sortname: 'values_all',
+            sortorder: 'desc',
+            page: 1,
+            debounce: false
+        }, function(err, data) {
+            if (err) return;
+            data.forEach(function(d) {
+                if (d === 'opening_hours') return;  // exception
+                popularKeys[d.value] = true;
+            });
+        });
+    },
+
+
     reset: function() { taginfoCache = {}; },
 
 
@@ -200,6 +223,13 @@ export default {
 
 
     values: function(parameters, callback) {
+        // Exclude popular keys from values lookups.. see #3955
+        var key = parameters.key;
+        if (key && popularKeys[key]) {
+            callback(null, []);
+            return;
+        }
+
         var debounce = parameters.debounce;
         parameters = clean(setSort(setFilter(parameters)));
         request(endpoint + 'key/values?' +
