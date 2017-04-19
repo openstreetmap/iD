@@ -176,7 +176,7 @@ export default {
     },
 
 
-    reset: function() { taginfoCache = {}; },
+    reset: function() { },
 
 
     keys: function(parameters, callback) {
