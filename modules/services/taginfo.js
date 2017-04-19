@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { utilQsString } from '../util/index';
+import { utilQsString } from '../util';
 
 
 var endpoint = 'https://taginfo.openstreetmap.org/api/4/',
@@ -34,31 +34,31 @@ var endpoint = 'https://taginfo.openstreetmap.org/api/4/',
     };
 
 
-function sets(parameters, n, o) {
-    if (parameters.geometry && o[parameters.geometry]) {
-        parameters[n] = o[parameters.geometry];
+function sets(params, n, o) {
+    if (params.geometry && o[params.geometry]) {
+        params[n] = o[params.geometry];
     }
-    return parameters;
+    return params;
 }
 
 
-function setFilter(parameters) {
-    return sets(parameters, 'filter', tag_filters);
+function setFilter(params) {
+    return sets(params, 'filter', tag_filters);
 }
 
 
-function setSort(parameters) {
-    return sets(parameters, 'sortname', tag_sorts);
+function setSort(params) {
+    return sets(params, 'sortname', tag_sorts);
 }
 
 
-function setSortMembers(parameters) {
-    return sets(parameters, 'sortname', tag_sort_members);
+function setSortMembers(params) {
+    return sets(params, 'sortname', tag_sort_members);
 }
 
 
-function clean(parameters) {
-    return _.omit(parameters, 'geometry', 'debounce');
+function clean(params) {
+    return _.omit(params, 'geometry', 'debounce');
 }
 
 
@@ -130,23 +130,18 @@ function sortKeys(a, b) {
 }
 
 
-var debounced = _.debounce(d3.json, 750, true);
+var debouncedRequest = _.debounce(request, 750, { leading: false });
 
-
-function request(url, debounce, callback) {
+function request(url, params, callback) {
     if (taginfoCache[url]) {
         callback(null, taginfoCache[url]);
-    } else if (debounce) {
-        debounced(url, done);
     } else {
-        d3.json(url, done);
-    }
-
-    function done(err, data) {
-        if (!err) {
-            taginfoCache[url] = data;
-        }
-        callback(err, data);
+        d3.json(url, function (err, data) {
+            if (!err) {
+                taginfoCache[url] = data;
+            }
+            callback(err, data);
+        });
     }
 }
 
@@ -160,13 +155,8 @@ export default {
         // Fetch popular keys.  We'll exclude these from `values`
         // lookups because they stress taginfo, and they aren't likely
         // to yield meaningful autocomplete results.. see #3955
-        this.keys({
-            rp: 100,
-            sortname: 'values_all',
-            sortorder: 'desc',
-            page: 1,
-            debounce: false
-        }, function(err, data) {
+        var params = { rp: 100, sortname: 'values_all', sortorder: 'desc', page: 1, debounce: false };
+        this.keys(params, function(err, data) {
             if (err) return;
             data.forEach(function(d) {
                 if (d === 'opening_hours') return;  // exception
@@ -179,114 +169,107 @@ export default {
     reset: function() { },
 
 
-    keys: function(parameters, callback) {
-        var debounce = parameters.debounce;
-        parameters = clean(setSort(parameters));
-        request(endpoint + 'keys/all?' +
-            utilQsString(_.extend({
-                rp: 10,
-                sortname: 'count_all',
-                sortorder: 'desc',
-                page: 1
-            }, parameters)), debounce, function(err, d) {
-                if (err) {
-                    callback(err);
-                } else {
-                    var f = filterKeys(parameters.filter);
-                    callback(null, d.data.filter(f).sort(sortKeys).map(valKey));
-                }
-            }
+    keys: function(params, callback) {
+        var req = params.debounce ? debouncedRequest : request;
+        params = clean(setSort(params));
+
+        var qs = utilQsString(
+            _.extend({ rp: 10, sortname: 'count_all', sortorder: 'desc', page: 1 }, params)
         );
+
+
+        req(endpoint + 'keys/all?' + qs, params, function(err, d) {
+            if (err) {
+                callback(err);
+            } else {
+                var f = filterKeys(params.filter);
+                callback(null, d.data.filter(f).sort(sortKeys).map(valKey));
+            }
+        });
     },
 
 
-    multikeys: function(parameters, callback) {
-        var debounce = parameters.debounce;
-        parameters = clean(setSort(parameters));
-        var prefix = parameters.query;
-        request(endpoint + 'keys/all?' +
-            utilQsString(_.extend({
-                rp: 25,
-                sortname: 'count_all',
-                sortorder: 'desc',
-                page: 1
-            }, parameters)), debounce, function(err, d) {
-                if (err) {
-                    callback(err);
-                } else {
-                    var f = filterMultikeys(prefix);
-                    callback(null, d.data.filter(f).map(valKey));
-                }
-            }
+    multikeys: function(params, callback) {
+        var req = params.debounce ? debouncedRequest : request;
+        params = clean(setSort(params));
+        var prefix = params.query;
+
+        var qs = utilQsString(
+            _.extend({ rp: 25, sortname: 'count_all', sortorder: 'desc', page: 1 }, params)
         );
+
+        req(endpoint + 'keys/all?' + qs, params, function(err, d) {
+            if (err) {
+                callback(err);
+            } else {
+                var f = filterMultikeys(prefix);
+                callback(null, d.data.filter(f).map(valKey));
+            }
+        });
     },
 
 
-    values: function(parameters, callback) {
+    values: function(params, callback) {
         // Exclude popular keys from values lookups.. see #3955
-        var key = parameters.key;
+        var key = params.key;
         if (key && popularKeys[key]) {
             callback(null, []);
             return;
         }
 
-        var debounce = parameters.debounce;
-        parameters = clean(setSort(setFilter(parameters)));
-        request(endpoint + 'key/values?' +
-            utilQsString(_.extend({
-                rp: 25,
-                sortname: 'count_all',
-                sortorder: 'desc',
-                page: 1
-            }, parameters)), debounce, function(err, d) {
-                if (err) {
-                    callback(err);
-                } else {
-                    // In most cases we prefer taginfo value results with lowercase letters.
-                    // A few OSM keys expect values to contain uppercase values (see #3377).
-                    // This is not an exhaustive list (e.g. `name` also has uppercase values)
-                    // but these are the fields where taginfo value lookup is most useful.
-                    var re = /network|taxon|genus|species|brand|grape_variety|_hours|_times/;
-                    var allowUpperCase = (parameters.key.match(re) !== null);
-                    var f = filterValues(allowUpperCase);
-                    callback(null, d.data.filter(f).map(valKeyDescription));
-                }
-            }
+        var req = params.debounce ? debouncedRequest : request;
+        params = clean(setSort(setFilter(params)));
+
+        var qs = utilQsString(
+            _.extend({ rp: 25, sortname: 'count_all', sortorder: 'desc', page: 1 }, params)
         );
+
+        req(endpoint + 'key/values?' + qs, params, function(err, d) {
+            if (err) {
+                callback(err);
+            } else {
+                // In most cases we prefer taginfo value results with lowercase letters.
+                // A few OSM keys expect values to contain uppercase values (see #3377).
+                // This is not an exhaustive list (e.g. `name` also has uppercase values)
+                // but these are the fields where taginfo value lookup is most useful.
+                var re = /network|taxon|genus|species|brand|grape_variety|_hours|_times/;
+                var allowUpperCase = (params.key.match(re) !== null);
+                var f = filterValues(allowUpperCase);
+                callback(null, d.data.filter(f).map(valKeyDescription));
+            }
+        });
     },
 
 
-    roles: function(parameters, callback) {
-        var debounce = parameters.debounce;
-        var geometry = parameters.geometry;
-        parameters = clean(setSortMembers(parameters));
-        request(endpoint + 'relation/roles?' +
-            utilQsString(_.extend({
-                rp: 25,
-                sortname: 'count_all_members',
-                sortorder: 'desc',
-                page: 1
-            }, parameters)), debounce, function(err, d) {
-                if (err) {
-                    callback(err);
-                } else {
-                    var f = filterRoles(geometry);
-                    callback(null, d.data.filter(f).map(roleKey));
-                }
-            }
+    roles: function(params, callback) {
+        var req = params.debounce ? debouncedRequest : request;
+        var geometry = params.geometry;
+        params = clean(setSortMembers(params));
+
+        var qs = utilQsString(
+            _.extend({ rp: 25, sortname: 'count_all_members', sortorder: 'desc', page: 1 }, params)
         );
+
+        req(endpoint + 'relation/roles?' + qs, params, function(err, d) {
+            if (err) {
+                callback(err);
+            } else {
+                var f = filterRoles(geometry);
+                callback(null, d.data.filter(f).map(roleKey));
+            }
+        });
     },
 
 
-    docs: function(parameters, callback) {
-        var debounce = parameters.debounce;
-        parameters = clean(setSort(parameters));
+    docs: function(params, callback) {
+        var req = params.debounce ? debouncedRequest : request;
+        params = clean(setSort(params));
 
         var path = 'key/wiki_pages?';
-        if (parameters.value) path = 'tag/wiki_pages?';
-        else if (parameters.rtype) path = 'relation/wiki_pages?';
+        if (params.value) path = 'tag/wiki_pages?';
+        else if (params.rtype) path = 'relation/wiki_pages?';
 
-        request(endpoint + path + utilQsString(parameters), debounce, function(err, d) {
+        req(endpoint + path + utilQsString(params), params, function(err, d) {
             if (err) {
                 callback(err);
             } else {
