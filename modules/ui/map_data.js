@@ -325,6 +325,30 @@ export function uiMapData(context) {
                             return;
                         }
                         
+                        // call for count of import features
+                        var counter_url = metadata_url.split('/metadata')[0] + '/query?where=1%3D1&returnCountOnly=true&f=json';
+                        d3.selectAll('.layer-counted').classed('hide', false);
+                        d3.text(counter_url, function (err, data) {
+                            var count = JSON.parse(data).count;
+                            d3.selectAll('.layer-counted .global').text(count);
+                        });
+                        var bounds = context.map().trimmedExtent().bbox();
+                        bounds = JSON.stringify({
+                            xmin: bounds.minX.toFixed(6) * 1,
+                            ymin: bounds.minY.toFixed(6) * 1,
+                            xmax: bounds.maxX.toFixed(6) * 1,
+                            ymax: bounds.maxY.toFixed(6) * 1,
+                            spatialReference: {wkid: 4326}
+                        });
+                        counter_url += '&geometry=' + bounds;
+                        counter_url += '&geometryType=esriGeometryEnvelope';
+                        counter_url += '&spatialRel=esriSpatialRelIntersects';
+                        counter_url += '&inSR=4326';
+                        d3.text(counter_url, function (err, data) {
+                            var count = JSON.parse(data).count;
+                            d3.selectAll('.layer-counted .local').text(count);
+                        });
+                        
                         // handle OSM / ODBL license approval
                         window.metadata = metadata_url;
                         window.license = data.copyrightText.replace(/\s/g, '');
@@ -560,6 +584,10 @@ export function uiMapData(context) {
                                 window.layerImports['add_' + this.name] = this.value;
                             });
                     });
+
+            this.pane.append('div')
+                .attr('class', 'layer-counted hide')
+                .html('<span class="global"></span> features; <span class="local"></span> in current view');
             
             // save button makes changes to existing and new import data
             this.pane.append('button')
@@ -586,6 +614,7 @@ export function uiMapData(context) {
                 if (window.license || window.metadata) {
                     context.storage('license-' + (window.license || window.metadata), 'approved');
                 }
+                d3.selectAll('.layer-counted').classed('hide', true);
                 setGeoService(d3.select('.topurl input.geoservice').property('value'), geoserviceDownloadAll);
             };
             this.pane.append('button')

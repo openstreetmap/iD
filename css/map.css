@@ -1650,6 +1650,11 @@ text.geoservice {
     margin-right: 8px;
 }
 
+.geoservice-pane .layer-counted {
+    font-weight: bold;
+    text-align: right;
+}
+
 /* more importer stuff */
 
 .import-approve {
