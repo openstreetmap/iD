@@ -129,7 +129,7 @@ function sortKeys(a, b) {
 }
 
 
-var debounced = _.debounce(d3.json, 100, true);
+var debounced = _.debounce(d3.json, 750, true);
 
 
 function request(url, debounce, callback) {
