@@ -131,7 +131,7 @@ function sortKeys(a, b) {
 }
 
 
-var debouncedRequest = _.debounce(request, 750, { leading: false });
+var debouncedRequest = _.debounce(request, 500, { leading: false });
 
 function request(url, params, exactMatch, callback, loaded) {
     if (inflight[url]) return;
