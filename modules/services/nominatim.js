@@ -6,13 +6,22 @@ import { utilQsString } from '../util/index';
 
 
 var apibase = 'https://nominatim.openstreetmap.org/',
+    inflight = {},
     nominatimCache;
 
 
 export default {
 
-    init: function() { nominatimCache = rbush(); },
-    reset: function() { nominatimCache = rbush(); },
+    init: function() {
+        inflight = {};
+        nominatimCache = rbush();
+    },
+
+    reset: function() {
+        _.forEach(inflight, function(req) { req.abort(); });
+        inflight = {};
+        nominatimCache = rbush();
+    },
 
 
     countryCode: function (location, callback) {
@@ -24,32 +33,37 @@ export default {
             return callback(null, countryCodes[0].data);
         }
 
-        d3.json(apibase + 'reverse?' +
-            utilQsString({
-                format: 'json',
-                addressdetails: 1,
-                lat: location[1],
-                lon: location[0]
-            }), function(err, result) {
-                if (err)
-                    return callback(err);
-                else if (result && result.error)
-                    return callback(result.error);
+        var params = { format: 'json', addressdetails: 1, lat: location[1], lon: location[0] };
+        var url = apibase + 'reverse?' + utilQsString(params);
+        if (inflight[url]) return;
 
-                var extent = geoExtent(location).padByMeters(1000);
-                nominatimCache.insert(_.assign(extent.bbox(),
-                    { data: result.address.country_code }
-                ));
+        inflight[url] = d3.json(url, function(err, result) {
+            delete inflight[url];
 
-                callback(null, result.address.country_code);
-            }
-        );
+            if (err)
+                return callback(err);
+            else if (result && result.error)
+                return callback(result.error);
+
+            var extent = geoExtent(location).padByMeters(1000);
+            nominatimCache.insert(_.assign(extent.bbox(),
+                { data: result.address.country_code }
+            ));
+
+            callback(null, result.address.country_code);
+        });
     },
 
 
     search: function (val, callback) {
         var searchVal = encodeURIComponent(val);
-        d3.json(apibase + 'search/' + searchVal + '?limit=10&format=json', callback);
+        var url = apibase + 'search/' + searchVal + '?limit=10&format=json';
+        if (inflight[url]) return;
+
+        inflight[url] = d3.json(url, function(err, result) {
+            delete inflight[url];
+            callback(err, result);
+        });
     }
 
 };
