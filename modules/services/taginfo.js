@@ -3,9 +3,10 @@ import _ from 'lodash';
 import { utilQsString } from '../util';
 
 
-var endpoint = 'https://taginfo.openstreetmap.org/api/4/',
-    taginfoCache = {},
+var apibase = 'https://taginfo.openstreetmap.org/api/4/',
+    inflight = {},
     popularKeys = {},
+    taginfoCache = {},
     tag_sorts = {
         point: 'count_nodes',
         vertex: 'count_nodes',
@@ -132,23 +133,49 @@ function sortKeys(a, b) {
 
 var debouncedRequest = _.debounce(request, 750, { leading: false });
 
-function request(url, params, callback) {
-    if (taginfoCache[url]) {
-        callback(null, taginfoCache[url]);
-    } else {
-        d3.json(url, function (err, data) {
-            if (!err) {
-                taginfoCache[url] = data;
-            }
-            callback(err, data);
-        });
-    }
+function request(url, params, exactMatch, callback, loaded) {
+    if (inflight[url]) return;
+
+    if (checkCache(url, params, exactMatch, callback)) return;
+
+    inflight[url] = d3.json(url, function (err, data) {
+        delete inflight[url];
+        loaded(err, data);
+    });
+}
+
+
+function checkCache(url, params, exactMatch, callback) {
+    var rp = params.rp || 25,
+        testQuery = params.query || '',
+        testUrl = url;
+
+    do {
+        var hit = taginfoCache[testUrl];
+
+        // exact match, or shorter match yielding fewer than max results (rp)
+        if (hit && (url === testUrl || hit.length < rp)) {
+            callback(null, hit);
+            return true;
+        }
+
+        // don't try to shorten the query
+        if (exactMatch || !testQuery.length) return false;
+
+        // do shorten the query to see if we already have a cached result
+        // that has returned fewer than max results (rp)
+        testQuery = testQuery.slice(0, -1);
+        testUrl = url.replace(/&query=(.*?)&/, '&query=' + testQuery + '&');
+    } while (testQuery.length >= 0);
+
+    return false;
 }
 
 
 export default {
 
     init: function() {
+        inflight = {};
         taginfoCache = {};
         popularKeys = {};
 
@@ -166,44 +193,46 @@ export default {
     },
 
 
-    reset: function() { },
+    reset: function() {
+        _.forEach(inflight, function(req) { req.abort(); });
+        inflight = {};
+    },
 
 
     keys: function(params, callback) {
-        var req = params.debounce ? debouncedRequest : request;
+        var doRequest = params.debounce ? debouncedRequest : request;
         params = clean(setSort(params));
+        params = _.extend({ rp: 10, sortname: 'count_all', sortorder: 'desc', page: 1 }, params);
 
-        var qs = utilQsString(
-            _.extend({ rp: 10, sortname: 'count_all', sortorder: 'desc', page: 1 }, params)
-        );
-
-
-        req(endpoint + 'keys/all?' + qs, params, function(err, d) {
+        var url = apibase + 'keys/all?' + utilQsString(params);
+        doRequest(url, params, false, callback, function(err, d) {
             if (err) {
                 callback(err);
             } else {
                 var f = filterKeys(params.filter);
-                callback(null, d.data.filter(f).sort(sortKeys).map(valKey));
+                var result = d.data.filter(f).sort(sortKeys).map(valKey);
+                taginfoCache[url] = result;
+                callback(null, result);
             }
         });
     },
 
 
     multikeys: function(params, callback) {
-        var req = params.debounce ? debouncedRequest : request;
+        var doRequest = params.debounce ? debouncedRequest : request;
         params = clean(setSort(params));
+        params = _.extend({ rp: 25, sortname: 'count_all', sortorder: 'desc', page: 1 }, params);
         var prefix = params.query;
 
-        var qs = utilQsString(
-            _.extend({ rp: 25, sortname: 'count_all', sortorder: 'desc', page: 1 }, params)
-        );
-
-        req(endpoint + 'keys/all?' + qs, params, function(err, d) {
+        var url = apibase + 'keys/all?' + utilQsString(params);
+        doRequest(url, params, true, callback, function(err, d) {
             if (err) {
                 callback(err);
             } else {
                 var f = filterMultikeys(prefix);
-                callback(null, d.data.filter(f).map(valKey));
+                var result = d.data.filter(f).map(valKey);
+                taginfoCache[url] = result;
+                callback(null, result);
             }
         });
     },
@@ -217,14 +246,12 @@ export default {
             return;
         }
 
-        var req = params.debounce ? debouncedRequest : request;
+        var doRequest = params.debounce ? debouncedRequest : request;
         params = clean(setSort(setFilter(params)));
+        params = _.extend({ rp: 25, sortname: 'count_all', sortorder: 'desc', page: 1 }, params);
 
-        var qs = utilQsString(
-            _.extend({ rp: 25, sortname: 'count_all', sortorder: 'desc', page: 1 }, params)
-        );
-
-        req(endpoint + 'key/values?' + qs, params, function(err, d) {
+        var url = apibase + 'key/values?' + utilQsString(params);
+        doRequest(url, params, false, callback, function(err, d) {
             if (err) {
                 callback(err);
             } else {
@@ -235,53 +262,58 @@ export default {
                 var re = /network|taxon|genus|species|brand|grape_variety|_hours|_times/;
                 var allowUpperCase = (params.key.match(re) !== null);
                 var f = filterValues(allowUpperCase);
-                callback(null, d.data.filter(f).map(valKeyDescription));
+
+                var result = d.data.filter(f).map(valKeyDescription);
+                taginfoCache[url] = result;
+                callback(null, result);
             }
         });
     },
 
 
     roles: function(params, callback) {
-        var req = params.debounce ? debouncedRequest : request;
+        var doRequest = params.debounce ? debouncedRequest : request;
         var geometry = params.geometry;
         params = clean(setSortMembers(params));
+        params = _.extend({ rp: 25, sortname: 'count_all_members', sortorder: 'desc', page: 1 }, params);
 
-        var qs = utilQsString(
-            _.extend({ rp: 25, sortname: 'count_all_members', sortorder: 'desc', page: 1 }, params)
-        );
-
-        req(endpoint + 'relation/roles?' + qs, params, function(err, d) {
+        var url = apibase + 'relation/roles?' + utilQsString(params);
+        doRequest(url, params, true, callback, function(err, d) {
             if (err) {
                 callback(err);
             } else {
                 var f = filterRoles(geometry);
-                callback(null, d.data.filter(f).map(roleKey));
+                var result = d.data.filter(f).map(roleKey);
+                taginfoCache[url] = result;
+                callback(null, result);
             }
         });
     },
 
 
     docs: function(params, callback) {
-        var req = params.debounce ? debouncedRequest : request;
+        var doRequest = params.debounce ? debouncedRequest : request;
         params = clean(setSort(params));
 
         var path = 'key/wiki_pages?';
         if (params.value) path = 'tag/wiki_pages?';
         else if (params.rtype) path = 'relation/wiki_pages?';
 
-        req(endpoint + path + utilQsString(params), params, function(err, d) {
+        var url = apibase + path + utilQsString(params);
+        doRequest(url, params, true, callback, function(err, d) {
             if (err) {
                 callback(err);
             } else {
+                taginfoCache[url] = d.data;
                 callback(null, d.data);
             }
         });
     },
 
 
-    endpoint: function(_) {
-        if (!arguments.length) return endpoint;
-        endpoint = _;
+    apibase: function(_) {
+        if (!arguments.length) return apibase;
+        apibase = _;
         return this;
     }
 
