@@ -19,6 +19,7 @@ export function uiRawTagEditor(context) {
         readOnlyTags = [],
         updatePreference = true,
         showBlank = false,
+        newRow,
         state,
         preset,
         tags,
@@ -52,6 +53,7 @@ export function uiRawTagEditor(context) {
         if (!entries.length || showBlank) {
             showBlank = false;
             entries.push({key: '', value: ''});
+            newRow = '';
         }
 
         var list = wrap.selectAll('.tag-list')
@@ -121,8 +123,8 @@ export function uiRawTagEditor(context) {
         items = items
             .merge(enter)
             .sort(function(a, b) {
-                return (a.key === '') ? 1
-                    : (b.key === '') ? -1
+                return (a.key === newRow && b.key !== newRow) ? 1
+                    : (a.key !== newRow && b.key === newRow) ? -1
                     : d3.ascending(a.key, b.key);
             });
 
@@ -259,7 +261,13 @@ export function uiRawTagEditor(context) {
             }
             tag[kOld] = undefined;
             tag[kNew] = d.value;
+
             d.key = kNew; // Maintain DOM identity through the subsequent update.
+
+            if (newRow === kOld) {  // see if this row is still a new row
+                newRow = ((d.value === '' || kNew === '') ? kNew : undefined);
+            }
+
             this.value = kNew;
             dispatch.call('change', this, tag);
         }
@@ -269,6 +277,11 @@ export function uiRawTagEditor(context) {
             if (isReadOnly(d)) return;
             var tag = {};
             tag[d.key] = this.value;
+
+            if (newRow === d.key && d.key !== '' && d.value !== '') {   // not a new row anymore
+                newRow = undefined;
+            }
+
             dispatch.call('change', this, tag);
         }
 
