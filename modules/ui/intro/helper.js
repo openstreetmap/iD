@@ -53,6 +53,7 @@ function slugify(text) {
 }
 
 
+// console warning for missing walkthrough names
 export var missingStrings = {};
 function checkKey(key, text) {
     if (t(key, { default: undefined}) === undefined) {
@@ -67,35 +68,36 @@ function checkKey(key, text) {
 export function localize(obj) {
     var key;
 
+    // Assign name if entity has one..
     var name = obj.tags && obj.tags.name;
     if (name) {
         key = 'intro.graph.name.' + slugify(name);
         obj.tags.name = t(key, { default: name });
         checkKey(key, name);
     }
+
+    // Assign street name if entity has one..
     var street = obj.tags && obj.tags['addr:street'];
     if (street) {
         key = 'intro.graph.name.' + slugify(street);
         obj.tags['addr:street'] = t(key, { default: street });
         checkKey(key, street);
-    }
-    var city = obj.tags && obj.tags['addr:city'];
-    if (city) {
-        key = 'intro.graph.city';
-        obj.tags['addr:city'] = t(key, { default: city });
-        checkKey(key, city);
-    }
-    var state = obj.tags && obj.tags['addr:state'];
-    if (state) {
-        key = 'intro.graph.state';
-        obj.tags['addr:state'] = t(key, { default: state });
-        checkKey(key, state);
-    }
-    var postcode = obj.tags && obj.tags['addr:postcode'];
-    if (postcode) {
-        key = 'intro.graph.postcode';
-        obj.tags['addr:postcode'] = t(key, { default: postcode });
-        checkKey(key, postcode);
+
+        // Add address details common across walkthrough..
+        var addrTags = [
+            'block_number', 'city', 'county', 'district', 'hamlet', 'neighbourhood',
+            'postcode', 'province', 'quarter', 'state', 'subdistrict', 'suburb'
+        ];
+        addrTags.forEach(function(k) {
+            var key = 'intro.graph.' + k,
+                tag = 'addr:' + k,
+                val = obj.tags && obj.tags[tag],
+                str = t(key, { default: val });
+
+            if (str && str.match(/^<.*>$/) === null) {
+                obj.tags[tag] = str;
+            }
+        });
     }
 
     return obj;

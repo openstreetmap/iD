@@ -120,7 +120,7 @@ export function uiFieldAddress(field, context) {
         if (err) return;
 
         var addressFormat = _.find(dataAddressFormats, function (a) {
-            return a && a.countryCodes && _.includes(a.countryCodes, countryCode);
+            return a && a.countryCodes && _.includes(a.countryCodes, countryCode.toLowerCase());
         }) || _.first(dataAddressFormats);
 
         var widths = addressFormat.widths || {
@@ -153,7 +153,7 @@ export function uiFieldAddress(field, context) {
             .append('input')
             .property('type', 'text')
             .attr('placeholder', function (d) {
-                var localkey = d.id + '!' + countryCode,
+                var localkey = d.id + '!' + countryCode.toLowerCase(),
                     tkey = field.strings.placeholders[localkey] ? localkey : d.id;
                 return field.t('placeholders.' + tkey);
             })

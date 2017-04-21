@@ -6,6 +6,7 @@ import { coreGraph } from '../../core/graph';
 import { dataIntroGraph } from '../../../data/intro_graph.json';
 import { modeBrowse } from '../../modes/browse';
 import { osmEntity } from '../../osm/entity';
+import { services } from '../../services';
 import { svgIcon } from '../../svg/icon';
 import { uiCurtain } from '../curtain';
 
@@ -61,7 +62,8 @@ export function uiIntro(context) {
             background = context.background().baseLayerSource(),
             opacity = d3.selectAll('#map .layer-background').style('opacity'),
             loadedTiles = context.connection().loadedTiles(),
-            baseEntities = context.history().graph().base().entities;
+            baseEntities = context.history().graph().base().entities,
+            countryCode = services.geocoder.countryCode;
 
         // Block saving
         context.inIntro(true);
@@ -72,6 +74,11 @@ export function uiIntro(context) {
         context.history().merge(d3.values(coreGraph().load(introGraph).entities));
         context.history().checkpoint('initial');
         context.background().bing();
+
+        // Mock geocoder
+        services.geocoder.countryCode = function(location, callback) {
+            callback(null, t('intro.graph.countrycode'));
+        };
 
         d3.selectAll('#map .layer-background').style('opacity', 1);
 
@@ -106,6 +113,7 @@ export function uiIntro(context) {
             if (history) context.history().fromJSON(history, false);
             context.map().centerZoom(center, zoom);
             window.location.replace(hash);
+            services.geocoder.countryCode = countryCode;
             context.inIntro(false);
         });
 
