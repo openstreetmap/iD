@@ -73,6 +73,12 @@ export function localize(obj) {
         obj.tags.name = t(key, { default: name });
         checkKey(key, name);
     }
+    var street = obj.tags && obj.tags['addr:street'];
+    if (street) {
+        key = 'intro.graph.name.' + slugify(street);
+        obj.tags['addr:street'] = t(key, { default: street });
+        checkKey(key, street);
+    }
     var city = obj.tags && obj.tags['addr:city'];
     if (city) {
         key = 'intro.graph.city';
