@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { actionReverse } from '../actions/reverse';
+import { osmIsInterestingTag } from './tags';
 
 
 // For fixing up rendering of multipolygons with tags on the outer member.
@@ -13,7 +14,7 @@ export function osmIsSimpleMultipolygonOuterMember(entity, graph) {
         return false;
 
     var parent = parents[0];
-    if (!parent.isMultipolygon() || Object.keys(parent.tags).length > 1)
+    if (!parent.isMultipolygon() || Object.keys(parent.tags).filter(osmIsInterestingTag).length > 1)
         return false;
 
     var members = parent.members, member;
@@ -38,7 +39,7 @@ export function osmSimpleMultipolygonOuterMember(entity, graph) {
         return false;
 
     var parent = parents[0];
-    if (!parent.isMultipolygon() || Object.keys(parent.tags).length > 1)
+    if (!parent.isMultipolygon() || Object.keys(parent.tags).filter(osmIsInterestingTag).length > 1)
         return false;
 
     var members = parent.members, member, outerMember;
