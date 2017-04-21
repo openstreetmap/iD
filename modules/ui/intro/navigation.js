@@ -485,8 +485,8 @@ export function uiIntroNavigation(context, reveal) {
         reveal('.entity-editor-pane',
             t('intro.navigation.editor_street', {
                 button: icon(href, 'pre-text'),
-                field1: onewayField.label().toLowerCase(),
-                field2: maxspeedField.label().toLowerCase()
+                field1: onewayField.label(),
+                field2: maxspeedField.label()
             })
         );
 
