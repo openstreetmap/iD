@@ -58,7 +58,8 @@ export function svgLines(projection, context) {
             lines.enter()
                 .append('path')
                 .attr('class', function(d) {
-                    return 'way line ' + klass + ' ' + d.id + (isSelected ? ' selected' : '');
+                    return 'way line ' + klass + ' ' + d.id + (isSelected ? ' selected' : '') +
+                        (oldMultiPolygonOuters[d.id] ? ' old-multipolygon' : '');
                 })
                 .call(svgTagClasses())
                 .merge(lines)
@@ -87,13 +88,15 @@ export function svgLines(projection, context) {
         var getPath = svgPath(projection, graph),
             ways = [],
             pathdata = {},
-            onewaydata = {};
+            onewaydata = {},
+            oldMultiPolygonOuters = {};
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i],
                 outer = osmSimpleMultipolygonOuterMember(entity, graph);
             if (outer) {
                 ways.push(entity.mergeTags(outer.tags));
+                oldMultiPolygonOuters[outer.id] = true;
             } else if (entity.geometry(graph) === 'line') {
                 ways.push(entity);
             }
