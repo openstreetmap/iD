@@ -45,17 +45,17 @@ export function modeDragNode(context) {
     }
 
     function edge(point, size) {
-        var pad = [30, 100, 30, 100],
+        var pad = [80, 20, 50, 20],   // top, right, bottom, left
             x = 0,
             y = 0;
 
-        if (point[0] > size[0] - pad[0])
+        if (point[0] > size[0] - pad[1])
             x = -10;
-        if (point[0] < pad[2])
+        if (point[0] < pad[3])
             x = 10;
-        if (point[1] > size[1] - pad[1])
+        if (point[1] > size[1] - pad[2])
             y = -10;
-        if (point[1] < pad[3])
+        if (point[1] < pad[0])
             y = 10;
 
         if (x || y) {
@@ -76,8 +76,10 @@ export function modeDragNode(context) {
 
 
     function stopNudge() {
-        if (nudgeInterval) window.clearInterval(nudgeInterval);
-        nudgeInterval = null;
+        if (nudgeInterval) {
+            window.clearInterval(nudgeInterval);
+            nudgeInterval = null;
+        }
     }
 
 
@@ -159,10 +161,12 @@ export function modeDragNode(context) {
             loc = context.projection.invert(currMouse),
             d = datum();
 
-        if (d.type === 'node' && d.id !== entity.id) {
-            loc = d.loc;
-        } else if (d.type === 'way' && !d3.select(d3.event.sourceEvent.target).classed('fill')) {
-            loc = geoChooseEdge(context.childNodes(d), context.mouse(), context.projection).loc;
+        if (!nudgeInterval) {
+            if (d.type === 'node' && d.id !== entity.id) {
+                loc = d.loc;
+            } else if (d.type === 'way' && !d3.select(d3.event.sourceEvent.target).classed('fill')) {
+                loc = geoChooseEdge(context.childNodes(d), context.mouse(), context.projection).loc;
+            }
         }
 
         context.replace(
@@ -181,8 +185,11 @@ export function modeDragNode(context) {
 
         doMove(entity);
         var nudge = edge(d3.event.point, context.map().dimensions());
-        if (nudge) startNudge(entity, nudge);
-        else stopNudge();
+        if (nudge) {
+            startNudge(entity, nudge);
+        } else {
+            stopNudge();
+        }
     }
 
 
