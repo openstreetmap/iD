@@ -99,7 +99,14 @@ export function utilDetect(force) {
     }
     setTextDirection(detected.textDirection);
 
-    detected.host = window.location && (window.location.origin + window.location.pathname);
+    // detect host
+    var loc = window.top.location;
+    var origin = loc.origin;
+    if (!origin) {  // for unpatched IE11
+        origin = loc.protocol + '//' + loc.hostname + (loc.port ? ':' + loc.port: '');
+    }
+
+    detected.host = origin + loc.pathname;
 
     detected.filedrop = (window.FileReader && 'ondrop' in window);
 
