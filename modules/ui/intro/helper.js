@@ -94,8 +94,12 @@ export function localize(obj) {
                 val = obj.tags && obj.tags[tag],
                 str = t(key, { default: val });
 
-            if (str && str.match(/^<.*>$/) === null) {
-                obj.tags[tag] = str;
+            if (str) {
+                if (str.match(/^<.*>$/) !== null) {
+                    delete obj.tags[tag];
+                } else {
+                    obj.tags[tag] = str;
+                }
             }
         });
     }
