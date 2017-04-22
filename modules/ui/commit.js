@@ -41,7 +41,16 @@ export function uiCommit(context) {
 
         var changes = context.history().changes(),
             summary = context.history().difference().summary(),
-            rawTagEditor = uiRawTagEditor(context).on('change', changeTags);
+            rawTagEditor = uiRawTagEditor(context).on('change', changeTags),
+            comment = context.storage('comment') || '',
+            commentDate = +context.storage('commentDate') || 0,
+            currDate = Date.now(),
+            cutoff = 2 * 86400 * 1000;   // 2 days
+
+        // expire the stored comment if it is too old - #3947
+        if (commentDate > currDate || currDate - commentDate > cutoff) {
+            comment = '';
+        }
 
         selection
             .append('div')
@@ -67,11 +76,12 @@ export function uiCommit(context) {
             .attr('class', 'commit-form-comment')
             .attr('placeholder', t('commit.description_placeholder'))
             .attr('maxlength', 255)
-            .property('value', context.storage('comment') || '')
+            .property('value', comment)
             .on('input.save', change(true))
             .on('change.save', change())
             .on('blur.save', function() {
                 context.storage('comment', this.value);
+                context.storage('commentDate', Date.now());
             });
 
 

@@ -75,8 +75,13 @@ export function behaviorHash(context) {
 
         if (window.location.hash) {
             var q = utilStringQs(window.location.hash.substring(1));
-            if (q.id) context.zoomToEntity(q.id.split(',')[0], !q.map);
-            if (q.comment) context.storage('comment', q.comment);
+            if (q.id) {
+                context.zoomToEntity(q.id.split(',')[0], !q.map);
+            }
+            if (q.comment) {
+                context.storage('comment', q.comment);
+                context.storage('commentDate', Date.now());
+            }
             hashchange();
             if (q.map) hash.hadHash = true;
         }
