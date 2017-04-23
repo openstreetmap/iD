@@ -1,5 +1,8 @@
 {
     "icon": "poi-monument",
+    "fields": [
+        "inscription"
+    ],
     "geometry": [
         "point",
         "vertex"
