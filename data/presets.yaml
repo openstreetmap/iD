@@ -588,6 +588,9 @@ en:
       information:
         # information=*
         label: Type
+      inscription:
+        # inscription=*
+        label: Inscription
       internet_access:
         # internet_access=*
         label: Internet Access

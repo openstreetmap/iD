@@ -1,5 +1,8 @@
 {
     "icon": "landmark",
+    "fields": [
+        "inscription"
+    ],
     "geometry": [
         "point",
         "vertex",

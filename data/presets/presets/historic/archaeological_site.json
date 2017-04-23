@@ -1,7 +1,8 @@
 {
     "icon": "poi-ruins",
     "fields": [
-        "historic/civilization"
+        "historic/civilization",
+        "inscription"
     ],
     "geometry": [
         "point",

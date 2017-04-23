@@ -1429,6 +1429,9 @@
                 "information": {
                     "label": "Type"
                 },
+                "inscription": {
+                    "label": "Inscription"
+                },
                 "internet_access": {
                     "label": "Internet Access",
                     "options": {

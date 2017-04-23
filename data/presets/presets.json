@@ -6024,7 +6024,8 @@
         "historic": {
             "icon": "poi-ruins",
             "fields": [
-                "historic"
+                "historic",
+                "inscription"
             ],
             "geometry": [
                 "point",
@@ -6039,7 +6040,8 @@
         "historic/archaeological_site": {
             "icon": "poi-ruins",
             "fields": [
-                "historic/civilization"
+                "historic/civilization",
+                "inscription"
             ],
             "geometry": [
                 "point",
@@ -6080,6 +6082,9 @@
         },
         "historic/memorial": {
             "icon": "monument",
+            "fields": [
+                "inscription"
+            ],
             "geometry": [
                 "point",
                 "vertex",
@@ -6092,6 +6097,9 @@
         },
         "historic/monument": {
             "icon": "monument",
+            "fields": [
+                "inscription"
+            ],
             "geometry": [
                 "point",
                 "vertex",
@@ -6105,7 +6113,8 @@
         "historic/ruins": {
             "icon": "poi-ruins",
             "fields": [
-                "historic/civilization"
+                "historic/civilization",
+                "inscription"
             ],
             "geometry": [
                 "point",
@@ -6121,7 +6130,8 @@
             "icon": "cemetery",
             "fields": [
                 "tomb",
-                "building_area"
+                "building_area",
+                "inscription"
             ],
             "geometry": [
                 "point",
@@ -6134,6 +6144,9 @@
         },
         "historic/wayside_cross": {
             "icon": "religious-christian",
+            "fields": [
+                "inscription"
+            ],
             "geometry": [
                 "point",
                 "vertex",
@@ -6146,6 +6159,9 @@
         },
         "historic/wayside_shrine": {
             "icon": "landmark",
+            "fields": [
+                "inscription"
+            ],
             "geometry": [
                 "point",
                 "vertex",

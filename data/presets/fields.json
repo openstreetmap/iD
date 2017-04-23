@@ -821,6 +821,11 @@
             "type": "typeCombo",
             "label": "Type"
         },
+        "inscription": {
+            "key": "inscription",
+            "type": "textarea",
+            "label": "Inscription"
+        },
         "internet_access": {
             "key": "internet_access",
             "type": "combo",
