@@ -15,7 +15,7 @@ import { utilRebind } from '../util/rebind';
  */
 export function behaviorHover() {
     var dispatch = d3.dispatch('hover'),
-        selection = d3.select(null),
+        _selection = d3.select(null),
         buttonDown,
         altDisables,
         target;
@@ -23,28 +23,36 @@ export function behaviorHover() {
 
     function keydown() {
         if (altDisables && d3.event.keyCode === d3keybinding.modifierCodes.alt) {
-            dispatch.call('hover', this, null);
-            selection.selectAll('.hover')
+            _selection.selectAll('.hover')
                 .classed('hover-suppressed', true)
                 .classed('hover', false);
+
+            _selection
+                .classed('hover-disabled', true);
+
+            dispatch.call('hover', this, null);
         }
     }
 
 
     function keyup() {
         if (altDisables && d3.event.keyCode === d3keybinding.modifierCodes.alt) {
-            dispatch.call('hover', this, target ? target.id : null);
-            selection.selectAll('.hover-suppressed')
+            _selection.selectAll('.hover-suppressed')
                 .classed('hover-suppressed', false)
                 .classed('hover', true);
+
+            _selection
+                .classed('hover-disabled', false);
+
+            dispatch.call('hover', this, target ? target.id : null);
         }
     }
 
 
-    var hover = function(__) {
-        selection = __;
+    var hover = function(selection) {
+        _selection = selection;
 
-        selection
+        _selection
             .on('mouseover.hover', mouseover)
             .on('mouseout.hover', mouseout)
             .on('mousedown.hover', mousedown);
@@ -86,9 +94,9 @@ export function behaviorHover() {
             if (d === target) return;
             target = d;
 
-            selection.selectAll('.hover')
+            _selection.selectAll('.hover')
                 .classed('hover', false);
-            selection.selectAll('.hover-suppressed')
+            _selection.selectAll('.hover-suppressed')
                 .classed('hover-suppressed', false);
 
             if (target instanceof osmEntity) {
@@ -102,10 +110,11 @@ export function behaviorHover() {
 
                 var suppressed = altDisables && d3.event && d3.event.altKey;
 
-                selection.selectAll(selector)
+                _selection.selectAll(selector)
                     .classed(suppressed ? 'hover-suppressed' : 'hover', true);
 
-                dispatch.call('hover', this, target.id);
+                dispatch.call('hover', this, !suppressed && target.id);
+
             } else {
                 dispatch.call('hover', this, null);
             }
@@ -114,13 +123,13 @@ export function behaviorHover() {
     };
 
 
-    hover.off = function(selection) {
-        selection.selectAll('.hover')
+    hover.off = function() {
+        _selection.selectAll('.hover')
             .classed('hover', false);
-        selection.selectAll('.hover-suppressed')
+        _selection.selectAll('.hover-suppressed')
             .classed('hover-suppressed', false);
 
-        selection
+        _selection
             .on('mouseover.hover', null)
             .on('mouseout.hover', null)
             .on('mousedown.hover', null);

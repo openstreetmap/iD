@@ -70,6 +70,12 @@ describe('iD.behaviorHover', function() {
             expect(container.selectAll('.hover').nodes()).to.have.length(0);
             expect(container.selectAll('.hover-suppressed').nodes()).to.have.length(1);
         });
+
+        it('adds the .hover-disabled class to the surface', function () {
+            container.call(iD.behaviorHover(context).altDisables(true));
+            happen.keydown(window, {keyCode: 18});
+            expect(container.classed('hover-disabled')).to.be.true;
+        });
     });
 
     describe('alt keyup', function () {
@@ -81,6 +87,13 @@ describe('iD.behaviorHover', function() {
 
             expect(container.selectAll('.hover').nodes()).to.have.length(1);
             expect(container.selectAll('.hover-suppressed').nodes()).to.have.length(0);
+        });
+
+        it('removes the .hover-disabled class from the surface', function () {
+            container.call(iD.behaviorHover(context).altDisables(true));
+            happen.keydown(window, {keyCode: 18});
+            happen.keyup(window, {keyCode: 18});
+            expect(container.classed('hover-disabled')).to.be.false;
         });
     });
 });
