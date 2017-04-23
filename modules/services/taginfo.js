@@ -59,7 +59,7 @@ function setSortMembers(params) {
 
 
 function clean(params) {
-    return _.omit(params, 'geometry', 'debounce');
+    return _.omit(params, ['geometry', 'debounce']);
 }
 
 

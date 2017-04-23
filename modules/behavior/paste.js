@@ -65,7 +65,7 @@ export function behaviorPaste(context) {
 
             extent._extend(oldEntity.extent(oldGraph));
             context.perform(
-                actionChangeTags(newEntity.id, _.omit(newEntity.tags, omitTag))
+                actionChangeTags(newEntity.id, _.omitBy(newEntity.tags, omitTag))
             );
 
             // Exclude child nodes from newIDs if their parent way was also copied.
