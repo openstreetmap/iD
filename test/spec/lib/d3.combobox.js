@@ -81,7 +81,7 @@ describe('d3.combobox', function() {
 
     it('adds the combobox-input class', function() {
         input.call(combobox);
-        expect(input).to.be.classed('combobox-input');
+        expect(input.classed('combobox-input')).to.be.true;
     });
 
     it('adds combobox under body by default', function() {

@@ -24,8 +24,8 @@ describe('iD.svgLines', function () {
 
         surface.call(iD.svgLines(projection, context), graph, [line], all);
 
-        expect(surface.select('path.way')).to.be.classed('way');
-        expect(surface.select('path.line')).to.be.classed('line');
+        expect(surface.select('path.way').classed('way')).to.be.true;
+        expect(surface.select('path.line').classed('line')).to.be.true;
     });
 
     it('adds tag classes', function () {
@@ -36,8 +36,8 @@ describe('iD.svgLines', function () {
 
         surface.call(iD.svgLines(projection, context), graph, [line], all);
 
-        expect(surface.select('.line')).to.be.classed('tag-highway');
-        expect(surface.select('.line')).to.be.classed('tag-highway-residential');
+        expect(surface.select('.line').classed('tag-highway')).to.be.true;
+        expect(surface.select('.line').classed('tag-highway-residential')).to.be.true;
     });
 
     it('adds stroke classes for the tags of the parent relation of multipolygon members', function() {
@@ -49,7 +49,7 @@ describe('iD.svgLines', function () {
 
         surface.call(iD.svgLines(projection, context), graph, [line], all);
 
-        expect(surface.select('.stroke')).to.be.classed('tag-natural-wood');
+        expect(surface.select('.stroke').classed('tag-natural-wood')).to.be.true;
     });
 
     it('renders stroke for outer way of multipolygon with tags on the outer way', function() {
@@ -62,7 +62,7 @@ describe('iD.svgLines', function () {
 
         surface.call(iD.svgLines(projection, context), graph, [w], all);
 
-        expect(surface.select('.stroke')).to.be.classed('tag-natural-wood');
+        expect(surface.select('.stroke').classed('tag-natural-wood')).to.be.true;
     });
 
     it('adds stroke classes for the tags of the outer way of multipolygon with tags on the outer way', function() {
@@ -76,7 +76,7 @@ describe('iD.svgLines', function () {
 
         surface.call(iD.svgLines(projection, context), graph, [i], all);
 
-        expect(surface.select('.stroke')).to.be.classed('tag-natural-wood');
+        expect(surface.select('.stroke').classed('tag-natural-wood')).to.be.true;
     });
 
     describe('z-indexing', function() {

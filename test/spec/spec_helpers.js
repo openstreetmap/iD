@@ -18,16 +18,3 @@ mocha.setup({
 
 expect = chai.expect;
 var d3 = iD.d3;
-
-chai.use(function (chai, utils) {
-    var flag = utils.flag;
-
-    chai.Assertion.addMethod('classed', function (className) {
-        this.assert(
-            flag(this, 'object').classed(className)
-            , 'expected #{this} to be classed #{exp}'
-            , 'expected #{this} not to be classed #{exp}'
-            , className
-        );
-    });
-});

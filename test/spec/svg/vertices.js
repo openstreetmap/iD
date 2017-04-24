@@ -15,13 +15,14 @@ describe('iD.svgVertices', function () {
 
 
     it('adds the .shared class to vertices that are members of two or more ways', function () {
-        var node = iD.Node({loc: [0, 0]}),
+        var zoom = 17,
+            node = iD.Node({loc: [0, 0]}),
             way1 = iD.Way({nodes: [node.id], tags: {highway: 'residential'}}),
             way2 = iD.Way({nodes: [node.id], tags: {highway: 'residential'}}),
             graph = iD.Graph([node, way1, way2]);
 
-        surface.call(iD.svgVertices(projection, context), graph, [node], 17);
+        surface.call(iD.svgVertices(projection, context), graph, [node], zoom);
 
-        expect(surface.select('.vertex')).to.be.classed('shared');
+        expect(surface.select('.vertex').classed('shared')).to.be.true;
     });
 });
