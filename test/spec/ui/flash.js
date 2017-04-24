@@ -8,7 +8,7 @@ describe('iD.uiFlash', function () {
             .attr('id', 'footer-wrap');
     });
 
-    afterEach(function () {
+    afterEach(function() {
         d3.select('body > div').remove();
     });
 
@@ -18,7 +18,7 @@ describe('iD.uiFlash', function () {
         expect(content.classed('content')).to.be.ok;
     });
 
-    it('flash is shown', function () {
+    it('flash is shown', function() {
         iD.uiFlash(200);
         var flashWrap = d3.selectAll('#flash-wrap');
         var footerWrap = d3.selectAll('#footer-wrap');
@@ -26,15 +26,16 @@ describe('iD.uiFlash', function () {
         expect(footerWrap.classed('footer-hide')).to.be.ok;
     });
 
-    it('flash goes away', function (done) {
+    it('flash goes away', function(done) {
         iD.uiFlash(200);
         window.setTimeout(function() {
+            d3.timerFlush();
             var flashWrap = d3.selectAll('#flash-wrap');
             var footerWrap = d3.selectAll('#footer-wrap');
             expect(flashWrap.classed('footer-hide')).to.be.ok;
             expect(footerWrap.classed('footer-show')).to.be.ok;
             done();
-        }, 500);
+        }, 225);
     });
 
 });

@@ -43,9 +43,10 @@ describe('iD.Map', function() {
             expect(map.zoom(4)).to.equal(map);
             map.zoomIn();
             window.setTimeout(function() {
+                d3.timerFlush();
                 expect(map.zoom()).to.be.closeTo(5, 1e-6);
                 done();
-            }, 300);
+            }, 275);
         });
     });
 
@@ -54,9 +55,10 @@ describe('iD.Map', function() {
             expect(map.zoom(4)).to.equal(map);
             map.zoomOut();
             window.setTimeout(function() {
+                d3.timerFlush();
                 expect(map.zoom()).to.be.closeTo(3, 1e-6);
                 done();
-            }, 300);
+            }, 275);
         });
     });
 
@@ -95,12 +97,13 @@ describe('iD.Map', function() {
     describe('#centerEase', function() {
         it('sets center', function(done) {
             expect(map.center([10, 10])).to.equal(map);
-            expect(map.centerEase([20, 20])).to.equal(map);
+            expect(map.centerEase([20, 20], 250)).to.equal(map);
             window.setTimeout(function() {
+                d3.timerFlush();
                 expect(map.center()[0]).to.be.closeTo(20, 1e-6);
                 expect(map.center()[1]).to.be.closeTo(20, 1e-6);
                 done();
-            }, 1000);
+            }, 275);
         });
     });
 
