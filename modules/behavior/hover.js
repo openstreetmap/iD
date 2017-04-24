@@ -123,13 +123,16 @@ export function behaviorHover() {
     };
 
 
-    hover.off = function() {
-        _selection.selectAll('.hover')
+    hover.off = function(selection) {
+        selection.selectAll('.hover')
             .classed('hover', false);
-        _selection.selectAll('.hover-suppressed')
+        selection.selectAll('.hover-suppressed')
             .classed('hover-suppressed', false);
+        selection
+            .classed('hover-disabled', false);
 
-        _selection
+
+        selection
             .on('mouseover.hover', null)
             .on('mouseout.hover', null)
             .on('mousedown.hover', null);
