@@ -1156,7 +1156,7 @@
         },
         "opening_hours": {
             "key": "opening_hours",
-            "type": "text",
+            "type": "combo",
             "label": "Hours"
         },
         "operator": {

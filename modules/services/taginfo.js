@@ -186,7 +186,7 @@ export default {
         this.keys(params, function(err, data) {
             if (err) return;
             data.forEach(function(d) {
-                if (d === 'opening_hours') return;  // exception
+                if (d.value === 'opening_hours') return;  // exception
                 popularKeys[d.value] = true;
             });
         });
