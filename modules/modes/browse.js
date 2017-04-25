@@ -5,7 +5,9 @@ import {
     behaviorLasso,
     behaviorPaste,
     behaviorSelect
-} from '../behavior/index';
+} from '../behavior';
+
+import { modeDragNode } from './drag_node';
 
 
 export function modeBrowse(context) {
@@ -20,7 +22,8 @@ export function modeBrowse(context) {
         behaviorPaste(context),
         behaviorHover(context).on('hover', context.ui().sidebar.hover),
         behaviorSelect(context),
-        behaviorLasso(context)
+        behaviorLasso(context),
+        modeDragNode(context).behavior
     ];
 
 

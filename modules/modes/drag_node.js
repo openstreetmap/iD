@@ -101,20 +101,7 @@ export function modeDragNode(context) {
     function start(entity) {
         wasMidpoint = entity.type === 'midpoint';
 
-        // Things allowed to be dragged include:
-        // - midpoints
-        // - nodes that are selected
-        // - vertices that are selected
-        // - vertices classed 'sibling' which includes (see svg/vertices.js)
-        //   - children of selected ways or multipolygons
-        //   - vertices sharing a way with selected vertices
-        var selector = 'g.node.point.selected.' + entity.id +
-            ', g.vertex-persistent.selected.' + entity.id +
-            ', g.vertex-persistent.sibling.' + entity.id;
-
-        var isDraggable = wasMidpoint || !d3.select(selector).empty();
-
-        isCancelled = d3.event.sourceEvent.shiftKey || !isDraggable ||
+        isCancelled = d3.event.sourceEvent.shiftKey ||
             context.features().hasHiddenConnections(entity, context.graph());
 
         if (isCancelled) {
