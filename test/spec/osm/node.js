@@ -68,12 +68,28 @@ describe('iD.osmNode', function () {
     });
 
     describe('#isConnected', function () {
-        it('returns true for a node with more than one parent way', function () {
+        it('returns true for a node with multiple parent ways, at least one interesting', function () {
+            var node = iD.Node(),
+                w1 = iD.Way({nodes: [node.id]}),
+                w2 = iD.Way({nodes: [node.id], tags: { highway: 'residential' }}),
+                graph = iD.Graph([node, w1, w2]);
+            expect(node.isConnected(graph)).to.equal(true);
+        });
+
+        it('returns false for a node with only area parent ways', function () {
+            var node = iD.Node(),
+                w1 = iD.Way({nodes: [node.id], tags: { area: 'yes' }}),
+                w2 = iD.Way({nodes: [node.id], tags: { area: 'yes' }}),
+                graph = iD.Graph([node, w1, w2]);
+            expect(node.isConnected(graph)).to.equal(false);
+        });
+
+        it('returns false for a node with only uninteresting parent ways', function () {
             var node = iD.Node(),
                 w1 = iD.Way({nodes: [node.id]}),
                 w2 = iD.Way({nodes: [node.id]}),
                 graph = iD.Graph([node, w1, w2]);
-            expect(node.isConnected(graph)).to.equal(true);
+            expect(node.isConnected(graph)).to.equal(false);
         });
 
         it('returns false for a standalone node on a single parent way', function () {
