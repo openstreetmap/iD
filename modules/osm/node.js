@@ -59,8 +59,13 @@ _.extend(osmNode.prototype, {
         return resolver.transient(this, 'isConnected', function() {
             var parents = resolver.parentWays(this);
 
-            // vertex is connected to multiple parent ways
-            if (parents.length > 1) {
+            function isLine(entity) {
+                return entity.geometry(resolver) === 'line' &&
+                    entity.hasInterestingTags();
+            }
+
+            // vertex is connected to multiple parent lines
+            if (parents.length > 1 && _.some(parents, isLine)) {
                 return true;
 
             } else if (parents.length === 1) {
