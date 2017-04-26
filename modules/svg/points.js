@@ -43,6 +43,13 @@ export function svgPoints(projection, context) {
         enter.append('path')
             .call(markerPath, 'shadow');
 
+        enter.append('ellipse')
+            .attr('cx', 0.5)
+            .attr('cy', 1)
+            .attr('rx', 6.5)
+            .attr('ry', 3)
+            .attr('class', 'stroke');
+
         enter.append('path')
             .call(markerPath, 'stroke');
 

@@ -49,6 +49,15 @@ g.point.active, g.point.active * {
     pointer-events: none;
 }
 
+g.point ellipse.stroke {
+    display: none;
+}
+
+.mode-drag-node g.point.active ellipse.stroke {
+    display: block;
+}
+
+
 /* vertices and midpoints */
 
 g.vertex .fill {
