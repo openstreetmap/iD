@@ -1,12 +1,15 @@
 describe('iD.Map', function() {
-    var context, map;
+    var content, context, map;
 
     beforeEach(function() {
+        content = d3.select('body').append('div');
         context = iD.Context();
-        context.container(d3.select(document.createElement('div')));
         map = context.map();
-        d3.select(document.createElement('div'))
-            .call(map);
+        content.call(map);
+    });
+
+    afterEach(function() {
+        content.remove();
     });
 
     describe('#zoom', function() {

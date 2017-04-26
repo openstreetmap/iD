@@ -4,7 +4,8 @@ describe('iD.behaviorHover', function() {
     beforeEach(function() {
         container = d3.select('body').append('div');
         context = {
-            hover: function() {}
+            hover: function() {},
+            mode: function() { return { id: 'browse' }; }
         };
     });
 

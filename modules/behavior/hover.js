@@ -13,9 +13,10 @@ import { utilRebind } from '../util/rebind';
    Only one of these elements can have the :hover pseudo-class, but all of them will
    have the .hover class.
  */
-export function behaviorHover() {
+export function behaviorHover(context) {
     var dispatch = d3.dispatch('hover'),
         _selection = d3.select(null),
+        newNode = null,
         buttonDown,
         altDisables,
         target;
@@ -51,6 +52,7 @@ export function behaviorHover() {
 
     var hover = function(selection) {
         _selection = selection;
+        newNode = null;
 
         _selection
             .on('mouseover.hover', mouseover)
@@ -99,7 +101,15 @@ export function behaviorHover() {
             _selection.selectAll('.hover-suppressed')
                 .classed('hover-suppressed', false);
 
-            if (target instanceof osmEntity) {
+            if (target instanceof osmEntity && target !== newNode) {
+
+                // If drawing a way, don't hover on a node that was just placed. #3974
+                var mode = context.mode() && context.mode().id;
+                if ((mode === 'draw-line' || mode === 'draw-area') && !newNode && target.type === 'node') {
+                    newNode = target;
+                    return;
+                }
+
                 var selector = '.' + target.id;
 
                 if (target.type === 'relation') {
