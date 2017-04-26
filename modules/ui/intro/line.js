@@ -286,10 +286,18 @@ export function uiIntroLine(context, reveal) {
             });
 
         timeout(function() {
-            reveal(subgrid.node(),
+            var tooltip = reveal(subgrid.node(),
                 t('intro.lines.choose_preset_residential', { preset: residentialPreset.name() }),
                 { duration: 300 }
             );
+
+            // put the tooltip near the "Residential Road" button
+            var button = d3.select('.preset-highway-residential .preset-list-button').node();
+            var buttonRect = button.getBoundingClientRect();
+            var tooltipRect = tooltip.node().getBoundingClientRect();
+            var top = buttonRect.top - (tooltipRect.height / 2) + (buttonRect.height / 2);
+            tooltip.style('top', top + 'px');
+
         }, 300);
 
         function continueTo(nextStep) {
