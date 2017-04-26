@@ -117,9 +117,10 @@ export function uiRawMembershipEditor(context) {
 
     function rawMembershipEditor(selection) {
         var entity = context.entity(id),
+            parents = context.graph().parentRelations(entity),
             memberships = [];
 
-        context.graph().parentRelations(entity).forEach(function(relation) {
+        parents.slice(0, 1000).forEach(function(relation) {
             relation.members.forEach(function(member, index) {
                 if (member.id === entity.id) {
                     memberships.push({ relation: relation, member: member, index: index });
@@ -127,8 +128,9 @@ export function uiRawMembershipEditor(context) {
             });
         });
 
+        var gt = parents.length > 1000 ? '>' : '';
         selection.call(uiDisclosure()
-            .title(t('inspector.all_relations') + ' (' + memberships.length + ')')
+            .title(t('inspector.all_relations') + ' (' + gt + memberships.length + ')')
             .expanded(true)
             .on('toggled', toggled)
             .content(content)

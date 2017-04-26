@@ -51,7 +51,7 @@ export function uiRawMemberEditor(context) {
         var entity = context.entity(id),
             memberships = [];
 
-        entity.members.forEach(function(member, index) {
+        entity.members.slice(0, 1000).forEach(function(member, index) {
             memberships.push({
                 index: index,
                 id: member.id,
@@ -62,8 +62,9 @@ export function uiRawMemberEditor(context) {
             });
         });
 
+        var gt = entity.members.length > 1000 ? '>' : '';
         selection.call(uiDisclosure()
-            .title(t('inspector.all_members') + ' (' + memberships.length + ')')
+            .title(t('inspector.all_members') + ' (' + gt + memberships.length + ')')
             .expanded(true)
             .on('toggled', toggled)
             .content(content)
