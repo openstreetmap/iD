@@ -83,7 +83,7 @@ g.midpoint .fill {
 
 g.vertex .shadow,
 g.midpoint .shadow {
-    stroke-width: 16;
+    stroke-width: 6;
     fill: #f6634f;
     fill-opacity: 0;
 }

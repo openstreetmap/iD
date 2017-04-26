@@ -7,9 +7,9 @@ import { geoChooseEdge, geoEuclideanDistance } from '../geo/index';
 import { utilRebind } from '../util/rebind';
 
 
-behaviorDraw.usedTails = {};
-behaviorDraw.disableSpace = false;
-behaviorDraw.lastSpace = null;
+var usedTails = {};
+var disableSpace = false;
+var lastSpace = null;
 
 
 export function behaviorDraw(context) {
@@ -24,8 +24,7 @@ export function behaviorDraw(context) {
         closeTolerance = 4,
         tolerance = 12,
         mouseLeave = false,
-        lastMouse = null,
-        cached = behaviorDraw;
+        lastMouse = null;
 
 
     function datum() {
@@ -126,21 +125,21 @@ export function behaviorDraw(context) {
 
     function space() {
         var currSpace = context.mouse();
-        if (cached.disableSpace && cached.lastSpace) {
-            var dist = geoEuclideanDistance(cached.lastSpace, currSpace);
+        if (disableSpace && lastSpace) {
+            var dist = geoEuclideanDistance(lastSpace, currSpace);
             if (dist > tolerance) {
-                cached.disableSpace = false;
+                disableSpace = false;
             }
         }
 
-        if (cached.disableSpace || mouseLeave || !lastMouse) return;
+        if (disableSpace || mouseLeave || !lastMouse) return;
 
         // user must move mouse or release space bar to allow another click
-        cached.lastSpace = currSpace;
-        cached.disableSpace = true;
+        lastSpace = currSpace;
+        disableSpace = true;
 
         d3.select(window).on('keyup.space-block', function() {
-            cached.disableSpace = false;
+            disableSpace = false;
             d3.select(window).on('keyup.space-block', null);
         });
 
@@ -171,7 +170,7 @@ export function behaviorDraw(context) {
         context.install(hover);
         context.install(edit);
 
-        if (!context.inIntro() && !cached.usedTails[tail.text()]) {
+        if (!context.inIntro() && !usedTails[tail.text()]) {
             context.install(tail);
         }
 
@@ -201,9 +200,9 @@ export function behaviorDraw(context) {
         context.uninstall(hover);
         context.uninstall(edit);
 
-        if (!context.inIntro() && !cached.usedTails[tail.text()]) {
+        if (!context.inIntro() && !usedTails[tail.text()]) {
             context.uninstall(tail);
-            cached.usedTails[tail.text()] = true;
+            usedTails[tail.text()] = true;
         }
 
         selection
