@@ -160,9 +160,13 @@ function clickListener() {
         tooltip = d3.select(null),
         down = {};
 
+    // `down` keeps track of which buttons/keys are down.
+    // Setting a property in `down` happens immediately.
+    // Unsetting a property in `down` is delayed because
+    //   on Windows a contextmenu event happens after keyup/mouseup
 
     function keydown() {
-        if (d3.event.keyCode === 93)  {   //context menu
+        if (d3.event.keyCode === 93)  {   // context menu
             d3.event.preventDefault();
             d3.event.stopPropagation();
             down.menu = d3.event.timeStamp;
@@ -172,43 +176,61 @@ function clickListener() {
 
 
     function keyup() {
-        if (d3.event.keyCode === 93)  {   //context menu
+        if (d3.event.keyCode === 93)  {   // context menu
             d3.event.preventDefault();
             d3.event.stopPropagation();
             var endTime = d3.event.timeStamp,
                 startTime = down.menu || endTime,
                 delay = (endTime - startTime < minTime) ? minTime : 0;
 
-            window.setTimeout(function() { tooltip.classed('rightclick', false); }, delay);
+            window.setTimeout(function() {
+                tooltip.classed('rightclick', false);
+                down.menu = undefined;  // delayed, for Windows
+            }, delay);
+
             dispatch.call('click', this, 'right');
-            down.menu = undefined;
         }
     }
 
 
     function mousedown() {
-        if (d3.event.button === 0 && !d3.event.ctrlKey) {
+        var button = d3.event.button;
+        if (button === 0 && !d3.event.ctrlKey) {
             tooltip.classed('leftclick', true);
-        } else if (d3.event.button === 2) {
+        } else if (button === 2) {
             tooltip.classed('rightclick', true);
         }
-        down[d3.event.button] = d3.event.timeStamp;
+        down[button] = d3.event.timeStamp;
     }
 
 
     function mouseup() {
-        var endTime = d3.event.timeStamp,
-            startTime = down[d3.event.button] || endTime,
+        var button = d3.event.button,
+            endTime = d3.event.timeStamp,
+            startTime = down[button] || endTime,
             delay = (endTime - startTime < minTime) ? minTime : 0;
 
-        if (d3.event.button === 0 && !d3.event.ctrlKey) {
-            window.setTimeout(function() { tooltip.classed('leftclick', false); }, delay);
+        if (button === 0 && !d3.event.ctrlKey) {
+            window.setTimeout(function() {
+                tooltip.classed('leftclick', false);
+                down[button] = undefined;  // delayed, for Windows
+            }, delay);
+
             dispatch.call('click', this, 'left');
-        } else if (d3.event.button === 2) {
-            window.setTimeout(function() { tooltip.classed('rightclick', false); }, delay);
+
+        } else if (button === 2) {
+            window.setTimeout(function() {
+                tooltip.classed('rightclick', false);
+                down[button] = undefined;  // delayed, for Windows
+            }, delay);
+
             dispatch.call('click', this, 'right');
+
+        } else {
+            window.setTimeout(function() {
+                down[button] = undefined;  // delayed, for Windows
+            }, delay);
         }
-        down[d3.event.button] = undefined;
     }
 
 
@@ -217,7 +239,9 @@ function clickListener() {
         d3.event.stopPropagation();
         if (!down[2] && !down.menu) {
             tooltip.classed('rightclick', true);
-            window.setTimeout(function() { tooltip.classed('rightclick', false); }, minTime);
+            window.setTimeout(function() {
+                tooltip.classed('rightclick', false);
+            }, minTime);
             dispatch.call('click', this, 'right');
         }
     }
