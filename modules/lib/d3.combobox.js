@@ -1,9 +1,10 @@
 import * as d3 from 'd3';
 import { utilRebind } from '../../modules/util/rebind';
+import { utilTriggerEvent } from '../../modules/util/trigger_event';
 
 
 export function d3combobox() {
-    var event = d3.dispatch('accept'),
+    var dispatch = d3.dispatch('accept'),
         container = d3.select(document.body),
         data = [],
         suggestions = [],
@@ -118,7 +119,7 @@ export function d3combobox() {
                // tab
                case 9:
                    wrapper.selectAll('a.selected').each(function (d) {
-                       event.call('accept', this, d);
+                       dispatch.call('accept', this, d);
                    });
                    hide();
                    break;
@@ -149,7 +150,7 @@ export function d3combobox() {
                 // return
                 case 13:
                     wrapper.selectAll('a.selected').each(function (d) {
-                       event.call('accept', this, d);
+                       dispatch.call('accept', this, d);
                     });
                     hide();
                     break;
@@ -258,10 +259,9 @@ export function d3combobox() {
 
         function accept(d) {
             if (!shown) return;
-            input
-                .property('value', d.value)
-                .dispatch('change');
-            event.call('accept', this, d);
+            input.property('value', d.value);
+            utilTriggerEvent(input, 'change');
+            dispatch.call('accept', this, d);
             hide();
         }
     };
@@ -296,7 +296,7 @@ export function d3combobox() {
         return combobox;
     };
 
-    return utilRebind(combobox, event, 'on');
+    return utilRebind(combobox, dispatch, 'on');
 }
 
 
