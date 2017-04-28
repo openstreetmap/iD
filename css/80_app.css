@@ -1264,12 +1264,20 @@ button.save.has-count .count::before {
     font-weight: bold;
 }
 
+.more-fields label {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .more-fields input {
     margin-left: 10px;
-    width: 50%;
+    flex: 1 1 50%;
 }
 [dir='rtl'] .more-fields input {
-    margin-left: 5px;
+    margin-left: auto;
+    margin-right: 10px;
 }
 
 .preset-input-wrap .label {
@@ -1278,9 +1286,6 @@ button.save.has-count .count::before {
     padding: 5px 10px;
 }
 
-[dir='rtl'] .more-fields label {
-    padding: 5px 0 5px 10px;
-}
 
 
 /* preset form access */
