@@ -3696,7 +3696,8 @@ img.tile-removing {
     display: inline-block;
 }
 
-.curtain-tooltip.intro-points-describe {
+.curtain-tooltip.intro-points-describe ,
+.curtain-tooltip.intro-lines-name_road {
     top: 133px !important;
 }
 
