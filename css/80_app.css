@@ -20,6 +20,7 @@ body {
     min-width: 768px;
     color:#333;
     overflow: hidden;
+    -ms-user-select: none;
 }
 
 .unsupported {
@@ -676,6 +677,7 @@ button.save.has-count .count::before {
     overflow: hidden;
     z-index: 10;
     background: #f6f6f6;
+    -ms-user-select: element;
 }
 
 .sidebar-component {
@@ -2513,6 +2515,10 @@ img.tile-removing {
     overflow:hidden;
     height:100%;
     background:#000;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 #supersurface {
@@ -2521,11 +2527,6 @@ img.tile-removing {
     -webkit-transform-origin:0 0;
     -moz-transform-origin:0 0;
     -o-transform-origin:0 0;
-
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 
 #supersurface, .layer {
@@ -2641,6 +2642,7 @@ img.tile-removing {
     width: 240px;
     border-radius: 4px 0 0 0;
     border-bottom: 1px solid black;
+    -ms-user-select: element;
 }
 
 .infobox .infobox-heading {
@@ -2676,6 +2678,7 @@ img.tile-removing {
     pointer-events: none;
     display: flex;
     flex-direction: column;
+    -ms-user-select: element;
 }
 
 #attrib {
