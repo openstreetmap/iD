@@ -307,17 +307,23 @@ export function uiMapData(context) {
                         }
                         data = JSON.parse(data);
                         if (data.layers && data.layers.length) {
-                            // MapServer field
-                            layerSelect.html('');
+                            // MapServer layer selector
+                            layerSelect.html('')
+                                .classed('hide', false)
+                                .on('change', function() {
+                                    if (this.value) {
+                                        urlInput.property('value', this.value);
+                                        urlInput.on('input')(null, this.value);
+                                    }
+                                })
+                                .append('option')
+                                    .text('select one layer')
+                                    .attr('value', '')
+                                    .property('selected', true);
                             _.map(data.layers, function(optLayer) {
-                                layerSelect.append('button')
+                                layerSelect.append('option')
                                     .text(optLayer.name)
-                                    .on('click', function() {
-                                        layerSelect.html('');
-                                        var mdatax = metadata_url.split('/metadata')[0] + '/' + optLayer.id;
-                                        urlInput.property('value', mdatax);
-                                        urlInput.on('input')(null, mdatax);
-                                    });
+                                    .attr('value', metadata_url.split('/metadata')[0] + '/' + optLayer.id);
                             });
                             return;
                         }
@@ -434,7 +440,8 @@ export function uiMapData(context) {
             copylabel.append('span').text('This data is permitted to include on OpenStreetMap under their ODbL license');
             
             var layerSelect = urlEntry.append('div')
-                .attr('class', 'layer-select');
+                .append('select')
+                .attr('class', 'layer-select hide');
             
             // load initial GeoService URL
             /*

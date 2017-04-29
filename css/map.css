@@ -1643,11 +1643,7 @@ text.geoservice {
 }
 
 .geoservice-pane .layer-select {
-    float: left;
-}
-
-.geoservice-pane .layer-select button {
-    margin-right: 8px;
+    margin-top: 8px;
 }
 
 .geoservice-pane .layer-counted {
