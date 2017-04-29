@@ -84,20 +84,12 @@ export function uiEntityEditor(context) {
             .attr('class', 'inspector-border import-approve');
                 
         var acceptButton = importApprove.append('button')
-            .text('Approve');
-        
-        var chooseOption = importApprove.append('input')
-            .attr('type', 'range')
-            .attr('min', 0)
-            .attr('max', 1)
-            .property('value', 1);
-        
-        acceptButton.on('click', function() {
-            this.focusEntity.approvedForEdit = true;
-            // apply a CSS class to any point / line / polygon approved
-            d3.selectAll('.layer-osm .' + this.focusEntity.id).classed('import-approved', true);
-            chooseOption.property('value', 0);
-        }.bind(this));
+            .text('Approve')
+            .on('click', function() {
+                this.focusEntity.approvedForEdit = true;
+                // apply a CSS class to any point / line / polygon approved
+                d3.selectAll('.layer-osm .' + this.focusEntity.id).classed('import-approved', true);
+            }.bind(this));
         
         var rejectButton = importApprove.append('button')
             .text('Reject')
@@ -114,17 +106,7 @@ export function uiEntityEditor(context) {
                     // 100% new object: delete button removes the entity
                     operationDelete([this.focusEntity.id], context)();
                 }
-                chooseOption.property('value', 1);
             }).bind(this));
-        
-        // moving the slider clicks the corresponding button for you
-        chooseOption.on('change', function() {
-            if (chooseOption.property('value') * 1) {
-                rejectButton.on('click')();
-            } else {
-                acceptButton.on('click')();
-            }
-        });
         
         // show import approval section?
         d3.selectAll('.import-approve').classed('hide', entity.approvedForEdit || (d3.select('input[name="approvalProcess"]:checked').property('value') === 'all'));
