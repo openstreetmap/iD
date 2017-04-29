@@ -1,0 +1,29 @@
+{
+    "icon": "basketball",
+    "fields": [
+        "surface",
+        "lit"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "pitch",
+        "sport": "beachvolleyball"
+    },
+    "addTags": {
+        "leisure": "pitch",
+        "sport": "beachvolleyball",
+        "surface": "sand"
+    },
+    "removeTags": {
+        "leisure": "pitch",
+        "sport": "beachvolleyball",
+        "surface": "sand"
+    },
+    "terms": [
+        "volleyball"
+    ],
+    "name": "Beach Volleyball Court"
+}

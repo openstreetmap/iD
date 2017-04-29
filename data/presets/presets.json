@@ -7419,6 +7419,35 @@
             "terms": [],
             "name": "Basketball Court"
         },
+        "leisure/pitch/beachvolleyball": {
+            "icon": "basketball",
+            "fields": [
+                "surface",
+                "lit"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "pitch",
+                "sport": "beachvolleyball"
+            },
+            "addTags": {
+                "leisure": "pitch",
+                "sport": "beachvolleyball",
+                "surface": "sand"
+            },
+            "removeTags": {
+                "leisure": "pitch",
+                "sport": "beachvolleyball",
+                "surface": "sand"
+            },
+            "terms": [
+                "volleyball"
+            ],
+            "name": "Beach Volleyball Court"
+        },
         "leisure/pitch/bowls": {
             "icon": "pitch",
             "fields": [
@@ -7584,7 +7613,7 @@
             "name": "Tennis Court"
         },
         "leisure/pitch/volleyball": {
-            "icon": "pitch",
+            "icon": "basketball",
             "fields": [
                 "surface",
                 "lit"

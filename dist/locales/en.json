@@ -3622,6 +3622,10 @@
                     "name": "Basketball Court",
                     "terms": ""
                 },
+                "leisure/pitch/beachvolleyball": {
+                    "name": "Beach Volleyball Court",
+                    "terms": "volleyball"
+                },
                 "leisure/pitch/bowls": {
                     "name": "Bowling Green",
                     "terms": ""

@@ -3062,6 +3062,11 @@ en:
         # 'leisure=pitch, sport=basketball'
         name: Basketball Court
         terms: '<translate with synonyms or related terms for ''Basketball Court'', separated by commas>'
+      leisure/pitch/beachvolleyball:
+        # 'leisure=pitch, sport=beachvolleyball'
+        name: Beach Volleyball Court
+        # 'terms: volleyball'
+        terms: '<translate with synonyms or related terms for ''Beach Volleyball Court'', separated by commas>'
       leisure/pitch/bowls:
         # 'leisure=pitch, sport=bowls'
         name: Bowling Green
