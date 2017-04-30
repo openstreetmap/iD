@@ -58,8 +58,13 @@ export function svgLines(projection, context) {
             lines.enter()
                 .append('path')
                 .attr('class', function(d) {
-                    return 'way line ' + klass + ' ' + d.id + (isSelected ? ' selected' : '') +
+                    var baseClass = 'way line ' + klass + ' ' + d.id + (isSelected ? ' selected' : '') +
                         (oldMultiPolygonOuters[d.id] ? ' old-multipolygon' : '');
+                    if (d.approvedForEdit) {
+                        return baseClass + ' import-' + d.approvedForEdit;
+                    } else {
+                        return baseClass;
+                    }                    
                 })
                 .call(svgTagClasses())
                 .merge(lines)

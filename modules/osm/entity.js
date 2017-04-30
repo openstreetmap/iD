@@ -56,7 +56,7 @@ osmEntity.prototype = {
     tags: {},
     
     // use this to track user one-by-one approval for addition to the edits
-    approvedForEdit: true,
+    approvedForEdit: null,
 
 
     initialize: function(sources) {

@@ -139,7 +139,6 @@ export function svgGeoService(projection, context, dispatch) {
                     props = makeEntity(pts[p]);
                     props.tags = {};
                     var node = new osmNode(props);
-                    node.approvedForEdit = false;
                     context.perform(
                         actionAddEntity(node),
                         'adding node inside a way'
@@ -153,7 +152,6 @@ export function svgGeoService(projection, context, dispatch) {
                 nodes = makeMiniNodes(coords);
                 props = makeEntity(nodes);
                 way = new osmWay(props, nodes);
-                way.approvedForEdit = false;
                 context.perform(
                     actionAddEntity(way),
                     'adding way'
@@ -210,7 +208,6 @@ export function svgGeoService(projection, context, dispatch) {
                             },
                             members: componentRings
                         });
-                        rel.approvedForEdit = false;
                         context.perform(
                             actionAddEntity(rel),
                             'adding multiple-ring Polygon'
@@ -243,7 +240,6 @@ export function svgGeoService(projection, context, dispatch) {
             function mergeImportTags(wayid) {
                 // merge the active import GeoJSON attributes (d.properties) into item with wayid
                 var ent = context.entity(wayid);
-                ent.approvedForEdit = false;
                 if (!ent.importOriginal) {
                     ent.importOriginal = _.clone(ent.tags);
                 }
@@ -322,7 +318,6 @@ export function svgGeoService(projection, context, dispatch) {
                     if (!matched) {
                         // add address point independently of existing buildings
                         var node = new osmNode(props);
-                        node.approvedForEdit = false;
                         context.perform(
                             actionAddEntity(node),
                             'adding point'
@@ -332,7 +327,6 @@ export function svgGeoService(projection, context, dispatch) {
                     
                 } else {
                     var node = new osmNode(props);
-                    node.approvedForEdit = false;
                     context.perform(
                         actionAddEntity(node),
                         'adding point'
@@ -401,7 +395,6 @@ export function svgGeoService(projection, context, dispatch) {
                     },
                     members: lines
                 });
-                rel.approvedForEdit = false;
                 context.perform(
                     actionAddEntity(rel),
                     'adding multiple Lines as a Relation'
@@ -428,7 +421,6 @@ export function svgGeoService(projection, context, dispatch) {
                     },
                     members: polygons
                 });
-                rel.approvedForEdit = false;
                 context.perform(
                     actionAddEntity(rel),
                     'adding multiple Polygons as a Relation'

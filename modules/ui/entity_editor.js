@@ -86,7 +86,7 @@ export function uiEntityEditor(context) {
         var acceptButton = importApprove.append('button')
             .text('Approve')
             .on('click', function() {
-                this.focusEntity.approvedForEdit = true;
+                this.focusEntity.approvedForEdit = 'approved';
                 // apply a CSS class to any point / line / polygon approved
                 d3.selectAll('.layer-osm .' + this.focusEntity.id)
                     .classed('import-approved', true)
@@ -99,7 +99,7 @@ export function uiEntityEditor(context) {
             .on('click', (function() {
                 if (this.focusEntity && this.focusEntity.importOriginal) {
                     // modified object: delete button restores original tags
-                    delete this.focusEntity.approvedForEdit;
+                    this.focusEntity.approvedForEdit = 'unchanged';
                     context.perform(
                         actionChangeTags(this.focusEntity.id, this.focusEntity.importOriginal),
                         'merged import item tags'
@@ -107,7 +107,7 @@ export function uiEntityEditor(context) {
                     d3.selectAll('.layer-osm .' + this.focusEntity.id).classed('import-edited', false);
                 } else {
                     // show object red for rejected
-                    this.focusEntity.approvedForEdit = false;
+                    this.focusEntity.approvedForEdit = 'rejected';
                     d3.selectAll('.layer-osm .' + this.focusEntity.id)
                         .classed('import-approved', false)
                         .classed('import-edited', false)
@@ -117,7 +117,7 @@ export function uiEntityEditor(context) {
             }).bind(this));
         
         // show import approval section?
-        d3.selectAll('.import-approve').classed('hide', entity.approvedForEdit || (d3.select('input[name="approvalProcess"]:checked').property('value') === 'all'));
+        d3.selectAll('.import-approve').classed('hide', (entity.approvedForEdit === 'approved') || (d3.select('input[name="approvalProcess"]:checked').property('value') === 'all'));
         
         enter
             .append('div')

@@ -40,7 +40,7 @@ export function modeSave(context) {
         var deletions = [];
         _.map(window.importedEntities, function(entity) {
             try {
-                if (!entity.approvedForEdit && context.entity(entity.id)) {
+                if ((entity.approvedForEdit !== 'approved' && entity.approvedForEdit !== 'unchanged') && context.entity(entity.id)) {
                     deletions.push(entity.id); 
                 }
             } catch (e) {
