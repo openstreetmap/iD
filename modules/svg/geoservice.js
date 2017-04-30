@@ -120,7 +120,7 @@ export function svgGeoService(projection, context, dispatch) {
                 };
             
                 // store the OBJECTID as source_oid
-                props.tags['geoservice:objectid'] = props.tags.OBJECTID;
+                props.tags['geoservice:objectid'] = d.properties.OBJECTID;
                 delete props.tags.OBJECTID;
                 
                 // allows this helper method to work on nodes and ways
@@ -229,10 +229,7 @@ export function svgGeoService(projection, context, dispatch) {
                             var buildingPoly = gjids[getBuildingPoly(building)];
                             var intersectPoly = polygonIntersect(d, buildingPoly);
                             if (intersectPoly) {
-                                console.log('found an overlap building');
                                 foundOverlap = true;
-                            } else {
-                                console.log('didnt overlap the building');
                             }
                         }
                     });
