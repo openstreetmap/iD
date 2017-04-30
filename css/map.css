@@ -1634,7 +1634,7 @@ text.geoservice {
     margin-top: -5px;
 }
 
-.geoservice-pane .point-in-polygon, .geoservice-pane .merge-lines {
+.geoservice-pane .point-in-polygon, .geoservice-pane .merge-lines, .geoservice-pane .overlap-buildings {
     display: none;
 }
 

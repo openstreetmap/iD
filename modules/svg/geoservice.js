@@ -46,13 +46,17 @@ export function svgGeoService(projection, context, dispatch) {
             enabled = svgGeoService.enabled,
             gjids = {},
             pointInPolygon = false,
-            mergeLines = false;
+            mergeLines = false,
+            overlapBuildings = false;
 
         try {
             pointInPolygon = d3.selectAll('.point-in-polygon input').property('checked');
         } catch(e) { }
         try {
             mergeLines = d3.selectAll('.merge-lines input').property('checked');
+        } catch(e) { }
+        try {
+            overlapBuildings = d3.selectAll('.overlap-buildings input').property('checked');
         } catch(e) { }
 
         function fetchVisibleBuildings(callback, selector) {
@@ -157,42 +161,86 @@ export function svgGeoService(projection, context, dispatch) {
                 return way;
             }
             
-            function mapPolygon(d, coords) {
-                d.properties.area = d.properties.area || 'yes';
-                if (coords.length > 1) {
-                    // donut hole polygons (e.g. building with courtyard) must be a relation
-                    // example data: Hartford, CT building footprints
-                    // TODO: rings within rings?
-
-                    // generate each ring                    
-                    var componentRings = [];
-                    for (var ring = 0; ring < coords.length; ring++) {
-                        // props.tags = {};
-                        way = mapLine(d, coords[ring]);
-                        componentRings.push({
-                            id: way.id,
-                            role: (ring === 0 ? 'outer' : 'inner')
-                        });
-                    }
-                    
-                    // generate a relation
-                    rel = new osmRelation({
-                        tags: {
-                            type: 'MultiPolygon'
-                        },
-                        members: componentRings
+            function getBuildingPoly(building) {
+                // retrieve GeoJSON for this building if it isn't already stored in gjids { }
+                var wayid = d3.select(building).attr('class').split(' ')[3];
+                var ent;
+                if (!gjids[wayid]) {
+                    var nodes = [];
+                    ent = context.entity(wayid);
+                    _.map(ent.nodes, function(nodeid) {
+                        var node = context.entity(nodeid);
+                        nodes.push(node.loc);
                     });
-                    rel.approvedForEdit = false;
-                    context.perform(
-                        actionAddEntity(rel),
-                        'adding multiple-ring Polygon'
-                    );
-                    return rel;
-                } else {
-                    // polygon with one single ring
-                    way = mapLine(d, coords[0]);
-                    return way;
+                    
+                    gjids[wayid] = {
+                        type: 'Feature',
+                        geometry: {
+                            type: 'Polygon',
+                            coordinates: [nodes]
+                        }
+                    };
                 }
+                return wayid;
+            }
+            
+            function mapPolygon(d, coords) {
+                var plotBuilding = function() {
+                    d.properties.area = d.properties.area || 'yes';
+                    if (coords.length > 1) {
+                        // donut hole polygons (e.g. building with courtyard) must be a relation
+                        // example data: Hartford, CT building footprints
+                        // TODO: rings within rings?
+
+                        // generate each ring                    
+                        var componentRings = [];
+                        for (var ring = 0; ring < coords.length; ring++) {
+                            // props.tags = {};
+                            way = mapLine(d, coords[ring]);
+                            componentRings.push({
+                                id: way.id,
+                                role: (ring === 0 ? 'outer' : 'inner')
+                            });
+                        }
+                    
+                        // generate a relation
+                        rel = new osmRelation({
+                            tags: {
+                                type: 'MultiPolygon'
+                            },
+                            members: componentRings
+                        });
+                        rel.approvedForEdit = false;
+                        context.perform(
+                            actionAddEntity(rel),
+                            'adding multiple-ring Polygon'
+                        );
+                        return rel;
+                    } else {
+                        // polygon with one single ring
+                        way = mapLine(d, coords[0]);
+                        return way;
+                    }
+                }
+                if (overlapBuildings) {
+                    var foundOverlap = false;
+                    fetchVisibleBuildings(function(building) {
+                        if (!foundOverlap) {
+                            var buildingPoly = gjids[getBuildingPoly(building)];
+                            var intersectPoly = polygonIntersect(d, buildingPoly);
+                            if (intersectPoly) {
+                                console.log('found an overlap building');
+                                foundOverlap = true;
+                            } else {
+                                console.log('didnt overlap the building');
+                            }
+                        }
+                    });
+                    if (foundOverlap) {
+                        return 0;
+                    }
+                }
+                plotBuilding();
             }
                         
             function mergeImportTags(wayid) {
@@ -266,26 +314,7 @@ export function svgGeoService(projection, context, dispatch) {
                 if (pointInPolygon) {
                     var matched = false;
                     fetchVisibleBuildings(function(building) {
-                        // retrieve GeoJSON for this building if it isn't already stored in gjids { }
-                        var wayid = d3.select(building).attr('class').split(' ')[3];
-                        var ent;
-                        if (!gjids[wayid]) {
-                            var nodes = [];
-                            ent = context.entity(wayid);
-                            _.map(ent.nodes, function(nodeid) {
-                                var node = context.entity(nodeid);
-                                nodes.push(node.loc);
-                            });
-                            
-                            gjids[wayid] = {
-                                type: 'Feature',
-                                geometry: {
-                                    type: 'Polygon',
-                                    coordinates: [nodes]
-                                }
-                            };
-                        }
-
+                        var wayid = getBuildingPoly(building);
                         var isInside = pointInside(d, gjids[wayid]);
                         if (isInside) {
                             matched = true;
@@ -523,6 +552,8 @@ export function svgGeoService(projection, context, dispatch) {
                 return d3.selectAll('.point-in-polygon').classed('must-show', true);
             } else if (preset.id.indexOf('cycle') > -1) {
                 return d3.selectAll('.merge-lines').classed('must-show', true);
+            } else if (preset.id.indexOf('building') > -1) {
+                return d3.selectAll('.overlap-buildings').classed('must-show', true);
             } else {
                 console.log(preset.id);
             }
@@ -542,7 +573,7 @@ export function svgGeoService(projection, context, dispatch) {
         }
         
         // reset UI for point-in-polygon and merge-lines
-        d3.selectAll('.point-in-polygon, .merge-lines')
+        d3.selectAll('.point-in-polygon, .merge-lines, .overlap-buildings')
             .classed('must-show', false)
             .selectAll('input')
                 .property('checked', false);

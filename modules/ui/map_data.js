@@ -437,7 +437,7 @@ export function uiMapData(context) {
                 .attr('type', 'checkbox')
                 .attr('class', 'copyright-approved')
                 .property('checked', false)
-            copylabel.append('span').text('This data is permitted to include on OpenStreetMap under their ODbL license');
+            copylabel.append('span').text('This data is permitted to include on OpenStreetMap under the ODbL license');
             
             var layerSelect = urlEntry.append('div')
                 .append('select')
@@ -492,7 +492,7 @@ export function uiMapData(context) {
                    geoserviceLayer.preset(selection);
                 });
             
-            // point-in-polygon, merge line options
+            // point-in-polygon option
             var pip = preset.append('div')
                 .attr('class', 'point-in-polygon')
                 .append('label');
@@ -503,6 +503,7 @@ export function uiMapData(context) {
             pip.append('span')
                 .text('Add addresses to buildings');
             
+            // merge lines option
             var ml = preset.append('div')
                 .attr('class', 'merge-lines')
                 .append('label');
@@ -512,6 +513,29 @@ export function uiMapData(context) {
                 .property('checked', false);
             ml.append('span')
                 .text('Add data to roads');
+            
+            // no overlapping buildings option
+            var bld = preset.append('div')
+                .attr('class', 'overlap-buildings')
+                .append('label');
+            bld.append('input')
+                .attr('type', 'checkbox')
+                .attr('name', 'overlap-buildings')
+                .property('checked', false);
+            bld.append('span')
+                .text('Prevent overlapping buildings');
+            
+            // using a point-in-polygon or other preset geo trickery requires us to see everything on the map
+            d3.selectAll('.point-in-polygon, .merge-lines, .overlap-buildings').on('click', function() {
+                if (d3.selectAll('.point-in-polygon input').property('checked') ||
+                    d3.selectAll('.merge-lines input').property('checked') ||
+                    d3.selectAll('.overlap-buildings input').property('checked')) {
+                    
+                    d3.selectAll('button.url.final.global').property('disabled', true);
+                } else {
+                    d3.selectAll('button.url.final.global').property('disabled', false);
+                }
+            });
             
             // radio buttons to decide how data is finalized on OSM
             var approvalPhase = urlEntry.append('div')
@@ -625,11 +649,11 @@ export function uiMapData(context) {
                 setGeoService(d3.select('.topurl input.geoservice').property('value'), geoserviceDownloadAll);
             };
             this.pane.append('button')
-                .attr('class', 'url final')
+                .attr('class', 'url final local')
                 .text('Load In View')
                 .on('click', function() { startLoad(false); });
             this.pane.append('button')
-                .attr('class', 'url final')
+                .attr('class', 'url final global')
                 .attr('style', 'margin-right: 10px')
                 .text('Load Globally')
                 .on('click', function() { startLoad(true); });
