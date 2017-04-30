@@ -88,7 +88,10 @@ export function uiEntityEditor(context) {
             .on('click', function() {
                 this.focusEntity.approvedForEdit = true;
                 // apply a CSS class to any point / line / polygon approved
-                d3.selectAll('.layer-osm .' + this.focusEntity.id).classed('import-approved', true);
+                d3.selectAll('.layer-osm .' + this.focusEntity.id)
+                    .classed('import-approved', true)
+                    .classed('import-edited', false)
+                    .classed('import-rejected', false);
             }.bind(this));
         
         var rejectButton = importApprove.append('button')
@@ -103,8 +106,13 @@ export function uiEntityEditor(context) {
                     );
                     d3.selectAll('.layer-osm .' + this.focusEntity.id).classed('import-edited', false);
                 } else {
-                    // 100% new object: delete button removes the entity
-                    operationDelete([this.focusEntity.id], context)();
+                    // show object red for rejected
+                    this.focusEntity.approvedForEdit = false;
+                    d3.selectAll('.layer-osm .' + this.focusEntity.id)
+                        .classed('import-approved', false)
+                        .classed('import-edited', false)
+                        .classed('import-rejected', true);
+                    //operationDelete([this.focusEntity.id], context)();
                 }
             }).bind(this));
         

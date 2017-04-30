@@ -1683,12 +1683,28 @@ path.import-approved.way.area {
     stroke: rgba(90, 225, 90, 0.3);
 }
 
+g.point.import-edited .stroke {
+    fill: #a6a6f3;
+}
+
 path.import-edited.way {
     stroke: #a6a6f3;
 }
 
 path.import-edited.way.area {
     stroke: rgba(90, 90, 225, 0.3);
+}
+
+g.point.import-rejected .stroke {
+    fill: #f3a6a6;
+}
+
+path.import-rejected.way {
+    stroke: #f3a6a6;
+}
+
+path.import-rejected.way.area {
+    stroke: rgba(225, 90, 90, 0.3);
 }
 
 /* GPX Paths */
