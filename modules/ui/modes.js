@@ -82,9 +82,15 @@ export function uiModes(context) {
 
         var keybinding = d3keybinding('mode-buttons');
 
-        modes.forEach(function(m) {
-            keybinding.on(m.key, function() {
-                if (editable()) context.enter(m);
+        modes.forEach(function(mode) {
+            keybinding.on(mode.key, function() {
+                if (editable()) {
+                    if (mode.id === context.mode().id) {
+                        context.enter(modeBrowse(context));
+                    } else {
+                        context.enter(mode);
+                    }
+                }
             });
         });
 
