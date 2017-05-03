@@ -60,6 +60,7 @@ export function uiIntro(context) {
             center = context.map().center(),
             zoom = context.map().zoom(),
             background = context.background().baseLayerSource(),
+            overlays = context.background().overlayLayerSources(),
             opacity = d3.selectAll('#map .layer-background').style('opacity'),
             loadedTiles = context.connection().loadedTiles(),
             baseEntities = context.history().graph().base().entities,
@@ -74,6 +75,7 @@ export function uiIntro(context) {
         context.history().merge(d3.values(coreGraph().load(introGraph).entities));
         context.history().checkpoint('initial');
         context.background().bing();
+        overlays.forEach(function (d) { context.background().toggleOverlayLayer(d); });
 
         // Mock geocoder
         services.geocoder.countryCode = function(location, callback) {
@@ -110,6 +112,7 @@ export function uiIntro(context) {
             context.connection().toggle(true).reset().loadedTiles(loadedTiles);
             context.history().reset().merge(d3.values(baseEntities));
             context.background().baseLayerSource(background);
+            overlays.forEach(function (d) { context.background().toggleOverlayLayer(d); });
             if (history) context.history().fromJSON(history, false);
             context.map().centerZoom(center, zoom);
             window.location.replace(hash);
