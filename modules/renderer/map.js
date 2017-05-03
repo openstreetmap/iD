@@ -75,6 +75,9 @@ export function rendererMap(context) {
         context.history()
             .on('change.map', immediateRedraw)
             .on('undone.map redone.map', function(stack) {
+                var mode = context.mode().id;
+                if (mode !== 'browse' && mode !== 'select') return;
+
                 var followSelected = false;
                 if (Array.isArray(stack.selectedIDs)) {
                     followSelected = (stack.selectedIDs.length === 1 && stack.selectedIDs[0][0] === 'n');
