@@ -125,8 +125,15 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
 
 
     drawWay.off = function(surface) {
-        context.pop(tempEdits);
-        tempEdits = 0;
+        // Drawing was interrupted unexpectedly.
+        // This can happen if the user changes modes,
+        // clicks geolocate button, a hashchange event occurs, etc.
+        if (tempEdits) {
+            context.pop(tempEdits);
+            while (context.graph() !== startGraph) {
+                context.pop();
+            }
+        }
 
         context.map()
             .on('drawn.draw', null);
@@ -268,7 +275,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
         tempEdits = 0;
 
         var way = context.hasEntity(wayId);
-        if (!way || origWay.isDegenerate()) {
+        if (!way || way.isDegenerate()) {
             drawWay.cancel();
             return;
         }
