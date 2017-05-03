@@ -1,7 +1,7 @@
 import { t } from '../util/locale';
 import { behaviorDrawWay } from '../behavior/index';
 
-export function modeDrawArea(context, wayId, baseGraph) {
+export function modeDrawArea(context, wayId, startGraph) {
     var mode = {
         button: 'area',
         id: 'draw-area'
@@ -13,7 +13,7 @@ export function modeDrawArea(context, wayId, baseGraph) {
     mode.enter = function() {
         var way = context.entity(wayId);
 
-        behavior = behaviorDrawWay(context, wayId, undefined, mode, baseGraph)
+        behavior = behaviorDrawWay(context, wayId, undefined, mode, startGraph)
             .tail(t('modes.draw_area.tail'));
 
         var addNode = behavior.addNode;

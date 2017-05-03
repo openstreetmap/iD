@@ -35,7 +35,7 @@ export function modeAddArea(context) {
 
 
     function start(loc) {
-        var graph = context.graph(),
+        var startGraph = context.graph(),
             node = osmNode({ loc: loc }),
             way = osmWay({ tags: defaultTags });
 
@@ -46,12 +46,12 @@ export function modeAddArea(context) {
             actionClose(way.id)
         );
 
-        context.enter(modeDrawArea(context, way.id, graph));
+        context.enter(modeDrawArea(context, way.id, startGraph));
     }
 
 
     function startFromWay(loc, edge) {
-        var graph = context.graph(),
+        var startGraph = context.graph(),
             node = osmNode({ loc: loc }),
             way = osmWay({ tags: defaultTags });
 
@@ -63,12 +63,12 @@ export function modeAddArea(context) {
             actionAddMidpoint({ loc: loc, edge: edge }, node)
         );
 
-        context.enter(modeDrawArea(context, way.id, graph));
+        context.enter(modeDrawArea(context, way.id, startGraph));
     }
 
 
     function startFromNode(node) {
-        var graph = context.graph(),
+        var startGraph = context.graph(),
             way = osmWay({ tags: defaultTags });
 
         context.perform(
@@ -77,7 +77,7 @@ export function modeAddArea(context) {
             actionClose(way.id)
         );
 
-        context.enter(modeDrawArea(context, way.id, graph));
+        context.enter(modeDrawArea(context, way.id, startGraph));
     }
 
 
