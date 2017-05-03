@@ -173,12 +173,11 @@ export function coreHistory(context) {
         },
 
 
+        // Back to the previous annotated state or index = 0.
         undo: function() {
             d3.select(document).interrupt('history.perform');
 
             var previous = stack[index].graph;
-
-            // Pop to the next annotated state.
             while (index > 0) {
                 index--;
                 if (stack[index].annotation) break;
@@ -189,16 +188,21 @@ export function coreHistory(context) {
         },
 
 
+        // Forward to the next annotated state.
         redo: function() {
             d3.select(document).interrupt('history.perform');
 
             var previous = stack[index].graph;
-            while (index < stack.length - 1) {
-                index++;
-                if (stack[index].annotation) break;
+            var tryIndex = index;
+            while (tryIndex < stack.length - 1) {
+                tryIndex++;
+                if (stack[tryIndex].annotation) {
+                    index = tryIndex;
+                    dispatch.call('redone', this, stack[index]);
+                    break;
+                }
             }
 
-            dispatch.call('redone', this, stack[index]);
             return change(previous);
         },
 

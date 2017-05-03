@@ -214,12 +214,21 @@ describe('iD.History', function () {
             expect(history.redo().changes()).to.eql({});
         });
 
-        it('emits an redone event', function () {
-            history.perform(action);
+        it('does redo into an annotated state', function () {
+            history.perform(action, 'annotation');
+            history.on('redone', spy);
             history.undo();
-            history.on('change', spy);
             history.redo();
+            expect(history.undoAnnotation()).to.equal('annotation');
             expect(spy).to.have.been.called;
+        });
+
+        it('does not redo into a non-annotated state', function () {
+            history.perform(action);
+            history.on('redone', spy);
+            history.undo();
+            history.redo();
+            expect(spy).not.to.have.been.called;
         });
 
         it('emits a change event', function () {
