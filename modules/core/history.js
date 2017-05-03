@@ -161,15 +161,18 @@ export function coreHistory(context) {
         },
 
 
-        pop: function() {
+        pop: function(n) {
             d3.select(document).interrupt('history.perform');
 
             var previous = stack[index].graph;
-            if (index > 0) {
+            if (isNaN(+n) || +n < 0) {
+                n = 1;
+            }
+            while (n-- > 0 && index > 0) {
                 index--;
                 stack.pop();
-                return change(previous);
             }
+            return change(previous);
         },
 
 

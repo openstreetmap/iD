@@ -132,6 +132,32 @@ describe('iD.History', function () {
             var difference = history.pop();
             expect(spy).to.have.been.calledWith(difference);
         });
+
+        it('pops n times', function () {
+            history.perform(action, 'annotation1');
+            history.perform(action, 'annotation2');
+            history.perform(action, 'annotation3');
+            history.pop(2);
+            expect(history.undoAnnotation()).to.equal('annotation1');
+        });
+
+        it('pops 0 times', function () {
+            history.perform(action, 'annotation1');
+            history.perform(action, 'annotation2');
+            history.perform(action, 'annotation3');
+            history.pop(0);
+            expect(history.undoAnnotation()).to.equal('annotation3');
+        });
+
+        it('pops 1 time if argument is invalid', function () {
+            history.perform(action, 'annotation1');
+            history.perform(action, 'annotation2');
+            history.perform(action, 'annotation3');
+            history.pop('foo');
+            expect(history.undoAnnotation()).to.equal('annotation2');
+            history.pop(-1);
+            expect(history.undoAnnotation()).to.equal('annotation1');
+        });
     });
 
     describe('#overwrite', function () {
