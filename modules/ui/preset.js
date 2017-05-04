@@ -202,7 +202,9 @@ export function uiPreset(context) {
                         if (d3.event.keyCode === 13 && d3.select('.combobox').empty()) {
                             context.enter(modeBrowse(context));
                         }
-                    })
+                    });
+
+                d3.select(this)
                     .call(reference.body)
                     .select('.form-label-button-wrap')
                     .call(reference.button);
