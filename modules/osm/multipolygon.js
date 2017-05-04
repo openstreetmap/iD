@@ -6,7 +6,7 @@ import { osmIsInterestingTag } from './tags';
 // For fixing up rendering of multipolygons with tags on the outer member.
 // https://github.com/openstreetmap/iD/issues/613
 export function osmIsSimpleMultipolygonOuterMember(entity, graph) {
-    if (entity.type !== 'way')
+    if (entity.type !== 'way' || Object.keys(entity.tags).filter(osmIsInterestingTag).length === 0)
         return false;
 
     var parents = graph.parentRelations(entity);
@@ -52,7 +52,14 @@ export function osmSimpleMultipolygonOuterMember(entity, graph) {
         }
     }
 
-    return outerMember && graph.hasEntity(outerMember.id);
+    if (!outerMember)
+        return false;
+
+    var outerEntity = graph.hasEntity(outerMember.id);
+    if (!outerEntity || !Object.keys(outerEntity.tags).filter(osmIsInterestingTag).length)
+        return false;
+
+    return outerEntity;
 }
 
 
