@@ -915,7 +915,7 @@ en:
       chapters: "So far, so good! You can use the buttons below to skip chapters at any time or to restart a chapter if you get stuck. Let's begin! **Click '{next}' to continue.**"
     navigation:
       title: "Navigation"
-      drag: "The main map area shows OpenStreetMap data on top of a background. You can navigate by dragging and scrolling, just like any web map. **Drag the map!**"
+      drag: "The main map area shows OpenStreetMap data on top of a background.{br}You can drag the map by pressing and holding the left mouse button while moving the mouse around. You can also use the arrow keys on your keyboard. **Drag the map!**"
       zoom: "You can zoom in or out by scrolling with the mouse wheel or trackpad, or by clicking the {plus} / {minus} buttons. **Zoom the map!**"
       features: "We use the word *features* to describe the things that appear on the map. Anything in the real world can be mapped as a feature on OpenStreetMap."
       points_lines_areas: "Map features are represented using *points, lines, or areas.*"

@@ -59,7 +59,7 @@ export function uiIntroNavigation(context, reveal) {
                 var centerNow = context.map().center();
                 if (centerStart[0] !== centerNow[0] || centerStart[1] !== centerNow[1]) {
                     context.map().on('move.intro', null);
-                    timeout(function() { continueTo(zoomMap); }, 1500);
+                    timeout(function() { continueTo(zoomMap); }, 3000);
                 }
             });
 
@@ -94,7 +94,7 @@ export function uiIntroNavigation(context, reveal) {
         context.map().on('move.intro', function() {
             if (context.map().zoom() !== zoomStart) {
                 context.map().on('move.intro', null);
-                timeout(function() { continueTo(features); }, 1500);
+                timeout(function() { continueTo(features); }, 3000);
             }
         });
 
