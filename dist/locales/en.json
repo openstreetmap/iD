@@ -776,7 +776,7 @@
             "navigation": {
                 "title": "Navigation",
                 "drag": "The main map area shows OpenStreetMap data on top of a background. You can navigate by dragging and scrolling, just like any web map. **Drag the map!**",
-                "zoom": "You can zoom in or out by scrolling with the mouse wheel or trackpad. **Zoom the map!**",
+                "zoom": "You can zoom in or out by scrolling with the mouse wheel or trackpad, or by clicking the {plus} / {minus} buttons. **Zoom the map!**",
                 "features": "We use the word *features* to describe the things that appear on the map. Anything in the real world can be mapped as a feature on OpenStreetMap.",
                 "points_lines_areas": "Map features are represented using *points, lines, or areas.*",
                 "nodes_ways": "In OpenStreetMap, points are sometimes called *nodes*, and lines and areas are sometimes called *ways*.",

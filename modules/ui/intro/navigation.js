@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { t, textDirection } from '../../util/locale';
+import { t } from '../../util/locale';
 import { modeBrowse, modeSelect } from '../../modes';
 import { utilRebind } from '../../util/rebind';
 import { icon, pointBox, transitionTime } from './helper';
@@ -39,17 +39,6 @@ export function uiIntroNavigation(context, reveal) {
     }
 
 
-    function trimmedMap() {
-        var rect = d3.select('#map').node().getBoundingClientRect();
-        return {
-            left: rect.left + (textDirection === 'rtl' ? 60 : 10),
-            top: rect.top + 70,
-            width: rect.width - 60,
-            height: rect.height - 170
-        };
-    }
-
-
     function dragMap() {
         context.enter(modeBrowse(context));
         context.history().reset('initial');
@@ -61,9 +50,9 @@ export function uiIntroNavigation(context, reveal) {
         timeout(function() {
             var centerStart = context.map().center();
 
-            reveal(trimmedMap(), t('intro.navigation.drag'));
+            reveal('#surface', t('intro.navigation.drag'));
             context.map().on('drawn.intro', function() {
-                reveal(trimmedMap(), t('intro.navigation.drag'), { duration: 0 });
+                reveal('#surface', t('intro.navigation.drag'), { duration: 0 });
             });
 
             context.map().on('move.intro', function() {
@@ -86,9 +75,20 @@ export function uiIntroNavigation(context, reveal) {
     function zoomMap() {
         var zoomStart = context.map().zoom();
 
-        reveal(trimmedMap(), t('intro.navigation.zoom'));
+        reveal('#surface',
+            t('intro.navigation.zoom', {
+                plus: icon('#icon-plus', 'pre-text'),
+                minus: icon('#icon-minus', 'pre-text')
+            })
+        );
+
         context.map().on('drawn.intro', function() {
-            reveal(trimmedMap(), t('intro.navigation.zoom'), { duration: 0 });
+            reveal('#surface',
+                t('intro.navigation.zoom', {
+                    plus: icon('#icon-plus', 'pre-text'),
+                    minus: icon('#icon-minus', 'pre-text')
+                }), { duration: 0 }
+            );
         });
 
         context.map().on('move.intro', function() {
@@ -108,12 +108,12 @@ export function uiIntroNavigation(context, reveal) {
     function features() {
         var onClick = function() { continueTo(pointsLinesAreas); };
 
-        reveal(trimmedMap(), t('intro.navigation.features'),
+        reveal('#surface', t('intro.navigation.features'),
             { buttonText: t('intro.ok'), buttonCallback: onClick }
         );
 
         context.map().on('drawn.intro', function() {
-            reveal(trimmedMap(), t('intro.navigation.features'),
+            reveal('#surface', t('intro.navigation.features'),
                 { duration: 0, buttonText: t('intro.ok'), buttonCallback: onClick }
             );
         });
@@ -127,12 +127,12 @@ export function uiIntroNavigation(context, reveal) {
     function pointsLinesAreas() {
         var onClick = function() { continueTo(nodesWays); };
 
-        reveal(trimmedMap(), t('intro.navigation.points_lines_areas'),
+        reveal('#surface', t('intro.navigation.points_lines_areas'),
             { buttonText: t('intro.ok'), buttonCallback: onClick }
         );
 
         context.map().on('drawn.intro', function() {
-            reveal(trimmedMap(), t('intro.navigation.points_lines_areas'),
+            reveal('#surface', t('intro.navigation.points_lines_areas'),
                 { duration: 0, buttonText: t('intro.ok'), buttonCallback: onClick }
             );
         });
@@ -146,12 +146,12 @@ export function uiIntroNavigation(context, reveal) {
     function nodesWays() {
         var onClick = function() { continueTo(clickTownHall); };
 
-        reveal(trimmedMap(), t('intro.navigation.nodes_ways'),
+        reveal('#surface', t('intro.navigation.nodes_ways'),
             { buttonText: t('intro.ok'), buttonCallback: onClick }
         );
 
         context.map().on('drawn.intro', function() {
-            reveal(trimmedMap(), t('intro.navigation.nodes_ways'),
+            reveal('#surface', t('intro.navigation.nodes_ways'),
                 { duration: 0, buttonText: t('intro.ok'), buttonCallback: onClick }
             );
         });
