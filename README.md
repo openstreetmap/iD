@@ -1,8 +1,7 @@
 # iD - friendly JavaScript editor for [OpenStreetMap](http://www.openstreetmap.org/)
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/openstreetmap/iD.svg)](https://greenkeeper.io/)
-
 [![Build Status](https://travis-ci.org/openstreetmap/iD.svg?branch=master)](https://travis-ci.org/openstreetmap/iD)
+[![Greenkeeper badge](https://badges.greenkeeper.io/openstreetmap/iD.svg)](https://greenkeeper.io/)
 
 ## Basics
 
