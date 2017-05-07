@@ -286,7 +286,7 @@ export function uiIntroLine(context, reveal) {
             });
 
         timeout(function() {
-            var tooltip = reveal(subgrid.node(),
+            reveal(subgrid.node(),
                 t('intro.lines.choose_preset_residential', { preset: residentialPreset.name() }),
                 { tooltipBox: '.preset-highway-residential .preset-list-button', duration: 300 }
             );
@@ -334,7 +334,6 @@ export function uiIntroLine(context, reveal) {
         });
 
         timeout(function() {
-            var box = d3.select('.form-field-name').node().getBoundingClientRect();
             reveal('.entity-editor-pane',
                 t('intro.lines.name_road', { button: icon('#icon-apply', 'pre-text') }),
                 { tooltipClass: 'intro-lines-name_road' }
