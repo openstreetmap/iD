@@ -17,5 +17,9 @@
         "amenity": "place_of_worship",
         "religion": "jewish"
     },
+    "reference": {
+        "key": "amenity",
+        "value": "place_of_worship"
+    },
     "name": "Synagogue"
 }

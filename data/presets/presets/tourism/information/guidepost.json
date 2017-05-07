@@ -12,5 +12,9 @@
         "tourism": "information",
         "information": "guidepost"
     },
+    "reference": {
+        "key": "information",
+        "value": "guidepost"
+    },
     "name": "Guidepost"
 }

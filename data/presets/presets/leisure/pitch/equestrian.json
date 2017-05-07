@@ -13,6 +13,10 @@
         "leisure": "pitch",
         "sport": "equestrian"
     },
+    "reference": {
+        "key": "sport",
+        "value": "equestrian"
+    },
     "terms": [
         "dressage",
         "equestrian",

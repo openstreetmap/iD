@@ -23,5 +23,9 @@
         "social_facility": "group_home",
         "social_facility:for": "senior"
     },
+    "reference": {
+        "key": "social_facility",
+        "value": "group_home"
+    },
     "name": "Elderly Group Home"
 }

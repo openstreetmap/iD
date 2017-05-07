@@ -2,6 +2,7 @@
     "icon": "poi-vending-machine",
     "fields": [
         "operator",
+        "fee",
         "payment_multi",
         "currency_multi"
     ],
@@ -9,19 +10,16 @@
         "point"
     ],
     "terms": [
-        "drink",
-        "soda",
-        "beverage",
-        "juice",
-        "pop"
+        "newspaper"
     ],
     "tags": {
         "amenity": "vending_machine",
-        "vending": "drinks"
+        "vending": "news_papers"
     },
     "reference": {
         "key": "vending",
-        "value": "drinks"
+        "value": "newspapers"
     },
-    "name": "Drink Vending Machine"
+    "name": "Newspaper Vending Machine",
+    "searchable": false
 }

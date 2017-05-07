@@ -11,5 +11,9 @@
     "tags": {
         "noexit": "yes"
     },
+    "reference": {
+        "key": "noexit",
+        "value": "*"
+    },
     "name": "No Exit"
 }

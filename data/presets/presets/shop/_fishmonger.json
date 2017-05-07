@@ -13,6 +13,10 @@
     "tags": {
         "shop": "fishmonger"
     },
+    "reference": {
+        "key": "shop",
+        "value": "seafood"
+    },
     "name": "Fishmonger",
     "searchable": false
 }

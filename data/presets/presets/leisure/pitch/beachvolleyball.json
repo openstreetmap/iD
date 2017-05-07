@@ -22,6 +22,10 @@
         "sport": "beachvolleyball",
         "surface": "sand"
     },
+    "reference": {
+        "key": "sport",
+        "value": "beachvolleyball"
+    },
     "terms": [
         "volleyball"
     ],

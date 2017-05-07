@@ -15,5 +15,9 @@
         "highway": "service",
         "service": "parking_aisle"
     },
+    "reference": {
+        "key": "service",
+        "value": "parking_aisle"
+    },
     "name": "Parking Aisle"
 }

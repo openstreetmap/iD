@@ -14,7 +14,11 @@
     ],
     "tags": {
         "amenity": "vending_machine",
-        "vending": "news_papers"
+        "vending": "newspapers"
+    },
+    "reference": {
+        "key": "vending",
+        "value": "newspapers"
     },
     "name": "Newspaper Vending Machine"
 }

@@ -26,5 +26,9 @@
         "social_facility": "shelter",
         "social_facility:for": "homeless"
     },
+    "reference": {
+        "key": "social_facility",
+        "value": "shelter"
+    },
     "name": "Homeless Shelter"
 }

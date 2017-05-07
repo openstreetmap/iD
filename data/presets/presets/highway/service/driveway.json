@@ -15,5 +15,9 @@
         "highway": "service",
         "service": "driveway"
     },
+    "reference": {
+        "key": "service",
+        "value": "driveway"
+    },
     "name": "Driveway"
 }

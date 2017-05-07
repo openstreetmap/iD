@@ -7,6 +7,10 @@
         "natural": "water",
         "water": "lake"
     },
+    "reference": {
+        "key": "natural",
+        "value": "water"
+    },
     "terms": [
         "lakelet",
         "loch",

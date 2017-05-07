@@ -68,6 +68,22 @@
             "description": "The quality score this preset will receive when being compared with other matches (higher is better)",
             "type": "number",
             "default": 1.0
+        },
+        "reference": {
+            "description": "Taginfo documentation parameters (to be used when a preset manages multiple tags)",
+            "type": "object",
+            "properties": {
+                "key": {
+                    "description": "For documentation of a key",
+                    "type": "string",
+                    "required": true
+                },
+                "value": {
+                    "description": "For documentation of a tag (key and value)",
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
         }
     },
     "additionalProperties": false

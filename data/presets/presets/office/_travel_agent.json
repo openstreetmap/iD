@@ -13,6 +13,10 @@
     "tags": {
         "office": "travel_agent"
     },
+    "reference": {
+        "key": "shop",
+        "value": "travel_agency"
+    },
     "terms": [],
     "name": "Travel Agency",
     "searchable": false

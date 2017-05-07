@@ -12,6 +12,10 @@
         "leisure": "pitch",
         "sport": "soccer"
     },
+    "reference": {
+        "key": "sport",
+        "value": "soccer"
+    },
     "terms": [],
     "name": "Soccer Field"
 }

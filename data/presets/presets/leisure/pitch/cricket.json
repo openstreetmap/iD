@@ -12,6 +12,10 @@
         "leisure": "pitch",
         "sport": "cricket"
     },
+    "reference": {
+        "key": "sport",
+        "value": "cricket"
+    },
     "terms": [],
     "name": "Cricket Field"
 }

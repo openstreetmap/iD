@@ -12,6 +12,10 @@
         "leisure": "pitch",
         "sport": "volleyball"
     },
+    "reference": {
+        "key": "sport",
+        "value": "volleyball"
+    },
     "terms": [],
     "name": "Volleyball Court"
 }

@@ -9,5 +9,9 @@
         "leisure": "pitch",
         "sport": "golf"
     },
+    "reference": {
+        "key": "golf",
+        "value": "green"
+    },
     "name": "Putting Green"
 }

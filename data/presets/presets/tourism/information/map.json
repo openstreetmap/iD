@@ -13,5 +13,9 @@
         "tourism": "information",
         "information": "map"
     },
+    "reference": {
+        "key": "information",
+        "value": "map"
+    },
     "name": "Map"
 }

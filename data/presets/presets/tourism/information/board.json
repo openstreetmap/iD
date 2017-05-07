@@ -12,5 +12,9 @@
         "tourism": "information",
         "information": "board"
     },
+    "reference": {
+        "key": "information",
+        "value": "board"
+    },
     "name": "Information Board"
 }

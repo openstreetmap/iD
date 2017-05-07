@@ -18,5 +18,9 @@
         "amenity": "social_facility",
         "social_facility": "food_bank"
     },
+    "reference": {
+        "key": "social_facility",
+        "value": "food_bank"
+    },
     "name": "Food Bank"
 }

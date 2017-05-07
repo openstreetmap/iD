@@ -14,5 +14,9 @@
         "tourism": "information",
         "information": "office"
     },
+    "reference": {
+        "key": "information",
+        "value": "office"
+    },
     "name": "Tourist Information Office"
 }

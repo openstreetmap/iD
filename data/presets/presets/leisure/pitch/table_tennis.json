@@ -12,6 +12,10 @@
         "leisure": "pitch",
         "sport": "table_tennis"
     },
+    "reference": {
+        "key": "sport",
+        "value": "table_tennis"
+    },
     "terms": [
         "table tennis",
         "ping pong"

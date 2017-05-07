@@ -508,6 +508,14 @@
             "value": "university"
         },
         {
+            "key": "amenity",
+            "value": "vending_machine"
+        },
+        {
+            "key": "vending",
+            "value": "news_papers"
+        },
+        {
             "key": "vending",
             "value": "cigarettes"
         },
@@ -525,7 +533,7 @@
         },
         {
             "key": "vending",
-            "value": "news_papers"
+            "value": "newspapers"
         },
         {
             "key": "vending",
@@ -542,10 +550,6 @@
         {
             "key": "vending",
             "value": "sweets"
-        },
-        {
-            "key": "amenity",
-            "value": "vending_machine"
         },
         {
             "key": "amenity",

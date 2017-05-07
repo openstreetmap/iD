@@ -14,6 +14,10 @@
         "office": "lawyer",
         "lawyer": "notary"
     },
+    "reference": {
+        "key": "office",
+        "value": "notary"
+    },
     "terms": [
         "clerk",
         "signature",

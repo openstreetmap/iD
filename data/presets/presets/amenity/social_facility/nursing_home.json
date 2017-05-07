@@ -25,5 +25,9 @@
         "social_facility": "nursing_home",
         "social_facility:for": "senior"
     },
+    "reference": {
+        "key": "social_facility",
+        "value": "nursing_home"
+    },
     "name": "Nursing Home"
 }

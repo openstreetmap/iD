@@ -530,6 +530,10 @@
             "tags": {
                 "amenity": "nursing_home"
             },
+            "reference": {
+                "key": "social_facility",
+                "value": "nursing_home"
+            },
             "name": "Nursing Home",
             "searchable": false
         },
@@ -548,6 +552,10 @@
             "tags": {
                 "amenity": "register_office"
             },
+            "reference": {
+                "key": "government",
+                "value": "register_office"
+            },
             "name": "Register Office",
             "searchable": false
         },
@@ -560,6 +568,10 @@
             ],
             "tags": {
                 "amenity": "swimming_pool"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "swimming_pool"
             },
             "name": "Swimming Pool",
             "searchable": false
@@ -1857,6 +1869,10 @@
                 "amenity": "place_of_worship",
                 "religion": "buddhist"
             },
+            "reference": {
+                "key": "amenity",
+                "value": "place_of_worship"
+            },
             "name": "Buddhist Temple"
         },
         "amenity/place_of_worship/christian": {
@@ -1898,6 +1914,10 @@
                 "amenity": "place_of_worship",
                 "religion": "christian"
             },
+            "reference": {
+                "key": "amenity",
+                "value": "place_of_worship"
+            },
             "name": "Church"
         },
         "amenity/place_of_worship/jewish": {
@@ -1919,6 +1939,10 @@
                 "amenity": "place_of_worship",
                 "religion": "jewish"
             },
+            "reference": {
+                "key": "amenity",
+                "value": "place_of_worship"
+            },
             "name": "Synagogue"
         },
         "amenity/place_of_worship/muslim": {
@@ -1939,6 +1963,10 @@
             "tags": {
                 "amenity": "place_of_worship",
                 "religion": "muslim"
+            },
+            "reference": {
+                "key": "amenity",
+                "value": "place_of_worship"
             },
             "name": "Mosque"
         },
@@ -2351,6 +2379,10 @@
                 "amenity": "social_facility",
                 "social_facility": "food_bank"
             },
+            "reference": {
+                "key": "social_facility",
+                "value": "food_bank"
+            },
             "name": "Food Bank"
         },
         "amenity/social_facility/group_home": {
@@ -2377,6 +2409,10 @@
                 "amenity": "social_facility",
                 "social_facility": "group_home",
                 "social_facility:for": "senior"
+            },
+            "reference": {
+                "key": "social_facility",
+                "value": "group_home"
             },
             "name": "Elderly Group Home"
         },
@@ -2408,6 +2444,10 @@
                 "social_facility": "shelter",
                 "social_facility:for": "homeless"
             },
+            "reference": {
+                "key": "social_facility",
+                "value": "shelter"
+            },
             "name": "Homeless Shelter"
         },
         "amenity/social_facility/nursing_home": {
@@ -2436,6 +2476,10 @@
                 "amenity": "social_facility",
                 "social_facility": "nursing_home",
                 "social_facility:for": "senior"
+            },
+            "reference": {
+                "key": "social_facility",
+                "value": "nursing_home"
             },
             "name": "Nursing Home"
         },
@@ -2591,6 +2635,48 @@
             },
             "name": "University Grounds"
         },
+        "amenity/vending_machine": {
+            "icon": "poi-vending-machine",
+            "fields": [
+                "vending",
+                "operator",
+                "payment_multi",
+                "currency_multi"
+            ],
+            "geometry": [
+                "point"
+            ],
+            "terms": [],
+            "tags": {
+                "amenity": "vending_machine"
+            },
+            "name": "Vending Machine"
+        },
+        "amenity/vending_machine/news_papers": {
+            "icon": "poi-vending-machine",
+            "fields": [
+                "operator",
+                "fee",
+                "payment_multi",
+                "currency_multi"
+            ],
+            "geometry": [
+                "point"
+            ],
+            "terms": [
+                "newspaper"
+            ],
+            "tags": {
+                "amenity": "vending_machine",
+                "vending": "news_papers"
+            },
+            "reference": {
+                "key": "vending",
+                "value": "newspapers"
+            },
+            "name": "Newspaper Vending Machine",
+            "searchable": false
+        },
         "amenity/vending_machine/cigarettes": {
             "icon": "poi-vending-machine",
             "fields": [
@@ -2607,6 +2693,10 @@
             "tags": {
                 "amenity": "vending_machine",
                 "vending": "cigarettes"
+            },
+            "reference": {
+                "key": "vending",
+                "value": "cigarettes"
             },
             "name": "Cigarette Vending Machine"
         },
@@ -2626,6 +2716,10 @@
             "tags": {
                 "amenity": "vending_machine",
                 "vending": "condoms"
+            },
+            "reference": {
+                "key": "vending",
+                "value": "condoms"
             },
             "name": "Condom Vending Machine"
         },
@@ -2649,6 +2743,10 @@
             "tags": {
                 "amenity": "vending_machine",
                 "vending": "drinks"
+            },
+            "reference": {
+                "key": "vending",
+                "value": "drinks"
             },
             "name": "Drink Vending Machine"
         },
@@ -2674,9 +2772,13 @@
                 "amenity": "vending_machine",
                 "vending": "excrement_bags"
             },
+            "reference": {
+                "key": "vending",
+                "value": "excrement_bags"
+            },
             "name": "Excrement Bag Vending Machine"
         },
-        "amenity/vending_machine/news_papers": {
+        "amenity/vending_machine/newspapers": {
             "icon": "poi-vending-machine",
             "fields": [
                 "operator",
@@ -2692,7 +2794,11 @@
             ],
             "tags": {
                 "amenity": "vending_machine",
-                "vending": "news_papers"
+                "vending": "newspapers"
+            },
+            "reference": {
+                "key": "vending",
+                "value": "newspapers"
             },
             "name": "Newspaper Vending Machine"
         },
@@ -2715,6 +2821,10 @@
                 "amenity": "vending_machine",
                 "vending": "parcel_pickup;parcel_mail_in"
             },
+            "reference": {
+                "key": "vending",
+                "value": "parcel_pickup;parcel_mail_in"
+            },
             "name": "Parcel Pickup/Dropoff Vending Machine"
         },
         "amenity/vending_machine/parking_tickets": {
@@ -2734,6 +2844,10 @@
             "tags": {
                 "amenity": "vending_machine",
                 "vending": "parking_tickets"
+            },
+            "reference": {
+                "key": "vending",
+                "value": "parking_tickets"
             },
             "matchScore": 0.94,
             "name": "Parking Ticket Vending Machine"
@@ -2760,6 +2874,10 @@
                 "amenity": "vending_machine",
                 "vending": "public_transport_tickets"
             },
+            "reference": {
+                "key": "vending",
+                "value": "public_transport_tickets"
+            },
             "name": "Transit Ticket Vending Machine"
         },
         "amenity/vending_machine/sweets": {
@@ -2784,24 +2902,11 @@
                 "amenity": "vending_machine",
                 "vending": "sweets"
             },
-            "name": "Snack Vending Machine"
-        },
-        "amenity/vending_machine/vending_machine": {
-            "icon": "poi-vending-machine",
-            "fields": [
-                "vending",
-                "operator",
-                "payment_multi",
-                "currency_multi"
-            ],
-            "geometry": [
-                "point"
-            ],
-            "terms": [],
-            "tags": {
-                "amenity": "vending_machine"
+            "reference": {
+                "key": "vending",
+                "value": "sweets"
             },
-            "name": "Vending Machine"
+            "name": "Snack Vending Machine"
         },
         "amenity/veterinary": {
             "icon": "veterinary",
@@ -3856,6 +3961,10 @@
             "tags": {
                 "craft": "jeweler"
             },
+            "reference": {
+                "key": "shop",
+                "value": "jewelry"
+            },
             "name": "Jeweler",
             "searchable": false
         },
@@ -3874,6 +3983,10 @@
             "tags": {
                 "craft": "locksmith"
             },
+            "reference": {
+                "key": "shop",
+                "value": "locksmith"
+            },
             "name": "Locksmith",
             "searchable": false
         },
@@ -3891,6 +4004,10 @@
             ],
             "tags": {
                 "craft": "optician"
+            },
+            "reference": {
+                "key": "shop",
+                "value": "optician"
             },
             "name": "Optician",
             "searchable": false
@@ -3913,6 +4030,10 @@
             ],
             "tags": {
                 "craft": "tailor"
+            },
+            "reference": {
+                "key": "shop",
+                "value": "tailor"
             },
             "name": "Tailor",
             "searchable": false
@@ -4880,6 +5001,10 @@
                 "highway": "footway",
                 "footway": "crossing"
             },
+            "reference": {
+                "key": "footway",
+                "value": "crossing"
+            },
             "terms": [],
             "name": "Street Crossing"
         },
@@ -4899,6 +5024,10 @@
                 "highway": "footway",
                 "footway": "crossing",
                 "crossing": "zebra"
+            },
+            "reference": {
+                "key": "highway",
+                "value": "crossing"
             },
             "terms": [
                 "zebra crossing"
@@ -4920,6 +5049,10 @@
             "tags": {
                 "highway": "footway",
                 "footway": "sidewalk"
+            },
+            "reference": {
+                "key": "footway",
+                "value": "sidewalk"
             },
             "terms": [],
             "name": "Sidewalk"
@@ -4946,6 +5079,10 @@
                 "hazard",
                 "bunker"
             ],
+            "reference": {
+                "key": "golf",
+                "value": "bunker"
+            },
             "name": "Sand Trap"
         },
         "golf/fairway": {
@@ -4956,6 +5093,10 @@
             "tags": {
                 "golf": "fairway",
                 "landuse": "grass"
+            },
+            "reference": {
+                "key": "golf",
+                "value": "fairway"
             },
             "name": "Fairway"
         },
@@ -4969,6 +5110,10 @@
                 "landuse": "grass",
                 "leisure": "pitch",
                 "sport": "golf"
+            },
+            "reference": {
+                "key": "golf",
+                "value": "green"
             },
             "name": "Putting Green"
         },
@@ -4996,6 +5141,10 @@
                 "golf": "lateral_water_hazard",
                 "natural": "water"
             },
+            "reference": {
+                "key": "golf",
+                "value": "lateral_water_hazard"
+            },
             "name": "Lateral Water Hazard"
         },
         "golf/lateral_water_hazard_line": {
@@ -5017,6 +5166,10 @@
                 "golf": "rough",
                 "landuse": "grass"
             },
+            "reference": {
+                "key": "golf",
+                "value": "rough"
+            },
             "name": "Rough"
         },
         "golf/tee": {
@@ -5031,6 +5184,10 @@
             "terms": [
                 "teeing ground"
             ],
+            "reference": {
+                "key": "golf",
+                "value": "tee"
+            },
             "name": "Tee Box"
         },
         "golf/water_hazard_area": {
@@ -5041,6 +5198,10 @@
             "tags": {
                 "golf": "water_hazard",
                 "natural": "water"
+            },
+            "reference": {
+                "key": "golf",
+                "value": "water_hazard"
             },
             "name": "Water Hazard"
         },
@@ -5155,6 +5316,10 @@
             "tags": {
                 "highway": "crossing"
             },
+            "reference": {
+                "key": "footway",
+                "value": "crossing"
+            },
             "terms": [],
             "name": "Street Crossing"
         },
@@ -5171,6 +5336,10 @@
             "tags": {
                 "highway": "crossing",
                 "crossing": "zebra"
+            },
+            "reference": {
+                "key": "highway",
+                "value": "crossing"
             },
             "terms": [
                 "zebra crossing"
@@ -5624,6 +5793,10 @@
                 "highway": "service",
                 "service": "alley"
             },
+            "reference": {
+                "key": "service",
+                "value": "alley"
+            },
             "name": "Alley"
         },
         "highway/service/drive-through": {
@@ -5644,6 +5817,10 @@
                 "highway": "service",
                 "service": "drive-through"
             },
+            "reference": {
+                "key": "service",
+                "value": "drive-through"
+            },
             "name": "Drive-Through"
         },
         "highway/service/driveway": {
@@ -5662,6 +5839,10 @@
             "tags": {
                 "highway": "service",
                 "service": "driveway"
+            },
+            "reference": {
+                "key": "service",
+                "value": "driveway"
             },
             "name": "Driveway"
         },
@@ -5682,6 +5863,10 @@
                 "highway": "service",
                 "service": "emergency_access"
             },
+            "reference": {
+                "key": "service",
+                "value": "emergency_access"
+            },
             "name": "Emergency Access"
         },
         "highway/service/parking_aisle": {
@@ -5700,6 +5885,10 @@
             "tags": {
                 "highway": "service",
                 "service": "parking_aisle"
+            },
+            "reference": {
+                "key": "service",
+                "value": "parking_aisle"
             },
             "name": "Parking Aisle"
         },
@@ -7139,6 +7328,10 @@
                 "leisure": "fitness_centre",
                 "sport": "yoga"
             },
+            "reference": {
+                "key": "sport",
+                "value": "yoga"
+            },
             "name": "Yoga Studio"
         },
         "leisure/fitness_station": {
@@ -7381,6 +7574,10 @@
                 "leisure": "pitch",
                 "sport": "american_football"
             },
+            "reference": {
+                "key": "sport",
+                "value": "american_football"
+            },
             "terms": [],
             "name": "American Football Field"
         },
@@ -7396,6 +7593,10 @@
             "tags": {
                 "leisure": "pitch",
                 "sport": "baseball"
+            },
+            "reference": {
+                "key": "sport",
+                "value": "baseball"
             },
             "terms": [],
             "name": "Baseball Diamond"
@@ -7415,6 +7616,10 @@
             "tags": {
                 "leisure": "pitch",
                 "sport": "basketball"
+            },
+            "reference": {
+                "key": "sport",
+                "value": "basketball"
             },
             "terms": [],
             "name": "Basketball Court"
@@ -7443,6 +7648,10 @@
                 "sport": "beachvolleyball",
                 "surface": "sand"
             },
+            "reference": {
+                "key": "sport",
+                "value": "beachvolleyball"
+            },
             "terms": [
                 "volleyball"
             ],
@@ -7462,6 +7671,10 @@
                 "leisure": "pitch",
                 "sport": "bowls"
             },
+            "reference": {
+                "key": "sport",
+                "value": "bowls"
+            },
             "terms": [],
             "name": "Bowling Green"
         },
@@ -7478,6 +7691,10 @@
             "tags": {
                 "leisure": "pitch",
                 "sport": "cricket"
+            },
+            "reference": {
+                "key": "sport",
+                "value": "cricket"
             },
             "terms": [],
             "name": "Cricket Field"
@@ -7496,6 +7713,10 @@
             "tags": {
                 "leisure": "pitch",
                 "sport": "equestrian"
+            },
+            "reference": {
+                "key": "sport",
+                "value": "equestrian"
             },
             "terms": [
                 "dressage",
@@ -7520,6 +7741,10 @@
                 "leisure": "pitch",
                 "sport": "rugby_league"
             },
+            "reference": {
+                "key": "sport",
+                "value": "rugby_league"
+            },
             "terms": [],
             "name": "Rugby League Field"
         },
@@ -7536,6 +7761,10 @@
             "tags": {
                 "leisure": "pitch",
                 "sport": "rugby_union"
+            },
+            "reference": {
+                "key": "sport",
+                "value": "rugby_union"
             },
             "terms": [],
             "name": "Rugby Union Field"
@@ -7554,6 +7783,10 @@
                 "leisure": "pitch",
                 "sport": "skateboard"
             },
+            "reference": {
+                "key": "sport",
+                "value": "skateboard"
+            },
             "terms": [],
             "name": "Skate Park"
         },
@@ -7571,6 +7804,10 @@
                 "leisure": "pitch",
                 "sport": "soccer"
             },
+            "reference": {
+                "key": "sport",
+                "value": "soccer"
+            },
             "terms": [],
             "name": "Soccer Field"
         },
@@ -7587,6 +7824,10 @@
             "tags": {
                 "leisure": "pitch",
                 "sport": "table_tennis"
+            },
+            "reference": {
+                "key": "sport",
+                "value": "table_tennis"
             },
             "terms": [
                 "table tennis",
@@ -7609,6 +7850,10 @@
                 "leisure": "pitch",
                 "sport": "tennis"
             },
+            "reference": {
+                "key": "sport",
+                "value": "tennis"
+            },
             "terms": [],
             "name": "Tennis Court"
         },
@@ -7625,6 +7870,10 @@
             "tags": {
                 "leisure": "pitch",
                 "sport": "volleyball"
+            },
+            "reference": {
+                "key": "sport",
+                "value": "volleyball"
             },
             "terms": [],
             "name": "Volleyball Court"
@@ -7738,6 +7987,10 @@
             "tags": {
                 "leisure": "sports_centre",
                 "sport": "swimming"
+            },
+            "reference": {
+                "key": "sport",
+                "value": "swimming"
             },
             "name": "Swimming Pool Facility"
         },
@@ -8626,6 +8879,10 @@
                 "natural": "water",
                 "water": "lake"
             },
+            "reference": {
+                "key": "natural",
+                "value": "water"
+            },
             "terms": [
                 "lakelet",
                 "loch",
@@ -8641,6 +8898,10 @@
             "tags": {
                 "natural": "water",
                 "water": "pond"
+            },
+            "reference": {
+                "key": "natural",
+                "value": "water"
             },
             "terms": [
                 "lakelet",
@@ -8659,6 +8920,10 @@
             "tags": {
                 "natural": "water",
                 "water": "reservoir"
+            },
+            "reference": {
+                "key": "natural",
+                "value": "water"
             },
             "name": "Reservoir"
         },
@@ -8708,6 +8973,10 @@
             "tags": {
                 "noexit": "yes"
             },
+            "reference": {
+                "key": "noexit",
+                "value": "*"
+            },
             "name": "No Exit"
         },
         "office": {
@@ -8744,6 +9013,10 @@
             ],
             "tags": {
                 "office": "travel_agent"
+            },
+            "reference": {
+                "key": "shop",
+                "value": "travel_agency"
             },
             "terms": [],
             "name": "Travel Agency",
@@ -8842,6 +9115,10 @@
             ],
             "tags": {
                 "office": "coworking"
+            },
+            "reference": {
+                "key": "amenity",
+                "value": "coworking_space"
             },
             "name": "Coworking Space"
         },
@@ -8960,6 +9237,10 @@
                 "office": "government",
                 "government": "register_office"
             },
+            "reference": {
+                "key": "government",
+                "value": "register_office"
+            },
             "name": "Register Office"
         },
         "office/insurance": {
@@ -9031,6 +9312,10 @@
             "tags": {
                 "office": "lawyer",
                 "lawyer": "notary"
+            },
+            "reference": {
+                "key": "office",
+                "value": "notary"
             },
             "terms": [
                 "clerk",
@@ -9393,6 +9678,10 @@
             ],
             "tags": {
                 "power": "sub_station"
+            },
+            "reference": {
+                "key": "power",
+                "value": "substation"
             },
             "name": "Substation",
             "searchable": false
@@ -9869,6 +10158,10 @@
             "tags": {
                 "shop": "fishmonger"
             },
+            "reference": {
+                "key": "shop",
+                "value": "seafood"
+            },
             "name": "Fishmonger",
             "searchable": false
         },
@@ -10091,6 +10384,10 @@
                 "shop": "beauty",
                 "beauty": "nails"
             },
+            "reference": {
+                "key": "shop",
+                "value": "beauty"
+            },
             "name": "Nail Salon"
         },
         "shop/beauty/tanning": {
@@ -10108,6 +10405,10 @@
             "tags": {
                 "shop": "beauty",
                 "beauty": "tanning"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "tanning_salon"
             },
             "name": "Tanning Salon"
         },
@@ -12447,6 +12748,10 @@
                 "tourism": "information",
                 "information": "board"
             },
+            "reference": {
+                "key": "information",
+                "value": "board"
+            },
             "name": "Information Board"
         },
         "tourism/information/guidepost": {
@@ -12462,6 +12767,10 @@
             "tags": {
                 "tourism": "information",
                 "information": "guidepost"
+            },
+            "reference": {
+                "key": "information",
+                "value": "guidepost"
             },
             "name": "Guidepost"
         },
@@ -12480,6 +12789,10 @@
                 "tourism": "information",
                 "information": "map"
             },
+            "reference": {
+                "key": "information",
+                "value": "map"
+            },
             "name": "Map"
         },
         "tourism/information/office": {
@@ -12497,6 +12810,10 @@
             "tags": {
                 "tourism": "information",
                 "information": "office"
+            },
+            "reference": {
+                "key": "information",
+                "value": "office"
             },
             "name": "Tourist Information Office"
         },
@@ -12836,7 +13153,10 @@
             ]
         },
         "type/boundary/administrative": {
-            "name": "Administrative Boundary",
+            "icon": "boundary",
+            "fields": [
+                "admin_level"
+            ],
             "geometry": [
                 "relation"
             ],
@@ -12844,10 +13164,11 @@
                 "type": "boundary",
                 "boundary": "administrative"
             },
-            "fields": [
-                "admin_level"
-            ],
-            "icon": "boundary"
+            "reference": {
+                "key": "boundary",
+                "value": "administrative"
+            },
+            "name": "Administrative Boundary"
         },
         "type/restriction": {
             "geometry": [

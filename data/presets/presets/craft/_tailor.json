@@ -17,6 +17,10 @@
     "tags": {
         "craft": "tailor"
     },
+    "reference": {
+        "key": "shop",
+        "value": "tailor"
+    },
     "name": "Tailor",
     "searchable": false
 }

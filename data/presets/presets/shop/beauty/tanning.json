@@ -14,5 +14,9 @@
         "shop": "beauty",
         "beauty": "tanning"
     },
+    "reference": {
+        "key": "leisure",
+        "value": "tanning_salon"
+    },
     "name": "Tanning Salon"
 }
