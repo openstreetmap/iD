@@ -6243,7 +6243,7 @@
             "name": "Archaeological Site"
         },
         "historic/boundary_stone": {
-            "icon": "poi-monument",
+            "icon": "monument",
             "fields": [
                 "inscription"
             ],
