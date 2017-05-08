@@ -117,6 +117,15 @@
                 ["housenumber", "postcode"],
                 ["street"]
             ]
+        },
+        {
+            "countryCodes": ["cn"],
+            "format": [
+                ["postcode", "province"],
+                ["city"],
+                ["district"],
+                ["street", "housenumber"]
+            ]
         }
     ]
 }
