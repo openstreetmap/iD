@@ -5,8 +5,8 @@
         "oneway",
         "maxspeed",
         "surface",
-        "maxheight",
         "structure",
+        "maxheight",
         "access"
     ],
     "geometry": [

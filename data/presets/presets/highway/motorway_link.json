@@ -6,8 +6,8 @@
         "maxspeed",
         "lanes",
         "surface",
-        "maxheight",
         "structure",
+        "maxheight",
         "access"
     ],
     "geometry": [

@@ -6,9 +6,9 @@
         "maxspeed",
         "lanes",
         "surface",
+        "structure",
         "maxheight",
         "toll",
-        "structure",
         "access"
     ],
     "geometry": [

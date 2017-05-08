@@ -5,10 +5,10 @@
         "maxspeed",
         "lanes",
         "surface",
+        "structure",
         "maxheight",
         "ref",
         "cycleway",
-        "structure",
         "access"
     ],
     "geometry": [
