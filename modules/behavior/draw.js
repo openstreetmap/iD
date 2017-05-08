@@ -124,6 +124,9 @@ export function behaviorDraw(context) {
 
 
     function space() {
+        d3.event.preventDefault();
+        d3.event.stopPropagation();
+
         var currSpace = context.mouse();
         if (disableSpace && lastSpace) {
             var dist = geoEuclideanDistance(lastSpace, currSpace);
@@ -139,13 +142,12 @@ export function behaviorDraw(context) {
         disableSpace = true;
 
         d3.select(window).on('keyup.space-block', function() {
-            disableSpace = false;
-            d3.select(window).on('keyup.space-block', null);
             d3.event.preventDefault();
             d3.event.stopPropagation();
+            disableSpace = false;
+            d3.select(window).on('keyup.space-block', null);
         });
 
-        d3.event.preventDefault();
         click();
     }
 

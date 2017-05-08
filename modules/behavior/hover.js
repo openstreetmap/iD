@@ -16,7 +16,7 @@ import { utilRebind } from '../util/rebind';
 export function behaviorHover(context) {
     var dispatch = d3.dispatch('hover'),
         _selection = d3.select(null),
-        newNode = null,
+        newId = null,
         buttonDown,
         altDisables,
         target;
@@ -52,7 +52,7 @@ export function behaviorHover(context) {
 
     var hover = function(selection) {
         _selection = selection;
-        newNode = null;
+        newId = null;
 
         _selection
             .on('mouseover.hover', mouseover)
@@ -101,12 +101,12 @@ export function behaviorHover(context) {
             _selection.selectAll('.hover-suppressed')
                 .classed('hover-suppressed', false);
 
-            if (target instanceof osmEntity && target !== newNode) {
+            if (target instanceof osmEntity && target.id !== newId) {
 
                 // If drawing a way, don't hover on a node that was just placed. #3974
                 var mode = context.mode() && context.mode().id;
-                if ((mode === 'draw-line' || mode === 'draw-area') && !newNode && target.type === 'node') {
-                    newNode = target;
+                if ((mode === 'draw-line' || mode === 'draw-area') && !newId && target.type === 'node') {
+                    newId = target.id;
                     return;
                 }
 

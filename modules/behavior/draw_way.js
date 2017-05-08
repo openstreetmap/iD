@@ -255,6 +255,13 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
         // Avoid creating duplicate segments
         if (origWay.areAdjacent(node.id, origWay.nodes[origWay.nodes.length - 1])) return;
 
+        // Clicks should not occur on the drawing node, however a space keypress can
+        // sometimes grab that node's datum (before it gets classed as `active`?)  #4016
+        if (node.id === end.id) {
+            drawWay.add(node.loc);
+            return;
+        }
+
         context.pop(tempEdits);
 
         context.perform(
