@@ -201,14 +201,14 @@ export function uiFieldRadio(field, context) {
 
         spin
             .append('button')
-            .datum(1)
-            .attr('class', 'increment')
+            .datum(-1)
+            .attr('class', 'decrement')
             .attr('tabindex', -1);
 
         spin
             .append('button')
-            .datum(-1)
-            .attr('class', 'decrement')
+            .datum(1)
+            .attr('class', 'increment')
             .attr('tabindex', -1);
 
         layerItem = layerItem
