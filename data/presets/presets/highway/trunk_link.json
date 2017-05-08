@@ -1,14 +1,14 @@
 {
     "icon": "highway-trunk-link",
     "fields": [
+        "ref",
         "oneway",
         "maxspeed",
-        "structure",
-        "access",
         "lanes",
         "surface",
         "maxheight",
-        "ref"
+        "structure",
+        "access"
     ],
     "geometry": [
         "line"

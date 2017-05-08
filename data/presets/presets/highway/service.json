@@ -4,10 +4,10 @@
         "service",
         "oneway",
         "maxspeed",
-        "structure",
-        "access",
         "surface",
-        "maxheight"
+        "maxheight",
+        "structure",
+        "access"
     ],
     "geometry": [
         "line"

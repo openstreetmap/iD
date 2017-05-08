@@ -4,10 +4,10 @@
         "oneway",
         "surface",
         "sport_racing_motor",
-        "structure",
         "lit",
         "width",
-        "lanes"
+        "lanes",
+        "structure"
     ],
     "geometry": [
         "point",

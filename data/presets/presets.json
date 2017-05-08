@@ -5349,10 +5349,10 @@
         "highway/cycleway": {
             "icon": "highway-cycleway",
             "fields": [
+                "oneway",
                 "surface",
                 "lit",
                 "width",
-                "oneway",
                 "structure",
                 "access"
             ],
@@ -5415,11 +5415,11 @@
             "fields": [
                 "oneway",
                 "maxspeed",
-                "structure",
-                "access",
                 "lanes",
                 "surface",
+                "structure",
                 "maxheight",
+                "access",
                 "cycleway"
             ],
             "geometry": [
@@ -5459,14 +5459,14 @@
         "highway/motorway_link": {
             "icon": "highway-motorway-link",
             "fields": [
+                "ref",
                 "oneway_yes",
                 "maxspeed",
-                "structure",
-                "access",
                 "lanes",
                 "surface",
                 "maxheight",
-                "ref"
+                "structure",
+                "access"
             ],
             "geometry": [
                 "line"
@@ -5492,15 +5492,15 @@
         "highway/motorway": {
             "icon": "highway-motorway",
             "fields": [
+                "ref",
                 "oneway_yes",
                 "maxspeed",
-                "structure",
-                "access",
                 "lanes",
                 "surface",
                 "maxheight",
                 "toll",
-                "ref"
+                "structure",
+                "access"
             ],
             "geometry": [
                 "line"
@@ -5575,13 +5575,13 @@
             "fields": [
                 "oneway",
                 "maxspeed",
-                "structure",
-                "access",
                 "lanes",
                 "surface",
                 "maxheight",
                 "ref",
-                "cycleway"
+                "cycleway",
+                "structure",
+                "access"
             ],
             "geometry": [
                 "line"
@@ -5601,13 +5601,13 @@
             "fields": [
                 "oneway",
                 "maxspeed",
-                "structure",
-                "access",
                 "lanes",
                 "surface",
                 "maxheight",
                 "ref",
-                "cycleway"
+                "cycleway",
+                "structure",
+                "access"
             ],
             "geometry": [
                 "line"
@@ -5624,10 +5624,10 @@
                 "oneway",
                 "surface",
                 "sport_racing_motor",
-                "structure",
                 "lit",
                 "width",
-                "lanes"
+                "lanes",
+                "structure"
             ],
             "geometry": [
                 "point",
@@ -5657,12 +5657,12 @@
             "fields": [
                 "oneway",
                 "maxspeed",
-                "structure",
-                "access",
                 "lanes",
                 "surface",
                 "maxheight",
-                "cycleway"
+                "cycleway",
+                "structure",
+                "access"
             ],
             "geometry": [
                 "line"
@@ -5693,11 +5693,11 @@
             "fields": [
                 "oneway",
                 "maxspeed",
-                "structure",
-                "access",
                 "lanes",
                 "surface",
-                "maxheight"
+                "maxheight",
+                "structure",
+                "access"
             ],
             "geometry": [
                 "line"
@@ -5713,13 +5713,13 @@
             "fields": [
                 "oneway",
                 "maxspeed",
-                "structure",
-                "access",
                 "lanes",
                 "surface",
                 "maxheight",
                 "ref",
-                "cycleway"
+                "cycleway",
+                "structure",
+                "access"
             ],
             "geometry": [
                 "line"
@@ -5739,13 +5739,13 @@
             "fields": [
                 "oneway",
                 "maxspeed",
-                "structure",
-                "access",
                 "lanes",
                 "surface",
                 "maxheight",
                 "ref",
-                "cycleway"
+                "cycleway",
+                "structure",
+                "access"
             ],
             "geometry": [
                 "line"
@@ -5762,10 +5762,10 @@
                 "service",
                 "oneway",
                 "maxspeed",
-                "structure",
-                "access",
                 "surface",
-                "maxheight"
+                "maxheight",
+                "structure",
+                "access"
             ],
             "geometry": [
                 "line"
@@ -5991,13 +5991,13 @@
             "fields": [
                 "oneway",
                 "maxspeed",
-                "structure",
-                "access",
                 "lanes",
                 "surface",
                 "maxheight",
                 "ref",
-                "cycleway"
+                "cycleway",
+                "structure",
+                "access"
             ],
             "geometry": [
                 "line"
@@ -6017,13 +6017,13 @@
             "fields": [
                 "oneway",
                 "maxspeed",
-                "structure",
-                "access",
                 "lanes",
                 "surface",
                 "maxheight",
                 "ref",
-                "cycleway"
+                "cycleway",
+                "structure",
+                "access"
             ],
             "geometry": [
                 "line"
@@ -6119,14 +6119,14 @@
         "highway/trunk_link": {
             "icon": "highway-trunk-link",
             "fields": [
+                "ref",
                 "oneway",
                 "maxspeed",
-                "structure",
-                "access",
                 "lanes",
                 "surface",
                 "maxheight",
-                "ref"
+                "structure",
+                "access"
             ],
             "geometry": [
                 "line"
@@ -6144,15 +6144,15 @@
         "highway/trunk": {
             "icon": "highway-trunk",
             "fields": [
+                "ref",
                 "oneway",
                 "maxspeed",
-                "structure",
-                "access",
                 "lanes",
                 "surface",
                 "maxheight",
                 "toll",
-                "ref"
+                "structure",
+                "access"
             ],
             "geometry": [
                 "line"
@@ -6194,12 +6194,12 @@
             "fields": [
                 "oneway",
                 "maxspeed",
-                "structure",
-                "access",
                 "lanes",
                 "surface",
                 "maxheight",
-                "cycleway"
+                "cycleway",
+                "structure",
+                "access"
             ],
             "geometry": [
                 "line"
