@@ -3247,7 +3247,7 @@ img.tile-removing {
 }
 
 .tooltip.in {
-    opacity: 0.8;
+    opacity: 0.9;
     z-index: 1030;
     height: auto;
     display: block;
@@ -3448,6 +3448,23 @@ img.tile-removing {
 [dir='rtl'] .add-point .tooltip .tooltip-arrow {
     left: auto;
     right: 60px;
+}
+
+.badge .tooltip {
+    left: auto !important;
+    right: 5px !important;
+}
+[dir='rtl'] .badge .tooltip {
+    left: 5px !important;
+    right: auto !important;
+}
+.badge .tooltip .tooltip-arrow {
+    right: 15px !important;
+    left: auto !important;
+}
+[dir='rtl'] .badge .tooltip .tooltip-arrow {
+    left: 15px !important;
+    right: auto !important;
 }
 
 
