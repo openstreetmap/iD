@@ -6,25 +6,10 @@ import { osmEntity } from '../osm';
 
 
 export function behaviorSelect(context) {
-    var suppressMenu = true,
+    var lastMouse = null,
+        suppressMenu = true,
         tolerance = 4,
         p1 = null;
-
-
-    function keydown() {
-        if (d3.event && d3.event.shiftKey) {
-            context.surface()
-                .classed('behavior-multiselect', true);
-        }
-    }
-
-
-    function keyup() {
-        if (!d3.event || !d3.event.shiftKey) {
-            context.surface()
-                .classed('behavior-multiselect', false);
-        }
-    }
 
 
     function point() {
@@ -32,11 +17,33 @@ export function behaviorSelect(context) {
     }
 
 
-    function contextmenu() {
-        if (!p1) p1 = point();
-        d3.event.preventDefault();
-        suppressMenu = false;
-        click();
+    function keydown() {
+        var e = d3.event;
+        if (e && e.shiftKey) {
+            context.surface()
+                .classed('behavior-multiselect', true);
+        }
+
+        if (e && e.keyCode === 93) {  // context menu
+            e.preventDefault();
+            e.stopPropagation();
+        }
+    }
+
+
+    function keyup() {
+        var e = d3.event;
+        if (!e || !e.shiftKey) {
+            context.surface()
+                .classed('behavior-multiselect', false);
+        }
+
+
+        if (e && e.keyCode === 93) {  // context menu
+            e.preventDefault();
+            e.stopPropagation();
+            contextmenu();
+        }
     }
 
 
@@ -50,7 +57,31 @@ export function behaviorSelect(context) {
     }
 
 
+    function mousemove() {
+        if (d3.event) lastMouse = d3.event;
+    }
+
+
     function mouseup() {
+        click();
+    }
+
+
+    function contextmenu() {
+        var e = d3.event;
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (!+e.clientX && !+e.clientY) {
+            if (lastMouse) {
+                e.sourceEvent = lastMouse;
+            } else {
+                return;
+            }
+        }
+
+        if (!p1) p1 = point();
+        suppressMenu = false;
         click();
     }
 
@@ -70,7 +101,7 @@ export function behaviorSelect(context) {
 
         var isMultiselect = d3.event.shiftKey || d3.select('#surface .lasso').node(),
             isShowAlways = +context.storage('edit-menu-show-always') === 1,
-            datum = d3.event.target.__data__,
+            datum = d3.event.target.__data__ || (lastMouse && lastMouse.target.__data__),
             mode = context.mode();
 
 
@@ -122,15 +153,30 @@ export function behaviorSelect(context) {
 
 
     var behavior = function(selection) {
+        lastMouse = null;
+        suppressMenu = true;
+        p1 = null;
+
         d3.select(window)
             .on('keydown.select', keydown)
-            .on('keyup.select', keyup);
+            .on('keyup.select', keyup)
+            .on('contextmenu.select-window', function() {
+                // Edge and IE really like to show the contextmenu on the
+                // menubar when user presses a keyboard menu button
+                // even after we've already preventdefaulted the key event.
+                d3.event.preventDefault();
+                d3.event.stopPropagation();
+            });
 
         selection
             .on('mousedown.select', mousedown)
+            .on('mousemove.select', mousemove)
             .on('contextmenu.select', contextmenu);
 
-        keydown();
+        if (d3.event && d3.event.shiftKey) {
+            context.surface()
+                .classed('behavior-multiselect', true);
+        }
     };
 
 
@@ -138,13 +184,16 @@ export function behaviorSelect(context) {
         d3.select(window)
             .on('keydown.select', null)
             .on('keyup.select', null)
+            .on('contextmenu.select-window', null)
             .on('mouseup.select', null, true);
 
         selection
             .on('mousedown.select', null)
+            .on('mousemove.select', null)
             .on('contextmenu.select', null);
 
-        keyup();
+        context.surface()
+            .classed('behavior-multiselect', false);
     };
 
 
