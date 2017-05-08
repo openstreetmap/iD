@@ -141,6 +141,8 @@ export function behaviorDraw(context) {
         d3.select(window).on('keyup.space-block', function() {
             disableSpace = false;
             d3.select(window).on('keyup.space-block', null);
+            d3.event.preventDefault();
+            d3.event.stopPropagation();
         });
 
         d3.event.preventDefault();
