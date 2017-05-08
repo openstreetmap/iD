@@ -3450,19 +3450,23 @@ img.tile-removing {
     right: 60px;
 }
 
-.badge .tooltip {
+li:first-of-type .badge .tooltip,
+li.hide + li.version .badge .tooltip {
     left: auto !important;
     right: 5px !important;
 }
-[dir='rtl'] .badge .tooltip {
+[dir='rtl'] li:first-of-type .badge .tooltip,
+[dir='rtl'] li.hide + li.version .badge .tooltip {
     left: 5px !important;
     right: auto !important;
 }
-.badge .tooltip .tooltip-arrow {
+li:first-of-type .badge .tooltip .tooltip-arrow,
+li.hide + li.version .badge .tooltip .tooltip-arrow {
     right: 15px !important;
     left: auto !important;
 }
-[dir='rtl'] .badge .tooltip .tooltip-arrow {
+[dir='rtl'] li:first-of-type .badge .tooltip .tooltip-arrow,
+[dir='rtl'] li.hide + li.version .badge .tooltip .tooltip-arrow {
     left: 15px !important;
     right: auto !important;
 }

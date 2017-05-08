@@ -197,6 +197,7 @@ export function uiInit(context) {
 
         aboutList
             .append('li')
+            .attr('class', 'version')
             .call(uiVersion(context));
 
         var issueLinks = aboutList
