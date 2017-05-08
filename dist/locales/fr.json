@@ -663,7 +663,7 @@
                 "search": "De nombreux éléments peuvent être représentés par des points. Le point que vous venez d'ajouter est un café. \n**Cherchez '{name}'**",
                 "choose": "**Choisissez Café dans la liste.**",
                 "describe": "Le point est désormais marqué comme étant un café. Nous pouvons ajouter davantage d'informations grâce à l'éditeur d'élément. **Ajoutez un nom au café.**",
-                "close": "L'éditeur d'élément enregistre automatiquement tous vos changements. Quand vous éditez une caractéristique, the bouton fermer se transforme en coche. **Cliquez sur le {button} bouton pour fermer l'éditeur d'élément.\"",
+                "close": "L'éditeur d'élément enregistre automatiquement tous vos changements. Quand vous éditez une caractéristique, le bouton fermer se transforme en coche. **Cliquez sur le {button} bouton pour fermer l'éditeur d'élément.\"",
                 "reselect": "En général, les points existent déjà, mais sont incomplets ou contiennent des erreurs. Il est possible de modifier un point existant. **Cliquez pour sélectionner le point que vous venez de créer.**",
                 "fixname": "**Changez le nom, puis cliquez sur le {button} bouton pour fermer l'éditeur d'élément.**",
                 "reselect_delete": "Toutes les caractéristiques de la carte peuvent être supprimées. **Cliquez pour sélectionnez le point que vous avez créé**",
@@ -675,7 +675,7 @@
                 "corner": "Dessinez la zone en positionnant les noeuds qui forment la frontière de la zone. **Cliquer sur l'un des coins du terrain de jeux pour démarrer.  ",
                 "place": "Dessinez le polygone en ajoutant des nœuds. Terminez le polygone en cliquant sur le nœud de départ. **Dessinez un polygone pour l'aire de jeu.**",
                 "search": "**Rechercher '{name}'.**",
-                "choose": "**Choisi Terrain de jeu dans la liste.**",
+                "choose": "**Choisissez Terrain de jeu dans la liste.**",
                 "describe": "**Ajoutez un nom et ensuite cliquez sur le bouton {button} pour fermer l'éditeur d'éléments**"
             },
             "lines": {
@@ -684,7 +684,7 @@
                 "start": "**Commencez la ligne en cliquant sur l'extrémité de la route.**",
                 "intersect": "Cliquez pour ajouter plus de noeuds à la ligne. Il est possible de déplacer la carte pendant le traçage. Les routes et les autres types de ligne font partie d'un plus grand réseau. Il est important que les lignes soient correctement connectées pour permettre aux applications de fonctionner. **Cliquer sur {name} pour créer une intersection connectant les deux lignes. ",
                 "finish": "Les lignes peuvent être terminées en cliquant une seconde fois sur le dernier nœud. **Terminez le dessin de la route**",
-                "road": "**Choisi Rue dans la liste**",
+                "road": "**Choisissez Rue dans la liste**",
                 "residential": "Il y a différent types de routes, le plus commun est \"Résidentielle\" (Residential). **Sélectionnez le type \"Résidentielle\".**",
                 "describe": "**Donnez un nom à la route, puis cliquez sur le {button} bouton pour fermer l'éditeur d'élément.**",
                 "restart": "La route doit couper {name}.",
