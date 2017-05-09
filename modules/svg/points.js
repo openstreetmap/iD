@@ -39,9 +39,9 @@ export function svgPoints(projection, context) {
             .append('g')
             .attr('class', function(d) {
                 if (d.approvedForEdit) {
-                    return 'node point ' + d.id + ' import-' + d.approvedForEdit;
+                    return 'node point geoservice-import ' + d.id + ' import-' + d.approvedForEdit;
                 } else {
-                    return 'node point ' + d.id;
+                    return 'node point geoservice-osm ' + d.id;
                 }
             })
             .order();

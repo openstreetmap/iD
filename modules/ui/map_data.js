@@ -250,6 +250,44 @@ export function uiMapData(context) {
                 .append('span')
                 .attr('class', 'geoservice-button-label')
                 .text('Add GeoService Layer');
+            
+            var allOpts = enter.append('label');
+            allOpts.append('input')
+                .attr('type', 'radio')
+                .attr('class', 'geoservice-all-opt')
+                .attr('name', 'import-visibility')
+                .attr('value', 'all')
+                .property('checked', 'checked');
+            allOpts.append('span').text('Show OSM & Import');
+            var osmOpt = enter.append('label');
+            osmOpt.append('input')
+                .attr('type', 'radio')
+                .attr('class', 'geoservice-osm-opt')
+                .attr('name', 'import-visibility')
+                .attr('value', 'osm');
+            osmOpt.append('span').text('Hide Import Layer');
+            var importOpt = enter.append('label');
+            importOpt.append('input')
+                .attr('type', 'radio')
+                .attr('class', 'geoservice-import-opt')
+                .attr('name', 'import-visibility')
+                .attr('value', 'import');
+            importOpt.append('span').text('Hide OSM Layer');
+
+            setInterval(function() {
+                if (d3.select('.geoservice-all-opt').property('checked')) {
+                    // console.log('Import and OSM visible');
+                    d3.selectAll('.data-layer .geoservice-import, .data-layer .geoservice-osm').style('visibility', 'visible');
+                } else if (d3.select('.geoservice-osm-opt').property('checked')) {
+                    // console.log('Only OSM visible');
+                    d3.selectAll('.data-layer .geoservice-osm').style('visibility', 'visible');
+                    d3.selectAll('.data-layer .geoservice-import').style('visibility', 'hidden');
+                } else if (d3.select('.geoservice-import-opt').property('checked')) {
+                    // console.log('Only import visible');
+                    d3.selectAll('.data-layer .geoservice-osm').style('visibility', 'hidden');
+                    d3.selectAll('.data-layer .geoservice-import').style('visibility', 'visible');
+                }
+            }, 300);
 
             // create GeoService layer edit pane only once            
             if (this.pane) {
@@ -637,6 +675,7 @@ export function uiMapData(context) {
                     };
                     d3.select('.geoservice-button-label').text('Edit GeoService Layer');
                     hoverGeoService.title('Customize your GeoService import');
+                    d3.selectAll('.list-item-geoservice label').style('display', 'block');
                 })
                 .attr('class', 'no-float hide')
                 .call(svgIcon('#icon-save', 'icon light'))
@@ -646,6 +685,8 @@ export function uiMapData(context) {
             var startLoad = function(geoserviceDownloadAll) {
                 d3.select('.geoservice-button-label').text('Edit GeoService Layer');
                 hoverGeoService.title('Customize your GeoService import');
+                d3.selectAll('.list-item-geoservice label').style('display', 'block');
+                
                 if (!copyapproval.property('checked')) {
                     alert('This is your first time using this data source or license. Please confirm that this data can be added to OpenStreetMap');
                     return;

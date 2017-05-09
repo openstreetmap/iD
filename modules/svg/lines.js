@@ -61,9 +61,9 @@ export function svgLines(projection, context) {
                     var baseClass = 'way line ' + klass + ' ' + d.id + (isSelected ? ' selected' : '') +
                         (oldMultiPolygonOuters[d.id] ? ' old-multipolygon' : '');
                     if (d.approvedForEdit) {
-                        return baseClass + ' import-' + d.approvedForEdit;
+                        return baseClass + ' geoservice-import import-' + d.approvedForEdit;
                     } else {
-                        return baseClass;
+                        return baseClass + ' geoservice-osm';
                     }                    
                 })
                 .call(svgTagClasses())

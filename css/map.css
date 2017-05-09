@@ -1489,6 +1489,20 @@ g.turn circle {
     pointer-events: none;
 }
 
+.layer-list li.list-item-geoservice {
+    height: auto;
+}
+
+.layer-list .list-item-geoservice label {
+    border-top: 1px solid #ccc;
+    display: none;
+}
+
+.layer-list .list-item-geoservice label:first-child {
+    border-top: none;
+    display: block;
+}
+
 path.geoservice {
     stroke: #FF26D4;
     stroke-width: 2;
