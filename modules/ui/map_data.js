@@ -233,10 +233,13 @@ export function uiMapData(context) {
                 .attr('class', 'layer-list layer-list-geoservice')
                 .append('li')
                 .classed('list-item-geoservice', true);
-        
+                
+            var hoverGeoService = tooltip()
+                .title('Enter a GeoService URL')
+                .placement('top');
             var labelGeoService = enter
-              .append('label')
-              .call(tooltip().title('Enter a GeoService URL').placement('top'));
+                .append('label')
+                .call(hoverGeoService);
 
             labelGeoService.append('button')
                 .attr('class', 'layer-browse')
@@ -245,7 +248,8 @@ export function uiMapData(context) {
 
             labelGeoService
                 .append('span')
-                .text('Input GeoService layer');
+                .attr('class', 'geoservice-button-label')
+                .text('Add GeoService Layer');
 
             // create GeoService layer edit pane only once            
             if (this.pane) {
@@ -631,6 +635,8 @@ export function uiMapData(context) {
                         refreshGeoService(context.storage('geoserviceLayerUrl'), geoserviceDownloadAll);
                         toggle();
                     };
+                    d3.select('.geoservice-button-label').text('Edit GeoService Layer');
+                    hoverGeoService.title('Customize your GeoService import');
                 })
                 .attr('class', 'no-float hide')
                 .call(svgIcon('#icon-save', 'icon light'))
@@ -638,6 +644,8 @@ export function uiMapData(context) {
             
             // actual download buttons, with license check and memory step
             var startLoad = function(geoserviceDownloadAll) {
+                d3.select('.geoservice-button-label').text('Edit GeoService Layer');
+                hoverGeoService.title('Customize your GeoService import');
                 if (!copyapproval.property('checked')) {
                     alert('This is your first time using this data source or license. Please confirm that this data can be added to OpenStreetMap');
                     return;
