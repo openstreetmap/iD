@@ -967,7 +967,7 @@ en:
       intersect: "Click or press spacebar to add more nodes to the line.{br}Roads, and many other types of lines, are part of a larger network. It is important for these lines to be connected properly in order for routing applications to work. **Click on {name} to create an intersection connecting the two lines.**"
       retry_intersect: "The road needs to intersect {name}. Let's try again!"
       continue_line: "Continue drawing the line for the new road. Remember that you can drag and zoom the map if needed.{br}When you are finished drawing, click on the last node again. **Finish drawing the road.**"
-      choose_category_road: "**Select {category} from the list**"
+      choose_category_road: "**Select {category} from the list.**"
       choose_preset_residential: "There are many different types of roads, but this one is a residential road. **Choose the {preset} type.**"
       retry_preset_residential: "You didn't select the {preset} type. **Click here to choose again.**"
       name_road: "**Give this road a name, then hit escape, return, or click the {button} button to close the feature editor.**"
