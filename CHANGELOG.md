@@ -12,6 +12,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 ##### MMM DD, YYYY
 
 #### :newspaper: News
+#### :mega: Release Highlights
 #### :boom: Breaking Changes
 #### :tada: New Features
 #### :sparkles: Usability
@@ -28,7 +29,27 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 # 2.2.0
 ##### May 9, 2017
 
-#### :newspaper: News
+#### :mega: Release Highlights
+
+* :artificial_satellite: Two **new global satellite imagery layers**: DigitalGlobe Premium and DigitalGlobe Standard!<br/>
+These new layers cover many parts of the world that previously had no usable imagery.<br/>
+_Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>)_
+
+* :point_right: A new **right-click editing menu** replaces the old radial menu.<br/>
+The new editing menu gives iD room to grow and won't get in the way of your editing.<br/>
+_Remember: Right-click on map features to use the new menu._
+
+* :woman_student: The **introductory walkthrough** has been completely revised, covering
+more OpenStreetMap concepts and common editing tasks using the new right-click menu.
+Users can explore and practice editing in the example town - now much
+better mapped than before and completely localizable. Even long time iD users should give it a try!<br/>
+_Replay the walkthrough from the Help pane (shortcut <kbd>H</kbd>)._
+
+* :vertical_traffic_light: Big refresh of icons!  You'll see **a lot more icons** for
+commonly mapped features.<br/>
+_Map traffic signals, stop signs, benches, crossings, street lamps, fountains, towers, and many more._
+
+* :writing_hand: You can now **see and edit changeset tags** before uploading to OpenStreetMap.
 
 #### :tada: New Features
 * Features for detecting and cleaning up old-style multipolygons
