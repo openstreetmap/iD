@@ -137,7 +137,6 @@
                 "key": "C",
                 "annotation": "Satukan {n} fitur.",
                 "not_eligible": "Fitur-fitur ini tidak bisa digabung.",
-                "not_adjacent": "Fitur-fitur ini tidak bisa disatukan karena tidak saling terhubung.",
                 "restriction": "Fitur-fitur ini tidak bisa disatukan karena ada setidaknya satu yang merupakan bagian dari relasi \"{relation}\".",
                 "incomplete_relation": "Fitur ini tidak bisa digabungkan karena belum sepenuhnya terunduh.",
                 "conflicting_tags": "Fitur-fitur ini tidak bisa disatukan karena beberapa nilai dari tagnya ada yang bertolak belakang."
@@ -434,7 +433,6 @@
             "help_link_text": "detail"
         },
         "confirm": {
-            "okay": "Baiklah",
             "cancel": "Batal"
         },
         "splash": {
@@ -455,12 +453,12 @@
         },
         "validations": {
             "untagged_point": "Titik tanpa tag",
-            "untagged_line": "Garis tanpa tag",
-            "untagged_area": "Area tanpa tag",
-            "tag_suggests_area": "Penanda {tag} menyarankan garis sebaiknya dalam bentuk area, tapi ini bukan sebuah area",
             "untagged_point_tooltip": "Pilih tipe fitur yang menjelaskan apa identitas poin ini.",
+            "untagged_line": "Garis tanpa tag",
             "untagged_line_tooltip": "Pilih tipe fitur yang menjelaskan apa identitas garis ini.",
+            "untagged_area": "Area tanpa tag",
             "untagged_area_tooltip": "Pilih tipe fitur yang menjelaskan apa identitas area ini.",
+            "tag_suggests_area": "Penanda {tag} menyarankan garis sebaiknya dalam bentuk area, tapi ini bukan sebuah area",
             "deprecated_tags": "Tag sudah tidak dipergunakan: {tags}"
         },
         "zoom": {
@@ -484,34 +482,29 @@
         "intro": {
             "done": "selesai",
             "graph": {
-                "spring_st": "jalan spring"
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "id"
             },
             "navigation": {
-                "title": "Navigasi",
-                "drag": "Area peta utama menampilkan data OpenStreetMap pada bagian atas dari latar. Anda dapat bernavigasi dengan menggeser dan mengskrol, seperti peta web lainnya. **Geser petanya!**",
-                "select": "Fitur peta dapat diwakili dengan tiga cara: dengan titik, garis, atau area. Semua fitur dapat dipilih dengan mengklik mereka. **Klik sebuah titik untuk memilihnya.**",
-                "pane": "Ketika sebuah fitur dipilih, fitur editor disembunyikan. Bagian kepala menunjukkan tipe fitur dan jendela utama atribut dari fitur tersebut, seperti nama dan alamat. ** Tutup fitur editor dengan menekan {tombol} tombol di kanan atas.**"
+                "title": "Navigasi"
             },
             "points": {
-                "title": "Titik",
-                "place": "Penanda dapat di tempatkan dengan cara meng-klik peta. **Klik peta untuk meletakkan penanda baru pada atap bangunan**",
-                "search": "Terdapat banyak fitur berbeda yang dapat diwakili oleh titik. Titik yang baru anda tambahkan adalah Cafe. **Pencarian untuk '{name}'**",
-                "choose": "**Pilih Kafe dari daftar.**",
-                "describe": "Kini titik bisa ditandai sebagai cafe. Gunakan penyunting fitur, kita dapat tambahkan informasi lebih tentang fitur. **Tambahkan sebuah nama**"
+                "title": "Titik"
             },
             "areas": {
-                "title": "Area",
-                "place": "Gambar area dengan meletakan lebih banyak simpul. Selesaikan area dengan mengklik pada simpul awal. **Gambar sebuah area untuk tempat bermain.**",
-                "search": "**Pencarian untuk '{name}'.**",
-                "choose": "**Pilih Tempat-bermain dari daftar.**"
+                "title": "Area"
             },
             "lines": {
-                "title": "Garis",
-                "start": "**Mulai garis dengan mengklik pada ujung sebuah jalan.**",
-                "finish": "Garis bisa diselesaikan dengan mengklik ulang pada simpul terakhir. **Selesaikan menggambar jalan.**",
-                "road": "**Pilih Jalan dari daftar**",
-                "residential": "Ada beberapa tipe jalan berbeda, yang paling umum adalah Jalan Perumahan. **Pilih tipe jalan Perumahan**",
-                "wrong_preset": "Anda belum memilih tipe Jalan Perumahan. **Klik di sini untuk memilih lagi**"
+                "title": "Garis"
             },
             "startediting": {
                 "title": "Mulai Menyunting",
@@ -705,14 +698,8 @@
                 "craft": {
                     "label": "Tipe"
                 },
-                "crop": {
-                    "label": "Tanaman"
-                },
                 "crossing": {
                     "label": "Tipe"
-                },
-                "cuisine": {
-                    "label": "Masakan"
                 },
                 "cycleway": {
                     "label": "Jalur Sepeda",
@@ -1058,15 +1045,6 @@
                 },
                 "source": {
                     "label": "Sumber"
-                },
-                "sport": {
-                    "label": "Olahraga"
-                },
-                "sport_ice": {
-                    "label": "Olahraga"
-                },
-                "sport_racing": {
-                    "label": "Olahraga"
                 },
                 "structure": {
                     "label": "Struktur",
@@ -1739,9 +1717,6 @@
                     "name": "Jalan Penghubung Primer",
                     "terms": "Jalan Penghubung Primer"
                 },
-                "highway/raceway": {
-                    "name": "Trek Balap"
-                },
                 "highway/residential": {
                     "name": "Jalan Perumahan",
                     "terms": "Jalan Permukiman, Jalan Pemukiman"
@@ -2016,9 +1991,6 @@
                     "name": "Lapangan Bermain",
                     "terms": "Tempat Bermain"
                 },
-                "leisure/running_track": {
-                    "name": "Lintasan Lari"
-                },
                 "leisure/stadium": {
                     "name": "Stadion",
                     "terms": "Stadion"
@@ -2026,9 +1998,6 @@
                 "leisure/swimming_pool": {
                     "name": "Kolam Renang",
                     "terms": "Kolam Renang"
-                },
-                "leisure/track": {
-                    "name": "Jalur Balap (tidak bermotor)"
                 },
                 "line": {
                     "name": "Garis",

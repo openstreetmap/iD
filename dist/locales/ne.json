@@ -1,0 +1,398 @@
+{
+    "ne": {
+        "modes": {
+            "add_area": {
+                "title": "क्षेत्र",
+                "description": "नक्सामा पार्क, भवन, पोखरी वा अन्य क्षेत्र थप गर्नुहोस्।",
+                "tail": "पार्क, ताल, वा भवन जस्ता क्षेत्र कोर्न, नक्सामा क्लिक गर्नुहोस्।"
+            },
+            "add_line": {
+                "title": "लाइन",
+                "description": "नक्सामा राजमार्ग, सडकमार्ग, पैदलमार्ग, नहर वा अन्य लाइनहरु थप्नुहोस्।",
+                "tail": "सडक, बाटो, वा मार्ग जस्ता लाइन कोर्न गर्न नक्सामा क्लिक गर्नुहोस्।"
+            },
+            "add_point": {
+                "title": "स्थल",
+                "description": "नक्सामा रेस्टुरेन्ट, स्मारक, हुलाक बक्से वा अन्य स्थल थप्नुहोस्।",
+                "tail": "स्थल थप्न नक्सामा क्लिक गर्नुहोस्।"
+            },
+            "browse": {
+                "title": "ब्राउज",
+                "description": "नक्सा प्यान र जूम गर्नुहोस्।"
+            },
+            "draw_area": {
+                "tail": "आफ्नो क्षेत्रमा नोड्स थप्न क्लिक गर्नुहोस्। क्षेत्र समाप्त गर्न पहिलो नोड क्लिक गर्नुहोस्।"
+            },
+            "draw_line": {
+                "tail": "लाइनमा नोड्स थप्न क्लिक गर्नुहोस्। लाइनहरु जडान गर्न अन्य लाइनहरुमा क्लिक गर्नुहोस्, र रेखा अन्त्य गर्न डबल-क्लिक गर्नुहोस्।"
+            }
+        },
+        "operations": {
+            "add": {
+                "annotation": {
+                    "point": " स्थल थपियो।",
+                    "vertex": "वे मा नोड थपियो।",
+                    "relation": "रिलेसन थपियो।"
+                }
+            },
+            "start": {
+                "annotation": {
+                    "line": "लाईन सुरु गरियो।",
+                    "area": "क्षेत्र सुरु गरियो।"
+                }
+            },
+            "continue": {
+                "key": "A",
+                "title": "जारी राख्नु",
+                "description": "यो लाईनलाई जारी राख्नु।",
+                "not_eligible": "यहाँबाट कुनै लाईन जारी गर्न सकिन्न। ",
+                "multiple": "यहाँबाट एकभन्दा बादी लाईन जारी गर्न सकिन्छ। कुनै एक लाईन छनोट गर्न Shift थिचेर लाईन छनोट गर्नुहोस।"
+            },
+            "circularize": {
+                "title": "गोलाकार बनाउनुहोस",
+                "description": {
+                    "line": "यस लाईनलाई गोलाकार बनाउनुहोस।",
+                    "area": "यस क्षेत्रलाई गोलाकार बनाउनुहोस।"
+                },
+                "key": "O",
+                "annotation": {
+                    "line": "लाईनलाई गोलाकार बनायियो।",
+                    "area": "क्षेत्रलाई गोलाकार बनायियो।"
+                }
+            },
+            "orthogonalize": {
+                "title": "वर्गाकार",
+                "description": {
+                    "line": "यस लाईनको कुनाहरु लाई बर्गाकार गर्नुहोस।",
+                    "area": "यस क्षेत्रको कुनाहरु लाई बर्गाकार गर्नुहोस।"
+                },
+                "key": "S",
+                "annotation": {
+                    "line": "लाईनको कुनाहरु लाई बर्गाकार गरियो।",
+                    "area": "क्षेत्रको कुनाहरु लाई बर्गाकार गरियो।"
+                }
+            },
+            "straighten": {
+                "title": "सिधा पार्नु",
+                "description": "यस लाईनलाई सिधा पार्नुस।",
+                "key": "S",
+                "annotation": "लाईनलाई सिधा परियो।"
+            },
+            "disconnect": {
+                "key": "D"
+            },
+            "merge": {
+                "key": "C"
+            },
+            "move": {
+                "key": "M"
+            },
+            "reflect": {
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                }
+            },
+            "rotate": {
+                "key": "R"
+            },
+            "reverse": {
+                "key": "V"
+            },
+            "split": {
+                "key": "X"
+            }
+        },
+        "intro": {
+            "graph": {
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "np"
+            }
+        },
+        "presets": {
+            "fields": {
+                "access": {
+                    "options": {
+                        "destination": {
+                            "title": "गन्तव्य"
+                        },
+                        "no": {
+                            "title": "निषेधित"
+                        },
+                        "private": {
+                            "title": "निजी"
+                        }
+                    },
+                    "placeholder": "तोकिएको छैन",
+                    "types": {
+                        "access": "सबै",
+                        "horse": "घोडा"
+                    }
+                },
+                "access_toilets": {
+                    "label": "पहुँच"
+                },
+                "address": {
+                    "label": "ठेगाना",
+                    "placeholders": {
+                        "city": "शहर",
+                        "conscriptionnumber": "१२३",
+                        "country": "देश",
+                        "county!jp": "जिल्ला",
+                        "district": "जिल्ला",
+                        "housenumber": "१२३",
+                        "state": "राज्य",
+                        "street": "सडक",
+                        "suburb!jp": "वडा"
+                    }
+                },
+                "aerialway": {
+                    "label": "प्रकार"
+                },
+                "aerialway/access": {
+                    "label": "पहुँच",
+                    "options": {
+                        "both": "दुबै",
+                        "entry": "प्रवेश",
+                        "exit": "बाहिर जाने"
+                    }
+                },
+                "aerialway/capacity": {
+                    "placeholder": "५००, २५००, ५०००..."
+                },
+                "aerialway/duration": {
+                    "placeholder": "१, २, ३..."
+                },
+                "aerialway/heating": {
+                    "label": "गरम"
+                },
+                "aerialway/summer/access": {
+                    "options": {
+                        "both": "दुबै",
+                        "entry": "प्रवेश"
+                    }
+                },
+                "aeroway": {
+                    "label": "प्रकार"
+                },
+                "amenity": {
+                    "label": "प्रकार"
+                },
+                "area/highway": {
+                    "label": "प्रकार"
+                },
+                "artwork_type": {
+                    "label": "प्रकार"
+                },
+                "barrier": {
+                    "label": "प्रकार"
+                },
+                "bicycle_parking": {
+                    "label": "प्रकार"
+                },
+                "board_type": {
+                    "label": "प्रकार"
+                },
+                "boundary": {
+                    "label": "प्रकार"
+                },
+                "bunker_type": {
+                    "label": "प्रकार"
+                },
+                "castle_type": {
+                    "label": "प्रकार"
+                },
+                "club": {
+                    "label": "प्रकार"
+                },
+                "construction": {
+                    "label": "प्रकार"
+                },
+                "country": {
+                    "label": "देश"
+                },
+                "craft": {
+                    "label": "प्रकार"
+                },
+                "crossing": {
+                    "label": "प्रकार"
+                },
+                "dock": {
+                    "label": "प्रकार"
+                },
+                "electrified": {
+                    "options": {
+                        "no": "होइन"
+                    }
+                },
+                "entrance": {
+                    "label": "प्रकार"
+                },
+                "fence_type": {
+                    "label": "प्रकार"
+                },
+                "fire_hydrant/type": {
+                    "label": "प्रकार"
+                },
+                "generator/type": {
+                    "label": "प्रकार"
+                },
+                "highway": {
+                    "label": "प्रकार"
+                },
+                "historic": {
+                    "label": "प्रकार"
+                },
+                "hoops": {
+                    "placeholder": "१, २, ४..."
+                },
+                "information": {
+                    "label": "प्रकार"
+                },
+                "internet_access": {
+                    "options": {
+                        "no": "होइन",
+                        "yes": "हो"
+                    }
+                },
+                "lamp_type": {
+                    "label": "प्रकार"
+                },
+                "landuse": {
+                    "label": "प्रकार"
+                },
+                "leisure": {
+                    "label": "प्रकार"
+                },
+                "man_made": {
+                    "label": "प्रकार"
+                },
+                "map_type": {
+                    "label": "प्रकार"
+                },
+                "mtb/scale": {
+                    "placeholder": "०, १, २, ३..."
+                },
+                "mtb/scale/uphill": {
+                    "placeholder": "०, १, २, ३..."
+                },
+                "office": {
+                    "label": "प्रकार"
+                },
+                "oneway": {
+                    "options": {
+                        "no": "होइन",
+                        "yes": "हो"
+                    }
+                },
+                "oneway_yes": {
+                    "options": {
+                        "no": "होइन",
+                        "yes": "हो"
+                    }
+                },
+                "parking": {
+                    "label": "प्रकार"
+                },
+                "piste/type": {
+                    "label": "प्रकार"
+                },
+                "place": {
+                    "label": "प्रकार"
+                },
+                "power": {
+                    "label": "प्रकार"
+                },
+                "railway": {
+                    "label": "प्रकार"
+                },
+                "relation": {
+                    "label": "प्रकार"
+                },
+                "restriction": {
+                    "label": "प्रकार"
+                },
+                "route": {
+                    "label": "प्रकार"
+                },
+                "route_master": {
+                    "label": "प्रकार"
+                },
+                "second_hand": {
+                    "options": {
+                        "no": "होइन",
+                        "yes": "हो"
+                    }
+                },
+                "service": {
+                    "label": "प्रकार"
+                },
+                "shelter_type": {
+                    "label": "प्रकार"
+                },
+                "shop": {
+                    "label": "प्रकार"
+                },
+                "site": {
+                    "label": "प्रकार"
+                },
+                "social_facility": {
+                    "label": "प्रकार"
+                },
+                "studio": {
+                    "label": "प्रकार"
+                },
+                "substation": {
+                    "label": "प्रकार"
+                },
+                "takeaway": {
+                    "options": {
+                        "no": "होइन",
+                        "yes": "हो"
+                    }
+                },
+                "tomb": {
+                    "label": "प्रकार"
+                },
+                "tourism": {
+                    "label": "प्रकार"
+                },
+                "tower/type": {
+                    "label": "प्रकार"
+                },
+                "traffic_calming": {
+                    "label": "प्रकार"
+                },
+                "traffic_signals": {
+                    "label": "प्रकार"
+                },
+                "wall": {
+                    "label": "प्रकार"
+                },
+                "water": {
+                    "label": "प्रकार"
+                },
+                "waterway": {
+                    "label": "प्रकार"
+                },
+                "wetland": {
+                    "label": "प्रकार"
+                }
+            },
+            "presets": {
+                "highway/street_lamp": {
+                    "name": " सडक बत्ति"
+                }
+            }
+        }
+    }
+}

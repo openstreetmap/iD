@@ -220,16 +220,18 @@
             "title": "Help"
         },
         "intro": {
-            "navigation": {
-                "drag": "Die hoofkaartarea toon OpenStreetMap data aan op 'n agtergrond. Jy kan navigeer deur te trek en te sleep net soos met enige ander web gebaseerde kaart. **Probeer dit nou!**",
-                "select": "Kaart eienskappe word verteenwoordig op drie maniere: punte, lyne en areas. All eienskappe kan uitgekies word deur daarop te klick. **Klick op 'n punt om dit uit te kies.**"
-            },
-            "points": {
-                "describe": "Die punt is nou gemerk as 'n kafee. Gebruik die eienskapslys om meer inligting by te sit. **Sit 'n naam by**"
-            },
-            "lines": {
-                "start": "** Begin die lyn deur op die einde van die pad te klick.**",
-                "residential": "Daar is verskillende tipes paaie, die mees algemeenste is 'n residensieel pad. ** Kies die Residentieele Pad tipe**"
+            "graph": {
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "za"
             },
             "startediting": {
                 "save": "Moenie vergeet om gereeld verandering te bêre nie!",
@@ -356,9 +358,6 @@
                 },
                 "crossing": {
                     "label": "Tipe"
-                },
-                "cuisine": {
-                    "label": "Kos"
                 },
                 "denomination": {
                     "label": "Denominasie"
@@ -514,9 +513,6 @@
                 },
                 "source": {
                     "label": "Bro"
-                },
-                "sport": {
-                    "label": "Sport"
                 },
                 "structure": {
                     "label": "Struktuur",

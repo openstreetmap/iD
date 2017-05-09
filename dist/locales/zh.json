@@ -230,9 +230,6 @@
             "view_on_osm": "在OSM上查看",
             "facebook": "在Facebook上分享"
         },
-        "confirm": {
-            "okay": "确定"
-        },
         "splash": {
             "welcome": "欢迎使用OpenStreetMap编辑器iD",
             "text": "iD编辑器是一个既易用而又功能强大的工具，以助您编辑世界上最好的自由世界地图。这是版本{version}。欲知详情，请浏览{website} 及在{github}上报告程序错误。",
@@ -267,29 +264,30 @@
             "buildings": "# 建筑物\n\nOpenStreetMap 是世界上最大的建筑物的数据库。您可以建立\n和改善这个数据库。\n\n### 选择建筑物\n\n您可以点击建筑物的边界，以选择该建筑物。该建筑物将以高亮度显示，并会开启小工具选单，和在右边显示有关建筑物更多资料的面板。\n\n### 修改建筑物\n\n有时候，建筑物的位置或其标签或许会不正确。\n\n要移动整个建筑物的位置，先选择该建筑物，然后点击'移动'工具。移动您的滑鼠以移动筑物，在移到正确位置上点击一下。\n\n要更正建筑物的形状，点击并拖曳建筑物轮廓的节点，以移到更佳的位置。\n\n### 绘制新建筑物\n\n为地图添加建筑物的主要问题之一，是OpenStreetMap 可以用轮廓或点的形式，记录建筑物。一般来说，应_尽可能以区域记录建筑物的轮廓_，并以置于建筑轮廓内的点，记录建筑物中的公司、住宅、设施及其他东西。\n\n要开始绘制建筑物，先单击左上方的'区域'按钮，最后则按键盘上的'Return'键或点击所绘的第一个节点，完成轮廓的绘制。\n\n### 删除建筑物\n\n如果一项建筑物完全不正确－ 您看到它在卫星图像上不存在，并最好实地证实它根本不存在－ 您可以将建筑物删除，这会从地图中将之移除。删除物件时务必要小心－ 像任何其他的编辑，结果会被大家看见，而卫星图像往往会过时，因此该建筑物或许只是新建的。\n\n要删除建筑物，您可以点击它以选择，然后点击垃圾桶图标，或按'Delete' 键。\n"
         },
         "intro": {
+            "graph": {
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "cn"
+            },
             "navigation": {
-                "title": "导航",
-                "drag": "主要地图区域会在背景图像上方显示OpenStreetMap 资料，您可以透过拖曳与滚动来浏览，就像其他互联网地图一样。 **拖曳地图！ **",
-                "select": "地图物件有三种表示方式：点、线以及面，所有要素都可以点选。 **点击该点来选择它**"
+                "title": "导航"
             },
             "points": {
-                "title": "点。",
-                "search": "很多不同的物体可以用点来代表。您刚刚新增加的点是一间咖啡厅。**搜寻'{咖啡厅}'**",
-                "choose": "**从列表中选择咖啡厅。**",
-                "describe": "这个点现在标示为咖啡厅，透过物件编辑器，我们可以加入更多相关资讯。 **新增一个名称**"
+                "title": "点。"
             },
             "areas": {
-                "title": "面。",
-                "place": "放置更多节点，以勾画该面。点击起始节点以完成绘制面。 **绘制一区域以代表游乐场**",
-                "search": "**搜寻'{名称}'。**",
-                "choose": "**从列表中选择游乐场。**"
+                "title": "面。"
             },
             "lines": {
-                "title": "直线。",
-                "start": "**点击道路末端，以开始绘制线段。 **",
-                "finish": "再次点击最后的节点，可完成绘制线段。 **完成绘制此道路**",
-                "road": "**从列表中选择道路**",
-                "residential": "道路有不同种类，最常见的为住宅区道路。 **选择住宅区道路**"
+                "title": "直线。"
             },
             "startediting": {
                 "title": "开始编辑。",
@@ -389,9 +387,6 @@
                 },
                 "crossing": {
                     "label": "类型"
-                },
-                "cuisine": {
-                    "label": "美食"
                 },
                 "denomination": {
                     "label": "教派"
@@ -541,9 +536,6 @@
                 },
                 "source": {
                     "label": "来源"
-                },
-                "sport": {
-                    "label": "运动"
                 },
                 "structure": {
                     "label": "结构",

@@ -155,7 +155,6 @@
                 "key": "C",
                 "annotation": "Pinagsama ang {n} features.",
                 "not_eligible": "Ang mga bagay na ito ay hindi maaaring pagsamahin.",
-                "not_adjacent": "Hindi maaring pagsamahin dahil hindi konektado.",
                 "restriction": "Hindi maaring pagsamahin dahil may isang o higit pang feature na bahagi ng \"{relation}\" relation.",
                 "incomplete_relation": "Hindi maaaring ipagsama o i-merge dahil ang isa sa mga ito ay hindi pa ganap na nai-download.",
                 "conflicting_tags": "Hindi maaring pagsamahin dahil may magkakaibang mga tags ang bawat isa."
@@ -188,7 +187,6 @@
                 }
             },
             "reflect": {
-                "title": "Ipakita",
                 "description": {
                     "long": {
                         "single": "Ipakita ang tampok na ito sa kabuuan ng kanyang mahabang axis.",
@@ -205,11 +203,9 @@
                 },
                 "annotation": {
                     "long": {
-                        "single": "Naipakita ang tampok na ito sa kabuaan ng kanyang mahabang axis.",
                         "multiple": "Naipakita ang mga tampok na ito sa kabuaan ng kanilang mahabang axis."
                     },
                     "short": {
-                        "single": "Naipakita ang tampok na ito sa kabuaan ng kanyang maikling axis.",
                         "multiple": "Naipakita ang mga tampok na ito sa kabuaan ng kanilang maikling axis."
                     }
                 },
@@ -493,7 +489,6 @@
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
         "confirm": {
-            "okay": "Okay",
             "cancel": "Kanselahin"
         },
         "splash": {
@@ -515,12 +510,12 @@
         "validations": {
             "disconnected_highway": "Hindi nakakabit na highway",
             "untagged_point": "Walang tag na punto o tuldok",
-            "untagged_line": "Walang tag na linya",
-            "untagged_area": "Walang tag na area o poligon",
-            "tag_suggests_area": "Ang tag na {tag} ay kalimitang para sa mga area o poligon sublait ito ay nasa linya lamang.",
             "untagged_point_tooltip": "Pumili ng uri ng tampok na naglalarawan kung ano ang puntong ito.",
+            "untagged_line": "Walang tag na linya",
             "untagged_line_tooltip": "Pumili ng uri ng tampok na naglalarawan kung ano ang linyang ito.",
+            "untagged_area": "Walang tag na area o poligon",
             "untagged_area_tooltip": "Pumili ng uri ng tampok na naglalarawan kung ano ang poligong ito.",
+            "tag_suggests_area": "Ang tag na {tag} ay kalimitang para sa mga area o poligon sublait ito ay nasa linya lamang.",
             "deprecated_tags": "Hindi na ginagamit na \"tag\": {tags}"
         },
         "zoom": {
@@ -535,46 +530,32 @@
         "intro": {
             "done": "Tapos",
             "graph": {
-                "w_michigan_ave": "Abenida ng kanlurang Michigan",
-                "e_michigan_ave": "Abenida ng sliangang Michigan",
-                "walnut_st": "Kalye ng Walnut",
-                "morris_ave": "Abenida ng Morris",
-                "east_st": "Kalye ng East",
-                "portage_ave": "Abenida ng Portage"
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "ph"
             },
             "navigation": {
-                "title": "Navigation",
-                "drag": "Ang pangunahing lugar ng mapa ay nagpapakita ng datos ng na makikita sa OpenStreetMap. Maaari kang mag-navigate sa pamamagitan ng pag-drag at pag-scroll, tulad ng anumang webmap. **I-drag ang mapa!**",
-                "select": "Mga tampok ng mapa ay kinakatawan ng tatlong paraan: gamit ang mga puntos, mga linya o area/poligon. Ang lahat ng mga tampok ay maaaring piliin sa pamamagitan ng pag-click sa mga ito. **Mag-click sa punto upang piliin ito.**",
-                "pane": "Pag isang tampok ay pinili, ang editor ng tampok ay ipinapakita. Ang header ang nagpapakita sa atin ng uri ng tampok at ang pangunahing pane ay nagpapakita ng katangian ng tampok, tulad ng pangalan nito at address.**Sarado ang editor ng tampok sa pamamagitan ng pagpindot sa {button} sa kanang tuktok**",
-                "search": "Pwede mo rin i-search ang tampok sa kasalukuyang tinitignan o sa buong mundo. **Search for '{name}'**"
+                "title": "Navigation"
             },
             "points": {
-                "title": "Mga Punto o tuldok",
-                "search": "Maraming iba't ibang mga tampok ang pwedeng kumatawan bilang puntos. Ang puntong iyong nai-dagdag ay isang Cafe. **I-search ang '{name}'**",
-                "choose": "**Pumili ng Cafe mula sa talaan.**",
-                "describe": "Ang punto o tuldok na ito ay minarkahan bilang \"cafe\".  Gamit ang \"feature editor\", maari tayong magdagdag ng iba pang impormasyon. **Magdagdag ng pangalan**"
+                "title": "Mga Punto o tuldok"
             },
             "areas": {
-                "title": "Mga area o poligon",
-                "place": "Ipagpatuloy ang pag-guhit ng area o pligon sa pamamagitan ng paglalagay ng higit pang mga node. Tapusin ito sa pamamagitan ng pag-click sa umpisang node. ** Gumuhit ng area o pilgon ng palaruan.**",
-                "search": "**Hanapin ang '{name}'.**",
-                "choose": "**Pliin ang \"Playground\" mula sa talaan.**"
+                "title": "Mga area o poligon"
             },
             "lines": {
-                "title": "Mga linya",
-                "start": "**Simulan ang linya sa pamamagitan ng pag-click sa dulo ng kalsada.**",
-                "intersect": "I-click upang magdagdag ng higit pang mga nodes sa linya. Maaari mong i-drag ang mapa kung kinakailangan. Ang kalsada o ibang pang mga uri ng mga linya, ay bahagi ng isang mas malaking network. Mahalagang konektado ang mga linyo para mas maayos na routing.  ** I-click sa {name} upang lumikha ng isang intersection sa dalawang linya. **",
-                "finish": "Ang mga linya ay matatapos sa pamamagitan ng pag-click muli sa huling node. **Taposin ang pagguhit ng kalsada.**",
-                "road": "**Piliin ang \"Road\" mula sa talaan**",
-                "residential": "Mayroong iba't ibang mga uri ng mga kalsada, ang pinaka-karaniwang ay residential. **Piliin ang residential na uri ng kalsada**",
-                "describe": "**Lagyan ng pangalan ang kasada at i-click ang {button} button para masara ang feature editor.**",
-                "restart": "Kailangang magkadugtong ang kalsadang {name}.",
-                "wrong_preset": "Hindi ka pumili ang Residential na uri ng kalsada. **I-click dito upang piliin muli**"
+                "title": "Mga linya"
             },
             "startediting": {
                 "title": "Umpisahan ang pag-edit",
-                "help": "Maaaring i-replay ang walkthrough o tingnan ang karagdagang dokumentasyon. I-click lamang ang {button} Help button.",
                 "save": "Huwag kalimutan na regular na i-save ang iyong mga binago!",
                 "start": "Simulan ang pagma-mapa!"
             }
@@ -896,14 +877,8 @@
                 "craft": {
                     "label": "uri"
                 },
-                "crop": {
-                    "label": "Gupitin ng maigsi"
-                },
                 "crossing": {
                     "label": "Uri"
-                },
-                "cuisine": {
-                    "label": "pagkain"
                 },
                 "currency_multi": {
                     "label": "Uri ng pera"

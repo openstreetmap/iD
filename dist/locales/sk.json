@@ -62,10 +62,10 @@
                 "annotation": "Zmenenie označenia."
             },
             "circularize": {
-                "title": "Usporiadanie do kruhu",
+                "title": "Usporiadať do kruhu",
                 "description": {
-                    "line": "Usporiadať čiaru do kruhu.",
-                    "area": "Usporiadať plochu do kruhu."
+                    "line": "Usporiadať túto čiaru do kruhu.",
+                    "area": "Usporiadať túto plochu do kruhu."
                 },
                 "key": "O",
                 "annotation": {
@@ -77,7 +77,7 @@
                 "connected_to_hidden": "Tento objekt nemožno usporiadať do kruhu, pretože je spojený so skrytým objektom."
             },
             "orthogonalize": {
-                "title": "Usporiadať do pravého uhla.",
+                "title": "Usporiadať do pravého uhla",
                 "description": {
                     "line": "Usporiadať rohy tejto čiary do pravého uhla.",
                     "area": "Usporiadať rohy tejto plochy do pravého uhla."
@@ -100,13 +100,34 @@
                 "connected_to_hidden": "Túto čiaru nemožno vyrovnať, pretože je spojená so skrytým objektom."
             },
             "delete": {
-                "title": "Vymaž",
+                "title": "Vymazať",
+                "description": {
+                    "single": "Vymaž tento objekt natrvalo.",
+                    "multiple": "Vymaž tieto objekty natrvalo."
+                },
                 "annotation": {
                     "point": "Odstránenie bodu.",
                     "vertex": "Odstránenie uzla z cesty.",
                     "line": "Odstránenie čiary.",
                     "area": "Odstránenie plochy.",
-                    "relation": "Odstránenie relácie."
+                    "relation": "Odstránenie relácie.",
+                    "multiple": "Zmazanie {n} objektov."
+                },
+                "too_large": {
+                    "single": "Tento objekt nemožno vymazať, pretože niektoré jeho časti nie sú viditeľné.",
+                    "multiple": "Tieto objekty nemožno vymazať, pretože niektoré ich časti nie sú viditeľné."
+                },
+                "incomplete_relation": {
+                    "single": "Tento objekt nemožno vymazať, pretože nebol úplne stiahnutý.",
+                    "multiple": "Tiento objekty nemožno vymazať, pretože neboli úplne stiahnuté."
+                },
+                "part_of_relation": {
+                    "single": "Tento objekt nemôžno vymazať, pretože je súčasťou väčšej relácie. Musíte ho najskôr z tejto relácie odobrať.",
+                    "multiple": "Tieto objekty nemôžno vymazať, pretože sú súčasťou väčších relácii. Musíte ich z relácií najskôr odobrať."
+                },
+                "connected_to_hidden": {
+                    "single": "Tento objekt nemožno vymazať, pretože je spojený so skrytým objektom.",
+                    "multiple": "Tieto objekty nemožno vymazať, pretože niektoré sú spojené so skrytými objektami."
                 }
             },
             "add_member": {
@@ -124,45 +145,121 @@
                 }
             },
             "disconnect": {
-                "title": "Oddeliť",
-                "description": "Oddeliť od seba tieto čiary alebo plochy.",
+                "title": "Odpojiť",
+                "description": "Odpojiť od seba tieto čiary alebo plochy.",
                 "key": "D",
-                "annotation": "Oddelenie čiar alebo plôch.",
-                "not_connected": "Nie je dostatočný počet čiar/plôch na oddelenie.",
-                "connected_to_hidden": "Tento objekt nemožno oddeliť, pretože je spojený so skrytým objektom.",
-                "relation": "Tento objekt nemôže byť odpojený, pretože spája členov v relácii."
+                "annotation": "Odpojenie čiar alebo plôch.",
+                "not_connected": "Nie je dostatočný počet čiar/plôch na odpojenie.",
+                "connected_to_hidden": "Tento objekt nemožno odpojiť, pretože je spojený so skrytým objektom.",
+                "relation": "Tento objekt nemôžno odpojiť, pretože spája členov v relácii."
             },
             "merge": {
                 "title": "Zlúčiť",
                 "description": "Zlúčiť tieto objekty.",
                 "key": "C",
                 "annotation": "Zlúčiť {n} objektov.",
-                "not_eligible": "Tieto objekty nemôžu byť zlúčené.",
-                "not_adjacent": "Tieto objekty nemôžu byť zlúčené, pretože nie sú spojené.",
-                "restriction": "Tieto objekty nemôžu byť zlúčené, pretože aspoň jeden je členom relácie \"{relation}\".",
-                "incomplete_relation": "Tieto objekty nemôžu byť zlúčené, pretože aspoň jeden z nich nebol úplne stiahnutý.",
-                "conflicting_tags": "Tieto objekty nemôžu byť zlúčené, pretože niktoré ich označenia majú odporujúce si hodnoty."
+                "not_eligible": "Tieto objekty nemôžno zlúčiť.",
+                "not_adjacent": "Tieto objekty nemôžno zlúčiť, pretože ich koncové body nie sú spojené.",
+                "restriction": "Tieto objekty nemôžno zlúčiť, pretože aspoň jeden je členom relácie \"{relation}\".",
+                "incomplete_relation": "Tieto objekty nemôžno zlúčiť, pretože aspoň jeden z nich nebol úplne stiahnutý.",
+                "conflicting_tags": "Tieto objekty nemôžno zlúčiť, pretože niktoré ich označenia majú odporujúce si hodnoty."
             },
             "move": {
                 "title": "Presunúť",
+                "description": {
+                    "single": "Presunúť tento objekt na iné miesto.",
+                    "multiple": "Presunúť tieto objekty na iné miesto."
+                },
                 "key": "M",
                 "annotation": {
                     "point": "Presunutie bodu.",
-                    "vertex": "Presunutie uzla cesty.",
+                    "vertex": "Presunutie cestného uzla.",
                     "line": "Presunutie čiary.",
-                    "area": "Presunutie plochy."
+                    "area": "Presunutie plochy.",
+                    "multiple": "Presunutie viacerých objektov."
+                },
+                "incomplete_relation": {
+                    "single": "Tento objekt nemožno presunúť, pretože nebol úplne stiahnutý.",
+                    "multiple": "Tiento objekty nemožno presunúť, pretože neboli úplne stiahnuté."
+                },
+                "too_large": {
+                    "single": "Tento objekt nemožno presunúť, pretože niektoré jeho časti nie sú viditeľné.",
+                    "multiple": "Tieto objekty nemožno presunúť, pretože niektoré ich časti nie sú viditeľné."
+                },
+                "connected_to_hidden": {
+                    "single": "Tento objekt nemožno presunúť, pretože je spojený so skrytým objektom.",
+                    "multiple": "Tieto objekty nemožno presunúť, pretože niektoré sú spojené so skrytými objektami."
+                }
+            },
+            "reflect": {
+                "title": {
+                    "long": "Preklopiť na dĺžku",
+                    "short": "Preklopiť na šírku"
+                },
+                "description": {
+                    "long": {
+                        "single": "Preklopiť tento objekt cez jeho dlhú osu.",
+                        "multiple": "Preklopiť tieto objekty cez ich dlhú osu."
+                    },
+                    "short": {
+                        "single": "Preklopiť tento objekt cez jeho krátku osu.",
+                        "multiple": "Preklopiť tieto objekty cez ich krátku osu."
+                    }
+                },
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                },
+                "annotation": {
+                    "long": {
+                        "single": "Preklopenie objektu cez jeho dlhú osu.",
+                        "multiple": "Preklopenie viacerých objektov cez ich dlhú osu."
+                    },
+                    "short": {
+                        "single": "Preklopenie objektu cez jeho krátku osu.",
+                        "multiple": "Preklopenie viacero objektov cez ich krátku osu."
+                    }
+                },
+                "incomplete_relation": {
+                    "single": "Tento objekt nemožno preklopiť, pretože nebol úplne stiahnutý.",
+                    "multiple": "Tiento objekty nemožno preklopiť, pretože neboli úplne stiahnuté."
+                },
+                "too_large": {
+                    "single": "Tento objekt nemožno preklopiť, pretože niektoré jeho časti nie sú viditeľné.",
+                    "multiple": "Tieto objekty nemožno preklopiť, pretože niektoré ich časti nie sú viditeľné."
+                },
+                "connected_to_hidden": {
+                    "single": "Tento objekt nemožno preklopiť, pretože je spojený so skrytým objektom.",
+                    "multiple": "Tieto objekty nemožno preklopiť, pretože niektoré sú spojené so skrytými objektami."
                 }
             },
             "rotate": {
                 "title": "Otočiť",
+                "description": {
+                    "single": "Otočiť objekt okolo jeho stredového bodu.",
+                    "multiple": "Otočiť tieto objekty okolo ich stredového bodu."
+                },
                 "key": "R",
                 "annotation": {
                     "line": "Otočenie čiary.",
-                    "area": "Otočenie plochy."
+                    "area": "Otočenie plochy.",
+                    "multiple": "Otočenie viacerých objektov."
+                },
+                "incomplete_relation": {
+                    "single": "Tento objekt nemožno otočiť, pretože nebol úplne stiahnutý.",
+                    "multiple": "Tiento objekty nemožno otočiť, pretože neboli úplne stiahnuté."
+                },
+                "too_large": {
+                    "single": "Tento objekt nemožno otočit, pretože niektoré jeho časti nie sú viditeľné.",
+                    "multiple": "Tieto objekty nemožno otočiť, pretože niektoré ich časti nie sú viditeľné."
+                },
+                "connected_to_hidden": {
+                    "single": "Tento objekt nemožno otočiť, pretože je spojený so skrytým objektom.",
+                    "multiple": "Tieto objekty nemožno otočiť, pretože niektoré sú spojené so skrytými objektami."
                 }
             },
             "reverse": {
-                "title": "Obráiť",
+                "title": "Obrátiť",
                 "description": "Obrátiť smer čiary na opačnú stranu.",
                 "key": "V",
                 "annotation": "Obrátenie čiary."
@@ -180,7 +277,7 @@
                     "area": "Rozdelenie ohraničenia plochy.",
                     "multiple": "Rozdelenie {n} čiar/hraníc plôch. "
                 },
-                "not_eligible": "Čiary nemôžu byť rozdelené na ich začiatku alebo konci.",
+                "not_eligible": "Čiary nemôžno rozdeliť na ich začiatku alebo konci.",
                 "multiple_ways": "Príliš veľa čiar na rozdelenie.",
                 "connected_to_hidden": "Tento objekt nemôžno rozdeliť, pretože je spojený so skrytým objektom."
             },
@@ -209,11 +306,12 @@
         "browser_notice": "Tento editor je podporovaný v prehliadačoch Firefox, Chrome, Safari, Opera a Internet Explorer 11 a vyžší. Aktualizujte prosím svoj prehliadač alebo použite Potlach 2.",
         "translate": {
             "translate": "Preložiť",
-            "localized_translation_label": "Viacjazyčný názov",
+            "localized_translation_label": "Cudzojazyčné meno",
             "localized_translation_language": "Zvoľte jazyk",
-            "localized_translation_name": "Názov"
+            "localized_translation_name": "Meno"
         },
         "zoom_in_edit": "Priblížiť mapu pre úpravu",
+        "login": "prihlásenie",
         "logout": "odhlásiť",
         "loading_auth": "Pripája sa k OpenStreetMap...",
         "report_a_bug": "Nahlásiť chybu",
@@ -225,21 +323,25 @@
         "status": {
             "error": "Nepodarilo sa spojiť s API.",
             "offline": "API je offline. Skúste upravovať neskôr.",
-            "readonly": "API je iba na čítanie. Budete musieť počkať, aby ste mohli uložiť vaše zmeny."
+            "readonly": "API je iba na čítanie. Budete musieť počkať, aby ste mohli uložiť vaše zmeny.",
+            "rateLimit": "OSM obmedzuje anonymné spojenia. Môžete to vyriešiť tým, že sa prihlásite."
         },
         "commit": {
+            "title": "Nahrať do OpenStreetMap",
             "description_placeholder": "Krátky popis vašich príspevkov (potrebný)",
+            "message_label": "Popis súboru zmien",
             "upload_explanation": "Zmeny, ktoré nahráte, budú viditeľné na všetkých mapách, ktoré používajú údaje z OpenStreetMap.",
             "upload_explanation_with_user": "Zmeny, ktoré nahráte ako {user}, budú viditeľné na všetkých mapách, ktoré používajú údaje z OpenStreetMap.",
+            "save": "Nahrať",
             "cancel": "Zrušiť",
             "changes": "Počet zmien: {count}",
             "warnings": "Upozornenia",
             "modified": "Upravené",
             "deleted": "Odstránené",
             "created": "Vytvorené",
-            "about_changeset_comments": "O komentároch súborov zmien",
+            "about_changeset_comments": "O popisoch súborov zmien",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
-            "google_warning": "Spomenuli ste Google v komentári: nezabúdajte, že kopírovanie z Google máp je prísne zakázané.",
+            "google_warning": "V popise ste spomenuli Google: nezabúdajte, že kopírovanie z Google máp je prísne zakázané.",
             "google_warning_link": "http://www.openstreetmap.org/copyright"
         },
         "contributors": {
@@ -278,6 +380,7 @@
         "inspector": {
             "no_documentation_combination": "Pre túto kombináciu označenia nie je dostupná dokumentácia",
             "no_documentation_key": "Pre toto označenie nie je dostupná dokumentácia",
+            "documentation_redirect": "Táto dokumantácia bola presmerovaná na novú stránku",
             "show_more": "Zobraziť viac",
             "view_on_osm": "Zobraziť na openstreetmap.org",
             "all_fields": "Všetky polia",
@@ -292,13 +395,22 @@
             "back_tooltip": "Zmeň typ objektu",
             "remove": "Odstráň",
             "search": "Hľadaj",
+            "multiselect": "Vybrané objekty",
             "unknown": "Neznámy",
             "incomplete": "<nebolo stiahnuté>",
             "feature_list": "Hľadaj objekty",
             "edit": "Uprav objekt",
             "check": {
                 "yes": "Áno",
-                "no": "Nie"
+                "no": "Nie",
+                "reverser": "Zmeniť smer"
+            },
+            "radio": {
+                "structure": {
+                    "type": "Typ",
+                    "default": "Štandardné",
+                    "layer": "Vrstva"
+                }
             },
             "add": "Pridať",
             "none": "Žiadne",
@@ -317,6 +429,7 @@
             "switch": "Prepnúť späť na toto pozadie",
             "custom": "Voliteľné",
             "custom_button": "Upraviť volitelné pozadie",
+            "custom_prompt": "Vyplňte vzorovú URL pre mapové dlaždice. Platné polia sú {zoom}, {x}, {y} pre Z/X/Y schému a {u} pre quadtile schému.",
             "fix_misalignment": "Upraviť posun obrázkov",
             "imagery_source_faq": "Odkiaľ pochádzajú tieto obrázky?",
             "reset": "vynulovať",
@@ -340,6 +453,7 @@
                 "tooltip": "Body záujmu"
             },
             "traffic_roads": {
+                "description": "Dopravné cesty",
                 "tooltip": "Diaľnice, ulice, atď."
             },
             "service_roads": {
@@ -405,10 +519,12 @@
         },
         "save": {
             "title": "Ulož",
+            "help": "Prezrite si znovu Vaše zmeny a nahrajte ich do OpenStreetMap, čím ich sprístupnite ďalším užívateľom.",
             "no_changes": "Žiadne zmeny na uloženie.",
             "error": "Počas ukladania sa vyskyla chyba",
             "status_code": "Server vrátil chybový kód {code}",
             "unknown_error_details": "Uistite sa prosím, že ste pripojený k internetu.",
+            "uploading": "Nahrávanie zmien do OpenStreetMap...",
             "unsaved_changes": "Máte neuložené zmeny",
             "conflict": {
                 "header": "Vyrieš konfliktné úpravy",
@@ -420,11 +536,14 @@
                 "restore": "Obnov",
                 "delete": "Ponechaj vymazané",
                 "download_changes": "Alebo stiahni moje zmeny",
-                "done": "Všetky konflikty sú vyriešené!"
+                "done": "Všetky konflikty sú vyriešené!",
+                "help": "Iný užívateľ zmenil niektoré objekty, ktoré ste zmenili aj vy.\nPre viac detajlov o konflikte, kliknite na každú položku nižšie a vyberte, či chcete ponechať\nvaše zmeny alebo zmeny druhého užívateľa.\n"
             }
         },
         "merge_remote_changes": {
             "conflict": {
+                "deleted": "Tento objekt bol vymazaný užívateľom {user}.",
+                "location": "Tento objekt bol posunutý vami a tiež užívateľom {user}.",
                 "nodelist": "Body boli zmenené vami a tiež používateľom {user}.",
                 "memberlist": "Členy relácie boli zmenené vami a tiež používateľom {user}.",
                 "tags": "Zmenili ste označenie <b>{tag}</b> na \"{local}\" a {user} ho zmenil na \"{remote}\"."
@@ -437,6 +556,7 @@
             "facebook": "Zdieľaj na Facebooku",
             "twitter": "Zdieľaj na Twitteri",
             "google": "Zdieľaj na Google+",
+            "help_html": "Vaše zmeny by sa mali objaviť na \"Základnej\" vrstve v priebehu niekoľkých minút. Ostatným vrstvám a niektorým objektom to môže trvať dlhšie.",
             "help_link_text": "Podrobnosti",
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
@@ -455,19 +575,27 @@
             "lose_changes": "Máte neuložené zmeny. Zmenou mapového servera ich zrušíte. Ste si istý, že chcete prepnúť na iný server?",
             "dev": "dev"
         },
+        "version": {
+            "whats_new": "Čo je nové v iD {version}"
+        },
         "tag_reference": {
             "description": "Popis",
             "on_wiki": "{tag} na wiki.osm.org",
             "used_with": "použité s {type}"
         },
         "validations": {
+            "disconnected_highway": "Rozpojená cesta",
+            "disconnected_highway_tooltip": "Cesty by mali byť spojené s ďalšími cestami alebo vchodmi do budov.",
             "untagged_point": "Neoznačený bod",
-            "untagged_line": "Neoznačená čiara",
-            "untagged_area": "Neoznačená plocha",
-            "tag_suggests_area": "Označenie {tag} predpokladá, že objekt by mal byť plochou a nie čiarou.",
             "untagged_point_tooltip": "Vyberte typ objektu, ktorý popisuje, čo je tento bod.",
+            "untagged_line": "Neoznačená čiara",
             "untagged_line_tooltip": "Vyberte typ objektu, ktorý popisuje, čo je táto línia.",
+            "untagged_area": "Neoznačená plocha",
             "untagged_area_tooltip": "Vyberte typ objektu, ktorý popisuje, čo je táto plocha.",
+            "untagged_relation": "Neoznačená relácia",
+            "untagged_relation_tooltip": "Vyberte typ objektu, ktorý popisuje, čo je táto relácia.",
+            "many_deletions": "Chystáte sa vymazať {n} objektov. Ste si naozaj istý, že to chcete urobiť? Týmto ich vymažete z mapy na openstreetmap.org, ktorú používajú ďalší používatelia.",
+            "tag_suggests_area": "Označenie {tag} predpokladá, že objekt by mal byť plochou a nie čiarou.",
             "deprecated_tags": "Neschválené označenie: {tags}"
         },
         "zoom": {
@@ -476,6 +604,12 @@
         },
         "cannot_zoom": "V tomto móde nemožno viac oddialiť.",
         "full_screen": "Prepni na plnú obrazovku",
+        "gpx": {
+            "local_layer": "Lokálny súbor",
+            "drag_drop": "Pretiahnite a pustite .gpx, .geojson or .kml súbor na stránku, alebo kliknite na tlačítko napravo pre výber",
+            "zoom": "Priblížiť na vrstvu",
+            "browse": "Vybrať súbor"
+        },
         "mapillary_images": {
             "tooltip": "Fotografie ulíc z Mapillary",
             "title": "Vrstva fotografií (Mapillary)"
@@ -500,30 +634,98 @@
             "relations": "# Relácie\n\nRelácia je zvláštny typ objektu v OpenStreetMap, ktorý zoskupuje dokopy iné objekty. Dva najčastejšie typy relácií  sú *trasy*, ktoré zoskupujú časti cesty patriace určitému cestnému ťahu a *multipolygóny*, ktoré zoskupujú čiary vytvárajúce zložité plochy (pozostávajúce z niekoľko častí alebo otvorov uprostred).\n\nObjekty v relácií sa nazývajú *členy*. V postrannom panely môžete vidieť v akých reláciach sa objekt nachádza a kliknutím na reláciu ju označiť. Keď je relácia označená, môžete vidieť všetky jej členy na postrannom panely a zvýraznené na mape.\n\nVo väčšine prípadov sa iD postará o udržovanie relácií počas vášho upravovania automaticky. Dôležitá vec, na ktorú by ste si mali dávať pozor je, ak vymažete časť cesty, aby ste ju presnejšie nakreslili, že táto časť bude členom rovnakých relácií ako časť pôvodná.\n\n## Úprava relácií\n\nAk chcete upravovať relácie, tu sú základy.\n\nPre pridanie objektu do relácie, vyberte objekt a kliknite na tlačítko \"+\" v časti postranného panelu s názvom \"Všetky relácie\" a vyberte alebo napíšte meno relácie.\n\nPre vytvorenie novej relácie, vyberte prvý objekt, ktorý by mal byť jej členom a kliknite na tlačítko \"+\" v časti s názvom \"Všetky relácie\" a vyberte \"Nová relácia...\".\n\nPre odstránenie objektu z relácie, vyberte objekt a kliknite na tlačitko smetného koša, vedľa relácie, z ktorej ho chcete odobrať.\n\nPomocou nástroja \"Zlúč\" môžete vytvoriť multipolygón s dierami. Nakreslite dve plochy (vonkajšiu a vnútornú), stlačte klávesu Shift a kliknite na každú z nich, aby ste ich vybrali a potom kliknite na tlačítko \"Zlúč\" (+).\n"
         },
         "intro": {
+            "done": "hotovo",
+            "ok": "OK",
+            "graph": {
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "sk"
+            },
+            "welcome": {
+                "title": "Uvítanie",
+                "welcome": "Vitajte! Táto prehliadka Vás naučí základy upravovania OpenStreetMap.",
+                "practice": "Všetky údaje v tejto prehliadke sú iba na precvičovanie a úpravy, ktoré počas prehliadky urobíte nebudú uložené.",
+                "words": "Táto prehliadka predstaví niekoľko nových pojmov a konceptov. Vždy keď predstavíme nový pojem, uvedieme ho v *kurzíve*.",
+                "mouse": "Pre úpravu mapy môžete použiť kocijaké vstupné zariadenie. Táto prehliadka však prespokladá, že máte myš s ľavým a pravým tlačítkom. **Ak chcete pripojiť myš, urobte tak teraz a potom kliknite na OK.**",
+                "leftclick": "Keď Vás táto prehliadka požiada, aby ste klikli alebo dvojklikli, myslíme tým ľavé tlačítko. Na trackpade to môže byť jedno kliknutie alebo ťuknutie jedným prstom. **Kliknite ľavým tlačítkom {num} krát.**",
+                "rightclick": "Niekedy Vás tiež požiadame, aby ste klikli pravým tlačítkom. To môže byť to isté ako control+klik alebo ťuknutie dvoma prstami na trackpade. Vaša klávesnica tiež môže mať \"menu\" kláves, ktorý funguje ako kliknutie pravým tlačítkom. **Kliknite pravým tlačítkom {num} krát.**",
+                "chapters": "Zatiaľ ste všetko zvládli! Pokiaľ chcete preskočiť kapitoly, alebo reštartovať kapitolu, v ktorej ste sa zasekli, použite tlačítka nižšie. Začnime! **Pre pokračovanie kliknite na \"{next}\".**"
+            },
             "navigation": {
                 "title": "Navigácia",
-                "drag": "Hlavná plocha s mapou zobrazuje nad pozadím údaje z OpenStreetMap. Presúvať sa môžete ťahaním za mapu alebo koliečkom myši rovnako, ako u iných webových máp. **Potiahnite za mapu!**",
-                "select": "Objekty na mape sú reprezentované tromi spôsobmi: pomocou bodov, čiar alebo plôch. Každý objekt môžete vybrať tým, že naň kliknete. **Kliknite na bod, aby ste ho vybrali.**"
+                "features": "Slovo *objekty* používame pre popis vecí, ktoré sa zobrazujú na mape. Všetko v reálnom svete môže byť zmapované ako objekt v OpenStreetMap.",
+                "points_lines_areas": "Mapové objekty sú reprezentované pomocou *bodov, čiar alebo plôch.*",
+                "nodes_ways": "V OpenStreetMap sa body niekedy volajú *uzly*, a čiary a plochy sa niekedy volajú *cesty*. ",
+                "click_townhall": "Všetky objekty na mape môžu byť vybraté tým, že na ne kliknete. **Kliknite na bod, aby ste ho vybrali.**",
+                "selected_townhall": "Výborne! Bod je teraz vybraný. Vybrané objekty sú vykreslené s pulzujúcim obrysom. ",
+                "editor_townhall": "Keď je objekt vybraný, vedľa mapy sa zobrazí *editor objektov*.",
+                "preset_townhall": "Vo vrchnej časti editora objektov sa zobrazuje typ objektu. Tento bod je {preset}.",
+                "fields_townhall": "V strednej časti editora objektov sa nachádzajú *polia* ukazujúce vlastnosti objektu ako meno a adresa.",
+                "close_townhall": "**Zavrite editor objektov stlačením klávesu escape alebo kliknutím na tlačitko {button} v hornom rohu.**",
+                "search_street": "Môžete tiež hľadať objekty v aktuálnom zornom poli alebo na celom svete. **Vyhľadajte \"{name}\".**",
+                "choose_street": "**Zvoľte {name} zo zoznamu, aby ste ju vybrali.**",
+                "selected_street": "Výborne! {name} je teraz vybraná.",
+                "editor_street": "Polia zobrazené pre ulicu sú odližné od polí, ktoré sa zobrazovali pre metský úrad. {br}Pre túto vybranú ulicu editor objektov zobrazuje polia ako \"{field1}\" a \"{field2}\". **Zavrite editor objektov stlačení klavesu escape alebo kliknutím na tlačitko {button}.**",
+                "play": "Skúste sa pohybovať po mape a kliknúť na iné objekty, aby ste videli, aké veci sa dajú pridať do OpenStreetMap. **Keď budete pripravený pokračovať na ďalšiu kapitolu, kliknite na \"{next}\".**"
             },
             "points": {
                 "title": "Body",
-                "search": "Body môžu znázorňovať veľa rôznych objektov. Bod, ktorý ste práve pridali, je Kaviareň. **Vyhľadajte \"{name}\"**",
-                "choose": "**Vyberte Kaviareň zo zoznamu.**",
-                "describe": "Bod je teraz označený ako kaviareň. S použitím editora objektu môžeme pridať viac informácií o objekte. **Pridajte názov**"
+                "add_point": "*Body* môžu byť použité na znázornenie objektov ako obchody, reštaurácie alebo pamätníky.{br}Označujú presnú pozíciu a opisujú, čo sa tam nachádza. **Kliknite na tlačítko {button} Bod a pridajte nový bod.**",
+                "place_point": "Pre pridanie nového bodu na mapu, presunte kurzor na miesto, kam má byť bod umiestnený a kliknite ľavým tlačítkom alebo stlačte medzerník. **Premiestnite kurzor na túto budovu a potom kliknite ľavým tlačitkom alebo stlačte medzerník.**",
+                "search_cafe": "Tento bod môže znázorňovať veľa rôznych objektov. Bod, ktorý ste práve pridali je kaviareň. **Vyhľadajte \"{preset}\".**",
+                "choose_cafe": "**Vyberte {preset} zo zoznamu.**",
+                "feature_editor": "Bod je teraz označený ako kaviareň. Pomocou editora objektov môžeme pridať ďalšie informácie o tejto kaviarni.",
+                "add_name": "V OpenStreetMap sú všetky polia nepovinné a je vporiadku nechať nejaké pole nevyplnené, ak ste si neni istý.{br}Predstierajme, že máte miestnu znalosť o tejto kaviarni a viete jej meno. **Pridajte meno kaviarne.**",
+                "add_close": "Editor objektov si automaticky zapamätá všetky vaše úpravy. **Keď dokončíte pridávanie mena, stlačte escape, enter alebo kliknite na tlačítko {button}, čím zatvoríte editor objektov.**",
+                "reselect": "Body už často existujú, ale obsahujú chyby alebo sú neúplné. Existujúce body môžeme upravovať. **Kliknutím vyberte kaviareň, ktorú ste práve vytvorili.**",
+                "update": "Poďme vyplniť ďalšie detaily o tejto kaviarni. Môžete zmeniť jej meno, pridať druh kuchyne alebo adresu. **Zmeňte údaje o kaviarni.**",
+                "update_close": "**Keď dokončíte aktualizáciu údajov o kaviarni, stlačte escape, enter, alebo kliknite tlačitko {button}, čím zatvoríte editor objektov.**",
+                "rightclick": "Keď kliknete pravým tlačítkom na ktorýkoľvek objekt, zobrazíte editačné menu, ktoré ukazuje zoznam úprav, ktoré možno vykonať. **Zobrazte editačné menu tým, že kliknite pravým tlačítkom na bod, ktorý ste vytvorili.**",
+                "delete": "Je vporiadku vymazať objekt, ktorý neexistuje v skutočnom svete.{br}Vymazanie objektu z OpenStreetMap ho tiež odstráni z mapy, ktorú všetci používajú, a preto by ste sa mali pred jeho vymazaním ubezpečiť, že fyzický objekt tam už naozaj nie je. **Vymažte bod kliknutím na tlačítko {button}.**",
+                "undo": "Vaše úpravy možete vždy vrátiť späť, až dokiaľ ich neuložíte do OpenStreetMap. **Obnovte bod tým, že kliknete na tlačítko {button} a zrušíte jeho vymazanie.**",
+                "play": "Teraz, keď už viete ako vytvoriť a upravovať body, skúste cvične vytvoriť ešte zopár bodov! **Keď budete pripravený pokračovať na ďalšiu kapitolu, kliknite \"{next}\".**"
             },
             "areas": {
                 "title": "Plochy",
-                "place": "Nakreslite plochu umiestnením ďalších uzlov.  Plochu dokončíte kliknutím na počiatočný uzol. **Nakreslite plochu pre ihrisko.**",
-                "search": "**Vyhľadajte \"{name}\".**",
-                "choose": "**Vyberte ihrisko zo zoznamu.**"
+                "add_playground": "*Plochy* sa používajú na zobrazovanie hraníc objektov ako jazerá, budovy alebo rezidenčné zóny.{br}Môžu byť tiež použité na detailnejšie mapovanie objektov, ktoré by ste nomálne označili iba bodom. **Kliknite na {button} Plocha a pridajte novú plochu.** ",
+                "start_playground": "Poďme pridať do mapy ihrisko tým, že nakreslíme plochu. Plochy sa kreslia tak, že pridávate *uzly* pozdĺž vonkajšej hrany objektu. **Kliknite alebo stlačte medzerník pre umiestnenie počiatočného uzla na jeden z rohov ihriska.**",
+                "continue_playground": "Pokračujte v kreslení plochy pridávaním ďalších uzlov pozdĺž hrany ihriska. Je poriadku ak spojíte plochu s existujúcimi chodníkmi.{br}Tip: Podržaním klávesu Alt zabránite uzlom v spájaní s ďalšími objektami. **Pokračujte v kreslní plochy inhriska.**",
+                "finish_playground": "Dokončite plochu tým, že stlačíte enter alebo kliknete na prvý alebo posledný uzol. **Dokončite kreslenie plochy ihriska.**",
+                "search_playground": "**Vyhľadajte \"{preset}.**",
+                "choose_playground": "**Vyberte {preset} zo zoznamu.**",
+                "add_field": "Toto ihrisko nemá oficiálne meno, a preto do poľa Meno nič nevyplníme.{br}Namiesto toho pridajme zopár dodatočných údajov o ihrisku do poľa Popis. **Otvorte zoznam vedľa Pridať pole.**",
+                "choose_field": "**Vyberte {field} zo zoznamu.**",
+                "retry_add_field": "Nezvolili ste pole {field}. Skúsme to ešte raz.",
+                "describe_playground": "**Pridajte popis a potom kliknite na tlačítko {button} pre zavretie editora objektov.**",
+                "play": "Dobrá práca! Skúste zakresliť zopár ďalších plôch, aby ste sa oboznámili s tým, aké ďalšie plochové objekty môžete pridať to OpenStreetMap. **Keď budete pripravený pokračovať na ďalšiu kapitolu, kliknite \"{next}\".**"
             },
             "lines": {
                 "title": "Čiary",
-                "start": "**Začnite kresliť čiaru kliknutím na koniec cesty.**",
-                "finish": "Čiary sa dajú ukončiť opätovným kliknutím na posledný uzol. **Dokončite kreslenie cesty.**",
-                "road": "**Vyberte cestu zo zoznamu**",
-                "residential": "Poznáme cesty rôznych typov. Najviac častý z nich je Obytná ulica. **Vyberte typ: Obytná ulica**",
-                "wrong_preset": "Nezvolili ste typ Ubytná ulica. **Kliknite sem pre opätovný výber**"
+                "add_line": "*Čiary* sa používajú na znázornenie objektov ako cesty, železnice alebo rieky. **Kliknite na tlačitko {button} Čiara a pridajte novú čiaru.**",
+                "start_line": "Tu je miesto, kde chýba cesta. Poďme ju pridať!{br}V OpenStreetMap sa čiary kreslia na pozdĺžnu os cesty. Ak je to potrebné, počas kreslenia môžete mapu posúvať a približovať. **Začnite novú čiaru kliknutím na horný koniec chýbajúcej cesty.**",
+                "intersect": "Kliknite alebo stlačte medzerník pre pridanie ďalších uzlov čiary.{br}Cesty a tiež iné typy čiar sú súčatou veľkej siete. Aby aplikácie pre navigáciu pracovali správne, je dôležité, aby boli tieto čiary správne prepojené. **Kliknite na {name} a vytvorte križovatku spájajúcu obe čiary.**",
+                "retry_intersect": "Cesta musí pretínať {name}. Skúsme to ešte raz!",
+                "continue_line": "Pokračujte v kreslení čiary pre novú cestu. Nezabudnite, že mapu môžete posúvať a priblížovať ako potrebujete.{br}Keď dokreslíte, kliknite na ešte raz na posledný uzol. **Dokončite kreslenie cesty.**",
+                "choose_category_road": "**Vyberte {category} zo zoznamu**",
+                "choose_preset_residential": "Máme veľa typov ciest, ale táto je obytná ulica. **Vyberte typ {preset}.**",
+                "retry_preset_residential": "Nevybrali ste typ {preset}. **Kliknite sem a vyberte ešte raz.**",
+                "name_road": "**Dajte tejto ceste meno a potom stlačte escape, enter alebo kliknite na tlačítko {button}, čím zatvoríte editor objektov.",
+                "did_name_road": "Vyzerá to dobre! Ďalej sa naučíme ako upraviť tvar čiary.",
+                "update_line": "Niekedy budete musieť zmeniť tvar existúcej čiary. Tu je cesta, ktorá nevyzerá celkom vporiadku.",
+                "add_node": "Môžeme k nej pridať niekoľko uzlov, aby sme vylepšili jej tvar. Jeden zo spôsobov ako pridať uzol je dvojkliknúť na čiaru, kde chcete pridať uzol. **Dvojkliknite na čiaru a pridajte nový uzol.**",
+                "start_drag_endpoint": "Keď je čiara vybraná, môžete presunúť hociktorý jej uzol tým, že naň kliknete, podržíte ľavé tlačítko a zaňho potiahnete. **Potiahnite za koncový bod a presuňte ho na misto, kde sa obe cesty pretínajú.**"
+            },
+            "buildings": {
+                "title": "Budovy",
+                "retry_circle": "Neklikli ste na tlačítko Usporiadať do kruhu. Skúste to ešte raz."
             },
             "startediting": {
                 "title": "Začať upravovať",
@@ -766,14 +968,8 @@
                 "craft": {
                     "label": "Typ"
                 },
-                "crop": {
-                    "label": "Pole"
-                },
                 "crossing": {
                     "label": "Typ"
-                },
-                "cuisine": {
-                    "label": "Druh jedla"
                 },
                 "currency_multi": {
                     "label": "Typy mien"
@@ -1073,7 +1269,7 @@
                     "placeholder": "0, 1, 2, 3..."
                 },
                 "name": {
-                    "label": "Názov",
+                    "label": "Meno",
                     "placeholder": "Vlastné meno objektu (nepovinné)"
                 },
                 "natural": {
@@ -1301,15 +1497,6 @@
                 },
                 "source": {
                     "label": "Zdroj"
-                },
-                "sport": {
-                    "label": "Šport"
-                },
-                "sport_ice": {
-                    "label": "Šport"
-                },
-                "sport_racing": {
-                    "label": "Šport"
                 },
                 "stars": {
                     "label": "Hviezdičky"
@@ -1844,8 +2031,7 @@
                     "terms": "automat na sacky pre vykaly"
                 },
                 "amenity/vending_machine/news_papers": {
-                    "name": "Automat na noviny",
-                    "terms": "noviny,casopisy,časopisy"
+                    "name": "Automat na noviny"
                 },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
                     "name": "Automat na odosielanie/príjem balíkov",
@@ -1862,10 +2048,6 @@
                 "amenity/vending_machine/sweets": {
                     "name": "Automat na sladkosti",
                     "terms": "jedlo,tyčinky,tycinky"
-                },
-                "amenity/vending_machine/vending_machine": {
-                    "name": "Automat",
-                    "terms": "výdajný automat,vydajny automat"
                 },
                 "amenity/veterinary": {
                     "name": "Veterinár",
@@ -2418,10 +2600,6 @@
                     "name": "Privádzač na cestu 1. triedy",
                     "terms": "Privadzac na cestu 1. triedy,privadzac,privádzač,zjazd,vyjazd,výjazd,nájazd,najazd,pripojovací pruh,pripojovaci pruh"
                 },
-                "highway/raceway": {
-                    "name": "Pretekárska strať",
-                    "terms": "pretekarska trat,nascar,formula,enduro"
-                },
                 "highway/residential": {
                     "name": "Obytná ulica",
                     "terms": "obytna ulica,rezidenčná ulica,rezidencna ulica"
@@ -2634,8 +2812,8 @@
                     "terms": "kamenolom,lom,kamene,strk,kameňe,štrk"
                 },
                 "landuse/residential": {
-                    "name": "Obytná zóna",
-                    "terms": "obytna oblast,mesto,dedina,rezidencna oblast,rezidenčná oblast,obytna zona"
+                    "name": "Rezidenčná zóna",
+                    "terms": "obytna oblast,mesto,dedina,rezidencna oblast,rezidenčná oblast,obytna zona,rezidencna zona"
                 },
                 "landuse/retail": {
                     "name": "Maloobchodná zóna",
@@ -2741,10 +2919,6 @@
                     "name": "Ihrisko pre deti",
                     "terms": "ihrisko,preliezačky,pieskovisko,pre deti,preliezacky,detske ihrisko,detské ihrisko"
                 },
-                "leisure/running_track": {
-                    "name": "Bežecká trať",
-                    "terms": "bezecka trat,bežecká trať"
-                },
                 "leisure/slipway": {
                     "name": "Spúšťanie lodí",
                     "terms": "Spustanie lodi,dok,lodenica,klzacka,kĺzačka"
@@ -2760,10 +2934,6 @@
                 "leisure/swimming_pool": {
                     "name": "Plaváreň",
                     "terms": "Plavaren,kúpalisko,kupalisko"
-                },
-                "leisure/track": {
-                    "name": "Pretekárska dráha (nemotoristická)",
-                    "terms": "pretekarska draha (nemotoristicka),zavodná dráha,zavodna draha"
                 },
                 "leisure/water_park": {
                     "name": "Vodný park",
@@ -2809,10 +2979,6 @@
                 "man_made/lighthouse": {
                     "name": "Maják",
                     "terms": "majak,výstraha,vystraha"
-                },
-                "man_made/mast": {
-                    "name": "Telekomunikačný stožiar",
-                    "terms": "telekomunikacny stoziar,stlp,veza,veža,stĺp"
                 },
                 "man_made/observation": {
                     "name": "Výhliadková veža",
@@ -3053,8 +3219,7 @@
                     "terms": "velkomesto,mesto"
                 },
                 "place/farm": {
-                    "name": "Farma",
-                    "terms": "farma"
+                    "name": "Farma"
                 },
                 "place/hamlet": {
                     "name": "Osada",
@@ -3070,15 +3235,11 @@
                 },
                 "place/locality": {
                     "name": "Lokalita",
-                    "terms": "oblast,oblasť,miestny názov,miestny nazov"
+                    "terms": "oblast,oblasť,miestny názov,miestny nazov,nazov"
                 },
                 "place/neighbourhood": {
                     "name": "Susedstvo",
                     "terms": "okrsok,oblast,oblasť,štvrť,stvrt"
-                },
-                "place/suburb": {
-                    "name": "Mestská časť",
-                    "terms": "mestska cast"
                 },
                 "place/town": {
                     "name": "Mesto",

@@ -234,7 +234,6 @@
             "help_link_text": "விவரங்கள்"
         },
         "confirm": {
-            "okay": "சரி",
             "cancel": "ரத்து"
         },
         "splash": {
@@ -252,6 +251,19 @@
         },
         "intro": {
             "done": "முடிந்தது",
+            "graph": {
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "sg"
+            },
             "navigation": {
                 "title": "வழிசெலுத்தல்"
             },
@@ -511,9 +523,6 @@
                 },
                 "craft": {
                     "label": "வகை"
-                },
-                "crop": {
-                    "label": "பயிர்"
                 },
                 "crossing": {
                     "label": "வகை"
@@ -927,15 +936,6 @@
                 },
                 "source": {
                     "label": "மூலம்"
-                },
-                "sport": {
-                    "label": "விளையாட்டு"
-                },
-                "sport_ice": {
-                    "label": "விளையாட்டு"
-                },
-                "sport_racing": {
-                    "label": "விளையாட்டு"
                 },
                 "stars": {
                     "label": "நட்சத்திரங்கள்"

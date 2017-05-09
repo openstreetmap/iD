@@ -1,21 +1,5 @@
 {
-    "sc": {
-        "modes": {
-            "browse": {
-                "title": "Circa"
-            }
-        },
-        "operations": {
-            "delete": {
-                "title": "Boga"
-            },
-            "move": {
-                "title": "Movi"
-            },
-            "split": {
-                "title": "Sperra"
-            }
-        },
+    "mn": {
         "intro": {
             "graph": {
                 "block_number": "<value for addr:block_number>",
@@ -28,7 +12,7 @@
                 "state": "<value for addr:state>",
                 "subdistrict": "<value for addr:subdistrict>",
                 "suburb": "<value for addr:suburb>",
-                "countrycode": "it"
+                "countrycode": "mn"
             }
         }
     }

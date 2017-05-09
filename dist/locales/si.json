@@ -371,7 +371,6 @@
             "google": "Google+ හි බෙදා හරින්න"
         },
         "confirm": {
-            "okay": "හරි",
             "cancel": "අහෝසි කරන්න"
         },
         "splash": {
@@ -400,6 +399,19 @@
             "title": "සහය"
         },
         "intro": {
+            "graph": {
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "lk"
+            },
             "navigation": {
                 "title": "මර්ගෝපදේශනය"
             },

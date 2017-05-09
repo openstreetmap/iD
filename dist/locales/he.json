@@ -1,0 +1,121 @@
+{
+    "he": {
+        "modes": {
+            "add_area": {
+                "title": "איזור",
+                "description": "ניתן להוסיף פארקים, בניינים, נהרות ואזורים נוספים למפה.",
+                "tail": "יש ללחוץ על המפה כדי להתחיל לצייר איזור כמו פארק, אגם או בניין."
+            },
+            "add_line": {
+                "title": "קו",
+                "description": "ניתן להוסיף כבישים מהירים, רחובות, מסלולים להולכי רגל, תעלות וקווים נוספים למפה.",
+                "tail": "יש ללחוץ על המפה כדי להתחיל לצייר דרך, נתיב או מסלול."
+            },
+            "add_point": {
+                "title": "נקודה",
+                "description": "ניתן להוסיף מסעדות, אתרי מורשת, תיבות דואר ונקודות אחרות למפה.",
+                "tail": "יש ללחוץ על המפה כדי להוסיף נקודה."
+            },
+            "browse": {
+                "title": "עיון"
+            },
+            "draw_area": {
+                "tail": "יש ללחוץ כדי להוסיף קודקודים לאזור שלך. יש ללחוץ שוב על הקודקוד הראשון כדי לסיים את ציור האיזור."
+            },
+            "draw_line": {
+                "tail": "יש ללחוץ כדי להוסיף קודקודים נוספים לקו. יש ללחוץ על קווים אחרים כדי להתחבר אליהם, ולחיצה כפולה כדי לסיים את ציור הקו."
+            }
+        },
+        "operations": {
+            "add": {
+                "annotation": {
+                    "point": "נוספה נקודה.",
+                    "vertex": "נוספה נקודה לדרך.",
+                    "relation": "נוסף קשר."
+                }
+            },
+            "start": {
+                "annotation": {
+                    "line": "קו התחיל.",
+                    "area": "איזור התחיל."
+                }
+            },
+            "continue": {
+                "title": "להמשיך",
+                "description": "להמשיך את הקו הזה.",
+                "not_eligible": "אי אפשר להמשיך מכאן עם קו.",
+                "multiple": "ניתן להמשיך מכאן מספר קווים. כדי לבחור קו, יש ללחוץ על המקש Shift ועל הקו עצמו עם העכבר כדי לבחור אותו.",
+                "annotation": {
+                    "line": "המשיך קו.",
+                    "area": "המשיך אזור."
+                }
+            },
+            "cancel_draw": {
+                "annotation": "ביטל ציור."
+            },
+            "change_tags": {
+                "annotation": "שינה תגיות."
+            },
+            "circularize": {
+                "title": "מעגלי",
+                "description": {
+                    "line": "להפוך קו זה למעגלי.",
+                    "area": "להפוך איזור זה למעגלי."
+                },
+                "annotation": {
+                    "line": "הקו עוגל",
+                    "area": "האיזור עוגל."
+                }
+            },
+            "orthogonalize": {
+                "title": "ריבוע",
+                "description": {
+                    "line": "ריבוע פינות בקו זה",
+                    "area": "ריבוע פינות באיזור זה"
+                }
+            }
+        },
+        "confirm": {
+            "cancel": "ביטול"
+        },
+        "splash": {
+            "start": "לערוך כעת"
+        },
+        "source_switch": {
+            "live": "חי"
+        },
+        "version": {
+            "whats_new": "מה חדש ב־iD {version}"
+        },
+        "tag_reference": {
+            "description": "תיאור"
+        },
+        "gpx": {
+            "local_layer": "קובץ מקומי"
+        },
+        "help": {
+            "title": "עזרה"
+        },
+        "intro": {
+            "graph": {
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "il"
+            },
+            "areas": {
+                "title": "אזורים"
+            },
+            "lines": {
+                "title": "קווים"
+            }
+        }
+    }
+}

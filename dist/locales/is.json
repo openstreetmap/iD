@@ -93,12 +93,17 @@
             },
             "straighten": {
                 "title": "Slétta",
+                "description": "Slétta þessa línu",
+                "key": "S",
                 "annotation": "Slétti úr línu",
                 "too_bendy": "Það er ekki hægt að slétta úr þessu því að það beygir of skarplega",
                 "connected_to_hidden": "Ekki er hægt að slétta línuna þar sem hún er tengd földu eigindi."
             },
             "delete": {
                 "title": "Eyða",
+                "description": {
+                    "single": "Eyða þessu endanlega."
+                },
                 "annotation": {
                     "point": "Eyddi punkti.",
                     "vertex": "Eyddi hnút af leið.",
@@ -287,6 +292,9 @@
             },
             "past_future": {
                 "tooltip": "Tillaga,  í byggingu, í eyði, niðurrif oþh"
+            },
+            "others": {
+                "tooltip": "Allt annað"
             }
         },
         "restore": {
@@ -311,9 +319,6 @@
             "facebook": "Deila á Facebook",
             "twitter": "Deila á Twitter",
             "google": "Deila á Google+"
-        },
-        "confirm": {
-            "okay": "Í lagi"
         },
         "splash": {
             "welcome": "Velkomin/n í iD ritil OpenStreetMap",
@@ -353,29 +358,48 @@
             "buildings": "# Byggingar\n\nOpenStreetMap er stærsta gagnasafn heims með byggingum. Þú getur\nbætt við þetta gagnasafn.\n\n### Velja\n\nÞú getur valið byggingu með því að ýta á útlínur hennar. Þetta\nlýsir upp bygginguna og opnar tækjaslá sem og valmynd sem hefur\nað geyma frekari upplýsingar um bygginguna.\n\n### Breyta\n\nStundum eru byggingar vitlaust staðsettar eða með vitlausum\nupplýsingum.\n\nTil að færa byggingu í einu lagi er hún valin og svo smellt á 'Færa'\ntólið. Færðu músina til að hliðra byggingunni og smelltu svo þegar\nhún er komin á réttan stað.\n\n### Búa til\n\nÞegar byggingum er bætt við kort er hægt að nota bæði svæði og\npunkta. Þumalputtareglan er sú að nota svæði fyrir byggingu þegar\nhægt er, og merkja svo þau fyrirtæki, stofnanir og annað sem\nstarfa þar sem punkta innan svæðisins.\n\nBúðu til byggingu sem svæði með því að ýta á takkann 'Svæði' efst til vinstri, smelltu svo þar sem byggingin byrjar og merktu\nþannig útlínur hennar. Þú klárar bygginguna svo með því að tengja\nsíðasta hnútinn við fyrsta hnútinn eða með því að ýta á 'Enter'\ná lyklaborðinu.\n\n### Eyða\n\nEf að bygging er út úr kú - þú sérð að hún er ekki til á\nloftmyndinni og hefur helst séð með eigin augum að hún er ekki til\nstaðar - þá geturðu eytt henni af kortinu. Farðu varlega þegar þú\neyðir hlutum - breytingarnar munu sjást hjá öllum sem nota kortið\nog það getur verið að loftmyndin sé bara gömul og byggingin ný.\n\nÞú getur eytt byggingu með því að velja hana, ýta svo á\nruslatunnutáknið eða með því að ýta á 'Delete' á lyklaborðinu.\n"
         },
         "intro": {
+            "graph": {
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "is",
+                "name": {
+                    "1st-avenue": "1sta breiðgata",
+                    "2nd-avenue": "2ur breiðgata",
+                    "4th-avenue": "4ða breiðgata",
+                    "5th-avenue": "5ta breiðgata",
+                    "6th-avenue": "6ta breiðgata",
+                    "6th-street": "Sjöttastræti",
+                    "7th-avenue": "7da breiðgata",
+                    "8th-avenue": "8da breiðgata",
+                    "9th-avenue": "9da breiðgata",
+                    "10th-avenue": "10da breiðgata",
+                    "11th-avenue": "11ta breiðgata",
+                    "12th-avenue": "12ta breiðgata",
+                    "adams-street": "Adamsstræti",
+                    "andrews-elementary-school": "Grunnskóli Aragötu",
+                    "andrews-street": "Aragata",
+                    "lynns-garage": "Bílskúr Lísu"
+                }
+            },
             "navigation": {
-                "title": "Leiðarvísun",
-                "drag": "Kortið sýnir OpenStreetMap gögn ofan á bakgrunni. Þú getur flakkað um með því að draga\nog skruna, rétt eins og á öðrum vefkortum. **Dragðu kortið!**",
-                "select": "Hlutir á kortinu samanstanda af einhverju af þessu þrennu: punktar, línur eða svæði. Hægt er að velja hvaða hlut á kortinu með því að smella á hann. ** Smelltu á punktinn til að velja hann.**"
+                "title": "Leiðarvísun"
             },
             "points": {
-                "title": "Punktar",
-                "search": "Það eru margvíslegir hlutir sem punktar geta staðið fyrir. Punkturinn sem þú varst að bæta við er kaffihús. **Leitaðu að '{name}'**",
-                "choose": "**Veldu kaffihús af listanum.**",
-                "describe": "Punkturinn er nú merktur sem kaffihús. Notaðu valmyndina, þá er hægt að bæta við fleiri upplýsingum. **Bættu nafni við**"
+                "title": "Punktar"
             },
             "areas": {
-                "title": "Svæði",
-                "place": "Teiknaðu svæðið með því að setja fleiri hnúta á kortið. Kláraðu svæðið með því að smella í lokin á upphafshnútinn. **Teiknaðu svæði fyrir leikvöllinn.**",
-                "search": "**Leita að '{name}'.**",
-                "choose": "**Veldu leikvöll af listanum.**"
+                "title": "Svæði"
             },
             "lines": {
-                "title": "Línur",
-                "start": "**Byrjaðu línuna með því að smella á enda vegarins.**",
-                "finish": "Hægt er að klára línur með því að smella aftur á síðasta hnútinn. **Kláraðu að teikna veginn.**",
-                "road": "**Veldu veg af listanum**",
-                "residential": "Það eru til ýmsar tegundir vega, sú algengasta er húsagata. **Veldu tegundina 'Húsagata'**"
+                "title": "Línur"
             },
             "startediting": {
                 "title": "Byrja að breyta",
@@ -500,14 +524,8 @@
                 "covered": {
                     "label": "Yfirbyggt"
                 },
-                "crop": {
-                    "label": "Uppskera"
-                },
                 "crossing": {
                     "label": "Tegund"
-                },
-                "cuisine": {
-                    "label": "Matarhefð"
                 },
                 "denomination": {
                     "label": "Trúardeild"
@@ -700,12 +718,6 @@
                 },
                 "source": {
                     "label": "Uppruni"
-                },
-                "sport": {
-                    "label": "Íþrótt"
-                },
-                "sport_ice": {
-                    "label": "Íþrótt"
                 },
                 "structure": {
                     "label": "Mannvirki",
@@ -1337,9 +1349,6 @@
                 },
                 "leisure/playground": {
                     "name": "Leikvöllur"
-                },
-                "leisure/running_track": {
-                    "name": "Hlaupabraut"
                 },
                 "leisure/slipway": {
                     "name": "Dráttarbraut"

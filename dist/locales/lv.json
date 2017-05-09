@@ -232,7 +232,6 @@
             "google": "Dalīties uz Google+"
         },
         "confirm": {
-            "okay": "Labi",
             "cancel": "Atcelt"
         },
         "splash": {
@@ -263,6 +262,19 @@
             "title": "Palīdzība"
         },
         "intro": {
+            "graph": {
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "lv"
+            },
             "navigation": {
                 "title": "Navigācija"
             },
@@ -270,12 +282,10 @@
                 "title": "Punkti"
             },
             "areas": {
-                "title": "Apgabali",
-                "search": "**Meklēt '{name}'.**"
+                "title": "Apgabali"
             },
             "lines": {
-                "title": "Līnijas",
-                "start": "**Uzsāciet līniju, klikšķinot ceļa beigu punktā.**"
+                "title": "Līnijas"
             },
             "startediting": {
                 "save": "Neizmirstiet regulāri saglabāt izmaiņas!",
@@ -358,9 +368,6 @@
                 },
                 "crossing": {
                     "label": "Tips"
-                },
-                "cuisine": {
-                    "label": "Ēdiens"
                 },
                 "denomination": {
                     "label": "Denominācija"
@@ -474,9 +481,6 @@
                 },
                 "source": {
                     "label": "Avots"
-                },
-                "sport": {
-                    "label": "Sports"
                 },
                 "structure": {
                     "label": "Objekts",

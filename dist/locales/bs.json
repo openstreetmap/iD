@@ -264,9 +264,6 @@
             "twitter": "Podijeliti na Twitteru",
             "google": "Podijeliti na Google+"
         },
-        "confirm": {
-            "okay": "Uredu"
-        },
         "splash": {
             "welcome": "Dobrodošli u ID - OpenStreetMap uređivač",
             "text": "ID je prijateljski ali moćan alat za doprinos najboljoj svjetskoj besplatnoj karti svijeta. Ovo je verzija {version}. Za više informacija pogledajte stranicu {website} i prijavite greške na stranici {github}.",
@@ -304,30 +301,30 @@
             "relations": "# Relacije\n\nRelacija je posebna vrsta značajke OpenStreetMap projektu koja grupira\ndruge značajke. Na primjer, dvije uobičajene vrste relacija su *relacije ruta*,\nkoje zajedno grupiraju dijelove puta koji pripadaju posebnom putu ili\nautoputu, i  *multipoligoni*, koji zajedno grupiraju nekoliko linija koje definiraju\nsloženo područje (jedno sa više dijelova ili rupa u sebi kao krofna).\n\nGrupa značajki u relaciji se naziva *članovi*. Na Bočnoj traic, možete\nvidjeti kojoj relaciji pripada član, i kliknuti na relaciju\nda je odaberete. Kada je relacija odabrana možete vidjeti sve njene\nčlanove izlistane na bočnoj traci i osvijetljene na karti.\n\nU većini slučajeva, iD editor će voditi računa o održavanju relacija automatski\ndok uređujete. Glavna stvar koje trebate biti svjesni jeste da ako izbrišete\ndio puta u namjeri da ga nacrtate tačnije, morate biti sigurni da je\nnovi dio član istih relacija kao i original.\n\n## Uređivanje relacija\n\nAko želite uređivati relacije, ovo su osnove.\n\nDa dodate značajku relaciji, odaberite značajku, kliknite na dugme \"+\" u\ndijelu \"Sve relacije\" na bočnoj traci, i izaberite ili ukucajte naziv relacije.\n\nDa napravite novu relaciju, prvo odaberite značajku koja treba biti član,\nkliknite na dugme \"+\" u dijelu \"Sve relacije\", i izaberite \"Nova relacija...\".\n\nDa uklonite značajku iz relacije, odaberite značajku i kliknite na dugme smeće\nkoje se pojavljuje uy relaciju iz koje je želite ukloniti.\n\nMožete praviti multipoligone sa rupama koristeći alat \"Spojiti\". Nacrtajte dva područja (unutrašnje i\nvanjsko), držite tipku Shift i kliknite na svaku od njih da ih izaberete, a potom\nkliknite na dugme \"Spojiti\" (+).\n"
         },
         "intro": {
+            "graph": {
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "ba"
+            },
             "navigation": {
-                "title": "Navigacija",
-                "drag": "Glavno područje karte pokazuje podatke karte OpenStreetMap iznad pozadine. Možete upravljati povlačenjem i skrolanjem kao u bilo kojoj drugoj web aplikaciji. **Povuci kartu!**",
-                "select": "Značajke karte su predstavljene na tri načina: korištenjem tačaka, linija ili područja. Sve značajke mogu biti odabrane klikom na iste. **Kliknite na tačku da je odaberete.**"
+                "title": "Navigacija"
             },
             "points": {
-                "title": "Tačke",
-                "search": "Postoji mnogo različitih značajki koje mogu biti predstavljene tačkama. Tačka koju ste upravo dodali je kafe. **Tražiti '{name}' **",
-                "choose": "**Izaberite kafe sa liste.**",
-                "describe": "Ova tačka je sada označena kao kafe. Korištenjem uređivača značajki, možemo dodati više informacija o značajki. **Dodati naziv**"
+                "title": "Tačke"
             },
             "areas": {
-                "title": "Područja",
-                "place": "Nacrtati područje postavljanjem više čvorova. Završiti područje klikom na početni čvor. **Nacrtati područje za igralište.**",
-                "search": "**Tražiti '{name}'.**",
-                "choose": "**Izaberite igralište sa liste.**"
+                "title": "Područja"
             },
             "lines": {
-                "title": "Linije",
-                "start": "**Započnite liniju klikom na kraj puta.**",
-                "finish": "Linije mogu biti završene ponovnim klikom na posljednji čvor. **Završite crtanje ceste.**",
-                "road": "**Izaberite cestu sa liste**",
-                "residential": "Postoje različite vrste puteva, od kojih su najčešće rezidencijalne ceste. **Odaberite vrstu 'rezidencijalna cesta'**",
-                "wrong_preset": "Niste odabrali rezidencijalnu vrstu ceste. **Kliknite ovdje da opet odaberete**"
+                "title": "Linije"
             },
             "startediting": {
                 "title": "Počnite uređivati",
@@ -469,9 +466,6 @@
                 },
                 "crossing": {
                     "label": "Vrsta"
-                },
-                "cuisine": {
-                    "label": "Kuhinja"
                 },
                 "denomination": {
                     "label": "Vjeroispovjest"
@@ -669,9 +663,6 @@
                 },
                 "source": {
                     "label": "Izvor"
-                },
-                "sport": {
-                    "label": "Sport"
                 },
                 "structure": {
                     "label": "Struktura",

@@ -138,7 +138,6 @@
                 "key": "సీ",
                 "annotation": "{n} లక్షణాలు విలీనించబడ్డాయి.",
                 "not_eligible": "ఈ విశేషాలు విలీనానికి చేయబడలేవు",
-                "not_adjacent": "ఈ లక్షణాలు విలీనింపబడవు ఎందుకంటే అవి కలిపిలేవు.",
                 "restriction": "ఈ లక్షణాలు విలీనింపబడవు ఎందుకంటే కనీసం ఒకటి \"{relation}\" సంబంధంలో అంశం.",
                 "incomplete_relation": "ఈ లక్షణాలు విలీనింపబడవు ఎందుకంటే కనీసం ఒక లక్షణం పూర్తిగా డౌన్‌లోడ్ కాలేదు.",
                 "conflicting_tags": "ఈ లక్షణాలు విలీనింపబడవు ఎందుకంటే వాటిలో కొన్ని ట్యాగ్‌లకు విలువలు విరుద్ధంగా ఉన్నాయి. "
@@ -325,7 +324,6 @@
             "help_link_text": "వివరాలు"
         },
         "confirm": {
-            "okay": "సరే",
             "cancel": "రద్దుచేయి"
         },
         "splash": {
@@ -344,47 +342,26 @@
         },
         "intro": {
             "graph": {
-                "city_hall": "పెద్దపల్లి పురపాలక కేంద్రం",
-                "fire_department": "పెద్దపల్లి అగ్నిమాపక కేంద్రం",
-                "memory_isle_park": "రావు జ్ఞాపక పార్కు",
-                "riverwalk_trail": "కొలను ఒడ్డు కాలిబాట దారి",
-                "w_michigan_ave": "కృష్ణపట్నం పడమర కూడలి",
-                "e_michigan_ave": "కృష్ణపట్నం తూర్పు కూడలి",
-                "spring_st": "షావుకారు వీధి",
-                "scidmore_park": "పక్కపాలెం తోట",
-                "petting_zoo": "పక్కపాలెం వనం జంతుశాల",
-                "n_andrews_st": "శ్రీనగర్ ఉత్తర వీధి",
-                "s_andrews_st": "శ్రీనగర్ దక్షిణ వీధి",
-                "n_constantine_st": "రామాపురం ఉత్తర వీధి",
-                "s_constantine_st": "రామాపురం దక్షిణ వీధి",
-                "rocky_river": "సెలయేరు",
-                "railroad_dr": "రైలుపట్టాల తోవ",
-                "conrail_rr": "తూ.కో.రైల్వే పట్టాలు",
-                "st_joseph_river": "కృష్ణా నది",
-                "n_main_st": "2nd మెయిన్ రోడ్డు",
-                "s_main_st": "3rd మెయిన్ రోడ్డు",
-                "water_st": "మేదర వీధి",
-                "foster_st": "కందుకూరి మార్గం",
-                "portage_river": "పెద్దపాలెం ఏరు",
-                "flower_st": "కోటదుర్గ అమ్మవారి వీధి",
-                "elm_st": "ప్రభుత్వ కాలేజి స్ట్రీట్",
-                "walnut_st": "ముడునూరి స్ట్రీట్",
-                "morris_ave": "బి.ఆర్.పి రోడ్డు",
-                "east_st": "ఈస్ట్ బైపాస్ రోడ్డు",
-                "portage_ave": "పెద్దపాలం కూడలి"
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "in"
             },
             "points": {
-                "title": "బిందువులు",
-                "choose": "జాబితా నుండి కఫే ఎంచుకోండి"
+                "title": "బిందువులు"
             },
             "areas": {
-                "title": "ప్రదేశాలు",
-                "search": "**'{name}' కొరకు వెతుకు**",
-                "choose": "జాబితా నుండి మైదానం ఎంచుకోండి"
+                "title": "ప్రదేశాలు"
             },
             "lines": {
-                "title": "గీతలు",
-                "road": "జాబితా నుండి రోడ్డు ఎంచుకోండి"
+                "title": "గీతలు"
             },
             "startediting": {
                 "title": "కూర్పు మొదలుపెట్టు",
@@ -548,9 +525,6 @@
                 },
                 "source": {
                     "label": "మూలం"
-                },
-                "sport": {
-                    "label": "క్రీడ"
                 },
                 "structure": {
                     "options": {

@@ -69,18 +69,18 @@
                 },
                 "key": "O",
                 "annotation": {
-                    "line": "Laget en linje rund.",
-                    "area": "Laget et areal rundt."
+                    "line": "Gjorde en linje sirkulær.",
+                    "area": "Gjorde et område sirkulært."
                 },
-                "not_closed": "Denne kan ikke bli sirkulær, for endene er ikke koblet.",
-                "too_large": "Denne kan ikke bli sirkulær fordi for lite av den er synlig.",
-                "connected_to_hidden": "Denne kan ikke bli sirkulær fordi den er koblet til en skjult egenskap."
+                "not_closed": "Denne kan ikke bli gjort sirkulær, da endene ikke er sammenkoblet.",
+                "too_large": "Denne kan ikke bli gjort sirkulær, da for lite av den er synlig.",
+                "connected_to_hidden": "Denne kan ikke bli sirkulær, da den er koblet til en skjult egenskap."
             },
             "orthogonalize": {
                 "title": "Rett opp hjørner",
                 "description": {
-                    "line": "Rett opp hjørner på denne linja.",
-                    "area": "Rett opp hjørner i dette området."
+                    "line": "Rett opp hjørnene på denne linja.",
+                    "area": "Rett opp hjørnene i dette området."
                 },
                 "key": "S",
                 "annotation": {
@@ -112,6 +112,22 @@
                     "area": "Fjernet et areal.",
                     "relation": "Fjernet en relasjon.",
                     "multiple": "Slettet {n} kartegenskaper."
+                },
+                "too_large": {
+                    "single": "Denne kartegenskapen kan ikke slettes fordi kun noen deler av den er synlig.",
+                    "multiple": "Disse kartegenskapene kan ikke slettes fordi kun noen deler av dem er synlige."
+                },
+                "incomplete_relation": {
+                    "single": "Denne kartegenskapen kan ikke slettes fordi den ikke er fullstendig lastet ned.",
+                    "multiple": "Disse kartegenskapene kan ikke slettes fordi de ikke er fullstendig lastet ned."
+                },
+                "part_of_relation": {
+                    "single": "Denne kartegenskapen kan ikke slettes fordi den er en del av en større relasjon. Du må fjerne den fra relasjonen først.",
+                    "multiple": "Disse kartegenskapene kan ikke slettes fordi de er en del av en større relasjon. Du må fjerne de fra relasjonen først."
+                },
+                "connected_to_hidden": {
+                    "single": "Denne kartegenskapen kan ikke slettes fordi den er koblet til en skjult kartegenskap.",
+                    "multiple": "Disse kartegenskapene kan ikke slettes fordi noen av dem er koblet til en skjult kartegenskap."
                 }
             },
             "add_member": {
@@ -143,34 +159,103 @@
                 "key": "C",
                 "annotation": "{n} kartegenskaper er slått sammen.",
                 "not_eligible": "Disse kartegenskapene kan ikke bli slått sammen.",
-                "not_adjacent": "Disse kartegenskapene kan ikke bli slått sammen fordi de ikke er sammenkoblet.",
+                "not_adjacent": "Disse objektene kan ikke bli slått sammen da ytterpunktene ikke er sammenkoblet.",
                 "restriction": "Disse kartegenskapene kan ikke bli slått sammen fordi minst en er et medlem av en \"{relation}\" relasjon.",
                 "incomplete_relation": "Disse funksjonene kan ikke bli knyttet sammen fordi hvertfall én av dem er ikke ferdig nedlastet.",
                 "conflicting_tags": "Disse kartegenskapene kan ikke bli slått sammen fordi noen av deres merker har konfliktskapende verdier."
             },
             "move": {
                 "title": "Flytt",
+                "description": {
+                    "single": "Flytt denne kartegenskapen til et annet sted.",
+                    "multiple": "Flytt disse kartegenskapene til et annet sted."
+                },
                 "key": "M",
                 "annotation": {
                     "point": "Flyttet et punkt.",
                     "vertex": "Flyttet en node til en vei.",
                     "line": "Flyttet en linje.",
-                    "area": "Flyttet et areal."
+                    "area": "Flyttet et areal.",
+                    "multiple": "Flyttet flere kartegenskaper."
+                },
+                "incomplete_relation": {
+                    "single": "Denne kartegenskapen kan ikke flyttes fordi den ikke er fullstendig lastet ned.",
+                    "multiple": "Disse kartegenskapene kan ikke flyttes fordi de ikke er fullstendig lastet ned."
+                },
+                "too_large": {
+                    "single": "Denne kartegenskapen kan ikke flyttes fordi kun noen deler av den er synlig.",
+                    "multiple": "Disse kartegenskapene kan ikke flyttes fordi kun noen deler av dem er synlige."
+                },
+                "connected_to_hidden": {
+                    "single": "Denne kartegenskapen kan ikke flyttes fordi den er koblet til en skjult kartegenskap.",
+                    "multiple": "Disse kartegenskapene kan ikke flyttes fordi noen av dem er koblet til en skjult kartegenskap."
                 }
             },
             "reflect": {
-                "title": "reflektere",
+                "title": {
+                    "long": "Speilvend om langside",
+                    "short": "Speilvend om kortside"
+                },
+                "description": {
+                    "long": {
+                        "single": "Speilvend denne kartegenskapen om sin lange akse.",
+                        "multiple": "Speilvend disse kartegenskapene om sine lange akser."
+                    },
+                    "short": {
+                        "single": "Speilvend denne kartegenskapen om sin korte akse.",
+                        "multiple": "Speilvend disse kartegenskapene om sine korte akser."
+                    }
+                },
                 "key": {
                     "long": "T",
                     "short": "Y"
+                },
+                "annotation": {
+                    "long": {
+                        "single": "Speilet en kartegenskap om sin lange akse.",
+                        "multiple": "Speilet flere kartegenskaper om sine lange akser."
+                    },
+                    "short": {
+                        "single": "Speilet en kartegenskap om sin korte akse.",
+                        "multiple": "Speilet flere kartegenskaper om sine korte akser."
+                    }
+                },
+                "incomplete_relation": {
+                    "single": "Denne kartegenskapen kan ikke speiles fordi den ikke er fullstendig lastet ned.",
+                    "multiple": "Disse kartegenskapene kan ikke speiles fordi de ikke er fullstendig lastet ned."
+                },
+                "too_large": {
+                    "single": "Denne kartegenskapen kan ikke speiles fordi kun noen deler av den er synlig.",
+                    "multiple": "Disse kartegenskapene kan ikke speiles fordi kun noen deler av dem er synlige."
+                },
+                "connected_to_hidden": {
+                    "single": "Dette objektet kan ikke blir reflektert da det er sammenkoblet med et et skult objekt.",
+                    "multiple": "Disse kartegenskapene kan ikke speilvendes fordi noen av dem er koblet til skjulte kartegenskaper."
                 }
             },
             "rotate": {
                 "title": "Rotér",
+                "description": {
+                    "single": "Rotér dette objektet rundt sitt midtpunkt.",
+                    "multiple": "Rotér disse objektene rundt sine midtpunkt."
+                },
                 "key": "R",
                 "annotation": {
                     "line": "Rotér en linje.",
-                    "area": "Rotér et areal."
+                    "area": "Rotér et areal.",
+                    "multiple": "Rotér flere objekter."
+                },
+                "incomplete_relation": {
+                    "single": "Dette objektet kan ikke roteres da det ikke er fullstendig lastet ned.",
+                    "multiple": "Disse objektene kan ikke roteres da de ikke er fullstendig lastet ned."
+                },
+                "too_large": {
+                    "single": "Dette objektet kan ikke roteres da kun noen deler av det er synlig.",
+                    "multiple": "Disse objektene kan ikke roteres da kun noen deler av det er synlig."
+                },
+                "connected_to_hidden": {
+                    "single": "Dette objektet kan ikke roteres da det er koblet til et skjult objekt.",
+                    "multiple": "Disse objektene kan ikke roteres da de er koblet til skjulte objekter."
                 }
             },
             "reverse": {
@@ -181,9 +266,31 @@
             },
             "split": {
                 "title": "Del",
+                "description": {
+                    "line": "Del denne linjen i to ved denne noden.",
+                    "area": "Del yttergrensen av dette området i to.",
+                    "multiple": "Del linjene/yttergrensene i to ved denne noden."
+                },
                 "key": "X",
                 "annotation": {
-                    "line": "Splitt en linje"
+                    "line": "Splitt en linje",
+                    "area": "Del et områdes yttergrense.",
+                    "multiple": "Del {n} linjer/yttergrenser."
+                },
+                "not_eligible": "Linjers endepunkter kan ikke deles.",
+                "multiple_ways": "Det er for mange linjer til at det kan deles.",
+                "connected_to_hidden": "Dette/denne kan ikke deles da det er koblet til et skjult objekt."
+            },
+            "restriction": {
+                "help": {
+                    "select": "Klikk for å velge et vegelement.",
+                    "toggle": "Klikk for å endre svingebegrensninger.",
+                    "toggle_on": "Klikk for å legge til \"{restriction}\" begrensning.",
+                    "toggle_off": "Klikk for å fjerne \"{restriction}\" begrensning."
+                },
+                "annotation": {
+                    "create": "La til en svingebegrensning.",
+                    "delete": "Fjernet en svingebegrensning."
                 }
             }
         },
@@ -194,27 +301,51 @@
             "tooltip": "Omgjør: {action}",
             "nothing": "Ingen ting å gjøre tilbake."
         },
+        "tooltip_keyhint": "Snarvei:",
+        "browser_notice": "Denne editor er støttet i Firefox, Chrome, Safari, Opera og Internet Explorer 11 og høyere. Vennligst oppgrader din nettleser eller bruk Potlatch 2 for å redigere kartet.",
         "translate": {
             "translate": "Oversett",
+            "localized_translation_label": "Flerspråklig navn",
             "localized_translation_language": "Velg språk",
             "localized_translation_name": "Navn"
         },
         "zoom_in_edit": "Zoom inn for å redigere",
+        "login": "logg inn",
         "logout": "logg ut",
         "loading_auth": "Kobler til OpenStreetMap...",
         "report_a_bug": "Rapporter feil",
         "help_translate": "Hjelp til med oversettelse",
+        "feature_info": {
+            "hidden_warning": "{count} skjulte kartegenskaper",
+            "hidden_details": "Disse kartegenskapene er skjult: {details}"
+        },
+        "status": {
+            "error": "Kan ikke koble til API.",
+            "offline": "APIet er frakoblet. Vennligst forsøk å redigere senere.",
+            "readonly": "APIet er kun i lesemodus. Du må vente for å lagre dine endringer.",
+            "rateLimit": "Dette APIet begrenser anonyme tilkoblinger. Du løser dette ved å logge inn."
+        },
         "commit": {
+            "title": "Last opp til OpenStreetMap",
+            "description_placeholder": "Kort beskrivelse av dine bidrag (påkrevet)",
+            "message_label": "Kommentar til endringssettet",
+            "upload_explanation": "Endringene du laster opp vil være synlige på alle kart som bruker dataene til OpenStreetMap.",
+            "upload_explanation_with_user": "Endringene du laster opp som {user} vil være synlige på alle kart som bruker dataene til OpenStreetMap.",
+            "save": "Last opp",
             "cancel": "Avbryt",
             "changes": "{count} endringer",
             "warnings": "Advarsler",
             "modified": "Endret",
             "deleted": "Fjernet",
             "created": "Opprettet",
-            "about_changeset_comments": "Angående kommentarer til endringssett"
+            "about_changeset_comments": "Angående kommentarer til endringssett",
+            "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
+            "google_warning": "Du nevnte Google i kommentaren: husk at det er strengt forbudt å kopiere fra Google Maps.",
+            "google_warning_link": "http://www.openstreetmap.org/copyright"
         },
         "contributors": {
-            "list": "Redigeringer utført av {users}"
+            "list": "Redigeringer utført av {users}",
+            "truncated_list": "Endringer av {users} og {count} andre"
         },
         "infobox": {
             "selected": "{n} valgt(e)",
@@ -224,27 +355,34 @@
             "perimeter": "Perimeter",
             "length": "Lengde",
             "area": "Område",
+            "location": "Sted",
             "metric": "Metrisk"
         },
         "geometry": {
             "point": "punkt",
             "line": "linje",
-            "area": "område"
+            "area": "område",
+            "relation": "relasjon"
         },
         "geocoder": {
             "search": "Søk over hele verden...",
+            "no_results_visible": "Ingen resultater synlige i kartområdet",
             "no_results_worldwide": "Ingen resultater funnet"
         },
         "geolocate": {
-            "title": "Vis min posisjon"
+            "title": "Vis min posisjon",
+            "locating": "Finner sted, vennligst vent..."
         },
         "inspector": {
             "no_documentation_combination": "Det finnes ingen dokumentasjon for denne tag-kombinasjonen",
             "no_documentation_key": "Det finnes ingen dokumentasjon tilgjengelig for denne nøkkelen",
+            "documentation_redirect": "Denne dokumentasjonen peker nå til en ny side.",
             "show_more": "Vis mer",
+            "view_on_osm": "Se på openstreetmap.org",
             "all_fields": "Alle felter",
             "all_tags": "Alle tagger",
             "all_members": "Alle medlemmer",
+            "all_relations": "Alle relasjoner",
             "new_relation": "Ny relasjon...",
             "role": "Rolle",
             "choose": "Velg egenskapstype",
@@ -253,13 +391,24 @@
             "back_tooltip": "Endre funksjon",
             "remove": "Fjern",
             "search": "Søk",
+            "multiselect": "Valgte kartegenskaper",
             "unknown": "Ukjent",
+            "incomplete": "<not downloaded>",
             "feature_list": "Søkeegenskaper",
             "edit": "Endre funksjon",
             "check": {
                 "yes": "Ja",
-                "no": "Nei"
+                "no": "Nei",
+                "reverser": "Endre retning"
             },
+            "radio": {
+                "structure": {
+                    "type": "Type",
+                    "default": "Standard",
+                    "layer": "Lag"
+                }
+            },
+            "add": "Legg til",
             "none": "Ingen",
             "node": "Node",
             "way": "Vei",
@@ -272,9 +421,14 @@
             "description": "Bakgrunnsinnstillinger",
             "percent_brightness": "{opacity}% lysstyrke",
             "none": "Ingen",
+            "best_imagery": "Den beste ortofotokilden til denne plasseringen",
+            "switch": "Bytt tilbake til denne bakgrunnen",
             "custom": "Egendefinert",
             "custom_button": "Endre egendefinert bakgrunn",
+            "fix_misalignment": "Finjuster ortofotoet",
+            "imagery_source_faq": "Hvor kommer dette ortofotoet fra?",
             "reset": "tilbakestill",
+            "offset": "Dra hvor som helst i det grå feltet under for justere ortofotoet. Du kan også angi justeringsverdiene i meter.",
             "minimap": {
                 "description": "Mini-kart"
             }
@@ -288,6 +442,12 @@
             "points": {
                 "description": "Punkter",
                 "tooltip": "Interessepunkter"
+            },
+            "traffic_roads": {
+                "tooltip": "Hovedveier, gater e.l."
+            },
+            "service_roads": {
+                "description": "Tjenesteveier"
             },
             "paths": {
                 "description": "Stier",
@@ -357,10 +517,10 @@
             "facebook": "Del på Facebook",
             "twitter": "Del på Twitter",
             "google": "Del på Google+",
+            "help_html": "Endringene dine burde vises i \"standard\" laget om et par minutter. Andre lag, og visse kartegenskaper, kan ta litt lengre tid.",
             "help_link_text": "Detaljer"
         },
         "confirm": {
-            "okay": "OK",
             "cancel": "Avbryt"
         },
         "splash": {
@@ -378,8 +538,10 @@
             "used_with": "brukes med {type}"
         },
         "validations": {
+            "untagged_point": "Utagget punkt",
             "untagged_line": "Utagget linje",
             "untagged_area": "Utagget areal",
+            "untagged_relation": "Utagget relasjon",
             "tag_suggests_area": "Taggen {tag} anbefaler at linje bør være et areal, men dette er ikke et areal",
             "deprecated_tags": "Utgående tagger: {tags}"
         },
@@ -391,22 +553,35 @@
             "title": "Hjelp"
         },
         "intro": {
+            "done": "ferdig",
+            "graph": {
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "no"
+            },
             "navigation": {
-                "title": "Navigasjon",
-                "drag": "Hovedkartet viser data fra OpenstreetMap lagt over en bakgrunn. Du kan navigere ved å dra eller scrolle, slik som et vanlig nettkart. **Dra kartet!**"
+                "title": "Navigasjon"
             },
             "points": {
                 "title": "Punkter"
             },
             "areas": {
-                "title": "Områder",
-                "search": "**Søk etter '{name}'.**"
+                "title": "Områder"
             },
             "lines": {
                 "title": "Linjer"
             },
             "startediting": {
                 "title": "Begynn redigeringen",
+                "save": "Ikke glem å lagre endringene dine innimellom!",
                 "start": "Begynn kartredigeringen!"
             }
         },
@@ -666,14 +841,8 @@
                 "craft": {
                     "label": "Type"
                 },
-                "crop": {
-                    "label": "Avling"
-                },
                 "crossing": {
                     "label": "Type"
-                },
-                "cuisine": {
-                    "label": "Kjøkken"
                 },
                 "cycleway": {
                     "label": "Sykkelfelter",
@@ -1087,15 +1256,6 @@
                 },
                 "source": {
                     "label": "Kilde"
-                },
-                "sport": {
-                    "label": "Sport"
-                },
-                "sport_ice": {
-                    "label": "Sport"
-                },
-                "sport_racing": {
-                    "label": "Idrett"
                 },
                 "structure": {
                     "label": "Struktur",
@@ -1885,9 +2045,6 @@
                 "leisure/playground": {
                     "name": "Lekeplass"
                 },
-                "leisure/running_track": {
-                    "name": "Løpebane"
-                },
                 "leisure/slipway": {
                     "name": "Båtslipp"
                 },
@@ -1935,9 +2092,6 @@
                 },
                 "man_made/lighthouse": {
                     "name": "Fyrtårn"
-                },
-                "man_made/mast": {
-                    "name": "Radiomast"
                 },
                 "man_made/observation": {
                     "name": "Observasjonstårn"

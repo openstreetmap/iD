@@ -252,9 +252,6 @@
             "twitter": "টুইটার-এ জানান",
             "google": "গুগল+ এ জানান"
         },
-        "confirm": {
-            "okay": "ঠিক অাছে"
-        },
         "splash": {
             "welcome": "iD ওপেনস্ট্রীটম্যাপ এডিটর-এ অাপনাকে স্বাগতম",
             "walkthrough": "ওয়াকথ্রু শুরু করুন",
@@ -286,25 +283,30 @@
             "title": "সাহায্য"
         },
         "intro": {
+            "graph": {
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "bd"
+            },
             "navigation": {
                 "title": "ঘুরে বেরানো"
             },
             "points": {
-                "title": "বিন্দুসমুহ",
-                "choose": "**তালিকাটি থেকে ক্যাফে বেছে নিন**"
+                "title": "বিন্দুসমুহ"
             },
             "areas": {
-                "title": "এলাকাসমুহ",
-                "search": "**'{name}' নামটি খুঁজুন।**",
-                "choose": "**তালিকাটি থেকে খেলার মাঠ বেছে নিন**"
+                "title": "এলাকাসমুহ"
             },
             "lines": {
-                "title": "রেখাসমুহ",
-                "start": "**রেখাটি শুরু করার জন্য রাস্তার শেষ প্রান্তে ক্লিক করুন।**",
-                "finish": "রেখা সম্পুর্ন করার জন্য শেষ নোড-এ ক্লিক করতে পারেন। **রাস্তাটি অাঁকা সম্পুর্ন করুন।**",
-                "road": "**তালিকাটি থেকে রাস্তা বেছে নিন**",
-                "residential": "অনেক প্রকারের রাস্তা রয়েছে, যার মধ্যে অাবাসিক রাস্তা সবচেয়ে সচরাচর ব্যবহৃত হয়।. **অাবাসিক রাস্তা টাইপটি সিলেক্ট করুন**",
-                "wrong_preset": "অাপনি অাবাসিক রাস্তা বেছে নেন নি। **অাবার বাছার জন্য এখানে ক্লিক করুন**"
+                "title": "রেখাসমুহ"
             },
             "startediting": {
                 "title": "পরিবর্তন করা শুরু করুন",
@@ -632,9 +634,6 @@
                 },
                 "source": {
                     "label": "উৎস"
-                },
-                "sport": {
-                    "label": "খেলাধুলা"
                 },
                 "structure": {
                     "label": "কাঠামো",

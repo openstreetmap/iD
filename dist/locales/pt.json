@@ -113,6 +113,10 @@
                     "relation": "Relação eliminada.",
                     "multiple": "Eliminados {n} elementos."
                 },
+                "too_large": {
+                    "single": "Este elemento não pode ser eliminado porque não está completamente visível.",
+                    "multiple": "Estes elementos não podem ser eliminados porque não estão completamente visíveis."
+                },
                 "incomplete_relation": {
                     "single": "Este elemento não pode ser eliminado porque não foi descarregado completamente do servidor.",
                     "multiple": "Estes elementos não podem ser eliminados porque não foram descarregados completamente do servidor."
@@ -155,7 +159,6 @@
                 "key": "C",
                 "annotation": "{n} elementos combinados.",
                 "not_eligible": "Estes elementos não podem ser combinados.",
-                "not_adjacent": "Estes elementos não podem ser combinados porque não estão ligados um ao outro.",
                 "restriction": "Estes elementos não podem ser combinados porque pelo menos um deles é membro de uma relação \"{relation}\".",
                 "incomplete_relation": "Estes elementos não podem ser combinados porque pelo menos um deles não está completamente descarregado no mapa.",
                 "conflicting_tags": "Estes elementos não podem ser combinados porque algumas das suas etiquetas entram em conflito."
@@ -188,7 +191,10 @@
                 }
             },
             "reflect": {
-                "title": "refletir",
+                "title": {
+                    "long": "Refletir Longo",
+                    "short": "Refletir Curto"
+                },
                 "description": {
                     "long": {
                         "single": "Refletir este elemento pelo eixo longo.",
@@ -395,7 +401,15 @@
             "edit": "Editar elemento",
             "check": {
                 "yes": "Sim",
-                "no": "Não"
+                "no": "Não",
+                "reverser": "Alterar Direção"
+            },
+            "radio": {
+                "structure": {
+                    "type": "Tipo",
+                    "default": "Padrão",
+                    "layer": "Nível"
+                }
             },
             "add": "Adicionar",
             "none": "Nenhum",
@@ -546,7 +560,6 @@
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
         "confirm": {
-            "okay": "OK",
             "cancel": "Cancelar"
         },
         "splash": {
@@ -560,6 +573,9 @@
             "lose_changes": "Tem alterações por gravar. Mudando o servidor de mapas irá perdê-las. Tem a certeza que deseja mudar de servidores?",
             "dev": "dev"
         },
+        "version": {
+            "whats_new": "O que há de novo no iD {version}"
+        },
         "tag_reference": {
             "description": "Descrição",
             "on_wiki": "{tag} em wiki.osm.org",
@@ -567,17 +583,17 @@
         },
         "validations": {
             "disconnected_highway": "Rodovia desligada",
-            "disconnected_highway_tooltip": "As estradas devem estar ligadas a outras estradas.",
+            "disconnected_highway_tooltip": "As estradas devem estar ligadas a outras estradas ou entradas de edifícios.",
             "untagged_point": "Ponto sem etiquetas",
+            "untagged_point_tooltip": "Escolha um elemento que indique o que este ponto representa.",
             "untagged_line": "Linha sem etiquetas",
+            "untagged_line_tooltip": "Escolha um elemento que indique o que esta linha representa.",
             "untagged_area": "Área sem etiquetas",
+            "untagged_area_tooltip": "Escolha um elemento que indique o que esta área representa.",
             "untagged_relation": "Relação sem etiquetas",
+            "untagged_relation_tooltip": "Selecione um tipo de elemento que descreva o que é esta relação.",
             "many_deletions": "Está a eliminar {n} elementos. Tem a certeza que quer fazer isso? Isto irá eliminá-los do mapa que todas as pessoas Veem em openstreetmap.org.",
             "tag_suggests_area": "A etiqueta {tag} é normalmente usada em áreas e não linhas.",
-            "untagged_point_tooltip": "Escolha um elemento que indique o que este ponto representa.",
-            "untagged_line_tooltip": "Escolha um elemento que indique o que esta linha representa.",
-            "untagged_area_tooltip": "Escolha um elemento que indique o que esta área representa.",
-            "untagged_relation_tooltip": "Selecione um tipo de elemento que descreva o que é esta relação.",
             "deprecated_tags": "Etiquetas obsoletas: {tags}"
         },
         "zoom": {
@@ -618,81 +634,33 @@
         "intro": {
             "done": "feito",
             "graph": {
-                "city_hall": "Câmara Municipal de Cruz",
-                "fire_department": "Quartel de Bombeiros  de Cruz",
-                "memory_isle_park": "Parque das Memórias",
-                "riverwalk_trail": "Trilho do Alto da Montanha",
-                "w_michigan_ave": "Avenida do Oeste",
-                "e_michigan_ave": "Avenida do Este",
-                "spring_st": "Rua dos Mercadores",
-                "scidmore_park": "Parque do Marquês",
-                "petting_zoo": "Zoológico da Bicharada",
-                "n_andrews_st": "Avenida do Norte",
-                "s_andrews_st": "Avenida do Sul",
-                "n_constantine_st": "Rua do Norte da Aguda",
-                "s_constantine_st": "Rua do Sul da Aguda",
-                "rocky_river": "Rio Amazonas",
-                "railroad_dr": "Rua Central",
-                "conrail_rr": "Linha Ferroviária do Norte",
-                "st_joseph_river": "Rio Nilo",
-                "n_main_st": "Estrada Principal do Norte",
-                "s_main_st": "Estrada Principal do Sul",
-                "water_st": "Rua das Águas",
-                "foster_st": "Rua do Conde",
-                "portage_river": "Rio Tejo",
-                "flower_st": "Rua das Flores",
-                "elm_st": "Rua do Elmo",
-                "walnut_st": "Rua das Amêndoas",
-                "morris_ave": "Avenida da Ajuda",
-                "east_st": "Rua Este",
-                "portage_ave": "Rua dos Paços"
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "postcode": "4909",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "pt"
             },
             "navigation": {
-                "title": "Navegação",
-                "drag": "A área central mostra os dados do mapa do OpenStreetMap por cima das imagens aéreas. Pode navegar no mapa clicando e arrastando com o rato ou utilizando as teclas de direção. **Experimente arrastar o mapa agora!**",
-                "select": "Existem 3 tipos de elementos no mapa: pontos, linhas e áreas. Todos estes elementos podem ser criados clicando neles com o rato. **Clique no ponto para o criar um ponto.**",
-                "pane": "Quando um elemento é selecionado, aparece um painel lateral com os dados desse elemento. No cabeçalho é mostrado o tipo de elemento e abaixo os atributos do elemento, tais como o nome e o endereço. **Feche o painel lateral clicando no botão {button} no canto superior direito.**",
-                "search": "Também pode procurar por outros tipos de elementos que não apareçam no painel . **Procurar por '{name}'**",
-                "choose": "**Clique em {name} na lista para escolher.**",
-                "chosen": "Fantástico! {name} está agora selecionado. **Feche o painel lateral clicando no botão {button}.**"
+                "title": "Navegação"
             },
             "points": {
-                "title": "Pontos",
-                "add": "Os pontos podem ser usados para representar elementos tais como lojas, restaurantes e monumentos. Estes indicam uma localização específica e descrevem o que existe no sítio. **Clique no botão {button} para adicionar um novo ponto.**",
-                "place": "O ponto pode ser posicionado clicando no mapa. **Clique no mapa para colocar o novo ponto em cima do edifício.**",
-                "search": "Existem muitos elementos que podem ser representados por pontos. O ponto que acabou de adicionar é um café. **Pesquise por '{name}'**",
-                "choose": "**Clique em Café na lista.**",
-                "describe": "O ponto está agora marcado como café. Utilizando o painel lateral, podemos adicionar mais informações sobre o elemento. **Adicione um nome**",
-                "close": "O painel lateral irá manter todas as alterações que fez automaticamente. Quando se muda um elemento, o botão para fechar fecha o painel e guarda as alteraçṍes. **Clique no botão {button} para fechar o painel.**",
-                "reselect": "Por vezes encontram-se pontos no mapa mas com erros ou com informações incompletas, sendo que nesses casos o melhor é corrigir-los. **Seleccione o ponto que acabou de criar.** ",
-                "fixname": "**Altere o nome e clique no botão {button} para fechar o painel lateral.",
-                "reselect_delete": "Todos os elementos do mapa podem ser eliminados. **Clique no ponto para selecionar o ponto que acabou de criar.**",
-                "delete": "O menu com ícones à volta do ponto contém vários botões, um deles é o 'Eliminar'.  **Clique no botão {button} para eliminar o ponto.**"
+                "title": "Pontos"
             },
             "areas": {
-                "title": "Áreas",
-                "add": "As áreas servem para representar os limites de certos elementos como por exemplo: lagos, edifícios e parques. As áreas também podem ser usadas para mapear mais detalhadamente outros elementos que são normalmente representados por pontos. **Clique no botão {button} Área para adicionar uma nova área.**",
-                "corner": "As áreas são desenhadas ao colocar pontos que definem as fronteira destas. **Clique para colocar um ponto inicial num dos cantos do parque infantil.**",
-                "place": "Continue a desenhar a área adicionando mais pontos. Termine a área clicando no ponto inicial desta ou clicando 2 vezes no ponto terminal. **Desenhe uma área para representar o parque infantil.**",
-                "search": "**Pesquisar por '{name}'.**",
-                "choose": "**Clique em Parque infantil na lista.**",
-                "describe": "Adicione um nome e clique no botão {button} para fechar o painel lateral."
+                "title": "Áreas"
             },
             "lines": {
-                "title": "Linhas",
-                "add": "As linhas são usadas para representar elementos tais como estradas, ferrovias e rios. **Clique no botão {button} Linha para adicionar uma nova linha.**",
-                "start": "**Comece a linha clicando na extremidade desta estrada.**",
-                "intersect": "Clique para adicionar mais pontos à linha. Pode arrastar o mapa ao desenhar se for necessário. As estradas e outros tipos de linhas fazem parte de uma rede maior. É importante que estas linhas estejam ligadas entre si.. **Clique em {name} para criar uma interseção ligando as 2 linhas.**",
-                "finish": "As linhas podem ser terminadas clicando de novo no último ponto adicionado. **Termine o desenho da estrada.**",
-                "road": "**Clique em Estrada que aparece na lista**",
-                "residential": "Existem vários tipos de estradas como por exemplo as ruas residenciais. **Clique em Rua Residencial na lista**",
-                "describe": "**Atribua um nome à estrada e clique no botão {button} para fechar o painel lateral.**",
-                "restart": "A estrada tem de estar ligada a {name}.",
-                "wrong_preset": "Não selecionou o tipo de Rua Residencial. **Clique aqui para selecionar**"
+                "title": "Linhas"
             },
             "startediting": {
                 "title": "Começar a editar",
-                "help": "Pode sempre repetir este guia ou ver mais informações clicando no botão {button} Ajuda.",
                 "save": "Não se esqueça de gravar as suas alterações regularmente clicando neste botão!",
                 "start": "Começar a editar o mapa!"
             }
@@ -871,6 +839,15 @@
                 "amenity": {
                     "label": "Tipo"
                 },
+                "animal_boarding": {
+                    "label": "Para Animais"
+                },
+                "animal_breeding": {
+                    "label": "Para Animais"
+                },
+                "animal_shelter": {
+                    "label": "Para Animais"
+                },
                 "area/highway": {
                     "label": "Tipo"
                 },
@@ -992,8 +969,14 @@
                         "clockwise": "Sentido dos ponteiros do relógio"
                     }
                 },
+                "club": {
+                    "label": "Tipo"
+                },
                 "collection_times": {
                     "label": "Horário de recolha"
+                },
+                "communication_multi": {
+                    "label": "Tipos de Comunicações"
                 },
                 "construction": {
                     "label": "Tipo"
@@ -1015,7 +998,7 @@
                     "label": "Tipo"
                 },
                 "crop": {
-                    "label": "Produção"
+                    "label": "Colheitas"
                 },
                 "crossing": {
                     "label": "Tipo"
@@ -1182,6 +1165,9 @@
                     "label": "Referência",
                     "placeholder": "Número do buraco (1-18)"
                 },
+                "grape_variety": {
+                    "label": "Variedades de Castas"
+                },
                 "handicap": {
                     "label": "Handicap",
                     "placeholder": "1-18"
@@ -1197,6 +1183,9 @@
                 },
                 "historic": {
                     "label": "Tipo"
+                },
+                "historic/civilization": {
+                    "label": "Civilização Histórica"
                 },
                 "hoops": {
                     "label": "Cestos",
@@ -1531,7 +1520,7 @@
                     "label": "produz"
                 },
                 "product": {
-                    "label": "Produto"
+                    "label": "Produtos"
                 },
                 "railway": {
                     "label": "Tipo"
@@ -1603,6 +1592,9 @@
                 "service/bicycle": {
                     "label": "Serviços"
                 },
+                "service/vehicle": {
+                    "label": "Serviços"
+                },
                 "service_rail": {
                     "label": "Tipo de serviço",
                     "options": {
@@ -1611,6 +1603,9 @@
                         "spur": "Ramal curto (mercadorias)",
                         "yard": "Linha de manobras"
                     }
+                },
+                "service_times": {
+                    "label": "Horário de Abertura"
                 },
                 "shelter": {
                     "label": "Abrigo"
@@ -1660,16 +1655,22 @@
                     "label": "Fonte das informações"
                 },
                 "sport": {
-                    "label": "Desporto"
+                    "label": "Desportos"
                 },
                 "sport_ice": {
-                    "label": "Desporto"
+                    "label": "Desportos"
                 },
-                "sport_racing": {
-                    "label": "Desporto"
+                "sport_racing_motor": {
+                    "label": "Desportos"
+                },
+                "sport_racing_nonmotor": {
+                    "label": "Desportos"
                 },
                 "stars": {
                     "label": "Estrelas"
+                },
+                "start_date": {
+                    "label": "Data de Início"
                 },
                 "step_count": {
                     "label": "Número de Degraus"
@@ -1744,6 +1745,9 @@
                 },
                 "toll": {
                     "label": "Portagem"
+                },
+                "tomb": {
+                    "label": "Tipo"
                 },
                 "tourism": {
                     "label": "Tipo"
@@ -2059,6 +2063,10 @@
                     "name": "Água potável",
                     "terms": "Fonte de Água, Água Potável, Bebedouro"
                 },
+                "amenity/driving_school": {
+                    "name": "Escola de Condução",
+                    "terms": "Escolas de Condução, Autoescola, Centro de Formação de Condutores"
+                },
                 "amenity/embassy": {
                     "name": "Embaixada",
                     "terms": "Consulado"
@@ -2294,8 +2302,7 @@
                     "terms": "Excrement Bag Vending Machine"
                 },
                 "amenity/vending_machine/news_papers": {
-                    "name": "Máquina de venda de jornais",
-                    "terms": "Newspaper Vending Machine"
+                    "name": "Máquina de venda de jornais"
                 },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
                     "name": "Máquina para recolha/entrega de encomendas",
@@ -2312,10 +2319,6 @@
                 "amenity/vending_machine/sweets": {
                     "name": "Máquina de snacks",
                     "terms": "Snack Vending Machine, sande, sandes"
-                },
-                "amenity/vending_machine/vending_machine": {
-                    "name": "Máquina de venda automática",
-                    "terms": "Vending Machine"
                 },
                 "amenity/veterinary": {
                     "name": "Veterinário",
@@ -2922,10 +2925,6 @@
                     "name": "Ligação a uma estrada primária",
                     "terms": "Primary Link, Ligação Estrada Nacional, Ligação Rodovia Nacional, Ligação Nacional,  Ligação Estrada Principal, Entrada Estrada Nacional, Entrada Rodovia Nacional, Entrada Nacional, Entrada Estrada Nacional, Saída Nacional, Saída Rodovia Nacional, Saída Nacional, Saída Estrada Nacional,"
                 },
-                "highway/raceway": {
-                    "name": "Circuito de corrida automóvel",
-                    "terms": "Motor Raceway"
-                },
                 "highway/residential": {
                     "name": "Rua residencial",
                     "terms": "Estrada Residencial, Rodovia Residencial, Estrada Urbana, Rodovia Urbana, Estrada Suburbana, Rodovia Suburbana, Estrada dentro de localidades, Rodovia dentro de localidades"
@@ -2973,6 +2972,10 @@
                 "highway/services": {
                     "name": "Área de serviço",
                     "terms": "Service Area, Posto de Serviço"
+                },
+                "highway/speed_camera": {
+                    "name": "Radar de Controlo de Velocidade",
+                    "terms": "radar, controlo de velocidade"
                 },
                 "highway/steps": {
                     "name": "Escadas",
@@ -3054,6 +3057,10 @@
                     "name": "Ruínas",
                     "terms": "Ruins, Abandonado"
                 },
+                "historic/tomb": {
+                    "name": "Túmulo",
+                    "terms": "túmulo, tumba"
+                },
                 "historic/wayside_cross": {
                     "name": "Cruzeiro",
                     "terms": " Cruz ao Ar Livre, Cruz"
@@ -3120,6 +3127,10 @@
                 "landuse/grass": {
                     "name": "Relva",
                     "terms": "Relva, Grama"
+                },
+                "landuse/harbour": {
+                    "name": "Porto Marítimo",
+                    "terms": "porto, abra, refúgio, abrigo, porto seguro, porto-seguro, porto abrigado, ancoradouro"
                 },
                 "landuse/industrial": {
                     "name": "Zona industrial",
@@ -3192,6 +3203,10 @@
                 "landuse/quarry": {
                     "name": "Pedreira (mina a céu aberto)",
                     "terms": "Canteira, Quarry"
+                },
+                "landuse/railway": {
+                    "name": "Área Ferroviária",
+                    "terms": "área ferroviária, zona ferroviária"
                 },
                 "landuse/recreation_ground": {
                     "name": "Zona de recreação",
@@ -3309,6 +3324,10 @@
                     "name": "Campo de boccia",
                     "terms": "Bowling Green"
                 },
+                "leisure/pitch/cricket": {
+                    "name": "Campo de Críquete",
+                    "terms": "campo de críquete, campo de cricket, campo de jogos de críquete, campo de jogos de cricket"
+                },
                 "leisure/pitch/rugby_league": {
                     "name": "Campo de rugby de 13",
                     "terms": "Rugby League Field"
@@ -3325,6 +3344,10 @@
                     "name": "Campo de futebol",
                     "terms": "Futebol, Soccer Field, Estádio, campo, relvado"
                 },
+                "leisure/pitch/table_tennis": {
+                    "name": "Mesa de Pingue-Pongue",
+                    "terms": "pingue-pongue, pingue pongue, ténis de mesa"
+                },
                 "leisure/pitch/tennis": {
                     "name": "Campo de ténis",
                     "terms": "Ténis, Quadra de Ténis, Tennis Court"
@@ -3340,10 +3363,6 @@
                 "leisure/resort": {
                     "name": "Restort",
                     "terms": "Resort, resorte, centro de férias, estação turística, estância turística ou hotel de lazer"
-                },
-                "leisure/running_track": {
-                    "name": "Pista de corrida de atletismo",
-                    "terms": "Racing Track, Pista de Atletismo, Atletismo"
                 },
                 "leisure/slipway": {
                     "name": "Rampa para barcos",
@@ -3364,10 +3383,6 @@
                 "leisure/swimming_pool": {
                     "name": "Piscina",
                     "terms": "Piscina, Swimming Pool"
-                },
-                "leisure/track": {
-                    "name": "Circuito de corrida (não motorizada)",
-                    "terms": "Racetrack (non-Motorsport), Circuito de Bicicletas"
                 },
                 "leisure/water_park": {
                     "name": "Parque Aquático",
@@ -3421,8 +3436,8 @@
                     "terms": "Faról, Lighthouse, Farolim"
                 },
                 "man_made/mast": {
-                    "name": "Torre de comunicações",
-                    "terms": "Radio Mast, Mastro de Rádio, Rádio, Televisão, Telemóveis, Antena"
+                    "name": "Poste",
+                    "terms": "mastro, poste, torre"
                 },
                 "man_made/observation": {
                     "name": "Torre de observação",
@@ -3707,8 +3722,7 @@
                     "terms": "City, Cidade, Capital, Distrito"
                 },
                 "place/farm": {
-                    "name": "Quinta",
-                    "terms": "Farm, Fazenda, Pasto"
+                    "name": "Quinta"
                 },
                 "place/hamlet": {
                     "name": "Aldeia",
@@ -3733,10 +3747,6 @@
                 "place/square": {
                     "name": "Praça",
                     "terms": "Square"
-                },
-                "place/suburb": {
-                    "name": "Subúrbio",
-                    "terms": "Borough"
                 },
                 "place/town": {
                     "name": "Cidade / Vila",
@@ -3854,6 +3864,10 @@
                 "railway/tram": {
                     "name": "Elétrico",
                     "terms": "Elétrico, Eléctrico"
+                },
+                "railway/tram_stop": {
+                    "name": "Paragem de Elétrico",
+                    "terms": "Paragem de Elétrico, Estação de Elétrico"
                 },
                 "relation": {
                     "name": "Relação",
@@ -4212,6 +4226,10 @@
                 "shop/pawnbroker": {
                     "name": "Casa de penhoras",
                     "terms": "Pawn Shop, penhores, penhoras, penhorar"
+                },
+                "shop/perfumery": {
+                    "name": "Perfumaria",
+                    "terms": "loja de perfumes, perfumes, perfume"
                 },
                 "shop/pet": {
                     "name": "Loja de animais",

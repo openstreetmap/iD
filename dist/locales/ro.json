@@ -275,20 +275,30 @@
             "title": "Ajutor"
         },
         "intro": {
+            "graph": {
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "ro"
+            },
             "navigation": {
-                "title": "Navigare",
-                "select": "Trăsăturile hărții sunt reprezentate in trei moduri: folosind puncte, linii sau suprafețe. Toate trăsăturile pot fi selectate apăsând pe ele. **Apasă pe un punct pentru al selecta.** "
+                "title": "Navigare"
             },
             "points": {
                 "title": "Puncte"
             },
             "areas": {
-                "title": "Suprafețe",
-                "search": "**Caută {name}.**"
+                "title": "Suprafețe"
             },
             "lines": {
-                "title": "Linii",
-                "road": "**Selectează drumul din listă**"
+                "title": "Linii"
             },
             "startediting": {
                 "title": "Începe editarea",
@@ -423,9 +433,6 @@
                 },
                 "source": {
                     "label": "Sursă"
-                },
-                "sport": {
-                    "label": "Sport"
                 },
                 "surface": {
                     "label": "Suprafață"

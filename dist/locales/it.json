@@ -113,6 +113,10 @@
                     "relation": "Cancellata una relazione.",
                     "multiple": "Cancellati {n} elementi."
                 },
+                "too_large": {
+                    "single": "Questo elemento non può essere cancellato perché non è del tutto visibile.",
+                    "multiple": "Questi elementi non possono essere cacnellati perché non tutti sono visibili."
+                },
                 "incomplete_relation": {
                     "single": "Questo elemento non può essere cancellato perché non è stato completamente scaricato.",
                     "multiple": "Questi elementi non possono essere cancellati perché non sono stati completamente scaricati."
@@ -155,7 +159,7 @@
                 "key": "C",
                 "annotation": "Uniti {n} elementi.",
                 "not_eligible": "Questi elementi non possono essere uniti.",
-                "not_adjacent": "Questi elementi non possono essere uniti perché non sono connessi.",
+                "not_adjacent": "Questi elementi non possono essere uniti perché i loro estremi non sono connessi.",
                 "restriction": "Questi elementi non possono essere uniti perché almeno uno è membro di una relazione \"{relation}\".",
                 "incomplete_relation": "Questi elementi non posso essere uniti perché almeno uno di loro non è stato completamente scaricato.",
                 "conflicting_tags": "Questi elementi non possono essere uniti perché alcuni dei loro tag sono in conflitto tra loro."
@@ -188,7 +192,10 @@
                 }
             },
             "reflect": {
-                "title": "rifletti",
+                "title": {
+                    "long": "Rifletti per il lungo",
+                    "short": "Rifletti per il corto"
+                },
                 "description": {
                     "long": {
                         "single": "Rifletti questo elemento lungo il suo asse maggiore.",
@@ -205,11 +212,11 @@
                 },
                 "annotation": {
                     "long": {
-                        "single": "Riflesso un elemento lungo il suo lato maggiore.",
+                        "single": "Riflesso un elemento lungo il suo asse maggiore.",
                         "multiple": "Riflessi più elementi lungo il loro asse maggiore."
                     },
                     "short": {
-                        "single": "Riflesso un elemento lungo il suo lato minore.",
+                        "single": "Riflesso un elemento lungo il suo asse minore.",
                         "multiple": "Riflessi più elementi lungo il loro asse minore."
                     }
                 },
@@ -395,7 +402,15 @@
             "edit": "Modifica elemento",
             "check": {
                 "yes": "Sì",
-                "no": "No"
+                "no": "No",
+                "reverser": "Cambia direzione"
+            },
+            "radio": {
+                "structure": {
+                    "type": "Tipo",
+                    "default": "Predefinito",
+                    "layer": "Livello"
+                }
             },
             "add": "Aggiungi",
             "none": "Nessuno",
@@ -546,7 +561,7 @@
             "help_link_url": "https://wiki.openstreetmap.org/wiki/IT:FAQ#Ho_editato_i_dati_tutto_il_giorno.2C_ma_le_mie_modifiche_non_appaiono_nel_viewer.21"
         },
         "confirm": {
-            "okay": "Okay",
+            "okay": "OK",
             "cancel": "Cancella"
         },
         "splash": {
@@ -560,6 +575,9 @@
             "lose_changes": "Hai modifiche non salvate. Cambiare il server le farà scartare. Sei sicuro?",
             "dev": "dev"
         },
+        "version": {
+            "whats_new": "Cosa c'è di nuovo in iD {version}"
+        },
         "tag_reference": {
             "description": "Descrizione",
             "on_wiki": "{tag} su wiki.osm.org",
@@ -567,17 +585,19 @@
         },
         "validations": {
             "disconnected_highway": "Percorso scollegato",
-            "disconnected_highway_tooltip": "I percorsi dovrebbero essere connessi ad altri percorsi.",
+            "disconnected_highway_tooltip": "I percorsi dovrebbero essere connessi ad altri percorsi o all'ingresso di un edificio.",
+            "old_multipolygon": "Etichette di multipoligono su percorso esterno",
+            "old_multipolygon_tooltip": "Questo modo di mappare un multipoligono è sconsigliato. Assegnare le etichette alla relazione multipoligono piuttosto che al percorso esterno.",
             "untagged_point": "Punto senta tag",
+            "untagged_point_tooltip": "Seleziona un tipo di elemento che descriva cos'è questo punto.",
             "untagged_line": "Linea senza tag",
+            "untagged_line_tooltip": "Seleziona un tipo di elemento che descriva cos'è questa linea.",
             "untagged_area": "Area senza tag",
+            "untagged_area_tooltip": "Seleziona un tipo di elemento che descriva cos'è quest'area.",
             "untagged_relation": "Relazione senza tag",
+            "untagged_relation_tooltip": "Seleziona un tipo di elemento che descriva di che relazione si tratta.",
             "many_deletions": "Stai per cancellare {n} elementi. Sei sicuro di volerlo fare? Questo li cancellerà dalla mappa che chiunque altro vede su openstreetmap.org.",
             "tag_suggests_area": "Il tag {tag} fa pensare che la linea sia un'area, ma non rappresenta un'area",
-            "untagged_point_tooltip": "Seleziona un tipo di elemento che descriva cos'è questo punto.",
-            "untagged_line_tooltip": "Seleziona un tipo di elemento che descriva cos'è questa linea.",
-            "untagged_area_tooltip": "Seleziona un tipo di elemento che descriva cos'è quest'area.",
-            "untagged_relation_tooltip": "Seleziona un tipo di elemento che descriva di che relazione si tratta.",
             "deprecated_tags": "Tag deprecati: {tags}"
         },
         "zoom": {
@@ -617,82 +637,248 @@
         },
         "intro": {
             "done": "fatto",
+            "ok": "OK",
             "graph": {
-                "city_hall": "Municipio di Fontechiara",
-                "fire_department": "Vigili del Fuoco di Fontechiara",
-                "memory_isle_park": "Parco della Memoria",
-                "riverwalk_trail": "Sentiero natura",
-                "w_michigan_ave": "Viale Timavo",
-                "e_michigan_ave": "Viale Piave",
-                "spring_st": "Via Roma",
-                "scidmore_park": "Parco Antonio Verdi",
-                "petting_zoo": "Zoo del parco Antonio Verdi",
-                "n_andrews_st": "Via Gasometro Nord",
-                "s_andrews_st": "Via Gasometro Sud",
-                "n_constantine_st": "Via Giuseppe Garibaldi",
-                "s_constantine_st": "Via Anita Garibaldi",
-                "rocky_river": "Fiume Grassella",
-                "railroad_dr": "Strada della ferrovia",
-                "conrail_rr": "Ferrovia Roma-Milano",
-                "st_joseph_river": "Fiume Ternaro",
-                "n_main_st": "Via Monte Bianco",
-                "s_main_st": "Via Monte Rosa",
-                "water_st": "Via dell'acqua",
-                "foster_st": "Via Corta",
-                "portage_river": "Fiume Medonte",
-                "flower_st": "Via del fiore",
-                "elm_st": "Via del fosso",
-                "walnut_st": "Via della noce",
-                "morris_ave": "Viale Etna",
-                "east_st": "Via Ferdinando Magellano",
-                "portage_ave": "Viale Maiella"
+                "block_number": "<value for addr:block_number>",
+                "city": "Fontechiara",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "postcode": "49093",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "it",
+                "name": {
+                    "1st-avenue": "Viale Dante Alighieri",
+                    "2nd-avenue": "Viale Giovanni Boccaccio",
+                    "4th-avenue": "Viale Cecco Angiolieri",
+                    "5th-avenue": "Viale Marsilio da Padova",
+                    "6th-avenue": "Viale Eugenio Montale",
+                    "6th-street": "Viale Salvatore Quasimodo",
+                    "7th-avenue": "Viale Giuseppe Ungaretti",
+                    "8th-avenue": "Viale Ugo Foscolo",
+                    "9th-avenue": "Viale Giacomo Leopardi",
+                    "10th-avenue": "Viale Torquato Tasso",
+                    "11th-avenue": "Viale Vittorio Alfieri",
+                    "12th-avenue": "Viale Edmondo De Amicis",
+                    "access-point-employment": "Centro per l'impiego",
+                    "adams-street": "Via Sandro Pertini",
+                    "andrews-elementary-school": "Scuola Elementare Luigi Einaudi",
+                    "andrews-street": "Via Luigi Einaudi",
+                    "armitage-street": "Via Umberto Nobile",
+                    "barrows-school": "Scuola Giuseppe Mazzini",
+                    "battle-street": "Via martiri di Soweto",
+                    "bennett-street": "Via Marco Polo",
+                    "bowman-park": "Parco dei Cigni",
+                    "collins-drive": "Viale Galileo Galilei",
+                    "conrail-railroad": "Ferrovia Roma-Milano",
+                    "conservation-park": "Parco della stazione",
+                    "constantine-street": "Via Giuseppe Garibaldi",
+                    "cushman-street": "Via Vasco da Gama",
+                    "dollar-tree": "Tutto a un euro",
+                    "douglas-avenue": "Viale Alcide De Gasperi",
+                    "east-street": "Via Ferdinando Magellano",
+                    "elm-street": "Via del fosso",
+                    "flower-street": "Via del fiore",
+                    "foster-street": "Via Corta",
+                    "french-street": "Via Leonardo da Vinci",
+                    "garden-street": "Via dei giardini",
+                    "gem-pawnbroker": "Compro oro",
+                    "golden-finch-framing": "Galleria d'arte",
+                    "grant-avenue": "Viale Giuseppe Saragat",
+                    "hoffman-pond": "Laghetto delle papere",
+                    "hoffman-street": "Via Cesare Pavese",
+                    "hook-avenue": "Viale Antonio Gramsci",
+                    "jefferson-street": "Via Giovanni Leone",
+                    "kelsey-street": "Via Giorgio Caproni",
+                    "lafayette-park": "Parco Nelson Mandela",
+                    "las-coffee-cafe": "Bar Lepanto",
+                    "lincoln-avenue": "Viale Giovanni Gronchi",
+                    "lowrys-books": "Libreria Feltrinelli",
+                    "lynns-garage": "Officina",
+                    "main-street-barbell": "Palestra",
+                    "main-street-cafe": "Bar della stazione",
+                    "main-street-fitness": "Palestra Virgin",
+                    "main-street": "Via Monte Bianco",
+                    "maple-street": "Via dei meli",
+                    "marina-park": "Parco del porto",
+                    "market-street": "Via del mercato",
+                    "memory-isle-park": "Parco dell'Isola della Memoria",
+                    "memory-isle": "Isola della Memoria",
+                    "michigan-avenue": "Viale Piave",
+                    "middle-street": "Via Pier Paolo Pasolini",
+                    "millard-street": "Via Anita Garibaldi",
+                    "moore-street": "Via dei glicini",
+                    "morris-avenue": "Viale Etna",
+                    "mural-mall": "Centro commerciale Cinecittadue",
+                    "paisanos-bar-and-grill": "Rosticceria",
+                    "paisley-emporium": "Emporio Rossi",
+                    "paparazzi-tattoo": "Lauro Tattoo",
+                    "pealer-street": "Via Francesco Petrarca",
+                    "pine-street": "Via dei pini",
+                    "pizza-hut": "Pizzeria Vesuvio",
+                    "portage-avenue": "Viale Maiella",
+                    "portage-river": "Fiume Medonte",
+                    "preferred-insurance-services": "Assicurazioni",
+                    "railroad-drive": "Strada della ferrovia",
+                    "river-city-appliance": "Trony",
+                    "river-drive": "Vicolo del fiume",
+                    "river-road": "Strada del fiume",
+                    "river-street": "Via del fiume",
+                    "riverside-cemetery": "Cimitero comunale",
+                    "riverwalk-trail": "Sentiero natura",
+                    "riviera-theatre": "Teatro Riviera",
+                    "rocky-river": "Fiume Grassella",
+                    "saint-joseph-river": "Fiume Ternaro",
+                    "scidmore-park-petting-zoo": "Zoo del parco Antonio Verdi",
+                    "scidmore-park": "Parco Antonio Verdi",
+                    "scouter-park": "Parco Enrico Berlinguer",
+                    "sherwin-williams": "Negozio di vernici",
+                    "south-street": "Via del meridione",
+                    "southern-michigan-bank": "Banca di Roma",
+                    "spring-street": "Via Roma",
+                    "sturgeon-river-road": "Via delle margherite",
+                    "three-rivers-city-hall": "Municipio di Fontechiara",
+                    "three-rivers-elementary-school": "Scuola Elementare di Fontechiara",
+                    "three-rivers-fire-department": "Vigili del Fuoco di Fontechiara",
+                    "three-rivers-high-school": "Scuola Superiore di Fontechiara",
+                    "three-rivers-middle-school": "Scuola Media di Fontechiara",
+                    "three-rivers-municipal-airport": "Aeroporto Municipale di Fontechiara",
+                    "three-rivers-post-office": "Ufficio Postale di Fontechiara",
+                    "three-rivers-public-library": "Biblioteca di Fontechiara",
+                    "three-rivers": "Fontechiara",
+                    "unique-jewelry": "Gioielleria Verdi",
+                    "walnut-street": "Via della noce",
+                    "washington-street": "Via Francesco Cossiga",
+                    "water-street": "Via dell'acqua",
+                    "west-street": "Via Cristoforo Colombo",
+                    "wheeler-street": "Via Amerigo Vespucci",
+                    "william-towing": "Carro Attrezzi ACI",
+                    "willow-drive": "Viale Gianni Rodari",
+                    "wood-street": "Via Giuseppe Ungaretti",
+                    "world-fare": "Fiera di Milano"
+                }
+            },
+            "welcome": {
+                "title": "Benvenuto",
+                "welcome": "Benevento! Questa guida ti insegnerà le nozioni base per modificare OpenStreetMap.",
+                "practice": "Tutti i dati contenuti in questa guida sono dati d'esempio a scopo didattico, qualsiasi modifica che farai non sarà salvata.",
+                "words": "Questa guida introdurrà termini e concetti nuovi. Queste novità saranno indicate in *corsivo*.",
+                "mouse": "Puoi usare ogni dispositivo per modificare la mappa, ma questa guida presuppone che tu stia utilizzando un mouse con un pulsante sinistro ed uno destro. **Se vuoi collegare un mouse fallo ora e quindi clicca OK**.",
+                "leftclick": "Quando questo tutorial ti chiede di fare un click si intende con il pulsante sinistro. Su un trackpad può essere un click singolo o un tap con un solo dito. **Clicca col pulsante sinistro {num} volte.**",
+                "rightclick": "Certe volte viene chiesto di fare un click col pulsante destro.  Su un trackpad potrebbe significare control + click o un tap con due dita. La tua tastiera potrebbe avere un tasto 'menu' che funziona come un click destro. **Clicca col pulsante destro {num} volte.**",
+                "chapters": "Ci siamo quasi! Puoi usare i pulsanti in basso per saltare i capitoli in ogni momento o per ricominciare un capitolo se ti trovi in difficoltà. Iniziamo! **Clicca '{next}' per continuare.**"
             },
             "navigation": {
                 "title": "Navigazione",
-                "drag": "L'area della mappa principale mostra i dati OpenStreetMap su di uno sfondo. Puoi navigare trascinanndo e scorrendo, proprio come in ogni mappa web. **Trascina la mappa!**",
-                "select": "Gli elementi della mappa sono rappresentai in tre modi: usando punti, linee o aree. Tutti gli elementi possono essere selezionati cliccando su di essi. **Clicca sul punto per selezionarlo.**",
-                "pane": "Quando un elemento è selezionato viene mostrato l'editor dell'elemento. L'intestazione mostra il tipo di elemento e il pannello principale mostra gli attributi dell'elemento, come il nome e l'indirizzo. **Chiudi l'editor dell'elemento con il pulsante {button} in alto a destra.**",
-                "search": "Nella schermata attuale si possono anche cercare elementi della mappa o del mondo intero. **Cerca '{name}'**",
-                "choose": "**Scegli {name} dalla lista per selezionarla.**",
-                "chosen": "Bene! Ora {name} è selezionata. **Chiudi l'editor dell'elemento premendo il pulsante {button}.**"
+                "drag": "L'area principale mostra i dati di OpenStreetMap sopra uno sfondo.{br}Puoi trascinare la mappa premendo il tasto sinistro del mouse e tenendolo premuto mentre sposti il mouse. Puoi anche usare le frecce della tastiera. **Scorri la mappa!**",
+                "zoom": "Puoi aumentare o diminuire l'ingrandimento con la rotellina centrale del mouse o del trackpad, oppure cliccando i pulsanti {plus}/{minus}. **Ingrandisci la mappa!**",
+                "features": "Viene usata la parola *elemento* per descrivere le cose che appaiono sulla mappa. Qualsiasi cosa presente nel mondo reale può essere mappa come elemento su OpenStreetMap.",
+                "points_lines_areas": "Gli elementi della mappa vengono rappresentati con *punti, linee o aree.*",
+                "nodes_ways": "In OpenStreetMap i punti sono chiamati anche *nodi* e le linee e le aree sono chiamate anche *percorsi*.",
+                "click_townhall": "Tutti gli elementi sulla mappa possono essere selezionati cliccando su di essi. **Clicca sul punto per selezionarlo.**",
+                "selected_townhall": "Bene! Ora il punto è selezionato. Gli elementi selezionati vengono mostrati con un contorno lampeggiante.",
+                "editor_townhall": "Quando un elemento è selezionato, l'*editor dell'elemento* viene mostrato a fianco della mappa.",
+                "preset_townhall": "La parte superiore dell'editor dell'elemento mostra il tipo di elemento. Questo punto è un {preset}.",
+                "fields_townhall": "La parte sottostante dell'editor dell'elemento contiene i *campi* che mostrano gli attributi dell'elemento, come il suo nome o il suo indirizzo.",
+                "close_townhall": "**Chiudi l'editor dell'elemento premendo il tasto Escape o il pulsante {button} nell'angolo in alto.**",
+                "search_street": "Si possono cercare elementi nella vista corrente, o in tutto il mondo.  **Cerca '{name}'.**",
+                "choose_street": "**Scegli {name} dalla lista per selezionarla.**",
+                "selected_street": "Bene! Ora {name} è selezionata.",
+                "editor_street": "I campi visualizzati per una strada sono differenti dai campi mostrati per il municipio.{br}Per questa strada selezionata, l'editor dell'elemento mostra campi come '{field1}' e '{field2}'. **Chiudi l'editor dell'elemento premendo il tasto Escape o il pulsante {button}.**",
+                "play": "Prova a muovere la mappa e a cliccare su qualche elemento per vedere che tipo di informazioni possono essere aggiunte su OpenStreetMap. **Quando sei pronto per passare al prossimo capitolo, clicca '{next}'.**"
             },
             "points": {
                 "title": "Punti",
-                "add": "I punti possono essere usati per rappresentare elementi come negozi, ristoranti e monumenti. Indicano un luogo specifico e descrivono cos'è. **Clicca il pulsante Punto {button} per aggiungere un nuovo punto.**",
-                "place": "Il punto può essere piazzato cliccando sulla mappa. **Clicca la mappa per piazzare il nuovo punto sull'edificio.**",
-                "search": "Ci sono diversi elementi che possono essere rappresentati da punti. Il punto che hai appena aggiunto è un Caffè. **Cerca '{name}'**",
-                "choose": "**Scegli Caffè dalla lista.**",
-                "describe": "Ora il punto è marcato come Caffè. Usando l'editor dell'elemento possiamo aggiungere più informazioni sull'elemento stesso. **Aggiungi un nome**",
-                "close": "L'editor dell'elemento mantiene automaticamente in memoria tutti i cambiamenti effettuati. Quando si modifica un elemento il pulsante di chiusura diventa un segno di spunta. **Clicca il pulsante {button} per chiudere l'editor dell'elemento**",
-                "reselect": "Spesso esistono già dei punti, ma contengono errori o sono incompleti. I punti esistenti si possono modificare. **Clicca per selezionare il punto che hai appena creato.**",
-                "fixname": "**Cambia il nome quindi clicca il pulsante {button} per chiudere l'editor dell'elemento.**",
-                "reselect_delete": "Tutti gli elementi sulla mappa possono essere cancellati. **Clicca per selezionare il punto che hai creato.**",
-                "delete": "Il menu attorno al punto contiene le operazioni che possono essere fatte su di esso, inclusa la cancellazione. **Clicca sul pulsante {button} per cancellare il punto.**"
+                "add_point": "I *punti* possono essere usati per rappresentare elementi come negozi, ristoranti e monumenti.{br}Indicano un luogo specifico e descrivono cosa vi si trova. **Clicca il {button} Punto per aggiungere un nuovo punto.**",
+                "place_point": "Per mettere il nuovo punto sulla mappa, posiziona il tuo cursore del mouse dove il punto dovrebbe andare, quindi clicca con il bottone sinistro del mouse o premi la barra spaziatrice. **Muovi il puntatore del mouse sopra questo edificio, quindi clicca con il bottone sinistro o premi la barra spaziatrice.**",
+                "search_cafe": "Ci sono molti elementi che possono essere rappresentati da un punto. Il punto che hai appena creato è un Bar. **Cerca '{preset}'.**",
+                "choose_cafe": "**Scegli {preset} dalla lista.**",
+                "feature_editor": "Ora il punto è marcato come Caffè. Usando l'editor dell'elemento possiamo aggiungere più informazioni sull'elemento stesso.",
+                "add_name": "In OpenStreetMap, tutti i campi sono opzionali, ed è ammesso lasciare un campo vuoto se non si è sicuri.{br}Facciamo finta che tu conosca questo bar, e che sappia come si chiami. **Aggiungi il nome del bar**",
+                "add_close": "L'editor mantiene automaticamente in memoria tutte le modifiche effettuate. **Quando hai finito di aggiungere il nome, premi Escape, Invio, oppure clicca il pulsante {button} per chiudere l'editor.**",
+                "reselect": "Sovente i punti esistono già, ma hanno errori o sono incompleti. Noi possiamo modificare i punti esistenti. **Clicca per selezionare il bar che hai appena creato.**",
+                "update": "Aggiungiamo qualche dettaglio al bar. Puoi cambiargli nome, aggiungere il tipo di cucina, o aggiungere l'indirizzo. **Cambia le informazioni associate al bar.**",
+                "update_close": "Quando hai finito di modificare le informazioni associate al bar, premi Escape, Invio, oppure clicca il pulsante {button} per chiudere l'editor.",
+                "rightclick": "Puoi cliccare con il pulsante destro su qualsiasi elemento per visualizzare il *menù di modifica*, che mostra la lista di tipi di modifiche che si possono effettuare. **Clicca con il pulsante destro per selezionare il punto che hai creato e mostrare il menù di modifica.**",
+                "delete": "Si possono cancellare elementi che non esistono nella realtà.{br}La cancellazione di un elemento da OpenStreetMap lo rimuove dalla mappa che tutti vedono, perciò devi essere sicuro che un elemento non esista veramente prima di cancellarlo. **Clicca sul pulsante {button} per eliminare il punto.**",
+                "undo": "Puoi sempre annullare le modifiche prima di salvarle in OpenStreetMap. **Clicca sul pulsante  {button} per annullare la cancellazione e ripristinare il punto.**",
+                "play": "Ora che sai come si creano e si modificano i punti, prova a esercitarti creandone altri! **Quando sei pronto per proseguire al prossimo capitolo, clicca '{next}'.**"
             },
             "areas": {
                 "title": "Aree",
-                "add": "Le aree sono utilizzate per indicare i contorni degli elementi come ad esempio i laghi, gli edifici e le aree residenziali. Possono anche essere utilizzate per rappresentare in modo più dettagliato elementi che normalmente vengono mappati come punti. **Clicca il pulsante Area {button} per aggiungere una nuova area.**",
-                "corner": "Le aree devono essere disegnate posizionando i punti che segnano il confine dell'area. **Clicca per posizionare il punto di partenza su di uno degli angoli del parchetto.**",
-                "place": "Disegna l'area posizionando più punti. Terminare l'area cliccando sul punto di partenza. **Disegnare un'area per il parchetto.**",
-                "search": "**Cerca per '{name}'.**",
-                "choose": "**Scegli Parco giochi dalla lista.**",
-                "describe": "**Aggiungi un nome e clicca il pulsante {button} per chiudere l'editor dell'elemento**"
+                "add_playground": "*Le aree* sono utilizzate per indicare i contorni degli elementi come ad esempio i laghi, gli edifici e le aree residenziali.{br}Possono anche essere utilizzate per rappresentare in modo più dettagliato elementi che normalmente vengono mappati come punti. **Clicca il pulsante Area {button} per aggiungere una nuova area.**",
+                "start_playground": "Aggiungiamo questo giardino alla mappa disegnandone l'area. Le aree sono disegnate posizionando dei *punti* lungo il bordo esterno dell'elemento. **Clicca o premi la barra spaziatrice per posizionare il punto iniziale su uno dei vertici del giardino.**",
+                "continue_playground": "Continua a disegnare l'area sistemando più punti lungo il bordo del giardino. Si può connettere l'area ai percorsi pedonali esistenti.{br}Suggerimento: Puoi tenere premuto il tasto Alt per impedire ai punti che stai creando di connettersi ad altri elementi. **Continua a disegnare l'area del parco giochi.**",
+                "finish_playground": "Terminate l'area premendo Invio, o cliccando nuovamente sul primo o ultimo nodo. **Conclusione del disegno dell'area del giardino.**",
+                "search_playground": "**Cerca '{preset}'.**",
+                "choose_playground": "**Scegli {preset} dalla lista.**",
+                "add_field": "Questo giardino non ha un nome ufficiale, perciò non aggiungiamo nulla nel campo Name.{br}Aggiungiamo invece qualche altra informazione relativa al giardino nel campo Description. **Apri la lista Aggiungi Campo.**",
+                "choose_field": "**Scegli {field} dalla lista.**",
+                "retry_add_field": "Non hai selezionato il campo {field}. Prova ancora.",
+                "describe_playground": "**Aggiungi una descrizione, quindi clicca il bottone {button} per chiudere l'editor dell'elemento.**",
+                "play": "Ottimo lavoro! Prova ad aggiungere qualche altra area, e osserva quali altri tipi di area si possono aggiungere in OpenStreetMap. **Quando sei pronto per proseguire con il prossimo capitolo, clicca  '{next}'.**"
             },
             "lines": {
                 "title": "Linee",
-                "add": "Le linee sono usate per rappresentare elementi come strade, ferrovie e fiumi. **Clicca il bottone Linea {button} per aggiungere una nuova linea.**",
-                "start": "**Inizia la linea cliccando sulla fine della strada.**",
-                "intersect": "Clicca per aggiungere altri nodi alla linea. Puoi trascinare la mappa mentre disegni, se necessario. Le strade, e molti altri tipi di linea, fanno parte di una rete più larga. È importante che queste linee siano connesse correttamente perché le applicazioni che creano itinerari funzionino. **Clicca su {name} per creare un'intersezione che collega le due linee.**",
-                "finish": "Le linee possono essere terminate cliccando sull'ultimo nodo una seconda volta. **Terminare il disegno della strada.**",
-                "road": "**Scegli Strada dalla lista**",
-                "residential": "Ci sono diversi tipi di strade, il più comune dei quali è Residenziale. **Scegli il tipo di strada Residenziale**",
-                "describe": "**Dai un nome alla strada e clicca sul pulsante {button} per chiudere l'editor dell'elemento.**",
-                "restart": "La strada deve intersecare {name}.",
-                "wrong_preset": "Non hai selezionato il tipo di strada Residenziale. **Clicca qua per scegliere nuovamente**"
+                "add_line": "*Le linee* sono usate per rappresentare elementi quali strade, linee ferroviarie, e fiumi. **Clicca il {button}\n pulsante Linea per aggiungere una nuova linea.**",
+                "start_line": "Ecco una strada mancante. Aggiungiamola!{br}In OpenStreetMap, le linee dovrebbero essere tracciate sulla linea di mezzeria della strada. Puoi spostare la mappa mentre disegni se necessario. **Inizia una nuova linea cliccando in cima alla strada mancante.**",
+                "intersect": "Clicca o premi spazio per aggiungere altri nodi alla linea.{br}Le strade e molti altri tipi di percorsi, fanno parte di una rete più estesa. È importante che queste linee siano connesse correttamente affinché le applicazioni di navigazione possano funzionare. **Clicca su {name} per creare una intersezione che connetta le due linee.**",
+                "retry_intersect": "La strada deve intersecare {name}. Prova ancora!",
+                "continue_line": "Continua a disegnare la nuova strada. Ricordati che puoi spostare o ingrandire la mappa a piacimento.{br}Quando avrai finito, clicca di nuovo l'ultimo nodo. **Finisci di disegnare la strada.**",
+                "choose_category_road": "**Seleziona {category} dalla lista**",
+                "choose_preset_residential": "Esistono molti tipi diversi di strade, ma questa è una residenziale. **Scegli il tipo {preset}.**",
+                "retry_preset_residential": "Non hai selezionato il tipo {preset}. **Clicca qui per scegliere di nuovo.**",
+                "name_road": "**Dai un nome a questa strada, poi premi Escape, Invio o clicca il pulsante {button} per chiudere l'editor degli elementi.**",
+                "did_name_road": "Sembra perfetto! Tra poco impareremo ad aggiornare l'aspetto di un percorso.",
+                "update_line": "Talvolta dovrai alterare l'aspetto di un percorso esistente. Qui abbiamo una strada che non sembra disegnata correttamente.",
+                "add_node": "Possiamo aggiungere qualche nodo al percorso per migliorarne la forma. Un modo per farlo è di cliccare due volte la linea nel punto in cui vuoi aggiungere un nodo. **Clicca due volte la linea per creare un nuovo nodo.**",
+                "start_drag_endpoint": "Quando un percorso è selezionato, puoi spostare un suo nodo cliccando e tenendo premuto il tasto sinistro del mouse mentre trascini. **Trascina l'estremità nel punto in cui le strade dovrebbero intersecarsi.**",
+                "finish_drag_endpoint": "Questo posto sembra andar bene. **Rilascia il tasto sinistro del mouse per terminare lo spostamento.**",
+                "start_drag_midpoint": "Dei piccoli triangoli sono presenti a metà strada tra ogni nodo del percorso. Un ulteriore modo per creare nuovi nodi è quello di trascinare uno di questi triangoli in un'altra posizione. **Trascina un triangolo intermedio per creare un nuovo nodo sul percorso della strada.**",
+                "continue_drag_midpoint": "Questa linea sembra molto meglio adesso! Continua a ritoccarla facendo doppio click o trascinando i punti intermedi a che la curva non corrisponderà alla forma della strada. **Quando sei soddisfatto di come è il percorso, clicca OK.**",
+                "delete_lines": "Le strade che non esistono nella realtà dovrebbero essere eliminate.{br}Qui ad esempio abbiamo una {street} la cui costruzione era stata pianificata dal comune ma che poi non è più stata realizzata. Possiamo migliorare la mappa eliminando i percorsi in più.",
+                "rightclick_intersection": "L'ultima strada esistente è {street1}, perciò *dividiamo* {street2} all'altezza di questa intersezione e rimuoviamo tutto quello che è al di sopra. **Clicca con il tasto destro del mouse il nodo di intersezione.**",
+                "split_intersection": "**Clicca il pulsante {button} per dividere {street}.**",
+                "retry_split": "Non hai cliccato il pulsante Dividi. Prova di nuovo.",
+                "did_split_multi": "Ben fatto! {street1} è ora divisa in due parti. La parte più in alto può essere rimossa. **Clicca nella parte in alto di {street2} per selezionarla.**",
+                "did_split_single": "**Clicca nella parte in alto di {street2} per selezionarla.**",
+                "multi_select": "Hai selezionato {selected}. Seleziona anche {other1}. Puoi tenere premuto il tasto Maiuscolo mentre clicchi per selezionare più di un oggetto. **Tieni premuto il tasto Maiuscolo e clicca su {other2}.**",
+                "multi_rightclick": "Bene! Entrambe le strade da eliminare sono adesso selezionate. **Clicca col tasto destro su di una delle linee per mostrare il menù di modifica.**",
+                "multi_delete": "**Clicca il pulsante {button} per eliminare le linee in più.**",
+                "retry_delete": "Non hai cliccato il pulsante Cancella. Prova di nuovo.",
+                "play": "Perfetto! Utilizza ciò che ha imparato in questo capitolo per fare delle prove su altri percorsi. **Quando sei pronto per il nuovo capitolo, clicca '{next}'.**"
+            },
+            "buildings": {
+                "title": "Edifici",
+                "add_building": "OpenStreetMap è il più grande database degli edifici del mondo.{br}Puoi aiutare a migliorare questo database tracciando gli edifici che mancano. **Clicca il pulsante Area {button} per aggiungere una nuova area.**",
+                "start_building": "Aggiungiamo questa casa alla mappa tracciando il suo perimetro.{br}Gli edifici dovrebbero essere tracciati seguendo il loro aspetto nel modo più preciso possibile. ** Clicca con il mouse o premi spazio per disegnare il nodo iniziale su un angolo dell'edificio.**",
+                "continue_building": "Continua ad aggiungere altri nodi per tracciare il perimetro dell'edificio. Ricordati che puoi ingrandire se vuoi, così da aggiungere altri dettagli.{br}Termina l'edificio premendo Invio o cliccando di nuovo sul primo o sull'ultimo nodo. **Finisci di disegnare l'edificio.**",
+                "retry_building": "Sembra che tu abbia avuto qualche problema nel piazzare i nodi negli angoli dell'edificio. Prova di nuovo!",
+                "choose_category_building": "**Scegli {category} dalla lista.**",
+                "choose_preset_house": "Esistono molti tipi differenti di edificio, ma questa è senza dubbio una casa.{br}Se non sei sicuro sul tipo, va bene anche scegliere semplicemente il tipo generico di edificio. **Scegli il tipo {preset}.**",
+                "close": "**Premi il tasto Escape o clicca il pulsante {button} per chiudere l'editor degli elementi.**",
+                "rightclick_building": "**Clicca con il tasto destro del mouse per selezionare l'edificio che hai creato e mostrare il menù di modifica.**",
+                "square_building": "La casa che hai appena aggiunto avrà un aspetto migliore se gli angoli saranno retti. **Clicca il pulsante {button} per ortogonalizzare l'aspetto dell'edificio.**",
+                "retry_square": "Non hai cliccato il bottone Ortogonalizza. Prova di nuovo.",
+                "done_square": "Hai visto come gli angoli dell'edificio si sono spostati al loro posto? Impariamo un altro trucchetto.",
+                "add_tank": "Adesso disegneremo questa cisterna di stoccaggio rotonda. **Clicca il pulsante Area {button} per aggiungere una nuova area.**",
+                "start_tank": "Non ti preoccupare, non sarà necessario disegnare un cerchio perfetto, Basta che disegni un'area dentro la cisterna che ne tocchi il bordo. **Clicca con il mouse o premi spazio per aggiungere un nodo sul bordo della cisterna.**",
+                "continue_tank": "Aggiungi qualche altro nodo sul bordo. Il cerchio verrà creato attorno ai nodi disegnati.{br}Finisci l'area premendo Invio, o cliccando di nuovo sul primo o sull'ultimo nodo. **Finisci di tracciare la cisterna.**",
+                "search_tank": "**Cerca il termine '{preset}'.**",
+                "choose_tank": "**Scegli {preset} dalla lista.**",
+                "rightclick_tank": "**Clicca con il tasto destro del mouse la cisterna creata per mostrare il menù di modifica.**",
+                "circle_tank": "**Clicca il pulsante {button} per rendere la cisterna rotonda.**",
+                "retry_circle": "Non ha cliccato il pulsante Rendi rotondo. Prova di nuovo.",
+                "play": "Bel lavoro! Continua a fare pratica tracciando altri edifici, oltre a provare qualche altro comando del menù di modifica. **Quando sei pronto per il nuovo capitolo, clicca '{next}'.**"
             },
             "startediting": {
                 "title": "Inizia a Modificare",
-                "help": "Puoi ripetere questa guida o vedere la documentazione cliccando sul pulsante Aiuto {button}.",
+                "help": "Adesso sei pronto per effettuare modifiche su OpenStreetMap!{br}Puoi rifare questo tutorial quando vuoi o leggere la documentazione cliccando sul pulsante Aiuto {button}.",
                 "save": "Non dimenticare di salvare periodicamente le tue modifiche!",
                 "start": "Inizia a mappare!"
             }
@@ -796,9 +982,11 @@
                         "block_number": "Blocco",
                         "block_number!jp": "Num. blocco",
                         "city": "Città",
+                        "city!vn": "Città/Cittadina",
                         "conscriptionnumber": "123",
                         "country": "Nazione",
                         "county": "Contea (in Italia NON usare)",
+                        "county!jp": "Distretto",
                         "district": "Distretto",
                         "floor": "Piano",
                         "hamlet": "Borgo",
@@ -809,6 +997,7 @@
                         "place": "Luogo",
                         "postcode": "Codice postale",
                         "province": "Provincia",
+                        "province!jp": "Prefettura",
                         "quarter": "Circoscrizione",
                         "state": "Stato/Regione",
                         "street": "Strada",
@@ -862,6 +1051,15 @@
                 "amenity": {
                     "label": "Tipo"
                 },
+                "animal_boarding": {
+                    "label": "Animali"
+                },
+                "animal_breeding": {
+                    "label": "Animali"
+                },
+                "animal_shelter": {
+                    "label": "Animali"
+                },
                 "area/highway": {
                     "label": "Tipo"
                 },
@@ -879,6 +1077,20 @@
                 },
                 "barrier": {
                     "label": "Tipo"
+                },
+                "bath/open_air": {
+                    "label": "all'aperto"
+                },
+                "bath/sand_bath": {
+                    "label": "Sabbiatura"
+                },
+                "bath/type": {
+                    "label": "Specialità",
+                    "options": {
+                        "foot_bath": "pediluvio",
+                        "hot_spring": "Sorgente termale",
+                        "onsen": "Onsen giapponese"
+                    }
                 },
                 "beauty": {
                     "label": "Tipologia di negozio"
@@ -969,8 +1181,14 @@
                         "clockwise": "Senso orario"
                     }
                 },
+                "club": {
+                    "label": "Tipo"
+                },
                 "collection_times": {
                     "label": "Orari di raccolta"
+                },
+                "communication_multi": {
+                    "label": "Tipi di comunicazione"
                 },
                 "construction": {
                     "label": "Tipo"
@@ -992,13 +1210,13 @@
                     "label": "Tipo"
                 },
                 "crop": {
-                    "label": "Coltura"
+                    "label": "Colture"
                 },
                 "crossing": {
                     "label": "Tipo"
                 },
                 "cuisine": {
-                    "label": "Cucina"
+                    "label": "Cucine"
                 },
                 "currency_multi": {
                     "label": "Valute"
@@ -1159,6 +1377,9 @@
                     "label": "Codice",
                     "placeholder": "Numero buca (1-18)"
                 },
+                "grape_variety": {
+                    "label": "Varietà"
+                },
                 "handicap": {
                     "label": "Handicap",
                     "placeholder": "1-18"
@@ -1174,6 +1395,9 @@
                 },
                 "historic": {
                     "label": "Tipo"
+                },
+                "historic/civilization": {
+                    "label": "Civiltà storica"
                 },
                 "hoops": {
                     "label": "Canestri",
@@ -1200,6 +1424,9 @@
                 },
                 "information": {
                     "label": "Tipo"
+                },
+                "inscription": {
+                    "label": "Iscrizione"
                 },
                 "internet_access": {
                     "label": "Accesso ad Internet",
@@ -1508,7 +1735,7 @@
                     "label": "Produzione"
                 },
                 "product": {
-                    "label": "Prodotto"
+                    "label": "Prodotti"
                 },
                 "railway": {
                     "label": "Tipo"
@@ -1580,6 +1807,9 @@
                 "service/bicycle": {
                     "label": "Servizi"
                 },
+                "service/vehicle": {
+                    "label": "Servizi"
+                },
                 "service_rail": {
                     "label": "Tipo di servizio",
                     "options": {
@@ -1588,6 +1818,9 @@
                         "spur": "Accesso",
                         "yard": "Smistamento"
                     }
+                },
+                "service_times": {
+                    "label": "Orari di servizio"
                 },
                 "shelter": {
                     "label": "Riparo"
@@ -1642,11 +1875,17 @@
                 "sport_ice": {
                     "label": "Sport"
                 },
-                "sport_racing": {
+                "sport_racing_motor": {
+                    "label": "Sport"
+                },
+                "sport_racing_nonmotor": {
                     "label": "Sport"
                 },
                 "stars": {
                     "label": "Stelle"
+                },
+                "start_date": {
+                    "label": "Data d'inizio"
                 },
                 "step_count": {
                     "label": "Numero di gradini"
@@ -1721,6 +1960,9 @@
                 },
                 "toll": {
                     "label": "Pedaggio"
+                },
+                "tomb": {
+                    "label": "Tipo di tomba"
                 },
                 "tourism": {
                     "label": "Tipo"
@@ -1905,6 +2147,18 @@
                 "amenity": {
                     "name": "Servizi"
                 },
+                "amenity/animal_boarding": {
+                    "name": "Pensione per animali",
+                    "terms": "pet,resort,hotel,rifugio,can*,gatt*,cavall*,cucciol*,rettil*"
+                },
+                "amenity/animal_breeding": {
+                    "name": "Allevamento",
+                    "terms": "tor*,gatt*,vivaio,can*,mucc*,cavall*,cucciol*,rettil*,allevatore"
+                },
+                "amenity/animal_shelter": {
+                    "name": "Rifugio per animali",
+                    "terms": "adozion*,gatt*,can*,cucciol*,rettil*,ricovero,riparo"
+                },
                 "amenity/arts_centre": {
                     "name": "Centro Culturale",
                     "terms": "circolo,cultura,centro,artistico,arte,danza,pittura,scultura,museo,centro sociale,auditorium,teatro,cinema"
@@ -2036,6 +2290,10 @@
                     "name": "Fontanella",
                     "terms": "fontana,fontanella,acqua potabile,nasone"
                 },
+                "amenity/driving_school": {
+                    "name": "Scuola guida",
+                    "terms": "autoscuola,auto*,macchina,guida,scuola"
+                },
                 "amenity/embassy": {
                     "name": "Ambasciata",
                     "terms": "Ambasciata"
@@ -2051,6 +2309,9 @@
                 "amenity/fire_station": {
                     "name": "Caserma dei pompieri",
                     "terms": "Stazione dei Vigili del fuoco"
+                },
+                "amenity/food_court": {
+                    "name": "Zona ristorazione"
                 },
                 "amenity/fountain": {
                     "name": "Fontana",
@@ -2119,6 +2380,10 @@
                     "name": "Stallo",
                     "terms": "posto auto"
                 },
+                "amenity/pavilion": {
+                    "name": "Tendone",
+                    "terms": "padiglione,tend*"
+                },
                 "amenity/pharmacy": {
                     "name": "Farmacia",
                     "terms": "Farmacia"
@@ -2166,6 +2431,9 @@
                 "amenity/pub": {
                     "name": "Pub",
                     "terms": "pub,birreria,locale"
+                },
+                "amenity/public_bath": {
+                    "name": "Bagni Pubblici"
                 },
                 "amenity/public_bookcase": {
                     "name": "Libreria pubblica",
@@ -2270,8 +2538,7 @@
                     "terms": "distributore automatico,macchinetta,cacca,cane"
                 },
                 "amenity/vending_machine/news_papers": {
-                    "name": "Distributore automatico di giornali",
-                    "terms": "distributore automatico,macchinetta,gioranli,riviste,quotidiani"
+                    "name": "Distributore automatico di giornali"
                 },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
                     "name": "Distributore postale automatico",
@@ -2288,10 +2555,6 @@
                 "amenity/vending_machine/sweets": {
                     "name": "Distributore automatico di snack",
                     "terms": "distributore automatico,macchinetta,snack,cibo"
-                },
-                "amenity/vending_machine/vending_machine": {
-                    "name": "Distributore automatico",
-                    "terms": "distributore automatico,macchinetta"
                 },
                 "amenity/veterinary": {
                     "name": "Veterinario",
@@ -2312,6 +2575,10 @@
                 "amenity/water_point": {
                     "name": "Acqua potabile per camper",
                     "terms": "colonnina,acqua,camper,caravan"
+                },
+                "amenity/watering_place": {
+                    "name": "Abbeveratoio",
+                    "terms": "acqua,fontan*,abbever*,animal*"
                 },
                 "area": {
                     "name": "Area",
@@ -2540,6 +2807,10 @@
                 "camp_site/camp_pitch": {
                     "name": "Piazzola",
                     "terms": "Piazzola,lotto"
+                },
+                "club": {
+                    "name": "Club",
+                    "terms": "social*,centr*"
                 },
                 "craft": {
                     "name": "Mestiere",
@@ -2899,8 +3170,8 @@
                     "terms": "Svincolo primario"
                 },
                 "highway/raceway": {
-                    "name": "Circuito",
-                    "terms": "pista,autodromo,pista automobilistica,pista motoristica"
+                    "name": "Circuito (Motoristico)",
+                    "terms": "pista,autodromo,pista automobilistica,pista motoristica,auto*,moto*"
                 },
                 "highway/residential": {
                     "name": "Residenziale",
@@ -2949,6 +3220,10 @@
                 "highway/services": {
                     "name": "Area di servizio",
                     "terms": "servizio"
+                },
+                "highway/speed_camera": {
+                    "name": "Autovelox",
+                    "terms": "macchina,fotografica,fotocamera,rilevamento,velocità,stradale"
                 },
                 "highway/steps": {
                     "name": "Scale",
@@ -3030,6 +3305,10 @@
                     "name": "Rovine",
                     "terms": "Rovine"
                 },
+                "historic/tomb": {
+                    "name": "Tomba",
+                    "terms": "sepolcro,sepoltura,tumulo"
+                },
                 "historic/wayside_cross": {
                     "name": "Croce storica",
                     "terms": "Crocefisso"
@@ -3096,6 +3375,10 @@
                 "landuse/grass": {
                     "name": "Erba",
                     "terms": "Erba"
+                },
+                "landuse/harbour": {
+                    "name": "Porto",
+                    "terms": "porto,insenatura,riparo,rifugio,marittimo,fluviale"
                 },
                 "landuse/industrial": {
                     "name": "Area industriale",
@@ -3168,6 +3451,10 @@
                 "landuse/quarry": {
                     "name": "Cava",
                     "terms": "Cava"
+                },
+                "landuse/railway": {
+                    "name": "Corridoio ferroviario",
+                    "terms": "ferrovia,tracciato"
                 },
                 "landuse/recreation_ground": {
                     "name": "Campo da gioco",
@@ -3281,9 +3568,20 @@
                     "name": "Campo da basket",
                     "terms": "Campo da pallacanestro"
                 },
+                "leisure/pitch/beachvolleyball": {
+                    "name": "Campo di beach volley"
+                },
                 "leisure/pitch/bowls": {
                     "name": "Campo da bocce",
                     "terms": "Campo da bocce"
+                },
+                "leisure/pitch/cricket": {
+                    "name": "Campo da cricket",
+                    "terms": "cricket,campo,sportivo"
+                },
+                "leisure/pitch/equestrian": {
+                    "name": "Maneggio",
+                    "terms": "dressage,equestre,cavall*,cavalcat*"
                 },
                 "leisure/pitch/rugby_league": {
                     "name": "Campo di rugby a 13",
@@ -3300,6 +3598,10 @@
                 "leisure/pitch/soccer": {
                     "name": "Campo di calcio",
                     "terms": "Campo da calcio"
+                },
+                "leisure/pitch/table_tennis": {
+                    "name": "Tavolo da ping pong",
+                    "terms": "tennis,tavolo,tennistavolo"
                 },
                 "leisure/pitch/tennis": {
                     "name": "Campo da tennis",
@@ -3318,7 +3620,7 @@
                     "terms": "resort"
                 },
                 "leisure/running_track": {
-                    "name": "Pista di atletica",
+                    "name": "Pista (Atletica)",
                     "terms": "atletica,tartan,pista"
                 },
                 "leisure/slipway": {
@@ -3343,7 +3645,7 @@
                 },
                 "leisure/track": {
                     "name": "Pista (sport non motoristici)",
-                    "terms": "circuito"
+                    "terms": "circuito,pista,ippodromo"
                 },
                 "leisure/water_park": {
                     "name": "Parco acquatico",
@@ -3397,8 +3699,8 @@
                     "terms": "Faro"
                 },
                 "man_made/mast": {
-                    "name": "Antenna radio",
-                    "terms": "antenna,torre,wireless,radio,telefonia,antenne"
+                    "name": "Palo",
+                    "terms": "albero,torre,comunicazione,radio,cellulari,antenna,trasmissioni,tv,televisione,telefoni"
                 },
                 "man_made/observation": {
                     "name": "Torre di osservazione",
@@ -3683,8 +3985,7 @@
                     "terms": "Città"
                 },
                 "place/farm": {
-                    "name": "Azienda agricola",
-                    "terms": "fattoria,campi,campo,agricoltura,agricolo,contadino"
+                    "name": "Azienda agricola"
                 },
                 "place/hamlet": {
                     "name": "Paese",
@@ -3706,13 +4007,16 @@
                     "name": "Vicinanze",
                     "terms": "Quartiere,Zona"
                 },
+                "place/quarter": {
+                    "name": "Sotto-distretto / Quartiere"
+                },
                 "place/square": {
                     "name": "Piazza",
                     "terms": "piazz*,spiazzo,slargo"
                 },
                 "place/suburb": {
                     "name": "Sobborgo",
-                    "terms": "sobborgo,quartiere,circoscrizione"
+                    "terms": "borgo,quartiere"
                 },
                 "place/town": {
                     "name": "Centro abitato tra 10000 e 100000 abitanti",
@@ -3830,6 +4134,10 @@
                 "railway/tram": {
                     "name": "Tram",
                     "terms": "tram,rotaia,trasporto pubblico"
+                },
+                "railway/tram_stop": {
+                    "name": "Fermata del tram",
+                    "terms": "tram,metropolitana,superficie"
                 },
                 "relation": {
                     "name": "Relazione",
@@ -3959,8 +4267,8 @@
                     "terms": "Negozio vestiti"
                 },
                 "shop/coffee": {
-                    "name": "Bar Caffetteria",
-                    "terms": "Bottega del caffè,Negozio di caffè"
+                    "name": "Negozio di caffè",
+                    "terms": "Bottega del caffè,Caffetteria"
                 },
                 "shop/computer": {
                     "name": "Negozio di informatica",
@@ -4060,6 +4368,10 @@
                 "shop/garden_centre": {
                     "name": "Vivaio",
                     "terms": "Centro per il giardinaggio"
+                },
+                "shop/gas": {
+                    "name": "Bombolaio",
+                    "terms": "gas,bombol*,gpl,metano,lpg,cng,gas naturale,propano"
                 },
                 "shop/gift": {
                     "name": "Negozio souvenir",
@@ -4188,6 +4500,10 @@
                 "shop/pawnbroker": {
                     "name": "Banco dei pegni",
                     "terms": "Banco dei pegni,Monte dei pegni"
+                },
+                "shop/perfumery": {
+                    "name": "Profumeria",
+                    "terms": "profum*"
                 },
                 "shop/pet": {
                     "name": "Negozio di animali",

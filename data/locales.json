@@ -12,6 +12,9 @@
         "ast": {
             "rtl": false
         },
+        "bg": {
+            "rtl": false
+        },
         "bg-BG": {
             "rtl": false
         },
@@ -57,11 +60,17 @@
         "fr": {
             "rtl": false
         },
+        "gan": {
+            "rtl": false
+        },
         "gl": {
             "rtl": false
         },
         "gu": {
             "rtl": false
+        },
+        "he": {
+            "rtl": true
         },
         "hi": {
             "rtl": false
@@ -73,6 +82,9 @@
             "rtl": false
         },
         "hy": {
+            "rtl": false
+        },
+        "ia": {
             "rtl": false
         },
         "id": {
@@ -87,6 +99,12 @@
         "ja": {
             "rtl": false
         },
+        "jv": {
+            "rtl": false
+        },
+        "km": {
+            "rtl": false
+        },
         "kn": {
             "rtl": false
         },
@@ -94,7 +112,7 @@
             "rtl": false
         },
         "ku": {
-            "rtl": false
+            "rtl": true
         },
         "lij": {
             "rtl": false
@@ -105,16 +123,34 @@
         "lv": {
             "rtl": false
         },
+        "mg": {
+            "rtl": false
+        },
         "mk": {
             "rtl": false
         },
         "ml": {
             "rtl": false
         },
+        "mn": {
+            "rtl": false
+        },
+        "ms": {
+            "rtl": false
+        },
+        "ne": {
+            "rtl": false
+        },
         "nl": {
             "rtl": false
         },
+        "nn": {
+            "rtl": false
+        },
         "no": {
+            "rtl": false
+        },
+        "nv": {
             "rtl": false
         },
         "pl": {
@@ -124,6 +160,9 @@
             "rtl": false
         },
         "pt-BR": {
+            "rtl": false
+        },
+        "rm": {
             "rtl": false
         },
         "ro": {
@@ -170,6 +209,9 @@
         },
         "uk": {
             "rtl": false
+        },
+        "ur": {
+            "rtl": true
         },
         "vi": {
             "rtl": false

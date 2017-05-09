@@ -138,7 +138,6 @@
                 "key": "C",
                 "annotation": "拼咗地貌 {n} 個",
                 "not_eligible": "爾啲地貌，無得併埋。",
-                "not_adjacent": "地貌無得拼，佢哋根本無聯埋。",
                 "restriction": "地貌無得拼，佢哋至少一個，屬於 {relation} 關聯。",
                 "incomplete_relation": "地貌無得拼，佢哋至少一個未傳晒落來。",
                 "conflicting_tags": "地貌無得拼，佢哋籤中內有矛盾。"
@@ -443,7 +442,6 @@
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
         "confirm": {
-            "okay": "得",
             "cancel": "唔做"
         },
         "splash": {
@@ -464,12 +462,12 @@
         },
         "validations": {
             "untagged_point": "未有籤嘅點",
-            "untagged_line": "冇籤嘅綫",
-            "untagged_area": "冇籤嘅範圍",
-            "tag_suggests_area": "{tag}籤話條綫係範圍，實情佢唔係。",
             "untagged_point_tooltip": "揀種地貌，兼且寫呢處係乜來。",
+            "untagged_line": "冇籤嘅綫",
             "untagged_line_tooltip": "揀種地貌，兼且寫呢綫係乜來。",
+            "untagged_area": "冇籤嘅範圍",
             "untagged_area_tooltip": "揀種地貌，兼且寫呢範圍係乜來。",
+            "tag_suggests_area": "{tag}籤話條綫係範圍，實情佢唔係。",
             "deprecated_tags": "廢籤：{tags}"
         },
         "zoom": {
@@ -504,81 +502,32 @@
         "intro": {
             "done": "搞掂",
             "graph": {
-                "city_hall": "三江大會堂",
-                "fire_department": "三江消防局",
-                "memory_isle_park": "念洲園",
-                "riverwalk_trail": "江徑",
-                "w_michigan_ave": "海西道",
-                "e_michigan_ave": "海東道",
-                "spring_st": "春街",
-                "scidmore_park": "野居園",
-                "petting_zoo": "野居園寵物園",
-                "n_andrews_st": "漢北街",
-                "s_andrews_st": "漢南街",
-                "n_constantine_st": "恆北街",
-                "s_constantine_st": "恆南街",
-                "rocky_river": "石江",
-                "railroad_dr": "火車道",
-                "conrail_rr": "合鐵道",
-                "st_joseph_river": "增聖道",
-                "n_main_st": "北大街",
-                "s_main_st": "南大街",
-                "water_st": "水街",
-                "foster_st": "司林街",
-                "portage_river": "負江",
-                "flower_st": "華街",
-                "elm_st": "榆街",
-                "walnut_st": "核桃街",
-                "morris_ave": "黎道",
-                "east_st": "東街",
-                "portage_ave": "負道"
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "cn"
             },
             "navigation": {
-                "title": "周圍望",
-                "drag": "大地圖度，公家街圖資料，放喺背景之上。你想周圍望，就拖住，推上落，推左右，就好似普通網上地圖咁。**拖住地圖**",
-                "select": "圖上地貌，有三種方法表示，處、綫同範圍。所有地貌，都以一撳就揀。**撳處去揀。**",
-                "pane": "一揀地貌，地貌器就出。頂頭話我哋知乜嘢地貌，主要顯示地貌屬性，如名同地址。**閂地貌器，就撳右上{button}個掣。**",
-                "search": "喺家陣畫面，或全世界，你亦搵得地貌。**搵'{name}'**",
-                "choose": "**由一覽度揀 {name}。**",
-                "chosen": "正！家陣揀咗 {name} 。**撳{button} 掣，收埋地貌編輯。**"
+                "title": "周圍望"
             },
             "points": {
-                "title": "處",
-                "add": "處，用來指示地貌，如舖、餐廳、紀念碑。佢哋畫低某個位置，用來講下當地係乜。**撳 {button}  處個掣，開新一處。**",
-                "place": "地圖度，撳一下擺低一處。**撳下地圖，擺新嗰處去屋頂。**",
-                "search": "處可以用來指示種種地貌。你加爾處就係茶座。**搵【{name}】**",
-                "choose": "**由一覽度揀茶座。**",
-                "describe": "爾處畫成茶座。用地貌編器，我哋可以加名啲料上地貌。**加個名**",
-                "close": "地貌編寫會自動自覺，記低你改過乜。你一改地貌，閂掣會轉成清查記號。**要閂地貌編寫，撳{button}掣**",
-                "reselect": "有時處在。之不過整錯，又或者未完。我哋可改已有之處。**撳一下，揀你啱啱整嗰處。**",
-                "fixname": "**改名，兼撳 {button} 掣閂地貌編寫**",
-                "reselect_delete": "地圖度，乜地貌都刪得。**撳你嗰開嗰處去揀佢。**",
-                "delete": "個選單，會圍住嗰處。嗰處有唔同嘢做，當中有刪。**撳落 {button} 掣，刪嗰處。**"
+                "title": "處"
             },
             "areas": {
-                "title": "範圍",
-                "add": "範圍，地貌邊界，如湖、屋宇、住宅區。又原本地貌一處，範圍勾畫加之詳細。**撳住 {button} 範圍掣，開新範圍。**",
-                "corner": "要畫範圍，就用節來勾出邊界，包住範圍。**撳一下遊樂場一角，開一節。**",
-                "place": "畫範圍，就要擺多啲節。要完成範圍，就欽返頭嗰節。**畫個範圍畀遊樂場。**",
-                "search": "**搵【{name}】。**",
-                "choose": "**由一覽度揀遊樂場。**",
-                "describe": "**加名兼撳 {button} 掣閂埋地貌編寫**"
+                "title": "範圍"
             },
             "lines": {
-                "title": "綫",
-                "add": "綫，用來地示地貌，如道、鐵道、江河等。\"\"撳 {button} 綫掣會加條新綫。**",
-                "start": "**開一條綫，就撳路一端。**",
-                "intersect": "撳一下，條綫加多節。必要時，一邊畫一邊用滑鼠拖地圖，道，同埋其他種種綫。都係大綫網之中。特別留意依啲綫，有相連特性，用來畀帶街程式用。**撳落個 {名} 開新交點，駁埋兩條綫。**",
-                "finish": "畫綫到尾，只要再撳最尾一節一次。**畫完條路。**",
-                "road": "**由一覽度揀路。**",
-                "residential": "種種道路，最常見係住宅路。**揀住宅路**",
-                "describe": "**同車道起名，跟手撳  {button} 掣閂埋地貌製圖程式。**",
-                "restart": "車道要同 {name} 相交。",
-                "wrong_preset": "你未有指名住宅路。**撳爾度去揀多次**"
+                "title": "綫"
             },
             "startediting": {
                 "title": "開始改",
-                "help": "逐步解釋，可以由頭來過。又或者，睇多啲文件，撳下 {button} 幫助掣。",
                 "save": "記得定時記低修改！",
                 "start": "開始制圖"
             }
@@ -831,14 +780,8 @@
                 "craft": {
                     "label": "類"
                 },
-                "crop": {
-                    "label": "剪裁"
-                },
                 "crossing": {
                     "label": "類"
-                },
-                "cuisine": {
-                    "label": "菜系"
                 },
                 "currency_multi": {
                     "label": "錢類"
@@ -1415,15 +1358,6 @@
                 },
                 "source": {
                     "label": "來源"
-                },
-                "sport": {
-                    "label": "運動"
-                },
-                "sport_ice": {
-                    "label": "運動"
-                },
-                "sport_racing": {
-                    "label": "運動"
                 },
                 "stars": {
                     "label": "星級"
@@ -2471,8 +2405,7 @@
                     "terms": "City,城,城市"
                 },
                 "place/farm": {
-                    "name": "農場",
-                    "terms": "Farm,田,稻田,農地,農場,農田"
+                    "name": "農場"
                 },
                 "place/hamlet": {
                     "name": "村仔",

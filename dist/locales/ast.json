@@ -113,6 +113,10 @@
                     "relation": "Desaniciada una rellación.",
                     "multiple": "Desaniciáronse {n} oxetos"
                 },
+                "too_large": {
+                    "single": "Nun pué desaniciase esta carauterística porque nun se ve abondo d'ella",
+                    "multiple": "Nun pueden desaniciase estes carauterístiques porque nun se ve abondo d'elles"
+                },
                 "incomplete_relation": {
                     "single": "Esti oxetu nun pué desaniciase porque nun se descargó completamente.",
                     "multiple": "Estos oxetos nun pueden desaniciase porque nun se descargaron completamente."
@@ -155,7 +159,6 @@
                 "key": "C",
                 "annotation": "Meciéronse {n} carauterístiques.",
                 "not_eligible": "Eses carauterístiques nun puen amestase",
-                "not_adjacent": "Eses carauterístiques nun puen mecese porque nun tán coneutaes.",
                 "restriction": "Eses carauterístiques nun puen mecese porque una polo menos ye miembru d'una rellación \"{relation}\".",
                 "incomplete_relation": "Estes carauterístiques nun puen entemecese porque polo menos una nun se descargó completamente.",
                 "conflicting_tags": "Eses carauterístiques nun puen mecese porque  dalgún valor de les etiquetes fai conflictu."
@@ -171,7 +174,50 @@
                     "point": "Movíu un puntu.",
                     "vertex": "Movíu un nuedu d'una vía.",
                     "line": "Movida una llinia.",
-                    "area": "Movíu un área."
+                    "area": "Movíu un área.",
+                    "multiple": "Moviéronse delles carauterístiques"
+                },
+                "incomplete_relation": {
+                    "single": "Esta carauterística nun puede movese porque nun se descargó completamente.",
+                    "multiple": "Estes carauterístiques nun pueden movese porque nun se descargaron completamente."
+                },
+                "too_large": {
+                    "single": "Nun pué movese esta carauterística porque nun se ve abondo d'ella",
+                    "multiple": "Nun pueden movese estes carauterístiques porque nun se ve abondo d'elles"
+                },
+                "connected_to_hidden": {
+                    "single": "Nun pué movese esta carauterística porque ta coneutada con una carauterística tapecida.",
+                    "multiple": "Nun pueden movese estes carauterístiques porque dalgunes tán coneutaes con carauterístiques tapecíes."
+                }
+            },
+            "reflect": {
+                "title": {
+                    "long": "Espeyar llargu",
+                    "short": "Espeyar curtiu"
+                },
+                "description": {
+                    "long": {
+                        "single": "Espeyar esta carauterística respeuto a la exa llarga",
+                        "multiple": "Espeyar estes carauterístiques respeuto a la exa llarga"
+                    },
+                    "short": {
+                        "single": "Espeyar esta carauterística respeuto a la exa curtia",
+                        "multiple": "Espeyar estes carauterístiques respeuto a la exa curtia"
+                    }
+                },
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                },
+                "annotation": {
+                    "long": {
+                        "single": "Espeyada una carauterística respeuto a la exa llarga",
+                        "multiple": "Espeyaes delles carauterístiques respeuto a la exa llarga"
+                    },
+                    "short": {
+                        "single": "Espeyada una carauterística respeuto a la exa curtia",
+                        "multiple": "Espeyaes delles carauterístiques respeuto a la exa curtia"
+                    }
                 }
             },
             "rotate": {
@@ -460,7 +506,6 @@
             "help_link_text": "Detalles"
         },
         "confirm": {
-            "okay": "Aceutar",
             "cancel": "Encaboxar"
         },
         "splash": {
@@ -500,27 +545,26 @@
         "intro": {
             "done": "fecho",
             "graph": {
-                "city_hall": "Casa del conceyu de Three Rivers",
-                "fire_department": "Bomberos de Three Rivers",
-                "memory_isle_park": "Parque Memory Isle",
-                "riverwalk_trail": "Camín Riverwalk",
-                "w_michigan_ave": "Avenida West Michigan",
-                "e_michigan_ave": "Avenida East Michigan"
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "es"
             },
             "navigation": {
-                "title": "Navegacion",
-                "drag": "L'área principal del mapa presenta los datos d'OpenStreetMap enriba d'un fondu. Pue navegar arrastrando y moviendo, igual que cualquier mapa web. **¡Arrastre'l mapa!**",
-                "select": "Les carauterístiques del mapa representense de trés maneres: usando puntos, llinies o árees. Toles carauterístiques puen seleicionase calcando nelles. **Calque nel puntu pa selicionalu.**"
+                "title": "Navegacion"
             },
             "points": {
-                "title": "Puntos",
-                "search": "Hai munches carauterístiques distintes que puen representase con puntos. El puntu que vienes d'amestar ye un Café. **Busca '{name}'**",
-                "choose": "**Escueyi Café la llista.**",
-                "describe": "Agora ta marcáu el puntu como un café. Usando'l editor de carauterístiques, podemos amestar más información de la carauterística. **Amiesta un nome**"
+                "title": "Puntos"
             },
             "areas": {
-                "title": "Árees",
-                "search": "**Guetar '{name}'.**"
+                "title": "Árees"
             },
             "lines": {
                 "title": "Llinies"
@@ -782,14 +826,8 @@
                 "craft": {
                     "label": "Tipu"
                 },
-                "crop": {
-                    "label": "Collecha"
-                },
                 "crossing": {
                     "label": "Tipu"
-                },
-                "cuisine": {
-                    "label": "Cocina"
                 },
                 "currency_multi": {
                     "label": "Tipos de divisa"
@@ -1377,15 +1415,6 @@
                 "source": {
                     "label": "Fonte"
                 },
-                "sport": {
-                    "label": "Deporte"
-                },
-                "sport_ice": {
-                    "label": "Deporte"
-                },
-                "sport_racing": {
-                    "label": "Deporte"
-                },
                 "stars": {
                     "label": "Estrelles"
                 },
@@ -1906,9 +1935,6 @@
                 "amenity/vending_machine/sweets": {
                     "name": "Máquina de venta de llambionaes"
                 },
-                "amenity/vending_machine/vending_machine": {
-                    "name": "Máquina de venta automática"
-                },
                 "amenity/veterinary": {
                     "name": "Veterinariu",
                     "terms": "Clínica veterinaria"
@@ -2398,10 +2424,6 @@
                     "name": "Enllaz de carretera autonómica I",
                     "terms": "Salida, accesu, enllaz, autonómica primaria, autonómica naranxa"
                 },
-                "highway/raceway": {
-                    "name": "Circuitu de carreres",
-                    "terms": "autódromu, pista de carreres,"
-                },
                 "highway/residential": {
                     "name": "Cai urbana"
                 },
@@ -2665,10 +2687,6 @@
                 "leisure/playground": {
                     "name": "Xuegos infantiles"
                 },
-                "leisure/running_track": {
-                    "name": "Pista d'atletismu",
-                    "terms": "Pista, circuitu"
-                },
                 "leisure/slipway": {
                     "name": "Rampla de botadura"
                 },
@@ -2683,9 +2701,6 @@
                 },
                 "leisure/swimming_pool": {
                     "name": "Piscina"
-                },
-                "leisure/track": {
-                    "name": "Pista de carreres (non pa motor)"
                 },
                 "leisure/water_park": {
                     "name": "Parque acuáticu"
@@ -2724,9 +2739,6 @@
                 },
                 "man_made/lighthouse": {
                     "name": "Faru"
-                },
-                "man_made/mast": {
-                    "name": "Antena de radio"
                 },
                 "man_made/observation": {
                     "name": "Torre de vixilancia",
@@ -2946,9 +2958,6 @@
                 },
                 "place/neighbourhood": {
                     "name": "Barriu"
-                },
-                "place/suburb": {
-                    "name": "Distritu"
                 },
                 "place/town": {
                     "name": "Villa"

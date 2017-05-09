@@ -155,7 +155,6 @@
                 "key": "C",
                 "annotation": "{n} nesne birleştirildi.",
                 "not_eligible": "Bu nesneler birleştirilemez.",
-                "not_adjacent": "Bu nesneler birleştirilemez, çünkü birbirleriyle bağlı değiller.",
                 "restriction": "Bu nesneler birleştirilemez, çünkü en az bir tanesi \"{relation}\" kümesinin üyesi.",
                 "incomplete_relation": "Bu nesneler birleştirilemez, çünkü içlerinden en az biri henüz tamamen indirilmedi.",
                 "conflicting_tags": "Bu nesneler birleştirilemez, çünkü bazı etiketleri birbiriyle çelişkili değerlere sahip."
@@ -188,7 +187,10 @@
                 }
             },
             "reflect": {
-                "title": "yansıt",
+                "title": {
+                    "long": "Uzun Ekseninden Yansıt",
+                    "short": "Kısa Ekseninden Yansıt"
+                },
                 "description": {
                     "long": {
                         "single": "Bu nesneyi uzun ekseninden yansıt.",
@@ -205,11 +207,11 @@
                 },
                 "annotation": {
                     "long": {
-                        "single": "Nesne uzun ekseninden yansıtıldı.",
+                        "single": "Nesne kısa ekseninden yansıtıldı.",
                         "multiple": "Nesneler uzun eksenlerinden yansıtıldı."
                     },
                     "short": {
-                        "single": "Nesne kısa ekseninden yansıtıldı.",
+                        "single": "Nesne uzun ekseninden yansıtıldı.",
                         "multiple": "Nesneler kısa eksenlerinden yansıtıldı."
                     }
                 },
@@ -395,7 +397,14 @@
             "edit": "Nesneyi düzenle",
             "check": {
                 "yes": "Evet",
-                "no": "Hayır"
+                "no": "Hayır",
+                "reverser": "Yön Değiştir"
+            },
+            "radio": {
+                "structure": {
+                    "default": "Varsayılan",
+                    "layer": "Katman"
+                }
             },
             "add": "Ekle",
             "none": "Hiç",
@@ -560,6 +569,9 @@
             "lose_changes": "Kaydedilmemiş değişikliklerin var. Harita sunucusunu değiştirmek bunları kaybetmene sebep olur. Sunucuyu değiştirmek istediğinden emin misin?",
             "dev": "geliştirme"
         },
+        "version": {
+            "whats_new": "iD'nin {version} sürümünde neler var?"
+        },
         "tag_reference": {
             "description": "Açıklama",
             "on_wiki": "wiki.osm.org sitesinde {tag} ",
@@ -567,17 +579,16 @@
         },
         "validations": {
             "disconnected_highway": "Kopuk yol",
-            "disconnected_highway_tooltip": "Yollar başka yollara bağlanmalıdır.",
             "untagged_point": "Etiketlenmemiş nokta",
+            "untagged_point_tooltip": "Bu noktanın ne olduğunu belirten bir tür seç.",
             "untagged_line": "Etiketlenmemiş çizgi",
+            "untagged_line_tooltip": "Bu çizginin ne olduğunu belirten bir tür seç.",
             "untagged_area": "Etiketlenmemiş alan",
+            "untagged_area_tooltip": "Bu alanın ne olduğunu belirten bir tür seç.",
             "untagged_relation": "Etiketlenmemiş Küme",
+            "untagged_relation_tooltip": "Bu kümeyi tanımlayan bir tür seç",
             "many_deletions": "Şu an {n} adet nesneyi siliyorsun. Bunu yapmak istediğinden emin misin? Bu, ilgili tüm nesneleri openstreetmap.org haritasından silecektir.",
             "tag_suggests_area": "{tag} etiketi buranın alan olmasını ima ediyor, ama burası alan değil.",
-            "untagged_point_tooltip": "Bu noktanın ne olduğunu belirten bir tür seç.",
-            "untagged_line_tooltip": "Bu çizginin ne olduğunu belirten bir tür seç.",
-            "untagged_area_tooltip": "Bu alanın ne olduğunu belirten bir tür seç.",
-            "untagged_relation_tooltip": "Bu kümeyi tanımlayan bir tür seç",
             "deprecated_tags": "Kullanımdan kaldırılmış etiketler: {tags}"
         },
         "zoom": {
@@ -617,82 +628,62 @@
         },
         "intro": {
             "done": "tamamlandı",
+            "ok": "Tamam",
             "graph": {
-                "city_hall": "Emirdağ Hükümet Konağı",
-                "fire_department": "Emirdağ İtfaiyesi",
-                "memory_isle_park": "Gezi Parkı",
-                "riverwalk_trail": "Sahil Yürüyüş Yolu",
-                "w_michigan_ave": "Cumhuriyet Bulvarı",
-                "e_michigan_ave": "Atatürk Bulvarı",
-                "spring_st": "Kocatepe Caddesi",
-                "scidmore_park": "Kuğulu Park",
-                "petting_zoo": "Ankara Hayvanat Bahçesi",
-                "n_andrews_st": "Fevzi Paşa Caddesi",
-                "s_andrews_st": "Ordular Caddesi",
-                "n_constantine_st": "Bağcılar Caddesi",
-                "s_constantine_st": "Kufalı Caddesi",
-                "rocky_river": "Manavgat Nehri",
-                "railroad_dr": "Korsan Çıkmazı",
-                "conrail_rr": "Eskişehir Demiryolu",
-                "st_joseph_river": "Ceyhan Nehri",
-                "n_main_st": "İmam Sokak",
-                "s_main_st": "1223. Sokak",
-                "water_st": "Su Sokak",
-                "foster_st": "Mevlana Caddesi",
-                "portage_river": "Sakarya Nehri",
-                "flower_st": "Yaka Sokak",
-                "elm_st": "Ali Çetinkaya Caddesi",
-                "walnut_st": "1907. Sokak",
-                "morris_ave": "İsmet Paşa Bulvarı",
-                "east_st": "Aydın Sokak",
-                "portage_ave": "Alparslan Türkeş Bulvarı"
+                "block_number": "<value for addr:block_number>",
+                "city": "Üç İrmak",
+                "county": "<value for addr:county>",
+                "hamlet": "<value for addr:hamlet>",
+                "postcode": "49093",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "tr",
+                "name": {
+                    "1st-avenue": "Atatürk Bulvarı",
+                    "2nd-avenue": "Dostluk Bulvarı",
+                    "4th-avenue": "Başkent Bulvarı",
+                    "5th-avenue": "Cumhuriyet Bulvarı",
+                    "6th-avenue": "Anadolu Bulvarı",
+                    "6th-street": "Erciyes Caddesi",
+                    "7th-avenue": "Anadolu Bulvarı",
+                    "8th-avenue": "Malazgirt Bulvarı",
+                    "9th-avenue": "Bilkent Bulvarı",
+                    "10th-avenue": "Gazi Mustafa Kemal Bulvarı",
+                    "11th-avenue": "Gençlik Bulvarı",
+                    "12th-avenue": "Barış Bulvarı",
+                    "adams-street": "İsmet İnönü Caddesi",
+                    "andrews-elementary-school": "Mustafa Ergün İlköğretim Okulu",
+                    "andrews-street": "Antalya Caddesi",
+                    "armitage-street": "Adana Caddesi",
+                    "barrows-school": "Atatürk Ortaokulu",
+                    "battle-street": "Bursa Caddesi",
+                    "bennett-street": "Balıkesir Caddesi",
+                    "bowman-park": "Kuğu Parkı",
+                    "collins-drive": "Çorum Caddesi",
+                    "conrail-railroad": "Demiryolu",
+                    "conservation-park": "Enver Dönmez Parkı",
+                    "constantine-street": "Kemal Sunal Caddesi",
+                    "cushman-street": "Bülent Caddesi",
+                    "douglas-avenue": "Pera Bulvarı"
+                }
             },
             "navigation": {
-                "title": "Navigasyon",
-                "drag": "Haritada OpenStreetMap verileri arka plan üzerinde gösterilmektedir. Diğer harita uygulamalarında olduğu gibi haritayı sürekleyip, yaklaşıp uzaklaşarak haritada dolaşabilirsin. **Haritayı sürükle!** ",
-                "select": "Haritadaki nesneler üç farklı şekilde gösterilir: noktalar, çizgiler ve alanlar. Tüm nesneler üzerlerine tıklanarak seçilebilir. **Noktayı üzerine tıklayarak seç.**",
-                "pane": "Bir nesne seçildiğinde nesne düzenleyicisi gösterilecektir. Düzenleyicinin başlığı sana nesne türünü ve geri kalan kısmı da nesnenin isim, adres vb. özelliklerini gösterecektir. **Sağ üstteki {button} tuşuna basarak düzenleyiciyi kapat.**",
-                "search": "Ekrandaki harita sınırlarında ve dünya genelinde nesneleri arayabilirsin. **'{name}' ile bir arama yap**",
-                "choose": "**Listeden {name} nesnesini seç.**",
-                "chosen": "Süper! {name} seçildi. **{button} tuşuna basarak düzenleyiciyi kapat.**"
+                "title": "Navigasyon"
             },
             "points": {
-                "title": "Noktalar",
-                "add": "Noktalar mağaza, restoran ve anıtları göstermek için kullanılabilir. Noktalar belli bir yeri işaret eder ve orada ne olduğunu tanımlar. **{button} tuşuna basarak bir nokta ekle.**",
-                "place": "Haritaya tıklayarak bir nokta ekleyebilirsin. **Haritaya tıkla ve bir binanın içine yeni bir nokta ekle.**",
-                "search": "Noktalarla gösterilebilecek birçok farklı nesne var. Şimdi eklediğin nokta bir kafe. **'{name}' ile arama yap**",
-                "choose": "**Listeden Kafe'yi seç.**",
-                "describe": "Bu nokta artık kafe olarak işaretlendi. Düzenleyici ile nesneye daha fazla bilgi ekleyebilirsin. **Bir ad ekle**",
-                "close": "Bu düzenleyici yaptığın bütün değişiklikleri otomatik olarak hatırlar. Bir nesneyi değiştirdiğinde kapatma butonu bir onay işaretine dönüşecektir. **{button} tuşuna basarak düzenleyiciyi kapat.**",
-                "reselect": "Bazen halihazırda noktalar varolabilir. Fakat bu noktalar eksik ya da hatalı olabilir. Bu noktaları düzenleyebilirsin. **Oluşturduğun noktayı tıklayarak seç.**",
-                "fixname": "**Adı değiştir ve ardından {button} tuşuna basarak düzenleyiciyi kapat.**",
-                "reselect_delete": "Harita üstündeki tüm nesneler silinebilir. **Oluşturduğun noktayı tıklayarak seç.**",
-                "delete": "Nokta çevresindeki menü ile silmek dahil birçok işlem gerçekleştirilebilirsin. **{button} tuşuna basarak noktayı sil.**"
+                "title": "Noktalar"
             },
             "areas": {
-                "title": "Alanlar",
-                "add": "Alanlar göl, bina ve mahallelerin sınırlarını göstermek için kullanılır. Ayrıca, nokta kullanarak haritaya eklenebilen nesneler, alan kullanılarak daha detaylı bir şekilde haritada gösterilebilir. **{button} tuşuna basarak yeni bir alan ekle.**",
-                "corner": "Alanlar bağlantı noktalarını bir alanın sınırları dahilinde birleştirilmesi ile oluşturulur. **Test amacıyla lütfen çocuk parkının bir köşesine bağlantı noktası ekle.**",
-                "place": "Alanı daha fazla bağlantı noktası ekleyerek çiz. Başladığın noktaya tıklayarak alan çizimini bitir. **Çocuk parkı için bir alan çiz.**",
-                "search": "**'{name}' ile arama yap.**",
-                "choose": "**Listeden Çocuk Parkı'nı seç.**",
-                "describe": "**Bir ad ekle ve ardından {button} tuşuna basarak düzenleyiciyi kapat.**"
+                "title": "Alanlar"
             },
             "lines": {
-                "title": "Çizgiler",
-                "add": "Çizgiler yol, demiryolu ve ırmak gibi nesneleri göstermek için kullanılır.  **Yeni bir çizgi eklemek için {button} tuşuna bas.**",
-                "start": "**Çizimi başlatmak için yolun sonuna tıkla.**",
-                "intersect": "Çizgiye daha fazla bağlantı noktası eklemek için tıkla. Çizerken haritayı istediğin yönde sürükleyebilirsin. Yollar ve diğer tür çizgiler harita üzerinde birbirine bağlı bir ağın parçasıdır. Eklenen çizgileri bu ağa doğru şekilde bağlamak güzergah bulma uygulamaları için çok önemlidir. **{name}'e tıklayarak birbiri üzerinden geçen iki çizgi arasında ortak bir bağlantı noktası oluşturabilirsin.**",
-                "finish": "Çizgiler, son bağlantı noktasına bir kez daha tıklanarak bitirilebilir. **Yol çizimini bitir.**",
-                "road": "**Listeden yol seç**",
-                "residential": "Birçok farklı türde yol vardır ve en yaygın olanı yerleşim yeri yoludur. **Yerleşim yeri yol türünü şeç**",
-                "describe": "**Yolun adını ekle ve ardından {button} tuşuna basarak düzenleyiciyi kapat.**",
-                "restart": "Yolun {name} ile kesişmesi gerekiyor.",
-                "wrong_preset": "Yerleşim yeri yol türünü seçmedin. **Yeniden seçmek için buraya tıkla**"
+                "title": "Çizgiler"
             },
             "startediting": {
                 "title": "Düzenlemeye Başla",
-                "help": "Bu eğitimi tekrarlayabilir ya da {button} tuşuna basarak detaylı dokümanlara gözatabilirsin.",
                 "save": "Belli aralıklarla değişikliklerini kaydetmeyi unutma!",
                 "start": "Haritayı düzenlemeye başla!"
             }
@@ -871,6 +862,15 @@
                 "amenity": {
                     "label": "Tür"
                 },
+                "animal_boarding": {
+                    "label": "Hayvanlar için"
+                },
+                "animal_breeding": {
+                    "label": "Hayvanlar için"
+                },
+                "animal_shelter": {
+                    "label": "Hayvanlar için"
+                },
                 "area/highway": {
                     "label": "Tür"
                 },
@@ -992,8 +992,14 @@
                         "clockwise": "Saat Yönünde"
                     }
                 },
+                "club": {
+                    "label": "Cins"
+                },
                 "collection_times": {
                     "label": "Toplanma Zamanları"
+                },
+                "communication_multi": {
+                    "label": "İletişim türleri"
                 },
                 "construction": {
                     "label": "Tür"
@@ -1015,13 +1021,13 @@
                     "label": "Tür"
                 },
                 "crop": {
-                    "label": "Mahsul"
+                    "label": "Tahıl"
                 },
                 "crossing": {
                     "label": "Tür"
                 },
                 "cuisine": {
-                    "label": "Mutfak"
+                    "label": "Yemek Çeşitleri"
                 },
                 "currency_multi": {
                     "label": "Para Birimi Çeşitleri"
@@ -1182,6 +1188,9 @@
                     "label": "Referans",
                     "placeholder": "Çukur Numarası (1-18)"
                 },
+                "grape_variety": {
+                    "label": "Meyve Çeşitleri"
+                },
                 "handicap": {
                     "label": "Engelli",
                     "placeholder": "1-18"
@@ -1197,6 +1206,9 @@
                 },
                 "historic": {
                     "label": "Tür"
+                },
+                "historic/civilization": {
+                    "label": "Eski Uygarlık"
                 },
                 "hoops": {
                     "label": "Engel",
@@ -1527,8 +1539,11 @@
                 "power_supply": {
                     "label": "Güç Kaynağı"
                 },
-                "product": {
+                "produce": {
                     "label": "Ürün"
+                },
+                "product": {
+                    "label": "Ürünler"
                 },
                 "railway": {
                     "label": "Tür"
@@ -1600,6 +1615,9 @@
                 "service/bicycle": {
                     "label": "Bisiklet"
                 },
+                "service/vehicle": {
+                    "label": "Hizmetler"
+                },
                 "service_rail": {
                     "label": "Servis Türü",
                     "options": {
@@ -1608,6 +1626,9 @@
                         "spur": "Destek Hattı",
                         "yard": "İstasyon"
                     }
+                },
+                "service_times": {
+                    "label": "Hizmet Saatleri"
                 },
                 "shelter": {
                     "label": "Barınak"
@@ -1662,11 +1683,17 @@
                 "sport_ice": {
                     "label": "Spor"
                 },
-                "sport_racing": {
+                "sport_racing_motor": {
+                    "label": "Spor"
+                },
+                "sport_racing_nonmotor": {
                     "label": "Spor"
                 },
                 "stars": {
                     "label": "Yıldızlar"
+                },
+                "start_date": {
+                    "label": "Başlangıç Tarihi"
                 },
                 "step_count": {
                     "label": "Basamak Sayısı"
@@ -1741,6 +1768,9 @@
                 },
                 "toll": {
                     "label": "Ücret"
+                },
+                "tomb": {
+                    "label": "Cins"
                 },
                 "tourism": {
                     "label": "Tür"
@@ -1925,6 +1955,9 @@
                 "amenity": {
                     "name": "Tesis"
                 },
+                "amenity/animal_shelter": {
+                    "name": "Hayvan Barinağı"
+                },
                 "amenity/arts_centre": {
                     "name": "Sanat Merkezi",
                     "terms": "Sanat Merkezi"
@@ -2055,6 +2088,9 @@
                 "amenity/drinking_water": {
                     "name": "İçme Suyu",
                     "terms": "İçme Suyu, Sebil"
+                },
+                "amenity/driving_school": {
+                    "name": "Sürücü Kursu"
                 },
                 "amenity/embassy": {
                     "name": "Büyükelçilik",
@@ -2298,8 +2334,7 @@
                     "terms": "Dışkı Toplama Poşet Otomatı"
                 },
                 "amenity/vending_machine/news_papers": {
-                    "name": "Gazete Otomatı",
-                    "terms": "Gazete Otomatı"
+                    "name": "Gazete Otomatı"
                 },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
                     "name": "Posta Alma-Bırakma Makinası",
@@ -2316,10 +2351,6 @@
                 "amenity/vending_machine/sweets": {
                     "name": "Yiyecek Otomatı",
                     "terms": "Yiyecek Otomatı"
-                },
-                "amenity/vending_machine/vending_machine": {
-                    "name": "Otomat",
-                    "terms": "Otomat, Otomatik Satış Makinası"
                 },
                 "amenity/veterinary": {
                     "name": "Veteriner",
@@ -2568,6 +2599,9 @@
                 "camp_site/camp_pitch": {
                     "name": "Kamp Ateş Alanı",
                     "terms": "Kamp Ateş Alanı"
+                },
+                "club": {
+                    "name": "Klüb"
                 },
                 "craft": {
                     "name": "Zanaat",
@@ -2926,10 +2960,6 @@
                     "name": "Anayol Bağlantı Yolu",
                     "terms": "Anayol Bağlantı Yolu, Anayola Bağlanan Yol"
                 },
-                "highway/raceway": {
-                    "name": "Araç Yarış Yolu",
-                    "terms": "Araç Yarış Yolu, Yarış Pisti"
-                },
                 "highway/residential": {
                     "name": "Yerleşim Yeri Yolu",
                     "terms": "Yerleşim Yeri Yolu, Mahalle Arası Yol"
@@ -3058,6 +3088,9 @@
                     "name": "Harabeler",
                     "terms": "Harabeler"
                 },
+                "historic/tomb": {
+                    "name": "Mezar"
+                },
                 "historic/wayside_cross": {
                     "name": "Çarmıh",
                     "terms": "Çarmıh"
@@ -3077,6 +3110,10 @@
                 "landuse/allotments": {
                     "name": "Hobi Bahçesi",
                     "terms": "Hobi Bahçesi"
+                },
+                "landuse/aquaculture": {
+                    "name": "Su Kültürü",
+                    "terms": "Su Kültürü"
                 },
                 "landuse/basin": {
                     "name": "Havza",
@@ -3120,6 +3157,9 @@
                 "landuse/grass": {
                     "name": "Çimenlik",
                     "terms": "Çimenlik, Yeşil Alan"
+                },
+                "landuse/harbour": {
+                    "name": "Liman"
                 },
                 "landuse/industrial": {
                     "name": "Sanayi Bölgesi",
@@ -3309,6 +3349,9 @@
                     "name": "Açıkhava Top Oyun Sahası",
                     "terms": "Açıkhava Top Oyun Sahası"
                 },
+                "leisure/pitch/equestrian": {
+                    "name": "Binicilik Alanı"
+                },
                 "leisure/pitch/rugby_league": {
                     "name": "Ragbi Lig Sahası",
                     "terms": "Ragbi Lig Sahası"
@@ -3324,6 +3367,9 @@
                 "leisure/pitch/soccer": {
                     "name": "Futbol Sahası",
                     "terms": "Futbol Sahası"
+                },
+                "leisure/pitch/table_tennis": {
+                    "name": "Masa Tennis"
                 },
                 "leisure/pitch/tennis": {
                     "name": "Tenis Sahası",
@@ -3342,8 +3388,7 @@
                     "terms": "Tatil Yeri"
                 },
                 "leisure/running_track": {
-                    "name": "Koşu Yolu",
-                    "terms": "Koşu Yolu"
+                    "name": "Yarış Pisti (motor spor hariç)"
                 },
                 "leisure/slipway": {
                     "name": "Gemi Kızağı",
@@ -3366,8 +3411,7 @@
                     "terms": "Yüzme Havuzu"
                 },
                 "leisure/track": {
-                    "name": "Koşu Pisti",
-                    "terms": "Koşu Pisti"
+                    "name": "Yarış Pisti (motor spor hariç)"
                 },
                 "leisure/water_park": {
                     "name": "Su Parkı",
@@ -3421,8 +3465,7 @@
                     "terms": "Deniz Feneri, Fener"
                 },
                 "man_made/mast": {
-                    "name": "Anten Kulesi",
-                    "terms": "Anten Kulesi"
+                    "name": "Direk"
                 },
                 "man_made/observation": {
                     "name": "Gözetleme Kulesi",
@@ -3707,8 +3750,7 @@
                     "terms": "Şehir"
                 },
                 "place/farm": {
-                    "name": "Çiftlik",
-                    "terms": "Çiftlik"
+                    "name": "Çiftlik"
                 },
                 "place/hamlet": {
                     "name": "Mezra",
@@ -3730,13 +3772,15 @@
                     "name": "Mahalle",
                     "terms": "Mahalle"
                 },
+                "place/quarter": {
+                    "name": "Semt"
+                },
                 "place/square": {
                     "name": "Meydan",
                     "terms": "Meydan"
                 },
                 "place/suburb": {
-                    "name": "Semt",
-                    "terms": "Semt"
+                    "name": "Mahalle"
                 },
                 "place/town": {
                     "name": "Kasaba",
@@ -3854,6 +3898,9 @@
                 "railway/tram": {
                     "name": "Tramvay",
                     "terms": "Tramvay"
+                },
+                "railway/tram_stop": {
+                    "name": "Tramvay Durağı"
                 },
                 "relation": {
                     "name": "İlişki",
@@ -4212,6 +4259,9 @@
                 "shop/pawnbroker": {
                     "name": "İkinciel Alım Satım Mağazası",
                     "terms": "İkinciel Alım Satım Mağazası"
+                },
+                "shop/perfumery": {
+                    "name": "Parfümeri"
                 },
                 "shop/pet": {
                     "name": "Evcil Hayvan Mağazası",

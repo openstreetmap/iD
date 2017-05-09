@@ -113,6 +113,10 @@
                     "relation": "已刪除一個關係。",
                     "multiple": "已刪除{n}個特徵。"
                 },
+                "too_large": {
+                    "single": "未能將這個特徵刪除因為它不是被完全看得到。",
+                    "multiple": "未能將這些特徵刪除因為它不是被完全看得到。"
+                },
                 "incomplete_relation": {
                     "single": "此特徵未能刪除，因為它尚未完全下載。",
                     "multiple": "這些特徵未能刪除，因為它們尚未完全下載。"
@@ -155,7 +159,7 @@
                 "key": "C",
                 "annotation": "合併{n}個特徵。",
                 "not_eligible": "不能合併這些特徵。",
-                "not_adjacent": "這些特徵不能合併因為它們不是連接在一起。",
+                "not_adjacent": "這些特徵不能合併因為它們的端點不是連接在一起。",
                 "restriction": "這些特徵不能合併因為最少一個是\"{relation}\" 關係的構件。",
                 "incomplete_relation": "這些特徵不能合併因為最少一個尚未完全下載。",
                 "conflicting_tags": "這些特徵不能合併因為當中一些標籤的數值有衝突。"
@@ -188,7 +192,10 @@
                 }
             },
             "reflect": {
-                "title": "鏡射",
+                "title": {
+                    "long": "以長軸鏡射",
+                    "short": "以短軸鏡射"
+                },
                 "description": {
                     "long": {
                         "single": "以特徵長軸鏡射。",
@@ -395,7 +402,15 @@
             "edit": "編輯特徵",
             "check": {
                 "yes": "是",
-                "no": "否"
+                "no": "否",
+                "reverser": "更改方向"
+            },
+            "radio": {
+                "structure": {
+                    "type": "種類",
+                    "default": "預設",
+                    "layer": "圖層"
+                }
             },
             "add": "新增",
             "none": "無",
@@ -560,6 +575,9 @@
             "lose_changes": "你有尚未儲存的變更。切換地圖伺服器將放棄它們。你確定要切換伺服器嗎？",
             "dev": "開發模式"
         },
+        "version": {
+            "whats_new": "iD {version} 的新消息"
+        },
         "tag_reference": {
             "description": "描述",
             "on_wiki": "在wiki.osm.org上的 {tag}",
@@ -567,17 +585,17 @@
         },
         "validations": {
             "disconnected_highway": "已斷開的高速公路。",
-            "disconnected_highway_tooltip": "道路必須連接至其他道路。",
+            "disconnected_highway_tooltip": "道路必須連接至其他道路或建築物入口。",
             "untagged_point": "未有標籤的點",
+            "untagged_point_tooltip": "選擇一個特徵種類來形容這個點是甚麼。",
             "untagged_line": "未有標籤的綫",
+            "untagged_line_tooltip": "選擇一個特徵種類來形容這條綫是甚麼。",
             "untagged_area": "未有標籤的範圍",
+            "untagged_area_tooltip": "選擇一個特徵種類來形容這個範圍是甚麼。",
             "untagged_relation": "未有標籤的關係",
+            "untagged_relation_tooltip": "選擇一個特徵種類來形容這個關係是甚麼。",
             "many_deletions": "你正在刪除 {n} 個特徵。你確定要這樣做嗎？這樣就會將人人在 openstreetmap.org 地圖內看到的物件刪除了。",
             "tag_suggests_area": "{tag}標籤建議綫應為範圍，但這不是一個範圍。",
-            "untagged_point_tooltip": "選擇一個特徵種類來形容這個點是甚麼。",
-            "untagged_line_tooltip": "選擇一個特徵種類來形容這條綫是甚麼。",
-            "untagged_area_tooltip": "選擇一個特徵種類來形容這個範圍是甚麼。",
-            "untagged_relation_tooltip": "選擇一個特徵種類來形容這個關係是甚麼。",
             "deprecated_tags": "已棄用的標籤: {tags}"
         },
         "zoom": {
@@ -617,82 +635,57 @@
         },
         "intro": {
             "done": "完成",
+            "ok": "確定",
             "graph": {
-                "city_hall": "模擬市政廳",
-                "fire_department": "模擬消防局",
-                "memory_isle_park": "模擬公園",
-                "riverwalk_trail": "河邊步行徑",
-                "w_michigan_ave": "西大道",
-                "e_michigan_ave": "東大道",
-                "spring_st": "春天街",
-                "scidmore_park": "模擬大公園",
-                "petting_zoo": "模擬大公園寵物區",
-                "n_andrews_st": "香港大街北",
-                "s_andrews_st": "香港大街南",
-                "n_constantine_st": "九龍大街北",
-                "s_constantine_st": "九龍大街南",
-                "rocky_river": "城門河",
-                "railroad_dr": "鐵道徑",
-                "conrail_rr": "模擬鐵道",
-                "st_joseph_river": "啟德河",
-                "n_main_st": "北大街",
-                "s_main_st": "南大街",
-                "water_st": "水街",
-                "foster_st": "科士打街",
-                "portage_river": "運輸河",
-                "flower_st": "花街",
-                "elm_st": "榆樹街",
-                "walnut_st": "合桃街",
-                "morris_ave": "摩利斯大道",
-                "east_st": "東街",
-                "portage_ave": "運輸街"
+                "block_number": "<value for addr:block_number>",
+                "city": "三江",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "postcode": "999077",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "hk",
+                "name": {
+                    "1st-avenue": "第一大街",
+                    "2nd-avenue": "第二大街",
+                    "4th-avenue": "第四大街",
+                    "5th-avenue": "第五大街",
+                    "6th-avenue": "第六大街",
+                    "6th-street": "第六街",
+                    "7th-avenue": "第七大街",
+                    "8th-avenue": "第八大街",
+                    "9th-avenue": "第九大街",
+                    "10th-avenue": "第十大街",
+                    "11th-avenue": "第十一大街",
+                    "12th-avenue": "第十二大街"
+                }
+            },
+            "welcome": {
+                "title": "歡迎"
             },
             "navigation": {
-                "title": "導航",
-                "drag": "主要地圖顯示OpenStreetMap資料在背面之上。你可以透過拖曳與捲動來導覽，就像任何其他網絡地圖。**拖曳地圖！**",
-                "select": "地圖特徵以三種方法表示：點、綫或範圍。所有特徵均可點選。**按一下點去選擇它。**",
-                "pane": "當選擇了一個特徵時，編輯器就會顯示。頁首會顯示特徵類別，主版面就會顯示特徴屬性，例如它的名稱和地址。**按一下右上方的 {button} 按鈕就可關閉特徵編輯器。**",
-                "search": "你可以搜尋在目前檢視畫面或者全世界的特徵。**搜尋'{name}'**",
-                "choose": "**由清單中選擇{name}。**",
-                "chosen": "太好了！已選取{name}。**按 {button} 按鈕關閉特徵編輯器。**"
+                "title": "導航"
             },
             "points": {
-                "title": "處",
-                "add": "點是用來表示如商店、餐廳和紀念碑這些特徵，它們用來標示一個特定位置和描述那裏有甚麼。**按一下{button}點按鈕來新增一個點。**",
-                "place": "在地圖上按一下就可以新增一個點。**在地圖上按一下以新增一個點在建築物之上。**",
-                "search": "處可以用來指示種種地貌。你加爾處就係茶座。**搵【{name}】**",
-                "choose": "**由一覽度揀茶座。**",
-                "describe": "爾處畫成茶座。用地貌編器，我哋可以加名啲料上地貌。**加個名**",
-                "close": "特徵編輯器會自動記住你所有的變更。當你更改一個特徵時，關閉按鈕會變成剔號。**按一下{button}按鈕關閉特徵編輯器**",
-                "reselect": "很多時候點已經存在，但是有錯誤或者不完整。我們可以編輯已存在的點。**按一下你剛新增的點。**",
-                "fixname": "**更改名稱，然後按一下{button}按鈕就可關閉特徵編輯器。**",
-                "reselect_delete": "所有在地圖上的特徵都可刪除。**按一下選你建立的點。**",
-                "delete": "圍繞著點的選單包含你可以執行的動作，包括刪除。**按一下{button}按鈕就可刪除點。**"
+                "title": "處"
             },
             "areas": {
-                "title": "範圍",
-                "add": "範圍是用作顯示特徵的邊界，例如湖泊、建築物和住宅區。亦可用來更細緻地標示很多平常是點的特徵。 **按一下{button}範圍鍵來新增範圍。**",
-                "corner": "將節放在範圍的邊界就可畫出範圍。**於遊樂場的一個角按一下就可放置開始的節**",
-                "place": "畫範圍，就要擺多啲節。要完成範圍，就欽返頭嗰節。**畫個範圍畀遊樂場。**",
-                "search": "**尋找'{name}'。**",
-                "choose": "**從列表中選擇遊樂場。**",
-                "describe": "**新增名稱，然後按一下{button}按鈕就可關閉特徵編輯器**"
+                "title": "範圍"
             },
             "lines": {
-                "title": "綫",
-                "add": "綫是用來表示如道路、鐵路和河流這些特徵。**按一下{button}綫按鈕來新增一條綫。**",
-                "start": "**於路的尾端按一下就可開始畫綫。**",
-                "intersect": "按一下就可新增節到綫上。有需要時你可以在邊畫地圖邊拖拉。道路和很多其他類別的綫，是大網絡的其中一部份。確保這些綫互相連接才能使路綫計劃應用程式發揮最大作用。**按一下{name}來為兩條綫新增相交點。**",
-                "finish": "於最後一節按一下就可完成繪畫一條綫。**完成繪畫道路。**",
-                "road": "**從列表中選擇道路。**",
-                "residential": "種種道路，最常見係住宅路。**揀住宅路**",
-                "describe": "**填入道路名稱，然後按一下{button}按鈕就可關閉特徵編輯器。**",
-                "restart": "道路必須與 {name} 相交。",
-                "wrong_preset": "你未有指名住宅路。**撳爾度去揀多次**"
+                "title": "綫"
+            },
+            "buildings": {
+                "title": "建築物",
+                "choose_category_building": "**從列表中選擇{category}。**"
             },
             "startediting": {
                 "title": "開始編輯",
-                "help": "你可以再看一次新手教學，或者按一下{button}幫助按鈕查看更多使用說明。",
                 "save": "不要忘記定時儲存你的變更！",
                 "start": "開始制圖"
             }
@@ -871,6 +864,15 @@
                 "amenity": {
                     "label": "種類"
                 },
+                "animal_boarding": {
+                    "label": "動物用"
+                },
+                "animal_breeding": {
+                    "label": "動物用"
+                },
+                "animal_shelter": {
+                    "label": "動物用"
+                },
                 "area/highway": {
                     "label": "種類"
                 },
@@ -992,8 +994,14 @@
                         "clockwise": "順時針"
                     }
                 },
+                "club": {
+                    "label": "種類"
+                },
                 "collection_times": {
                     "label": "收集時間"
+                },
+                "communication_multi": {
+                    "label": "通訊種類"
                 },
                 "construction": {
                     "label": "種類"
@@ -1021,7 +1029,7 @@
                     "label": "種類"
                 },
                 "cuisine": {
-                    "label": "菜系"
+                    "label": "菜式"
                 },
                 "currency_multi": {
                     "label": "外幣種類"
@@ -1140,7 +1148,7 @@
                     }
                 },
                 "fire_hydrant/type": {
-                    "label": "類",
+                    "label": "種類",
                     "options": {
                         "pillar": "柱狀/地上",
                         "pond": "池塘",
@@ -1182,6 +1190,9 @@
                     "label": "參攷",
                     "placeholder": "洞數（一到十八）"
                 },
+                "grape_variety": {
+                    "label": "葡萄種類"
+                },
                 "handicap": {
                     "label": "差點",
                     "placeholder": "1-18"
@@ -1197,6 +1208,9 @@
                 },
                 "historic": {
                     "label": "種類"
+                },
+                "historic/civilization": {
+                    "label": "古代文明"
                 },
                 "hoops": {
                     "label": "籃框數量",
@@ -1223,6 +1237,9 @@
                 },
                 "information": {
                     "label": "種類"
+                },
+                "inscription": {
+                    "label": "碑文"
                 },
                 "internet_access": {
                     "label": "用到互聯網",
@@ -1414,7 +1431,7 @@
                     "label": "註"
                 },
                 "office": {
-                    "label": "類"
+                    "label": "種類"
                 },
                 "oneway": {
                     "label": "單程",
@@ -1456,7 +1473,7 @@
                     "label": "泊車轉乘"
                 },
                 "parking": {
-                    "label": "類",
+                    "label": "種類",
                     "options": {
                         "carports": "車位",
                         "garage_boxes": "車庫箱",
@@ -1603,6 +1620,9 @@
                 "service/bicycle": {
                     "label": "服務"
                 },
+                "service/vehicle": {
+                    "label": "服務"
+                },
                 "service_rail": {
                     "label": "服務類型",
                     "options": {
@@ -1611,6 +1631,9 @@
                         "spur": "支線",
                         "yard": "貨場"
                     }
+                },
+                "service_times": {
+                    "label": "服務時間"
                 },
                 "shelter": {
                     "label": "有蓋"
@@ -1665,11 +1688,17 @@
                 "sport_ice": {
                     "label": "運動"
                 },
-                "sport_racing": {
+                "sport_racing_motor": {
+                    "label": "運動"
+                },
+                "sport_racing_nonmotor": {
                     "label": "運動"
                 },
                 "stars": {
                     "label": "星級"
+                },
+                "start_date": {
+                    "label": "起始日期"
                 },
                 "step_count": {
                     "label": "梯級數目"
@@ -1745,8 +1774,11 @@
                 "toll": {
                     "label": "收費"
                 },
+                "tomb": {
+                    "label": "種類"
+                },
                 "tourism": {
-                    "label": "類"
+                    "label": "種類"
                 },
                 "tower/construction": {
                     "label": "建築物料",
@@ -1805,20 +1837,20 @@
                     "label": "種類"
                 },
                 "water": {
-                    "label": "類"
+                    "label": "種類"
                 },
                 "water_point": {
                     "label": "取水地點"
                 },
                 "waterway": {
-                    "label": "類"
+                    "label": "種類"
                 },
                 "website": {
                     "label": "網站",
                     "placeholder": "http://example.com/"
                 },
                 "wetland": {
-                    "label": "類"
+                    "label": "種類"
                 },
                 "wheelchair": {
                     "label": "可通輪椅"
@@ -1927,6 +1959,18 @@
                 },
                 "amenity": {
                     "name": "設施"
+                },
+                "amenity/animal_boarding": {
+                    "name": "寵物酒店",
+                    "terms": "Animal Boarding Facility, Dog hotel, pet hotel,寵物度假村,寵物飯店,狗酒店, 動物酒店"
+                },
+                "amenity/animal_breeding": {
+                    "name": "動物繁殖場",
+                    "terms": "Animal Breeding Facility, 寵物繁殖場"
+                },
+                "amenity/animal_shelter": {
+                    "name": "動物收容中心",
+                    "terms": "Animal Shelter, 動物收容所"
                 },
                 "amenity/arts_centre": {
                     "name": "美術館",
@@ -2059,6 +2103,10 @@
                     "name": "飲用水",
                     "terms": "Drinking Water,水源,活水,飲水,飲水處,飲水機,飲水器"
                 },
+                "amenity/driving_school": {
+                    "name": "駕駛學校",
+                    "terms": "Driving School, 駕駛學院"
+                },
                 "amenity/embassy": {
                     "name": "大使館",
                     "terms": "Embassy,使館,大使館,領事館"
@@ -2145,6 +2193,10 @@
                 "amenity/parking_space": {
                     "name": "泊車位",
                     "terms": "停車空間,泊車處,停車位,車位"
+                },
+                "amenity/pavilion": {
+                    "name": "亭",
+                    "terms": "Pavilion,亭"
                 },
                 "amenity/pharmacy": {
                     "name": "藥房",
@@ -2301,8 +2353,7 @@
                     "terms": "糞便袋售賣機"
                 },
                 "amenity/vending_machine/news_papers": {
-                    "name": "報紙售賣機",
-                    "terms": "報紙售賣機"
+                    "name": "報紙售賣機"
                 },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
                     "name": "包裹領件/投寄機",
@@ -2319,10 +2370,6 @@
                 "amenity/vending_machine/sweets": {
                     "name": "零食售賣機",
                     "terms": "零食販賣機"
-                },
-                "amenity/vending_machine/vending_machine": {
-                    "name": "售賣機",
-                    "terms": "販賣機"
                 },
                 "amenity/veterinary": {
                     "name": "獸醫",
@@ -2343,6 +2390,10 @@
                 "amenity/water_point": {
                     "name": "露營車飲用水",
                     "terms": "旅行車飲用水"
+                },
+                "amenity/watering_place": {
+                    "name": "動物飲水處",
+                    "terms": "Animal Watering Place, 動物飲水區"
                 },
                 "area": {
                     "name": "範圍",
@@ -2571,6 +2622,10 @@
                 "camp_site/camp_pitch": {
                     "name": "露營營地",
                     "terms": "Camp Pitch, 露營場地, 營地"
+                },
+                "club": {
+                    "name": "俱樂部",
+                    "terms": "Club, 會所"
                 },
                 "craft": {
                     "name": "工藝",
@@ -2930,8 +2985,8 @@
                     "terms": "Primary Link,主要道路匝道,主要道路連接路,大路駁路"
                 },
                 "highway/raceway": {
-                    "name": "賽車道",
-                    "terms": "賽車路"
+                    "name": "賽道(小型賽車)",
+                    "terms": "Racetrack (Motorsport), 賽道, 賽車車道"
                 },
                 "highway/residential": {
                     "name": "住宅區道路",
@@ -2980,6 +3035,10 @@
                 "highway/services": {
                     "name": "公路服務區",
                     "terms": "公路服務區"
+                },
+                "highway/speed_camera": {
+                    "name": "快相相機",
+                    "terms": "Speed Camera,快相機"
                 },
                 "highway/steps": {
                     "name": "樓梯",
@@ -3061,6 +3120,10 @@
                     "name": "廢墟",
                     "terms": "Ruins,廢墟"
                 },
+                "historic/tomb": {
+                    "name": "古墓",
+                    "terms": "Tomb,古墓"
+                },
                 "historic/wayside_cross": {
                     "name": "路邊十字架",
                     "terms": "Wayside Cross,路邊十字架"
@@ -3127,6 +3190,10 @@
                 "landuse/grass": {
                     "name": "草地",
                     "terms": "Grass,草地"
+                },
+                "landuse/harbour": {
+                    "name": "海港",
+                    "terms": "Harbor, Harbour, 海港, 港灣"
                 },
                 "landuse/industrial": {
                     "name": "工業區",
@@ -3199,6 +3266,10 @@
                 "landuse/quarry": {
                     "name": "石礦場",
                     "terms": "Quarry,石礦場,礦場,採石場"
+                },
+                "landuse/railway": {
+                    "name": "鐵路走廊",
+                    "terms": "Railway Corridor, 鐵路走廊, 鐵道走廊"
                 },
                 "landuse/recreation_ground": {
                     "name": "遊樂場",
@@ -3312,9 +3383,21 @@
                     "name": "籃球場",
                     "terms": "Basketball Court,球場,籃球場"
                 },
+                "leisure/pitch/beachvolleyball": {
+                    "name": "沙灘排球場",
+                    "terms": "Beach Volleyball Court, 沙灘排球場"
+                },
                 "leisure/pitch/bowls": {
                     "name": "草地滾球",
                     "terms": "Bowling Green, 草地滾球"
+                },
+                "leisure/pitch/cricket": {
+                    "name": "木球場",
+                    "terms": "Cricket Field,木球場"
+                },
+                "leisure/pitch/equestrian": {
+                    "name": "策騎場地",
+                    "terms": "Riding Arena, 策騎場地"
                 },
                 "leisure/pitch/rugby_league": {
                     "name": "聯盟式欖球場",
@@ -3331,6 +3414,10 @@
                 "leisure/pitch/soccer": {
                     "name": "足球場",
                     "terms": "Soccer Field,足球場"
+                },
+                "leisure/pitch/table_tennis": {
+                    "name": "乒乓波枱",
+                    "terms": "Ping Pong Table,乒乓球枱,乒乓枱"
                 },
                 "leisure/pitch/tennis": {
                     "name": "網球場",
@@ -3349,8 +3436,8 @@
                     "terms": "Resort, 度假村"
                 },
                 "leisure/running_track": {
-                    "name": "徑賽跑道",
-                    "terms": "跑道,徑賽跑道,標準跑道"
+                    "name": "賽道(田徑)",
+                    "terms": "Racetrack (Running), 賽跑道"
                 },
                 "leisure/slipway": {
                     "name": "船台",
@@ -3373,8 +3460,8 @@
                     "terms": "Swimming Pool,游水池,游泳池,遊泳池"
                 },
                 "leisure/track": {
-                    "name": "賽道(非小型賽車)",
-                    "terms": "賽道(非小型賽車)"
+                    "name": "賽道(非賽車)",
+                    "terms": "Racetrack (Non-Motorsport),跑道"
                 },
                 "leisure/water_park": {
                     "name": "水上樂園",
@@ -3428,8 +3515,8 @@
                     "terms": "Lighthouse,燈塔"
                 },
                 "man_made/mast": {
-                    "name": "無線電杆",
-                    "terms": "無線電杆, 天線杆"
+                    "name": "天線塔",
+                    "terms": "Mast,天線桿"
                 },
                 "man_made/observation": {
                     "name": "瞭望臺",
@@ -3714,8 +3801,7 @@
                     "terms": "City,城,城市"
                 },
                 "place/farm": {
-                    "name": "農場",
-                    "terms": "農場, 農田, 農莊"
+                    "name": "農場"
                 },
                 "place/hamlet": {
                     "name": "小村莊",
@@ -3737,13 +3823,17 @@
                     "name": "近鄰",
                     "terms": "近鄰"
                 },
+                "place/quarter": {
+                    "name": "自治市分區 / 小區",
+                    "terms": "Sub-Borough / Quarter, 自治市分區 / 小區"
+                },
                 "place/square": {
                     "name": "廣場",
                     "terms": "Square,廣場"
                 },
                 "place/suburb": {
-                    "name": "自治鎮",
-                    "terms": "自治鎮, 自治市鎮"
+                    "name": "自治市 / 郊區",
+                    "terms": "Borough / Suburb, 自治鎮, 自治市鎮"
                 },
                 "place/town": {
                     "name": "鎮",
@@ -3861,6 +3951,10 @@
                 "railway/tram": {
                     "name": "電車",
                     "terms": "Tram,電車"
+                },
+                "railway/tram_stop": {
+                    "name": "電車站",
+                    "terms": "Tram Stop, 電車站"
                 },
                 "relation": {
                     "name": "關係",
@@ -4092,6 +4186,10 @@
                     "name": "園藝中心",
                     "terms": "Garden Center,園藝中心,園藝舖,花店"
                 },
+                "shop/gas": {
+                    "name": "瓶裝石油氣店",
+                    "terms": "Bottled Gas Shop, 樽裝石油氣店"
+                },
                 "shop/gift": {
                     "name": "禮品店",
                     "terms": "Gift Shop,禮品店,禮品舖,禮物店"
@@ -4219,6 +4317,10 @@
                 "shop/pawnbroker": {
                     "name": "當舖",
                     "terms": "大押,押,當押"
+                },
+                "shop/perfumery": {
+                    "name": "香水店",
+                    "terms": "Perfume Store,香水店"
                 },
                 "shop/pet": {
                     "name": "寵物舖",

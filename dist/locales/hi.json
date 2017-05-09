@@ -3,12 +3,12 @@
         "modes": {
             "add_area": {
                 "title": "एरिया",
-                "description": "पार्क, बिल्डिंग, झील अथवा अन्य क्षेत्रों को नक़्शे पर जोड़ें।",
+                "description": "पार्क, बिल्डिंग, झील या अन्य क्षेत्रों को नक़्शे पर डालें।",
                 "tail": "पार्क, झील या बिल्डिंग, अर्थात किसी क्षेत्र के रेखांकन हेतु नक़्शे पर क्लिक करें।"
             },
             "add_line": {
                 "title": "रेखा",
-                "description": "राजमार्ग, गलियों, पैदल पथ, नहरों अथवा अन्य रैखिक चीजों को नक़्शे पर जोड़ें।",
+                "description": "राजमार्ग, गलियों, पैदल पथ, नहरों या अन्य रैखिक चीजों को नक़्शे पर डालें।",
                 "tail": "सड़क, पथ, या मार्ग की ड्राइंग शुरू करने के लिए नक्शे पर क्लिक करें"
             },
             "add_point": {
@@ -16,19 +16,367 @@
                 "tail": "बिंदु जोड़ने के लिये नक़्शे पर क्लिक करें।"
             }
         },
+        "operations": {
+            "add": {
+                "annotation": {
+                    "point": "बिंदू जोड़ दिया"
+                }
+            },
+            "start": {
+                "annotation": {
+                    "line": "एक रॆखा शुरू कर दी",
+                    "area": "एक श्रॆत्र शुरू कर दिया ।"
+                }
+            },
+            "continue": {
+                "key": "अ",
+                "title": "ज़ारी रख्खें",
+                "description": "इस रेखा को ज़ारी रख्खें ।"
+            },
+            "circularize": {
+                "key": "अो"
+            },
+            "orthogonalize": {
+                "title": "चौकोर"
+            },
+            "straighten": {
+                "title": "सीधा करें ।",
+                "description": "इस रेखा को सीधा करें ।"
+            },
+            "delete": {
+                "title": "मिटायें"
+            },
+            "merge": {
+                "title": "मिलायें"
+            },
+            "rotate": {
+                "title": "घुमायॆं",
+                "key": "र"
+            }
+        },
+        "translate": {
+            "localized_translation_language": "भाषा चुनें",
+            "localized_translation_name": "नाम"
+        },
         "infobox": {
+            "closed": "बंद",
             "area": "एरिया"
         },
+        "geometry": {
+            "line": "रेखा",
+            "area": "क्षेत्र"
+        },
+        "inspector": {
+            "show_more": "और दिखायें",
+            "remove": "हटायें",
+            "check": {
+                "yes": "हॉं",
+                "no": "नहीं"
+            },
+            "add": "जोड़े",
+            "way": "रास्ता"
+        },
+        "feature": {
+            "paths": {
+                "description": "रास्ते"
+            },
+            "buildings": {
+                "description": "इमारतें"
+            }
+        },
+        "intro": {
+            "graph": {
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "in"
+            }
+        },
         "presets": {
+            "categories": {
+                "category-barrier": {
+                    "name": "बाधा विशॆषता"
+                },
+                "category-building": {
+                    "name": "इमारत विशॆषता"
+                },
+                "category-golf": {
+                    "name": "गोल्फ विशॆषता"
+                },
+                "category-landuse": {
+                    "name": "भूमि उपयोग विशॆषता"
+                },
+                "category-natural-area": {
+                    "name": "प्राकृितक विशॆषता"
+                },
+                "category-natural-line": {
+                    "name": "प्राकृितक विशॆषता"
+                },
+                "category-natural-point": {
+                    "name": "प्राकृितक विशॆषता"
+                },
+                "category-path": {
+                    "name": "रास्ता विशॆषता"
+                },
+                "category-rail": {
+                    "name": "रेल विशॆषता"
+                },
+                "category-restriction": {
+                    "name": "प्रतिबंध विशॆषता"
+                },
+                "category-road": {
+                    "name": "सड़क विशॆषता"
+                },
+                "category-route": {
+                    "name": "रास्ता विशॆषता"
+                },
+                "category-water-area": {
+                    "name": "पानी विशॆषता"
+                },
+                "category-water-line": {
+                    "name": "पानी विशॆषता"
+                }
+            },
+            "fields": {
+                "access": {
+                    "label": "अनुज्ञात प्रवेश",
+                    "options": {
+                        "destination": {
+                            "title": "मंजिल"
+                        },
+                        "dismount": {
+                            "title": "उतरना"
+                        },
+                        "no": {
+                            "title": "प्रतिबंधित"
+                        },
+                        "permissive": {
+                            "title": "अनुज्ञात्मक"
+                        },
+                        "private": {
+                            "title": "निजी"
+                        },
+                        "yes": {
+                            "title": "अनुज्ञात"
+                        }
+                    },
+                    "types": {
+                        "access": "सब",
+                        "bicycle": "साइकिल",
+                        "foot": "पैर",
+                        "horse": "घोड़े",
+                        "motor_vehicle": "मोटर वाहन"
+                    }
+                },
+                "access_simple": {
+                    "label": "अनुज्ञात प्रवेश"
+                },
+                "access_toilets": {
+                    "label": "प्रवेश"
+                },
+                "address": {
+                    "label": "पता",
+                    "placeholders": {
+                        "city": "शहर",
+                        "city!jp": "शहर/नगर /गाँव",
+                        "city!vn": "शहर/नगर ",
+                        "country": "देश",
+                        "county": "देश",
+                        "county!jp": "जिला",
+                        "district": "जिला",
+                        "floor": "मंजिल",
+                        "hamlet": "उपग्राम",
+                        "housename": "घर का नाम",
+                        "neighbourhood": "अास पड़ोस",
+                        "place": "जगह",
+                        "state": "प्रदेश",
+                        "street": "गली"
+                    }
+                },
+                "aerialway": {
+                    "label": "भाती"
+                },
+                "aerialway/access": {
+                    "options": {
+                        "both": "दोनो",
+                        "entry": "प्रवेश",
+                        "exit": "निकास"
+                    }
+                },
+                "aerialway/capacity": {
+                    "label": "क्षमता (प्रति घंटा)"
+                },
+                "aerialway/summer/access": {
+                    "options": {
+                        "both": "दोनो",
+                        "entry": "प्रवेश"
+                    }
+                },
+                "animal_breeding": {
+                    "label": "जान्वरों के लिए"
+                },
+                "animal_shelter": {
+                    "label": "जान्वरों के लिए"
+                },
+                "building": {
+                    "label": "इमारत"
+                },
+                "building_area": {
+                    "label": "इमारत"
+                },
+                "cardinal_direction": {
+                    "options": {
+                        "E": "पूर्व",
+                        "N": "उत्तर",
+                        "S": "दक्षिण",
+                        "W": "पश्चिम"
+                    }
+                },
+                "date": {
+                    "label": "दिनॉंक"
+                },
+                "fire_hydrant/type": {
+                    "options": {
+                        "pond": "तलाब",
+                        "wall": "दिवार"
+                    }
+                },
+                "gender": {
+                    "options": {
+                        "female": "औरत",
+                        "male": "आदमी"
+                    }
+                },
+                "incline_steps": {
+                    "options": {
+                        "down": "नीचॆ",
+                        "up": "ऊपर"
+                    }
+                },
+                "internet_access": {
+                    "options": {
+                        "no": "नहीं",
+                        "yes": "हॉं"
+                    }
+                },
+                "name": {
+                    "label": "नाम"
+                },
+                "parallel_direction": {
+                    "label": "दिशा"
+                },
+                "plant": {
+                    "label": "पौधा"
+                },
+                "rooms": {
+                    "label": "कमरे"
+                },
+                "second_hand": {
+                    "options": {
+                        "no": "नहीं",
+                        "only": "केवल",
+                        "yes": "हॉं"
+                    }
+                },
+                "smoking": {
+                    "label": "धूम्रपान"
+                },
+                "sport": {
+                    "label": "खेल"
+                },
+                "sport_ice": {
+                    "label": "खेल"
+                },
+                "sport_racing_motor": {
+                    "label": "खेल"
+                },
+                "sport_racing_nonmotor": {
+                    "label": "खेल"
+                },
+                "stars": {
+                    "label": "तारे"
+                },
+                "structure": {
+                    "options": {
+                        "bridge": "पुल"
+                    }
+                },
+                "toilets/disposal": {
+                    "options": {
+                        "bucket": "बालटी"
+                    }
+                },
+                "trees": {
+                    "label": "पेड़"
+                }
+            },
             "presets": {
+                "address": {
+                    "name": "पता"
+                },
+                "amenity/clock": {
+                    "name": "घडी"
+                },
+                "amenity/drinking_water": {
+                    "name": "पीने का पानी"
+                },
                 "area": {
                     "name": "एरिया"
+                },
+                "barrier/wall": {
+                    "name": "दिवार"
+                },
+                "building/house": {
+                    "name": "मकान"
+                },
+                "building/hut": {
+                    "name": "झोपड़ी"
+                },
+                "craft/tailor": {
+                    "name": "दऱजी"
+                },
+                "golf/rough": {
+                    "name": "खुरदुरा"
+                },
+                "landuse/forest": {
+                    "name": "जंगल"
+                },
+                "landuse/grass": {
+                    "name": "घास"
                 },
                 "line": {
                     "name": "रेखा"
                 },
+                "natural/tree": {
+                    "name": "पेड़"
+                },
+                "natural/water": {
+                    "name": "पानी"
+                },
+                "natural/water/lake": {
+                    "name": "झील"
+                },
+                "natural/water/pond": {
+                    "name": "तलाब"
+                },
                 "point": {
                     "name": "बिंदु"
+                },
+                "tourism/zoo": {
+                    "name": "चिड़िया घर"
+                },
+                "waterway/river": {
+                    "name": "नदी"
+                },
+                "waterway/waterfall": {
+                    "name": "झरना"
                 }
             }
         }

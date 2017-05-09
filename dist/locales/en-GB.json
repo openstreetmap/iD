@@ -101,12 +101,33 @@
             },
             "delete": {
                 "title": "Delete",
+                "description": {
+                    "single": "Delete this feature permanently.",
+                    "multiple": "Delete these features permanently."
+                },
                 "annotation": {
                     "point": "Deleted a point.",
                     "vertex": "Deleted a node from a way.",
                     "line": "Deleted a line.",
                     "area": "Deleted an area.",
-                    "relation": "Deleted a relation."
+                    "relation": "Deleted a relation.",
+                    "multiple": "Deleted {n} features."
+                },
+                "too_large": {
+                    "single": "This feature can't be deleted because not enough of it is currently visible.",
+                    "multiple": "These features can't be deleted because not enough of them are currently visible."
+                },
+                "incomplete_relation": {
+                    "single": "This feature can't be deleted because it hasn't been fully downloaded.",
+                    "multiple": "These features can't be deleted because they haven't been fully downloaded."
+                },
+                "part_of_relation": {
+                    "single": "This feature can't be deleted because it is part of a larger relation. You must remove it from the relation first.",
+                    "multiple": "These features can't be deleted because they are part of larger relations. You must remove them from the relations first."
+                },
+                "connected_to_hidden": {
+                    "single": "This feature can't be deleted because it is connected to a hidden feature.",
+                    "multiple": "These features can't be deleted because some are connected to hidden features."
                 }
             },
             "add_member": {
@@ -138,27 +159,103 @@
                 "key": "C",
                 "annotation": "Merged {n} features.",
                 "not_eligible": "These features can't be merged.",
-                "not_adjacent": "These features can't be merged because they aren't connected.",
+                "not_adjacent": "These features can't be merged because their endpoints aren't connected.",
                 "restriction": "These features can't be merged because at least one is a member of a \"{relation}\" relation.",
                 "incomplete_relation": "These features can't be merged because at least one hasn't been fully downloaded.",
                 "conflicting_tags": "These features can't be merged because some of their tags have conflicting values."
             },
             "move": {
                 "title": "Move",
+                "description": {
+                    "single": "Move this feature to a different location.",
+                    "multiple": "Move these features to a different location."
+                },
                 "key": "M",
                 "annotation": {
                     "point": "Moved a point.",
                     "vertex": "Moved a node in a way.",
                     "line": "Moved a line.",
-                    "area": "Moved an area."
+                    "area": "Moved an area.",
+                    "multiple": "Moved multiple features."
+                },
+                "incomplete_relation": {
+                    "single": "This feature can't be moved because it hasn't been fully downloaded.",
+                    "multiple": "These features can't be moved because they haven't been fully downloaded."
+                },
+                "too_large": {
+                    "single": "This feature can't be moved because not enough of it is currently visible.",
+                    "multiple": "These features can't be moved because not enough of them are currently visible."
+                },
+                "connected_to_hidden": {
+                    "single": "This feature can't be moved because it is connected to a hidden feature.",
+                    "multiple": "These features can't be moved because some are connected to hidden features."
+                }
+            },
+            "reflect": {
+                "title": {
+                    "long": "Reflect Long",
+                    "short": "Reflect Short"
+                },
+                "description": {
+                    "long": {
+                        "single": "Reflect this feature across its long axis.",
+                        "multiple": "Reflect these features across their long axis."
+                    },
+                    "short": {
+                        "single": "Reflect this feature across its short axis.",
+                        "multiple": "Reflect these features across their short axis."
+                    }
+                },
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                },
+                "annotation": {
+                    "long": {
+                        "single": "Reflected a feature across its long axis.",
+                        "multiple": "Reflected multiple features across their long axis."
+                    },
+                    "short": {
+                        "single": "Reflected a feature across its short axis.",
+                        "multiple": "Reflected multiple features across their short axis."
+                    }
+                },
+                "incomplete_relation": {
+                    "single": "This feature can't be reflected because it hasn't been fully downloaded.",
+                    "multiple": "These features can't be reflected because they haven't been fully downloaded."
+                },
+                "too_large": {
+                    "single": "This feature can't be reflected because not enough of it is currently visible.",
+                    "multiple": "These features can't be reflected because not enough of them are currently visible."
+                },
+                "connected_to_hidden": {
+                    "single": "This feature can't be reflected because it is connected to a hidden feature.",
+                    "multiple": "These features can't be reflected because some are connected to hidden features."
                 }
             },
             "rotate": {
                 "title": "Rotate",
+                "description": {
+                    "single": "Rotate this feature around its center point.",
+                    "multiple": "Rotate these features around their center point."
+                },
                 "key": "R",
                 "annotation": {
                     "line": "Rotated a line.",
-                    "area": "Rotated an area."
+                    "area": "Rotated an area.",
+                    "multiple": "Rotated multiple features."
+                },
+                "incomplete_relation": {
+                    "single": "This feature can't be rotated because it hasn't been fully downloaded.",
+                    "multiple": "These features can't be rotated because they haven't been fully downloaded."
+                },
+                "too_large": {
+                    "single": "This feature can't be rotated because not enough of it is currently visible.",
+                    "multiple": "These features can't be rotated because not enough of them are currently visible."
+                },
+                "connected_to_hidden": {
+                    "single": "This feature can't be rotated because it is connected to a hidden feature.",
+                    "multiple": "These features can't be rotated because some are connected to hidden features."
                 }
             },
             "reverse": {
@@ -214,6 +311,7 @@
             "localized_translation_name": "Name"
         },
         "zoom_in_edit": "Zoom in to Edit",
+        "login": "login",
         "logout": "logout",
         "loading_auth": "Connecting to OpenStreetMap...",
         "report_a_bug": "Report a bug",
@@ -225,12 +323,16 @@
         "status": {
             "error": "Unable to connect to API.",
             "offline": "The API is offline. Please try editing later.",
-            "readonly": "The API is read-only. You will need to wait to save your changes."
+            "readonly": "The API is read-only. You will need to wait to save your changes.",
+            "rateLimit": "The API is limiting anonymous connections.  You can fix this by logging in."
         },
         "commit": {
+            "title": "Upload to OpenStreetMap",
             "description_placeholder": "Brief description of your contributions (required)",
+            "message_label": "Changeset Comment",
             "upload_explanation": "The changes you upload will be visible on all maps that use OpenStreetMap data.",
             "upload_explanation_with_user": "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
+            "save": "Upload",
             "cancel": "Cancel",
             "changes": "{count} Changes",
             "warnings": "Warnings",
@@ -278,6 +380,7 @@
         "inspector": {
             "no_documentation_combination": "There is no documentation available for this tag combination",
             "no_documentation_key": "There is no documentation available for this key",
+            "documentation_redirect": "This documentation has been redirected to a new page",
             "show_more": "Show More",
             "view_on_osm": "View on openstreetmap.org",
             "all_fields": "All fields",
@@ -292,13 +395,22 @@
             "back_tooltip": "Change feature",
             "remove": "Remove",
             "search": "Search",
+            "multiselect": "Selected features",
             "unknown": "Unknown",
             "incomplete": "<not downloaded>",
             "feature_list": "Search features",
             "edit": "Edit feature",
             "check": {
                 "yes": "Yes",
-                "no": "No"
+                "no": "No",
+                "reverser": "Change Direction"
+            },
+            "radio": {
+                "structure": {
+                    "type": "Type",
+                    "default": "Default",
+                    "layer": "Layer"
+                }
             },
             "add": "Add",
             "none": "None",
@@ -317,6 +429,7 @@
             "switch": "Switch back to this background",
             "custom": "Custom",
             "custom_button": "Edit custom background",
+            "custom_prompt": "Enter a tile URL template. Valid tokens are {zoom}, {x}, {y} for Z/X/Y scheme and {u} for quadtile scheme.",
             "fix_misalignment": "Adjust imagery offset",
             "imagery_source_faq": "Where does this imagery come from?",
             "reset": "reset",
@@ -406,10 +519,12 @@
         },
         "save": {
             "title": "Save",
+            "help": "Review your changes and upload them to OpenStreetMap, making them visible to other users.",
             "no_changes": "No changes to save.",
             "error": "Errors occurred while trying to save",
             "status_code": "Server returned status code {code}",
             "unknown_error_details": "Please ensure you are connected to the Internet.",
+            "uploading": "Uploading changes to OpenStreetMap...",
             "unsaved_changes": "You have unsaved changes",
             "conflict": {
                 "header": "Resolve conflicting edits",
@@ -421,11 +536,14 @@
                 "restore": "Restore",
                 "delete": "Leave Deleted",
                 "download_changes": "Or download your changes.",
-                "done": "All conflicts resolved!"
+                "done": "All conflicts resolved!",
+                "help": "Another user changed some of the same map features you changed.\nClick on each feature below for more details about the conflict, and choose whether to keep\nyour changes or the other user's changes.\n"
             }
         },
         "merge_remote_changes": {
             "conflict": {
+                "deleted": "This feature has been deleted by {user}.",
+                "location": "This feature was moved by both you and {user}.",
                 "nodelist": "Nodes were changed by both you and {user}.",
                 "memberlist": "Relation members were changed by both you and {user}.",
                 "tags": "You changed the <b>{tag}</b> tag to \"{local}\" and {user} changed it to \"{remote}\"."
@@ -443,7 +561,7 @@
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
         "confirm": {
-            "okay": "Okay",
+            "okay": "OK",
             "cancel": "Cancel"
         },
         "splash": {
@@ -457,19 +575,29 @@
             "lose_changes": "You have unsaved changes. Switching the map server will discard them. Are you sure you want to switch servers?",
             "dev": "dev"
         },
+        "version": {
+            "whats_new": "What's new in iD {version}"
+        },
         "tag_reference": {
             "description": "Description",
             "on_wiki": "{tag} on wiki.osm.org",
             "used_with": "used with {type}"
         },
         "validations": {
+            "disconnected_highway": "Disconnected highway",
+            "disconnected_highway_tooltip": "Roads should be connected to other roads or building entrances.",
+            "old_multipolygon": "Multipolygon tags on outer way",
+            "old_multipolygon_tooltip": "This style of multipolygon is deprecated. Please assign the tags to the parent multipolygon instead of the outer way.",
             "untagged_point": "Untagged point",
-            "untagged_line": "Untagged line",
-            "untagged_area": "Untagged area",
-            "tag_suggests_area": "The tag {tag} suggests line should be area, but it is not an area",
             "untagged_point_tooltip": "Select a feature type that describes what this point is.",
+            "untagged_line": "Untagged line",
             "untagged_line_tooltip": "Select a feature type that describes what this line is.",
+            "untagged_area": "Untagged area",
             "untagged_area_tooltip": "Select a feature type that describes what this area is.",
+            "untagged_relation": "Untagged relation",
+            "untagged_relation_tooltip": "Select a feature type that describes what this relation is.",
+            "many_deletions": "You're deleting {n} features. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
+            "tag_suggests_area": "The tag {tag} suggests line should be area, but it is not an area",
             "deprecated_tags": "Deprecated tags: {tags}"
         },
         "zoom": {
@@ -478,6 +606,12 @@
         },
         "cannot_zoom": "Cannot zoom out further in current mode.",
         "full_screen": "Toggle Full Screen",
+        "gpx": {
+            "local_layer": "Local file",
+            "drag_drop": "Drag and drop a .gpx, .geojson or .kml file on the page, or click the button to the right to browse",
+            "zoom": "Zoom to layer",
+            "browse": "Browse for a file"
+        },
         "mapillary_images": {
             "tooltip": "Street-level photos from Mapillary",
             "title": "Photo Overlay (Mapillary)"
@@ -502,82 +636,249 @@
             "relations": "# Relations\n\nA relation is a special type of feature in OpenStreetMap that groups together\nother features. For example, two common types of relations are *route relations*,\nwhich group together sections of road that belong to a specific freeway or\nhighway, and *multipolygons*, which group together several lines that define\na complex area (one with several pieces or holes in it like a donut).\n\nThe group of features in a relation are called *members*. In the sidebar, you can\nsee which relations a feature is a member of, and click on a relation there\nto select the it. When the relation is selected, you can see all of its\nmembers listed in the sidebar and highlighted on the map.\n\nFor the most part, iD will take care of maintaining relations automatically\nwhile you edit. The main thing you should be aware of is that if you delete a\nsection of road to redraw it more accurately, you should make sure that the\nnew section is a member of the same relations as the original.\n\n## Editing Relations\n\nIf you want to edit relations, here are the basics.\n\nTo add a feature to a relation, select the feature, click the \"+\" button in the\n\"All relations\" section of the sidebar, and select or type the name of the relation.\n\nTo create a new relation, select the first feature that should be a member,\nclick the \"+\" button in the \"All relations\" section, and select \"New relation...\".\n\nTo remove a feature from a relation, select the feature and click the trash\nbutton next to the relation you want to remove it from.\n\nYou can create multipolygons with holes using the \"Merge\" tool. Draw two areas (inner\nand outer), hold the Shift key and click on each of them to select them both, and then\nclick the \"Merge\" (+) button.\n"
         },
         "intro": {
+            "done": "done",
+            "ok": "OK",
             "graph": {
-                "city_hall": "Three Rivers City Hall",
-                "fire_department": "Three Rivers Fire and Rescue Service",
-                "memory_isle_park": "Memory Isle Park",
-                "riverwalk_trail": "Riverwalk Trail",
-                "w_michigan_ave": "West Michigan Avenue",
-                "e_michigan_ave": "East Michigan Avenue",
-                "spring_st": "Spring Street",
-                "scidmore_park": "Scidmore Park",
-                "petting_zoo": "Scidmore Park Zoo",
-                "n_andrews_st": "North Andrews Street",
-                "s_andrews_st": "South Andrews Street",
-                "n_constantine_st": "North Constantine Street",
-                "s_constantine_st": "South Constantine Street",
-                "rocky_river": "Rocky River",
-                "railroad_dr": "Station Drive",
-                "conrail_rr": "Ravenglass Railway",
-                "st_joseph_river": "Saint Joseph River",
-                "n_main_st": "North High Street",
-                "s_main_st": "South High Street",
-                "water_st": "Water Street",
-                "foster_st": "Foster Street",
-                "portage_river": "Portage River",
-                "flower_st": "Flower Street",
-                "elm_st": "Oak Street",
-                "walnut_st": "Walnut Street",
-                "morris_ave": "Morris Avenue",
-                "east_st": "East Street",
-                "portage_ave": "Portage Avenue"
+                "block_number": "<value for addr:block_number>",
+                "city": "Three Rivers",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "postcode": "TR17 1BB",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "gb",
+                "name": {
+                    "1st-avenue": "1st Avenue",
+                    "2nd-avenue": "2nd Avenue",
+                    "4th-avenue": "4th Avenue",
+                    "5th-avenue": "5th Avenue",
+                    "6th-avenue": "6th Avenue",
+                    "6th-street": "6th Street",
+                    "7th-avenue": "7th Avenue",
+                    "8th-avenue": "8th Avenue",
+                    "9th-avenue": "9th Avenue",
+                    "10th-avenue": "10th Avenue",
+                    "11th-avenue": "11th Avenue",
+                    "12th-avenue": "12th Avenue",
+                    "access-point-employment": "Access Point Employment",
+                    "adams-street": "Adams Street",
+                    "andrews-elementary-school": "Andrews Elementary School",
+                    "andrews-street": "Andrews Street",
+                    "armitage-street": "Armitage Street",
+                    "barrows-school": "Barrows School",
+                    "battle-street": "Battle Street",
+                    "bennett-street": "Bennett Street",
+                    "bowman-park": "Bowman Park",
+                    "collins-drive": "Collins Drive",
+                    "conrail-railroad": "National Rail",
+                    "conservation-park": "Conservation Park",
+                    "constantine-street": "Constantine Street",
+                    "cushman-street": "Cushman Street",
+                    "dollar-tree": "Euro Tree",
+                    "douglas-avenue": "Douglas Avenue",
+                    "east-street": "East Street",
+                    "elm-street": "Elm Street",
+                    "flower-street": "Flower Street",
+                    "foster-street": "Foster Street",
+                    "french-street": "French Street",
+                    "garden-street": "Garden Street",
+                    "gem-pawnbroker": "Gem Pawnbroker",
+                    "golden-finch-framing": "Golden Finch Framing",
+                    "grant-avenue": "Grant Avenue",
+                    "hoffman-pond": "Hoffman Pond",
+                    "hoffman-street": "Hoffman Street",
+                    "hook-avenue": "Hook Avenue",
+                    "jefferson-street": "Jefferson Street",
+                    "kelsey-street": "Kelsey Street",
+                    "lafayette-park": "LaFayette Park",
+                    "las-coffee-cafe": "L.A.'s Coffee Cafe",
+                    "lincoln-avenue": "Longspring Avenue",
+                    "lowrys-books": "Lowry's Books",
+                    "lynns-garage": "Lynn's Garage",
+                    "main-street-barbell": "Main Street Barbell",
+                    "main-street-cafe": "Main Street Cafe",
+                    "main-street-fitness": "Main Street Fitness",
+                    "main-street": "Main Street",
+                    "maple-street": "Maple Street",
+                    "marina-park": "Marina Park",
+                    "market-street": "Market Street",
+                    "memory-isle-park": "Memory Isle Park",
+                    "memory-isle": "Memory Isle",
+                    "michigan-avenue": "Mayfair Avenue",
+                    "middle-street": "Middle Street",
+                    "millard-street": "Millard Street",
+                    "moore-street": "Moore Street",
+                    "morris-avenue": "Morris Avenue",
+                    "mural-mall": "Mural Mall",
+                    "paisanos-bar-and-grill": "Paisano's Bar and Grill",
+                    "paisley-emporium": "Paisley Emporium",
+                    "paparazzi-tattoo": "Paparazzi Tattoo",
+                    "pealer-street": "Pealer Street",
+                    "pine-street": "Pine Street",
+                    "pizza-hut": "Pizza Hut",
+                    "portage-avenue": "Portage Avenue",
+                    "portage-river": "Portage River",
+                    "preferred-insurance-services": "Preferred Insurance Services",
+                    "railroad-drive": "Railroad Drive",
+                    "river-city-appliance": "River City Appliance",
+                    "river-drive": "River Drive",
+                    "river-road": "River Road",
+                    "river-street": "River Street",
+                    "riverside-cemetery": "Riverside Cemetery",
+                    "riverwalk-trail": "Riverwalk Trail",
+                    "riviera-theatre": "Riviera Theatre",
+                    "rocky-river": "Rocky River",
+                    "saint-joseph-river": "Saint Joseph River",
+                    "scidmore-park-petting-zoo": "Scidmore Park Petting Zoo",
+                    "scidmore-park": "Scidmore Park",
+                    "scouter-park": "Scouter Park",
+                    "sherwin-williams": "Sherwin-Williams",
+                    "south-street": "South Street",
+                    "southern-michigan-bank": "Santander",
+                    "spring-street": "Spring Street",
+                    "sturgeon-river-road": "Sturgeon River Road",
+                    "three-rivers-city-hall": "Three Rivers City Hall",
+                    "three-rivers-elementary-school": "Three Rivers Elementary School",
+                    "three-rivers-fire-department": "Three Rivers Fire Department",
+                    "three-rivers-high-school": "Three Rivers High School",
+                    "three-rivers-middle-school": "Three Rivers Middle School",
+                    "three-rivers-municipal-airport": "Three Rivers Municipal Airport",
+                    "three-rivers-post-office": "Three Rivers Post Office",
+                    "three-rivers-public-library": "Three Rivers Public Library",
+                    "three-rivers": "Three Rivers",
+                    "unique-jewelry": "Unique Jewelry",
+                    "walnut-street": "Walnut Street",
+                    "washington-street": "Kings Road",
+                    "water-street": "Water Street",
+                    "west-street": "West Street",
+                    "wheeler-street": "Wheeler Street",
+                    "william-towing": "William Towing",
+                    "willow-drive": "Willow Drive",
+                    "wood-street": "Wood Street",
+                    "world-fare": "World Fare"
+                }
+            },
+            "welcome": {
+                "title": "Welcome",
+                "welcome": "Welcome! This walkthrough will teach you the basics of editing on OpenStreetMap.",
+                "practice": "All of the data in this walkthrough is just for practicing, and any edits that you make in the walkthrough will not be saved.",
+                "words": "This walkthrough will introduce some new words and concepts. When we introduce a new word, we'll use *italics*.",
+                "mouse": "You can use any input device to edit the map, but this walkthrough assumes you have a mouse with left and right buttons. **If you want to attach a mouse, do so now, then click OK.**",
+                "leftclick": "When this tutorial asks you to click or double-click, we mean with the left button. On a trackpad it might be a single-click or single-finger tap. **Left-click {num} times.**",
+                "rightclick": "Sometimes we'll also ask you to right-click. This might be the same as control-click, or two-finger tap on a trackpad. Your keyboard might even have a 'menu' key that works like right-click. **Right-click {num} times.**",
+                "chapters": "So far, so good! You can use the buttons below to skip chapters at any time or to restart a chapter if you get stuck. Let's begin! **Click '{next}' to continue.**"
             },
             "navigation": {
                 "title": "Navigation",
-                "drag": "The main map area shows OpenStreetMap data on top of a background. You can navigate by dragging and scrolling, just like any web map. **Drag the map!**",
-                "select": "Map features are represented three ways: using points, lines or areas. All features can be selected by clicking on them. **Click on the point to select it.**",
-                "pane": "When a feature is selected, the feature editor is displayed. The header shows us the feature type and the main pane shows the feature's attributes, such as its name and address. **Close the feature editor by pressing the {button} button in the top right.**",
-                "search": "You can also search for features in the current view, or worldwide. **Search for '{name}'**",
-                "choose": "**Choose {name} from the list to select it.**",
-                "chosen": "Great! {name} is now selected. **Close the feature editor by pressing the {button} button.**"
+                "drag": "The main map area shows OpenStreetMap data on top of a background.{br}You can drag the map by pressing and holding the left mouse button while moving the mouse around. You can also use the arrow keys on your keyboard. **Drag the map!**",
+                "zoom": "You can zoom in or out by scrolling with the mouse wheel or trackpad, or by clicking the {plus} / {minus} buttons. **Zoom the map!**",
+                "features": "We use the word *features* to describe the things that appear on the map. Anything in the real world can be mapped as a feature on OpenStreetMap.",
+                "points_lines_areas": "Map features are represented using *points, lines, or areas.*",
+                "nodes_ways": "In OpenStreetMap, points are sometimes called *nodes*, and lines and areas are sometimes called *ways*.",
+                "click_townhall": "All features on the map can be selected by clicking on them. **Click on the point to select it.**",
+                "selected_townhall": "Great! The point is now selected. Selected features are drawn with a pulsing glow.",
+                "editor_townhall": "When a feature is selected, the *feature editor* is displayed alongside the map.",
+                "preset_townhall": "The top part of the feature editor shows the feature's type. This point is a {preset}.",
+                "fields_townhall": "The middle part of the feature editor contains *fields* showing the feature's attributes, such as its name and address.",
+                "close_townhall": "**Close the feature editor by hitting escape or pressing the {button} button in the upper corner.**",
+                "search_street": "You can also search for features in the current view, or worldwide. **Search for '{name}'.**",
+                "choose_street": "**Choose {name} from the list to select it.**",
+                "selected_street": "Great! {name} is now selected.",
+                "editor_street": "The fields shown for a street are different than the fields that were shown for the town hall.{br}For this selected street, the feature editor shows fields like '{field1}' and '{field2}'. **Close the feature editor by hitting escape or pressing the {button} button.**",
+                "play": "Try moving the map and clicking on some other features to see what kinds of things can be added to OpenStreetMap. **When you are ready to continue to the next chapter, click '{next}'.**"
             },
             "points": {
                 "title": "Points",
-                "add": "Points can be used to represent features such as shops, restaurants, and monuments. They mark a specific location, and describe what's there. **Click the {button} Point button to add a new point.**",
-                "place": "The point can be placed by clicking on the map. **Click the map to place the new point on top of the building.**",
-                "search": "There are many different features that can be represented by points. The point you just added is a Cafe. **Search for '{name}'**",
-                "choose": "**Choose Cafe from the list.**",
-                "describe": "The point is now marked as a cafe. Using the feature editor, we can add more information about the feature. **Add a name**",
-                "close": "The feature editor will remember all of your changes automatically.  When you change a feature, the close button will change to a checkmark. **Click the {button} button to close the feature editor**",
-                "reselect": "Often points will already exist, but have mistakes or be incomplete. We can edit existing points. **Click to select the point you just created.**",
-                "fixname": "**Change the name, then click the {button} button to close the feature editor.**",
-                "reselect_delete": "All features on the map can be deleted. **Click to select the point you created.**",
-                "delete": "The menu around the point contains operations that can be performed on it, including delete. **Click on the {button} button to delete the point.**"
+                "add_point": "*Points* can be used to represent features such as shops, restaurants, and monuments.{br}They mark a specific location, and describe what's there. **Click the {button} Point button to add a new point.**",
+                "place_point": "To place the new point on the map, position your mouse cursor where the point should go, then left-click or press the spacebar. **Move the mouse pointer over this building, then left-click or press the spacebar.**",
+                "search_cafe": "There are many different features that can be represented by points. The point you just added is a cafe. **Search for '{preset}'.**",
+                "choose_cafe": "**Choose {preset} from the list.**",
+                "feature_editor": "The point is now marked as a cafe. Using the feature editor, we can add more information about the cafe.",
+                "add_name": "In OpenStreetMap, all of the fields are optional, and it's OK to leave a field blank if you are unsure.{br}Let's pretend that you have local knowledge of this cafe, and you know its name. **Add a name for the cafe.**",
+                "add_close": "The feature editor will remember all of your changes automatically. **When you are finished adding the name, hit escape, return, or click the {button} button to close the feature editor.**",
+                "reselect": "Often points will already exist, but have mistakes or be incomplete. We can edit existing points. **Click to select the cafe you just created.**",
+                "update": "Let's fill in some more details for this cafe. You can change its name, add a cuisine, or add an address. **Change the cafe details.**",
+                "update_close": "**When you are finished updating the cafe, hit escape, return, or click the {button} button to close the feature editor.**",
+                "rightclick": "You can right-click on any feature to see the *edit menu*, which shows a list of editing operations that can be performed. **Right-click to select the point you created and show the edit menu.**",
+                "delete": "It's OK to delete features that don't exist in the real world.{br}Deleting a feature from OpenStreetMap removes it from the map that everyone uses, so you should make sure a feature is really gone before you delete it. **Click on the {button} button to delete the point.**",
+                "undo": "You can always undo any changes up until you save your edits to OpenStreetMap. **Click on the {button} button to undo the delete and get the point back.**",
+                "play": "Now that you know how to create and edit points, try creating a few more points for practice! **When you are ready to continue to the next chapter, click '{next}'.**"
             },
             "areas": {
                 "title": "Areas",
-                "add": "Areas are used to show the boundaries of features like lakes, buildings, and residential areas. They can be also be used for more detailed mapping of many features you might normally map as points. **Click the {button} Area button to add a new area.**",
-                "corner": "Areas are drawn by placing nodes that mark the boundary of the area. **Click to place a starting node on one of the corners of the playground.**",
-                "place": "Draw the area by placing more nodes. Finish the area by clicking on the starting node. **Draw an area for the playground.**",
-                "search": "**Search for '{name}'.**",
-                "choose": "**Choose Playground from the list.**",
-                "describe": "**Add a name, then click the {button} button to close the feature editor**"
+                "add_playground": "*Areas* are used to show the boundaries of features like lakes, buildings, and residential areas.{br}They can be also be used for more detailed mapping of many features you might normally map as points. **Click the {button} Area button to add a new area.**",
+                "start_playground": "Let's add this playground to the map by drawing an area. Areas are drawn by placing *nodes* along the outer edge of the feature. **Click or press spacebar to place a starting node on one of the corners of the playground.**",
+                "continue_playground": "Continue drawing the area by placing more nodes along the playground's edge. It is OK to connect the area to the existing walking paths.{br}Tip: You can hold down the Alt key to prevent nodes from connecting to other features. **Continue drawing an area for the playground.**",
+                "finish_playground": "Finish the area by pressing return, or clicking again on either the first or last node. **Finish drawing an area for the playground.**",
+                "search_playground": "**Search for '{preset}'.**",
+                "choose_playground": "**Choose {preset} from the list.**",
+                "add_field": "This playground doesn't have an official name, so we won't add anything in the Name field.{br}Instead let's add some additional details about the playground to the Description field. **Open the Add Field list.**",
+                "choose_field": "**Choose {field} from the list.**",
+                "retry_add_field": "You didn't select the {field} field. Let's try again.",
+                "describe_playground": "**Add a description, then click the {button} button to close the feature editor.**",
+                "play": "Good job! Try drawing a few more areas, and see what other kinds of area features you can add to OpenStreetMap. **When you are ready to continue to the next chapter, click '{next}'.**"
             },
             "lines": {
                 "title": "Lines",
-                "add": "Lines are used to represent features such as roads, railways, and rivers. **Click the {button} Line button to add a new line.**",
-                "start": "**Start the line by clicking on the end of the road.**",
-                "intersect": "Click to add more nodes to the line. You can drag the map while drawing if necessary. Roads, and many other types of lines, are part of a larger network. It is important for these lines to be connected properly in order for routing applications to work. **Click on {name} to create an intersection connecting the two lines.**",
-                "finish": "Lines can be finished by clicking on the last node again. **Finish drawing the road.**",
-                "road": "**Select Road from the list**",
-                "residential": "There are different types of roads, the most common of which is Residential. **Choose the Residential road type**",
-                "describe": "**Name the road, then click the {button} button to close the feature editor.**",
-                "restart": "The road needs to intersect {name}.",
-                "wrong_preset": "You didn't select the Residential road type. **Click here to choose again**"
+                "add_line": "*Lines* are used to represent features such as roads, railroads, and rivers. **Click the {button} Line button to add a new line.**",
+                "start_line": "Here is a road that is missing. Let's add it!{br}In OpenStreetMap, lines should be drawn down the centre of the road. You can drag and zoom the map while drawing if necessary. **Start a new line by clicking at the top end of this missing road.**",
+                "intersect": "Click or press spacebar to add more nodes to the line.{br}Roads, and many other types of lines, are part of a larger network. It is important for these lines to be connected properly in order for routing applications to work. **Click on {name} to create an intersection connecting the two lines.**",
+                "retry_intersect": "The road needs to intersect {name}. Let's try again!",
+                "continue_line": "Continue drawing the line for the new road. Remember that you can drag and zoom the map if needed.{br}When you are finished drawing, click on the last node again. **Finish drawing the road.**",
+                "choose_category_road": "**Select {category} from the list**",
+                "choose_preset_residential": "There are many different types of roads, but this one is a residential road. **Choose the {preset} type.**",
+                "retry_preset_residential": "You didn't select the {preset} type. **Click here to choose again.**",
+                "name_road": "**Give this road a name, then hit escape, return, or click the {button} button to close the feature editor.**",
+                "did_name_road": "Looks good! Next we will learn how to update the shape of a line.",
+                "update_line": "Sometimes you will need to change the shape of an existing line. Here is a road that doesn't look quite right.",
+                "add_node": "We can add some nodes to this line to improve its shape. One way to add a node is to double-click the line where you want to add a node. **Double-click on the line to create a new node.**",
+                "start_drag_endpoint": "When a line is selected, you can drag any of its nodes by clicking and holding down the left mouse button while you drag. **Drag the endpoint to the place where these roads should intersect.**",
+                "finish_drag_endpoint": "This spot looks good. **Release the left mouse button to finish dragging.**",
+                "start_drag_midpoint": "Small triangles are drawn at the *midpoints* between nodes. Another way to create a new node is to drag a midpoint to a new location. **Drag the midpoint triangle to create a new node along the curve of the road.**",
+                "continue_drag_midpoint": "This line is looking much better! Continue to adjust this line by double-clicking or dragging midpoints until the curve matches the road shape. **When you're happy with how the line looks, click OK.**",
+                "delete_lines": "It's OK to delete lines for roads that don't exist in the real world.{br}Here's an example where the city planned a {street} but never built it. We can improve this part of the map by deleting the extra lines.",
+                "rightclick_intersection": "The last real street is {street1}, so we will *split* {street2} at this intersection and remove everything above it. **Right click on the intersection node.**",
+                "split_intersection": "**Click on the {button} button to split {street}.**",
+                "retry_split": "You didn't click the Split button. Try again.",
+                "did_split_multi": "Good Job! {street1} is now split into two pieces. The top part can be removed. **Click the top part of {street2} to select it.**",
+                "did_split_single": "**Click the top part of {street2} to select it.**",
+                "multi_select": "{selected} is now selected. Let's also select {other1}. You can shift-click to select multiple things. **Shift-click on {other2}.**",
+                "multi_rightclick": "Good! Both lines to delete are now selected. **Right-click on one of the lines to show the edit menu.**",
+                "multi_delete": "**Click on the {button} button to delete the extra lines.**",
+                "retry_delete": "You didn't click the Delete button. Try again.",
+                "play": "Great! Use the skills that you've learned in this chapter to practice editing some more lines. **When you are ready to continue to the next chapter, click '{next}'.**"
+            },
+            "buildings": {
+                "title": "Buildings",
+                "add_building": "OpenStreetMap is the world's largest database of buildings.{br}You can help improve this database by tracing buildings that aren't already mapped. **Click the {button} Area button to add a new area.**",
+                "start_building": "Let's add this house to the map by tracing its outline.{br}Buildings should be traced around their footprint as accurately as possible. **Click or press spacebar to place a starting node on one of the corners of the building.**",
+                "continue_building": "Continue adding more nodes to trace the outline of the building. Remember that you can zoom in if you want to add more details.{br}Finish the building by pressing return, or clicking again on either the first or last node. **Finish tracing the building.**",
+                "retry_building": "It looks like you had some trouble placing the nodes at the building corners. Try again!",
+                "choose_category_building": "**Choose {category} from the list.**",
+                "choose_preset_house": "There are many different types of buildings, but this one is clearly a house.{br}If you're not sure of the type, it's OK to just choose the generic Building type. **Choose the {preset} type.**",
+                "close": "**Hit escape or click the {button} button to close the feature editor.**",
+                "rightclick_building": "**Right-click to select the building you created and show the edit menu.**",
+                "square_building": "The house that you just added will look even better with perfectly square corners. **Click on the {button} button to square the building shape.**",
+                "retry_square": "You didn't click the Square button. Try again.",
+                "done_square": "See how the corners of the building moved into place? Let's learn another useful trick.",
+                "add_tank": "Next we'll trace this circular storage tank. **Click the {button} Area button to add a new area.**",
+                "start_tank": "Don't worry, you won't need to draw a perfect circle. Just draw an area inside the tank that touches its edge. **Click or press spacebar to place a starting node on the edge of the tank.**",
+                "continue_tank": "Add a few more nodes around the edge. The circle will be created outside the nodes that you draw.{br}Finish the area by pressing return, or clicking again on either the first or last node. **Finish tracing the tank.**",
+                "search_tank": "**Search for '{preset}'.**",
+                "choose_tank": "**Choose {preset} from the list.**",
+                "rightclick_tank": "**Right-click to select the storage tank you created and show the edit menu.**",
+                "circle_tank": "**Click on the {button} button to make the tank a circle.**",
+                "retry_circle": "You didn't click the Circularize button. Try again.",
+                "play": "Great Job! Practice tracing a few more buildings, and try some of the other commands on the edit menu. **When you are ready to continue to the next chapter, click '{next}'.**"
             },
             "startediting": {
                 "title": "Start Editing",
-                "help": "You can replay this walkthrough or view more documentation by clicking the {button} Help button.",
+                "help": "You're now ready to edit OpenStreetMap!{br}You can replay this walkthrough anytime or view more documentation by clicking the {button} Help button.",
                 "save": "Don't forget to regularly save your changes!",
                 "start": "Start mapping!"
             }
@@ -595,6 +896,15 @@
                 },
                 "category-landuse": {
                     "name": "Land Use Features"
+                },
+                "category-natural-area": {
+                    "name": "Natural Features"
+                },
+                "category-natural-line": {
+                    "name": "Natural Features"
+                },
+                "category-natural-point": {
+                    "name": "Natural Features"
                 },
                 "category-path": {
                     "name": "Path Features"
@@ -669,20 +979,36 @@
                 "address": {
                     "label": "Address",
                     "placeholders": {
+                        "block_number": "Block Number",
+                        "block_number!jp": "Block No.",
                         "city": "City",
+                        "city!jp": "City/Town/Village/Tokyo Special Ward",
+                        "city!vn": "City/Town",
                         "conscriptionnumber": "123",
                         "country": "Country",
+                        "county": "County",
+                        "county!jp": "District",
                         "district": "District",
+                        "district!vn": "Arrondissement/Town/District",
+                        "floor": "Floor",
                         "hamlet": "Hamlet",
                         "housename": "Housename",
                         "housenumber": "123",
+                        "housenumber!jp": "Building No./Lot No.",
+                        "neighbourhood": "Neighbourhood",
+                        "neighbourhood!jp": "Chōme/Aza/Koaza",
                         "place": "Place",
                         "postcode": "Postcode",
                         "province": "Province",
+                        "province!jp": "Prefecture",
+                        "quarter": "Quarter",
+                        "quarter!jp": "Ōaza/Machi",
                         "state": "State",
                         "street": "Street",
                         "subdistrict": "Subdistrict",
-                        "suburb": "Suburb"
+                        "subdistrict!vn": "Ward/Commune/Townlet",
+                        "suburb": "Suburb",
+                        "suburb!jp": "Ward"
                     }
                 },
                 "admin_level": {
@@ -731,6 +1057,15 @@
                 "amenity": {
                     "label": "Type"
                 },
+                "animal_boarding": {
+                    "label": "For Animals"
+                },
+                "animal_breeding": {
+                    "label": "For Animals"
+                },
+                "animal_shelter": {
+                    "label": "For Animals"
+                },
                 "area/highway": {
                     "label": "Type"
                 },
@@ -749,6 +1084,23 @@
                 "barrier": {
                     "label": "Type"
                 },
+                "bath/open_air": {
+                    "label": "Open Air"
+                },
+                "bath/sand_bath": {
+                    "label": "Sand Bath"
+                },
+                "bath/type": {
+                    "label": "Specialty",
+                    "options": {
+                        "foot_bath": "Foot Bath",
+                        "hot_spring": "Hot Spring",
+                        "onsen": "Japanese Onsen"
+                    }
+                },
+                "beauty": {
+                    "label": "Shop Type"
+                },
                 "bench": {
                     "label": "Bench"
                 },
@@ -757,6 +1109,18 @@
                 },
                 "bin": {
                     "label": "Waste Bin"
+                },
+                "blood_components": {
+                    "label": "Blood Components",
+                    "options": {
+                        "plasma": "plasma",
+                        "platelets": "platelets",
+                        "stemcells": "stem cell samples",
+                        "whole": "whole blood"
+                    }
+                },
+                "board_type": {
+                    "label": "Type"
                 },
                 "boundary": {
                     "label": "Type"
@@ -769,6 +1133,24 @@
                 },
                 "building_area": {
                     "label": "Building"
+                },
+                "bunker_type": {
+                    "label": "Type"
+                },
+                "camera/direction": {
+                    "label": "Direction (Degrees Clockwise)",
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "camera/mount": {
+                    "label": "Camera Mount"
+                },
+                "camera/type": {
+                    "label": "Camera Type",
+                    "options": {
+                        "dome": "Dome",
+                        "fixed": "Fixed",
+                        "panning": "Panning"
+                    }
                 },
                 "capacity": {
                     "label": "Capacity",
@@ -795,6 +1177,9 @@
                         "WSW": "West-southwest"
                     }
                 },
+                "castle_type": {
+                    "label": "Type"
+                },
                 "clock_direction": {
                     "label": "Direction",
                     "options": {
@@ -802,11 +1187,21 @@
                         "clockwise": "Clockwise"
                     }
                 },
+                "club": {
+                    "label": "Type"
+                },
                 "collection_times": {
                     "label": "Collection Times"
                 },
+                "communication_multi": {
+                    "label": "Communication Types"
+                },
                 "construction": {
                     "label": "Type"
+                },
+                "contact/webcam": {
+                    "label": "Webcam URL",
+                    "placeholder": "http://example.com/"
                 },
                 "content": {
                     "label": "Contents"
@@ -821,16 +1216,19 @@
                     "label": "Type"
                 },
                 "crop": {
-                    "label": "Crop"
+                    "label": "Crops"
                 },
                 "crossing": {
                     "label": "Type"
                 },
                 "cuisine": {
-                    "label": "Cuisine"
+                    "label": "Cuisines"
                 },
                 "currency_multi": {
                     "label": "Currency Types"
+                },
+                "cycle_network": {
+                    "label": "Network"
                 },
                 "cycleway": {
                     "label": "Bike Lanes",
@@ -870,6 +1268,9 @@
                         "cycleway:right": "Right side"
                     }
                 },
+                "date": {
+                    "label": "Date"
+                },
                 "delivery": {
                     "label": "Delivery"
                 },
@@ -884,6 +1285,9 @@
                 },
                 "diaper": {
                     "label": "Baby Changing Available"
+                },
+                "display": {
+                    "label": "Display"
                 },
                 "dock": {
                     "label": "Type"
@@ -904,6 +1308,10 @@
                 "elevation": {
                     "label": "Elevation"
                 },
+                "email": {
+                    "label": "Email",
+                    "placeholder": "example@example.com"
+                },
                 "emergency": {
                     "label": "Emergency"
                 },
@@ -919,6 +1327,18 @@
                 },
                 "fee": {
                     "label": "Fee"
+                },
+                "fence_type": {
+                    "label": "Type"
+                },
+                "fire_hydrant/position": {
+                    "label": "Position",
+                    "options": {
+                        "green": "Green",
+                        "lane": "Lane",
+                        "parking_lot": "Parking Lot",
+                        "sidewalk": "Sidewalk"
+                    }
                 },
                 "fire_hydrant/type": {
                     "label": "Type",
@@ -963,6 +1383,9 @@
                     "label": "Reference",
                     "placeholder": "Hole number (1-18)"
                 },
+                "grape_variety": {
+                    "label": "Grape Varieties"
+                },
                 "handicap": {
                     "label": "Handicap",
                     "placeholder": "1-18"
@@ -970,11 +1393,17 @@
                 "handrail": {
                     "label": "Handrail"
                 },
+                "height": {
+                    "label": "Height (Meters)"
+                },
                 "highway": {
                     "label": "Type"
                 },
                 "historic": {
                     "label": "Type"
+                },
+                "historic/civilization": {
+                    "label": "Historic Civilization"
                 },
                 "hoops": {
                     "label": "Hoops",
@@ -996,6 +1425,9 @@
                         "up": "Up"
                     }
                 },
+                "indoor": {
+                    "label": "Indoor"
+                },
                 "information": {
                     "label": "Type"
                 },
@@ -1008,6 +1440,15 @@
                         "wlan": "Wi-Fi",
                         "yes": "Yes"
                     }
+                },
+                "internet_access/fee": {
+                    "label": "Internet Access Fee"
+                },
+                "internet_access/ssid": {
+                    "label": "SSID (Network Name)"
+                },
+                "kerb": {
+                    "label": "Curb Ramp"
                 },
                 "lamp_type": {
                     "label": "Type"
@@ -1080,6 +1521,16 @@
                 "man_made": {
                     "label": "Type"
                 },
+                "map_size": {
+                    "label": "Coverage"
+                },
+                "map_type": {
+                    "label": "Type"
+                },
+                "maxheight": {
+                    "label": "Max Height",
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
+                },
                 "maxspeed": {
                     "label": "Speed Limit",
                     "placeholder": "40, 50, 60..."
@@ -1133,6 +1584,39 @@
                 "network": {
                     "label": "Network"
                 },
+                "network_bicycle": {
+                    "label": "Network Type",
+                    "options": {
+                        "icn": "International",
+                        "lcn": "Local",
+                        "ncn": "National",
+                        "rcn": "Regional"
+                    },
+                    "placeholder": "Local, Regional, National, International"
+                },
+                "network_foot": {
+                    "label": "Network Type",
+                    "options": {
+                        "iwn": "International",
+                        "lwn": "Local",
+                        "nwn": "National",
+                        "rwn": "Regional"
+                    },
+                    "placeholder": "Local, Regional, National, International"
+                },
+                "network_horse": {
+                    "label": "Network Type",
+                    "options": {
+                        "ihn": "International",
+                        "lhn": "Local",
+                        "nhn": "National",
+                        "rhn": "Regional"
+                    },
+                    "placeholder": "Local, Regional, National, International"
+                },
+                "network_road": {
+                    "label": "Network"
+                },
                 "note": {
                     "label": "Note"
                 },
@@ -1161,9 +1645,19 @@
                 "operator": {
                     "label": "Operator"
                 },
+                "outdoor_seating": {
+                    "label": "Outdoor Seating"
+                },
                 "par": {
                     "label": "Par",
                     "placeholder": "3, 4, 5..."
+                },
+                "parallel_direction": {
+                    "label": "Direction",
+                    "options": {
+                        "backward": "Backward",
+                        "forward": "Forward"
+                    }
                 },
                 "park_ride": {
                     "label": "Park and Ride"
@@ -1228,6 +1722,9 @@
                 "place": {
                     "label": "Type"
                 },
+                "plant": {
+                    "label": "Plant"
+                },
                 "population": {
                     "label": "Population"
                 },
@@ -1237,6 +1734,12 @@
                 "power_supply": {
                     "label": "Power Supply"
                 },
+                "produce": {
+                    "label": "Produce"
+                },
+                "product": {
+                    "label": "Products"
+                },
                 "railway": {
                     "label": "Type"
                 },
@@ -1244,8 +1747,10 @@
                     "label": "Accepts"
                 },
                 "recycling_type": {
+                    "label": "Recycling Type",
                     "options": {
-                        "centre": "Recycling Centre"
+                        "centre": "Recycling Centre",
+                        "container": "Container"
                     }
                 },
                 "ref": {
@@ -1262,6 +1767,9 @@
                 },
                 "restrictions": {
                     "label": "Turn Restrictions"
+                },
+                "rooms": {
+                    "label": "Rooms"
                 },
                 "route": {
                     "label": "Type"
@@ -1287,8 +1795,23 @@
                 "seasonal": {
                     "label": "Seasonal"
                 },
+                "second_hand": {
+                    "label": "Sells Used",
+                    "options": {
+                        "no": "No",
+                        "only": "Only",
+                        "yes": "Yes"
+                    },
+                    "placeholder": "Yes, No, Only"
+                },
                 "service": {
                     "label": "Type"
+                },
+                "service/bicycle": {
+                    "label": "Services"
+                },
+                "service/vehicle": {
+                    "label": "Services"
                 },
                 "service_rail": {
                     "label": "Service Type",
@@ -1298,6 +1821,9 @@
                         "spur": "Spur",
                         "yard": "Yard"
                     }
+                },
+                "service_times": {
+                    "label": "Service Times"
                 },
                 "shelter": {
                     "label": "Shelter"
@@ -1337,17 +1863,42 @@
                     },
                     "placeholder": "Thin Rollers, Wheels, Off-Road..."
                 },
+                "social_facility": {
+                    "label": "Type"
+                },
+                "social_facility_for": {
+                    "label": "People Served"
+                },
                 "source": {
                     "label": "Source"
                 },
                 "sport": {
-                    "label": "Sport"
+                    "label": "Sports"
                 },
                 "sport_ice": {
-                    "label": "Sport"
+                    "label": "Sports"
                 },
-                "sport_racing": {
-                    "label": "Sport"
+                "sport_racing_motor": {
+                    "label": "Sports"
+                },
+                "sport_racing_nonmotor": {
+                    "label": "Sports"
+                },
+                "stars": {
+                    "label": "Stars"
+                },
+                "start_date": {
+                    "label": "Start Date"
+                },
+                "step_count": {
+                    "label": "Number of Steps"
+                },
+                "stop": {
+                    "label": "Stop Type",
+                    "options": {
+                        "all": "All Ways",
+                        "minor": "Minor Road"
+                    }
                 },
                 "structure": {
                     "label": "Structure",
@@ -1369,8 +1920,25 @@
                 "supervised": {
                     "label": "Supervised"
                 },
+                "support": {
+                    "label": "Support"
+                },
                 "surface": {
                     "label": "Surface"
+                },
+                "surveillance": {
+                    "label": "Surveillance Kind"
+                },
+                "surveillance/type": {
+                    "label": "Surveillance Type",
+                    "options": {
+                        "ALPR": "Automatic License Plate Reader",
+                        "camera": "Camera",
+                        "guard": "Guard"
+                    }
+                },
+                "surveillance/zone": {
+                    "label": "Surveillance Zone"
                 },
                 "tactile_paving": {
                     "label": "Tactile Paving"
@@ -1388,31 +1956,187 @@
                     "label": "Toilet Disposal",
                     "options": {
                         "bucket": "Bucket",
-                        "chemical": "Chemical"
+                        "chemical": "Chemical",
+                        "flush": "Flush",
+                        "pitlatrine": "Pit/Latrine"
                     }
                 },
+                "toll": {
+                    "label": "Toll"
+                },
+                "tomb": {
+                    "label": "Type"
+                },
                 "tourism": {
+                    "label": "Type"
+                },
+                "tower/construction": {
+                    "label": "Construction",
+                    "placeholder": "Guyed, Lattice, Concealed, ..."
+                },
+                "tower/type": {
+                    "label": "Type"
+                },
+                "tracktype": {
+                    "label": "Track Type",
+                    "options": {
+                        "grade1": "Solid: paved or heavily compacted hardcore surface",
+                        "grade2": "Mostly Solid: gravel/rock with some soft material mixed in",
+                        "grade3": "Even mixture of hard and soft materials",
+                        "grade4": "Mostly Soft: soil/sand/grass with some hard material mixed in",
+                        "grade5": "Soft: soil/sand/grass"
+                    },
+                    "placeholder": "Solid, Mostly Solid, Soft..."
+                },
+                "traffic_calming": {
                     "label": "Type"
                 },
                 "traffic_signals": {
                     "label": "Type"
                 },
+                "trail_visibility": {
+                    "label": "Trail Visibility",
+                    "options": {
+                        "bad": "Bad: no markers, path sometimes invisible/pathless",
+                        "excellent": "Excellent: unambiguous path or markers everywhere",
+                        "good": "Good: markers visible, sometimes require searching",
+                        "horrible": "Horrible: often pathless, some orientation skills required",
+                        "intermediate": "Intermediate: few markers, path mostly visible",
+                        "no": "No: pathless, excellent orientation skills required"
+                    },
+                    "placeholder": "Excellent, Good, Bad..."
+                },
+                "trees": {
+                    "label": "Trees"
+                },
+                "tunnel": {
+                    "label": "Tunnel"
+                },
+                "vending": {
+                    "label": "Type of Goods"
+                },
+                "visibility": {
+                    "label": "Visibility",
+                    "options": {
+                        "area": "Over 20m (65ft)",
+                        "house": "Up to 5m (16ft)",
+                        "street": "5 to 20m (16 to 65ft)"
+                    }
+                },
+                "wall": {
+                    "label": "Type"
+                },
                 "water": {
                     "label": "Type"
+                },
+                "water_point": {
+                    "label": "Water Point"
                 },
                 "waterway": {
                     "label": "Type"
                 },
+                "website": {
+                    "label": "Website",
+                    "placeholder": "http://example.com/"
+                },
                 "wetland": {
                     "label": "Type"
+                },
+                "wheelchair": {
+                    "label": "Wheelchair Access"
+                },
+                "width": {
+                    "label": "Width (Meters)"
+                },
+                "wikipedia": {
+                    "label": "Wikipedia"
                 }
             },
             "presets": {
                 "address": {
                     "name": "Address"
                 },
+                "advertising/billboard": {
+                    "name": "Billboard"
+                },
+                "aerialway": {
+                    "name": "Aerialway"
+                },
+                "aerialway/cable_car": {
+                    "name": "Cable Car"
+                },
+                "aerialway/chair_lift": {
+                    "name": "Chair Lift"
+                },
+                "aerialway/drag_lift": {
+                    "name": "Drag Lift"
+                },
                 "aerialway/gondola": {
+                    "name": "Gondola",
                     "terms": "Dangleway"
+                },
+                "aerialway/goods": {
+                    "name": "Goods Aerialway"
+                },
+                "aerialway/magic_carpet": {
+                    "name": "Magic Carpet Lift"
+                },
+                "aerialway/mixed_lift": {
+                    "name": "Mixed Lift"
+                },
+                "aerialway/platter": {
+                    "name": "Platter Lift"
+                },
+                "aerialway/pylon": {
+                    "name": "Aerialway Pylon"
+                },
+                "aerialway/rope_tow": {
+                    "name": "Rope Tow Lift"
+                },
+                "aerialway/station": {
+                    "name": "Aerialway Station"
+                },
+                "aerialway/t-bar": {
+                    "name": "T-bar Lift"
+                },
+                "aeroway": {
+                    "name": "Aeroway"
+                },
+                "aeroway/aerodrome": {
+                    "name": "Airport"
+                },
+                "aeroway/apron": {
+                    "name": "Apron"
+                },
+                "aeroway/gate": {
+                    "name": "Airport Gate"
+                },
+                "aeroway/hangar": {
+                    "name": "Hangar"
+                },
+                "aeroway/helipad": {
+                    "name": "Helipad"
+                },
+                "aeroway/runway": {
+                    "name": "Runway"
+                },
+                "aeroway/taxiway": {
+                    "name": "Taxiway"
+                },
+                "aeroway/terminal": {
+                    "name": "Airport Terminal"
+                },
+                "amenity": {
+                    "name": "Amenity"
+                },
+                "amenity/animal_boarding": {
+                    "name": "Animal Boarding Facility"
+                },
+                "amenity/animal_breeding": {
+                    "name": "Animal Breeding Facility"
+                },
+                "amenity/animal_shelter": {
+                    "name": "Animal Shelter"
                 },
                 "amenity/arts_centre": {
                     "name": "Arts Centre"
@@ -1420,34 +2144,478 @@
                 "amenity/atm": {
                     "name": "ATM"
                 },
+                "amenity/bank": {
+                    "name": "Bank"
+                },
+                "amenity/bar": {
+                    "name": "Bar"
+                },
+                "amenity/bbq": {
+                    "name": "Barbecue/Grill"
+                },
                 "amenity/bench": {
                     "name": "Bench"
                 },
+                "amenity/bicycle_parking": {
+                    "name": "Bicycle Parking"
+                },
+                "amenity/bicycle_rental": {
+                    "name": "Bicycle Rental"
+                },
+                "amenity/bicycle_repair_station": {
+                    "name": "Bicycle Repair Tool Stand"
+                },
+                "amenity/biergarten": {
+                    "name": "Beer Garden"
+                },
+                "amenity/boat_rental": {
+                    "name": "Boat Rental"
+                },
+                "amenity/bureau_de_change": {
+                    "name": "Currency Exchange"
+                },
+                "amenity/bus_station": {
+                    "name": "Bus Station"
+                },
+                "amenity/cafe": {
+                    "name": "Cafe"
+                },
+                "amenity/car_rental": {
+                    "name": "Car Rental"
+                },
+                "amenity/car_sharing": {
+                    "name": "Car Sharing"
+                },
+                "amenity/car_wash": {
+                    "name": "Car Wash"
+                },
+                "amenity/casino": {
+                    "name": "Casino"
+                },
+                "amenity/charging_station": {
+                    "name": "Charging Station"
+                },
+                "amenity/childcare": {
+                    "name": "Nursery/Childcare"
+                },
+                "amenity/cinema": {
+                    "name": "Cinema"
+                },
+                "amenity/clinic": {
+                    "name": "Clinic"
+                },
+                "amenity/clock": {
+                    "name": "Clock"
+                },
+                "amenity/college": {
+                    "name": "College Grounds"
+                },
                 "amenity/community_centre": {
                     "name": "Community Centre"
+                },
+                "amenity/compressed_air": {
+                    "name": "Compressed Air"
+                },
+                "amenity/courthouse": {
+                    "name": "Courthouse"
+                },
+                "amenity/coworking_space": {
+                    "name": "Coworking Space"
+                },
+                "amenity/crematorium": {
+                    "name": "Crematorium"
+                },
+                "amenity/dentist": {
+                    "name": "Dentist"
+                },
+                "amenity/doctors": {
+                    "name": "Doctor"
+                },
+                "amenity/dojo": {
+                    "name": "Dojo / Martial Arts Academy"
+                },
+                "amenity/drinking_water": {
+                    "name": "Drinking Water"
+                },
+                "amenity/driving_school": {
+                    "name": "Driving School"
+                },
+                "amenity/embassy": {
+                    "name": "Embassy"
+                },
+                "amenity/fast_food": {
+                    "name": "Fast Food"
+                },
+                "amenity/ferry_terminal": {
+                    "name": "Ferry Terminal"
+                },
+                "amenity/fire_station": {
+                    "name": "Fire Station"
+                },
+                "amenity/food_court": {
+                    "name": "Food Court"
+                },
+                "amenity/fountain": {
+                    "name": "Fountain"
                 },
                 "amenity/fuel": {
                     "name": "Petrol Station",
                     "terms": "gas, fuel, propane, diesel, lng, cng, biodiesel"
                 },
+                "amenity/grave_yard": {
+                    "name": "Graveyard"
+                },
+                "amenity/grit_bin": {
+                    "name": "Grit Bin"
+                },
+                "amenity/hospital": {
+                    "name": "Hospital Grounds"
+                },
+                "amenity/hunting_stand": {
+                    "name": "Hunting Stand"
+                },
+                "amenity/ice_cream": {
+                    "name": "Ice Cream Shop"
+                },
+                "amenity/internet_cafe": {
+                    "name": "Internet Cafe"
+                },
+                "amenity/kindergarten": {
+                    "name": "Preschool/Kindergarten Grounds"
+                },
+                "amenity/library": {
+                    "name": "Library"
+                },
+                "amenity/marketplace": {
+                    "name": "Marketplace"
+                },
+                "amenity/motorcycle_parking": {
+                    "name": "Motorcycle Parking"
+                },
+                "amenity/nightclub": {
+                    "name": "Nightclub"
+                },
+                "amenity/nursing_home": {
+                    "name": "Nursing Home"
+                },
+                "amenity/parking": {
+                    "name": "Car Parking"
+                },
+                "amenity/parking_entrance": {
+                    "name": "Parking Garage Entrance/Exit"
+                },
+                "amenity/parking_space": {
+                    "name": "Parking Space"
+                },
+                "amenity/pavilion": {
+                    "name": "Pavilion"
+                },
+                "amenity/pharmacy": {
+                    "name": "Pharmacy"
+                },
+                "amenity/place_of_worship": {
+                    "name": "Place of Worship"
+                },
+                "amenity/place_of_worship/buddhist": {
+                    "name": "Buddhist Temple"
+                },
+                "amenity/place_of_worship/christian": {
+                    "name": "Church"
+                },
+                "amenity/place_of_worship/jewish": {
+                    "name": "Synagogue"
+                },
+                "amenity/place_of_worship/muslim": {
+                    "name": "Mosque"
+                },
+                "amenity/planetarium": {
+                    "name": "Planetarium"
+                },
+                "amenity/police": {
+                    "name": "Police"
+                },
                 "amenity/post_box": {
                     "name": "Post Box",
                     "terms": "Mailbox"
                 },
+                "amenity/post_office": {
+                    "name": "Post Office"
+                },
+                "amenity/prison": {
+                    "name": "Prison Grounds"
+                },
+                "amenity/pub": {
+                    "name": "Pub"
+                },
+                "amenity/public_bath": {
+                    "name": "Public Bath"
+                },
+                "amenity/public_bookcase": {
+                    "name": "Public Bookcase"
+                },
                 "amenity/ranger_station": {
                     "name": "Warden Station"
+                },
+                "amenity/recycling": {
+                    "name": "Recycling"
                 },
                 "amenity/recycling_centre": {
                     "name": "Recycling Centre"
                 },
+                "amenity/register_office": {
+                    "name": "Register Office"
+                },
+                "amenity/restaurant": {
+                    "name": "Restaurant"
+                },
+                "amenity/sanitary_dump_station": {
+                    "name": "RV Toilet Disposal"
+                },
+                "amenity/school": {
+                    "name": "School Grounds"
+                },
+                "amenity/shelter": {
+                    "name": "Shelter"
+                },
+                "amenity/social_facility": {
+                    "name": "Social Facility"
+                },
+                "amenity/social_facility/food_bank": {
+                    "name": "Food Bank"
+                },
+                "amenity/social_facility/group_home": {
+                    "name": "Elderly Group Home"
+                },
+                "amenity/social_facility/homeless_shelter": {
+                    "name": "Homeless Shelter"
+                },
+                "amenity/social_facility/nursing_home": {
+                    "name": "Nursing Home"
+                },
+                "amenity/studio": {
+                    "name": "Studio"
+                },
+                "amenity/swimming_pool": {
+                    "name": "Swimming Pool"
+                },
+                "amenity/taxi": {
+                    "name": "Taxi Stand"
+                },
+                "amenity/telephone": {
+                    "name": "Telephone"
+                },
                 "amenity/theatre": {
                     "name": "Theatre"
+                },
+                "amenity/toilets": {
+                    "name": "Toilets"
+                },
+                "amenity/townhall": {
+                    "name": "Town Hall"
+                },
+                "amenity/university": {
+                    "name": "University Grounds"
+                },
+                "amenity/vending_machine/cigarettes": {
+                    "name": "Cigarette Vending Machine"
+                },
+                "amenity/vending_machine/condoms": {
+                    "name": "Condom Vending Machine"
+                },
+                "amenity/vending_machine/drinks": {
+                    "name": "Drink Vending Machine"
+                },
+                "amenity/vending_machine/excrement_bags": {
+                    "name": "Excrement Bag Vending Machine"
+                },
+                "amenity/vending_machine/news_papers": {
+                    "name": "Newspaper Vending Machine"
+                },
+                "amenity/vending_machine/parcel_pickup_dropoff": {
+                    "name": "Parcel Pickup/Dropoff Vending Machine"
+                },
+                "amenity/vending_machine/parking_tickets": {
+                    "name": "Parking Ticket Vending Machine"
+                },
+                "amenity/vending_machine/public_transport_tickets": {
+                    "name": "Transit Ticket Vending Machine"
+                },
+                "amenity/vending_machine/sweets": {
+                    "name": "Snack Vending Machine"
+                },
+                "amenity/veterinary": {
+                    "name": "Veterinary"
+                },
+                "amenity/waste_basket": {
+                    "name": "Waste Basket"
+                },
+                "amenity/waste_disposal": {
+                    "name": "Garbage Dumpster"
+                },
+                "amenity/waste_transfer_station": {
+                    "name": "Waste Transfer Station"
+                },
+                "amenity/water_point": {
+                    "name": "RV Drinking Water"
+                },
+                "amenity/watering_place": {
+                    "name": "Animal Watering Place"
                 },
                 "area": {
                     "name": "Area"
                 },
+                "area/highway": {
+                    "name": "Road Surface"
+                },
+                "barrier": {
+                    "name": "Barrier"
+                },
+                "barrier/block": {
+                    "name": "Block"
+                },
+                "barrier/bollard": {
+                    "name": "Bollard"
+                },
+                "barrier/border_control": {
+                    "name": "Border Control"
+                },
+                "barrier/cattle_grid": {
+                    "name": "Cattle Grid"
+                },
+                "barrier/city_wall": {
+                    "name": "City Wall"
+                },
+                "barrier/cycle_barrier": {
+                    "name": "Cycle Barrier"
+                },
+                "barrier/ditch": {
+                    "name": "Trench"
+                },
+                "barrier/entrance": {
+                    "name": "Entrance"
+                },
+                "barrier/fence": {
+                    "name": "Fence"
+                },
+                "barrier/gate": {
+                    "name": "Gate"
+                },
+                "barrier/hedge": {
+                    "name": "Hedge"
+                },
+                "barrier/kissing_gate": {
+                    "name": "Kissing Gate"
+                },
+                "barrier/lift_gate": {
+                    "name": "Lift Gate"
+                },
+                "barrier/retaining_wall": {
+                    "name": "Retaining Wall"
+                },
+                "barrier/stile": {
+                    "name": "Stile"
+                },
+                "barrier/toll_booth": {
+                    "name": "Toll Booth"
+                },
+                "barrier/wall": {
+                    "name": "Wall"
+                },
+                "boundary/administrative": {
+                    "name": "Administrative Boundary"
+                },
                 "building": {
                     "name": "Building"
+                },
+                "building/apartments": {
+                    "name": "Apartments"
+                },
+                "building/barn": {
+                    "name": "Barn"
+                },
+                "building/bunker": {
+                    "name": "Bunker"
+                },
+                "building/cabin": {
+                    "name": "Cabin"
+                },
+                "building/cathedral": {
+                    "name": "Cathedral Building"
+                },
+                "building/chapel": {
+                    "name": "Chapel Building"
+                },
+                "building/church": {
+                    "name": "Church Building"
+                },
+                "building/college": {
+                    "name": "College Building"
+                },
+                "building/commercial": {
+                    "name": "Commercial Building"
+                },
+                "building/construction": {
+                    "name": "Building Under Construction"
+                },
+                "building/detached": {
+                    "name": "Detached House"
+                },
+                "building/dormitory": {
+                    "name": "Dormitory"
+                },
+                "building/entrance": {
+                    "name": "Entrance/Exit"
+                },
+                "building/garage": {
+                    "name": "Garage"
+                },
+                "building/garages": {
+                    "name": "Garages"
+                },
+                "building/greenhouse": {
+                    "name": "Greenhouse"
+                },
+                "building/hospital": {
+                    "name": "Hospital Building"
+                },
+                "building/hotel": {
+                    "name": "Hotel Building"
+                },
+                "building/house": {
+                    "name": "House"
+                },
+                "building/hut": {
+                    "name": "Hut"
+                },
+                "building/industrial": {
+                    "name": "Industrial Building"
+                },
+                "building/kindergarten": {
+                    "name": "Preschool/Kindergarten Building"
+                },
+                "building/public": {
+                    "name": "Public Building"
+                },
+                "building/residential": {
+                    "name": "Residential Building"
+                },
+                "building/retail": {
+                    "name": "Retail Building"
+                },
+                "building/roof": {
+                    "name": "Roof"
+                },
+                "building/school": {
+                    "name": "School Building"
+                },
+                "building/semidetached_house": {
+                    "name": "Semi-Detached House"
+                },
+                "building/shed": {
+                    "name": "Shed"
+                },
+                "building/stable": {
+                    "name": "Stable"
                 },
                 "building/static_caravan": {
                     "name": "Static Caravan"
@@ -1455,29 +2623,605 @@
                 "building/terrace": {
                     "name": "Terraced houses"
                 },
+                "building/train_station": {
+                    "name": "Train Station"
+                },
+                "building/university": {
+                    "name": "University Building"
+                },
+                "building/warehouse": {
+                    "name": "Warehouse"
+                },
+                "camp_site/camp_pitch": {
+                    "name": "Camp Pitch"
+                },
+                "club": {
+                    "name": "Club"
+                },
+                "craft": {
+                    "name": "Craft"
+                },
+                "craft/basket_maker": {
+                    "name": "Basket Maker"
+                },
+                "craft/beekeeper": {
+                    "name": "Beekeeper"
+                },
+                "craft/blacksmith": {
+                    "name": "Blacksmith"
+                },
+                "craft/boatbuilder": {
+                    "name": "Boat Builder"
+                },
+                "craft/bookbinder": {
+                    "name": "Bookbinder"
+                },
+                "craft/brewery": {
+                    "name": "Brewery"
+                },
+                "craft/carpenter": {
+                    "name": "Carpenter"
+                },
+                "craft/carpet_layer": {
+                    "name": "Carpet Layer"
+                },
+                "craft/caterer": {
+                    "name": "Caterer"
+                },
+                "craft/clockmaker": {
+                    "name": "Clockmaker"
+                },
+                "craft/confectionery": {
+                    "name": "Confectionery"
+                },
+                "craft/dressmaker": {
+                    "name": "Dressmaker"
+                },
+                "craft/electrician": {
+                    "name": "Electrician"
+                },
+                "craft/gardener": {
+                    "name": "Gardener"
+                },
+                "craft/glaziery": {
+                    "name": "Glaziery"
+                },
+                "craft/handicraft": {
+                    "name": "Handicraft"
+                },
+                "craft/hvac": {
+                    "name": "HVAC"
+                },
+                "craft/insulator": {
+                    "name": "Insulator"
+                },
+                "craft/jeweler": {
+                    "name": "Jeweler"
+                },
+                "craft/key_cutter": {
+                    "name": "Key Cutter"
+                },
+                "craft/locksmith": {
+                    "name": "Locksmith"
+                },
+                "craft/metal_construction": {
+                    "name": "Metal Construction"
+                },
+                "craft/optician": {
+                    "name": "Optician"
+                },
+                "craft/painter": {
+                    "name": "Painter"
+                },
+                "craft/photographer": {
+                    "name": "Photographer"
+                },
+                "craft/photographic_laboratory": {
+                    "name": "Photographic Laboratory"
+                },
+                "craft/plasterer": {
+                    "name": "Plasterer"
+                },
+                "craft/plumber": {
+                    "name": "Plumber"
+                },
+                "craft/pottery": {
+                    "name": "Pottery"
+                },
+                "craft/rigger": {
+                    "name": "Rigger"
+                },
+                "craft/roofer": {
+                    "name": "Roofer"
+                },
+                "craft/saddler": {
+                    "name": "Saddler"
+                },
+                "craft/sailmaker": {
+                    "name": "Sailmaker"
+                },
+                "craft/sawmill": {
+                    "name": "Sawmill"
+                },
+                "craft/scaffolder": {
+                    "name": "Scaffolder"
+                },
+                "craft/sculpter": {
+                    "name": "Sculpter"
+                },
+                "craft/shoemaker": {
+                    "name": "Shoemaker"
+                },
+                "craft/stonemason": {
+                    "name": "Stonemason"
+                },
+                "craft/sweep": {
+                    "name": "Chimney Sweep"
+                },
+                "craft/tailor": {
+                    "name": "Tailor"
+                },
+                "craft/tiler": {
+                    "name": "Tiler"
+                },
+                "craft/tinsmith": {
+                    "name": "Tinsmith"
+                },
+                "craft/upholsterer": {
+                    "name": "Upholsterer"
+                },
+                "craft/watchmaker": {
+                    "name": "Watchmaker"
+                },
+                "craft/window_construction": {
+                    "name": "Window Construction"
+                },
+                "craft/winery": {
+                    "name": "Winery"
+                },
+                "embankment": {
+                    "name": "Embankment"
+                },
+                "emergency/ambulance_station": {
+                    "name": "Ambulance Station"
+                },
+                "emergency/defibrillator": {
+                    "name": "Defibrillator"
+                },
+                "emergency/designated": {
+                    "name": "Emergency Access Designated"
+                },
+                "emergency/destination": {
+                    "name": "Emergency Access Destination"
+                },
+                "emergency/fire_hydrant": {
+                    "name": "Fire Hydrant"
+                },
+                "emergency/no": {
+                    "name": "Emergency Access No"
+                },
+                "emergency/official": {
+                    "name": "Emergency Access Official"
+                },
+                "emergency/phone": {
+                    "name": "Emergency Phone"
+                },
+                "emergency/private": {
+                    "name": "Emergency Access Private"
+                },
+                "emergency/yes": {
+                    "name": "Emergency Access Yes"
+                },
+                "entrance": {
+                    "name": "Entrance/Exit"
+                },
+                "footway/crossing": {
+                    "name": "Street Crossing"
+                },
+                "footway/crosswalk": {
+                    "name": "Pedestrian Crosswalk"
+                },
+                "footway/sidewalk": {
+                    "name": "Sidewalk"
+                },
+                "ford": {
+                    "name": "Ford"
+                },
+                "golf/bunker": {
+                    "name": "Sand Trap"
+                },
+                "golf/fairway": {
+                    "name": "Fairway"
+                },
+                "golf/green": {
+                    "name": "Putting Green"
+                },
+                "golf/hole": {
+                    "name": "Golf Hole"
+                },
+                "golf/lateral_water_hazard_area": {
+                    "name": "Lateral Water Hazard"
+                },
+                "golf/lateral_water_hazard_line": {
+                    "name": "Lateral Water Hazard"
+                },
+                "golf/rough": {
+                    "name": "Rough"
+                },
+                "golf/tee": {
+                    "name": "Tee Box"
+                },
+                "golf/water_hazard_area": {
+                    "name": "Water Hazard"
+                },
+                "golf/water_hazard_line": {
+                    "name": "Water Hazard"
+                },
                 "healthcare/blood_donation": {
                     "name": "Blood Donor Centre"
+                },
+                "highway": {
+                    "name": "Highway"
                 },
                 "highway/bridleway": {
                     "name": "Bridleway"
                 },
+                "highway/bus_stop": {
+                    "name": "Bus Stop"
+                },
+                "highway/corridor": {
+                    "name": "Indoor Corridor"
+                },
+                "highway/crossing": {
+                    "name": "Street Crossing"
+                },
+                "highway/crosswalk": {
+                    "name": "Pedestrian Crosswalk"
+                },
+                "highway/cycleway": {
+                    "name": "Cycle Path"
+                },
+                "highway/footway": {
+                    "name": "Foot Path"
+                },
+                "highway/give_way": {
+                    "name": "Give Way Sign"
+                },
+                "highway/living_street": {
+                    "name": "Living Street"
+                },
+                "highway/mini_roundabout": {
+                    "name": "Mini-Roundabout"
+                },
+                "highway/motorway": {
+                    "name": "Motorway"
+                },
+                "highway/motorway_junction": {
+                    "name": "Motorway Junction / Exit"
+                },
+                "highway/motorway_link": {
+                    "name": "Motorway Link"
+                },
+                "highway/path": {
+                    "name": "Path"
+                },
+                "highway/pedestrian": {
+                    "name": "Pedestrian Street"
+                },
+                "highway/primary": {
+                    "name": "Primary Road"
+                },
+                "highway/primary_link": {
+                    "name": "Primary Link"
+                },
+                "highway/raceway": {
+                    "name": "Racetrack (Motorsport)"
+                },
+                "highway/residential": {
+                    "name": "Residential Road"
+                },
+                "highway/rest_area": {
+                    "name": "Rest Area"
+                },
+                "highway/road": {
+                    "name": "Unknown Road"
+                },
+                "highway/secondary": {
+                    "name": "Secondary Road"
+                },
+                "highway/secondary_link": {
+                    "name": "Secondary Link"
+                },
+                "highway/service": {
+                    "name": "Service Road"
+                },
+                "highway/service/alley": {
+                    "name": "Alley"
+                },
                 "highway/service/drive-through": {
                     "name": "Drive-Through"
+                },
+                "highway/service/driveway": {
+                    "name": "Driveway"
+                },
+                "highway/service/emergency_access": {
+                    "name": "Emergency Access"
+                },
+                "highway/service/parking_aisle": {
+                    "name": "Parking Aisle"
+                },
+                "highway/services": {
+                    "name": "Service Area"
+                },
+                "highway/speed_camera": {
+                    "name": "Speed Camera"
+                },
+                "highway/steps": {
+                    "name": "Steps"
+                },
+                "highway/stop": {
+                    "name": "Stop Sign"
+                },
+                "highway/street_lamp": {
+                    "name": "Street Lamp"
+                },
+                "highway/tertiary": {
+                    "name": "Tertiary Road"
+                },
+                "highway/tertiary_link": {
+                    "name": "Tertiary Link"
                 },
                 "highway/track": {
                     "name": "Track"
                 },
+                "highway/traffic_mirror": {
+                    "name": "Traffic Mirror"
+                },
+                "highway/traffic_signals": {
+                    "name": "Traffic Signals"
+                },
+                "highway/trunk": {
+                    "name": "Trunk Road"
+                },
+                "highway/trunk_link": {
+                    "name": "Trunk Link"
+                },
+                "highway/turning_circle": {
+                    "name": "Turning Circle"
+                },
+                "highway/turning_loop": {
+                    "name": "Turning Loop (Island)"
+                },
+                "highway/unclassified": {
+                    "name": "Minor/Unclassified Road"
+                },
+                "historic": {
+                    "name": "Historic Site"
+                },
+                "historic/archaeological_site": {
+                    "name": "Archaeological Site"
+                },
+                "historic/boundary_stone": {
+                    "name": "Boundary Stone"
+                },
+                "historic/castle": {
+                    "name": "Castle"
+                },
+                "historic/memorial": {
+                    "name": "Memorial"
+                },
+                "historic/monument": {
+                    "name": "Monument"
+                },
+                "historic/ruins": {
+                    "name": "Ruins"
+                },
+                "historic/tomb": {
+                    "name": "Tomb"
+                },
+                "historic/wayside_cross": {
+                    "name": "Wayside Cross"
+                },
+                "historic/wayside_shrine": {
+                    "name": "Wayside Shrine"
+                },
+                "junction": {
+                    "name": "Junction"
+                },
+                "landuse": {
+                    "name": "Land Use"
+                },
                 "landuse/allotments": {
                     "name": "Allotments"
+                },
+                "landuse/aquaculture": {
+                    "name": "Aquaculture"
+                },
+                "landuse/basin": {
+                    "name": "Basin"
+                },
+                "landuse/cemetery": {
+                    "name": "Cemetery"
+                },
+                "landuse/churchyard": {
+                    "name": "Churchyard"
+                },
+                "landuse/commercial": {
+                    "name": "Commercial Area"
+                },
+                "landuse/construction": {
+                    "name": "Construction"
+                },
+                "landuse/farm": {
+                    "name": "Farmland"
+                },
+                "landuse/farmland": {
+                    "name": "Farmland"
+                },
+                "landuse/farmyard": {
+                    "name": "Farmyard"
+                },
+                "landuse/forest": {
+                    "name": "Forest"
+                },
+                "landuse/garages": {
+                    "name": "Garages"
+                },
+                "landuse/grass": {
+                    "name": "Grass"
+                },
+                "landuse/harbour": {
+                    "name": "Harbor"
+                },
+                "landuse/industrial": {
+                    "name": "Industrial Area"
+                },
+                "landuse/landfill": {
+                    "name": "Landfill"
+                },
+                "landuse/meadow": {
+                    "name": "Meadow"
+                },
+                "landuse/military": {
+                    "name": "Military Area"
+                },
+                "landuse/military/airfield": {
+                    "name": "Military Airfield"
+                },
+                "landuse/military/barracks": {
+                    "name": "Barracks"
+                },
+                "landuse/military/bunker": {
+                    "name": "Military Bunker"
+                },
+                "landuse/military/checkpoint": {
+                    "name": "Checkpoint"
+                },
+                "landuse/military/danger_area": {
+                    "name": "Danger Area"
+                },
+                "landuse/military/naval_base": {
+                    "name": "Naval Base"
+                },
+                "landuse/military/nuclear_explosion_site": {
+                    "name": "Nuclear Explosion Site"
+                },
+                "landuse/military/obstacle_course": {
+                    "name": "Obstacle Course"
+                },
+                "landuse/military/office": {
+                    "name": "Military Office"
+                },
+                "landuse/military/range": {
+                    "name": "Military Range"
+                },
+                "landuse/military/training_area": {
+                    "name": "Training Area"
+                },
+                "landuse/orchard": {
+                    "name": "Orchard"
+                },
+                "landuse/plant_nursery": {
+                    "name": "Plant Nursery"
+                },
+                "landuse/quarry": {
+                    "name": "Quarry"
+                },
+                "landuse/railway": {
+                    "name": "Railway Corridor"
+                },
+                "landuse/recreation_ground": {
+                    "name": "Recreation Ground"
+                },
+                "landuse/residential": {
+                    "name": "Residential Area"
+                },
+                "landuse/retail": {
+                    "name": "Retail Area"
+                },
+                "landuse/vineyard": {
+                    "name": "Vineyard"
+                },
+                "leisure": {
+                    "name": "Leisure"
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "Adult Gaming Centre"
                 },
+                "leisure/bird_hide": {
+                    "name": "Bird Hide"
+                },
+                "leisure/bowling_alley": {
+                    "name": "Bowling Alley"
+                },
+                "leisure/common": {
+                    "name": "Common"
+                },
+                "leisure/dance": {
+                    "name": "Dance Hall"
+                },
+                "leisure/dog_park": {
+                    "name": "Dog Park"
+                },
+                "leisure/firepit": {
+                    "name": "Firepit"
+                },
                 "leisure/fitness_centre": {
                     "name": "Gym / Fitness Centre"
                 },
+                "leisure/fitness_centre/yoga": {
+                    "name": "Yoga Studio"
+                },
+                "leisure/fitness_station": {
+                    "name": "Outdoor Fitness Station"
+                },
+                "leisure/garden": {
+                    "name": "Garden"
+                },
+                "leisure/golf_course": {
+                    "name": "Golf Course"
+                },
+                "leisure/horse_riding": {
+                    "name": "Horseback Riding Facility"
+                },
+                "leisure/ice_rink": {
+                    "name": "Ice Rink"
+                },
+                "leisure/marina": {
+                    "name": "Marina"
+                },
+                "leisure/miniature_golf": {
+                    "name": "Miniature Golf"
+                },
+                "leisure/nature_reserve": {
+                    "name": "Nature Reserve"
+                },
+                "leisure/park": {
+                    "name": "Park"
+                },
+                "leisure/picnic_table": {
+                    "name": "Picnic Table"
+                },
+                "leisure/pitch": {
+                    "name": "Sport Pitch"
+                },
+                "leisure/pitch/american_football": {
+                    "name": "American Football Field"
+                },
                 "leisure/pitch/baseball": {
                     "name": "Baseball"
+                },
+                "leisure/pitch/basketball": {
+                    "name": "Basketball Court"
+                },
+                "leisure/pitch/bowls": {
+                    "name": "Bowling Green"
+                },
+                "leisure/pitch/cricket": {
+                    "name": "Cricket Field"
+                },
+                "leisure/pitch/equestrian": {
+                    "name": "Riding Arena"
                 },
                 "leisure/pitch/rugby_league": {
                     "name": "Rugby League Pitch"
@@ -1485,17 +3229,296 @@
                 "leisure/pitch/rugby_union": {
                     "name": "Rugby Union Pitch"
                 },
+                "leisure/pitch/skateboard": {
+                    "name": "Skate Park"
+                },
                 "leisure/pitch/soccer": {
                     "name": "Football Pitch"
+                },
+                "leisure/pitch/table_tennis": {
+                    "name": "Ping Pong Table"
+                },
+                "leisure/pitch/tennis": {
+                    "name": "Tennis Court"
+                },
+                "leisure/pitch/volleyball": {
+                    "name": "Volleyball Court"
                 },
                 "leisure/playground": {
                     "name": "Playground"
                 },
+                "leisure/resort": {
+                    "name": "Resort"
+                },
+                "leisure/running_track": {
+                    "name": "Racetrack (Running)"
+                },
+                "leisure/slipway": {
+                    "name": "Slipway"
+                },
                 "leisure/sports_centre": {
                     "name": "Sports Centre / Complex"
                 },
+                "leisure/sports_centre/swimming": {
+                    "name": "Swimming Pool Facility"
+                },
+                "leisure/stadium": {
+                    "name": "Stadium"
+                },
+                "leisure/swimming_pool": {
+                    "name": "Swimming Pool"
+                },
+                "leisure/track": {
+                    "name": "Racetrack (Non-Motorsport)"
+                },
+                "leisure/water_park": {
+                    "name": "Water Park"
+                },
+                "line": {
+                    "name": "Line"
+                },
+                "man_made": {
+                    "name": "Man Made"
+                },
+                "man_made/adit": {
+                    "name": "Adit"
+                },
+                "man_made/breakwater": {
+                    "name": "Breakwater"
+                },
+                "man_made/bridge": {
+                    "name": "Bridge"
+                },
+                "man_made/chimney": {
+                    "name": "Chimney"
+                },
+                "man_made/cutline": {
+                    "name": "Cut line"
+                },
+                "man_made/embankment": {
+                    "name": "Embankment"
+                },
+                "man_made/flagpole": {
+                    "name": "Flagpole"
+                },
+                "man_made/gasometer": {
+                    "name": "Gasometer"
+                },
+                "man_made/groyne": {
+                    "name": "Groyne"
+                },
+                "man_made/lighthouse": {
+                    "name": "Lighthouse"
+                },
+                "man_made/mast": {
+                    "name": "Mast"
+                },
+                "man_made/observation": {
+                    "name": "Observation Tower"
+                },
+                "man_made/petroleum_well": {
+                    "name": "Oil Well"
+                },
+                "man_made/pier": {
+                    "name": "Pier"
+                },
+                "man_made/pipeline": {
+                    "name": "Pipeline"
+                },
+                "man_made/pumping_station": {
+                    "name": "Pumping Station"
+                },
+                "man_made/silo": {
+                    "name": "Silo"
+                },
+                "man_made/storage_tank": {
+                    "name": "Storage Tank"
+                },
+                "man_made/surveillance": {
+                    "name": "Surveillance"
+                },
+                "man_made/surveillance_camera": {
+                    "name": "Surveillance Camera"
+                },
+                "man_made/survey_point": {
+                    "name": "Survey Point"
+                },
+                "man_made/tower": {
+                    "name": "Tower"
+                },
+                "man_made/wastewater_plant": {
+                    "name": "Wastewater Plant"
+                },
+                "man_made/water_tower": {
+                    "name": "Water Tower"
+                },
+                "man_made/water_well": {
+                    "name": "Water Well"
+                },
+                "man_made/water_works": {
+                    "name": "Water Works"
+                },
+                "man_made/works": {
+                    "name": "Factory"
+                },
+                "natural": {
+                    "name": "Natural"
+                },
+                "natural/bare_rock": {
+                    "name": "Bare Rock"
+                },
+                "natural/bay": {
+                    "name": "Bay"
+                },
+                "natural/beach": {
+                    "name": "Beach"
+                },
+                "natural/cave_entrance": {
+                    "name": "Cave Entrance"
+                },
+                "natural/cliff": {
+                    "name": "Cliff"
+                },
+                "natural/coastline": {
+                    "name": "Coastline"
+                },
+                "natural/fell": {
+                    "name": "Fell"
+                },
+                "natural/glacier": {
+                    "name": "Glacier"
+                },
+                "natural/grassland": {
+                    "name": "Grassland"
+                },
+                "natural/heath": {
+                    "name": "Heath"
+                },
+                "natural/peak": {
+                    "name": "Peak"
+                },
+                "natural/ridge": {
+                    "name": "Ridge"
+                },
+                "natural/saddle": {
+                    "name": "Saddle"
+                },
+                "natural/sand": {
+                    "name": "Sand"
+                },
+                "natural/scree": {
+                    "name": "Scree"
+                },
+                "natural/scrub": {
+                    "name": "Scrub"
+                },
+                "natural/spring": {
+                    "name": "Spring"
+                },
+                "natural/tree": {
+                    "name": "Tree"
+                },
+                "natural/tree_row": {
+                    "name": "Tree row"
+                },
+                "natural/volcano": {
+                    "name": "Volcano"
+                },
+                "natural/water": {
+                    "name": "Water"
+                },
+                "natural/water/lake": {
+                    "name": "Lake"
+                },
+                "natural/water/pond": {
+                    "name": "Pond"
+                },
+                "natural/water/reservoir": {
+                    "name": "Reservoir"
+                },
+                "natural/wetland": {
+                    "name": "Wetland"
+                },
+                "natural/wood": {
+                    "name": "Wood"
+                },
+                "noexit/yes": {
+                    "name": "No Exit"
+                },
+                "office": {
+                    "name": "Office"
+                },
+                "office/accountant": {
+                    "name": "Accountant"
+                },
+                "office/administrative": {
+                    "name": "Administrative Office"
+                },
+                "office/architect": {
+                    "name": "Architect"
+                },
+                "office/company": {
+                    "name": "Company Office"
+                },
+                "office/coworking": {
+                    "name": "Coworking Space"
+                },
+                "office/educational_institution": {
+                    "name": "Educational Institution"
+                },
+                "office/employment_agency": {
+                    "name": "Employment Agency"
+                },
                 "office/estate_agent": {
                     "name": "Estate Agent"
+                },
+                "office/financial": {
+                    "name": "Financial Office"
+                },
+                "office/government": {
+                    "name": "Government Office"
+                },
+                "office/government/register_office": {
+                    "name": "Register Office"
+                },
+                "office/insurance": {
+                    "name": "Insurance Office"
+                },
+                "office/it": {
+                    "name": "IT Office"
+                },
+                "office/lawyer": {
+                    "name": "Law Office"
+                },
+                "office/lawyer/notary": {
+                    "name": "Notary Office"
+                },
+                "office/newspaper": {
+                    "name": "Newspaper"
+                },
+                "office/ngo": {
+                    "name": "NGO Office"
+                },
+                "office/physician": {
+                    "name": "Physician"
+                },
+                "office/political_party": {
+                    "name": "Political Party"
+                },
+                "office/research": {
+                    "name": "Research Office"
+                },
+                "office/telecommunication": {
+                    "name": "Telecom Office"
+                },
+                "office/therapist": {
+                    "name": "Therapist"
+                },
+                "office/travel_agent": {
+                    "name": "Travel Agency"
+                },
+                "piste": {
+                    "name": "Piste/Ski Trail"
                 },
                 "place": {
                     "name": "Place"
@@ -1503,35 +3526,719 @@
                 "place/city": {
                     "name": "City"
                 },
+                "place/farm": {
+                    "name": "Farm"
+                },
                 "place/hamlet": {
                     "name": "Hamlet"
+                },
+                "place/island": {
+                    "name": "Island"
+                },
+                "place/isolated_dwelling": {
+                    "name": "Isolated Dwelling"
+                },
+                "place/locality": {
+                    "name": "Locality"
+                },
+                "place/neighbourhood": {
+                    "name": "Neighborhood"
+                },
+                "place/quarter": {
+                    "name": "Sub-Borough / Quarter"
+                },
+                "place/square": {
+                    "name": "Square"
+                },
+                "place/suburb": {
+                    "name": "Borough / Suburb"
+                },
+                "place/town": {
+                    "name": "Town"
+                },
+                "place/village": {
+                    "name": "Village"
+                },
+                "point": {
+                    "name": "Point"
+                },
+                "power": {
+                    "name": "Power"
+                },
+                "power/generator": {
+                    "name": "Power Generator"
+                },
+                "power/line": {
+                    "name": "Power Line"
+                },
+                "power/minor_line": {
+                    "name": "Minor Power Line"
+                },
+                "power/plant": {
+                    "name": "Power Station Grounds"
+                },
+                "power/pole": {
+                    "name": "Power Pole"
+                },
+                "power/sub_station": {
+                    "name": "Substation"
+                },
+                "power/substation": {
+                    "name": "Substation"
+                },
+                "power/tower": {
+                    "name": "High-Voltage Tower"
+                },
+                "power/transformer": {
+                    "name": "Transformer"
+                },
+                "public_transport/platform": {
+                    "name": "Platform"
+                },
+                "public_transport/stop_position": {
+                    "name": "Stop Position"
+                },
+                "railway": {
+                    "name": "Railway"
+                },
+                "railway/abandoned": {
+                    "name": "Abandoned Railway"
+                },
+                "railway/crossing": {
+                    "name": "Railway Crossing (Path)"
+                },
+                "railway/disused": {
+                    "name": "Disused Railway"
+                },
+                "railway/funicular": {
+                    "name": "Funicular"
+                },
+                "railway/halt": {
+                    "name": "Railway Halt"
+                },
+                "railway/level_crossing": {
+                    "name": "Railway Crossing (Road)"
+                },
+                "railway/monorail": {
+                    "name": "Monorail"
+                },
+                "railway/narrow_gauge": {
+                    "name": "Narrow Gauge Rail"
+                },
+                "railway/platform": {
+                    "name": "Railway Platform"
+                },
+                "railway/rail": {
+                    "name": "Rail"
+                },
+                "railway/station": {
+                    "name": "Railway Station"
+                },
+                "railway/subway": {
+                    "name": "Subway"
+                },
+                "railway/subway_entrance": {
+                    "name": "Subway Entrance"
+                },
+                "railway/tram": {
+                    "name": "Tram"
+                },
+                "railway/tram_stop": {
+                    "name": "Tram Stop"
                 },
                 "relation": {
                     "name": "Relation"
                 },
+                "roundabout": {
+                    "name": "Roundabout"
+                },
+                "route/ferry": {
+                    "name": "Ferry Route"
+                },
+                "shop": {
+                    "name": "Shop"
+                },
                 "shop/alcohol": {
                     "name": "Off licence (Alcohol shop)"
+                },
+                "shop/anime": {
+                    "name": "Anime Shop"
+                },
+                "shop/antiques": {
+                    "name": "Antiques Shop"
+                },
+                "shop/art": {
+                    "name": "Art Store"
+                },
+                "shop/baby_goods": {
+                    "name": "Baby Goods Store"
+                },
+                "shop/bag": {
+                    "name": "Bag/Luggage Store"
+                },
+                "shop/bakery": {
+                    "name": "Bakery"
+                },
+                "shop/bathroom_furnishing": {
+                    "name": "Bathroom Furnishing Store"
+                },
+                "shop/beauty": {
+                    "name": "Beauty Shop"
+                },
+                "shop/beauty/nails": {
+                    "name": "Nail Salon"
+                },
+                "shop/beauty/tanning": {
+                    "name": "Tanning Salon"
+                },
+                "shop/bed": {
+                    "name": "Bedding/Mattress Store"
+                },
+                "shop/beverages": {
+                    "name": "Beverage Store"
+                },
+                "shop/bicycle": {
+                    "name": "Bicycle Shop"
+                },
+                "shop/bookmaker": {
+                    "name": "Bookmaker"
+                },
+                "shop/books": {
+                    "name": "Book Store"
+                },
+                "shop/boutique": {
+                    "name": "Boutique"
+                },
+                "shop/butcher": {
+                    "name": "Butcher"
+                },
+                "shop/candles": {
+                    "name": "Candle Shop"
+                },
+                "shop/car": {
+                    "name": "Car Dealership"
+                },
+                "shop/car_parts": {
+                    "name": "Car Parts Store"
+                },
+                "shop/car_repair": {
+                    "name": "Car Repair Shop"
+                },
+                "shop/carpet": {
+                    "name": "Carpet Store"
+                },
+                "shop/charity": {
+                    "name": "Charity Store"
+                },
+                "shop/cheese": {
+                    "name": "Cheese Store"
                 },
                 "shop/chemist": {
                     "name": "Chemist"
                 },
+                "shop/chocolate": {
+                    "name": "Chocolate Store"
+                },
+                "shop/clothes": {
+                    "name": "Clothing Store"
+                },
+                "shop/coffee": {
+                    "name": "Coffee Store"
+                },
+                "shop/computer": {
+                    "name": "Computer Store"
+                },
+                "shop/confectionery": {
+                    "name": "Candy Store"
+                },
+                "shop/convenience": {
+                    "name": "Convenience Store"
+                },
+                "shop/copyshop": {
+                    "name": "Copy Store"
+                },
+                "shop/cosmetics": {
+                    "name": "Cosmetics Store"
+                },
+                "shop/craft": {
+                    "name": "Arts and Crafts Store"
+                },
+                "shop/curtain": {
+                    "name": "Curtain Store"
+                },
+                "shop/dairy": {
+                    "name": "Dairy Store"
+                },
+                "shop/deli": {
+                    "name": "Deli"
+                },
+                "shop/department_store": {
+                    "name": "Department Store"
+                },
+                "shop/doityourself": {
+                    "name": "DIY Store"
+                },
+                "shop/dry_cleaning": {
+                    "name": "Dry Cleaner"
+                },
+                "shop/e-cigarette": {
+                    "name": "E-Cigarette Shop"
+                },
+                "shop/electronics": {
+                    "name": "Electronics Store"
+                },
+                "shop/erotic": {
+                    "name": "Erotic Store"
+                },
+                "shop/fabric": {
+                    "name": "Fabric Store"
+                },
                 "shop/farm": {
                     "name": "Farm Shop"
+                },
+                "shop/fashion": {
+                    "name": "Fashion Store"
+                },
+                "shop/fishmonger": {
+                    "name": "Fishmonger"
+                },
+                "shop/florist": {
+                    "name": "Florist"
+                },
+                "shop/frame": {
+                    "name": "Framing Shop"
+                },
+                "shop/funeral_directors": {
+                    "name": "Funeral Home"
+                },
+                "shop/furnace": {
+                    "name": "Furnace Store"
+                },
+                "shop/furniture": {
+                    "name": "Furniture Store"
                 },
                 "shop/garden_centre": {
                     "name": "Garden Centre"
                 },
+                "shop/gas": {
+                    "name": "Bottled Gas Shop"
+                },
+                "shop/gift": {
+                    "name": "Gift Shop"
+                },
+                "shop/greengrocer": {
+                    "name": "Greengrocer"
+                },
+                "shop/hairdresser": {
+                    "name": "Hairdresser"
+                },
+                "shop/hardware": {
+                    "name": "Hardware Store"
+                },
+                "shop/hearing_aids": {
+                    "name": "Hearing Aids Store"
+                },
+                "shop/herbalist": {
+                    "name": "Herbalist"
+                },
+                "shop/hifi": {
+                    "name": "Hifi Store"
+                },
+                "shop/houseware": {
+                    "name": "Houseware Store"
+                },
+                "shop/interior_decoration": {
+                    "name": "Interior Decoration Store"
+                },
                 "shop/jewelry": {
                     "name": "Jeweller"
                 },
+                "shop/kiosk": {
+                    "name": "News Kiosk"
+                },
+                "shop/kitchen": {
+                    "name": "Kitchen Design Store"
+                },
+                "shop/laundry": {
+                    "name": "Laundry"
+                },
+                "shop/leather": {
+                    "name": "Leather Store"
+                },
+                "shop/locksmith": {
+                    "name": "Locksmith"
+                },
+                "shop/lottery": {
+                    "name": "Lottery Shop"
+                },
+                "shop/mall": {
+                    "name": "Mall"
+                },
+                "shop/massage": {
+                    "name": "Massage Shop"
+                },
+                "shop/medical_supply": {
+                    "name": "Medical Supply Store"
+                },
+                "shop/mobile_phone": {
+                    "name": "Mobile Phone Store"
+                },
+                "shop/money_lender": {
+                    "name": "Money Lender"
+                },
+                "shop/motorcycle": {
+                    "name": "Motorcycle Dealership"
+                },
+                "shop/music": {
+                    "name": "Music Store"
+                },
+                "shop/musical_instrument": {
+                    "name": "Musical Instrument Store"
+                },
+                "shop/newsagent": {
+                    "name": "Newspaper/Magazine Shop"
+                },
+                "shop/nutrition_supplements": {
+                    "name": "Nutrition Supplements Store"
+                },
+                "shop/optician": {
+                    "name": "Optician"
+                },
+                "shop/organic": {
+                    "name": "Organic Goods Store"
+                },
+                "shop/outdoor": {
+                    "name": "Outdoors Store"
+                },
+                "shop/paint": {
+                    "name": "Paint Store"
+                },
+                "shop/pastry": {
+                    "name": "Pastry Shop"
+                },
+                "shop/pawnbroker": {
+                    "name": "Pawn Shop"
+                },
+                "shop/perfumery": {
+                    "name": "Perfume Store"
+                },
+                "shop/pet": {
+                    "name": "Pet Store"
+                },
+                "shop/photo": {
+                    "name": "Photography Store"
+                },
+                "shop/pyrotechnics": {
+                    "name": "Fireworks Store"
+                },
+                "shop/radiotechnics": {
+                    "name": "Radio/Electronic Component Store"
+                },
+                "shop/religion": {
+                    "name": "Religious Store"
+                },
+                "shop/scuba_diving": {
+                    "name": "Scuba Diving Shop"
+                },
+                "shop/seafood": {
+                    "name": "Seafood Shop"
+                },
+                "shop/second_hand": {
+                    "name": "Consignment/Thrift Store"
+                },
                 "shop/shoes": {
                     "name": "Shoe Shop"
+                },
+                "shop/sports": {
+                    "name": "Sporting Goods Store"
+                },
+                "shop/stationery": {
+                    "name": "Stationery Store"
+                },
+                "shop/storage_rental": {
+                    "name": "Storage Rental"
+                },
+                "shop/supermarket": {
+                    "name": "Supermarket"
+                },
+                "shop/tailor": {
+                    "name": "Tailor"
+                },
+                "shop/tattoo": {
+                    "name": "Tattoo Parlor"
+                },
+                "shop/tea": {
+                    "name": "Tea Store"
+                },
+                "shop/ticket": {
+                    "name": "Ticket Seller"
+                },
+                "shop/tobacco": {
+                    "name": "Tobacco Shop"
+                },
+                "shop/toys": {
+                    "name": "Toy Store"
+                },
+                "shop/travel_agency": {
+                    "name": "Travel Agency"
+                },
+                "shop/tyres": {
+                    "name": "Tire Store"
+                },
+                "shop/vacant": {
+                    "name": "Vacant Shop"
+                },
+                "shop/vacuum_cleaner": {
+                    "name": "Vacuum Cleaner Store"
+                },
+                "shop/variety_store": {
+                    "name": "Variety Store"
+                },
+                "shop/video": {
+                    "name": "Video Store"
+                },
+                "shop/video_games": {
+                    "name": "Video Game Store"
+                },
+                "shop/watches": {
+                    "name": "Watches Shop"
+                },
+                "shop/water_sports": {
+                    "name": "Watersport/Swim Shop"
+                },
+                "shop/weapons": {
+                    "name": "Weapon Shop"
+                },
+                "shop/window_blind": {
+                    "name": "Window Blind Store"
+                },
+                "shop/wine": {
+                    "name": "Wine Shop"
+                },
+                "tourism": {
+                    "name": "Tourism"
+                },
+                "tourism/alpine_hut": {
+                    "name": "Alpine Hut"
+                },
+                "tourism/apartment": {
+                    "name": "Guest Apartment / Condo"
+                },
+                "tourism/aquarium": {
+                    "name": "Aquarium"
+                },
+                "tourism/artwork": {
+                    "name": "Artwork"
+                },
+                "tourism/attraction": {
+                    "name": "Tourist Attraction"
                 },
                 "tourism/camp_site": {
                     "name": "Camp Site"
                 },
                 "tourism/caravan_site": {
                     "name": "Caravan Park"
+                },
+                "tourism/chalet": {
+                    "name": "Chalet"
+                },
+                "tourism/gallery": {
+                    "name": "Art Gallery"
+                },
+                "tourism/guest_house": {
+                    "name": "Guest House"
+                },
+                "tourism/hostel": {
+                    "name": "Hostel"
+                },
+                "tourism/hotel": {
+                    "name": "Hotel"
+                },
+                "tourism/information": {
+                    "name": "Information"
+                },
+                "tourism/information/board": {
+                    "name": "Information Board"
+                },
+                "tourism/information/guidepost": {
+                    "name": "Guidepost"
+                },
+                "tourism/information/map": {
+                    "name": "Map"
+                },
+                "tourism/information/office": {
+                    "name": "Tourist Information Office"
+                },
+                "tourism/motel": {
+                    "name": "Motel"
+                },
+                "tourism/museum": {
+                    "name": "Museum"
+                },
+                "tourism/picnic_site": {
+                    "name": "Picnic Site"
+                },
+                "tourism/theme_park": {
+                    "name": "Theme Park"
+                },
+                "tourism/viewpoint": {
+                    "name": "Viewpoint"
+                },
+                "tourism/zoo": {
+                    "name": "Zoo"
+                },
+                "traffic_calming": {
+                    "name": "Traffic Calming"
+                },
+                "traffic_calming/bump": {
+                    "name": "Speed Bump"
+                },
+                "traffic_calming/chicane": {
+                    "name": "Traffic Chicane"
+                },
+                "traffic_calming/choker": {
+                    "name": "Traffic Choker"
+                },
+                "traffic_calming/cushion": {
+                    "name": "Speed Cushion"
+                },
+                "traffic_calming/dip": {
+                    "name": "Dip"
+                },
+                "traffic_calming/hump": {
+                    "name": "Speed Hump"
+                },
+                "traffic_calming/island": {
+                    "name": "Traffic Island"
+                },
+                "traffic_calming/rumble_strip": {
+                    "name": "Rumble Strip"
+                },
+                "traffic_calming/table": {
+                    "name": "Raised Pedestrian Crossing"
+                },
+                "type/boundary": {
+                    "name": "Boundary"
+                },
+                "type/boundary/administrative": {
+                    "name": "Administrative Boundary"
+                },
+                "type/multipolygon": {
+                    "name": "Multipolygon"
+                },
+                "type/restriction": {
+                    "name": "Restriction"
+                },
+                "type/restriction/no_left_turn": {
+                    "name": "No Left Turn"
+                },
+                "type/restriction/no_right_turn": {
+                    "name": "No Right Turn"
+                },
+                "type/restriction/no_straight_on": {
+                    "name": "No Straight On"
+                },
+                "type/restriction/no_u_turn": {
+                    "name": "No U-turn"
+                },
+                "type/restriction/only_left_turn": {
+                    "name": "Left Turn Only"
+                },
+                "type/restriction/only_right_turn": {
+                    "name": "Right Turn Only"
+                },
+                "type/restriction/only_straight_on": {
+                    "name": "No Turns"
+                },
+                "type/route": {
+                    "name": "Route"
+                },
+                "type/route/bicycle": {
+                    "name": "Cycle Route"
+                },
+                "type/route/bus": {
+                    "name": "Bus Route"
+                },
+                "type/route/detour": {
+                    "name": "Detour Route"
+                },
+                "type/route/ferry": {
+                    "name": "Ferry Route"
+                },
+                "type/route/foot": {
+                    "name": "Foot Route"
+                },
+                "type/route/hiking": {
+                    "name": "Hiking Route"
+                },
+                "type/route/horse": {
+                    "name": "Riding Route"
+                },
+                "type/route/pipeline": {
+                    "name": "Pipeline Route"
+                },
+                "type/route/power": {
+                    "name": "Power Route"
+                },
+                "type/route/road": {
+                    "name": "Road Route"
+                },
+                "type/route/train": {
+                    "name": "Train Route"
+                },
+                "type/route/tram": {
+                    "name": "Tram Route"
+                },
+                "type/route_master": {
+                    "name": "Route Master"
+                },
+                "type/site": {
+                    "name": "Site"
+                },
+                "vertex": {
+                    "name": "Other"
+                },
+                "waterway/boatyard": {
+                    "name": "Boatyard"
+                },
+                "waterway/canal": {
+                    "name": "Canal"
+                },
+                "waterway/dam": {
+                    "name": "Dam"
+                },
+                "waterway/ditch": {
+                    "name": "Ditch"
+                },
+                "waterway/dock": {
+                    "name": "Wet Dock / Dry Dock"
+                },
+                "waterway/drain": {
+                    "name": "Drain"
+                },
+                "waterway/fuel": {
+                    "name": "Marine Fuel Station"
+                },
+                "waterway/river": {
+                    "name": "River"
+                },
+                "waterway/riverbank": {
+                    "name": "Riverbank"
+                },
+                "waterway/sanitary_dump_station": {
+                    "name": "Marine Toilet Disposal"
+                },
+                "waterway/stream": {
+                    "name": "Stream"
+                },
+                "waterway/water_point": {
+                    "name": "Marine Drinking Water"
+                },
+                "waterway/waterfall": {
+                    "name": "Waterfall"
+                },
+                "waterway/weir": {
+                    "name": "Weir"
                 }
             }
         }
