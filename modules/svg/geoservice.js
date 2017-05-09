@@ -152,6 +152,7 @@ export function svgGeoService(projection, context, dispatch) {
                 nodes = makeMiniNodes(coords);
                 props = makeEntity(nodes);
                 way = new osmWay(props, nodes);
+                way.approvedForEdit = 'pending';
                 context.perform(
                     actionAddEntity(way),
                     'adding way'
@@ -208,6 +209,7 @@ export function svgGeoService(projection, context, dispatch) {
                             },
                             members: componentRings
                         });
+                        rel.approvedForEdit = 'pending';
                         context.perform(
                             actionAddEntity(rel),
                             'adding multiple-ring Polygon'
@@ -318,6 +320,7 @@ export function svgGeoService(projection, context, dispatch) {
                     if (!matched) {
                         // add address point independently of existing buildings
                         var node = new osmNode(props);
+                        node.approvedForEdit = 'pending';
                         context.perform(
                             actionAddEntity(node),
                             'adding point'
@@ -327,6 +330,7 @@ export function svgGeoService(projection, context, dispatch) {
                     
                 } else {
                     var node = new osmNode(props);
+                    node.approvedForEdit = 'pending';
                     context.perform(
                         actionAddEntity(node),
                         'adding point'
@@ -395,6 +399,7 @@ export function svgGeoService(projection, context, dispatch) {
                     },
                     members: lines
                 });
+                rel.approvedForEdit = 'pending';
                 context.perform(
                     actionAddEntity(rel),
                     'adding multiple Lines as a Relation'
@@ -421,6 +426,7 @@ export function svgGeoService(projection, context, dispatch) {
                     },
                     members: polygons
                 });
+                rel.approvedForEdit = 'pending';
                 context.perform(
                     actionAddEntity(rel),
                     'adding multiple Polygons as a Relation'

@@ -117,7 +117,7 @@ export function uiEntityEditor(context) {
             }).bind(this));
         
         // show import approval section?
-        d3.selectAll('.import-approve').classed('hide', (entity.approvedForEdit === 'approved') || (d3.select('input[name="approvalProcess"]:checked').property('value') === 'all'));
+        d3.selectAll('.import-approve').classed('hide', (!entity.approvedForEdit) || (entity.approvedForEdit === 'approved') || (d3.select('input[name="approvalProcess"]:checked').property('value') === 'all'));
         
         enter
             .append('div')
