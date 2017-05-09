@@ -133,7 +133,7 @@ export function uiEntityEditor(context) {
         enter
             .append('div')
             .attr('class', 'inspector-border inspector-preset');
-        
+
         enter
             .append('div')
             .attr('class', 'inspector-border raw-tag-editor inspector-inner');
@@ -217,7 +217,7 @@ export function uiEntityEditor(context) {
     function clean(o) {
 
         function cleanVal(k, v) {
-            // a number value from service should be converted to a string
+            // a number value from service should be converted to a string here
             v = v + '';
 
             function keepSpaces(k) {

@@ -9,8 +9,6 @@ import { uiPresetIcon } from './preset_icon';
 import { uiTagReference } from './tag_reference';
 import { utilNoAuto, utilRebind } from '../util';
 
-// TODO: make this less of a hack
-window.presetReloadFunction = null;
 
 export function uiPresetList(context) {
     var dispatch = d3.dispatch('choose'),
@@ -19,7 +17,7 @@ export function uiPresetList(context) {
         autofocus = false;
 
 
-    function presetList(selection, seeAllGeos) {
+    function presetList(selection) {
         var entity = context.entity(id),
             geometry = context.geometry(id);
 
@@ -28,8 +26,7 @@ export function uiPresetList(context) {
             geometry = 'point';
         }
 
-        var presets = context.presets();
-        presets = presets.matchGeometry(geometry);
+        var presets = context.presets().matchGeometry(geometry);
 
         selection.html('');
 
@@ -251,16 +248,12 @@ export function uiPresetList(context) {
 
         item.choose = function() {
             context.presets().choose(preset);
-            
-            // avoid editing the last-selected option, if we are using preset UI for a GeoService import
-            var gsLayer = context.layers().layer('geoservice');
-            if (!gsLayer.windowOpen() || !gsLayer.awaitingUrl()) {
-                context.perform(
-                    actionChangePreset(id, currentPreset, preset),
-                    t('operations.change_tags.annotation')
-                );
-            }
-            
+
+            context.perform(
+                actionChangePreset(id, currentPreset, preset),
+                t('operations.change_tags.annotation')
+            );
+
             dispatch.call('choose', this, preset);
         };
 

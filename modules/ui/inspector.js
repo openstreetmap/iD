@@ -47,11 +47,7 @@ export function uiInspector(context) {
             showEditor = state === 'hover' ||
                 entity.isUsed(graph) ||
                 entity.isHighwayIntersection(graph);
-        
-        // make sure some content is in the preset pane
-        // TODO: is this actually helping?
-        presetPane.call(presetList);
-        
+
         if (showEditor) {
             wrap.style('right', '0%');
             editorPane.call(entityEditor);
@@ -82,7 +78,6 @@ export function uiInspector(context) {
 
 
         function setPreset(preset) {
-            // standard preset behavior
             wrap.transition()
                 .styleTween('right', function() { return d3.interpolate('-100%', '0%'); });
 
