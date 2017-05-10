@@ -186,16 +186,18 @@ export function uiFeatureList(context) {
             list.selectAll('.no-results-item .entity-name')
                 .text(noResultsWorldwide ? t('geocoder.no_results_worldwide') : t('geocoder.no_results_visible'));
 
-            list.selectAll('.geocode-item')
-                .data([0])
-                .enter().append('button')
-                .attr('class', 'geocode-item')
-                .on('click', geocoderSearch)
-                .append('div')
-                .attr('class', 'label')
-                .append('span')
-                .attr('class', 'entity-name')
-                .text(t('geocoder.search'));
+            if (services.geocoder) {
+              list.selectAll('.geocode-item')
+                  .data([0])
+                  .enter().append('button')
+                  .attr('class', 'geocode-item')
+                  .on('click', geocoderSearch)
+                  .append('div')
+                  .attr('class', 'label')
+                  .append('span')
+                  .attr('class', 'entity-name')
+                  .text(t('geocoder.search'));
+            }
 
             list.selectAll('.no-results-item')
                 .style('display', (value.length && !results.length) ? 'block' : 'none');
