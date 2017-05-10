@@ -1157,7 +1157,8 @@
         "opening_hours": {
             "key": "opening_hours",
             "type": "combo",
-            "label": "Hours"
+            "label": "Hours",
+            "snake_case": false
         },
         "operator": {
             "key": "operator",
