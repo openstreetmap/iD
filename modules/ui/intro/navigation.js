@@ -249,6 +249,9 @@ export function uiIntroNavigation(context, reveal) {
     function editorTownHall() {
         if (!isTownHallSelected()) return clickTownHall();
 
+        // disallow scrolling
+        d3.select('.inspector-wrap').on('wheel.intro', eventCancel);
+
         var onClick = function() { continueTo(presetTownHall); };
 
         reveal('.entity-editor-pane',
@@ -269,6 +272,7 @@ export function uiIntroNavigation(context, reveal) {
         function continueTo(nextStep) {
             context.on('exit.intro', null);
             context.history().on('change.intro', null);
+            d3.select('.inspector-wrap').on('wheel.intro', null);
             nextStep();
         }
     }
@@ -279,6 +283,8 @@ export function uiIntroNavigation(context, reveal) {
 
         // reset pane, in case user happened to change it..
         d3.select('.inspector-wrap .panewrap').style('right', '0%');
+        // disallow scrolling
+        d3.select('.inspector-wrap').on('wheel.intro', eventCancel);
 
         // preset match, in case the user happened to change it.
         var entity = context.entity(context.selectedIDs()[0]);
@@ -304,6 +310,7 @@ export function uiIntroNavigation(context, reveal) {
         function continueTo(nextStep) {
             context.on('exit.intro', null);
             context.history().on('change.intro', null);
+            d3.select('.inspector-wrap').on('wheel.intro', null);
             nextStep();
         }
     }
@@ -314,6 +321,8 @@ export function uiIntroNavigation(context, reveal) {
 
         // reset pane, in case user happened to change it..
         d3.select('.inspector-wrap .panewrap').style('right', '0%');
+        // disallow scrolling
+        d3.select('.inspector-wrap').on('wheel.intro', eventCancel);
 
         var onClick = function() { continueTo(closeTownHall); };
 
@@ -335,6 +344,7 @@ export function uiIntroNavigation(context, reveal) {
         function continueTo(nextStep) {
             context.on('exit.intro', null);
             context.history().on('change.intro', null);
+            d3.select('.inspector-wrap').on('wheel.intro', null);
             nextStep();
         }
     }
@@ -538,6 +548,7 @@ export function uiIntroNavigation(context, reveal) {
         context.on('enter.intro exit.intro', null);
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
+        d3.select('.inspector-wrap').on('wheel.intro', null);
         d3.select('.search-header input').on('keydown.intro keyup.intro', null);
     };
 

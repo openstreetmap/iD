@@ -192,6 +192,9 @@ export function uiIntroArea(context, reveal) {
             context.enter(modeSelect(context, [areaId]));
         }
 
+        // disallow scrolling
+        d3.select('.inspector-wrap').on('wheel.intro', eventCancel);
+
         timeout(function() {
             // reset pane, in case user somehow happened to change it..
             d3.select('.inspector-wrap .panewrap').style('right', '-100%');
@@ -217,6 +220,8 @@ export function uiIntroArea(context, reveal) {
 
                 // reset pane, in case user somehow happened to change it..
                 d3.select('.inspector-wrap .panewrap').style('right', '-100%');
+                // disallow scrolling
+                d3.select('.inspector-wrap').on('wheel.intro', eventCancel);
 
                 d3.select('.preset-search-input')
                     .on('keydown.intro', null)
@@ -250,6 +255,7 @@ export function uiIntroArea(context, reveal) {
         }
 
         function continueTo(nextStep) {
+            d3.select('.inspector-wrap').on('wheel.intro', null);
             context.on('enter.intro', null);
             context.history().on('change.intro', null);
             d3.select('.preset-search-input').on('keydown.intro keyup.intro', null);
@@ -266,6 +272,13 @@ export function uiIntroArea(context, reveal) {
         if (context.mode().id !== 'select' || !ids.length || ids[0] !== areaId) {
             return searchPresets();
         }
+
+        if (!d3.select('.form-field-description').empty()) {
+            return continueTo(describePlayground);
+        }
+
+        // disallow scrolling
+        d3.select('.inspector-wrap').on('wheel.intro', eventCancel);
 
         timeout(function() {
             // reset pane, in case user somehow happened to change it..
@@ -294,6 +307,7 @@ export function uiIntroArea(context, reveal) {
         });
 
         function continueTo(nextStep) {
+            d3.select('.inspector-wrap').on('wheel.intro', null);
             d3.select('.more-fields .combobox-input').on('click.intro', null);
             context.on('exit.intro', null);
             nextStep();
@@ -308,6 +322,10 @@ export function uiIntroArea(context, reveal) {
         var ids = context.selectedIDs();
         if (context.mode().id !== 'select' || !ids.length || ids[0] !== areaId) {
             return searchPresets();
+        }
+
+        if (!d3.select('.form-field-description').empty()) {
+            return continueTo(describePlayground);
         }
 
         // Make sure combobox is ready..
@@ -429,6 +447,7 @@ export function uiIntroArea(context, reveal) {
         context.on('enter.intro exit.intro', null);
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
+        d3.select('.inspector-wrap').on('wheel.intro', null);
         d3.select('.preset-search-input').on('keydown.intro keyup.intro', null);
         d3.select('.more-fields .combobox-input').on('click.intro', null);
     };

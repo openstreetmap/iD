@@ -114,6 +114,9 @@ export function uiIntroPoint(context, reveal) {
             return addPoint();
         }
 
+        // disallow scrolling
+        d3.select('.inspector-wrap').on('wheel.intro', eventCancel);
+
         d3.select('.preset-search-input')
             .on('keydown.intro', null)
             .on('keyup.intro', checkPresetSearch);
@@ -131,6 +134,9 @@ export function uiIntroPoint(context, reveal) {
             if (mode.id !== 'select' || !ids.length || ids[0] !== pointId) {
                 // keep the user's point selected..
                 context.enter(modeSelect(context, [pointId]));
+
+                // disallow scrolling
+                d3.select('.inspector-wrap').on('wheel.intro', eventCancel);
 
                 d3.select('.preset-search-input')
                     .on('keydown.intro', null)
@@ -167,6 +173,7 @@ export function uiIntroPoint(context, reveal) {
         function continueTo(nextStep) {
             context.on('enter.intro', null);
             context.history().on('change.intro', null);
+            d3.select('.inspector-wrap').on('wheel.intro', null);
             d3.select('.preset-search-input').on('keydown.intro keyup.intro', null);
             nextStep();
         }
@@ -483,6 +490,7 @@ export function uiIntroPoint(context, reveal) {
         context.on('enter.intro exit.intro', null);
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
+        d3.select('.inspector-wrap').on('wheel.intro', eventCancel);
         d3.select('.preset-search-input').on('keydown.intro keyup.intro', null);
     };
 
