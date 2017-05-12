@@ -164,8 +164,11 @@ export function behaviorSelect(context) {
                 // Edge and IE really like to show the contextmenu on the
                 // menubar when user presses a keyboard menu button
                 // even after we've already preventdefaulted the key event.
-                d3.event.preventDefault();
-                d3.event.stopPropagation();
+                var e = d3.event;
+                if (+e.clientX === 0 && +e.clientY === 0) {
+                    d3.event.preventDefault();
+                    d3.event.stopPropagation();
+                }
             });
 
         selection
