@@ -830,7 +830,7 @@
                 "intersect": "Clique com o mouse ou pressione a barra de espaço para adicionar outros nós à linha.{br}Ruas, assim como vários outros tipos de linhas, são parte de uma malha muito maior. Portanto, é importante que essas linhas estejam conectadas corretamente, para que aplicativos de roteamento funcionem direito. **Clique na {name} para criar um cruzamento juntando as duas ruas.**",
                 "retry_intersect": "A rua precisa cruzar com a {name}. Vamos tentar novamente!",
                 "continue_line": "Continue desenhando a linha da nova rua. Lembre-se que você pode arrastar e alterar o zoom do mapa, se necessário.{br}Quando você tiver terminado de desenhar, clique no último nó novamente. **Termine de desenhar a rua.**",
-                "choose_category_road": "**Selecione {category} na lista.**",
+                "choose_category_road": "**Escolha {category} na lista.**",
                 "choose_preset_residential": "Há vários tipos de ruas e estradas, mas esta é uma via residencial. **Escolha {preset} na lista.**",
                 "retry_preset_residential": "Você não selecionou o tipo {preset}. **Clique aqui para selecionar novamente.**",
                 "name_road": "**Dê um nome a esta rua, e então aperte Esc, Enter, ou clique no botão {button} para fechar o editor de elementos. Evite abreviar nomes de ruas.**",

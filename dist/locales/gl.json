@@ -800,10 +800,10 @@
                 "choose_cafe": "**Elexida {preset} da lista.**",
                 "feature_editor": "O punto novo marcado coma café. Usando o editor de aplicacións, podemos engadir máis información sobre o café.",
                 "add_name": "En OpenStreetMap tódolos campos son opcionais, ao dar OK para sair co campo en branco se ti estás seguro.{br} Imos supoñer que vostede ten información local de ese café e coñece o nome. **Engada o nome para o café.**",
-                "add_close": "O editor de elementos lle lembrará que tódolos trocos son automáticos. **Cando ti remates de editar o nome, pulsa escape, retorno ou click no botón {button} para pechar o editor de elementos.**",
+                "add_close": "O editor del elementos lembrará tódolos trocos automáticamente. **Cando remates de editar e nomear, pulsa escape, enter, o u fai clic no botón  {button} de peche do editor de elementos.**",
                 "reselect": "A miudo os puntos deixarán de existir, pero terán erros ou serán incompletos. Lembremos editar os puntos existentes. **Pincha no café para seleccionar ou só crealo.**",
                 "update": "Imos cubrir algúns detalles sobre o café. Pode cambiar o seu nome, engade a cociña, ou engadir un enderezo. **Cambiar a información do café.**",
-                "update_close": "**Cando remates sube o café, presiona escape, retorno, ou click no botón {button} para pechar o editor de elementos.**",
+                "update_close": "**Cando remates de actualizar o café, pulsa escape, enter, ou fai click no botón  {button}  para pechar o editor de elementos.**",
                 "rightclick": "Podes pinchar no botón dereito ou calquera elemento para ver o *edit menu*, entón amosa a listaxe de operacións a editar dispoñible. **Pulsa botón dereito ou selecciona o punto que creas e amosa o menú de edición.**",
                 "delete": "OK borrar elementos que non existen no mundo real.{br} Borrando un elemento de OpenStreetMap quitalo do mapa para todo uso, debes estar certo de que un elemento realmente non existente antes de borralo. **Clica no botón {button}  borrar punto.**",
                 "undo": "Sempre pode desfacer calquera modificación ata que garde as súas edicións en OpenStreetMap. **Prema no botón {button} para anular a eliminación e obter o punto de volta.**",
@@ -814,7 +814,7 @@
                 "add_playground": "*Areas* son usadas para amosar límites de elementos tales como lagoas, edificios e zonas residenciais.{br} Poden ser empregadas para máis detalles como mapeado de calquera elemento debes normalmente mapear puntos. **Clica no {button} Area e engade a nova área.**",
                 "start_playground": "Deixa engadir xogos ao mapa para debuxar áreas. As áreas son debuxadas como lugares *nodos* fora das formas do elemento. **Pincha ou presiona barra espaciadora no lugar para poñer un nodo ou unha das esquinas do xogo.**",
                 "continue_playground": "Continúa a debuxar áreas por lugares con máis nodos ao redor das formas dos xogos. Xa está OK conectado con áreas existentes marcando rutas.{br} Tipo: pode manter premida a tecla Alt para evitar que os nodos se liguen ao exsitentes. **Continue debuxando un área de xogo.** ",
-                "finish_playground": "Remata esta área pesionando retorno, ou clicando outra vez osbre calquera primeiro ou último nodo. **Remata debuxando a área para o xogo.**",
+                "finish_playground": "Remata a área presionando enter, ou facendo click outra vez noutro nodo ou último nodo. **Remata de debuxar a área do polígono.**",
                 "search_playground": "**Atopar para '{preset}'.**",
                 "choose_playground": "**Elixe {preset} da lista.**",
                 "add_field": "Este xogo non ten un nome oficial, pola contra imos engadir nome ao campo.{br} Engadiremos detalles adicionais ao xogo como descrición do campo. **Abrir e engadir campos á lista.**",
@@ -830,10 +830,10 @@
                 "intersect": "Click ou presiona barra espaciadora para engadir nodos á liña.{br} Estradas e algúns outros tipos de liñas son parte dunha longa rede. É importante que esas liñas estean correctamente ligadas para que as aplicacións traballen. **Click sobre {name} para crear a intersección e ligar dúas liñas.**",
                 "retry_intersect": "A estrada necesita ligar con {name}. Volve tentalo!",
                 "continue_line": "Continúa debuxando liñas na nova estrada. Lembra que ti podes debuxar e facer zoom no mapa se o necesitas.{br} Cando remtes de debuxar fai click no último nodo outra vez. **Remata de debuxar a estrada.**",
-                "choose_category_road": "**Elixe {category} da lista**",
+                "choose_category_road": "**Escolla {category} na lista.**",
                 "choose_preset_residential": "Hai varios tipos diferentes de estradas, pero esta é unha rúa residencial. **Exisa o {preset} tipo.**",
                 "retry_preset_residential": "Non seleccionales o {preset} tipo. **Pincha aquí para volver elexir.**",
-                "name_road": "**Damos a esta estrada nome, pulsamos escape, retorno ou clicamos no botón {button} de edición do elemento.**",
+                "name_road": "**Da nome á estrada, logo pulsa escape, enter, ou click no botón {button}  para pechar o editor de elementos.**",
                 "did_name_road": "Parece Bo! Agora aprenderemos como actualizar as formas dunha liña.",
                 "update_line": "Algunhas veces necesitamos trocar formas en liñas existentes. Aquí é unha estrada que non parece correcta.",
                 "add_node": "Nós podemos engadir nodos a esta liña e proporcionar a forma. Un xeito de engadir nodos é facendo doble click sobre as liñas cando queiras engadir un nodo. **Doble click sobre a liña para crear un novo nodo.**",
@@ -857,7 +857,7 @@
                 "title": "Edificios",
                 "add_building": "OpenStreetMap é a maior e máis ampla base de datos mundial de edificios.{br} Podes axudar a aumentar esta base de datos trazando edificios que non están aínda mapeados. **Pinchar no botón {button} Área para engadir nova área.**",
                 "start_building": "Imos engadir esta casa para o mapa, trazando o seu contorno. {br} Os edificios deberán ser trazadas ao redor da súa pegada coa maior precisión posible. ** Pinche ou prema a barra de espazo para poñer un nó dende un dos cantos do edificio. **",
-                "continue_building": "Continue engadindo máis nodos ao trazar as liñas exteriores do edificio. Lembre que pode facer zoom se quere engadir máis detalles.{br} Remate o edificio e presione retorno ou faga click outra vez no final ou primeiro nodo. **Remae primeiro de trazar o edificiio.**",
+                "continue_building": "Continúa editando máis nodos ou traza o perímetro do edificio. Lembra que podes facer zoom se queres engadir máis detalles. .{br} Remata o edificio e presiona enter ou facendo click outra vez no primeiro ou último nodo. **Remata trazando o edificio.**",
                 "retry_building": "Parece que tivo algúns problemas poñendo os nós nas esquinas do edificio. Probe de novo!",
                 "choose_category_building": "**Elixe {category} na lista.**",
                 "choose_preset_house": "Hai varios diferentes tipos de edificios, pode que estea claro que é unha casa.{br} Se ti non estás seguro do tipo, está ben só elixe o tipo de edificio xenérico. **Elixe o tipo {preset}.**",
@@ -868,7 +868,7 @@
                 "done_square": "Amosa como as esquinas do edificio se moven de lugar? Imos aprender un truco útil.",
                 "add_tank": "O próximo trazado circular pechado.**Pinche no {button} botón Área e engada a nova área.**",
                 "start_tank": "Non te preocupes se necesitas debuxar un círculo perfecto. Solo debuxa unha área dentro da forma e toca o perimetro. **Click ou presiona a barra espaciadora para iniciar un nodo ou filo sobre a forma.**",
-                "continue_tank": "Engadir un novo nodo ao redor da forma. Este círculo creará fora dos nodos un novo debuxo.{br} Remata a área presionado retorno ou clicando outra vez preto do primeiro ou úlitmo nodo. **Primeiro debuxa o peche.**",
+                "continue_tank": "Engade uns poucos nodos ao redor da forma. O círuclo pode ser creado fora dos nodos que estás a debuxar. {br} Remata a área presionado enter, ou facendo click outra vez no primeiro ou último nodo. **Remata de debuxar o recinto.**",
                 "search_tank": "**Atopa para '{preset}'.**",
                 "choose_tank": "**Elixe {preset} da lista.**",
                 "rightclick_tank": "**Botón dereito para seleccionar e amalcenar o creado ou amosar o menú editar.**",
@@ -2529,6 +2529,10 @@
                     "name": "Campus",
                     "terms": "<translate with synonyms or related terms for 'University Grounds', separated by commas>"
                 },
+                "amenity/vending_machine": {
+                    "name": "Máquina de Vending",
+                    "terms": "<translate with synonyms or related terms for 'Vending Machine', separated by commas>"
+                },
                 "amenity/vending_machine/cigarettes": {
                     "name": "Expendedora de Tabaco",
                     "terms": "<translate with synonyms or related terms for 'Cigarette Vending Machine', separated by commas>"
@@ -2547,6 +2551,10 @@
                 },
                 "amenity/vending_machine/news_papers": {
                     "name": "Expendedora de Xornais"
+                },
+                "amenity/vending_machine/newspapers": {
+                    "name": "Máquina Expendedora de Xornais",
+                    "terms": "<translate with synonyms or related terms for 'Newspaper Vending Machine', separated by commas>"
                 },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
                     "name": "Máquina expendedora de recollida/entrega de paquetes",

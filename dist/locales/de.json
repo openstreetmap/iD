@@ -77,7 +77,7 @@
                 "connected_to_hidden": "Dieses Objekt kann nicht kreisförmig gemacht werden, da es mit einem versteckten Objekt verbunden ist."
             },
             "orthogonalize": {
-                "title": "Rechteck",
+                "title": "Rechtwinkelig machen",
                 "description": {
                     "line": "Die Ecken dieser Linie rechtwinkelig machen.",
                     "area": "Die Ecken dieser Fläche rechtwinkelig machen."
@@ -92,7 +92,7 @@
                 "connected_to_hidden": "Dieses Objekt kann nicht quadratisch gemacht werden, weil es mit einem versteckten Objekt verbunden ist."
             },
             "straighten": {
-                "title": "gerade ausrichten",
+                "title": "Gerade ausrichten",
                 "description": "Diese Linie gerade ausrichten.",
                 "key": "S",
                 "annotation": "Linie gerade ausgerichtet.",
@@ -115,7 +115,7 @@
                 },
                 "too_large": {
                     "single": "Dieses Objekt kann nicht gelöscht werden, da zu wenig davon sichtbar ist.",
-                    "multiple": "Diese Objekte können nicht gelöscht werden, da nicht genug davon momentan sichtbar ist."
+                    "multiple": "Diese Objekte können nicht gelöscht werden, da momentan nicht genug davon sichtbar ist."
                 },
                 "incomplete_relation": {
                     "single": "Dieses Objekt kann nicht gelöscht werden, da es nicht vollständig heruntergeladen wurde.",
@@ -183,8 +183,8 @@
                     "multiple": "Diese Objekte können nicht verschoben werden, da sie nicht vollständig heruntergeladen wurden."
                 },
                 "too_large": {
-                    "single": "Dieses Objekt kann nicht bewegt werden, da nicht genug davon momentan sichtbar ist.",
-                    "multiple": "Diese Objekte können nicht bewegt werden, da nicht genug davon momentan sichtbar ist."
+                    "single": "Dieses Objekt kann nicht bewegt werden, da momentan nicht genug davon sichtbar ist.",
+                    "multiple": "Diese Objekte können nicht bewegt werden, da momentan nicht genug davon sichtbar ist."
                 },
                 "connected_to_hidden": {
                     "single": "Dieses Objekt kann nicht verschoben werden, da es mit einem versteckten Objekt verbunden ist.",
@@ -225,8 +225,8 @@
                     "multiple": "Diese Objekte können nicht gespiegelt werden, da sie nicht vollständig heruntergeladen wurden."
                 },
                 "too_large": {
-                    "single": "Dieses Objekt kann nicht gespiegelt werden, da nicht genug davon momentan sichtbar ist.",
-                    "multiple": "Diese Objekte können nicht gespiegelt werden, da nicht genug davon momentan sichtbar sind."
+                    "single": "Dieses Objekt kann nicht gespiegelt werden, da momentan nicht genug davon sichtbar ist.",
+                    "multiple": "Diese Objekte können nicht gespiegelt werden, da momentan nicht genug davon sichtbar sind."
                 },
                 "connected_to_hidden": {
                     "single": "Dieses Objekt kann nicht gespiegelt werden, da es mit einem versteckten Objekt verbunden ist.",
@@ -250,8 +250,8 @@
                     "multiple": "Diese Objekte können nicht gedreht werden, da sie nicht vollständig heruntergeladen wurden."
                 },
                 "too_large": {
-                    "single": "Dieses Objekt kann nicht gedreht werden, da nicht genug davon momentan sichtbar ist.",
-                    "multiple": "Diese Objekte können nicht gedreht werden, da nicht genug davon momentan sichtbar sind."
+                    "single": "Dieses Objekt kann nicht gedreht werden, da momentan nicht genug davon sichtbar ist.",
+                    "multiple": "Diese Objekte können nicht gedreht werden, da momentan nicht genug davon sichtbar sind."
                 },
                 "connected_to_hidden": {
                     "single": "Dieses Objekt kann nicht gedreht werden, da es mit einem versteckten Objekt verbunden ist.",
@@ -785,11 +785,11 @@
                 "editor_townhall": "Wenn ein Objekt selektiert ist wird der *Objekteditor* neben der Karte angezeigt.",
                 "preset_townhall": "Der obere Teil des Objekteditors zeigt den Typ des Objekts. Dieser Punkt ist ein {preset}.",
                 "fields_townhall": "Der mittlere Teil des Objekteditors zeigt in *Feldern* die Eigenschaften des Objektes wie Name oder Adresse",
-                "close_townhall": "**Schließe den Objekteditor durch Drücken von ESC oder klicken auf {button} Knopf in der oberen Ecke.**",
+                "close_townhall": "**Schließe den Objekteditor durch Drücken von Escape oder klicken auf {button} Knopf in der oberen Ecke.**",
                 "search_street": "Du kannst Objekte in der aktuellen Kartenansicht oder weltweit suchen. **Suche nach '{name}'.**",
                 "choose_street": "**Wähle {name} aus der Liste.**",
                 "selected_street": "Super! Die {name} ist jetzt selektiert.",
-                "editor_street": "Die angezeigten Felder für eine Straße unterscheiden sich von denen für das Rathaus.{br}Für diese Straße zeigt der Objekteditor Felder wie {field1} oder {field2}. **Schließe den Objekteditor durch Drücken von ESC oder klicken auf {button} Knopf.**",
+                "editor_street": "Die angezeigten Felder für eine Straße unterscheiden sich von denen für das Rathaus.{br}Für diese Straße zeigt der Objekteditor Felder wie {field1} oder {field2}. **Schließe den Objekteditor durch Drücken von Escape oder klicken auf {button} Knopf.**",
                 "play": "Versuche die Karte zu verschieben und auf andere Objekte zu klicken, damit du siehst welche Dinge zu OpenStreetMap hinzugefügt werden können. **Wenn du zum nächsten Kapitel willst klicke '{next}'.**"
             },
             "points": {
@@ -800,10 +800,10 @@
                 "choose_cafe": "**Wähle {preset} aus der Liste.**",
                 "feature_editor": "Der Punkt ist nun ein Café. Mit dem Objekteditor kannst du mehr Information über das Café eingeben.",
                 "add_name": "In OpenStreetMap sind alle Felder optional und es ist okay Felder frei zu lassen wenn du unsicher bist.{br}Nehmen wir an du hast lokales Wissen und kennst den Namen dieses Cafés. **Gib den Namen des Cafés ein.**",
-                "add_close": "Der Objekteditor merkt sich alle deine Änderungen automatisch. **Wenn du den Namen fertig eingegeben hast, drücke ESC, Return oder klicke auf {button} Knopf um den Objekteditor zu schließen.**",
+                "add_close": "Der Objekteditor merkt sich alle deine Änderungen automatisch. **Wenn du den Namen fertig eingegeben hast, drücke Escape oder Enter oder klicke den {button} Knopf um den Objekteditor zu schließen.**",
                 "reselect": "Oft gibt es Punkte die unvollständig oder fehlerhaft sind. Du kannst bestehende Punkte ändern. **Klicke auf das gerade erzeugte Café um es zu selektieren.**",
                 "update": "Gib mehr Details über dieses Café ein. Du kannst seinen Namen ändern, angeben welche Küche dort angeboten wird oder die Adresse eingeben. **Ändere die Details des Café.**",
-                "update_close": "**Wenn du das Café fertig geändert hast, drücke ESC, Return oder klicke auf {button} Knopf um den Objekteditor zu schließen.**",
+                "update_close": "Wenn du das Café fertig geänder hast, drücke Escape oder oder klicke den {button} Knopf um den Objekteditor zu schließen.**",
                 "rightclick": "Du kannst jedes Objekt rechtsklicken um das *Editier-Menu* zu sehen, welches dir eine Liste der möglichen Bearbeitungs-Operationen zeigt. **Rechts-Klicke den erzeugten Punkt und zeige das Editier-Menu.**",
                 "delete": "Du kannst Objekte löschen, die es in der echten Welt nicht gibt.{br}Löschen eines Objets aus OpenStreetMap entfernt es von der Karte, die alle benutzen. Daher solltest du sicher sein, dass das Objekt nicht mehr existiert, bevor du es löschst. **Klicke auf {button} Knopf um den Punkt zu löschen.**",
                 "undo": "Du kannst alle Änderungen rückgängig machen, bis du deine Änderungen zu OpenStreetMap speicherst. **Klicke auf  {button} Knopf um das Löschen rückgängig zu machen und den Punkt wiederherzustellen.**",
@@ -814,7 +814,7 @@
                 "add_playground": "*Flächen* werden benutzt um die Grenzen von Objekten wie Seen, Gebäuden und Wohngebieten zu zeigen.{br}Sie können benutzt werden, um Objekte die normalerweise als Punkte gezeichnet werden genauer darzustellen. **Klicke auf {button} Fläche um einen neue Fläche zu zeichnen.**",
                 "start_playground": "Zeichne diesen Spielplatz als Fläche auf der Karte ein. Flächen werden gezeichnet indem *Knoten* entlang der Außengrenze des Objekte gezeichnet werden. **Klicke oder drücke die Leertaste um den Startknoten an einer Ecke des Spielplatzes zu zeichnen.**",
                 "continue_playground": "Setze das Zeichnen der Fläche fort, indem du Knoten entlang der Ecken des Spielplatzes setzt. Du kannst die Fläche mit den bestehenden Fußwegen verbinden.{br}Tipp: Wenn du die ALT Taste gedrückt hältst, dann verhinderst du dass die Knoten sich mit anderen Objekten verbinden. **Setze das Zeichnen der Fläche für den Spielplatz fort.**",
-                "finish_playground": "Beende die Fläche durch Drücken von Return oder nochmaliges klicken auf den ersten Knoten oder den letzten Knoten. **Beende das Zeichnen der Fläche für den Spielplatz.**",
+                "finish_playground": "Beende die Fläche durch Drücken von Enter oder nochmaliges Klicken auf den ersten oder letzten Knoten. **Beende das Zeichnen der Fläche für den Spielplatz.**",
                 "search_playground": "**Suche nach '{preset}'.**",
                 "choose_playground": "**Wähle {preset} aus der Liste.**",
                 "add_field": "Dieser Spielplatz hat keinen offiziellen Namen, daher lassen wir das Namens-Feld frei.{br}Schreibe zusätzliche Details über den Spielplatz in das Beschreibungs-Feld. **Öffne die Liste Feld hinzufügen.**",
@@ -830,10 +830,10 @@
                 "intersect": "Klicke oder drücke die Leertaste um weitere Knoten der Linie zu zeichnen.{br} Straßen und viele andere Arten von Linien sind Teil eines größeren Netzwerks. Es ist wichtig dass diese Linien verbunden sind, damit Routing-Anwendungen funktionieren. **Klicke auf {name} um eine Verbindung zwischen den beiden Linien zu erzeugen.**",
                 "retry_intersect": "Diese Straße soll {name} kreuzen. Versuch es nochmals!",
                 "continue_line": "Setze das Zeichnen der Linie für die neue Straße fort. Du kannst die Karte verschieben, wenn das notwendig ist.{br}Wenn du fertig gezeichnet hast klicke nochmals auf den letzten Knoten. **Beende das Zeichnen der Straße.**",
-                "choose_category_road": "**Wähle {category} aus der Liste**",
-                "choose_preset_residential": "Es gibt viele verschiedene Arten von Straßen, diese ist eine Wohngebietsstraße. **Wähle {preset}.**",
+                "choose_category_road": "**Wähle {category} aus der Liste.**",
+                "choose_preset_residential": "Es gibt viele verschiedene Arten von Straßen, diese ist eine Anliegerstraße. **Wähle {preset}.**",
                 "retry_preset_residential": "Du hast nicht {preset} gewählt. **Klicke hier um erneut zu wählen.**",
-                "name_road": "**Gib dieser Straße einen Namen, dann drücke ESC, Return oder klicke auf {button} Knopf um den Objekteditor zu schließen.**",
+                "name_road": "**Gib dieser Straße einen Namen, dann drücke Escape oder Enter oder klicke den {button} Knopf um den Objekteditor zu schließen.**",
                 "did_name_road": "Schaut gut aus! Jetzt wirst du lernen wie die den Zustand einer Linie verbessern kannst.",
                 "update_line": "Manchmal musst du den Zustand einer bestehenden Linie verbessern. Hier ist eine Straße die nicht ganz richtig ausschaut.",
                 "add_node": "Du kannst weitere Knoten zu einer Linie hinzufügen, um den Zustand einer Linie zu verbessern. Eine Möglichkeit um neue Knoten zu zeichnen ist ein Doppelklick auf die Stelle der Linie, wo der neue Knoten entstehen soll. **Doppelklicke auf die Linie um einen neuen Knoten zu erzeugen.**",
@@ -857,18 +857,18 @@
                 "title": "Gebäude",
                 "add_building": "OpenStreetMap ist die größte Gebäude-Datenbank der Welt.{br}Du kannst helfen diese Datenbank zu verbessern, indem du Gebäude einzeichnest, die in der Karte noch fehlen. **Klicke auf {button} Fläche um eine neue Fläche zu zeichnen.**",
                 "start_building": "Zeichne dieses Gebäude in der Karte ein, indem du seine Umrisse zeichnest.{br}Gebäude sollten entlang ihrer Grundfläche so genau wie möglich gezeichnet werden. **Klick oder drücke die Leertaste um den Startknoten auf einer Ecke des Gebäudes zu zeichnen.**",
-                "continue_building": "Erstelle weitere Knoten um den Umriss des Gebäudes zu zeichnen. Du kannst auf der Karte hineinzoomen, wenn du mehr Details erfassen willst.{br}Vollende das Gebäude durch Drücken von Return oder durch nochmaliges klicken auf den ersten oder letzten Knoten. **Vollende die Umrisse des Gebäudes.**",
+                "continue_building": "Erstelle weitere Knoten um den Umriss des Gebäudes zu zeichnen. Du kannst auf hineinzoomen wenn du genauer zeichnen willst.{br}Beende das Gebäude durch drücken von Enter oder nochmaliges Klicken auf den ersten oder letzten Knoten.**Vollende den Umriss des Gebäudes.**",
                 "retry_building": "Es schaut so aus als hättest du die Knoten nicht auf die Ecken des Gebäudes gesetzt. Versuche es noch einmal!",
                 "choose_category_building": "**Wähle {category} aus der Liste.**",
                 "choose_preset_house": "Es gibt viele verschiedene Arten von Gebäuden, dieses ist eindeutig ein Einfamilienhaus.{br}Wenn du beim Gebäudetyp unsicher bist, wähle einfach Gebäude. **Wähle {preset}.**",
-                "close": "**Drücke ESC oder klicke auf {button} Knopf um dem Objekteditor zu schließen.**",
+                "close": "**Drücke Escape oder klicke auf {button} Knopf um dem Objekteditor zu schließen.**",
                 "rightclick_building": "**Rechts-klicke das gerade erzeugte Gebäude um es zu selektieren und zeige das Editier-Menu.**",
                 "square_building": "Das gerade gezeichnete Haus schaut besser aus, wenn es perfekt rechtwinklige Kanten hat. **Klicke auf {button} Knopf um das Gebäude rechtwinklig zu machen.**",
                 "retry_square": "Du hast nicht den Rechtwinklig-Machen-Knopf geklickt. Versuch es noch einmal.",
                 "done_square": "Siehst du wie die Ecken des Gebäude auf die richtige Stelle rücken? Schaut Dir noch einen anderen nützlichen Trick an.",
                 "add_tank": "Als Nächstes wirst du einen kreisrunden Tank zeichnen. **Klicke auf {button} Fläche um eine neue Fläche zu zeichnen.**",
                 "start_tank": "Du musst keinen perfekten Kreis zeichnen. Zeichne einfach eine Fläche innerhalb des Tanks die seinen Rand berührt. **Klicke oder drücke die Leertaste um den Startknoten an Rand des Lagertanks zu zeichnen.**",
-                "continue_tank": "Zeichne noch ein paar weitere Knoten am Rand. Der Kreis wird außerhalb der gezeichneten Knoten erzeugt.{br}Beende die Fläche durch Drücken von Return oder nochmaliges klicken auf den ersten oder letzten Knoten. **Beende die Tank -Zeichnung.**",
+                "continue_tank": "Zeichne noch zwei weitere Knoten am Rad. Der Kreis wird außerhalb der gezeichneten Knoten erzeugt.{br}Beende die Fläche durch Drücken von Enter oder nochmaliges klicken auf den ersten oder letzten Knoten.**Zeichne den Tank fertig.**",
                 "search_tank": "**Suche nach '{preset}'.**",
                 "choose_tank": "**Wähle {preset} von der Liste.**",
                 "rightclick_tank": "**Selektiere den gezeichneten Tank durch rechtsklicken und zeige das Editier-Menu.**",
@@ -2759,7 +2759,7 @@
                 },
                 "building/hut": {
                     "name": "Schuppen",
-                    "terms": "Baracke,Holzhütte,Berghütte"
+                    "terms": "Baracke,Holzhütte,Unterstand"
                 },
                 "building/industrial": {
                     "name": "Fabrikgebäude",
@@ -4651,7 +4651,7 @@
                     "terms": "Fremdenverkehr, Tourimus"
                 },
                 "tourism/alpine_hut": {
-                    "name": "Berghütte",
+                    "name": "Schutzhütte",
                     "terms": "Alpenvereinshütte,Berghütte,Schutzhütte,Schutzhaus,Hospiz,"
                 },
                 "tourism/apartment": {

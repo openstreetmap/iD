@@ -625,7 +625,7 @@
         },
         "help": {
             "title": "Ayuda",
-            "help": "# Ayuda\n\nEste es un editor para [OpenStreetMap](http://www.openstreetmap.org/), el\nmapa libre y editable del mundo. Se puede utilizar para añadir y actualizar\ndatos en su área, haciendo el mapa de fuente abierto y de datos abiertos del mundo\nmejor para todos.\n\nLas ediciones que realice en este mapa serán visible a todos los que usen\nOpenStreetMap. Con el fin de hacer una edición, tendrá que\n[Iniciar sesión](https://www.openstreetmap.org/login).\n\n\nEl [editor iD](http://ideditor.com/) es un proyecto colaborativo con [código\nfuente disponible en GitHub](https://github.com/openstreetmap/iD).\n",
+            "help": "# Ayuda\n\nEste es un editor para [OpenStreetMap](http://www.openstreetmap.org/), el\nmapa libre y editable del mundo. Se puede utilizar para añadir y actualizar\ndatos en su área, haciendo que el mapa del mundo de fuente y datos abiertos\nsea mejor para todos.\n\nLas ediciones que realice en este mapa serán visible a todos los que usen\nOpenStreetMap. Para poder hacer una edición tendrá que\n[Iniciar sesión](https://www.openstreetmap.org/login).\n\nEl [editor iD](http://ideditor.com/) es un proyecto colaborativo con [código\nfuente disponible en GitHub](https://github.com/openstreetmap/iD).\n",
             "editing_saving": "# Editar y guardar\n\nEste editor está diseñado para trabajar en línea principalmente, y en estos\nmomentos esta accediendo a través de un sitio web.\n\n### Seleccionar elementos\n\nPara seleccionar un elemento del mapa, como una carretera o un punto de\ninterés, haga clic sobre el en el mapa. Esto resaltará el elemento seleccionado,\nabriendo un panel con sus detalles, y mostrará un menú de cosas que puede\nhacer con ese elemento.\n\nPara seleccionar múltiples elementos, mantenga pulsada la tecla 'Mayús'. Luego\nhaga clic en los elementos que desea seleccionar o arrastre en el mapa para\ndibujar un rectángulo. Esto dibujará una caja y seleccionará todos los puntos\ndentro de ella.\n\n### Guardar ediciones\n\nCuando haga cambios como editar carreteras, edificios o lugares, estos se\nalmacenan localmente en su ordenador hasta que los guarde en el servidor.\nNo se preocupe si comete un error - puede deshacer los cambios haciendo\nclic en el botón 'Deshacer', y rehacerlos haciendo clic en el botón 'Rehacer'.\n\nHaga clic en 'Guardar' para finalizar un grupo de ediciones - por ejemplo, si ha\ncompletado una zona de la ciudad y quisiera empezar en un área nueva. Tendrá\nla oportunidad de revisar lo que ha hecho, y el editor proporciona avisos y\nsugerencias útiles si algo parece no ser correcto en los cambios.\n\nSi ve que todo es correcto, puede escribir un breve comentario explicando el\ncambio que ha hecho, y haga clic en 'Guardar' de nuevo para registrar los\ncambios en [OpenStreetMap.org](http://www.openstreetmap.org/), donde serán\nvisibles para todos los demás usuarios y estarán disponible para que otros\npuedan seguir construyendo y mejorando el mapa.\n\nSi no puede terminar sus ediciones en una sola sesión, puede dejar la ventana\ndel editor y volver más tarde (al mismo navegador y ordenador), y el editor le\npermitirá retomar su trabajo.\n\n### Uso del editor\n\nUna lista de métodos abreviados de teclado disponibles puede encontrarse [aquí](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
             "roads": "# Carreteras\n\nPuede crear, corregir y borrar carreteras con este editor. Las vías pueden ser de todas las clases: caminos, carreteras, senderos, ciclovías, etc. A cualquier línea dibujada en el mapa se le debe indicar el tipo de elemento lineal que es.\n\n### Seleccionar\n\nHaga clic sobre una vía para seleccionarla. Verá sobre ella como se visualiza su esquema, formada por nodos y segmentos, junto con un menú de herramientas que aparece sobre el mapa y una barra lateral que muestra más información sobre la vía.\n\n### Modificar\n\nA menudo verá viales que no están alineados correctamente con la imagen aérea de fondo o con la traza GPS. Puede ajustar esas vías para situarlas en el lugar exacto.\n\nPrimero haga clic sobre la vía que desea cambiar. Esto la resaltará y mostrará los nodos o puntos de control a lo largo de la vía que la forman. A continuación simplemente arrastre esos puntos a la posición correcta. Si desea añadir nuevos puntos de control para dibujar la carretera con mayor detalle haga doble clic sobre la parte de la vía donde quiere añadir el nuevo nodo y este será creado en la vía.\n\nSi la vía conecta con otra carretera o camino pero esta conexión no aparece correctamente en el mapa puede arrastrar uno de los puntos de la vía hasta la otra carretera y se unirá automáticamente a ella mediante un nodo común. Es muy importante tener las carreteras conectadas en el mapa, ya que es esencial para proporcionar instrucciones correctas para la conducción si queremos que la cartografía se útil, por ejemplo, para los navegadores GPS.\n\n### Eliminar\n\nSi un camino es totalmente incorrecto -ha observado que no aparece en las imágenes de satélite y de manera ideal lo ha confirmado en campo- puede eliminarlo, lo cual lo borrará del mapa. Sea precavido al eliminar elementos del mapa. Como cualquier otra edición que haga este cambio será visto por todo el mundo y las imágenes de satélite a menudo no están actualizadas, por lo que una carretera que no existe en ellas pero sí en el mapa simplemente puede aparecer porque es de reciente construcción y otro usuario la ha añadido.\n\n### Crear\n\n¿Ha encontrado un lugar donde debería existir una carretera pero no aparece? Haga clic con el ratón sobre el icono 'Línea' situado en la parte superior izquierda del editor o simplemente presione la tecla '2'  de su teclado que es el acceso rápido para comenzar a dibujar una línea.\n\nHaga clic sobre el mapa en el inicio de la carretera para comenzar a dibujar. Si la vía se ramifica a partir de una carretera ya existente empiece haciendo clic sobre el lugar donde ambas conectan.\n\nHaga clic en puntos a lo largo de la vía para definir el trazado correcto de la carretera. La densidad de puntos dependerá de la complejidad del recorrido, por lo que es aconsejable dibujar desde un nivel de zoom apropiado. Si la vía que está dibujando atraviesa otra carretera conéctela con esta haciendo clic sobre el punto de intersección. Una vez haya terminado el dibujo haga doble clic con el ratón o presiones la tecla 'Return' o 'Intro' de su teclado para finalizar.\n",
             "gps": "# GPS\n\nLas trazas de GPS recogidas son una valiosa fuente de datos para OpenStreetMap. Este\neditor soporta trazas locales - archivos `.gpx` en su equipo local. Usted puede obtener\neste tipo de traza GPS con una serie de aplicaciones de smartphone, como también con\nhardware GPS personal.\n\nPara más información sobre cómo realizar un relevamiento GPS, lea\n[Mapear con un smartphone, GPS, o papel](http://learnosm.org/es/mobile-mapping/).\n\nPara utilizar una traza GPX para mapear, arrastre y suelte el archivo GPX en el editor\nde mapa. Si este es reconocido, se añadirá al mapa como una línea púrpura brillante.\nHaga clic en el menú 'Datos del mapa' en el lado derecho para activar,\ndesactivar o acercar a esta nueva capa alimentada por GPX.\n\nLa traza GPX no se carga directamente a OpenStreetMap - la mejor manera de\nutilizarlo es dibujar en el mapa, usándolo como guía para las nuevos elementos que\nagregue, y también [subirlo a OpenStreetMap](http://www.openstreetmap.org/trace/create)\npara que otros usuarios lo utilicen.\n",
@@ -830,7 +830,7 @@
                 "intersect": "Haga clic o presione la barra espaciadora para añadir más nodos a la línea.{br}Los caminos y muchos otros tipos de líneas forman parte de una red más grande. Es importante que estas líneas se conecten correctamente para que las aplicaciones de enrutamiento funcionen. **Haga clic en {name} para crear una intersección que conecte las dos líneas.**",
                 "retry_intersect": "El camino debe intersectarse con {name}. ¡Intentémoslo de nuevo!",
                 "continue_line": "Siga dibujando la línea del nuevo camino. Recuerde que puede arrastrar y acercar el mapa si es necesario.{br}Cuando haya terminado de dibujar, vuelva a hacer clic en el último nodo. **Termine de dibujar el camino.**",
-                "choose_category_road": "**Seleccione {category} de la lista**",
+                "choose_category_road": "**Seleccione {category} de la lista.**",
                 "choose_preset_residential": "Hay muchos tipos diferentes de caminos, pero éste es un camino residencial. **Elija el tipo {preset}.**",
                 "retry_preset_residential": "No ha seleccionado el tipo {preset}. **Haga clic aquí para elegir de nuevo.**",
                 "name_road": "**Ponga un nombre a este camino, luego presione la tecla escape, retorno o haga clic en el botón {button} para cerrar el editor de elementos.**",
@@ -1741,7 +1741,7 @@
                     "label": "Produce"
                 },
                 "product": {
-                    "label": "Producto"
+                    "label": "Productos"
                 },
                 "railway": {
                     "label": "Tipo"
@@ -1876,7 +1876,7 @@
                     "label": "Fuente"
                 },
                 "sport": {
-                    "label": "Deporte"
+                    "label": "Deportes"
                 },
                 "sport_ice": {
                     "label": "Deporte"
@@ -2132,7 +2132,7 @@
                 },
                 "aeroway/hangar": {
                     "name": "Hangar",
-                    "terms": "hangar"
+                    "terms": "hangar, cobertizo, aéreo, aeronáutico, aviación, aeronaves, militar, taller de reparación, taller de mantenimiento"
                 },
                 "aeroway/helipad": {
                     "name": "Helipuerto",
@@ -2140,11 +2140,11 @@
                 },
                 "aeroway/runway": {
                     "name": "Pista de aeropuerto",
-                    "terms": "pista,pista de aterrizaje,pista de despegue"
+                    "terms": "pista, pista de aterrizaje, pista de despegue"
                 },
                 "aeroway/taxiway": {
                     "name": "Pista de rodaje",
-                    "terms": "pista de carreteo,pista de rodaje,pista de taxeo,calle de rodaje"
+                    "terms": "pista, pista de carreteo, pista de rodaje, pista de taxeo, calle de rodaje"
                 },
                 "aeroway/terminal": {
                     "name": "Terminal de aeropuerto",
@@ -2306,7 +2306,7 @@
                 },
                 "amenity/fast_food": {
                     "name": "Comida rápida",
-                    "terms": "comida rápida,platos preparados"
+                    "terms": "comida rápida, comida chatarra, comida basura, comida preparada, platos preparados, comida en la calle, comida de paso, hamburguesa, hotdog, pancho, pollos fritos, tacos, papas fritas, pizza, choripán, sandwitch, bocadillos, salchipapas, burrito, sopaipillas, quesadilla, nachos, arepa"
                 },
                 "amenity/ferry_terminal": {
                     "name": "Terminal de ferry",
@@ -2834,7 +2834,7 @@
                 },
                 "craft/basket_maker": {
                     "name": "Fabricante de cestas",
-                    "terms": "cestero, cesta, cestería, canastero, canasto, mimbrero, mimbre"
+                    "terms": "cestero, cesta, cestería, canastero, canasto, mimbrero, mimbre, artesanía"
                 },
                 "craft/beekeeper": {
                     "name": "Apicultor",
@@ -4799,11 +4799,11 @@
                 },
                 "type/restriction/no_left_turn": {
                     "name": "No girar a la izquierda",
-                    "terms": "no girar a la izquierda, prohibido girar a la izquierda"
+                    "terms": "prohibición, giro, giro a la izquierda, no girar a la izquierda, prohibido girar a la izquierda"
                 },
                 "type/restriction/no_right_turn": {
                     "name": "No girar a la derecha",
-                    "terms": "no girar a la derecha, prohibido girar a la derecha"
+                    "terms": "prohibición, giro, giro a la derecha, no girar a la derecha, prohibido girar a la derecha"
                 },
                 "type/restriction/no_straight_on": {
                     "name": "Prohibido seguir de frente",
@@ -4823,7 +4823,7 @@
                 },
                 "type/restriction/only_straight_on": {
                     "name": "No girar",
-                    "terms": "no girar, prohibido girar"
+                    "terms": "prohibición, giro, no girar, prohibido girar"
                 },
                 "type/route": {
                     "name": "Ruta",
@@ -4831,7 +4831,7 @@
                 },
                 "type/route/bicycle": {
                     "name": "Ruta de bicicleta",
-                    "terms": "ruta ciclista, ciclovía, carril bici, ciclosenda, bicicleta"
+                    "terms": "ruta ciclista, ciclovía, bicicarril, carril bici, ciclosenda, bicicleta, bicisenda, ciclopista"
                 },
                 "type/route/bus": {
                     "name": "Ruta de bus",
