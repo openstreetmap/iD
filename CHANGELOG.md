@@ -26,6 +26,22 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+
+# 2.2.1
+##### May 12, 2017
+
+#### :bug: Bugfixes
+
+* Allow right-click and contextmenu events to work on the sidebar ([#4036])
+* Omit global search UI when no geocoder ([#4032], thanks [@mojodna])
+* Don't replace spaces with underscores in `opening_hours` field ([#4030])
+
+[#4036]: https://github.com/openstreetmap/iD/issues/4036
+[#4030]: https://github.com/openstreetmap/iD/issues/4030
+[#4032]: https://github.com/openstreetmap/iD/issues/4032
+[@mojodna]: https://github.com/mojodna
+
+
 # 2.2.0
 ##### May 9, 2017
 
