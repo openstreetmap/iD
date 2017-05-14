@@ -613,7 +613,7 @@ en:
         label: SSID (Network Name)
       kerb:
         # kerb=*
-        label: Curb Ramp
+        label: Curb
       lamp_type:
         # lamp_type=*
         label: Type

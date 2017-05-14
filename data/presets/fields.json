@@ -853,7 +853,7 @@
         "kerb": {
             "key": "kerb",
             "type": "combo",
-            "label": "Curb Ramp"
+            "label": "Curb"
         },
         "lamp_type": {
             "key": "lamp_type",

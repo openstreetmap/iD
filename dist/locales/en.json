@@ -1451,7 +1451,7 @@
                     "label": "SSID (Network Name)"
                 },
                 "kerb": {
-                    "label": "Curb Ramp"
+                    "label": "Curb"
                 },
                 "lamp_type": {
                     "label": "Type"
