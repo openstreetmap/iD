@@ -845,7 +845,7 @@
                 "rightclick_intersection": "The last real street is {street1}, so we will *split* {street2} at this intersection and remove everything above it. **Right click on the intersection node.**",
                 "split_intersection": "**Click on the {button} button to split {street}.**",
                 "retry_split": "You didn't click the Split button. Try again.",
-                "did_split_multi": "Good Job! {street1} is now split into two pieces. The top part can be removed. **Click the top part of {street2} to select it.**",
+                "did_split_multi": "Good job! {street1} is now split into two pieces. The top part can be removed. **Click the top part of {street2} to select it.**",
                 "did_split_single": "**Click the top part of {street2} to select it.**",
                 "multi_select": "{selected} is now selected. Let's also select {other1}. You can shift-click to select multiple things. **Shift-click on {other2}.**",
                 "multi_rightclick": "Good! Both lines to delete are now selected. **Right-click on one of the lines to show the edit menu.**",
