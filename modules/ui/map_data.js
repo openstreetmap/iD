@@ -316,11 +316,20 @@ export function uiMapData(context) {
                 .attr('class', 'clear-geoservice hide')
                 .text('Clear GeoService')
                 .on('click', (function() {
+                    // clear the UI
                     d3.selectAll('.geoservice-all-opt, .geoservice-osm-opt, .geoservice-import-opt, .clear-geoservice')
                        .style('display', 'none');
                     d3.select('.geoservice-button-label').text('Add GeoService Layer');
                     hoverGeoService.title('Enter a GeoService URL');
                     populatePane(this.pane);
+                    
+                    // clear the map
+                    context.flush();
+                    window.knownObjectIds = {};
+                    window.importedEntities = [];
+                    window.onOSMreload = function() {
+                        window.onOSMreload = null;
+                    };
                 }).bind(this));
             
             function previewGeoService(err, data) {
