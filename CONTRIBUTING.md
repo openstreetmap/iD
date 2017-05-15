@@ -239,7 +239,7 @@ Just like HTML and JavaScript, 4 space soft tabs always.
 ```
 
 We write vanilla CSS with no preprocessing step. Since iD targets modern browsers,
-(Chrome, Firefox, Safair, Opera, IE11, and Edge) feel free to use newer features wisely.
+(Chrome, Firefox, Safari, Opera, IE11, and Edge) feel free to use newer features wisely.
 
 
 ## Tests
