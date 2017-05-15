@@ -525,21 +525,60 @@ export function svgGeoService(projection, context, dispatch) {
             // console.log(preset)
             // preset.tags { }
             // preset.fields[{ keys: [], strings: { placeholders: { } } }]
+            var tag = [preset.icon, preset.id.split('/')[0], preset.id.replace('/', '-')];
+            
+            var iconHolder = presetBox.select('.preset-icon-holder')
+                .html('');
+
             if (!preset.icon) {
                 preset.icon = 'marker-stroked';
             }
-            var tag = preset.icon + ' tag-' + preset.id.split('/')[0] + ' tag-' + preset.id.replace('/', '-');
+            if (preset.geometry && preset.geometry[preset.geometry.length - 1] === 'area') {
+                // add background first
+                var pair = iconHolder.append('div')
+                    .attr('class', 'preset-icon preset-icon-24')
+                    .append('svg')
+                        .attr('class', ['icon', tag[0], tag[2], 'tag-' + tag[1], 'tag-' + tag[2]].join(' '));
+                        
+                pair.append('use')
+                    .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
+                    .attr('xlink:href', '#' + tag[0]);
+                pair.append('use')
+                    .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
+                    .attr('xlink:href', '#' + tag[0] + '-15');
+
+                // add inner icon
+                iconHolder.append('div')
+                    .attr('class', 'preset-icon-frame')
+                    .append('svg')
+                        .attr('class', 'icon')
+                        .append('use')
+                            .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
+                            .attr('xlink:href', '#preset-icon-frame');
+                            
+                
+            } else if (preset.geometry && preset.geometry[preset.geometry.length - 1] === 'line') {
+                iconHolder.append('div')
+                    .attr('class', 'preset-icon preset-icon-60')
+                    .append('svg')
+                        .attr('class', ['icon', tag[0], tag[2], 'tag-' + tag[1], 'tag-' + tag[2]].join(' '))
+                        .append('use')
+                            .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
+                            .attr('xlink:href', '#' + tag[2]);
+            } else {
+                iconHolder.append('div')
+                    .attr('preset-icon preset-icon-28')
+                    .append('svg')
+                        .attr('icon ' + tag[0])
+                        .append('use')
+                            .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
+                            .attr('xlink:href', '#' + tag[0] + '-15');
+            }
             
             presetBox.selectAll('label.preset-prompt').text('OSM preset: ');
             presetBox.selectAll('span.preset-prompt').text(preset.id);
-            presetBox.selectAll('.preset-icon-fill')
-                .attr('class', 'preset-icon-fill preset-icon-fill-area preset-icon-fill-line' + tag);
-            presetBox.selectAll('.preset-icon-fill, .preset-icon')
+            presetBox.selectAll('button, .preset-icon-fill, .preset-icon')
                 .classed('hide', false);
-            presetBox.selectAll('.preset svg')
-                .attr('class', 'icon ' + tag)
-                .html('<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#' + preset.icon + '"></use><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#' + preset.icon + '-24"></use>');
-            presetBox.selectAll('button').classed('hide', false);
             this.internalPreset = preset;
             
             // special geo circumstances

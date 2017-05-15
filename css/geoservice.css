@@ -113,6 +113,23 @@ text.geoservice {
   height: 35px;
 }
 
+.geoservice-pane .preset-icon-holder {
+  display: inline-block;
+}
+
+.geoservice-pane .preset-icon-frame {
+  position: relative;
+  top: -12px;
+  left: 0;
+  margin-right: 8px;
+}
+
+.geoservice-pane .preset-icon svg {
+  position: relative;
+  top: 106px;
+  left: 90px;
+}
+
 .geoservice-pane .import-approval {
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -139,27 +156,6 @@ text.geoservice {
 .geoservice-pane .preset .combobox-input {
     width: 50%;
     margin-left: 10%;
-}
-
-.geoservice-pane .preset-icon-fill, .geoservice-pane .preset-icon {
-    display: inline-block;
-    margin: 0;
-    left: auto;
-    top: auto;
-    position: static;
-}
-
-.geoservice-pane .preset-icon-fill {
-    margin-bottom: -15px;
-}
-
-.geoservice-pane .preset-icon {
-    margin-left: -36px;
-    margin-right: 20px;
-}
-
-.geoservice-pane .preset-icon svg {
-    margin-top: -5px;
 }
 
 .geoservice-pane .point-in-polygon, .geoservice-pane .merge-lines, .geoservice-pane .overlap-buildings {

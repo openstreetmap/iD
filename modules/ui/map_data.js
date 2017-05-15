@@ -547,10 +547,7 @@ export function uiMapData(context) {
                     .attr('class', 'preset-prompt')
                     .text('Optional: match features to a OSM preset');
                 preset.append('div')
-                    .attr('class', 'preset-icon-fill preset-icon-fill-area hide');
-                preset.append('div')
-                    .attr('class', 'preset-icon preset-icon-32 hide')
-                    .append('svg');
+                    .attr('class', 'preset-icon-holder');
                 preset.append('span')
                     .attr('class', 'preset-prompt');
 
@@ -562,7 +559,7 @@ export function uiMapData(context) {
                     .on('click', function() {
                         geoserviceLayer.preset(null);
                     });
-            
+                
                 presetList = _.map(context.presets().collection, function(preset) {
                     return { value: preset.id };
                 });
@@ -619,19 +616,15 @@ export function uiMapData(context) {
 
                 // using a point-in-polygon or other preset geo trickery requires us to see everything on the map
                 d3.selectAll('.point-in-polygon, .merge-lines, .overlap-buildings').on('click', function() {
-                    if (d3.selectAll('.point-in-polygon input').property('checked') ||
-                        d3.selectAll('.merge-lines input').property('checked') ||
-                        d3.selectAll('.overlap-buildings input').property('checked')) {
-                        d3.selectAll('button.url.final.global').property('disabled', true);
-                    } else {
-                        d3.selectAll('button.url.final.global').property('disabled', false);
-                    }
+                    var globalBlocked = d3.selectAll('.point-in-polygon input').property('checked') || d3.selectAll('.merge-lines input').property('checked') || d3.selectAll('.overlap-buildings input').property('checked');
+                    d3.selectAll('button.url.final.global').property('disabled', globalBlocked);
                 });
             
                 // radio buttons to decide how data is finalized on OSM
                 approvalPhase = urlEntry.append('div')
                     .attr('class', 'import-approval hide');
-                approvalPhase.append('h4').text('Review data before importing?');
+                approvalPhase.append('h4')
+                    .text('Review data before importing?');
             
                 individualApproval = approvalPhase.append('label');
                 individualApproval.append('input')
@@ -640,7 +633,8 @@ export function uiMapData(context) {
                     .attr('name', 'approvalProcess')
                     .attr('value', 'individual')
                     .property('checked', true);
-                individualApproval.append('span').text('Manually select import features');
+                individualApproval.append('span')
+                    .text('Manually select import features');
             
                 allApproval = approvalPhase.append('label');
                 allApproval.append('input')
@@ -648,7 +642,8 @@ export function uiMapData(context) {
                     .attr('type', 'radio')
                     .attr('name', 'approvalProcess')
                     .attr('value', 'all');
-                allApproval.append('span').text('Import all features by default');
+                allApproval.append('span')
+                    .text('Import all features by default');
             
                 body.append('table')
                     .attr('border', '1')
