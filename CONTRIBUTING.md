@@ -3,10 +3,12 @@
 Thinking of contributing to iD? High five! Here are some basics for our habits
 so that you can write code that fits in perfectly.
 
+
 ## Code of Conduct
 
 We want everyone to feel comfortable contributing to iD.  Please read the project
 [Code of Conduct](CODE_OF_CONDUCT.md) and remember to be nice to one another.
+
 
 ## Reporting Issues
 
@@ -23,6 +25,7 @@ and browser extensions you have installed
 What happened instead?
 * We love screenshots.  If you can take a picture of the issue, that is extra helpful.
 You can drag the image file onto the GitHub issue and it will be included with your bug report.
+* You can use a program like [LICEcap](http://www.cockos.com/licecap/) to record an animated gif.
 * Please keep bug reports professional and straightforward: trust us, we share your dismay at software breaking.
 * If you can, [enable web developer extensions](http://debugbrowser.com/) and report the
 JavaScript error message.
@@ -35,6 +38,67 @@ To request a feature:
   We care about prior art.
 * Understand that iD is meant to be a simple editor and doesn't aim to be
   as complete or complicated as JOSM or similar.
+
+
+## Issue Labels
+
+We use GitHub labels to keep track of issues.  Some guidelines:
+
+Green labels are for **action items**. Jump in and start working!
+* <sub>![get-started](http://labl.es/svg?text=get-started&bgcolor=0e8a16)</sub> -
+Issues are great for new contributors.
+* <sub>![priority](http://labl.es/svg?text=priority&bgcolor=0e8a16)</sub> -
+Issues that have a big impact or matter most to _new mappers_.
+<br/>(There should probably be 10 or fewer "priority" items.)
+
+Red labels are for **bugs**. These are things that we want fixed, but might be a bit more
+complicted than the green action items.
+* <sub>![bug](http://labl.es/svg?text=bug&bgcolor=d93f0b)</sub>
+<sub>![bug-release-blocker](http://labl.es/svg?text=bug-release-blocker&bgcolor=d93f0b)</sub>
+<sub>![bug-browser-specific](http://labl.es/svg?text=bug-browser-specific&bgcolor=d93f0b)</sub>
+
+Purple labels are for **non-action items**. These might be a question or feature request
+that needs some discussion about whether it belongs in iD.  Discuss before working on these.
+* <sub>![considering](http://labl.es/svg?text=considering&bgcolor=cc33cc)</sub>
+<sub>![question](http://labl.es/svg?text=question&bgcolor=cc33cc)</sub>
+
+Yellow labels are for **chores**. These are the things like code cleanup, upgrades, tests,
+documentation, repository gardening, and other stuff that makes developers happy.
+* <sub>![chore](http://labl.es/svg?text=chore&bgcolor=fef2c0)</sub>
+<sub>![chore-dependency](http://labl.es/svg?text=chore-dependency&bgcolor=fef2c0)</sub>
+<sub>![chore-documentation](http://labl.es/svg?text=chore-documentation&bgcolor=fef2c0)</sub>
+<sub>![chore-greenkeeper](http://labl.es/svg?text=chore-greenkeeper&bgcolor=fef2c0)</sub>
+
+Light blue labels are for **features**. We use labels to group them into categories.
+* <sub>![core](http://labl.es/svg?text=core&bgcolor=c5def5)</sub>
+<sub>![localization](http://labl.es/svg?text=localization&bgcolor=c5def5)</sub>
+<sub>![performance](http://labl.es/svg?text=performance&bgcolor=c5def5)</sub>
+<sub>![preset](http://labl.es/svg?text=preset&bgcolor=c5def5)</sub>
+<sub>![renderer](http://labl.es/svg?text=renderer&bgcolor=c5def5)</sub>
+<sub>![validation](http://labl.es/svg?text=validation&bgcolor=c5def5)</sub>
+
+Dark Grey labels are for **waitfor items**. We won't work on these now, but we'll keep the issues
+open while we wait for something to happen.
+* <sub>![waitfor](http://labl.es/svg?text=waitfor&bgcolor=444)</sub>
+<sub>![waitfor-consensus](http://labl.es/svg?text=waitfor-consensus&bgcolor=444)</sub>
+<sub>![waitfor-icon](http://labl.es/svg?text=waitfor-icon&bgcolor=444)</sub>
+<sub>![waitfor-info](http://labl.es/svg?text=waitfor-info&bgcolor=444)</sub>
+<sub>![waitfor-upstream](http://labl.es/svg?text=waitfor-upstream&bgcolor=444)</sub>
+
+Light Grey labels are for **wontfix items**. We've decided these doesn't belong in
+iD at this time. Don't feel bad, sometimes we change our minds later and revisit them!
+(ISATIDL = "I saw a thing I don't like", a common OpenStreetMap complaint)
+* <sub>![wontfix](http://labl.es/svg?text=wontfix&bgcolor=eee)</sub>
+<sub>![wontfix-confusing](http://labl.es/svg?text=wontfix-confusing&bgcolor=eee)</sub>
+<sub>![wontfix-ISATIDL](http://labl.es/svg?text=wontfix-ISATIDL&bgcolor=eee)</sub>
+<sub>![wontfix-low-impact](http://labl.es/svg?text=wontfix-low-impact&bgcolor=eee)</sub>
+
+Special:
+* <sub>![bluesky](http://labl.es/svg?text=bluesky&bgcolor=1d76db)</sub> -
+Bluesky issues are extra challenging. They might require weeks of development or not even be possible.
+* <sub>![wip](http://labl.es/svg?text=wip&bgcolor=fbca04)</sub> -
+Work in Progress.  Don't start work on these, somebody else already did!
+
 
 ## Verifying Bug Fixes
 
@@ -103,13 +167,14 @@ to iD, only display them in the interface through the `t()` function.
 Then, add the new string to `data/core.yaml`. The translation system, Transifex,
 will automatically detect the change.
 
-If you are updating an existing string, update it in `data/core/yaml` and run 
-`npm run build` to generate the `en.json` file automatically, then commit both 
+If you are updating an existing string, update it in `data/core/yaml` and run
+`npm run build` to generate the `en.json` file automatically, then commit both
 modified files.
 
 Use `npm run build` to build the translations with the local changes.
 
 `npm run translations` can be used to pull the latest translations from Transifex.
+
 
 ## Contributing Documentation
 
@@ -128,11 +193,13 @@ so on in order to keep it in a certain order.
 
 To add a new piece of documentation, simply add to [core.yaml](/data/core.yaml) in the same format as the rest.
 
+
 ## Adding or Refining Presets
 
 Presets save time for iD users by automatically showing them the tags they are
 likely to add for a given feature. They are stored in `data/presets/presets`. If
 you're going to update the presets, [review the Presets README](/data/presets/README.md).
+
 
 ## JavaScript
 
@@ -148,6 +215,7 @@ JavaScript code should pass through [ESLint](http://eslint.org/) with no
 warnings. iD uses [ES6 modules](http://exploringjs.com/es6/ch_modules.html) to
 handle connect code together, so we support `import` and `export` constructs.
 
+
 ## HTML
 
 There isn't much HTML in iD, but what there is is similar to JavaScript: 4 spaces
@@ -158,6 +226,7 @@ always, indented by the level of the tree:
     <div></div>
 </div>
 ```
+
 
 ## CSS
 
@@ -171,6 +240,7 @@ Just like HTML and JavaScript, 4 space soft tabs always.
 
 We write vanilla CSS with no preprocessing step. Since iD targets modern browsers,
 (Chrome, Firefox, Safair, Opera, IE11, and Edge) feel free to use newer features wisely.
+
 
 ## Tests
 
@@ -187,27 +257,28 @@ You can rebuild iD completely with the command `npm run all`.
 iD will be built to the `dist` directory. This directory is self-contained; you can copy it
 into the public directory of your webserver to deploy iD.
 
+
 ## Licensing
 
 iD is available under the [ISC License](https://opensource.org/licenses/ISC).
 Some of the libraries it uses are under different licenses. If you're contributing
 to iD, you're contributing ISC Licensed code.
 
+
 ## Submitting Changes
 
-Let's say that you've thought of a great improvement to iD - a change that
-turns everything red (please do not do this, we like colors other than red).
+We like when people get involved! iD is a busy project, and it helps the
+maintainers if you first open an issue to ask whether an idea makes sense,
+instead of surprising us with a pull request.
 
-In your local copy, make a branch for this change:
+In your local copy, make a branch for this change using a descriptive branch name:
 
-    git checkout -b make-red
+    git checkout -b fix-the-thing
 
 Make your changes to source files under `modules/`.
 The `iD.js` and `iD.min.js` files in this project are autogenerated - don't edit them.
 
-So let's say you've changed `modules/ui/confirm.js`.
-
-1. Try it out locally.  Run `npm start` and visit `localhost:8080` in a browser.
+1. Try your change locally.  Run `npm start` and visit `localhost:8080` in a browser.
 2. Run lint and tests with `npm test`
 3. Commit your changes with an informative commit message
 4. [Submit a pull request](https://help.github.com/articles/using-pull-requests) to the `openstreetmap/iD` project.
