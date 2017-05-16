@@ -5,6 +5,7 @@ import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
 import { dataShortcuts } from '../../data';
 
+
 export function uiShortcuts() {
     var key = '⇧/';
     var activeTab = 0;
@@ -23,7 +24,8 @@ export function uiShortcuts() {
 
     d3.select(document)
         .call(keybinding);
-    
+
+
     function shortcutsModal(modalSelection) {
         modalSelection.select('.modal')
         .attr('class', 'modal modal-shortcuts fillL col6');
@@ -35,10 +37,11 @@ export function uiShortcuts() {
             .attr('class', 'modal-section')
             .append('h3')
             .text(t('shortcuts.modal.title'));
-        
+
         shortcutsModal
             .call(renderTabs);
     }
+
 
     function renderTabs(selection) {
         var wrapper = selection
@@ -132,6 +135,7 @@ export function uiShortcuts() {
                 return i === activeTab ? 'flex' : 'none';
             });
     }
+
 
     return function(selection, show) {
         savedSelection = selection;
