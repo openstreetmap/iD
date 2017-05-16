@@ -172,7 +172,7 @@ a:visited, a {
 }
 
 a:hover {
-    color:#597be7;
+    color: #597be7;
 }
 
 /* Forms
@@ -646,7 +646,7 @@ button.save.has-count .count::before {
     position: absolute;
     right: 0;
     top: 0;
-    height: 59px;
+    height: 60px;
     z-index: 50;
 }
 
@@ -3084,43 +3084,37 @@ img.tile-removing {
 
 /* Shortcuts Modal
 ------------------------------------------------------- */
-.modal-shortcuts {
-    padding-bottom: 20px;
-}
-.modal-shortcuts .modal-section {
-    margin-bottom: 10px;
-}
-.modal-shortcuts .wrapper {
-    padding: 0 20px;
+
+.modal-shortcuts .modal-section:last-child {
+    padding-top: 10px;
 }
 
 .modal-shortcuts .tabs-bar {
     text-align: center;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .modal-shortcuts .tab {
     display: inline-block;
-    padding: 0 10px;
+    padding: 5px 10px;
     margin: 0 5px;
     cursor: pointer;
-    border: 1px solid #ccc;
-    background-color: #eee;
-    border-radius: 4px;
+    color: #666;
+}
+.modal-shortcuts .tab.active {
+    color: #7092ff;
+}
+.modal-shortcuts .tab:hover {
+    color: #597be7;
+    background-color: #efefef;
 }
 
 .modal-shortcuts .shortcut-tab {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-}
-
-.modal-shortcuts .tab:hover {
-    background-color: #ccc;
-}
-.modal-shortcuts .tab.active {
-    background-color: #E8EBFF;
-    color: #7092FF;
 }
 
 .modal-shortcuts .shortcut-row {
@@ -4098,8 +4092,6 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     left: 0;
     right: unset;
     top: 0;
-    height: 59px;
-    z-index: 50;
 }
 
 /* shortcuts modal */
