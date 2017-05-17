@@ -3098,6 +3098,7 @@ en:
       leisure/pitch/soccer:
         # 'leisure=pitch, sport=soccer'
         name: Soccer Field
+        # 'terms: football'
         terms: '<translate with synonyms or related terms for ''Soccer Field'', separated by commas>'
       leisure/pitch/table_tennis:
         # 'leisure=pitch, sport=table_tennis'

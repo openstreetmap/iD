@@ -16,6 +16,8 @@
         "key": "sport",
         "value": "soccer"
     },
-    "terms": [],
+    "terms": [
+	"football"
+    ],
     "name": "Soccer Field"
 }
