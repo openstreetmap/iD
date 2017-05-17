@@ -884,33 +884,66 @@
             }
         },
         "shortcuts": {
-            "modal": {
-                "title": "Keyboard shortcuts"
+            "title": "Keyboard shortcuts",
+            "browsing": {
+                "title": "Browsing",
+                "navigation": {
+                    "title": "Navigation",
+                    "pan_map": "Pan map",
+                    "pan_map_screen": "Pan map by one screenful",
+                    "zoom": "Zoom in / Zoom out",
+                    "zoom_large": "Zoom in / Zoom out by a lot"
+                },
+                "display": {
+                    "title": "Display",
+                    "background": "Background settings",
+                    "background_switch": "Switch back to last background",
+                    "toggle_minimap": "Toggle minimap",
+                    "map_data": "Map data settings",
+                    "wireframe": "Toggle wireframe mode"
+                },
+                "help": {
+                    "title": "Help",
+                    "help": "Show help/documentation"
+                },
+                "selected": {
+                    "title": "With selected",
+                    "toggle_infobox": "Toggle info box",
+                    "toggle_menu": "Toggle edit menu"
+                }
             },
-            "display": {
-                "desc": "Display",
-                "pan_map": "Pan map",
-                "pan_map_screen": "Pan map by one screenful",
-                "zoom": "Zoom in / Zoom out",
-                "zoom_large": "Zoom in / Zoom out by a lot",
-                "bg_switcher": "Display background layer switcher",
-                "bg": "Switch between backgrounds",
-                "wireframe": "Toggle wireframe mode",
-                "help": "Show in-editor help/documentation",
-                "minimap": "Toggle minimap",
-                "infobox": "Toggle info/measurements box",
-                "radial_menu": "Toggle radial menu for selected object"
-            },
-            "edit": {
-                "desc": "Editing",
-                "add_point": "Switch to 'add point' mode",
-                "add_line": "Switch to 'add line' mode",
-                "add_area": "Switch to 'add area' mode",
-                "continue_line": "Continue drawing a line at the selected node",
-                "stop_line": "Stop drawing of a line or area",
-                "undo": "Undo last action",
-                "redo": "Redo last action",
-                "save": "Save changes"
+            "editing": {
+                "title": "Editing",
+                "drawing": {
+                    "title": "Drawing",
+                    "add_point": "'Add point' mode",
+                    "add_line": "'Add line' mode",
+                    "add_area": "'Add area' mode",
+                    "place_point": "Place a point",
+                    "stop_line": "Stop drawing of a line or area"
+                },
+                "operations": {
+                    "title": "Operations",
+                    "continue_line": "Continue a line at the selected node",
+                    "merge": "Combine (Merge) selected items",
+                    "disconnect": "Disconnect features at the selected node",
+                    "split": "Split a line into two at the selected node",
+                    "move": "Move selected items",
+                    "rotate": "Rotate selected items",
+                    "orthagonalize": "Straighten line / Square area corners",
+                    "circularize": "Circularize an area",
+                    "reflect_long": "Reflect items across the longer axis",
+                    "reflect_short": "Reflect items across the shorter axis",
+                    "reverse": "Reverse a line"
+                },
+                "edit": {
+                    "title": "Edit",
+                    "copy": "Copy map features",
+                    "paste": "Paste map features",
+                    "undo": "Undo last action",
+                    "redo": "Redo last action",
+                    "save": "Save changes"
+                }
             }
         },
         "presets": {

@@ -3084,6 +3084,10 @@ img.tile-removing {
 
 /* Shortcuts Modal
 ------------------------------------------------------- */
+.modal-shortcuts {
+    width: 75%;
+    max-width: 800px;
+}
 
 .modal-shortcuts .modal-section:last-child {
     padding-top: 10px;
@@ -3113,11 +3117,22 @@ img.tile-removing {
 
 .modal-shortcuts .shortcut-tab {
     display: flex;
+    flex-flow: row wrap;
+}
+
+.modal-shortcuts .shortcut-group {
+    padding: 10px;
+    flex: 0 0 50%;
+    display: flex;
     flex-direction: column;
-    flex-grow: 1;
+}
+
+.modal-shortcuts .shortcut-group h3 {
+    text-align: center;
 }
 
 .modal-shortcuts .shortcut-row {
+    flex: 0 0 auto;
     display: flex;
     flex-direction: row;
 }
@@ -3127,12 +3142,12 @@ img.tile-removing {
     color: #767676;
     text-align: right;
     padding-bottom: 5px;
-    width: 50%;
+    flex: 1 1 40%;
 
 }
 .modal-shortcuts .shortcut-desc {
     padding-bottom: 5px;
-    width: 50%;
+    flex: 1 1 60%;
 }
 
 .modal-shortcuts kbd {
