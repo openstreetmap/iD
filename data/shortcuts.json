@@ -49,6 +49,9 @@
                     {
                         "shortcut": ["H"],
                         "text": "shortcuts.browsing.help.help"
+                    }, {
+                        "shortcut": ["?"],
+                        "text": "shortcuts.browsing.help.keyboard"
                     }
                 ]
             }, {
@@ -96,38 +99,38 @@
                 "text": "shortcuts.editing.operations.title",
                 "shortcuts": [
                     {
-                        "shortcut": ["A"],
+                        "shortcut": ["operations.continue.key"],
                         "text": "shortcuts.editing.operations.continue_line"
                     }, {
-                        "shortcut": ["C"],
+                        "shortcut": ["operations.merge.key"],
                         "text": "shortcuts.editing.operations.merge"
                     }, {
-                        "shortcut": ["D"],
+                        "shortcut": ["operations.disconnect.key"],
                         "text": "shortcuts.editing.operations.disconnect"
                     }, {
-                        "shortcut": ["X"],
+                        "shortcut": ["operations.split.key"],
                         "text": "shortcuts.editing.operations.split"
                     }, {
-                        "shortcut": ["M"],
+                        "shortcut": ["operations.reverse.key"],
+                        "text": "shortcuts.editing.operations.reverse"
+                    }, {
+                        "shortcut": ["operations.move.key"],
                         "text": "shortcuts.editing.operations.move"
                     }, {
-                        "shortcut": ["R"],
+                        "shortcut": ["operations.rotate.key"],
                         "text": "shortcuts.editing.operations.rotate"
                     }, {
-                        "shortcut": ["S"],
-                        "text": "shortcuts.editing.operations.orthagonalize"
+                        "shortcut": ["operations.orthogonalize.key"],
+                        "text": "shortcuts.editing.operations.orthogonalize"
                     }, {
-                        "shortcut": ["O"],
+                        "shortcut": ["operations.circularize.key"],
                         "text": "shortcuts.editing.operations.circularize"
                     }, {
-                        "shortcut": ["T"],
+                        "shortcut": ["operations.reflect.key.long"],
                         "text": "shortcuts.editing.operations.reflect_long"
                     }, {
-                        "shortcut": ["Y"],
+                        "shortcut": ["operations.reflect.key.short"],
                         "text": "shortcuts.editing.operations.reflect_short"
-                    }, {
-                        "shortcut": ["V"],
-                        "text": "shortcuts.editing.operations.reverse"
                     }
                 ]
             }, {

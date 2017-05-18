@@ -1036,6 +1036,7 @@ en:
       help:
         title: "Help"
         help: "Show help/documentation"
+        keyboard: "Show keyboard shortcuts"
       selected:
         title: "With selected"
         toggle_infobox: "Toggle info box"
@@ -1057,7 +1058,7 @@ en:
         split: "Split a line into two at the selected node"
         move: "Move selected items"
         rotate: "Rotate selected items"
-        orthagonalize: "Straighten line / Square area corners"
+        orthogonalize: "Straighten line / Square area corners"
         circularize: "Circularize an area"
         reflect_long: "Reflect items across the longer axis"
         reflect_short: "Reflect items across the shorter axis"

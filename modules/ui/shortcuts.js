@@ -127,7 +127,9 @@ export function uiShortcuts() {
             .data(function (d) { return d.shortcut; })
             .enter()
             .append('kbd')
-            .text(function (d) { return uiCmd(d); });
+            .text(function (d) {
+                return d.indexOf('.') !== -1 ? uiCmd(t(d)) : uiCmd(d);
+            });
 
         row
             .append('div')
