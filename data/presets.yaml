@@ -2284,6 +2284,11 @@ en:
         name: Electrician
         # 'terms: power,wire'
         terms: '<translate with synonyms or related terms for ''Electrician'', separated by commas>'
+      craft/electronics_repair:
+        # craft=electronics_repair
+        name: Electronics Repair Shop
+        # 'terms: electronic,repair'
+        terms: '<translate with synonyms or related terms for ''Electronics Repair Shop'', separated by commas>'
       craft/gardener:
         # craft=gardener
         name: Gardener
