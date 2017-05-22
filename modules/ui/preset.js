@@ -188,7 +188,11 @@ export function uiPreset(context) {
             .classed('modified', function(field) { return field.modified(); })
             .classed('present', function(field) { return field.present(); })
             .each(function(field) {
-                var reference = uiTagReference(field.reference || { key: field.key }, context);
+                var referenceKey = field.key;
+                if (field.type === 'multiCombo') {   // lookup key without the trailing ':'
+                    referenceKey = referenceKey.replace(/:$/, '');
+                }
+                var reference = uiTagReference(field.reference || { key: referenceKey }, context);
 
                 if (state === 'hover') {
                     reference.showing(false);
