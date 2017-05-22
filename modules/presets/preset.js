@@ -71,7 +71,7 @@ export function presetPreset(id, preset, fields) {
 
     var reference = preset.reference || {};
     preset.reference = function(geometry) {
-        var key = reference.key || Object.keys(preset.tags)[0],
+        var key = reference.key || Object.keys(_.omit(preset.tags, 'name'))[0],
             value = reference.value || preset.tags[key];
 
         if (geometry === 'relation' && key === 'type') {
