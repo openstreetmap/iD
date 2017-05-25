@@ -13,8 +13,15 @@
     "terms": [
         "appliance",
         "audio",
+        "blueray",
+        "camera",
         "computer",
-        "tv"
+        "dvd",
+        "home theater",
+        "radio",
+        "speaker",
+        "tv",
+        "video"
     ],
     "tags": {
         "shop": "electronics"

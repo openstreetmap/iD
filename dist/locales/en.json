@@ -4228,6 +4228,10 @@
                     "name": "Antiques Shop",
                     "terms": ""
                 },
+                "shop/appliance": {
+                    "name": "Appliance Store",
+                    "terms": "air conditioner,appliance,dishwasher,dryer,freezer,fridge,grill,kitchen,oven,refrigerator,stove,washer,washing machine"
+                },
                 "shop/art": {
                     "name": "Art Store",
                     "terms": "art*,exhibit*,gallery"
@@ -4386,7 +4390,7 @@
                 },
                 "shop/electronics": {
                     "name": "Electronics Store",
-                    "terms": "appliance,audio,computer,tv"
+                    "terms": "appliance,audio,blueray,camera,computer,dvd,home theater,radio,speaker,tv,video"
                 },
                 "shop/erotic": {
                     "name": "Erotic Store",

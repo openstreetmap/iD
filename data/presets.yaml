@@ -3722,6 +3722,11 @@ en:
         # shop=antiques
         name: Antiques Shop
         terms: '<translate with synonyms or related terms for ''Antiques Shop'', separated by commas>'
+      shop/appliance:
+        # shop=appliance
+        name: Appliance Store
+        # 'terms: air conditioner,appliance,dishwasher,dryer,freezer,fridge,grill,kitchen,oven,refrigerator,stove,washer,washing machine'
+        terms: '<translate with synonyms or related terms for ''Appliance Store'', separated by commas>'
       shop/art:
         # shop=art
         name: Art Store
@@ -3899,7 +3904,7 @@ en:
       shop/electronics:
         # shop=electronics
         name: Electronics Store
-        # 'terms: appliance,audio,computer,tv'
+        # 'terms: appliance,audio,blueray,camera,computer,dvd,home theater,radio,speaker,tv,video'
         terms: '<translate with synonyms or related terms for ''Electronics Store'', separated by commas>'
       shop/erotic:
         # shop=erotic

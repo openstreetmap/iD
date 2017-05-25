@@ -10248,6 +10248,38 @@
             },
             "name": "Antiques Shop"
         },
+        "shop/appliance": {
+            "icon": "shop",
+            "fields": [
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "air conditioner",
+                "appliance",
+                "dishwasher",
+                "dryer",
+                "freezer",
+                "fridge",
+                "grill",
+                "kitchen",
+                "oven",
+                "refrigerator",
+                "stove",
+                "washer",
+                "washing machine"
+            ],
+            "tags": {
+                "shop": "appliance"
+            },
+            "name": "Appliance Store"
+        },
         "shop/art": {
             "icon": "shop",
             "fields": [
@@ -11021,8 +11053,15 @@
             "terms": [
                 "appliance",
                 "audio",
+                "blueray",
+                "camera",
                 "computer",
-                "tv"
+                "dvd",
+                "home theater",
+                "radio",
+                "speaker",
+                "tv",
+                "video"
             ],
             "tags": {
                 "shop": "electronics"

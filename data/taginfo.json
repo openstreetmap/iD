@@ -2151,6 +2151,10 @@
         },
         {
             "key": "shop",
+            "value": "appliance"
+        },
+        {
+            "key": "shop",
             "value": "art"
         },
         {
