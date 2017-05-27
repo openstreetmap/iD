@@ -4281,6 +4281,23 @@
             },
             "name": "Electrician"
         },
+        "craft/electronics_repair": {
+            "icon": "poi-tool",
+            "fields": [
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "craft": "electronics_repair"
+            },
+            "name": "Electronics Repair Shop"
+        },
         "craft/gardener": {
             "icon": "garden",
             "fields": [

@@ -880,6 +880,10 @@
         },
         {
             "key": "craft",
+            "value": "electronics_repair"
+        },
+        {
+            "key": "craft",
             "value": "gardener"
         },
         {

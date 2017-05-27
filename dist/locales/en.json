@@ -2936,6 +2936,10 @@
                     "name": "Electrician",
                     "terms": "power,wire"
                 },
+                "craft/electronics_repair": {
+                    "name": "Electronics Repair Shop",
+                    "terms": ""
+                },
                 "craft/gardener": {
                     "name": "Gardener",
                     "terms": "landscaper,grounds keeper"
