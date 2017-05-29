@@ -1007,6 +1007,12 @@
             ],
             "snake_case": false
         },
+        "maxweight": {
+            "key": "maxweight",
+            "type": "combo",
+            "label": "Max Weight",
+            "snake_case": false
+        },
         "mtb/scale": {
             "key": "mtb:scale",
             "type": "combo",

@@ -3,6 +3,7 @@
     "fields": [
         "access_simple",
         "opening_hours",
+        "maxweight",
         "ref"
     ],
     "geometry": [

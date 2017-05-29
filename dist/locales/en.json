@@ -1541,6 +1541,9 @@
                 "maxstay": {
                     "label": "Max Stay"
                 },
+                "maxweight": {
+                    "label": "Max Weight"
+                },
                 "mtb/scale": {
                     "label": "Mountain Biking Difficulty",
                     "placeholder": "0, 1, 2, 3...",

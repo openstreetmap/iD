@@ -718,6 +718,9 @@ en:
       maxstay:
         # maxstay=*
         label: Max Stay
+      maxweight:
+        # maxweight=*
+        label: Max Weight
       mtb/scale:
         # 'mtb:scale=*'
         label: Mountain Biking Difficulty
