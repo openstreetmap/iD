@@ -1,0 +1,20 @@
+{
+    "icon": "highway-unclassified",
+    "fields": [
+        "oneway",
+        "structure",
+        "cycleway"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "unclassified"
+    },
+    "terms": [
+        "construction"
+    ],
+    "matchScore": 0.5,
+    "name": "Minor/Unclassified Road Under Construction"
+}

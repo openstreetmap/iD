@@ -1,0 +1,20 @@
+{
+    "icon": "highway-service",
+    "fields": [
+        "service",
+        "oneway",
+        "structure"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "service"
+    },
+    "matchScore": 0.5,
+    "terms": [
+        "construction"
+    ],
+    "name": "Service Road Under Construction"
+}

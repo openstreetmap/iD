@@ -2547,6 +2547,124 @@ en:
         # highway=bus_stop
         name: Bus Stop
         terms: '<translate with synonyms or related terms for ''Bus Stop'', separated by commas>'
+      highway/construction:
+        # highway=construction
+        name: Highway Under Construction
+      highway/construction/bridleway:
+        # 'highway=construction, construction=bridleway'
+        name: Bridle Path Under Construction
+        # 'terms: bridleway,equestrian,horse,construction'
+        terms: '<translate with synonyms or related terms for ''Bridle Path Under Construction'', separated by commas>'
+      highway/construction/cycleway:
+        # 'highway=construction, construction=cycleway'
+        name: Cycle Path Under Construction
+        # 'terms: bike,construction'
+        terms: '<translate with synonyms or related terms for ''Cycle Path Under Construction'', separated by commas>'
+      highway/construction/footway:
+        # 'highway=construction, construction=footway'
+        name: Foot Path Under Construction
+        # 'terms: hike,hiking,trackway,trail,walk,construction'
+        terms: '<translate with synonyms or related terms for ''Foot Path Under Construction'', separated by commas>'
+      highway/construction/motorway:
+        # 'highway=construction, construction=motorway'
+        name: Motorway Under Construction
+        # 'terms: autobahn,expressway,freeway,highway,interstate,parkway,thruway,turnpike,construction'
+        terms: '<translate with synonyms or related terms for ''Motorway Under Construction'', separated by commas>'
+      highway/construction/motorway_link:
+        # 'highway=construction, construction=motorway_link'
+        name: Motorway Link Under Construction
+        # 'terms: ramp,on ramp,off ramp,construction'
+        terms: '<translate with synonyms or related terms for ''Motorway Link Under Construction'', separated by commas>'
+      highway/construction/path:
+        # 'highway=construction, construction=path'
+        name: Path Under Construction
+        # 'terms: hike,hiking,trackway,trail,walk,construction'
+        terms: '<translate with synonyms or related terms for ''Path Under Construction'', separated by commas>'
+      highway/construction/primary:
+        # 'highway=construction, construction=primary'
+        name: Primary Road Under Construction
+        # 'terms: construction'
+        terms: '<translate with synonyms or related terms for ''Primary Road Under Construction'', separated by commas>'
+      highway/construction/primary_link:
+        # 'highway=construction, construction=primary_link'
+        name: Primary Link Under Construction
+        # 'terms: ramp,on ramp,off ramp,construction'
+        terms: '<translate with synonyms or related terms for ''Primary Link Under Construction'', separated by commas>'
+      highway/construction/residential:
+        # 'highway=construction, construction=residential'
+        name: Residential Road Under Construction
+        # 'terms: construction'
+        terms: '<translate with synonyms or related terms for ''Residential Road Under Construction'', separated by commas>'
+      highway/construction/road:
+        # 'highway=construction, construction=road'
+        name: Unknown Road Under Construction
+        # 'terms: construction'
+        terms: '<translate with synonyms or related terms for ''Unknown Road Under Construction'', separated by commas>'
+      highway/construction/secondary:
+        # 'highway=construction, construction=secondary'
+        name: Secondary Road Under Construction
+        # 'terms: construction'
+        terms: '<translate with synonyms or related terms for ''Secondary Road Under Construction'', separated by commas>'
+      highway/construction/secondary_link:
+        # 'highway=construction, construction=secondary_link'
+        name: Secondary Link Under Construction
+        # 'terms: ramp,on ramp,off ramp,construction'
+        terms: '<translate with synonyms or related terms for ''Secondary Link Under Construction'', separated by commas>'
+      highway/construction/service:
+        # 'highway=construction, construction=service'
+        name: Service Road Under Construction
+        # 'terms: construction'
+        terms: '<translate with synonyms or related terms for ''Service Road Under Construction'', separated by commas>'
+      highway/construction/service/alley:
+        # 'highway=construction, construction=service, service=alley'
+        name: Alley Under Construction
+        # 'terms: construction'
+        terms: '<translate with synonyms or related terms for ''Alley Under Construction'', separated by commas>'
+      highway/construction/service/drive-through:
+        # 'highway=construction, construction=service, service=drive-through'
+        name: Drive-Through Under Construction
+        # 'terms: construction'
+        terms: '<translate with synonyms or related terms for ''Drive-Through Under Construction'', separated by commas>'
+      highway/construction/service/driveway:
+        # 'highway=construction, construction=service, service=driveway'
+        name: Driveway Under Construction
+        # 'terms: construction'
+        terms: '<translate with synonyms or related terms for ''Driveway Under Construction'', separated by commas>'
+      highway/construction/service/emergency_access:
+        # 'highway=construction, construction=service, service=emergency_access'
+        name: Emergency Access Under Construction
+        # 'terms: construction'
+        terms: '<translate with synonyms or related terms for ''Emergency Access Under Construction'', separated by commas>'
+      highway/construction/service/parking_aisle:
+        # 'highway=construction, construction=service, service=parking_aisle'
+        name: Parking Aisle Under Construction
+        # 'terms: construction'
+        terms: '<translate with synonyms or related terms for ''Parking Aisle Under Construction'', separated by commas>'
+      highway/construction/tertiary:
+        # 'highway=construction, construction=tertiary'
+        name: Tertiary Road Under Construction
+        # 'terms: construction'
+        terms: '<translate with synonyms or related terms for ''Tertiary Road Under Construction'', separated by commas>'
+      highway/construction/tertiary_link:
+        # 'highway=construction, construction=tertiary_link'
+        name: Tertiary Link Under Construction
+        # 'terms: ramp,on ramp,off ramp,construction'
+        terms: '<translate with synonyms or related terms for ''Tertiary Link Under Construction'', separated by commas>'
+      highway/construction/trunk:
+        # 'highway=construction, construction=trunk'
+        name: Trunk Road Under Construction
+        # 'terms: construction'
+        terms: '<translate with synonyms or related terms for ''Trunk Road Under Construction'', separated by commas>'
+      highway/construction/trunk_link:
+        # 'highway=construction, construction=trunk_link'
+        name: Trunk Link Under Construction
+        # 'terms: ramp,on ramp,off ramp,construction'
+        terms: '<translate with synonyms or related terms for ''Trunk Link Under Construction'', separated by commas>'
+      highway/construction/unclassified:
+        # 'highway=construction, construction=unclassified'
+        name: Minor/Unclassified Road Under Construction
+        # 'terms: construction'
+        terms: '<translate with synonyms or related terms for ''Minor/Unclassified Road Under Construction'', separated by commas>'
       highway/corridor:
         # highway=corridor
         name: Indoor Corridor

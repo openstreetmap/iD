@@ -1,0 +1,23 @@
+{
+    "icon": "highway-trunk",
+    "fields": [
+        "oneway",
+        "structure",
+        "ref"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "trunk_link"
+    },
+    "terms": [
+        "ramp",
+        "on ramp",
+        "off ramp",
+        "construction"
+    ],
+    "matchScore": 0.5,
+    "name": "Trunk Link Under Construction"
+}

@@ -1,0 +1,20 @@
+{
+    "icon": "highway-service",
+    "fields": [
+        "oneway",
+        "structure"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "construction",
+        "construction": "service",
+        "service": "emergency_access"
+    },
+    "matchScore": 0.5,
+    "terms": [
+        "construction"
+    ],
+    "name": "Emergency Access Under Construction"
+}
