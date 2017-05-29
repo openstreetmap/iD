@@ -5384,6 +5384,24 @@
             ],
             "name": "Cycle Path"
         },
+        "highway/elevator": {
+            "icon": "poi-elevator",
+            "fields": [
+                "access_simple",
+                "opening_hours",
+                "ref"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "highway": "elevator"
+            },
+            "terms": [
+                "lift"
+            ],
+            "name": "Elevator"
+        },
         "highway/footway": {
             "icon": "highway-footway",
             "fields": [

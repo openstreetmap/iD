@@ -2566,6 +2566,11 @@ en:
         name: Cycle Path
         # 'terms: bike'
         terms: '<translate with synonyms or related terms for ''Cycle Path'', separated by commas>'
+      highway/elevator:
+        # highway=elevator
+        name: Elevator
+        # 'terms: lift'
+        terms: '<translate with synonyms or related terms for ''Elevator'', separated by commas>'
       highway/footway:
         # highway=footway
         name: Foot Path

@@ -3188,6 +3188,10 @@
                     "name": "Cycle Path",
                     "terms": "bike"
                 },
+                "highway/elevator": {
+                    "name": "Elevator",
+                    "terms": "lift"
+                },
                 "highway/footway": {
                     "name": "Foot Path",
                     "terms": "hike,hiking,trackway,trail,walk"

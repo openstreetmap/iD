@@ -1131,6 +1131,10 @@
         },
         {
             "key": "highway",
+            "value": "elevator"
+        },
+        {
+            "key": "highway",
             "value": "footway"
         },
         {
