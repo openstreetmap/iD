@@ -2,12 +2,13 @@
     {
         "tab": "browsing",
         "text": "shortcuts.browsing.title",
-        "groups": [
+        "columns": [
             {
-                "group": "navigation",
-                "text": "shortcuts.browsing.navigation.title",
-                "shortcuts": [
+                "rows": [
                     {
+                        "section": "navigation",
+                        "text": "shortcuts.browsing.navigation.title"
+                    }, {
                         "shortcut": ["↓", "↑", "←", "→"],
                         "text": "shortcuts.browsing.navigation.pan_map"
                     }, {
@@ -19,13 +20,25 @@
                     }, {
                         "shortcut": ["⌘+", "⌘-"],
                         "text": "shortcuts.browsing.navigation.zoom_large"
+                    },
+
+                    {
+                        "section": "help",
+                        "text": "shortcuts.browsing.help.title"
+                    }, {
+                        "shortcut": ["H"],
+                        "text": "shortcuts.browsing.help.help"
+                    }, {
+                        "shortcut": ["?"],
+                        "text": "shortcuts.browsing.help.keyboard"
                     }
                 ]
             }, {
-                "group": "display",
-                "text": "shortcuts.browsing.display.title",
-                "shortcuts": [
+                "rows": [
                     {
+                        "section": "display",
+                        "text": "shortcuts.browsing.display.title"
+                    }, {
                         "shortcut": ["B"],
                         "text": "shortcuts.browsing.display.background"
                     }, {
@@ -40,25 +53,12 @@
                     }, {
                         "shortcut": ["W"],
                         "text": "shortcuts.browsing.display.wireframe"
-                    }
-                ]
-            }, {
-                "group": "help",
-                "text": "shortcuts.browsing.help.title",
-                "shortcuts": [
+                    },
+
                     {
-                        "shortcut": ["H"],
-                        "text": "shortcuts.browsing.help.help"
+                        "section": "selected",
+                        "text": "shortcuts.browsing.selected.title"
                     }, {
-                        "shortcut": ["?"],
-                        "text": "shortcuts.browsing.help.keyboard"
-                    }
-                ]
-            }, {
-                "group": "selected",
-                "text": "shortcuts.browsing.selected.title",
-                "shortcuts": [
-                    {
                         "shortcut": ["⌘I"],
                         "text": "shortcuts.browsing.selected.toggle_infobox"
                     }, {
@@ -68,16 +68,16 @@
                 ]
             }
         ]
-    },
-    {
+    }, {
         "tab": "editing",
         "text": "shortcuts.editing.title",
-        "groups": [
+        "columns" : [
             {
-                "group": "drawing",
-                "text": "shortcuts.editing.drawing.title",
-                "shortcuts": [
+                "rows": [
                     {
+                        "section": "drawing",
+                        "text": "shortcuts.editing.drawing.title"
+                    }, {
                         "shortcut": ["1"],
                         "text": "shortcuts.editing.drawing.add_point"
                     }, {
@@ -92,13 +92,34 @@
                     }, {
                         "shortcut": ["↵ Enter", "Esc"],
                         "text": "shortcuts.editing.drawing.stop_line"
+                    },
+
+                    {
+                        "section": "edit",
+                        "text": "shortcuts.editing.edit.title"
+                    }, {
+                        "shortcut": ["⌘C"],
+                        "text": "shortcuts.editing.edit.copy"
+                    }, {
+                        "shortcut": ["⌘V"],
+                        "text": "shortcuts.editing.edit.paste"
+                    }, {
+                        "shortcut": ["⌘Z"],
+                        "text": "shortcuts.editing.edit.undo"
+                    }, {
+                        "shortcut": ["⌘⇧Z"],
+                        "text": "shortcuts.editing.edit.redo"
+                    }, {
+                        "shortcut": ["⌘S"],
+                        "text": "shortcuts.editing.edit.save"
                     }
                 ]
             }, {
-                "group": "operations",
-                "text": "shortcuts.editing.operations.title",
-                "shortcuts": [
+                "rows": [
                     {
+                        "section": "operations",
+                        "text": "shortcuts.editing.operations.title"
+                    }, {
                         "shortcut": ["operations.continue.key"],
                         "text": "shortcuts.editing.operations.continue_line"
                     }, {
@@ -131,27 +152,6 @@
                     }, {
                         "shortcut": ["operations.reflect.key.short"],
                         "text": "shortcuts.editing.operations.reflect_short"
-                    }
-                ]
-            }, {
-                "group": "edit",
-                "text": "shortcuts.editing.edit.title",
-                "shortcuts": [
-                    {
-                        "shortcut": ["⌘C"],
-                        "text": "shortcuts.editing.edit.copy"
-                    }, {
-                        "shortcut": ["⌘V"],
-                        "text": "shortcuts.editing.edit.paste"
-                    }, {
-                        "shortcut": ["⌘Z"],
-                        "text": "shortcuts.editing.edit.undo"
-                    }, {
-                        "shortcut": ["⌘⇧Z"],
-                        "text": "shortcuts.editing.edit.redo"
-                    }, {
-                        "shortcut": ["⌘S"],
-                        "text": "shortcuts.editing.edit.save"
                     }
                 ]
             }

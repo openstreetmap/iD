@@ -99,30 +99,38 @@ export function uiShortcuts() {
             .append('div')
             .attr('class', 'shortcut-tab');
 
-
-        var groupsEnter = shortcutsEnter
-            .selectAll('.shortcut-group')
-            .data(function (d) { return d.groups; })
+        var columnsEnter = shortcutsEnter
+            .selectAll('.shortcut-column')
+            .data(function (d) { return d.columns; })
             .enter()
-            .append('div')
-            .attr('class', 'shortcut-group');
+            .append('table')
+            .attr('class', 'shortcut-column');
 
-        groupsEnter
-            .append('h3')
-            .text(function(d) { return t(d.text); });
-
-        var row = groupsEnter
+        var rowsEnter = columnsEnter
             .selectAll('.shortcut-row')
-            .data(function (d) { return d.shortcuts; })
+            .data(function (d) { return d.rows; })
             .enter()
-            .append('div')
+            .append('tr')
             .attr('class', 'shortcut-row');
 
-        var shortcutsRow = row
-            .append('div')
-            .attr('class', 'kbd-row');
+        var sectionRows = rowsEnter
+            .filter(function (d) { return !d.shortcut; });
 
-        shortcutsRow
+        sectionRows
+            .append('td');
+
+        sectionRows
+            .append('td')
+            .attr('class', 'shortcut-section')
+            .append('h3')
+            .text(function (d) { return t(d.text); });
+
+        var shortcutRows = rowsEnter
+            .filter(function (d) { return d.shortcut; });
+
+        shortcutRows
+            .append('td')
+            .attr('class', 'shortcut-keys')
             .selectAll('kbd')
             .data(function (d) { return d.shortcut; })
             .enter()
@@ -131,10 +139,11 @@ export function uiShortcuts() {
                 return d.indexOf('.') !== -1 ? uiCmd(t(d)) : uiCmd(d);
             });
 
-        row
-            .append('div')
+        shortcutRows
+            .append('td')
             .attr('class', 'shortcut-desc')
             .text(function (d) { return t(d.text); });
+
 
         shortcuts = shortcuts
             .merge(shortcutsEnter);

@@ -3120,45 +3120,34 @@ img.tile-removing {
     flex-flow: row wrap;
 }
 
-.modal-shortcuts .shortcut-group {
-    padding: 10px;
-    flex: 0 0 50%;
-    display: flex;
-    flex-direction: column;
+.modal-shortcuts .shortcut-column {
+    flex: 1 1 50%;
+    width: 50%;
 }
 
-.modal-shortcuts .shortcut-group h3 {
-    text-align: center;
+.modal-shortcuts td {
+    padding-bottom: 5px;
 }
 
-.modal-shortcuts .shortcut-row {
-    flex: 0 0 auto;
-    display: flex;
-    flex-direction: row;
+.modal-shortcuts .shortcut-section {
+    padding: 15px 0 10px 0;
 }
 
-.modal-shortcuts .kbd-row {
+.modal-shortcuts .shortcut-keys {
     padding-right: 10px;
     color: #767676;
     text-align: right;
-    padding-bottom: 5px;
-    flex: 1 1 40%;
-
-}
-.modal-shortcuts .shortcut-desc {
-    padding-bottom: 5px;
-    flex: 1 1 60%;
 }
 
-.modal-shortcuts kbd {
+.modal-shortcuts .shortcut-keys kbd {
     display: inline-block;
-    text-align: right;
+    text-align: center;
     padding: 3px 5px;
     font-size: 11px;
-    line-height: 10px;
-    letter-spacing: 1px;
+    line-height: 12px;
+    min-width: 12px;
     color: #555;
-    vertical-align: middle;
+    vertical-align: baseline;
     background-color: #fcfcfc;
     border: solid 1px #ccc;
     margin: 0 2px;
