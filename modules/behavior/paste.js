@@ -3,7 +3,6 @@ import _ from 'lodash';
 import { d3keybinding } from '../lib/d3.keybinding.js';
 
 import {
-    actionChangeTags,
     actionCopyEntities,
     actionMove
 } from '../actions/index';
@@ -19,22 +18,6 @@ import { uiCmd } from '../ui/index';
 
 export function behaviorPaste(context) {
     var keybinding = d3keybinding('paste');
-
-    function omitTag(v, k) {
-        return (
-            k === 'phone' ||
-            k === 'fax' ||
-            k === 'email' ||
-            k === 'website' ||
-            k === 'url' ||
-            k === 'note' ||
-            k === 'description' ||
-            k.indexOf('name') !== -1 ||
-            k.indexOf('wiki') === 0 ||
-            k.indexOf('addr:') === 0 ||
-            k.indexOf('contact:') === 0
-        );
-    }
 
 
     function doPaste() {
@@ -64,9 +47,6 @@ export function behaviorPaste(context) {
                 newEntity = copies[id];
 
             extent._extend(oldEntity.extent(oldGraph));
-            context.perform(
-                actionChangeTags(newEntity.id, _.omitBy(newEntity.tags, omitTag))
-            );
 
             // Exclude child nodes from newIDs if their parent way was also copied.
             var parents = context.graph().parentWays(newEntity),
