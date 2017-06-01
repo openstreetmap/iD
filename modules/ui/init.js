@@ -24,6 +24,7 @@ import { uiModes } from './modes';
 import { uiRestore } from './restore';
 import { uiSave } from './save';
 import { uiScale } from './scale';
+import { uiShortcuts } from './shortcuts';
 import { uiSidebar } from './sidebar';
 import { uiSpinner } from './spinner';
 import { uiSplash } from './splash';
@@ -283,7 +284,8 @@ export function uiInit(context) {
         if (!uiInitCounter++) {
             context.container()
                 .call(uiSplash(context))
-                .call(uiRestore(context));
+                .call(uiRestore(context))
+				.call(uiShortcuts(context));
         }
 
         var authenticating = uiLoading(context)
