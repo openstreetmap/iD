@@ -7,12 +7,12 @@ import { dataShortcuts } from '../../data';
 
 
 export function uiShortcuts() {
-    var key = '⇧/';
     var activeTab = 0;
     var modalSelection;
     var savedSelection;
+
     var keybinding = d3keybinding('shortcuts')
-        .on(key, function () {
+        .on(['?', '⇧/'], function () {
             if (modalSelection) {
                 modalSelection.close();
                 modalSelection = null;
@@ -142,7 +142,7 @@ export function uiShortcuts() {
         shortcutRows
             .append('td')
             .attr('class', 'shortcut-desc')
-            .text(function (d) { return t(d.text); });
+            .text(function (d) { return d.text ? t(d.text) : '\u00a0'; });
 
 
         shortcuts = shortcuts
