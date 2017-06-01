@@ -1080,7 +1080,7 @@ en:
       commands:
         title: "Commands"
         copy: "Copy selected features"
-        paste: "Paste selected features"
+        paste: "Paste copied features"
         undo: "Undo last action"
         redo: "Redo last action"
         save: "Save changes"
