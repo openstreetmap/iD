@@ -9,16 +9,18 @@
                         "section": "navigation",
                         "text": "shortcuts.browsing.navigation.title"
                     }, {
-                        "shortcut": ["↓", "↑", "←", "→"],
+                        "shortcuts": ["↓", "↑", "←", "→"],
                         "text": "shortcuts.browsing.navigation.pan"
                     }, {
-                        "shortcut": ["⇧↓", "⇧↑", "⇧←", "⇧→"],
+                        "modifiers": ["⇧"],
+                        "shortcuts": ["↓", "↑", "←", "→"],
                         "text": "shortcuts.browsing.navigation.pan_more"
                     }, {
-                        "shortcut": ["+", "-"],
+                        "shortcuts": ["+", "-"],
                         "text": "shortcuts.browsing.navigation.zoom"
                     }, {
-                        "shortcut": ["⌘+", "⌘-"],
+                        "modifiers": ["⇧"],
+                        "shortcuts": ["+", "-"],
                         "text": "shortcuts.browsing.navigation.zoom_more"
                     },
 
@@ -26,10 +28,10 @@
                         "section": "help",
                         "text": "shortcuts.browsing.help.title"
                     }, {
-                        "shortcut": ["H"],
+                        "shortcuts": ["H"],
                         "text": "shortcuts.browsing.help.help"
                     }, {
-                        "shortcut": ["?"],
+                        "shortcuts": ["?"],
                         "text": "shortcuts.browsing.help.keyboard"
                     },
 
@@ -37,19 +39,20 @@
                         "section": "display_options",
                         "text": "shortcuts.browsing.display_options.title"
                     }, {
-                        "shortcut": ["B"],
+                        "shortcuts": ["B"],
                         "text": "shortcuts.browsing.display_options.background"
                     }, {
-                        "shortcut": ["⌘B"],
+                        "modifiers": ["⌘"],
+                        "shortcuts": ["B"],
                         "text": "shortcuts.browsing.display_options.background_switch"
                     }, {
-                        "shortcut": ["F"],
+                        "shortcuts": ["F"],
                         "text": "shortcuts.browsing.display_options.map_data"
                     }, {
-                        "shortcut": ["W"],
+                        "shortcuts": ["W"],
                         "text": "shortcuts.browsing.display_options.wireframe"
                     }, {
-                        "shortcut": ["/"],
+                        "shortcuts": ["/"],
                         "text": "shortcuts.browsing.display_options.minimap"
                     }
                 ]
@@ -59,16 +62,18 @@
                         "section": "selecting",
                         "text": "shortcuts.browsing.selecting.title"
                     }, {
-                        "shortcut": ["Left-click"],
+                        "shortcuts": ["Left-click"],
                         "text": "shortcuts.browsing.selecting.select_one"
                     }, {
-                        "shortcut": ["⇧ Left-click"],
+                        "modifiers": ["⇧"],
+                        "shortcuts": ["Left-click"],
                         "text": "shortcuts.browsing.selecting.select_multi"
                     }, {
-                        "shortcut": ["⇧ Left-click + drag"],
+                        "modifiers": ["⇧"],
+                        "shortcuts": ["Left-click + drag"],
                         "text": "shortcuts.browsing.selecting.lasso"
                     }, {
-                        "shortcut": [],
+                        "shortcuts": [],
                         "text": ""
                     },
 
@@ -76,10 +81,11 @@
                         "section": "with_selected",
                         "text": "shortcuts.browsing.with_selected.title"
                     }, {
-                        "shortcut": ["⌘I"],
+                        "modifiers": ["⌘"],
+                        "shortcuts": ["I"],
                         "text": "shortcuts.browsing.with_selected.infobox"
                     }, {
-                        "shortcut": ["Right-click", "Space"],
+                        "shortcuts": ["Right-click", "Space"],
                         "text": "shortcuts.browsing.with_selected.edit_menu"
                     },
 
@@ -87,19 +93,19 @@
                         "section": "vertex_selected",
                         "text": "shortcuts.browsing.vertex_selected.title"
                     }, {
-                        "shortcut": ["[", "↖ PgUp"],
+                        "shortcuts": ["[", "↖"],
                         "text": "shortcuts.browsing.vertex_selected.previous"
                     }, {
-                        "shortcut": ["]", "↘ PgDn"],
+                        "shortcuts": ["]", "↘"],
                         "text": "shortcuts.browsing.vertex_selected.next"
                     }, {
-                        "shortcut": ["{", "⇞ Home"],
+                        "shortcuts": ["{", "⇞"],
                         "text": "shortcuts.browsing.vertex_selected.first"
                     }, {
-                        "shortcut": ["}", "⇟ End"],
+                        "shortcuts": ["}", "⇟"],
                         "text": "shortcuts.browsing.vertex_selected.last"
                     }, {
-                        "shortcut": ["\\", "Pause"],
+                        "shortcuts": ["\\", "Pause"],
                         "text": "shortcuts.browsing.vertex_selected.change_parent"
                     }
 
@@ -116,22 +122,22 @@
                         "section": "drawing",
                         "text": "shortcuts.editing.drawing.title"
                     }, {
-                        "shortcut": ["1"],
+                        "shortcuts": ["1"],
                         "text": "shortcuts.editing.drawing.add_point"
                     }, {
-                        "shortcut": ["2"],
+                        "shortcuts": ["2"],
                         "text": "shortcuts.editing.drawing.add_line"
                     }, {
-                        "shortcut": ["3"],
+                        "shortcuts": ["3"],
                         "text": "shortcuts.editing.drawing.add_area"
                     }, {
-                        "shortcut": ["Space"],
+                        "shortcuts": ["Space"],
                         "text": "shortcuts.editing.drawing.place_point"
                     }, {
-                        "shortcut": ["⌥ Alt"],
+                        "shortcuts": ["⌥"],
                         "text": "shortcuts.editing.drawing.disable_snap"
                     }, {
-                        "shortcut": ["↵ Enter", "⎋ Esc"],
+                        "shortcuts": ["↵", "⎋"],
                         "text": "shortcuts.editing.drawing.stop_line"
                     },
 
@@ -139,19 +145,24 @@
                         "section": "commands",
                         "text": "shortcuts.editing.commands.title"
                     }, {
-                        "shortcut": ["⌘C"],
+                        "modifiers": ["⌘"],
+                        "shortcuts": ["C"],
                         "text": "shortcuts.editing.commands.copy"
                     }, {
-                        "shortcut": ["⌘V"],
+                        "modifiers": ["⌘"],
+                        "shortcuts": ["V"],
                         "text": "shortcuts.editing.commands.paste"
                     }, {
-                        "shortcut": ["⌘Z"],
+                        "modifiers": ["⌘"],
+                        "shortcuts": ["Z"],
                         "text": "shortcuts.editing.commands.undo"
                     }, {
-                        "shortcut": ["⌘⇧Z"],
+                        "modifiers": ["⌘","⇧"],
+                        "shortcuts": ["Z"],
                         "text": "shortcuts.editing.commands.redo"
                     }, {
-                        "shortcut": ["⌘S"],
+                        "modifiers": ["⌘"],
+                        "shortcuts": ["S"],
                         "text": "shortcuts.editing.commands.save"
                     }
                 ]
@@ -161,40 +172,41 @@
                         "section": "operations",
                         "text": "shortcuts.editing.operations.title"
                     }, {
-                        "shortcut": ["operations.continue.key"],
+                        "shortcuts": ["operations.continue.key"],
                         "text": "shortcuts.editing.operations.continue_line"
                     }, {
-                        "shortcut": ["operations.merge.key"],
+                        "shortcuts": ["operations.merge.key"],
                         "text": "shortcuts.editing.operations.merge"
                     }, {
-                        "shortcut": ["operations.disconnect.key"],
+                        "shortcuts": ["operations.disconnect.key"],
                         "text": "shortcuts.editing.operations.disconnect"
                     }, {
-                        "shortcut": ["operations.split.key"],
+                        "shortcuts": ["operations.split.key"],
                         "text": "shortcuts.editing.operations.split"
                     }, {
-                        "shortcut": ["operations.reverse.key"],
+                        "shortcuts": ["operations.reverse.key"],
                         "text": "shortcuts.editing.operations.reverse"
                     }, {
-                        "shortcut": ["operations.move.key"],
+                        "shortcuts": ["operations.move.key"],
                         "text": "shortcuts.editing.operations.move"
                     }, {
-                        "shortcut": ["operations.rotate.key"],
+                        "shortcuts": ["operations.rotate.key"],
                         "text": "shortcuts.editing.operations.rotate"
                     }, {
-                        "shortcut": ["operations.orthogonalize.key"],
+                        "shortcuts": ["operations.orthogonalize.key"],
                         "text": "shortcuts.editing.operations.orthogonalize"
                     }, {
-                        "shortcut": ["operations.circularize.key"],
+                        "shortcuts": ["operations.circularize.key"],
                         "text": "shortcuts.editing.operations.circularize"
                     }, {
-                        "shortcut": ["operations.reflect.key.long"],
+                        "shortcuts": ["operations.reflect.key.long"],
                         "text": "shortcuts.editing.operations.reflect_long"
                     }, {
-                        "shortcut": ["operations.reflect.key.short"],
+                        "shortcuts": ["operations.reflect.key.short"],
                         "text": "shortcuts.editing.operations.reflect_short"
                     }, {
-                        "shortcut": ["⌘⌫", "⌦"],
+                        "modifiers": ["⌘"],
+                        "shortcuts": ["⌫"],
                         "text": "shortcuts.editing.operations.delete"
                     }
                 ]

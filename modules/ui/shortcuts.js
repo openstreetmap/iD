@@ -114,7 +114,7 @@ export function uiShortcuts() {
             .attr('class', 'shortcut-row');
 
         var sectionRows = rowsEnter
-            .filter(function (d) { return !d.shortcut; });
+            .filter(function (d) { return !d.shortcuts; });
 
         sectionRows
             .append('td');
@@ -126,18 +126,52 @@ export function uiShortcuts() {
             .text(function (d) { return t(d.text); });
 
         var shortcutRows = rowsEnter
-            .filter(function (d) { return d.shortcut; });
+            .filter(function (d) { return d.shortcuts; });
 
-        shortcutRows
+        var shortcutKeys = shortcutRows
             .append('td')
-            .attr('class', 'shortcut-keys')
-            .selectAll('kbd')
-            .data(function (d) { return d.shortcut; })
+            .attr('class', 'shortcut-keys');
+
+        var modifierKeys = shortcutKeys
+            .filter(function (d) { return d.modifiers; });
+
+        modifierKeys
+            .selectAll('kbd.modifier')
+            .data(function (d) { return d.modifiers; })
             .enter()
-            .append('kbd')
-            .text(function (d) {
-                return d.indexOf('.') !== -1 ? uiCmd(t(d)) : uiCmd(d);
+            .each(function () {
+                var selection = d3.select(this);
+                selection
+                    .append('kbd')
+                    .attr('class', 'modifier')
+                    .text(function (d) { return uiCmd.display(d); });
+
+                selection
+                    .append('span')
+                    .text('+');
             });
+
+
+        shortcutKeys
+            .selectAll('kbd.shortcut')
+            .data(function (d) { return d.shortcuts; })
+            .enter()
+            .each(function (d, i, nodes) {
+                var selection = d3.select(this);
+                selection
+                    .append('kbd')
+                    .attr('class', 'shortcut')
+                    .text(function (d) {
+                        return d.indexOf('.') !== -1 ? uiCmd.display(t(d)) : uiCmd.display(d);
+                    });
+
+                if (i < nodes.length - 1) {
+                    selection
+                        .append('span')
+                        .text(',');
+                }
+            });
+
 
         shortcutRows
             .append('td')
