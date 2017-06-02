@@ -67,6 +67,7 @@ export function rendererBackground(context) {
 
         if (id) {
             q.background = id;
+            context.storage('background', q.background);
         } else {
             delete q.background;
         }
@@ -230,6 +231,7 @@ export function rendererBackground(context) {
             q = utilStringQs(window.location.hash.substring(1)),
             chosen = q.background || q.layer,
             extent = parseMap(q.map),
+            validRecent,
             best;
 
         backgroundSources = dataImagery.map(function(source) {
@@ -243,13 +245,18 @@ export function rendererBackground(context) {
         backgroundSources.unshift(rendererBackgroundSource.None());
 
         if (!chosen && extent) {
-            best = _.find(this.sources(extent), function(s) { return s.best(); });
+            var recent = findSource(context.storage('background'));
+            if (recent && recent.intersects(extent)) {
+                validRecent = recent;
+            } else {
+                best = _.find(this.sources(extent), function(s) { return s.best(); });
+            }
         }
 
         if (chosen && chosen.indexOf('custom:') === 0) {
             background.baseLayerSource(rendererBackgroundSource.Custom(chosen.replace(/^custom:/, '')));
         } else {
-            background.baseLayerSource(findSource(chosen) || best || findSource('Bing') || backgroundSources[1] || backgroundSources[0]);
+            background.baseLayerSource(findSource(chosen) || validRecent || best || findSource('Bing') || backgroundSources[1] || backgroundSources[0]);
         }
 
         var locator = _.find(backgroundSources, function(d) {
