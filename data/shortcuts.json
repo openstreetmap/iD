@@ -99,7 +99,7 @@
                         "shortcut": ["}", "⇟ End"],
                         "text": "shortcuts.browsing.vertex_selected.last"
                     }, {
-                        "shortcut": ["\\", "↨ Pause"],
+                        "shortcut": ["\\", "Pause"],
                         "text": "shortcuts.browsing.vertex_selected.change_parent"
                     }
 
