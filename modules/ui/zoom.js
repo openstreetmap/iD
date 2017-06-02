@@ -71,10 +71,20 @@ export function uiZoom(context) {
 
         var keybinding = d3keybinding('zoom');
 
-        _.each(['=','ffequals','plus','ffplus'], function(key) {
+
+       // match '+' as-is (no '⇧', because '⇧+' is '?' on some non-US keyboards)
+       _.each(['plus','ffplus'], function(key) {
+            keybinding.on([key], zoomIn);
+            keybinding.on([uiCmd('⌘' + key)], zoomInFurther);
+        });
+
+        // also match '=' and '⇧=' as a plus
+        _.each(['=','ffequals'], function(key) {
             keybinding.on([key, '⇧' + key], zoomIn);
             keybinding.on([uiCmd('⌘' + key), uiCmd('⌘⇧' + key)], zoomInFurther);
         });
+
+        // match '-' and '⇧-' as a minus
         _.each(['-','ffminus','dash'], function(key) {
             keybinding.on([key, '⇧' + key], zoomOut);
             keybinding.on([uiCmd('⌘' + key), uiCmd('⌘⇧' + key)], zoomOutFurther);
