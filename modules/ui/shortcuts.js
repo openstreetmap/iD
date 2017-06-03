@@ -1,9 +1,11 @@
 import * as d3 from 'd3';
+
+import { t } from '../util/locale';
+import { d3keybinding } from '../lib/d3.keybinding.js';
+import { dataShortcuts } from '../../data';
+import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
 import { uiModal } from './modal';
-import { d3keybinding } from '../lib/d3.keybinding.js';
-import { t } from '../util/locale';
-import { dataShortcuts } from '../../data';
 
 
 export function uiShortcuts() {
@@ -113,6 +115,7 @@ export function uiShortcuts() {
             .append('tr')
             .attr('class', 'shortcut-row');
 
+
         var sectionRows = rowsEnter
             .filter(function (d) { return !d.shortcuts; });
 
@@ -124,6 +127,7 @@ export function uiShortcuts() {
             .attr('class', 'shortcut-section')
             .append('h3')
             .text(function (d) { return t(d.text); });
+
 
         var shortcutRows = rowsEnter
             .filter(function (d) { return d.shortcuts; });
@@ -141,6 +145,7 @@ export function uiShortcuts() {
             .enter()
             .each(function () {
                 var selection = d3.select(this);
+
                 selection
                     .append('kbd')
                     .attr('class', 'modifier')
@@ -154,22 +159,53 @@ export function uiShortcuts() {
 
         shortcutKeys
             .selectAll('kbd.shortcut')
-            .data(function (d) { return d.shortcuts; })
+            .data(function (d) {
+                return d.shortcuts.map(function(s) {
+                    return {
+                        shortcut: s,
+                        separator: d.separator
+                    };
+                });
+            })
             .enter()
             .each(function (d, i, nodes) {
                 var selection = d3.select(this);
-                selection
-                    .append('kbd')
-                    .attr('class', 'shortcut')
-                    .text(function (d) {
-                        return d.indexOf('.') !== -1 ? uiCmd.display(t(d)) : uiCmd.display(d);
-                    });
+                var click = d.shortcut.toLowerCase().match(/(.*).click/);
+
+                if (click && click[1]) {
+                    selection
+                        .call(svgIcon('#walkthrough-mouse', 'mouseclick', click[1]));
+                } else {
+                    selection
+                        .append('kbd')
+                        .attr('class', 'shortcut')
+                        .text(function (d) {
+                            var key = d.shortcut;
+                            return key.indexOf('.') !== -1 ? uiCmd.display(t(key)) : uiCmd.display(key);
+                        });
+                }
 
                 if (i < nodes.length - 1) {
                     selection
                         .append('span')
-                        .text(',');
+                        .text(d.separator || '\u00a0' + t('shortcuts.or') + '\u00a0');
                 }
+            });
+
+
+        shortcutKeys
+            .filter(function(d) { return d.gesture; })
+            .each(function () {
+                var selection = d3.select(this);
+
+                selection
+                    .append('span')
+                    .text('+');
+
+                selection
+                    .append('span')
+                    .attr('class', 'gesture')
+                    .text(function (d) { return t(d.gesture); });
             });
 
 

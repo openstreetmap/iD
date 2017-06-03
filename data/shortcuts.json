@@ -10,18 +10,22 @@
                         "text": "shortcuts.browsing.navigation.title"
                     }, {
                         "shortcuts": ["↓", "↑", "←", "→"],
-                        "text": "shortcuts.browsing.navigation.pan"
+                        "text": "shortcuts.browsing.navigation.pan",
+                        "separator": ","
                     }, {
                         "modifiers": ["⇧"],
                         "shortcuts": ["↓", "↑", "←", "→"],
-                        "text": "shortcuts.browsing.navigation.pan_more"
+                        "text": "shortcuts.browsing.navigation.pan_more",
+                        "separator": ","
                     }, {
                         "shortcuts": ["+", "-"],
-                        "text": "shortcuts.browsing.navigation.zoom"
+                        "text": "shortcuts.browsing.navigation.zoom",
+                        "separator": ","
                     }, {
                         "modifiers": ["⇧"],
                         "shortcuts": ["+", "-"],
-                        "text": "shortcuts.browsing.navigation.zoom_more"
+                        "text": "shortcuts.browsing.navigation.zoom_more",
+                        "separator": ","
                     },
 
                     {
@@ -70,7 +74,8 @@
                         "text": "shortcuts.browsing.selecting.select_multi"
                     }, {
                         "modifiers": ["⇧"],
-                        "shortcuts": ["Left-click + drag"],
+                        "shortcuts": ["Left-click"],
+                        "gesture": "shortcuts.drag",
                         "text": "shortcuts.browsing.selecting.lasso"
                     }, {
                         "shortcuts": [],
