@@ -86,12 +86,12 @@
                         "section": "with_selected",
                         "text": "shortcuts.browsing.with_selected.title"
                     }, {
+                        "shortcuts": ["Right-click", "Space"],
+                        "text": "shortcuts.browsing.with_selected.edit_menu"
+                    }, {
                         "modifiers": ["⌘"],
                         "shortcuts": ["I"],
                         "text": "shortcuts.browsing.with_selected.infobox"
-                    }, {
-                        "shortcuts": ["Right-click", "Space"],
-                        "text": "shortcuts.browsing.with_selected.edit_menu"
                     },
 
                     {
