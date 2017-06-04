@@ -46338,8 +46338,9 @@
                 19
             ],
             "terms_url": "https://openstreetmap.org/",
-            "terms_text": "© OpenStreetMap contributors, CC-BY-SA"
-            
+            "terms_text": "© OpenStreetMap contributors, CC-BY-SA",
+			"default": true
+           
         },
         {
             "id": "OpenStreetMap-turistautak",
