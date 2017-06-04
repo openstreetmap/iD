@@ -6,12 +6,15 @@ import { dataShortcuts } from '../../data';
 import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
 import { uiModal } from './modal';
+import { utilDetect } from '../util/detect';
 
 
 export function uiShortcuts() {
+    var detected = utilDetect();
     var activeTab = 0;
     var modalSelection;
     var savedSelection;
+
 
     var keybinding = d3keybinding('shortcuts')
         .on(['?', '⇧/'], function () {
@@ -141,7 +144,13 @@ export function uiShortcuts() {
 
         modifierKeys
             .selectAll('kbd.modifier')
-            .data(function (d) { return d.modifiers; })
+            .data(function (d) {
+                if (detected.os === 'win' && d.text === 'shortcuts.editing.commands.redo') {
+                    return ['⌘'];
+                } else {
+                    return d.modifiers;
+                }
+            })
             .enter()
             .each(function () {
                 var selection = d3.select(this);
@@ -160,6 +169,14 @@ export function uiShortcuts() {
         shortcutKeys
             .selectAll('kbd.shortcut')
             .data(function (d) {
+                var arr;
+                if (detected.os === 'win' && d.text === 'shortcuts.editing.commands.redo') {
+                    return [{
+                        shortcut: 'Y',
+                        separator: d.separator
+                    }];
+                }
+
                 return d.shortcuts.map(function(s) {
                     return {
                         shortcut: s,
