@@ -18,22 +18,25 @@ export function uiShortcuts() {
 
     var keybinding = d3keybinding('shortcuts')
         .on(['?', '⇧/'], function () {
-            if (modalSelection) {
-                modalSelection.close();
-                modalSelection = null;
-                return;
+            if (d3.selectAll('.modal-shortcuts').size()) {  // already showing
+                if (modalSelection) {
+                    modalSelection.close();
+                    modalSelection = null;
+                }
+            } else {
+                modalSelection = uiModal(savedSelection);
+                shortcutsModal(modalSelection);
             }
-            modalSelection = uiModal(savedSelection);
-            shortcutsModal(modalSelection);
         });
 
     d3.select(document)
         .call(keybinding);
 
 
+
     function shortcutsModal(modalSelection) {
         modalSelection.select('.modal')
-        .attr('class', 'modal modal-shortcuts fillL col6');
+            .classed('modal-shortcuts', true);
 
         var shortcutsModal = modalSelection.select('.content');
 
@@ -169,7 +172,6 @@ export function uiShortcuts() {
         shortcutKeys
             .selectAll('kbd.shortcut')
             .data(function (d) {
-                var arr;
                 if (detected.os === 'win' && d.text === 'shortcuts.editing.commands.redo') {
                     return [{
                         shortcut: 'Y',
