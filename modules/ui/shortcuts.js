@@ -1,34 +1,42 @@
 import * as d3 from 'd3';
+
+import { t } from '../util/locale';
+import { d3keybinding } from '../lib/d3.keybinding.js';
+import { dataShortcuts } from '../../data';
+import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
 import { uiModal } from './modal';
-import { d3keybinding } from '../lib/d3.keybinding.js';
-import { t } from '../util/locale';
-import { dataShortcuts } from '../../data';
+import { utilDetect } from '../util/detect';
 
 
 export function uiShortcuts() {
+    var detected = utilDetect();
     var activeTab = 0;
     var modalSelection;
     var savedSelection;
 
+
     var keybinding = d3keybinding('shortcuts')
         .on(['?', '⇧/'], function () {
-            if (modalSelection) {
-                modalSelection.close();
-                modalSelection = null;
-                return;
+            if (d3.selectAll('.modal-shortcuts').size()) {  // already showing
+                if (modalSelection) {
+                    modalSelection.close();
+                    modalSelection = null;
+                }
+            } else {
+                modalSelection = uiModal(savedSelection);
+                shortcutsModal(modalSelection);
             }
-            modalSelection = uiModal(savedSelection);
-            shortcutsModal(modalSelection);
         });
 
     d3.select(document)
         .call(keybinding);
 
 
+
     function shortcutsModal(modalSelection) {
         modalSelection.select('.modal')
-        .attr('class', 'modal modal-shortcuts fillL col6');
+            .classed('modal-shortcuts', true);
 
         var shortcutsModal = modalSelection.select('.content');
 
@@ -113,8 +121,9 @@ export function uiShortcuts() {
             .append('tr')
             .attr('class', 'shortcut-row');
 
+
         var sectionRows = rowsEnter
-            .filter(function (d) { return !d.shortcut; });
+            .filter(function (d) { return !d.shortcuts; });
 
         sectionRows
             .append('td');
@@ -125,19 +134,99 @@ export function uiShortcuts() {
             .append('h3')
             .text(function (d) { return t(d.text); });
 
-        var shortcutRows = rowsEnter
-            .filter(function (d) { return d.shortcut; });
 
-        shortcutRows
+        var shortcutRows = rowsEnter
+            .filter(function (d) { return d.shortcuts; });
+
+        var shortcutKeys = shortcutRows
             .append('td')
-            .attr('class', 'shortcut-keys')
-            .selectAll('kbd')
-            .data(function (d) { return d.shortcut; })
+            .attr('class', 'shortcut-keys');
+
+        var modifierKeys = shortcutKeys
+            .filter(function (d) { return d.modifiers; });
+
+        modifierKeys
+            .selectAll('kbd.modifier')
+            .data(function (d) {
+                if (detected.os === 'win' && d.text === 'shortcuts.editing.commands.redo') {
+                    return ['⌘'];
+                } else {
+                    return d.modifiers;
+                }
+            })
             .enter()
-            .append('kbd')
-            .text(function (d) {
-                return d.indexOf('.') !== -1 ? uiCmd(t(d)) : uiCmd(d);
+            .each(function () {
+                var selection = d3.select(this);
+
+                selection
+                    .append('kbd')
+                    .attr('class', 'modifier')
+                    .text(function (d) { return uiCmd.display(d); });
+
+                selection
+                    .append('span')
+                    .text('+');
             });
+
+
+        shortcutKeys
+            .selectAll('kbd.shortcut')
+            .data(function (d) {
+                if (detected.os === 'win' && d.text === 'shortcuts.editing.commands.redo') {
+                    return [{
+                        shortcut: 'Y',
+                        separator: d.separator
+                    }];
+                }
+
+                return d.shortcuts.map(function(s) {
+                    return {
+                        shortcut: s,
+                        separator: d.separator
+                    };
+                });
+            })
+            .enter()
+            .each(function (d, i, nodes) {
+                var selection = d3.select(this);
+                var click = d.shortcut.toLowerCase().match(/(.*).click/);
+
+                if (click && click[1]) {
+                    selection
+                        .call(svgIcon('#walkthrough-mouse', 'mouseclick', click[1]));
+                } else {
+                    selection
+                        .append('kbd')
+                        .attr('class', 'shortcut')
+                        .text(function (d) {
+                            var key = d.shortcut;
+                            return key.indexOf('.') !== -1 ? uiCmd.display(t(key)) : uiCmd.display(key);
+                        });
+                }
+
+                if (i < nodes.length - 1) {
+                    selection
+                        .append('span')
+                        .text(d.separator || '\u00a0' + t('shortcuts.or') + '\u00a0');
+                }
+            });
+
+
+        shortcutKeys
+            .filter(function(d) { return d.gesture; })
+            .each(function () {
+                var selection = d3.select(this);
+
+                selection
+                    .append('span')
+                    .text('+');
+
+                selection
+                    .append('span')
+                    .attr('class', 'gesture')
+                    .text(function (d) { return t(d.gesture); });
+            });
+
 
         shortcutRows
             .append('td')

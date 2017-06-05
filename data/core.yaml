@@ -1018,6 +1018,8 @@ en:
       start: "Start mapping!"
   shortcuts:
     title: "Keyboard shortcuts"
+    or: "-or-"
+    drag: drag
     browsing:
       title: "Browsing"
       navigation:
