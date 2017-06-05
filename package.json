@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "brfs": "1.4.3",
-    "chai": "~3.5.0",
+    "chai": "~4.0.2",
     "d3": "4.9.1",
     "ecstatic": "~2.1.0",
     "editor-layer-index": "osmlab/editor-layer-index.git#gh-pages",
