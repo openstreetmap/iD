@@ -4,3 +4,13 @@ node_js:
   - "6"
   - "7"
 sudo: false
+
+script:
+  - npm test
+  - if ! git diff --patch --stat --color=never --exit-code; then
+        echo "";
+        echo "#### You can apply this patch via:";
+        echo "git apply -";
+        echo "git commit --all --message 'fix up generated files via `npm run build`'";
+        false;
+    fi >&2
