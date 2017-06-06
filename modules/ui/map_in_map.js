@@ -325,7 +325,7 @@ export function uiMapInMap(context) {
         redraw();
 
         var keybinding = d3keybinding('map-in-map')
-            .on([key, '⇧'+key], toggle);
+            .on([key], toggle);
 
         d3.select(document)
             .call(keybinding);

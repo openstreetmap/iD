@@ -10,6 +10,7 @@ import { utilDetect } from '../util/detect';
 
 
 export function uiShortcuts() {
+    var key = '?';
     var detected = utilDetect();
     var activeTab = 0;
     var modalSelection;
@@ -17,7 +18,7 @@ export function uiShortcuts() {
 
 
     var keybinding = d3keybinding('shortcuts')
-        .on(['?', '⇧/'], function () {
+        .on([key], function () {
             if (d3.selectAll('.modal-shortcuts').size()) {  // already showing
                 if (modalSelection) {
                     modalSelection.close();
