@@ -202,7 +202,7 @@ d3keybinding.keys = {
     // Up Arrow Key, or ↑
     '↑': ['ArrowUp', 'Up'], up: ['ArrowUp', 'Up'], 'arrow-up': ['ArrowUp', 'Up'],
     // Right Arrow Key, or →
-    '→': ['ArrowRight', 'Right'], right: ['ArrowDown', 'Down'], 'arrow-right': ['ArrowDown', 'Down'],
+    '→': ['ArrowRight', 'Right'], right: ['ArrowRight', 'Right'], 'arrow-right': ['ArrowRight', 'Right'],
     // Up Arrow Key, or ↓
     '↓': ['ArrowDown', 'Down'], down: ['ArrowDown', 'Down'], 'arrow-down': ['ArrowDown', 'Down'],
     // odities, stuff for backward compatibility (browsers and code):
