@@ -14,43 +14,72 @@ import _ from 'lodash';
 export function d3keybinding(namespace) {
     var bindings = [];
 
-    function matches(binding, event) {
-        if (event.key !== undefined) {
-            if (binding.event.key === undefined) {
-                return false;
-            } else if (_.isArray(binding.event.key)) {
-                if (binding.event.key.map(function(s) { return s.toLowerCase(); }).indexOf(event.key.toLowerCase()) === -1)
-                    return false;
-            } else {
-                if (event.key.toLowerCase() !== binding.event.key.toLowerCase())
-                    return false;
-            }
-        } else {
-            // check keycodes if browser doesn't support KeyboardEvent.key
-            if (event.keyCode !== binding.event.keyCode)
-                return false;
-        }
-        // check modifier keys
-        for (var p in binding.event.modifiers) {
-            if (event[p] !== binding.event.modifiers[p])
-                return false;
-        }
-        return true;
-    }
 
     function testBindings(isCapturing) {
-        for (var i = 0; i < bindings.length; i++) {
-            var binding = bindings[i];
+        var didMatch = false,
+            i, binding;
 
-            if (!!binding.capture === isCapturing && matches(binding, d3.event)) {
+        // Most key shortcuts will accept either lower or uppercase ('h' or 'H'),
+        // so we don't strictly match on the shift key, but we prioritize
+        // shifted bindings first, and fallback to unshifted only if no match.
+        // (This lets us differentiate between '←'/'⇧←' or '⌘Z'/'⌘⇧Z')
+
+        // priority match shifted bindings first
+        for (i = 0; i < bindings.length; i++) {
+            binding = bindings[i];
+            if (!binding.event.modifiers.shiftKey) continue;  // no shift
+            if (!!binding.capture !== isCapturing) continue;
+            if (matches(binding, true)) {
+                binding.callback();
+                didMatch = true;
+            }
+        }
+
+        // then unshifted bindings
+        if (didMatch) return;
+        for (i = 0; i < bindings.length; i++) {
+            binding = bindings[i];
+            if (binding.event.modifiers.shiftKey) continue;   // shift
+            if (!!binding.capture !== isCapturing) continue;
+            if (matches(binding, false)) {
                 binding.callback();
             }
         }
+
+
+        function matches(binding, testShift) {
+            var event = d3.event;
+            if (event.key !== undefined) {
+                if (binding.event.key === undefined) {
+                    return false;
+                } else if (_.isArray(binding.event.key)) {
+                    if (binding.event.key.map(function(s) { return s.toLowerCase(); }).indexOf(event.key.toLowerCase()) === -1)
+                        return false;
+                } else {
+                    if (event.key.toLowerCase() !== binding.event.key.toLowerCase())
+                        return false;
+                }
+            } else {
+                // check keycodes if browser doesn't support KeyboardEvent.key
+                if (event.keyCode !== binding.event.keyCode)
+                    return false;
+            }
+
+            // test modifier keys
+            if (event.ctrlKey !== binding.event.modifiers.ctrlKey) return false;
+            if (event.altKey !== binding.event.modifiers.altKey) return false;
+            if (event.metaKey !== binding.event.modifiers.metaKey) return false;
+            if (testShift && event.shiftKey !== binding.event.modifiers.shiftKey) return false;
+
+            return true;
+        }
     }
+
 
     function capture() {
         testBindings(true);
     }
+
 
     function bubble() {
         var tagName = d3.select(d3.event.target).node().tagName;
@@ -60,12 +89,14 @@ export function d3keybinding(namespace) {
         testBindings(false);
     }
 
+
     function keybinding(selection) {
         selection = selection || d3.select(document);
         selection.on('keydown.capture' + namespace, capture, true);
         selection.on('keydown.bubble' + namespace, bubble, false);
         return keybinding;
     }
+
 
     keybinding.off = function(selection) {
         bindings = [];
@@ -74,6 +105,7 @@ export function d3keybinding(namespace) {
         selection.on('keydown.bubble' + namespace, null);
         return keybinding;
     };
+
 
     keybinding.on = function(codes, callback, capture) {
         var arr = [].concat(codes);
