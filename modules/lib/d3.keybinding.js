@@ -130,7 +130,7 @@ export function d3keybinding(namespace) {
 
             for (var j = 0; j < code.length; j++) {
                 // Normalise matching errors
-                if (code[j] === '++') code[i] = '+';
+                if (code[j] === '++') code[j] = '+';
 
                 if (code[j] in d3keybinding.modifierCodes) {
                     binding.event.modifiers[d3keybinding.modifierProperties[d3keybinding.modifierCodes[code[j]]]] = true;
