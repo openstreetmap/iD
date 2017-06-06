@@ -885,8 +885,29 @@
         },
         "shortcuts": {
             "title": "Keyboard shortcuts",
+            "key": {
+                "alt": "Alt",
+                "backspace": "Backspace",
+                "cmd": "Cmd",
+                "ctrl": "Ctrl",
+                "delete": "Delete",
+                "del": "Del",
+                "end": "End",
+                "enter": "Enter",
+                "esc": "Esc",
+                "home": "Home",
+                "option": "Option",
+                "pause": "Pause",
+                "pgdn": "PgDn",
+                "pgup": "PgUp",
+                "return": "Return",
+                "shift": "Shift",
+                "space": "Space"
+            },
+            "gesture": {
+                "drag": "drag"
+            },
             "or": "-or-",
-            "drag": "drag",
             "browsing": {
                 "title": "Browsing",
                 "navigation": {

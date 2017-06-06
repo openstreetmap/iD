@@ -79,7 +79,7 @@
                     }, {
                         "modifiers": ["⇧"],
                         "shortcuts": ["Left-click"],
-                        "gesture": "shortcuts.drag",
+                        "gesture": "shortcuts.gesture.drag",
                         "text": "shortcuts.browsing.selecting.lasso"
                     }, {
                         "shortcuts": [],
@@ -90,7 +90,7 @@
                         "section": "with_selected",
                         "text": "shortcuts.browsing.with_selected.title"
                     }, {
-                        "shortcuts": ["Right-click", "Space"],
+                        "shortcuts": ["Right-click", "shortcuts.key.space"],
                         "text": "shortcuts.browsing.with_selected.edit_menu"
                     }, {
                         "modifiers": ["⌘"],
@@ -114,7 +114,7 @@
                         "shortcuts": ["}", "⇟"],
                         "text": "shortcuts.browsing.vertex_selected.last"
                     }, {
-                        "shortcuts": ["\\", "Pause"],
+                        "shortcuts": ["\\", "shortcuts.key.pause"],
                         "text": "shortcuts.browsing.vertex_selected.change_parent"
                     }
 
@@ -140,7 +140,7 @@
                         "shortcuts": ["3"],
                         "text": "shortcuts.editing.drawing.add_area"
                     }, {
-                        "shortcuts": ["Space"],
+                        "shortcuts": ["shortcuts.key.space"],
                         "text": "shortcuts.editing.drawing.place_point"
                     }, {
                         "shortcuts": ["⌥"],

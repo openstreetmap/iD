@@ -1,3 +1,4 @@
+import { t } from '../util/locale';
 import { utilDetect } from '../util/detect';
 
 // Translate a MacOS key command into the appropriate Windows/Linux equivalent.
@@ -41,17 +42,17 @@ uiCmd.display = function(code) {
     var detected = utilDetect();
     var mac = (detected.os === 'mac');
     var replacements = {
-        '⌘': mac ? '⌘ Cmd'       : 'Ctrl',
-        '⇧': mac ? '⇧ Shift'     : 'Shift',
-        '⌥': mac ? '⌥ Option'    : 'Alt',
-        '⌫': mac ? '⌫ Delete'    : 'Backspace',
-        '⌦': mac ? '⌦ Del'       : 'Del',
-        '↖': mac ? '↖ PgUp'      : 'PgUp',
-        '↘': mac ? '↘ PgDn'      : 'PgDn',
-        '⇞': mac ? '⇞ Home'      : 'Home',
-        '⇟': mac ? '⇟ End'       : 'End',
-        '↵': mac ? '↵ Return'    : 'Enter',
-        '⎋': mac ? '⎋ Esc'       : 'Esc',
+        '⌘': mac ? '⌘ ' + t('shortcuts.key.cmd')    : t('shortcuts.key.ctrl'),
+        '⇧': mac ? '⇧ ' + t('shortcuts.key.shift')  : t('shortcuts.key.shift'),
+        '⌥': mac ? '⌥ ' + t('shortcuts.key.option') : t('shortcuts.key.alt'),
+        '⌫': mac ? '⌫ ' + t('shortcuts.key.delete') : t('shortcuts.key.backspace'),
+        '⌦': mac ? '⌦ ' + t('shortcuts.key.del')    : t('shortcuts.key.del'),
+        '↖': mac ? '↖ ' + t('shortcuts.key.pgup')   : t('shortcuts.key.pgup'),
+        '↘': mac ? '↘ ' + t('shortcuts.key.pgdn')   : t('shortcuts.key.pgdn'),
+        '⇞': mac ? '⇞ ' + t('shortcuts.key.home')   : t('shortcuts.key.home'),
+        '⇟': mac ? '⇟ ' + t('shortcuts.key.end')    : t('shortcuts.key.end'),
+        '↵': mac ? '↵ ' + t('shortcuts.key.return') : t('shortcuts.key.enter'),
+        '⎋': mac ? '⎋ ' + t('shortcuts.key.esc')    : t('shortcuts.key.esc'),
     };
 
     return replacements[code] || code;
