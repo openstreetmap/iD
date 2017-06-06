@@ -53,6 +53,10 @@
                         "shortcuts": ["F"],
                         "text": "shortcuts.browsing.display_options.map_data"
                     }, {
+                        "modifiers": ["⌘", "⇧"],
+                        "shortcuts": ["F"],
+                        "text": "shortcuts.browsing.display_options.fullscreen"
+                    }, {
                         "shortcuts": ["W"],
                         "text": "shortcuts.browsing.display_options.wireframe"
                     }, {

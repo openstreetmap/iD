@@ -1037,6 +1037,7 @@ en:
         background: "Show background options"
         background_switch: "Switch back to last background"
         map_data: "Show map data options"
+        fullscreen: "Enter full screen mode"
         wireframe: "Toggle wireframe mode"
         minimap: "Toggle minimap"
       selecting:
