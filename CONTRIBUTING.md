@@ -112,9 +112,9 @@ with stable releases. Issues that are marked fixed in the tracker may still be p
 ## Translating
 
 Translations are managed using the
-[Transifex](https://www.transifex.com/ideditor/id-editor/) platform. After
+[Transifex](https://www.transifex.com/openstreetmap/id-editor/) platform. After
 signing up, you can go to [iD's project
-page](https://www.transifex.com/ideditor/id-editor/), select a language and
+page](https://www.transifex.com/openstreetmap/id-editor/), select a language and
 click *Translate now* to start translating. Translations are divided into two
 sections, *core*, which contains text for the main interface of iD, and
 *presets*, which has the text for labeling feature presets.
@@ -133,7 +133,7 @@ You can check your translations in the [master deployment](http://preview.idedit
 (http://preview.ideditor.com/master/), which is updated every 10 minutes with the
 latest code and translation strings.
 
-[iD translation project on Transifex](https://www.transifex.com/ideditor/id-editor/)
+[iD translation project on Transifex](https://www.transifex.com/openstreetmap/id-editor/)
 
 To get notifications when translation source files change, click **Watch
 project** button near the bottom of the project page. You can edit your
