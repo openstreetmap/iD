@@ -3138,6 +3138,11 @@ img.tile-removing {
     color: #767676;
     text-align: right;
 }
+[dir='rtl'] .modal-shortcuts .shortcut-keys {
+    padding-right: auto;
+    padding-left: 10px;
+    text-align: left;
+}
 
 .modal-shortcuts .shortcut-keys kbd {
     display: inline-block;
@@ -4113,12 +4118,3 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     top: 0;
 }
 
-/* shortcuts modal */
-
-[dir='rtl'] .kbd-row {
-    padding-left: 10px;
-    color: #767676;
-    text-align: left;
-    padding-bottom: 5px;
-    width: 50%;
-}
