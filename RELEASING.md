@@ -2,7 +2,7 @@
 
 ### Prerelease (several days prior)
 - Notify translators of impending release
-  (https://www.transifex.com/openstreetmap/id-editor/announcements/)
+  (https://www.transifex.com/projects/p/id-editor/announcements/)
 - Notify TomH
 
 ### Prep
