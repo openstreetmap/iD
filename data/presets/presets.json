@@ -4240,6 +4240,27 @@
             },
             "name": "Confectionery"
         },
+        "craft/distillery": {
+            "icon": "beer",
+            "fields": [
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "beer",
+                "bier"
+            ],
+            "tags": {
+                "craft": "distillery"
+            },
+            "name": "Distillery"
+        },
         "craft/dressmaker": {
             "icon": "clothing-store",
             "fields": [

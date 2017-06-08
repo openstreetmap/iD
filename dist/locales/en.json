@@ -3035,6 +3035,10 @@
                     "name": "Confectionery",
                     "terms": "sweets,candy"
                 },
+                "craft/distillery": {
+                    "name": "Distillery",
+                    "terms": "beer,bier"
+                },
                 "craft/dressmaker": {
                     "name": "Dressmaker",
                     "terms": "seamstress"
