@@ -4240,6 +4240,32 @@
             },
             "name": "Confectionery"
         },
+        "craft/distillery": {
+            "icon": "poi-storage-tank",
+            "fields": [
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "beer",
+                "bier",
+                "non-beer",
+                "spirits",
+                "liquor",
+                "hard alcohol",
+                "beverage"
+            ],
+            "tags": {
+                "craft": "distillery"
+            },
+            "name": "Distillery"
+        },
         "craft/dressmaker": {
             "icon": "clothing-store",
             "fields": [

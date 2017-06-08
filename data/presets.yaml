@@ -2277,6 +2277,11 @@ en:
         name: Confectionery
         # 'terms: sweets,candy'
         terms: '<translate with synonyms or related terms for ''Confectionery'', separated by commas>'
+      craft/distillery:
+        # craft=distillery
+        name: Distillery
+        # 'terms: beer,bier,non-beer,spirits,liquor,hard alcohol,beverage'
+        terms: '<translate with synonyms or related terms for ''Distillery'', separated by commas>'
       craft/dressmaker:
         # craft=dressmaker
         name: Dressmaker
