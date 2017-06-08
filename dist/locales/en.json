@@ -3013,7 +3013,7 @@
                 },
                 "craft/brewery": {
                     "name": "Brewery",
-                    "terms": "beer,bier"
+                    "terms": "alcohol,beer,beverage,bier,booze,cider"
                 },
                 "craft/carpenter": {
                     "name": "Carpenter",
@@ -3037,7 +3037,7 @@
                 },
                 "craft/distillery": {
                     "name": "Distillery",
-                    "terms": "beer,bier,non-beer,spirits,liquor,hard alcohol,beverage"
+                    "terms": "alcohol,beverage,bourbon,booze,brandy,gin,hooch,liquor,mezcal,moonshine,rum,scotch,spirits,still,tequila,vodka,whiskey,whisky"
                 },
                 "craft/dressmaker": {
                     "name": "Dressmaker",

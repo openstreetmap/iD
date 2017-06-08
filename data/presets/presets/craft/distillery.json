@@ -4,20 +4,32 @@
         "operator",
         "address",
         "building_area",
-        "opening_hours"
+        "opening_hours",
+        "product"
     ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-        "beer",
-        "bier",
-        "non-beer",
-        "spirits",
+        "alcohol",
+        "beverage",
+        "bourbon",
+        "booze",
+        "brandy",
+        "gin",
+        "hooch",
         "liquor",
-        "hard alcohol",
-        "beverage"
+        "mezcal",
+        "moonshine",
+        "rum",
+        "scotch",
+        "spirits",
+        "still",
+        "tequila",
+        "vodka",
+        "whiskey",
+        "whisky"
     ],
     "tags": {
         "craft": "distillery"

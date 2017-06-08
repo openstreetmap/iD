@@ -2253,7 +2253,7 @@ en:
       craft/brewery:
         # craft=brewery
         name: Brewery
-        # 'terms: beer,bier'
+        # 'terms: alcohol,beer,beverage,bier,booze,cider'
         terms: '<translate with synonyms or related terms for ''Brewery'', separated by commas>'
       craft/carpenter:
         # craft=carpenter
@@ -2280,7 +2280,7 @@ en:
       craft/distillery:
         # craft=distillery
         name: Distillery
-        # 'terms: beer,bier,non-beer,spirits,liquor,hard alcohol,beverage'
+        # 'terms: alcohol,beverage,bourbon,booze,brandy,gin,hooch,liquor,mezcal,moonshine,rum,scotch,spirits,still,tequila,vodka,whiskey,whisky'
         terms: '<translate with synonyms or related terms for ''Distillery'', separated by commas>'
       craft/dressmaker:
         # craft=dressmaker

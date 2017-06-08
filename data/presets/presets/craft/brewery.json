@@ -1,18 +1,23 @@
 {
-    "icon": "beer",
+    "icon": "poi-storage-tank",
     "fields": [
         "operator",
         "address",
         "building_area",
-        "opening_hours"
+        "opening_hours",
+        "product"
     ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
+        "alcohol",
         "beer",
-        "bier"
+        "beverage",
+        "bier",
+        "booze",
+        "cider"
     ],
     "tags": {
         "craft": "brewery"
