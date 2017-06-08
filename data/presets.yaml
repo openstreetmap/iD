@@ -2280,7 +2280,7 @@ en:
       craft/distillery:
         # craft=distillery
         name: Distillery
-        # 'terms: beer,bier'
+        # 'terms: beer,bier,non-beer,spirits,liquor,hard alcohol,beverage'
         terms: '<translate with synonyms or related terms for ''Distillery'', separated by commas>'
       craft/dressmaker:
         # craft=dressmaker

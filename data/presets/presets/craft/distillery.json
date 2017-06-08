@@ -1,5 +1,5 @@
 {
-    "icon": "beer",
+    "icon": "poi-storage-tank",
     "fields": [
         "operator",
         "address",
@@ -12,7 +12,12 @@
     ],
     "terms": [
         "beer",
-        "bier"
+        "bier",
+        "non-beer",
+        "spirits",
+        "liquor",
+        "hard alcohol",
+        "beverage"
     ],
     "tags": {
         "craft": "distillery"

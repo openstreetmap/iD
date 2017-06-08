@@ -3037,7 +3037,7 @@
                 },
                 "craft/distillery": {
                     "name": "Distillery",
-                    "terms": "beer,bier"
+                    "terms": "beer,bier,non-beer,spirits,liquor,hard alcohol,beverage"
                 },
                 "craft/dressmaker": {
                     "name": "Dressmaker",
