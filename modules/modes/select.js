@@ -426,10 +426,10 @@ export function modeSelect(context, selectedIDs) {
         });
 
         keybinding
-            .on(['[','pgup'], previousVertex)
+            .on(['[', 'pgup'], previousVertex)
             .on([']', 'pgdown'], nextVertex)
-            .on([uiCmd('⌘['), 'home'], firstVertex)
-            .on([uiCmd('⌘]'), 'end'], lastVertex)
+            .on(['{', uiCmd('⌘['), 'home'], firstVertex)
+            .on(['}', uiCmd('⌘]'), 'end'], lastVertex)
             .on(['\\', 'pause'], nextParent)
             .on('⎋', esc, true)
             .on('space', toggleMenu);
