@@ -1018,6 +1018,7 @@ en:
       start: "Start mapping!"
   shortcuts:
     title: "Keyboard shortcuts"
+    tooltip: "Show the keyboard shortcuts screen."
     key:
       alt: Alt
       backspace: Backspace

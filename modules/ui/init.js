@@ -285,7 +285,7 @@ export function uiInit(context) {
             context.container()
                 .call(uiSplash(context))
                 .call(uiRestore(context))
-				.call(uiShortcuts(context));
+                .call(uiShortcuts(context));
         }
 
         var authenticating = uiLoading(context)

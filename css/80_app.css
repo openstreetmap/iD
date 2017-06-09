@@ -2417,16 +2417,20 @@ div.full-screen > button:hover {
     border-radius: 4px 4px 0 0;
 }
 
-.help-wrap .toc li:nth-last-child(2) a {
+.help-wrap .toc li:nth-last-child(3) a {
     border-bottom: 1px solid #CCC;
     border-radius: 0 0 4px 4px
 }
 
+.help-wrap .toc li.shortcuts a,
 .help-wrap .toc li.walkthrough a {
     overflow: hidden;
     margin-top: 10px;
     border-bottom: 1px solid #ccc;
     border-radius: 4px;
+}
+
+.help-wrap .toc li.walkthrough a {
     text-align: center;
 }
 
@@ -3531,6 +3535,9 @@ img.tile-removing {
 /* Uncramp map-control tooltips */
 .map-control .tooltip {
     min-width: 160px;
+}
+.map-control .shortcuts .tooltip {
+    max-width: 160px;
 }
 
 /* Move over tooltips that are near the edge of screen */
