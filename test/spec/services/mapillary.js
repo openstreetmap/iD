@@ -383,7 +383,8 @@ describe('iD.serviceMapillary', function() {
                     value: 'regulatory--maximum-speed-limit-65--g1',
                 };
 
-            expect(mapillary.signHTML(signdata)).to.eql('<div style="background-image:url(img/traffic-signs/traffic-signs.png);background-repeat:no-repeat;height:24px;width:24px;background-position-x:-576px;background-position-y:-528px"></div>');
+            var sprite = context.asset('img/traffic-signs/traffic-signs.png');
+            expect(mapillary.signHTML(signdata)).to.eql('<div style="background-image:url(' + sprite + ');background-repeat:no-repeat;height:24px;width:24px;background-position-x:-576px;background-position-y:-528px"></div>');
         });
     });
 

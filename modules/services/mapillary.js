@@ -21,6 +21,7 @@ var apibase = 'https://a.mapillary.com/v3/',
     mapillaryClicks,
     mapillaryImage,
     mapillarySignDefs,
+    mapillarySignSprite,
     mapillaryViewer;
 
 
@@ -124,10 +125,10 @@ function loadNextTilePage(which, currZoom, url, tile) {
             if (linkHeader) {
                 var pagination = parsePagination(xhr.getResponseHeader('Link'));
                 if (pagination.next) {
-                    cache.nextURL[tile.id] = pagination.next;  
+                    cache.nextURL[tile.id] = pagination.next;
                 }
             }
-            
+
             return JSON.parse(xhr.responseText); })
         .get(function(err, data) {
             cache.loaded[id] = true;
@@ -267,11 +268,11 @@ export default {
 
 
     signHTML: function(d) {
-        if (!mapillarySignDefs) return;
+        if (!mapillarySignDefs || !mapillarySignSprite) return;
         var position = mapillarySignDefs[d.value];
         if (!position) return '<div></div>';
         var iconStyle = [
-            'background-image:url(img/traffic-signs/traffic-signs.png)',
+            'background-image:url(' + mapillarySignSprite + ')',
             'background-repeat:no-repeat',
             'height:' + position.height + 'px',
             'width:' + position.width + 'px',
@@ -295,6 +296,7 @@ export default {
 
         // load traffic sign defs
         if (!mapillarySignDefs) {
+            mapillarySignSprite = context.asset('img/traffic-signs/traffic-signs.png');
             mapillarySignDefs = {};
             d3.json(context.asset('img/traffic-signs/traffic-signs.json'), function(err, data) {
                 if (err) return;
