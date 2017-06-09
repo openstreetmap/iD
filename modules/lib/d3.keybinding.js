@@ -66,8 +66,10 @@ export function d3keybinding(namespace) {
             }
 
             // test modifier keys
-            if (event.ctrlKey !== binding.event.modifiers.ctrlKey) return false;
-            if (event.altKey !== binding.event.modifiers.altKey) return false;
+            if (!(event.ctrlKey && event.altKey)) {  // if both are set, assume AltGr and skip it - #4096
+                if (event.ctrlKey !== binding.event.modifiers.ctrlKey) return false;
+                if (event.altKey !== binding.event.modifiers.altKey) return false;
+            }
             if (event.metaKey !== binding.event.modifiers.metaKey) return false;
             if (testShift && event.shiftKey !== binding.event.modifiers.shiftKey) return false;
 
