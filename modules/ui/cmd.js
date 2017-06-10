@@ -12,7 +12,6 @@ export var uiCmd = function (code) {
 
     if (detected.os === 'win') {
         if (code === '⌘⇧Z') return 'Ctrl+Y';
-        if (code === '⌃⌘F') return 'F11';
     }
 
     var result = '',

@@ -151,8 +151,8 @@ export function uiShortcuts() {
             .data(function (d) {
                 if (detected.os === 'win' && d.text === 'shortcuts.editing.commands.redo') {
                     return ['⌘'];
-                } else if (detected.os === 'win' && d.text === 'shortcuts.browsing.display_options.fullscreen') {
-                    return [];
+                } else if (detected.os === 'mac' && d.text === 'shortcuts.browsing.display_options.fullscreen') {
+                    return ["⌃", "⌘"];
                 } else {
                     return d.modifiers;
                 }
@@ -175,19 +175,14 @@ export function uiShortcuts() {
         shortcutKeys
             .selectAll('kbd.shortcut')
             .data(function (d) {
+                var arr = d.shortcuts;
                 if (detected.os === 'win' && d.text === 'shortcuts.editing.commands.redo') {
-                    return [{
-                        shortcut: 'Y',
-                        separator: d.separator
-                    }];
-                } else if (detected.os === 'win' && d.text === 'shortcuts.browsing.display_options.fullscreen') {
-                    return [{
-                        shortcut: 'F11',
-                        separator: d.separator
-                    }];
+                    arr = ['Y'];
+                } else if (detected.os === 'mac' && d.text === 'shortcuts.browsing.display_options.fullscreen') {
+                    arr = ['F', 'F11'];
                 }
 
-                return d.shortcuts.map(function(s) {
+                return arr.map(function(s) {
                     return {
                         shortcut: s,
                         separator: d.separator
