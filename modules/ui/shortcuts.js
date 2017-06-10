@@ -152,7 +152,7 @@ export function uiShortcuts() {
                 if (detected.os === 'win' && d.text === 'shortcuts.editing.commands.redo') {
                     return ['⌘'];
                 } else if (detected.os === 'mac' && d.text === 'shortcuts.browsing.display_options.fullscreen') {
-                    return ["⌃", "⌘"];
+                    return ['⌃', '⌘'];
                 } else {
                     return d.modifiers;
                 }
