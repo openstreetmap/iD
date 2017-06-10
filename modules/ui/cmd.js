@@ -12,6 +12,7 @@ export var uiCmd = function (code) {
 
     if (detected.os === 'win') {
         if (code === '⌘⇧Z') return 'Ctrl+Y';
+        if (code === '⌃⌘F') return 'F11';
     }
 
     var result = '',
@@ -45,6 +46,7 @@ uiCmd.display = function(code) {
         '⌘': mac ? '⌘ ' + t('shortcuts.key.cmd')    : t('shortcuts.key.ctrl'),
         '⇧': mac ? '⇧ ' + t('shortcuts.key.shift')  : t('shortcuts.key.shift'),
         '⌥': mac ? '⌥ ' + t('shortcuts.key.option') : t('shortcuts.key.alt'),
+        '⌃': mac ? '⌃ ' + t('shortcuts.key.ctrl')   : t('shortcuts.key.ctrl'),
         '⌫': mac ? '⌫ ' + t('shortcuts.key.delete') : t('shortcuts.key.backspace'),
         '⌦': mac ? '⌦ ' + t('shortcuts.key.del')    : t('shortcuts.key.del'),
         '↖': mac ? '↖ ' + t('shortcuts.key.pgup')   : t('shortcuts.key.pgup'),

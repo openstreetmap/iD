@@ -74,8 +74,7 @@ export function uiFullScreen(context) {
         //     .attr('class', 'icon full-screen');
 
         keybinding
-            .on('f11', fullScreen)
-            .on(uiCmd('⌘⇧F'), fullScreen);
+            .on([uiCmd('⌃⌘F'), 'f11'], fullScreen);
 
         d3.select(document)
             .call(keybinding);
