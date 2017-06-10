@@ -151,8 +151,8 @@ export function uiShortcuts() {
             .data(function (d) {
                 if (detected.os === 'win' && d.text === 'shortcuts.editing.commands.redo') {
                     return ['⌘'];
-                } else if (detected.os === 'mac' && d.text === 'shortcuts.browsing.display_options.fullscreen') {
-                    return ['⌃', '⌘'];
+                } else if (detected.os !== 'mac' && d.text === 'shortcuts.browsing.display_options.fullscreen') {
+                    return [];
                 } else {
                     return d.modifiers;
                 }
@@ -178,8 +178,8 @@ export function uiShortcuts() {
                 var arr = d.shortcuts;
                 if (detected.os === 'win' && d.text === 'shortcuts.editing.commands.redo') {
                     arr = ['Y'];
-                } else if (detected.os === 'mac' && d.text === 'shortcuts.browsing.display_options.fullscreen') {
-                    arr = ['F', 'F11'];
+                } else if (detected.os !== 'mac' && d.text === 'shortcuts.browsing.display_options.fullscreen') {
+                    arr = ['F11'];
                 }
 
                 return arr.map(function(s) {
