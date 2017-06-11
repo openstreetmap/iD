@@ -1,0 +1,13 @@
+[main]
+host = https://www.transifex.com
+minimum_perc = 1
+
+[id-editor.core]
+source_file = data/core.yaml
+source_lang = en
+type = YAML
+
+[id-editor.presets]
+source_file = data/presets.yaml
+source_lang = en
+type = YAML
