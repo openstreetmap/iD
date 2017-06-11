@@ -5,6 +5,7 @@ node_js:
   - "8"
 sudo: required
 after_success:
+  - if [[ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "master" ]]; then exit 0; fi
   - pip install virtualenv
   - virtualenv ~/env
   - source ~/env/bin/activate
