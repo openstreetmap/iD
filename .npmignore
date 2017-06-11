@@ -1,5 +1,6 @@
 .DS_Store
 .travis.yml
+/.tx/
 /data/data.js
 /docs/
 /node_modules/
