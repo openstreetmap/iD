@@ -55,6 +55,7 @@
         "no-unused-expressions": "error",
         "no-unexpected-multiline": "error",
         "no-unused-vars": "warn",
+        "no-useless-escape": "off",
         "no-void": "error",
         "no-warning-comments": "warn",
         "no-with": "error",
