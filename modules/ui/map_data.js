@@ -275,30 +275,23 @@ export function uiMapData(context) {
                 .attr('value', 'import');
             importOpt.append('span').text('Hide OSM Layer');
             
-            var filterInterval, urlEntry, urlInput, copyrightable, copyLabel, copyapproval, layerSelect, preset, presetList, presetComboBox, approvalPhase, individualApproval, allApproval, metadata_url;
+            var urlEntry, urlInput, copyrightable, copyLabel, copyapproval, layerSelect, preset, presetList, presetComboBox, approvalPhase, individualApproval, allApproval, metadata_url;
             
-            // I'm going to run this filtering process but only if it's initially enabled
-            function startFilering() {
-                if (filterInterval) {
-                    return;
+            // I'm going to run this filtering process but only once
+            if (window.filterInterval) {
+                clearInterval(window.filterInterval);
+            }
+            window.filterInterval = setInterval(function() {
+                if (d3.select('.geoservice-all-opt input').property('checked')) {
+                    d3.selectAll('.data-layer .geoservice-import, .data-layer .geoservice-osm').style('visibility', 'visible');
+                } else if (d3.select('.geoservice-osm-opt input').property('checked')) {
+                    d3.selectAll('.data-layer .geoservice-osm').style('visibility', 'visible');
+                    d3.selectAll('.data-layer .geoservice-import').style('visibility', 'hidden');
+                } else if (d3.select('.geoservice-import-opt input').property('checked')) {
+                    d3.selectAll('.data-layer .geoservice-osm').style('visibility', 'hidden');
+                    d3.selectAll('.data-layer .geoservice-import').style('visibility', 'visible');
                 }
-                filterInterval = setInterval(function() {
-                    if (d3.select('.geoservice-all-opt').property('checked')) {
-                        // console.log('Import and OSM visible');
-                        d3.selectAll('.data-layer .geoservice-import, .data-layer .geoservice-osm').style('visibility', 'visible');
-                    } else if (d3.select('.geoservice-osm-opt').property('checked')) {
-                        // console.log('Only OSM visible');
-                        d3.selectAll('.data-layer .geoservice-osm').style('visibility', 'visible');
-                        d3.selectAll('.data-layer .geoservice-import').style('visibility', 'hidden');
-                    } else if (d3.select('.geoservice-import-opt').property('checked')) {
-                        // console.log('Only import visible');
-                        d3.selectAll('.data-layer .geoservice-osm').style('visibility', 'hidden');
-                        d3.selectAll('.data-layer .geoservice-import').style('visibility', 'visible');
-                    }
-                }, 300);
-            };
-            osmOpt.on('change', startFilering);
-            importOpt.on('change', startFilering);
+            }, 300);
 
             // create GeoService layer edit pane only once            
             if (this.pane) {
