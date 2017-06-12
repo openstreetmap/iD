@@ -657,6 +657,7 @@ button.save.has-count .count::before {
     border-top: 1px solid #ccc;
     background-color: #fafafa;
     width: 100%;
+    z-index: 1;
 }
 
 .sidebar-component .body {
