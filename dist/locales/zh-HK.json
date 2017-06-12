@@ -624,7 +624,6 @@
         "help": {
             "title": "說明",
             "help": "# 說明\n\n這是[OpenStreetMap]的編輯器 (http://www.openstreetmap.org/)，\n免費而且可以編輯的世界地圖。你可以用來新增和更新\n在你附近的資料，令這個開放源碼和開放資料的地圖\n變得更好。\n你在這地圖裡所作的變更會令其他使用OpenStreetMap的人看得到。\n如要編輯，你需要[登入] (https://www.openstreetmap.org/login)。\n\n[iD 編輯器](http://ideditor.com/)是一個共同合作計劃，[原始碼可在GitHub找到](https://github.com/openstreetmap/iD)。\n",
-            "editing_saving": "# 編輯和儲存\n\n這個編輯器主要是靠網上運作而你正在\n經網頁使用它。\n\n### 選擇特徵\n\n要選擇特徵一個地圖特徵，例如道路或興趣點，\n可以在地圖上按它一下。 這樣就可以突出標示你選擇的特徵並開啟有關\n的詳細面板和顯示你可做的動作的選單。\n\n要選擇多個特徵，按著'Shift'鍵，然後\n用滑鼠按你想選擇的特徵或者在地圖上拖曳畫出長方形，\n所有在長方形內的點就會被選。\n\n### 儲存編輯\n\n當你作了變更，例如編輯道路、建築物和地方，\n它們就會儲在你的裝置直至你把它們儲存在伺服器內。如果有錯\n亦不用擔心 - 你可以按還原鍵還原你的變更和重做鍵再做過你的變更。\n\n按 '儲存' 就可儲存一組的編輯 - 例如你已完成\n一個鎮的範圍和希望開始一個新的範圍。你亦有機會\n去復審你做過甚麼，而如果有些不太正確的編輯，\n編輯器還會提供有用的建議和警告。\n\n如果沒有問題，你就可以輸入一些短句解釋一下你所作的變更。\n然後按'儲存'就可將變更上傳到\n[OpenStreetMap.org](http://www.openstreetmap.org/), 其他使用者\n就會看得到和使其他人建立和作出改進。\n\n如果你不可以一次過完成你的編輯，你可以離開編輯器\n視窗並再次回來(使用同一個瀏覽器和電腦)，\n編輯器就會復原你的工作。editor application will offer to restore your work.\n\n### 使用編輯器\n\n鍵盤快捷鍵列表可以在\n[這裡](http://wiki.openstreetmap.org/wiki/ID/Shortcuts)找到。\n",
             "roads": "# 道路\n\n你可以用編輯器創造、修改和刪除道路。道路有不同種類：\n行人路、公路、步行徑、單車徑等等 — 所有路段都可以畫出來。\n\n### 選擇\n\n按一下道路就可選擇。道路的輪廓就會顯現出來，\n小工具選單也會一併顯示在地圖上，\n而道路的更多資訊就會顯示在旁邊的版面。\n\n### 修改\n\n間中你會看到道路並不是與背景圖像或者\nGPS軌跡對齊。你可以調節這些道路，使它們\n在正確的地方。\n\n首先按一下你要更改的道路。道路會顯現出來，你可以\n拖拉道路上的控制點至更佳位置。如果\n你想使道路有更仔細顯示，你可以增加控制點，\n在道路上沒有節的地方按兩下，就可增加一個控制點。\n\n如果道路與另一道路相連，但不是妥善地在地圖上\n連接著，你可以拖拉其中一個控制點至另一條道路上\n，便它們連接。令道路連接是十分重要的，而且是\n駕駛方向的重要資訊。\n\n你可以按一下'移動'工具或者按'M'快速鍵去移動整條\n路，然後按多一下就會將那一次動作儲存。\n\n### 刪除\n\n如果道路完全不正確 — 你在衛星圖像裡看不到，\n而最好實地證實它並不存在 — 你就可以刪除\n它，從地圖中移除。刪除特徵時要特別小心 —\n與其他編輯一樣，每一個人都會看得到結果而衛星圖像\n通常都不是最新的，所以道路可能是新建的。\n\n你可以按一下想刪除的道路，然後\n按垃圾桶圖示或按'Delete'鍵。\n\n### 創造\n\n發現某個地方的道路不在嗎？按一下編輯器\n左上方的'綫'圖示或者按'2'快速鍵就可以\n開始繪畫一條新綫。\n\n在地圖上按一下就可以開始繪畫道路的開端。如果道路\n是現有道路的分支，你可以從分支處按一下開始繪畫。\n\n然後跟據衛星圖像或者GPS，沿著道路的點，\n使它跟著正確的路徑。如果你繪畫的道路與另一道路\n相交，在它們的相交點按一下就可將它們連接。當你\n完成繪畫，按兩下或者按'Return'或'Enter'鍵。\n\n",
             "gps": "# GPS\n\nGPS 追蹤是OpenStreetMap 的寶貴資料來源。這個編輯器\n支援你電腦內的 `.gpx` 檔案。使用智能電話的\n一些應用程式或個人GPS更體就可以搜集得到\n這類的GPS軌跡。\n\n要知道如何運用GPS測量，\n請參閱[用智能電話、GPS或紙繪地圖](http://learnosm.org/en/mobile-mapping/)。\n\n要使用GPX的軌跡繪畫地圖，拖放GPX檔案到編輯器上。\n如辨認得到，它就會於地圖上新增為鮮紫色的綫。\n按'地圖資料'選單右側就可顯示、\n隱藏或縮放這個新的GPX圖層。\n\nGPX軌跡不會直接上載至 OpenStreetMap - 最好的用法\n就要用來繪畫新的地圖、協助你新增特徵、\n或者用來[上載至OpenStreetMap](http://www.openstreetmap.org/trace/create)\n供其他使用者使用。\n",
             "imagery": "# 圖像\n\n航攝圖像是繪製地圖的重要資源。一系列的\n航攝圖像、衛星圖像和自由編輯的圖像資源\n可以從編輯器右方的'背景設定'選單中選擇。\n\n編輯器預設的衛星圖層是 [Bing Map](http://www.bing.com/maps/)，\n但當你平移和縮放至一個新的地域，\n新的來源就可以使用。有一些國家，例如：\n美國、法國和丹麥當中的一些地方，會有高品質圖像。\n\n圖像有時與地圖資料有所偏差，這是由於圖像\n供應商的誤差。如果你看到很多的道路與圖像有平移錯位，\n不用立即移動它們以符合背景。你可以按背景設定底部的'校準'\n來調整圖像，讓它符合現有資料。\n",
@@ -688,6 +687,40 @@
                 "title": "開始編輯",
                 "save": "不要忘記定時儲存你的變更！",
                 "start": "開始制圖"
+            }
+        },
+        "shortcuts": {
+            "title": "鍵盤快速鍵",
+            "browsing": {
+                "title": "瀏覽",
+                "navigation": {
+                    "title": "導航",
+                    "pan": "平移地圖",
+                    "zoom": "放大 / 縮小"
+                },
+                "help": {
+                    "title": "說明",
+                    "help": "顯示說明/文件",
+                    "keyboard": "顯示鍵盤快速鍵"
+                },
+                "display_options": {
+                    "title": "顯示選項",
+                    "background": "顯示背景選項",
+                    "background_switch": "轉換至上一個背景",
+                    "map_data": "顯示地圖資料選項",
+                    "minimap": "切換迷你地圖"
+                },
+                "selecting": {
+                    "title": "選擇特徵",
+                    "select_one": "選擇一個特徵",
+                    "select_multi": "選擇多個特徵"
+                },
+                "with_selected": {
+                    "edit_menu": "切換編輯選單"
+                }
+            },
+            "editing": {
+                "title": "編輯"
             }
         },
         "presets": {
@@ -1023,7 +1056,7 @@
                     "label": "種類"
                 },
                 "crop": {
-                    "label": "裁剪"
+                    "label": "農作物"
                 },
                 "crossing": {
                     "label": "種類"
@@ -1347,6 +1380,9 @@
                 },
                 "maxstay": {
                     "label": "可停留時間"
+                },
+                "maxweight": {
+                    "label": "最大承重"
                 },
                 "mtb/scale": {
                     "label": "越野單車徑難度",
@@ -2336,6 +2372,10 @@
                     "name": "大學範圍",
                     "terms": "大學,大專,大學用地"
                 },
+                "amenity/vending_machine": {
+                    "name": "售賣機",
+                    "terms": "Vending Machine,售賣機,自動售賣機,自動販賣機,販賣機"
+                },
                 "amenity/vending_machine/cigarettes": {
                     "name": "香煙售賣機",
                     "terms": "香煙售賣機"
@@ -2354,6 +2394,10 @@
                 },
                 "amenity/vending_machine/news_papers": {
                     "name": "報紙售賣機"
+                },
+                "amenity/vending_machine/newspapers": {
+                    "name": "報紙售賣機",
+                    "terms": "Newspaper Vending Machine,報紙販賣機"
                 },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
                     "name": "包裹領件/投寄機",
@@ -2683,6 +2727,10 @@
                     "name": "電工",
                     "terms": "電氣工程,電業工匠"
                 },
+                "craft/electronics_repair": {
+                    "name": "電子儀器維修店",
+                    "terms": "Electronics Repair Shop, 家電維修店"
+                },
                 "craft/gardener": {
                     "name": "園務工人",
                     "terms": "花王"
@@ -2939,6 +2987,10 @@
                 "highway/cycleway": {
                     "name": "單車徑",
                     "terms": "Cycle Path,單車徑,自行車道"
+                },
+                "highway/elevator": {
+                    "name": "升降機",
+                    "terms": "Elevator, lift, 升降機"
                 },
                 "highway/footway": {
                     "name": "行人徑",
@@ -3982,6 +4034,10 @@
                 "shop/antiques": {
                     "name": "古董店",
                     "terms": "古董店, 古玩店"
+                },
+                "shop/appliance": {
+                    "name": "電器店",
+                    "terms": "Appliance Store,家電店,家用電器店"
                 },
                 "shop/art": {
                     "name": "藝術商店",

@@ -113,6 +113,12 @@
                     "area": "Am mutat o suprafață."
                 }
             },
+            "reflect": {
+                "key": {
+                    "long": "T",
+                    "short": "Y"
+                }
+            },
             "rotate": {
                 "title": "Rotește",
                 "key": "R",
@@ -148,6 +154,7 @@
             "hidden_warning": "{count} funcționalități ascunse"
         },
         "commit": {
+            "title": "Încarcă în OpenStreetMap",
             "cancel": "Renunță",
             "changes": "{count} Modificări",
             "warnings": "Atenționări",
@@ -237,13 +244,18 @@
         "save": {
             "title": "Salveaza",
             "no_changes": "Nici o modificare de salvat.",
+            "uploading": "Încarcă modificările în OpenStreetMap",
             "unsaved_changes": "Ai modificări nesalvate."
         },
         "success": {
             "view_on_osm": "Vezi pe OSM",
             "facebook": "Distribuie pe Facebook",
             "twitter": "Distribuie pe Twitter",
-            "google": "Distribuie pe Google+"
+            "google": "Distribuie pe Google+",
+            "help_link_text": "Detalii"
+        },
+        "confirm": {
+            "cancel": "Renunță"
         },
         "splash": {
             "welcome": "Bine ai venit în editorul iD OpenStreetMap",
@@ -270,6 +282,9 @@
         "zoom": {
             "in": "Mareste",
             "out": "Micsoreaza"
+        },
+        "mapillary": {
+            "view_on_mapillary": "Vezi această imagine pe Mapillary"
         },
         "help": {
             "title": "Ajutor"
@@ -304,6 +319,19 @@
                 "title": "Începe editarea",
                 "save": "Nu uita să salvezi periodic modificările. ",
                 "start": "Începe cartografierea!"
+            }
+        },
+        "shortcuts": {
+            "or": "-sau-",
+            "browsing": {
+                "help": {
+                    "title": "Ajutor"
+                }
+            },
+            "editing": {
+                "commands": {
+                    "save": "Salvează modificările"
+                }
             }
         },
         "presets": {
@@ -475,6 +503,9 @@
                 "amenity/bicycle_rental": {
                     "name": "Închiriere biciclete"
                 },
+                "amenity/bus_station": {
+                    "name": "Stație de autobuz"
+                },
                 "amenity/cafe": {
                     "name": "Cafenea"
                 },
@@ -552,6 +583,9 @@
                 },
                 "highway/steps": {
                     "name": "Scări"
+                },
+                "type/route/bus": {
+                    "name": "Traseu Autobuz"
                 }
             }
         }

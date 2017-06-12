@@ -95,7 +95,7 @@
                 "title": "Luruskan",
                 "description": "Luruskan garis ini.",
                 "key": "S",
-                "annotation": "Luruskan suatu garis.",
+                "annotation": "Suatu garis telah diluruskan.",
                 "too_bendy": "Pelurusan tidak dapat dibuat kerana garis terlalu bengkang-bengkok.",
                 "connected_to_hidden": "Pelurusan tidak dapat dibuat kerana garis bersambung dengan ciri yang tersorok."
             },
@@ -286,6 +286,8 @@
             "imperial": "Imperial"
         },
         "geometry": {
+            "point": "titik",
+            "vertex": "bucu",
             "line": "garis",
             "area": "kawasan",
             "relation": "hubungan"
@@ -313,7 +315,9 @@
                     "type": "Jenis",
                     "default": "Lalai"
                 }
-            }
+            },
+            "node": "Nod",
+            "relation": "Hubungan"
         },
         "background": {
             "percent_brightness": "{opacity}% kecerahan",
@@ -344,7 +348,8 @@
                 "tooltip": "Lorong Jalan Kaki, Laluan Kaki, Lorong Basikal, dll."
             },
             "buildings": {
-                "description": "Bangunan-bangunan"
+                "description": "Bangunan-bangunan",
+                "tooltip": "Bangunan-bangunan, Tempat-tempat Berlindung, Garaj-garaj, dll."
             },
             "landuse": {
                 "description": "Gambaran Guna Tanah",
@@ -358,8 +363,17 @@
                 "description": "Gambaran-Gambaran Air",
                 "tooltip": "Sungai-sungai, Tasik-tasik, Kolam-kolam, Lembangan-lembangan, dll."
             },
+            "power": {
+                "description": "Gambaran-gambaran Kuasa Elektrik",
+                "tooltip": "Talian-talian Elektrik, Loji-loji Kuasa, Pencawang-pencawang, dll."
+            },
+            "past_future": {
+                "description": "Garis Masa",
+                "tooltip": "Cadangan, Pembinaan, Terabai, Diruntuhkan, dll."
+            },
             "others": {
-                "description": "Lain-lain"
+                "description": "Lain-lain",
+                "tooltip": "Yang Lain-lain"
             }
         },
         "restore": {
@@ -388,7 +402,8 @@
             "view_on_osm": "Lihat dalam OSM",
             "facebook": "Kongsi melalui Facebook",
             "twitter": "Kongsi melalui Twitter",
-            "google": "Kongsi melalui Google+"
+            "google": "Kongsi melalui Google+",
+            "help_link_text": "Butiran"
         },
         "confirm": {
             "okay": "OK",
@@ -397,21 +412,52 @@
         "splash": {
             "welcome": "Selamat datang! Ini ialah penyunting iD OpenStreetMap",
             "text": "Penyunting iD ialah suatu alat yang berkuasa tinggi tetapi sangat mudah digunakan untuk membuat sumbangan terhadap peta percuma yang terunggul di dunia. Ini ialah versi {version}. Untuk maklumat lanjut sila layari {website} dan laporkan pepijat di {github}.",
-            "walkthrough": "Mulakan Panduan"
+            "walkthrough": "Mulakan Panduan",
+            "start": "Sunting Sekarang"
         },
+        "source_switch": {
+            "live": "live",
+            "dev": "dev"
+        },
+        "version": {
+            "whats_new": "Yang terkini dalam iD {version}"
+        },
+        "tag_reference": {
+            "description": "Perincian",
+            "on_wiki": "{tag} pada wiki.osm.org"
+        },
+        "validations": {
+            "untagged_point": "Titik tanpa tag",
+            "untagged_line": "Garis tanpa tag",
+            "untagged_area": "Kawasan tanpa tag",
+            "untagged_relation": "Hubungan tanpa tag",
+            "deprecated_tags": "Tag-tag yang telah lapuk: {tags}"
+        },
+        "zoom": {
+            "in": "Zum Dekat",
+            "out": "Zum Jauh"
+        },
+        "cannot_zoom": "Had zum jauh telah dicapai dalam mod yang sedang dipakai.",
+        "full_screen": "Togol Skrin Penuh",
         "gpx": {
-            "local_layer": "Fail tempatan"
+            "local_layer": "Fail tempatan",
+            "drag_drop": "Tarik dan lepaskan suatu fail .gpx, .geojson atau .kml masuk halaman ini, atau klik butang di sebelah kanan untuk mengimbas"
         },
         "mapillary_images": {
+            "tooltip": "Gambar jalan dari Mapillary",
             "title": "Tindihan Gambar (Mapillary)"
         },
         "mapillary_signs": {
             "title": "Tindihan Isyarat Lalu Lintas (Mapillary)"
         },
+        "mapillary": {
+            "view_on_mapillary": "Paparkan imej ini dalam Mapillary"
+        },
         "help": {
             "title": "Bantuan"
         },
         "intro": {
+            "ok": "OK",
             "graph": {
                 "block_number": "<value for addr:block_number>",
                 "county": "<value for addr:county>",
@@ -423,14 +469,63 @@
                 "state": "<value for addr:state>",
                 "subdistrict": "<value for addr:subdistrict>",
                 "suburb": "<value for addr:suburb>",
-                "countrycode": "my"
+                "countrycode": "my",
+                "name": {
+                    "1st-avenue": "Lebuh Satu",
+                    "2nd-avenue": "Lebuh Dua",
+                    "4th-avenue": "Lebuh Empat",
+                    "5th-avenue": "Lebuh Lima",
+                    "6th-avenue": "Lebuh Enam",
+                    "6th-street": "Jalan Enam",
+                    "7th-avenue": "Lebuh Tujuh",
+                    "8th-avenue": "Lebuh Lapan",
+                    "9th-avenue": "Lebuh Sembilan",
+                    "10th-avenue": "Lebuh Sepuluh",
+                    "11th-avenue": "Lebuh Sebelas",
+                    "12th-avenue": "Lebuh Dua Belas"
+                }
             },
             "welcome": {
                 "title": "Selamat datang",
-                "welcome": "Selamat datang! Diharap panduan ini membantu dalam menerangkan asas-asas menyunting OpenStreetMap."
+                "welcome": "Selamat datang! Diharap panduan ini membantu dalam menerangkan asas-asas menyunting OpenStreetMap.",
+                "practice": "Semua data dalam lintas semak ini hanyalah sekadar amali, dan suntingan anda dalam lintas semak ini tidak akan disimpan.",
+                "words": "Beberapa istilah dan konsep baru bakal diperkenalkan dalam lintas semak ini. Perkataan baru akan *dicondongkan*.",
+                "mouse": "Sebarang peranti input boleh digunakan untuk menyunting peta. Bagaimanapun, lintas semak ini menggunakan tetikus dengan butang kiri dan butang kanan. **Sekiranya anda ingin menyambung tetikus anda, sila sambungkannya dengan segera, dan kemudian klik OK.**",
+                "leftclick": "Apabila tutorial ini meminta anda untuk mengklik atau mengklik dua kali, ini menggunakan butang kiri tetikus. Bagi pengguna pad sentuh laptop pula boleh klik atau ketuk satu kali. **Klik kiri {num} kali.**",
+                "rightclick": "Kadang-kadang anda mungkin diarahkan untuk klik-kanan pada tetikus. Mungkin mirip dengan mengklik sambil menekan butang Control, atau mengetuk dua jari di pad sentuh. Ada sesetengah papan kekunci turut tersedia dengan kekunci 'menu' yang boleh berfungsi seolah-olah klik-kanan tetikus. **Klik-kanan {num} kali.**",
+                "chapters": "Setakat ini, semuanya elok-elok belaka! Anda boleh gunakan butang-butang di bawah untuk melangkau bab pada bila-bila masa, atau mengulang semula suatu bab yang dirasakan sukar. Ayuh! **Klik '{next}' untuk teruskan.**"
+            },
+            "navigation": {
+                "title": "Pengemudian",
+                "drag": "Bahagian peta utama menunjukkan data OpenStreetMap dengan suatu latar belakang.{br}Anda boleh menyorot peta dengan mengklik-kiri tetikus dan mengubah kedudukan tetikus anda sambil tidak melepaskan butang klik tetikus. Anda juga boleh menggunakan butang tanda anak panah pada papan kekunci anda. **Sorotkan peta!**",
+                "zoom": "Anda boleh zum masuk atau zum keluar dengan mentatal roda tetikus atau pad sentuh laptop, atau dengan mengklik pada butang {plus}/{minus}. **Zumkan peta!**",
+                "features": "Perkataan *gambaran-gambaran* digunakan untuk memperincikan objek-objek dalam peta. Setiap butiran dalam alam nyata boleh dipetakan sebagai suatu gambaran dalam OpenStreetMap.",
+                "points_lines_areas": "Gambaran-gambaran peta diwakilkan dengan *titik-titik*, *garis-garis*, atau *kawasan-kawasan*.",
+                "nodes_ways": "Dalam OpenStreetMap, titik-titik ini kadang kala dirujuk sebagai nod-nod, manakala garis-garis dan kawasan-kawasan pula mungkin dirujuk sebagai *jalan-jalan*.",
+                "click_townhall": "Semua gambaran dalam peta boleh dipilih dengan satu klik terhadapnya. **Klik titik ini untuk memilihnya.**",
+                "selected_townhall": "Bagus! Titik ini telah dipilih. Gambaran yang telah dipilih akan berkunang-kunang.",
+                "editor_townhall": "Setelah suatu gambaran telah dipilih, *penyunting gambaran* akan dipaparkan di sisi peta.",
+                "preset_townhall": "Bahagian paling atas pada penyunting gambaran menunjukkan ciri-ciri gambaran. Titik ini ialah sebuah{preset}.",
+                "fields_townhall": "Bahagian tengah penyunting gambaran mempunyai medan-medan yang menunjukkan sifat-sifat gambaran, seperti nama dan alamatnya.",
+                "close_townhall": "**Tutup penyunting gambaran dengan menekan butang Escape atau mengklik butang {button} di bucu atas sekali.**",
+                "search_street": "Anda boleh menggelintar gambaran-gambaran yang sedang dipaparkan di peta, atau di seluruh dunia. **Gelintar '{name}'.**",
+                "choose_street": "**Pilih {name} dari senarai untuk memilih yang ini.**",
+                "selected_street": "Bagus! {name} telah dipilih."
+            },
+            "points": {
+                "title": "Titik-titik"
+            },
+            "areas": {
+                "title": "Kawasan-kawasan",
+                "choose_playground": "**Pilih {preset} dari senarai.**",
+                "add_field": "Tempat permainan kanak-kanak ini tidak mempunyai nama rasmi, jadi biarkan medan Nama kosong sahaja.{br}Maka eloklah kita menambah sedikit maklumat tambahan tentang tempat permainan ini dalam medan Perincian. **Buka senarai Tambah Medan.**",
+                "choose_field": "**Pilih {field} dari senarai.**",
+                "retry_add_field": "Medan {field} tidak dipilih. Sila cuba sekali lagi."
             },
             "lines": {
-                "title": "Garis-garis"
+                "title": "Garis-garis",
+                "choose_category_road": "**Pilih {category} dari senarai.**",
+                "retry_delete": "Butang Delete tidak diklik. Sila cuba sekali lagi."
             },
             "buildings": {
                 "title": "Bangunan-bangunan"
@@ -440,6 +535,24 @@
                 "help": "Anda kini sudah bersedia menyunting OpenStreetMap!{br}Anda boleh mengikuti semula panduan ini pada bila-bila masa sahaja, atau baca dokumentasi lain dengan mengklik pada {button} butang Bantuan.",
                 "save": "Jangan lupa untuk kerap menyimpan perubahan-perubahan anda!",
                 "start": "Mulakan pemetaan!"
+            }
+        },
+        "shortcuts": {
+            "browsing": {
+                "navigation": {
+                    "title": "Pengemudian"
+                },
+                "help": {
+                    "title": "Bantuan"
+                },
+                "display_options": {
+                    "map_data": "Tunjukkan pilihan data peta"
+                }
+            },
+            "editing": {
+                "commands": {
+                    "save": "Simpan perubahan"
+                }
             }
         },
         "presets": {

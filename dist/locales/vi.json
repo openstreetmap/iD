@@ -21,10 +21,10 @@
                 "description": "Di chuyển và thu phóng bản đồ."
             },
             "draw_area": {
-                "tail": "Nhấn chuột để thêm nốt vào vùng. Nhấn nốt đầu tiên để hoàn thành vùng."
+                "tail": "Nhấn chuột để đặt các nốt của vùng. Nhấn chuột vào nốt đầu tiên để hoàn thành vùng."
             },
             "draw_line": {
-                "tail": "Nhấn chuột để thêm nốt vào đường kẻ. Nhấn vào đường khác để nối đường lại. Nhấn đúp để hoàn thành đường."
+                "tail": "Nhấn chuột để đặt thêm nốt vào đường kẻ. Nhấn vào đường khác để nối đường lại. Nhấn đúp để hoàn thành đường."
             }
         },
         "operations": {
@@ -561,6 +561,7 @@
             "help_link_url": "https://wiki.openstreetmap.org/wiki/Vi:FAQ?setlang=vi#T.C3.B4i_v.E1.BB.ABa_thay_.C4.91.E1.BB.95i_b.E1.BA.A3n_.C4.91.E1.BB.93._L.C3.A0m_sao_xem_.C4.91.C6.B0.E1.BB.A3c_c.C3.A1c_thay_.C4.91.E1.BB.95i_c.E1.BB.A7a_t.C3.B4i.3F"
         },
         "confirm": {
+            "okay": "OK",
             "cancel": "Hủy bỏ"
         },
         "splash": {
@@ -585,6 +586,8 @@
         "validations": {
             "disconnected_highway": "Đường không nối liền",
             "disconnected_highway_tooltip": "Đường phải nối liền với đường khác hoặc lối ra vào tòa nhà.",
+            "old_multipolygon": "Thẻ được gắn vào lối bên ngoài của tổ hợp đa giác",
+            "old_multipolygon_tooltip": "Kiểu tổ hợp đa giác này đã bị phản đối. Xin vui lòng gắn các thẻ vào chính tổ hợp đa giác thay vì lối bên ngoài.",
             "untagged_point": "Địa điểm không có thẻ",
             "untagged_point_tooltip": "Chọn loại điểm.",
             "untagged_line": "Đường kẻ không có thẻ",
@@ -623,7 +626,7 @@
         "help": {
             "title": "Trợ giúp",
             "help": "# Trợ giúp\n\nĐây là trình vẽ của [OpenStreetMap](http://www.openstreetmap.org/), bản đồ có mã nguồn mở và dữ liệu mở cho phép mọi người cùng sửa đổi. Bạn có thể sử dụng chương trình này để bổ sung và cập nhật dữ liệu bản đồ tại khu vực của bạn. Bạn có thể cải tiến bản đồ thế giới mở để cho mọi người sử dụng.\n\nCác sửa đổi của bạn trên bản đồ này sẽ xuất hiện cho mọi người dùng OpenStreetMap. Để sửa bản đồ, bạn cần phải [đăng nhập](https://www.openstreetmap.org/login).\n\n[Trình vẽ iD](http://ideditor.com/) là một dự án cộng tác và xuất bản [tất cả mã nguồn tại GitHub](https://github.com/openstreetmap/iD).\n",
-            "editing_saving": "# Sửa đổi & Lưu giữ\n\nĐây là một chương trình vẽ trực tuyến, hiện tại bạn đang truy cập nó qua một trang Web.\n\n### Lựa chọn Đối tượng\n\nĐể lựa chọn một đối tượng, thí dụ con đường hay một điểm, nhấn chuột vào nó trên bản đồ. Khi đối tượng được chọn, bạn sẽ thấy một biểu mẫu ở bên phải chứa các chi tiết về đối tượng, cũng như một trình đơn giống bảng màu của họa sĩ chứa các tác vụ để thực hiện với đối tượng.\n\nĐể lựa chọn nhiều đối tượng cùng lúc, nhấn giữ phím Shift và nhấn chuột vào từng đối tượng một. Thay thế, nhấn giữ Shift và kéo chuột trên bản đồ để vẽ hộp bao. Các đối tượng nằm vào hộp này sẽ được chọn.\n\n### Lưu giữ Sửa đổi\n\nKhi bạn sửa đổi các tuyến đường, tòa nhà, và địa điểm, các thay đổi này được lưu giữ trên máy cho đến khi bạn đăng nó lên máy chủ. Đừng lo nhầm lẫn: chỉ việc nhấn vào các nút Hoàn tác và Làm lại.\n\nNhấn “Lưu” để hoàn thành các sửa đổi, thí dụ bạn vừa vẽ xong một khu và muốn bắt đầu vẽ khu mới. Trình vẽ sẽ trình bày các thay đổi để bạn xem lại, cũng như các gợi ý và cảnh báo nếu bạn đã sửa nhầm lẫn.\n\nSau khi vẽ xong, bạn sẽ nhập lời tóm lược các thay đổi và nhấn “Lưu” lần nữa để đăng các thay đổi lên [OpenStreetMap.org](http://www.openstreetmap.org/). Các thay đổi sẽ xuất hiện tại trang web này để mọi người xem và cập nhật nếu có sai sót.\n\nNếu bạn chưa xong mà cần rời khỏi máy tính, bạn có thể đóng trình vẽ này. Lần sau trở lại, trình vẽ này sẽ cho phép khôi phục các thay đổi chưa lưu của bạn (miễn là bạn sử dụng cùng máy tính và trình duyệt).\n\n### Sử dụng Chương trình\n\nXem [bảng phím tắt đầy đủ](http://wiki.openstreetmap.org/wiki/Vi:iD/Shortcuts?uselang=vi).\n",
+            "editing_saving": "# Sửa đổi & Lưu giữ\n\nĐây là một chương trình vẽ trực tuyến, hiện tại bạn đang truy cập nó qua một trang Web.\n\n### Lựa chọn Đối tượng\n\nĐể lựa chọn một đối tượng, thí dụ con đường hay một điểm, nhấn chuột vào nó trên bản đồ. Khi đối tượng được chọn, bạn sẽ thấy một biểu mẫu ở bên phải chứa các chi tiết về đối tượng, cũng như một trình đơn chứa các tác vụ để thực hiện với đối tượng.\n\nĐể lựa chọn nhiều đối tượng cùng lúc, nhấn giữ phím Shift và nhấn chuột vào từng đối tượng một. Thay thế, nhấn giữ Shift và kéo chuột trên bản đồ để vẽ hộp bao. Các đối tượng nằm vào hộp này sẽ được chọn.\n\n### Lưu giữ Sửa đổi\n\nKhi bạn sửa đổi các tuyến đường, tòa nhà, và địa điểm, các thay đổi này được lưu giữ trên máy cho đến khi bạn đăng nó lên máy chủ. Đừng lo nhầm lẫn: chỉ việc nhấn vào các nút “Hoàn tác” và “Làm lại”.\n\nNhấn “Lưu” để hoàn thành các sửa đổi, thí dụ bạn vừa vẽ xong một khu và muốn bắt đầu vẽ khu mới. Trình vẽ sẽ trình bày các thay đổi để bạn xem lại, cũng như các gợi ý và cảnh báo nếu bạn đã sửa nhầm lẫn.\n\nSau khi vẽ xong, bạn sẽ nhập lời tóm lược các thay đổi và nhấn “Lưu” lần nữa để đăng các thay đổi lên [OpenStreetMap.org](http://www.openstreetmap.org/). Các thay đổi sẽ xuất hiện tại trang web này để mọi người xem và cập nhật nếu có sai sót.\n\nNếu bạn chưa xong mà cần rời khỏi máy tính, bạn có thể đóng trình vẽ này. Lần sau trở lại, trình vẽ này sẽ cho phép khôi phục các thay đổi chưa lưu của bạn (miễn là bạn sử dụng cùng máy tính và trình duyệt).\n\n### Sử dụng Chương trình\n\nBấm phím `?` để xem bảng phím tắt đầy đủ.\n",
             "roads": "# Đường sá\n\nTrình vẽ này cho phép tạo, sửa, và xóa các con đường. Con đường không nhất thiết phải là đường phố: có thể vẽ đường cao tốc, đường mòn, đường đi bộ, đường xe đạp…\n\n### Lựa chọn\n\nNhấn vào con đường để lựa chọn nó. Con đường sẽ được tô sáng, một trình đơn công cụ sẽ xuất hiện bên cạnh đường, và thanh bên sẽ trình bày các chi tiết của con đường.\n\n### Sửa đổi\n\nNhiều khi bạn sẽ gặp những con đường bị chệch đối với hình nền hoặc tuyến đường GPS. Bạn có thể chỉnh lại các con đường này để chính xác hơn.\n\nTrước tiên, nhấn vào con đường cần chỉnh lại. Đường sẽ được tô sáng và các nốt sẽ xuất hiện để bạn kéo sang vị trí đúng hơn. Để thêm chi tiết, nhấn đúp vào một khúc đường chưa có nốt, và một nốt mới sẽ xuất hiện để bạn kéo.\n\nNếu con đường nối với đường khác trên thực tiếp, nhưng trên bản đồ thì chưa nối liền, hãy kéo một nốt của một con đường sang đường kia để nối liền hai con đường. Nối liền các đường tại giao lộ là một điều rất quan trọng tăng khả năng chỉ đường.\n\nĐể di chuyển toàn bộ con đường cùng lúc, nhấn vào công cụ “Di chuyển” hoặc nhấn phím tắt `M`, chuyển chuột sang vị trí mới, rồi nhấn chuột để hoàn thành việc di chuyển.\n\n### Xóa\n\nHãy tưởng tượng bạn gặp một con đường hoàn toàn sai: bạn không thấy được con đường trong hình ảnh trên không và, theo lý tưởng, cũng đã ghé vào chỗ đó để xác nhận rằng nó không tồn tại. Nếu trường hợp này, bạn có thể xóa con đường hoàn toàn khỏi bản đồ. Xin cẩn thận khi xóa đối tượng: giống như mọi sửa đổi khác, mọi người sẽ thấy được kết quả. Ngoài ra, hình ảnh trên không nhiều khi lỗi thời – con đường có thể mới xây – thành thử tốt nhất là ghé vào chỗ đó để quan sát chắc chắn, nếu có thể.\n\nĐể xóa một con đường, lựa chọn nó bằng cách nhấn vào nó, rồi nhấn vào hình thùng rác hoặc nhấn phím Delete.\n\n### Tạo mới\n\nBạn có tìm ra một con đường chưa được vẽ trên bản đồ? Hãy bắt đầu vẽ đường kẻ mới bằng cách nhấn vào nút “Đường” ở phía trên bên trái của trình vẽ, hoặc nhấn phím tắt `2`.\n\nNhấn vào bản đồ tại điểm bắt đầu của con đường. Hoặc nếu con đường chia ra từ đường khác đã tồn tại, trước tiên nhấn chuột tại giao lộ giữa hai con đường này.\n\nSau đó, nhấn chuột lần lượt theo lối đường dùng hình ảnh trên không hoặc tuyến đường GPS. Khi nào con đường giao với đường khác, nhấn chuột tại giao lộ để nối liền hai con đường này. Sau khi vẽ xong, nhấn đúp vào nốt cuối dùng hoặc nhấn phím Return hay Enter.\n",
             "gps": "# GPS\n\nHệ thống định vị toàn cầu, còn gọi GPS, là nguồn dữ liệu tin tưởng nhất trong dự án OpenStreetMap. Trình vẽ này hỗ trợ các tuyến đường thu thập được từ máy GPS, tức tập tin `.gpx` trên máy tính của bạn. Bạn có thể thu loại tuyến đường GPS này bằng một ứng dụng cài đặt trên điện thoại thông minh hoặc máy thu GPS.\n\nĐọc thêm về cách thu thập dữ liệu bằng GPS tại “[Mapping with a smartphone, GPS, or paper](http://learnosm.org/en/mobile-mapping/)”.\n\nĐể sử dụng một tuyến đường GPX trong việc vẽ bản đồ, kéo thả tập tin GPX vào trình vẽ bản đồ này. Nếu trình vẽ nhận ra tuyến đường, tuyến đường sẽ được tô màu hồng sẫm trên bản đồ. Mở hộp “Dữ liệu Bản đồ” ở thanh công cụ bên phải để bật tắt hoặc thu phóng lớp GPX này.\n\nTuyến đường GPX không được tải trực tiếp lên OpenStreetMap. Cách tốt nhất để sử dụng nó là vạch đường theo nó trên bản đồ, cũng như [tải nó lên OpenStreetMap](http://www.openstreetmap.org/trace/create) để cho người khác sử dụng.\n",
             "imagery": "# Hình ảnh\n\nẢnh hàng không là tài nguyên quan trọng trong việc vẽ bản đồ. Có sẵn một số nguồn hình ảnh chụp từ máy bay và vệ tinh, cũng như một số nguồn thông tin mở, trong trình đơn “Tùy chọn Hình nền” ở bên phải của trình vẽ này.\n\nTheo mặc định, trình vẽ hiển thị lớp trên không của [Bản đồ Bing](http://www.bing.com/maps/), nhưng có sẵn nguồn khác tùy theo vị trí đang xem trong trình duyệt. Ngoài ra có hình ảnh rất rõ tại nhiều vùng ở một số quốc gia như Hoa Kỳ, Pháp, và Đan Mạch.\n\nHình ảnh đôi khi bị chệch đối với dữ liệu bản đồ vì dịch vụ hình ảnh có lỗi. Nếu bạn nhận thấy nhiều con đường bị chệch đối với hình nền, xin đừng di chuyển các đường này để trùng hợp với hình ảnh. Thay vì di chuyển các con đường, hãy chỉnh lại hình ảnh để phù hợp với dữ liệu tồn tại bằng cách nhấn “Chỉnh lại hình nền bị chệch” ở cuối hộp Tùy chọn Hình nền.\n",
@@ -634,25 +637,258 @@
         },
         "intro": {
             "done": "xong",
+            "ok": "OK",
             "graph": {
-                "postcode": "221572"
+                "block_number": "<value for addr:block_number>",
+                "city": "<value for addr:city>",
+                "county": "<value for addr:county>",
+                "district": "Yên Phong",
+                "hamlet": "Nguyệt Cầu",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "postcode": "221572",
+                "province": "Bắc Ninh",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "Tam Giang",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "vn",
+                "name": {
+                    "andrews-elementary-school": "Trường Tiểu học Nguyễn Văn A",
+                    "conrail-railroad": "Hà Nội – Đồng Đăng",
+                    "southern-michigan-bank": "Ngân hàng Bắc Ninh",
+                    "three-rivers-city-hall": "Tòa thị chính Tam Giang",
+                    "three-rivers-elementary-school": "Trường Tiểu học Tam Giang",
+                    "three-rivers-fire-department": "Đoàn Cứu hỏa Tam Giang",
+                    "three-rivers-high-school": "Trường Trung học phổ thông Tam Giang",
+                    "three-rivers-middle-school": "Trường Trung học cơ sở Tam Giang",
+                    "three-rivers-municipal-airport": "Sân bay Tam Giang",
+                    "three-rivers-post-office": "Bưu điện Tam Giang",
+                    "three-rivers-public-library": "Thư viện Tam Giang",
+                    "three-rivers": "Tam Giang"
+                }
+            },
+            "welcome": {
+                "title": "Chào mừng",
+                "welcome": "Chào mừng, trình hướng dẫn này sẽ dạy căn bản sửa đổi OpenStreetMap.",
+                "practice": "Tất cả những dữ liệu trong trình hướng dẫn này chỉ để tập thôi. Các thay đổi của bạn sẽ bị hủy bỏ khi thoát trình hướng dẫn này.",
+                "words": "Trình hướng dẫn này sẽ định nghĩa các thuật ngữ và khái niệm mới. Các thuật ngữ mới được *in nghiêng*.",
+                "mouse": "Bạn có thể sử dụng thiết bị đầu vào nào đó để sửa đổi bản đồ, nhưng trình hướng dẫn này cho rằng bạn sử dụng con chuột hoặc bàn di chuột có hai nút bên trái bên phải. **Nếu bạn muốn gắn chuột, hãy gắn nó vào bây giờ rồi bấm OK.**",
+                "leftclick": "Khi nào hướng dẫn này xin bạn nhấn hoặc nhấn đúp chuột, hãy nhấn hoặc nhấn đúp chuột trái. Nếu dùng bàn di chuột, bạn có thể phải nhấn hoặc chạm một lần vào bàn di chuột. **Nhấn chuột {num} lần.**",
+                "rightclick": "Đôi khi hướng dẫn sẽ xin bạn nhấn chuột phải. Tùy máy tính, bạn có thể phải nhấn chuột trái khi giữ phím Control, chạm hai ngón tay trên bàn di chuột, hoặc sử dụng phím “menu” trên bàn phím. **Nhấn chuột phải {num} lần.**",
+                "chapters": "Nếu muốn bỏ qua hoặc lặp lại phần nào, bấm các nút bên dưới. Hãy bắt đầu! **Bấm “{next}” để tiếp tục.**"
             },
             "navigation": {
-                "title": "Điều hướng"
+                "title": "Điều hướng",
+                "drag": "Bản đồ ở giữa cho xem dữ liệu OpenStreetMap ở trên một hình nền.{br}Để đi tới đi lui, kéo thả và cuộn bản đồ, hoặc bấm các phím mũi tên trên bàn phím. **Kéo bản đồ này!**",
+                "zoom": "Cuộn để thu phóng bản đồ. Chuột thường có bánh xe ở giữa để cuộn lên xuống. Tùy bàn di chuột, bạn có thể phải vuốt hai ngón tay lên xuống hoặc vuốt cạnh bên phải. Thay thế, bạn có thể bấm các nút {plus} và {minus}. **Thu phóng bản đồ!**",
+                "features": "Từ *đối tượng* chỉ những gì xuất hiện trên bản đồ. Bạn có thể vẽ bất cứ vật tĩnh và cụ thể là một đối tượng trong OpenStreetMap.",
+                "points_lines_areas": "Các đối tượng bản đồ được vẽ dưới dạng *địa điểm, đường kẻ, hoặc vùng*.",
+                "nodes_ways": "Trong OpenStreetMap, các địa điểm đôi khi được gọi *nốt*, và các đường kẻ và vùng đôi khi được gọi *lối*.",
+                "click_townhall": "Nhấn chuột để chọn bất cứ đối tượng trên bản đồ. **Nhấn chuột vào địa điểm để chọn nó.**",
+                "selected_townhall": "Được rồi, địa điểm đã được chọn. Các đối tượng chớp chớp khi được chọn.",
+                "editor_townhall": "Khi nào đối tượng được chọn, *biểu mẫu* “Sửa đối tượng” xuất hiện ở thanh bên.",
+                "preset_townhall": "Cờ ngang ở trên biểu mẫu cho biết loại đối tượng. Địa điểm này là một {preset}.",
+                "fields_townhall": "Phần giữa của biểu mẫu có các *chi tiết* của đối tượng, chẳng hạn như tên và địa chỉ.",
+                "close_townhall": "**Bấm phím Esc hoặc bấm nút {button} ở góc phải bên trên để đóng biểu mẫu.**",
+                "search_street": "Bạn có thể tìm kiếm các đối tượng theo tên trong khu vực đang xem hoặc toàn thế giới. **Tìm “{name}”.**",
+                "choose_street": "**Chọn {name} trong danh sách để chọn nó.**",
+                "selected_street": "Được rồi, {name} được chọn.",
+                "editor_street": "Các chi tiết của con đường khác với các chi tiết của tòa thị chính.{br}Khi con đường này được chọn, biểu mẫu chứa các chi tiết như “{field1}” và “{field2}”. **Bấm phím Esc hoặc bấm nút {button} để đóng biểu mẫu.**",
+                "play": "Thử di chuyển bản đồ và chọn những đối tượng khác để biết thêm về các loại đối tượng thường được đóng góp vào OpenStreetMap. **Khi nào sẵn sàng đi tiếp đến phần sau, bấm “{next}”.**"
             },
             "points": {
-                "title": "Địa điểm"
+                "title": "Địa điểm",
+                "add_point": "*Địa điểm* tương ứng với các nơi như cửa hàng, nhà hàng, đài tưởng niệm.{br}Nó chỉ ra một vị trí cụ thể và mô tả những gì thấy được tại vị trí đó. **Bấm nút {button} Điểm để thêm một địa điểm mới.**",
+                "place_point": "Để đặt địa điểm mới trên bản đồ, đưa con trỏ lên vị trí chính xác, rồi nhấn chuột trái hoặc bấm phím cách. **Đưa con trỏ lên tòa nhà này, rồi nhấn chuột trái hoặc bấm phím cách.**",
+                "search_cafe": "Có đủ thứ địa điểm. Bạn vừa đặt địa điểm ứng với một quán cà phê. **Tìm “{preset}”.**",
+                "choose_cafe": "**Chọn {preset} từ danh sách.**",
+                "feature_editor": "Địa điểm hiện là một quán cà phê. Bây giờ bạn có thể cung cấp thêm chi tiết về địa điểm này trong biểu mẫu.",
+                "add_name": "Trong OpenStreetMap, tất cả các trường văn bản là tùy chọn. Để trống trường nào mà bạn không biết rõ giá trị.{br}Hãy giả bộ quen với quán này và biết tên của nó. **Định rõ tên của quán cà phê.**",
+                "add_close": "Biểu mẫu sẽ tự động ghi nhớ các thay đổi của bạn. **Sau khi định rõ tên, bấm Esc, Enter, hoặc Return, hoặc bấm nút {button} để đóng biểu mẫu.**",
+                "reselect": "Nhiều khi một địa điểm đã tồn tại nhưng không chính xác hoặc không tròn vẹn. Bạn có thể sửa đổi địa điểm đã tồn tại. **Nhấn chuột để chọn quán cà phê mà bạn vừa tạo ra.**",
+                "update": "Hãy bổ sung thêm chi tiết về quán này. Bạn có thể thay đổi tên của nó, định rõ nền ẩm thực, hoặc định rõ địa chỉ. **Thay đổi chi tiết của quán cà phê.**",
+                "update_close": "**Sau khi cập nhật quán cà phê xong, bấm Esc, Enter, hoặc Return, hoặc bấm nút {button} để đóng biểu mẫu.**",
+                "rightclick": "Nhấn chuột phải vào đối tượng để xem *trình đơn sửa đổi* có các tác vụ có thể áp dụng vào đối tượng. **Nhấn chuột phải để chọn điểm mà bạn vừa tạo ra và hiển thị trình đơn sửa đổi.**",
+                "delete": "Đôi khi cần xóa các đối tượng không tồn tại trên thực tế.{br}Khi xóa đối tượng khỏi OpenStreetMap, nó được loại bỏ khỏi bản đồ công cộng, nên bạn phải chắc chắn rằng nó không còn tồn tại trước khi xóa nó khỏi bản đồ. **Bấm nút {button} để xóa địa điểm này.**",
+                "undo": "Bạn có thể lúc nào hoàn tác thay đổi nào cho tới khi lưu các thay đổi vào OpenStreetMap. **Bấm nút {button} để hoàn tác vụ xóa để cho địa điểm trở lại.**",
+                "play": "Giờ đây bạn đã biết cách tạo và sửa đổi địa điểm, hãy thử tạo vài điểm nữa! **Khi nào sẵn sàng đi tiếp đến phần sau, bấm “{next}”.**"
             },
             "areas": {
-                "title": "Vùng"
+                "title": "Vùng",
+                "add_playground": "*Vùng* cho biết hình dạng của các đa giác như hồ nước, tòa nhà, và khu vực dân cư.{br}Bạn có thể cung cấp nhiều chi tiết hơn dùng vùng so với địa điểm. **Bấm nút {button} Vùng để bắt đầu vẽ vùng mới.**",
+                "start_playground": "Hãy vẽ một vùng để thêm sân chơi này vào bản đồ. Để vẽ vùng, đặt các *nốt* theo đường biên của vùng. **Nhấn chuột hoặc bấm phím cách để đặt nốt đầu tiên vào một góc của sân chơi.**",
+                "continue_playground": "Để tiếp tục vẽ vùng này, đặt thêm nốt theo đường biên của sân chơi. Bạn có thể nối liền vùng với các đường dạo đã tồn tại.{br}Mẹo vặt: Bạn có thể giữ xuống phím Alt hoặc Option để tránh việc nối liền nốt với các đối tượng khác. **Tiếp tục vẽ vùng ứng với sân chơi này.**",
+                "finish_playground": "Để hoàn tất vùng, bấm Enter hoặc Return, hoặc nhấn chuột lần nữa vào nốt đầu tiên hoặc cuối dùng. **Vẽ xong vùng ứng với sân chơi.**",
+                "search_playground": "**Tìm “{preset}”.**",
+                "choose_playground": "**Chọn {preset} từ danh sách.**",
+                "add_field": "Sân chơi này không có tên chính thức, nên bạn sẽ để trống trường Tên.{br}Thay thế, hãy bổ sung chi tiết về sân chơi trong trường Miêu tả. **Mở trình đơn “Thêm chi tiết”.**",
+                "choose_field": "**Chọn {field} từ danh sách.**",
+                "retry_add_field": "Bạn không chọn trường {field}. Hãy thử lại.",
+                "describe_playground": "**Thêm lời miêu tả rồi bấm nút {button} để đóng biểu mẫu.**",
+                "play": "Tuyệt vời! Hãy thử vẽ vài vùng nữa và thử những loại vùng khác để thêm vào OpenStreetMap. **Khi nào sẵn sàng đi tiếp đến phần sau, bấm “{next}”.**"
             },
             "lines": {
-                "title": "Đường kẻ"
+                "title": "Đường kẻ",
+                "add_line": "*Đường kẻ* tương ứng với chẳng hạn các đường sá, đường sắt, dòng sông. **Bấm nút {button} Đường để bắt đầu vẽ đường mới.**",
+                "start_line": "Bản đồ chưa có con đường này – hãy vẽ nó!{br}Trong OpenStreetMap, chúng ta vẽ các đường kẻ theo giữa đường. Bạn có thể kéo vào thu phóng bản đồ nếu cần trong khi vẽ đường. **Nhấn chuột vào phía trên của con đường bị thiếu để bắt đầu vẽ đường kẻ mới.**",
+                "intersect": "Nhấn chuột hoặc bấm phím cách để thêm nốt và kéo dài đường kẻ.{br}Tương tự với nhiều loại đường kẻ, các đường bộ kết hợp nhau thành một mạng lớn hơn. Để cho các ứng dụng chỉ đường có thể hoạt động chính xác, xin chú ý nối liền các đường ở những giao lộ trên thực tế. **Nhấn vào con đường {name} để nối hai đường kẻ tại một giao lộ.**",
+                "retry_intersect": "Con đường phải giao với đường {name}. Hãy thử lại!",
+                "continue_line": "Tiếp tục vẽ đường kẻ mới theo con đường. Hãy nhớ rằng bạn có thể lúc nào kéo và thu phóng bản đồ.{br}Sau khi vẽ xong xuôi, nhấn chuột lần nữa vào nốt cuối cùng. **Hoàn tất việc vẽ con đường.**",
+                "choose_category_road": "**Chọn {category} từ danh sách.**",
+                "choose_preset_residential": "Có nhiều kiểu con đường; kiểu phổ biến nhất là ngõ dân cư. **Chọn kiểu con đường là {preset}.**",
+                "retry_preset_residential": "Bạn không chọn kiểu {preset}. **Nhấn chuột vào đây để thử lần nữa.**",
+                "name_road": "**Đặt tên cho con đường rồi bấm Esc, Enter, hay Return, hoặc bấm nút {button} để đóng biểu mẫu.**",
+                "did_name_road": "Được rồi, hãy tập thay đổi hình dạng đường kẻ.",
+                "update_line": "Đôi khi cần thay đổi hình dạng của một đường kẻ đã tồn tại. Đây có con đường không chính xác.",
+                "add_node": "Bạn có thể đặt thêm nốt vào đường kẻ này để làm cho nó chính xác hơn. Một cách đặt nốt là nhấn đúp vào đường kẻ tại vị trí muốn đặt nốt. **Nhấn đúp vào đường kẻ để đặt nốt mới.**",
+                "start_drag_endpoint": "Khi đường kẻ được chọn, bạn có thể kéo thả nốt nào dùng chuột trái để di chuyển nó. **Kéo điểm cuối đến giao lộ các con đường này.**",
+                "finish_drag_endpoint": "Nơi này có vẻ đúng. **Thả chuột trái để kết thúc tác vụ di chuyển.**",
+                "start_drag_midpoint": "Có các hình mũi tên nhỏ *nửa đường* giữa các nốt. Bạn cũng có thể tạo nốt mới bằng cách kéo một mũi tên nửa đường đến vị trí khác. **Kéo mũi tên nửa đường để tạo nốt mới dọc theo con đường.**",
+                "continue_drag_midpoint": "Đường kẻ này có vẻ đẹp hơn nhỉ? Hãy tiếp tục chỉnh lại đường kẻ này bằng cách nhấn đúp vào đường kẻ hoặc kéo mũi tên nửa đường cho đến khi nó trùng khớp với con đường. **Khi nào đường kẻ được hoàn thiện xong xuôi, bấm OK.**",
+                "delete_lines": "Bạn nên xóa các con đường không ứng với con đường thật.{br}Đây có một {street} được chính phủ thiết kế mà không bao giờ xây dựng. Chúng ta có thể xóa các đường kẻ thừa để cải thiện bản đồ.",
+                "rightclick_intersection": "Con đường thật cuối cùng là {street1}, nên phải *chia cắt* {street2} tại giao lộ này và xóa quãng đường về phía bắc. **Nhấn chuột trái vào nốt giao lộ.**",
+                "split_intersection": "**Bấm nút {button} để cắt đôi {street}.**",
+                "retry_split": "Bạn không bấm nút Chia cắt. Hãy thử lại.",
+                "did_split_multi": "OK, {street1} hiện đường cắt đôi. Hãy xóa quãng đường ở phía bắc. **Bấm phần bên trên của {street2} để chọn nó.**",
+                "did_split_single": "**Bấm phần bên trên của {street2} để chọn nó.**",
+                "multi_select": "{selected} đã được chọn. Hãy chọn {other1} cùng lúc. Để chọn nhiều đối tượng cùng lúc, nhấn chuột trái trong khi bấm giữ Shift. **Bấm giữ Shift và nhấn chuột vào {other2}.**",
+                "multi_rightclick": "OK, hai đường kẻ cần xóa đã được chọn. **Nhấn chuột phải vào một đường kẻ để hiển thị trình đơn sửa đổi.**",
+                "multi_delete": "**Bấm nút {button} để xóa các đường kẻ thừa.**",
+                "retry_delete": "Bạn không bấm nút Xóa. Hãy thử lại.",
+                "play": "Hay quá! Hãy tiếp tục tập sửa đổi vài đường kẻ nữa. **Khi nào sẵn sàng đi tiếp đến phần sau, bấm “{next}”.**"
+            },
+            "buildings": {
+                "title": "Tòa nhà",
+                "add_building": "OpenStreetMap là cơ sở dữ liệu tòa nhà lớn nhất trên thế giới.{br}Mời bạn giúp xây dựng cơ sở dữ liệu này bằng cách vẽ các tòa nhà chưa có trên bản đồ. **Bấm nút {button} Vùng để thêm vùng mới.**",
+                "start_building": "Hãy thêm căn nhà này vào bản đồ.{br}Vẽ vùng theo các tường bên ngoài tòa nhà. **Nhấn chuột hoặc bấm phím cách để đặt nốt đầu tiên vào một góc của tòa nhà.**",
+                "continue_building": "Tiếp tục đặt thêm nốt để vẽ tất cả tòa nhà. Nhớ có thể phóng to để nhìn rõ khi vẽ vùng.{br}Để hoàn thành tòa nhà, bấm Enter hay Return, hoặc nhấn chuột lần nữa vào nốt đầu tiên hoặc cuối cùng. **Hoàn thành tòa nhà.**",
+                "retry_building": "Hình như bạn vướng mắc khi đặt nốt vào các góc tòa nhà. Hãy thử lại.",
+                "choose_category_building": "**Chọn {category} từ danh sách.**",
+                "choose_preset_house": "Có nhiều kiểu tòa nhà; tòa nhà này rõ ràng là nhà ở.{br}Nếu bạn không chắc chắn nó là kiểu nào, bạn có thể chọn kiểu Tòa nhà bình thường không sao. **Chọn kiểu {preset}.**",
+                "close": "**Bấm Esc hoặc nút {button} để đóng biểu mẫu.**",
+                "rightclick_building": "**Nhấn chuột phải để chọn tòa nhà vừa vẽ và hiển thị trình đơn sửa đổi.**",
+                "square_building": "Hãy làm căn nhà này đẹp đẽ hơn. **Bấm nút {button} để làm gọn các góc của tòa nhà.**",
+                "retry_square": "Bạn không bấm nút Làm Vuông góc. Hãy thử lại.",
+                "done_square": "Để ý tòa nhà có vẻ gọn gàng hơn. Hãy xem một công cụ tiện ích nũa.",
+                "add_tank": "Thùng chứa nước này có hình dạng vòng tròn. **Bấm nút {button} Vùng để thêm vùng mới.**",
+                "start_tank": "Đừng lo, bạn không cần phải vẽ hình tròn hoàn hảo. Chỉ việc vẽ một vùng thô có vài nốt trên đường biên của thùng chứa nước. **Nhấn chuột hoặc bấm phím cách để đặt nốt đầu tiên vào đường biên của thùng chứa nước.**",
+                "continue_tank": "Đặt thêm vài nốt nữa chung quanh thùng chứa nước. Hình tròn sẽ bao gồm các nốt mà bạn đang đặt.{br}Để hoàn thành vùng, bấm Enter hay Return, hoặc nhấn chuột lần nữa vào nốt đầu tiên hoặc cuối cùng. **Hoàn thành thùng chứa nước.**",
+                "search_tank": "**Tìm “{preset}”.**",
+                "choose_tank": "**Chọn {preset} từ danh sách.**",
+                "rightclick_tank": "**Nhấn chuột phải để chọn thùng chứa nước vừa vẽ và hiển thị trình đơn sửa đổi.**",
+                "circle_tank": "**Bấm nút {button} để làm tròn thùng chứa nước này.**",
+                "retry_circle": "Bạn không bấm nút Làm Tròn góc. Hãy thử lại.",
+                "play": "Tuyệt vời! Hãy thử vẽ vài tòa nhà nữa và thử những tác vụ trong trình đơn sửa đổi. **Khi nào sẵn sàng đi tiếp đến phần sau, bấm “{next}”.**"
             },
             "startediting": {
                 "title": "Bắt đầu Sửa đổi",
+                "help": "Bạn sẵn sàng sửa đổi OpenStreetMap!{br}Lúc nào muốn được hướng dẫn lại hoặc xem thêm tài liệu, chỉ việc bấm nút {button} Trợ giúp.",
                 "save": "Hãy nhớ lưu các thay đổi của bạn thường xuyên!",
                 "start": "Hãy bắt đầu vẽ bản đồ!"
+            }
+        },
+        "shortcuts": {
+            "title": "Phím tắt",
+            "key": {
+                "alt": "Alt",
+                "backspace": "Backspace",
+                "cmd": "Cmd",
+                "ctrl": "Ctrl",
+                "delete": "Delete",
+                "del": "Del",
+                "end": "End",
+                "enter": "Enter",
+                "esc": "Esc",
+                "home": "Home",
+                "option": "Option",
+                "pause": "Pause",
+                "pgdn": "PgDn",
+                "pgup": "PgUp",
+                "return": "Return",
+                "shift": "Shift",
+                "space": "Dấu cách"
+            },
+            "gesture": {
+                "drag": "kéo"
+            },
+            "or": "–hoặc–",
+            "browsing": {
+                "title": "Xem",
+                "navigation": {
+                    "title": "Điều hướng",
+                    "pan": "Di chuyển bản đồ",
+                    "pan_more": "Di chuyển bản đồ cả chiều rộng/cao màn hình",
+                    "zoom": "Thu phóng",
+                    "zoom_more": "Thu phóng rất nhiều"
+                },
+                "help": {
+                    "title": "Trợ giúp",
+                    "help": "Xem tài liệu trợ giúp",
+                    "keyboard": "Xem bảng phím tắt này"
+                },
+                "display_options": {
+                    "title": "Tùy chọn xem",
+                    "background": "Xem hộp chọn lớp nền",
+                    "background_switch": "Quay lại lớp nền trước",
+                    "map_data": "Xem hộp dữ liệu bản đồ",
+                    "fullscreen": "Bật chế độ toàn màn hình",
+                    "wireframe": "Bật/tắt chế độ khung lưới",
+                    "minimap": "Mở/đóng bản đồ nhỏ"
+                },
+                "selecting": {
+                    "title": "Chọn đối tượng",
+                    "select_one": "Chọn một đối tượng",
+                    "select_multi": "Chọn nhiều đối tượng cùng lúc",
+                    "lasso": "Vẽ vùng chọn chung quanh các đối tượng"
+                },
+                "with_selected": {
+                    "title": "Trong khi đối tượng được chọn",
+                    "infobox": "Bật/tắt hộp hộp kiểm tra/đo đạc",
+                    "edit_menu": "Bật/tắt trình đơn sửa đổi"
+                },
+                "vertex_selected": {
+                    "title": "Trong khi nốt được chọn",
+                    "previous": "Chọn nốt trước trong lối",
+                    "next": "Chọn nốt sau trong lối",
+                    "first": "Chọn nốt đầu tiên trong lối",
+                    "last": "Chọn nốt cuối cùng trong lối",
+                    "change_parent": "Luân chuyển qua các lối nối nhau tại nốt"
+                }
+            },
+            "editing": {
+                "title": "Sửa",
+                "drawing": {
+                    "title": "Vẽ",
+                    "add_point": "Chế độ “thêm địa điểm”",
+                    "add_line": "Chế độ “thêm đường kẻ”",
+                    "add_area": "Chế độ “thêm vùng”",
+                    "place_point": "Đặt địa điểm hoặc nốt",
+                    "disable_snap": "Giữ xuống để tránh nối liền với đối tượng khác khi đặt địa điểm hoặc nốt",
+                    "stop_line": "Kết thúc vẽ đường kẻ hoặc vùng"
+                },
+                "operations": {
+                    "title": "Thao tác",
+                    "continue_line": "Vẽ tiếp đường kẻ từ nốt được chọn",
+                    "merge": "Gộp các đối tượng được chọn",
+                    "disconnect": "Tháo gỡ các đối tượng tại nốt được chọn",
+                    "split": "Cắt đôi các đường kẻ tại nốt được chọn",
+                    "reverse": "Đảo ngược chiều đường kẻ",
+                    "move": "Di chuyển các đối tượng được chọn",
+                    "rotate": "Xoay đối tượng được chọn",
+                    "orthogonalize": "Làm thẳng đường kẻ được chọn, hoặc làm vuông góc vùng hoặc đường kẻ đóng được chọn",
+                    "circularize": "Làm tròn vùng hoặc đường kẻ đóng",
+                    "reflect_long": "Phản chiếu đối tượng qua trục dài",
+                    "reflect_short": "Phản chiếu đối tượng qua trục ngắn",
+                    "delete": "Xóa đối tượng hay nốt được chọn"
+                },
+                "commands": {
+                    "title": "Lệnh",
+                    "copy": "Sao chép các đối tượng được chọn",
+                    "paste": "Dán các đối tượng đã sao chép",
+                    "undo": "Hoàn tác thao tác cuối cùng",
+                    "redo": "Làm lại thao tác cuối cùng",
+                    "save": "Lưu các thay đổi"
+                }
             }
         },
         "presets": {
@@ -1312,6 +1548,9 @@
                 },
                 "maxstay": {
                     "label": "Thời gian Ở Tối đa"
+                },
+                "maxweight": {
+                    "label": "Trọng lượng Tối đa"
                 },
                 "mtb/scale": {
                     "label": "Độ hiểm trở Đạp xe Leo núi",
@@ -2656,6 +2895,10 @@
                     "name": "Lắp Điện",
                     "terms": "thợ lắp điện, người lắp điện, tho lap dien, nguoi lap dien"
                 },
+                "craft/electronics_repair": {
+                    "name": "Tiệm Sửa Điện tử",
+                    "terms": "tiệm sửa điện tử, cửa hàng sửa điện tử, tiệm sửa đồ điện, cửa hàng sửa đồ điện, tiem sua dien tu, cua hang sua dien tu, tiem sua do dien, cua hang sua do dien"
+                },
                 "craft/gardener": {
                     "name": "Làm vườn",
                     "terms": "người làm vườn, người trồng hoa, người cắt cỏ, nguoi lam vuon, nguoi trong hoa, nguoi cat co"
@@ -2912,6 +3155,10 @@
                 "highway/cycleway": {
                     "name": "Đường Xe đạp",
                     "terms": "đường xe đạp, đường mòn xe đạp, duong xe dap, duong mon xe dap"
+                },
+                "highway/elevator": {
+                    "name": "Thang máy",
+                    "terms": "thang máy, thang may"
                 },
                 "highway/footway": {
                     "name": "Đường Dạo",
@@ -3814,7 +4061,7 @@
                 },
                 "place/village": {
                     "name": "Làng",
-                    "terms": "làng, lang"
+                    "terms": "làng, thôn, ấp, lang, thon, ap"
                 },
                 "point": {
                     "name": "Địa điểm",
@@ -3955,6 +4202,10 @@
                 "shop/antiques": {
                     "name": "Tiệm Đồ Cổ",
                     "terms": "tiệm đồ cổ, cửa hàng đồ cổ, cửa hiệu đồ cổ, người bán đồ cổ, chỗ bán đồ cổ, nơi bán đồ cổ, tiem do co, cua hang do co, cua hieu do co, nguoi ban do co, cho ban do co, noi ban do co"
+                },
+                "shop/appliance": {
+                    "name": "Tiệm Gia dụng",
+                    "terms": "tiệm gia dụng, tiệm đồ gia dụng, cửa hàng gia dụng, cửa hàng đồ gia dụng, tiem gia dung, tiem do gia dung, cua hang gia dung, cua hang do gia dung"
                 },
                 "shop/art": {
                     "name": "Tiệm Nghệ phẩm",
@@ -4113,8 +4364,8 @@
                     "terms": "tiệm thuốc lá điện tử, tiệm thuốc điện tử, cửa hàng thuốc lá điện tử, cửa hàng thuốc điện tử, tiem thuoc la dien tu, tiem thuoc dien tu, cua hang thuoc la dien tu, cua hang thuoc dien tu"
                 },
                 "shop/electronics": {
-                    "name": "Cửa hàng điện tử",
-                    "terms": "chỗ bán đồ điện, tiệm bán đồ điện, nơi bán đồ điện, cửa hàng bán đồ điện, cửa hiệu bán đồ điện, quầy bán đồ điện, cửa tiệm đồ điện, tiệm điện tử, cửa hàng điện tử, máy tính, vi tính, điện thoại, tivi, tv, máy giặt, máy lạnh, máy sưởi, loa, máy ảnh, máy chụp hình, cho ban do dien, tiem ban do dien, noi ban do dien, cua hang ban do dien, cua hieu ban do dien, quay ban do dien, cua tiem do dien, tiem dien tu, cua hang dien tu, may tinh, vi tinh, dien thoai, may giat, may lanh, may suoi, may anh, may chup hinh"
+                    "name": "Tiệm Điện tử",
+                    "terms": "tiệm điện tử, cửa hàng điện tử, tiệm đồ điện, cửa hàng đồ điện, máy tính, vi tính, điện thoại, tivi, tv, máy giặt, máy lạnh, máy sưởi, loa, máy ảnh, máy chụp hình, tiem dien tu, cua hang dien tu, tiem do dien, cua hang do dien, may tinh, vi tinh, dien thoai, may giat, may lanh, may suoi, may anh, may chup hinh"
                 },
                 "shop/erotic": {
                     "name": "Tiệm Bán đồ Khiêu dâm",
@@ -4173,7 +4424,7 @@
                 },
                 "shop/hairdresser": {
                     "name": "Tiệm Làm tóc",
-                    "terms": "chỗ làm tóc, tiệm làm tóc, nơi làm tóc, cửa hàng làm tóc, quầy làm tóc, cửa hiệu làm tóc, cửa tiệm làm tóc, cho lam toc, tiem lam toc, noi lam toc, cua hang lam toc, quay lam toc, cua hieu lam toc, cua tiem lam toc"
+                    "terms": "tiệm làm tóc, cửa hàng làm tóc, tiệm cắt tóc, cửa hàng cắt tóc, tiệm hớt tóc, cửa hàng hớt tóc, tiem lam toc, cua hang lam toc, tiem cat toc, cua hang cat toc, tiem hot toc, cua hang hot toc"
                 },
                 "shop/hardware": {
                     "name": "Tiệm Ngũ kim",

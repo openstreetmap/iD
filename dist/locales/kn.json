@@ -539,6 +539,7 @@
             "help_link_text": "ವಿವರಗಳು"
         },
         "confirm": {
+            "okay": "ಸರಿ",
             "cancel": "ರದ್ದು ಮಾಡು"
         },
         "splash": {
@@ -605,6 +606,9 @@
                 "suburb": "<value for addr:suburb>",
                 "countrycode": "in",
                 "name": {
+                    "6th-street": "6ನೇ ರಸ್ತೆ",
+                    "adams-street": "ಆಡಮ್ಸ್ ರಸ್ತೆ",
+                    "andrews-street": "ಆಂಡ್ರ್ಯೂಸ್ ರಸ್ತೆ",
                     "scidmore-park": "ಸ್ಕಿಡ್ಮ್ಮಾರ ಪಾರ್ಕ್  ",
                     "scouter-park": "ಸ್ಕೌಟರ್ ಪಾರ್ಕ್  ",
                     "sherwin-williams": "ಶೆರ್ವಿನ್ ವಿಲ್ಯಮ್ಸ್  ",

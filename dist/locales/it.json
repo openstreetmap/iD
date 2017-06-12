@@ -626,7 +626,6 @@
         "help": {
             "title": "Aiuto",
             "help": "# Aiuto\n\nQuesto è un editor per [OpenStreetMap](http://www.openstreetmap.org/), la\nmappa del mondo gratuita e modificabile. Puoi usarlo per aggiungere ed aggiornare\ndati nella tua area, creando una mappa del mondo open-source e open-data\nmigliore per tutti.\n\nLe modifiche che fai a questa mappa saranno visibili a chiunque usa\nOpenStreetMap. Per fare una modifica, avrai bisogno di [accedere](https://www.openstreetmap.org/login).\n\n[iD editor](http://ideditor.com/) è un progetto collaborativo il cui [codice\nsorgente è disponibile su GitHub](https://github.com/openstreetmap/iD).\n",
-            "editing_saving": "# Modifica & salvataggio\n\nQuesto editor è stato pensato per funzionare principalmente online ed\nanche in questo momento lo stai utilizzando tramite browser web.\n\n### Selezione degli Elementi\n\nPer selezionare un elemento della mappa, come ad esempio una\nstrada o un punto di interesse, clicca su di esso sulla mappa. Questo\nfarà in modo che l'elemento selezionato venga evidenziato, che si apra\nun pannello con i dettagli e che si apra un menu di azioni che è\npossibile fare con l'elemento stesso.\n\nPer selezionare più elementi tenendo premuto il tasto 'Maiusc'; clicca\nsu ogni elemento o trascina il mouse disegnando un riquadro sulla\nmappa. Questo farà sì che tutti gli elementi all'interno del riquadro\nvengano selezionati consentendo di compiere azioni su più elementi\nin una volta sola.\n\n### Salvataggio delle modifiche\n\nQuando si fanno dei cambiamenti, come modifiche alle strade, agli\nedifici e ai luoghi, questi vengono memorizzati localmente fino a che\nnon si effettua il salvataggio sul server. Non preoccuparti se fai un\nerrore, puoi annullare la modifica premendo il tasto 'Annulla' e\nrieffettuare la modifica cliccando sul tasto 'Ripeti'.\n\nSe ad esempio hai completato un'area della città e vuoi iniziare un'altra\narea clicca su 'Salva' e porre fine ad un gruppo di modifiche. Avrai\ncomunque la possibilità di revisionare ciò che hai modificato inoltre\nl'editor fornirà suggerimenti e avvertimenti se qualcosa nelle tue\nmodifiche non sembra andare bene.\n\nSe tutto è a posto puoi aggiungere un piccolo commento per spiegare\nla modifica effettuata e cliccare su 'Salva' di nuovo per caricare le\nmodifiche su [OpenStreetMap.org](http://www.openstreetmap.org/),\ndove saranno visibili a tutti gli utenti e disponibili agli altri per\nconsentire di costruirci sopra o migliorarle ulteriormente.\n\nSe non riesci a finire le modifiche in una seduta, puoi abbandonare la\nfinestra dell'editor e tornarci più tardi (utilizzando lo stesso browser e lo\nstesso computer): l'editor ti offrirà infatti la possibiltà di recuperare il tuo\nlavoro.\n\n### Utilizzo dell'editor\n\n[Qui](http://wiki.openstreetmap.org/wiki/ID/Shortcuts) puoi trovare una lista delle scorciatoie disponibili.\n",
             "roads": "# Strade\n\nE' possibile creare, aggiustare ed eliminare le strade con questo editor. Le strade possono essere di tutti i tipi: percorsi, autostrade, cammini, piste ciclabili o altro. E' possibile mappare ogni segmento calpestabile.\n\n### Selezione\n\nCliccare su una strada per selezionarla. Verranno visualizzati un contorno e un piccolo menu strumenti sulla mappa oltre ad una barra laterale che mostra informazioni dettagliate sulla strada.\n\n### Modifica\n\nVi capiterà spesso di vedere strade non combacianti con le immagini sullo sfondo o con il tracciato GPS. E' possibile allineare queste strada in modo che si trovino nella giusta posizione.\n\nPer prima cosa cliccare sulla strada che si vuole modificare. Questo farà in modo che la strada venga evidenziata e che vengano visualizzati i punti di controllo lungo di essa che possono essere spostati in luoghi più consoni. Se si vuole aggiungere nuovi punti di controllo per aggiungere maggiori dettagli, basta fare doppio clic su parte della strada senza nodi.\n\nSe la strada è connessa ad un'altra strada ma non è ben connessa sulla mappa, è possibile spostare uno di questi punti di controllo sull'altra strada in modo da unirli. E' importante per la mappa che le strade siano correttamente connesse  anche per garantire giuste indicazioni di guida.\n\nE' possibile cliccare sullo strumento 'Sposta' o premere il tasto rapido `M` per muovere l'intera strada in una volta sola. Cliccare nuovamente per memorizzare lo spostamento.\n\n### Eliminizione\n\nSe la strada è completamente sbagliata, ovvero non compare sulle immagini satellitari e non viene rilevata nella realtà, è possibile eliminarla eliminandola dalla mappa. Attenzione ad effettuare questa operazione di eliminazione poiché, come per ogni altra modifica, i risultati vengono visti da tutti. Considera che le immagini satellitari sono spesso vecchie quindi è possibile che la strada sia stata costruita solo di recente.\n\nE' possibile eliminare una strada cliccando prima su di essa per selezionarla e poi sull'icona cestino o premendo il tasto 'Canc' della tastiera.\n\n### Creazione\n\nHai notato che in un punto della mappa dovrebbe esserci una strada ma non c'è ? Clicca sull'incona 'Linea' in alto a sinistra nell'editor o premi il tasto `2` per iniziare a disegnare una linea.\n\nCliccare sull'inizio della strada sulla mappa per iniziare a disegnarla. Se la strada  è unita ad una strada già esistente, iniziare cliccando nel punto dove sono connesse.\n\nQuindi cliccare i nuovi punti lungo la strada in modo che segua il percorso giusto dettato dall'immagine satellitare o dai dati del GPS. Se la strada che stai disegnando attraversa un'altra strada, collegala cliccando sul punto di intersezione. Quando hai finito di disegnare fai doppio clic o premi 'Invio' o 'Enter' sulla tua tastiera.\n",
             "gps": "# GPS\n\nLe tracce provenienti dal GPS sono una sorgente dati fidata per OpenStreetMap. Questo editor\nsupporta i tracciati locali - i file `.gpx` che si trovano sul tuo computer. È possibile raccogliere\nquesto tipo di tracciati GPS con un gran numero di applicazioni per smartphone\no tramite dispositivi GPS personali.\n\nPer informazioni su come effettuare un rilevamento GPS è possibile\nleggere [Mappare con uno smartphone, un GPS o una cartina](http://learnosm.org/en/mobile-mapping/).\n\nPer utilizzare un tracciato GPX al fine di effettuare una mappatura,\ntrascina il file GPX sull'editor di mappe. Se viene riconosciuto verrà\naggiunto alla mappa ed evidenziato tramite una linea violetta. Clicca\nsul menu 'Dati mappa' che si trova sulla sinistra per abilitare,\ndisabilitare o zoomare il livello creato dal file GPX.\n\nIl tracciato GPX non viene caricato direttamente su OpenStreetMap - il\nmodo migliore di utilizzarlo è quello di disegnare sulla mappa usando il\ntracciato come guida per i nuovi elementi che vuoi aggiungere e\n[caricarlo comunque su OpenStreetMap](http://www.openstreetmap.org/trace/create) per renderlo poi\ndisponibile agli altri utenti.\n",
             "imagery": "# Immagini\n\nLe immagini aeree sono un'importante risorsa per la mappatura. Una\ncombinazione di foto aeree, immagini satellitari e risorse liberamente\ncompilate sono disponibili nell'editor nel menu 'Impostazioni dello sfondo'\nsulla destra.\n\nLe immagini predefinite presentate nell'editor sono quelle satellitari di\n[Bing Maps](http://www.bing.com/maps/), ma spostando o ingrandendo\nla mappa in specifiche aree geografiche potranno essere disponibili più\nrisorse. Alcune nazioni, come Stati Uniti, Francia e Danimarca, hanno a\ndisposizione, per alcune aree, immagini ad alta definizione.\n\nLe immagini sono a volte disallineate rispetto ai dati della mappa a causa\ndi errori da parte di chi le fornisce. Se vedi numerose strade spostate\nrispetto alle immagini di sfondo non correggerle tutte subito per farle\nnuovamente combaciare. Puoi invece aggiustare l'allineamento delle immagini\nsullo sfondo in modo da ri-allinearle con i dati esistenti cliccando su\n'Allinea' in fondo al menu.\n",
@@ -770,14 +769,14 @@
                 "words": "Questa guida introdurrà termini e concetti nuovi. Queste novità saranno indicate in *corsivo*.",
                 "mouse": "Puoi usare ogni dispositivo per modificare la mappa, ma questa guida presuppone che tu stia utilizzando un mouse con un pulsante sinistro ed uno destro. **Se vuoi collegare un mouse fallo ora e quindi clicca OK**.",
                 "leftclick": "Quando questo tutorial ti chiede di fare un click si intende con il pulsante sinistro. Su un trackpad può essere un click singolo o un tap con un solo dito. **Clicca col pulsante sinistro {num} volte.**",
-                "rightclick": "Certe volte viene chiesto di fare un click col pulsante destro.  Su un trackpad potrebbe significare control + click o un tap con due dita. La tua tastiera potrebbe avere un tasto 'menu' che funziona come un click destro. **Clicca col pulsante destro {num} volte.**",
+                "rightclick": "Certe volte viene chiesto di fare un click col pulsante destro.  Su un trackpad potrebbe significare control + click o un tap con due dita. La tua tastiera potrebbe avere un tasto 'menù' che funziona come un click destro. **Clicca col pulsante destro {num} volte.**",
                 "chapters": "Ci siamo quasi! Puoi usare i pulsanti in basso per saltare i capitoli in ogni momento o per ricominciare un capitolo se ti trovi in difficoltà. Iniziamo! **Clicca '{next}' per continuare.**"
             },
             "navigation": {
                 "title": "Navigazione",
                 "drag": "L'area principale mostra i dati di OpenStreetMap sopra uno sfondo.{br}Puoi trascinare la mappa premendo il tasto sinistro del mouse e tenendolo premuto mentre sposti il mouse. Puoi anche usare le frecce della tastiera. **Scorri la mappa!**",
                 "zoom": "Puoi aumentare o diminuire l'ingrandimento con la rotellina centrale del mouse o del trackpad, oppure cliccando i pulsanti {plus}/{minus}. **Ingrandisci la mappa!**",
-                "features": "Viene usata la parola *elemento* per descrivere le cose che appaiono sulla mappa. Qualsiasi cosa presente nel mondo reale può essere mappa come elemento su OpenStreetMap.",
+                "features": "Viene usata la parola *elemento* per descrivere le cose che appaiono sulla mappa. Qualsiasi cosa presente nel mondo reale può essere mappata come elemento su OpenStreetMap.",
                 "points_lines_areas": "Gli elementi della mappa vengono rappresentati con *punti, linee o aree.*",
                 "nodes_ways": "In OpenStreetMap i punti sono chiamati anche *nodi* e le linee e le aree sono chiamate anche *percorsi*.",
                 "click_townhall": "Tutti gli elementi sulla mappa possono essere selezionati cliccando su di essi. **Clicca sul punto per selezionarlo.**",
@@ -796,14 +795,14 @@
                 "title": "Punti",
                 "add_point": "I *punti* possono essere usati per rappresentare elementi come negozi, ristoranti e monumenti.{br}Indicano un luogo specifico e descrivono cosa vi si trova. **Clicca il {button} Punto per aggiungere un nuovo punto.**",
                 "place_point": "Per mettere il nuovo punto sulla mappa, posiziona il tuo cursore del mouse dove il punto dovrebbe andare, quindi clicca con il bottone sinistro del mouse o premi la barra spaziatrice. **Muovi il puntatore del mouse sopra questo edificio, quindi clicca con il bottone sinistro o premi la barra spaziatrice.**",
-                "search_cafe": "Ci sono molti elementi che possono essere rappresentati da un punto. Il punto che hai appena creato è un Bar. **Cerca '{preset}'.**",
+                "search_cafe": "Ci sono molti elementi che possono essere rappresentati da un punto. Il punto che hai appena creato è un bar. **Cerca '{preset}'.**",
                 "choose_cafe": "**Scegli {preset} dalla lista.**",
-                "feature_editor": "Ora il punto è marcato come Caffè. Usando l'editor dell'elemento possiamo aggiungere più informazioni sull'elemento stesso.",
+                "feature_editor": "Ora il punto è marcato come bar. Usando l'editor dell'elemento possiamo aggiungere più informazioni sull'elemento stesso.",
                 "add_name": "In OpenStreetMap, tutti i campi sono opzionali, ed è ammesso lasciare un campo vuoto se non si è sicuri.{br}Facciamo finta che tu conosca questo bar, e che sappia come si chiami. **Aggiungi il nome del bar**",
-                "add_close": "L'editor mantiene automaticamente in memoria tutte le modifiche effettuate. **Quando hai finito di aggiungere il nome, premi Escape, Invio, oppure clicca il pulsante {button} per chiudere l'editor.**",
+                "add_close": "L'editor mantiene automaticamente in memoria tutte le modifiche effettuate. **Quando hai finito di aggiungere il nome, premi Esc, Invio, oppure clicca il pulsante {button} per chiudere l'editor dell'elemento.**",
                 "reselect": "Sovente i punti esistono già, ma hanno errori o sono incompleti. Noi possiamo modificare i punti esistenti. **Clicca per selezionare il bar che hai appena creato.**",
                 "update": "Aggiungiamo qualche dettaglio al bar. Puoi cambiargli nome, aggiungere il tipo di cucina, o aggiungere l'indirizzo. **Cambia le informazioni associate al bar.**",
-                "update_close": "Quando hai finito di modificare le informazioni associate al bar, premi Escape, Invio, oppure clicca il pulsante {button} per chiudere l'editor.",
+                "update_close": "**Quando hai finito di modificare le informazioni associate al bar, premi Esc, Invio, oppure clicca il pulsante {button} per chiudere l'editor dell'elemento.**",
                 "rightclick": "Puoi cliccare con il pulsante destro su qualsiasi elemento per visualizzare il *menù di modifica*, che mostra la lista di tipi di modifiche che si possono effettuare. **Clicca con il pulsante destro per selezionare il punto che hai creato e mostrare il menù di modifica.**",
                 "delete": "Si possono cancellare elementi che non esistono nella realtà.{br}La cancellazione di un elemento da OpenStreetMap lo rimuove dalla mappa che tutti vedono, perciò devi essere sicuro che un elemento non esista veramente prima di cancellarlo. **Clicca sul pulsante {button} per eliminare il punto.**",
                 "undo": "Puoi sempre annullare le modifiche prima di salvarle in OpenStreetMap. **Clicca sul pulsante  {button} per annullare la cancellazione e ripristinare il punto.**",
@@ -811,13 +810,13 @@
             },
             "areas": {
                 "title": "Aree",
-                "add_playground": "*Le aree* sono utilizzate per indicare i contorni degli elementi come ad esempio i laghi, gli edifici e le aree residenziali.{br}Possono anche essere utilizzate per rappresentare in modo più dettagliato elementi che normalmente vengono mappati come punti. **Clicca il pulsante Area {button} per aggiungere una nuova area.**",
-                "start_playground": "Aggiungiamo questo giardino alla mappa disegnandone l'area. Le aree sono disegnate posizionando dei *punti* lungo il bordo esterno dell'elemento. **Clicca o premi la barra spaziatrice per posizionare il punto iniziale su uno dei vertici del giardino.**",
-                "continue_playground": "Continua a disegnare l'area sistemando più punti lungo il bordo del giardino. Si può connettere l'area ai percorsi pedonali esistenti.{br}Suggerimento: Puoi tenere premuto il tasto Alt per impedire ai punti che stai creando di connettersi ad altri elementi. **Continua a disegnare l'area del parco giochi.**",
-                "finish_playground": "Terminate l'area premendo Invio, o cliccando nuovamente sul primo o ultimo nodo. **Conclusione del disegno dell'area del giardino.**",
+                "add_playground": "*Le aree* sono utilizzate per indicare i contorni degli elementi come ad esempio laghi, edifici e aree residenziali.{br}Possono anche essere utilizzate per rappresentare in modo più dettagliato elementi che normalmente vengono mappati come punti. **Clicca il pulsante Area {button} per aggiungere una nuova area.**",
+                "start_playground": "Aggiungiamo questo parco giochi alla mappa disegnandone l'area. Le aree sono disegnate posizionando dei *punti* lungo il bordo esterno dell'elemento. **Clicca o premi la barra spaziatrice per posizionare il punto iniziale su uno dei vertici del parco giochi.**",
+                "continue_playground": "Continua a disegnare l'area sistemando più punti lungo il bordo del parco giochi. Si può connettere l'area ai percorsi pedonali esistenti.{br}Suggerimento: Puoi tenere premuto il tasto Alt per impedire ai punti che stai creando di connettersi ad altri elementi. **Continua a disegnare l'area del parco giochi.**",
+                "finish_playground": "Termina l'area premendo Invio, o cliccando nuovamente sul primo o ultimo nodo. **Finisci di disegnare un'area per il parco giochi.**",
                 "search_playground": "**Cerca '{preset}'.**",
                 "choose_playground": "**Scegli {preset} dalla lista.**",
-                "add_field": "Questo giardino non ha un nome ufficiale, perciò non aggiungiamo nulla nel campo Name.{br}Aggiungiamo invece qualche altra informazione relativa al giardino nel campo Description. **Apri la lista Aggiungi Campo.**",
+                "add_field": "Questo parco giochi non ha un nome ufficiale, perciò non aggiungiamo nulla nel campo Nome.{br}Aggiungiamo invece qualche altra informazione relativa al parco giochi nel campo Descrizione. **Apri la lista Aggiungi Campo.**",
                 "choose_field": "**Scegli {field} dalla lista.**",
                 "retry_add_field": "Non hai selezionato il campo {field}. Prova ancora.",
                 "describe_playground": "**Aggiungi una descrizione, quindi clicca il bottone {button} per chiudere l'editor dell'elemento.**",
@@ -830,25 +829,25 @@
                 "intersect": "Clicca o premi spazio per aggiungere altri nodi alla linea.{br}Le strade e molti altri tipi di percorsi, fanno parte di una rete più estesa. È importante che queste linee siano connesse correttamente affinché le applicazioni di navigazione possano funzionare. **Clicca su {name} per creare una intersezione che connetta le due linee.**",
                 "retry_intersect": "La strada deve intersecare {name}. Prova ancora!",
                 "continue_line": "Continua a disegnare la nuova strada. Ricordati che puoi spostare o ingrandire la mappa a piacimento.{br}Quando avrai finito, clicca di nuovo l'ultimo nodo. **Finisci di disegnare la strada.**",
-                "choose_category_road": "**Seleziona {category} dalla lista**",
+                "choose_category_road": "**Scegli {category} dalla lista.**",
                 "choose_preset_residential": "Esistono molti tipi diversi di strade, ma questa è una residenziale. **Scegli il tipo {preset}.**",
                 "retry_preset_residential": "Non hai selezionato il tipo {preset}. **Clicca qui per scegliere di nuovo.**",
-                "name_road": "**Dai un nome a questa strada, poi premi Escape, Invio o clicca il pulsante {button} per chiudere l'editor degli elementi.**",
+                "name_road": "**Dai un nome a questa strada, poi premi Esc, Invio o clicca il pulsante {button} per chiudere l'editor dell'elemento.**",
                 "did_name_road": "Sembra perfetto! Tra poco impareremo ad aggiornare l'aspetto di un percorso.",
                 "update_line": "Talvolta dovrai alterare l'aspetto di un percorso esistente. Qui abbiamo una strada che non sembra disegnata correttamente.",
                 "add_node": "Possiamo aggiungere qualche nodo al percorso per migliorarne la forma. Un modo per farlo è di cliccare due volte la linea nel punto in cui vuoi aggiungere un nodo. **Clicca due volte la linea per creare un nuovo nodo.**",
                 "start_drag_endpoint": "Quando un percorso è selezionato, puoi spostare un suo nodo cliccando e tenendo premuto il tasto sinistro del mouse mentre trascini. **Trascina l'estremità nel punto in cui le strade dovrebbero intersecarsi.**",
                 "finish_drag_endpoint": "Questo posto sembra andar bene. **Rilascia il tasto sinistro del mouse per terminare lo spostamento.**",
                 "start_drag_midpoint": "Dei piccoli triangoli sono presenti a metà strada tra ogni nodo del percorso. Un ulteriore modo per creare nuovi nodi è quello di trascinare uno di questi triangoli in un'altra posizione. **Trascina un triangolo intermedio per creare un nuovo nodo sul percorso della strada.**",
-                "continue_drag_midpoint": "Questa linea sembra molto meglio adesso! Continua a ritoccarla facendo doppio click o trascinando i punti intermedi a che la curva non corrisponderà alla forma della strada. **Quando sei soddisfatto di come è il percorso, clicca OK.**",
+                "continue_drag_midpoint": "Questa linea sembra molto meglio adesso! Continua a ritoccarla facendo doppio click o trascinando i punti intermedi fino a che la curva non corrisponderà alla forma della strada. **Quando sei soddisfatto di come è il percorso, clicca OK.**",
                 "delete_lines": "Le strade che non esistono nella realtà dovrebbero essere eliminate.{br}Qui ad esempio abbiamo una {street} la cui costruzione era stata pianificata dal comune ma che poi non è più stata realizzata. Possiamo migliorare la mappa eliminando i percorsi in più.",
                 "rightclick_intersection": "L'ultima strada esistente è {street1}, perciò *dividiamo* {street2} all'altezza di questa intersezione e rimuoviamo tutto quello che è al di sopra. **Clicca con il tasto destro del mouse il nodo di intersezione.**",
                 "split_intersection": "**Clicca il pulsante {button} per dividere {street}.**",
                 "retry_split": "Non hai cliccato il pulsante Dividi. Prova di nuovo.",
-                "did_split_multi": "Ben fatto! {street1} è ora divisa in due parti. La parte più in alto può essere rimossa. **Clicca nella parte in alto di {street2} per selezionarla.**",
+                "did_split_multi": "Ben fatto! {street1} è ora divisa in due parti. La parte più in alto può essere rimossa. **Clicca la parte superiore di {street2} per selezionarla.**",
                 "did_split_single": "**Clicca nella parte in alto di {street2} per selezionarla.**",
                 "multi_select": "Hai selezionato {selected}. Seleziona anche {other1}. Puoi tenere premuto il tasto Maiuscolo mentre clicchi per selezionare più di un oggetto. **Tieni premuto il tasto Maiuscolo e clicca su {other2}.**",
-                "multi_rightclick": "Bene! Entrambe le strade da eliminare sono adesso selezionate. **Clicca col tasto destro su di una delle linee per mostrare il menù di modifica.**",
+                "multi_rightclick": "Bene! Entrambe le strade da eliminare sono adesso selezionate. **Clicca col tasto destro su una delle linee per mostrare il menù di modifica.**",
                 "multi_delete": "**Clicca il pulsante {button} per eliminare le linee in più.**",
                 "retry_delete": "Non hai cliccato il pulsante Cancella. Prova di nuovo.",
                 "play": "Perfetto! Utilizza ciò che ha imparato in questo capitolo per fare delle prove su altri percorsi. **Quando sei pronto per il nuovo capitolo, clicca '{next}'.**"
@@ -857,18 +856,18 @@
                 "title": "Edifici",
                 "add_building": "OpenStreetMap è il più grande database degli edifici del mondo.{br}Puoi aiutare a migliorare questo database tracciando gli edifici che mancano. **Clicca il pulsante Area {button} per aggiungere una nuova area.**",
                 "start_building": "Aggiungiamo questa casa alla mappa tracciando il suo perimetro.{br}Gli edifici dovrebbero essere tracciati seguendo il loro aspetto nel modo più preciso possibile. ** Clicca con il mouse o premi spazio per disegnare il nodo iniziale su un angolo dell'edificio.**",
-                "continue_building": "Continua ad aggiungere altri nodi per tracciare il perimetro dell'edificio. Ricordati che puoi ingrandire se vuoi, così da aggiungere altri dettagli.{br}Termina l'edificio premendo Invio o cliccando di nuovo sul primo o sull'ultimo nodo. **Finisci di disegnare l'edificio.**",
+                "continue_building": "Continua ad aggiungere altri nodi per tracciare il perimetro dell'edificio. Ricordati che puoi ingrandire se vuoi aggiungere più dettagli.{br}Termina l'edificio premendo Invio o cliccando di nuovo sul primo o sull'ultimo nodo. **Finisci di tracciare l'edificio.**",
                 "retry_building": "Sembra che tu abbia avuto qualche problema nel piazzare i nodi negli angoli dell'edificio. Prova di nuovo!",
                 "choose_category_building": "**Scegli {category} dalla lista.**",
                 "choose_preset_house": "Esistono molti tipi differenti di edificio, ma questa è senza dubbio una casa.{br}Se non sei sicuro sul tipo, va bene anche scegliere semplicemente il tipo generico di edificio. **Scegli il tipo {preset}.**",
-                "close": "**Premi il tasto Escape o clicca il pulsante {button} per chiudere l'editor degli elementi.**",
+                "close": "**Premi il tasto Escape o clicca il pulsante {button} per chiudere l'editor dell'elemento.**",
                 "rightclick_building": "**Clicca con il tasto destro del mouse per selezionare l'edificio che hai creato e mostrare il menù di modifica.**",
-                "square_building": "La casa che hai appena aggiunto avrà un aspetto migliore se gli angoli saranno retti. **Clicca il pulsante {button} per ortogonalizzare l'aspetto dell'edificio.**",
+                "square_building": "La casa che hai appena aggiunto avrà un aspetto migliore se gli angoli sono retti. **Clicca il pulsante {button} per ortogonalizzare l'aspetto dell'edificio.**",
                 "retry_square": "Non hai cliccato il bottone Ortogonalizza. Prova di nuovo.",
                 "done_square": "Hai visto come gli angoli dell'edificio si sono spostati al loro posto? Impariamo un altro trucchetto.",
                 "add_tank": "Adesso disegneremo questa cisterna di stoccaggio rotonda. **Clicca il pulsante Area {button} per aggiungere una nuova area.**",
                 "start_tank": "Non ti preoccupare, non sarà necessario disegnare un cerchio perfetto, Basta che disegni un'area dentro la cisterna che ne tocchi il bordo. **Clicca con il mouse o premi spazio per aggiungere un nodo sul bordo della cisterna.**",
-                "continue_tank": "Aggiungi qualche altro nodo sul bordo. Il cerchio verrà creato attorno ai nodi disegnati.{br}Finisci l'area premendo Invio, o cliccando di nuovo sul primo o sull'ultimo nodo. **Finisci di tracciare la cisterna.**",
+                "continue_tank": "Aggiungi qualche altro nodo sul bordo. Il cerchio verrà creato attorno ai nodi disegnati.{br}Finisci l'area premendo Invio o cliccando di nuovo sul primo o sull'ultimo nodo. **Finisci di tracciare il serbatoio.**",
                 "search_tank": "**Cerca il termine '{preset}'.**",
                 "choose_tank": "**Scegli {preset} dalla lista.**",
                 "rightclick_tank": "**Clicca con il tasto destro del mouse la cisterna creata per mostrare il menù di modifica.**",
@@ -881,6 +880,110 @@
                 "help": "Adesso sei pronto per effettuare modifiche su OpenStreetMap!{br}Puoi rifare questo tutorial quando vuoi o leggere la documentazione cliccando sul pulsante Aiuto {button}.",
                 "save": "Non dimenticare di salvare periodicamente le tue modifiche!",
                 "start": "Inizia a mappare!"
+            }
+        },
+        "shortcuts": {
+            "title": "Scorciatoie da tastiera",
+            "tooltip": "Mostra le scorciatoie da tastiera",
+            "key": {
+                "alt": "Alt",
+                "backspace": "← Backspace",
+                "cmd": "Cmd",
+                "ctrl": "Ctrl",
+                "delete": "Canc",
+                "del": "Canc",
+                "end": "Fine",
+                "enter": "Invio",
+                "esc": "Esc",
+                "home": "Inizio",
+                "option": "option",
+                "pause": "Pausa",
+                "pgdn": "Pag",
+                "pgup": "Pag",
+                "return": "Invio",
+                "shift": "Maiusc",
+                "space": "Spazio"
+            },
+            "gesture": {
+                "drag": "trascina"
+            },
+            "or": "-o-",
+            "browsing": {
+                "title": "Navigando",
+                "navigation": {
+                    "title": "Navigazione",
+                    "pan": "Scorrere la mappa",
+                    "pan_more": "Scorrere la mappa di una schermata",
+                    "zoom": "Ingrandisci / Rimpicciolisci",
+                    "zoom_more": "Ingrandisci / Rimpicciolisci molto"
+                },
+                "help": {
+                    "title": "Aiuto",
+                    "help": "Mostra la documentazione",
+                    "keyboard": "Mostra scorciatoie da tastiera"
+                },
+                "display_options": {
+                    "title": "Mostra opzioni",
+                    "background": "Mostra opzioni sfondo",
+                    "background_switch": "Ritorna all'ultimo sfondo",
+                    "map_data": "Mostra opzioni dati mappa",
+                    "fullscreen": "Entra in modalità a tutto schermo",
+                    "wireframe": "Commuta modalità \"fil di ferro\"",
+                    "minimap": "Commuta minimappa"
+                },
+                "selecting": {
+                    "title": "Selezione elementi",
+                    "select_one": "Seleziona un solo elemento",
+                    "select_multi": "Seleziona più elementi",
+                    "lasso": "Disegna un lazo intorno agli elementi da selezionare"
+                },
+                "with_selected": {
+                    "title": "Con l'elemento selezionato",
+                    "infobox": "Commuta riquadro info / misura",
+                    "edit_menu": "Commuta il menù edit"
+                },
+                "vertex_selected": {
+                    "title": "con il nodo selezionato",
+                    "previous": "Passa al nodo precedente",
+                    "next": "Passa al nodo successivo",
+                    "first": "Passa al primo nodo",
+                    "last": "Passa all'ultimo nodo"
+                }
+            },
+            "editing": {
+                "title": "Modificando",
+                "drawing": {
+                    "title": "Disegnando",
+                    "add_point": "modo 'aggiungi punto'",
+                    "add_line": "modo 'aggiungi linea'",
+                    "add_area": "modo 'aggiungi area'",
+                    "place_point": "Fai un punto",
+                    "disable_snap": "Tieni premuto per disabilitare l'ancoraggio ai nodi preesistenti",
+                    "stop_line": "Termine disegno di una linea o di un'area"
+                },
+                "operations": {
+                    "title": "Operazioni",
+                    "continue_line": "Continua una linea dal nodo selezionato",
+                    "merge": "Unisci (fondi) gli elementi selezionati",
+                    "disconnect": "Disconnetti gli elementi dal nodo selezionato",
+                    "split": "Spezza una linea in due sul nodo selezionato",
+                    "reverse": "Inverti la direzione di una linea",
+                    "move": "Sposta gli elementi selezionati",
+                    "rotate": "Ruota gli elementi selezionati",
+                    "orthogonalize": "Raddrizza linea / squadra gli angoli di un'area",
+                    "circularize": "Arrotonda una linea chiusa o area",
+                    "reflect_long": "Rifletti gli elementi lungo l'asse maggiore",
+                    "reflect_short": "Rifletti gli elementi lungo l'asse minore ",
+                    "delete": "Cancella gli elementi selezionati"
+                },
+                "commands": {
+                    "title": "Comandi",
+                    "copy": "Copia gli elementi selezionati",
+                    "paste": "Incolla gli elementi selezionati",
+                    "undo": "Annulla l'ultima operazione",
+                    "redo": "Ripeti l'ultima operazione",
+                    "save": "Salva le modifiche"
+                }
             }
         },
         "presets": {
@@ -982,27 +1085,33 @@
                         "block_number": "Blocco",
                         "block_number!jp": "Num. blocco",
                         "city": "Città",
+                        "city!jp": "Città/Cittadina/Paese/particolare rione di Tokio",
                         "city!vn": "Città/Cittadina",
                         "conscriptionnumber": "123",
                         "country": "Nazione",
                         "county": "Contea (in Italia NON usare)",
                         "county!jp": "Distretto",
                         "district": "Distretto",
+                        "district!vn": "Circoscrizione/Città/Distretto",
                         "floor": "Piano",
                         "hamlet": "Borgo",
                         "housename": "Numero civico",
                         "housenumber": "123",
                         "housenumber!jp": "Num. edificio/Num. lotto",
                         "neighbourhood": "Quartiere",
+                        "neighbourhood!jp": "Chōme/Aza/Koaza",
                         "place": "Luogo",
                         "postcode": "Codice postale",
                         "province": "Provincia",
                         "province!jp": "Prefettura",
                         "quarter": "Circoscrizione",
+                        "quarter!jp": "Ōaza/Machi",
                         "state": "Stato/Regione",
                         "street": "Strada",
                         "subdistrict": "Sottodistretto",
-                        "suburb": "Circoscrizione"
+                        "subdistrict!vn": "Rione/Comune/Cittadina",
+                        "suburb": "Circoscrizione",
+                        "suburb!jp": "Rione"
                     }
                 },
                 "admin_level": {
@@ -1445,7 +1554,7 @@
                     "label": "SSID (Nome della rete)"
                 },
                 "kerb": {
-                    "label": "Rampa sul cordolo"
+                    "label": "Cordolo"
                 },
                 "lamp_type": {
                     "label": "Tipo"
@@ -1534,6 +1643,9 @@
                 },
                 "maxstay": {
                     "label": "Limite orario"
+                },
+                "maxweight": {
+                    "label": "Peso massimo"
                 },
                 "mtb/scale": {
                     "label": "Difficoltà Mountain Bike",
@@ -2311,7 +2423,8 @@
                     "terms": "Stazione dei Vigili del fuoco"
                 },
                 "amenity/food_court": {
-                    "name": "Zona ristorazione"
+                    "name": "Zona ristorazione",
+                    "terms": "<translate with synonyms or related terms for 'Food Court', separated by commas>"
                 },
                 "amenity/fountain": {
                     "name": "Fontana",
@@ -2433,7 +2546,8 @@
                     "terms": "pub,birreria,locale"
                 },
                 "amenity/public_bath": {
-                    "name": "Bagni Pubblici"
+                    "name": "Bagni Pubblici",
+                    "terms": "<translate with synonyms or related terms for 'Public Bath', separated by commas>"
                 },
                 "amenity/public_bookcase": {
                     "name": "Libreria pubblica",
@@ -2521,6 +2635,10 @@
                     "name": "Area universitaria",
                     "terms": "università"
                 },
+                "amenity/vending_machine": {
+                    "name": "Distributore automatico",
+                    "terms": "distributore automatico,macchinetta"
+                },
                 "amenity/vending_machine/cigarettes": {
                     "name": "Distributore automatico di sigarette",
                     "terms": "distributore automatico,macchinetta,sigarette,tabacco,cartine,accendini"
@@ -2539,6 +2657,10 @@
                 },
                 "amenity/vending_machine/news_papers": {
                     "name": "Distributore automatico di giornali"
+                },
+                "amenity/vending_machine/newspapers": {
+                    "name": "Distributore automatico di quotidiani",
+                    "terms": "distributore automatico,macchinetta,giornali,riviste,quotidiani"
                 },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
                     "name": "Distributore postale automatico",
@@ -2860,6 +2982,10 @@
                     "name": "Negozio per dolciumi",
                     "terms": "dolci,dolciumi,caramelle,confetti"
                 },
+                "craft/distillery": {
+                    "name": "Distilleria",
+                    "terms": "<translate with synonyms or related terms for 'Distillery', separated by commas>"
+                },
                 "craft/dressmaker": {
                     "name": "Sartoria",
                     "terms": "sarto,merceria,vestiti su misura"
@@ -2867,6 +2993,10 @@
                 "craft/electrician": {
                     "name": "Elettricista",
                     "terms": "elettronica,elettricità"
+                },
+                "craft/electronics_repair": {
+                    "name": "Riparazione di elettrodomestici",
+                    "terms": "elettronica,riparazione,negozio,elettrodomestici,elettricista,aggiustare"
                 },
                 "craft/gardener": {
                     "name": "Giardiniere",
@@ -3124,6 +3254,10 @@
                 "highway/cycleway": {
                     "name": "Percorso ciclabile",
                     "terms": "Percorso ciclabile"
+                },
+                "highway/elevator": {
+                    "name": "Ascensore",
+                    "terms": "montacarichi,ascensore,elevatore"
                 },
                 "highway/footway": {
                     "name": "Percorso pedonale",
@@ -3569,7 +3703,8 @@
                     "terms": "Campo da pallacanestro"
                 },
                 "leisure/pitch/beachvolleyball": {
-                    "name": "Campo di beach volley"
+                    "name": "Campo di beach volley",
+                    "terms": "pallavolo,pista,palla,volley,campetto"
                 },
                 "leisure/pitch/bowls": {
                     "name": "Campo da bocce",
@@ -4008,7 +4143,8 @@
                     "terms": "Quartiere,Zona"
                 },
                 "place/quarter": {
-                    "name": "Sotto-distretto / Quartiere"
+                    "name": "Sotto-distretto / Quartiere",
+                    "terms": "<translate with synonyms or related terms for 'Sub-Borough / Quarter', separated by commas>"
                 },
                 "place/square": {
                     "name": "Piazza",
@@ -4165,6 +4301,10 @@
                 "shop/antiques": {
                     "name": "Antiquario",
                     "terms": "antichità,mobili antichi"
+                },
+                "shop/appliance": {
+                    "name": "Negozio di elettrodomestici",
+                    "terms": "condizionatori,apparecchi,lavatrici,asciugatori,freezer,frigo,congelatori"
                 },
                 "shop/art": {
                     "name": "Negozio di opere d'arte",

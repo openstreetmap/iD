@@ -2331,8 +2331,8 @@
                     "name": "Uisuväljak"
                 },
                 "leisure/marina": {
-                    "name": "Jahisadam",
-                    "terms": "Väikesadam, kaatrisadam"
+                    "name": "Väikesadam",
+                    "terms": "Jahisadam,kaatrisadam,jaht,paat,kaater,sadam"
                 },
                 "leisure/miniature_golf": {
                     "name": "Minatuurgolf",

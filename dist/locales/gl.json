@@ -626,7 +626,7 @@
         "help": {
             "title": "Axuda",
             "help": "# Axuda\n\nEste é un editor para [OpenStreetMap](http://www.openstreetmap.org/), o mapa\nlibre e editable do mundo. Podes usalo e engadir e actualizar información\ndatos da túa zona, facendo unha fonte libre de datos abertos do mapa do mundo\na mellor para todos.\n\nAs edicións que podes facer neste mapa poden ser visibes para calquera uso en\nOpenStreetMap. Para facer unha edición ti debes\n[log in](https://www.openstreetmap.org/login).\n\nO [iD editor](http://ideditor.com/) é un proxecto colaborativo con [source\ncode available on GitHub] (https://github.com/openstreetmap/iD).\n",
-            "editing_saving": "# Editar & Salvar\n\nEste editor está deseñado para traballar primeiramente en liña, e estás accedendo\na el a través dun website agora.\n\n### Sección de Elementos\n\nSelecciona un elemento no mapa, como unha estrada ou punto de interés, pincha\nnel sobre o mapa. Isto pode destacar a función seleccionada, abrir un panel con\ndetailles relacionados, e amosar un menú con funcións que podes facer.\n\nPara seleccionar multiples elementos, menten premida a tecla 'Shift'. Despois prema con cada click sobre os elementos que queira seleccionar, ou arrastre sobre o mapa e debuxe un rectangulo.\nIsto debuxará unha caixa e seleccionará tódolos puntos con ela.\n\n### Salvar Edicións\n\nCando ti fagas cambios como edicións de estradas, edificios, e lugares, son\ngardados localmente ata que sexan subidos no server. Non te preocupes por ter un erro - ti podes desfacer un cambio pinchando no botón de desfacer, e refacer\ncambios pinchando no botón refacer.\n\nPincha en 'Save' ao rematar un grupo de edicións - por exemplo, se remataches\nunha area da cidade e queiras iniciar unha nova áreae. Ti terás que cambiar\na revisión que ti queiras facer, e o editor amosará útiles suxestións\ne avisos se algo non parece correcto nos cambios.\n\nSe todo parece correcto, pode introducir un breve comentario explicando os cambios\nPodes facer click en 'Save' outra vez e postear os cambios\nen [OpenStreetMap.org](http://www.openstreetmap.org/), onde serán visibles\na tódolos outros usuarios e dispoñible para que outros constrúan e o melloren.\n\nSe ti non podes rematar as edicións e queres parar, cando saias da fiestra do editor\ne cando volvas (á mesma computadora e editor), a\naplicación do editor ofrecerache recuperar o teu traballo.\n\n### Usar o editor\n\nUnha lista de atallos de teclado está dispoñible e pode ser atopada en  [here](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
+            "editing_saving": "#  Editar & Salvar\n\nIste editor foi deseñado para traballar primeiramente online, e  accedes directamente através do website agora.\n\n### Seleccionar Elementos\n\nSelecciona elementos do mapa, coma unha estrada ou punto de interese, facendo click sobre el no mapa. Esto resaltará a función seleccionada, abrirá detalles sobre el, e amosará un menu cas cousas que podes facer co elemento.\n\nPra escoller múltiplos elementos manten pulsada a 'Shift' key -Maiusculas-. Logo fai click nos elementos,  que queiras seleccionar, ou arrastra sobre o mapa co rectángulo de selección. Esto debuxará unha caixa e seleccionará tódolos puntos dentro del.\n\n### Salvar Edicións\n\nCando fagas trocos como edicións de rúas, edificios ou lugares, son almacenados localmente ata que os subas ao server. Non te preocupes se tes un erro - podes desfacer os trocos facendo click no botón desfacer, e refacer trocos no botón refacer.-\n\nFai click en 'Save' ao rematar o grupo de edicións -Por exemplo, se remataches unha zona da cidade ou cando queiras iniciar unha nova zona. Terás oportunidade de revisala, e o editor fará suxestións útiles e dará avisos se algo non está correcto nos trocos.\n\nSe che parece todo correcto, podes poñer unha curta resume explicando os trocos feitos, fas click en 'Save' outra vez e os trocos  [OpenStreetMap.org](http://www.openstreetmap.org/) os fará visibles a tódolos usuarios para que os empreguen e actualicen.\n\nSe non es quen de facer as dicións dunha sentada podes deixalo e cando volvas (en calquera navegaro e ordenador) a aplicación do editor darache a oportunidade de restaurar e gardar o traballo feito\n\n###  Usar o editor\n\nTi poder ver a lista de atallos do teclado premendo a tecla `?`\n",
             "roads": "# Estradas\n\nTi podes crear, marcar, e borrar estradas co editor. As estradas poden ser de todo tipo:\npistas, autoestradas, camiños, ciclopistas, e máis - de calquera tipo- os cruces\ne os segmentos poden ser mapeados.\n\n### Seleccionar\n\nPincha sobre unha estrada para seleccionala. En esbozo debe ser visible, xunto\ncun pequeno menú de ferramentas no mapa e unha barra lateral que mostra máis información sobre a estrada.\n\n### Modificar\n\nMoitas veces vai ver que as estradas non están aliñadas coas imaxes por tras delas\nou cunha pista GPS. Pode axustar estradas para que estean no lugar axeitado.\n\nPrimeiro fai click na estrada que queiras modificar. Iluminarase e amosará\nos puntos de control ao longo dela ti podes arrastralos para mellorar a localización. Se queres engadir novos puntos de control para máis precisión, fai doble click na parte da estrada na que queiras o novo nodo, e un punto engadirase.\n\nSe a estrada conecta con outra estrada, pero non se conecta correctamente sobre\no mapa, pode arrastrar un dos seus puntos de control sobre o outro punto na estrada\nco fin de unilas. Ter as estradas conectardas é importante para o mapa e esencial para proporcionar instrucións de conducción.\n\nTamén pode premer na ferramenta 'Move' ou prema a tecla de acceso rápido `M` para mover toda a estrada\nunha vez máis, e logo prema de novo para gardar ese movemento.\n\n### Borrar\n\nSe unha estrada é enteiramente incorrecta - podes ver que non existe nas imaxes de satélite e, idealmente, ter confirmado localmente que non está presente - pode borrala, ou eliminala dende o mapa. Sexa cauteloso ao eliminar características -\ncomo calquera outra edición, os resultados non son vistos por todos en imaxes de satélite é moitas veces están desactualizados, de xeito que a estrada pode estar simplemente recén construída.\n\nPode eliminar unha estrada, premendo sobre ela para seleccionala, a continuación,\npremer na icona lixo ou premendo a tecla \"Delete\".\n\n### Crear\n\nAtopa nalgún lugar que debe haber un camiño, pero non está? Prema na \"liña\"\nicona na esquina superior esquerda do editor ou prema a tecla de acceso `2` para comezar a debuxar.\n\nPrema no inicio da estrada no mapa para comezar a deseñar. Se a estrada\nramifica dende unha estrada existente, comeza premendo sobre o lugar onde elas se conectan.\n\nDespois, prema en puntos ao longo do camiño que segue a liña correcta, segundo imaxes de satélite ou GPS. Se a estrada que está deseñando cruza outra estrada, actívea\npremendo sobre o punto de intersección. Cando termine o deseño, prema dúas veces ou prema 'Return \"ou\" Intro \"no teclado.\n\n",
             "gps": "# GPS\n\nAs trazas GPS gardadas son unha valiosa fonte de información para OpenStreetMap. Este editor\nsoporta trazas locais - `.gpx` arquivos no teu computador local. Ti podes gardar\neste tipo de trazas  GPS cun número de apliacións de smartphone tamén con\nhardware GPS persoal.\n\nPara obter información sobre como realizar trazados GPS, lea\n[Mapping with a smartphone, GPS, or paper](http://learnosm.org/en/mobile-mapping/).\n\nUse trazas GPX para mapear, arrastrar e solta arquivos GPX sobre o editor do mapa.\nDe ser recoñecido, será engadido ao mapa cunha liña en púrpura brillante. Faga clic no menú \"Mapa de datos 'no lado dereito para permitir,\ndesactivar ou engadir a esta nova capa GPX-engadida.\n\nAs trazas GPX non son directamente subidas a OpenStreetMap -o mellor xeito de\nusalas é deseñar o mapa, usándoas como unha guía para as novas características a\nengadir, e tamén para [upload it to OpenStreetMap](http://www.openstreetmap.org/trace/create)\npara que outros usuarios o empreguen.\n",
             "imagery": "# Imaxes\n\nas imaxes aéreas son un recurso importante para o mapeado. Unha combinación de\nvos aéreos, imaxes de satélite, e fontes libremente-compilados están dispoñibles\nno editor baixo o menú 'Configuración do fondo ' á dereita.\n\nPor omisión en [Bing Maps](http://www.bing.com/maps/) as capas de satélite están\npresentes no editor, pero como o pan e o zoom do mapa en novas áreas xeográficas,\nnovas fontes estarán disponíbles. Nalgúns países, como Estados\nUnidos, Francia e Dinamarca teñen dispoñibles moitas imaxes de alta calidade para algunhas áreas.\n\nAs imaxes ás veces son compensadas a partir dos datos do mapa por mor dun erro\npor parte do provedor de imaxes. Se ves que unha morea de camiños desprazouse do fondo,\nnon se moven inmediatamente todos eles para combinar o fondo. Pola contra pode axustar\nas imaxes de xeito que combine os datos premendo en  'Fix alignment' na\nparte inferior da interface de usuario da configuración de fondo UI.\n",
@@ -845,7 +845,7 @@
                 "rightclick_intersection": "A última estrada real é {street1}, nós podemos *split* {street2}  esta ligazón e borrar todo. **Click botón dereito no nodo de ligazón.**",
                 "split_intersection": "**Pincha en {button} butón para dividir {street}.**",
                 "retry_split": "Non pinchaches no botón dividir. Volve tentalo.",
-                "did_split_multi": "Bo traballo!  {street1} está agora dividida en dúas. Na parte alta podes borrala. **Click no alto da parte  {street2}  para seleccionala.**",
+                "did_split_multi": "Ben feito! {street1} agora divide en dúas partes. A parte de enriba pode ser borrada. **Pincha na parte alta {street2} e selecciónaa.**",
                 "did_split_single": "**Pincha na parte alta de {street2} para seleccionala.**",
                 "multi_select": "{selected} está agora seleccionado. Manten a selección {other1}. Podes facer click no botón para facer múltiples seleccións. **Maiusculas máis click en {other2}.**",
                 "multi_rightclick": "Meu! Ambas liñas son borradas ao seleccionalas. **Click no botón dereito sobre unha liña que amosa o menú edición.**",
@@ -881,6 +881,111 @@
                 "help": "Agora xa estás preparado para editar OpenStreetMap! {br} Pode repetir este paso a paso a calquera hora ou ver máis documentación, premendo no botón de Axuda {button}.",
                 "save": "Non te esquezas de gardar regularmente os teus cambios!",
                 "start": "Comeza a cartografiar!"
+            }
+        },
+        "shortcuts": {
+            "title": "Atallos de teclado",
+            "tooltip": "Amosar os atallos de teclado na pantalla.",
+            "key": {
+                "alt": "Alt",
+                "backspace": "Barra Espaciadora",
+                "cmd": "Cmd",
+                "ctrl": "Ctrl",
+                "delete": "Borrar",
+                "del": "Del",
+                "end": "Fin",
+                "enter": "Enter",
+                "esc": "Esc",
+                "home": "Inicio",
+                "option": "Opción",
+                "pause": "Pausa",
+                "pgdn": "PáxAd",
+                "pgup": "PáxAt",
+                "return": "Retorno",
+                "shift": "Maius",
+                "space": "Espacio"
+            },
+            "gesture": {
+                "drag": "arrastrar"
+            },
+            "or": "-ou-",
+            "browsing": {
+                "title": "Navegando",
+                "navigation": {
+                    "title": "Navegación",
+                    "pan": "Mapa Panorámico",
+                    "pan_more": "Mapa panorámico por pantalla completa",
+                    "zoom": "Zoon +/Zoom -",
+                    "zoom_more": "Zoom in / Zoom out total"
+                },
+                "help": {
+                    "title": "Axuda",
+                    "help": "Amosar axuda/documentación",
+                    "keyboard": "Amosar atallos de teclado"
+                },
+                "display_options": {
+                    "title": "Amosar opcións",
+                    "background": "Amosar opcións do fondo",
+                    "background_switch": "Volver trocar ao último fondo",
+                    "map_data": "Amosar opcións datos do mapa",
+                    "fullscreen": "Enter para modo 'pantalla' completa",
+                    "wireframe": "Alternar a modo rede de arame",
+                    "minimap": "Alternar minimapa"
+                },
+                "selecting": {
+                    "title": "Elexir elementos",
+                    "select_one": "Seleccionar un só elemento",
+                    "select_multi": "Seleccionar múltiples elementos",
+                    "lasso": "Debuxar unha volta ao redor dos elementos"
+                },
+                "with_selected": {
+                    "title": "Con elementos selecionados",
+                    "infobox": "Alternar info / caixa de medidas ",
+                    "edit_menu": "Trocar munú edición"
+                },
+                "vertex_selected": {
+                    "title": "Con nodo seleccionado",
+                    "previous": "Saltar ao nodo previo",
+                    "next": "Saltar a próximo nodo",
+                    "first": "Saltar ao primeiro nodo",
+                    "last": "Saltar ao último nodo",
+                    "change_parent": "Trocar a vía local"
+                }
+            },
+            "editing": {
+                "title": "Editando",
+                "drawing": {
+                    "title": "Debuxando",
+                    "add_point": "'Engadir punto' modo",
+                    "add_line": "'Engadir liña' modo",
+                    "add_area": "'Engadir área' modo",
+                    "place_point": "Lugar no punto",
+                    "disable_snap": "Manter premido o punto para desactivalo",
+                    "stop_line": "Rematar debuxando unha liña ou área"
+                },
+                "operations": {
+                    "title": "Operacións",
+                    "continue_line": "Continuar unha liña no nodo seleccionado",
+                    "merge": "Combinar (mesturar) elementos selecionados",
+                    "disconnect": "Desligar elementos do modo selección",
+                    "split": "Dividir unha liña en dúas no nodo seleccionado",
+                    "reverse": "Liña invertida.",
+                    "move": "Mover elementos seleccionados",
+                    "rotate": "Rotar elementos seleccionados",
+                    "orthogonalize": "Endreitar liñas / Esquinas cadradas",
+                    "circularize": "Arredondar unha liña pechada ou área",
+                    "reflect_long": "Reflexar elementos através dun eixo longo",
+                    "reflect_short": "Reflexar elementos através dun eixo curto",
+                    "delete": "Borrar elementos seleccionados"
+                },
+                "commands": {
+                    "title": "Comandos",
+                    "copy": "Copiar elementos seleccionados",
+                    "paste": "Pegar elementos seleccionados",
+                    "undo": "Desfacer última acción",
+                    "redo": "Refacer última acción",
+                    "save": "Gardar os cambios"
+                }
             }
         },
         "presets": {
@@ -1451,7 +1556,7 @@
                     "label": "SSID (Nome da Rede)"
                 },
                 "kerb": {
-                    "label": "Rampla de freo"
+                    "label": "Bordo"
                 },
                 "lamp_type": {
                     "label": "Tipo"
@@ -1540,6 +1645,9 @@
                 },
                 "maxstay": {
                     "label": "Estancia Máxima"
+                },
+                "maxweight": {
+                    "label": "Peso Máximo"
                 },
                 "mtb/scale": {
                     "label": "Dificultade en bicicleta de montaña",
@@ -2369,8 +2477,8 @@
                     "terms": "<translate with synonyms or related terms for 'Motorcycle Parking', separated by commas>"
                 },
                 "amenity/nightclub": {
-                    "name": "Puticlub",
-                    "terms": "<translate with synonyms or related terms for 'Nightclub', separated by commas>"
+                    "name": "Pub",
+                    "terms": "Pub, Discoteca, After, Sala de baile"
                 },
                 "amenity/nursing_home": {
                     "name": "Residencia de Anciáns"
@@ -2688,7 +2796,7 @@
                     "terms": "<translate with synonyms or related terms for 'Apartments', separated by commas>"
                 },
                 "building/barn": {
-                    "name": "Celeiro",
+                    "name": "Celeiro-Hórreo",
                     "terms": "<translate with synonyms or related terms for 'Barn', separated by commas>"
                 },
                 "building/bunker": {
@@ -2876,6 +2984,10 @@
                     "name": "Repostería",
                     "terms": "<translate with synonyms or related terms for 'Confectionery', separated by commas>"
                 },
+                "craft/distillery": {
+                    "name": "Destilaría",
+                    "terms": "<translate with synonyms or related terms for 'Distillery', separated by commas>"
+                },
                 "craft/dressmaker": {
                     "name": "Costureiro/a",
                     "terms": "<translate with synonyms or related terms for 'Dressmaker', separated by commas>"
@@ -2883,6 +2995,10 @@
                 "craft/electrician": {
                     "name": "Electricista",
                     "terms": "<translate with synonyms or related terms for 'Electrician', separated by commas>"
+                },
+                "craft/electronics_repair": {
+                    "name": "Tenda de Reparacións Electrónicas",
+                    "terms": "<translate with synonyms or related terms for 'Electronics Repair Shop', separated by commas>"
                 },
                 "craft/gardener": {
                     "name": "Xardineiro/a",
@@ -3140,6 +3256,10 @@
                 "highway/cycleway": {
                     "name": "Senda Ciclista",
                     "terms": "<translate with synonyms or related terms for 'Cycle Path', separated by commas>"
+                },
+                "highway/elevator": {
+                    "name": "Montacargas",
+                    "terms": "<translate with synonyms or related terms for 'Elevator', separated by commas>"
                 },
                 "highway/footway": {
                     "name": "Senda Peonil",
@@ -4183,6 +4303,10 @@
                 "shop/antiques": {
                     "name": "Antiguidades Tenda",
                     "terms": "<translate with synonyms or related terms for 'Antiques Shop', separated by commas>"
+                },
+                "shop/appliance": {
+                    "name": "Tenda de Electrodomésticos",
+                    "terms": "<translate with synonyms or related terms for 'Appliance Store', separated by commas>"
                 },
                 "shop/art": {
                     "name": "Galería de Arte",

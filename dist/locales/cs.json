@@ -626,7 +626,6 @@
         "help": {
             "title": "Nápověda",
             "help": "# Pomoc\n\nToto je editor [OpenStreetMap](http://www.openstreetmap.org/), svobodné a otevřené mapy světa, vytvářené jako open-source a open-data. S pomocí editoru můžete přidávat a upravovat data v mapě třeba ve svém okolí, a zlepšovat tak celou mapu pro každého.\n\nVaše úpravy mapy budou viditelné pro každého uživatele OpenStreetMap. Před editací se ovšem musíte [přihlásit](https://www.openstreetmap.org/login).\n\n[iD editor](http://ideditor.com/) je projekt vytvářený spoluprací mnoha lidí, se [zdrojovým kódem na GitHubu](https://github.com/openstreetmap/iD).\n",
-            "editing_saving": "# Editace a publikace\n\nTento editor pracuje primárně online - právě teď k němu přistupujete prostřednictvím webové stránky.\n\n### Výběr objektů\n\nChcete-li vybrat objekt, jako třeba silnici nebo obchod, klikněte na něj v mapě. Objekt se tím označí, otevře se boční panel s vlastnostmi objektu a zobrazí se nabídka s akcemi, které lze s objektem provést.\n\nMůžete označit a pracovat s několika objekty najednou: podržte klávesu 'Shift', a pak buď postupně označte dotyčné objekty, anebo klikněte na mapu a táhněte myší či prstem - editor označí všechny objekty uvnitř příslušného obdélníku.\n\n### Publikace změn\n\nKdyž provedete nějaké úpravy objektů v mapě, úpravy jsou uloženy lokálně ve vašem prohlížeči. Nelekejte se, když uděláte chybu - úpravy lze vrátit zpět tlačítkem Zpět, a naopak je znovu provést tlačítkem Znovu.\n\nPo dokončení bloku úprav klikněte na 'Uložit' - například když jste upravili jednu část města, a chcete začít úpravy někde jinde. Zobrazí se přehled úprav, které jste provedli, editor tyto úpravy zkontroluje, a když se mu něco nebude zdát, zobrazí varování a návrhy.\n\nKdyž bude všechno v pořádku, můžete přidat krátký komentář s vysvětlením vašich úprav a kliknout znovu 'Uložit'. Úpravy se tímto publikují na [OpenStreetMap.org](http://www.openstreetmap.org/), kde za chvíli budou viditelné pro všechny uživatele a bude na nich možné provádět další úpravy.\n\nPokud nechcete nebo nemůžete úpravy dokončit teď, stačí prostě odejít ze stránky pryč. Až příště navštívíte stránku (na stejném počítači, ve stejném prohlížeči), editor vám nabídne možnost znovu načíst neuložené úpravy.\n\n### Používání editoru\n\nSeznam dostupných klávesových zkratek je k dispozici [zde](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
             "roads": "# Cesty\n\nEditor umožňuje vytvářet, opravovat a mazat silnice, pěšiny, cyklostezky, železnice atd. Zmapovat by mělo jít jakýkoli druh komunikace.\n\n### Výběr\n\nKdyž na cestu kliknete, zbarví se její obrys, otevře se u ní malá nabídka s nástroji a dále boční panel s informacemi o cestě.\n\n### Úpravy\n\nČasto narazíte na cesty, které jen nepřesně sledují pozadí či trasu GPS. Takové cesty můžete zarovnat na správné místo.\n\nNapřed klikněte na cestu, kterou chcete upravit. Cesta se rozsvítí a podél ní se objeví kontrolní uzly, které můžete posunout na správné místo. Pokud chcete přidat další kontrolní body a zpřesnit tak průběh cesty, stačí dvakrát kliknout na kus cesty mezi dvěma uzly - na zvolené místo přibude nový uzel.\n\nKdyž je reálná cesta napojena na jinou, ale v mapě spojeny nejsou, posuňte myší kontrolní uzel jedné cesty nad druhou - cesty se pak spojí. Propojení cest je velmi důležité pro správnou funkci navigací.\n\nTaké můžete posunout najednou celou cestu: buď klikněte na ikonu posunu v menu zobrazeném u cesty nebo stiskněte klávesu `M` a potom klikněte myší pro ukončení posunu. Jen pozor - pokud jsou vůči pozadí či GPS stopě všechny objekty v okolí, pravděpodobně to bude chybným pozadím a ne chybnou polohou objektů.\n\n### Mazání\n\nPokud je cesta úplně špatně, můžete ji zcela odstranit z mapy. Neměli byste se spoléhat pouze na satelitní snímky - mohou být zastaralé nebo zavádějící -, ideální je se přesvědčit na místě, že cesta opravdu neexistuje. Zvlášť při mazání objektů buďte opatrní - výsledek vaší úpravy se projeví v mapě pro všechny její uživatele.\n\nCestu smažete tak, že na ni kliknete a zvolíte ikonu odpadkového koše nebo stisknete klávesu Delete.\n\n### Vytváření\n\nNarazili jste na cestu, která by v mapě měla být, ale není? Klikněte na tlačítko 'Cesta' vlevo nahoře nebo stiskněte klávesu `2` - to vám umožní nakreslit novou cestu.\n\nKlikněte na místo, kde cesta začíná. Pokud cesta vychází z jiné, existující cesty, klikněte na místo, kde se cesty oddělují.\n\nPotom postupně klikejte na body, kudy cesta vede, podle satelitních snímků nebo trasy z GPS. Pokud vaše cesta protíná jinou, je třeba je propojit tak, že kliknete na bod křížení. Nakonec dvakrát klikněte na stejné místo nebo stiskněte klávesu 'Return' nebo 'Enter', cesta se tak ukončí.\n",
             "gps": "# GPS\n\nData z GPS jsou jedním z důvěryhodných zdrojů informací pro OpenStreetMap. Tento editor podporuje zobrazení tras ve formátu `.gpx` nahraných z vašeho počítače. Takovou trasu můžete nasbírat s pomocí nejrůznějších aplikací pro mobily nebo s pomocí specializované navigace.\n\nPro více informací, jak provést takový sběr dat z GPS, viz např. návod anglicky: [Mapping with a smartphone, GPS, or paper](http://learnosm.org/en/mobile-mapping/).\n\nPokud už máte záznam ve formátu GPX, přetáhněte soubor myší či prstem nad editor. Rozpozná-li editor formát souboru, zobrazí se trasa v mapě jako světle růžová čára. Pokud chcete tuto novou vrstvu zapnout, vypnout nebo zvětšit na velikost pracovní plochy, klikněte na menu 'Mapová data' na pravé straně.\n\nTrasa GPX nebude přímo nahrána na OpenStreetMap - pouze slouží jako vodítko, podle kterého se můžete orientovat, a podle kterého můžete kreslit nové objekty do mapy. Pokud chcete přímo trasu GPX poskytnout i ostatním, můžete ji [nahrát do samostatné databáze OpenStreetMap](http://www.openstreetmap.org/trace/create).\n",
             "imagery": "# Podkladové snímky\n\nSatelitní a letecké snímky jsou důležitým zdrojem mapových dat. V menu 'Nastavení pozadí' na levé straně editoru je k dispozici kombinace leteckých snímků, satelitních snímků a dalších volně dostupných podkladů.\n\nImplicitní vrstvou jsou satelitní snímky [Bing](http://www.bing.com/maps/), ale jakmile se přesunete do konkrétní geografické oblasti a nastavíte dostatečné zvětšení, nabídnou se vám další mapové podklady. V některých státech, jako jsou Spojené státy, Francie či Dánskou, jsou k dispozici snímky ve vysoké kvalitě. Pro velkou část České republiky jsou také dostupné velmi detailní satelitní snímky. **Data z katastru nemovitostí a letecké mapy ÚHUL** je možné zobrazit dle [návodu zde](https://wiki.openstreetmap.org/wiki/WikiProject_Czech_Republic/freemap#WMS_UHUL_-_ortofotomapa).\n\nPodklady jsou někdy posunuté vůči mapě, kvůli chybám na straně poskytovatele snímků. Pokud uvidíte, že je mnoho cest v mapě posunuto vůči pozadí, nesnažte se je hned přesunout - posun obvykle znamená chybu v podkladu a ne chybu v mapě. V menu 'Nastavení pozadí' klikněte na 'Zarovnat pozadí' - to vám dovolí posunout podklad, aby lícoval s mapou.\n",
@@ -771,7 +770,7 @@
                 "mouse": "Doporučujme používat myš s levým a pravým tlačítkem. **Připojte ji prosím a stiskněte OK.**",
                 "leftclick": "Kliknutí nebo dvojklik = levé tlačítko. (Na touchpadu to může být klepnutí jedním prstem.) **Klikněte levým tlačítkem {num}krát.**",
                 "rightclick": "Pravé tlačítko je jasné. (Na touchpadu lze použít klepnutí dvěma prsty či CTRL+klik.) **Klikněte {num}krát pravým tlačítkem.**",
-                "chapters": "Super! Tlačítky dole můžete přeskočit kapitolu nebo jí opakovat. **Pokračujte do '{next}'.**"
+                "chapters": "Tak jdem na to! Tlačítky dole můžete přeskočit kapitolu nebo jí opakovat. **Pokračujte do '{next}'.**"
             },
             "navigation": {
                 "title": "Navigace",
@@ -781,15 +780,15 @@
                 "points_lines_areas": "Prvky v mapě jsou tvořeny pomocí *bodů*, *linií* a *ploch*.",
                 "nodes_ways": "V OSM se též používá tato terminologie: \n*body = uzly* (nodes) \na *linie a plochy = cesty* (ways). ",
                 "click_townhall": "Kliknutím lze vybírat libovolné prvky v mapě. **Klikněte na tento bod.**",
-                "selected_townhall": "Fajn! Bod je nyní vybrán. Pozná se to tak, že červeně pulzuje.",
+                "selected_townhall": "OK! Bod je nyní vybrán. Pozná se to tak, že červeně pulzuje.",
                 "editor_townhall": "S vybraným prvkem se otevře *editor vlastností*.",
                 "preset_townhall": "Nahoře je *typ prvku*. (Tento bod je {preset}.)",
                 "fields_townhall": "Uprostřed jsou *vlastnosti* (jako třeba název nebo adresa).",
                 "close_townhall": "**Zavřete editor vlastností (Esc či {button})**",
                 "search_street": "Zde můžete vyhledávat prvky v aktuálním výřezu mapy nebo i celosvětově. **Vyhledejte '{name}'.**",
                 "choose_street": "**Vyberte {name}**",
-                "selected_street": "Fajn! Ulice {name} je nyní vybrán.",
-                "editor_street": "Vlastnosti ulice jsou jiné než pro radnici.{br}\nZde například '{field1}' a '{field2}'. \n**Zavřete editor vlastností (Esc či {button})**",
+                "selected_street": "OK! Ulice {name} je nyní vybrána.",
+                "editor_street": "Vlastnosti ulice jsou jiné než pro radnici.{br}\nZde například '{field1}' a '{field2}'. \n**Nyní zavřete editor vlastností (Esc či {button})**",
                 "play": "Zkuste si zabrouzdat mapou a proklikat pár prvků. **Potom pokračujte na '{next}'.**"
             },
             "points": {
@@ -845,7 +844,7 @@
                 "rightclick_intersection": "Poslední existující je ulice {street1}, takže musíme *rozdělit* ulici {street2} na této křižovatce a smazat vše výše od ní.\n**Klikněte pravým tlačítkem na křiovatku**",
                 "split_intersection": "**Tlačítkem {button} rozdělte {street}.**",
                 "retry_split": "Nevybrali jste tlačítko Rozdělit. Zkuste to znovu.",
-                "did_split_multi": "Supr. {street1} je nyní na dvě části, tu horní smažeme.\n**Klikněte na horní číst ulice {street2}**",
+                "did_split_multi": "Supr. {street1} je nyní na dvě části, tu horní smažeme.\n**Klikněte na horní část ulice {street2}**",
                 "did_split_single": "**Klikněte na horní část ulice {street2}**",
                 "multi_select": "Nyní jsme vybrali {selected}. Přidáme do výběru ještě {other1}.\n**SHIFT+klikněte na {other2}**",
                 "multi_rightclick": "Teď už je bude stačit jen smazat.\n**Pravým tlačítkem otevřete kontextové menu**",
@@ -857,7 +856,7 @@
                 "title": "Budovy",
                 "add_building": "OSM je mimojiné také největší databází budov.{br}\nPokud někde budova chybí, můžete přidat její obrys.\n**Přidejte novou plochu tlačítkem {button} Plocha**",
                 "start_building": "Pojďme přidat třeba tenhle barák.{br}\nZkuste budovu oklikat co nejpřesněji.\n**Začněte kreslit kliknutím do rohu**",
-                "continue_building": "Přidejte postupně další body do rohů, můžete i přizoomvat.{br}\nZadávání ukončíte kliknutím na první či poslední bod.\n**Dokončete obrys budovy**",
+                "continue_building": "Přidejte postupně další body do rohů, můžete i přizoomovat.{br}\nZadávání ukončíte kliknutím na první či poslední bod.\n**Dokončete obrys budovy**",
                 "retry_building": "Nějak se vám to asi nezdařilo. Zkuste to prosím znovu.",
                 "choose_category_building": "**Vyberte ktegorii {category}**",
                 "choose_preset_house": "Existuje opět spousta typů budov, ale tohle je určitě obytný dům.{br}Když si nejste jisti zvolte prostě jen \"Budova\"\n**Vyberte {preset}**",
@@ -881,6 +880,38 @@
                 "help": "Nyní jste připraveni editovat OpenStreetMap!{br}Tuto prohlídku si můžete kdykoliv znovu přehrát nebo se podívejte na další dokumentaci stisknutím {button} tlačítka Nápověda.",
                 "save": "Nezapomeňte pravidelně ukládat své úpravy!",
                 "start": "Začít mapovat!"
+            }
+        },
+        "shortcuts": {
+            "title": "Klávesové zkratky",
+            "key": {
+                "alt": "Alt",
+                "backspace": "Backspace",
+                "cmd": "Cmd",
+                "ctrl": "Ctrl",
+                "delete": "Delete",
+                "del": "Del",
+                "end": "End",
+                "enter": "Enter",
+                "esc": "Esc",
+                "home": "Home",
+                "option": "Option",
+                "pause": "Pause",
+                "pgdn": "PageUp",
+                "pgup": "PageDown",
+                "return": "Return",
+                "shift": "Shift",
+                "space": "Mezerník"
+            },
+            "gesture": {
+                "drag": "táhnout"
+            },
+            "or": "-nebo-",
+            "browsing": {
+                "title": "Procházení",
+                "help": {
+                    "title": "Nápověda"
+                }
             }
         },
         "presets": {
@@ -1540,6 +1571,9 @@
                 },
                 "maxstay": {
                     "label": "Povoleno zůstat max."
+                },
+                "maxweight": {
+                    "label": "Max. hmotnost"
                 },
                 "mtb/scale": {
                     "label": "Klasifikace obtížnosti pro MTB",
@@ -2884,6 +2918,10 @@
                     "name": "Elektrikář",
                     "terms": "elektrikář,elektrikářství"
                 },
+                "craft/electronics_repair": {
+                    "name": "Opravna elektroniky",
+                    "terms": "Opravy elektroniky,Opravna elektroniky"
+                },
                 "craft/gardener": {
                     "name": "Zahradník",
                     "terms": "zahradník,zahradnictví,zahradní architekt"
@@ -3055,11 +3093,11 @@
                     "terms": "vchod,východ,vjezd,výjezd,vlez,výlez,vstup"
                 },
                 "footway/crossing": {
-                    "name": "Cesta přechodu pro chodce",
+                    "name": "Přechod pro chodce",
                     "terms": "přechod pro chodce,zebra,přechod,přechod pro pěší"
                 },
                 "footway/crosswalk": {
-                    "name": "Cesta přechodu typu zebra",
+                    "name": "Přechod pro chodce typu zebra",
                     "terms": "přechod pro chodce,zebra,přechod,přechod pro pěší"
                 },
                 "footway/sidewalk": {
@@ -3140,6 +3178,10 @@
                 "highway/cycleway": {
                     "name": "Cyklostezka",
                     "terms": "cyklotrasa"
+                },
+                "highway/elevator": {
+                    "name": "Výtah",
+                    "terms": "Výtah"
                 },
                 "highway/footway": {
                     "name": "Chodník",
@@ -3669,7 +3711,7 @@
                     "terms": "akvapark,aquapark,vodní zábavní park,bazén,koupaliště,tobogán"
                 },
                 "line": {
-                    "name": "Cesta",
+                    "name": "Linie",
                     "terms": "čára,cesta,trať,kanál,trasa"
                 },
                 "man_made": {
@@ -4183,6 +4225,10 @@
                 "shop/antiques": {
                     "name": "Starožitnictví",
                     "terms": "starožitnost,starožitnosti,starožitnictví,antikvář,antikvity,antikvita,antikvariát"
+                },
+                "shop/appliance": {
+                    "name": "Prodejna spotřební elektroniky",
+                    "terms": "Prodejna bílého zboží,Prodej spotřební elektroniky"
                 },
                 "shop/art": {
                     "name": "Obchod s uměním",

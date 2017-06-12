@@ -371,7 +371,15 @@
             "edit": "Editar carauterística",
             "check": {
                 "yes": "Si",
-                "no": "Non"
+                "no": "Non",
+                "reverser": "Cambiar direición"
+            },
+            "radio": {
+                "structure": {
+                    "type": "Tipu",
+                    "default": "Predeterminao",
+                    "layer": "Capa"
+                }
             },
             "add": "Amestar",
             "none": "Dengún",
@@ -482,6 +490,7 @@
             "error": "Hebo errores al intentar guardar",
             "status_code": "El sirvidor devolvió'l códigu d'estáu {code}",
             "unknown_error_details": "Comprueba que tienes conexón a internet.",
+            "uploading": "Xubiendo los cambios a OpenStreetMap",
             "unsaved_changes": "Tien cambios ensin guardar",
             "conflict": {
                 "header": "Iguar conflictos d'edición",
@@ -506,6 +515,7 @@
             "help_link_text": "Detalles"
         },
         "confirm": {
+            "okay": "Aceutar",
             "cancel": "Encaboxar"
         },
         "splash": {
@@ -519,12 +529,17 @@
             "lose_changes": "Tien cambios ensin guardar. Camudar el sirvidor de mapes descartarálos. ¿Ta seguru de que quier intercambiar de sirvidores?",
             "dev": "dev"
         },
+        "version": {
+            "whats_new": "Les novedaes en iD {version}"
+        },
         "tag_reference": {
             "description": "Descripción",
             "on_wiki": "{tag} en wiki.osm.org",
             "used_with": "usada con {type}"
         },
         "validations": {
+            "disconnected_highway": "Carretera desconeutada",
+            "disconnected_highway_tooltip": "Les carreteres habríen tar coneutaes con otres carreteres o entraes d'edificios.",
             "untagged_point": "Puntu ensin etiquetar",
             "untagged_line": "Llinia ensin etiquetar",
             "untagged_area": "Área ensin etiquetar",
@@ -535,6 +550,12 @@
             "in": "Averar",
             "out": "Alloñar"
         },
+        "full_screen": "Conmutar pantalla completa",
+        "gpx": {
+            "local_layer": "Ficheru llocal",
+            "drag_drop": "Abasna y suelta un ficheru .gpx, .geojson o .kml na páxina, o prime nel botón de la drecha pa restolar",
+            "zoom": "Averar a capa"
+        },
         "mapillary": {
             "view_on_mapillary": "Ver esta imaxe'n Mapillary"
         },
@@ -544,18 +565,38 @@
         },
         "intro": {
             "done": "fecho",
+            "ok": "Aceutar",
             "graph": {
                 "block_number": "<value for addr:block_number>",
+                "city": "Three Rivers",
                 "county": "<value for addr:county>",
                 "district": "<value for addr:district>",
                 "hamlet": "<value for addr:hamlet>",
                 "neighbourhood": "<value for addr:neighbourhood>",
+                "postcode": "49093",
                 "province": "<value for addr:province>",
                 "quarter": "<value for addr:quarter>",
                 "state": "<value for addr:state>",
                 "subdistrict": "<value for addr:subdistrict>",
                 "suburb": "<value for addr:suburb>",
-                "countrycode": "es"
+                "countrycode": "es",
+                "name": {
+                    "1st-avenue": "1ª Avenida",
+                    "2nd-avenue": "2ª Avenida",
+                    "4th-avenue": "4ª Avenida",
+                    "5th-avenue": "5ª Avenida",
+                    "6th-avenue": "6ª Avenida",
+                    "6th-street": "Calle 6ª",
+                    "7th-avenue": "7ª Avenida",
+                    "8th-avenue": "8ª Avenida",
+                    "9th-avenue": "9ª Avenida",
+                    "10th-avenue": "10ª Avenida",
+                    "11th-avenue": "11ª Avenida",
+                    "12th-avenue": "12 Avenida"
+                }
+            },
+            "welcome": {
+                "title": "Bienveníos"
             },
             "navigation": {
                 "title": "Navegacion"
@@ -569,10 +610,32 @@
             "lines": {
                 "title": "Llinies"
             },
+            "buildings": {
+                "title": "Edificios"
+            },
             "startediting": {
                 "title": "Principiar la edición",
                 "save": "¡Nun escaeza guardar los cambios de mou regular!",
                 "start": "¡Principie a facer mapes!"
+            }
+        },
+        "shortcuts": {
+            "editing": {
+                "title": "Editar",
+                "drawing": {
+                    "title": "Dibuxar",
+                    "add_point": "Mou «amestar puntu»",
+                    "add_line": "Mou «amestar llinia»",
+                    "add_area": "Mou «amestar área»",
+                    "place_point": "Asitiar un puntu"
+                },
+                "operations": {
+                    "title": "Operaciones"
+                },
+                "commands": {
+                    "title": "Comandos",
+                    "save": "Guardar los cambios"
+                }
             }
         },
         "presets": {
@@ -1023,9 +1086,6 @@
                 },
                 "internet_access/fee": {
                     "label": "Accesu a Internet de pagu"
-                },
-                "kerb": {
-                    "label": "Bordiellu rebaxáu"
                 },
                 "lamp_type": {
                     "label": "Tipu"

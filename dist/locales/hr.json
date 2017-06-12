@@ -626,7 +626,6 @@
         "help": {
             "title": "Pomoć",
             "help": "# Pomoć\n\niD je mrežna aplikacija za uređivanje [OpenStreetMap-a](http://www.openstreetmap.org/),\nbesplatne karte svijeta. Možeš ju koristiti za dodavanje\ni obnavljanje podataka u svojoj okolini, čime stvaraš bolju otvorenu kartu svijeta dostupnu svima, uključujući izvorne podatke karte.\n\nIspravke i sadržaj koji napraviš na karti biti će vidljive svakome tko koristi\nOpenStreetMap. Da bi mogao/la uređivati kartu, trebaš se\n[prijaviti] (https://www.openstreetmap.org/login).\n\n[iD editor](http://ideditor.com/) je suradnički projekt sa [izvornim kôdom\ndostupnim na GitHub-u](https://github.com/openstreetmap/iD).\n",
-            "editing_saving": "# Uređivanje i pohranjivanje\n\nOvaj uređivač je primarno dizajniran za korištenje na mreži, i pristupaš mu\nkroz web stranicu.\n\n### Odabir elemenata karte\n\nZa odabir elementa na karti, npr. ceste ili točke interesa, klikni\nna nju na karti. To će istaknuti element, otvoriti okno\ns detaljima o njoj, i prikazati izbornik s mogućnostima koje možeš napraviti na elementu.\n\nZa odabir više elemenata, pritisni i drži \"Shift\" tipku. Tada ili klikni na\nelemente koje želiš odabrati ili povuci po karti za crtanje pravokutnika.\nTime će se nacrtati pravokutnik i odabrati sve točke unutar njega.\n\n### Pohranjivanje promjena\n\nKada napraviš promjenu poput uređenja ceste, zgrada i mjesta, one su\npohranjene lokalno dok ih ne spremiš na server. Ne moraš se brinuti ako pogriješiš\n- možeš poništiti promjene klikom na tipku \"Opovrgni\" i vratiti\npromjene klikom na tipku \"Ponovi\".\n\nKlikni \"Spremi\" za završavanje skupa uređivanja - npr. ako završiš jedno područje grada\ni želiš početi novo područje. Imaš mogućnost, pogledati popis promjena koju si napravio/la,\ni uređivač će ti dati korisne prijedloge i upozorenja\nako je promjena nešto nije u redu.\n\nAko je sve u redu, možeš unijeti kratak komentar za objašnjenje napravljenih promjena\nkoje si napravio/la i ponovno kliknuti \"Spremi\" za postavljanje promjena\nna [OpenStreetMap.org](http://www.openstreetmap.org/), gdje će biti vidljive\nza sve ostale korisnike i dostupne drugima za dogradnju i unaprijeđenje podataka.\n\nAko nisi zavšio/la sve promjene u jednom uređivanju, možeš ostaviti prozor\nuređivača i doći kasnije (na isto računalo i isti internet preglednik) i\naplikacija za uređivanje će ti ponuditi vraćanje tvojih započetih promjena.\n\n### Korištenje uređivača\n\nPopis dostupnih kratica na tipkovnici mogu se pronaći[ovdje](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
             "roads": "# Ceste\n\nMožeš stvarati, popraviti/urediti i obrisati ceste pomoću ovog uređivača. Ceste\nmogu biti svih vrsta: puteljci, ceste, poljski putovi, biciklističke staze i drugo -\nsve staze preko kojih se često prolazi bi se trebale kartirati.\n\n### Odabir\n\nKlikni na cestu da ju odabereš. Pojaviti će se obrub oko ceste, zajedno s\nmalim alatnim izbornikom na karti i bočnim oknom koji prikazuje dodatne\ninformacije o odabranoj cesti.\n\n### Uređivanje\n\nČesto ćeš vidjeti ceste koje se ne podudaraju s pozadinskim snimcima ili s\nGNSS tragom. Možeš urediti te ceste tako da se nalaze na ispravnom mjestu.\n\nPrvo klikni na cestu koju želiš urediti. To će ju označiti i prikazati kontrolne\ntočke unutar nje koje možeš premjestiti na točnije lokacije. Ako želiš dodati\nnove kontrolne točke za precizniju putanju, klikni dvoklikom na dio ceste gdje\nnema točke kako bi dodao/la novu.\n\nAko se cesta spaja s drugom cestom, ali nije ispravno spojena na karti, možeš\npovući kontrolnu točku na drugu cestu kako bi ih spojio/la. Spojene ceste su\nvrlo važne za kartu i osnova za omogućavanje uputa za navigaciju.\n\nTakođer možeš kliknuti alat \"Premjesti\" ili pritisnuti kraticu - tipku `M` za\npomak cijele ceste odjednom i zatim kliknuti ponovno za spremanje tog\npomaka.\n\n### Brisanje\n\nAko je cesta potpuno krivo ucrtana - ne vidi se na satelitskim snimkama i ako\nsi utvrdio/la da zbilja ne postoji uvidom na terenu možeš ju obrisati, što će ju\nobrisati s karte. Budi oprezan/na kada brišeš elemente - kao i kod svakog\ndrugog uređivanja rezultati su vidljivi svima, a satelitske snimke su često\nzastarjele, pa je moguće da je cesta nedavno sagrađena.\n\nZa brisanje ceste najprije ju označi, a zatim klikni na ikonicu kante za smeće ili\npritisni tipku \"Delete\".\n\n### Stvaranje\n\nAko si pronašao/la cestu koja bi trebala biti ucrtana ali nije, klikni ikonicu\n\"Linija\" na gornjem lijevom dijelu uređivača ili pritisni kraticu - tipku `2` da\nzapočneš crtanje linije.\n\nKlikni na početak ceste na karti da započneš crtanje. Ako se cesta odvaja od\npostojeće ceste, klikni na mjesto gdje se spajaju.\n\nZatim klikni na točke duž ceste tako da prate ispravnu putanju ceste, prema\npodacima satelitske snimke ili GNSS traga. Ako se cesta koju crtaš križa s\ndrugom cestom, spoji ih klikom na mjestu raskrižja. Kada si završio/la s\ncrtanjem, klikni dvoklikom sastrane ili pritisni tipku \"Return\" ili \"Enter\" na\ntipkovnici.\n",
             "gps": "# GNSS\n\nGNSS podaci su najpouzdaniji izvor podataka za OpenStreetMap. Ovaj uređivač\npodržava lokalne tragove - `.gpx` datoteteke s tvog računala. Takav oblik GNSS\ntraga možeš prikupiti s raznim aplikacijama za pametne telefone kao i s drugim\nGNSS/GPS uređajima.\n\nZa više informacija o postupku izmjere pomoću GNSS satelita, pročitaj članak\n[\"Kartiranje s pametnim telefonom, GPS-om ili papirom\"](http://learnosm.org/en/mobile-mapping/).\n\nKako bi koristio/la GPX tragove za kartiranje, povuci i ispusti GPX datoteku na uređivač\nkarte. Ako se datoteka ispravno učita, biti će dodana na kartu kao linija svjetlo ljubičaste\nboje. Klikni na izbornik \"Podaci karte\" s desne strane za uključivanje, isključivanje\nili približenje na taj novi GPX sloj.\n\nGPX trag nije direktno postavljen na OpenStreetMap, samo je prikazan na karti. Da bi ga\niskoristio/la na najbolji način, preko njega crtaj na karti koristeći ga kao vodilju za\ndodavanje novih elemenata. Trag možeš također [postaviti na OpenStreetMap](http://www.openstreetmap.org/trace/create)\nkako bi ga i drugi korisnici mogli koristiti.\n",
             "imagery": "# Fotografski snimci\n\nZračni snimci su važan izvor za kartiranje. Kombinacija snimaka iz aviona,\nsatelitskih snimaka i drugih besplatno prikupljenih izvornika je dostupna s\ndesne strane u izborniku \"Postavke podloge\".\n\nPočetno je u pozadini kao podloga prikazan sloj satelitskih snimaka [karte Bing Maps](http://www.bing.com/maps/). Novi izvornici postaju dostupni pomicanjem\ni približenjem karte na novo geografsko područje. Neke države, poput SAD-a,\nFrancuske i Danske imaju dostupne vrlo kvalitetne snimke za određena\npodručja.\n\nSnimke su ponekad pomaknute u odnosu na podatke karte zbog pogreške\nna koordinatama izvornih snimaka. Ako vidiš puno cesta izmaknutih u\nodnosu na pozadinu, nemoj ih odmah pomicati da se poklope sa pozadinom.\nUmjesto toga, možeš podesiti snimke da odgovaraju postojećim podacima\ntako da klikneš \"Popravi odstupanje\" na dnu izbornika \"Postavke pozadine\".\n",
@@ -786,7 +785,7 @@
                 "preset_townhall": "Gornji dio uređivača elemenata prikazuje vrstu elementa. Ova točka je {preset}.",
                 "fields_townhall": "Srednji dio uređivača elemenata sadrži *polja* koja prikazuju atribute elementa, npr. njegovo ime i adresu.",
                 "close_townhall": "**Zatvori uređivač elemenata pritiskom tipke escape na tipkovnici ili klikom na gumb {button} u gornjem uglu.**",
-                "search_street": "Također možeš tražiti elemente koji se nalaze u trenutnom prikazu, ili bilo gdje u svijetu. **'Potraži: {name}'**",
+                "search_street": "Također možeš tražiti elemente koji se nalaze u trenutnom prikazu, ili bilo gdje u svijetu. **Potraži: '{name}'**",
                 "choose_street": "**Odaberi {name} iz liste kako bi odabrao/la element.**",
                 "selected_street": "Odlično! {name} je sada odabrana.",
                 "editor_street": "Prikazana polja za ulicu su različita od polja koja su bila prikazana za gradsku vijećnicu.{br}Za ovu odabranu ulicu, uređivač elemenata prikazuje polja kao '{field1}' i '{field2}'. **Zatvori uređivač elemenata pritiskom tipke escape na tipkovnici ili klikom na gumb {button}.**",
@@ -845,7 +844,7 @@
                 "rightclick_intersection": "Posljednja prava ulica je '{street1}', stoga ćemo *razdvojiti* '{street2}' na ovom raskrižju i obrisati sve iznad nje. **Desnom tipkom klikni na čvornu točku raskrižja.**",
                 "split_intersection": "**Klikni na gumb {button} za razvajanje {street}.**",
                 "retry_split": "Nisi kliknuo/la gumb Razdvoji. Pokušaj ponovno.",
-                "did_split_multi": "Bravo! {street1} je sada razvojena na dva dijela. Gornji dio se može obrisati. **Klikni na gornji dio ulice '{street2}' da ju odabereš.**",
+                "did_split_multi": "Bravo! {street1} je sada razvojena na dva dijela. Gornji dio se može obrisati. **Klikni na gornji dio ulice {street2} da ju odabereš.**",
                 "did_split_single": "**Klikni na gornji dio ulice '{street2}' da ju odabereš.**",
                 "multi_select": "'{selected}' je sada odabrana. Idemo također odabrati ulicu '{other1}'. Više stvari možeš odabrati ako držiš tipku shift dok odabireš mišem. **Odaberi '{other2}' pomoću shift-klika.** ",
                 "multi_rightclick": "Obje linije koje trebamo obrisati su sada odabrane. **Desnom tipkom na mišu klikni na jednu od linija za prikazivanje izbornika za uređivanje.**",
@@ -881,6 +880,18 @@
                 "help": "Sada si spreman/a za uređivanje OpenStreetMap karte!{br}Možeš bilo kada ponoviti ovaj prohod ili potražiti više dokumentacije klikom na gumb {button} Pomoć.**",
                 "save": "Ne zaboravi redovno spremiti tvoje promjene!",
                 "start": "Počni kartirati!"
+            }
+        },
+        "shortcuts": {
+            "browsing": {
+                "help": {
+                    "title": "Pomoć"
+                }
+            },
+            "editing": {
+                "commands": {
+                    "save": "Spremi promjene"
+                }
             }
         },
         "presets": {
@@ -2121,7 +2132,7 @@
                     "name": "Pitka voda za kamp kućice"
                 },
                 "area": {
-                    "name": "Površina",
+                    "name": "Područje",
                     "terms": "površina,područje"
                 },
                 "area/highway": {

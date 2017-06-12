@@ -159,6 +159,7 @@
                 "key": "C",
                 "annotation": "{n} elementos combinados.",
                 "not_eligible": "Estes elementos não podem ser combinados.",
+                "not_adjacent": "Estas linhas não podem ser unidas já que as suas extremidades não estão conectadas ",
                 "restriction": "Estes elementos não podem ser combinados porque pelo menos um deles é membro de uma relação \"{relation}\".",
                 "incomplete_relation": "Estes elementos não podem ser combinados porque pelo menos um deles não está completamente descarregado no mapa.",
                 "conflicting_tags": "Estes elementos não podem ser combinados porque algumas das suas etiquetas entram em conflito."
@@ -560,6 +561,7 @@
             "help_link_url": "https://wiki.openstreetmap.org/wiki/FAQ#I_have_just_made_some_changes_to_the_map._How_do_I_get_to_see_my_changes.3F"
         },
         "confirm": {
+            "okay": "Ok",
             "cancel": "Cancelar"
         },
         "splash": {
@@ -622,7 +624,6 @@
         "help": {
             "title": "Ajuda",
             "help": "#Ajuda\n\nEstá a usar um editor do [OpenStreetMap](http://www.openstreetmap.org/), o mapa mundial livre e editável.\nPode usá-lo para adicionar e atualizar dados da sua área, tornando-o num mapa de código e dados abertos mundial melhor para todos.\n\nAs alterações que fizer neste mapa serão visíveis para qualquer pessoa que\ndecida usar o OpenStreetMap. Para fazer uma edição, basta\n[iniciar sessão](https://www.openstreetmap.org/login).\n\nO [editor iD](http://ideditor.com/) é um projeto colaborativo com o [código-fonte disponível no GitHub](https://github.com/openstreetmap/iD).\n",
-            "editing_saving": "# Editar e Gravar\n\nEste editor foi concebido para editar ligado à internet, e está a utilizá-lo através de um site neste momento.\n\n### Selecionar elementos do mapa\n\nPara selecionar um elemento do mapa, como uma estrada ou uma loja, clique nesse elemento no mapa. Aparecerá de seguida um painel lateral com informações sobre o elemento onde poderá eliminar, alterar ou acrescentar informações.\n\nPara selecionar vários elementos, manter premida a tecla 'Shift' (maiúsculas), clicar e arrastar com o rato no mapa. Isto irá seleccionar todos os elementos dentro do rectângulo de seleção, permitindo fazer alterações em todos os elementos selecionados de uma só vez.\n\n### Gravar edições\n\nQuando faz alterações em estradas, edifícios e locais, as alterações são gravadas temporariamente no seu computador. Se clicar no botão Gravar essas alterações são enviadas para o OpenStreetMap. Não se preocupe caso cometa algum erro - pode desfazer as alterações clicando no botão Desfazer, assim como refazer as alterações desfeitas clicando no botão Refazer que se encontram no topo do ecrã.\n\nClique em 'Gravar' para terminar um conjunto de alterações - por exemplo, se terminou as alterações num local e quer fazer alterações noutro local. Terá oportunidade de rever as alterações que fez e o editor fornece sugestões úteis e avisos caso alguma alteração possa conter erros.\n\nSe tudo estiver bem, pode introduzir uma breve descrição explicando as alterações que fez e clicar de seguida em 'Gravar' de novo para enviar as alterações para o [OpenStreetMap.org](http://www.openstreetmap.org/) onde estarão visíveis para todos e onde outros podem melhorar e completar.\n\nCaso não possa terminar as edições de uma só vez, pode deixar o editor, ou inclusive fechar o navegador de internet e mais tarde regressar ao site do OpenStreetMap, editando-o novamente . Será mostrado então um aviso, caso seja o mesmo computador e mesmo navegador de internet, que tem alterações por gravar e se quer recuperar essas alterações, para continuar.\n\n### Usando o editor\n\nEstá disponível uma lista de atalhos [aqui](http://wiki.openstreetmap.org/wiki/ID/Shortcuts)\n",
             "roads": "# Estradas\n\nPode criar, corrigir e eliminar estradas com o editor. As estradas podem ser\nde qualquer tipo: caminhos, autoestradas, carreiros florestais ou agrícolas,\nruas pedonais, ciclovias, entre outras. Qualquer local que seja frequentemente\natravessado por pessoas deve ser normalmente colocado no mapa.\n\n### Selecionar\n\nClique numa estrada para a selecionar. Aparece o painel lateral direito para\npoder editar as caraterísticas da estrada e botões em redor da estrada.\n\n### Alterar\n\nClique na estrada que quer alterar. Se quiser adicionar pontos à estrada entre\ndois pontos existentes basta clicar 2 vezes sobre o segmento da estrada.\nPode então deslocar esse ponto acabado de criar.\n\nSe existir uma estrada com ligação a outra no terreno mas que no mapa não\nestão ligadas, basta deslocar um ponto de uma das estradas até à outra estrada\npara ficarem ligadas. É muito importante as estradas estarem corretamente\nligadas umas às outras para que os programas de rotas possam fornecer\ninformações corretas aos utilizadores.\n\nPode também clicar no botão de 'Mover' ou premir a tecla 'M' para mover\na estrada toda de uma só vez. No entanto deve-se ter cuidado ao fazer isso\npois todos os pontos da estrada, incluindo os pontos partilhados com\noutras estradas, serão movidos.\n\nPara dividir uma estrada em duas, útil por exemplo quando existe uma estrada\nno mapa que na realidade são 2 estradas diferentes com nomes diferentes,\nclique no ponto da estrada onde quer dividir e clique no botão da tesoura que\naparece ao lado do ponto. Esse botão aparece apenas se estiver selecionado o ponto e não a linha. Pode também combinar as 2 linhas numa só\nselecionando as duas estradas e clicando no botão + que aparece ao lado.\nSe existirem no mapa 2 estradas ligadas (nas extremidades ou num cruzamento)\nmas que na realidade não se ligam ou cruzam, basta selecionar o ponto comum\ne clicar no botão ao lado de desligar as linhas. Pode então deslocar o ponto\npara outro local.\n\n### Eliminar\n\nSe uma estrada estiver errada - pode-se confirmar pela imagem de satélite (ter em\nconta que a imagem de satélite pode ter alguns anos e a estrada pode ter sido\nconstruida posteriormente) e preferencialmente confirmar presencialmente  - pode\neliminar a estrada toda. É necessária precaução ao eliminar elementos do mapa.\nTal como qualquer outra alteração, os resultados serão visíveis a todos os outros.\n\nPode eliminar uma estrada clicando nela para a selecionar e de seguida\nclicar no ícone do caixote do lixo que aparece ao lado, ou simplesmente\npressionar na tecla 'Del' do teclado.\n\n### Criar\n\nEncontrou alguma estrada que não existe no mapa? Clique no botão 'Linha' que\nestá na parte superior ou pressione a tecla '2' para começar a desenhar a linha.\n\nClique no ponto inicial da estrada para começar a desenhá-la. Se já existir\numa estrada no mapa, mas que está incompleta, pode continuá-la bastando\npara isso clicar no ponto da extremidade da estrada existente e clicar no botão em redor 'Continuar esta linha'.\n\nAdicione então outros pontos de acordo com as imagens de satélite ou os trilhos\nGPS. Se a estrada que está a desenhar cruzar com outra estrada, crie um ponto\npor cima da outra estrada onde se cruzam. Quando terminar de desenhar\na estrada, clique duas vezes no último ponto da estrada ou pressione a tecla 'Enter' (mudança d linha).\n",
             "gps": "# GPS\n\nOs dados de GPS são a fonte mais fidedigna de dados no OpenStreetMap. Este editor suporta trilhos GPS locais - ficheiros `.gpx` que estejam no seu computador. Pode obter este tipo de trilhos GPS através de várias aplicações existentes para telemóveis assim como dispositivos GPS.\n\nPara mais informações sobre a obtenção de trilhos GPS, ver [Surveying with a GPS](http://learnosm.org/en/mobile-mapping/).\n\nPara usar um trilho GPX no editor para mapear, arraste o ficheiro GPX do seu computador para a janela do editor com o mapa. Se o ficheiro for reconhecido com sucesso, o trilho será adicionado ao mapa, aparecendo como uma linha de cor roxa. Clique no botão 'Dados do Mapa' à direita para ativar, desativar ou enquadrar nesta nova camada onde se situa o trilho GPX.\n\nO trilho GPX não é enviado diretamente para o OpenStreetMap - apenas pode servir de referência para si, por forma a desenhar com mais precisão elementos no mapa.\n\nTambém pode [enviar os seus trilhos GPS](http://www.openstreetmap.org/trace/create) para o OpenStreetMap para que possam ser úteis a outros utilizadores que editem o mapa.\n",
             "imagery": "# Imagens aéreas\n\nAs imagens aéreas são um recurso importante na criação e alteração\ndos mapas. Existem várias fontes de informações totalmente\ngratuitas no lado direito\ndo editor em 'Configurar imagem de fundo'.\n\nPor padrão são usadas as imagens aéreas do [Bing](http://www.bing.com/maps/), que\npodem variar no nível de qualidade. Em geral as capitais e os centros\nurbanos têm imagens de melhor qualidade. À medida que visualiza outras zonas do mapa podem aparecer novas fontes de imagens aéreas.\n\nPor vezes as imagens aéreas podem estar desalinhadas. Se notar que existe\numa grande quantidade de estradas 'fora do lugar'  pode ser um sinal que as imagens aéreas estão desalinhadas. Para as alinhar clique no botão do lado direito 'Configuração da imagem de fundo', de seguida clique em 'Corrigir alinhamento' e depois nas setas que aparecem para alinhar.\n",
@@ -1229,9 +1230,6 @@
                 "internet_access/ssid": {
                     "label": "SSID (Nome da rede)"
                 },
-                "kerb": {
-                    "label": "Rampa"
-                },
                 "lamp_type": {
                     "label": "Tipo"
                 },
@@ -1319,6 +1317,9 @@
                 },
                 "maxstay": {
                     "label": "Tempo máximo"
+                },
+                "maxweight": {
+                    "label": "undefined"
                 },
                 "mtb/scale": {
                     "label": "Dificuldade para bicicletas de montanha",
@@ -2285,6 +2286,9 @@
                     "name": "Universidade",
                     "terms": "University Grounds, Universidade, Faculdade, Instituto, Politécnico"
                 },
+                "amenity/vending_machine": {
+                    "name": "undefined"
+                },
                 "amenity/vending_machine/cigarettes": {
                     "name": "Máquina de tabaco",
                     "terms": "Cigarette Vending Machine, Tabaco, Cigarros"
@@ -2303,6 +2307,9 @@
                 },
                 "amenity/vending_machine/news_papers": {
                     "name": "Máquina de venda de jornais"
+                },
+                "amenity/vending_machine/newspapers": {
+                    "name": "Máquina de venda automática de jornais "
                 },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
                     "name": "Máquina para recolha/entrega de encomendas",
@@ -2567,6 +2574,9 @@
                 "camp_site/camp_pitch": {
                     "name": "Sítio de acampamento",
                     "terms": "Camp Pitch"
+                },
+                "club": {
+                    "name": "Clube"
                 },
                 "craft": {
                     "name": "Artesão",
@@ -4098,6 +4108,9 @@
                 "shop/garden_centre": {
                     "name": "Loja de jardinagem",
                     "terms": "Garden Center, Flores, Artigos para jardinagem, Jardinagem, Jardinajem"
+                },
+                "shop/gas": {
+                    "name": "undefined"
                 },
                 "shop/gift": {
                     "name": "Loja de lembranças",

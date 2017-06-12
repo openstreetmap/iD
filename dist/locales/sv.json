@@ -17,7 +17,7 @@
                 "tail": "Klicka på kartan för att lägga till en punkt."
             },
             "browse": {
-                "title": "Bläddra",
+                "title": "Navigera",
                 "description": "Panorera och zooma kartan."
             },
             "draw_area": {
@@ -131,10 +131,10 @@
                 }
             },
             "add_member": {
-                "annotation": "Lägg till ett objekt i relationen."
+                "annotation": "Lagt till en medlem till en relationen."
             },
             "delete_member": {
-                "annotation": "Ta bort ett objekt i relationen."
+                "annotation": "Raderat en medlem från en relationen."
             },
             "connect": {
                 "annotation": {
@@ -148,7 +148,7 @@
                 "title": "Bryt av",
                 "description": "Bryt av dessa linjer/områden från varandra.",
                 "key": "D",
-                "annotation": "Bryt av linjer/områden.",
+                "annotation": "Bröt av linjer/områden.",
                 "not_connected": "Det finns inte tillräckligt med linjer/områden här att koppla ifrån.",
                 "connected_to_hidden": "Detta kan inte brytas av då det är kopplat till ett dolt objekt.",
                 "relation": "Detta kan inte brytas av då den kopplar ihop medlemmar i en relation."
@@ -157,10 +157,10 @@
                 "title": "Sammanfoga",
                 "description": "Sammanfoga dessa objekt.",
                 "key": "C",
-                "annotation": "Sammanfoga {n} objekt.",
-                "not_eligible": "Dessa objekt kan inte slås samman.",
+                "annotation": "Sammanfogade {n} objekt.",
+                "not_eligible": "Dessa objekt kan inte sammanfogas.",
                 "not_adjacent": "Dessa objekt kan inte sammanfogas då deras ändar inte är sammankopplade.",
-                "restriction": "Dessa objekt kan inte sammanfogas då minst en av dem tillhör relationen \"{relation}\".",
+                "restriction": "Dessa objekt kan inte sammanfogas då minst en av dem tillhör relationenen \"{relation}\".",
                 "incomplete_relation": "Dessa objekt kan inte sammanfogas då åtminstone ett inte är fullständigt nedladdat.",
                 "conflicting_tags": "Dessa objekt kan inte sammanfogas då några av dess taggar har motstridiga värden."
             },
@@ -213,11 +213,11 @@
                 "annotation": {
                     "long": {
                         "single": "Speglade ett objekt längs dess långa axel.",
-                        "multiple": "Spegla flera objekt längst dess långa axel."
+                        "multiple": "Speglade flera objekt längst dess långa axel."
                     },
                     "short": {
                         "single": "Speglade ett objekt längs dess korta axel.",
-                        "multiple": "Spegla flera objekt längst dess korta axel."
+                        "multiple": "Speglade flera objekt längst dess korta axel."
                     }
                 },
                 "incomplete_relation": {
@@ -246,7 +246,7 @@
                     "multiple": "Rotera flera objekt."
                 },
                 "incomplete_relation": {
-                    "single": "Detta objekt kan inte roteras då det inte har nedladdats ned fullständigt.",
+                    "single": "Detta objekt kan inte roteras då det inte har laddats ned fullständigt.",
                     "multiple": "Dessa objekt kan inte roteras då de inte är fullständigt nedladdade."
                 },
                 "too_large": {
@@ -302,7 +302,7 @@
             "tooltip": "Gör om: {action}",
             "nothing": "Inget att upprepa."
         },
-        "tooltip_keyhint": "Genväg:",
+        "tooltip_keyhint": "Kortkommando:",
         "browser_notice": "Redigeraren stöds i Firefox, Chrome, Safari, Opera samt Internet Explorer 11 och högre. Uppgradera din webbläsare eller använd Potlatch 2 för att redigera kartan.",
         "translate": {
             "translate": "Översätt",
@@ -398,7 +398,7 @@
             "multiselect": "Valda objekt",
             "unknown": "Okänd",
             "incomplete": "<inte hämtad>",
-            "feature_list": "Sök efter egenskaper",
+            "feature_list": "Sök efter objekt",
             "edit": "Ändra objekt",
             "check": {
                 "yes": "Ja",
@@ -535,7 +535,7 @@
                 "keep_remote": "Använd deras",
                 "restore": "Återställ",
                 "delete": "Låt vara raderad",
-                "download_changes": "Eller ladda ner dina ändringar.",
+                "download_changes": "Eller ladda ned dina ändringar.",
                 "done": "Alla konflikter lösta!",
                 "help": "En annan användare har ändrat på samma objekt som du har ändrat.\nKlicka på vardera objekt nedan för ytterligare detaljer om respektive konflikt, och välj om dina eller\nden andra användarens ändringar ska behållas.\n"
             }
@@ -544,8 +544,8 @@
             "conflict": {
                 "deleted": "Detta objekt har raderats av {user}.",
                 "location": "Detta objekt har flyttas av både dig och {user}.",
-                "nodelist": "Nod har ändrats av både dig och {user}.",
-                "memberlist": "Relationsmedlem har ändrats av både dig och {user}.",
+                "nodelist": "Noder har ändrats av både dig och {user}.",
+                "memberlist": "Relationsmedlemar har ändrats av både dig och {user}.",
                 "tags": "Du ändrade taggen <b>{tag}</b> till \"{local}\" och {user} ändrade den till \"{remote}\"."
             }
         },
@@ -584,7 +584,7 @@
             "used_with": "används med {type}"
         },
         "validations": {
-            "disconnected_highway": "Bryt av väg",
+            "disconnected_highway": "Ej kopplad väg",
             "disconnected_highway_tooltip": "Vägar bör vara kopplade till andra vägar eller entréer i byggnader.",
             "old_multipolygon": "Multipolygontaggar på yttre väg",
             "old_multipolygon_tooltip": "Denna typ av multipolygon är föråldrad. Istället för att ha taggar på den yttre vägen, flytta dem till dess överliggande multipolygonen.",
@@ -598,13 +598,13 @@
             "untagged_relation_tooltip": "Välj en typ som beskriver vad denna relation är.",
             "many_deletions": "Du håller på att radera {n} objekt. Är du helt säker att du vill göra detta? Detta tar bort dem från kartan som alla andra ser på openstreetmap.org.",
             "tag_suggests_area": "Taggen {tag} indikerar att detta borde vara ett område istället för en linje",
-            "deprecated_tags": "Borttagna taggar: {tags}"
+            "deprecated_tags": "Föråldrade taggar: {tags}"
         },
         "zoom": {
             "in": "Zooma in",
             "out": "Zooma ut"
         },
-        "cannot_zoom": "Går ej att zooma ut ytterligare med nuvarande sätt.",
+        "cannot_zoom": "Går ej att zooma ut ytterligare i nuvarande läge. ",
         "full_screen": "Växla fullskärm",
         "gpx": {
             "local_layer": "Lokal fil",
@@ -626,14 +626,14 @@
         "help": {
             "title": "Hjälp",
             "help": "# Hjälp\n\nDetta är en redigerare för [OpenStreetMap](http://www.openstreetmap.org/),\nen gratis och redigerbar karta över världen. Du kan använda den för att lägga till och ändra\ndata i ditt område, allt för att göra en världsomspännande karta baserad på\nöppen källkod och öppen data bättre för alla.\n\nRedigeringar du gör på kartan kommer att visas för alla som använder\nOpenStreetMap. För att göra en redigering måste du\n[log in](https://www.openstreetmap.org/login).\n\n[iD editor](http://ideditor.com/) är ett gemensamt projekt med [källkod\ntillgänglig på GitHub](https://github.com/openstreetmap/iD).\n",
-            "editing_saving": "# Redigera & spara\n\nDenna redigerare är designad att främst fungera online, och du använder den via en webbsida just nu.\n\n### Välj objekt\n\nFör att välja ett kartobjekt, t.ex. en väg eller en punkt, klicka på den på kartan. Detta kommer att markera det valda objektet, öppna en panel med detaljer om det, och visa en meny med saker du kan göra med det.\n\nFör att välja flera objekt, håll ner Skift-tangenten. Klicka sedan på objekten du vill välja eller dra på kartan för att rita en rektangel. Detta kommer att rita en ruta och markera punkterna inuti den.\n\n### Spara redigeringar\n\nNär du gör ändringar som att ändra på en väg, byggnad eller plats är detta sparat lokalt fram tills att du spara det på servern. Oroa dig inte om du gör ett misstag, du kan alltid ångra en ändring genom att klicka på Ånga-knappen och göra om din förändring genom att klicka på Gör om-knappen.\n\nKlicka på Spara för att slutföra en grupp att förändringar, t.ex. om du fullfört ett område i en stad och vill börja ändra i ett annat område. Du får möjlighet att granska vad du gjort och redigeraren ger dig hjälpsamma förslag och varningar om någon ändring inte verka korrekt.\n\nOm allt ser bra ut kan du ange en kort kommentar som förklarar vad du gjort och sedan klicka på Spara igen för att skicka ändringarna till [OpenStreetMap.org](http://www.openstreetmap.org/) där de blir synliga för alla andra användare och tillgängliga för andra att jobba vidare med.\n\nOm du inte kan slutföra din ändring på en gång kan du lämna redigeringsfönstret öppet och komma tillbaka (i samma webbläsare på samma dator) och redigeringsprogrammet kommer att ge dig möjlighet att återuppta ditt arbete.\n\n### Använda redigeraren\n\nEn lista med tillgängliga kortkommandon hittas [här](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
+            "editing_saving": "# Redigera & spara\n\nDenna redigerare är designad att främst fungera online, och du använder den via en webbsida just nu.\n\n### Markera objekt\n\nFör att välja ett kartobjekt, t.ex. en väg eller en punkt, klicka på den på kartan. Detta kommer att markera det valda objektet, öppna en panel med detaljer om det, och visa en meny med saker du kan göra med det.\n\nFör att markera flera objekt, håll ned Skift-tangenten. Klicka sedan på objekten du vill markera eller dra på kartan för att rita en rektangel. Detta kommer att rita en ruta och markera punkterna inuti den.\n\n### Spara redigeringar\n\nNär du gör ändringar som att ändra på en väg, byggnad eller plats är detta lagrat lokalt fram tills att du spara det på servern. Oroa dig inte om du gör ett misstag, du kan alltid ångra en ändring genom att klicka på Ånga-knappen och göra om din förändring genom att klicka på Gör om-knappen.\n\nKlicka på Spara för att slutföra en samling förändringar, t.ex. om du fullfört ett område i en stad och vill börja ändra i ett annat område. Du får möjlighet att granska vad du gjort och redigeraren ger dig hjälpsamma förslag och varningar om någon ändring inte verka korrekt.\n\nOm allt ser bra ut kan du ange en kort kommentar som förklarar vad du gjort och sedan klicka på Spara igen för att skicka ändringarna till [OpenStreetMap.org](http://www.openstreetmap.org/) där de blir synliga för alla andra användare och tillgängliga för andra att jobba vidare med.\n\nOm du inte kan slutföra din ändring på en gång kan du lämna redigeringsfönstret öppet och komma tillbaka (i samma webbläsare på samma dator) och redigeringsprogrammet kommer att ge dig möjlighet att återuppta ditt arbete.\n\n### Använda redigeraren\n\nDu kan se en lista med kortkommandon genom att trycka på tangenten `?`\n",
             "roads": "# Vägar\n\nDu kan skapa, fixa och ta bort vägar med denna redigerare. Vägar kan vara alla typer av: stigar, bilvägar, spår, cykelvägar m.m - alla välanvända segment ska mappas.\n\n### Markering\n\nKlicka på en väg för att välja den. En markering blir då synlig tillsammans med en liten verktygsmeny på kartan och ett sidofält visar mer information om vägen.\n\n### Modifiering\n\nOfta ser du vägar som inte är justerade till bakgrundsbilden eller till ett GPS-spår. Du kan justera dessa vägar så att de är på korrekt plats.\n\nKlicka först på vägen du vill ändra. Detta kommer att markera den och visa kontrollpunkt längst den som du kan dra i för att justera den. Om du vill lägga till en ny kontrollpunkt för högre detaljrikedom, dubbelklicka på en del av vägen utan en punkt så kommer en kontrollpunkt läggas till.\n\nOm vägen är ansluten till en annan väg, men är inte det på kartan, kan du dra en av dess kontrollpunkt till den andra vägen för att koppla dem tillsammans. Att vägarna är kopplade till varandra är viktigt för kartan och avgörande för att kunna ge korrekta körinstruktioner.\n\nDu kan också klicka på verktyget 'Flytta' eller trycka på tangenten 'M' på tangentbordet för att flytta en hel väg på en gång, och sedan klicka igen för att spara flytten.\n\n### Radering\n\nOm hela vägen är helt fel - du kan se att den inte existerar på satellitbilderna och har helst bekräftat i verkligheten att den inte finns - kan du radera den, vilket tar bort den från kartan. Var försiktigt när du raderar objekt - precis som vid all redigering kan alla se resultatet och satellitbilderna är oftast gamla, så vägen kan helt enkelt vara nybyggd.\n\nDu kan ta radera en väg genom att klicka på den för att markera den och sedan klicka på ikonen soptunna eller klicka på knappen 'Delete' på tangentbordet.\n\n### Skapa\n\nHittat någonstans att det borde finnas en väg där de inte finns en? Klicka på ikonen 'Linje'  högst upp till vänster i redigeringsfönstret eller klicka på knappen '2' på tangentbordet för att börja rita en linje.\n\nKlicka på början av vägen på kartan för att påbörja ritningen. Om vägen viker av från en existerande väg, starta genom att klicka där de ansluter till varandra.\n\nKlicka sedan på punkter längst vägen så att den följer vägens sträckning enligt satellitbilder eller GPS-spår. Om vägen du ritar korsar en annan väg, anslut dem tillsammans genom att klicka där de korsar. När du är klar med att rita in vägen, dubbelklicka eller tryck 'Enter' på tangentbordet.\n",
             "gps": "# GPS\n\nInsamlade GPS-spår är en värdefull källan för data till OpenStreetMap. Denna redigeraren\nstöder lokala spår - .gpx-filer på din lokala dator. Du kan samla\nin denna typ av GPS-spår med ett antal olika appar till din smartphone eller en GPS-enhet.\n\nFör information om du du gör en GPS-uppmätning, läs\n[Mapping with a smartphone, GPS, or paper](http://learnosm.org/en/mobile-mapping/).\n\nFör att använda ett GPX-spår för att kartlägga, dra och släpp GPX-filen på kartredigeraren.\nOm den accepteras kommer det att läggas till på kartan som en ljuslila\nlinje. Klicka på menyn Kartdata till höger för att aktivera,\navaktivera eller zooma in till detta nya GPX-skapade lager.\n\nGPX-spåret laddas inte direkt upp till OpenStreetMap - bästa sätet att använda\ndet är att rita på kartan och använda det som en guide för att lägga till ny information,\nmen också för att [ladda upp det till OpenStreetMap] (http://www.openstreetmap.org/trace/create)\nså att andra kan använda det.\n",
-            "imagery": "# Flygfoton\n\nFlygfoton är en viktig källa vid kartläggning. En kombination av bilder från flygplan, satelliter och andra fria källor finns tillgängliga i redigeraren i menyn 'Bakgrundsinställningar' till höger.\n\nNormalt visas ett satellitlager från  [Bing Maps](http://www.bing.com/maps/) i redigeraren, men när du förflytta dig runt och zooma till nya geografiska områden kommer nya källor bli tillgängliga. Vissa länder, som t.ex. USA, Frankrike och Danmark har bilder av väldigt hög kvalité tillgängliga för vissa områden.\n\nFlygfotona är ibland förskjutna till kartan på grund av misstag från leverantören av flygfoton. Om du ser att många vägar är förskjutna i förhållande till flygfotot, flytta dem inte direkt för att matcha bakgrunden. Istället kan du justera flygfotot så att det matchar med existerande data genom att klicka 'Justera bildplacering' längst ner i menyn för Bakgrundsinställningar.\n",
+            "imagery": "# Flygfoton\n\nFlygfoton är en viktig källa vid kartläggning. En kombination av bilder från flygplan, satelliter och andra fria källor finns tillgängliga i redigeraren i menyn 'Bakgrundsinställningar' till höger.\n\nNormalt visas ett satellitlager från  [Bing Maps](http://www.bing.com/maps/) i redigeraren, men när du förflytta dig runt och zooma till nya geografiska områden kommer nya källor bli tillgängliga. Vissa länder, som t.ex. USA, Frankrike och Danmark har bilder av väldigt hög kvalité tillgängliga för vissa områden.\n\nFlygfotona är ibland förskjutna till kartan på grund av misstag från leverantören av flygfoton. Om du ser att många vägar är förskjutna i förhållande till flygfotot, flytta dem inte direkt för att matcha bakgrunden. Istället kan du justera flygfotot så att det matchar med existerande data genom att klicka 'Justera bildplacering' längst ned i menyn för Bakgrundsinställningar.\n",
             "addresses": "# Adresser\n\nAdresser är bland den mest användbara informationen på kartan.\n\nÄven om adresser normalt oftast är relaterade till segment av gatan är de i OpenStreetMap hanterade som attribut på byggnader och platser längst gatan.\n\nDu kan lägga till adressinformation både på platser kartlagda som byggnadskonturer och på platser kartlagda som enskilda punkter.\nDen bästa källan för adressinformation är från egen kunskap eller genom att besöka platsen - precis som för allt annat, att kopiera från kommersiella källor som Google Maps är strikt förbjudet.\n",
-            "inspector": "# Använda objektredigeraren\n\nObjektredigeraren är området till vänster på sidan som låter dig\nändra detaljerna för valt objekt.\n\n### Välj objekttyp\n\nEfter att du lagt till en punkt, linje eller område kan du välja vad för typ av objekt det\när, t.ex. om det är en huvudväg eller bostadsgata, shoppingcenter eller café.\nobjektredigeraren visar knappar för vanliga objekttyper, och du kan\nsöka efter andra typer i sökfönstret.\n\nKlicka på 'i' i nedre högra hörnet för en objekttyp för\natt läsa mer om det. Klicka på en knapp för att välja typ.\n\n### Använda formulär och ändra taggar\n\nEfter att du valt en objekttyp, eller om du väljer ett objekt som redan\nhar en typ associerad, kommer objektredigeraren visa fält med detaljer om objekttypen så som namn och adress.\n\nUnder fälten du ser kan du klicka på menyn 'Lägg till fält\" för att lägga till\nandra detaljer, som t.ex. Wikipedia-länk, handikappanpassning m.m.\n\nLängst ner i objektredigeraren, klicka på 'Alla taggar' för att lägga till ytterligare godtyckliga\ntaggar till objektet. [Taginfo](http://taginfo.openstreetmap.org/) är en\nbra resurs för att lära dig mer om populära tagg-kombinationer.\n\nÄndringar du gör i objektredigeraren visas automatiskt på kartan.\nDu kan ångra dem när du vill genom att klicka på 'Ånga'-knappen.\n",
+            "inspector": "# Använda objektredigeraren\n\nObjektredigeraren är området till vänster på sidan som låter dig\nändra detaljerna för valt objekt.\n\n### Välj objekttyp\n\nEfter att du lagt till en punkt, linje eller område kan du välja vad för typ av objekt det\när, t.ex. om det är en huvudväg eller bostadsgata, shoppingcenter eller café.\nobjektredigeraren visar knappar för vanliga objekttyper, och du kan\nsöka efter andra typer i sökfönstret.\n\nKlicka på 'i' i nedre högra hörnet för en objekttyp för\natt läsa mer om det. Klicka på en knapp för att välja typ.\n\n### Använda formulär och ändra taggar\n\nEfter att du valt en objekttyp, eller om du väljer ett objekt som redan\nhar en typ associerad, kommer objektredigeraren visa fält med detaljer om objekttypen så som namn och adress.\n\nUnder fälten du ser kan du klicka på menyn 'Lägg till fält\" för att lägga till\nandra detaljer, som t.ex. Wikipedia-länk, handikappanpassning m.m.\n\nLängst ned i objektredigeraren, klicka på 'Alla taggar' för att lägga till ytterligare godtyckliga\ntaggar till objektet. [Taginfo](http://taginfo.openstreetmap.org/) är en\nbra resurs för att lära dig mer om populära tagg-kombinationer.\n\nÄndringar du gör i objektredigeraren visas automatiskt på kartan.\nDu kan ångra dem när du vill genom att klicka på 'Ånga'-knappen.\n",
             "buildings": "# Byggnader\n\nOpenStreetMap är världens största databas över byggnader. Du kan skapa\noch förbättra denna databas.\n\n### Markering\n\nDu kan markera en byggnad genom att klicka på dess kant. Detta kommer att markera\nbyggnaden och öppna en litet verktygsmeny och ett sidofält som visar mer information\nom byggnaden.\n\n### Modifiering\n\nIbland är byggnader felaktigt placerade eller har felaktiga taggar.\n\nFör att flytta en hel byggnad, markera den och klicka sedan på \"Flytta\"-verktyget. flytta\nmus för att flytta byggnaden, och klicka när den är korrekt placerad.\n\nFör att fixa den specifika formen av en byggnad, klicka och dra noderna som bildar\nramen till bättre platser.\n\n### Skapa\n\nEn av de viktigaste frågorna att tänka på vid tilläggning av byggnader till kartan är att\nOpenStreetMap registrerar byggnader både som form och punkt. Tumregeln\när att _kartlägga en byggnad som en form när möjligt_ och kartlägg företag, bostäder,\nfaciliteter, och andra saker finns i byggnaderna som punkter placerade\ninuti byggnadernas ram.\n\nBörja rita en byggnad som en ram genom att klicka på knappen \"område\" högst upp till vänster\ngränssnittet, och avsluta det antingen genom att trycka på \"Enter\" på tangentbordet\neller genom att klicka på den första ritade noden för att stänga formen.\n\n### Radering\n\nOm en byggnad är helt fel – du kan se att den inte finns med i någon satellitbild\noch helst har bekräftat lokalt att det inte finns – kan du ta bort\nden, vilket tar bort det från kartan. Var försiktig när du tar bort objekt –\nlikt alla ändringar kommer resultatet ses av alla och satellitbilder\när ofta föråldrad, så byggnaden kan helt enkelt vara nybyggd.\n\nDu kan ta bort en byggnad genom att klicka på den för att markera den och sedan klicka på\nikonen papperskorg eller trycka på \"Delete\"-tangenten.\n",
-            "relations": "# Relationer\n\nEn relation är en speciell typ av egenskap i OpenStreetMap som gruppera ihop objekt. Två vanliga relationstyper är t.ex. *ruttrelation* som gruppera ihop sektioner av vägar som tillhör en specifik riksväg eller motorväg, och *multipolygoner* som gruppera ihop linjer som definiera ett komplext område (som t.ex. har flera delar eller hål i sig)\n\nObjekten i en relation kallas\n*medlemmar*. I sidopanelen kan du se vilka relationer ett objekt är medlem i, och klicka på en relation där för att välja den. När relationen är vald kan du se alla medlemmar listade i sidopanelen och markerade på kartan.\n\nFör det mesta kommer iD ta hand om relationerna automatiskt när du redigerar. Det viktigaste du måste veta om är att om du tar bort en sektion av en väg för att rita om den mer exakt, måste du se till att den nya sektionen är medlem i samma relation som originalet.\n\n## Redigera relationer\n\nOm du vill redigera relationer är här grunderna.\n\nFör att lägga till ett objekt till en relation, markera objektet och klicka på \"+\"-knappen i sektionen \"Alla relationer\" i sidopanelen, och välj sedan eller skriv namnet på relationen.\n\nFör att skapa en ny relation, markera första objektet som ska vara medlem i relationen, Klicka på \"+\"-knappen i sektionen \"Alla relationer\" och välj \"Ny relation...\"\n\nFör att ta bort ett objekt från en relation, markera objektet och klicka på soptunnan bredvid relationen du vill ta bort den från.\n\nDu kan skapa multipolygoner med hål i sig med verktyget \"sammanfoga\". Rita två områden (inre och yttre), håll ner shift-tangenten och klicka på var och en av dem för att markera dem båda, klicka sedan på knappen \"Sammanfoga\" (+).\n"
+            "relations": "# Relationer\n\nEn relation är en speciell typ av egenskap i OpenStreetMap som gruppera ihop objekt. Två vanliga relationstyper är t.ex. *ruttrelation* som gruppera ihop sektioner av vägar som tillhör en specifik riksväg eller motorväg, och *multipolygoner* som gruppera ihop linjer som definiera ett komplext område (som t.ex. har flera delar eller hål i sig)\n\nObjekten i en relation kallas\n*medlemmar*. I sidopanelen kan du se vilka relationer ett objekt är medlem i, och klicka på en relation där för att välja den. När relationen är vald kan du se alla medlemmar listade i sidopanelen och markerade på kartan.\n\nFör det mesta kommer iD ta hand om relationerna automatiskt när du redigerar. Det viktigaste du måste veta om är att om du tar bort en sektion av en väg för att rita om den mer exakt, måste du se till att den nya sektionen är medlem i samma relation som originalet.\n\n## Redigera relationer\n\nOm du vill redigera relationer är här grunderna.\n\nFör att lägga till ett objekt till en relation, markera objektet och klicka på \"+\"-knappen i sektionen \"Alla relationer\" i sidopanelen, och välj sedan eller skriv namnet på relationen.\n\nFör att skapa en ny relation, markera första objektet som ska vara medlem i relationen, Klicka på \"+\"-knappen i sektionen \"Alla relationer\" och välj \"Ny relation...\"\n\nFör att ta bort ett objekt från en relation, markera objektet och klicka på soptunnan bredvid relationen du vill ta bort den från.\n\nDu kan skapa multipolygoner med hål i sig med verktyget \"sammanfoga\". Rita två områden (inre och yttre), håll ned shift-tangenten och klicka på var och en av dem för att markera dem båda, klicka sedan på knappen \"Sammanfoga\" (+).\n"
         },
         "intro": {
             "done": "klar",
@@ -881,6 +881,111 @@
                 "help": "Du är nu redo att redigera OpenStreetMap!{br}Du kan köra om denna genomgång när du vill, eller läsa mer i dokumentationen genom att klicka på knappen {button} Hjälp.",
                 "save": "Glöm inte att regelbundet spara dina ändringar!",
                 "start": "Börja kartera!"
+            }
+        },
+        "shortcuts": {
+            "title": "Kortkommandon",
+            "tooltip": "Visa vy med kortkommandon.",
+            "key": {
+                "alt": "Alt",
+                "backspace": "Backsteg",
+                "cmd": "Cmd",
+                "ctrl": "Ctrl",
+                "delete": "Delete",
+                "del": "Del",
+                "end": "End",
+                "enter": "Enter",
+                "esc": "Esc",
+                "home": "Home",
+                "option": "Option",
+                "pause": "Pause",
+                "pgdn": "PgDn",
+                "pgup": "PgUp",
+                "return": "Return",
+                "shift": "Shift",
+                "space": "Mellanslag"
+            },
+            "gesture": {
+                "drag": "dra"
+            },
+            "or": "-eller-",
+            "browsing": {
+                "title": "Navigera",
+                "navigation": {
+                    "title": "Navigation",
+                    "pan": "Panorera kartan",
+                    "pan_more": "Panorera kartan en skärm åt gången",
+                    "zoom": "Zooma in / Zooma ut",
+                    "zoom_more": "Zooma in / Zooma ut mycket"
+                },
+                "help": {
+                    "title": "Hjälp",
+                    "help": "Visa hjälp/dokumentation",
+                    "keyboard": "Visa kortkommandon"
+                },
+                "display_options": {
+                    "title": "Visa inställningar",
+                    "background": "Visa inställningar för bakgrund",
+                    "background_switch": "Växla tillbaka till senaste bakgrund",
+                    "map_data": "Visa alternativ för kartdata",
+                    "fullscreen": "Gå till fullskärmsläge",
+                    "wireframe": "Växla trådramsläge",
+                    "minimap": "Visa/dölj minikarta"
+                },
+                "selecting": {
+                    "title": "Markera objekt",
+                    "select_one": "Markera ett enskilt objekt",
+                    "select_multi": "Markera flera objekt",
+                    "lasso": "Rita en markeringslasso runt objekt"
+                },
+                "with_selected": {
+                    "title": "Med objekt markerat",
+                    "infobox": "Visa/dölj info- och mätruta",
+                    "edit_menu": "Visa/dölj redigerameny"
+                },
+                "vertex_selected": {
+                    "title": "Med nod markerad",
+                    "previous": "Hoppa till föregående nod",
+                    "next": "Hoppa till nästa nod",
+                    "first": "Hoppa till första noden",
+                    "last": "Hoppa till sista noden",
+                    "change_parent": "Växla vald väg"
+                }
+            },
+            "editing": {
+                "title": "Redigera",
+                "drawing": {
+                    "title": "Rita",
+                    "add_point": "'Lägg till punkt'-läge",
+                    "add_line": "'Lägg till linje'-läge",
+                    "add_area": "'Lägg till område'-läge",
+                    "place_point": "Placera en punkt",
+                    "disable_snap": "Hindra att punkter kopplas samman",
+                    "stop_line": "Slutför linje eller område"
+                },
+                "operations": {
+                    "title": "Operationer",
+                    "continue_line": "Fortsätt en linje från markerad nod",
+                    "merge": "Kombinera (sammanfoga) markerade objekt",
+                    "disconnect": "Bryt av objekt vid markerad nod",
+                    "split": "Dela en linje i två vid markerad nod",
+                    "reverse": "Byt riktning på en linje",
+                    "move": "Flytta markerade objekt",
+                    "rotate": "Rotera markerade objekt",
+                    "orthogonalize": "Räta ut linje / Räta upp hörnen på område",
+                    "circularize": "Gör en stängd linje eller ett område cirkulär. ",
+                    "reflect_long": "Spegla objekt längst dess långa axel",
+                    "reflect_short": "Spegla objekt längst dess korta axel",
+                    "delete": "Radera markerade objekt"
+                },
+                "commands": {
+                    "title": "Kommandon",
+                    "copy": "Kopiera markerade objekt",
+                    "paste": "Klistra in kopierade objekt",
+                    "undo": "Ångra senaste ändring",
+                    "redo": "Gör om senaste ändring",
+                    "save": "Spara ändringar"
+                }
             }
         },
         "presets": {
@@ -1540,6 +1645,9 @@
                 },
                 "maxstay": {
                     "label": "Maxtid"
+                },
+                "maxweight": {
+                    "label": "Maxvikt"
                 },
                 "mtb/scale": {
                     "label": "Mountainbike-svårighet",
@@ -2884,6 +2992,10 @@
                     "name": "Elektriker",
                     "terms": "Elektriker, elmontör, elreparatör, montör, el, elmontör, starkströmsmontör, systembyggare, kabeldragning, elkraft"
                 },
+                "craft/electronics_repair": {
+                    "name": "Elektronikreparatör",
+                    "terms": "elektronik, elektronikreparation, reparation, reparatör, tv-service, tv-reparatör, datorservice, datorreparation, skärmbyte, telefonreparatör, vitvaror, tvättmaskinsreparatör"
+                },
                 "craft/gardener": {
                     "name": "Trädgårdsmästare",
                     "terms": "Trädgårdsmästare, trädgård, handelsträdgård, landskapsarkitekt"
@@ -3141,6 +3253,10 @@
                     "name": "Cykelväg",
                     "terms": "cykelväg, cykelled, gc-väg, gång- och cykelväg, cykel"
                 },
+                "highway/elevator": {
+                    "name": "Hiss",
+                    "terms": "Hiss"
+                },
                 "highway/footway": {
                     "name": "Gångväg",
                     "terms": "gångväg, gc-väg, gång- och cykelväg, stig, vandring, vandra, löparbana, motionsspår, promenad"
@@ -3262,8 +3378,8 @@
                     "terms": "Anslutning, påfart, avfart, länsväg, huvudgata, tertiär väg"
                 },
                 "highway/track": {
-                    "name": "Ej underhållen bruksväg",
-                    "terms": "Bruksväg, traktorväg, skogsväg, åkerväg, virkesväg, timmerväg, traktor, skogsmaskin, åker, timmer, jordbruk, brandväg, brandgata"
+                    "name": "Jordbruks-/skogsväg",
+                    "terms": "Bruksväg, traktorväg, skogsväg, åkerväg, virkesväg, timmerväg, traktor, skogsmaskin, åker, timmer, jordbruk, brandväg, brandgata, jordbruksväg"
                 },
                 "highway/traffic_mirror": {
                     "name": "Trafikspegel",
@@ -4183,6 +4299,10 @@
                 "shop/antiques": {
                     "name": "Antikaffär",
                     "terms": "Antikaffär, antikshop, antikt, antikvitetsaffär, antikvariat"
+                },
+                "shop/appliance": {
+                    "name": "Vitvaror",
+                    "terms": "vitvaror, vitvaruaffär, vitvarukedja, vitvara, hushållsmaskiner, hushållsmaskin, tvättmaskin, diskmaskin, frys, kylskåp, spis, ugn, mikrovågsugn, köksfläkt"
                 },
                 "shop/art": {
                     "name": "Konstaffär",

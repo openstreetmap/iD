@@ -267,9 +267,9 @@
             "split": {
                 "title": "Couper",
                 "description": {
-                    "line": "Divise la ligne en deux parties à l'emplacement du nœud.",
+                    "line": "Diviser la ligne en deux parties à l'emplacement du nœud.",
                     "area": "Couper le contour de ce polygone en deux.",
-                    "multiple": "Divise la ligne ou les limites du polygone en deux parties à l'emplacement du nœud."
+                    "multiple": "Diviser la ligne ou les limites du polygone en deux parties à l'emplacement du nœud."
                 },
                 "key": "X",
                 "annotation": {
@@ -626,7 +626,7 @@
         "help": {
             "title": "Aide",
             "help": "# Aide\n\nCeci est un éditeur pour [OpenStreetMap](http://www.openstreetmap.org/), la\ncarte du monde libre et éditable. Vous pouvez l'utiliser pour ajouter ou mettre à jour\nles données dans votre zone, et participer ainsi à la réalisation d'une carte du monde libre et à données ouvertes\nmeilleure pour tout le monde.\n\nLes modifications que vous réaliserez sur cette carte seront visibles par tous les utilisateurs d'OpenStreetMap. Pour commencer à modifier, vous devez vous [connecter](https://www.openstreetmap.org/login).\n\nL'[éditeur iD](http://ideditor.com/) est un projet collaboratif dont le [code\nsource est disponible sur GitHub](https://github.com/openstreetmap/iD).\n",
-            "editing_saving": "# Édition & sauvegarde\n\nCet éditeur est conçu pour fonctionner de façon connecté et vous êtes\nactuellement en train de l'utiliser depuis un site web.\n\n### Sélection des éléments\n\nPour sélectionner un élément de la carte comme une route ou un point d’intérêt,\nil faut cliquer dessus sur la carte. Il sera alors mis en surbrillance et un\npanneau latéral s’ouvrira avec tous ses détails élément ainsi qu'un menu des\nactions disponibles pour cet élément.\n\nPour sélectionner plusieurs éléments, laisser appuyer sur la touche «Shift» du\nclavier. Pendant ce temps, vous pouvez au choix sélectionner les différents\néléments directement ou dessiner une zone rectangulaire à l'aide de la souris.\nLorsque le bouton de la souris est relâché, tous les objets à l'intérieur du\nrectangle seront sélectionnés.\n\n### Sauvegarde des modifications\n\nLorsque vous modifiez la carte (par exemple modification de routes, bâtiments\net places), ces changements sont conservés localement en attendant que vous\nles sauvegardiez sur le serveur. En cas d'erreur, il est possible d'annuler les\nchangements en cliquant sur le bouton idoine. De façon similaire il est possible\nde ré-appliquer un changement qui a été annulé.\n\nLorsque vous souhaitez sauvegarder sur le serveur vos changements, appuyer sur\nle bouton «Sauvegarder». La liste de vos modifications s'affichera alors, vous\npermettant de vérifier vos modifications. Par ailleurs, l'éditeur vous\npréviendra et conseillera si quelque chose semble incorrect.\n\nSi tout semble correct, vous pourrez alors écrire un commentaire du travail\neffectué (par exemple «Ajout d'une boulangerie») puis il faudra à nouveau\nappuyer sur le bouton «Sauvegarder» pour envoyer les changements sur\n[OpenStreetMap.org](http://www.openstreetmap.org/). Vos changements seront\nvisible par tous peu de temps après.\n\nSi vous ne pouvez pas terminer vos changements en une seule fois, vous pouvez\nfermer la fenêtre de l'éditeur. Vos changements seront enregistrés localement.\nLorsque vous ouvrirez à nouveau l'éditeur, sur le même ordinateur et avec le\nmême navigateur Web, l'éditeur vous proposera de récupérer le travail de la\nséance précédente.\n\n### Utilisation de l'éditeur\n\nUne liste des raccourcis claviers est disponible\n[ici](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
+            "editing_saving": "# Édition & sauvegarde\n\nCet éditeur est conçu pour fonctionner de façon connecté et vous êtes\nactuellement en train de l'utiliser depuis un site web.\n\n### Sélection des éléments\n\nPour sélectionner un élément de la carte comme une route ou un point d’intérêt,\nil faut cliquer dessus sur la carte. Il sera alors mis en surbrillance et un\npanneau latéral s’ouvrira avec tous ses détails élément ainsi qu'un menu des\nactions disponibles pour cet élément.\n\nPour sélectionner plusieurs éléments, laisser appuyer sur la touche «Shift» du\nclavier. Pendant ce temps, vous pouvez au choix sélectionner les différents\néléments directement ou dessiner une zone rectangulaire à l'aide de la souris.\nLorsque le bouton de la souris est relâché, tous les objets à l'intérieur du\nrectangle seront sélectionnés.\n\n### Sauvegarde des modifications\n\nLorsque vous modifiez la carte (par exemple modification de routes, bâtiments\net places), ces changements sont conservés localement en attendant que vous\nles sauvegardiez sur le serveur. En cas d'erreur, il est possible d'annuler les\nchangements en cliquant sur le bouton idoine. De façon similaire il est possible\nde ré-appliquer un changement qui a été annulé.\n\nLorsque vous souhaitez sauvegarder sur le serveur vos changements, appuyer sur\nle bouton «Sauvegarder». La liste de vos modifications s'affichera alors, vous\npermettant de vérifier vos modifications. Par ailleurs, l'éditeur vous\npréviendra et conseillera si quelque chose semble incorrect.\n\nSi tout semble correct, vous pourrez alors écrire un commentaire du travail\neffectué (par exemple «Ajout d'une boulangerie») puis il faudra à nouveau\nappuyer sur le bouton «Sauvegarder» pour envoyer les changements sur\n[OpenStreetMap.org](http://www.openstreetmap.org/). Vos changements seront\nvisible par tous peu de temps après.\n\nSi vous ne pouvez pas terminer vos changements en une seule fois, vous pouvez\nfermer la fenêtre de l'éditeur. Vos changements seront enregistrés localement.\nLorsque vous ouvrirez à nouveau l'éditeur, sur le même ordinateur et avec le\nmême navigateur Web, l'éditeur vous proposera de récupérer le travail de la\nséance précédente.\n\n### Utilisation de l'éditeur\n\nVous pouvez consulter la [liste des raccourcis claviers](https://wiki.openstreetmap.org/wiki/FR:ID/Shortcuts).\n",
             "roads": "# Routes\n\nVous pouvez créer, mettre à jour et supprimer des routes à l'aide de l'éditeur. Il peut s'agir de tous types de routes : chemins, autoroutes, pistes cyclables, et plus encore : toute voie régulièrement fréquentée peut être cartographiée.\n\n### Sélection\n\nCliquez sur une route pour la sélectionner. Elle sera alors surlignée et un menu 'outils' apparaîtra sur la carte, ainsi qu'une barre d'état affichant des informations supplémentaires.\n\n### Modification\n\nIl est fréquent que les routes ne soient pas bien alignées avec l'imagerie satellite ou avec les traces GPS. Vous pouvez ajuster et corriger la position des routes.\n\nCliquez d'abord sur la route à modifier. Elle est alors surlignée et des points de contrôle apparaissent qui permettent de corriger sa position. Pour ajouter des points de contrôle, double-cliquez sur un segment de la route sans nœuds.\n\nSi la route est connectée à une autre, mais que la connexion est incorrecte, vous pouvez déplacer un de ses points de contrôle sur la seconde route pour corriger la connexion. Des routes bien connectées sont essentielles pour la carte et pour fournir de bonnes informations d'itinéraire.\n\nVous pouvez également cliquer sur l'outil 'Déplacer' ou appuyer sur le raccourci `M` pour déplacer l'ensemble de la route en une fois, puis cliquer de nouveau une fois pour sauvegarder le déplacement.\n\n### Suppression\n\nSi une route est complètement fausse - c'est-à-dire qu'elle n'apparaît pas sur l'image satellite, et que dans l'idéal, vous avez confirmé qu'elle n'existe pas sur le terrain - vous pouvez la supprimer, ce qui l'enlèvera de la carte. Faites attention lorsque vous supprimez des éléments : comme n'importe quelle autre modification, le résultat sera visible par tout le monde sur la carte. Les photos aériennes sont souvent dépassées et la route est peut-être tout simplement récente.\n\nPour supprimer une route, sélectionnez-la en cliquant dessus, puis cliquez sur l'icône 'Poubelle' ou appuyez sur la touche 'Suppr'.\n\n### Création\n\nVous avez constaté qu'une route de votre connaissance manque à la carte ? Cliquez sur l'icône 'Ligne' en haut à gauche de l'éditeur ou appuyez sur le raccourci `2` pour dessiner une route.\n\nPour commencer le dessin, cliquez sur l'endroit où commence la route. Si elle commence à l'embranchement d'une autre route, commencez le dessin en cliquant à l'endroit de la connexion.\n\nCliquez ensuite régulièrement le long de la route pour ajouter des points, en utilisant l'imagerie satellite comme référence. Si la route que vous dessinez croise une autre route, connectez les deux en cliquant à l'endroit de l'intersection. Lorsque vous avez terminé le dessin, double-cliquez ou appuyez sur 'Entrée'.\n",
             "gps": "# GPS\n\nLe GPS est la source la plus fiable de données pour OpenStreetMap. Cet éditeur\nsupporte les traces en local - fichiers `.gpx` sur votre ordinateur. Vous pouvez collecter\nce genre de trace GPS à l'aide de nombreuses applications pour smartphones ainsi\nqu'avec du matériel GPS personnel.\n\nPour savoir comment effectuer un relevé GPS, lisez\n[Sur le terrain avec un GPS](http://learnosm.org/fr/beginner/using-gps/).\n\nPour utiliser un tracé GPX pour cartographier, effectuer un \"glissé-déposé\" du\nfichier GPX dans l'éditeur de cartes. S'il est reconnu, une ligne violette en\nsurbrillance apparaîtra sur la carte. Cliquez dans le menu \"Données de la carte\"\nsur le côté droit pour activer, désactiver, ou zoomer dans ce nouveau calque GPX.\n\nLe tracé GPX n'est pas directement envoyé sur OpenStreetMap - le meilleur moyen de\nl'utiliser est de dessiner sur la carte, en l'utilisant comme guide pour les\nnouveaux éléments que vous ajoutez, et aussi de le\n[charger dans OpenStreetMap](http://www.openstreetmap.org/trace/create) pour que\nles autres utilisateurs puissent s'en servir.\n",
             "imagery": "# Fond de carte\n\nLes photos aériennes sont une source importante pour cartographier. Une\ncompilation de photos prises d'avion, imageries satellites, et autres sources\nlibre d'utilisation sont disponibles dans l'éditeur dans le menu \"Configuration\ndu fond de carte\" à gauche.\n\nPar défaut, l'imagerie aérienne de [Bing Maps](http://www.bing.com/maps/)\nest utilisée dans l'éditeur, mais lorsque vous zoomez sur la carte, d'autres sources sont parfois disponibles dans certaines zones. Certains pays tels que la France, les États-Unis ou le Danemark disposent d'images de très haute qualité sur certaines zones.\n\nCertaines images sont parfois décalées par rapport aux données, notamment\nà cause d'un mauvais calibrage. Si vous voyez de nombreux éléments tous décalés par rapport au fond de carte, ne déplacez pas immédiatement ces éléments. À la place, vous pouvez ajuster le fond de carte afin qu'il soit aligné aux données en cliquant sur \"Ajuster le décalage du fond de carte\" en bas de l'interface de configuration du fond de carte.\n",
@@ -883,6 +883,88 @@
                 "start": "Commencer à cartographier !"
             }
         },
+        "shortcuts": {
+            "title": "Raccourcis clavier",
+            "or": "-ou-",
+            "browsing": {
+                "title": "Navigation",
+                "navigation": {
+                    "title": "Navigation",
+                    "pan": "Déplacer la vue",
+                    "pan_more": "Déplacer la vue, de la taille de tout l'écran",
+                    "zoom": "Zoomer en avant / en arrière",
+                    "zoom_more": "Zoomer en avant / en arrière par grand incrément"
+                },
+                "help": {
+                    "title": "Aide",
+                    "help": "Afficher l'aide et la documentation",
+                    "keyboard": "Afficher les raccourcis clavier"
+                },
+                "display_options": {
+                    "title": "Afficher les options",
+                    "background": "Afficher les options d'imagerie d'arrière-plan",
+                    "background_switch": "Reprendre l'imagerie précédemment utilisée",
+                    "map_data": "Accéder aux options d'affichage des données",
+                    "fullscreen": "Passer en plein écran",
+                    "wireframe": "Basculer le mode filaire",
+                    "minimap": "Afficher/cacher mini-carte"
+                },
+                "selecting": {
+                    "title": "Sélection",
+                    "select_one": "Sélectionner un seul élément",
+                    "select_multi": "Sélectionner plusieurs éléments",
+                    "lasso": "Dessiner une sélection englobante autour des éléments"
+                },
+                "with_selected": {
+                    "title": "Avec l'élément sélectionné",
+                    "infobox": "Afficher/cacher le cadre d'informations et mesures",
+                    "edit_menu": "Afficher/cacher le menu d'édition"
+                },
+                "vertex_selected": {
+                    "title": "Avec le nœud sélectionné",
+                    "previous": "Aller au nœud précédent",
+                    "next": "Aller au nœud suivant",
+                    "first": "Aller au premier nœud",
+                    "last": "Aller au dernier nœud",
+                    "change_parent": "Basculer sur une ligne connectée"
+                }
+            },
+            "editing": {
+                "title": "Édition",
+                "drawing": {
+                    "title": "Tracés",
+                    "add_point": "Mode 'Ajouter un point'",
+                    "add_line": "Mode 'Ajouter une ligne'",
+                    "add_area": "Mode 'Ajouter un polygone'",
+                    "place_point": "Placer un point",
+                    "disable_snap": "Désactiver l'attraction des points à proximité",
+                    "stop_line": "Terminer de tracer une ligne ou un polygone"
+                },
+                "operations": {
+                    "title": "Opérations",
+                    "continue_line": "Reprendre le tracé d'une ligne à partir du point sélectionné",
+                    "merge": "Fusionner les éléments sélectionnés",
+                    "disconnect": "Déconnecter les éléments au nœud sélectionné",
+                    "split": "Couper une ligne en deux au nœud sélectionné",
+                    "reverse": "Inverser une ligne",
+                    "move": "Déplacer les éléments sélectionnés",
+                    "rotate": "Tourner les éléments sélectionnés",
+                    "orthogonalize": "Aligner les points d'une ligne / Ajuster les coins d'un polygone en angles droits",
+                    "circularize": "Rendre circulaire une ligne fermée ou un polygone",
+                    "reflect_long": "Effectuer un miroir par rapport au grand axe",
+                    "reflect_short": "Effectuer un miroir par rapport au petit axe",
+                    "delete": "Supprimer les éléments sélectionnés"
+                },
+                "commands": {
+                    "title": "Commandes",
+                    "copy": "Copier les éléments sélectionnés",
+                    "paste": "Coller les éléments copiés",
+                    "undo": "Annuler la dernière action",
+                    "redo": "Rétablir la dernière action",
+                    "save": "Enregistrer les modifications"
+                }
+            }
+        },
         "presets": {
             "categories": {
                 "category-barrier": {
@@ -1076,7 +1158,7 @@
                     "label": "Type"
                 },
                 "atm": {
-                    "label": "Distributeur de billets, DAB"
+                    "label": "Distributeur de billets"
                 },
                 "backrest": {
                     "label": "Dossier de siège"
@@ -1541,6 +1623,9 @@
                 "maxstay": {
                     "label": "Durée maximale"
                 },
+                "maxweight": {
+                    "label": "Charge maximale [kg]"
+                },
                 "mtb/scale": {
                     "label": "Difficulté VTT",
                     "options": {
@@ -1753,7 +1838,7 @@
                     "label": "Type de recyclage",
                     "options": {
                         "centre": "Déchèterie",
-                        "container": "Benne"
+                        "container": "Conteneur de recyclage"
                     }
                 },
                 "ref": {
@@ -2171,7 +2256,7 @@
                 },
                 "amenity/atm": {
                     "name": "Distributeur de billets",
-                    "terms": "Distributeur de billets, distributeur automatique, guichet automatique, DAB, GAB"
+                    "terms": "distributeur de billets, distributeur automatique, distributeur automatique de billets, guichet automatique, DAB, GAB, billets de banque, retrait d'argent, retrait de liquide, guichet de retrait, retrait automatique, ATM, amenity atm"
                 },
                 "amenity/bank": {
                     "name": "Banque",
@@ -2529,6 +2614,10 @@
                     "name": "Université, enseignement supérieur universitaire - institution ou campus",
                     "terms": "université, campus universitaire, campus, enseignement supérieur universitaire, enseignement supérieur, universitaire, établissement d'enseignement supérieur, post-bac, post bac, institut, etablissement d'enseignement superieur, école, ecole, university, amenity university, college, école supérieure, grande école, haute école, ecole superieure, grande ecole"
                 },
+                "amenity/vending_machine": {
+                    "name": "Distributeur automatique",
+                    "terms": "distributeur automatique, machine, vente automatique, distributeur, guichet automatique, vending machine"
+                },
                 "amenity/vending_machine/cigarettes": {
                     "name": "Distributeur de cigarettes",
                     "terms": "distributeur de cigarettes, distributeur à cigarettes, cigarettes, distributeur automatique de cigarettes, machine à cigarettes, vente automatique de cigarettes, vente de cigarettes, vente cigarettes, vending machine cigarettes"
@@ -2548,6 +2637,10 @@
                 "amenity/vending_machine/news_papers": {
                     "name": "Distributeur de journaux"
                 },
+                "amenity/vending_machine/newspapers": {
+                    "name": "Distributeur de journaux",
+                    "terms": "distributeur de journaux, distributeur à journaux, distributeur automatique de journaux, machine à journaux, vente automatique de journaux, vente de journaux, vente journaux, journaux, journal, machine journaux, vending machine newspapers, newspapers, magazines, journaux "
+                },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
                     "name": "Dépôt ou retrait automatique de colis",
                     "terms": "dépôt ou retrait de colis, dépôt de colis, retrait de colis, machine à colis,\ndistributeur de colis, distributeur à colis, distributeur automatique de colis, colis, dépôt automatique de colis, retrait automatique de colis, vending machine parcel, parcel pickup dropoff, vending machine parcel pickup dropoff, parcel"
@@ -2558,7 +2651,7 @@
                 },
                 "amenity/vending_machine/public_transport_tickets": {
                     "name": "Distributeur de titres de transport",
-                    "terms": "distributeur de titres de transport, distributeur à titres de transport, titres de transport, tickets de transport, distributeur automatique de titres de transport, machine à titres de transport, vente automatique de titres de transport, vente de titres de transport, vente titres de transport, tickets de train, tickets de bus, tickets de métro, tickets de RER, tickets train, tickets bus, tickets métro, tickets RER, billets de train, billets de bus, billets de métro, billets de RER, billets train, billets bus, billets métro, billets RER, titres de train, titres de bus, titres de métro, titres de RER, vending machine public transport tickets, public transport tickets, tickets, billets, train, bus, métro, RER"
+                    "terms": "distributeur de titres de transport, distributeur à titres de transport, titres de transport, tickets de transport, distributeur automatique de titres de transport, guichet automatique, machine à titres de transport, vente automatique de titres de transport, vente de titres de transport, vente titres de transport, tickets de train, tickets de bus, tickets de métro, tickets de RER, tickets train, tickets bus, tickets métro, tickets RER, billets de train, billets de bus, billets de métro, billets de RER, billets train, billets bus, billets métro, billets RER, titres de train, titres de bus, titres de métro, titres de RER, vending machine public transport tickets, public transport tickets, tickets, billets, train, bus, métro, RER"
                 },
                 "amenity/vending_machine/sweets": {
                     "name": "Distributeur de snacks",
@@ -2876,6 +2969,10 @@
                     "name": "Électricien",
                     "terms": "Electricien"
                 },
+                "craft/electronics_repair": {
+                    "name": "Service de réparation électronique",
+                    "terms": "réparation électronique, maintenance électronique, réparateur électronique, magasin d'électronique, réparation de téléphone, réparation d'appareil photo, réparation de téléviseur, réparation d'électroménager, réparation d'ordinateur, réparation de caméra, craft electronics repair, electronics repair, electronics, repair"
+                },
                 "craft/gardener": {
                     "name": "Jardinier",
                     "terms": "Concepteur de jardins, Paysagiste"
@@ -3133,8 +3230,12 @@
                     "name": "Voie cyclable",
                     "terms": "Piste cyclable"
                 },
+                "highway/elevator": {
+                    "name": "Ascenseur",
+                    "terms": "ascenseur, élévateur, monte-charge, elevator, lift"
+                },
                 "highway/footway": {
-                    "name": "Voie piétonne",
+                    "name": "Chemin piéton",
                     "terms": "Chemin piétonnier, Sentier"
                 },
                 "highway/give_way": {
@@ -4175,6 +4276,10 @@
                 "shop/antiques": {
                     "name": "Antiquaire",
                     "terms": "Brocante"
+                },
+                "shop/appliance": {
+                    "name": "Magasin d'électroménager",
+                    "terms": "magasin d'électroménager, électroménager, appareil électroménager, petit électroménager, gros électroménager, shop appliance, appliances, \nbouilloire, centrifugeuse, cuiseur, cuit vapeur, fouet électrique, grille-pain, machine à pain, mixeur, pierrade, presse-agrumes, robot de cuisine, robot multifonctions, pèse-personne, épilateur, rasoir électrique, cafetière, moulin à café, aspirateur, cireuse, nettoyeur à vapeur, tondeuse, repassage, centrale vapeur, fer à repasser, cuisinière, four micro-ondes, four traditionnel, four à vapeur, cuisinière à gaz, hotte aspirante, plaque de cuisson, lave-linge, lave-vaisselle, sèche-linge, cave à vin, congélateur, réfrigérateur, climatiseur"
                 },
                 "shop/art": {
                     "name": "Marchand d'art",

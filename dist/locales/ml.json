@@ -10,19 +10,57 @@
                 "title": "രേഖ"
             },
             "add_point": {
-                "title": "ബിന്ദു"
+                "title": "ബിന്ദു",
+                "tail": "ഒരു പോയിന്റ് ചേർക്കുന്നതിന് മാപ്പിൽ ക്ലിക്കുചെയ്യുക"
             },
             "browse": {
-                "title": "ബ്രൗസ് ചെയ്യുക"
+                "title": "ബ്രൗസ് ചെയ്യുക",
+                "description": "മാപ്പ് പാൻ ചെയ്ത് സൂം ചെയ്യുക"
             }
         },
         "operations": {
+            "add": {
+                "annotation": {
+                    "point": "ഒരു ബിന്ദു ചേർത്തു"
+                }
+            },
             "continue": {
                 "title": "തുടരുക"
             },
+            "circularize": {
+                "title": "വൃത്താകൃതി"
+            },
             "orthogonalize": {
-                "title": "ചതുരം"
+                "title": "ചതുരം",
+                "key": "S"
+            },
+            "straighten": {
+                "title": "നേരായ",
+                "description": "ഈ വരി നേരെയാക്കുക",
+                "key": "S"
+            },
+            "delete": {
+                "title": "ഇല്ലാതാക്കുക",
+                "description": {
+                    "single": "ഈ സവിശേഷത ശാശ്വതമായി ഇല്ലാതാക്കുക"
+                }
+            },
+            "disconnect": {
+                "key": "D"
+            },
+            "rotate": {
+                "title": "തിരിക്കുക"
+            },
+            "split": {
+                "title": "രണ്ടായി പിരിയുക"
             }
+        },
+        "login": "ലോഗിൻ",
+        "logout": "പുറത്തുകടക്കുക",
+        "geometry": {
+            "point": "ബിന്ദു",
+            "line": "രേഖ",
+            "area": "പ്രദേശം"
         },
         "intro": {
             "graph": {
@@ -39,7 +77,40 @@
                 "countrycode": "in"
             }
         },
+        "shortcuts": {
+            "editing": {
+                "operations": {
+                    "delete": "തിരഞ്ഞെടുത്ത ഫീച്ചറുകൾ ഇല്ലാതാക്കുക"
+                },
+                "commands": {
+                    "save": "മാറ്റങ്ങൾ സൂക്ഷിക്കുക"
+                }
+            }
+        },
         "presets": {
+            "categories": {
+                "category-natural-line": {
+                    "name": "പ്രകൃതി സവിശേഷതകൾ"
+                },
+                "category-natural-point": {
+                    "name": "പ്രകൃതി സവിശേഷതകൾ"
+                },
+                "category-path": {
+                    "name": "പാത സവിശേഷതകൾ"
+                },
+                "category-rail": {
+                    "name": "റെയിൽ സവിശേഷതകൾ"
+                },
+                "category-road": {
+                    "name": "റോഡ് സവിശേഷതകൾ"
+                },
+                "category-water-area": {
+                    "name": "ജല സവിശേഷതകൾ"
+                },
+                "category-water-line": {
+                    "name": "ജല സവിശേഷതകൾ"
+                }
+            },
             "fields": {
                 "access": {
                     "types": {
@@ -49,10 +120,14 @@
                     }
                 },
                 "address": {
+                    "label": "വിലാസം",
                     "placeholders": {
                         "city": "നഗരം",
+                        "city!vn": "നഗരം/പട്ടണം",
                         "country": "രാജ്യം",
                         "district": "ജില്ല",
+                        "housenumber": "123",
+                        "neighbourhood": "അയല്പക്കം",
                         "place": "പ്രദേശം",
                         "postcode": "പോസ്റ്റ്കോഡ്",
                         "state": "സംസ്ഥാനം"

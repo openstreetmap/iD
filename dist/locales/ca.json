@@ -469,7 +469,7 @@
                 "tooltip": "Edificis, refugis, garatges, etc."
             },
             "landuse": {
-                "description": "Ús del terreny",
+                "description": "Ús del territori",
                 "tooltip": "Boscos, camps, parcs, residencial, comercial, etc."
             },
             "boundaries": {
@@ -624,7 +624,6 @@
         "help": {
             "title": "Ajuda",
             "help": "# Ajuda\n\nAixò és un editor per al [OpenStreetMap](http://www.openstreetmap.org/), el mapa lliure i editable del món. Podeu utilitzar-lo per afegir i actualitzar\nles dades a la vostra àrea, contibuint així a fer un mapa de codi obert i amb dades lliures del món\nmillor per a tothom.\n\nLes edicions que feu en aquest mapa seran visibles per tothom que faci servir OpenStreetMap. Per tal de començar a editar, necessitareu\n[iniciar sessió](https://www.openstreetmap.org/login).\n\nL'[Editor iD](http://ideditor.com/) és un projecte cooperatiu que té el [codi font\ndisponible a GitHub](https://github.com/openstreetmap/iD).\n",
-            "editing_saving": "# Edició i desat\n\nAquest editor està dissenyat per treballar principalment en línia, i hi heu accedit mitjançant una pàgina web.\n\n### Selecció d'objectes\n\nPer seleccionar un element del mapa, com ara una carretera o un punt d'interès, cliqueu-hi a sobre.\nAixò ressaltarà l'objecte seleccionat, obrirà un panell amb els detalls sobre aquest, i un menú amb les coses que hi podeu fer.\n\nPer seleccionar múltiples objectes, premeu la tecla 'Shift' i cliqueu-los per separat, o bé clicant i arrossegant el cursor dibuixeu un rectangle per sobre de tots ells. Això seleccionarà tots els objectes dins el rectangle que es dibuixarà i permetrà modificar tots els objectes seleccionats alhora.\n\n### Desant les edicions\n\nQuan feu canvis com ara editar carreteres, edificis, o llocs, aquests canvis es desen localment fins que els deseu al servidor. No us preocupeu si cometeu algun error- podeu desfer els canvis clicant el botó de desfer, i podeu refer els canvis clicant el botó de refer.\n\nCliqueu 'Desa' per acabar un grup d'edicions - per exemple, si heu acabat de delimitar l'àrea d'una ciutat i voleu començar a fer-ne una altra. Tindreu la oportunitat de revisar la feina feta, i l'editor proporcionarà suggeriments que us podran ajudar com també mostrarà alertes si detecta alguna cosa que no està del tot bé als vostres canvis.\n\nSi tot sembla correcte, podeu escriure un breu comentari explicant el canvis que heu fet, i clicar 'Desa' un altre cop per publicar els canvis a [OpenStreetMap.org](http://www.openstreetmap.org/), on seran visibles per a tots els altres usuaris i disponibles per a altres per refer-los o bé millorar-los. Si no podeu finalitzar les vostres edicions en una mateixa sessió, podeu sortir de la finestra d'edició i tornar-hi més tard (al mateix navegador i ordinador), i l'aplicació d'edició us preguntarà si voleu restaurar els canvis anteriors.\n\n### Utilitzant l'editor\n\nHi ha una llista de dreceres de teclat disponible [aquí](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
             "roads": "# Carreteres\n\nPodeu crear, ajustar i eliminar carreteres amb aquest editor. Les carreteres poden ser\nde molts tipus: pistes, autovies, camins, carrils bici, i molts més - qualsevol tram\ndels més comuns s'hauria de poder dibuixar.\n\n### Selecció\n\nCliqueu a la carretera per seleccionar-la. En fer-ho els seus contorns es faran visibles,\ncom també un petit menú d'eines i una barra lateral que mostrarà més informació\nde la carretera.\n\n### Modificació\n\nDe vegades veureu carreteres que no coincideixen amb la imatge de fons\no amb una traça de GPS. Podeu ajustar aquestes carreteres per tal que estiguin al lloc\ncorrecte.\n\nPrimer cliqueu la carretera que voleu canviar. Això la ressaltarà i mostrarà els punts de control\nque podeu arrossegar a les ubicacions desitjades. Si el que\nvoleu és afegir nous punts per millorar-ne el detall, feu doble clic a una part de la carretera sense punts, i se'n afegirà un.\n\nSi la carretera es connecta amb una altra, però no es reflecteix al mapa,\npodeu arrossegar un dels punts de control cap a l'altra carretera\nper tal d'unir-les. Fer que les carreteres es connectin és molt important\nper al mapa i essencial per proveir direccions per a la conducció.\n\nTambé podeu clicar l'eina «Mou» o prémer la drecera «M» per moure la carretera sencera, tota de cop, i llavors clicar altra vegada per guardar aquest moviment.\n\n### Eliminació\n\nSi una carretera està mal posada -podeu apreciar que no existeix a la imatge per satèl·lit\ni, a més a més, els veïns han confirmat que no existeix - la podeu eliminar, cosa que la traurà del mapa. Aneu amb compte  en eliminar objectes -\ncom en altres edicions, els resultats els veurà tothom, perquè sovint, la imatge del satèl·lit no està actualitzada: podria ser que la carretera s'hagués construït recentment.\n\nPodeu eliminar una carretera clicant-la i, llavors, clicant la icona de la paperera, o bé prement la tecla «Suprimeix».\n\n### Creació\n\nHeu trobat que en algun lloc hi hauria d'haver una carretera però no hi és? Cliqueu la icona «Línia»\nal marge superior esquerre de la zona del mapa o bé premeu la drecera «2» per començar a dibuixar\nuna línia.\n\nCliqueu a l'inici de la carretera al mapa per començar-la a dibuixar. Si la carretera comença amb una bifurcació en una carretera existent, cliqueu al lloc a on connecten.\n\nTot seguit cliqueu a diferents punts al llarg de la carretera per tal que segueixi el traçat correcte, d'acord  amb la imatge del satèl·lit o una traça del GPS. Si la carretera que esteu dibuixant s'encreua amb una altra carretera, connecteu-les clicant al punt d'intersecció. Quan acabeu el dibuix, feu doble clic o premeu «Retorn» del teclat.\n",
             "gps": "# GPS\n\nLes traces enregistrades amb GPS són una font fiable de dades per a l'OpenStreetMap. Aquest editor accepta les traces locals - fitxers `.gpx` del vostre ordinador. Podeu generar aquest tipus de traça GPS amb aplicacions per a mòbils o per dispositius personals de GPS.\n\nPer a més informació de com recollir dades amb GPS, llegiu [Recollir dades amb GPS](http://learnosm.org/en/mobile-mapping/).\n\nPer utilitzar una traça GPX en la edició del mapa arrossegueu el fitxer GPX i deixeu-lo a l'editor. En detectar-se, s'afegirà en el mapa com una línia lila llampant. Cliqueu al menú 'Dades del mapa', al cantó dret, per activar, desactivar, o ajustar la visió d'aquesta capa GPX.\n\nLa traça GPX no pujarà directament a OpenStreetMap - la millor manera d'utilitzar-la és que dibuixeu en el mapa els nous objectes, fent-la servir com a guia. De tota manera, també la podeu [pujar a l'OpenStreetMap] (http://www.openstreetmap.org/trace/create) perquè d'altres persones l'aprofitin.\n",
             "imagery": "# Imatgeria\n\nLa imatgeria aèria és un recurs important per a l'edició de mapes. Una combinació de\nvols d'aeronaus, fotografies de satèl·lit, i d'altres fonts compilades gratuïtament\nestan disponibles a l'editor dins del menú de l'esquerra 'Paràmetres de configuració del fons'.\n\nPer defecte, l'editor mostra la capa de satèl·lit de [Bing Maps](http://www.bing.com/maps/), però a mesura que us moveu i ajusteu la vista del mapa a noves àrees geogràfiques, noves fonts estaran disponibles. En alguns països, com ara els Estats Units, França, i Dinamarca tenen\nuna imatgeria d'alta qualitat disponible per a determinades àrees.\n\nLa imatgeria a vegades no es correspon amb les dades del mapa, això és degut a un error\nper part del proveïdor de la imatge. Si observeu moltes carreteres mogudes del seu lloc a la imatge,\nno les mogueu per tal que encaixin amb aquesta. Ja que podeu ajustar la imatgeria per tal de que quadri amb les dades existents clicant a 'Corregeix la desalineació' al capdevall de la pestanya dels\n'Paràmetres de configuració del fons'.\n",
@@ -665,7 +664,7 @@
                 "zoom": "Us podeu apropar o allunyar movent la rodeta del ratolí o del ratolí tàctil o clicant els botons {plus} / {minus}. **Amplia el mapa!**",
                 "features": "Utilitzem la paraula *objectes* per descriure les coses que es mostren al mapa. Qualsevol cosa del món real es pot representar al mapa com un objecte a OpenStreetmap",
                 "points_lines_areas": "Els objectes del mapa es representen usant *punts, línies o àrees.*",
-                "nodes_ways": "En l'OpenStreetMap, els punts de vegades els anomenem *nodes*, i les línies i àrees de vegades les anomenem *vies*.",
+                "nodes_ways": "A OpenStreetMap els punts de vegades els anomenem *nodes* i les línies i àrees de vegades les anomenem *vies*.",
                 "click_townhall": "Tots els objectes del mapa es poden seleccionar fent-hi clic. **Feu clic al punt per a seleccionar-lo.**",
                 "selected_townhall": "Bé! Ara el punt està seleccionat. Els objectes seleccionats es mostren amb un contorn realçat.",
                 "editor_townhall": "Quan un objecte es selecciona,  es mostra **l'editor d'objectes** al costat del mapa",
@@ -686,13 +685,13 @@
                 "choose_cafe": "**Trieu «{preset}» de la llista.**",
                 "feature_editor": "Ara el punt està marcat com un cafè. Utilitzant l'editor d'objectes podem afegir més informació d'aquest cafè.",
                 "add_name": "A OpenStreetMap tots els camps són opcionals, i ja estarà bé si deixeu un camp buit quan no n'estigueu segur.{br}Ara suposem que coneixeu aquest cafè i sabeu el seu nom. **Afegiu un nom al cafè.**",
-                "add_close": "L'editor d'objectes recordarà els vostres canvis automàticament. **Quan acabeu de posar el nom, premeu la tecla d'escapada o la de retorn, o cliqueu el {button} botó per tancar l'editor d'objectes.**",
+                "add_close": "L'editor d'objectes recordarà automàticament tots els vostres canvis.  **Quan hàgiu acabat d'afegir el nom premeu la tecla d'escapada o la de retorn, o cliqueu el botó {button} per tancar l'editor d'objectes.**",
                 "reselect": "Sovint hi ha punts que ja existeixen però tenen errors o són incomplets. Podem editar els punts existents. **Cliqueu per seleccionar el cafè que acabeu de crear.**",
-                "update": "Ara podem emplenar alguns detalls més d'aquest cafè. Podeu canviar els seu nom, afegir el tipus de menjar o una adreça. **Modifiqueu els detalls del cafè.**",
-                "update_close": "**Quan acabeu d'actualitzar el cafè, premeu la tecla d'escapada o la de retorn, o cliqueu el {button} botó per tancar l'editor d'objectes.**",
+                "update": "Ara podrem afegir alguns detalls més d'aquest cafè. Podeu canviar els seu nom, afegir el tipus de menjar o una adreça. **Modifiqueu els detalls del cafè.**",
+                "update_close": "**Quan hàgiu acabat de modificar el cafè premeu la tecla d'escapada o la de retorn, o cliqueu el botó {button} per tancar l'editor d'objectes.**",
                 "rightclick": "Podeu clicar el botó dret sobre qualsevol objecte per veure el *menú d'edició*, això mostra la llista de les operacions d'edició que es poden fer. **Cliqueu el botó dret per seleccionar el punt que heu creat i veure el menú d'edició. **",
                 "delete": "És convenient esborrar objectes si no existeixen al món real .{br}En esborrar un objecte de OpenStreetMap el suprimiu del mapa que tots utilitzem, per tant ho hauríeu de saber del cert que l'objecte no hi és abans d'esborrar-lo. **Cliqueu el botó {button} per esborrar el punt.**",
-                "undo": "Sempre podeu desfer tots canvis fins el darrer quan hàgiu desat les vostres edicions a OpenStreetMap. **Cliqueu en el botó {button} per desfer l'esborrat i recuperar el punt.**",
+                "undo": "Sempre podreu anar desfent els canvis fets fins el darrer cop que vareu desar les vostres edicions a OpenStreetMap. **Cliqueu en el botó {button} per desfer l'esborrat i recuperar el punt.**",
                 "play": "Ara que sabeu com crear i editar punts, proveu creant uns quants punts per practicar! **Quan estigueu preparat per continuar vers el següent capítol, cliqueu '{next}'.**"
             },
             "areas": {
@@ -700,7 +699,7 @@
                 "add_playground": "*Àrees* s'utilitza per definir els límits d'objectes com llacs, edificis o àrees residencials.{br}També es poden utilitzar per incloure més detalls al mapa de molts objectes que altrament deixaríeu com un punt. **Cliqueu el botó {button} Àrea per afegir una nova àrea.**",
                 "start_playground": "Afegim aquesta zona de joc al mapa dibuixant una àrea. Les àrees es dibuixen situant *nodes* seguint el límit extern de l'objecte. **Cliqueu o premeu la barra espaiadora per situar el primer node a una de les cantonades de la zona de joc.**",
                 "continue_playground": "Continueu dibuixant l'àrea situant més nodes al llarg del límit de la zona de joc. Queda perfecte si connecteu l'àrea a les rutes d'accés per vianants que pugui haver.{br}Consell: Si manteniu premuda la tecla d'alternativa evitareu que els nodes es connectin a altres objectes. **Continueu dibuixant una àrea per la zona de joc.**",
-                "finish_playground": "Finalitzeu l'àrea prement la tecla de retorn o clicant altre cop sigui el primer o el darrer node. **Finalitzeu el dibuix de l'àrea de la zona de jocs infantils.**",
+                "finish_playground": "Acabeu l'àrea prement la tecla de retorn o clicant altre cop el primer o el darrer node. **Acabeu de dibuixar una àrea per al parc.**",
                 "search_playground": "**Cerqueu «{preset}».**",
                 "choose_playground": "**Trieu «{preset}» de la llista.**",
                 "add_field": "Aquesta zona de jocs infantils no té un nom oficial i no en podrem posar-ne cap al camp Nom. {br}Altrament podem afegir alguns detalls addicionals s'aquesta zona de joc en el camp Descripció. **Obriu la llista Afegir Camp.** ",
@@ -716,13 +715,20 @@
                 "intersect": "Cliqueu o premeu la barra d'espais per afegir més nodes a la línia. {br}Les carreteres i molts altres tipus de línies són part d'una xarxa superior. Aquestes línies s'han de connectar correctament perquè les aplicacions de navegació funcionin. ** Cliqueu a {name} per crear un encreuament que connecti les dues línies.**",
                 "retry_intersect": "La carretera ha d'intersecar «{name}». Torneu a intentar-ho!",
                 "continue_line": "Continueu dibuixant la línia de la nova carretera. recordeu que podeu arrossegar i modificar la escala del mapa si us convé. {br}Quan acabeu el traçat, cliqueu altre cop el darrer node.  **Finalitzeu el traçat de la carretera.**",
-                "choose_category_road": "**Trieu «{category}» de la llista.**",
+                "choose_category_road": "**Seleccioneu {category} de la llista.**",
                 "choose_preset_residential": "Hi ha molts tipus de vies, però les més comunes són els carrers residencials. **Trieu el tipus «{preset}».**",
                 "retry_preset_residential": "No heu seleccionat tipus «{preset}». **Feu clic aquí per a intentar-ho un altra vegada.**",
-                "name_road": "**Poseu a aquesta via un nom, desprès premeu la tecla d'escapada o la de retorn, o cliqueu el {button} botó per tancar l'editor d'objectes.**",
+                "name_road": "**Poseu un nom a aquesta via, desprès premeu la tecla d'escapada o la de retorn, o cliqueu el botó {button} per tancar l'editor d'objectes.**",
+                "did_name_road": "Te bona pinta! Ara aprendrem com modificar la forma d'una línia.",
+                "update_line": "De vegades necessitareu modificar la forma d'una línia ja existent. Aquí teniu una línia que es podria millorar,",
+                "add_node": "Podem afegir alguns nodes a aquesta línia per millorar la seva forma. Una manera d'afegir nodes és clicant dos cops la línia allà on vulguem afegir el node. **Cliqueu dos cops a la línia per crear un node nou.**",
+                "start_drag_endpoint": "Quan una línia està seleccionada es poden arrossegar qualsevol dels seus nodes clicant i mantenint pres el botó esquerra del ratolí mentre l'arrossegueu.  **Arrossegueu el punt extrem fins on aquestes vies s'haurien de creuar.**",
+                "delete_lines": "És convenient esborrar els trams de carrer que no existeixin realment.(br)Aquí hi ha un exemple on es va planejar un carrer però mai es va fer. Podem millorar aquesta zona del mapa si esborrem les línies supèrflues. ",
                 "split_intersection": "** Feu clic al botó {button} per a dividir «{street}».**",
                 "retry_split": "No heu fet clic al botó «Divideix». Torneu a intentar-ho.",
+                "did_split_multi": "Ben fet! {street1} ara està dividit en dos troços. La part superior es pot esborrar. **Cliqueu la part superior de {street2} per seleccionar-la.**",
                 "did_split_single": "**Feu clic a la part superior de «{street2}» per a seleccionar-ho.**",
+                "multi_rightclick": "Molt bé! Les dues línies a esborrar ara estan seleccionades. **Cliqueu el botó dret sobre una de les línies per mostrar el menú d'edició.*",
                 "multi_delete": "**Cliqueu el {button} botó per eliminar les línies addicionals.**",
                 "retry_delete": "No heu clicat al botó Esborra. Torneu a intentar-ho."
             },
@@ -730,15 +736,16 @@
                 "title": "Edificis",
                 "add_building": "L'OpenStreetMap és la base de dades d'edificis més gran del món. {br}Podeu millorar aquesta base de dades dibuixant edificis que encara no estiguin al mapa. **Cliqueu el botó {button} Àrea per afegir una nova àrea.**.",
                 "start_building": "Afegiu aquesta casa al mapa perfilant el seu contorn. {br}Els edificis s'haurien de perfilar al voltant de la seva planta el més acuradament possible. **Cliqueu o premeu la barra d'espai per posar un node inicial a una de les cantonades del edifici.**",
-                "continue_building": "Continueu afegint més nodes per perfilar el contorn de l'edifici. Recordeu que podeu ampliar l'escala si voleu afegir més detalls. {br}Finalitzeu l'edifici prement la tecla de retorn o clicant altre cop el primer o el darrer node.** Acabeu de perfilar l'edifici.**",
+                "retry_building": "Sembla que heu tingut problemes situant els nodes a les cantonades del edifici. Torneu-ho a provar!",
                 "choose_category_building": "**Trieu «{category}» de la llista.**",
                 "choose_preset_house": "Hi ha molts tipus d'edificis, però aquest és clarament una casa.{br}Si no esteu segur del tipus, és correcte de simplement triar un tipus d'edifici genèric. **Trieu el tipus «{preset}».**",
                 "close": "**Premeu la tecla d'escapada o cliqueu el {button} botó per tancar l'editor d'objectes.**",
                 "rightclick_building": "**Cliqueu-lo amb el botó dret per seleccionar l'edifici que heu creat i mostrar-lo al menú d'edició.**",
+                "square_building": "La casa que acabeu d'afegir tindrà més bona pinta amb unes cantonades en angle recte. **Cliqueu en el botó {button} per dibuixar l'edifici amb angles rectes.**",
                 "retry_square": "No heu clicat al botó Quadrat. Torneu a intentar-ho.",
+                "done_square": "Veieu com les cantonades del edifici han canviat de lloc? Aprenguem un altre pràctic truc. ",
                 "add_tank": "Ara perfilarem aquest dipòsit d'emmagatzemament circular. \"\"Cliqueu el botó {button} per afegir una àrea nova.**",
                 "start_tank": "No us preocupeu que no us cal dibuixar un cercle perfecte. Només dibuixeu una àrea dins del dipòsit que toqui el seu contorn. **Cliqueu o premeu la barra d'espai per situar el node inicial del contorn del dipòsit.**",
-                "continue_tank": "Afegiu uns pocs nodes més a la vora del contorn. El cercle es crearà per fora dels nodes que dibuixeu. {br}Acabeu l'àrea prement la tecla de retorn o clicant altre cop el primer o el darrer node. **Acabeu de perfilar el dipòsit.**",
                 "search_tank": "**Cerqueu «{preset}».**",
                 "choose_tank": "**Trieu «{preset}» de la llista.**",
                 "rightclick_tank": "**Cliqueu amb el botó dret per seleccionar el dipòsit d'emmagatzematge que heu creat i mostrar el menú d'edició.**",
@@ -751,6 +758,9 @@
                 "save": "No oblideu que els canvis s'han de desar regularment!",
                 "start": "Comenceu a editar el mapa!"
             }
+        },
+        "shortcuts": {
+            "title": "Dreceres de teclat"
         },
         "presets": {
             "categories": {
@@ -1306,9 +1316,6 @@
                 },
                 "internet_access/ssid": {
                     "label": "SSID (nom de la xarxa)"
-                },
-                "kerb": {
-                    "label": "Rebaix de vorada"
                 },
                 "lamp_type": {
                     "label": "Tipus"

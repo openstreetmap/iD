@@ -30,9 +30,9 @@
         "operations": {
             "add": {
                 "annotation": {
-                    "point": "أضفت نقطة.",
-                    "vertex": "أضفت نقطة إلى طريق.",
-                    "relation": "أضفت علاقة."
+                    "point": "تم إضافة نقطة.",
+                    "vertex": "تم إضافة نقطة إلى طريق.",
+                    "relation": "تم إضافة علاقة."
                 }
             },
             "start": {
@@ -74,7 +74,7 @@
                 },
                 "not_closed": "هذه لا يمكن جعلها دائرية لأنها ليست حلقة.",
                 "too_large": "هذه لا يمكن جعلها دائرية لأنه لا يوجد جزء كافٍ منها ظاهر.",
-                "connected_to_hidden": "هذه لا يمكن جعلها دائرية لأنها متصلة بعنصر خفي."
+                "connected_to_hidden": "لا يمكن جعلها دائرية لأنها متصلة بعنصر مخفي."
             },
             "orthogonalize": {
                 "title": "مربع",
@@ -89,7 +89,7 @@
                 },
                 "not_squarish": "هذا لا يمكن أن يكون مربعا لأنه ليس رباعياً.",
                 "too_large": "هذه لا يمكن جعلها مربّعة لأنه لا يوجد جزء كافٍ منها ظاهر.",
-                "connected_to_hidden": "هذه لا يمكن تربيعها لأنها مرتبطة بميزة خفية"
+                "connected_to_hidden": "لا يمكن جعلها مربعة لأنها مرتبطة بعنصر مخفي."
             },
             "straighten": {
                 "title": "مستقيم",
@@ -97,24 +97,33 @@
                 "key": "S",
                 "annotation": "جعل الخط مستقيما.",
                 "too_bendy": "هذا لا يمكن أن يستقيم لأنه ينحني كثيرا.",
-                "connected_to_hidden": "هذا الخط لا يمكن أن يكون مستقيما لأنه متصل بميزة مخفية."
+                "connected_to_hidden": "هذا الخط لا يمكن جعله مستقيما لأنه متصل بعنصر مخفي."
             },
             "delete": {
                 "title": "حذف",
                 "description": {
-                    "single": "احذف هذه الميزة نهائيا.",
-                    "multiple": "احذف هذه الميزات نهائيا."
+                    "single": "حذف هذا العنصر نهائيا.",
+                    "multiple": "حذف هذه العناصر نهائيا."
                 },
                 "annotation": {
                     "point": "حذف نقطة.",
                     "vertex": "حذفت نقطة من طريق.",
                     "line": "حذف خط.",
                     "area": "حذف مساحة.",
-                    "relation": "حذف علاقة."
+                    "relation": "حذف علاقة.",
+                    "multiple": "حذفت {n} عناصر."
+                },
+                "too_large": {
+                    "single": "لا يمكن حذف هذا العنصر بسبب عدم ظهور مايكفي منه حاليا.",
+                    "multiple": "لا يمكن حذف هذه العناصر بسبب عدم ظهور مايكفي منها حاليا."
+                },
+                "incomplete_relation": {
+                    "single": "لا يمكن حذف هذا العنصر لأنه لم يكتمل تنزيله من الإنترنت.",
+                    "multiple": "لا يمكن حذف هذه العناصر لأنه لم يكتمل تنزيلها من الإنترنت."
                 }
             },
             "add_member": {
-                "annotation": "أضاف عضو إلى علاقة."
+                "annotation": "تم إضافة عضو إلى علاقة."
             },
             "delete_member": {
                 "annotation": "حذف عضو من علاقة."
@@ -133,27 +142,33 @@
                 "key": "D",
                 "annotation": "فصل الخطوط/المناطق.",
                 "not_connected": "لا توجد خطوط/مناطق كافية هنا لفصلها.",
-                "connected_to_hidden": "هذه لا يمكن فصلها لأنها متصلة بميزة مخفية.",
+                "connected_to_hidden": "لا يمكن فصلها لأنها متصلة بعنصر مخفي.",
                 "relation": "هذه لا يمكن فصلها لأنها تربط أعضاءً في علاقة"
             },
             "merge": {
                 "title": "دمج",
-                "description": "دمج هذه الميزات.",
+                "description": "دمج هذه العناصر.",
                 "key": "C",
-                "annotation": "دمج {n} ميزات.",
-                "not_eligible": "لا يمكن دمج هذه الميزات.",
-                "restriction": "لا يمكن دمج هذه الميزات لأن واحدة منها على الأقل جزء من العلاقة \"{relation}\".",
-                "incomplete_relation": "لا يمكن دمج هذه المميزات لأن واحد منها على الأقل لم يتم تحميله بالكامل.",
-                "conflicting_tags": "لا يمكن دمج هذه الميزات لأن بعض وسومها تحتوي قيما متعارضة مع بعضها."
+                "annotation": "تم دمج {n} عناصر.",
+                "not_eligible": "لا يمكن دمج هذه العناصر.",
+                "not_adjacent": "لا يمكن دمج هذه العناصر لأن نقاط نهاياتها غير متصلة.",
+                "restriction": "لا يمكن دمج هذه العناصر لأن واحدة منها على الأقل جزء من العلاقة \"{relation}\".",
+                "incomplete_relation": "لا يمكن دمج هذه العناصر لأن واحد منها على الأقل لم يتم تحميله بالكامل.",
+                "conflicting_tags": "لا يمكن دمج هذه العناصر لأن بعض وسومها تحتوي قيما متعارضة مع بعضها."
             },
             "move": {
                 "title": "تحريك",
+                "description": {
+                    "single": "حرك هذا العنصر إلى مكان آخر.",
+                    "multiple": "حرك هذه العناصر إلى مكان آخر."
+                },
                 "key": "M",
                 "annotation": {
                     "point": "نقل نقطة",
                     "vertex": "حركت نقطة في طريق.",
                     "line": "حرك خطاً",
-                    "area": "حرك منطقة"
+                    "area": "حرك منطقة",
+                    "multiple": "تم تحريك عدد من العناصر."
                 }
             },
             "reflect": {
@@ -191,7 +206,7 @@
                 },
                 "not_eligible": "لا يمكن فصل الخطوط عند البداية أو النهاية.",
                 "multiple_ways": "توجد الكثير من الخطوط هنا لفصلها.",
-                "connected_to_hidden": "لا يمكن فصل هذه لأنها متصلة بميزة خفية."
+                "connected_to_hidden": "لا يمكن فصل هذه لأنها متصلة بعنصر مخفي."
             },
             "restriction": {
                 "help": {
@@ -201,7 +216,7 @@
                     "toggle_off": "انقر لإزالة تقييد \"{restriction}\"."
                 },
                 "annotation": {
-                    "create": "تمت إضافة تقييد.",
+                    "create": "تم إضافة تقييد.",
                     "delete": "تمت ازالت تقييد."
                 }
             }
@@ -229,8 +244,8 @@
         "report_a_bug": "إبلاغ عن خطأ أو مشكلة",
         "help_translate": "ساعد في الترجمة",
         "feature_info": {
-            "hidden_warning": "{count} ميزات مخفية",
-            "hidden_details": "هذه الميزة مخفية حاليا: {details}"
+            "hidden_warning": "{count} عناصر مخفية",
+            "hidden_details": "هذه العناصر مخفية حاليا: {details}"
         },
         "status": {
             "error": "تعذر اﻹتصال مع واجهة التطبيق البرمجية API.",
@@ -244,7 +259,7 @@
             "upload_explanation": "التغييرات التي قمت برفعها سوف تظهر على كل الخرائط التي تستخدم بيانات OpenStreetMap.",
             "upload_explanation_with_user": "التغييرات التي قمت برفعها كـ {user} سوف تظهر على كل الخرائط التي تستخدم بيانات OpenStreetMap.",
             "save": "إرسل",
-            "cancel": "إلغي",
+            "cancel": "إلغاء",
             "changes": "{count} تغييرات",
             "warnings": "تنبيهات",
             "modified": "عُدل",
@@ -299,16 +314,16 @@
             "all_relations": "كل العلاقات",
             "new_relation": "علاقة جديدة....",
             "role": "الدور",
-            "choose": "اختر نوع الميزة",
+            "choose": "اختر نوع العنصر",
             "results": "{n} نتيجة لـ {search}",
             "reference": "العرض على ويكي OpenStreetMap",
-            "back_tooltip": "تغيير الميزة",
+            "back_tooltip": "تغيير العنصر",
             "remove": "إزالة",
             "search": "بحث",
-            "multiselect": "الميزات المختارة",
+            "multiselect": "العناصر المختارة",
             "unknown": "غير معروف",
-            "feature_list": "ابحث عن ميزات",
-            "edit": "حرر ميزة",
+            "feature_list": "ابحث عن عناصر",
+            "edit": "حرر عنصر",
             "check": {
                 "yes": "نعم",
                 "no": "لا",
@@ -351,8 +366,8 @@
             "description": "بيانات الخريطة",
             "data_layers": "طبقات البيانات",
             "fill_area": "ملء المساحات",
-            "map_features": "ميزات الخريطة",
-            "autohidden": "لقد تم إخفاء هذه الميزات تلقائيا بسبب وجود الكثير من الميزات القريبة منها والتي ستؤدي لظهور الكثير جدا من الميزات المتداخلة مع بعضها. بإمكانك التكبير لتعديلهم."
+            "map_features": "عناصر الخريطة",
+            "autohidden": "لقد تم إخفاء هذه العناصر تلقائيا بسبب وجود الكثير من العناصر القريبة منها والتي ستؤدي لظهور الكثير جدا من العناصر المتداخلة مع بعضها. بإمكانك التكبير لتعديلهم."
         },
         "feature": {
             "points": {
@@ -372,7 +387,7 @@
                 "tooltip": "مباني، ملاجئ، مرائب، الخ"
             },
             "landuse": {
-                "description": "خصائص استخدامات الأراضى",
+                "description": "عناصر الأراضي",
                 "tooltip": "غابات، أراضي زراعية، حدائق، مناطق سكنية، مناطق تجارية، إلخ..."
             },
             "boundaries": {
@@ -380,15 +395,15 @@
                 "tooltip": "حدود إدارية"
             },
             "water": {
-                "description": "خصائص مائية",
+                "description": "عناصر مائية",
                 "tooltip": "انهار، بحيرات، برك، أحواض، الخ "
             },
             "rail": {
-                "description": "خصائص السكك الحديدية",
+                "description": "عناصر السكك الحديدية",
                 "tooltip": "السكك الحديدية"
             },
             "power": {
-                "description": "خصائص طاقية",
+                "description": "عناصر الطاقة",
                 "tooltip": "خطوط الكهرباء، محطات الطاقة، محطات توليد الكهرباء، الخ"
             },
             "past_future": {
@@ -480,11 +495,11 @@
         },
         "validations": {
             "untagged_point": "نقطة غير موسومة",
-            "untagged_point_tooltip": "اختر نوع الميزة التي تصف هذه النقطة.",
+            "untagged_point_tooltip": "اختر نوع العنصر الذي يصف هذه النقطة.",
             "untagged_line": "خط غير موسوم",
-            "untagged_line_tooltip": "اختر نوع الميزة التي تصف هذا الخط.",
+            "untagged_line_tooltip": "اختر نوع العنصر الذي يصف هذا الخط.",
             "untagged_area": "منطقة غير موسومة",
-            "untagged_area_tooltip": "اختر نوع الميزة التي تصف هذه المساحة.",
+            "untagged_area_tooltip": "اختر نوع العنصر التي يصف هذه المساحة.",
             "untagged_relation": "علاقة غير موسومة",
             "tag_suggests_area": "الوسم {tag} يقترح بأن الخط يجب أن يكون منطقة، ولكنها حاليا ليست منطقة",
             "deprecated_tags": "وسوم مهجورة: {tags}"
@@ -545,7 +560,7 @@
             },
             "welcome": {
                 "title": "مرحباً",
-                "welcome": "أهلا بك ! هذه جولة تعلمك أساسيات التحرير على خريطة الشارع المفتوحة."
+                "welcome": "أهلا بك ! هذه جولة ستعلمك أساسيات التحرير على خرائط الشارع المفتوحة."
             },
             "navigation": {
                 "title": "التجوال"
@@ -564,35 +579,59 @@
                 "title": "المباني"
             },
             "startediting": {
-                "title": "ابدأ التحرير",
+                "title": "ابدأ بالتحرير",
                 "save": "لا تنس حفظ تغييراتك بشكل دوري!",
                 "start": "إبدأ رسم الخرائط !"
             }
         },
         "presets": {
             "categories": {
+                "category-barrier": {
+                    "name": "عناصر الحواجز"
+                },
                 "category-building": {
-                    "name": "ميزات المبنى"
+                    "name": "عناصر المباني"
+                },
+                "category-golf": {
+                    "name": "عناصر الغولف"
+                },
+                "category-landuse": {
+                    "name": "عناصر الأراضي"
                 },
                 "category-natural-area": {
-                    "name": "ميزات طبيعية"
+                    "name": "عناصر طبيعية"
                 },
                 "category-natural-line": {
-                    "name": "ميزات طبيعية"
+                    "name": "عناصر طبيعية"
                 },
                 "category-natural-point": {
-                    "name": "ميزات طبيعية"
+                    "name": "عناصر طبيعية"
+                },
+                "category-path": {
+                    "name": "عناصر المسارات"
                 },
                 "category-rail": {
-                    "name": "ميزات السكك الحديدية"
+                    "name": "عناصر السكك الحديدية"
+                },
+                "category-restriction": {
+                    "name": "عناصر القيود"
                 },
                 "category-road": {
-                    "name": "خصائص الطريق"
+                    "name": "عناصر الطرق"
+                },
+                "category-route": {
+                    "name": "عناصر المسارات"
+                },
+                "category-water-area": {
+                    "name": "عناصر المياه"
+                },
+                "category-water-line": {
+                    "name": "عناصر المياه"
                 }
             },
             "fields": {
                 "access": {
-                    "label": "الدخول مسموح",
+                    "label": "وصول مسموح",
                     "options": {
                         "designated": {
                             "description": "الدخول مصرح به وفقا لعلامات أو قوانين محلية مخصصة.",
@@ -628,7 +667,7 @@
                         "bicycle": "دراجات هوائية",
                         "foot": "بالقدم",
                         "horse": "أحصنة",
-                        "motor_vehicle": "مركبات"
+                        "motor_vehicle": "سيارات"
                     }
                 },
                 "access_simple": {
@@ -640,8 +679,10 @@
                 "address": {
                     "label": "العنوان",
                     "placeholders": {
+                        "block_number": "رقم البلوك",
+                        "block_number!jp": "رقم البلوك",
                         "city": "المدينة",
-                        "city!vn": "بلدة / مدينة",
+                        "city!vn": "المدينة / البلدة",
                         "conscriptionnumber": "123",
                         "country": "دولة",
                         "county": "بلد",
@@ -651,13 +692,17 @@
                         "hamlet": "قرية",
                         "housename": "اسم المنزل",
                         "housenumber": "123",
+                        "housenumber!jp": "رقم المبنى/ رقم القطعة",
                         "neighbourhood": "حي",
                         "place": "المكان",
                         "postcode": "الرمز البريدي",
                         "province": "المحافظة",
                         "quarter": "حي",
                         "state": "ولاية",
-                        "street": "شارع"
+                        "street": "شارع",
+                        "subdistrict": "منطقة فرعية",
+                        "suburb": "ضاحية",
+                        "suburb!jp": "جناح"
                     }
                 },
                 "admin_level": {
@@ -701,6 +746,15 @@
                 "amenity": {
                     "label": "النوع"
                 },
+                "animal_boarding": {
+                    "label": "للحيوانات"
+                },
+                "animal_breeding": {
+                    "label": "للحيوانات"
+                },
+                "animal_shelter": {
+                    "label": "للحيوانات"
+                },
                 "area/highway": {
                     "label": "النوع"
                 },
@@ -718,6 +772,9 @@
                 },
                 "barrier": {
                     "label": "نوع"
+                },
+                "bath/open_air": {
+                    "label": "هواء طلق"
                 },
                 "beauty": {
                     "label": "نوع المتجر"
@@ -738,6 +795,9 @@
                         "whole": "الدم الكامل"
                     }
                 },
+                "board_type": {
+                    "label": "النوع"
+                },
                 "boundary": {
                     "label": "النوع"
                 },
@@ -749,6 +809,10 @@
                 },
                 "building_area": {
                     "label": "المبنى"
+                },
+                "camera/direction": {
+                    "label": "الاتجاه (الدرجات في اتجاه عقارب الساعة)",
+                    "placeholder": "45 ، 90 ، 180 ، 270"
                 },
                 "capacity": {
                     "label": "السعة",
@@ -775,6 +839,9 @@
                         "WSW": "غربي - جنوبي غربي"
                     }
                 },
+                "castle_type": {
+                    "label": "النوع"
+                },
                 "clock_direction": {
                     "label": "الاتجاه",
                     "options": {
@@ -782,11 +849,21 @@
                         "clockwise": "باتجاه عقارب الساعة"
                     }
                 },
+                "club": {
+                    "label": "النوع"
+                },
                 "collection_times": {
                     "label": "وقت الاستلام"
                 },
+                "communication_multi": {
+                    "label": "أنواع الاتصالات"
+                },
                 "construction": {
                     "label": "النوع"
+                },
+                "contact/webcam": {
+                    "label": "رابط كاميرا الويب",
+                    "placeholder": "http://example.com"
                 },
                 "content": {
                     "label": "المحتويات"
@@ -797,8 +874,14 @@
                 "craft": {
                     "label": "النوع"
                 },
+                "crop": {
+                    "label": "محاصيل"
+                },
                 "crossing": {
                     "label": "النوع"
+                },
+                "cuisine": {
+                    "label": "المأكولات"
                 },
                 "currency_multi": {
                     "label": "أنواع العملات"
@@ -809,6 +892,9 @@
                 "cycleway": {
                     "label": "ممر للدراجات",
                     "options": {
+                        "lane": {
+                            "title": "ممر دراجات قياسي"
+                        },
                         "none": {
                             "description": "لا ممر للدراجات",
                             "title": "لا شيء"
@@ -818,6 +904,12 @@
                         "cycleway:left": "جانب أيسر",
                         "cycleway:right": "جانب أيمن"
                     }
+                },
+                "date": {
+                    "label": "التاريخ"
+                },
+                "delivery": {
+                    "label": "توصيل طلبات"
                 },
                 "denomination": {
                     "label": "الطائفة"
@@ -835,11 +927,14 @@
                     "label": "يمكن القيادة من خلاله"
                 },
                 "electrified": {
+                    "label": "الكهربية",
                     "options": {
+                        "contact_line": "خط واصل",
                         "no": "لا",
                         "rail": "سكة حديد مكهربة",
                         "yes": "نعم (غير محدد)"
-                    }
+                    },
+                    "placeholder": "خط واصل، سكك حديدية مكهربة..."
                 },
                 "elevation": {
                     "label": "ارتفاع"
@@ -866,6 +961,13 @@
                 },
                 "fence_type": {
                     "label": "النوع"
+                },
+                "fire_hydrant/position": {
+                    "options": {
+                        "lane": "حارة طريق",
+                        "parking_lot": "ساحة وقوف سيارات",
+                        "sidewalk": "رصيف"
+                    }
                 },
                 "fire_hydrant/type": {
                     "label": "النوع",
@@ -915,6 +1017,9 @@
                 "handrail": {
                     "label": "سياج سلم (درابزين)"
                 },
+                "height": {
+                    "label": "الارتفاع (بالأمتار)"
+                },
                 "highway": {
                     "label": "النوع"
                 },
@@ -947,7 +1052,7 @@
                     "label": "النوع"
                 },
                 "internet_access": {
-                    "label": "ولوج للإنترنت",
+                    "label": "خدمة إنترنت",
                     "options": {
                         "no": "لا",
                         "terminal": "محطة",
@@ -957,7 +1062,7 @@
                     }
                 },
                 "internet_access/fee": {
-                    "label": "رسوم الدخول إلى شبكة الإنترنت"
+                    "label": "رسوم استخدام خدمة الإنترنت"
                 },
                 "lamp_type": {
                     "label": "النوع"
@@ -1019,21 +1124,28 @@
                 "man_made": {
                     "label": "النوع"
                 },
+                "maxheight": {
+                    "label": "أقصى ارتفاع"
+                },
                 "maxspeed": {
                     "label": "حدود السرعة",
                     "placeholder": "40, 50, 60..."
                 },
+                "maxweight": {
+                    "label": "أقصى وزن"
+                },
                 "mtb/scale/imba": {
                     "options": {
                         "1": "سهل (دائرة خضراء)"
-                    }
+                    },
+                    "placeholder": "سهل ، متوسط ، صعب..."
                 },
                 "mtb/scale/uphill": {
                     "placeholder": "0، 1، 2، 3 ..."
                 },
                 "name": {
-                    "label": "اسم",
-                    "placeholder": "اسم شائع (إذا وجد)"
+                    "label": "الاسم",
+                    "placeholder": "الاسم شائع (إن وجد)"
                 },
                 "natural": {
                     "label": "طبيعه"
@@ -1079,10 +1191,13 @@
                     }
                 },
                 "opening_hours": {
-                    "label": "ساعات"
+                    "label": "ساعات العمل"
                 },
                 "operator": {
                     "label": "مشغل"
+                },
+                "outdoor_seating": {
+                    "label": "مقاعد في الهواء الطلق"
                 },
                 "par": {
                     "placeholder": "3، 4، 5 ..."
@@ -1150,6 +1265,9 @@
                 "restriction": {
                     "label": "النوع"
                 },
+                "restrictions": {
+                    "label": "قيود المنعطفات"
+                },
                 "rooms": {
                     "label": "الغرف"
                 },
@@ -1215,6 +1333,7 @@
                         "bridge": "جسر",
                         "cutting": "طريق منخفض",
                         "embankment": "طريق مرتفع",
+                        "ford": "ممر مائي",
                         "tunnel": "نفق"
                     },
                     "placeholder": "غير معروف"
@@ -1346,12 +1465,16 @@
                     "terms": "مقعد, مقعد طويل"
                 },
                 "amenity/bicycle_parking": {
-                    "name": "موقف دراجات",
-                    "terms": "موقف دراجات هوائية"
+                    "name": "موقف دراجات هوائية",
+                    "terms": "موقف دراجات هوائية; موقف; دراجة; دراجات"
                 },
                 "amenity/bicycle_rental": {
                     "name": "تأجير دراجات",
-                    "terms": "محل استئجار دراجات هوائية"
+                    "terms": "تأجير دراجات هوائية; تأجير; دراجة; دراجات; هوائي; هوائية"
+                },
+                "amenity/bicycle_repair_station": {
+                    "name": "ورشة إصلاح دراجات هوائية",
+                    "terms": "دراجات هوائية; دراجة; اصلاح; تصليح دراجات; تصليح"
                 },
                 "amenity/boat_rental": {
                     "name": "محل استئجار قوارب",
@@ -1376,6 +1499,9 @@
                 "amenity/car_wash": {
                     "name": "غسيل سيارات",
                     "terms": "غسيل السيارات"
+                },
+                "amenity/casino": {
+                    "name": "كازينو"
                 },
                 "amenity/charging_station": {
                     "name": "محطة شحن",
@@ -1443,7 +1569,7 @@
                     "terms": "أرض مستشفى"
                 },
                 "amenity/internet_cafe": {
-                    "name": "مقهى الإنترنت"
+                    "name": "مقهى إنترنت"
                 },
                 "amenity/library": {
                     "name": "مكتبة",
@@ -1455,7 +1581,7 @@
                 },
                 "amenity/motorcycle_parking": {
                     "name": "موقف دراجات نارية",
-                    "terms": "دراجة نارية, دراجة بخارية"
+                    "terms": "دراجة نارية, دراجة بخارية; موقف; مواقف; ركن"
                 },
                 "amenity/nightclub": {
                     "name": "ملهى ليلي"
@@ -1465,7 +1591,7 @@
                     "terms": "مواقف سيارات عامة ، مصف للسيارات، مواقف مركبات عمومية, مركن سيارات, جراج"
                 },
                 "amenity/parking_entrance": {
-                    "name": "مدخل ومخرج موقف سيارات",
+                    "name": "مدخل ومخرج جراج وقوف",
                     "terms": "مدخل, مخرج"
                 },
                 "amenity/pharmacy": {
@@ -1580,8 +1706,8 @@
                     "terms": "سلة المهملات,سلة القمامة"
                 },
                 "area": {
-                    "name": "مساحة",
-                    "terms": "المساحة, مساحة"
+                    "name": "منطقة",
+                    "terms": "المساحة; مساحة; منطقة; المنطقة"
                 },
                 "barrier": {
                     "name": "حاجز",
@@ -1604,8 +1730,8 @@
                     "terms": "جدار المدينة"
                 },
                 "barrier/cycle_barrier": {
-                    "name": "حاجز الدرجات الهوائية",
-                    "terms": "حاجز دراجات هوائية"
+                    "name": "حاجز دراجات هوائية",
+                    "terms": "حاجز دراجات هوائية; حاجز; ممر; حاجز مرور; حاجز دراجات"
                 },
                 "barrier/entrance": {
                     "name": "مدخل"
@@ -1662,9 +1788,16 @@
                     "name": "مبني تجاري",
                     "terms": "مبنى تجاري"
                 },
+                "building/entrance": {
+                    "name": "مدخل ومخرج"
+                },
                 "building/garage": {
                     "name": "جراج",
                     "terms": "مَرْأب , كراج, تصليح سيارات"
+                },
+                "building/garages": {
+                    "name": "جراجات",
+                    "terms": "جراج; جراج سيارات; موقف; موقف سيارات; ركن; ركنة"
                 },
                 "building/greenhouse": {
                     "name": "بيت بلاستيكي"
@@ -1706,14 +1839,23 @@
                 "craft/carpenter": {
                     "name": "نجار"
                 },
+                "craft/gardener": {
+                    "name": "بستاني"
+                },
                 "craft/jeweler": {
                     "name": "بائع مجوهرات"
+                },
+                "craft/painter": {
+                    "name": "دهّان"
                 },
                 "craft/photographer": {
                     "name": "مصور"
                 },
                 "craft/plumber": {
                     "name": "سمكري"
+                },
+                "craft/saddler": {
+                    "name": "صانع سراج"
                 },
                 "craft/shoemaker": {
                     "name": "إسكافي"
@@ -1730,9 +1872,25 @@
                     "name": "هاتف طوارئ",
                     "terms": "هاتف طوارئ"
                 },
+                "entrance": {
+                    "name": "مدخل ومخرج",
+                    "terms": "دخول; خروج; مدخل; مخرج"
+                },
+                "footway/crossing": {
+                    "name": "معبر طريق",
+                    "terms": "معبر; عبور; عبور طريق; عبور شارع; معبر شارع; معبر طريق"
+                },
+                "footway/crosswalk": {
+                    "name": "معبر مشاة",
+                    "terms": "ممر; معبر; مشاة; ناس; اشخاص; عبور; مرور"
+                },
                 "footway/sidewalk": {
                     "name": "رصيف المشاة",
                     "terms": "رصيف, رصيف المشاة"
+                },
+                "ford": {
+                    "name": "ممر مائي",
+                    "terms": "ممر مائي; ممر; مائي; ماء"
                 },
                 "highway": {
                     "name": "طريق سريع"
@@ -1745,9 +1903,17 @@
                     "name": "محطة باص",
                     "terms": "موقف باصات, محطة باصات"
                 },
+                "highway/crossing": {
+                    "name": "معبر طريق",
+                    "terms": "معبر; عبور; عبور طريق; عبور شارع; معبر شارع; معبر طريق"
+                },
+                "highway/crosswalk": {
+                    "name": "معبر مشاة",
+                    "terms": "ممر; معبر; مشاة; ناس; اشخاص; عبور; مرور"
+                },
                 "highway/cycleway": {
-                    "name": "طريق دراجة هوائية",
-                    "terms": "طريق دراجات هوائية"
+                    "name": "مسار دراجات",
+                    "terms": "طريق دراجات; مسار دراجات"
                 },
                 "highway/footway": {
                     "name": "طريق مشي بالأقدام",
@@ -1788,6 +1954,10 @@
                     "name": "طريق سكني",
                     "terms": "شارع سكني"
                 },
+                "highway/rest_area": {
+                    "name": "منطقة استراحة",
+                    "terms": "راحة; نوم; استريح"
+                },
                 "highway/road": {
                     "name": "طريق غير معروف",
                     "terms": "طريق غير معروف"
@@ -1824,6 +1994,10 @@
                     "name": "ممر وقوف السيارات",
                     "terms": "ممر وقوف السيارات"
                 },
+                "highway/services": {
+                    "name": "منطقة خدمة",
+                    "terms": "خدمة سيارات; منطقة خدمة سيارات; منطقة خدمية"
+                },
                 "highway/steps": {
                     "name": "درج",
                     "terms": "درج"
@@ -1843,9 +2017,13 @@
                     "name": "رابط لطريق ثالثي",
                     "terms": "رابط لشارع ثالثي"
                 },
+                "highway/traffic_mirror": {
+                    "name": "مرآة مرور",
+                    "terms": "مرآة; مرور; مراية"
+                },
                 "highway/traffic_signals": {
                     "name": "إشارات مرور",
-                    "terms": "إشارات المرور"
+                    "terms": "اشارة; اشارات; اشارة مرور"
                 },
                 "highway/trunk": {
                     "name": "طريق أساسي",
@@ -1887,13 +2065,16 @@
                     "name": "آثار",
                     "terms": "أطلال"
                 },
-                "historic/wayside_cross": {
-                    "name": "صليب على الطريق",
-                    "terms": "صليب على الطريق"
-                },
                 "historic/wayside_shrine": {
                     "name": "مقام نصراني على الطريق",
                     "terms": "مقام نصراني على الطريق"
+                },
+                "landuse": {
+                    "name": "أرض",
+                    "terms": "<ترجم بالمصطلحات أو المرادفات لـ \"الأراضي\"، فاصلا المدخلات بالفاصلة \",\">"
+                },
+                "landuse/aquaculture": {
+                    "name": "مزرعة سمكية"
                 },
                 "landuse/basin": {
                     "name": "حوض",
@@ -1904,7 +2085,8 @@
                     "terms": "مقبرة, مدفن, جبانة"
                 },
                 "landuse/commercial": {
-                    "name": "منطقة تجارية"
+                    "name": "منطقة تجارية",
+                    "terms": "تجارية; تجاري; منطقة تجارة"
                 },
                 "landuse/construction": {
                     "name": "إنشاءات",
@@ -1924,12 +2106,17 @@
                     "name": "غابة",
                     "terms": "غابة"
                 },
+                "landuse/garages": {
+                    "name": "جراجات",
+                    "terms": "جراج; جراج سيارات; موقف; موقف سيارات; ركن; ركنة"
+                },
                 "landuse/grass": {
                     "name": "عشب",
                     "terms": "عشب, غطاء أخضر"
                 },
                 "landuse/industrial": {
-                    "name": "منطقة صناعية"
+                    "name": "منطقة صناعية",
+                    "terms": "صناعية; صناعي; صناعات; منطقة صناعات; منطقة صناعة; صناعة; صنع"
                 },
                 "landuse/meadow": {
                     "name": "مرج",
@@ -1939,11 +2126,23 @@
                     "name": "منطقة عسكرية",
                     "terms": "جيش, قوات مسلحة, عسكرية"
                 },
+                "landuse/military/danger_area": {
+                    "name": "منطقة خطرة",
+                    "terms": "منطقة خطر; خطر"
+                },
+                "landuse/military/naval_base": {
+                    "name": "قاعدة بحرية",
+                    "terms": "بحرية; بحري; بحر; قاعدة"
+                },
                 "landuse/military/office": {
                     "name": "مكتب عسكري"
                 },
                 "landuse/military/range": {
                     "name": "نطاق عسكري"
+                },
+                "landuse/military/training_area": {
+                    "name": "منطقة تدريب",
+                    "terms": "منطقة تمرين; تدريب; تمرين"
                 },
                 "landuse/orchard": {
                     "name": "بستان",
@@ -1954,7 +2153,8 @@
                     "terms": "محجر"
                 },
                 "landuse/residential": {
-                    "name": "منطقة سكنية"
+                    "name": "منطقة سكنية",
+                    "terms": "منطقة سكانية; سكان; سكنية; سكن; منطقة سكن"
                 },
                 "landuse/retail": {
                     "name": "منطقة بيع بالتجزئة",
@@ -1987,6 +2187,10 @@
                     "name": "معلب جولف",
                     "terms": "معلب جولف"
                 },
+                "leisure/horse_riding": {
+                    "name": "منشأة ركوب خيل",
+                    "terms": "منشأة ركوب خيل; خيل; ركوب خيل; امتطاء; امتطاء خيل; منشأة"
+                },
                 "leisure/ice_rink": {
                     "name": "حلبة تزلج",
                     "terms": "جليد, تزلج, حلبة"
@@ -2018,6 +2222,10 @@
                     "name": "ملعب كرة السلة",
                     "terms": "ملعب كرة السلة"
                 },
+                "leisure/pitch/equestrian": {
+                    "name": "حلبة ركوب خيل",
+                    "terms": "حلبة; ساحة; حلبة ركوب; ساحة ركوب; خيل; ركوب خيل"
+                },
                 "leisure/pitch/skateboard": {
                     "name": "حديقة تزلج",
                     "terms": "حديقة تزلج، ساحة تزلج"
@@ -2042,13 +2250,17 @@
                     "name": "مزلقة سفن",
                     "terms": "مزلقة سفن"
                 },
+                "leisure/sports_centre/swimming": {
+                    "name": "مبنى حوض سباحة",
+                    "terms": "حمام سباحة; حوض سباحة; حمام; حوض; سباحة; مسبح"
+                },
                 "leisure/stadium": {
-                    "name": "مدرج رياضي",
-                    "terms": "مدرج, مدرج للألعاب الرياضية, أستاذ رياضي"
+                    "name": "استاد رياضي",
+                    "terms": "مدرج; مدرج للألعاب الرياضية; استاد رياضي; استاد"
                 },
                 "leisure/swimming_pool": {
                     "name": "حوض سباحة",
-                    "terms": "حوض سباحة"
+                    "terms": "حمام سباحة; حوض سباحة; حمام; حوض; سباحة; مسبح"
                 },
                 "line": {
                     "name": "طريق",
@@ -2061,6 +2273,9 @@
                 "man_made/breakwater": {
                     "name": "كاسر الأمواج",
                     "terms": "كاسر الأمواج"
+                },
+                "man_made/chimney": {
+                    "name": "مدخنة"
                 },
                 "man_made/cutline": {
                     "name": "خط الفصل",
@@ -2133,7 +2348,8 @@
                     "terms": "شاطئ"
                 },
                 "natural/cave_entrance": {
-                    "name": "مدخل كهف"
+                    "name": "مدخل كهف",
+                    "terms": "مدخل كهفي; كهف"
                 },
                 "natural/cliff": {
                     "name": "جرف صخري",
@@ -2380,6 +2596,10 @@
                     "name": "سكة حديدية مهجورة",
                     "terms": "سكة حديد مهجورة"
                 },
+                "railway/crossing": {
+                    "name": "معبر سكة حديد (مسار)",
+                    "terms": "معبر سكة حديد; معبر"
+                },
                 "railway/disused": {
                     "name": "سكة حديدة مهجورة",
                     "terms": "سكة حديد غير مستعملة"
@@ -2387,6 +2607,10 @@
                 "railway/halt": {
                     "name": "موقف سكة حديد",
                     "terms": "موقف إجباري خاص بسكك الحديد، موقف السكة الحديدية"
+                },
+                "railway/level_crossing": {
+                    "name": "معبر سكة حديد (طريق)",
+                    "terms": "معبر سكة حديد; معبر"
                 },
                 "railway/monorail": {
                     "name": "سكة حديدة مفردة",
@@ -2452,8 +2676,8 @@
                     "terms": "محل مشروبات"
                 },
                 "shop/bicycle": {
-                    "name": "محل دراجات هوائية",
-                    "terms": "محل دراجات هوائية"
+                    "name": "متجر دراجات هوائية",
+                    "terms": "محل دراجات هوائية; متجر دراجات; محل دراجات; بائع دراجات"
                 },
                 "shop/books": {
                     "name": "متجر كتب"
@@ -2475,8 +2699,8 @@
                     "terms": "محل بيع قطع السيارات"
                 },
                 "shop/car_repair": {
-                    "name": "محل تصليح السيارات جراج",
-                    "terms": "محل تصليح سيارات"
+                    "name": "ورشة إصلاح سيارات",
+                    "terms": "محل تصليح سيارات; ورشة تصليح; ورشة; ميكانيكي"
                 },
                 "shop/carpet": {
                     "name": "متجر سجاد"
@@ -2582,8 +2806,8 @@
                     "terms": "محل بيع هواتف"
                 },
                 "shop/motorcycle": {
-                    "name": "وكالة دراجات نارية",
-                    "terms": "وكالة دراجات هوائية"
+                    "name": "بائع دراجات نارية",
+                    "terms": "وكالة دراجات هوائية; توكيل; بائع; توكيل دراجات; بائع دراجات; بيع دراجات; بيع"
                 },
                 "shop/music": {
                     "name": "محل بيع موسيقى",
@@ -2723,7 +2947,8 @@
                     "terms": "حديقة الحيوانات"
                 },
                 "traffic_calming": {
-                    "name": "ممهل"
+                    "name": "مخفف سرعة",
+                    "terms": "مطب; مخفف; مهديء; مهدئ; ممهل; تخفيف; تمهيل; مطب صناعي"
                 },
                 "type/boundary": {
                     "name": "حدود",
@@ -2745,8 +2970,8 @@
                     "terms": "مسار"
                 },
                 "type/route/bicycle": {
-                    "name": "مسار دراجات الهوائية",
-                    "terms": "مسار دراجات هوائية"
+                    "name": "مسار دراجات",
+                    "terms": "مسار دراجات; مسار; طريق"
                 },
                 "type/route/bus": {
                     "name": "مسار الباصات",
@@ -2767,6 +2992,10 @@
                 "type/route/hiking": {
                     "name": "ممشى ",
                     "terms": "مسار المشاة، طريق للمشي، "
+                },
+                "type/route/horse": {
+                    "name": "مسار ركوب",
+                    "terms": "مسار ركوب"
                 },
                 "type/route/pipeline": {
                     "name": "مسار خط أنابيب",

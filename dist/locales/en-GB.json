@@ -626,7 +626,7 @@
         "help": {
             "title": "Help",
             "help": "# Help\n\nThis is an editor for [OpenStreetMap](http://www.openstreetmap.org/), the\nfree and editable map of the World. You can use it to add and update\ndata in your area, making an open-source and open-data map of the world\nbetter for everyone.\n\nEdits that you make on this map will be visible to everyone who uses\nOpenStreetMap. In order to make an edit, you'll need to\n[log in](https://www.openstreetmap.org/login).\n\nThe [iD editor](http://ideditor.com/) is a collaborative project with [source\ncode available on GitHub](https://github.com/openstreetmap/iD).\n",
-            "editing_saving": "# Editing & Saving\n\nThis editor is designed to work primarily online, and you're accessing\nit through a website right now.\n\n### Selecting Features\n\nTo select a map feature, like a road or point of interest, click\non it on the map. This will highlight the selected feature, open a panel with\ndetails about it, and show a menu of things you can do with the feature.\n\nTo select multiple features, hold down the 'Shift' key. Then either click\non the features you want to select, or drag on the map to draw a rectangle.\nThis will draw a box and select all the points within it.\n\n### Saving Edits\n\nWhen you make changes like editing roads, buildings, and places, these are\nstored locally until you save them to the server. Don't worry if you make\na mistake - you can undo changes by clicking the undo button, and redo\nchanges by clicking the redo button.\n\nClick 'Save' to finish a group of edits - for instance, if you've completed\nan area of town and would like to start on a new area. You'll have a chance\nto review what you've done, and the editor supplies helpful suggestions\nand warnings if something doesn't seem right about the changes.\n\nIf everything looks good, you can enter a short comment explaining the change\nyou made, and click 'Save' again to post the changes\nto [OpenStreetMap.org](http://www.openstreetmap.org/), where they are visible\nto all other users and available for others to build and improve upon.\n\nIf you can't finish your edits in one sitting, you can leave the editor\nwindow and come back (on the same browser and computer), and the\neditor application will offer to restore your work.\n\n### Using the editor\n\nA list of available keyboard shortcuts can be found [here](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
+            "editing_saving": "# Editing & Saving\n\nThis editor is designed to work primarily online, and you're accessing\nit through a website right now.\n\n### Selecting Features\n\nTo select a map feature, like a road or point of interest, click\non it on the map. This will highlight the selected feature, open a panel with\ndetails about it, and show a menu of things you can do with the feature.\n\nTo select multiple features, hold down the 'Shift' key. Then either click\non the features you want to select, or drag on the map to draw a rectangle.\nThis will draw a box and select all the points within it.\n\n### Saving Edits\n\nWhen you make changes like editing roads, buildings, and places, these are\nstored locally until you save them to the server. Don't worry if you make\na mistake - you can undo changes by clicking the undo button, and redo\nchanges by clicking the redo button.\n\nClick 'Save' to finish a group of edits - for instance, if you've completed\nan area of town and would like to start on a new area. You'll have a chance\nto review what you've done, and the editor supplies helpful suggestions\nand warnings if something doesn't seem right about the changes.\n\nIf everything looks good, you can enter a short comment explaining the change\nyou made, and click 'Save' again to post the changes\nto [OpenStreetMap.org](http://www.openstreetmap.org/), where they are visible\nto all other users and available for others to build and improve upon.\n\nIf you can't finish your edits in one sitting, you can leave the editor\nwindow and come back (on the same browser and computer), and the\neditor application will offer to restore your work.\n\n### Using the editor\n\nYou can view a list of keyboard shortcuts by pressing the `?` key.\n",
             "roads": "# Roads\n\nYou can create, fix, and delete roads with this editor. Roads can be all\nkinds: paths, highways, trails, cycleways, and more - any often-crossed\nsegment should be mappable.\n\n### Selecting\n\nClick on a road to select it. An outline should become visible, along\nwith a small tools menu on the map and a sidebar showing more information\nabout the road.\n\n### Modifying\n\nOften you'll see roads that aren't aligned to the imagery behind them\nor to a GPS track. You can adjust these roads so they are in the correct\nplace.\n\nFirst click on the road you want to change. This will highlight it and show\ncontrol points along it that you can drag to better locations. If\nyou want to add new control points for more detail, double-click a part\nof the road without a node, and one will be added.\n\nIf the road connects to another road, but doesn't properly connect on\nthe map, you can drag one of its control points onto the other road in\norder to join them. Having roads connect is important for the map\nand essential for providing driving directions.\n\nYou can also click the 'Move' tool or press the `M` shortcut key to move the entire road at\none time, and then click again to save that movement.\n\n### Deleting\n\nIf a road is entirely incorrect - you can see that it doesn't exist in satellite\nimagery and ideally have confirmed locally that it's not present - you can delete\nit, which removes it from the map. Be cautious when deleting features -\nlike any other edit, the results are seen by everyone and satellite imagery\nis often out of date, so the road could simply be newly built.\n\nYou can delete a road by clicking on it to select it, then clicking the\ntrash can icon or pressing the 'Delete' key.\n\n### Creating\n\nFound somewhere there should be a road but there isn't? Click the 'Line'\nicon in the top-left of the editor or press the shortcut key `2` to start drawing\na line.\n\nClick on the start of the road on the map to start drawing. If the road\nbranches off from an existing road, start by clicking on the place where they connect.\n\nThen click on points along the road so that it follows the right path, according\nto satellite imagery or GPS. If the road you are drawing crosses another road, connect\nit by clicking on the intersection point. When you're done drawing, double-click\nor press 'Return' or 'Enter' on your keyboard.\n",
             "gps": "# GPS\n\nCollected GPS traces are one valuable source of data for OpenStreetMap. This editor\nsupports local traces - `.gpx` files on your local computer. You can collect\nthis kind of GPS trace with a number of smartphone applications as well as\npersonal GPS hardware.\n\nFor information on how to perform a GPS survey, read\n[Mapping with a smartphone, GPS, or paper](http://learnosm.org/en/mobile-mapping/).\n\nTo use a GPX track for mapping, drag and drop the GPX file onto the map\neditor. If it's recognised, it will be added to the map as a bright purple\nline. Click on the 'Map Data' menu on the right side to enable,\ndisable, or zoom to this new GPX-powered layer.\n\nThe GPX track isn't directly uploaded to OpenStreetMap - the best way to\nuse it is to draw on the map, using it as a guide for the new features that\nyou add, and also to [upload it to OpenStreetMap](http://www.openstreetmap.org/trace/create)\nfor other users to use.\n",
             "imagery": "# Imagery\n\nAerial imagery is an important resource for mapping. A combination of\naeroplane flyovers, satellite views, and freely-compiled sources are available\nin the editor under the 'Background Settings' menu on the right.\n\nBy default a [Bing Maps](http://www.bing.com/maps/) satellite layer is\npresented in the editor, but as you pan and zoom the map to new geographical\nareas, new sources will become available. Some countries, like the United Kingdom, United\nStates, France, and Denmark have very high-quality imagery available for some areas.\n\nImagery is sometimes offset from the map data because of a mistake on the\nimagery provider's side. If you see a lot of roads shifted from the background,\ndon't immediately move them all to match the background. Instead you can adjust\nthe imagery so that it matches the existing data by clicking 'Fix alignment' at\nthe bottom of the Background Settings UI.\n",
@@ -800,10 +800,10 @@
                 "choose_cafe": "**Choose {preset} from the list.**",
                 "feature_editor": "The point is now marked as a cafe. Using the feature editor, we can add more information about the cafe.",
                 "add_name": "In OpenStreetMap, all of the fields are optional, and it's OK to leave a field blank if you are unsure.{br}Let's pretend that you have local knowledge of this cafe, and you know its name. **Add a name for the cafe.**",
-                "add_close": "The feature editor will remember all of your changes automatically. **When you are finished adding the name, hit escape, return, or click the {button} button to close the feature editor.**",
+                "add_close": "The feature editor will remember all of your changes automatically. **When you are finished adding the name, hit escape, enter, or click the {button} button to close the feature editor.**",
                 "reselect": "Often points will already exist, but have mistakes or be incomplete. We can edit existing points. **Click to select the cafe you just created.**",
                 "update": "Let's fill in some more details for this cafe. You can change its name, add a cuisine, or add an address. **Change the cafe details.**",
-                "update_close": "**When you are finished updating the cafe, hit escape, return, or click the {button} button to close the feature editor.**",
+                "update_close": "**When you are finished updating the cafe, hit escape, enter, or click the {button} button to close the feature editor.**",
                 "rightclick": "You can right-click on any feature to see the *edit menu*, which shows a list of editing operations that can be performed. **Right-click to select the point you created and show the edit menu.**",
                 "delete": "It's OK to delete features that don't exist in the real world.{br}Deleting a feature from OpenStreetMap removes it from the map that everyone uses, so you should make sure a feature is really gone before you delete it. **Click on the {button} button to delete the point.**",
                 "undo": "You can always undo any changes up until you save your edits to OpenStreetMap. **Click on the {button} button to undo the delete and get the point back.**",
@@ -814,7 +814,7 @@
                 "add_playground": "*Areas* are used to show the boundaries of features like lakes, buildings, and residential areas.{br}They can be also be used for more detailed mapping of many features you might normally map as points. **Click the {button} Area button to add a new area.**",
                 "start_playground": "Let's add this playground to the map by drawing an area. Areas are drawn by placing *nodes* along the outer edge of the feature. **Click or press spacebar to place a starting node on one of the corners of the playground.**",
                 "continue_playground": "Continue drawing the area by placing more nodes along the playground's edge. It is OK to connect the area to the existing walking paths.{br}Tip: You can hold down the Alt key to prevent nodes from connecting to other features. **Continue drawing an area for the playground.**",
-                "finish_playground": "Finish the area by pressing return, or clicking again on either the first or last node. **Finish drawing an area for the playground.**",
+                "finish_playground": "Finish the area by pressing enter, or clicking again on either the first or last node. **Finish drawing an area for the playground.**",
                 "search_playground": "**Search for '{preset}'.**",
                 "choose_playground": "**Choose {preset} from the list.**",
                 "add_field": "This playground doesn't have an official name, so we won't add anything in the Name field.{br}Instead let's add some additional details about the playground to the Description field. **Open the Add Field list.**",
@@ -830,10 +830,10 @@
                 "intersect": "Click or press spacebar to add more nodes to the line.{br}Roads, and many other types of lines, are part of a larger network. It is important for these lines to be connected properly in order for routing applications to work. **Click on {name} to create an intersection connecting the two lines.**",
                 "retry_intersect": "The road needs to intersect {name}. Let's try again!",
                 "continue_line": "Continue drawing the line for the new road. Remember that you can drag and zoom the map if needed.{br}When you are finished drawing, click on the last node again. **Finish drawing the road.**",
-                "choose_category_road": "**Select {category} from the list**",
+                "choose_category_road": "**Select {category} from the list.**",
                 "choose_preset_residential": "There are many different types of roads, but this one is a residential road. **Choose the {preset} type.**",
                 "retry_preset_residential": "You didn't select the {preset} type. **Click here to choose again.**",
-                "name_road": "**Give this road a name, then hit escape, return, or click the {button} button to close the feature editor.**",
+                "name_road": "**Give this road a name, then hit escape, enter, or click the {button} button to close the feature editor.**",
                 "did_name_road": "Looks good! Next we will learn how to update the shape of a line.",
                 "update_line": "Sometimes you will need to change the shape of an existing line. Here is a road that doesn't look quite right.",
                 "add_node": "We can add some nodes to this line to improve its shape. One way to add a node is to double-click the line where you want to add a node. **Double-click on the line to create a new node.**",
@@ -845,7 +845,7 @@
                 "rightclick_intersection": "The last real street is {street1}, so we will *split* {street2} at this intersection and remove everything above it. **Right click on the intersection node.**",
                 "split_intersection": "**Click on the {button} button to split {street}.**",
                 "retry_split": "You didn't click the Split button. Try again.",
-                "did_split_multi": "Good Job! {street1} is now split into two pieces. The top part can be removed. **Click the top part of {street2} to select it.**",
+                "did_split_multi": "Good job! {street1} is now split into two pieces. The top part can be removed. **Click the top part of {street2} to select it.**",
                 "did_split_single": "**Click the top part of {street2} to select it.**",
                 "multi_select": "{selected} is now selected. Let's also select {other1}. You can shift-click to select multiple things. **Shift-click on {other2}.**",
                 "multi_rightclick": "Good! Both lines to delete are now selected. **Right-click on one of the lines to show the edit menu.**",
@@ -857,7 +857,7 @@
                 "title": "Buildings",
                 "add_building": "OpenStreetMap is the world's largest database of buildings.{br}You can help improve this database by tracing buildings that aren't already mapped. **Click the {button} Area button to add a new area.**",
                 "start_building": "Let's add this house to the map by tracing its outline.{br}Buildings should be traced around their footprint as accurately as possible. **Click or press spacebar to place a starting node on one of the corners of the building.**",
-                "continue_building": "Continue adding more nodes to trace the outline of the building. Remember that you can zoom in if you want to add more details.{br}Finish the building by pressing return, or clicking again on either the first or last node. **Finish tracing the building.**",
+                "continue_building": "Continue adding more nodes to trace the outline of the building. Remember that you can zoom in if you want to add more details.{br}Finish the building by pressing enter, or clicking again on either the first or last node. **Finish tracing the building.**",
                 "retry_building": "It looks like you had some trouble placing the nodes at the building corners. Try again!",
                 "choose_category_building": "**Choose {category} from the list.**",
                 "choose_preset_house": "There are many different types of buildings, but this one is clearly a house.{br}If you're not sure of the type, it's OK to just choose the generic Building type. **Choose the {preset} type.**",
@@ -868,7 +868,7 @@
                 "done_square": "See how the corners of the building moved into place? Let's learn another useful trick.",
                 "add_tank": "Next we'll trace this circular storage tank. **Click the {button} Area button to add a new area.**",
                 "start_tank": "Don't worry, you won't need to draw a perfect circle. Just draw an area inside the tank that touches its edge. **Click or press spacebar to place a starting node on the edge of the tank.**",
-                "continue_tank": "Add a few more nodes around the edge. The circle will be created outside the nodes that you draw.{br}Finish the area by pressing return, or clicking again on either the first or last node. **Finish tracing the tank.**",
+                "continue_tank": "Add a few more nodes around the edge. The circle will be created outside the nodes that you draw.{br}Finish the area by pressing enter, or clicking again on either the first or last node. **Finish tracing the tank.**",
                 "search_tank": "**Search for '{preset}'.**",
                 "choose_tank": "**Choose {preset} from the list.**",
                 "rightclick_tank": "**Right-click to select the storage tank you created and show the edit menu.**",
@@ -881,6 +881,110 @@
                 "help": "You're now ready to edit OpenStreetMap!{br}You can replay this walkthrough anytime or view more documentation by clicking the {button} Help button.",
                 "save": "Don't forget to regularly save your changes!",
                 "start": "Start mapping!"
+            }
+        },
+        "shortcuts": {
+            "title": "Keyboard shortcuts",
+            "key": {
+                "alt": "Alt",
+                "backspace": "Backspace",
+                "cmd": "Cmd",
+                "ctrl": "Ctrl",
+                "delete": "Delete",
+                "del": "Del",
+                "end": "End",
+                "enter": "Enter",
+                "esc": "Esc",
+                "home": "Home",
+                "option": "Option",
+                "pause": "Pause",
+                "pgdn": "PgDn",
+                "pgup": "PgUp",
+                "return": "Return",
+                "shift": "Shift",
+                "space": "Space"
+            },
+            "gesture": {
+                "drag": "drag"
+            },
+            "or": "-or-",
+            "browsing": {
+                "title": "Browsing",
+                "navigation": {
+                    "title": "Navigation",
+                    "pan": "Pan map",
+                    "pan_more": "Pan map by one screenful",
+                    "zoom": "Zoom in / Zoom out",
+                    "zoom_more": "Zoom in / Zoom out by a lot"
+                },
+                "help": {
+                    "title": "Help",
+                    "help": "Show help/documentation",
+                    "keyboard": "Show keyboard shortcuts"
+                },
+                "display_options": {
+                    "title": "Display options",
+                    "background": "Show background options",
+                    "background_switch": "Switch back to last background",
+                    "map_data": "Show map data options",
+                    "fullscreen": "Enter full screen mode",
+                    "wireframe": "Toggle wireframe mode",
+                    "minimap": "Toggle minimap"
+                },
+                "selecting": {
+                    "title": "Selecting features",
+                    "select_one": "Select a single feature",
+                    "select_multi": "Select multiple features",
+                    "lasso": "Draw a selection lasso around features"
+                },
+                "with_selected": {
+                    "title": "With feature selected",
+                    "infobox": "Toggle info / measurement box",
+                    "edit_menu": "Toggle edit menu"
+                },
+                "vertex_selected": {
+                    "title": "With node selected",
+                    "previous": "Jump to previous node",
+                    "next": "Jump to next node",
+                    "first": "Jump to first node",
+                    "last": "Jump to last node",
+                    "change_parent": "Switch parent way"
+                }
+            },
+            "editing": {
+                "title": "Editing",
+                "drawing": {
+                    "title": "Drawing",
+                    "add_point": "'Add point' mode",
+                    "add_line": "'Add line' mode",
+                    "add_area": "'Add area' mode",
+                    "place_point": "Place a point",
+                    "disable_snap": "Hold to disable point snapping",
+                    "stop_line": "Finish drawing a line or area"
+                },
+                "operations": {
+                    "title": "Operations",
+                    "continue_line": "Continue a line at the selected node",
+                    "merge": "Combine (merge) selected features",
+                    "disconnect": "Disconnect features at the selected node",
+                    "split": "Split a line into two at the selected node",
+                    "reverse": "Reverse a line",
+                    "move": "Move selected features",
+                    "rotate": "Rotate selected features",
+                    "orthogonalize": "Straighten line / Square area corners",
+                    "circularize": "Circularize a closed line or area",
+                    "reflect_long": "Reflect features across the longer axis",
+                    "reflect_short": "Reflect features across the shorter axis",
+                    "delete": "Delete selected features"
+                },
+                "commands": {
+                    "title": "Commands",
+                    "copy": "Copy selected features",
+                    "paste": "Paste copied features",
+                    "undo": "Undo last action",
+                    "redo": "Redo last action",
+                    "save": "Save changes"
+                }
             }
         },
         "presets": {
@@ -1431,6 +1535,9 @@
                 "information": {
                     "label": "Type"
                 },
+                "inscription": {
+                    "label": "Inscription"
+                },
                 "internet_access": {
                     "label": "Internet Access",
                     "options": {
@@ -1448,7 +1555,7 @@
                     "label": "SSID (Network Name)"
                 },
                 "kerb": {
-                    "label": "Curb Ramp"
+                    "label": "Kerb"
                 },
                 "lamp_type": {
                     "label": "Type"
@@ -1537,6 +1644,9 @@
                 },
                 "maxstay": {
                     "label": "Max Stay"
+                },
+                "maxweight": {
+                    "label": "Max Weight"
                 },
                 "mtb/scale": {
                     "label": "Mountain Biking Difficulty",
@@ -2431,6 +2541,9 @@
                 "amenity/vending_machine/news_papers": {
                     "name": "Newspaper Vending Machine"
                 },
+                "amenity/vending_machine/newspapers": {
+                    "name": "Newspaper Vending Machine"
+                },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
                     "name": "Parcel Pickup/Dropoff Vending Machine"
                 },
@@ -2680,6 +2793,9 @@
                 "craft/electrician": {
                     "name": "Electrician"
                 },
+                "craft/electronics_repair": {
+                    "name": "Electronics Repair Shop"
+                },
                 "craft/gardener": {
                     "name": "Gardener"
                 },
@@ -2880,6 +2996,9 @@
                 },
                 "highway/cycleway": {
                     "name": "Cycle Path"
+                },
+                "highway/elevator": {
+                    "name": "Lift"
                 },
                 "highway/footway": {
                     "name": "Foot Path"
@@ -3213,6 +3332,9 @@
                 },
                 "leisure/pitch/basketball": {
                     "name": "Basketball Court"
+                },
+                "leisure/pitch/beachvolleyball": {
+                    "name": "Beach Volleyball Court"
                 },
                 "leisure/pitch/bowls": {
                     "name": "Bowling Green"
@@ -3666,6 +3788,9 @@
                 },
                 "shop/antiques": {
                     "name": "Antiques Shop"
+                },
+                "shop/appliance": {
+                    "name": "Appliance Store"
                 },
                 "shop/art": {
                     "name": "Art Store"
@@ -4197,6 +4322,9 @@
                 },
                 "vertex": {
                     "name": "Other"
+                },
+                "waterway": {
+                    "name": "Waterway"
                 },
                 "waterway/boatyard": {
                     "name": "Boatyard"

@@ -499,15 +499,15 @@
         },
         "area_fill": {
             "wireframe": {
-                "description": "Niet Inkleuren (Wireframe)",
+                "description": "Niet inkleuren (wireframe)",
                 "tooltip": "De wireframe-modus maakt het gemakkelijk de achtergrondbeelden te zien."
             },
             "partial": {
-                "description": "Gedeeltelijk Inkleuren",
+                "description": "Gedeeltelijk inkleuren",
                 "tooltip": "Vlakken worden enkel ingekleurd langs hun binnenranden. (Aanbevolen voor beginnende cartografen)"
             },
             "full": {
-                "description": "Volledig Inkleuren",
+                "description": "Volledig inkleuren",
                 "tooltip": "Vlakken worden steeds volledig ingekleurd."
             }
         },
@@ -626,7 +626,7 @@
         "help": {
             "title": "Hulp",
             "help": "# Hulp\n\nDit is een bewerkingsprogramma voor\n[OpenStreetMap](http://www.openstreetmap.org/), de vrije en bewerkbare kaart van de wereld. Je kan\nhet gebruiken om data in je regio toe te voegen en bij te werken.\nZo maak je de open-source- en open-data-kaart van de wereld\nbeter voor iedereen.\n\nWijzingen die je maakt aan deze kaart worden zichtbaar voor iedereen\ndie OpenStreetMap gebruikt. Om te kunnen bewerken, zal je moeten\n[inloggen](https://www.openstreetmap.org/login).\n\nDe [iD-bewerker](http://ideditor.com/) is een samenwerkingsproject\nwaarvan de [broncode beschikbaar is op GitHub](https://github.com/openstreetmap/iD).\n",
-            "editing_saving": "# Bewerken & Opslaan\n\nDit kaartbewerkingsprogramma is ontworpen om voornamelijk online te gebruikt te worden. Je gebruikt hem op dit moment via een website.\n\n### Objecten Selecteren\n\nOm objecten in een kaart te selecteren, zoals een weg of interessant punt, moet je op de kaart erop klikken. Het geselecteerde object zal dan oplichten, er zal een paneel met details geopend worden en een menu zal getoond worden met dingen die je met dit object kan doen.\n\nOm meerdere objecten te kunnen selecteren, hou je de 'Shift'-toets ingedrukt terwijl je de objecten aanklikt, of terwijl je een rechthoek tekent op de kaart. Dat laatste zal een kader tonen waarbinnen alle objecten geselecteerd worden.\n\n### Bewerkingen Opslaan\n\nAls je wijzigingen maakt, zoals het bewerken van wegen, gebouwen en andere plaatsen, worden deze eerst lokaal bijgehouden totdat je ze op de server opslaat. Maak je geen zorgen als je een fout maakt – je kan wijzigingen altijd ongedaan maken door op de 'Ongedaan maken'-knop te klikken en ze weer herstellen door op de 'Opnieuw doen'-knop te klikken.\n\nKlik op 'Opslaan' om een groep van bewerkingen op te slaan – bijvoorbeeld als je een gebied of dorp hebt afgerond en je aan een ander gebied wil beginnen. Je krijgt de mogelijkheid om te herzien wat je hebt aangepast en de editor geeft je suggesties voor verbeteringen en waarschuwingen als er iets mis lijkt te zijn.\n\nAls alles er goed uit ziet kun je kort commentaar toevoegen, dat de wijziging die je hebt gemaakt beschrijft. Klik daarna nogmaals op 'Opslaan' om de wijzigingen op te sturen naar [OpenStreetMap.org](http://www.openstreetmap.org/), waar ze zichtbaar zijn voor alle gebruikers en voor anderen om op voort te bouwen of te verbeteren.\n\nAls je in een sessie niet al je bewerkingen door kan voeren kun je het venster van de editor sluiten en later terugkomen (in dezelfde browser op dezelfde computer) en de bewerkapplicatie zal je aanbieden je werk te herstellen.\n\n### Het kaartbewerkingsprogramma gebruiken\n\nEen lijst van beschikbare sneltoetsen kan je [hier](http://wiki.openstreetmap.org/wiki/NL:iD/Shortcuts) vinden.\n",
+            "editing_saving": "# Bewerken & opslaan\n\nDit kaartbewerkingsprogramma is ontworpen om voornamelijk online te gebruikt te worden. Je gebruikt hem op dit moment via een website.\n\n### Objecten selecteren\n\nOm objecten in een kaart te selecteren, zoals een weg of interessant punt, moet je op de kaart erop klikken. Het geselecteerde object zal dan oplichten en er zal een paneel met details geopend worden. Je kan een menu met dingen die je met dit object kan doen openen door te rechtsklikken op de selectie.\n\nOm meerdere objecten te kunnen selecteren, hou je de 'Shift'-toets ingedrukt terwijl je de objecten aanklikt, of terwijl je een rechthoek tekent op de kaart. Dat laatste zal een kader tonen waarbinnen alle objecten geselecteerd worden.\n\n### Bewerkingen opslaan\n\nAls je wijzigingen maakt, zoals het bewerken van wegen, gebouwen en andere plaatsen, worden deze eerst lokaal bijgehouden totdat je ze op de server opslaat. Maak je geen zorgen als je een fout maakt – je kan wijzigingen altijd ongedaan maken door op de 'Ongedaan maken'-knop te klikken en ze weer herstellen door op de 'Opnieuw doen'-knop te klikken.\n\nKlik op 'Opslaan' om een groep van bewerkingen op te slaan – bijvoorbeeld als je een gebied of dorp hebt afgerond en je aan een ander gebied wil beginnen. Je krijgt de mogelijkheid om te herzien wat je hebt aangepast en de editor geeft je suggesties voor verbeteringen en waarschuwingen als er iets mis lijkt te zijn.\n\nAls alles er goed uit ziet kun je kort commentaar toevoegen, dat de wijziging die je hebt gemaakt beschrijft. Klik daarna nogmaals op 'Opslaan' om de wijzigingen op te sturen naar [OpenStreetMap.org](http://www.openstreetmap.org/), waar ze zichtbaar zijn voor alle gebruikers en voor anderen om op voort te bouwen of te verbeteren.\n\nAls je in een sessie niet al je bewerkingen door kan voeren kun je het venster van de editor sluiten en later terugkomen (in dezelfde browser op dezelfde computer) en de bewerkapplicatie zal je aanbieden je werk te herstellen.\n\n### Het kaartbewerkingsprogramma gebruiken\n\nJe kan een lijst van beschikbare sneltoetsen openen door op de `?`-toets op het toetsenbord te drukken.\n",
             "roads": "# Wegen\n\nJe kan met deze editor wegen maken, verbeteren en verwijderen. Wegen zijn er in allerlei soorten en maten: landweggetjes, snelwegen, paadjes, fietspaden en veel meer – ieder stukje dat vaak wordt gebruikt kan in kaart worden gebracht.\n\n### Selecteren\n\nKlik op een weg om deze te selecteren. De omtrek verschijnt samen met een klein menu op de kaart en een schermpje met informatie over de weg.\n\n### Aanpassen\n\nVaak kom je wegen tegen, die niet precies over het beeldmateriaal of de GPS-route erachter lopen. Je kan deze wegen aanpassen, zodat ze op de juiste plek komen te liggen.\n\nKlik eerst op de weg die je wil aanpassen. Deze zal dan oplichten en er verschijnen knooppunten langs de lijn die je kan verslepen naar een betere plek. Als je nieuwe knooppunten wil toevoegen voor meer detaillering, dubbelklik op een weggedeelte zonder een knooppunt en er wordt een nieuwe ingevoegd.\n\nAls een weg in het echt is verbonden met een andere weg, maar op de kaart niet, dan versleep je een van de puntjes op de andere weg om ze te verbinden. Dat wegen met elkaar zijn verbonden is belangrijk voor de kaart en essentieel om een routebeschrijving te kunnen maken.\n\nJe kan bovendien het 'Verschuif'-gereedschap aanklikken of de 'V'-sneltoets indrukken om de gehele weg in een keer te verplaatsen, en opnieuw klikken om deze verplaatsing te bevestigen.\n\n### Verwijderen\n\nAls een weg helemaal verkeerd is – je hebt ter plaatse gecontroleerd dat de weg er niet is – dan kan je hem verwijderen, zodat hij van de kaart verdwijnt. Wees voorzichtig met het verwijderen van objecten: zoals bij iedere aanpassing is het resultaat voor iedereen zichtbaar en satellietbeelden zijn vaak verouderd, dus de weg zou gewoon nieuw aangelegd kunnen zijn.\n\nJe kan een weg verwijderen door er op te klikken om hem te selecteren, waarna je op het prullenbakicoon klikt of de 'Verwijderen'-toets drukt.\n\n### Aanmaken\n\nHeb je ergens een weg gevonden die nog niet op de kaart staat? Klik op het 'Lijn'-gereedschap in de linkerbovenhoek van de editor of druk op de sneltoets '2' om een lijn te tekenen.\n\nKlik op het begin van de weg op de kaart en begin te tekenen. Als de weg zich vertakt van de bestaande weg, begin dan op de plek waar ze elkaar kruisen.\n\nKlik dan de punten langs de weg, zodat deze het juiste tracé volgt, volgens het satellietbeeld of de GPS-route. Als de weg die je aan het tekenen bent een andere weg kruist, verbind deze dan door op het kruispunt te klikken. Als je klaar met tekenen bent, dubbelklik of druk op 'Return' of 'Enter' op je toetsenbord.\n",
             "gps": "# GPS\n\nGPS-data is een waardevolle databron voor OpenStreetMap. Dit bewerkingsprogramma ondersteunt lokale GPS-paden – '.gpx'-bestanden op je eigen computer. Je kan dit soort paden opnemen met een aantal smartphone-apps of met aparte GPS-toestellen.\n\nVoor meer informatie over hoe je onderzoek kan doen met GPS, kan je terecht op [Mapping with a smartphone, GPS, or paper (Engels)](http://learnosm.org/en/mobile-mapping/) of [Sur le terrain avec un GPS (Frans)](http://learnosm.org/fr/beginner/using-gps/).\n\nOm een GPX-pad te gebruiken bij het karteren, sleep je het GPX-bestand op het kaartbewerkingsprogramma. Als het wordt herkend, zal het op de kaart worden getoond als een helderpaarse lijn. Open het menu 'Kaartgegevens' aan de rechterkant om deze nieuwe GPX-laag aan of uit te zetten of hem volledig in beeld te brengen.\n\nHet GPX-pad wordt niet rechtstreeks als een weg geüpload naar OpenStreetMap. De beste manier om het te gebruiken is als een hulpmiddel om op de kaart tekenen. Je wordt aangemoedigd het ook te [uploaden naar OpenStreetMap](http://www.openstreetmap.org/trace/create), zodat anderen het op dezelfde manier kunnen gebruiken.\n",
             "imagery": "# Beeldmateriaal\n\nLuchtfoto's vormen een belangrijke bron bij het maken van de kaart. Een combinatie van luchtfoto's, satellietbeelden en vrij beschikbare bronnen is beschikbaar in de editor onder het menu 'Achtergrondinstellingen' aan de linkerzijde.\n\nOp veel plaatsen wordt standaard een [Bing Maps](http://www.bing.com/maps/)-satellietbeeld in de editor getoond, maar als je de kaart verschaalt of verplaatst naar andere gebieden, worden nieuwe bronnen getoond. Bepaalde gebieden, zoals Vlaanderen en sommige plaatsen in de Verenigde Staten, Frankrijk en Denemarken hebben beeldmateriaal van zeer hoge kwaliteit.\n\nSoms is het beeldmateriaal ten opzichte van de kaart verschoven door een fout van de leverancier van het beeldmateriaal. Als je ziet dat een heleboel wegen verschoven zijn ten opzichte van de achtergrond, ga deze dan niet meteen allemaal verplaatsen zodat de ligging overeenkomt met de achtergrond. In plaats daarvan kan je het beeldmateriaal aanpassen, zodat de ligging overeenkomt met de bestaande gegevens door op de knop 'Verbeter de ligging' te klikken onderaan de 'Achtergrondinstellingen'.\n",
@@ -830,7 +830,7 @@
                 "intersect": "Klik of gebruik de spatiebalk om meer knooppunten aan de lijn toe te voegen.{br}Wegen maken deel uit van het wegennetwerk. Het is belangrijk dat de lijnen daarin goed verbonden zijn, anders werken navigatietoepassingen niet. **Klik op {name} om een kruispunt te maken dat de twee lijnen verbindt.**",
                 "retry_intersect": "De weg moet een punt gemeenschappelijk hebben met {name}. Laten we opnieuw proberen!",
                 "continue_line": "Teken de lijn voor deze nieuwe straat verder in. Onthou dat je de kaart kan verslepen en zoomen als dat nodig is.{br}Als je klaar bent met tekenen, klik dan nogmaals op het laatste knooppunt. **Werk de straat af.**",
-                "choose_category_road": "**Kies {category} uit de lijst**",
+                "choose_category_road": "**Selecteer {category} in de lijst.**",
                 "choose_preset_residential": "Er zijn veel soorten wegen, maar dit is een straat. **Kies {preset}.**",
                 "retry_preset_residential": "Je hebt niet het {preset}-type geselecteerd. **Klik hier om opnieuw te kiezen.**",
                 "name_road": "**Geef deze weg een naam, en sluit dan de objectbewerker met escape, enter, of de {button}-knop.**",
@@ -857,7 +857,7 @@
                 "title": "Gebouwen",
                 "add_building": "OpenStreetMap is de grootste verzameling gebouwen ter wereld.{br}Je kan aan deze verzameling meehelpen door gebouwen in te tekenen die er nog niet instaan. **Klik op de knop \"{button} Vlak\" om een nieuw vlak toe te voegen.**",
                 "start_building": "Laten we dit huis intekenen door zijn omtrek te volgen.{br}Gebouwen teken je zo nauwkeurig mogelijk in langs hun grondplan. **Klik of druk op de spatiebalk om het eerste knooppunt op een van de hoeken van het gebouw te plaatsen.**",
-                "continue_building": "Teken de omtrek van het gebouw verder in. Onthou dat je de kaart kan verslepen en zoomen als dat nodig is.{br}Sluit het gebouw door op enter te drukken of door nogmaals op het eerste of laatste knooppunt te klikken. **Werk het gebouw af.**",
+                "continue_building": "Teken de omtrek van het gebouw verder in. Onthou dat je kan inzoomen om gedetailleerder te werken.{br}Sluit het gebouw door op enter te drukken of door nogmaals op het eerste of laatste knooppunt te klikken. **Werk het gebouw af.**",
                 "retry_building": "Je had wat moeite met de knooppunten in de hoeken van het gebouw te zetten. Probeer opnieuw!",
                 "choose_category_building": "**Kies {category} uit de lijst.**",
                 "choose_preset_house": "Er zijn veel verschillende soorten gebouwen, maar dit is duidelijk een huis.{br}Als je niet zeker bent van het type, is het oké om het algemene Gebouw-type te kiezen. **Kies {preset}.**",
@@ -881,6 +881,111 @@
                 "help": "Je bent nu klaar om OpenStreetMap echt te bewerken!{br}Je kan deze rondleiding steeds opnieuw volgen en meer documentatie bekijken door op de knop \"{button} Hulp\" te klikken.",
                 "save": "Vergeet niet om je aanpassingen regelmatig op te slaan!",
                 "start": "Karteer de wereld!"
+            }
+        },
+        "shortcuts": {
+            "title": "Sneltoetsen",
+            "tooltip": "Toon het overzicht met sneltoetsen.",
+            "key": {
+                "alt": "Alt",
+                "backspace": "Backspace",
+                "cmd": "Cmd",
+                "ctrl": "Ctrl",
+                "delete": "Delete",
+                "del": "Del",
+                "end": "End",
+                "enter": "Enter",
+                "esc": "Esc",
+                "home": "Home",
+                "option": "Option",
+                "pause": "Pause",
+                "pgdn": "PgDn",
+                "pgup": "PgUp",
+                "return": "Return",
+                "shift": "Shift",
+                "space": "Space"
+            },
+            "gesture": {
+                "drag": "sleep"
+            },
+            "or": "-of-",
+            "browsing": {
+                "title": "Rondbewegen",
+                "navigation": {
+                    "title": "Navigatie",
+                    "pan": "Kaart verschuiven",
+                    "pan_more": "Kaart een schermgrootte verschuiven",
+                    "zoom": "Inzoomen / Uitzoomen",
+                    "zoom_more": "Veel inzoomen / uitzoomen"
+                },
+                "help": {
+                    "title": "Hulp",
+                    "help": "Toon hulp/documentatie",
+                    "keyboard": "Sneltoetsen tonen"
+                },
+                "display_options": {
+                    "title": "Weergaveopties",
+                    "background": "Achtergrondopties tonen",
+                    "background_switch": "Naar laatstgebruikte achtergrond wisselen",
+                    "map_data": "Opties voor kaartgegevens tonen",
+                    "fullscreen": "Gebruik volledig scherm",
+                    "wireframe": "Wireframemodus aan/uit",
+                    "minimap": "Minikaartje aan/uit"
+                },
+                "selecting": {
+                    "title": "Objecten selecteren",
+                    "select_one": "Eén object selecteren",
+                    "select_multi": "Meerdere objecten selecteren",
+                    "lasso": "Objecten selecteren met lasso"
+                },
+                "with_selected": {
+                    "title": "Met object geselecteerd",
+                    "infobox": "Info/meting-kader open/dicht",
+                    "edit_menu": "Bewerkmenu open/dicht"
+                },
+                "vertex_selected": {
+                    "title": "Met knoop geselecteerd",
+                    "previous": "Naar vorige knoop springen",
+                    "next": "Naar volgende knoop springen",
+                    "first": "Naar eerste knoop springen",
+                    "last": "Naar laatste knoop springen",
+                    "change_parent": "Van lijn wisselen"
+                }
+            },
+            "editing": {
+                "title": "Bewerken",
+                "drawing": {
+                    "title": "Tekenen",
+                    "add_point": "'Punt toevoegen'-modus",
+                    "add_line": "'Lijn toevoegen'-modus",
+                    "add_area": "'Vlak toevoegen'-modus",
+                    "place_point": "Punt plaatsen",
+                    "disable_snap": "Ingedrukt houden om punt-magnetisme uit te zetten",
+                    "stop_line": "Tekenen van lijn of vlak beëindigen"
+                },
+                "operations": {
+                    "title": "Operaties",
+                    "continue_line": "Lijn verderzetten bij geselecteerde knoop",
+                    "merge": "Geselecteerde objecten samenvoegen",
+                    "disconnect": "Objecten bij geselecteerde knoop losmaken",
+                    "split": "Lijn bij geselecteerde knoop in twee splitsen",
+                    "reverse": "Lijn omkeren",
+                    "move": "Geselecteerde objecten verplaatsen",
+                    "rotate": "Geselecteerde objecten draaien",
+                    "orthogonalize": "Lijn rechtmaken / Hoeken van vlak haaks maken",
+                    "circularize": "Vlak of gesloten lijn rond maken",
+                    "reflect_long": "Objecten rond lange as spiegelen",
+                    "reflect_short": "Objecten rond korte as spiegelen",
+                    "delete": "Geselecteerde objecten verwijderen"
+                },
+                "commands": {
+                    "title": "Commando's",
+                    "copy": "Geselecteerde objecten kopiëren",
+                    "paste": "Geselecteerde objecten plakken",
+                    "undo": "Laatste actie ongedaan maken",
+                    "redo": "Ongedaan gemaakte actie opnieuw uitvoeren",
+                    "save": "Wijzigingen opslaan"
+                }
             }
         },
         "presets": {
@@ -1540,6 +1645,9 @@
                 },
                 "maxstay": {
                     "label": "Maximale verblijftijd"
+                },
+                "maxweight": {
+                    "label": "Maximaal gewicht"
                 },
                 "mtb/scale": {
                     "label": "Mountain Bike Moeilijkheidsgraad",
@@ -2848,6 +2956,10 @@
                 "craft/confectionery": {
                     "name": "Snoepmakerij"
                 },
+                "craft/distillery": {
+                    "name": "Destilleerderij",
+                    "terms": "stokerij,distillerij,distilleerderij,destillerij,destillatie,whisky,gin,alcohol,jenever,brandewijn"
+                },
                 "craft/dressmaker": {
                     "name": "Kleermaker voornamelijk voor vrouwen",
                     "terms": "kleermaker,kleedjes,jurken,maatwerk,kleren,kledij"
@@ -2855,6 +2967,10 @@
                 "craft/electrician": {
                     "name": "Elektricien",
                     "terms": "monteur,elektriciteit,installatie,stielman,elektrisch"
+                },
+                "craft/electronics_repair": {
+                    "name": "Electronicaherstelwinkel",
+                    "terms": "electronica herstel winkel,herstellingen,gsm-herstelwinkel,telefoonherstelwinkel,smartphoneherstelwinkel,schermherstelwinkel,herstelwinkel"
                 },
                 "craft/gardener": {
                     "name": "Tuinman"
@@ -3094,6 +3210,9 @@
                 "highway/cycleway": {
                     "name": "Fietspad",
                     "terms": "rijwielpad,fietssnelweg,flitsfietspad"
+                },
+                "highway/elevator": {
+                    "name": "Lift"
                 },
                 "highway/footway": {
                     "name": "Wandelpad",
@@ -3738,7 +3857,8 @@
                     "name": "Puinhelling"
                 },
                 "natural/scrub": {
-                    "name": "Ruigte"
+                    "name": "Ruigte",
+                    "terms": "struiken"
                 },
                 "natural/spring": {
                     "name": "Bron"
@@ -4043,6 +4163,10 @@
                 "shop/antiques": {
                     "name": "Antiquair",
                     "terms": "antiek,winkel"
+                },
+                "shop/appliance": {
+                    "name": "Huishoudelijkeapparatuurwinkel",
+                    "terms": "huisraadwinkel,huishoudelijke apparatuur"
                 },
                 "shop/art": {
                     "name": "Kunstwinkel",

@@ -84,8 +84,8 @@
                 },
                 "key": "S",
                 "annotation": {
-                    "line": "Stworzono kąty proste z narożników linii.",
-                    "area": "Stworzono kąty proste obszaru."
+                    "line": "Utworzono kąty proste z narożników linii.",
+                    "area": "Utworzono kąty proste obszaru."
                 },
                 "not_squarish": "Nie można stworzyć kątów prostych, gdyż obiekt nie posiada czterech boków.",
                 "too_large": "Nie można poprawić równoległości tego obiektu, ponieważ nie jest on wystarczająco widoczny.",
@@ -327,12 +327,12 @@
             "rateLimit": "API ogranicza anonimowe połączenia. Możesz je ominąć logując się."
         },
         "commit": {
-            "title": "Zapisz zmiany",
-            "description_placeholder": "Zwięzły opis twoich zmian (wymagany)",
+            "title": "Prześlij do OpenStreetMap",
+            "description_placeholder": "Zwięzły opis Twoich zmian (wymagany)",
             "message_label": "Opis zmian",
             "upload_explanation": "Zmiany, które wyślesz będą widoczne na wszystkich mapach używających danych OpenStreetMap.",
             "upload_explanation_with_user": "Zmiany, które wyślesz jako {user} będą widoczne na wszystkich mapach używających danych OpenStreetMap.",
-            "save": "Zapisz",
+            "save": "Prześlij",
             "cancel": "Anuluj",
             "changes": "{count} zmian/zmiany",
             "warnings": "Ostrzeżenia",
@@ -429,7 +429,7 @@
             "switch": "Wróć do tego podkładu",
             "custom": "Własne",
             "custom_button": "Edycja własnego podkładu",
-            "custom_prompt": "Podaj adres URL kafelka mapy. Poprawne adresy posiadają {zoom}, {x}, {y}  dla współrzędnych Z/X/Y oraz {u} dla każdego kwartyla mapy.",
+            "custom_prompt": "Podaj szablon adresu URL kafelka mapy. Poprawne adresy posiadają {zoom}, {x}, {y}  dla współrzędnych w formacie Z/X/Y lub {u} dla współrzędnych w formacie quadtile.",
             "fix_misalignment": "Przesunięcie podkładu",
             "imagery_source_faq": "Skąd pochodzi ta warstwa?",
             "reset": "Przywraca ustawienia",
@@ -626,7 +626,6 @@
         "help": {
             "title": "Pomoc",
             "help": "# Pomoc\n\nTo jest edytor [OpenStreetMap](http://www.openstreetmap.org/),\nwolnej i edytowalnej mapy świata. Możesz go używać do dodawania i\naktualizacji danych w twoim rejonie, czyniąc otwartą mapę świata lepszą\ndla każdego.\n\nModyfikacje wprowadzone na tej mapie będą widoczne dla wszystkich\nużywających OpenStreetMap. Aby wprowadzić modyfikacje,\nmusisz się [zalogować](https://www.openstreetmap.org/login).\n\n[Edytor iD](http://ideditor.com/) jest projektem społecznościowym z\n[kodem dostępnym na GitHub](https://github.com/openstreetmap/iD).\n",
-            "editing_saving": "# Edycja i zapis\n\nTen edytor został zaprojektowany do pracy w trybie online i właśnie go używasz poprzez stronę internetową.\n\n### Wybieranie obiektów\n\nAby wybrać obiekt na mapie, na przykład drogę czy POI, kliknij go na mapie.\nSpowoduje to podświetlenie wybranego obiektu, otworzenie panelu zawierającego szczegóły\no nim i wyświetlenie menu z poleceniami, które możesz wykonać na obiekcie.\n\nAby wybrać wiele obiektów, należy przytrzymać wciśnięty klawisz 'Shift'. Wtedy wystarczy kliknąć lewym klawiszem myszy na odpowiednich obiektach lub zaznaczyć interesujący obszar mapy. Spowoduje to wybór wszystkich obiektów zawartych w narysowanym prostokącie.\n\n### Zapisywanie modyfikacji\n\nGdy wprowadzisz zmiany, na przykład przez modyfikacje dróg, budynków i miejsc, są one\nprzechowywane lokalnie aż zapiszesz je na serwerze. Nie martw się, gdy popełnisz błąd - możesz\ncofnąć zmiany przez kliknięcie przycisku cofania i przywrócić je poprzez kliknięcie przycisku powtarzania.\n\nKliknij 'Zapisz' aby skończyć grupę modyfikacji - na przykład, gdy skończyłeś pewien obszar miasta i\nchcesz zacząć następny. Będziesz miał wtedy szansę przejrzeć swoje zmiany, a edytor dostarczy pomocne\nsugestie i ostrzeżenia w razie, gdyby coś było z nimi nie tak.\n\nJeśli nie widać problemów, możesz podać krótki komentarz opisujący zmianę, którą wprowadziłeś\ni kliknąć 'Zapisz' ponownie, aby wysłać zmiany do [OpenStreetMap.org](http://www.openstreetmap.org/),\ngdzie będą one widoczne dla wszystkich użytkowników i dostępne dla innych do\ndalszego ulepszania.\n\nJeżeli nie możesz skończyć swoich modyfikacji w czasie jednej sesji, możesz opuścić okno edytora i\nwrócić później (na tym samym komputerze i w tej samej przeglądarce), a edytor zaoferuje ci przywrócenie\ntwojej pracy.\n\n### Korzystanie z edytora\n\nLista dostępnych skrótów klawiszowych znajduje się [tutaj](http://wiki.openstreetmap.org/wiki/Pl:iD/Shortcuts).\n",
             "roads": "# Drogi\n\nMożesz tworzyć, poprawiać i usuwać drogi używając tego edytora. Drogi mogą być wszelkiego rodzaju:\nścieżki, ulice, szlaki, ścieżki rowerowe i tak dalej - każdy często uczęszczany odcinek powinien dać się\nprzedstawić.\n\n### Zaznaczanie\n\nKliknij drogę, aby ją zaznaczyć. Obwiednia powinna stać się widoczna, wraz z małym menu\nnarzędziowym na mapie oraz panelem bocznym pokazującym więcej informacji na temat drogi.\n\n### Modyfikowanie\n\nCzęsto będziesz widział drogi, które nie są wyrównane ze zdjęciami satelitarnymi lub śladami GPS.\nMożesz dopasować te drogi tak, aby były we właściwym miejscu.\n\nNajpierw kliknij drogę, którą chcesz zmienić. Podświetli ją to oraz pokaże punkty kontrolne, które\nmożesz przesunąć w lepsze miejsce. Jeżeli chcesz dodać nowe punkty kontrolne, aby droga\nbyła bardziej szczegółowa, dwukrotnie kliknij część drogi bez punktu, a w tym miejscu nowy się\npojawi.\n\nJeżeli droga łączy się z inną drogą, ale nie jest prawidłowo połączona z nią na mapie, możesz\nprzeciągnąć jeden z puntów kontrolnych na drugą drogę w celu ich połączenia. Prawidłowe połączenia\ndróg są ważne dla mapy i kluczowe dla wyznaczania tras.\n\nMożesz też kliknąć narzędzie 'Przesuń' lub nacisnąć klawisz `M` aby przesunąć jednocześnie całą\ndrogę, a następnie kliknąć ponownie, aby zachować to przesunięcie.\n\n### Usuwanie\n\nGdy droga jest całkiem błędna - widzisz, że nie istnieje na zdjęciach satelitarnych (a najlepiej sam\nsprawdziłeś w terenie, że jej nie ma) - możesz usunąć ją. Uważaj, gdy usuwasz obiekty - wyniki usunięcia,\ntak jak każdej modyfikacji, są widoczne dla wszystkich, a zdjęcie satelitarne często nie są aktualne,\nwięc droga może być po prostu nowo wybudowana.\n\nMożesz usunąć drogę przez zaznaczenie jej, a następnie kliknięcie ikony kosza lub wciśnięcie\nklawisza 'Delete'.\n\n### Tworzenie\n\nGdzieś tam powinna być droga, ale jej nie ma? Kliknij przycisk 'Linia' w górnym lewym rogu edytora\nlub naciśnij klawisz '2' na klawiaturze, aby zacząć rysować linię.\n\nKliknij początek drogi na mapie, aby zacząć rysować. Jeżeli droga odchodzi od już istniejącej, zacznij\nprzez kliknięcie w miejscu, w którym się łączą.\n\nNastępnie klikaj na punktach wzdłuż drogi tak, aby biegła ona odpowiednio według zdjęć satelitarnych\nlub GPS. Jeżeli droga, którą rysujesz, krzyżuje się z inną, połącz je, klikając na punkcie przecięcia. Gdy\nskończysz rysować, dwukrotnie kliknij ostatni punkt lub naciśnij klawisz 'Enter' na klawiaturze.\n",
             "gps": "# GPS\n\nZebrane ślady GPS są ważnym źródłem danych dla OpenStreetMap. Ten edytor pozwala na użycie lokalnych śladów - plików \".gpx\" na twoim komputerze. Możesz je zbierać za pomocą aplikacji na smartfony jak również dedykowanych odbiorników GPS.\n\nBy uzyskać więcej informacji jak wykonać pomiar GPS, przeczytaj [Mapping with a smartphone, GPS, or paper](http://learnosm.org/en/mobile-mapping/).\n\nBy użyć śladu GPX do mapowania, przeciągnij i upuść plik GPX na mapę edytora. Jeśli został on rozpoznany, pojawi się na niej jako jasno-purpurowa linia. Kliknij na \"Dane mapy\" po prawej stronie by włączyć, wyłączyć lub przybilżyć widok mapy do miejsca w którym pojawił się ślad.\n\nSam ślad nie jest bezpośrednio przenoszony na serwery OpenStreetMap - najlepszym sposobem na wykorzystanie go jest nanoszenie informacji uzyskanych z niego na mapę, często używając go jako wskazówkę, możesz także [wysłać go na serwery OpenStreetMap](http://www.openstreetmap.org/trace/create)\npozwalając tym samym innym użytkownikom na korzystanie z niego.\n",
             "imagery": "# Zdjęcia\n\nZdjęcia lotnicze/satelitarne są ważnym zasobem w rysowaniu map. Kolekcja zdjęć lotniczych,\nsatelitarnych i innych wolnodostępnych źródeł jest dostępna w edytorze w menu 'Ustawienia tła' po\nprawej stronie.\n\nDomyślnie wyświetlana jest warstwa zdjęć satelitarnych z [Bing Maps](http://www.bing.com/maps/),\nale w miarę przybliżania i pojawiają się nowe źródła. Niektóre kraje, takie jak Stany Zjednoczone, Francja\nczy Dania mają w pewnych miejscach dostępne zdjęcia bardzo wysokiej jakości.\n\nZdjęcia są czasem przesunięte względem danych na mapie z powodu błędu dostawcy zdjęć. Jeżeli\nwidzisz dużo dróg przesuniętych względem tła, zastanów się, zanim je wszystkie wyrównasz względem\ntła. Zamiast tego możesz dostosować przesunięcie zdjęć tak, aby zgadzały się z istniejącymi danymi przez\nnaciśnięcie przycisku 'Wyrównaj podkład' na dole Ustawień tła.\n",
@@ -679,14 +678,14 @@
                     "conservation-park": "Park Konwersacji",
                     "constantine-street": "Wrocławska",
                     "cushman-street": "Truskawkowa",
-                    "dollar-tree": "Drzewo Pieniędzy",
+                    "dollar-tree": "Drzewo pieniędzy",
                     "douglas-avenue": "Aleje Jerozolimskie",
                     "east-street": "Słoneczna ",
                     "elm-street": "Polna",
                     "flower-street": "Kwiatowa ",
                     "foster-street": "Henryka Sienkiewicza",
                     "french-street": "Francuska",
-                    "garden-street": "Pamiętajcie O Ogrodach",
+                    "garden-street": "Pamiętajcie o ogrodach",
                     "gem-pawnbroker": "Lombard U Stasia",
                     "golden-finch-framing": "Farma Zbycha",
                     "grant-avenue": "Hoża",
@@ -775,6 +774,8 @@
             },
             "navigation": {
                 "title": "Nawigacja",
+                "drag": "Główny obszar mapy pokazuje dane OpenStreetMap na tle podkładu.{br}Możesz poruszać się po niej, przeciągając i przewijając tak jak po każdej mapie internetowej. Dodatkowo możesz używać klawiszów strzałek. **Przeciągnij mapę!**",
+                "zoom": "Możesz przybliżać i oddalać widok poprzez kręcenie pokrętłem myszy, przy użyciu touchpada lub przycisków {plus} / {minus}. **Przybliż mapę!**",
                 "features": "By opisać rzeczy pojawiające się na mapie używamy słowa *obiekty*. Wszystko w świecie rzeczywistym może zostać odwzorowane - zmapowane - jako obiekt w OpenStreetMap.",
                 "points_lines_areas": "Obiekty mapy są przedstawione przy użyciu *punktów, linii oraz obszarów.*",
                 "nodes_ways": "W OpenStreetMap punkty (ang. points) często nazywane są *węzłami* (ang. nodes), zaś linie oraz obszary są czasami nazywane *ścieżkami* (ang. ways).",
@@ -805,11 +806,13 @@
             "lines": {
                 "title": "Linie",
                 "add_line": "*Linie* są używane do reprezentowania obiektów takich jak drogi, tory czy rzeki. **Naciśnij przycisk Linia {button}, aby dodać nową linię.**",
+                "intersect": "Kliknij lub wciśnij spację, aby dodać więcej punktów do linii.{br}Drogi i wiele innych typów linii są częścią większej sieci. Ważne jest ich prawidłowe połączenie, aby programy do wyznaczania tras działały poprawnie. **Kliknij na {name}, aby dodać skrzyżowanie łączące dwie linie.**",
                 "retry_intersect": "Droga musi się skrzyżować z drogą {name}. Spróbuj ponownie!",
                 "choose_category_road": "**Wybierz {category} z listy**",
                 "choose_preset_residential": "Istnieje wiele rodzajów dróg, jednak ta jest drogą lokalną. **Wybierz typ {preset}.**",
                 "retry_preset_residential": "Nie zaznaczyłeś typu {preset}. **Kliknij tutaj, aby wybrać ponownie.**",
-                "name_road": "**Nazwij drogę, a następnie wciśnij Escape, powróć lub wciśnij przycisk {button}, aby zamknąć edytor obiektów.**",
+                "name_road": "**Nazwij drogę, a następnie wciśnij Escape, Enter lub wciśnij przycisk {button}, aby zamknąć edytor obiektów.**",
+                "did_name_road": "Nieźle! Następnie nauczysz się jak zmienić kształt linii.",
                 "split_intersection": "**Naciśnij przycisk {button}, aby rozdzielić {street}.**",
                 "retry_split": "Nie nacisnąłeś na przycisk Rozdziel. Spróbuj ponownie.",
                 "multi_delete": "**Naciśnij przycisk {button}, aby usunąć dodatkowe linie.**",
@@ -828,6 +831,40 @@
                 "start": "Zacznij mapować!"
             }
         },
+        "shortcuts": {
+            "title": "Skróty klawiszowe",
+            "browsing": {
+                "title": "Przeglądanie",
+                "navigation": {
+                    "title": "Nawigacja"
+                },
+                "help": {
+                    "title": "Pomoc",
+                    "help": "Wyświetl pomoc/dokumentację",
+                    "keyboard": "Wyświetl skróty klawiszowe"
+                },
+                "display_options": {
+                    "title": "Opcje wyświetlania",
+                    "background": "Wyświetl opcje tła"
+                }
+            },
+            "editing": {
+                "title": "Edytowanie",
+                "drawing": {
+                    "title": "Rysowanie",
+                    "add_point": "Tryb 'Dodawania punktu'",
+                    "add_line": "Tryb 'Dodawania linii'",
+                    "add_area": "Tryb 'Dodawania obszaru'",
+                    "place_point": "Umieść punkt"
+                },
+                "commands": {
+                    "title": "Polecenia",
+                    "undo": "Cofnij ostatnie działanie",
+                    "redo": "Ponów ostatnie działanie",
+                    "save": "Zapisz zmiany"
+                }
+            }
+        },
         "presets": {
             "categories": {
                 "category-barrier": {
@@ -843,13 +880,13 @@
                     "name": "Zagospodarowanie terenu"
                 },
                 "category-natural-area": {
-                    "name": "Obiekty Naturalne"
+                    "name": "Obiekty naturalne"
                 },
                 "category-natural-line": {
-                    "name": "Obiekty Naturalne"
+                    "name": "Obiekty naturalne"
                 },
                 "category-natural-point": {
-                    "name": "Obiekty Naturalne"
+                    "name": "Obiekty naturalne"
                 },
                 "category-path": {
                     "name": "Ścieżka"
@@ -939,14 +976,14 @@
                         "hamlet": "Przysiółek",
                         "housename": "Nazwa domu",
                         "housenumber": "123",
-                        "housenumber!jp": "Nr Budynku/Działki",
+                        "housenumber!jp": "Nr budynku/działki",
                         "neighbourhood": "Okręg",
                         "neighbourhood!jp": "Chōme/Aza/Koaza",
                         "place": "Miejsce",
                         "postcode": "Kod pocztowy",
                         "province": "Prowincja",
                         "province!jp": "Prefektura",
-                        "quarter": "Wyższy Okręg",
+                        "quarter": "Wyższy okręg",
                         "quarter!jp": "Ōaza/Machi",
                         "state": "Stan",
                         "street": "Ulica (nie miejscowość)",
@@ -985,7 +1022,7 @@
                     "label": "Ogrzewany"
                 },
                 "aerialway/occupancy": {
-                    "label": "ilość miejsc ",
+                    "label": "Ilość miejsc ",
                     "placeholder": "2, 4, 8..."
                 },
                 "aerialway/summer/access": {
@@ -1033,13 +1070,13 @@
                     "label": "Zewnątrz"
                 },
                 "bath/sand_bath": {
-                    "label": "Kąpiele Piaskowe"
+                    "label": "Kąpiele piaskowe"
                 },
                 "bath/type": {
                     "label": "Typ",
                     "options": {
-                        "foot_bath": "Mycie Nóg",
-                        "hot_spring": "Gorące Źródła",
+                        "foot_bath": "Mycie nóg",
+                        "hot_spring": "Gorące źródła",
                         "onsen": "Japoński Onsen"
                     }
                 },
@@ -1087,10 +1124,10 @@
                     "placeholder": "45, 90, 180, 270"
                 },
                 "camera/mount": {
-                    "label": "Mocowanie Kamery"
+                    "label": "Mocowanie kamery"
                 },
                 "camera/type": {
-                    "label": "Typ Kamery",
+                    "label": "Typ kamery",
                     "options": {
                         "dome": "Kopułkowa",
                         "fixed": "Stacjonarna",
@@ -1145,7 +1182,7 @@
                     "label": "Typ"
                 },
                 "contact/webcam": {
-                    "label": "Adres webcam",
+                    "label": "Adres kamery internetowej",
                     "placeholder": "http://przyklad.pl/"
                 },
                 "content": {
@@ -1238,7 +1275,7 @@
                     "label": "Typ"
                 },
                 "drive_through": {
-                    "label": "Drive-Through"
+                    "label": "Przejazd"
                 },
                 "electrified": {
                     "label": "Elektryfikacja",
@@ -1255,7 +1292,7 @@
                 },
                 "email": {
                     "label": "E-mail",
-                    "placeholder": "przyklad@example.com"
+                    "placeholder": "przyklad@przyklad.pl"
                 },
                 "emergency": {
                     "label": "W razie niebezpieczeństwa"
@@ -1295,7 +1332,7 @@
                     }
                 },
                 "fixme": {
-                    "label": "Napraw Mnie (FIXME)"
+                    "label": "Popraw mnie"
                 },
                 "fuel": {
                     "label": "Paliwo"
@@ -1393,7 +1430,7 @@
                     "label": "Płatny dostęp do Internetu"
                 },
                 "internet_access/ssid": {
-                    "label": "SSID (Nazwa Sieci)"
+                    "label": "SSID (Nazwa sieci)"
                 },
                 "kerb": {
                     "label": "Krawężnik"
@@ -1476,7 +1513,7 @@
                     "label": "Typ"
                 },
                 "maxheight": {
-                    "label": "Maksymalna Wysokość",
+                    "label": "Maksymalna wysokość",
                     "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
                 },
                 "maxspeed": {
@@ -1485,6 +1522,9 @@
                 },
                 "maxstay": {
                     "label": "Maksymalny czas postoju"
+                },
+                "maxweight": {
+                    "label": "Maksymalna waga"
                 },
                 "mtb/scale": {
                     "label": "Skala trudności dla rowerów górskich",
@@ -1594,7 +1634,7 @@
                     "label": "Operator"
                 },
                 "outdoor_seating": {
-                    "label": "Ogródek Restauracyjny"
+                    "label": "Ogródek restauracyjny"
                 },
                 "par": {
                     "label": "Par",
@@ -1744,7 +1784,7 @@
                     "label": "Sezonowy"
                 },
                 "second_hand": {
-                    "label": "Sprzedaż Używanych",
+                    "label": "Sprzedaż używanych",
                     "options": {
                         "no": "Nie",
                         "only": "Tylko",
@@ -1762,7 +1802,7 @@
                     "label": "Usługi"
                 },
                 "service_rail": {
-                    "label": "Typ Usługi",
+                    "label": "Typ usługi",
                     "options": {
                         "crossover": "Rozjazd",
                         "siding": "Bocznica",
@@ -1985,7 +2025,7 @@
                 },
                 "website": {
                     "label": "Strona WWW",
-                    "placeholder": "http://example.com/"
+                    "placeholder": "http://przyklad.pl/"
                 },
                 "wetland": {
                     "label": "Typ"
@@ -2029,7 +2069,7 @@
                     "terms": "Wyciąg narciarski gondolowy, Gondola"
                 },
                 "aerialway/goods": {
-                    "name": "Wyciąg Towarowy",
+                    "name": "Wyciąg towarowy",
                     "terms": "wyciąg towarowy, gondola towarowa, "
                 },
                 "aerialway/magic_carpet": {
@@ -2502,7 +2542,7 @@
                     "terms": "Automat z gazetami"
                 },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
-                    "name": "Poczkomat z funkcją nadawania przesyłek",
+                    "name": "Paczkomat z funkcją nadawania przesyłek",
                     "terms": "paczkomat"
                 },
                 "amenity/vending_machine/parking_tickets": {
@@ -2829,6 +2869,9 @@
                     "name": "Elektryk",
                     "terms": "elektryk,elektrotechnik"
                 },
+                "craft/electronics_repair": {
+                    "name": "Punkt napraw sprzętu elektronicznego"
+                },
                 "craft/gardener": {
                     "name": "Ogrodnik",
                     "terms": "ogrodnik,sadownik"
@@ -3086,6 +3129,9 @@
                     "name": "Droga rowerowa",
                     "terms": "droga,rowerowa,ścieżka,rowerów"
                 },
+                "highway/elevator": {
+                    "name": "Winda"
+                },
                 "highway/footway": {
                     "name": "Droga/ścieżka dla pieszych",
                     "terms": "pobocze,bulwar,ścieżka,deptak,szosa,spacer"
@@ -3163,8 +3209,8 @@
                     "terms": "alejka"
                 },
                 "highway/service/drive-through": {
-                    "name": "Drive-through",
-                    "terms": "drive-through"
+                    "name": "Przejazd",
+                    "terms": "przejazd"
                 },
                 "highway/service/driveway": {
                     "name": "Podjazd",
@@ -3231,7 +3277,7 @@
                     "terms": "miejsce,zawracania,zawracanie"
                 },
                 "highway/turning_loop": {
-                    "name": "Węzeł Do Zawracania (Z Wyspą)",
+                    "name": "Węzeł do zawracania (z wyspą)",
                     "terms": "zawracanie"
                 },
                 "highway/unclassified": {
@@ -3338,7 +3384,7 @@
                     "terms": "trawa, trawnik, "
                 },
                 "landuse/harbour": {
-                    "name": "Port Morski",
+                    "name": "Port morski",
                     "terms": "port morski,port"
                 },
                 "landuse/industrial": {
@@ -3358,7 +3404,7 @@
                     "terms": "poligon wojskowy"
                 },
                 "landuse/military/airfield": {
-                    "name": "Lotnisko Wojskowe",
+                    "name": "Lotnisko wojskowe",
                     "terms": "lotnisko wojskowe, wojskowy pas startowy"
                 },
                 "landuse/military/barracks": {
@@ -3366,7 +3412,7 @@
                     "terms": "koszary, wojsko, budynek wojskowy"
                 },
                 "landuse/military/bunker": {
-                    "name": "Bunkier Wojskowy",
+                    "name": "Bunkier wojskowy",
                     "terms": "bunkier wojskowy, schron wojskowy"
                 },
                 "landuse/military/checkpoint": {
@@ -3374,8 +3420,8 @@
                     "terms": "Wojskowy punkt kontrolny"
                 },
                 "landuse/military/danger_area": {
-                    "name": "Obszar Niebezpieczny",
-                    "terms": "Obszar Niebezpieczny"
+                    "name": "Obszar niebezpieczny",
+                    "terms": "Obszar niebezpieczny"
                 },
                 "landuse/military/naval_base": {
                     "name": "Port wojenny",
@@ -3974,8 +4020,8 @@
                     "terms": "kwartał,osiedle"
                 },
                 "place/square": {
-                    "name": "Plac",
-                    "terms": "plac, rynek"
+                    "name": "Plac publiczny",
+                    "terms": "plac miejski, rynek"
                 },
                 "place/suburb": {
                     "name": "Dzielnica",
@@ -4129,6 +4175,9 @@
                     "name": "Antykwariat",
                     "terms": "sklep z antykami, antyki"
                 },
+                "shop/appliance": {
+                    "name": "Sklep z AGD"
+                },
                 "shop/art": {
                     "name": "Sklep z dziełami sztuki",
                     "terms": "antykwariat, desa"
@@ -4187,7 +4236,7 @@
                 },
                 "shop/butcher": {
                     "name": "Rzeźnik",
-                    "terms": "sklep mięsny, rzeźnia"
+                    "terms": "sklep mięsny, wędliny, mięso, rzeźnia"
                 },
                 "shop/candles": {
                     "name": "Sklep ze świecami",
@@ -4457,7 +4506,7 @@
                     "terms": "farby,malowanie"
                 },
                 "shop/pastry": {
-                    "name": "Sklep z Wypiekami",
+                    "name": "Sklep z wypiekami",
                     "terms": "sklep z wypiekami, piekarnia, ciastkarnia, ciasta"
                 },
                 "shop/pawnbroker": {
@@ -4600,7 +4649,7 @@
                     "terms": "chata alpejska"
                 },
                 "tourism/apartment": {
-                    "name": "Apartamenty na Wynajem",
+                    "name": "Apartamenty na wynajem",
                     "terms": "aparatament na wynajem, apartamenty na wynajem, pokój na wynajem, pokoje na wynajem, apartament, apartamenty, pokój, pokoje, do wynajęcia"
                 },
                 "tourism/aquarium": {
@@ -4648,7 +4697,7 @@
                     "terms": "informacja dla turystów"
                 },
                 "tourism/information/board": {
-                    "name": "Tablica Informacyjna",
+                    "name": "Tablica informacyjna",
                     "terms": "informacja, obwieszczenia"
                 },
                 "tourism/information/guidepost": {
@@ -4660,7 +4709,7 @@
                     "terms": "plan, mapa, "
                 },
                 "tourism/information/office": {
-                    "name": "Informacja Turystyczna",
+                    "name": "Informacja turystyczna",
                     "terms": "informacja turystyka, turystyka"
                 },
                 "tourism/motel": {
@@ -4688,7 +4737,7 @@
                     "terms": "Zoo, ogród zoologiczny"
                 },
                 "traffic_calming": {
-                    "name": "Uspokojenie Ruchu",
+                    "name": "Uspokojenie ruchu",
                     "terms": "uspokojenie ruchu"
                 },
                 "traffic_calming/bump": {

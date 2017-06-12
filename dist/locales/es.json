@@ -8,12 +8,12 @@
             },
             "add_line": {
                 "title": "Línea",
-                "description": "Añade carreteras, calles, pasos peatonales, aceras, canales, ríos u otras líneas al mapa.",
+                "description": "Añade carreteras, calles, senderos, aceras, canales, ríos u otras líneas al mapa.",
                 "tail": "Haga clic en el mapa para empezar a dibujar un camino, sendero o ruta."
             },
             "add_point": {
                 "title": "Punto",
-                "description": "Añade restaurantes, oficinas, oficios, monumentos, buzones postales u otros puntos al mapa.",
+                "description": "Añade restaurantes, monumentos, buzones postales, negocios u otros puntos al mapa.",
                 "tail": "Haga clic en el mapa para añadir un punto."
             },
             "browse": {
@@ -64,15 +64,15 @@
             "circularize": {
                 "title": "Redondear",
                 "description": {
-                    "line": "Hacer circular esta línea.",
-                    "area": "Hacer circular esta área."
+                    "line": "Hacer esta línea circular.",
+                    "area": "Hacer este área circular."
                 },
                 "key": "O",
                 "annotation": {
-                    "line": "Hace la línea circular.",
-                    "area": "Hace el área circular."
+                    "line": "Línea hecha circular.",
+                    "area": "Área hecha circular."
                 },
-                "not_closed": "Esto no se puede redondear porque no es un círculo.",
+                "not_closed": "Esto no se puede redondear porque no está cerrado.",
                 "too_large": "Esto no se puede redondear porque no está completamente visible.",
                 "connected_to_hidden": "Esto no se puede hacer circular porque está conectado a un elemento oculto."
             },
@@ -80,16 +80,16 @@
                 "title": "Escuadrar",
                 "description": {
                     "line": "Escuadra las esquinas de esta línea.",
-                    "area": "Escuadra las esquinas de esta área."
+                    "area": "Escuadra las esquinas de este área."
                 },
                 "key": "S",
                 "annotation": {
                     "line": "Escuadrar las esquinas de una línea.",
                     "area": "Escuadrar las esquinas de un área."
                 },
-                "not_squarish": "Esto no puede escuadrarse porque no es cuadrado.",
+                "not_squarish": "Esto no puede escuadrarse porque no es escuadrable.",
                 "too_large": "Esto no puede escuadrarse porque no está completamente visible.",
-                "connected_to_hidden": "Esto no se puede hacer rectangular porque está conectado a un elemento oculto."
+                "connected_to_hidden": "Esto no se puede escuadrar porque está conectado a un elemento oculto."
             },
             "straighten": {
                 "title": "Enderezar",
@@ -131,10 +131,10 @@
                 }
             },
             "add_member": {
-                "annotation": "Un miembro ha sido añadido a una relación."
+                "annotation": "Se ha añadido un miembro a una relación."
             },
             "delete_member": {
-                "annotation": "Un miembro ha sido quitado de una relación."
+                "annotation": "Se ha quitado un miembro de una relación."
             },
             "connect": {
                 "annotation": {
@@ -608,7 +608,7 @@
         "full_screen": "Cambiar a pantalla completa",
         "gpx": {
             "local_layer": "Archivo local",
-            "drag_drop": "Arrastre y suelte un archivo .gpx, .geojson o .kml en la página o haga clic en el botón a la derecha para navegar",
+            "drag_drop": "Arrastre y suelte un archivo .gpx, .geojson o .kml en la página o haga clic en el botón a la derecha para explorar",
             "zoom": "Acercar a la capa",
             "browse": "Buscar un archivo"
         },
@@ -626,7 +626,7 @@
         "help": {
             "title": "Ayuda",
             "help": "# Ayuda\n\nEste es un editor para [OpenStreetMap](http://www.openstreetmap.org/), el\nmapa libre y editable del mundo. Se puede utilizar para añadir y actualizar\ndatos en su área, haciendo que el mapa del mundo de fuente y datos abiertos\nsea mejor para todos.\n\nLas ediciones que realice en este mapa serán visible a todos los que usen\nOpenStreetMap. Para poder hacer una edición tendrá que\n[Iniciar sesión](https://www.openstreetmap.org/login).\n\nEl [editor iD](http://ideditor.com/) es un proyecto colaborativo con [código\nfuente disponible en GitHub](https://github.com/openstreetmap/iD).\n",
-            "editing_saving": "# Editar y guardar\n\nEste editor está diseñado para trabajar en línea principalmente, y en estos\nmomentos esta accediendo a través de un sitio web.\n\n### Seleccionar elementos\n\nPara seleccionar un elemento del mapa, como una carretera o un punto de\ninterés, haga clic sobre el en el mapa. Esto resaltará el elemento seleccionado,\nabriendo un panel con sus detalles, y mostrará un menú de cosas que puede\nhacer con ese elemento.\n\nPara seleccionar múltiples elementos, mantenga pulsada la tecla 'Mayús'. Luego\nhaga clic en los elementos que desea seleccionar o arrastre en el mapa para\ndibujar un rectángulo. Esto dibujará una caja y seleccionará todos los puntos\ndentro de ella.\n\n### Guardar ediciones\n\nCuando haga cambios como editar carreteras, edificios o lugares, estos se\nalmacenan localmente en su ordenador hasta que los guarde en el servidor.\nNo se preocupe si comete un error - puede deshacer los cambios haciendo\nclic en el botón 'Deshacer', y rehacerlos haciendo clic en el botón 'Rehacer'.\n\nHaga clic en 'Guardar' para finalizar un grupo de ediciones - por ejemplo, si ha\ncompletado una zona de la ciudad y quisiera empezar en un área nueva. Tendrá\nla oportunidad de revisar lo que ha hecho, y el editor proporciona avisos y\nsugerencias útiles si algo parece no ser correcto en los cambios.\n\nSi ve que todo es correcto, puede escribir un breve comentario explicando el\ncambio que ha hecho, y haga clic en 'Guardar' de nuevo para registrar los\ncambios en [OpenStreetMap.org](http://www.openstreetmap.org/), donde serán\nvisibles para todos los demás usuarios y estarán disponible para que otros\npuedan seguir construyendo y mejorando el mapa.\n\nSi no puede terminar sus ediciones en una sola sesión, puede dejar la ventana\ndel editor y volver más tarde (al mismo navegador y ordenador), y el editor le\npermitirá retomar su trabajo.\n\n### Uso del editor\n\nUna lista de métodos abreviados de teclado disponibles puede encontrarse [aquí](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
+            "editing_saving": "# Editando y guardando\n\nEste editor está diseñado para trabajar principalmente en línea, y usted está accediendo\na través de un sitio web en este momento.\n\n### Seleccionando elementos\n\nPara seleccionar un elemento del mapa, como una carretera o punto de interés, haga clic en\nen él sobre el mapa. Esto resaltará el elemento seleccionado, abrirá un panel con\ndetalles sobre él y mostrará un menú de cosas que puede hacer con el elemento.\n\nPara seleccionar varios elementos, mantenga pulsada la tecla 'Shift'. A continuación, haga clic en\nen los elementos que desea seleccionar, o arrastre el mapa para dibujar un rectángulo.\nEsto dibujará una caja y seleccionará todos los puntos dentro de ella.\n\n### Guardando las ediciones\n\nCuando hace cambios como editar carreteras, edificios y lugares, estos son\nalmacenados localmente hasta que los guarde en el servidor. No se preocupe si se\nequivoca - puede deshacer los cambios haciendo clic en el botón deshacer, y rehacer cambios\nhaciendo clic en el botón Rehacer.\n\nHaga clic en 'Guardar' para finalizar un grupo de ediciones - por ejemplo, si ha completado\nun área de la ciudad y quisiera comenzar en un área nueva. Tendrá la oportunidad\npara revisar lo que ha hecho, y el editor suministra sugerencias útiles\ny advertencias si algo no parece correcto sobre los cambios.\n\nSi todo está bien, puede escribir un comentario corto explicando el cambio\nque ha hecho y hacer clic en 'Guardar' de nuevo para publicar los cambios\nen [OpenStreetMap.org](http://www.openstreetmap.org/), donde son visibles\na todos los demás usuarios y disponibles para que otros puedan aprovechar y mejorar.\n\nSi no puede terminar sus ediciones en una sola sesión, puede dejar la ventana\ndel editor y volver (en el mismo navegador y equipo), y el\neditor de la aplicación le ofrecerá restaurar su trabajo.\n\n### Usando del editor\n\nPuede ver una lista de atajos de teclado pulsando la tecla `?`.\n",
             "roads": "# Carreteras\n\nPuede crear, corregir y borrar carreteras con este editor. Las vías pueden ser de todas las clases: caminos, carreteras, senderos, ciclovías, etc. A cualquier línea dibujada en el mapa se le debe indicar el tipo de elemento lineal que es.\n\n### Seleccionar\n\nHaga clic sobre una vía para seleccionarla. Verá sobre ella como se visualiza su esquema, formada por nodos y segmentos, junto con un menú de herramientas que aparece sobre el mapa y una barra lateral que muestra más información sobre la vía.\n\n### Modificar\n\nA menudo verá viales que no están alineados correctamente con la imagen aérea de fondo o con la traza GPS. Puede ajustar esas vías para situarlas en el lugar exacto.\n\nPrimero haga clic sobre la vía que desea cambiar. Esto la resaltará y mostrará los nodos o puntos de control a lo largo de la vía que la forman. A continuación simplemente arrastre esos puntos a la posición correcta. Si desea añadir nuevos puntos de control para dibujar la carretera con mayor detalle haga doble clic sobre la parte de la vía donde quiere añadir el nuevo nodo y este será creado en la vía.\n\nSi la vía conecta con otra carretera o camino pero esta conexión no aparece correctamente en el mapa puede arrastrar uno de los puntos de la vía hasta la otra carretera y se unirá automáticamente a ella mediante un nodo común. Es muy importante tener las carreteras conectadas en el mapa, ya que es esencial para proporcionar instrucciones correctas para la conducción si queremos que la cartografía se útil, por ejemplo, para los navegadores GPS.\n\n### Eliminar\n\nSi un camino es totalmente incorrecto -ha observado que no aparece en las imágenes de satélite y de manera ideal lo ha confirmado en campo- puede eliminarlo, lo cual lo borrará del mapa. Sea precavido al eliminar elementos del mapa. Como cualquier otra edición que haga este cambio será visto por todo el mundo y las imágenes de satélite a menudo no están actualizadas, por lo que una carretera que no existe en ellas pero sí en el mapa simplemente puede aparecer porque es de reciente construcción y otro usuario la ha añadido.\n\n### Crear\n\n¿Ha encontrado un lugar donde debería existir una carretera pero no aparece? Haga clic con el ratón sobre el icono 'Línea' situado en la parte superior izquierda del editor o simplemente presione la tecla '2'  de su teclado que es el acceso rápido para comenzar a dibujar una línea.\n\nHaga clic sobre el mapa en el inicio de la carretera para comenzar a dibujar. Si la vía se ramifica a partir de una carretera ya existente empiece haciendo clic sobre el lugar donde ambas conectan.\n\nHaga clic en puntos a lo largo de la vía para definir el trazado correcto de la carretera. La densidad de puntos dependerá de la complejidad del recorrido, por lo que es aconsejable dibujar desde un nivel de zoom apropiado. Si la vía que está dibujando atraviesa otra carretera conéctela con esta haciendo clic sobre el punto de intersección. Una vez haya terminado el dibujo haga doble clic con el ratón o presiones la tecla 'Return' o 'Intro' de su teclado para finalizar.\n",
             "gps": "# GPS\n\nLas trazas de GPS recogidas son una valiosa fuente de datos para OpenStreetMap. Este\neditor soporta trazas locales - archivos `.gpx` en su equipo local. Usted puede obtener\neste tipo de traza GPS con una serie de aplicaciones de smartphone, como también con\nhardware GPS personal.\n\nPara más información sobre cómo realizar un relevamiento GPS, lea\n[Mapear con un smartphone, GPS, o papel](http://learnosm.org/es/mobile-mapping/).\n\nPara utilizar una traza GPX para mapear, arrastre y suelte el archivo GPX en el editor\nde mapa. Si este es reconocido, se añadirá al mapa como una línea púrpura brillante.\nHaga clic en el menú 'Datos del mapa' en el lado derecho para activar,\ndesactivar o acercar a esta nueva capa alimentada por GPX.\n\nLa traza GPX no se carga directamente a OpenStreetMap - la mejor manera de\nutilizarlo es dibujar en el mapa, usándolo como guía para las nuevos elementos que\nagregue, y también [subirlo a OpenStreetMap](http://www.openstreetmap.org/trace/create)\npara que otros usuarios lo utilicen.\n",
             "imagery": "# Imágenes\n\nLas imágenes aéreas son un importante recurso para mapear. Una combinación\nde vuelos aéreos, vistas de satélite, y compilaciones de fuentes libres están disponibles\nen el editor bajo el menú 'Ajustes del fondo' a la derecha.\n\nDe forma predeterminada se presenta la capa de satélite de [Bing Maps](http://www.bing.com/maps/) en el editor, pero mientras se mueva y acerque el mapa a nuevas áreas\ngeográficas, nuevas fuentes estarán disponibles. Algunos países, como los Estados\nUnidos, Francia, y Dinamarca poseen imágenes de muy alta calidad disponible\npara algunas áreas.\n\nLas imágenes a veces están desplazadas de los datos del mapa debido a un error en el\nlado del proveedor de imágenes. Si observa muchos caminos desplazados del fondo,\nno los mueva inmediatamente para emparejarlos con el fondo. En su lugar puede ajustar\nlas imágenes para que coincidan con los datos existentes haciendo clic\nen 'Corregir alineación' en la opción 'Ajustes del fondo' de la interfaz.\n",
@@ -683,7 +683,7 @@
                     "douglas-avenue": "Avenida Donato",
                     "east-street": "Calle Estero",
                     "elm-street": "Calle Santa Elena",
-                    "flower-street": "Calle Florencio Balcarce",
+                    "flower-street": "Calle Florida",
                     "foster-street": "Calle Formosa",
                     "french-street": "Calle República Francesa",
                     "garden-street": "Calle Garcia Lorca",
@@ -842,7 +842,7 @@
                 "start_drag_midpoint": "Pequeños triángulos se dibujan en los *puntos intermedios* entre los nodos. Otra forma de crear un nuevo nodo es arrastrar un punto intermedio a una nueva ubicación. **Arrastre el triángulo del punto intermedio para crear un nuevo nodo a lo largo de la curva del camino.**",
                 "continue_drag_midpoint": "¡Esta línea se ve mucho mejor! Continúe ajustando esta línea haciendo doble clic o arrastrando puntos intermedios hasta que la curva coincida con la forma del camino. **Cuando esté satisfecho con la apariencia de la línea, haga clic en Aceptar.**",
                 "delete_lines": "Está bien eliminar líneas de caminos que no existen en el mundo real.{br}He aquí un ejemplo en el que la ciudad planeó una {street} pero nunca la construyó. Podemos mejorar esta parte del mapa eliminando las líneas extra.",
-                "rightclick_intersection": "La última calle real es {street1}, por lo que vamos a *dividir* a {street2} en esta intersección y quitar todo lo anterior. **Haga clic derecho en el nodo de intersección.**",
+                "rightclick_intersection": "La última calle que realmente existe es {street1}, por lo que vamos a *dividir* a {street2} en esta intersección y quitar todo lo anterior. **Haga clic derecho en el nodo de intersección.**",
                 "split_intersection": "**Haga clic en el botón {button} para dividir {street}.**",
                 "retry_split": "No ha hecho clic en el botón Dividir. Inténtelo de nuevo.",
                 "did_split_multi": "¡Bien hecho! {street1} ahora está dividida en dos partes. La parte superior se puede quitar. **Haga clic en la parte superior de {street2} para seleccionarla.**",
@@ -881,6 +881,110 @@
                 "help": "¡Ya está en condiciones de editar OpenStreetMap!{br}Puedes volver a reproducir este tutorial cualquier momento o ver más documentación haciendo clic en el botón ayuda {button}.",
                 "save": "¡No olvide guardar sus cambios regularmente!",
                 "start": "¡Comience a mapear!"
+            }
+        },
+        "shortcuts": {
+            "title": "Atajos de teclado",
+            "key": {
+                "alt": "Alt",
+                "backspace": "Retroceso",
+                "cmd": "Cmd",
+                "ctrl": "Ctrl",
+                "delete": "Suprimir",
+                "del": "Supr",
+                "end": "Fin",
+                "enter": "Intro",
+                "esc": "Esc",
+                "home": "Inicio",
+                "option": "Opción",
+                "pause": "Pausa",
+                "pgdn": "AvPág",
+                "pgup": "RePág",
+                "return": "Retorno",
+                "shift": "Mayús",
+                "space": "Espacio"
+            },
+            "gesture": {
+                "drag": "arrastrar"
+            },
+            "or": "-o-",
+            "browsing": {
+                "title": "Navegando",
+                "navigation": {
+                    "title": "Navegación",
+                    "pan": "Panorámica del mapa",
+                    "pan_more": "Panorámica del mapa a una pantalla",
+                    "zoom": "Acercar / Alejar",
+                    "zoom_more": "Acercar / Alejar mucho"
+                },
+                "help": {
+                    "title": "Ayuda",
+                    "help": "Muestra la ayuda/documentación",
+                    "keyboard": "Muestra atajos de teclado"
+                },
+                "display_options": {
+                    "title": "Opciones de pantalla",
+                    "background": "Muestra opciones del fondo",
+                    "background_switch": "Vuelve al último fondo",
+                    "map_data": "Muestra opciones de datos del mapa",
+                    "fullscreen": "Ingresar al modo de pantalla completa",
+                    "wireframe": "Alterna el modo rejilla",
+                    "minimap": "Alterna el minimapa"
+                },
+                "selecting": {
+                    "title": "Seleccionando elementos",
+                    "select_one": "Selecciona un solo elemento",
+                    "select_multi": "Selecciona múltiples elementos",
+                    "lasso": "Dibuja un lazo de selección alrededor de los elementos"
+                },
+                "with_selected": {
+                    "title": "Con elemento seleccionado",
+                    "infobox": "Alterna la caja de información / medida",
+                    "edit_menu": "Alterna el menú editar"
+                },
+                "vertex_selected": {
+                    "title": "Con nodo seleccionado",
+                    "previous": "Ir al nodo anterior",
+                    "next": "Ir al siguiente nodo",
+                    "first": "Ir al primer nodo",
+                    "last": "Ir al último nodo",
+                    "change_parent": "Cambia la vía raiz"
+                }
+            },
+            "editing": {
+                "title": "Editando",
+                "drawing": {
+                    "title": "Dibujando",
+                    "add_point": "Modo 'añadir punto'",
+                    "add_line": "Modo 'añadir línea'",
+                    "add_area": "Modo 'añadir área'",
+                    "place_point": "Coloca un punto",
+                    "disable_snap": "Mantener presionado para desactivar el ajuste de punto",
+                    "stop_line": "Finaliza el dibujo de una línea o área"
+                },
+                "operations": {
+                    "title": "Operaciones",
+                    "continue_line": "Continua una línea en el nodo seleccionado",
+                    "merge": "Combina (fusiona) los elementos seleccionados",
+                    "disconnect": "Desconecta los elementos en el nodo seleccionado",
+                    "split": "Divide una línea en dos en el nodo seleccionado",
+                    "reverse": "Invierte una línea",
+                    "move": "Mueve los elementos seleccionados",
+                    "rotate": "Rota los elementos seleccionados",
+                    "orthogonalize": "Endereza una línea / Escuadra esquinas de área",
+                    "circularize": "Circulariza una línea o área cerrada",
+                    "reflect_long": "Refleja los elementos a través del eje más largo",
+                    "reflect_short": "Refleja los elementos a través del eje más corto",
+                    "delete": "Elimina elementos seleccionados"
+                },
+                "commands": {
+                    "title": "Comandos",
+                    "copy": "Copia elementos seleccionados",
+                    "paste": "Pega elementos seleccionados",
+                    "undo": "Deshace la última acción",
+                    "redo": "Rehace la última acción",
+                    "save": "Guarda cambios"
+                }
             }
         },
         "presets": {
@@ -1451,7 +1555,7 @@
                     "label": "SSID (nombre de red)"
                 },
                 "kerb": {
-                    "label": "Rampa de bordillo/cordón"
+                    "label": "Bordillo/Cordón"
                 },
                 "lamp_type": {
                     "label": "Tipo"
@@ -1540,6 +1644,9 @@
                 },
                 "maxstay": {
                     "label": "Estadía máxima"
+                },
+                "maxweight": {
+                    "label": "Peso máximo"
                 },
                 "mtb/scale": {
                     "label": "Dificultad de bicicleta de montaña",
@@ -2421,7 +2528,7 @@
                 },
                 "amenity/police": {
                     "name": "Policía",
-                    "terms": "policía, policia, comisaría, gendarmería, cuartel, guardia civil, guardia municipal"
+                    "terms": "policía, policia, comisaría, comisaria, gendarmería, gendarmeria, cuartel, guardia civil, guardia municipal, prefectura, gna, pfa, psa"
                 },
                 "amenity/post_box": {
                     "name": "Buzón de correos",
@@ -2884,6 +2991,10 @@
                     "name": "Electricista",
                     "terms": "electricista, iluminista, electricidad"
                 },
+                "craft/electronics_repair": {
+                    "name": "Tienda de reparación de electrónicos",
+                    "terms": "reparación, electrónica, electrónicos, centro de servicio de reparación, aparatos, equipos, compuradora, ordenador, portátil, laptop, radio, televisión, tv, teléfono, celular, cámara, vídeo, procesadoras, trituradoras, lavadoras, microondas, planchas, refrigeradores, monitores"
+                },
                 "craft/gardener": {
                     "name": "Jardinero",
                     "terms": "jardinero,  jardinería, jardín"
@@ -3140,6 +3251,10 @@
                 "highway/cycleway": {
                     "name": "Ciclovía",
                     "terms": "camino, senda, sendero, carril bici, bicisenda, ciclovía, ciclorruta, pista, ciclista, ciclismo, bicicleta, bici"
+                },
+                "highway/elevator": {
+                    "name": "Ascensor",
+                    "terms": "ascensor, elevador, montacargas"
                 },
                 "highway/footway": {
                     "name": "Sendero peatonal",
@@ -3490,7 +3605,7 @@
                 },
                 "leisure": {
                     "name": "Ocio",
-                    "terms": "zona, diversión, entretenimiento, pasatiempo, distracción, recreo, ocio, esparcimiento"
+                    "terms": "zona, diversión, entretenimiento, pasatiempo, distracción, recreo, ocio, esparcimiento, tiempo libre"
                 },
                 "leisure/adult_gaming_centre": {
                     "name": "Centro de juegos para adultos",
@@ -4183,6 +4298,10 @@
                 "shop/antiques": {
                     "name": "Tienda de antigüedades",
                     "terms": "antigüedades, anticuario, colecciones, muebles antiguos, objetos antiguos, cuadros, pinturas, subastas"
+                },
+                "shop/appliance": {
+                    "name": "Tienda de electrodomésticos",
+                    "terms": "electrodomésticos, aire acondicionado, acondicionador de aire, aparatos, lavavajillas, secadora, heladera, freezer, congelador, nevera, parrilla, cocina, horno, frigorífico, estufa, lavarropas, lavadora, "
                 },
                 "shop/art": {
                     "name": "Tienda de arte",

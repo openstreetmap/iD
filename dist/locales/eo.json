@@ -624,7 +624,7 @@
         "help": {
             "title": "Helpo",
             "help": "# Helpo\n\nĈi tiu estas redaktilo por [OpenStreetMap](http://www.openstreetmap.org/) - la libera kaj redaktebla mondmapo. Vi povas ĝin uzi por aldoni kaj ĝisdatigi datumojn pri via ĉirkaŭaĵo, farante malfermkodan kaj malferm-datuman mapon de la mondo pli bona por ĉiuj.\n\nRedaktoj, kiujn vi faras sur ĉi tiu mapo estos videblaj por ĉiu, kiu uzas OpenStreetMap. Por fari redakton, vi devos [ensaluti](https://www.openstreetmap.org/login).\n\nLa [redaktilo 'iD'](http://ideditor.com/) estas kunlabora projekto, kies [fontkodo estas disponebla en GitHub](https://github.com/openstreetmap/iD).\n",
-            "editing_saving": "# Redaktado kaj konservado\n\nĈi tiu redaktilo estas destinita por labori ĝenerale enrete, kaj vi nun uzas ĝin per retejo.\n\n### Elektado de objektoj\n\nPor elekti map-objekton - kiel vojon aŭ interesejon - klaku ĝin sur la mapo. Tio ĉi markos elektitan objekton, malfermos panelon kun detaloj pri ĝi, kaj montros menuon de agoj pri objekto.\n\nPor elekti kelkajn objektojn, premtenu 'majusklan' klavon. Tiam aŭ klaku objektojn, kiujn vi volas elekti, aŭ trenu sur mapo por desegni rektangulon. Tiel vi desegnos zonon kaj elektos ĉiujn punktojn ene.\n\n### Konservado de redaktoj\n\nKiam vi estas ŝanĝanta ion, kiel redakti vojojn, konstruaĵojn kaj lokoj, tiuj ŝanĝoj estas konservataj loke antaŭ vi konservos ilin en servilo. Ne klopodu, se vi eraras - vi povas malfari ŝanĝojn klakante butonon 'malfari' kaj refari klakante butonon 'refari'.\n\nKlaku 'Konservi' por fini grupon da redaktoj, ekzemple vi fine mapigis terenon de urbo kaj vi volas komenci novan terenon. Vi havos ŝancon por kontroli kion vi estos farinta kaj la redaktilo montros uzeblajn konsilojn se io povus esti malĝusta.\n\nSe ĉio ŝajnos ĝuste, vi povos entajpi etan komenton eksplikantan faritajn ŝanĝojn, klaku 'Konservi' por publikigi viajn redaktojn al [OpenStreetMap.org](http://www.openstreetmap.org/), kie ili estos videblaj por ĉiuj aliaj uzantoj kaj pretaj por plia plibonigo.\n\nSe vi ne povas fini viajn redaktojn dum unufoje, vi povas fermi fenestron kun redaktilo, kaj reveni poste (ĉe sama foliumilo kaj komputilo) kaj la redaktilo restarigos vian laboron.\n\n### Uzado de redaktilo\n\nListon de disponeblaj fulmoklavoj oni trovos [ĉi tie](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
+            "editing_saving": "# Redaktado kaj konservado\n\nĈi tiu redaktilo estas destinita por labori ĝenerale enrete, kaj vi nun uzas ĝin per retejo.\n\n### Elektado de objektoj\n\nPor elekti map-objekton - kiel vojon aŭ interesejon - klaku ĝin sur la mapo. Tio ĉi markos elektitan objekton, malfermos panelon kun detaloj pri ĝi, kaj montros menuon de agoj pri objekto.\n\nPor elekti kelkajn objektojn, premtenu 'majusklan' klavon. Tiam aŭ klaku objektojn, kiujn vi volas elekti, aŭ trenu sur mapo por desegni rektangulon. Tiel vi desegnos zonon kaj elektos ĉiujn punktojn ene.\n\n### Konservado de redaktoj\n\nKiam vi estas ŝanĝanta ion, kiel redakti vojojn, konstruaĵojn kaj lokoj, tiuj ŝanĝoj estas konservataj loke antaŭ vi konservos ilin en servilo. Ne klopodu, se vi eraras - vi povas malfari ŝanĝojn klakante butonon 'malfari' kaj refari klakante butonon 'refari'.\n\nKlaku 'Konservi' por fini grupon da redaktoj, ekzemple vi fine mapigis terenon de urbo kaj vi volas komenci novan terenon. Vi havos ŝancon por kontroli kion vi estos farinta kaj la redaktilo montros uzeblajn konsilojn se io povus esti malĝusta.\n\nSe ĉio ŝajnos ĝuste, vi povos entajpi etan komenton eksplikantan faritajn ŝanĝojn, klaku 'Konservi' por publikigi viajn redaktojn al [OpenStreetMap.org](http://www.openstreetmap.org/), kie ili estos videblaj por ĉiuj aliaj uzantoj kaj pretaj por plia plibonigo.\n\nSe vi ne povas fini viajn redaktojn dum unufoje, vi povas fermi fenestron kun redaktilo, kaj reveni poste (ĉe sama foliumilo kaj komputilo) kaj la redaktilo restarigos vian laboron.\n\n### Uzado de redaktilo\n\nVi povas vidi liston de disponeblaj fulmoklavoj per premi la klavon '?'\n",
             "roads": "# Vojoj\n\nVi povas krei, korekti kaj forigi vojojn per ĉi tiu redaktilo. Vojo povas esti de iu ajn speco: piediradaj vojetoj, aŭtovojoj, biciklvojoj, kaj pli - ĉiu regule uzata vojo estas mapiginda.\n\n### Elektado\n\nKlaku vojon por ĝin elekti. Ĝia konturo ekvidebliĝos, kune kun eta ilara menuo sur la mapo kaj flanka breto montranta pli da informoj pri la vojo.\n\n### Redaktado\n\nOfte vi vidos vojojn, kiuj ne estos alĝustigitaj al la malantaŭa fotaro aŭ al GPS-spuro. Vi povas korekti tiujn vojojn, do ili troviĝos en ĝusta loko.\n\nUnue klaku vojon, kiun vi volas ŝanĝi. Tio ĉi markos ĝin kaj montros kontrolpunktojn laŭlonge de ĝi, kiujn vi povas treni al pli bonaj lokoj. Se vi volas aldoni novan kontrolpunkton por plidetaligi, duoble klaku parton de vojo sen nodo kaj ĝi estos aldonita.\n\nSe vojo estas konektita al alia vojo, sed ili ne ĝuste kunigitaj sur la mapo, vi povas treni unu el iliaj kontrolpunktoj sur alian vojon por kunigi ilin. Konektado de vojoj estas grava por la mapo kaj necesa por liveri navigadon.\n\nVi ankaŭ povas klaki ilon 'Movi' aŭ premu fulmoklavon 'M' por movi la tutan vojon per unu fojo kaj klaki denove por konservi ĉi tiun agon.\n\n### Forigado\n\nSe vojo estas tute erara - vi vidas, ke ĝi ne ekzistas sur satelita fotaro kaj eĉ vi konfirmis enloke, ke ĝi ne ekzistas - vi povas ĝin forigi el la mapo. Estu singarda dum forigado de objektoj - kiel ĉiu alia redakto, rezultoj estos videblaj al ĉiuj kaj sputinika fotaro estas ofte neĝisdata, do vojo simple povus esti ĵus konstruita.\n\nVi povas forigi vojon per klaki ĝin por ĝin elekti, sekve klaku piktogramon de rubujo aŭ premu forigan klavon.\n\n### Kreado\n\nEble vi trovis, ke ie povas esti vojon, tamen ĝi ne troviĝas sur la mapo? Klaku piktogramon de linio ĉe supra maldekstra angulo aŭ premu fulmoklavon '2' por komenci desegni linion.\n\nKlaku komencon de la vojo sur mapo por komenci desegni. Se vojo disiĝas el ekzistanta vojo, komencu per klaki lokon, kie ili konektiĝas.\n\nSekve klaku punktojn laŭlonge de vojo tiel, kiel ili formiĝas ĝusta kurso laŭ satelita fotaro aŭ GPS. Se desegnata vojo interkruciĝas kun alia vojo, konektu ilin per klaki sekcopunkton. Kiam vi finos desegni, duoble klaku aŭ premu enen-klavon.\n",
             "gps": "# GPS\n\nKolektitaj GPS-spuroj estas valoraj fontoj de datumoj por OpenStreetMap. Ĉi tiu redaktilo subtenas lokajn spurojn - .gpx dosierojn en via loka komputilo. Vi povas kolekti tiajn GPS-spurojn per multe da poŝtelefonaj aplikaĵoj aŭ per persona GPS-a aparato.\n\nPor pli da informoj kiel fari GPS-an esploron, legu pri [mapigado per poŝtelefono, GPS aŭ papero](http://learnosm.org/en/mobile-mapping/) (malesperante).\n\nPor uzi GPX-spuron por mapigado, ŝovu kaj demetu GPX-dosieron sur la map-redaktilon. Se ĝi estos rekonita, ĝi estos aldonita al la mapo kiel helpurpura linio. Klaku menuon 'Map-datumoj' ĉe dekstre  por aktivigi, malaktivigi aŭ pligrandigi al ĉi tiu nova GPX-a tavolo.\n\nGPX-spuro ne estas rekte alŝutita al OpenStreetMap - la plej bona maniero por uzi ĝin estas vidigi ĝin sur la mapo por desegni iujn objektojn kaj ankaŭ [alŝuti ĝin al OpenStreetMap](http://www.openstreetmap.org/trace/create) por ke aliaj uzantoj povos uzi ĝin.\n",
             "imagery": "# Fotaro\n\nAerfotaro estas grava fonto por mapigado. Kombino de aerfotoj, satelitaj fotoj kaj libere kreeblaj fontoj estas disponebla en la redaktilo per menuo 'Fonaj agordoj' ĉe dekstre.\n\nImplicite satelita tavolo de [Bing Mapoj](http://www.bing.com/maps/) estas montrata en la redaktilo, tamen kiam vi aldirektas kaj pligrandigas al aliaj lokoj, novaj fontoj iĝos disponeblaj. Por kelkaj landoj - kiel Usono, Francujo aŭ Danujo - tre altkvalita fotaro estas disponebla por iuj areoj.\n\nFotaro estas iam deŝovita de map-datumoj pro eraro rilatanta al retejo de liveranto. Se vi vidas multe da vojoj deŝovitaj de fono, ne abrupte movi ilin laŭ la fono. Anstataŭ vi povas alĝustigi fotaron tiel, ke ĝi kongruos kun ekzistaj datumoj per klaki 'Ĝustigi fotaran deŝovon' ĉe malsupro de menuo de fonaj agordoj.\n",
@@ -879,6 +879,111 @@
                 "help": "Vi nun pretas por redakti OpenStreetMap!{br}Vi ĉiam povas reludi ĉi tiun gvidilon aŭ vidi pliajn dokumentaron per klaki la butonon '{button} Helpo'.",
                 "save": "Ne forgesu regule konservi viajn ŝanĝojn!",
                 "start": "Ekigi mapigadon!"
+            }
+        },
+        "shortcuts": {
+            "title": "Fulmoklavoj",
+            "tooltip": "Montri ekranon de fulmoklavoj.",
+            "key": {
+                "alt": "Alt",
+                "backspace": "Backspace",
+                "cmd": "Cmd",
+                "ctrl": "Ctrl",
+                "delete": "Forig-klavo",
+                "del": "Del",
+                "end": "End",
+                "enter": "Enen-klavo",
+                "esc": "Esc",
+                "home": "Home",
+                "option": "Option",
+                "pause": "Pause",
+                "pgdn": "PgDn",
+                "pgup": "PgUp",
+                "return": "Return",
+                "shift": "Shift",
+                "space": "Spacostango"
+            },
+            "gesture": {
+                "drag": "treni"
+            },
+            "or": "-aŭ-",
+            "browsing": {
+                "title": "Foliumado",
+                "navigation": {
+                    "title": "Navigado",
+                    "pan": "Rulumi mapon",
+                    "pan_more": "Rulumi mapon je unu ekrano",
+                    "zoom": "Pligrandigi / malgrandigi",
+                    "zoom_more": "Pligrandigegi / malgrandigegi"
+                },
+                "help": {
+                    "title": "Helpo",
+                    "help": "Montri helpon/dokumentaron",
+                    "keyboard": "Montri fulmoklavojn"
+                },
+                "display_options": {
+                    "title": "Vidaj agordoj",
+                    "background": "Montri agordojn pri fono",
+                    "background_switch": "Baskuli reen al antaŭa fono",
+                    "map_data": "Montri agordojn pri map-datumoj",
+                    "fullscreen": "Enigi plenekranan reĝimon",
+                    "wireframe": "Baskuli map-plenigon",
+                    "minimap": "Baskuli mapeton"
+                },
+                "selecting": {
+                    "title": "Elektado de objektoj",
+                    "select_one": "Elekti unuopan objekton",
+                    "select_multi": "Elekti kelkajn objektojn",
+                    "lasso": "Elekti per kaptoŝnuro"
+                },
+                "with_selected": {
+                    "title": "Kun elektita objekto",
+                    "infobox": "Baskuli pri-dialogujon / mezur-dialogujon",
+                    "edit_menu": "Baskuli redakt-menuon"
+                },
+                "vertex_selected": {
+                    "title": "Kun elektita nodo",
+                    "previous": "Al antaŭa nodo",
+                    "next": "Al sekva nodo",
+                    "first": "Al unua nodo",
+                    "last": "Al fina nodo",
+                    "change_parent": "Baskuli al supera linio"
+                }
+            },
+            "editing": {
+                "title": "Redaktado",
+                "drawing": {
+                    "title": "Desegnado",
+                    "add_point": "'Aldoni punkton'-reĝimo",
+                    "add_line": "'Aldoni linion'-reĝimo",
+                    "add_area": "'Aldoni areo'-reĝimo",
+                    "place_point": "Enmeti punkton",
+                    "disable_snap": "Premteni por ne kapti punktojn",
+                    "stop_line": "Fini desegni linion aŭ areon"
+                },
+                "operations": {
+                    "title": "Agoj",
+                    "continue_line": "Pluigi linion ĉe elektita nodo",
+                    "merge": "Kunfandi elektitajn objektojn",
+                    "disconnect": "Malkunigi objektojn de elektita nodo",
+                    "split": "Disduigi linon de elektita nodo",
+                    "reverse": "Inversigi linion",
+                    "move": "Movi elektitajn objektojn",
+                    "rotate": "Turni elektitajn objektojn",
+                    "orthogonalize": "Rektigi linion / kvadratigi angulojn de areo",
+                    "circularize": "Rondigi fermitan linion aŭ areon",
+                    "reflect_long": "Speguli objektojn laŭ longa akso",
+                    "reflect_short": "Speguli objekton laŭ mallonga akso",
+                    "delete": "Forigi elektitajn objektojn/verticojn"
+                },
+                "commands": {
+                    "title": "Ordonoj",
+                    "copy": "Kopii elektitajn objektojn",
+                    "paste": "Alglui kopiitajn objektojn",
+                    "undo": "Malfari antaŭan agon",
+                    "redo": "Refari antaŭan agon",
+                    "save": "Konservi ŝanĝojn"
+                }
             }
         },
         "presets": {
@@ -1538,6 +1643,9 @@
                 },
                 "maxstay": {
                     "label": "Maksimuma restad-tempo"
+                },
+                "maxweight": {
+                    "label": "Maksimuma pezo"
                 },
                 "mtb/scale": {
                     "label": "Montbicikla malfacileco",
@@ -2874,6 +2982,10 @@
                     "name": "Sukeraĵejo",
                     "terms": "sukerajhejo,sukerajxejo,konditoro,sukeraĵisto,kukejo"
                 },
+                "craft/distillery": {
+                    "name": "Distilejo",
+                    "terms": "distilado,viskio,brando"
+                },
                 "craft/dressmaker": {
                     "name": "Tajlora laborejo (inaj vestoj)",
                     "terms": "tajloro,kudristo"
@@ -2881,6 +2993,10 @@
                 "craft/electrician": {
                     "name": "Elektrista oficejo",
                     "terms": "elektristo"
+                },
+                "craft/electronics_repair": {
+                    "name": "Elektronik-riparejo",
+                    "terms": "elektroniko,elektronikaĵoj,riparejo,riparisto"
                 },
                 "craft/gardener": {
                     "name": "Ĝardenista oficejo",
@@ -3138,6 +3254,10 @@
                 "highway/cycleway": {
                     "name": "Bicikl-vojo",
                     "terms": "biciklo,biciklovojo"
+                },
+                "highway/elevator": {
+                    "name": "Lifto",
+                    "terms": "levmaŝino,levmashino,levmasxino,levilo,leviĝilo,ŝtuparlifto"
                 },
                 "highway/footway": {
                     "name": "Trotuaro",
@@ -4182,6 +4302,10 @@
                     "name": "Antikvaĵa vendejo",
                     "terms": "antikvaĵejo,antikvajhejo,antikvajxejo"
                 },
+                "shop/appliance": {
+                    "name": "Elektronikaĵega vendejo",
+                    "terms": "elektronikoj,lavmaŝinoj,lavmashinoj,lavmasxinoj,frostujoj,fridujoj,polvosuĉiloj,senpolvigiloj,kuiriloj,forneloj,kuirejo"
+                },
                 "shop/art": {
                     "name": "Artaĵa vendejo",
                     "terms": "artaĵejo,antikvaĵejo,artajxvendejo,artajhvendejo"
@@ -4251,12 +4375,12 @@
                     "terms": "aŭtomobiloj,aŭtoj,autoj,auxtoj,salono de aŭtoj"
                 },
                 "shop/car_parts": {
-                    "name": "Aŭtomobil-partaj vendejo",
+                    "name": "Aŭtomobil-parta vendejo",
                     "terms": "partoj aŭtomobilaj,pecoj aŭtomobilaj"
                 },
                 "shop/car_repair": {
                     "name": "Aŭtoriparejo",
-                    "terms": "riparejo,aŭtoservejo,aŭtejo,autoriparejo,auxtoriparejo"
+                    "terms": "riparejo,aŭtoservejo,aŭtejo,autoriparejo,auxtoriparejo,meĥanisto,mekanisto,meĥanikisto,mekanikisto"
                 },
                 "shop/carpet": {
                     "name": "Tapiŝa vendejo",

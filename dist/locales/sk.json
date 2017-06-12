@@ -102,8 +102,8 @@
             "delete": {
                 "title": "Vymazať",
                 "description": {
-                    "single": "Vymaž tento objekt natrvalo.",
-                    "multiple": "Vymaž tieto objekty natrvalo."
+                    "single": "Vymazať tento objekt natrvalo.",
+                    "multiple": "Vymazať tieto objekty natrvalo."
                 },
                 "annotation": {
                     "point": "Odstránenie bodu.",
@@ -586,6 +586,8 @@
         "validations": {
             "disconnected_highway": "Rozpojená cesta",
             "disconnected_highway_tooltip": "Cesty by mali byť spojené s ďalšími cestami alebo vchodmi do budov.",
+            "old_multipolygon": "Multipolygónové značky na vonkajšej ceste",
+            "old_multipolygon_tooltip": "Tento štýl multipolygónu nie je schválený. Pridajte prosím značky samotnému multipolygónu namiesto vonkajšej cesty.",
             "untagged_point": "Neoznačený bod",
             "untagged_point_tooltip": "Vyberte typ objektu, ktorý popisuje, čo je tento bod.",
             "untagged_line": "Neoznačená čiara",
@@ -624,7 +626,6 @@
         "help": {
             "title": "Pomoc",
             "help": "# Pomoc\n\nToto je editor pre [OpenStreetMap](http://www.openstreetmap.org/), slobodnú a upravovateľnú mapu sveta. Môžete ho používať na pridávanie a aktualizovanie údajov vo vašom okolí a vylepšiť tak mapu sveta s otvoreným kódom a dátami pre všetkých.\n\nÚpravy, ktoré v tejto mape spravíte, budú viditeľné pre každého, kto používa OpenStreetMap. Na to, aby ste mohli upravovať, sa budete musieť prihlásiť [prihlásiť](https://www.openstreetmap.org/login).\n\n[iD editor](http://ideditor.com/) je kolaboratívny projekt so [zdrojovým kódom dostupným na GitHub](https://github.com/openstreetmap/iD).\n",
-            "editing_saving": "# Upravovanie a ukladanie\n\nTento editor je primárne navrhnutý na prácu online, a aj práve teraz\nho používate cez internetovú stránku.\n\n### Výber objektov\n\nPre výber objektu, ako napríklad cesta alebo bod záujmu, naň kliknite\nna mape. Týmto sa vybraný objekt zvýrazní, otvorí sa panel s jeho\npodrobnosťami a zobrazí sa ponuka s úkonmi, ktoré môžete s objektom urobiť.\n\nViacero objektov je možné vybrať podržaním klávesu \"Shift\". Potom jednoducho\nkliknite na objekty, ktoré chcete vybrať, alebo pretiahnite po mape akoby ste\nchceli nakresliť obdĺžnik. Týmto sa zobrazí rám a vyberú sa všetky objekty, ktoré\nsa v ňom nachádzajú.\n\n### Ukladanie úprav\nKeď urobíte zmeny ako úpravy ciest, budov a miest, tieto budú lokálne uložené,\naž pokiaľ ich neuložíte na server. Netrápte sa ak urobíte chybu. Zmeny môžete\nvrátiť späť kliknutím na tlačítko vrátiť a zopakovať kliknutím na tlačidlo zopakovať.\n\nKeď chcete ukončiť sériu úprav, kliknite na \"Ulož\". Napríklad ak ste dokončili\nčasť mesta a chcete začať s inou časťou. Budete mať možnosť si prehliadnuť,\nčo ste urobili a editor poskytne užitočné návrhy a upozornenia, ak niečo nie je so\nzmenami v poriadku.\n\nAk všetko vyzerá v poriadku, môžete vyplniť krátky komentár vysvetľujúci, čo ste\nurobili a kliknite znovu na \"Ulož\" pre odoslanie zmien\nna [OpenStreetMap.org](http://www.openstreetmap.org/), kde budú viditeľné\npre ostatných používateľov a tak dostupné pre ďalšie vylepšenia.\n\nAk nemôžete dokončiť úpravy počas jedného sedenia, môžete zatvoriť okno\nprehliadača, vrátiť sa späť (na rovnakom prehliadači a počítači) a editor vám\nponúkne obnoviť vašu prácu.\n\n### Používanie editora\n\nZoznam dostupných klávesových skratiek je dostupný [tu](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
             "roads": "# Cesty\n\nS týmto editorom môžete cesty vytvoriť, opraviť alebo vymazať. Cesty môžu byť rôzneho druhu: chodníky, diaľnice, lesné cestičky, cyklochodníky a iné. Akýkoľvek často prechádzaný úsek by malo byť možné zmapovať.\n\n### Výber\n\nKliknite na cestu pre jej výber. Viditeľným by sa mal stať jej obrys spolu s malou ponukou nástrojov na mape a postranným panelom, ukazujúcim dodatočné informácie o ceste.\n\n### Úprava\n\nČasto krát uvidíte cesty, ktoré nie sú zarovnané so snímkami pod nimi alebo s GPS stopu. Tieto cesty môžete upraviť tak, aby boli na správnom mieste.\n\nNajskôr kliknite na cestu, ktorú chcete zmeniť. Týmto sa zvýrazní a po jej dĺžke sa ukážu kontrolné body, ktoré môžete pretiahnuť na lepšiu pozíciu. Ak chcete pridať nový kontrolný bod pre viac detailov, dva krát kliknite na časť cesty bez uzla a jeden bude pridaný.\n\nAk sa cesta spája s inou cestou, ale nie je správne spojená na mape, môžete pretiahnuť jeden z jej kontrolných bodov na druhú cestu, aby ste ich spojili. Spojenie ciest je dôležité pre mapu a nevyhnutné pre poskytovanie navigácie na cestách.\n\nMôžete tiež kliknúť na nástroj \"Presuň\" alebo stlačiť kláves \"M\" pre posunutie celej cesty naraz a potom kliknite znovu, aby ste uložili presun.\n\n### Vymazávanie\n\nAk je cesta úplne nesprávna - vidíte, že cesta neexistuje na satelitných snímkoch a najlepšie mate potvrdené zo samotného miesta, že tam cesta nie je - môžete ju vymazať, čím ju odstránite z mapy. Pri vymazávaní objektov buďte obozretný, rovnako ako pri iných úpravách sú výsledky viditeľné ostatnými a satelitné snímky sú často neaktuálne, takže cesta môže byť jednoducho novopostavená.\n\nCestu môžete vymazať, tak že na ňu kliknete čim ju vyberiete  a potom kliknete na ikonu smetného koša alebo stlačením klávesu \"Delete\".\n\n### Vytváranie\n\nZistili ste, že niekde by mala byť cesta ale ona tam nie je? Kliknite naľavo hore na ikonu \"Čiara\" alebo stlačte kláves \"2\" pre kreslenie čiary.\n\nAby ste začali kresliť, kliknite na začiatok cesty na mape. Ak cesta odbočuje z inej existujúcej cesty, začnite kliknútím na miesto, kde sa spájajú.\n\nPotom kliknite na body pozdĺž cesty tak, aby nasledovali správny smer podľa satelitných snímkov alebo GPS. Ak cesta, ktorú kreslíte, pretína ďalšiu cestu, spojte ich kliknutím v mieste križovatky. Keď ste hotový s skreslením, dva krát kliknite alebo stlačte kláves \"Enter\" na vašej klávesnici.\n",
             "gps": "# GPS\n\nzozbierané GPS údaje sú najcennejší zdroj dát pre OpenStreetMap. Tento editor\npodporuje stopy z lokálnych \".gpx\" súborov na vašom počítači. Tento typ GPS stôp\nmôžete zachytiť pomocou rôznych aplikácií pre smartfóny ako aj GPS\nprístrojmi.\n\nPre informácie, ako robiť GPS prieskum, si prečítajte\n[Mapovanie so smartfónom, GPS alebo papierom](http://learnosm.org/en/mobile-mapping/).\n\nPre použitie GPX stopy pre mapovanie, pretiahnite a pustite GPX súbor na mapový\neditor. Po rozpoznaní, bude pridaná na mapu ako jasná fialová\nčiara. Kliknite na ponuku \"Mapové údaje\" na pravej strane pre zapnutie,\nvypnutie alebo priblíženie na túto novú GPX vrstvu.\n\nGPX stopa nie je priamo nahraná na OpenStreetMap. Najlepší spôsob ako\nju využiť je, použiť ju ako predlohu pre zakreslovanie nových objektov\na potom ju [nahrať na OpenStreetMap](http://www.openstreetmap.org/trace/create)\npre ďalších uživateľov.\n",
             "imagery": "# Snímky povrchu\n\nLetecké snímky sú dôležitým zdrojom pre mapovanie. Kombinácia leteckých fotografií, satelitných snímok a voľne skompilovaných zdrojov je v editore dostupná vpravo pod ponukou \"Nastavenia pozadia\".\n\nŠtandardne je v editore predvolená satelitná vrstva z [Bing Maps](http://www.bing.com/maps/), ale ako posuniete a priblížite mapu na nové geografické miesta, dostupnými sa stanú nové zdroje. Niektoré krajiny ako Spojené Štáty, Francúzsko, a Dánsko majú pre niektoré oblasti dostupné veľmi kvalitné snímky.\n\nSnímky môžu byť niekedy posunuté voči mapovým dátam, kvôli chybe na strane poskytovateľa snímkov. Ak uvidíte veľa ciest posunutých voči pozadiu, neposúvajte ich hneď všetky, aby ste ich zarovnali s pozadím. Namiesto toho môžete upraviť snímky, aby odpovedali existujúcim dátam tým, že kliknete na \"Oprav zarovnanie\" naspodku Nastavenia pozadia.\n",
@@ -638,16 +639,128 @@
             "ok": "OK",
             "graph": {
                 "block_number": "<value for addr:block_number>",
+                "city": "Smolník nad Žitavou",
                 "county": "<value for addr:county>",
                 "district": "<value for addr:district>",
                 "hamlet": "<value for addr:hamlet>",
                 "neighbourhood": "<value for addr:neighbourhood>",
+                "postcode": "490 93",
                 "province": "<value for addr:province>",
                 "quarter": "<value for addr:quarter>",
                 "state": "<value for addr:state>",
                 "subdistrict": "<value for addr:subdistrict>",
                 "suburb": "<value for addr:suburb>",
-                "countrycode": "sk"
+                "countrycode": "sk",
+                "name": {
+                    "1st-avenue": "Slnečná",
+                    "2nd-avenue": "Nová",
+                    "4th-avenue": "Karpatská",
+                    "5th-avenue": "Veterná",
+                    "6th-avenue": "Kožušnícka",
+                    "6th-street": "Agátová",
+                    "7th-avenue": "Tehelná",
+                    "8th-avenue": "Žitná",
+                    "9th-avenue": "Robotnícka",
+                    "10th-avenue": "Farská",
+                    "11th-avenue": "Jánošíkova",
+                    "12th-avenue": "Košická",
+                    "access-point-employment": "Agentúra Kappa",
+                    "adams-street": "Eleny Maróthy-Šoltésovej",
+                    "andrews-elementary-school": "Základná škola Martina Kukučína",
+                    "andrews-street": "Kukučínova",
+                    "armitage-street": "Inovecká",
+                    "barrows-school": "Stredné odborné učilište strojárske",
+                    "battle-street": "Duklianska",
+                    "bennett-street": "Družstevná",
+                    "bowman-park": "Mestský park",
+                    "collins-drive": "Kapušianska",
+                    "conrail-railroad": "Trať ŽSR",
+                    "conservation-park": "Žitavský park",
+                    "constantine-street": "Metodova",
+                    "cushman-street": "Priečna",
+                    "dollar-tree": "Sekáč Bangkok",
+                    "douglas-avenue": "Janka Kráľa",
+                    "east-street": "Ruská",
+                    "elm-street": "Lipová",
+                    "flower-street": "Kvetná",
+                    "foster-street": "Práce",
+                    "french-street": "Francúzska",
+                    "garden-street": "Záhadná",
+                    "gem-pawnbroker": "Záložňa Uno",
+                    "golden-finch-framing": "Sklenárstvo Da Vinci",
+                    "grant-avenue": "Národná",
+                    "hoffman-pond": "Bottov rybník",
+                    "hoffman-street": "Jána Bottu",
+                    "hook-avenue": "P. O. Hviezdoslava",
+                    "jefferson-street": "Vajanského",
+                    "kelsey-street": "Strojárenská",
+                    "lafayette-park": "Park SNP",
+                    "las-coffee-cafe": "Kaviareň tekvicové latte",
+                    "lincoln-avenue": "Svätoplukova",
+                    "lowrys-books": "Kníhkupectvo Gutenberg",
+                    "lynns-garage": "Autoservis A je to",
+                    "main-street-barbell": "Záložňa Golden",
+                    "main-street-cafe": "Kaviareň Jarmilka",
+                    "main-street-fitness": "Fitness centrum Spartan",
+                    "main-street": "Hlavná",
+                    "maple-street": "Floriánska",
+                    "marina-park": "Žabí park",
+                    "market-street": "Obchodná",
+                    "memory-isle-park": "Pustý park",
+                    "memory-isle": "Pustý ostrov",
+                    "michigan-avenue": "Slovenského národného povstania",
+                    "middle-street": "Sokolská",
+                    "millard-street": "Študentská",
+                    "moore-street": "Hurbanova",
+                    "morris-avenue": "Štúrova",
+                    "mural-mall": "Ulička oddychu",
+                    "paisanos-bar-and-grill": "U Fachmana",
+                    "paisley-emporium": "Druhá móda",
+                    "paparazzi-tattoo": "Super kérky",
+                    "pealer-street": "Okružná",
+                    "pine-street": "Podhorská",
+                    "pizza-hut": "Rýchla pizza",
+                    "portage-avenue": "Slovenských partizánov",
+                    "portage-river": "Domanižanka",
+                    "preferred-insurance-services": "Všeobecná zdravotná poisťovňa",
+                    "railroad-drive": "Železničná",
+                    "river-city-appliance": "Elektrosvet",
+                    "river-drive": "Riečna",
+                    "river-road": "Riečna",
+                    "river-street": "Žitavská",
+                    "riverside-cemetery": "Starý cintorín",
+                    "riverwalk-trail": "Nábrežný chodník",
+                    "riviera-theatre": "Divadlo Nová scéna",
+                    "rocky-river": "Slatina",
+                    "saint-joseph-river": "Žitava",
+                    "scidmore-park-petting-zoo": "Zoo pri Starom parku",
+                    "scidmore-park": "Starý park",
+                    "scouter-park": "Park spisovateľov",
+                    "sherwin-williams": "Farby-Laky",
+                    "south-street": "Južná",
+                    "southern-michigan-bank": "Fatrabanka",
+                    "spring-street": "Jarná",
+                    "sturgeon-river-road": "Mlynská",
+                    "three-rivers-city-hall": "Mestský úrad Smolník nad Žitavou",
+                    "three-rivers-elementary-school": "1. Základná škola",
+                    "three-rivers-fire-department": "Požiarna stanica Smolník",
+                    "three-rivers-high-school": "Bilingválne gymnázium Jozefa Zbranského",
+                    "three-rivers-middle-school": "Stredná odborná škola jadrovej fúzie",
+                    "three-rivers-municipal-airport": "Medzinárodné letisko Jozefa Murgaša",
+                    "three-rivers-post-office": "Hlavná pošta",
+                    "three-rivers-public-library": "Okresná knižnica",
+                    "three-rivers": "Smolník nad Žitavou",
+                    "unique-jewelry": "Zlatníctvo KM - Karol Malý",
+                    "walnut-street": "1. mája",
+                    "washington-street": "Bratislavská",
+                    "water-street": "Československej armády",
+                    "west-street": "Kmeťova",
+                    "wheeler-street": "Krížová",
+                    "william-towing": "Autoservis pitstop",
+                    "willow-drive": "Odborárov",
+                    "wood-street": "Stromová",
+                    "world-fare": "Smolnícke suveníry"
+                }
             },
             "welcome": {
                 "title": "Uvítanie",
@@ -661,6 +774,8 @@
             },
             "navigation": {
                 "title": "Navigácia",
+                "drag": "Hlavná plocha zobrazuje nad pozadím mapové údaje z OpenStreetMap.{br}Presúvať sa môžete ťahaním za mapu alebo scrolovaním rovnako, ako u iných webových máp. **Potiahnite za mapu!**",
+                "zoom": "Mapu môžete priblížiť alebo oddialiť skrolovaním pomocou kolieska na myši alebo trackpadu, prípadne kliknutím na tlačítka {plus}/{minus}. **Priblížte mapu!**",
                 "features": "Slovo *objekty* používame pre popis vecí, ktoré sa zobrazujú na mape. Všetko v reálnom svete môže byť zmapované ako objekt v OpenStreetMap.",
                 "points_lines_areas": "Mapové objekty sú reprezentované pomocou *bodov, čiar alebo plôch.*",
                 "nodes_ways": "V OpenStreetMap sa body niekedy volajú *uzly*, a čiary a plochy sa niekedy volajú *cesty*. ",
@@ -721,14 +836,48 @@
                 "did_name_road": "Vyzerá to dobre! Ďalej sa naučíme ako upraviť tvar čiary.",
                 "update_line": "Niekedy budete musieť zmeniť tvar existúcej čiary. Tu je cesta, ktorá nevyzerá celkom vporiadku.",
                 "add_node": "Môžeme k nej pridať niekoľko uzlov, aby sme vylepšili jej tvar. Jeden zo spôsobov ako pridať uzol je dvojkliknúť na čiaru, kde chcete pridať uzol. **Dvojkliknite na čiaru a pridajte nový uzol.**",
-                "start_drag_endpoint": "Keď je čiara vybraná, môžete presunúť hociktorý jej uzol tým, že naň kliknete, podržíte ľavé tlačítko a zaňho potiahnete. **Potiahnite za koncový bod a presuňte ho na misto, kde sa obe cesty pretínajú.**"
+                "start_drag_endpoint": "Keď je čiara vybraná, môžete presunúť hociktorý jej uzol tým, že naň kliknete, podržíte ľavé tlačítko a zaň potiahnete. **Potiahnite za koncový bod a presuňte ho na misto, kde sa obe cesty pretínajú.**",
+                "finish_drag_endpoint": "Toto miesto vyzerá dobre. **Uvoľnením ľavého tlačítka na myši dokončíte presúvanie.**",
+                "start_drag_midpoint": "V *stredovom bode* medzi uzlami sa zobrazujú malé trojuholníky. Ďalšou možnosťou ako vytvoriť nový uzol je potiahnuť stredový bod na nové miesto. **Potiahnite za trojuholník stredového bodu a vytvorte tak nový bod na cestnom oblúku.**",
+                "continue_drag_midpoint": "Teraz už čiara vyzerá oveľa lepšie! Pokračujte v upravovaní čiary dvojkliknutím alebo ťahaním za stredové body, až pokiaľ nebude krivka zodpovedať tvaru cesty. **Keď budete spokojný s tým, ako čiara vyzerá, kliknite na OK.**",
+                "delete_lines": "Je vporiadku vymazať čiary, ktorých cesty už neexitujú v reálnom svete.{br}Tu je príklad, keď mesto plánovalo ulicu {street}, ale nikdy ju nepostavilo. Túto časť mapy môžeme vylepšiť tak, že vymažeme prebytočné čiary.",
+                "rightclick_intersection": "Posledná existujúca cesta je ulica {street1}, takže ulicu {street2} *rozdelíme* v tejto križovatke a odstránime všetko nad ňou. **Kliknite pravým tlačítkom na uzol križovatky.**",
+                "split_intersection": "**Kliknite na tlačítko {button} a rozdeľte ulicu {street}.**",
+                "retry_split": "Neklikli ste na na tlačítko Rozdeliť. Skúste to znova.",
+                "did_split_multi": "Výborne! {street1} je teraz rozdelená na dve časti. Horná časť môže byť vymazaná. **Kliknite na hornú časť ulice {street2}, aby ste ju vybrali.**",
+                "did_split_single": " **Kliknite na hornú časť {street2}, aby ste ju vybrali.**",
+                "multi_select": "{selected} je teraz vybraná. Vyberme tiež ulicu {other1}. Vybrať viacero objektov naraz môžete pomocou kliknutia s podržaním klávesu shift.  **Podržte kláves shift a kliknite na {other2}**",
+                "multi_rightclick": "Dobre! Obe čiary na určené vymazanie sú vybrané.  **Kliknite pravým tlačitkom na jednu z čiar, čím zobrazíte editačné menu.**",
+                "multi_delete": "**Kliknite na tlačítko {button} a vymažte prebytočné čiary.**",
+                "retry_delete": "Neklikli ste na tlačítko Vymazať. Skúste to znova.",
+                "play": "Výborne! Využite schopnosti, ktoré ste sa naučili v tejto kapitole a cvične upravte zopár čiar. **Keď budete pripravený pokračovať na ďalšiu kapitolu, kliknite na \"{next}\".**"
             },
             "buildings": {
                 "title": "Budovy",
-                "retry_circle": "Neklikli ste na tlačítko Usporiadať do kruhu. Skúste to ešte raz."
+                "add_building": "OpenStreetMap je najväčšia databáza budov na svete.{br}Môžete ju pomôcť vylepšiť tým, že obkreslíte budovy, ktoré ešte nie sú zmapované. **Kliknite na tlačítko {button}Plocha a pridajte novú plochu.**",
+                "start_building": "Pridajme do mapy tento dom obkreslením jeho obrysov.{br}Budovy by mali byť obkreslované pozdĺž ich pôdorysu tak presne ako je to len možné. **Kliknite alebo stlačte medzerník pre umiestnenie počiatočného uzla na jeden z rohov budovy.**",
+                "continue_building": "Pokračujte v pridávaní uzlov a obkreslovaní obrysu budovy. Nezabudnite, že mapu môžete priblížiť ak chcete pridať viac detajlov.{br}Dokončite budovu stlačením klávesu enter, alebo kliknutím buď na prvý alebo posledný uzol. **Dokončite obkreslovanie budovy.**",
+                "retry_building": "Zdá sa, že ste mali problém s umiestňovaním uzlov na rohy budovy. Skúste to znova!",
+                "choose_category_building": "**Vyberte {category} zo zoznamu.**",
+                "choose_preset_house": "Existuje veľa typov budov, ale táto je očividne dom.{br}Ak ste si neni istý typom, je vporiadku vybrať všeobecný typ \"Budova\". **Vyberte {preset} typ.**",
+                "close": "**Stlačte escape alebo kliknite na tlačítko {button} a zatvorte editor objektov.**",
+                "rightclick_building": "**Kliknite pravým tlačítkom, čim vyberiete budovu, ktorú ste práve vytvorili a zobrazíte editačné menu.**",
+                "square_building": "Dom, ktorý ste práve vytvorili bude vyzerať ešte lepšie s dokonale pravouhlými rohmi. **Kliknite na tlačítko {button}, čím usporiadate budovu do pravého uhla.**",
+                "retry_square": "Neklikli ste na tlačitko Usporiadať do pravého uhla. Skúste to ešte raz.",
+                "done_square": "Vidíte ako sa rohy budovy posunuli na ich správne miesto? Poďme sa naučiť ešte jeden užitočný trik.",
+                "add_tank": "Ďalej obkreslíme tento kruhový zásobník. **Kliknite na tlačítko {button} Plocha a pridajte novú plochu.**",
+                "start_tank": "Nebojte sa, numusíte nakresliť dokonalý kruh. Stačí, ak nakreslíte plochu vo vnútri zásobníka, ktorá sa dotýka jeho okraja. **Kliknite alebo stlačte medzerník pre umiestnenie počiatočného uzla na okraj zasobníku.**",
+                "continue_tank": "Pridajte ešte zopár uzlov okolo jeho okraju. Kruh bude vytvorený na vonkajšej strane uzlov, ktoré nakreslíte.{br}Dokončite plochu stlačením klávesu enter, alebo kliknutím buď na prvý alebo posledný uzol. **Dokončite obkreslovanie zásobníku.**",
+                "search_tank": "**Vyhľadajte \"{preset}.**",
+                "choose_tank": "**Vyberte {preset} zo zoznamu.**",
+                "rightclick_tank": "**Kliknite pravým tlačítkom, čim vyberiete zásobník, ktorý ste práve vytvorili a zobrazíte editačné menu.**",
+                "circle_tank": "**Kliknite na tlačítko {button}, čím usporiadate zásobník do kruhu.**",
+                "retry_circle": "Neklikli ste na tlačítko Usporiadať do kruhu. Skúste to ešte raz.",
+                "play": "Výborne! Skúste obkresliť zopár ďalších budov a vuskúšajte niektoré ďalšie príkazy v editačnom menu. **Keď budete pripravený pokračovať na ďalšiu kapitolu, kliknite \"{next}\".**"
             },
             "startediting": {
                 "title": "Začať upravovať",
+                "help": "Teraz ste pripravný upravovať OpenStreetMap!{br}Túto prehliadku môžete hocikedy zopakovať alebo si môžete prezrieť dokumentáciu tým, že kliknete na tlačítko {button} Pomoc.",
                 "save": "Nezabudnite pravidelne ukladať vaše zmeny!",
                 "start": "Začnite mapovať!"
             }
@@ -906,6 +1055,9 @@
                 "bicycle_parking": {
                     "label": "Typ"
                 },
+                "board_type": {
+                    "label": "Typ"
+                },
                 "boundary": {
                     "label": "Typ"
                 },
@@ -917,6 +1069,12 @@
                 },
                 "building_area": {
                     "label": "Budova"
+                },
+                "bunker_type": {
+                    "label": "Typ"
+                },
+                "camera/direction": {
+                    "placeholder": "45, 90, 180, 270"
                 },
                 "capacity": {
                     "label": "Kapacita",
@@ -943,12 +1101,18 @@
                         "WSW": "Západo-juhozápad"
                     }
                 },
+                "castle_type": {
+                    "label": "Typ"
+                },
                 "clock_direction": {
                     "label": "Smer",
                     "options": {
                         "anticlockwise": "Proti smeru hodinových ručičiek",
                         "clockwise": "V smere hodinových ručičiek"
                     }
+                },
+                "club": {
+                    "label": "Typ"
                 },
                 "collection_times": {
                     "label": "Časy výberov"
@@ -1225,6 +1389,13 @@
                 "man_made": {
                     "label": "Typ"
                 },
+                "map_type": {
+                    "label": "Typ"
+                },
+                "maxheight": {
+                    "label": "Maximálna výška",
+                    "placeholder": "2, 2.5, 3, 3.5, 4, 5"
+                },
                 "maxspeed": {
                     "label": "Povolená rýchlosť",
                     "placeholder": "40, 50, 60..."
@@ -1494,6 +1665,9 @@
                         "very_horrible": "Špecializovaný off-road: traktor, štvorkolka"
                     },
                     "placeholder": "Malé kolieska, kolesá, off-road..."
+                },
+                "social_facility": {
+                    "label": "Typ"
                 },
                 "source": {
                     "label": "Zdroj"

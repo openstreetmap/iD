@@ -626,7 +626,6 @@
         "help": {
             "title": "Ajuda",
             "help": "# Ajuda\n\nEste é um editor para [OpenStreetMap](http://www.openstreetmap.org/), o mapa mundial livre e editável. Você pode usá-lo para adicionar e atualizar de dados em sua área,  tornando um mapa mundi de código aberto melhor para todos.\n\nAs edições que você fizer nesse mapa serão visíveis para todos que usam OpenStreetMap. Para fazer uma edição você precisará se [identificar](https://www.openstreetmap.org/login).\n\nO [editor iD](http://ideditor.com/) é um projeto colaborativo com o [código fonte disponível no GitHub](https://github.com/openstreetmap/iD).\n",
-            "editing_saving": "# Editando e Salvando\n\nEsse editor é feito para trabalhar on-line e você está neste momento\nacessando-o através de uma página na Internet.\n\n### Selecionando Elementos\n\nPara selecionar um elemento do mapa, como uma estrada ou um ponto de\ninteresse, clique sobre ele. Isso vai pôr o elemento selecionado em destaque,\nabrir um painel com detalhes sobre ele e mostrar um menu de coisas que podem\nser feitas com ele.\n\nMúltiplos elementos podem ser selecionados segurando a\ntecla \"Shift\" e clicando nos quais você quer selecionar ou arrastando no mapa\npara desenhar um retângulo. Isso vai selecionar todos os elementos que\nestiverem dentro da caixa que foi desenhada.\n\n### Salvando Edições\n\nQuando você faz alterações como editar ruas, prédios e locais, elas são\nguardadas localmente até que você as envie para o servidor. Não se preocupe\nse você cometer algum deslize - você pode desfazer alterações clicando no\nbotão de desfazer e também refazer as alterações clicando no botão de refazer.\n\nClique em \"Salvar\" para finalizar um conjunto de alterações. Por exemplo, você\ncompletou uma área de uma cidade e gostaria de começar a editar uma outra\nárea. Você terá a chance de revisar o que foi feito até o momento e o editor\nmostrará sugestões e dicas se alguma coisa parecer estar errada com as suas\nalterações.\n\nSe tudo parecer estar OK, você pode inserir um breve comentário explicando\nas mudanças que você fez e clicar em \"Salvar\" de novo para enviar as mudanças\npara o [OpenStreetMap](http://www.openstreetmap.org/), onde elas estarão\nvisíveis para todos os outros usuários.\n\nSe você não conseguir concluir uma sessão de edição, você pode fechar a\njanela do editor e voltar mais tarde (no mesmo navegador e computador) que\no editor irá oferecer a possibilidade de restaurar o seu trabalho.\n\n### Usando o editor\n\nUma lista com os atalhos de teclado disponíveis pode ser encontrada [aqui](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
             "roads": "# Estradas\n\nVocê pode criar, corrigir e excluir estradas com este editor. Estradas podem ser de vários tipos: caminhos, estradas, trilhas, ciclovias e muito mais - qualquer segmento onde se passa, mesmo que às vezes, pode ser mapeado.\n\n### Selecionando\n\nClique em uma estrada para selecioná-la. Um esboço deve tornar-se visível, junto com um pequeno menu de ferramentas no mapa e uma barra lateral mostrando mais informações sobre a estrada.\n\n### Modificando\n\nMuitas vezes você vai encontrar estradas que não estão alinhadas com as imagens por trás delas ou com uma faixa de GPS. Você pode ajustar estas estradas para que elas fiquem no lugar certo.\n\nPrimeiro clique no caminho que você deseja alterar. Isso irá destacá-lo e mostrar pontos de controle ao longo dela que você pode arrastar para locais melhores. Se o que você deseja é adicionar novos pontos de controle para obter mais detalhes, clique duas vezes em uma parte da estrada sem um ponto, e um ponto será adicionado.\n\nSe a estrada se conecta a uma outra estrada, mas não está corretamente conectada no mapa, você pode arrastar um de seus pontos de controle para a outra estrada a fim de juntá-las. Ter estradas que se conectam é importante para o mapa e essencial para fornecer instruções de direção.\n\nVocê também pode clicar na ferramenta 'Mover' ou pressione a tecla 'M' para mover o caminho inteiro de uma vez, e em seguida, clique novamente para salvar esse movimento.\n\n### Apagando\n\nSe uma estrada está completamente errada - você pode ver que ela não existe nas imagens de satélite e, junto a isso, ter confirmado localmente que ela não existe - você pode apagá-la do mapa. Seja cauteloso ao excluir objetos - como qualquer outra edição, os resultados são vistos por todos, e como as imagens de satélite podem estar desatualizadas, a estrada pode simplesmente ser recém-construída.\n\nVocê pode excluir um caminho, clicando sobre ele para selecioná-lo, em seguida, clicar no ícone de lixeira ou pressionando a tecla 'Delete'.\n\n### Criando\n\nEncontrou um lugar onde deveria ter uma estrada, mas não tem? Clique no botão 'Linha' no canto superior esquerdo do editor ou pressione a tecla de atalho '2' para começar a desenhar uma linha.\n\nClique no início da estrada no mapa para começar a desenhar. Se a estrada se ramifica de uma estrada existente, comece clicando sobre o lugar onde eles se conectam.\n\nEm seguida, clique em pontos ao longo da estrada para que ela siga o caminho certo, de acordo com imagens de satélite ou GPS. Se a estrada que você está desenhando atravessa outra estrada, ligue-as clicando sobre o ponto de intersecção. Quando você terminar de desenhar, clique duas vezes ou pressione 'Voltar' ou 'Enter' no seu teclado.\n",
             "gps": "# GPS\n\nOs dados de GPS são as fontes mais confiáveis do OpenStreetMap. Este editor suporta trilhas locais - arquivos '.gpx'. Você pode utilizar aplicativos de celular ou aparelhos de GPS para coletar esse tipo de trilha. Para informações sobre como realizar levantamento com GPS, leia [Mapeando com smartphone, GPS ou papel](http://learnosm.org/pt/mobile-mapping/).\n\nPara usar uma trilha GPX para mapeamento, arraste e solte o arquivo GPX no editor de mapa iD. Caso seja reconhecida, será adicionada ao mapa como linhas roxo-claras. Clique no menu 'Dados do Mapa', no lado direito, para ativar, desativar ou focar o zoom nesta nova camada alimentada pelo GPX.\n\nA trilha GPX não é diretamente enviada ao OpenStreetMap - a melhor maneira para usá-la é desenhar no mapa, usando-a como um guia para os novos elementos que você adicionar, e também [enviá-lo ao OpenStreetMap](http://www.openstreetmap.org/trace/create) para que outros usuários possam usá-la.\n",
             "imagery": "# Imagens aéreas\n\nAs imagens aéreas são um recurso muito importante para o mapeamento.\nFotos de avião, de satélite e de outras fontes livre estão disponíveis no editor,\nno menu \"Configurações da Imagem de Fundo\" à direita.\n\nPor padrão, as imagens de satélite do [Bing Maps](http://www.bing.com/maps/)\nestão habilitadas no editor, mas ao mover e aproximar o mapa para certas áreas,\nnovas fontes de imagens estarão disponíveis. Alguns países, tais como os EUA, a\nFrança e a Dinamarca, têm imagens aéreas de alta qualidade disponíveis em algumas áreas.\n\nAtenção: as imagens aéreas algumas vezes não batem exatamente com o\nque há em terra, isto é, têm algum deslocamento por causa de algum erro por\nparte de quem as gerou. Se você notar que muitas ruas estão deslocadas\nem comparação com a imagem de fundo, não as alinhe imediatamente com\na imagem. Em vez disso ajuste a imagem para que ela se alinhe com as ruas\natravés da opção \"Ajustar o deslocamento da imagem de fundo\" no final do painel de Configurações da Imagem de Fundo.\n",
@@ -845,7 +844,7 @@
                 "rightclick_intersection": "A última rua de verdade é a {street1}, então vamos dividir a {street2} neste cruzamento e remover tudo que estiver ao norte dele. **Clique com o botão direito sobre o nó do cruzamento.**",
                 "split_intersection": "**Clique no botão {button} para dividir a {street}.**",
                 "retry_split": "Você não clicou no botão Dividir. Vamos tentar novamente.",
-                "did_split_multi": "Muito bem! A {street1} está agora dividida em duas partes. Esta parte pode ser removida. **Clique nesta parte da {street2} para selecioná-la.**",
+                "did_split_multi": "Muito bem! A {street1} agora está dividida em duas partes. A parte de cima pode ser removida. **Clique na parte de cima da {street2} para selecioná-la.**",
                 "did_split_single": "**Clique na parte norte da {street2} para selecioná-la.**",
                 "multi_select": "Agora a {selected} está selecionada. Vamos selecionar também a {other1}. Você pode clicar segurando a tecla Shift para selecionar mais de um objeto. **Enquanto mantém a tecla Shift pressionada, clique na {other2}.**",
                 "multi_rightclick": "Ótimo! As duas ruas a serem excluídas estão agora selecionadas. **Clique com o botão direito sobre uma das linhas para exibir o menu de edição.**",
@@ -881,6 +880,21 @@
                 "help": "Você está agora pronto(a) para editar o OpenStreetMap!{br}Você pode seguir este tutorial novamente a qualquer momento ou aprender mais clicando no botão {button} Ajuda.",
                 "save": "Não esqueça de salvar suas alterações regularmente!",
                 "start": "Começar a mapear!"
+            }
+        },
+        "shortcuts": {
+            "title": "Atalhos de teclado",
+            "key": {
+                "space": "Espaço"
+            },
+            "gesture": {
+                "drag": "arrastar"
+            },
+            "or": "-ou-",
+            "browsing": {
+                "help": {
+                    "title": "Ajuda"
+                }
             }
         },
         "presets": {
@@ -1540,6 +1554,9 @@
                 },
                 "maxstay": {
                     "label": "Permanência máxima"
+                },
+                "maxweight": {
+                    "label": "Peso Máximo"
                 },
                 "mtb/scale": {
                     "label": "Dificuldade para Mountain Biking",
@@ -2884,6 +2901,9 @@
                     "name": "Eletricista",
                     "terms": "Eletricista"
                 },
+                "craft/electronics_repair": {
+                    "name": "Oficina de Eletrônicos"
+                },
                 "craft/gardener": {
                     "name": "Jardineiro",
                     "terms": "Jardineiro"
@@ -3140,6 +3160,9 @@
                 "highway/cycleway": {
                     "name": "Ciclovia",
                     "terms": "Ciclovia"
+                },
+                "highway/elevator": {
+                    "name": "Elevador"
                 },
                 "highway/footway": {
                     "name": "Caminho de Pedestre",
@@ -4183,6 +4206,9 @@
                 "shop/antiques": {
                     "name": "Loja de Antiguidades",
                     "terms": "Antiquário"
+                },
+                "shop/appliance": {
+                    "name": "Loja de Eletrodomésticos"
                 },
                 "shop/art": {
                     "name": "Loja de Arte",

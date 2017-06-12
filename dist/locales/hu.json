@@ -284,7 +284,7 @@
             "restriction": {
                 "help": {
                     "select": "Kattints egy útszakasz kiválasztásához.",
-                    "toggle": "Kattints a kanyarodási tiltások beállításához.",
+                    "toggle": "Kattints a kanyarodási tiltások átkapcsolásához.",
                     "toggle_on": "Kattints egy „{restriction}” korlátozás hozzáadásához.",
                     "toggle_off": "Kattints a(z) „{restriction}” korlátozás eltávolításához."
                 },
@@ -626,7 +626,7 @@
         "help": {
             "title": "Súgó",
             "help": "# Súgó\n\nEz egy szerkesztő az [OpenStreetMap](http://www.openstreetmap.org/)hez, a szabadon szerkeszthető és felhasználható világtérképhez. A környezetedről tölthetsz fel, vagy frissíthetsz adatokat, ezáltal mindenki számára jobbá téve egy ingyenes térképet.\n\nAmit ezen a térképen alkotsz, mindenki számára látható lesz, aki használja az OpenStreetMapet. A szerkesztéshez [be kell jelentkezned]\n(https://www.openstreetmap.org/login)\n\nAz [iD szerkesztő](http://ideditor.com/) egy együttműködésen alapuló projekt, a [GitHub-on elérhető forráskóddal](https://github.com/openstreetmap/iD). Fordításába és fejlesztésébe te is besegíthetsz.\n",
-            "editing_saving": "# Szerkesztés és Mentés\n\nA szerkesztőt elsődlegesen online munkára tervezték és te jelenleg egy weblapon éred el.\n\n### Elemek kijelölése\n\nEgy térképelem, mint út vagy érdekes hely kijelöléséhez kattints rá a térképen. Ettől a kijelölt elem kiemelődik és megnyílik egy panel az adataival, és egy menüvel, ami mutatja, miket tudsz az elemmel csinálni. Több elemet a 'Shift' gomb nyomva tartása közbeni kattintással, vagy húzással tudsz kijelölni. A húzással kijelölöd a bekeretezett részen lévő összes elemet, lehetővé téve, hogy egyszerre több mindent változtass.\n\n### Szerkesztések mentése\n\nAmikor utakat, épületeket, helyeket szerkesztesz, ezek a változások helyileg lesznek tárolva, amíg nem mented őket a kiszolgálóra. Ne aggódj, ha elrontasz valamit - vissza tudod vonni a változtatásaidat a visszavonás gombra kattintva, a mégis gombra kattintva pedig a korábban visszavont változtatásaidat állíthatod vissza.\n\nKattints a 'Mentés' gombra, ha végeztél egy terület szerkesztésével - például, ha befejezted egy város részletének szerkesztését és egy másik területet szeretnél szerkeszteni. Lehetőséged lesz visszanézni, hogy mit csináltál. A szerkesztő hasznos tanácsokat biztosít és figyelmeztet ha valami nem tűnik megfelelőnek a változtatásaiddal.\n\nHa minden rendben van, beírhatsz egy rövid ismertetést a szerkesztéseiddel kapcsolatban és újból a 'Mentés' gombra kattintva közzéteheted a változtatásaidat és az információkat velük kapcsolatban az [OpenStreetMap.org](http://www.openstreetmap.org/) webhelyen, ahol az összes felhasználónak láthatóak és elérhetőek lesznek, hogy azokra építhessenek, fejleszthessék azokat.\n\nHa nem tudod befejezni a szerkesztéseidet egyszerre, elhagyhatod a szerkesztő ablakot, mert amikor visszatérsz (ugyanazzal a böngészővel és számítógéppel), a szerkesztő fel fogja ajánlani, hogy visszaállítsa-e a korábbi munkádat.\n\n### Szerkesztő használata\n\nA szerkesztést megkönnyítő gyorsbillentyűket [itt](http://wiki.openstreetmap.org/wiki/Hu:iD/Shortcuts) találhatod meg.\n",
+            "editing_saving": "# Szerkesztés és mentés\n\nEz a szerkesztő főleg online munkára lett tervezve, és most egy webhelyen\nkeresztül éred el.\n\n### Elemek kiválasztása\n\nEgy térképi elem, mint egy út vagy egy tájékozódási pont, kiválasztásához\nkattints rá a térképen. Ez kiemeli a kiválasztott elemet, megnyit egy panelt\na részleteivel, és megjelenít egy menüt azokkal a dolgokkal, amit az elemmel\ntenni lehet.\n\nTöbb elem kiválasztásához tartsd lenyomva a „Shift” gombot. Aztán kattints\na kiválasztandó elemekre, vagy húzd az egeret a térképen egy téglalapot\nrajzolva. Ez egy dobozt rajzol ki, és kiválaszt minden benne lévő pontot.\n\n### Szerkesztések mentése\n\nAmikor változásokat csinálsz, például utakat, épületeket vagy helyeket\nszerkesztesz, akkor ezek helyben mentésre kerülnek, amíg nem mented le ezt\na kiszolgálóra. Ne aggódj ha hibát vétesz – visszavonhatod a változásokat a\nvisszavonás gombbal, és újra végrehajthatod a módosításokat az újra gombbal.\n\nKattints a „Mentés” gombra a szerkesztéscsomag befejezéséhez – például, ha\nbefejezted a város egy területét, és egy másik területen folytatnád. Most\nfogod tudni leellenőrizni, hogy mit változtattál, a szerkesztő pedig\nsegítőkész javaslatokat és figyelmeztetéseket fog adni, ha valami nem tűnik\nteljesen jónak a változtatásokban.\n\nHa minden jónak néz ki, akkor megadhatsz egy rövid megjegyzést a változásról,\nés a „Mentés” gombra kattintva elküldheted a változásokat az\n[OpenStreetMap.org](http://www.openstreetmap.org/) oldalnak, ahol az látható\nlesz minden más felhasználó számára, így tovább javíthatnak azon.\n\nHa valamiért nem tudod egyszerre befejezni a szerkesztésed, akkor elhagyhatod\na szerkesztőablakot és visszatérhetsz (ugyanahhoz a géphez és böngészőhöz),\nekkor a szerkesztő alkalmazás helyreállítja a munkád.\n\n### A szerkesztő használata\n\nA „?” gomb megnyomásával megtekintheted a gyorsbillentyűket.\n",
             "roads": "# Utak\n\nA szerkesztőprogrammal tudsz utakat létrehozni, javítani és törölni. Az utak\nsokfélék lehetnek: ösvények, közutak, kerékpárutak, stb. – minden gyakran\nkeresztezett szakaszt térképezni kell.\n\n### Kijelölés\n\nÚt kijelöléséhez kattints rá. Meg fog jelenni kiemelve, mellette egy kis eszköztár\nmenüvel és egy oldalsávval, ami további információkat mutat az útról.\n\n### Módosítás\n\nGyakran láthatod, hogy az út nincs a mögötte lévő légifelvételhez, vagy GPS\nnyomvonalhoz igazítva. Ha megbizonyosodtál arról, hogy nem a légifelvétel téved,\nhelyreigazíthatod az utakat.\n\nElőször is kattints a módosítandó útra. Ettől kiemelődik az út és megjelennek a\nkezelőpontjai, amiket mozgatni tudsz a megfelelő helyre. Ha új kezelőpontot\nszeretnél hozzáadni, hogy részletesebb utat kapj, kattints duplán az útnak egy\nolyan részére, ahol még nincs pont.\n\nHa egy út egy másik útba csatlakozik, de a térképen nincsenek összekapcsolva,\nhúzd az egyik út kezelőpontját a másik útra, és össze fognak kapcsolódni.\nAz utak megfelelő összekapcsolása a térképen nagyon fontos, útvonaltervezéshez\nlétfontosságú.\n\nHasználhatod a 'Mozgatás' eszközt is, vagy megnyomhatod az 'M' gyorsbillentyűt, ha az\naz egész utat szeretnéd mozgatni. Mozgatás után kattintással rögzítheted az új helyén.\n\n### Törlés\n\nHa egy út teljesen hibás – ha azt látod, hogy egyáltalán nincs rajta a légifelvételen,\nés biztos vagy benne, hogy nem is létezik –, törölheted, amivel eltávolítod a térképről.\nLegyél óvatos elemek törlésekor, akárcsak bármilyen más szerkesztésnél, a mindenki\náltal látható eredmény és a légifelvétel gyakran elavult, lehet, hogy az utat nemrég építették.\n\nAz út törléséhez előbb válaszd ki, majd kattints a kuka ikonra, vagy nyomd meg a Delete\nbillentyűt.\n\n### Létrehozás\n\nTaláltál egy utat, ami még nincs rajta a térképen? Kattints a bal felső eszköztár 'Vonal'\nikonjára vagy nyomd meg a '2'-es billentyűt és kezdd el rajzolni a vonalat.\n\nA rajzolás megkezdéséhez kattints a térképen az út elejére. Ha az út\negy másik meglévő útból ágazik ki, arra a helyre kattints, ahol csatlakoznak.\n\nEzután kattintással hozz létre pontokat a műholdkép vagy GPS nyomvonal alapján,\nhogy a vonal az út középvonalát kövesse. Ha az utad keresztez egy másik utat, kapcsold\nössze őket a metszéspontjukra kattintva. Ha kész vagy a rajzolással, kattints duplán,\nvagy nyomj a billentyűzeten egy 'Enter'-t.\n",
             "gps": "#GPS\n\nAz összegyűjtött GPS nyomvonalak hasznos adatok az OpenStreetMap számára. Ez a szerkesztő\ntámogatja a helyi nyomvonalakat - `.gpx` fájlok a saját gépeden. Ezeket a\nGPS nyomvonalakat begyűjtheted jó pár okostelefon alkalmazással, vagy\nszemélyi GPS eszközökkel.\n\nTovábbi információkért, hogy hogy kell GPS felmérést végezni, olvasd el a\n[Térképezés okostelefonnal, GPS-szel, vagy papíron](http://learnosm.org/en/mobile-mapping/) cikket.\n\nHogy egy GPX sávot térképezéshez használj, fogd és vidd a GPX fájlt a térképszerkesztőre. Ha felismeri a program, akkor hozzáadásra kerül a térképre, mint egy fényes lila\nvonal. Kattints a „Térképadatok” menüre jobb oldalt a bekapcsoláshoz, kikapcsoláshoz vagy közelítéshez a GPX-vezérelt rétegen.\n\nA GPX sáv nem kerül közvetlen feltöltésre az OpenStreetMapbe - a legjobb módszer a használatára az,\nhogy rajzolsz a térképre, és az új elemek felviteléhez segítségként használod,\nmajd [feltöltöd az OpenStreetMapbe](http://www.openstreetmap.org/trace/create),\nhogy mások is használni tudják.\n",
             "imagery": "# Légifelvétel\n\nA légifelvétel a térképezés egyik fontos forrása. A repülőgépes ortofotók, műholdképek és szabadon összeállított források kombinációja rendelkezésre áll a szerkesztőben a bal oldali menü „Háttérbeállítások” gombjára kattintva.\n\nAlapértelmezésként a [Bing Maps](http://www.bing.com/maps/) műholdkép réteg jelenik meg a szerkesztőben, de ahogy új helyekre görgeted a térképet, új források jelennek meg. Néhány országban, mint az Egyesül Államok, Franciaország, vagy Dánia nagyon jó minőségű légifelvételek érhetőek el egyes területeken.\n\nA légifelvételek gyakran el vannak csúszva a valósághoz képest, a légifelvétel szolgáltatók hibájából. Ha látsz egy csomó utat eltolódva a háttértől, ne húzd őket rögtön a háttérképhez. Ehelyett igazítsd úgy a háttérképet, hogy a meglévő adatok illeszkedjenek rá. Ehhez kattints a Háttérbeállítások menü „Elcsúszás korrigálása” gombjára.\n",
@@ -814,7 +814,7 @@
                 "add_playground": "A *területeket* különféle elemek – pl. tavak, épületek vagy lakóterüetek – határainak megjelölésére használjuk.{br}Arra is használhatók, hogy részletesebben jelenítsünk meg olyan elemeket, amelyeket rendesen esetleg csak pontként rajzolnánk föl. **Egy új terület fölrajzolásához kattints a {button} Terület gombra.**",
                 "start_playground": "Adjuk hozzá ezt a játszóteret a térképhez úgy, hogy rajzolunk belőle egy területet. Területeket úgy rajzolunk, hogy *pontokat* helyezünk el az elem külső pereme mentén. **A kezdő pont elhelyezéséhez kattints vagy üsd le a szóközt a játszótér valamelyik sarkánál.**",
                 "continue_playground": "A terület rajzolását úgy folytathatod, hogy további pontokat teszel a játszótér szélére. Helyes dolog összekapcsolni a területet a meglévő gyalogutakkal.{br}Tipp: Az Alt billentyű lenyomva tartásával megakadályozhatjuk, hogy a pontok más elemekhez kapcsolódjanak. **Folytasd a játszótér területének megrajzolását!**",
-                "finish_playground": "Fejezd be a területet az Enter megnyomásával, vagy újra az első elemre kattintással. **Fejezd be a játszótér területének megrajzolását.**",
+                "finish_playground": "Fejezd be a területet az Enter megnyomásával, vagy újra az első vagy utolsó elemre kattintással. **Fejezd be a játszótér területének megrajzolását.**",
                 "search_playground": "**Keresd meg a következőt: {preset}!**",
                 "choose_playground": "**Válaszd ki a listából a következőt: {preset}.**",
                 "add_field": "Ennek a játszótérnek nincs hivatalos neve, úgyhogy a Név mezőt üresen hagyjuk.{br}Ellenben hozzáadhatunk néhány további információt a Leírás mezőben. **Nyisd meg a Mező hozzáadása listát!**",
@@ -845,7 +845,7 @@
                 "rightclick_intersection": "Az utolsó valódi utca a(z) {street1}, így ennél a kereszteződésnél *szétválaszthatjuk* a(z) {street2} utcát, és eltávolíthatunk mindent, ami fölötte van. **Kattints a jobb gombbal a kereszteződést jelentő pontra!**",
                 "split_intersection": "**A(z) {street} szétválasztásához kattints a(z) {button} gombra.**",
                 "retry_split": "Nem kattintottál rá a Szétválasztás gombra. Próbáld meg újra!",
-                "did_split_multi": "Remek! A(z) {street1} két részre van vágva. A felső része eltávolítható. **Kattints a {street2} felső részére a kijelöléséhez.**",
+                "did_split_multi": "Szép munka! {street1} ketté lett vágva. A felső darab eltávolítható. **A kijelöléshez kattints a {street2} felső részére.**",
                 "did_split_single": "**Kattints a {street2} felső részére, hogy kijelöld.**",
                 "multi_select": "A(z) {selected} ki van jelölve. Jelöljük ki a következőt is: {other1}. Több dolog kijelöléséhez kattintsunk a Shift billentyű lenyomva tartása mellett. **Kattints a Shift billentyű nyomva tartásával a következőre: {other2}**",
                 "multi_rightclick": "Nagyon jó! Most mindkét vonal ki van jelölve. **A szerkesztési menü megjelenítéséhez kattints valamelyik vonalra a jobb gombbal.**",
@@ -881,6 +881,110 @@
                 "help": "Most már készen állsz az OpenStreetMap szerkesztésére!{br}Ezt a bevezető tanfolyamot bármikor újra lejátszhatod, további dokumentációt pedig a {button} Súgó gombra kattintva találsz.",
                 "save": "Ne felejtsd rendszeresen menteni a változtatásaidat!",
                 "start": "Kezdhetsz térképezni!"
+            }
+        },
+        "shortcuts": {
+            "title": "Gyorsbillentyűk",
+            "key": {
+                "alt": "Alt",
+                "backspace": "Backspace",
+                "cmd": "Cmd",
+                "ctrl": "Ctrl",
+                "delete": "Delete",
+                "del": "Del",
+                "end": "End",
+                "enter": "Enter",
+                "esc": "Esc",
+                "home": "Home",
+                "option": "Option",
+                "pause": "Pause",
+                "pgdn": "PgDn",
+                "pgup": "PgUp",
+                "return": "Enter",
+                "shift": "Shift",
+                "space": "Szóköz"
+            },
+            "gesture": {
+                "drag": "húzás"
+            },
+            "or": "vagy",
+            "browsing": {
+                "title": "Böngészés",
+                "navigation": {
+                    "title": "Navigáció",
+                    "pan": "Térkép úsztatása",
+                    "pan_more": "Térkép úsztatása egy képernyőnivel",
+                    "zoom": "Nagyítás / kicsinyítés",
+                    "zoom_more": "Jelentős nagyítás / kicsinyítés"
+                },
+                "help": {
+                    "title": "Súgó",
+                    "help": "Súgó/dokumentáció megjelenítése",
+                    "keyboard": "Gyorsbillentyűk megjelenítése"
+                },
+                "display_options": {
+                    "title": "Megjelenítési beállítások",
+                    "background": "Háttérbeállítások megjelenítése",
+                    "background_switch": "Visszaváltás a legutóbbi háttérre",
+                    "map_data": "Térkép adatbeállítások megjelenítése",
+                    "fullscreen": "Teljes képernyős módba váltás",
+                    "wireframe": "Drótváz mód átkapcsolása",
+                    "minimap": "Minitérkép átkapcsolása"
+                },
+                "selecting": {
+                    "title": "Elemek kiválasztása",
+                    "select_one": "Egyetlen elem kiválasztása",
+                    "select_multi": "Több elem kiválasztása",
+                    "lasso": "Kiválasztási lasszó rajzolása az elemek köré"
+                },
+                "with_selected": {
+                    "title": "A kiválasztott elemmel",
+                    "infobox": "Infó / mérési doboz átkapcsolása",
+                    "edit_menu": "Menüszerkesztés átkapcsolása"
+                },
+                "vertex_selected": {
+                    "title": "A kiválasztott ponttal",
+                    "previous": "Ugrás az előző pontra",
+                    "next": "Ugrás a következő pontra",
+                    "first": "Ugrás az első pontra",
+                    "last": "Ugrás az utolsó pontra",
+                    "change_parent": "Szülő út cseréje"
+                }
+            },
+            "editing": {
+                "title": "Szerkesztés",
+                "drawing": {
+                    "title": "Rajzolás",
+                    "add_point": "„Pont hozzáadás” mód",
+                    "add_line": "„Vonal hozzáadás” mód",
+                    "add_area": "„Terület hozzáadás” mód",
+                    "place_point": "Helyezz el egy pontot",
+                    "disable_snap": "Tartsd a pont illesztés kikapcsolásához",
+                    "stop_line": "Fejezd be a vonal vagy terület rajzolását"
+                },
+                "operations": {
+                    "title": "Műveletek",
+                    "continue_line": "Vonal folytatása a kiválasztott ponttól",
+                    "merge": "Kiválasztott elemek összevonása (egyesítése)",
+                    "disconnect": "Elemek szétválasztása a kiválasztott pontnál",
+                    "split": "Vonal kettéválasztása a kiválasztott pontnál",
+                    "reverse": "Vonal megfordítása",
+                    "move": "Kiválasztott elemek mozgatása",
+                    "rotate": "Kiválasztott elemek forgatása",
+                    "orthogonalize": "Vonal egyenesítése / Terület sarkainak derékszögesítése",
+                    "circularize": "Zárt vonal vagy terület körvonalasítása",
+                    "reflect_long": "Elemek tükrözése a hosszanti tengelyre",
+                    "reflect_short": "Elemek tükrözése az oldalirányú tengelyre",
+                    "delete": "Kiválasztott elemek törlése"
+                },
+                "commands": {
+                    "title": "Parancsok",
+                    "copy": "Kiválasztott elemek másolása",
+                    "paste": "Másolt elemek beillesztése",
+                    "undo": "A legutóbbi művelet visszavonása",
+                    "redo": "A legutóbbi művelet újra",
+                    "save": "Módosítások mentése"
+                }
             }
         },
         "presets": {
@@ -1451,7 +1555,7 @@
                     "label": "SSID (hálózatnév)"
                 },
                 "kerb": {
-                    "label": "Járdaszegélyrámpa"
+                    "label": "Járdaszegély"
                 },
                 "lamp_type": {
                     "label": "Típus"
@@ -1540,6 +1644,9 @@
                 },
                 "maxstay": {
                     "label": "Leghosszabb várakozási idő"
+                },
+                "maxweight": {
+                    "label": "Súlykorlátozás"
                 },
                 "mtb/scale": {
                     "label": "Mountainbike nehézség",
@@ -2884,6 +2991,10 @@
                     "name": "Villanyszerelő",
                     "terms": "Villanyszerelő"
                 },
+                "craft/electronics_repair": {
+                    "name": "Elektronikai szerviz",
+                    "terms": "eltronikai,szerviz,javító,bontó"
+                },
                 "craft/gardener": {
                     "name": "Kertész",
                     "terms": "Melegházi termelő, bolgárkertész"
@@ -3140,6 +3251,10 @@
                 "highway/cycleway": {
                     "name": "Kerékpárút",
                     "terms": "Bicikliút, bringaút"
+                },
+                "highway/elevator": {
+                    "name": "Felvonó",
+                    "terms": "lift"
                 },
                 "highway/footway": {
                     "name": "Gyalogút",
@@ -4183,6 +4298,10 @@
                 "shop/antiques": {
                     "name": "Régiségkereskedés",
                     "terms": "antikvitás, antikvárium, ószeres"
+                },
+                "shop/appliance": {
+                    "name": "Háztartási gép üzlet",
+                    "terms": "háztartási,gép,készülék,nagygép,kisgép"
                 },
                 "shop/art": {
                     "name": "Műalkotásbolt",
