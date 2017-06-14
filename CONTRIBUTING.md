@@ -45,60 +45,138 @@ To request a feature:
 We use GitHub labels to keep track of issues.  Some guidelines:
 
 Green labels are for **action items**. Jump in and start working!
-* <sub>![get-started](http://labl.es/svg?text=get-started&bgcolor=0e8a16)</sub> -
+* <sub>[![get-started][get-started]][get-started_link]</sub> -
 Issues are great for new contributors.
-* <sub>![priority](http://labl.es/svg?text=priority&bgcolor=0e8a16)</sub> -
+* <sub>[![priority][priority]][priority_link]</sub> -
 Issues that have a big impact or matter most to _new mappers_.
 <br/>(There should probably be 10 or fewer "priority" items.)
 
+[get-started]: http://labl.es/svg?text=get-started&bgcolor=0e8a16
+[priority]: http://labl.es/svg?text=priority&bgcolor=0e8a16
+
+[get-started_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Aget-started
+[priority_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Apriority
+
 Red labels are for **bugs**. These are things that we want fixed, but might be a bit more
 complicted than the green action items.
-* <sub>![bug](http://labl.es/svg?text=bug&bgcolor=d93f0b)</sub>
-<sub>![bug-release-blocker](http://labl.es/svg?text=bug-release-blocker&bgcolor=d93f0b)</sub>
-<sub>![bug-browser-specific](http://labl.es/svg?text=bug-browser-specific&bgcolor=d93f0b)</sub>
+
+* <sub>[![bug][bug]][bug_link]
+[![bug-release-blocker][bug-release-blocker]][bug-release-blocker_link]
+[![bug-browser-specific][bug-browser-specific]][bug-browser-specific_link]</sub>
+
+[bug]: http://labl.es/svg?text=bug&bgcolor=d93f0b
+[bug-release-blocker]: http://labl.es/svg?text=bug-release-blocker&bgcolor=d93f0b
+[bug-browser-specific]: http://labl.es/svg?text=bug-browser-specific&bgcolor=d93f0b
+
+[bug_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Abug
+[bug-release-blocker_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Abug-release-blocker
+[bug-browser-specific_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Abug-browser-specific
 
 Purple labels are for **non-action items**. These might be a question or feature request
 that needs some discussion about whether it belongs in iD.  Discuss before working on these.
-* <sub>![considering](http://labl.es/svg?text=considering&bgcolor=cc33cc)</sub>
-<sub>![question](http://labl.es/svg?text=question&bgcolor=cc33cc)</sub>
+
+* <sub>[![considering][considering]][considering_link]
+[![question][question]][question_link]</sub>
+
+[considering]: http://labl.es/svg?text=considering&bgcolor=cc33cc
+[question]: http://labl.es/svg?text=question&bgcolor=cc33cc
+
+[considering_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Aconsidering
+[question_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Aquestion
 
 Yellow labels are for **chores**. These are the things like code cleanup, upgrades, tests,
 documentation, repository gardening, and other stuff that makes developers happy.
-* <sub>![chore](http://labl.es/svg?text=chore&bgcolor=fef2c0)</sub>
-<sub>![chore-dependency](http://labl.es/svg?text=chore-dependency&bgcolor=fef2c0)</sub>
-<sub>![chore-documentation](http://labl.es/svg?text=chore-documentation&bgcolor=fef2c0)</sub>
-<sub>![chore-greenkeeper](http://labl.es/svg?text=chore-greenkeeper&bgcolor=fef2c0)</sub>
+
+* <sub>[![chore][chore]][chore_link]
+[![chore-dependency][chore-dependency]][chore-dependency_link]
+[![chore-documentation][chore-documentation]][chore-documentation_link]
+[![chore-greenkeeper][chore-greenkeeper]][chore-greenkeeper_link]</sub>
+
+[chore]: http://labl.es/svg?text=chore&bgcolor=fef2c0
+[chore-dependency]: http://labl.es/svg?text=chore-dependency&bgcolor=fef2c0
+[chore-documentation]: http://labl.es/svg?text=chore-documentation&bgcolor=fef2c0
+[chore-greenkeeper]: http://labl.es/svg?text=chore-greenkeeper&bgcolor=fef2c0
+
+[chore_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Achore
+[chore-dependency_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Achore-dependency
+[chore-documentation_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Achore-documentation
+[chore-greenkeeper_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Achore-greenkeeper
 
 Light blue labels are for **features**. We use labels to group them into categories.
-* <sub>![core](http://labl.es/svg?text=core&bgcolor=c5def5)</sub>
-<sub>![localization](http://labl.es/svg?text=localization&bgcolor=c5def5)</sub>
-<sub>![performance](http://labl.es/svg?text=performance&bgcolor=c5def5)</sub>
-<sub>![preset](http://labl.es/svg?text=preset&bgcolor=c5def5)</sub>
-<sub>![renderer](http://labl.es/svg?text=renderer&bgcolor=c5def5)</sub>
-<sub>![validation](http://labl.es/svg?text=validation&bgcolor=c5def5)</sub>
+
+* <sub>[![core][core]][core_link]
+[![localization][localization]][localization_link]
+[![performance][performance]][performance_link]
+[![preset][preset]][preset_link]
+[![renderer][renderer]][renderer_link]
+[![validation][validation]][validation_link]</sub>
+
+[core]: http://labl.es/svg?text=core&bgcolor=c5def5
+[localization]: http://labl.es/svg?text=localization&bgcolor=c5def5
+[performance]: http://labl.es/svg?text=performance&bgcolor=c5def5
+[preset]: http://labl.es/svg?text=preset&bgcolor=c5def5
+[renderer]: http://labl.es/svg?text=renderer&bgcolor=c5def5
+[validation]: http://labl.es/svg?text=validation&bgcolor=c5def5
+
+[core_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Acore
+[localization_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Alocalization
+[performance_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Aperformance
+[preset_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Apreset
+[renderer_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Arenderer
+[validation_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Avalidation
 
 Dark Grey labels are for **waitfor items**. We won't work on these now, but we'll keep the issues
 open while we wait for something to happen.
-* <sub>![waitfor](http://labl.es/svg?text=waitfor&bgcolor=444)</sub>
-<sub>![waitfor-consensus](http://labl.es/svg?text=waitfor-consensus&bgcolor=444)</sub>
-<sub>![waitfor-icon](http://labl.es/svg?text=waitfor-icon&bgcolor=444)</sub>
-<sub>![waitfor-info](http://labl.es/svg?text=waitfor-info&bgcolor=444)</sub>
-<sub>![waitfor-upstream](http://labl.es/svg?text=waitfor-upstream&bgcolor=444)</sub>
+
+* <sub>[![waitfor][waitfor]][waitfor_link]
+[![waitfor-consensus][waitfor-consensus]][waitfor-consensus_link]
+[![waitfor-icon][waitfor-icon]][waitfor-icon_link]
+[![waitfor-info][waitfor-info]][waitfor-info_link]
+[![waitfor-upstream][waitfor-upstream]][waitfor-upstream_link]</sub>
+
+[waitfor]: http://labl.es/svg?text=waitfor&bgcolor=444
+[waitfor-consensus]: http://labl.es/svg?text=waitfor-consensus&bgcolor=444
+[waitfor-icon]: http://labl.es/svg?text=waitfor-icon&bgcolor=444
+[waitfor-info]: http://labl.es/svg?text=waitfor-info&bgcolor=444
+[waitfor-upstream]: http://labl.es/svg?text=waitfor-upstream&bgcolor=444
+
+[waitfor_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Awaitfor
+[waitfor-consensus_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Awaitfor-consensus
+[waitfor-icon_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Awaitfor-icon
+[waitfor-info_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Awaitfor-info
+[waitfor-upstream_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Awaitfor-upstream
 
 Light Grey labels are for **wontfix items**. We've decided these doesn't belong in
 iD at this time. Don't feel bad, sometimes we change our minds later and revisit them!
 (ISATIDL = "I saw a thing I don't like", a common OpenStreetMap complaint)
-* <sub>![wontfix](http://labl.es/svg?text=wontfix&bgcolor=eee)</sub>
-<sub>![wontfix-confusing](http://labl.es/svg?text=wontfix-confusing&bgcolor=eee)</sub>
-<sub>![wontfix-ISATIDL](http://labl.es/svg?text=wontfix-ISATIDL&bgcolor=eee)</sub>
-<sub>![wontfix-low-impact](http://labl.es/svg?text=wontfix-low-impact&bgcolor=eee)</sub>
+
+* <sub>[![wontfix][wontfix]][wontfix_link]
+[![wontfix-confusing][wontfix-confusing]][wontfix-confusing_link]
+[![wontfix-ISATIDL][wontfix-ISATIDL]][wontfix-ISATIDL_link]
+[![wontfix-low-impact][wontfix-low-impact]][wontfix-low-impact_link]</sub>
+
+[wontfix]: http://labl.es/svg?text=wontfix&bgcolor=eee
+[wontfix-confusing]: http://labl.es/svg?text=wontfix-confusing&bgcolor=eee
+[wontfix-ISATIDL]: http://labl.es/svg?text=wontfix-ISATIDL&bgcolor=eee
+[wontfix-low-impact]: http://labl.es/svg?text=wontfix-low-impact&bgcolor=eee
+
+[wontfix_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix
+[wontfix-confusing_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix-confusing
+[wontfix-ISATIDL_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix-ISATIDL
+[wontfix-low-impact_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aclosed+is%3Aissue+label%3Awontfix-low-impact
 
 Special:
-* <sub>![bluesky](http://labl.es/svg?text=bluesky&bgcolor=1d76db)</sub> -
+
+* <sub>[![bluesky][bluesky]][bluesky_link]</sub> -
 Bluesky issues are extra challenging. They might require weeks of development or not even be possible.
-* <sub>![wip](http://labl.es/svg?text=wip&bgcolor=fbca04)</sub> -
+* <sub>[![wip][wip]][wip_link]</sub> -
 Work in Progress.  Don't start work on these, somebody else already did!
 
+[bluesky]: http://labl.es/svg?text=bluesky&bgcolor=1d76db
+[wip]: http://labl.es/svg?text=wip&bgcolor=fbca04
+
+[bluesky_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Abluesky
+[wip_link]: https://github.com/openstreetmap/iD/issues?q=is%3Aopen+is%3Aissue+label%3Awip
 
 ## Verifying Bug Fixes
 
