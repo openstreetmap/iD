@@ -5109,6 +5109,31 @@
                     "terms": ""
                 }
             }
+        },
+        "imagery": {
+            "Bing.name": "Bing aerial imagery",
+            "DigitalGlobe-Premium.attribution.text": "Terms & Feedback",
+            "DigitalGlobe-Premium.name": "DigitalGlobe Premium Imagery",
+            "DigitalGlobe-Standard.attribution.text": "Terms & Feedback",
+            "DigitalGlobe-Standard.name": "DigitalGlobe Standard Imagery",
+            "Mapbox.attribution.text": "Terms & Feedback",
+            "Mapbox.name": "Mapbox Satellite",
+            "New_and_Misaligned_TIGER_Roads-2013.description": "At zoom level 16+, public domain map data from the US Census. At lower zooms, only changes since 2006 minus changes already incorporated into OpenStreetMap",
+            "New_and_Misaligned_TIGER_Roads-2013.name": "New & Misaligned TIGER Roads",
+            "mapbox_locator_overlay.attribution.text": "Terms & Feedback",
+            "mapbox_locator_overlay.description": "Shows major features to help orient you.",
+            "mapbox_locator_overlay.name": "Locator Overlay",
+            "osm-gps.attribution.text": "© OpenStreetMap contributors",
+            "osm-gps.description": "Public GPS traces uploaded to OpenStreetMap.",
+            "osm-gps.name": "OpenStreetMap GPS traces",
+            "osm-mapnik-german_style.attribution.text": "© OpenStreetMap contributors, CC-BY-SA",
+            "osm-mapnik-german_style.name": "OpenStreetMap (German Style)",
+            "stamen-terrain-background.attribution.text": "Map tiles by Stamen Design, under CC BY 3.0",
+            "stamen-terrain-background.name": "Stamen Terrain",
+            "tf-cycle.attribution.text": "Maps © Thunderforest, Data © OpenStreetMap contributors",
+            "tf-cycle.name": "Thunderforest OpenCycleMap",
+            "tf-landscape.attribution.text": "Maps © Thunderforest, Data © OpenStreetMap contributors",
+            "tf-landscape.name": "Thunderforest Landscape"
         }
     }
 }

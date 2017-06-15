@@ -9,7 +9,7 @@ var request = require('request').defaults({ maxSockets: 1 }),
 var resources = ['core', 'presets', 'imagery'];
 var outdir = './dist/locales/';
 var api = 'https://www.transifex.com/api/2/';
-var project = api + 'project/id-editor/';
+var projectURL = api + 'project/id-editor/';
 
 
 /*
@@ -32,7 +32,7 @@ var sourceCore = yaml.load(fs.readFileSync('./data/core.yaml', 'utf8')),
 asyncMap(resources, getResource, function(err, locales) {
     if (err) return console.log(err);
 
-    var locale = _.merge(sourceCore, sourcePresets, {en: sourceImagery}),
+    var locale = _.merge(sourceCore, sourcePresets, { en: { imagery: sourceImagery }}),
         dataLocales = {};
 
     locales.forEach(function(l) {
@@ -62,11 +62,11 @@ asyncMap(resources, getResource, function(err, locales) {
 
 
 function getResource(resource, callback) {
-    resource = project + 'resource/' + resource + '/';
-    getLanguages(resource, function(err, codes) {
+    var resourceURL = projectURL + 'resource/' + resource + '/';
+    getLanguages(resourceURL, function(err, codes) {
         if (err) return callback(err);
 
-        asyncMap(codes, getLanguage(resource), function(err, results) {
+        asyncMap(codes, getLanguage(resourceURL), function(err, results) {
             if (err) return callback(err);
 
             var locale = {};
@@ -80,15 +80,36 @@ function getResource(resource, callback) {
 }
 
 
-function getLanguage(resource) {
+function getLanguage(resourceURL) {
     return function(code, callback) {
         code = code.replace(/-/g, '_');
-        var url = resource + 'translation/' + code;
-        if (code === 'vi') url += '?mode=reviewed';
+        var isImagery = resourceURL.match(/imagery\/$/);
+        var mode;
+
+        // Transifex treats JSONKEYVALUE a bit differently than YML.
+        // YML = untranslated strings are excluded
+        // JSONKEYVALUE = untranslated strings are replaced by source strings
+        if (code === 'vi') {
+            mode = isImagery ? 'onlyreviewed' : 'reviewed';
+        } else {
+            mode = isImagery ? 'onlytranslated': 'default';
+        }
+
+        var url = resourceURL + 'translation/' + code + '?mode=' + mode;
         request.get(url, { auth : auth }, function(err, resp, body) {
             if (err) return callback(err);
             console.log(resp.statusCode + ': ' + url);
-            callback(null, yaml.load(JSON.parse(body).content)[code]);
+
+            var content = JSON.parse(body).content;
+            var data;
+            if (isImagery) {
+                // keep only translated (non-empty) values
+                var imagery = _.pickBy(JSON.parse(content), _.identity);
+                data = _.isEmpty(imagery) ? {} : { imagery: imagery };
+            } else {
+                data = yaml.safeLoad(content)[code];
+            }
+            callback(null, data);
         });
     };
 }
