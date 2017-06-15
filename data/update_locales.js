@@ -6,7 +6,7 @@ var request = require('request').defaults({ maxSockets: 1 }),
     stringify = require('json-stable-stringify'),
     _ = require('lodash');
 
-var resources = ['core', 'presets'];
+var resources = ['core', 'presets', 'imagery'];
 var outdir = './dist/locales/';
 var api = 'https://www.transifex.com/api/2/';
 var project = api + 'project/id-editor/';
@@ -25,13 +25,14 @@ var project = api + 'project/id-editor/';
 var auth = JSON.parse(fs.readFileSync('./transifex.auth', 'utf8'));
 
 var sourceCore = yaml.load(fs.readFileSync('./data/core.yaml', 'utf8')),
-    sourcePresets = yaml.load(fs.readFileSync('./data/presets.yaml', 'utf8'));
+    sourcePresets = yaml.load(fs.readFileSync('./data/presets.yaml', 'utf8')),
+    sourceImagery = JSON.parse(fs.readFileSync('./node_modules/editor-layer-index/i18n/en.json', 'utf8'));
 
 
 asyncMap(resources, getResource, function(err, locales) {
     if (err) return console.log(err);
 
-    var locale = _.merge(sourceCore, sourcePresets),
+    var locale = _.merge(sourceCore, sourcePresets, {en: sourceImagery}),
         dataLocales = {};
 
     locales.forEach(function(l) {
