@@ -193,9 +193,12 @@ Translations are managed using the
 [Transifex](https://www.transifex.com/projects/p/id-editor/) platform. After
 signing up, you can go to [iD's project
 page](https://www.transifex.com/projects/p/id-editor/), select a language and
-click *Translate now* to start translating. Translations are divided into two
-sections, *core*, which contains text for the main interface of iD, and
-*presets*, which has the text for labeling feature presets.
+click **Translate** to start translating. Translations are divided into
+separate resources:
+
+* *core* - contains text for the main interface of iD
+* *presets* - contains the text for labeling feature presets
+* *imagery* - contains text for imagery names and descriptions
 
 The words in brackets, for example `{name}`, should not be translated into a
 new language: it's replaced with a place name when iD presents the text. So a
