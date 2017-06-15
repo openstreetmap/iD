@@ -885,6 +885,7 @@
         },
         "shortcuts": {
             "title": "Gyorsbillentyűk",
+            "tooltip": "Gyorsbillentyűk megjelenítése a képernyőn.",
             "key": {
                 "alt": "Alt",
                 "backspace": "Backspace",
@@ -2983,6 +2984,10 @@
                     "name": "Édességbolt",
                     "terms": "édesség, cukorka, csokoládé, nyalóka"
                 },
+                "craft/distillery": {
+                    "name": "Párlatfőző",
+                    "terms": "alkohol,ital,pálinka,szeszfőzde"
+                },
                 "craft/dressmaker": {
                     "name": "Nőiruha-készítő",
                     "terms": "Ruhakészítő, szabó, varrónő"
@@ -5068,6 +5073,31 @@
                     "terms": "Bukógát"
                 }
             }
+        },
+        "imagery": {
+            "Bing.name": "Bing légifelvétel",
+            "DigitalGlobe-Premium.attribution.text": "Feltételek és visszajelzés",
+            "DigitalGlobe-Premium.name": "DigitalGlobe prémium légifelvétel",
+            "DigitalGlobe-Standard.attribution.text": "Feltételek és visszajelzés",
+            "DigitalGlobe-Standard.name": "DigitalGlobe normál légifelvétel",
+            "Mapbox.attribution.text": "Feltételek és visszajelzés",
+            "Mapbox.name": "Mapbox műhold",
+            "New_and_Misaligned_TIGER_Roads-2013.description": "16-os, és afeletti nagyítási szintű szabad felhasználású térkép, az USA népszámlálási irodájától. Alacsonyabb nagyítási szinteken a 2006 előtti változások már részei az OpenStreetMapnek.",
+            "New_and_Misaligned_TIGER_Roads-2013.name": "Új és eltolódott TIGER utak",
+            "mapbox_locator_overlay.attribution.text": "Feltételek és visszajelzés",
+            "mapbox_locator_overlay.description": "A legfontosabb funkciókat mutatja, hogy segítsen az eligazításban.",
+            "mapbox_locator_overlay.name": "Locator Overlay",
+            "osm-gps.attribution.text": "© OpenStreetMap közreműködők",
+            "osm-gps.description": "Az OpenStreetMapre feltöltött nyilvános GPS nyomvonalak.",
+            "osm-gps.name": "OpenStreetMap GPS nyomvonalak",
+            "osm-mapnik-german_style.attribution.text": "© OpenStreetMap közreműködők, CC-BY-SA",
+            "osm-mapnik-german_style.name": "OpenStreetMap (német stílusú)",
+            "stamen-terrain-background.attribution.text": "Csempék a Stamen Designtól, CC BY 3.0 alatt",
+            "stamen-terrain-background.name": "Stamen domborzat",
+            "tf-cycle.attribution.text": "Térképek © Thunderforest, Adatok © OpenStreetMap közreműködők",
+            "tf-cycle.name": "Thunderforest OpenCycleMap",
+            "tf-landscape.attribution.text": "Térképek © Thunderforest, Adatok © OpenStreetMap közreműködők",
+            "tf-landscape.name": "Thunderforest táj"
         }
     }
 }

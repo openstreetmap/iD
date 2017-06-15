@@ -4859,6 +4859,12 @@
                     "terms": "Плотина, Гидроплотина, Запруда, Дамба"
                 }
             }
+        },
+        "imagery": {
+            "osm-gps.attribution.text": "© участники OpenStreetMap",
+            "tf-cycle.attribution.text": "Карты © Thunderforest, данные © участники OpenStreetMap",
+            "tf-cycle.name": "Thunderforest OpenCycleMap",
+            "tf-landscape.attribution.text": "Карты © Thunderforest, данные © участники OpenStreetMap"
         }
     }
 }

@@ -580,7 +580,7 @@
         },
         "tag_reference": {
             "description": "Descrición",
-            "on_wiki": "{tag} en wiki.osm.org",
+            "on_wiki": "{tag} en wiki.openstreetmap.org/wiki/Gl:Main_Page",
             "used_with": "usado con {type}"
         },
         "validations": {
@@ -2484,7 +2484,7 @@
                     "name": "Residencia de Anciáns"
                 },
                 "amenity/parking": {
-                    "name": "Aparcadoiro de automóviles",
+                    "name": "Aparcadoiro de automóbiles",
                     "terms": "<translate with synonyms or related terms for 'Car Parking', separated by commas>"
                 },
                 "amenity/parking_entrance": {
@@ -4859,7 +4859,7 @@
                     "terms": "<translate with synonyms or related terms for 'Theme Park', separated by commas>"
                 },
                 "tourism/viewpoint": {
-                    "name": "Mirador",
+                    "name": "Miradoiro",
                     "terms": "<translate with synonyms or related terms for 'Viewpoint', separated by commas>"
                 },
                 "tourism/zoo": {

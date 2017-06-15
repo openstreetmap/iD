@@ -566,7 +566,7 @@
         },
         "splash": {
             "welcome": "Willkommen beim iD OpenStreetMap Editor",
-            "text": "iD ist ein benutzerfreundliches aber leistungsfähiges Werkzeug, um die weltbeste freie Weltkarte zu bearbeiten. Dies ist Version {version}. Für weitere Informationen besuche {website} und melde Fehler unter {github}.",
+            "text": "iD ist ein benutzerfreundliches aber leistungsfähiges Werkzeug, um an der besten freie Weltkarte mitzuwirken. Dies ist Version {version}. Für weitere Informationen besuche {website} und melde Fehler unter {github}.",
             "walkthrough": "Rundgang starten",
             "start": "Jetzt bearbeiten"
         },
@@ -973,7 +973,7 @@
                     "move": "Gewählte Objekte verschieben",
                     "rotate": "Gewählte Objekte drehen",
                     "orthogonalize": "Linie gerade biegen / Ecken rechtwinklig machen",
-                    "circularize": "Gechlossene Linie/Fläche kreisförmig machen",
+                    "circularize": "Geschlossene Linie/Fläche kreisförmig machen",
                     "reflect_long": "Objekte an der lange Achse spiegeln",
                     "reflect_short": "Objekte an der kurzen Achse spiegeln",
                     "delete": "Gewählte Objekte löschen"
@@ -5073,6 +5073,31 @@
                     "terms": "Wehr"
                 }
             }
+        },
+        "imagery": {
+            "Bing.name": "Bing-Luftbilder",
+            "DigitalGlobe-Premium.attribution.text": "Bedingungen & Feedback",
+            "DigitalGlobe-Premium.name": "DigitalGlobe-Premium-Luftbilder",
+            "DigitalGlobe-Standard.attribution.text": "Bedingungen & Feedback",
+            "DigitalGlobe-Standard.name": "DigitalGlobe-Standard-Luftbilder",
+            "Mapbox.attribution.text": "Bedingungen & Feedback",
+            "Mapbox.name": "Mapbox-Satellitenbilder",
+            "New_and_Misaligned_TIGER_Roads-2013.description": "Bei der Zoomstufe 16+ erscheinen Public-Domain-Kartendaten von der US-Volkszählung. Bei niedrigeren Zoomstufen sind nur Änderungen seit 2006, die noch nicht in OpenStreetMap eingearbeitet wurden, enthalten",
+            "New_and_Misaligned_TIGER_Roads-2013.name": "Neue & falsch ausgerichtete TIGER-Straßen",
+            "mapbox_locator_overlay.attribution.text": "Bedingungen & Feedback",
+            "mapbox_locator_overlay.description": "Zeigt die wichtigsten Funktionen an, um Ihnen beim Orientieren zu helfen.",
+            "mapbox_locator_overlay.name": "Orientierungs-Überlagerung",
+            "osm-gps.attribution.text": "© OpenStreetMap-Mitwirkende",
+            "osm-gps.description": "Öffentliche GPS-Spuren, zu OpenStreetMap hochgeladen.",
+            "osm-gps.name": "OpenStreetMap GPS-Spuren",
+            "osm-mapnik-german_style.attribution.text": "© OpenStreetMap-Mitwirkende, CC-BY-SA",
+            "osm-mapnik-german_style.name": "OpenStreetMap (Deutscher Stil)",
+            "stamen-terrain-background.attribution.text": "Kartenkacheln von Stamen Design, unter CC-BY 3.0",
+            "stamen-terrain-background.name": "Stamen Gelände",
+            "tf-cycle.attribution.text": "Karten © Thunderforest, Daten © OpenStreetMap-Mitwirkende",
+            "tf-cycle.name": "Thunderforest OpenCycleMap",
+            "tf-landscape.attribution.text": "Karten © Thunderforest, Daten © OpenStreetMap-Mitwirkende",
+            "tf-landscape.name": "Thunderforest Landschaft"
         }
     }
 }

@@ -914,7 +914,7 @@
                     "label": "通行可",
                     "options": {
                         "designated": {
-                            "description": "特定の地方条例や標識等で通行制限が行われている",
+                            "description": "標識等や特定の地方条例で通行が許可されている",
                             "title": "特定種の通行禁止"
                         },
                         "destination": {
@@ -3700,8 +3700,8 @@
                     "terms": "ガスタンク"
                 },
                 "man_made/groyne": {
-                    "name": "突堤",
-                    "terms": "突堤"
+                    "name": "水制",
+                    "terms": "水制, ケレップ水制, 防波堤, 突堤"
                 },
                 "man_made/lighthouse": {
                     "name": "灯台",

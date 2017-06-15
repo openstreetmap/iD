@@ -4990,6 +4990,9 @@
                     "terms": "Su Bendi, Su Seddi"
                 }
             }
+        },
+        "imagery": {
+            "osm-gps.name": "OpenStreetMap GPS rotaları"
         }
     }
 }

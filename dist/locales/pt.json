@@ -634,6 +634,7 @@
         },
         "intro": {
             "done": "feito",
+            "ok": "OK",
             "graph": {
                 "block_number": "<value for addr:block_number>",
                 "county": "<value for addr:county>",
@@ -647,6 +648,9 @@
                 "subdistrict": "<value for addr:subdistrict>",
                 "suburb": "<value for addr:suburb>",
                 "countrycode": "pt"
+            },
+            "welcome": {
+                "welcome": "bem vindo! Este tutorial irá ensiná-lo o básico de como editar no OpenStreetMap "
             },
             "navigation": {
                 "title": "Navegação"
@@ -1214,6 +1218,9 @@
                 "information": {
                     "label": "Tipo"
                 },
+                "inscription": {
+                    "label": "Inscricão"
+                },
                 "internet_access": {
                     "label": "Acesso à Internet",
                     "options": {
@@ -1229,6 +1236,9 @@
                 },
                 "internet_access/ssid": {
                     "label": "SSID (Nome da rede)"
+                },
+                "kerb": {
+                    "label": "Lancil"
                 },
                 "lamp_type": {
                     "label": "Tipo"
@@ -1933,6 +1943,15 @@
                 "amenity": {
                     "name": "Infraestrutura"
                 },
+                "amenity/animal_boarding": {
+                    "name": "Inatalações para embarque de animais "
+                },
+                "amenity/animal_breeding": {
+                    "name": "Instalação para reprodução de animais "
+                },
+                "amenity/animal_shelter": {
+                    "name": "Abrigo para animais "
+                },
                 "amenity/arts_centre": {
                     "name": "Centro artístico",
                     "terms": "Arts Center, Centro de Artes"
@@ -2140,6 +2159,9 @@
                     "name": "Discoteca (dança)",
                     "terms": "Nightclub, Salão de Dança"
                 },
+                "amenity/nursing_home": {
+                    "name": "Lar de idosos"
+                },
                 "amenity/parking": {
                     "name": "Parque de estacionamento",
                     "terms": "Estacionamento, Lugar de Estacionamento, Estacionar"
@@ -2151,6 +2173,9 @@
                 "amenity/parking_space": {
                     "name": "Lugar de estacionamento",
                     "terms": "Parking Space, Estacionamento, Estacionar"
+                },
+                "amenity/pavilion": {
+                    "name": "Pavilhão"
                 },
                 "amenity/pharmacy": {
                     "name": "Farmácia",
@@ -2255,6 +2280,9 @@
                     "name": "Abrigo para os sem-abrigo",
                     "terms": "Homeless Shelter, Casa para os Sem-Abrigo, Casa Pública, Sem-Abrigo"
                 },
+                "amenity/social_facility/nursing_home": {
+                    "name": "Lar de idosos"
+                },
                 "amenity/studio": {
                     "name": "Estúdio",
                     "terms": "Studio"
@@ -2346,6 +2374,9 @@
                 "amenity/water_point": {
                     "name": "Água potável para veículos recreativos",
                     "terms": "RV Drinking Water, Água, Caravana, Autocaravana"
+                },
+                "amenity/watering_place": {
+                    "name": "Local para bebedouro para animais "
                 },
                 "area": {
                     "name": "Área",
@@ -2626,6 +2657,9 @@
                     "name": "Confeitaria",
                     "terms": "Confectionery, Bolos, Pastelaria"
                 },
+                "craft/distillery": {
+                    "name": "Distilaria"
+                },
                 "craft/dressmaker": {
                     "name": "Costureira",
                     "terms": "Dressmaker, Costureiro, Estilista, Alfaiate, Modista"
@@ -2633,6 +2667,9 @@
                 "craft/electrician": {
                     "name": "Eletricista",
                     "terms": "Electrician, Homem da Luz"
+                },
+                "craft/electronics_repair": {
+                    "name": "Loja de reparação de aparelhos electrónicos"
                 },
                 "craft/gardener": {
                     "name": "Jardineiro",
@@ -2891,6 +2928,9 @@
                     "name": "Ciclovia",
                     "terms": "Bicicleta"
                 },
+                "highway/elevator": {
+                    "name": "Elevador"
+                },
                 "highway/footway": {
                     "name": "Caminho pedonal",
                     "terms": "Andar, Caminho, Estrada, Pé, Pedestre, Percurso, Rua, Ruela, Trajectória, Trilha, Trilho, Via, Viela, Caminho Pedonal"
@@ -2934,6 +2974,9 @@
                 "highway/primary_link": {
                     "name": "Ligação a uma estrada primária",
                     "terms": "Primary Link, Ligação Estrada Nacional, Ligação Rodovia Nacional, Ligação Nacional,  Ligação Estrada Principal, Entrada Estrada Nacional, Entrada Rodovia Nacional, Entrada Nacional, Entrada Estrada Nacional, Saída Nacional, Saída Rodovia Nacional, Saída Nacional, Saída Estrada Nacional,"
+                },
+                "highway/raceway": {
+                    "name": "Pista de corridas (motorizados) "
                 },
                 "highway/residential": {
                     "name": "Rua residencial",
@@ -3330,6 +3373,9 @@
                     "name": "Campo de basquetebol",
                     "terms": "Basquetebol, Quadra de Basquetebol, Basketball Court"
                 },
+                "leisure/pitch/beachvolleyball": {
+                    "name": "Campo de volley de praia"
+                },
                 "leisure/pitch/bowls": {
                     "name": "Campo de boccia",
                     "terms": "Bowling Green"
@@ -3337,6 +3383,9 @@
                 "leisure/pitch/cricket": {
                     "name": "Campo de Críquete",
                     "terms": "campo de críquete, campo de cricket, campo de jogos de críquete, campo de jogos de cricket"
+                },
+                "leisure/pitch/equestrian": {
+                    "name": "Pista de Equitação"
                 },
                 "leisure/pitch/rugby_league": {
                     "name": "Campo de rugby de 13",
@@ -3374,6 +3423,9 @@
                     "name": "Restort",
                     "terms": "Resort, resorte, centro de férias, estação turística, estância turística ou hotel de lazer"
                 },
+                "leisure/running_track": {
+                    "name": "Pista de atletismo "
+                },
                 "leisure/slipway": {
                     "name": "Rampa para barcos",
                     "terms": "Slipway"
@@ -3393,6 +3445,9 @@
                 "leisure/swimming_pool": {
                     "name": "Piscina",
                     "terms": "Piscina, Swimming Pool"
+                },
+                "leisure/track": {
+                    "name": "Pista de corridas (não motorizados) "
                 },
                 "leisure/water_park": {
                     "name": "Parque Aquático",
@@ -3754,9 +3809,15 @@
                     "name": "Bairro",
                     "terms": "Neigborhood, Vizinhança"
                 },
+                "place/quarter": {
+                    "name": "Quarteirão"
+                },
                 "place/square": {
                     "name": "Praça",
                     "terms": "Square"
+                },
+                "place/suburb": {
+                    "name": "Suburbio"
                 },
                 "place/town": {
                     "name": "Cidade / Vila",
@@ -3905,6 +3966,9 @@
                 "shop/antiques": {
                     "name": "Loja de antiguidades",
                     "terms": "Antiques Shop, Antiguidade, Antiguidades, Antigo, Relíquia, Relíquias"
+                },
+                "shop/appliance": {
+                    "name": "Loja de Electrodomésticos"
                 },
                 "shop/art": {
                     "name": "Loja de Artes",
@@ -4670,6 +4734,31 @@
                     "terms": "Weir"
                 }
             }
+        },
+        "imagery": {
+            "Bing.name": "Imagem aérea Bing ",
+            "DigitalGlobe-Premium.attribution.text": "Termos e opinião ",
+            "DigitalGlobe-Premium.name": "Imagem aérea DigitalGlobe Premium ",
+            "DigitalGlobe-Standard.attribution.text": "Termos e opinião ",
+            "DigitalGlobe-Standard.name": "Imagem aérea DigitalGlobe Standard ",
+            "Mapbox.attribution.text": "Termos e opinião",
+            "Mapbox.name": "Imagem aérea Mapbox",
+            "New_and_Misaligned_TIGER_Roads-2013.description": "No nível de zoom acima de 16, a data de domínio público dos Censos dos EUA. Nos níveis de zoom inferiores, apenas alterações desde 200 excepto alterações já incorporadas no OpenStreetMap",
+            "New_and_Misaligned_TIGER_Roads-2013.name": "Novas e desalinhadas estradas TIGER",
+            "mapbox_locator_overlay.attribution.text": "Termos e opinião",
+            "mapbox_locator_overlay.description": "Mostrar as principais funções para ajudá-lo.",
+            "mapbox_locator_overlay.name": "Camada superior de localização",
+            "osm-gps.attribution.text": "© contribuidores OpenStreetMap",
+            "osm-gps.description": "Registos de GPS públicos enviados para o OpenStreetMap",
+            "osm-gps.name": "registos GPS do OpenStreetMap",
+            "osm-mapnik-german_style.attribution.text": "© contribuidores OpenStreetMap, CC-BY-SA",
+            "osm-mapnik-german_style.name": "OpenStreetMap (estilo alemão)",
+            "stamen-terrain-background.attribution.text": "Moisacos de mapa por Stamen Design, sob licença CC BY 3.0",
+            "stamen-terrain-background.name": "Terreno Stamen",
+            "tf-cycle.attribution.text": "Mapas © Thunderforest, Data contribuidores © OpenStreetMap",
+            "tf-cycle.name": "Thunderforest OpenCycleMap",
+            "tf-landscape.attribution.text": "Mapas © Thunderforest, Data contribuidores © OpenStreetMap",
+            "tf-landscape.name": "Paisagem Thunderforest"
         }
     }
 }

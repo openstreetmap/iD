@@ -885,6 +885,7 @@
         },
         "shortcuts": {
             "title": "Atajos de teclado",
+            "tooltip": "Muestra la pantalla de atajos de teclado.",
             "key": {
                 "alt": "Alt",
                 "backspace": "Retroceso",
@@ -2983,6 +2984,10 @@
                     "name": "Repostero",
                     "terms": "confitería, dulces, repostería, repostero, golosina, bombones, pastelería, dulcería"
                 },
+                "craft/distillery": {
+                    "name": "Destilería",
+                    "terms": "Destileria, alcohol, bebida, bourbon, licor, brandy, ginebra, hooch, mezcal, moonshine, ron, scotch, escocés, bebidas espirituosas, tequila, vodka, whiskey,whisky"
+                },
                 "craft/dressmaker": {
                     "name": "Modista",
                     "terms": "modista, costurera, sastre, diseñador, moda"
@@ -3492,8 +3497,8 @@
                     "terms": "tierras de cultivo, tierras agrícolas, tierras de labranza, terreno agrícola, campo, chacra, chaco, agroagricultura"
                 },
                 "landuse/farmyard": {
-                    "name": "Edificio agrario",
-                    "terms": "corral, redil, edificio granja, graneros, cobertizos, edificio de granja, edificio agrario"
+                    "name": "Terreno de edificios agrarios",
+                    "terms": "corral, redil, edificio granja, graneros, cobertizos, edificio agrario, casco de estancia, estancia, hacienda, cultivos, cultivar"
                 },
                 "landuse/forest": {
                     "name": "Plantación forestal",
@@ -5068,6 +5073,31 @@
                     "terms": "presa, presas, azud, represa"
                 }
             }
+        },
+        "imagery": {
+            "Bing.name": "Imágenes aéreas de Bing",
+            "DigitalGlobe-Premium.attribution.text": "Términos y comentarios",
+            "DigitalGlobe-Premium.name": "Imágenes de DigitalGlobe Premium",
+            "DigitalGlobe-Standard.attribution.text": "Términos y comentarios",
+            "DigitalGlobe-Standard.name": "Imágenes de DigitalGlobe Standard",
+            "Mapbox.attribution.text": "Términos y comentarios",
+            "Mapbox.name": "Mapbox Satellite",
+            "New_and_Misaligned_TIGER_Roads-2013.description": "En el nivel de zoom 16+, datos del mapa de dominio público del censo de los Estados Unidos. A menor zooms, sólo los cambios desde 2006 menos los cambios ya incorporados en OpenStreetMap",
+            "New_and_Misaligned_TIGER_Roads-2013.name": "Vías nuevas y desalineadas de TIGER",
+            "mapbox_locator_overlay.attribution.text": "Términos y comentarios",
+            "mapbox_locator_overlay.description": "Muestra los principales elementos para ayudar a orientar.",
+            "mapbox_locator_overlay.name": "Superposición de localizador",
+            "osm-gps.attribution.text": "© Colaboradores de OpenStreetMap",
+            "osm-gps.description": "Trazas GPS públicas cargadas en OpenStreetMap.",
+            "osm-gps.name": "Trazas GPS de OpenStreetMap",
+            "osm-mapnik-german_style.attribution.text": "© Colaboradores de OpenStreetMap, CC-BY-SA",
+            "osm-mapnik-german_style.name": "OpenStreetMap (estilo alemán)",
+            "stamen-terrain-background.attribution.text": "Teselas de mapas de Stamen Design, bajo CC BY 3.0",
+            "stamen-terrain-background.name": "Stamen Terrain",
+            "tf-cycle.attribution.text": "Mapas © Thunderforest, Datos © Colaboradores de OpenStreetMap",
+            "tf-cycle.name": "Thunderforest OpenCycleMap",
+            "tf-landscape.attribution.text": "Mapas © Thunderforest, Datos © Colaboradores de OpenStreetMap",
+            "tf-landscape.name": "Thunderforest Landscape"
         }
     }
 }

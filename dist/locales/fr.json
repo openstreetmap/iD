@@ -885,6 +885,29 @@
         },
         "shortcuts": {
             "title": "Raccourcis clavier",
+            "tooltip": "Afficher la page de raccourcis clavier",
+            "key": {
+                "alt": "Alt",
+                "backspace": "⌫ Retour",
+                "cmd": "Cmd",
+                "ctrl": "Ctrl",
+                "delete": "Suppr ⌦",
+                "del": "Suppr ⌦",
+                "end": "Fin",
+                "enter": "Entrée",
+                "esc": "Échap",
+                "home": "↖ Début",
+                "option": "Opt",
+                "pause": "Pause",
+                "pgdn": "⇞ Pg.Préc",
+                "pgup": "\f Pg.Suiv",
+                "return": "⌫ Retour",
+                "shift": "⇧ Maj",
+                "space": "Espace"
+            },
+            "gesture": {
+                "drag": "glisser"
+            },
             "or": "-ou-",
             "browsing": {
                 "title": "Navigation",

@@ -735,7 +735,7 @@
                     "saint-joseph-river": "Czesława Małka",
                     "scidmore-park-petting-zoo": "Ogródek zoologiczny w Chrząszczyżewoszycach",
                     "scidmore-park": "Park Inwalidów Wojennych",
-                    "scouter-park": "Park Hulajnogowy",
+                    "scouter-park": "Park hulajnożny",
                     "sherwin-williams": "Mrówka",
                     "south-street": "Południowa",
                     "southern-michigan-bank": "Bank Opolski",
@@ -770,7 +770,7 @@
                 "mouse": "Możesz użyć dowolnego \"urządzenia wejścia\" aby edytować mapę, ale poradnik zakłada, że posiadasz myszkę z lewym i prawym przyciskiem. **Jeśli chcesz podłączyć myszkę, zrób to teraz, a potem naciśnij OK.**",
                 "leftclick": "Kiedy poradnik prosi cię o kliknięcie lub podwójne kliknięcie, użyj lewego przycisku. Na touchpadzie może to być jedno kliknięcie, lub jedno dotknięcie. **Kliknij lewym przyciskiem {num} razy.**",
                 "rightclick": "Czasami możemy Cię poprosić o użycie prawego przycisku. Na touchpadzie może to być Ctrl+kliknięcie lub dotknięcie dwoma palcami. **Kliknij prawym przyciskiem {num} razy.**",
-                "chapters": "W porządku! Klikając na przyciski poniżej możesz w każdej chwili zrestartować rozdział (jeśli utknąłeś) lub pominąć te rozdziały które Cię nie interesują. Zaczynajmy! **Kliknij '{next}' aby kontynuować.**"
+                "chapters": "W porządku! Klikając na przyciski poniżej możesz w każdej chwili zrestartować rozdział (jeśli utknąłeś) lub pominąć te rozdziały, które Cię nie interesują. Zaczynajmy! **Kliknij '{next}', aby kontynuować.**"
             },
             "navigation": {
                 "title": "Nawigacja",
@@ -813,8 +813,11 @@
                 "retry_preset_residential": "Nie zaznaczyłeś typu {preset}. **Kliknij tutaj, aby wybrać ponownie.**",
                 "name_road": "**Nazwij drogę, a następnie wciśnij Escape, Enter lub wciśnij przycisk {button}, aby zamknąć edytor obiektów.**",
                 "did_name_road": "Nieźle! Następnie nauczysz się jak zmienić kształt linii.",
+                "finish_drag_endpoint": "Ta kropka wygląda dobrze. **Zwolnij lewy przycisk myszki, aby zakończyć przeciąganie.**",
                 "split_intersection": "**Naciśnij przycisk {button}, aby rozdzielić {street}.**",
                 "retry_split": "Nie nacisnąłeś na przycisk Rozdziel. Spróbuj ponownie.",
+                "did_split_single": "**Naciśnij górną część {street2}, aby ją wybrać.**",
+                "multi_rightclick": "Dobrze! Obie linie do usunięcia są już zaznaczone. **Kliknij prawym przyciskiem myszki na jedną z linii, aby wyświetlić menu edycji.**",
                 "multi_delete": "**Naciśnij przycisk {button}, aby usunąć dodatkowe linie.**",
                 "retry_delete": "Nie nacisnąłeś na przycisk Usuń. Spróbuj ponownie."
             },
@@ -822,8 +825,11 @@
                 "title": "Budynki",
                 "choose_category_building": "**Wybierz {category} z listy.**",
                 "close": "**Naciśnij Escape lub wciśnij przycisk {button}, by zamknąć edytor obiektów.**",
+                "square_building": "Budynek, który właśnie dodałeś, będzie wyglądał lepiej z idealnie wyrównanymi narożnikami. **Kliknij na przycisk {button}, aby wyprostować kształt budynku.**",
+                "retry_square": "Nie nacisnąłeś na przycisk Popraw prostopadłość. Spróbuj ponownie.",
                 "search_tank": "**Wyszukaj '{preset}'.**",
-                "choose_tank": "**Wybierz {preset} z listy.**"
+                "choose_tank": "**Wybierz {preset} z listy.**",
+                "retry_circle": "Nie nacisnąłeś na przycisk Zaokrąglij. Spróbuj ponownie."
             },
             "startediting": {
                 "title": "Rozpocznij edytowanie",
@@ -833,10 +839,35 @@
         },
         "shortcuts": {
             "title": "Skróty klawiszowe",
+            "tooltip": "Wyświetl ekran skrótów klawiszowych.",
+            "key": {
+                "alt": "Alt",
+                "backspace": "Backspace",
+                "cmd": "Cmd",
+                "ctrl": "Ctrl",
+                "delete": "Delete",
+                "del": "Del",
+                "end": "End",
+                "enter": "Enter",
+                "esc": "Esc",
+                "home": "Home",
+                "option": "Option",
+                "pause": "Pause",
+                "pgdn": "PgDn",
+                "pgup": "PgUp",
+                "return": "Return",
+                "shift": "Shift",
+                "space": "Space"
+            },
+            "gesture": {
+                "drag": "przeciągnij"
+            },
+            "or": "-lub-",
             "browsing": {
                 "title": "Przeglądanie",
                 "navigation": {
-                    "title": "Nawigacja"
+                    "title": "Nawigacja",
+                    "zoom": "Przybliż / Oddal"
                 },
                 "help": {
                     "title": "Pomoc",
@@ -845,7 +876,28 @@
                 },
                 "display_options": {
                     "title": "Opcje wyświetlania",
-                    "background": "Wyświetl opcje tła"
+                    "background": "Wyświetl opcje tła",
+                    "background_switch": "Wróć do ostatniego podkładu",
+                    "map_data": "Wyświetl opcje danych mapy",
+                    "fullscreen": "Wejdź w tryb pełnoekranowy",
+                    "minimap": "Przełącz minimapę"
+                },
+                "selecting": {
+                    "title": "Wybieranie obiektów",
+                    "select_one": "Wybierz jeden obiekt",
+                    "select_multi": "Wybieranie wielu obiektów",
+                    "lasso": "Narysuj lasso wyboru wokół obiektów"
+                },
+                "with_selected": {
+                    "title": "Z zaznaczonym obiektem",
+                    "edit_menu": "Przełącz menu edycji"
+                },
+                "vertex_selected": {
+                    "title": "Z zaznaczonym węzłem",
+                    "previous": "Przejdź do poprzedniego węzła",
+                    "next": "Przejdź do następnego węzła",
+                    "first": "Przejdź do pierwszego węzła",
+                    "last": "Przejdź do ostatniego węzła"
                 }
             },
             "editing": {
@@ -855,10 +907,28 @@
                     "add_point": "Tryb 'Dodawania punktu'",
                     "add_line": "Tryb 'Dodawania linii'",
                     "add_area": "Tryb 'Dodawania obszaru'",
-                    "place_point": "Umieść punkt"
+                    "place_point": "Umieść punkt",
+                    "stop_line": "Zakończ rysowanie linii lub obszaru"
+                },
+                "operations": {
+                    "title": "Działania",
+                    "continue_line": "Kontynuuj linię w zaznaczonym węźle",
+                    "merge": "Złącz (połącz) wybrane obiekty",
+                    "disconnect": "Rozłącz obiekty w zaznaczonym węźle",
+                    "split": "Rozdziel linię na dwie części w zaznaczonym węźle",
+                    "reverse": "Odwróć linię",
+                    "move": "Przenieś wybrane obiekty",
+                    "rotate": "Obróć wybrane obiekty",
+                    "orthogonalize": "Wyprostuj linię / narożniki pola obszaru",
+                    "circularize": "Zaokrąglij zamkniętą linię lub obszar",
+                    "reflect_long": "Odbij obiekty wzdłuż dłuższego boku",
+                    "reflect_short": "Odbij obiekty wzdłuż krótszego boku",
+                    "delete": "Usuń wybrane obiekty"
                 },
                 "commands": {
                     "title": "Polecenia",
+                    "copy": "Kopiuj wybrane obiekty",
+                    "paste": "Wklej skopiowane obiekty",
                     "undo": "Cofnij ostatnie działanie",
                     "redo": "Ponów ostatnie działanie",
                     "save": "Zapisz zmiany"
@@ -2240,7 +2310,7 @@
                 },
                 "amenity/clock": {
                     "name": "Zegar",
-                    "terms": "Zegar, "
+                    "terms": "zegarek"
                 },
                 "amenity/college": {
                     "name": "Teren szkoły",
@@ -2259,7 +2329,7 @@
                     "terms": "sąd,sprawiedliwość,trybunał"
                 },
                 "amenity/coworking_space": {
-                    "name": "Coworking"
+                    "name": "Przestrzeń współpracy"
                 },
                 "amenity/crematorium": {
                     "name": "Krematorium",
@@ -2287,10 +2357,10 @@
                 },
                 "amenity/embassy": {
                     "name": "Ambasada",
-                    "terms": "ambasada"
+                    "terms": "konsulat"
                 },
                 "amenity/fast_food": {
-                    "name": "Fastfood",
+                    "name": "Fast-food",
                     "terms": "kebab, hot dog, fast food, McDonald's, McDonald, bar"
                 },
                 "amenity/ferry_terminal": {
@@ -2302,8 +2372,8 @@
                     "terms": "straż,osp,psp,ochotnicza straż pożarna"
                 },
                 "amenity/food_court": {
-                    "name": "Food Court",
-                    "terms": "food court"
+                    "name": "Punkt gastronomiczny",
+                    "terms": "część restauracyjna w centrum handlowym"
                 },
                 "amenity/fountain": {
                     "name": "Fontanna",
@@ -2334,7 +2404,7 @@
                     "terms": "sklep z lodami"
                 },
                 "amenity/internet_cafe": {
-                    "name": "Kafejka Internetowa",
+                    "name": "Kafejka internetowa",
                     "terms": "Internet"
                 },
                 "amenity/kindergarten": {
@@ -2355,7 +2425,7 @@
                 },
                 "amenity/nightclub": {
                     "name": "Klub nocny",
-                    "terms": "Klub nocny,"
+                    "terms": "klub dla dorosłych, striptease"
                 },
                 "amenity/nursing_home": {
                     "name": "Dom spokojnej starości"
@@ -2425,12 +2495,12 @@
                     "terms": "pub,piwo,wino"
                 },
                 "amenity/public_bath": {
-                    "name": "Łaźnie Publiczne",
+                    "name": "Łaźnie publiczne",
                     "terms": "Łazienki, mycie,"
                 },
                 "amenity/public_bookcase": {
-                    "name": "Półka bookcrossingowa",
-                    "terms": "bookcrossing"
+                    "name": "Publiczna wymiana książek",
+                    "terms": "półka z książkami, wymiana, bookcrossing"
                 },
                 "amenity/ranger_station": {
                     "name": "Baza strażników rezerwatu/parku",
@@ -2438,7 +2508,7 @@
                 },
                 "amenity/recycling": {
                     "name": "Recykling",
-                    "terms": "Recykling, Recyklizacja"
+                    "terms": "Przetwarzanie odpadów, utylizacja, recyklizacja"
                 },
                 "amenity/recycling_centre": {
                     "name": "Centrum przetwarzania odpadów (recycling)",
@@ -2472,7 +2542,7 @@
                     "terms": "Bank żywności, "
                 },
                 "amenity/social_facility/group_home": {
-                    "name": "Dom Spokojnej Starości",
+                    "name": "Dom spokojnej starości",
                     "terms": "dom starców, dom seniora"
                 },
                 "amenity/social_facility/homeless_shelter": {
@@ -2480,7 +2550,7 @@
                     "terms": "przytułek dla bezdomnych"
                 },
                 "amenity/social_facility/nursing_home": {
-                    "name": "Dom spokojnej starości",
+                    "name": "Dom opieki",
                     "terms": "Dom starców"
                 },
                 "amenity/studio": {
@@ -2559,7 +2629,7 @@
                 },
                 "amenity/veterinary": {
                     "name": "Weterynarz",
-                    "terms": "Zakład weterynaryjny, Weterynarz"
+                    "terms": "Zakład weterynaryjny, lecznica dla zwierząt"
                 },
                 "amenity/waste_basket": {
                     "name": "Kosz na śmieci",
@@ -2570,7 +2640,7 @@
                     "terms": "śmietnik"
                 },
                 "amenity/waste_transfer_station": {
-                    "name": "Stacja Przeróbki Odpadów",
+                    "name": "Stacja przeróbki odpadów",
                     "terms": "odpady"
                 },
                 "amenity/water_point": {
@@ -2732,7 +2802,7 @@
                 },
                 "building/hospital": {
                     "name": "Budynek szpitala",
-                    "terms": "Budynek Szpitalny"
+                    "terms": "Budynek szpitalny"
                 },
                 "building/hotel": {
                     "name": "Budynek hotelu",
@@ -2861,6 +2931,10 @@
                     "name": "Sklep ze słodyczami",
                     "terms": "Słodycze"
                 },
+                "craft/distillery": {
+                    "name": "Gorzelnia",
+                    "terms": "wytwórnia napojów alkoholowych, destylarnia"
+                },
                 "craft/dressmaker": {
                     "name": "Krawiec",
                     "terms": "Krawcowa"
@@ -2870,7 +2944,8 @@
                     "terms": "elektryk,elektrotechnik"
                 },
                 "craft/electronics_repair": {
-                    "name": "Punkt napraw sprzętu elektronicznego"
+                    "name": "Punkt napraw sprzętu elektronicznego",
+                    "terms": "naprawa RTV, naprawa elektroniki"
                 },
                 "craft/gardener": {
                     "name": "Ogrodnik",
@@ -2967,7 +3042,7 @@
                 },
                 "craft/stonemason": {
                     "name": "Zakład kamieniarski",
-                    "terms": "Zakład Kamieniarski, Kamieniarz"
+                    "terms": "kamieniarz"
                 },
                 "craft/sweep": {
                     "name": "Kominiarz",
@@ -2977,8 +3052,8 @@
                     "name": "Krawiec"
                 },
                 "craft/tiler": {
-                    "name": "Kafelkarz",
-                    "terms": "kafelki,płytki,glazura,terakota"
+                    "name": "Glazurnik",
+                    "terms": "kafelkarz,kafelki,płytki,glazura,terakota"
                 },
                 "craft/tinsmith": {
                     "name": "Blacharz",
@@ -3013,30 +3088,30 @@
                     "terms": "defibrylator"
                 },
                 "emergency/designated": {
-                    "name": "Dojazd dla służb ratowniczych - Wyznaczony"
+                    "name": "Wyznaczony dojazd dla służb ratowniczych"
                 },
                 "emergency/destination": {
-                    "name": "Dojazd dla służb ratowniczych docelowy"
+                    "name": "Docelowy dojazd dla służb ratowniczych"
                 },
                 "emergency/fire_hydrant": {
-                    "name": "Hydrant",
+                    "name": "Hydrant przeciwpożarowy",
                     "terms": "hydrant"
                 },
                 "emergency/no": {
                     "name": "Brak dojazdu dla służb ratowniczych"
                 },
                 "emergency/official": {
-                    "name": "Dojazd dla służb ratowniczych oficjalny"
+                    "name": "Oficjalny dojazd dla służb ratowniczych"
                 },
                 "emergency/phone": {
                     "name": "Telefon alarmowy",
                     "terms": "telefon,alarmowy,alarm"
                 },
                 "emergency/private": {
-                    "name": "Dojazd dla służb ratowniczych prywatny"
+                    "name": "Prywatny dojazd dla służb ratowniczych"
                 },
                 "emergency/yes": {
-                    "name": "Dojazd dla służb ratowniczych Tak"
+                    "name": "Istniejący dojazd dla służb ratowniczych"
                 },
                 "entrance": {
                     "name": "Wejście/wyjście",
@@ -3063,23 +3138,23 @@
                     "terms": "sand trap"
                 },
                 "golf/fairway": {
-                    "name": "Fairway",
+                    "name": "Bieżnia (część pola golfowego)",
                     "terms": "fairway"
                 },
                 "golf/green": {
                     "name": "green",
-                    "terms": "putting green"
+                    "terms": "pole puttingowe, małe pole golfowe"
                 },
                 "golf/hole": {
                     "name": "dołek na polu golfowym ",
                     "terms": "dołek golfowy"
                 },
                 "golf/lateral_water_hazard_area": {
-                    "name": "Przeszkoda Wodna Boczna",
+                    "name": "Przeszkoda wodna boczna",
                     "terms": "przeszkoda wodna boczna"
                 },
                 "golf/lateral_water_hazard_line": {
-                    "name": "Przeszkoda Wodna Boczna",
+                    "name": "Przeszkoda wodna boczna",
                     "terms": "przeszkoda wodna boczna"
                 },
                 "golf/rough": {
@@ -3091,16 +3166,16 @@
                     "terms": "tee box"
                 },
                 "golf/water_hazard_area": {
-                    "name": "Przeszkoda Wodna",
+                    "name": "Przeszkoda wodna",
                     "terms": "przeszkoda wodna"
                 },
                 "golf/water_hazard_line": {
-                    "name": "Przeszkoda Wodna",
+                    "name": "Przeszkoda wodna",
                     "terms": "przeszkoda wodna"
                 },
                 "healthcare/blood_donation": {
-                    "name": "Centrum Dawców Krwi",
-                    "terms": "dawstwo krwi"
+                    "name": "Centrum dawców krwi",
+                    "terms": "dawstwo krwi, krwiodawstwo"
                 },
                 "highway": {
                     "name": "Droga"
@@ -3130,7 +3205,8 @@
                     "terms": "droga,rowerowa,ścieżka,rowerów"
                 },
                 "highway/elevator": {
-                    "name": "Winda"
+                    "name": "Winda",
+                    "terms": "podnośnik, wyciąg"
                 },
                 "highway/footway": {
                     "name": "Droga/ścieżka dla pieszych",
@@ -4021,7 +4097,7 @@
                 },
                 "place/square": {
                     "name": "Plac publiczny",
-                    "terms": "plac miejski, rynek"
+                    "terms": "plac miejski, rynek, skwer"
                 },
                 "place/suburb": {
                     "name": "Dzielnica",
@@ -4176,7 +4252,8 @@
                     "terms": "sklep z antykami, antyki"
                 },
                 "shop/appliance": {
-                    "name": "Sklep z AGD"
+                    "name": "Sklep z AGD",
+                    "terms": "zmywarki, suszarki, lodówki, zamrażarki, kuchenki, mikrofalówki, miksery, roboty kuchenne"
                 },
                 "shop/art": {
                     "name": "Sklep z dziełami sztuki",
@@ -4943,6 +5020,31 @@
                     "terms": "jaz,tama"
                 }
             }
+        },
+        "imagery": {
+            "Bing.name": "Zdjęcia satelitarne i lotnicze Bing",
+            "DigitalGlobe-Premium.attribution.text": "Warunki użytkowania i opinia",
+            "DigitalGlobe-Premium.name": "Zdjęcia satelitarne DigitalGlobe Premium",
+            "DigitalGlobe-Standard.attribution.text": "Warunki użytkowania i opinia",
+            "DigitalGlobe-Standard.name": "Zdjęcia satelitarne DigitalGlobe Standard",
+            "Mapbox.attribution.text": "Warunki użytkowania i opinia",
+            "Mapbox.name": "Zdjęcia satelitarne Mapbox",
+            "New_and_Misaligned_TIGER_Roads-2013.description": "Przy poziomie przybliżenia 16+ dane w domenie publicznej z Spisu ludności Stanów Zjednoczonych. Przy mniejszym przybliżeniu - tylko zmiany od 2006 oprócz zmian już wprowadzonych do OpenStreetMap",
+            "New_and_Misaligned_TIGER_Roads-2013.name": "Nowe i niewyrównane drogi TIGER",
+            "mapbox_locator_overlay.attribution.text": "Warunki użytkowania i opinia",
+            "mapbox_locator_overlay.description": "Pokazuje najważniejsze obiekty pomocne w orientacji.",
+            "mapbox_locator_overlay.name": "Nakładka lokalizująca",
+            "osm-gps.attribution.text": "© użytkownicy OpenStreetMap",
+            "osm-gps.description": "Publiczne ślady GPS przesłane do OpenStreetMap.",
+            "osm-gps.name": "Ślady GPS OpenStreetMap",
+            "osm-mapnik-german_style.attribution.text": "© użytkownicy OpenStreetMap, CC-BY-SA",
+            "osm-mapnik-german_style.name": "OpenStreetMap (Styl niemiecki)",
+            "stamen-terrain-background.attribution.text": "Kafelki mapowe Stamen Design, licencja CC BY 3.0",
+            "stamen-terrain-background.name": "Teren Stamen",
+            "tf-cycle.attribution.text": "Mapa © Thunderforest, dane © użytkownicy OpenStreetMap",
+            "tf-cycle.name": "Thunderforest OpenCycleMap",
+            "tf-landscape.attribution.text": "Mapa © Thunderforest, dane © użytkownicy OpenStreetMap",
+            "tf-landscape.name": "Thunderforest Krajobraz"
         }
     }
 }

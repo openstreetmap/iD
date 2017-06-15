@@ -5073,6 +5073,12 @@
                     "terms": "坝,堰坝,拦河坝"
                 }
             }
+        },
+        "imagery": {
+            "Bing.name": "必应航空图像",
+            "DigitalGlobe-Premium.attribution.text": "条款和反馈",
+            "DigitalGlobe-Premium.name": "DigitalGlobe（美国数字地球公司）优质图像",
+            "DigitalGlobe-Standard.name": "DigitalGlobe（美国数字地球公司）标准图像"
         }
     }
 }

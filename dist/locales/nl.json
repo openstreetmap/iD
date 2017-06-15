@@ -4859,6 +4859,31 @@
                     "terms": "waterkering,stuwdam,keerdam"
                 }
             }
+        },
+        "imagery": {
+            "Bing.name": "Bing-luchtfotografie",
+            "DigitalGlobe-Premium.attribution.text": "Gebruiksvoorwaarden & feedback",
+            "DigitalGlobe-Premium.name": "DigitalGlobe-premiumbeelden",
+            "DigitalGlobe-Standard.attribution.text": "Gebruiksvoorwaarden & feedback",
+            "DigitalGlobe-Standard.name": "DigitalGlobe-standaardbeelden",
+            "Mapbox.attribution.text": "Gebruiksvoorwaarden & feedback",
+            "Mapbox.name": "Mapbox-satellietbeelden",
+            "New_and_Misaligned_TIGER_Roads-2013.description": "Bij zoomniveau 16+, kaartdata in publiek domein van de VS Census. Bij lagere zoomniveaus, enkel wijzigingen sinds 2006 behalve wijzigingen die al in OpenStreetMap zitten",
+            "New_and_Misaligned_TIGER_Roads-2013.name": "Nieuwe & slecht uitgelijnde TIGER-wegen",
+            "mapbox_locator_overlay.attribution.text": "Gebruiksvoorwaarden & feedback",
+            "mapbox_locator_overlay.description": "Toont grote objecten om je te helpen oriënteren.",
+            "mapbox_locator_overlay.name": "Oriëntatiehulp",
+            "osm-gps.attribution.text": "© OpenStreetMap-bijdragers",
+            "osm-gps.description": "Publieke GPS-traces die door gebruikers naar OpenStreetMap geüpload zijn.",
+            "osm-gps.name": "GPS-traces van OpenStreetMap",
+            "osm-mapnik-german_style.attribution.text": "© OpenStreetMap-bijdragers, CC BY-SA",
+            "osm-mapnik-german_style.name": "OpenStreetMap (Duitse stijl)",
+            "stamen-terrain-background.attribution.text": "Kaarttegels door Stamen Design, onder CC BY 3.0",
+            "stamen-terrain-background.name": "Stamen Terrein",
+            "tf-cycle.attribution.text": "Kaartstijl © Thunderforest, gegevens © OpenStreetMap-bijdragers",
+            "tf-cycle.name": "Thunderforest OpenCycleMap (fietskaart)",
+            "tf-landscape.attribution.text": "Kaartstijl © Thunderforest, gegevens © OpenStreetMap-bijdragers",
+            "tf-landscape.name": "Thunderforest Landschap"
         }
     }
 }
