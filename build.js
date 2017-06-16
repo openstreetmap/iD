@@ -66,8 +66,8 @@ fs.writeFileSync('data/taginfo.json', JSON.stringify(taginfo, null, 4));
 
 // Push changes from data/core.yaml into en.json
 var core = YAML.load(fs.readFileSync('data/core.yaml', 'utf8'));
-var imagery = JSON.parse(fs.readFileSync('./node_modules/editor-layer-index/i18n/en.json', 'utf8'));
-var en = _.merge(core, { en: { presets: tstrings }}, { en: { imagery: imagery }});
+var imagery = YAML.load(fs.readFileSync('node_modules/editor-layer-index/i18n/en.yaml', 'utf8'));
+var en = _.merge(core, { en: { presets: tstrings }}, imagery);
 fs.writeFileSync('dist/locales/en.json', JSON.stringify(en, null, 4));
 
 process.exit();

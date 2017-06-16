@@ -9,6 +9,7 @@ export function rendererBackgroundSource(data) {
     var source = _.clone(data),
         offset = [0, 0],
         name = source.name,
+        description = source.description,
         best = !!source.best;
 
     source.scaleExtent = data.scaleExtent || [0, 20];
@@ -30,7 +31,12 @@ export function rendererBackgroundSource(data) {
 
 
     source.name = function() {
-        return name;
+        return t('imagery.' + source.id + '.name', { default: name });
+    };
+
+
+    source.description = function() {
+        return t('imagery.' + source.id + '.description', { default: description });
     };
 
 

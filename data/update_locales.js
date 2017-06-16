@@ -26,13 +26,13 @@ var auth = JSON.parse(fs.readFileSync('./transifex.auth', 'utf8'));
 
 var sourceCore = yaml.load(fs.readFileSync('./data/core.yaml', 'utf8')),
     sourcePresets = yaml.load(fs.readFileSync('./data/presets.yaml', 'utf8')),
-    sourceImagery = JSON.parse(fs.readFileSync('./node_modules/editor-layer-index/i18n/en.json', 'utf8'));
+    sourceImagery = yaml.load(fs.readFileSync('./node_modules/editor-layer-index/i18n/en.yaml', 'utf8'));
 
 
 asyncMap(resources, getResource, function(err, locales) {
     if (err) return console.log(err);
 
-    var locale = _.merge(sourceCore, sourcePresets, { en: { imagery: sourceImagery }}),
+    var locale = _.merge(sourceCore, sourcePresets, sourceImagery),
         dataLocales = {};
 
     locales.forEach(function(l) {
@@ -83,33 +83,14 @@ function getResource(resource, callback) {
 function getLanguage(resourceURL) {
     return function(code, callback) {
         code = code.replace(/-/g, '_');
-        var isImagery = resourceURL.match(/imagery\/$/);
-        var mode;
+        var url = resourceURL + 'translation/' + code;
+        if (code === 'vi') { url += '?mode=reviewed'; }
 
-        // Transifex treats JSONKEYVALUE a bit differently than YML.
-        // YML = untranslated strings are excluded
-        // JSONKEYVALUE = untranslated strings are replaced by source strings
-        if (code === 'vi') {
-            mode = isImagery ? 'onlyreviewed' : 'reviewed';
-        } else {
-            mode = isImagery ? 'onlytranslated': 'default';
-        }
-
-        var url = resourceURL + 'translation/' + code + '?mode=' + mode;
         request.get(url, { auth : auth }, function(err, resp, body) {
             if (err) return callback(err);
             console.log(resp.statusCode + ': ' + url);
-
             var content = JSON.parse(body).content;
-            var data;
-            if (isImagery) {
-                // keep only translated (non-empty) values
-                var imagery = _.pickBy(JSON.parse(content), _.identity);
-                data = _.isEmpty(imagery) ? {} : { imagery: imagery };
-            } else {
-                data = yaml.safeLoad(content)[code];
-            }
-            callback(null, data);
+            callback(null, yaml.safeLoad(content)[code]);
         });
     };
 }

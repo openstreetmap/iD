@@ -62,6 +62,7 @@ export function uiBackground(context) {
                 var item = d3.select(this).select('label'),
                     span = item.select('span'),
                     placement = (i < nodes.length / 2) ? 'bottom' : 'top',
+                    description = d.description(),
                     isOverflowing = (span.property('clientWidth') !== span.property('scrollWidth'));
 
                 if (d === previous) {
@@ -73,10 +74,10 @@ export function uiBackground(context) {
                             return uiTooltipHtml(tip, uiCmd('⌘B'));
                         })
                     );
-                } else if (d.description || isOverflowing) {
+                } else if (description || isOverflowing) {
                     item.call(tooltip()
                         .placement(placement)
-                        .title(d.description || d.name())
+                        .title(description || d.name())
                     );
                 } else {
                     item.call(tooltip().destroy);

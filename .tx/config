@@ -15,6 +15,6 @@ source_lang = en
 type = YAML
 
 [id-editor.imagery]
-file_filter = .tx/tmp/imagery/<lang>.json
+file_filter = .tx/tmp/imagery/<lang>.yaml
 source_lang = en
-type = KEYVALUEJSON
+type = YAML
