@@ -36,11 +36,6 @@ var whitelist = [
     // Add custom sources here if needed.
 ];
 
-var descriptions = {
-    'Bing': 'Satellite and aerial imagery.',
-    'Mapbox': 'Satellite and aerial imagery.',
-    'MAPNIK': 'The default OpenStreetMap layer.'
-};
 
 sources.concat(whitelist).forEach(function(source) {
     if (source.type !== 'tms' && source.type !== 'bing') return;
@@ -59,7 +54,7 @@ sources.concat(whitelist).forEach(function(source) {
         template: source.url
     };
 
-    var description = source.description || descriptions[im.id];
+    var description = source.description;
     if (description) im.description = description;
 
     var extent = source.extent || {};
