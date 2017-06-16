@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
+import { t } from '../util/locale';
 
 
 export function uiAttribution(context) {
@@ -32,7 +33,9 @@ export function uiAttribution(context) {
                     return;
                 }
 
-                var source = d.terms_text || d.id || d.name();
+                var source = t('imagery.' + d.id + '.attribution.text',
+                    { default: d.terms_text || d.id || d.name() }
+                );
 
                 if (d.logo) {
                     source = '<img class="source-image" src="' + context.imagePath(d.logo) + '">';
