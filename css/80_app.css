@@ -2702,7 +2702,7 @@ img.tile-removing {
 .base-layer-attribution,
 .overlay-layer-attribution {
     position: absolute;
-    color: #888;
+    color: #ccc;
     font-size: 10px;
 }
 
@@ -2718,6 +2718,15 @@ img.tile-removing {
     content: '; ';
 }
 
+.attribution a,
+.attribution a:visited {
+    color: #ccf;
+}
+
+.attribution a:hover {
+    color: #aaf;
+}
+
 .attribution .source-image {
     height: 20px;
     vertical-align: middle;
@@ -2725,7 +2734,7 @@ img.tile-removing {
 }
 
 .attribution span {
-    margin: 0 5px;
+    margin: 0 3px;
 }
 
 
