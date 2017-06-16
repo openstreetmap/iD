@@ -5073,6 +5073,184 @@
                     "terms": "Briglia"
                 }
             }
+        },
+        "imagery": {
+            "Bing": {
+                "description": "Immagini satellitari e aeree.",
+                "name": "Immagini aeree Bing"
+            },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "Termini & Feedback"
+                },
+                "description": "Immagini satellitari Premium DigitalGlobe.",
+                "name": "Immagini DigitalGlobe Premium"
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "Termini & Feedback"
+                },
+                "description": "Immagini satellitari Standard DigitalGlobe.",
+                "name": "Immagini DigitalGlobe Standard"
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                },
+                "description": "Il livello base di OpenStreetMap.",
+                "name": "OpenStreetMap (Standard)"
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "Termini & Feedback"
+                },
+                "description": "Immagini satellitari e aeree.",
+                "name": "Mapbox Satellite"
+            },
+            "New_and_Misaligned_TIGER_Roads-2013": {
+                "description": "A livelli di zoom maggiori di 16, dati in pubblico dominio di US Census. A zoom minori solo cambiamenti a partire dal 2006 meno le modifiche già incorporate in OpenStreetMap",
+                "name": "TIGER Roads nuove e disallineate"
+            },
+            "OSM_Inspector-Addresses": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OMS Inspector: Indirizzi"
+            },
+            "OSM_Inspector-Geometry": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Geometria"
+            },
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Strade"
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Area"
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Luoghi"
+            },
+            "OSM_Inspector-Routing": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Navigazione"
+            },
+            "OSM_Inspector-Tagging": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Etichette"
+            },
+            "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Ciclismo"
+            },
+            "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Escursioni a piedi"
+            },
+            "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Mountain bike"
+            },
+            "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Pattinaggio in linea"
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© Michael Spreng, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Piste per sport invernali"
+            },
+            "hike_n_bike": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors"
+                },
+                "name": "Hike & Bike"
+            },
+            "mapbox_locator_overlay": {
+                "attribution": {
+                    "text": "Termini & Feedback"
+                },
+                "description": "Mostra gli elementi principali per aiutarti nell'orientamento.",
+                "name": "Locator Overlay"
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OpenPT Map (sovrapposta)"
+            },
+            "osm-gps": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors"
+                },
+                "description": "Tracce GPS pubbliche caricate su OpenStreetMap.",
+                "name": "Tracce GPS OpenStreetMap"
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (Standard bianco e nero)"
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (Stile tedesco)"
+            },
+            "qa_no_address": {
+                "attribution": {
+                    "text": "Simon Poole, Data ©OpenStreetMap contributors"
+                },
+                "name": "QA No Address"
+            },
+            "skobbler": {
+                "attribution": {
+                    "text": "© Tiles: skobbler Map data: OpenStreetMap contributors"
+                },
+                "name": "skobbler"
+            },
+            "stamen-terrain-background": {
+                "attribution": {
+                    "text": "Map tiles by Stamen Design, under CC BY 3.0"
+                },
+                "name": "Stamen Terrain"
+            },
+            "tf-cycle": {
+                "attribution": {
+                    "text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
+                },
+                "name": "Thunderforest OpenCycleMap"
+            },
+            "tf-landscape": {
+                "attribution": {
+                    "text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
+                },
+                "name": "Thunderforest Landscape"
+            }
         }
     }
 }

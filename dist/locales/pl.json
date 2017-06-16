@@ -5020,31 +5020,6 @@
                     "terms": "jaz,tama"
                 }
             }
-        },
-        "imagery": {
-            "Bing.name": "Zdjęcia satelitarne i lotnicze Bing",
-            "DigitalGlobe-Premium.attribution.text": "Warunki użytkowania i opinia",
-            "DigitalGlobe-Premium.name": "Zdjęcia satelitarne DigitalGlobe Premium",
-            "DigitalGlobe-Standard.attribution.text": "Warunki użytkowania i opinia",
-            "DigitalGlobe-Standard.name": "Zdjęcia satelitarne DigitalGlobe Standard",
-            "Mapbox.attribution.text": "Warunki użytkowania i opinia",
-            "Mapbox.name": "Zdjęcia satelitarne Mapbox",
-            "New_and_Misaligned_TIGER_Roads-2013.description": "Przy poziomie przybliżenia 16+ dane w domenie publicznej z Spisu ludności Stanów Zjednoczonych. Przy mniejszym przybliżeniu - tylko zmiany od 2006 oprócz zmian już wprowadzonych do OpenStreetMap",
-            "New_and_Misaligned_TIGER_Roads-2013.name": "Nowe i niewyrównane drogi TIGER",
-            "mapbox_locator_overlay.attribution.text": "Warunki użytkowania i opinia",
-            "mapbox_locator_overlay.description": "Pokazuje najważniejsze obiekty pomocne w orientacji.",
-            "mapbox_locator_overlay.name": "Nakładka lokalizująca",
-            "osm-gps.attribution.text": "© użytkownicy OpenStreetMap",
-            "osm-gps.description": "Publiczne ślady GPS przesłane do OpenStreetMap.",
-            "osm-gps.name": "Ślady GPS OpenStreetMap",
-            "osm-mapnik-german_style.attribution.text": "© użytkownicy OpenStreetMap, CC-BY-SA",
-            "osm-mapnik-german_style.name": "OpenStreetMap (Styl niemiecki)",
-            "stamen-terrain-background.attribution.text": "Kafelki mapowe Stamen Design, licencja CC BY 3.0",
-            "stamen-terrain-background.name": "Teren Stamen",
-            "tf-cycle.attribution.text": "Mapa © Thunderforest, dane © użytkownicy OpenStreetMap",
-            "tf-cycle.name": "Thunderforest OpenCycleMap",
-            "tf-landscape.attribution.text": "Mapa © Thunderforest, dane © użytkownicy OpenStreetMap",
-            "tf-landscape.name": "Thunderforest Krajobraz"
         }
     }
 }

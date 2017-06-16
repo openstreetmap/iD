@@ -4166,6 +4166,11 @@
                     "name": "Pato"
                 }
             }
+        },
+        "imagery": {
+            "Bing": {
+                "description": "Satelliitti- ja ilmakuvat."
+            }
         }
     }
 }

@@ -800,6 +800,13 @@
         },
         "shortcuts": {
             "title": "ショートカットキー",
+            "tooltip": "キーボードショートカット画面を表示",
+            "key": {
+                "space": "スペース"
+            },
+            "gesture": {
+                "drag": "ドラッグ"
+            },
             "or": "-または-",
             "browsing": {
                 "title": "閲覧",
@@ -817,6 +824,7 @@
                     "background": "背景オプションを表示",
                     "background_switch": "前の背景に切り替え",
                     "map_data": "地図データオプションを表示",
+                    "fullscreen": "全画面モードに入る",
                     "wireframe": "ワイヤーフレームモード切替",
                     "minimap": "ミニマップの表示/非表示"
                 },
@@ -839,7 +847,9 @@
                 }
             },
             "editing": {
+                "title": "編集",
                 "drawing": {
+                    "title": "描画",
                     "add_point": "「ポイントの追加」モード",
                     "add_line": "「ラインの追加」モード",
                     "add_area": "「エリアの追加」モード",
@@ -850,6 +860,14 @@
                 "operations": {
                     "title": "操作",
                     "continue_line": "選択モードでラインを継続",
+                    "merge": "選択した地物を連結",
+                    "disconnect": "選択したノードで地物を切り離し",
+                    "split": "選択したノードでラインを2つに分割",
+                    "reverse": "ラインを反転",
+                    "move": "選択した地物を移動",
+                    "rotate": "選択した地物を回転",
+                    "orthogonalize": "ラインを直線化 / エリアの角を直角化",
+                    "circularize": "クローズドラインやエリアを円形化",
                     "reflect_long": "地物を長軸で反転",
                     "reflect_short": "地物を短軸で反転",
                     "delete": "選択された地物を削除"
@@ -2859,6 +2877,10 @@
                 "craft/confectionery": {
                     "name": "菓子屋",
                     "terms": "駄菓子屋, パシティエ"
+                },
+                "craft/distillery": {
+                    "name": "蒸留所",
+                    "terms": "<translate with synonyms or related terms for 'Distillery', separated by commas>"
                 },
                 "craft/dressmaker": {
                     "name": "衣服製造所",
@@ -4944,6 +4966,177 @@
                     "name": "堰",
                     "terms": "堰"
                 }
+            }
+        },
+        "imagery": {
+            "Bing": {
+                "description": "衛星・航空画像です。",
+                "name": "Bing航空画像"
+            },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "規約＆フィードバック"
+                },
+                "description": "DigitalGlobeのプレミアム衛星画像です。",
+                "name": "DigitalGlobeプレミアム画像"
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "規約＆フィードバック"
+                },
+                "description": "DigitalGlobeの標準衛星画像です。",
+                "name": "DigitalGlobe標準画像"
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                },
+                "description": "OpenStreetMap標準レイヤーです。",
+                "name": "OpenStreetMap (標準)"
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "規約＆フィードバック"
+                },
+                "description": "衛星・航空画像です。",
+                "name": "Mapbox衛星画像"
+            },
+            "OSM_Inspector-Addresses": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Inspector: 住所"
+            },
+            "OSM_Inspector-Geometry": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Inspector: ジオメトリ"
+            },
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Inspector: 道路"
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Inspector: エリア"
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Inspector: 場所"
+            },
+            "OSM_Inspector-Routing": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Inspector: ルーティング"
+            },
+            "OSM_Inspector-Tagging": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Inspector: タグ付け"
+            },
+            "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: サイクリング"
+            },
+            "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: ハイキング"
+            },
+            "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: MTB"
+            },
+            "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: スケート"
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© Michael Spreng, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: 冬季スポーツ"
+            },
+            "hike_n_bike": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors"
+                },
+                "name": "Hike & Bike"
+            },
+            "mapbox_locator_overlay": {
+                "attribution": {
+                    "text": "規約 & フィードバック"
+                }
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OpenPT Map (オーバーレイ)"
+            },
+            "osm-gps": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors"
+                },
+                "description": "OpenStreetMapにアップロードされた公開GPSトレースです。",
+                "name": "OpenStreetMap GPSトレース"
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (Standard Black & White)"
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (ドイツスタイル)"
+            },
+            "qa_no_address": {
+                "attribution": {
+                    "text": "Simon Poole, Data ©OpenStreetMap contributors"
+                }
+            },
+            "skobbler": {
+                "attribution": {
+                    "text": "© Tiles: skobbler Map data: OpenStreetMap contributors"
+                },
+                "name": "skobbler"
+            },
+            "stamen-terrain-background": {
+                "attribution": {
+                    "text": "Map tiles by Stamen Design, under CC BY 3.0"
+                },
+                "name": "Stamen 地形図"
+            },
+            "tf-cycle": {
+                "attribution": {
+                    "text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
+                },
+                "name": "Thunderforest OpenCycleMap"
+            },
+            "tf-landscape": {
+                "attribution": {
+                    "text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
+                },
+                "name": "Thunderforest Landscape"
             }
         }
     }

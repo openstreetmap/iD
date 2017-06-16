@@ -4734,31 +4734,6 @@
                     "terms": "Weir"
                 }
             }
-        },
-        "imagery": {
-            "Bing.name": "Imagem aérea Bing ",
-            "DigitalGlobe-Premium.attribution.text": "Termos e opinião ",
-            "DigitalGlobe-Premium.name": "Imagem aérea DigitalGlobe Premium ",
-            "DigitalGlobe-Standard.attribution.text": "Termos e opinião ",
-            "DigitalGlobe-Standard.name": "Imagem aérea DigitalGlobe Standard ",
-            "Mapbox.attribution.text": "Termos e opinião",
-            "Mapbox.name": "Imagem aérea Mapbox",
-            "New_and_Misaligned_TIGER_Roads-2013.description": "No nível de zoom acima de 16, a data de domínio público dos Censos dos EUA. Nos níveis de zoom inferiores, apenas alterações desde 200 excepto alterações já incorporadas no OpenStreetMap",
-            "New_and_Misaligned_TIGER_Roads-2013.name": "Novas e desalinhadas estradas TIGER",
-            "mapbox_locator_overlay.attribution.text": "Termos e opinião",
-            "mapbox_locator_overlay.description": "Mostrar as principais funções para ajudá-lo.",
-            "mapbox_locator_overlay.name": "Camada superior de localização",
-            "osm-gps.attribution.text": "© contribuidores OpenStreetMap",
-            "osm-gps.description": "Registos de GPS públicos enviados para o OpenStreetMap",
-            "osm-gps.name": "registos GPS do OpenStreetMap",
-            "osm-mapnik-german_style.attribution.text": "© contribuidores OpenStreetMap, CC-BY-SA",
-            "osm-mapnik-german_style.name": "OpenStreetMap (estilo alemão)",
-            "stamen-terrain-background.attribution.text": "Moisacos de mapa por Stamen Design, sob licença CC BY 3.0",
-            "stamen-terrain-background.name": "Terreno Stamen",
-            "tf-cycle.attribution.text": "Mapas © Thunderforest, Data contribuidores © OpenStreetMap",
-            "tf-cycle.name": "Thunderforest OpenCycleMap",
-            "tf-landscape.attribution.text": "Mapas © Thunderforest, Data contribuidores © OpenStreetMap",
-            "tf-landscape.name": "Paisagem Thunderforest"
         }
     }
 }

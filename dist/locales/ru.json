@@ -2562,6 +2562,9 @@
                     "name": "Канализационно-насосная станция",
                     "terms": "КНС"
                 },
+                "amenity/water_point": {
+                    "name": "Резервуар с питьевой водой"
+                },
                 "amenity/watering_place": {
                     "name": "Водопой для животных",
                     "terms": "Поилка"
@@ -4861,10 +4864,181 @@
             }
         },
         "imagery": {
-            "osm-gps.attribution.text": "© участники OpenStreetMap",
-            "tf-cycle.attribution.text": "Карты © Thunderforest, данные © участники OpenStreetMap",
-            "tf-cycle.name": "Thunderforest OpenCycleMap",
-            "tf-landscape.attribution.text": "Карты © Thunderforest, данные © участники OpenStreetMap"
+            "Bing": {
+                "description": "Спутниковые и аэрофотоснимки.",
+                "name": "Aэрофотоснимки Bing"
+            },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "Условия и обратная связь"
+                },
+                "description": "Премиум спутниковые снимки DigitalGlobe.",
+                "name": "Премиум снимки DigitalGlobe."
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "Условия и обратная связь"
+                },
+                "description": "Стандартные спутниковые снимки DigitalGlobe.",
+                "name": "Стандартные снимки DigitalGlobe"
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "© Участники OpenStreetMap, CC-BY-SA"
+                },
+                "description": "Слой OpenStreetMap по умолчанию.",
+                "name": "OpenStreetMap (стандартный)"
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "Условия и обратная связь"
+                },
+                "description": "Спутниковые и аэрофотоснимки.",
+                "name": "Спутниковые снимки Mapbox"
+            },
+            "New_and_Misaligned_TIGER_Roads-2013": {
+                "description": "На уровне масштабирования 16+ - данные общедоступного картографирования из переписи населения США. При более низких масштабах - изменения только с 2006 года минус изменения, уже включенные в OpenStreetMap",
+                "name": "Новые и смещенные дороги TIGER"
+            },
+            "OSM_Inspector-Addresses": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, участники OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Aдреса"
+            },
+            "OSM_Inspector-Geometry": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, участники OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Геометрия"
+            },
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, участники OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Дороги"
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, участники OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Область"
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, участники OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Места"
+            },
+            "OSM_Inspector-Routing": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, участники OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Маршрутизация"
+            },
+            "OSM_Inspector-Tagging": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, участники OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Теги"
+            },
+            "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, данные карты: участники  OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Путевые маршруты: Велосипед"
+            },
+            "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, данные карты: участники  OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Путевые маршруты: Пеший туризм"
+            },
+            "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, данные карты: участники  OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Путевые маршруты: Горный велосипед"
+            },
+            "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, данные карты: участники  OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Путевые маршруты: Коньки"
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© Michael Spreng, CC by-SA 3.0, данные карты: участники  OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Путевые маршруты: Зимние виды спорта"
+            },
+            "hike_n_bike": {
+                "attribution": {
+                    "text": "© Участники OpenStreetMap"
+                }
+            },
+            "mapbox_locator_overlay": {
+                "attribution": {
+                    "text": "Условия и обратная связь"
+                },
+                "description": "Показывает основные точки местности, которые помогут вам ориентироваться.",
+                "name": "Наложение Locator"
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "© Участники OpenStreetMap, CC-BY-SA"
+                },
+                "name": "Карта OpenPT (наложение)"
+            },
+            "osm-gps": {
+                "attribution": {
+                    "text": "© Участники OpenStreetMap"
+                },
+                "description": "Публичные GPS треки, загруженные в OpenStreetMap.",
+                "name": "GPS треки OpenStreetMap"
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "© Участники OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (стандартный черно-белый)"
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "© Участники OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (немецкий стиль)"
+            },
+            "qa_no_address": {
+                "attribution": {
+                    "text": "Simon Poole, данные © участники OpenStreetMap"
+                },
+                "name": "Контроль качества: нет адреса"
+            },
+            "skobbler": {
+                "attribution": {
+                    "text": "© Плитки карты: skobbler, данные карты: участники  OpenStreetMap, ODbL 1.0"
+                },
+                "name": "skobbler"
+            },
+            "stamen-terrain-background": {
+                "attribution": {
+                    "text": "Плитки карты: Stamen Design, по CC BY 3.0"
+                },
+                "name": "Stamen Ландшафт"
+            },
+            "tf-cycle": {
+                "attribution": {
+                    "text": "Карты © Thunderforest, данные © участники OpenStreetMap"
+                },
+                "name": "Thunderforest OpenCycleMap"
+            },
+            "tf-landscape": {
+                "attribution": {
+                    "text": "Карты © Thunderforest, данные © участники OpenStreetMap"
+                },
+                "name": "Thunderforest Ландшафт"
+            }
         }
     }
 }

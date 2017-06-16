@@ -789,6 +789,7 @@
         },
         "shortcuts": {
             "title": "Phím tắt",
+            "tooltip": "Xem bảng phím tắt.",
             "key": {
                 "alt": "Alt",
                 "backspace": "Backspace",
@@ -2887,6 +2888,10 @@
                     "name": "Tiệm Kẹo",
                     "terms": "tiệm kẹo, tiệm mứt kẹo, tiệm sô-cô-la, tiệm sôcôla, tiệm súc-cù-là, cửa hàng kẹo, cửa hàng mứt kẹo, cửa hàng sô-cô-la, cửa hàng sôcôla, cửa hàng súc-cù-là, hiệu kẹo, hiệu mứt kẹo, hiệu sô-cô-la, hiệu sôcôla, hiệu súc-cù-là, quán kẹo, quán mứt kẹo, quán sô-cô-la, quán sôcôla, quán súc-cù-là, tiem keo, tiem mut keo, tiem so-co-la, tiem socola, tiem suc-cu-la, cua hang keo, cua hang mut keo, cua hang so-co-la, cua hang socola, cua hang suc-cu-la, hieu keo, hieu mut keo, hieu so-co-la, hieu socola, hieu suc-cu-la, quan keo, quan mut keo, quan so-co-la, quan socola, quan suc-cu-la"
                 },
+                "craft/distillery": {
+                    "name": "Nhà máy Rượu",
+                    "terms": "nhà máy rượu, nhà máy cất, nhà máy chưng cất rượu, nha may ruou, nha may cat, nha may chung cat ruou"
+                },
                 "craft/dressmaker": {
                     "name": "May Áo Phụ nữ",
                     "terms": "may áo phụ nữ, may quần áo phụ nữ, may áo đàn bà, may quần áo đàn bà, may ao phu nu, may quan ao phu nu, may ao dan ba, may quan ao dan ba"
@@ -4971,6 +4976,184 @@
                     "name": "Đập Tràn",
                     "terms": "đập tràn, đập nước thấp, dap tran, dap nuoc thap"
                 }
+            }
+        },
+        "imagery": {
+            "Bing": {
+                "description": "Hình ảnh chụp từ vệ tinh và trên không trung.",
+                "name": "Hình chụp trên không Bing"
+            },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "Điều khoản & Phản hồi"
+                },
+                "description": "Hình ảnh thượng hạng chụp từ vệ tinh DigitalGlobe.",
+                "name": "DigitalGlobe Thượng hạng"
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "Điều khoản & Phản hồi"
+                },
+                "description": "Hình ảnh tiêu chuẩn chụp từ vệ tinh DigitalGlobe.",
+                "name": "DigitalGlobe Tiêu chuẩn"
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "© những người đóng góp vào OpenStreetMap, CC BY-SA"
+                },
+                "description": "Lớp OpenStreetMap mặc định.",
+                "name": "OpenStreetMap (Chuẩn)"
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "Điều khoản & Phản hồi"
+                },
+                "description": "Hình ảnh chụp từ vệ tinh và trên không trung.",
+                "name": "Vệ tinh Mapbox"
+            },
+            "New_and_Misaligned_TIGER_Roads-2013": {
+                "description": "Ở các mức thu phóng 16+, dữ liệu bản đồ thuộc phạm vi công cộng từ Điều tra dân số Hoa Kỳ. Ở các mức nhỏ hơn, chỉ các thay đổi từ 2006 trở về sau trừ các thay đổi đã được nhập vào OpenStreetMap.",
+                "name": "Đường sá TIGER Mới & Chệch"
+            },
+            "OSM_Inspector-Addresses": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, những người đóng góp vào OpenStreetMap, CC BY-SA"
+                },
+                "name": "Trình kiểm tra OSM: Địa chỉ"
+            },
+            "OSM_Inspector-Geometry": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, những người đóng góp vào OpenStreetMap, CC BY-SA"
+                },
+                "name": "Trình kiểm tra OSM: Hình dạng"
+            },
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, những người đóng góp vào OpenStreetMap, CC BY-SA"
+                },
+                "name": "Trình kiểm tra OSM: Đường sá"
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, những người đóng góp vào OpenStreetMap, CC BY-SA"
+                },
+                "name": "Trình kiểm tra OSM: Vùng"
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, những người đóng góp vào OpenStreetMap, CC BY-SA"
+                },
+                "name": "Trình kiểm tra OSM: Địa điểm"
+            },
+            "OSM_Inspector-Routing": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, những người đóng góp vào OpenStreetMap, CC BY-SA"
+                },
+                "name": "Trình kiểm tra OSM: Chỉ đường"
+            },
+            "OSM_Inspector-Tagging": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, những người đóng góp vào OpenStreetMap, CC BY-SA"
+                },
+                "name": "Trình kiểm tra OSM: Thẻ"
+            },
+            "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC BY-SA 3.0, dữ liệu bản đồ do những người đóng góp vào  OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Xe đạp"
+            },
+            "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC BY-SA 3.0, dữ liệu bản đồ do những người đóng góp vào  OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Đường Đi bộ Dài"
+            },
+            "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC BY-SA 3.0, dữ liệu bản đồ do những người đóng góp vào  OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Xe đạp Leo núi"
+            },
+            "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC BY-SA 3.0, dữ liệu bản đồ do những người đóng góp vào  OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Trượt băng"
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© Michael Spreng, CC BY-SA 3.0, dữ liệu bản đồ do những người đóng góp vào  OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Thể thao Mùa đông"
+            },
+            "hike_n_bike": {
+                "attribution": {
+                    "text": "© những người đóng góp vào OpenStreetMap"
+                },
+                "name": "Đi bộ & Đạp xe"
+            },
+            "mapbox_locator_overlay": {
+                "attribution": {
+                    "text": "Điều khoản & Phản hồi"
+                },
+                "description": "Hiển thị các mốc để giúp bạn định hướng.",
+                "name": "Lớp phủ Định hướng"
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "© những người đóng góp vào OpenStreetMap, CC BY-SA"
+                },
+                "name": "Bản đồ OpenPT (lớp phủ)"
+            },
+            "osm-gps": {
+                "attribution": {
+                    "text": "© những người đóng góp vào OpenStreetMap"
+                },
+                "description": "Tuyến GPS công khai được tải lên OpenStreetMap",
+                "name": "Tuyến GPS OpenStreetMap"
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "© những người đóng góp vào OpenStreetMap, CC BY-SA"
+                },
+                "name": "OpenStreetMap (Chuẩn Trắng đen)"
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "© những người đóng góp vào OpenStreetMap, CC BY-SA"
+                },
+                "name": "OpenStreetMap (Kiểu Đức)"
+            },
+            "qa_no_address": {
+                "attribution": {
+                    "text": "Simon Poole, Dữ liệu © những người đóng góp vào OpenStreetMap"
+                },
+                "name": "Bảo đảm Chất lượng: Không Địa chỉ"
+            },
+            "skobbler": {
+                "attribution": {
+                    "text": "© Hình bản đồ: skobbler Dữ liệu bản đồ: những người đóng góp vào OpenStreetMap"
+                },
+                "name": "skobbler"
+            },
+            "stamen-terrain-background": {
+                "attribution": {
+                    "text": "Hình bản đồ do Stamen Design cung cấp dưới CC BY 3.0"
+                },
+                "name": "Địa thế Stamen"
+            },
+            "tf-cycle": {
+                "attribution": {
+                    "text": "Bản đồ © Thunderforest, dữ liệu © những người đóng góp vào OpenStreetMap"
+                },
+                "name": "Thunderforest OpenCycleMap"
+            },
+            "tf-landscape": {
+                "attribution": {
+                    "text": "Bản đồ © Thunderforest, dữ liệu © những người đóng góp vào OpenStreetMap"
+                },
+                "name": "Phong cảnh Thunderforest"
             }
         }
     }

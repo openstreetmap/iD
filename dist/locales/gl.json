@@ -5073,6 +5073,25 @@
                     "terms": "<translate with synonyms or related terms for 'Weir', separated by commas>"
                 }
             }
+        },
+        "imagery": {
+            "Bing": {
+                "description": "Imaxe satélite e aérea.",
+                "name": "Imaxe aérea Bing."
+            },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "Termos & Autoachegas"
+                },
+                "description": "Imaxes de satélite Premium DigitalGlobe.",
+                "name": "Imaxes de DigitalGlobe Premium"
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "Termos & Autoachegas"
+                },
+                "description": "Imaxes de satélite Standard DigitalGlobe."
+            }
         }
     }
 }

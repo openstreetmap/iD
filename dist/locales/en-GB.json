@@ -885,6 +885,7 @@
         },
         "shortcuts": {
             "title": "Keyboard shortcuts",
+            "tooltip": "Show the keyboard shortcuts screen.",
             "key": {
                 "alt": "Alt",
                 "backspace": "Backspace",
@@ -2526,6 +2527,9 @@
                 "amenity/university": {
                     "name": "University Grounds"
                 },
+                "amenity/vending_machine": {
+                    "name": "Vending Machine"
+                },
                 "amenity/vending_machine/cigarettes": {
                     "name": "Cigarette Vending Machine"
                 },
@@ -2786,6 +2790,9 @@
                 },
                 "craft/confectionery": {
                     "name": "Confectionery"
+                },
+                "craft/distillery": {
+                    "name": "Distillery"
                 },
                 "craft/dressmaker": {
                     "name": "Dressmaker"
@@ -4371,29 +4378,182 @@
             }
         },
         "imagery": {
-            "Bing.name": "Bing aerial imagery",
-            "DigitalGlobe-Premium.attribution.text": "Terms & Feedback",
-            "DigitalGlobe-Premium.name": "DigitalGlobe Premium Imagery",
-            "DigitalGlobe-Standard.attribution.text": "Terms & Feedback",
-            "DigitalGlobe-Standard.name": "DigitalGlobe Standard Imagery",
-            "Mapbox.attribution.text": "Terms & Feedback",
-            "Mapbox.name": "Mapbox Satellite",
-            "New_and_Misaligned_TIGER_Roads-2013.description": "At zoom level 16+, public domain map data from the US Census. At lower zooms, only changes since 2006 minus changes already incorporated into OpenStreetMap",
-            "New_and_Misaligned_TIGER_Roads-2013.name": "New & Misaligned TIGER Roads",
-            "mapbox_locator_overlay.attribution.text": "Terms & Feedback",
-            "mapbox_locator_overlay.description": "Shows major features to help orient you.",
-            "mapbox_locator_overlay.name": "Locator Overlay",
-            "osm-gps.attribution.text": "© OpenStreetMap contributors",
-            "osm-gps.description": "Public GPS traces uploaded to OpenStreetMap.",
-            "osm-gps.name": "OpenStreetMap GPS traces",
-            "osm-mapnik-german_style.attribution.text": "© OpenStreetMap contributors, CC-BY-SA",
-            "osm-mapnik-german_style.name": "OpenStreetMap (German Style)",
-            "stamen-terrain-background.attribution.text": "Map tiles by Stamen Design, under CC BY 3.0",
-            "stamen-terrain-background.name": "Stamen Terrain",
-            "tf-cycle.attribution.text": "Maps © Thunderforest, Data © OpenStreetMap contributors",
-            "tf-cycle.name": "Thunderforest OpenCycleMap",
-            "tf-landscape.attribution.text": "Maps © Thunderforest, Data © OpenStreetMap contributors",
-            "tf-landscape.name": "Thunderforest Landscape"
+            "Bing": {
+                "description": "Satellite and aerial imagery.",
+                "name": "Bing aerial imagery"
+            },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "Terms & Feedback"
+                },
+                "description": "Premium DigitalGlobe satellite imagery.",
+                "name": "DigitalGlobe Premium Imagery"
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "Terms & Feedback"
+                },
+                "description": "Standard DigitalGlobe satellite imagery.",
+                "name": "DigitalGlobe Standard Imagery"
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                },
+                "description": "The default OpenStreetMap layer.",
+                "name": "OpenStreetMap (Standard)"
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "Terms & Feedback"
+                },
+                "description": "Satellite and aerial imagery.",
+                "name": "Mapbox Satellite"
+            },
+            "New_and_Misaligned_TIGER_Roads-2013": {
+                "description": "At zoom level 16+, public domain map data from the US Census. At lower zooms, only changes since 2006 minus changes already incorporated into OpenStreetMap",
+                "name": "New & Misaligned TIGER Roads"
+            },
+            "OSM_Inspector-Addresses": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Addresses"
+            },
+            "OSM_Inspector-Geometry": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Geometry"
+            },
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Highways"
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Area"
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Places"
+            },
+            "OSM_Inspector-Routing": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Routing"
+            },
+            "OSM_Inspector-Tagging": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Tagging"
+            },
+            "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Cycling"
+            },
+            "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Hiking"
+            },
+            "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: MTB"
+            },
+            "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Skating"
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© Michael Spreng, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Winter Sports"
+            },
+            "hike_n_bike": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors"
+                },
+                "name": "Hike & Bike"
+            },
+            "mapbox_locator_overlay": {
+                "attribution": {
+                    "text": "Terms & Feedback"
+                },
+                "description": "Shows major features to help orient you.",
+                "name": "Locator Overlay"
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OpenPT Map (overlay)"
+            },
+            "osm-gps": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors"
+                },
+                "description": "Public GPS traces uploaded to OpenStreetMap.",
+                "name": "OpenStreetMap GPS traces"
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (Standard Black & White)"
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (German Style)"
+            },
+            "qa_no_address": {
+                "attribution": {
+                    "text": "Simon Poole, Data ©OpenStreetMap contributors"
+                },
+                "name": "QA No Address"
+            },
+            "skobbler": {
+                "attribution": {
+                    "text": "© Tiles: skobbler Map data: OpenStreetMap contributors"
+                },
+                "name": "skobbler"
+            },
+            "stamen-terrain-background": {
+                "attribution": {
+                    "text": "Map tiles by Stamen Design, under CC BY 3.0"
+                },
+                "name": "Stamen Terrain"
+            },
+            "tf-cycle": {
+                "attribution": {
+                    "text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
+                },
+                "name": "Thunderforest OpenCycleMap"
+            },
+            "tf-landscape": {
+                "attribution": {
+                    "text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
+                },
+                "name": "Thunderforest Landscape"
+            }
         }
     }
 }

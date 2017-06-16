@@ -349,7 +349,7 @@
             "truncated_list": "Ediciones de {users} y {count} más"
         },
         "infobox": {
-            "selected": "{n} seleccionado",
+            "selected": "{n} seleccionado(s)",
             "geometry": "Geometría",
             "closed": "cerrada",
             "center": "Centro",
@@ -626,7 +626,7 @@
         "help": {
             "title": "Ayuda",
             "help": "# Ayuda\n\nEste es un editor para [OpenStreetMap](http://www.openstreetmap.org/), el\nmapa libre y editable del mundo. Se puede utilizar para añadir y actualizar\ndatos en su área, haciendo que el mapa del mundo de fuente y datos abiertos\nsea mejor para todos.\n\nLas ediciones que realice en este mapa serán visible a todos los que usen\nOpenStreetMap. Para poder hacer una edición tendrá que\n[Iniciar sesión](https://www.openstreetmap.org/login).\n\nEl [editor iD](http://ideditor.com/) es un proyecto colaborativo con [código\nfuente disponible en GitHub](https://github.com/openstreetmap/iD).\n",
-            "editing_saving": "# Editando y guardando\n\nEste editor está diseñado para trabajar principalmente en línea, y usted está accediendo\na través de un sitio web en este momento.\n\n### Seleccionando elementos\n\nPara seleccionar un elemento del mapa, como una carretera o punto de interés, haga clic en\nen él sobre el mapa. Esto resaltará el elemento seleccionado, abrirá un panel con\ndetalles sobre él y mostrará un menú de cosas que puede hacer con el elemento.\n\nPara seleccionar varios elementos, mantenga pulsada la tecla 'Shift'. A continuación, haga clic en\nen los elementos que desea seleccionar, o arrastre el mapa para dibujar un rectángulo.\nEsto dibujará una caja y seleccionará todos los puntos dentro de ella.\n\n### Guardando las ediciones\n\nCuando hace cambios como editar carreteras, edificios y lugares, estos son\nalmacenados localmente hasta que los guarde en el servidor. No se preocupe si se\nequivoca - puede deshacer los cambios haciendo clic en el botón deshacer, y rehacer cambios\nhaciendo clic en el botón Rehacer.\n\nHaga clic en 'Guardar' para finalizar un grupo de ediciones - por ejemplo, si ha completado\nun área de la ciudad y quisiera comenzar en un área nueva. Tendrá la oportunidad\npara revisar lo que ha hecho, y el editor suministra sugerencias útiles\ny advertencias si algo no parece correcto sobre los cambios.\n\nSi todo está bien, puede escribir un comentario corto explicando el cambio\nque ha hecho y hacer clic en 'Guardar' de nuevo para publicar los cambios\nen [OpenStreetMap.org](http://www.openstreetmap.org/), donde son visibles\na todos los demás usuarios y disponibles para que otros puedan aprovechar y mejorar.\n\nSi no puede terminar sus ediciones en una sola sesión, puede dejar la ventana\ndel editor y volver (en el mismo navegador y equipo), y el\neditor de la aplicación le ofrecerá restaurar su trabajo.\n\n### Usando del editor\n\nPuede ver una lista de atajos de teclado pulsando la tecla `?`.\n",
+            "editing_saving": "# Editando y guardando\n\nEste editor está diseñado para trabajar principalmente en línea, y usted está accediendo\na través de un sitio web en este momento.\n\n### Seleccionando elementos\n\nPara seleccionar un elemento del mapa, como un camino o punto de interés, haga clic en\nen él sobre el mapa. Esto resaltará el elemento seleccionado, abrirá un panel con\ndetalles sobre él y mostrará un menú de cosas que puede hacer con el elemento.\n\nPara seleccionar varios elementos, mantenga pulsada la tecla 'Shift'. A continuación, haga clic\nen los elementos que desea seleccionar, o arrastre el mapa para dibujar un rectángulo.\nEsto dibujará una caja y seleccionará todos los puntos dentro de ella.\n\n### Guardando las ediciones\n\nCuando hace cambios como editar caminos, edificios y lugares, estos son\nalmacenados localmente hasta que los guarde en el servidor. No se preocupe si se\nequivoca - puede deshacer los cambios haciendo clic en el botón deshacer, y rehacer cambios\nhaciendo clic en el botón rehacer.\n\nHaga clic en 'Guardar' para finalizar un grupo de ediciones - por ejemplo, si completó\nun área de la ciudad y quisiera comenzar en un área nueva. Tendrá la oportunidad\npara revisar lo que ha hecho, y el editor suministra sugerencias útiles\ny advertencias si algo no parece correcto sobre los cambios.\n\nSi todo está bien, puede escribir un comentario corto explicando el cambio\nque ha hecho y hacer clic en 'Guardar' de nuevo para publicar los cambios\nen [OpenStreetMap.org](http://www.openstreetmap.org/), donde son visibles\na todos los demás usuarios y disponibles para que otros puedan aprovechar y mejorar.\n\nSi no puede terminar sus ediciones en una sola sesión, puede dejar la ventana\ndel editor y volver (en el mismo navegador y equipo), y el\neditor de la aplicación le ofrecerá restaurar su trabajo.\n\n### Usando del editor\n\nPuede ver una lista de atajos de teclado pulsando la tecla `?`.\n",
             "roads": "# Carreteras\n\nPuede crear, corregir y borrar carreteras con este editor. Las vías pueden ser de todas las clases: caminos, carreteras, senderos, ciclovías, etc. A cualquier línea dibujada en el mapa se le debe indicar el tipo de elemento lineal que es.\n\n### Seleccionar\n\nHaga clic sobre una vía para seleccionarla. Verá sobre ella como se visualiza su esquema, formada por nodos y segmentos, junto con un menú de herramientas que aparece sobre el mapa y una barra lateral que muestra más información sobre la vía.\n\n### Modificar\n\nA menudo verá viales que no están alineados correctamente con la imagen aérea de fondo o con la traza GPS. Puede ajustar esas vías para situarlas en el lugar exacto.\n\nPrimero haga clic sobre la vía que desea cambiar. Esto la resaltará y mostrará los nodos o puntos de control a lo largo de la vía que la forman. A continuación simplemente arrastre esos puntos a la posición correcta. Si desea añadir nuevos puntos de control para dibujar la carretera con mayor detalle haga doble clic sobre la parte de la vía donde quiere añadir el nuevo nodo y este será creado en la vía.\n\nSi la vía conecta con otra carretera o camino pero esta conexión no aparece correctamente en el mapa puede arrastrar uno de los puntos de la vía hasta la otra carretera y se unirá automáticamente a ella mediante un nodo común. Es muy importante tener las carreteras conectadas en el mapa, ya que es esencial para proporcionar instrucciones correctas para la conducción si queremos que la cartografía se útil, por ejemplo, para los navegadores GPS.\n\n### Eliminar\n\nSi un camino es totalmente incorrecto -ha observado que no aparece en las imágenes de satélite y de manera ideal lo ha confirmado en campo- puede eliminarlo, lo cual lo borrará del mapa. Sea precavido al eliminar elementos del mapa. Como cualquier otra edición que haga este cambio será visto por todo el mundo y las imágenes de satélite a menudo no están actualizadas, por lo que una carretera que no existe en ellas pero sí en el mapa simplemente puede aparecer porque es de reciente construcción y otro usuario la ha añadido.\n\n### Crear\n\n¿Ha encontrado un lugar donde debería existir una carretera pero no aparece? Haga clic con el ratón sobre el icono 'Línea' situado en la parte superior izquierda del editor o simplemente presione la tecla '2'  de su teclado que es el acceso rápido para comenzar a dibujar una línea.\n\nHaga clic sobre el mapa en el inicio de la carretera para comenzar a dibujar. Si la vía se ramifica a partir de una carretera ya existente empiece haciendo clic sobre el lugar donde ambas conectan.\n\nHaga clic en puntos a lo largo de la vía para definir el trazado correcto de la carretera. La densidad de puntos dependerá de la complejidad del recorrido, por lo que es aconsejable dibujar desde un nivel de zoom apropiado. Si la vía que está dibujando atraviesa otra carretera conéctela con esta haciendo clic sobre el punto de intersección. Una vez haya terminado el dibujo haga doble clic con el ratón o presiones la tecla 'Return' o 'Intro' de su teclado para finalizar.\n",
             "gps": "# GPS\n\nLas trazas de GPS recogidas son una valiosa fuente de datos para OpenStreetMap. Este\neditor soporta trazas locales - archivos `.gpx` en su equipo local. Usted puede obtener\neste tipo de traza GPS con una serie de aplicaciones de smartphone, como también con\nhardware GPS personal.\n\nPara más información sobre cómo realizar un relevamiento GPS, lea\n[Mapear con un smartphone, GPS, o papel](http://learnosm.org/es/mobile-mapping/).\n\nPara utilizar una traza GPX para mapear, arrastre y suelte el archivo GPX en el editor\nde mapa. Si este es reconocido, se añadirá al mapa como una línea púrpura brillante.\nHaga clic en el menú 'Datos del mapa' en el lado derecho para activar,\ndesactivar o acercar a esta nueva capa alimentada por GPX.\n\nLa traza GPX no se carga directamente a OpenStreetMap - la mejor manera de\nutilizarlo es dibujar en el mapa, usándolo como guía para las nuevos elementos que\nagregue, y también [subirlo a OpenStreetMap](http://www.openstreetmap.org/trace/create)\npara que otros usuarios lo utilicen.\n",
             "imagery": "# Imágenes\n\nLas imágenes aéreas son un importante recurso para mapear. Una combinación\nde vuelos aéreos, vistas de satélite, y compilaciones de fuentes libres están disponibles\nen el editor bajo el menú 'Ajustes del fondo' a la derecha.\n\nDe forma predeterminada se presenta la capa de satélite de [Bing Maps](http://www.bing.com/maps/) en el editor, pero mientras se mueva y acerque el mapa a nuevas áreas\ngeográficas, nuevas fuentes estarán disponibles. Algunos países, como los Estados\nUnidos, Francia, y Dinamarca poseen imágenes de muy alta calidad disponible\npara algunas áreas.\n\nLas imágenes a veces están desplazadas de los datos del mapa debido a un error en el\nlado del proveedor de imágenes. Si observa muchos caminos desplazados del fondo,\nno los mueva inmediatamente para emparejarlos con el fondo. En su lugar puede ajustar\nlas imágenes para que coincidan con los datos existentes haciendo clic\nen 'Corregir alineación' en la opción 'Ajustes del fondo' de la interfaz.\n",
@@ -916,7 +916,7 @@
                     "pan": "Panorámica del mapa",
                     "pan_more": "Panorámica del mapa a una pantalla",
                     "zoom": "Acercar / Alejar",
-                    "zoom_more": "Acercar / Alejar mucho"
+                    "zoom_more": "Acercar / Alejar un montón"
                 },
                 "help": {
                     "title": "Ayuda",
@@ -2986,7 +2986,7 @@
                 },
                 "craft/distillery": {
                     "name": "Destilería",
-                    "terms": "Destileria, alcohol, bebida, bourbon, licor, brandy, ginebra, hooch, mezcal, moonshine, ron, scotch, escocés, bebidas espirituosas, tequila, vodka, whiskey,whisky"
+                    "terms": "alcohol, bebida, bourbon, licor, brandy, ginebra, hooch, mezcal, moonshine, ron, scotch, escocés, bebidas espirituosas, tequila, vodka, whiskey, whisky, pisco, aguardiente, gin, singani"
                 },
                 "craft/dressmaker": {
                     "name": "Modista",
@@ -5075,29 +5075,182 @@
             }
         },
         "imagery": {
-            "Bing.name": "Imágenes aéreas de Bing",
-            "DigitalGlobe-Premium.attribution.text": "Términos y comentarios",
-            "DigitalGlobe-Premium.name": "Imágenes de DigitalGlobe Premium",
-            "DigitalGlobe-Standard.attribution.text": "Términos y comentarios",
-            "DigitalGlobe-Standard.name": "Imágenes de DigitalGlobe Standard",
-            "Mapbox.attribution.text": "Términos y comentarios",
-            "Mapbox.name": "Mapbox Satellite",
-            "New_and_Misaligned_TIGER_Roads-2013.description": "En el nivel de zoom 16+, datos del mapa de dominio público del censo de los Estados Unidos. A menor zooms, sólo los cambios desde 2006 menos los cambios ya incorporados en OpenStreetMap",
-            "New_and_Misaligned_TIGER_Roads-2013.name": "Vías nuevas y desalineadas de TIGER",
-            "mapbox_locator_overlay.attribution.text": "Términos y comentarios",
-            "mapbox_locator_overlay.description": "Muestra los principales elementos para ayudar a orientar.",
-            "mapbox_locator_overlay.name": "Superposición de localizador",
-            "osm-gps.attribution.text": "© Colaboradores de OpenStreetMap",
-            "osm-gps.description": "Trazas GPS públicas cargadas en OpenStreetMap.",
-            "osm-gps.name": "Trazas GPS de OpenStreetMap",
-            "osm-mapnik-german_style.attribution.text": "© Colaboradores de OpenStreetMap, CC-BY-SA",
-            "osm-mapnik-german_style.name": "OpenStreetMap (estilo alemán)",
-            "stamen-terrain-background.attribution.text": "Teselas de mapas de Stamen Design, bajo CC BY 3.0",
-            "stamen-terrain-background.name": "Stamen Terrain",
-            "tf-cycle.attribution.text": "Mapas © Thunderforest, Datos © Colaboradores de OpenStreetMap",
-            "tf-cycle.name": "Thunderforest OpenCycleMap",
-            "tf-landscape.attribution.text": "Mapas © Thunderforest, Datos © Colaboradores de OpenStreetMap",
-            "tf-landscape.name": "Thunderforest Landscape"
+            "Bing": {
+                "description": "Imágenes satelitales y aéreas.",
+                "name": "Imágenes aéreas Bing"
+            },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "Términos y comentarios"
+                },
+                "description": "Imagen de satélite Premium de DigitalGlobe.",
+                "name": "Imágenes aéreas DigitalGlobe Premium"
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "Términos y comentarios"
+                },
+                "description": "Imagen de satélite Standard de DigitalGlobe.",
+                "name": "Imágenes aéreas DigitalGlobe Standard"
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "© contribuidores OpenStreetMap, CC-BY-SA"
+                },
+                "description": "La capa predeterminada de OpenStreetMap",
+                "name": "OpenStreetMap (Estándar)"
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "Términos y comentarios"
+                },
+                "description": "Imágenes satelitales y aéreas.",
+                "name": "Mapbox Satellite"
+            },
+            "New_and_Misaligned_TIGER_Roads-2013": {
+                "description": "En nivel de acercamiento 16 o más, datos del mapa de dominio público de US Census. A menores acercamientos, sólo los cambios desde 2006 menos los cambios ya incorporados en OpenStreetMap",
+                "name": "Caminos nuevos y desalineados de TIGER"
+            },
+            "OSM_Inspector-Addresses": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, contribuidores OpenStreetMap, CC-BY-SA"
+                },
+                "name": "Inspector OSM: Direcciones"
+            },
+            "OSM_Inspector-Geometry": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, contribuidores OpenStreetMap, CC-BY-SA"
+                },
+                "name": "Inspector OSM: Geometría"
+            },
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, contribuidores OpenStreetMap, CC-BY-SA"
+                },
+                "name": "Inspector OSM: Carreteras"
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, contribuidores OpenStreetMap, CC-BY-SA"
+                },
+                "name": "Inspector OSM: Área"
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, contribuidores OpenStreetMap, CC-BY-SA"
+                },
+                "name": "Inspector OSM: Lugares"
+            },
+            "OSM_Inspector-Routing": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, contribuidores OpenStreetMap, CC-BY-SA"
+                },
+                "name": "Inspector OSM: Enrutamiento"
+            },
+            "OSM_Inspector-Tagging": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, contribuidores OpenStreetMap, CC-BY-SA"
+                },
+                "name": "Inspector OSM: Etiquetado"
+            },
+            "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, datos del mapa contribuidores OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Ciclismo"
+            },
+            "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, datos del mapa contribuidores OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Senderismo"
+            },
+            "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, datos del mapa contribuidores OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: BTT"
+            },
+            "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, datos del mapa contribuidores OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Patinaje"
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, datos del mapa contribuidores OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Deportes de invierno"
+            },
+            "hike_n_bike": {
+                "attribution": {
+                    "text": "© contribuidores OpenStreetMap"
+                },
+                "name": "Caminata y bicicleta"
+            },
+            "mapbox_locator_overlay": {
+                "attribution": {
+                    "text": "Términos y comentarios"
+                },
+                "description": "Muestra los principales elementos que le ayudarán a orientarse.",
+                "name": "Superposición de localizador"
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "© contribuidores OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OpenPT Map (capa)"
+            },
+            "osm-gps": {
+                "attribution": {
+                    "text": "© contribuidores OpenStreetMap"
+                },
+                "description": "Trazas GPS públicas subidas en OpenStreetMap.",
+                "name": "Trazas GPS de OpenStreetMap"
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "© contribuidores OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (Estándar blanco y negro)"
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "© contribuidores OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (estilo alemán)"
+            },
+            "qa_no_address": {
+                "attribution": {
+                    "text": "Simon Poole, datos © contribuidores OpenStreetMap"
+                },
+                "name": "CC sin direcciones"
+            },
+            "skobbler": {
+                "attribution": {
+                    "text": "© teselas: skobbler, datos del mapa: contribuidores OpenStreetMap"
+                },
+                "name": "skobbler"
+            },
+            "stamen-terrain-background": {
+                "attribution": {
+                    "text": "Teselas del mapa por Stamen Design, bajo CC BY 3.0"
+                },
+                "name": "Stamen Terrain"
+            },
+            "tf-cycle": {
+                "attribution": {
+                    "text": "Mapas © Thunderforest, datos © contribuidores OpenStreetMap"
+                },
+                "name": "Thunderforest OpenCycleMap"
+            },
+            "tf-landscape": {
+                "attribution": {
+                    "text": "Mapas © Thunderforest, datos © contribuidores OpenStreetMap"
+                },
+                "name": "Thunderforest Landscape"
+            }
         }
     }
 }

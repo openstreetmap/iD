@@ -1839,6 +1839,9 @@
                 "power_supply": {
                     "label": "Vir napajanja"
                 },
+                "produce": {
+                    "label": "Pridelava"
+                },
                 "product": {
                     "label": "Izdelki"
                 },
@@ -1890,6 +1893,9 @@
                         "mountain_hiking": "T2: gorska hoja"
                     },
                     "placeholder": "Različne stopnje težavnosti poti …"
+                },
+                "sanitary_dump_station": {
+                    "label": "Odstranjevanje sanitarnih odpadkov"
                 },
                 "seasonal": {
                     "label": "Sezonskost"
@@ -2067,7 +2073,8 @@
                     "label": "Vrsta turizma"
                 },
                 "tower/construction": {
-                    "label": "Gradbišče"
+                    "label": "Gradbišče",
+                    "placeholder": "Vpeto, mrežno, skrito"
                 },
                 "tower/type": {
                     "label": "Vrsta stolpa"
@@ -2123,6 +2130,9 @@
                 },
                 "water": {
                     "label": "Vrsta vode"
+                },
+                "water_point": {
+                    "label": "Vodna točka"
                 },
                 "waterway": {
                     "label": "Vrsta"
@@ -2551,8 +2561,8 @@
                     "terms": "zaklonišče,zaklon,bivak"
                 },
                 "amenity/social_facility": {
-                    "name": "Socialnovarstvene storitve",
-                    "terms": "zavod za zdravstveno zavarovanje,zdravstvo,zdravstveno varstvo,socialna stanovanja"
+                    "name": "Socialnovarstvena ustanova",
+                    "terms": "zavod za zdravstveno zavarovanje,zdravstvo,zdravstveno varstvo,socialna stanovanja,varna točka"
                 },
                 "amenity/social_facility/food_bank": {
                     "name": "Razdeljevalnica hrane",
@@ -4816,26 +4826,158 @@
             }
         },
         "imagery": {
-            "Bing.name": "Satelitski posnetki Bing",
-            "DigitalGlobe-Premium.attribution.text": "Pogoji uporabe in odziv",
-            "DigitalGlobe-Premium.name": "Posnetki DigitalGlobe Premium",
-            "DigitalGlobe-Standard.attribution.text": "Pogoji uporabe in odziv",
-            "DigitalGlobe-Standard.name": "Posnetki DigitalGlobe Standard",
-            "Mapbox.attribution.text": "Pogoji uporabe in odziv",
-            "Mapbox.name": "Posnetki Mapbox Satellite",
-            "mapbox_locator_overlay.attribution.text": "Pogoji uporabe in odziv",
-            "mapbox_locator_overlay.description": "Pokaže glavne značilnosti v okolju za hitro orientacijo.",
-            "osm-gps.attribution.text": "Skupnost © OpenStreetMap",
-            "osm-gps.description": "Javne sledi GPS, ki so poslane na OpenStreetMap.",
-            "osm-gps.name": "Sledi GPS za OpenStreetMap",
-            "osm-mapnik-german_style.attribution.text": "Skupnost © OpenStreetMap z dovoljenjem CC-BY-SA",
-            "osm-mapnik-german_style.name": "OpenStreetMap (nemški slog)",
-            "stamen-terrain-background.attribution.text": "Slike zemljevida z dovoljenjem CC BY 3.0 za Stamen Design",
-            "stamen-terrain-background.name": "Stamen Terrain",
-            "tf-cycle.attribution.text": "Zemljevidi © Thunderforest, Podatki Skupnost © OpenStreetMap",
-            "tf-cycle.name": "Thunderforest OpenCycleMap",
-            "tf-landscape.attribution.text": "Zemljevidi © Thunderforest, Podatki Skupnost © OpenStreetMap",
-            "tf-landscape.name": "Thunderforest Landscape"
+            "Bing": {
+                "description": "Satelitski posnetki in posnetki iz zraka",
+                "name": "Satelitski posnetki Bing"
+            },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "Pogoji uporabe in odziv"
+                },
+                "description": "Satelitski posnetki DigitalGlobe Premium",
+                "name": "Posnetki DigitalGlobe Premium"
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "Pogoji uporabe in odziv"
+                },
+                "description": "Satelitski posnetki DigitalGlobe Standard",
+                "name": "Posnetki DigitalGlobe Standard"
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "Skupnost © OpenStreetMap z dovoljenjem CC-BY-SA"
+                },
+                "description": "Privzeta plast zemljevida OpenStreetMap",
+                "name": "OpenStreetMap (standardni)"
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "Pogoji uporabe in odziv"
+                },
+                "description": "Satelitski posnetki in posnetki iz zraka",
+                "name": "Posnetki Mapbox Satellite"
+            },
+            "New_and_Misaligned_TIGER_Roads-2013": {
+                "description": "Pri približanju do ravni 16+ so podatki zemljevida v javni domeni z dovoljenjem US Census. Pri večjih približanjih, pa so prikazane le spremembe od leta 2006 naprej, neupoštevajoč sprememb, ki so že vključene v OpenStreetMap"
+            },
+            "OSM_Inspector-Addresses": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, skupnost © OpenStreetMap z dovoljenjem CC-BY-SA"
+                },
+                "name": "OSM Inspector: naslovi"
+            },
+            "OSM_Inspector-Geometry": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, skupnost © OpenStreetMap z dovoljenjem CC-BY-SA"
+                },
+                "name": "OSM Inspector: geometrija"
+            },
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, skupnost © OpenStreetMap z dovoljenjem CC-BY-SA"
+                },
+                "name": "OSM Inspector: avtoceste"
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, skupnost © OpenStreetMap z dovoljenjem CC-BY-SA"
+                },
+                "name": "OSM Inspector: območja"
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, skupnost © OpenStreetMap z dovoljenjem CC-BY-SA"
+                },
+                "name": "OSM Inspector: kraji"
+            },
+            "OSM_Inspector-Routing": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, skupnost © OpenStreetMap z dovoljenjem CC-BY-SA"
+                },
+                "name": "OSM Inspector: ceste"
+            },
+            "OSM_Inspector-Tagging": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, skupnost © OpenStreetMap z dovoljenjem CC-BY-SA"
+                },
+                "name": "OSM Inspector: oznake"
+            },
+            "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann z dovoljenjem CC BY-SA 3.0, podatki zemljevida skupnost © OpenStreetMap  z dovoljenjem ODbL 1.0"
+                },
+                "name": "Waymarked Trails: kolesarjenje"
+            },
+            "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann z dovoljenjem CC BY-SA 3.0, podatki zemljevida skupnost © OpenStreetMap z dovoljenjem ODbL 1.0"
+                },
+                "name": "Waymarked Trails: pohodništvo"
+            },
+            "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann z dovoljenjem CC BY-SA 3.0, podatki zemljevida skupnost © OpenStreetMap z dovoljenjem ODbL 1.0"
+                },
+                "name": "Waymarked Trails: MTB"
+            },
+            "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann z dovoljenjem CC BY-SA 3.0, podatki zemljevida skupnost © OpenStreetMap z dovoljenjem ODbL 1.0"
+                },
+                "name": "Waymarked Trails: rolkanje in rolanje"
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© Michael Spreng z dovoljenjem CC BY-SA 3.0, podatki zemljevida skupnost © OpenStreetMap z dovoljenjem ODbL 1.0"
+                },
+                "name": "Waymarked Trails: zimski športi"
+            },
+            "hike_n_bike": {
+                "attribution": {
+                    "text": "Skupnost © OpenStreetMap"
+                },
+                "name": "Pohodništvo in kolesarstvo"
+            },
+            "mapbox_locator_overlay": {
+                "attribution": {
+                    "text": "Pogoji uporabe in odziv"
+                },
+                "description": "Pokaže glavne značilnosti v okolju za hitro orientacijo."
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "Skupnost © OpenStreetMap z dovoljenjem CC-BY-SA"
+                },
+                "name": "Zemljevid OpenPT Map (prekrivna plast)"
+            },
+            "osm-gps": {
+                "attribution": {
+                    "text": "Skupnost © OpenStreetMap"
+                },
+                "description": "Javne sledi GPS, poslane na OpenStreetMap",
+                "name": "Sledi GPS za OpenStreetMap"
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "Skupnost © OpenStreetMap z dovoljenjem CC-BY-SA"
+                },
+                "name": "© OpenStreetMap (standardni črnobeli)"
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "Skupnost © OpenStreetMap z dovoljenjem CC-BY-SA"
+                },
+                "name": "OpenStreetMap (nemški slog)"
+            },
+            "qa_no_address": {
+                "attribution": {
+                    "text": "Simon Pole, podatki skupnost © OpenStreetMap"
+                }
+            },
+            "tf-landscape": {
+                "name": "Thunderforest Landscape"
+            }
         }
     }
 }

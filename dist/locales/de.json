@@ -310,7 +310,7 @@
             "localized_translation_language": "Sprache wählen",
             "localized_translation_name": "Name"
         },
-        "zoom_in_edit": "Hinein zoomen, um zu bearbeiten",
+        "zoom_in_edit": "Zum Bearbeiten hinein zoomen",
         "login": "Login",
         "logout": "Abmelden",
         "loading_auth": "Mit OpenStreetMap verbinden …",
@@ -374,7 +374,7 @@
             "no_results_worldwide": "Keine Ergebnisse gefunden"
         },
         "geolocate": {
-            "title": "Meinen Standort anzeigen",
+            "title": "Aktuellen Standort anzeigen",
             "locating": "Lokalisiere, bitte warten ..."
         },
         "inspector": {
@@ -436,7 +436,7 @@
             "offset": "Ziehe irgendwo im grauen Bereich um den Versatz des Bildmaterials anzupassen oder gib die Versatz-Werte in Metern ein.",
             "minimap": {
                 "description": "Minikarte",
-                "tooltip": "Heraus zoomen, damit das angezeigte Gebiet leichter lokalisiert werden kann."
+                "tooltip": "Zeige kleine Überblicks-Karte zum Auffinden des angezeigten Kartenausschnitts."
             }
         },
         "map_data": {
@@ -445,7 +445,7 @@
             "data_layers": "Datenebenen",
             "fill_area": "Füllflächen",
             "map_features": "Kartenobjekte",
-            "autohidden": "Diese Objekte wurden automatisch versteckt, da zu viele auf dem Bildschirm angezeigt würden. Zum Bearbeiten bitte hinein zoomen."
+            "autohidden": "Diese Objekte wurden automatisch versteckt, da zu viele auf dem Bildschirm angezeigt würden. Du kannst hinein zoomen zum bearbeiten."
         },
         "feature": {
             "points": {
@@ -500,7 +500,7 @@
         "area_fill": {
             "wireframe": {
                 "description": "Keine Füllung (Drahtgitter)",
-                "tooltip": "Drahtgittermodus aktivieren verbessert die Sichtbarkeit des Hintergrundbildes"
+                "tooltip": "Drahtgittermodus aktivieren verbessert die Sichtbarkeit des Bildmaterials"
             },
             "partial": {
                 "description": "Teilweise Füllung",
@@ -627,9 +627,9 @@
             "title": "Hilfe",
             "help": "#Hilfe\n\nDies ist der iD Editor für [OpenStreetMap](http://www.openstreetmap.org/), der freien und bearbeitbaren Weltkarte. Du kannst ihn verwenden, um Daten in deiner Umgebung hinzuzufügen oder zu verändern und so diese Karte mit freien Quellen und freien Daten für jeden verbessern.\n\nDeine Veränderungen werden für alle Nutzer von OpenStreetMap sichtbar. Um Veränderungen vornehmen zu können, musst du [einloggen](https://www.openstreetmap.org/login).\n\nDer [iD Editor](http://ideditor.com/) ist ein Gemeinschaftsprojekt, dessen [Quellcode auf GitHub](https://github.com/openstreetmap/iD) verfügbar ist.\n",
             "editing_saving": "# Bearbeiten & Speichern\n\nDieser Editor ist gedacht um hauptsächlich online zu arbeiten und du\nverwendest ihn gerade auf einer Webseite.\n\n### Objekte auswählen\n\nUm ein Karten-Objekt wie eine Straße oder einen interessanten Punkt auszuwählen, klicke\ndieses auf der Karte an. Dadurch wird das Objekt hervorgehoben und der\nObjekteditor mit den Objektdetails angezeigt. Durch rechtsklicken bekommst\ndu das Bearbeitungsmenu für das Objekt.\n\nMehrere Objekte kannst du auswählen, indem du die \"Shift\"-/Umschalt-Taste\ngedrückt hältst. Dann klicke entweder einzeln auf die\ngewünschten Objekte oder ziehe mit der Maus einen Rahmen auf, damit die Punkte im Rahmen ausgewählt werden.\n\n### Speichern der Änderungen\n\nWenn du eine Straße oder eine Gebäude geändert hast, dann sind\ndeine Änderungen nur lokal gespeichert, bis du sie zum Server hochlädst.\nMach dir keine Sorge wegen Fehler: du kannst Änderungen jederzeit\nmit dem Rückgängig-Knopf rückgängig machen oder über den Wiederherstellen-Knopf wiederherstellen.\n\nKlicke auf „Speichern“, um Änderungen abzuschließen, beispielsweise\nwenn du in einem Gebiet fertig bist und woanders weiter arbeiten willst.\nDu bekommst dann die Liste der Änderungen und manchmal auch\nnützliche Warnungen angezeigt, wenn etwas falsch sein könnte.\nDu kannst dann überprüfen, was du gerade geändert hast.\n\nWenn alles gut aussieht, solltest du einen kurzen Kommentar schreiben, der\nerklärt, was du gemacht hast. Drücke nun \"Hochladen“, um die\nÄnderungen auf  [OpenStreetMap.org](http://www.openstreetmap.org/)\nzu speichern, damit sie für alle anderen Benutzer sichtbar\nwerden und diese darauf aufbauen können.\n\nWenn du mit der Bearbeitung nicht fertig wirst, kannst du den Browser-Tab\neinfach schließen. Wenn du die Seite wieder aufrufst (mit dem gleichen\nRechner und Browser) wird dir angeboten, die ungesicherten Änderungen wiederherzustellen.\n\n### Benutzung des Editors\n\nDu kannst die Liste der Tastenkürzel mit dem '?'-Knopf aufrufen.\n",
-            "roads": "# Wege\n\nMit dem Editor kannst du Wege erstellen, verbessern und löschen. Mögliche Wegtypen können Straßen, Wanderwege, Eisenbahnschienen oder Fahrradwege sein, jeder benutzte Weg kann bearbeitet werden.\n\n### Auswählen\n\nKlicke auf einen Weg, um ihn auszuwählen, er wird dann hervorgehoben und es erscheint links der Objekteditor mit mehr Informationen über den Weg.\n\n### Modifizieren\n\nOft sieht man, dass Wege nicht mit dem Luftbild oder einer GPS-Spur übereinstimmen. Du kannst den Weg so anpassen, dass er an der richtigen Stelle ist. Beachte jedoch, dass Luftbilder einen Versatz aufweisen können.\n\nZuerst klickst du auf den Weg den du ändern willst. Dieser wird nun hervorgehoben und es werden die Knoten des Weges angezeigt. Diese kannst du verschieben, bis sie an der richtigen Stelle sind. Wenn du neue Knoten hinzufügen möchtest, klicke doppelt zwischen den Knoten auf die Linie und es wird ein neuer Knoten erzeugt. Du kannst auch einen Dreiecks-Pfeil auf der Linie anklicken und verschieben.\n\nWenn zwei Wege in Wirklichkeit mit einander verbunden sind, aber auf der Karte nicht, kannst du sie verbinden, indem du einen Knoten des einen Weges auf den anderen Weg ziehst. Dass Wege verbunden sind, ist wichtig für die Karte und notwendig für die Nutzung von Straßenroutern.\n\nDu kannst auch das „Bewegen“-Werkzeug nutzen oder „M“ drücken, um den kompletten Weg zu verschieben. Beende die Aktion mit einem Klick.\n\n### Löschen\n\nWenn du weißt, dass ein Weg nicht existiert, kannst du ihn löschen, um ihn von der Karte zu entfernen. Sei beim Löschen von Objekten - wie immer beim Bearbeiten - vorsichtig, da die Ergebnisse von jedem gesehen werden können und Luftbilder oft veraltet sind. Das heißt, dass ein Weg, der im Luftbild nicht zu sehen ist, wurde vielleicht einfach neu gebaut.\n\nDu kannst Wege löschen, indem du sie rechtsklickst und das Papierkorbsymbol auswählst oder die „Entfernen“-Taste drückst.\n\n### Erstellen\n\nDu kennst einen Weg, der nicht eingezeichnet ist? Dann klicke auf das „Linien“-Symbol oben links im Editor oder drücke die Taste „2“ und beginne mit dem Zeichnen einer Linie.\n\nKlicke dort hin, wo der Weg anfängt. Sollte er von einer bereits existierenden Straße abzweigen, klicke an der entsprechenden Stelle auf diese Straße.\n\nZeichne nun den Weg, indem du Knoten anhand der Luftaufnahme oder der GPS-Spur entlang des Weges setzt. Sollte der Weg einen anderen kreuzen, klicke auf den Kreuzungspunkt, um beide Wege zu verbinden. Wenn du mit dem Zeichnen fertig bist, klicke doppelt oder drücke „Enter“ auf der Tastatur, um den Weg abzuschließen.\n",
+            "roads": "# Wege\n\nMit dem Editor kannst du Wege erstellen, verbessern und löschen. Mögliche Wegtypen können Straßen, Wanderwege, Eisenbahnschienen oder Fahrradwege sein, jeder benutzte Weg kann bearbeitet werden.\n\n### Auswählen\n\nKlicke auf einen Weg, um ihn auszuwählen, er wird dann hervorgehoben und es erscheint links der Objekteditor mit mehr Informationen über den Weg.\n\n### Modifizieren\n\nOft sieht man, dass Wege nicht mit dem Bildmaterial oder einer GPS-Spur übereinstimmen. Du kannst den Weg so anpassen, dass er an der richtigen Stelle ist. Beachte jedoch, dass Luftbilder einen Versatz aufweisen können.\n\nZuerst klickst du auf den Weg den du ändern willst. Dieser wird nun hervorgehoben und es werden die Knoten des Weges angezeigt. Diese kannst du verschieben, bis sie an der richtigen Stelle sind. Wenn du neue Knoten hinzufügen möchtest, klicke doppelt zwischen den Knoten auf die Linie und es wird ein neuer Knoten erzeugt. Du kannst auch einen Dreiecks-Pfeil auf der Linie anklicken und verschieben.\n\nWenn zwei Wege in Wirklichkeit mit einander verbunden sind, aber auf der Karte nicht, kannst du sie verbinden, indem du einen Knoten des einen Weges auf den anderen Weg ziehst. Dass Wege verbunden sind, ist wichtig für die Karte und notwendig für die Nutzung von Straßenroutern.\n\nDu kannst auch das „Bewegen“-Werkzeug nutzen oder „M“ drücken, um den kompletten Weg zu verschieben. Beende die Aktion mit einem Klick.\n\n### Löschen\n\nWenn du weißt, dass ein Weg nicht existiert, kannst du ihn löschen, um ihn von der Karte zu entfernen. Sei beim Löschen von Objekten - wie immer beim Bearbeiten - vorsichtig, da die Ergebnisse von jedem gesehen werden können und die Satellitenbilder oft veraltet sind. Das heißt, dass ein Weg, der im Bildmaterial nicht zu sehen ist, wurde vielleicht einfach neu gebaut.\n\nDu kannst Wege löschen, indem du sie rechtsklickst und das Papierkorbsymbol auswählst oder die „Entfernen“-Taste drückst.\n\n### Erstellen\n\nDu kennst einen Weg, der nicht eingezeichnet ist? Dann klicke auf das „Linien“-Symbol oben links im Editor oder drücke die Taste „2“ und beginne mit dem Zeichnen einer Linie.\n\nKlicke dort hin, wo der Weg anfängt. Sollte er von einer bereits existierenden Straße abzweigen, klicke an der entsprechenden Stelle auf diese Straße.\n\nZeichne nun den Weg, indem du Knoten anhand des Bildmaterials oder der GPS-Spur entlang des Weges setzt. Sollte der Weg einen anderen kreuzen, klicke auf den Kreuzungspunkt, um beide Wege zu verbinden. Wenn du mit dem Zeichnen fertig bist, klicke doppelt oder drücke „Enter“ auf der Tastatur, um den Weg abzuschließen.\n",
             "gps": "# GPS\n\nSelbst aufgezeichnete GPS-Tracks sind eine wertvolle Datenquelle für OpenStreetMap. Dieser Editor unterstützt lokale GPS-Tracks - `.gpx`-Dateien auf deinem Computer. Du kannst GPS-Tracks mit Hilfe von  zahlreichen Smartphone-Apps oder mit GPS-Geräten aufnehmen.\n\nFür Informationen über das Aufzeichnen von GPS-Daten kannst du dir folgende Anleitung durchlesen: [Kartierung mit Smartphone, GPS oder Papier](http://learnosm.org/de/mobile-mapping/)\n\nUm einen GPS-Track fürs Mapping zu verwenden, ziehe ihn einfach auf die Karte. Wenn er erkannt wurde, wird der Track als hell-lila Linie auf der Karte dargestellt.\nKlicke auf das „Kartendaten“-Menu rechts, um die neue Ebene mit dem Track zu aktivieren/deaktivieren oder zoome zum Gebiet des Tracks.\n\nDer GPS-Track wird nicht automatisch direkt zu OpenStreetMap hochgeladen. Am besten verwendest du ihn als Orientierung um neue Objekte zu zeichnen. Möchtest du den GPS-Track jedem zugänglich machen, kannst du ihn [nach OpenStreetMap hochladen](http://www.openstreetmap.org/trace/create)\n",
-            "imagery": "# Bildmaterial\n\nLuftbilder sind eine wichtige Quelle für das Kartografieren. Eine Kombination aus Luftbildern von Flugzeugen, Satellitenbilder und freien Quellen sind im Editor über das „Hintergrundeinstellungen“-Menü auf der linken Seite verfügbar.\n\nAls Standard ist die [Bing-Maps](http://www.bing.com/maps/)-Satelliten-Ebene ausgewählt. Je nach angezeigter Gegend werden dir verschiedene andere Quellen angezeigt. In einigen Länder wie Deutschland, Österreich, Schweiz oder den USA stehen zum Teil sehr hochauflösende Luftbilder zur Verfügung.\n\nLuftbilder sind manchmal durch Fehler der Luftbild-Anbieter verschoben. Wenn du feststellst, dass viele Wege gegenüber dem Hintergrund verschoben sind, dann verschiebe nicht die Straßen sondern das Luftbild, bis sie übereinstimmen. Um das Luftbild zu korrigieren, klicke auf „Bildmaterial-Versatz anpassen“ unten in den Hintergrundeinstellungen.\n",
+            "imagery": "# Bildmaterial\n\nLuftbilder sind eine wichtige Quelle für das Kartografieren. Eine Kombination aus Luftbildern von Flugzeugen, Satellitenbilder und freien Quellen sind im Editor über das „Hintergrundeinstellungen“-Menü auf der linken Seite verfügbar.\n\nAls Standard sind die [Bing-Maps](http://www.bing.com/maps/)-Satellitenbilder ausgewählt. Je nach angezeigter Gegend werden dir verschiedene andere Quellen angezeigt. In einigen Länder wie Deutschland, Österreich, Schweiz oder den USA steht zum Teil sehr hochauflösendes Bildmaterial zur Verfügung.\n\nBildmaterial ist manchmal durch Fehler der Anbieter verschoben. Wenn du feststellst, dass viele Wege gegenüber dem Hintergrund verschoben sind, dann verschiebe nicht die Straßen sondern das Bildmaterial, bis sie übereinstimmen. Um das Bildmaterial zu korrigieren, klicke auf „Bildmaterial-Versatz anpassen“ unten in den Hintergrundeinstellungen.\n",
             "addresses": "# Adressen\n\nAdressen sind eine der wichtigsten Informationen einer Karte.\n\nAdressen werden in OpenStreetMap als Eigenschaften von Gebäuden oder als Punkt-Objekte neben der Straße eingetragen.\n\nDu kannst Adressinformationen sowohl zu Flächen, die als Gebäudegrundriss gezeichnet sind, als auch zu einzelnen Punkten hinzufügen. Die beste Quelle für Adressen ist eigenes Wissen oder eine Erhebung vor Ort. Wie bei allen anderen Objekten ist die Nutzung kommerzieller Quellen wie Google Maps strikt verboten.\n",
             "inspector": "# Objekteditor\n\nDer Objekteditor ist das Bedienelement links im Editor und erlaubt dir die Details des ausgewählten Objekts zu bearbeiten.\n\n### Einen Objekttyp auswählen\n\nNachdem du einen Punkt, eine Linie oder eine Fläche hinzugefügt hast, kannst du auswählen, welchen Typ das Objekt hat – ob es eine Autobahn oder eine Wohngebietsstraße, ein Supermarkt oder ein Café ist. Der Objekteditor zeigt Knöpfe für die am häufigsten verwendeten Eigenschaften an. Andere Eigenschaften findest du, indem du im Suchfeld eingibst, wonach du suchst.\n\nKlicke auf den Knopf „i“ in der rechten oberen Ecke bei einem Objekttyp, um mehr darüber zu erfahren.\n\n### Vorlagen verwenden und Eigenschaften bearbeiten\n\nNachdem du einen Objekttyp oder ein Objekt ausgewählt hast, zeigt der Objekteditor Felder mit Eigenschaften wie Name oder Adresse an.\n\nUnter diesen Feldern kannst du das \"Feld hinzufügen\"-Dropdown anklicken, um weitere Details hinzuzufügen wie zum Beispiel einen Wikipedia-Link, Zugänglichkeit für Rollstühle und anderes.\n\nFast ganz unten im Objekteditor kannst du auf „Alle Eigenschaften“ klicken, um das Objekt mit beliebigen anderen Eigenschaften zu versehen. [Taginfo](http://taginfo.openstreetmap.org/) ist eine gute Quelle, um oft genutzte Kombinationen von Eigenschaften zu finden.\n\nÄnderungen die du im Objekteditor vornimmst, werden automatisch auf die ausgewählten Objekte angewendet. Durch klicken auf den Knopf „Rückgängig“ kannst du sie rückgängig machen.\n",
             "buildings": "# Gebäude\n\nOpenStreetMap ist die größte Gebäude-Datenbank der Welt und du kannst helfen, sie weiter zu verbessern.\n\n### Auswahl\n\nDu kannst ein Gebäude auswählen, indem du auf dessen Umriss klickst. Der Umriss wird nun hervorgehoben. Außerdem wird links der Objekteditor die Informationen zum Gebäude anzeigen.\n\n### Bearbeitung\n\nManchmal sind Gebäude falsch platziert oder haben falsche Eigenschaften.\n\nUm ein Gebäude komplett zu verschieben kannst du es rechtsklicken und mit dem „Bewegen“-Werkzeug verschieben. Verschiebe das Gebäude und klicke einmal, wenn es an der richtigen Stelle ist.\n\nUm den Gebäudeumriss zu korrigieren, klicke und ziehe die Knoten des Umriss, bis sie an der richtigen Stelle sind.\n\n### Erstellen\n\nEine oft gestellte Frage bezieht sich auf das Erstellen von Gebäuden als Gebäudefläche und/oder als Punkt. Hier gilt, wann immer es möglich ist, sollte das Gebäude als Fläche eingetragen werden. Firmen, Geschäfte und ähnliches werden zusätzlich als Punkte innerhalb des Gebäudes angelegt.\n\nUm ein Gebäude als Fläche zu zeichnen, klicke auf den Knopf „Fläche“ oben links und vollende das Gebäude, indem du entweder die „Enter“-Taste drückst, oder auf den ersten Knoten klickst.\n\n### Löschen\n\nWenn du siehst und weißt, dass ein Gebäude nicht existiert – zum Beispiel, weil du vor Ort warst – kannst du es löschen und es wird von der Karte entfernt. Sei vorsichtig beim Löschen von Objekten, das Ergebnis kann, wie bei jeder anderen Veränderung, von allen gesehen werden. Außerdem sind Satellitenbilder oft veraltet und ein Gebäude könnte einfach neu gebaut sein.\n\nDu kannst ein Gebäude löschen, indem du es auswählst und auf das Papierkorbsymbol klickst oder die „Entfernen“-Taste betätigst.\n",
@@ -3298,12 +3298,12 @@
                     "terms": "Fußgängerzone, Fußgängerstraße"
                 },
                 "highway/primary": {
-                    "name": "Bundesstraße",
-                    "terms": "überregionale Landstraße, Hauptstraße, Hauptverbindungsstraße, Hauptverkehrsstraße, Fernstraße, Bundesstraße, Nationalstraße"
+                    "name": "Hauptverbindungsstraße",
+                    "terms": "Hauptverbindungsstraße, überregionale Landstraße, Hauptstraße, Hauptverkehrsstraße, Fernstraße, Bundesstraße, Nationalstraße"
                 },
                 "highway/primary_link": {
-                    "name": "Bundessstraßenanschluss",
-                    "terms": "Bundessstraßenanschluss, Hauptverbindungsstraßenanschluss, Hauptverbindungsstraßenauffahrt, Hauptverbindungsstraßenabfahrt, Fernstraßenanschluss, Fernstraßenauffahrt, Fernstraßenabfahrt, Bundesstraßenanschluss, Bundesstraßenauffahrt, Bundesstraßenabfahrt, Auffahrt, Abfahrt"
+                    "name": "Hauptverbindungsstraßenanschluss",
+                    "terms": "Hauptverbindungsstraßenanschluss, Bundessstraßenanschluss, Hauptverbindungsstraßenauffahrt, Hauptverbindungsstraßenabfahrt, Fernstraßenanschluss, Fernstraßenauffahrt, Fernstraßenabfahrt, Bundesstraßenanschluss, Bundesstraßenauffahrt, Bundesstraßenabfahrt, Auffahrt, Abfahrt"
                 },
                 "highway/raceway": {
                     "name": "Rennstrecke (Motorsport)",
@@ -5075,29 +5075,182 @@
             }
         },
         "imagery": {
-            "Bing.name": "Bing-Luftbilder",
-            "DigitalGlobe-Premium.attribution.text": "Bedingungen & Feedback",
-            "DigitalGlobe-Premium.name": "DigitalGlobe-Premium-Luftbilder",
-            "DigitalGlobe-Standard.attribution.text": "Bedingungen & Feedback",
-            "DigitalGlobe-Standard.name": "DigitalGlobe-Standard-Luftbilder",
-            "Mapbox.attribution.text": "Bedingungen & Feedback",
-            "Mapbox.name": "Mapbox-Satellitenbilder",
-            "New_and_Misaligned_TIGER_Roads-2013.description": "Bei der Zoomstufe 16+ erscheinen Public-Domain-Kartendaten von der US-Volkszählung. Bei niedrigeren Zoomstufen sind nur Änderungen seit 2006, die noch nicht in OpenStreetMap eingearbeitet wurden, enthalten",
-            "New_and_Misaligned_TIGER_Roads-2013.name": "Neue & falsch ausgerichtete TIGER-Straßen",
-            "mapbox_locator_overlay.attribution.text": "Bedingungen & Feedback",
-            "mapbox_locator_overlay.description": "Zeigt die wichtigsten Funktionen an, um Ihnen beim Orientieren zu helfen.",
-            "mapbox_locator_overlay.name": "Orientierungs-Überlagerung",
-            "osm-gps.attribution.text": "© OpenStreetMap-Mitwirkende",
-            "osm-gps.description": "Öffentliche GPS-Spuren, zu OpenStreetMap hochgeladen.",
-            "osm-gps.name": "OpenStreetMap GPS-Spuren",
-            "osm-mapnik-german_style.attribution.text": "© OpenStreetMap-Mitwirkende, CC-BY-SA",
-            "osm-mapnik-german_style.name": "OpenStreetMap (Deutscher Stil)",
-            "stamen-terrain-background.attribution.text": "Kartenkacheln von Stamen Design, unter CC-BY 3.0",
-            "stamen-terrain-background.name": "Stamen Gelände",
-            "tf-cycle.attribution.text": "Karten © Thunderforest, Daten © OpenStreetMap-Mitwirkende",
-            "tf-cycle.name": "Thunderforest OpenCycleMap",
-            "tf-landscape.attribution.text": "Karten © Thunderforest, Daten © OpenStreetMap-Mitwirkende",
-            "tf-landscape.name": "Thunderforest Landschaft"
+            "Bing": {
+                "description": "Satellitenbilder und Luftbilder",
+                "name": "Bing-Bildmaterial"
+            },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "Bedingungen & Feedback"
+                },
+                "description": "Premium-DigitalGlobe-Satellitenbilder",
+                "name": "DigitalGlobe Premium"
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "Bedingungen & Feedback"
+                },
+                "description": "Standard-DigitalGlobe-Satellitenbilder",
+                "name": "DigitalGlobe Standard"
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "© OpenStreetMap-Mitwirkende, CC-BY-SA"
+                },
+                "description": "Standard-OpenStreetMap-Karten-Layer",
+                "name": "OpenStreetMap (Standard)"
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "Bedingungen & Feedback"
+                },
+                "description": "Satellitenbilder und Luftbilder",
+                "name": "Mapbox Satellit"
+            },
+            "New_and_Misaligned_TIGER_Roads-2013": {
+                "description": "Zoom 16+: Freie Kartendaten aus der USA-Volkszählung, Zoom 15-: Nur Änderungen seit 2006 die in OpenStreetMap fehlen",
+                "name": "Neue/verschobene TIGER Straßen"
+            },
+            "OSM_Inspector-Addresses": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap-Mitwirkende, CC-BY-SA"
+                },
+                "name": "OSM-Objekteditor: Adressen"
+            },
+            "OSM_Inspector-Geometry": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap-Mitwirkende, CC-BY-SA"
+                },
+                "name": "OSM-Objekteditor: Geometrie"
+            },
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap-Mitwirkende, CC-BY-SA"
+                },
+                "name": "OSM-Objekteditor: Straßen"
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap-Mitwirkende, CC-BY-SA"
+                },
+                "name": "OSM-Objekteditor: Fläche"
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap-Mitwirkende, CC-BY-SA"
+                },
+                "name": "OSM-Objekteditor: Orte"
+            },
+            "OSM_Inspector-Routing": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap-Mitwirkende, CC-BY-SA"
+                },
+                "name": "OSM-Objekteditor: Routing"
+            },
+            "OSM_Inspector-Tagging": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap-Mitwirkende, CC-BY-SA"
+                },
+                "name": "OSM-Objekteditor: Kennzeichnung"
+            },
+            "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC-BY-SA 3.0, Kartendaten © OpenStreetMap-Mitwirkende, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Radfahren"
+            },
+            "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC-BY-SA 3.0, Kartendaten © OpenStreetMap-Mitwirkende, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Wandern"
+            },
+            "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC-BY-SA 3.0, Kartendaten © OpenStreetMap-Mitwirkende, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Mountainbiking"
+            },
+            "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC-BY-SA 3.0, Kartendaten © OpenStreetMap-Mitwirkende, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Skating"
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC-BY-SA 3.0, Kartendaten © OpenStreetMap-Mitwirkende, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Wintersport"
+            },
+            "hike_n_bike": {
+                "attribution": {
+                    "text": "© OpenStreetMap-Mitwirkende"
+                },
+                "name": "Hike & Bike"
+            },
+            "mapbox_locator_overlay": {
+                "attribution": {
+                    "text": "Bedingungen & Feedback"
+                },
+                "description": "Länder/Städte/Orte/Straßen zum Orientieren",
+                "name": "Orientierungs-Overlay"
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "© OpenStreetMap-Mitwirkende, CC-BY-SA"
+                },
+                "name": "OpenPT Map (Overlay)"
+            },
+            "osm-gps": {
+                "attribution": {
+                    "text": "© OpenStreetMap-Mitwirkende"
+                },
+                "description": "Öffentliche GPS-Tracks von OpenStreetMap-Mitwirkenden",
+                "name": "GPS-Tracks von OpenStreetMap"
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "© OpenStreetMap-Mitwirkende, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (Standard Schwarz & Weiss)"
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "© OpenStreetMap-Mitwirkende, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (Deutscher Stil)"
+            },
+            "qa_no_address": {
+                "attribution": {
+                    "text": "Kacheln © Simon Poole, Kartendaten © OpenStreetMap-Mitwirkende, ODbL 1.0"
+                },
+                "name": "Qualitätssicherung: Keine Adresse"
+            },
+            "skobbler": {
+                "attribution": {
+                    "text": "Kacheln © skobbler, Kartendaten © OpenStreetMap-Mitwirkende, ODbL 1.0"
+                },
+                "name": "skobbler"
+            },
+            "stamen-terrain-background": {
+                "attribution": {
+                    "text": "Kacheln © Stamen Design, CC-BY 3.0"
+                },
+                "name": "Stamen Terrain"
+            },
+            "tf-cycle": {
+                "attribution": {
+                    "text": "Kacheln © Thunderforest, Kartendaten © OpenStreetMap-Mitwirkende, ODbL 1.0"
+                },
+                "name": "Thunderforest OpenCycleMap"
+            },
+            "tf-landscape": {
+                "attribution": {
+                    "text": "Kacheln © Thunderforest, Kartendaten © OpenStreetMap-Mitwirkende, ODbL 1.0"
+                },
+                "name": "Thunderforest Landscape"
+            }
         }
     }
 }
