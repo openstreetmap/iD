@@ -2718,10 +2718,16 @@ img.tile-removing {
     content: '; ';
 }
 
-.source-image {
+.attribution .source-image {
     height: 20px;
-    vertical-align:top;
+    vertical-align: middle;
+    border-radius: 3px;
 }
+
+.attribution span {
+    margin: 0 5px;
+}
+
 
 #footer {
     pointer-events: all;

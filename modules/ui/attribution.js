@@ -33,24 +33,32 @@ export function uiAttribution(context) {
                     return;
                 }
 
-                var source = t('imagery.' + d.id + '.attribution.text',
+                var selection;
+                if (d.terms_url) {
+                    selection = d3.select(this)
+                        .append('a')
+                        .attr('href', d.terms_url)
+                        .attr('target', '_blank');
+                } else {
+                    selection = d3.select(this);
+                }
+
+
+                var terms_text = t('imagery.' + d.id + '.attribution.text',
                     { default: d.terms_text || d.id || d.name() }
                 );
 
-                if (d.logo) {
-                    source = '<img class="source-image" src="' + context.imagePath(d.logo) + '">';
+                if (d.icon && !d.overlay) {
+                    selection
+                        .append('img')
+                        .attr('class', 'source-image')
+                        .attr('src', d.icon);
                 }
 
-                if (d.terms_url) {
-                    d3.select(this)
-                        .append('a')
-                        .attr('href', d.terms_url)
-                        .attr('target', '_blank')
-                        .html(source);
-                } else {
-                    d3.select(this)
-                        .text(source);
-                }
+                selection
+                    .append('span')
+                    .attr('class', 'attribution-text')
+                    .text(terms_text);
             })
             .merge(background);
 

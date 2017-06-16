@@ -54,9 +54,6 @@ sources.concat(whitelist).forEach(function(source) {
         template: source.url
     };
 
-    var description = source.description;
-    if (description) im.description = description;
-
     var extent = source.extent || {};
     if (extent.min_zoom || extent.max_zoom) {
         im.scaleExtent = [
@@ -92,7 +89,7 @@ sources.concat(whitelist).forEach(function(source) {
         im.terms_html = attribution.html;
     }
 
-    ['default', 'overlay', 'best'].forEach(function(a) {
+    ['best', 'default', 'description', 'icon', 'overlay'].forEach(function(a) {
         if (source[a]) {
             im[a] = source[a];
         }

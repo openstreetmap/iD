@@ -148,7 +148,6 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
         }).join(', ');
     };
 
-    bing.logo = 'bing_maps.png';
     bing.terms_url = 'https://blog.openstreetmap.org/2010/11/30/microsoft-imagery-details';
 
     return bing;
