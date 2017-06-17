@@ -18,6 +18,8 @@
         "key": "footway",
         "value": "sidewalk"
     },
-    "terms": [],
+    "terms": [
+        "pavement"
+    ],
     "name": "Sidewalk"
 }

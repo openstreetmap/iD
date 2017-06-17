@@ -3226,7 +3226,7 @@
                 },
                 "footway/sidewalk": {
                     "name": "Sidewalk",
-                    "terms": ""
+                    "terms": "pavement"
                 },
                 "ford": {
                     "name": "Ford",
