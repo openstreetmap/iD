@@ -2491,6 +2491,7 @@ en:
       footway/sidewalk:
         # 'highway=footway, footway=sidewalk'
         name: Sidewalk
+        # 'terms: pavement'
         terms: '<translate with synonyms or related terms for ''Sidewalk'', separated by commas>'
       ford:
         # ford=yes
