@@ -14,10 +14,18 @@ export function uiIntroStartEditing(context, reveal) {
         title: 'intro.startediting.title'
     };
 
-
     function showHelp() {
         reveal('.map-control.help-control',
-            t('intro.startediting.help', { button: icon('#icon-help', 'pre-text') }), {
+            t('intro.startediting.help', { button: icon('#icon-help', 'pre-text'), key: t('help.key') }), {
+                buttonText: t('intro.ok'),
+                buttonCallback: function() { shortcuts(); }
+            }
+        );
+    }
+
+    function shortcuts() {
+        reveal('.map-control.help-control',
+            t('intro.startediting.shortcuts', { key: t('shortcuts.toggle.key') }), {
                 buttonText: t('intro.ok'),
                 buttonCallback: function() { showSave(); }
             }
@@ -25,6 +33,7 @@ export function uiIntroStartEditing(context, reveal) {
     }
 
     function showSave() {
+        d3.selectAll('.shaded').remove();  // in case user opened keyboard shortcuts
         reveal('#bar button.save',
             t('intro.startediting.save'), {
                 buttonText: t('intro.ok'),
@@ -34,6 +43,8 @@ export function uiIntroStartEditing(context, reveal) {
     }
 
     function showStart() {
+        d3.selectAll('.shaded').remove();  // in case user opened keyboard shortcuts
+
         modalSelection = uiModal(context.container());
 
         modalSelection.select('.modal')
@@ -70,6 +81,7 @@ export function uiIntroStartEditing(context, reveal) {
 
     chapter.exit = function() {
         modalSelection.remove();
+        d3.selectAll('.shaded').remove();  // in case user opened keyboard shortcuts
     };
 
 

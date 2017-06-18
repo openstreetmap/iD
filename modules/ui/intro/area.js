@@ -2,6 +2,7 @@ import * as d3 from 'd3';
 import { t } from '../../util/locale';
 import { modeBrowse, modeSelect } from '../../modes';
 import { utilRebind } from '../../util/rebind';
+import { uiCmd } from '../cmd';
 import { icon, pad, transitionTime } from './helper';
 
 
@@ -111,13 +112,15 @@ export function uiIntroArea(context, reveal) {
 
         areaId = null;
         revealPlayground(playground,
-            t('intro.areas.continue_playground'), { duration: 250 }
+            t('intro.areas.continue_playground', { alt: uiCmd.display('⌥') }),
+            { duration: 250 }
         );
 
         timeout(function() {
             context.map().on('move.intro drawn.intro', function() {
                 revealPlayground(playground,
-                    t('intro.areas.continue_playground'), { duration: 0 }
+                    t('intro.areas.continue_playground', { alt: uiCmd.display('⌥') }),
+                    { duration: 0 }
                 );
             });
         }, 250);  // after reveal
