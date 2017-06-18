@@ -71,7 +71,7 @@ export function uiBackground(context) {
                         .html(true)
                         .title(function() {
                             var tip = '<div>' + t('background.switch') + '</div>';
-                            return uiTooltipHtml(tip, uiCmd('⌘B'));
+                            return uiTooltipHtml(tip, uiCmd('⌘' + key));
                         })
                     );
                 } else if (description || isOverflowing) {
