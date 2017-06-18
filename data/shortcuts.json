@@ -32,10 +32,10 @@
                         "section": "help",
                         "text": "shortcuts.browsing.help.title"
                     }, {
-                        "shortcuts": ["H"],
+                        "shortcuts": ["help.key"],
                         "text": "shortcuts.browsing.help.help"
                     }, {
-                        "shortcuts": ["?"],
+                        "shortcuts": ["shortcuts.toggle.key"],
                         "text": "shortcuts.browsing.help.keyboard"
                     },
 
@@ -43,24 +43,24 @@
                         "section": "display_options",
                         "text": "shortcuts.browsing.display_options.title"
                     }, {
-                        "shortcuts": ["B"],
+                        "shortcuts": ["background.key"],
                         "text": "shortcuts.browsing.display_options.background"
                     }, {
                         "modifiers": ["⌘"],
-                        "shortcuts": ["B"],
+                        "shortcuts": ["background.key"],
                         "text": "shortcuts.browsing.display_options.background_switch"
                     }, {
-                        "shortcuts": ["F"],
+                        "shortcuts": ["map_data.key"],
                         "text": "shortcuts.browsing.display_options.map_data"
                     }, {
                         "modifiers": ["⌃", "⌘"],
                         "shortcuts": ["F", "F11"],
                         "text": "shortcuts.browsing.display_options.fullscreen"
                     }, {
-                        "shortcuts": ["W"],
+                        "shortcuts": ["area_fill.wireframe.key"],
                         "text": "shortcuts.browsing.display_options.wireframe"
                     }, {
-                        "shortcuts": ["/"],
+                        "shortcuts": ["background.minimap.key"],
                         "text": "shortcuts.browsing.display_options.minimap"
                     }
                 ]
@@ -94,7 +94,7 @@
                         "text": "shortcuts.browsing.with_selected.edit_menu"
                     }, {
                         "modifiers": ["⌘"],
-                        "shortcuts": ["I"],
+                        "shortcuts": ["infobox.key"],
                         "text": "shortcuts.browsing.with_selected.infobox"
                     },
 

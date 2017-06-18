@@ -13,8 +13,7 @@ import {
 
 
 export function uiInfo(context) {
-    var key = uiCmd('⌘I'),
-        isImperial = (utilDetect().locale.toLowerCase() === 'en-us'),
+    var isImperial = (utilDetect().locale.toLowerCase() === 'en-us'),
         isHidden = true;
 
 
@@ -244,7 +243,7 @@ export function uiInfo(context) {
         redraw();
 
         var keybinding = d3keybinding('info')
-            .on(key, toggle);
+            .on(uiCmd('⌘' + t('infobox.key')), toggle);
 
         d3.select(document)
             .call(keybinding);

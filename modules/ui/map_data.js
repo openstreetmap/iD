@@ -8,7 +8,7 @@ import { tooltip } from '../util/tooltip';
 
 
 export function uiMapData(context) {
-    var key = 'F',
+    var key = t('map_data.key'),
         features = context.features().keys(),
         layers = context.layers(),
         fills = ['wireframe', 'partial', 'full'],
@@ -286,7 +286,7 @@ export function uiMapData(context) {
                     .html(true)
                     .title(function(d) {
                         var tip = t(name + '.' + d + '.tooltip'),
-                            key = (d === 'wireframe' ? 'W' : null);
+                            key = (d === 'wireframe' ? t('area_fill.wireframe.key') : null);
 
                         if (name === 'feature' && autoHiddenFeature(d)) {
                             tip += '<div>' + t('map_data.autohidden') + '</div>';
@@ -479,9 +479,8 @@ export function uiMapData(context) {
 
         var keybinding = d3keybinding('features')
             .on(key, togglePanel)
-            .on('W', toggleWireframe)
-            .on('B', hidePanel)
-            .on('H', hidePanel);
+            .on(t('area_fill.wireframe.key'), toggleWireframe)
+            .on([t('background.key'), t('help.key')], hidePanel);
 
         d3.select(document)
             .call(keybinding);

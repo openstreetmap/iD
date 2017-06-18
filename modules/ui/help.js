@@ -10,7 +10,7 @@ import { tooltip } from '../util/tooltip';
 
 
 export function uiHelp(context) {
-    var key = 'H';
+    var key = t('help.key');
 
     var docKeys = [
         'help.help',
@@ -214,8 +214,7 @@ export function uiHelp(context) {
 
         var keybinding = d3keybinding('help')
             .on(key, toggle)
-            .on('B', hide)
-            .on('F', hide);
+            .on([t('background.key'), t('map_data.key')], hide);
 
         d3.select(document)
             .call(keybinding);

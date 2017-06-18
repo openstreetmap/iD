@@ -273,6 +273,7 @@ en:
     list: "Edits by {users}"
     truncated_list: "Edits by {users} and {count} others"
   infobox:
+    key: I
     selected: "{n} selected"
     geometry: Geometry
     closed: closed
@@ -339,6 +340,7 @@ en:
   background:
     title: Background
     description: Background settings
+    key: B
     percent_brightness: "{opacity}% brightness"
     none: None
     best_imagery: Best known imagery source for this location
@@ -353,9 +355,11 @@ en:
     minimap:
       description: Minimap
       tooltip: Show a zoomed out map to help locate the area currently displayed.
+      key: '/'
   map_data:
     title: Map Data
     description: Map Data
+    key: F
     data_layers: Data Layers
     fill_area: Fill Areas
     map_features: Map Features
@@ -401,6 +405,7 @@ en:
     wireframe:
       description: No Fill (Wireframe)
       tooltip: "Enabling wireframe mode makes it easy to see the background imagery."
+      key: W
     partial:
       description: Partial Fill
       tooltip: "Areas are drawn with fill only around their inner edges. (Recommended for beginner mappers)"
@@ -507,6 +512,7 @@ en:
     view_on_mapillary: "View this image on Mapillary"
   help:
     title: "Help"
+    key: H
     help: |
       # Help
 
@@ -1019,6 +1025,8 @@ en:
   shortcuts:
     title: "Keyboard shortcuts"
     tooltip: "Show the keyboard shortcuts screen."
+    toggle:
+      key: '?'
     key:
       alt: Alt
       backspace: Backspace

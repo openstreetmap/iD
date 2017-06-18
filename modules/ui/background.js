@@ -14,7 +14,7 @@ import { tooltip } from '../util/tooltip';
 
 
 export function uiBackground(context) {
-    var key = 'B',
+    var key = t('background.key'),
         detected = utilDetect(),
         opacities = [1, 0.75, 0.5, 0.25],
         directions = [
@@ -474,7 +474,7 @@ export function uiBackground(context) {
             .append('label')
             .call(tooltip()
                 .html(true)
-                .title(uiTooltipHtml(t('background.minimap.tooltip'), '/'))
+                .title(uiTooltipHtml(t('background.minimap.tooltip'), t('background.minimap.key')))
                 .placement('top')
             );
 
@@ -569,9 +569,8 @@ export function uiBackground(context) {
 
         var keybinding = d3keybinding('background')
             .on(key, toggle)
-            .on(uiCmd('⌘B'), quickSwitch)
-            .on('F', hide)
-            .on('H', hide);
+            .on(uiCmd('⌘' + key), quickSwitch)
+            .on([t('map_data.key'), t('help.key')], hide);
 
         d3.select(document)
             .call(keybinding);
