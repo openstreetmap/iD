@@ -14,19 +14,29 @@ git remote update > /dev/null
 
 rev=`git rev-parse --short HEAD`
 orig=`git rev-parse --short origin/master`
-if [[ "${rev}" == "${orig}" ]] ; then
-    exit 0
+
+# pull latest code
+if [[ "${rev}" != "${orig}" ]] ; then
+  git reset --hard HEAD
+  git pull origin master
+
+  rev=`git rev-parse --short HEAD`
+  sed -i "s/context.version = .*;/context.version = '${rev}';/" modules/core/context.js
 fi
 
-git reset --hard HEAD
-git pull origin master
+# pull latest imagery
+rm -rf node_modules/editor-layer-index/
 
-rev=`git rev-parse --short HEAD`
-sed -i "s/context.version = .*;/context.version = '${rev}';/" modules/core/context.js
-
+# build everything
 npm prune
 npm install
-# npm run all
+npm run imagery
+npm run all
+
+# pull latest translations
+if [[ -f transifex.auth ]] ; then
+  npm run translations
+fi
 
 cp -Rf dist/* /var/www/openstreetmap.us/iD/master/
 chgrp -R www-data /var/www/openstreetmap.us/iD/master/
