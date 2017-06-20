@@ -22,14 +22,16 @@ if [[ "${rev}" != "${orig}" ]] ; then
 
   rev=`git rev-parse --short HEAD`
   sed -i "s/context.version = .*;/context.version = '${rev}';/" modules/core/context.js
+
+  npm prune
+  npm install
 fi
 
 # pull latest imagery
 rm -rf node_modules/editor-layer-index/
+git clone https://github.com/osmlab/editor-layer-index.git node_modules/editor-layer-index
 
 # build everything
-npm prune
-npm install
 npm run imagery
 npm run all
 
