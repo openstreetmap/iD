@@ -457,6 +457,10 @@
         },
         {
             "key": "amenity",
+            "value": "scrapyard"
+        },
+        {
+            "key": "amenity",
             "value": "shelter"
         },
         {

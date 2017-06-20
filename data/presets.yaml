@@ -1837,6 +1837,11 @@ en:
         name: School Grounds
         # 'terms: academy,elementary school,middle school,high school'
         terms: '<translate with synonyms or related terms for ''School Grounds'', separated by commas>'
+      amenity/scrapyard:
+        # amenity=scrapyard
+        name: Scrap Yard
+        # 'terms: car,junk,metal,salvage,scrap,u-pull-it,vehicle,wreck,yard'
+        terms: '<translate with synonyms or related terms for ''Scrap Yard'', separated by commas>'
       amenity/shelter:
         # amenity=shelter
         name: Shelter

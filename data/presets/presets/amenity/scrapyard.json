@@ -1,0 +1,31 @@
+{
+    "icon": "car",
+    "fields": [
+        "operator",
+        "address",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "car",
+        "junk",
+        "metal",
+        "salvage",
+        "scrap",
+        "u-pull-it",
+        "vehicle",
+        "wreck",
+        "yard"
+    ],
+    "tags": {
+        "amenity": "scrapyard"
+    },
+    "reference": {
+        "key": "industrial",
+        "value": "scrap_yard"
+    },
+    "name": "Scrap Yard"
+}

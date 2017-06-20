@@ -2626,6 +2626,10 @@
                     "name": "School Grounds",
                     "terms": "academy,elementary school,middle school,high school"
                 },
+                "amenity/scrapyard": {
+                    "name": "Scrap Yard",
+                    "terms": "car,junk,metal,salvage,scrap,u-pull-it,vehicle,wreck,yard"
+                },
                 "amenity/shelter": {
                     "name": "Shelter",
                     "terms": "lean-to,gazebo,picnic"
