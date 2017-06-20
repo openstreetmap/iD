@@ -5229,6 +5229,20 @@
                 },
                 "name": "Waymarked Trails: Winter Sports"
             },
+            "basemap.at": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Basemap of Austria, based on goverment data.",
+                "name": "basemap.at"
+            },
+            "basemap.at-orthofoto": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Orthofoto layer provided by basemap.at. \"Successor\" of geoimage.at imagery.",
+                "name": "basemap.at Orthofoto"
+            },
             "hike_n_bike": {
                 "attribution": {
                     "text": "© OpenStreetMap contributors"

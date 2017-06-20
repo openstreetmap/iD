@@ -349,6 +349,7 @@
             "truncated_list": "Spremembe uporabnikov {users} in {count} drugih"
         },
         "infobox": {
+            "key": "I",
             "selected": "{n} izbranih",
             "geometry": "Geometrija",
             "closed": "zaprto",
@@ -423,6 +424,7 @@
         "background": {
             "title": "Ozadje",
             "description": "Nastavitve ozadja",
+            "key": "B",
             "percent_brightness": "{opacity}% svetlost",
             "none": "Brez",
             "best_imagery": "Najbolj znan slikovni vir ozadja za to območje",
@@ -436,12 +438,14 @@
             "offset": "Povlecite spodnje temnejše sivo področju za prilagoditev zamika ali pa vnesite zamik številčno v metrih.",
             "minimap": {
                 "description": "Mini zemljevid",
-                "tooltip": "Pokaži oddaljen zemljevid za pomoč pri določanju trenutno prikazanega mesta."
+                "tooltip": "Pokaži oddaljen zemljevid za pomoč pri določanju trenutno prikazanega mesta.",
+                "key": "/"
             }
         },
         "map_data": {
             "title": "Prikaz zemljevida",
             "description": "Prikaz zemljevida",
+            "key": "F",
             "data_layers": "Podatkovne plasti",
             "fill_area": "Zapolnjevanje polj",
             "map_features": "Predmeti zemljevida",
@@ -500,7 +504,8 @@
         "area_fill": {
             "wireframe": {
                 "description": "Brez zapolnjevanja (le obroba)",
-                "tooltip": "S tanko črto je izrisana le obroba polja."
+                "tooltip": "S tanko črto je izrisana le obroba polja.",
+                "key": "W"
             },
             "partial": {
                 "description": "Delno zapolnjevanje (širši rob)",
@@ -625,6 +630,7 @@
         },
         "help": {
             "title": "Pomoč",
+            "key": "H",
             "help": "# Pomoč\n\nUrejevalnik ID je orodje za urejanje [OpenStreetMap](http://www.openstreetmap.org/), brezplačnih in prostih zemljevidov sveta. Uporabljate ga lahko za posodabljanje podatkov in s tem izboljševanje odprto-kodnega in odprto-podatkovnega zemljevida za vse uporabnike.\n\nSpremembe, ki jih naredite na zemljevidu, bodo na voljo vsem uporabnikom, ki uporabljajo OpenStreetMap. Za urejanje se je treba najprej [prijaviti](https://www.openstreetmap.org/login).\n\nUrejevalnik [iD editor](http://ideditor.com/) je zasnovan kot odprt projekt s prosto dostopno kodo na [GitHub](https://github.com/openstreetmap/iD).\n",
             "editing_saving": "# Urejanje in shranjevanje\n\nUrejevalnik je zasnovan za delo na spletu in ravnokar imate omogočen dostop prek spletišča.\n\n### Izbira predmetov\n\nZa izbor predmeta, kot je cesta, točka ali polje, kliknite nanj. Obris predmeta bo poudarjen, na levi strani okna pa se bo odprlo polje z vpisnimi polji. Med njimi so tudi spustni meniji, prek katerih lahko natančneje opredelite posamezni predmet.\n\nZa izbor več predmetov, zadržite dvigalko »Shift« in nato kliknite na vse predmete, ki jih želite izbrati oziroma med držanjem dvigalke potegnite kazalko miške med predmeti in tako izberite želeno polje.\nIzrisalo se bo polje, znotraj katerega bodo vsi predmeti izbrani.\n\n### Shranjevanje urejanja\n\nKadarkoli naredite spremembe na poteh, zgradbah ali točkah, se ti samodejno shranjujejo krajevno. Spremembe lahko dodajate, razveljavljate, brišete in ponovno uveljavljate. Ko ste s spremembami zadovoljni, in bi jih želeli objaviti na zemljevidu, kliknite na gumb za shranjevanje in podatki bodo poslani na splet.\n\nS klikom na gumb »Shrani« se paket sprememb – na primer urejeno področje dela mesta – pripravi za objavo. Prikaže se seznam sprememb in morebitna opozorila, ki jih lahko pregledate in odpravite. Sistem ponudi tudi priporočila za urejanje.\n\nČe se vam zdijo spremembe ustrezne in so opozorila odpravljena, s ponovnim klikom na gumb »Shrani« paket tudi zares objavite na [OpenStreetMap.org](http://www.openstreetmap.org/), kjer so podatki na voljo vsem uporabnikom zemljevida.\n\nKadar vam urejanja nekega območja ne uspe končati naenkrat, lahko okno urejevalnika pustite odprto in nadaljujete z urejanjem kasneje (velja za isti brskalnik na istem računalniku). Ob ponovnem odprtju strani bo urejevalnik samodejno obnovil že narejene spremembe.\n\n### Uporaba urejevalnika\n\nDo seznama tipkovnih bližnjic je mogoče dostop s pritiskom tipke »?«.\n",
             "roads": "# Ceste\n\nZ urejevalnikom je mogoče poti dodajati, popravljati in jih izbrisati. Poti so lahko vseh vrst: pešpoti, kolovozi, kolesarske steze, avtoceste in druge – vrisan naj bi bil vsak del ceste, tudi prehodi in počivališča.\n\n### Izbiranje\n\nCesto izberemo s klikom nanjo. Pokaže se obris ceste, ob njem pa meni z orodji in stransko okno z več podrobnostmi o tej cesti.\n\n### Spreminjanje\n\nPogosto boste opazili črte cest, ki se ne skladajo s potekom ceste na sliki v ozadju oziroma s sledjo GPS. Take ceste lahko popravite, da odražajo stanje v naravi.\n\nNajprej kliknite na cesto, ki jo želite spremeniti. Črta ceste bo poudarjena in vzdolž nje bodo pokazana vozlišča, ki jih je mogoče premakniti na pravo mesto. Če želite dodati novo vozlišče za bolj podroben potek ceste, dvokliknite na del ceste, ki še nima vozlišča, in pojavilo se bo novo.\nČe se cesta dotika druge ceste, vendar na zemljevidu ni pravilno povezana, lahko enega od njenih vozlišč premaknete na drugo cesto in ju tako povežete. Pravilno povezane ceste so pomembne in nujne za samodejno iskanje poti med različnimi kraji.\nS klikom na gumb »Premakni« ali s pritiskom tipke »M« na tipkovnici lahko omogočite orodje za premik celotne ceste naenkrat; premik potrdite z drugim klikom.\n\n### Odstranjevanje\n\nČe je potek ceste v celoti napačno vrisan – ko na primer cesta na satelitskem posnetku sploh ne obstaja ali pa ko iz prve roke veste, da je ni – jo lahko izbrišete ter tako odstranite z zemljevida. Pri brisanju predmetov bodite pozorni – pri vsakem urejanju bodo spremembe vidne vsakomur.\nVčasih so satelitski posnetki zastareli in morda zato kakšne ceste na njih še ni.\nCesto izbrišete tako, da najprej kliknete nanjo, nato pa kliknete na ikono za smetnjak ali pa pritisnete tipko »Izbriši«.\n\n### Dodajanje poti\n\nAli ste opazili, da na zemljevidu manjka kakšna cesta? Za začetek risanja kliknite gumb »Črta« v urejevalniku levo zgoraj ali pa pritisnite tipko »2«.\nKliknite na zemljevid na začetek nove ceste. Če se cesta odcepi z že obstoječe ceste, začnite s klikom na mesto, kjer se ločita.\nNato klikajte na točke vzdolž ceste v pravi smeri (glede na satelitske posnetke ali GPS).\nČe cesta, ki jo rišete, križa drugo cesto, ju povežite s klikom na mestu križišča.\nKo končate, dvokliknite z miško ali na tipkovnici pritisnite vnosno tipko.\n",
@@ -813,7 +819,7 @@
                 "title": "Mnogokotniki",
                 "add_playground": "Z *mnogokotniki* so opredeljeni predmeti z natančno določenimi mejami, kot so zgradbe, parki, jezera ali stanovanjske soseske.{br}Uporabiti jih je mogoče tudi za bolj natančno izrisovanje predmetov, ki bi jih sicer določili s točko. **Kliknite na gumb {button} za dodajanje območja.**",
                 "start_playground": "Z mnogokotnikom lahko izrišemo na primer otroško igrišče. Mnogokotniki se izrisujejo z *vozlišči* po zunanjem robu predmeta. **Kliknite na rob igrišča za dodajanje prve točke.**",
-                "continue_playground": "Polje mnogokotnika nadaljujemo s postavljanjem vozlišč po ogliščih igrišča. Točke se lahko povezujejo z obstoječo pešpotjo, saj je igrišče povsem ob njej.{br}Namig: Če pritisnete tipko Alt na tipkovnici, se vozlišča ne bodo povezovala z drugimi že narisanimi predmeti. **Nadaljujte z risanjem igrišča.**",
+                "continue_playground": "Nadaljujte z risanjem mnogokotnika z dodajanjem vozlišč po robu otroškega igrišča. Seveda lahko povežete polje z obstoječo pohodno potjo.{br}Namig: če pritisnete tipko »{alt}« se onemogoči samodejno povezovanje vozlišč z drugimi točkami na zemljevidu. **Nadaljujte z risanjem igrišča.**",
                 "finish_playground": "Mnogokotnik se *zaključi* kot ponovno kliknete na prvo ali zadnje narisano vozlišče. **Končajte z risanjem igrišča.**",
                 "search_playground": "**Poiščite predmet »{preset}«.**",
                 "choose_playground": "**Izberte {preset} s seznama.**",
@@ -878,7 +884,8 @@
             },
             "startediting": {
                 "title": "Začnite urejati",
-                "help": "Sedaj ste pripravljeni na urejanje zemljevidov OpenStreetMap!{br}Če si v bodoče ponovno zaželite obnoviti pregled, kliknite na gumb pomoči {button}.",
+                "help": "Sedaj ste pripravljeni na urejanje zemljevida OpenStreetMap!{br}Kadarkoli se lahko vrnete na preizkusni urejevalnik oziroma si več podrobnosti pogledate v dokumentaciji, ki je na voljo prek gumba {button} oziroma neposredno prek tipkovne bližnjice »{key}«.",
+                "shortcuts": "Seznam ukazov in tipkovnih bližnjic si lahko kadarkoli ogledate s pritiskom na tipko »{key}«.",
                 "save": "Ne pozabite sproti shranjevati vnesenih sprememb!",
                 "start": "Začnite kartografirati!"
             }
@@ -886,6 +893,9 @@
         "shortcuts": {
             "title": "Tipkovne bližnjice",
             "tooltip": "Pokaži seznam tipkovnih bližnjic",
+            "toggle": {
+                "key": "?"
+            },
             "key": {
                 "alt": "Alt",
                 "backspace": "Povratna tipka",
@@ -2370,8 +2380,12 @@
                     "name": "Sodišče",
                     "terms": "sodnija,sodna palača"
                 },
+                "amenity/coworking_space": {
+                    "name": "Prostor za sodelanje"
+                },
                 "amenity/crematorium": {
-                    "name": "Krematorij"
+                    "name": "Krematorij",
+                    "terms": "krematoriš,sežigalnica,žale"
                 },
                 "amenity/dentist": {
                     "name": "Zobozdravnik",
@@ -3512,6 +3526,9 @@
                     "name": "Kamnolom",
                     "terms": "peskokop"
                 },
+                "landuse/railway": {
+                    "name": "Železniški koridor"
+                },
                 "landuse/recreation_ground": {
                     "name": "Rekreacijsko igrišče",
                     "terms": "Zemljišče za rekreacijo,igrišče,orodja,telovadba"
@@ -3921,6 +3938,9 @@
                 "office/company": {
                     "name": "Podjetje",
                     "terms": "firma,sedež podjetja,podjetnik"
+                },
+                "office/coworking": {
+                    "name": "Prostor za sodelo"
                 },
                 "office/educational_institution": {
                     "name": "Izobraževalna ustanova",
@@ -4537,6 +4557,9 @@
                 "shop/video_games": {
                     "name": "Trgovina z video igrami"
                 },
+                "shop/watches": {
+                    "name": "Trgovina z urami"
+                },
                 "shop/weapons": {
                     "name": "Trgovina z orožjem"
                 },
@@ -4789,7 +4812,8 @@
                     "terms": "jarek,graben"
                 },
                 "waterway/dock": {
-                    "name": "Mokri / Suhi dok"
+                    "name": "Mokri / Suhi dok",
+                    "terms": "mokri,suhi,dok,wet,dry,privezišče"
                 },
                 "waterway/drain": {
                     "name": "Odtočni kanal",

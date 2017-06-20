@@ -813,7 +813,6 @@
                 "title": "Polygones",
                 "add_playground": "Les *polygones* sont utilisés pour afficher les limites d’éléments comme les lacs, bâtiments et zones résidentielles.{br}Ils peuvent aussi servir à cartographier des éléments de façon plus détaillée qu'avec des points. **Cliquez sur le bouton {button} Polygone pour en ajouter un.**",
                 "start_playground": "Ajoutons une aire de jeu pour enfant sur la carte en dessinant un polygone. Les polygones sont dessinés en plaçant des *nœuds* pour définir les bords de l'élément. **Cliquez ou appuyez sur la barre d'espace pour placer le premier nœud sur l'un des angles de l'aire de jeu.**",
-                "continue_playground": "Continuez à dessiner le polygone en plaçant d'autres nœuds le long de l'aire de jeu. Le polygone peut être connecté aux éléments existants.{br}Astuce : pour ne pas se connecter aux autres éléments, il suffit d'appuyer et maintenir la touche Alt pressée. **Continuez la création du polygone d'aire de jeu.**",
                 "finish_playground": "Terminez le polygone avec la touche Entrée ou en cliquant une nouvelle fois sur son premier ou son dernier nœud. **Terminez le polygone d'aire de jeu.**",
                 "search_playground": "**Cherchez \"{preset}\".**",
                 "choose_playground": "**Choisissez \"{preset}\" dans la liste.**",
@@ -878,7 +877,6 @@
             },
             "startediting": {
                 "title": "Sortir du tutoriel et contribuer",
-                "help": "Bravo et merci ! Vous êtes maintenant capable de contribuer à OpenStreetMap !{br}Vous pouvez revoir ce tutoriel ou consulter plus de documentation en cliquant sur le bouton d'aide {button}",
                 "save": "N'oubliez pas de sauver régulièrement vos modifications !",
                 "start": "Commencer à cartographier !"
             }
@@ -888,21 +886,21 @@
             "tooltip": "Afficher la page de raccourcis clavier",
             "key": {
                 "alt": "Alt",
-                "backspace": "⌫ Retour",
+                "backspace": "Retour",
                 "cmd": "Cmd",
                 "ctrl": "Ctrl",
-                "delete": "Suppr ⌦",
-                "del": "Suppr ⌦",
+                "delete": "Suppr",
+                "del": "Suppr",
                 "end": "Fin",
                 "enter": "Entrée",
                 "esc": "Échap",
-                "home": "↖ Début",
+                "home": "Début",
                 "option": "Opt",
                 "pause": "Pause",
-                "pgdn": "⇞ Pg.Préc",
-                "pgup": "\f Pg.Suiv",
-                "return": "⌫ Retour",
-                "shift": "⇧ Maj",
+                "pgdn": "Pg.Préc",
+                "pgup": "Pg.Suiv",
+                "return": "Retour",
+                "shift": "Maj",
                 "space": "Espace"
             },
             "gesture": {

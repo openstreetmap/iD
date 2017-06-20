@@ -349,6 +349,7 @@
             "truncated_list": "Bearbeitet von {users} und {count} anderen"
         },
         "infobox": {
+            "key": "I",
             "selected": "{n} ausgewählt",
             "geometry": "Geometrie",
             "closed": "geschlossen",
@@ -423,6 +424,7 @@
         "background": {
             "title": "Hintergrund",
             "description": "Hintergrundeinstellungen",
+            "key": "B",
             "percent_brightness": "{opacity}% Helligkeit",
             "none": "Kein Hintergrund",
             "best_imagery": "Beste bekannte Bildmaterialquelle für diesen Ort",
@@ -436,12 +438,14 @@
             "offset": "Ziehe irgendwo im grauen Bereich um den Versatz des Bildmaterials anzupassen oder gib die Versatz-Werte in Metern ein.",
             "minimap": {
                 "description": "Minikarte",
-                "tooltip": "Zeige kleine Überblicks-Karte zum Auffinden des angezeigten Kartenausschnitts."
+                "tooltip": "Zeige kleine Überblicks-Karte zum Auffinden des angezeigten Kartenausschnitts.",
+                "key": "/"
             }
         },
         "map_data": {
             "title": "Kartendaten",
             "description": "Kartendaten",
+            "key": "F",
             "data_layers": "Datenebenen",
             "fill_area": "Füllflächen",
             "map_features": "Kartenobjekte",
@@ -500,7 +504,8 @@
         "area_fill": {
             "wireframe": {
                 "description": "Keine Füllung (Drahtgitter)",
-                "tooltip": "Drahtgittermodus aktivieren verbessert die Sichtbarkeit des Bildmaterials"
+                "tooltip": "Drahtgittermodus aktivieren verbessert die Sichtbarkeit des Bildmaterials",
+                "key": "W"
             },
             "partial": {
                 "description": "Teilweise Füllung",
@@ -625,8 +630,9 @@
         },
         "help": {
             "title": "Hilfe",
+            "key": "H",
             "help": "#Hilfe\n\nDies ist der iD Editor für [OpenStreetMap](http://www.openstreetmap.org/), der freien und bearbeitbaren Weltkarte. Du kannst ihn verwenden, um Daten in deiner Umgebung hinzuzufügen oder zu verändern und so diese Karte mit freien Quellen und freien Daten für jeden verbessern.\n\nDeine Veränderungen werden für alle Nutzer von OpenStreetMap sichtbar. Um Veränderungen vornehmen zu können, musst du [einloggen](https://www.openstreetmap.org/login).\n\nDer [iD Editor](http://ideditor.com/) ist ein Gemeinschaftsprojekt, dessen [Quellcode auf GitHub](https://github.com/openstreetmap/iD) verfügbar ist.\n",
-            "editing_saving": "# Bearbeiten & Speichern\n\nDieser Editor ist gedacht um hauptsächlich online zu arbeiten und du\nverwendest ihn gerade auf einer Webseite.\n\n### Objekte auswählen\n\nUm ein Karten-Objekt wie eine Straße oder einen interessanten Punkt auszuwählen, klicke\ndieses auf der Karte an. Dadurch wird das Objekt hervorgehoben und der\nObjekteditor mit den Objektdetails angezeigt. Durch rechtsklicken bekommst\ndu das Bearbeitungsmenu für das Objekt.\n\nMehrere Objekte kannst du auswählen, indem du die \"Shift\"-/Umschalt-Taste\ngedrückt hältst. Dann klicke entweder einzeln auf die\ngewünschten Objekte oder ziehe mit der Maus einen Rahmen auf, damit die Punkte im Rahmen ausgewählt werden.\n\n### Speichern der Änderungen\n\nWenn du eine Straße oder eine Gebäude geändert hast, dann sind\ndeine Änderungen nur lokal gespeichert, bis du sie zum Server hochlädst.\nMach dir keine Sorge wegen Fehler: du kannst Änderungen jederzeit\nmit dem Rückgängig-Knopf rückgängig machen oder über den Wiederherstellen-Knopf wiederherstellen.\n\nKlicke auf „Speichern“, um Änderungen abzuschließen, beispielsweise\nwenn du in einem Gebiet fertig bist und woanders weiter arbeiten willst.\nDu bekommst dann die Liste der Änderungen und manchmal auch\nnützliche Warnungen angezeigt, wenn etwas falsch sein könnte.\nDu kannst dann überprüfen, was du gerade geändert hast.\n\nWenn alles gut aussieht, solltest du einen kurzen Kommentar schreiben, der\nerklärt, was du gemacht hast. Drücke nun \"Hochladen“, um die\nÄnderungen auf  [OpenStreetMap.org](http://www.openstreetmap.org/)\nzu speichern, damit sie für alle anderen Benutzer sichtbar\nwerden und diese darauf aufbauen können.\n\nWenn du mit der Bearbeitung nicht fertig wirst, kannst du den Browser-Tab\neinfach schließen. Wenn du die Seite wieder aufrufst (mit dem gleichen\nRechner und Browser) wird dir angeboten, die ungesicherten Änderungen wiederherzustellen.\n\n### Benutzung des Editors\n\nDu kannst die Liste der Tastenkürzel mit dem '?'-Knopf aufrufen.\n",
+            "editing_saving": "# Bearbeiten & Speichern\n\nDieser Editor ist gedacht um hauptsächlich online zu arbeiten und du\nverwendest ihn gerade auf einer Webseite.\n\n### Objekte auswählen\n\nUm ein Karten-Objekt wie eine Straße oder einen interessanten Punkt auszuwählen, klicke\ndieses auf der Karte an. Dadurch wird das Objekt hervorgehoben und der\nObjekteditor mit den Objektdetails angezeigt. Durch rechtsklicken bekommst\ndu das Bearbeitungsmenu für das Objekt.\n\nMehrere Objekte kannst du auswählen, indem du die \"Shift\"-/Umschalt-Taste\ngedrückt hältst. Dann klicke entweder einzeln auf die\ngewünschten Objekte oder ziehe mit der Maus einen Rahmen auf, damit die Punkte im Rahmen ausgewählt werden.\n\n### Speichern der Änderungen\n\nWenn du eine Straße oder eine Gebäude geändert hast, dann sind\ndeine Änderungen nur lokal gespeichert, bis du sie zum Server hochlädst.\nMach dir keine Sorge wegen Fehler: du kannst Änderungen jederzeit\nmit dem Rückgängig-Knopf rückgängig machen oder über den Wiederherstellen-Knopf wiederherstellen.\n\nKlicke auf „Speichern“, um Änderungen abzuschließen, beispielsweise\nwenn du in einem Gebiet fertig bist und woanders weiter arbeiten willst.\nDu bekommst dann die Liste der Änderungen und manchmal auch\nnützliche Warnungen angezeigt, wenn etwas falsch sein könnte.\nDu kannst dann überprüfen, was du gerade geändert hast.\n\nWenn alles gut aussieht, solltest du einen kurzen Kommentar schreiben, der\nerklärt, was du gemacht hast. Drücke nun \"Hochladen“, um die\nÄnderungen auf  [OpenStreetMap.org](http://www.openstreetmap.org/)\nzu speichern, damit sie für alle anderen Benutzer sichtbar\nwerden und diese darauf aufbauen können.\n\nWenn du mit der Bearbeitung nicht fertig wirst, kannst du den Browser-Tab\neinfach schließen. Wenn du die Seite wieder aufrufst (mit dem gleichen\nRechner und Browser) wird dir angeboten, die ungesicherten Änderungen wiederherzustellen.\n\n### Benutzung des Editors\n\nDu kannst die Liste der Tastenkürzel mit dem '?'-Knopf ansehen.\n",
             "roads": "# Wege\n\nMit dem Editor kannst du Wege erstellen, verbessern und löschen. Mögliche Wegtypen können Straßen, Wanderwege, Eisenbahnschienen oder Fahrradwege sein, jeder benutzte Weg kann bearbeitet werden.\n\n### Auswählen\n\nKlicke auf einen Weg, um ihn auszuwählen, er wird dann hervorgehoben und es erscheint links der Objekteditor mit mehr Informationen über den Weg.\n\n### Modifizieren\n\nOft sieht man, dass Wege nicht mit dem Bildmaterial oder einer GPS-Spur übereinstimmen. Du kannst den Weg so anpassen, dass er an der richtigen Stelle ist. Beachte jedoch, dass Luftbilder einen Versatz aufweisen können.\n\nZuerst klickst du auf den Weg den du ändern willst. Dieser wird nun hervorgehoben und es werden die Knoten des Weges angezeigt. Diese kannst du verschieben, bis sie an der richtigen Stelle sind. Wenn du neue Knoten hinzufügen möchtest, klicke doppelt zwischen den Knoten auf die Linie und es wird ein neuer Knoten erzeugt. Du kannst auch einen Dreiecks-Pfeil auf der Linie anklicken und verschieben.\n\nWenn zwei Wege in Wirklichkeit mit einander verbunden sind, aber auf der Karte nicht, kannst du sie verbinden, indem du einen Knoten des einen Weges auf den anderen Weg ziehst. Dass Wege verbunden sind, ist wichtig für die Karte und notwendig für die Nutzung von Straßenroutern.\n\nDu kannst auch das „Bewegen“-Werkzeug nutzen oder „M“ drücken, um den kompletten Weg zu verschieben. Beende die Aktion mit einem Klick.\n\n### Löschen\n\nWenn du weißt, dass ein Weg nicht existiert, kannst du ihn löschen, um ihn von der Karte zu entfernen. Sei beim Löschen von Objekten - wie immer beim Bearbeiten - vorsichtig, da die Ergebnisse von jedem gesehen werden können und die Satellitenbilder oft veraltet sind. Das heißt, dass ein Weg, der im Bildmaterial nicht zu sehen ist, wurde vielleicht einfach neu gebaut.\n\nDu kannst Wege löschen, indem du sie rechtsklickst und das Papierkorbsymbol auswählst oder die „Entfernen“-Taste drückst.\n\n### Erstellen\n\nDu kennst einen Weg, der nicht eingezeichnet ist? Dann klicke auf das „Linien“-Symbol oben links im Editor oder drücke die Taste „2“ und beginne mit dem Zeichnen einer Linie.\n\nKlicke dort hin, wo der Weg anfängt. Sollte er von einer bereits existierenden Straße abzweigen, klicke an der entsprechenden Stelle auf diese Straße.\n\nZeichne nun den Weg, indem du Knoten anhand des Bildmaterials oder der GPS-Spur entlang des Weges setzt. Sollte der Weg einen anderen kreuzen, klicke auf den Kreuzungspunkt, um beide Wege zu verbinden. Wenn du mit dem Zeichnen fertig bist, klicke doppelt oder drücke „Enter“ auf der Tastatur, um den Weg abzuschließen.\n",
             "gps": "# GPS\n\nSelbst aufgezeichnete GPS-Tracks sind eine wertvolle Datenquelle für OpenStreetMap. Dieser Editor unterstützt lokale GPS-Tracks - `.gpx`-Dateien auf deinem Computer. Du kannst GPS-Tracks mit Hilfe von  zahlreichen Smartphone-Apps oder mit GPS-Geräten aufnehmen.\n\nFür Informationen über das Aufzeichnen von GPS-Daten kannst du dir folgende Anleitung durchlesen: [Kartierung mit Smartphone, GPS oder Papier](http://learnosm.org/de/mobile-mapping/)\n\nUm einen GPS-Track fürs Mapping zu verwenden, ziehe ihn einfach auf die Karte. Wenn er erkannt wurde, wird der Track als hell-lila Linie auf der Karte dargestellt.\nKlicke auf das „Kartendaten“-Menu rechts, um die neue Ebene mit dem Track zu aktivieren/deaktivieren oder zoome zum Gebiet des Tracks.\n\nDer GPS-Track wird nicht automatisch direkt zu OpenStreetMap hochgeladen. Am besten verwendest du ihn als Orientierung um neue Objekte zu zeichnen. Möchtest du den GPS-Track jedem zugänglich machen, kannst du ihn [nach OpenStreetMap hochladen](http://www.openstreetmap.org/trace/create)\n",
             "imagery": "# Bildmaterial\n\nLuftbilder sind eine wichtige Quelle für das Kartografieren. Eine Kombination aus Luftbildern von Flugzeugen, Satellitenbilder und freien Quellen sind im Editor über das „Hintergrundeinstellungen“-Menü auf der linken Seite verfügbar.\n\nAls Standard sind die [Bing-Maps](http://www.bing.com/maps/)-Satellitenbilder ausgewählt. Je nach angezeigter Gegend werden dir verschiedene andere Quellen angezeigt. In einigen Länder wie Deutschland, Österreich, Schweiz oder den USA steht zum Teil sehr hochauflösendes Bildmaterial zur Verfügung.\n\nBildmaterial ist manchmal durch Fehler der Anbieter verschoben. Wenn du feststellst, dass viele Wege gegenüber dem Hintergrund verschoben sind, dann verschiebe nicht die Straßen sondern das Bildmaterial, bis sie übereinstimmen. Um das Bildmaterial zu korrigieren, klicke auf „Bildmaterial-Versatz anpassen“ unten in den Hintergrundeinstellungen.\n",
@@ -813,7 +819,7 @@
                 "title": "Flächen",
                 "add_playground": "*Flächen* werden benutzt um die Grenzen von Objekten wie Seen, Gebäuden und Wohngebieten zu zeigen.{br}Sie können benutzt werden, um Objekte die normalerweise als Punkte gezeichnet werden genauer darzustellen. **Klicke auf {button} Fläche um einen neue Fläche zu zeichnen.**",
                 "start_playground": "Zeichne diesen Spielplatz als Fläche auf der Karte ein. Flächen werden gezeichnet indem *Knoten* entlang der Außengrenze des Objekte gezeichnet werden. **Klicke oder drücke die Leertaste um den ersten Knoten an einer Ecke des Spielplatzes zu zeichnen.**",
-                "continue_playground": "Setze das Zeichnen der Fläche fort, indem du Knoten entlang der Ecken des Spielplatzes setzt. Du kannst die Fläche mit den bestehenden Fußwegen verbinden.{br}Tipp: Wenn du die Alt Taste gedrückt hältst, dann verhinderst du dass die Knoten sich mit anderen Objekten verbinden. **Setze das Zeichnen der Fläche für den Spielplatz fort.**",
+                "continue_playground": "Setze das Zeichen der Fläche fort, indem du Knoten entlang der Ecken des Spielplatzes setzt. Es ist okay, wenn du die Fläche mit bestehenden Fußwegen verbindest.{br}Tip: Wenn du die '{alt}' Taste gedrückt hältst, kannst du verhindern, dass die Knoten sich mit anderen Objekten verbinden. **Setze das Zeichnen der Fläche für den Spielplatz fort.**",
                 "finish_playground": "Beende die Fläche durch Drücken von Enter oder nochmaliges Klicken auf den ersten oder letzten Knoten. **Beende das Zeichnen der Fläche für den Spielplatz.**",
                 "search_playground": "**Suche nach '{preset}'.**",
                 "choose_playground": "**Wähle {preset} aus der Liste.**",
@@ -878,7 +884,8 @@
             },
             "startediting": {
                 "title": "Bearbeiten",
-                "help": "Du kannst jetzt OpenStreetMap bearbeiten!{br} Du kannst diesen Rundgang jederzeit über den {button} Hilfe-Knopf aufrufen, dort findest du auch mehr Dokumentation.",
+                "help": "Du bist nun bereit OpenStreetMap zu beareiten!{br}Du kannst mit dem {button} Hilfe-Knopf oder der '{key}'-Taste diesen Rundgang wieder aufrufen oder mehr Dokumentation ansehen.",
+                "shortcuts": "Du kannst eine Liste der Kommandos mit ihren Tastenkürzel mit der '{key}'-Taste ansehen.",
                 "save": "Vergiss nicht, regelmäßig zu speichern, um die Änderungen zu OpenStreetMap hochzuladen!",
                 "start": "Fange an zu bearbeiten!"
             }
@@ -886,6 +893,9 @@
         "shortcuts": {
             "title": "Tastenkürzel",
             "tooltip": "Tastenkürzel-Bildschirm anzeigen",
+            "toggle": {
+                "key": "?"
+            },
             "key": {
                 "alt": "Alt",
                 "backspace": "← Rück",
@@ -5182,6 +5192,20 @@
                     "text": "© Sarah Hoffmann, CC-BY-SA 3.0, Kartendaten © OpenStreetMap-Mitwirkende, ODbL 1.0"
                 },
                 "name": "Waymarked Trails: Wintersport"
+            },
+            "basemap.at": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Amtliche Verwaltungsgrundkarte von Österreich",
+                "name": "basemap.at"
+            },
+            "basemap.at-orthofoto": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Orthofotos von basemap.at, früher geoimage.at",
+                "name": "basemap.at Orthofotos"
             },
             "hike_n_bike": {
                 "attribution": {

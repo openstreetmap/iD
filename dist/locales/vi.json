@@ -717,7 +717,6 @@
                 "title": "Vùng",
                 "add_playground": "*Vùng* cho biết hình dạng của các đa giác như hồ nước, tòa nhà, và khu vực dân cư.{br}Bạn có thể cung cấp nhiều chi tiết hơn dùng vùng so với địa điểm. **Bấm nút {button} Vùng để bắt đầu vẽ vùng mới.**",
                 "start_playground": "Hãy vẽ một vùng để thêm sân chơi này vào bản đồ. Để vẽ vùng, đặt các *nốt* theo đường biên của vùng. **Nhấn chuột hoặc bấm phím cách để đặt nốt đầu tiên vào một góc của sân chơi.**",
-                "continue_playground": "Để tiếp tục vẽ vùng này, đặt thêm nốt theo đường biên của sân chơi. Bạn có thể nối liền vùng với các đường dạo đã tồn tại.{br}Mẹo vặt: Bạn có thể giữ xuống phím Alt hoặc Option để tránh việc nối liền nốt với các đối tượng khác. **Tiếp tục vẽ vùng ứng với sân chơi này.**",
                 "finish_playground": "Để hoàn tất vùng, bấm Enter hoặc Return, hoặc nhấn chuột lần nữa vào nốt đầu tiên hoặc cuối dùng. **Vẽ xong vùng ứng với sân chơi.**",
                 "search_playground": "**Tìm “{preset}”.**",
                 "choose_playground": "**Chọn {preset} từ danh sách.**",
@@ -782,7 +781,6 @@
             },
             "startediting": {
                 "title": "Bắt đầu Sửa đổi",
-                "help": "Bạn sẵn sàng sửa đổi OpenStreetMap!{br}Lúc nào muốn được hướng dẫn lại hoặc xem thêm tài liệu, chỉ việc bấm nút {button} Trợ giúp.",
                 "save": "Hãy nhớ lưu các thay đổi của bạn thường xuyên!",
                 "start": "Hãy bắt đầu vẽ bản đồ!"
             }

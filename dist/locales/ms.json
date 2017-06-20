@@ -532,7 +532,6 @@
             },
             "startediting": {
                 "title": "Mulakan Suntingan",
-                "help": "Anda kini sudah bersedia menyunting OpenStreetMap!{br}Anda boleh mengikuti semula panduan ini pada bila-bila masa sahaja, atau baca dokumentasi lain dengan mengklik pada {button} butang Bantuan.",
                 "save": "Jangan lupa untuk kerap menyimpan perubahan-perubahan anda!",
                 "start": "Mulakan pemetaan!"
             }
@@ -619,6 +618,43 @@
                     "types": {
                         "bicycle": "Basikal"
                     }
+                }
+            }
+        },
+        "imagery": {
+            "Bing": {
+                "description": "Imej satelit dan udara.",
+                "name": "Imej udara Bing"
+            },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "Terma & Maklumbalas"
+                },
+                "description": "Imej satelit Premium DigitalGlobe.",
+                "name": "Imej DigitalGlobe Premium"
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "Terma & Maklumbalas"
+                },
+                "description": "Imej satelit Standard DigitalGlobe.",
+                "name": "Imej DigitalGlobe Standard"
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "© Penyumbang-penyumbang OpenStreetMap, CC-BY-SA"
+                }
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "Terma & Maklumbalas"
+                },
+                "description": "Imej satelit dan udara.",
+                "name": "Mapbox Satellite"
+            },
+            "qa_no_address": {
+                "attribution": {
+                    "text": "Simon Poole, Data © penyumbang-penyumbang OpenStreetMap"
                 }
             }
         }

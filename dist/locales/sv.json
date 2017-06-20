@@ -349,6 +349,7 @@
             "truncated_list": "Ändrad av {users} och {count} andra"
         },
         "infobox": {
+            "key": "I",
             "selected": "{n} vald(a)",
             "geometry": "Geometri",
             "closed": "sluten",
@@ -423,6 +424,7 @@
         "background": {
             "title": "Bakgrund",
             "description": "Bakgrundsinställningar",
+            "key": "B",
             "percent_brightness": "{opacity}% ljusstyrka",
             "none": "Ingen",
             "best_imagery": "Populäraste källan till flygfoton för den här platsen",
@@ -436,12 +438,14 @@
             "offset": "Dra i den grå ytan nedan för att justera bildplaceringen, eller ange hur mycket det ska justeras i meter.",
             "minimap": {
                 "description": "Minikarta",
-                "tooltip": "Visar en utzoomad karta för att hjälpa dig att hitta i området som visas för tillfället."
+                "tooltip": "Visar en utzoomad karta för att hjälpa dig att hitta i området som visas för tillfället.",
+                "key": "/"
             }
         },
         "map_data": {
             "title": "Kartdata",
             "description": "Kartdata",
+            "key": "F",
             "data_layers": "Datalager",
             "fill_area": "Fyllda områden",
             "map_features": "Kartobjekt",
@@ -500,7 +504,8 @@
         "area_fill": {
             "wireframe": {
                 "description": "Ingen ifyllnad (trådram)",
-                "tooltip": "Genom att använda trådram blir det enklare att se bakomliggande flygfoto."
+                "tooltip": "Genom att använda trådram blir det enklare att se bakomliggande flygfoto.",
+                "key": "W"
             },
             "partial": {
                 "description": "Delvist fylld",
@@ -625,6 +630,7 @@
         },
         "help": {
             "title": "Hjälp",
+            "key": "H",
             "help": "# Hjälp\n\nDetta är en redigerare för [OpenStreetMap](http://www.openstreetmap.org/),\nen gratis och redigerbar karta över världen. Du kan använda den för att lägga till och ändra\ndata i ditt område, allt för att göra en världsomspännande karta baserad på\nöppen källkod och öppen data bättre för alla.\n\nRedigeringar du gör på kartan kommer att visas för alla som använder\nOpenStreetMap. För att göra en redigering måste du\n[log in](https://www.openstreetmap.org/login).\n\n[iD editor](http://ideditor.com/) är ett gemensamt projekt med [källkod\ntillgänglig på GitHub](https://github.com/openstreetmap/iD).\n",
             "editing_saving": "# Redigera & spara\n\nDenna redigerare är designad att främst fungera online, och du använder den via en webbsida just nu.\n\n### Markera objekt\n\nFör att välja ett kartobjekt, t.ex. en väg eller en punkt, klicka på den på kartan. Detta kommer att markera det valda objektet, öppna en panel med detaljer om det, och visa en meny med saker du kan göra med det.\n\nFör att markera flera objekt, håll ned Skift-tangenten. Klicka sedan på objekten du vill markera eller dra på kartan för att rita en rektangel. Detta kommer att rita en ruta och markera punkterna inuti den.\n\n### Spara redigeringar\n\nNär du gör ändringar som att ändra på en väg, byggnad eller plats är detta lagrat lokalt fram tills att du spara det på servern. Oroa dig inte om du gör ett misstag, du kan alltid ångra en ändring genom att klicka på Ånga-knappen och göra om din förändring genom att klicka på Gör om-knappen.\n\nKlicka på Spara för att slutföra en samling förändringar, t.ex. om du fullfört ett område i en stad och vill börja ändra i ett annat område. Du får möjlighet att granska vad du gjort och redigeraren ger dig hjälpsamma förslag och varningar om någon ändring inte verka korrekt.\n\nOm allt ser bra ut kan du ange en kort kommentar som förklarar vad du gjort och sedan klicka på Spara igen för att skicka ändringarna till [OpenStreetMap.org](http://www.openstreetmap.org/) där de blir synliga för alla andra användare och tillgängliga för andra att jobba vidare med.\n\nOm du inte kan slutföra din ändring på en gång kan du lämna redigeringsfönstret öppet och komma tillbaka (i samma webbläsare på samma dator) och redigeringsprogrammet kommer att ge dig möjlighet att återuppta ditt arbete.\n\n### Använda redigeraren\n\nDu kan se en lista med kortkommandon genom att trycka på tangenten `?`\n",
             "roads": "# Vägar\n\nDu kan skapa, fixa och ta bort vägar med denna redigerare. Vägar kan vara alla typer av: stigar, bilvägar, spår, cykelvägar m.m - alla välanvända segment ska mappas.\n\n### Markering\n\nKlicka på en väg för att välja den. En markering blir då synlig tillsammans med en liten verktygsmeny på kartan och ett sidofält visar mer information om vägen.\n\n### Modifiering\n\nOfta ser du vägar som inte är justerade till bakgrundsbilden eller till ett GPS-spår. Du kan justera dessa vägar så att de är på korrekt plats.\n\nKlicka först på vägen du vill ändra. Detta kommer att markera den och visa kontrollpunkt längst den som du kan dra i för att justera den. Om du vill lägga till en ny kontrollpunkt för högre detaljrikedom, dubbelklicka på en del av vägen utan en punkt så kommer en kontrollpunkt läggas till.\n\nOm vägen är ansluten till en annan väg, men är inte det på kartan, kan du dra en av dess kontrollpunkt till den andra vägen för att koppla dem tillsammans. Att vägarna är kopplade till varandra är viktigt för kartan och avgörande för att kunna ge korrekta körinstruktioner.\n\nDu kan också klicka på verktyget 'Flytta' eller trycka på tangenten 'M' på tangentbordet för att flytta en hel väg på en gång, och sedan klicka igen för att spara flytten.\n\n### Radering\n\nOm hela vägen är helt fel - du kan se att den inte existerar på satellitbilderna och har helst bekräftat i verkligheten att den inte finns - kan du radera den, vilket tar bort den från kartan. Var försiktigt när du raderar objekt - precis som vid all redigering kan alla se resultatet och satellitbilderna är oftast gamla, så vägen kan helt enkelt vara nybyggd.\n\nDu kan ta radera en väg genom att klicka på den för att markera den och sedan klicka på ikonen soptunna eller klicka på knappen 'Delete' på tangentbordet.\n\n### Skapa\n\nHittat någonstans att det borde finnas en väg där de inte finns en? Klicka på ikonen 'Linje'  högst upp till vänster i redigeringsfönstret eller klicka på knappen '2' på tangentbordet för att börja rita en linje.\n\nKlicka på början av vägen på kartan för att påbörja ritningen. Om vägen viker av från en existerande väg, starta genom att klicka där de ansluter till varandra.\n\nKlicka sedan på punkter längst vägen så att den följer vägens sträckning enligt satellitbilder eller GPS-spår. Om vägen du ritar korsar en annan väg, anslut dem tillsammans genom att klicka där de korsar. När du är klar med att rita in vägen, dubbelklicka eller tryck 'Enter' på tangentbordet.\n",
@@ -813,7 +819,7 @@
                 "title": "Områden",
                 "add_playground": "*Områden* används för att visa avgränsningar för objekt så som sjöar, byggnader och bostadsområden.{br}De kan också används för mer detaljerad kartering av många objekt som du kanske normalt skulle kartera som punkter. **Klicka på knappen {button} Område för att skapa ett nytt område.**",
                 "start_playground": "Låt oss lägga till denna lekplats på kartan genom att rita ett område. Områden ritas genom att placera *noder* längs yttre kanten av objektet. **Klicka eller tryck mellanslag för att placera en startnod på ett av hörnen av lekplatsen.**",
-                "continue_playground": "Fortsätt rita området genom att placera noder längs kanten på lekplatsen. Det är ok att ansluta området till existerande gångvägar.{br}Tips: Du kan hålla ned Alt-tangenten för att förhindra att noder kopplas ihop med andra objekt. **Fortsätt att rita ett område runt lekplatsen.**",
+                "continue_playground": "Fortsätt rita området genom att placera noder längs kanten på lekplatsen. Det är ok att ansluta området till existerande gångvägar.{br}Tips: Du kan hålla ned '{alt}'-tangenten för att förhindra att noder kopplas ihop med andra objekt. **Fortsätt att rita ett område runt lekplatsen.**",
                 "finish_playground": "Slutför området genom att trycka Enter eller genom att trycka igen på antingen första eller sista noden. **Rita färdigt området för lekplatsen.**",
                 "search_playground": "**Sök efter '{preset}'.**",
                 "choose_playground": "**Välj {preset} i listan.**",
@@ -878,7 +884,8 @@
             },
             "startediting": {
                 "title": "Börja redigera",
-                "help": "Du är nu redo att redigera OpenStreetMap!{br}Du kan köra om denna genomgång när du vill, eller läsa mer i dokumentationen genom att klicka på knappen {button} Hjälp.",
+                "help": "Du är nu redo att redigera OpenStreetMap!{br}Du kan göra om denna genomgång när du vill, eller läsa mer i dokumentationen genom att klicka på knappen {button} Hjälp eller trycka på '{key}'-tangenten.",
+                "shortcuts": "Du kan se en lista med kommandon tillsammans med deras kortkommandon genom att trycka på tangenten '{key}'.",
                 "save": "Glöm inte att regelbundet spara dina ändringar!",
                 "start": "Börja kartera!"
             }
@@ -886,6 +893,9 @@
         "shortcuts": {
             "title": "Kortkommandon",
             "tooltip": "Visa vy med kortkommandon.",
+            "toggle": {
+                "key": "?"
+            },
             "key": {
                 "alt": "Alt",
                 "backspace": "Backsteg",
@@ -2984,6 +2994,10 @@
                     "name": "Konditori",
                     "terms": "Fik, Kafé, sötsaker, kakor, bullar, godis"
                 },
+                "craft/distillery": {
+                    "name": "Destilleri",
+                    "terms": "alkohol,bourbon,sprit,brandy,gin,sprit,mezcal,spritdryck,rom,scotch,sprit,tequila,vodka,whisky,whisky, Destilleri, spritdestillering, hembränning, alkoholdestillering, sprittillverkning, alkoholtillverkning"
+                },
                 "craft/dressmaker": {
                     "name": "Sömmerska",
                     "terms": "Sömmerska, skräddare, Dressmaker, Klädsömmare, sömnad, sy, kvinnokläder, kläder, klädtillverkning, klänning"
@@ -5068,6 +5082,184 @@
                     "name": "Damm",
                     "terms": "damm, reservoar, fördämning, vattensamling"
                 }
+            }
+        },
+        "imagery": {
+            "Bing": {
+                "description": "Satellit- eller flygfoton.",
+                "name": "Bing-flygfoto"
+            },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "Villkor & feedback"
+                },
+                "description": "Premium DigitalGlobe-satellitfoton.",
+                "name": "DigitalGlobe Premium-bilder"
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "Villkor & feedback"
+                },
+                "description": "Standard DigitalGlobe-satellitfoton.",
+                "name": "DigitalGlobe Standard-bilder"
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "© OpenStreetMaps bidragsgivare, CC-BY-SA"
+                },
+                "description": "Standardlagret på OpenStreetMap.",
+                "name": "OpenStreetMap (standard)"
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "Villkor & feedback"
+                },
+                "description": "Satellit- eller flygfoton.",
+                "name": "Mapbox satellit"
+            },
+            "New_and_Misaligned_TIGER_Roads-2013": {
+                "description": "Vid zoomnivå på 16+, allmänt tillgänglig kartdata från US Census. Vid lägre zoomnivåer, endast ändringar sedan 2006 minus ändringar som redan införts på OpenStreetMap",
+                "name": "Nya och felaktiga TIGER-vägar"
+            },
+            "OSM_Inspector-Addresses": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMaps bidragsgivare, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Adresser"
+            },
+            "OSM_Inspector-Geometry": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMaps bidragsgivare, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Geometri"
+            },
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMaps bidragsgivare, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Vägar"
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMaps bidragsgivare, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Områden"
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMaps bidragsgivare, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Platser"
+            },
+            "OSM_Inspector-Routing": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMaps bidragsgivare, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Rutter"
+            },
+            "OSM_Inspector-Tagging": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMaps bidragsgivare, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Taggning"
+            },
+            "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, kartdata OpenStreetMaps bidragsgivare, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Cykel"
+            },
+            "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, kartdata OpenStreetMaps bidragsgivare, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Vandring"
+            },
+            "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, kartdata OpenStreetMaps bidragsgivare, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Mountainbike"
+            },
+            "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, kartdata OpenStreetMaps bidragsgivare, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Inline skating"
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, kartdata OpenStreetMaps bidragsgivare, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Vintersport"
+            },
+            "hike_n_bike": {
+                "attribution": {
+                    "text": "© OpenStreetMaps bidragsgivare"
+                },
+                "name": "Vandring & cykel"
+            },
+            "mapbox_locator_overlay": {
+                "attribution": {
+                    "text": "Villkor & feedback"
+                },
+                "description": "Visa de viktigaste objekten för att hjälpa dig att orientera dig. ",
+                "name": "Bildlager för lokalisering"
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "© OpenStreetMaps bidragsgivare, CC-BY-SA"
+                },
+                "name": "OpenP-karta (bildlager)"
+            },
+            "osm-gps": {
+                "attribution": {
+                    "text": "© OpenStreetMaps bidragsgivare"
+                },
+                "description": "Publika GPS-spår uppladdade till OpenStreetMap.",
+                "name": "GPS-spår på OpenStreetMap"
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "© OpenStreetMaps bidragsgivare, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (Standard svartvit)"
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "© OpenStreetMaps bidragsgivare, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (Tysk stil)"
+            },
+            "qa_no_address": {
+                "attribution": {
+                    "text": "Simon Poole, Data ©OpenStreetMaps bidragsgivare"
+                },
+                "name": "QA Ingen adress"
+            },
+            "skobbler": {
+                "attribution": {
+                    "text": "© Plattor: skobbler Kartdata: OpenStreetMaps contributors"
+                },
+                "name": "skobbler"
+            },
+            "stamen-terrain-background": {
+                "attribution": {
+                    "text": "Kartplattor av Stamen Design, under CC BY 3.0"
+                },
+                "name": "Stamen terräng"
+            },
+            "tf-cycle": {
+                "attribution": {
+                    "text": "Kartor © Thunderforest, Data © OpenStreetMaps bidragsgivare"
+                },
+                "name": "Thunderforest OpenCycleMap"
+            },
+            "tf-landscape": {
+                "attribution": {
+                    "text": "Kartor © Thunderforest, Data © OpenStreetMaps bidragsgivare"
+                },
+                "name": "Thunderforest landskap"
             }
         }
     }

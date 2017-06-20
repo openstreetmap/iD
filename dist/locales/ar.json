@@ -3068,6 +3068,31 @@
                     "terms": "هدار سد صغير"
                 }
             }
+        },
+        "imagery": {
+            "Bing": {
+                "description": "الصور الجوية والقمر الصناعي.",
+                "name": "الصور الجوية ل بينج"
+            },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "الشروط والملاحظات"
+                }
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "الشروط والملاحظات"
+                }
+            },
+            "MAPNIK": {
+                "name": "خرائط الشارع المفتوحة (قياسي)"
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "الشروط والملاحظات"
+                },
+                "description": "الصور الجوية والقمر الصناعي."
+            }
         }
     }
 }

@@ -3712,7 +3712,7 @@
                     "terms": "pochylnia"
                 },
                 "leisure/sports_centre": {
-                    "name": "Centrum Sportowe",
+                    "name": "Centrum sportowe",
                     "terms": "centrum sportowe, ośrodek sportowy, ośrodek sportów"
                 },
                 "leisure/sports_centre/swimming": {
@@ -4181,7 +4181,7 @@
                     "terms": "funikular, kolejka"
                 },
                 "railway/halt": {
-                    "name": "Stacja kolejowa",
+                    "name": "Przystanek kolejowy",
                     "terms": "stacja,przystanek,kolej,kolejowa"
                 },
                 "railway/level_crossing": {
@@ -5019,6 +5019,184 @@
                     "name": "Jaz",
                     "terms": "jaz,tama"
                 }
+            }
+        },
+        "imagery": {
+            "Bing": {
+                "description": "Zdjęcia satelitarne i lotnicze.",
+                "name": "Zdjęcia lotnicze Bing"
+            },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "Warunki użytkowania i opinia"
+                },
+                "description": "Zdjęcia satelitarne DigitalGlobe Premium.",
+                "name": "Zdjęcia satelitarne DigitalGlobe Premium"
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "Warunki użytkowania i opinia"
+                },
+                "description": "Zdjęcia satelitarne DigitalGlobe Standard.",
+                "name": "Zdjęcia satelitarne DigitalGlobe Standard"
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "© autorzy OpenStreetMap, CC-BY-SA"
+                },
+                "description": "Domyślny podkład OpenStreetMap",
+                "name": "OpenStreetMap (Standard)"
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "Warunki użytkowania i opinia"
+                },
+                "description": "Zdjęcia satelitarne i lotnicze.",
+                "name": "Zdjęcia satelitarne Mapbox"
+            },
+            "New_and_Misaligned_TIGER_Roads-2013": {
+                "description": "Przy poziomie przybliżenia 16+ dane w domenie publicznej z Spisu ludności Stanów Zjednoczonych. Przy mniejszym przybliżeniu - tylko zmiany od 2006 oprócz zmian już wprowadzonych do OpenStreetMap",
+                "name": "Nowe i niewyrównane drogi TIGER"
+            },
+            "OSM_Inspector-Addresses": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, autorzy OpenStreetMap, CC-BY-SA"
+                },
+                "name": "Inspektor OSM: Adresy"
+            },
+            "OSM_Inspector-Geometry": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, autorzy OpenStreetMap, CC-BY-SA"
+                },
+                "name": "Inspektor OSM: Geometria"
+            },
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, autorzy OpenStreetMap, CC-BY-SA"
+                },
+                "name": "Inspektor OSM: Drogi"
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, autorzy OpenStreetMap, CC-BY-SA"
+                },
+                "name": "Inspektor OSM: Obszary"
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, autorzy OpenStreetMap, CC-BY-SA"
+                },
+                "name": "Inspektor OSM: Miejsca"
+            },
+            "OSM_Inspector-Routing": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, autorzy OpenStreetMap, CC-BY-SA"
+                },
+                "name": "Inspektor OSM: Routing"
+            },
+            "OSM_Inspector-Tagging": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, autorzy OpenStreetMap, CC-BY-SA"
+                },
+                "name": "Inspektor OSM: Tagi"
+            },
+            "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, dane mapy autorzy OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Oznakowane Szlaki Rowerowe"
+            },
+            "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, dane mapy autorzy OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Oznakowane Szlaki Piesze"
+            },
+            "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, dane mapy autorzy OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Oznakowane Szlaki MTB"
+            },
+            "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, dane mapy autorzy OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Ozankowane Szlaki Skaterskie"
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© Michael Spreng, CC by-SA 3.0, dane mapy autorzy OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Oznakowane szlaki sportów zimowych"
+            },
+            "hike_n_bike": {
+                "attribution": {
+                    "text": "© autorzy OpenStreetMap"
+                },
+                "name": "Wędrówki & Rowery"
+            },
+            "mapbox_locator_overlay": {
+                "attribution": {
+                    "text": "Warunki użytkowania i opinia"
+                },
+                "description": "Pokazuje najważniejsze obiekty pomocne w orientacji.",
+                "name": "Nakładka lokalizująca"
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "© autorzy OpenStreetMap, CC-BY-SA"
+                },
+                "name": "Mapa OpenPT (nakładka)"
+            },
+            "osm-gps": {
+                "attribution": {
+                    "text": "© autorzy OpenStreetMap"
+                },
+                "description": "Publiczne ślady GPS przesłane do OpenStreetMap.",
+                "name": "Ślady GPS OpenStreetMap"
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "© autorzy OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (Standard Czarno-Biała)"
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "© autorzy OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (Styl niemiecki)"
+            },
+            "qa_no_address": {
+                "attribution": {
+                    "text": "Simon Poole, Dane © autorzy OpenStreetMap"
+                },
+                "name": "QA Bez Adesu"
+            },
+            "skobbler": {
+                "attribution": {
+                    "text": "© Podład: skobbler Dane mapy: autorzy OpenStreetMap"
+                },
+                "name": "skobbler"
+            },
+            "stamen-terrain-background": {
+                "attribution": {
+                    "text": "Kafelki mapowe Stamen Design, licencja CC BY 3.0"
+                },
+                "name": "Teren Stamen"
+            },
+            "tf-cycle": {
+                "attribution": {
+                    "text": "Mapa © Thunderforest, dane © autorzy OpenStreetMap"
+                },
+                "name": "Thunderforest OpenCycleMap"
+            },
+            "tf-landscape": {
+                "attribution": {
+                    "text": "Mapa © Thunderforest, dane © autorzy OpenStreetMap"
+                },
+                "name": "Thunderforest Krajobraz"
             }
         }
     }

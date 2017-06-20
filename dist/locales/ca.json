@@ -698,7 +698,6 @@
                 "title": "Àrees",
                 "add_playground": "*Àrees* s'utilitza per definir els límits d'objectes com llacs, edificis o àrees residencials.{br}També es poden utilitzar per incloure més detalls al mapa de molts objectes que altrament deixaríeu com un punt. **Cliqueu el botó {button} Àrea per afegir una nova àrea.**",
                 "start_playground": "Afegim aquesta zona de joc al mapa dibuixant una àrea. Les àrees es dibuixen situant *nodes* seguint el límit extern de l'objecte. **Cliqueu o premeu la barra espaiadora per situar el primer node a una de les cantonades de la zona de joc.**",
-                "continue_playground": "Continueu dibuixant l'àrea situant més nodes al llarg del límit de la zona de joc. Queda perfecte si connecteu l'àrea a les rutes d'accés per vianants que pugui haver.{br}Consell: Si manteniu premuda la tecla d'alternativa evitareu que els nodes es connectin a altres objectes. **Continueu dibuixant una àrea per la zona de joc.**",
                 "finish_playground": "Acabeu l'àrea prement la tecla de retorn o clicant altre cop el primer o el darrer node. **Acabeu de dibuixar una àrea per al parc.**",
                 "search_playground": "**Cerqueu «{preset}».**",
                 "choose_playground": "**Trieu «{preset}» de la llista.**",
@@ -754,7 +753,6 @@
             },
             "startediting": {
                 "title": "Comenceu a editar",
-                "help": "Ara ja esteu preparat per editar a OpenStreetMap!{br}Podeu revisar la visita guiada quan vulgueu o veure més documentació prement el botó {button} Ajuda.",
                 "save": "No oblideu que els canvis s'han de desar regularment!",
                 "start": "Comenceu a editar el mapa!"
             }

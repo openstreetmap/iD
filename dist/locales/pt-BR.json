@@ -812,7 +812,6 @@
                 "title": "Áreas",
                 "add_playground": "*Áreas* são usadas para representar os limites de elementos como lagos, edifícios, e áreas residenciais.{br}Elas também podem ser usadas para um mapeamento mais detalhado de muitos elementos que você normalmente mapearia com pontos. **Clique no botão {button} Área para adicionar uma nova área.**",
                 "start_playground": "Vamos adicionar este parquinho ao mapa desenhando uma área. Áreas podem ser traçadas colocando *nós* ao longo do limite exterior do elemento. **Clique com o mouse ou pressione a barra de espaço para posicionar um nó inicial em um dos cantos do parquinho.**",
-                "continue_playground": "Continue desenhando a área colocando mais nós ao longo da borda do parquinho. Não se preocupe se a área conectar às calçadas existentes.{br}Dica: Você pode segurar a tecla Alt para evitar que nós se conectem a outros elementos. **Continue desenhando a área do parquinho.**",
                 "finish_playground": "Termine a área pressionando Enter, ou clicando novamente no primeiro ou último nó. **Termine de desenhar a área do parquinho.**",
                 "search_playground": "**Procure por '{preset}'.**",
                 "choose_playground": "**Escolha {preset} na lista.**",
@@ -877,7 +876,6 @@
             },
             "startediting": {
                 "title": "Começar a editar",
-                "help": "Você está agora pronto(a) para editar o OpenStreetMap!{br}Você pode seguir este tutorial novamente a qualquer momento ou aprender mais clicando no botão {button} Ajuda.",
                 "save": "Não esqueça de salvar suas alterações regularmente!",
                 "start": "Começar a mapear!"
             }
@@ -2702,8 +2700,8 @@
                     "name": "Entrada"
                 },
                 "barrier/fence": {
-                    "name": "Cerca",
-                    "terms": "Cerca"
+                    "name": "Cerca ou Grade",
+                    "terms": "Cerca ou Grade"
                 },
                 "barrier/gate": {
                     "name": "Portão",

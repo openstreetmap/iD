@@ -813,7 +813,6 @@
                 "title": "Aree",
                 "add_playground": "*Le aree* sono utilizzate per indicare i contorni degli elementi come ad esempio laghi, edifici e aree residenziali.{br}Possono anche essere utilizzate per rappresentare in modo più dettagliato elementi che normalmente vengono mappati come punti. **Clicca il pulsante Area {button} per aggiungere una nuova area.**",
                 "start_playground": "Aggiungiamo questo parco giochi alla mappa disegnandone l'area. Le aree sono disegnate posizionando dei *punti* lungo il bordo esterno dell'elemento. **Clicca o premi la barra spaziatrice per posizionare il punto iniziale su uno dei vertici del parco giochi.**",
-                "continue_playground": "Continua a disegnare l'area sistemando più punti lungo il bordo del parco giochi. Si può connettere l'area ai percorsi pedonali esistenti.{br}Suggerimento: Puoi tenere premuto il tasto Alt per impedire ai punti che stai creando di connettersi ad altri elementi. **Continua a disegnare l'area del parco giochi.**",
                 "finish_playground": "Termina l'area premendo Invio, o cliccando nuovamente sul primo o ultimo nodo. **Finisci di disegnare un'area per il parco giochi.**",
                 "search_playground": "**Cerca '{preset}'.**",
                 "choose_playground": "**Scegli {preset} dalla lista.**",
@@ -878,7 +877,6 @@
             },
             "startediting": {
                 "title": "Inizia a Modificare",
-                "help": "Adesso sei pronto per effettuare modifiche su OpenStreetMap!{br}Puoi rifare questo tutorial quando vuoi o leggere la documentazione cliccando sul pulsante Aiuto {button}.",
                 "save": "Non dimenticare di salvare periodicamente le tue modifiche!",
                 "start": "Inizia a mappare!"
             }
@@ -888,7 +886,7 @@
             "tooltip": "Mostra le scorciatoie da tastiera",
             "key": {
                 "alt": "Alt",
-                "backspace": "← Backspace",
+                "backspace": "Backspace",
                 "cmd": "Cmd",
                 "ctrl": "Ctrl",
                 "delete": "Canc",
@@ -897,7 +895,7 @@
                 "enter": "Invio",
                 "esc": "Esc",
                 "home": "Inizio",
-                "option": "option",
+                "option": "Option",
                 "pause": "Pausa",
                 "pgdn": "Pag",
                 "pgup": "Pag",

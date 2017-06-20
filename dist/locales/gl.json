@@ -349,6 +349,7 @@
             "truncated_list": "Edicións de {users} e {count} máis"
         },
         "infobox": {
+            "key": "I",
             "selected": "{n} seleccionados",
             "geometry": "Xeometría",
             "closed": "pechado",
@@ -423,6 +424,7 @@
         "background": {
             "title": "Fondo",
             "description": "Axustes do fondo",
+            "key": "B",
             "percent_brightness": "{opacity}% brillo",
             "none": "Ningún",
             "best_imagery": "Mellor fonte de imaxes coñecida deste sitio",
@@ -436,12 +438,14 @@
             "offset": "Arrastre en calquera parte baixa da área gris para axustar o desplazamento de imaxes ou ingrese os valores de desplazamento en metros.",
             "minimap": {
                 "description": "Mapa pequeno",
-                "tooltip": "Mostrar un mapa reducido para facilitar a localización da área que se estea a mostrar. "
+                "tooltip": "Mostrar un mapa reducido para facilitar a localización da área que se estea a mostrar. ",
+                "key": "/"
             }
         },
         "map_data": {
             "title": "Mapa de datos",
             "description": "Mapa de datos",
+            "key": "F",
             "data_layers": "Capas de datos",
             "fill_area": "Encher as áreas",
             "map_features": "Características do mapa",
@@ -500,7 +504,8 @@
         "area_fill": {
             "wireframe": {
                 "description": "Sen recheo (molde)",
-                "tooltip": "Activando o modo sen recheo, faise máis sinxelo ver a imaxe de fondo. "
+                "tooltip": "Activando o modo sen recheo, faise máis sinxelo ver a imaxe de fondo. ",
+                "key": "W"
             },
             "partial": {
                 "description": "Recheo parcial",
@@ -625,6 +630,7 @@
         },
         "help": {
             "title": "Axuda",
+            "key": "H",
             "help": "# Axuda\n\nEste é un editor para [OpenStreetMap](http://www.openstreetmap.org/), o mapa\nlibre e editable do mundo. Podes usalo e engadir e actualizar información\ndatos da túa zona, facendo unha fonte libre de datos abertos do mapa do mundo\na mellor para todos.\n\nAs edicións que podes facer neste mapa poden ser visibes para calquera uso en\nOpenStreetMap. Para facer unha edición ti debes\n[log in](https://www.openstreetmap.org/login).\n\nO [iD editor](http://ideditor.com/) é un proxecto colaborativo con [source\ncode available on GitHub] (https://github.com/openstreetmap/iD).\n",
             "editing_saving": "#  Editar & Salvar\n\nIste editor foi deseñado para traballar primeiramente online, e  accedes directamente através do website agora.\n\n### Seleccionar Elementos\n\nSelecciona elementos do mapa, coma unha estrada ou punto de interese, facendo click sobre el no mapa. Esto resaltará a función seleccionada, abrirá detalles sobre el, e amosará un menu cas cousas que podes facer co elemento.\n\nPra escoller múltiplos elementos manten pulsada a 'Shift' key -Maiusculas-. Logo fai click nos elementos,  que queiras seleccionar, ou arrastra sobre o mapa co rectángulo de selección. Esto debuxará unha caixa e seleccionará tódolos puntos dentro del.\n\n### Salvar Edicións\n\nCando fagas trocos como edicións de rúas, edificios ou lugares, son almacenados localmente ata que os subas ao server. Non te preocupes se tes un erro - podes desfacer os trocos facendo click no botón desfacer, e refacer trocos no botón refacer.-\n\nFai click en 'Save' ao rematar o grupo de edicións -Por exemplo, se remataches unha zona da cidade ou cando queiras iniciar unha nova zona. Terás oportunidade de revisala, e o editor fará suxestións útiles e dará avisos se algo non está correcto nos trocos.\n\nSe che parece todo correcto, podes poñer unha curta resume explicando os trocos feitos, fas click en 'Save' outra vez e os trocos  [OpenStreetMap.org](http://www.openstreetmap.org/) os fará visibles a tódolos usuarios para que os empreguen e actualicen.\n\nSe non es quen de facer as dicións dunha sentada podes deixalo e cando volvas (en calquera navegaro e ordenador) a aplicación do editor darache a oportunidade de restaurar e gardar o traballo feito\n\n###  Usar o editor\n\nTi poder ver a lista de atallos do teclado premendo a tecla `?`\n",
             "roads": "# Estradas\n\nTi podes crear, marcar, e borrar estradas co editor. As estradas poden ser de todo tipo:\npistas, autoestradas, camiños, ciclopistas, e máis - de calquera tipo- os cruces\ne os segmentos poden ser mapeados.\n\n### Seleccionar\n\nPincha sobre unha estrada para seleccionala. En esbozo debe ser visible, xunto\ncun pequeno menú de ferramentas no mapa e unha barra lateral que mostra máis información sobre a estrada.\n\n### Modificar\n\nMoitas veces vai ver que as estradas non están aliñadas coas imaxes por tras delas\nou cunha pista GPS. Pode axustar estradas para que estean no lugar axeitado.\n\nPrimeiro fai click na estrada que queiras modificar. Iluminarase e amosará\nos puntos de control ao longo dela ti podes arrastralos para mellorar a localización. Se queres engadir novos puntos de control para máis precisión, fai doble click na parte da estrada na que queiras o novo nodo, e un punto engadirase.\n\nSe a estrada conecta con outra estrada, pero non se conecta correctamente sobre\no mapa, pode arrastrar un dos seus puntos de control sobre o outro punto na estrada\nco fin de unilas. Ter as estradas conectardas é importante para o mapa e esencial para proporcionar instrucións de conducción.\n\nTamén pode premer na ferramenta 'Move' ou prema a tecla de acceso rápido `M` para mover toda a estrada\nunha vez máis, e logo prema de novo para gardar ese movemento.\n\n### Borrar\n\nSe unha estrada é enteiramente incorrecta - podes ver que non existe nas imaxes de satélite e, idealmente, ter confirmado localmente que non está presente - pode borrala, ou eliminala dende o mapa. Sexa cauteloso ao eliminar características -\ncomo calquera outra edición, os resultados non son vistos por todos en imaxes de satélite é moitas veces están desactualizados, de xeito que a estrada pode estar simplemente recén construída.\n\nPode eliminar unha estrada, premendo sobre ela para seleccionala, a continuación,\npremer na icona lixo ou premendo a tecla \"Delete\".\n\n### Crear\n\nAtopa nalgún lugar que debe haber un camiño, pero non está? Prema na \"liña\"\nicona na esquina superior esquerda do editor ou prema a tecla de acceso `2` para comezar a debuxar.\n\nPrema no inicio da estrada no mapa para comezar a deseñar. Se a estrada\nramifica dende unha estrada existente, comeza premendo sobre o lugar onde elas se conectan.\n\nDespois, prema en puntos ao longo do camiño que segue a liña correcta, segundo imaxes de satélite ou GPS. Se a estrada que está deseñando cruza outra estrada, actívea\npremendo sobre o punto de intersección. Cando termine o deseño, prema dúas veces ou prema 'Return \"ou\" Intro \"no teclado.\n\n",
@@ -813,7 +819,7 @@
                 "title": "Áreas",
                 "add_playground": "*Areas* son usadas para amosar límites de elementos tales como lagoas, edificios e zonas residenciais.{br} Poden ser empregadas para máis detalles como mapeado de calquera elemento debes normalmente mapear puntos. **Clica no {button} Area e engade a nova área.**",
                 "start_playground": "Deixa engadir xogos ao mapa para debuxar áreas. As áreas son debuxadas como lugares *nodos* fora das formas do elemento. **Pincha ou presiona barra espaciadora no lugar para poñer un nodo ou unha das esquinas do xogo.**",
-                "continue_playground": "Continúa a debuxar áreas por lugares con máis nodos ao redor das formas dos xogos. Xa está OK conectado con áreas existentes marcando rutas.{br} Tipo: pode manter premida a tecla Alt para evitar que os nodos se liguen ao exsitentes. **Continue debuxando un área de xogo.** ",
+                "continue_playground": "Continúa a deseñar áreas e ubicando máis nodos ao longo dos extremos dos polígonos. Esta ok a conexión da área existente ruteando pistas. .{br} Consello: podes manter presa a tecla '{alt}' para evitar que os nodos se conecten nos elemetos próximos. **Continúa a debuxar a área do polígono.**",
                 "finish_playground": "Remata a área presionando enter, ou facendo click outra vez noutro nodo ou último nodo. **Remata de debuxar a área do polígono.**",
                 "search_playground": "**Atopar para '{preset}'.**",
                 "choose_playground": "**Elixe {preset} da lista.**",
@@ -878,7 +884,8 @@
             },
             "startediting": {
                 "title": "Comezar a editar",
-                "help": "Agora xa estás preparado para editar OpenStreetMap! {br} Pode repetir este paso a paso a calquera hora ou ver máis documentación, premendo no botón de Axuda {button}.",
+                "help": "Agora estás listo para editar OpenStreetMap! {br} Pode reproducir este paseo en calquera momento ou ver máis documentación premendo no botón {button} Axuda ou premendo a tecla  '{key}'.",
+                "shortcuts": "Podes ver unha lista de comandos xunto cos seus atallos de teclado premendo a tecla  '{key}'.",
                 "save": "Non te esquezas de gardar regularmente os teus cambios!",
                 "start": "Comeza a cartografiar!"
             }
@@ -886,6 +893,9 @@
         "shortcuts": {
             "title": "Atallos de teclado",
             "tooltip": "Amosar os atallos de teclado na pantalla.",
+            "toggle": {
+                "key": "?"
+            },
             "key": {
                 "alt": "Alt",
                 "backspace": "Barra Espaciadora",
@@ -5090,7 +5100,166 @@
                 "attribution": {
                     "text": "Termos & Autoachegas"
                 },
-                "description": "Imaxes de satélite Standard DigitalGlobe."
+                "description": "Imaxes de satélite Standard DigitalGlobe.",
+                "name": "Imaxes DigitalGlobe Standard"
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "© OpenStreetMap contribuidores, CC-BY-SA"
+                },
+                "description": "Capa OpenStreetMap por defecto.",
+                "name": "OpenStreetMap (Estandard)"
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "Termos & Autoachegas"
+                },
+                "description": "Imaxes satélite e aéreas.",
+                "name": "Mapbox Satélite"
+            },
+            "New_and_Misaligned_TIGER_Roads-2013": {
+                "description": "A zoom nivel 16+, informacións do mapa de dominio público do censo de US. A baixo nivel de zoom, só trocos dende 2006 mínimas achegas xa incorporadas a OpenStreetMap",
+                "name": "Novas & Estradas TIGER Desaliñadas"
+            },
+            "OSM_Inspector-Addresses": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contribuidores, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Enderezos"
+            },
+            "OSM_Inspector-Geometry": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contribuidores, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Xeometría"
+            },
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contribuidores, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Autoestradas"
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contribuidores, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Área"
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contribuidores, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Lugares"
+            },
+            "OSM_Inspector-Routing": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contribuidores, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Ruteiros"
+            },
+            "OSM_Inspector-Tagging": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contribuidores, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Lapelas"
+            },
+            "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, datos do mapa OpenStreetMap contribuidores, ODbL 1.0"
+                },
+                "name": "Marcador de Pistas: Ciclismo"
+            },
+            "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, datos do mapa OpenStreetMap contribuidores, ODbL 1.0"
+                },
+                "name": "Marcador de vías Pistas: Excursionismo"
+            },
+            "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, información do mapa OpenStreetMap contribuidores, ODbL 1.0"
+                },
+                "name": "Marcador de Pistas: MTB"
+            },
+            "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, información de OpenStreetMap contribuidores, ODbL 1.0"
+                },
+                "name": "Marcador de Pistas: Skate"
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© Michael Spreng, CC by-SA 3.0, información do mapa OpenStreetMap contribuitores, ODbL 1.0"
+                },
+                "name": "Marcadores de Pistas: Deportes de inverno"
+            },
+            "hike_n_bike": {
+                "attribution": {
+                    "text": "© OpenStreetMap contribuidores"
+                },
+                "name": "Camiño & Bici"
+            },
+            "mapbox_locator_overlay": {
+                "attribution": {
+                    "text": "Termos & Autoachegas"
+                },
+                "description": "Amosar os elementos importantes e axuda a orientarte.",
+                "name": "Superposición de Localizador"
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "© OpenStreetMap contribuidores, CC-BY-SA"
+                },
+                "name": "OpenPT Mapa (superposición)"
+            },
+            "osm-gps": {
+                "attribution": {
+                    "text": "© OpenStreetMap contribuidores"
+                },
+                "description": "Trazas públicas GPS subidas a OpenStreetMap.",
+                "name": "OpenStreetMap trazas GPS"
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "© OpenStreetMap contribuidores, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (Estandard Branco & Negro)"
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "© OpenStreetMap contribuidores, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (Estilo Alemá)"
+            },
+            "qa_no_address": {
+                "attribution": {
+                    "text": "Simon Poole, Achegas ©OpenStreetMap contribuidores"
+                },
+                "name": "QA Sen Enderezos"
+            },
+            "skobbler": {
+                "attribution": {
+                    "text": "© Tiles: skobbler información Mapa: OpenStreetMap contribuidores"
+                },
+                "name": "skobbler"
+            },
+            "stamen-terrain-background": {
+                "attribution": {
+                    "text": "Tiles do mapa por Stamen Design, baixo CC BY 3.0"
+                },
+                "name": "Terreo Stamen"
+            },
+            "tf-cycle": {
+                "attribution": {
+                    "text": "Mapas © Thunderforest, Información © OpenStreetMap contribuidores"
+                },
+                "name": "Thunderforest OpenCycleMap"
+            },
+            "tf-landscape": {
+                "attribution": {
+                    "text": "Mapas © Thunderforest, Información © OpenStreetMap contribuidores"
+                },
+                "name": "Paisaxe Thunderforest"
             }
         }
     }

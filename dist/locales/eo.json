@@ -348,6 +348,7 @@
             "truncated_list": "Redaktita de {users} kaj {count} aliaj"
         },
         "infobox": {
+            "key": "I",
             "selected": "{n} elektitaj",
             "geometry": "Geometrio",
             "closed": "fermita",
@@ -422,6 +423,7 @@
         "background": {
             "title": "Fono",
             "description": "Fonaj agordoj",
+            "key": "B",
             "percent_brightness": "Heleco {opacity}%",
             "none": "Neniu",
             "best_imagery": "Plej bona fonto de fotaro por ĉi tiu loko",
@@ -435,12 +437,14 @@
             "offset": "Trenu ie ajn ene griza kampo sube por korekti fotaran deŝovon aŭ entajpu valorojn de deŝovo en metroj.",
             "minimap": {
                 "description": "Mapeto",
-                "tooltip": "Montri malgrandigitan mapon por helpi trovi nune montratan areon."
+                "tooltip": "Montri malgrandigitan mapon por helpi trovi nune montratan areon.",
+                "key": "/"
             }
         },
         "map_data": {
             "title": "Map-datumoj",
             "description": "Map-datumoj",
+            "key": "F",
             "data_layers": "Datum-tavoloj",
             "fill_area": "Plenigi areojn",
             "map_features": "Map-objektoj",
@@ -499,7 +503,8 @@
         "area_fill": {
             "wireframe": {
                 "description": "Nenia plenigo (krado)",
-                "tooltip": "Aktivigo de krada reĝimo igas vidon de fona fotaro pli facila."
+                "tooltip": "Aktivigo de krada reĝimo igas vidon de fona fotaro pli facila.",
+                "key": "W"
             },
             "partial": {
                 "description": "Parta plenigo",
@@ -623,6 +628,7 @@
         },
         "help": {
             "title": "Helpo",
+            "key": "H",
             "help": "# Helpo\n\nĈi tiu estas redaktilo por [OpenStreetMap](http://www.openstreetmap.org/) - la libera kaj redaktebla mondmapo. Vi povas ĝin uzi por aldoni kaj ĝisdatigi datumojn pri via ĉirkaŭaĵo, farante malfermkodan kaj malferm-datuman mapon de la mondo pli bona por ĉiuj.\n\nRedaktoj, kiujn vi faras sur ĉi tiu mapo estos videblaj por ĉiu, kiu uzas OpenStreetMap. Por fari redakton, vi devos [ensaluti](https://www.openstreetmap.org/login).\n\nLa [redaktilo 'iD'](http://ideditor.com/) estas kunlabora projekto, kies [fontkodo estas disponebla en GitHub](https://github.com/openstreetmap/iD).\n",
             "editing_saving": "# Redaktado kaj konservado\n\nĈi tiu redaktilo estas destinita por labori ĝenerale enrete, kaj vi nun uzas ĝin per retejo.\n\n### Elektado de objektoj\n\nPor elekti map-objekton - kiel vojon aŭ interesejon - klaku ĝin sur la mapo. Tio ĉi markos elektitan objekton, malfermos panelon kun detaloj pri ĝi, kaj montros menuon de agoj pri objekto.\n\nPor elekti kelkajn objektojn, premtenu 'majusklan' klavon. Tiam aŭ klaku objektojn, kiujn vi volas elekti, aŭ trenu sur mapo por desegni rektangulon. Tiel vi desegnos zonon kaj elektos ĉiujn punktojn ene.\n\n### Konservado de redaktoj\n\nKiam vi estas ŝanĝanta ion, kiel redakti vojojn, konstruaĵojn kaj lokoj, tiuj ŝanĝoj estas konservataj loke antaŭ vi konservos ilin en servilo. Ne klopodu, se vi eraras - vi povas malfari ŝanĝojn klakante butonon 'malfari' kaj refari klakante butonon 'refari'.\n\nKlaku 'Konservi' por fini grupon da redaktoj, ekzemple vi fine mapigis terenon de urbo kaj vi volas komenci novan terenon. Vi havos ŝancon por kontroli kion vi estos farinta kaj la redaktilo montros uzeblajn konsilojn se io povus esti malĝusta.\n\nSe ĉio ŝajnos ĝuste, vi povos entajpi etan komenton eksplikantan faritajn ŝanĝojn, klaku 'Konservi' por publikigi viajn redaktojn al [OpenStreetMap.org](http://www.openstreetmap.org/), kie ili estos videblaj por ĉiuj aliaj uzantoj kaj pretaj por plia plibonigo.\n\nSe vi ne povas fini viajn redaktojn dum unufoje, vi povas fermi fenestron kun redaktilo, kaj reveni poste (ĉe sama foliumilo kaj komputilo) kaj la redaktilo restarigos vian laboron.\n\n### Uzado de redaktilo\n\nVi povas vidi liston de disponeblaj fulmoklavoj per premi la klavon '?'\n",
             "roads": "# Vojoj\n\nVi povas krei, korekti kaj forigi vojojn per ĉi tiu redaktilo. Vojo povas esti de iu ajn speco: piediradaj vojetoj, aŭtovojoj, biciklvojoj, kaj pli - ĉiu regule uzata vojo estas mapiginda.\n\n### Elektado\n\nKlaku vojon por ĝin elekti. Ĝia konturo ekvidebliĝos, kune kun eta ilara menuo sur la mapo kaj flanka breto montranta pli da informoj pri la vojo.\n\n### Redaktado\n\nOfte vi vidos vojojn, kiuj ne estos alĝustigitaj al la malantaŭa fotaro aŭ al GPS-spuro. Vi povas korekti tiujn vojojn, do ili troviĝos en ĝusta loko.\n\nUnue klaku vojon, kiun vi volas ŝanĝi. Tio ĉi markos ĝin kaj montros kontrolpunktojn laŭlonge de ĝi, kiujn vi povas treni al pli bonaj lokoj. Se vi volas aldoni novan kontrolpunkton por plidetaligi, duoble klaku parton de vojo sen nodo kaj ĝi estos aldonita.\n\nSe vojo estas konektita al alia vojo, sed ili ne ĝuste kunigitaj sur la mapo, vi povas treni unu el iliaj kontrolpunktoj sur alian vojon por kunigi ilin. Konektado de vojoj estas grava por la mapo kaj necesa por liveri navigadon.\n\nVi ankaŭ povas klaki ilon 'Movi' aŭ premu fulmoklavon 'M' por movi la tutan vojon per unu fojo kaj klaki denove por konservi ĉi tiun agon.\n\n### Forigado\n\nSe vojo estas tute erara - vi vidas, ke ĝi ne ekzistas sur satelita fotaro kaj eĉ vi konfirmis enloke, ke ĝi ne ekzistas - vi povas ĝin forigi el la mapo. Estu singarda dum forigado de objektoj - kiel ĉiu alia redakto, rezultoj estos videblaj al ĉiuj kaj sputinika fotaro estas ofte neĝisdata, do vojo simple povus esti ĵus konstruita.\n\nVi povas forigi vojon per klaki ĝin por ĝin elekti, sekve klaku piktogramon de rubujo aŭ premu forigan klavon.\n\n### Kreado\n\nEble vi trovis, ke ie povas esti vojon, tamen ĝi ne troviĝas sur la mapo? Klaku piktogramon de linio ĉe supra maldekstra angulo aŭ premu fulmoklavon '2' por komenci desegni linion.\n\nKlaku komencon de la vojo sur mapo por komenci desegni. Se vojo disiĝas el ekzistanta vojo, komencu per klaki lokon, kie ili konektiĝas.\n\nSekve klaku punktojn laŭlonge de vojo tiel, kiel ili formiĝas ĝusta kurso laŭ satelita fotaro aŭ GPS. Se desegnata vojo interkruciĝas kun alia vojo, konektu ilin per klaki sekcopunkton. Kiam vi finos desegni, duoble klaku aŭ premu enen-klavon.\n",
@@ -811,7 +817,7 @@
                 "title": "Areoj",
                 "add_playground": "*Areoj* estas uzataj por reprezenti konturojn de objektoj kiel lagoj, konstruaĵoj kaj privatdomaj terenoj.{br}Oni povas ilin uzi por pli detale mapigi multe da objektoj, kiujn oni kutime mapigas kiel punktojn. **Klaku la butonon '{button} Areo' por aldoni novan areon.**",
                 "start_playground": "Ni aldonu ĉi tiun infanan ludejon al la mapo per desegni areon. Areojn oni desegnas per enmeti *nodojn* laŭ eksteraj randoj de objekto. **Klaku aŭ premu spacostangon por enmeti komencan nodon al iu el anguloj de la infana ludejo.**",
-                "continue_playground": "Pluigi desegni la areon per enmeti pliajn nodojn laŭ rando de infana ludejo. Estas ĝuste kunigi la areon kun ekzistaj irejoj.{br}Konsilo: vi povas premteni la alt-klavon por ke nodoj ne konektu kun aliaj objektoj. **Pluigu desegni areon por la infana ludejo.**",
+                "continue_playground": "Pluigi desegni la areon per enmeti pliajn nodojn laŭ rando de infana ludejo. Estas ĝuste kunigi la areon kun ekzistaj irejoj.{br}Konsilo: vi povas premteni la ‘{alt}’-klavon por ke nodoj ne konektu kun aliaj objektoj. **Pluigu desegni areon por la infana ludejo.**",
                 "finish_playground": "Finu la areon per premi enen-klavon aŭ klaku denove aŭ unuan aŭ finan nodon. **Finu desegni areon por la infana ludejo.**",
                 "search_playground": "**Serĉu '{preset}'-n.**",
                 "choose_playground": "**Elektu '{preset}'-n el la listo.**",
@@ -876,7 +882,8 @@
             },
             "startediting": {
                 "title": "Komenci redaktadon",
-                "help": "Vi nun pretas por redakti OpenStreetMap!{br}Vi ĉiam povas reludi ĉi tiun gvidilon aŭ vidi pliajn dokumentaron per klaki la butonon '{button} Helpo'.",
+                "help": "Vi nun pretas por redakti OpenStreetMap!{br}Vi ĉiam povas reludi ĉi tiun gvidilon aŭ vidi pliajn dokumentaron per klaki la butonon ‘{button} Helpo’ aŭ per premi la klavon ‘{key}’.",
+                "shortcuts": "Vi povas vidigi liston de komandoj kune kun ilaj fulmoklavoj per premi la klavon ‘{key}’.",
                 "save": "Ne forgesu regule konservi viajn ŝanĝojn!",
                 "start": "Ekigi mapigadon!"
             }
@@ -884,6 +891,9 @@
         "shortcuts": {
             "title": "Fulmoklavoj",
             "tooltip": "Montri ekranon de fulmoklavoj.",
+            "toggle": {
+                "key": "?"
+            },
             "key": {
                 "alt": "Alt",
                 "backspace": "Backspace",
@@ -5069,6 +5079,192 @@
                 "waterway/weir": {
                     "name": "Riversojlo",
                     "terms": "akvobaraĵo,digo,akvosojlo,sojlo,vejro"
+                }
+            }
+        },
+        "imagery": {
+            "Bing": {
+                "description": "Satelita kaj aera fotaroj.",
+                "name": "Aera fotaro de Bing"
+            },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "Kondiĉoj kaj rimarkoj"
+                },
+                "description": "Detala satelita fotaro de DigitalGlobe.",
+                "name": "Detala fotaro de DigitalGlobe"
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "Kondiĉoj kaj rimarkoj"
+                },
+                "description": "Norma satelita fotaro de DigitalGlobe.",
+                "name": "Norma fotaro de DigitalGlobe"
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "© OpenStreetMap kontribuintoj, CC-BY-SA"
+                },
+                "description": "Norma map-tavolo de OpenStreetMap.",
+                "name": "OpenStreetMap (norma mapo)"
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "Kondiĉoj kaj rimarkoj"
+                },
+                "description": "Satelita kaj aera fotaroj.",
+                "name": "Mapbox Satellite"
+            },
+            "New_and_Misaligned_TIGER_Roads-2013": {
+                "description": "Ĉe skal-nivelo 16+, publikaj map-datumoj de Usona popolnombrado. Ĉe malpli grandaj skal-niveloj, nur ŝanĝoj de post 2006 sen ŝanĝoj jam aldonitaj al OpenStreetMap.",
+                "name": "Novaj kaj ŝovitaj vojoj de TIGER"
+            },
+            "OSM_Inspector-Addresses": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap kontribuintoj, CC-BY-SA"
+                },
+                "name": "OSM Inspector: adresoj"
+            },
+            "OSM_Inspector-Geometry": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap kontribuintoj, CC-BY-SA"
+                },
+                "name": "OSM Inspector: geometrio"
+            },
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap kontribuintoj, CC-BY-SA"
+                },
+                "name": "OSM Inspector: vojoj"
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap kontribuintoj, CC-BY-SA"
+                },
+                "name": "OSM Inspector: areoj"
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap kontribuintoj, CC-BY-SA"
+                },
+                "name": "OSM Inspector: lokoj"
+            },
+            "OSM_Inspector-Routing": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap kontribuintoj, CC-BY-SA"
+                },
+                "name": "OSM Inspector: voj-difinado"
+            },
+            "OSM_Inspector-Tagging": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap kontribuintoj, CC-BY-SA"
+                },
+                "name": "OSM Inspector: etikedado"
+            },
+            "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© Sarah HOFFMANN, CC by-SA 3.0, map-datumoj de OpenStreetMap kontribuintoj, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: biciklado"
+            },
+            "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© Sarah HOFFMANN, CC by-SA 3.0, map-datumoj de OpenStreetMap kontribuintoj, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: marŝado"
+            },
+            "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© Sarah HOFFMANN, CC by-SA 3.0, map-datumoj de OpenStreetMap kontribuintoj, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: mont-biciklado"
+            },
+            "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© Sarah HOFFMANN, CC by-SA 3.0, map-datumoj de OpenStreetMap kontribuintoj, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: rulglitado"
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© Michael SPRENG, CC by-SA 3.0, map-datumoj de OpenStreetMap kontribuintoj, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: vintraj sportoj"
+            },
+            "basemap.at": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Mapo de Aŭstrujo bazita sur registaraj datumoj.",
+                "name": "basemap.at"
+            },
+            "basemap.at-orthofoto": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Ortofota tavolo liverata de basemap.at, anstataŭanto de fotaro geoimage.at.",
+                "name": "basemap.at ortofoto"
+            },
+            "hike_n_bike": {
+                "attribution": {
+                    "text": "© OpenStreetMap kontribuintoj"
+                }
+            },
+            "mapbox_locator_overlay": {
+                "attribution": {
+                    "text": "Kondiĉoj kaj rimarkoj"
+                },
+                "description": "Montras gravajn objektojn por helpi al vi orientiĝi.",
+                "name": "Orientiga surtavolo"
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "© OpenStreetMap kontribuintoj, CC-BY-SA"
+                },
+                "name": "OpenPT-mapo (surtavolo)"
+            },
+            "osm-gps": {
+                "attribution": {
+                    "text": "© OpenStreetMap kontribuintoj"
+                },
+                "description": "Publikaj GPS-spuroj alŝutitaj al OpenStreetMap.",
+                "name": "OpenStreetMap GPS-spuroj"
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "© OpenStreetMap kontribuintoj, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (norma blank-nigra)"
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "© OpenStreetMap kontribuintoj, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (germana stilo)"
+            },
+            "qa_no_address": {
+                "attribution": {
+                    "text": "Simon POOLE, Datumoj ©OpenStreetMap kontribuintoj"
+                }
+            },
+            "skobbler": {
+                "attribution": {
+                    "text": "© Kaheloj: skobbler map-datumoj: OpenStreetMap kontribuintoj"
+                }
+            },
+            "stamen-terrain-background": {
+                "attribution": {
+                    "text": "Map-kaheloj de Stamen Design, laŭ CC BY 3.0"
+                }
+            },
+            "tf-cycle": {
+                "attribution": {
+                    "text": "Mapoj: © Thunderforest, datumoj: © OpenStreetMap kontribuintoj"
+                }
+            },
+            "tf-landscape": {
+                "attribution": {
+                    "text": "Mapoj: © Thunderforest, datumoj: © OpenStreetMap kontribuintoj"
                 }
             }
         }

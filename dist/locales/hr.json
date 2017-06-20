@@ -813,7 +813,6 @@
                 "title": "Područja",
                 "add_playground": "*Područja* se koriste za prikaz granica elemenata karte kao što su npr.: jezera, zgrade i naseljena područja.{br}Također se mogu koristiti za detaljnije kartiranje mnogih elemenata karte koje bi inače kartirali kao točke. **Klikni na gumb {button} Područje za dodavanje novog područja.**",
                 "start_playground": "Idemo dodati ovo igralište na kartu crtajući područje. Područja se crtaju postavljanjem *čvorova* uzduž vanjske granice elementa. **Klikni ili pritisni razmaknicu za postavljanje početnog čvora na jedan od uglova igrališta.**",
-                "continue_playground": "Nastavi crtati područje postavljanjem ostalih čvorova uzduž ruba igrališta. U redu je povezati područje na postojeće pješačke staze.{br}Savjet: Možeš držati tipku Alt na tipkovnici da spriječiš povezivanje čvora s drugim elementima karte. **Nastavi crtati područje igrališta.** ",
                 "finish_playground": "Završi crtanje područja pritiskom tipke enter, ili tako da ponovno klikneš na početni ili posljednji čvor. **Završi crtanje područja igrališta.**",
                 "search_playground": "**Nađi '{preset}' pomoću tražilice.**",
                 "choose_playground": "**Odaberi {preset} sa liste.**",
@@ -878,7 +877,6 @@
             },
             "startediting": {
                 "title": "Započni uređivanje",
-                "help": "Sada si spreman/a za uređivanje OpenStreetMap karte!{br}Možeš bilo kada ponoviti ovaj prohod ili potražiti više dokumentacije klikom na gumb {button} Pomoć.**",
                 "save": "Ne zaboravi redovno spremiti tvoje promjene!",
                 "start": "Počni kartirati!"
             }
@@ -1219,6 +1217,9 @@
                 },
                 "construction": {
                     "label": "Vrsta"
+                },
+                "contact/webcam": {
+                    "placeholder": "http://primjer.hr/"
                 },
                 "content": {
                     "label": "Sadržaj"
@@ -1819,7 +1820,7 @@
                 },
                 "website": {
                     "label": "Web stranica",
-                    "placeholder": "http://primjer.com/"
+                    "placeholder": "http://primjer.hr/"
                 },
                 "wetland": {
                     "label": "Vrsta"
@@ -2433,7 +2434,8 @@
                     "name": "Urar (ručni satovi)"
                 },
                 "craft/confectionery": {
-                    "name": "Slastičarnica"
+                    "name": "Dućan sa slatkišima",
+                    "terms": "bombonijera,delikatesni dućan,delikatese,bomboni,čokoladice,praline"
                 },
                 "craft/dressmaker": {
                     "name": "Krojač"
@@ -2663,7 +2665,7 @@
                     "name": "Pristupna cesta"
                 },
                 "highway/service/alley": {
-                    "name": "Servisna ulica između blokova"
+                    "name": "Pristupna ulica između stamb. blokova"
                 },
                 "highway/service/drive-through": {
                     "name": "Provezi-kroz"
@@ -3532,6 +3534,10 @@
                 "shop/paint": {
                     "name": "Prodavaonica boja"
                 },
+                "shop/pastry": {
+                    "name": "Slastičarna",
+                    "terms": "slastice,kolači,kolačarnica,poslastičarna,slastičarnica,deserti,dućan s kolačima,kolač,torte,torta,slastice"
+                },
                 "shop/pawnbroker": {
                     "name": "Zalagaonica"
                 },
@@ -3853,26 +3859,186 @@
                     "text": "Uvjeti i povratne informacije"
                 },
                 "description": "Premium DigitalGlobe satelitske snimke.",
-                "name": "DigitalGlobe Premium fotografije"
+                "name": "DigitalGlobe Premium snimke"
             },
             "DigitalGlobe-Standard": {
                 "attribution": {
                     "text": "Uvjeti i povratne informacije"
                 },
-                "description": "Standard DigitalGlobe satelitske fotografije",
-                "name": "DigitalGlobe Standard fotografije"
+                "description": "Standard DigitalGlobe satelitske snimke.",
+                "name": "DigitalGlobe Standard snimke"
             },
             "MAPNIK": {
                 "attribution": {
                     "text": "© OpenStreetMap doprinositelji, CC-BY-SA"
                 },
-                "description": "Zadani OpenStreetMap podloga",
+                "description": "Zadani OpenStreetMap sloj.",
                 "name": "OpenStreetMap (Standardni)"
             },
             "Mapbox": {
                 "attribution": {
                     "text": "Uvjeti i povratne informacije"
-                }
+                },
+                "description": "Satelitske i zračne snimke.",
+                "name": "Mapbox Satellite"
+            },
+            "New_and_Misaligned_TIGER_Roads-2013": {
+                "description": "Na približenju 16+, podaci karte su iz javne domene US Censusa. Na udaljenijim prikazima, samo promjene od 2006 minus promjene koje su već uključene na OpenStreetMap.  ",
+                "name": "Nove i krivo poravnane TIGER ceste"
+            },
+            "OSM_Inspector-Addresses": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap doprinositelji, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Adrese"
+            },
+            "OSM_Inspector-Geometry": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap doprinositelji, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Geometrija"
+            },
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap doprinositelji, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Ceste"
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap doprinositelji, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Područja"
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap doprinositelji, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Mjesta"
+            },
+            "OSM_Inspector-Routing": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap doprinositelji, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Određivanje rute"
+            },
+            "OSM_Inspector-Tagging": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap doprinositelji, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Označavanje"
+            },
+            "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, podaci karte OpenStreetMap doprinositelji, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Biciklizam"
+            },
+            "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, podaci karte OpenStreetMap doprinositelji, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Planinarenje"
+            },
+            "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, podaci karte OpenStreetMap doprinositelji, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: MTB"
+            },
+            "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, podaci karte OpenStreetMap doprinositelji, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Rolanje"
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© Michael Spreng, CC by-SA 3.0, podaci karte OpenStreetMap doprinositelji, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Zimski sportovi"
+            },
+            "basemap.at": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Osnovna karta Austrije, bazirano na vladinim podacima.",
+                "name": "basemap.at"
+            },
+            "basemap.at-orthofoto": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Ortofoto sloj omogućen od basemap.at. \"Nasljednik\" geoimage.at snimaka.",
+                "name": "basemap.at Ortofoto"
+            },
+            "hike_n_bike": {
+                "attribution": {
+                    "text": "© OpenStreetMap doprinositelji"
+                },
+                "name": "Hike & Bike"
+            },
+            "mapbox_locator_overlay": {
+                "attribution": {
+                    "text": "Uvjeti i povratne informacije"
+                },
+                "description": "Prikazuje sloj glavnih elemenata za lakše orijentiranje na udaljenom prikazu.",
+                "name": "Sloj za lociranje"
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "© OpenStreetMap doprinositelji, CC-BY-SA"
+                },
+                "name": "OpenPT karta (preklop)"
+            },
+            "osm-gps": {
+                "attribution": {
+                    "text": "© OpenStreetMap doprinositelji"
+                },
+                "description": "Javni GNSS tragovi postavljeni na OpenStreetMap.",
+                "name": "OpenStreetMap GNSS tragovi"
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "© OpenStreetMap doprinositelji, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (Standardni Crno Bijelo)"
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "© OpenStreetMap doprinositelji, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (Njemački stil)"
+            },
+            "qa_no_address": {
+                "attribution": {
+                    "text": "Simon Poole, Podaci ©OpenStreetMap doprinositelji"
+                },
+                "name": "QA No Address"
+            },
+            "skobbler": {
+                "attribution": {
+                    "text": "© Sličice: skobbler Podaci karte: OpenStreetMap doprinositelji"
+                },
+                "name": "skobbler"
+            },
+            "stamen-terrain-background": {
+                "attribution": {
+                    "text": "Sličice karte od Stamen Design, pod CC BY 3.0"
+                },
+                "name": "Stamen Terrain"
+            },
+            "tf-cycle": {
+                "attribution": {
+                    "text": "Karte © Thunderforest, Podaci © OpenStreetMap doprinositelji"
+                },
+                "name": "Thunderforest OpenCycleMap"
+            },
+            "tf-landscape": {
+                "attribution": {
+                    "text": "Karte © Thunderforest, Podaci © OpenStreetMap doprinositelji"
+                },
+                "name": "Thunderforest Landscape"
             }
         }
     }

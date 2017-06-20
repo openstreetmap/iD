@@ -813,7 +813,6 @@
                 "title": "Területek",
                 "add_playground": "A *területeket* különféle elemek – pl. tavak, épületek vagy lakóterüetek – határainak megjelölésére használjuk.{br}Arra is használhatók, hogy részletesebben jelenítsünk meg olyan elemeket, amelyeket rendesen esetleg csak pontként rajzolnánk föl. **Egy új terület fölrajzolásához kattints a {button} Terület gombra.**",
                 "start_playground": "Adjuk hozzá ezt a játszóteret a térképhez úgy, hogy rajzolunk belőle egy területet. Területeket úgy rajzolunk, hogy *pontokat* helyezünk el az elem külső pereme mentén. **A kezdő pont elhelyezéséhez kattints vagy üsd le a szóközt a játszótér valamelyik sarkánál.**",
-                "continue_playground": "A terület rajzolását úgy folytathatod, hogy további pontokat teszel a játszótér szélére. Helyes dolog összekapcsolni a területet a meglévő gyalogutakkal.{br}Tipp: Az Alt billentyű lenyomva tartásával megakadályozhatjuk, hogy a pontok más elemekhez kapcsolódjanak. **Folytasd a játszótér területének megrajzolását!**",
                 "finish_playground": "Fejezd be a területet az Enter megnyomásával, vagy újra az első vagy utolsó elemre kattintással. **Fejezd be a játszótér területének megrajzolását.**",
                 "search_playground": "**Keresd meg a következőt: {preset}!**",
                 "choose_playground": "**Válaszd ki a listából a következőt: {preset}.**",
@@ -878,7 +877,6 @@
             },
             "startediting": {
                 "title": "Szerkesztés megkezdése",
-                "help": "Most már készen állsz az OpenStreetMap szerkesztésére!{br}Ezt a bevezető tanfolyamot bármikor újra lejátszhatod, további dokumentációt pedig a {button} Súgó gombra kattintva találsz.",
                 "save": "Ne felejtsd rendszeresen menteni a változtatásaidat!",
                 "start": "Kezdhetsz térképezni!"
             }

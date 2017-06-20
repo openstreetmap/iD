@@ -812,7 +812,6 @@
                 "title": "Plochy",
                 "add_playground": "*Plochy* sa používajú na zobrazovanie hraníc objektov ako jazerá, budovy alebo rezidenčné zóny.{br}Môžu byť tiež použité na detailnejšie mapovanie objektov, ktoré by ste nomálne označili iba bodom. **Kliknite na {button} Plocha a pridajte novú plochu.** ",
                 "start_playground": "Poďme pridať do mapy ihrisko tým, že nakreslíme plochu. Plochy sa kreslia tak, že pridávate *uzly* pozdĺž vonkajšej hrany objektu. **Kliknite alebo stlačte medzerník pre umiestnenie počiatočného uzla na jeden z rohov ihriska.**",
-                "continue_playground": "Pokračujte v kreslení plochy pridávaním ďalších uzlov pozdĺž hrany ihriska. Je poriadku ak spojíte plochu s existujúcimi chodníkmi.{br}Tip: Podržaním klávesu Alt zabránite uzlom v spájaní s ďalšími objektami. **Pokračujte v kreslní plochy inhriska.**",
                 "finish_playground": "Dokončite plochu tým, že stlačíte enter alebo kliknete na prvý alebo posledný uzol. **Dokončite kreslenie plochy ihriska.**",
                 "search_playground": "**Vyhľadajte \"{preset}.**",
                 "choose_playground": "**Vyberte {preset} zo zoznamu.**",
@@ -877,7 +876,6 @@
             },
             "startediting": {
                 "title": "Začať upravovať",
-                "help": "Teraz ste pripravný upravovať OpenStreetMap!{br}Túto prehliadku môžete hocikedy zopakovať alebo si môžete prezrieť dokumentáciu tým, že kliknete na tlačítko {button} Pomoc.",
                 "save": "Nezabudnite pravidelne ukladať vaše zmeny!",
                 "start": "Začnite mapovať!"
             }

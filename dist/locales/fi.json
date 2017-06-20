@@ -124,6 +124,10 @@
                 "part_of_relation": {
                     "single": "Tätä ominaisuutta ei voi poistaa koska se on osa suurempaa kokonaisuutta. Sinun täytyy poistaa sen relaatio.",
                     "multiple": "Näitä ominaisuuksia ei voi poistaa sillä ne ovat osa suurempaa relaatiota. Sinun täytyy ensin poistaa kohde relaatiosta."
+                },
+                "connected_to_hidden": {
+                    "single": "Tätä ominaisuutta ei voi poistaa koska se liitetty piilotettuun ominaisuuteen.",
+                    "multiple": "Näitä ominaisuuksia ei voida poistaa koska jotkut niistä on liitetty piilotettuihin ominaisuuksiin."
                 }
             },
             "add_member": {
@@ -150,7 +154,9 @@
             },
             "merge": {
                 "title": "Sulauta yhteen",
+                "description": "Yhdistä nämä ominaisuudet.",
                 "key": "C",
+                "annotation": "Yhdistetyt ominaisuudet.",
                 "not_eligible": "Näitä ominaisuuksia ei voi sulauttaa yhteen.",
                 "incomplete_relation": "Näitä karttakohteita ei voi yhdistää, koska ainakin yhden lataus on kesken."
             },
@@ -606,7 +612,6 @@
                 "title": "Alueet",
                 "add_playground": "*Alueilla* merkitään esimerkiksi järvien, rakennusten ja asuinalueiden rajoja.{br}Lisäksi paikkapisteet voi yleensä merkitä myös tarkemmin alueina. **Luo uusi alue napsauttamalla {button}-painiketta.**",
                 "start_playground": "Lisää tämä leikkipuisto kartalle piirtämällä alue. Alueet koostuvat alueen ulkoreunaa rajaavista *viivapisteistä*. **Osoita aloituspisteen paikka napsauttamalla kartalla tai painamalla välilyöntiä jossakin leikkipuiston nurkassa.**",
-                "continue_playground": "Jatka alueen piirtämistä sijoittamalla viivapisteitä leikkipuiston reunoille. Napsauta myös leikkipuistoon johtavan polun kohdalla.{br}Vinkki: Voit estää karttakohteen yhdistymisen muihiin kohteisiin pitämällä Alt-painiketta pohjassa. **Jatka leikkipuiston piirtämistä.**",
                 "search_playground": "**Etsi hakusanalla \"{preset}\".**",
                 "choose_playground": "**Valitse {preset} listalta.**",
                 "add_field": "Leikkipuistolla ei ole virallista nimeä, joten ei kirjoiteta Nimi-kenttään mitään.{br}Lisää sen sijaan leikkipuiston tietoja Kuvaus-kenttään. **Avaa Lisää kenttä -pudotusluettelo.**",

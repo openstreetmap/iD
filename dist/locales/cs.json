@@ -812,7 +812,6 @@
                 "title": "Plochy",
                 "add_playground": "*Plochy* používáme pro hranice budov, lesů, jezer apod.{br}\nOvšem také jimi můžeme detailně zakreslit prvky, které by normálně byly body.\n**Přidejte plochu tlačítkem {button} Plocha**",
                 "start_playground": "Pojďme přidat toto dětské hřiště. Plochu vytvoříte naklikáním bodů okolo.\n**Začněte kliknutím do rohu**",
-                "continue_playground": "Pokračujte přidáváním bodů do rohů hřiště. {br}\nPlochu můžete spojit s existující pěšinou. (Pokud tomu naopak chcete zabránit držte klávesu Alt)\n**Přidejte další body**",
                 "finish_playground": "Dokončete plochu kliknutím na první či poslední bod (též lze klávesou Enter).\n**Dokončete obrys hřšitě.**",
                 "search_playground": "**Vyhledejte '{preset}'.**",
                 "choose_playground": "**Zvolte {preset}.**",
@@ -877,7 +876,6 @@
             },
             "startediting": {
                 "title": "Začít s editací",
-                "help": "Nyní jste připraveni editovat OpenStreetMap!{br}Tuto prohlídku si můžete kdykoliv znovu přehrát nebo se podívejte na další dokumentaci stisknutím {button} tlačítka Nápověda.",
                 "save": "Nezapomeňte pravidelně ukládat své úpravy!",
                 "start": "Začít mapovat!"
             }

@@ -349,6 +349,7 @@
             "truncated_list": "由 {users} 與另外 {count} 人編輯"
         },
         "infobox": {
+            "key": "I",
             "selected": "{n} 被選擇",
             "geometry": "幾何",
             "closed": "已關閉",
@@ -423,6 +424,7 @@
         "background": {
             "title": "背景",
             "description": "背景圖像設定",
+            "key": "B",
             "percent_brightness": "{opacity}%的亮度",
             "none": "無",
             "best_imagery": "這個地點已知最佳的影像來源",
@@ -436,12 +438,14 @@
             "offset": "在灰色區域內拖拉調整影像偏移，或是輸入偏移公尺數。",
             "minimap": {
                 "description": "小地圖",
-                "tooltip": "顯示縮小的地圖幫助你確認所在區域的位置"
+                "tooltip": "顯示縮小的地圖幫助你確認所在區域的位置",
+                "key": "/"
             }
         },
         "map_data": {
             "title": "地圖圖資",
             "description": "地圖圖資",
+            "key": "F",
             "data_layers": "資料圖層",
             "fill_area": "填充選項",
             "map_features": "地圖圖徵",
@@ -500,7 +504,8 @@
         "area_fill": {
             "wireframe": {
                 "description": "不填充 (線條顯示)",
-                "tooltip": "啟用線框模式，可以很容易地看到背景圖像。"
+                "tooltip": "啟用線框模式，可以很容易地看到背景圖像。",
+                "key": "W"
             },
             "partial": {
                 "description": "部分填充",
@@ -625,6 +630,7 @@
         },
         "help": {
             "title": "說明文件",
+            "key": "H",
             "help": "# 說明\n\n這是[開放街圖](http://www.openstreetmap.org/)的編輯器。\n開放街圖是自由及可編輯的世界地圖。您可以用這個編輯器來添加和更新您所在區域的地圖資料，令這個開源和開放資料的世界地圖變得更好。\n\n您在地圖上所做的編輯，將會讓所有使用開放街圖的人看到。為了編輯，您需要先[登入](https://www.openstreetmap.org/login)。\n\n[iD編輯器](http://ideditor.com/) 採用開源方式合作開發的專案， [原始碼可在GitHub找到](https://github.com/openstreetmap/iD)。\n",
             "editing_saving": "# 編輯和儲存\n\n這個編輯器設計上主要為了在線上運作，現在你正透過網路連線。\n\n### 選擇圖徵\n\n要選擇圖徵，像是道路或是興趣點，請點一下地圖。\n這會高亮度顯示選擇的圖徵，並且開啟有詳細資訊的面版，\n顯示所有你能對圖徵做的動作。\n要選擇多個圖徵，你必須按住'Shift'鍵。\n接著按你想選擇的圖徵，或是拖拉地圖來畫出長方形。\n這樣做會畫出方框選擇所有在範圍裡的點。\n\n### 儲存編輯\n\n當你編輯道路、建築和地方等變動時，\n這些資料會儲存在本地空間，直到你上傳到伺服器。\n不要擔心你可能會犯錯，你可以按復原按鈕恢復變動，\n以及按重覆按鍵重覆動作。\n\n按'儲存'結束這一串編輯 - 舉例來說，\n如果你完成繪製城鎮裡的一區，想要開始畫新的一區。你有機會回顧先前你做的事情，而編輯器提供有用的建議，\n而且如果出錯時會警告。\n\n如果所有東西都看起來都好的時候，你可以輸入簡短的評論，解釋你的變動，\n接著再次按'儲存'輸出變動到[OpenStreetMap.org](http://www.openstreetmap.org/)，\n之後會讓大家都看得到，並且繼續繪製和改進。\n如果你無法在一次的時間裡完成編輯，你可以關係編輯器視窗，之後再回來 (相同瀏覽器和電腦)，\n編輯器程式會詢問你是否恢復你的工作。\n\n### 使用編輯器\n\n你可以按 `?`顯示鍵盤快速鍵清單。\n",
             "roads": "# 道路\n\n您可以利用這個編輯器創建，修復，及刪除道路。道路可以有很多種：行人路徑，公路，步道，單車路線等等 － 任何經常使用的路段都可製圖。\n\n### 選擇道路\n\n按圖上的道路以選擇該道路。道路的輪廓會以高亮度顯示，而同時地圖上會出現小工具選單，旁邊亦會彈出面板，顯示有關該道路的資訊。\n\n### 修改道路\n\n您或會經常注意到，道路並非對齊在背景中顯示的衛星圖像或GPS軌跡。您可以調整這些道路，讓他們位於正確的位置。\n\n首先，按您想修訂的道路。這會將道路以高亮度顯示，並顯示沿著這道路的節點，你可以拖曳這些節點到更好的位置。如果您想增加細節，可以為道路添加新的節點，點擊兩下道路上沒有節點的部分，便可在該處増加節點。\n\n如果道路連接到另一條道路，但在地圖上並未妥善連接，你可以拖曳道路的其中一個節點到另一條道路上，以連接兩條道路。連接好道路，對地圖非常重要，特別是對提供駕駛指示的應用程序而言，是必要的。\n\n您也可以按下'移動'工具或按`M`快速鍵，來移動整條道路，然後按一下以完成移動的動作。\n\n### 刪除道路\n\n如果一條道路完全不正確 － 您看到它在衛星圖像上不存在，並最好實地證實它根本不存在 － 您可以將道路刪除，這會從地圖中將之移除。刪除物件時務必要小心 － 像任何其他的編輯，結果會被大家看見，而衛星圖像往往會過時，因此該道路或許只是新建的。\n\n要刪除道路，您可以按住它以選擇，然後按下垃圾桶圖標，或按 ’Delete’ 鍵。\n\n### 繪製新道路\n\n發現某處應有一條道路，但地圖上沒有？按編輯器左上方的'線'按鈕，或按下`2`快速鍵，以開始繪製線段。\n\n在地圖上點擊道路的開端，以開始繪製道路。如果道路從一條現有的道路分支出來，應點擊兩者連接的地方，以開始繪製。\n\n然後按住沿著道路的點，以根據衛星影像或GPS軌跡，正確地繪製道路。如果您繪製的道路如果與另一條道路交匯，請點擊相交點以將它們連接起來。當您完成繪製後，可按兩下滑鼠或按鍵盤上的 'Return' 或 ’Enter’ 鍵。\n\n",
@@ -813,7 +819,7 @@
                 "title": "區域",
                 "add_playground": "*區域*可以用來顯示圖徵邊界，常用在表示湖泊、建築和住宅區。 {br}。另外區域也可以用在更詳盡的畫地圖上面，取代先前只有節點表示的圖徵。**點{button}區域按鈕來新增區域。**",
                 "start_playground": "讓我們用畫區域的方式來新增遊樂場吧。區域是由增加圖徵邊界的*節點*來繪製。**點或是按空白鍵在遊樂場邊角標上初始節點。**",
-                "continue_playground": "繼續在遊樂場邊界標上更多節點來繪製區域。如果遇到既有的人行道，你也可以將區域連接到人行道上。{br}小技巧：你可以按住Alt鍵防止節點連到其他圖徵。**繼續繪製遊樂場區域。**",
+                "continue_playground": "繼續在遊樂場邊界標上更多節點來繪製區域。如果遇到既有的人行道，你也可以將區域連接到人行道上。{br}小技巧：你可以按住 '{alt}' 鍵防止節點連到其他圖徵。 **繼續繪製遊樂場區域。** ",
                 "finish_playground": "按enter鏈或是按第一個或最後一個節點完成編輯。**完成遊樂場區域繪製**",
                 "search_playground": "**搜尋'{preset}'。**",
                 "choose_playground": "**從清單選擇{preset}**",
@@ -878,7 +884,8 @@
             },
             "startediting": {
                 "title": "開始編輯",
-                "help": "你現在準備好可以來編輯開放街圖了！ {br}你可以再看一次新手教學，或者按下 {button} 幫助按鈕看更多使用說明。",
+                "help": "你現在準備好可以來編輯開放街圖了！ {br}你可以再看一次新手教學，或者按下 {button} 說明按鈕或 '{key}' 鍵看更多使用說明。 ",
+                "shortcuts": "您可以透過按下 '{key}' 鍵來檢視指令與它們的快捷鍵的清單。",
                 "save": "不要忘記定時儲存您的編輯！",
                 "start": "開始製圖！"
             }
@@ -886,6 +893,9 @@
         "shortcuts": {
             "title": "鍵盤快速鍵",
             "tooltip": "顯示鍵盤快速鍵畫面",
+            "toggle": {
+                "key": "?"
+            },
             "key": {
                 "alt": "Alt",
                 "backspace": "Backspace",
@@ -5072,6 +5082,184 @@
                     "name": "水壩",
                     "terms": "堰堤"
                 }
+            }
+        },
+        "imagery": {
+            "Bing": {
+                "description": "衛星與空照圖",
+                "name": "Bing 空照圖"
+            },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "使用條款與意見回饋"
+                },
+                "description": "Premium DigitalGlobe 衛星圖",
+                "name": "DigitalGlobe Premium 空照圖"
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "使用條款與意見回饋"
+                },
+                "description": "Standard DigitalGlobe 衛星圖",
+                "name": "DigitalGlobe Standard 空照圖"
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "© OpenStreetMap 貢獻者，CC-BY-SA"
+                },
+                "description": "預設的 OpenStreetMap 圖層",
+                "name": "OpenStreetMap（標準）"
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "使用條款與意見回饋"
+                },
+                "description": "衛星與空照圖",
+                "name": "Mapbox 衛星圖"
+            },
+            "New_and_Misaligned_TIGER_Roads-2013": {
+                "description": "在縮放等級 16 以上的資料是從美國人口普查局的公眾領域圖資取得的。較低縮放等級的則僅有自2006年開放街圖刪除部份不合授權條款的資料後併入開放街圖的資料",
+                "name": "新的且並未對齊的 TIGER 道路"
+            },
+            "OSM_Inspector-Addresses": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap 貢獻者，CC-BY-SA"
+                },
+                "name": "OSM 檢查器：地址"
+            },
+            "OSM_Inspector-Geometry": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap 貢獻者，CC-BY-SA"
+                },
+                "name": "OSM 檢查器：幾何"
+            },
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap 貢獻者，CC-BY-SA"
+                },
+                "name": "OSM 檢查器：道路"
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap 貢獻者，CC-BY-SA"
+                },
+                "name": "OSM 檢查器：區域"
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap 貢獻者，CC-BY-SA"
+                },
+                "name": "OSM 檢查器：地區"
+            },
+            "OSM_Inspector-Routing": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap 貢獻者，CC-BY-SA"
+                },
+                "name": "OSM 檢查器：路徑"
+            },
+            "OSM_Inspector-Tagging": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap 貢獻者，CC-BY-SA"
+                },
+                "name": "OSM 檢查器：標籤"
+            },
+            "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0，圖資：OpenStreetMap 貢獻者, ODbL 1.0"
+                },
+                "name": "小徑標示：自行車"
+            },
+            "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0，圖資：OpenStreetMap 貢獻者, ODbL 1.0"
+                },
+                "name": "小徑標示：健行"
+            },
+            "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0，圖資：OpenStreetMap 貢獻者, ODbL 1.0"
+                },
+                "name": "小徑標示：MTB"
+            },
+            "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0，圖資：OpenStreetMap 貢獻者, ODbL 1.0"
+                },
+                "name": "小徑標示：溜冰"
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© Michael Spreng, CC by-SA 3.0，圖資：OpenStreetMap 貢獻者, ODbL 1.0"
+                },
+                "name": "小徑標示：冬季運動"
+            },
+            "hike_n_bike": {
+                "attribution": {
+                    "text": "© OpenStreetMap 貢獻者"
+                },
+                "name": "健行與自行車"
+            },
+            "mapbox_locator_overlay": {
+                "attribution": {
+                    "text": "使用條款與意見回饋"
+                },
+                "description": "顯示主要的圖徽以協助您定位。",
+                "name": "定位器覆蓋層"
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "© OpenStreetMap 貢獻者，CC-BY-SA"
+                },
+                "name": "OpenPT 地圖（覆蓋層）"
+            },
+            "osm-gps": {
+                "attribution": {
+                    "text": "© OpenStreetMap 貢獻者"
+                },
+                "description": "上傳至開放街圖的公開 GPS 軌跡。",
+                "name": "OpenStreetMap GPS 軌跡"
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "© OpenStreetMap 貢獻者，CC-BY-SA"
+                },
+                "name": "OpenStreetMap（標準黑與白）"
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "© OpenStreetMap 貢獻者，CC-BY-SA"
+                },
+                "name": "OpenStreetMap（德國樣式）"
+            },
+            "qa_no_address": {
+                "attribution": {
+                    "text": "Simon Poole，資料 ©OpenStreetMap 貢獻者"
+                },
+                "name": "QA 無地址"
+            },
+            "skobbler": {
+                "attribution": {
+                    "text": "© 圖磚：skobbler 圖資：OpenStreetMap 貢獻者"
+                },
+                "name": "skobbler"
+            },
+            "stamen-terrain-background": {
+                "attribution": {
+                    "text": "Stamen 設計的圖磚，以 CC-BY 3.0 授權"
+                },
+                "name": "Stamen Terrain"
+            },
+            "tf-cycle": {
+                "attribution": {
+                    "text": "地圖 © Thunderforest，資料 © OpenStreetMap 貢獻者"
+                },
+                "name": "Thunderforest OpenCycleMap"
+            },
+            "tf-landscape": {
+                "attribution": {
+                    "text": "地圖 © Thunderforest，資料 © OpenStreetMap 貢獻者"
+                },
+                "name": "Thunderforest Landscape"
             }
         }
     }

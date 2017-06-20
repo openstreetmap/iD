@@ -812,7 +812,6 @@
                 "title": "Områder",
                 "add_playground": "*Områder* bruges til at vise omridset af objekter som søer, bygninger og boligområder. {br}De kan også bruges til mere detaljeret kortlægning af mange af de objekter som man ellers normalt ville bruge punkter til. **Tilføj et ny område ved at klikke på {button} Område-knappen.**",
                 "start_playground": "Lad os tilføje denne legeplads til kortet ved at optegne et område. Områder tegnes ved at placere *noder* langs objektets ydre kant. **Klik eller tast mellemrum for at placere den første node i et at legepladsens hjørner.**",
-                "continue_playground": "Fortsæt med at optegne området ved at placere flere noder langs legepladsens kant. Det er fint at forbinde området til de eksisterende stier.{br}Tip: Hvis du holder Alt-knappen ned forbindes noden ikke til andre objekter. **Fortsæt med at optegne legepladsens område.**",
                 "finish_playground": "Afslut området ved at taste retur, eller klikke igen på enten den første eller den sidste node. **Afslut optegningen af legepladsens område.**",
                 "search_playground": "**Søg efter '{preset}'.**",
                 "choose_playground": "**Vælg {preset} fra listen.**",
@@ -877,7 +876,6 @@
             },
             "startediting": {
                 "title": "Start redigering",
-                "help": "Du er nu klar til at redigere OpenStreetMap!{br}Du kan vende tilbage til denne gennemgang når du har lyst eller se mere dokumentation, ved at klikke på {button} Hjælp-knappen.",
                 "save": "Glem ikke regelmæssigt at gemme dine ændringer!",
                 "start": "Start kortlægning!"
             }
