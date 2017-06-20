@@ -31,12 +31,14 @@ export function rendererBackgroundSource(data) {
 
 
     source.name = function() {
-        return t('imagery.' + source.id + '.name', { default: name });
+        var id_safe = source.id.replace('.', '<TX_DOT>');
+        return t('imagery.' + id_safe + '.name', { default: name });
     };
 
 
     source.description = function() {
-        return t('imagery.' + source.id + '.description', { default: description });
+        var id_safe = source.id.replace('.', '<TX_DOT>');
+        return t('imagery.' + id_safe + '.description', { default: description });
     };
 
 

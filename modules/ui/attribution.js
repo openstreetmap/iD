@@ -44,7 +44,8 @@ export function uiAttribution(context) {
                 }
 
 
-                var terms_text = t('imagery.' + d.id + '.attribution.text',
+                var id_safe = d.id.replace('.', '<TX_DOT>');
+                var terms_text = t('imagery.' + id_safe + '.attribution.text',
                     { default: d.terms_text || d.id || d.name() }
                 );
 
