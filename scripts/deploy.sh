@@ -29,7 +29,7 @@ fi
 
 # pull latest imagery
 rm -rf node_modules/editor-layer-index/
-git clone https://github.com/osmlab/editor-layer-index.git node_modules/editor-layer-index > /dev/null
+git clone https://github.com/osmlab/editor-layer-index.git node_modules/editor-layer-index > /dev/null 2>&1
 
 # build everything
 npm run imagery
