@@ -19,7 +19,7 @@ in the hash portion of the URL:
   where the URL can contain the standard tile URL placeholders `{x}`, `{y}` and
   `{z}`/`{zoom}`, `{ty}` for flipped TMS-style Y coordinates, and `{switch:a,b,c}` for
   DNS multiplexing.  Example:
-  `background=custom:http://{switch:a,b,c}.tiles.mapbox.com/v4/examples.map-4l7djmvo/{z}/{x}/{y}.png`
+  `background=custom:https://{switch:a,b,c}.tiles.mapbox.com/v4/examples.map-4l7djmvo/{zoom}/{x}/{y}.png`
 * `gpx` - A custom URL for loading a gpx track.  Specifying a `gpx` parameter will
   automatically enable the gpx layer for display.  Example:
   `gpx=https://tasks.hotosm.org/project/592/task/16.gpx`
