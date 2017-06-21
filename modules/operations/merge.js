@@ -22,7 +22,7 @@ export function operationMerge(selectedIDs, context) {
         var oldPreset = context.presets().match(oldEntity, oldGraph),
             newPreset = context.presets().match(newEntity, newGraph);
 
-        context.replace(actionChangePreset(id, oldPreset, newPreset));
+        context.replace(actionChangePreset(id, oldPreset, newPreset), operation.annotation());
     }
 
 
