@@ -12,17 +12,15 @@ import { modeSelect } from '../modes';
 
 export function operationMerge(selectedIDs, context) {
 
-    function updatePresetTags(oldGraph, newGraph, ids) {
+    function updatePresetTags(newGraph, ids) {
         var id = ids[0],
-            oldEntity = oldGraph.hasEntity(id),
             newEntity = newGraph.hasEntity(id);
 
-        if (!oldEntity || !newEntity) return;
+        if (!newEntity) return;
 
-        var oldPreset = context.presets().match(oldEntity, oldGraph),
-            newPreset = context.presets().match(newEntity, newGraph);
+        var newPreset = context.presets().match(newEntity, newGraph);
 
-        context.replace(actionChangePreset(id, oldPreset, newPreset), operation.annotation());
+        context.replace(actionChangePreset(id, null, newPreset), operation.annotation());
     }
 
 
@@ -50,9 +48,9 @@ export function operationMerge(selectedIDs, context) {
             return entity && entity.type !== 'node';
         });
 
-        // if we merged tags, rematch preset and update tags if necessary (#3851)
+        // if we merged tags, rematch preset to update tags if necessary (#3851)
         if (action === merge) {
-            updatePresetTags(origGraph, context.graph(), ids);
+            updatePresetTags(context.graph(), ids);
         }
 
         context.enter(modeSelect(context, ids));
