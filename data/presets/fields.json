@@ -855,6 +855,11 @@
             "type": "combo",
             "label": "Curb"
         },
+        "label": {
+            "key": "label",
+            "type": "textarea",
+            "label": "Label"
+        },
         "lamp_type": {
             "key": "lamp_type",
             "type": "combo",
@@ -962,6 +967,11 @@
         },
         "man_made": {
             "key": "man_made",
+            "type": "typeCombo",
+            "label": "Type"
+        },
+        "manhole": {
+            "key": "manhole",
             "type": "typeCombo",
             "label": "Type"
         },

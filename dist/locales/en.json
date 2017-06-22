@@ -1568,6 +1568,9 @@
                 "kerb": {
                     "label": "Curb"
                 },
+                "label": {
+                    "label": "Label"
+                },
                 "lamp_type": {
                     "label": "Type"
                 },
@@ -1637,6 +1640,9 @@
                     "label": "Location"
                 },
                 "man_made": {
+                    "label": "Type"
+                },
+                "manhole": {
                     "label": "Type"
                 },
                 "map_size": {
@@ -3961,6 +3967,14 @@
                 "man_made/works": {
                     "name": "Factory",
                     "terms": "assembly,build,brewery,car,plant,plastic,processing,manufacture,refinery"
+                },
+                "manhole": {
+                    "name": "Manhole",
+                    "terms": "cover,hole,sewer,sewage,telecom"
+                },
+                "manhole/drain": {
+                    "name": "Storm Drain",
+                    "terms": "cover,drain,hole,rain,sewer,sewage,storm"
                 },
                 "natural": {
                     "name": "Natural",

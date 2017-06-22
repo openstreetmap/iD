@@ -614,6 +614,9 @@ en:
       kerb:
         # kerb=*
         label: Curb
+      label:
+        # label=*
+        label: Label
       lamp_type:
         # lamp_type=*
         label: Type
@@ -698,6 +701,9 @@ en:
         label: Location
       man_made:
         # man_made=*
+        label: Type
+      manhole:
+        # manhole=*
         label: Type
       map_size:
         # map_size=*
@@ -3308,6 +3314,16 @@ en:
         name: Factory
         # 'terms: assembly,build,brewery,car,plant,plastic,processing,manufacture,refinery'
         terms: '<translate with synonyms or related terms for ''Factory'', separated by commas>'
+      manhole:
+        # manhole=*
+        name: Manhole
+        # 'terms: cover,hole,sewer,sewage,telecom'
+        terms: '<translate with synonyms or related terms for ''Manhole'', separated by commas>'
+      manhole/drain:
+        # manhole=drain
+        name: Storm Drain
+        # 'terms: cover,drain,hole,rain,sewer,sewage,storm'
+        terms: '<translate with synonyms or related terms for ''Storm Drain'', separated by commas>'
       natural:
         # natural=*
         name: Natural

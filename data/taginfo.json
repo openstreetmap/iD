@@ -1778,6 +1778,13 @@
             "value": "works"
         },
         {
+            "key": "manhole"
+        },
+        {
+            "key": "manhole",
+            "value": "drain"
+        },
+        {
             "key": "natural"
         },
         {
