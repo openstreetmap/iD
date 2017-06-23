@@ -111,7 +111,7 @@ export function uiBackground(context) {
 
         function editCustom() {
             d3.event.preventDefault();
-            var example = 'https://tile.openstreetmap.org/{zoom}/{x}/{y}.png';
+            var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
             var template = window.prompt(t('background.custom_prompt', { example: example }), customTemplate);
             if (template) {
                 setCustom(template);
