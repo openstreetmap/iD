@@ -37,7 +37,7 @@ export function behaviorHash(context) {
         var center = map.center(),
             zoom = map.zoom(),
             precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2)),
-            q = _.omit(utilStringQs(window.location.hash.substring(1)), 'comment'),
+            q = _.omit(utilStringQs(window.location.hash.substring(1)), ['comment', 'walkthrough']),
             newParams = {};
 
         delete q.id;
@@ -87,16 +87,27 @@ export function behaviorHash(context) {
             .on('hashchange.hash', hashchange);
 
         if (window.location.hash) {
+
             var q = utilStringQs(window.location.hash.substring(1));
+
             if (q.id) {
                 context.zoomToEntity(q.id.split(',')[0], !q.map);
             }
+
             if (q.comment) {
                 context.storage('comment', q.comment);
                 context.storage('commentDate', Date.now());
             }
+
+            if (q.walkthrough) {
+                hash.startWalkthrough = true;
+            }
+
             hashchange();
-            if (q.map) hash.hadHash = true;
+
+            if (q.map) {
+                hash.hadHash = true;
+            }
         }
     }
 

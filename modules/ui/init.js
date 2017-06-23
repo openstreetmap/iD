@@ -17,6 +17,7 @@ import { uiFullScreen } from './full_screen';
 import { uiGeolocate } from './geolocate';
 import { uiHelp } from './help';
 import { uiInfo } from './info';
+import { uiIntro } from './intro';
 import { uiLoading } from './loading';
 import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
@@ -282,9 +283,13 @@ export function uiInit(context) {
         context.enter(modeBrowse(context));
 
         if (!uiInitCounter++) {
+            if (!hash.startWalkthrough) {
+                context.container()
+                    .call(uiSplash(context))
+                    .call(uiRestore(context));
+            }
+
             context.container()
-                .call(uiSplash(context))
-                .call(uiRestore(context))
                 .call(uiShortcuts(context));
         }
 
@@ -302,6 +307,11 @@ export function uiInit(context) {
             });
 
         uiInitCounter++;
+
+        if (hash.startWalkthrough) {
+            hash.startWalkthrough = false;
+            context.container().call(uiIntro(context));
+        }
     }
 
 

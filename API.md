@@ -28,6 +28,8 @@ in the hash portion of the URL:
 * `comment` - Prefills the changeset comment box, for use when integrating iD with
   external task management or quality assurance tools.  Example:
   `comment=CAR%20crisis%2C%20refugee%20areas%20in%20Cameroon%20%23hotosm-task-592`.
+* `rtl=true` - Force iD into right-to-left mode (useful for testing).
+* `walkthrough=true` - Start the walkthrough automatically
 
 ##### iD on openstreetmap.org (Rails Port)
 
@@ -42,6 +44,7 @@ are available as regular URL query parameters:
 * `gpx` - same as standalone
 * `offset` - same as standalone
 * `comment` - same as standalone
+* `walkthrough` - same as standalone
 
 
 ## CSS selectors
