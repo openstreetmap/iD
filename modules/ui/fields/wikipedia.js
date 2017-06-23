@@ -138,13 +138,13 @@ export function uiFieldWikipedia(field, context) {
         var value = utilGetSetValue(title),
             m = value.match(/https?:\/\/([-a-z]+)\.wikipedia\.org\/(?:wiki|\1-[-a-z]+)\/([^#]+)(?:#(.+))?/),
             l = m && _.find(dataWikipedia, function(d) { return m[1] === d[2]; }),
-            anchor,
             syncTags = {};
 
         if (l) {
             // Normalize title http://www.mediawiki.org/wiki/API:Query#Title_normalization
             value = decodeURIComponent(m[2]).replace(/_/g, ' ');
             if (m[3]) {
+                var anchor;
                 try {
                     // Best-effort `anchordecode:` implementation
                     anchor = decodeURIComponent(m[3].replace(/\.([0-9A-F]{2})/g, '%$1'));
@@ -158,8 +158,10 @@ export function uiFieldWikipedia(field, context) {
             utilGetSetValue(title, value);
         }
 
-        syncTags.wikipedia = value ? language()[2] + ':' + value : undefined;
-        if (!skipWikidata) {
+        if (value) {
+            syncTags.wikipedia = language()[2] + ':' + value;
+        } else {
+            syncTags.wikipedia = undefined;
             syncTags.wikidata = undefined;
         }
 
@@ -169,34 +171,29 @@ export function uiFieldWikipedia(field, context) {
         if (skipWikidata || !value || !language()[2]) return;
 
         // attempt asynchronous update of wikidata tag..
-        var initEntityId = entity.id,
-            initWikipedia = context.entity(initEntityId).tags.wikipedia;
+        var initGraph = context.graph(),
+            initEntityId = entity.id;
 
         wikidata.itemsByTitle(language()[2], value, function(title, data) {
+            // If graph has changed, we can't apply this update.
+            if (context.graph() !== initGraph) return;
+
             if (!data || !Object.keys(data).length) return;
+
             var qids = Object.keys(data);
+            var value = qids && _.find(qids, function(id) { return id.match(/^Q\d+$/); });
+            var currTags = _.clone(context.entity(initEntityId).tags);
 
-            // 1. most recent change was a tag change
-            var annotation = t('operations.change_tags.annotation'),
-                currAnnotation = context.history().undoAnnotation();
-            if (currAnnotation !== annotation) return;
+            currTags.wikidata = value;
 
-            // 2. same entity exists and still selected
-            var selectedIds = context.selectedIDs(),
-                currEntityId = selectedIds.length > 0 && selectedIds[0];
-            if (currEntityId !== initEntityId) return;
+            // Coalesce the update of wikidata tag into the previous tag change
+            context.overwrite(
+                actionChangeTags(initEntityId, currTags),
+                context.history().undoAnnotation()
+            );
 
-            // 3. wikipedia value has not changed
-            var currTags = _.clone(context.entity(currEntityId).tags);
-            if (initWikipedia !== currTags.wikipedia) return;
-
-            // ok to coalesce the update of wikidata tag into the previous tag change
-            currTags.wikidata = qids && _.find(qids, function(id) {
-                return id.match(/^Q\d+$/);
-            });
-
-            context.overwrite(actionChangeTags(currEntityId, currTags), annotation);
-            dispatch.call('change', this, currTags);
+            // do not dispatch.call('change') here, because entity_editor
+            // changeTags() is not intended to be called asynchronously
         });
     }
 
