@@ -9859,6 +9859,12 @@
                 "vertex",
                 "area"
             ],
+            "terms": [
+                "hydro",
+                "solar",
+                "turbine",
+                "wind"
+            ],
             "tags": {
                 "power": "generator"
             },

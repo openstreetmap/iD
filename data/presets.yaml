@@ -3620,6 +3620,7 @@ en:
       power/generator:
         # power=generator
         name: Power Generator
+        # 'terms: hydro,solar,turbine,wind'
         terms: '<translate with synonyms or related terms for ''Power Generator'', separated by commas>'
       power/line:
         # power=line

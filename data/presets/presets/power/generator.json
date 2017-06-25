@@ -11,12 +11,12 @@
         "vertex",
         "area"
     ],
-    "terms": {
+    "terms": [
         "hydro",
         "solar",
         "turbine",
         "wind"
-    },
+    ],
     "tags": {
         "power": "generator"
     },

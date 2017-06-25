@@ -4246,7 +4246,7 @@
                 },
                 "power/generator": {
                     "name": "Power Generator",
-                    "terms": ""
+                    "terms": "hydro,solar,turbine,wind"
                 },
                 "power/line": {
                     "name": "Power Line",
