@@ -350,17 +350,21 @@
         },
         "infobox": {
             "key": "I",
-            "selected": "{n} selected",
-            "geometry": "Geometry",
-            "closed": "closed",
-            "center": "Center",
-            "perimeter": "Perimeter",
-            "length": "Length",
-            "area": "Area",
-            "centroid": "Centroid",
-            "location": "Location",
-            "metric": "Metric",
-            "imperial": "Imperial"
+            "measurement": {
+                "key": "M",
+                "title": "Measurement",
+                "selected": "{n} selected",
+                "geometry": "Geometry",
+                "closed": "closed",
+                "center": "Center",
+                "perimeter": "Perimeter",
+                "length": "Length",
+                "area": "Area",
+                "centroid": "Centroid",
+                "location": "Location",
+                "metric": "Metric",
+                "imperial": "Imperial"
+            }
         },
         "geometry": {
             "point": "point",

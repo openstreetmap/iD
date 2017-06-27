@@ -81,10 +81,7 @@ export function uiInit(context) {
             .call(map);
 
         content
-            .call(uiMapInMap(context));
-
-        content
-            .append('div')
+            .call(uiMapInMap(context))
             .call(uiInfo(context));
 
         bar

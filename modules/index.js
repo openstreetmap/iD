@@ -11,6 +11,7 @@ export * from './renderer/index';
 export * from './services/index';
 export * from './svg/index';
 export * from './ui/fields/index';
+export * from './ui/info/index';
 export * from './ui/intro/index';
 export * from './ui/index';
 export * from './util/index';
