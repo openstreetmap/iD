@@ -192,6 +192,7 @@ export function uiInfoMeasurement(context) {
                 .on('click', function() {
                     d3.event.preventDefault();
                     isImperial = !isImperial;
+                    lastLength = null;   // force redraw
                     selection.call(redraw);
                 });
 
