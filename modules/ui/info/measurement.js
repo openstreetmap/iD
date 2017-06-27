@@ -11,7 +11,8 @@ import {
 
 
 export function uiInfoMeasurement(context) {
-    var isImperial = (utilDetect().locale.toLowerCase() === 'en-us');
+    var isImperial = (utilDetect().locale.toLowerCase() === 'en-us'),
+        lastLength, lastSingular;
 
 
     function radiansToMeters(r) {
@@ -116,6 +117,10 @@ export function uiInfoMeasurement(context) {
             singular = selected.length === 1 ? selected[0] : null,
             extent = geoExtent(),
             entity;
+
+        if (selected.length === lastLength && singular === lastSingular) return;  // no change
+        lastLength = selected.length;
+        lastSingular = singular;
 
         selection.html('');
 

@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
+import { svgIcon } from '../svg/index';
 import { uiCmd } from './cmd';
 import { uiInfoWidgets } from './info/index';
 
@@ -33,7 +34,10 @@ export function uiInfo(context) {
 
 
         function toggle(setCurrent) {
-            current = setCurrent || current;
+            if (setCurrent && current !== setCurrent) {
+                current = setCurrent;
+                return;
+            }
 
             if (d3.event) {
                 d3.event.preventDefault();
@@ -75,21 +79,29 @@ export function uiInfo(context) {
             .merge(infobox);
 
 
-        var containers = infobox.selectAll('.widget-container')
+        var container = infobox.selectAll('.widget-container')
             .data(ids);
 
-        containers.exit()
+        container.exit()
             .remove();
 
-        var enter = containers.enter()
+        var enter = container.enter()
             .append('div')
             .attr('class', function(d) { return 'widget-container widget-container-' + d; });
 
-        enter
+        var title = enter
             .append('div')
-            .attr('class', 'widget-title fillD2')
+            .attr('class', 'widget-title fillD2');
+
+        title
             .append('h3')
             .text(function(d) { return widgets[d].title; });
+
+        title
+            .append('button')
+            .attr('class', 'close')
+            .on('click', function () { if (!isHidden) toggle(); })
+            .call(svgIcon('#icon-close'));
 
         enter
             .append('div')

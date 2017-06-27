@@ -2660,6 +2660,23 @@ img.tile-removing {
     padding: 5px 10px;
 }
 
+.widget-title h3 {
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+.widget-title button.close {
+    float: right;
+    height: 20px;
+    background: none;
+    color: white;
+}
+
+.widget-title button.close .icon {
+    height: 20px;
+    width: 16px;
+}
+
 .widget-content-measurement .measurement-heading {
     display: block;
     border-radius: 4px 0 0 0;
