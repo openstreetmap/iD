@@ -109,8 +109,7 @@ export function uiInfoMeasurement(context) {
 
 
     function redraw(selection) {
-
-        // check if visible
+        if (d3.selectAll('.infobox.hide').size()) return;   // infobox is hidden
 
         var resolver = context.graph(),
             selected = _.filter(context.selectedIDs(), function(e) { return context.hasEntity(e); }),
@@ -122,7 +121,7 @@ export function uiInfoMeasurement(context) {
 
         selection
             .append('h4')
-            .attr('class', 'infobox-heading fillD')
+            .attr('class', 'measurement-heading')
             .text(singular || t('infobox.measurement.selected', { n: selected.length }));
 
         if (!selected.length) return;
@@ -188,7 +187,7 @@ export function uiInfoMeasurement(context) {
                 .on('click', function() {
                     d3.event.preventDefault();
                     isImperial = !isImperial;
-                    redraw();
+                    selection.call(redraw);
                 });
 
         } else {
@@ -206,13 +205,7 @@ export function uiInfoMeasurement(context) {
 
 
 
-    var widget = {};
-
-    widget.id = 'measurement';
-    widget.title = t('infobox.measurement.title');
-    widget.key = t('infobox.measurement.key');
-
-    widget.redraw = function(selection) {
+    var widget = function(selection) {
         selection.call(redraw);
 
         context.map()
@@ -220,6 +213,16 @@ export function uiInfoMeasurement(context) {
                 selection.call(redraw);
             });
     };
+
+    widget.off = function() {
+        context.map()
+            .on('drawn.info-measurement', null);
+    };
+
+    widget.id = 'measurement';
+    widget.title = t('infobox.measurement.title');
+    widget.key = t('infobox.measurement.key');
+
 
     return widget;
 }

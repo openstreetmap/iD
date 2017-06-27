@@ -28,7 +28,7 @@ export function uiInfo(context) {
             var widget = widgets[current];
 
             var content = selection.selectAll('.widget-content-' + current);
-            content.call(widget.redraw);
+            content.call(widget);
         }
 
 
@@ -42,40 +42,40 @@ export function uiInfo(context) {
             isHidden = !isHidden;
 
             if (isHidden) {
-                wrap
-                    .style('display', 'block')
+                infobox
+                    .classed('hide', false)
                     .style('opacity', 1)
                     .transition()
                     .duration(200)
                     .style('opacity', 0)
                     .on('end', function() {
-                        d3.select(this).style('display', 'none');
+                        d3.select(this).classed('hide', true);
                     });
             } else {
-                wrap
-                    .style('display', 'block')
-                    .style('opacity', 0)
+                infobox
+                    .classed('hide', false)
+                    .style('opacity', 0);
+
+                redraw();
+
+                infobox
                     .transition()
                     .duration(200)
-                    .style('opacity', 1)
-                    .on('end', function() {
-                        redraw();
-                    });
+                    .style('opacity', 1);
             }
         }
 
 
-        var wrap = selection.selectAll('.infobox')
+        var infobox = selection.selectAll('.infobox')
             .data([0]);
 
-        wrap = wrap.enter()
+        infobox = infobox.enter()
             .append('div')
-            .attr('class', 'infobox fillD2')
-            .style('display', (isHidden ? 'none' : 'block'))
-            .merge(wrap);
+            .attr('class', 'infobox fillD2' + (isHidden ? ' hide' : ''))
+            .merge(infobox);
 
 
-        var containers = wrap.selectAll('.widget-container')
+        var containers = infobox.selectAll('.widget-container')
             .data(ids);
 
         containers.exit()
@@ -86,8 +86,9 @@ export function uiInfo(context) {
             .attr('class', function(d) { return 'widget-container widget-container-' + d; });
 
         enter
-            .append('h4')
-            .attr('class', 'title')
+            .append('div')
+            .attr('class', 'widget-title fillD2')
+            .append('h3')
             .text(function(d) { return widgets[d].title; });
 
         enter

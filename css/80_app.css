@@ -2645,6 +2645,7 @@ img.tile-removing {
 /* Info Box
 ------------------------------------------------------- */
 .infobox {
+    display: block;
     position: absolute;
     z-index: 1;
     right: 0;
@@ -2655,18 +2656,22 @@ img.tile-removing {
     -ms-user-select: element;
 }
 
-.infobox .infobox-heading {
+.widget-title {
+    padding: 5px 10px;
+}
+
+.widget-content-measurement .measurement-heading {
     display: block;
     border-radius: 4px 0 0 0;
     padding: 5px 10px;
     height: 30px;
 }
 
-.infobox ul {
+.widget-content-measurement ul {
     padding: 5px 10px;
 }
 
-.infobox .button {
+.widget-content-measurement .button {
     position: absolute;
     background: #7092ff;
     border-radius: 2px;
