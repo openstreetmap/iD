@@ -274,6 +274,10 @@ en:
     truncated_list: "Edits by {users} and {count} others"
   infobox:
     key: I
+    location:
+      key: L
+      title: Location
+      pointer: Pointer
     measurement:
       key: M
       title: Measurement

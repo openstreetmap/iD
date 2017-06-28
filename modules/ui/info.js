@@ -7,66 +7,82 @@ import { uiInfoWidgets } from './info/index';
 
 
 export function uiInfo(context) {
-    var isHidden = true,
-        ids = Object.keys(uiInfoWidgets),
+    var ids = Object.keys(uiInfoWidgets),
         widgets = {},
-        current;
+        active = {};
 
     // create widgets
     ids.forEach(function(k) {
-        current = current || k;
         if (!widgets[k]) {
             widgets[k] = uiInfoWidgets[k](context);
+            active[k] = false;
         }
     });
-
 
 
     function info(selection) {
 
         function redraw() {
-            if (isHidden || !current) return;
-            var widget = widgets[current];
+            var activeids = ids.filter(function(k) { return active[k]; });
 
-            var content = selection.selectAll('.widget-content-' + current);
-            content.call(widget);
+            var containers = infobox.selectAll('.widget-container')
+                .data(activeids, function(k) { return k; });
+
+            containers.exit()
+                .style('opacity', 1)
+                .transition()
+                .duration(200)
+                .style('opacity', 0)
+                .on('end', function(d) {
+                    d3.select(this)
+                        .call(widgets[d].off)
+                        .remove();
+                });
+
+            var enter = containers.enter()
+                .append('div')
+                .attr('class', function(d) { return 'fillD2 widget-container widget-container-' + d; });
+
+            enter
+                .style('opacity', 0)
+                .transition()
+                .duration(200)
+                .style('opacity', 1);
+
+            var title = enter
+                .append('div')
+                .attr('class', 'widget-title fillD2');
+
+            title
+                .append('h3')
+                .text(function(d) { return widgets[d].title; });
+
+            title
+                .append('button')
+                .attr('class', 'close')
+                .on('click', function (d) { toggle(d); })
+                .call(svgIcon('#icon-close'));
+
+            enter
+                .append('div')
+                .attr('class', function(d) { return 'widget-content widget-content-' + d; });
+
+
+            // redraw the widgets
+            infobox.selectAll('.widget-content')
+                .each(function(d) {
+                    d3.select(this).call(widgets[d]);
+                });
         }
 
 
-        function toggle(setCurrent) {
-            if (setCurrent && current !== setCurrent) {
-                current = setCurrent;
-                return;
-            }
+        function toggle(which) {
+            if (d3.event) d3.event.preventDefault();
 
-            if (d3.event) {
-                d3.event.preventDefault();
-            }
+            if (!which) which = 'measurement';
+            active[which] = !active[which];
 
-            isHidden = !isHidden;
-
-            if (isHidden) {
-                infobox
-                    .classed('hide', false)
-                    .style('opacity', 1)
-                    .transition()
-                    .duration(200)
-                    .style('opacity', 0)
-                    .on('end', function() {
-                        d3.select(this).classed('hide', true);
-                    });
-            } else {
-                infobox
-                    .classed('hide', false)
-                    .style('opacity', 0);
-
-                redraw();
-
-                infobox
-                    .transition()
-                    .duration(200)
-                    .style('opacity', 1);
-            }
+            redraw();
         }
 
 
@@ -75,38 +91,8 @@ export function uiInfo(context) {
 
         infobox = infobox.enter()
             .append('div')
-            .attr('class', 'infobox fillD2' + (isHidden ? ' hide' : ''))
+            .attr('class', 'infobox')
             .merge(infobox);
-
-
-        var container = infobox.selectAll('.widget-container')
-            .data(ids);
-
-        container.exit()
-            .remove();
-
-        var enter = container.enter()
-            .append('div')
-            .attr('class', function(d) { return 'widget-container widget-container-' + d; });
-
-        var title = enter
-            .append('div')
-            .attr('class', 'widget-title fillD2');
-
-        title
-            .append('h3')
-            .text(function(d) { return widgets[d].title; });
-
-        title
-            .append('button')
-            .attr('class', 'close')
-            .on('click', function () { if (!isHidden) toggle(); })
-            .call(svgIcon('#icon-close'));
-
-        enter
-            .append('div')
-            .attr('class', function(d) { return 'widget-content widget-content-' + d; });
-
 
         redraw();
 

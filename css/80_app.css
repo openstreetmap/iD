@@ -2651,18 +2651,39 @@ img.tile-removing {
     right: 0;
     bottom: 30px;
     width: 240px;
-    border-radius: 4px 0 0 0;
-    border-bottom: 1px solid black;
     -ms-user-select: element;
+}
+
+.infobox h1,
+.infobox h2,
+.infobox h3,
+.infobox h4,
+.infobox h5 {
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+.infobox h1,
+.infobox h2,
+.infobox h3 {
+    color: #ff8;
+}
+
+.widget-container {
+    padding-bottom: 10px;
+}
+
+.widget-container:first-of-type,
+.widget-container:first-of-type .widget-title {
+    border-radius: 4px 0 0 0;
+}
+
+.widget-container:last-of-type {
+    padding-bottom: 0px;
 }
 
 .widget-title {
     padding: 5px 10px;
-}
-
-.widget-title h3 {
-    display: inline-block;
-    margin-bottom: 0;
 }
 
 .widget-title button.close {
@@ -2677,16 +2698,15 @@ img.tile-removing {
     width: 16px;
 }
 
-.widget-content-measurement .measurement-heading {
-    display: block;
-    border-radius: 4px 0 0 0;
+.widget-content {
     padding: 5px 10px;
-    height: 30px;
+    position: relative;
 }
 
-.widget-content-measurement ul {
-    padding: 5px 10px;
-}
+.widget-content-measurement .measurement-heading {
+/*    display: inline-block;
+    height: 30px;
+*/}
 
 .widget-content-measurement .button {
     position: absolute;
@@ -2694,7 +2714,7 @@ img.tile-removing {
     border-radius: 2px;
     padding: 0 4px;
     color: white;
-    top: 40px;
+    top: 6px;
     right: 10px;
 }
 

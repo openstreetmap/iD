@@ -350,6 +350,11 @@
         },
         "infobox": {
             "key": "I",
+            "location": {
+                "key": "L",
+                "title": "Location",
+                "pointer": "Pointer"
+            },
             "measurement": {
                 "key": "M",
                 "title": "Measurement",
