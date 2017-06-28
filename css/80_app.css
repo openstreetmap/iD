@@ -2690,7 +2690,11 @@ img.tile-removing {
     float: right;
     height: 20px;
     background: none;
-    color: white;
+    color: #ddd;
+}
+
+.widget-title button.close:hover {
+    color: #fff;
 }
 
 .widget-title button.close .icon {
