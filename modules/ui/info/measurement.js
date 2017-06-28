@@ -2,6 +2,7 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { t } from '../../util/locale';
 import { geoExtent } from '../../geo';
+import { osmEntity } from '../../osm';
 import { utilDetect } from '../../util/detect';
 
 import {
@@ -11,8 +12,8 @@ import {
 
 
 export function uiInfoMeasurement(context) {
-    var isImperial = (utilDetect().locale.toLowerCase() === 'en-us'),
-        lastLength, lastSingular;
+    var isImperial = (utilDetect().locale.toLowerCase() === 'en-us');
+    var OSM_PRECISION = 7;
 
 
     function radiansToMeters(r) {
@@ -115,12 +116,9 @@ export function uiInfoMeasurement(context) {
         var resolver = context.graph(),
             selected = _.filter(context.selectedIDs(), function(e) { return context.hasEntity(e); }),
             singular = selected.length === 1 ? selected[0] : null,
+            singularKey = singular && osmEntity.key(context.entity(singular)),
             extent = geoExtent(),
             entity;
-
-        if (selected.length === lastLength && singular === lastSingular) return;  // no change
-        lastLength = selected.length;
-        lastSingular = singular;
 
         selection.html('');
 
@@ -146,7 +144,9 @@ export function uiInfoMeasurement(context) {
         if (!singular) {
             list
                 .append('li')
-                .text(t('infobox.measurement.center') + ': ' + center[0].toFixed(5) + ', ' + center[1].toFixed(5));
+                .text(t('infobox.measurement.center') + ': ' +
+                    center[0].toFixed(OSM_PRECISION) + ', ' + center[1].toFixed(OSM_PRECISION)
+                );
             return;
         }
 
@@ -179,7 +179,9 @@ export function uiInfoMeasurement(context) {
 
             list
                 .append('li')
-                .text(t('infobox.measurement.centroid') + ': ' + centroid[0].toFixed(5) + ', ' + centroid[1].toFixed(5));
+                .text(t('infobox.measurement.centroid') + ': ' +
+                    centroid[0].toFixed(OSM_PRECISION) + ', ' + centroid[1].toFixed(OSM_PRECISION)
+                );
 
 
             var toggle  = isImperial ? 'imperial' : 'metric';
@@ -192,7 +194,6 @@ export function uiInfoMeasurement(context) {
                 .on('click', function() {
                     d3.event.preventDefault();
                     isImperial = !isImperial;
-                    lastLength = null;   // force redraw
                     selection.call(redraw);
                 });
 
@@ -205,7 +206,9 @@ export function uiInfoMeasurement(context) {
 
             list
                 .append('li')
-                .text(centerLabel + ': ' + center[0].toFixed(5) + ', ' + center[1].toFixed(5));
+                .text(centerLabel + ': ' +
+                    center[0].toFixed(OSM_PRECISION) + ', ' + center[1].toFixed(OSM_PRECISION)
+                );
         }
     }
 
