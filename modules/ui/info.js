@@ -8,6 +8,7 @@ import { uiInfoWidgets } from './info/index';
 
 export function uiInfo(context) {
     var ids = Object.keys(uiInfoWidgets),
+        wasActive = ['measurement'],
         widgets = {},
         active = {};
 
@@ -23,7 +24,7 @@ export function uiInfo(context) {
     function info(selection) {
 
         function redraw() {
-            var activeids = ids.filter(function(k) { return active[k]; });
+            var activeids = ids.filter(function(k) { return active[k]; }).sort();
 
             var containers = infobox.selectAll('.widget-container')
                 .data(activeids, function(k) { return k; });
@@ -79,8 +80,21 @@ export function uiInfo(context) {
         function toggle(which) {
             if (d3.event) d3.event.preventDefault();
 
-            if (!which) which = 'measurement';
-            active[which] = !active[which];
+            var activeids = ids.filter(function(k) { return active[k]; });
+
+            if (which) {  // toggle one
+                active[which] = !active[which];
+                if (activeids.length === 1 && activeids[0] === which) {  // none active anymore
+                    wasActive = [which];
+                }
+            } else {      // toggle all
+                if (activeids.length) {
+                    wasActive = activeids;
+                    activeids.forEach(function(k) { active[k] = false; });
+                } else {
+                    wasActive.forEach(function(k) { active[k] = true; });
+                }
+            }
 
             redraw();
         }
