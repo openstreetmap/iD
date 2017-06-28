@@ -2,7 +2,6 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { t } from '../../util/locale';
 import { geoExtent } from '../../geo';
-import { osmEntity } from '../../osm';
 import { utilDetect } from '../../util/detect';
 
 import {
@@ -116,7 +115,6 @@ export function uiInfoMeasurement(context) {
         var resolver = context.graph(),
             selected = _.filter(context.selectedIDs(), function(e) { return context.hasEntity(e); }),
             singular = selected.length === 1 ? selected[0] : null,
-            singularKey = singular && osmEntity.key(context.entity(singular)),
             extent = geoExtent(),
             entity;
 
