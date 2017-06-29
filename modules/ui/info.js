@@ -3,19 +3,19 @@ import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
 import { svgIcon } from '../svg/index';
 import { uiCmd } from './cmd';
-import { uiInfoWidgets } from './info/index';
+import { uiInfoPanels } from './info/index';
 
 
 export function uiInfo(context) {
-    var ids = Object.keys(uiInfoWidgets),
+    var ids = Object.keys(uiInfoPanels),
         wasActive = ['measurement'],
-        widgets = {},
+        panels = {},
         active = {};
 
-    // create widgets
+    // create panels
     ids.forEach(function(k) {
-        if (!widgets[k]) {
-            widgets[k] = uiInfoWidgets[k](context);
+        if (!panels[k]) {
+            panels[k] = uiInfoPanels[k](context);
             active[k] = false;
         }
     });
@@ -26,7 +26,7 @@ export function uiInfo(context) {
         function redraw() {
             var activeids = ids.filter(function(k) { return active[k]; }).sort();
 
-            var containers = infobox.selectAll('.widget-container')
+            var containers = infobox.selectAll('.panel-container')
                 .data(activeids, function(k) { return k; });
 
             containers.exit()
@@ -36,13 +36,13 @@ export function uiInfo(context) {
                 .style('opacity', 0)
                 .on('end', function(d) {
                     d3.select(this)
-                        .call(widgets[d].off)
+                        .call(panels[d].off)
                         .remove();
                 });
 
             var enter = containers.enter()
                 .append('div')
-                .attr('class', function(d) { return 'fillD2 widget-container widget-container-' + d; });
+                .attr('class', function(d) { return 'fillD2 panel-container panel-container-' + d; });
 
             enter
                 .style('opacity', 0)
@@ -52,11 +52,11 @@ export function uiInfo(context) {
 
             var title = enter
                 .append('div')
-                .attr('class', 'widget-title fillD2');
+                .attr('class', 'panel-title fillD2');
 
             title
                 .append('h3')
-                .text(function(d) { return widgets[d].title; });
+                .text(function(d) { return panels[d].title; });
 
             title
                 .append('button')
@@ -66,13 +66,13 @@ export function uiInfo(context) {
 
             enter
                 .append('div')
-                .attr('class', function(d) { return 'widget-content widget-content-' + d; });
+                .attr('class', function(d) { return 'panel-content panel-content-' + d; });
 
 
-            // redraw the widgets
-            infobox.selectAll('.widget-content')
+            // redraw the panels
+            infobox.selectAll('.panel-content')
                 .each(function(d) {
-                    d3.select(this).call(widgets[d]);
+                    d3.select(this).call(panels[d]);
                 });
         }
 

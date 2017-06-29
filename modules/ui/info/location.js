@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import { t } from '../../util/locale';
 
 
-export function uiInfoLocation(context) {
+export function uiPanelLocation(context) {
     var OSM_PRECISION = 7;
 
     function wrap(x, min, max) {
@@ -35,7 +35,7 @@ export function uiInfoLocation(context) {
     }
 
 
-    var widget = function(selection) {
+    var panel = function(selection) {
         selection.call(redraw);
 
         context.surface()
@@ -44,15 +44,15 @@ export function uiInfoLocation(context) {
             });
     };
 
-    widget.off = function() {
+    panel.off = function() {
         context.surface()
             .on('mousemove.info-location', null);
     };
 
-    widget.id = 'location';
-    widget.title = t('infobox.location.title');
-    widget.key = t('infobox.location.key');
+    panel.id = 'location';
+    panel.title = t('infobox.location.title');
+    panel.key = t('infobox.location.key');
 
 
-    return widget;
+    return panel;
 }

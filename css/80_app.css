@@ -2669,50 +2669,45 @@ img.tile-removing {
     color: #ff8;
 }
 
-.widget-container {
+.panel-container {
     padding-bottom: 10px;
 }
 
-.widget-container:first-of-type,
-.widget-container:first-of-type .widget-title {
+.panel-container:first-of-type,
+.panel-container:first-of-type .panel-title {
     border-radius: 4px 0 0 0;
 }
 
-.widget-container:last-of-type {
+.panel-container:last-of-type {
     padding-bottom: 0px;
 }
 
-.widget-title {
+.panel-title {
     padding: 5px 10px;
 }
 
-.widget-title button.close {
+.panel-title button.close {
     float: right;
     height: 20px;
     background: none;
     color: #ddd;
 }
 
-.widget-title button.close:hover {
+.panel-title button.close:hover {
     color: #fff;
 }
 
-.widget-title button.close .icon {
+.panel-title button.close .icon {
     height: 20px;
     width: 16px;
 }
 
-.widget-content {
+.panel-content {
     padding: 5px 10px;
     position: relative;
 }
 
-.widget-content-measurement .measurement-heading {
-/*    display: inline-block;
-    height: 30px;
-*/}
-
-.widget-content-measurement .button {
+.panel-content-measurement .button {
     position: absolute;
     background: #7092ff;
     border-radius: 2px;

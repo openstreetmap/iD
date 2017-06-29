@@ -10,7 +10,7 @@ import {
 } from 'd3';
 
 
-export function uiInfoMeasurement(context) {
+export function uiPanelMeasurement(context) {
     var isImperial = (utilDetect().locale.toLowerCase() === 'en-us');
     var OSM_PRECISION = 7;
 
@@ -212,7 +212,7 @@ export function uiInfoMeasurement(context) {
 
 
 
-    var widget = function(selection) {
+    var panel = function(selection) {
         selection.call(redraw);
 
         context.map()
@@ -221,15 +221,15 @@ export function uiInfoMeasurement(context) {
             });
     };
 
-    widget.off = function() {
+    panel.off = function() {
         context.map()
             .on('drawn.info-measurement', null);
     };
 
-    widget.id = 'measurement';
-    widget.title = t('infobox.measurement.title');
-    widget.key = t('infobox.measurement.key');
+    panel.id = 'measurement';
+    panel.title = t('infobox.measurement.title');
+    panel.key = t('infobox.measurement.key');
 
 
-    return widget;
+    return panel;
 }
