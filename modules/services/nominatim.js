@@ -25,32 +25,44 @@ export default {
 
 
     countryCode: function (location, callback) {
-        var countryCodes = nominatimCache.search(
+        this.reverse(location, function(err, result) {
+            if (err) {
+                return callback(err);
+            } else if (result.address) {
+                return callback(null, result.address.country_code);
+            } else {
+                return callback('Unable to geocode', null);
+            }
+        });
+    },
+
+
+    reverse: function (location, callback) {
+        var cached = nominatimCache.search(
             { minX: location[0], minY: location[1], maxX: location[0], maxY: location[1] }
         );
 
-        if (countryCodes.length > 0) {
-            return callback(null, countryCodes[0].data);
+        if (cached.length > 0) {
+            return callback(null, cached[0].data);
         }
 
-        var params = { format: 'json', addressdetails: 1, lat: location[1], lon: location[0] };
+        var params = { zoom: 13, format: 'json', addressdetails: 1, lat: location[1], lon: location[0] };
         var url = apibase + 'reverse?' + utilQsString(params);
         if (inflight[url]) return;
 
         inflight[url] = d3.json(url, function(err, result) {
             delete inflight[url];
 
-            if (err)
+            if (err) {
                 return callback(err);
-            else if (result && result.error)
+            } else if (result && result.error) {
                 return callback(result.error);
+            }
 
-            var extent = geoExtent(location).padByMeters(1000);
-            nominatimCache.insert(_.assign(extent.bbox(),
-                { data: result.address.country_code }
-            ));
+            var extent = geoExtent(location).padByMeters(200);
+            nominatimCache.insert(_.assign(extent.bbox(), {data: result}));
 
-            callback(null, result.address.country_code);
+            callback(null, result);
         });
     },
 
