@@ -352,8 +352,7 @@
             "key": "I",
             "location": {
                 "key": "L",
-                "title": "Location",
-                "pointer": "Pointer"
+                "title": "Location"
             },
             "measurement": {
                 "key": "M",

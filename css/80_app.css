@@ -2707,6 +2707,10 @@ img.tile-removing {
     position: relative;
 }
 
+.panel-content-location .location-name {
+    padding-top: 10px;
+}
+
 .panel-content-measurement .button {
     position: absolute;
     background: #7092ff;
