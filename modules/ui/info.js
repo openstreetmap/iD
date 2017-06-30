@@ -1,9 +1,9 @@
 import * as d3 from 'd3';
 import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
-import { svgIcon } from '../svg/index';
+import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
-import { uiInfoPanels } from './info/index';
+import { uiInfoPanels } from './panels/index';
 
 
 export function uiInfo(context) {
