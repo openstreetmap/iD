@@ -39,9 +39,47 @@ describe('iD.serviceOsm', function () {
         expect(connection.changesetURL(2)).to.match(/^https:/);
     });
 
-    describe('#changesetUrl', function() {
+    describe('#changesetURL', function() {
         it('provides a changeset url', function() {
             expect(connection.changesetURL(2)).to.eql('http://www.openstreetmap.org/changeset/2');
+        });
+    });
+
+    describe('#changesetsURL', function() {
+        it('provides a local changesets url', function() {
+            var center = [-74.65, 40.65];
+            var zoom = 17;
+            expect(connection.changesetsURL(center, zoom)).to.eql('http://www.openstreetmap.org/history#map=17/40.65000/-74.65000');
+        });
+    });
+
+    describe('#entityURL', function() {
+        it('provides an entity url for a node', function() {
+            var e = iD.Node({id: 'n1'});
+            expect(connection.entityURL(e)).to.eql('http://www.openstreetmap.org/node/1');
+        });
+        it('provides an entity url for a way', function() {
+            var e = iD.Way({id: 'w1'});
+            expect(connection.entityURL(e)).to.eql('http://www.openstreetmap.org/way/1');
+        });
+        it('provides an entity url for a relation', function() {
+            var e = iD.Relation({id: 'r1'});
+            expect(connection.entityURL(e)).to.eql('http://www.openstreetmap.org/relation/1');
+        });
+    });
+
+    describe('#historyURL', function() {
+        it('provides a history url for a node', function() {
+            var e = iD.Node({id: 'n1'});
+            expect(connection.historyURL(e)).to.eql('http://www.openstreetmap.org/node/1/history');
+        });
+        it('provides a history url for a way', function() {
+            var e = iD.Way({id: 'w1'});
+            expect(connection.historyURL(e)).to.eql('http://www.openstreetmap.org/way/1/history');
+        });
+        it('provides a history url for a relation', function() {
+            var e = iD.Relation({id: 'r1'});
+            expect(connection.historyURL(e)).to.eql('http://www.openstreetmap.org/relation/1/history');
         });
     });
 

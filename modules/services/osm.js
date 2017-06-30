@@ -203,6 +203,11 @@ export default {
     },
 
 
+    historyURL: function(entity) {
+        return urlroot + '/' + entity.type + '/' + entity.osmId() + '/history';
+    },
+
+
     userURL: function(username) {
         return urlroot + '/user/' + username;
     },
