@@ -350,6 +350,17 @@
         },
         "infobox": {
             "key": "I",
+            "history": {
+                "key": "H",
+                "title": "History",
+                "selected": "{n} selected",
+                "version": "Version",
+                "last_edit": "Last Edit",
+                "edited_by": "Edited By",
+                "changeset": "Changeset",
+                "unknown": "Unknown",
+                "link_text": "History on openstreetmap.org"
+            },
             "location": {
                 "key": "L",
                 "title": "Location"

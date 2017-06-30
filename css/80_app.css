@@ -2707,6 +2707,19 @@ img.tile-removing {
     position: relative;
 }
 
+.panel-content-history .links a {
+    padding-left: 10px;
+}
+[dir='rtl'] .panel-content-history .links a {
+    padding-left: auto;
+    padding-right: 10px;
+}
+
+.panel-content-history .view-history-on-osm {
+    display: block;
+    padding: 10px 0;
+}
+
 .panel-content-location .location-name {
     padding-top: 10px;
 }
