@@ -6,7 +6,7 @@ import { services } from '../../services';
 
 export function uiPanelLocation(context) {
     var lastLocation = '';
-    var debouncedUpdate = _.debounce(updateLocation, 250);
+    var lastImagery = '';
     var OSM_PRECISION = 7;
 
 
@@ -43,26 +43,61 @@ export function uiPanelLocation(context) {
             .append('li')
             .text(coordStr);
 
-        // Location Name
-        if (services.geocoder) {
-            selection
-                .append('p')
-                .attr('class', 'location-name')
-                .text(lastLocation);
+        list
+            .append('li')
+            .text(t('infobox.location.zoom') + ': ' + context.map().zoom().toFixed(2));
 
-            debouncedUpdate(selection, coord);
+        // Date of Imagery
+        selection
+            .append('p')
+            .attr('class', 'imagery-vintage')
+            .text(lastImagery);
+
+        // Location Name
+        selection
+            .append('p')
+            .attr('class', 'location-name')
+            .text(lastLocation);
+
+        debouncedLocation(selection, coord);
+    }
+
+
+    var debouncedLocation = _.debounce(updateLocation, 250);
+    function updateLocation(selection, coord) {
+        if (!services.geocoder) {
+            lastLocation = t('infobox.location.unknown_location');
+            selection.selectAll('.location-name')
+                .text(lastLocation);
+        } else {
+            services.geocoder.reverse(coord, function(err, result) {
+                lastLocation = result ? result.display_name : t('infobox.location.unknown_location');
+                selection.selectAll('.location-name')
+                    .text(lastLocation);
+            });
         }
     }
 
 
-    function updateLocation(selection, coord) {
-        if (!services.geocoder) return;
-        services.geocoder.reverse(coord, function(err, result) {
-            if (result) {
-                lastLocation = result.display_name;
-                selection.selectAll('.location-name')
-                    .text(lastLocation);
+    var debouncedImageryVintage = _.debounce(updateImageryVintage, 250);
+    function updateImageryVintage(selection) {
+        var tiledata = d3.select('.layer-background img').datum(),
+            zoom = tiledata[2] || Math.floor(context.map().zoom()),
+            center = context.map().center();
+
+        context.background().baseLayerSource().getVintage(center, zoom, function(err, result) {
+            if (!result) {
+                lastImagery = t('infobox.location.unknown_imagery_age');
+            } else {
+                if (result.start || result.end) {
+                    lastImagery = (result.start || '?') + ' - ' + (result.end || '?');
+                } else {
+                    lastImagery = t('infobox.location.unknown_imagery_age');
+                }
             }
+
+            selection.selectAll('.imagery-vintage')
+                .text(lastImagery);
         });
     }
 
@@ -74,11 +109,24 @@ export function uiPanelLocation(context) {
             .on('mousemove.info-location', function() {
                 selection.call(redraw);
             });
+
+        context.map()
+            .on('drawn.info-location', function() {
+                selection.call(redraw);
+            })
+            .on('move.info-location', function() {
+                selection.call(debouncedImageryVintage);
+            });
+
     };
 
     panel.off = function() {
         context.surface()
             .on('mousemove.info-location', null);
+
+        context.map()
+            .on('drawn.info-location', null)
+            .on('move.info-location', null);
     };
 
     panel.id = 'location';

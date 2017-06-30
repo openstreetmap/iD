@@ -106,6 +106,11 @@ export function rendererBackgroundSource(data) {
     source.copyrightNotices = function() {};
 
 
+    source.getVintage = function(center, zoom, callback) {
+        callback(null, { start: null, end: null });
+    };
+
+
     return source;
 }
 
@@ -137,6 +142,7 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
         dispatch.call('change');
     });
 
+
     bing.copyrightNotices = function(zoom, extent) {
         zoom = Math.min(zoom, 21);
         return providers.filter(function(provider) {
@@ -150,7 +156,30 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
         }).join(', ');
     };
 
+
+    bing.getVintage = function(center, zoom, callback) {
+        zoom = Math.min(zoom, 21);
+
+        var centerPoint = center[1] + ',' + center[0],
+            url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial/' + centerPoint +
+                '?zl=' + zoom + '&key=' + key + '&jsonp={callback}';
+
+        jsonpRequest(url, function(result) {
+            var error = (!result && 'Unknown Error') || result.errorDetails;
+            if (error) {
+                return callback(error);
+            } else {
+                return callback(null, {
+                    start: result.resourceSets[0].resources[0].vintageStart,
+                    end: result.resourceSets[0].resources[0].vintageEnd
+                });
+            }
+        });
+    };
+
+
     bing.terms_url = 'https://blog.openstreetmap.org/2010/11/30/microsoft-imagery-details';
+
 
     return bing;
 };
@@ -159,17 +188,21 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
 rendererBackgroundSource.None = function() {
     var source = rendererBackgroundSource({ id: 'none', template: '' });
 
+
     source.name = function() {
         return t('background.none');
     };
+
 
     source.imageryUsed = function() {
         return 'None';
     };
 
+
     source.area = function() {
         return -1;  // sources in background pane are sorted by area
     };
+
 
     return source;
 };
@@ -178,17 +211,21 @@ rendererBackgroundSource.None = function() {
 rendererBackgroundSource.Custom = function(template) {
     var source = rendererBackgroundSource({ id: 'custom', template: template });
 
+
     source.name = function() {
         return t('background.custom');
     };
+
 
     source.imageryUsed = function() {
         return 'Custom (' + template + ')';
     };
 
+
     source.area = function() {
         return -2;  // sources in background pane are sorted by area
     };
+
 
     return source;
 };

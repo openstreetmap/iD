@@ -287,6 +287,9 @@ en:
     location:
       key: L
       title: Location
+      zoom: Zoom
+      unknown_location: Unknown Location
+      unknown_imagery_age: Unknown Imagery Age
     measurement:
       key: M
       title: Measurement
