@@ -5,10 +5,7 @@ import { services } from '../../services';
 
 
 export function uiPanelLocation(context) {
-    var background = context.background();
     var currLocation = '';
-    var currImagerySource = null;
-    var currImageryDates = '';
     var OSM_PRECISION = 7;
 
 
@@ -45,39 +42,6 @@ export function uiPanelLocation(context) {
             .append('li')
             .text(coordStr);
 
-        list
-            .append('li')
-            .text(t('infobox.location.zoom') + ': ' + context.map().zoom().toFixed(2));
-
-
-        // Imagery Info
-        if (currImagerySource !== background.baseLayerSource().name()) {
-            currImagerySource = background.baseLayerSource().name();
-            currImageryDates = '';
-        }
-
-        var imageryList = selection
-            .append('ul')
-            .attr('class', 'imagery-info');
-
-        imageryList
-            .append('li')
-            .text(currImagerySource);
-
-        imageryList
-            .append('li')
-            .text(t('infobox.location.imagery_capture_dates') + ':');
-
-        imageryList
-            .append('li')
-            .attr('class', 'imagery-dates')
-            .text(currImageryDates || ' ');
-
-        if (!currImageryDates) {
-            debouncedGetImageryDates(selection);
-        }
-
-
         // Location Info
         selection
             .append('div')
@@ -104,29 +68,6 @@ export function uiPanelLocation(context) {
     }
 
 
-    var debouncedGetImageryDates = _.debounce(getImageryDates, 250);
-    function getImageryDates(selection) {
-        var tiledata = d3.select('.layer-background img').datum(),
-            zoom = tiledata[2] || Math.floor(context.map().zoom()),
-            center = context.map().center();
-
-        background.baseLayerSource().getVintage(center, zoom, function(err, result) {
-            if (!result) {
-                currImageryDates = t('infobox.location.unknown_imagery_age');
-            } else {
-                if (result.start || result.end) {
-                    currImageryDates = (result.start || '?') + ' - ' + (result.end || '?');
-                } else {
-                    currImageryDates = t('infobox.location.unknown_imagery_age');
-                }
-            }
-
-            selection.selectAll('.imagery-dates')
-                .text(currImageryDates);
-        });
-    }
-
-
     var panel = function(selection) {
         selection.call(redraw);
 
@@ -134,24 +75,11 @@ export function uiPanelLocation(context) {
             .on('mousemove.info-location', function() {
                 selection.call(redraw);
             });
-
-        context.map()
-            .on('drawn.info-location', function() {
-                selection.call(redraw);
-            })
-            .on('move.info-location', function() {
-                selection.call(debouncedGetImageryDates);
-            });
-
     };
 
     panel.off = function() {
         context.surface()
             .on('mousemove.info-location', null);
-
-        context.map()
-            .on('drawn.info-location', null)
-            .on('move.info-location', null);
     };
 
     panel.id = 'location';

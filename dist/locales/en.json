@@ -361,13 +361,17 @@
                 "unknown": "Unknown",
                 "link_text": "History on openstreetmap.org"
             },
+            "imagery": {
+                "key": "G",
+                "title": "Imagery",
+                "zoom": "Zoom",
+                "vintage": "Vintage",
+                "unknown": "Unknown"
+            },
             "location": {
                 "key": "L",
                 "title": "Location",
-                "zoom": "Zoom",
-                "imagery_capture_dates": "Imagery Capture Dates",
-                "unknown_location": "Unknown Location",
-                "unknown_imagery_age": "Unknown Imagery Age"
+                "unknown_location": "Unknown Location"
             },
             "measurement": {
                 "key": "M",
