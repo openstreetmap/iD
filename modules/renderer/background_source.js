@@ -5,6 +5,14 @@ import { geoExtent, geoPolygonIntersectsPolygon } from '../geo/index';
 import { jsonpRequest } from '../util/jsonp_request';
 
 
+function localeDateString(s) {
+    if (!s) return null;
+    var d = new Date(s);
+    if (isNaN(d.getTime())) return null;
+    return d.toLocaleDateString();
+}
+
+
 export function rendererBackgroundSource(data) {
     var source = _.clone(data),
         offset = [0, 0],
@@ -107,7 +115,10 @@ export function rendererBackgroundSource(data) {
 
 
     source.getVintage = function(center, zoom, callback) {
-        callback(null, { start: null, end: null });
+        callback(null, {
+            start: localeDateString(source.startDate),
+            end: localeDateString(source.endDate)
+        });
     };
 
 
@@ -173,13 +184,6 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
                     start: localeDateString(result.resourceSets[0].resources[0].vintageStart),
                     end: localeDateString(result.resourceSets[0].resources[0].vintageEnd)
                 });
-            }
-
-            function localeDateString(s) {
-                if (!s) return null;
-                var d = new Date(s);
-                if (isNaN(d.getTime())) return null;
-                return d.toLocaleDateString();
             }
         });
     };
