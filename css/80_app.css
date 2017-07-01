@@ -2720,7 +2720,8 @@ img.tile-removing {
     padding: 10px 0;
 }
 
-.panel-content-location .location-name {
+.panel-content-location .imagery-info,
+.panel-content-location .location-info {
     padding-top: 10px;
 }
 

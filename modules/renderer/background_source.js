@@ -165,14 +165,21 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
                 '?zl=' + zoom + '&key=' + key + '&jsonp={callback}';
 
         jsonpRequest(url, function(result) {
-            var error = (!result && 'Unknown Error') || result.errorDetails;
-            if (error) {
-                return callback(error);
+            var err = (!result && 'Unknown Error') || result.errorDetails;
+            if (err) {
+                return callback(err);
             } else {
                 return callback(null, {
-                    start: result.resourceSets[0].resources[0].vintageStart,
-                    end: result.resourceSets[0].resources[0].vintageEnd
+                    start: localeDateString(result.resourceSets[0].resources[0].vintageStart),
+                    end: localeDateString(result.resourceSets[0].resources[0].vintageEnd)
                 });
+            }
+
+            function localeDateString(s) {
+                if (!s) return null;
+                var d = new Date(s);
+                if (isNaN(d.getTime())) return null;
+                return d.toLocaleDateString();
             }
         });
     };
