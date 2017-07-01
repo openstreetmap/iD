@@ -2,11 +2,15 @@
 
 # This script runs on TravisCI to push new translation strings to transifex
 
-echo $"TRAVIS"
-echo $"TRAVIS_PULL_REQUEST"
-echo $"TRAVIS_BRANCH"
+echo "TRAVIS=$TRAVIS"
+echo "TRAVIS_PULL_REQUEST=$TRAVIS_PULL_REQUEST"
+echo "TRAVIS_BRANCH=$TRAVIS_BRANCH"
+echo "TRAVIS_NODE_VERSION=$TRAVIS_NODE_VERSION"
 
-if [[ "$TRAVIS" != "true" -o $"TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "master" ]]; then exit 0; fi
+if [[ "$TRAVIS" != "true" ]]; then exit 0; fi
+if [[ "$TRAVIS_PULL_REQUEST" != "false" ]]; then exit 0; fi
+if [[ "$TRAVIS_BRANCH" != "master" ]]; then exit 0; fi
+if [[ "$TRAVIS_NODE_VERSION" != "6" ]]; then exit 0; fi
 
 echo "Pushing source strings to Transifex..."
 pip install virtualenv
