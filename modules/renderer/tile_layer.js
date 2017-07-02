@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import { t } from '../util/locale';
 import { d3geoTile } from '../lib/d3.geo.tile';
 import { utilPrefixCSSProperty } from '../util/index';
 import { rendererBackgroundSource } from './background_source.js';
@@ -145,14 +146,19 @@ export function rendererTileLayer(context) {
                 'scale(' + scale + ',' + scale + ')';
         }
 
-        function debugTransform(d) {
+        function debugCoordinates(d) {
             var _ts = tileSize * Math.pow(2, z - d[2]);
             var scale = tileSizeAtZoom(d, z);
-            return 'translate(' +
-                ((d[0] * _ts) - tileOrigin[0] + pixelOffset[0] + scale * (tileSize / 4)) + 'px,' +
-                ((d[1] * _ts) - tileOrigin[1] + pixelOffset[1] + scale * (tileSize / 2)) + 'px)';
+            return [
+                ((d[0] * _ts) - tileOrigin[0] + pixelOffset[0] + scale * (tileSize / 4)),
+                ((d[1] * _ts) - tileOrigin[1] + pixelOffset[1] + scale * (tileSize / 2))
+            ];
         }
 
+        function debugTransform(d) {
+            var coord = debugCoordinates(d);
+            return 'translate(' + coord[0] + 'px,' + coord[1] + 'px)';
+        }
 
         var image = selection.selectAll('img')
             .data(requests, function(d) { return d[3]; });
@@ -187,12 +193,50 @@ export function rendererTileLayer(context) {
         debug.exit()
             .remove();
 
-        debug.enter()
-          .append('div')
-            .attr('class', 'tile-label-debug')
-          .merge(debug)
-            .text(function(d) { return d[2] + ' / ' + d[0] + ' / ' + d[1]; })
-            .style(transformProp, debugTransform);
+        if (showDebug) {
+            var debugEnter = debug.enter()
+                .append('div')
+                .attr('class', 'tile-label-debug');
+
+            debugEnter
+                .append('div')
+                .attr('class', 'tile-label-debug-coord');
+
+            debugEnter
+                .append('div')
+                .attr('class', 'tile-label-debug-vintage');
+
+            debug = debug.merge(debugEnter);
+
+            debug
+                .style(transformProp, debugTransform);
+
+            debug
+                .selectAll('.tile-label-debug-coord')
+                .text(function(d) { return d[2] + ' / ' + d[0] + ' / ' + d[1]; });
+
+            debug
+                .selectAll('.tile-label-debug-vintage')
+                .each(function(d) {
+                    var span = d3.select(this);
+                    var center = context.projection.invert(debugCoordinates(d));
+                    source.getVintage(center, d[2], function(err, result) {
+                        var vintage = '';
+                        if (result) {
+                            if (result.start || result.end) {
+                                vintage = (result.start || '?');
+                                if (result.start !== result.end) {
+                                    vintage += ' - ' + (result.end || '?');
+                                }
+                            }
+                        }
+
+                        span
+                            .text(vintage || t('infobox.imagery.vintage') + ': ' + t('infobox.imagery.unknown'));
+                    });
+                });
+        }
+
     }
 
 

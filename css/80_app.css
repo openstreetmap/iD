@@ -2488,7 +2488,7 @@ img.tile {
     color: #fff;
     position: absolute;
     text-align: center;
-    width: 128px;
+    padding: 5px;
     border-radius: 3px;
     z-index: 2;
 
