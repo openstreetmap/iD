@@ -2648,12 +2648,12 @@ img.tile-removing {
 /* Info Box
 ------------------------------------------------------- */
 .infobox {
-    display: block;
+    display: flex;
+    flex-flow: row-reverse wrap-reverse;
     position: absolute;
     z-index: 1;
     right: 0;
     bottom: 30px;
-    width: 240px;
     -ms-user-select: element;
 }
 
@@ -2673,16 +2673,16 @@ img.tile-removing {
 }
 
 .panel-container {
+    flex: 0 0 auto;
+    margin: 2px 0 0 2px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.75);
     padding-bottom: 10px;
+    width: 250px;
 }
 
-.panel-container:first-of-type,
-.panel-container:first-of-type .panel-title {
-    border-radius: 4px 0 0 0;
-}
-
-.panel-container:last-of-type {
-    padding-bottom: 0px;
+.panel-container .panel-title {
+    border-radius: 4px 4px 0 0;
 }
 
 .panel-title {
@@ -2715,7 +2715,7 @@ img.tile-removing {
     background: #7092ff;
     border-radius: 2px;
     padding: 0 4px;
-    margin-top: 5px;
+    margin-top: 10px;
     color: white;
 }
 
