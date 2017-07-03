@@ -290,6 +290,8 @@ en:
       zoom: Zoom
       vintage: Vintage
       unknown: Unknown
+      show_tiles: Show Tiles
+      hide_tiles: Hide Tiles
     location:
       key: L
       title: Location

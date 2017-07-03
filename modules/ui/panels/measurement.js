@@ -188,7 +188,7 @@ export function uiPanelMeasurement(context) {
                 .append('a')
                 .text(t('infobox.measurement.' + toggle))
                 .attr('href', '#')
-                .attr('class', 'button')
+                .attr('class', 'button button-toggle-units')
                 .on('click', function() {
                     d3.event.preventDefault();
                     isImperial = !isImperial;

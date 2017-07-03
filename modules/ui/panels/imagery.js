@@ -46,6 +46,19 @@ export function uiPanelImagery(context) {
         if (!currVintage) {
             debouncedGetVintage(selection);
         }
+
+        var toggle = context.getDebug('tile') ? 'hide_tiles' : 'show_tiles';
+
+        selection
+            .append('a')
+            .text(t('infobox.imagery.' + toggle))
+            .attr('href', '#')
+            .attr('class', 'button button-toggle-tiles')
+            .on('click', function() {
+                d3.event.preventDefault();
+                context.setDebug('tile', !context.getDebug('tile'));
+                selection.call(redraw);
+            });
     }
 
 

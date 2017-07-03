@@ -366,7 +366,9 @@
                 "title": "Imagery",
                 "zoom": "Zoom",
                 "vintage": "Vintage",
-                "unknown": "Unknown"
+                "unknown": "Unknown",
+                "show_tiles": "Show Tiles",
+                "hide_tiles": "Hide Tiles"
             },
             "location": {
                 "key": "L",

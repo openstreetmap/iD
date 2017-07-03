@@ -2707,33 +2707,33 @@ img.tile-removing {
     position: relative;
 }
 
+.panel-content .button {
+    display: inline-block;
+    background: #7092ff;
+    border-radius: 2px;
+    padding: 0 4px;
+    margin-top: 5px;
+    color: white;
+}
+
 .panel-content-history .links a {
-    padding-left: 10px;
+    margin-left: 10px;
 }
 [dir='rtl'] .panel-content-history .links a {
-    padding-left: auto;
-    padding-right: 10px;
+    margin-left: auto;
+    margin-right: 10px;
 }
 
 .panel-content-history .view-history-on-osm {
     display: block;
-    padding: 10px 0;
+    margin-top: 10px;
 }
 
 .panel-content-location .imagery-info,
 .panel-content-location .location-info {
-    padding-top: 10px;
+    margin-top: 10px;
 }
 
-.panel-content-measurement .button {
-    position: absolute;
-    background: #7092ff;
-    border-radius: 2px;
-    padding: 0 4px;
-    color: white;
-    top: 6px;
-    right: 10px;
-}
 
 /* About Section
 ------------------------------------------------------- */
