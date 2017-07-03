@@ -12,6 +12,17 @@ function localeDateString(s) {
     return d.toLocaleDateString();
 }
 
+function vintageRange(vintage) {
+    var s;
+    if (vintage.start || vintage.end) {
+        s = (vintage.start || '?');
+        if (vintage.start !== vintage.end) {
+            s += ' - ' + (vintage.end || '?');
+        }
+    }
+    return s;
+}
+
 
 export function rendererBackgroundSource(data) {
     var source = _.clone(data),
@@ -114,11 +125,13 @@ export function rendererBackgroundSource(data) {
     source.copyrightNotices = function() {};
 
 
-    source.getVintage = function(center, zoom, callback) {
-        callback(null, {
+    source.getVintage = function(center, tileCoord, callback) {
+        var vintage = {
             start: localeDateString(source.startDate),
             end: localeDateString(source.endDate)
-        });
+        };
+        vintage.range = vintageRange(vintage);
+        callback(null, vintage);
     };
 
 
@@ -136,6 +149,7 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
         key = 'Arzdiw4nlOJzRwOz__qailc8NiR31Tt51dN2D7cm57NrnceZnCpgOkmJhNpGoppU', // Same as P2 and JOSM
         url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?include=ImageryProviders&key=' +
             key + '&jsonp={callback}',
+        cache = {},
         providers = [];
 
     jsonpRequest(url, function(json) {
@@ -168,22 +182,32 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     };
 
 
-    bing.getVintage = function(center, zoom, callback) {
-        zoom = Math.min(zoom, 21);
-
-        var centerPoint = center[1] + ',' + center[0],
+    bing.getVintage = function(center, tileCoord, callback) {
+        var tileId = tileCoord.slice(0, 3).join('/'),
+            zoom = Math.min(tileCoord[2], 21),
+            centerPoint = center[1] + ',' + center[0],  // lat,lng
             url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial/' + centerPoint +
                 '?zl=' + zoom + '&key=' + key + '&jsonp={callback}';
+
+        if (!cache[tileId]) {
+            cache[tileId] = {};
+        }
+        if (cache[tileId] && cache[tileId].vintage) {
+            return callback(null, cache[tileId].vintage);
+        }
 
         jsonpRequest(url, function(result) {
             var err = (!result && 'Unknown Error') || result.errorDetails;
             if (err) {
                 return callback(err);
             } else {
-                return callback(null, {
+                var vintage = {
                     start: localeDateString(result.resourceSets[0].resources[0].vintageStart),
                     end: localeDateString(result.resourceSets[0].resources[0].vintageEnd)
-                });
+                };
+                vintage.range = vintageRange(vintage);
+                cache[tileId].vintage = vintage;
+                return callback(null, vintage);
             }
         });
     };

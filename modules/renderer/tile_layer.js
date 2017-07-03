@@ -1,7 +1,8 @@
 import * as d3 from 'd3';
 import { t } from '../util/locale';
 import { d3geoTile } from '../lib/d3.geo.tile';
-import { utilPrefixCSSProperty } from '../util/index';
+import { geoEuclideanDistance } from '../geo';
+import { utilPrefixCSSProperty } from '../util';
 import { rendererBackgroundSource } from './background_source.js';
 
 
@@ -98,7 +99,7 @@ export function rendererTileLayer(context) {
             tile().forEach(function(d) {
                 addSource(d);
                 if (d[3] === '') return;
-                if (typeof d[3] !== 'string') return; // Workaround for chrome crash https://github.com/openstreetmap/iD/issues/2295
+                if (typeof d[3] !== 'string') return; // Workaround for #2295
                 requests.push(d);
                 if (cache[d[3]] === false && lookUp(d)) {
                     requests.push(addSource(lookUp(d)));
@@ -118,6 +119,7 @@ export function rendererTileLayer(context) {
             source.offset()[0] * Math.pow(2, z),
             source.offset()[1] * Math.pow(2, z)
         ];
+
 
         function load(d) {
             cache[d[3]] = true;
@@ -146,9 +148,11 @@ export function rendererTileLayer(context) {
                 'scale(' + scale + ',' + scale + ')';
         }
 
-        function debugCoordinates(d) {
+        function tileCenter(d) {
             var _ts = tileSize * Math.pow(2, z - d[2]);
             var scale = tileSizeAtZoom(d, z);
+            // FIXME:  this scale * tileSize/number stuff is hacky, and more for displaying the debug text.
+            // It's not really the center of the tile, but it is guaranteed to be somewhere in the tile.
             return [
                 ((d[0] * _ts) - tileOrigin[0] + pixelOffset[0] + scale * (tileSize / 4)),
                 ((d[1] * _ts) - tileOrigin[1] + pixelOffset[1] + scale * (tileSize / 2))
@@ -156,9 +160,27 @@ export function rendererTileLayer(context) {
         }
 
         function debugTransform(d) {
-            var coord = debugCoordinates(d);
+            var coord = tileCenter(d);
             return 'translate(' + coord[0] + 'px,' + coord[1] + 'px)';
         }
+
+
+        // Pick a representative tile near the center of the viewport
+        // (This is useful for sampling the imagery vintage)
+        var dims = tile.size(),
+            mapCenter = [dims[0] / 2, dims[1] / 2],
+            minDist = Math.max(dims[0], dims[1]),
+            nearCenter;
+
+        requests.forEach(function(d) {
+            var c = tileCenter(d);
+            var dist = geoEuclideanDistance(c, mapCenter);
+            if (dist < minDist) {
+                minDist = dist;
+                nearCenter = d;
+            }
+        });
+
 
         var image = selection.selectAll('img')
             .data(requests, function(d) { return d[3]; });
@@ -166,6 +188,7 @@ export function rendererTileLayer(context) {
         image.exit()
             .style(transformProp, imageTransform)
             .classed('tile-removing', true)
+            .classed('tile-center', false)
             .each(function() {
                 var tile = d3.select(this);
                 window.setTimeout(function() {
@@ -184,7 +207,9 @@ export function rendererTileLayer(context) {
           .merge(image)
             .style(transformProp, imageTransform)
             .classed('tile-debug', showDebug)
-            .classed('tile-removing', false);
+            .classed('tile-removing', false)
+            .classed('tile-center', function(d) { return d === nearCenter; });
+
 
 
         var debug = selection.selectAll('.tile-label-debug')
@@ -219,20 +244,11 @@ export function rendererTileLayer(context) {
                 .selectAll('.tile-label-debug-vintage')
                 .each(function(d) {
                     var span = d3.select(this);
-                    var center = context.projection.invert(debugCoordinates(d));
-                    source.getVintage(center, d[2], function(err, result) {
-                        var vintage = '';
-                        if (result) {
-                            if (result.start || result.end) {
-                                vintage = (result.start || '?');
-                                if (result.start !== result.end) {
-                                    vintage += ' - ' + (result.end || '?');
-                                }
-                            }
-                        }
-
-                        span
-                            .text(vintage || t('infobox.imagery.vintage') + ': ' + t('infobox.imagery.unknown'));
+                    var center = context.projection.invert(tileCenter(d));
+                    source.getVintage(center, d, function(err, result) {
+                        span.text((result && result.range) ||
+                            t('infobox.imagery.vintage') + ': ' + t('infobox.imagery.unknown')
+                        );
                     });
                 });
         }

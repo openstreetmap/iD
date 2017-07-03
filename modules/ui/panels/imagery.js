@@ -64,31 +64,20 @@ export function uiPanelImagery(context) {
 
     var debouncedGetVintage = _.debounce(getVintage, 250);
     function getVintage(selection) {
-        var tile = d3.select('.layer-background img');
+        var tile = d3.select('.layer-background img.tile-center');   // tile near viewport center
         if (tile.empty()) return;
 
-        var tiledata = tile.datum(),
-            zoom = tiledata[2] || Math.floor(context.map().zoom()),
+        var d = tile.datum(),
+            zoom = (d && d.length >= 3 && d[2]) || Math.floor(context.map().zoom()),
             center = context.map().center();
 
         currZoom = String(zoom);
         selection.selectAll('.zoom')
             .text(currZoom);
 
-        background.baseLayerSource().getVintage(center, currZoom, function(err, result) {
-            if (!result) {
-                currVintage = t('infobox.imagery.unknown');
-            } else {
-                if (result.start || result.end) {
-                    currVintage = (result.start || '?');
-                    if (result.start !== result.end) {
-                        currVintage += ' - ' + (result.end || '?');
-                    }
-                } else {
-                    currVintage = t('infobox.imagery.unknown');
-                }
-            }
-
+        if (!d || !d.length >= 3) return;
+        background.baseLayerSource().getVintage(center, d, function(err, result) {
+            currVintage = (result && result.range) || t('infobox.imagery.unknown');
             selection.selectAll('.vintage')
                 .text(currVintage);
         });
