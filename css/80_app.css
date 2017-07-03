@@ -2484,6 +2484,7 @@ img.tile {
 }
 
 .tile-label-debug {
+    font-size: 10px;
     background: rgba(0, 0, 0, 0.7);
     color: #fff;
     position: absolute;
@@ -2491,6 +2492,8 @@ img.tile {
     padding: 5px;
     border-radius: 3px;
     z-index: 2;
+    margin-left: -50px;
+    margin-top: -20px;
 
     transform-origin:0 0;
     -ms-transform-origin:0 0;

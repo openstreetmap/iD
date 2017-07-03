@@ -151,11 +151,9 @@ export function rendererTileLayer(context) {
         function tileCenter(d) {
             var _ts = tileSize * Math.pow(2, z - d[2]);
             var scale = tileSizeAtZoom(d, z);
-            // FIXME:  this scale * tileSize/number stuff is hacky, and more for displaying the debug text.
-            // It's not really the center of the tile, but it is guaranteed to be somewhere in the tile.
             return [
-                ((d[0] * _ts) - tileOrigin[0] + pixelOffset[0] + scale * (tileSize / 4)),
-                ((d[1] * _ts) - tileOrigin[1] + pixelOffset[1] + scale * (tileSize / 2))
+                ((d[0] * _ts) - tileOrigin[0] + pixelOffset[0] + (_ts / 2)),
+                ((d[1] * _ts) - tileOrigin[1] + pixelOffset[1] + (_ts / 2))
             ];
         }
 
