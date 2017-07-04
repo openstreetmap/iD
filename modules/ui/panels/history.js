@@ -1,4 +1,3 @@
-import * as d3 from 'd3';
 import _ from 'lodash';
 import { t } from '../../util/locale';
 import { svgIcon } from '../../svg';
