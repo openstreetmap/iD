@@ -2647,7 +2647,7 @@ img.tile-removing {
 
 /* Info Box
 ------------------------------------------------------- */
-.infobox {
+.info-panels {
     display: flex;
     flex-flow: row-reverse wrap-reverse;
     position: absolute;
@@ -2657,18 +2657,18 @@ img.tile-removing {
     -ms-user-select: element;
 }
 
-.infobox h1,
-.infobox h2,
-.infobox h3,
-.infobox h4,
-.infobox h5 {
+.info-panels h1,
+.info-panels h2,
+.info-panels h3,
+.info-panels h4,
+.info-panels h5 {
     display: inline-block;
     margin-bottom: 0;
 }
 
-.infobox h1,
-.infobox h2,
-.infobox h3 {
+.info-panels h1,
+.info-panels h2,
+.info-panels h3 {
     color: #ff8;
 }
 

@@ -7,10 +7,10 @@ export function uiPanelHistory(context) {
 
 
     function displayTimestamp(entity) {
-        if (!entity.timestamp) return t('infobox.history.unknown');
+        if (!entity.timestamp) return t('info_panels.history.unknown');
 
         var d = new Date(entity.timestamp);
-        if (isNaN(d.getTime())) return t('infobox.history.unknown');
+        if (isNaN(d.getTime())) return t('info_panels.history.unknown');
 
         return d.toLocaleString();
     }
@@ -20,7 +20,7 @@ export function uiPanelHistory(context) {
         if (!entity.user) {
             selection
                 .append('span')
-                .text(t('infobox.history.unknown'));
+                .text(t('info_panels.history.unknown'));
             return;
         }
 
@@ -55,7 +55,7 @@ export function uiPanelHistory(context) {
         if (!entity.changeset) {
             selection
                 .append('span')
-                .text(t('infobox.history.unknown'));
+                .text(t('info_panels.history.unknown'));
             return;
         }
 
@@ -95,7 +95,7 @@ export function uiPanelHistory(context) {
         selection
             .append('h4')
             .attr('class', 'history-heading')
-            .text(singular || t('infobox.history.selected', { n: selected.length }));
+            .text(singular || t('info_panels.history.selected', { n: selected.length }));
 
         if (!singular) return;
 
@@ -106,20 +106,20 @@ export function uiPanelHistory(context) {
 
         list
             .append('li')
-            .text(t('infobox.history.version') + ': ' + entity.version);
+            .text(t('info_panels.history.version') + ': ' + entity.version);
 
         list
             .append('li')
-            .text(t('infobox.history.last_edit') + ': ' + displayTimestamp(entity));
+            .text(t('info_panels.history.last_edit') + ': ' + displayTimestamp(entity));
 
         list
             .append('li')
-            .text(t('infobox.history.edited_by') + ': ')
+            .text(t('info_panels.history.edited_by') + ': ')
             .call(displayUser, entity);
 
         list
             .append('li')
-            .text(t('infobox.history.changeset') + ': ')
+            .text(t('info_panels.history.changeset') + ': ')
             .call(displayChangeset, entity);
 
         selection
@@ -130,7 +130,7 @@ export function uiPanelHistory(context) {
             .attr('href', context.connection().historyURL(entity))
             .call(svgIcon('#icon-out-link', 'inline'))
             .append('span')
-            .text(t('infobox.history.link_text'));
+            .text(t('info_panels.history.link_text'));
     }
 
 
@@ -149,8 +149,8 @@ export function uiPanelHistory(context) {
     };
 
     panel.id = 'history';
-    panel.title = t('infobox.history.title');
-    panel.key = t('infobox.history.key');
+    panel.title = t('info_panels.history.title');
+    panel.key = t('info_panels.history.key');
 
 
     return panel;

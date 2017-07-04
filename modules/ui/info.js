@@ -26,7 +26,7 @@ export function uiInfo(context) {
         function redraw() {
             var activeids = ids.filter(function(k) { return active[k]; }).sort();
 
-            var containers = infobox.selectAll('.panel-container')
+            var containers = infoPanels.selectAll('.panel-container')
                 .data(activeids, function(k) { return k; });
 
             containers.exit()
@@ -70,7 +70,7 @@ export function uiInfo(context) {
 
 
             // redraw the panels
-            infobox.selectAll('.panel-content')
+            infoPanels.selectAll('.panel-content')
                 .each(function(d) {
                     d3.select(this).call(panels[d]);
                 });
@@ -100,21 +100,21 @@ export function uiInfo(context) {
         }
 
 
-        var infobox = selection.selectAll('.infobox')
+        var infoPanels = selection.selectAll('.info-panels')
             .data([0]);
 
-        infobox = infobox.enter()
+        infoPanels = infoPanels.enter()
             .append('div')
-            .attr('class', 'infobox')
-            .merge(infobox);
+            .attr('class', 'info-panels')
+            .merge(infoPanels);
 
         redraw();
 
         var keybinding = d3keybinding('info')
-            .on(uiCmd('⌘' + t('infobox.key')), toggle);
+            .on(uiCmd('⌘' + t('info_panels.key')), toggle);
 
         ids.forEach(function(k) {
-            var key = t('infobox.' + k + '.key', { default: null });
+            var key = t('info_panels.' + k + '.key', { default: null });
             if (!key) return;
             keybinding
                 .on(uiCmd('⌘⇧' + key), function() { toggle(k); });

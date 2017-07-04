@@ -29,14 +29,14 @@ export function uiPanelBackground(context) {
 
         list
             .append('li')
-            .text(t('infobox.background.zoom') + ': ')
+            .text(t('info_panels.background.zoom') + ': ')
             .append('span')
             .attr('class', 'zoom')
             .text(currZoom);
 
         list
             .append('li')
-            .text(t('infobox.background.vintage') + ': ')
+            .text(t('info_panels.background.vintage') + ': ')
             .append('span')
             .attr('class', 'vintage')
             .text(currVintage);
@@ -49,7 +49,7 @@ export function uiPanelBackground(context) {
 
         selection
             .append('a')
-            .text(t('infobox.background.' + toggle))
+            .text(t('info_panels.background.' + toggle))
             .attr('href', '#')
             .attr('class', 'button button-toggle-tiles')
             .on('click', function() {
@@ -75,7 +75,7 @@ export function uiPanelBackground(context) {
 
         if (!d || !d.length >= 3) return;
         background.baseLayerSource().getVintage(center, d, function(err, result) {
-            currVintage = (result && result.range) || t('infobox.background.unknown');
+            currVintage = (result && result.range) || t('info_panels.background.unknown');
             selection.selectAll('.vintage')
                 .text(currVintage);
         });
@@ -102,8 +102,8 @@ export function uiPanelBackground(context) {
     };
 
     panel.id = 'background';
-    panel.title = t('infobox.background.title');
-    panel.key = t('infobox.background.key');
+    panel.title = t('info_panels.background.title');
+    panel.key = t('info_panels.background.key');
 
 
     return panel;

@@ -244,7 +244,7 @@ export function rendererTileLayer(context) {
                     var center = context.projection.invert(tileCenter(d));
                     source.getVintage(center, d, function(err, result) {
                         span.text((result && result.range) ||
-                            t('infobox.background.vintage') + ': ' + t('infobox.background.unknown')
+                            t('info_panels.background.vintage') + ': ' + t('info_panels.background.unknown')
                         );
                     });
                 });

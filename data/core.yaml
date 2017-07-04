@@ -272,7 +272,7 @@ en:
   contributors:
     list: "Edits by {users}"
     truncated_list: "Edits by {users} and {count} others"
-  infobox:
+  info_panels:
     key: I
     history:
       key: H
@@ -1101,7 +1101,7 @@ en:
         lasso: "Draw a selection lasso around features"
       with_selected:
         title: "With feature selected"
-        infobox: "Toggle info / measurement box"
+        info_panels: "Toggle information panels"
         edit_menu: "Toggle edit menu"
       vertex_selected:
         title: "With node selected"

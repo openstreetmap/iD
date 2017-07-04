@@ -94,8 +94,8 @@
                         "text": "shortcuts.browsing.with_selected.edit_menu"
                     }, {
                         "modifiers": ["⌘"],
-                        "shortcuts": ["infobox.key"],
-                        "text": "shortcuts.browsing.with_selected.infobox"
+                        "shortcuts": ["info_panels.key"],
+                        "text": "shortcuts.browsing.with_selected.info_panels"
                     },
 
                     {

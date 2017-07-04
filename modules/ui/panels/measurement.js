@@ -121,7 +121,7 @@ export function uiPanelMeasurement(context) {
         selection
             .append('h4')
             .attr('class', 'measurement-heading')
-            .text(singular || t('infobox.measurement.selected', { n: selected.length }));
+            .text(singular || t('info_panels.measurement.selected', { n: selected.length }));
 
         if (!selected.length) return;
 
@@ -140,7 +140,7 @@ export function uiPanelMeasurement(context) {
         if (!singular) {
             list
                 .append('li')
-                .text(t('infobox.measurement.center') + ': ' +
+                .text(t('info_panels.measurement.center') + ': ' +
                     center[0].toFixed(OSM_PRECISION) + ', ' + center[1].toFixed(OSM_PRECISION)
                 );
             return;
@@ -154,19 +154,19 @@ export function uiPanelMeasurement(context) {
             var closed = (entity.type === 'relation') || (entity.isClosed() && !entity.isDegenerate()),
                 feature = entity.asGeoJSON(resolver),
                 length = radiansToMeters(d3GeoLength(toLineString(feature))),
-                lengthLabel = t('infobox.measurement.' + (closed ? 'perimeter' : 'length')),
+                lengthLabel = t('info_panels.measurement.' + (closed ? 'perimeter' : 'length')),
                 centroid = d3GeoCentroid(feature);
 
             list
                 .append('li')
-                .text(t('infobox.measurement.geometry') + ': ' +
-                    (closed ? t('infobox.measurement.closed') + ' ' : '') + t('geometry.' + geometry) );
+                .text(t('info_panels.measurement.geometry') + ': ' +
+                    (closed ? t('info_panels.measurement.closed') + ' ' : '') + t('geometry.' + geometry) );
 
             if (closed) {
                 var area = steradiansToSqmeters(entity.area(resolver));
                 list
                     .append('li')
-                    .text(t('infobox.measurement.area') + ': ' + displayArea(area));
+                    .text(t('info_panels.measurement.area') + ': ' + displayArea(area));
             }
 
             list
@@ -175,7 +175,7 @@ export function uiPanelMeasurement(context) {
 
             list
                 .append('li')
-                .text(t('infobox.measurement.centroid') + ': ' +
+                .text(t('info_panels.measurement.centroid') + ': ' +
                     centroid[0].toFixed(OSM_PRECISION) + ', ' + centroid[1].toFixed(OSM_PRECISION)
                 );
 
@@ -184,7 +184,7 @@ export function uiPanelMeasurement(context) {
 
             selection
                 .append('a')
-                .text(t('infobox.measurement.' + toggle))
+                .text(t('info_panels.measurement.' + toggle))
                 .attr('href', '#')
                 .attr('class', 'button button-toggle-units')
                 .on('click', function() {
@@ -194,11 +194,11 @@ export function uiPanelMeasurement(context) {
                 });
 
         } else {
-            var centerLabel = t('infobox.measurement.' + (entity.type === 'node' ? 'location' : 'center'));
+            var centerLabel = t('info_panels.measurement.' + (entity.type === 'node' ? 'location' : 'center'));
 
             list
                 .append('li')
-                .text(t('infobox.measurement.geometry') + ': ' + t('geometry.' + geometry));
+                .text(t('info_panels.measurement.geometry') + ': ' + t('geometry.' + geometry));
 
             list
                 .append('li')
@@ -224,8 +224,8 @@ export function uiPanelMeasurement(context) {
     };
 
     panel.id = 'measurement';
-    panel.title = t('infobox.measurement.title');
-    panel.key = t('infobox.measurement.key');
+    panel.title = t('info_panels.measurement.title');
+    panel.key = t('info_panels.measurement.key');
 
 
     return panel;

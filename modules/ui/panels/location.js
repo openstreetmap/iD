@@ -52,12 +52,12 @@ export function uiPanelLocation(context) {
     var debouncedGetLocation = _.debounce(getLocation, 250);
     function getLocation(selection, coord) {
         if (!services.geocoder) {
-            currLocation = t('infobox.location.unknown_location');
+            currLocation = t('info_panels.location.unknown_location');
             selection.selectAll('.location-info')
                 .text(currLocation);
         } else {
             services.geocoder.reverse(coord, function(err, result) {
-                currLocation = result ? result.display_name : t('infobox.location.unknown_location');
+                currLocation = result ? result.display_name : t('info_panels.location.unknown_location');
                 selection.selectAll('.location-info')
                     .text(currLocation);
             });
@@ -80,8 +80,8 @@ export function uiPanelLocation(context) {
     };
 
     panel.id = 'location';
-    panel.title = t('infobox.location.title');
-    panel.key = t('infobox.location.key');
+    panel.title = t('info_panels.location.title');
+    panel.key = t('info_panels.location.key');
 
 
     return panel;
