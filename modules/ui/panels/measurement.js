@@ -110,8 +110,6 @@ export function uiPanelMeasurement(context) {
 
 
     function redraw(selection) {
-        if (d3.selectAll('.infobox.hide').size()) return;   // infobox is hidden
-
         var resolver = context.graph(),
             selected = _.filter(context.selectedIDs(), function(e) { return context.hasEntity(e); }),
             singular = selected.length === 1 ? selected[0] : null,
@@ -209,7 +207,6 @@ export function uiPanelMeasurement(context) {
                 );
         }
     }
-
 
 
     var panel = function(selection) {

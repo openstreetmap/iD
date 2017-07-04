@@ -21,8 +21,6 @@ export function uiPanelLocation(context) {
 
 
     function redraw(selection) {
-        if (d3.selectAll('.infobox.hide').size()) return;   // infobox is hidden
-
         selection.html('');
 
         var list = selection

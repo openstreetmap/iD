@@ -88,8 +88,6 @@ export function uiPanelHistory(context) {
 
 
     function redraw(selection) {
-        if (d3.selectAll('.infobox.hide').size()) return;   // infobox is hidden
-
         var selected = _.filter(context.selectedIDs(), function(e) { return context.hasEntity(e); }),
             singular = selected.length === 1 ? selected[0] : null;
 
@@ -135,7 +133,6 @@ export function uiPanelHistory(context) {
             .append('span')
             .text(t('infobox.history.link_text'));
     }
-
 
 
     var panel = function(selection) {

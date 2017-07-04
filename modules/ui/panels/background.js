@@ -11,8 +11,6 @@ export function uiPanelBackground(context) {
 
 
     function redraw(selection) {
-        if (d3.selectAll('.infobox.hide').size()) return;   // infobox is hidden
-
         if (currSource !== background.baseLayerSource().name()) {
             currSource = background.baseLayerSource().name();
             currZoom = '';
