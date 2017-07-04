@@ -72,7 +72,7 @@ export function uiPanelHistory(context) {
         links
             .append('a')
             .attr('class', 'changeset-osm-link')
-            .attr('href', context.connection().userURL(entity.changeset))
+            .attr('href', context.connection().changesetURL(entity.changeset))
             .attr('target', '_blank')
             .attr('tabindex', -1)
             .text('OSM');
