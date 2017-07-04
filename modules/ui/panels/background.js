@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { t } from '../../util/locale';
 
 
-export function uiPanelImagery(context) {
+export function uiPanelBackground(context) {
     var background = context.background();
     var currSource = null;
     var currZoom = '';
@@ -23,7 +23,7 @@ export function uiPanelImagery(context) {
 
         var list = selection
             .append('ul')
-            .attr('class', 'imagery-info');
+            .attr('class', 'background-info');
 
         list
             .append('li')
@@ -31,14 +31,14 @@ export function uiPanelImagery(context) {
 
         list
             .append('li')
-            .text(t('infobox.imagery.zoom') + ': ')
+            .text(t('infobox.background.zoom') + ': ')
             .append('span')
             .attr('class', 'zoom')
             .text(currZoom);
 
         list
             .append('li')
-            .text(t('infobox.imagery.vintage') + ': ')
+            .text(t('infobox.background.vintage') + ': ')
             .append('span')
             .attr('class', 'vintage')
             .text(currVintage);
@@ -51,7 +51,7 @@ export function uiPanelImagery(context) {
 
         selection
             .append('a')
-            .text(t('infobox.imagery.' + toggle))
+            .text(t('infobox.background.' + toggle))
             .attr('href', '#')
             .attr('class', 'button button-toggle-tiles')
             .on('click', function() {
@@ -77,7 +77,7 @@ export function uiPanelImagery(context) {
 
         if (!d || !d.length >= 3) return;
         background.baseLayerSource().getVintage(center, d, function(err, result) {
-            currVintage = (result && result.range) || t('infobox.imagery.unknown');
+            currVintage = (result && result.range) || t('infobox.background.unknown');
             selection.selectAll('.vintage')
                 .text(currVintage);
         });
@@ -88,10 +88,10 @@ export function uiPanelImagery(context) {
         selection.call(redraw);
 
         context.map()
-            .on('drawn.info-imagery', function() {
+            .on('drawn.info-background', function() {
                 selection.call(redraw);
             })
-            .on('move.info-imagery', function() {
+            .on('move.info-background', function() {
                 selection.call(debouncedGetVintage);
             });
 
@@ -99,13 +99,13 @@ export function uiPanelImagery(context) {
 
     panel.off = function() {
         context.map()
-            .on('drawn.info-imagery', null)
-            .on('move.info-imagery', null);
+            .on('drawn.info-background', null)
+            .on('move.info-background', null);
     };
 
-    panel.id = 'imagery';
-    panel.title = t('infobox.imagery.title');
-    panel.key = t('infobox.imagery.key');
+    panel.id = 'background';
+    panel.title = t('infobox.background.title');
+    panel.key = t('infobox.background.key');
 
 
     return panel;

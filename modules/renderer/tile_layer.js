@@ -150,7 +150,6 @@ export function rendererTileLayer(context) {
 
         function tileCenter(d) {
             var _ts = tileSize * Math.pow(2, z - d[2]);
-            var scale = tileSizeAtZoom(d, z);
             return [
                 ((d[0] * _ts) - tileOrigin[0] + pixelOffset[0] + (_ts / 2)),
                 ((d[1] * _ts) - tileOrigin[1] + pixelOffset[1] + (_ts / 2))
@@ -245,7 +244,7 @@ export function rendererTileLayer(context) {
                     var center = context.projection.invert(tileCenter(d));
                     source.getVintage(center, d, function(err, result) {
                         span.text((result && result.range) ||
-                            t('infobox.imagery.vintage') + ': ' + t('infobox.imagery.unknown')
+                            t('infobox.background.vintage') + ': ' + t('infobox.background.unknown')
                         );
                     });
                 });

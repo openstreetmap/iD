@@ -284,9 +284,9 @@ en:
       changeset: Changeset
       unknown: Unknown
       link_text: History on openstreetmap.org
-    imagery:
-      key: G
-      title: Imagery
+    background:
+      key: B
+      title: Background
       zoom: Zoom
       vintage: Vintage
       unknown: Unknown

@@ -1,16 +1,16 @@
+export * from './background';
 export * from './history';
-export * from './imagery';
 export * from './location';
 export * from './measurement';
 
+import { uiPanelBackground } from './background';
 import { uiPanelHistory } from './history';
-import { uiPanelImagery } from './imagery';
 import { uiPanelLocation } from './location';
 import { uiPanelMeasurement } from './measurement';
 
 export var uiInfoPanels = {
+    background: uiPanelBackground,
     history: uiPanelHistory,
-    imagery: uiPanelImagery,
     location: uiPanelLocation,
     measurement: uiPanelMeasurement,
 };
