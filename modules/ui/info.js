@@ -117,7 +117,7 @@ export function uiInfo(context) {
             var key = t('infobox.' + k + '.key', { default: null });
             if (!key) return;
             keybinding
-                .on(uiCmd('⌘' + key), function() { toggle(k); });
+                .on(uiCmd('⌘⇧' + key), function() { toggle(k); });
         });
 
         d3.select(document)
