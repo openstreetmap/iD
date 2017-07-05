@@ -17,7 +17,6 @@ describe('iD.serviceNominatim', function() {
 
 
     describe('#countryCode', function() {
-
         it('calls the given callback with the results of the country code query', function() {
             var callback = sinon.spy();
             nominatim.countryCode([16, 48], callback);
@@ -28,13 +27,15 @@ describe('iD.serviceNominatim', function() {
             server.respond();
 
             expect(query(server.requests[0].url)).to.eql(
-                {format: 'json', addressdetails: '1', lat: '48', lon: '16'});
+                {zoom: '13', format: 'json', addressdetails: '1', lat: '48', lon: '16'});
             expect(callback).to.have.been.calledWithExactly(null, 'at');
         });
+    });
 
-        it('should not cache the first country code result', function() {
+    describe('#reverse', function() {
+        it('should not cache distant result', function() {
             var callback = sinon.spy();
-            nominatim.countryCode([16, 48], callback);
+            nominatim.reverse([16, 48], callback);
 
             server.respondWith('GET', new RegExp('https://nominatim.openstreetmap.org/reverse'),
                 [200, { 'Content-Type': 'application/json' },
@@ -42,13 +43,14 @@ describe('iD.serviceNominatim', function() {
             server.respond();
 
             expect(query(server.requests[0].url)).to.eql(
-                {format: 'json', addressdetails: '1', lat: '48', lon: '16'});
-            expect(callback).to.have.been.calledWithExactly(null, 'at');
+                {zoom: '13', format: 'json', addressdetails: '1', lat: '48', lon: '16'});
+            expect(callback).to.have.been.calledWithExactly(null, {address: {country_code:'at'}});
 
             server.restore();
             server = sinon.fakeServer.create();
 
-            nominatim.countryCode([17, 49], callback);
+            callback = sinon.spy();
+            nominatim.reverse([17, 49], callback);
 
             server.respondWith('GET', new RegExp('https://nominatim.openstreetmap.org/reverse'),
                 [200, { 'Content-Type': 'application/json' },
@@ -56,13 +58,13 @@ describe('iD.serviceNominatim', function() {
             server.respond();
 
             expect(query(server.requests[0].url)).to.eql(
-                {format: 'json', addressdetails: '1', lat: '49', lon: '17'});
-            expect(callback).to.have.been.calledWithExactly(null, 'cz');
+                {zoom: '13', format: 'json', addressdetails: '1', lat: '49', lon: '17'});
+            expect(callback).to.have.been.calledWithExactly(null, {address: {country_code:'cz'}});
         });
 
-        it('should cache the first country code result', function() {
+        it('should cache nearby result', function() {
             var callback = sinon.spy();
-            nominatim.countryCode([16, 48], callback);
+            nominatim.reverse([16, 48], callback);
 
             server.respondWith('GET', new RegExp('https://nominatim.openstreetmap.org/reverse'),
                 [200, { 'Content-Type': 'application/json' },
@@ -70,24 +72,25 @@ describe('iD.serviceNominatim', function() {
             server.respond();
 
             expect(query(server.requests[0].url)).to.eql(
-                {format: 'json', addressdetails: '1', lat: '48', lon: '16'});
-            expect(callback).to.have.been.calledWithExactly(null, 'at');
+                {zoom: '13', format: 'json', addressdetails: '1', lat: '48', lon: '16'});
+            expect(callback).to.have.been.calledWithExactly(null, {address: {country_code:'at'}});
 
             server.restore();
             server = sinon.fakeServer.create();
 
-            nominatim.countryCode([16.01, 48.01], callback);
+            callback = sinon.spy();
+            nominatim.reverse([16.000001, 48.000001], callback);
 
             server.respondWith('GET', new RegExp('https://nominatim.openstreetmap.org/reverse'),
                 [200, { 'Content-Type': 'application/json' },
                     '{"address":{"country_code":"cz"}}']);
             server.respond();
-            expect(callback).to.have.been.calledWithExactly(null, 'at');
+            expect(callback).to.have.been.calledWithExactly(null, {address: {country_code:'at'}});
         });
 
         it('calls the given callback with an error', function() {
             var callback = sinon.spy();
-            nominatim.countryCode([1000, 1000], callback);
+            nominatim.reverse([1000, 1000], callback);
 
             server.respondWith('GET', new RegExp('https://nominatim.openstreetmap.org/reverse'),
                 [200, { 'Content-Type': 'application/json' },
@@ -95,7 +98,7 @@ describe('iD.serviceNominatim', function() {
             server.respond();
 
             expect(query(server.requests[0].url)).to.eql(
-                {format: 'json', addressdetails: '1', lat: '1000', lon: '1000'});
+                {zoom: '13', format: 'json', addressdetails: '1', lat: '1000', lon: '1000'});
             expect(callback).to.have.been.calledWithExactly('Unable to geocode');
         });
     });

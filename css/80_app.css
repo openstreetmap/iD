@@ -2484,13 +2484,16 @@ img.tile {
 }
 
 .tile-label-debug {
+    font-size: 10px;
     background: rgba(0, 0, 0, 0.7);
     color: #fff;
     position: absolute;
     text-align: center;
-    width: 128px;
+    padding: 5px;
     border-radius: 3px;
     z-index: 2;
+    margin-left: -50px;
+    margin-top: -20px;
 
     transform-origin:0 0;
     -ms-transform-origin:0 0;
@@ -2505,7 +2508,7 @@ img.tile {
 }
 
 img.tile-debug {
-    border: 1px solid red;
+    outline: 1px solid red;
 }
 
 img.tile-loaded {
@@ -2644,37 +2647,95 @@ img.tile-removing {
 
 /* Info Box
 ------------------------------------------------------- */
-.infobox {
+.info-panels {
+    display: flex;
+    flex-flow: row-reverse wrap-reverse;
     position: absolute;
     z-index: 1;
     right: 0;
     bottom: 30px;
-    width: 240px;
-    border-radius: 4px 0 0 0;
-    border-bottom: 1px solid black;
     -ms-user-select: element;
 }
 
-.infobox .infobox-heading {
-    display: block;
-    border-radius: 4px 0 0 0;
-    padding: 5px 10px;
-    height: 30px;
+.info-panels h1,
+.info-panels h2,
+.info-panels h3,
+.info-panels h4,
+.info-panels h5 {
+    display: inline-block;
+    margin-bottom: 0;
 }
 
-.infobox ul {
+.info-panels h1,
+.info-panels h2,
+.info-panels h3 {
+    color: #ff8;
+}
+
+.panel-container {
+    flex: 0 0 auto;
+    margin: 2px 0 0 2px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.75);
+    padding-bottom: 10px;
+    width: 250px;
+}
+
+.panel-container .panel-title {
+    border-radius: 4px 4px 0 0;
+}
+
+.panel-title {
     padding: 5px 10px;
 }
 
-.infobox .button {
-    position: absolute;
+.panel-title button.close {
+    float: right;
+    height: 20px;
+    background: none;
+    color: #ddd;
+}
+
+.panel-title button.close:hover {
+    color: #fff;
+}
+
+.panel-title button.close .icon {
+    height: 20px;
+    width: 16px;
+}
+
+.panel-content {
+    padding: 5px 10px;
+    position: relative;
+}
+
+.panel-content .button {
+    display: inline-block;
     background: #7092ff;
     border-radius: 2px;
     padding: 0 4px;
+    margin-top: 10px;
     color: white;
-    top: 40px;
-    right: 10px;
 }
+
+.panel-content-history .links a {
+    margin-left: 10px;
+}
+[dir='rtl'] .panel-content-history .links a {
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.panel-content-history .view-history-on-osm {
+    display: block;
+    margin-top: 10px;
+}
+
+.panel-content-location .location-info {
+    margin-top: 10px;
+}
+
 
 /* About Section
 ------------------------------------------------------- */
@@ -3111,6 +3172,7 @@ img.tile-removing {
 
 .modal-shortcuts .modal-section:last-child {
     padding-top: 10px;
+    min-height: 275px;
 }
 
 .modal-shortcuts .tabs-bar {
@@ -3143,6 +3205,11 @@ img.tile-removing {
 .modal-shortcuts .shortcut-column {
     flex: 1 1 50%;
     width: 50%;
+}
+
+.modal-shortcuts .shortcut-tab-tools .shortcut-column {
+    flex: 1 1 100%;
+    width: 100%;
 }
 
 .modal-shortcuts td {

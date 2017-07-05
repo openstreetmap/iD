@@ -5,6 +5,8 @@
             "name": "2013 aerial imagery for San Juan County WA",
             "type": "tms",
             "template": "http://sjcgis.org/arcgis/rest/services/Basemaps/Aerials_2013_WM/MapServer/tile/{zoom}/{y}/{x}",
+            "endDate": "2013-06-01T00:00:00.000Z",
+            "startDate": "2013-05-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 19
@@ -162,6 +164,8 @@
             "name": "2016 aerial imagery for San Juan County WA",
             "type": "tms",
             "template": "http://sjcgis.org/arcgis/rest/services/Basemaps/Aerials_2016_WM/MapServer/tile/{zoom}/{y}/{x}",
+            "endDate": "2016-07-01T00:00:00.000Z",
+            "startDate": "2016-05-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 19
@@ -1631,6 +1635,8 @@
             "name": "Basemap geoportail.lu",
             "type": "tms",
             "template": "https://{switch:wmts3,wmts4}.geoportail.lu/opendata/wmts/basemap/GLOBAL_WEBMERCATOR_4_V3/{zoom}/{x}/{y}.png",
+            "endDate": "2010-07-20T00:00:00.000Z",
+            "startDate": "2013-07-19T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 20
@@ -6528,6 +6534,8 @@
             "name": "British Columbia Mosaic",
             "type": "tms",
             "template": "http://{switch:a,b,c,d}.imagery.paulnorman.ca/tiles/bc_mosaic/{zoom}/{x}/{y}.png",
+            "endDate": "2013-06-01T00:00:00.000Z",
+            "startDate": "2009-01-01T00:00:00.000Z",
             "scaleExtent": [
                 9,
                 20
@@ -8645,6 +8653,8 @@
             "name": "City of Cape Town 2013 Aerial",
             "type": "tms",
             "template": "http://{switch:a,b,c}.coct.aerial.openstreetmap.org.za/layer/za_coct_aerial_2013/{zoom}/{x}/{y}.jpg",
+            "endDate": "2015-01-01T00:00:00.000Z",
+            "startDate": "2013-01-01T00:00:00.000Z",
             "scaleExtent": [
                 1,
                 21
@@ -9450,6 +9460,8 @@
             "name": "City of Cape Town 2015 Aerial",
             "type": "tms",
             "template": "http://{switch:a,b,c}.coct.aerial.openstreetmap.org.za/layer/za_coct_aerial_2015/{zoom}/{x}/{y}.jpg",
+            "endDate": "2016-01-01T00:00:00.000Z",
+            "startDate": "2015-01-01T00:00:00.000Z",
             "scaleExtent": [
                 1,
                 21
@@ -14343,6 +14355,8 @@
             "name": "FÖMI orthophoto 2000",
             "type": "tms",
             "template": "http://e.tile.openstreetmap.hu/ortofoto2000/{zoom}/{x}/{y}.jpg",
+            "endDate": "2000-01-01T00:00:00.000Z",
+            "startDate": "2000-01-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 17
@@ -16651,6 +16665,8 @@
             "name": "FÖMI orthophoto 2005",
             "type": "tms",
             "template": "http://e.tile.openstreetmap.hu/ortofoto2005/{zoom}/{x}/{y}.jpg",
+            "endDate": "2005-01-01T00:00:00.000Z",
+            "startDate": "2005-01-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 17
@@ -24559,6 +24575,8 @@
             "name": "imagico.de OSM images for mapping: Adams Bridge",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R119_N09_20160327T050917&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-03-27T00:00:00.000Z",
+            "startDate": "2016-03-27T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -24597,6 +24615,8 @@
             "name": "imagico.de OSM images for mapping: Alaska Range",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80700162014211LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2014-07-31T00:00:00.000Z",
+            "startDate": "2014-07-31T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 12
@@ -24639,6 +24659,8 @@
             "name": "imagico.de OSM images for mapping: Bakun Reservoir",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81190582014075LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2014-03-16T00:00:00.000Z",
+            "startDate": "2014-03-16T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -24681,6 +24703,8 @@
             "name": "imagico.de OSM images for mapping: Batam",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81250592016107LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-01-01T00:00:00.000Z",
+            "startDate": "2014-01-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -24719,6 +24743,8 @@
             "name": "imagico.de OSM images for mapping: Bouvet Island",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81800982013291LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2013-10-18T00:00:00.000Z",
+            "startDate": "2013-10-18T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -24758,6 +24784,8 @@
             "name": "imagico.de OSM images for mapping: Cental Alps in late September 2016",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R065_N47_20160929T102022&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-09-29T00:00:00.000Z",
+            "startDate": "2016-09-29T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -24808,6 +24836,8 @@
             "name": "imagico.de OSM images for mapping: Clerke Rocks",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC82050982015344LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-12-10T00:00:00.000Z",
+            "startDate": "2015-12-10T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -24850,6 +24880,8 @@
             "name": "imagico.de OSM images for mapping: Coropuna",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=EO1A0040712016264110KF&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-09-21T00:00:00.000Z",
+            "startDate": "2016-09-21T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -24896,6 +24928,8 @@
             "name": "imagico.de OSM images for mapping: Cotonou",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R022_N06_20151221T103009&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-12-21T00:00:00.000Z",
+            "startDate": "2015-12-21T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -24938,6 +24972,8 @@
             "name": "imagico.de OSM images for mapping: Darwin and Wolf islands, Galapagos",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R040_N01_20160311T164128&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-03-11T00:00:00.000Z",
+            "startDate": "2016-03-11T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -24976,6 +25012,8 @@
             "name": "imagico.de OSM images for mapping: Eastern Devon Island coast",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80360072014245LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2014-09-02T00:00:00.000Z",
+            "startDate": "2014-09-02T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 11
@@ -25014,6 +25052,8 @@
             "name": "imagico.de OSM images for mapping: Eastern Iceland",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC82160152013239LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2013-08-27T00:00:00.000Z",
+            "startDate": "2013-08-27T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 12
@@ -25052,6 +25092,8 @@
             "name": "imagico.de OSM images for mapping: El Altar",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=AST_L1T_00302052007154424_20150518041444_91492&z={zoom}&x={x}&y={-y}",
+            "endDate": "2012-02-05T00:00:00.000Z",
+            "startDate": "2012-02-05T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -25090,6 +25132,8 @@
             "name": "imagico.de OSM images for mapping: Elephant Island/Clarence Island",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R009_S61_20160109&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-01-09T00:00:00.000Z",
+            "startDate": "2016-01-09T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -25132,6 +25176,8 @@
             "name": "imagico.de OSM images for mapping: Enderby Land and Kemp Coast",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=enderby&z={zoom}&x={x}&y={-y}",
+            "endDate": "2017-03-27T00:00:00.000Z",
+            "startDate": "2017-01-25T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -25182,6 +25228,8 @@
             "name": "imagico.de OSM images for mapping: Fogo, Cape Verde",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC82100502015347LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-12-13T00:00:00.000Z",
+            "startDate": "2015-12-13T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -25220,6 +25268,8 @@
             "name": "imagico.de OSM images for mapping: Greenland mosaic",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=greenland&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-01-01T00:00:00.000Z",
+            "startDate": "2013-01-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 12
@@ -25870,6 +25920,8 @@
             "name": "imagico.de OSM images for mapping: Heard Island coast",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R047_S54_20160411T044330&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-04-12T00:00:00.000Z",
+            "startDate": "2016-04-12T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -25912,6 +25964,8 @@
             "name": "imagico.de OSM images for mapping: Isla Londonderry",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC82280982013259LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2013-09-16T00:00:00.000Z",
+            "startDate": "2013-09-16T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 12
@@ -25962,6 +26016,8 @@
             "name": "imagico.de OSM images for mapping: Kerch Strait",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R021_N44_20160807T083013&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-08-07T00:00:00.000Z",
+            "startDate": "2016-08-07T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -26000,6 +26056,8 @@
             "name": "imagico.de OSM images for mapping: Landsat off-nadir July 2016",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=ls_polar2&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-07-17T00:00:00.000Z",
+            "startDate": "2016-07-17T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 10
@@ -26050,6 +26108,8 @@
             "name": "imagico.de OSM images for mapping: Leskov Island ASTER",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=AST_L1T_00311162013112731_20150618142416_109190&z={zoom}&x={x}&y={-y}",
+            "endDate": "2013-11-16T00:00:00.000Z",
+            "startDate": "2013-11-16T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -26088,6 +26148,8 @@
             "name": "imagico.de OSM images for mapping: Leskov Island Landsat",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81991002015286LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-10-13T00:00:00.000Z",
+            "startDate": "2015-10-13T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -26130,6 +26192,8 @@
             "name": "imagico.de OSM images for mapping: May 2013 off-nadir Landsat",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=ls_polar&z={zoom}&x={x}&y={-y}",
+            "endDate": "2013-05-17T00:00:00.000Z",
+            "startDate": "2013-05-17T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 10
@@ -26200,6 +26264,8 @@
             "name": "imagico.de OSM images for mapping: Mount Kenya 2016",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R092_S02_20160613T075613&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-06-13T00:00:00.000Z",
+            "startDate": "2016-06-13T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -26238,6 +26304,8 @@
             "name": "imagico.de OSM images for mapping: Mount Kilimanjaro 2016",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R092_S05_20160802T075556&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-08-02T00:00:00.000Z",
+            "startDate": "2016-08-02T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -26276,6 +26344,8 @@
             "name": "imagico.de OSM images for mapping: New Ireland",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80940622015159LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-06-08T00:00:00.000Z",
+            "startDate": "2015-06-08T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -26314,6 +26384,8 @@
             "name": "imagico.de OSM images for mapping: North Sea Coast 2016",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=northsea_s2_2016&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-09-25T00:00:00.000Z",
+            "startDate": "2016-09-25T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -26360,6 +26432,8 @@
             "name": "imagico.de OSM images for mapping: Northern and Polar Ural mountains August 2016",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=ural_s2_2016&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-08-12T00:00:00.000Z",
+            "startDate": "2016-08-12T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -26406,6 +26480,8 @@
             "name": "imagico.de OSM images for mapping: Northern Ellesmere Island",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=nellesmere_ast&z={zoom}&x={x}&y={-y}",
+            "endDate": "2012-07-09T00:00:00.000Z",
+            "startDate": "2012-07-09T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 10
@@ -26452,6 +26528,8 @@
             "name": "imagico.de OSM images for mapping: Northern Ellesmere Island July 2016",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=nellesmere_ast_2016&z={zoom}&x={x}&y={-y}",
+            "endDate": "2012-07-15T00:00:00.000Z",
+            "startDate": "2012-07-08T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 10
@@ -26502,6 +26580,8 @@
             "name": "imagico.de OSM images for mapping: Northern German west coast tidalflats",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81960222015233LGN00vis&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-08-21T00:00:00.000Z",
+            "startDate": "2015-08-21T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 12
@@ -26544,6 +26624,8 @@
             "name": "imagico.de OSM images for mapping: Northern German west coast tidalflats (infrared)",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81960222015233LGN00ir&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-08-21T00:00:00.000Z",
+            "startDate": "2015-08-21T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 12
@@ -26586,6 +26668,8 @@
             "name": "imagico.de OSM images for mapping: Northern Greenland ASTER",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=ngreenland_ast&z={zoom}&x={x}&y={-y}",
+            "endDate": "2012-08-13T00:00:00.000Z",
+            "startDate": "2005-06-21T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 10
@@ -26644,6 +26728,8 @@
             "name": "imagico.de OSM images for mapping: Northwest Heard Island",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=EO1A1350972013086110KF&z={zoom}&x={x}&y={-y}",
+            "endDate": "2013-03-13T00:00:00.000Z",
+            "startDate": "2013-03-13T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -26690,6 +26776,8 @@
             "name": "imagico.de OSM images for mapping: Panama Canal",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R111_N09_20160604T154554&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-06-07T00:00:00.000Z",
+            "startDate": "2016-06-07T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -26728,6 +26816,8 @@
             "name": "imagico.de OSM images for mapping: Panama Canal - Pacific side",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=EO1A0120532016364110KF&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-12-30T00:00:00.000Z",
+            "startDate": "2016-12-30T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -26774,6 +26864,8 @@
             "name": "imagico.de OSM images for mapping: Pechora Sea Coast",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R078_N68_20160930T081002&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-09-30T00:00:00.000Z",
+            "startDate": "2016-09-30T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -26832,6 +26924,8 @@
             "name": "imagico.de OSM images for mapping: Pensacola Mountains",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81511242016033LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-02-02T00:00:00.000Z",
+            "startDate": "2016-02-02T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 10
@@ -26878,6 +26972,8 @@
             "name": "imagico.de OSM images for mapping: Prokletije Mountains",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R136_N41_20150831T093006&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-08-31T00:00:00.000Z",
+            "startDate": "2015-08-31T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -26916,6 +27012,8 @@
             "name": "imagico.de OSM images for mapping: Qasigiannguit",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=DMS_1142622_03746_20110415_17533956&z={zoom}&x={x}&y={-y}",
+            "endDate": "2011-04-15T00:00:00.000Z",
+            "startDate": "2011-04-15T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 15
@@ -26954,6 +27052,8 @@
             "name": "imagico.de OSM images for mapping: Rann of Kutch",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81510432015030LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-01-01T00:00:00.000Z",
+            "startDate": "2015-01-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 12
@@ -26996,6 +27096,8 @@
             "name": "imagico.de OSM images for mapping: Rila and Pirin Mountains",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R093_N41_20150828T092005&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-08-28T00:00:00.000Z",
+            "startDate": "2015-08-28T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -27038,6 +27140,8 @@
             "name": "imagico.de OSM images for mapping: Rwenzori Mountains",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81730602015040LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-02-09T00:00:00.000Z",
+            "startDate": "2015-02-09T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -27076,6 +27180,8 @@
             "name": "imagico.de OSM images for mapping: Rwenzori Mountains 2016",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R078_N01_20160702T082522&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-07-02T00:00:00.000Z",
+            "startDate": "2016-07-02T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -27114,6 +27220,8 @@
             "name": "imagico.de OSM images for mapping: Scott Island",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80611072014036LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2014-02-05T00:00:00.000Z",
+            "startDate": "2014-02-05T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -27152,6 +27260,8 @@
             "name": "imagico.de OSM images for mapping: Shag Rocks",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC82100972015347LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-12-13T00:00:00.000Z",
+            "startDate": "2015-12-13T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -27190,6 +27300,8 @@
             "name": "imagico.de OSM images for mapping: Southeastern Sulawesi",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81130622013270LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2013-09-27T00:00:00.000Z",
+            "startDate": "2013-09-27T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -27236,6 +27348,8 @@
             "name": "imagico.de OSM images for mapping: Southern Transantarctic Mountains",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80281222016035LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-02-04T00:00:00.000Z",
+            "startDate": "2016-02-04T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 10
@@ -27294,6 +27408,8 @@
             "name": "imagico.de OSM images for mapping: Svalbard mosaic",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=s2sval&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-01-01T00:00:00.000Z",
+            "startDate": "2016-01-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -27404,6 +27520,8 @@
             "name": "imagico.de OSM images for mapping: Thule Air Base",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=DMS_1142636_160xx_20110507_1822xxxx&z={zoom}&x={x}&y={-y}",
+            "endDate": "2011-05-07T00:00:00.000Z",
+            "startDate": "2011-05-07T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 15
@@ -27450,6 +27568,8 @@
             "name": "imagico.de OSM images for mapping: Thule Airbase DMS low altitude overflight September 2015",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=dms_thule2_2015.09.25&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-09-25T00:00:00.000Z",
+            "startDate": "2015-09-25T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 17
@@ -27504,6 +27624,8 @@
             "name": "imagico.de OSM images for mapping: Thule Airbase DMS overflight October 2015",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=dms_thule_2015.10.06&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-10-06T00:00:00.000Z",
+            "startDate": "2015-10-06T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 16
@@ -27554,6 +27676,8 @@
             "name": "imagico.de OSM images for mapping: Thule Airbase DMS overflight September 2015",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=dms_thule_2015.09.25&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-09-25T00:00:00.000Z",
+            "startDate": "2015-09-25T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 16
@@ -27600,6 +27724,8 @@
             "name": "imagico.de OSM images for mapping: Ushakov Island August 2016",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R094_N79_20160812T105622&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-08-12T00:00:00.000Z",
+            "startDate": "2016-08-12T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 12
@@ -27638,6 +27764,8 @@
             "name": "imagico.de OSM images for mapping: Vanatinai",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80910682014358LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2014-12-24T00:00:00.000Z",
+            "startDate": "2014-12-24T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -27680,6 +27808,8 @@
             "name": "imagico.de OSM images for mapping: Volcán Calbuco",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC82330892016031LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-01-31T00:00:00.000Z",
+            "startDate": "2016-01-31T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -27722,6 +27852,8 @@
             "name": "imagico.de OSM images for mapping: Vostochny Cosmodrome",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R089_N52_20160623T024048&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-06-23T00:00:00.000Z",
+            "startDate": "2016-06-23T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -27760,6 +27892,8 @@
             "name": "imagico.de OSM images for mapping: Western Karakoram",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81490352013282LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2013-10-09T00:00:00.000Z",
+            "startDate": "2013-10-09T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -27798,6 +27932,8 @@
             "name": "imagico.de OSM images for mapping: Willkanuta Mountains and Quelccaya Ice Cap",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R039_S15_20160510T145731&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-05-10T00:00:00.000Z",
+            "startDate": "2016-05-10T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -28589,6 +28725,8 @@
             "name": "Kanton Aargau 25cm (AGIS 2011)",
             "type": "tms",
             "template": "http://tiles.poole.ch/AGIS/OF2011/{zoom}/{x}/{y}.png",
+            "endDate": "2011-01-01T00:00:00.000Z",
+            "startDate": "2011-01-01T00:00:00.000Z",
             "scaleExtent": [
                 14,
                 19
@@ -29240,6 +29378,8 @@
             "name": "Kanton Aargau 25cm (AGIS 2014)",
             "type": "tms",
             "template": "http://mapproxy.osm.ch:8080/tiles/AGIS2014/EPSG900913/{zoom}/{x}/{y}.png?origin=nw",
+            "endDate": "2014-01-01T00:00:00.000Z",
+            "startDate": "2014-01-01T00:00:00.000Z",
             "scaleExtent": [
                 8,
                 19
@@ -29891,6 +30031,8 @@
             "name": "Kanton Aargau 25cm (AGIS 2016)",
             "type": "tms",
             "template": "http://mapproxy.osm.ch:8080/tiles/AGIS2016/EPSG900913/{zoom}/{x}/{y}.png?origin=nw",
+            "endDate": "2016-01-01T00:00:00.000Z",
+            "startDate": "2016-01-01T00:00:00.000Z",
             "scaleExtent": [
                 8,
                 19
@@ -32526,6 +32668,8 @@
             "name": "Kelowna 2012",
             "type": "tms",
             "template": "http://{switch:a,b,c,d}.tile.paulnorman.ca/kelowna2012/{zoom}/{x}/{y}.png",
+            "endDate": "2012-05-14T00:00:00.000Z",
+            "startDate": "2012-05-13T00:00:00.000Z",
             "scaleExtent": [
                 9,
                 20
@@ -33324,6 +33468,8 @@
             "name": "Landsat 233055",
             "type": "tms",
             "template": "http://{switch:a,b,c,d}.tile.paulnorman.ca/landsat_233055/{zoom}/{x}/{y}.png",
+            "endDate": "2013-09-03T00:00:00.000Z",
+            "startDate": "2013-09-03T00:00:00.000Z",
             "scaleExtent": [
                 5,
                 14
@@ -33359,6 +33505,8 @@
             "name": "Latest southwest British Columbia Landsat",
             "type": "tms",
             "template": "http://{switch:a,b,c,d}.tile.paulnorman.ca/landsat_047026/{zoom}/{x}/{y}.png",
+            "endDate": "2013-09-12T00:00:00.000Z",
+            "startDate": "2013-09-12T00:00:00.000Z",
             "scaleExtent": [
                 5,
                 13
@@ -34067,6 +34215,8 @@
             "name": "Lithuania - NŽT ORT10LT",
             "type": "tms",
             "template": "http://ort10lt.openmap.lt/g16/{zoom}/{x}/{y}.jpeg",
+            "endDate": "2016-01-01T00:00:00.000Z",
+            "startDate": "2010-01-01T00:00:00.000Z",
             "scaleExtent": [
                 4,
                 18
@@ -36754,6 +36904,8 @@
             "name": "MD Latest 6 Inch Aerial Imagery",
             "type": "tms",
             "template": "http://whoots.mapwarper.net/tms/{zoom}/{x}/{y}/MD_SixInchImagery/http://geodata.md.gov/imap/services/Imagery/MD_SixInchImagery/MapServer/WmsServer",
+            "endDate": "2016-01-01T00:00:00.000Z",
+            "startDate": "2013-01-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 20
@@ -37641,6 +37793,8 @@
             "name": "NJ 2015 Aerial Imagery (Infrared)",
             "type": "tms",
             "template": "http://whoots.mapwarper.net/tms/{zoom}/{x}/{y}/Infrared2015/http://geodata.state.nj.us/imagerywms/Infrared2015",
+            "endDate": "2015-05-03T00:00:00.000Z",
+            "startDate": "2015-03-29T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 20
@@ -38098,6 +38252,8 @@
             "name": "NJ 2015 Aerial Imagery (Natural Color)",
             "type": "tms",
             "template": "http://whoots.mapwarper.net/tms/{zoom}/{x}/{y}/Natural2015/http://geodata.state.nj.us/imagerywms/Natural2015",
+            "endDate": "2015-05-03T00:00:00.000Z",
+            "startDate": "2015-03-29T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 20
@@ -45994,6 +46150,7 @@
             "name": "NLSC General Map with Contour line",
             "type": "tms",
             "template": "http://wmts.nlsc.gov.tw/wmts/EMAP5_OPENDATA/default/EPSG:3857/{zoom}/{y}/{x}",
+            "startDate": "2015-01-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 15
@@ -48853,6 +49010,8 @@
             "name": "Ortho 2010 geoportail.lu",
             "type": "tms",
             "template": "https://{switch:wmts3,wmts4}.geoportail.lu/opendata/wmts/ortho_2010/GLOBAL_WEBMERCATOR_4_V3/{zoom}/{x}/{y}.jpeg",
+            "endDate": "2010-07-02T00:00:00.000Z",
+            "startDate": "2010-06-24T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 20
@@ -49774,6 +49933,8 @@
             "name": "Ortho 2013 geoportail.lu",
             "type": "tms",
             "template": "https://{switch:wmts3,wmts4}.geoportail.lu/opendata/wmts/ortho_2013/GLOBAL_WEBMERCATOR_4_V3/{zoom}/{x}/{y}.jpeg",
+            "endDate": "2013-07-20T00:00:00.000Z",
+            "startDate": "2013-07-19T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 20
@@ -50695,6 +50856,8 @@
             "name": "Ortho 2016 geoportail.lu",
             "type": "tms",
             "template": "https://{switch:wmts3,wmts4}.geoportail.lu/opendata/wmts/ortho_2016/GLOBAL_WEBMERCATOR_4_V3/{zoom}/{x}/{y}.jpeg",
+            "endDate": "2016-08-16T00:00:00.000Z",
+            "startDate": "2013-08-30T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 20
@@ -57237,6 +57400,7 @@
             "name": "Sóskút, Pusztazámor, Tárnok, Diósd ortophoto 2017",
             "type": "tms",
             "template": "http://adam.openstreetmap.hu/mapproxy/tiles/1.0.0/Soskut-Tarnok-Pusztazamor-Diosd/mercator/{zoom}/{x}/{y}.png",
+            "startDate": "2017-03-01T00:00:00.000Z",
             "polygon": [
                 [
                     [
@@ -64443,6 +64607,8 @@
             "name": "Surrey Air Survey",
             "type": "tms",
             "template": "http://gravitystorm.dev.openstreetmap.org/surrey/{zoom}/{x}/{y}.png",
+            "endDate": "2009-01-01T00:00:00.000Z",
+            "startDate": "2007-01-01T00:00:00.000Z",
             "scaleExtent": [
                 8,
                 19
@@ -65162,6 +65328,7 @@
             "name": "Texas Orthophoto",
             "type": "tms",
             "template": "https://txgi.tnris.org/login/path/ecology-fiona-poem-romeo/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=texas&STYLE=&FORMAT=image/png&tileMatrixSet=0to20&tileMatrix=0to20:{zoom}&tileRow={y}&tileCol={x}",
+            "startDate": "2012-01-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 20
@@ -65289,6 +65456,8 @@
             "name": "Topographical Map geoportail.lu",
             "type": "tms",
             "template": "https://{switch:wmts3,wmts4}.geoportail.lu/opendata/wmts/topo/GLOBAL_WEBMERCATOR_4_V3/{zoom}/{x}/{y}.png",
+            "endDate": "2010-07-20T00:00:00.000Z",
+            "startDate": "2013-07-19T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 20
@@ -67258,6 +67427,8 @@
             "name": "Tours - Orthophotos 2008-2010",
             "type": "tms",
             "template": "http://wms.openstreetmap.fr/tms/1.0.0/tours/{zoom}/{x}/{y}",
+            "endDate": "2011-01-01T00:00:00.000Z",
+            "startDate": "2008-01-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 20
@@ -67862,6 +68033,8 @@
             "name": "Tours - Orthophotos 2013",
             "type": "tms",
             "template": "http://wms.openstreetmap.fr/tms/1.0.0/tours_2013/{zoom}/{x}/{y}",
+            "endDate": "2013-01-01T00:00:00.000Z",
+            "startDate": "2013-01-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 22

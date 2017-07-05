@@ -348,19 +348,48 @@
             "list": "Edits by {users}",
             "truncated_list": "Edits by {users} and {count} others"
         },
-        "infobox": {
+        "info_panels": {
             "key": "I",
-            "selected": "{n} selected",
-            "geometry": "Geometry",
-            "closed": "closed",
-            "center": "Center",
-            "perimeter": "Perimeter",
-            "length": "Length",
-            "area": "Area",
-            "centroid": "Centroid",
-            "location": "Location",
-            "metric": "Metric",
-            "imperial": "Imperial"
+            "background": {
+                "key": "B",
+                "title": "Background",
+                "zoom": "Zoom",
+                "vintage": "Vintage",
+                "unknown": "Unknown",
+                "show_tiles": "Show Tiles",
+                "hide_tiles": "Hide Tiles"
+            },
+            "history": {
+                "key": "H",
+                "title": "History",
+                "selected": "{n} selected",
+                "version": "Version",
+                "last_edit": "Last Edit",
+                "edited_by": "Edited By",
+                "changeset": "Changeset",
+                "unknown": "Unknown",
+                "link_text": "History on openstreetmap.org"
+            },
+            "location": {
+                "key": "L",
+                "title": "Location",
+                "unknown_location": "Unknown Location"
+            },
+            "measurement": {
+                "key": "M",
+                "title": "Measurement",
+                "selected": "{n} selected",
+                "geometry": "Geometry",
+                "closed": "closed",
+                "center": "Center",
+                "perimeter": "Perimeter",
+                "length": "Length",
+                "area": "Area",
+                "centroid": "Centroid",
+                "location": "Location",
+                "metric": "Metric",
+                "imperial": "Imperial"
+            }
         },
         "geometry": {
             "point": "point",
@@ -950,7 +979,6 @@
                 },
                 "with_selected": {
                     "title": "With feature selected",
-                    "infobox": "Toggle info / measurement box",
                     "edit_menu": "Toggle edit menu"
                 },
                 "vertex_selected": {
@@ -995,6 +1023,17 @@
                     "undo": "Undo last action",
                     "redo": "Redo last action",
                     "save": "Save changes"
+                }
+            },
+            "tools": {
+                "title": "Tools",
+                "info": {
+                    "title": "Information",
+                    "all": "Toggle all information panels",
+                    "background": "Toggle background panel",
+                    "history": "Toggle history panel",
+                    "location": "Toggle location panel",
+                    "measurement": "Toggle measurement panel"
                 }
             }
         },
