@@ -274,6 +274,14 @@ en:
     truncated_list: "Edits by {users} and {count} others"
   info_panels:
     key: I
+    background:
+      key: B
+      title: Background
+      zoom: Zoom
+      vintage: Vintage
+      unknown: Unknown
+      show_tiles: Show Tiles
+      hide_tiles: Hide Tiles
     history:
       key: H
       title: History
@@ -284,14 +292,6 @@ en:
       changeset: Changeset
       unknown: Unknown
       link_text: History on openstreetmap.org
-    background:
-      key: B
-      title: Background
-      zoom: Zoom
-      vintage: Vintage
-      unknown: Unknown
-      show_tiles: Show Tiles
-      hide_tiles: Hide Tiles
     location:
       key: L
       title: Location
@@ -1101,7 +1101,6 @@ en:
         lasso: "Draw a selection lasso around features"
       with_selected:
         title: "With feature selected"
-        info_panels: "Toggle information panels"
         edit_menu: "Toggle edit menu"
       vertex_selected:
         title: "With node selected"
@@ -1141,3 +1140,12 @@ en:
         undo: "Undo last action"
         redo: "Redo last action"
         save: "Save changes"
+    tools:
+      title: "Tools"
+      info:
+        title: "Information"
+        all: "Toggle all information panels"
+        background: "Toggle background panel"
+        history: "Toggle history panel"
+        location: "Toggle location panel"
+        measurement: "Toggle measurement panel"

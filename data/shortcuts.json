@@ -93,9 +93,8 @@
                         "shortcuts": ["Right-click", "shortcuts.key.space"],
                         "text": "shortcuts.browsing.with_selected.edit_menu"
                     }, {
-                        "modifiers": ["⌘"],
-                        "shortcuts": ["info_panels.key"],
-                        "text": "shortcuts.browsing.with_selected.info_panels"
+                        "shortcuts": [],
+                        "text": ""
                     },
 
                     {
@@ -166,7 +165,7 @@
                         "shortcuts": ["Z"],
                         "text": "shortcuts.editing.commands.undo"
                     }, {
-                        "modifiers": ["⌘","⇧"],
+                        "modifiers": ["⌘", "⇧"],
                         "shortcuts": ["Z"],
                         "text": "shortcuts.editing.commands.redo"
                     }, {
@@ -217,6 +216,39 @@
                         "modifiers": ["⌘"],
                         "shortcuts": ["⌫"],
                         "text": "shortcuts.editing.operations.delete"
+                    }
+                ]
+            }
+        ]
+    }, {
+        "tab": "tools",
+        "text": "shortcuts.tools.title",
+        "columns" : [
+            {
+                "rows": [
+                    {
+                        "section": "info",
+                        "text": "shortcuts.tools.info.title"
+                    }, {
+                        "modifiers": ["⌘"],
+                        "shortcuts": ["info_panels.key"],
+                        "text": "shortcuts.tools.info.all"
+                    }, {
+                        "modifiers": ["⌘", "⇧"],
+                        "shortcuts": ["info_panels.background.key"],
+                        "text": "shortcuts.tools.info.background"
+                    }, {
+                        "modifiers": ["⌘", "⇧"],
+                        "shortcuts": ["info_panels.history.key"],
+                        "text": "shortcuts.tools.info.history"
+                    }, {
+                        "modifiers": ["⌘", "⇧"],
+                        "shortcuts": ["info_panels.location.key"],
+                        "text": "shortcuts.tools.info.location"
+                    }, {
+                        "modifiers": ["⌘", "⇧"],
+                        "shortcuts": ["info_panels.measurement.key"],
+                        "text": "shortcuts.tools.info.measurement"
                     }
                 ]
             }
