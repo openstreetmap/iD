@@ -548,8 +548,8 @@
         "restore": {
             "heading": "You have unsaved changes",
             "description": "Do you wish to restore unsaved changes from a previous editing session?",
-            "restore": "Restore",
-            "reset": "Reset"
+            "restore": "Restore my changes",
+            "reset": "Discard my changes"
         },
         "save": {
             "title": "Save",
