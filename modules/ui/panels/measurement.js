@@ -141,7 +141,7 @@ export function uiPanelMeasurement(context) {
             list
                 .append('li')
                 .text(t('info_panels.measurement.center') + ': ' +
-                    center[0].toFixed(OSM_PRECISION) + ', ' + center[1].toFixed(OSM_PRECISION)
+                    center[1].toFixed(OSM_PRECISION) + ', ' + center[0].toFixed(OSM_PRECISION)
                 );
             return;
         }
@@ -176,7 +176,7 @@ export function uiPanelMeasurement(context) {
             list
                 .append('li')
                 .text(t('info_panels.measurement.centroid') + ': ' +
-                    centroid[0].toFixed(OSM_PRECISION) + ', ' + centroid[1].toFixed(OSM_PRECISION)
+                    centroid[1].toFixed(OSM_PRECISION) + ', ' + centroid[0].toFixed(OSM_PRECISION)
                 );
 
 
@@ -203,7 +203,7 @@ export function uiPanelMeasurement(context) {
             list
                 .append('li')
                 .text(centerLabel + ': ' +
-                    center[0].toFixed(OSM_PRECISION) + ', ' + center[1].toFixed(OSM_PRECISION)
+                    center[1].toFixed(OSM_PRECISION) + ', ' + center[0].toFixed(OSM_PRECISION)
                 );
         }
     }
