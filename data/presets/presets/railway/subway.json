@@ -12,6 +12,9 @@
         "electrified",
         "service_rail"
     ],
-    "terms": [],
+    "terms": [
+        "metro",
+        "transit"
+    ],
     "name": "Subway"
 }

@@ -10202,12 +10202,16 @@
         "railway/subway_entrance": {
             "icon": "entrance",
             "geometry": [
-                "point"
+                "point",
+                "vertex"
             ],
             "tags": {
                 "railway": "subway_entrance"
             },
-            "terms": [],
+            "terms": [
+                "metro",
+                "transit"
+            ],
             "name": "Subway Entrance"
         },
         "railway/subway": {
@@ -10224,7 +10228,10 @@
                 "electrified",
                 "service_rail"
             ],
-            "terms": [],
+            "terms": [
+                "metro",
+                "transit"
+            ],
             "name": "Subway"
         },
         "railway/tram_stop": {

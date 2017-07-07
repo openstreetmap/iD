@@ -3718,10 +3718,12 @@ en:
       railway/subway:
         # railway=subway
         name: Subway
+        # 'terms: metro,transit'
         terms: '<translate with synonyms or related terms for ''Subway'', separated by commas>'
       railway/subway_entrance:
         # railway=subway_entrance
         name: Subway Entrance
+        # 'terms: metro,transit'
         terms: '<translate with synonyms or related terms for ''Subway Entrance'', separated by commas>'
       railway/tram:
         # railway=tram

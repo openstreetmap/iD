@@ -4369,11 +4369,11 @@
                 },
                 "railway/subway_entrance": {
                     "name": "Subway Entrance",
-                    "terms": ""
+                    "terms": "metro,transit"
                 },
                 "railway/subway": {
                     "name": "Subway",
-                    "terms": ""
+                    "terms": "metro,transit"
                 },
                 "railway/tram_stop": {
                     "name": "Tram Stop",
