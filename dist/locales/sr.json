@@ -212,15 +212,6 @@
             "list": "Измене од стране {users}",
             "truncated_list": "Измене од стране {users} и још {count} других"
         },
-        "infobox": {
-            "selected": "{n} изабрано",
-            "geometry": "Геометрија",
-            "closed": "затворено",
-            "center": "Центар",
-            "perimeter": "Опсег",
-            "length": "Дужина",
-            "area": "Површина"
-        },
         "geometry": {
             "point": "тачка",
             "vertex": "чвор",
@@ -288,9 +279,7 @@
         },
         "restore": {
             "heading": "Имате несачуване измене",
-            "description": "Да ли желите да се повратити несачуване измене од претходног уређивања?",
-            "restore": "Врати претходно",
-            "reset": "Ресетуј"
+            "description": "Да ли желите да се повратити несачуване измене од претходног уређивања?"
         },
         "save": {
             "title": "Сачувај",
@@ -385,6 +374,50 @@
             }
         },
         "presets": {
+            "categories": {
+                "category-barrier": {
+                    "name": "Обележја ограда"
+                },
+                "category-building": {
+                    "name": "Обележја грађевина"
+                },
+                "category-golf": {
+                    "name": "Обележја голф терена"
+                },
+                "category-landuse": {
+                    "name": "Обележја намене земљишта"
+                },
+                "category-natural-area": {
+                    "name": "Обележја природних добара"
+                },
+                "category-natural-line": {
+                    "name": "Обележја природних добара"
+                },
+                "category-natural-point": {
+                    "name": "Обележја природних добара"
+                },
+                "category-path": {
+                    "name": "Обележја путања"
+                },
+                "category-rail": {
+                    "name": "Обележја железнице"
+                },
+                "category-restriction": {
+                    "name": "Обележја ограничења"
+                },
+                "category-road": {
+                    "name": "Обележја путева"
+                },
+                "category-route": {
+                    "name": "Обележја траса"
+                },
+                "category-water-area": {
+                    "name": "Обележја водених површина"
+                },
+                "category-water-line": {
+                    "name": "Обележја водених површина"
+                }
+            },
             "fields": {
                 "access": {
                     "label": "Дозвољен приступ",
@@ -435,13 +468,19 @@
                         "city": "Град",
                         "conscriptionnumber": "123",
                         "country": "Држава",
+                        "county": "Округ",
+                        "county!jp": "Дистрикт",
                         "district": "Округ",
+                        "floor": "Спрат",
                         "hamlet": "Засеок",
                         "housename": "Назив куће",
                         "housenumber": "123",
+                        "neighbourhood": "Комшилук",
                         "place": "Место",
                         "postcode": "Поштански број",
                         "province": "Провинција",
+                        "province!jp": "Префектура",
+                        "quarter": "Четврт",
                         "state": "Савезна држава",
                         "street": "Улица",
                         "subdistrict": "Подокруг",
@@ -449,7 +488,7 @@
                     }
                 },
                 "admin_level": {
-                    "label": "Административни ниво"
+                    "label": "Управни спрат"
                 },
                 "aerialway": {
                     "label": "Врста"
@@ -494,6 +533,15 @@
                 "amenity": {
                     "label": "Врста"
                 },
+                "animal_boarding": {
+                    "label": "За животиње"
+                },
+                "animal_breeding": {
+                    "label": "За животиње"
+                },
+                "animal_shelter": {
+                    "label": "За животиње"
+                },
                 "area/highway": {
                     "label": "Врста"
                 },
@@ -512,10 +560,30 @@
                 "barrier": {
                     "label": "Врста"
                 },
+                "bath/type": {
+                    "options": {
+                        "hot_spring": "Термални извор"
+                    }
+                },
+                "beauty": {
+                    "label": "Врста продавнице"
+                },
                 "bench": {
                     "label": "Клупа"
                 },
                 "bicycle_parking": {
+                    "label": "Врста"
+                },
+                "bin": {
+                    "label": "Канта за отпатке"
+                },
+                "blood_components": {
+                    "label": "Крвни чиниоци",
+                    "options": {
+                        "plasma": "плазма"
+                    }
+                },
+                "board_type": {
                     "label": "Врста"
                 },
                 "boundary": {
@@ -529,6 +597,18 @@
                 },
                 "building_area": {
                     "label": "Зграда"
+                },
+                "bunker_type": {
+                    "label": "Врста"
+                },
+                "camera/direction": {
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "camera/type": {
+                    "label": "Врста камере",
+                    "options": {
+                        "dome": "Купола"
+                    }
                 },
                 "capacity": {
                     "label": "Капацитет",
@@ -555,12 +635,18 @@
                         "WSW": "Запад-југозапад"
                     }
                 },
+                "castle_type": {
+                    "label": "Врста"
+                },
                 "clock_direction": {
                     "label": "Правац",
                     "options": {
                         "anticlockwise": "Супротно смеру казаљке на сату",
                         "clockwise": "У смеру казаљке на сату"
                     }
+                },
+                "club": {
+                    "label": "Врста"
                 },
                 "collection_times": {
                     "label": "Време прикупљања"
@@ -579,6 +665,9 @@
                 },
                 "craft": {
                     "label": "Врста"
+                },
+                "crop": {
+                    "label": "Летина"
                 },
                 "crossing": {
                     "label": "Врста"
@@ -618,6 +707,9 @@
                         "cycleway:right": "Десна страна"
                     }
                 },
+                "date": {
+                    "label": "Датум"
+                },
                 "delivery": {
                     "label": "Достава"
                 },
@@ -629,6 +721,9 @@
                 },
                 "description": {
                     "label": "Опис"
+                },
+                "display": {
+                    "label": "Приказ"
                 },
                 "dock": {
                     "label": "Врста"
@@ -660,6 +755,15 @@
                 },
                 "fee": {
                     "label": "Провизија"
+                },
+                "fence_type": {
+                    "label": "Врста"
+                },
+                "fire_hydrant/position": {
+                    "label": "Положај",
+                    "options": {
+                        "sidewalk": "Тротоар"
+                    }
                 },
                 "fire_hydrant/type": {
                     "label": "Врста",
@@ -711,11 +815,17 @@
                 "handrail": {
                     "label": "Рукохват"
                 },
+                "height": {
+                    "label": "Висина (у метрима)"
+                },
                 "highway": {
                     "label": "Врста"
                 },
                 "historic": {
                     "label": "Врста"
+                },
+                "historic/civilization": {
+                    "label": "Историјска цивилизација"
                 },
                 "hoops": {
                     "label": "Обручи",
@@ -752,6 +862,9 @@
                 },
                 "internet_access/fee": {
                     "label": "Накнада за приступ интернету"
+                },
+                "label": {
+                    "label": "Назив"
                 },
                 "lamp_type": {
                     "label": "Врста"
@@ -807,10 +920,10 @@
                     "label": "Дужина (метара)"
                 },
                 "level": {
-                    "label": "Ниво"
+                    "label": "Спрат"
                 },
                 "levels": {
-                    "label": "Нивои",
+                    "label": "Спратови",
                     "placeholder": "2, 4, 6..."
                 },
                 "lit": {
@@ -822,12 +935,28 @@
                 "man_made": {
                     "label": "Врста"
                 },
+                "manhole": {
+                    "label": "Врста"
+                },
+                "map_size": {
+                    "label": "Покривеност"
+                },
+                "map_type": {
+                    "label": "Врста"
+                },
+                "maxheight": {
+                    "label": "Максимална висина",
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
+                },
                 "maxspeed": {
                     "label": "Ограничење брзине",
                     "placeholder": "40, 50, 60..."
                 },
                 "maxstay": {
                     "label": "Максимално задржавање"
+                },
+                "maxweight": {
+                    "label": "Максимална тежина"
                 },
                 "mtb/scale": {
                     "placeholder": "0, 1, 2, 3..."
@@ -844,6 +973,36 @@
                 },
                 "network": {
                     "label": "Мрежа"
+                },
+                "network_bicycle": {
+                    "label": "Врста стазе за бицикле",
+                    "options": {
+                        "icn": "Међународна",
+                        "lcn": "Локална",
+                        "ncn": "Национална",
+                        "rcn": "Регионална"
+                    },
+                    "placeholder": "Локална, регионална, национална, међународна"
+                },
+                "network_foot": {
+                    "label": "Врста пешачке стазе",
+                    "options": {
+                        "iwn": "Међународна",
+                        "lwn": "Локална",
+                        "nwn": "Национална",
+                        "rwn": "Регионална"
+                    },
+                    "placeholder": "Локална, регионална, национална, међународна"
+                },
+                "network_horse": {
+                    "label": "Врста коњичке стазе",
+                    "options": {
+                        "ihn": "Међународна",
+                        "lhn": "Локална",
+                        "nhn": "Национална",
+                        "rhn": "Регионална"
+                    },
+                    "placeholder": "Локална, регионална, национална, међународна"
                 },
                 "note": {
                     "label": "Напомена"
@@ -949,8 +1108,22 @@
                 "seasonal": {
                     "label": "Сезонско"
                 },
+                "second_hand": {
+                    "options": {
+                        "no": "Не",
+                        "only": "Искључиво",
+                        "yes": "Да"
+                    },
+                    "placeholder": "Да, не, искључиво"
+                },
                 "service": {
                     "label": "Врста"
+                },
+                "service/bicycle": {
+                    "label": "Сервиси"
+                },
+                "service/vehicle": {
+                    "label": "Сервиси"
                 },
                 "service_rail": {
                     "label": "Врста сервиса"
@@ -984,6 +1157,21 @@
                 "source": {
                     "label": "Извор"
                 },
+                "sport": {
+                    "label": "Спортови"
+                },
+                "sport_ice": {
+                    "label": "Спортови"
+                },
+                "sport_racing_motor": {
+                    "label": "Спортови"
+                },
+                "sport_racing_nonmotor": {
+                    "label": "Спортови"
+                },
+                "stop": {
+                    "label": "Врста стајалишта"
+                },
                 "structure": {
                     "label": "Грађевина",
                     "options": {
@@ -1005,6 +1193,15 @@
                 },
                 "surface": {
                     "label": "Површина"
+                },
+                "surveillance/type": {
+                    "options": {
+                        "camera": "Камера",
+                        "guard": "Стража"
+                    }
+                },
+                "surveillance/zone": {
+                    "label": "Област надзора"
                 },
                 "takeaway": {
                     "options": {
@@ -2453,6 +2650,29 @@
                 },
                 "waterway/weir": {
                     "name": "Устава"
+                }
+            }
+        },
+        "imagery": {
+            "Bing": {
+                "description": "Сателитске и висинске слике.",
+                "name": "Бинг висинске слике"
+            },
+            "Mapbox": {
+                "description": "Сателитске и висинске слике.",
+                "name": "Мапбокс сателит"
+            },
+            "basemap.at": {
+                "name": "basemap.at"
+            },
+            "basemap.at-orthofoto": {
+                "attribution": {
+                    "text": "basemap.at"
+                }
+            },
+            "hike_n_bike": {
+                "attribution": {
+                    "text": "© Опенстритмап доприносиоци"
                 }
             }
         }

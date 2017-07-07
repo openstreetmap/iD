@@ -2,7 +2,7 @@
     "fr": {
         "modes": {
             "add_area": {
-                "title": "Polygone",
+                "title": "Polygon",
                 "description": "Ajouter des parcs, des bâtiments, des lacs ou d'autres polygones à la carte.",
                 "tail": "Cliquez sur la carte pour ajouter un polygone tel qu'un parc, un lac ou un bâtiment."
             },
@@ -348,19 +348,6 @@
             "list": "Editions de {users}",
             "truncated_list": "Editions de {users} et de {count} autres"
         },
-        "infobox": {
-            "selected": "{n} selectionné s",
-            "geometry": "Géométrie",
-            "closed": "fermé",
-            "center": "Centre",
-            "perimeter": "Périmètre",
-            "length": "Longueur",
-            "area": "Polygone",
-            "centroid": "Centroïde",
-            "location": "Emplacement",
-            "metric": "Métrique",
-            "imperial": "Impérial"
-        },
         "geometry": {
             "point": "point",
             "vertex": "sommet",
@@ -429,7 +416,6 @@
             "switch": "Revenir à cet arrière-plan",
             "custom": "Personnalisé",
             "custom_button": "Modifier le fond personnalisé",
-            "custom_prompt": "Entrez un modèle d'URL de tuile. Les jetons valides sont {zoom}, {x}, {y} pour le schéma Z/X/Y et {u} pour le schéma quadtile.",
             "fix_misalignment": "Ajuster le décalage du fond de carte",
             "imagery_source_faq": "D'où provient ce fond de carte ?",
             "reset": "réinitialiser",
@@ -513,9 +499,7 @@
         },
         "restore": {
             "heading": "Vous avez des changements non sauvegardés.",
-            "description": "Vous avez des changements non sauvegardés d'une précédente édition. Souhaitez-vous restaurer ces changements ?",
-            "restore": "Restaurer",
-            "reset": "Réinitialiser"
+            "description": "Vous avez des changements non sauvegardés d'une précédente édition. Souhaitez-vous restaurer ces changements ?"
         },
         "save": {
             "title": "Sauvegarder...",
@@ -938,7 +922,6 @@
                 },
                 "with_selected": {
                     "title": "Avec l'élément sélectionné",
-                    "infobox": "Afficher/cacher le cadre d'informations et mesures",
                     "edit_menu": "Afficher/cacher le menu d'édition"
                 },
                 "vertex_selected": {
@@ -4885,8 +4868,8 @@
                     "terms": "Baden"
                 },
                 "traffic_calming/hump": {
-                    "name": "Ralentisseur dos d’âne (gendarme couché)",
-                    "terms": "Dos d'âne"
+                    "name": "Ralentisseur dos d’âne",
+                    "terms": "Dos d'âne, Gendarme couché"
                 },
                 "traffic_calming/island": {
                     "name": "Îlot central",

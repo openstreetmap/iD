@@ -348,19 +348,6 @@
             "list": "Přispěli {users}",
             "truncated_list": "Přispěli {users} a {count} další."
         },
-        "infobox": {
-            "selected": "zvoleno {n}",
-            "geometry": "Geometrie",
-            "closed": "uzavřená",
-            "center": "Střed",
-            "perimeter": "Obvod",
-            "length": "Délka",
-            "area": "Plocha",
-            "centroid": "Těžiště",
-            "location": "Poloha",
-            "metric": "Metrické jednotky",
-            "imperial": "Imperiální jednotky"
-        },
         "geometry": {
             "point": "bod",
             "vertex": "bod vnitřní",
@@ -429,7 +416,6 @@
             "switch": "Přepnout zpět na toto pozadí",
             "custom": "Vlastní",
             "custom_button": "Editovat vlastní pozadí",
-            "custom_prompt": "Vložte šablonu pro URL dlaždic. Platné proměnné jsou {zoom}, {x}, {y} u schématu Z/X/Y a {u} u schématu hierarchicky čtvrcených dlaždic.",
             "fix_misalignment": "Zarovnat podklad",
             "imagery_source_faq": "Odkud jsou tyto podklady?",
             "reset": "vrátit na začátek",
@@ -513,9 +499,7 @@
         },
         "restore": {
             "heading": "Vaše úpravy nebyly uloženy",
-            "description": "Přejete si obnovit úpravy, které při minulém spuštění nebyly uloženy?",
-            "restore": "Obnovit",
-            "reset": "Zahodit"
+            "description": "Přejete si obnovit úpravy, které při minulém spuštění nebyly uloženy?"
         },
         "save": {
             "title": "Uložit",

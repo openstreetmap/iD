@@ -348,19 +348,6 @@
             "list": "Edições de {users}",
             "truncated_list": "Edições feitas por {users} e outros {count} utilizadores"
         },
-        "infobox": {
-            "selected": "{n} selecionados",
-            "geometry": "Geometria",
-            "closed": "fechado",
-            "center": "Centro",
-            "perimeter": "Perímetro ",
-            "length": "Comprimento",
-            "area": "Área",
-            "centroid": "Centroide",
-            "location": "Localização",
-            "metric": "Métrico",
-            "imperial": "Imperial"
-        },
         "geometry": {
             "point": "ponto",
             "vertex": "vértice",
@@ -429,7 +416,6 @@
             "switch": "Mudar para este fundo",
             "custom": "Personalizado",
             "custom_button": "Editar fundo personalizando",
-            "custom_prompt": "Introduza o URL de um modelo de telas. As máscaras válidas são {zoom}, {x}, {y} para o esquema Z/X/Y e {u} para o esquema de telas quádruplas.",
             "fix_misalignment": "Corrigir o alinhamento da imagem",
             "imagery_source_faq": "Qual é a origem desta imagem?",
             "reset": "reiniciar",
@@ -513,9 +499,7 @@
         },
         "restore": {
             "heading": "Tem alterações por gravar",
-            "description": "Tem alterações feitas numa sessão anterior por gravar. Quer recuperar essas alterações?",
-            "restore": "Recuperar",
-            "reset": "Não recuperar"
+            "description": "Tem alterações feitas numa sessão anterior por gravar. Quer recuperar essas alterações?"
         },
         "save": {
             "title": "Gravar",
@@ -1309,6 +1293,9 @@
                     "label": "Localização"
                 },
                 "man_made": {
+                    "label": "Tipo"
+                },
+                "manhole": {
                     "label": "Tipo"
                 },
                 "map_size": {
@@ -2259,6 +2246,9 @@
                 "amenity/school": {
                     "name": "Escola",
                     "terms": "Academia, Creche, Colégio, Departamento, Externato, Liceu, Seminário"
+                },
+                "amenity/scrapyard": {
+                    "name": "Sucata"
                 },
                 "amenity/shelter": {
                     "name": "Abrigo",
@@ -3374,7 +3364,8 @@
                     "terms": "Basquetebol, Quadra de Basquetebol, Basketball Court"
                 },
                 "leisure/pitch/beachvolleyball": {
-                    "name": "Campo de volley de praia"
+                    "name": "Campo de volley de praia",
+                    "terms": "Vólei, campo, praia, voleibol, volley"
                 },
                 "leisure/pitch/bowls": {
                     "name": "Campo de boccia",
@@ -3424,7 +3415,8 @@
                     "terms": "Resort, resorte, centro de férias, estação turística, estância turística ou hotel de lazer"
                 },
                 "leisure/running_track": {
-                    "name": "Pista de atletismo "
+                    "name": "Pista de atletismo ",
+                    "terms": "Pista, corrida, jogging, competição"
                 },
                 "leisure/slipway": {
                     "name": "Rampa para barcos",
@@ -3447,7 +3439,8 @@
                     "terms": "Piscina, Swimming Pool"
                 },
                 "leisure/track": {
-                    "name": "Pista de corridas (não motorizados) "
+                    "name": "Pista de corridas (não motorizados) ",
+                    "terms": "pista, ciclovia, passadiço, peões, pedestre, via, bicicleta, passeio, calçada, correr, caminhar"
                 },
                 "leisure/water_park": {
                     "name": "Parque Aquático",
@@ -3567,6 +3560,13 @@
                 "man_made/works": {
                     "name": "Fábrica",
                     "terms": "indústria, manofatura, manofaturação, fabrico, fabricar, works"
+                },
+                "manhole": {
+                    "name": "Sumidouro"
+                },
+                "manhole/drain": {
+                    "name": "Drenagem",
+                    "terms": "Sumidouro, sarjeta, vala, valeta, tempestade, chuva, inundação, pluviais, escoamento, drenagem"
                 },
                 "natural": {
                     "name": "Natural",
@@ -3810,14 +3810,16 @@
                     "terms": "Neigborhood, Vizinhança"
                 },
                 "place/quarter": {
-                    "name": "Quarteirão"
+                    "name": "Quarteirão",
+                    "terms": "quarteirão, bairro, vizinhança, limite"
                 },
                 "place/square": {
                     "name": "Praça",
                     "terms": "Square"
                 },
                 "place/suburb": {
-                    "name": "Suburbio"
+                    "name": "Suburbio",
+                    "terms": "periferia, subúrbio, bairro, quarteirão, margem, limite"
                 },
                 "place/town": {
                     "name": "Cidade / Vila",
@@ -4174,7 +4176,8 @@
                     "terms": "Garden Center, Flores, Artigos para jardinagem, Jardinagem, Jardinajem"
                 },
                 "shop/gas": {
-                    "name": "undefined"
+                    "name": "undefined",
+                    "terms": "gás, botija, propano, gpl, bilha, redutor, garrafa, recarga, fogão"
                 },
                 "shop/gift": {
                     "name": "Loja de lembranças",
@@ -4733,6 +4736,106 @@
                     "name": "Represa",
                     "terms": "Weir"
                 }
+            }
+        },
+        "imagery": {
+            "Bing": {
+                "description": "Imagens aéreas e de satélite",
+                "name": "Imagem aérea Bing "
+            },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "Termos e opinião"
+                },
+                "description": "Imagem satélite DigitalGlobe Premium ",
+                "name": "Imagem aérea DigitalGlobe Premium "
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "Termos e opinião "
+                },
+                "description": "Imagem aérea DigitalGlobe Standard ",
+                "name": "Imagem aérea DigitalGlobe Standard "
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "© contribuidores OpenStreetMap, CC-BY-SA"
+                },
+                "description": "A versão normal do OpenStreetMap.",
+                "name": "OpenStreetMap (Normal)"
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "Termos e opinião"
+                },
+                "description": "Imagens aéreas e de satélite",
+                "name": "Imagem aérea Mapbox"
+            },
+            "New_and_Misaligned_TIGER_Roads-2013": {
+                "description": "No nível de zoom acima de 16, os dados são do domínio público dos Censos dos EUA. Nos níveis de zoom inferiores, apenas alterações desde 2006 exceto alterações já incorporadas no OpenStreetMap",
+                "name": "Estradas TIGER: Novas e desalinhadas"
+            },
+            "OSM_Inspector-Addresses": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, contribuidores OpenStreetMap, CC-BY-SA"
+                }
+            },
+            "OSM_Inspector-Geometry": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, contribuidores OpenStreetMap, CC-BY-SA"
+                }
+            },
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, contribuidores OpenStreetMap, CC-BY-SA"
+                }
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, contribuidores OpenStreetMap, CC-BY-SA"
+                }
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, contribuidores OpenStreetMap, CC-BY-SA"
+                }
+            },
+            "OSM_Inspector-Routing": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, contribuidores OpenStreetMap, CC-BY-SA"
+                }
+            },
+            "OSM_Inspector-Tagging": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, contribuidores OpenStreetMap, CC-BY-SA"
+                }
+            },
+            "hike_n_bike": {
+                "name": "Bicicleta & caminhadas"
+            },
+            "mapbox_locator_overlay": {
+                "attribution": {
+                    "text": "Termos e opinião"
+                }
+            },
+            "osm-gps": {
+                "attribution": {
+                    "text": "© contribuidores OpenStreetMap"
+                },
+                "description": "Registos de GPS públicos enviados para o OpenStreetMap",
+                "name": "registos GPS do OpenStreetMap"
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "© contribuidores OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (Normal em preto e branco)"
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "© contribuidores OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (estilo alemão)"
             }
         }
     }

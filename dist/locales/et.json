@@ -281,19 +281,6 @@
             "list": "Muutjad: {users}",
             "truncated_list": "Muutjad: {users} ja {count} teist"
         },
-        "infobox": {
-            "selected": "{n} valitud",
-            "geometry": "Geomeetria",
-            "closed": "suletud",
-            "center": "Keskel",
-            "perimeter": "Välisäär",
-            "length": "Pikkus",
-            "area": "Ala",
-            "centroid": "Tsentroid",
-            "location": "Asukoht",
-            "metric": "Meeter",
-            "imperial": "Inglise"
-        },
         "geometry": {
             "point": "punkt",
             "vertex": "tipp",
@@ -359,7 +346,6 @@
             "none": "Puudub",
             "custom": "Kohandatud",
             "custom_button": "Muuda kohandatud tausta",
-            "custom_prompt": "Sisesta kohandatud tausta URL. Kasutatavad muutujad on {zoom}, {x}, {y} Z/X/Y skeemi jaoks ja {u} quadtile skeemi jaoks.",
             "fix_misalignment": "Korrigeeri kattekaardi nihet",
             "reset": "lähtesta",
             "offset": "Lohista alumist halli kasti, et sättida kattekaardi nihet või siseta nihe meetrites.",
@@ -442,9 +428,7 @@
         },
         "restore": {
             "heading": "Sul on salvestamata muudatusi",
-            "description": "Kas soovid taastada eelmise sessiooni käigus tehtud muudatused?",
-            "restore": "Taasta",
-            "reset": "Lähtesta"
+            "description": "Kas soovid taastada eelmise sessiooni käigus tehtud muudatused?"
         },
         "save": {
             "title": "Salvesta",
@@ -1524,7 +1508,7 @@
                 },
                 "amenity/recycling": {
                     "name": "Taaskasutus",
-                    "terms": "Taara,taaraautomaat,jäätmed,prügi,pudelid,klaas,purgid,praht"
+                    "terms": "Taara,taaraautomaat,jäätmed,prügi,pudelid,klaas,purgid,praht,konteiner"
                 },
                 "amenity/recycling_centre": {
                     "name": "Jäätmejaam",

@@ -322,19 +322,6 @@
             "list": "Edits nina {users}",
             "truncated_list": "Edits nina {users} at {count} iba pa"
         },
-        "infobox": {
-            "selected": "{n} ang napili",
-            "geometry": "Heometrya",
-            "closed": "sarado",
-            "center": "gitna",
-            "perimeter": "buong gilid",
-            "length": "haba",
-            "area": "lugar",
-            "centroid": "centroid",
-            "location": "lokasyon",
-            "metric": "metric",
-            "imperial": "imperyal"
-        },
         "geometry": {
             "point": "tuldok",
             "vertex": "tuluktok",
@@ -447,9 +434,7 @@
         },
         "restore": {
             "heading": "Mayroon kang hindi na-save ng mga pagbabago",
-            "description": "Ibig mo bang ibalik ang mga hindi na-save na pagbabago mula sa isang nakaraang session sa pag-edit?",
-            "restore": "Ibalik",
-            "reset": "I-reset"
+            "description": "Ibig mo bang ibalik ang mga hindi na-save na pagbabago mula sa isang nakaraang session sa pag-edit?"
         },
         "save": {
             "title": "I-save",

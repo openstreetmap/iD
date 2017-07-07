@@ -299,9 +299,7 @@
         },
         "restore": {
             "heading": "Þú átt óvistaðar breytingar",
-            "description": "Viltu endurvekja óvistaðar breytingar frá því síðast?",
-            "restore": "Endurvekja",
-            "reset": "Endurstilla"
+            "description": "Viltu endurvekja óvistaðar breytingar frá því síðast?"
         },
         "save": {
             "title": "Vista",

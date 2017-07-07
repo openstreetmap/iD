@@ -348,19 +348,6 @@
             "list": "Úpravy od {users}",
             "truncated_list": "Úpravy od {users} a {count} ďalších"
         },
-        "infobox": {
-            "selected": "{n} označených",
-            "geometry": "Tvar",
-            "closed": "zatvorené",
-            "center": "Stred",
-            "perimeter": "Obvod",
-            "length": "Dĺžka",
-            "area": "Plocha",
-            "centroid": "Ťažisko",
-            "location": "Poloha",
-            "metric": "Metrické",
-            "imperial": "Imperiálne"
-        },
         "geometry": {
             "point": "bod",
             "vertex": "vrchol",
@@ -429,7 +416,6 @@
             "switch": "Prepnúť späť na toto pozadie",
             "custom": "Voliteľné",
             "custom_button": "Upraviť volitelné pozadie",
-            "custom_prompt": "Vyplňte vzorovú URL pre mapové dlaždice. Platné polia sú {zoom}, {x}, {y} pre Z/X/Y schému a {u} pre quadtile schému.",
             "fix_misalignment": "Upraviť posun obrázkov",
             "imagery_source_faq": "Odkiaľ pochádzajú tieto obrázky?",
             "reset": "vynulovať",
@@ -513,9 +499,7 @@
         },
         "restore": {
             "heading": "Máte neuložené zmeny",
-            "description": "Želáte si obnoviť neuložené zmeny z predchádzajúcej návštevy?",
-            "restore": "Obnov",
-            "reset": "Vymaž"
+            "description": "Želáte si obnoviť neuložené zmeny z predchádzajúcej návštevy?"
         },
         "save": {
             "title": "Ulož",

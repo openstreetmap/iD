@@ -114,8 +114,8 @@
                     "multiple": "Usunięto {n} obiektów."
                 },
                 "too_large": {
-                    "single": "Ta funkcja nie może być usunięta, ponieważ nie jest wystarczająco widoczna.",
-                    "multiple": "Te funkcje nie może być usunięta, ponieważ nie są wystarczająco widoczne."
+                    "single": "Ten obiekt nie może być usunięty, ponieważ nie jest wystarczająco widoczny.",
+                    "multiple": "Te obiekty nie mogą być usunięte, ponieważ nie są wystarczająco widoczne."
                 },
                 "incomplete_relation": {
                     "single": "Ten obiekt nie może być usunięty, ponieważ nie został całkowicie pobrany.",
@@ -150,7 +150,7 @@
                 "key": "D",
                 "annotation": "Rozłączono linie/obszary.",
                 "not_connected": "Nie ma tu wystarczająco wielu linii/obszarów do rozłączenia.",
-                "connected_to_hidden": "Nie można odłączyć tego obiektu, ponieważ jest połączony z innym niewidocznym obiektem lub jego cechą. ",
+                "connected_to_hidden": "Nie można odłączyć tego obiektu, ponieważ jest połączony z ukrytym obiektem lub jego cechą. ",
                 "relation": "Nie można odłączyć tego obiektu, ponieważ łączy on członków relacji."
             },
             "merge": {
@@ -159,9 +159,9 @@
                 "key": "C",
                 "annotation": "Scal {n} obiektów.",
                 "not_eligible": "Te obiekty nie mogą zostać scalone.",
-                "not_adjacent": "Tego obiekt nie można scalić, ponieważ punkty zakończenia nie są połączone",
+                "not_adjacent": "Tych obiektów nie można scalić, ponieważ ich węzły nie są połączone.",
                 "restriction": "Tego obiektu nie można scalić, ponieważ przynajmniej jeden z nich jest członkiem relacji - \"{relation}\".",
-                "incomplete_relation": "Tego obiektu nie można scalić, ponieważ przynajmniej jeden z nich nie został w pełni pobrany.",
+                "incomplete_relation": "Tych obiektów nie można scalić, ponieważ przynajmniej jeden z nich nie został w pełni pobrany.",
                 "conflicting_tags": "Tego obiektu nie można scalić, ponieważ ich tagi mają sprzeczne wartości."
             },
             "move": {
@@ -184,7 +184,7 @@
                 },
                 "too_large": {
                     "single": "Nie można przesunąć tego obiektu, ponieważ nie jest on wystarczająco widoczny.",
-                    "multiple": "Nie można przesunąć tego obiektu, ponieważ nie jest on wystarczająco widoczny."
+                    "multiple": "Nie można przesunąć tych obiektów, ponieważ nie są one wystarczająco widoczny."
                 },
                 "connected_to_hidden": {
                     "single": "Nie można przesunąć tego obiektu, ponieważ jest połączony z ukrytym obiektem.",
@@ -279,7 +279,7 @@
                 },
                 "not_eligible": "Nie można rozdzielić linii na ich początku lub końcu.",
                 "multiple_ways": "Jest tu zbyt wiele linii do rozdzielenia.",
-                "connected_to_hidden": "Tego obiektu nie można podzielić, ponieważ jest połączony z innym niewidocznym obiektem lub jego cechą. "
+                "connected_to_hidden": "Tego obiektu nie można podzielić, ponieważ jest połączony z ukrytym obiektem lub jego cechą. "
             },
             "restriction": {
                 "help": {
@@ -348,18 +348,39 @@
             "list": "Edycje użytkowników {users}",
             "truncated_list": "Edycje użytkowników {users} i {count} innych"
         },
-        "infobox": {
-            "selected": "Wybrano {n}",
-            "geometry": "Geometria",
-            "closed": "zamknięta",
-            "center": "Środek",
-            "perimeter": "Obwód",
-            "length": "Długość",
-            "area": "Obszar",
-            "centroid": "Centroid",
-            "location": "Położenie",
-            "metric": "Metryczne",
-            "imperial": "Imperialne"
+        "info_panels": {
+            "key": "I",
+            "background": {
+                "key": "B",
+                "title": "Tło",
+                "zoom": "Powiększenie",
+                "unknown": "Nieznany",
+                "show_tiles": "Pokaż kafle",
+                "hide_tiles": "Ukryj kafle"
+            },
+            "history": {
+                "key": "H",
+                "title": "Historia",
+                "selected": "[n] zaznaczono",
+                "version": "Wersja",
+                "last_edit": "Ostatnia edycja",
+                "edited_by": "Edytowane przez",
+                "changeset": "Zestaw zmian"
+            },
+            "location": {
+                "key": "L"
+            },
+            "measurement": {
+                "key": "M",
+                "selected": "[n] zaznaczono",
+                "geometry": "Geometria",
+                "closed": "zamknięte",
+                "length": "Długość",
+                "area": "Powierzchnia",
+                "location": "Lokalizacja",
+                "metric": "Metryczne",
+                "imperial": "Imperialne"
+            }
         },
         "geometry": {
             "point": "punkt",
@@ -423,25 +444,27 @@
         "background": {
             "title": "Tło",
             "description": "Ustawienia tła",
+            "key": "B",
             "percent_brightness": "Jasność {opacity}%",
             "none": "Brak",
             "best_imagery": "Najlepsza znana warstwa podkładu dla tego obszaru",
             "switch": "Wróć do tego podkładu",
             "custom": "Własne",
             "custom_button": "Edycja własnego podkładu",
-            "custom_prompt": "Podaj szablon adresu URL kafelka mapy. Poprawne adresy posiadają {zoom}, {x}, {y}  dla współrzędnych w formacie Z/X/Y lub {u} dla współrzędnych w formacie quadtile.",
             "fix_misalignment": "Przesunięcie podkładu",
             "imagery_source_faq": "Skąd pochodzi ta warstwa?",
             "reset": "Przywraca ustawienia",
             "offset": "Przeciągnij na szare pole poniżej, aby dostosować obrazek, lub wprowadź wartości przesunięcia w metrach.",
             "minimap": {
                 "description": "Minimapa",
-                "tooltip": "Pokaż oddaloną mapę, aby pomóc zlokalizować wyświetlany obszar."
+                "tooltip": "Pokaż oddaloną mapę, aby pomóc zlokalizować wyświetlany obszar.",
+                "key": "/"
             }
         },
         "map_data": {
             "title": "Dane mapy",
             "description": "Dane mapy",
+            "key": "F",
             "data_layers": "Warstwy danych",
             "fill_area": "Wypełnianie obszarów",
             "map_features": "Obiekty na mapie",
@@ -500,7 +523,8 @@
         "area_fill": {
             "wireframe": {
                 "description": "Bez wypełnienia (szkielet)",
-                "tooltip": "Włączenie trybu szkieletowego ułatwia przeglądanie zdjęć w tle."
+                "tooltip": "Włączenie trybu szkieletowego ułatwia przeglądanie zdjęć w tle.",
+                "key": "W"
             },
             "partial": {
                 "description": "Częściowe wypełnienie",
@@ -513,9 +537,7 @@
         },
         "restore": {
             "heading": "Masz niezapisane zmiany",
-            "description": "Przywrócić niezapisane zmiany z poprzedniej sesji?",
-            "restore": "Przywróć",
-            "reset": "Wyczyść"
+            "description": "Przywrócić niezapisane zmiany z poprzedniej sesji?"
         },
         "save": {
             "title": "Zapisz",
@@ -625,6 +647,7 @@
         },
         "help": {
             "title": "Pomoc",
+            "key": "H",
             "help": "# Pomoc\n\nTo jest edytor [OpenStreetMap](http://www.openstreetmap.org/),\nwolnej i edytowalnej mapy świata. Możesz go używać do dodawania i\naktualizacji danych w twoim rejonie, czyniąc otwartą mapę świata lepszą\ndla każdego.\n\nModyfikacje wprowadzone na tej mapie będą widoczne dla wszystkich\nużywających OpenStreetMap. Aby wprowadzić modyfikacje,\nmusisz się [zalogować](https://www.openstreetmap.org/login).\n\n[Edytor iD](http://ideditor.com/) jest projektem społecznościowym z\n[kodem dostępnym na GitHub](https://github.com/openstreetmap/iD).\n",
             "roads": "# Drogi\n\nMożesz tworzyć, poprawiać i usuwać drogi używając tego edytora. Drogi mogą być wszelkiego rodzaju:\nścieżki, ulice, szlaki, ścieżki rowerowe i tak dalej - każdy często uczęszczany odcinek powinien dać się\nprzedstawić.\n\n### Zaznaczanie\n\nKliknij drogę, aby ją zaznaczyć. Obwiednia powinna stać się widoczna, wraz z małym menu\nnarzędziowym na mapie oraz panelem bocznym pokazującym więcej informacji na temat drogi.\n\n### Modyfikowanie\n\nCzęsto będziesz widział drogi, które nie są wyrównane ze zdjęciami satelitarnymi lub śladami GPS.\nMożesz dopasować te drogi tak, aby były we właściwym miejscu.\n\nNajpierw kliknij drogę, którą chcesz zmienić. Podświetli ją to oraz pokaże punkty kontrolne, które\nmożesz przesunąć w lepsze miejsce. Jeżeli chcesz dodać nowe punkty kontrolne, aby droga\nbyła bardziej szczegółowa, dwukrotnie kliknij część drogi bez punktu, a w tym miejscu nowy się\npojawi.\n\nJeżeli droga łączy się z inną drogą, ale nie jest prawidłowo połączona z nią na mapie, możesz\nprzeciągnąć jeden z puntów kontrolnych na drugą drogę w celu ich połączenia. Prawidłowe połączenia\ndróg są ważne dla mapy i kluczowe dla wyznaczania tras.\n\nMożesz też kliknąć narzędzie 'Przesuń' lub nacisnąć klawisz `M` aby przesunąć jednocześnie całą\ndrogę, a następnie kliknąć ponownie, aby zachować to przesunięcie.\n\n### Usuwanie\n\nGdy droga jest całkiem błędna - widzisz, że nie istnieje na zdjęciach satelitarnych (a najlepiej sam\nsprawdziłeś w terenie, że jej nie ma) - możesz usunąć ją. Uważaj, gdy usuwasz obiekty - wyniki usunięcia,\ntak jak każdej modyfikacji, są widoczne dla wszystkich, a zdjęcie satelitarne często nie są aktualne,\nwięc droga może być po prostu nowo wybudowana.\n\nMożesz usunąć drogę przez zaznaczenie jej, a następnie kliknięcie ikony kosza lub wciśnięcie\nklawisza 'Delete'.\n\n### Tworzenie\n\nGdzieś tam powinna być droga, ale jej nie ma? Kliknij przycisk 'Linia' w górnym lewym rogu edytora\nlub naciśnij klawisz '2' na klawiaturze, aby zacząć rysować linię.\n\nKliknij początek drogi na mapie, aby zacząć rysować. Jeżeli droga odchodzi od już istniejącej, zacznij\nprzez kliknięcie w miejscu, w którym się łączą.\n\nNastępnie klikaj na punktach wzdłuż drogi tak, aby biegła ona odpowiednio według zdjęć satelitarnych\nlub GPS. Jeżeli droga, którą rysujesz, krzyżuje się z inną, połącz je, klikając na punkcie przecięcia. Gdy\nskończysz rysować, dwukrotnie kliknij ostatni punkt lub naciśnij klawisz 'Enter' na klawiaturze.\n",
             "gps": "# GPS\n\nZebrane ślady GPS są ważnym źródłem danych dla OpenStreetMap. Ten edytor pozwala na użycie lokalnych śladów - plików \".gpx\" na twoim komputerze. Możesz je zbierać za pomocą aplikacji na smartfony jak również dedykowanych odbiorników GPS.\n\nBy uzyskać więcej informacji jak wykonać pomiar GPS, przeczytaj [Mapping with a smartphone, GPS, or paper](http://learnosm.org/en/mobile-mapping/).\n\nBy użyć śladu GPX do mapowania, przeciągnij i upuść plik GPX na mapę edytora. Jeśli został on rozpoznany, pojawi się na niej jako jasno-purpurowa linia. Kliknij na \"Dane mapy\" po prawej stronie by włączyć, wyłączyć lub przybilżyć widok mapy do miejsca w którym pojawił się ślad.\n\nSam ślad nie jest bezpośrednio przenoszony na serwery OpenStreetMap - najlepszym sposobem na wykorzystanie go jest nanoszenie informacji uzyskanych z niego na mapę, często używając go jako wskazówkę, możesz także [wysłać go na serwery OpenStreetMap](http://www.openstreetmap.org/trace/create)\npozwalając tym samym innym użytkownikom na korzystanie z niego.\n",
@@ -813,6 +836,7 @@
                 "retry_preset_residential": "Nie zaznaczyłeś typu {preset}. **Kliknij tutaj, aby wybrać ponownie.**",
                 "name_road": "**Nazwij drogę, a następnie wciśnij Escape, Enter lub wciśnij przycisk {button}, aby zamknąć edytor obiektów.**",
                 "did_name_road": "Nieźle! Następnie nauczysz się jak zmienić kształt linii.",
+                "update_line": "Zdarza się sytuację w których trzeba zmienić kształt istniejącej linii na inny. Geometria tej drogi nie jest w porządku.",
                 "finish_drag_endpoint": "Ta kropka wygląda dobrze. **Zwolnij lewy przycisk myszki, aby zakończyć przeciąganie.**",
                 "split_intersection": "**Naciśnij przycisk {button}, aby rozdzielić {street}.**",
                 "retry_split": "Nie nacisnąłeś na przycisk Rozdziel. Spróbuj ponownie.",
@@ -840,6 +864,9 @@
         "shortcuts": {
             "title": "Skróty klawiszowe",
             "tooltip": "Wyświetl ekran skrótów klawiszowych.",
+            "toggle": {
+                "key": "?"
+            },
             "key": {
                 "alt": "Alt",
                 "backspace": "Backspace",
@@ -867,6 +894,8 @@
                 "title": "Przeglądanie",
                 "navigation": {
                     "title": "Nawigacja",
+                    "pan": "Przesuń mapę",
+                    "pan_more": "Przesuń mapę o jeden ekran",
                     "zoom": "Przybliż / Oddal"
                 },
                 "help": {
@@ -897,7 +926,8 @@
                     "previous": "Przejdź do poprzedniego węzła",
                     "next": "Przejdź do następnego węzła",
                     "first": "Przejdź do pierwszego węzła",
-                    "last": "Przejdź do ostatniego węzła"
+                    "last": "Przejdź do ostatniego węzła",
+                    "change_parent": "Przełącz nadrzędną drogę"
                 }
             },
             "editing": {
@@ -908,6 +938,7 @@
                     "add_line": "Tryb 'Dodawania linii'",
                     "add_area": "Tryb 'Dodawania obszaru'",
                     "place_point": "Umieść punkt",
+                    "disable_snap": "Przytrzymaj by wyłączyć przyciąganie do punktu",
                     "stop_line": "Zakończ rysowanie linii lub obszaru"
                 },
                 "operations": {
@@ -1253,7 +1284,7 @@
                 },
                 "contact/webcam": {
                     "label": "Adres kamery internetowej",
-                    "placeholder": "http://przyklad.pl/"
+                    "placeholder": "http://example.com"
                 },
                 "content": {
                     "label": "Zawartość"
@@ -1345,7 +1376,7 @@
                     "label": "Typ"
                 },
                 "drive_through": {
-                    "label": "Przejazd"
+                    "label": "Drive-Through"
                 },
                 "electrified": {
                     "label": "Elektryfikacja",
@@ -1362,7 +1393,7 @@
                 },
                 "email": {
                     "label": "E-mail",
-                    "placeholder": "przyklad@przyklad.pl"
+                    "placeholder": "przyklad@example.com"
                 },
                 "emergency": {
                     "label": "W razie niebezpieczeństwa"
@@ -1402,7 +1433,7 @@
                     }
                 },
                 "fixme": {
-                    "label": "Popraw mnie"
+                    "label": "Popraw mnie (fixme)"
                 },
                 "fuel": {
                     "label": "Paliwo"
@@ -1505,6 +1536,9 @@
                 "kerb": {
                     "label": "Krawężnik"
                 },
+                "label": {
+                    "label": "Etykieta"
+                },
                 "lamp_type": {
                     "label": "Typ"
                 },
@@ -1576,6 +1610,9 @@
                 "man_made": {
                     "label": "Typ"
                 },
+                "manhole": {
+                    "label": "Rodzaj"
+                },
                 "map_size": {
                     "label": "Zasięg mapy"
                 },
@@ -1594,7 +1631,7 @@
                     "label": "Maksymalny czas postoju"
                 },
                 "maxweight": {
-                    "label": "Maksymalna waga"
+                    "label": "Maksymalna masa całkowita"
                 },
                 "mtb/scale": {
                     "label": "Skala trudności dla rowerów górskich",
@@ -1634,7 +1671,7 @@
                 },
                 "name": {
                     "label": "Nazwa",
-                    "placeholder": "Powszechna nazwa (jeśli istnieje)"
+                    "placeholder": "Powszechna nazwa własna (tylko jeśli istnieje)"
                 },
                 "natural": {
                     "label": "Natura"
@@ -2095,7 +2132,7 @@
                 },
                 "website": {
                     "label": "Strona WWW",
-                    "placeholder": "http://przyklad.pl/"
+                    "placeholder": "http://example.com"
                 },
                 "wetland": {
                     "label": "Typ"
@@ -2528,6 +2565,10 @@
                 "amenity/school": {
                     "name": "Teren szkoły",
                     "terms": "tereny szkolne"
+                },
+                "amenity/scrapyard": {
+                    "name": "Złomowisko",
+                    "terms": "skład złomu, składowisko złomu"
                 },
                 "amenity/shelter": {
                     "name": "Schronienie",
@@ -3285,8 +3326,8 @@
                     "terms": "alejka"
                 },
                 "highway/service/drive-through": {
-                    "name": "Przejazd",
-                    "terms": "przejazd"
+                    "name": "Drive-Through",
+                    "terms": "drive-through"
                 },
                 "highway/service/driveway": {
                     "name": "Podjazd",
@@ -3849,6 +3890,14 @@
                 "man_made/works": {
                     "name": "Fabryka",
                     "terms": "zakład produkcyjny"
+                },
+                "manhole": {
+                    "name": "Właz",
+                    "terms": "Otwór, nisza"
+                },
+                "manhole/drain": {
+                    "name": "Kanalizacja burzowa",
+                    "terms": "Kanalizacja deszczowa, burzowiec"
                 },
                 "natural": {
                     "name": "Natura",
@@ -5024,21 +5073,21 @@
         "imagery": {
             "Bing": {
                 "description": "Zdjęcia satelitarne i lotnicze.",
-                "name": "Zdjęcia lotnicze Bing"
+                "name": "Bing (satelitarne)"
             },
             "DigitalGlobe-Premium": {
                 "attribution": {
                     "text": "Warunki użytkowania i opinia"
                 },
                 "description": "Zdjęcia satelitarne DigitalGlobe Premium.",
-                "name": "Zdjęcia satelitarne DigitalGlobe Premium"
+                "name": "DigitalGlobe Premium (satelitarne)"
             },
             "DigitalGlobe-Standard": {
                 "attribution": {
                     "text": "Warunki użytkowania i opinia"
                 },
                 "description": "Zdjęcia satelitarne DigitalGlobe Standard.",
-                "name": "Zdjęcia satelitarne DigitalGlobe Standard"
+                "name": "DigitalGlobe Standard (satelitarne)"
             },
             "MAPNIK": {
                 "attribution": {
@@ -5052,17 +5101,17 @@
                     "text": "Warunki użytkowania i opinia"
                 },
                 "description": "Zdjęcia satelitarne i lotnicze.",
-                "name": "Zdjęcia satelitarne Mapbox"
+                "name": "Mapbox Satellite (satelitarne)"
             },
             "New_and_Misaligned_TIGER_Roads-2013": {
-                "description": "Przy poziomie przybliżenia 16+ dane w domenie publicznej z Spisu ludności Stanów Zjednoczonych. Przy mniejszym przybliżeniu - tylko zmiany od 2006 oprócz zmian już wprowadzonych do OpenStreetMap",
+                "description": "Przy poziomie przybliżenia 16+ dane w domenie publicznej ze Spisu ludności Stanów Zjednoczonych. Przy mniejszym przybliżeniu - tylko zmiany od 2006 oprócz zmian już wprowadzonych do OpenStreetMap",
                 "name": "Nowe i niewyrównane drogi TIGER"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
                     "text": "© Geofabrik GmbH, autorzy OpenStreetMap, CC-BY-SA"
                 },
-                "name": "Inspektor OSM: Adresy"
+                "name": "OSM Inspector: Adresy"
             },
             "OSM_Inspector-Geometry": {
                 "attribution": {
@@ -5092,49 +5141,63 @@
                 "attribution": {
                     "text": "© Geofabrik GmbH, autorzy OpenStreetMap, CC-BY-SA"
                 },
-                "name": "Inspektor OSM: Routing"
+                "name": "Inspektor OSM: Nawigacja"
             },
             "OSM_Inspector-Tagging": {
                 "attribution": {
                     "text": "© Geofabrik GmbH, autorzy OpenStreetMap, CC-BY-SA"
                 },
-                "name": "Inspektor OSM: Tagi"
+                "name": "Inspektor OSM: Tagowanie"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
                     "text": "© Sarah Hoffmann, CC by-SA 3.0, dane mapy autorzy OpenStreetMap, ODbL 1.0"
                 },
-                "name": "Oznakowane Szlaki Rowerowe"
+                "name": "Waymarked Trails: Szlaki rowerowe"
             },
             "Waymarked_Trails-Hiking": {
                 "attribution": {
                     "text": "© Sarah Hoffmann, CC by-SA 3.0, dane mapy autorzy OpenStreetMap, ODbL 1.0"
                 },
-                "name": "Oznakowane Szlaki Piesze"
+                "name": "Waymarked Trails: Szlaki piesze"
             },
             "Waymarked_Trails-MTB": {
                 "attribution": {
                     "text": "© Sarah Hoffmann, CC by-SA 3.0, dane mapy autorzy OpenStreetMap, ODbL 1.0"
                 },
-                "name": "Oznakowane Szlaki MTB"
+                "name": "Waymarked Trails: Trasy MTB"
             },
             "Waymarked_Trails-Skating": {
                 "attribution": {
                     "text": "© Sarah Hoffmann, CC by-SA 3.0, dane mapy autorzy OpenStreetMap, ODbL 1.0"
                 },
-                "name": "Ozankowane Szlaki Skaterskie"
+                "name": "Waymarked Trails: Szlaki skaterskie"
             },
             "Waymarked_Trails-Winter_Sports": {
                 "attribution": {
                     "text": "© Michael Spreng, CC by-SA 3.0, dane mapy autorzy OpenStreetMap, ODbL 1.0"
                 },
-                "name": "Oznakowane szlaki sportów zimowych"
+                "name": "Waymarked Trails: Szlaki sportów zimowych"
+            },
+            "basemap.at": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Mapa bazowa Austrii, oparta o dane rządowe.",
+                "name": "basemap.at"
+            },
+            "basemap.at-orthofoto": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Warstwa ortofotomapy dostarczana przez basemap.at. \"Następca\" obrazowania z serwisu geoimage.at.",
+                "name": "basemap.at Orthofoto"
             },
             "hike_n_bike": {
                 "attribution": {
                     "text": "© autorzy OpenStreetMap"
                 },
-                "name": "Wędrówki & Rowery"
+                "name": "Hike & Bike"
             },
             "mapbox_locator_overlay": {
                 "attribution": {
@@ -5184,7 +5247,7 @@
                 "attribution": {
                     "text": "Kafelki mapowe Stamen Design, licencja CC BY 3.0"
                 },
-                "name": "Teren Stamen"
+                "name": "Stamen - Teren"
             },
             "tf-cycle": {
                 "attribution": {

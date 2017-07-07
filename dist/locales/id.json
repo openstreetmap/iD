@@ -241,19 +241,6 @@
             "list": "Disunting oleh {users}",
             "truncated_list": "Disunting oleh {users} dan {count} lainnya"
         },
-        "infobox": {
-            "selected": "{n} terpilih",
-            "geometry": "Geometri",
-            "closed": "ditutup",
-            "center": "Pusat",
-            "perimeter": "Perimeter",
-            "length": "Panjang",
-            "area": "Area",
-            "centroid": "Titik berat",
-            "location": "Letak",
-            "metric": "Metrik",
-            "imperial": "Imperial"
-        },
         "geometry": {
             "point": "titik",
             "vertex": "titik",
@@ -392,9 +379,7 @@
         },
         "restore": {
             "heading": "Anda memiliki perubahan yang belum disimpan",
-            "description": "Apakah anda ingin mengembalikan perubahan yang belum tersimpan dari sesi penyuntingan sebelumnya?",
-            "restore": "Kembalikan",
-            "reset": "Ulang"
+            "description": "Apakah anda ingin mengembalikan perubahan yang belum tersimpan dari sesi penyuntingan sebelumnya?"
         },
         "save": {
             "title": "Simpan",

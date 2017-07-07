@@ -348,19 +348,6 @@
             "list": "Đóng góp bởi {users}",
             "truncated_list": "Đóng góp bởi {users} và {count} người khác"
         },
-        "infobox": {
-            "selected": "{n} được chọn",
-            "geometry": "Hình dạng",
-            "closed": "đóng",
-            "center": "Trung tâm",
-            "perimeter": "Chu vi",
-            "length": "Chiều dài",
-            "area": "Diện tích",
-            "centroid": "Trọng tâm",
-            "location": "Vị trí",
-            "metric": "Hệ mét",
-            "imperial": "Hệ Anh"
-        },
         "geometry": {
             "point": "điểm",
             "vertex": "đỉnh",
@@ -429,7 +416,6 @@
             "switch": "Quay về hình nền này",
             "custom": "Tùy biến",
             "custom_button": "Sửa hình nền tùy biến",
-            "custom_prompt": "Nhập định dạng URL của các mảnh bản đồ. Bạn có thể sử dụng các dấu hiệu {zoom}, {x}, {y} cho định dạng Z/X/Y hoặc {u} cho định dạng quadtile.",
             "fix_misalignment": "Chỉnh độ lệch hình ảnh",
             "imagery_source_faq": "Hình ảnh này được lấy từ đâu?",
             "reset": "đặt lại",
@@ -513,9 +499,7 @@
         },
         "restore": {
             "heading": "Bạn có thay đổi chưa lưu",
-            "description": "Bạn có thay đổi chưa lưu từ một phiên làm việc trước đây. Bạn có muốn khôi phục các thay đổi này không?",
-            "restore": "Mở lại",
-            "reset": "Đặt lại"
+            "description": "Bạn có thay đổi chưa lưu từ một phiên làm việc trước đây. Bạn có muốn khôi phục các thay đổi này không?"
         },
         "save": {
             "title": "Lưu",
@@ -842,7 +826,6 @@
                 },
                 "with_selected": {
                     "title": "Trong khi đối tượng được chọn",
-                    "infobox": "Bật/tắt hộp hộp kiểm tra/đo đạc",
                     "edit_menu": "Bật/tắt trình đơn sửa đổi"
                 },
                 "vertex_selected": {

@@ -348,19 +348,6 @@
             "list": "{users} tarafından yapılmış değişiklikler",
             "truncated_list": "{users} ve {count} başka kişi tarafından yapılmış değişiklikler"
         },
-        "infobox": {
-            "selected": "{n} seçildi",
-            "geometry": "Geometri",
-            "closed": "kapalı",
-            "center": "Merkez",
-            "perimeter": "Çevre",
-            "length": "Uzunluk",
-            "area": "Alan",
-            "centroid": "Kütle Merkezi",
-            "location": "Konum",
-            "metric": "Metrik Ölçü Birimi",
-            "imperial": "İngiliz Ölçü Birimi"
-        },
         "geometry": {
             "point": "nokta",
             "vertex": "köşe",
@@ -423,25 +410,27 @@
         "background": {
             "title": "Arka Plan",
             "description": "Arka plan ayarları",
+            "key": "B",
             "percent_brightness": "{opacity}% parlaklık",
             "none": "Yok",
             "best_imagery": "Bu yer için bilinen en iyi uydu görüntüsü",
             "switch": "Bu arka plana geçiş yap",
             "custom": "Özel",
             "custom_button": "Özel arka planı düzenle",
-            "custom_prompt": "Bir kaynak (URL) şablonu gir. Geçerli değişkenler: {zoom}, {x}, {y}, {u}.",
             "fix_misalignment": "Uydu görüntüsünü ayarla",
             "imagery_source_faq": "Bu uydu görüntüsünün kaynağı ne?",
             "reset": "sıfırla",
             "offset": "Uydu görüntüsünü ayarlamak için gri kısımda herhangi bir yere taşı ya da göreceli konum değerlerini metre cinsinden gir.",
             "minimap": {
                 "description": "Küçük Harita",
-                "tooltip": "Şu an ekrandaki bölgeden uzaklaşarak üzerinde çalıştığın alanı haritada bul."
+                "tooltip": "Şu an ekrandaki bölgeden uzaklaşarak üzerinde çalıştığın alanı haritada bul.",
+                "key": "/"
             }
         },
         "map_data": {
             "title": "Harita Verileri",
             "description": "Harita Verileri",
+            "key": "F",
             "data_layers": "Veri Katmanları",
             "fill_area": "Alanları Doldur",
             "map_features": "Nesneler",
@@ -500,7 +489,8 @@
         "area_fill": {
             "wireframe": {
                 "description": "Doldurma Yapma (Tel Örgü)",
-                "tooltip": "Tel Örgü modunu aktif hale getirerek arka plan uydu resmini daha rahat görebilirsin."
+                "tooltip": "Tel Örgü modunu aktif hale getirerek arka plan uydu resmini daha rahat görebilirsin.",
+                "key": "W"
             },
             "partial": {
                 "description": "Kısmen Doldur",
@@ -513,9 +503,7 @@
         },
         "restore": {
             "heading": "Kaydedilmemiş değişikliklerin var",
-            "description": "Daha önceki oturumdan kaydedilmemiş değişiklikleri geri getirmek ister misin?",
-            "restore": "Geri Getir",
-            "reset": "Sıfırla"
+            "description": "Daha önceki oturumdan kaydedilmemiş değişiklikleri geri getirmek ister misin?"
         },
         "save": {
             "title": "Kaydet",
@@ -623,6 +611,7 @@
         },
         "help": {
             "title": "Yardım",
+            "key": "H",
             "help": "# Yardım\n\n[OpenStreetMap](http://www.openstreetmap.org/) bedava ve düzenlenebilir\nbir dünya haritasıdır. Bu, bir harita düzenleme aracıdır. Bu aracı kullanarak\nharitaya yeni veriler ekleyebilir, mevcut verileri düzenleyebilirsin.\n\nYaptığın değişiklikler OpenStreetMap kullanan herkesin erişimine açık olacak\nve herkes tarafından görülebilecektir. Haritada\ndeğişiklikler, iyileştirmeler yapmak için [giriş yap](https://www.openstreetmap.org/login)\nman gerekmektedi.\n\n[iD editor](http://ideditor.com/) ortak bir çalışma ürünü olup [kaynak kodu\nGitHub'da yer almaktadır](https://github.com/openstreetmap/iD).\n",
             "roads": "# Yollar\n\nBu düzenleyici ile yol oluşturabilir, mevcut yolları düzenleyebilir ya da silebilirsin.\nÜzerinde çalışmak istediğin yol bir patika, otoyol, bisiklet yolu ya da başka\nherhangi bir yol çeşidi bile olabilir.\n\n### Seçme\n\nBir yolu seçmek için üzerine tıkla. Seçme işlemi yolu farklı renkte vurgulayacaktır.\nAyrıca, yolun kenarında bir işlem menüsü ve yol hakkında detaylı bilgilerin yer\naldığı ek bilgi kutusu belirecektir.\n\n### Düzenleme\n\nÇoğu zaman harita üzerinde uydu görüntüsü ya da GPS verileri ile tam olarak\naynı hizada olmayan yollar göreceksin. Bu yolları hizalayarak düzeltebilirsin.\n\nÖncelikle düzenlemek istediğin yola tıkla. Bu yolu haritada farklı renkte vurgulayacak\nve yolun şeklini düzeltmeye yarayan yol üzerindeki bağlantı noktalarını gösterecektir.\nEğer yolun bağlantı noktası olmayan kısmına yeni noktalar eklemek istersen,\nyolun nokta eklemek istediğin kısmına çift tıkla. Yolun tıklanan kısmına yeni\nbir nokta eklenecektir.\n\nEğer yol başka bir yolla kesişiyor, fakat harita üzerinde düzgün bir şekilde diğer\nyola bağlanmıyor ise, bağlantı noktalarını sürükleyerek farklı yollar üzerindeki\nbağlantı noktalarını birleştirebilirsin. Birbiri ile düzgün bağlanmış yollar harita ve\ngüzergah uygulamaları için en temel verilerden biridir.\n\nAyrıca, 'Kaydır' aracını kullanarak ya da 'M' kısayol tuşuna basarak bir yolun tüm\nkısımlarını topluca kaydırabilir ve ardından haritaya tıklayarak bu değişikliği\nkaydedebilirsin.\n\n### Silme\n\nEğer bir yol tamamen yanlış görünüyor ise, uydu görüntüsünde yoksa ya da bu\nyolun gerçekte olmadığını bizzat biliyorsan, yolu haritadan silebilirsin. Fakat, nesneleri\nharitadan silerken dikkatli ol, çünkü bu değişiklik işlemi herkes tarafından\ngörülecektir. Ayrıca, uydu görüntüsü eski ve yol yeni yapılmış olabilir.\n\nYolu silmek için önce üzerine tıklayarak yolu seç, ardından\nişlem menüsündeki çöp tenekesi simgesine ya da 'Delete' tuşuna basarak yolu sil.\n\n### Ekleme\n\nEğer haritada bir bölgede yol yoksa, ama gerçekte o bölgede bir yol var ise, sol\nüstte yer alan 'Çizgi' simgesine tıkla ya da '2' kısayol tuşuna basarak bir çizgi\nçizmeye başla.\n\nYolun başladığı yerde haritaya tıklayarak çizmeye başla. Eğer yol başka bir yoldan\nayrılıyorsa, bu durumda yolu, yolun diğer yoldan ayrıldığı bağlantı noktasından çizmeye\nbaşla.\n\nÇizmeye başladıktan sonra yolun takip ettiği rota doğrultusunda, uydu görüntülerini\nya da GPS verilerini takip ederek, yolu çiz. Eğer yol başka bir yolla kesişiyorsa yolları\nkesişim noktalarında oluşturacağın bir bağlantı noktası ile birbirine bağla. Çizme\nişlemini tamamladığında, çift tıklayarak ya da 'Enter' tuşuna basarak çizimi tamamla.\n",
             "gps": "# GPS\n\nKullanıcılar tarafından toplanan GPS (küresel konumlandırma sistemi) verileri\nOpenStreetMap için en önemli veri kaynaklarından biridir. Bu düzenleyici makinanda\nyer alan `.gpx` formatındaki dosyaları destekler. GPS verilerini kişisel GPS aleti\nile ya da akıllı telefon uygulamalarını kullanarak toplayabilirsin.\n\nGPS verileri toplama konusunda daha fazla bilgi almak için,\n[Mapping with a smartphone, GPS başlığındaki İngilizce](http://learnosm.org/en/mobile-mapping/) dokümana gözatabilirsin.\n\nGPX verilerini kullanarak haritayı düzenlemek için, GPX dosyasını haritaya\nsürükle ve bırak. Eğer veriler sistem tarafından tanınabilirse, haritaya parlak mor\nrenkte çizgi şeklinde eklenecektir. Sağ tarafta yer alan 'Harita Verileri' menüsünü\nkullanarak verilerini gizleyebilir, tekrar aktif hale getirebilir ya da verilere yakınlaşabilirsin.\n\nGPX verileri OpenStreetMap'e yüklenerek sunucuya kaydedilmeyecektir. Bu\nverileri kullanmanın en iyi yolu haritada göstermektir. Bu sayede yeni nesneler\noluşturulabilir, mevcut nesneler güncellenebilir. Sana ait GPX verilerini başkalarının\nda kullanabilmesini istiyorsan, [şuradan](http://www.openstreetmap.org/trace/create)\nOpenStreetMap'e yükleyebilirsin.\n",
@@ -768,14 +757,18 @@
             },
             "navigation": {
                 "title": "Navigasyon",
+                "zoom": "Farenin tekerleğini veya izleme dörtgenini kullanarak yada {plus} / {minus} tuşlarını kullanarak yakınlaştırabilir veya uzaklaştırabilirsiniz. ** Haritayı yakınlaştırın ! **",
                 "points_lines_areas": "Haritadaki nesneler *nokta, çizgi veya alan* ile gösterilir.",
                 "nodes_ways": "OpenStreetMap'te noktalar bazen *bağlantı noktası* olarak ifade edilir. Benzer şekilde çizgi ve alanlar da *yol* şeklinde ifade edilebilir.",
+                "selected_townhall": "Harika! Nokta seçildi. Seçilen özellikler parlayan bir parıltı ile çizilir.",
+                "editor_townhall": "Bir özellik seçildiğinde, harita yanında * özellik editörü * görüntülenir.",
                 "choose_street": "**{name} ismini listeden seç.**",
                 "selected_street": "Güzel! {name} seçildi."
             },
             "points": {
                 "title": "Noktalar",
-                "choose_cafe": "**{preset} öğesini listeden seç.**"
+                "choose_cafe": "**{preset} öğesini listeden seç.**",
+                "feature_editor": "Nokta şimdi bir kafe olarak işaretlendi. Özellik editörünü kullanarak, kafeterya hakkında daha fazla bilgi ekleyebiliriz."
             },
             "areas": {
                 "title": "Alanlar",
@@ -790,6 +783,7 @@
                 "choose_category_road": "**Listedene {category} kategorisini seç.**",
                 "did_name_road": "Herşey yolunda! Şimdi çizgilerin şekillerini nasıl düzenlenebileceğini öğreneceğiz.",
                 "retry_split": "Ayır tuşuna basmadın. Tekrar dene.",
+                "multi_delete": "**Ekstra çizgileri silmek için {button}'a tıklayın.**",
                 "retry_delete": "Sil tuşuna basmadın. Tekrar dene."
             },
             "buildings": {
@@ -798,6 +792,7 @@
                 "choose_category_building": "**{category} kategorisini listeden seç.**",
                 "rightclick_building": "**Sağ tıklayarak oluşturduğun binayı seç ve seçenekleri göster.**",
                 "retry_square": "Kareleştir tuşuna basmadın. Tekrar dene.",
+                "done_square": "Bina'nın köşelerinin nasıl hareket ettiğini görüyor musun? Başka bir faydalı numara öğrenelim.",
                 "search_tank": "**'{preset} ile arama yap'.**",
                 "choose_tank": "**Listeden {preset} öğesini seç.**",
                 "rightclick_tank": "**Sağ tıklayarak oluşturduğun depoyu seç ve seçenekleri göster.**",
@@ -812,6 +807,7 @@
         },
         "shortcuts": {
             "title": "Klavye kısayolları",
+            "tooltip": "Klavye kısayolları ekranını gösterin.",
             "key": {
                 "alt": "Alt",
                 "backspace": "Backspace",
@@ -823,6 +819,8 @@
                 "enter": "Enter",
                 "esc": "Esc",
                 "home": "Home",
+                "option": "Seçenek",
+                "pause": "Durdur",
                 "pgdn": "PgDn",
                 "pgup": "PgUp",
                 "return": "Enter",
@@ -862,7 +860,6 @@
                 },
                 "with_selected": {
                     "title": "Seçilmiş nesnelerle beraber",
-                    "infobox": "Ölçü kutusunu aç/kapa",
                     "edit_menu": "Düzenleme menüsünü aç/kapa"
                 },
                 "vertex_selected": {

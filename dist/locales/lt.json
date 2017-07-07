@@ -348,19 +348,6 @@
             "list": "Keitėjai {users}",
             "truncated_list": "Keitėjai {users} ir {count} kitų"
         },
-        "infobox": {
-            "selected": "{n} pažymėta",
-            "geometry": "Geometrija",
-            "closed": "uždaryta",
-            "center": "Centras",
-            "perimeter": "Perimetras",
-            "length": "Ilgis",
-            "area": "Plotas",
-            "centroid": "Centroidas",
-            "location": "Vieta",
-            "metric": "Metrinė",
-            "imperial": "Imperinė"
-        },
         "geometry": {
             "point": "taškas",
             "vertex": "viršūnė",
@@ -429,7 +416,6 @@
             "switch": "Persijungti atgal į šį foną",
             "custom": "Savas",
             "custom_button": "Redaguoti pasirinktiną foną",
-            "custom_prompt": "Įveskite URL šabloną. Galimos žymos yra {zoom}, {x}, {y} skirtos Z/X/Y schemai ir {u} quadtile schemai.",
             "fix_misalignment": "Keisti fono poslinkį",
             "imagery_source_faq": "Iš kur ši ortofotografija?",
             "reset": "iš naujo",
@@ -513,9 +499,7 @@
         },
         "restore": {
             "heading": "Turite neįrašytų pakeitimų",
-            "description": "Ar norite atstatyti neįrašytus ankstesnės redagavimo sesijos pakeitimus?",
-            "restore": "Atstatyti",
-            "reset": "Iš naujo"
+            "description": "Ar norite atstatyti neįrašytus ankstesnės redagavimo sesijos pakeitimus?"
         },
         "save": {
             "title": "Išsaugoti",

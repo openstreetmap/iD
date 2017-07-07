@@ -347,17 +347,6 @@
             "list": "Redigeringer utført av {users}",
             "truncated_list": "Endringer av {users} og {count} andre"
         },
-        "infobox": {
-            "selected": "{n} valgt(e)",
-            "geometry": "Geometri",
-            "closed": "lukket",
-            "center": "Senter",
-            "perimeter": "Perimeter",
-            "length": "Lengde",
-            "area": "Område",
-            "location": "Sted",
-            "metric": "Metrisk"
-        },
         "geometry": {
             "point": "punkt",
             "line": "linje",
@@ -493,8 +482,7 @@
             }
         },
         "restore": {
-            "heading": "Du har ulagrede endringer",
-            "reset": "Tilbakestill"
+            "heading": "Du har ulagrede endringer"
         },
         "save": {
             "title": "Lagre",

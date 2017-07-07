@@ -116,9 +116,6 @@
         "commit": {
             "cancel": "ยกเลิก"
         },
-        "infobox": {
-            "area": "พื้นที่"
-        },
         "geolocate": {
             "title": "แสดงตำแหน่งของฉัน"
         },

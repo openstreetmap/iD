@@ -348,19 +348,43 @@
             "list": "Ändrad av {users}",
             "truncated_list": "Ändrad av {users} och {count} andra"
         },
-        "infobox": {
+        "info_panels": {
             "key": "I",
-            "selected": "{n} vald(a)",
-            "geometry": "Geometri",
-            "closed": "sluten",
-            "center": "Centrum",
-            "perimeter": "Omkrets",
-            "length": "Längd",
-            "area": "Område",
-            "centroid": "Centrumpunkt",
-            "location": "Positionering",
-            "metric": "Metriskt",
-            "imperial": "Brittiskt"
+            "background": {
+                "key": "B",
+                "title": "Bakgrund",
+                "vintage": "Ålder",
+                "unknown": "Okänt"
+            },
+            "history": {
+                "key": "H",
+                "selected": "{n} markerad(e)",
+                "version": "Version",
+                "last_edit": "Senast redigerad",
+                "edited_by": "Redigerad av",
+                "changeset": "Changeset",
+                "link_text": "Historik på openstreetmap.org"
+            },
+            "location": {
+                "key": "L",
+                "title": "Lokalisering",
+                "unknown_location": "Okänd lokalisering"
+            },
+            "measurement": {
+                "key": "M",
+                "title": "Mätning",
+                "selected": "{n} markerad(e)",
+                "geometry": "Geometri",
+                "closed": "sluten",
+                "center": "Centrum",
+                "perimeter": "Omkrets",
+                "length": "Längd",
+                "area": "Area",
+                "centroid": "Centrumpunkt",
+                "location": "Lokalisering",
+                "metric": "Metriskt",
+                "imperial": "Brittiskt"
+            }
         },
         "geometry": {
             "point": "Punkt",
@@ -431,7 +455,7 @@
             "switch": "Växla tillbaka till denna bakgrund",
             "custom": "Anpassa",
             "custom_button": "Ändra anpassad bakgrund",
-            "custom_prompt": "Ange en URL-mall för plattor. Giltiga symboler är {zoom}, {x} och {y} för Z/X/Y-scheman och {u} för QuadTile-scheman.",
+            "custom_prompt": "Ange en URL-mall för plattor. Giltiga nycklar är:\n  - {zoom}/{z}, {x}, {y} enligt Z/X/Y-schema\n  - {ty} för Y-koordinat enligt omvänd TMS-stil\n  - {u} för QuadTile-scheman\n  - {switch:a,b,c} för multiplex mot DNS-server\n\nExempel:\n{example}",
             "fix_misalignment": "Justera bildplacering",
             "imagery_source_faq": "Var kommer dessa flygfoton från?",
             "reset": "ta bort",
@@ -518,9 +542,7 @@
         },
         "restore": {
             "heading": "Du har icke-sparade ändringar.",
-            "description": "Du har ändringar från förra sessionen som inte har sparats. Vill du hämta dessa ändringar?",
-            "restore": "Återställ",
-            "reset": "Ta bort"
+            "description": "Du har ändringar från förra sessionen som inte har sparats. Vill du hämta dessa ändringar?"
         },
         "save": {
             "title": "Spara",
@@ -950,7 +972,6 @@
                 },
                 "with_selected": {
                     "title": "Med objekt markerat",
-                    "infobox": "Visa/dölj info- och mätruta",
                     "edit_menu": "Visa/dölj redigerameny"
                 },
                 "vertex_selected": {
@@ -995,6 +1016,12 @@
                     "undo": "Ångra senaste ändring",
                     "redo": "Gör om senaste ändring",
                     "save": "Spara ändringar"
+                }
+            },
+            "tools": {
+                "title": "Verktyg",
+                "info": {
+                    "title": "Information"
                 }
             }
         },
@@ -1568,6 +1595,9 @@
                 "kerb": {
                     "label": "Trottoarkant"
                 },
+                "label": {
+                    "label": "Märkning"
+                },
                 "lamp_type": {
                     "label": "Typ"
                 },
@@ -1637,6 +1667,9 @@
                     "label": "Lokalisering"
                 },
                 "man_made": {
+                    "label": "Typ"
+                },
+                "manhole": {
                     "label": "Typ"
                 },
                 "map_size": {
@@ -2591,6 +2624,10 @@
                 "amenity/school": {
                     "name": "Skolområde",
                     "terms": "Skolgård, skolområde, Campus, universitetsområde, högskoleområde, universitet, högskola, grundskola, mellanstadium, lågstadium, högstadium, gymnasium"
+                },
+                "amenity/scrapyard": {
+                    "name": "Bilskrot",
+                    "terms": "Bilskrot, skrot, bil, fordon, metall, bärgning, vrak, bildemontering, metallavfall, metallskräp, metallskrot, skrotupplag, skrotningsanläggning"
                 },
                 "amenity/shelter": {
                     "name": "Väderskydd",
@@ -3913,6 +3950,14 @@
                     "name": "Fabrik",
                     "terms": "Fabrik, montering, bryggeri, bil, plast, bearbetning, tillverkning, raffinaderi, fabrikstillverkning, industri, verkstad, fabriksbyggnad, monteringsanläggning, bearbetningsanläggning, möbeltillverkning, oljeraffinaderi"
                 },
+                "manhole": {
+                    "name": "Gatubrunn",
+                    "terms": "Gatubrunn, brunn, dagvattenbrunn, dagvatten, avlopp, telekom, telefoni, manhålslucka, Brunnslock, manlucka, manhål, avloppsbrunn, a-brunn, Brandpost, Rensbrunn"
+                },
+                "manhole/drain": {
+                    "name": "Dagvattenbrunn",
+                    "terms": "Dagvatten, dagvattenbrunn, dränering, regn, regnvatten, dagbrunn, avlopp, avloppsvatten, avloppsbrunn, smältvatten, spillvatten, avrinning"
+                },
                 "natural": {
                     "name": "Naturlig",
                     "terms": "Naturligt, naturlig, natur, skyddsområde, naturanvändning, geologi"
@@ -5192,6 +5237,20 @@
                     "text": "© Sarah Hoffmann, CC by-SA 3.0, kartdata OpenStreetMaps bidragsgivare, ODbL 1.0"
                 },
                 "name": "Waymarked Trails: Vintersport"
+            },
+            "basemap.at": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Baskarta över Österrike, baserad på offentlig data.",
+                "name": "basemap.at"
+            },
+            "basemap.at-orthofoto": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Ortofoto-lager tillhandahållen av basemap.at. \"Efterträdare\" till geoimage.at imagery.",
+                "name": "basemap.at ortofoto"
             },
             "hike_n_bike": {
                 "attribution": {

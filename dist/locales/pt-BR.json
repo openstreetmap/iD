@@ -348,19 +348,6 @@
             "list": "Edições de {users}",
             "truncated_list": "Edições de {users} e {count} outros"
         },
-        "infobox": {
-            "selected": "{n} selecionados",
-            "geometry": "Geometria",
-            "closed": "fechado",
-            "center": "Centro",
-            "perimeter": "Perímetro",
-            "length": "Comprimento",
-            "area": "Área",
-            "centroid": "Centróide",
-            "location": "Localização",
-            "metric": "Métrico",
-            "imperial": "Imperial"
-        },
         "geometry": {
             "point": "ponto",
             "vertex": "vértice",
@@ -429,7 +416,6 @@
             "switch": "Voltar para este fundo de tela",
             "custom": "Customizado",
             "custom_button": "Editar fundo de tela personalizado",
-            "custom_prompt": "Insira um modelo de URL de uma camada de tiles. São tokens válidos: {zoom}, {x}, {y} para o esquema Z/X/Y e {u} para o esquema quadtile.",
             "fix_misalignment": "Ajustar o deslocamento da imagem de fundo",
             "imagery_source_faq": "De onde essa imagem de satélite vem?",
             "reset": "redefinir",
@@ -513,9 +499,7 @@
         },
         "restore": {
             "heading": "Você tem alterações não salvas",
-            "description": "Deseja restaurar as alterações não salvas da sessão anterior?",
-            "restore": "Restaurar",
-            "reset": "Resetar"
+            "description": "Deseja restaurar as alterações não salvas da sessão anterior?"
         },
         "save": {
             "title": "Salvar",

@@ -348,24 +348,11 @@
             "list": "{users}编辑",
             "truncated_list": "{users}及另外{count}人编辑"
         },
-        "infobox": {
-            "selected": "已选择{n}个",
-            "geometry": "几何",
-            "closed": "已关闭",
-            "center": "中心",
-            "perimeter": "周长",
-            "length": "长度",
-            "area": "面",
-            "centroid": "重心",
-            "location": "位置",
-            "metric": "公制",
-            "imperial": "英制"
-        },
         "geometry": {
             "point": "点",
             "vertex": "顶点",
             "line": "线",
-            "area": "面状要素",
+            "area": "面",
             "relation": "关系"
         },
         "geocoder": {
@@ -423,25 +410,27 @@
         "background": {
             "title": "背景",
             "description": "背景设置",
+            "key": "B",
             "percent_brightness": "{opacity}%亮度",
             "none": "无",
             "best_imagery": "此地最知名的影像数据源",
             "switch": "切换回该底图",
             "custom": "自定义",
             "custom_button": "编辑自定义背景",
-            "custom_prompt": "输入地图影像的URL模版。以Z/X/Y方式的服务器使用 {zoom}, {x}, {y} 作为参数，而以quadtile方式的服务器，则使用 {u} 作参数。",
             "fix_misalignment": "调整影像偏移",
             "imagery_source_faq": "该影像的来源是？",
             "reset": "重置",
             "offset": "在下面的灰色区域拖动来调整影像偏移，或输入以米为单位的偏移量。",
             "minimap": {
                 "description": "小地图",
-                "tooltip": "显示一个大范围的地图来帮助定位当前显示的区域"
+                "tooltip": "显示一个大范围的地图来帮助定位当前显示的区域",
+                "key": "/"
             }
         },
         "map_data": {
             "title": "地图数据",
             "description": "地图数据",
+            "key": "F",
             "data_layers": "数据图层",
             "fill_area": "填充面状要素",
             "map_features": "地图要素",
@@ -500,7 +489,8 @@
         "area_fill": {
             "wireframe": {
                 "description": "无填充（线框）",
-                "tooltip": "开启线框模式，以便看清背景影像。"
+                "tooltip": "开启线框模式，以便看清背景影像。",
+                "key": "W"
             },
             "partial": {
                 "description": "部分填充",
@@ -513,9 +503,7 @@
         },
         "restore": {
             "heading": "您有未保存的更改",
-            "description": "您在上一次编辑时有未保存的修改，您想恢复这些修改吗？",
-            "restore": "恢复",
-            "reset": "重置"
+            "description": "您在上一次编辑时有未保存的修改，您想恢复这些修改吗？"
         },
         "save": {
             "title": "保存",
@@ -625,6 +613,7 @@
         },
         "help": {
             "title": "帮助",
+            "key": "H",
             "help": "#帮助\n\n这是一个免费且可编辑的世界地图[OpenStreetMap](http://www.openstreetmap.org/)\n的编辑器，你可以用它来增加和更新你所在地区的数据，\n为全世界将这个开源、开放数据的世界地图变得更好。\n\n你在这张地图上的编辑将会被使用OpenStreetMap的所有人看到。\n你需要[登录](https://www.openstreetmap.org/login)才能编辑。\n\n本编辑器名为[iD](http://ideditor.com/)，是一个[源码在GitHub上共享](https://github.com/openstreetmap/iD)\n的协作项目。\n",
             "editing_saving": "# 编辑和保存\n\n本编辑器为在线编辑设计，您正在经由本网站使用它。\n\n### 选择要素\n\n您可以在地图上单击以选中一个要素，如道路或一个兴趣点。\n被选中的要素将被高亮显示，同时弹出一个显示其详细信息的面板，\n以及一个列出了可对该要素进行之操作的菜单。\n\n如需同时选中多个要素，您需要先按住 Shift 键。然后请多次点击选择全部的要素，\n或者在地图上画出一个长方形以圈出并选中长方形中所有的点。\n\n### 保存编辑内容\n\n当您做了比如编辑道路、建筑物或地点的更改后，\n这些更改在您将它们保存到服务器之前都只会保存在本地。\n无需担心犯错：您随时可以点击撤销按钮或重做按钮以撤销或重做更改。\n\n请点击“保存”按钮以结束一组编辑内容。例如，如果您刚完成了城镇的一个区域，\n正打算开始下一个区域的工作，这时您有机会重新检查之前完成的工作，\n同时编辑器会自动给出有用的建议。如果您的更改有一些问题，编辑器也会给出警告。\n\n如果一切正常，您可以在保存时写入一小段注释以解释上一阶段的工作内容，\n然后再次点击“保存”按钮以向\n[OpenStreetMap.org](http://www.openstreetmap.org/) 提交更改。\n在此之后，您的更改将对所有其它用户可见，其它用户也将以此为基础继续改进地图。\n\n如果您一时无法完成编辑内容，您可以关闭编辑器窗口。\n待稍后您返回 (至同一台计算机的同一个浏览器) 时，\n重新打开编辑器将会恢复您的工作进度。\n\n## 使用编辑器\n\n您可以按下 `?` 键来查看键盘快捷键列表。\n",
             "roads": "# 道路\n\n您可以利用这个编辑器创建，修复，及删除道路。道路可以有很多种：路径，公路，郊游径，单车径，和更多－ 任何经常使用的路段都可制图。\n\n### 选择道路\n\n点击图上的道路以选择该道路。道路的轮廓会以高亮度显示，而同时地图上会出现小工具选单，旁边亦会弹出面板，显示有关该道路的信息。\n\n### 编辑道路\n\n您或会经常注意到，道路并非对齐在背景中显示的卫星图像或GPS轨迹。您可以调整这些道路，让他们位于正确的位置。\n\n首先，点击您想编辑的道路。这会将道路以高亮度显示，并显示沿着这道路的节点，你可以拖曳这些节点到更好的位置。如果您想增加细节，可以为道路添加新的节点，点击两下道路上没有节点的部分，便可在该处増加节点。\n\n如果道路连接到另一条道路，但在地图上并未妥善连接，你可以拖曳道路的其中一个节点到另一条道路上，以连接两条道路。连接好道路，对地图非常重要，特别是对提供驾驶指示的应用程序而言，是必要的。\n\n您也可以点击'移动'工具或按`M`快速键，来移动整条道路，然后点击一下以完成移动的动作。\n\n### 删除道路\n\n如果一条道路完全不正确－ 您看到它在卫星图像上不存在，并最好实地证实它根本不存在－ 您可以将道路删除，这会从地图中将之移除。删除物件时务必要小心－ 像任何其他的编辑，结果会被大家看见，而卫星图像往往会过时，因此该道路或许只是新建的。\n\n要删除道路，您可以点击它以选择，然后点击垃圾桶图标，或按'Delete' 键。\n\n### 绘制新道路\n\n发现某处应有一条道路，但地图上没有？点击编辑器左上方的'线'图标，或按下`2`快速键，以开始绘制线段。\n\n在地图上点击道路的开端，以开始绘制道路。如果道路从一条现有的道路分支出来，应点击两者连接的地方，以开始绘制。\n\n然后点击沿着道路的点，以根据卫星影像或GPS轨迹，正确地绘制道路。如果您绘制的道路如果与另一条道路交汇，请点击相交点以将它们连接起来。当您完成绘制后，可点击两下或按键盘上的'Return' 或'Enter' 键。\n",
@@ -813,6 +802,7 @@
                 "title": "面",
                 "add_playground": "*面* 用来显示诸如湖泊、建筑物或居民区等要素的边界。{br}他们亦可作为一种更细致的绘制方式，以替代普通地用点来标记的方式。 **点击 {button} 面按钮来添加一个新的面。**",
                 "start_playground": "让我们通过描绘一个面来添加这个游乐场。面通过在要素的外部轮廓上放置若干 *节点* 来描绘。 **点击或按空格键，在游乐场的其中一角放置一个起始节点。**",
+                "continue_playground": "通过继续在游乐场的轮廓上放置更多的节点来绘制该面。若将面连接到已经存在的人行道上也是可以的。{br}提示：您可以按下{alt}键以防止节点连接到其他要素上。 **继续绘制游乐场的面。**",
                 "finish_playground": "按回车键、或再次点击起始/结束节点来结束绘制该面。 **完成勾画该游乐场的轮廓。**",
                 "search_playground": "**搜索 '{preset}' 。**",
                 "choose_playground": "**在列表中选择 {preset} 。**",
@@ -877,6 +867,8 @@
             },
             "startediting": {
                 "title": "开始编辑",
+                "help": "您现在已经学会编辑 OpenStreetMap 了！{br}您可以在任何时候点击 {button} 帮助按钮或按下{key}键来重放该教程或查看更多参考文档。",
+                "shortcuts": "您可以通过按下{key}键来查看命令列表及相应快捷键。",
                 "save": "不要忘了定期保存您的修改！",
                 "start": "开始绘制地图！"
             }
@@ -884,6 +876,9 @@
         "shortcuts": {
             "title": "键盘快捷键",
             "tooltip": "显示键盘快捷键界面",
+            "toggle": {
+                "key": "?"
+            },
             "key": {
                 "alt": "Alt",
                 "backspace": "Backspace",
@@ -938,7 +933,6 @@
                 },
                 "with_selected": {
                     "title": "对选中的要素",
-                    "infobox": "切换信息 / 测量框",
                     "edit_menu": "切换编辑菜单"
                 },
                 "vertex_selected": {
@@ -1556,6 +1550,9 @@
                 "kerb": {
                     "label": "路缘"
                 },
+                "label": {
+                    "label": "标识"
+                },
                 "lamp_type": {
                     "label": "类型"
                 },
@@ -1625,6 +1622,9 @@
                     "label": "位置"
                 },
                 "man_made": {
+                    "label": "类型"
+                },
+                "manhole": {
                     "label": "类型"
                 },
                 "map_size": {
@@ -2175,7 +2175,7 @@
                 },
                 "aerialway/cable_car": {
                     "name": "大缆车",
-                    "terms": "缆车, 索道车"
+                    "terms": "缆车,索道车"
                 },
                 "aerialway/chair_lift": {
                     "name": "登山吊椅",
@@ -2579,6 +2579,10 @@
                 "amenity/school": {
                     "name": "学校",
                     "terms": "学校场地"
+                },
+                "amenity/scrapyard": {
+                    "name": "废品堆放场",
+                    "terms": "废品堆放场,废料场,垃圾,垃圾场,废物,废品,回收,填埋,堆放,废弃,报废,废料,废弃,残余物,碎片,清理,废置,坏,汽车,金属,打捞,沉船,场地"
                 },
                 "amenity/shelter": {
                     "name": "亭",
@@ -3901,6 +3905,14 @@
                     "name": "工厂",
                     "terms": "工厂,加工,制造"
                 },
+                "manhole": {
+                    "name": "人井",
+                    "terms": "人井,人孔,检修,探孔,入孔,盖,洞,孔,下水道,排水,污水,通信,电信,电缆,通讯,人孔井,手井,穿线,下水管"
+                },
+                "manhole/drain": {
+                    "name": "窨井口",
+                    "terms": "窨井盖,窨井口,窨井,下水道,盖,下水管,排水,排水道,污水,排水管,排水沟,洞,井,孔,雨,雷雨,台风,沙井,沙井盖"
+                },
                 "natural": {
                     "name": "自然",
                     "terms": "自然"
@@ -5070,6 +5082,198 @@
                     "name": "堰",
                     "terms": "坝,堰坝,拦河坝"
                 }
+            }
+        },
+        "imagery": {
+            "Bing": {
+                "description": "卫星和航空影像",
+                "name": "必应航空影像"
+            },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "条款与反馈"
+                },
+                "description": "DigitalGlobe优质卫星影像",
+                "name": "DigitalGlobe优质影像"
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "条款与反馈"
+                },
+                "description": "DigitalGlobe标准卫星影像",
+                "name": "DigitalGlobe标准影像"
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "© OpenStreetMap贡献者, 署名-相同方式共享"
+                },
+                "description": "OpenStreetMap默认图层",
+                "name": "OpenStreetMap（标准）"
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "条款与反馈"
+                },
+                "description": "卫星和航空影像",
+                "name": "Mapbox卫星"
+            },
+            "New_and_Misaligned_TIGER_Roads-2013": {
+                "description": "在缩放等级16级以上是来自美国人口调查局的公共领域地图数据。低缩放等级下仅包含自2006年以来的变更，不含已纳入OpenStreetMap的变更。",
+                "name": "更新和未对其的TIGER(拓扑集成地理编码与参考)道路数据"
+            },
+            "OSM_Inspector-Addresses": {
+                "attribution": {
+                    "text": "© Geofabrik有限公司, OpenStreetMap贡献者, 署名-相同方式共享"
+                },
+                "name": "OSM查看器：地址"
+            },
+            "OSM_Inspector-Geometry": {
+                "attribution": {
+                    "text": "© Geofabrik有限公司, OpenStreetMap贡献者, 署名-相同方式共享"
+                },
+                "name": "OSM查看器：几何"
+            },
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "© Geofabrik有限公司, OpenStreetMap贡献者, 署名-相同方式共享"
+                },
+                "name": "OSM查看器：道路"
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "© Geofabrik有限公司, OpenStreetMap贡献者, 署名-相同方式共享"
+                },
+                "name": "OSM查看器：区域（面）"
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "© Geofabrik有限公司, OpenStreetMap贡献者, 署名-相同方式共享"
+                },
+                "name": "OSM查看器：地名"
+            },
+            "OSM_Inspector-Routing": {
+                "attribution": {
+                    "text": "© Geofabrik有限公司, OpenStreetMap贡献者, 署名-相同方式共享"
+                },
+                "name": "OSM查看器：路线"
+            },
+            "OSM_Inspector-Tagging": {
+                "attribution": {
+                    "text": "© Geofabrik有限公司, OpenStreetMap贡献者, 署名-相同方式共享"
+                },
+                "name": "OSM查看器：标签"
+            },
+            "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, 署名-相同方式共享3.0, 地图数据版权OpenStreetMap贡献者, 开放数据库授权1.0"
+                },
+                "name": "以路径表示的小路：自行车道"
+            },
+            "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, 署名-相同方式共享3.0, 地图数据版权OpenStreetMap贡献者, 开放数据库授权1.0"
+                },
+                "name": "以路径表示的小路：徒步"
+            },
+            "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, 署名-相同方式共享3.0, 地图数据版权OpenStreetMap贡献者, 开放数据库授权1.0"
+                },
+                "name": "以路径表示的小路：山地自行车"
+            },
+            "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, 署名-相同方式共享3.0, 地图数据版权OpenStreetMap贡献者, 开放数据库授权1.0"
+                },
+                "name": "以路径表示的小路：滑冰"
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© Michael Spreng, 署名-相同方式共享3.0, 地图数据版权OpenStreetMap贡献者, 开放数据库授权1.0"
+                },
+                "name": "以路径表示的小路：冬季运动"
+            },
+            "basemap.at": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "基于政府数据的奥地利底图",
+                "name": "basemap.at"
+            },
+            "basemap.at-orthofoto": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "由basemap.at提供的正射影像图层，接替geoimage.at影像图层。",
+                "name": "basemap.at正射影像"
+            },
+            "hike_n_bike": {
+                "attribution": {
+                    "text": "© OpenStreetMap贡献者"
+                },
+                "name": "徒步与自行车"
+            },
+            "mapbox_locator_overlay": {
+                "attribution": {
+                    "text": "条款与反馈"
+                },
+                "description": "显示主要要素辅助定向",
+                "name": "定位辅助叠加层"
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "© OpenStreetMap贡献者, 署名-相同方式共享"
+                },
+                "name": "OpenPT Map (叠加层)"
+            },
+            "osm-gps": {
+                "attribution": {
+                    "text": "© OpenStreetMap贡献者"
+                },
+                "description": "上传至OpenStreetMap的公开GPS轨迹",
+                "name": "OpenStreetMap GPS轨迹"
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "© OpenStreetMap贡献者, 署名-相同方式共享"
+                },
+                "name": "OpenStreetMap（黑白标准）"
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "© OpenStreetMap贡献者, 署名-相同方式共享"
+                },
+                "name": "OpenStreetMap（德国样式）"
+            },
+            "qa_no_address": {
+                "attribution": {
+                    "text": "© Simon Poole, 数据© OpenStreetMap贡献者"
+                },
+                "name": "地址缺失质检"
+            },
+            "skobbler": {
+                "attribution": {
+                    "text": "© 瓦片 skobbler, 地图数据 OpenStreetMap贡献者"
+                },
+                "name": "skobbler"
+            },
+            "stamen-terrain-background": {
+                "attribution": {
+                    "text": "地图瓦片由Stamen Design设计并以知识共享署名3.0协议授权"
+                },
+                "name": "Stamen地形"
+            },
+            "tf-cycle": {
+                "attribution": {
+                    "text": "地图© Thunderforest, 数据© OpenStreetMap贡献者"
+                },
+                "name": "Thunderforest OpenCycleMap"
+            },
+            "tf-landscape": {
+                "attribution": {
+                    "text": "地图© Thunderforest, 数据© OpenStreetMap贡献者"
+                },
+                "name": "Thunderforest地貌"
             }
         }
     }

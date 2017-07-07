@@ -119,19 +119,6 @@
             "deleted": "நீக்கப்பட்டது",
             "created": "உருவாக்கப்பட்டது"
         },
-        "infobox": {
-            "selected": "{n} தேர்ந்தெடுக்கப் பட்டுள்ளது",
-            "geometry": "வடிவியல்",
-            "closed": "மூடப்பட்டுள்ளது",
-            "center": "நடு பகுதி",
-            "perimeter": "சுற்றளவு",
-            "length": "நீளம்",
-            "area": "பரப்பளவு",
-            "centroid": "திணிவு",
-            "location": "இடம்",
-            "metric": "மெட்ரிக்",
-            "imperial": "இம்பீரியல்"
-        },
         "geometry": {
             "point": "புள்ளி",
             "vertex": "உச்சி",
@@ -211,10 +198,6 @@
             "others": {
                 "description": "பிற"
             }
-        },
-        "restore": {
-            "restore": "மீட்டமை",
-            "reset": "மீட்டமை"
         },
         "save": {
             "title": "சேமி",

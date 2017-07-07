@@ -58,10 +58,6 @@
             "localized_translation_language": "भाषा चुनें",
             "localized_translation_name": "नाम"
         },
-        "infobox": {
-            "closed": "बंद",
-            "area": "एरिया"
-        },
         "geometry": {
             "line": "रेखा",
             "area": "क्षेत्र"

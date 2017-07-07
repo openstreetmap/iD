@@ -275,16 +275,6 @@
             "list": "Suntingan-suntingan oleh {users}",
             "truncated_list": "Suntingan-suntingan oleh {users} dan {count} orang yang lain"
         },
-        "infobox": {
-            "selected": "{n} dipilih",
-            "geometry": "Geometri",
-            "perimeter": "Ukur keliling",
-            "length": "Panjang",
-            "area": "Luas",
-            "centroid": "Pusat Bentuk",
-            "metric": "Metrik",
-            "imperial": "Imperial"
-        },
         "geometry": {
             "point": "titik",
             "vertex": "bucu",
@@ -378,9 +368,7 @@
         },
         "restore": {
             "heading": "Anda mempunyai perubahan yang belum disimpan",
-            "description": "Andakah anda ingin mengembalikan perubahan yang belum disimpan dari sesi penyuntingan sebelumnya?",
-            "restore": "Kembalikan",
-            "reset": "Set semula"
+            "description": "Andakah anda ingin mengembalikan perubahan yang belum disimpan dari sesi penyuntingan sebelumnya?"
         },
         "save": {
             "title": "Simpan",

@@ -245,19 +245,6 @@
             "list": "有{users}修改",
             "truncated_list": "有{users}同另外{count}人修改"
         },
-        "infobox": {
-            "selected": "揀咗 {n} 個",
-            "geometry": "幾何形狀",
-            "closed": "封咗",
-            "center": "中心",
-            "perimeter": "周界",
-            "length": "長",
-            "area": "範圍",
-            "centroid": "重心",
-            "location": "地點",
-            "metric": "十進制",
-            "imperial": "英制"
-        },
         "geometry": {
             "point": "點",
             "vertex": "頂點",
@@ -399,9 +386,7 @@
         },
         "restore": {
             "heading": "你有修改未記妥",
-            "description": "要唔要囘復上次未記妥之修改？",
-            "restore": "囘復",
-            "reset": "重新開始"
+            "description": "要唔要囘復上次未記妥之修改？"
         },
         "save": {
             "title": "記低",

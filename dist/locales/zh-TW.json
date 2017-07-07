@@ -348,19 +348,48 @@
             "list": "正顯示 {users} 的編輯",
             "truncated_list": "由 {users} 與另外 {count} 人編輯"
         },
-        "infobox": {
+        "info_panels": {
             "key": "I",
-            "selected": "{n} 被選擇",
-            "geometry": "幾何",
-            "closed": "已關閉",
-            "center": "中心",
-            "perimeter": "周長",
-            "length": "長度",
-            "area": "區域",
-            "centroid": "質心",
-            "location": "地點",
-            "metric": "公制",
-            "imperial": "英制"
+            "background": {
+                "key": "B",
+                "title": "背景",
+                "zoom": "縮放",
+                "vintage": "年代",
+                "unknown": "未知",
+                "show_tiles": "顯示圖磚",
+                "hide_tiles": "隱藏圖磚"
+            },
+            "history": {
+                "key": "H",
+                "title": "歷史",
+                "selected": "{n} 被選擇",
+                "version": "版本",
+                "last_edit": "最近編輯",
+                "edited_by": "編輯由",
+                "changeset": "變更組合",
+                "unknown": "未知",
+                "link_text": "在 openstreetmap.org 上的歷史"
+            },
+            "location": {
+                "key": "L",
+                "title": "位置",
+                "unknown_location": "未知位置"
+            },
+            "measurement": {
+                "key": "M",
+                "title": "測量",
+                "selected": "{n} 被選擇",
+                "geometry": "形狀",
+                "closed": "已關閉",
+                "center": "中心",
+                "perimeter": "周長",
+                "length": "長度",
+                "area": "區域",
+                "centroid": "質心",
+                "location": "位置",
+                "metric": "公制",
+                "imperial": "英制"
+            }
         },
         "geometry": {
             "point": "點",
@@ -431,7 +460,7 @@
             "switch": "切換回此背景",
             "custom": "客製化",
             "custom_button": "編輯自訂的背景",
-            "custom_prompt": "輸入地圖影像區塊的 URL 模版。以 Z/X/Y 方式存取區塊的伺服器，可在模版中使用 {z}, {x}, {y} 作參數，而以 quadtile 存取區塊的伺服器，則可使用 {u} 作參數。",
+            "custom_prompt": "輸入圖磚 URL 範本。有效的代號是：\n   - {zoom}/{z}, {x}, {y} 給 Z/X/Y 結構\n   - {ty} 給 TMS 樣式的 Y 座標\n   - {u} 給 quadtile 結構使用\n   - {switch:a,b,c} 給 DNS 伺服器多路通訊使用\n\n範例：\n{example}",
             "fix_misalignment": "調整影像偏移",
             "imagery_source_faq": "影像是從那裡來的呢？",
             "reset": "重設",
@@ -519,8 +548,8 @@
         "restore": {
             "heading": "您有未儲存的編輯",
             "description": "您在上一次編輯時仍有未儲存的修改，你想恢復這些修改嗎﹖",
-            "restore": "恢復",
-            "reset": "重設"
+            "restore": "復原我的變更",
+            "reset": "丟棄我的變更"
         },
         "save": {
             "title": "儲存",
@@ -950,7 +979,6 @@
                 },
                 "with_selected": {
                     "title": "選中圖徵",
-                    "infobox": "切換資訊 / 比例尺",
                     "edit_menu": "切換編輯選單"
                 },
                 "vertex_selected": {
@@ -995,6 +1023,17 @@
                     "undo": "還原上一個動作",
                     "redo": "重覆上一個動作",
                     "save": "儲存變更"
+                }
+            },
+            "tools": {
+                "title": "工具",
+                "info": {
+                    "title": "資訊",
+                    "all": "切換所有資訊面板",
+                    "background": "切換背景面板",
+                    "history": "切換歷史面板",
+                    "location": "切換位置面板",
+                    "measurement": "切換測量面板"
                 }
             }
         },
@@ -1568,6 +1607,9 @@
                 "kerb": {
                     "label": "路邊斜坡"
                 },
+                "label": {
+                    "label": "標籤"
+                },
                 "lamp_type": {
                     "label": "種類"
                 },
@@ -1638,6 +1680,9 @@
                 },
                 "man_made": {
                     "label": "種類"
+                },
+                "manhole": {
+                    "label": "類型"
                 },
                 "map_size": {
                     "label": "覆蓋範圍"
@@ -2591,6 +2636,10 @@
                 "amenity/school": {
                     "name": "中小學範圍",
                     "terms": "學校,中學,小學,國中,國小,高中,學校用地,學校範圍,School Grounds,School"
+                },
+                "amenity/scrapyard": {
+                    "name": "汽車廢料場",
+                    "terms": "汽車廢料場,廢料場,回收場"
                 },
                 "amenity/shelter": {
                     "name": "涼亭",
@@ -3913,6 +3962,14 @@
                     "name": "工廠",
                     "terms": "工廠,加工廠,Factory"
                 },
+                "manhole": {
+                    "name": "人孔",
+                    "terms": "人孔,下水道口"
+                },
+                "manhole/drain": {
+                    "name": "排水系統",
+                    "terms": "排水系統,排水道"
+                },
                 "natural": {
                     "name": "自然景觀",
                     "terms": "自然物件"
@@ -5192,6 +5249,20 @@
                     "text": "© Michael Spreng, CC by-SA 3.0，圖資：OpenStreetMap 貢獻者, ODbL 1.0"
                 },
                 "name": "小徑標示：冬季運動"
+            },
+            "basemap.at": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "基於政府資料的奧地利底圖。",
+                "name": "basemap.at"
+            },
+            "basemap.at-orthofoto": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "由 basemap.at 提供的 Orthofoto 圖層。geoimage.at 圖的「繼承者」。",
+                "name": "basemap.at Orthofoto"
             },
             "hike_n_bike": {
                 "attribution": {

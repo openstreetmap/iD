@@ -318,18 +318,22 @@
             "list": "Ediciones de {users}",
             "truncated_list": "Ediciones de {users} y otros {count}"
         },
-        "infobox": {
-            "selected": "{n} seleicionao",
-            "geometry": "Xeometría",
-            "closed": "zarrao",
-            "center": "Centrar",
-            "perimeter": "Perímetru",
-            "length": "Llargor",
-            "area": "Área",
-            "centroid": "Centroide",
-            "location": "Llugar",
-            "metric": "Métricu",
-            "imperial": "Imperial"
+        "info_panels": {
+            "key": "I",
+            "background": {
+                "key": "F",
+                "title": "Fondu"
+            },
+            "history": {
+                "version": "Versión"
+            },
+            "measurement": {
+                "key": "M",
+                "title": "Midíes",
+                "geometry": "Xeometría",
+                "metric": "Métricu",
+                "imperial": "Imperial"
+            }
         },
         "geometry": {
             "point": "puntu",
@@ -480,9 +484,7 @@
         },
         "restore": {
             "heading": "Tien cambios ensin guardar",
-            "description": "¿Quier recuperar los cambios ensin guardar d'una sesión d'edición anterior?",
-            "restore": "Restaurar",
-            "reset": "Restaurar"
+            "description": "¿Quier recuperar los cambios ensin guardar d'una sesión d'edición anterior?"
         },
         "save": {
             "title": "Guardar",
@@ -620,6 +622,28 @@
             }
         },
         "shortcuts": {
+            "title": "Atayos de tecláu",
+            "tooltip": "Ver la pantalla d'atayos de tecláu.",
+            "toggle": {
+                "key": "?"
+            },
+            "key": {
+                "alt": "Alt",
+                "backspace": "Borrar atrás",
+                "cmd": "Cmd",
+                "ctrl": "Ctrl",
+                "delete": "Borrar",
+                "del": "Del",
+                "esc": "Esc",
+                "return": "Intro",
+                "shift": "Mayús",
+                "space": "Espaciu"
+            },
+            "browsing": {
+                "help": {
+                    "title": "Ayuda"
+                }
+            },
             "editing": {
                 "title": "Editar",
                 "drawing": {
@@ -635,6 +659,12 @@
                 "commands": {
                     "title": "Comandos",
                     "save": "Guardar los cambios"
+                }
+            },
+            "tools": {
+                "title": "Ferramientes",
+                "info": {
+                    "title": "Información"
                 }
             }
         },

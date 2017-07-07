@@ -348,19 +348,6 @@
             "list": "由{users}編輯",
             "truncated_list": "由 {users} 和另外 {count} 人編輯"
         },
-        "infobox": {
-            "selected": "已選 {n} 項",
-            "geometry": "幾何",
-            "closed": "已關閉",
-            "center": "中心",
-            "perimeter": "周界",
-            "length": "長度",
-            "area": "範圍",
-            "centroid": "形心",
-            "location": "位置",
-            "metric": "十進制",
-            "imperial": "英制"
-        },
         "geometry": {
             "point": "點",
             "vertex": "頂點",
@@ -429,7 +416,6 @@
             "switch": "切換回這個背景",
             "custom": "自訂",
             "custom_button": "編輯自訂背景",
-            "custom_prompt": "輸入區塊範本的網址。有效的標記是以 {z}, {x}, {y} 作為 Z/X/Y 標記系統 Z/X/Y scheme 和 {u} 作為四分位數標記系統 quadtile scheme。",
             "fix_misalignment": "校正對位誤差",
             "imagery_source_faq": "這個背景影像來自何處？",
             "reset": "重設",
@@ -513,9 +499,7 @@
         },
         "restore": {
             "heading": "你有未儲存的變更",
-            "description": "你想恢復上一次編輯時尚未儲存的變更嗎？",
-            "restore": "恢復",
-            "reset": "重設"
+            "description": "你想恢復上一次編輯時尚未儲存的變更嗎？"
         },
         "save": {
             "title": "儲存",
