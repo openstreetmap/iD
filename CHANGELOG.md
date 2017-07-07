@@ -26,6 +26,73 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.3.0
+##### July 7, 2017
+
+#### :tada: New Features
+
+* Toggleable information panels can be used to expose more advanced features without cluttering the UI ([#4121])
+  * <kbd>⌘I</kbd>: Toggle all info panels (by default, will toggle the Measurement panel)
+  * <kbd>⌘⇧M</kbd>: Toggle Measurement Panel - Show selected object area, length, perimeter, calculate center, etc.
+  * <kbd>⌘⇧L</kbd>: Toggle Location Panel - Show location coordinates ([#2183]) and reverse geocode ([#2515])
+  * <kbd>⌘⇧H</kbd>: Toggle History Panel - Show last edited by ([#2273]), links to user and changeset info, object history ([#3761])
+  * <kbd>⌘⇧B</kbd>: Toggle Background Panel - Show imagery age if available ([#2492]), and toggle tile debugging
+
+[#4121]: https://github.com/openstreetmap/iD/issues/4121
+[#3761]: https://github.com/openstreetmap/iD/issues/3761
+[#2515]: https://github.com/openstreetmap/iD/issues/2515
+[#2492]: https://github.com/openstreetmap/iD/issues/2492
+[#2273]: https://github.com/openstreetmap/iD/issues/2273
+[#2183]: https://github.com/openstreetmap/iD/issues/2183
+
+#### :sparkles: Usability
+
+* Improve wording of "Restore my changes" / "Discard my changes" prompt ([#4117])
+* Add example and improve the text on the custom url template prompt ([#3887])
+* Adjust imagery attribution colors for better visibility ([#4047])
+* Show background imagery icons from [editor-layer-index](https://github.com/osmlab/editor-layer-index), upgrade Bing icon and others
+
+[#4117]: https://github.com/openstreetmap/iD/issues/4117
+[#4047]: https://github.com/openstreetmap/iD/issues/4047
+[#3887]: https://github.com/openstreetmap/iD/issues/3887
+
+#### :bug: Bugfixes
+
+* Don't remove important tags when performing point-area merge ([#4114])
+* Don't break undo/redo when performing point-area merge ([#4113])
+* Fix wikidata clearing, failed lookups when feature no longer selected ([#3987], [#3684])
+
+[#4114]: https://github.com/openstreetmap/iD/issues/4114
+[#4113]: https://github.com/openstreetmap/iD/issues/4113
+[#3987]: https://github.com/openstreetmap/iD/issues/3987
+[#3684]: https://github.com/openstreetmap/iD/issues/3684
+
+#### :earth_asia: Localization
+
+* Support localization of more keyboard shortcuts ([#4081])
+* Support localization of background imagery names, descriptions, and attribution text ([#4034])
+
+[#4081]: https://github.com/openstreetmap/iD/issues/4081
+[#4034]: https://github.com/openstreetmap/iD/issues/4034
+
+#### :mortar_board: Walkthrough
+
+* Add `walkthrough=true` url parameter to auto-start the walkthrough ([#4111])
+* Mention keyboard shortcuts <kbd>?</kbd> at the end of the walkthrough ([#4107])
+
+[#4111]: https://github.com/openstreetmap/iD/issues/4111
+[#4107]: https://github.com/openstreetmap/iD/issues/4107
+
+#### :rocket: Presets
+
+* Allow subway entrance preset as vertex geometry (attached to a line), update terms ([#4122])
+* Add presets for manholes and storm drains
+* Add preset for `amenity=scrapyard` ([#3387])
+
+[#4122]: https://github.com/openstreetmap/iD/issues/4122
+[#3387]: https://github.com/openstreetmap/iD/issues/3387
+
+
 # 2.2.2
 ##### June 12, 2017
 
