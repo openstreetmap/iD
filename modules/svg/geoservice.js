@@ -453,7 +453,7 @@ export function svgGeoService(projection, context, dispatch) {
                 
         // keep the OBJECTID to make sure we don't download the same data multiple times
         var outprops = {
-            OBJECTID: selectfeature.properties.OBJECTID
+            OBJECTID: (selectfeature.properties.OBJECTID || (Math.random() + ''))
         };
 
         // convert the rest of the layer's properties
@@ -567,7 +567,7 @@ export function svgGeoService(projection, context, dispatch) {
                             .attr('xlink:href', '#' + tag[2]);
             } else {
                 iconHolder.append('div')
-                    .attr('preset-icon preset-icon-28')
+                    .attr('class', 'preset-icon preset-icon-28')
                     .append('svg')
                         .attr('icon ' + tag[0])
                         .append('use')
