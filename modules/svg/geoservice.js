@@ -105,6 +105,12 @@ export function svgGeoService(projection, context, dispatch) {
             return Math.max(overlap1, overlap2);
         }
 
+        if (window.inAdd) {
+            return;
+        }        
+        console.log('download completed: mapping any new features');
+        window.inAdd = true;
+
         _.map(geojson.features || [], function(d) {
             // don't reload the same objects over again
             if (window.knownObjectIds[d.properties.OBJECTID]) {
@@ -148,8 +154,11 @@ export function svgGeoService(projection, context, dispatch) {
                 return nodes;
             }
             
-            function mapLine(d, coords) {
+            function mapLine(d, coords, loop) {
                 nodes = makeMiniNodes(coords);
+                if (loop) {
+                    nodes.push(nodes[0]);
+                }
                 props = makeEntity(nodes);
                 way = new osmWay(props, nodes);
                 way.approvedForEdit = 'pending';
@@ -195,7 +204,8 @@ export function svgGeoService(projection, context, dispatch) {
                         var componentRings = [];
                         for (var ring = 0; ring < coords.length; ring++) {
                             // props.tags = {};
-                            way = mapLine(d, coords[ring]);
+                            coords[ring].pop();
+                            way = mapLine(d, coords[ring], true);
                             componentRings.push({
                                 id: way.id,
                                 role: (ring === 0 ? 'outer' : 'inner')
@@ -217,7 +227,8 @@ export function svgGeoService(projection, context, dispatch) {
                         return rel;
                     } else {
                         // polygon with one single ring
-                        way = mapLine(d, coords[0]);
+                        coords[0].pop();
+                        way = mapLine(d, coords[0], true);
                         return way;
                     }
                 }
@@ -437,6 +448,8 @@ export function svgGeoService(projection, context, dispatch) {
                 console.log('Did not recognize Geometry Type: ' + d.geometry.type);
             }
         });
+        
+        window.inAdd = false;
         
         return this;
     }
