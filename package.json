@@ -12,6 +12,7 @@
   "scripts": {
     "all": "npm-run-all -s clean build dist",
     "build": "node build.js && node development_server.js",
+    "postall": "node build-sw.js",
     "clean": "shx rm -f dist/*.js dist/*.map dist/*.css dist/img/*.svg",
     "dist": "npm-run-all -p dist:**",
     "dist:css": "shx cat css/*.css > dist/iD.css",

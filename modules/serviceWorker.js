@@ -31,7 +31,7 @@ export function registerServiceWorker() {
             };
           };
         })
-        .catch(error => {
+        .catch(function(error) {
           console.error('Error during service worker registration:', error);
         });
     });

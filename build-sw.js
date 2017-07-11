@@ -7,7 +7,7 @@ workboxBuild
         skipWaiting: true,
         swDest: 'dist/service-worker.js',
         globDirectory: 'dist',
-        staticFileGlobs: ['**/!(*map*)'],
+        staticFileGlobs: ['**/*.{js,css,png,jpg,gif,svg,eot,ttf,woff}'],
         globIgnores: ['**/service-worker.js']
     })
     .then(() => {
