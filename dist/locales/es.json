@@ -2,7 +2,7 @@
     "es": {
         "modes": {
             "add_area": {
-                "title": "Área",
+                "title": "Árezo",
                 "description": "Añade parques, edificios, lagos, bosques u otras áreas al mapa.",
                 "tail": "Haga clic en el mapa para empezar a dibujar un área, como un parque, lago o edificio."
             },
@@ -352,22 +352,33 @@
             "key": "I",
             "background": {
                 "key": "B",
-                "title": "Fondo"
+                "title": "Fondo",
+                "zoom": "Acercamiento",
+                "vintage": "Época",
+                "unknown": "Desconocido",
+                "show_tiles": "Mostrar teselas",
+                "hide_tiles": "Ocultar teselas"
             },
             "history": {
                 "key": "H",
                 "title": "Historial",
+                "selected": "{n} seleccionado",
                 "version": "Versión",
                 "last_edit": "Última edición",
                 "edited_by": "Editado por",
                 "changeset": "Conjunto de cambios",
+                "unknown": "Desconocido",
                 "link_text": "Historial en openstreetmap.org"
             },
             "location": {
-                "key": "L"
+                "key": "L",
+                "title": "Ubicación",
+                "unknown_location": "Ubicación desconocida"
             },
             "measurement": {
                 "key": "M",
+                "title": "Medición",
+                "selected": "{n} seleccionado",
                 "geometry": "Geometría",
                 "closed": "cerrada",
                 "center": "Centro",
@@ -375,6 +386,7 @@
                 "length": "Longitud",
                 "area": "Área",
                 "centroid": "Centroide",
+                "location": "Ubicación",
                 "metric": "Métrico",
                 "imperial": "Imperial"
             }
@@ -448,13 +460,15 @@
             "switch": "Volver a este fondo",
             "custom": "Personalizado",
             "custom_button": "Editar fondo personalizado",
+            "custom_prompt": "Introduzca una plantilla URL de tesela. Los tokens válidos son:\n  - {zoom}/{z}, {x}, {y} para el esquema de tesela Z / X / Y\n  - {ty} para coordenadas Y invertidas del estilo TMS\n  - {u} para el esquema cuádruple\n  - {switch:a,b,c} para la multiplexación del servidor DNS\n\nEjemplo:\n{example}",
             "fix_misalignment": "Ajustar desplazamiento de imágenes",
             "imagery_source_faq": "¿De dónde vienen estas imágenes?",
             "reset": "reiniciar",
             "offset": "Arrastre en cualquier lugar del área gris de abajo para ajustar el desplazamiento de imágenes, o introduzca los valores de desplazamiento en metros.",
             "minimap": {
                 "description": "Minimapa",
-                "tooltip": "Mostrar una vista alejada del mapa para ayudar a ubicar el área que se muestra actualmente."
+                "tooltip": "Mostrar una vista alejada del mapa para ayudar a ubicar el área que se muestra actualmente.",
+                "key": "/"
             }
         },
         "map_data": {
@@ -533,7 +547,9 @@
         },
         "restore": {
             "heading": "Tiene cambios sin guardar",
-            "description": "¿Quiere recuperar los cambios no guardados de una sesión de edición previa?"
+            "description": "¿Quiere recuperar los cambios no guardados de una sesión de edición previa?",
+            "restore": "Restaurar mis cambios",
+            "reset": "Descartar mis cambios"
         },
         "save": {
             "title": "Guardar",
@@ -832,6 +848,7 @@
                 "title": "Áreas",
                 "add_playground": "Las *áreas* son utilizadas para mostrar los límites de elementos como lagos, edificios y áreas residenciales.{br}Estos pueden ser utilizados para mapear con más detalle muchos elementos que normalmente podría mapear como puntos. **Haga clic en el botón área {button} para añadir una nueva área.**",
                 "start_playground": "Vamos a añadir esta zona de juegos al mapa dibujando un área.  Las áreas se dibujan colocando *nodos* a lo largo del borde exterior del elemento. **Haga clic o presione la barra espaciadora para colocar un nodo inicial en una de las esquinas de la zona de juegos.**",
+                "continue_playground": "Continúe dibujando el área colocando más nodos a lo largo del borde del patio. Está bien conectar el área a los caminos existentes.{br}Consejo: Puede mantener pulsada la tecla '{alt}' para evitar que los nodos se conecten a otros elementos. **Continuar dibujando un área para el patio de recreo.**",
                 "finish_playground": "Termine el área presionando la tecla retorno, o haciendo clic nuevamente en el primer o último nodo. **Termine de dibujar un área para la zona de juegos.**",
                 "search_playground": "**Busque '{preset}'.**",
                 "choose_playground": "**Elija {preset} de la lista.**",
@@ -896,6 +913,8 @@
             },
             "startediting": {
                 "title": "Empezar a editar",
+                "help": "Ahora está listo para editar OpenStreetMap.{br}Puede volver a reproducir este tutorial en cualquier momento o ver más documentación haciendo clic en el botón {button} o pulsando la tecla '{key}'.",
+                "shortcuts": "Puede ver una lista de comandos junto con sus atajos de teclado pulsando la tecla '{key}'.",
                 "save": "¡No olvide guardar sus cambios regularmente!",
                 "start": "¡Comience a mapear!"
             }
@@ -903,6 +922,9 @@
         "shortcuts": {
             "title": "Atajos de teclado",
             "tooltip": "Muestra la pantalla de atajos de teclado.",
+            "toggle": {
+                "key": "?"
+            },
             "key": {
                 "alt": "Alt",
                 "backspace": "Retroceso",
@@ -1001,6 +1023,17 @@
                     "undo": "Deshace la última acción",
                     "redo": "Rehace la última acción",
                     "save": "Guarda cambios"
+                }
+            },
+            "tools": {
+                "title": "Herramientas",
+                "info": {
+                    "title": "Información",
+                    "all": "Alternar todos los paneles de información",
+                    "background": "Alternar panel de fondo",
+                    "history": "Alternar panel de historial",
+                    "location": "Alternar panel de ubicación",
+                    "measurement": "Alternar panel de medición"
                 }
             }
         },
@@ -5198,6 +5231,20 @@
                     "text": "© Sarah Hoffmann, CC by-SA 3.0, datos del mapa contribuidores OpenStreetMap, ODbL 1.0"
                 },
                 "name": "Waymarked Trails: Deportes de invierno"
+            },
+            "basemap.at": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Mapa base de Austria, basado en datos del gobierno.",
+                "name": "basemap.at"
+            },
+            "basemap.at-orthofoto": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Capa de ortofoto proporcionada por basemap.at. \"Sucesor\" de las imágenes de geoimage.at.",
+                "name": "Ortofoto de basemap.at"
             },
             "hike_n_bike": {
                 "attribution": {

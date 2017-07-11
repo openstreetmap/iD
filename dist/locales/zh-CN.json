@@ -348,6 +348,49 @@
             "list": "{users}编辑",
             "truncated_list": "{users}及另外{count}人编辑"
         },
+        "info_panels": {
+            "key": "I",
+            "background": {
+                "key": "B",
+                "title": "背景",
+                "zoom": "缩放",
+                "vintage": "影像日期",
+                "unknown": "未知",
+                "show_tiles": "显示瓦片",
+                "hide_tiles": "隐藏瓦片"
+            },
+            "history": {
+                "key": "H",
+                "title": "历史",
+                "selected": "已选择 {n} 个",
+                "version": "版本",
+                "last_edit": "最近编辑",
+                "edited_by": "编辑者",
+                "changeset": "修改集合",
+                "unknown": "未知",
+                "link_text": "在 openstreetmap.org 上的历史记录"
+            },
+            "location": {
+                "key": "L",
+                "title": "位置",
+                "unknown_location": "未知地点"
+            },
+            "measurement": {
+                "key": "M",
+                "title": "测量",
+                "selected": "已选择 {n} 个",
+                "geometry": "几何",
+                "closed": "闭合",
+                "center": "中心",
+                "perimeter": "周长",
+                "length": "长度",
+                "area": "面积",
+                "centroid": "质心",
+                "location": "位置",
+                "metric": "公制",
+                "imperial": "英制"
+            }
+        },
         "geometry": {
             "point": "点",
             "vertex": "顶点",
@@ -503,7 +546,9 @@
         },
         "restore": {
             "heading": "您有未保存的更改",
-            "description": "您在上一次编辑时有未保存的修改，您想恢复这些修改吗？"
+            "description": "您在上一次编辑时有未保存的修改，您想恢复这些修改吗？",
+            "restore": "恢复我的修改",
+            "reset": "丢弃我的修改"
         },
         "save": {
             "title": "保存",
@@ -977,6 +1022,17 @@
                     "undo": "撤销上一操作",
                     "redo": "重做上一操作",
                     "save": "保存更改"
+                }
+            },
+            "tools": {
+                "title": "工具",
+                "info": {
+                    "title": "信息",
+                    "all": "切换全部信息面板",
+                    "background": "切换背景面板",
+                    "history": "切换历史面板",
+                    "location": "切换位置面板",
+                    "measurement": "切换测量面板"
                 }
             }
         },
@@ -2578,7 +2634,7 @@
                 },
                 "amenity/school": {
                     "name": "学校",
-                    "terms": "学校场地"
+                    "terms": "学校,中学,小学"
                 },
                 "amenity/scrapyard": {
                     "name": "废品堆放场",
@@ -4866,7 +4922,7 @@
                 },
                 "tourism/theme_park": {
                     "name": "主题公园",
-                    "terms": "主题公园"
+                    "terms": "主题公园,乐园,度假区,娱乐,游乐园,游乐场,公园"
                 },
                 "tourism/viewpoint": {
                     "name": "观景点",
