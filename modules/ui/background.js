@@ -25,6 +25,7 @@ export function uiBackground(context) {
         opacityDefault = (context.storage('background-opacity') !== null) ?
             (+context.storage('background-opacity')) : 1.0,
         customTemplate = context.storage('background-custom-template') || '',
+        customSource = rendererBackgroundSource.Custom(customTemplate),
         previous;
 
     // Can be 0 from <1.3.0 use or due to issue #1923.
@@ -112,20 +113,19 @@ export function uiBackground(context) {
         function editCustom() {
             d3.event.preventDefault();
             var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
-            var template = window.prompt(t('background.custom_prompt', { example: example }), customTemplate);
+            var template = window.prompt(
+                t('background.custom_prompt', { example: example }),
+                customSource.template() || example
+            );
+
             if (template) {
-                setCustom(template);
+                context.storage('background-custom-template', template);
+                customTemplate = template;
+                customSource.template(template);
+                clickSetSource(customSource);
             } else {
                 selectLayer();
             }
-        }
-
-
-        function setCustom(template) {
-            context.storage('background-custom-template', template);
-            var d = rendererBackgroundSource.Custom(template);
-            content.selectAll('.custom_layer').datum(d);
-            clickSetSource(d);
         }
 
 
@@ -187,12 +187,6 @@ export function uiBackground(context) {
             overlayList.call(drawList, 'checkbox', clickSetOverlay, function(d) { return d.overlay; });
 
             selectLayer();
-
-            var source = context.background().baseLayerSource();
-            if (source.id === 'custom') {
-                customTemplate = source.template;
-            }
-
             updateOffsetVal();
         }
 
@@ -419,7 +413,7 @@ export function uiBackground(context) {
         var custom = backgroundList
             .append('li')
             .attr('class', 'custom_layer')
-            .datum(rendererBackgroundSource.Custom());
+            .datum(customSource);
 
         custom
             .append('button')
@@ -438,8 +432,8 @@ export function uiBackground(context) {
             .attr('type', 'radio')
             .attr('name', 'layers')
             .on('change', function () {
-                if (customTemplate) {
-                    setCustom(customTemplate);
+                if (customSource.template()) {
+                    clickSetSource(customSource);
                 } else {
                     editCustom();
                 }

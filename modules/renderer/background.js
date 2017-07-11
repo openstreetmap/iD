@@ -62,7 +62,7 @@ export function rendererBackground(context) {
 
         var id = b.id;
         if (id === 'custom') {
-            id = 'custom:' + b.template;
+            id = 'custom:' + b.template();
         }
 
         if (id) {
@@ -133,14 +133,15 @@ export function rendererBackground(context) {
         // test source against OSM imagery blacklists..
         var blacklists = context.connection().imageryBlacklists();
 
-        var fail = false,
+        var template = d.template(),
+            fail = false,
             tested = 0,
             regex, i;
 
         for (i = 0; i < blacklists.length; i++) {
             try {
                 regex = new RegExp(blacklists[i]);
-                fail = regex.test(d.template);
+                fail = regex.test(template);
                 tested++;
                 if (fail) break;
             } catch (e) {
@@ -151,7 +152,7 @@ export function rendererBackground(context) {
         // ensure at least one test was run.
         if (!tested) {
             regex = new RegExp('.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*');
-            fail = regex.test(d.template);
+            fail = regex.test(template);
         }
 
         baseLayer.source(!fail ? d : rendererBackgroundSource.None());

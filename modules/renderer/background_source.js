@@ -29,7 +29,8 @@ export function rendererBackgroundSource(data) {
         offset = [0, 0],
         name = source.name,
         description = source.description,
-        best = !!source.best;
+        best = !!source.best,
+        template = source.template;
 
     source.scaleExtent = data.scaleExtent || [0, 20];
     source.overzoom = data.overzoom !== false;
@@ -78,8 +79,15 @@ export function rendererBackgroundSource(data) {
     };
 
 
+    source.template = function(_) {
+        if (!arguments.length) return template;
+        if (source.id === 'custom') template = _;
+        return source;
+    };
+
+
     source.url = function(coord) {
-        return data.template
+        return template
             .replace('{x}', coord[0])
             .replace('{y}', coord[1])
             // TMS-flipped y coordinate
@@ -253,7 +261,7 @@ rendererBackgroundSource.Custom = function(template) {
 
 
     source.imageryUsed = function() {
-        return 'Custom (' + template + ')';
+        return 'Custom (' + source.template() + ')';
     };
 
 
