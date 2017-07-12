@@ -26,6 +26,22 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.3.1
+##### July 11, 2017
+
+#### :sparkles: Usability
+
+* Display left click icon for "Place a point" on keyboard shortcuts screen
+
+#### :bug: Bugfixes
+
+* Don't lose the imagery offset when switching between "Custom" and another background imagery layer ([#3982])
+* After splitting a way, update all matching relation members (fix for broken u-turn relations) ([#4140])
+
+[#3982]: https://github.com/openstreetmap/iD/issues/3982
+[#4140]: https://github.com/openstreetmap/iD/issues/4140
+
+
 # 2.3.0
 ##### July 7, 2017
 

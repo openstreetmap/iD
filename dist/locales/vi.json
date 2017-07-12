@@ -348,6 +348,49 @@
             "list": "Đóng góp bởi {users}",
             "truncated_list": "Đóng góp bởi {users} và {count} người khác"
         },
+        "info_panels": {
+            "key": "I",
+            "background": {
+                "key": "B",
+                "title": "Hình nền",
+                "zoom": "Mức thu phóng",
+                "vintage": "Lúc chụp",
+                "unknown": "Không rõ",
+                "show_tiles": "Hiện các Mảnh",
+                "hide_tiles": "Ẩn các Mảnh"
+            },
+            "history": {
+                "key": "L",
+                "title": "Lịch sử",
+                "selected": "{n} được chọn",
+                "version": "Phiên bản",
+                "last_edit": "Sửa đổi Cuối cùng",
+                "edited_by": "Người Sửa đổi",
+                "changeset": "Bộ thay đổi",
+                "unknown": "Không rõ",
+                "link_text": "Lịch sử tại openstreetmap.org"
+            },
+            "location": {
+                "key": "V",
+                "title": "Vị trí",
+                "unknown_location": "Vị trí Không rõ"
+            },
+            "measurement": {
+                "key": "M",
+                "title": "Đo lường",
+                "selected": "{n} được chọn",
+                "geometry": "Hình",
+                "closed": "đóng",
+                "center": "Tâm",
+                "perimeter": "Chu vi",
+                "length": "Chiều dài",
+                "area": "Diện tích",
+                "centroid": "Trọng tâm",
+                "location": "Vị trí",
+                "metric": "Hệ mét",
+                "imperial": "Hệ Anh"
+            }
+        },
         "geometry": {
             "point": "điểm",
             "vertex": "đỉnh",
@@ -410,24 +453,28 @@
         "background": {
             "title": "Hình nền",
             "description": "Tùy chọn Hình nền",
+            "key": "B",
             "percent_brightness": "Độ sáng {opacity}%",
             "none": "Không có",
             "best_imagery": "Nguồn hình ảnh hữu ích nhất đối với nơi này",
             "switch": "Quay về hình nền này",
             "custom": "Tùy biến",
             "custom_button": "Sửa hình nền tùy biến",
+            "custom_prompt": "Nhập định dạng URL của các mảnh bản đồ. Bạn có thể sử dụng các dấu hiệu:\n   - {zoom}/{z}, {x}, {y} cho định dạng mảnh Z/X/Y\n   - {ty} cho tọa độ Y kiểu TMS phản chiếu\n   - {u} cho định dạng quadtile\n   - {switch:a,b,c} để luân phiên các máy chủ DNS\n\nVí dụ:\n{example}",
             "fix_misalignment": "Chỉnh độ lệch hình ảnh",
             "imagery_source_faq": "Hình ảnh này được lấy từ đâu?",
             "reset": "đặt lại",
             "offset": "Kéo thả chuột ở vùng màu xám bên dưới để chỉnh độ lệch hình ảnh, hoặc nhập độ lệch được đo bằng mét.",
             "minimap": {
                 "description": "Bản đồ nhỏ",
-                "tooltip": "Mở một bản đồ thu nhỏ định vị trí đang được sửa đổi."
+                "tooltip": "Mở một bản đồ thu nhỏ định vị trí đang được sửa đổi.",
+                "key": "/"
             }
         },
         "map_data": {
             "title": "Dữ liệu Bản đồ",
             "description": "Dữ liệu Bản đồ",
+            "key": "F",
             "data_layers": "Các Lớp Dữ liệu",
             "fill_area": "Cách Tô màu các Vùng",
             "map_features": "Các Thể loại Đối tượng",
@@ -486,7 +533,8 @@
         "area_fill": {
             "wireframe": {
                 "description": "Không Tô (Khung lưới)",
-                "tooltip": "Chế độ khung lưới cho phép thấy rõ hình ảnh nền."
+                "tooltip": "Chế độ khung lưới cho phép thấy rõ hình ảnh nền.",
+                "key": "K"
             },
             "partial": {
                 "description": "Tô Mép",
@@ -499,7 +547,9 @@
         },
         "restore": {
             "heading": "Bạn có thay đổi chưa lưu",
-            "description": "Bạn có thay đổi chưa lưu từ một phiên làm việc trước đây. Bạn có muốn khôi phục các thay đổi này không?"
+            "description": "Bạn có thay đổi chưa lưu từ một phiên làm việc trước đây. Bạn có muốn khôi phục các thay đổi này không?",
+            "restore": "Phục hồi các thay đổi của tôi",
+            "reset": "Vứt bỏ các thay đổi của tôi"
         },
         "save": {
             "title": "Lưu",
@@ -609,6 +659,7 @@
         },
         "help": {
             "title": "Trợ giúp",
+            "key": "H",
             "help": "# Trợ giúp\n\nĐây là trình vẽ của [OpenStreetMap](http://www.openstreetmap.org/), bản đồ có mã nguồn mở và dữ liệu mở cho phép mọi người cùng sửa đổi. Bạn có thể sử dụng chương trình này để bổ sung và cập nhật dữ liệu bản đồ tại khu vực của bạn. Bạn có thể cải tiến bản đồ thế giới mở để cho mọi người sử dụng.\n\nCác sửa đổi của bạn trên bản đồ này sẽ xuất hiện cho mọi người dùng OpenStreetMap. Để sửa bản đồ, bạn cần phải [đăng nhập](https://www.openstreetmap.org/login).\n\n[Trình vẽ iD](http://ideditor.com/) là một dự án cộng tác và xuất bản [tất cả mã nguồn tại GitHub](https://github.com/openstreetmap/iD).\n",
             "editing_saving": "# Sửa đổi & Lưu giữ\n\nĐây là một chương trình vẽ trực tuyến, hiện tại bạn đang truy cập nó qua một trang Web.\n\n### Lựa chọn Đối tượng\n\nĐể lựa chọn một đối tượng, thí dụ con đường hay một điểm, nhấn chuột vào nó trên bản đồ. Khi đối tượng được chọn, bạn sẽ thấy một biểu mẫu ở bên phải chứa các chi tiết về đối tượng, cũng như một trình đơn chứa các tác vụ để thực hiện với đối tượng.\n\nĐể lựa chọn nhiều đối tượng cùng lúc, nhấn giữ phím Shift và nhấn chuột vào từng đối tượng một. Thay thế, nhấn giữ Shift và kéo chuột trên bản đồ để vẽ hộp bao. Các đối tượng nằm vào hộp này sẽ được chọn.\n\n### Lưu giữ Sửa đổi\n\nKhi bạn sửa đổi các tuyến đường, tòa nhà, và địa điểm, các thay đổi này được lưu giữ trên máy cho đến khi bạn đăng nó lên máy chủ. Đừng lo nhầm lẫn: chỉ việc nhấn vào các nút “Hoàn tác” và “Làm lại”.\n\nNhấn “Lưu” để hoàn thành các sửa đổi, thí dụ bạn vừa vẽ xong một khu và muốn bắt đầu vẽ khu mới. Trình vẽ sẽ trình bày các thay đổi để bạn xem lại, cũng như các gợi ý và cảnh báo nếu bạn đã sửa nhầm lẫn.\n\nSau khi vẽ xong, bạn sẽ nhập lời tóm lược các thay đổi và nhấn “Lưu” lần nữa để đăng các thay đổi lên [OpenStreetMap.org](http://www.openstreetmap.org/). Các thay đổi sẽ xuất hiện tại trang web này để mọi người xem và cập nhật nếu có sai sót.\n\nNếu bạn chưa xong mà cần rời khỏi máy tính, bạn có thể đóng trình vẽ này. Lần sau trở lại, trình vẽ này sẽ cho phép khôi phục các thay đổi chưa lưu của bạn (miễn là bạn sử dụng cùng máy tính và trình duyệt).\n\n### Sử dụng Chương trình\n\nBấm phím `?` để xem bảng phím tắt đầy đủ.\n",
             "roads": "# Đường sá\n\nTrình vẽ này cho phép tạo, sửa, và xóa các con đường. Con đường không nhất thiết phải là đường phố: có thể vẽ đường cao tốc, đường mòn, đường đi bộ, đường xe đạp…\n\n### Lựa chọn\n\nNhấn vào con đường để lựa chọn nó. Con đường sẽ được tô sáng, một trình đơn công cụ sẽ xuất hiện bên cạnh đường, và thanh bên sẽ trình bày các chi tiết của con đường.\n\n### Sửa đổi\n\nNhiều khi bạn sẽ gặp những con đường bị chệch đối với hình nền hoặc tuyến đường GPS. Bạn có thể chỉnh lại các con đường này để chính xác hơn.\n\nTrước tiên, nhấn vào con đường cần chỉnh lại. Đường sẽ được tô sáng và các nốt sẽ xuất hiện để bạn kéo sang vị trí đúng hơn. Để thêm chi tiết, nhấn đúp vào một khúc đường chưa có nốt, và một nốt mới sẽ xuất hiện để bạn kéo.\n\nNếu con đường nối với đường khác trên thực tiếp, nhưng trên bản đồ thì chưa nối liền, hãy kéo một nốt của một con đường sang đường kia để nối liền hai con đường. Nối liền các đường tại giao lộ là một điều rất quan trọng tăng khả năng chỉ đường.\n\nĐể di chuyển toàn bộ con đường cùng lúc, nhấn vào công cụ “Di chuyển” hoặc nhấn phím tắt `M`, chuyển chuột sang vị trí mới, rồi nhấn chuột để hoàn thành việc di chuyển.\n\n### Xóa\n\nHãy tưởng tượng bạn gặp một con đường hoàn toàn sai: bạn không thấy được con đường trong hình ảnh trên không và, theo lý tưởng, cũng đã ghé vào chỗ đó để xác nhận rằng nó không tồn tại. Nếu trường hợp này, bạn có thể xóa con đường hoàn toàn khỏi bản đồ. Xin cẩn thận khi xóa đối tượng: giống như mọi sửa đổi khác, mọi người sẽ thấy được kết quả. Ngoài ra, hình ảnh trên không nhiều khi lỗi thời – con đường có thể mới xây – thành thử tốt nhất là ghé vào chỗ đó để quan sát chắc chắn, nếu có thể.\n\nĐể xóa một con đường, lựa chọn nó bằng cách nhấn vào nó, rồi nhấn vào hình thùng rác hoặc nhấn phím Delete.\n\n### Tạo mới\n\nBạn có tìm ra một con đường chưa được vẽ trên bản đồ? Hãy bắt đầu vẽ đường kẻ mới bằng cách nhấn vào nút “Đường” ở phía trên bên trái của trình vẽ, hoặc nhấn phím tắt `2`.\n\nNhấn vào bản đồ tại điểm bắt đầu của con đường. Hoặc nếu con đường chia ra từ đường khác đã tồn tại, trước tiên nhấn chuột tại giao lộ giữa hai con đường này.\n\nSau đó, nhấn chuột lần lượt theo lối đường dùng hình ảnh trên không hoặc tuyến đường GPS. Khi nào con đường giao với đường khác, nhấn chuột tại giao lộ để nối liền hai con đường này. Sau khi vẽ xong, nhấn đúp vào nốt cuối dùng hoặc nhấn phím Return hay Enter.\n",
@@ -639,6 +690,7 @@
                 "name": {
                     "andrews-elementary-school": "Trường Tiểu học Nguyễn Văn A",
                     "conrail-railroad": "Hà Nội – Đồng Đăng",
+                    "rocky-river": "Sông Đá",
                     "southern-michigan-bank": "Ngân hàng Bắc Ninh",
                     "three-rivers-city-hall": "Tòa thị chính Tam Giang",
                     "three-rivers-elementary-school": "Trường Tiểu học Tam Giang",
@@ -701,6 +753,7 @@
                 "title": "Vùng",
                 "add_playground": "*Vùng* cho biết hình dạng của các đa giác như hồ nước, tòa nhà, và khu vực dân cư.{br}Bạn có thể cung cấp nhiều chi tiết hơn dùng vùng so với địa điểm. **Bấm nút {button} Vùng để bắt đầu vẽ vùng mới.**",
                 "start_playground": "Hãy vẽ một vùng để thêm sân chơi này vào bản đồ. Để vẽ vùng, đặt các *nốt* theo đường biên của vùng. **Nhấn chuột hoặc bấm phím cách để đặt nốt đầu tiên vào một góc của sân chơi.**",
+                "continue_playground": "Để tiếp tục vẽ vùng này, đặt thêm nốt theo đường biên của sân chơi. Bạn có thể nối liền vùng với các đường dạo đã tồn tại.{br}Mẹo vặt: Bạn có thể giữ xuống phím “{alt}” để tránh việc nối liền nốt với các đối tượng khác. **Tiếp tục vẽ vùng ứng với sân chơi này.**",
                 "finish_playground": "Để hoàn tất vùng, bấm Enter hoặc Return, hoặc nhấn chuột lần nữa vào nốt đầu tiên hoặc cuối dùng. **Vẽ xong vùng ứng với sân chơi.**",
                 "search_playground": "**Tìm “{preset}”.**",
                 "choose_playground": "**Chọn {preset} từ danh sách.**",
@@ -765,6 +818,8 @@
             },
             "startediting": {
                 "title": "Bắt đầu Sửa đổi",
+                "help": "Bạn sẵn sàng sửa đổi OpenStreetMap!{br}Lúc nào muốn được hướng dẫn lại hoặc xem thêm tài liệu, chỉ việc bấm nút {button} Trợ giúp hoặc phím “{key}”.",
+                "shortcuts": "Để xem danh sách các tác vụ cùng với phím tắt, bấm phím “{key}”.",
                 "save": "Hãy nhớ lưu các thay đổi của bạn thường xuyên!",
                 "start": "Hãy bắt đầu vẽ bản đồ!"
             }
@@ -772,6 +827,9 @@
         "shortcuts": {
             "title": "Phím tắt",
             "tooltip": "Xem bảng phím tắt.",
+            "toggle": {
+                "key": "?"
+            },
             "key": {
                 "alt": "Alt",
                 "backspace": "Backspace",
@@ -870,6 +928,17 @@
                     "undo": "Hoàn tác thao tác cuối cùng",
                     "redo": "Làm lại thao tác cuối cùng",
                     "save": "Lưu các thay đổi"
+                }
+            },
+            "tools": {
+                "title": "Công cụ",
+                "info": {
+                    "title": "Thông tin",
+                    "all": "Bật/tắt tất cả các bảng thông tin",
+                    "background": "Bật/tắt bảng hình nền",
+                    "history": "Bật/tắt bảng lịch sử",
+                    "location": "Bật/tắt bảng vị trí",
+                    "measurement": "Bật/tắt bảng đo lường"
                 }
             }
         },
@@ -1443,6 +1512,9 @@
                 "kerb": {
                     "label": "Bờ Lề đường"
                 },
+                "label": {
+                    "label": "Chữ đề"
+                },
                 "lamp_type": {
                     "label": "Kiểu"
                 },
@@ -1513,6 +1585,9 @@
                 },
                 "man_made": {
                     "label": "Loại"
+                },
+                "manhole": {
+                    "label": "Kiểu"
                 },
                 "map_size": {
                     "label": "Phạm vi"
@@ -2466,6 +2541,10 @@
                 "amenity/school": {
                     "name": "Sân Trường",
                     "terms": "sân trường, sân trường học, sân nhà trường, sân trung tâm giáo dục, san truong, san truong hoc, san nha truong, san trung tam giao duc"
+                },
+                "amenity/scrapyard": {
+                    "name": "Bãi Phế liệu",
+                    "terms": "phế liệu, ve chai, rác rưởi, sắt vụn, mảnh sắt, xe hơi, xe cộ, gạch vụn, phe lieu, ve chai, rac ruoi, sat vun, manh sat, xe hoi, xe co, gach vun"
                 },
                 "amenity/shelter": {
                     "name": "Nhà trú",
@@ -3788,6 +3867,14 @@
                     "name": "Nhà máy",
                     "terms": "nhà máy, xí nghiệp, xưởng, hãng, nha may, xi nghiep, xuong, hang"
                 },
+                "manhole": {
+                    "name": "Hố ga",
+                    "terms": "hố ga, lỗ cống, miệng cống, viễn thông, ho ga, lo cong, mieng cong, vien thong"
+                },
+                "manhole/drain": {
+                    "name": "Cống Thoát Nước",
+                    "terms": "cống thoát nước mưa, cống nước mưa, cong thoat nuoc mua, cong nuoc mua"
+                },
                 "natural": {
                     "name": "Thiên nhiên",
                     "terms": "thiên nhiên, tự nhiên, thien nhien, tu nhien"
@@ -5067,6 +5154,20 @@
                     "text": "© Michael Spreng, CC BY-SA 3.0, dữ liệu bản đồ do những người đóng góp vào  OpenStreetMap, ODbL 1.0"
                 },
                 "name": "Waymarked Trails: Thể thao Mùa đông"
+            },
+            "basemap.at": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Bản đồ gốc của Áo dựa trên dữ liệu chính phủ.",
+                "name": "basemap.at"
+            },
+            "basemap.at-orthofoto": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Lớp hình ảnh trực giao do basemap.at cung cấp. “Kế tiếp” hình ảnh geoimage.at.",
+                "name": "Hình ảnh trực giao basemap.at"
             },
             "hike_n_bike": {
                 "attribution": {

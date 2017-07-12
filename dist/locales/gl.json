@@ -354,6 +354,7 @@
                 "key": "B",
                 "title": "Fondo",
                 "zoom": "Zoom",
+                "vintage": "Retro",
                 "unknown": "Descoñecido",
                 "show_tiles": "Amosar teselas",
                 "hide_tiles": "Ocultar teselas"
@@ -546,7 +547,9 @@
         },
         "restore": {
             "heading": "Tes cambios sen gardar",
-            "description": "Queres recuperar os cambios non gardados da sesión de edición anterior?"
+            "description": "Queres recuperar os cambios non gardados da sesión de edición anterior?",
+            "restore": "Recuperar meus trocos",
+            "reset": "Desbotar meus trocos"
         },
         "save": {
             "title": "Gardar",
@@ -1152,7 +1155,7 @@
                         "postcode": "Código postal",
                         "province": "Provincia",
                         "province!jp": "Concello",
-                        "quarter": "Trimestre",
+                        "quarter": "Distrito",
                         "quarter!jp": "Ōaza/Machi",
                         "state": "Estado",
                         "street": "Rúa",
@@ -1299,7 +1302,7 @@
                     "label": "Tipo de Cámara",
                     "options": {
                         "dome": "Cúpula",
-                        "fixed": "Amañar",
+                        "fixed": "Fixa",
                         "panning": "Barrido"
                     }
                 },
@@ -1351,7 +1354,7 @@
                     "label": "Tipo"
                 },
                 "contact/webcam": {
-                    "label": "Webcam URL",
+                    "label": "URL da webcam",
                     "placeholder": "http://exemplo.gal/"
                 },
                 "content": {
@@ -1778,7 +1781,7 @@
                     "placeholder": "Local, Rexional, Nacional, Internacional"
                 },
                 "network_road": {
-                    "label": "Network"
+                    "label": "Rede"
                 },
                 "note": {
                     "label": "Nota"
@@ -1809,14 +1812,14 @@
                     "label": "Operador"
                 },
                 "outdoor_seating": {
-                    "label": "Estar ao aire libre"
+                    "label": "Terraza"
                 },
                 "par": {
                     "label": "Par",
                     "placeholder": "3, 4, 5..."
                 },
                 "parallel_direction": {
-                    "label": "Enderezo",
+                    "label": "Dirección",
                     "options": {
                         "backward": "Atrás",
                         "forward": "Adiante"
@@ -1845,7 +1848,7 @@
                     "placeholder": "+34 989 12 34 56"
                 },
                 "piste/difficulty": {
-                    "label": "Difícil",
+                    "label": "Dificultade",
                     "options": {
                         "advanced": "Avanzado (black diamond)",
                         "easy": "Doado (green circle)",
@@ -1853,7 +1856,7 @@
                         "extreme": "Extremo (require equipamento de escalada)",
                         "freeride": "Por libre (fora da pista)",
                         "intermediate": "Intermedio (cadrado azul)",
-                        "novice": "Aviso (instructor)"
+                        "novice": "Principiante (aprendizaxe)"
                     },
                     "placeholder": "Doado, Intermedio, Avanzado..."
                 },
@@ -1913,7 +1916,7 @@
                     "label": "Tipo de reciclaxe",
                     "options": {
                         "centre": "Centro de Reciclaxe",
-                        "container": "Container"
+                        "container": "Contedor"
                     }
                 },
                 "ref": {
@@ -1941,19 +1944,19 @@
                     "label": "Tipo"
                 },
                 "sac_scale": {
-                    "label": "Difícil Camiñata",
+                    "label": "Dificultade do sendeirismo",
                     "options": {
-                        "alpine_hiking": "T4: Camiñata Alpina",
-                        "demanding_alpine_hiking": "T5: Camiñata alpina exixente",
-                        "demanding_mountain_hiking": "T3: Esixente Camiñata de Montaña",
-                        "difficult_alpine_hiking": "T6: Dificil Camiñata Alpina",
-                        "hiking": "T1: Camiñata",
-                        "mountain_hiking": "T2: Camiñata de Montaña"
+                        "alpine_hiking": "T4: Sendeirismo alpino",
+                        "demanding_alpine_hiking": "T5: Sendeirismo alpino exixente",
+                        "demanding_mountain_hiking": "T3: Sendeirismo de montaña exixente",
+                        "difficult_alpine_hiking": "T6: Sendeirismo alpino difícil",
+                        "hiking": "T1: Sendeirismo",
+                        "mountain_hiking": "T2: Sendeirismo de montaña"
                     },
-                    "placeholder": "Montaña Senderismo, Sendeirismo alpino ..."
+                    "placeholder": "Sendeirismo de montaña, sendeirismo alpino"
                 },
                 "sanitary_dump_station": {
-                    "label": "Servizo WC"
+                    "label": "Área de desagüe para caravanas"
                 },
                 "seasonal": {
                     "label": "Estacional"
@@ -2003,10 +2006,10 @@
                 "smoking": {
                     "label": "Fumar",
                     "options": {
-                        "dedicated": "Adicado a fumadores (e.g. club fumadores)",
+                        "dedicated": "Adicado a fumadores (p.ex. club fumadores)",
                         "isolated": "En zonas de fumadores, fisicamente illadas",
                         "no": "Non fumar en ningures",
-                        "outside": "Saída permitida",
+                        "outside": "Permitido no exterior",
                         "separated": "En zonas de fumadores, non fisicamente illadas",
                         "yes": "Permitido en todas partes"
                     },
@@ -2090,7 +2093,7 @@
                     "label": "Superficie"
                 },
                 "surveillance": {
-                    "label": "Vixilancia de Cativos"
+                    "label": "Tipo de vixilancia"
                 },
                 "surveillance/type": {
                     "label": "Tipo de Vixilancia",
@@ -2217,316 +2220,246 @@
             },
             "presets": {
                 "address": {
-                    "name": "Enderezo",
-                    "terms": "<translate with synonyms or related terms for 'Address', separated by commas>"
+                    "name": "Enderezo"
                 },
                 "advertising/billboard": {
-                    "name": "Carteleira",
-                    "terms": "<translate with synonyms or related terms for 'Billboard', separated by commas>"
+                    "name": "Carteleira"
                 },
                 "aerialway": {
                     "name": "Vía Aérea"
                 },
                 "aerialway/cable_car": {
-                    "name": "Teleférico",
-                    "terms": "<translate with synonyms or related terms for 'Cable Car', separated by commas>"
+                    "name": "Teleférico"
                 },
                 "aerialway/chair_lift": {
-                    "name": "Ascensor de Cadeiras",
-                    "terms": "<translate with synonyms or related terms for 'Chair Lift', separated by commas>"
+                    "name": "Ascensor de Cadeiras"
                 },
                 "aerialway/drag_lift": {
-                    "name": "Ascensor de Arrastre",
-                    "terms": "<translate with synonyms or related terms for 'Drag Lift', separated by commas>"
+                    "name": "Ascensor de Arrastre"
                 },
                 "aerialway/gondola": {
-                    "name": "Góndola",
-                    "terms": "<translate with synonyms or related terms for 'Gondola', separated by commas>"
+                    "name": "Góndola"
                 },
                 "aerialway/goods": {
-                    "name": "Camiño aéreo de mercadorías",
-                    "terms": "<translate with synonyms or related terms for 'Goods Aerialway', separated by commas>"
+                    "name": "Camiño aéreo de mercadorías"
                 },
                 "aerialway/magic_carpet": {
-                    "name": "Ascensor Magic Carpet",
-                    "terms": "<translate with synonyms or related terms for 'Magic Carpet Lift', separated by commas>"
+                    "name": "Ascensor Magic Carpet"
                 },
                 "aerialway/mixed_lift": {
-                    "name": "Elevador Mixto",
-                    "terms": "<translate with synonyms or related terms for 'Mixed Lift', separated by commas"
+                    "name": "Elevador Mixto"
                 },
                 "aerialway/platter": {
-                    "name": "Plataforma Elevadora",
-                    "terms": "<translate with synonyms or related terms for 'Platter Lift', separated by commas>"
+                    "name": "Plataforma Elevadora"
                 },
                 "aerialway/pylon": {
-                    "name": "Pilón Vía Aérea",
-                    "terms": "<translate with synonyms or related terms for 'Aerialway Pylon', separated by commas>"
+                    "name": "Pilón Vía Aérea"
                 },
                 "aerialway/rope_tow": {
-                    "name": "Ascensor de Corda de Remolque",
-                    "terms": "<translate with synonyms or related terms for 'Rope Tow Lift', separated by commas>"
+                    "name": "Ascensor de Corda de Remolque"
                 },
                 "aerialway/station": {
-                    "name": "Estación Vía Aérea",
-                    "terms": "<translate with synonyms or related terms for 'Aerialway Station', separated by commas>"
+                    "name": "Estación Vía Aérea"
                 },
                 "aerialway/t-bar": {
-                    "name": "Elevador en T-bar",
-                    "terms": "<translate with synonyms or related terms for 'T-bar Lift', separated by commas>"
+                    "name": "Elevador en T-bar"
                 },
                 "aeroway": {
                     "name": "Vía aérea"
                 },
                 "aeroway/aerodrome": {
                     "name": "Aeroporto",
-                    "terms": "<translate with synonyms or related terms for 'Airport', separated by commas>"
+                    "terms": "aeroporto, avión, aeródromo, terminal"
                 },
                 "aeroway/apron": {
-                    "name": "Diantal",
-                    "terms": "<translate with synonyms or related terms for 'Apron', separated by commas>"
+                    "name": "Diantal"
                 },
                 "aeroway/gate": {
-                    "name": "Aeroporto Porta",
-                    "terms": "<translate with synonyms or related terms for 'Airport Gate', separated by commas>"
+                    "name": "Aeroporto Porta"
                 },
                 "aeroway/hangar": {
-                    "name": "Hangar",
-                    "terms": "<translate with synonyms or related terms for 'Hangar', separated by commas>"
+                    "name": "Hangar"
                 },
                 "aeroway/helipad": {
                     "name": "Heliporto",
-                    "terms": "<translate with synonyms or related terms for 'Helipad', separated by commas>"
+                    "terms": "heliporto, helicóptero"
                 },
                 "aeroway/runway": {
-                    "name": "Pista",
-                    "terms": "<translate with synonyms or related terms for 'Runway', separated by commas>"
+                    "name": "Pista"
                 },
                 "aeroway/taxiway": {
-                    "name": "Carril Taxi",
-                    "terms": "<translate with synonyms or related terms for 'Taxiway', separated by commas>"
+                    "name": "Carril Taxi"
                 },
                 "aeroway/terminal": {
-                    "name": "Aeroporto Terminal",
-                    "terms": "<translate with synonyms or related terms for 'Airport Terminal', separated by commas>"
+                    "name": "Aeroporto Terminal"
                 },
                 "amenity": {
                     "name": "Instalacións"
                 },
                 "amenity/animal_boarding": {
-                    "name": "Embarque de Animais",
-                    "terms": "<translate with synonyms or related terms for 'Animal Boarding Facility', separated by commas>"
+                    "name": "Embarque de Animais"
                 },
                 "amenity/animal_breeding": {
-                    "name": "Mellora Animal",
-                    "terms": "<translate with synonyms or related terms for 'Animal Breeding Facility', separated by commas>"
+                    "name": "Mellora Animal"
                 },
                 "amenity/animal_shelter": {
-                    "name": "Pousada Animal",
-                    "terms": "<translate with synonyms or related terms for 'Animal Shelter', separated by commas>"
+                    "name": "Pousada Animal"
                 },
                 "amenity/arts_centre": {
-                    "name": "Centro de Arte",
-                    "terms": "<translate with synonyms or related terms for 'Arts Center', separated by commas>"
+                    "name": "Centro de Arte"
                 },
                 "amenity/atm": {
-                    "name": "Caixeiro automático",
-                    "terms": "<translate with synonyms or related terms for 'ATM', separated by commas>"
+                    "name": "Caixeiro automático"
                 },
                 "amenity/bank": {
                     "name": "Banco",
-                    "terms": "<translate with synonyms or related terms for 'Bank', separated by commas>"
+                    "terms": "banco, caixa, entidade financeira"
                 },
                 "amenity/bar": {
                     "name": "Bar de copas",
                     "terms": "pub, bar, bar de copas, bebidas"
                 },
                 "amenity/bbq": {
-                    "name": "Barbacoa/Grella",
-                    "terms": "<translate with synonyms or related terms for 'Barbecue/Grill', separated by commas>"
+                    "name": "Barbacoa/Grella"
                 },
                 "amenity/bench": {
-                    "name": "Banco",
-                    "terms": "<translate with synonyms or related terms for 'Bench', separated by commas>"
+                    "name": "Banco"
                 },
                 "amenity/bicycle_parking": {
-                    "name": "Aparcadoiro de bicicletas",
-                    "terms": "<translate with synonyms or related terms for 'Bicycle Parking', separated by commas>"
+                    "name": "Aparcadoiro de bicicletas"
                 },
                 "amenity/bicycle_rental": {
-                    "name": "Alugamento de bicicletas",
-                    "terms": "<translate with synonyms or related terms for 'Bicycle Rental', separated by commas>"
+                    "name": "Alugamento de bicicletas"
                 },
                 "amenity/bicycle_repair_station": {
-                    "name": "Lugar para ferramentas de reparación de bicicletas",
-                    "terms": "<translate with synonyms or related terms for 'Bicycle Repair Tool Stand', separated by commas>"
+                    "name": "Lugar para ferramentas de reparación de bicicletas"
                 },
                 "amenity/biergarten": {
-                    "name": "Xardín da Cervexa",
-                    "terms": "<translate with synonyms or related terms for 'Beer Garden', separated by commas>"
+                    "name": "Xardín da Cervexa"
                 },
                 "amenity/boat_rental": {
-                    "name": "Aluguer de Botes",
-                    "terms": "<translate with synonyms or related terms for 'Boat Rental', separated by commas>"
+                    "name": "Aluguer de Botes"
                 },
                 "amenity/bureau_de_change": {
-                    "name": "Troco de Divisas",
-                    "terms": "<translate with synonyms or related terms for 'Currency Exchange', separated by commas>"
+                    "name": "Troco de Divisas"
                 },
                 "amenity/bus_station": {
-                    "name": "Estación de autobuses",
-                    "terms": "<translate with synonyms or related terms for 'Bus Station', separated by commas>"
+                    "name": "Estación de autobuses"
                 },
                 "amenity/cafe": {
                     "name": "Cafetería",
                     "terms": "cafetería, café, bar"
                 },
                 "amenity/car_rental": {
-                    "name": "Aluguer de automóbiles",
-                    "terms": "<translate with synonyms or related terms for 'Car Rental', separated by commas>"
+                    "name": "Aluguer de automóbiles"
                 },
                 "amenity/car_sharing": {
-                    "name": "Auto Compartido",
-                    "terms": "<translate with synonyms or related terms for 'Car Sharing', separated by commas>"
+                    "name": "Auto Compartido"
                 },
                 "amenity/car_wash": {
-                    "name": "Lavado de automóbiles",
-                    "terms": "<translate with synonyms or related terms for 'Car Wash', separated by commas>"
+                    "name": "Lavado de automóbiles"
                 },
                 "amenity/casino": {
-                    "name": "Casino",
-                    "terms": "<translate with synonyms or related terms for 'Casino', separated by commas>"
+                    "name": "Casino"
                 },
                 "amenity/charging_station": {
-                    "name": "Estación de carga",
-                    "terms": "<translate with synonyms or related terms for 'Charging Station', separated by commas>"
+                    "name": "Estación de carga"
                 },
                 "amenity/childcare": {
-                    "name": "Cuidadora/niñeira",
-                    "terms": "<translate with synonyms or related terms for 'Nursery/Childcare', separated by commas>"
+                    "name": "Cuidadora/niñeira"
                 },
                 "amenity/cinema": {
-                    "name": "Cine",
-                    "terms": "<translate with synonyms or related terms for 'Cinema', separated by commas>"
+                    "name": "Cine"
                 },
                 "amenity/clinic": {
-                    "name": "Clínica",
-                    "terms": "<translate with synonyms or related terms for 'Clinic', separated by commas>"
+                    "name": "Clínica"
                 },
                 "amenity/clock": {
-                    "name": "Reloxo",
-                    "terms": "<translate with synonyms or related terms for 'Clock', separated by commas>"
+                    "name": "Reloxo"
                 },
                 "amenity/college": {
-                    "name": "Zona Universitaria",
-                    "terms": "<translate with synonyms or related terms for 'College Grounds', separated by commas>"
+                    "name": "Zona Universitaria"
                 },
                 "amenity/community_centre": {
-                    "name": "Centro Comunitario",
-                    "terms": "<translate with synonyms or related terms for 'Community Center', separated by commas>"
+                    "name": "Centro Comunitario"
                 },
                 "amenity/compressed_air": {
-                    "name": "Aire Comprimido",
-                    "terms": "<translate with synonyms or related terms for 'Compressed Air', separated by commas>"
+                    "name": "Aire Comprimido"
                 },
                 "amenity/courthouse": {
-                    "name": "Pazo de xustiza",
-                    "terms": "<translate with synonyms or related terms for 'Courthouse', separated by commas>"
+                    "name": "Pazo de xustiza"
                 },
                 "amenity/coworking_space": {
                     "name": "Espacio de Cotraballo"
                 },
                 "amenity/crematorium": {
-                    "name": "Crematorio",
-                    "terms": "<translate with synonyms or related terms for 'Crematorium', separated by commas>"
+                    "name": "Crematorio"
                 },
                 "amenity/dentist": {
-                    "name": "Dentista",
-                    "terms": "<translate with synonyms or related terms for 'Dentist', separated by commas>"
+                    "name": "Dentista"
                 },
                 "amenity/doctors": {
-                    "name": "Doutor",
-                    "terms": "<translate with synonyms or related terms for 'Doctor', separated by commas>"
+                    "name": "Doutor"
                 },
                 "amenity/dojo": {
-                    "name": "Dojo/Academia de Artes Marciais",
-                    "terms": "<translate with synonyms or related terms for 'Dojo / Martial Arts Academy', separated by commas>"
+                    "name": "Dojo/Academia de Artes Marciais"
                 },
                 "amenity/drinking_water": {
-                    "name": "Fonte",
-                    "terms": "<translate with synonyms or related terms for 'Drinking Water', separated by commas>"
+                    "name": "Fonte"
                 },
                 "amenity/driving_school": {
-                    "name": "Autoescola",
-                    "terms": "<translate with synonyms or related terms for 'Driving School', separated by commas>"
+                    "name": "Autoescola"
                 },
                 "amenity/embassy": {
-                    "name": "Embaixada",
-                    "terms": "<translate with synonyms or related terms for 'Embassy', separated by commas>"
+                    "name": "Embaixada"
                 },
                 "amenity/fast_food": {
-                    "name": "Comida Rápida",
-                    "terms": "<translate with synonyms or related terms for 'Fast Food', separated by commas>"
+                    "name": "Comida Rápida"
                 },
                 "amenity/ferry_terminal": {
-                    "name": "Terminal Ferry",
-                    "terms": "<translate with synonyms or related terms for 'Ferry Terminal', separated by commas>"
+                    "name": "Terminal Ferry"
                 },
                 "amenity/fire_station": {
-                    "name": "Parque de bombeiros",
-                    "terms": "<translate with synonyms or related terms for 'Fire Station', separated by commas>"
+                    "name": "Parque de bombeiros"
                 },
                 "amenity/food_court": {
-                    "name": "Zona de Comidas",
-                    "terms": "<translate with synonyms or related terms for 'Food Court', separated by commas>"
+                    "name": "Zona de Comidas"
                 },
                 "amenity/fountain": {
-                    "name": "Fonte ornamental",
-                    "terms": "<translate with synonyms or related terms for 'Fountain', separated by commas>"
+                    "name": "Fonte ornamental"
                 },
                 "amenity/fuel": {
-                    "name": "Gasolineira",
-                    "terms": "<translate with synonyms or related terms for 'Gas Station', separated by commas>"
+                    "name": "Gasolineira"
                 },
                 "amenity/grave_yard": {
-                    "name": "Cemiterio",
-                    "terms": "<translate with synonyms or related terms for 'Graveyard', separated by commas>"
+                    "name": "Cemiterio"
                 },
                 "amenity/grit_bin": {
-                    "name": "Papeleira",
-                    "terms": "<translate with synonyms or related terms for 'Grit Bin', separated by commas>"
+                    "name": "Papeleira"
                 },
                 "amenity/hospital": {
-                    "name": "Hospital",
-                    "terms": "<translate with synonyms or related terms for 'Hospital Grounds', separated by commas>"
+                    "name": "Hospital"
                 },
                 "amenity/hunting_stand": {
-                    "name": "Stand de Caza",
-                    "terms": "<translate with synonyms or related terms for 'Hunting Stand', separated by commas>"
+                    "name": "Stand de Caza"
                 },
                 "amenity/ice_cream": {
-                    "name": "Xeladería",
-                    "terms": "<translate with synonyms or related terms for 'Ice Cream Shop', separated by commas>"
+                    "name": "Xeladería"
                 },
                 "amenity/internet_cafe": {
-                    "name": "Internet Café",
-                    "terms": "<translate with synonyms or related terms for 'Internet Cafe', separated by commas>"
+                    "name": "Internet Café"
                 },
                 "amenity/kindergarten": {
-                    "name": "Preescolar/Xardín de Infancia Terreos",
-                    "terms": "<translate with synonyms or related terms for 'Preschool/Kindergarten Grounds', separated by commas>"
+                    "name": "Preescolar/Xardín de Infancia Terreos"
                 },
                 "amenity/library": {
-                    "name": "Biblioteca",
-                    "terms": "<translate with synonyms or related terms for 'Library', separated by commas>"
+                    "name": "Biblioteca"
                 },
                 "amenity/marketplace": {
-                    "name": "Mercado",
-                    "terms": "<translate with synonyms or related terms for 'Marketplace', separated by commas>"
+                    "name": "Mercado"
                 },
                 "amenity/motorcycle_parking": {
-                    "name": "Aparcamento de Motos",
-                    "terms": "<translate with synonyms or related terms for 'Motorcycle Parking', separated by commas>"
+                    "name": "Aparcamento de Motos"
                 },
                 "amenity/nightclub": {
                     "name": "Pub",
@@ -2536,88 +2469,72 @@
                     "name": "Residencia de Anciáns"
                 },
                 "amenity/parking": {
-                    "name": "Aparcadoiro de automóbiles",
-                    "terms": "<translate with synonyms or related terms for 'Car Parking', separated by commas>"
+                    "name": "Aparcadoiro de automóbiles"
                 },
                 "amenity/parking_entrance": {
-                    "name": "Garaxe Aparcamento Entrada/Saída",
-                    "terms": "<translate with synonyms or related terms for 'Parking Garage Entrance/Exit', separated by commas>"
+                    "name": "Garaxe Aparcamento Entrada/Saída"
                 },
                 "amenity/parking_space": {
-                    "name": "Espazo de Aparcamento",
-                    "terms": "<translate with synonyms or related terms for 'Parking Space', separated by commas>"
+                    "name": "Espazo de Aparcamento"
                 },
                 "amenity/pavilion": {
-                    "name": "Pavillón",
-                    "terms": "<translate with synonyms or related terms for 'Pavilion', separated by commas>"
+                    "name": "Pavillón"
                 },
                 "amenity/pharmacy": {
-                    "name": "Farmacia",
-                    "terms": "<translate with synonyms or related terms for 'Pharmacy', separated by commas>"
+                    "name": "Farmacia"
                 },
                 "amenity/place_of_worship": {
                     "name": "Lugar de culto",
                     "terms": "lugar de culto, igrexa, templo, capela, basílica, parroquia, santuario, ermida, catedral, sinagoga, mesquita"
                 },
                 "amenity/place_of_worship/buddhist": {
-                    "name": "Templo Budista",
-                    "terms": "<translate with synonyms or related terms for 'Buddhist Temple', separated by commas>"
+                    "name": "Templo Budista"
                 },
                 "amenity/place_of_worship/christian": {
                     "name": "Igrexa",
                     "terms": "igrexa, capela, parroquia, templo, ermida, santuario"
                 },
                 "amenity/place_of_worship/jewish": {
-                    "name": "Sinagoga",
-                    "terms": "<translate with synonyms or related terms for 'Synagogue', separated by commas>"
+                    "name": "Sinagoga"
                 },
                 "amenity/place_of_worship/muslim": {
-                    "name": "Mesquita",
-                    "terms": "<translate with synonyms or related terms for 'Mosque', separated by commas>"
+                    "name": "Mesquita"
                 },
                 "amenity/planetarium": {
-                    "name": "Planetario",
-                    "terms": "<translate with synonyms or related terms for 'Planetarium', separated by commas>"
+                    "name": "Planetario"
                 },
                 "amenity/police": {
                     "name": "Policía",
-                    "terms": "<translate with synonyms or related terms for 'Police', separated by commas>"
+                    "terms": "policía, comisaría, cuartel, policía local, policía nacional, garda civil, forzas de seguridade"
                 },
                 "amenity/post_box": {
                     "name": "Caixa do correo",
                     "terms": "correo, buzón, correos, mensaxería, postal"
                 },
                 "amenity/post_office": {
-                    "name": "Oficina de Correos",
-                    "terms": "<translate with synonyms or related terms for 'Post Office', separated by commas>"
+                    "name": "Oficina de Correos"
                 },
                 "amenity/prison": {
-                    "name": "Penitenciaria",
-                    "terms": "<translate with synonyms or related terms for 'Prison Grounds', separated by commas>"
+                    "name": "Penitenciaria"
                 },
                 "amenity/pub": {
                     "name": "Bar",
                     "terms": "Pub, bar, café, cafetería"
                 },
                 "amenity/public_bath": {
-                    "name": "Baño Público",
-                    "terms": "<translate with synonyms or related terms for 'Public Bath', separated by commas>"
+                    "name": "Baño Público"
                 },
                 "amenity/public_bookcase": {
-                    "name": "Estantería Pública",
-                    "terms": "<translate with synonyms or related terms for 'Public Bookcase', separated by commas>"
+                    "name": "Estantería Pública"
                 },
                 "amenity/ranger_station": {
-                    "name": "Garda Bosques Estación",
-                    "terms": "<translate with synonyms or related terms for 'Ranger Station', separated by commas>"
+                    "name": "Garda Bosques Estación"
                 },
                 "amenity/recycling": {
-                    "name": "Reciclaxe",
-                    "terms": "<translate with synonyms or related terms for 'Recycling', separated by commas>"
+                    "name": "Reciclaxe"
                 },
                 "amenity/recycling_centre": {
-                    "name": "Centro de Reciclaxe",
-                    "terms": "<translate with synonyms or related terms for 'Recycling Center', separated by commas>"
+                    "name": "Centro de Reciclaxe"
                 },
                 "amenity/register_office": {
                     "name": "Oficina de Rexistro"
@@ -2627,574 +2544,442 @@
                     "terms": "restaurante, mesón, taberna, comedor, comida, comer, xantar, cear, menú"
                 },
                 "amenity/sanitary_dump_station": {
-                    "name": "RV WC Eliminación",
-                    "terms": "<translate with synonyms or related terms for 'RV Toilet Disposal', separated by commas>"
+                    "name": "RV WC Eliminación"
                 },
                 "amenity/school": {
                     "name": "Escola Terreos",
                     "terms": "escola, colexio, instituto, educación, ensinanza, primaria, secundaria, ESO, bacharelato"
                 },
                 "amenity/scrapyard": {
-                    "name": "Depósito de Chatarra",
-                    "terms": "<translate with synonyms or related terms for 'Scrap Yard', separated by commas>"
+                    "name": "Depósito de Chatarra"
                 },
                 "amenity/shelter": {
-                    "name": "Abrigo",
-                    "terms": "<translate with synonyms or related terms for 'Shelter', separated by commas>"
+                    "name": "Abrigo"
                 },
                 "amenity/social_facility": {
-                    "name": "Axuda Social",
-                    "terms": "<translate with synonyms or related terms for 'Social Facility', separated by commas>"
+                    "name": "Axuda Social"
                 },
                 "amenity/social_facility/food_bank": {
-                    "name": "Banco de Alimentos",
-                    "terms": "<translate with synonyms or related terms for 'Food Bank', separated by commas>"
+                    "name": "Banco de Alimentos"
                 },
                 "amenity/social_facility/group_home": {
-                    "name": "Grupo de Vellos Fogar",
-                    "terms": "<translate with synonyms or related terms for 'Elderly Group Home', separated by commas>"
+                    "name": "Grupo de Vellos Fogar"
                 },
                 "amenity/social_facility/homeless_shelter": {
-                    "name": "Refuxio para Indixentes",
-                    "terms": "<translate with synonyms or related terms for 'Homeless Shelter', separated by commas>"
+                    "name": "Refuxio para Indixentes"
                 },
                 "amenity/social_facility/nursing_home": {
-                    "name": "Residencia de Anciáns",
-                    "terms": "<translate with synonyms or related terms for 'Nursing Home', separated by commas>"
+                    "name": "Residencia de Anciáns"
                 },
                 "amenity/studio": {
-                    "name": "Estudio",
-                    "terms": "<translate with synonyms or related terms for 'Studio', separated by commas>"
+                    "name": "Estudio"
                 },
                 "amenity/swimming_pool": {
                     "name": "Piscina"
                 },
                 "amenity/taxi": {
-                    "name": "Parada de taxis",
-                    "terms": "<translate with synonyms or related terms for 'Taxi Stand', separated by commas>"
+                    "name": "Parada de taxis"
                 },
                 "amenity/telephone": {
-                    "name": "Teléfono",
-                    "terms": "<translate with synonyms or related terms for 'Telephone', separated by commas>"
+                    "name": "Teléfono"
                 },
                 "amenity/theatre": {
-                    "name": "Teatro",
-                    "terms": "<translate with synonyms or related terms for 'Theater', separated by commas>"
+                    "name": "Teatro"
                 },
                 "amenity/toilets": {
-                    "name": "Aseos",
-                    "terms": "<translate with synonyms or related terms for 'Toilets', separated by commas>"
+                    "name": "Aseos"
                 },
                 "amenity/townhall": {
                     "name": "Casa do Concello",
                     "terms": "casa do concello, concello, consistorio, municipio, municipal, cabido"
                 },
                 "amenity/university": {
-                    "name": "Campus",
-                    "terms": "<translate with synonyms or related terms for 'University Grounds', separated by commas>"
+                    "name": "Campus"
                 },
                 "amenity/vending_machine": {
-                    "name": "Máquina de Vending",
-                    "terms": "<translate with synonyms or related terms for 'Vending Machine', separated by commas>"
+                    "name": "Máquina de Vending"
                 },
                 "amenity/vending_machine/cigarettes": {
-                    "name": "Expendedora de Tabaco",
-                    "terms": "<translate with synonyms or related terms for 'Cigarette Vending Machine', separated by commas>"
+                    "name": "Expendedora de Tabaco"
                 },
                 "amenity/vending_machine/condoms": {
-                    "name": "Expendedora de Condóns",
-                    "terms": "<translate with synonyms or related terms for 'Condom Vending Machine', separated by commas>"
+                    "name": "Expendedora de Condóns"
                 },
                 "amenity/vending_machine/drinks": {
-                    "name": "Mánquina de Vending, Bebidas",
-                    "terms": "<translate with synonyms or related terms for 'Drink Vending Machine', separated by commas>"
+                    "name": "Mánquina de Vending, Bebidas"
                 },
                 "amenity/vending_machine/excrement_bags": {
-                    "name": "Caca Can",
-                    "terms": "<translate with synonyms or related terms for 'Excrement Bag Vending Machine', separated by commas>"
+                    "name": "Caca Can"
                 },
                 "amenity/vending_machine/news_papers": {
                     "name": "Expendedora de Xornais"
                 },
                 "amenity/vending_machine/newspapers": {
-                    "name": "Máquina Expendedora de Xornais",
-                    "terms": "<translate with synonyms or related terms for 'Newspaper Vending Machine', separated by commas>"
+                    "name": "Máquina Expendedora de Xornais"
                 },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
-                    "name": "Máquina expendedora de recollida/entrega de paquetes",
-                    "terms": "<translate with synonyms or related terms for 'Parcel Pickup/Dropoff Vending Machine', separated by commas>"
+                    "name": "Máquina expendedora de recollida/entrega de paquetes"
                 },
                 "amenity/vending_machine/parking_tickets": {
-                    "name": "Máquina Parquímetro",
-                    "terms": "<translate with synonyms or related terms for 'Parking Ticket Vending Machine', separated by commas>"
+                    "name": "Máquina Parquímetro"
                 },
                 "amenity/vending_machine/public_transport_tickets": {
-                    "name": "Expendedora Tickets de Tránsito",
-                    "terms": "<translate with synonyms or related terms for 'Transit Ticket Vending Machine', separated by commas>"
+                    "name": "Expendedora Tickets de Tránsito"
                 },
                 "amenity/vending_machine/sweets": {
-                    "name": "Expendedora de Snacks",
-                    "terms": "<translate with synonyms or related terms for 'Snack Vending Machine', separated by commas>"
+                    "name": "Expendedora de Snacks"
                 },
                 "amenity/veterinary": {
-                    "name": "Veterinario",
-                    "terms": "<translate with synonyms or related terms for 'Veterinary', separated by commas>"
+                    "name": "Veterinario"
                 },
                 "amenity/waste_basket": {
                     "name": "Papeleira",
-                    "terms": "<translate with synonyms or related terms for 'Waste Basket', separated by commas>"
+                    "terms": "papeleira, lixo, basura"
                 },
                 "amenity/waste_disposal": {
-                    "name": "Vertedeiro",
-                    "terms": "<translate with synonyms or related terms for 'Garbage Dumpster', separated by commas>"
+                    "name": "Vertedeiro"
                 },
                 "amenity/waste_transfer_station": {
-                    "name": "Estación de Bombeo Augas Residuais",
-                    "terms": "<translate with synonyms or related terms for 'Waste Transfer Station', separated by commas>"
+                    "name": "Estación de Bombeo Augas Residuais"
                 },
                 "amenity/water_point": {
-                    "name": "Auga potable de RV",
-                    "terms": "<translate with synonyms or related terms for 'RV Drinking Water', separated by commas>"
+                    "name": "Auga potable de RV"
                 },
                 "amenity/watering_place": {
-                    "name": "Bebedoiro de animais",
-                    "terms": "<translate with synonyms or related terms for 'Animal Watering Place', separated by commas>"
+                    "name": "Bebedoiro de animais"
                 },
                 "area": {
-                    "name": "Área",
-                    "terms": "<translate with synonyms or related terms for 'Area', separated by commas>"
+                    "name": "Área"
                 },
                 "area/highway": {
-                    "name": "Superficie da Estrada",
-                    "terms": "<translate with synonyms or related terms for 'Road Surface', separated by commas>"
+                    "name": "Superficie da Estrada"
                 },
                 "barrier": {
-                    "name": "Barreira",
-                    "terms": "<translate with synonyms or related terms for 'Barrier', separated by commas>"
+                    "name": "Barreira"
                 },
                 "barrier/block": {
-                    "name": "Bloque",
-                    "terms": "<translate with synonyms or related terms for 'Block', separated by commas>"
+                    "name": "Bloque"
                 },
                 "barrier/bollard": {
-                    "name": "Bolardo",
-                    "terms": "<translate with synonyms or related terms for 'Bollard', separated by commas>"
+                    "name": "Bolardo"
                 },
                 "barrier/border_control": {
-                    "name": "Alfándega",
-                    "terms": "<translate with synonyms or related terms for 'Border Control', separated by commas>"
+                    "name": "Alfándega"
                 },
                 "barrier/cattle_grid": {
-                    "name": "Reixa de Retención",
-                    "terms": "<translate with synonyms or related terms for 'Cattle Grid', separated by commas>"
+                    "name": "Reixa de Retención"
                 },
                 "barrier/city_wall": {
-                    "name": "Muralla",
-                    "terms": "<translate with synonyms or related terms for 'City Wall', separated by commas>"
+                    "name": "Muralla"
                 },
                 "barrier/cycle_barrier": {
-                    "name": "Barreira Ciclista",
-                    "terms": "<translate with synonyms or related terms for 'Cycle Barrier', separated by commas>"
+                    "name": "Barreira Ciclista"
                 },
                 "barrier/ditch": {
-                    "name": "Trincheira",
-                    "terms": "<translate with synonyms or related terms for 'Trench', separated by commas>"
+                    "name": "Trincheira"
                 },
                 "barrier/entrance": {
                     "name": "Entrada"
                 },
                 "barrier/fence": {
-                    "name": "Valado",
-                    "terms": "<translate with synonyms or related terms for 'Fence', separated by commas>"
+                    "name": "Valado"
                 },
                 "barrier/gate": {
-                    "name": "Porta",
-                    "terms": "<translate with synonyms or related terms for 'Gate', separated by commas>"
+                    "name": "Porta"
                 },
                 "barrier/hedge": {
-                    "name": "Cobertura",
-                    "terms": "<translate with synonyms or related terms for 'Hedge', separated by commas>"
+                    "name": "Cobertura"
                 },
                 "barrier/kissing_gate": {
-                    "name": "Porta Kissing",
-                    "terms": "<translate with synonyms or related terms for 'Kissing Gate', separated by commas>"
+                    "name": "Porta Kissing"
                 },
                 "barrier/lift_gate": {
-                    "name": "Barreira levadiza",
-                    "terms": "<translate with synonyms or related terms for 'Lift Gate', separated by commas>"
+                    "name": "Barreira levadiza"
                 },
                 "barrier/retaining_wall": {
-                    "name": "Muro de contención",
-                    "terms": "<translate with synonyms or related terms for 'Retaining Wall', separated by commas>"
+                    "name": "Muro de contención"
                 },
                 "barrier/stile": {
-                    "name": "Escada",
-                    "terms": "<translate with synonyms or related terms for 'Stile', separated by commas>"
+                    "name": "Escada"
                 },
                 "barrier/toll_booth": {
-                    "name": "Peaxe",
-                    "terms": "<translate with synonyms or related terms for 'Toll Booth', separated by commas>"
+                    "name": "Peaxe"
                 },
                 "barrier/wall": {
-                    "name": "Muro",
-                    "terms": "<translate with synonyms or related terms for 'Wall', separated by commas>"
+                    "name": "Muro"
                 },
                 "boundary/administrative": {
-                    "name": "Límite administrativo",
-                    "terms": "<translate with synonyms or related terms for 'Administrative Boundary', separated by commas>"
+                    "name": "Límite administrativo"
                 },
                 "building": {
-                    "name": "Edificio",
-                    "terms": "<translate with synonyms or related terms for 'Building', separated by commas>"
+                    "name": "Edificio"
                 },
                 "building/apartments": {
-                    "name": "Apartamentos",
-                    "terms": "<translate with synonyms or related terms for 'Apartments', separated by commas>"
+                    "name": "Apartamentos"
                 },
                 "building/barn": {
-                    "name": "Celeiro-Hórreo",
-                    "terms": "<translate with synonyms or related terms for 'Barn', separated by commas>"
+                    "name": "Celeiro-Hórreo"
                 },
                 "building/bunker": {
                     "name": "Bunker"
                 },
                 "building/cabin": {
-                    "name": "Cabina",
-                    "terms": "<translate with synonyms or related terms for 'Cabin', separated by commas>"
+                    "name": "Cabina"
                 },
                 "building/cathedral": {
-                    "name": "Catedral Edificio",
-                    "terms": "<translate with synonyms or related terms for 'Cathedral Building', separated by commas>"
+                    "name": "Catedral Edificio"
                 },
                 "building/chapel": {
-                    "name": "Capela Edificio",
-                    "terms": "<translate with synonyms or related terms for 'Chapel Building', separated by commas>"
+                    "name": "Capela Edificio"
                 },
                 "building/church": {
-                    "name": "Igrexa edificio",
-                    "terms": "<translate with synonyms or related terms for 'Church Building', separated by commas>"
+                    "name": "Igrexa edificio"
                 },
                 "building/college": {
-                    "name": "Colexio edificio",
-                    "terms": "<translate with synonyms or related terms for 'College Building', separated by commas>"
+                    "name": "Colexio edificio"
                 },
                 "building/commercial": {
-                    "name": "Comercial edificio",
-                    "terms": "<translate with synonyms or related terms for 'Commercial Building', separated by commas>"
+                    "name": "Comercial edificio"
                 },
                 "building/construction": {
-                    "name": "Edificio en Construción",
-                    "terms": "<translate with synonyms or related terms for 'Building Under Construction', separated by commas>"
+                    "name": "Edificio en Construción"
                 },
                 "building/detached": {
-                    "name": "Casa Illada",
-                    "terms": "<translate with synonyms or related terms for 'Detached House', separated by commas>"
+                    "name": "Casa Illada"
                 },
                 "building/dormitory": {
-                    "name": "Dormitorio",
-                    "terms": "<translate with synonyms or related terms for 'Dormitory', separated by commas>"
+                    "name": "Dormitorio"
                 },
                 "building/entrance": {
                     "name": "Entrada/Saída"
                 },
                 "building/garage": {
-                    "name": "Garaxe",
-                    "terms": "<translate with synonyms or related terms for 'Garage', separated by commas>"
+                    "name": "Garaxe"
                 },
                 "building/garages": {
-                    "name": "Garaxes",
-                    "terms": "<translate with synonyms or related terms for 'Garages', separated by commas>"
+                    "name": "Garaxes"
                 },
                 "building/greenhouse": {
-                    "name": "invernadoiro",
-                    "terms": "<translate with synonyms or related terms for 'Greenhouse', separated by commas>"
+                    "name": "invernadoiro"
                 },
                 "building/hospital": {
-                    "name": "Hospital edificio",
-                    "terms": "<translate with synonyms or related terms for 'Hospital Building', separated by commas>"
+                    "name": "Hospital edificio"
                 },
                 "building/hotel": {
-                    "name": "Hotel edificio",
-                    "terms": "<translate with synonyms or related terms for 'Hotel Building', separated by commas>"
+                    "name": "Hotel edificio"
                 },
                 "building/house": {
-                    "name": "Casa",
-                    "terms": "<translate with synonyms or related terms for 'House', separated by commas>"
+                    "name": "Casa"
                 },
                 "building/hut": {
-                    "name": "Refuxio",
-                    "terms": "<translate with synonyms or related terms for 'Hut', separated by commas>"
+                    "name": "Refuxio"
                 },
                 "building/industrial": {
-                    "name": "Edificio Industrial",
-                    "terms": "<translate with synonyms or related terms for 'Industrial Building', separated by commas>"
+                    "name": "Edificio Industrial"
                 },
                 "building/kindergarten": {
-                    "name": "Preescolar/Xardín de Infancia Edificio",
-                    "terms": "<translate with synonyms or related terms for 'Preschool/Kindergarten Building', separated by commas>"
+                    "name": "Preescolar/Xardín de Infancia Edificio"
                 },
                 "building/public": {
-                    "name": "Público Edificio",
-                    "terms": "<translate with synonyms or related terms for 'Public Building', separated by commas>"
+                    "name": "Público Edificio"
                 },
                 "building/residential": {
-                    "name": "Edificio Residencial",
-                    "terms": "<translate with synonyms or related terms for 'Residential Building', separated by commas>"
+                    "name": "Edificio Residencial"
                 },
                 "building/retail": {
-                    "name": "Minorista Edificio",
-                    "terms": "<translate with synonyms or related terms for 'Retail Building', separated by commas>"
+                    "name": "Minorista Edificio"
                 },
                 "building/roof": {
-                    "name": "Tellado",
-                    "terms": "<translate with synonyms or related terms for 'Roof', separated by commas>"
+                    "name": "Tellado"
                 },
                 "building/school": {
-                    "name": "Escola Edificio",
-                    "terms": "<translate with synonyms or related terms for 'School Building', separated by commas>"
+                    "name": "Escola Edificio"
                 },
                 "building/semidetached_house": {
-                    "name": "Casa Adosada",
-                    "terms": "<translate with synonyms or related terms for 'Semi-Detached House', separated by commas>"
+                    "name": "Casa Adosada"
                 },
                 "building/shed": {
-                    "name": "Galpón",
-                    "terms": "<translate with synonyms or related terms for 'Shed', separated by commas>"
+                    "name": "Galpón"
                 },
                 "building/stable": {
-                    "name": "Estable",
-                    "terms": "<translate with synonyms or related terms for 'Stable', separated by commas>"
+                    "name": "Estable"
                 },
                 "building/static_caravan": {
-                    "name": "Casa Móbil Estática",
-                    "terms": "<translate with synonyms or related terms for 'Static Mobile Home', separated by commas>"
+                    "name": "Casa Móbil Estática"
                 },
                 "building/terrace": {
-                    "name": "Casas en fila",
-                    "terms": "<translate with synonyms or related terms for 'Row Houses', separated by commas>"
+                    "name": "Casas en fila"
                 },
                 "building/train_station": {
                     "name": "Estación de tren"
                 },
                 "building/university": {
-                    "name": "Edificio Universitario",
-                    "terms": "<translate with synonyms or related terms for 'University Building', separated by commas>"
+                    "name": "Edificio Universitario"
                 },
                 "building/warehouse": {
-                    "name": "Almacén",
-                    "terms": "<translate with synonyms or related terms for 'Warehouse', separated by commas>"
+                    "name": "Almacén"
                 },
                 "camp_site/camp_pitch": {
-                    "name": "Campamento Pitch",
-                    "terms": "<translate with synonyms or related terms for 'Camp Pitch', separated by commas>"
+                    "name": "Campamento Pitch"
                 },
                 "club": {
-                    "name": "Clube",
-                    "terms": "<translate with synonyms or related terms for 'Club', separated by commas>"
+                    "name": "Clube"
                 },
                 "craft": {
-                    "name": "Oficio",
-                    "terms": "<translate with synonyms or related terms for 'Craft', separated by commas>"
+                    "name": "Oficio"
                 },
                 "craft/basket_maker": {
-                    "name": "Cesteiría",
-                    "terms": "<translate with synonyms or related terms for 'Basket Maker', separated by commas>"
+                    "name": "Cesteiría"
                 },
                 "craft/beekeeper": {
-                    "name": "Apicultor",
-                    "terms": "<translate with synonyms or related terms for 'Beekeeper', separated by commas>"
+                    "name": "Apicultor"
                 },
                 "craft/blacksmith": {
-                    "name": "Ferreiro",
-                    "terms": "<translate with synonyms or related terms for 'Blacksmith', separated by commas>"
+                    "name": "Ferreiro"
                 },
                 "craft/boatbuilder": {
-                    "name": "Carpinteiro de Ribeira",
-                    "terms": "<translate with synonyms or related terms for 'Boat Builder', separated by commas>"
+                    "name": "Carpinteiro de Ribeira"
                 },
                 "craft/bookbinder": {
-                    "name": "Encadernador",
-                    "terms": "<translate with synonyms or related terms for 'Bookbinder', separated by commas>"
+                    "name": "Encadernador"
                 },
                 "craft/brewery": {
-                    "name": "Cervexa",
-                    "terms": "<translate with synonyms or related terms for 'Brewery', separated by commas>"
+                    "name": "Cervexa"
                 },
                 "craft/carpenter": {
-                    "name": "Carpinteiro",
-                    "terms": "<translate with synonyms or related terms for 'Carpenter', separated by commas>"
+                    "name": "Carpinteiro"
                 },
                 "craft/carpet_layer": {
-                    "name": "Capa de Alfombra",
-                    "terms": "<translate with synonyms or related terms for 'Carpet Layer', separated by commas>"
+                    "name": "Capa de Alfombra"
                 },
                 "craft/caterer": {
-                    "name": "Provedor",
-                    "terms": "<translate with synonyms or related terms for 'Caterer', separated by commas>"
+                    "name": "Provedor"
                 },
                 "craft/clockmaker": {
-                    "name": "Reloxeiro",
-                    "terms": "<translate with synonyms or related terms for 'Clockmaker', separated by commas>"
+                    "name": "Reloxeiro"
                 },
                 "craft/confectionery": {
-                    "name": "Repostería",
-                    "terms": "<translate with synonyms or related terms for 'Confectionery', separated by commas>"
+                    "name": "Repostería"
                 },
                 "craft/distillery": {
-                    "name": "Destilaría",
-                    "terms": "<translate with synonyms or related terms for 'Distillery', separated by commas>"
+                    "name": "Destilaría"
                 },
                 "craft/dressmaker": {
-                    "name": "Costureiro/a",
-                    "terms": "<translate with synonyms or related terms for 'Dressmaker', separated by commas>"
+                    "name": "Costureiro/a"
                 },
                 "craft/electrician": {
-                    "name": "Electricista",
-                    "terms": "<translate with synonyms or related terms for 'Electrician', separated by commas>"
+                    "name": "Electricista"
                 },
                 "craft/electronics_repair": {
-                    "name": "Tenda de Reparacións Electrónicas",
-                    "terms": "<translate with synonyms or related terms for 'Electronics Repair Shop', separated by commas>"
+                    "name": "Tenda de Reparacións Electrónicas"
                 },
                 "craft/gardener": {
-                    "name": "Xardineiro/a",
-                    "terms": "<translate with synonyms or related terms for 'Gardener', separated by commas>"
+                    "name": "Xardineiro/a"
                 },
                 "craft/glaziery": {
-                    "name": "Glaciar",
-                    "terms": "<translate with synonyms or related terms for 'Glaziery', separated by commas>"
+                    "name": "Glaciar"
                 },
                 "craft/handicraft": {
-                    "name": "Artesanía",
-                    "terms": "<translate with synonyms or related terms for 'Handicraft', separated by commas>"
+                    "name": "Artesanía"
                 },
                 "craft/hvac": {
-                    "name": "HVAC",
-                    "terms": "<translate with synonyms or related terms for 'HVAC', separated by commas>"
+                    "name": "HVAC"
                 },
                 "craft/insulator": {
-                    "name": "Illador",
-                    "terms": "<translate with synonyms or related terms for 'Insulator', separated by commas>"
+                    "name": "Illador"
                 },
                 "craft/jeweler": {
                     "name": "Xoieiro"
                 },
                 "craft/key_cutter": {
-                    "name": "Copiado de Chaves",
-                    "terms": "<translate with synonyms or related terms for 'Key Cutter', separated by commas>"
+                    "name": "Copiado de Chaves"
                 },
                 "craft/locksmith": {
                     "name": "Cerraxeiro"
                 },
                 "craft/metal_construction": {
-                    "name": "Metal Construción",
-                    "terms": "<translate with synonyms or related terms for 'Metal Construction', separated by commas>"
+                    "name": "Metal Construción"
                 },
                 "craft/optician": {
                     "name": "Óptico"
                 },
                 "craft/painter": {
-                    "name": "Pintor",
-                    "terms": "<translate with synonyms or related terms for 'Painter', separated by commas>"
+                    "name": "Pintor"
                 },
                 "craft/photographer": {
-                    "name": "Fotógrafo",
-                    "terms": "<translate with synonyms or related terms for 'Photographer', separated by commas>"
+                    "name": "Fotógrafo"
                 },
                 "craft/photographic_laboratory": {
-                    "name": "Laboratorio de Fotografía",
-                    "terms": "<translate with synonyms or related terms for 'Photographic Laboratory', separated by commas>"
+                    "name": "Laboratorio de Fotografía"
                 },
                 "craft/plasterer": {
-                    "name": "Xesero",
-                    "terms": "<translate with synonyms or related terms for 'Plasterer', separated by commas>"
+                    "name": "Xesero"
                 },
                 "craft/plumber": {
-                    "name": "Fontaneiro",
-                    "terms": "<translate with synonyms or related terms for 'Plumber', separated by commas>"
+                    "name": "Fontaneiro"
                 },
                 "craft/pottery": {
-                    "name": "Cerámica",
-                    "terms": "<translate with synonyms or related terms for 'Pottery', separated by commas>"
+                    "name": "Cerámica"
                 },
                 "craft/rigger": {
-                    "name": "Aparellador",
-                    "terms": "<translate with synonyms or related terms for 'Rigger', separated by commas>"
+                    "name": "Aparellador"
                 },
                 "craft/roofer": {
-                    "name": "Tellador",
-                    "terms": "<translate with synonyms or related terms for 'Roofer', separated by commas>"
+                    "name": "Tellador"
                 },
                 "craft/saddler": {
-                    "name": "Seleiro",
-                    "terms": "<translate with synonyms or related terms for 'Saddler', separated by commas>"
+                    "name": "Seleiro"
                 },
                 "craft/sailmaker": {
-                    "name": "Fabricante de Velas Mariñas",
-                    "terms": "<translate with synonyms or related terms for 'Sailmaker', separated by commas>"
+                    "name": "Fabricante de Velas Mariñas"
                 },
                 "craft/sawmill": {
-                    "name": "Serraría",
-                    "terms": "<translate with synonyms or related terms for 'Sawmill', separated by commas>"
+                    "name": "Serraría"
                 },
                 "craft/scaffolder": {
-                    "name": "Scaffolder",
-                    "terms": "<translate with synonyms or related terms for 'Scaffolder', separated by commas>"
+                    "name": "Scaffolder"
                 },
                 "craft/sculpter": {
-                    "name": "Escultor",
-                    "terms": "<translate with synonyms or related terms for 'Sculpter', separated by commas>"
+                    "name": "Escultor"
                 },
                 "craft/shoemaker": {
-                    "name": "Zapateiro",
-                    "terms": "<translate with synonyms or related terms for 'Shoemaker', separated by commas>"
+                    "name": "Zapateiro"
                 },
                 "craft/stonemason": {
-                    "name": "Albanel",
-                    "terms": "<translate with synonyms or related terms for 'Stonemason', separated by commas>"
+                    "name": "Albanel"
                 },
                 "craft/sweep": {
-                    "name": "Limpa Chemineas",
-                    "terms": "<translate with synonyms or related terms for 'Chimney Sweep', separated by commas>"
+                    "name": "Limpa Chemineas"
                 },
                 "craft/tailor": {
                     "name": "Xastre"
                 },
                 "craft/tiler": {
-                    "name": "Tellador",
-                    "terms": "<translate with synonyms or related terms for 'Tiler', separated by commas>"
+                    "name": "Tellador"
                 },
                 "craft/tinsmith": {
-                    "name": "Follalateiro",
-                    "terms": "<translate with synonyms or related terms for 'Tinsmith', separated by commas>"
+                    "name": "Follalateiro"
                 },
                 "craft/upholsterer": {
-                    "name": "Tapiceiro",
-                    "terms": "<translate with synonyms or related terms for 'Upholsterer', separated by commas>"
+                    "name": "Tapiceiro"
                 },
                 "craft/watchmaker": {
-                    "name": "Reloxeiro",
-                    "terms": "<translate with synonyms or related terms for 'Watchmaker', separated by commas>"
+                    "name": "Reloxeiro"
                 },
                 "craft/window_construction": {
-                    "name": "Fabricación de Fiestras",
-                    "terms": "<translate with synonyms or related terms for 'Window Construction', separated by commas>"
+                    "name": "Fabricación de Fiestras"
                 },
                 "craft/winery": {
-                    "name": "Lagar",
-                    "terms": "<translate with synonyms or related terms for 'Winery', separated by commas>"
+                    "name": "Lagar"
                 },
                 "embankment": {
-                    "name": "Terraplén",
-                    "terms": "<translate with synonyms or related terms for 'Embankment', separated by commas>"
+                    "name": "Terraplén"
                 },
                 "emergency/ambulance_station": {
-                    "name": "Estación de Ambulancias",
-                    "terms": "<translate with synonyms or related terms for 'Ambulance Station', separated by commas>"
+                    "name": "Estación de Ambulancias"
                 },
                 "emergency/defibrillator": {
-                    "name": "Desfibrilador",
-                    "terms": "<translate with synonyms or related terms for 'Defibrillator', separated by commas>"
+                    "name": "Desfibrilador"
                 },
                 "emergency/designated": {
                     "name": "Acceso de emerxencia designado"
@@ -3203,8 +2988,7 @@
                     "name": "Acceso de Emerxencia Designado"
                 },
                 "emergency/fire_hydrant": {
-                    "name": "Boca de incendio",
-                    "terms": "<translate with synonyms or related terms for 'Fire Hydrant', separated by commas>"
+                    "name": "Boca de incendio"
                 },
                 "emergency/no": {
                     "name": "Sen Acceso de Emerxencia"
@@ -3213,8 +2997,7 @@
                     "name": "Acceso de Emerxencia Oficial"
                 },
                 "emergency/phone": {
-                    "name": "Teléfono de emerxencia",
-                    "terms": "<translate with synonyms or related terms for 'Emergency Phone', separated by commas>"
+                    "name": "Teléfono de emerxencia"
                 },
                 "emergency/private": {
                     "name": "Acceso de Emerxencia Privado"
@@ -3223,1918 +3006,1462 @@
                     "name": "Acceso de Emerxencia Si"
                 },
                 "entrance": {
-                    "name": "Entrada/Saída",
-                    "terms": "<translate with synonyms or related terms for 'Entrance/Exit', separated by commas>"
+                    "name": "Entrada/Saída"
                 },
                 "footway/crossing": {
-                    "name": "Cruce de Estradas",
-                    "terms": "<translate with synonyms or related terms for 'Street Crossing', separated by commas>"
+                    "name": "Cruce de Estradas"
                 },
                 "footway/crosswalk": {
-                    "name": "Paso de Peóns",
-                    "terms": "<translate with synonyms or related terms for 'Pedestrian Crosswalk', separated by commas>"
+                    "name": "Paso de Peóns"
                 },
                 "footway/sidewalk": {
-                    "name": "Beirarrúa",
-                    "terms": "<translate with synonyms or related terms for 'Sidewalk', separated by commas>"
+                    "name": "Beirarrúa"
                 },
                 "ford": {
-                    "name": "Vao",
-                    "terms": "<translate with synonyms or related terms for 'Ford', separated by commas>"
+                    "name": "Vao"
                 },
                 "golf/bunker": {
-                    "name": "Trampa de Area",
-                    "terms": "<translate with synonyms or related terms for 'Sand Trap', separated by commas>"
+                    "name": "Trampa de Area"
                 },
                 "golf/fairway": {
-                    "name": "Camiño Acceso",
-                    "terms": "<translate with synonyms or related terms for 'Fairway', separated by commas>"
+                    "name": "Camiño Acceso"
                 },
                 "golf/green": {
-                    "name": "Putting Green",
-                    "terms": "<translate with synonyms or related terms for 'Putting Green', separated by commas>"
+                    "name": "Putting Green"
                 },
                 "golf/hole": {
-                    "name": "Burato de Golf",
-                    "terms": "<translate with synonyms or related terms for 'Golf Hole', separated by commas>"
+                    "name": "Burato de Golf"
                 },
                 "golf/lateral_water_hazard_area": {
-                    "name": "Risco de Auga Lateral",
-                    "terms": "<translate with synonyms or related terms for 'Lateral Water Hazard', separated by commas>"
+                    "name": "Risco de Auga Lateral"
                 },
                 "golf/lateral_water_hazard_line": {
-                    "name": "Risco de Auga Lateral",
-                    "terms": "<translate with synonyms or related terms for 'Lateral Water Hazard', separated by commas>"
+                    "name": "Risco de Auga Lateral"
                 },
                 "golf/rough": {
-                    "name": "Duro",
-                    "terms": "<translate with synonyms or related terms for 'Rough', separated by commas>"
+                    "name": "Duro"
                 },
                 "golf/tee": {
-                    "name": "Caixa de Te",
-                    "terms": "<translate with synonyms or related terms for 'Tee Box', separated by commas>"
+                    "name": "Caixa de Te"
                 },
                 "golf/water_hazard_area": {
-                    "name": "Obstáculo de Auga",
-                    "terms": "<translate with synonyms or related terms for 'Water Hazard', separated by commas>"
+                    "name": "Obstáculo de Auga"
                 },
                 "golf/water_hazard_line": {
-                    "name": "Obstáculo de Auga",
-                    "terms": "<translate with synonyms or related terms for 'Water Hazard', separated by commas>"
+                    "name": "Obstáculo de Auga"
                 },
                 "healthcare/blood_donation": {
-                    "name": "Doación de Sangue",
-                    "terms": "<translate with synonyms or related terms for 'Blood Donor Center', separated by commas>"
+                    "name": "Doación de Sangue"
                 },
                 "highway": {
                     "name": "Estrada"
                 },
                 "highway/bridleway": {
-                    "name": "Camiño de ferradura",
-                    "terms": "<translate with synonyms or related terms for 'Bridle Path', separated by commas>"
+                    "name": "Camiño de ferradura"
                 },
                 "highway/bus_stop": {
-                    "name": "Parada de Autobús",
-                    "terms": "<translate with synonyms or related terms for 'Bus Stop', separated by commas>"
+                    "name": "Parada de Autobús"
                 },
                 "highway/corridor": {
-                    "name": "Corredor Interior",
-                    "terms": "<translate with synonyms or related terms for 'Indoor Corridor', separated by commas>"
+                    "name": "Corredor Interior"
                 },
                 "highway/crossing": {
                     "name": "Cruce",
-                    "terms": "<translate with synonyms or related terms for 'Street Crossing', separated by commas>"
+                    "terms": "paso peonil, paso peatonal, paso de cebra"
                 },
                 "highway/crosswalk": {
-                    "name": "Cruce Peonil",
-                    "terms": "<translate with synonyms or related terms for 'Pedestrian Crosswalk', separated by commas>"
+                    "name": "Cruce Peonil"
                 },
                 "highway/cycleway": {
-                    "name": "Senda Ciclista",
-                    "terms": "<translate with synonyms or related terms for 'Cycle Path', separated by commas>"
+                    "name": "Senda Ciclista"
                 },
                 "highway/elevator": {
-                    "name": "Montacargas",
-                    "terms": "<translate with synonyms or related terms for 'Elevator', separated by commas>"
+                    "name": "Montacargas"
                 },
                 "highway/footway": {
-                    "name": "Senda Peonil",
-                    "terms": "<translate with synonyms or related terms for 'Foot Path', separated by commas>"
+                    "name": "Senda Peonil"
                 },
                 "highway/give_way": {
-                    "name": "Ceda o Paso",
-                    "terms": "<translate with synonyms or related terms for 'Yield Sign', separated by commas>"
+                    "name": "Ceda o Paso"
                 },
                 "highway/living_street": {
-                    "name": "Rúa Residencial",
-                    "terms": "<translate with synonyms or related terms for 'Living Street', separated by commas>"
+                    "name": "Rúa Residencial"
                 },
                 "highway/mini_roundabout": {
-                    "name": "Mini Rotonda",
-                    "terms": "<translate with synonyms or related terms for 'Mini-Roundabout', separated by commas>"
+                    "name": "Mini Rotonda"
                 },
                 "highway/motorway": {
-                    "name": "Autovía",
-                    "terms": "<translate with synonyms or related terms for 'Motorway', separated by commas>"
+                    "name": "Autovía"
                 },
                 "highway/motorway_junction": {
-                    "name": "Saída/saída da autoestrada",
-                    "terms": "<translate with synonyms or related terms for 'Motorway Junction / Exit', separated by commas>"
+                    "name": "Saída/saída da autoestrada"
                 },
                 "highway/motorway_link": {
                     "name": "Enlace de autovía",
                     "terms": "autovía, autopista, enlace, entrada, saída, acceso"
                 },
                 "highway/path": {
-                    "name": "Camiño",
-                    "terms": "<translate with synonyms or related terms for 'Path', separated by commas>"
+                    "name": "Camiño"
                 },
                 "highway/pedestrian": {
-                    "name": "Rúa Peonil",
-                    "terms": "<translate with synonyms or related terms for 'Pedestrian Street', separated by commas>"
+                    "name": "Rúa Peonil"
                 },
                 "highway/primary": {
-                    "name": "Estrada Primaria",
-                    "terms": "<translate with synonyms or related terms for 'Primary Road', separated by commas>"
+                    "name": "Estrada Primaria"
                 },
                 "highway/primary_link": {
-                    "name": "Enlace a estrada primaria",
-                    "terms": "<translate with synonyms or related terms for 'Primary Link', separated by commas>"
+                    "name": "Enlace a estrada primaria"
                 },
                 "highway/raceway": {
-                    "name": "Pista de carreiras (Motorsport)",
-                    "terms": "<translate with synonyms or related terms for 'Racetrack (Motorsport)', separated by commas>"
+                    "name": "Pista de carreiras (Motorsport)"
                 },
                 "highway/residential": {
-                    "name": "Rúa urbana",
-                    "terms": "<translate with synonyms or related terms for 'Residential Road', separated by commas>"
+                    "name": "Rúa urbana"
                 },
                 "highway/rest_area": {
-                    "name": "Área de Descanso",
-                    "terms": "<translate with synonyms or related terms for 'Rest Area', separated by commas>"
+                    "name": "Área de Descanso"
                 },
                 "highway/road": {
-                    "name": "Vía de categoría descoñecida",
-                    "terms": "<translate with synonyms or related terms for 'Unknown Road', separated by commas>"
+                    "name": "Vía de categoría descoñecida"
                 },
                 "highway/secondary": {
-                    "name": "Estrada Secundaria",
-                    "terms": "<translate with synonyms or related terms for 'Secondary Road', separated by commas>"
+                    "name": "Estrada Secundaria"
                 },
                 "highway/secondary_link": {
-                    "name": "Ligazón a estrada secundaria",
-                    "terms": "<translate with synonyms or related terms for 'Secondary Link', separated by commas>"
+                    "name": "Ligazón a estrada secundaria"
                 },
                 "highway/service": {
-                    "name": "Vía de Servizo",
-                    "terms": "<translate with synonyms or related terms for 'Service Road', separated by commas>"
+                    "name": "Vía de Servizo"
                 },
                 "highway/service/alley": {
-                    "name": "Calexón",
-                    "terms": "<translate with synonyms or related terms for 'Alley', separated by commas>"
+                    "name": "Calexón"
                 },
                 "highway/service/drive-through": {
-                    "name": "Auto-Servizo",
-                    "terms": "<translate with synonyms or related terms for 'Drive-Through', separated by commas>"
+                    "name": "Auto-Servizo"
                 },
                 "highway/service/driveway": {
-                    "name": "Entrada de Garaxe",
-                    "terms": "<translate with synonyms or related terms for 'Driveway', separated by commas>"
+                    "name": "Entrada de Garaxe"
                 },
                 "highway/service/emergency_access": {
-                    "name": "Acceso de Emerxencia",
-                    "terms": "<translate with synonyms or related terms for 'Emergency Access', separated by commas>"
+                    "name": "Acceso de Emerxencia"
                 },
                 "highway/service/parking_aisle": {
-                    "name": "Pasillo de Aparcamento",
-                    "terms": "<translate with synonyms or related terms for 'Parking Aisle', separated by commas>"
+                    "name": "Pasillo de Aparcamento"
                 },
                 "highway/services": {
-                    "name": "Área de Servizo",
-                    "terms": "<translate with synonyms or related terms for 'Service Area', separated by commas>"
+                    "name": "Área de Servizo"
                 },
                 "highway/speed_camera": {
-                    "name": "Rádar Velocidade",
-                    "terms": "<translate with synonyms or related terms for 'Speed Camera', separated by commas>"
+                    "name": "Rádar Velocidade"
                 },
                 "highway/steps": {
-                    "name": "Escaleiras",
-                    "terms": "<translate with synonyms or related terms for 'Steps', separated by commas>"
+                    "name": "Escaleiras"
                 },
                 "highway/stop": {
-                    "name": "Sinal de Stop",
-                    "terms": "<translate with synonyms or related terms for 'Stop Sign', separated by commas>"
+                    "name": "Sinal de Stop"
                 },
                 "highway/street_lamp": {
-                    "name": "Farola",
-                    "terms": "<translate with synonyms or related terms for 'Street Lamp', separated by commas>"
+                    "name": "Farola"
                 },
                 "highway/tertiary": {
-                    "name": "Estrada terciaria",
-                    "terms": "<translate with synonyms or related terms for 'Tertiary Road', separated by commas>"
+                    "name": "Estrada terciaria"
                 },
                 "highway/tertiary_link": {
-                    "name": "Enlace a estrada terciaria",
-                    "terms": "<translate with synonyms or related terms for 'Tertiary Link', separated by commas>"
+                    "name": "Enlace a estrada terciaria"
                 },
                 "highway/track": {
-                    "name": "Pista Sen Mantemento",
-                    "terms": "<translate with synonyms or related terms for 'Unmaintained Track Road', separated by commas>"
+                    "name": "Pista Sen Mantemento"
                 },
                 "highway/traffic_mirror": {
-                    "name": "Espello de tráfico",
-                    "terms": "<translate with synonyms or related terms for 'Traffic Mirror', separated by commas>"
+                    "name": "Espello de tráfico"
                 },
                 "highway/traffic_signals": {
-                    "name": "Semáforo",
-                    "terms": "<translate with synonyms or related terms for 'Traffic Signals', separated by commas>"
+                    "name": "Semáforo"
                 },
                 "highway/trunk": {
-                    "name": "Estrada troncal",
-                    "terms": "<translate with synonyms or related terms for 'Trunk Road', separated by commas>"
+                    "name": "Estrada troncal"
                 },
                 "highway/trunk_link": {
-                    "name": "Ligazón a estrada troncal",
-                    "terms": "<translate with synonyms or related terms for 'Trunk Link', separated by commas>"
+                    "name": "Ligazón a estrada troncal"
                 },
                 "highway/turning_circle": {
-                    "name": "Círculo de xiro",
-                    "terms": "<translate with synonyms or related terms for 'Turning Circle', separated by commas>"
+                    "name": "Círculo de xiro"
                 },
                 "highway/turning_loop": {
-                    "name": "Rotonda (Illa)",
-                    "terms": "<translate with synonyms or related terms for 'Turning Loop (Island)', separated by commas>"
+                    "name": "Rotonda (Illa)"
                 },
                 "highway/unclassified": {
-                    "name": "Estrada Menor/Sen Clasificar",
-                    "terms": "<translate with synonyms or related terms for 'Minor/Unclassified Road', separated by commas>"
+                    "name": "Estrada Menor/Sen Clasificar"
                 },
                 "historic": {
-                    "name": "Lugar histórico",
-                    "terms": "<translate with synonyms or related terms for 'Historic Site', separated by commas>"
+                    "name": "Lugar histórico"
                 },
                 "historic/archaeological_site": {
-                    "name": "Sitio arqueolóxico",
-                    "terms": "<translate with synonyms or related terms for 'Archaeological Site', separated by commas>"
+                    "name": "Sitio arqueolóxico"
                 },
                 "historic/boundary_stone": {
                     "name": "Marco",
                     "terms": "marco, fito, mollón, mouteira, linde, pedra"
                 },
                 "historic/castle": {
-                    "name": "Castelo",
-                    "terms": "<translate with synonyms or related terms for 'Castle', separated by commas>"
+                    "name": "Castelo"
                 },
                 "historic/memorial": {
-                    "name": "Monumento conmemorativo",
-                    "terms": "<translate with synonyms or related terms for 'Memorial', separated by commas>"
+                    "name": "Monumento conmemorativo"
                 },
                 "historic/monument": {
-                    "name": "Monumento",
-                    "terms": "<translate with synonyms or related terms for 'Monument', separated by commas>"
+                    "name": "Monumento"
                 },
                 "historic/ruins": {
-                    "name": "Ruinas",
-                    "terms": "<translate with synonyms or related terms for 'Ruins', separated by commas>"
+                    "name": "Ruinas"
                 },
                 "historic/tomb": {
-                    "name": "Tumba",
-                    "terms": "<translate with synonyms or related terms for 'Tomb', separated by commas>"
+                    "name": "Tumba"
                 },
                 "historic/wayside_cross": {
-                    "name": "Cruceiro",
-                    "terms": "<translate with synonyms or related terms for 'Wayside Cross', separated by commas>"
+                    "name": "Cruceiro"
                 },
                 "historic/wayside_shrine": {
-                    "name": "Peto de ánimas",
-                    "terms": "<translate with synonyms or related terms for 'Wayside Shrine', separated by commas>"
+                    "name": "Peto de ánimas"
                 },
                 "junction": {
-                    "name": "Incorporación",
-                    "terms": "<translate with synonyms or related terms for 'Junction', separated by commas>"
+                    "name": "Incorporación"
                 },
                 "landuse": {
-                    "name": "Uso da Terra",
-                    "terms": "<translate with synonyms or related terms for 'Land Use', separated by commas>"
+                    "name": "Uso da Terra"
                 },
                 "landuse/allotments": {
-                    "name": "Xardín Comunitario",
-                    "terms": "<translate with synonyms or related terms for 'Community Garden', separated by commas>"
+                    "name": "Xardín Comunitario"
                 },
                 "landuse/aquaculture": {
-                    "name": "Acuacultura",
-                    "terms": "<translate with synonyms or related terms for 'Aquaculture', separated by commas>"
+                    "name": "Acuacultura"
                 },
                 "landuse/basin": {
-                    "name": "Cunca",
-                    "terms": "<translate with synonyms or related terms for 'Basin', separated by commas>"
+                    "name": "Cunca"
                 },
                 "landuse/cemetery": {
-                    "name": "Cemiterio",
-                    "terms": "<translate with synonyms or related terms for 'Cemetery', separated by commas>"
+                    "name": "Cemiterio"
                 },
                 "landuse/churchyard": {
-                    "name": "Adro",
-                    "terms": "<translate with synonyms or related terms for 'Churchyard', separated by commas>"
+                    "name": "Adro"
                 },
                 "landuse/commercial": {
-                    "name": "Área Comercial",
-                    "terms": "<translate with synonyms or related terms for 'Commercial Area', separated by commas>"
+                    "name": "Área Comercial"
                 },
                 "landuse/construction": {
-                    "name": "Construción",
-                    "terms": "<translate with synonyms or related terms for 'Construction', separated by commas>"
+                    "name": "Construción"
                 },
                 "landuse/farm": {
                     "name": "Terra de Cultivo"
                 },
                 "landuse/farmland": {
-                    "name": "Terra de Cultivo",
-                    "terms": "<translate with synonyms or related terms for 'Farmland', separated by commas>"
+                    "name": "Terra de Cultivo"
                 },
                 "landuse/farmyard": {
-                    "name": "Granxa",
-                    "terms": "<translate with synonyms or related terms for 'Farmyard', separated by commas>"
+                    "name": "Granxa"
                 },
                 "landuse/forest": {
-                    "name": "Forestal",
-                    "terms": "<translate with synonyms or related terms for 'Forest', separated by commas>"
+                    "name": "Forestal"
                 },
                 "landuse/garages": {
-                    "name": "Garaxes",
-                    "terms": "<translate with synonyms or related terms for 'Garages', separated by commas>"
+                    "name": "Garaxes"
                 },
                 "landuse/grass": {
-                    "name": "Herba",
-                    "terms": "<translate with synonyms or related terms for 'Grass', separated by commas>"
+                    "name": "Herba"
                 },
                 "landuse/harbour": {
-                    "name": "Peirao",
-                    "terms": "<translate with synonyms or related terms for 'Harbor', separated by commas>"
+                    "name": "Peirao"
                 },
                 "landuse/industrial": {
-                    "name": "Industrial Area",
-                    "terms": "<translate with synonyms or related terms for 'Industrial Area', separated by commas>"
+                    "name": "Industrial Area"
                 },
                 "landuse/landfill": {
-                    "name": "Terraplén",
-                    "terms": "<translate with synonyms or related terms for 'Landfill', separated by commas>"
+                    "name": "Terraplén"
                 },
                 "landuse/meadow": {
-                    "name": "Prado",
-                    "terms": "<translate with synonyms or related terms for 'Meadow', separated by commas>"
+                    "name": "Prado"
                 },
                 "landuse/military": {
-                    "name": "Zona Militar",
-                    "terms": "<traducir con sinónimos ou termos relacionados con 'Zona Militar', separados por comas>"
+                    "name": "Zona Militar"
                 },
                 "landuse/military/airfield": {
-                    "name": "Aeródromo Militar",
-                    "terms": "<translate with synonyms or related terms for 'Military Airfield', separated by commas>"
+                    "name": "Aeródromo Militar"
                 },
                 "landuse/military/barracks": {
-                    "name": "Barracóns",
-                    "terms": "<translate with synonyms or related terms for 'Barracks', separated by commas>"
+                    "name": "Barracóns"
                 },
                 "landuse/military/bunker": {
-                    "name": "Bunker Militar",
-                    "terms": "<translate with synonyms or related terms for 'Military Bunker', separated by commas>"
+                    "name": "Bunker Militar"
                 },
                 "landuse/military/checkpoint": {
-                    "name": "Checkpoint",
-                    "terms": "<translate with synonyms or related terms for 'Checkpoint', separated by commas>"
+                    "name": "Checkpoint"
                 },
                 "landuse/military/danger_area": {
-                    "name": "Área Perigosa",
-                    "terms": "<translate with synonyms or related terms for 'Danger Area', separated by commas>"
+                    "name": "Área Perigosa"
                 },
                 "landuse/military/naval_base": {
-                    "name": "Base Naval",
-                    "terms": "<translate with synonyms or related terms for 'Naval Base', separated by commas>"
+                    "name": "Base Naval"
                 },
                 "landuse/military/nuclear_explosion_site": {
-                    "name": "Explosión Nuclear Lugar",
-                    "terms": "<translate with synonyms or related terms for 'Nuclear Explosion Site', separated by commas>"
+                    "name": "Explosión Nuclear Lugar"
                 },
                 "landuse/military/obstacle_course": {
-                    "name": "Pista de Obstáculos",
-                    "terms": "<translate with synonyms or related terms for 'Obstacle Course', separated by commas>"
+                    "name": "Pista de Obstáculos"
                 },
                 "landuse/military/office": {
-                    "name": "Militar Oficina",
-                    "terms": "<translate with synonyms or related terms for 'Military Office', separated by commas>"
+                    "name": "Militar Oficina"
                 },
                 "landuse/military/range": {
-                    "name": "Franxa Militar",
-                    "terms": "<translate with synonyms or related terms for 'Military Range', separated by commas>"
+                    "name": "Franxa Militar"
                 },
                 "landuse/military/training_area": {
-                    "name": "Área de Entreno",
-                    "terms": "<translate with synonyms or related terms for 'Training Area', separated by commas>"
+                    "name": "Área de Entreno"
                 },
                 "landuse/orchard": {
-                    "name": "Área de froitais",
-                    "terms": "<translate with synonyms or related terms for 'Orchard', separated by commas>"
+                    "name": "Área de froitais"
                 },
                 "landuse/plant_nursery": {
-                    "name": "Viveiro de Plantas",
-                    "terms": "<translate with synonyms or related terms for 'Plant Nursery', separated by commas>"
+                    "name": "Viveiro de Plantas"
                 },
                 "landuse/quarry": {
-                    "name": "Canteira",
-                    "terms": "<translate with synonyms or related terms for 'Quarry', separated by commas>"
+                    "name": "Canteira"
                 },
                 "landuse/railway": {
-                    "name": "Corredor Ferroviario",
-                    "terms": "<translate with synonyms or related terms for 'Railway Corridor', separated by commas>"
+                    "name": "Corredor Ferroviario"
                 },
                 "landuse/recreation_ground": {
-                    "name": "Campo de Diversión",
-                    "terms": "<translate with synonyms or related terms for 'Recreation Ground', separated by commas>"
+                    "name": "Campo de Diversión"
                 },
                 "landuse/residential": {
-                    "name": "Área Residencial",
-                    "terms": "<translate with synonyms or related terms for 'Residential Area', separated by commas>"
+                    "name": "Área Residencial"
                 },
                 "landuse/retail": {
-                    "name": "Venda Minorista Área",
-                    "terms": "<translate with synonyms or related terms for 'Retail Area', separated by commas>"
+                    "name": "Venda Minorista Área"
                 },
                 "landuse/vineyard": {
-                    "name": "Viña",
-                    "terms": "<translate with synonyms or related terms for 'Vineyard', separated by commas>"
+                    "name": "Viña"
                 },
                 "leisure": {
-                    "name": "Ocio",
-                    "terms": "<translate with synonyms or related terms for 'Leisure', separated by commas>"
+                    "name": "Ocio"
                 },
                 "leisure/adult_gaming_centre": {
-                    "name": "Centro Recreativo para Adultos",
-                    "terms": "<translate with synonyms or related terms for 'Adult Gaming Center', separated by commas>"
+                    "name": "Centro Recreativo para Adultos"
                 },
                 "leisure/bird_hide": {
-                    "name": "Ocultado de Aves",
-                    "terms": "<translate with synonyms or related terms for 'Bird Hide', separated by commas>"
+                    "name": "Ocultado de Aves"
                 },
                 "leisure/bowling_alley": {
-                    "name": "Birlos",
-                    "terms": "<translate with synonyms or related terms for 'Bowling Alley', separated by commas>"
+                    "name": "Birlos"
                 },
                 "leisure/common": {
-                    "name": "Común",
-                    "terms": "<translate with synonyms or related terms for 'Common', separated by commas>"
+                    "name": "Común"
                 },
                 "leisure/dance": {
-                    "name": "Sala de Baile",
-                    "terms": "<translate with synonyms or related terms for 'Dance Hall', separated by commas>"
+                    "name": "Sala de Baile"
                 },
                 "leisure/dog_park": {
-                    "name": "Parque Canino",
-                    "terms": "<translate with synonyms or related terms for 'Dog Park', separated by commas>"
+                    "name": "Parque Canino"
                 },
                 "leisure/firepit": {
-                    "name": "Fogueira",
-                    "terms": "<translate with synonyms or related terms for 'Firepit', separated by commas>"
+                    "name": "Fogueira"
                 },
                 "leisure/fitness_centre": {
-                    "name": "Ximnasio/Fitness Centro",
-                    "terms": "<translate with synonyms or related terms for 'Gym / Fitness Center', separated by commas>"
+                    "name": "Ximnasio/Fitness Centro"
                 },
                 "leisure/fitness_centre/yoga": {
-                    "name": "Estudio de Yoga",
-                    "terms": "<translate with synonyms or related terms for 'Yoga Studio', separated by commas>"
+                    "name": "Estudio de Yoga"
                 },
                 "leisure/fitness_station": {
-                    "name": "Estación de ximnasia ao aire libre",
-                    "terms": "<translate with synonyms or related terms for 'Outdoor Fitness Station', separated by commas>"
+                    "name": "Estación de ximnasia ao aire libre"
                 },
                 "leisure/garden": {
-                    "name": "Xardín",
-                    "terms": "<translate with synonyms or related terms for 'Garden', separated by commas>"
+                    "name": "Xardín"
                 },
                 "leisure/golf_course": {
-                    "name": "Campo de Golf",
-                    "terms": "<translate with synonyms or related terms for 'Golf Course', separated by commas>"
+                    "name": "Campo de Golf"
                 },
                 "leisure/horse_riding": {
-                    "name": "Centro de Equitación",
-                    "terms": "<translate with synonyms or related terms for 'Horseback Riding Facility', separated by commas>"
+                    "name": "Centro de Equitación"
                 },
                 "leisure/ice_rink": {
-                    "name": "Pista de Xeo",
-                    "terms": "<translate with synonyms or related terms for 'Ice Rink', separated by commas>"
+                    "name": "Pista de Xeo"
                 },
                 "leisure/marina": {
-                    "name": "Marina",
-                    "terms": "<translate with synonyms or related terms for 'Marina', separated by commas>"
+                    "name": "Marina"
                 },
                 "leisure/miniature_golf": {
-                    "name": "Mini Golf",
-                    "terms": "<translate with synonyms or related terms for 'Miniature Golf', separated by commas>"
+                    "name": "Mini Golf"
                 },
                 "leisure/nature_reserve": {
-                    "name": "Reserva Natural",
-                    "terms": "<translate with synonyms or related terms for 'Nature Reserve', separated by commas>"
+                    "name": "Reserva Natural"
                 },
                 "leisure/park": {
                     "name": "Parque",
                     "terms": "parque, zona verde, xardín, alameda"
                 },
                 "leisure/picnic_table": {
-                    "name": "Mesa de Picnic",
-                    "terms": "<translate with synonyms or related terms for 'Picnic Table', separated by commas>"
+                    "name": "Mesa de Picnic"
                 },
                 "leisure/pitch": {
-                    "name": "Campo deportivo",
-                    "terms": "<translate with synonyms or related terms for 'Sport Pitch', separated by commas>"
+                    "name": "Campo deportivo"
                 },
                 "leisure/pitch/american_football": {
-                    "name": "Campo de fútbol americano",
-                    "terms": "<translate with synonyms or related terms for 'American Football Field', separated by commas>"
+                    "name": "Campo de fútbol americano"
                 },
                 "leisure/pitch/baseball": {
-                    "name": "Diamante de béisbol",
-                    "terms": "<translate with synonyms or related terms for 'Baseball Diamond', separated by commas>"
+                    "name": "Diamante de béisbol"
                 },
                 "leisure/pitch/basketball": {
-                    "name": "Cancha de baloncesto",
-                    "terms": "<translate with synonyms or related terms for 'Basketball Court', separated by commas>"
+                    "name": "Cancha de baloncesto"
                 },
                 "leisure/pitch/beachvolleyball": {
-                    "name": "Cancha de Voley Praia",
-                    "terms": "<translate with synonyms or related terms for 'Beach Volleyball Court', separated by commas>"
+                    "name": "Cancha de Voley Praia"
                 },
                 "leisure/pitch/bowls": {
-                    "name": "Bowling Green",
-                    "terms": "<translate with synonyms or related terms for 'Bowling Green', separated by commas>"
+                    "name": "Bowling Green"
                 },
                 "leisure/pitch/cricket": {
-                    "name": "Campo de Cricket",
-                    "terms": "<translate with synonyms or related terms for 'Cricket Field', separated by commas>"
+                    "name": "Campo de Cricket"
                 },
                 "leisure/pitch/equestrian": {
-                    "name": "Equitación Area",
-                    "terms": "<translate with synonyms or related terms for 'Riding Arena', separated by commas>"
+                    "name": "Equitación Area"
                 },
                 "leisure/pitch/rugby_league": {
-                    "name": "Campo Liga de Rugby",
-                    "terms": "<translate with synonyms or related terms for 'Rugby League Field', separated by commas>"
+                    "name": "Campo Liga de Rugby"
                 },
                 "leisure/pitch/rugby_union": {
-                    "name": "Campo Unión de Rugby",
-                    "terms": "<translate with synonyms or related terms for 'Rugby Union Field', separated by commas>"
+                    "name": "Campo Unión de Rugby"
                 },
                 "leisure/pitch/skateboard": {
-                    "name": "Parque de Skate",
-                    "terms": "<translate with synonyms or related terms for 'Skate Park', separated by commas>"
+                    "name": "Parque de Skate"
                 },
                 "leisure/pitch/soccer": {
-                    "name": "Campo de fútbol",
-                    "terms": "<translate with synonyms or related terms for 'Soccer Field', separated by commas>"
+                    "name": "Campo de fútbol"
                 },
                 "leisure/pitch/table_tennis": {
-                    "name": "Mesa de Ping Pong",
-                    "terms": "<translate with synonyms or related terms for 'Ping Pong Table', separated by commas>"
+                    "name": "Mesa de Ping Pong"
                 },
                 "leisure/pitch/tennis": {
-                    "name": "Cancha de tenis",
-                    "terms": "<translate with synonyms or related terms for 'Tennis Court', separated by commas>"
+                    "name": "Cancha de tenis"
                 },
                 "leisure/pitch/volleyball": {
-                    "name": "Cancha de voleibol",
-                    "terms": "<translate with synonyms or related terms for 'Volleyball Court', separated by commas>"
+                    "name": "Cancha de voleibol"
                 },
                 "leisure/playground": {
-                    "name": "Área de recreo",
-                    "terms": "<translate with synonyms or related terms for 'Playground', separated by commas>"
+                    "name": "Área de recreo"
                 },
                 "leisure/resort": {
-                    "name": "Recurso",
-                    "terms": "<translate with synonyms or related terms for 'Resort', separated by commas>"
+                    "name": "Recurso"
                 },
                 "leisure/running_track": {
-                    "name": "Pista de Carreiras (Velocidade)",
-                    "terms": "<translate with synonyms or related terms for 'Racetrack (Running)', separated by commas>"
+                    "name": "Pista de Carreiras (Velocidade)"
                 },
                 "leisure/slipway": {
-                    "name": "Rampla",
-                    "terms": "<translate with synonyms or related terms for 'Slipway', separated by commas>"
+                    "name": "Rampla"
                 },
                 "leisure/sports_centre": {
-                    "name": "Centro Deportivo/Complexo",
-                    "terms": "<translate with synonyms or related terms for 'Sports Center / Complex', separated by commas>"
+                    "name": "Centro Deportivo/Complexo"
                 },
                 "leisure/sports_centre/swimming": {
-                    "name": "Servizo de Piscina",
-                    "terms": "<translate with synonyms or related terms for 'Swimming Pool Facility', separated by commas>"
+                    "name": "Servizo de Piscina"
                 },
                 "leisure/stadium": {
-                    "name": "Estadio",
-                    "terms": "<translate with synonyms or related terms for 'Stadium', separated by commas>"
+                    "name": "Estadio"
                 },
                 "leisure/swimming_pool": {
-                    "name": "Piscina",
-                    "terms": "<translate with synonyms or related terms for 'Swimming Pool', separated by commas>"
+                    "name": "Piscina"
                 },
                 "leisure/track": {
-                    "name": "Pista de competición (non motorizada)",
-                    "terms": "<translate with synonyms or related terms for 'Racetrack (Non-Motorsport)', separated by commas>"
+                    "name": "Pista de competición (non motorizada)"
                 },
                 "leisure/water_park": {
-                    "name": "Parque Acuático",
-                    "terms": "<translate with synonyms or related terms for 'Water Park', separated by commas>"
+                    "name": "Parque Acuático"
                 },
                 "line": {
-                    "name": "Liña",
-                    "terms": "<translate with synonyms or related terms for 'Line', separated by commas>"
+                    "name": "Liña"
                 },
                 "man_made": {
-                    "name": "Estrutura artificial",
-                    "terms": "<translate with synonyms or related terms for 'Man Made', separated by commas>"
+                    "name": "Estrutura artificial"
                 },
                 "man_made/adit": {
-                    "name": "Santuario",
-                    "terms": "<translate with synonyms or related terms for 'Adit', separated by commas>"
+                    "name": "Santuario"
                 },
                 "man_made/breakwater": {
-                    "name": "Rompeondas",
-                    "terms": "<translate with synonyms or related terms for 'Breakwater', separated by commas>"
+                    "name": "Rompeondas"
                 },
                 "man_made/bridge": {
-                    "name": "Ponte",
-                    "terms": "<traducir con sinónimos ou termos relacionados con 'Ponte', separados por comas>"
+                    "name": "Ponte"
                 },
                 "man_made/chimney": {
-                    "name": "Cheminea",
-                    "terms": "<translate with synonyms or related terms for 'Chimney', separated by commas>"
+                    "name": "Cheminea"
                 },
                 "man_made/cutline": {
-                    "name": "Corta lumes",
-                    "terms": "<traducir con sinónimos ou termos relacionados con 'Cortalumes', separados por comas>"
+                    "name": "Corta lumes"
                 },
                 "man_made/embankment": {
                     "name": "Terraplén"
                 },
                 "man_made/flagpole": {
-                    "name": "Mantro de Bandeira",
-                    "terms": "<translate with synonyms or related terms for 'Flagpole', separated by commas>"
+                    "name": "Mantro de Bandeira"
                 },
                 "man_made/gasometer": {
-                    "name": "Gasómetro",
-                    "terms": "<translate with synonyms or related terms for 'Gasometer', separated by commas>"
+                    "name": "Gasómetro"
                 },
                 "man_made/groyne": {
-                    "name": "Dique",
-                    "terms": "<translate with synonyms or related terms for 'Groyne', separated by commas>"
+                    "name": "Dique"
                 },
                 "man_made/lighthouse": {
-                    "name": "Faro",
-                    "terms": "<translate with synonyms or related terms for 'Lighthouse', separated by commas>"
+                    "name": "Faro"
                 },
                 "man_made/mast": {
-                    "name": "Mastro",
-                    "terms": "<translate with synonyms or related terms for 'Mast', separated by commas>"
+                    "name": "Mastro"
                 },
                 "man_made/observation": {
-                    "name": "Torre de Observación",
-                    "terms": "<translate with synonyms or related terms for 'Observation Tower', separated by commas>"
+                    "name": "Torre de Observación"
                 },
                 "man_made/petroleum_well": {
-                    "name": "Pozo de Petróleo",
-                    "terms": "<translate with synonyms or related terms for 'Oil Well', separated by commas>"
+                    "name": "Pozo de Petróleo"
                 },
                 "man_made/pier": {
-                    "name": "Peirao",
-                    "terms": "<translate with synonyms or related terms for 'Pier', separated by commas>"
+                    "name": "Peirao"
                 },
                 "man_made/pipeline": {
-                    "name": "Tubería",
-                    "terms": "<translate with synonyms or related terms for 'Pipeline', separated by commas>"
+                    "name": "Tubería"
                 },
                 "man_made/pumping_station": {
-                    "name": "Estación de Bombeo",
-                    "terms": "<translate with synonyms or related terms for 'Pumping Station', separated by commas>"
+                    "name": "Estación de Bombeo"
                 },
                 "man_made/silo": {
-                    "name": "Silo",
-                    "terms": "<translate with synonyms or related terms for 'Silo', separated by commas>"
+                    "name": "Silo"
                 },
                 "man_made/storage_tank": {
-                    "name": "Tanque de Almacenamento",
-                    "terms": "<translate with synonyms or related terms for 'Storage Tank', separated by commas>"
+                    "name": "Tanque de Almacenamento"
                 },
                 "man_made/surveillance": {
-                    "name": "Vixilancia",
-                    "terms": "<translate with synonyms or related terms for 'Surveillance', separated by commas>"
+                    "name": "Vixilancia"
                 },
                 "man_made/surveillance_camera": {
-                    "name": "Vídeo Vixilancia",
-                    "terms": "<translate with synonyms or related terms for 'Surveillance Camera', separated by commas>"
+                    "name": "Vídeo Vixilancia"
                 },
                 "man_made/survey_point": {
-                    "name": "Vértice xeodésico",
-                    "terms": "<translate with synonyms or related terms for 'Survey Point', separated by commas>"
+                    "name": "Vértice xeodésico"
                 },
                 "man_made/tower": {
-                    "name": "Torre",
-                    "terms": "<translate with synonyms or related terms for 'Tower', separated by commas>"
+                    "name": "Torre"
                 },
                 "man_made/wastewater_plant": {
-                    "name": "Depuradora de augas",
-                    "terms": "<translate with synonyms or related terms for 'Wastewater Plant', separated by commas>"
+                    "name": "Depuradora de augas"
                 },
                 "man_made/water_tower": {
-                    "name": "Torre de auga",
-                    "terms": "<translate with synonyms or related terms for 'Water Tower', separated by commas>"
+                    "name": "Torre de auga"
                 },
                 "man_made/water_well": {
-                    "name": "Pozo",
-                    "terms": "<translate with synonyms or related terms for 'Water Well', separated by commas>"
+                    "name": "Pozo"
                 },
                 "man_made/water_works": {
-                    "name": "Traballos Acuáticos",
-                    "terms": "<translate with synonyms or related terms for 'Water Works', separated by commas>"
+                    "name": "Traballos Acuáticos"
                 },
                 "man_made/works": {
-                    "name": "Fábrica",
-                    "terms": "<translate with synonyms or related terms for 'Factory', separated by commas>"
+                    "name": "Fábrica"
                 },
                 "manhole": {
-                    "name": "Burato de home",
-                    "terms": "<translate with synonyms or related terms for 'Manhole', separated by commas>"
+                    "name": "Burato de home"
                 },
                 "manhole/drain": {
-                    "name": "Drenaxe da tormenta",
-                    "terms": "<translate with synonyms or related terms for 'Storm Drain', separated by commas>"
+                    "name": "Drenaxe da tormenta"
                 },
                 "natural": {
-                    "name": "Natural",
-                    "terms": "<translate with synonyms or related terms for 'Natural', separated by commas>"
+                    "name": "Natural"
                 },
                 "natural/bare_rock": {
-                    "name": "Rocha Pelada",
-                    "terms": "<translate with synonyms or related terms for 'Bare Rock', separated by commas>"
+                    "name": "Rocha Pelada"
                 },
                 "natural/bay": {
-                    "name": "Baía",
-                    "terms": "<translate with synonyms or related terms for 'Bay', separated by commas>"
+                    "name": "Baía"
                 },
                 "natural/beach": {
-                    "name": "Praia",
-                    "terms": "<translate with synonyms or related terms for 'Beach', separated by commas>"
+                    "name": "Praia"
                 },
                 "natural/cave_entrance": {
-                    "name": "Entrada de Cova",
-                    "terms": "<translate with synonyms or related terms for 'Cave Entrance', separated by commas>"
+                    "name": "Entrada de Cova"
                 },
                 "natural/cliff": {
-                    "name": "Cantil",
-                    "terms": "<translate with synonyms or related terms for 'Cliff', separated by commas>"
+                    "name": "Cantil"
                 },
                 "natural/coastline": {
                     "name": "Liña de costa",
-                    "terms": "<translate with synonyms or related terms for 'Coastline', separated by commas>"
+                    "terms": "liña de costa, costa, litoral, ribeira"
                 },
                 "natural/fell": {
-                    "name": "Caeu",
-                    "terms": "<translate with synonyms or related terms for 'Fell', separated by commas>"
+                    "name": "Caeu"
                 },
                 "natural/glacier": {
-                    "name": "Glaciar",
-                    "terms": "<translate with synonyms or related terms for 'Glacier', separated by commas>"
+                    "name": "Glaciar"
                 },
                 "natural/grassland": {
-                    "name": "Pradeira",
-                    "terms": "<translate with synonyms or related terms for 'Grassland', separated by commas>"
+                    "name": "Pradeira"
                 },
                 "natural/heath": {
-                    "name": "Uceira ou breixeira",
-                    "terms": "<translate with synonyms or related terms for 'Heath', separated by commas>"
+                    "name": "Uceira ou breixeira"
                 },
                 "natural/peak": {
                     "name": "Cume",
-                    "terms": "<translate with synonyms or related terms for 'Peak', separated by commas>"
+                    "terms": "pico, cume, montaña, monte, cúspide"
                 },
                 "natural/ridge": {
-                    "name": "Cume",
-                    "terms": "<translate with synonyms or related terms for 'Ridge', separated by commas>"
+                    "name": "Cume"
                 },
                 "natural/saddle": {
-                    "name": "Sillín",
-                    "terms": "<translate with synonyms or related terms for 'Saddle', separated by commas>"
+                    "name": "Sillín"
                 },
                 "natural/sand": {
-                    "name": "Area",
-                    "terms": "<translate with synonyms or related terms for 'Sand', separated by commas>"
+                    "name": "Area"
                 },
                 "natural/scree": {
-                    "name": "Laxas",
-                    "terms": "<translate with synonyms or related terms for 'Scree', separated by commas>"
+                    "name": "Laxas"
                 },
                 "natural/scrub": {
-                    "name": "Matogueira",
-                    "terms": "<translate with synonyms or related terms for 'Scrub', separated by commas>"
+                    "name": "Matogueira"
                 },
                 "natural/spring": {
-                    "name": "Manancial",
-                    "terms": "<translate with synonyms or related terms for 'Spring', separated by commas>"
+                    "name": "Manancial"
                 },
                 "natural/tree": {
-                    "name": "Árbore",
-                    "terms": "<translate with synonyms or related terms for 'Tree', separated by commas>"
+                    "name": "Árbore"
                 },
                 "natural/tree_row": {
-                    "name": "Fila de Árbores",
-                    "terms": "<translate with synonyms or related terms for 'Tree row', separated by commas>"
+                    "name": "Fila de Árbores"
                 },
                 "natural/volcano": {
-                    "name": "Volcán",
-                    "terms": "<translate with synonyms or related terms for 'Volcano', separated by commas>"
+                    "name": "Volcán"
                 },
                 "natural/water": {
-                    "name": "Auga",
-                    "terms": "<translate with synonyms or related terms for 'Water', separated by commas>"
+                    "name": "Auga"
                 },
                 "natural/water/lake": {
                     "name": "Lago",
-                    "terms": "<translate with synonyms or related terms for 'Lake', separated by commas>"
+                    "terms": "lago, lagoa, charca, auga"
                 },
                 "natural/water/pond": {
                     "name": "Estanque",
-                    "terms": "<translate with synonyms or related terms for 'Pond', separated by commas>"
+                    "terms": "auga, estanque, lagoa, charca"
                 },
                 "natural/water/reservoir": {
-                    "name": "Encoro",
-                    "terms": "<translate with synonyms or related terms for 'Reservoir', separated by commas>"
+                    "name": "Encoro"
                 },
                 "natural/wetland": {
-                    "name": "Pantano",
-                    "terms": "<translate with synonyms or related terms for 'Wetland', separated by commas>"
+                    "name": "Pantano"
                 },
                 "natural/wood": {
-                    "name": "Bosque",
-                    "terms": "<translate with synonyms or related terms for 'Wood', separated by commas>"
+                    "name": "Bosque"
                 },
                 "noexit/yes": {
-                    "name": "Sen Saída",
-                    "terms": "<translate with synonyms or related terms for 'No Exit', separated by commas>"
+                    "name": "Sen Saída"
                 },
                 "office": {
-                    "name": "Oficina",
-                    "terms": "<translate with synonyms or related terms for 'Office', separated by commas>"
+                    "name": "Oficina"
                 },
                 "office/accountant": {
-                    "name": "Contador",
-                    "terms": "<translate with synonyms or related terms for 'Accountant', separated by commas>"
+                    "name": "Contador"
                 },
                 "office/administrative": {
-                    "name": "Oficina Administrativa",
-                    "terms": "<translate with synonyms or related terms for 'Administrative Office', separated by commas>"
+                    "name": "Oficina Administrativa"
                 },
                 "office/architect": {
-                    "name": "Arquitecto",
-                    "terms": "<translate with synonyms or related terms for 'Architect', separated by commas>"
+                    "name": "Arquitecto"
                 },
                 "office/company": {
-                    "name": "Oficina de Empresa",
-                    "terms": "<translate with synonyms or related terms for 'Company Office', separated by commas>"
+                    "name": "Oficina de Empresa"
                 },
                 "office/coworking": {
-                    "name": "Espacio de Cotraballo",
-                    "terms": "<translate with synonyms or related terms for 'Coworking Space', separated by commas>"
+                    "name": "Espacio de Cotraballo"
                 },
                 "office/educational_institution": {
-                    "name": "Institución Educativa",
-                    "terms": "<translate with synonyms or related terms for 'Educational Institution', separated by commas>"
+                    "name": "Institución Educativa"
                 },
                 "office/employment_agency": {
-                    "name": "Axencia de Emprego",
-                    "terms": "<translate with synonyms or related terms for 'Employment Agency', separated by commas>"
+                    "name": "Axencia de Emprego"
                 },
                 "office/estate_agent": {
-                    "name": "Oficina Inmobiliaria",
-                    "terms": "<translate with synonyms or related terms for 'Real Estate Office', separated by commas>"
+                    "name": "Oficina Inmobiliaria"
                 },
                 "office/financial": {
-                    "name": "Oficina Financeira",
-                    "terms": "<translate with synonyms or related terms for 'Financial Office', separated by commas>"
+                    "name": "Oficina Financeira"
                 },
                 "office/government": {
-                    "name": "Gobernamental Oficina",
-                    "terms": "<translate with synonyms or related terms for 'Government Office', separated by commas>"
+                    "name": "Gobernamental Oficina"
                 },
                 "office/government/register_office": {
-                    "name": "Rexistro Oficina",
-                    "terms": "<translate with synonyms or related terms for 'Register Office', separated by commas>"
+                    "name": "Rexistro Oficina"
                 },
                 "office/insurance": {
-                    "name": "Oficina de Seguros",
-                    "terms": "<translate with synonyms or related terms for 'Insurance Office', separated by commas>"
+                    "name": "Oficina de Seguros"
                 },
                 "office/it": {
-                    "name": "IT Oficina",
-                    "terms": "<translate with synonyms or related terms for 'IT Office', separated by commas>"
+                    "name": "IT Oficina"
                 },
                 "office/lawyer": {
-                    "name": "Bufete",
-                    "terms": "<translate with synonyms or related terms for 'Law Office', separated by commas>"
+                    "name": "Bufete"
                 },
                 "office/lawyer/notary": {
-                    "name": "Notaría",
-                    "terms": "<translate with synonyms or related terms for 'Notary Office', separated by commas>"
+                    "name": "Notaría"
                 },
                 "office/newspaper": {
-                    "name": "Xornal",
-                    "terms": "<translate with synonyms or related terms for 'Newspaper', separated by commas>"
+                    "name": "Xornal"
                 },
                 "office/ngo": {
-                    "name": "Oficina ONG",
-                    "terms": "<translate with synonyms or related terms for 'NGO Office', separated by commas>"
+                    "name": "Oficina ONG"
                 },
                 "office/physician": {
-                    "name": "Médico",
-                    "terms": "<translate with synonyms or related terms for 'Physician', separated by commas>"
+                    "name": "Médico"
                 },
                 "office/political_party": {
-                    "name": "Partido Político",
-                    "terms": "<translate with synonyms or related terms for 'Political Party', separated by commas>"
+                    "name": "Partido Político"
                 },
                 "office/research": {
-                    "name": "Investigación Oficina",
-                    "terms": "<translate with synonyms or related terms for 'Research Office', separated by commas>"
+                    "name": "Investigación Oficina"
                 },
                 "office/telecommunication": {
-                    "name": "Oficina de Telecomunicacións",
-                    "terms": "<translate with synonyms or related terms for 'Telecom Office', separated by commas>"
+                    "name": "Oficina de Telecomunicacións"
                 },
                 "office/therapist": {
-                    "name": "Terapeuta",
-                    "terms": "<translate with synonyms or related terms for 'Therapist', separated by commas>"
+                    "name": "Terapeuta"
                 },
                 "office/travel_agent": {
                     "name": "Axencia de Viaxes"
                 },
                 "piste": {
-                    "name": "Pista/Pista de Esquí",
-                    "terms": "<translate with synonyms or related terms for 'Piste/Ski Trail', separated by commas>"
+                    "name": "Pista/Pista de Esquí"
                 },
                 "place": {
                     "name": "Lugar"
                 },
                 "place/city": {
-                    "name": "Cidade",
-                    "terms": "<translate with synonyms or related terms for 'City', separated by commas>"
+                    "name": "Cidade"
                 },
                 "place/farm": {
                     "name": "Granxa"
                 },
                 "place/hamlet": {
-                    "name": "Aldea",
-                    "terms": "<translate with synonyms or related terms for 'Hamlet', separated by commas>"
+                    "name": "Aldea"
                 },
                 "place/island": {
                     "name": "Illa",
-                    "terms": "<translate with synonyms or related terms for 'Island', separated by commas>"
+                    "terms": "illa, isla, illote, insua"
                 },
                 "place/isolated_dwelling": {
-                    "name": "Vivenda illada",
-                    "terms": "<translate with synonyms or related terms for 'Isolated Dwelling', separated by commas>"
+                    "name": "Vivenda illada"
                 },
                 "place/locality": {
-                    "name": "Lugar",
-                    "terms": "<translate with synonyms or related terms for 'Locality', separated by commas>"
+                    "name": "Lugar"
                 },
                 "place/neighbourhood": {
-                    "name": "Barrio",
-                    "terms": "<translate with synonyms or related terms for 'Neighborhood', separated by commas>"
+                    "name": "Barrio"
                 },
                 "place/quarter": {
-                    "name": "Sub-Borough / Quarter",
-                    "terms": "<translate with synonyms or related terms for 'Sub-Borough / Quarter', separated by commas>"
+                    "name": "Sub-Borough / Quarter"
                 },
                 "place/square": {
-                    "name": "Esquina",
-                    "terms": "<translate with synonyms or related terms for 'Square', separated by commas>"
+                    "name": "Esquina"
                 },
                 "place/suburb": {
-                    "name": "Barrio / Suburbio",
-                    "terms": "<translate with synonyms or related terms for 'Borough / Suburb', separated by commas>"
+                    "name": "Barrio / Suburbio"
                 },
                 "place/town": {
-                    "name": "Cidade",
-                    "terms": "<translate with synonyms or related terms for 'Town', separated by commas>"
+                    "name": "Cidade"
                 },
                 "place/village": {
-                    "name": "Vila",
-                    "terms": "<translate with synonyms or related terms for 'Village', separated by commas>"
+                    "name": "Vila"
                 },
                 "point": {
-                    "name": "Punto",
-                    "terms": "<translate with synonyms or related terms for 'Point', separated by commas>"
+                    "name": "Punto"
                 },
                 "power": {
                     "name": "Rede eléctrica"
                 },
                 "power/generator": {
-                    "name": "Xerador de enerxía",
-                    "terms": "<translate with synonyms or related terms for 'Power Generator', separated by commas>"
+                    "name": "Xerador de enerxía"
                 },
                 "power/line": {
-                    "name": "Liña de alta tensión",
-                    "terms": "<translate with synonyms or related terms for 'Power Line', separated by commas>"
+                    "name": "Liña de alta tensión"
                 },
                 "power/minor_line": {
-                    "name": "Liña Eléctrica de Baixa Tensión",
-                    "terms": "<translate with synonyms or related terms for 'Minor Power Line', separated by commas>"
+                    "name": "Liña Eléctrica de Baixa Tensión"
                 },
                 "power/plant": {
-                    "name": "Estación Central Eléctrica",
-                    "terms": "<translate with synonyms or related terms for 'Power Station Grounds', separated by commas>"
+                    "name": "Estación Central Eléctrica"
                 },
                 "power/pole": {
-                    "name": "Poste eléctrico",
-                    "terms": "<translate with synonyms or related terms for 'Power Pole', separated by commas>"
+                    "name": "Poste eléctrico"
                 },
                 "power/sub_station": {
                     "name": "Subestación"
                 },
                 "power/substation": {
-                    "name": "Subestación",
-                    "terms": "<translate with synonyms or related terms for 'Substation', separated by commas>"
+                    "name": "Subestación"
                 },
                 "power/tower": {
-                    "name": "Torre de Alta Tensión",
-                    "terms": "<translate with synonyms or related terms for 'High-Voltage Tower', separated by commas>"
+                    "name": "Torre de Alta Tensión"
                 },
                 "power/transformer": {
-                    "name": "Transformador",
-                    "terms": "<translate with synonyms or related terms for 'Transformer', separated by commas>"
+                    "name": "Transformador"
                 },
                 "public_transport/platform": {
-                    "name": "Plataforma",
-                    "terms": "<translate with synonyms or related terms for 'Platform', separated by commas>"
+                    "name": "Plataforma"
                 },
                 "public_transport/stop_position": {
-                    "name": "Posición de Stop",
-                    "terms": "<translate with synonyms or related terms for 'Stop Position', separated by commas>"
+                    "name": "Posición de Stop"
                 },
                 "railway": {
                     "name": "Ferrocarril"
                 },
                 "railway/abandoned": {
-                    "name": "Ferrocarril abandonado",
-                    "terms": "<translate with synonyms or related terms for 'Abandoned Railway', separated by commas>"
+                    "name": "Ferrocarril abandonado"
                 },
                 "railway/crossing": {
-                    "name": "Cruce Ferroviario (Camiño)",
-                    "terms": "<translate with synonyms or related terms for 'Railway Crossing (Path)', separated by commas>"
+                    "name": "Cruce Ferroviario (Camiño)"
                 },
                 "railway/disused": {
-                    "name": "Ferrocarril en desuso",
-                    "terms": "<translate with synonyms or related terms for 'Disused Railway', separated by commas>"
+                    "name": "Ferrocarril en desuso"
                 },
                 "railway/funicular": {
-                    "name": "Funicular",
-                    "terms": "<translate with synonyms or related terms for 'Funicular', separated by commas>"
+                    "name": "Funicular"
                 },
                 "railway/halt": {
-                    "name": "Halt Ferroviario",
-                    "terms": "<translate with synonyms or related terms for 'Railway Halt', separated by commas>"
+                    "name": "Halt Ferroviario"
                 },
                 "railway/level_crossing": {
-                    "name": "Cruce Ferroviario (Estrada)",
-                    "terms": "<translate with synonyms or related terms for 'Railway Crossing (Road)', separated by commas>"
+                    "name": "Cruce Ferroviario (Estrada)"
                 },
                 "railway/monorail": {
-                    "name": "Monorraíl",
-                    "terms": "<translate with synonyms or related terms for 'Monorail', separated by commas>"
+                    "name": "Monorraíl"
                 },
                 "railway/narrow_gauge": {
-                    "name": "Tren de Vía Estreita",
-                    "terms": "<translate with synonyms or related terms for 'Narrow Gauge Rail', separated by commas>"
+                    "name": "Tren de Vía Estreita"
                 },
                 "railway/platform": {
-                    "name": "Plataforma",
-                    "terms": "<translate with synonyms or related terms for 'Railway Platform', separated by commas>"
+                    "name": "Plataforma"
                 },
                 "railway/rail": {
-                    "name": "Vía de tren",
-                    "terms": "<translate with synonyms or related terms for 'Rail', separated by commas>"
+                    "name": "Vía de tren"
                 },
                 "railway/station": {
-                    "name": "Estación de ferrocarril",
-                    "terms": "<translate with synonyms or related terms for 'Railway Station', separated by commas>"
+                    "name": "Estación de ferrocarril"
                 },
                 "railway/subway": {
-                    "name": "Metro",
-                    "terms": "<translate with synonyms or related terms for 'Subway', separated by commas>"
+                    "name": "Metro"
                 },
                 "railway/subway_entrance": {
-                    "name": "Entrada de metro",
-                    "terms": "<translate with synonyms or related terms for 'Subway Entrance', separated by commas>"
+                    "name": "Entrada de metro"
                 },
                 "railway/tram": {
-                    "name": "Tranvía",
-                    "terms": "<translate with synonyms or related terms for 'Tram', separated by commas>"
+                    "name": "Tranvía"
                 },
                 "railway/tram_stop": {
-                    "name": "Parada de Tranvía",
-                    "terms": "<translate with synonyms or related terms for 'Tram Stop', separated by commas>"
+                    "name": "Parada de Tranvía"
                 },
                 "relation": {
-                    "name": "Relación",
-                    "terms": "<translate with synonyms or related terms for 'Relation', separated by commas>"
+                    "name": "Relación"
                 },
                 "roundabout": {
                     "name": "Rotonda"
                 },
                 "route/ferry": {
-                    "name": "Ruta de Ferry",
-                    "terms": "<translate with synonyms or related terms for 'Ferry Route', separated by commas>"
+                    "name": "Ruta de Ferry"
                 },
                 "shop": {
-                    "name": "Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Shop', separated by commas>"
+                    "name": "Tenda"
                 },
                 "shop/alcohol": {
-                    "name": "Licorería",
-                    "terms": "<translate with synonyms or related terms for 'Liquor Store', separated by commas>"
+                    "name": "Licorería"
                 },
                 "shop/anime": {
-                    "name": "Anime Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Anime Shop', separated by commas>"
+                    "name": "Anime Tenda"
                 },
                 "shop/antiques": {
-                    "name": "Antiguidades Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Antiques Shop', separated by commas>"
+                    "name": "Antiguidades Tenda"
                 },
                 "shop/appliance": {
-                    "name": "Tenda de Electrodomésticos",
-                    "terms": "<translate with synonyms or related terms for 'Appliance Store', separated by commas>"
+                    "name": "Tenda de Electrodomésticos"
                 },
                 "shop/art": {
-                    "name": "Galería de Arte",
-                    "terms": "<translate with synonyms or related terms for 'Art Store', separated by commas>"
+                    "name": "Galería de Arte"
                 },
                 "shop/baby_goods": {
-                    "name": "Mercadorías para Bebés Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Baby Goods Store', separated by commas>"
+                    "name": "Mercadorías para Bebés Tenda"
                 },
                 "shop/bag": {
-                    "name": "Maletas/Equipaxe Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Bag/Luggage Store', separated by commas>"
+                    "name": "Maletas/Equipaxe Tenda"
                 },
                 "shop/bakery": {
-                    "name": "Panadería",
-                    "terms": "<translate with synonyms or related terms for 'Bakery', separated by commas>"
+                    "name": "Panadería"
                 },
                 "shop/bathroom_furnishing": {
-                    "name": "Tenda de Mobiliario de Baño",
-                    "terms": "<translate with synonyms or related terms for 'Bathroom Furnishing Store', separated by commas>"
+                    "name": "Tenda de Mobiliario de Baño"
                 },
                 "shop/beauty": {
-                    "name": "Salón de beleza",
-                    "terms": "<translate with synonyms or related terms for 'Beauty Shop', separated by commas>"
+                    "name": "Salón de beleza"
                 },
                 "shop/beauty/nails": {
-                    "name": "Salón de Unllas",
-                    "terms": "<translate with synonyms or related terms for 'Nail Salon', separated by commas>"
+                    "name": "Salón de Unllas"
                 },
                 "shop/beauty/tanning": {
-                    "name": "Salón de Bronceado",
-                    "terms": "<translate with synonyms or related terms for 'Tanning Salon', separated by commas>"
+                    "name": "Salón de Bronceado"
                 },
                 "shop/bed": {
-                    "name": "Ropa de cama/colchón",
-                    "terms": "<translate with synonyms or related terms for 'Bedding/Mattress Store', separated by commas>"
+                    "name": "Ropa de cama/colchón"
                 },
                 "shop/beverages": {
-                    "name": "Tenda de Bebidas",
-                    "terms": "<translate with synonyms or related terms for 'Beverage Store', separated by commas>"
+                    "name": "Tenda de Bebidas"
                 },
                 "shop/bicycle": {
-                    "name": "Tenda de bicicletas",
-                    "terms": "<translate with synonyms or related terms for 'Bicycle Shop', separated by commas>"
+                    "name": "Tenda de bicicletas"
                 },
                 "shop/bookmaker": {
-                    "name": "Corredor de Apostas",
-                    "terms": "<translate with synonyms or related terms for 'Bookmaker', separated by commas>"
+                    "name": "Corredor de Apostas"
                 },
                 "shop/books": {
-                    "name": "Libraría",
-                    "terms": "<translate with synonyms or related terms for 'Book Store', separated by commas>"
+                    "name": "Libraría"
                 },
                 "shop/boutique": {
-                    "name": "Boutique",
-                    "terms": "<translate with synonyms or related terms for 'Boutique', separated by commas>"
+                    "name": "Boutique"
                 },
                 "shop/butcher": {
-                    "name": "Carnicería",
-                    "terms": "<translate with synonyms or related terms for 'Butcher', separated by commas>"
+                    "name": "Carnicería"
                 },
                 "shop/candles": {
-                    "name": "Tenda de Velas",
-                    "terms": "<translate with synonyms or related terms for 'Candle Shop', separated by commas>"
+                    "name": "Tenda de Velas"
                 },
                 "shop/car": {
-                    "name": "Concesionario",
-                    "terms": "<translate with synonyms or related terms for 'Car Dealership', separated by commas>"
+                    "name": "Concesionario"
                 },
                 "shop/car_parts": {
-                    "name": "Tenda de recambios de automóbiles",
-                    "terms": "<translate with synonyms or related terms for 'Car Parts Store', separated by commas>"
+                    "name": "Tenda de recambios de automóbiles"
                 },
                 "shop/car_repair": {
-                    "name": "Taller de reparación de vehículos",
-                    "terms": "<translate with synonyms or related terms for 'Car Repair Shop', separated by commas>"
+                    "name": "Taller de reparación de vehículos"
                 },
                 "shop/carpet": {
-                    "name": "Alfombras Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Carpet Store', separated by commas>"
+                    "name": "Alfombras Tenda"
                 },
                 "shop/charity": {
-                    "name": "Tenda Solidaria",
-                    "terms": "<translate with synonyms or related terms for 'Charity Store', separated by commas>"
+                    "name": "Tenda Solidaria"
                 },
                 "shop/cheese": {
-                    "name": "Queixos Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Cheese Store', separated by commas>"
+                    "name": "Queixos Tenda"
                 },
                 "shop/chemist": {
-                    "name": "Droguería",
-                    "terms": "<translate with synonyms or related terms for 'Drugstore', separated by commas>"
+                    "name": "Droguería"
                 },
                 "shop/chocolate": {
-                    "name": "Chocolatería",
-                    "terms": "<translate with synonyms or related terms for 'Chocolate Store', separated by commas>"
+                    "name": "Chocolatería"
                 },
                 "shop/clothes": {
-                    "name": "Tenda de roupa",
-                    "terms": "<translate with synonyms or related terms for 'Clothing Store', separated by commas>"
+                    "name": "Tenda de roupa"
                 },
                 "shop/coffee": {
-                    "name": "Tenda de Café",
-                    "terms": "<translate with synonyms or related terms for 'Coffee Store', separated by commas>"
+                    "name": "Tenda de Café"
                 },
                 "shop/computer": {
-                    "name": "Tenda de informática",
-                    "terms": "<translate with synonyms or related terms for 'Computer Store', separated by commas>"
+                    "name": "Tenda de informática"
                 },
                 "shop/confectionery": {
-                    "name": "Larpeiradas Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Candy Store', separated by commas>"
+                    "name": "Larpeiradas Tenda"
                 },
                 "shop/convenience": {
-                    "name": "Tenda de Barrio",
-                    "terms": "<translate with synonyms or related terms for 'Convenience Store', separated by commas>"
+                    "name": "Tenda de Barrio"
                 },
                 "shop/copyshop": {
-                    "name": "Copistería",
-                    "terms": "<translate with synonyms or related terms for 'Copy Store', separated by commas>"
+                    "name": "Copistería"
                 },
                 "shop/cosmetics": {
-                    "name": "Tenda de Cosméticos",
-                    "terms": "<translate with synonyms or related terms for 'Cosmetics Store', separated by commas>"
+                    "name": "Tenda de Cosméticos"
                 },
                 "shop/craft": {
-                    "name": "Artes e oficios tenda",
-                    "terms": "<translate with synonyms or related terms for 'Arts and Crafts Store', separated by commas>"
+                    "name": "Artes e oficios tenda"
                 },
                 "shop/curtain": {
-                    "name": "Tenda de Cortinas",
-                    "terms": "<translate with synonyms or related terms for 'Curtain Store', separated by commas>"
+                    "name": "Tenda de Cortinas"
                 },
                 "shop/dairy": {
-                    "name": "Tenda de Lácteos",
-                    "terms": "<translate with synonyms or related terms for 'Dairy Store', separated by commas>"
+                    "name": "Tenda de Lácteos"
                 },
                 "shop/deli": {
-                    "name": "Delicatessen",
-                    "terms": "<translate with synonyms or related terms for 'Deli', separated by commas>"
+                    "name": "Delicatessen"
                 },
                 "shop/department_store": {
-                    "name": "Grandes almacéns",
-                    "terms": "<translate with synonyms or related terms for 'Department Store', separated by commas>"
+                    "name": "Grandes almacéns"
                 },
                 "shop/doityourself": {
-                    "name": "Bricolaxe DIY",
-                    "terms": "<translate with synonyms or related terms for 'DIY Store', separated by commas>"
+                    "name": "Bricolaxe DIY"
                 },
                 "shop/dry_cleaning": {
-                    "name": "Lavandería en Seco",
-                    "terms": "<translate with synonyms or related terms for 'Dry Cleaner', separated by commas>"
+                    "name": "Lavandería en Seco"
                 },
                 "shop/e-cigarette": {
-                    "name": "E-Cigarros Tenda",
-                    "terms": "<translate with synonyms or related terms for 'E-Cigarette Shop', separated by commas>"
+                    "name": "E-Cigarros Tenda"
                 },
                 "shop/electronics": {
-                    "name": "Tenda de electrodomésticos",
-                    "terms": "<translate with synonyms or related terms for 'Electronics Store', separated by commas>"
+                    "name": "Tenda de electrodomésticos"
                 },
                 "shop/erotic": {
-                    "name": "Erótica Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Erotic Store', separated by commas>"
+                    "name": "Erótica Tenda"
                 },
                 "shop/fabric": {
-                    "name": "Tenda de Teas",
-                    "terms": "<translate with synonyms or related terms for 'Fabric Store', separated by commas>"
+                    "name": "Tenda de Teas"
                 },
                 "shop/farm": {
-                    "name": "Cesta de produtos",
-                    "terms": "<translate with synonyms or related terms for 'Produce Stand', separated by commas>"
+                    "name": "Cesta de produtos"
                 },
                 "shop/fashion": {
-                    "name": "Tenda de Moda",
-                    "terms": "<translate with synonyms or related terms for 'Fashion Store', separated by commas>"
+                    "name": "Tenda de Moda"
                 },
                 "shop/fishmonger": {
                     "name": "Peixeiro"
                 },
                 "shop/florist": {
-                    "name": "Florería",
-                    "terms": "<translate with synonyms or related terms for 'Florist', separated by commas>"
+                    "name": "Florería"
                 },
                 "shop/frame": {
-                    "name": "Marcos Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Framing Shop', separated by commas>"
+                    "name": "Marcos Tenda"
                 },
                 "shop/funeral_directors": {
-                    "name": "Funeraria",
-                    "terms": "<translate with synonyms or related terms for 'Funeral Home', separated by commas>"
+                    "name": "Funeraria"
                 },
                 "shop/furnace": {
-                    "name": "Fornos Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Furnace Store', separated by commas>"
+                    "name": "Fornos Tenda"
                 },
                 "shop/furniture": {
-                    "name": "Tenda de mobles",
-                    "terms": "<translate with synonyms or related terms for 'Furniture Store', separated by commas>"
+                    "name": "Tenda de mobles"
                 },
                 "shop/garden_centre": {
-                    "name": "Centro de xardinería",
-                    "terms": "<translate with synonyms or related terms for 'Garden Center', separated by commas>"
+                    "name": "Centro de xardinería"
                 },
                 "shop/gas": {
-                    "name": "Bombonas Gas Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Bottled Gas Shop', separated by commas>"
+                    "name": "Bombonas Gas Tenda"
                 },
                 "shop/gift": {
-                    "name": "Tenda de Regalos",
-                    "terms": "<translate with synonyms or related terms for 'Gift Shop', separated by commas>"
+                    "name": "Tenda de Regalos"
                 },
                 "shop/greengrocer": {
-                    "name": "Froitería",
-                    "terms": "<translate with synonyms or related terms for 'Greengrocer', separated by commas>"
+                    "name": "Froitería"
                 },
                 "shop/hairdresser": {
-                    "name": "Perruquería",
-                    "terms": "<translate with synonyms or related terms for 'Hairdresser', separated by commas>"
+                    "name": "Perruquería"
                 },
                 "shop/hardware": {
-                    "name": "Ferretería",
-                    "terms": "<translate with synonyms or related terms for 'Hardware Store', separated by commas>"
+                    "name": "Ferretería"
                 },
                 "shop/hearing_aids": {
-                    "name": "Audífonos Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Hearing Aids Store', separated by commas>"
+                    "name": "Audífonos Tenda"
                 },
                 "shop/herbalist": {
-                    "name": "Herborista",
-                    "terms": "<translate with synonyms or related terms for 'Herbalist', separated by commas>"
+                    "name": "Herborista"
                 },
                 "shop/hifi": {
-                    "name": "Hifi Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Hifi Store', separated by commas>"
+                    "name": "Hifi Tenda"
                 },
                 "shop/houseware": {
-                    "name": "Electrodomésticos Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Houseware Store', separated by commas>"
+                    "name": "Electrodomésticos Tenda"
                 },
                 "shop/interior_decoration": {
-                    "name": "Decoración Interiores Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Interior Decoration Store', separated by commas>"
+                    "name": "Decoración Interiores Tenda"
                 },
                 "shop/jewelry": {
-                    "name": "Xoiería",
-                    "terms": "<translate with synonyms or related terms for 'Jeweler', separated by commas>"
+                    "name": "Xoiería"
                 },
                 "shop/kiosk": {
-                    "name": "Kiosko Xornais",
-                    "terms": "<translate with synonyms or related terms for 'News Kiosk', separated by commas>"
+                    "name": "Kiosko Xornais"
                 },
                 "shop/kitchen": {
-                    "name": "Deseño Cociñas Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Kitchen Design Store', separated by commas>"
+                    "name": "Deseño Cociñas Tenda"
                 },
                 "shop/laundry": {
-                    "name": "Lavandería",
-                    "terms": "<translate with synonyms or related terms for 'Laundry', separated by commas>"
+                    "name": "Lavandería"
                 },
                 "shop/leather": {
-                    "name": "Tenda de Peles",
-                    "terms": "<translate with synonyms or related terms for 'Leather Store', separated by commas>"
+                    "name": "Tenda de Peles"
                 },
                 "shop/locksmith": {
-                    "name": "Cerraxeiro",
-                    "terms": "<translate with synonyms or related terms for 'Locksmith', separated by commas>"
+                    "name": "Cerraxeiro"
                 },
                 "shop/lottery": {
-                    "name": "Tenda de Lotería",
-                    "terms": "<translate with synonyms or related terms for 'Lottery Shop', separated by commas>"
+                    "name": "Tenda de Lotería"
                 },
                 "shop/mall": {
-                    "name": "Centro comercial",
-                    "terms": "<translate with synonyms or related terms for 'Mall', separated by commas>"
+                    "name": "Centro comercial"
                 },
                 "shop/massage": {
-                    "name": "Fisioterapia",
-                    "terms": "<translate with synonyms or related terms for 'Massage Shop', separated by commas>"
+                    "name": "Fisioterapia"
                 },
                 "shop/medical_supply": {
-                    "name": "Tenda de suministros médicos",
-                    "terms": "<translate with synonyms or related terms for 'Medical Supply Store', separated by commas>"
+                    "name": "Tenda de suministros médicos"
                 },
                 "shop/mobile_phone": {
-                    "name": "Tenda de telefonía móvil",
-                    "terms": "<translate with synonyms or related terms for 'Mobile Phone Store', separated by commas>"
+                    "name": "Tenda de telefonía móvil"
                 },
                 "shop/money_lender": {
-                    "name": "Usureiro",
-                    "terms": "<translate with synonyms or related terms for 'Money Lender', separated by commas>"
+                    "name": "Usureiro"
                 },
                 "shop/motorcycle": {
-                    "name": "Concesionario de motocicletas",
-                    "terms": "<translate with synonyms or related terms for 'Motorcycle Dealership', separated by commas>"
+                    "name": "Concesionario de motocicletas"
                 },
                 "shop/music": {
-                    "name": "Tenda de música",
-                    "terms": "<translate with synonyms or related terms for 'Music Store', separated by commas>"
+                    "name": "Tenda de música"
                 },
                 "shop/musical_instrument": {
-                    "name": "Tenda Instrumentos Musicais",
-                    "terms": "<translate with synonyms or related terms for 'Musical Instrument Store', separated by commas>"
+                    "name": "Tenda Instrumentos Musicais"
                 },
                 "shop/newsagent": {
-                    "name": "Xornais/Revistas Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Newspaper/Magazine Shop', separated by commas>"
+                    "name": "Xornais/Revistas Tenda"
                 },
                 "shop/nutrition_supplements": {
-                    "name": "Nutrición Suplemento Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Nutrition Supplements Store', separated by commas>"
+                    "name": "Nutrición Suplemento Tenda"
                 },
                 "shop/optician": {
-                    "name": "Óptica",
-                    "terms": "<translate with synonyms or related terms for 'Optician', separated by commas>"
+                    "name": "Óptica"
                 },
                 "shop/organic": {
-                    "name": "Produtos Ecolóxicos Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Organic Goods Store', separated by commas>"
+                    "name": "Produtos Ecolóxicos Tenda"
                 },
                 "shop/outdoor": {
-                    "name": "Tenda ao aire libre",
-                    "terms": "<translate with synonyms or related terms for 'Outdoors Store', separated by commas>"
+                    "name": "Tenda ao aire libre"
                 },
                 "shop/paint": {
-                    "name": "Pintura Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Paint Store', separated by commas>"
+                    "name": "Pintura Tenda"
                 },
                 "shop/pastry": {
-                    "name": "Confitería",
-                    "terms": "<translate with synonyms or related terms for 'Pastry Shop', separated by commas>"
+                    "name": "Confitería"
                 },
                 "shop/pawnbroker": {
-                    "name": "Casa de Empeños",
-                    "terms": "<translate with synonyms or related terms for 'Pawn Shop', separated by commas>"
+                    "name": "Casa de Empeños"
                 },
                 "shop/perfumery": {
-                    "name": "Perfumaría",
-                    "terms": "<translate with synonyms or related terms for 'Perfume Store', separated by commas>"
+                    "name": "Perfumaría"
                 },
                 "shop/pet": {
-                    "name": "Tenda de mascotas",
-                    "terms": "<translate with synonyms or related terms for 'Pet Store', separated by commas>"
+                    "name": "Tenda de mascotas"
                 },
                 "shop/photo": {
-                    "name": "Tenda de Fotografía",
-                    "terms": "<translate with synonyms or related terms for 'Photography Store', separated by commas>"
+                    "name": "Tenda de Fotografía"
                 },
                 "shop/pyrotechnics": {
-                    "name": "Fogos artificiais tenda",
-                    "terms": "<translate with synonyms or related terms for 'Fireworks Store', separated by commas>"
+                    "name": "Fogos artificiais tenda"
                 },
                 "shop/radiotechnics": {
-                    "name": "Radio/Electrónica, Tenda de Compoñentes",
-                    "terms": "<translate with synonyms or related terms for 'Radio/Electronic Component Store', separated by commas>"
+                    "name": "Radio/Electrónica, Tenda de Compoñentes"
                 },
                 "shop/religion": {
-                    "name": "Relixiosa Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Religious Store', separated by commas>"
+                    "name": "Relixiosa Tenda"
                 },
                 "shop/scuba_diving": {
-                    "name": "Mergullo Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Scuba Diving Shop', separated by commas>"
+                    "name": "Mergullo Tenda"
                 },
                 "shop/seafood": {
-                    "name": "Tenda de Mariscos",
-                    "terms": "<translate with synonyms or related terms for 'Seafood Shop', separated by commas>"
+                    "name": "Tenda de Mariscos"
                 },
                 "shop/second_hand": {
-                    "name": "Consigna/tenda de segunda man",
-                    "terms": "<translate with synonyms or related terms for 'Consignment/Thrift Store', separated by commas>"
+                    "name": "Consigna/tenda de segunda man"
                 },
                 "shop/shoes": {
-                    "name": "Zapatería",
-                    "terms": "<translate with synonyms or related terms for 'Shoe Store', separated by commas>"
+                    "name": "Zapatería"
                 },
                 "shop/sports": {
-                    "name": "Deportiva Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Sporting Goods Store', separated by commas>"
+                    "name": "Deportiva Tenda"
                 },
                 "shop/stationery": {
-                    "name": "Papelería",
-                    "terms": "<translate with synonyms or related terms for 'Stationery Store', separated by commas>"
+                    "name": "Papelería"
                 },
                 "shop/storage_rental": {
-                    "name": "Aluguer de Almacéns",
-                    "terms": "<translate with synonyms or related terms for 'Storage Rental', separated by commas>"
+                    "name": "Aluguer de Almacéns"
                 },
                 "shop/supermarket": {
-                    "name": "Supermercado",
-                    "terms": "<translate with synonyms or related terms for 'Supermarket', separated by commas>"
+                    "name": "Supermercado"
                 },
                 "shop/tailor": {
-                    "name": "Xastre",
-                    "terms": "<translate with synonyms or related terms for 'Tailor', separated by commas>"
+                    "name": "Xastre"
                 },
                 "shop/tattoo": {
-                    "name": "Salón de Tatuaxes",
-                    "terms": "<translate with synonyms or related terms for 'Tattoo Parlor', separated by commas>"
+                    "name": "Salón de Tatuaxes"
                 },
                 "shop/tea": {
-                    "name": "Te Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Tea Store', separated by commas>"
+                    "name": "Te Tenda"
                 },
                 "shop/ticket": {
-                    "name": "Venda de Entradas",
-                    "terms": "<translate with synonyms or related terms for 'Ticket Seller', separated by commas>"
+                    "name": "Venda de Entradas"
                 },
                 "shop/tobacco": {
-                    "name": "Estanco",
-                    "terms": "<translate with synonyms or related terms for 'Tobacco Shop', separated by commas>"
+                    "name": "Estanco"
                 },
                 "shop/toys": {
-                    "name": "Tenda de xoguetes",
-                    "terms": "<translate with synonyms or related terms for 'Toy Store', separated by commas>"
+                    "name": "Tenda de xoguetes"
                 },
                 "shop/travel_agency": {
-                    "name": "Axencia de viaxes",
-                    "terms": "<translate with synonyms or related terms for 'Travel Agency', separated by commas>"
+                    "name": "Axencia de viaxes"
                 },
                 "shop/tyres": {
-                    "name": "Tenda de neumáticos",
-                    "terms": "<translate with synonyms or related terms for 'Tire Store', separated by commas>"
+                    "name": "Tenda de neumáticos"
                 },
                 "shop/vacant": {
                     "name": "Local baleiro"
                 },
                 "shop/vacuum_cleaner": {
-                    "name": "Aspiradoras Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Vacuum Cleaner Store', separated by commas>"
+                    "name": "Aspiradoras Tenda"
                 },
                 "shop/variety_store": {
-                    "name": "Tenda de Variedades",
-                    "terms": "<translate with synonyms or related terms for 'Variety Store', separated by commas>"
+                    "name": "Tenda de Variedades"
                 },
                 "shop/video": {
-                    "name": "Videoclub",
-                    "terms": "<translate with synonyms or related terms for 'Video Store', separated by commas>"
+                    "name": "Videoclub"
                 },
                 "shop/video_games": {
-                    "name": "Video Xogos Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Video Game Store', separated by commas>"
+                    "name": "Video Xogos Tenda"
                 },
                 "shop/watches": {
-                    "name": "Reloxería",
-                    "terms": "<translate with synonyms or related terms for 'Watches Shop', separated by commas>"
+                    "name": "Reloxería"
                 },
                 "shop/water_sports": {
-                    "name": "Deportes acuáticos/tenda de natación",
-                    "terms": "<translate with synonyms or related terms for 'Watersport/Swim Shop', separated by commas>"
+                    "name": "Deportes acuáticos/tenda de natación"
                 },
                 "shop/weapons": {
-                    "name": "Armería",
-                    "terms": "<translate with synonyms or related terms for 'Weapon Shop', separated by commas>"
+                    "name": "Armería"
                 },
                 "shop/window_blind": {
-                    "name": "Tenda de Venta a Cegas",
-                    "terms": "<translate with synonyms or related terms for 'Window Blind Store', separated by commas>"
+                    "name": "Tenda de Venta a Cegas"
                 },
                 "shop/wine": {
-                    "name": "Viño Tenda",
-                    "terms": "<translate with synonyms or related terms for 'Wine Shop', separated by commas>"
+                    "name": "Viño Tenda"
                 },
                 "tourism": {
-                    "name": "Turismo",
-                    "terms": "<translate with synonyms or related terms for 'Tourism', separated by commas>"
+                    "name": "Turismo"
                 },
                 "tourism/alpine_hut": {
-                    "name": "Cabana alpina",
-                    "terms": "<translate with synonyms or related terms for 'Alpine Hut', separated by commas>"
+                    "name": "Cabana alpina"
                 },
                 "tourism/apartment": {
-                    "name": "Apartamento de Convidados /Condo",
-                    "terms": "<translate with synonyms or related terms for 'Guest Apartment / Condo', separated by commas>"
+                    "name": "Apartamento de Convidados /Condo"
                 },
                 "tourism/aquarium": {
-                    "name": "Acuarium",
-                    "terms": "<translate with synonyms or related terms for 'Aquarium', separated by commas>"
+                    "name": "Acuarium"
                 },
                 "tourism/artwork": {
-                    "name": "Obra artística",
-                    "terms": "<translate with synonyms or related terms for 'Artwork', separated by commas>"
+                    "name": "Obra artística"
                 },
                 "tourism/attraction": {
-                    "name": "Atracción turística",
-                    "terms": "<translate with synonyms or related terms for 'Tourist Attraction', separated by commas>"
+                    "name": "Atracción turística"
                 },
                 "tourism/camp_site": {
-                    "name": "Área de camping",
-                    "terms": "<translate with synonyms or related terms for 'Campground', separated by commas>"
+                    "name": "Área de camping"
                 },
                 "tourism/caravan_site": {
-                    "name": "Parque de Caravanas",
-                    "terms": "<translate with synonyms or related terms for 'RV Park', separated by commas>"
+                    "name": "Parque de Caravanas"
                 },
                 "tourism/chalet": {
-                    "name": "Chalé",
-                    "terms": "<translate with synonyms or related terms for 'Chalet', separated by commas>"
+                    "name": "Chalé"
                 },
                 "tourism/gallery": {
-                    "name": "Galería de Arte",
-                    "terms": "<translate with synonyms or related terms for 'Art Gallery', separated by commas>"
+                    "name": "Galería de Arte"
                 },
                 "tourism/guest_house": {
                     "name": "Hostal",
                     "terms": "hostal, pensión, hospedaxe, fonda, pousada, aloxamento, habitación"
                 },
                 "tourism/hostel": {
-                    "name": "Albergue",
-                    "terms": "<translate with synonyms or related terms for 'Hostel', separated by commas>"
+                    "name": "Albergue"
                 },
                 "tourism/hotel": {
-                    "name": "Hotel",
-                    "terms": "<translate with synonyms or related terms for 'Hotel', separated by commas>"
+                    "name": "Hotel"
                 },
                 "tourism/information": {
-                    "name": "Información",
-                    "terms": "<translate with synonyms or related terms for 'Information', separated by commas>"
+                    "name": "Información"
                 },
                 "tourism/information/board": {
-                    "name": "Placa de información",
-                    "terms": "<translate with synonyms or related terms for 'Information Board', separated by commas>"
+                    "name": "Placa de información"
                 },
                 "tourism/information/guidepost": {
-                    "name": "Posto Guía",
-                    "terms": "<translate with synonyms or related terms for 'Guidepost', separated by commas>"
+                    "name": "Posto Guía"
                 },
                 "tourism/information/map": {
-                    "name": "Mapa",
-                    "terms": "<translate with synonyms or related terms for 'Map', separated by commas>"
+                    "name": "Mapa"
                 },
                 "tourism/information/office": {
-                    "name": "Oficina de Información Turística",
-                    "terms": "<translate with synonyms or related terms for 'Tourist Information Office', separated by commas>"
+                    "name": "Oficina de Información Turística"
                 },
                 "tourism/motel": {
-                    "name": "Motel",
-                    "terms": "<translate with synonyms or related terms for 'Motel', separated by commas>"
+                    "name": "Motel"
                 },
                 "tourism/museum": {
-                    "name": "Museo",
-                    "terms": "<translate with synonyms or related terms for 'Museum', separated by commas>"
+                    "name": "Museo"
                 },
                 "tourism/picnic_site": {
-                    "name": "Zona de picnic",
-                    "terms": "<translate with synonyms or related terms for 'Picnic Site', separated by commas>"
+                    "name": "Zona de picnic"
                 },
                 "tourism/theme_park": {
-                    "name": "Parque de atraccións",
-                    "terms": "<translate with synonyms or related terms for 'Theme Park', separated by commas>"
+                    "name": "Parque de atraccións"
                 },
                 "tourism/viewpoint": {
-                    "name": "Miradoiro",
-                    "terms": "<translate with synonyms or related terms for 'Viewpoint', separated by commas>"
+                    "name": "Miradoiro"
                 },
                 "tourism/zoo": {
-                    "name": "Zoo",
-                    "terms": "<translate with synonyms or related terms for 'Zoo', separated by commas>"
+                    "name": "Zoo"
                 },
                 "traffic_calming": {
-                    "name": "Acougo de Tráfico",
-                    "terms": "<translate with synonyms or related terms for 'Traffic Calming', separated by commas>"
+                    "name": "Acougo de Tráfico"
                 },
                 "traffic_calming/bump": {
-                    "name": "Banda de frenado",
-                    "terms": "<translate with synonyms or related terms for 'Speed Bump', separated by commas>"
+                    "name": "Banda de frenado"
                 },
                 "traffic_calming/chicane": {
-                    "name": "Chicán de Tráfico",
-                    "terms": "<translate with synonyms or related terms for 'Traffic Chicane', separated by commas>"
+                    "name": "Chicán de Tráfico"
                 },
                 "traffic_calming/choker": {
-                    "name": "Choker de tráfico",
-                    "terms": "<translate with synonyms or related terms for 'Traffic Choker', separated by commas>"
+                    "name": "Choker de tráfico"
                 },
                 "traffic_calming/cushion": {
-                    "name": "Almofa de Velocidade",
-                    "terms": "<translate with synonyms or related terms for 'Speed Cushion', separated by commas>"
+                    "name": "Almofa de Velocidade"
                 },
                 "traffic_calming/dip": {
-                    "name": "Soterrado",
-                    "terms": "<translate with synonyms or related terms for 'Dip', separated by commas>"
+                    "name": "Soterrado"
                 },
                 "traffic_calming/hump": {
-                    "name": "Speed Hump",
-                    "terms": "<translate with synonyms or related terms for 'Speed Hump', separated by commas>"
+                    "name": "Speed Hump"
                 },
                 "traffic_calming/island": {
-                    "name": "Illa de Tráfico",
-                    "terms": "<translate with synonyms or related terms for 'Traffic Island', separated by commas>"
+                    "name": "Illa de Tráfico"
                 },
                 "traffic_calming/rumble_strip": {
-                    "name": "Rumble Faixa",
-                    "terms": "<translate with synonyms or related terms for 'Rumble Strip', separated by commas>"
+                    "name": "Rumble Faixa"
                 },
                 "traffic_calming/table": {
-                    "name": "Cruce Peonil Elevado",
-                    "terms": "<translate with synonyms or related terms for 'Raised Pedestrian Crossing', separated by commas>"
+                    "name": "Cruce Peonil Elevado"
                 },
                 "type/boundary": {
-                    "name": "Límite",
-                    "terms": "<translate with synonyms or related terms for 'Boundary', separated by commas>"
+                    "name": "Límite"
                 },
                 "type/boundary/administrative": {
-                    "name": "Límite administrativo",
-                    "terms": "<translate with synonyms or related terms for 'Administrative Boundary', separated by commas>"
+                    "name": "Límite administrativo"
                 },
                 "type/multipolygon": {
                     "name": "Multipolígono"
                 },
                 "type/restriction": {
-                    "name": "Restrición",
-                    "terms": "<translate with synonyms or related terms for 'Restriction', separated by commas>"
+                    "name": "Restrición"
                 },
                 "type/restriction/no_left_turn": {
-                    "name": "Prohibido xirar á esquerda",
-                    "terms": "<translate with synonyms or related terms for 'No Left Turn', separated by commas>"
+                    "name": "Prohibido xirar á esquerda"
                 },
                 "type/restriction/no_right_turn": {
-                    "name": "Prohibido xirar á dereita",
-                    "terms": "<translate with synonyms or related terms for 'No Right Turn', separated by commas>"
+                    "name": "Prohibido xirar á dereita"
                 },
                 "type/restriction/no_straight_on": {
-                    "name": "Non Pradiante",
-                    "terms": "<translate with synonyms or related terms for 'No Straight On', separated by commas>"
+                    "name": "Non Pradiante"
                 },
                 "type/restriction/no_u_turn": {
-                    "name": "Prohibido o cambio de sentido",
-                    "terms": "<translate with synonyms or related terms for 'No U-turn', separated by commas>"
+                    "name": "Prohibido o cambio de sentido"
                 },
                 "type/restriction/only_left_turn": {
-                    "name": "Obrigatorio xirar á esquerda",
-                    "terms": "<translate with synonyms or related terms for 'Left Turn Only', separated by commas>"
+                    "name": "Obrigatorio xirar á esquerda"
                 },
                 "type/restriction/only_right_turn": {
-                    "name": "Obrigatorio xirar á dereita",
-                    "terms": "<translate with synonyms or related terms for 'Right Turn Only', separated by commas>"
+                    "name": "Obrigatorio xirar á dereita"
                 },
                 "type/restriction/only_straight_on": {
-                    "name": "Obrigatorio continuar recto",
-                    "terms": "<translate with synonyms or related terms for 'No Turns', separated by commas>"
+                    "name": "Obrigatorio continuar recto"
                 },
                 "type/route": {
-                    "name": "Ruta",
-                    "terms": "<translate with synonyms or related terms for 'Route', separated by commas>"
+                    "name": "Ruta"
                 },
                 "type/route/bicycle": {
-                    "name": "Ruta ciclista",
-                    "terms": "<translate with synonyms or related terms for 'Cycle Route', separated by commas>"
+                    "name": "Ruta ciclista"
                 },
                 "type/route/bus": {
-                    "name": "Ruta de autobús",
-                    "terms": "<translate with synonyms or related terms for 'Bus Route', separated by commas>"
+                    "name": "Ruta de autobús"
                 },
                 "type/route/detour": {
-                    "name": "Ruta de Desvío",
-                    "terms": "<translate with synonyms or related terms for 'Detour Route', separated by commas>"
+                    "name": "Ruta de Desvío"
                 },
                 "type/route/ferry": {
-                    "name": "Ruta do Ferry",
-                    "terms": "<translate with synonyms or related terms for 'Ferry Route', separated by commas>"
+                    "name": "Ruta do Ferry"
                 },
                 "type/route/foot": {
-                    "name": "Rúa a Pé",
-                    "terms": "<translate with synonyms or related terms for 'Foot Route', separated by commas>"
+                    "name": "Rúa a Pé"
                 },
                 "type/route/hiking": {
-                    "name": "Ruta de Camiñata",
-                    "terms": "<translate with synonyms or related terms for 'Hiking Route', separated by commas>"
+                    "name": "Ruta de Camiñata"
                 },
                 "type/route/horse": {
-                    "name": "Ruta de Equitación",
-                    "terms": "<translate with synonyms or related terms for 'Riding Route', separated by commas>"
+                    "name": "Ruta de Equitación"
                 },
                 "type/route/pipeline": {
-                    "name": "Ruta de Tubaría",
-                    "terms": "<translate with synonyms or related terms for 'Pipeline Route', separated by commas>"
+                    "name": "Ruta de Tubaría"
                 },
                 "type/route/power": {
-                    "name": "Ruta de Enerxía",
-                    "terms": "<translate with synonyms or related terms for 'Power Route', separated by commas>"
+                    "name": "Ruta de Enerxía"
                 },
                 "type/route/road": {
-                    "name": "Ruta de Estrada",
-                    "terms": "<translate with synonyms or related terms for 'Road Route', separated by commas>"
+                    "name": "Ruta de Estrada"
                 },
                 "type/route/train": {
-                    "name": "Ruta de Tren",
-                    "terms": "<translate with synonyms or related terms for 'Train Route', separated by commas>"
+                    "name": "Ruta de Tren"
                 },
                 "type/route/tram": {
-                    "name": "Ruta de Tranvía",
-                    "terms": "<translate with synonyms or related terms for 'Tram Route', separated by commas>"
+                    "name": "Ruta de Tranvía"
                 },
                 "type/route_master": {
-                    "name": "Ruta Mestre",
-                    "terms": "<translate with synonyms or related terms for 'Route Master', separated by commas>"
+                    "name": "Ruta Mestre"
                 },
                 "type/site": {
-                    "name": "Lugar",
-                    "terms": "<translate with synonyms or related terms for 'Site', separated by commas>"
+                    "name": "Lugar"
                 },
                 "vertex": {
-                    "name": "Outro",
-                    "terms": "<translate with synonyms or related terms for 'Other', separated by commas>"
+                    "name": "Outro"
                 },
                 "waterway": {
                     "name": "Vía de Auga"
                 },
                 "waterway/boatyard": {
-                    "name": "Estaleiro",
-                    "terms": "<translate with synonyms or related terms for 'Boatyard', separated by commas>"
+                    "name": "Estaleiro"
                 },
                 "waterway/canal": {
-                    "name": "Canal",
-                    "terms": "<translate with synonyms or related terms for 'Canal', separated by commas>"
+                    "name": "Canal"
                 },
                 "waterway/dam": {
-                    "name": "Presa",
-                    "terms": "<translate with synonyms or related terms for 'Dam', separated by commas>"
+                    "name": "Presa"
                 },
                 "waterway/ditch": {
-                    "name": "Cuneta",
-                    "terms": "<translate with synonyms or related terms for 'Ditch', separated by commas>"
+                    "name": "Cuneta"
                 },
                 "waterway/dock": {
-                    "name": "Dique Húmido/Dique Seco",
-                    "terms": "<translate with synonyms or related terms for 'Wet Dock / Dry Dock', separated by commas>"
+                    "name": "Dique Húmido/Dique Seco"
                 },
                 "waterway/drain": {
-                    "name": "Cuneta",
-                    "terms": "<translate with synonyms or related terms for 'Drain', separated by commas>"
+                    "name": "Cuneta"
                 },
                 "waterway/fuel": {
-                    "name": "Estación Mariá de Fuel",
-                    "terms": "<translate with synonyms or related terms for 'Marine Fuel Station', separated by commas>"
+                    "name": "Estación Mariá de Fuel"
                 },
                 "waterway/river": {
                     "name": "Río",
-                    "terms": "<translate with synonyms or related terms for 'River', separated by commas>"
+                    "terms": "río, regato, afluente, auga"
                 },
                 "waterway/riverbank": {
-                    "name": "Ribeira do río",
-                    "terms": "<translate with synonyms or related terms for 'Riverbank', separated by commas>"
+                    "name": "Ribeira do río"
                 },
                 "waterway/sanitary_dump_station": {
-                    "name": "WC Mariño Eliminación",
-                    "terms": "<translate with synonyms or related terms for 'Marine Toilet Disposal', separated by commas>"
+                    "name": "WC Mariño Eliminación"
                 },
                 "waterway/stream": {
                     "name": "Regato",
-                    "terms": "<translate with synonyms or related terms for 'Stream', separated by commas>"
+                    "terms": "río, regato, rego, torrente, auga"
                 },
                 "waterway/water_point": {
-                    "name": "Auga Potable Mariña",
-                    "terms": "<translate with synonyms or related terms for 'Marine Drinking Water', separated by commas>"
+                    "name": "Auga Potable Mariña"
                 },
                 "waterway/waterfall": {
-                    "name": "Fervenza",
-                    "terms": "<translate with synonyms or related terms for 'Waterfall', separated by commas>"
+                    "name": "Fervenza"
                 },
                 "waterway/weir": {
-                    "name": "Presa",
-                    "terms": "<translate with synonyms or related terms for 'Weir', separated by commas>"
+                    "name": "Presa"
                 }
             }
         },

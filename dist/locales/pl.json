@@ -138,7 +138,7 @@
             },
             "connect": {
                 "annotation": {
-                    "point": "Połączono linię z węzłem.",
+                    "point": "Połączono linię z punktem.",
                     "vertex": "Połączono linie.",
                     "line": "Połączono drogę z linią.",
                     "area": "Połączono drogę z obszarem."
@@ -315,7 +315,7 @@
         "logout": "wyloguj",
         "loading_auth": "Łączenie z OpenStreetMap...",
         "report_a_bug": "Zgłoś błąd",
-        "help_translate": "Pomóż tłumaczyć",
+        "help_translate": "Pomóż przetłumaczyć",
         "feature_info": {
             "hidden_warning": "{count} ukrytych obiektów",
             "hidden_details": "Te obiekty są akutalnie ukryte: {details}"
@@ -352,31 +352,40 @@
             "key": "I",
             "background": {
                 "key": "B",
-                "title": "Tło",
+                "title": "Warstawa tła",
                 "zoom": "Powiększenie",
-                "unknown": "Nieznany",
-                "show_tiles": "Pokaż kafle",
-                "hide_tiles": "Ukryj kafle"
+                "vintage": "Datowanie",
+                "unknown": "Nieznane",
+                "show_tiles": "Pokaż dane kafli",
+                "hide_tiles": "Ukryj dane kafli"
             },
             "history": {
                 "key": "H",
                 "title": "Historia",
-                "selected": "[n] zaznaczono",
+                "selected": "{n} wybrano",
                 "version": "Wersja",
                 "last_edit": "Ostatnia edycja",
                 "edited_by": "Edytowane przez",
-                "changeset": "Zestaw zmian"
+                "changeset": "Zestaw zmian",
+                "unknown": "brak",
+                "link_text": "Historia na openstreetmap.org"
             },
             "location": {
-                "key": "L"
+                "key": "L",
+                "title": "Lokalizacja",
+                "unknown_location": "Lokalizacja nieznana"
             },
             "measurement": {
                 "key": "M",
-                "selected": "[n] zaznaczono",
+                "title": "Pomiary",
+                "selected": "{n} wybrano",
                 "geometry": "Geometria",
-                "closed": "zamknięte",
+                "closed": "zamknięty",
+                "center": "Środek",
+                "perimeter": "Obwód",
                 "length": "Długość",
                 "area": "Powierzchnia",
+                "centroid": "Centroida",
                 "location": "Lokalizacja",
                 "metric": "Metryczne",
                 "imperial": "Imperialne"
@@ -384,7 +393,7 @@
         },
         "geometry": {
             "point": "punkt",
-            "vertex": "węzeł",
+            "vertex": "wierzchołek",
             "line": "linia",
             "area": "obszar",
             "relation": "relacja"
@@ -417,10 +426,10 @@
             "remove": "Usuń",
             "search": "Szukaj",
             "multiselect": "Wybrane obiekty",
-            "unknown": "Nieznane",
+            "unknown": "brak",
             "incomplete": "<nie pobrane>",
             "feature_list": "Wyszukiwanie rodzaju obiektu",
-            "edit": "Edytuj obiekt",
+            "edit": "Edytor obiektu",
             "check": {
                 "yes": "Tak",
                 "no": "Nie",
@@ -442,7 +451,7 @@
             "add_fields": "Dodaj pole:"
         },
         "background": {
-            "title": "Tło",
+            "title": "Warstwa tła",
             "description": "Ustawienia tła",
             "key": "B",
             "percent_brightness": "Jasność {opacity}%",
@@ -451,7 +460,8 @@
             "switch": "Wróć do tego podkładu",
             "custom": "Własne",
             "custom_button": "Edycja własnego podkładu",
-            "fix_misalignment": "Przesunięcie podkładu",
+            "custom_prompt": "Wprowadź szablon dla URL kafla mapy. Obsługiwane symbole:\n   - {zoom}/{z}, {x}, {y} dla schematu adresowania kafla Z/X/Y\n   - {ty} dla odwróconej współrzędnej Y w adresowaniu TMS\n   - {u} dla QuadTiles\n   - {switch:a,b,c} dla multipleksacji serwerów na poziomie DNS\n\nPrzykład:\n{example}",
+            "fix_misalignment": "Przesunięcie warstwy tła",
             "imagery_source_faq": "Skąd pochodzi ta warstwa?",
             "reset": "Przywraca ustawienia",
             "offset": "Przeciągnij na szare pole poniżej, aby dostosować obrazek, lub wprowadź wartości przesunięcia w metrach.",
@@ -537,11 +547,13 @@
         },
         "restore": {
             "heading": "Masz niezapisane zmiany",
-            "description": "Przywrócić niezapisane zmiany z poprzedniej sesji?"
+            "description": "Przywrócić niezapisane zmiany z poprzedniej sesji?",
+            "restore": "Przywróć moje zmiany",
+            "reset": "Zapomnij moje zmiany"
         },
         "save": {
             "title": "Zapisz",
-            "help": "Zapisz zmiany na OpenStreetMap, aby były one widoczne dla innych.",
+            "help": "Sprawdź i zapisz zmiany na OpenStreetMap, aby były one widoczne dla innych.",
             "no_changes": "Brak zmian do zapisania.",
             "error": "Wystąpiły błędy podczas zapisywania. ",
             "status_code": "Serwer zwrócił kod {code}",
@@ -608,15 +620,15 @@
         "validations": {
             "disconnected_highway": "Droga odłączona od siatki innych dróg",
             "disconnected_highway_tooltip": "Drogi powinny być połączone z innymi drogami lub wejściami do budynków. ",
-            "old_multipolygon": "Tagi multipoligonu na linii zewnętrznej",
-            "old_multipolygon_tooltip": "Ten styl tagowania multipoligonu jest przestarzały. Tagi powinny zostać zapisane w relacji, a nie na zewnętrznej linii.",
-            "untagged_point": "Nieoznaczony punkt",
+            "old_multipolygon": "Znaczniki multipoligonu na linii zewnętrznej",
+            "old_multipolygon_tooltip": "Ten sposób oznaczania multipoligonu jest przestarzały. Znaczniki powinny być zapisane w relacji, a nie na zewnętrznej linii.",
+            "untagged_point": "Pusty punkt - brak znaczników",
             "untagged_point_tooltip": "Wybierz typ obiektu, który opisuje czym jest ten punkt.",
-            "untagged_line": "Nieoznaczona linia",
+            "untagged_line": "Pusta linia - brak znaczników",
             "untagged_line_tooltip": "Wybierz typ obiektu, który opisuje czym jest ta linia.",
             "untagged_area": "Nieoznaczony obszar",
             "untagged_area_tooltip": "Wybierz typ obiektu, który opisuje czym jest ten obszar.",
-            "untagged_relation": "Nieoznaczona relacja",
+            "untagged_relation": "Pusta relacja - brak znaczników",
             "untagged_relation_tooltip": "Wybierz typ obiektu, który opisuje czym jest ta relacja.",
             "many_deletions": "Usuwasz aż {n} obiektów! Czy na pewno chcesz to zrobić? Tym sposobem trwale usuniesz je z mapy, który wszyscy mogą zobaczyć na openstreetmap.org.",
             "tag_suggests_area": "Znacznik {tag} sugeruje, że linia powinna być obszarem, ale nim nie jest.",
@@ -632,7 +644,7 @@
             "local_layer": "Lokalny plik",
             "drag_drop": "Przeciągnij i upuść plik .gpx, .geojson lub .kml na stronę lub kliknij przycisk po prawej by go wybrać",
             "zoom": "Przybliż do warstwy",
-            "browse": "Zlokalizuj plik"
+            "browse": "Wczytaj plik"
         },
         "mapillary_images": {
             "tooltip": "Zdjęcia z serwisu Mapillary",
@@ -648,14 +660,15 @@
         "help": {
             "title": "Pomoc",
             "key": "H",
-            "help": "# Pomoc\n\nTo jest edytor [OpenStreetMap](http://www.openstreetmap.org/),\nwolnej i edytowalnej mapy świata. Możesz go używać do dodawania i\naktualizacji danych w twoim rejonie, czyniąc otwartą mapę świata lepszą\ndla każdego.\n\nModyfikacje wprowadzone na tej mapie będą widoczne dla wszystkich\nużywających OpenStreetMap. Aby wprowadzić modyfikacje,\nmusisz się [zalogować](https://www.openstreetmap.org/login).\n\n[Edytor iD](http://ideditor.com/) jest projektem społecznościowym z\n[kodem dostępnym na GitHub](https://github.com/openstreetmap/iD).\n",
-            "roads": "# Drogi\n\nMożesz tworzyć, poprawiać i usuwać drogi używając tego edytora. Drogi mogą być wszelkiego rodzaju:\nścieżki, ulice, szlaki, ścieżki rowerowe i tak dalej - każdy często uczęszczany odcinek powinien dać się\nprzedstawić.\n\n### Zaznaczanie\n\nKliknij drogę, aby ją zaznaczyć. Obwiednia powinna stać się widoczna, wraz z małym menu\nnarzędziowym na mapie oraz panelem bocznym pokazującym więcej informacji na temat drogi.\n\n### Modyfikowanie\n\nCzęsto będziesz widział drogi, które nie są wyrównane ze zdjęciami satelitarnymi lub śladami GPS.\nMożesz dopasować te drogi tak, aby były we właściwym miejscu.\n\nNajpierw kliknij drogę, którą chcesz zmienić. Podświetli ją to oraz pokaże punkty kontrolne, które\nmożesz przesunąć w lepsze miejsce. Jeżeli chcesz dodać nowe punkty kontrolne, aby droga\nbyła bardziej szczegółowa, dwukrotnie kliknij część drogi bez punktu, a w tym miejscu nowy się\npojawi.\n\nJeżeli droga łączy się z inną drogą, ale nie jest prawidłowo połączona z nią na mapie, możesz\nprzeciągnąć jeden z puntów kontrolnych na drugą drogę w celu ich połączenia. Prawidłowe połączenia\ndróg są ważne dla mapy i kluczowe dla wyznaczania tras.\n\nMożesz też kliknąć narzędzie 'Przesuń' lub nacisnąć klawisz `M` aby przesunąć jednocześnie całą\ndrogę, a następnie kliknąć ponownie, aby zachować to przesunięcie.\n\n### Usuwanie\n\nGdy droga jest całkiem błędna - widzisz, że nie istnieje na zdjęciach satelitarnych (a najlepiej sam\nsprawdziłeś w terenie, że jej nie ma) - możesz usunąć ją. Uważaj, gdy usuwasz obiekty - wyniki usunięcia,\ntak jak każdej modyfikacji, są widoczne dla wszystkich, a zdjęcie satelitarne często nie są aktualne,\nwięc droga może być po prostu nowo wybudowana.\n\nMożesz usunąć drogę przez zaznaczenie jej, a następnie kliknięcie ikony kosza lub wciśnięcie\nklawisza 'Delete'.\n\n### Tworzenie\n\nGdzieś tam powinna być droga, ale jej nie ma? Kliknij przycisk 'Linia' w górnym lewym rogu edytora\nlub naciśnij klawisz '2' na klawiaturze, aby zacząć rysować linię.\n\nKliknij początek drogi na mapie, aby zacząć rysować. Jeżeli droga odchodzi od już istniejącej, zacznij\nprzez kliknięcie w miejscu, w którym się łączą.\n\nNastępnie klikaj na punktach wzdłuż drogi tak, aby biegła ona odpowiednio według zdjęć satelitarnych\nlub GPS. Jeżeli droga, którą rysujesz, krzyżuje się z inną, połącz je, klikając na punkcie przecięcia. Gdy\nskończysz rysować, dwukrotnie kliknij ostatni punkt lub naciśnij klawisz 'Enter' na klawiaturze.\n",
-            "gps": "# GPS\n\nZebrane ślady GPS są ważnym źródłem danych dla OpenStreetMap. Ten edytor pozwala na użycie lokalnych śladów - plików \".gpx\" na twoim komputerze. Możesz je zbierać za pomocą aplikacji na smartfony jak również dedykowanych odbiorników GPS.\n\nBy uzyskać więcej informacji jak wykonać pomiar GPS, przeczytaj [Mapping with a smartphone, GPS, or paper](http://learnosm.org/en/mobile-mapping/).\n\nBy użyć śladu GPX do mapowania, przeciągnij i upuść plik GPX na mapę edytora. Jeśli został on rozpoznany, pojawi się na niej jako jasno-purpurowa linia. Kliknij na \"Dane mapy\" po prawej stronie by włączyć, wyłączyć lub przybilżyć widok mapy do miejsca w którym pojawił się ślad.\n\nSam ślad nie jest bezpośrednio przenoszony na serwery OpenStreetMap - najlepszym sposobem na wykorzystanie go jest nanoszenie informacji uzyskanych z niego na mapę, często używając go jako wskazówkę, możesz także [wysłać go na serwery OpenStreetMap](http://www.openstreetmap.org/trace/create)\npozwalając tym samym innym użytkownikom na korzystanie z niego.\n",
-            "imagery": "# Zdjęcia\n\nZdjęcia lotnicze/satelitarne są ważnym zasobem w rysowaniu map. Kolekcja zdjęć lotniczych,\nsatelitarnych i innych wolnodostępnych źródeł jest dostępna w edytorze w menu 'Ustawienia tła' po\nprawej stronie.\n\nDomyślnie wyświetlana jest warstwa zdjęć satelitarnych z [Bing Maps](http://www.bing.com/maps/),\nale w miarę przybliżania i pojawiają się nowe źródła. Niektóre kraje, takie jak Stany Zjednoczone, Francja\nczy Dania mają w pewnych miejscach dostępne zdjęcia bardzo wysokiej jakości.\n\nZdjęcia są czasem przesunięte względem danych na mapie z powodu błędu dostawcy zdjęć. Jeżeli\nwidzisz dużo dróg przesuniętych względem tła, zastanów się, zanim je wszystkie wyrównasz względem\ntła. Zamiast tego możesz dostosować przesunięcie zdjęć tak, aby zgadzały się z istniejącymi danymi przez\nnaciśnięcie przycisku 'Wyrównaj podkład' na dole Ustawień tła.\n",
-            "addresses": "# Adresy\n\nAdresy są jedną z najbardziej użytecznych informacji na mapie.\n\nMimo że adresy są często reprezentowane jako części ulic, w OpenStreetMap są one\nzapisywane jako atrybuty budynków i miejsc wzdłuż ulicy.\n\nMożesz dodać nową informację adresową do miejsc narysowanych w postaci\nobwiedni budynków jak również do tych narysowanych w postaci pojedynczych punktów.\nNajlepszym źródłem danych adresowych jest jak zwykle zwiedzanie okolicy\nlub własna wiedza - tak jak z każdym innym obiektem, kopiowanie danych z komercyjnych\nźródeł takich jak Google Maps jest zabronione.\n",
-            "inspector": "#Użycie Edytora\n\nEdytor jest to panel po lewej stronie strony który umożliwa Ci edycję szczegółów wybranego obiektu.\n\n### Wybór typu obiektu\n\nPo tym jak dodasz punkt, linię lub obszar, możesz wybrać jakim typem obiektu jest on. Na przykład czy jest to autostrada czy droga polna, supermarket czy kafejka. Edytor pokaże propozycje najczęściej występujących obiektów, ale możesz także wpisać w wyszukiwarce nazwę typu obiektu który chcesz oznaczyć.\n\nKliknij \"i\" w prawym-dolnym rogu przycisku z nazwą danego typu obiektu by dowiedzieć się więcej. Kliknięcie samego przcisku oznaczy obiekt jako obiekt danego typu.\n\n### Użycie Schematów oraz Edycja Tagów\n\nPo tym jak wybierzesz typ, lub zaznaczysz obiekt który już go posiada, edytor wyświetli zestaw pól w których zapisane będą szczegóły obiektu takie jak nazwa czy adres.\n\nPoniżej wcześniej wyświetlonych pól, możesz kliknąć na listę rozwijalną \"Dodaj pole\" i użyć jej do dodania innych detali, jak na przykład link do Wikipedii, ułatwienia dla niepełnosprawnych i inne.\n\nNa samym dole edytora, możesz dodać dowolne tagi do danego obiektu, klikając na \"Dodatkowe tagi\". [Taginfo](http://taginfo.openstreetmap.org/) jest wspaniałym narzędziem, które pozwoli Ci dowiedzieć się więcej na temat popularnych zestawów tagów.\n\nZmiany które zrobisz przy użyciu edytora są automatycznie pokazywane na mapie.\nMożesz cofnąć każdą zmianę klikając przycisk \"Cofnij\".\n",
-            "buildings": "# Budynki\n\nOpenStreetMap jest największą na świecie bazą budynków. Możesz\nprzyczynić się do rozwoju owej bazy.\n\n### Zaznaczanie\n\nMożesz zaznaczyć budynek przez kliknięcie jego obwodu. Podświetli\nto obiekt i otworzy małe menu narzędziowe oraz pasek boczny zawierający\ninformacje o budynku.\n\n### Modyfikowanie\n\nZdarza się, że budynki są umieszczone w nieprawidłowych miejscach\nlub mają nieodpowiednie tagi.\n\nAby przesunąć cały budynek, zaznacz go, a następnie wybierz narzędzie\nprzesuwania. Przesuń kursor myszy, aby zmienić pozycję obiektu, a następnie\nkliknij, gdy już będzie w odpowiednim miejscu.\n\nAby poprawić kształt budynku, kliknij i przeciągnij węzły, które tworzą obwód\nobiektu, w lepiej usytuowane miejsce.\n\n### Tworzenie\n\nJednym z głównych problemów podczas tworzenia budynków jest to,\nże OpenStreetMap przechowuje budynki zarówno w postaci punktów\njak i obszarów. Przyjęło się rysowanie budynków w postaci obszarów, a rysowanie\nfirm, domów czy innej infrastruktury w postaci punktów w obszarze budynku.\n\nZacznij rysować budynek w postaci obszaru przez kliknięcie przycisku 'Obszar'\nw górnym lewym rogu edytora i zakończ go przez naciśnięcie klawisza 'Enter'\nna klawiaturze lub przez kliknięcie na pierwszym rysowanym punkcie w celu\nzamknięcia obszaru.\n\n### Usuwanie\n\nJeżeli budynek jest całkiem błędny - widzisz, że nie ma go na zdjęciach satelitarnych,\na najlepiej sprawdziłeś w terenie, że nie istnieje - możesz go usunąć. Bądź ostrożny\nusuwając obiekty - tak jak po każdej innej modyfikacji, rezultaty są widoczne dla wszystkich,\na zdjęcia satelitarne często nie są aktualne, więc budynek może być po prostu nowo\nwybudowany.\n\nMożesz usunąć budynek przez kliknięcie na nim, a następnie na ikonie\nśmietnika lub wciśnięcie klawisza 'Delete'.\n",
-            "relations": "# Relacje\n\nRelacja to specjalny rodzaj obiektu w OpenStreetMap, który grupuje razem\ninne obiekty. Na przykład dwa powszechne rodzaje relacji to *relacje trasy*\nktóre grupują odcinki drogi należące do konkretnej autostrady lub drogi oraz\n*wielokąty* łączące razem kilka linii, które definiują bardziej złożony obszar\n(na przykład las z polaną w środku).\n\nKażdy element relacji nazywany jest *członkiem*. W pasku bocznym możesz\nzobaczyć do której relacji należy obiekt i kliknąć aby ją zaznaczyć. Gdy relacja\njest zaznaczona, ukaże nam się lista jej członków, które jednocześnie zostaną\npodświetlone na mapie.\n\nPrzeważnie edytor iD automatycznie sprawdza relacje podczas twoich edycji.\nTrzeba pamiętać o ważnej rzeczy, gdy kasujesz jakiś fragment linii (np. aby\ndokładniej go narysować), sprawdź wcześniej do jakich relacji należy oraz\njakie pełni w nich role aby uzupełnić te dane po wyrysowaniu linii.\n\n## Edycja relacji\n\nJeśli chcesz edytować relacje, oto podstawy wiedzy.\n\nAby dodać obiekt do relacji, zaznacz obiekt i wciśnij \"+\" w sekcji \"Wszystkie relacje\"\ni wybierz relację lub wpisz jej nazwę.\n\nAby utworzyć nową relację, zaznacz pierwszy obiekt, który ma być członkiem\nrelacji i wciśnij \"+\" w sekcji \"Wszystkie relacje\" i wybierz \"Nowa relacja...\"\n\nAby usunąć obiekt z relacji, zaznacz obiekt i kliknij ikonkę kosza obok\nrelacji, z której chcesz go usunąć.\n\nMożesz stworzyć wielokąt złożony z otworem używając narzędzia Scalanie.\nNarysuj dwa obszary, gdzie jeden znajduje się wewnątrz drugiego, zaznacz\noba przytrzymując klawisz Shift i kliknij przycisk \"Scal te linie\" (+).\n"
+            "help": "# Pomoc\n\nTo jest edytor [OpenStreetMap](http://www.openstreetmap.org/),\nwolnej i edytowalnej mapy świata. Możesz go używać do dodawania i\naktualizacji danych w twoim rejonie, czyniąc otwartą mapę świata lepszą\ndla każdego.\n\nModyfikacje wprowadzone na tej mapie będą widoczne dla wszystkich\nkorzystających z OpenStreetMap. Aby wprowadzić modyfikacje,\nmusisz się [zalogować](https://www.openstreetmap.org/login).\n\n[Edytor iD](http://ideditor.com/) jest projektem społecznościowym z\n[kodem dostępnym na GitHub](https://github.com/openstreetmap/iD).\n",
+            "editing_saving": "# Edytowanie i zapisywanie\n\nTen edytor został zaprojektowany do pracy online i korzystasz z niego teraz poprzez stronę internetową.\n\n### Wybieranie obiektów\n\nAby wybrać obiekt na mapie, taki jak droga czy POI, kliknij na nim. Spowoduje to podświetlenie wybranego obiektu, otwarcie panelu z informacjami o nim i wyświetlenie menu z działaniami, jakie możesz wykonać na obiekcie.\n\nAby wybrać wiele obiektów na raz, naciśnij i trzymaj klawisz 'Shift'. Następnie klikaj na obiektach, które chcesz wybrać, lub trzymając wciśnięty lewy przycisk myszy z jednoczesnym przeciągnięciem zaznacz prostokątem interesujący cię obszar na mapie. Spowoduje to wybranie wszystkich obiektów wewnątrz niego.\n\n### Zapisywanie edycji\n\nGdy wprowadzisz zmiany poprzez edycję dróg, budynków, miejsc itp., są one zapisane lokalnie aż do czasu przesłania ich na serwer. Nie przejmuj się, gdy popełnisz błąd - zmiany możesz wycofać poprzez kliknięcie na przycisku 'Cofnij', i przywrócić cofnięte zmiany poprzez kliknięcie na przycisku 'Ponów'.\n\nKliknij 'Zapisz' by zapisać grupę edycji - na przykład gdy skończyłeś jeden obszar miejscowości i chcesz przejść do edytowania kolejnego. Przed zapisem będzie jeszcze możliwość przejrzenia swoich edycji, edytor w tym zakresie dostarcza pomocnych podpowiedzi oraz ostrzeżeń w sytuacji, gdy coś w zmianach nie wygląda poprawnie.\n\nJeśli wszystko jest dobrze, to po wpisaniu komentarza wyjaśniającego wykonane zmiany, kliknij ponownie 'Zapisz' by wysłać zmiany do [OpenStreetMap.org](http://www.openstreetmap.org/), gdzie staną się one widoczne dla innych użytkowników oraz dostępne dla nich w celach edycji i dalszego uzupełniania mapy.\n\nJeśli nie masz czasu by skończyć rozpoczęte edytowanie, możesz w dowolnej chwili je przerwać poprzez zamknięcie Edytora. Nie musisz przy tym zapisywać zmian, Edytor zapamięta wszystko lokalnie i po powrocie do edytowania (do tej samej przeglądarki i na tym samym komputerze)  zaoferuje przywrócenie twojej pracy.\n\n### Korzystanie z edytora\n\nMożesz zobaczyć listę skrótów klawiaturowych po naciśnięciu klawisza `?`.\n",
+            "roads": "# Drogi\n\nMożesz tworzyć, poprawiać i usuwać drogi używając tego edytora. Drogi mogą różnorodne:\nścieżki, chodniki, ulice, drogi rowerowe i tak dalej - każdy często uczęszczany odcinek drogi powinien dać się prawidłowo przedstawić na mapie.\n\n### Zaznaczanie/wybieranie\n\nKliknij drogę, aby ją wybrać. Obrys powinien stać się widoczny, wraz z małym menu\nnarzędziowym na mapie oraz panelem bocznym pokazującym więcej informacji o drodze.\n\n### Edytowanie\n\nCzęsto zobaczysz drogi, które nie są wyrównane ze zdjęciami satelitarnymi lub śladami GPS.\nMożesz poprawić te drogi tak, aby były we właściwym miejscu.\n\nNajpierw kliknij na drodze, którą chcesz zmienić. Podświetli ją to oraz pokaże punkty kontrolne, które możesz przesunąć w prawidłowe miejsce. Jeżeli chcesz dodać nowe punkty kontrolne, aby droga była bardziej dokładnie pokazana, dwukrotnie kliknij na częśi drogi bez punktu, a dodany zostanie w tym miejscu nowy punkt.\n\nJeżeli droga łączy się z inną drogą, ale na mapie nie jest prawidłowo połączona z nią, możesz\nprzeciągnąć jeden z puntów kontrolnych na drugą drogę w celu ich połączenia. Prawidłowe połączenia dróg są ważne dla mapy i kluczowe dla wyznaczania tras w nawigacji.\n\nMożesz też kliknąć narzędzie 'Przesuń' lub nacisnąć klawisz `M` aby przesunąć jednocześnie całą\ndrogę, a następnie kliknąć ponownie, aby zatwierdzić to przesunięcie.\n\n### Usuwanie\n\nGdy droga jest całkiem błędna - widzisz, że nie istnieje na zdjęciach satelitarnych, a najlepiej gdy wiesz to po sprawdzeniu w terenie, możesz ją usunąć. Uważaj, gdy usuwasz obiekty - jak w przypadku każdej edycji, usunięcie to będzie widoczne dla wszystkich - a wykorzystane zdjęcie satelitarne może nie być aktualne, więc droga mogła zostać po prostu dopiero niedawno zbudowana i dlatego nie widać jej na zdjęciu.\n\nMożesz usunąć drogę wybierając ją kliknięciem, a następnie klikając na ikonie kosza na śmieci lub wciskając klawisz 'Delete'.\n\n### Tworzenie\n\nOkazało się, że gdzieś powinna być droga, ale jej nie ma? Kliknij przycisk 'Linia' w górnym lewym rogu edytora lub naciśnij klawisz '2' na klawiaturze, aby zacząć rysować linię.\n\nKliknij w miejscu, w którym zaczyna się droga, aby zacząć rysować. Jeżeli droga odchodzi od już istniejącej, zacznij rysowanie poprzez kliknięcie w miejscu, w którym się łączą.\n\nNastępnie klikaj wzdłuż drogi tworząc nowe punkty, tak, aby przebieg rysowanej drogi odpowiadał temu widocznemu na zdjęciach satelitarnych lub ścieżce GPS. Jeżeli droga, którą rysujesz, krzyżuje się z inną, połącz je, klikając na punkcie ich przecięcia. Gdy skończysz rysować, dwukrotnie kliknij ostatni punkt lub naciśnij klawisz 'Enter' na klawiaturze.\n",
+            "gps": "# GPS\n\nZebrane ślady GPS są ważnym źródłem danych dla OpenStreetMap. Ten edytor pozwala na użycie lokalnych śladów - plików \".gpx\" z twojego komputera. Możesz je zbierać za pomocą aplikacji na smartfony, jak również dedykowanych odbiorników GPS.\n\nBy uzyskać więcej informacji jak wykonać pomiar GPS, przeczytaj [Mapping with a smartphone, GPS, or paper](http://learnosm.org/en/mobile-mapping/).\n\nBy użyć śladu GPX do mapowania, przeciągnij i upuść plik GPX na mapę edytora. Jeśli zostanie on rozpoznany, pojawi się na niej jako jasno-purpurowa linia. Kliknij na \"Dane mapy\" po prawej stronie by włączyć, wyłączyć lub przybliżyć widok mapy do miejsca w którym pojawił się ślad.\n\nSam ślad nie jest bezpośrednio zapisywany na serwerach OpenStreetMap - najlepszym sposobem na wykorzystanie go jest rysowanie mapy na jego podstawie; możesz także [wysłać go na serwery OpenStreetMap](http://www.openstreetmap.org/trace/create)\npozwalając tym samym innym użytkownikom na korzystanie z niego.\n",
+            "imagery": "# Zdjęcia\n\nZdjęcia lotnicze/satelitarne są ważną pomocą w rysowaniu map. Kolekcja zdjęć lotniczych,\nsatelitarnych i innych z wolnodostępnych źródeł jest dostępna w edytorze w menu po prawej stronie jako przycisk 'Ustawienia tła'.\n\nDomyślnie dla Polski wyświetlana jest ortofotomapa 'Geoportal.gov.pl' wykonana ze zdjęć lotniczych. Poza krajem domyślną mapą są zdjęcia satelitarne [Bing Maps](http://www.bing.com/maps/), jednak w zależności od kraju mogą być też dostępne inne, lepsze zdjęcia. Niektóre kraje, np. Stany Zjednoczone, Francja czy Dania mają w pewnych miejscach dostępne zdjęcia bardzo wysokiej jakości.\n\nZdjęcia są czasem przesunięte względem danych na mapie z powodu braku ich kalibracji przez dostawcę zdjęć. Jeżeli widzisz dużo dróg przesuniętych względem tła, nie przesuwaj ich od razu w prawidłowe miejsce. Zamiast tego skoryguj przesunięcie zdjęć tak, aby zgadzały się z istniejącymi danymi, przez kliknięcie na 'Przesunięcie warstwy tła' na dole Ustawień tła.\n",
+            "addresses": "# Adresy\n\nAdresy są jedną z najbardziej użytecznych informacji na mapie.\n\nChociaż adresy są często reprezentowane jako części ulic, w OpenStreetMap są one\nzapisywane jako atrybuty budynków i miejsc wzdłuż ulicy.\n\nMożesz dodać nową informację adresową do obrysów budynków oraz do pojedynczych punktów. Pożądanym źródłem danych adresowych jest zwykle zwiedzanie okolicy\nlub własna wiedza. Tak jak w przypadku każdego innego obiektu, kopiowanie danych z komercyjnych źródeł takich jak Google Maps jest zabronione.\n",
+            "inspector": "#Korzystanie z Edytora Obiektu\n\nEdytor Obiektu jest to panel po lewej stronie, który umożliwa edycję szczegółów wybranego obiektu.\n\n### Wybór rodzaju obiektu\n\nGdy dodasz punkt, linię lub obszar, możesz wybrać jakim rodzajem obiektu on jest. Na przykład czy jest to autostrada czy droga osiedlowa, supermarket czy kafejka. Edytor Obiektu pokaże propozycje najczęściej występujących rodzajów obiektów, ale możesz też wyszukać inne poprzez wpisanie w polu wyszukiwania nazwy tego, czego szukasz.\n\nKliknij \"i\" w prawej części przycisku z nazwą danego rodzaju obiektu by dowiedzieć się więcej. Kliknij przycisk by oznaczyć wybrany obiekt jako obiekt danego rodzaju.\n\n\n### Korzystanie z formularzy oraz edycja znaczników\n\nPo tym jak wybierzesz rodzaj obiektu lub gdy zaznaczysz obiekt, który już ma określony rodzaj, Edytor Obiektu wyświetli zestaw pól z informacjami o obiekcie, takimi jak nazwa czy adres.\n\nPoniżej tych pól możesz kliknąć na listę rozwijalną \"Dodaj pole\" i użyć jej do dodania innych informacji, takich jak link do Wikipedii, dostęp dla wózków inwalidzkich i kilku innych.\n\nNa samym dole Edytora Obiektu możesz dodać dowolne znaczniki do wybranego obiektu poprzez kliknięcie na \"Wszystkie znaczniki\". [Taginfo](http://taginfo.openstreetmap.org/) jest wspaniałym narzędziem do poznania popularnych zestawów znaczników.\n\nZmiany, które zrobisz przy użyciu Edytora Obiektu, są automatycznie pokazywane na mapie.\nMożesz cofnąć każdą zmianę klikając przycisk \"Cofnij\".\n",
+            "buildings": "# Budynki\n\nOpenStreetMap jest największą na świecie bazą budynków. Możesz przyczynić się do rozwoju tej bazy.\n\n### Zaznaczanie/wybieranie\n\nMożesz wybrać budynek poprzez kliknięcie na jego obwodzie. Podświetli\nto obiekt i wyświetli panel boczny zawierający informacje o budynku.\nKlikając prawym klawiszem myszy dodatkowo otworzysz małe menu narzędziowe.\n\n### Edytowanie\n\nZdarza się, że budynki są umieszczone w nieprawidłowych miejscach lub mają nieodpowiednie znaczniki.\n\nAby przesunąć cały budynek, wybierz go klikając prawym klawiszem myszy, a następnie kliknij na narzędzie \"Przesuń\". Przesuwając myszą zmieniasz pozycję budynku. Kliknij, gdy będzie już w odpowiednim miejscu by zatwierdzić zmianę.\n\nAby poprawić kształt budynku, kliknij i przeciągnij węzły, które tworzą obwód\nobiektu, w prawidłowe miejsce.\n\n### Tworzenie\n\nJednym z głównych problemów związanych z budynkami jest to,\nże OpenStreetMap pozwala na zapisywanie budynki zarówno w postaci punktów jak i obszarów.\nPodstawową zasadą jest rysowanie budynków w postaci obszarów, a rysowanie\nPOI, firm, sklepów czy innej infrastruktury w postaci punktów wewnątrz budynku.\n\nZacznij rysować budynek w postaci obszaru przez kliknięcie przycisku 'Obszar'\nna górze edytora i zakończ rysowanie przez naciśnięcie klawisza 'Enter'\nna klawiaturze lub przez kliknięcie na pierwszym narysowanym punkcie.\n\n### Usuwanie\n\nJeżeli budynek jest całkiem błędny - widzisz, że nie istnieje na zdjęciach satelitarnych, a najlepiej gdy wiesz to po sprawdzeniu w terenie, możesz go usunąć. Uważaj, gdy usuwasz obiekty - jak w przypadku każdej edycji, usunięcie to będzie widoczne dla wszystkich - a wykorzystane zdjęcie satelitarne może nie być aktualne, więc budynek mógł zostać po prostu dopiero niedawno zbudowany i dlatego nie widać go na zdjęciu.\n\nUsuń budynek poprzez wybranie go kliknięciem,  a następnie kliknij na ikonie\nkosza na śmieci lub naciśnij klawisz 'Delete'.\n",
+            "relations": "# Relacje\n\nRelacja to specjalny rodzaj obiektu w OpenStreetMap, który grupuje razem\ninne obiekty. Na przykład dwa powszechne rodzaje relacji to *relacje trasy*\nktóre grupują odcinki drogi należące do konkretnej autostrady lub drogi oraz\n*wielokąty* łączące razem kilka linii, które definiują bardziej złożony obszar\n(na przykład las z polaną w środku).\n\nKażdy obiekt w relacji nazywany jest *członkiem*. W panelu bocznym możesz\nzobaczyć do jakich relacji należy obiekt, i kliknąć na relacji by ją wybrać. Gdy relacja\njest wybrana, listę jej wszystkich członków zobaczysz w panelu bocznym, zostanę oni jednocześnie podświetlone na mapie.\n\nPrzeważnie edytor iD automatycznie pilnuje relacji podczas twoich edycji.\nMusisz jednak pamiętać, że jeśli usuwasz jakiś fragment linii,  np. aby\ndokładniej go narysować, sprawdź wcześniej do jakich relacji należy oraz\njakie pełni w nich role. Po narysowaniu nowej linii dodaj ją do tych relacji w tych samych rolach.\n\n## Edycja relacji\n\nJeśli chcesz edytować relacje, oto podstawy wiedzy.\n\nBy dodać obiekt do relacji, wybierz obiekt i kliknij przycisk \"+\" w sekcji \"Wszystkie relacje\" na panelu bocznym, i wybierz relację lub wpisz jej nazwę.\n\nBy utworzyć nową relację, zaznacz pierwszy obiekt, który ma być członkiem\nrelacji i kliknij przycisk \"+\" w sekcji \"Wszystkie relacje\" i wybierz \"Nowa relacja...\"\n\nBy usunąć obiekt z relacji, zaznacz obiekt i kliknij ikonkę kosza na śmieci obok\nrelacji, z której chcesz go usunąć.\n\nMożesz stworzyć wielokąt złożony z otworami używając narzędzia \"Scalanie\".\nNarysuj dwa obszary, jeden znajdujący się wewnątrz drugiego. Wybierz oba przytrzymując klawisz Shift i klikając na nich. Kliknij prawym klawiszem myszy by wyświetlić menu narzędziowe. Wybierz w nim przycisk \"+\" (\"Scalanie\").\n\n"
         },
         "intro": {
             "done": "gotowe",
@@ -679,15 +692,15 @@
                     "2nd-avenue": "Długa",
                     "4th-avenue": "Marszałkowska",
                     "5th-avenue": "Perłowa",
-                    "6th-avenue": "Perłowa",
+                    "6th-avenue": "Brylantowa",
                     "6th-street": "Marii Skłodowskiej-Curie",
                     "7th-avenue": "Grzybowa",
                     "8th-avenue": "Legionów",
                     "9th-avenue": "Husarska",
                     "10th-avenue": "Beskidzka",
-                    "11th-avenue": "Lipowa",
+                    "11th-avenue": "Warszawska",
                     "12th-avenue": "Brzozowa",
-                    "access-point-employment": "Punkt Dostępu Pracowników",
+                    "access-point-employment": "undefined",
                     "adams-street": "Wspólna",
                     "andrews-elementary-school": "Szkoła Podstawowa im. Powstańców Warszawy",
                     "andrews-street": "Łomżyńska",
@@ -701,16 +714,16 @@
                     "conservation-park": "Park Konwersacji",
                     "constantine-street": "Wrocławska",
                     "cushman-street": "Truskawkowa",
-                    "dollar-tree": "Drzewo pieniędzy",
+                    "dollar-tree": "Dobry Ciuch",
                     "douglas-avenue": "Aleje Jerozolimskie",
                     "east-street": "Słoneczna ",
                     "elm-street": "Polna",
                     "flower-street": "Kwiatowa ",
                     "foster-street": "Henryka Sienkiewicza",
                     "french-street": "Francuska",
-                    "garden-street": "Pamiętajcie o ogrodach",
+                    "garden-street": "Ogrodowa",
                     "gem-pawnbroker": "Lombard U Stasia",
-                    "golden-finch-framing": "Farma Zbycha",
+                    "golden-finch-framing": "Pracownia Ram",
                     "grant-avenue": "Hoża",
                     "hoffman-pond": "Staw Jaracza",
                     "hoffman-street": "Jaracza",
@@ -721,7 +734,7 @@
                     "las-coffee-cafe": "Kawiarnia Nad Jeziorem",
                     "lincoln-avenue": "Rycerska",
                     "lowrys-books": "Książki Anety",
-                    "lynns-garage": "Garaż Adama",
+                    "lynns-garage": "Warsztat Adama",
                     "main-street-barbell": "Siłownia Pan Biceps",
                     "main-street-cafe": "Kawiarnia Na Głównej",
                     "main-street-fitness": "Miejski Fitness",
@@ -745,7 +758,7 @@
                     "pizza-hut": "Pizza Hut",
                     "portage-avenue": "Lipowa ",
                     "portage-river": "Rzeka Lipowa",
-                    "preferred-insurance-services": "Ubezpieczenia Na Życie",
+                    "preferred-insurance-services": "Ubezpieczenia na Życie",
                     "railroad-drive": "Kolejowa",
                     "river-city-appliance": "Europejskie AGD",
                     "river-drive": "Nadbrzeżna",
@@ -755,8 +768,8 @@
                     "riverwalk-trail": "Parkowa",
                     "riviera-theatre": "Teatr Roma",
                     "rocky-river": "Kamionkówka",
-                    "saint-joseph-river": "Czesława Małka",
-                    "scidmore-park-petting-zoo": "Ogródek zoologiczny w Chrząszczyżewoszycach",
+                    "saint-joseph-river": "Rega",
+                    "scidmore-park-petting-zoo": "Małe Zoo w Chrząszczyżewoszycach",
                     "scidmore-park": "Park Inwalidów Wojennych",
                     "scouter-park": "Park hulajnożny",
                     "sherwin-williams": "Mrówka",
@@ -767,96 +780,141 @@
                     "three-rivers-city-hall": "Urząd Miasta Chrząszczyżewoszyce",
                     "three-rivers-elementary-school": "Szkoła Podstawowa w Chrząszczyżewoszycach",
                     "three-rivers-fire-department": "Komenda Miejska Państwowej Straży Pożarnej w Chrząszczyżewoszycach",
-                    "three-rivers-high-school": "Uniwersytet w Chrząszczyżewoszczycach",
-                    "three-rivers-middle-school": "Szkoła Średnia w Chrząszczyżewoszyczycach",
+                    "three-rivers-high-school": "Liceum w Chrząszczyżewoszczycach",
+                    "three-rivers-middle-school": "Gimnazjum w Chrząszczyżewoszyczycach",
                     "three-rivers-municipal-airport": "Lotnisko Regionalne w Chrząszczyżewoszczycach",
                     "three-rivers-post-office": "Urząd Pocztowy w Chrząszczyżewoszczycach",
                     "three-rivers-public-library": "Biblioteka Publiczna w Chrząszczyżewoszczycach",
                     "three-rivers": "Chrząszczyżewoszyce",
                     "unique-jewelry": "Błyszcząca Biżuteria",
                     "walnut-street": "Elizy Orzeszkowej",
-                    "washington-street": "Warszawska",
+                    "washington-street": "Lipowa",
                     "water-street": "Józefa Piłsudskiego",
                     "west-street": "Zachodnia",
                     "wheeler-street": "Królewska",
                     "william-towing": "Pomoc Drogowa Janusza",
                     "willow-drive": "Pogodna",
                     "wood-street": "Drewniana",
-                    "world-fare": "Dobry Sklep"
+                    "world-fare": "Pamiątki"
                 }
             },
             "welcome": {
                 "title": "Witamy",
                 "welcome": "Witaj! Ten poradnik nauczy Cię podstaw edytowania OpenStreetMap.",
                 "practice": "Dane w tym poradniku są dostępne tylko w celach edukacyjnych, żadna zmiana wykonana w poradniku nie zostanie zapisana.",
-                "words": "Poradnik wprowadzi kilka nowych pojęć i koncepcji. Każdy nowy zwrot będzie zaznaczony *kursywą*.",
-                "mouse": "Możesz użyć dowolnego \"urządzenia wejścia\" aby edytować mapę, ale poradnik zakłada, że posiadasz myszkę z lewym i prawym przyciskiem. **Jeśli chcesz podłączyć myszkę, zrób to teraz, a potem naciśnij OK.**",
+                "words": "Poradnik wprowadzi kilka nowych pojęć i koncepcji. Każde nowe pojęcie będzie oznaczone *kursywą*.",
+                "mouse": "Możesz użyć dowolnego \"urządzenia wejścia\" aby edytować mapę, jednak poradnik zakłada, że posiadasz myszkę z lewym i prawym przyciskiem. **Jeśli chcesz podłączyć myszkę, zrób to teraz, następnie naciśnij OK.**",
                 "leftclick": "Kiedy poradnik prosi cię o kliknięcie lub podwójne kliknięcie, użyj lewego przycisku. Na touchpadzie może to być jedno kliknięcie, lub jedno dotknięcie. **Kliknij lewym przyciskiem {num} razy.**",
                 "rightclick": "Czasami możemy Cię poprosić o użycie prawego przycisku. Na touchpadzie może to być Ctrl+kliknięcie lub dotknięcie dwoma palcami. **Kliknij prawym przyciskiem {num} razy.**",
-                "chapters": "W porządku! Klikając na przyciski poniżej możesz w każdej chwili zrestartować rozdział (jeśli utknąłeś) lub pominąć te rozdziały, które Cię nie interesują. Zaczynajmy! **Kliknij '{next}', aby kontynuować.**"
+                "chapters": "Dobrze! Klikając na przyciski poniżej możesz pominąć te rozdziały, które Cię nie interesują,   lub zacząć rozdział od nowa, jeśli utknąłeś. Zaczynajmy! **Kliknij '{next}', aby kontynuować.**"
             },
             "navigation": {
                 "title": "Nawigacja",
-                "drag": "Główny obszar mapy pokazuje dane OpenStreetMap na tle podkładu.{br}Możesz poruszać się po niej, przeciągając i przewijając tak jak po każdej mapie internetowej. Dodatkowo możesz używać klawiszów strzałek. **Przeciągnij mapę!**",
-                "zoom": "Możesz przybliżać i oddalać widok poprzez kręcenie pokrętłem myszy, przy użyciu touchpada lub przycisków {plus} / {minus}. **Przybliż mapę!**",
-                "features": "By opisać rzeczy pojawiające się na mapie używamy słowa *obiekty*. Wszystko w świecie rzeczywistym może zostać odwzorowane - zmapowane - jako obiekt w OpenStreetMap.",
-                "points_lines_areas": "Obiekty mapy są przedstawione przy użyciu *punktów, linii oraz obszarów.*",
-                "nodes_ways": "W OpenStreetMap punkty (ang. points) często nazywane są *węzłami* (ang. nodes), zaś linie oraz obszary są czasami nazywane *ścieżkami* (ang. ways).",
-                "click_townhall": "Wszystkie obiekty mogą zostać zaznaczone poprzez kliknięcie. **Kliknij na punkt aby go wybrać.**",
-                "selected_townhall": "Wspaniale! Wybrałeś punkt. Wybrane obiekty odznaczają się pulsującą poświatą.",
-                "editor_townhall": "Gdy dowolny obiekt jest zaznaczony *edytor obiektów* staje się aktywny.",
-                "preset_townhall": "Na samej górze edytora prezentowany jest typ obiektu. Punkt który wybrałeś posiada typ {preset}.",
+                "drag": "Główny obszar mapy pokazuje dane OpenStreetMap umieszczone nad warstwą tła.{br}Możesz przesuwać mapę trzymając wciśnięty lewy przycisk myszy podczas ruszania nią. Poza tym możesz używać klawiszów strzałek. **Przeciągnij mapę!**",
+                "zoom": "Możesz przybliżać i oddalać widok poprzez kręcenie kółkiem myszy, poprzez użycie touchpada lub przycisków {plus} / {minus} po prawej stronie. **Przybliż mapę!**",
+                "features": "Rzeczy pojawiające się na mapie określamy słowem *obiekty*. Wszystko w świecie rzeczywistym może zostać zmapowane, czyli odwzorowane, jako obiekt w OpenStreetMap.",
+                "points_lines_areas": "Obiekty mapy są przedstawione przy użyciu *punktów, linii* oraz *obszarów.*",
+                "nodes_ways": "W OpenStreetMap punkty (ang. points) czasem nazywane są *węzłami* (ang. nodes), zaś linie oraz obszary są czasami nazywane *drogami* (ang. ways).",
+                "click_townhall": "Wszystkie obiekty mogą zostać wybrane poprzez kliknięcie na nich. **Kliknij na punkt, aby go wybrać.**",
+                "selected_townhall": "Świetnie! Wybrałeś punkt. Wybrane obiekty odznaczają się pulsującą poświatą.",
+                "editor_townhall": "Gdy dowolny obiekt jest wybrany *Edytor obiektu* staje się aktywny.",
+                "preset_townhall": "Na samej górze Edytora obiektu pokazany jest rodzaj obiektu. Punkt, który wybrałeś, posiada rodzaj \"{preset}\".",
+                "fields_townhall": "Środkowa część Edytora obiektu zawiera \"pola\" pokazujące atrybuty obiektu, takie jak jego nazwa i adres.",
+                "close_townhall": "**Zamknij Edytor obiektu poprzez naciśnięcie klawisza Esc lub kliknięcie na {button} w górnym rogu.**",
                 "search_street": "Możesz także wyszukiwać obiekty widoczne w aktualnym oknie, lub gdziekolwiek indziej na świecie. **Wyszukaj '{name}'.**",
-                "choose_street": "**Wybierz {name} z listy zaznaczonych.**",
-                "selected_street": "Świetnie! Wybrano {name}."
+                "choose_street": "**Wybierz {name} z listy.**",
+                "selected_street": "Świetnie! {name} została wybrana.",
+                "editor_street": "Widoczne pola dla ulicy są inne niż poprzednie pola dla Ratusza.{br} Dla tej ulicy Edytor obiektu pokazuje pola takie jak '{field1}' oraz '{field2}'. **Zamknij Edytor obiektu poprzez naciśnięcie klawisza Esc lub kliknięcie na {button} w górnym rogu.**",
+                "play": "Spróbuj poprzesuwać teraz mapę i wybierać inne obiekty, by zobaczyć jakie jeszcze inne rzeczy można umieszczać w OpenStreetMap. **W celu przejścia do następnego etapu samouczka, kliknij na '{next}'.**"
             },
             "points": {
                 "title": "Punkty",
-                "add_point": "*Punkty* mogą być używane do reprezentowania obiektów, takich jak sklepy, restauracje czy pomniki.{br}Zaznaczają one konkretną lokalizację i opisują co się tam znajduje. **Kliknij na przycisk Punkt {button}, aby dodać nowy punkt.**",
-                "search_cafe": "Istnieje wiele różnych obiektów, które mogą być reprezentowane za pomocą punktów. Dodany przed chwilą punkt jest kawiarnią. **Wyszukaj '{preset}'.**",
+                "add_point": "*Punkty* mogą być używane do reprezentowania obiektów takich jak sklepy, restauracje czy pomniki.{br}Wskazują one konkretną lokalizację i opisują co się w niej znajduje. **Kliknij na {button} Punkt, by dodać nowy punkt.**",
+                "place_point": "By umieścić nowy punkt na mapie, przesuń kursor myszy do miejsca, w którym powinien się znajdować. Następnie kliknij lewym klawiszem myszy lub naciśnij Spację.. **Przesuń kursor myszy nad ten budynek, kliknij lewy przycisk myszy lub naciśnij Spację.**",
+                "search_cafe": "Istnieje wiele różnych obiektów możliwych do przedstawienia w postaci punktów. Dodany przed chwilą punkt jest kawiarnią. **Wyszukaj '{preset}'.**",
                 "choose_cafe": "**Wybierz {preset} z listy.",
-                "feature_editor": "Punkt jest teraz oznaczony jako kawiarnia. Używając edytora, możemy dodać więcej informacji o tym obiekcie."
+                "feature_editor": "Punkt jest teraz oznaczony jako kawiarnia. Używając Edytora obiektu, możemy dodać więcej informacji o kawiarni.",
+                "add_name": "W OpenStreetMap wszystkie pola są opcjonalne, możesz zostawisz jakieś puste, jeśli nie wiesz, co wpisać.{br}Przyjmijmy, że znasz tę kawiarnię i wiesz jak się nazywa. **Wpisz nazwę kawiarni.**",
+                "add_close": "Edytor obiektu automatycznie zapamięta wszystkie twoje zmiany. **Kiedy wpiszesz już nazwę, naciśnij Esc, Enter lub kliknij na {button} by zamknąć Edytor obiektu.**",
+                "reselect": "Punkty często już istnieją, ale zawierają błędy lub są niekompletne. Możesz edytować istniejące punkty. **Kliknij na dopiero co utworzonej kawiarni, by ją wybrać.** ",
+                "update": "Wprowadź więcej informacji o tej kawiarni. Możesz zmienić jej nazwę, dodać rodzaj kuchni lub uzupełnić dane adresowe. **Zmień informacje o kawiarni.**",
+                "update_close": "**Gdy skończysz poprawiać kawiarnię, naciśnij klawisz Esc, Enter lub kliknij na {button} by zamknąć Edytor obiektu.**",
+                "rightclick": "Możesz kliknąć prawym klawiszem myszy na każdym obiekcie by wyświetlić \"menu edycyjne\" z listą działań, jakie możesz na nim wykonać. **Kliknij prawym przyciskiem myszy na utworzonym punkcie by wyświetlić menu edycyjne.**",
+                "delete": "Możesz usuwać obiekty, które nie istnieją w rzeczywistości.{br}Usunięcie obiektu z OpenStreetMap usuwa go dla wszystkich użytkowników mapy, przed jego skasowaniem należy więc mieć całkowitą pewność, że obiektu naprawdę nie ma. **Kliknij na przycisku {button} by usunąć punkt.**",
+                "undo": "Zawsze możesz wycofać wprowadzone zmiany, za wyjątkiem tych zapisanych już wcześniej w OpenStreetMap. **Kliknij przycisk {button} by cofnąć usunięcie i przywrócić punkt.**",
+                "play": "Wiesz już jak tworzyć i edytować punkty, poćwicz więc teraz tworząc kilka dodatkowych punktów. \n**W celu przejścia do następnego etapu samouczka, kliknij na '{next}'.**"
             },
             "areas": {
                 "title": "Obszary",
-                "add_playground": "*Obszary* służą do wyznaczania granic dla takich obiektów jak jeziora, budynki, czy osiedla mieszkaniowe.{br}Mogą również zostać użyte do mapowania wielu obiektów, które normalnie przedstawiane są za pomocą punktów. **Kliknij na przycisk Obszar {button}, aby dodać nowy obszar.**",
+                "add_playground": "*Obszary* służą do wyznaczania granic dla takich obiektów jak jeziora, budynki czy osiedla mieszkaniowe.{br}Mogą również zostać użyte do mapowania wielu obiektów, które zwykle przedstawiane są za pomocą punktów. **Kliknij na {button} Obszar, by dodać nowy obszar.**",
+                "start_playground": "Umieść plac zabaw na mapie poprzez narysowanie go jako obszaru. Obszary są rysowane poprzez umieszczanie \"węzłów\" wzdłuż zewnętrznego brzegu obiektu. **Kliknij lub naciśnij Spację i umieść punkt początkowy w jednym z rogów placu zabaw..**",
+                "continue_playground": "Dalej rysuj obszar, umieszczając więcej punktów wzdłuż brzegu placu zabaw. Możesz przy tym łączyć obszar z już istniejącymi ścieżkami. {br}Podpowiedź: jeśli będziesz trzymać wciśnięty klawisz 'Alt', tworzone węzły nie zostaną połączone do już istniejących obiektów. **Narysuj cały obszar placu zabaw.**",
+                "finish_playground": "Zakończ rysowanie obszaru poprzez naciśnięcie Enter lub poprzez ponowne kliknięcie na pierwszym lub ostatnim punkcie. **Zakończ rysowanie obszaru placu zabaw.**",
                 "search_playground": "**Wyszukaj '{preset}'.**",
                 "choose_playground": "** Wybierz {preset} z listy.**",
+                "add_field": "Plac zabaw nie ma żadnej nazwy, dlatego nie wpisuj nic w pole Nazwa.{br}Zamiast tego wpisz dodatkowe informacji o nim w polu \"Opis obiektu\".  **Rozwiń listę Dodaj pole.**",
                 "choose_field": "**Wybierz {field} z listy.**",
                 "retry_add_field": "Nie zaznaczyłeś pola {field}. Spróbuj ponownie.",
-                "describe_playground": "**Dodaj opis, a następnie przyciśnij przycisk {button}, aby zamknąć edytor.**"
+                "describe_playground": "**Dodaj opis, a następnie kliknij na przycisku {button}, by zamknąć Edytor obiektu.**",
+                "play": "Bardzo dobrze! Poćwicz rysując jeszcze kilka obszarów i sprawdź, jakie inne rodzaje obiektów obszarowych możesz dodać do OpenStreetMap. **W celu przejścia do następnego etapu samouczka, kliknij na '{next}'.**"
             },
             "lines": {
                 "title": "Linie",
-                "add_line": "*Linie* są używane do reprezentowania obiektów takich jak drogi, tory czy rzeki. **Naciśnij przycisk Linia {button}, aby dodać nową linię.**",
-                "intersect": "Kliknij lub wciśnij spację, aby dodać więcej punktów do linii.{br}Drogi i wiele innych typów linii są częścią większej sieci. Ważne jest ich prawidłowe połączenie, aby programy do wyznaczania tras działały poprawnie. **Kliknij na {name}, aby dodać skrzyżowanie łączące dwie linie.**",
+                "add_line": "*Linie* są używane do reprezentowania obiektów takich jak drogi, tory czy rzeki. **Kliknij na {button} Linia, by dodać nową linię.**",
+                "start_line": "Tutaj brakuje drogi.  Spróbuj ją dodać!{br}W OpenStreetMap, linie powinny być prowadzone środkiem drogi. W czasie rysowania możesz przesuwać mapę oraz ją przybliżać i oddalać. **Zacznij rysować nową linię poprzez kliknięcie na górze w początek brakującej drogi.**",
+                "intersect": "Kliknij lub naciśnij Spację, by dodać więcej punktów do linii.{br}Drogi i wiele innych rodzajów linii są częścią większej sieci. Ważne jest ich prawidłowe wzajemne połączenie, aby programy do nawigacji działały poprawnie. **Kliknij na ulicy {name}, by utworzyć połączenie tych dwóch linii.**",
                 "retry_intersect": "Droga musi się skrzyżować z drogą {name}. Spróbuj ponownie!",
+                "continue_line": "Dalej rysuj linię nowej drogi. Pamiętaj, że możesz przesuwać mapę oraz ją przybliżać i oddalać, gdy tego potrzebujesz.{br}Kiedy narysujesz wszystko, kliknij ponownie na ostatnim punkcie. **Dokończ rysowanie drogi.**",
                 "choose_category_road": "**Wybierz {category} z listy**",
-                "choose_preset_residential": "Istnieje wiele rodzajów dróg, jednak ta jest drogą lokalną. **Wybierz typ {preset}.**",
-                "retry_preset_residential": "Nie zaznaczyłeś typu {preset}. **Kliknij tutaj, aby wybrać ponownie.**",
-                "name_road": "**Nazwij drogę, a następnie wciśnij Escape, Enter lub wciśnij przycisk {button}, aby zamknąć edytor obiektów.**",
-                "did_name_road": "Nieźle! Następnie nauczysz się jak zmienić kształt linii.",
-                "update_line": "Zdarza się sytuację w których trzeba zmienić kształt istniejącej linii na inny. Geometria tej drogi nie jest w porządku.",
-                "finish_drag_endpoint": "Ta kropka wygląda dobrze. **Zwolnij lewy przycisk myszki, aby zakończyć przeciąganie.**",
-                "split_intersection": "**Naciśnij przycisk {button}, aby rozdzielić {street}.**",
-                "retry_split": "Nie nacisnąłeś na przycisk Rozdziel. Spróbuj ponownie.",
-                "did_split_single": "**Naciśnij górną część {street2}, aby ją wybrać.**",
-                "multi_rightclick": "Dobrze! Obie linie do usunięcia są już zaznaczone. **Kliknij prawym przyciskiem myszki na jedną z linii, aby wyświetlić menu edycji.**",
-                "multi_delete": "**Naciśnij przycisk {button}, aby usunąć dodatkowe linie.**",
-                "retry_delete": "Nie nacisnąłeś na przycisk Usuń. Spróbuj ponownie."
+                "choose_preset_residential": "Istnieje wiele rodzajów dróg, ta rysowana jest drogą lokalną. **Wybierz rodzaj {preset}.**",
+                "retry_preset_residential": "Nie wybrałeś rodzaju {preset}. **Kliknij tutaj, aby wybrać ponownie.**",
+                "name_road": "**Wpisz nazwę drogi, a następnie wciśnij klawisz Esc, Enter lub kliknij na {button}, by zamknąć Edytor obiektu.**",
+                "did_name_road": "Nieźle! Następnie nauczysz się, jak zmienić kształt linii.",
+                "update_line": "Zdarzają się sytuację, gdy konieczna jest zmiana kształtu istniejącej linii. Tutaj widzisz drogę, która nie wydaje się być dobrze narysowana.",
+                "add_node": "Możesz dodać parę węzłów do tej linii by poprawić jej kształt. Jednym ze sposobów jest dwukrotne kliknięcie myszą na linii w miejscu, w którym chcesz dodać węzeł.  **Kliknij dwukrotnie na linii, by utworzyć nowy węzeł.**",
+                "start_drag_endpoint": "Gdy linia jest wybrana, możesz przeciągnąć którykolwiek z jej węzłów poprzez kliknięcie i przytrzymanie lewego klawisza myszy wraz z jednoczesnym jej przesunięciem.**Przeciągnij punkt końcowy w miejsce, w którym te drogi faktycznie tworzą skrzyżowanie.**",
+                "finish_drag_endpoint": "To miejsce wygląda na właściwe. **Puść lewy przycisk myszki, by zakończyć przeciąganie.**",
+                "start_drag_midpoint": "Pośrodku węzłów linii są narysowane małe trójkąciki.  Dzięki nim także możliwe jest tworzenie nowych węzłów drogi - poprzez przeciągnięcie tych trójkącików w nowe miejsce.  **Przeciągnij trójkącik pośrodku by utworzyć nowy węzeł wzdłuż drogi..**",
+                "continue_drag_midpoint": "Linia wygląda teraz znacznie lepiej! Dalej poprawiaj linię poprzez dwukrotne kliknięcie lub przeciąganie trójkącików, aż jej kształt będzie odpowiadał kształtowi drogi.. **Jeśli wygląd linii jest już dobry, kliknij OK.**",
+                "delete_lines": "Możesz usuwać linie tych dróg, które nie istnieją w rzeczywistości.{br}Tutaj masz przykład ulicy {street}, która nie została jeszcze zbudowana. Możesz poprawić mapę w tym miejscu usuwając zbędne linie.",
+                "rightclick_intersection": "Najbliższą istniejąca ulicą jest ulica {street1}, tak więc musisz *rozdzielić* ulicę {street2} na tym skrzyżowaniu i usunąć wszystko co jest powyżej niego.. **Kliknij prawym klawiszem myszy na węźle skrzyżowania.**",
+                "split_intersection": "**Kliknij na {button}, by rozdzielić {street}.**",
+                "retry_split": "Musisz kliknąć na przycisku Rozdziel. Spróbuj ponownie.",
+                "did_split_multi": "Świetnie! Ulica {street1} jest teraz rozdzielona na dwie części. Górna część może zostać usunięta. **Kliknij na górnej części ulicy {street2}, by ją wybrać.**",
+                "did_split_single": "**Kliknij na górnej części ulicy {street2}, by ją wybrać.**",
+                "multi_select": "Ulica {selected} jest teraz wybrana. Wybierz także ulicę {other1}. Wiele obiektów naraz możesz zaznaczyć klikając na nich przy wciśniętym klawiszu Shift. **Shift+klik na {other2}.**",
+                "multi_rightclick": "Dobrze! Obie linie do usunięcia są teraz wybrane. **Kliknij prawym klawiszem myszy na jednej z linii, by wyświetlić menu edycji.**",
+                "multi_delete": "**Kliknij przycisk {button}, by usunąć zbędne linie.**",
+                "retry_delete": "Nie kliknąłeś na przycisku Usuń. Spróbuj ponownie.",
+                "play": "Świetnie! Wykorzystaj teraz zdobyte w tym etapie umiejętności i poćwicz edytowanie innych linii. **W celu przejścia do następnego etapu samouczka, kliknij na '{next}'.**"
             },
             "buildings": {
                 "title": "Budynki",
+                "add_building": "OpenStreetMap jest największą na świecie bazą budynków.{br}Możesz przyczynić się do rozwoju tej bazy obrysowując budynki, które jeszcze nie zostały zmapowane. **Kliknij na {button} Obszar, by dodać nowy obszar.**",
+                "start_building": "Dodaj ten budynek do mapy, obrysowując jego brzegi.{br}Budynki powinny być obrysowane u ich podstawy i możliwe jak najdokładniej.**Kliknij lub naciśnij Spację w jednym z narożników budynku, by umieścić pierwszy węzeł.**",
+                "continue_building": "Dalej dodawał węzły w celu obrysowania całego budynku. Pamiętaj, że możesz przybliżać mapę, jeśli chcesz precyzyjniej zmapować budynek.{br}Zakończ rysowanie budynku naciskając Enter lub klikając na pierwszym lub ostatnim z narysowanych węzłów.**Dokończ obrysowanie budynku.**",
+                "retry_building": "Chyba masz problemy z umieszczeniem węzłów w narożnikach budynku. Spróbuj ponownie!",
                 "choose_category_building": "**Wybierz {category} z listy.**",
-                "close": "**Naciśnij Escape lub wciśnij przycisk {button}, by zamknąć edytor obiektów.**",
+                "choose_preset_house": "Jest wiele rodzajów budynków, a ten wygląda na dom jednorodzinny.{br}Jeśli nie znasz rodzaju rysowanego budynku, możesz wybrać rodzaj ogólny.**Wybierz rodzaj {preset}.**",
+                "close": "**Naciśnij Esc lub kliknij przycisk {button}, by zamknąć Edytor obiektu.**",
+                "rightclick_building": "**Kliknij prawym klawiszem myszy by wybrać utworzony budynek i wyświetlić menu edycyjne.**",
                 "square_building": "Budynek, który właśnie dodałeś, będzie wyglądał lepiej z idealnie wyrównanymi narożnikami. **Kliknij na przycisk {button}, aby wyprostować kształt budynku.**",
-                "retry_square": "Nie nacisnąłeś na przycisk Popraw prostopadłość. Spróbuj ponownie.",
+                "retry_square": "Należy kliknąć na przycisku \"Popraw prostopadłość\". Spróbuj ponownie.",
+                "done_square": "Zauważ, jak narożniki budynku zmieniły położenie. Zaraz nauczysz się kolejnej przydatnej rzeczy.",
+                "add_tank": "Teraz obrysujesz okrągły zbiornik. **Kliknij na {button} Obszar, by dodać nowy obszar.**",
+                "start_tank": "Nie musisz rysować idealnego okręgu. Po prostu narysuj obszar wewnątrz zbiornika tak, by węzły dotykały jego brzegu. **Kliknij lub naciśnij Spację by umieścić pierwszy węzeł na brzegu zbiornika.**",
+                "continue_tank": "Dodaj jeszcze kilka węzłów wzdłuż brzegu. Okrąg zostanie utworzony między tymi węzłami.{br}Zakończ rysować obszar naciskając Enter lub klikając na pierwszym lub ostatnim z narysowanych węzłów. **Dokończ obrysowywanie zbiornika.**",
                 "search_tank": "**Wyszukaj '{preset}'.**",
                 "choose_tank": "**Wybierz {preset} z listy.**",
-                "retry_circle": "Nie nacisnąłeś na przycisk Zaokrąglij. Spróbuj ponownie."
+                "rightclick_tank": "**Kliknij prawym klawiszem myszy by wybrać utworzony zbiornik i wyświetlić menu edycyjne.**",
+                "circle_tank": "**Kliknij na {button} by zaokrąglić zbiornik.**",
+                "retry_circle": "Należy nacisnąć na przycisk Zaokrąglij. Spróbuj ponownie.",
+                "play": "Świetnie! Poćwicz obrysowywanie jeszcze na innych budynkach i wypróbuj pozostałe polecenia z menu edycyjnego. **W celu przejścia do następnego etapu samouczka, kliknij na '{next}'.**"
             },
             "startediting": {
                 "title": "Rozpocznij edytowanie",
+                "help": "Teraz możesz rozpocząć edytowanie OpenStreetMap!{br}Ten samouczek możesz uruchomić ponownie w dowolnym momencie, możesz też zajrzeć do dokumentacji klikając na przycisku pomocy {button} lub naciskając klawisz '{key}'.",
+                "shortcuts": "Możesz zobaczyć wszystkie polecenia wraz z ich skrótami klawiaturowymi po naciśnięciu klawisza '{key}'.",
                 "save": "Nie zapomnij o regularnym zapisywaniu swoich zmian!",
                 "start": "Zacznij mapować!"
             }
@@ -896,7 +954,8 @@
                     "title": "Nawigacja",
                     "pan": "Przesuń mapę",
                     "pan_more": "Przesuń mapę o jeden ekran",
-                    "zoom": "Przybliż / Oddal"
+                    "zoom": "Przybliż / Oddal",
+                    "zoom_more": "Przybliż / Oddal mocniej"
                 },
                 "help": {
                     "title": "Pomoc",
@@ -909,44 +968,45 @@
                     "background_switch": "Wróć do ostatniego podkładu",
                     "map_data": "Wyświetl opcje danych mapy",
                     "fullscreen": "Wejdź w tryb pełnoekranowy",
+                    "wireframe": "Przełącz tryb szkieletowy",
                     "minimap": "Przełącz minimapę"
                 },
                 "selecting": {
                     "title": "Wybieranie obiektów",
                     "select_one": "Wybierz jeden obiekt",
-                    "select_multi": "Wybieranie wielu obiektów",
-                    "lasso": "Narysuj lasso wyboru wokół obiektów"
+                    "select_multi": "Wybierz wiele obiektów",
+                    "lasso": "Wybierz obiekty lassem"
                 },
                 "with_selected": {
-                    "title": "Z zaznaczonym obiektem",
+                    "title": "Z wybranym obiektem",
                     "edit_menu": "Przełącz menu edycji"
                 },
                 "vertex_selected": {
-                    "title": "Z zaznaczonym węzłem",
+                    "title": "Z wybranym węzłem",
                     "previous": "Przejdź do poprzedniego węzła",
                     "next": "Przejdź do następnego węzła",
                     "first": "Przejdź do pierwszego węzła",
                     "last": "Przejdź do ostatniego węzła",
-                    "change_parent": "Przełącz nadrzędną drogę"
+                    "change_parent": "Następna linia z tym węzłem"
                 }
             },
             "editing": {
                 "title": "Edytowanie",
                 "drawing": {
                     "title": "Rysowanie",
-                    "add_point": "Tryb 'Dodawania punktu'",
-                    "add_line": "Tryb 'Dodawania linii'",
-                    "add_area": "Tryb 'Dodawania obszaru'",
+                    "add_point": "Tryb 'Dodawanie punktu'",
+                    "add_line": "Tryb 'Dodawanie linii'",
+                    "add_area": "Tryb 'Dodawanie obszaru'",
                     "place_point": "Umieść punkt",
-                    "disable_snap": "Przytrzymaj by wyłączyć przyciąganie do punktu",
+                    "disable_snap": "Przytrzymaj, by wyłączyć przyciąganie do punktu",
                     "stop_line": "Zakończ rysowanie linii lub obszaru"
                 },
                 "operations": {
                     "title": "Działania",
-                    "continue_line": "Kontynuuj linię w zaznaczonym węźle",
+                    "continue_line": "Kontynuuj linię w wybranym węźle",
                     "merge": "Złącz (połącz) wybrane obiekty",
-                    "disconnect": "Rozłącz obiekty w zaznaczonym węźle",
-                    "split": "Rozdziel linię na dwie części w zaznaczonym węźle",
+                    "disconnect": "Rozłącz obiekty w wybranym węźle",
+                    "split": "Rozdziel linię na dwie części w wybranym węźle",
                     "reverse": "Odwróć linię",
                     "move": "Przenieś wybrane obiekty",
                     "rotate": "Obróć wybrane obiekty",
@@ -964,6 +1024,17 @@
                     "redo": "Ponów ostatnie działanie",
                     "save": "Zapisz zmiany"
                 }
+            },
+            "tools": {
+                "title": "Narzędzia",
+                "info": {
+                    "title": "Informacja",
+                    "all": "Przełącz wszystkie panele informacyjne",
+                    "background": "Przełącz panel tła",
+                    "history": "Przełącz panel historii",
+                    "location": "Przełącz panel lokalizacji",
+                    "measurement": "Przełącz panel pomiarów"
+                }
             }
         },
         "presets": {
@@ -972,7 +1043,7 @@
                     "name": "Przeszkody"
                 },
                 "category-building": {
-                    "name": "Budynek"
+                    "name": "Budynki"
                 },
                 "category-golf": {
                     "name": "Golf"
@@ -1013,7 +1084,7 @@
             },
             "fields": {
                 "access": {
-                    "label": "Prawo wstępu mają",
+                    "label": "Prawo wstępu/wjazdu mają",
                     "options": {
                         "designated": {
                             "description": "Dostęp jest dozwolony na podstawie znaków lub określonych przepisów lokalnych",
@@ -2776,7 +2847,7 @@
                     "terms": "granica,administracyjna,granice,administracyjne"
                 },
                 "building": {
-                    "name": "Budynek",
+                    "name": "Budynek (ogólny)",
                     "terms": "budynek,budowla,dom"
                 },
                 "building/apartments": {
@@ -2791,28 +2862,28 @@
                     "name": "Bunkier"
                 },
                 "building/cabin": {
-                    "name": "Chata",
-                    "terms": "Kabina"
+                    "name": "Domek letniskowy/kempingowy",
+                    "terms": "chata, dom letniskowy"
                 },
                 "building/cathedral": {
                     "name": "Budynek katedralny",
                     "terms": "Budynek katedry, katedra"
                 },
                 "building/chapel": {
-                    "name": "kaplica",
+                    "name": "Kaplica",
                     "terms": "kapliczka"
                 },
                 "building/church": {
-                    "name": "kościół",
-                    "terms": "budynek kościelny"
+                    "name": "Budynek kościoła",
+                    "terms": "budynek kościelny, kościół, cerkiew"
                 },
                 "building/college": {
                     "name": "Budynek szkoły policealnej",
                     "terms": "Szkoła policealna"
                 },
                 "building/commercial": {
-                    "name": "Nieruchomość komercyjna",
-                    "terms": "sklep,komercyjny,sprzedaż,handlowy"
+                    "name": "Budynek handlowy/biurowy",
+                    "terms": "sklep,sprzedaż,handlowy,biurowy,biuro"
                 },
                 "building/construction": {
                     "name": "Budynek w budowie",
@@ -2850,7 +2921,7 @@
                     "terms": "budynek hotelowy"
                 },
                 "building/house": {
-                    "name": "Dom",
+                    "name": "Dom jednorodzinny",
                     "terms": "dom,domek,chata"
                 },
                 "building/hut": {
@@ -2879,7 +2950,7 @@
                 },
                 "building/roof": {
                     "name": "Zadaszenie",
-                    "terms": "Dach,"
+                    "terms": "dach,zadaszenia,wiata"
                 },
                 "building/school": {
                     "name": "Budynek szkolny",
@@ -2906,7 +2977,7 @@
                     "terms": "szeregówki"
                 },
                 "building/train_station": {
-                    "name": "Stacja kolejowa"
+                    "name": "Budynek dworca kolejowego"
                 },
                 "building/university": {
                     "name": "Budynek uczelni wyższej",

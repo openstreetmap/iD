@@ -348,6 +348,48 @@
             "list": "Szerkesztette {users}",
             "truncated_list": "Szerkesztette {users} és {count} másik szerkesztő"
         },
+        "info_panels": {
+            "key": "I",
+            "background": {
+                "key": "B",
+                "title": "Háttér",
+                "zoom": "Nagyítás",
+                "unknown": "Ismeretlen",
+                "show_tiles": "Csempék megjelenítése",
+                "hide_tiles": "Csempék elrejtése"
+            },
+            "history": {
+                "key": "H",
+                "title": "Előzmények",
+                "selected": "{n} kiválasztott",
+                "version": "Verzió",
+                "last_edit": "Utolsó szerkesztés",
+                "edited_by": "Szerkesztette",
+                "changeset": "Módosításcsomag",
+                "unknown": "Ismeretlen",
+                "link_text": "Előzmények az openstreetmap.org-on"
+            },
+            "location": {
+                "key": "L",
+                "title": "Helyszín",
+                "unknown_location": "Ismeretlen helyszín"
+            },
+            "measurement": {
+                "key": "M",
+                "title": "Mérés",
+                "selected": "{n} kiválasztott",
+                "geometry": "Geometria",
+                "closed": "zárt",
+                "center": "Középpont",
+                "perimeter": "Kerület",
+                "length": "Hossz",
+                "area": "Terület",
+                "centroid": "Súlypont",
+                "location": "Helyszín",
+                "metric": "Metrikus",
+                "imperial": "Angolszász"
+            }
+        },
         "geometry": {
             "point": "pont",
             "vertex": "csúcspont",
@@ -503,7 +545,9 @@
         },
         "restore": {
             "heading": "Elmentetlen változtatásaid vannak",
-            "description": "Szeretnéd visszaállítani az elmentetlen változtatásokat az előző munkamenetből?"
+            "description": "Szeretnéd visszaállítani az elmentetlen változtatásokat az előző munkamenetből?",
+            "restore": "Módosítások visszaállítása",
+            "reset": "Módosításaim elvetése"
         },
         "save": {
             "title": "Mentés",
@@ -977,6 +1021,17 @@
                     "undo": "A legutóbbi művelet visszavonása",
                     "redo": "A legutóbbi művelet újra",
                     "save": "Módosítások mentése"
+                }
+            },
+            "tools": {
+                "title": "Eszközök",
+                "info": {
+                    "title": "Információ",
+                    "all": "Az összes információ panel kapcsolása",
+                    "background": "A háttér panel kapcsolása",
+                    "history": "Előzmények panel kapcsolása",
+                    "location": "Helyszín panel kapcsolása",
+                    "measurement": "Mérés panel kapcsolása"
                 }
             }
         },

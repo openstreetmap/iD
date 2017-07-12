@@ -353,16 +353,21 @@
             "background": {
                 "key": "B",
                 "title": "Bakgrund",
+                "zoom": "Zoom",
                 "vintage": "Ålder",
-                "unknown": "Okänt"
+                "unknown": "Okänt",
+                "show_tiles": "Visa kartrutor",
+                "hide_tiles": "Dölj kartrutor"
             },
             "history": {
                 "key": "H",
+                "title": "Historik",
                 "selected": "{n} markerad(e)",
                 "version": "Version",
                 "last_edit": "Senast redigerad",
                 "edited_by": "Redigerad av",
-                "changeset": "Changeset",
+                "changeset": "Ändringsset",
+                "unknown": "Okänd",
                 "link_text": "Historik på openstreetmap.org"
             },
             "location": {
@@ -375,13 +380,13 @@
                 "title": "Mätning",
                 "selected": "{n} markerad(e)",
                 "geometry": "Geometri",
-                "closed": "sluten",
+                "closed": "slutet",
                 "center": "Centrum",
                 "perimeter": "Omkrets",
                 "length": "Längd",
                 "area": "Area",
                 "centroid": "Centrumpunkt",
-                "location": "Lokalisering",
+                "location": "Placering",
                 "metric": "Metriskt",
                 "imperial": "Brittiskt"
             }
@@ -542,7 +547,9 @@
         },
         "restore": {
             "heading": "Du har icke-sparade ändringar.",
-            "description": "Du har ändringar från förra sessionen som inte har sparats. Vill du hämta dessa ändringar?"
+            "description": "Du har ändringar från förra sessionen som inte har sparats. Vill du hämta dessa ändringar?",
+            "restore": "Återställ mina ändringar",
+            "reset": "Ta bort mina ändringar"
         },
         "save": {
             "title": "Spara",
@@ -972,7 +979,7 @@
                 },
                 "with_selected": {
                     "title": "Med objekt markerat",
-                    "edit_menu": "Visa/dölj redigerameny"
+                    "edit_menu": "Visa/dölj redigeringsmeny"
                 },
                 "vertex_selected": {
                     "title": "Med nod markerad",
@@ -1021,7 +1028,12 @@
             "tools": {
                 "title": "Verktyg",
                 "info": {
-                    "title": "Information"
+                    "title": "Information",
+                    "all": "Visa/dölj alla informationspaneler",
+                    "background": "Visa/dölj panelen Bakgrund",
+                    "history": "Visa/dölj panelen Historik",
+                    "location": "Visa/dölj panelen Lokalisering",
+                    "measurement": "Visa/dölj panelen Mätning"
                 }
             }
         },
