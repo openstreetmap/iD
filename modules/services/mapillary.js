@@ -22,8 +22,7 @@ var apibase = 'https://a.mapillary.com/v3/',
     mapillaryImage,
     mapillarySignDefs,
     mapillarySignSprite,
-    mapillaryViewer,
-    tagComponent;
+    mapillaryViewer;
 
 
 function abortRequest(i) {
@@ -363,44 +362,50 @@ export default {
 
         return this;
     },
+
+
+
     showDetections: function(detectionKey) {
+        if (!mapillaryViewer) return;
+
+        var tagComponent = mapillaryViewer.getComponent('tag');
         if (!detectionKey) return tagComponent.removeAll();
 
-        var url = apibase + 'detections/'+ 
+        var url = apibase + 'detections/'+
             detectionKey + '?' + utilQsString({
                 client_id: clientId,
             });
 
         d3.request(url)
-        .mimeType('application/json')
-        .response(function(xhr) {
-            return JSON.parse(xhr.responseText); 
-        }).get(function(err, data) {
-            if (!data || !data.properties) return tagComponent.removeAll();
-            var tag;
-            // Currently only two shapes <Polygon|Point>
-            if (data.properties.shape.type === 'Polygon') {
-                var polygonGeometry = new Mapillary
-                    .TagComponent
-                    .PolygonGeometry(data.properties.shape.coordinates[0]);
-                tag = new Mapillary.TagComponent.OutlineTag(
-                    'polygonTag', polygonGeometry, { text: data.properties.value }
-                );
-            } else if (data.properties.shape.type === 'Point') {
-                var pointGeometry = new Mapillary
-                    .TagComponent
-                    .PointGeometry(data.properties.shape.coordinates[0]);
-                tag = new Mapillary.TagComponent.SpotTag(
-                    'pointTag', pointGeometry, { text: data.properties.value }
-                );  
-            }
+            .mimeType('application/json')
+            .response(function(xhr) {
+                return JSON.parse(xhr.responseText);
+            }).get(function(err, data) {
+                if (!data || !data.properties) return tagComponent.removeAll();
+                var tag;
+                // Currently only two shapes <Polygon|Point>
+                if (data.properties.shape.type === 'Polygon') {
+                    var polygonGeometry = new Mapillary
+                        .TagComponent
+                        .PolygonGeometry(data.properties.shape.coordinates[0]);
+                    tag = new Mapillary.TagComponent.OutlineTag(
+                        'polygonTag', polygonGeometry, { text: data.properties.value }
+                    );
+                } else if (data.properties.shape.type === 'Point') {
+                    var pointGeometry = new Mapillary
+                        .TagComponent
+                        .PointGeometry(data.properties.shape.coordinates[0]);
+                    tag = new Mapillary.TagComponent.SpotTag(
+                        'pointTag', pointGeometry, { text: data.properties.value }
+                    );
+                }
 
-            if (tag && data.properties.image_key === mapillaryImage) {
-                tagComponent.add([tag]);
-            } else {
-                tagComponent.removeAll();
-            }
-        });
+                if (tag && data.properties.image_key === mapillaryImage) {
+                    tagComponent.add([tag]);
+                } else {
+                    tagComponent.removeAll();
+                }
+            });
     },
 
 
@@ -448,7 +453,6 @@ export default {
             };
 
             mapillaryViewer = new Mapillary.Viewer('mly', clientId, imageKey, opts);
-            tagComponent = mapillaryViewer.getComponent('tag');
             mapillaryViewer.on('nodechanged', nodeChanged);
         }
 
