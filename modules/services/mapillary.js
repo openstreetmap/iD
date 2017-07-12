@@ -22,7 +22,8 @@ var apibase = 'https://a.mapillary.com/v3/',
     mapillaryImage,
     mapillarySignDefs,
     mapillarySignSprite,
-    mapillaryViewer;
+    mapillaryViewer,
+    tagComponent;
 
 
 function abortRequest(i) {
@@ -143,7 +144,11 @@ function loadNextTilePage(which, currZoom, url, tile) {
                 loc = feature.geometry.coordinates;
                 d = { key: feature.properties.key, loc: loc };
                 if (which === 'images') d = { ca: feature.properties.ca, key: feature.properties.key, loc: loc };
-                if (which === 'signs') d = { key: feature.properties.detections[0].image_key, loc: loc, value: feature.properties.value };
+                if (which === 'signs') d = {
+                    key: feature.properties.detections[0].image_key,
+                    detectionKey: feature.properties.detections[0].detection_key,
+                    loc: loc, value: feature.properties.value
+                };
 
                 features.push({minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d});
             }
@@ -358,6 +363,45 @@ export default {
 
         return this;
     },
+    showDetections: function(detectionKey) {
+        if (!detectionKey) return tagComponent.removeAll();
+
+        var url = apibase + 'detections/'+ 
+            detectionKey + '?' + utilQsString({
+                client_id: clientId,
+            });
+
+        d3.request(url)
+        .mimeType('application/json')
+        .response(function(xhr) {
+            return JSON.parse(xhr.responseText); 
+        }).get(function(err, data) {
+            if (!data || !data.properties) return tagComponent.removeAll();
+            var tag;
+            // Currently only two shapes <Polygon|Point>
+            if (data.properties.shape.type === 'Polygon') {
+                var polygonGeometry = new Mapillary
+                    .TagComponent
+                    .PolygonGeometry(data.properties.shape.coordinates[0]);
+                tag = new Mapillary.TagComponent.OutlineTag(
+                    'polygonTag', polygonGeometry, { text: data.properties.value }
+                );
+            } else if (data.properties.shape.type === 'Point') {
+                var pointGeometry = new Mapillary
+                    .TagComponent
+                    .PointGeometry(data.properties.shape.coordinates[0]);
+                tag = new Mapillary.TagComponent.SpotTag(
+                    'pointTag', pointGeometry, { text: data.properties.value }
+                );  
+            }
+
+            if (tag && data.properties.image_key === mapillaryImage) {
+                tagComponent.add([tag]);
+            } else {
+                tagComponent.removeAll();
+            }
+        });
+    },
 
 
     hideViewer: function() {
@@ -398,11 +442,13 @@ export default {
                 baseImageSize: 320,
                 component: {
                     cover: false,
-                    keyboard: false
+                    keyboard: false,
+                    tag: true
                 }
             };
 
             mapillaryViewer = new Mapillary.Viewer('mly', clientId, imageKey, opts);
+            tagComponent = mapillaryViewer.getComponent('tag');
             mapillaryViewer.on('nodechanged', nodeChanged);
         }
 
@@ -422,15 +468,23 @@ export default {
 
     selectedImage: function(imageKey, fromClick) {
         if (!arguments.length) return mapillaryImage;
-
         mapillaryImage = imageKey;
         if (fromClick) {
             mapillaryClicks.push(imageKey);
         }
-
         d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
-            .classed('selected', function(d) { return d.key === imageKey; });
+            .classed('selected', function(d) {
+                return d.key === imageKey;
+            });
 
+        var detectionKey;
+        d3.selectAll('.layer-mapillary-signs .icon-sign')
+            .each(function(d) {
+                if (d.key === imageKey) {
+                    detectionKey = d.detectionKey;
+                }
+            });
+        this.showDetections(detectionKey);
         return this;
     },
 
