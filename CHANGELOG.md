@@ -48,11 +48,16 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 #### :tada: New Features
 
 * Toggleable information panels can be used to expose more advanced features without cluttering the UI ([#4121])
-  * <kbd>⌘I</kbd>: Toggle all info panels (by default, will toggle the Measurement panel)
-  * <kbd>⌘⇧M</kbd>: Toggle Measurement Panel - Show selected object area, length, perimeter, calculate center, etc.
-  * <kbd>⌘⇧L</kbd>: Toggle Location Panel - Show location coordinates ([#2183]) and reverse geocode ([#2515])
-  * <kbd>⌘⇧H</kbd>: Toggle History Panel - Show last edited by ([#2273]), links to user and changeset info, object history ([#3761])
-  * <kbd>⌘⇧B</kbd>: Toggle Background Panel - Show imagery age if available ([#2492]), and toggle tile debugging
+  * <kbd>⌘I</kbd> / <kbd>Ctrl+I</kbd>: Toggle visibility of all info panels
+  (by default, will toggle the Measurement panel)
+  * <kbd>⌘⇧M</kbd> / <kbd>Ctrl+Shift+M</kbd> : Toggle Measurement Panel<br/>
+  Show selected object area, length, perimeter, calculate center, etc.
+  * <kbd>⌘⇧L</kbd> / <kbd>Ctrl+Shift+L</kbd> : Toggle Location Panel<br/>
+  Show location coordinates ([#2183]) and reverse geocode ([#2515])
+  * <kbd>⌘⇧H</kbd> / <kbd>Ctrl+Shift+H</kbd> : Toggle History Panel<br/>
+  Show last edited by ([#2273]), links to user and changeset info, object history ([#3761])
+  * <kbd>⌘⇧B</kbd> / <kbd>Ctrl+Shift+B</kbd> : Toggle Background Panel<br/>
+  Show imagery age if available ([#2492]), and toggle tile debugging
 
 [#4121]: https://github.com/openstreetmap/iD/issues/4121
 [#3761]: https://github.com/openstreetmap/iD/issues/3761
