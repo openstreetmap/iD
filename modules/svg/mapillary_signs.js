@@ -56,9 +56,20 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
         context.map().centerEase(d.loc);
 
+        var selected = mapillary.selectedImage(),
+            imageKey;
+
+        // Pick one of the images the sign was detected in,
+        // preference given to an image already selected.
+        d.detections.forEach(function(detection) {
+            if (!imageKey || selected === detection.image_key) {
+                imageKey = detection.image_key;
+            }
+        });
+
         mapillary
-            .selectedImage(d.key, true)
-            .updateViewer(d.key, context)
+            .selectedImage(imageKey, true)
+            .updateViewer(imageKey, context)
             .showViewer();
     }
 
@@ -79,7 +90,11 @@ export function svgMapillarySigns(projection, context, dispatch) {
             .attr('class', 'icon-sign')
             .attr('width', '32px')      // for Firefox
             .attr('height', '32px')     // for Firefox
-            .classed('selected', function(d) { return d.key === imageKey; })
+            .classed('selected', function(d) {
+                return _.some(d.detections, function(detection) {
+                    return detection.image_key === imageKey;
+                });
+            })
             .on('click', click);
 
         enter

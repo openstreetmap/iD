@@ -128,34 +128,58 @@ function loadNextTilePage(which, currZoom, url, tile) {
                     cache.nextURL[tile.id] = pagination.next;
                 }
             }
-
-            return JSON.parse(xhr.responseText); })
+            return JSON.parse(xhr.responseText);
+        })
         .get(function(err, data) {
             cache.loaded[id] = true;
             delete cache.inflight[id];
             if (err || !data.features || !data.features.length) return;
 
-            var features = [],
-                feature, loc, d;
+            var features = data.features.map(function(feature) {
+                var loc = feature.geometry.coordinates,
+                    d;
 
-            for (var i = 0; i < data.features.length; i++) {
-                feature = data.features[i];
-                loc = feature.geometry.coordinates;
-                d = { key: feature.properties.key, loc: loc };
-                if (which === 'images') d = { ca: feature.properties.ca, key: feature.properties.key, loc: loc };
-                if (which === 'signs') d = {
-                    key: feature.properties.detections[0].image_key,
-                    detectionKey: feature.properties.detections[0].detection_key,
-                    loc: loc, value: feature.properties.value
+                if (which === 'images') {
+                    d = {
+                        loc: loc,
+                        ca: feature.properties.ca,
+                        key: feature.properties.key
+                    };
+                } else if (which === 'objects') {
+                    d = {
+                        loc: loc,
+                        key: feature.properties.key,
+                        value: feature.properties.value,
+                        package: feature.properties.package,
+                        detections: feature.properties.detections
+                    };
+
+                    // cache image_key -> detection_key
+                    feature.properties.detections.forEach(function(detection) {
+                        var ik = detection.image_key;
+                        var dk = detection.detection_key;
+                        if (!mapillaryCache.detections[ik]) {
+                            mapillaryCache.detections[ik] = {};
+                        }
+                        if (!mapillaryCache.detections[ik][dk]) {
+                            mapillaryCache.detections[ik][dk] = {};
+                        }
+                    });
+                }
+
+                return {
+                    minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
                 };
-
-                features.push({minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d});
-            }
+            });
 
             cache.rtree.load(features);
 
-            if (which === 'images') dispatch.call('loadedImages');
-            if (which === 'signs') dispatch.call('loadedSigns');
+            if (which === 'images') {
+                dispatch.call('loadedImages');
+            } else if (which === 'objects') {
+                dispatch.call('loadedSigns');
+            }
+
             if (data.features.length === maxResults) {  // more pages to load
                 cache.nextPage[tile.id] = nextPage + 1;
                 loadNextTilePage(which, currZoom, url, tile);
@@ -236,14 +260,15 @@ export default {
             if (cache.images && cache.images.inflight) {
                 _.forEach(cache.images.inflight, abortRequest);
             }
-            if (cache.signs && cache.signs.inflight) {
-                _.forEach(cache.signs.inflight, abortRequest);
+            if (cache.objects && cache.objects.inflight) {
+                _.forEach(cache.objects.inflight, abortRequest);
             }
         }
 
         mapillaryCache = {
             images: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() },
-            signs:  { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() }
+            objects:  { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() },
+            detections: {}
         };
 
         mapillaryImage = null;
@@ -259,7 +284,7 @@ export default {
 
     signs: function(projection) {
         var psize = 32, limit = 3;
-        return searchLimited(psize, limit, projection, mapillaryCache.signs.rtree);
+        return searchLimited(psize, limit, projection, mapillaryCache.objects.rtree);
     },
 
 
@@ -296,7 +321,7 @@ export default {
 
     loadSigns: function(context, projection) {
         var url = apibase + 'objects?';
-        loadTiles('signs', url, projection);
+        loadTiles('objects', url, projection);
 
         // load traffic sign defs
         if (!mapillarySignDefs) {
@@ -364,51 +389,6 @@ export default {
     },
 
 
-
-    showDetections: function(detectionKey) {
-        if (!mapillaryViewer) return;
-
-        var tagComponent = mapillaryViewer.getComponent('tag');
-        if (!detectionKey) return tagComponent.removeAll();
-
-        var url = apibase + 'detections/'+
-            detectionKey + '?' + utilQsString({
-                client_id: clientId,
-            });
-
-        d3.request(url)
-            .mimeType('application/json')
-            .response(function(xhr) {
-                return JSON.parse(xhr.responseText);
-            }).get(function(err, data) {
-                if (!data || !data.properties) return tagComponent.removeAll();
-                var tag;
-                // Currently only two shapes <Polygon|Point>
-                if (data.properties.shape.type === 'Polygon') {
-                    var polygonGeometry = new Mapillary
-                        .TagComponent
-                        .PolygonGeometry(data.properties.shape.coordinates[0]);
-                    tag = new Mapillary.TagComponent.OutlineTag(
-                        'polygonTag', polygonGeometry, { text: data.properties.value }
-                    );
-                } else if (data.properties.shape.type === 'Point') {
-                    var pointGeometry = new Mapillary
-                        .TagComponent
-                        .PointGeometry(data.properties.shape.coordinates[0]);
-                    tag = new Mapillary.TagComponent.SpotTag(
-                        'pointTag', pointGeometry, { text: data.properties.value }
-                    );
-                }
-
-                if (tag && data.properties.image_key === mapillaryImage) {
-                    tagComponent.add([tag]);
-                } else {
-                    tagComponent.removeAll();
-                }
-            });
-    },
-
-
     hideViewer: function() {
         d3.select('#content')
             .selectAll('.mapillary-wrap')
@@ -457,6 +437,8 @@ export default {
         }
 
         function nodeChanged(node) {
+            mapillaryViewer.getComponent('tag').removeAll();  // remove previous detections
+
             var clicks = mapillaryClicks;
             var index = clicks.indexOf(node.key);
             if (index > -1) {    // nodechange initiated from clicking on a marker..
@@ -473,23 +455,84 @@ export default {
     selectedImage: function(imageKey, fromClick) {
         if (!arguments.length) return mapillaryImage;
         mapillaryImage = imageKey;
+
         if (fromClick) {
             mapillaryClicks.push(imageKey);
         }
-        d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
+
+        d3.selectAll('.layer-mapillary-images .viewfield-group')
             .classed('selected', function(d) {
                 return d.key === imageKey;
             });
 
-        var detectionKey;
         d3.selectAll('.layer-mapillary-signs .icon-sign')
-            .each(function(d) {
-                if (d.key === imageKey) {
-                    detectionKey = d.detectionKey;
-                }
+            .classed('selected', function(d) {
+                return _.some(d.detections, function(detection) {
+                    return detection.image_key === imageKey;
+                });
             });
-        this.showDetections(detectionKey);
+
+        this.updateDetections();
         return this;
+    },
+
+
+    updateDetections: function() {
+        if (!mapillaryViewer) return;
+
+        var tagComponent = mapillaryViewer.getComponent('tag');
+        var detections = mapillaryCache.detections[mapillaryImage];
+
+        _.each(detections, function(v, k) {
+            if (_.isEmpty(v)) {
+                loadDetection(k);
+            } else {
+                tagComponent.add([v]);
+            }
+        });
+
+
+        function loadDetection(detectionKey) {
+            var url = apibase + 'detections/'+
+                detectionKey + '?' + utilQsString({
+                    client_id: clientId,
+                });
+
+            d3.request(url)
+                .mimeType('application/json')
+                .response(function(xhr) {
+                    return JSON.parse(xhr.responseText);
+                })
+                .get(function(err, data) {
+                    if (!data || !data.properties) return;
+
+                    var tag;
+                    // Currently only two shapes <Polygon|Point>
+                    if (data.properties.shape.type === 'Polygon') {
+                        var polygonGeometry = new Mapillary
+                            .TagComponent
+                            .PolygonGeometry(data.properties.shape.coordinates[0]);
+                        tag = new Mapillary.TagComponent.OutlineTag(
+                            detectionKey, polygonGeometry, { text: data.properties.value }
+                        );
+                    } else if (data.properties.shape.type === 'Point') {
+                        var pointGeometry = new Mapillary
+                            .TagComponent
+                            .PointGeometry(data.properties.shape.coordinates[0]);
+                        tag = new Mapillary.TagComponent.SpotTag(
+                            detectionKey, pointGeometry, { text: data.properties.value }
+                        );
+                    }
+
+                    if (tag) {
+                        var ik = data.properties.image_key;
+                        mapillaryCache.detections[ik][detectionKey] = tag;
+                        if (mapillaryImage === ik) {
+                            tagComponent.add([tag]);
+                        }
+                    }
+                });
+        }
     },
 
 
