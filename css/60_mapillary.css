@@ -46,9 +46,9 @@
 
 .layer-mapillary-signs .icon-sign .icon-sign-body {
     min-width: 20px;
-    height: 28px;
-    width: 28px;
-    border: 2px solid transparent;
+    height: 24px;
+    width: 24px;
+    outline: 2px solid transparent;
     pointer-events: visible;
     cursor: pointer; /* Opera */
     cursor: url(img/cursor-select-mapillary.png) 6 1, pointer; /* FF */
@@ -57,21 +57,12 @@
 }
 
 .layer-mapillary-signs .icon-sign:hover .icon-sign-body {
-    border: 2px solid rgba(255,198,0,0.8);
+    outline: 2px solid rgba(255,198,0,0.8);
     z-index: 80;
- }
+}
 
 .layer-mapillary-signs .icon-sign.selected .icon-sign-body {
-    border: 2px solid rgba(255,0,0,0.8);
-    z-index: 80;
- }
-
-.layer-mapillary-signs .icon-sign .t {
-    font-size: 28px;
-    z-index: 70;
-}
-
-.layer-mapillary-signs .icon-sign:hover .t,
-.layer-mapillary-signs .icon-sign.selected .t {
+    outline: 2px solid rgba(255,0,0,0.8);
     z-index: 80;
 }
+

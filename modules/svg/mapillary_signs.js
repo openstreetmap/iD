@@ -88,8 +88,8 @@ export function svgMapillarySigns(projection, context, dispatch) {
         var enter = signs.enter()
             .append('foreignObject')
             .attr('class', 'icon-sign')
-            .attr('width', '32px')      // for Firefox
-            .attr('height', '32px')     // for Firefox
+            .attr('width', '24px')      // for Firefox
+            .attr('height', '24px')     // for Firefox
             .classed('selected', function(d) {
                 return _.some(d.detections, function(detection) {
                     return detection.image_key === imageKey;
@@ -104,8 +104,8 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
         signs
             .merge(enter)
-            .attr('x', function(d) { return projection(d.loc)[0] - 16; })   // offset by -16px to
-            .attr('y', function(d) { return projection(d.loc)[1] - 16; });  // center signs on loc
+            .attr('x', function(d) { return projection(d.loc)[0] - 12; })   // offset by -12px to
+            .attr('y', function(d) { return projection(d.loc)[1] - 12; });  // center signs on loc
     }
 
 
