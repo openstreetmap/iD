@@ -45,7 +45,8 @@ describe('iD.serviceMapillary', function() {
         it('Initializes cache one time', function() {
             var cache = mapillary.cache();
             expect(cache).to.have.property('images');
-            expect(cache).to.have.property('signs');
+            expect(cache).to.have.property('objects');
+            expect(cache).to.have.property('detections');
 
             mapillary.init();
             var cache2 = mapillary.cache();
@@ -226,7 +227,7 @@ describe('iD.serviceMapillary', function() {
             mapillary.loadSigns(context, context.projection);
 
             var rects = [{
-                    'package': 'trafficsign_us_3.0',
+                    package: 'trafficsign',
                     rect: [ 0.805, 0.463, 0.833, 0.502 ],
                     length: 4,
                     score: '1.27',
@@ -301,45 +302,39 @@ describe('iD.serviceMapillary', function() {
 
     describe('#signs', function() {
         it('returns signs in the visible map area', function() {
-            var signs = [{
-                    'package': 'trafficsign_us_3.0',
-                    rect: [ 0.805, 0.463, 0.833, 0.502 ],
-                    length: 4,
-                    score: '1.27',
-                    type: 'regulatory--maximum-speed-limit-65--us'
+            var detections = [{
+                    detection_key: '78vqha63gs1upg15s823qckcmn',
+                    image_key: 'bwYs-uXLDvm_meo_EC5Nzw'
                 }],
                 features = [
-                    { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], signs: signs } },
-                    { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], signs: signs } },
-                    { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], signs: signs } }
+                    { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], detections: detections } },
+                    { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], detections: detections } },
+                    { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], detections: detections } }
                 ];
 
-            mapillary.cache().signs.rtree.load(features);
+            mapillary.cache().objects.rtree.load(features);
             var res = mapillary.signs(context.projection);
 
             expect(res).to.deep.eql([
-                { key: '0', loc: [10,0], signs: signs },
-                { key: '1', loc: [10,0], signs: signs }
+                { key: '0', loc: [10,0], detections: detections },
+                { key: '1', loc: [10,0], detections: detections }
             ]);
         });
 
         it('limits results no more than 3 stacked signs in one spot', function() {
-            var signs = [{
-                    'package': 'trafficsign_us_3.0',
-                    rect: [ 0.805, 0.463, 0.833, 0.502 ],
-                    length: 4,
-                    score: '1.27',
-                    type: 'regulatory--maximum-speed-limit-65--us'
+            var detections = [{
+                    detection_key: '78vqha63gs1upg15s823qckcmn',
+                    image_key: 'bwYs-uXLDvm_meo_EC5Nzw'
                 }],
                 features = [
-                    { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], signs: signs } },
-                    { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], signs: signs } },
-                    { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '2', loc: [10,0], signs: signs } },
-                    { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '3', loc: [10,0], signs: signs } },
-                    { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '4', loc: [10,0], signs: signs } }
+                    { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], detections: detections } },
+                    { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], detections: detections } },
+                    { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '2', loc: [10,0], detections: detections } },
+                    { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '3', loc: [10,0], detections: detections } },
+                    { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '4', loc: [10,0], detections: detections } }
                 ];
 
-            mapillary.cache().signs.rtree.load(features);
+            mapillary.cache().objects.rtree.load(features);
             var res = mapillary.signs(context.projection);
             expect(res).to.have.length.of.at.most(3);
         });
