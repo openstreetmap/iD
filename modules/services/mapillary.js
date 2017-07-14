@@ -523,7 +523,12 @@ export default {
 
 
         function makeTag(data) {
+            var valueParts = data.properties.value.split('--');
+            if (valueParts.length !== 3) return;
+
+            var text = valueParts[1].replace(/-/g, ' ');
             var tag;
+
             // Currently only two shapes <Polygon|Point>
             if (data.properties.shape.type === 'Polygon') {
                 var polygonGeometry = new Mapillary
@@ -534,7 +539,12 @@ export default {
                     data.properties.key,
                     polygonGeometry,
                     {
-                        text: data.properties.value
+                        text: text,
+                        textColor: 0xffff00,
+                        lineColor: 0xffff00,
+                        lineWidth: 2,
+                        fillColor: 0xffff00,
+                        fillOpacity: 0.3,
                     }
                 );
 
@@ -547,7 +557,9 @@ export default {
                     data.properties.key,
                     pointGeometry,
                     {
-                        text: data.properties.value
+                        text: text,
+                        color: 0xffff00,
+                        textColor: 0xffff00
                     }
                 );
             }

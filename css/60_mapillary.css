@@ -66,3 +66,15 @@
     z-index: 80;
 }
 
+
+/* Mapillary viewer */
+#mly .domRenderer .TagSymbol {
+    font-size: 12px;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 0 4px;
+    border-radius: 4px;
+    transform: translate(-50%, -120%) !important;
+}
+
+
+
