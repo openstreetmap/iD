@@ -142,8 +142,10 @@ function loadNextTilePage(which, currZoom, url, tile) {
                 if (which === 'images') {
                     d = {
                         loc: loc,
+                        key: feature.properties.key,
                         ca: feature.properties.ca,
-                        key: feature.properties.key
+                        captured_at: feature.properties.captured_at,
+                        pano: feature.properties.pano
                     };
                 } else if (which === 'objects') {
                     d = {
@@ -472,7 +474,36 @@ export default {
                 });
             });
 
+        if (!imageKey)  return this;
+
+
+        function localeTimestamp(s) {
+            if (!s) return null;
+            var d = new Date(s);
+            if (isNaN(d.getTime())) return null;
+            return d.toLocaleString();
+        }
+
+        var selected = d3.selectAll('.layer-mapillary-images .viewfield-group.selected');
+        if (selected.empty()) return this;
+
+        var datum = selected.datum();
+        var timestamp = localeTimestamp(datum.captured_at);
+        var attribution = d3.select('.mapillary-js-dom .Attribution');
+        var capturedAt = attribution.selectAll('.captured-at');
+        if (capturedAt.empty()) {
+            attribution
+                .insert('span', 'a')
+                .text('|');
+            capturedAt = attribution
+                .insert('span', 'span')
+                .attr('class', 'captured-at');
+        }
+        capturedAt
+            .text(timestamp);
+
         this.updateDetections();
+
         return this;
     },
 
