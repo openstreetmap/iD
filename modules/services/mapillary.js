@@ -438,14 +438,27 @@ export default {
             mapillaryViewer.on('nodechanged', nodeChanged);
         }
 
+        // nodeChanged: called after the viewer has changed images and is ready.
+        //
+        // There is some logic here to batch up clicks into a mapillaryClicks array
+        // because the user might click on a lot of markers quickly and nodechanged
+        // may be called out of order asychronously.
+        //
+        // Clicks are added to the array in `selectedImage` and removed here.
+        //
         function nodeChanged(node) {
             mapillaryViewer.getComponent('tag').removeAll();  // remove previous detections
 
             var clicks = mapillaryClicks;
             var index = clicks.indexOf(node.key);
-            if (index > -1) {    // nodechange initiated from clicking on a marker..
+            if (index > -1) {    // `nodechanged` initiated from clicking on a marker..
                 clicks.splice(index, 1);
-            } else {             // nodechange initiated from the Mapillary viewer controls..
+                // If `node.key` matches the current mapillaryImage, call `selectedImage()`
+                // one more time to update the detections and attribution..
+                if (node.key === mapillaryImage) {
+                    that.selectedImage(node.key, false);
+                }
+            } else {             // `nodechanged` initiated from the Mapillary viewer controls..
                 var loc = node.computedLatLon ? [node.computedLatLon.lon, node.computedLatLon.lat] : [node.latLon.lon, node.latLon.lat];
                 context.map().centerEase(loc);
                 that.selectedImage(node.key, false);
