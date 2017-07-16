@@ -481,7 +481,7 @@ export default {
             if (!s) return null;
             var d = new Date(s);
             if (isNaN(d.getTime())) return null;
-            return d.toLocaleString();
+            return d.toLocaleString(undefined, { timeZone: 'UTC' });
         }
 
         var selected = d3.selectAll('.layer-mapillary-images .viewfield-group.selected');
