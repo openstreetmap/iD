@@ -506,10 +506,10 @@ export default {
         var capturedAt = attribution.selectAll('.captured-at');
         if (capturedAt.empty()) {
             attribution
-                .insert('span', 'a')
+                .append('span')
                 .text('|');
             capturedAt = attribution
-                .insert('span', 'span')
+                .append('span')
                 .attr('class', 'captured-at');
         }
         capturedAt
