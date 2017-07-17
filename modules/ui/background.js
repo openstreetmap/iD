@@ -305,13 +305,19 @@ export function uiBackground(context) {
 
 
         function toggle() {
-            if (d3.event) d3.event.preventDefault();
+            if (d3.event) {
+                d3.event.preventDefault();
+            }
             tooltipBehavior.hide(button);
             setVisible(!button.classed('active'));
         }
 
 
         function quickSwitch() {
+            if (d3.event) {
+                d3.event.stopImmediatePropagation();
+                d3.event.preventDefault();
+            }
             if (previous) {
                 clickSetSource(previous);
             }

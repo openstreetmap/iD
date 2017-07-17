@@ -78,7 +78,10 @@ export function uiInfo(context) {
 
 
         function toggle(which) {
-            if (d3.event) d3.event.preventDefault();
+            if (d3.event) {
+                d3.event.stopImmediatePropagation();
+                d3.event.preventDefault();
+            }
 
             var activeids = ids.filter(function(k) { return active[k]; });
 
