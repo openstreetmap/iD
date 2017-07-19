@@ -592,7 +592,6 @@ en:
       ### Using the editor
 
       You can view a list of keyboard shortcuts by pressing the `?` key.
-
     roads: |
       # Roads
 
@@ -809,6 +808,40 @@ en:
       You can create multipolygons with holes using the "Merge" tool. Draw two areas (inner
       and outer), hold the Shift key and click on each of them to select them both, and then
       click the "Merge" (+) button.
+    geoservices: |
+      # GeoServices
+
+      The Geoservices import tool allows you to fetch authoritative data (for example [ArcGIS Open Data](https://hub.arcgis.com/pages/open-data)) and verify the accuracy of individual features before importing them into OpenStreetMap.
+
+      ### Sample GeoServices
+
+      * [Madison, WI - bus lines](https://maps.cityofmadison.com/arcgis/rest/services/Public/OPEN_DATA_TRANS/MapServer/18/query?outFields=*&where=1>0&outSR=4326&f=json)
+      * [Norfolk, VA - addresses](http://orfmaps.norfolk.gov/orfgis/rest/services/OpenData/Property_Information/MapServer/0/query?outFields=*&where=1%3D1&outSR=4326&f=json')
+      * [Norfolk, VA - parcels](http://orfmaps.norfolk.gov/orfgis/rest/services/OpenData/Property_Information/MapServer/2/query?outFields=*&where=1%3D1&outSR=4326&f=json)
+      * [Hartford, CT - complex buildings / OSM relations](http://gis1.hartford.gov/arcgis/rest/services/OpenData_Community/MapServer/41/query?outFields=*&where=1%3D1&f=json)
+      * [Stark County / Canton, OH - bike lanes](https://webdmz.starkcountyohio.gov/arcgis/rest/services/RPC/RideStarkOnRoadBikeLane/MapServer/0/query?outFields=*&where=1%3D1)
+
+      ### Editing Process
+
+      In the right menubar, select Map Data (as if you are importing a GPX layer)
+
+      Click 'Add GeoService Layer'
+
+      Use the iD editor's preset menu on the left to set a target import (for example, a building or address).
+
+      Paste the GeoService URL into the text field (it is also possible to add a service to iD by including &geoservice=(escaped URL) in a link URL).
+
+      You'll be asked to confirm that the copyright information for the service grants permission for the data to be included in OpenStreetMap.
+
+      Select 'Load in View' (for large datasets) or 'Load Globally' to control what is fetched.
+
+      The GeoService importer now gives you the option to map the service's fields to OSM tags.
+
+      * You can change the name of the tag in your GeoService
+      * You can add new fields - for example, addresses in Norfolk, Virginia should have ```addr:city=Norfolk``` and ```addr:state=VA``` which are ignored as redundant in the city's data
+      * Fields which you do not map are removed from the data before import
+
+      After features have been fetched they need to be reviewed individually prior to being included in an actual changeset.
   intro:
     done: done
     ok: OK

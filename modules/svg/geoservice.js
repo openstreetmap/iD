@@ -40,7 +40,7 @@ export function svgGeoService(projection, context, dispatch) {
 
         svgGeoService.initialized = true;
     }
-    
+
     function drawGeoService(selection) {
         var geojson = svgGeoService.geojson,
             enabled = svgGeoService.enabled,
@@ -69,20 +69,20 @@ export function svgGeoService(projection, context, dispatch) {
                 });
             });
         }
-        
+
         function fetchVisibleRoads(callback) {
             return fetchVisibleBuildings(callback, 'path.tag-highway');
         }
-        
+
         function linesMatch(importLine, roadLine) {
             var importPoly = polygonBuffer(importLine, 5, 'meters');
             var roadPoly = polygonBuffer(roadLine, 5, 'meters');
-            
+
             var intersectPoly = polygonIntersect(importPoly, roadPoly);
             if (!intersectPoly) {
                 return 0;
             }
-            
+
             function areaFix(polygon) {
                 var area = 0;
                 if (polygon.geometry.type === 'MultiPolygon') {
@@ -94,11 +94,11 @@ export function svgGeoService(projection, context, dispatch) {
                 }
                 return area;
             }
-            
+
             var intersect = areaFix(intersectPoly);
             var overlap1 = intersect / areaFix(importPoly);
             var overlap2 = intersect / areaFix(roadPoly);
-            
+
             // how much of line 1 is in line 2?  how much of line 2 is in line 1?
             // either score could indicate a good fit
 
@@ -107,8 +107,8 @@ export function svgGeoService(projection, context, dispatch) {
 
         if (window.inAdd) {
             return;
-        }        
-        console.log('download completed: mapping any new features');
+        }
+        // console.log('download completed: mapping any new features');
         window.inAdd = true;
 
         _.map(geojson.features || [], function(d) {
@@ -117,18 +117,18 @@ export function svgGeoService(projection, context, dispatch) {
                 return;
             }
             window.knownObjectIds[d.properties.OBJECTID] = true;
-        
+
             var props, nodes, ln, way, rel;
             function makeEntity(loc_or_nodes) {
                 props = {
                     tags: d.properties,
                     visible: true
                 };
-            
+
                 // store the OBJECTID as source_oid
                 props.tags['geoservice:objectid'] = d.properties.OBJECTID;
                 delete props.tags.OBJECTID;
-                
+
                 // allows this helper method to work on nodes and ways
                 if (loc_or_nodes.length && (typeof loc_or_nodes[0] === 'string')) {
                     props.nodes = loc_or_nodes;
@@ -137,7 +137,7 @@ export function svgGeoService(projection, context, dispatch) {
                 }
                 return props;
             }
-                
+
             function makeMiniNodes(pts) {
                 // generates the nodes which make up a longer way
                 var nodes = [];
@@ -153,7 +153,7 @@ export function svgGeoService(projection, context, dispatch) {
                 }
                 return nodes;
             }
-            
+
             function mapLine(d, coords, loop) {
                 nodes = makeMiniNodes(coords);
                 if (loop) {
@@ -168,7 +168,7 @@ export function svgGeoService(projection, context, dispatch) {
                 );
                 return way;
             }
-            
+
             function getBuildingPoly(building) {
                 // retrieve GeoJSON for this building if it isn't already stored in gjids { }
                 var wayid = d3.select(building).attr('class').split(' ')[3];
@@ -180,7 +180,7 @@ export function svgGeoService(projection, context, dispatch) {
                         var node = context.entity(nodeid);
                         nodes.push(node.loc);
                     });
-                    
+
                     gjids[wayid] = {
                         type: 'Feature',
                         geometry: {
@@ -191,7 +191,7 @@ export function svgGeoService(projection, context, dispatch) {
                 }
                 return wayid;
             }
-            
+
             function mapPolygon(d, coords) {
                 var plotBuilding = function() {
                     d.properties.area = d.properties.area || 'yes';
@@ -200,7 +200,7 @@ export function svgGeoService(projection, context, dispatch) {
                         // example data: Hartford, CT building footprints
                         // TODO: rings within rings?
 
-                        // generate each ring                    
+                        // generate each ring
                         var componentRings = [];
                         for (var ring = 0; ring < coords.length; ring++) {
                             // props.tags = {};
@@ -211,7 +211,7 @@ export function svgGeoService(projection, context, dispatch) {
                                 role: (ring === 0 ? 'outer' : 'inner')
                             });
                         }
-                    
+
                         // generate a relation
                         rel = new osmRelation({
                             tags: {
@@ -249,23 +249,23 @@ export function svgGeoService(projection, context, dispatch) {
                 }
                 plotBuilding();
             }
-                        
+
             function mergeImportTags(wayid) {
                 // merge the active import GeoJSON attributes (d.properties) into item with wayid
                 var ent = context.entity(wayid);
                 if (!ent.importOriginal) {
                     ent.importOriginal = _.clone(ent.tags);
                 }
-                
+
                 var originalProperties = _.clone(ent.tags);
-                
+
                 var keys = Object.keys(d.properties);
                 _.map(keys, function(key) {
                     originalProperties[key] = d.properties[key];
                 });
 
                 var adjustedFeature = processGeoFeature({ properties: originalProperties }, gsLayer = context.layers().layer('geoservice').preset());
-                
+
                 context.perform(
                     actionChangeTags(wayid, adjustedFeature.properties),
                     'merged import item tags'
@@ -274,7 +274,7 @@ export function svgGeoService(projection, context, dispatch) {
                     d3.selectAll('.layer-osm .' + wayid).classed('import-edited', true);
                 }, 250);
             }
-            
+
             function matchingRoads(importLine) {
                 var matches = [];
                 fetchVisibleRoads(function(road) {
@@ -284,7 +284,7 @@ export function svgGeoService(projection, context, dispatch) {
                         return;
                     }
                     var ent;
-                        
+
                     // fetch existing, or load a GeoJSON representation of the road
                     if (!gjids[wayid]) {
                         var nodes = [];
@@ -311,11 +311,11 @@ export function svgGeoService(projection, context, dispatch) {
                 });
                 return matches;
             }
-            
+
             // importing different GeoJSON geometries
             if (d.geometry.type === 'Point') {
                 props = makeEntity(d.geometry.coordinates);
-                
+
                 // user is merging points to polygons (example: addresses to buildings)
                 if (pointInPolygon) {
                     var matched = false;
@@ -327,7 +327,7 @@ export function svgGeoService(projection, context, dispatch) {
                             mergeImportTags(wayid);
                         }
                     });
-                    
+
                     if (!matched) {
                         // add address point independently of existing buildings
                         var node = new osmNode(props);
@@ -338,7 +338,7 @@ export function svgGeoService(projection, context, dispatch) {
                         );
                         window.importedEntities.push(node);
                     }
-                    
+
                 } else {
                     var node = new osmNode(props);
                     node.approvedForEdit = 'pending';
@@ -348,15 +348,15 @@ export function svgGeoService(projection, context, dispatch) {
                     );
                     window.importedEntities.push(node);
                 }
-                  
-            } else if (d.geometry.type === 'LineString') {                
+
+            } else if (d.geometry.type === 'LineString') {
                 if (mergeLines) {
                     var mergeRoads = matchingRoads(d);
                     /*
-                    _.map(mergeRoads, function(mergeRoadWayId) {    
+                    _.map(mergeRoads, function(mergeRoadWayId) {
                     });
                     */
-                    
+
                     if (!mergeRoads.length) {
                         // none of the roads overlapped
                         window.importedEntities.push(mapLine(d, d.geometry.coordinates));
@@ -364,13 +364,13 @@ export function svgGeoService(projection, context, dispatch) {
                 } else {
                     window.importedEntities.push(mapLine(d, d.geometry.coordinates));
                 }
-                    
+
             } else if (d.geometry.type === 'MultiLineString') {
                 var lines = [];
                 for (ln = 0; ln < d.geometry.coordinates.length; ln++) {
                     if (mergeLines) {
                         // test each part of the MultiLineString for merge-ability
-                        
+
                         // this fragment of the MultiLineString should be compared
                         var importPart = {
                             type: 'Feature',
@@ -380,13 +380,13 @@ export function svgGeoService(projection, context, dispatch) {
                             }
                         };
                         var mergeRoads = matchingRoads(importPart);
-                        
+
                         /*
                         _.map(mergeRoads, function(mergeRoadWayId) {
-                        
+
                         });
                         */
-                        
+
                         if (!mergeRoads.length) {
                             // TODO: what if part or all of the MultiLineString does not have a place to merge to?
                         }
@@ -397,12 +397,12 @@ export function svgGeoService(projection, context, dispatch) {
                         });
                     }
                 }
-                
+
                 // don't add geodata if we are busy merging lines
                 if (mergeLines) {
                     return;
                 }
-                
+
                 // generate a relation
                 rel = new osmRelation({
                     tags: {
@@ -416,8 +416,8 @@ export function svgGeoService(projection, context, dispatch) {
                     'adding multiple Lines as a Relation'
                 );
                 window.importedEntities.push(rel);
-                
-                    
+
+
             } else if (d.geometry.type === 'Polygon') {
                 window.importedEntities.push(mapPolygon(d, d.geometry.coordinates));
 
@@ -429,7 +429,7 @@ export function svgGeoService(projection, context, dispatch) {
                         role: ''
                     });
                 }
-                
+
                 // generate a relation
                 rel = new osmRelation({
                     tags: {
@@ -448,12 +448,12 @@ export function svgGeoService(projection, context, dispatch) {
                 console.log('Did not recognize Geometry Type: ' + d.geometry.type);
             }
         });
-        
+
         window.inAdd = false;
-        
+
         return this;
     }
-    
+
     function processGeoFeature(selectfeature, preset) {
         // when importing an object, accept users' changes to keys
         var convertedKeys = Object.keys(window.layerImports);
@@ -463,7 +463,7 @@ export function svgGeoService(projection, context, dispatch) {
                 convertedKeys.push(additionalKeys[a]);
             }
         }
-                
+
         // keep the OBJECTID to make sure we don't download the same data multiple times
         var outprops = {
             OBJECTID: (selectfeature.properties.OBJECTID || (Math.random() + ''))
@@ -485,14 +485,14 @@ export function svgGeoService(projection, context, dispatch) {
                     // left unchecked, do not import
                     continue;
                 }
-                
+
                 // user checked or kept box checked, should be imported
                 osmv = selectfeature.properties[originalKey];
                 if (osmv) {
                     osmk = window.layerImports[originalKey] || originalKey;
                 }
             }
-                
+
             if (osmk) {
                 // user directs any transferred keys
                 outprops[osmk] = osmv;
@@ -502,7 +502,7 @@ export function svgGeoService(projection, context, dispatch) {
         return selectfeature;
     }
 
-    
+
     drawGeoService.pane = function() {
         if (!this.geoservicepane) {
             this.geoservicepane = d3.selectAll('.geoservice-pane');
@@ -522,15 +522,15 @@ export function svgGeoService(projection, context, dispatch) {
         var geojson = svgGeoService.geojson;
         return (!(_.isEmpty(geojson) || _.isEmpty(geojson.features)));
     };
-    
+
     drawGeoService.windowOpen = function() {
         return !this.pane().classed('hide');
     };
-    
+
     drawGeoService.awaitingUrl = function() {
         return this.windowOpen() && (!this.pane().selectAll('.topurl').classed('hide'));
     };
-    
+
     drawGeoService.preset = function(preset) {
         // get / set an individual preset, or reset to null
         var presetBox = this.pane().selectAll('.preset');
@@ -539,7 +539,7 @@ export function svgGeoService(projection, context, dispatch) {
             // preset.tags { }
             // preset.fields[{ keys: [], strings: { placeholders: { } } }]
             var tag = [preset.icon, preset.id.split('/')[0], preset.id.replace('/', '-')];
-            
+
             var iconHolder = presetBox.select('.preset-icon-holder')
                 .html('');
 
@@ -552,7 +552,7 @@ export function svgGeoService(projection, context, dispatch) {
                     .attr('class', 'preset-icon preset-icon-24')
                     .append('svg')
                         .attr('class', ['icon', tag[0], tag[2], 'tag-' + tag[1], 'tag-' + tag[2]].join(' '));
-                        
+
                 pair.append('use')
                     .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
                     .attr('xlink:href', '#' + tag[0]);
@@ -568,8 +568,8 @@ export function svgGeoService(projection, context, dispatch) {
                         .append('use')
                             .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
                             .attr('xlink:href', '#preset-icon-frame');
-                            
-                
+
+
             } else if (preset.geometry && preset.geometry[preset.geometry.length - 1] === 'line') {
                 iconHolder.append('div')
                     .attr('class', 'preset-icon preset-icon-60')
@@ -587,13 +587,13 @@ export function svgGeoService(projection, context, dispatch) {
                             .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
                             .attr('xlink:href', '#' + tag[0] + '-15');
             }
-            
+
             presetBox.selectAll('label.preset-prompt').text('OSM preset: ');
             presetBox.selectAll('span.preset-prompt').text(preset.id);
             presetBox.selectAll('button, .preset-icon-fill, .preset-icon')
                 .classed('hide', false);
             this.internalPreset = preset;
-            
+
             // special geo circumstances
             if (preset.id === 'address') {
                 return d3.selectAll('.point-in-polygon').classed('must-show', true);
@@ -604,7 +604,7 @@ export function svgGeoService(projection, context, dispatch) {
             } else {
                 console.log(preset.id);
             }
-            
+
         } else if (preset === null) {
             // removing preset status
             presetBox.selectAll('.preset label.preset-prompt')
@@ -618,7 +618,7 @@ export function svgGeoService(projection, context, dispatch) {
         } else {
             return this.internalPreset;
         }
-        
+
         // reset UI for point-in-polygon and merge-lines
         d3.selectAll('.point-in-polygon, .merge-lines, .overlap-buildings')
             .classed('must-show', false)
@@ -638,7 +638,7 @@ export function svgGeoService(projection, context, dispatch) {
         if (!this.originalURL) {
             this.originalURL = true_url;
         }
-    
+
         // add necessary URL parameters to the user's URL
         var url = true_url;
         if (url.indexOf('/query') === -1) {
@@ -660,7 +660,7 @@ export function svgGeoService(projection, context, dispatch) {
         if (url.indexOf('&f=') === -1) {
             url += '&f=json';
         }
-        
+
         // turn iD Editor bounds into a query
         var bounds = context.map().trimmedExtent().bbox();
         bounds = JSON.stringify({
@@ -676,19 +676,19 @@ export function svgGeoService(projection, context, dispatch) {
             // unchanged bounds, unchanged import parameters, so unchanged data
             return this;
         }
-        
+
         // data has changed - make a query
         this.lastBounds = bounds;
         this.lastProps = JSON.stringify(window.layerImports);
 
-        // make a spatial query within the user viewport (unless the user made their own spatial query)       
+        // make a spatial query within the user viewport (unless the user made their own spatial query)
         if (!downloadMax && (url.indexOf('spatialRel') === -1)) {
             url += '&geometry=' + this.lastBounds;
             url += '&geometryType=esriGeometryEnvelope';
             url += '&spatialRel=esriSpatialRelIntersects';
             url += '&inSR=4326';
         }
-                
+
         var that = this;
         console.log('attempting download from ' + url);
         d3.text(url, function(err, data) {
@@ -699,22 +699,22 @@ export function svgGeoService(projection, context, dispatch) {
                 // convert EsriJSON text to GeoJSON object
                 data = JSON.parse(data);
                 var jsondl = fromEsri.fromEsri(data);
-                
+
                 // warn if went over server's maximum results count
                 if (data.exceededTransferLimit) {
                     window.alert('Service returned first ' + data.features.length + ' results (maximum)');
                 }
-                                
+
                 _.map(jsondl.features, function(selectfeature) {
                     return processGeoFeature(selectfeature, that.preset());
                 });
-                
+
                 // send the modified geo-features to the draw layer
                 drawGeoService.geojson(jsondl);
             }
         });
 
-/*        
+/*
         // whenever map is moved, start 0.7s timer to re-download data from ArcGIS service
         // unless we are downloading everything we can anyway
         if (!downloadMax) {
@@ -727,7 +727,7 @@ export function svgGeoService(projection, context, dispatch) {
                 }.bind(this), 700);
             }.bind(this));
         }
-*/        
+*/
         return this;
     };
 

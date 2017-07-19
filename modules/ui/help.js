@@ -21,7 +21,8 @@ export function uiHelp(context) {
         'help.addresses',
         'help.inspector',
         'help.buildings',
-        'help.relations'];
+        'help.relations',
+        'help.geoservices'];
 
     var docs = docKeys.map(function(key) {
         var text = t(key);
