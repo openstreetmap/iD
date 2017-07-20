@@ -248,7 +248,9 @@ export function rendererBackground(context) {
         }
 
         if (chosen && chosen.indexOf('custom:') === 0) {
-            background.baseLayerSource(rendererBackgroundSource.Custom(chosen.replace(/^custom:/, '')));
+            var template = chosen.replace(/^custom:/, '');
+            background.baseLayerSource(rendererBackgroundSource.Custom(template));
+            context.storage('background-custom-template', template);
         } else {
             background.baseLayerSource(findSource(chosen) || best || findSource('Bing') || backgroundSources[1] || backgroundSources[0]);
         }
