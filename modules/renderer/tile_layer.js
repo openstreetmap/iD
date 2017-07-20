@@ -3,7 +3,6 @@ import { t } from '../util/locale';
 import { d3geoTile } from '../lib/d3.geo.tile';
 import { geoEuclideanDistance } from '../geo';
 import { utilPrefixCSSProperty } from '../util';
-import { rendererBackgroundSource } from './background_source.js';
 
 
 export function rendererTileLayer(context) {
@@ -14,7 +13,7 @@ export function rendererTileLayer(context) {
         tileOrigin,
         z,
         transformProp = utilPrefixCSSProperty('Transform'),
-        source = rendererBackgroundSource.None();
+        source;
 
 
     // blacklist overlay tiles around Null Island..
@@ -92,6 +91,7 @@ export function rendererTileLayer(context) {
     // Important that this part not depend on `projection` because it's
     // rentered when tiles load/error (see #644).
     function render(selection) {
+        if (!source) return;
         var requests = [];
         var showDebug = context.getDebug('tile') && !source.overlay;
 

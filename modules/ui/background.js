@@ -2,7 +2,6 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t, textDirection } from '../util/locale';
-import { rendererBackgroundSource } from '../renderer/index';
 import { geoMetersToOffset, geoOffsetToMeters } from '../geo/index';
 import { utilDetect } from '../util/detect';
 import { utilSetTransform } from '../util/index';
@@ -24,8 +23,7 @@ export function uiBackground(context) {
             ['bottom', [0, 0.5]]],
         opacityDefault = (context.storage('background-opacity') !== null) ?
             (+context.storage('background-opacity')) : 1.0,
-        customTemplate = context.storage('background-custom-template') || '',
-        customSource = rendererBackgroundSource.Custom(customTemplate),
+        customSource = context.background().findSource('custom'),
         previous;
 
     // Can be 0 from <1.3.0 use or due to issue #1923.
@@ -92,7 +90,7 @@ export function uiBackground(context) {
                 return context.background().showsLayer(d);
             }
 
-            content.selectAll('.layer, .custom_layer')
+            content.selectAll('.layer')
                 .classed('active', active)
                 .classed('switch', function(d) { return d === previous; })
                 .call(setTooltips)
@@ -102,6 +100,10 @@ export function uiBackground(context) {
 
 
         function clickSetSource(d) {
+            if (d.id === 'custom' && !d.template()) {
+                return editCustom();
+            }
+
             d3.event.preventDefault();
             previous = context.background().baseLayerSource();
             context.background().baseLayerSource(d);
@@ -120,7 +122,6 @@ export function uiBackground(context) {
 
             if (template) {
                 context.storage('background-custom-template', template);
-                customTemplate = template;
                 customSource.template(template);
                 clickSetSource(customSource);
             } else {
@@ -149,9 +150,19 @@ export function uiBackground(context) {
                 .remove();
 
             var enter = layerLinks.enter()
-                .insert('li', '.custom_layer')
+                .append('li')
                 .attr('class', 'layer')
+                .classed('layer-custom', function(d) { return d.id === 'custom'; })
                 .classed('best', function(d) { return d.best(); });
+
+            enter.filter(function(d) { return d.id === 'custom'; })
+                .append('button')
+                .attr('class', 'layer-browse')
+                .call(tooltip()
+                    .title(t('background.custom_button'))
+                    .placement((textDirection === 'rtl') ? 'right' : 'left'))
+                .on('click', editCustom)
+                .call(svgIcon('#icon-search'));
 
             enter.filter(function(d) { return d.best(); })
                 .append('div')
@@ -342,7 +353,7 @@ export function uiBackground(context) {
                         .duration(200)
                         .style('right', '0px');
 
-                    content.selectAll('.layer, .custom_layer')
+                    content.selectAll('.layer')
                         .call(setTooltips);
 
                 } else {
@@ -409,45 +420,12 @@ export function uiBackground(context) {
             .style('opacity', function(d) { return 1.25 - d; });
 
 
-        /* background switcher */
+        /* background list */
 
         var backgroundList = content
             .append('ul')
             .attr('class', 'layer-list')
             .attr('dir', 'auto');
-
-        var custom = backgroundList
-            .append('li')
-            .attr('class', 'custom_layer')
-            .datum(customSource);
-
-        custom
-            .append('button')
-            .attr('class', 'layer-browse')
-            .call(tooltip()
-                .title(t('background.custom_button'))
-                .placement((textDirection === 'rtl') ? 'right' : 'left'))
-            .on('click', editCustom)
-            .call(svgIcon('#icon-search'));
-
-        var label = custom
-            .append('label');
-
-        label
-            .append('input')
-            .attr('type', 'radio')
-            .attr('name', 'layers')
-            .on('change', function () {
-                if (customSource.template()) {
-                    clickSetSource(customSource);
-                } else {
-                    editCustom();
-                }
-            });
-
-        label
-            .append('span')
-            .text(t('background.custom'));
 
         content
             .append('div')
@@ -459,6 +437,9 @@ export function uiBackground(context) {
             .attr('href', 'https://github.com/openstreetmap/iD/blob/master/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
             .append('span')
             .text(t('background.imagery_source_faq'));
+
+
+        /* overlay list */
 
         var overlayList = content
             .append('ul')
