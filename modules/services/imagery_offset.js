@@ -23,18 +23,6 @@ export default {
     offsetCache = rbush();
   },
 
-  countryCode: function(location, callback) {
-    this.reverse(location, function(err, result) {
-      if (err) {
-        return callback(err);
-      } else if (result.address) {
-        return callback(null, result.address.country_code);
-      } else {
-        return callback("Unable to geocode", null);
-      }
-    });
-  },
-
   search: function(location, callback) {
     var paddedLocation = geoExtent(location).padByMeters(500);
     var cached = offsetCache.search({

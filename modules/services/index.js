@@ -4,8 +4,8 @@ import serviceOsm from "./osm";
 import serviceTaginfo from "./taginfo";
 import serviceWikidata from "./wikidata";
 import serviceWikipedia from "./wikipedia";
-
 import serviceImageryOffset from "./imagery_offset";
+
 window.offset = serviceImageryOffset;
 export var services = {
   mapillary: serviceMapillary,
@@ -13,5 +13,6 @@ export var services = {
   osm: serviceOsm,
   taginfo: serviceTaginfo,
   wikidata: serviceWikidata,
-  wikipedia: serviceWikipedia
+  wikipedia: serviceWikipedia,
+  imageryOffset: serviceImageryOffset
 };
