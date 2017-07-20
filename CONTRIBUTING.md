@@ -268,9 +268,12 @@ of each new section of documentation should be of the form
 # GPS
 ```
 
-This will be used for navigation and as its title in iD. To add a new piece of documentation, simply add to [/data/core.yaml](/data/core.yaml) in the same format as the rest, include your new corresponding `docKey` in [/modules/ui/help.js](/modules/ui/help.js) and call `npm run build`.
+This will be used for navigation and as its title in iD. To add a new piece
+of documentation, simply add to [/data/core.yaml](/data/core.yaml) in the
+same format as the rest, include your new corresponding `docKey` in
+[/modules/ui/help.js](/modules/ui/help.js) and call `npm run build`.
 
-Afte
+
 ## Adding or Refining Presets
 
 Presets save time for iD users by automatically showing them the tags they are
