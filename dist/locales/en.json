@@ -1358,7 +1358,7 @@
                     "placeholder": "http://example.com/"
                 },
                 "content": {
-                    "label": "Contents"
+                    "label": "Content"
                 },
                 "country": {
                     "label": "Country"

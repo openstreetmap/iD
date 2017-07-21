@@ -446,7 +446,7 @@
         "content": {
             "key": "content",
             "type": "combo",
-            "label": "Contents"
+            "label": "Content"
         },
         "country": {
             "key": "country",

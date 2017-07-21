@@ -344,7 +344,7 @@ en:
         placeholder: 'http://example.com/'
       content:
         # content=*
-        label: Contents
+        label: Content
       country:
         # country=*
         label: Country
