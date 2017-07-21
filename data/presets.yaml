@@ -325,6 +325,9 @@ en:
           anticlockwise: Counterclockwise
           # direction=clockwise
           clockwise: Clockwise
+      clothes:
+        # clothes=*
+        label: Clothes
       club:
         # club=*
         label: Type

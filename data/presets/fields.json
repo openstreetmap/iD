@@ -416,6 +416,11 @@
                 }
             }
         },
+        "clothes": {
+            "key": "clothes",
+            "type": "semiCombo",
+            "label": "Clothes"
+        },
         "club": {
             "key": "club",
             "type": "typeCombo",

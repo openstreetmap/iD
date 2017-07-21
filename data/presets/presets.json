@@ -10754,6 +10754,7 @@
         "shop/boutique": {
             "icon": "shop",
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -10972,6 +10973,7 @@
         "shop/clothes": {
             "icon": "clothing-store",
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -11342,6 +11344,7 @@
         "shop/fashion": {
             "icon": "shop",
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39054,6 +39057,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39073,6 +39077,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39092,6 +39097,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39111,6 +39117,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39130,6 +39137,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39149,6 +39157,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39168,6 +39177,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39187,6 +39197,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39206,6 +39217,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39225,6 +39237,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39244,6 +39257,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39263,6 +39277,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39282,6 +39297,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39301,6 +39317,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39320,6 +39337,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39339,6 +39357,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39358,6 +39377,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39377,6 +39397,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39396,6 +39417,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39415,6 +39437,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39434,6 +39457,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39453,6 +39477,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39472,6 +39497,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39491,6 +39517,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39510,6 +39537,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39529,6 +39557,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39548,6 +39577,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39567,6 +39597,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39586,6 +39617,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39605,6 +39637,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39624,6 +39657,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39643,6 +39677,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39662,6 +39697,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39681,6 +39717,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39700,6 +39737,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39719,6 +39757,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39738,6 +39777,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39757,6 +39797,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39776,6 +39817,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39795,6 +39837,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39814,6 +39857,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39833,6 +39877,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39852,6 +39897,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39871,6 +39917,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39890,6 +39937,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39909,6 +39957,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39928,6 +39977,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39947,6 +39997,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39966,6 +40017,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39985,6 +40037,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40004,6 +40057,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40023,6 +40077,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40042,6 +40097,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40061,6 +40117,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40080,6 +40137,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40099,6 +40157,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40118,6 +40177,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40137,6 +40197,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40156,6 +40217,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40175,6 +40237,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40194,6 +40257,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40213,6 +40277,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40232,6 +40297,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40251,6 +40317,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40270,6 +40337,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40289,6 +40357,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40308,6 +40377,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40327,6 +40397,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40346,6 +40417,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40365,6 +40437,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40384,6 +40457,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40403,6 +40477,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40422,6 +40497,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40441,6 +40517,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",

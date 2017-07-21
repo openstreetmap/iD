@@ -1341,6 +1341,9 @@
                         "anticlockwise": "Counterclockwise"
                     }
                 },
+                "clothes": {
+                    "label": "Clothes"
+                },
                 "club": {
                     "label": "Type"
                 },
