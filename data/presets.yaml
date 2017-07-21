@@ -3309,6 +3309,16 @@ en:
         # man_made=water_works
         name: Water Works
         terms: '<translate with synonyms or related terms for ''Water Works'', separated by commas>'
+      man_made/watermill:
+        # man_made=watermill
+        name: Watermill
+        # 'terms: water,wheel,mill'
+        terms: '<translate with synonyms or related terms for ''Watermill'', separated by commas>'
+      man_made/windmill:
+        # man_made=windmill
+        name: Windmill
+        # 'terms: wind,wheel,mill'
+        terms: '<translate with synonyms or related terms for ''Windmill'', separated by commas>'
       man_made/works:
         # man_made=works
         name: Factory

@@ -4003,6 +4003,14 @@
                     "name": "Water Works",
                     "terms": ""
                 },
+                "man_made/watermill": {
+                    "name": "Watermill",
+                    "terms": "water,wheel,mill"
+                },
+                "man_made/windmill": {
+                    "name": "Windmill",
+                    "terms": "wind,wheel,mill"
+                },
                 "man_made/works": {
                     "name": "Factory",
                     "terms": "assembly,build,brewery,car,plant,plastic,processing,manufacture,refinery"

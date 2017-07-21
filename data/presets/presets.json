@@ -8632,6 +8632,44 @@
             },
             "name": "Water Works"
         },
+        "man_made/watermill": {
+            "icon": "buddhism",
+            "fields": [
+                "building_area"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "water",
+                "wheel",
+                "mill"
+            ],
+            "tags": {
+                "man_made": "watermill"
+            },
+            "name": "Watermill"
+        },
+        "man_made/windmill": {
+            "icon": "buddhism",
+            "fields": [
+                "building_area"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "wind",
+                "wheel",
+                "mill"
+            ],
+            "tags": {
+                "man_made": "windmill"
+            },
+            "name": "Windmill"
+        },
         "man_made/works": {
             "icon": "industry",
             "fields": [
