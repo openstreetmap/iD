@@ -2494,6 +2494,10 @@
                     "name": "Doctor",
                     "terms": "medic*"
                 },
+                "amenity/dog_excrement_bin": {
+                    "name": "Dog Excrement Bin",
+                    "terms": "bin,garbage,rubbish,litter,trash,poo,dog"
+                },
                 "amenity/dojo": {
                     "name": "Dojo / Martial Arts Academy",
                     "terms": "martial arts,dojang"

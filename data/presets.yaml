@@ -1627,6 +1627,11 @@ en:
         name: Doctor
         # 'terms: medic*'
         terms: '<translate with synonyms or related terms for ''Doctor'', separated by commas>'
+      amenity/dog_excrement_bin:
+        # 'amenity=waste_basket, waste=dog_excrement'
+        name: Dog Excrement Bin
+        # 'terms: bin,garbage,rubbish,litter,trash,poo,dog'
+        terms: '<translate with synonyms or related terms for ''Dog Excrement Bin'', separated by commas>'
       amenity/dojo:
         # amenity=dojo
         name: Dojo / Martial Arts Academy

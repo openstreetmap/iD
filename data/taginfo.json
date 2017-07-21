@@ -276,6 +276,10 @@
             "value": "doctors"
         },
         {
+            "key": "waste",
+            "value": "dog_excrement"
+        },
+        {
             "key": "amenity",
             "value": "dojo"
         },
