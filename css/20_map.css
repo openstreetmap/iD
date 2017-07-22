@@ -202,6 +202,12 @@ text.pointlabel {
     -moz-transition: opacity 100ms linear;
 }
 
+text.linelabel-halo.housenumber,
+text.linelabel.housenumber{
+    font-size: 10px;
+    fill: #005f85;
+}
+
 /* Opera doesn't support dominant-baseline. See #715 */
 /* Safari 10 seems to have regressed too */
 .linelabel-halo .textpath,
@@ -215,6 +221,10 @@ text.pointlabel {
     stroke: #fff;
     stroke-width: 5px;
     stroke-miterlimit: 1;
+}
+
+.layer-halo text.housenumber {
+    stroke: #FFC74A;
 }
 
 text.proximate {
