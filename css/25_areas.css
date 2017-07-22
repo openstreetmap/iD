@@ -92,7 +92,7 @@ path.stroke.tag-amenity-kindergarten,
 path.stroke.tag-amenity-school,
 path.stroke.tag-amenity-college,
 path.stroke.tag-amenity-university {
-    stroke: rgb(255, 255, 148);
+    stroke: rgba(255, 255, 148, 0.75);
 }
 path.fill.tag-leisure-pitch.tag-sport-beachvolleyball,
 path.fill.tag-natural-beach,
