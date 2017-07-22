@@ -2790,7 +2790,7 @@
                     "name": "Waste Transfer Station",
                     "terms": "dump,garbage,recycling,rubbish,scrap,trash"
                 },
-                "amenity/waste/dog_excrement_bin": {
+                "amenity/waste/dog_excrement": {
                     "name": "Dog Excrement Bin",
                     "terms": "bin,garbage,rubbish,litter,trash,poo,dog"
                 },

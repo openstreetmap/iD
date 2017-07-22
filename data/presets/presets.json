@@ -3029,7 +3029,7 @@
             },
             "name": "Waste Transfer Station"
         },
-        "amenity/waste/dog_excrement_bin": {
+        "amenity/waste/dog_excrement": {
             "icon": "waste-basket",
             "fields": [
                 "collection_times"
