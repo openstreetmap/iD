@@ -8652,7 +8652,7 @@
             "name": "Watermill"
         },
         "man_made/windmill": {
-            "icon": "buddhism",
+            "icon": "poi-windmill",
             "fields": [
                 "building_area"
             ],
