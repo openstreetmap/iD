@@ -529,6 +529,11 @@ en:
       generator/method:
         # 'generator:method=*'
         label: Method
+      generator/output/electricity:
+        # 'generator:output:electricity=*'
+        label: Power Output
+        # generator/output/electricity field placeholder
+        placeholder: '50 MW, 100 MW, 200 MW...'
       generator/source:
         # 'generator:source=*'
         label: Source
@@ -981,6 +986,11 @@ en:
       plant:
         # plant=*
         label: Plant
+      plant/output/electricity:
+        # 'plant:output:electricity=*'
+        label: Power Output
+        # plant/output/electricity field placeholder
+        placeholder: '500 MW, 1000 MW, 2000 MW...'
       population:
         # population=*
         label: Population
@@ -3635,6 +3645,11 @@ en:
         name: Power Generator
         # 'terms: hydro,solar,turbine,wind'
         terms: '<translate with synonyms or related terms for ''Power Generator'', separated by commas>'
+      power/generator/source_wind:
+        # 'power=generator, generator:source=wind, generator:method=wind_turbine'
+        name: Wind Generator
+        # 'terms: generator,turbine,windmill,wind'
+        terms: '<translate with synonyms or related terms for ''Wind Generator'', separated by commas>'
       power/line:
         # power=line
         name: Power Line

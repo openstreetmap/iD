@@ -732,6 +732,12 @@
             "type": "combo",
             "label": "Method"
         },
+        "generator/output/electricity": {
+            "key": "generator:output:electricity",
+            "type": "text",
+            "label": "Power Output",
+            "placeholder": "50 MW, 100 MW, 200 MW..."
+        },
         "generator/source": {
             "key": "generator:source",
             "type": "combo",
@@ -1301,6 +1307,12 @@
             "key": "plant",
             "type": "combo",
             "label": "Plant"
+        },
+        "plant/output/electricity": {
+            "key": "plant:output:electricity",
+            "type": "text",
+            "label": "Power Output",
+            "placeholder": "500 MW, 1000 MW, 2000 MW..."
         },
         "population": {
             "key": "population",

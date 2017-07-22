@@ -2058,6 +2058,10 @@
             "value": "generator"
         },
         {
+            "key": "generator:method",
+            "value": "wind_turbine"
+        },
+        {
             "key": "power",
             "value": "line"
         },

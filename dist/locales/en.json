@@ -1530,6 +1530,10 @@
                 "generator/method": {
                     "label": "Method"
                 },
+                "generator/output/electricity": {
+                    "label": "Power Output",
+                    "placeholder": "50 MW, 100 MW, 200 MW..."
+                },
                 "generator/source": {
                     "label": "Source"
                 },
@@ -1893,6 +1897,10 @@
                 },
                 "plant": {
                     "label": "Plant"
+                },
+                "plant/output/electricity": {
+                    "label": "Power Output",
+                    "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
                 "population": {
                     "label": "Population"
@@ -4297,6 +4305,10 @@
                 "power/generator": {
                     "name": "Power Generator",
                     "terms": "hydro,solar,turbine,wind"
+                },
+                "power/generator/source_wind": {
+                    "name": "Wind Generator",
+                    "terms": "generator,turbine,windmill,wind"
                 },
                 "power/line": {
                     "name": "Power Line",
