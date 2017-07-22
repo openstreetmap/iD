@@ -1273,31 +1273,6 @@
             },
             "name": "Doctor"
         },
-        "amenity/dog_excrement_bin": {
-            "icon": "waste-basket",
-            "fields": [
-                "collection_times"
-            ],
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "tags": {
-                "amenity": "waste_basket",
-                "waste": "dog_excrement"
-            },
-            "terms": [
-                "bin",
-                "garbage",
-                "rubbish",
-                "litter",
-                "trash",
-                "poo",
-                "dog"
-            ],
-            "name": "Dog Excrement Bin"
-        },
         "amenity/dojo": {
             "icon": "pitch",
             "fields": [
@@ -3053,6 +3028,31 @@
                 "amenity": "waste_transfer_station"
             },
             "name": "Waste Transfer Station"
+        },
+        "amenity/waste/dog_excrement_bin": {
+            "icon": "waste-basket",
+            "fields": [
+                "collection_times"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "amenity": "waste_basket",
+                "waste": "dog_excrement"
+            },
+            "terms": [
+                "bin",
+                "garbage",
+                "rubbish",
+                "litter",
+                "trash",
+                "poo",
+                "dog"
+            ],
+            "name": "Dog Excrement Bin"
         },
         "amenity/water_point": {
             "icon": "drinking-water",

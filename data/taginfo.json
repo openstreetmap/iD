@@ -276,10 +276,6 @@
             "value": "doctors"
         },
         {
-            "key": "waste",
-            "value": "dog_excrement"
-        },
-        {
             "key": "amenity",
             "value": "dojo"
         },
@@ -574,6 +570,10 @@
         {
             "key": "amenity",
             "value": "waste_transfer_station"
+        },
+        {
+            "key": "waste",
+            "value": "dog_excrement"
         },
         {
             "key": "amenity",
