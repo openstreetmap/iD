@@ -301,6 +301,7 @@
     "poi-chimney":              { "viewBox": "550 335 15 15" },
     "poi-bowling":              { "viewBox": "565 335 15 15" },
     "poi-binoculars":           { "viewBox": "580 335 15 15" },
+    "poi-wind-generator":       { "viewBox": "595 335 15 15" },
 
     "poi-vending-machine-shape":   { "fill": "currentColor" },
     "poi-dice-shape":              { "fill": "currentColor" },
@@ -315,6 +316,7 @@
     "poi-chimney-shape":           { "fill": "currentColor" },
     "poi-bowling-shape":           { "fill": "currentColor" },
     "poi-binoculars-shape":        { "fill": "currentColor" },
+    "poi-wind-generator-shape":    { "fill": "currentColor" },
 
     "poi-vertex":               { "viewBox": "400 350 15 15" },
 
