@@ -1984,6 +1984,11 @@ en:
         name: Veterinary
         # 'terms: pet clinic,veterinarian,animal hospital,pet doctor'
         terms: '<translate with synonyms or related terms for ''Veterinary'', separated by commas>'
+      amenity/waste/dog_excrement:
+        # 'amenity=waste_basket, waste=dog_excrement'
+        name: Dog Excrement Bin
+        # 'terms: bin,garbage,rubbish,litter,trash,poo,dog'
+        terms: '<translate with synonyms or related terms for ''Dog Excrement Bin'', separated by commas>'
       amenity/waste_basket:
         # amenity=waste_basket
         name: Waste Basket

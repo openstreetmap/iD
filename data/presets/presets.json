@@ -3029,6 +3029,31 @@
             },
             "name": "Waste Transfer Station"
         },
+        "amenity/waste/dog_excrement": {
+            "icon": "waste-basket",
+            "fields": [
+                "collection_times"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "amenity": "waste_basket",
+                "waste": "dog_excrement"
+            },
+            "terms": [
+                "bin",
+                "garbage",
+                "rubbish",
+                "litter",
+                "trash",
+                "poo",
+                "dog"
+            ],
+            "name": "Dog Excrement Bin"
+        },
         "amenity/water_point": {
             "icon": "drinking-water",
             "geometry": [

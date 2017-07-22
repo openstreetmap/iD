@@ -572,6 +572,10 @@
             "value": "waste_transfer_station"
         },
         {
+            "key": "waste",
+            "value": "dog_excrement"
+        },
+        {
             "key": "amenity",
             "value": "water_point"
         },
