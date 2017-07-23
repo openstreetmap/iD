@@ -734,6 +734,20 @@ export function uiMapData(context) {
                     if (window.license || window.metadata) {
                         context.storage('license-' + (window.license || window.metadata), 'approved');
                     }
+
+                    var importFields = Object.keys(window.layerChecked);
+                    var importedAtLeastOneField = false;
+                    for (var f = 0; f < importFields.length; f++) {
+                        if (window.layerChecked[importFields[f]]) {
+                            importedAtLeastOneField = true;
+                            break;
+                        }
+                    }
+                    if (!importedAtLeastOneField) {
+                        alert('You should use a preset or import at least one field from the GeoService');
+                        return;
+                    }
+
                     d3.select('.geoservice-button-label')
                         .text('Edit GeoService Layer');
                     hoverGeoService.title('Customize your GeoService import');

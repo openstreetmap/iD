@@ -518,18 +518,9 @@ export function svgGeoService(projection, context, dispatch) {
         return this;
     };
 
-
     drawGeoService.hasData = function() {
         var geojson = drawGeoService.geojson();
         return (!(_.isEmpty(geojson) || _.isEmpty(geojson.features)));
-    };
-
-    drawGeoService.windowOpen = function() {
-        return !this.pane().classed('hide');
-    };
-
-    drawGeoService.awaitingUrl = function() {
-        return this.windowOpen() && (!this.pane().selectAll('.topurl').classed('hide'));
     };
 
     drawGeoService.preset = function(preset) {
@@ -583,7 +574,7 @@ export function svgGeoService(projection, context, dispatch) {
                 iconHolder.append('div')
                     .attr('class', 'preset-icon preset-icon-28')
                     .append('svg')
-                        .attr('icon ' + tag[0])
+                        .attr('class', 'icon ' + tag[0])
                         .append('use')
                             .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
                             .attr('xlink:href', '#' + tag[0] + '-15');
@@ -713,7 +704,7 @@ export function svgGeoService(projection, context, dispatch) {
 
                 // warn if went over server's maximum results count
                 if (data.exceededTransferLimit) {
-                    window.alert('Service returned first ' + data.features.length + ' results (maximum)');
+                    alert('Service returned first ' + data.features.length + ' results (maximum)');
                 }
 
                 _.map(jsondl.features, function(selectfeature) {
