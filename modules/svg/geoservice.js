@@ -634,10 +634,18 @@ export function svgGeoService(projection, context, dispatch) {
         return this;
     };
 
+    drawGeoService.format = function(fmt) {
+        if (!arguments.length) return drawGeoService.fmt;
+        drawGeoService.fmt = fmt;
+        return this;
+    };
+
     drawGeoService.url = function(true_url, downloadMax) {
         if (!this.originalURL) {
             this.originalURL = true_url;
         }
+
+        var fmt = drawGeoService.format() || 'json';
 
         // add necessary URL parameters to the user's URL
         var url = true_url;
@@ -658,7 +666,7 @@ export function svgGeoService(projection, context, dispatch) {
             url += '&outSR=4326';
         }
         if (url.indexOf('&f=') === -1) {
-            url += '&f=json';
+            url += '&f=' + fmt;
         }
         if (url.indexOf('maxAllowableOffset') === -1) {
             url += '&maxAllowableOffset=0.000005';
@@ -701,7 +709,7 @@ export function svgGeoService(projection, context, dispatch) {
             } else {
                 // convert EsriJSON text to GeoJSON object
                 data = JSON.parse(data);
-                var jsondl = fromEsri.fromEsri(data);
+                var jsondl = (fmt === 'geojson') ? data : fromEsri.fromEsri(data);
 
                 // warn if went over server's maximum results count
                 if (data.exceededTransferLimit) {

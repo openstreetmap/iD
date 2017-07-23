@@ -419,6 +419,12 @@ export function uiMapData(context) {
                 var geoserviceTable = d3.selectAll('.geoservice-table')
                     .html('<thead class="tag-row"><th>Include?</th><th>GeoService field</th><th>(optional) OSM tag</th></thead>');
 
+                if (data.supportedQueryFormats && data.supportedQueryFormats.toLowerCase().indexOf('geojson') > -1) {
+                    geoserviceLayer.format('geojson');
+                } else {
+                    geoserviceLayer.format('json');
+                }
+
                 data.fields.map(function(field) {
                     // don't allow user to change how OBJECTID works
                     if (field.name === 'OBJECTID' || field.alias === 'OBJECTID') {
