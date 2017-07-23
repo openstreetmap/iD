@@ -660,6 +660,9 @@ export function svgGeoService(projection, context, dispatch) {
         if (url.indexOf('&f=') === -1) {
             url += '&f=json';
         }
+        if (url.indexOf('maxAllowableOffset') === -1) {
+            url += '&maxAllowableOffset=0.000005';
+        }
 
         // turn iD Editor bounds into a query
         var bounds = context.map().trimmedExtent().bbox();
