@@ -126,7 +126,7 @@ export function svgGeoService(projection, context, dispatch) {
                 };
 
                 // store the OBJECTID as source_oid
-                props.tags['geoservice:objectid'] = d.properties.OBJECTID;
+                // props.tags['geoservice:objectid'] = d.properties.OBJECTID;
                 delete props.tags.OBJECTID;
 
                 // allows this helper method to work on nodes and ways
