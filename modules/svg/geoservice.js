@@ -29,9 +29,6 @@ export function svgGeoService(projection, context, dispatch) {
     function init() {
         if (svgGeoService.initialized) return;  // run once
 
-        svgGeoService.geojson = {};
-        svgGeoService.enabled = true;
-
         function over() {
             d3.event.stopPropagation();
             d3.event.preventDefault();
@@ -42,12 +39,16 @@ export function svgGeoService(projection, context, dispatch) {
     }
 
     function drawGeoService(selection) {
-        var geojson = svgGeoService.geojson,
-            enabled = svgGeoService.enabled,
+        var geojson = drawGeoService.geojson(),
+            enabled = drawGeoService.enabled(),
             gjids = {},
             pointInPolygon = false,
             mergeLines = false,
             overlapBuildings = false;
+
+        if (!geojson || !geojson.features) {
+            return;
+        }
 
         try {
             pointInPolygon = d3.selectAll('.point-in-polygon input').property('checked');
@@ -519,7 +520,7 @@ export function svgGeoService(projection, context, dispatch) {
 
 
     drawGeoService.hasData = function() {
-        var geojson = svgGeoService.geojson;
+        var geojson = drawGeoService.geojson();
         return (!(_.isEmpty(geojson) || _.isEmpty(geojson.features)));
     };
 
@@ -627,9 +628,8 @@ export function svgGeoService(projection, context, dispatch) {
     };
 
     drawGeoService.geojson = function(gj) {
-        if (!arguments.length) return svgGeoService.geojson;
-        if (_.isEmpty(gj) || _.isEmpty(gj.features)) return this;
-        svgGeoService.geojson = gj;
+        if (!arguments.length) return drawGeoService.datastore;
+        drawGeoService.datastore = gj;
         dispatch.call('change');
         return this;
     };
@@ -693,7 +693,7 @@ export function svgGeoService(projection, context, dispatch) {
         }
 
         var that = this;
-        console.log('attempting download from ' + url);
+        console.log('final GeoService URL: ' + url);
         d3.text(url, function(err, data) {
             if (err) {
                 console.log('GeoService URL did not load');
@@ -737,7 +737,7 @@ export function svgGeoService(projection, context, dispatch) {
     drawGeoService.fitZoom = function() {
         // todo: implement
         if (!this.hasData()) return this;
-        var geojson = svgGeoService.geojson;
+        var geojson = drawGeoService.geojson();
 
         var map = context.map(),
             viewport = map.trimmedExtent().polygon(),

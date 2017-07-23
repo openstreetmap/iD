@@ -315,15 +315,13 @@ export function uiMapData(context) {
                        .style('display', 'none');
                     d3.select('.geoservice-button-label').text('Add GeoService Layer');
                     hoverGeoService.title('Enter a GeoService URL');
-                    populatePane(this.pane);
 
                     // clear the map
-                    context.flush();
+                    geoserviceLayer.geojson({});
                     window.knownObjectIds = {};
                     window.importedEntities = [];
-                    window.onOSMreload = function() {
-                        window.onOSMreload = null;
-                    };
+                    context.flush();
+                    populatePane(this.pane);
                 }).bind(this));
 
             function previewGeoService(err, data) {
