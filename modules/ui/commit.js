@@ -173,6 +173,20 @@ export function uiCommit(context) {
             .attr('class', 'commit-info')
             .html(t('commit.upload_explanation'));
 
+        var requestReview = saveSection
+            .append('p')
+            .attr('class', 'request-review')
+            .html( t('commit.request_review'))
+            .append('a')
+            .attr('target', '_blank')
+            .attr('tabindex', -1)
+            .call(svgIcon('#icon-out-link', 'inline'))
+            .attr('href', t('commit.request_review_link'));
+
+        requestReview
+            .append('input')
+            .attr('type', 'checkbox')
+            .on('change', toggleRequestReview());
 
         context.connection().userDetails(function(err, user) {
             if (err) return;
@@ -372,6 +386,31 @@ export function uiCommit(context) {
                         .readOnlyTags(readOnlyTags)
                         .tags(_.clone(changeset.tags))
                     );
+            };
+        }
+
+        function toggleRequestReview() {
+            var toggled = false;
+            return function() {
+                var changeset;
+                if (toggled) {
+                    changeset = updateChangeset({
+                        review_requested: undefined
+                    });
+                } else {
+                    changeset = updateChangeset({
+                        review_requested: 'yes'
+                    });
+                }
+                toggled = !toggled;
+                var expanded = !tagSection
+                    .selectAll('a.hide-toggle.expanded')
+                    .empty();
+
+                tagSection.call(rawTagEditor
+                        .expanded(expanded)
+                        .readOnlyTags(readOnlyTags)
+                        .tags(_.clone(changeset.tags)));
             };
         }
 

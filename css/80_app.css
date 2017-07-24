@@ -3293,6 +3293,10 @@ img.tile-removing {
 }
 
 .mode-save .commit-info {
+    margin-bottom: 2px;
+}
+
+.mode-save .request-review {
     margin-bottom: 10px;
 }
 
