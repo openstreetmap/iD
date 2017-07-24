@@ -16,6 +16,7 @@ import {
 
 export function uiPreset(context) {
     var dispatch = d3.dispatch('change'),
+        expandedPreference = (context.storage('preset_fields.expanded') !== 'false'),
         state,
         fieldsArr,
         preset,
@@ -84,12 +85,13 @@ export function uiPreset(context) {
     function presets(selection) {
         selection.call(uiDisclosure()
             .title(t('inspector.all_fields'))
-            .expanded(context.storage('preset_fields.expanded') !== 'false')
+            .expanded(expandedPreference)
             .on('toggled', toggled)
             .content(content)
         );
 
         function toggled(expanded) {
+            expandedPreference = expanded;
             context.storage('preset_fields.expanded', expanded);
         }
     }

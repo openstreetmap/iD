@@ -15,9 +15,10 @@ import {
 export function uiRawTagEditor(context) {
     var taginfo = services.taginfo,
         dispatch = d3.dispatch('change'),
-        expanded = context.storage('raw_tag_editor.expanded') === 'true',
-        readOnlyTags = [],
+        expandedPreference = (context.storage('raw_tag_editor.expanded') === 'true'),
+        expandedCurrent = expandedPreference,
         updatePreference = true,
+        readOnlyTags = [],
         showBlank = false,
         newRow,
         state,
@@ -31,13 +32,15 @@ export function uiRawTagEditor(context) {
 
         selection.call(uiDisclosure()
             .title(t('inspector.all_tags') + ' (' + count + ')')
-            .expanded(expanded)
+            .expanded(expandedCurrent)
             .on('toggled', toggled)
             .content(content)
         );
 
         function toggled(expanded) {
+            expandedCurrent = expanded;
             if (updatePreference) {
+                expandedPreference = expanded;
                 context.storage('raw_tag_editor.expanded', expanded);
             }
             if (expanded) {
@@ -319,10 +322,10 @@ export function uiRawTagEditor(context) {
         if (!arguments.length) return preset;
         preset = _;
         if (preset.isFallback()) {
-            expanded = true;
+            expandedCurrent = true;
             updatePreference = false;
         } else {
-            expanded = context.storage('raw_tag_editor.expanded') === 'true';
+            expandedCurrent = expandedPreference;
             updatePreference = true;
         }
         return rawTagEditor;
@@ -344,8 +347,8 @@ export function uiRawTagEditor(context) {
 
 
     rawTagEditor.expanded = function(_) {
-        if (!arguments.length) return expanded;
-        expanded = _;
+        if (!arguments.length) return expandedCurrent;
+        expandedCurrent = _;
         updatePreference = false;
         return rawTagEditor;
     };
