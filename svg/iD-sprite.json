@@ -305,7 +305,8 @@
     "poi-chimney":              { "viewBox": "550 335 15 15" },
     "poi-bowling":              { "viewBox": "565 335 15 15" },
     "poi-binoculars":           { "viewBox": "580 335 15 15" },
-    "poi-wind-generator":       { "viewBox": "595 335 15 15" },
+    "poi-wind":                 { "viewBox": "595 335 15 15" },
+    "poi-nuclear":              { "viewBox": "610 335 15 15" },
     "poi-sikhist":              { "viewBox": "625 335 15 15" },
     "poi-taoist":               { "viewBox": "640 335 15 15" },
 
@@ -322,7 +323,8 @@
     "poi-chimney-shape":           { "fill": "currentColor" },
     "poi-bowling-shape":           { "fill": "currentColor" },
     "poi-binoculars-shape":        { "fill": "currentColor" },
-    "poi-wind-generator-shape":    { "fill": "currentColor" },
+    "poi-wind-shape":              { "fill": "currentColor" },
+    "poi-nuclear-shape":           { "fill": "currentColor" },
     "poi-sikhist-shape":           { "fill": "currentColor" },
     "poi-taoist-shape":            { "fill": "currentColor" },
 

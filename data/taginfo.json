@@ -2079,6 +2079,10 @@
         },
         {
             "key": "generator:method",
+            "value": "fission"
+        },
+        {
+            "key": "generator:method",
             "value": "wind_turbine"
         },
         {

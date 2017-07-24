@@ -1,12 +1,11 @@
 {
-    "icon": "poi-wind",
+    "icon": "poi-nuclear",
     "fields": [
         "operator",
         "generator/source",
         "generator/method",
         "generator/type",
-        "generator/output/electricity",
-        "height"
+        "generator/output/electricity"
     ],
     "geometry": [
         "point",
@@ -14,19 +13,20 @@
         "area"
     ],
     "terms": [
+        "fission",
         "generator",
-        "turbine",
-        "windmill",
-        "wind"
+        "nuclear",
+        "nuke",
+        "reactor"
     ],
     "tags": {
         "power": "generator",
-        "generator:source": "wind",
-        "generator:method": "wind_turbine"
+        "generator:source": "nuclear",
+        "generator:method": "fission"
     },
     "reference": {
         "key": "generator:source",
-        "value": "wind"
+        "value": "nuclear"
     },
-    "name": "Wind Turbine"
+    "name": "Nuclear Reactor"
 }
