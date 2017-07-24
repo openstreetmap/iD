@@ -1773,6 +1773,11 @@ en:
         name: Church
         # 'terms: christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple'
         terms: '<translate with synonyms or related terms for ''Church'', separated by commas>'
+      amenity/place_of_worship/hindu:
+        # 'amenity=place_of_worship, religion=hindu'
+        name: Hindu Temple
+        # 'terms: garbhargriha,mandu,puja,shrine,temple'
+        terms: '<translate with synonyms or related terms for ''Hindu Temple'', separated by commas>'
       amenity/place_of_worship/jewish:
         # 'amenity=place_of_worship, religion=jewish'
         name: Synagogue
@@ -1783,6 +1788,21 @@ en:
         name: Mosque
         # 'terms: muslim'
         terms: '<translate with synonyms or related terms for ''Mosque'', separated by commas>'
+      amenity/place_of_worship/shinto:
+        # 'amenity=place_of_worship, religion=shinto'
+        name: Shinto Shrine
+        # 'terms: kami,torii'
+        terms: '<translate with synonyms or related terms for ''Shinto Shrine'', separated by commas>'
+      amenity/place_of_worship/sikh:
+        # 'amenity=place_of_worship, religion=sikh'
+        name: Sikh Temple
+        # 'terms: gurudwara,temple'
+        terms: '<translate with synonyms or related terms for ''Sikh Temple'', separated by commas>'
+      amenity/place_of_worship/taoist:
+        # 'amenity=place_of_worship, religion=taoist'
+        name: Taoist Temple
+        # 'terms: daoist,monastery,temple'
+        terms: '<translate with synonyms or related terms for ''Taoist Temple'', separated by commas>'
       amenity/planetarium:
         # amenity=planetarium
         name: Planetarium

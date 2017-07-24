@@ -393,11 +393,27 @@
         },
         {
             "key": "religion",
+            "value": "hindu"
+        },
+        {
+            "key": "religion",
             "value": "jewish"
         },
         {
             "key": "religion",
             "value": "muslim"
+        },
+        {
+            "key": "religion",
+            "value": "shinto"
+        },
+        {
+            "key": "religion",
+            "value": "sikh"
+        },
+        {
+            "key": "religion",
+            "value": "taoist"
         },
         {
             "key": "amenity",

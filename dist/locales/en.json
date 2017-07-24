@@ -2618,6 +2618,10 @@
                     "name": "Church",
                     "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
                 },
+                "amenity/place_of_worship/hindu": {
+                    "name": "Hindu Temple",
+                    "terms": "garbhargriha,mandu,puja,shrine,temple"
+                },
                 "amenity/place_of_worship/jewish": {
                     "name": "Synagogue",
                     "terms": "jewish"
@@ -2625,6 +2629,18 @@
                 "amenity/place_of_worship/muslim": {
                     "name": "Mosque",
                     "terms": "muslim"
+                },
+                "amenity/place_of_worship/shinto": {
+                    "name": "Shinto Shrine",
+                    "terms": "kami,torii"
+                },
+                "amenity/place_of_worship/sikh": {
+                    "name": "Sikh Temple",
+                    "terms": "gurudwara,temple"
+                },
+                "amenity/place_of_worship/taoist": {
+                    "name": "Taoist Temple",
+                    "terms": "daoist,monastery,temple"
                 },
                 "amenity/planetarium": {
                     "name": "Planetarium",

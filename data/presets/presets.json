@@ -1920,6 +1920,35 @@
             },
             "name": "Church"
         },
+        "amenity/place_of_worship/hindu": {
+            "icon": "poi-hinduist",
+            "fields": [
+                "denomination",
+                "building_area",
+                "address",
+                "service_times"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "garbhargriha",
+                "mandu",
+                "puja",
+                "shrine",
+                "temple"
+            ],
+            "tags": {
+                "amenity": "place_of_worship",
+                "religion": "hindu"
+            },
+            "reference": {
+                "key": "amenity",
+                "value": "place_of_worship"
+            },
+            "name": "Hindu Temple"
+        },
         "amenity/place_of_worship/jewish": {
             "icon": "religious-jewish",
             "fields": [
@@ -1969,6 +1998,85 @@
                 "value": "place_of_worship"
             },
             "name": "Mosque"
+        },
+        "amenity/place_of_worship/shinto": {
+            "icon": "poi-shintoist",
+            "fields": [
+                "denomination",
+                "building_area",
+                "address",
+                "service_times"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "kami",
+                "torii"
+            ],
+            "tags": {
+                "amenity": "place_of_worship",
+                "religion": "shinto"
+            },
+            "reference": {
+                "key": "amenity",
+                "value": "place_of_worship"
+            },
+            "name": "Shinto Shrine"
+        },
+        "amenity/place_of_worship/sikh": {
+            "icon": "poi-sikhist",
+            "fields": [
+                "denomination",
+                "building_area",
+                "address",
+                "service_times"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "gurudwara",
+                "temple"
+            ],
+            "tags": {
+                "amenity": "place_of_worship",
+                "religion": "sikh"
+            },
+            "reference": {
+                "key": "amenity",
+                "value": "place_of_worship"
+            },
+            "name": "Sikh Temple"
+        },
+        "amenity/place_of_worship/taoist": {
+            "icon": "poi-taoist",
+            "fields": [
+                "denomination",
+                "building_area",
+                "address",
+                "service_times"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "daoist",
+                "monastery",
+                "temple"
+            ],
+            "tags": {
+                "amenity": "place_of_worship",
+                "religion": "taoist"
+            },
+            "reference": {
+                "key": "amenity",
+                "value": "place_of_worship"
+            },
+            "name": "Taoist Temple"
         },
         "amenity/planetarium": {
             "icon": "museum",
