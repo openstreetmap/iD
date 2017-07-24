@@ -869,9 +869,6 @@
                 "contact/webcam": {
                     "placeholder": "http://example.com/"
                 },
-                "content": {
-                    "label": "Περιεχόμενο"
-                },
                 "country": {
                     "label": "Χώρα"
                 },

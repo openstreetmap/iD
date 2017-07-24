@@ -2,7 +2,7 @@
     "es": {
         "modes": {
             "add_area": {
-                "title": "Árezo",
+                "title": "Área",
                 "description": "Añade parques, edificios, lagos, bosques u otras áreas al mapa.",
                 "tail": "Haga clic en el mapa para empezar a dibujar un área, como un parque, lago o edificio."
             },
@@ -1134,35 +1134,35 @@
                     "label": "Dirección",
                     "placeholders": {
                         "block_number": "Número de manzana",
-                        "block_number!jp": "Nro. de manzana",
+                        "block_number!jp": "Nro. de manzana - Japón",
                         "city": "Ciudad",
-                        "city!jp": "Ciudad / Pueblo / Aldea / Barrio especial de Tokio",
+                        "city!jp": "Ciudad / Pueblo / Aldea / Barrio especial de Tokio - Japón",
                         "city!vn": "Ciudad / Pueblo",
                         "conscriptionnumber": "123",
                         "country": "País",
                         "county": "Condado",
-                        "county!jp": "Distrito",
+                        "county!jp": "Distrito - Japón",
                         "district": "Distrito",
                         "district!vn": "Arrondissement / Pueblo / Distrito",
                         "floor": "Piso",
                         "hamlet": "Aldea / Caserío",
                         "housename": "Nombre de la casa",
                         "housenumber": "123",
-                        "housenumber!jp": "Nro. de edificio/Nro. de lote",
+                        "housenumber!jp": "Nro. de edificio / Nro. de lote - Japón",
                         "neighbourhood": "Barrio",
-                        "neighbourhood!jp": "Chōme / Aza / Koaza",
+                        "neighbourhood!jp": "Chōme / Aza / Koaza - Japón",
                         "place": "Lugar",
                         "postcode": "Código postal",
                         "province": "Provincia",
-                        "province!jp": "Prefectura",
-                        "quarter": "Quarter",
-                        "quarter!jp": "Ōaza / Machi",
+                        "province!jp": "Prefectura - Japón",
+                        "quarter": "Barrio",
+                        "quarter!jp": "Ōaza / Machi - Japón",
                         "state": "Estado",
                         "street": "Calle",
                         "subdistrict": "Subdistrito",
                         "subdistrict!vn": "Barrio / Comuna / Pueblito",
                         "suburb": "Suburbio",
-                        "suburb!jp": "Ward"
+                        "suburb!jp": "Ward - Japón"
                     }
                 },
                 "admin_level": {
@@ -1340,6 +1340,9 @@
                         "anticlockwise": "En sentido antihorario",
                         "clockwise": "En sentido horario"
                     }
+                },
+                "clothes": {
+                    "label": "Ropa"
                 },
                 "club": {
                     "label": "Tipo"
@@ -1527,6 +1530,10 @@
                 "generator/method": {
                     "label": "Método"
                 },
+                "generator/output/electricity": {
+                    "label": "Potencia de salida",
+                    "placeholder": "50 MW, 100 MW, 200 MW..."
+                },
                 "generator/source": {
                     "label": "Fuente"
                 },
@@ -1607,6 +1614,9 @@
                 "kerb": {
                     "label": "Bordillo/Cordón"
                 },
+                "label": {
+                    "label": "Etiqueta"
+                },
                 "lamp_type": {
                     "label": "Tipo"
                 },
@@ -1676,6 +1686,9 @@
                     "label": "Ubicación"
                 },
                 "man_made": {
+                    "label": "Tipo"
+                },
+                "manhole": {
                     "label": "Tipo"
                 },
                 "map_size": {
@@ -1884,6 +1897,10 @@
                 },
                 "plant": {
                     "label": "Planta"
+                },
+                "plant/output/electricity": {
+                    "label": "Potencia de salida",
+                    "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
                 "population": {
                     "label": "Población"
@@ -2564,6 +2581,10 @@
                     "name": "Iglesia cristiana",
                     "terms": "templo, capilla, parroquia, santuario, ermita, oratorio, iglesia, oratorio, la iglesia"
                 },
+                "amenity/place_of_worship/hindu": {
+                    "name": "Templo hindú",
+                    "terms": "Templo, hindú, Grbrgrih, Mandu, adoración, capilla, templo, santuario"
+                },
                 "amenity/place_of_worship/jewish": {
                     "name": "Sinagoga",
                     "terms": "templo, aljama, sinagoga, judío, religión"
@@ -2571,6 +2592,18 @@
                 "amenity/place_of_worship/muslim": {
                     "name": "Mezquita",
                     "terms": "mezquita, morabito, rábida, musulmán, religión"
+                },
+                "amenity/place_of_worship/shinto": {
+                    "name": "Santuario sintoísta",
+                    "terms": "Santuario, Shinto, sintoísta, Kami, Torii, capilla, templo"
+                },
+                "amenity/place_of_worship/sikh": {
+                    "name": "Templo Sij",
+                    "terms": "Templo, Sij, Sikh, Gurudwara"
+                },
+                "amenity/place_of_worship/taoist": {
+                    "name": "Templo Taoísta",
+                    "terms": "Templo, Taoísta, monasterio"
                 },
                 "amenity/planetarium": {
                     "name": "Planetario",
@@ -2630,6 +2663,10 @@
                 "amenity/school": {
                     "name": "Terreno escolar",
                     "terms": "terreno, área, suelo, recinto escolar, escolar, escuela, colegio, centro educativo, unidad educativa, primaria, secundaria, secundario, instituto"
+                },
+                "amenity/scrapyard": {
+                    "name": "Depósito de chatarra",
+                    "terms": "Depósito de chatarra, cementerio de coches, auto, coche, vehículo, basura, metal, objetos salvados, chatarra, naufragio, desguace"
                 },
                 "amenity/shelter": {
                     "name": "Refugio",
@@ -2732,6 +2769,10 @@
                 "amenity/veterinary": {
                     "name": "Veterinario",
                     "terms": "veterinario, veterinaria, albéitar, mascotas, animales, perros, gatos"
+                },
+                "amenity/waste/dog_excrement": {
+                    "name": "Recipiente para excremento de perro",
+                    "terms": "Basura, tacho, recipiente, caca, excremento, perro"
                 },
                 "amenity/waste_basket": {
                     "name": "Papelera",
@@ -3948,9 +3989,25 @@
                     "name": "Planta potabilizadora de agua",
                     "terms": "potabilizadora, ETAP, planta potabilizadora, abastecimiento de agua, agua potable"
                 },
+                "man_made/watermill": {
+                    "name": "Molino de agua",
+                    "terms": "agua, rueda, molino"
+                },
+                "man_made/windmill": {
+                    "name": "Molino de viento",
+                    "terms": "Viento, rueda, molino"
+                },
                 "man_made/works": {
                     "name": "Fábrica",
                     "terms": "factoría, manofactura, industria, taller, ensamblaje, planta, materia prima, fabricado, producción, fabricación, ingenio, procesadora, refinería, cervecería, azucarera"
+                },
+                "manhole": {
+                    "name": "Pozo de inspección",
+                    "terms": "Cubierta, tapa, agujero, alcantarillado, telecomunicaciones, pozo, sumidero, boca de alcantarilla, boca de inspección, pozo de registro, abertura, boca de acceso"
+                },
+                "manhole/drain": {
+                    "name": "Desagüe pluvial",
+                    "terms": "Cubierta, tapa, desagüe, agujero, pozo, lluvia, alcantarillado, tormenta, boca de tormenta, alcantarillado pluvial"
                 },
                 "natural": {
                     "name": "Natural",
@@ -4194,16 +4251,16 @@
                     "terms": "barrio, vecindario, vecindad, urbanización, colonia"
                 },
                 "place/quarter": {
-                    "name": "Sub-Borough / Quarter",
-                    "terms": "sub-distrito, cuadrante, delegación, localidad, barrio, vecindario"
+                    "name": "Sub-municipio / Barrio",
+                    "terms": "sub-municipio, sub-distrito, sector, cuadrante, delegación, localidad, barrio, vecindario"
                 },
                 "place/square": {
                     "name": "Plaza",
                     "terms": "plaza"
                 },
                 "place/suburb": {
-                    "name": "Borough / Suburbio",
-                    "terms": "distrito, suburbio"
+                    "name": "Municipio / Suburbio",
+                    "terms": "municipio, división administrativa, division administrativa, burgo, delegación, delegacion, localidad"
                 },
                 "place/town": {
                     "name": "Ciudad pequeña",
@@ -4223,6 +4280,14 @@
                 "power/generator": {
                     "name": "Generador de energía",
                     "terms": "subestación, generador, generador eléctrico, generador de electricidad, generador de potencia"
+                },
+                "power/generator/source_nuclear": {
+                    "name": "Reactor nuclear",
+                    "terms": "Fisión, generador, nuclear, reactor"
+                },
+                "power/generator/source_wind": {
+                    "name": "Turbina eólica",
+                    "terms": "Generador, turbina, molino de viento, viento, eólico, eolico"
                 },
                 "power/line": {
                     "name": "Línea de alta tensión",

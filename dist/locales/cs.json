@@ -1216,9 +1216,6 @@
                     "label": "URL webkamery",
                     "placeholder": "http://priklad.cz/"
                 },
-                "content": {
-                    "label": "Obsah"
-                },
                 "country": {
                     "label": "Stát"
                 },

@@ -966,9 +966,6 @@
                 "contact/webcam": {
                     "placeholder": "http://pavyzdys.lt/"
                 },
-                "content": {
-                    "label": "Turinys"
-                },
                 "country": {
                     "label": "Šalis"
                 },

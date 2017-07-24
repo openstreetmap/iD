@@ -761,9 +761,6 @@
                     "label": "Veebikaamera URL",
                     "placeholder": "http://näidis.ee"
                 },
-                "content": {
-                    "label": "Sisu"
-                },
                 "country": {
                     "label": "Riik"
                 },

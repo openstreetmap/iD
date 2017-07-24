@@ -1226,9 +1226,6 @@
                     "label": "Webcam Adresi",
                     "placeholder": "http://example.com/"
                 },
-                "content": {
-                    "label": "İçerik"
-                },
                 "country": {
                     "label": "Ülke"
                 },

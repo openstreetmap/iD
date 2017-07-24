@@ -348,6 +348,23 @@
             "list": "{users} 사용자의 편집",
             "truncated_list": "{users} 사용자와 다른 {count}명의 편집"
         },
+        "info_panels": {
+            "key": "I",
+            "background": {
+                "key": "B",
+                "title": "배경",
+                "zoom": "확대",
+                "unknown": "알 수 없음",
+                "show_tiles": "타일 나타내기",
+                "hide_tiles": "타일 숨기기"
+            },
+            "history": {
+                "key": "H",
+                "selected": "{n}개 선택함",
+                "version": "버전",
+                "last_edit": "최근 편집"
+            }
+        },
         "geometry": {
             "point": "점",
             "vertex": "꼭지점",
@@ -641,10 +658,13 @@
                 "countrycode": "kr",
                 "name": {
                     "main-street": "중앙로",
+                    "pizza-hut": "피자헛",
                     "three-rivers-city-hall": "삼천시청",
                     "three-rivers-elementary-school": "삼천초등학교",
+                    "three-rivers-fire-department": "삼천소방서",
                     "three-rivers-high-school": "삼천고등학교",
                     "three-rivers-middle-school": "삼천중학교",
+                    "three-rivers-municipal-airport": "삼천공항",
                     "three-rivers-post-office": "삼천우체국",
                     "three-rivers-public-library": "삼천도서관"
                 }
@@ -698,13 +718,16 @@
                 "choose_category_road": "**목록에서 {category}을 선택하세요.**",
                 "choose_preset_residential": "여기에 도로의 여러 종류가 있지만, 지금 선택된 것은 주거 도로입니다. **{preset} 유형을 선택하세요**",
                 "retry_preset_residential": "{preset} 유형을 선택하지 않았습니다. **다시 선택하려면 여기를 클릭하세요**",
+                "split_intersection": "**{button} 버튼을 눌러 {street}을(를) 분할하세요.**",
                 "retry_split": "Split 버튼을 클릭하지 않았습니다. 다시 시도하세요.",
+                "multi_delete": "**{button} 버튼을 눌러 여분의 줄을 삭제하세요.**",
                 "retry_delete": "Delete 버튼을 클릭하지 않았습니다. 다시 시도하세요."
             },
             "buildings": {
                 "title": "건물",
                 "retry_building": "건물 모서리에 교점을 설치하는 데 문제가 있는것 같습니다. 다시해보십시요!",
                 "choose_category_building": "**목록에서 {category}을 선택하세요.**",
+                "rightclick_building": "**마우스 오른쪽 버튼을 눌러 당신이 만든 빌딩을 선택하고 편집 메뉴를 표시하세요.**",
                 "retry_square": "Square 버튼을 클릭하지 않았습니다. 다시 시도하세요.",
                 "search_tank": "**'{preset}'을 검색하세요.**",
                 "choose_tank": "**목록에서 {preset}을 선택하세요.**"
@@ -718,6 +741,9 @@
         "shortcuts": {
             "title": "키보드 단축키",
             "tooltip": "화면에 키보드 단축키를 보여줍니다.",
+            "toggle": {
+                "key": "?"
+            },
             "key": {
                 "alt": "Alt",
                 "backspace": "Backspace",
@@ -731,6 +757,7 @@
                 "home": "Home",
                 "option": "Option",
                 "pause": "Pause",
+                "pgdn": "PgDn",
                 "pgup": "Pgup",
                 "return": "Return",
                 "shift": "Shift",
@@ -1111,9 +1138,6 @@
                 "contact/webcam": {
                     "label": "웹캠 URL",
                     "placeholder": "http://example.com/"
-                },
-                "content": {
-                    "label": "내용"
                 },
                 "country": {
                     "label": "국가"
@@ -4614,6 +4638,51 @@
             "Waymarked_Trails-Cycling": {
                 "attribution": {
                     "text": "© Sarah Hoffmann, CC by-SA 3.0, 맵 데이터 OpenStreetMap 기여자, ODbL 1.0"
+                }
+            },
+            "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, 맵 데이터 OpenStreetMap 기여자, ODbL 1.0"
+                }
+            },
+            "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, 맵 데이터 OpenStreetMap 기여자, ODbL 1.0"
+                }
+            },
+            "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, 맵 데이터 OpenStreetMap 기여자, ODbL 1.0"
+                }
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© Michael Spreng, CC by-SA 3.0, 맵 데이터 OpenStreetMap 기여자, ODbL 1.0"
+                }
+            },
+            "hike_n_bike": {
+                "attribution": {
+                    "text": "© OpenStreetMap 기여자"
+                }
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "© OpenStreetMap 기여자, CC-BY-SA"
+                }
+            },
+            "osm-gps": {
+                "attribution": {
+                    "text": "© OpenStreetMap 기여자"
+                }
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "© OpenStreetMap 기여자, CC-BY-SA"
+                }
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "© OpenStreetMap 기여자, CC-BY-SA"
                 }
             }
         }

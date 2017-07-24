@@ -1341,6 +1341,9 @@
                         "clockwise": "順時針"
                     }
                 },
+                "clothes": {
+                    "label": "服飾"
+                },
                 "club": {
                     "label": "類型"
                 },
@@ -1526,6 +1529,10 @@
                 },
                 "generator/method": {
                     "label": "方法"
+                },
+                "generator/output/electricity": {
+                    "label": "電力輸出",
+                    "placeholder": "50 MW, 100 MW, 200 MW..."
                 },
                 "generator/source": {
                     "label": "來源"
@@ -1890,6 +1897,10 @@
                 },
                 "plant": {
                     "label": "電廠"
+                },
+                "plant/output/electricity": {
+                    "label": "電力輸出",
+                    "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
                 "population": {
                     "label": "人口數"
@@ -2570,6 +2581,10 @@
                     "name": "教堂",
                     "terms": "教堂,教會"
                 },
+                "amenity/place_of_worship/hindu": {
+                    "name": "印度寺廟",
+                    "terms": "印度寺廟"
+                },
                 "amenity/place_of_worship/jewish": {
                     "name": "猶太教堂",
                     "terms": "猶太會堂,synagogue"
@@ -2577,6 +2592,18 @@
                 "amenity/place_of_worship/muslim": {
                     "name": "清真寺",
                     "terms": "清真寺,回教寺"
+                },
+                "amenity/place_of_worship/shinto": {
+                    "name": "神社",
+                    "terms": "神社,日本神社"
+                },
+                "amenity/place_of_worship/sikh": {
+                    "name": "錫克教寺廟",
+                    "terms": "錫克教寺廟"
+                },
+                "amenity/place_of_worship/taoist": {
+                    "name": "道教寺廟",
+                    "terms": "道教寺廟"
                 },
                 "amenity/planetarium": {
                     "name": "天文臺",
@@ -2742,6 +2769,10 @@
                 "amenity/veterinary": {
                     "name": "獸醫院",
                     "terms": "獸醫診所, 動物醫院"
+                },
+                "amenity/waste/dog_excrement": {
+                    "name": "狗排洩物箱",
+                    "terms": "<translate with synonyms or related terms for 'Dog Excrement Bin', separated by commas>"
                 },
                 "amenity/waste_basket": {
                     "name": "垃圾筒",
@@ -3958,6 +3989,14 @@
                     "name": "淨水廠",
                     "terms": "水務設施"
                 },
+                "man_made/watermill": {
+                    "name": "水力磨坊",
+                    "terms": "水力磨坊"
+                },
+                "man_made/windmill": {
+                    "name": "風力磨坊",
+                    "terms": "風力磨坊"
+                },
                 "man_made/works": {
                     "name": "工廠",
                     "terms": "工廠,加工廠,Factory"
@@ -4241,6 +4280,14 @@
                 "power/generator": {
                     "name": "發電機",
                     "terms": "發電機"
+                },
+                "power/generator/source_nuclear": {
+                    "name": "核子反應爐",
+                    "terms": "核子反應爐,核反應爐,核電廠"
+                },
+                "power/generator/source_wind": {
+                    "name": "風力發電機",
+                    "terms": "風力發電機"
                 },
                 "power/line": {
                     "name": "電纜",

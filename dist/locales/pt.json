@@ -348,6 +348,49 @@
             "list": "Edições de {users}",
             "truncated_list": "Edições feitas por {users} e outros {count} utilizadores"
         },
+        "info_panels": {
+            "key": "I",
+            "background": {
+                "key": "B",
+                "title": "Fundo",
+                "zoom": "Aproximar",
+                "vintage": "Vintage",
+                "unknown": "Desconhecido",
+                "show_tiles": "Mostrar rmoisaco",
+                "hide_tiles": "Ocultar moisaco"
+            },
+            "history": {
+                "key": "H",
+                "title": "Histórico",
+                "selected": "(n) selecionados",
+                "version": "Versão",
+                "last_edit": "Última edição",
+                "edited_by": "Editado por",
+                "changeset": "Conjunto de alterações",
+                "unknown": "Desconhecidos",
+                "link_text": "Histórico em openstreetmap.org"
+            },
+            "location": {
+                "key": "L",
+                "title": "Localização",
+                "unknown_location": "Localização desconhecida"
+            },
+            "measurement": {
+                "key": "M",
+                "title": "Medição",
+                "selected": "(n) selecionados",
+                "geometry": "Geometria",
+                "closed": "Fechado",
+                "center": "Centro",
+                "perimeter": "Perímetro ",
+                "length": "Comprimento",
+                "area": "Área",
+                "centroid": "Centróide",
+                "location": "Localização",
+                "metric": "Métrico",
+                "imperial": "Imperial"
+            }
+        },
         "geometry": {
             "point": "ponto",
             "vertex": "vértice",
@@ -410,24 +453,28 @@
         "background": {
             "title": "Imagem de Fundo",
             "description": "Configurar imagem de fundo",
+            "key": "B",
             "percent_brightness": "{opacity}% transparente",
             "none": "Nenhum",
             "best_imagery": "Melhor fonte de imagem para esse lugar",
             "switch": "Mudar para este fundo",
             "custom": "Personalizado",
             "custom_button": "Editar fundo personalizando",
+            "custom_prompt": "Submeta um modelo de moisaco via. Tokens válidos: - {zoom}/{z}, {x}, {y} para Z/X/Y esquema de moisaco - {ty} for flipped TMS-style Y coordinates - {u} for quadtile scheme - {switch:a,b,c} for DNS server multiplexingExample:{example}",
             "fix_misalignment": "Corrigir o alinhamento da imagem",
             "imagery_source_faq": "Qual é a origem desta imagem?",
             "reset": "reiniciar",
             "offset": "Arrasta para a área cinzenta abaixo para corrigir o alinhamento da imagem, ou insira os valores de deslocamento em metros. ",
             "minimap": {
                 "description": "Mini-mapa",
-                "tooltip": "Mostra um pequeno mapa com uma área mais abrangente que ajuda a localizar a área que está a editar."
+                "tooltip": "Mostra um pequeno mapa com uma área mais abrangente que ajuda a localizar a área que está a editar.",
+                "key": "/"
             }
         },
         "map_data": {
             "title": "Dados do Mapa",
             "description": "Dados do Mapa",
+            "key": "F",
             "data_layers": "Camadas de Dados",
             "fill_area": "Preenchimento de Áreas",
             "map_features": "Elementos do Mapa",
@@ -486,7 +533,8 @@
         "area_fill": {
             "wireframe": {
                 "description": "Sem Preenchimento (só linhas)",
-                "tooltip": "Ativar o modo 'só linhas' permite ver melhor a imagem de fundo."
+                "tooltip": "Ativar o modo 'só linhas' permite ver melhor a imagem de fundo.",
+                "key": "W"
             },
             "partial": {
                 "description": "Preenchimento Parcial",
@@ -499,7 +547,9 @@
         },
         "restore": {
             "heading": "Tem alterações por gravar",
-            "description": "Tem alterações feitas numa sessão anterior por gravar. Quer recuperar essas alterações?"
+            "description": "Tem alterações feitas numa sessão anterior por gravar. Quer recuperar essas alterações?",
+            "restore": "Restaurar as minhas alterações",
+            "reset": "Desfazer as minhas alterações"
         },
         "save": {
             "title": "Gravar",
@@ -570,6 +620,8 @@
         "validations": {
             "disconnected_highway": "Rodovia desligada",
             "disconnected_highway_tooltip": "As estradas devem estar ligadas a outras estradas ou entradas de edifícios.",
+            "old_multipolygon": "Tags de multi-polígono na parte exterior ",
+            "old_multipolygon_tooltip": "Este tipo de multi-polígono está fore de uso. Por favor ajuste as tags ao multi-polígono principal em vez de colocar na parte exterior ",
             "untagged_point": "Ponto sem etiquetas",
             "untagged_point_tooltip": "Escolha um elemento que indique o que este ponto representa.",
             "untagged_line": "Linha sem etiquetas",
@@ -607,6 +659,7 @@
         },
         "help": {
             "title": "Ajuda",
+            "key": "H",
             "help": "#Ajuda\n\nEstá a usar um editor do [OpenStreetMap](http://www.openstreetmap.org/), o mapa mundial livre e editável.\nPode usá-lo para adicionar e atualizar dados da sua área, tornando-o num mapa de código e dados abertos mundial melhor para todos.\n\nAs alterações que fizer neste mapa serão visíveis para qualquer pessoa que\ndecida usar o OpenStreetMap. Para fazer uma edição, basta\n[iniciar sessão](https://www.openstreetmap.org/login).\n\nO [editor iD](http://ideditor.com/) é um projeto colaborativo com o [código-fonte disponível no GitHub](https://github.com/openstreetmap/iD).\n",
             "roads": "# Estradas\n\nPode criar, corrigir e eliminar estradas com o editor. As estradas podem ser\nde qualquer tipo: caminhos, autoestradas, carreiros florestais ou agrícolas,\nruas pedonais, ciclovias, entre outras. Qualquer local que seja frequentemente\natravessado por pessoas deve ser normalmente colocado no mapa.\n\n### Selecionar\n\nClique numa estrada para a selecionar. Aparece o painel lateral direito para\npoder editar as caraterísticas da estrada e botões em redor da estrada.\n\n### Alterar\n\nClique na estrada que quer alterar. Se quiser adicionar pontos à estrada entre\ndois pontos existentes basta clicar 2 vezes sobre o segmento da estrada.\nPode então deslocar esse ponto acabado de criar.\n\nSe existir uma estrada com ligação a outra no terreno mas que no mapa não\nestão ligadas, basta deslocar um ponto de uma das estradas até à outra estrada\npara ficarem ligadas. É muito importante as estradas estarem corretamente\nligadas umas às outras para que os programas de rotas possam fornecer\ninformações corretas aos utilizadores.\n\nPode também clicar no botão de 'Mover' ou premir a tecla 'M' para mover\na estrada toda de uma só vez. No entanto deve-se ter cuidado ao fazer isso\npois todos os pontos da estrada, incluindo os pontos partilhados com\noutras estradas, serão movidos.\n\nPara dividir uma estrada em duas, útil por exemplo quando existe uma estrada\nno mapa que na realidade são 2 estradas diferentes com nomes diferentes,\nclique no ponto da estrada onde quer dividir e clique no botão da tesoura que\naparece ao lado do ponto. Esse botão aparece apenas se estiver selecionado o ponto e não a linha. Pode também combinar as 2 linhas numa só\nselecionando as duas estradas e clicando no botão + que aparece ao lado.\nSe existirem no mapa 2 estradas ligadas (nas extremidades ou num cruzamento)\nmas que na realidade não se ligam ou cruzam, basta selecionar o ponto comum\ne clicar no botão ao lado de desligar as linhas. Pode então deslocar o ponto\npara outro local.\n\n### Eliminar\n\nSe uma estrada estiver errada - pode-se confirmar pela imagem de satélite (ter em\nconta que a imagem de satélite pode ter alguns anos e a estrada pode ter sido\nconstruida posteriormente) e preferencialmente confirmar presencialmente  - pode\neliminar a estrada toda. É necessária precaução ao eliminar elementos do mapa.\nTal como qualquer outra alteração, os resultados serão visíveis a todos os outros.\n\nPode eliminar uma estrada clicando nela para a selecionar e de seguida\nclicar no ícone do caixote do lixo que aparece ao lado, ou simplesmente\npressionar na tecla 'Del' do teclado.\n\n### Criar\n\nEncontrou alguma estrada que não existe no mapa? Clique no botão 'Linha' que\nestá na parte superior ou pressione a tecla '2' para começar a desenhar a linha.\n\nClique no ponto inicial da estrada para começar a desenhá-la. Se já existir\numa estrada no mapa, mas que está incompleta, pode continuá-la bastando\npara isso clicar no ponto da extremidade da estrada existente e clicar no botão em redor 'Continuar esta linha'.\n\nAdicione então outros pontos de acordo com as imagens de satélite ou os trilhos\nGPS. Se a estrada que está a desenhar cruzar com outra estrada, crie um ponto\npor cima da outra estrada onde se cruzam. Quando terminar de desenhar\na estrada, clique duas vezes no último ponto da estrada ou pressione a tecla 'Enter' (mudança d linha).\n",
             "gps": "# GPS\n\nOs dados de GPS são a fonte mais fidedigna de dados no OpenStreetMap. Este editor suporta trilhos GPS locais - ficheiros `.gpx` que estejam no seu computador. Pode obter este tipo de trilhos GPS através de várias aplicações existentes para telemóveis assim como dispositivos GPS.\n\nPara mais informações sobre a obtenção de trilhos GPS, ver [Surveying with a GPS](http://learnosm.org/en/mobile-mapping/).\n\nPara usar um trilho GPX no editor para mapear, arraste o ficheiro GPX do seu computador para a janela do editor com o mapa. Se o ficheiro for reconhecido com sucesso, o trilho será adicionado ao mapa, aparecendo como uma linha de cor roxa. Clique no botão 'Dados do Mapa' à direita para ativar, desativar ou enquadrar nesta nova camada onde se situa o trilho GPX.\n\nO trilho GPX não é enviado diretamente para o OpenStreetMap - apenas pode servir de referência para si, por forma a desenhar com mais precisão elementos no mapa.\n\nTambém pode [enviar os seus trilhos GPS](http://www.openstreetmap.org/trace/create) para o OpenStreetMap para que possam ser úteis a outros utilizadores que editem o mapa.\n",
@@ -634,10 +687,12 @@
                 "countrycode": "pt"
             },
             "welcome": {
-                "welcome": "bem vindo! Este tutorial irá ensiná-lo o básico de como editar no OpenStreetMap "
+                "welcome": "bem vindo! Este tutorial irá ensiná-lo o básico de como editar no OpenStreetMap ",
+                "practice": "Toda a informação contida neste guia, é a apenas para praticar e qualquer alteração que faça durante este guia, não serão guardadas."
             },
             "navigation": {
-                "title": "Navegação"
+                "title": "Navegação",
+                "points_lines_areas": "Os elementos do mapa são representados em *pontos, linhas ou áreas.*"
             },
             "points": {
                 "title": "Pontos"
@@ -974,9 +1029,6 @@
                     "label": "URL da webcam",
                     "placeholder": "http://example.com/"
                 },
-                "content": {
-                    "label": "Conteúdos"
-                },
                 "country": {
                     "label": "País"
                 },
@@ -1223,6 +1275,9 @@
                 },
                 "kerb": {
                     "label": "Lancil"
+                },
+                "label": {
+                    "label": "Rótulo"
                 },
                 "lamp_type": {
                     "label": "Tipo"
@@ -4778,45 +4833,107 @@
             "OSM_Inspector-Addresses": {
                 "attribution": {
                     "text": "© Geofabrik GmbH, contribuidores OpenStreetMap, CC-BY-SA"
-                }
+                },
+                "name": "Inspector OSM: Moradas"
             },
             "OSM_Inspector-Geometry": {
                 "attribution": {
                     "text": "© Geofabrik GmbH, contribuidores OpenStreetMap, CC-BY-SA"
-                }
+                },
+                "name": "Inspector OSM: Geometria"
             },
             "OSM_Inspector-Highways": {
                 "attribution": {
                     "text": "© Geofabrik GmbH, contribuidores OpenStreetMap, CC-BY-SA"
-                }
+                },
+                "name": "Inspector OSM: Estradas"
             },
             "OSM_Inspector-Multipolygon": {
                 "attribution": {
                     "text": "© Geofabrik GmbH, contribuidores OpenStreetMap, CC-BY-SA"
-                }
+                },
+                "name": "Inspector OSM: Áreas"
             },
             "OSM_Inspector-Places": {
                 "attribution": {
                     "text": "© Geofabrik GmbH, contribuidores OpenStreetMap, CC-BY-SA"
-                }
+                },
+                "name": "Inspector OSM: Lugares"
             },
             "OSM_Inspector-Routing": {
                 "attribution": {
                     "text": "© Geofabrik GmbH, contribuidores OpenStreetMap, CC-BY-SA"
-                }
+                },
+                "name": "Inspector OSM: Rotas"
             },
             "OSM_Inspector-Tagging": {
                 "attribution": {
                     "text": "© Geofabrik GmbH, contribuidores OpenStreetMap, CC-BY-SA"
-                }
+                },
+                "name": "Inspector OSM: Etiquetagem"
+            },
+            "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, conteúdo do mapa contribuidores OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Ciclismo"
+            },
+            "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, conteúdo do mapa contribuidores OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Pedestrianismo"
+            },
+            "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, conteúdo do mapa contribuidores OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Ciclismo de montanha"
+            },
+            "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, conteúdo do mapa contribuidores OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Skate"
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, conteúdo do mapa contribuidores OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Desportos de Inverno"
+            },
+            "basemap.at": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Mapa base Áustria, baseado em informação govenamental ",
+                "name": "basemap.at"
+            },
+            "basemap.at-orthofoto": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Ortofotomapa fornecido por basemap.at. Sucessor de geoimage.at imagery.",
+                "name": "Ortofotomapa geoimage.at"
             },
             "hike_n_bike": {
+                "attribution": {
+                    "text": "Contribuidores © OpenStreetMap"
+                },
                 "name": "Bicicleta & caminhadas"
             },
             "mapbox_locator_overlay": {
                 "attribution": {
                     "text": "Termos e opinião"
-                }
+                },
+                "description": "Mostras as principais funcionalidades para ajudar a orientá-lo.",
+                "name": "Sobreposição de localização"
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "Contribuidores © OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OpenPT Map (sobreposição)"
             },
             "osm-gps": {
                 "attribution": {
@@ -4836,6 +4953,36 @@
                     "text": "© contribuidores OpenStreetMap, CC-BY-SA"
                 },
                 "name": "OpenStreetMap (estilo alemão)"
+            },
+            "qa_no_address": {
+                "attribution": {
+                    "text": "Simon Poole, dados contribuidores © OpenStreetMap"
+                },
+                "name": "QA Sem morada"
+            },
+            "skobbler": {
+                "attribution": {
+                    "text": "© moisaco: skobbler, dados do mapa contribuidores © OpenStreetMap"
+                },
+                "name": "skobbler"
+            },
+            "stamen-terrain-background": {
+                "attribution": {
+                    "text": "moisaco do mapa por Stamen Design, sob licença CC BY 3.0"
+                },
+                "name": "Terreno Stamen"
+            },
+            "tf-cycle": {
+                "attribution": {
+                    "text": "Mapa © Thunderforest, dados do mapa contribuidores © OpenStreetMap"
+                },
+                "name": "Thunderforest OpenCycleMap"
+            },
+            "tf-landscape": {
+                "attribution": {
+                    "text": "Mapa © Thunderforest, dados do mapa contribuidores © OpenStreetMap"
+                },
+                "name": "Thunderforest Landscape"
             }
         }
     }

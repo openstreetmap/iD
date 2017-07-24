@@ -1289,9 +1289,6 @@
                     "label": "Webcam-URL",
                     "placeholder": "http://example.com/"
                 },
-                "content": {
-                    "label": "Inhoud"
-                },
                 "country": {
                     "label": "Land"
                 },

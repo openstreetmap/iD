@@ -1357,9 +1357,6 @@
                     "label": "Adres kamery internetowej",
                     "placeholder": "http://example.com"
                 },
-                "content": {
-                    "label": "Zawartość"
-                },
                 "country": {
                     "label": "Kraj"
                 },
@@ -1447,7 +1444,7 @@
                     "label": "Typ"
                 },
                 "drive_through": {
-                    "label": "Drive-Through"
+                    "label": "Drive-Through (zakupy)"
                 },
                 "electrified": {
                     "label": "Elektryfikacja",
@@ -2150,7 +2147,7 @@
                         "grade2": "Żwirowa/tłuczniowa z niewielką domieszką piasku, mułu lub gliny",
                         "grade3": "Składająca się z równej ilości twardych i miękkich materiałów",
                         "grade4": "Ziemia/piasek/trawa z domieszką twardych materiałów",
-                        "grade5": "Ziemia/piasek/trawa, bez dodatku materiałów utwardzonych; często słabo widoczna"
+                        "grade5": "Ziemia/piasek/trawa, bez dodatku materiałów twardych; często słabo widoczna"
                     },
                     "placeholder": "Utwardzona, nieubita..."
                 },
@@ -3329,8 +3326,8 @@
                     "terms": "ustąp pierwszeństwa przejazdu"
                 },
                 "highway/living_street": {
-                    "name": "Droga w oznaczonej strefie zamieszkania",
-                    "terms": "strefa,zamieszkania,zamieszkała,droga,ulica"
+                    "name": "Droga w oznaczonej znakami D-40/D-41 strefie zamieszkania",
+                    "terms": "strefa zamieszkania"
                 },
                 "highway/mini_roundabout": {
                     "name": "Mini-rondo",
@@ -3397,7 +3394,7 @@
                     "terms": "alejka"
                 },
                 "highway/service/drive-through": {
-                    "name": "Drive-Through",
+                    "name": "Drive-Through (zakupy)",
                     "terms": "drive-through"
                 },
                 "highway/service/driveway": {

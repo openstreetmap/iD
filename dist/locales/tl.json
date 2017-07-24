@@ -850,9 +850,6 @@
                     "label": "URL ng webcam",
                     "placeholder": "http://example.com/"
                 },
-                "content": {
-                    "label": "Mga nilalaman"
-                },
                 "country": {
                     "label": "bansa"
                 },

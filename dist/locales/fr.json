@@ -2,7 +2,7 @@
     "fr": {
         "modes": {
             "add_area": {
-                "title": "Polygon",
+                "title": "Polygone",
                 "description": "Ajouter des parcs, des bâtiments, des lacs ou d'autres polygones à la carte.",
                 "tail": "Cliquez sur la carte pour ajouter un polygone tel qu'un parc, un lac ou un bâtiment."
             },
@@ -30,15 +30,15 @@
         "operations": {
             "add": {
                 "annotation": {
-                    "point": "Un point créé.",
-                    "vertex": "Un nœud ajouté à une ligne.",
-                    "relation": "Relation ajoutée."
+                    "point": "ajout d'un point.",
+                    "vertex": "ajout d'un nœud à une ligne.",
+                    "relation": "création d'une relation."
                 }
             },
             "start": {
                 "annotation": {
-                    "line": "Une ligne commencée.",
-                    "area": "Un polygone commencé."
+                    "line": "création d'une ligne.",
+                    "area": "création d'un polygone."
                 }
             },
             "continue": {
@@ -48,8 +48,8 @@
                 "not_eligible": "Aucune ligne ne peut être poursuivie ici.",
                 "multiple": "Plusieurs lignes peuvent être poursuivies ici. Pour choisir une ligne, appuyez sur la touche Shift / Majuscule du clavier et appuyez sur la ligne voulue pour la sélectionner.",
                 "annotation": {
-                    "line": "Une ligne continuée.",
-                    "area": "Un polygone continué."
+                    "line": "poursuite d'une ligne.",
+                    "area": "poursuite d'un polygone."
                 }
             },
             "cancel_draw": {
@@ -69,8 +69,8 @@
                 },
                 "key": "O",
                 "annotation": {
-                    "line": "Ligne rendue circulaire.",
-                    "area": "Polygone rendu circulaire."
+                    "line": "ligne rendue circulaire.",
+                    "area": "polygone rendu circulaire."
                 },
                 "not_closed": "Cet élément ne peut pas être rendu circulaire car il ne boucle pas.",
                 "too_large": "Ceci ne peut pas être transformé en cercle parce qu'une partie n'est pas visible.",
@@ -84,8 +84,8 @@
                 },
                 "key": "S",
                 "annotation": {
-                    "line": "Ligne rendue orthogonale.",
-                    "area": "Polygone rendu orthogonal."
+                    "line": "ligne rendue orthogonale.",
+                    "area": "polygone rendu orthogonal."
                 },
                 "not_squarish": "Cela ne peut être fait, ce n'est pas carré.",
                 "too_large": "Ceci ne peut pas être transformé en rectangle parce qu'une partie n'est pas visible.",
@@ -95,7 +95,7 @@
                 "title": "Rendre droit",
                 "description": "Rendre cette ligne droite.",
                 "key": "S",
-                "annotation": "Rendre une ligne droite.",
+                "annotation": "rendu une ligne droite.",
                 "too_bendy": "Cela ne peut pas être redressé, car la courbe est trop importante.",
                 "connected_to_hidden": "Cette ligne ne peut être rendue droite parce qu'elle est connecté à un élément caché."
             },
@@ -106,12 +106,12 @@
                     "multiple": "Supprimer ces éléments définitivement."
                 },
                 "annotation": {
-                    "point": "Point supprimé",
-                    "vertex": "Nœud d'une ligne supprimé.",
-                    "line": "Ligne supprimée.",
-                    "area": "Polygone supprimé.",
-                    "relation": "Relation supprimée.",
-                    "multiple": "{n} éléments supprimés."
+                    "point": "suppression d'un point.",
+                    "vertex": "suppression d'un nœud d'une ligne.",
+                    "line": "suppression d'une ligne.",
+                    "area": "suppression d'un polygone.",
+                    "relation": "suppression d'une relation.",
+                    "multiple": "suppression de {n} éléments."
                 },
                 "too_large": {
                     "single": "Cet élément ne peut pas être supprimé car il n'est pas suffisamment visible.",
@@ -131,24 +131,24 @@
                 }
             },
             "add_member": {
-                "annotation": "Membre ajouté à une relation."
+                "annotation": "ajout d'un membre à une relation."
             },
             "delete_member": {
-                "annotation": "Membre supprimé d'une relation."
+                "annotation": "suppression d'un membre d'une relation."
             },
             "connect": {
                 "annotation": {
-                    "point": "Joindre une ligne à un point.",
-                    "vertex": "Joindre les nœuds à une ligne.",
-                    "line": "Joindre les chemins ensemble.",
-                    "area": "Joindre une ligne à un polygone."
+                    "point": "connexion d'un chemin à un point.",
+                    "vertex": "connexion d'un chemin à un autre chemin.",
+                    "line": "connexion d'un chemin à une ligne.",
+                    "area": "connexion d'un chemin à un polygone."
                 }
             },
             "disconnect": {
                 "title": "Séparer",
                 "description": "Séparer les lignes/contours l'un de l'autre.",
                 "key": "D",
-                "annotation": "Lignes non connectées.",
+                "annotation": "déconnexion de lignes ou polygones.",
                 "not_connected": "Il n'y a pas ici de lignes/polygones à déconnecter.",
                 "connected_to_hidden": "Ceci ne peut être déconnecté parce que c'est connecté à un élément caché.",
                 "relation": "Ceci ne peut être déconnecté parce que cela connecte les membres d'une relation."
@@ -157,7 +157,7 @@
                 "title": "Fusionner",
                 "description": "Fusionner ces éléments",
                 "key": "C",
-                "annotation": "{n} éléments fusionnés",
+                "annotation": "fusion de {n} éléments.",
                 "not_eligible": "Ces éléments ne peuvent pas être fusionnés.",
                 "not_adjacent": "Ces éléments ne peuvent être fusionnés car leurs extrémités ne sont pas connectés.",
                 "restriction": "Ces éléments ne peuvent être fusionnés car au moins l'un d'entre eux est membre de la relation \"{relation}\".",
@@ -172,11 +172,11 @@
                 },
                 "key": "M",
                 "annotation": {
-                    "point": "Point déplacé.",
-                    "vertex": "Nœud d'une ligne déplacé.",
-                    "line": "Ligne déplacée.",
-                    "area": "Polygone déplacé.",
-                    "multiple": "Plusieurs éléments déplacés."
+                    "point": "déplacement d'un point .",
+                    "vertex": "déplacement d'un nœud d'une ligne.",
+                    "line": "déplacement d'une ligne.",
+                    "area": "déplacement d'un polygone.",
+                    "multiple": "déplacement de plusieurs éléments."
                 },
                 "incomplete_relation": {
                     "single": "Cet élément ne peut pas être déplacé car il n'est pas téléchargé totalement.",
@@ -212,12 +212,12 @@
                 },
                 "annotation": {
                     "long": {
-                        "single": "Miroir par rapport au grand axe de l'élément.",
-                        "multiple": "Miroir par rapport au grand axe des éléments effectué."
+                        "single": "réflexion d'un élément par rapport à son grand axe.",
+                        "multiple": "réflexion d'éléments par rapport à leur grand axe."
                     },
                     "short": {
-                        "single": "Miroir par rapport au petit axe de l'élément.",
-                        "multiple": "Miroir par rapport au petit axe des éléments effectué."
+                        "single": "réflexion d'un élément par rapport à son petit axe.",
+                        "multiple": "réflexion d'éléments par rapport à leur petit axe."
                     }
                 },
                 "incomplete_relation": {
@@ -241,9 +241,9 @@
                 },
                 "key": "R",
                 "annotation": {
-                    "line": "Pivoter la ligne.",
-                    "area": "Pivoter un polygone.",
-                    "multiple": "Tourner plusieurs éléments."
+                    "line": "ligne pivotée.",
+                    "area": "polygone pivoté.",
+                    "multiple": "plusieurs éléments pivotés."
                 },
                 "incomplete_relation": {
                     "single": "Cet élément ne peut pas être tourné car il n'est pas téléchargé totalement.",
@@ -262,7 +262,7 @@
                 "title": "Inverser",
                 "description": "Inverse le sens d'une ligne.",
                 "key": "V",
-                "annotation": "Sens d'une ligne inversé."
+                "annotation": "sens d'une ligne inversé."
             },
             "split": {
                 "title": "Couper",
@@ -273,9 +273,9 @@
                 },
                 "key": "X",
                 "annotation": {
-                    "line": "Coupe une ligne.",
-                    "area": "Couper le contour d'un polygone.",
-                    "multiple": "Couper {n} lignes/contour de polygone."
+                    "line": "ligne coupée.",
+                    "area": "contour d'un polygone coupé.",
+                    "multiple": "{n} lignes/contours de polygone coupés."
                 },
                 "not_eligible": "Les lignes ne peuvent pas être coupées à leurs extrémités.",
                 "multiple_ways": "Il y a trop de ligne à cet endroit pour pouvoir couper.",
@@ -289,8 +289,8 @@
                     "toggle_off": "Cliquez pour supprimer la restriction \"{restriction}\"."
                 },
                 "annotation": {
-                    "create": "Interdiction de tourner ajoutée",
-                    "delete": "Interdiction de tourner supprimée"
+                    "create": "interdiction de tourner ajoutée.",
+                    "delete": "interdiction de tourner supprimée."
                 }
             }
         },
@@ -334,7 +334,7 @@
             "upload_explanation_with_user": "Les modifications envoyées en tant que {user} seront visibles sur toutes les cartes qui utilisent les données d'OpenStreetMap.",
             "save": "Envoyer",
             "cancel": "Annuler",
-            "changes": "{count} changements",
+            "changes": "{count} modifications",
             "warnings": "Attention",
             "modified": "Modifié",
             "deleted": "Supprimé",
@@ -345,8 +345,8 @@
             "google_warning_link": "http://www.openstreetmap.org/copyright"
         },
         "contributors": {
-            "list": "Editions de {users}",
-            "truncated_list": "Editions de {users} et de {count} autres"
+            "list": "Modifications de {users}",
+            "truncated_list": "Modifications de {users} et de {count} autres"
         },
         "geometry": {
             "point": "point",
@@ -1288,9 +1288,6 @@
                 "contact/webcam": {
                     "label": "adresse de visioconférence",
                     "placeholder": "http://example.com/"
-                },
-                "content": {
-                    "label": "Contenu"
                 },
                 "country": {
                     "label": "Pays"

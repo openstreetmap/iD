@@ -348,6 +348,49 @@
             "list": "Spremembe uporabnikov {users}",
             "truncated_list": "Spremembe uporabnikov {users} in {count} drugih"
         },
+        "info_panels": {
+            "key": "I",
+            "background": {
+                "key": "O",
+                "title": "Ozadje",
+                "zoom": "Približaj",
+                "vintage": "Starinsko",
+                "unknown": "Neznano",
+                "show_tiles": "Pokaži sličice",
+                "hide_tiles": "Skrij sličice"
+            },
+            "history": {
+                "key": "Z",
+                "title": "Zgodovina",
+                "selected": "{n} izbranih",
+                "version": "Različica",
+                "last_edit": "Zadnje urejanje",
+                "edited_by": "Urejevalec",
+                "changeset": "Spremembe",
+                "unknown": "Neznano",
+                "link_text": "Zgodovina na openstreetmap.org"
+            },
+            "location": {
+                "key": "L",
+                "title": "Mesto",
+                "unknown_location": "Neznano mesto"
+            },
+            "measurement": {
+                "key": "M",
+                "title": "Merilo",
+                "selected": "{n} izbranih",
+                "geometry": "Geometrija",
+                "closed": "zaprto",
+                "center": "Središče",
+                "perimeter": "Obseg",
+                "length": "Dolžina",
+                "area": "Površina",
+                "centroid": "Središčna točka",
+                "location": "Mesto",
+                "metric": "Metrične enote",
+                "imperial": "Imperialne enote"
+            }
+        },
         "geometry": {
             "point": "točka",
             "vertex": "ogljišče",
@@ -417,6 +460,7 @@
             "switch": "Preklopi nazaj na to ozadje.",
             "custom": "Po meri",
             "custom_button": "Uredi ozadje po meri",
+            "custom_prompt": "Vpišite naslov url predloge sličic. Veljavni žetoni so:\n   - {zoom}/{z}, {x}, {y} za Z/X/Y sheme sličic\n   - {ty} za koordinate v zapisu TMS\n   - {u} za shemo četverjenja – quadtile\n   - {switch:a,b,c} za zvijanje pretoka prek strežnika DNS\n\nPrimer:\n{example}",
             "fix_misalignment": "Popravi zamik ozadja",
             "imagery_source_faq": "Od kod so ozadja zemljevida?",
             "reset": "ponastavi",
@@ -503,7 +547,9 @@
         },
         "restore": {
             "heading": "Nekatere spremembe še niso shranjene.",
-            "description": "Ali želite ponovno obnoviti še ne shranjene spremembe predhodne seje urejanja?"
+            "description": "Ali želite ponovno obnoviti še ne shranjene spremembe predhodne seje urejanja?",
+            "restore": "Obnovi spremembe",
+            "reset": "Zavrzi spremembe"
         },
         "save": {
             "title": "Shrani",
@@ -978,6 +1024,17 @@
                     "redo": "Ponovno uveljavi zadnje dejanje",
                     "save": "Shrani spremembe"
                 }
+            },
+            "tools": {
+                "title": "Orodja",
+                "info": {
+                    "title": "Podrobnosti",
+                    "all": "Preklopi vsa okna podrobnosti",
+                    "background": "Preklopi okno ozadja",
+                    "history": "Preklopi okno zgodovine",
+                    "location": "Preklopi okno mesta",
+                    "measurement": "Preklopi okno merila"
+                }
             }
         },
         "presets": {
@@ -1299,9 +1356,6 @@
                 "contact/webcam": {
                     "label": "Naslov URL spletne kamere",
                     "placeholder": "http://www.naslov.si/"
-                },
-                "content": {
-                    "label": "Vsebina"
                 },
                 "country": {
                     "label": "Država"
@@ -3865,6 +3919,9 @@
                 "natural/saddle": {
                     "name": "Sedlo",
                     "terms": "Sedlo, škrbina"
+                },
+                "natural/sand": {
+                    "name": "Pesek"
                 },
                 "natural/scree": {
                     "name": "Melišče",

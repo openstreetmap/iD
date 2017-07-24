@@ -2,7 +2,7 @@
     "yue": {
         "modes": {
             "add_area": {
-                "title": "範圍",
+                "title": "範圍Up",
                 "description": "加公園、建築物、湖或者其他範圍入去地圖度。",
                 "tail": "喺地圖度撳一下就可以開始畫範圍，好似公園呀、湖呀、或者建築物呀咁。"
             },
@@ -101,12 +101,25 @@
             },
             "delete": {
                 "title": "刪",
+                "description": {
+                    "single": "刪走此地貌，從此消失。",
+                    "multiple": "刪走此等地貌，從此消失。"
+                },
                 "annotation": {
                     "point": "刪咗處。",
                     "vertex": "道度刪咗節。",
                     "line": "刪咗綫。",
                     "area": "刪咗範圍。",
-                    "relation": "刪咗關聯。"
+                    "relation": "刪咗關聯。",
+                    "multiple": "刪走 {n} 地貌。"
+                },
+                "too_large": {
+                    "single": "此地貌不得刪走，皆因依家見到部份唔夠數。",
+                    "multiple": "此等地貌不得刪走，皆因依家見到部份唔夠數。"
+                },
+                "incomplete_relation": {
+                    "single": "此地貌不得刪走，皆因佢未傳晒落來。",
+                    "multiple": "此等地貌不得刪走，皆因佢哋未傳晒落來。"
                 }
             },
             "add_member": {
@@ -150,6 +163,16 @@
                     "vertex": "道度搬咗節。",
                     "line": "搬咗條綫。",
                     "area": "搬咗範圍。"
+                },
+                "incomplete_relation": {
+                    "single": "此地貌冇得搬，皆因佢未傳晒落來。",
+                    "multiple": "此等地貌冇得搬，皆因佢哋未傳晒落來。"
+                }
+            },
+            "reflect": {
+                "key": {
+                    "long": "T",
+                    "short": "Y"
                 }
             },
             "rotate": {
@@ -227,9 +250,12 @@
             "readonly": "程式接口，只讀不寫。你要等下先記到你修改。"
         },
         "commit": {
+            "title": "傳上去公家街圖",
             "description_placeholder": "簡述你做過啲乜（必填）",
+            "message_label": "變更留言",
             "upload_explanation": "你嘅修改，傳咗上去公家街圖。凢用公家街圖資料，地圖都會見到。",
             "upload_explanation_with_user": "你以{user}名義，修改傳咗上去公家街圖。凢用公家街圖資料，地圖都會見到。",
+            "save": "傳上",
             "cancel": "唔記",
             "changes": "變更 {count} 個",
             "warnings": "警告",
@@ -244,6 +270,17 @@
         "contributors": {
             "list": "有{users}修改",
             "truncated_list": "有{users}同另外{count}人修改"
+        },
+        "info_panels": {
+            "key": "I",
+            "background": {
+                "key": "B"
+            },
+            "history": {
+                "last_edit": "最近修改",
+                "edited_by": "修改人為",
+                "changeset": "變更"
+            }
         },
         "geometry": {
             "point": "點",
@@ -390,10 +427,12 @@
         },
         "save": {
             "title": "記低",
+            "help": "重閱所變更，傳上公家街圖，等其他用者睇到。",
             "no_changes": "無修改可記",
             "error": "記低途中有錯。",
             "status_code": "服務電腦回覆狀況代號 {code}",
             "unknown_error_details": "請確保你上到互聯網",
+            "uploading": "傳緊改動上公家街圖",
             "unsaved_changes": "你有修改未記妥",
             "conflict": {
                 "header": "調解相衝修改",
@@ -404,7 +443,7 @@
                 "keep_remote": "用佢",
                 "restore": "囘復",
                 "delete": "由佢唔要",
-                "download_changes": "或者下載你改嘅。",
+                "download_changes": "或者傳你改嘅落來。",
                 "done": "衝突通通解決！"
             }
         },
@@ -474,7 +513,8 @@
         },
         "help": {
             "title": "指南",
-            "help": "# 指南\n\n爾個編器，係爲 [公家街圖](http://www.openstreetmap.org/)而做。 有世界地圖，任用亦改得。你可以用佢，喺你處加嘢改嘢。如此一來，裏面嘅料，人人可以公開任用，人人得益。\n\n邊個用公家街圖，都見得到你整嘅地圖。要改得到，就要開定個\n[簽入戶口](https://www.openstreetmap.org/login).\n\n[iD editor](http://ideditor.com/) 係合作而成， [程式碼放喺 GitHub](https://github.com/openstreetmap/iD).\n",
+            "help": "# 指南\n\n爾個程式，係爲 [公家街圖](http://www.openstreetmap.org/)而做。 有世界地圖，任用亦改得。你可以用佢，喺你處加嘢改嘢。如此一來，裏面嘅料，人人可以公開任用，人人得益。\n\n邊個用公家街圖，都見得到你整嘅地圖。要改得到，就要開定個\n[簽入戶口](https://www.openstreetmap.org/login).\n\n[iD editor](http://ideditor.com/) 係合作而成， [程式碼放喺 GitHub](https://github.com/openstreetmap/iD).\n",
+            "editing_saving": "# 編寫與記低\n\n爾個程式，主要係上網改，就係你如今去緊網站。\n\n### 㨂地貌\n\n要揀地貌，好似路同名勝咁，撳落地圖。揀咗嘅就會上色，開個版面，\n內有佢明細，亦會有個表單，你可以同地貌做乜。\n\n揀幾個地貌，撳住「Shift」掣。跟住，一係滑鼠撳落地貌你所揀，或者地圖上拖佢，\n畫長方形。咁會有個格，同埋揀咗格內所有點。\n\n### 記低修改\n\n你改路改樓改地方，只係記喺你部機度，直至你記上網度。錯咗唔使慌，\n你可以退返改左嘅，撳一退回掣就得，或者再做返個修改，都係撳一下重做掣。\n\n撳「記低」，完成成組修改，即係，你改完城一部份，想做另一部份。你有機\n去睇返改過乜，程式會畀啲建議你，或者，若果有唔妥提出警告。\n\n若果睇落幾好，你就打句短評，解釋下你改乜，然後再撳「記低」放上網，放上\n[OpenStreetMap.org](http://www.openstreetmap.org/)，咁樣呢，修改就睇得見。\n其他人可以再改再改再改善。\n\n你一次未改好，可以留畀程，下次返來改（只要同機同瀏覧器）。咁樣，程式\n會繼續返。\n\n### 用程式\n\n你想睇鍵盤快掣，就咁下「?」掣。\n",
             "roads": "# 路\n\n用個程式，你開得，整得，刪得啲路。路有幾種，徑、公路、山徑、單車徑等等，乜嘢相交一段都要畫面出來。\n\n### 揀\n\n撳一下條路，就揀到。個外形會見得明顯，亦有架生仔選單，外加邊註欄有多啲路嘅資料。\n\n### 改\n\n你耐不耐見到條路，同背景相，或全球定位系統行縱，並唔一致。你要調較到佢哋啱位。\n\n首先撳一下，你想改嗰條路。咁條路就會特別顯眼，同埋有一點點畀你畀拉到啱位。若你想加多幾點，更加仔細，就喺條路上面，無節嘅地方，快撳兩下，咁就會開多一節。\n\n若然條路要駁去其他路，之但係無駁妥，咁你就拖住一點，拉到其他路，整到聯埋。地圖來講，駁通啲路係咁緊要，同埋駕車搵路亦必須。\n\n你亦可以用【搬】爾個架生，或撳快掣【M】，一次過搬成條路，再撳多下，就記好搬動。\n\n### 刪\n\n若成條路都唔啱，你亦要望下衞星相，以及最好親身確認，佢真係唔喺度，你就可以刪咗佢，卽係由地圖度搬走。小心啲刪走地貌，同其他改法一樣，有時地貌係人人都見到，但係衞星相過晒時，新路未必見。\n\n你刪條路，就撳佢一下，揀咗佢。跟住撳垃圾筒公仔，或者撳快掣【Delete】。\n\n### 開新\n\n要搵地方，緊係要有條路，係咪？去程式左上角，咁住【綫】個公仔，或者撳快掣【2】，就開始畫綫。\n\n地圖度，撳住路頭個位開始畫。若然條路由原路分出，就由原路上面路口位，撳一下開始。\n\n撳嘅點，應該人係跟實條路，跟䘙星相，或跟全球定位系統行蹤。若果你條路，會橫過另一條，你就喺路口位，撳落另一條路上，就起咗個交叉點。你要畫完，就快撳兩下。又或者咁鍵盤【Return】或【Enter】掣。\n",
             "gps": "# 全球定位系統\n\n數據取自全球定位系統，係公家街圖至可靠來源。爾個造圖程式，用到本機行蹤，卽放你電腦嘅【.gpx】檔案。你收集全球定位系統行蹤，取自智能電話程式，或者個人全球定位系統儀。\n\n點去用全球定位系統測量，睇下 [製圖，用電話、用全球定位系統、用紙](http://learnosm.org/en/mobile-mapping/)。\n\n用GPX途徑製圖，拖GPX檔案落造圖程式。若然讀得明，佢會加入地圖，用鮮紫綫顯現。喺右邊，撳落【背景設定】選單。咁就開得，閂得，放大縮細新嘅GPX層。\n\n爾個GPX途徑，唔會直上公家街圖，最好用法，就係用佢製圖。按此加新地貌，亦可[傳上公家街圖](http://www.openstreetmap.org/trace/create)以作其他用途。\n",
             "imagery": "# 相\n\n航空相係地圖要源。佢哋飛機飛過，衞星望落等組合。網上有任用來源，可供使用。就喺右邊，【背景設定】之內。\n\n程式預先已有 [兵地圖](http://www.bing.com/maps/) 䘙星相層。你放大縮細去某啲地方，就有其他可用。某幾國，如美國、法國、丹麥等，國內某啲地方，有極精細嘅相。\n\n相有時同地圖資料有差距，爾個係供相者出錯。若你睇到多多路與背景移咗位，就唔好郁住。將啲相校好個位，同地圖資料吻合。要咁做，就去背景設定，撳【校正對位誤差】校好咗先。\n",
@@ -512,14 +552,27 @@
             },
             "startediting": {
                 "title": "開始改",
+                "shortcuts": "撳下「{key}」掣，你可睇下連串命令，同埋佢嘅鍵盤快掣。",
                 "save": "記得定時記低修改！",
                 "start": "開始制圖"
+            }
+        },
+        "shortcuts": {
+            "title": "鍵盤快掣",
+            "tooltip": "螢幕上睇到鍵盤快掣",
+            "browsing": {
+                "help": {
+                    "keyboard": "睇鍵盤快掣"
+                }
+            },
+            "tools": {
+                "title": "架生"
             }
         },
         "presets": {
             "categories": {
                 "category-barrier": {
-                    "name": "阻擋地貌"
+                    "name": "屏障地貌"
                 },
                 "category-building": {
                     "name": "屋宇地貌"
@@ -529,6 +582,15 @@
                 },
                 "category-landuse": {
                     "name": "用地地貌"
+                },
+                "category-natural-area": {
+                    "name": "天然地貌"
+                },
+                "category-natural-line": {
+                    "name": "天然地貌"
+                },
+                "category-natural-point": {
+                    "name": "天然地貌"
                 },
                 "category-path": {
                     "name": "徑地貌"
@@ -603,10 +665,17 @@
                 "address": {
                     "label": "地埗",
                     "placeholders": {
+                        "block_number": "座數",
+                        "block_number!jp": "座數",
                         "city": "城",
+                        "city!jp": "城／鎮／村／東京都區部",
+                        "city!vn": "城／鎮",
                         "conscriptionnumber": "一百二十三號",
                         "country": "國",
+                        "county": "郡縣",
+                        "county!jp": "區",
                         "district": "區",
+                        "district!vn": "法國之縣／鎮／區",
                         "floor": "樓數",
                         "hamlet": "村仔",
                         "housename": "屋名",
@@ -714,6 +783,9 @@
                 "building_area": {
                     "label": "屋宇"
                 },
+                "camera/direction": {
+                    "placeholder": "45, 90, 180, 270"
+                },
                 "capacity": {
                     "label": "容納",
                     "placeholder": "50, 100, 200..."
@@ -739,6 +811,9 @@
                         "WSW": "西南偏西"
                     }
                 },
+                "castle_type": {
+                    "label": "類"
+                },
                 "clock_direction": {
                     "label": "方向",
                     "options": {
@@ -746,14 +821,14 @@
                         "clockwise": "順時針"
                     }
                 },
+                "club": {
+                    "label": "類"
+                },
                 "collection_times": {
                     "label": "收集時間"
                 },
                 "construction": {
                     "label": "類"
-                },
-                "content": {
-                    "label": "內容"
                 },
                 "country": {
                     "label": "國"
@@ -801,7 +876,7 @@
                             "title": "共用單車道"
                         },
                         "track": {
-                            "description": "單車道與交通有阻隔",
+                            "description": "單車道與交通有屏障",
                             "title": "單連分徑"
                         }
                     },
@@ -851,6 +926,10 @@
                 "elevation": {
                     "label": "海拔"
                 },
+                "email": {
+                    "label": "電郵",
+                    "placeholder": "example@example.com"
+                },
                 "emergency": {
                     "label": "急症室"
                 },
@@ -866,6 +945,9 @@
                 },
                 "fee": {
                     "label": "費用"
+                },
+                "fence_type": {
+                    "label": "類"
                 },
                 "fire_hydrant/type": {
                     "label": "類",
@@ -916,6 +998,9 @@
                 },
                 "handrail": {
                     "label": "扶手"
+                },
+                "height": {
+                    "label": "高（米）"
                 },
                 "highway": {
                     "label": "類"
@@ -1031,6 +1116,12 @@
                     "label": "地點"
                 },
                 "man_made": {
+                    "label": "類"
+                },
+                "manhole": {
+                    "label": "類"
+                },
+                "map_type": {
                     "label": "類"
                 },
                 "maxspeed": {
@@ -1723,7 +1814,7 @@
                     "terms": "Area,區域,範圍"
                 },
                 "barrier": {
-                    "name": "阻擋",
+                    "name": "屏障",
                     "terms": "Barrier,屏障,阻擋,障礙,障礙物"
                 },
                 "barrier/block": {
@@ -2881,6 +2972,40 @@
                     "name": "堰",
                     "terms": "Weir,堤堰,堤壩,堰,壩,壆"
                 }
+            }
+        },
+        "imagery": {
+            "Bing": {
+                "description": "衞星同般空相。",
+                "name": "必應般空相"
+            },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "條款同回應"
+                },
+                "description": "數碼地球，特等衞星相。",
+                "name": "數碼地球特等相。"
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "條款同回應"
+                },
+                "description": "數碼地球，一般衞星相。",
+                "name": "數碼地球一般相。"
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "版權所有，公家街圖協力人。共創之下，任發任改，然而必須提及協力者，改咗必以同樣條款發放。"
+                },
+                "description": "預設公家街圖層",
+                "name": "公家街圖（一般）"
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "條款同回應"
+                },
+                "description": "衞星同般空相。",
+                "name": "輿圖盒衛星"
             }
         }
     }

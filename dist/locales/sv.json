@@ -1341,6 +1341,9 @@
                         "clockwise": "Medsols"
                     }
                 },
+                "clothes": {
+                    "label": "Kläder"
+                },
                 "club": {
                     "label": "Typ"
                 },
@@ -1526,6 +1529,10 @@
                 },
                 "generator/method": {
                     "label": "Metod"
+                },
+                "generator/output/electricity": {
+                    "label": "Effektuttaget",
+                    "placeholder": "50 MW, 100 MW, 200 MW..."
                 },
                 "generator/source": {
                     "label": "Källa"
@@ -1890,6 +1897,10 @@
                 },
                 "plant": {
                     "label": "Växt"
+                },
+                "plant/output/electricity": {
+                    "label": "Effektuttaget",
+                    "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
                 "population": {
                     "label": "Folkmängd"
@@ -2570,6 +2581,10 @@
                     "name": "Kyrka",
                     "terms": "Kyrka, tempel, gudshus, kyrkobyggnad, kapell, bönehus, böneplats, missionshus, dom, katedral, helgedom, gudstjänstlokal,tro, religion, helgedom, kristen, kristendom, församling, tillbedjan, predikan, katedral, kor, kapell, guds hus, gud, bönehus, socken, helgedom, tempel"
                 },
+                "amenity/place_of_worship/hindu": {
+                    "name": "Hindutempel",
+                    "terms": "hindu, hinduism, Sanatana Dharma, garbhagriha,  puja, arcana, helgedom, tempel"
+                },
                 "amenity/place_of_worship/jewish": {
                     "name": "Synagoga",
                     "terms": "Synagoga, tempel, gudshus, bönehus, böneplats, missionshus, dom, katedral, helgedom, gudstjänstlokal,tro, religion, helgedom, Jude, Judendom, tillbedjan, predikan"
@@ -2577,6 +2592,18 @@
                 "amenity/place_of_worship/muslim": {
                     "name": "Moské",
                     "terms": "moské, gudshus, kyrkobyggnad, bönehus, böneplats, helgedom, gudstjänstlokal,tro, religion, helgedom, tillbedjan, muslim, predikan, minaret"
+                },
+                "amenity/place_of_worship/shinto": {
+                    "name": "Jinja (Shintoistisk helgedom)",
+                    "terms": "Jinja, shintoism, Shinto, kami, torii, yashiro, miya, jingū, Shinto shrine, shrine, shintohelgedom, helgedom, tempel"
+                },
+                "amenity/place_of_worship/sikh": {
+                    "name": "Sikhiskt tempel",
+                    "terms": "Sikh, Sikh-tempel, Sikhtempel, Sikhism, Gurudwara, tempel, helgedom"
+                },
+                "amenity/place_of_worship/taoist": {
+                    "name": "Taoistiskt tempel",
+                    "terms": "Taoism, Taoistiskt tempel, daoism, tao, tempel, helgedom"
                 },
                 "amenity/planetarium": {
                     "name": "Planetarium",
@@ -2742,6 +2769,10 @@
                 "amenity/veterinary": {
                     "name": "Veterinär ",
                     "terms": "Veterinär, djurläkare, djurdoktor, djurklinik, djursjukhus"
+                },
+                "amenity/waste/dog_excrement": {
+                    "name": "Sopkärl för hundbajspåsar",
+                    "terms": "Sopkärl för hundbajspåsar, hundbajs, hundbajspåsar, hundbajspåse, hund, bajs, bajspåsar, soptunna, sopkärl, hundskit, skitpåse"
                 },
                 "amenity/waste_basket": {
                     "name": "Soptunna (liten)",
@@ -3958,6 +3989,14 @@
                     "name": "Vattenverk",
                     "terms": "Vattenverk, vattenreningsanläggning, vattenreningsverk,\nvattenanläggning, vatten"
                 },
+                "man_made/watermill": {
+                    "name": "Vattenkvarn",
+                    "terms": "Vattenkvarn, kvarn, kvarnhjul, vattenmölla, mölla, skovelhjul, skvalta, skvaltkvarn"
+                },
+                "man_made/windmill": {
+                    "name": "Väderkvarn",
+                    "terms": "Väderkvarn, vindmölla, vädemölle, vindkraft, kvarn, mölla"
+                },
                 "man_made/works": {
                     "name": "Fabrik",
                     "terms": "Fabrik, montering, bryggeri, bil, plast, bearbetning, tillverkning, raffinaderi, fabrikstillverkning, industri, verkstad, fabriksbyggnad, monteringsanläggning, bearbetningsanläggning, möbeltillverkning, oljeraffinaderi"
@@ -4241,6 +4280,14 @@
                 "power/generator": {
                     "name": "Elgenerator",
                     "terms": "Elgenerator, kraftgenerator, generator, strömtillverkning, kraftkälla"
+                },
+                "power/generator/source_nuclear": {
+                    "name": "Kärnkraftsreaktor",
+                    "terms": "Kärnkraftsreaktor, kärnkraft, reaktor, kärnenergi, atomenergi, atomkraft, atomkraftverk, nukleär energi,kärnkraftverk, kärnkraftvärk, kärnreaktor, kärnanläggning, kärnkraftsanläggning,"
+                },
+                "power/generator/source_wind": {
+                    "name": "Vindturbin",
+                    "terms": "Vindturbin, vindkraft, vindkraftverk, vindmölla"
                 },
                 "power/line": {
                     "name": "Högspänningsledning",
