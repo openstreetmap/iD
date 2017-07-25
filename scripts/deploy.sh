@@ -17,6 +17,8 @@ orig=`git rev-parse --short origin/master`
 
 # pull latest code
 if [[ "${rev}" != "${orig}" ]] ; then
+  # avoid issues with local untracked locale files
+  rm -f dist/locales/*.json
   git reset --hard HEAD
   git pull origin master
 
@@ -24,7 +26,7 @@ if [[ "${rev}" != "${orig}" ]] ; then
   sed -i "s/context.version = .*;/context.version = '${rev}';/" modules/core/context.js
 
   npm prune
-  npm install
+  npm install > /dev/null 2>&1
 fi
 
 # pull latest imagery
