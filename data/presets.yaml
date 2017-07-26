@@ -542,9 +542,9 @@ en:
         label: Type
       golf_hole:
         # ref=*
-        label: Reference
+        label: Hole Number
         # golf_hole field placeholder
-        placeholder: Hole number (1-18)
+        placeholder: (1-18)
       grape_variety:
         # grape_variety=*
         label: Grape Varieties

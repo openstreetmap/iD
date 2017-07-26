@@ -751,8 +751,8 @@
         "golf_hole": {
             "key": "ref",
             "type": "text",
-            "label": "Reference",
-            "placeholder": "Hole number (1-18)"
+            "label": "Hole Number",
+            "placeholder": "(1-18)"
         },
         "grape_variety": {
             "key": "grape_variety",
