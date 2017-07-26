@@ -75,25 +75,26 @@ export function uiEntityEditor(context) {
         enter = body.enter()
             .append('div')
             .attr('class', 'inspector-body');
-        
+
         // import one-by-one approval
         this.focusEntity = entity;
-        
+
         var importApprove = enter
             .append('div')
             .attr('class', 'inspector-border import-approve');
-                
+
         var acceptButton = importApprove.append('button')
             .text('Approve')
             .on('click', function() {
                 this.focusEntity.approvedForEdit = 'approved';
+                context.history().on('change.save')();
                 // apply a CSS class to any point / line / polygon approved
                 d3.selectAll('.layer-osm .' + this.focusEntity.id)
                     .classed('import-approved', true)
                     .classed('import-edited', false)
                     .classed('import-rejected', false);
             }.bind(this));
-        
+
         var rejectButton = importApprove.append('button')
             .text('Reject')
             .on('click', (function() {
@@ -114,11 +115,12 @@ export function uiEntityEditor(context) {
                         .classed('import-rejected', true);
                     //operationDelete([this.focusEntity.id], context)();
                 }
+                context.history().on('change.save')();
             }).bind(this));
-        
+
         // show import approval section?
         d3.selectAll('.import-approve').classed('hide', (!entity.approvedForEdit) || (entity.approvedForEdit === 'approved') || (d3.select('input[name="approvalProcess"]:checked').property('value') === 'all'));
-        
+
         enter
             .append('div')
             .attr('class', 'preset-list-item inspector-inner')

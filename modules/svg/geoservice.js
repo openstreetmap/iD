@@ -503,7 +503,6 @@ export function svgGeoService(projection, context, dispatch) {
         return selectfeature;
     }
 
-
     drawGeoService.pane = function() {
         if (!this.geoservicepane) {
             this.geoservicepane = d3.selectAll('.geoservice-pane');
