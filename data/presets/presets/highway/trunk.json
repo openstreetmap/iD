@@ -1,7 +1,7 @@
 {
     "icon": "highway-trunk",
     "fields": [
-        "ref",
+        "road_number_ref",
         "oneway",
         "maxspeed",
         "lanes",

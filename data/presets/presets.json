@@ -5699,14 +5699,14 @@
                 "highway": "motorway_junction"
             },
             "fields": [
-                "ref"
+                "highway_junction_ref"
             ],
             "name": "Motorway Junction / Exit"
         },
         "highway/motorway_link": {
             "icon": "highway-motorway-link",
             "fields": [
-                "ref",
+                "road_number_ref",
                 "oneway_yes",
                 "maxspeed",
                 "lanes",
@@ -5739,7 +5739,7 @@
         "highway/motorway": {
             "icon": "highway-motorway",
             "fields": [
-                "ref",
+                "road_number_ref",
                 "oneway_yes",
                 "maxspeed",
                 "lanes",
@@ -5825,7 +5825,7 @@
                 "lanes",
                 "surface",
                 "maxheight",
-                "ref",
+                "road_number_ref",
                 "cycleway",
                 "structure",
                 "access"
@@ -5852,7 +5852,7 @@
                 "surface",
                 "structure",
                 "maxheight",
-                "ref",
+                "road_number_ref",
                 "cycleway",
                 "access"
             ],
@@ -5964,7 +5964,7 @@
                 "surface",
                 "structure",
                 "maxheight",
-                "ref",
+                "road_number_ref",
                 "cycleway",
                 "access"
             ],
@@ -5990,7 +5990,7 @@
                 "surface",
                 "structure",
                 "maxheight",
-                "ref",
+                "road_number_ref",
                 "cycleway",
                 "access"
             ],
@@ -6242,7 +6242,7 @@
                 "surface",
                 "structure",
                 "maxheight",
-                "ref",
+                "road_number_ref",
                 "cycleway",
                 "access"
             ],
@@ -6268,7 +6268,7 @@
                 "surface",
                 "structure",
                 "maxheight",
-                "ref",
+                "road_number_ref",
                 "cycleway",
                 "access"
             ],
@@ -6391,7 +6391,7 @@
         "highway/trunk": {
             "icon": "highway-trunk",
             "fields": [
-                "ref",
+                "road_number_ref",
                 "oneway",
                 "maxspeed",
                 "lanes",

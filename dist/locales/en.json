@@ -1557,6 +1557,9 @@
                 "height": {
                     "label": "Height (Meters)"
                 },
+                "highway_junction_ref": {
+                    "label": "Junction Number"
+                },
                 "highway": {
                     "label": "Type"
                 },
@@ -1931,7 +1934,7 @@
                     }
                 },
                 "ref": {
-                    "label": "Reference"
+                    "label": "Reference Code"
                 },
                 "relation": {
                     "label": "Type"
@@ -1944,6 +1947,9 @@
                 },
                 "restrictions": {
                     "label": "Turn Restrictions"
+                },
+                "road_number_ref": {
+                    "label": "Road Number"
                 },
                 "rooms": {
                     "label": "Rooms"
