@@ -9,6 +9,6 @@
     "name": "Detour Route",
     "icon": "route-detour",
     "fields": [
-        "ref"
+        "ref_route"
     ]
 }

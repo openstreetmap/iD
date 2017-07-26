@@ -1930,11 +1930,26 @@
                         "centre": "Recycling Center"
                     }
                 },
+                "ref_aeroway_gate": {
+                    "label": "Gate Number"
+                },
+                "ref_aeroway": {
+                    "label": "Airport Code"
+                },
+                "ref_airfield": {
+                    "label": "Airfield Code"
+                },
                 "ref_highway_junction": {
                     "label": "Junction Number"
                 },
+                "ref_platform": {
+                    "label": "Platform Number"
+                },
                 "ref_road_number": {
                     "label": "Road Number"
+                },
+                "ref_route": {
+                    "label": "Route Number"
                 },
                 "ref_stop_position": {
                     "label": "Stop Number"

@@ -362,7 +362,7 @@
                 "area"
             ],
             "fields": [
-                "ref",
+                "ref_aeroway",
                 "iata",
                 "icao",
                 "operator",
@@ -403,7 +403,7 @@
                 "point"
             ],
             "fields": [
-                "ref"
+                "ref_aeroway_gate"
             ],
             "tags": {
                 "aeroway": "gate"
@@ -6896,7 +6896,7 @@
         "landuse/military/airfield": {
             "icon": "airfield",
             "fields": [
-                "ref",
+                "ref_airfield",
                 "iata",
                 "icao"
             ],
@@ -10212,7 +10212,7 @@
         "public_transport/platform": {
             "icon": "bus",
             "fields": [
-                "ref",
+                "ref_platform",
                 "network",
                 "operator",
                 "shelter"
@@ -13767,7 +13767,7 @@
             "icon": "route",
             "fields": [
                 "route",
-                "ref",
+                "ref_route",
                 "operator",
                 "network"
             ]
@@ -13783,7 +13783,7 @@
             "name": "Cycle Route",
             "icon": "route-bicycle",
             "fields": [
-                "ref",
+                "ref_route",
                 "network_bicycle",
                 "cycle_network"
             ]
@@ -13799,7 +13799,7 @@
             "name": "Bus Route",
             "icon": "route-bus",
             "fields": [
-                "ref",
+                "ref_route",
                 "operator",
                 "network"
             ]
@@ -13815,7 +13815,7 @@
             "name": "Detour Route",
             "icon": "route-detour",
             "fields": [
-                "ref"
+                "ref_route"
             ]
         },
         "type/route/ferry": {
@@ -13829,7 +13829,7 @@
             "name": "Ferry Route",
             "icon": "route-ferry",
             "fields": [
-                "ref",
+                "ref_route",
                 "operator",
                 "network"
             ]
@@ -13845,7 +13845,7 @@
             "name": "Foot Route",
             "icon": "route-foot",
             "fields": [
-                "ref",
+                "ref_route",
                 "operator",
                 "network_foot"
             ]
@@ -13861,7 +13861,7 @@
             "name": "Hiking Route",
             "icon": "route-foot",
             "fields": [
-                "ref",
+                "ref_route",
                 "operator",
                 "network_foot"
             ]
@@ -13877,7 +13877,7 @@
             "name": "Riding Route",
             "icon": "route-horse",
             "fields": [
-                "ref",
+                "ref_route",
                 "operator",
                 "network_horse"
             ]
@@ -13893,7 +13893,7 @@
             "name": "Pipeline Route",
             "icon": "route-pipeline",
             "fields": [
-                "ref",
+                "ref_route",
                 "operator"
             ]
         },
@@ -13908,7 +13908,7 @@
             "name": "Power Route",
             "icon": "route-power",
             "fields": [
-                "ref",
+                "ref_route",
                 "operator"
             ]
         },
@@ -13923,7 +13923,7 @@
             "name": "Road Route",
             "icon": "route-road",
             "fields": [
-                "ref",
+                "ref_route",
                 "network_road"
             ]
         },
@@ -13938,7 +13938,7 @@
             "name": "Train Route",
             "icon": "route-train",
             "fields": [
-                "ref",
+                "ref_route",
                 "operator",
                 "network"
             ]
@@ -13954,7 +13954,7 @@
             "name": "Tram Route",
             "icon": "route-tram",
             "fields": [
-                "ref",
+                "ref_route",
                 "operator",
                 "network"
             ]

@@ -1361,15 +1361,40 @@
                 }
             }
         },
+        "ref_aeroway_gate": {
+            "key": "ref",
+            "type": "text",
+            "label": "Gate Number"
+        },
+        "ref_aeroway": {
+            "key": "ref",
+            "type": "text",
+            "label": "Airport Code"
+        },
+        "ref_airfield": {
+            "key": "ref",
+            "type": "text",
+            "label": "Airfield Code"
+        },
         "ref_highway_junction": {
             "key": "ref",
             "type": "text",
             "label": "Junction Number"
         },
+        "ref_platform": {
+            "key": "ref",
+            "type": "text",
+            "label": "Platform Number"
+        },
         "ref_road_number": {
             "key": "ref",
             "type": "text",
             "label": "Road Number"
+        },
+        "ref_route": {
+            "key": "ref",
+            "type": "text",
+            "label": "Route Number"
         },
         "ref_stop_position": {
             "key": "ref",
