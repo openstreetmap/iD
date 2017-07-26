@@ -1029,6 +1029,9 @@ en:
       ref_road_number:
         # ref=*
         label: Road Number
+      ref_stop_position:
+        # ref=*
+        label: Stop Number
       relation:
         # type=*
         label: Type

@@ -1371,6 +1371,11 @@
             "type": "text",
             "label": "Road Number"
         },
+        "ref_stop_position": {
+            "key": "ref",
+            "type": "text",
+            "label": "Stop Number"
+        },
         "ref": {
             "key": "ref",
             "type": "text",

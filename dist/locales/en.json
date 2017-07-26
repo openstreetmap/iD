@@ -1936,6 +1936,9 @@
                 "ref_road_number": {
                     "label": "Road Number"
                 },
+                "ref_stop_position": {
+                    "label": "Stop Number"
+                },
                 "ref": {
                     "label": "Reference Code"
                 },

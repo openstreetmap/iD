@@ -1,7 +1,7 @@
 {
     "icon": "bus",
     "fields": [
-        "ref",
+        "ref_stop_position",
         "network",
         "operator"
     ],

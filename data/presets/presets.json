@@ -10231,7 +10231,7 @@
         "public_transport/stop_position": {
             "icon": "bus",
             "fields": [
-                "ref",
+                "ref_stop_position",
                 "network",
                 "operator"
             ],
