@@ -562,9 +562,6 @@ en:
       highway:
         # highway=*
         label: Type
-      highway_junction_ref:
-        # ref=*
-        label: Junction Number
       historic:
         # historic=*
         label: Type
@@ -1026,6 +1023,12 @@ en:
       ref:
         # ref=*
         label: Reference Code
+      ref_highway_junction:
+        # ref=*
+        label: Junction Number
+      ref_road_number:
+        # ref=*
+        label: Road Number
       relation:
         # type=*
         label: Type
@@ -1037,9 +1040,6 @@ en:
         label: Type
       restrictions:
         label: Turn Restrictions
-      road_number_ref:
-        # ref=*
-        label: Road Number
       rooms:
         # rooms=*
         label: Rooms

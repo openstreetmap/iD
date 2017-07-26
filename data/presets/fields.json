@@ -775,11 +775,6 @@
             "type": "number",
             "label": "Height (Meters)"
         },
-        "highway_junction_ref": {
-            "key": "ref",
-            "type": "text",
-            "label": "Junction Number"
-        },
         "highway": {
             "key": "highway",
             "type": "typeCombo",
@@ -1366,6 +1361,16 @@
                 }
             }
         },
+        "ref_highway_junction": {
+            "key": "ref",
+            "type": "text",
+            "label": "Junction Number"
+        },
+        "ref_road_number": {
+            "key": "ref",
+            "type": "text",
+            "label": "Road Number"
+        },
         "ref": {
             "key": "ref",
             "type": "text",
@@ -1394,11 +1399,6 @@
                 "rtype": "restriction"
             },
             "label": "Turn Restrictions"
-        },
-        "road_number_ref": {
-            "key": "ref",
-            "type": "text",
-            "label": "Road Number"
         },
         "rooms": {
             "key": "rooms",

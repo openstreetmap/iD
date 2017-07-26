@@ -1557,9 +1557,6 @@
                 "height": {
                     "label": "Height (Meters)"
                 },
-                "highway_junction_ref": {
-                    "label": "Junction Number"
-                },
                 "highway": {
                     "label": "Type"
                 },
@@ -1933,6 +1930,12 @@
                         "centre": "Recycling Center"
                     }
                 },
+                "ref_highway_junction": {
+                    "label": "Junction Number"
+                },
+                "ref_road_number": {
+                    "label": "Road Number"
+                },
                 "ref": {
                     "label": "Reference Code"
                 },
@@ -1947,9 +1950,6 @@
                 },
                 "restrictions": {
                     "label": "Turn Restrictions"
-                },
-                "road_number_ref": {
-                    "label": "Road Number"
                 },
                 "rooms": {
                     "label": "Rooms"
