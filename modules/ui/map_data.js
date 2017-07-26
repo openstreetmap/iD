@@ -450,6 +450,16 @@ export function uiMapData(context) {
                         })
                         .on('change', function() {
                             window.layerChecked[field.name] = this.checked;
+                            var fields = geoserviceLayer.fields();
+                            if (this.checked) {
+                                fields.push(field.name);
+                            } else {
+                                var dex = fields.indexOf(field.name);
+                                if (dex > -1) {
+                                    fields.splice(dex, 1);
+                                }
+                            }
+                            geoserviceLayer.fields(fields);
                         });
                     row.append('td').text(field.alias || field.name);
                     // row.append('td').text(samplefeature.properties[keys[r]] || '');

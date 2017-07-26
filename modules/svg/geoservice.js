@@ -631,6 +631,12 @@ export function svgGeoService(projection, context, dispatch) {
         return this;
     };
 
+    drawGeoService.fields = function(fields) {
+        if (!arguments.length) return (drawGeoService.importFields || []);
+        drawGeoService.importFields = fields;
+        return this;
+    };
+
     drawGeoService.url = function(true_url, downloadMax) {
         if (!this.originalURL) {
             this.originalURL = true_url;
@@ -661,6 +667,9 @@ export function svgGeoService(projection, context, dispatch) {
         }
         if (url.indexOf('maxAllowableOffset') === -1) {
             url += '&maxAllowableOffset=0.000005';
+        }
+        if (url.indexOf('outFields=') === -1) {
+            url += '&outFields=' + (drawGeoService.fields().join(',') || '*');
         }
 
         // turn iD Editor bounds into a query
@@ -732,27 +741,6 @@ export function svgGeoService(projection, context, dispatch) {
 */
         return this;
     };
-
-    drawGeoService.fitZoom = function() {
-        // todo: implement
-        if (!this.hasData()) return this;
-        var geojson = drawGeoService.geojson();
-
-        var map = context.map(),
-            viewport = map.trimmedExtent().polygon(),
-            coords = _.reduce(geojson.features, function(coords, feature) {
-                var c = feature.geometry.coordinates;
-                return _.union(coords, feature.geometry.type === 'Point' ? [c] : c);
-            }, []);
-
-        if (!geoPolygonIntersectsPolygon(viewport, coords, true)) {
-            var extent = geoExtent(d3.geoBounds(geojson));
-            map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
-        }
-
-        return this;
-    };
-
 
     init();
     return drawGeoService;
