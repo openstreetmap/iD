@@ -542,9 +542,9 @@ en:
         label: Type
       golf_hole:
         # ref=*
-        label: Reference
+        label: Hole Number
         # golf_hole field placeholder
-        placeholder: Hole number (1-18)
+        placeholder: (1-18)
       grape_variety:
         # grape_variety=*
         label: Grape Varieties
@@ -1022,7 +1022,31 @@ en:
           container: Container
       ref:
         # ref=*
-        label: Reference
+        label: Reference Code
+      ref_aeroway:
+        # ref=*
+        label: Airport Code
+      ref_aeroway_gate:
+        # ref=*
+        label: Gate Number
+      ref_airfield:
+        # ref=*
+        label: Airfield Code
+      ref_highway_junction:
+        # ref=*
+        label: Junction Number
+      ref_platform:
+        # ref=*
+        label: Platform Number
+      ref_road_number:
+        # ref=*
+        label: Road Number
+      ref_route:
+        # ref=*
+        label: Route Number
+      ref_stop_position:
+        # ref=*
+        label: Stop Number
       relation:
         # type=*
         label: Type

@@ -9,7 +9,7 @@
     "name": "Bus Route",
     "icon": "route-bus",
     "fields": [
-        "ref",
+        "ref_route",
         "operator",
         "network"
     ]

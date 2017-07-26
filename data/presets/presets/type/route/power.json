@@ -9,7 +9,7 @@
     "name": "Power Route",
     "icon": "route-power",
     "fields": [
-        "ref",
+        "ref_route",
         "operator"
     ]
 }
