@@ -540,11 +540,6 @@ en:
       generator/type:
         # 'generator:type=*'
         label: Type
-      golf_hole:
-        # ref=*
-        label: Hole Number
-        # golf_hole field placeholder
-        placeholder: (1-18)
       grape_variety:
         # grape_variety=*
         label: Grape Varieties
@@ -1032,6 +1027,11 @@ en:
       ref_airfield:
         # ref=*
         label: Airfield Code
+      ref_golf_hole:
+        # ref=*
+        label: Hole Number
+        # ref_golf_hole field placeholder
+        placeholder: 1-18
       ref_highway_junction:
         # ref=*
         label: Junction Number

@@ -748,12 +748,6 @@
             "type": "combo",
             "label": "Type"
         },
-        "golf_hole": {
-            "key": "ref",
-            "type": "text",
-            "label": "Hole Number",
-            "placeholder": "(1-18)"
-        },
         "grape_variety": {
             "key": "grape_variety",
             "type": "semiCombo",
@@ -1375,6 +1369,12 @@
             "key": "ref",
             "type": "text",
             "label": "Airfield Code"
+        },
+        "ref_golf_hole": {
+            "key": "ref",
+            "type": "text",
+            "label": "Hole Number",
+            "placeholder": "1-18"
         },
         "ref_highway_junction": {
             "key": "ref",

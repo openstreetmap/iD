@@ -2,5 +2,5 @@
     "key": "ref",
     "type": "text",
     "label": "Hole Number",
-    "placeholder": "(1-18)"
+    "placeholder": "1-18"
 }
