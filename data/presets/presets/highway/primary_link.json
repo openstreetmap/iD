@@ -6,7 +6,7 @@
         "lanes",
         "surface",
         "maxheight",
-        "road_number_ref",
+        "ref_road_number",
         "cycleway",
         "structure",
         "access"
