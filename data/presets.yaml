@@ -3396,6 +3396,11 @@ en:
         name: Storm Drain
         # 'terms: cover,drain,hole,rain,sewer,sewage,storm'
         terms: '<translate with synonyms or related terms for ''Storm Drain'', separated by commas>'
+      manhole/telecom:
+        # manhole=telecom
+        name: Telecom Manhole
+        # 'terms: cover,phone,hole,telecom,telephone,bt'
+        terms: '<translate with synonyms or related terms for ''Telecom Manhole'', separated by commas>'
       natural:
         # natural=*
         name: Natural

@@ -8883,6 +8883,29 @@
             ],
             "name": "Storm Drain"
         },
+        "manhole/telecom": {
+            "icon": "circle-stroked",
+            "fields": [
+                "operator",
+                "ref"
+            ],
+            "geometry": [
+                "point",
+                "vertex"
+            ],
+            "tags": {
+                "manhole": "telecom"
+            },
+            "terms": [
+                "cover",
+                "phone",
+                "hole",
+                "telecom",
+                "telephone",
+                "bt"
+            ],
+            "name": "Telecom Manhole"
+        },
         "natural": {
             "icon": "natural",
             "fields": [
