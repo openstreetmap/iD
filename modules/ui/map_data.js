@@ -737,6 +737,15 @@ export function uiMapData(context) {
 
                 // actual download buttons, with license check and memory step
                 var startLoad = function(geoserviceDownloadAll) {
+                    var url = d3.select('input.geoservice').property('value');
+                    var blacklists = context.connection().imageryBlacklists();
+                    for (var b = 0; b < blacklists.length; b++) {
+                        if (url.match(new RegExp(blacklists[b]))) {
+                            alert('This data source matches Google or another service which is copyrighted, and not importable on OpenStreetMap.');
+                            return;
+                        }
+                    }
+
                     if (!copyapproval.property('checked')) {
                         alert('This is your first time using this data source or license. Please confirm that this data can be added to OpenStreetMap');
                         return;
