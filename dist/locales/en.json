@@ -1929,9 +1929,6 @@
                 "ref_aeroway_gate": {
                     "label": "Gate Number"
                 },
-                "ref_aeroway": {
-                    "label": "Airport Code"
-                },
                 "ref_airfield": {
                     "label": "Airfield Code"
                 },

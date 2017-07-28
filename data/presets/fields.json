@@ -1360,11 +1360,6 @@
             "type": "text",
             "label": "Gate Number"
         },
-        "ref_aeroway": {
-            "key": "ref",
-            "type": "text",
-            "label": "Airport Code"
-        },
         "ref_airfield": {
             "key": "ref",
             "type": "text",
