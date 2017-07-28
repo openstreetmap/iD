@@ -1021,9 +1021,6 @@ en:
       ref_aeroway_gate:
         # ref=*
         label: Gate Number
-      ref_airfield:
-        # ref=*
-        label: Airfield Code
       ref_golf_hole:
         # ref=*
         label: Hole Number

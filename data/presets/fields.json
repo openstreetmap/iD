@@ -1360,11 +1360,6 @@
             "type": "text",
             "label": "Gate Number"
         },
-        "ref_airfield": {
-            "key": "ref",
-            "type": "text",
-            "label": "Airfield Code"
-        },
         "ref_golf_hole": {
             "key": "ref",
             "type": "text",

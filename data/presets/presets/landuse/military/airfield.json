@@ -1,7 +1,6 @@
 {
     "icon": "airfield",
     "fields": [
-        "ref_airfield",
         "iata",
         "icao"
     ],

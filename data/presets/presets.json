@@ -6895,7 +6895,6 @@
         "landuse/military/airfield": {
             "icon": "airfield",
             "fields": [
-                "ref_airfield",
                 "iata",
                 "icao"
             ],
