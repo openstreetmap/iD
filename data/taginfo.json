@@ -1813,6 +1813,10 @@
             "value": "drain"
         },
         {
+            "key": "manhole",
+            "value": "telecom"
+        },
+        {
             "key": "natural"
         },
         {

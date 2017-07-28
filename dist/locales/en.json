@@ -4078,6 +4078,10 @@
                     "name": "Storm Drain",
                     "terms": "cover,drain,hole,rain,sewer,sewage,storm"
                 },
+                "manhole/telecom": {
+                    "name": "Telecom Manhole",
+                    "terms": "cover,phone,hole,telecom,telephone,bt"
+                },
                 "natural": {
                     "name": "Natural",
                     "terms": ""
