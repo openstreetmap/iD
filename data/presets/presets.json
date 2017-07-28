@@ -362,7 +362,6 @@
                 "area"
             ],
             "fields": [
-                "ref_aeroway",
                 "iata",
                 "icao",
                 "operator",
