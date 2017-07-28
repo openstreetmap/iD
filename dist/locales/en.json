@@ -1929,9 +1929,6 @@
                 "ref_aeroway_gate": {
                     "label": "Gate Number"
                 },
-                "ref_airfield": {
-                    "label": "Airfield Code"
-                },
                 "ref_golf_hole": {
                     "label": "Hole Number",
                     "placeholder": "1-18"
