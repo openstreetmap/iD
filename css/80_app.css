@@ -865,6 +865,7 @@ button.save.has-count .count::before {
     border: 1.5px solid #333;
     border-radius: 20px;
     background-color: #efefef;
+    backface-visibility: hidden;
 }
 
 [dir='rtl'] .preset-icon-fill-vertex,
