@@ -8,7 +8,8 @@
         "access"
     ],
     "geometry": [
-        "line", "area"
+        "line",
+        "area"
     ],
     "terms": [
         "hike",

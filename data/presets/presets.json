@@ -10408,10 +10408,14 @@
             "name": "Narrow Gauge Rail"
         },
         "railway/platform": {
-            "icon": "rail",
+            "icon": "highway-footway",
+            "fields": [
+                "ref_platform",
+                "surface",
+                "lit",
+                "shelter"
+            ],
             "geometry": [
-                "point",
-                "vertex",
                 "line",
                 "area"
             ],
