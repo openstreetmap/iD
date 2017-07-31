@@ -273,6 +273,7 @@
     "poi-windmill":             { "viewBox": "610 320 15 15" },
     "poi-hinduist":             { "viewBox": "625 320 15 15" },
     "poi-shintoist":            { "viewBox": "640 320 15 15" },
+    "poi-buffer-stop":          { "viewBox": "655 320 15 15" },
 
     "poi-foot-shape":              { "fill": "currentColor" },
     "poi-traffic-signals-shape":   { "fill": "currentColor" },
@@ -291,6 +292,7 @@
     "poi-windmill-shape":          { "fill": "currentColor" },
     "poi-hinduist-shape":          { "fill": "currentColor" },
     "poi-shintoist-shape":         { "fill": "currentColor" },
+    "poi-buffer-stop-shape":       { "fill": "currentColor" },
 
     "poi-vending-machine":      { "viewBox": "400 335 15 15" },
     "poi-dice":                 { "viewBox": "415 335 15 15" },
