@@ -2139,6 +2139,10 @@
         },
         {
             "key": "railway",
+            "value": "derail"
+        },
+        {
+            "key": "railway",
             "value": "disused"
         },
         {
@@ -2152,6 +2156,10 @@
         {
             "key": "railway",
             "value": "level_crossing"
+        },
+        {
+            "key": "railway",
+            "value": "milestone"
         },
         {
             "key": "railway",
@@ -2171,6 +2179,10 @@
         },
         {
             "key": "railway",
+            "value": "signal"
+        },
+        {
+            "key": "railway",
             "value": "station"
         },
         {
@@ -2180,6 +2192,14 @@
         {
             "key": "railway",
             "value": "subway"
+        },
+        {
+            "key": "railway",
+            "value": "switch"
+        },
+        {
+            "key": "railway",
+            "value": "wash"
         },
         {
             "key": "railway",

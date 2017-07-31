@@ -1028,6 +1028,12 @@
             "label": "Max Weight",
             "snake_case": false
         },
+        "milestone_position": {
+            "key": "railway:position",
+            "type": "text",
+            "placeholder": "Distance to one decimal (123.4)",
+            "label": "Milestone Position"
+        },
         "mtb/scale": {
             "key": "mtb:scale",
             "type": "combo",
