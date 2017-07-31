@@ -733,6 +733,8 @@ en:
       milestone_position:
         # 'railway:position=*'
         label: Milestone Position
+        # milestone_position field placeholder
+        placeholder: Distance to one decimal (123.4)
       mtb/scale:
         # 'mtb:scale=*'
         label: Mountain Biking Difficulty

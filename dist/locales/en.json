@@ -1708,7 +1708,8 @@
                     "label": "Max Weight"
                 },
                 "milestone_position": {
-                    "label": "Milestone Position"
+                    "label": "Milestone Position",
+                    "placeholder": "Distance to one decimal (123.4)"
                 },
                 "mtb/scale": {
                     "label": "Mountain Biking Difficulty",

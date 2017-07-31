@@ -1031,6 +1031,7 @@
         "milestone_position": {
             "key": "railway:position",
             "type": "text",
+            "placeholder": "Distance to one decimal (123.4)",
             "label": "Milestone Position"
         },
         "mtb/scale": {
