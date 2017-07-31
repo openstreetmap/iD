@@ -10279,6 +10279,21 @@
             "terms": [],
             "name": "Abandoned Railway"
         },
+        "railway/buffer_stop": {
+            "icon": "poi-buffer-stop",
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "railway": "buffer_stop"
+            },
+            "terms": [
+                "stop",
+                "halt",
+                "buffer"
+            ],
+            "name": "Buffer Stop"
+        },
         "railway/crossing": {
             "icon": "cross",
             "geometry": [
