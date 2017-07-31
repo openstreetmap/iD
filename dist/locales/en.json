@@ -4396,6 +4396,10 @@
                     "name": "Abandoned Railway",
                     "terms": ""
                 },
+                "railway/buffer_stop": {
+                    "name": "Buffer Stop",
+                    "terms": "stop,halt,buffer"
+                },
                 "railway/crossing": {
                     "name": "Railway Crossing (Path)",
                     "terms": "crossing,pedestrian crossing,railroad crossing,level crossing,grade crossing,path through railroad,train crossing"

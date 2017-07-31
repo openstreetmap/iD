@@ -3750,6 +3750,11 @@ en:
         # railway=abandoned
         name: Abandoned Railway
         terms: '<translate with synonyms or related terms for ''Abandoned Railway'', separated by commas>'
+      railway/buffer_stop:
+        # railway=buffer_stop
+        name: Buffer Stop
+        # 'terms: stop,halt,buffer'
+        terms: '<translate with synonyms or related terms for ''Buffer Stop'', separated by commas>'
       railway/crossing:
         # railway=crossing
         name: Railway Crossing (Path)
