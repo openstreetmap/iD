@@ -730,6 +730,9 @@ en:
       maxweight:
         # maxweight=*
         label: Max Weight
+      milestone_position:
+        # 'railway:position=*'
+        label: Milestone Position
       mtb/scale:
         # 'mtb:scale=*'
         label: Mountain Biking Difficulty

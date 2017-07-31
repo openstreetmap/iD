@@ -1707,6 +1707,9 @@
                 "maxweight": {
                     "label": "Max Weight"
                 },
+                "milestone_position": {
+                    "label": "Milestone Position"
+                },
                 "mtb/scale": {
                     "label": "Mountain Biking Difficulty",
                     "placeholder": "0, 1, 2, 3...",

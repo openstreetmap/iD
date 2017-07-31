@@ -5,6 +5,10 @@
         "vertex",
         "area"
     ],
+    "fields": [
+        "operator",
+        "building_area"
+    ],
     "tags": {
         "railway": "wash"
     },

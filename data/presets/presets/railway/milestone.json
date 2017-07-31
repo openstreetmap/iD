@@ -4,6 +4,9 @@
         "point",
         "vertex"
     ],
+    "fields": [
+        "milestone_position"
+    ],
     "tags": {
         "railway": "milestone"
     },

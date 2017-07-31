@@ -10405,6 +10405,9 @@
                 "point",
                 "vertex"
             ],
+            "fields": [
+                "milestone_position"
+            ],
             "tags": {
                 "railway": "milestone"
             },
@@ -10580,6 +10583,10 @@
                 "point",
                 "vertex",
                 "area"
+            ],
+            "fields": [
+                "operator",
+                "building_area"
             ],
             "tags": {
                 "railway": "wash"
