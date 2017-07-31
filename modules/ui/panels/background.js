@@ -1,14 +1,17 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
+import {services} from '../../services'
 import { t } from '../../util/locale';
 
+var searchOffset = services.imageryOffset;
+searchOffset.init();
 
 export function uiPanelBackground(context) {
     var background = context.background();
     var currSource = null;
     var currZoom = '';
     var currVintage = '';
-
+    debugger;
 
     function redraw(selection) {
         if (currSource !== background.baseLayerSource().name()) {
@@ -44,7 +47,7 @@ export function uiPanelBackground(context) {
         if (!currVintage) {
             debouncedGetVintage(selection);
         }
-
+        debouncedGetOffset(selection);
         var toggle = context.getDebug('tile') ? 'hide_tiles' : 'show_tiles';
 
         selection
@@ -61,6 +64,8 @@ export function uiPanelBackground(context) {
 
 
     var debouncedGetVintage = _.debounce(getVintage, 250);
+    var debouncedGetOffset = _.debounce(getOffset, 250);
+
     function getVintage(selection) {
         var tile = d3.select('.layer-background img.tile-center');   // tile near viewport center
         if (tile.empty()) return;
@@ -81,6 +86,35 @@ export function uiPanelBackground(context) {
         });
     }
 
+    function getOffset(selection) {
+        var tile = d3.select('.layer-background img.tile-center'); // tile near viewport center
+        if (tile.empty()) return;
+
+        var d = tile.datum();
+        var zoom = d[2];
+        var url = d[3];
+        var center = context.map().center();
+        console.log(d);
+        searchOffset.search(center,url, console.log);
+        //     zoom = (d && d.length >= 3 && d[2]) || Math.floor(context
+        //                 .map()
+        //                 .zoom()),
+        //     center = context.map().center();
+
+        // currZoom = String(zoom);
+        // selection.selectAll('.zoom').text(currZoom);
+
+        // if (!d || !d.length >= 3) return;
+        // background
+        //     .baseLayerSource()
+        //     .getVintage(center, d, function(err, result) {
+        //         currVintage =
+        //             (result && result.range) ||
+        //             t('info_panels.background.unknown');
+        //         selection.selectAll('.vintage').text(currVintage);
+        //     });
+    }
+
 
     var panel = function(selection) {
         selection.call(redraw);
@@ -91,6 +125,7 @@ export function uiPanelBackground(context) {
             })
             .on('move.info-background', function() {
                 selection.call(debouncedGetVintage);
+                selection.call(debouncedGetOffset);
             });
 
     };
