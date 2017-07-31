@@ -1,0 +1,15 @@
+{
+    "icon": "roadblock",
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "railway": "milestone"
+    },
+    "terms": [
+        "milestone",
+        "marker"
+    ],
+    "name": "Railway Milestone"
+}

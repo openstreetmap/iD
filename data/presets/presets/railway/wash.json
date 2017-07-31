@@ -1,0 +1,16 @@
+{
+    "icon": "rail",
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "railway": "wash"
+    },
+    "terms": [
+        "wash",
+        "clean"
+    ],
+    "name": "Railway Wash"
+}
