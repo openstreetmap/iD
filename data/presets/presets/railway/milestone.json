@@ -1,5 +1,5 @@
 {
-    "icon": "roadblock",
+    "icon": "triangle-stroked",
     "geometry": [
         "point",
         "vertex"

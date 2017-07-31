@@ -10313,6 +10313,19 @@
             ],
             "name": "Railway Crossing (Path)"
         },
+        "railway/derail": {
+            "icon": "roadblock",
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "railway": "derail"
+            },
+            "terms": [
+                "derailer"
+            ],
+            "name": "Railway Derailer"
+        },
         "railway/disused": {
             "icon": "railway-disused",
             "geometry": [
@@ -10386,6 +10399,21 @@
             ],
             "name": "Railway Crossing (Road)"
         },
+        "railway/milestone": {
+            "icon": "triangle-stroked",
+            "geometry": [
+                "point",
+                "vertex"
+            ],
+            "tags": {
+                "railway": "milestone"
+            },
+            "terms": [
+                "milestone",
+                "marker"
+            ],
+            "name": "Railway Milestone"
+        },
         "railway/monorail": {
             "icon": "railway-monorail",
             "geometry": [
@@ -10457,6 +10485,21 @@
             "terms": [],
             "name": "Rail"
         },
+        "railway/signal": {
+            "icon": "poi-junction",
+            "geometry": [
+                "point",
+                "vertex"
+            ],
+            "tags": {
+                "railway": "signal"
+            },
+            "terms": [
+                "signal",
+                "lights"
+            ],
+            "name": "Railway Signal"
+        },
         "railway/station": {
             "icon": "rail",
             "fields": [
@@ -10516,6 +10559,36 @@
                 "transit"
             ],
             "name": "Subway"
+        },
+        "railway/switch": {
+            "icon": "poi-junction",
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "railway": "switch"
+            },
+            "terms": [
+                "switch",
+                "points"
+            ],
+            "name": "Railway Switch"
+        },
+        "railway/train_wash": {
+            "icon": "rail",
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "railway": "wash"
+            },
+            "terms": [
+                "wash",
+                "clean"
+            ],
+            "name": "Train Wash"
         },
         "railway/tram_stop": {
             "icon": "rail-light",
