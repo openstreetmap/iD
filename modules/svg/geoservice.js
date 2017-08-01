@@ -656,7 +656,7 @@ export function svgGeoService(projection, context, dispatch) {
         }
         if (downloadMax && url.indexOf('where') === -1) {
             // if there is no spatial query, need a SQL query here
-            url += '&where=1>0';
+            url += 'where=1>0';
         }
         if (url.indexOf('outSR') === -1) {
             url += '&outSR=4326';
