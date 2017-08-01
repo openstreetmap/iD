@@ -3299,6 +3299,7 @@
         },
         "area/highway": {
             "fields": [
+                "name",
                 "area/highway"
             ],
             "geometry": [
@@ -3565,6 +3566,7 @@
                 "boundary": "administrative"
             },
             "fields": [
+                "name",
                 "admin_level"
             ]
         },
@@ -3589,6 +3591,7 @@
         },
         "building/bunker": {
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -3616,6 +3619,7 @@
         "building/train_station": {
             "icon": "building",
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -3634,6 +3638,7 @@
         "building/apartments": {
             "icon": "building",
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -3649,6 +3654,7 @@
         "building/barn": {
             "icon": "farm",
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -3664,6 +3670,7 @@
         "building/cabin": {
             "icon": "home",
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -3679,6 +3686,7 @@
         "building/cathedral": {
             "icon": "place-of-worship",
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -3694,6 +3702,7 @@
         "building/chapel": {
             "icon": "place-of-worship",
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -3709,6 +3718,7 @@
         "building/church": {
             "icon": "place-of-worship",
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -3724,6 +3734,7 @@
         "building/college": {
             "icon": "building",
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -3742,6 +3753,7 @@
         "building/commercial": {
             "icon": "commercial",
             "fields": [
+                "name",
                 "address",
                 "levels",
                 "smoking"
@@ -3758,6 +3770,7 @@
         "building/construction": {
             "icon": "building",
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -3773,6 +3786,7 @@
         "building/detached": {
             "icon": "home",
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -3795,6 +3809,7 @@
         "building/dormitory": {
             "icon": "building",
             "fields": [
+                "name",
                 "address",
                 "levels",
                 "smoking"
@@ -3811,6 +3826,7 @@
         "building/garage": {
             "icon": "warehouse",
             "fields": [
+                "name",
                 "capacity"
             ],
             "geometry": [
@@ -3825,6 +3841,7 @@
         "building/garages": {
             "icon": "warehouse",
             "fields": [
+                "name",
                 "capacity"
             ],
             "geometry": [
@@ -3839,6 +3856,7 @@
         "building/greenhouse": {
             "icon": "garden-center",
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -3854,6 +3872,7 @@
         "building/hospital": {
             "icon": "building",
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -3869,6 +3888,7 @@
         "building/hotel": {
             "icon": "building",
             "fields": [
+                "name",
                 "address",
                 "levels",
                 "smoking"
@@ -3885,6 +3905,7 @@
         "building/house": {
             "icon": "home",
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -3907,6 +3928,9 @@
             "geometry": [
                 "area"
             ],
+            "fields": [
+                "name"
+            ],
             "tags": {
                 "building": "hut"
             },
@@ -3916,6 +3940,7 @@
         "building/industrial": {
             "icon": "industry",
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -3931,6 +3956,7 @@
         "building/kindergarten": {
             "icon": "building",
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -3950,6 +3976,7 @@
         "building/public": {
             "icon": "building",
             "fields": [
+                "name",
                 "address",
                 "levels",
                 "smoking"
@@ -3966,6 +3993,7 @@
         "building/residential": {
             "icon": "residential-community",
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -3981,6 +4009,7 @@
         "building/retail": {
             "icon": "commercial",
             "fields": [
+                "name",
                 "address",
                 "levels",
                 "smoking"
@@ -3997,6 +4026,7 @@
         "building/roof": {
             "icon": "shelter",
             "fields": [
+                "name",
                 "address"
             ],
             "geometry": [
@@ -4011,6 +4041,7 @@
         "building/school": {
             "icon": "building",
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -4032,6 +4063,7 @@
         "building/semidetached_house": {
             "icon": "home",
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -4056,6 +4088,7 @@
         "building/shed": {
             "icon": "home",
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -4071,6 +4104,7 @@
         "building/stable": {
             "icon": "horse-riding",
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -4086,6 +4120,7 @@
         "building/static_caravan": {
             "icon": "home",
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -4101,6 +4136,7 @@
         "building/terrace": {
             "icon": "building",
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -4124,6 +4160,7 @@
         "building/university": {
             "icon": "building",
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -4142,6 +4179,7 @@
         "building/warehouse": {
             "icon": "warehouse",
             "fields": [
+                "name",
                 "address",
                 "levels"
             ],
@@ -4157,6 +4195,7 @@
         "camp_site/camp_pitch": {
             "icon": "campsite",
             "fields": [
+                "name",
                 "ref"
             ],
             "geometry": [
