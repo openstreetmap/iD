@@ -1,6 +1,7 @@
 {
     "icon": "industry",
     "fields": [
+	    "name",
         "operator",
         "address",
         "plant/output/electricity",

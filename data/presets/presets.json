@@ -10595,6 +10595,7 @@
         "power/plant": {
             "icon": "industry",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "plant/output/electricity",
@@ -10674,6 +10675,7 @@
         "public_transport/platform": {
             "icon": "bus",
             "fields": [
+                "name",
                 "ref_platform",
                 "network",
                 "operator",
@@ -10693,6 +10695,7 @@
         "public_transport/stop_position": {
             "icon": "bus",
             "fields": [
+                "name",
                 "ref_stop_position",
                 "network",
                 "operator"
@@ -10714,6 +10717,7 @@
                 "railway": "abandoned"
             },
             "fields": [
+                "name",
                 "structure",
                 "service_rail"
             ],
@@ -10867,6 +10871,7 @@
                 "railway": "monorail"
             },
             "fields": [
+                "name",
                 "structure",
                 "electrified",
                 "service_rail"
@@ -10883,6 +10888,7 @@
                 "railway": "narrow_gauge"
             },
             "fields": [
+                "name",
                 "structure",
                 "gauge",
                 "electrified",
@@ -10897,6 +10903,7 @@
         "railway/platform": {
             "icon": "highway-footway",
             "fields": [
+                "name",
                 "ref_platform",
                 "surface",
                 "lit",
@@ -10920,6 +10927,7 @@
                 "railway": "rail"
             },
             "fields": [
+                "name",
                 "structure",
                 "gauge",
                 "electrified",
@@ -10947,6 +10955,7 @@
         "railway/station": {
             "icon": "rail",
             "fields": [
+                "name",
                 "network",
                 "operator",
                 "address",
@@ -10975,6 +10984,9 @@
                 "point",
                 "vertex"
             ],
+            "fields": [
+                "name"
+            ],
             "tags": {
                 "railway": "subway_entrance"
             },
@@ -10993,6 +11005,7 @@
                 "railway": "subway"
             },
             "fields": [
+                "name",
                 "structure",
                 "gauge",
                 "electrified",
@@ -11041,6 +11054,7 @@
         "railway/tram_stop": {
             "icon": "rail-light",
             "fields": [
+                "name",
                 "network",
                 "operator"
             ],
@@ -11067,6 +11081,7 @@
                 "railway": "tram"
             },
             "fields": [
+                "name",
                 "structure",
                 "gauge",
                 "electrified",
