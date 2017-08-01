@@ -40,7 +40,7 @@ export function uiPreset(context) {
         field.show = show;
 
         field.shown = function() {
-            return field.id === 'name' || field.show || _.some(field.keys, function(key) { return !!tags[key]; });
+            return field.id === '' || field.show || _.some(field.keys, function(key) { return !!tags[key]; });
         };
 
         field.modified = function() {
