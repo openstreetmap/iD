@@ -187,6 +187,7 @@
                 "ropeway"
             ],
             "fields": [
+                "name",
                 "aerialway/occupancy",
                 "aerialway/capacity",
                 "aerialway/duration",
@@ -202,6 +203,7 @@
                 "line"
             ],
             "fields": [
+                "name",
                 "aerialway/occupancy",
                 "aerialway/capacity",
                 "aerialway/duration",
@@ -218,6 +220,7 @@
                 "line"
             ],
             "fields": [
+                "name",
                 "aerialway/capacity",
                 "aerialway/duration"
             ],
@@ -231,6 +234,7 @@
                 "line"
             ],
             "fields": [
+                "name",
                 "aerialway/occupancy",
                 "aerialway/capacity",
                 "aerialway/duration",
@@ -247,6 +251,7 @@
                 "line"
             ],
             "fields": [
+                "name",
                 "aerialway/capacity",
                 "aerialway/duration"
             ],
@@ -260,6 +265,7 @@
                 "line"
             ],
             "fields": [
+                "name",
                 "aerialway/capacity",
                 "aerialway/duration",
                 "aerialway/heating"
@@ -274,6 +280,7 @@
                 "line"
             ],
             "fields": [
+                "name",
                 "aerialway/occupancy",
                 "aerialway/capacity",
                 "aerialway/duration",
@@ -294,6 +301,7 @@
                 "poma lift"
             ],
             "fields": [
+                "name",
                 "aerialway/capacity",
                 "aerialway/duration"
             ],
@@ -324,6 +332,7 @@
                 "bugel lift"
             ],
             "fields": [
+                "name",
                 "aerialway/capacity",
                 "aerialway/duration"
             ],
@@ -353,6 +362,7 @@
                 "line"
             ],
             "fields": [
+                "name",
                 "aerialway/capacity",
                 "aerialway/duration"
             ],
@@ -10669,11 +10679,12 @@
         "relation": {
             "name": "Relation",
             "icon": "relation",
-            "fields": [
-                "relation"
-            ],
             "tags": {},
             "geometry": [
+                "relation"
+            ],
+            "fields": [
+                "name",
                 "relation"
             ]
         },
