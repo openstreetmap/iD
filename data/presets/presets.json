@@ -54,6 +54,7 @@
         },
         "highway": {
             "fields": [
+                "name",
                 "highway"
             ],
             "geometry": [
@@ -70,6 +71,7 @@
         },
         "place": {
             "fields": [
+                "name",
                 "place"
             ],
             "geometry": [
@@ -120,6 +122,9 @@
                 "vertex",
                 "line"
             ],
+            "fields": [
+                "name"
+            ],
             "tags": {
                 "junction": "roundabout"
             },
@@ -128,6 +133,7 @@
         },
         "waterway": {
             "fields": [
+                "name",
                 "waterway"
             ],
             "geometry": [
@@ -3191,6 +3197,9 @@
         },
         "area": {
             "name": "Area",
+            "fields": [
+                "name"
+            ],
             "tags": {
                 "area": "yes"
             },
@@ -3473,6 +3482,7 @@
         "building": {
             "icon": "home",
             "fields": [
+                "name",
                 "building",
                 "levels",
                 "address"
@@ -4076,6 +4086,7 @@
         "club": {
             "icon": "heart",
             "fields": [
+                "name",
                 "club",
                 "operator",
                 "address",
@@ -4097,6 +4108,7 @@
         "craft": {
             "icon": "poi-tool",
             "fields": [
+                "name",
                 "craft",
                 "operator",
                 "address",
@@ -6612,6 +6624,9 @@
         },
         "junction": {
             "icon": "poi-junction",
+            "fields": [
+                "name"
+            ],
             "geometry": [
                 "vertex",
                 "area"
@@ -6623,6 +6638,7 @@
         },
         "landuse": {
             "fields": [
+                "name",
                 "landuse"
             ],
             "geometry": [
@@ -7395,6 +7411,7 @@
         "leisure": {
             "icon": "pitch",
             "fields": [
+                "name",
                 "leisure"
             ],
             "geometry": [
@@ -8325,6 +8342,9 @@
         },
         "line": {
             "name": "Line",
+            "fields": [
+                "name"
+            ],
             "tags": {},
             "geometry": [
                 "line"
@@ -8334,6 +8354,7 @@
         "man_made": {
             "icon": "poi-storage-tank",
             "fields": [
+                "name",
                 "man_made"
             ],
             "geometry": [
@@ -8907,6 +8928,7 @@
         "natural": {
             "icon": "natural",
             "fields": [
+                "name",
                 "natural"
             ],
             "geometry": [
@@ -9338,6 +9360,7 @@
         "office": {
             "icon": "commercial",
             "fields": [
+                "name",
                 "office",
                 "address",
                 "building_area",
@@ -9812,6 +9835,7 @@
         "piste": {
             "icon": "skiing",
             "fields": [
+                "name",
                 "piste/type",
                 "piste/difficulty",
                 "piste/grooming",
@@ -10016,6 +10040,9 @@
         },
         "point": {
             "name": "Point",
+            "fields": [
+                "name"
+            ],
             "tags": {},
             "geometry": [
                 "point"
@@ -10642,11 +10669,11 @@
         "relation": {
             "name": "Relation",
             "icon": "relation",
-            "tags": {},
-            "geometry": [
+            "fields": [
                 "relation"
             ],
-            "fields": [
+            "tags": {},
+            "geometry": [
                 "relation"
             ]
         },
@@ -10663,6 +10690,7 @@
         "shop": {
             "icon": "shop",
             "fields": [
+                "name",
                 "shop",
                 "operator",
                 "address",
@@ -13018,6 +13046,7 @@
         "tourism": {
             "icon": "attraction",
             "fields": [
+                "name",
                 "tourism"
             ],
             "geometry": [
@@ -14095,6 +14124,9 @@
         "vertex": {
             "name": "Other",
             "tags": {},
+            "fields": [
+                "name"
+            ],
             "geometry": [
                 "vertex"
             ],

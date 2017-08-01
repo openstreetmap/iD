@@ -1,6 +1,7 @@
 {
     "icon": "pitch",
     "fields": [
+        "name",
         "leisure"
     ],
     "geometry": [
