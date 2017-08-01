@@ -5315,6 +5315,7 @@
         "emergency/ambulance_station": {
             "icon": "hospital",
             "fields": [
+                "name",
                 "operator",
                 "building_area",
                 "address"
@@ -5403,6 +5404,7 @@
         },
         "footway/crossing": {
             "fields": [
+                "name",
                 "crossing",
                 "access",
                 "surface",
@@ -5426,6 +5428,7 @@
         "footway/crosswalk": {
             "icon": "highway-footway",
             "fields": [
+                "name",
                 "crossing",
                 "access",
                 "surface",
@@ -5452,6 +5455,7 @@
         "footway/sidewalk": {
             "icon": "highway-footway",
             "fields": [
+                "name",
                 "surface",
                 "lit",
                 "width",
