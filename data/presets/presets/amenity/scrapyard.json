@@ -1,6 +1,7 @@
 {
     "icon": "car",
     "fields": [
+	    "name",
         "operator",
         "address",
         "opening_hours"

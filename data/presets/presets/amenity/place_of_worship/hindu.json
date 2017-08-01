@@ -1,6 +1,7 @@
 {
     "icon": "poi-hinduist",
     "fields": [
+	    "name",
         "denomination",
         "building_area",
         "address",

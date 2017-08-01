@@ -1,6 +1,7 @@
 {
     "icon": "poi-sikhist",
     "fields": [
+	    "name",
         "denomination",
         "building_area",
         "address",
