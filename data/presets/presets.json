@@ -9750,6 +9750,7 @@
         "office/travel_agent": {
             "icon": "suitcase",
             "fields": [
+                "name",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -9773,6 +9774,7 @@
         "office/accountant": {
             "icon": "commercial",
             "fields": [
+                "name",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -9791,6 +9793,7 @@
         "office/administrative": {
             "icon": "commercial",
             "fields": [
+                "name",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -9809,6 +9812,7 @@
         "office/architect": {
             "icon": "commercial",
             "fields": [
+                "name",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -9827,6 +9831,7 @@
         "office/company": {
             "icon": "commercial",
             "fields": [
+                "name",
                 "address",
                 "building_area",
                 "opening_hours",
@@ -9846,6 +9851,7 @@
         "office/coworking": {
             "icon": "commercial",
             "fields": [
+                "name",
                 "address",
                 "building_area",
                 "opening_hours",
@@ -9873,6 +9879,7 @@
         "office/educational_institution": {
             "icon": "commercial",
             "fields": [
+                "name",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -9891,6 +9898,7 @@
         "office/employment_agency": {
             "icon": "commercial",
             "fields": [
+                "name",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -9911,6 +9919,7 @@
         "office/estate_agent": {
             "icon": "commercial",
             "fields": [
+                "name",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -9929,6 +9938,7 @@
         "office/financial": {
             "icon": "commercial",
             "fields": [
+                "name",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -9947,6 +9957,7 @@
         "office/government": {
             "icon": "commercial",
             "fields": [
+                "name",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -9965,6 +9976,7 @@
         "office/government/register_office": {
             "icon": "town-hall",
             "fields": [
+                "name",
                 "address",
                 "building_area",
                 "opening_hours",
@@ -9994,6 +10006,7 @@
         "office/insurance": {
             "icon": "commercial",
             "fields": [
+                "name",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -10012,6 +10025,7 @@
         "office/it": {
             "icon": "commercial",
             "fields": [
+                "name",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -10030,6 +10044,7 @@
         "office/lawyer": {
             "icon": "commercial",
             "fields": [
+                "name",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -10048,6 +10063,7 @@
         "office/lawyer/notary": {
             "icon": "suitcase",
             "fields": [
+                "name",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -10077,6 +10093,7 @@
         "office/newspaper": {
             "icon": "commercial",
             "fields": [
+                "name",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -10095,6 +10112,7 @@
         "office/ngo": {
             "icon": "commercial",
             "fields": [
+                "name",
                 "address",
                 "building_area",
                 "opening_hours",
@@ -10114,6 +10132,7 @@
         "office/physician": {
             "icon": "commercial",
             "fields": [
+                "name",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -10132,6 +10151,7 @@
         "office/political_party": {
             "icon": "commercial",
             "fields": [
+                "name",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -10150,6 +10170,7 @@
         "office/research": {
             "icon": "commercial",
             "fields": [
+                "name",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -10168,6 +10189,7 @@
         "office/telecommunication": {
             "icon": "commercial",
             "fields": [
+                "name",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -10186,6 +10208,7 @@
         "office/therapist": {
             "icon": "commercial",
             "fields": [
+                "name",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -10236,6 +10259,9 @@
                 "point",
                 "area"
             ],
+            "fields": [
+                "name"
+            ],
             "tags": {
                 "place": "farm"
             },
@@ -10245,6 +10271,7 @@
         "place/city": {
             "icon": "city",
             "fields": [
+                "name",
                 "population"
             ],
             "geometry": [
@@ -10259,6 +10286,7 @@
         "place/hamlet": {
             "icon": "triangle-stroked",
             "fields": [
+                "name",
                 "population"
             ],
             "geometry": [
@@ -10275,6 +10303,9 @@
             "geometry": [
                 "point",
                 "area"
+            ],
+            "fields": [
+                "name"
             ],
             "terms": [
                 "archipelago",
@@ -10297,6 +10328,9 @@
                 "point",
                 "area"
             ],
+            "fields": [
+                "name"
+            ],
             "tags": {
                 "place": "isolated_dwelling"
             },
@@ -10308,6 +10342,9 @@
                 "point",
                 "area"
             ],
+            "fields": [
+                "name"
+            ],
             "tags": {
                 "place": "locality"
             },
@@ -10316,6 +10353,7 @@
         "place/neighbourhood": {
             "icon": "triangle-stroked",
             "fields": [
+                "name",
                 "population"
             ],
             "geometry": [
@@ -10333,6 +10371,7 @@
         "place/quarter": {
             "icon": "triangle-stroked",
             "fields": [
+                "name",
                 "population"
             ],
             "geometry": [
@@ -10355,6 +10394,9 @@
                 "point",
                 "area"
             ],
+            "fields": [
+                "name"
+            ],
             "tags": {
                 "place": "square"
             },
@@ -10363,6 +10405,7 @@
         "place/suburb": {
             "icon": "triangle-stroked",
             "fields": [
+                "name",
                 "population"
             ],
             "geometry": [
@@ -10382,6 +10425,7 @@
         "place/town": {
             "icon": "town",
             "fields": [
+                "name",
                 "population"
             ],
             "geometry": [
@@ -10396,6 +10440,7 @@
         "place/village": {
             "icon": "village",
             "fields": [
+                "name",
                 "population"
             ],
             "geometry": [
