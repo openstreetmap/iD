@@ -6489,7 +6489,7 @@
             "name": "Archaeological Site"
         },
         "historic/boundary_stone": {
-            "icon": "monument",
+            "icon": "poi-milestone",
             "fields": [
                 "inscription"
             ],
@@ -10400,7 +10400,7 @@
             "name": "Railway Crossing (Road)"
         },
         "railway/milestone": {
-            "icon": "triangle-stroked",
+            "icon": "poi-milestone",
             "geometry": [
                 "point",
                 "vertex"
