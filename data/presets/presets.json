@@ -9080,6 +9080,7 @@
         "man_made/wastewater_plant": {
             "icon": "water",
             "fields": [
+                "name",
                 "operator",
                 "address"
             ],
@@ -9128,6 +9129,7 @@
         "man_made/water_works": {
             "icon": "water",
             "fields": [
+                "name",
                 "operator",
                 "address"
             ],
@@ -9181,6 +9183,7 @@
         "man_made/works": {
             "icon": "industry",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -9311,6 +9314,9 @@
                 "point",
                 "area"
             ],
+            "fields": [
+                "name"
+            ],
             "tags": {
                 "natural": "bay"
             },
@@ -9430,6 +9436,7 @@
         "natural/peak": {
             "icon": "mountain",
             "fields": [
+                "name",
                 "elevation"
             ],
             "geometry": [
@@ -9572,6 +9579,7 @@
         "natural/volcano": {
             "icon": "volcano",
             "fields": [
+                "name",
                 "elevation"
             ],
             "geometry": [
@@ -9605,6 +9613,9 @@
             "geometry": [
                 "area"
             ],
+            "fields": [
+                "name"
+            ],
             "tags": {
                 "natural": "water",
                 "water": "lake"
@@ -9624,6 +9635,9 @@
             "icon": "water",
             "geometry": [
                 "area"
+            ],
+            "fields": [
+                "name"
             ],
             "tags": {
                 "natural": "water",
@@ -9646,6 +9660,9 @@
             "icon": "water",
             "geometry": [
                 "area"
+            ],
+            "fields": [
+                "name"
             ],
             "tags": {
                 "natural": "water",
