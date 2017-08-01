@@ -7749,6 +7749,7 @@
         "leisure/adult_gaming_centre": {
             "icon": "poi-dice",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -7789,6 +7790,7 @@
         "leisure/bowling_alley": {
             "icon": "poi-bowling",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -7811,6 +7813,9 @@
                 "point",
                 "area"
             ],
+            "fields": [
+                "name"
+            ],
             "terms": [
                 "open space"
             ],
@@ -7822,6 +7827,7 @@
         "leisure/dance": {
             "icon": "music",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -7849,6 +7855,9 @@
                 "point",
                 "area"
             ],
+            "fields": [
+                "name"
+            ],
             "terms": [],
             "tags": {
                 "leisure": "dog_park"
@@ -7873,6 +7882,7 @@
         "leisure/fitness_centre": {
             "icon": "pitch",
             "fields": [
+                "name",
                 "sport",
                 "address",
                 "building_area",
@@ -7896,6 +7906,7 @@
         "leisure/fitness_centre/yoga": {
             "icon": "pitch",
             "fields": [
+                "name",
                 "sport",
                 "address",
                 "building_area",
@@ -7921,6 +7932,7 @@
         "leisure/fitness_station": {
             "icon": "pitch",
             "fields": [
+                "name",
                 "sport",
                 "address",
                 "opening_hours"
@@ -7941,6 +7953,7 @@
         "leisure/garden": {
             "icon": "garden",
             "fields": [
+                "name",
                 "access_simple"
             ],
             "geometry": [
@@ -7956,6 +7969,7 @@
         "leisure/golf_course": {
             "icon": "golf",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "opening_hours"
@@ -7975,6 +7989,7 @@
         "leisure/horse_riding": {
             "icon": "horse-riding",
             "fields": [
+                "name",
                 "access_simple",
                 "operator",
                 "address",
@@ -7996,6 +8011,7 @@
         "leisure/ice_rink": {
             "icon": "pitch",
             "fields": [
+                "name",
                 "seasonal",
                 "sport_ice",
                 "operator",
@@ -8020,6 +8036,7 @@
         "leisure/marina": {
             "icon": "harbor",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "capacity",
@@ -8046,6 +8063,7 @@
         "leisure/miniature_golf": {
             "icon": "golf",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "opening_hours"
@@ -8070,6 +8088,9 @@
                 "point",
                 "area"
             ],
+            "fields": [
+                "name"
+            ],
             "tags": {
                 "leisure": "nature_reserve"
             },
@@ -8084,6 +8105,9 @@
             "geometry": [
                 "point",
                 "area"
+            ],
+            "fields": [
+                "name"
             ],
             "terms": [
                 "esplanade",
@@ -8482,6 +8506,7 @@
         "leisure/resort": {
             "icon": "lodging",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "opening_hours"
@@ -8539,6 +8564,7 @@
         "leisure/sports_centre": {
             "icon": "pitch",
             "fields": [
+                "name",
                 "sport",
                 "address",
                 "building_area",
@@ -8557,6 +8583,7 @@
         "leisure/sports_centre/swimming": {
             "icon": "swimming",
             "fields": [
+                "name",
                 "access_simple",
                 "operator",
                 "address",
@@ -8583,6 +8610,7 @@
         "leisure/stadium": {
             "icon": "pitch",
             "fields": [
+                "name",
                 "sport",
                 "address"
             ],
@@ -8598,6 +8626,7 @@
         "leisure/swimming_pool": {
             "icon": "swimming",
             "fields": [
+                "name",
                 "access_simple",
                 "operator",
                 "address"
@@ -8645,6 +8674,7 @@
         "leisure/water_park": {
             "icon": "swimming",
             "fields": [
+                "name",
                 "operator",
                 "address"
             ],
