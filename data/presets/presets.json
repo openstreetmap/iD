@@ -5692,6 +5692,7 @@
         },
         "highway/bridleway": {
             "fields": [
+                "name",
                 "surface",
                 "width",
                 "structure",
@@ -5714,6 +5715,7 @@
         "highway/bus_stop": {
             "icon": "bus",
             "fields": [
+                "name",
                 "network",
                 "operator",
                 "bench",
@@ -5732,6 +5734,7 @@
         "highway/corridor": {
             "icon": "highway-footway",
             "fields": [
+                "name",
                 "width",
                 "level",
                 "access_simple"
@@ -5754,6 +5757,7 @@
         },
         "highway/crossing": {
             "fields": [
+                "name",
                 "crossing",
                 "kerb",
                 "tactile_paving"
@@ -5774,6 +5778,7 @@
         "highway/crosswalk": {
             "icon": "poi-foot",
             "fields": [
+                "name",
                 "crossing",
                 "kerb",
                 "tactile_paving"
@@ -5797,6 +5802,7 @@
         "highway/cycleway": {
             "icon": "highway-cycleway",
             "fields": [
+                "name",
                 "oneway",
                 "surface",
                 "lit",
@@ -5837,6 +5843,7 @@
         "highway/footway": {
             "icon": "highway-footway",
             "fields": [
+                "name",
                 "surface",
                 "lit",
                 "width",
@@ -5880,6 +5887,7 @@
         "highway/living_street": {
             "icon": "highway-living-street",
             "fields": [
+                "name",
                 "oneway",
                 "maxspeed",
                 "lanes",
@@ -5926,6 +5934,7 @@
         "highway/motorway_link": {
             "icon": "highway-motorway-link",
             "fields": [
+                "name",
                 "ref_road_number",
                 "oneway_yes",
                 "maxspeed",
@@ -5959,6 +5968,7 @@
         "highway/motorway": {
             "icon": "highway-motorway",
             "fields": [
+                "name",
                 "ref_road_number",
                 "oneway_yes",
                 "maxspeed",
@@ -5990,6 +6000,7 @@
         "highway/path": {
             "icon": "highway-path",
             "fields": [
+                "name",
                 "surface",
                 "width",
                 "structure",
@@ -6020,6 +6031,7 @@
         "highway/pedestrian": {
             "icon": "highway-footway",
             "fields": [
+                "name",
                 "surface",
                 "lit",
                 "width",
@@ -6040,6 +6052,7 @@
         "highway/primary_link": {
             "icon": "highway-primary-link",
             "fields": [
+                "name",
                 "oneway",
                 "maxspeed",
                 "lanes",
@@ -6066,6 +6079,7 @@
         "highway/primary": {
             "icon": "highway-primary",
             "fields": [
+                "name",
                 "oneway",
                 "maxspeed",
                 "lanes",
@@ -6088,6 +6102,7 @@
         "highway/raceway": {
             "icon": "highway-unclassified",
             "fields": [
+                "name",
                 "oneway",
                 "surface",
                 "sport_racing_motor",
@@ -6122,6 +6137,7 @@
         "highway/residential": {
             "icon": "highway-residential",
             "fields": [
+                "name",
                 "oneway",
                 "maxspeed",
                 "lanes",
@@ -6142,6 +6158,9 @@
         },
         "highway/rest_area": {
             "icon": "car",
+            "fields": [
+                "name"
+            ],
             "geometry": [
                 "point",
                 "vertex",
@@ -6158,6 +6177,7 @@
         "highway/road": {
             "icon": "highway-road",
             "fields": [
+                "name",
                 "oneway",
                 "maxspeed",
                 "lanes",
@@ -6178,6 +6198,7 @@
         "highway/secondary_link": {
             "icon": "highway-secondary-link",
             "fields": [
+                "name",
                 "oneway",
                 "maxspeed",
                 "lanes",
@@ -6204,6 +6225,7 @@
         "highway/secondary": {
             "icon": "highway-secondary",
             "fields": [
+                "name",
                 "oneway",
                 "maxspeed",
                 "lanes",
@@ -6226,6 +6248,7 @@
         "highway/service": {
             "icon": "highway-service",
             "fields": [
+                "name",
                 "service",
                 "oneway",
                 "maxspeed",
@@ -6246,6 +6269,7 @@
         "highway/service/alley": {
             "icon": "highway-service",
             "fields": [
+                "name",
                 "oneway",
                 "maxspeed",
                 "structure",
@@ -6269,6 +6293,7 @@
         "highway/service/drive-through": {
             "icon": "highway-service",
             "fields": [
+                "name",
                 "oneway",
                 "covered",
                 "maxheight",
@@ -6293,6 +6318,7 @@
         "highway/service/driveway": {
             "icon": "highway-service",
             "fields": [
+                "name",
                 "oneway",
                 "maxspeed",
                 "structure",
@@ -6316,6 +6342,7 @@
         "highway/service/emergency_access": {
             "icon": "highway-service",
             "fields": [
+                "name",
                 "oneway",
                 "maxspeed",
                 "structure",
@@ -6339,6 +6366,7 @@
         "highway/service/parking_aisle": {
             "icon": "highway-service",
             "fields": [
+                "name",
                 "oneway",
                 "maxspeed",
                 "structure",
@@ -6361,6 +6389,9 @@
         },
         "highway/services": {
             "icon": "car",
+            "fields": [
+                "name"
+            ],
             "geometry": [
                 "point",
                 "vertex",
@@ -6456,6 +6487,7 @@
         "highway/tertiary_link": {
             "icon": "highway-tertiary-link",
             "fields": [
+                "name",
                 "oneway",
                 "maxspeed",
                 "lanes",
@@ -6482,6 +6514,7 @@
         "highway/tertiary": {
             "icon": "highway-tertiary",
             "fields": [
+                "name",
                 "oneway",
                 "maxspeed",
                 "lanes",
@@ -6504,6 +6537,7 @@
         "highway/track": {
             "icon": "highway-track",
             "fields": [
+                "name",
                 "tracktype",
                 "surface",
                 "width",
@@ -6586,6 +6620,7 @@
         "highway/trunk_link": {
             "icon": "highway-trunk-link",
             "fields": [
+                "name",
                 "ref_road_number",
                 "oneway",
                 "maxspeed",
@@ -6611,6 +6646,7 @@
         "highway/trunk": {
             "icon": "highway-trunk",
             "fields": [
+                "name",
                 "ref_road_number",
                 "oneway",
                 "maxspeed",
@@ -6659,6 +6695,7 @@
         "highway/unclassified": {
             "icon": "highway-unclassified",
             "fields": [
+                "name",
                 "oneway",
                 "maxspeed",
                 "lanes",
