@@ -378,6 +378,7 @@
                 "area"
             ],
             "fields": [
+                "name",
                 "iata",
                 "icao",
                 "operator",
@@ -430,6 +431,7 @@
                 "area"
             ],
             "fields": [
+                "name",
                 "building_area"
             ],
             "tags": {
@@ -499,6 +501,7 @@
                 "aerodrome"
             ],
             "fields": [
+                "name",
                 "operator",
                 "building_area"
             ],
