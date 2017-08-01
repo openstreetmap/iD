@@ -5487,6 +5487,9 @@
         },
         "golf/bunker": {
             "icon": "golf",
+            "fields": [
+                "name"
+            ],
             "geometry": [
                 "area"
             ],
@@ -5506,6 +5509,9 @@
         },
         "golf/fairway": {
             "icon": "golf",
+            "fields": [
+                "name"
+            ],
             "geometry": [
                 "area"
             ],
@@ -5521,6 +5527,9 @@
         },
         "golf/green": {
             "icon": "golf",
+            "fields": [
+                "name"
+            ],
             "geometry": [
                 "area"
             ],
@@ -5539,6 +5548,7 @@
         "golf/hole": {
             "icon": "golf",
             "fields": [
+                "name",
                 "ref_golf_hole",
                 "par",
                 "handicap"
@@ -5553,6 +5563,9 @@
         },
         "golf/lateral_water_hazard_area": {
             "icon": "golf",
+            "fields": [
+                "name"
+            ],
             "geometry": [
                 "area"
             ],
@@ -5568,6 +5581,9 @@
         },
         "golf/lateral_water_hazard_line": {
             "icon": "golf",
+            "fields": [
+                "name"
+            ],
             "geometry": [
                 "line"
             ],
@@ -5578,6 +5594,9 @@
         },
         "golf/rough": {
             "icon": "golf",
+            "fields": [
+                "name"
+            ],
             "geometry": [
                 "area"
             ],
@@ -5593,6 +5612,9 @@
         },
         "golf/tee": {
             "icon": "golf",
+            "fields": [
+                "name"
+            ],
             "geometry": [
                 "area"
             ],
@@ -5611,6 +5633,9 @@
         },
         "golf/water_hazard_area": {
             "icon": "golf",
+            "fields": [
+                "name"
+            ],
             "geometry": [
                 "area"
             ],
@@ -5626,6 +5651,9 @@
         },
         "golf/water_hazard_line": {
             "icon": "golf",
+            "fields": [
+                "name"
+            ],
             "geometry": [
                 "line"
             ],
@@ -5637,6 +5665,7 @@
         "healthcare/blood_donation": {
             "icon": "blood-bank",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "blood_components",
