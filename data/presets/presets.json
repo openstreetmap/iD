@@ -4256,6 +4256,7 @@
         "craft/jeweler": {
             "icon": "marker-stroked",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4278,6 +4279,7 @@
         "craft/locksmith": {
             "icon": "marker-stroked",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4300,6 +4302,7 @@
         "craft/optician": {
             "icon": "marker-stroked",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4322,6 +4325,7 @@
         "craft/tailor": {
             "icon": "clothing-store",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4348,6 +4352,7 @@
         "craft/basket_maker": {
             "icon": "art-gallery",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4365,6 +4370,7 @@
         "craft/beekeeper": {
             "icon": "farm",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4382,6 +4388,7 @@
         "craft/blacksmith": {
             "icon": "poi-tool",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4399,6 +4406,7 @@
         "craft/boatbuilder": {
             "icon": "poi-tool",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4416,6 +4424,7 @@
         "craft/bookbinder": {
             "icon": "library",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4436,6 +4445,7 @@
         "craft/brewery": {
             "icon": "poi-storage-tank",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4462,6 +4472,7 @@
         "craft/carpenter": {
             "icon": "poi-tool",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4482,6 +4493,7 @@
         "craft/carpet_layer": {
             "icon": "poi-tool",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4499,6 +4511,7 @@
         "craft/caterer": {
             "icon": "restaurant",
             "fields": [
+                "name",
                 "cuisine",
                 "operator",
                 "address",
@@ -4517,6 +4530,7 @@
         "craft/clockmaker": {
             "icon": "poi-clock",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4534,6 +4548,7 @@
         "craft/confectionery": {
             "icon": "bakery",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4555,6 +4570,7 @@
         "craft/distillery": {
             "icon": "poi-storage-tank",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4593,6 +4609,7 @@
         "craft/dressmaker": {
             "icon": "clothing-store",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4613,6 +4630,7 @@
         "craft/electrician": {
             "icon": "poi-power",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4634,6 +4652,7 @@
         "craft/electronics_repair": {
             "icon": "poi-tool",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4651,6 +4670,7 @@
         "craft/gardener": {
             "icon": "garden",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4672,6 +4692,7 @@
         "craft/glaziery": {
             "icon": "fire-station",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4694,6 +4715,7 @@
         "craft/handicraft": {
             "icon": "art-gallery",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4711,6 +4733,7 @@
         "craft/hvac": {
             "icon": "poi-tool",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4733,6 +4756,7 @@
         "craft/insulator": {
             "icon": "poi-tool",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4750,6 +4774,7 @@
         "craft/key_cutter": {
             "icon": "marker-stroked",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4767,6 +4792,7 @@
         "craft/metal_construction": {
             "icon": "poi-tool",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4784,6 +4810,7 @@
         "craft/painter": {
             "icon": "art-gallery",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4801,6 +4828,7 @@
         "craft/photographer": {
             "icon": "attraction",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4818,6 +4846,7 @@
         "craft/photographic_laboratory": {
             "icon": "attraction",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4838,6 +4867,7 @@
         "craft/plasterer": {
             "icon": "poi-tool",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4855,6 +4885,7 @@
         "craft/plumber": {
             "icon": "poi-tool",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4875,6 +4906,7 @@
         "craft/pottery": {
             "icon": "art-gallery",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4895,6 +4927,7 @@
         "craft/rigger": {
             "icon": "poi-tool",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4912,6 +4945,7 @@
         "craft/roofer": {
             "icon": "poi-tool",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4929,6 +4963,7 @@
         "craft/saddler": {
             "icon": "poi-tool",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4946,6 +4981,7 @@
         "craft/sailmaker": {
             "icon": "poi-tool",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4963,6 +4999,7 @@
         "craft/sawmill": {
             "icon": "logging",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -4983,6 +5020,7 @@
         "craft/scaffolder": {
             "icon": "poi-tool",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -5000,6 +5038,7 @@
         "craft/sculpter": {
             "icon": "art-gallery",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -5017,6 +5056,7 @@
         "craft/shoemaker": {
             "icon": "poi-tool",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -5037,6 +5077,7 @@
         "craft/stonemason": {
             "icon": "poi-tool",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -5057,6 +5098,7 @@
         "craft/sweep": {
             "icon": "poi-chimney",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -5074,6 +5116,7 @@
         "craft/tiler": {
             "icon": "poi-tool",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -5091,6 +5134,7 @@
         "craft/tinsmith": {
             "icon": "poi-tool",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -5108,6 +5152,7 @@
         "craft/upholsterer": {
             "icon": "poi-tool",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -5125,6 +5170,7 @@
         "craft/watchmaker": {
             "icon": "poi-clock",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -5142,6 +5188,7 @@
         "craft/window_construction": {
             "icon": "poi-tool",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -5162,6 +5209,7 @@
         "craft/winery": {
             "icon": "alcohol-shop",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
