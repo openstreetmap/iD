@@ -276,7 +276,7 @@ export function uiMapData(context) {
                 .attr('value', 'import');
             importOpt.append('span').text('Hide OSM Layer');
 
-            var urlEntry, urlInput, copyrightable, copyLabel, copyapproval, layerSelect, preset, presetList, presetComboBox, approvalPhase, individualApproval, allApproval, metadata_url;
+            var urlEntry, urlInput, copyrightable, copyLabel, unrecognizedSource, unrecognizedLabel, copyapproval, layerPreview, layerSelect, preset, presetList, presetComboBox, approvalPhase, individualApproval, allApproval, metadata_url;
 
             // I'm going to run this filtering process but only once
             if (window.filterInterval) {
@@ -324,6 +324,11 @@ export function uiMapData(context) {
                     populatePane(this.pane);
                 }).bind(this));
 
+            function hidePreviewGeoService () {
+                d3.selectAll('.geoservice-preview, .geoservice-table, .copyright-text, .layer-counted')
+                    .classed('hide', true)
+            }
+
             function previewGeoService(err, data) {
                 if (err) {
                     return console.log(err);
@@ -340,6 +345,9 @@ export function uiMapData(context) {
                     console.log(ne);
                 }
                 */
+
+                d3.selectAll('.geoservice-preview, .copyright-text')
+                    .classed('hide', false)
 
                 if (data.layers && data.layers.length) {
                     // MapServer layer selector
@@ -426,8 +434,8 @@ export function uiMapData(context) {
                 }
 
                 data.fields.map(function(field) {
-                    // don't allow user to change how OBJECTID works
-                    if (field.name === 'OBJECTID' || field.alias === 'OBJECTID') {
+                    // don't allow user to change how OBJECTID works or map other system-managed fields
+                    if (field.name === 'OBJECTID' || field.name === 'Shape' || field.name === 'Shape_Length' || field.name === 'Shape_Area' ) {
                         return;
                     }
 
@@ -509,7 +517,27 @@ export function uiMapData(context) {
                         // reformat URL ending to /layerID/metadata?f=json
                         metadata_url = fixedURL ? fixedURL : this.value;
                         metadata_url = metadata_url.split('/');
+
+                        if (unrecognizedLabel) {
+                            unrecognizedLabel.classed('hide', true);
+                        }
+
                         if (metadata_url.length < 2 || metadata_url[0].indexOf('http') === -1) {
+                            // if something was there previously, is this our opportunity to reset?
+                            hidePreviewGeoService();
+                            return;
+                        }
+
+                        // if url doesn't contain MapServer or FeatureServer, warn and abort
+                        if (!(new RegExp(/(map|feature)server/, 'i').test(this.value))) {
+                            unrecognizedSource = urlEntry.append('div');
+                            unrecognizedSource.append('div')
+                                .attr('class', 'copyright-text');
+                            unrecognizedLabel = unrecognizedSource.append('label')
+                                .attr('class', 'hide');
+                            unrecognizedLabel.append('span')
+                                .text('The url provided not recognized as a valid GeoService');
+                            unrecognizedLabel.classed('hide', false);
                             return;
                         }
 
@@ -523,7 +551,10 @@ export function uiMapData(context) {
                         d3.text(metadata_url, previewGeoService);
                     });
 
-                copyrightable = urlEntry.append('div');
+                layerPreview = urlEntry.append('div')
+                    .attr('class', 'geoservice-preview')
+
+                copyrightable = layerPreview.append('div');
                 copyrightable.append('div')
                     .attr('class', 'copyright-text');
                 copylabel = copyrightable.append('label')
