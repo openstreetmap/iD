@@ -40,7 +40,7 @@ export function uiPreset(context) {
         field.show = show;
 
         field.shown = function() {
-            return field.id === 'name' || field.show || _.some(field.keys, function(key) { return !!tags[key]; });
+            return field.show || _.some(field.keys, function(key) { return !!tags[key]; });
         };
 
         field.modified = function() {
@@ -104,10 +104,6 @@ export function uiPreset(context) {
                 presets = context.presets();
 
             fieldsArr = [];
-
-            if (presets.field('name')) {
-                fieldsArr.push(UIField(presets.field('name'), entity));
-            }
 
             preset.fields.forEach(function(field) {
                 if (field.matchGeometry(geometry)) {

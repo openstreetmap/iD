@@ -1039,6 +1039,10 @@ button.save.has-count .count::before {
     border-radius: 8px;
 }
 
+.inspector-preset .preset-form:empty {
+    display: none;
+}
+
 .entity-editor-pane .preset-list-item .preset-list-button-wrap {
     margin-bottom: 0;
 }
