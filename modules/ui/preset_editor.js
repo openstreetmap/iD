@@ -14,7 +14,7 @@ import {
 } from '../util';
 
 
-export function uiPreset(context) {
+export function uiPresetEditor(context) {
     var dispatch = d3.dispatch('change'),
         expandedPreference = (context.storage('preset_fields.expanded') !== 'false'),
         state,
@@ -24,61 +24,7 @@ export function uiPreset(context) {
         id;
 
 
-    // // Field Constructor
-    // function UIField(field, entity, show) {
-    //     field = _.clone(field);
-
-    //     field.input = uiFields[field.type](field, context)
-    //         .on('change', function(t, onInput) {
-    //             dispatch.call('change', field, t, onInput);
-    //         });
-
-    //     if (field.input.entity) field.input.entity(entity);
-
-    //     field.keys = field.keys || [field.key];
-
-    //     field.show = show;
-
-    //     field.shown = function() {
-    //         return field.show || _.some(field.keys, function(key) { return !!tags[key]; });
-    //     };
-
-    //     field.modified = function() {
-    //         var original = context.graph().base().entities[entity.id];
-    //         return _.some(field.keys, function(key) {
-    //             return original ? tags[key] !== original.tags[key] : tags[key];
-    //         });
-    //     };
-
-    //     field.revert = function() {
-    //         var original = context.graph().base().entities[entity.id],
-    //             t = {};
-    //         field.keys.forEach(function(key) {
-    //             t[key] = original ? original.tags[key] : undefined;
-    //         });
-    //         return t;
-    //     };
-
-    //     field.present = function() {
-    //         return _.some(field.keys, function(key) {
-    //             return tags[key];
-    //         });
-    //     };
-
-    //     field.remove = function() {
-    //         var t = {};
-    //         field.keys.forEach(function(key) {
-    //             t[key] = undefined;
-    //         });
-    //         return t;
-    //     };
-
-    //     return field;
-    // }
-
-
-
-    function presets(selection) {
+    function presetEditor(selection) {
         selection.call(uiDisclosure()
             .title(t('inspector.all_fields'))
             .expanded(expandedPreference)
@@ -305,38 +251,38 @@ export function uiPreset(context) {
     }
 
 
-    presets.preset = function(_) {
+    presetEditor.preset = function(_) {
         if (!arguments.length) return preset;
-        if (preset && preset.id === _.id) return presets;
+        if (preset && preset.id === _.id) return presetEditor;
         preset = _;
         fieldsArr = null;
-        return presets;
+        return presetEditor;
     };
 
 
-    presets.state = function(_) {
+    presetEditor.state = function(_) {
         if (!arguments.length) return state;
         state = _;
-        return presets;
+        return presetEditor;
     };
 
 
-    presets.tags = function(_) {
+    presetEditor.tags = function(_) {
         if (!arguments.length) return tags;
         tags = _;
         // Don't reset fieldsArr here.
-        return presets;
+        return presetEditor;
     };
 
 
-    presets.entityID = function(_) {
+    presetEditor.entityID = function(_) {
         if (!arguments.length) return id;
-        if (id === _) return presets;
+        if (id === _) return presetEditor;
         id = _;
         fieldsArr = null;
-        return presets;
+        return presetEditor;
     };
 
 
-    return utilRebind(presets, dispatch, 'on');
+    return utilRebind(presetEditor, dispatch, 'on');
 }

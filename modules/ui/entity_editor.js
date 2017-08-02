@@ -10,7 +10,7 @@ import { uiRawMemberEditor } from './raw_member_editor';
 import { uiRawMembershipEditor } from './raw_membership_editor';
 import { uiRawTagEditor } from './raw_tag_editor';
 import { uiTagReference } from './tag_reference';
-import { uiPreset } from './preset';
+import { uiPresetEditor } from './preset_editor';
 import { utilRebind } from '../util';
 
 
@@ -24,7 +24,7 @@ export function uiEntityEditor(context) {
         activePreset,
         reference;
 
-    var presetEditor = uiPreset(context)
+    var presetEditor = uiPresetEditor(context)
         .on('change', changeTags);
     var rawTagEditor = uiRawTagEditor(context)
         .on('change', changeTags);
