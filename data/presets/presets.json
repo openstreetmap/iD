@@ -13615,6 +13615,7 @@
         "tourism/alpine_hut": {
             "icon": "lodging",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -13634,6 +13635,7 @@
         "tourism/apartment": {
             "icon": "lodging",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -13655,6 +13657,7 @@
         "tourism/aquarium": {
             "icon": "aquarium",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -13677,6 +13680,7 @@
         "tourism/artwork": {
             "icon": "art-gallery",
             "fields": [
+                "name",
                 "artwork_type",
                 "artist"
             ],
@@ -13698,6 +13702,7 @@
         "tourism/attraction": {
             "icon": "monument",
             "fields": [
+                "name",
                 "operator",
                 "address"
             ],
@@ -13714,6 +13719,7 @@
         "tourism/camp_site": {
             "icon": "campsite",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "capacity",
@@ -13739,6 +13745,7 @@
         "tourism/caravan_site": {
             "icon": "bus",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "capacity",
@@ -13766,6 +13773,7 @@
         "tourism/chalet": {
             "icon": "lodging",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -13786,6 +13794,7 @@
         "tourism/gallery": {
             "icon": "art-gallery",
             "fields": [
+                "name",
                 "artwork_type",
                 "operator",
                 "address",
@@ -13811,6 +13820,7 @@
         "tourism/guest_house": {
             "icon": "lodging",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -13836,6 +13846,7 @@
         "tourism/hostel": {
             "icon": "lodging",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -13857,6 +13868,7 @@
         "tourism/hotel": {
             "icon": "lodging",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -13897,6 +13909,7 @@
         "tourism/information/board": {
             "icon": "information",
             "fields": [
+                "name",
                 "operator",
                 "board_type"
             ],
@@ -13958,6 +13971,7 @@
         "tourism/information/office": {
             "icon": "information",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area"
@@ -13980,6 +13994,7 @@
         "tourism/motel": {
             "icon": "lodging",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -14001,6 +14016,7 @@
         "tourism/museum": {
             "icon": "museum",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "building_area",
@@ -14029,6 +14045,7 @@
         "tourism/picnic_site": {
             "icon": "picnic-site",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "smoking"
@@ -14049,6 +14066,7 @@
         "tourism/theme_park": {
             "icon": "amusement-park",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "opening_hours"
@@ -14076,6 +14094,7 @@
         "tourism/zoo": {
             "icon": "zoo",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "opening_hours"
@@ -14688,6 +14707,7 @@
         "waterway/boatyard": {
             "icon": "harbor",
             "fields": [
+                "name",
                 "operator"
             ],
             "geometry": [
@@ -14703,6 +14723,7 @@
         "waterway/canal": {
             "icon": "waterway-canal",
             "fields": [
+                "name",
                 "width"
             ],
             "geometry": [
@@ -14720,6 +14741,9 @@
                 "vertex",
                 "line",
                 "area"
+            ],
+            "fields": [
+                "name"
             ],
             "tags": {
                 "waterway": "dam"
@@ -14742,6 +14766,7 @@
         "waterway/dock": {
             "icon": "harbor",
             "fields": [
+                "name",
                 "dock",
                 "operator"
             ],
@@ -14777,6 +14802,7 @@
         "waterway/fuel": {
             "icon": "fuel",
             "fields": [
+                "name",
                 "operator",
                 "address",
                 "opening_hours",
@@ -14800,6 +14826,7 @@
         "waterway/river": {
             "icon": "waterway-river",
             "fields": [
+                "name",
                 "tunnel",
                 "width"
             ],
@@ -14839,6 +14866,7 @@
         "waterway/sanitary_dump_station": {
             "icon": "poi-storage-tank",
             "fields": [
+                "name",
                 "operator",
                 "access_toilets",
                 "fee",
@@ -14869,6 +14897,7 @@
         "waterway/stream": {
             "icon": "waterway-stream",
             "fields": [
+                "name",
                 "tunnel",
                 "width"
             ],
@@ -14922,6 +14951,7 @@
         "waterway/waterfall": {
             "icon": "water",
             "fields": [
+                "name",
                 "height",
                 "width"
             ],
