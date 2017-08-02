@@ -2,10 +2,10 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { d3combobox } from '../lib/d3.combobox.js';
 import { t, textDirection } from '../util/locale';
-import { modeBrowse } from '../modes/index';
-import { svgIcon } from '../svg/index';
+import { modeBrowse } from '../modes';
+import { svgIcon } from '../svg';
 import { uiDisclosure } from './disclosure';
-import { uiFields } from './fields/index';
+import { uiField } from './field';
 import { uiTagReference } from './tag_reference';
 import {
     utilGetSetValue,
@@ -24,62 +24,58 @@ export function uiPreset(context) {
         id;
 
 
-    // Field Constructor
-    function UIField(field, entity, show) {
-        field = _.clone(field);
+    // // Field Constructor
+    // function UIField(field, entity, show) {
+    //     field = _.clone(field);
 
-        field.input = uiFields[field.type](field, context)
-            .on('change', function(t, onInput) {
-                dispatch.call('change', field, t, onInput);
-            });
+    //     field.input = uiFields[field.type](field, context)
+    //         .on('change', function(t, onInput) {
+    //             dispatch.call('change', field, t, onInput);
+    //         });
 
-        if (field.input.entity) field.input.entity(entity);
+    //     if (field.input.entity) field.input.entity(entity);
 
-        field.keys = field.keys || [field.key];
+    //     field.keys = field.keys || [field.key];
 
-        field.show = show;
+    //     field.show = show;
 
-        field.shown = function() {
-            return field.show || _.some(field.keys, function(key) { return !!tags[key]; });
-        };
+    //     field.shown = function() {
+    //         return field.show || _.some(field.keys, function(key) { return !!tags[key]; });
+    //     };
 
-        field.modified = function() {
-            var original = context.graph().base().entities[entity.id];
-            return _.some(field.keys, function(key) {
-                return original ? tags[key] !== original.tags[key] : tags[key];
-            });
-        };
+    //     field.modified = function() {
+    //         var original = context.graph().base().entities[entity.id];
+    //         return _.some(field.keys, function(key) {
+    //             return original ? tags[key] !== original.tags[key] : tags[key];
+    //         });
+    //     };
 
-        field.revert = function() {
-            var original = context.graph().base().entities[entity.id],
-                t = {};
-            field.keys.forEach(function(key) {
-                t[key] = original ? original.tags[key] : undefined;
-            });
-            return t;
-        };
+    //     field.revert = function() {
+    //         var original = context.graph().base().entities[entity.id],
+    //             t = {};
+    //         field.keys.forEach(function(key) {
+    //             t[key] = original ? original.tags[key] : undefined;
+    //         });
+    //         return t;
+    //     };
 
-        field.present = function() {
-            return _.some(field.keys, function(key) {
-                return tags[key];
-            });
-        };
+    //     field.present = function() {
+    //         return _.some(field.keys, function(key) {
+    //             return tags[key];
+    //         });
+    //     };
 
-        field.remove = function() {
-            var t = {};
-            field.keys.forEach(function(key) {
-                t[key] = undefined;
-            });
-            return t;
-        };
+    //     field.remove = function() {
+    //         var t = {};
+    //         field.keys.forEach(function(key) {
+    //             t[key] = undefined;
+    //         });
+    //         return t;
+    //     };
 
-        return field;
-    }
+    //     return field;
+    // }
 
-
-    function fieldKey(field) {
-        return field.id;
-    }
 
 
     function presets(selection) {
@@ -107,17 +103,23 @@ export function uiPreset(context) {
 
             preset.fields.forEach(function(field) {
                 if (field.matchGeometry(geometry)) {
-                    fieldsArr.push(UIField(field, entity, true));
+                    fieldsArr.push(
+                        uiField(context, dispatch, field, entity, true).tags(tags)
+                    );
                 }
             });
 
             if (entity.isHighwayIntersection(context.graph()) && presets.field('restrictions')) {
-                fieldsArr.push(UIField(presets.field('restrictions'), entity, true));
+                fieldsArr.push(
+                    uiField(context, dispatch, presets.field('restrictions'), entity, true).tags(tags)
+                );
             }
 
             presets.universal().forEach(function(field) {
                 if (preset.fields.indexOf(field) < 0) {
-                    fieldsArr.push(UIField(field, entity));
+                    fieldsArr.push(
+                        uiField(context, dispatch, field, entity).tags(tags)
+                    );
                 }
             });
         }
@@ -135,8 +137,8 @@ export function uiPreset(context) {
             .merge(form);
 
 
-        var fields = form.selectAll('.form-field')
-            .data(shown, fieldKey);
+        var fields = form.selectAll('.preset-form-field')
+            .data(shown, function(d) { return d.id; });
 
         fields.exit()
             .remove();
@@ -144,60 +146,47 @@ export function uiPreset(context) {
         // Enter
         var enter = fields.enter()
             .append('div')
-            .attr('class', function(field) {
-                return 'form-field form-field-' + field.id;
-            });
+            .attr('class', function(d) { return 'preset-form-field preset-form-field-' + d.id; });
 
-        var label = enter
-            .append('label')
-            .attr('class', 'form-label')
-            .attr('for', function(field) { return 'preset-input-' + field.id; })
-            .text(function(field) { return field.label(); });
 
-        var wrap = label
-            .append('div')
-            .attr('class', 'form-label-button-wrap');
+        // var label = enter
+        //     .append('label')
+        //     .attr('class', 'form-label')
+        //     .attr('for', function(d) { return 'preset-input-' + d.id; })
+        //     .text(function(d) { return d.label(); });
 
-        wrap.append('button')
-            .attr('class', 'remove-icon')
-            .attr('tabindex', -1)
-            .call(svgIcon('#operation-delete'));
+        // var wrap = label
+        //     .append('div')
+        //     .attr('class', 'form-label-button-wrap');
 
-        wrap.append('button')
-            .attr('class', 'modified-icon')
-            .attr('tabindex', -1)
-            .call(
-                (textDirection === 'rtl') ? svgIcon('#icon-redo') : svgIcon('#icon-undo')
-            );
+        // wrap.append('button')
+        //     .attr('class', 'remove-icon')
+        //     .attr('tabindex', -1)
+        //     .call(svgIcon('#operation-delete'));
+
+        // wrap.append('button')
+        //     .attr('class', 'modified-icon')
+        //     .attr('tabindex', -1)
+        //     .call(
+        //         (textDirection === 'rtl') ? svgIcon('#icon-redo') : svgIcon('#icon-undo')
+        //     );
 
 
         // Update
         fields = fields
             .merge(enter);
 
-        fields.selectAll('.form-label-button-wrap .remove-icon')
-            .on('click', remove);
+        // fields.selectAll('.form-label-button-wrap .remove-icon')
+        //     .on('click', remove);
 
-        fields.selectAll('.modified-icon')
-            .on('click', revert);
+        // fields.selectAll('.modified-icon')
+        //     .on('click', revert);
 
         fields
             .order()
-            .classed('modified', function(field) { return field.modified(); })
-            .classed('present', function(field) { return field.present(); })
             .each(function(field) {
-                var referenceKey = field.key;
-                if (field.type === 'multiCombo') {   // lookup key without the trailing ':'
-                    referenceKey = referenceKey.replace(/:$/, '');
-                }
-                var reference = uiTagReference(field.reference || { key: referenceKey }, context);
-
-                if (state === 'hover') {
-                    reference.showing(false);
-                }
-
                 d3.select(this)
-                    .call(field.input)
+                    .call(field.render)
                     .selectAll('input')
                     .on('keydown', function() {
                         // if user presses enter, and combobox is not active, accept edits..
@@ -206,13 +195,39 @@ export function uiPreset(context) {
                         }
                     });
 
-                d3.select(this)
-                    .call(reference.body)
-                    .select('.form-label-button-wrap')
-                    .call(reference.button);
-
-                field.input.tags(tags);
+                field.render.tags(tags);
             });
+
+            // .classed('modified', function(d) { return d.modified(); })
+            // .classed('present', function(d) { return d.present(); })
+            // .each(function(field) {
+            //     var referenceKey = field.key;
+            //     if (field.type === 'multiCombo') {   // lookup key without the trailing ':'
+            //         referenceKey = referenceKey.replace(/:$/, '');
+            //     }
+            //     var reference = uiTagReference(field.reference || { key: referenceKey }, context);
+
+            //     if (state === 'hover') {
+            //         reference.showing(false);
+            //     }
+
+            //     d3.select(this)
+            //         .call(field.render)
+            //         .selectAll('input')
+            //         .on('keydown', function() {
+            //             // if user presses enter, and combobox is not active, accept edits..
+            //             if (d3.event.keyCode === 13 && d3.select('.combobox').empty()) {
+            //                 context.enter(modeBrowse(context));
+            //             }
+            //         });
+
+            //     d3.select(this)
+            //         .call(reference.body)
+            //         .select('.form-label-button-wrap')
+            //         .call(reference.button);
+
+            //     field.render.tags(tags);
+            // });
 
         notShown = notShown.map(function(field) {
             return {
