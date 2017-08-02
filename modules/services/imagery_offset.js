@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import rbush from 'rbush';
-import { geoExtent } from '../geo/index';
+import { geoExtent, geoSphericalDistance } from '../geo/index';
 import { utilQsString } from '../util/index';
 
 var apibase = 'http://offsets.textual.ru/get?',
@@ -22,28 +22,20 @@ export default {
         inflight = {};
         offsetCache = rbush();
     },
-    getImageryID: function(url, imageryType) {
+    getImageryID: function(url) {
         if (url == null) return;
-        console.log('url=', url)
-        debugger;
-        url = url.toLowerCase();
-        if (imageryType === 'bing' || url.indexOf('tiles.virtualearth.net') > -1)
-            return 'bing';
-        // if (url.indexOf("scanex_irs") > )
-        if (
-            imageryType === 'TMS' &&
-            url.match(/.+tiles\.mapbox\.com\/v[3-9]\/openstreetmap\.map.*/)
-        )
-            return 'mapbox';
 
-        // does iD support WMS? if yes, how to detect
-        var isWMS = false;
+        url = url.toLowerCase();
+        if (url.indexOf('tiles.virtualearth.net') > -1) return 'bing';
+
+        if (url.match(/.+tiles\.mapbox\.com\/v[3-9]\/openstreetmap\.map.*/))
+            return 'mapbox';
 
         // Remove protocol
         var i = url.indexOf('://');
         url = url.substring(i + 3);
-
         var query = '';
+
         // Split URL into address and query string
         var questionMarkIndex = url.indexOf('?');
         if (questionMarkIndex > 0) {
@@ -51,30 +43,13 @@ export default {
             url = url.slice(0, questionMarkIndex);
         }
 
-        var removeWMSParams = [
-            'srs',
-            'width',
-            'height',
-            'bbox',
-            'service',
-            'request',
-            'version',
-            'format',
-            'styles',
-            'transparent'
-        ];
-
         var qparams = {};
         var qparamsStr = query.length > 1 ? query.slice(1).split('&') : '';
 
         qparamsStr.forEach(function(param) {
             var kv = param.split('=');
-            console.log(kv);
             kv[0] = kv[0].toLowerCase();
-            // WMS: if this is WMS, remove all parameters except map and layers
-            if (isWMS && removeWMSParams.indexOf(kv[0]) > -1) {
-                return;
-            }
+
             // TMS: skip parameters with variable values and Mapbox's access token
             if (
                 (kv.length > 1 &&
@@ -84,7 +59,6 @@ export default {
             ) {
                 return;
             }
-            console.log('here')
             qparams[kv[0].toLowerCase()] = kv.length > 1 ? kv[1] : null;
         });
 
@@ -109,8 +83,32 @@ export default {
 
         return url + query;
     },
+    match: function(location, imageryId, data) {
+        // TOFIX: need to figure out the closest distance
+        //  to start with, ideally it should be distance of
+        // center screen to nearest edge.
+        var closestDistance = Infinity;
+        var matchedImagery;
+
+        data
+            .filter(function(d) {
+                return d.data.imagery === imageryId;
+            })
+            .forEach(function(d) {
+                var imagery = d.data;
+                var dist = geoSphericalDistance(
+                    [parseFloat(imagery.lon), parseFloat(imagery.lat)],
+                    location
+                );
+                if (dist < closestDistance) {
+                    closestDistance = dist;
+                    matchedImagery = imagery;
+                    return d.data;
+                }
+            });
+        return matchedImagery;
+    },
     search: function(location, url, callback) {
-        console.log(this.getImageryID(url))
         var cached = offsetCache.search({
             minX: location[0],
             minY: location[1],
@@ -118,13 +116,10 @@ export default {
             maxY: location[1]
         });
 
+        var imageryId = this.getImageryID(url);
+
         if (cached.length > 0) {
-            return callback(
-                null,
-                cached.map(function(c) {
-                    return c.data;
-                })
-            );
+            return callback(null, this.match(location, imageryId, cached));
         }
 
         var params = {
@@ -133,11 +128,13 @@ export default {
             lat: location[1],
             lon: location[0]
         };
-        var url = apibase + utilQsString(params);
-        if (inflight[url]) return;
 
-        inflight[url] = d3.json(url, function(err, result) {
-            delete inflight[url];
+        var databaseUrl = apibase + utilQsString(params);
+
+        if (inflight[databaseUrl]) return;
+        var that = this;
+        inflight[databaseUrl] = d3.json(databaseUrl, function(err, result) {
+            delete inflight[databaseUrl];
 
             if (err) {
                 return callback(err);
@@ -151,15 +148,21 @@ export default {
             // the first entry is always a timestamp
             // which can be discarded.
             result = result.slice(1);
-            result.forEach(function(imagery) {
-                var extent = geoExtent([
-                    parseFloat(imagery.lon),
-                    parseFloat(imagery.lat)
-                ]).padByMeters(1000); // need to figure out how much to pad
+            result
+                .filter(function(imagery) {
+                    return imagery.type === 'offset';
+                })
+                .forEach(function(imagery) {
+                    var extent = geoExtent([
+                        parseFloat(imagery.lon),
+                        parseFloat(imagery.lat)
+                    ]).padByMeters(9 * 1000); // need to figure out how much to pad
 
-                offsetCache.insert(_.assign(extent.bbox(), { data: imagery }));
-            });
-            callback(null, result);
+                    offsetCache.insert(
+                        _.assign(extent.bbox(), { data: imagery })
+                    );
+                });
+            callback(null, that.match(location, imageryId, cached));
         });
     }
 };

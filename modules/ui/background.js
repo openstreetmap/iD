@@ -185,7 +185,7 @@ export function uiBackground(context) {
         function update() {
             backgroundList.call(drawList, 'radio', clickSetSource, function(d) { return !d.overlay; });
             overlayList.call(drawList, 'checkbox', clickSetOverlay, function(d) { return d.overlay; });
-            
+
             selectLayer();
             updateOffsetVal();
         }
