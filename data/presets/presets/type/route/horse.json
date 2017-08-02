@@ -9,6 +9,7 @@
     "name": "Riding Route",
     "icon": "route-horse",
     "fields": [
+	    "name",
         "ref_route",
         "operator",
         "network_horse"

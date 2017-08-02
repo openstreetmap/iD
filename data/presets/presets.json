@@ -14328,12 +14328,14 @@
             "name": "Boundary",
             "icon": "boundary",
             "fields": [
+                "name",
                 "boundary"
             ]
         },
         "type/boundary/administrative": {
             "icon": "boundary",
             "fields": [
+                "name",
                 "admin_level"
             ],
             "geometry": [
@@ -14359,6 +14361,7 @@
             "name": "Restriction",
             "icon": "restriction",
             "fields": [
+                "name",
                 "restriction",
                 "except"
             ]
@@ -14471,6 +14474,7 @@
             "name": "Route Master",
             "icon": "route-master",
             "fields": [
+                "name",
                 "route_master",
                 "ref",
                 "operator",
@@ -14487,6 +14491,7 @@
             "name": "Route",
             "icon": "route",
             "fields": [
+                "name",
                 "route",
                 "ref_route",
                 "operator",
@@ -14504,6 +14509,7 @@
             "name": "Cycle Route",
             "icon": "route-bicycle",
             "fields": [
+                "name",
                 "ref_route",
                 "network_bicycle",
                 "cycle_network"
@@ -14520,6 +14526,7 @@
             "name": "Bus Route",
             "icon": "route-bus",
             "fields": [
+                "name",
                 "ref_route",
                 "operator",
                 "network"
@@ -14536,6 +14543,7 @@
             "name": "Detour Route",
             "icon": "route-detour",
             "fields": [
+                "name",
                 "ref_route"
             ]
         },
@@ -14550,6 +14558,7 @@
             "name": "Ferry Route",
             "icon": "route-ferry",
             "fields": [
+                "name",
                 "ref_route",
                 "operator",
                 "network"
@@ -14566,6 +14575,7 @@
             "name": "Foot Route",
             "icon": "route-foot",
             "fields": [
+                "name",
                 "ref_route",
                 "operator",
                 "network_foot"
@@ -14582,6 +14592,7 @@
             "name": "Hiking Route",
             "icon": "route-foot",
             "fields": [
+                "name",
                 "ref_route",
                 "operator",
                 "network_foot"
@@ -14598,6 +14609,7 @@
             "name": "Riding Route",
             "icon": "route-horse",
             "fields": [
+                "name",
                 "ref_route",
                 "operator",
                 "network_horse"
@@ -14614,6 +14626,7 @@
             "name": "Pipeline Route",
             "icon": "route-pipeline",
             "fields": [
+                "name",
                 "ref_route",
                 "operator"
             ]
@@ -14629,6 +14642,7 @@
             "name": "Power Route",
             "icon": "route-power",
             "fields": [
+                "name",
                 "ref_route",
                 "operator"
             ]
@@ -14644,6 +14658,7 @@
             "name": "Road Route",
             "icon": "route-road",
             "fields": [
+                "name",
                 "ref_route",
                 "network_road"
             ]
@@ -14659,6 +14674,7 @@
             "name": "Train Route",
             "icon": "route-train",
             "fields": [
+                "name",
                 "ref_route",
                 "operator",
                 "network"
@@ -14675,6 +14691,7 @@
             "name": "Tram Route",
             "icon": "route-tram",
             "fields": [
+                "name",
                 "ref_route",
                 "operator",
                 "network"
@@ -14690,6 +14707,7 @@
             "name": "Site",
             "icon": "relation",
             "fields": [
+                "name",
                 "site"
             ]
         },
