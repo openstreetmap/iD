@@ -1146,6 +1146,7 @@ button.save.has-count .count::before {
 .inspector-hover .form-field-multicombo,
 .inspector-hover .structure-extras-wrap,
 .inspector-hover input,
+.inspector-hover textarea,
 .inspector-hover label {
     background: #ececec;
 }

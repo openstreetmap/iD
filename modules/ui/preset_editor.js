@@ -75,7 +75,9 @@ export function uiPresetEditor(context) {
         }
 
         fieldsArr.forEach(function(field) {
-            field.tags(tags);
+            field
+                .state(state)
+                .tags(tags);
         });
 
         var shown = fieldsArr.filter(function(field) { return field.isShown(); }),

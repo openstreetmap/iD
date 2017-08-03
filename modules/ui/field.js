@@ -10,7 +10,8 @@ import { utilRebind } from '../util';
 export function uiField(context, presetField, entity, show) {
     var dispatch = d3.dispatch('change'),
         field = _.clone(presetField),
-        tags;
+        state = '',
+        tags = {};
 
 
     field.impl = uiFields[field.type](field, context)
@@ -123,10 +124,9 @@ export function uiField(context, presetField, entity, show) {
                 }
                 var reference = uiTagReference(d.reference || { key: referenceKey }, context);
 
-//FIXME
-                // if (state === 'hover') {
-                //     reference.showing(false);
-                // }
+                if (state === 'hover') {
+                    reference.showing(false);
+                }
 
                 d3.select(this)
                     .call(d.impl);
@@ -138,6 +138,13 @@ export function uiField(context, presetField, entity, show) {
 
                 d.impl.tags(tags);
             });
+    };
+
+
+    field.state = function(_) {
+        if (!arguments.length) return state;
+        state = _;
+        return field;
     };
 
 
