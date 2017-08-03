@@ -1024,22 +1024,22 @@ button.save.has-count .count::before {
 
 /* preset form basics */
 
-.inspector-preset {
+.preset-editor {
     overflow: hidden;
     padding-bottom: 10px;
 }
 
-.inspector-preset a.hide-toggle {
+.preset-editor a.hide-toggle {
     margin: 0 20px 10px 20px;
 }
 
-.inspector-preset .preset-form {
+.preset-editor .preset-form {
     padding: 10px;
     margin: 0 10px 10px 10px;
     border-radius: 8px;
 }
 
-.inspector-preset .preset-form:empty {
+.preset-editor .preset-form:empty {
     display: none;
 }
 
@@ -1056,7 +1056,7 @@ button.save.has-count .count::before {
             transition: margin-bottom 200ms;
 }
 
-.form-field:last-child {
+.wrap-form-field:last-child .form-field {
     margin-bottom: 0;
 }
 

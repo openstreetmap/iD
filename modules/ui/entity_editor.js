@@ -88,7 +88,7 @@ export function uiEntityEditor(context) {
 
         enter
             .append('div')
-            .attr('class', 'inspector-border inspector-preset');
+            .attr('class', 'inspector-border preset-editor');
 
         enter
             .append('div')
@@ -129,7 +129,7 @@ export function uiEntityEditor(context) {
         body.select('.preset-list-item .label')
             .text(activePreset.name());
 
-        body.select('.inspector-preset')
+        body.select('.preset-editor')
             .call(presetEditor
                 .preset(activePreset)
                 .entityID(id)

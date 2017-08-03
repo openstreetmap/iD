@@ -1,12 +1,9 @@
 import * as d3 from 'd3';
-import _ from 'lodash';
 import { d3combobox } from '../lib/d3.combobox.js';
-import { t, textDirection } from '../util/locale';
+import { t } from '../util/locale';
 import { modeBrowse } from '../modes';
-import { svgIcon } from '../svg';
 import { uiDisclosure } from './disclosure';
 import { uiField } from './field';
-import { uiTagReference } from './tag_reference';
 import {
     utilGetSetValue,
     utilNoAuto,
@@ -29,7 +26,7 @@ export function uiPresetEditor(context) {
             .title(t('inspector.all_fields'))
             .expanded(expandedPreference)
             .on('toggled', toggled)
-            .content(content)
+            .content(render)
         );
 
         function toggled(expanded) {
@@ -39,7 +36,7 @@ export function uiPresetEditor(context) {
     }
 
 
-    function content(selection) {
+    function render(selection) {
         if (!fieldsArr) {
             var entity = context.entity(id),
                 geometry = context.geometry(id),
@@ -62,7 +59,7 @@ export function uiPresetEditor(context) {
             }
 
             presets.universal().forEach(function(field) {
-                if (preset.fields.indexOf(field) < 0) {
+                if (preset.fields.indexOf(field) === -1) {
                     fieldsArr.push(
                         uiField(context, dispatch, field, entity).tags(tags)
                     );
@@ -70,8 +67,8 @@ export function uiPresetEditor(context) {
             });
         }
 
-        var shown = fieldsArr.filter(function(field) { return field.shown(); }),
-            notShown = fieldsArr.filter(function(field) { return !field.shown(); });
+        var shown = fieldsArr.filter(function(field) { return field.isShown(); }),
+            notShown = fieldsArr.filter(function(field) { return !field.isShown(); });
 
 
         var form = selection.selectAll('.preset-form')
@@ -83,7 +80,7 @@ export function uiPresetEditor(context) {
             .merge(form);
 
 
-        var fields = form.selectAll('.preset-form-field')
+        var fields = form.selectAll('.wrap-form-field')
             .data(shown, function(d) { return d.id; });
 
         fields.exit()
@@ -92,47 +89,17 @@ export function uiPresetEditor(context) {
         // Enter
         var enter = fields.enter()
             .append('div')
-            .attr('class', function(d) { return 'preset-form-field preset-form-field-' + d.id; });
-
-
-        // var label = enter
-        //     .append('label')
-        //     .attr('class', 'form-label')
-        //     .attr('for', function(d) { return 'preset-input-' + d.id; })
-        //     .text(function(d) { return d.label(); });
-
-        // var wrap = label
-        //     .append('div')
-        //     .attr('class', 'form-label-button-wrap');
-
-        // wrap.append('button')
-        //     .attr('class', 'remove-icon')
-        //     .attr('tabindex', -1)
-        //     .call(svgIcon('#operation-delete'));
-
-        // wrap.append('button')
-        //     .attr('class', 'modified-icon')
-        //     .attr('tabindex', -1)
-        //     .call(
-        //         (textDirection === 'rtl') ? svgIcon('#icon-redo') : svgIcon('#icon-undo')
-        //     );
-
+            .attr('class', function(d) { return 'wrap-form-field wrap-form-field-' + d.id; });
 
         // Update
         fields = fields
             .merge(enter);
 
-        // fields.selectAll('.form-label-button-wrap .remove-icon')
-        //     .on('click', remove);
-
-        // fields.selectAll('.modified-icon')
-        //     .on('click', revert);
-
         fields
             .order()
-            .each(function(field) {
+            .each(function(d) {
                 d3.select(this)
-                    .call(field.render)
+                    .call(d.render)
                     .selectAll('input')
                     .on('keydown', function() {
                         // if user presses enter, and combobox is not active, accept edits..
@@ -141,39 +108,9 @@ export function uiPresetEditor(context) {
                         }
                     });
 
-                field.render.tags(tags);
+                d.tags(tags);
             });
 
-            // .classed('modified', function(d) { return d.modified(); })
-            // .classed('present', function(d) { return d.present(); })
-            // .each(function(field) {
-            //     var referenceKey = field.key;
-            //     if (field.type === 'multiCombo') {   // lookup key without the trailing ':'
-            //         referenceKey = referenceKey.replace(/:$/, '');
-            //     }
-            //     var reference = uiTagReference(field.reference || { key: referenceKey }, context);
-
-            //     if (state === 'hover') {
-            //         reference.showing(false);
-            //     }
-
-            //     d3.select(this)
-            //         .call(field.render)
-            //         .selectAll('input')
-            //         .on('keydown', function() {
-            //             // if user presses enter, and combobox is not active, accept edits..
-            //             if (d3.event.keyCode === 13 && d3.select('.combobox').empty()) {
-            //                 context.enter(modeBrowse(context));
-            //             }
-            //         });
-
-            //     d3.select(this)
-            //         .call(reference.body)
-            //         .select('.form-label-button-wrap')
-            //         .call(reference.button);
-
-            //     field.render.tags(tags);
-            // });
 
         notShown = notShown.map(function(field) {
             return {
@@ -229,25 +166,13 @@ export function uiPresetEditor(context) {
 
 
         function show(field) {
-            field = field.field;
-            field.show = true;
-            content(selection);
-            field.input.focus();
+//FIXME
+            // field = field.field;
+            // field.show = true;
+            // render(selection);
+            // field.input.focus();
         }
 
-
-        function revert(field) {
-            d3.event.stopPropagation();
-            d3.event.preventDefault();
-            dispatch.call('change', field, field.revert());
-        }
-
-
-        function remove(field) {
-            d3.event.stopPropagation();
-            d3.event.preventDefault();
-            dispatch.call('change', field, field.remove());
-        }
     }
 
 
