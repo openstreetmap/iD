@@ -1,7 +1,7 @@
 {
     "icon": "building",
     "fields": [
-	    "name",
+        "name",
         "address",
         "levels",
         "smoking"

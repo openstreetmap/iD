@@ -1,7 +1,7 @@
 {
     "icon": "horse-riding",
     "fields": [
-	    "name",
+        "name",
         "address",
         "levels"
     ],

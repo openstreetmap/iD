@@ -1,7 +1,7 @@
 {
     "icon": "zoo",
     "fields": [
-	    "name",
+        "name",
         "operator",
         "address",
         "opening_hours"

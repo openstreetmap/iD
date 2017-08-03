@@ -1,7 +1,7 @@
 {
     "icon": "bus",
     "fields": [
-	    "name",
+        "name",
         "network",
         "operator",
         "bench",

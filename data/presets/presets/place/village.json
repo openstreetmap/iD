@@ -1,7 +1,7 @@
 {
     "icon": "village",
     "fields": [
-	    "name",
+        "name",
         "population"
     ],
     "geometry": [

@@ -1,6 +1,6 @@
 {
     "fields": [
-	    "name",
+        "name",
         "operator",
         "address",
         "building_area",

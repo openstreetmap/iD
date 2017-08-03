@@ -1,7 +1,7 @@
 {
     "icon": "picnic-site",
     "fields": [
-	    "name",
+        "name",
         "operator",
         "address",
         "smoking"

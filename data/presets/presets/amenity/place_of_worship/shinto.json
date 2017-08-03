@@ -1,7 +1,7 @@
 {
     "icon": "poi-shintoist",
     "fields": [
-	    "name",
+        "name",
         "denomination",
         "building_area",
         "address",

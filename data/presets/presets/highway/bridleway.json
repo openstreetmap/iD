@@ -1,6 +1,6 @@
 {
     "fields": [
-	    "name",
+        "name",
         "surface",
         "width",
         "structure",

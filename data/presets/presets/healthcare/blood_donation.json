@@ -1,7 +1,7 @@
 {
     "icon": "blood-bank",
     "fields": [
-	    "name",
+        "name",
         "operator",
         "address",
         "blood_components",

@@ -9,7 +9,7 @@
     "name": "Foot Route",
     "icon": "route-foot",
     "fields": [
-	    "name",
+        "name",
         "ref_route",
         "operator",
         "network_foot"

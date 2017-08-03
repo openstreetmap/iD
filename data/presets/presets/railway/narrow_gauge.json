@@ -7,7 +7,7 @@
         "railway": "narrow_gauge"
     },
     "fields": [
-	    "name",
+        "name",
         "structure",
         "gauge",
         "electrified",

@@ -1,7 +1,7 @@
 {
     "icon": "dentist",
     "fields": [
-	    "name",
+        "name",
         "address",
         "building_area",
         "opening_hours"

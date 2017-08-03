@@ -7,7 +7,7 @@
         "railway": "monorail"
     },
     "fields": [
-	    "name",
+        "name",
         "structure",
         "electrified",
         "service_rail"

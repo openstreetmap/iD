@@ -9,7 +9,7 @@
     "name": "Ferry Route",
     "icon": "route-ferry",
     "fields": [
-	    "name",
+        "name",
         "ref_route",
         "operator",
         "network"

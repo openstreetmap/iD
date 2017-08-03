@@ -1,7 +1,7 @@
 {
     "icon": "swimming",
     "fields": [
-	    "name",
+        "name",
         "access_simple",
         "operator",
         "address",

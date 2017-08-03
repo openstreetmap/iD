@@ -1,7 +1,7 @@
 {
     "icon": "cemetery",
     "fields": [
-	    "name",
+        "name",
         "tomb",
         "building_area",
         "inscription"

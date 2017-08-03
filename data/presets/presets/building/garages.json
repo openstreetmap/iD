@@ -1,7 +1,7 @@
 {
     "icon": "warehouse",
     "fields": [
-	    "name",
+        "name",
         "capacity"
     ],
     "geometry": [

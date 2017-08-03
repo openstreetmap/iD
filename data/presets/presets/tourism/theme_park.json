@@ -1,7 +1,7 @@
 {
     "icon": "amusement-park",
     "fields": [
-	    "name",
+        "name",
         "operator",
         "address",
         "opening_hours"

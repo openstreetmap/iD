@@ -7,7 +7,7 @@
         "railway": "rail"
     },
     "fields": [
-	    "name",
+        "name",
         "structure",
         "gauge",
         "electrified",

@@ -1,7 +1,7 @@
 {
     "icon": "city",
     "fields": [
-	    "name",
+        "name",
         "population"
     ],
     "geometry": [

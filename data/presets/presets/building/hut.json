@@ -2,8 +2,8 @@
     "geometry": [
         "area"
     ],
-	"fields": [
-	    "name"
+    "fields": [
+        "name"
     ],
 
     "tags": {

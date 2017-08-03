@@ -1,7 +1,7 @@
 {
     "icon": "cemetery",
     "fields": [
-	    "name",
+        "name",
         "website",
         "phone",
         "opening_hours",

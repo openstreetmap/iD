@@ -1,8 +1,8 @@
 {
     "icon": "danger",
-	"fields": [
-	    "name"
-	],
+    "fields": [
+        "name"
+    ],
     "geometry": [
         "point",
         "vertex",

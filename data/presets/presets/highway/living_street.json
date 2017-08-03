@@ -1,7 +1,7 @@
 {
     "icon": "highway-living-street",
     "fields": [
-	    "name",
+        "name",
         "oneway",
         "maxspeed",
         "lanes",

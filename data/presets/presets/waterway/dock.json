@@ -1,7 +1,7 @@
 {
     "icon": "harbor",
     "fields": [
-	    "name",
+        "name",
         "dock",
         "operator"
     ],

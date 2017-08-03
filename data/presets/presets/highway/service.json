@@ -1,7 +1,7 @@
 {
     "icon": "highway-service",
     "fields": [
-	    "name",
+        "name",
         "service",
         "oneway",
         "maxspeed",

@@ -7,7 +7,7 @@
         "railway": "abandoned"
     },
     "fields": [
-	    "name",
+        "name",
         "structure",
         "service_rail"
     ],

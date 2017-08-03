@@ -4,9 +4,9 @@
         "point",
         "area"
     ],
-	"fields": [
-	    "name"
-	],
+    "fields": [
+        "name"
+    ],
     "terms": [
         "open space"
     ],

@@ -3,9 +3,9 @@
     "geometry": [
         "line"
     ],
-	"fields": [
-	    "name"
-	],
+    "fields": [
+        "name"
+    ],
     "tags": {
         "route": "ferry"
     },

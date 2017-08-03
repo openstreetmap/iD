@@ -1,7 +1,7 @@
 {
     "icon": "castle",
     "fields": [
-	    "name",
+        "name",
         "castle_type",
         "building_area",
         "historic/civilization"

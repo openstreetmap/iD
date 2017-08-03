@@ -8,7 +8,7 @@
     "name": "Restriction",
     "icon": "restriction",
     "fields": [
-	    "name",
+        "name",
         "restriction",
         "except"
     ]

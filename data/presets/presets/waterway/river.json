@@ -1,7 +1,7 @@
 {
     "icon": "waterway-river",
     "fields": [
-	    "name",
+        "name",
         "tunnel",
         "width"
     ],

@@ -1,7 +1,7 @@
 {
     "icon": "campsite",
     "fields": [
-	    "name",
+        "name",
         "operator",
         "address",
         "capacity",

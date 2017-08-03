@@ -1,7 +1,7 @@
 {
     "icon": "golf",
-	"fields": [
-	    "name"
+    "fields": [
+        "name"
     ],
     "geometry": [
         "line"

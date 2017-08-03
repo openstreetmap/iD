@@ -7,7 +7,7 @@
         "boundary": "administrative"
     },
     "fields": [
-	    "name",
+        "name",
         "admin_level"
     ]
 }

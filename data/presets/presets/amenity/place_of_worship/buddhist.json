@@ -1,7 +1,7 @@
 {
     "icon": "buddhism",
     "fields": [
-	    "name",
+        "name",
         "denomination",
         "building_area",
         "address",

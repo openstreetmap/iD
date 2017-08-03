@@ -1,8 +1,8 @@
 {
     "icon": "industry",
-	"fields": [
-	    "name"
-	],
+    "fields": [
+        "name"
+    ],
     "geometry": [
         "area"
     ],

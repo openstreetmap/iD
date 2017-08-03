@@ -1,7 +1,7 @@
 {
     "icon": "highway-cycleway",
     "fields": [
-	    "name",
+        "name",
         "oneway",
         "surface",
         "lit",

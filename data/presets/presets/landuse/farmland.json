@@ -1,7 +1,7 @@
 {
     "icon": "farm",
     "fields": [
-	    "name",
+        "name",
         "operator",
         "crop",
         "produce"

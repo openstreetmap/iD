@@ -1,7 +1,7 @@
 {
     "icon": "place-of-worship",
     "fields": [
-	    "name",
+        "name",
         "religion",
         "denomination",
         "address",

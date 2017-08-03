@@ -1,7 +1,7 @@
 {
     "icon": "poi-milestone",
     "fields": [
-	    "name",
+        "name",
         "inscription"
     ],
     "geometry": [

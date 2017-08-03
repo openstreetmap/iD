@@ -1,7 +1,7 @@
 {
     "icon": "boundary",
     "fields": [
-	    "name",
+        "name",
         "admin_level"
     ],
     "geometry": [

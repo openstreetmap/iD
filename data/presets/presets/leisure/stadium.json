@@ -1,7 +1,7 @@
 {
     "icon": "pitch",
     "fields": [
-	    "name",
+        "name",
         "sport",
         "address"
     ],

@@ -1,7 +1,7 @@
 {
     "icon": "highway-primary",
     "fields": [
-	    "name",
+        "name",
         "oneway",
         "maxspeed",
         "lanes",
