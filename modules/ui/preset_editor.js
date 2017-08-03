@@ -161,17 +161,13 @@ export function uiPresetEditor(context) {
                 .container(context.container())
                 .data(notShown)
                 .minItems(1)
-                .on('accept', show)
+                .on('accept', function (d) {
+                    var field = d.field;
+                    field.show = true;
+                    render(selection);
+                    field.focus();
+                })
             );
-
-
-        function show(field) {
-//FIXME
-            // field = field.field;
-            // field.show = true;
-            // render(selection);
-            // field.input.focus();
-        }
 
     }
 

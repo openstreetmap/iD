@@ -151,6 +151,11 @@ export function uiField(context, dispatch, presetField, entity, show) {
     };
 
 
+    field.focus = function() {
+        field.impl.focus();
+    };
+
+
     return field;
 }
 
