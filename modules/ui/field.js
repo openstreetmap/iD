@@ -142,6 +142,7 @@ export function uiField(context, dispatch, presetField, entity, show) {
     field.tags = function(_) {
         if (!arguments.length) return tags;
         tags = _;
+        // field.impl.tags(tags);
         return field;
     };
 

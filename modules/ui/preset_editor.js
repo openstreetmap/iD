@@ -18,7 +18,7 @@ export function uiPresetEditor(context) {
         fieldsArr,
         preset,
         tags,
-        id;
+        entityId;
 
 
     function presetEditor(selection) {
@@ -38,8 +38,8 @@ export function uiPresetEditor(context) {
 
     function render(selection) {
         if (!fieldsArr) {
-            var entity = context.entity(id),
-                geometry = context.geometry(id),
+            var entity = context.entity(entityId),
+                geometry = context.geometry(entityId),
                 presets = context.presets();
 
             fieldsArr = [];
@@ -108,7 +108,7 @@ export function uiPresetEditor(context) {
                         }
                     });
 
-                d.tags(tags);
+                // d.tags(tags);
             });
 
 
@@ -197,9 +197,9 @@ export function uiPresetEditor(context) {
 
 
     presetEditor.entityID = function(_) {
-        if (!arguments.length) return id;
-        if (id === _) return presetEditor;
-        id = _;
+        if (!arguments.length) return entityId;
+        if (entityId === _) return presetEditor;
+        entityId = _;
         fieldsArr = null;
         return presetEditor;
     };
