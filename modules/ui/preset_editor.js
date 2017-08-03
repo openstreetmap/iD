@@ -61,19 +61,22 @@ export function uiPresetEditor(context) {
             presets.universal().forEach(function(field) {
                 if (preset.fields.indexOf(field) === -1) {
                     fieldsArr.push(
-                        uiField(context, field, entity)
+                        uiField(context, field, entity, false)
                     );
                 }
             });
 
             fieldsArr.forEach(function(field) {
                 field
-                    .tags(tags)
                     .on('change', function(t, onInput) {
                         dispatch.call('change', field, t, onInput);
                     });
             });
         }
+
+        fieldsArr.forEach(function(field) {
+            field.tags(tags);
+        });
 
         var shown = fieldsArr.filter(function(field) { return field.isShown(); }),
             notShown = fieldsArr.filter(function(field) { return !field.isShown(); });
@@ -115,8 +118,6 @@ export function uiPresetEditor(context) {
                             context.enter(modeBrowse(context));
                         }
                     });
-
-                // d.tags(tags);
             });
 
 
