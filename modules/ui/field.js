@@ -4,10 +4,12 @@ import { textDirection } from '../util/locale';
 import { svgIcon } from '../svg';
 import { uiFields } from './fields';
 import { uiTagReference } from './tag_reference';
+import { utilRebind } from '../util';
 
 
-export function uiField(context, dispatch, presetField, entity, show) {
-    var field = _.clone(presetField),
+export function uiField(context, presetField, entity, show) {
+    var dispatch = d3.dispatch('change'),
+        field = _.clone(presetField),
         tags;
 
 
@@ -157,6 +159,6 @@ export function uiField(context, dispatch, presetField, entity, show) {
     };
 
 
-    return field;
+    return utilRebind(field, dispatch, 'on');
 }
 

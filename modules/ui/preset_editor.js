@@ -47,23 +47,31 @@ export function uiPresetEditor(context) {
             preset.fields.forEach(function(field) {
                 if (field.matchGeometry(geometry)) {
                     fieldsArr.push(
-                        uiField(context, dispatch, field, entity, true).tags(tags)
+                        uiField(context, field, entity, true)
                     );
                 }
             });
 
             if (entity.isHighwayIntersection(context.graph()) && presets.field('restrictions')) {
                 fieldsArr.push(
-                    uiField(context, dispatch, presets.field('restrictions'), entity, true).tags(tags)
+                    uiField(context, presets.field('restrictions'), entity, true)
                 );
             }
 
             presets.universal().forEach(function(field) {
                 if (preset.fields.indexOf(field) === -1) {
                     fieldsArr.push(
-                        uiField(context, dispatch, field, entity).tags(tags)
+                        uiField(context, field, entity)
                     );
                 }
+            });
+
+            fieldsArr.forEach(function(field) {
+                field
+                    .tags(tags)
+                    .on('change', function(t, onInput) {
+                        dispatch.call('change', field, t, onInput);
+                    });
             });
         }
 
