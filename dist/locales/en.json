@@ -2350,7 +2350,7 @@
                 },
                 "aerialway/t-bar": {
                     "name": "T-bar Lift",
-                    "terms": ""
+                    "terms": "tbar"
                 },
                 "aeroway/aerodrome": {
                     "name": "Airport",

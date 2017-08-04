@@ -1467,6 +1467,7 @@ en:
       aerialway/t-bar:
         # aerialway=t-bar
         name: T-bar Lift
+        # 'terms: tbar'
         terms: '<translate with synonyms or related terms for ''T-bar Lift'', separated by commas>'
       aeroway:
         # aeroway=*
