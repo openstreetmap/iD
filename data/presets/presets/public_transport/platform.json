@@ -1,6 +1,7 @@
 {
     "icon": "bus",
     "fields": [
+        "name",
         "ref_platform",
         "network",
         "operator",

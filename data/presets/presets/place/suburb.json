@@ -1,6 +1,7 @@
 {
     "icon": "triangle-stroked",
     "fields": [
+        "name",
         "population"
     ],
     "geometry": [

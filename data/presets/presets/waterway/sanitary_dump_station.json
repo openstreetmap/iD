@@ -1,6 +1,7 @@
 {
     "icon": "poi-storage-tank",
     "fields": [
+        "name",
         "operator",
         "access_toilets",
         "fee",

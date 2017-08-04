@@ -1,6 +1,7 @@
 {
     "icon": "highway-tertiary-link",
     "fields": [
+        "name",
         "oneway",
         "maxspeed",
         "lanes",

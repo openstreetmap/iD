@@ -1,6 +1,7 @@
 {
     "icon": "embassy",
     "fields": [
+        "name",
         "country",
         "address",
         "building_area"

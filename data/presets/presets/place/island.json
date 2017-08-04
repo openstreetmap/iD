@@ -4,6 +4,9 @@
         "point",
         "area"
     ],
+    "fields": [
+        "name"
+    ],
     "terms": [
         "archipelago",
         "atoll",

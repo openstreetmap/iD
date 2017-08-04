@@ -1,6 +1,7 @@
 {
     "icon": "highway-unclassified",
     "fields": [
+        "name",
         "oneway",
         "surface",
         "sport_racing_motor",

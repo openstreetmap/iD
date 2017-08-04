@@ -1,5 +1,6 @@
 {
     "fields": [
+        "name",
         "crossing",
         "kerb",
         "tactile_paving"

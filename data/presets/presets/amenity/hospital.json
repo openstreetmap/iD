@@ -1,6 +1,7 @@
 {
     "icon": "hospital",
     "fields": [
+        "name",
         "operator",
         "address",
         "emergency"

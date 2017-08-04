@@ -8,6 +8,7 @@
     "name": "Boundary",
     "icon": "boundary",
     "fields": [
+        "name",
         "boundary"
     ]
 }

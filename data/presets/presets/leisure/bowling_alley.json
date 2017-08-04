@@ -1,6 +1,7 @@
 {
     "icon": "poi-bowling",
     "fields": [
+        "name",
         "operator",
         "address",
         "building_area",

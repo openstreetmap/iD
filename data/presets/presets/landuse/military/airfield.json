@@ -1,6 +1,7 @@
 {
     "icon": "airfield",
     "fields": [
+        "name",
         "iata",
         "icao"
     ],

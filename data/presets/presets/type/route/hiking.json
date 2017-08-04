@@ -9,6 +9,7 @@
     "name": "Hiking Route",
     "icon": "route-foot",
     "fields": [
+        "name",
         "ref_route",
         "operator",
         "network_foot"

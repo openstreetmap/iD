@@ -1,5 +1,8 @@
 {
     "icon": "poi-junction",
+    "fields": [
+        "name"
+    ],
     "geometry": [
         "vertex",
         "area"

@@ -4,6 +4,9 @@
         "point",
         "area"
     ],
+    "fields": [
+        "name"
+    ],
     "tags": {
         "place": "isolated_dwelling"
     },

@@ -1,6 +1,7 @@
 {
     "icon": "shelter",
     "fields": [
+        "name",
         "address"
     ],
     "geometry": [

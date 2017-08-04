@@ -1,5 +1,8 @@
 {
     "name": "Point",
+    "fields": [
+        "name"
+    ],
     "tags": {},
     "geometry": ["point"],
     "matchScore": 0.1

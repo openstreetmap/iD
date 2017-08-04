@@ -3,6 +3,9 @@
     "geometry": [
         "area"
     ],
+    "fields": [
+        "name"
+    ],
     "tags": {
         "natural": "water",
         "water": "reservoir"
