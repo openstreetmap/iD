@@ -1,11 +1,12 @@
 import * as d3 from 'd3';
 import { t } from '../../util/locale';
-import { d3combobox } from '../../lib/d3.combobox.js';
-import { services } from '../../services/index';
+// import { d3combobox } from '../../lib/d3.combobox.js';
+// import { services } from '../../services';
+import { uiField } from '../field';
 
 import {
     utilGetSetValue,
-    utilNoAuto,
+    // utilNoAuto,
     utilRebind
 } from '../../util';
 
@@ -15,13 +16,14 @@ export { uiFieldRadio as uiFieldStructureRadio };
 
 export function uiFieldRadio(field, context) {
     var dispatch = d3.dispatch('change'),
-        taginfo = services.taginfo,
+        // taginfo = services.taginfo,
         placeholder = d3.select(null),
         wrap = d3.select(null),
         labels = d3.select(null),
         radios = d3.select(null),
-        typeInput = d3.select(null),
-        layerInput = d3.select(null),
+        // typeInput = d3.select(null),
+        // layerInput = d3.select(null),
+        layerField,
         oldType = {},
         entity;
 
@@ -32,31 +34,31 @@ export function uiFieldRadio(field, context) {
         return !node.empty() && node.datum();
     }
 
-    // returns the tag value for a display value
-    function tagValue(dispVal) {
-        dispVal = snake(clean(dispVal || ''));
-        return dispVal.toLowerCase() || 'yes';
-    }
+    // // returns the tag value for a display value
+    // function tagValue(dispVal) {
+    //     dispVal = snake(clean(dispVal || ''));
+    //     return dispVal.toLowerCase() || 'yes';
+    // }
 
-    // returns the display value for a tag value
-    function displayValue(tagVal) {
-        tagVal = tagVal || '';
-        return tagVal.toLowerCase() === 'yes' ? '' : unsnake(tagVal);
-    }
+    // // returns the display value for a tag value
+    // function displayValue(tagVal) {
+    //     tagVal = tagVal || '';
+    //     return tagVal.toLowerCase() === 'yes' ? '' : unsnake(tagVal);
+    // }
 
-    function snake(s) {
-        return s.replace(/\s+/g, '_');
-    }
+    // function snake(s) {
+    //     return s.replace(/\s+/g, '_');
+    // }
 
-    function unsnake(s) {
-        return s.replace(/_+/g, ' ');
-    }
+    // function unsnake(s) {
+    //     return s.replace(/_+/g, ' ');
+    // }
 
-    function clean(s) {
-        return s.split(';')
-            .map(function(s) { return s.trim(); })
-            .join(';');
-    }
+    // function clean(s) {
+    //     return s.split(';')
+    //         .map(function(s) { return s.trim(); })
+    //         .join(';');
+    // }
 
 
     function radio(selection) {
@@ -101,10 +103,11 @@ export function uiFieldRadio(field, context) {
 
         radios = labels.selectAll('input')
             .on('change', changeRadio);
+
     }
 
 
-    function structureExtras(selection) {
+    function structureExtras(selection, tags) {
         var selected = selectedKey();
 
         var extrasWrap = selection.selectAll('.structure-extras-wrap')
@@ -118,152 +121,183 @@ export function uiFieldRadio(field, context) {
             .attr('class', 'structure-extras-wrap')
             .merge(extrasWrap);
 
-        var list = extrasWrap.selectAll('ul')
-            .data([0]);
+        // var list = extrasWrap.selectAll('ul')
+        //     .data([0]);
 
-        list = list.enter()
-            .append('ul')
-            .merge(list);
+        // list = list.enter()
+        //     .append('ul')
+        //     .merge(list);
 
 
-        // Type
-        var typeItem = list.selectAll('.structure-type-item')
-            .data([0]);
+        // // Type
+        // var typeItem = list.selectAll('.structure-type-item')
+        //     .data([0]);
 
-        var typeEnter = typeItem.enter()
-            .append('li')
-            .attr('class', 'cf structure-type-item');
+        // var typeEnter = typeItem.enter()
+        //     .append('li')
+        //     .attr('class', 'cf structure-type-item');
 
-        typeEnter
-            .append('span')
-            .attr('class', 'col6 label structure-label-type')
-            .attr('for', 'structure-input-type')
-            .text(t('inspector.radio.structure.type'));
+        // typeEnter
+        //     .append('span')
+        //     .attr('class', 'col6 label structure-label-type')
+        //     .attr('for', 'structure-input-type')
+        //     .text(t('inspector.radio.structure.type'));
 
-        typeEnter
-            .append('div')
-            .attr('class', 'col6 structure-input-type-wrap')
-            .append('input')
-            .attr('type', 'text')
-            .attr('class', 'structure-input-type')
-            .attr('placeholder', t('inspector.radio.structure.default'))
-            .call(utilNoAuto);
+        // typeEnter
+        //     .append('div')
+        //     .attr('class', 'col6 structure-input-type-wrap')
+        //     .append('input')
+        //     .attr('type', 'text')
+        //     .attr('class', 'structure-input-type')
+        //     .attr('placeholder', t('inspector.radio.structure.default'))
+        //     .call(utilNoAuto);
 
-        typeItem = typeItem
-            .merge(typeEnter);
+        // typeItem = typeItem
+        //     .merge(typeEnter);
 
-        typeInput = typeItem.selectAll('.structure-input-type');
+        // typeInput = typeItem.selectAll('.structure-input-type');
 
-        if (taginfo) {
-            typeInput
-                .call(d3combobox()
-                    .container(context.container())
-                    .fetcher(typeFetcher)
-                );
-        }
+        // if (taginfo) {
+        //     typeInput
+        //         .call(d3combobox()
+        //             .container(context.container())
+        //             .fetcher(typeFetcher)
+        //         );
+        // }
 
-        typeInput
-            .on('change', changeType)
-            .on('blur', changeType);
+        // typeInput
+        //     .on('change', changeType)
+        //     .on('blur', changeType);
 
 
         // Layer
         var showLayer = (selected === 'bridge' || selected === 'tunnel');
+        if (!layerField) {
+            var field = context.presets().field('layer');
+            layerField = uiField(context, field, entity, true)
+                .on('change', changeLayer);
+        }
 
-        var layerItem = list.selectAll('.structure-layer-item')
-            .data(showLayer ? [0] : []);
+        layerField.tags(tags);
 
+
+        var layerItem = extrasWrap.selectAll('.structure-layer-item')
+            .data(layerField && showLayer ? [0] : []);
+
+        // Exit
         layerItem.exit()
             .remove();
 
+        // Enter
         var layerEnter = layerItem.enter()
-            .append('li')
+            .append('div')
             .attr('class', 'cf structure-layer-item');
 
-        layerEnter
-            .append('span')
-            .attr('class', 'col6 label structure-label-layer')
-            .attr('for', 'structure-input-layer')
-            .text(t('inspector.radio.structure.layer'));
-
-        layerEnter
-            .append('div')
-            .attr('class', 'col6 structure-input-layer-wrap')
-            .append('input')
-            .attr('type', 'text')
-            .attr('class', 'structure-input-layer')
-            .attr('placeholder', '0')
-            .call(utilNoAuto);
-
-        var spin = layerEnter
-            .append('div')
-            .attr('class', 'spin-control');
-
-        spin
-            .append('button')
-            .datum(-1)
-            .attr('class', 'decrement')
-            .attr('tabindex', -1);
-
-        spin
-            .append('button')
-            .datum(1)
-            .attr('class', 'increment')
-            .attr('tabindex', -1);
-
+        // Update
         layerItem = layerItem
             .merge(layerEnter);
 
-        layerInput = layerItem.selectAll('.structure-input-layer')
-            .on('change', changeLayer)
-            .on('blur', changeLayer);
+        layerItem
+            .call(layerField.render);
 
-        layerItem.selectAll('button')
-            .on('click', function(d) {
-                d3.event.preventDefault();
-                var num = parseInt(layerInput.node().value || 0, 10);
-                if (!isNaN(num)) layerInput.node().value = num + d;
-                changeLayer();
-            });
+
+        // var layerItem = list.selectAll('.structure-layer-item')
+        //     .data(showLayer ? [0] : []);
+
+        // layerItem.exit()
+        //     .remove();
+
+        // var layerEnter = layerItem.enter()
+        //     .append('li')
+        //     .attr('class', 'cf structure-layer-item');
+
+        // layerEnter
+        //     .append('span')
+        //     .attr('class', 'col6 label structure-label-layer')
+        //     .attr('for', 'structure-input-layer')
+        //     .text(t('inspector.radio.structure.layer'));
+
+        // layerEnter
+        //     .append('div')
+        //     .attr('class', 'col6 structure-input-layer-wrap')
+        //     .append('input')
+        //     .attr('type', 'text')
+        //     .attr('class', 'structure-input-layer')
+        //     .attr('placeholder', '0')
+        //     .call(utilNoAuto);
+
+        // var spin = layerEnter
+        //     .append('div')
+        //     .attr('class', 'spin-control');
+
+        // spin
+        //     .append('button')
+        //     .datum(-1)
+        //     .attr('class', 'decrement')
+        //     .attr('tabindex', -1);
+
+        // spin
+        //     .append('button')
+        //     .datum(1)
+        //     .attr('class', 'increment')
+        //     .attr('tabindex', -1);
+
+        // layerItem = layerItem
+        //     .merge(layerEnter);
+
+        // layerInput = layerItem.selectAll('.structure-input-layer')
+        //     .on('change', changeLayer)
+        //     .on('blur', changeLayer);
+
+        // layerItem.selectAll('button')
+        //     .on('click', function(d) {
+        //         d3.event.preventDefault();
+        //         var num = parseInt(layerInput.node().value || 0, 10);
+        //         if (!isNaN(num)) layerInput.node().value = num + d;
+        //         changeLayer();
+        //     });
 
     }
 
 
-    function typeFetcher(q, callback) {
-        taginfo.values({
-            debounce: true,
-            key: selectedKey(),
-            query: q
-        }, function(err, data) {
-            if (err) return;
-            var comboData = data.map(function(d) {
-                return {
-                    key: d.value,
-                    value: unsnake(d.value),
-                    title: d.title
-                };
-            });
-            if (callback) callback(comboData);
-        });
-    }
+    // function typeFetcher(q, callback) {
+    //     taginfo.values({
+    //         debounce: true,
+    //         key: selectedKey(),
+    //         query: q
+    //     }, function(err, data) {
+    //         if (err) return;
+    //         var comboData = data.map(function(d) {
+    //             return {
+    //                 key: d.value,
+    //                 value: unsnake(d.value),
+    //                 title: d.title
+    //             };
+    //         });
+    //         if (callback) callback(comboData);
+    //     });
+    // }
 
 
-    function changeType() {
-        var key = selectedKey(),
-            t = {};
+    // function changeType() {
+    //     var key = selectedKey(),
+    //         t = {};
 
-        if (!key) return;
-        var val = tagValue(utilGetSetValue(typeInput));
-        t[key] = val;
-        if (val !== 'no') oldType[key] = val;
-        dispatch.call('change', this, t);
-    }
+    //     if (!key) return;
+    //     var val = tagValue(utilGetSetValue(typeInput));
+    //     t[key] = val;
+    //     if (val !== 'no') oldType[key] = val;
+    //     dispatch.call('change', this, t);
+    // }
 
 
-    function changeLayer() {
+    function changeLayer(t, onInput) {
         // note: don't use utilGetSetValue here because we want 0 to be falsy.
-        var t = { layer: layerInput.node().value || undefined };
-        dispatch.call('change', this, t);
+        // var t = { layer: layerInput.node().value || undefined };
+        if (t.layer === '0') {
+            t.layer = undefined;
+        }
+        dispatch.call('change', this, t, onInput);
     }
 
 
@@ -324,9 +358,7 @@ export function uiFieldRadio(field, context) {
         }
 
         if (field.type === 'structureRadio') {
-            wrap.call(structureExtras);
-            utilGetSetValue(typeInput, displayValue(typeVal) || '');
-            utilGetSetValue(layerInput, tags.layer || '');
+            wrap.call(structureExtras, tags);
         }
     };
 

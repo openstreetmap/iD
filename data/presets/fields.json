@@ -883,8 +883,9 @@
         },
         "layer": {
             "key": "layer",
-            "type": "combo",
-            "label": "Layer"
+            "type": "number",
+            "label": "Layer",
+            "placeholder": "0"
         },
         "leaf_cycle_singular": {
             "key": "leaf_cycle",

@@ -634,6 +634,8 @@ en:
       layer:
         # layer=*
         label: Layer
+        # layer field placeholder
+        placeholder: '0'
       leaf_cycle:
         # leaf_cycle=*
         label: Leaf Cycle

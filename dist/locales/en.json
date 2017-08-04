@@ -1624,7 +1624,8 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "layer": {
-                    "label": "Layer"
+                    "label": "Layer",
+                    "placeholder": "0"
                 },
                 "leaf_cycle_singular": {
                     "label": "Leaf Cycle",
