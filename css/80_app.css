@@ -968,7 +968,7 @@ button.save.has-count .count::before {
     position: absolute;
     top: 0;
     right: 0;
-    width: 10%;
+    width: 32px;
     background: #fafafa;
 }
 
@@ -1097,7 +1097,7 @@ button.save.has-count .count::before {
 
 .form-label button {
     border-left: 1px solid #ccc;
-    width: 10%;
+    width: 32px;
     height: 100%;
     border-radius: 0;
     background: #f6f6f6;
@@ -1404,10 +1404,10 @@ input[type=number] {
 }
 
 .spin-control {
-    width: 20%;
-    height: 29px;
+    width: 64px;
+    height: 30px;
     display: inline-block;
-    margin-left: -20%;
+    margin-left: -64px;
     margin-bottom: -11px;
     position: relative;
 }
@@ -1417,7 +1417,7 @@ input[type=number] {
     position: relative;
     float: left;
     height: 100%;
-    width: 50%;
+    width: 32px;
     border-left: 1px solid #CCC;
     border-radius: 0;
     background: rgba(0, 0, 0, 0);
@@ -1531,11 +1531,11 @@ input[type=number] {
 }
 
 .form-field .wiki-title ~ .combobox-caret {
-    right: 10%;
+    right: 32px;
 }
 [dir='rtl'] .form-field .wiki-title ~ .combobox-caret {
     right: auto;
-    left: 10%;
+    left: 32px;
 }
 
 /* Localized field */
@@ -1550,8 +1550,8 @@ input[type=number] {
 .form-field .button-input-action {
     position: relative;
     right: 1px;
-    width: 10%;
-    margin-left: -10%;
+    width: 32px;
+    margin-left: -32px;
     border: 1px solid #CCC;
     border-top-width: 0;
     border-right-width: 0;
@@ -1561,7 +1561,7 @@ input[type=number] {
 }
 [dir='rtl'] .form-field .button-input-action {
     margin-left: 0;
-    margin-right: -10%;
+    margin-right: -32px;
     border-right-width: 1px;
     border-radius: 0 0 0 4px;
 }
