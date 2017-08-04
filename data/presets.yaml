@@ -1051,6 +1051,11 @@ en:
       ref_stop_position:
         # ref=*
         label: Stop Number
+      ref_taxiway:
+        # ref=*
+        label: Taxiway Name
+        # ref_taxiway field placeholder
+        placeholder: e.g A5
       relation:
         # type=*
         label: Type

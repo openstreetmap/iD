@@ -1404,6 +1404,12 @@
             "type": "text",
             "label": "Stop Number"
         },
+        "ref_taxiway": {
+            "key": "ref",
+            "type": "text",
+            "label": "Taxiway Name",
+            "placeholder": "e.g A5"
+        },
         "ref": {
             "key": "ref",
             "type": "text",

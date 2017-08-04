@@ -1956,6 +1956,10 @@
                 "ref_stop_position": {
                     "label": "Stop Number"
                 },
+                "ref_taxiway": {
+                    "label": "Taxiway Name",
+                    "placeholder": "e.g A5"
+                },
                 "ref": {
                     "label": "Reference Code"
                 },
