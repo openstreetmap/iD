@@ -51,7 +51,7 @@
     "jsonschema": "^1.1.0",
     "json-stable-stringify": "^1.0.1",
     "@mapbox/maki": "^4.0.0",
-    "mapillary-js": "2.6.0",
+    "mapillary-js": "2.7.0",
     "minimist": "^1.2.0",
     "mocha": "^3.4.0",
     "mocha-phantomjs-core": "^2.1.0",
