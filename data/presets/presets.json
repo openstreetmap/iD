@@ -467,7 +467,7 @@
                 "landing strip"
             ],
             "fields": [
-                "ref",
+                "ref_runway",
                 "surface",
                 "length",
                 "width"

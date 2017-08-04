@@ -1949,6 +1949,10 @@
                 "ref_route": {
                     "label": "Route Number"
                 },
+                "ref_runway": {
+                    "label": "Runway Number",
+                    "placeholder": "e.g 01L/23R"
+                },
                 "ref_stop_position": {
                     "label": "Stop Number"
                 },

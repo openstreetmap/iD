@@ -1393,6 +1393,12 @@
             "type": "text",
             "label": "Route Number"
         },
+        "ref_runway": {
+            "key": "ref",
+            "type": "text",
+            "label": "Runway Number",
+            "placeholder": "e.g 01L/23R"
+        },
         "ref_stop_position": {
             "key": "ref",
             "type": "text",
