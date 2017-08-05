@@ -2,5 +2,5 @@
     "key": "ref",
     "type": "text",
     "label": "Taxiway Name",
-    "placeholder": "e.g A5"
+    "placeholder": "e.g. A5"
 }

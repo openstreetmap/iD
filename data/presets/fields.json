@@ -1397,7 +1397,7 @@
             "key": "ref",
             "type": "text",
             "label": "Runway Number",
-            "placeholder": "e.g 01L/23R"
+            "placeholder": "e.g. 01L/19R"
         },
         "ref_stop_position": {
             "key": "ref",
@@ -1408,7 +1408,7 @@
             "key": "ref",
             "type": "text",
             "label": "Taxiway Name",
-            "placeholder": "e.g A5"
+            "placeholder": "e.g. A5"
         },
         "ref": {
             "key": "ref",
