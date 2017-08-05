@@ -121,12 +121,12 @@ export function uiFieldRadio(field, context) {
             .attr('class', 'structure-extras-wrap')
             .merge(extrasWrap);
 
-        // var list = extrasWrap.selectAll('ul')
-        //     .data([0]);
+        var list = extrasWrap.selectAll('ul')
+            .data([0]);
 
-        // list = list.enter()
-        //     .append('ul')
-        //     .merge(list);
+        list = list.enter()
+            .append('ul')
+            .merge(list);
 
 
         // // Type
@@ -174,14 +174,14 @@ export function uiFieldRadio(field, context) {
         var showLayer = (selected === 'bridge' || selected === 'tunnel');
         if (!layerField) {
             var field = context.presets().field('layer');
-            layerField = uiField(context, field, entity, true)
+            layerField = uiField(context, field, entity, { wrap: false })
                 .on('change', changeLayer);
         }
 
         layerField.tags(tags);
 
 
-        var layerItem = extrasWrap.selectAll('.structure-layer-item')
+        var layerItem = list.selectAll('.structure-layer-item')
             .data(layerField && showLayer ? [0] : []);
 
         // Exit
@@ -190,72 +190,25 @@ export function uiFieldRadio(field, context) {
 
         // Enter
         var layerEnter = layerItem.enter()
-            .append('div')
+            .append('li')
             .attr('class', 'cf structure-layer-item');
+
+        layerEnter
+            .append('span')
+            .attr('class', 'col6 label structure-label-layer')
+            .attr('for', 'preset-input-layer')
+            .text(t('inspector.radio.structure.layer'));
+
+        layerEnter
+            .append('div')
+            .attr('class', 'col6 structure-input-layer-wrap');
 
         // Update
         layerItem = layerItem
             .merge(layerEnter);
 
-        layerItem
+        layerItem.selectAll('.structure-input-layer-wrap')
             .call(layerField.render);
-
-
-        // var layerItem = list.selectAll('.structure-layer-item')
-        //     .data(showLayer ? [0] : []);
-
-        // layerItem.exit()
-        //     .remove();
-
-        // var layerEnter = layerItem.enter()
-        //     .append('li')
-        //     .attr('class', 'cf structure-layer-item');
-
-        // layerEnter
-        //     .append('span')
-        //     .attr('class', 'col6 label structure-label-layer')
-        //     .attr('for', 'structure-input-layer')
-        //     .text(t('inspector.radio.structure.layer'));
-
-        // layerEnter
-        //     .append('div')
-        //     .attr('class', 'col6 structure-input-layer-wrap')
-        //     .append('input')
-        //     .attr('type', 'text')
-        //     .attr('class', 'structure-input-layer')
-        //     .attr('placeholder', '0')
-        //     .call(utilNoAuto);
-
-        // var spin = layerEnter
-        //     .append('div')
-        //     .attr('class', 'spin-control');
-
-        // spin
-        //     .append('button')
-        //     .datum(-1)
-        //     .attr('class', 'decrement')
-        //     .attr('tabindex', -1);
-
-        // spin
-        //     .append('button')
-        //     .datum(1)
-        //     .attr('class', 'increment')
-        //     .attr('tabindex', -1);
-
-        // layerItem = layerItem
-        //     .merge(layerEnter);
-
-        // layerInput = layerItem.selectAll('.structure-input-layer')
-        //     .on('change', changeLayer)
-        //     .on('blur', changeLayer);
-
-        // layerItem.selectAll('button')
-        //     .on('click', function(d) {
-        //         d3.event.preventDefault();
-        //         var num = parseInt(layerInput.node().value || 0, 10);
-        //         if (!isNaN(num)) layerInput.node().value = num + d;
-        //         changeLayer();
-        //     });
 
     }
 
@@ -292,8 +245,6 @@ export function uiFieldRadio(field, context) {
 
 
     function changeLayer(t, onInput) {
-        // note: don't use utilGetSetValue here because we want 0 to be falsy.
-        // var t = { layer: layerInput.node().value || undefined };
         if (t.layer === '0') {
             t.layer = undefined;
         }

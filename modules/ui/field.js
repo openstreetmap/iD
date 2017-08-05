@@ -7,7 +7,12 @@ import { uiTagReference } from './tag_reference';
 import { utilRebind } from '../util';
 
 
-export function uiField(context, presetField, entity, show) {
+export function uiField(context, presetField, entity, options) {
+    options = _.extend({
+        show: true,
+        wrap: true
+    }, options);
+
     var dispatch = d3.dispatch('change'),
         field = _.clone(presetField),
         state = '',
@@ -25,7 +30,7 @@ export function uiField(context, presetField, entity, show) {
 
     field.keys = field.keys || [field.key];
 
-    field.show = show;
+    field.show = options.show;
 
 
     function isModified() {
@@ -77,31 +82,34 @@ export function uiField(context, presetField, entity, show) {
         // Enter
         var enter = container.enter()
             .append('div')
-            .attr('class', function(d) { return 'form-field form-field-' + d.id; });
+            .attr('class', function(d) { return 'form-field form-field-' + d.id; })
+            .classed('nowrap', !options.wrap);
 
-        var label = enter
-            .append('label')
-            .attr('class', 'form-label')
-            .attr('for', function(d) { return 'preset-input-' + d.id; })
-            .text(function(d) { return d.label(); });
+        if (options.wrap) {
+            var label = enter
+                .append('label')
+                .attr('class', 'form-label')
+                .attr('for', function(d) { return 'preset-input-' + d.id; })
+                .text(function(d) { return d.label(); });
 
-        var wrap = label
-            .append('div')
-            .attr('class', 'form-label-button-wrap');
+            var wrap = label
+                .append('div')
+                .attr('class', 'form-label-button-wrap');
 
-        wrap
-            .append('button')
-            .attr('class', 'remove-icon')
-            .attr('tabindex', -1)
-            .call(svgIcon('#operation-delete'));
+            wrap
+                .append('button')
+                .attr('class', 'remove-icon')
+                .attr('tabindex', -1)
+                .call(svgIcon('#operation-delete'));
 
-        wrap
-            .append('button')
-            .attr('class', 'modified-icon')
-            .attr('tabindex', -1)
-            .call(
-                (textDirection === 'rtl') ? svgIcon('#icon-redo') : svgIcon('#icon-undo')
-            );
+            wrap
+                .append('button')
+                .attr('class', 'modified-icon')
+                .attr('tabindex', -1)
+                .call(
+                    (textDirection === 'rtl') ? svgIcon('#icon-redo') : svgIcon('#icon-undo')
+                );
+        }
 
 
         // Update
@@ -118,23 +126,27 @@ export function uiField(context, presetField, entity, show) {
             .classed('modified', isModified())
             .classed('present', isPresent())
             .each(function(d) {
-                var referenceKey = d.key;
-                if (d.type === 'multiCombo') {   // lookup key without the trailing ':'
-                    referenceKey = referenceKey.replace(/:$/, '');
-                }
-                var reference = uiTagReference(d.reference || { key: referenceKey }, context);
+                if (options.wrap) {
+                    var referenceKey = d.key;
+                    if (d.type === 'multiCombo') {   // lookup key without the trailing ':'
+                        referenceKey = referenceKey.replace(/:$/, '');
+                    }
+                    var reference = uiTagReference(d.reference || { key: referenceKey }, context);
 
-                if (state === 'hover') {
-                    reference.showing(false);
+                    if (state === 'hover') {
+                        reference.showing(false);
+                    }
                 }
 
                 d3.select(this)
                     .call(d.impl);
 
-                d3.select(this)
-                    .call(reference.body)
-                    .select('.form-label-button-wrap')
-                    .call(reference.button);
+                if (options.wrap) {
+                    d3.select(this)
+                        .call(reference.body)
+                        .select('.form-label-button-wrap')
+                        .call(reference.button);
+                }
 
                 d.impl.tags(tags);
             });

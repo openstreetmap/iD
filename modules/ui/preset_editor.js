@@ -47,21 +47,21 @@ export function uiPresetEditor(context) {
             preset.fields.forEach(function(field) {
                 if (field.matchGeometry(geometry)) {
                     fieldsArr.push(
-                        uiField(context, field, entity, true)
+                        uiField(context, field, entity)
                     );
                 }
             });
 
             if (entity.isHighwayIntersection(context.graph()) && presets.field('restrictions')) {
                 fieldsArr.push(
-                    uiField(context, presets.field('restrictions'), entity, true)
+                    uiField(context, presets.field('restrictions'), entity)
                 );
             }
 
             presets.universal().forEach(function(field) {
                 if (preset.fields.indexOf(field) === -1) {
                     fieldsArr.push(
-                        uiField(context, field, entity, false)
+                        uiField(context, field, entity, { show: false })
                     );
                 }
             });
