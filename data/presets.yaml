@@ -1043,9 +1043,19 @@ en:
       ref_route:
         # ref=*
         label: Route Number
+      ref_runway:
+        # ref=*
+        label: Runway Number
+        # ref_runway field placeholder
+        placeholder: e.g 01L/23R
       ref_stop_position:
         # ref=*
         label: Stop Number
+      ref_taxiway:
+        # ref=*
+        label: Taxiway Name
+        # ref_taxiway field placeholder
+        placeholder: e.g A5
       relation:
         # type=*
         label: Type
@@ -1457,6 +1467,7 @@ en:
       aerialway/t-bar:
         # aerialway=t-bar
         name: T-bar Lift
+        # 'terms: tbar'
         terms: '<translate with synonyms or related terms for ''T-bar Lift'', separated by commas>'
       aeroway:
         # aeroway=*

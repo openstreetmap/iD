@@ -345,12 +345,14 @@
             "icon": "aerialway",
             "geometry": [
                 "point",
-                "vertex"
+                "vertex",
+                "area"
             ],
             "fields": [
                 "aerialway/access",
                 "aerialway/summer/access",
-                "elevation"
+                "elevation",
+                "building_area"
             ],
             "tags": {
                 "aerialway": "station"
@@ -365,6 +367,9 @@
                 "name",
                 "aerialway/capacity",
                 "aerialway/duration"
+            ],
+            "terms": [
+                "tbar"
             ],
             "tags": {
                 "aerialway": "t-bar"
@@ -467,7 +472,7 @@
                 "landing strip"
             ],
             "fields": [
-                "ref",
+                "ref_runway",
                 "surface",
                 "length",
                 "width"
@@ -482,7 +487,7 @@
                 "line"
             ],
             "fields": [
-                "ref",
+                "ref_taxiway",
                 "surface"
             ],
             "tags": {
