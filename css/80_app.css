@@ -1107,6 +1107,7 @@ button.save.has-count .count::before {
     border-left: none;
     border-right: 1px solid #CCC;
     border-radius: 4px 0 0 0;
+    width: 31px;
 }
 .form-label button:hover {
     background: #f1f1f1;
@@ -1298,6 +1299,7 @@ button.save.has-count .count::before {
 
 /* preset form access */
 /* preset form cycleway */
+/* preset form structure extras */
 
 .form-field-structure .structure-extras-wrap li,
 .form-field-cycleway .preset-input-wrap li,
@@ -1348,6 +1350,22 @@ button.save.has-count .count::before {
 }
 .structure-extras-wrap li:last-child input {
     border-bottom-right-radius: 4px;
+}
+[dir='rtl'] .structure-extras-wrap li:first-child span {
+    border-top-left-radius: 0;
+    border-top-right-radius: 4px;
+}
+[dir='rtl'] .structure-extras-wrap li:first-child input {
+    border-top-right-radius: 0;
+    border-top-left-radius: 4px;
+}
+[dir='rtl'] .structure-extras-wrap li:last-child span {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 4px;
+}
+[dir='rtl'] .structure-extras-wrap li:last-child input {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 4px;
 }
 
 
@@ -1424,6 +1442,10 @@ input[type=number] {
     margin-bottom: -11px;
     position: relative;
 }
+[dir='rtl'] .spin-control{
+    margin-left: 0;
+    margin-right: -64px;
+}
 
 .spin-control button {
     right: 1px;
@@ -1435,9 +1457,20 @@ input[type=number] {
     border-radius: 0;
     background: rgba(0, 0, 0, 0);
 }
+[dir='rtl'] .spin-control button{
+    border-left: 0;
+    border-right: 1px solid #CCC;
+}
 
 .spin-control button.decrement {
     border-bottom-right-radius: 3px;
+}
+[dir='rtl'] .spin-control button.decrement{
+    border-bottom-right-radius: 0;
+    right: 0;
+}
+[dir='rtl'] .spin-control button.increment{
+    border-bottom-left-radius: 3px;
 }
 
 .spin-control button.decrement::after,
@@ -1460,6 +1493,7 @@ input[type=number] {
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
 }
+
 
 /* preset form checkbox */
 
@@ -4179,23 +4213,6 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
   border-radius: 4px 0 0 4px;
 }
 
-
-/* increment / decrement control - code by Naoufel Razouane */
-
-[dir='rtl'] .spin-control{
-  margin-left: 0;
-  margin-right: -20%;
-}
-[dir='rtl'] .spin-control button{
-  border-left: 0;
-  border-right: 1px solid #CCC;
-}
-[dir='rtl'] .spin-control button.decrement{
-  border-bottom-right-radius: 0;
-}
-[dir='rtl'] .spin-control button.increment{
-  border-bottom-left-radius: 3px;
-}
 /* modal */
 [dir='rtl'] .modal > button {
     position: absolute;
