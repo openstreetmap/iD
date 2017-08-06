@@ -246,6 +246,11 @@ en:
       brand:
         # brand=*
         label: Brand
+      bridge:
+        # bridge=*
+        label: Type
+        # bridge field placeholder
+        placeholder: Default
       building:
         # building=*
         label: Building
@@ -369,6 +374,11 @@ en:
       currency_multi:
         # 'currency:=*'
         label: Currency Types
+      cutting:
+        # cutting=*
+        label: Type
+        # cutting field placeholder
+        placeholder: Default
       cycle_network:
         # cycle_network=*
         label: Network
@@ -458,6 +468,11 @@ en:
         label: Email
         # email field placeholder
         placeholder: example@example.com
+      embankment:
+        # embankment=*
+        label: Type
+        # embankment field placeholder
+        placeholder: Default
       emergency:
         # emergency=*
         label: Emergency
@@ -505,6 +520,11 @@ en:
       fixme:
         # fixme=*
         label: Fix Me
+      ford:
+        # ford=*
+        label: Type
+        # ford field placeholder
+        placeholder: Default
       fuel:
         # fuel=*
         label: Fuel
@@ -1353,6 +1373,11 @@ en:
         # trees=*
         label: Trees
       tunnel:
+        # tunnel=*
+        label: Type
+        # tunnel field placeholder
+        placeholder: Default
+      tunnel_waterway:
         # tunnel=*
         label: Tunnel
       vending:

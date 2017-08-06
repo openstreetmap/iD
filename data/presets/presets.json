@@ -14144,7 +14144,7 @@
         "waterway/ditch": {
             "icon": "waterway-ditch",
             "fields": [
-                "tunnel"
+                "tunnel_waterway"
             ],
             "geometry": [
                 "line"
@@ -14179,7 +14179,7 @@
         "waterway/drain": {
             "icon": "waterway-stream",
             "fields": [
-                "tunnel"
+                "tunnel_waterway"
             ],
             "geometry": [
                 "line"
@@ -14215,7 +14215,7 @@
         "waterway/river": {
             "icon": "waterway-river",
             "fields": [
-                "tunnel",
+                "tunnel_waterway",
                 "width"
             ],
             "geometry": [
@@ -14284,7 +14284,7 @@
         "waterway/stream": {
             "icon": "waterway-stream",
             "fields": [
-                "tunnel",
+                "tunnel_waterway",
                 "width"
             ],
             "geometry": [

@@ -329,6 +329,12 @@
             "type": "text",
             "label": "Brand"
         },
+        "bridge": {
+            "key": "bridge",
+            "type": "typeCombo",
+            "label": "Type",
+            "placeholder": "Default"
+        },
         "building_area": {
             "key": "building",
             "type": "combo",
@@ -488,6 +494,12 @@
             "type": "multiCombo",
             "label": "Currency Types"
         },
+        "cutting": {
+            "key": "cutting",
+            "type": "typeCombo",
+            "label": "Type",
+            "placeholder": "Default"
+        },
         "cycle_network": {
             "key": "cycle_network",
             "type": "networkCombo",
@@ -631,6 +643,12 @@
             "universal": true,
             "label": "Email"
         },
+        "embankment": {
+            "key": "embankment",
+            "type": "typeCombo",
+            "label": "Type",
+            "placeholder": "Default"
+        },
         "emergency": {
             "key": "emergency",
             "type": "check",
@@ -694,6 +712,12 @@
             "type": "textarea",
             "label": "Fix Me",
             "universal": true
+        },
+        "ford": {
+            "key": "ford",
+            "type": "typeCombo",
+            "label": "Type",
+            "placeholder": "Default"
         },
         "fuel_multi": {
             "key": "fuel:",
@@ -1831,10 +1855,16 @@
             "type": "semiCombo",
             "label": "Trees"
         },
-        "tunnel": {
+        "tunnel_waterway": {
             "key": "tunnel",
             "type": "combo",
             "label": "Tunnel"
+        },
+        "tunnel": {
+            "key": "tunnel",
+            "type": "typeCombo",
+            "label": "Type",
+            "placeholder": "Default"
         },
         "vending": {
             "key": "vending",

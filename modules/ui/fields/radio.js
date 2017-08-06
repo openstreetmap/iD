@@ -1,14 +1,7 @@
 import * as d3 from 'd3';
 import { t } from '../../util/locale';
-// import { d3combobox } from '../../lib/d3.combobox.js';
-// import { services } from '../../services';
 import { uiField } from '../field';
-
-import {
-    utilGetSetValue,
-    // utilNoAuto,
-    utilRebind
-} from '../../util';
+import { utilRebind } from '../../util';
 
 
 export { uiFieldRadio as uiFieldStructureRadio };
@@ -16,13 +9,11 @@ export { uiFieldRadio as uiFieldStructureRadio };
 
 export function uiFieldRadio(field, context) {
     var dispatch = d3.dispatch('change'),
-        // taginfo = services.taginfo,
         placeholder = d3.select(null),
         wrap = d3.select(null),
         labels = d3.select(null),
         radios = d3.select(null),
-        // typeInput = d3.select(null),
-        // layerInput = d3.select(null),
+        typeField,
         layerField,
         oldType = {},
         entity;
@@ -33,32 +24,6 @@ export function uiFieldRadio(field, context) {
             node = d3.selectAll(selector);
         return !node.empty() && node.datum();
     }
-
-    // // returns the tag value for a display value
-    // function tagValue(dispVal) {
-    //     dispVal = snake(clean(dispVal || ''));
-    //     return dispVal.toLowerCase() || 'yes';
-    // }
-
-    // // returns the display value for a tag value
-    // function displayValue(tagVal) {
-    //     tagVal = tagVal || '';
-    //     return tagVal.toLowerCase() === 'yes' ? '' : unsnake(tagVal);
-    // }
-
-    // function snake(s) {
-    //     return s.replace(/\s+/g, '_');
-    // }
-
-    // function unsnake(s) {
-    //     return s.replace(/_+/g, ' ');
-    // }
-
-    // function clean(s) {
-    //     return s.split(';')
-    //         .map(function(s) { return s.trim(); })
-    //         .join(';');
-    // }
 
 
     function radio(selection) {
@@ -108,7 +73,11 @@ export function uiFieldRadio(field, context) {
 
 
     function structureExtras(selection, tags) {
-        var selected = selectedKey();
+        var selected = selectedKey(),
+            type = context.presets().field(selected),
+            layer = context.presets().field('layer'),
+            showLayer = (selected === 'bridge' || selected === 'tunnel');
+
 
         var extrasWrap = selection.selectAll('.structure-extras-wrap')
                 .data(selected ? [0] : []);
@@ -129,60 +98,62 @@ export function uiFieldRadio(field, context) {
             .merge(list);
 
 
-        // // Type
-        // var typeItem = list.selectAll('.structure-type-item')
-        //     .data([0]);
+        // Type
+        if (type) {
+            if (!typeField || typeField.id !== selected) {
+                typeField = uiField(context, type, entity, { wrap: false })
+                    .on('change', changeType);
+            }
+            typeField.tags(tags);
+        } else {
+            typeField = null;
+        }
 
-        // var typeEnter = typeItem.enter()
-        //     .append('li')
-        //     .attr('class', 'cf structure-type-item');
+        var typeItem = list.selectAll('.structure-type-item')
+            .data(typeField ? [typeField] : [], function(d) { return d.id; });
 
-        // typeEnter
-        //     .append('span')
-        //     .attr('class', 'col6 label structure-label-type')
-        //     .attr('for', 'structure-input-type')
-        //     .text(t('inspector.radio.structure.type'));
+        // Exit
+        typeItem.exit()
+            .remove();
 
-        // typeEnter
-        //     .append('div')
-        //     .attr('class', 'col6 structure-input-type-wrap')
-        //     .append('input')
-        //     .attr('type', 'text')
-        //     .attr('class', 'structure-input-type')
-        //     .attr('placeholder', t('inspector.radio.structure.default'))
-        //     .call(utilNoAuto);
+        // Enter
+        var typeEnter = typeItem.enter()
+            .insert('li', ':first-child')
+            .attr('class', 'cf structure-type-item');
 
-        // typeItem = typeItem
-        //     .merge(typeEnter);
+        typeEnter
+            .append('span')
+            .attr('class', 'col6 label structure-label-type')
+            .attr('for', 'preset-input-' + selected)
+            .text(t('inspector.radio.structure.type'));
 
-        // typeInput = typeItem.selectAll('.structure-input-type');
+        typeEnter
+            .append('div')
+            .attr('class', 'col6 structure-input-type-wrap');
 
-        // if (taginfo) {
-        //     typeInput
-        //         .call(d3combobox()
-        //             .container(context.container())
-        //             .fetcher(typeFetcher)
-        //         );
-        // }
+        // Update
+        typeItem = typeItem
+            .merge(typeEnter);
 
-        // typeInput
-        //     .on('change', changeType)
-        //     .on('blur', changeType);
+        if (typeField) {
+            typeItem.selectAll('.structure-input-type-wrap')
+                .call(typeField.render);
+        }
 
 
         // Layer
-        var showLayer = (selected === 'bridge' || selected === 'tunnel');
-        if (!layerField) {
-            var field = context.presets().field('layer');
-            layerField = uiField(context, field, entity, { wrap: false })
-                .on('change', changeLayer);
+        if (layer && showLayer) {
+            if (!layerField) {
+                layerField = uiField(context, layer, entity, { wrap: false })
+                    .on('change', changeLayer);
+            }
+            layerField.tags(tags);
+        } else {
+            layerField = null;
         }
 
-        layerField.tags(tags);
-
-
         var layerItem = list.selectAll('.structure-layer-item')
-            .data(layerField && showLayer ? [0] : []);
+            .data(layerField ? [layerField] : []);
 
         // Exit
         layerItem.exit()
@@ -207,41 +178,21 @@ export function uiFieldRadio(field, context) {
         layerItem = layerItem
             .merge(layerEnter);
 
-        layerItem.selectAll('.structure-input-layer-wrap')
-            .call(layerField.render);
-
+        if (layerField) {
+            layerItem.selectAll('.structure-input-layer-wrap')
+                .call(layerField.render);
+        }
     }
 
 
-    // function typeFetcher(q, callback) {
-    //     taginfo.values({
-    //         debounce: true,
-    //         key: selectedKey(),
-    //         query: q
-    //     }, function(err, data) {
-    //         if (err) return;
-    //         var comboData = data.map(function(d) {
-    //             return {
-    //                 key: d.value,
-    //                 value: unsnake(d.value),
-    //                 title: d.title
-    //             };
-    //         });
-    //         if (callback) callback(comboData);
-    //     });
-    // }
+    function changeType(t, onInput) {
+        var key = selectedKey();
+        if (!key) return;
 
-
-    // function changeType() {
-    //     var key = selectedKey(),
-    //         t = {};
-
-    //     if (!key) return;
-    //     var val = tagValue(utilGetSetValue(typeInput));
-    //     t[key] = val;
-    //     if (val !== 'no') oldType[key] = val;
-    //     dispatch.call('change', this, t);
-    // }
+        var val = t[key];
+        if (val !== 'no') oldType[key] = val;
+        dispatch.call('change', this, t, onInput);
+    }
 
 
     function changeLayer(t, onInput) {
@@ -299,13 +250,12 @@ export function uiFieldRadio(field, context) {
         radios.property('checked', checked);
 
         var selection = radios.filter(function() { return this.checked; });
-        var typeVal = '';
 
         if (selection.empty()) {
             placeholder.text(t('inspector.none'));
         } else {
             placeholder.text(selection.attr('value'));
-            typeVal = oldType[selection.datum()] = tags[selection.datum()];
+            oldType[selection.datum()] = tags[selection.datum()];
         }
 
         if (field.type === 'structureRadio') {
