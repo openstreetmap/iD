@@ -1931,7 +1931,7 @@ en:
       amenity/social_facility/group_home:
         # 'amenity=social_facility, social_facility=group_home, social_facility:for=senior'
         name: Elderly Group Home
-        # 'terms: old,senior,living,care home'
+        # 'terms: old,senior,living,care home,assisted living'
         terms: '<translate with synonyms or related terms for ''Elderly Group Home'', separated by commas>'
       amenity/social_facility/homeless_shelter:
         # 'amenity=social_facility, social_facility=shelter, social_facility:for=homeless'
@@ -1941,7 +1941,7 @@ en:
       amenity/social_facility/nursing_home:
         # 'amenity=social_facility, social_facility=nursing_home, social_facility:for=senior'
         name: Nursing Home
-        # 'terms: elderly,living,nursing,old,senior'
+        # 'terms: elderly,living,nursing,old,senior,assisted living'
         terms: '<translate with synonyms or related terms for ''Nursing Home'', separated by commas>'
       amenity/studio:
         # amenity=studio

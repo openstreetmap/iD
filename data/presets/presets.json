@@ -2633,7 +2633,8 @@
                 "old",
                 "senior",
                 "living",
-                "care home"
+                "care home",
+                "assisted living"
             ],
             "tags": {
                 "amenity": "social_facility",
@@ -2702,7 +2703,8 @@
                 "living",
                 "nursing",
                 "old",
-                "senior"
+                "senior",
+                "assisted living"
             ],
             "tags": {
                 "amenity": "social_facility",

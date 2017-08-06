@@ -18,7 +18,8 @@
         "old",
         "senior",
         "living",
-        "care home"
+        "care home",
+        "assisted living"
     ],
     "tags": {
         "amenity": "social_facility",
