@@ -1353,6 +1353,9 @@
             "value": "wayside_shrine"
         },
         {
+            "key": "addr:interpolation"
+        },
+        {
             "key": "junction",
             "value": "yes"
         },

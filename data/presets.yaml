@@ -605,6 +605,16 @@ en:
           down: Down
           # incline=up
           up: Up
+      inclusion:
+        # 'addr:inclusion=*'
+        label: Accuracy Level
+        options:
+          # 'addr:inclusion=actual'
+          actual: actual
+          # 'addr:inclusion=estimated'
+          estimated: estimate
+          # 'addr:inclusion=potential'
+          potential: potential
       indoor:
         # indoor=*
         label: Indoor
@@ -634,6 +644,18 @@ en:
       internet_access/ssid:
         # 'internet_access:ssid=*'
         label: SSID (Network Name)
+      interpolation:
+        # 'addr:interpolation=*'
+        label: Interpolation Type
+        options:
+          # 'addr:interpolation=all'
+          all: all
+          # 'addr:interpolation=alphabetic'
+          alphabetic: alphabetic
+          # 'addr:interpolation=even'
+          even: even
+          # 'addr:interpolation=odd'
+          odd: odd
       kerb:
         # kerb=*
         label: Curb
@@ -2901,6 +2923,10 @@ en:
         # historic=wayside_shrine
         name: Wayside Shrine
         terms: '<translate with synonyms or related terms for ''Wayside Shrine'', separated by commas>'
+      interpolation:
+        # 'addr:interpolation=*'
+        name: Interpolation
+        terms: '<translate with synonyms or related terms for ''Interpolation'', separated by commas>'
       junction:
         # junction=yes
         name: Junction

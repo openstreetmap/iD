@@ -1598,6 +1598,14 @@
                 "incline": {
                     "label": "Incline"
                 },
+                "inclusion": {
+                    "label": "Accuracy Level",
+                    "options": {
+                        "actual": "actual",
+                        "estimated": "estimate",
+                        "potential": "potential"
+                    }
+                },
                 "indoor": {
                     "label": "Indoor"
                 },
@@ -1622,6 +1630,15 @@
                 },
                 "internet_access/ssid": {
                     "label": "SSID (Network Name)"
+                },
+                "interpolation": {
+                    "label": "Interpolation Type",
+                    "options": {
+                        "all": "all",
+                        "even": "even",
+                        "odd": "odd",
+                        "alphabetic": "alphabetic"
+                    }
                 },
                 "kerb": {
                     "label": "Curb"
@@ -3635,6 +3652,10 @@
                 },
                 "historic/wayside_shrine": {
                     "name": "Wayside Shrine",
+                    "terms": ""
+                },
+                "interpolation": {
+                    "name": "Interpolation",
                     "terms": ""
                 },
                 "junction": {

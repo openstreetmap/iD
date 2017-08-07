@@ -840,6 +840,18 @@
             "type": "combo",
             "label": "Incline"
         },
+        "inclusion": {
+            "key": "addr:inclusion",
+            "type": "combo",
+            "label": "Accuracy Level",
+            "strings": {
+                "options": {
+                    "actual": "actual",
+                    "estimated": "estimate",
+                    "potential": "potential"
+                }
+            }
+        },
         "indoor": {
             "key": "indoor",
             "type": "check",
@@ -878,6 +890,19 @@
             "key": "internet_access:ssid",
             "type": "text",
             "label": "SSID (Network Name)"
+        },
+        "interpolation": {
+            "key": "addr:interpolation",
+            "type": "combo",
+            "label": "Interpolation Type",
+            "strings": {
+                "options": {
+                    "all": "all",
+                    "even": "even",
+                    "odd": "odd",
+                    "alphabetic": "alphabetic"
+                }
+            }
         },
         "kerb": {
             "key": "kerb",

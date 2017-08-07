@@ -6884,6 +6884,22 @@
             },
             "name": "Wayside Shrine"
         },
+        "interpolation": {
+            "fields": [
+                "interpolation",
+                "inclusion"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "addr:interpolation": "*"
+            },
+            "addTags": {},
+            "removeTags": {},
+            "matchScore": 0.2,
+            "name": "Interpolation"
+        },
         "junction": {
             "icon": "poi-junction",
             "fields": [

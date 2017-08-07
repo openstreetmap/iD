@@ -1,0 +1,12 @@
+{
+    "key": "addr:inclusion",
+    "type": "combo",
+    "label": "Accuracy Level",
+    "strings": {
+        "options": {
+            "actual": "actual",
+            "estimated": "estimate",
+            "potential": "potential"
+        }
+    }
+}

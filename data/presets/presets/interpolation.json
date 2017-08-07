@@ -1,0 +1,16 @@
+{
+    "fields": [
+        "interpolation",
+        "inclusion"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "addr:interpolation": "*"
+    },
+    "addTags": {},
+    "removeTags": {},
+    "matchScore": 0.2,
+    "name": "Interpolation"
+}
