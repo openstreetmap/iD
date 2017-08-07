@@ -1282,6 +1282,10 @@
                 "brand": {
                     "label": "Brand"
                 },
+                "bridge": {
+                    "label": "Type",
+                    "placeholder": "Default"
+                },
                 "building_area": {
                     "label": "Building"
                 },
@@ -1384,6 +1388,10 @@
                 "currency_multi": {
                     "label": "Currency Types"
                 },
+                "cutting": {
+                    "label": "Type",
+                    "placeholder": "Default"
+                },
                 "cycle_network": {
                     "label": "Network"
                 },
@@ -1469,6 +1477,10 @@
                     "label": "Email",
                     "placeholder": "example@example.com"
                 },
+                "embankment": {
+                    "label": "Type",
+                    "placeholder": "Default"
+                },
                 "emergency": {
                     "label": "Emergency"
                 },
@@ -1508,6 +1520,10 @@
                 },
                 "fixme": {
                     "label": "Fix Me"
+                },
+                "ford": {
+                    "label": "Type",
+                    "placeholder": "Default"
                 },
                 "fuel_multi": {
                     "label": "Fuel Types"
@@ -1624,7 +1640,8 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "layer": {
-                    "label": "Layer"
+                    "label": "Layer",
+                    "placeholder": "0"
                 },
                 "leaf_cycle_singular": {
                     "label": "Leaf Cycle",
@@ -2216,8 +2233,12 @@
                 "trees": {
                     "label": "Trees"
                 },
-                "tunnel": {
+                "tunnel_waterway": {
                     "label": "Tunnel"
+                },
+                "tunnel": {
+                    "label": "Type",
+                    "placeholder": "Default"
                 },
                 "vending": {
                     "label": "Type of Goods"
