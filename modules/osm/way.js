@@ -154,7 +154,7 @@ _.extend(osmWay.prototype, {
     isArea: function() {
         // `highway` and `railway` are typically linear features, but there
         // are a few exceptions that should be treated as areas, even in the
-        // absense of a proper `area=yes` or `areaKeys` tag.. see #4194
+        // absence of a proper `area=yes` or `areaKeys` tag.. see #4194
         var lineKeys = {
             highway: {
                 rest_area: true,
