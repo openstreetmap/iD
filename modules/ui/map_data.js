@@ -523,22 +523,24 @@ export function uiMapData(context) {
                         }
 
                         if (metadata_url.length < 2 || metadata_url[0].indexOf('http') === -1) {
-                            // if something was there previously, is this our opportunity to reset?
                             hidePreviewGeoService();
                             return;
                         }
 
-                        // if url doesn't contain MapServer or FeatureServer, warn and abort
-                        if (!(new RegExp(/(map|feature)server/, 'i').test(this.value))) {
-                            unrecognizedSource = urlEntry.append('div');
-                            unrecognizedSource.append('div')
-                                .attr('class', 'copyright-text');
-                            unrecognizedLabel = unrecognizedSource.append('label')
-                                .attr('class', 'hide');
-                            unrecognizedLabel.append('span')
-                                .text('The url provided not recognized as a valid GeoService');
-                            unrecognizedLabel.classed('hide', false);
-                            return;
+                        // if user is selecting from dropdown, continue
+                        if (this.value) {
+                            // if url isn't a GeoService, warn and abort
+                            if (!new RegExp(/(map|feature)server/, 'i').test(this.value.toLowerCase())) {
+                                unrecognizedSource = urlEntry.append('div');
+                                unrecognizedSource.append('div')
+                                    .attr('class', 'copyright-text');
+                                unrecognizedLabel = unrecognizedSource.append('label')
+                                    .attr('class', 'hide');
+                                unrecognizedLabel.append('span')
+                                    .text('The url provided not recognized as a valid GeoService');
+                                unrecognizedLabel.classed('hide', false);
+                                return;
+                            } 
                         }
 
                         // if it just ends /0, we need to keep /0 around
@@ -564,9 +566,9 @@ export function uiMapData(context) {
                     .attr('class', 'copyright-approved')
                     .property('checked', false)
                 copylabel.append('span')
-                    .text('This data is permitted to include on OpenStreetMap under the ODbL license');
+                    .html('The source <a href="http://wiki.openstreetmap.org/wiki/Import/ODbL_Compatibility" target="_blank">license</a> grants permission for inclusion in OpenStreetMap');
 
-                layerSelect = urlEntry.append('div')
+                layerSelect = layerPreview.append('div')
                     .append('select')
                     .attr('class', 'layer-select hide');
 
@@ -584,7 +586,7 @@ export function uiMapData(context) {
                     .attr('class', 'preset');
                 preset.append('label')
                     .attr('class', 'preset-prompt')
-                    .text('Optional: match features to a OSM preset');
+                    .text('Optional: match features to an OSM preset');
                 preset.append('div')
                     .attr('class', 'preset-icon-holder');
                 preset.append('span')
@@ -778,7 +780,7 @@ export function uiMapData(context) {
                     }
 
                     if (!copyapproval.property('checked')) {
-                        alert('This is your first time using this data source or license. Please confirm that this data can be added to OpenStreetMap');
+                        alert('This is your first time importing from this GeoService. Please confirm that it\'s license grants permission to be included in OpenStreetMap');
                         return;
                     }
                     if (window.license || window.metadata) {
@@ -794,7 +796,7 @@ export function uiMapData(context) {
                         }
                     }
                     if (!importedAtLeastOneField) {
-                        alert('You should use a preset or import at least one field from the GeoService');
+                        alert('Please use a preset or import at least one field from the GeoService');
                         return;
                     }
 
