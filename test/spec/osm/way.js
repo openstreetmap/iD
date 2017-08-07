@@ -345,6 +345,16 @@ describe('iD.osmWay', function() {
             expect(iD.Way({nodes: ['n1', 'n1'], tags: {building: 'yes'}}).isArea()).to.equal(true);
         });
 
+        it('returns true for some highway and railway exceptions', function() {
+            expect(iD.Way({nodes: ['n1', 'n1'], tags: { highway: 'services' }}).isArea(), 'highway=services').to.equal(true);
+            expect(iD.Way({nodes: ['n1', 'n1'], tags: { highway: 'rest_area' }}).isArea(), 'highway=rest_area').to.equal(true);
+            expect(iD.Way({nodes: ['n1', 'n1'], tags: { railway: 'roundhouse' }}).isArea(), 'railway=roundhouse').to.equal(true);
+            expect(iD.Way({nodes: ['n1', 'n1'], tags: { railway: 'station' }}).isArea(), 'railway=station').to.equal(true);
+            expect(iD.Way({nodes: ['n1', 'n1'], tags: { railway: 'traverser' }}).isArea(), 'railway=traverser').to.equal(true);
+            expect(iD.Way({nodes: ['n1', 'n1'], tags: { railway: 'turntable' }}).isArea(), 'railway=turntable').to.equal(true);
+            expect(iD.Way({nodes: ['n1', 'n1'], tags: { railway: 'wash' }}).isArea(), 'railway=wash').to.equal(true);
+        });
+
         it('returns false if the way is closed and has no keys in iD.areaKeys', function() {
             expect(iD.Way({nodes: ['n1', 'n1'], tags: {a: 'b'}}).isArea()).to.equal(false);
         });
