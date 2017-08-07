@@ -19,7 +19,8 @@
         "living",
         "nursing",
         "old",
-        "senior"
+        "senior",
+        "assisted living"
     ],
     "tags": {
         "amenity": "social_facility",

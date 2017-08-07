@@ -2767,7 +2767,7 @@
                 },
                 "amenity/social_facility/group_home": {
                     "name": "Elderly Group Home",
-                    "terms": "old,senior,living"
+                    "terms": "old,senior,living,care home,assisted living"
                 },
                 "amenity/social_facility/homeless_shelter": {
                     "name": "Homeless Shelter",
@@ -2775,7 +2775,7 @@
                 },
                 "amenity/social_facility/nursing_home": {
                     "name": "Nursing Home",
-                    "terms": "elderly,living,nursing,old,senior"
+                    "terms": "elderly,living,nursing,old,senior,assisted living"
                 },
                 "amenity/studio": {
                     "name": "Studio",
