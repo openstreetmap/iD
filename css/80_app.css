@@ -1465,12 +1465,12 @@ input[type=number] {
 .spin-control button.decrement {
     border-bottom-right-radius: 3px;
 }
-[dir='rtl'] .spin-control button.decrement{
+[dir='rtl'] .spin-control button.decrement {
     border-bottom-right-radius: 0;
-    right: 0;
 }
-[dir='rtl'] .spin-control button.increment{
+[dir='rtl'] .spin-control button.increment {
     border-bottom-left-radius: 3px;
+    right: 0;
 }
 
 .spin-control button.decrement::after,
