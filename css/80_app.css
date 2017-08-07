@@ -2756,6 +2756,9 @@ img.tile-removing {
     background: none;
     color: #ddd;
 }
+[dir='rtl'] .panel-title button.close {
+    float: left;
+}
 
 .panel-title button.close:hover {
     color: #fff;
