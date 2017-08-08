@@ -99,7 +99,7 @@ export function behaviorHash(context) {
                 context.storage('commentDate', Date.now());
             }
 
-            if (q.walkthrough) {
+            if (q.walkthrough === 'true') {
                 hash.startWalkthrough = true;
             }
 
