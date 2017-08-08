@@ -1,5 +1,6 @@
 import _ from 'lodash';
-import { debug } from '../index';
+// import { debug } from '../index';
+var debug = false;
 import { osmIsInterestingTag } from './tags';
 import { dataDeprecated } from '../../data/index';
 
@@ -19,7 +20,9 @@ import { dataDeprecated } from '../../data/index';
 //     return (new osmEntity()).initialize(arguments);
 // }
 
-var Entity = {};
+export function Entity() {
+    return this;
+}
 
 Entity.id = function(type) {
     return Entity.id.fromOSM(type, Entity.id.next[type]--);
@@ -51,8 +54,7 @@ Entity.key = function(entity) {
     return entity.id + 'v' + (entity.v || 0);
 };
 
-
-Entity.prototype = {
+export var base = {
 
     tags: {},
 
@@ -175,6 +177,3 @@ Entity.prototype = {
         return deprecated;
     }
 };
-
-
-export {Entity};

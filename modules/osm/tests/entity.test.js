@@ -1,16 +1,20 @@
-import {entityFactory, osmEntity} from "../entityFactory";
-import {osmNode} from '../node';
-import {osmWay} from '../way';
-import {osmRelation} from '../relation';
+
+import {osmEntity} from '../entityFactory';
+
+import {Entity} from '../entity';
+import {Node} from '../node';
+import {Way} from '../way';
+import {Relation} from '../relation';
 
 describe('iD.osmEntity', function () {
     it('returns a subclass of the appropriate type', function () {
-        expect(entityFactory({type: 'node'})).toBeInstanceOf(osmNode);
-        expect(osmEntity({type: 'way'})).toBeInstanceOf(osmWay);
-        expect(osmEntity({type: 'relation'})).toBeInstanceOf(osmRelation);
-        expect(osmEntity({id: 'n1'})).toBeInstanceOf(osmNode);
-        expect(osmEntity({id: 'w1'})).toBeInstanceOf(osmWay);
-        expect(osmEntity({id: 'r1'})).toBeInstanceOf(osmRelation);
+        expect(osmEntity({type: 'node'})).toBeInstanceOf(Node);
+        // console.log(osmEntity({type: 'node'}).isNew);
+        // expect(osmEntity({type: 'way'})).toBeInstanceOf(Way);
+        // expect(osmEntity({type: 'relation'})).toBeInstanceOf(Relation);
+        // expect(osmEntity({id: 'n1'})).toBeInstanceOf(Node);
+        // expect(osmEntity({id: 'w1'})).toBeInstanceOf(Way);
+        // expect(osmEntity({id: 'r1'})).toBeInstanceOf(Relation);
     });
 
     // if (debug) {
@@ -23,65 +27,66 @@ describe('iD.osmEntity', function () {
     //     });
     // }
 
-    // describe('.id', function () {
-    //     it('generates unique IDs', function () {
-    //         expect(osmEntity.id('node')).not.toBe(osmEntity.id('node'));
-    //     });
+    describe('.id', function () {
+        it('generates unique IDs', function () {
+            expect(Entity.id('node')).not.toBe(Entity.id('node'));
+        });
 
-    //     describe('.fromOSM', function () {
-    //         it('returns a ID string unique across entity types', function () {
-    //             expect(osmEntity.id.fromOSM('node', '1')).toBe('n1');
-    //         });
-    //     });
+        describe('.fromOSM', function () {
+            it('returns a ID string unique across entity types', function () {
+                expect(Entity.id.fromOSM('node', '1')).toBe('n1');
+            });
+        });
 
-    //     describe('.toOSM', function () {
-    //         it('reverses fromOSM', function () {
-    //             expect(osmEntity.id.toOSM(osmEntity.id.fromOSM('node', '1'))).toBe('1');
-    //         });
-    //     });
-    // });
+        describe('.toOSM', function () {
+            it('reverses fromOSM', function () {
+                expect(Entity.id.toOSM(Entity.id.fromOSM('node', '1'))).toBe('1');
+            });
+        });
+    });
 
-    // describe('#copy', function () {
-    //     it('returns a new Entity', function () {
-    //         var n = osmEntity({id: 'n'}),
-    //             result = n.copy(null, {});
-    //         expect(result).toBeInstanceOf(osmEntity);
-    //         expect(result).not.toBe(n);
-    //     });
+    describe('#copy', function () {
+        // it('returns a new Entity', function () {
+        //     var n = osmEntity({id: 'n'}),
+        //         result = n.copy(null, {});
+        //         console.log(n.initialize)
+        //     expect(result).toBeInstanceOf(Node);
+        //     expect(result).not.toBe(n);
+        // });
 
-    //     it('adds the new Entity to input object', function () {
-    //         var n = osmEntity({id: 'n'}),
-    //             copies = {},
-    //             result = n.copy(null, copies);
-    //         expect(Object.keys(copies)).toHaveLength(1);
-    //         expect(copies.n).toBe(result);
-    //     });
+        // it('adds the new Entity to input object', function () {
+        //     var n = osmEntity({id: 'n'}),
+        //         copies = {},
+        //         result = n.copy(null, copies);
+        //     expect(Object.keys(copies)).toHaveLength(1);
+        //     expect(copies.n).toBe(result);
+        // });
 
-    //     it('returns an existing copy in input object', function () {
-    //         var n = osmEntity({id: 'n'}),
-    //             copies = {},
-    //             result1 = n.copy(null, copies),
-    //             result2 = n.copy(null, copies);
-    //         expect(Object.keys(copies)).toHaveLength(1);
-    //         expect(result1).toBe(result2);
-    //     });
+        // it('returns an existing copy in input object', function () {
+        //     var n = osmEntity({id: 'n'}),
+        //         copies = {},
+        //         result1 = n.copy(null, copies),
+        //         result2 = n.copy(null, copies);
+        //     expect(Object.keys(copies)).toHaveLength(1);
+        //     expect(result1).toBe(result2);
+        // });
 
-    //     it('resets \'id\', \'user\', and \'version\' properties', function () {
-    //         var n = osmEntity({id: 'n', version: 10, user: 'user'}),
-    //             copies = {};
-    //         n.copy(null, copies);
-    //         expect(copies.n.isNew()).toBeTruthy();
-    //         expect(copies.n.version).toBeUndefined();
-    //         expect(copies.n.user).toBeUndefined();
-    //     });
+        it('resets \'id\', \'user\', and \'version\' properties', function () {
+            var n = osmEntity({id: 'n', version: 10, user: 'user'}),
+                copies = {};
+            n.copy(null, copies);
+            expect(copies.n.isNew()).toBeTruthy();
+            expect(copies.n.version).toBeUndefined();
+            expect(copies.n.user).toBeUndefined();
+        });
 
-    //     it('copies tags', function () {
-    //         var n = osmEntity({id: 'n', tags: {foo: 'foo'}}),
-    //             copies = {};
-    //         n.copy(null, copies);
-    //         expect(copies.n.tags).toBe(n.tags);
-    //     });
-    // });
+        it('copies tags', function () {
+            var n = osmEntity({id: 'n', tags: {foo: 'foo'}}),
+                copies = {};
+            n.copy(null, copies);
+            expect(copies.n.tags).toBe(n.tags);
+        });
+    });
 
     // describe('#update', function () {
     //     it('returns a new Entity', function () {

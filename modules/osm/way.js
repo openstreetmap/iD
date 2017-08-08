@@ -7,22 +7,23 @@ import { areaKeys } from '../core/context';
 
 import { Entity } from './entity';
 
-// export function osmWay() {
-//     if (!(this instanceof osmWay)) {
-//         return (new osmWay()).initialize(arguments);
+// export function Way() {
+//     if (!(this instanceof Way)) {
+//         return (new Way()).initialize(arguments);
 //     } else if (arguments.length) {
 //         this.initialize(arguments);
 //     }
 // }
 
 
-// osmEntity.way = osmWay;
-var osmWay = {};
+// osmEntity.way = Way;
+export function Way() {
+    return this;
+}
 
-osmWay.prototype = Object.create(Entity.prototype);
+Way.prototype = Object.create(Entity.prototype);
 
-
-_.extend(osmWay.prototype, {
+_.extend(Way.prototype, {
     type: 'way',
     nodes: [],
 
@@ -443,8 +444,6 @@ _.extend(osmWay.prototype, {
         });
     }
 });
-
-export {osmWay};
 
 // Filter function to eliminate consecutive duplicates.
 function noRepeatNodes(node, i, arr) {

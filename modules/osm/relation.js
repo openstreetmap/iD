@@ -10,20 +10,22 @@ import {
 
 import { Entity } from './entity';
 
-// export function osmRelation() {
-//     if (!(this instanceof osmRelation)) {
-//         return (new osmRelation()).initialize(arguments);
+// export function Relation() {
+//     if (!(this instanceof Relation)) {
+//         return (new Relation()).initialize(arguments);
 //     } else if (arguments.length) {
 //         this.initialize(arguments);
 //     }
 // }
 
-// osmEntity.relation = osmRelation;
-var osmRelation = {};
+// osmEntity.relation = Relation;
+export function Relation() {
+    return this;
+}
 
-osmRelation.prototype = Object.create(Entity.prototype);
+Relation.prototype = Object.create(Entity.prototype);
 
-osmRelation.creationOrder = function(a, b) {
+Relation.creationOrder = function(a, b) {
     var aId = parseInt(Entity.id.toOSM(a.id), 10);
     var bId = parseInt(Entity.id.toOSM(b.id), 10);
 
@@ -31,7 +33,7 @@ osmRelation.creationOrder = function(a, b) {
     return bId - aId;
 };
 
-_.extend(osmRelation.prototype, {
+_.extend(Relation.prototype, {
     type: 'relation',
     members: [],
 
@@ -179,7 +181,7 @@ _.extend(osmRelation.prototype, {
                         keyAttributes: {
                             type: member.type,
                             role: member.role,
-                            ref: osmEntity.id.toOSM(member.id)
+                            ref: Entity.id.toOSM(member.id)
                         }
                     };
                 }),
@@ -308,4 +310,3 @@ _.extend(osmRelation.prototype, {
     }
 });
 
-export { osmRelation };

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { Entity } from './entity';
+import { Entity, base } from './entity';
 import { geoExtent } from '../geo/index';
 
 // export function osmNode() {
@@ -10,11 +10,11 @@ import { geoExtent } from '../geo/index';
 //     }
 // }
 
-var Node = {};
+export function Node() {
+    return this;
+}
 
-Node.prototype = Object.create(Entity.prototype);
-
-_.extend(Node.prototype, {
+Node.prototype = Object.assign({}, base, {
     type: 'node',
 
     extent: function() {
@@ -148,4 +148,5 @@ _.extend(Node.prototype, {
     }
 });
 
-export { Node };
+
+// export { Node };
