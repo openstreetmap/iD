@@ -1,24 +1,25 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { geoExtent, geoCross } from '../geo/index';
-import { osmEntity } from './entity';
 import { osmLanes } from './lanes';
 import { osmOneWayTags } from './tags';
 import { areaKeys } from '../core/context';
 
+import { Entity } from './entity';
 
-export function osmWay() {
-    if (!(this instanceof osmWay)) {
-        return (new osmWay()).initialize(arguments);
-    } else if (arguments.length) {
-        this.initialize(arguments);
-    }
-}
+// export function osmWay() {
+//     if (!(this instanceof osmWay)) {
+//         return (new osmWay()).initialize(arguments);
+//     } else if (arguments.length) {
+//         this.initialize(arguments);
+//     }
+// }
 
 
-osmEntity.way = osmWay;
+// osmEntity.way = osmWay;
+var osmWay = {};
 
-osmWay.prototype = Object.create(osmEntity.prototype);
+osmWay.prototype = Object.create(Entity.prototype);
 
 
 _.extend(osmWay.prototype, {
@@ -30,7 +31,7 @@ _.extend(osmWay.prototype, {
         if (copies[this.id])
             return copies[this.id];
 
-        var copy = osmEntity.prototype.copy.call(this, resolver, copies);
+        var copy = Entity.prototype.copy.call(this, resolver, copies);
 
         var nodes = this.nodes.map(function(id) {
             return resolver.entity(id).copy(resolver, copies).id;
@@ -384,7 +385,7 @@ _.extend(osmWay.prototype, {
                 '@id': this.osmId(),
                 '@version': this.version || 0,
                 nd: _.map(this.nodes, function(id) {
-                    return { keyAttributes: { ref: osmEntity.id.toOSM(id) } };
+                    return { keyAttributes: { ref: Entity.id.toOSM(id) } };
                 }),
                 tag: _.map(this.tags, function(v, k) {
                     return { keyAttributes: { k: k, v: v } };
@@ -443,8 +444,10 @@ _.extend(osmWay.prototype, {
     }
 });
 
+export {osmWay};
 
 // Filter function to eliminate consecutive duplicates.
 function noRepeatNodes(node, i, arr) {
     return i === 0 || node !== arr[i - 1];
 }
+
