@@ -1,0 +1,111 @@
+Arguments: 
+  /Users/kushanjoshi/.nvm/versions/node/v8.1.0/bin/node /usr/local/bin/yarn add -D rollup-plugin-includepaths
+
+PATH: 
+  /Users/kushanjoshi/.yarn/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:/Users/kushanjoshi/.cargo/bin:/Users/kushanjoshi/.nvm/versions/node/v8.1.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Postgres.app/Contents/Versions/latest/bin
+
+Yarn version: 
+  0.27.5
+
+Node version: 
+  8.1.0
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+    "name": "iD",
+    "version": "2.3.2",
+    "description": "A friendly editor for OpenStreetMap",
+    "main": "iD.js",
+    "repository": "openstreetmap/iD",
+    "keywords": [
+      "editor",
+      "openstreetmap"
+    ],
+    "license": "ISC",
+    "scripts": {
+      "all": "npm-run-all -s clean build dist",
+      "build": "node build.js && node development_server.js",
+      "clean": "shx rm -f dist/*.js dist/*.map dist/*.css dist/img/*.svg",
+      "dist": "npm-run-all -p dist:**",
+      "dist:css": "shx cat css/*.css > dist/iD.css",
+      "dist:mapillary": "shx mkdir -p dist/mapillary-js && shx cp -R node_modules/mapillary-js/dist/* dist/mapillary-js/",
+      "dist:min": "uglifyjs dist/iD.js -c warnings=false -m -o dist/iD.min.js",
+      "dist:svg:maki": "svg-sprite --symbol --symbol-dest . --symbol-sprite dist/img/maki-sprite.svg node_modules/@mapbox/maki/icons/*.svg",
+      "dist:svg:id": "node svg/spriteify.js --svg svg/iD-sprite.src.svg --json svg/iD-sprite.json > dist/img/iD-sprite.svg",
+      "imagery": "node data/update_imagery",
+      "lint": "eslint *.js js/id test/spec modules",
+      "prepublish": "npm run all",
+      "start": "node development_server.js develop",
+      "test": "npm-run-all -s lint build test:**",
+      "test:phantom": "phantomjs --web-security=no node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index.html spec",
+      "translations": "node data/update_locales"
+    },
+    "dependencies": {
+      "diacritics": "1.3.0",
+      "lodash": "4.17.4",
+      "marked": "0.3.6",
+      "osm-auth": "1.0.2",
+      "rbush": "2.0.1",
+      "@mapbox/sexagesimal": "1.0.0",
+      "@mapbox/togeojson": "0.16.0",
+      "wmf-sitematrix": "0.1.4"
+    },
+    "devDependencies": {
+      "brfs": "1.4.3",
+      "chai": "^4.1.0",
+      "d3": "4.10.0",
+      "ecstatic": "^2.2.0",
+      "editor-layer-index": "osmlab/editor-layer-index.git#gh-pages",
+      "gaze": "^1.1.1",
+      "eslint": "^4.3.0",
+      "glob": "^7.1.0",
+      "happen": "^0.3.1",
+      "js-yaml": "^3.9.0",
+      "jsonschema": "^1.1.0",
+      "json-stable-stringify": "^1.0.1",
+      "@mapbox/maki": "^4.0.0",
+      "mapillary-js": "2.7.0",
+      "minimist": "^1.2.0",
+      "mocha": "^3.4.0",
+      "mocha-phantomjs-core": "^2.1.0",
+      "name-suggestion-index": "0.1.1",
+      "npm-run-all": "^4.0.0",
+      "phantomjs-prebuilt": "~2.1.11",
+      "request": "^2.81.0",
+      "rollup": "0.45.2",
+      "rollup-plugin-commonjs": "8.1.0",
+      "rollup-plugin-json": "2.2.0",
+      "rollup-plugin-node-resolve": "3.0.0",
+      "shelljs": "^0.7.5",
+      "shx": "^0.2.1",
+      "sinon": "^2.3.0",
+      "sinon-chai": "^2.12.0",
+      "smash": "0.0",
+      "svg-sprite": "1.3.7",
+      "uglify-js": "^3.0.0",
+      "xml2js": "^0.4.17",
+      "xmlbuilder": "^9.0.1"
+    },
+    "greenkeeper": {
+      "label": "chore-greenkeeper"
+    },
+    "engines": {
+      "node": ">=4.0.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: https://github.com/osmlab/editor-layer-index: ETIMEDOUT
+      at Timeout._onTimeout (/usr/local/Cellar/yarn/0.27.5/libexec/lib/yarn-cli.js:114906:19)
+      at ontimeout (timers.js:488:11)
+      at tryOnTimeout (timers.js:323:5)
+      at Timer.listOnTimeout (timers.js:283:5)

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { osmEntity } from './entity';
+import { osmEntity } from 'osm/entity';
 import { geoExtent } from '../geo/index';
 
 export function osmNode() {

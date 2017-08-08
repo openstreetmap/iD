@@ -8,9 +8,16 @@ var json = require('rollup-plugin-json');
 var http = require('http');
 var gaze = require('gaze');
 var ecstatic = require('ecstatic');
+var includePaths = require('rollup-plugin-includepaths');
 
 var building = false;
 var cache;
+var includePathOptions = {
+    include: {},
+    paths: ['modules'],
+    external: [],
+    extensions: ['.js', '.json', '.html']
+};
 if (process.argv[2] === 'develop') {
     build();
 
@@ -50,6 +57,7 @@ function build() {
     rollup.rollup({
         entry: './modules/id.js',
         plugins: [
+            includePaths(includePathOptions),
             nodeResolve({
                 jsnext: true, main: true, browser: false
             }),
