@@ -8,7 +8,7 @@ import {
     geoPolygonIntersectsPolygon
 } from '../geo/index';
 
-import { Entity } from './entity';
+import { Entity, base } from './entity';
 
 // export function Relation() {
 //     if (!(this instanceof Relation)) {
@@ -23,8 +23,6 @@ export function Relation() {
     return this;
 }
 
-Relation.prototype = Object.create(Entity.prototype);
-
 Relation.creationOrder = function(a, b) {
     var aId = parseInt(Entity.id.toOSM(a.id), 10);
     var bId = parseInt(Entity.id.toOSM(b.id), 10);
@@ -33,14 +31,35 @@ Relation.creationOrder = function(a, b) {
     return bId - aId;
 };
 
-_.extend(Relation.prototype, {
+Relation.prototype = Object.assign({}, base, {
     type: 'relation',
     members: [],
 
+    baseCopy: function(resolver, copies) {
+        if (copies[this.id]) return copies[this.id];
+
+        var copy = new Relation().initialize([
+            this,
+            {
+                id: undefined,
+                user: undefined,
+                version: undefined
+            }
+        ]);
+        copies[this.id] = copy;
+        return copy;
+    },
+    update: function(attrs) {
+        return new Relation().initialize([
+            this,
+            attrs,
+            { v: 1 + (this.v || 0) }
+        ]);
+    },
     copy: function(resolver, copies) {
         if (copies[this.id]) return copies[this.id];
 
-        var copy = osmEntity.prototype.copy.call(this, resolver, copies);
+        var copy = this.baseCopy(resolver, copies);
 
         var members = this.members.map(function(member) {
             return _.extend({}, member, {
@@ -309,4 +328,3 @@ _.extend(Relation.prototype, {
         return result;
     }
 });
-

@@ -6,10 +6,9 @@ import { Relation } from './relation';
 export function osmEntity(attrs) {
     // For prototypal inheritance.
     // if (this instanceof Entity) return;
-
     // Create the appropriate subtype.
+    if (!attrs.type && !attrs.id) throw new Error('entity needs id/type')
     var type = (attrs && attrs.type) || Entity.id.type(attrs.id);
-    console.log(type);
     if (type === 'node') {
         return osmNode.apply(this, arguments);
     } else if (type === 'way') {
@@ -18,23 +17,17 @@ export function osmEntity(attrs) {
         return osmRelation.apply(this, arguments);
     }
     // Initialize a generic Entity (used only in tests).
-    return new Entity().initialize(arguments);
+    // return new Node().initialize(arguments);
 }
 
 export function osmNode() {
-    if (arguments.length) {
-        return new Node().initialize(arguments);
-    }
+    return new Node().initialize(arguments);
 }
 
 export function osmWay() {
-    if (arguments.length) {
-        return new Way().initialize(arguments);
-    }
+    return new Way().initialize(arguments);
 }
 
 export function osmRelation() {
-    if (arguments.length) {
         return new Relation().initialize(arguments);
-    }
 }

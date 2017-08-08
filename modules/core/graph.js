@@ -1,5 +1,6 @@
 import _ from 'lodash';
-import { debug } from '../index';
+// import { debug } from '../index';
+var debug = false;
 import { utilGetPrototypeOf } from '../util/index';
 
 

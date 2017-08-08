@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { Entity, base } from './entity';
+import {  base } from './entity';
 import { geoExtent } from '../geo/index';
 
 // export function osmNode() {
@@ -20,13 +20,27 @@ Node.prototype = Object.assign({}, base, {
     extent: function() {
         return new geoExtent(this.loc);
     },
+    copy: function(resolver, copies) {
+        if (copies[this.id]) return copies[this.id];
+        console.log(this.tags);
+        var copy = new Node().initialize([this, {
+            id: undefined,
+            user: undefined,
+            version: undefined
+        }]);
+        copies[this.id] = copy;
+
+        return copy;
+    },
 
     geometry: function(graph) {
         return graph.transient(this, 'geometry', function() {
             return graph.isPoi(this) ? 'point' : 'vertex';
         });
     },
-
+    update: function(attrs) {
+        return new Node().initialize([this, attrs, { v: 1 + (this.v || 0) }]);
+    },
     move: function(loc) {
         return this.update({ loc: loc });
     },
@@ -147,6 +161,5 @@ Node.prototype = Object.assign({}, base, {
         };
     }
 });
-
 
 // export { Node };

@@ -93,15 +93,15 @@ export var base = {
     },
 
 
-    copy: function(resolver, copies) {
-        if (copies[this.id])
-            return copies[this.id];
+    // copy: function(resolver, copies) {
+    //     if (copies[this.id])
+    //         return copies[this.id];
 
-        var copy = Entity(this, {id: undefined, user: undefined, version: undefined});
-        copies[this.id] = copy;
+    //     var copy = Entity(this, {id: undefined, user: undefined, version: undefined});
+    //     copies[this.id] = copy;
 
-        return copy;
-    },
+    //     return copy;
+    // },
 
 
     osmId: function() {
@@ -114,9 +114,9 @@ export var base = {
     },
 
 
-    update: function(attrs) {
-        return Entity(this, attrs, {v: 1 + (this.v || 0)});
-    },
+    // update: function(attrs) {
+    //     return Entity(this, attrs, {v: 1 + (this.v || 0)});
+    // },
 
 
     mergeTags: function(tags) {
