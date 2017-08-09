@@ -92,8 +92,9 @@ export function rendererBackground(context) {
             .forEach(function (d) { imageryUsed.push(d.source().imageryUsed()); });
 
         var gsLayer = context.layers().layer('geoservice');
-        if (gsLayer && gsLayer.enabled() && gsLayer.hasData()) {
+        if (gsLayer && gsLayer.hasData()) {
             imageryUsed.push('GeoService');
+            context.history().source(gsLayer.layerUrl);
         }
 
         var gpx = context.layers().layer('gpx');
@@ -272,7 +273,7 @@ export function rendererBackground(context) {
                 background.toggleOverlayLayer(overlay);
             }
         });
-        
+
         /*
         if (q.geoservice) {
             setTimeout(function() {

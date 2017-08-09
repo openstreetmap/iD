@@ -637,8 +637,8 @@ export function svgGeoService(projection, context, dispatch) {
     };
 
     drawGeoService.url = function(true_url, downloadMax) {
-        if (!this.originalURL) {
-            this.originalURL = true_url;
+        if (!this.layerUrl) {
+            drawGeoService.layerUrl = true_url;
         }
 
         var fmt = drawGeoService.format() || 'json';
@@ -700,7 +700,7 @@ export function svgGeoService(projection, context, dispatch) {
         }
 
         var that = this;
-        console.log('final GeoService URL: ' + url);
+        // console.log('final GeoService URL: ' + url);
         d3.text(url, function(err, data) {
             if (err) {
                 console.log('GeoService URL did not load');

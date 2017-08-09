@@ -18,7 +18,7 @@ import {
 
 
 var changeset;
-var readOnlyTags = ['created_by', 'imagery_used', 'host', 'locale'];
+var readOnlyTags = ['created_by', 'imagery_used', 'host', 'locale', 'source'];
 
 
 export function uiCommit(context) {
@@ -35,6 +35,13 @@ export function uiCommit(context) {
                     locale: detected.locale.substr(0, 255)
                 };
 
+                // if a GeoService was imported, pass the source url through,
+                // along with mandatory, user editable field for the import discussion
+                if (context.history().source() ){
+                    tags.source = context.history().source();
+                    tags.import_discussion = '';
+                }
+
             changeset = new osmChangeset({ tags: tags });
         }
 
@@ -44,6 +51,7 @@ export function uiCommit(context) {
             rawTagEditor = uiRawTagEditor(context).on('change', changeTags),
             comment = context.storage('comment') || '',
             commentDate = +context.storage('commentDate') || 0,
+            importDiscussion = context.storage('importDiscussion') || '',
             currDate = Date.now(),
             cutoff = 2 * 86400 * 1000;   // 2 days
 
@@ -86,6 +94,29 @@ export function uiCommit(context) {
 
 
         commentField.node().select();
+
+        if (tags.source) {
+            var discussionSection = body
+            .append('div')
+            .attr('class', 'modal-section form-field commit-form');
+
+            discussionSection
+                .append('label')
+                .attr('class', 'form-label')
+                .text('Import Discussion');
+
+            var discussionField = discussionSection
+                .append('textarea')
+                .attr('class', 'commit-form-comment')
+                .attr('placeholder', 'imports@openstreetmap.org discussion thread (required)')
+                .attr('maxlength', 255)
+                .property('value', importDiscussion)
+                .on('input.save', change(true))
+                .on('change.save', change())
+                .on('blur.save', function() {
+                    context.storage('importDiscussion', this.value);
+                });
+        }
 
         context.connection().userChangesets(function (err, changesets) {
             if (err) return;
@@ -364,6 +395,18 @@ export function uiCommit(context) {
                 checkComment(comment);
 
                 var changeset = updateChangeset({ comment: comment });
+
+                if (discussionField) {
+                    var discussion = discussionField.property('value').trim();
+                    if (!onInput) {
+                        discussionField.property('value', discussion);
+                    }
+
+                    checkComment(discussion);
+
+                    var changeset = updateChangeset({ import_discussion: discussion });
+                }
+
                 var expanded = !tagSection.selectAll('a.hide-toggle.expanded').empty();
 
                 tagSection

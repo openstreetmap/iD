@@ -7,7 +7,6 @@ import { uiCmd } from './cmd';
 import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
 
-
 export function uiSave(context) {
     var history = context.history(),
         key = uiCmd('⌘S');
