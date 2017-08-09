@@ -502,6 +502,7 @@ export function uiMapData(context) {
                 content.append('h3')
                     .text('Import from a GeoService by URL');
 
+
                 var body = content.append('div')
                     .attr('class', 'body');
 
@@ -540,7 +541,7 @@ export function uiMapData(context) {
                                     .text('The url provided not recognized as a valid GeoService');
                                 unrecognizedLabel.classed('hide', false);
                                 return;
-                            } 
+                            }
                         }
 
                         // if it just ends /0, we need to keep /0 around
@@ -831,6 +832,7 @@ export function uiMapData(context) {
 
         function editGeoService() {
             // window allows user to enter a GeoService layer
+
             d3.event.preventDefault();
             toggle();
         }

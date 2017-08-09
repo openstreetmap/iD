@@ -51,9 +51,9 @@ export function behaviorHash(context) {
         newParams.map = zoom.toFixed(2) +
             '/' + center[1].toFixed(precision) +
             '/' + center[0].toFixed(precision);
-        
+
         /*
-        var gsLayer = context.layers().layer('geoservice').originalURL;
+        var gsLayer = context.layers().layer('geoservice').layerUrl;
         if (gsLayer) {
             q.geoservice = gsLayer;
         }

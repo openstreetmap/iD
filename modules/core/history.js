@@ -16,7 +16,7 @@ export function coreHistory(context) {
         lock = utilSessionMutex('lock'),
         duration = 150,
         checkpoints = {},
-        stack, index, tree;
+        stack, index, tree, source;
 
 
     // internal _act, accepts list of actions and eased time
@@ -40,7 +40,8 @@ export function coreHistory(context) {
         return {
             graph: graph,
             annotation: annotation,
-            imageryUsed: imageryUsed
+            imageryUsed: imageryUsed,
+            source: source
         };
     }
 
@@ -285,6 +286,15 @@ export function coreHistory(context) {
             }
         },
 
+        source: function(sourceUrl) {
+            if (sourceUrl) {
+                source = sourceUrl;
+                return history;
+            } else {
+                return source;
+            }
+        },
+
 
         // save the current history state
         checkpoint: function(key) {
@@ -414,6 +424,7 @@ export function coreHistory(context) {
                 if (deleted.length) x.deleted = deleted;
                 if (i.imageryUsed) x.imageryUsed = i.imageryUsed;
                 if (i.annotation) x.annotation = i.annotation;
+                if (i.source) x.source = i.source;
 
                 return x;
             });
@@ -516,7 +527,8 @@ export function coreHistory(context) {
                     return {
                         graph: coreGraph(stack[0].graph).load(entities),
                         annotation: d.annotation,
-                        imageryUsed: d.imageryUsed
+                        imageryUsed: d.imageryUsed,
+                        source: d.source
                     };
                 });
 
