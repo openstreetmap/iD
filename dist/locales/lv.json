@@ -164,9 +164,6 @@
             "deleted": "Dzēsts",
             "created": "Izveidots"
         },
-        "infobox": {
-            "geometry": "Ģeometrija"
-        },
         "geocoder": {
             "search": "Meklēt pasaulē...",
             "no_results_visible": "Nav rezultātu redzamajā kartes apgabalā",
@@ -211,9 +208,7 @@
         },
         "restore": {
             "heading": "Jums ir nesaglabātas izmaiņas",
-            "description": "Jums ir nesaglabātas izmaiņas no iepriekšējās labošanas sesijas. Vai vēlaties ielādēt šīs izmaiņas?",
-            "restore": "Ielādēt",
-            "reset": "Atmest"
+            "description": "Jums ir nesaglabātas izmaiņas no iepriekšējās labošanas sesijas. Vai vēlaties ielādēt šīs izmaiņas?"
         },
         "save": {
             "title": "Saglabāt",

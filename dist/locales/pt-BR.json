@@ -348,19 +348,6 @@
             "list": "Edições de {users}",
             "truncated_list": "Edições de {users} e {count} outros"
         },
-        "infobox": {
-            "selected": "{n} selecionados",
-            "geometry": "Geometria",
-            "closed": "fechado",
-            "center": "Centro",
-            "perimeter": "Perímetro",
-            "length": "Comprimento",
-            "area": "Área",
-            "centroid": "Centróide",
-            "location": "Localização",
-            "metric": "Métrico",
-            "imperial": "Imperial"
-        },
         "geometry": {
             "point": "ponto",
             "vertex": "vértice",
@@ -429,7 +416,6 @@
             "switch": "Voltar para este fundo de tela",
             "custom": "Customizado",
             "custom_button": "Editar fundo de tela personalizado",
-            "custom_prompt": "Insira um modelo de URL de uma camada de tiles. São tokens válidos: {zoom}, {x}, {y} para o esquema Z/X/Y e {u} para o esquema quadtile.",
             "fix_misalignment": "Ajustar o deslocamento da imagem de fundo",
             "imagery_source_faq": "De onde essa imagem de satélite vem?",
             "reset": "redefinir",
@@ -513,9 +499,7 @@
         },
         "restore": {
             "heading": "Você tem alterações não salvas",
-            "description": "Deseja restaurar as alterações não salvas da sessão anterior?",
-            "restore": "Restaurar",
-            "reset": "Resetar"
+            "description": "Deseja restaurar as alterações não salvas da sessão anterior?"
         },
         "save": {
             "title": "Salvar",
@@ -909,7 +893,9 @@
             "browsing": {
                 "title": "Navegar",
                 "navigation": {
-                    "title": "Navegação"
+                    "title": "Navegação",
+                    "zoom": "Aumentar/Diminuir ",
+                    "zoom_more": "Aumentar/Diminuir Bastante"
                 },
                 "help": {
                     "title": "Ajuda",
@@ -920,13 +906,31 @@
                     "title": "Mostrar opções",
                     "background": "Mostrar opções de imagem de fundo",
                     "background_switch": "Voltar para a última imagem de fundo",
+                    "map_data": "Mostre as opções dos dados do mapa",
                     "fullscreen": "Entrar no modo de tela cheia"
+                },
+                "selecting": {
+                    "title": "Selecione um recurso",
+                    "select_one": "Selecione apenas um recurso",
+                    "select_multi": "Selecione multiplos recursos"
+                },
+                "with_selected": {
+                    "title": "Com o recurso selecionado"
+                },
+                "vertex_selected": {
+                    "previous": "Pule para o nó anterior ",
+                    "next": "Pule para o próximo nó",
+                    "first": "Pule para o primeiro nó",
+                    "last": "Pule para o ultimo nó"
                 }
             },
             "editing": {
                 "title": "Editar",
                 "drawing": {
-                    "title": "Desenhar"
+                    "title": "Desenhar",
+                    "add_point": "modo 'Adicionar ponto' ",
+                    "add_line": "modo 'Adicionar linha'",
+                    "add_area": "modo 'Adicionar area'"
                 },
                 "operations": {
                     "title": "Operações",
@@ -938,6 +942,9 @@
                     "redo": "Refazer última ação",
                     "save": "Salvar alterações"
                 }
+            },
+            "tools": {
+                "title": "Ferramentas"
             }
         },
         "presets": {
@@ -1259,9 +1266,6 @@
                 "contact/webcam": {
                     "label": "URL da Webcam",
                     "placeholder": "http://exemplo.com.br/"
-                },
-                "content": {
-                    "label": "Conteúdo"
                 },
                 "country": {
                     "label": "País"

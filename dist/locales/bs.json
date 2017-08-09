@@ -247,9 +247,7 @@
         },
         "restore": {
             "heading": "Imate nespremljenih promjena",
-            "description": "Želite li vratiti nespremljene promjene od prethodnog uređivanja?",
-            "restore": "Vratite prethodno",
-            "reset": "Ponovo postavite"
+            "description": "Želite li vratiti nespremljene promjene od prethodnog uređivanja?"
         },
         "save": {
             "title": "Sačuvajte",

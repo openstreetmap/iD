@@ -23,6 +23,8 @@ export function setAreaKeys(value) {
 
 
 export function coreContext() {
+    var context = {};
+    context.version = '2.3.2';
 
     // create a special translation that contains the keys in place of the strings
     var tkeys = _.cloneDeep(dataEn);
@@ -44,8 +46,7 @@ export function coreContext() {
     addTranslation('en', dataEn);
     setLocale('en');
 
-    var dispatch = d3.dispatch('enter', 'exit', 'change'),
-        context = {};
+    var dispatch = d3.dispatch('enter', 'exit', 'change');
 
     // https://github.com/openstreetmap/iD/issues/772
     // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
@@ -377,7 +378,6 @@ export function coreContext() {
 
 
     /* Init */
-    context.version = '2.2.2';
 
     context.projection = geoRawMercator();
     context.curtainProjection = geoRawMercator();

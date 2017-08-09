@@ -348,19 +348,6 @@
             "list": "{users} による編集",
             "truncated_list": "{users} とその他 {count} 人による編集"
         },
-        "infobox": {
-            "selected": "{n} 個を選択中",
-            "geometry": "ジオメトリ",
-            "closed": "閉店中",
-            "center": "中央部",
-            "perimeter": "周辺部",
-            "length": "長さ",
-            "area": "エリア",
-            "centroid": "中央に表示",
-            "location": "ロケーション",
-            "metric": "メトリック",
-            "imperial": "ヤード・ポンド法"
-        },
         "geometry": {
             "point": "ポイント",
             "vertex": "交点",
@@ -429,7 +416,6 @@
             "switch": "背景に切り替え",
             "custom": "カスタム",
             "custom_button": "カスタム背景の編集",
-            "custom_prompt": "タイルURLのテンプレートを入力してください。有効なトークンは Z/X/Y 用に {zoom}, {x}, {y} と、クアッドタイル用に {u} です。",
             "fix_misalignment": "画像の位置を調整",
             "imagery_source_faq": "この写真の出典元",
             "reset": "設定リセット",
@@ -513,9 +499,7 @@
         },
         "restore": {
             "heading": "OSMにアップロードされていない編集内容があります",
-            "description": "前回作業した編集内容がアップロードされていません。編集内容を復元しますか？",
-            "restore": "復元",
-            "reset": "破棄"
+            "description": "前回作業した編集内容がアップロードされていません。編集内容を復元しますか？"
         },
         "save": {
             "title": "保存",
@@ -1199,9 +1183,6 @@
                 "contact/webcam": {
                     "label": "ウェブカメラのURL",
                     "placeholder": "http://example.com/"
-                },
-                "content": {
-                    "label": "中身"
                 },
                 "country": {
                     "label": "国"

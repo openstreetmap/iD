@@ -335,6 +335,7 @@ export function rendererMap(context) {
             });
         }
 
+        mousemove = event;
         transformed = true;
         transformLast = eventTransform;
         utilSetTransform(supersurface, tX, tY, scale);

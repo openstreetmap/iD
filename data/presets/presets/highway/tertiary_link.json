@@ -7,7 +7,7 @@
         "surface",
         "structure",
         "maxheight",
-        "ref",
+        "ref_road_number",
         "cycleway",
         "access"
     ],

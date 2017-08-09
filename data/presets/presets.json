@@ -362,7 +362,6 @@
                 "area"
             ],
             "fields": [
-                "ref",
                 "iata",
                 "icao",
                 "operator",
@@ -403,7 +402,7 @@
                 "point"
             ],
             "fields": [
-                "ref"
+                "ref_aeroway_gate"
             ],
             "tags": {
                 "aeroway": "gate"
@@ -1920,6 +1919,35 @@
             },
             "name": "Church"
         },
+        "amenity/place_of_worship/hindu": {
+            "icon": "poi-hinduist",
+            "fields": [
+                "denomination",
+                "building_area",
+                "address",
+                "service_times"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "garbhargriha",
+                "mandu",
+                "puja",
+                "shrine",
+                "temple"
+            ],
+            "tags": {
+                "amenity": "place_of_worship",
+                "religion": "hindu"
+            },
+            "reference": {
+                "key": "amenity",
+                "value": "place_of_worship"
+            },
+            "name": "Hindu Temple"
+        },
         "amenity/place_of_worship/jewish": {
             "icon": "religious-jewish",
             "fields": [
@@ -1969,6 +1997,85 @@
                 "value": "place_of_worship"
             },
             "name": "Mosque"
+        },
+        "amenity/place_of_worship/shinto": {
+            "icon": "poi-shintoist",
+            "fields": [
+                "denomination",
+                "building_area",
+                "address",
+                "service_times"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "kami",
+                "torii"
+            ],
+            "tags": {
+                "amenity": "place_of_worship",
+                "religion": "shinto"
+            },
+            "reference": {
+                "key": "amenity",
+                "value": "place_of_worship"
+            },
+            "name": "Shinto Shrine"
+        },
+        "amenity/place_of_worship/sikh": {
+            "icon": "poi-sikhist",
+            "fields": [
+                "denomination",
+                "building_area",
+                "address",
+                "service_times"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "gurudwara",
+                "temple"
+            ],
+            "tags": {
+                "amenity": "place_of_worship",
+                "religion": "sikh"
+            },
+            "reference": {
+                "key": "amenity",
+                "value": "place_of_worship"
+            },
+            "name": "Sikh Temple"
+        },
+        "amenity/place_of_worship/taoist": {
+            "icon": "poi-taoist",
+            "fields": [
+                "denomination",
+                "building_area",
+                "address",
+                "service_times"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "daoist",
+                "monastery",
+                "temple"
+            ],
+            "tags": {
+                "amenity": "place_of_worship",
+                "religion": "taoist"
+            },
+            "reference": {
+                "key": "amenity",
+                "value": "place_of_worship"
+            },
+            "name": "Taoist Temple"
         },
         "amenity/planetarium": {
             "icon": "museum",
@@ -3028,6 +3135,35 @@
                 "amenity": "waste_transfer_station"
             },
             "name": "Waste Transfer Station"
+        },
+        "amenity/waste/dog_excrement": {
+            "icon": "waste-basket",
+            "fields": [
+                "collection_times"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "amenity": "waste_basket",
+                "waste": "dog_excrement"
+            },
+            "reference": {
+                "key": "waste",
+                "value": "dog_excrement"
+            },
+            "terms": [
+                "bin",
+                "garbage",
+                "rubbish",
+                "litter",
+                "trash",
+                "poo",
+                "dog"
+            ],
+            "name": "Dog Excrement Bin"
         },
         "amenity/water_point": {
             "icon": "drinking-water",
@@ -5211,7 +5347,7 @@
         "golf/hole": {
             "icon": "golf",
             "fields": [
-                "golf_hole",
+                "ref_golf_hole",
                 "par",
                 "handicap"
             ],
@@ -5562,14 +5698,14 @@
                 "highway": "motorway_junction"
             },
             "fields": [
-                "ref"
+                "ref_highway_junction"
             ],
             "name": "Motorway Junction / Exit"
         },
         "highway/motorway_link": {
             "icon": "highway-motorway-link",
             "fields": [
-                "ref",
+                "ref_road_number",
                 "oneway_yes",
                 "maxspeed",
                 "lanes",
@@ -5602,7 +5738,7 @@
         "highway/motorway": {
             "icon": "highway-motorway",
             "fields": [
-                "ref",
+                "ref_road_number",
                 "oneway_yes",
                 "maxspeed",
                 "lanes",
@@ -5688,7 +5824,7 @@
                 "lanes",
                 "surface",
                 "maxheight",
-                "ref",
+                "ref_road_number",
                 "cycleway",
                 "structure",
                 "access"
@@ -5715,7 +5851,7 @@
                 "surface",
                 "structure",
                 "maxheight",
-                "ref",
+                "ref_road_number",
                 "cycleway",
                 "access"
             ],
@@ -5827,7 +5963,7 @@
                 "surface",
                 "structure",
                 "maxheight",
-                "ref",
+                "ref_road_number",
                 "cycleway",
                 "access"
             ],
@@ -5853,7 +5989,7 @@
                 "surface",
                 "structure",
                 "maxheight",
-                "ref",
+                "ref_road_number",
                 "cycleway",
                 "access"
             ],
@@ -6105,7 +6241,7 @@
                 "surface",
                 "structure",
                 "maxheight",
-                "ref",
+                "ref_road_number",
                 "cycleway",
                 "access"
             ],
@@ -6131,7 +6267,7 @@
                 "surface",
                 "structure",
                 "maxheight",
-                "ref",
+                "ref_road_number",
                 "cycleway",
                 "access"
             ],
@@ -6229,7 +6365,7 @@
         "highway/trunk_link": {
             "icon": "highway-trunk-link",
             "fields": [
-                "ref",
+                "ref_road_number",
                 "oneway",
                 "maxspeed",
                 "lanes",
@@ -6254,7 +6390,7 @@
         "highway/trunk": {
             "icon": "highway-trunk",
             "fields": [
-                "ref",
+                "ref_road_number",
                 "oneway",
                 "maxspeed",
                 "lanes",
@@ -6353,7 +6489,7 @@
             "name": "Archaeological Site"
         },
         "historic/boundary_stone": {
-            "icon": "monument",
+            "icon": "poi-milestone",
             "fields": [
                 "inscription"
             ],
@@ -6759,7 +6895,6 @@
         "landuse/military/airfield": {
             "icon": "airfield",
             "fields": [
-                "ref",
                 "iata",
                 "icao"
             ],
@@ -8632,6 +8767,44 @@
             },
             "name": "Water Works"
         },
+        "man_made/watermill": {
+            "icon": "buddhism",
+            "fields": [
+                "building_area"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "water",
+                "wheel",
+                "mill"
+            ],
+            "tags": {
+                "man_made": "watermill"
+            },
+            "name": "Watermill"
+        },
+        "man_made/windmill": {
+            "icon": "poi-windmill",
+            "fields": [
+                "building_area"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "wind",
+                "wheel",
+                "mill"
+            ],
+            "tags": {
+                "man_made": "windmill"
+            },
+            "name": "Windmill"
+        },
         "man_made/works": {
             "icon": "industry",
             "fields": [
@@ -8707,6 +8880,29 @@
                 "storm"
             ],
             "name": "Storm Drain"
+        },
+        "manhole/telecom": {
+            "icon": "circle-stroked",
+            "fields": [
+                "operator",
+                "ref"
+            ],
+            "geometry": [
+                "point",
+                "vertex"
+            ],
+            "tags": {
+                "manhole": "telecom"
+            },
+            "terms": [
+                "cover",
+                "phone",
+                "hole",
+                "telecom",
+                "telephone",
+                "bt"
+            ],
+            "name": "Telecom Manhole"
         },
         "natural": {
             "icon": "natural",
@@ -9852,17 +10048,88 @@
                 "operator",
                 "generator/source",
                 "generator/method",
-                "generator/type"
+                "generator/type",
+                "generator/output/electricity"
             ],
             "geometry": [
                 "point",
                 "vertex",
                 "area"
             ],
+            "terms": [
+                "hydro",
+                "solar",
+                "turbine",
+                "wind"
+            ],
             "tags": {
                 "power": "generator"
             },
             "name": "Power Generator"
+        },
+        "power/generator/source_nuclear": {
+            "icon": "poi-nuclear",
+            "fields": [
+                "operator",
+                "generator/source",
+                "generator/method",
+                "generator/type",
+                "generator/output/electricity"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "terms": [
+                "fission",
+                "generator",
+                "nuclear",
+                "nuke",
+                "reactor"
+            ],
+            "tags": {
+                "power": "generator",
+                "generator:source": "nuclear",
+                "generator:method": "fission"
+            },
+            "reference": {
+                "key": "generator:source",
+                "value": "nuclear"
+            },
+            "name": "Nuclear Reactor"
+        },
+        "power/generator/source_wind": {
+            "icon": "poi-wind",
+            "fields": [
+                "operator",
+                "generator/source",
+                "generator/method",
+                "generator/type",
+                "generator/output/electricity",
+                "height"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "terms": [
+                "generator",
+                "turbine",
+                "windmill",
+                "wind"
+            ],
+            "tags": {
+                "power": "generator",
+                "generator:source": "wind",
+                "generator:method": "wind_turbine"
+            },
+            "reference": {
+                "key": "generator:source",
+                "value": "wind"
+            },
+            "name": "Wind Turbine"
         },
         "power/line": {
             "icon": "power-line",
@@ -9887,7 +10154,10 @@
         "power/plant": {
             "icon": "industry",
             "fields": [
-                "operator"
+                "operator",
+                "address",
+                "plant/output/electricity",
+                "start_date"
             ],
             "geometry": [
                 "area"
@@ -9963,7 +10233,7 @@
         "public_transport/platform": {
             "icon": "bus",
             "fields": [
-                "ref",
+                "ref_platform",
                 "network",
                 "operator",
                 "shelter"
@@ -9982,7 +10252,7 @@
         "public_transport/stop_position": {
             "icon": "bus",
             "fields": [
-                "ref",
+                "ref_stop_position",
                 "network",
                 "operator"
             ],
@@ -10009,6 +10279,21 @@
             "terms": [],
             "name": "Abandoned Railway"
         },
+        "railway/buffer_stop": {
+            "icon": "poi-buffer-stop",
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "railway": "buffer_stop"
+            },
+            "terms": [
+                "stop",
+                "halt",
+                "buffer"
+            ],
+            "name": "Buffer Stop"
+        },
         "railway/crossing": {
             "icon": "cross",
             "geometry": [
@@ -10027,6 +10312,19 @@
                 "train crossing"
             ],
             "name": "Railway Crossing (Path)"
+        },
+        "railway/derail": {
+            "icon": "roadblock",
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "railway": "derail"
+            },
+            "terms": [
+                "derailer"
+            ],
+            "name": "Railway Derailer"
         },
         "railway/disused": {
             "icon": "railway-disused",
@@ -10101,6 +10399,24 @@
             ],
             "name": "Railway Crossing (Road)"
         },
+        "railway/milestone": {
+            "icon": "poi-milestone",
+            "geometry": [
+                "point",
+                "vertex"
+            ],
+            "fields": [
+                "milestone_position"
+            ],
+            "tags": {
+                "railway": "milestone"
+            },
+            "terms": [
+                "milestone",
+                "marker"
+            ],
+            "name": "Railway Milestone"
+        },
         "railway/monorail": {
             "icon": "railway-monorail",
             "geometry": [
@@ -10138,10 +10454,14 @@
             "name": "Narrow Gauge Rail"
         },
         "railway/platform": {
-            "icon": "rail",
+            "icon": "highway-footway",
+            "fields": [
+                "ref_platform",
+                "surface",
+                "lit",
+                "shelter"
+            ],
             "geometry": [
-                "point",
-                "vertex",
                 "line",
                 "area"
             ],
@@ -10167,6 +10487,21 @@
             ],
             "terms": [],
             "name": "Rail"
+        },
+        "railway/signal": {
+            "icon": "poi-railway-signals",
+            "geometry": [
+                "point",
+                "vertex"
+            ],
+            "tags": {
+                "railway": "signal"
+            },
+            "terms": [
+                "signal",
+                "lights"
+            ],
+            "name": "Railway Signal"
         },
         "railway/station": {
             "icon": "rail",
@@ -10196,12 +10531,16 @@
         "railway/subway_entrance": {
             "icon": "entrance",
             "geometry": [
-                "point"
+                "point",
+                "vertex"
             ],
             "tags": {
                 "railway": "subway_entrance"
             },
-            "terms": [],
+            "terms": [
+                "metro",
+                "transit"
+            ],
             "name": "Subway Entrance"
         },
         "railway/subway": {
@@ -10218,8 +10557,45 @@
                 "electrified",
                 "service_rail"
             ],
-            "terms": [],
+            "terms": [
+                "metro",
+                "transit"
+            ],
             "name": "Subway"
+        },
+        "railway/switch": {
+            "icon": "poi-junction",
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "railway": "switch"
+            },
+            "terms": [
+                "switch",
+                "points"
+            ],
+            "name": "Railway Switch"
+        },
+        "railway/train_wash": {
+            "icon": "rail",
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "fields": [
+                "operator",
+                "building_area"
+            ],
+            "tags": {
+                "railway": "wash"
+            },
+            "terms": [
+                "wash",
+                "clean"
+            ],
+            "name": "Train Wash"
         },
         "railway/tram_stop": {
             "icon": "rail-light",
@@ -10703,6 +11079,7 @@
         "shop/boutique": {
             "icon": "shop",
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -10921,6 +11298,7 @@
         "shop/clothes": {
             "icon": "clothing-store",
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -11291,6 +11669,7 @@
         "shop/fashion": {
             "icon": "shop",
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -13508,7 +13887,7 @@
             "icon": "route",
             "fields": [
                 "route",
-                "ref",
+                "ref_route",
                 "operator",
                 "network"
             ]
@@ -13524,7 +13903,7 @@
             "name": "Cycle Route",
             "icon": "route-bicycle",
             "fields": [
-                "ref",
+                "ref_route",
                 "network_bicycle",
                 "cycle_network"
             ]
@@ -13540,7 +13919,7 @@
             "name": "Bus Route",
             "icon": "route-bus",
             "fields": [
-                "ref",
+                "ref_route",
                 "operator",
                 "network"
             ]
@@ -13556,7 +13935,7 @@
             "name": "Detour Route",
             "icon": "route-detour",
             "fields": [
-                "ref"
+                "ref_route"
             ]
         },
         "type/route/ferry": {
@@ -13570,7 +13949,7 @@
             "name": "Ferry Route",
             "icon": "route-ferry",
             "fields": [
-                "ref",
+                "ref_route",
                 "operator",
                 "network"
             ]
@@ -13586,7 +13965,7 @@
             "name": "Foot Route",
             "icon": "route-foot",
             "fields": [
-                "ref",
+                "ref_route",
                 "operator",
                 "network_foot"
             ]
@@ -13602,7 +13981,7 @@
             "name": "Hiking Route",
             "icon": "route-foot",
             "fields": [
-                "ref",
+                "ref_route",
                 "operator",
                 "network_foot"
             ]
@@ -13618,7 +13997,7 @@
             "name": "Riding Route",
             "icon": "route-horse",
             "fields": [
-                "ref",
+                "ref_route",
                 "operator",
                 "network_horse"
             ]
@@ -13634,7 +14013,7 @@
             "name": "Pipeline Route",
             "icon": "route-pipeline",
             "fields": [
-                "ref",
+                "ref_route",
                 "operator"
             ]
         },
@@ -13649,7 +14028,7 @@
             "name": "Power Route",
             "icon": "route-power",
             "fields": [
-                "ref",
+                "ref_route",
                 "operator"
             ]
         },
@@ -13664,7 +14043,7 @@
             "name": "Road Route",
             "icon": "route-road",
             "fields": [
-                "ref",
+                "ref_route",
                 "network_road"
             ]
         },
@@ -13679,7 +14058,7 @@
             "name": "Train Route",
             "icon": "route-train",
             "fields": [
-                "ref",
+                "ref_route",
                 "operator",
                 "network"
             ]
@@ -13695,7 +14074,7 @@
             "name": "Tram Route",
             "icon": "route-tram",
             "fields": [
-                "ref",
+                "ref_route",
                 "operator",
                 "network"
             ]
@@ -39003,6 +39382,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39022,6 +39402,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39041,6 +39422,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39060,6 +39442,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39079,6 +39462,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39098,6 +39482,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39117,6 +39502,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39136,6 +39522,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39155,6 +39542,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39174,6 +39562,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39193,6 +39582,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39212,6 +39602,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39231,6 +39622,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39250,6 +39642,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39269,6 +39662,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39288,6 +39682,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39307,6 +39702,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39326,6 +39722,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39345,6 +39742,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39364,6 +39762,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39383,6 +39782,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39402,6 +39802,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39421,6 +39822,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39440,6 +39842,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39459,6 +39862,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39478,6 +39882,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39497,6 +39902,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39516,6 +39922,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39535,6 +39942,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39554,6 +39962,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39573,6 +39982,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39592,6 +40002,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39611,6 +40022,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39630,6 +40042,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39649,6 +40062,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39668,6 +40082,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39687,6 +40102,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39706,6 +40122,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39725,6 +40142,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39744,6 +40162,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39763,6 +40182,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39782,6 +40202,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39801,6 +40222,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39820,6 +40242,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39839,6 +40262,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39858,6 +40282,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39877,6 +40302,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39896,6 +40322,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39915,6 +40342,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39934,6 +40362,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39953,6 +40382,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39972,6 +40402,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -39991,6 +40422,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40010,6 +40442,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40029,6 +40462,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40048,6 +40482,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40067,6 +40502,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40086,6 +40522,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40105,6 +40542,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40124,6 +40562,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40143,6 +40582,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40162,6 +40602,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40181,6 +40622,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40200,6 +40642,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40219,6 +40662,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40238,6 +40682,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40257,6 +40702,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40276,6 +40722,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40295,6 +40742,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40314,6 +40762,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40333,6 +40782,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40352,6 +40802,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40371,6 +40822,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",
@@ -40390,6 +40842,7 @@
                 "area"
             ],
             "fields": [
+                "clothes",
                 "operator",
                 "address",
                 "building_area",

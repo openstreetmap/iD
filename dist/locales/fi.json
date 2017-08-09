@@ -150,7 +150,8 @@
                 "key": "D",
                 "annotation": "Erotetut viivat/alueet.",
                 "not_connected": "Ei riittävästi viivoja/alueita niiden erottamiseksi.",
-                "connected_to_hidden": "Tätä kohdetta ei voi katkaista, sillä se on yhdistetty piilotettuun karttakohteeseen."
+                "connected_to_hidden": "Tätä kohdetta ei voi katkaista, sillä se on yhdistetty piilotettuun karttakohteeseen.",
+                "relation": "Tätä ei voi katkaista, sillä se on yhteydessä relaatiojäseniin."
             },
             "merge": {
                 "title": "Sulauta yhteen",
@@ -167,7 +168,8 @@
                     "point": "Paikkapiste siirretty.",
                     "vertex": "Viivapiste siirretty.",
                     "line": "Viiva siirretty.",
-                    "area": "Alue siirretty."
+                    "area": "Alue siirretty.",
+                    "multiple": "Monta kohdetta siirretty."
                 }
             },
             "reflect": {
@@ -274,18 +276,32 @@
             "list": "Muokkaajat {users}",
             "truncated_list": "Muokkaajat {users} ja {count} muuta"
         },
-        "infobox": {
-            "selected": "{n} valittu",
-            "geometry": "Geometria",
-            "closed": "suljettu",
-            "center": "Keskus",
-            "perimeter": "Kehä",
-            "length": "Pituus",
-            "area": "Alue",
-            "centroid": "Keskusalue",
-            "location": "Sijainti",
-            "metric": "Metrinen järjestelmä",
-            "imperial": "Brittiläinen järjestelmä"
+        "info_panels": {
+            "background": {
+                "title": "Tausta",
+                "unknown": "Ei tiedossa"
+            },
+            "history": {
+                "title": "Historia",
+                "selected": "{n} valittu",
+                "version": "Versio",
+                "last_edit": "Viimeisin muokkaus",
+                "edited_by": "Muokkaaja",
+                "changeset": "Muutoskokoelma",
+                "unknown": "Ei tiedossa",
+                "link_text": "Muutoshistoria openstreetmap.org-sivustolla"
+            },
+            "location": {
+                "title": "Sijainti",
+                "unknown_location": "Sijainti ei tiedossa"
+            },
+            "measurement": {
+                "selected": "{n} valittu",
+                "length": "Pituus",
+                "area": "Alue",
+                "metric": "Metrijärjestelmä",
+                "imperial": "Brittiläinen järjestelmä"
+            }
         },
         "geometry": {
             "point": "piste",
@@ -355,7 +371,6 @@
             "switch": "Vaihda takaisin tähän taustaan",
             "custom": "Mukautettu",
             "custom_button": "Muokkaa omaa taustaa",
-            "custom_prompt": "Kirjoita karttapohjan osoitemalline. Sallittuja arvoja ovat Z/X/Y-syötteille {zoom}, {x}, {y} sekä neliöintiin {u}.",
             "fix_misalignment": "Korjaa ilmakuvavirhe",
             "imagery_source_faq": "Mikä tämän ilmakuvan lähde on?",
             "reset": "palauta",
@@ -440,8 +455,8 @@
         "restore": {
             "heading": "Kaikkia muutoksia ei ole tallennettu",
             "description": "Haluatko palauttaa tallentamattomat muutokset edelliseltä muokkauskerralta?",
-            "restore": "Palauta",
-            "reset": "Älä palauta"
+            "restore": "Palauta muutokset",
+            "reset": "Hylkää muutokset"
         },
         "save": {
             "title": "Tallenna",
@@ -462,13 +477,17 @@
                 "restore": "Palauta",
                 "delete": "Poista pysyvästi",
                 "download_changes": "Vaihtoehtoisesti voit ladata omat muutoksesi.",
-                "done": "Kaikki ristiriidat on ratkaistu!"
+                "done": "Kaikki ristiriidat on ratkaistu!",
+                "help": "Joku muu käyttäjä on muuttanut samaa karttakohdetta kuin sinä.\nNapsauta jokaista alapuolella olevan listan kohdetta, ja valitse jokaisen ristiriidan kohdalla\nhaluatko säilyttää omat vai toisen käyttäjän muutokset.\n"
             }
         },
         "merge_remote_changes": {
             "conflict": {
+                "deleted": "{user} on poistanut tämän karttakohteen.",
+                "location": "Sekä sinä että {user} olette siirtäneet tätä karttakohdetta.",
                 "nodelist": "Sekä sinä että {user} olette muuttaneet pistetietoja.",
-                "memberlist": "Sekä sinä että {user} olette muuttaneet relaation jäseniä."
+                "memberlist": "Sekä sinä että {user} olette muuttaneet relaation jäseniä.",
+                "tags": "Sinä vaihdoit ominaisuuden <b>{tag}</b>ominaisuudeksi \"{local}\" ja {user} vaihtoi sen ominaisuudeksi \"{remote}\"."
             }
         },
         "success": {
@@ -974,9 +993,6 @@
                     "label": "Kameran verkko-osoite",
                     "placeholder": "http://www.esimerkki.fi/"
                 },
-                "content": {
-                    "label": "Sisältö"
-                },
                 "country": {
                     "label": "Maa"
                 },
@@ -1283,6 +1299,9 @@
                 "man_made": {
                     "label": "Tyyppi"
                 },
+                "manhole": {
+                    "label": "Tyyppi"
+                },
                 "map_size": {
                     "label": "Peittävyys"
                 },
@@ -1299,6 +1318,9 @@
                 },
                 "maxstay": {
                     "label": "Sallittu enimmäisaika"
+                },
+                "maxweight": {
+                    "label": "Painorajoitus"
                 },
                 "mtb/scale": {
                     "label": "Maastopyöräilyn haastavuus",
@@ -1705,6 +1727,9 @@
                         "flush": "Huuhtelu",
                         "pitlatrine": "Peittoaines"
                     }
+                },
+                "toll": {
+                    "label": "Tulli"
                 },
                 "tourism": {
                     "label": "Tyyppi"
@@ -2195,6 +2220,9 @@
                 "amenity/university": {
                     "name": "Yliopistoalue"
                 },
+                "amenity/vending_machine": {
+                    "name": "Myyntiautomaatti"
+                },
                 "amenity/vending_machine/cigarettes": {
                     "name": "Tupakka-automaatti",
                     "terms": "tupakka, tupakointi, savu, polttaminen, polttaa, rööki, automaatti"
@@ -2211,6 +2239,9 @@
                     "terms": "koira, koirat, koiran, kakka, uloste, koirankakka, koiranuloste, pussi, muovipussi"
                 },
                 "amenity/vending_machine/news_papers": {
+                    "name": "Lehtiautomaatti"
+                },
+                "amenity/vending_machine/newspapers": {
                     "name": "Lehtiautomaatti"
                 },
                 "amenity/vending_machine/parcel_pickup_dropoff": {
@@ -2289,7 +2320,8 @@
                     "name": "Aita"
                 },
                 "barrier/gate": {
-                    "name": "Portti"
+                    "name": "Portti",
+                    "terms": "puomi, ovi"
                 },
                 "barrier/hedge": {
                     "name": "Pensasaita"
@@ -2298,7 +2330,8 @@
                     "name": "Karjarajoitin"
                 },
                 "barrier/lift_gate": {
-                    "name": "Nostopuomi"
+                    "name": "Nostopuomi",
+                    "terms": "puomi, portti, nosto, nousu, nouseva, ylösnouseva"
                 },
                 "barrier/retaining_wall": {
                     "name": "Tukimuuri"
@@ -2699,6 +2732,9 @@
                 "highway/cycleway": {
                     "name": "Pyörätie"
                 },
+                "highway/elevator": {
+                    "name": "Hissi"
+                },
                 "highway/footway": {
                     "name": "Jalankulkutie",
                     "terms": "Polku"
@@ -2817,6 +2853,9 @@
                     "name": "Kääntymispaikka",
                     "terms": "kääntymispaikka, kääntöpaikka, U-käännös, kääntöympyrä, kääntymisympyrä, U-käännöksen tekopaikka"
                 },
+                "highway/turning_loop": {
+                    "name": "Saarekkeellinen kääntöpaikka"
+                },
                 "highway/unclassified": {
                     "name": "Syrjätie/luokittelematon tie"
                 },
@@ -2824,7 +2863,7 @@
                     "name": "Historiallinen paikka"
                 },
                 "historic/archaeological_site": {
-                    "name": "Argeologinen paikka"
+                    "name": "Arkeologinen paikka"
                 },
                 "historic/boundary_stone": {
                     "name": "Rajamerkki"
@@ -3062,6 +3101,10 @@
                 },
                 "leisure/pitch/basketball": {
                     "name": "Koripallokenttä"
+                },
+                "leisure/pitch/beachvolleyball": {
+                    "name": "Rantalentopallokenttä",
+                    "terms": "lentopallo, rantalentopallo, beach, volley, beachvolley, kenttä, hiekka, pallo, peli, hiekkakenttä"
                 },
                 "leisure/pitch/bowls": {
                     "name": "Mailapeliviheriö"
@@ -3840,7 +3883,7 @@
                     "name": "Valokuvausliike"
                 },
                 "shop/pyrotechnics": {
-                    "name": "Ilotulitusmyymälä",
+                    "name": "Ilotulitemyymälä",
                     "terms": "ilotulite, ilotulitus, raketti, kauppa, liike, myymälä, puoti, myyntipiste, uusi, vuosi, uusivuosi, raketin, raketinammunta"
                 },
                 "shop/radiotechnics": {
@@ -4174,7 +4217,62 @@
         },
         "imagery": {
             "Bing": {
-                "description": "Satelliitti- ja ilmakuvat."
+                "description": "Satelliitti- ja ilmakuvat.",
+                "name": "Bing-ilmakuvat"
+            },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "Käyttöehdot ja palaute"
+                }
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "Käyttöehdot ja palaute"
+                }
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "© OpenStreetMapin tekijät, CC-BY-SA"
+                },
+                "description": "OpenStreetMapin oletuskarttanäkymä",
+                "name": "OpenStreetMap (Perinteinen)"
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "Käyttöehdot ja palaute"
+                },
+                "description": "Satelliitti- ja ilmakuvat.",
+                "name": "Mapbox-satelliittikuvat"
+            },
+            "hike_n_bike": {
+                "attribution": {
+                    "text": "© OpenStreetMapin tekijät"
+                }
+            },
+            "mapbox_locator_overlay": {
+                "attribution": {
+                    "text": "Käyttöehdot ja palaute"
+                }
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "© OpenStreetMapin tekijät, CC-BY-SA"
+                }
+            },
+            "osm-gps": {
+                "attribution": {
+                    "text": "© OpenStreetMapin tekijät"
+                }
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "© OpenStreetMapin tekijät, CC-BY-SA"
+                }
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "© OpenStreetMapin tekijät, CC-BY-SA"
+                }
             }
         }
     }

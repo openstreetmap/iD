@@ -25,13 +25,6 @@
             "deleted": "سڕایەوە",
             "created": "دروستکرا"
         },
-        "infobox": {
-            "closed": "داخرا",
-            "center": "ناوەند",
-            "length": "درێژی",
-            "area": "ناوچە",
-            "location": "شوێن"
-        },
         "geometry": {
             "point": "خاڵ",
             "line": "هێڵ",

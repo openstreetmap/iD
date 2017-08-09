@@ -215,9 +215,7 @@
         },
         "restore": {
             "heading": "您有未保存的更改",
-            "description": "上次您有未保存的更改。你想恢复这些更改吗？",
-            "restore": "恢复",
-            "reset": "重置"
+            "description": "上次您有未保存的更改。你想恢复这些更改吗？"
         },
         "save": {
             "title": "保存",

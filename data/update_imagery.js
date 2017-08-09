@@ -41,18 +41,31 @@ sources.concat(whitelist).forEach(function(source) {
     if (source.type !== 'tms' && source.type !== 'bing') return;
     if (source.id in blacklist) return;
 
-    if (source.end_date) {
-        var endDate = new Date(source.end_date),
-            isValid = !isNaN(endDate.getTime());
-        if (isValid && endDate <= cutoffDate) return;
-    }
-
     var im = {
         id: source.id,
         name: source.name,
         type: source.type,
         template: source.url
     };
+
+    var startDate, endDate, isValid;
+
+    if (source.end_date) {
+        endDate = new Date(source.end_date);
+        isValid = !isNaN(endDate.getTime());
+        if (isValid) {
+            if (endDate <= cutoffDate) return;  // too old
+            im.endDate = endDate;
+        }
+    }
+
+    if (source.start_date) {
+        startDate = new Date(source.start_date);
+        isValid = !isNaN(startDate.getTime());
+        if (isValid) {
+            im.startDate = startDate;
+        }
+    }
 
     var extent = source.extent || {};
     if (extent.min_zoom || extent.max_zoom) {

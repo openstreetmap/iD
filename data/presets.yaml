@@ -325,6 +325,9 @@ en:
           anticlockwise: Counterclockwise
           # direction=clockwise
           clockwise: Clockwise
+      clothes:
+        # clothes=*
+        label: Clothes
       club:
         # club=*
         label: Type
@@ -344,7 +347,7 @@ en:
         placeholder: 'http://example.com/'
       content:
         # content=*
-        label: Contents
+        label: Content
       country:
         # country=*
         label: Country
@@ -526,17 +529,17 @@ en:
       generator/method:
         # 'generator:method=*'
         label: Method
+      generator/output/electricity:
+        # 'generator:output:electricity=*'
+        label: Power Output
+        # generator/output/electricity field placeholder
+        placeholder: '50 MW, 100 MW, 200 MW...'
       generator/source:
         # 'generator:source=*'
         label: Source
       generator/type:
         # 'generator:type=*'
         label: Type
-      golf_hole:
-        # ref=*
-        label: Reference
-        # golf_hole field placeholder
-        placeholder: Hole number (1-18)
       grape_variety:
         # grape_variety=*
         label: Grape Varieties
@@ -727,6 +730,11 @@ en:
       maxweight:
         # maxweight=*
         label: Max Weight
+      milestone_position:
+        # 'railway:position=*'
+        label: Milestone Position
+        # milestone_position field placeholder
+        placeholder: Distance to one decimal (123.4)
       mtb/scale:
         # 'mtb:scale=*'
         label: Mountain Biking Difficulty
@@ -978,6 +986,11 @@ en:
       plant:
         # plant=*
         label: Plant
+      plant/output/electricity:
+        # 'plant:output:electricity=*'
+        label: Power Output
+        # plant/output/electricity field placeholder
+        placeholder: '500 MW, 1000 MW, 2000 MW...'
       population:
         # population=*
         label: Population
@@ -1009,7 +1022,30 @@ en:
           container: Container
       ref:
         # ref=*
-        label: Reference
+        label: Reference Code
+      ref_aeroway_gate:
+        # ref=*
+        label: Gate Number
+      ref_golf_hole:
+        # ref=*
+        label: Hole Number
+        # ref_golf_hole field placeholder
+        placeholder: 1-18
+      ref_highway_junction:
+        # ref=*
+        label: Junction Number
+      ref_platform:
+        # ref=*
+        label: Platform Number
+      ref_road_number:
+        # ref=*
+        label: Road Number
+      ref_route:
+        # ref=*
+        label: Route Number
+      ref_stop_position:
+        # ref=*
+        label: Stop Number
       relation:
         # type=*
         label: Type
@@ -1760,6 +1796,11 @@ en:
         name: Church
         # 'terms: christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple'
         terms: '<translate with synonyms or related terms for ''Church'', separated by commas>'
+      amenity/place_of_worship/hindu:
+        # 'amenity=place_of_worship, religion=hindu'
+        name: Hindu Temple
+        # 'terms: garbhargriha,mandu,puja,shrine,temple'
+        terms: '<translate with synonyms or related terms for ''Hindu Temple'', separated by commas>'
       amenity/place_of_worship/jewish:
         # 'amenity=place_of_worship, religion=jewish'
         name: Synagogue
@@ -1770,6 +1811,21 @@ en:
         name: Mosque
         # 'terms: muslim'
         terms: '<translate with synonyms or related terms for ''Mosque'', separated by commas>'
+      amenity/place_of_worship/shinto:
+        # 'amenity=place_of_worship, religion=shinto'
+        name: Shinto Shrine
+        # 'terms: kami,torii'
+        terms: '<translate with synonyms or related terms for ''Shinto Shrine'', separated by commas>'
+      amenity/place_of_worship/sikh:
+        # 'amenity=place_of_worship, religion=sikh'
+        name: Sikh Temple
+        # 'terms: gurudwara,temple'
+        terms: '<translate with synonyms or related terms for ''Sikh Temple'', separated by commas>'
+      amenity/place_of_worship/taoist:
+        # 'amenity=place_of_worship, religion=taoist'
+        name: Taoist Temple
+        # 'terms: daoist,monastery,temple'
+        terms: '<translate with synonyms or related terms for ''Taoist Temple'', separated by commas>'
       amenity/planetarium:
         # amenity=planetarium
         name: Planetarium
@@ -1971,6 +2027,11 @@ en:
         name: Veterinary
         # 'terms: pet clinic,veterinarian,animal hospital,pet doctor'
         terms: '<translate with synonyms or related terms for ''Veterinary'', separated by commas>'
+      amenity/waste/dog_excrement:
+        # 'amenity=waste_basket, waste=dog_excrement'
+        name: Dog Excrement Bin
+        # 'terms: bin,garbage,rubbish,litter,trash,poo,dog'
+        terms: '<translate with synonyms or related terms for ''Dog Excrement Bin'', separated by commas>'
       amenity/waste_basket:
         # amenity=waste_basket
         name: Waste Basket
@@ -3309,6 +3370,16 @@ en:
         # man_made=water_works
         name: Water Works
         terms: '<translate with synonyms or related terms for ''Water Works'', separated by commas>'
+      man_made/watermill:
+        # man_made=watermill
+        name: Watermill
+        # 'terms: water,wheel,mill'
+        terms: '<translate with synonyms or related terms for ''Watermill'', separated by commas>'
+      man_made/windmill:
+        # man_made=windmill
+        name: Windmill
+        # 'terms: wind,wheel,mill'
+        terms: '<translate with synonyms or related terms for ''Windmill'', separated by commas>'
       man_made/works:
         # man_made=works
         name: Factory
@@ -3324,6 +3395,11 @@ en:
         name: Storm Drain
         # 'terms: cover,drain,hole,rain,sewer,sewage,storm'
         terms: '<translate with synonyms or related terms for ''Storm Drain'', separated by commas>'
+      manhole/telecom:
+        # manhole=telecom
+        name: Telecom Manhole
+        # 'terms: cover,phone,hole,telecom,telephone,bt'
+        terms: '<translate with synonyms or related terms for ''Telecom Manhole'', separated by commas>'
       natural:
         # natural=*
         name: Natural
@@ -3620,7 +3696,18 @@ en:
       power/generator:
         # power=generator
         name: Power Generator
+        # 'terms: hydro,solar,turbine,wind'
         terms: '<translate with synonyms or related terms for ''Power Generator'', separated by commas>'
+      power/generator/source_nuclear:
+        # 'power=generator, generator:source=nuclear, generator:method=fission'
+        name: Nuclear Reactor
+        # 'terms: fission,generator,nuclear,nuke,reactor'
+        terms: '<translate with synonyms or related terms for ''Nuclear Reactor'', separated by commas>'
+      power/generator/source_wind:
+        # 'power=generator, generator:source=wind, generator:method=wind_turbine'
+        name: Wind Turbine
+        # 'terms: generator,turbine,windmill,wind'
+        terms: '<translate with synonyms or related terms for ''Wind Turbine'', separated by commas>'
       power/line:
         # power=line
         name: Power Line
@@ -3668,11 +3755,21 @@ en:
         # railway=abandoned
         name: Abandoned Railway
         terms: '<translate with synonyms or related terms for ''Abandoned Railway'', separated by commas>'
+      railway/buffer_stop:
+        # railway=buffer_stop
+        name: Buffer Stop
+        # 'terms: stop,halt,buffer'
+        terms: '<translate with synonyms or related terms for ''Buffer Stop'', separated by commas>'
       railway/crossing:
         # railway=crossing
         name: Railway Crossing (Path)
         # 'terms: crossing,pedestrian crossing,railroad crossing,level crossing,grade crossing,path through railroad,train crossing'
         terms: '<translate with synonyms or related terms for ''Railway Crossing (Path)'', separated by commas>'
+      railway/derail:
+        # railway=derail
+        name: Railway Derailer
+        # 'terms: derailer'
+        terms: '<translate with synonyms or related terms for ''Railway Derailer'', separated by commas>'
       railway/disused:
         # railway=disused
         name: Disused Railway
@@ -3692,6 +3789,11 @@ en:
         name: Railway Crossing (Road)
         # 'terms: crossing,railroad crossing,level crossing,grade crossing,road through railroad,train crossing'
         terms: '<translate with synonyms or related terms for ''Railway Crossing (Road)'', separated by commas>'
+      railway/milestone:
+        # railway=milestone
+        name: Railway Milestone
+        # 'terms: milestone,marker'
+        terms: '<translate with synonyms or related terms for ''Railway Milestone'', separated by commas>'
       railway/monorail:
         # railway=monorail
         name: Monorail
@@ -3709,6 +3811,11 @@ en:
         # railway=rail
         name: Rail
         terms: '<translate with synonyms or related terms for ''Rail'', separated by commas>'
+      railway/signal:
+        # railway=signal
+        name: Railway Signal
+        # 'terms: signal,lights'
+        terms: '<translate with synonyms or related terms for ''Railway Signal'', separated by commas>'
       railway/station:
         # railway=station
         name: Railway Station
@@ -3717,11 +3824,23 @@ en:
       railway/subway:
         # railway=subway
         name: Subway
+        # 'terms: metro,transit'
         terms: '<translate with synonyms or related terms for ''Subway'', separated by commas>'
       railway/subway_entrance:
         # railway=subway_entrance
         name: Subway Entrance
+        # 'terms: metro,transit'
         terms: '<translate with synonyms or related terms for ''Subway Entrance'', separated by commas>'
+      railway/switch:
+        # railway=switch
+        name: Railway Switch
+        # 'terms: switch,points'
+        terms: '<translate with synonyms or related terms for ''Railway Switch'', separated by commas>'
+      railway/train_wash:
+        # railway=wash
+        name: Train Wash
+        # 'terms: wash,clean'
+        terms: '<translate with synonyms or related terms for ''Train Wash'', separated by commas>'
       railway/tram:
         # railway=tram
         name: Tram

@@ -16,6 +16,7 @@ import {
 
 export function uiPreset(context) {
     var dispatch = d3.dispatch('change'),
+        expandedPreference = (context.storage('preset_fields.expanded') !== 'false'),
         state,
         fieldsArr,
         preset,
@@ -39,7 +40,7 @@ export function uiPreset(context) {
         field.show = show;
 
         field.shown = function() {
-            return field.id === 'name' || field.show || _.some(field.keys, function(key) { return !!tags[key]; });
+            return field.show || _.some(field.keys, function(key) { return !!tags[key]; });
         };
 
         field.modified = function() {
@@ -84,12 +85,13 @@ export function uiPreset(context) {
     function presets(selection) {
         selection.call(uiDisclosure()
             .title(t('inspector.all_fields'))
-            .expanded(context.storage('preset_fields.expanded') !== 'false')
+            .expanded(expandedPreference)
             .on('toggled', toggled)
             .content(content)
         );
 
         function toggled(expanded) {
+            expandedPreference = expanded;
             context.storage('preset_fields.expanded', expanded);
         }
     }
@@ -102,10 +104,6 @@ export function uiPreset(context) {
                 presets = context.presets();
 
             fieldsArr = [];
-
-            if (presets.field('name')) {
-                fieldsArr.push(UIField(presets.field('name'), entity));
-            }
 
             preset.fields.forEach(function(field) {
                 if (field.matchGeometry(geometry)) {

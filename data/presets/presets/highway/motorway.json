@@ -1,7 +1,7 @@
 {
     "icon": "highway-motorway",
     "fields": [
-        "ref",
+        "ref_road_number",
         "oneway_yes",
         "maxspeed",
         "lanes",

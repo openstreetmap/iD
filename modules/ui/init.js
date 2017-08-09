@@ -81,10 +81,7 @@ export function uiInit(context) {
             .call(map);
 
         content
-            .call(uiMapInMap(context));
-
-        content
-            .append('div')
+            .call(uiMapInMap(context))
             .call(uiInfo(context));
 
         bar
@@ -264,7 +261,7 @@ export function uiInit(context) {
 
 
         // pan amount
-        var pa = 10;
+        var pa = 80;
 
         var keybinding = d3keybinding('main')
             .on('⌫', function() { d3.event.preventDefault(); })

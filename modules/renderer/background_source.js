@@ -5,12 +5,32 @@ import { geoExtent, geoPolygonIntersectsPolygon } from '../geo/index';
 import { jsonpRequest } from '../util/jsonp_request';
 
 
+function localeDateString(s) {
+    if (!s) return null;
+    var d = new Date(s);
+    if (isNaN(d.getTime())) return null;
+    return d.toLocaleDateString();
+}
+
+function vintageRange(vintage) {
+    var s;
+    if (vintage.start || vintage.end) {
+        s = (vintage.start || '?');
+        if (vintage.start !== vintage.end) {
+            s += ' - ' + (vintage.end || '?');
+        }
+    }
+    return s;
+}
+
+
 export function rendererBackgroundSource(data) {
     var source = _.clone(data),
         offset = [0, 0],
         name = source.name,
         description = source.description,
-        best = !!source.best;
+        best = !!source.best,
+        template = source.template;
 
     source.scaleExtent = data.scaleExtent || [0, 20];
     source.overzoom = data.overzoom !== false;
@@ -59,8 +79,15 @@ export function rendererBackgroundSource(data) {
     };
 
 
+    source.template = function(_) {
+        if (!arguments.length) return template;
+        if (source.id === 'custom') template = _;
+        return source;
+    };
+
+
     source.url = function(coord) {
-        return data.template
+        return template
             .replace('{x}', coord[0])
             .replace('{y}', coord[1])
             // TMS-flipped y coordinate
@@ -106,6 +133,16 @@ export function rendererBackgroundSource(data) {
     source.copyrightNotices = function() {};
 
 
+    source.getVintage = function(center, tileCoord, callback) {
+        var vintage = {
+            start: localeDateString(source.startDate),
+            end: localeDateString(source.endDate)
+        };
+        vintage.range = vintageRange(vintage);
+        callback(null, vintage);
+    };
+
+
     return source;
 }
 
@@ -120,6 +157,7 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
         key = 'Arzdiw4nlOJzRwOz__qailc8NiR31Tt51dN2D7cm57NrnceZnCpgOkmJhNpGoppU', // Same as P2 and JOSM
         url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?include=ImageryProviders&key=' +
             key + '&jsonp={callback}',
+        cache = {},
         providers = [];
 
     jsonpRequest(url, function(json) {
@@ -137,6 +175,7 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
         dispatch.call('change');
     });
 
+
     bing.copyrightNotices = function(zoom, extent) {
         zoom = Math.min(zoom, 21);
         return providers.filter(function(provider) {
@@ -150,7 +189,40 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
         }).join(', ');
     };
 
+
+    bing.getVintage = function(center, tileCoord, callback) {
+        var tileId = tileCoord.slice(0, 3).join('/'),
+            zoom = Math.min(tileCoord[2], 21),
+            centerPoint = center[1] + ',' + center[0],  // lat,lng
+            url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial/' + centerPoint +
+                '?zl=' + zoom + '&key=' + key + '&jsonp={callback}';
+
+        if (!cache[tileId]) {
+            cache[tileId] = {};
+        }
+        if (cache[tileId] && cache[tileId].vintage) {
+            return callback(null, cache[tileId].vintage);
+        }
+
+        jsonpRequest(url, function(result) {
+            var err = (!result && 'Unknown Error') || result.errorDetails;
+            if (err) {
+                return callback(err);
+            } else {
+                var vintage = {
+                    start: localeDateString(result.resourceSets[0].resources[0].vintageStart),
+                    end: localeDateString(result.resourceSets[0].resources[0].vintageEnd)
+                };
+                vintage.range = vintageRange(vintage);
+                cache[tileId].vintage = vintage;
+                return callback(null, vintage);
+            }
+        });
+    };
+
+
     bing.terms_url = 'https://blog.openstreetmap.org/2010/11/30/microsoft-imagery-details';
+
 
     return bing;
 };
@@ -159,17 +231,21 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
 rendererBackgroundSource.None = function() {
     var source = rendererBackgroundSource({ id: 'none', template: '' });
 
+
     source.name = function() {
         return t('background.none');
     };
+
 
     source.imageryUsed = function() {
         return 'None';
     };
 
+
     source.area = function() {
         return -1;  // sources in background pane are sorted by area
     };
+
 
     return source;
 };
@@ -178,17 +254,21 @@ rendererBackgroundSource.None = function() {
 rendererBackgroundSource.Custom = function(template) {
     var source = rendererBackgroundSource({ id: 'custom', template: template });
 
+
     source.name = function() {
         return t('background.custom');
     };
 
+
     source.imageryUsed = function() {
-        return 'Custom (' + template + ')';
+        return 'Custom (' + source.template() + ')';
     };
+
 
     source.area = function() {
         return -2;  // sources in background pane are sorted by area
     };
+
 
     return source;
 };

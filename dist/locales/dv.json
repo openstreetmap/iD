@@ -1,0 +1,91 @@
+{
+    "dv": {
+        "modes": {
+            "add_area": {
+                "description": "ޕާރކުތަކާއި، އިމާރާތްތަކާއި އަދިވެސް ފާހަގަކުރެވޭ ތަންތަން ހިމަނުއްވާ"
+            },
+            "add_line": {
+                "description": "ހައިވޭއާއި، މަގުތަކާއި، ދުވާރާއި އަދި އެހެނިހެން ރޮނގުތައް ހިމަނުއްވާ"
+            },
+            "add_point": {
+                "description": "ރެސްޓޯރަންޓްތަކާއި، ފާހަގަކުރެވޭ ބިނާތަކާއި، ޕޯސްޓް ފޮށިތަކާއި، އެހެނިހެން މުހިއްމު ތަންތަން ހިމަނުއްވާ"
+            }
+        },
+        "inspector": {
+            "add_fields": "ޗާާޓަށް މައުލޫމާތު އެއްކުރައްވާ"
+        },
+        "presets": {
+            "categories": {
+                "category-building": {
+                    "name": "އެކި ވައްތަރުގެ އިމާރާތް"
+                }
+            },
+            "fields": {
+                "address": {
+                    "label": "އެޑްރެސް"
+                },
+                "building": {
+                    "label": "އިމާރާތް"
+                },
+                "building_area": {
+                    "label": "އިމާރާތް"
+                },
+                "structure": {
+                    "options": {
+                        "bridge": "ފާލަން"
+                    }
+                }
+            },
+            "presets": {
+                "address": {
+                    "name": "އެޑްރެސް"
+                },
+                "aeroway/terminal": {
+                    "name": "އެއާރޕޯޓް ގިމަތަ"
+                },
+                "amenity/bank": {
+                    "name": "ބޭންކު"
+                },
+                "amenity/bar": {
+                    "name": "ބާރ"
+                },
+                "amenity/cafe": {
+                    "name": "ކެފޭ"
+                },
+                "amenity/cinema": {
+                    "name": "ސިނަމާ"
+                },
+                "amenity/parking": {
+                    "name": "ކާރު ޕާރކުކުރާ ސަރަޙައްދު"
+                },
+                "amenity/place_of_worship/muslim": {
+                    "name": "މިސްކިތް"
+                },
+                "building": {
+                    "name": "އިމާރާތް"
+                },
+                "building/commercial": {
+                    "name": "ވިިޔަފާރި ޢިމާރާތްތައް"
+                },
+                "highway/bus_stop": {
+                    "name": "ބަސް ހުއްޓި"
+                },
+                "landuse/cemetery": {
+                    "name": "ސަހަރާ"
+                },
+                "landuse/commercial": {
+                    "name": "ވިޔަފާރި ސަރަޙައްދު"
+                },
+                "man_made/bridge": {
+                    "name": "ފާލަން"
+                },
+                "natural/beach": {
+                    "name": "މޫދު ސަރަޙައްދު"
+                },
+                "shop/car_repair": {
+                    "name": "ކާާރު ހަދައިދޭ ގަރާޖް"
+                }
+            }
+        }
+    }
+}

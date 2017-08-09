@@ -393,11 +393,27 @@
         },
         {
             "key": "religion",
+            "value": "hindu"
+        },
+        {
+            "key": "religion",
             "value": "jewish"
         },
         {
             "key": "religion",
             "value": "muslim"
+        },
+        {
+            "key": "religion",
+            "value": "shinto"
+        },
+        {
+            "key": "religion",
+            "value": "sikh"
+        },
+        {
+            "key": "religion",
+            "value": "taoist"
         },
         {
             "key": "amenity",
@@ -570,6 +586,10 @@
         {
             "key": "amenity",
             "value": "waste_transfer_station"
+        },
+        {
+            "key": "waste",
+            "value": "dog_excrement"
         },
         {
             "key": "amenity",
@@ -1775,6 +1795,14 @@
         },
         {
             "key": "man_made",
+            "value": "watermill"
+        },
+        {
+            "key": "man_made",
+            "value": "windmill"
+        },
+        {
+            "key": "man_made",
             "value": "works"
         },
         {
@@ -1783,6 +1811,10 @@
         {
             "key": "manhole",
             "value": "drain"
+        },
+        {
+            "key": "manhole",
+            "value": "telecom"
         },
         {
             "key": "natural"
@@ -2050,6 +2082,14 @@
             "value": "generator"
         },
         {
+            "key": "generator:method",
+            "value": "fission"
+        },
+        {
+            "key": "generator:method",
+            "value": "wind_turbine"
+        },
+        {
             "key": "power",
             "value": "line"
         },
@@ -2091,7 +2131,15 @@
         },
         {
             "key": "railway",
+            "value": "buffer_stop"
+        },
+        {
+            "key": "railway",
             "value": "crossing"
+        },
+        {
+            "key": "railway",
+            "value": "derail"
         },
         {
             "key": "railway",
@@ -2111,6 +2159,10 @@
         },
         {
             "key": "railway",
+            "value": "milestone"
+        },
+        {
+            "key": "railway",
             "value": "monorail"
         },
         {
@@ -2127,6 +2179,10 @@
         },
         {
             "key": "railway",
+            "value": "signal"
+        },
+        {
+            "key": "railway",
             "value": "station"
         },
         {
@@ -2136,6 +2192,14 @@
         {
             "key": "railway",
             "value": "subway"
+        },
+        {
+            "key": "railway",
+            "value": "switch"
+        },
+        {
+            "key": "railway",
+            "value": "wash"
         },
         {
             "key": "railway",

@@ -348,19 +348,48 @@
             "list": "Edits by {users}",
             "truncated_list": "Edits by {users} and {count} others"
         },
-        "infobox": {
+        "info_panels": {
             "key": "I",
-            "selected": "{n} selected",
-            "geometry": "Geometry",
-            "closed": "closed",
-            "center": "Center",
-            "perimeter": "Perimeter",
-            "length": "Length",
-            "area": "Area",
-            "centroid": "Centroid",
-            "location": "Location",
-            "metric": "Metric",
-            "imperial": "Imperial"
+            "background": {
+                "key": "B",
+                "title": "Background",
+                "zoom": "Zoom",
+                "vintage": "Vintage",
+                "unknown": "Unknown",
+                "show_tiles": "Show Tiles",
+                "hide_tiles": "Hide Tiles"
+            },
+            "history": {
+                "key": "H",
+                "title": "History",
+                "selected": "{n} selected",
+                "version": "Version",
+                "last_edit": "Last Edit",
+                "edited_by": "Edited By",
+                "changeset": "Changeset",
+                "unknown": "Unknown",
+                "link_text": "History on openstreetmap.org"
+            },
+            "location": {
+                "key": "L",
+                "title": "Location",
+                "unknown_location": "Unknown Location"
+            },
+            "measurement": {
+                "key": "M",
+                "title": "Measurement",
+                "selected": "{n} selected",
+                "geometry": "Geometry",
+                "closed": "closed",
+                "center": "Center",
+                "perimeter": "Perimeter",
+                "length": "Length",
+                "area": "Area",
+                "centroid": "Centroid",
+                "location": "Location",
+                "metric": "Metric",
+                "imperial": "Imperial"
+            }
         },
         "geometry": {
             "point": "point",
@@ -519,8 +548,8 @@
         "restore": {
             "heading": "You have unsaved changes",
             "description": "Do you wish to restore unsaved changes from a previous editing session?",
-            "restore": "Restore",
-            "reset": "Reset"
+            "restore": "Restore my changes",
+            "reset": "Discard my changes"
         },
         "save": {
             "title": "Save",
@@ -950,7 +979,6 @@
                 },
                 "with_selected": {
                     "title": "With feature selected",
-                    "infobox": "Toggle info / measurement box",
                     "edit_menu": "Toggle edit menu"
                 },
                 "vertex_selected": {
@@ -995,6 +1023,17 @@
                     "undo": "Undo last action",
                     "redo": "Redo last action",
                     "save": "Save changes"
+                }
+            },
+            "tools": {
+                "title": "Tools",
+                "info": {
+                    "title": "Information",
+                    "all": "Toggle all information panels",
+                    "background": "Toggle background panel",
+                    "history": "Toggle history panel",
+                    "location": "Toggle location panel",
+                    "measurement": "Toggle measurement panel"
                 }
             }
         },
@@ -1302,6 +1341,9 @@
                         "anticlockwise": "Counterclockwise"
                     }
                 },
+                "clothes": {
+                    "label": "Clothes"
+                },
                 "club": {
                     "label": "Type"
                 },
@@ -1319,7 +1361,7 @@
                     "placeholder": "http://example.com/"
                 },
                 "content": {
-                    "label": "Contents"
+                    "label": "Content"
                 },
                 "country": {
                     "label": "Country"
@@ -1488,15 +1530,15 @@
                 "generator/method": {
                     "label": "Method"
                 },
+                "generator/output/electricity": {
+                    "label": "Power Output",
+                    "placeholder": "50 MW, 100 MW, 200 MW..."
+                },
                 "generator/source": {
                     "label": "Source"
                 },
                 "generator/type": {
                     "label": "Type"
-                },
-                "golf_hole": {
-                    "label": "Reference",
-                    "placeholder": "Hole number (1-18)"
                 },
                 "grape_variety": {
                     "label": "Grape Varieties"
@@ -1664,6 +1706,10 @@
                 },
                 "maxweight": {
                     "label": "Max Weight"
+                },
+                "milestone_position": {
+                    "label": "Milestone Position",
+                    "placeholder": "Distance to one decimal (123.4)"
                 },
                 "mtb/scale": {
                     "label": "Mountain Biking Difficulty",
@@ -1852,6 +1898,10 @@
                 "plant": {
                     "label": "Plant"
                 },
+                "plant/output/electricity": {
+                    "label": "Power Output",
+                    "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
                 "population": {
                     "label": "Population"
                 },
@@ -1880,8 +1930,30 @@
                         "centre": "Recycling Center"
                     }
                 },
+                "ref_aeroway_gate": {
+                    "label": "Gate Number"
+                },
+                "ref_golf_hole": {
+                    "label": "Hole Number",
+                    "placeholder": "1-18"
+                },
+                "ref_highway_junction": {
+                    "label": "Junction Number"
+                },
+                "ref_platform": {
+                    "label": "Platform Number"
+                },
+                "ref_road_number": {
+                    "label": "Road Number"
+                },
+                "ref_route": {
+                    "label": "Route Number"
+                },
+                "ref_stop_position": {
+                    "label": "Stop Number"
+                },
                 "ref": {
-                    "label": "Reference"
+                    "label": "Reference Code"
                 },
                 "relation": {
                     "label": "Type"
@@ -2568,6 +2640,10 @@
                     "name": "Church",
                     "terms": "christian,abbey,basilica,bethel,cathedral,chancel,chantry,chapel,fold,house of God,house of prayer,house of worship,minster,mission,oratory,parish,sacellum,sanctuary,shrine,tabernacle,temple"
                 },
+                "amenity/place_of_worship/hindu": {
+                    "name": "Hindu Temple",
+                    "terms": "garbhargriha,mandu,puja,shrine,temple"
+                },
                 "amenity/place_of_worship/jewish": {
                     "name": "Synagogue",
                     "terms": "jewish"
@@ -2575,6 +2651,18 @@
                 "amenity/place_of_worship/muslim": {
                     "name": "Mosque",
                     "terms": "muslim"
+                },
+                "amenity/place_of_worship/shinto": {
+                    "name": "Shinto Shrine",
+                    "terms": "kami,torii"
+                },
+                "amenity/place_of_worship/sikh": {
+                    "name": "Sikh Temple",
+                    "terms": "gurudwara,temple"
+                },
+                "amenity/place_of_worship/taoist": {
+                    "name": "Taoist Temple",
+                    "terms": "daoist,monastery,temple"
                 },
                 "amenity/planetarium": {
                     "name": "Planetarium",
@@ -2747,6 +2835,10 @@
                 "amenity/waste_transfer_station": {
                     "name": "Waste Transfer Station",
                     "terms": "dump,garbage,recycling,rubbish,scrap,trash"
+                },
+                "amenity/waste/dog_excrement": {
+                    "name": "Dog Excrement Bin",
+                    "terms": "bin,garbage,rubbish,litter,trash,poo,dog"
                 },
                 "amenity/water_point": {
                     "name": "RV Drinking Water",
@@ -3964,6 +4056,14 @@
                     "name": "Water Works",
                     "terms": ""
                 },
+                "man_made/watermill": {
+                    "name": "Watermill",
+                    "terms": "water,wheel,mill"
+                },
+                "man_made/windmill": {
+                    "name": "Windmill",
+                    "terms": "wind,wheel,mill"
+                },
                 "man_made/works": {
                     "name": "Factory",
                     "terms": "assembly,build,brewery,car,plant,plastic,processing,manufacture,refinery"
@@ -3975,6 +4075,10 @@
                 "manhole/drain": {
                     "name": "Storm Drain",
                     "terms": "cover,drain,hole,rain,sewer,sewage,storm"
+                },
+                "manhole/telecom": {
+                    "name": "Telecom Manhole",
+                    "terms": "cover,phone,hole,telecom,telephone,bt"
                 },
                 "natural": {
                     "name": "Natural",
@@ -4246,7 +4350,15 @@
                 },
                 "power/generator": {
                     "name": "Power Generator",
-                    "terms": ""
+                    "terms": "hydro,solar,turbine,wind"
+                },
+                "power/generator/source_nuclear": {
+                    "name": "Nuclear Reactor",
+                    "terms": "fission,generator,nuclear,nuke,reactor"
+                },
+                "power/generator/source_wind": {
+                    "name": "Wind Turbine",
+                    "terms": "generator,turbine,windmill,wind"
                 },
                 "power/line": {
                     "name": "Power Line",
@@ -4288,9 +4400,17 @@
                     "name": "Abandoned Railway",
                     "terms": ""
                 },
+                "railway/buffer_stop": {
+                    "name": "Buffer Stop",
+                    "terms": "stop,halt,buffer"
+                },
                 "railway/crossing": {
                     "name": "Railway Crossing (Path)",
                     "terms": "crossing,pedestrian crossing,railroad crossing,level crossing,grade crossing,path through railroad,train crossing"
+                },
+                "railway/derail": {
+                    "name": "Railway Derailer",
+                    "terms": "derailer"
                 },
                 "railway/disused": {
                     "name": "Disused Railway",
@@ -4308,6 +4428,10 @@
                     "name": "Railway Crossing (Road)",
                     "terms": "crossing,railroad crossing,level crossing,grade crossing,road through railroad,train crossing"
                 },
+                "railway/milestone": {
+                    "name": "Railway Milestone",
+                    "terms": "milestone,marker"
+                },
                 "railway/monorail": {
                     "name": "Monorail",
                     "terms": ""
@@ -4324,17 +4448,29 @@
                     "name": "Rail",
                     "terms": ""
                 },
+                "railway/signal": {
+                    "name": "Railway Signal",
+                    "terms": "signal,lights"
+                },
                 "railway/station": {
                     "name": "Railway Station",
                     "terms": "train station,station"
                 },
                 "railway/subway_entrance": {
                     "name": "Subway Entrance",
-                    "terms": ""
+                    "terms": "metro,transit"
                 },
                 "railway/subway": {
                     "name": "Subway",
-                    "terms": ""
+                    "terms": "metro,transit"
+                },
+                "railway/switch": {
+                    "name": "Railway Switch",
+                    "terms": "switch,points"
+                },
+                "railway/train_wash": {
+                    "name": "Train Wash",
+                    "terms": "wash,clean"
                 },
                 "railway/tram_stop": {
                     "name": "Tram Stop",

@@ -348,19 +348,6 @@
             "list": "Redigeringer af {users}",
             "truncated_list": "Redigeringer af {users} og {count} andre"
         },
-        "infobox": {
-            "selected": "{n} valgte",
-            "geometry": "Geometri",
-            "closed": "lukket",
-            "center": "Center",
-            "perimeter": "Perimeter",
-            "length": "Længde",
-            "area": "Område",
-            "centroid": "Centroid",
-            "location": "Lokalitet",
-            "metric": "Meter",
-            "imperial": "Imperial"
-        },
         "geometry": {
             "point": "punkt",
             "vertex": "hjørne",
@@ -429,7 +416,6 @@
             "switch": "Skift tilbage til denne baggrund",
             "custom": "Brugerdefineret",
             "custom_button": "Rediger brugerdefineret baggrund",
-            "custom_prompt": "Indtast en tile URL template. Valide opsætning er  {zoom}, {x}, {y} for Z/X/Y skema og {u} for kvartile skema.",
             "fix_misalignment": "Juster billedets offset",
             "imagery_source_faq": "Hvem er ophavsmand til luftfotoet?",
             "reset": "nulstil",
@@ -513,9 +499,7 @@
         },
         "restore": {
             "heading": "Du har ændringer der ikke er gemt endnu",
-            "description": "Ønsker du at gendanne ikke gemte ændringer fra en tidligere redigeringssession?",
-            "restore": "Gendan",
-            "reset": "Nulstil"
+            "description": "Ønsker du at gendanne ikke gemte ændringer fra en tidligere redigeringssession?"
         },
         "save": {
             "title": "Gem",
@@ -1199,9 +1183,6 @@
                 "contact/webcam": {
                     "label": "Webcam-URL",
                     "placeholder": "http://example.com/"
-                },
-                "content": {
-                    "label": "Indhold"
                 },
                 "country": {
                     "label": "Land"

@@ -4,12 +4,19 @@
         "operator",
         "generator/source",
         "generator/method",
-        "generator/type"
+        "generator/type",
+        "generator/output/electricity"
     ],
     "geometry": [
         "point",
         "vertex",
         "area"
+    ],
+    "terms": [
+        "hydro",
+        "solar",
+        "turbine",
+        "wind"
     ],
     "tags": {
         "power": "generator"

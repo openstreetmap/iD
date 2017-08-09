@@ -347,19 +347,48 @@
             "list": "Redaktita de {users}",
             "truncated_list": "Redaktita de {users} kaj {count} aliaj"
         },
-        "infobox": {
+        "info_panels": {
             "key": "I",
-            "selected": "{n} elektitaj",
-            "geometry": "Geometrio",
-            "closed": "fermita",
-            "center": "Centro",
-            "perimeter": "Ĉirkaŭmezuro",
-            "length": "Longo",
-            "area": "Areo",
-            "centroid": "Pezcentro",
-            "location": "Pozicio",
-            "metric": "Metraj",
-            "imperial": "Imperiaj"
+            "background": {
+                "key": "B",
+                "title": "Fono",
+                "zoom": "Pligrandigo",
+                "vintage": "Fotita je",
+                "unknown": "Nekonata",
+                "show_tiles": "Montri kahelojn",
+                "hide_tiles": "Kaŝi kahelojn"
+            },
+            "history": {
+                "key": "H",
+                "title": "Historio",
+                "selected": "{n} elektitaj",
+                "version": "Versio",
+                "last_edit": "Lasta redakto",
+                "edited_by": "Redaktita de",
+                "changeset": "Ŝanĝaro",
+                "unknown": "Nekonata",
+                "link_text": "Historio ĉe openstreetmap.org"
+            },
+            "location": {
+                "key": "L",
+                "title": "Pozicio",
+                "unknown_location": "Nekonata pozicio"
+            },
+            "measurement": {
+                "key": "M",
+                "title": "Mezuro",
+                "selected": "{n} elektitaj",
+                "geometry": "Geometrio",
+                "closed": "fermita",
+                "center": "Centro",
+                "perimeter": "Ĉirkaŭmezuro",
+                "length": "Longo",
+                "area": "Areo",
+                "centroid": "Pezcentro",
+                "location": "Pozicio",
+                "metric": "Metraj",
+                "imperial": "Imperiaj"
+            }
         },
         "geometry": {
             "point": "punkto",
@@ -430,7 +459,7 @@
             "switch": "Baskuli reen al ĉi tiu fono",
             "custom": "Propra",
             "custom_button": "Redakti propran fonon",
-            "custom_prompt": "Entajpu URL-on de kaheloj. Ĝustaj ĵetonoj enhavas {zoom}, {x}, {y} por Z/X/Y koordinatoj kaj {u} por ĉiu map-kvarilo.",
+            "custom_prompt": "Entajpu URL-skemon de kaheloj. Ĝustaj ĵetonoj estas:\n - {zoom}/{z}, {x}, {y} por Z/X/Y kahela skemo\n - {ty} por renversaj TMS-stilaj Y-koordinatoj\n - {u} por kvarkahela (quadtile) skemo\n - {switch:a,b,c} por DNS-servila kunigado (multiplexing)\n\nEkzemplo:\n{example}",
             "fix_misalignment": "Ĝustigi fotaran deŝovon",
             "imagery_source_faq": "De kie ĉi tiu fotaro devenas?",
             "reset": "restarigi",
@@ -518,8 +547,8 @@
         "restore": {
             "heading": "Vi havas nekonservitajn ŝanĝojn",
             "description": "Ĉu vi volas restarigi nekonservitajn ŝanĝojn de antaŭa redaktada seanco?",
-            "restore": "Restarigi",
-            "reset": "Rekomencigi"
+            "restore": "Restarigi miajn ŝanĝojn",
+            "reset": "Ne konservi miajn ŝanĝojn"
         },
         "save": {
             "title": "Konservi",
@@ -560,7 +589,7 @@
             "facebook": "Kunhavigi per Fejsbuko",
             "twitter": "Kunhavigi per Twitter",
             "google": "Kunhavigi per Google+",
-            "help_html": "Viaj ŝanĝoj povos aperi en \"Norma\" tavolo post kelkaj minutoj. Aktualigo de aliaj tavoloj kaj aliaj elementoj povus okupiĝi pli da tempo.",
+            "help_html": "Viaj ŝanĝoj povos aperi en la “Norma” tavolo post kelkaj minutoj. Aktualigo de aliaj tavoloj kaj aliaj elementoj povos okupi pli da tempo.",
             "help_link_text": "Detaloj"
         },
         "confirm": {
@@ -948,7 +977,6 @@
                 },
                 "with_selected": {
                     "title": "Kun elektita objekto",
-                    "infobox": "Baskuli pri-dialogujon / mezur-dialogujon",
                     "edit_menu": "Baskuli redakt-menuon"
                 },
                 "vertex_selected": {
@@ -993,6 +1021,17 @@
                     "undo": "Malfari antaŭan agon",
                     "redo": "Refari antaŭan agon",
                     "save": "Konservi ŝanĝojn"
+                }
+            },
+            "tools": {
+                "title": "Iloj",
+                "info": {
+                    "title": "Informoj",
+                    "all": "Baskuli ĉiujn informajn panelojn",
+                    "background": "Baskuli fon-panelon",
+                    "history": "Baskuli histori-panelon",
+                    "location": "Baskuli pozici-panelon",
+                    "measurement": "Baskuli mezur-panelon"
                 }
             }
         },
@@ -1300,6 +1339,9 @@
                         "clockwise": "Horloĝdirekte"
                     }
                 },
+                "clothes": {
+                    "label": "Vestaĵoj"
+                },
                 "club": {
                     "label": "Speco"
                 },
@@ -1486,6 +1528,10 @@
                 "generator/method": {
                     "label": "Metodo"
                 },
+                "generator/output/electricity": {
+                    "label": "Povumo",
+                    "placeholder": "50 MW, 100 MW, 200 MW…"
+                },
                 "generator/source": {
                     "label": "Energi-fonto"
                 },
@@ -1566,6 +1612,9 @@
                 "kerb": {
                     "label": "Trotuar-randaĵo"
                 },
+                "label": {
+                    "label": "Etikedo"
+                },
                 "lamp_type": {
                     "label": "Speco"
                 },
@@ -1635,6 +1684,9 @@
                     "label": "Loko"
                 },
                 "man_made": {
+                    "label": "Speco"
+                },
+                "manhole": {
                     "label": "Speco"
                 },
                 "map_size": {
@@ -1843,6 +1895,10 @@
                 },
                 "plant": {
                     "label": "Vegetaĵo"
+                },
+                "plant/output/electricity": {
+                    "label": "Povumo",
+                    "placeholder": "500 MW, 1000 MW, 2000 MW…"
                 },
                 "population": {
                     "label": "Loĝantaro"
@@ -2523,6 +2579,10 @@
                     "name": "Kirko",
                     "terms": "kristana preĝejo,mesejo,kapelo,katedralo,baziliko,abatejo,monaĥejo,kristanismo,katolika preĝejo"
                 },
+                "amenity/place_of_worship/hindu": {
+                    "name": "Hinduisma templo",
+                    "terms": "templo"
+                },
                 "amenity/place_of_worship/jewish": {
                     "name": "Sinagogo",
                     "terms": "juda preĝejo,judismo,judaismo"
@@ -2530,6 +2590,18 @@
                 "amenity/place_of_worship/muslim": {
                     "name": "Moskeo",
                     "terms": "islama preĝejo,islamo,minareto"
+                },
+                "amenity/place_of_worship/shinto": {
+                    "name": "Ŝintoismo adorejo",
+                    "terms": "shintoismo,sxintoismo,templo,adorejo,ŝintoo,kamio"
+                },
+                "amenity/place_of_worship/sikh": {
+                    "name": "Sikisma templo",
+                    "terms": "siĥismo,templo"
+                },
+                "amenity/place_of_worship/taoist": {
+                    "name": "Taoisma templo",
+                    "terms": "templo,daŭismo,taismo"
                 },
                 "amenity/planetarium": {
                     "name": "Planetario (astrokinejo)",
@@ -2589,6 +2661,10 @@
                 "amenity/school": {
                     "name": "Lerneja tereno",
                     "terms": "lernejo,edukejo,instruejo"
+                },
+                "amenity/scrapyard": {
+                    "name": "Ferrubejo",
+                    "terms": "aŭtovrakejo,vrakejo,feraĵejo,recikliga centro,rubejo"
                 },
                 "amenity/shelter": {
                     "name": "Ŝirmejo",
@@ -2691,6 +2767,10 @@
                 "amenity/veterinary": {
                     "name": "Bestokuracistejo",
                     "terms": "bestokuracisto,bestkuracisto,veterinaro"
+                },
+                "amenity/waste/dog_excrement": {
+                    "name": "Rubujo por hund-fekaĵoj",
+                    "terms": "rubujo,hundaj fekoj,fekaĵoj,eksrementoj"
                 },
                 "amenity/waste_basket": {
                     "name": "Rubujo",
@@ -3907,9 +3987,25 @@
                     "name": "Akvotrinkebligejo",
                     "terms": "akvopurigejo,trinkebligejo,seninfektigo de akvo,akvokonduktilo"
                 },
+                "man_made/watermill": {
+                    "name": "Muelejo akva",
+                    "terms": "muelejo,akvomuelejo,grenmuelejo,akvmueejo"
+                },
+                "man_made/windmill": {
+                    "name": "Muelejo venta",
+                    "terms": "ventmuelejo,ventomuelejo,ventoturbino,grenmuelejo"
+                },
                 "man_made/works": {
                     "name": "Fabriko",
                     "terms": "produktejo,uzino,manufakturo"
+                },
+                "manhole": {
+                    "name": "Stratkanala kovrilo",
+                    "terms": "stratkanalo,kanalo,kloako,kablokanalo,pluvkanalo,kovrilo"
+                },
+                "manhole/drain": {
+                    "name": "Stratkanala (pluvakvo) kovrilo",
+                    "terms": "stratkanalo,kloako,kanalo,pluvakvo"
                 },
                 "natural": {
                     "name": "Natura objekto",
@@ -4183,6 +4279,14 @@
                     "name": "Elektr-generilo",
                     "terms": "elektrogenerilo,generilo,generatoro"
                 },
+                "power/generator/source_nuclear": {
+                    "name": "Nuklea reakciujo",
+                    "terms": "nuklea reaktoro,reaktoro,reakciujo,atoma reaktoro,atompilo,elektrocentralo"
+                },
+                "power/generator/source_wind": {
+                    "name": "Ventoturbino",
+                    "terms": "ventturbino,elektrogenerilo,ventomuelejo,ventturbino,ventelektrigilo,ventmotoro,ventenergio"
+                },
                 "power/line": {
                     "name": "Elektra kondukilo (alttensia)",
                     "terms": "lineo forkurenta,kablo"
@@ -4369,8 +4473,8 @@
                     "terms": "librejo,librovendejo"
                 },
                 "shop/boutique": {
-                    "name": "Galanteria vendejo",
-                    "terms": "galanterio,ornamoj,dekoracioj,butiko"
+                    "name": "Mod-butiko (altprezaj vestaĵoj)",
+                    "terms": "galanterio,ornamoj,dekoracioj,butiko,vestoj,"
                 },
                 "shop/butcher": {
                     "name": "Vianda vendejo",
@@ -4556,8 +4660,8 @@
                     "terms": "mastrumado,mastrumaparatoj,mastrumaj aparatoj,potoj,manĝiloj"
                 },
                 "shop/interior_decoration": {
-                    "name": "Ensembla vendejo",
-                    "terms": "ensembloj,ornamoj,ornamaĵoj,dekoracioj"
+                    "name": "Ensembla (meblara) vendejo",
+                    "terms": "ensembloj,ornamoj,ornamaĵoj,dekoracioj,mebloj,meblaro"
                 },
                 "shop/jewelry": {
                     "name": "Juvelista vendejo",

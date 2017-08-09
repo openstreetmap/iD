@@ -176,9 +176,7 @@
         },
         "restore": {
             "heading": "Jy het verandering wat nog gebêre moet word",
-            "description": "Wil jy graag ongebêrede veranderinge heroep van 'n vorige kaart veranderingssessie?",
-            "restore": "Herstel",
-            "reset": "Begin van voor"
+            "description": "Wil jy graag ongebêrede veranderinge heroep van 'n vorige kaart veranderingssessie?"
         },
         "save": {
             "title": "Stoor",

@@ -105,7 +105,7 @@ export function uiShortcuts() {
         var shortcutsEnter = shortcuts
             .enter()
             .append('div')
-            .attr('class', 'shortcut-tab');
+            .attr('class', function(d) { return 'shortcut-tab shortcut-tab-' + d.tab; });
 
         var columnsEnter = shortcutsEnter
             .selectAll('.shortcut-column')

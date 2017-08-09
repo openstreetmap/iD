@@ -1,7 +1,10 @@
 {
     "icon": "industry",
     "fields": [
-        "operator"
+        "operator",
+        "address",
+        "plant/output/electricity",
+        "start_date"
     ],
     "geometry": [
         "area"

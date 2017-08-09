@@ -348,19 +348,6 @@
             "list": "Edicions fetes per {users}",
             "truncated_list": "Edicions fetes per {users} i {count} més"
         },
-        "infobox": {
-            "selected": "{n} seleccionats",
-            "geometry": "Geometria",
-            "closed": "tancat",
-            "center": "Centre",
-            "perimeter": "Perímetre",
-            "length": "Llargària",
-            "area": "Àrea",
-            "centroid": "Centroide",
-            "location": "Ubicació",
-            "metric": "Mètric",
-            "imperial": "Imperial"
-        },
         "geometry": {
             "point": "punt",
             "vertex": "vèrtex",
@@ -429,7 +416,6 @@
             "switch": "Senyals de trànsit ",
             "custom": "Personalitzar",
             "custom_button": "Editar el fons personalitzat",
-            "custom_prompt": "Introduïu una plantilla d'URL de tessel·les. Els identificadors vàlids són {zoom}, {x}, {y} per a un esquem a Z/X/Y i {u} per a un esquema de tessel·les quadrades.",
             "fix_misalignment": "Ajusta la alineació de la imatgeria",
             "imagery_source_faq": "D'on prové aquesta imatgeria?",
             "reset": "reiniciar",
@@ -513,9 +499,7 @@
         },
         "restore": {
             "heading": "Teniu canvis sense desar",
-            "description": "Voleu restaurar els canvis no desats de la sessió anterior?",
-            "restore": "Restaurar",
-            "reset": "Reiniciar"
+            "description": "Voleu restaurar els canvis no desats de la sessió anterior?"
         },
         "save": {
             "title": "Desa",
@@ -1079,9 +1063,6 @@
                 "contact/webcam": {
                     "label": "URL de la webcam",
                     "placeholder": "http://example.com/"
-                },
-                "content": {
-                    "label": "Continguts"
                 },
                 "country": {
                     "label": "País"
@@ -4232,6 +4213,41 @@
                 "waterway/weir": {
                     "name": "Assut"
                 }
+            }
+        },
+        "imagery": {
+            "Bing": {
+                "description": "Imatges aèries i de satèl·lit.",
+                "name": "Imatges aèries de Bing"
+            },
+            "DigitalGlobe-Standard": {
+                "description": "Imatges de satèl·lit de DigitalGlobe estàndard",
+                "name": "Imatges de DigitalGlobe estàndard"
+            },
+            "MAPNIK": {
+                "description": "La capa d'OpenStreetmap predeterminada",
+                "name": "OpenStreetMap (Estàndard)"
+            },
+            "Mapbox": {
+                "description": "Imatges aèries i de satèl·lit."
+            },
+            "basemap.at": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "name": "basemap.at"
+            },
+            "basemap.at-orthofoto": {
+                "attribution": {
+                    "text": "basemap.at"
+                }
+            },
+            "osm-gps": {
+                "description": "Traces GPS públiques pujades a OpenStreetMap.",
+                "name": "Traces GPS d'OpenStreetMap"
+            },
+            "osm-mapnik-german_style": {
+                "name": "OpenStreetMap (Estil alemany)"
             }
         }
     }

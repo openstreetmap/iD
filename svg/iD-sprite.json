@@ -270,6 +270,11 @@
     "poi-junction":             { "viewBox": "565 320 15 15" },
     "poi-social-facility":      { "viewBox": "580 320 15 15" },
     "poi-elevator":             { "viewBox": "595 320 15 15" },
+    "poi-windmill":             { "viewBox": "610 320 15 15" },
+    "poi-hinduist":             { "viewBox": "625 320 15 15" },
+    "poi-shintoist":            { "viewBox": "640 320 15 15" },
+    "poi-buffer-stop":          { "viewBox": "655 320 15 15" },
+    "poi-railway-signals":      { "viewBox": "670 320 15 15" },
 
     "poi-foot-shape":              { "fill": "currentColor" },
     "poi-traffic-signals-shape":   { "fill": "currentColor" },
@@ -285,6 +290,11 @@
     "poi-junction-shape":          { "fill": "currentColor" },
     "poi-social-facility-shape":   { "fill": "currentColor" },
     "poi-elevator-shape":          { "fill": "currentColor" },
+    "poi-windmill-shape":          { "fill": "currentColor" },
+    "poi-hinduist-shape":          { "fill": "currentColor" },
+    "poi-shintoist-shape":         { "fill": "currentColor" },
+    "poi-buffer-stop-shape":       { "fill": "currentColor" },
+    "poi-railway-signals-shape":   { "fill": "currentColor" },
 
     "poi-vending-machine":      { "viewBox": "400 335 15 15" },
     "poi-dice":                 { "viewBox": "415 335 15 15" },
@@ -299,6 +309,11 @@
     "poi-chimney":              { "viewBox": "550 335 15 15" },
     "poi-bowling":              { "viewBox": "565 335 15 15" },
     "poi-binoculars":           { "viewBox": "580 335 15 15" },
+    "poi-wind":                 { "viewBox": "595 335 15 15" },
+    "poi-nuclear":              { "viewBox": "610 335 15 15" },
+    "poi-sikhist":              { "viewBox": "625 335 15 15" },
+    "poi-taoist":               { "viewBox": "640 335 15 15" },
+    "poi-milestone":            { "viewBox": "655 335 15 15" },
 
     "poi-vending-machine-shape":   { "fill": "currentColor" },
     "poi-dice-shape":              { "fill": "currentColor" },
@@ -313,6 +328,11 @@
     "poi-chimney-shape":           { "fill": "currentColor" },
     "poi-bowling-shape":           { "fill": "currentColor" },
     "poi-binoculars-shape":        { "fill": "currentColor" },
+    "poi-wind-shape":              { "fill": "currentColor" },
+    "poi-nuclear-shape":           { "fill": "currentColor" },
+    "poi-sikhist-shape":           { "fill": "currentColor" },
+    "poi-taoist-shape":            { "fill": "currentColor" },
+    "poi-milestone-shape":         { "fill": "currentColor" },
 
     "poi-vertex":               { "viewBox": "400 350 15 15" },
 

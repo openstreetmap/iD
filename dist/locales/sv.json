@@ -348,19 +348,48 @@
             "list": "Ändrad av {users}",
             "truncated_list": "Ändrad av {users} och {count} andra"
         },
-        "infobox": {
+        "info_panels": {
             "key": "I",
-            "selected": "{n} vald(a)",
-            "geometry": "Geometri",
-            "closed": "sluten",
-            "center": "Centrum",
-            "perimeter": "Omkrets",
-            "length": "Längd",
-            "area": "Område",
-            "centroid": "Centrumpunkt",
-            "location": "Positionering",
-            "metric": "Metriskt",
-            "imperial": "Brittiskt"
+            "background": {
+                "key": "B",
+                "title": "Bakgrund",
+                "zoom": "Zoom",
+                "vintage": "Ålder",
+                "unknown": "Okänt",
+                "show_tiles": "Visa kartrutor",
+                "hide_tiles": "Dölj kartrutor"
+            },
+            "history": {
+                "key": "H",
+                "title": "Historik",
+                "selected": "{n} markerad(e)",
+                "version": "Version",
+                "last_edit": "Senast redigerad",
+                "edited_by": "Redigerad av",
+                "changeset": "Ändringsset",
+                "unknown": "Okänd",
+                "link_text": "Historik på openstreetmap.org"
+            },
+            "location": {
+                "key": "L",
+                "title": "Lokalisering",
+                "unknown_location": "Okänd lokalisering"
+            },
+            "measurement": {
+                "key": "M",
+                "title": "Mätning",
+                "selected": "{n} markerad(e)",
+                "geometry": "Geometri",
+                "closed": "slutet",
+                "center": "Centrum",
+                "perimeter": "Omkrets",
+                "length": "Längd",
+                "area": "Area",
+                "centroid": "Centrumpunkt",
+                "location": "Placering",
+                "metric": "Metriskt",
+                "imperial": "Brittiskt"
+            }
         },
         "geometry": {
             "point": "Punkt",
@@ -431,7 +460,7 @@
             "switch": "Växla tillbaka till denna bakgrund",
             "custom": "Anpassa",
             "custom_button": "Ändra anpassad bakgrund",
-            "custom_prompt": "Ange en URL-mall för plattor. Giltiga symboler är {zoom}, {x} och {y} för Z/X/Y-scheman och {u} för QuadTile-scheman.",
+            "custom_prompt": "Ange en URL-mall för plattor. Giltiga nycklar är:\n  - {zoom}/{z}, {x}, {y} enligt Z/X/Y-schema\n  - {ty} för Y-koordinat enligt omvänd TMS-stil\n  - {u} för QuadTile-scheman\n  - {switch:a,b,c} för multiplex mot DNS-server\n\nExempel:\n{example}",
             "fix_misalignment": "Justera bildplacering",
             "imagery_source_faq": "Var kommer dessa flygfoton från?",
             "reset": "ta bort",
@@ -519,8 +548,8 @@
         "restore": {
             "heading": "Du har icke-sparade ändringar.",
             "description": "Du har ändringar från förra sessionen som inte har sparats. Vill du hämta dessa ändringar?",
-            "restore": "Återställ",
-            "reset": "Ta bort"
+            "restore": "Återställ mina ändringar",
+            "reset": "Ta bort mina ändringar"
         },
         "save": {
             "title": "Spara",
@@ -950,8 +979,7 @@
                 },
                 "with_selected": {
                     "title": "Med objekt markerat",
-                    "infobox": "Visa/dölj info- och mätruta",
-                    "edit_menu": "Visa/dölj redigerameny"
+                    "edit_menu": "Visa/dölj redigeringsmeny"
                 },
                 "vertex_selected": {
                     "title": "Med nod markerad",
@@ -995,6 +1023,17 @@
                     "undo": "Ångra senaste ändring",
                     "redo": "Gör om senaste ändring",
                     "save": "Spara ändringar"
+                }
+            },
+            "tools": {
+                "title": "Verktyg",
+                "info": {
+                    "title": "Information",
+                    "all": "Visa/dölj alla informationspaneler",
+                    "background": "Visa/dölj panelen Bakgrund",
+                    "history": "Visa/dölj panelen Historik",
+                    "location": "Visa/dölj panelen Lokalisering",
+                    "measurement": "Visa/dölj panelen Mätning"
                 }
             }
         },
@@ -1302,6 +1341,9 @@
                         "clockwise": "Medsols"
                     }
                 },
+                "clothes": {
+                    "label": "Kläder"
+                },
                 "club": {
                     "label": "Typ"
                 },
@@ -1488,6 +1530,10 @@
                 "generator/method": {
                     "label": "Metod"
                 },
+                "generator/output/electricity": {
+                    "label": "Effektuttaget",
+                    "placeholder": "50 MW, 100 MW, 200 MW..."
+                },
                 "generator/source": {
                     "label": "Källa"
                 },
@@ -1568,6 +1614,9 @@
                 "kerb": {
                     "label": "Trottoarkant"
                 },
+                "label": {
+                    "label": "Märkning"
+                },
                 "lamp_type": {
                     "label": "Typ"
                 },
@@ -1637,6 +1686,9 @@
                     "label": "Lokalisering"
                 },
                 "man_made": {
+                    "label": "Typ"
+                },
+                "manhole": {
                     "label": "Typ"
                 },
                 "map_size": {
@@ -1845,6 +1897,10 @@
                 },
                 "plant": {
                     "label": "Växt"
+                },
+                "plant/output/electricity": {
+                    "label": "Effektuttaget",
+                    "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
                 "population": {
                     "label": "Folkmängd"
@@ -2525,6 +2581,10 @@
                     "name": "Kyrka",
                     "terms": "Kyrka, tempel, gudshus, kyrkobyggnad, kapell, bönehus, böneplats, missionshus, dom, katedral, helgedom, gudstjänstlokal,tro, religion, helgedom, kristen, kristendom, församling, tillbedjan, predikan, katedral, kor, kapell, guds hus, gud, bönehus, socken, helgedom, tempel"
                 },
+                "amenity/place_of_worship/hindu": {
+                    "name": "Hindutempel",
+                    "terms": "hindu, hinduism, Sanatana Dharma, garbhagriha,  puja, arcana, helgedom, tempel"
+                },
                 "amenity/place_of_worship/jewish": {
                     "name": "Synagoga",
                     "terms": "Synagoga, tempel, gudshus, bönehus, böneplats, missionshus, dom, katedral, helgedom, gudstjänstlokal,tro, religion, helgedom, Jude, Judendom, tillbedjan, predikan"
@@ -2532,6 +2592,18 @@
                 "amenity/place_of_worship/muslim": {
                     "name": "Moské",
                     "terms": "moské, gudshus, kyrkobyggnad, bönehus, böneplats, helgedom, gudstjänstlokal,tro, religion, helgedom, tillbedjan, muslim, predikan, minaret"
+                },
+                "amenity/place_of_worship/shinto": {
+                    "name": "Jinja (Shintoistisk helgedom)",
+                    "terms": "Jinja, shintoism, Shinto, kami, torii, yashiro, miya, jingū, Shinto shrine, shrine, shintohelgedom, helgedom, tempel"
+                },
+                "amenity/place_of_worship/sikh": {
+                    "name": "Sikhiskt tempel",
+                    "terms": "Sikh, Sikh-tempel, Sikhtempel, Sikhism, Gurudwara, tempel, helgedom"
+                },
+                "amenity/place_of_worship/taoist": {
+                    "name": "Taoistiskt tempel",
+                    "terms": "Taoism, Taoistiskt tempel, daoism, tao, tempel, helgedom"
                 },
                 "amenity/planetarium": {
                     "name": "Planetarium",
@@ -2591,6 +2663,10 @@
                 "amenity/school": {
                     "name": "Skolområde",
                     "terms": "Skolgård, skolområde, Campus, universitetsområde, högskoleområde, universitet, högskola, grundskola, mellanstadium, lågstadium, högstadium, gymnasium"
+                },
+                "amenity/scrapyard": {
+                    "name": "Bilskrot",
+                    "terms": "Bilskrot, skrot, bil, fordon, metall, bärgning, vrak, bildemontering, metallavfall, metallskräp, metallskrot, skrotupplag, skrotningsanläggning"
                 },
                 "amenity/shelter": {
                     "name": "Väderskydd",
@@ -2693,6 +2769,10 @@
                 "amenity/veterinary": {
                     "name": "Veterinär ",
                     "terms": "Veterinär, djurläkare, djurdoktor, djurklinik, djursjukhus"
+                },
+                "amenity/waste/dog_excrement": {
+                    "name": "Sopkärl för hundbajspåsar",
+                    "terms": "Sopkärl för hundbajspåsar, hundbajs, hundbajspåsar, hundbajspåse, hund, bajs, bajspåsar, soptunna, sopkärl, hundskit, skitpåse"
                 },
                 "amenity/waste_basket": {
                     "name": "Soptunna (liten)",
@@ -3909,9 +3989,25 @@
                     "name": "Vattenverk",
                     "terms": "Vattenverk, vattenreningsanläggning, vattenreningsverk,\nvattenanläggning, vatten"
                 },
+                "man_made/watermill": {
+                    "name": "Vattenkvarn",
+                    "terms": "Vattenkvarn, kvarn, kvarnhjul, vattenmölla, mölla, skovelhjul, skvalta, skvaltkvarn"
+                },
+                "man_made/windmill": {
+                    "name": "Väderkvarn",
+                    "terms": "Väderkvarn, vindmölla, vädemölle, vindkraft, kvarn, mölla"
+                },
                 "man_made/works": {
                     "name": "Fabrik",
                     "terms": "Fabrik, montering, bryggeri, bil, plast, bearbetning, tillverkning, raffinaderi, fabrikstillverkning, industri, verkstad, fabriksbyggnad, monteringsanläggning, bearbetningsanläggning, möbeltillverkning, oljeraffinaderi"
+                },
+                "manhole": {
+                    "name": "Gatubrunn",
+                    "terms": "Gatubrunn, brunn, dagvattenbrunn, dagvatten, avlopp, telekom, telefoni, manhålslucka, Brunnslock, manlucka, manhål, avloppsbrunn, a-brunn, Brandpost, Rensbrunn"
+                },
+                "manhole/drain": {
+                    "name": "Dagvattenbrunn",
+                    "terms": "Dagvatten, dagvattenbrunn, dränering, regn, regnvatten, dagbrunn, avlopp, avloppsvatten, avloppsbrunn, smältvatten, spillvatten, avrinning"
                 },
                 "natural": {
                     "name": "Naturlig",
@@ -4184,6 +4280,14 @@
                 "power/generator": {
                     "name": "Elgenerator",
                     "terms": "Elgenerator, kraftgenerator, generator, strömtillverkning, kraftkälla"
+                },
+                "power/generator/source_nuclear": {
+                    "name": "Kärnkraftsreaktor",
+                    "terms": "Kärnkraftsreaktor, kärnkraft, reaktor, kärnenergi, atomenergi, atomkraft, atomkraftverk, nukleär energi,kärnkraftverk, kärnkraftvärk, kärnreaktor, kärnanläggning, kärnkraftsanläggning,"
+                },
+                "power/generator/source_wind": {
+                    "name": "Vindturbin",
+                    "terms": "Vindturbin, vindkraft, vindkraftverk, vindmölla"
                 },
                 "power/line": {
                     "name": "Högspänningsledning",
@@ -5192,6 +5296,20 @@
                     "text": "© Sarah Hoffmann, CC by-SA 3.0, kartdata OpenStreetMaps bidragsgivare, ODbL 1.0"
                 },
                 "name": "Waymarked Trails: Vintersport"
+            },
+            "basemap.at": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Baskarta över Österrike, baserad på offentlig data.",
+                "name": "basemap.at"
+            },
+            "basemap.at-orthofoto": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Ortofoto-lager tillhandahållen av basemap.at. \"Efterträdare\" till geoimage.at imagery.",
+                "name": "basemap.at ortofoto"
             },
             "hike_n_bike": {
                 "attribution": {

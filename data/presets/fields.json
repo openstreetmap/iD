@@ -416,6 +416,11 @@
                 }
             }
         },
+        "clothes": {
+            "key": "clothes",
+            "type": "semiCombo",
+            "label": "Clothes"
+        },
         "club": {
             "key": "club",
             "type": "typeCombo",
@@ -446,7 +451,7 @@
         "content": {
             "key": "content",
             "type": "combo",
-            "label": "Contents"
+            "label": "Content"
         },
         "country": {
             "key": "country",
@@ -727,6 +732,12 @@
             "type": "combo",
             "label": "Method"
         },
+        "generator/output/electricity": {
+            "key": "generator:output:electricity",
+            "type": "text",
+            "label": "Power Output",
+            "placeholder": "50 MW, 100 MW, 200 MW..."
+        },
         "generator/source": {
             "key": "generator:source",
             "type": "combo",
@@ -736,12 +747,6 @@
             "key": "generator:type",
             "type": "combo",
             "label": "Type"
-        },
-        "golf_hole": {
-            "key": "ref",
-            "type": "text",
-            "label": "Reference",
-            "placeholder": "Hole number (1-18)"
         },
         "grape_variety": {
             "key": "grape_variety",
@@ -1023,6 +1028,12 @@
             "label": "Max Weight",
             "snake_case": false
         },
+        "milestone_position": {
+            "key": "railway:position",
+            "type": "text",
+            "placeholder": "Distance to one decimal (123.4)",
+            "label": "Milestone Position"
+        },
         "mtb/scale": {
             "key": "mtb:scale",
             "type": "combo",
@@ -1075,6 +1086,7 @@
             "key": "name",
             "type": "localized",
             "label": "Name",
+            "universal": true,
             "placeholder": "Common name (if any)"
         },
         "natural": {
@@ -1297,6 +1309,12 @@
             "type": "combo",
             "label": "Plant"
         },
+        "plant/output/electricity": {
+            "key": "plant:output:electricity",
+            "type": "text",
+            "label": "Power Output",
+            "placeholder": "500 MW, 1000 MW, 2000 MW..."
+        },
         "population": {
             "key": "population",
             "type": "text",
@@ -1344,10 +1362,46 @@
                 }
             }
         },
+        "ref_aeroway_gate": {
+            "key": "ref",
+            "type": "text",
+            "label": "Gate Number"
+        },
+        "ref_golf_hole": {
+            "key": "ref",
+            "type": "text",
+            "label": "Hole Number",
+            "placeholder": "1-18"
+        },
+        "ref_highway_junction": {
+            "key": "ref",
+            "type": "text",
+            "label": "Junction Number"
+        },
+        "ref_platform": {
+            "key": "ref",
+            "type": "text",
+            "label": "Platform Number"
+        },
+        "ref_road_number": {
+            "key": "ref",
+            "type": "text",
+            "label": "Road Number"
+        },
+        "ref_route": {
+            "key": "ref",
+            "type": "text",
+            "label": "Route Number"
+        },
+        "ref_stop_position": {
+            "key": "ref",
+            "type": "text",
+            "label": "Stop Number"
+        },
         "ref": {
             "key": "ref",
             "type": "text",
-            "label": "Reference"
+            "label": "Reference Code"
         },
         "relation": {
             "key": "type",

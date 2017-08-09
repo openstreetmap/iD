@@ -102,6 +102,12 @@ export function uiEntityEditor(context) {
             .append('div')
             .attr('class', 'raw-membership-editor inspector-inner');
 
+        enter
+            .append('input')
+            .attr('type', 'text')
+            .attr('class', 'key-trap');
+
+
         // Update
         body = body
             .merge(enter);
@@ -151,6 +157,15 @@ export function uiEntityEditor(context) {
             .call(uiRawMembershipEditor(context)
                 .entityID(id));
 
+        body.select('.key-trap')
+            .on('keydown.key-trap', function() {
+                // On tabbing, send focus back to the first field on the inspector-body
+                // (probably the `name` field) #4159
+                if (d3.event.keyCode === 9 && !d3.event.shiftKey) {
+                    d3.event.preventDefault();
+                    body.select('input').node().focus();
+                }
+            });
 
         context.history()
             .on('change.entity-editor', historyChanged);

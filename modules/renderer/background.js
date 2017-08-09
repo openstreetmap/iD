@@ -15,13 +15,6 @@ export function rendererBackground(context) {
         backgroundSources;
 
 
-    function findSource(id) {
-        return _.find(backgroundSources, function(d) {
-            return d.id && d.id === id;
-        });
-    }
-
-
     function background(selection) {
         var base = selection.selectAll('.layer-background')
             .data([0]);
@@ -62,7 +55,7 @@ export function rendererBackground(context) {
 
         var id = b.id;
         if (id === 'custom') {
-            id = 'custom:' + b.template;
+            id = 'custom:' + b.template();
         }
 
         if (id) {
@@ -133,14 +126,15 @@ export function rendererBackground(context) {
         // test source against OSM imagery blacklists..
         var blacklists = context.connection().imageryBlacklists();
 
-        var fail = false,
+        var template = d.template(),
+            fail = false,
             tested = 0,
             regex, i;
 
         for (i = 0; i < blacklists.length; i++) {
             try {
                 regex = new RegExp(blacklists[i]);
-                fail = regex.test(d.template);
+                fail = regex.test(template);
                 tested++;
                 if (fail) break;
             } catch (e) {
@@ -151,18 +145,25 @@ export function rendererBackground(context) {
         // ensure at least one test was run.
         if (!tested) {
             regex = new RegExp('.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*');
-            fail = regex.test(d.template);
+            fail = regex.test(template);
         }
 
-        baseLayer.source(!fail ? d : rendererBackgroundSource.None());
+        baseLayer.source(!fail ? d : background.findSource('none'));
         dispatch.call('change');
         background.updateImagery();
         return background;
     };
 
 
+    background.findSource = function(id) {
+        return _.find(backgroundSources, function(d) {
+            return d.id && d.id === id;
+        });
+    };
+
+
     background.bing = function() {
-        background.baseLayerSource(findSource('Bing'));
+        background.baseLayerSource(background.findSource('Bing'));
     };
 
 
@@ -228,10 +229,12 @@ export function rendererBackground(context) {
 
         var dataImagery = data.imagery || [],
             q = utilStringQs(window.location.hash.substring(1)),
-            chosen = q.background || q.layer,
+            requested = q.background || q.layer,
             extent = parseMap(q.map),
+            first,
             best;
 
+        // Add all the available imagery sources
         backgroundSources = dataImagery.map(function(source) {
             if (source.type === 'bing') {
                 return rendererBackgroundSource.Bing(source, dispatch);
@@ -240,16 +243,33 @@ export function rendererBackground(context) {
             }
         });
 
+        first = backgroundSources.length && backgroundSources[0];
+
+        // Add 'None'
         backgroundSources.unshift(rendererBackgroundSource.None());
 
-        if (!chosen && extent) {
+        // Add 'Custom'
+        var template = context.storage('background-custom-template') || '';
+        var custom = rendererBackgroundSource.Custom(template);
+        backgroundSources.unshift(custom);
+
+
+        // Decide which background layer to display
+        if (!requested && extent) {
             best = _.find(this.sources(extent), function(s) { return s.best(); });
         }
-
-        if (chosen && chosen.indexOf('custom:') === 0) {
-            background.baseLayerSource(rendererBackgroundSource.Custom(chosen.replace(/^custom:/, '')));
+        if (requested && requested.indexOf('custom:') === 0) {
+            template = requested.replace(/^custom:/, '');
+            background.baseLayerSource(custom.template(template));
+            context.storage('background-custom-template', template);
         } else {
-            background.baseLayerSource(findSource(chosen) || best || findSource('Bing') || backgroundSources[1] || backgroundSources[0]);
+            background.baseLayerSource(
+                background.findSource(requested) ||
+                best ||
+                background.findSource('Bing') ||
+                first ||
+                background.findSource('none')
+            );
         }
 
         var locator = _.find(backgroundSources, function(d) {
@@ -262,7 +282,7 @@ export function rendererBackground(context) {
 
         var overlays = (q.overlays || '').split(',');
         overlays.forEach(function(overlay) {
-            overlay = findSource(overlay);
+            overlay = background.findSource(overlay);
             if (overlay) {
                 background.toggleOverlayLayer(overlay);
             }

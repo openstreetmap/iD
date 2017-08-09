@@ -5,6 +5,8 @@
             "name": "2013 aerial imagery for San Juan County WA",
             "type": "tms",
             "template": "http://sjcgis.org/arcgis/rest/services/Basemaps/Aerials_2013_WM/MapServer/tile/{zoom}/{y}/{x}",
+            "endDate": "2013-06-01T00:00:00.000Z",
+            "startDate": "2013-05-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 19
@@ -162,6 +164,8 @@
             "name": "2016 aerial imagery for San Juan County WA",
             "type": "tms",
             "template": "http://sjcgis.org/arcgis/rest/services/Basemaps/Aerials_2016_WM/MapServer/tile/{zoom}/{y}/{x}",
+            "endDate": "2016-07-01T00:00:00.000Z",
+            "startDate": "2016-05-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 19
@@ -1631,6 +1635,8 @@
             "name": "Basemap geoportail.lu",
             "type": "tms",
             "template": "https://{switch:wmts3,wmts4}.geoportail.lu/opendata/wmts/basemap/GLOBAL_WEBMERCATOR_4_V3/{zoom}/{x}/{y}.png",
+            "endDate": "2010-07-20T00:00:00.000Z",
+            "startDate": "2013-07-19T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 20
@@ -6528,6 +6534,8 @@
             "name": "British Columbia Mosaic",
             "type": "tms",
             "template": "http://{switch:a,b,c,d}.imagery.paulnorman.ca/tiles/bc_mosaic/{zoom}/{x}/{y}.png",
+            "endDate": "2013-06-01T00:00:00.000Z",
+            "startDate": "2009-01-01T00:00:00.000Z",
             "scaleExtent": [
                 9,
                 20
@@ -8645,6 +8653,8 @@
             "name": "City of Cape Town 2013 Aerial",
             "type": "tms",
             "template": "http://{switch:a,b,c}.coct.aerial.openstreetmap.org.za/layer/za_coct_aerial_2013/{zoom}/{x}/{y}.jpg",
+            "endDate": "2015-01-01T00:00:00.000Z",
+            "startDate": "2013-01-01T00:00:00.000Z",
             "scaleExtent": [
                 1,
                 21
@@ -9450,6 +9460,8 @@
             "name": "City of Cape Town 2015 Aerial",
             "type": "tms",
             "template": "http://{switch:a,b,c}.coct.aerial.openstreetmap.org.za/layer/za_coct_aerial_2015/{zoom}/{x}/{y}.jpg",
+            "endDate": "2016-01-01T00:00:00.000Z",
+            "startDate": "2015-01-01T00:00:00.000Z",
             "scaleExtent": [
                 1,
                 21
@@ -14343,6 +14355,8 @@
             "name": "FÖMI orthophoto 2000",
             "type": "tms",
             "template": "http://e.tile.openstreetmap.hu/ortofoto2000/{zoom}/{x}/{y}.jpg",
+            "endDate": "2000-01-01T00:00:00.000Z",
+            "startDate": "2000-01-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 17
@@ -16651,6 +16665,8 @@
             "name": "FÖMI orthophoto 2005",
             "type": "tms",
             "template": "http://e.tile.openstreetmap.hu/ortofoto2005/{zoom}/{x}/{y}.jpg",
+            "endDate": "2005-01-01T00:00:00.000Z",
+            "startDate": "2005-01-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 17
@@ -24559,6 +24575,8 @@
             "name": "imagico.de OSM images for mapping: Adams Bridge",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R119_N09_20160327T050917&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-03-27T00:00:00.000Z",
+            "startDate": "2016-03-27T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -24597,6 +24615,8 @@
             "name": "imagico.de OSM images for mapping: Alaska Range",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80700162014211LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2014-07-31T00:00:00.000Z",
+            "startDate": "2014-07-31T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 12
@@ -24639,6 +24659,8 @@
             "name": "imagico.de OSM images for mapping: Bakun Reservoir",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81190582014075LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2014-03-16T00:00:00.000Z",
+            "startDate": "2014-03-16T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -24681,6 +24703,8 @@
             "name": "imagico.de OSM images for mapping: Batam",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81250592016107LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-01-01T00:00:00.000Z",
+            "startDate": "2014-01-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -24719,6 +24743,8 @@
             "name": "imagico.de OSM images for mapping: Bouvet Island",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81800982013291LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2013-10-18T00:00:00.000Z",
+            "startDate": "2013-10-18T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -24758,6 +24784,8 @@
             "name": "imagico.de OSM images for mapping: Cental Alps in late September 2016",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R065_N47_20160929T102022&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-09-29T00:00:00.000Z",
+            "startDate": "2016-09-29T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -24808,6 +24836,8 @@
             "name": "imagico.de OSM images for mapping: Clerke Rocks",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC82050982015344LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-12-10T00:00:00.000Z",
+            "startDate": "2015-12-10T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -24850,6 +24880,8 @@
             "name": "imagico.de OSM images for mapping: Coropuna",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=EO1A0040712016264110KF&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-09-21T00:00:00.000Z",
+            "startDate": "2016-09-21T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -24896,6 +24928,8 @@
             "name": "imagico.de OSM images for mapping: Cotonou",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R022_N06_20151221T103009&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-12-21T00:00:00.000Z",
+            "startDate": "2015-12-21T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -24938,6 +24972,8 @@
             "name": "imagico.de OSM images for mapping: Darwin and Wolf islands, Galapagos",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R040_N01_20160311T164128&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-03-11T00:00:00.000Z",
+            "startDate": "2016-03-11T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -24976,6 +25012,8 @@
             "name": "imagico.de OSM images for mapping: Eastern Devon Island coast",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80360072014245LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2014-09-02T00:00:00.000Z",
+            "startDate": "2014-09-02T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 11
@@ -25014,6 +25052,8 @@
             "name": "imagico.de OSM images for mapping: Eastern Iceland",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC82160152013239LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2013-08-27T00:00:00.000Z",
+            "startDate": "2013-08-27T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 12
@@ -25052,6 +25092,8 @@
             "name": "imagico.de OSM images for mapping: El Altar",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=AST_L1T_00302052007154424_20150518041444_91492&z={zoom}&x={x}&y={-y}",
+            "endDate": "2012-02-05T00:00:00.000Z",
+            "startDate": "2012-02-05T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -25090,6 +25132,8 @@
             "name": "imagico.de OSM images for mapping: Elephant Island/Clarence Island",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R009_S61_20160109&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-01-09T00:00:00.000Z",
+            "startDate": "2016-01-09T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -25132,6 +25176,8 @@
             "name": "imagico.de OSM images for mapping: Enderby Land and Kemp Coast",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=enderby&z={zoom}&x={x}&y={-y}",
+            "endDate": "2017-03-27T00:00:00.000Z",
+            "startDate": "2017-01-25T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -25182,6 +25228,8 @@
             "name": "imagico.de OSM images for mapping: Fogo, Cape Verde",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC82100502015347LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-12-13T00:00:00.000Z",
+            "startDate": "2015-12-13T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -25220,6 +25268,8 @@
             "name": "imagico.de OSM images for mapping: Greenland mosaic",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=greenland&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-01-01T00:00:00.000Z",
+            "startDate": "2013-01-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 12
@@ -25870,6 +25920,8 @@
             "name": "imagico.de OSM images for mapping: Heard Island coast",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R047_S54_20160411T044330&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-04-12T00:00:00.000Z",
+            "startDate": "2016-04-12T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -25912,6 +25964,8 @@
             "name": "imagico.de OSM images for mapping: Isla Londonderry",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC82280982013259LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2013-09-16T00:00:00.000Z",
+            "startDate": "2013-09-16T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 12
@@ -25962,6 +26016,8 @@
             "name": "imagico.de OSM images for mapping: Kerch Strait",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R021_N44_20160807T083013&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-08-07T00:00:00.000Z",
+            "startDate": "2016-08-07T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -26000,6 +26056,8 @@
             "name": "imagico.de OSM images for mapping: Landsat off-nadir July 2016",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=ls_polar2&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-07-17T00:00:00.000Z",
+            "startDate": "2016-07-17T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 10
@@ -26050,6 +26108,8 @@
             "name": "imagico.de OSM images for mapping: Leskov Island ASTER",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=AST_L1T_00311162013112731_20150618142416_109190&z={zoom}&x={x}&y={-y}",
+            "endDate": "2013-11-16T00:00:00.000Z",
+            "startDate": "2013-11-16T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -26088,6 +26148,8 @@
             "name": "imagico.de OSM images for mapping: Leskov Island Landsat",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81991002015286LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-10-13T00:00:00.000Z",
+            "startDate": "2015-10-13T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -26130,6 +26192,8 @@
             "name": "imagico.de OSM images for mapping: May 2013 off-nadir Landsat",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=ls_polar&z={zoom}&x={x}&y={-y}",
+            "endDate": "2013-05-17T00:00:00.000Z",
+            "startDate": "2013-05-17T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 10
@@ -26200,6 +26264,8 @@
             "name": "imagico.de OSM images for mapping: Mount Kenya 2016",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R092_S02_20160613T075613&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-06-13T00:00:00.000Z",
+            "startDate": "2016-06-13T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -26238,6 +26304,8 @@
             "name": "imagico.de OSM images for mapping: Mount Kilimanjaro 2016",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R092_S05_20160802T075556&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-08-02T00:00:00.000Z",
+            "startDate": "2016-08-02T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -26276,6 +26344,8 @@
             "name": "imagico.de OSM images for mapping: New Ireland",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80940622015159LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-06-08T00:00:00.000Z",
+            "startDate": "2015-06-08T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -26314,6 +26384,8 @@
             "name": "imagico.de OSM images for mapping: North Sea Coast 2016",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=northsea_s2_2016&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-09-25T00:00:00.000Z",
+            "startDate": "2016-09-25T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -26360,6 +26432,8 @@
             "name": "imagico.de OSM images for mapping: Northern and Polar Ural mountains August 2016",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=ural_s2_2016&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-08-12T00:00:00.000Z",
+            "startDate": "2016-08-12T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -26406,6 +26480,8 @@
             "name": "imagico.de OSM images for mapping: Northern Ellesmere Island",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=nellesmere_ast&z={zoom}&x={x}&y={-y}",
+            "endDate": "2012-07-09T00:00:00.000Z",
+            "startDate": "2012-07-09T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 10
@@ -26452,6 +26528,8 @@
             "name": "imagico.de OSM images for mapping: Northern Ellesmere Island July 2016",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=nellesmere_ast_2016&z={zoom}&x={x}&y={-y}",
+            "endDate": "2012-07-15T00:00:00.000Z",
+            "startDate": "2012-07-08T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 10
@@ -26502,6 +26580,8 @@
             "name": "imagico.de OSM images for mapping: Northern German west coast tidalflats",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81960222015233LGN00vis&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-08-21T00:00:00.000Z",
+            "startDate": "2015-08-21T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 12
@@ -26544,6 +26624,8 @@
             "name": "imagico.de OSM images for mapping: Northern German west coast tidalflats (infrared)",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81960222015233LGN00ir&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-08-21T00:00:00.000Z",
+            "startDate": "2015-08-21T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 12
@@ -26586,6 +26668,8 @@
             "name": "imagico.de OSM images for mapping: Northern Greenland ASTER",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=ngreenland_ast&z={zoom}&x={x}&y={-y}",
+            "endDate": "2012-08-13T00:00:00.000Z",
+            "startDate": "2005-06-21T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 10
@@ -26644,6 +26728,8 @@
             "name": "imagico.de OSM images for mapping: Northwest Heard Island",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=EO1A1350972013086110KF&z={zoom}&x={x}&y={-y}",
+            "endDate": "2013-03-13T00:00:00.000Z",
+            "startDate": "2013-03-13T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -26690,6 +26776,8 @@
             "name": "imagico.de OSM images for mapping: Panama Canal",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R111_N09_20160604T154554&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-06-07T00:00:00.000Z",
+            "startDate": "2016-06-07T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -26728,6 +26816,8 @@
             "name": "imagico.de OSM images for mapping: Panama Canal - Pacific side",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=EO1A0120532016364110KF&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-12-30T00:00:00.000Z",
+            "startDate": "2016-12-30T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -26774,6 +26864,8 @@
             "name": "imagico.de OSM images for mapping: Pechora Sea Coast",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R078_N68_20160930T081002&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-09-30T00:00:00.000Z",
+            "startDate": "2016-09-30T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -26832,6 +26924,8 @@
             "name": "imagico.de OSM images for mapping: Pensacola Mountains",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81511242016033LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-02-02T00:00:00.000Z",
+            "startDate": "2016-02-02T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 10
@@ -26878,6 +26972,8 @@
             "name": "imagico.de OSM images for mapping: Prokletije Mountains",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R136_N41_20150831T093006&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-08-31T00:00:00.000Z",
+            "startDate": "2015-08-31T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -26916,6 +27012,8 @@
             "name": "imagico.de OSM images for mapping: Qasigiannguit",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=DMS_1142622_03746_20110415_17533956&z={zoom}&x={x}&y={-y}",
+            "endDate": "2011-04-15T00:00:00.000Z",
+            "startDate": "2011-04-15T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 15
@@ -26954,6 +27052,8 @@
             "name": "imagico.de OSM images for mapping: Rann of Kutch",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81510432015030LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-01-01T00:00:00.000Z",
+            "startDate": "2015-01-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 12
@@ -26996,6 +27096,8 @@
             "name": "imagico.de OSM images for mapping: Rila and Pirin Mountains",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R093_N41_20150828T092005&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-08-28T00:00:00.000Z",
+            "startDate": "2015-08-28T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -27038,6 +27140,8 @@
             "name": "imagico.de OSM images for mapping: Rwenzori Mountains",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81730602015040LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-02-09T00:00:00.000Z",
+            "startDate": "2015-02-09T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -27076,6 +27180,8 @@
             "name": "imagico.de OSM images for mapping: Rwenzori Mountains 2016",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R078_N01_20160702T082522&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-07-02T00:00:00.000Z",
+            "startDate": "2016-07-02T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -27114,6 +27220,8 @@
             "name": "imagico.de OSM images for mapping: Scott Island",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80611072014036LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2014-02-05T00:00:00.000Z",
+            "startDate": "2014-02-05T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -27152,6 +27260,8 @@
             "name": "imagico.de OSM images for mapping: Shag Rocks",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC82100972015347LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-12-13T00:00:00.000Z",
+            "startDate": "2015-12-13T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -27190,6 +27300,8 @@
             "name": "imagico.de OSM images for mapping: Southeastern Sulawesi",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81130622013270LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2013-09-27T00:00:00.000Z",
+            "startDate": "2013-09-27T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -27236,6 +27348,8 @@
             "name": "imagico.de OSM images for mapping: Southern Transantarctic Mountains",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80281222016035LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-02-04T00:00:00.000Z",
+            "startDate": "2016-02-04T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 10
@@ -27294,6 +27408,8 @@
             "name": "imagico.de OSM images for mapping: Svalbard mosaic",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=s2sval&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-01-01T00:00:00.000Z",
+            "startDate": "2016-01-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -27404,6 +27520,8 @@
             "name": "imagico.de OSM images for mapping: Thule Air Base",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=DMS_1142636_160xx_20110507_1822xxxx&z={zoom}&x={x}&y={-y}",
+            "endDate": "2011-05-07T00:00:00.000Z",
+            "startDate": "2011-05-07T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 15
@@ -27450,6 +27568,8 @@
             "name": "imagico.de OSM images for mapping: Thule Airbase DMS low altitude overflight September 2015",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=dms_thule2_2015.09.25&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-09-25T00:00:00.000Z",
+            "startDate": "2015-09-25T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 17
@@ -27504,6 +27624,8 @@
             "name": "imagico.de OSM images for mapping: Thule Airbase DMS overflight October 2015",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=dms_thule_2015.10.06&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-10-06T00:00:00.000Z",
+            "startDate": "2015-10-06T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 16
@@ -27554,6 +27676,8 @@
             "name": "imagico.de OSM images for mapping: Thule Airbase DMS overflight September 2015",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=dms_thule_2015.09.25&z={zoom}&x={x}&y={-y}",
+            "endDate": "2015-09-25T00:00:00.000Z",
+            "startDate": "2015-09-25T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 16
@@ -27600,6 +27724,8 @@
             "name": "imagico.de OSM images for mapping: Ushakov Island August 2016",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R094_N79_20160812T105622&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-08-12T00:00:00.000Z",
+            "startDate": "2016-08-12T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 12
@@ -27638,6 +27764,8 @@
             "name": "imagico.de OSM images for mapping: Vanatinai",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC80910682014358LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2014-12-24T00:00:00.000Z",
+            "startDate": "2014-12-24T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -27680,6 +27808,8 @@
             "name": "imagico.de OSM images for mapping: Volcán Calbuco",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC82330892016031LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-01-31T00:00:00.000Z",
+            "startDate": "2016-01-31T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -27722,6 +27852,8 @@
             "name": "imagico.de OSM images for mapping: Vostochny Cosmodrome",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R089_N52_20160623T024048&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-06-23T00:00:00.000Z",
+            "startDate": "2016-06-23T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -27760,6 +27892,8 @@
             "name": "imagico.de OSM images for mapping: Western Karakoram",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=LC81490352013282LGN00&z={zoom}&x={x}&y={-y}",
+            "endDate": "2013-10-09T00:00:00.000Z",
+            "startDate": "2013-10-09T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 13
@@ -27798,6 +27932,8 @@
             "name": "imagico.de OSM images for mapping: Willkanuta Mountains and Quelccaya Ice Cap",
             "type": "tms",
             "template": "http://imagico.de/map/osmim_tiles.php?layer=S2A_R039_S15_20160510T145731&z={zoom}&x={x}&y={-y}",
+            "endDate": "2016-05-10T00:00:00.000Z",
+            "startDate": "2016-05-10T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 14
@@ -28589,6 +28725,8 @@
             "name": "Kanton Aargau 25cm (AGIS 2011)",
             "type": "tms",
             "template": "http://tiles.poole.ch/AGIS/OF2011/{zoom}/{x}/{y}.png",
+            "endDate": "2011-01-01T00:00:00.000Z",
+            "startDate": "2011-01-01T00:00:00.000Z",
             "scaleExtent": [
                 14,
                 19
@@ -29240,6 +29378,8 @@
             "name": "Kanton Aargau 25cm (AGIS 2014)",
             "type": "tms",
             "template": "http://mapproxy.osm.ch:8080/tiles/AGIS2014/EPSG900913/{zoom}/{x}/{y}.png?origin=nw",
+            "endDate": "2014-01-01T00:00:00.000Z",
+            "startDate": "2014-01-01T00:00:00.000Z",
             "scaleExtent": [
                 8,
                 19
@@ -29891,6 +30031,8 @@
             "name": "Kanton Aargau 25cm (AGIS 2016)",
             "type": "tms",
             "template": "http://mapproxy.osm.ch:8080/tiles/AGIS2016/EPSG900913/{zoom}/{x}/{y}.png?origin=nw",
+            "endDate": "2016-01-01T00:00:00.000Z",
+            "startDate": "2016-01-01T00:00:00.000Z",
             "scaleExtent": [
                 8,
                 19
@@ -32526,6 +32668,8 @@
             "name": "Kelowna 2012",
             "type": "tms",
             "template": "http://{switch:a,b,c,d}.tile.paulnorman.ca/kelowna2012/{zoom}/{x}/{y}.png",
+            "endDate": "2012-05-14T00:00:00.000Z",
+            "startDate": "2012-05-13T00:00:00.000Z",
             "scaleExtent": [
                 9,
                 20
@@ -33324,6 +33468,8 @@
             "name": "Landsat 233055",
             "type": "tms",
             "template": "http://{switch:a,b,c,d}.tile.paulnorman.ca/landsat_233055/{zoom}/{x}/{y}.png",
+            "endDate": "2013-09-03T00:00:00.000Z",
+            "startDate": "2013-09-03T00:00:00.000Z",
             "scaleExtent": [
                 5,
                 14
@@ -33359,6 +33505,8 @@
             "name": "Latest southwest British Columbia Landsat",
             "type": "tms",
             "template": "http://{switch:a,b,c,d}.tile.paulnorman.ca/landsat_047026/{zoom}/{x}/{y}.png",
+            "endDate": "2013-09-12T00:00:00.000Z",
+            "startDate": "2013-09-12T00:00:00.000Z",
             "scaleExtent": [
                 5,
                 13
@@ -34067,6 +34215,8 @@
             "name": "Lithuania - NŽT ORT10LT",
             "type": "tms",
             "template": "http://ort10lt.openmap.lt/g16/{zoom}/{x}/{y}.jpeg",
+            "endDate": "2016-01-01T00:00:00.000Z",
+            "startDate": "2010-01-01T00:00:00.000Z",
             "scaleExtent": [
                 4,
                 18
@@ -36754,6 +36904,8 @@
             "name": "MD Latest 6 Inch Aerial Imagery",
             "type": "tms",
             "template": "http://whoots.mapwarper.net/tms/{zoom}/{x}/{y}/MD_SixInchImagery/http://geodata.md.gov/imap/services/Imagery/MD_SixInchImagery/MapServer/WmsServer",
+            "endDate": "2016-01-01T00:00:00.000Z",
+            "startDate": "2013-01-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 20
@@ -37641,6 +37793,8 @@
             "name": "NJ 2015 Aerial Imagery (Infrared)",
             "type": "tms",
             "template": "http://whoots.mapwarper.net/tms/{zoom}/{x}/{y}/Infrared2015/http://geodata.state.nj.us/imagerywms/Infrared2015",
+            "endDate": "2015-05-03T00:00:00.000Z",
+            "startDate": "2015-03-29T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 20
@@ -38098,6 +38252,8 @@
             "name": "NJ 2015 Aerial Imagery (Natural Color)",
             "type": "tms",
             "template": "http://whoots.mapwarper.net/tms/{zoom}/{x}/{y}/Natural2015/http://geodata.state.nj.us/imagerywms/Natural2015",
+            "endDate": "2015-05-03T00:00:00.000Z",
+            "startDate": "2015-03-29T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 20
@@ -45994,6 +46150,7 @@
             "name": "NLSC General Map with Contour line",
             "type": "tms",
             "template": "http://wmts.nlsc.gov.tw/wmts/EMAP5_OPENDATA/default/EPSG:3857/{zoom}/{y}/{x}",
+            "startDate": "2015-01-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 15
@@ -48853,6 +49010,8 @@
             "name": "Ortho 2010 geoportail.lu",
             "type": "tms",
             "template": "https://{switch:wmts3,wmts4}.geoportail.lu/opendata/wmts/ortho_2010/GLOBAL_WEBMERCATOR_4_V3/{zoom}/{x}/{y}.jpeg",
+            "endDate": "2010-07-02T00:00:00.000Z",
+            "startDate": "2010-06-24T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 20
@@ -49774,6 +49933,8 @@
             "name": "Ortho 2013 geoportail.lu",
             "type": "tms",
             "template": "https://{switch:wmts3,wmts4}.geoportail.lu/opendata/wmts/ortho_2013/GLOBAL_WEBMERCATOR_4_V3/{zoom}/{x}/{y}.jpeg",
+            "endDate": "2013-07-20T00:00:00.000Z",
+            "startDate": "2013-07-19T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 20
@@ -50695,6 +50856,8 @@
             "name": "Ortho 2016 geoportail.lu",
             "type": "tms",
             "template": "https://{switch:wmts3,wmts4}.geoportail.lu/opendata/wmts/ortho_2016/GLOBAL_WEBMERCATOR_4_V3/{zoom}/{x}/{y}.jpeg",
+            "endDate": "2016-08-16T00:00:00.000Z",
+            "startDate": "2013-08-30T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 20
@@ -57237,6 +57400,7 @@
             "name": "Sóskút, Pusztazámor, Tárnok, Diósd ortophoto 2017",
             "type": "tms",
             "template": "http://adam.openstreetmap.hu/mapproxy/tiles/1.0.0/Soskut-Tarnok-Pusztazamor-Diosd/mercator/{zoom}/{x}/{y}.png",
+            "startDate": "2017-03-01T00:00:00.000Z",
             "polygon": [
                 [
                     [
@@ -60783,10 +60947,12 @@
             "terms_text": "© Autonomen Provinz Bozen/Provincia Autonoma di Bolzano CC-BY 3.0"
         },
         {
-            "id": "South-Tyrol-Orthofoto2014",
-            "name": "South Tyrol Orthofoto 2014",
+            "id": "South-Tyrol-Orthofoto-2014-2015",
+            "name": "South Tyrol Orthofoto 2014/2015",
             "type": "tms",
-            "template": "http://geoservices.buergernetz.bz.it/geoserver/gwc/service/wmts/?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=P_BZ_OF_2014_EPSG3857&STYLE=default&TILEMATRIXSET=GoogleMapsCompatible&TILEMATRIX=GoogleMapsCompatible%3A{zoom}&TILEROW={y}&TILECOL={x}&FORMAT=image%2Fjpeg",
+            "template": "http://geoservices.buergernetz.bz.it/geoserver/gwc/service/wmts/?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=P_BZ_OF_2014_2015_EPSG3857&STYLE=default&TILEMATRIXSET=GoogleMapsCompatible&TILEMATRIX=GoogleMapsCompatible%3A{zoom}&TILEROW={y}&TILECOL={x}&FORMAT=image%2Fjpeg",
+            "endDate": "2015-11-01T00:00:00.000Z",
+            "startDate": "2014-07-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 18
@@ -60794,1143 +60960,1885 @@
             "polygon": [
                 [
                     [
-                        12.23442,
-                        46.84254
+                        10.38615,
+                        46.68821
                     ],
                     [
-                        12.24913,
-                        46.82785
+                        10.39201,
+                        46.69016
                     ],
                     [
-                        12.24913,
-                        46.81945
+                        10.40215,
+                        46.70624
                     ],
                     [
-                        12.25753,
-                        46.81735
+                        10.41274,
+                        46.70821
                     ],
                     [
-                        12.26173,
-                        46.80686
+                        10.41622,
+                        46.71479
                     ],
                     [
-                        12.26594,
-                        46.80686
+                        10.4168,
+                        46.71847
                     ],
                     [
-                        12.26804,
-                        46.79637
+                        10.39934,
+                        46.73435
                     ],
                     [
-                        12.26173,
+                        10.43464,
+                        46.75356
+                    ],
+                    [
+                        10.44107,
+                        46.75413
+                    ],
+                    [
+                        10.44011,
+                        46.77149
+                    ],
+                    [
+                        10.42123,
+                        46.78861
+                    ],
+                    [
+                        10.42845,
+                        46.79755
+                    ],
+                    [
+                        10.43851,
+                        46.79869
+                    ],
+                    [
+                        10.44925,
+                        46.80462
+                    ],
+                    [
+                        10.45602,
+                        46.81635
+                    ],
+                    [
+                        10.45438,
+                        46.82221
+                    ],
+                    [
+                        10.4583,
+                        46.82478
+                    ],
+                    [
+                        10.45513,
+                        46.83059
+                    ],
+                    [
+                        10.45906,
+                        46.83548
+                    ],
+                    [
+                        10.46483,
+                        46.83624
+                    ],
+                    [
+                        10.46229,
+                        46.8413
+                    ],
+                    [
+                        10.46987,
+                        46.84933
+                    ],
+                    [
+                        10.46819,
+                        46.8553
+                    ],
+                    [
+                        10.47838,
+                        46.86013
+                    ],
+                    [
+                        10.48372,
+                        46.85543
+                    ],
+                    [
+                        10.49628,
+                        46.85305
+                    ],
+                    [
+                        10.49931,
+                        46.84857
+                    ],
+                    [
+                        10.52124,
+                        46.84653
+                    ],
+                    [
+                        10.5527,
+                        46.8511
+                    ],
+                    [
+                        10.55795,
+                        46.84695
+                    ],
+                    [
+                        10.55264,
+                        46.8408
+                    ],
+                    [
+                        10.55536,
+                        46.84087
+                    ],
+                    [
+                        10.58883,
+                        46.85125
+                    ],
+                    [
+                        10.59502,
+                        46.85829
+                    ],
+                    [
+                        10.60936,
+                        46.8597
+                    ],
+                    [
+                        10.62441,
+                        46.86558
+                    ],
+                    [
+                        10.64858,
+                        46.86655
+                    ],
+                    [
+                        10.66787,
+                        46.87651
+                    ],
+                    [
+                        10.67297,
+                        46.87138
+                    ],
+                    [
+                        10.69112,
+                        46.86861
+                    ],
+                    [
+                        10.69786,
+                        46.86339
+                    ],
+                    [
+                        10.69508,
+                        46.85308
+                    ],
+                    [
+                        10.70594,
+                        46.84786
+                    ],
+                    [
+                        10.71763,
+                        46.84795
+                    ],
+                    [
+                        10.72333,
+                        46.83892
+                    ],
+                    [
+                        10.75621,
+                        46.83383
+                    ],
+                    [
+                        10.76481,
+                        46.82409
+                    ],
+                    [
+                        10.76387,
+                        46.81971
+                    ],
+                    [
+                        10.75239,
+                        46.81387
+                    ],
+                    [
+                        10.74506,
+                        46.80223
+                    ],
+                    [
+                        10.7276,
+                        46.79709
+                    ],
+                    [
+                        10.73122,
+                        46.78925
+                    ],
+                    [
+                        10.75722,
+                        46.78624
+                    ],
+                    [
+                        10.77744,
+                        46.79149
+                    ],
+                    [
+                        10.78678,
+                        46.79735
+                    ],
+                    [
+                        10.81439,
+                        46.77662
+                    ],
+                    [
+                        10.82479,
+                        46.77472
+                    ],
+                    [
+                        10.83129,
+                        46.78138
+                    ],
+                    [
+                        10.84112,
+                        46.78282
+                    ],
+                    [
+                        10.85354,
+                        46.77506
+                    ],
+                    [
+                        10.86845,
+                        46.77313
+                    ],
+                    [
+                        10.86993,
+                        46.7669
+                    ],
+                    [
+                        10.88294,
+                        46.76393
+                    ],
+                    [
+                        10.88962,
+                        46.76529
+                    ],
+                    [
+                        10.8951,
+                        46.77092
+                    ],
+                    [
+                        10.90527,
+                        46.76911
+                    ],
+                    [
+                        10.92299,
+                        46.7764
+                    ],
+                    [
+                        10.92821,
+                        46.77408
+                    ],
+                    [
+                        10.94388,
+                        46.77648
+                    ],
+                    [
+                        10.97522,
+                        46.77361
+                    ],
+                    [
+                        10.97932,
+                        46.77014
+                    ],
+                    [
+                        10.99475,
+                        46.76804
+                    ],
+                    [
+                        11.01397,
+                        46.77317
+                    ],
+                    [
+                        11.02328,
+                        46.76715
+                    ],
+                    [
+                        11.0346,
+                        46.79428
+                    ],
+                    [
+                        11.04234,
+                        46.801
+                    ],
+                    [
+                        11.03792,
+                        46.80562
+                    ],
+                    [
+                        11.05633,
+                        46.80928
+                    ],
+                    [
+                        11.07279,
+                        46.82092
+                    ],
+                    [
+                        11.08171,
+                        46.82252
+                    ],
+                    [
+                        11.0762,
+                        46.83384
+                    ],
+                    [
+                        11.06887,
+                        46.83793
+                    ],
+                    [
+                        11.07303,
+                        46.84345
+                    ],
+                    [
+                        11.06988,
+                        46.85348
+                    ],
+                    [
+                        11.08742,
+                        46.87927
+                    ],
+                    [
+                        11.09961,
+                        46.88922
+                    ],
+                    [
+                        11.09538,
+                        46.89178
+                    ],
+                    [
+                        11.09795,
+                        46.89844
+                    ],
+                    [
+                        11.0946,
+                        46.91247
+                    ],
+                    [
+                        11.10792,
+                        46.91706
+                    ],
+                    [
+                        11.10804,
+                        46.92632
+                    ],
+                    [
+                        11.11418,
+                        46.93234
+                    ],
+                    [
+                        11.13851,
+                        46.92865
+                    ],
+                    [
+                        11.16322,
+                        46.94091
+                    ],
+                    [
+                        11.16642,
+                        46.94479
+                    ],
+                    [
+                        11.16114,
+                        46.94979
+                    ],
+                    [
+                        11.1637,
+                        46.96677
+                    ],
+                    [
+                        11.17598,
+                        46.96367
+                    ],
+                    [
+                        11.18658,
+                        46.97062
+                    ],
+                    [
+                        11.19527,
+                        46.97152
+                    ],
+                    [
+                        11.20418,
+                        46.96877
+                    ],
+                    [
+                        11.20688,
+                        46.96403
+                    ],
+                    [
+                        11.22047,
+                        46.97025
+                    ],
+                    [
+                        11.24139,
+                        46.9708
+                    ],
+                    [
+                        11.24865,
+                        46.97517
+                    ],
+                    [
+                        11.25582,
+                        46.97535
+                    ],
+                    [
+                        11.26272,
+                        46.98169
+                    ],
+                    [
+                        11.27662,
+                        46.98168
+                    ],
+                    [
+                        11.28762,
+                        46.98699
+                    ],
+                    [
+                        11.30709,
+                        46.98525
+                    ],
+                    [
+                        11.3205,
+                        46.99345
+                    ],
+                    [
+                        11.33765,
+                        46.98606
+                    ],
+                    [
+                        11.34516,
+                        46.99169
+                    ],
+                    [
+                        11.35932,
+                        46.99154
+                    ],
+                    [
+                        11.37697,
+                        46.98025
+                    ],
+                    [
+                        11.38324,
+                        46.97168
+                    ],
+                    [
+                        11.40465,
+                        46.96609
+                    ],
+                    [
+                        11.43929,
+                        46.97601
+                    ],
+                    [
+                        11.45134,
+                        46.99294
+                    ],
+                    [
+                        11.46803,
+                        46.99582
+                    ],
+                    [
+                        11.46859,
+                        47.003
+                    ],
+                    [
+                        11.47831,
+                        47.01201
+                    ],
+                    [
+                        11.50238,
+                        47.01073
+                    ],
+                    [
+                        11.50313,
+                        47.00808
+                    ],
+                    [
+                        11.51366,
+                        47.00595
+                    ],
+                    [
+                        11.51679,
+                        47.00091
+                    ],
+                    [
+                        11.53381,
+                        46.99233
+                    ],
+                    [
+                        11.53846,
+                        46.98519
+                    ],
+                    [
+                        11.55297,
+                        46.99149
+                    ],
+                    [
+                        11.57663,
+                        46.99657
+                    ],
+                    [
+                        11.58,
+                        47.00277
+                    ],
+                    [
+                        11.58879,
+                        47.00641
+                    ],
+                    [
+                        11.59901,
+                        47.00657
+                    ],
+                    [
+                        11.60944,
+                        47.01207
+                    ],
+                    [
+                        11.62697,
+                        47.01437
+                    ],
+                    [
+                        11.63629,
+                        47.00383
+                    ],
+                    [
+                        11.66542,
+                        46.99304
+                    ],
+                    [
+                        11.6885,
+                        46.99658
+                    ],
+                    [
+                        11.71226,
+                        46.99416
+                    ],
+                    [
+                        11.72897,
+                        46.97322
+                    ],
+                    [
+                        11.74698,
+                        46.97013
+                    ],
+                    [
+                        11.76411,
+                        46.97412
+                    ],
+                    [
+                        11.78106,
+                        46.99342
+                    ],
+                    [
+                        11.81526,
+                        46.991
+                    ],
+                    [
+                        11.83564,
+                        46.99417
+                    ],
+                    [
+                        11.84396,
+                        47.0025
+                    ],
+                    [
+                        11.85192,
+                        47.0014
+                    ],
+                    [
+                        11.86722,
+                        47.01252
+                    ],
+                    [
+                        11.87393,
+                        47.01136
+                    ],
+                    [
+                        11.8794,
+                        47.01714
+                    ],
+                    [
+                        11.89137,
+                        47.01728
+                    ],
+                    [
+                        11.91627,
+                        47.03422
+                    ],
+                    [
+                        11.9329,
+                        47.03864
+                    ],
+                    [
+                        11.94688,
+                        47.03464
+                    ],
+                    [
+                        11.95457,
+                        47.04374
+                    ],
+                    [
+                        11.96773,
+                        47.04158
+                    ],
+                    [
+                        11.97912,
+                        47.0511
+                    ],
+                    [
+                        11.98587,
+                        47.04815
+                    ],
+                    [
+                        11.99534,
+                        47.05064
+                    ],
+                    [
+                        12.02037,
+                        47.04821
+                    ],
+                    [
+                        12.02968,
+                        47.05127
+                    ],
+                    [
+                        12.03353,
+                        47.0583
+                    ],
+                    [
+                        12.04276,
+                        47.06228
+                    ],
+                    [
+                        12.07543,
+                        47.0605
+                    ],
+                    [
+                        12.08035,
+                        47.06951
+                    ],
+                    [
+                        12.09308,
+                        47.07791
+                    ],
+                    [
+                        12.10329,
+                        47.07931
+                    ],
+                    [
+                        12.11867,
+                        47.07445
+                    ],
+                    [
+                        12.13561,
+                        47.08171
+                    ],
+                    [
+                        12.15125,
+                        47.08049
+                    ],
+                    [
+                        12.15997,
+                        47.08267
+                    ],
+                    [
+                        12.18589,
+                        47.09322
+                    ],
+                    [
+                        12.2278,
+                        47.08302
+                    ],
+                    [
+                        12.24228,
+                        47.06892
+                    ],
+                    [
+                        12.23786,
+                        47.0644
+                    ],
+                    [
+                        12.21821,
+                        47.05795
+                    ],
+                    [
+                        12.2182,
+                        47.04483
+                    ],
+                    [
+                        12.20552,
+                        47.02595
+                    ],
+                    [
+                        12.18048,
+                        47.02414
+                    ],
+                    [
+                        12.16423,
+                        47.01782
+                    ],
+                    [
+                        12.14786,
+                        47.02357
+                    ],
+                    [
+                        12.12723,
+                        47.01218
+                    ],
+                    [
+                        12.12285,
+                        47.00662
+                    ],
+                    [
+                        12.1322,
+                        46.99339
+                    ],
+                    [
+                        12.12974,
+                        46.98593
+                    ],
+                    [
+                        12.13977,
+                        46.982
+                    ],
+                    [
+                        12.13808,
+                        46.96514
+                    ],
+                    [
+                        12.13328,
+                        46.96292
+                    ],
+                    [
+                        12.13882,
+                        46.95764
+                    ],
+                    [
+                        12.15927,
+                        46.95133
+                    ],
+                    [
+                        12.1702,
+                        46.93758
+                    ],
+                    [
+                        12.15414,
+                        46.91654
+                    ],
+                    [
+                        12.14675,
+                        46.91413
+                    ],
+                    [
+                        12.16205,
+                        46.908
+                    ],
+                    [
+                        12.16959,
+                        46.91121
+                    ],
+                    [
+                        12.19154,
+                        46.90682
+                    ],
+                    [
+                        12.20106,
+                        46.8965
+                    ],
+                    [
+                        12.2022,
+                        46.88806
+                    ],
+                    [
+                        12.21663,
+                        46.87517
+                    ],
+                    [
+                        12.22147,
+                        46.88084
+                    ],
+                    [
+                        12.23125,
+                        46.88146
+                    ],
+                    [
+                        12.2345,
+                        46.88919
+                    ],
+                    [
+                        12.24162,
+                        46.89192
+                    ],
+                    [
+                        12.27486,
+                        46.88512
+                    ],
+                    [
+                        12.27979,
+                        46.87921
+                    ],
+                    [
+                        12.27736,
+                        46.87319
+                    ],
+                    [
+                        12.29326,
+                        46.86566
+                    ],
+                    [
+                        12.2912,
+                        46.85704
+                    ],
+                    [
+                        12.29733,
+                        46.84455
+                    ],
+                    [
+                        12.30833,
+                        46.84137
+                    ],
+                    [
+                        12.30726,
+                        46.83271
+                    ],
+                    [
+                        12.285,
+                        46.81503
+                    ],
+                    [
+                        12.29383,
+                        46.8027
+                    ],
+                    [
+                        12.28905,
+                        46.79948
+                    ],
+                    [
+                        12.28889,
                         46.79427
                     ],
                     [
-                        12.27014,
-                        46.78587
+                        12.28232,
+                        46.79153
                     ],
                     [
-                        12.27224,
-                        46.76908
+                        12.28539,
+                        46.7839
                     ],
                     [
-                        12.28485,
-                        46.76698
+                        12.30943,
+                        46.78603
                     ],
                     [
-                        12.29745,
-                        46.7439
+                        12.35837,
+                        46.77583
                     ],
                     [
-                        12.30166,
-                        46.7439
+                        12.37036,
+                        46.74163
                     ],
                     [
-                        12.30166,
-                        46.7376
+                        12.38475,
+                        46.71745
                     ],
                     [
-                        12.28695,
-                        46.7376
+                        12.40283,
+                        46.70811
                     ],
                     [
-                        12.23652,
-                        46.72081
+                        12.41103,
+                        46.70701
                     ],
                     [
-                        12.18819,
-                        46.71451
+                        12.41522,
+                        46.70163
                     ],
                     [
-                        12.16298,
-                        46.70192
+                        12.42862,
+                        46.6997
                     ],
                     [
-                        12.10835,
-                        46.69353
+                        12.42943,
+                        46.69567
                     ],
                     [
-                        12.08944,
-                        46.68303
+                        12.44268,
+                        46.68979
                     ],
                     [
-                        12.05792,
-                        46.68093
+                        12.47501,
+                        46.68756
                     ],
                     [
-                        12.04531,
-                        46.67464
+                        12.4795,
+                        46.67969
                     ],
                     [
-                        12.03481,
-                        46.67464
+                        12.43473,
+                        46.66714
                     ],
                     [
-                        12.03061,
-                        46.68303
+                        12.40648,
+                        46.64167
                     ],
                     [
-                        12.0096,
-                        46.68303
+                        12.38115,
+                        46.64183
                     ],
                     [
-                        11.98438,
-                        46.66834
+                        12.37944,
+                        46.63733
                     ],
                     [
-                        11.94866,
-                        46.66414
+                        12.3915,
+                        46.62765
                     ],
                     [
-                        11.93816,
-                        46.65575
+                        12.38577,
+                        46.62154
                     ],
                     [
-                        11.90874,
-                        46.64525
+                        12.35939,
+                        46.61829
                     ],
                     [
-                        11.89193,
-                        46.64525
+                        12.34465,
+                        46.62376
                     ],
                     [
-                        11.8457,
-                        46.62846
+                        12.34034,
+                        46.63022
                     ],
                     [
-                        11.82049,
-                        46.62636
+                        12.33578,
+                        46.62732
                     ],
                     [
-                        11.80998,
-                        46.60748
+                        12.3172,
+                        46.62876
                     ],
                     [
-                        11.79528,
-                        46.60328
+                        12.31785,
+                        46.62355
                     ],
                     [
-                        11.78897,
-                        46.59069
+                        12.30802,
+                        46.61811
                     ],
                     [
-                        11.78057,
-                        46.58859
+                        12.28413,
+                        46.61623
                     ],
                     [
-                        11.76586,
-                        46.55501
+                        12.26982,
+                        46.62003
                     ],
                     [
-                        11.75325,
-                        46.54871
+                        12.25931,
+                        46.62809
                     ],
                     [
-                        11.73855,
-                        46.52982
+                        12.24502,
+                        46.62326
                     ],
                     [
-                        11.73224,
-                        46.52982
+                        12.24198,
+                        46.61586
                     ],
                     [
-                        11.72384,
-                        46.51513
+                        12.21241,
+                        46.60918
                     ],
                     [
-                        11.71543,
-                        46.51513
+                        12.20444,
+                        46.59836
                     ],
                     [
-                        11.71333,
-                        46.50254
+                        12.19228,
+                        46.59321
                     ],
                     [
-                        11.70913,
-                        46.50254
+                        12.19261,
+                        46.62059
                     ],
                     [
-                        11.70913,
-                        46.49624
+                        12.1818,
+                        46.6192
                     ],
                     [
-                        11.69652,
-                        46.48575
+                        12.17117,
+                        46.63275
                     ],
                     [
-                        11.69442,
-                        46.47735
+                        12.16062,
+                        46.63574
                     ],
                     [
-                        11.66711,
-                        46.47525
+                        12.1511,
+                        46.63215
                     ],
                     [
-                        11.66711,
-                        46.44587
+                        12.1436,
+                        46.6327
                     ],
                     [
-                        11.6608,
-                        46.44587
+                        12.13739,
+                        46.64122
                     ],
                     [
-                        11.64399,
-                        46.45846
+                        12.12342,
+                        46.64475
                     ],
                     [
-                        11.63769,
-                        46.45846
+                        12.10949,
+                        46.65204
                     ],
                     [
-                        11.63349,
-                        46.44587
+                        12.10609,
+                        46.65783
                     ],
                     [
-                        11.62508,
-                        46.44797
+                        12.09345,
+                        46.66123
                     ],
                     [
-                        11.62508,
-                        46.43957
+                        12.08826,
+                        46.66638
                     ],
                     [
-                        11.61878,
-                        46.43957
+                        12.07985,
+                        46.66686
                     ],
                     [
-                        11.61458,
-                        46.42278
+                        12.07038,
+                        46.67386
                     ],
                     [
-                        11.61037,
-                        46.42278
+                        12.07173,
+                        46.66064
                     ],
                     [
-                        11.61037,
-                        46.41649
+                        12.06686,
+                        46.65364
                     ],
                     [
-                        11.62508,
-                        46.41229
+                        12.07479,
+                        46.64329
                     ],
                     [
-                        11.62508,
-                        46.3934
+                        12.06837,
+                        46.63997
                     ],
                     [
-                        11.61458,
-                        46.38291
+                        12.06495,
+                        46.62121
                     ],
                     [
-                        11.60617,
-                        46.38291
+                        12.05448,
+                        46.61778
                     ],
                     [
-                        11.60407,
-                        46.37241
+                        12.05318,
+                        46.60989
                     ],
                     [
-                        11.58306,
-                        46.37241
+                        12.04613,
+                        46.60716
                     ],
                     [
-                        11.58306,
-                        46.34932
+                        12.05043,
+                        46.60016
                     ],
                     [
-                        11.55995,
-                        46.32414
+                        12.04763,
+                        46.58357
                     ],
                     [
-                        11.53894,
-                        46.32834
+                        12.03665,
+                        46.57668
                     ],
                     [
-                        11.53894,
-                        46.34513
+                        12.0266,
+                        46.55871
                     ],
                     [
-                        11.52423,
-                        46.34723
+                        12.02189,
+                        46.55791
                     ],
                     [
-                        11.50111,
-                        46.34723
+                        11.99941,
+                        46.53208
                     ],
                     [
-                        11.49901,
-                        46.32834
+                        11.99411,
+                        46.53345
                     ],
                     [
-                        11.48851,
-                        46.33044
+                        11.98704,
+                        46.54417
                     ],
                     [
-                        11.49271,
-                        46.32204
+                        11.96633,
+                        46.54363
                     ],
                     [
-                        11.41917,
-                        46.32414
+                        11.95094,
+                        46.53869
                     ],
                     [
-                        11.41707,
-                        46.25278
+                        11.94719,
+                        46.52879
                     ],
                     [
-                        11.35613,
-                        46.24858
+                        11.94147,
+                        46.52689
                     ],
                     [
-                        11.34773,
-                        46.25698
+                        11.93294,
+                        46.52631
                     ],
                     [
-                        11.34563,
-                        46.26747
+                        11.9121,
+                        46.532
                     ],
                     [
-                        11.34143,
-                        46.26747
+                        11.8904,
+                        46.52175
                     ],
                     [
-                        11.33722,
-                        46.25068
+                        11.85192,
+                        46.51682
                     ],
                     [
-                        11.31201,
-                        46.24858
+                        11.82849,
+                        46.50783
                     ],
                     [
-                        11.30991,
-                        46.25278
+                        11.82334,
+                        46.51315
                     ],
                     [
-                        11.3015,
-                        46.25278
+                        11.82391,
+                        46.52141
                     ],
                     [
-                        11.2889,
-                        46.24019
+                        11.81086,
+                        46.53146
                     ],
                     [
-                        11.2889,
-                        46.2234
+                        11.79385,
+                        46.52023
                     ],
                     [
-                        11.25108,
-                        46.2234
+                        11.79189,
+                        46.51322
                     ],
                     [
-                        11.24898,
-                        46.2129
+                        11.76157,
+                        46.50503
                     ],
                     [
-                        11.16283,
-                        46.215
+                        11.74317,
+                        46.50391
                     ],
                     [
-                        11.16283,
-                        46.24858
+                        11.73202,
+                        46.50877
                     ],
                     [
-                        11.12711,
-                        46.24858
+                        11.71935,
+                        46.50916
                     ],
                     [
-                        11.13131,
-                        46.25278
+                        11.71524,
+                        46.51245
                     ],
                     [
-                        11.12291,
-                        46.25488
+                        11.69889,
+                        46.50218
                     ],
                     [
-                        11.12501,
-                        46.29895
+                        11.6672,
+                        46.49647
                     ],
                     [
-                        11.16283,
-                        46.29895
+                        11.64515,
+                        46.49743
                     ],
                     [
-                        11.16283,
-                        46.36821
+                        11.63849,
+                        46.50051
                     ],
                     [
-                        11.16703,
-                        46.36821
+                        11.63495,
+                        46.49486
                     ],
                     [
-                        11.16703,
-                        46.38081
+                        11.64297,
+                        46.49346
                     ],
                     [
-                        11.17543,
-                        46.3871
+                        11.65174,
+                        46.48271
                     ],
                     [
-                        11.17754,
-                        46.3997
+                        11.64536,
+                        46.47189
                     ],
                     [
-                        11.20485,
-                        46.3997
+                        11.64179,
+                        46.47439
                     ],
                     [
-                        11.20695,
-                        46.42068
+                        11.62679,
+                        46.4708
                     ],
                     [
-                        11.19014,
-                        46.42068
+                        11.62987,
+                        46.46377
                     ],
                     [
-                        11.19014,
-                        46.42698
+                        11.61882,
+                        46.44325
                     ],
                     [
-                        11.19435,
-                        46.42698
+                        11.62143,
+                        46.42539
                     ],
                     [
-                        11.19855,
-                        46.44167
+                        11.60161,
+                        46.39731
                     ],
                     [
-                        11.20485,
-                        46.44587
+                        11.60307,
+                        46.38924
                     ],
                     [
-                        11.20695,
-                        46.47315
+                        11.5932,
+                        46.38265
                     ],
                     [
-                        11.19014,
-                        46.47525
+                        11.56489,
+                        46.38018
                     ],
                     [
-                        11.18804,
-                        46.48365
+                        11.55878,
+                        46.35076
                     ],
                     [
-                        11.15232,
-                        46.47525
+                        11.55249,
+                        46.34418
                     ],
                     [
-                        11.08298,
-                        46.47525
+                        11.54423,
+                        46.34483
                     ],
                     [
-                        11.08088,
-                        46.43537
+                        11.53837,
+                        46.35015
                     ],
                     [
-                        11.04096,
-                        46.42068
+                        11.52445,
+                        46.35502
                     ],
                     [
-                        11.01154,
-                        46.42068
+                        11.47969,
+                        46.36277
                     ],
                     [
-                        10.99894,
-                        46.44587
+                        11.48052,
+                        46.3551
                     ],
                     [
-                        10.98843,
-                        46.44587
+                        11.46322,
+                        46.34922
                     ],
                     [
-                        10.98423,
-                        46.45217
+                        11.45556,
+                        46.33396
                     ],
                     [
-                        10.96952,
-                        46.45217
+                        11.42105,
+                        46.32441
                     ],
                     [
-                        10.96112,
-                        46.48365
+                        11.40517,
+                        46.32387
                     ],
                     [
-                        10.95691,
-                        46.48365
+                        11.39865,
+                        46.31426
                     ],
                     [
-                        10.95481,
-                        46.49414
+                        11.39994,
+                        46.30709
                     ],
                     [
-                        10.94851,
-                        46.49624
+                        11.39569,
+                        46.3083
                     ],
                     [
-                        10.94431,
-                        46.50673
+                        11.38188,
+                        46.30052
                     ],
                     [
-                        10.91069,
-                        46.49624
+                        11.36088,
+                        46.29906
                     ],
                     [
-                        10.90018,
-                        46.49624
+                        11.36078,
+                        46.29682
                     ],
                     [
-                        10.89808,
-                        46.51093
+                        11.38256,
+                        46.29177
                     ],
                     [
-                        10.85606,
-                        46.50254
+                        11.3871,
+                        46.28143
                     ],
                     [
-                        10.84135,
-                        46.54241
+                        11.39609,
+                        46.27423
                     ],
                     [
-                        10.86446,
-                        46.54661
+                        11.39862,
+                        46.264
                     ],
                     [
-                        10.86236,
-                        46.55081
+                        11.38756,
+                        46.26029
                     ],
                     [
-                        10.76571,
-                        46.54031
+                        11.37347,
+                        46.2629
                     ],
                     [
-                        10.72158,
-                        46.55081
+                        11.36836,
+                        46.26135
                     ],
                     [
-                        10.59762,
-                        46.55291
+                        11.35783,
+                        46.26481
                     ],
                     [
-                        10.5619,
-                        46.54871
+                        11.35495,
+                        46.27564
                     ],
                     [
-                        10.53668,
-                        46.55291
+                        11.33912,
+                        46.28306
                     ],
                     [
-                        10.50096,
-                        46.54871
+                        11.33379,
+                        46.29049
                     ],
                     [
-                        10.48415,
-                        46.55501
+                        11.33471,
+                        46.2962
                     ],
                     [
-                        10.46314,
-                        46.55501
+                        11.3129,
+                        46.28256
                     ],
                     [
-                        10.47155,
-                        46.5676
+                        11.31737,
+                        46.27303
                     ],
                     [
-                        10.47365,
-                        46.59069
+                        11.30645,
+                        46.25786
                     ],
                     [
-                        10.47785,
-                        46.59069
+                        11.29124,
+                        46.2604
                     ],
                     [
-                        10.47785,
-                        46.61797
+                        11.24743,
+                        46.22933
                     ],
                     [
-                        10.46944,
-                        46.62636
+                        11.20622,
+                        46.2187
                     ],
                     [
-                        10.44843,
-                        46.63476
+                        11.18267,
+                        46.22496
                     ],
                     [
-                        10.42532,
-                        46.62846
+                        11.17077,
+                        46.23806
                     ],
                     [
-                        10.3938,
-                        46.63056
+                        11.17994,
+                        46.24434
                     ],
                     [
-                        10.3896,
-                        46.64525
+                        11.18351,
+                        46.25269
                     ],
                     [
-                        10.3812,
-                        46.64735
+                        11.18935,
+                        46.25354
                     ],
                     [
-                        10.3833,
-                        46.66414
+                        11.19448,
+                        46.2461
                     ],
                     [
-                        10.3791,
-                        46.66834
+                        11.20029,
+                        46.25566
                     ],
                     [
-                        10.3791,
-                        46.69353
+                        11.16604,
+                        46.26129
                     ],
                     [
-                        10.3854,
-                        46.72081
+                        11.14885,
+                        46.27904
                     ],
                     [
-                        10.3896,
-                        46.72081
+                        11.13725,
+                        46.28336
                     ],
                     [
-                        10.3938,
-                        46.7376
+                        11.14293,
+                        46.28934
                     ],
                     [
-                        10.41692,
-                        46.75229
+                        11.15847,
+                        46.29059
                     ],
                     [
-                        10.41692,
-                        46.78587
+                        11.16439,
+                        46.2986
                     ],
                     [
-                        10.42112,
-                        46.79847
+                        11.1761,
+                        46.30346
                     ],
                     [
-                        10.42532,
-                        46.79847
+                        11.1847,
+                        46.32104
                     ],
                     [
-                        10.42532,
-                        46.80686
+                        11.18894,
+                        46.32151
                     ],
                     [
-                        10.43373,
-                        46.81106
+                        11.18696,
+                        46.32673
                     ],
                     [
-                        10.43793,
-                        46.79007
+                        11.1942,
+                        46.33016
                     ],
                     [
-                        10.44423,
-                        46.78377
+                        11.20204,
+                        46.34212
                     ],
                     [
-                        10.44843,
-                        46.7439
+                        11.19001,
+                        46.35984
                     ],
                     [
-                        10.45264,
-                        46.7439
+                        11.19263,
+                        46.36578
                     ],
                     [
-                        10.45684,
-                        46.72711
+                        11.20393,
+                        46.36765
                     ],
                     [
-                        10.46104,
-                        46.72711
+                        11.19792,
+                        46.37232
                     ],
                     [
-                        10.46524,
-                        46.71032
+                        11.21275,
+                        46.39804
                     ],
                     [
-                        10.46944,
-                        46.71032
+                        11.21345,
+                        46.40675
                     ],
                     [
-                        10.47365,
-                        46.67254
+                        11.20565,
+                        46.4166
                     ],
                     [
-                        10.47995,
-                        46.67044
+                        11.21026,
+                        46.4206
                     ],
                     [
-                        10.48415,
-                        46.65575
+                        11.20347,
+                        46.42682
                     ],
                     [
-                        10.48836,
-                        46.65575
+                        11.21416,
+                        46.43556
                     ],
                     [
-                        10.48415,
-                        46.62846
+                        11.21634,
+                        46.44255
                     ],
                     [
-                        10.48836,
-                        46.62846
+                        11.20903,
+                        46.45293
                     ],
                     [
-                        10.48836,
-                        46.62217
+                        11.21419,
+                        46.45807
                     ],
                     [
-                        10.49886,
-                        46.62007
+                        11.21736,
+                        46.45731
                     ],
                     [
-                        10.52828,
-                        46.62427
+                        11.21886,
+                        46.46199
                     ],
                     [
-                        10.49886,
-                        46.63056
+                        11.21626,
+                        46.47277
                     ],
                     [
-                        10.49886,
-                        46.64525
+                        11.20939,
+                        46.481
                     ],
                     [
-                        10.50516,
-                        46.64316
+                        11.20876,
+                        46.49346
                     ],
                     [
-                        10.49886,
-                        46.66204
+                        11.19608,
+                        46.50241
                     ],
                     [
-                        10.51777,
-                        46.65785
+                        11.1924,
+                        46.501
                     ],
                     [
-                        10.58921,
-                        46.66204
+                        11.18686,
+                        46.50734
                     ],
                     [
-                        10.63123,
-                        46.65365
+                        11.18002,
+                        46.49823
                     ],
                     [
-                        10.79302,
-                        46.65575
+                        11.17014,
+                        46.49635
                     ],
                     [
-                        10.79723,
-                        46.65155
+                        11.16095,
+                        46.4878
                     ],
                     [
-                        10.88127,
-                        46.65155
+                        11.12934,
+                        46.48058
                     ],
                     [
-                        10.89178,
-                        46.65785
+                        11.1103,
+                        46.49643
                     ],
                     [
-                        10.9275,
-                        46.66414
+                        11.10449,
+                        46.4948
                     ],
                     [
-                        10.94431,
-                        46.67464
+                        11.08812,
+                        46.50128
                     ],
                     [
-                        10.98003,
-                        46.67464
+                        11.08173,
+                        46.53021
                     ],
                     [
-                        11.00104,
-                        46.68303
+                        11.05915,
+                        46.51508
                     ],
                     [
-                        11.02415,
-                        46.68303
+                        11.03795,
+                        46.51357
                     ],
                     [
-                        11.05147,
-                        46.69772
+                        11.05006,
+                        46.50784
                     ],
                     [
-                        11.12711,
-                        46.70822
+                        11.05773,
+                        46.49235
                     ],
                     [
-                        11.13971,
-                        46.71242
+                        11.06278,
+                        46.4894
                     ],
                     [
-                        11.14392,
-                        46.71871
+                        11.06894,
+                        46.46619
                     ],
                     [
-                        11.17543,
-                        46.72081
+                        11.07625,
+                        46.45487
                     ],
                     [
-                        11.19855,
-                        46.7334
+                        11.0778,
+                        46.44569
                     ],
                     [
-                        11.24898,
-                        46.7355
+                        11.07301,
+                        46.44042
                     ],
                     [
-                        11.25318,
-                        46.72291
+                        11.05394,
+                        46.44849
                     ],
                     [
-                        11.2952,
-                        46.72921
+                        11.0414,
+                        46.44569
                     ],
                     [
-                        11.30571,
-                        46.70822
+                        11.02817,
+                        46.46116
                     ],
                     [
-                        11.31831,
-                        46.70822
+                        11.00952,
+                        46.46917
                     ],
                     [
-                        11.33722,
-                        46.71871
+                        11.00462,
+                        46.47607
                     ],
                     [
-                        11.38555,
-                        46.72081
+                        10.98695,
+                        46.48289
                     ],
                     [
-                        11.43178,
-                        46.7376
+                        10.96543,
+                        46.48103
                     ],
                     [
-                        11.50952,
-                        46.7439
+                        10.95791,
+                        46.46983
                     ],
                     [
-                        11.54734,
-                        46.75649
+                        10.93819,
+                        46.46578
                     ],
                     [
-                        11.56835,
-                        46.75649
+                        10.9325,
+                        46.45831
                     ],
                     [
-                        11.58306,
-                        46.76698
+                        10.93332,
+                        46.4528
                     ],
                     [
-                        11.60617,
-                        46.76908
+                        10.91305,
+                        46.44284
                     ],
                     [
-                        11.61037,
-                        46.77538
+                        10.89161,
+                        46.44366
                     ],
                     [
-                        11.69862,
-                        46.79427
+                        10.88324,
+                        46.44995
                     ],
                     [
-                        11.71753,
-                        46.79427
+                        10.88093,
+                        46.44579
                     ],
                     [
-                        11.72174,
-                        46.79007
+                        10.87162,
+                        46.4438
                     ],
                     [
-                        11.73855,
-                        46.75859
+                        10.86174,
+                        46.43509
                     ],
                     [
-                        11.74905,
-                        46.75019
+                        10.85113,
+                        46.43817
                     ],
                     [
-                        11.76166,
-                        46.70192
+                        10.80034,
+                        46.44185
                     ],
                     [
-                        11.76586,
-                        46.70192
+                        10.78906,
+                        46.45164
                     ],
                     [
-                        11.78687,
-                        46.71661
+                        10.77835,
+                        46.47112
                     ],
                     [
-                        11.8331,
-                        46.72291
+                        10.76934,
+                        46.47609
                     ],
                     [
-                        11.86041,
-                        46.7376
+                        10.76463,
+                        46.4848
                     ],
                     [
-                        11.90874,
-                        46.7439
+                        10.75906,
+                        46.48547
                     ],
                     [
-                        11.92135,
-                        46.75229
+                        10.74422,
+                        46.48333
                     ],
                     [
-                        11.95286,
-                        46.75859
+                        10.71753,
+                        46.46022
                     ],
                     [
-                        11.95917,
-                        46.76488
+                        10.69667,
+                        46.4573
                     ],
                     [
-                        11.99489,
-                        46.77538
+                        10.68293,
+                        46.44846
                     ],
                     [
-                        12.00749,
-                        46.77538
+                        10.66821,
+                        46.45122
                     ],
                     [
-                        12.0096,
-                        46.77958
+                        10.63303,
+                        46.44309
                     ],
                     [
-                        12.03061,
-                        46.78168
+                        10.61439,
+                        46.45098
                     ],
                     [
-                        12.05792,
-                        46.79427
+                        10.60128,
+                        46.46139
                     ],
                     [
-                        12.09995,
-                        46.79847
+                        10.59995,
+                        46.46766
                     ],
                     [
-                        12.13566,
-                        46.81316
+                        10.57672,
+                        46.47237
                     ],
                     [
-                        12.15878,
-                        46.81316
+                        10.55875,
+                        46.48187
                     ],
                     [
-                        12.18609,
-                        46.82785
+                        10.54986,
+                        46.49123
                     ],
                     [
-                        12.21551,
-                        46.83205
+                        10.53685,
+                        46.49062
                     ],
                     [
-                        12.23442,
-                        46.84254
-                    ]
-                ],
-                [
-                    [
-                        11.97388,
-                        46.96637
-                    ],
-                    [
-                        11.99489,
-                        46.96007
-                    ],
-                    [
-                        11.99489,
-                        46.95587
-                    ],
-                    [
-                        12.0096,
-                        46.95797
-                    ],
-                    [
-                        12.0117,
-                        46.94748
-                    ],
-                    [
-                        12.0159,
-                        46.94748
-                    ],
-                    [
-                        12.0117,
-                        46.94118
-                    ],
-                    [
-                        12.018,
-                        46.93908
-                    ],
-                    [
-                        12.02851,
-                        46.92229
-                    ],
-                    [
-                        12.00749,
-                        46.9118
-                    ],
-                    [
-                        11.97388,
-                        46.9055
-                    ],
-                    [
-                        11.95707,
-                        46.89501
-                    ],
-                    [
-                        11.91714,
-                        46.88871
-                    ],
-                    [
-                        11.85831,
-                        46.86982
-                    ],
-                    [
-                        11.8394,
-                        46.86982
-                    ],
-                    [
-                        11.80158,
-                        46.85303
-                    ],
-                    [
-                        11.76166,
-                        46.84464
-                    ],
-                    [
-                        11.74905,
-                        46.83415
-                    ],
-                    [
-                        11.68181,
-                        46.81945
-                    ],
-                    [
-                        11.67971,
-                        46.81526
-                    ],
-                    [
-                        11.6545,
-                        46.81106
+                        10.52657,
+                        46.49425
                     ],
                     [
-                        11.64399,
-                        46.80476
+                        10.49366,
+                        46.49719
                     ],
                     [
-                        11.63769,
-                        46.80686
+                        10.48141,
+                        46.49337
                     ],
                     [
-                        11.63139,
-                        46.82155
+                        10.45714,
+                        46.5096
                     ],
                     [
-                        11.62508,
-                        46.82155
+                        10.45124,
+                        46.53083
                     ],
                     [
-                        11.62298,
-                        46.83205
+                        10.45814,
+                        46.54215
                     ],
                     [
-                        11.61037,
-                        46.84464
+                        10.47056,
+                        46.54377
                     ],
                     [
-                        11.61668,
-                        46.84884
+                        10.46954,
+                        46.54856
                     ],
                     [
-                        11.61458,
-                        46.85723
+                        10.47617,
+                        46.55749
                     ],
                     [
-                        11.61037,
-                        46.85723
+                        10.47321,
+                        46.56701
                     ],
                     [
-                        11.61668,
-                        46.86563
+                        10.48305,
+                        46.5777
                     ],
                     [
-                        11.64609,
-                        46.86563
+                        10.48575,
+                        46.58921
                     ],
                     [
-                        11.68602,
-                        46.88242
+                        10.48221,
+                        46.59199
                     ],
                     [
-                        11.69022,
-                        46.88871
+                        10.48576,
+                        46.59805
                     ],
                     [
-                        11.74905,
-                        46.89711
+                        10.48291,
+                        46.60512
                     ],
                     [
-                        11.75325,
-                        46.90341
+                        10.49055,
+                        46.61394
                     ],
                     [
-                        11.78057,
-                        46.9076
+                        10.44632,
+                        46.63989
                     ],
                     [
-                        11.80158,
-                        46.9202
+                        10.40935,
+                        46.63389
                     ],
                     [
-                        11.8457,
-                        46.92649
+                        10.40011,
+                        46.63648
                     ],
                     [
-                        11.87722,
-                        46.94118
+                        10.39873,
+                        46.6455
                     ],
                     [
-                        11.89613,
-                        46.94328
+                        10.38946,
+                        46.65862
                     ],
                     [
-                        11.92135,
-                        46.95797
+                        10.39057,
+                        46.67089
                     ],
                     [
-                        11.96757,
-                        46.96217
+                        10.3803,
+                        46.68399
                     ],
                     [
-                        11.97388,
-                        46.96637
+                        10.38615,
+                        46.68821
                     ]
                 ]
             ],
             "terms_url": "http://geoservices.buergernetz.bz.it/geokatalog/",
-            "terms_text": "© Autonomen Provinz Bozen/Provincia Autonoma di Bolzano CC-BY 3.0",
+            "terms_text": "© Autonomen Provinz Bozen/Provincia Autonoma di Bolzano CC-BY 4.0",
             "best": true
         },
         {
@@ -64443,6 +65351,8 @@
             "name": "Surrey Air Survey",
             "type": "tms",
             "template": "http://gravitystorm.dev.openstreetmap.org/surrey/{zoom}/{x}/{y}.png",
+            "endDate": "2009-01-01T00:00:00.000Z",
+            "startDate": "2007-01-01T00:00:00.000Z",
             "scaleExtent": [
                 8,
                 19
@@ -65162,6 +66072,7 @@
             "name": "Texas Orthophoto",
             "type": "tms",
             "template": "https://txgi.tnris.org/login/path/ecology-fiona-poem-romeo/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=texas&STYLE=&FORMAT=image/png&tileMatrixSet=0to20&tileMatrix=0to20:{zoom}&tileRow={y}&tileCol={x}",
+            "startDate": "2012-01-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 20
@@ -65289,6 +66200,8 @@
             "name": "Topographical Map geoportail.lu",
             "type": "tms",
             "template": "https://{switch:wmts3,wmts4}.geoportail.lu/opendata/wmts/topo/GLOBAL_WEBMERCATOR_4_V3/{zoom}/{x}/{y}.png",
+            "endDate": "2010-07-20T00:00:00.000Z",
+            "startDate": "2013-07-19T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 20
@@ -67258,6 +68171,8 @@
             "name": "Tours - Orthophotos 2008-2010",
             "type": "tms",
             "template": "http://wms.openstreetmap.fr/tms/1.0.0/tours/{zoom}/{x}/{y}",
+            "endDate": "2011-01-01T00:00:00.000Z",
+            "startDate": "2008-01-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 20
@@ -67862,6 +68777,8 @@
             "name": "Tours - Orthophotos 2013",
             "type": "tms",
             "template": "http://wms.openstreetmap.fr/tms/1.0.0/tours_2013/{zoom}/{x}/{y}",
+            "endDate": "2013-01-01T00:00:00.000Z",
+            "startDate": "2013-01-01T00:00:00.000Z",
             "scaleExtent": [
                 0,
                 22

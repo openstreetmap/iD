@@ -348,19 +348,48 @@
             "list": "Spremembe uporabnikov {users}",
             "truncated_list": "Spremembe uporabnikov {users} in {count} drugih"
         },
-        "infobox": {
+        "info_panels": {
             "key": "I",
-            "selected": "{n} izbranih",
-            "geometry": "Geometrija",
-            "closed": "zaprto",
-            "center": "Središče",
-            "perimeter": "Obseg",
-            "length": "Dolžina",
-            "area": "Površina",
-            "centroid": "Središčna točka",
-            "location": "Mesto",
-            "metric": "metri",
-            "imperial": "čevlji"
+            "background": {
+                "key": "O",
+                "title": "Ozadje",
+                "zoom": "Približaj",
+                "vintage": "Starinsko",
+                "unknown": "Neznano",
+                "show_tiles": "Pokaži sličice",
+                "hide_tiles": "Skrij sličice"
+            },
+            "history": {
+                "key": "Z",
+                "title": "Zgodovina",
+                "selected": "{n} izbranih",
+                "version": "Različica",
+                "last_edit": "Zadnje urejanje",
+                "edited_by": "Urejevalec",
+                "changeset": "Spremembe",
+                "unknown": "Neznano",
+                "link_text": "Zgodovina na openstreetmap.org"
+            },
+            "location": {
+                "key": "L",
+                "title": "Mesto",
+                "unknown_location": "Neznano mesto"
+            },
+            "measurement": {
+                "key": "M",
+                "title": "Merilo",
+                "selected": "{n} izbranih",
+                "geometry": "Geometrija",
+                "closed": "zaprto",
+                "center": "Središče",
+                "perimeter": "Obseg",
+                "length": "Dolžina",
+                "area": "Površina",
+                "centroid": "Središčna točka",
+                "location": "Mesto",
+                "metric": "Metrične enote",
+                "imperial": "Imperialne enote"
+            }
         },
         "geometry": {
             "point": "točka",
@@ -431,7 +460,7 @@
             "switch": "Preklopi nazaj na to ozadje.",
             "custom": "Po meri",
             "custom_button": "Uredi ozadje po meri",
-            "custom_prompt": "Navedite naslov URL predloge. Dovoljeni nadomestni znaki so {zoom}, {x}, {y} za osi Z/X/Y in {u} za shemo quadtile.",
+            "custom_prompt": "Vpišite naslov url predloge sličic. Veljavni žetoni so:\n   - {zoom}/{z}, {x}, {y} za Z/X/Y sheme sličic\n   - {ty} za koordinate v zapisu TMS\n   - {u} za shemo četverjenja – quadtile\n   - {switch:a,b,c} za zvijanje pretoka prek strežnika DNS\n\nPrimer:\n{example}",
             "fix_misalignment": "Popravi zamik ozadja",
             "imagery_source_faq": "Od kod so ozadja zemljevida?",
             "reset": "ponastavi",
@@ -519,8 +548,8 @@
         "restore": {
             "heading": "Nekatere spremembe še niso shranjene.",
             "description": "Ali želite ponovno obnoviti še ne shranjene spremembe predhodne seje urejanja?",
-            "restore": "Obnovi",
-            "reset": "Ponastavi"
+            "restore": "Obnovi spremembe",
+            "reset": "Zavrzi spremembe"
         },
         "save": {
             "title": "Shrani",
@@ -950,7 +979,6 @@
                 },
                 "with_selected": {
                     "title": "Z izbranim predmetom",
-                    "infobox": "Preklopi okno izmer / podrobnosti",
                     "edit_menu": "Preklopi meni urejanja"
                 },
                 "vertex_selected": {
@@ -995,6 +1023,17 @@
                     "undo": "Razveljavi zadnje dejanje",
                     "redo": "Ponovno uveljavi zadnje dejanje",
                     "save": "Shrani spremembe"
+                }
+            },
+            "tools": {
+                "title": "Orodja",
+                "info": {
+                    "title": "Podrobnosti",
+                    "all": "Preklopi vsa okna podrobnosti",
+                    "background": "Preklopi okno ozadja",
+                    "history": "Preklopi okno zgodovine",
+                    "location": "Preklopi okno mesta",
+                    "measurement": "Preklopi okno merila"
                 }
             }
         },
@@ -1308,15 +1347,15 @@
                 "collection_times": {
                     "label": "Ure zbiranja"
                 },
+                "communication_multi": {
+                    "label": "Vrste komunikacij"
+                },
                 "construction": {
                     "label": "Vrsta"
                 },
                 "contact/webcam": {
                     "label": "Naslov URL spletne kamere",
                     "placeholder": "http://www.naslov.si/"
-                },
-                "content": {
-                    "label": "Vsebina"
                 },
                 "country": {
                     "label": "Država"
@@ -1561,6 +1600,9 @@
                 },
                 "kerb": {
                     "label": "Cestni robnik"
+                },
+                "label": {
+                    "label": "Oznaka"
                 },
                 "lamp_type": {
                     "label": "Vrsta"
@@ -2155,7 +2197,7 @@
                     "label": "Vrsta"
                 },
                 "wheelchair": {
-                    "label": "Dostop z vozičkom"
+                    "label": "Dostopno z vozičkom"
                 },
                 "width": {
                     "label": "Širina (v metrih)"
@@ -2392,7 +2434,8 @@
                     "terms": "stomatolog,ortodont"
                 },
                 "amenity/doctors": {
-                    "name": "Zdravnik"
+                    "name": "Zdravnik",
+                    "terms": "doktor,zdravnik,zdravstvo,prva pomoč"
                 },
                 "amenity/dojo": {
                     "name": "Dojo in šola borilnih veščin",
@@ -2453,7 +2496,8 @@
                     "terms": "slaščičarna, bistro"
                 },
                 "amenity/internet_cafe": {
-                    "name": "Internet Cafe"
+                    "name": "Internet Cafe",
+                    "terms": "internet, kiber, taksi, tele, kava, net, omrežje, internet kafe"
                 },
                 "amenity/kindergarten": {
                     "name": "Vrtčevsko območje",
@@ -2558,6 +2602,9 @@
                 },
                 "amenity/recycling_centre": {
                     "name": "Center za recikliranje"
+                },
+                "amenity/register_office": {
+                    "name": "Prijavi urad"
                 },
                 "amenity/restaurant": {
                     "name": "Restavracija",
@@ -3814,6 +3861,10 @@
                     "name": "Tovarna",
                     "terms": "tvornica,obrat,fabrika"
                 },
+                "manhole": {
+                    "name": "Jašek",
+                    "terms": "jašek, vhodna odprtina, kanalizacija, elektro, vodovod, telekom, cestni jašek"
+                },
                 "natural": {
                     "name": "Naravna prvina",
                     "terms": "naravno"
@@ -3868,6 +3919,9 @@
                 "natural/saddle": {
                     "name": "Sedlo",
                     "terms": "Sedlo, škrbina"
+                },
+                "natural/sand": {
+                    "name": "Pesek"
                 },
                 "natural/scree": {
                     "name": "Melišče",
@@ -4382,7 +4436,7 @@
                 },
                 "shop/hairdresser": {
                     "name": "Frizer",
-                    "terms": "Frizerski salon"
+                    "terms": "Frizerski salon,frizer,česalnica,striženje,britje"
                 },
                 "shop/hardware": {
                     "name": "Železnina",
@@ -4956,6 +5010,18 @@
                     "text": "© Michael Spreng z dovoljenjem CC BY-SA 3.0, podatki zemljevida skupnost © OpenStreetMap z dovoljenjem ODbL 1.0"
                 },
                 "name": "Waymarked Trails: zimski športi"
+            },
+            "basemap.at": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Osnovni zemljevid Avstrije, ki temelji na uradnih podatkih",
+                "name": "basemap.at"
+            },
+            "basemap.at-orthofoto": {
+                "attribution": {
+                    "text": "basemap.at"
+                }
             },
             "hike_n_bike": {
                 "attribution": {

@@ -348,18 +348,48 @@
             "list": "Ediciones de {users}",
             "truncated_list": "Ediciones de {users} y {count} más"
         },
-        "infobox": {
-            "selected": "{n} seleccionado(s)",
-            "geometry": "Geometría",
-            "closed": "cerrada",
-            "center": "Centro",
-            "perimeter": "Perímetro",
-            "length": "Longitud",
-            "area": "Área",
-            "centroid": "Centroide",
-            "location": "Ubicación",
-            "metric": "Métrica",
-            "imperial": "Imperial"
+        "info_panels": {
+            "key": "I",
+            "background": {
+                "key": "B",
+                "title": "Fondo",
+                "zoom": "Acercamiento",
+                "vintage": "Época",
+                "unknown": "Desconocido",
+                "show_tiles": "Mostrar teselas",
+                "hide_tiles": "Ocultar teselas"
+            },
+            "history": {
+                "key": "H",
+                "title": "Historial",
+                "selected": "{n} seleccionado",
+                "version": "Versión",
+                "last_edit": "Última edición",
+                "edited_by": "Editado por",
+                "changeset": "Conjunto de cambios",
+                "unknown": "Desconocido",
+                "link_text": "Historial en openstreetmap.org"
+            },
+            "location": {
+                "key": "L",
+                "title": "Ubicación",
+                "unknown_location": "Ubicación desconocida"
+            },
+            "measurement": {
+                "key": "M",
+                "title": "Medición",
+                "selected": "{n} seleccionado",
+                "geometry": "Geometría",
+                "closed": "cerrada",
+                "center": "Centro",
+                "perimeter": "Perímetro",
+                "length": "Longitud",
+                "area": "Área",
+                "centroid": "Centroide",
+                "location": "Ubicación",
+                "metric": "Métrico",
+                "imperial": "Imperial"
+            }
         },
         "geometry": {
             "point": "punto",
@@ -423,25 +453,28 @@
         "background": {
             "title": "Fondo",
             "description": "Ajustes del fondo",
+            "key": "B",
             "percent_brightness": "{opacity}% brillo",
             "none": "Ninguno",
             "best_imagery": "La mejor fuente de imágenes para esta ubicación",
             "switch": "Volver a este fondo",
             "custom": "Personalizado",
             "custom_button": "Editar fondo personalizado",
-            "custom_prompt": "Introduzca una plantilla URL de tesela. Los símbolos válidos son {zoom}, {x}, {y} para el esquema Z/X/Y y {u} para el esquema cuadrático.",
+            "custom_prompt": "Introduzca una plantilla URL de tesela. Los tokens válidos son:\n  - {zoom}/{z}, {x}, {y} para el esquema de tesela Z / X / Y\n  - {ty} para coordenadas Y invertidas del estilo TMS\n  - {u} para el esquema cuádruple\n  - {switch:a,b,c} para la multiplexación del servidor DNS\n\nEjemplo:\n{example}",
             "fix_misalignment": "Ajustar desplazamiento de imágenes",
             "imagery_source_faq": "¿De dónde vienen estas imágenes?",
             "reset": "reiniciar",
             "offset": "Arrastre en cualquier lugar del área gris de abajo para ajustar el desplazamiento de imágenes, o introduzca los valores de desplazamiento en metros.",
             "minimap": {
                 "description": "Minimapa",
-                "tooltip": "Mostrar una vista alejada del mapa para ayudar a ubicar el área que se muestra actualmente."
+                "tooltip": "Mostrar una vista alejada del mapa para ayudar a ubicar el área que se muestra actualmente.",
+                "key": "/"
             }
         },
         "map_data": {
             "title": "Datos del mapa",
             "description": "Datos del mapa",
+            "key": "F",
             "data_layers": "Capas de datos",
             "fill_area": "Pintar las áreas",
             "map_features": "Elementos del mapa",
@@ -500,7 +533,8 @@
         "area_fill": {
             "wireframe": {
                 "description": "Sin relleno (rejilla)",
-                "tooltip": "Habilitando el modo rejilla hace que sea fácil ver las imágenes de fondo."
+                "tooltip": "Habilitando el modo rejilla hace que sea fácil ver las imágenes de fondo.",
+                "key": "W"
             },
             "partial": {
                 "description": "Relleno parcial",
@@ -514,8 +548,8 @@
         "restore": {
             "heading": "Tiene cambios sin guardar",
             "description": "¿Quiere recuperar los cambios no guardados de una sesión de edición previa?",
-            "restore": "Restaurar",
-            "reset": "Descartar"
+            "restore": "Restaurar mis cambios",
+            "reset": "Descartar mis cambios"
         },
         "save": {
             "title": "Guardar",
@@ -625,6 +659,7 @@
         },
         "help": {
             "title": "Ayuda",
+            "key": "H",
             "help": "# Ayuda\n\nEste es un editor para [OpenStreetMap](http://www.openstreetmap.org/), el\nmapa libre y editable del mundo. Se puede utilizar para añadir y actualizar\ndatos en su área, haciendo que el mapa del mundo de fuente y datos abiertos\nsea mejor para todos.\n\nLas ediciones que realice en este mapa serán visible a todos los que usen\nOpenStreetMap. Para poder hacer una edición tendrá que\n[Iniciar sesión](https://www.openstreetmap.org/login).\n\nEl [editor iD](http://ideditor.com/) es un proyecto colaborativo con [código\nfuente disponible en GitHub](https://github.com/openstreetmap/iD).\n",
             "editing_saving": "# Editando y guardando\n\nEste editor está diseñado para trabajar principalmente en línea, y usted está accediendo\na través de un sitio web en este momento.\n\n### Seleccionando elementos\n\nPara seleccionar un elemento del mapa, como un camino o punto de interés, haga clic en\nen él sobre el mapa. Esto resaltará el elemento seleccionado, abrirá un panel con\ndetalles sobre él y mostrará un menú de cosas que puede hacer con el elemento.\n\nPara seleccionar varios elementos, mantenga pulsada la tecla 'Shift'. A continuación, haga clic\nen los elementos que desea seleccionar, o arrastre el mapa para dibujar un rectángulo.\nEsto dibujará una caja y seleccionará todos los puntos dentro de ella.\n\n### Guardando las ediciones\n\nCuando hace cambios como editar caminos, edificios y lugares, estos son\nalmacenados localmente hasta que los guarde en el servidor. No se preocupe si se\nequivoca - puede deshacer los cambios haciendo clic en el botón deshacer, y rehacer cambios\nhaciendo clic en el botón rehacer.\n\nHaga clic en 'Guardar' para finalizar un grupo de ediciones - por ejemplo, si completó\nun área de la ciudad y quisiera comenzar en un área nueva. Tendrá la oportunidad\npara revisar lo que ha hecho, y el editor suministra sugerencias útiles\ny advertencias si algo no parece correcto sobre los cambios.\n\nSi todo está bien, puede escribir un comentario corto explicando el cambio\nque ha hecho y hacer clic en 'Guardar' de nuevo para publicar los cambios\nen [OpenStreetMap.org](http://www.openstreetmap.org/), donde son visibles\na todos los demás usuarios y disponibles para que otros puedan aprovechar y mejorar.\n\nSi no puede terminar sus ediciones en una sola sesión, puede dejar la ventana\ndel editor y volver (en el mismo navegador y equipo), y el\neditor de la aplicación le ofrecerá restaurar su trabajo.\n\n### Usando del editor\n\nPuede ver una lista de atajos de teclado pulsando la tecla `?`.\n",
             "roads": "# Carreteras\n\nPuede crear, corregir y borrar carreteras con este editor. Las vías pueden ser de todas las clases: caminos, carreteras, senderos, ciclovías, etc. A cualquier línea dibujada en el mapa se le debe indicar el tipo de elemento lineal que es.\n\n### Seleccionar\n\nHaga clic sobre una vía para seleccionarla. Verá sobre ella como se visualiza su esquema, formada por nodos y segmentos, junto con un menú de herramientas que aparece sobre el mapa y una barra lateral que muestra más información sobre la vía.\n\n### Modificar\n\nA menudo verá viales que no están alineados correctamente con la imagen aérea de fondo o con la traza GPS. Puede ajustar esas vías para situarlas en el lugar exacto.\n\nPrimero haga clic sobre la vía que desea cambiar. Esto la resaltará y mostrará los nodos o puntos de control a lo largo de la vía que la forman. A continuación simplemente arrastre esos puntos a la posición correcta. Si desea añadir nuevos puntos de control para dibujar la carretera con mayor detalle haga doble clic sobre la parte de la vía donde quiere añadir el nuevo nodo y este será creado en la vía.\n\nSi la vía conecta con otra carretera o camino pero esta conexión no aparece correctamente en el mapa puede arrastrar uno de los puntos de la vía hasta la otra carretera y se unirá automáticamente a ella mediante un nodo común. Es muy importante tener las carreteras conectadas en el mapa, ya que es esencial para proporcionar instrucciones correctas para la conducción si queremos que la cartografía se útil, por ejemplo, para los navegadores GPS.\n\n### Eliminar\n\nSi un camino es totalmente incorrecto -ha observado que no aparece en las imágenes de satélite y de manera ideal lo ha confirmado en campo- puede eliminarlo, lo cual lo borrará del mapa. Sea precavido al eliminar elementos del mapa. Como cualquier otra edición que haga este cambio será visto por todo el mundo y las imágenes de satélite a menudo no están actualizadas, por lo que una carretera que no existe en ellas pero sí en el mapa simplemente puede aparecer porque es de reciente construcción y otro usuario la ha añadido.\n\n### Crear\n\n¿Ha encontrado un lugar donde debería existir una carretera pero no aparece? Haga clic con el ratón sobre el icono 'Línea' situado en la parte superior izquierda del editor o simplemente presione la tecla '2'  de su teclado que es el acceso rápido para comenzar a dibujar una línea.\n\nHaga clic sobre el mapa en el inicio de la carretera para comenzar a dibujar. Si la vía se ramifica a partir de una carretera ya existente empiece haciendo clic sobre el lugar donde ambas conectan.\n\nHaga clic en puntos a lo largo de la vía para definir el trazado correcto de la carretera. La densidad de puntos dependerá de la complejidad del recorrido, por lo que es aconsejable dibujar desde un nivel de zoom apropiado. Si la vía que está dibujando atraviesa otra carretera conéctela con esta haciendo clic sobre el punto de intersección. Una vez haya terminado el dibujo haga doble clic con el ratón o presiones la tecla 'Return' o 'Intro' de su teclado para finalizar.\n",
@@ -813,6 +848,7 @@
                 "title": "Áreas",
                 "add_playground": "Las *áreas* son utilizadas para mostrar los límites de elementos como lagos, edificios y áreas residenciales.{br}Estos pueden ser utilizados para mapear con más detalle muchos elementos que normalmente podría mapear como puntos. **Haga clic en el botón área {button} para añadir una nueva área.**",
                 "start_playground": "Vamos a añadir esta zona de juegos al mapa dibujando un área.  Las áreas se dibujan colocando *nodos* a lo largo del borde exterior del elemento. **Haga clic o presione la barra espaciadora para colocar un nodo inicial en una de las esquinas de la zona de juegos.**",
+                "continue_playground": "Continúe dibujando el área colocando más nodos a lo largo del borde del patio. Está bien conectar el área a los caminos existentes.{br}Consejo: Puede mantener pulsada la tecla '{alt}' para evitar que los nodos se conecten a otros elementos. **Continuar dibujando un área para el patio de recreo.**",
                 "finish_playground": "Termine el área presionando la tecla retorno, o haciendo clic nuevamente en el primer o último nodo. **Termine de dibujar un área para la zona de juegos.**",
                 "search_playground": "**Busque '{preset}'.**",
                 "choose_playground": "**Elija {preset} de la lista.**",
@@ -877,6 +913,8 @@
             },
             "startediting": {
                 "title": "Empezar a editar",
+                "help": "Ahora está listo para editar OpenStreetMap.{br}Puede volver a reproducir este tutorial en cualquier momento o ver más documentación haciendo clic en el botón {button} o pulsando la tecla '{key}'.",
+                "shortcuts": "Puede ver una lista de comandos junto con sus atajos de teclado pulsando la tecla '{key}'.",
                 "save": "¡No olvide guardar sus cambios regularmente!",
                 "start": "¡Comience a mapear!"
             }
@@ -884,6 +922,9 @@
         "shortcuts": {
             "title": "Atajos de teclado",
             "tooltip": "Muestra la pantalla de atajos de teclado.",
+            "toggle": {
+                "key": "?"
+            },
             "key": {
                 "alt": "Alt",
                 "backspace": "Retroceso",
@@ -938,7 +979,6 @@
                 },
                 "with_selected": {
                     "title": "Con elemento seleccionado",
-                    "infobox": "Alterna la caja de información / medida",
                     "edit_menu": "Alterna el menú editar"
                 },
                 "vertex_selected": {
@@ -983,6 +1023,17 @@
                     "undo": "Deshace la última acción",
                     "redo": "Rehace la última acción",
                     "save": "Guarda cambios"
+                }
+            },
+            "tools": {
+                "title": "Herramientas",
+                "info": {
+                    "title": "Información",
+                    "all": "Alternar todos los paneles de información",
+                    "background": "Alternar panel de fondo",
+                    "history": "Alternar panel de historial",
+                    "location": "Alternar panel de ubicación",
+                    "measurement": "Alternar panel de medición"
                 }
             }
         },
@@ -1083,35 +1134,35 @@
                     "label": "Dirección",
                     "placeholders": {
                         "block_number": "Número de manzana",
-                        "block_number!jp": "Nro. de manzana",
+                        "block_number!jp": "Nro. de manzana - Japón",
                         "city": "Ciudad",
-                        "city!jp": "Ciudad / Pueblo / Aldea / Barrio especial de Tokio",
+                        "city!jp": "Ciudad / Pueblo / Aldea / Barrio especial de Tokio - Japón",
                         "city!vn": "Ciudad / Pueblo",
                         "conscriptionnumber": "123",
                         "country": "País",
                         "county": "Condado",
-                        "county!jp": "Distrito",
+                        "county!jp": "Distrito - Japón",
                         "district": "Distrito",
                         "district!vn": "Arrondissement / Pueblo / Distrito",
                         "floor": "Piso",
                         "hamlet": "Aldea / Caserío",
                         "housename": "Nombre de la casa",
                         "housenumber": "123",
-                        "housenumber!jp": "Nro. de edificio/Nro. de lote",
+                        "housenumber!jp": "Nro. de edificio / Nro. de lote - Japón",
                         "neighbourhood": "Barrio",
-                        "neighbourhood!jp": "Chōme / Aza / Koaza",
+                        "neighbourhood!jp": "Chōme / Aza / Koaza - Japón",
                         "place": "Lugar",
                         "postcode": "Código postal",
                         "province": "Provincia",
-                        "province!jp": "Prefectura",
-                        "quarter": "Quarter",
-                        "quarter!jp": "Ōaza / Machi",
+                        "province!jp": "Prefectura - Japón",
+                        "quarter": "Barrio",
+                        "quarter!jp": "Ōaza / Machi - Japón",
                         "state": "Estado",
                         "street": "Calle",
                         "subdistrict": "Subdistrito",
                         "subdistrict!vn": "Barrio / Comuna / Pueblito",
                         "suburb": "Suburbio",
-                        "suburb!jp": "Ward"
+                        "suburb!jp": "Ward - Japón"
                     }
                 },
                 "admin_level": {
@@ -1289,6 +1340,9 @@
                         "anticlockwise": "En sentido antihorario",
                         "clockwise": "En sentido horario"
                     }
+                },
+                "clothes": {
+                    "label": "Ropa"
                 },
                 "club": {
                     "label": "Tipo"
@@ -1476,6 +1530,10 @@
                 "generator/method": {
                     "label": "Método"
                 },
+                "generator/output/electricity": {
+                    "label": "Potencia de salida",
+                    "placeholder": "50 MW, 100 MW, 200 MW..."
+                },
                 "generator/source": {
                     "label": "Fuente"
                 },
@@ -1556,6 +1614,9 @@
                 "kerb": {
                     "label": "Bordillo/Cordón"
                 },
+                "label": {
+                    "label": "Etiqueta"
+                },
                 "lamp_type": {
                     "label": "Tipo"
                 },
@@ -1625,6 +1686,9 @@
                     "label": "Ubicación"
                 },
                 "man_made": {
+                    "label": "Tipo"
+                },
+                "manhole": {
                     "label": "Tipo"
                 },
                 "map_size": {
@@ -1833,6 +1897,10 @@
                 },
                 "plant": {
                     "label": "Planta"
+                },
+                "plant/output/electricity": {
+                    "label": "Potencia de salida",
+                    "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
                 "population": {
                     "label": "Población"
@@ -2513,6 +2581,10 @@
                     "name": "Iglesia cristiana",
                     "terms": "templo, capilla, parroquia, santuario, ermita, oratorio, iglesia, oratorio, la iglesia"
                 },
+                "amenity/place_of_worship/hindu": {
+                    "name": "Templo hindú",
+                    "terms": "Templo, hindú, Grbrgrih, Mandu, adoración, capilla, templo, santuario"
+                },
                 "amenity/place_of_worship/jewish": {
                     "name": "Sinagoga",
                     "terms": "templo, aljama, sinagoga, judío, religión"
@@ -2520,6 +2592,18 @@
                 "amenity/place_of_worship/muslim": {
                     "name": "Mezquita",
                     "terms": "mezquita, morabito, rábida, musulmán, religión"
+                },
+                "amenity/place_of_worship/shinto": {
+                    "name": "Santuario sintoísta",
+                    "terms": "Santuario, Shinto, sintoísta, Kami, Torii, capilla, templo"
+                },
+                "amenity/place_of_worship/sikh": {
+                    "name": "Templo Sij",
+                    "terms": "Templo, Sij, Sikh, Gurudwara"
+                },
+                "amenity/place_of_worship/taoist": {
+                    "name": "Templo Taoísta",
+                    "terms": "Templo, Taoísta, monasterio"
                 },
                 "amenity/planetarium": {
                     "name": "Planetario",
@@ -2579,6 +2663,10 @@
                 "amenity/school": {
                     "name": "Terreno escolar",
                     "terms": "terreno, área, suelo, recinto escolar, escolar, escuela, colegio, centro educativo, unidad educativa, primaria, secundaria, secundario, instituto"
+                },
+                "amenity/scrapyard": {
+                    "name": "Depósito de chatarra",
+                    "terms": "Depósito de chatarra, cementerio de coches, auto, coche, vehículo, basura, metal, objetos salvados, chatarra, naufragio, desguace"
                 },
                 "amenity/shelter": {
                     "name": "Refugio",
@@ -2681,6 +2769,10 @@
                 "amenity/veterinary": {
                     "name": "Veterinario",
                     "terms": "veterinario, veterinaria, albéitar, mascotas, animales, perros, gatos"
+                },
+                "amenity/waste/dog_excrement": {
+                    "name": "Recipiente para excremento de perro",
+                    "terms": "Basura, tacho, recipiente, caca, excremento, perro"
                 },
                 "amenity/waste_basket": {
                     "name": "Papelera",
@@ -3897,9 +3989,25 @@
                     "name": "Planta potabilizadora de agua",
                     "terms": "potabilizadora, ETAP, planta potabilizadora, abastecimiento de agua, agua potable"
                 },
+                "man_made/watermill": {
+                    "name": "Molino de agua",
+                    "terms": "agua, rueda, molino"
+                },
+                "man_made/windmill": {
+                    "name": "Molino de viento",
+                    "terms": "Viento, rueda, molino"
+                },
                 "man_made/works": {
                     "name": "Fábrica",
                     "terms": "factoría, manofactura, industria, taller, ensamblaje, planta, materia prima, fabricado, producción, fabricación, ingenio, procesadora, refinería, cervecería, azucarera"
+                },
+                "manhole": {
+                    "name": "Pozo de inspección",
+                    "terms": "Cubierta, tapa, agujero, alcantarillado, telecomunicaciones, pozo, sumidero, boca de alcantarilla, boca de inspección, pozo de registro, abertura, boca de acceso"
+                },
+                "manhole/drain": {
+                    "name": "Desagüe pluvial",
+                    "terms": "Cubierta, tapa, desagüe, agujero, pozo, lluvia, alcantarillado, tormenta, boca de tormenta, alcantarillado pluvial"
                 },
                 "natural": {
                     "name": "Natural",
@@ -4143,16 +4251,16 @@
                     "terms": "barrio, vecindario, vecindad, urbanización, colonia"
                 },
                 "place/quarter": {
-                    "name": "Sub-Borough / Quarter",
-                    "terms": "sub-distrito, cuadrante, delegación, localidad, barrio, vecindario"
+                    "name": "Sub-municipio / Barrio",
+                    "terms": "sub-municipio, sub-distrito, sector, cuadrante, delegación, localidad, barrio, vecindario"
                 },
                 "place/square": {
                     "name": "Plaza",
                     "terms": "plaza"
                 },
                 "place/suburb": {
-                    "name": "Borough / Suburbio",
-                    "terms": "distrito, suburbio"
+                    "name": "Municipio / Suburbio",
+                    "terms": "municipio, división administrativa, division administrativa, burgo, delegación, delegacion, localidad"
                 },
                 "place/town": {
                     "name": "Ciudad pequeña",
@@ -4172,6 +4280,14 @@
                 "power/generator": {
                     "name": "Generador de energía",
                     "terms": "subestación, generador, generador eléctrico, generador de electricidad, generador de potencia"
+                },
+                "power/generator/source_nuclear": {
+                    "name": "Reactor nuclear",
+                    "terms": "Fisión, generador, nuclear, reactor"
+                },
+                "power/generator/source_wind": {
+                    "name": "Turbina eólica",
+                    "terms": "Generador, turbina, molino de viento, viento, eólico, eolico"
                 },
                 "power/line": {
                     "name": "Línea de alta tensión",
@@ -5180,6 +5296,20 @@
                     "text": "© Sarah Hoffmann, CC by-SA 3.0, datos del mapa contribuidores OpenStreetMap, ODbL 1.0"
                 },
                 "name": "Waymarked Trails: Deportes de invierno"
+            },
+            "basemap.at": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Mapa base de Austria, basado en datos del gobierno.",
+                "name": "basemap.at"
+            },
+            "basemap.at-orthofoto": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Capa de ortofoto proporcionada por basemap.at. \"Sucesor\" de las imágenes de geoimage.at.",
+                "name": "Ortofoto de basemap.at"
             },
             "hike_n_bike": {
                 "attribution": {

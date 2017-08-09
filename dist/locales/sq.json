@@ -223,19 +223,6 @@
             "list": "Redaktime nga {users}",
             "truncated_list": "Redaktime nga {users} dhe {count} të tjerë"
         },
-        "infobox": {
-            "selected": "{n} të zgjedhur",
-            "geometry": "Gjeometria",
-            "closed": "i mbyllur",
-            "center": "Qendra",
-            "perimeter": "Perimetri",
-            "length": "Gjatësia",
-            "area": "Sipërfaqja",
-            "centroid": "Centroida",
-            "location": "Vendndodhja",
-            "metric": "Metrik",
-            "imperial": "Perandorak"
-        },
         "geometry": {
             "point": "pik",
             "vertex": "tepe",

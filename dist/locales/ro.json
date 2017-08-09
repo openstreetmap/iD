@@ -166,18 +166,6 @@
             "list": "Editări făcute de {user}",
             "truncated_list": "Editat de {users} si alți {count} de editori"
         },
-        "infobox": {
-            "selected": "{n} selectate",
-            "geometry": "Geometrie",
-            "closed": "închis ",
-            "center": "Centru",
-            "perimeter": "Perimetru",
-            "length": "Lungime",
-            "area": "Suprafață",
-            "location": "Locație ",
-            "metric": "Metric",
-            "imperial": "Imperial"
-        },
         "geometry": {
             "point": "punct",
             "vertex": "vertex",
@@ -237,9 +225,7 @@
         },
         "restore": {
             "heading": "Ai modificări nesalvate.",
-            "description": "Dorești să revii la modificările nesalvate din sesiunea anterioară de editare? ",
-            "restore": "Restabilește.",
-            "reset": "Resetează"
+            "description": "Dorești să revii la modificările nesalvate din sesiunea anterioară de editare? "
         },
         "save": {
             "title": "Salveaza",

@@ -272,19 +272,44 @@ en:
   contributors:
     list: "Edits by {users}"
     truncated_list: "Edits by {users} and {count} others"
-  infobox:
+  info_panels:
     key: I
-    selected: "{n} selected"
-    geometry: Geometry
-    closed: closed
-    center: Center
-    perimeter: Perimeter
-    length: Length
-    area: Area
-    centroid: Centroid
-    location: Location
-    metric: Metric
-    imperial: Imperial
+    background:
+      key: B
+      title: Background
+      zoom: Zoom
+      vintage: Vintage
+      unknown: Unknown
+      show_tiles: Show Tiles
+      hide_tiles: Hide Tiles
+    history:
+      key: H
+      title: History
+      selected: "{n} selected"
+      version: Version
+      last_edit: Last Edit
+      edited_by: Edited By
+      changeset: Changeset
+      unknown: Unknown
+      link_text: History on openstreetmap.org
+    location:
+      key: L
+      title: Location
+      unknown_location: Unknown Location
+    measurement:
+      key: M
+      title: Measurement
+      selected: "{n} selected"
+      geometry: Geometry
+      closed: closed
+      center: Center
+      perimeter: Perimeter
+      length: Length
+      area: Area
+      centroid: Centroid
+      location: Location
+      metric: Metric
+      imperial: Imperial
   geometry:
     point: point
     vertex: vertex
@@ -415,8 +440,8 @@ en:
   restore:
     heading: You have unsaved changes
     description: "Do you wish to restore unsaved changes from a previous editing session?"
-    restore: Restore
-    reset: Reset
+    restore: Restore my changes
+    reset: Discard my changes
   save:
     title: Save
     help: "Review your changes and upload them to OpenStreetMap, making them visible to other users."
@@ -1076,7 +1101,6 @@ en:
         lasso: "Draw a selection lasso around features"
       with_selected:
         title: "With feature selected"
-        infobox: "Toggle info / measurement box"
         edit_menu: "Toggle edit menu"
       vertex_selected:
         title: "With node selected"
@@ -1116,3 +1140,12 @@ en:
         undo: "Undo last action"
         redo: "Redo last action"
         save: "Save changes"
+    tools:
+      title: "Tools"
+      info:
+        title: "Information"
+        all: "Toggle all information panels"
+        background: "Toggle background panel"
+        history: "Toggle history panel"
+        location: "Toggle location panel"
+        measurement: "Toggle measurement panel"

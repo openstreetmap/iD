@@ -348,19 +348,6 @@
             "list": "Uređivali {users}",
             "truncated_list": "Uređivali {users} i {count} drugih"
         },
-        "infobox": {
-            "selected": "{n} odabranih",
-            "geometry": "Geometrija",
-            "closed": "zatvoreno",
-            "center": "Centar",
-            "perimeter": "Opseg",
-            "length": "Duljina",
-            "area": "Područje",
-            "centroid": "Centroid",
-            "location": "Lokacija",
-            "metric": "Metrički",
-            "imperial": "Imperijalni"
-        },
         "geometry": {
             "point": "točka",
             "vertex": "čvor",
@@ -429,7 +416,6 @@
             "switch": "Vrati nazad na ovu podlogu",
             "custom": "Podesivo",
             "custom_button": "Uredi prilagođenu podlogu",
-            "custom_prompt": "Unesi URL predložak sličica karte. Ispravne oznake su {zoom}, {x}, {y} za Z/X/Y shemu i {u} za quadtile shemu.",
             "fix_misalignment": "Popravi odstupanje snimaka",
             "imagery_source_faq": "Koji su izvornici ovih snimaka?",
             "reset": "resetiraj",
@@ -513,9 +499,7 @@
         },
         "restore": {
             "heading": "Imaš nespremljenih promjena",
-            "description": "Želiš li vratiti nespremljene promjene od posljednji puta kada si uređivao/la?",
-            "restore": "Vrati",
-            "reset": "Resetiraj"
+            "description": "Želiš li vratiti nespremljene promjene od posljednji puta kada si uređivao/la?"
         },
         "save": {
             "title": "Spremi",
@@ -938,7 +922,6 @@
                 },
                 "with_selected": {
                     "title": "Sa odabranim elementom",
-                    "infobox": "Aktiviranje info / mjernog okvira",
                     "edit_menu": "Aktiviranje izbornika za uređivanje"
                 },
                 "vertex_selected": {
@@ -1220,9 +1203,6 @@
                 },
                 "contact/webcam": {
                     "placeholder": "http://primjer.hr/"
-                },
-                "content": {
-                    "label": "Sadržaj"
                 },
                 "country": {
                     "label": "Država"

@@ -116,9 +116,6 @@
         "commit": {
             "cancel": "ยกเลิก"
         },
-        "infobox": {
-            "area": "พื้นที่"
-        },
         "geolocate": {
             "title": "แสดงตำแหน่งของฉัน"
         },
@@ -338,9 +335,6 @@
                 },
                 "contact/webcam": {
                     "placeholder": "http://example.com/"
-                },
-                "content": {
-                    "label": "เนื้อหา"
                 },
                 "currency_multi": {
                     "label": "ชนิดเงินตรา"
