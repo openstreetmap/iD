@@ -1,6 +1,15 @@
 describe('iD.serviceNominatim', function() {
     var server, nominatim;
 
+
+    before(function() {
+        iD.services.geocoder = iD.serviceNominatim;
+    });
+
+    after(function() {
+        delete iD.services.geocoder;
+    });
+
     beforeEach(function() {
         server = sinon.fakeServer.create();
         nominatim = iD.services.geocoder;

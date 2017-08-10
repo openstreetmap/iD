@@ -1,7 +1,10 @@
 /* globals chai:false */
 
 iD.debug = true;
+
+// disable things that use the network
 iD.data.imagery = [];
+_.forEach(iD.services, function(v,k) { delete iD.services[k]; });
 
 mocha.setup({
     ui: 'bdd',

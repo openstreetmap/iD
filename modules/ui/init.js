@@ -290,18 +290,19 @@ export function uiInit(context) {
                 .call(uiShortcuts(context));
         }
 
-        var authenticating = uiLoading(context)
-            .message(t('loading_auth'))
-            .blocking(true);
+        var osm = context.connection(),
+            auth = uiLoading(context).message(t('loading_auth')).blocking(true);
 
-        context.connection()
-            .on('authLoading.ui', function() {
-                context.container()
-                    .call(authenticating);
-            })
-            .on('authDone.ui', function() {
-                authenticating.close();
-            });
+        if (osm && auth) {
+            osm
+                .on('authLoading.ui', function() {
+                    context.container()
+                        .call(auth);
+                })
+                .on('authDone.ui', function() {
+                    auth.close();
+                });
+        }
 
         uiInitCounter++;
 

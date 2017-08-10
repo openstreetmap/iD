@@ -43,8 +43,10 @@ export function uiSuccess(context) {
             .append('span')
             .text(t('success.help_link_text'));
 
-        var changesetURL = context.connection().changesetURL(changeset.id);
+        var osm = context.connection();
+        if (!osm) return;
 
+        var changesetURL = osm.changesetURL(changeset.id);
 
         var viewOnOsm = body
             .append('a')
@@ -62,9 +64,8 @@ export function uiSuccess(context) {
             .append('div')
             .text(t('success.view_on_osm'));
 
-
         var message = (changeset.tags.comment || t('success.edited_osm')).substring(0, 130) +
-            ' ' + context.connection().changesetURL(changeset.id);
+            ' ' + changesetURL;
 
         var sharing = {
             facebook: 'https://facebook.com/sharer/sharer.php?u=' + encodeURIComponent(changesetURL),

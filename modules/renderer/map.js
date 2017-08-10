@@ -73,8 +73,10 @@ export function rendererMap(context) {
         context
             .on('change.map', immediateRedraw);
 
-        context.connection()
-            .on('change.map', immediateRedraw);
+        var osm = context.connection();
+        if (osm) {
+            osm.on('change.map', immediateRedraw);
+        }
 
         context.history()
             .on('change.map', immediateRedraw)
