@@ -1357,9 +1357,6 @@
                     "label": "URL веб-камери",
                     "placeholder": "http://example.com/"
                 },
-                "content": {
-                    "label": "Вміст"
-                },
                 "country": {
                     "label": "Країна"
                 },

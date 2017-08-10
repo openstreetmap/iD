@@ -9,7 +9,8 @@ describe('iD.uiFlash', function () {
     });
 
     afterEach(function() {
-        d3.select('body > div').remove();
+        d3.select('#flash-wrap')
+            .remove();
     });
 
     it('returns a selection', function () {

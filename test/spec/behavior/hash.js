@@ -5,8 +5,6 @@ describe('iD.behaviorHash', function () {
 
     beforeEach(function () {
         context = iD.Context();
-        context.connection().loadTiles = function () {};   // Neuter connection
-
         var container = d3.select(document.createElement('div'));
         context.container(container);
         container.call(context.map());
@@ -15,6 +13,7 @@ describe('iD.behaviorHash', function () {
 
     afterEach(function () {
         hash.off();
+        location.hash = '';
     });
 
     it('sets hadHash if location.hash is present', function () {

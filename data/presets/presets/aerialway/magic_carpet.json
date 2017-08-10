@@ -3,6 +3,7 @@
         "line"
     ],
     "fields": [
+        "name",
         "aerialway/capacity",
         "aerialway/duration",
         "aerialway/heating"

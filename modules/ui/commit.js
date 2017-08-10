@@ -26,6 +26,9 @@ export function uiCommit(context) {
 
 
     function commit(selection) {
+        var osm = context.connection();
+        if (!osm) return;
+
         if (!changeset) {
             var detected = utilDetect(),
                 tags = {
@@ -87,7 +90,7 @@ export function uiCommit(context) {
 
         commentField.node().select();
 
-        context.connection().userChangesets(function (err, changesets) {
+        osm.userChangesets(function (err, changesets) {
             if (err) return;
 
             var comments = changesets.map(function(changeset) {
@@ -188,7 +191,7 @@ export function uiCommit(context) {
             .attr('type', 'checkbox')
             .on('change', toggleRequestReview());
 
-        context.connection().userDetails(function(err, user) {
+        osm.userDetails(function(err, user) {
             if (err) return;
 
             var userLink = d3.select(document.createElement('div'));
@@ -204,7 +207,7 @@ export function uiCommit(context) {
                 .append('a')
                 .attr('class','user-info')
                 .text(user.display_name)
-                .attr('href', context.connection().userURL(user.display_name))
+                .attr('href', osm.userURL(user.display_name))
                 .attr('tabindex', -1)
                 .attr('target', '_blank');
 

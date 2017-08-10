@@ -1,6 +1,7 @@
 {
     "icon": "lodging",
     "fields": [
+        "name",
         "operator",
         "address",
         "opening_hours"

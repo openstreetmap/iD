@@ -820,9 +820,6 @@
                 "construction": {
                     "label": "Type"
                 },
-                "content": {
-                    "label": "Innhold"
-                },
                 "country": {
                     "label": "Land"
                 },

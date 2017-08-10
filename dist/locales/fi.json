@@ -993,9 +993,6 @@
                     "label": "Kameran verkko-osoite",
                     "placeholder": "http://www.esimerkki.fi/"
                 },
-                "content": {
-                    "label": "Sisältö"
-                },
                 "country": {
                     "label": "Maa"
                 },

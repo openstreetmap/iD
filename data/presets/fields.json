@@ -329,6 +329,12 @@
             "type": "text",
             "label": "Brand"
         },
+        "bridge": {
+            "key": "bridge",
+            "type": "typeCombo",
+            "label": "Type",
+            "placeholder": "Default"
+        },
         "building_area": {
             "key": "building",
             "type": "combo",
@@ -488,6 +494,12 @@
             "type": "multiCombo",
             "label": "Currency Types"
         },
+        "cutting": {
+            "key": "cutting",
+            "type": "typeCombo",
+            "label": "Type",
+            "placeholder": "Default"
+        },
         "cycle_network": {
             "key": "cycle_network",
             "type": "networkCombo",
@@ -631,6 +643,12 @@
             "universal": true,
             "label": "Email"
         },
+        "embankment": {
+            "key": "embankment",
+            "type": "typeCombo",
+            "label": "Type",
+            "placeholder": "Default"
+        },
         "emergency": {
             "key": "emergency",
             "type": "check",
@@ -695,6 +713,12 @@
             "label": "Fix Me",
             "universal": true
         },
+        "ford": {
+            "key": "ford",
+            "type": "typeCombo",
+            "label": "Type",
+            "placeholder": "Default"
+        },
         "fuel_multi": {
             "key": "fuel:",
             "type": "multiCombo",
@@ -747,12 +771,6 @@
             "key": "generator:type",
             "type": "combo",
             "label": "Type"
-        },
-        "golf_hole": {
-            "key": "ref",
-            "type": "text",
-            "label": "Reference",
-            "placeholder": "Hole number (1-18)"
         },
         "grape_variety": {
             "key": "grape_variety",
@@ -889,8 +907,9 @@
         },
         "layer": {
             "key": "layer",
-            "type": "combo",
-            "label": "Layer"
+            "type": "number",
+            "label": "Layer",
+            "placeholder": "0"
         },
         "leaf_cycle_singular": {
             "key": "leaf_cycle",
@@ -1034,6 +1053,12 @@
             "label": "Max Weight",
             "snake_case": false
         },
+        "milestone_position": {
+            "key": "railway:position",
+            "type": "text",
+            "placeholder": "Distance to one decimal (123.4)",
+            "label": "Milestone Position"
+        },
         "mtb/scale": {
             "key": "mtb:scale",
             "type": "combo",
@@ -1086,6 +1111,7 @@
             "key": "name",
             "type": "localized",
             "label": "Name",
+            "universal": true,
             "placeholder": "Common name (if any)"
         },
         "natural": {
@@ -1361,10 +1387,58 @@
                 }
             }
         },
+        "ref_aeroway_gate": {
+            "key": "ref",
+            "type": "text",
+            "label": "Gate Number"
+        },
+        "ref_golf_hole": {
+            "key": "ref",
+            "type": "text",
+            "label": "Hole Number",
+            "placeholder": "1-18"
+        },
+        "ref_highway_junction": {
+            "key": "ref",
+            "type": "text",
+            "label": "Junction Number"
+        },
+        "ref_platform": {
+            "key": "ref",
+            "type": "text",
+            "label": "Platform Number"
+        },
+        "ref_road_number": {
+            "key": "ref",
+            "type": "text",
+            "label": "Road Number"
+        },
+        "ref_route": {
+            "key": "ref",
+            "type": "text",
+            "label": "Route Number"
+        },
+        "ref_runway": {
+            "key": "ref",
+            "type": "text",
+            "label": "Runway Number",
+            "placeholder": "e.g. 01L/19R"
+        },
+        "ref_stop_position": {
+            "key": "ref",
+            "type": "text",
+            "label": "Stop Number"
+        },
+        "ref_taxiway": {
+            "key": "ref",
+            "type": "text",
+            "label": "Taxiway Name",
+            "placeholder": "e.g. A5"
+        },
         "ref": {
             "key": "ref",
             "type": "text",
-            "label": "Reference"
+            "label": "Reference Code"
         },
         "relation": {
             "key": "type",
@@ -1793,10 +1867,16 @@
             "type": "semiCombo",
             "label": "Trees"
         },
-        "tunnel": {
+        "tunnel_waterway": {
             "key": "tunnel",
             "type": "combo",
             "label": "Tunnel"
+        },
+        "tunnel": {
+            "key": "tunnel",
+            "type": "typeCombo",
+            "label": "Type",
+            "placeholder": "Default"
         },
         "vending": {
             "key": "vending",

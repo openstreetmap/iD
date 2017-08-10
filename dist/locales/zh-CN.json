@@ -2,8 +2,8 @@
     "zh-CN": {
         "modes": {
             "add_area": {
-                "title": "面",
-                "description": "添加公园、建筑物、湖泊或其他面到地图上。",
+                "title": "区域",
+                "description": "在地图上添加公园、建筑物、湖泊或其他区域。",
                 "tail": "在地图上单击开始绘制面状要素，如公园、湖泊或建筑物。"
             },
             "add_line": {
@@ -341,11 +341,11 @@
             "created": "已创建",
             "about_changeset_comments": "关于修改集合说明",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
-            "google_warning": "您在评论中提及Google: 注意从Google地图抄袭是严格禁止的。",
+            "google_warning": "您在该评论中提及 Google : 记住复制 Google Maps 中信息是严格禁止的。",
             "google_warning_link": "http://www.openstreetmap.org/copyright"
         },
         "contributors": {
-            "list": "{users}编辑",
+            "list": "{users} 编辑",
             "truncated_list": "{users}及另外{count}人编辑"
         },
         "info_panels": {
@@ -460,6 +460,7 @@
             "switch": "切换回该底图",
             "custom": "自定义",
             "custom_button": "编辑自定义背景",
+            "custom_prompt": "输入地图影像的URL模版。有效的参数包括：\n以Z/X/Y方式的服务器使用 {zoom}, {z},{x}, {y} 作为参数，\n以TMS风格翻转Y坐标方式的服务器，使用{ty} 作为参数\n以quadtile方式的服务器，使用 {u} 作参数。\n以复用DNS方式的服务器，使用{switch:a,b,c}作为参数\n\n例如：{example}",
             "fix_misalignment": "调整影像偏移",
             "imagery_source_faq": "该影像的来源是？",
             "reset": "重置",
@@ -1355,9 +1356,6 @@
                 "contact/webcam": {
                     "label": "网络摄像机地址",
                     "placeholder": "http://example.com/"
-                },
-                "content": {
-                    "label": "内容"
                 },
                 "country": {
                     "label": "国家"

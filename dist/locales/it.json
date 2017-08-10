@@ -1289,9 +1289,6 @@
                     "label": "URL webcam",
                     "placeholder": "http://example.com/"
                 },
-                "content": {
-                    "label": "Contenuto"
-                },
                 "country": {
                     "label": "Stato"
                 },

@@ -1284,6 +1284,10 @@
                 "brand": {
                     "label": "Brand"
                 },
+                "bridge": {
+                    "label": "Type",
+                    "placeholder": "Default"
+                },
                 "building_area": {
                     "label": "Building"
                 },
@@ -1386,6 +1390,10 @@
                 "currency_multi": {
                     "label": "Currency Types"
                 },
+                "cutting": {
+                    "label": "Type",
+                    "placeholder": "Default"
+                },
                 "cycle_network": {
                     "label": "Network"
                 },
@@ -1471,6 +1479,10 @@
                     "label": "Email",
                     "placeholder": "example@example.com"
                 },
+                "embankment": {
+                    "label": "Type",
+                    "placeholder": "Default"
+                },
                 "emergency": {
                     "label": "Emergency"
                 },
@@ -1511,6 +1523,10 @@
                 "fixme": {
                     "label": "Fix Me"
                 },
+                "ford": {
+                    "label": "Type",
+                    "placeholder": "Default"
+                },
                 "fuel_multi": {
                     "label": "Fuel Types"
                 },
@@ -1541,10 +1557,6 @@
                 },
                 "generator/type": {
                     "label": "Type"
-                },
-                "golf_hole": {
-                    "label": "Reference",
-                    "placeholder": "Hole number (1-18)"
                 },
                 "grape_variety": {
                     "label": "Grape Varieties"
@@ -1630,7 +1642,8 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "layer": {
-                    "label": "Layer"
+                    "label": "Layer",
+                    "placeholder": "0"
                 },
                 "leaf_cycle_singular": {
                     "label": "Leaf Cycle",
@@ -1712,6 +1725,10 @@
                 },
                 "maxweight": {
                     "label": "Max Weight"
+                },
+                "milestone_position": {
+                    "label": "Milestone Position",
+                    "placeholder": "Distance to one decimal (123.4)"
                 },
                 "mtb/scale": {
                     "label": "Mountain Biking Difficulty",
@@ -1932,8 +1949,38 @@
                         "centre": "Recycling Center"
                     }
                 },
+                "ref_aeroway_gate": {
+                    "label": "Gate Number"
+                },
+                "ref_golf_hole": {
+                    "label": "Hole Number",
+                    "placeholder": "1-18"
+                },
+                "ref_highway_junction": {
+                    "label": "Junction Number"
+                },
+                "ref_platform": {
+                    "label": "Platform Number"
+                },
+                "ref_road_number": {
+                    "label": "Road Number"
+                },
+                "ref_route": {
+                    "label": "Route Number"
+                },
+                "ref_runway": {
+                    "label": "Runway Number",
+                    "placeholder": "e.g. 01L/19R"
+                },
+                "ref_stop_position": {
+                    "label": "Stop Number"
+                },
+                "ref_taxiway": {
+                    "label": "Taxiway Name",
+                    "placeholder": "e.g. A5"
+                },
                 "ref": {
-                    "label": "Reference"
+                    "label": "Reference Code"
                 },
                 "relation": {
                     "label": "Type"
@@ -2188,8 +2235,12 @@
                 "trees": {
                     "label": "Trees"
                 },
-                "tunnel": {
+                "tunnel_waterway": {
                     "label": "Tunnel"
+                },
+                "tunnel": {
+                    "label": "Type",
+                    "placeholder": "Default"
                 },
                 "vending": {
                     "label": "Type of Goods"
@@ -2322,7 +2373,7 @@
                 },
                 "aerialway/t-bar": {
                     "name": "T-bar Lift",
-                    "terms": ""
+                    "terms": "tbar"
                 },
                 "aeroway/aerodrome": {
                     "name": "Airport",
@@ -2718,7 +2769,7 @@
                 },
                 "amenity/social_facility/group_home": {
                     "name": "Elderly Group Home",
-                    "terms": "old,senior,living"
+                    "terms": "old,senior,living,care home,assisted living"
                 },
                 "amenity/social_facility/homeless_shelter": {
                     "name": "Homeless Shelter",
@@ -2726,7 +2777,7 @@
                 },
                 "amenity/social_facility/nursing_home": {
                     "name": "Nursing Home",
-                    "terms": "elderly,living,nursing,old,senior"
+                    "terms": "elderly,living,nursing,old,senior,assisted living"
                 },
                 "amenity/studio": {
                     "name": "Studio",
@@ -3986,7 +4037,7 @@
                 },
                 "man_made/pier": {
                     "name": "Pier",
-                    "terms": "dock"
+                    "terms": "dock,jetty"
                 },
                 "man_made/pipeline": {
                     "name": "Pipeline",
@@ -4055,6 +4106,10 @@
                 "manhole/drain": {
                     "name": "Storm Drain",
                     "terms": "cover,drain,hole,rain,sewer,sewage,storm"
+                },
+                "manhole/telecom": {
+                    "name": "Telecom Manhole",
+                    "terms": "cover,phone,hole,telecom,telephone,bt"
                 },
                 "natural": {
                     "name": "Natural",
@@ -4376,9 +4431,17 @@
                     "name": "Abandoned Railway",
                     "terms": ""
                 },
+                "railway/buffer_stop": {
+                    "name": "Buffer Stop",
+                    "terms": "stop,halt,buffer"
+                },
                 "railway/crossing": {
                     "name": "Railway Crossing (Path)",
                     "terms": "crossing,pedestrian crossing,railroad crossing,level crossing,grade crossing,path through railroad,train crossing"
+                },
+                "railway/derail": {
+                    "name": "Railway Derailer",
+                    "terms": "derailer"
                 },
                 "railway/disused": {
                     "name": "Disused Railway",
@@ -4396,6 +4459,10 @@
                     "name": "Railway Crossing (Road)",
                     "terms": "crossing,railroad crossing,level crossing,grade crossing,road through railroad,train crossing"
                 },
+                "railway/milestone": {
+                    "name": "Railway Milestone",
+                    "terms": "milestone,marker"
+                },
                 "railway/monorail": {
                     "name": "Monorail",
                     "terms": ""
@@ -4412,6 +4479,10 @@
                     "name": "Rail",
                     "terms": ""
                 },
+                "railway/signal": {
+                    "name": "Railway Signal",
+                    "terms": "signal,lights"
+                },
                 "railway/station": {
                     "name": "Railway Station",
                     "terms": "train station,station"
@@ -4423,6 +4494,14 @@
                 "railway/subway": {
                     "name": "Subway",
                     "terms": "metro,transit"
+                },
+                "railway/switch": {
+                    "name": "Railway Switch",
+                    "terms": "switch,points"
+                },
+                "railway/train_wash": {
+                    "name": "Train Wash",
+                    "terms": "wash,clean"
                 },
                 "railway/tram_stop": {
                     "name": "Tram Stop",

@@ -1,6 +1,7 @@
 {
     "icon": "waterway-canal",
     "fields": [
+        "name",
         "width"
     ],
     "geometry": [

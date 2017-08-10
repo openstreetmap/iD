@@ -1027,9 +1027,6 @@
                     "label": "網路相機 URL",
                     "placeholder": "http://example.com/"
                 },
-                "content": {
-                    "label": "內容"
-                },
                 "country": {
                     "label": "國"
                 },

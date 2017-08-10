@@ -24,7 +24,7 @@ export function setAreaKeys(value) {
 
 export function coreContext() {
     var context = {};
-    context.version = '2.3.1';
+    context.version = '2.3.2';
 
     // create a special translation that contains the keys in place of the strings
     var tkeys = _.cloneDeep(dataEn);
@@ -88,7 +88,9 @@ export function coreContext() {
     }
 
     context.preauth = function(options) {
-        connection.switch(options);
+        if (connection) {
+            connection.switch(options);
+        }
         return context;
     };
 
@@ -97,7 +99,9 @@ export function coreContext() {
             entitiesLoaded(err, result);
             if (callback) callback(err, result);
         }
-        connection.loadTiles(projection, dimensions, done);
+        if (connection) {
+            connection.loadTiles(projection, dimensions, done);
+        }
     };
 
     context.loadEntity = function(id, callback) {
@@ -105,7 +109,9 @@ export function coreContext() {
             entitiesLoaded(err, result);
             if (callback) callback(err, result);
         }
-        connection.loadEntity(id, done);
+        if (connection) {
+            connection.loadEntity(id, done);
+        }
     };
 
     context.zoomToEntity = function(id, zoomTo) {
@@ -136,7 +142,9 @@ export function coreContext() {
     context.minEditableZoom = function(_) {
         if (!arguments.length) return minEditableZoom;
         minEditableZoom = _;
-        connection.tileZoom(_);
+        if (connection) {
+            connection.tileZoom(_);
+        }
         return context;
     };
 

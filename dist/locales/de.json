@@ -491,7 +491,7 @@
             },
             "service_roads": {
                 "description": "Erschließungsstraßen",
-                "tooltip": "Erschließungsstraßen, Zufahrtsstraßen, Parkplatzstraßen, Feldwege, Waldwege, etc."
+                "tooltip": "Erschließungsstraßen, Zufahrtsstraßen, Parkplatzstraßen, Waldwege, Feldwege, etc."
             },
             "paths": {
                 "description": "Wege",
@@ -1341,6 +1341,9 @@
                         "clockwise": "im Uhrzeigersinn"
                     }
                 },
+                "clothes": {
+                    "label": "Kleidung"
+                },
                 "club": {
                     "label": "Typ"
                 },
@@ -1358,7 +1361,7 @@
                     "placeholder": "http://example.com/"
                 },
                 "content": {
-                    "label": "Inhalte"
+                    "label": "Inhalt"
                 },
                 "country": {
                     "label": "Land"
@@ -1526,6 +1529,10 @@
                 },
                 "generator/method": {
                     "label": "Methode"
+                },
+                "generator/output/electricity": {
+                    "label": "Leistung",
+                    "placeholder": "50 MW, 100 MW, 200 MW..."
                 },
                 "generator/source": {
                     "label": "Quelle"
@@ -1891,6 +1898,10 @@
                 "plant": {
                     "label": "Pflanze"
                 },
+                "plant/output/electricity": {
+                    "label": "Leistung",
+                    "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
                 "population": {
                     "label": "Bevölkerung"
                 },
@@ -2144,7 +2155,7 @@
                     "label": "Typ"
                 },
                 "tracktype": {
-                    "label": "Typ des Feld-/Waldweges",
+                    "label": "Typ des Wald-/Feldweges",
                     "options": {
                         "grade1": "Grad 1 - Fest: befestigt oder sehr kompakte harte Oberfläche",
                         "grade2": "Grad 2 - Größtenteils fest: Kies/Stein gemischt mit etwas weichem Material",
@@ -2570,6 +2581,10 @@
                     "name": "Kirche",
                     "terms": "christlich,Abtei,Basilika,geweihter Ort,Kathedrale,Altarraum,Kantorei,Kapelle,Kirche,Kirchgemeinde,Gotteshaus,Gebetshaus,Dom,Oratorium,Heiligtum,Sacellum,Schrein,Tabernakel,Tempel"
                 },
+                "amenity/place_of_worship/hindu": {
+                    "name": "Hindutempel",
+                    "terms": "<translate with synonyms or related terms for 'Hindu Temple', separated by commas>"
+                },
                 "amenity/place_of_worship/jewish": {
                     "name": "Sy­n­a­go­ge",
                     "terms": "jüdisch,Synagoge"
@@ -2577,6 +2592,18 @@
                 "amenity/place_of_worship/muslim": {
                     "name": "Moschee",
                     "terms": "muslimisch,Moschee"
+                },
+                "amenity/place_of_worship/shinto": {
+                    "name": "Shintō-Schrein",
+                    "terms": "<translate with synonyms or related terms for 'Shinto Shrine', separated by commas>"
+                },
+                "amenity/place_of_worship/sikh": {
+                    "name": "Sikh-Tempel",
+                    "terms": "<translate with synonyms or related terms for 'Sikh Temple', separated by commas>"
+                },
+                "amenity/place_of_worship/taoist": {
+                    "name": "Tao-Tempel",
+                    "terms": "<translate with synonyms or related terms for 'Taoist Temple', separated by commas>"
                 },
                 "amenity/planetarium": {
                     "name": "Planetarium",
@@ -2742,6 +2769,10 @@
                 "amenity/veterinary": {
                     "name": "Tierarzt",
                     "terms": "Tierarzt, Tierärztin, Verterinär"
+                },
+                "amenity/waste/dog_excrement": {
+                    "name": "Hundekotabfalleimer",
+                    "terms": "<translate with synonyms or related terms for 'Dog Excrement Bin', separated by commas>"
                 },
                 "amenity/waste_basket": {
                     "name": "Mülleimer",
@@ -3441,8 +3472,8 @@
                     "terms": "Verbindungsstraßenanschluss,Kreisstraßenanschluss, Kreisstraßenauffahrt, Kreisstraßenabfahrt, Auffahrt, Abfahrt"
                 },
                 "highway/track": {
-                    "name": "Feld-/Waldweg",
-                    "terms": "Wirtschaftsweg, Feldweg, Waldweg, Forststraße"
+                    "name": "Wald-/Feldweg",
+                    "terms": "Wirtschaftsweg, Waldweg, Feldweg, Forststraße"
                 },
                 "highway/traffic_mirror": {
                     "name": "Verkehrsspiegel",
@@ -3958,6 +3989,14 @@
                     "name": "Wasserwerk",
                     "terms": "Wasserwerk"
                 },
+                "man_made/watermill": {
+                    "name": "Wassermühle",
+                    "terms": "Wassermühle"
+                },
+                "man_made/windmill": {
+                    "name": "Windmühle",
+                    "terms": "Windmühle"
+                },
                 "man_made/works": {
                     "name": "Fabrik",
                     "terms": "Fabrik, Werk, Betrieb, Fabriksanlage, Produktionsstätte, Fertigungsanlage"
@@ -4241,6 +4280,14 @@
                 "power/generator": {
                     "name": "Stromgenerator",
                     "terms": "Stromgenerator"
+                },
+                "power/generator/source_nuclear": {
+                    "name": "Kernreaktor",
+                    "terms": "<translate with synonyms or related terms for 'Nuclear Reactor', separated by commas>"
+                },
+                "power/generator/source_wind": {
+                    "name": "Windrad",
+                    "terms": "<translate with synonyms or related terms for 'Wind Turbine', separated by commas>"
                 },
                 "power/line": {
                     "name": "Stromleitung-Hochspannung",

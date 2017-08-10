@@ -1064,9 +1064,6 @@
                     "label": "URL de la webcam",
                     "placeholder": "http://example.com/"
                 },
-                "content": {
-                    "label": "Continguts"
-                },
                 "country": {
                     "label": "País"
                 },

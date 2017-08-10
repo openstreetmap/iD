@@ -1,6 +1,7 @@
 {
     "icon": "water",
     "fields": [
+        "name",
         "height",
         "width"
     ],

@@ -326,7 +326,7 @@ export function uiIntroNavigation(context, reveal) {
 
         var onClick = function() { continueTo(closeTownHall); };
 
-        reveal('.inspector-body .inspector-preset',
+        reveal('.inspector-body .preset-editor',
             t('intro.navigation.fields_townhall'),
             { buttonText: t('intro.ok'), buttonCallback: onClick }
         );

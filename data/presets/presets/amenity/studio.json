@@ -1,6 +1,7 @@
 {
     "icon": "karaoke",
     "fields": [
+        "name",
         "studio",
         "address",
         "building_area"

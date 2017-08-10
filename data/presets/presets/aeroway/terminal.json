@@ -9,6 +9,7 @@
         "aerodrome"
     ],
     "fields": [
+        "name",
         "operator",
         "building_area"
     ],

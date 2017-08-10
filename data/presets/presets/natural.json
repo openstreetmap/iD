@@ -1,6 +1,7 @@
 {
     "icon": "natural",
     "fields": [
+        "name",
         "natural"
     ],
     "geometry": [

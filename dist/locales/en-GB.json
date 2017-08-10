@@ -547,7 +547,9 @@
         },
         "restore": {
             "heading": "You have unsaved changes",
-            "description": "Do you wish to restore unsaved changes from a previous editing session?"
+            "description": "Do you wish to restore unsaved changes from a previous editing session?",
+            "restore": "Restore my changes",
+            "reset": "Discard my changes"
         },
         "save": {
             "title": "Save",
@@ -1260,7 +1262,7 @@
                     "label": "Type"
                 },
                 "bin": {
-                    "label": "Waste Bin"
+                    "label": "Rubbish Bin"
                 },
                 "blood_components": {
                     "label": "Blood Components",
@@ -1339,6 +1341,9 @@
                         "clockwise": "Clockwise"
                     }
                 },
+                "clothes": {
+                    "label": "Clothes"
+                },
                 "club": {
                     "label": "Type"
                 },
@@ -1356,7 +1361,7 @@
                     "placeholder": "http://example.com/"
                 },
                 "content": {
-                    "label": "Contents"
+                    "label": "Content"
                 },
                 "country": {
                     "label": "Country"
@@ -1525,6 +1530,10 @@
                 "generator/method": {
                     "label": "Method"
                 },
+                "generator/output/electricity": {
+                    "label": "Power Output",
+                    "placeholder": "50 MW, 100 MW, 200 MW..."
+                },
                 "generator/source": {
                     "label": "Source"
                 },
@@ -1605,6 +1614,9 @@
                 "kerb": {
                     "label": "Kerb"
                 },
+                "label": {
+                    "label": "Label"
+                },
                 "lamp_type": {
                     "label": "Type"
                 },
@@ -1674,6 +1686,9 @@
                     "label": "Location"
                 },
                 "man_made": {
+                    "label": "Type"
+                },
+                "manhole": {
                     "label": "Type"
                 },
                 "map_size": {
@@ -1882,6 +1897,10 @@
                 },
                 "plant": {
                     "label": "Plant"
+                },
+                "plant/output/electricity": {
+                    "label": "Power Output",
+                    "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
                 "population": {
                     "label": "Population"
@@ -2480,11 +2499,23 @@
                 "amenity/place_of_worship/christian": {
                     "name": "Church"
                 },
+                "amenity/place_of_worship/hindu": {
+                    "name": "Hindu Temple"
+                },
                 "amenity/place_of_worship/jewish": {
                     "name": "Synagogue"
                 },
                 "amenity/place_of_worship/muslim": {
                     "name": "Mosque"
+                },
+                "amenity/place_of_worship/shinto": {
+                    "name": "Shinto Shrine"
+                },
+                "amenity/place_of_worship/sikh": {
+                    "name": "Sikh Temple"
+                },
+                "amenity/place_of_worship/taoist": {
+                    "name": "Taoist Temple"
                 },
                 "amenity/planetarium": {
                     "name": "Planetarium"
@@ -2531,6 +2562,9 @@
                 },
                 "amenity/school": {
                     "name": "School Grounds"
+                },
+                "amenity/scrapyard": {
+                    "name": "Scrap Yard"
                 },
                 "amenity/shelter": {
                     "name": "Shelter"
@@ -2610,8 +2644,11 @@
                 "amenity/veterinary": {
                     "name": "Veterinary"
                 },
+                "amenity/waste/dog_excrement": {
+                    "name": "Dog Excrement Bin"
+                },
                 "amenity/waste_basket": {
-                    "name": "Waste Basket"
+                    "name": "Rubbish Bin"
                 },
                 "amenity/waste_disposal": {
                     "name": "Garbage Dumpster"
@@ -3535,8 +3572,20 @@
                 "man_made/water_works": {
                     "name": "Water Works"
                 },
+                "man_made/watermill": {
+                    "name": "Watermill"
+                },
+                "man_made/windmill": {
+                    "name": "Windmill"
+                },
                 "man_made/works": {
                     "name": "Factory"
+                },
+                "manhole": {
+                    "name": "Manhole"
+                },
+                "manhole/drain": {
+                    "name": "Storm Drain"
                 },
                 "natural": {
                     "name": "Natural"
@@ -3744,6 +3793,12 @@
                 },
                 "power/generator": {
                     "name": "Power Generator"
+                },
+                "power/generator/source_nuclear": {
+                    "name": "Nuclear Reactor"
+                },
+                "power/generator/source_wind": {
+                    "name": "Wind Turbine"
                 },
                 "power/line": {
                     "name": "Power Line"

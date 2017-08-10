@@ -495,9 +495,6 @@
                 "construction": {
                     "label": "வகை"
                 },
-                "content": {
-                    "label": "பொருளடக்கம்"
-                },
                 "country": {
                     "label": "நாடு"
                 },

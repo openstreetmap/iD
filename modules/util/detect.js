@@ -92,7 +92,7 @@ export function utilDetect(force) {
     // detect text direction
     var q = utilStringQs(window.location.hash.substring(1));
     var lang = dataLocales[detected.locale];
-    if ((lang && lang.rtl) || q.hasOwnProperty('rtl')) {
+    if ((lang && lang.rtl) || (q.rtl === 'true')) {
         detected.textDirection = 'rtl';
     } else {
         detected.textDirection = 'ltr';

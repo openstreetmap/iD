@@ -8,7 +8,7 @@ or learn more by visiting our project page on GitHub:  :octocat: https://github.
 _Breaking changes, which may affect downstream projects or sites that embed iD, are marked with a_ :warning:
 
 <!--
-  # A.B.C
+# A.B.C
 ##### MMM DD, YYYY
 
 #### :newspaper: News
@@ -25,6 +25,62 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [#xxxx]: https://github.com/openstreetmap/iD/issues/xxxx
 [@xxxx]: https://github.com/xxxx
 -->
+
+# 2.3.2
+##### July 24, 2017
+
+#### :tada: New Features
+
+* Display capture date on the attribution line at bottom of Mapillary viewer ([#4156])
+* Highlight detected objects and signs in Mapillary images ([#3772], [#4148], thanks [@kepta])
+
+[#4156]: https://github.com/openstreetmap/iD/issues/4156
+[#4148]: https://github.com/openstreetmap/iD/issues/4148
+[#3772]: https://github.com/openstreetmap/iD/issues/3772
+[@kepta]: https://github.com/kepta
+
+#### :sparkles: Usability
+
+* Prevent user from tabbing from fields in the sidebar to the browser's address bar ([#4159])
+* Distinguish between default vs. tagged `service=*` highways and railways ([#4157])
+* Fix styles for several aeroway, highway, railway mapped as areas ([#4167])
+* Change rendering for non-grass sport pitches (basketball, skateboard, beachvolleyball)
+* Render `railway=platform` like sidewalks and footpaths
+* Place pasted point at cursor (not offset) when pasting while dragging the map ([#4155])
+
+[#4167]: https://github.com/openstreetmap/iD/issues/4167
+[#4159]: https://github.com/openstreetmap/iD/issues/4159
+[#4157]: https://github.com/openstreetmap/iD/issues/4157
+[#4155]: https://github.com/openstreetmap/iD/issues/4155
+
+#### :bug: Bugfixes
+
+* Make expandable sidebar sections work with incognito mode ([#4159])
+* Remember the chosen custom background when set by url ([#4162], [#4165], thanks [@pgiraud])
+* Fix: <kbd>⌘⇧B</kbd> / <kbd>Ctrl+Shift+B</kbd> should not also swap the background like <kbd>⌘B</kbd> / <kbd>Ctrl+B</kbd> ([#4153])
+
+[#4165]: https://github.com/openstreetmap/iD/issues/4165
+[#4162]: https://github.com/openstreetmap/iD/issues/4162
+[#4159]: https://github.com/openstreetmap/iD/issues/4159
+[#4153]: https://github.com/openstreetmap/iD/issues/4153
+[@pgiraud]: https://github.com/pgiraud
+
+#### :rocket: Presets
+
+* Add presets, icons for Wind and Nuclear `power=generator`, and `output:electricity` field
+* Add presets, icons for Shinto, Taoist, Hindu, Sikh `amenity=place_of_worship` ([#4175])
+* Add preset for Dog Excrement Bin, `waste=dog_excrement` ([#4172], thanks [@JamesKingdom])
+* Add Clothes field to Clothing Store, Botique, Fashion ([#4149])
+* Change caption for content field from "Contents" to "Content" ([#4169])
+* Add presets for Windmill and Watermill ([#4168])
+
+[#4175]: https://github.com/openstreetmap/iD/issues/4175
+[#4172]: https://github.com/openstreetmap/iD/issues/4172
+[#4169]: https://github.com/openstreetmap/iD/issues/4169
+[#4168]: https://github.com/openstreetmap/iD/issues/4168
+[#4149]: https://github.com/openstreetmap/iD/issues/4149
+[@JamesKingdom]: https://github.com/JamesKingdom
+
 
 # 2.3.1
 ##### July 11, 2017

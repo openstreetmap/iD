@@ -1,6 +1,7 @@
 {
     "icon": "highway-footway",
     "fields": [
+        "name",
         "surface",
         "lit",
         "width",
@@ -8,7 +9,8 @@
         "access"
     ],
     "geometry": [
-        "line", "area"
+        "line",
+        "area"
     ],
     "terms": [
         "hike",

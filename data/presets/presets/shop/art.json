@@ -1,6 +1,7 @@
 {
     "icon": "shop",
     "fields": [
+        "name",
         "artwork_type",
         "operator",
         "address",

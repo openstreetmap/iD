@@ -1184,9 +1184,6 @@
                     "label": "ウェブカメラのURL",
                     "placeholder": "http://example.com/"
                 },
-                "content": {
-                    "label": "中身"
-                },
                 "country": {
                     "label": "国"
                 },

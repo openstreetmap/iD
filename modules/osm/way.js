@@ -152,12 +152,32 @@ _.extend(osmWay.prototype, {
 
 
     isArea: function() {
+        // `highway` and `railway` are typically linear features, but there
+        // are a few exceptions that should be treated as areas, even in the
+        // absence of a proper `area=yes` or `areaKeys` tag.. see #4194
+        var lineKeys = {
+            highway: {
+                rest_area: true,
+                services: true
+            },
+            railway: {
+                roundhouse: true,
+                station: true,
+                traverser: true,
+                turntable: true,
+                wash: true
+            }
+        };
+
         if (this.tags.area === 'yes')
             return true;
         if (!this.isClosed() || this.tags.area === 'no')
             return false;
         for (var key in this.tags) {
             if (key in areaKeys && !(this.tags[key] in areaKeys[key])) {
+                return true;
+            }
+            if (key in lineKeys && this.tags[key] in lineKeys[key]) {
                 return true;
             }
         }

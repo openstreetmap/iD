@@ -2,11 +2,14 @@ describe('iD.uiModal', function () {
     var elem;
 
     beforeEach(function() {
-        elem = d3.select('body').append('div');
+        elem = d3.select('body')
+            .append('div')
+            .attr('id', 'modal-wrap');
     });
 
     afterEach(function() {
-        elem.remove();
+        d3.select('#modal-wrap')
+            .remove();
     });
 
     it('can be instantiated', function() {

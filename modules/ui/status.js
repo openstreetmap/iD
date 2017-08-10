@@ -4,12 +4,14 @@ import { svgIcon } from '../svg/index';
 
 
 export function uiStatus(context) {
-    var connection = context.connection();
+    var osm = context.connection();
+
 
     return function(selection) {
+        if (!osm) return;
 
         function update() {
-            connection.status(function(err, apiStatus) {
+            osm.status(function(err, apiStatus) {
                 selection.html('');
 
                 if (err) {
@@ -24,7 +26,7 @@ export function uiStatus(context) {
                             .text(t('login'))
                             .on('click.login', function() {
                                 d3.event.preventDefault();
-                                connection.authenticate();
+                                osm.authenticate();
                             });
                     } else {
                         // TODO: nice messages for different error types
@@ -41,8 +43,7 @@ export function uiStatus(context) {
             });
         }
 
-        connection
-            .on('change', function() { update(selection); });
+        osm.on('change', function() { update(selection); });
 
         window.setInterval(update, 90000);
         update(selection);

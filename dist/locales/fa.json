@@ -907,9 +907,6 @@
                     "label": "URL دوربین",
                     "placeholder": "http://example.com/"
                 },
-                "content": {
-                    "label": "محتویات"
-                },
                 "country": {
                     "label": "کشور"
                 },

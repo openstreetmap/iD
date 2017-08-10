@@ -1262,9 +1262,6 @@
                     "label": "URL Webcam",
                     "placeholder": "http://example.com/"
                 },
-                "content": {
-                    "label": "Đồ Chứa đựng"
-                },
                 "country": {
                     "label": "Quốc gia"
                 },

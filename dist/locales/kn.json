@@ -329,9 +329,9 @@
         "commit": {
             "title": "ಓಪೆನ್‌ಸ್ಟ್ರೀಟ್ಮ್ಯಾಪ್ ಜಾಲಕ್ಕೆ ನಿಮ್ಮ ಬದಲಾವಣೆಗಳನ್ನು ರವಾನಿಸಿ.   ",
             "description_placeholder": "ನೀವು ಮಾಡಿದ ಬದಲಾವಣೆಗಳ ಬಗ್ಗೆ ಒಂದು ಚಿಕ್ಕ ವಿವರಣೆ (ಅವಶ್ಯಕ).",
-            "message_label": "ಬದಲಿಸಿದಗುಂಪು ವ್ಯಾಖ್ಯೆ ",
+            "message_label": "ಬದಲಾವಣೆಗಳ ಸಾರಾಂಶ",
             "upload_explanation": "ನೀವು ಉಪ್ಲೋಡ್ ಮಾಡುವ ಎಲ್ಲ ಮಾಹಿತಿ ಆಥಾವ ಬದಲಾವಣೆಗಳು ಓಪನ್ಸ್ಟ್ರೀಟ್ಮ್ಯಾಪ್ ಮಾಹಿತಿ ಉಪಯೋಗಿಸುವ ಎಲ್ಲ ನಕ್ಷೆಗಲ್ಲಿ ವ್ಯಕ್ತವಾಗುತ್ತದೆ. ",
-            "upload_explanation_with_user": "{ನಿಮ್ಮ ಹೆಸರಿನಿಲ್ಲಿ} ಉಪ್ಲೋಡ್ ಮಾಡುವ ಎಲ್ಲ ಮಾಹಿತಿ ಆಥಾವ ಬದಲಾವಣೆಗಳು ಓಪನ್ಸ್ಟ್ರೀಟ್ಮ್ಯಾಪ್ ಮಾಹಿತಿ ಉಪಯೋಗಿಸುವ ಎಲ್ಲ ನಕ್ಷೆಗಲ್ಲಿ ವ್ಯಕ್ತವಾಗುತ್ತದೆ. ",
+            "upload_explanation_with_user": "{user} ಉಪ್ಲೋಡ್ ಮಾಡುವ ಎಲ್ಲ ಮಾಹಿತಿ ಆಥಾವ ಬದಲಾವಣೆಗಳು ಓಪನ್ಸ್ಟ್ರೀಟ್ಮ್ಯಾಪ್ ಮಾಹಿತಿ ಉಪಯೋಗಿಸುವ ಎಲ್ಲ ನಕ್ಷೆಗಲ್ಲಿ ವ್ಯಕ್ತವಾಗುತ್ತದೆ. ",
             "save": "ಅಂತರಜಾಲಕ್ಕೆ ರವಾನೆ ಮಾಡು ",
             "cancel": "ರದ್ದು ಮಾಡು",
             "changes": "{count} ಬದಲಾವಣೆಗಳು",
@@ -339,7 +339,7 @@
             "modified": "ಮಾರ್ಪಡಿಸು",
             "deleted": "ಅಳಿಸಲಾಯಿತು",
             "created": "ರಚಿಸಲಾಯಿತು",
-            "about_changeset_comments": "‍‍‍ಚೇಂಜ್‌ಸೆಟ್ ಅಭಿಪ್ರಾಯದ ಬಗ್ಗೆ",
+            "about_changeset_comments": "ಬದಲಾವಣೆಗಳ ಸಾರಾಂಶದ ಬಗ್ಗೆ",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments\n\nಯಾವುದಾದರೂ ಬದಲಾದ ಗುಂಪಿಗೆ ನಿಮ್ಮ ಅಭಿಪ್ರಾಯ ತಿಳಿಸಬೇಕಾದಲ್ಲಿ ಈ ದಾಖಲೆ ನಿಮ್ಮ ಸಹಾಯಕ್ಕಿದೆ.  ",
             "google_warning": "ನೀವು ಈ ಹೇಳಿಕೆಯಲ್ಲಿ ಗೂಗಲ್ ಅನ್ನು ಉಲ್ಲೇಖಿಸಿದ್ದೀರ. ಗೂಗಲ್ ಮಾಪ್ಸ್ ನಿಂದ ಮಾಹಿತಿ ಪಡೆಯುವುದು ನಿಷೇಧಿಸಿದೆ. ",
             "google_warning_link": "http://www.openstreetmap.org/copyright\n\nಓಪನ್ಸ್ಟ್ರೀಟ್ಮ್ಯಾಪ್ ಕೃತಿಸ್ವಾಮ್ಯ ವಿವರಗಳ ಬಗ್ಗೆ ಮಾಹಿತಿ ಇಲ್ಲಿ ದೊರೆಯುತ್ತದೆ.  "
@@ -347,6 +347,25 @@
         "contributors": {
             "list": "ಸಂಪಾದನೆಗಳು {ಬಳಕೆದಾರ ಮೂಲಕ}",
             "truncated_list": "ಸಂಪಾದನೆಗಳು {users} ಮತ್ತು {count} ಇನ್ನಿತರೆ  "
+        },
+        "info_panels": {
+            "key": "ಐ",
+            "background": {
+                "key": "B",
+                "title": "ಹಿನ್ನೆಲೆ",
+                "zoom": "ಜೂಮ್",
+                "vintage": "ವಿಂಟೇಜ್",
+                "unknown": "ಅಜ್ಞಾತ"
+            },
+            "history": {
+                "key": "H"
+            },
+            "location": {
+                "key": "L"
+            },
+            "measurement": {
+                "key": "M"
+            }
         },
         "geometry": {
             "point": "ಬಿಂದು",
@@ -410,12 +429,13 @@
         "background": {
             "title": "ಹಿನ್ನೆಲೆ",
             "description": "ಹಿನ್ನಲೆ ವ್ಯವಸ್ತೆಗಳು",
+            "key": "B",
             "percent_brightness": "{opacity} % ಉಜ್ಜ್ವಲತೆ",
             "none": "‍‍ಯಾವುದೂ ಇಲ್ಲ",
             "best_imagery": "ಈ ಪ್ರದೇಶಕ್ಕೆ ಅಪ್ರತಿಮ ಉಪಗ್ರಹ ಚಿತ್ರಣ  ",
             "switch": "ಈ ಹಿನ್ನಲೆಗೆ ಹಿಂತಿರುಗಿ ",
             "custom": "ಅನುಸರಣ",
-            "custom_button": "ಅನುಸರಣ ಹಿನ್ನಲೆಯನ್ನು ಬದಲಿಸಿ  ",
+            "custom_button": "ಅನುಸರಣ ಹಿನ್ನಲೆಯನ್ನು ಸಂಪಾದಿಸಿ",
             "fix_misalignment": "ಉಪಗ್ರಹ ಚಿತ್ರಣ ಸರಿಹೊಂದಿಸುವುದು.",
             "imagery_source_faq": "‍ಈ ಉಪಗ್ರಹ ಚಿತ್ರಣ ಎಲ್ಲಿಂದ ದೊರೆತಿರುವುದು?",
             "reset": "ಮರುಹೊಂದಿಸು",
@@ -426,6 +446,7 @@
         "map_data": {
             "title": "ನಕ್ಷೆ ಮಾಹಿತಿ.",
             "description": "ನಕ್ಷೆ ಮಾಹಿತಿ.",
+            "key": "F",
             "data_layers": "ಡೇಟಾ ಪದರಗಳು",
             "fill_area": "ಪ್ರದೇಶಗಳನ್ನು ತುಂಬು",
             "map_features": "‍ನಕ್ಷೆಯ ವೈಶಿಷ್ಟ್ಯತೆಗಳು"
@@ -483,7 +504,8 @@
         "area_fill": {
             "wireframe": {
                 "description": "ತುಂಬುಇಲ್ಲ (ವಯರ್ಫ್ರೇಮ್)",
-                "tooltip": "ವಯರ್ಫ್ರೇಮ್ ಅಳವಡಿಸುವುದರಿಂದ ಹಿಂದಿನ ಸೆಟಿಲೈಟ್ ಚಿತ್ರ ಸ್ಪಷ್ಟವಾಗಿ ಕಾಣುತ್ತದೆ."
+                "tooltip": "ವಯರ್ಫ್ರೇಮ್ ಅಳವಡಿಸುವುದರಿಂದ ಹಿಂದಿನ ಸೆಟಿಲೈಟ್ ಚಿತ್ರ ಸ್ಪಷ್ಟವಾಗಿ ಕಾಣುತ್ತದೆ.",
+                "key": "W"
             },
             "partial": {
                 "description": "ಅರೆ ತುಂಬು‍"
@@ -530,7 +552,7 @@
         "splash": {
             "welcome": "ಓಪನ್ ಸ್ಟ್ರೀಟ್ ಮ್ಯಾಪ್ ಐಡಿ ಎಡಿಟರಿಗೆ ಸ್ವಾಗತ!",
             "walkthrough": "ಸಹಾಯದರ್ಶನವನ್ನು ಪ್ರಾರಂಭಿಸಿ  ",
-            "start": "ಬದಲಿಸಿ"
+            "start": "ಈಗ ಸಂಪಾದಿಸಿ"
         },
         "source_switch": {
             "live": "ಲೈವ್",
@@ -571,7 +593,8 @@
             "view_on_mapillary": "ಈ ಚಿತ್ರವನ್ನು Mapillary ನಲ್ಲಿ ನೋಡಿ"
         },
         "help": {
-            "title": "ಸಹಾಯ"
+            "title": "ಸಹಾಯ",
+            "key": "H"
         },
         "intro": {
             "done": "‍ಮುಗಿಯಿತು",
@@ -645,6 +668,47 @@
                 "title": "ಬದಲಿಸಲು ಪ್ರಾರಂಭಿಸಿ.",
                 "save": "ನೀವು ಮಾಡಿದ ಬದಲಾವಣೆಗಲ್‌ನ್ನು ಮರೆಯದೆ ಉಳಿಸಿಕೊಳ್ಳಿ, ",
                 "start": "ನಕ್ಷೆ ಮಾಡಲು ಪ್ರಾರಂಭಿಸಿ!"
+            }
+        },
+        "shortcuts": {
+            "toggle": {
+                "key": "?"
+            },
+            "key": {
+                "alt": "Alt",
+                "backspace": "Backspace",
+                "cmd": "Cmd",
+                "ctrl": "Ctrl",
+                "delete": "Delete",
+                "del": "Del",
+                "end": "End",
+                "enter": "Enter",
+                "esc": "Esc",
+                "home": "Home",
+                "option": "Option",
+                "pause": "Pause",
+                "pgdn": "PgDn",
+                "pgup": "PgUp",
+                "return": "Return",
+                "shift": "Shift",
+                "space": "Space"
+            },
+            "browsing": {
+                "help": {
+                    "title": "ಸಹಾಯ"
+                }
+            },
+            "editing": {
+                "title": "ಸಂಪಾದಿಸುವುದು",
+                "commands": {
+                    "title": "ಆದೇಶಗಳು"
+                }
+            },
+            "tools": {
+                "title": "ಉಪಕರಣಗಳು",
+                "info": {
+                    "title": "ಮಾಹಿತಿ"
+                }
             }
         },
         "presets": {
@@ -747,9 +811,11 @@
                         "county": "ದೇಶ",
                         "county!jp": "ಜಿಲ್ಲೆ",
                         "district": "ಜಿಲ್ಲೆ",
+                        "floor": "ಮಹಡಿ",
                         "hamlet": "ಕೊಪ್ಪಲು",
                         "housename": "ಮನೆ ಹೆಸರು",
                         "housenumber": "೧೨೩",
+                        "housenumber!jp": "ಕಟ್ಟಡದ ಸಂಖ್ಯೆ",
                         "place": "ಸ್ಥಳ",
                         "postcode": "ಅಂಚೆ ಸಂಖ್ಯೆ",
                         "province": "ಪ್ರಾಂತ್ಯ",
@@ -805,6 +871,15 @@
                 "amenity": {
                     "label": "ವಿಧ"
                 },
+                "animal_boarding": {
+                    "label": "ಪ್ರಾಣಿಗಳಿಗಾಗಿ"
+                },
+                "animal_breeding": {
+                    "label": "ಪ್ರಾಣಿಗಳಿಗಾಗಿ"
+                },
+                "animal_shelter": {
+                    "label": "ಪ್ರಾಣಿಗಳಿಗಾಗಿ"
+                },
                 "area/highway": {
                     "label": "‍ವಿಧ"
                 },
@@ -850,6 +925,9 @@
                 "bunker_type": {
                     "label": "‍ವಿಧ"
                 },
+                "camera/direction": {
+                    "placeholder": "45, 90, 180, 270"
+                },
                 "capacity": {
                     "label": "ಸಾಮರ್ಥ್ಯ",
                     "placeholder": "50, 100, 200..."
@@ -888,8 +966,8 @@
                 "construction": {
                     "label": "ವಿಧ"
                 },
-                "content": {
-                    "label": "‍ ಒಳಾಂಶಗಳು"
+                "contact/webcam": {
+                    "placeholder": "http://example.com/"
                 },
                 "country": {
                     "label": "ದೇಶ"
@@ -951,6 +1029,10 @@
                 "elevation": {
                     "label": "ಎತ್ತರ"
                 },
+                "email": {
+                    "label": "ಮಿಂಚಂಚೆ",
+                    "placeholder": "example@example.com"
+                },
                 "emergency": {
                     "label": "ತುರ್ತು"
                 },
@@ -966,6 +1048,11 @@
                 },
                 "fee": {
                     "label": "ಶುಲ್ಕ"
+                },
+                "fire_hydrant/position": {
+                    "options": {
+                        "green": "ಹಸಿರು"
+                    }
                 },
                 "fire_hydrant/type": {
                     "label": "ವಿಧ",
@@ -1122,6 +1209,9 @@
                 "man_made": {
                     "label": "ವಿಧ"
                 },
+                "maxheight": {
+                    "placeholder": "4, 4.5, 5, 14'0\", 14'6\", 15'0\""
+                },
                 "maxspeed": {
                     "label": "ವೇಗ ಮಿತಿ",
                     "placeholder": "40, 50, 60..."
@@ -1156,6 +1246,12 @@
                 },
                 "network": {
                     "label": "ಜಾಲಬಂಧ"
+                },
+                "network_bicycle": {
+                    "options": {
+                        "ncn": "ರಾಷ್ಟ್ರೀಯ",
+                        "rcn": "ಸ್ಥಳೀಯ"
+                    }
                 },
                 "network_foot": {
                     "options": {
@@ -1288,6 +1384,12 @@
                 },
                 "seasonal": {
                     "label": "ಋತುಮಾನ"
+                },
+                "second_hand": {
+                    "options": {
+                        "no": "ಇಲ್ಲ",
+                        "yes": "ಹೌದು"
+                    }
                 },
                 "service": {
                     "label": "ವಿಧ"

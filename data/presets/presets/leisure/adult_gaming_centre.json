@@ -1,6 +1,7 @@
 {
     "icon": "poi-dice",
     "fields": [
+        "name",
         "operator",
         "address",
         "building_area",

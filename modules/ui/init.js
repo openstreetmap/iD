@@ -261,7 +261,7 @@ export function uiInit(context) {
 
 
         // pan amount
-        var pa = 10;
+        var pa = 80;
 
         var keybinding = d3keybinding('main')
             .on('⌫', function() { d3.event.preventDefault(); })
@@ -290,18 +290,19 @@ export function uiInit(context) {
                 .call(uiShortcuts(context));
         }
 
-        var authenticating = uiLoading(context)
-            .message(t('loading_auth'))
-            .blocking(true);
+        var osm = context.connection(),
+            auth = uiLoading(context).message(t('loading_auth')).blocking(true);
 
-        context.connection()
-            .on('authLoading.ui', function() {
-                context.container()
-                    .call(authenticating);
-            })
-            .on('authDone.ui', function() {
-                authenticating.close();
-            });
+        if (osm && auth) {
+            osm
+                .on('authLoading.ui', function() {
+                    context.container()
+                        .call(auth);
+                })
+                .on('authDone.ui', function() {
+                    auth.close();
+                });
+        }
 
         uiInitCounter++;
 

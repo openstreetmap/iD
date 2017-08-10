@@ -1,6 +1,7 @@
 {
     "icon": "highway-service",
     "fields": [
+        "name",
         "oneway",
         "covered",
         "maxheight",

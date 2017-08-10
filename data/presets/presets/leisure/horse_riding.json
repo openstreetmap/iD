@@ -1,6 +1,7 @@
 {
     "icon": "horse-riding",
     "fields": [
+        "name",
         "access_simple",
         "operator",
         "address",

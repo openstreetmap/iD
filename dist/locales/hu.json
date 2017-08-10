@@ -1355,9 +1355,6 @@
                     "label": "Webkamera URL",
                     "placeholder": "http://pelda.hu/"
                 },
-                "content": {
-                    "label": "Tartalom"
-                },
                 "country": {
                     "label": "Ország"
                 },
@@ -3491,7 +3488,7 @@
                     "terms": "Emlékhely"
                 },
                 "historic/monument": {
-                    "name": "Kiemelkedően jelentős emlékmű",
+                    "name": "Monumentális, épületszerű emlékmű",
                     "terms": "monumentális emlékmű"
                 },
                 "historic/ruins": {

@@ -1,5 +1,8 @@
 {
     "icon": "barrier",
+    "fields": [
+        "name"
+    ],
     "geometry": [
         "point",
         "vertex",

@@ -865,6 +865,7 @@ button.save.has-count .count::before {
     border: 1.5px solid #333;
     border-radius: 20px;
     background-color: #efefef;
+    backface-visibility: hidden;
 }
 
 [dir='rtl'] .preset-icon-fill-vertex,
@@ -967,7 +968,7 @@ button.save.has-count .count::before {
     position: absolute;
     top: 0;
     right: 0;
-    width: 10%;
+    width: 32px;
     background: #fafafa;
 }
 
@@ -1023,19 +1024,23 @@ button.save.has-count .count::before {
 
 /* preset form basics */
 
-.inspector-preset {
+.preset-editor {
     overflow: hidden;
     padding-bottom: 10px;
 }
 
-.inspector-preset a.hide-toggle {
+.preset-editor a.hide-toggle {
     margin: 0 20px 10px 20px;
 }
 
-.inspector-preset .preset-form {
+.preset-editor .preset-form {
     padding: 10px;
     margin: 0 10px 10px 10px;
     border-radius: 8px;
+}
+
+.preset-editor .preset-form:empty {
+    display: none;
 }
 
 .entity-editor-pane .preset-list-item .preset-list-button-wrap {
@@ -1051,7 +1056,8 @@ button.save.has-count .count::before {
             transition: margin-bottom 200ms;
 }
 
-.form-field:last-child {
+.form-field.nowrap,
+.wrap-form-field:last-child .form-field {
     margin-bottom: 0;
 }
 
@@ -1092,7 +1098,7 @@ button.save.has-count .count::before {
 
 .form-label button {
     border-left: 1px solid #ccc;
-    width: 10%;
+    width: 32px;
     height: 100%;
     border-radius: 0;
     background: #f6f6f6;
@@ -1101,6 +1107,7 @@ button.save.has-count .count::before {
     border-left: none;
     border-right: 1px solid #CCC;
     border-radius: 4px 0 0 0;
+    width: 31px;
 }
 .form-label button:hover {
     background: #f1f1f1;
@@ -1141,6 +1148,7 @@ button.save.has-count .count::before {
 .inspector-hover .form-field-multicombo,
 .inspector-hover .structure-extras-wrap,
 .inspector-hover input,
+.inspector-hover textarea,
 .inspector-hover label {
     background: #ececec;
 }
@@ -1291,6 +1299,7 @@ button.save.has-count .count::before {
 
 /* preset form access */
 /* preset form cycleway */
+/* preset form structure extras */
 
 .form-field-structure .structure-extras-wrap li,
 .form-field-cycleway .preset-input-wrap li,
@@ -1329,6 +1338,34 @@ button.save.has-count .count::before {
 .structure-extras-wrap ul {
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+.structure-extras-wrap li:first-child span {
+    border-top-left-radius: 4px;
+}
+.structure-extras-wrap li:first-child input {
+    border-top-right-radius: 4px;
+}
+.structure-extras-wrap li:last-child span {
+    border-bottom-left-radius: 4px;
+}
+.structure-extras-wrap li:last-child input {
+    border-bottom-right-radius: 4px;
+}
+[dir='rtl'] .structure-extras-wrap li:first-child span {
+    border-top-left-radius: 0;
+    border-top-right-radius: 4px;
+}
+[dir='rtl'] .structure-extras-wrap li:first-child input {
+    border-top-right-radius: 0;
+    border-top-left-radius: 4px;
+}
+[dir='rtl'] .structure-extras-wrap li:last-child span {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 4px;
+}
+[dir='rtl'] .structure-extras-wrap li:last-child input {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 4px;
 }
 
 
@@ -1398,12 +1435,16 @@ input[type=number] {
 }
 
 .spin-control {
-    width: 20%;
-    height: 29px;
+    width: 64px;
+    height: 30px;
     display: inline-block;
-    margin-left: -20%;
+    margin-left: -64px;
     margin-bottom: -11px;
     position: relative;
+}
+[dir='rtl'] .spin-control{
+    margin-left: 0;
+    margin-right: -64px;
 }
 
 .spin-control button {
@@ -1411,14 +1452,25 @@ input[type=number] {
     position: relative;
     float: left;
     height: 100%;
-    width: 50%;
+    width: 32px;
     border-left: 1px solid #CCC;
     border-radius: 0;
     background: rgba(0, 0, 0, 0);
 }
+[dir='rtl'] .spin-control button{
+    border-left: 0;
+    border-right: 1px solid #CCC;
+}
 
 .spin-control button.decrement {
     border-bottom-right-radius: 3px;
+}
+[dir='rtl'] .spin-control button.decrement {
+    border-bottom-right-radius: 0;
+}
+[dir='rtl'] .spin-control button.increment {
+    border-bottom-left-radius: 3px;
+    right: 0;
 }
 
 .spin-control button.decrement::after,
@@ -1441,6 +1493,7 @@ input[type=number] {
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
 }
+
 
 /* preset form checkbox */
 
@@ -1525,11 +1578,11 @@ input[type=number] {
 }
 
 .form-field .wiki-title ~ .combobox-caret {
-    right: 10%;
+    right: 32px;
 }
 [dir='rtl'] .form-field .wiki-title ~ .combobox-caret {
     right: auto;
-    left: 10%;
+    left: 32px;
 }
 
 /* Localized field */
@@ -1544,8 +1597,8 @@ input[type=number] {
 .form-field .button-input-action {
     position: relative;
     right: 1px;
-    width: 10%;
-    margin-left: -10%;
+    width: 32px;
+    margin-left: -32px;
     border: 1px solid #CCC;
     border-top-width: 0;
     border-right-width: 0;
@@ -1555,7 +1608,7 @@ input[type=number] {
 }
 [dir='rtl'] .form-field .button-input-action {
     margin-left: 0;
-    margin-right: -10%;
+    margin-right: -32px;
     border-right-width: 1px;
     border-radius: 0 0 0 4px;
 }
@@ -1964,6 +2017,14 @@ img.wiki-image {
 
 .add-relation:hover {
     background: rgba(0,0,0,.8);
+}
+
+/* hidden field to prevent user from tabbing out of the sidebar */
+input.key-trap {
+    height: 0px;
+    width: 0px;
+    padding: 0px;
+    border: 1px solid rgba(0,0,0,0);
 }
 
 /* Fullscreen button */
@@ -2694,6 +2755,9 @@ img.tile-removing {
     height: 20px;
     background: none;
     color: #ddd;
+}
+[dir='rtl'] .panel-title button.close {
+    float: left;
 }
 
 .panel-title button.close:hover {
@@ -4156,23 +4220,6 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
   border-radius: 4px 0 0 4px;
 }
 
-
-/* increment / decrement control - code by Naoufel Razouane */
-
-[dir='rtl'] .spin-control{
-  margin-left: 0;
-  margin-right: -20%;
-}
-[dir='rtl'] .spin-control button{
-  border-left: 0;
-  border-right: 1px solid #CCC;
-}
-[dir='rtl'] .spin-control button.decrement{
-  border-bottom-right-radius: 0;
-}
-[dir='rtl'] .spin-control button.increment{
-  border-bottom-left-radius: 3px;
-}
 /* modal */
 [dir='rtl'] .modal > button {
     position: absolute;

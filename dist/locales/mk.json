@@ -805,9 +805,6 @@
                     "label": "URL на семрежната камера",
                     "placeholder": "http://example.com/"
                 },
-                "content": {
-                    "label": "Содржина"
-                },
                 "country": {
                     "label": "Земја"
                 },

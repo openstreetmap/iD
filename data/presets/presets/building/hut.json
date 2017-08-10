@@ -2,6 +2,10 @@
     "geometry": [
         "area"
     ],
+    "fields": [
+        "name"
+    ],
+
     "tags": {
         "building": "hut"
     },

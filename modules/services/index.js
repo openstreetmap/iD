@@ -13,3 +13,12 @@ export var services = {
     wikidata: serviceWikidata,
     wikipedia: serviceWikipedia
 };
+
+export {
+    serviceMapillary,
+    serviceNominatim,
+    serviceOsm,
+    serviceTaginfo,
+    serviceWikidata,
+    serviceWikipedia
+};

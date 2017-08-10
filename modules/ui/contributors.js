@@ -5,13 +5,16 @@ import { svgIcon } from '../svg/index';
 
 
 export function uiContributors(context) {
-    var debouncedUpdate = _.debounce(function() { update(); }, 1000),
+    var osm = context.connection(),
+        debouncedUpdate = _.debounce(function() { update(); }, 1000),
         limit = 4,
         hidden = false,
         wrap = d3.select(null);
 
 
     function update() {
+        if (!osm) return;
+
         var users = {},
             entities = context.intersects(context.map().extent());
 
@@ -32,7 +35,7 @@ export function uiContributors(context) {
             .enter()
             .append('a')
             .attr('class', 'user-link')
-            .attr('href', function(d) { return context.connection().userURL(d); })
+            .attr('href', function(d) { return osm.userURL(d); })
             .attr('target', '_blank')
             .attr('tabindex', -1)
             .text(String);
@@ -44,7 +47,7 @@ export function uiContributors(context) {
                 .attr('target', '_blank')
                 .attr('tabindex', -1)
                 .attr('href', function() {
-                    return context.connection().changesetsURL(context.map().center(), context.map().zoom());
+                    return osm.changesetsURL(context.map().center(), context.map().zoom());
                 })
                 .text(u.length - limit + 1);
 
@@ -71,10 +74,11 @@ export function uiContributors(context) {
 
 
     return function(selection) {
+        if (!osm) return;
         wrap = selection;
         update();
 
-        context.connection().on('loaded.contributors', debouncedUpdate);
+        osm.on('loaded.contributors', debouncedUpdate);
         context.map().on('move.contributors', debouncedUpdate);
     };
 }

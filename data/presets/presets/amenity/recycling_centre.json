@@ -1,6 +1,7 @@
 {
     "icon": "waste-basket",
     "fields": [
+        "name",
         "operator",
         "address",
         "opening_hours",

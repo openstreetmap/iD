@@ -1,6 +1,7 @@
 {
     "icon": "ice-cream",
     "fields": [
+        "name",
         "address",
         "building_area",
         "opening_hours",

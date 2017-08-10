@@ -1,10 +1,12 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { t } from '../util/locale';
+import { geoExtent } from '../geo';
 
-import { utilRebind } from '../util/rebind';
-import { utilBindOnce } from '../util/bind_once';
-import { utilGetDimensions } from '../util/dimensions';
+import {
+    modeBrowse,
+    modeSelect
+} from '../modes';
 
 import {
     svgAreas,
@@ -14,18 +16,20 @@ import {
     svgMidpoints,
     svgPoints,
     svgVertices
-} from '../svg/index';
+} from '../svg';
 
-import { geoExtent } from '../geo/index';
-import { modeSelect } from '../modes/select';
+import { uiFlash } from '../ui';
 
 import {
     utilFastMouse,
-    utilSetTransform,
-    utilFunctor
-} from '../util/index';
+    utilFunctor,
+    utilRebind,
+    utilSetTransform
+} from '../util';
 
-import { uiFlash } from '../ui/index';
+import { utilBindOnce } from '../util/bind_once';
+import { utilGetDimensions } from '../util/dimensions';
+
 
 
 export function rendererMap(context) {
@@ -69,8 +73,10 @@ export function rendererMap(context) {
         context
             .on('change.map', immediateRedraw);
 
-        context.connection()
-            .on('change.map', immediateRedraw);
+        var osm = context.connection();
+        if (osm) {
+            osm.on('change.map', immediateRedraw);
+        }
 
         context.history()
             .on('change.map', immediateRedraw)
@@ -267,6 +273,7 @@ export function rendererMap(context) {
     function editOff() {
         context.features().resetStats();
         surface.selectAll('.layer-osm *').remove();
+        context.enter(modeBrowse(context));
         dispatch.call('drawn', this, {full: true});
     }
 

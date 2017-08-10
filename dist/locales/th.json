@@ -336,9 +336,6 @@
                 "contact/webcam": {
                     "placeholder": "http://example.com/"
                 },
-                "content": {
-                    "label": "เนื้อหา"
-                },
                 "currency_multi": {
                     "label": "ชนิดเงินตรา"
                 },

@@ -654,9 +654,6 @@
                 "construction": {
                     "label": "Врста"
                 },
-                "content": {
-                    "label": "Садржај"
-                },
                 "country": {
                     "label": "Земља"
                 },

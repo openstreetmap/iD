@@ -8,6 +8,7 @@
     "name": "Site",
     "icon": "relation",
     "fields": [
+        "name",
         "site"
     ]
 }

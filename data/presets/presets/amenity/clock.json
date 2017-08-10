@@ -1,6 +1,7 @@
 {
     "icon": "poi-clock",
     "fields": [
+        "name",
         "support",
         "display",
         "visibility",

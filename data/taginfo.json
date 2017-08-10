@@ -1813,6 +1813,10 @@
             "value": "drain"
         },
         {
+            "key": "manhole",
+            "value": "telecom"
+        },
+        {
             "key": "natural"
         },
         {
@@ -2127,7 +2131,15 @@
         },
         {
             "key": "railway",
+            "value": "buffer_stop"
+        },
+        {
+            "key": "railway",
             "value": "crossing"
+        },
+        {
+            "key": "railway",
+            "value": "derail"
         },
         {
             "key": "railway",
@@ -2147,6 +2159,10 @@
         },
         {
             "key": "railway",
+            "value": "milestone"
+        },
+        {
+            "key": "railway",
             "value": "monorail"
         },
         {
@@ -2163,6 +2179,10 @@
         },
         {
             "key": "railway",
+            "value": "signal"
+        },
+        {
+            "key": "railway",
             "value": "station"
         },
         {
@@ -2172,6 +2192,14 @@
         {
             "key": "railway",
             "value": "subway"
+        },
+        {
+            "key": "railway",
+            "value": "switch"
+        },
+        {
+            "key": "railway",
+            "value": "wash"
         },
         {
             "key": "railway",

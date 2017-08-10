@@ -9,7 +9,8 @@
     "name": "Pipeline Route",
     "icon": "route-pipeline",
     "fields": [
-        "ref",
+        "name",
+        "ref_route",
         "operator"
     ]
 }

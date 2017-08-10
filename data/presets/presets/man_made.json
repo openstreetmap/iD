@@ -1,6 +1,7 @@
 {
     "icon": "poi-storage-tank",
     "fields": [
+        "name",
         "man_made"
     ],
     "geometry": [

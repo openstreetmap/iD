@@ -353,6 +353,7 @@
                 "key": "B",
                 "title": "Fono",
                 "zoom": "Pligrandigo",
+                "vintage": "Fotita je",
                 "unknown": "Nekonata",
                 "show_tiles": "Montri kahelojn",
                 "hide_tiles": "Kaŝi kahelojn"
@@ -1338,6 +1339,9 @@
                         "clockwise": "Horloĝdirekte"
                     }
                 },
+                "clothes": {
+                    "label": "Vestaĵoj"
+                },
                 "club": {
                     "label": "Speco"
                 },
@@ -1523,6 +1527,10 @@
                 },
                 "generator/method": {
                     "label": "Metodo"
+                },
+                "generator/output/electricity": {
+                    "label": "Povumo",
+                    "placeholder": "50 MW, 100 MW, 200 MW…"
                 },
                 "generator/source": {
                     "label": "Energi-fonto"
@@ -1887,6 +1895,10 @@
                 },
                 "plant": {
                     "label": "Vegetaĵo"
+                },
+                "plant/output/electricity": {
+                    "label": "Povumo",
+                    "placeholder": "500 MW, 1000 MW, 2000 MW…"
                 },
                 "population": {
                     "label": "Loĝantaro"
@@ -2567,6 +2579,10 @@
                     "name": "Kirko",
                     "terms": "kristana preĝejo,mesejo,kapelo,katedralo,baziliko,abatejo,monaĥejo,kristanismo,katolika preĝejo"
                 },
+                "amenity/place_of_worship/hindu": {
+                    "name": "Hinduisma templo",
+                    "terms": "templo"
+                },
                 "amenity/place_of_worship/jewish": {
                     "name": "Sinagogo",
                     "terms": "juda preĝejo,judismo,judaismo"
@@ -2574,6 +2590,18 @@
                 "amenity/place_of_worship/muslim": {
                     "name": "Moskeo",
                     "terms": "islama preĝejo,islamo,minareto"
+                },
+                "amenity/place_of_worship/shinto": {
+                    "name": "Ŝintoismo adorejo",
+                    "terms": "shintoismo,sxintoismo,templo,adorejo,ŝintoo,kamio"
+                },
+                "amenity/place_of_worship/sikh": {
+                    "name": "Sikisma templo",
+                    "terms": "siĥismo,templo"
+                },
+                "amenity/place_of_worship/taoist": {
+                    "name": "Taoisma templo",
+                    "terms": "templo,daŭismo,taismo"
                 },
                 "amenity/planetarium": {
                     "name": "Planetario (astrokinejo)",
@@ -2739,6 +2767,10 @@
                 "amenity/veterinary": {
                     "name": "Bestokuracistejo",
                     "terms": "bestokuracisto,bestkuracisto,veterinaro"
+                },
+                "amenity/waste/dog_excrement": {
+                    "name": "Rubujo por hund-fekaĵoj",
+                    "terms": "rubujo,hundaj fekoj,fekaĵoj,eksrementoj"
                 },
                 "amenity/waste_basket": {
                     "name": "Rubujo",
@@ -3955,6 +3987,14 @@
                     "name": "Akvotrinkebligejo",
                     "terms": "akvopurigejo,trinkebligejo,seninfektigo de akvo,akvokonduktilo"
                 },
+                "man_made/watermill": {
+                    "name": "Muelejo akva",
+                    "terms": "muelejo,akvomuelejo,grenmuelejo,akvmueejo"
+                },
+                "man_made/windmill": {
+                    "name": "Muelejo venta",
+                    "terms": "ventmuelejo,ventomuelejo,ventoturbino,grenmuelejo"
+                },
                 "man_made/works": {
                     "name": "Fabriko",
                     "terms": "produktejo,uzino,manufakturo"
@@ -4238,6 +4278,14 @@
                 "power/generator": {
                     "name": "Elektr-generilo",
                     "terms": "elektrogenerilo,generilo,generatoro"
+                },
+                "power/generator/source_nuclear": {
+                    "name": "Nuklea reakciujo",
+                    "terms": "nuklea reaktoro,reaktoro,reakciujo,atoma reaktoro,atompilo,elektrocentralo"
+                },
+                "power/generator/source_wind": {
+                    "name": "Ventoturbino",
+                    "terms": "ventturbino,elektrogenerilo,ventomuelejo,ventturbino,ventelektrigilo,ventmotoro,ventenergio"
                 },
                 "power/line": {
                     "name": "Elektra kondukilo (alttensia)",

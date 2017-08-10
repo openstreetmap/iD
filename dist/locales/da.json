@@ -1184,9 +1184,6 @@
                     "label": "Webcam-URL",
                     "placeholder": "http://example.com/"
                 },
-                "content": {
-                    "label": "Indhold"
-                },
                 "country": {
                     "label": "Land"
                 },

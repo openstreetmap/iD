@@ -1,6 +1,7 @@
 {
     "icon": "volcano",
     "fields": [
+        "name",
         "elevation"
     ],
     "geometry": [

@@ -454,6 +454,7 @@ export function coreHistory(context) {
                     // When we restore a modified way, we also need to fetch any missing
                     // childnodes that would normally have been downloaded with it.. #2142
                     if (loadChildNodes) {
+                        var osm = context.connection();
                         var missing =  _(baseEntities)
                                 .filter({ type: 'way' })
                                 .map('nodes')
@@ -462,7 +463,7 @@ export function coreHistory(context) {
                                 .reject(function(n) { return stack[0].graph.hasEntity(n); })
                                 .value();
 
-                        if (!_.isEmpty(missing)) {
+                        if (!_.isEmpty(missing) && osm) {
                             loadComplete = false;
                             context.redrawEnable(false);
 
@@ -480,8 +481,7 @@ export function coreHistory(context) {
 
                                     // fetch older versions of nodes that were deleted..
                                     _.each(visible.false, function(entity) {
-                                        context.connection()
-                                            .loadEntityVersion(entity.id, +entity.version - 1, childNodesLoaded);
+                                        osm.loadEntityVersion(entity.id, +entity.version - 1, childNodesLoaded);
                                     });
                                 }
 
@@ -492,7 +492,7 @@ export function coreHistory(context) {
                                 }
                             };
 
-                            context.connection().loadMultiple(missing, childNodesLoaded);
+                            osm.loadMultiple(missing, childNodesLoaded);
                         }
                     }
                 }
