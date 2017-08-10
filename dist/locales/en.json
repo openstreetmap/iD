@@ -4035,7 +4035,7 @@
                 },
                 "man_made/pier": {
                     "name": "Pier",
-                    "terms": "dock"
+                    "terms": "dock,jetty"
                 },
                 "man_made/pipeline": {
                     "name": "Pipeline",

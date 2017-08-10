@@ -3353,7 +3353,7 @@ en:
       man_made/pier:
         # man_made=pier
         name: Pier
-        # 'terms: dock'
+        # 'terms: dock,jetty'
         terms: '<translate with synonyms or related terms for ''Pier'', separated by commas>'
       man_made/pipeline:
         # man_made=pipeline

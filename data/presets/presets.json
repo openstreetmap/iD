@@ -8918,7 +8918,8 @@
                 "area"
             ],
             "terms": [
-                "dock"
+                "dock",
+                "jetty"
             ],
             "tags": {
                 "man_made": "pier"
