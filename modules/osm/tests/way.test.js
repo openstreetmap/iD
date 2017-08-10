@@ -1,7 +1,8 @@
-import { osmNode, osmWay } from '../entityFactory';
-import { Way } from '../way';
-import { Node } from '../node';
 import { coreGraph } from '../../core/graph';
+
+import { osmNode, Node } from '../node';
+import { osmWay, Way } from '../way';
+
 
 describe('iD.osmWay', function() {
     // if (iD.debug) {

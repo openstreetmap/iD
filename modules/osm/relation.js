@@ -10,15 +10,10 @@ import {
 
 import { Entity, base } from './entity';
 
-// export function Relation() {
-//     if (!(this instanceof Relation)) {
-//         return (new Relation()).initialize(arguments);
-//     } else if (arguments.length) {
-//         this.initialize(arguments);
-//     }
-// }
+export function osmRelation() {
+    return new Relation().initialize(arguments);
+}
 
-// osmEntity.relation = Relation;
 export function Relation() {
     return this;
 }

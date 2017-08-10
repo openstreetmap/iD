@@ -1,10 +1,11 @@
-import { osmEntity, osmNode, osmWay, osmRelation } from '../entityFactory';
 import { coreGraph } from '../../core/graph';
 
-import { Entity, base } from '../entity';
-import { Node } from '../node';
-import { Way } from '../way';
-import { Relation } from '../relation';
+import { osmEntity } from '../entityFactory';
+import { Entity } from '../entityStatic';
+import { entityBase } from '../entityBase';
+import { osmNode, Node } from '../node';
+import { osmWay, Way } from '../way';
+import { osmRelation, Relation } from '../relation';
 
 describe('iD.osmEntity', function() {
     it('returns a subclass of the appropriate type', function() {
@@ -262,13 +263,13 @@ describe('iD.osmEntity', function() {
 
     describe('#isHighwayIntersection', function () {
         it('returns false', function () {
-            expect(base.isHighwayIntersection()).toBe(false);
+            expect(entityBase.isHighwayIntersection()).toBe(false);
         });
     });
 
     describe('#isDegenerate', function () {
         it('returns true', function () {
-            expect(base.isDegenerate()).toBe(true);
+            expect(entityBase.isDegenerate()).toBe(true);
         });
     });
 });

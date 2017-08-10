@@ -6,17 +6,10 @@ import { osmOneWayTags } from './tags';
 import { areaKeys } from '../core/context';
 import { base , Entity} from './entity';
 
-// import { Entity } from './entity';
+export function osmWay() {
+    return new Way().initialize(arguments);
+}
 
-// export function Way() {
-//     if (!(this instanceof Way)) {
-//         return (new Way()).initialize(arguments);
-//     } else if (arguments.length) {
-//         this.initialize(arguments);
-//     }
-// }
-
-// osmEntity.way = Way;
 export function Way() {
     return this;
 }

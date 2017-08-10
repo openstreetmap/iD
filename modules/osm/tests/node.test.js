@@ -1,7 +1,7 @@
-import { osmNode, osmWay } from '../entityFactory';
-import { Way } from '../way';
-import { Node } from '../node';
 import { coreGraph } from '../../core/graph';
+
+import { osmNode, Node } from '../node';
+import { osmWay } from '../way';
 
 describe('iD.osmNode', function () {
     it('returns a node', function () {

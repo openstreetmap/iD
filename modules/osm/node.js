@@ -10,6 +10,10 @@ import { geoExtent } from '../geo/index';
 //     }
 // }
 
+export function osmNode() {
+    return new Node().initialize(arguments);
+}
+
 export function Node() {
     return this;
 }
