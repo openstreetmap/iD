@@ -174,17 +174,12 @@ export function uiCommit(context) {
         var prose = saveSection
             .append('p')
             .attr('class', 'commit-info')
-            .html(t('commit.upload_explanation'));
+            .text(t('commit.upload_explanation'));
 
         var requestReview = saveSection
             .append('p')
             .attr('class', 'request-review')
-            .html( t('commit.request_review'))
-            .append('a')
-            .attr('target', '_blank')
-            .attr('tabindex', -1)
-            .call(svgIcon('#icon-out-link', 'inline'))
-            .attr('href', t('commit.request_review_link'));
+            .text(t('commit.request_review'));
 
         requestReview
             .append('input')
