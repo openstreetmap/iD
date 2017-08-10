@@ -76,7 +76,9 @@ export function rendererBackground(context) {
             delete q.offset;
         }
 
-        window.location.replace('#' + utilQsString(q, true));
+        if (!window.mocha) {
+            window.location.replace('#' + utilQsString(q, true));
+        }
 
         var imageryUsed = [b.imageryUsed()];
 
@@ -124,6 +126,9 @@ export function rendererBackground(context) {
         if (!arguments.length) return baseLayer.source();
 
         // test source against OSM imagery blacklists..
+        var osm = context.connection();
+        if (!osm) return background;
+
         var blacklists = context.connection().imageryBlacklists();
 
         var template = d.template(),

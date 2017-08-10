@@ -4,7 +4,7 @@ import { svgIcon } from '../../svg';
 
 
 export function uiPanelHistory(context) {
-
+    var osm;
 
     function displayTimestamp(entity) {
         if (!entity.timestamp) return t('info_panels.history.unknown');
@@ -33,13 +33,15 @@ export function uiPanelHistory(context) {
             .append('div')
             .attr('class', 'links');
 
-        links
-            .append('a')
-            .attr('class', 'user-osm-link')
-            .attr('href', context.connection().userURL(entity.user))
-            .attr('target', '_blank')
-            .attr('tabindex', -1)
-            .text('OSM');
+        if (osm) {
+            links
+                .append('a')
+                .attr('class', 'user-osm-link')
+                .attr('href', osm.userURL(entity.user))
+                .attr('target', '_blank')
+                .attr('tabindex', -1)
+                .text('OSM');
+        }
 
         links
             .append('a')
@@ -68,13 +70,15 @@ export function uiPanelHistory(context) {
             .append('div')
             .attr('class', 'links');
 
-        links
-            .append('a')
-            .attr('class', 'changeset-osm-link')
-            .attr('href', context.connection().changesetURL(entity.changeset))
-            .attr('target', '_blank')
-            .attr('tabindex', -1)
-            .text('OSM');
+        if (osm) {
+            links
+                .append('a')
+                .attr('class', 'changeset-osm-link')
+                .attr('href', osm.changesetURL(entity.changeset))
+                .attr('target', '_blank')
+                .attr('tabindex', -1)
+                .text('OSM');
+        }
 
         links
             .append('a')
@@ -89,6 +93,8 @@ export function uiPanelHistory(context) {
     function redraw(selection) {
         var selected = _.filter(context.selectedIDs(), function(e) { return context.hasEntity(e); }),
             singular = selected.length === 1 ? selected[0] : null;
+
+        osm = context.connection();
 
         selection.html('');
 
@@ -122,15 +128,17 @@ export function uiPanelHistory(context) {
             .text(t('info_panels.history.changeset') + ': ')
             .call(displayChangeset, entity);
 
-        selection
-            .append('a')
-            .attr('class', 'view-history-on-osm')
-            .attr('target', '_blank')
-            .attr('tabindex', -1)
-            .attr('href', context.connection().historyURL(entity))
-            .call(svgIcon('#icon-out-link', 'inline'))
-            .append('span')
-            .text(t('info_panels.history.link_text'));
+        if (osm) {
+            selection
+                .append('a')
+                .attr('class', 'view-history-on-osm')
+                .attr('target', '_blank')
+                .attr('tabindex', -1)
+                .attr('href', osm.historyURL(entity))
+                .call(svgIcon('#icon-out-link', 'inline'))
+                .append('span')
+                .text(t('info_panels.history.link_text'));
+        }
     }
 
 

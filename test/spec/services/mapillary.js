@@ -6,6 +6,14 @@ describe('iD.serviceMapillary', function() {
         context, server, mapillary, orig;
 
 
+    before(function() {
+        iD.services.mapillary = iD.serviceMapillary;
+    });
+
+    after(function() {
+        delete iD.services.mapillary;
+    });
+
     beforeEach(function() {
         context = iD.Context().assetPath('../dist/');
         context.projection

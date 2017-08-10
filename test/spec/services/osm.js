@@ -1,5 +1,5 @@
 describe('iD.serviceOsm', function () {
-    var context, connection, spy;
+    var context, connection, server, spy;
 
     function login() {
         if (!connection) return;
@@ -17,12 +17,25 @@ describe('iD.serviceOsm', function () {
         connection.logout();
     }
 
+    before(function() {
+        iD.services.osm = iD.serviceOsm;
+    });
+
+    after(function() {
+        delete iD.services.osm;
+    });
+
     beforeEach(function () {
+        server = sinon.fakeServer.create();
         context = iD.Context();
         connection = context.connection();
         connection.switch({ urlroot: 'http://www.openstreetmap.org' });
         connection.reset();
         spy = sinon.spy();
+    });
+
+    afterEach(function() {
+        server.restore();
     });
 
 
@@ -109,8 +122,7 @@ describe('iD.serviceOsm', function () {
     });
 
     describe('#loadFromAPI', function () {
-        var server,
-            path = '/api/0.6/map?bbox=-74.542,40.655,-74.541,40.656',
+        var path = '/api/0.6/map?bbox=-74.542,40.655,-74.541,40.656',
             response = '<?xml version="1.0" encoding="UTF-8"?>' +
                 '<osm version="0.6">' +
                 '  <bounds minlat="40.655" minlon="-74.542" maxlat="40.656" maxlon="-74.541' +
@@ -267,8 +279,7 @@ describe('iD.serviceOsm', function () {
     });
 
     describe('#loadEntity', function () {
-        var server,
-            nodeXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
+        var nodeXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
                 '<node id="1" version="1" changeset="1" lat="0" lon="0" visible="true" timestamp="2009-03-07T03:26:33Z"></node>' +
                 '</osm>',
             wayXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
@@ -312,8 +323,7 @@ describe('iD.serviceOsm', function () {
     });
 
     describe('#loadEntityVersion', function () {
-        var server,
-            nodeXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
+        var nodeXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
                 '<node id="1" version="1" changeset="1" lat="0" lon="0" visible="true" timestamp="2009-03-07T03:26:33Z"></node>' +
                 '</osm>',
             wayXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
@@ -356,7 +366,6 @@ describe('iD.serviceOsm', function () {
     });
 
     describe('#loadMultiple', function () {
-        var server;
         beforeEach(function() {
             server = sinon.fakeServer.create();
         });
@@ -372,7 +381,7 @@ describe('iD.serviceOsm', function () {
 
 
     describe('#userChangesets', function() {
-        var server, userDetailsFn;
+        var userDetailsFn;
 
         beforeEach(function() {
             server = sinon.fakeServer.create();
@@ -477,8 +486,7 @@ describe('iD.serviceOsm', function () {
 
 
     describe('API capabilities', function() {
-        var server,
-            capabilitiesXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
+        var capabilitiesXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
             '<api>' +
             '<version minimum="0.6" maximum="0.6"/>' +
             '<area maximum="0.25"/>' +
