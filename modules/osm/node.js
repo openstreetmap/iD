@@ -22,7 +22,6 @@ Node.prototype = Object.assign({}, base, {
     },
     copy: function(resolver, copies) {
         if (copies[this.id]) return copies[this.id];
-        console.log(this.tags);
         var copy = new Node().initialize([this, {
             id: undefined,
             user: undefined,
