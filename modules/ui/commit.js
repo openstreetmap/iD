@@ -125,17 +125,6 @@ export function uiCommit(context) {
             .text(t('commit.about_changeset_comments'));
 
 
-        var requestReview = fieldSection
-            .append('p')
-            .attr('class', 'request-review')
-            .text(t('commit.request_review'));
-
-        requestReview
-            .append('input')
-            .attr('type', 'checkbox')
-            .on('change', toggleRequestReview());
-
-
         // Warnings
         var warnings = body.selectAll('div.warning-section')
             .data([context.history().validate(changes)]);
@@ -211,6 +200,18 @@ export function uiCommit(context) {
             prose
                 .html(t('commit.upload_explanation_with_user', { user: userLink.html() }));
         });
+
+
+        var requestReview = saveSection
+            .append('p')
+            .attr('class', 'request-review')
+            .text(t('commit.request_review'));
+
+        var requestReviewField = requestReview
+            .append('input')
+            .attr('type', 'checkbox')
+            .property('checked', isReviewRequested(changeset.tags))
+            .on('change', toggleRequestReview());
 
 
         // Buttons
@@ -391,13 +392,10 @@ export function uiCommit(context) {
 
 
         function toggleRequestReview() {
-            var toggled = false;
-
             return function() {
-                var changeset = updateChangeset({ review_requested: (toggled ? 'yes' : undefined) });
+                var rr = requestReviewField.property('checked');
+                var changeset = updateChangeset({ review_requested: (rr ? 'yes' : undefined) });
                 var expanded = !tagSection.selectAll('a.hide-toggle.expanded').empty();
-
-                toggled = !toggled;
 
                 tagSection
                     .call(rawTagEditor
@@ -415,10 +413,31 @@ export function uiCommit(context) {
                     changed.comment = '';
                 }
                 changed.comment = changed.comment.trim();
-                commentField.property('value', changed.comment);
+                commentField
+                    .property('value', changed.comment);
             }
+
+            if (changed.hasOwnProperty('review_requested')) {
+                if (changed.review_requested === undefined) {
+                    requestReviewField
+                        .property('checked', false);
+                } else {
+                    changed.review_requested = changed.review_requested.trim();
+                    requestReviewField
+                        .property('checked', isReviewRequested(changed));
+                }
+            }
+
             updateChangeset(changed);
             utilTriggerEvent(commentField, 'input');
+        }
+
+
+        function isReviewRequested(tags) {
+            var rr = tags.review_requested;
+            if (rr === undefined) return false;
+            rr = rr.trim().toLowerCase();
+            return !(rr == '' || rr === 'no')
         }
 
 
