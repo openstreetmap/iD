@@ -6,6 +6,7 @@ import { osmChangeset } from '../osm';
 import { modeSelect } from '../modes';
 import { svgIcon } from '../svg';
 import { tooltip } from '../util/tooltip';
+import { uiChangesetEditor } from './changeset_editor';
 import { uiRawTagEditor } from './raw_tag_editor';
 import { utilDetect } from '../util/detect';
 import {
@@ -41,10 +42,13 @@ export function uiCommit(context) {
             changeset = new osmChangeset({ tags: tags });
         }
 
+        var changesetEditor = uiChangesetEditor(context)
+            .on('change', changeTags);
+        var rawTagEditor = uiRawTagEditor(context)
+            .on('change', changeTags);
 
         var changes = context.history().changes(),
             summary = context.history().difference().summary(),
-            rawTagEditor = uiRawTagEditor(context).on('change', changeTags),
             comment = context.storage('comment') || '',
             commentDate = +context.storage('commentDate') || 0,
             currDate = Date.now(),
@@ -64,6 +68,14 @@ export function uiCommit(context) {
         var body = selection
             .append('div')
             .attr('class', 'body');
+
+        body
+            .append('div')
+            .attr('class', 'modal-section changeset-editor')
+            .call(changesetEditor
+                .changeset(changeset)
+                .tags(tags)
+            );
 
 
         // Fields

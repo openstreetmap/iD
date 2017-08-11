@@ -2,6 +2,7 @@ export { uiInit } from './init';
 export { uiAccount } from './account';
 export { uiAttribution } from './attribution';
 export { uiBackground } from './background';
+export { uiChangesetEditor } from './changeset_editor';
 export { uiCmd } from './cmd';
 export { uiCommit } from './commit';
 export { uiConfirm } from './confirm';
