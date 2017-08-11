@@ -110,8 +110,8 @@ export function uiCommit(context) {
                 );
         });
 
-        var clippyArea = fieldSection.append('div')
-            .attr('class', 'clippy-area');
+        var commentWarning = fieldSection.append('div')
+            .attr('class', 'field-warning comment-warning');
 
         var changeSetInfo = fieldSection.append('div')
             .attr('class', 'changeset-info');
@@ -144,7 +144,6 @@ export function uiCommit(context) {
             .append('div')
             .attr('class', 'modal-section warning-section fillL2')
             .style('display', function(d) { return _.isEmpty(d) ? 'none' : null; })
-            .style('background', '#ffb')
             .merge(warnings);
 
         warnings
@@ -350,7 +349,7 @@ export function uiCommit(context) {
                 .attr('disabled', (comment.length ? null : true));
 
             // Warn if comment mentions Google..
-            var googleWarning = clippyArea
+            var googleWarning = commentWarning
                .html('')
                .selectAll('a')
                .data(comment.match(/google/i) ? [true] : []);

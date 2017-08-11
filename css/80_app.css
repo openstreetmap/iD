@@ -3506,33 +3506,50 @@ img.tile-removing {
     float: left;
     height: 12px;
     min-width: 12px;
-    font-size:12px;
+    font-size: 12px;
     line-height: 12px;
-    border-radius:24px;
-    padding:5px;
-    background:#7092ff;
-    color:#fff;
+    border-radius: 24px;
+    padding: 5px;
+    background: #7092ff;
+    color: #fff;
 }
 
+.mode-save .field-warning {
+    background: #ffb;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.mode-save .field-warning:empty {
+    display: none;
+}
+
+.mode-save .field-warning,
+.mode-save .changeset-info,
 .mode-save .request-review,
 .mode-save .commit-info {
     margin-bottom: 10px;
 }
 
 .mode-save .changeset-list {
-    border:1px solid #ccc;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    background:#fff;
+    background: #fff;
+}
+
+.mode-save .warning-section {
+    background: #ffb;
 }
 
 .mode-save .warning-section .changeset-list button {
-    border-left: 1px solid #CCC;
+    border-left: 1px solid #ccc;
 }
 
 .mode-save .changeset-list li {
     position: relative;
-    border-top:1px solid #ccc;
-    padding:5px 10px;
+    border-top: 1px solid #ccc;
+    padding: 5px 10px;
     cursor: pointer;
 }
 
@@ -3545,8 +3562,8 @@ img.tile-removing {
 }
 
 .changeset-list li span.count {
-    font-size:10px;
-    color:#555;
+    font-size: 10px;
+    color: #555;
 }
 
 .mode-save .commit-section .changeset-list button {
