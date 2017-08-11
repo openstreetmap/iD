@@ -65,16 +65,18 @@ export function uiCommit(context) {
             .append('div')
             .attr('class', 'body');
 
-        var commentSection = body
+
+        // Fields
+        var fieldSection = body
             .append('div')
             .attr('class', 'modal-section form-field commit-form');
 
-        commentSection
+        fieldSection
             .append('label')
             .attr('class', 'form-label')
             .text(t('commit.message_label'));
 
-        var commentField = commentSection
+        var commentField = fieldSection
             .append('textarea')
             .attr('class', 'commit-form-comment')
             .attr('placeholder', t('commit.description_placeholder'))
@@ -108,10 +110,10 @@ export function uiCommit(context) {
                 );
         });
 
-        var clippyArea = commentSection.append('div')
+        var clippyArea = fieldSection.append('div')
             .attr('class', 'clippy-area');
 
-        var changeSetInfo = commentSection.append('div')
+        var changeSetInfo = fieldSection.append('div')
             .attr('class', 'changeset-info');
 
         changeSetInfo.append('a')
@@ -121,6 +123,17 @@ export function uiCommit(context) {
             .attr('href', t('commit.about_changeset_comments_link'))
             .append('span')
             .text(t('commit.about_changeset_comments'));
+
+
+        var requestReview = fieldSection
+            .append('p')
+            .attr('class', 'request-review')
+            .text(t('commit.request_review'));
+
+        requestReview
+            .append('input')
+            .attr('type', 'checkbox')
+            .on('change', toggleRequestReview());
 
 
         // Warnings
@@ -175,16 +188,6 @@ export function uiCommit(context) {
             .append('p')
             .attr('class', 'commit-info')
             .text(t('commit.upload_explanation'));
-
-        var requestReview = saveSection
-            .append('p')
-            .attr('class', 'request-review')
-            .text(t('commit.request_review'));
-
-        requestReview
-            .append('input')
-            .attr('type', 'checkbox')
-            .on('change', toggleRequestReview());
 
         osm.userDetails(function(err, user) {
             if (err) return;
@@ -387,28 +390,22 @@ export function uiCommit(context) {
             };
         }
 
+
         function toggleRequestReview() {
             var toggled = false;
-            return function() {
-                var changeset;
-                if (toggled) {
-                    changeset = updateChangeset({
-                        review_requested: undefined
-                    });
-                } else {
-                    changeset = updateChangeset({
-                        review_requested: 'yes'
-                    });
-                }
-                toggled = !toggled;
-                var expanded = !tagSection
-                    .selectAll('a.hide-toggle.expanded')
-                    .empty();
 
-                tagSection.call(rawTagEditor
+            return function() {
+                var changeset = updateChangeset({ review_requested: (toggled ? 'yes' : undefined) });
+                var expanded = !tagSection.selectAll('a.hide-toggle.expanded').empty();
+
+                toggled = !toggled;
+
+                tagSection
+                    .call(rawTagEditor
                         .expanded(expanded)
                         .readOnlyTags(readOnlyTags)
-                        .tags(_.clone(changeset.tags)));
+                        .tags(_.clone(changeset.tags))
+                    );
             };
         }
 
