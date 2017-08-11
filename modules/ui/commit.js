@@ -437,7 +437,7 @@ export function uiCommit(context) {
             var rr = tags.review_requested;
             if (rr === undefined) return false;
             rr = rr.trim().toLowerCase();
-            return !(rr == '' || rr === 'no')
+            return !(rr === '' || rr === 'no');
         }
 
 
