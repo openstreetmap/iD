@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import _ from 'lodash';
 import { d3combobox } from '../lib/d3.combobox.js';
 import { t } from '../util/locale';
 import { uiField } from './field';
@@ -12,30 +13,20 @@ import {
 export function uiChangesetEditor(context) {
     var dispatch = d3.dispatch('change'),
         fieldsArr,
-        changeset,
-        tags;
+        changeset;
 
 
     function changesetEditor(selection) {
+        var tags = _.clone(changeset.tags);
 
         if (!fieldsArr) {
             var presets = context.presets();
 
-            fieldsArr = [];
-
-// FIXME: for testing
-            if (presets.field('brand')) {
-                fieldsArr.push(
-                    uiField(context, presets.field('brand'), changeset)
-                );
-            }
-
-// FIXME: for testing
-            presets.universal().forEach(function(field) {
-                fieldsArr.push(
-                    uiField(context, field, changeset, { show: false })
-                );
-            });
+            fieldsArr = [
+                uiField(context, presets.field('comment'), changeset),
+                uiField(context, presets.field('source'), changeset, { show: false }),
+                uiField(context, presets.field('hashtags'), changeset, { show: false }),
+            ];
 
             fieldsArr.forEach(function(field) {
                 field
@@ -149,14 +140,6 @@ export function uiChangesetEditor(context) {
         if (!arguments.length) return changeset;
         changeset = _;
         fieldsArr = null;
-        return changesetEditor;
-    };
-
-
-    changesetEditor.tags = function(_) {
-        if (!arguments.length) return tags;
-        tags = _;
-        // Don't reset fieldsArr here.
         return changesetEditor;
     };
 

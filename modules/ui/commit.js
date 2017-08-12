@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { t } from '../util/locale';
-import { d3combobox } from '../lib/d3.combobox.js';
+// import { d3combobox } from '../lib/d3.combobox.js';
 import { osmChangeset } from '../osm';
 import { modeSelect } from '../modes';
 import { svgIcon } from '../svg';
@@ -14,7 +14,7 @@ import {
     utilDisplayType,
     utilEntityOrMemberSelector,
     utilRebind,
-    utilTriggerEvent
+    // utilTriggerEvent
 } from '../util';
 
 
@@ -29,18 +29,6 @@ export function uiCommit(context) {
     function commit(selection) {
         var osm = context.connection();
         if (!osm) return;
-
-        if (!changeset) {
-            var detected = utilDetect(),
-                tags = {
-                    created_by: ('iD ' + context.version).substr(0, 255),
-                    imagery_used: context.history().imageryUsed().join(';').substr(0, 255),
-                    host: detected.host.substr(0, 255),
-                    locale: detected.locale.substr(0, 255)
-                };
-
-            changeset = new osmChangeset({ tags: tags });
-        }
 
         var changesetEditor = uiChangesetEditor(context)
             .on('change', changeTags);
@@ -59,82 +47,110 @@ export function uiCommit(context) {
             comment = '';
         }
 
-        selection
+        if (!changeset) {
+            var detected = utilDetect(),
+                tags = {
+                    comment: comment,
+                    created_by: ('iD ' + context.version).substr(0, 255),
+                    imagery_used: context.history().imageryUsed().join(';').substr(0, 255),
+                    host: detected.host.substr(0, 255),
+                    locale: detected.locale.substr(0, 255)
+                };
+
+            changeset = new osmChangeset({ tags: tags });
+        }
+
+
+        var header = selection.selectAll('.header')
+            .data([0]);
+
+        header.enter()
             .append('div')
             .attr('class', 'header fillL')
             .append('h3')
             .text(t('commit.title'));
 
-        var body = selection
-            .append('div')
-            .attr('class', 'body');
+        var body = selection.selectAll('.body')
+            .data([0]);
 
-        body
+        body = body.enter()
+            .append('div')
+            .attr('class', 'body')
+            .merge(body);
+
+
+        // Changeset Section
+        var changesetSection = body.selectAll('.changeset-editor')
+            .data([0]);
+
+        changesetSection = changesetSection.enter()
             .append('div')
             .attr('class', 'modal-section changeset-editor')
+            .merge(changesetSection);
+
+        changesetSection
             .call(changesetEditor
                 .changeset(changeset)
-                .tags(tags)
             );
 
 
-        // Fields
-        var fieldSection = body
-            .append('div')
-            .attr('class', 'modal-section form-field commit-form');
+        // // Fields
+        // var fieldSection = body
+        //     .append('div')
+        //     .attr('class', 'modal-section form-field commit-form');
 
-        fieldSection
-            .append('label')
-            .attr('class', 'form-label')
-            .text(t('commit.message_label'));
+        // fieldSection
+        //     .append('label')
+        //     .attr('class', 'form-label')
+        //     .text(t('commit.message_label'));
 
-        var commentField = fieldSection
-            .append('textarea')
-            .attr('class', 'commit-form-comment')
-            .attr('placeholder', t('commit.description_placeholder'))
-            .attr('maxlength', 255)
-            .property('value', comment)
-            .on('input.save', change(true))
-            .on('change.save', change())
-            .on('blur.save', function() {
-                context.storage('comment', this.value);
-                context.storage('commentDate', Date.now());
-            });
+        // var commentField = fieldSection
+        //     .append('textarea')
+        //     .attr('class', 'commit-form-comment')
+        //     .attr('placeholder', t('commit.description_placeholder'))
+        //     .attr('maxlength', 255)
+        //     .property('value', comment)
+        //     .on('input.save', changeComment(true))
+        //     .on('change.save', changeComment())
+        //     .on('blur.save', function() {
+        //         context.storage('comment', this.value);
+        //         context.storage('commentDate', Date.now());
+        //     });
 
 
-        commentField.node().select();
+        // commentField.node().select();
 
-        osm.userChangesets(function (err, changesets) {
-            if (err) return;
+        // osm.userChangesets(function (err, changesets) {
+        //     if (err) return;
 
-            var comments = changesets.map(function(changeset) {
-                return {
-                    title: changeset.tags.comment,
-                    value: changeset.tags.comment
-                };
-            });
+        //     var comments = changesets.map(function(changeset) {
+        //         return {
+        //             title: changeset.tags.comment,
+        //             value: changeset.tags.comment
+        //         };
+        //     });
 
-            commentField
-                .call(d3combobox()
-                    .container(context.container())
-                    .caseSensitive(true)
-                    .data(_.uniqBy(comments, 'title'))
-                );
-        });
+        //     commentField
+        //         .call(d3combobox()
+        //             .container(context.container())
+        //             .caseSensitive(true)
+        //             .data(_.uniqBy(comments, 'title'))
+        //         );
+        // });
 
-        var commentWarning = fieldSection.append('div')
-            .attr('class', 'field-warning comment-warning');
+        // var commentWarning = fieldSection.append('div')
+        //     .attr('class', 'field-warning comment-warning');
 
-        var changeSetInfo = fieldSection.append('div')
-            .attr('class', 'changeset-info');
+        // var changeSetInfo = fieldSection.append('div')
+        //     .attr('class', 'changeset-info');
 
-        changeSetInfo.append('a')
-            .attr('target', '_blank')
-            .attr('tabindex', -1)
-            .call(svgIcon('#icon-out-link', 'inline'))
-            .attr('href', t('commit.about_changeset_comments_link'))
-            .append('span')
-            .text(t('commit.about_changeset_comments'));
+        // changeSetInfo.append('a')
+        //     .attr('target', '_blank')
+        //     .attr('tabindex', -1)
+        //     .call(svgIcon('#icon-out-link', 'inline'))
+        //     .attr('href', t('commit.about_changeset_comments_link'))
+        //     .append('span')
+        //     .text(t('commit.about_changeset_comments'));
 
 
         // Warnings
@@ -180,14 +196,22 @@ export function uiCommit(context) {
 
 
         // Upload Explanation
-        var saveSection = body
-            .append('div')
-            .attr('class','modal-section save-section fillL cf');
+        var saveSection = body.selectAll('.save-section')
+            .data([0]);
 
-        var prose = saveSection
+        saveSection = saveSection.enter()
+            .append('div')
+            .attr('class','modal-section save-section fillL cf')
+            .merge(saveSection);
+
+        var prose = saveSection.selectAll('.commit-info')
+            .data([0]);
+
+        prose = prose.enter()
             .append('p')
             .attr('class', 'commit-info')
-            .text(t('commit.upload_explanation'));
+            .text(t('commit.upload_explanation'))
+            .merge(prose);
 
         osm.userDetails(function(err, user) {
             if (err) return;
@@ -214,38 +238,61 @@ export function uiCommit(context) {
         });
 
 
-        var requestReview = saveSection
+        var requestReview = saveSection.selectAll('.request-review')
+            .data([0]);
+
+        requestReview = requestReview.enter()
             .append('p')
             .attr('class', 'request-review')
-            .text(t('commit.request_review'));
+            .text(t('commit.request_review'))
+            .merge(requestReview);
 
-        var requestReviewField = requestReview
+        var requestReviewField = requestReview.selectAll('input')
+            .data([0]);
+
+        requestReviewField = requestReviewField.enter()
             .append('input')
             .attr('type', 'checkbox')
+            .merge(requestReviewField);
+
+        requestReviewField
             .property('checked', isReviewRequested(changeset.tags))
-            .on('change', toggleRequestReview());
+            .on('change', toggleRequestReview);
 
 
         // Buttons
-        var buttonSection = saveSection
+        var buttonSection = saveSection.selectAll('.buttons')
+            .data([0]);
+
+        // enter
+        var buttonEnter = buttonSection.enter()
             .append('div')
             .attr('class', 'buttons fillL cf');
 
-        var cancelButton = buttonSection
+        buttonEnter
             .append('button')
             .attr('class', 'secondary-action col5 button cancel-button')
-            .on('click.cancel', function() {
-                dispatch.call('cancel');
-            });
-
-        cancelButton
             .append('span')
             .attr('class', 'label')
             .text(t('commit.cancel'));
 
-        var saveButton = buttonSection
+        buttonEnter
             .append('button')
             .attr('class', 'action col5 button save-button')
+            .append('span')
+            .attr('class', 'label')
+            .text(t('commit.save'));
+
+        // update
+        buttonSection = buttonSection
+            .merge(buttonEnter);
+
+        buttonSection.selectAll('.cancel-button')
+            .on('click.cancel', function() {
+                dispatch.call('cancel');
+            });
+
+        buttonSection.selectAll('.save-button')
             .attr('disabled', function() {
                 var n = d3.select('.commit-form textarea').node();
                 return (n && n.value.length) ? null : true;
@@ -254,27 +301,40 @@ export function uiCommit(context) {
                 dispatch.call('save', this, changeset);
             });
 
-        saveButton
-            .append('span')
-            .attr('class', 'label')
-            .text(t('commit.save'));
-
 
         // Raw Tag Editor
-        var tagSection = body
-            .append('div')
-            .attr('class', 'modal-section tag-section raw-tag-editor');
+        var tagSection = body.selectAll('.tag-section.raw-tag-editor')
+            .data([0]);
 
+        tagSection = tagSection.enter()
+            .append('div')
+            .attr('class', 'modal-section tag-section raw-tag-editor')
+            .merge(tagSection);
+
+        var expanded = !tagSection.selectAll('a.hide-toggle.expanded').empty();
+        tagSection
+            .call(rawTagEditor
+                .expanded(expanded)
+                .readOnlyTags(readOnlyTags)
+                .tags(_.clone(changeset.tags))
+            );
+
+
+// TODO check this below...
 
         // Changes
-        var changeSection = body
+        var changeSection = body.selectAll('.modal-section.commit-section')
+            .data([0]);
+
+        var changeEnter = changeSection.enter()
             .append('div')
             .attr('class', 'commit-section modal-section fillL2');
 
-        changeSection.append('h3')
+        changeEnter
+            .append('h3')
             .text(t('commit.changes', { count: summary.length }));
 
-        var li = changeSection
+        var li = changeEnter
             .append('ul')
             .attr('class', 'changeset-list')
             .selectAll('li')
@@ -317,9 +377,9 @@ export function uiCommit(context) {
             .style('opacity', 1);
 
 
-        // Call change() off the bat, in case a changeset
-        // comment is recovered from localStorage
-        utilTriggerEvent(commentField, 'input');
+        // // Call changeComment() off the bat, in case a changeset
+        // // comment is recovered from localStorage
+        // utilTriggerEvent(commentField, 'input');
 
 
         function mouseover(d) {
@@ -361,72 +421,87 @@ export function uiCommit(context) {
             d3.selectAll('.save-section .save-button')
                 .attr('disabled', (comment.length ? null : true));
 
-            // Warn if comment mentions Google..
-            var googleWarning = commentWarning
-               .html('')
-               .selectAll('a')
-               .data(comment.match(/google/i) ? [true] : []);
+            // // Warn if comment mentions Google..
+            // var googleWarning = commentWarning
+            //    .html('')
+            //    .selectAll('a')
+            //    .data(comment.match(/google/i) ? [true] : []);
 
-            googleWarning.exit()
-                .remove();
+            // googleWarning.exit()
+            //     .remove();
 
-            googleWarning.enter()
-               .append('a')
-               .attr('target', '_blank')
-               .attr('tabindex', -1)
-               .call(svgIcon('#icon-alert', 'inline'))
-               .attr('href', t('commit.google_warning_link'))
-               .append('span')
-               .text(t('commit.google_warning'));
+            // googleWarning.enter()
+            //    .append('a')
+            //    .attr('target', '_blank')
+            //    .attr('tabindex', -1)
+            //    .call(svgIcon('#icon-alert', 'inline'))
+            //    .attr('href', t('commit.google_warning_link'))
+            //    .append('span')
+            //    .text(t('commit.google_warning'));
         }
 
 
-        function change(onInput) {
-            return function() {
-                var comment = commentField.property('value').trim();
-                if (!onInput) {
-                    commentField.property('value', comment);
-                }
+        // function changeComment(onInput) {
+        //     return function() {
+                // var comment = commentField.property('value').trim();
+                // if (!onInput) {
+                //     commentField.property('value', comment);
+                // }
 
-                checkComment(comment);
+                // checkComment(comment);
 
-                var changeset = updateChangeset({ comment: comment });
-                var expanded = !tagSection.selectAll('a.hide-toggle.expanded').empty();
+                // var changeset = updateChangeset({ comment: comment }, onInput);
+                // var expanded = !tagSection.selectAll('a.hide-toggle.expanded').empty();
 
-                tagSection
-                    .call(rawTagEditor
-                        .expanded(expanded)
-                        .readOnlyTags(readOnlyTags)
-                        .tags(_.clone(changeset.tags))
-                    );
-            };
-        }
+                // changesetSection
+                //     .call(changesetEditor
+                //         .changeset(changeset)
+                //     );
+
+                // tagSection
+                //     .call(rawTagEditor
+                //         .expanded(expanded)
+                //         .readOnlyTags(readOnlyTags)
+                //         .tags(_.clone(changeset.tags))
+                //     );
+        //     };
+        // }
 
 
         function toggleRequestReview() {
-            return function() {
-                var rr = requestReviewField.property('checked');
-                var changeset = updateChangeset({ review_requested: (rr ? 'yes' : undefined) });
-                var expanded = !tagSection.selectAll('a.hide-toggle.expanded').empty();
+            var rr = requestReviewField.property('checked');
+            updateChangeset({ review_requested: (rr ? 'yes' : undefined) });
 
-                tagSection
-                    .call(rawTagEditor
-                        .expanded(expanded)
-                        .readOnlyTags(readOnlyTags)
-                        .tags(_.clone(changeset.tags))
-                    );
-            };
+            var expanded = !tagSection.selectAll('a.hide-toggle.expanded').empty();
+
+            tagSection
+                .call(rawTagEditor
+                    .expanded(expanded)
+                    .readOnlyTags(readOnlyTags)
+                    .tags(_.clone(changeset.tags))
+                );
         }
 
 
-        function changeTags(changed) {
+        function changeTags(changed, onInput) {
+            // if (changed.hasOwnProperty('comment')) {
+            //     if (changed.comment === undefined) {
+            //         changed.comment = '';
+            //     }
+            //     changed.comment = changed.comment.trim();
+            //     commentField
+            //         .property('value', changed.comment);
+            // }
             if (changed.hasOwnProperty('comment')) {
                 if (changed.comment === undefined) {
                     changed.comment = '';
                 }
-                changed.comment = changed.comment.trim();
-                commentField
-                    .property('value', changed.comment);
+                // if (!onInput) {
+                //     changed.comment = changed.comment.trim();
+                // }
+                // commentField
+                //     .property('value', changed.comment);
+
             }
 
             if (changed.hasOwnProperty('review_requested')) {
@@ -440,8 +515,14 @@ export function uiCommit(context) {
                 }
             }
 
-            updateChangeset(changed);
-            utilTriggerEvent(commentField, 'input');
+            updateChangeset(changed, onInput);
+
+            if (changed.hasOwnProperty('comment')) {
+                checkComment(changed.comment);
+            }
+
+            commit(selection);
+            // utilTriggerEvent(commentField, 'input');
         }
 
 
@@ -453,7 +534,7 @@ export function uiCommit(context) {
         }
 
 
-        function updateChangeset(changed) {
+        function updateChangeset(changed, onInput) {
             var tags = _.clone(changeset.tags);
 
             _.forEach(changed, function(v, k) {
@@ -461,7 +542,9 @@ export function uiCommit(context) {
                 if (readOnlyTags.indexOf(k) !== -1) return;
 
                 if (k !== '' && v !== undefined) {
-                    tags[k] = v.trim().substr(0, 255);
+                    if (!onInput) {
+                        tags[k] = v.trim().substr(0, 255);
+                    }
                 } else {
                     delete tags[k];
                 }
@@ -470,8 +553,6 @@ export function uiCommit(context) {
             if (!_.isEqual(changeset.tags, tags)) {
                 changeset = changeset.update({ tags: tags });
             }
-
-            return changeset;
         }
 
     }

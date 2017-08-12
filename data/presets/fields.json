@@ -437,6 +437,11 @@
             "type": "text",
             "label": "Collection Times"
         },
+        "comment": {
+            "key": "comment",
+            "type": "textarea",
+            "label": "Changeset Comment"
+        },
         "communication_multi": {
             "key": "communication:",
             "type": "multiCombo",
@@ -787,6 +792,11 @@
             "key": "handrail",
             "type": "check",
             "label": "Handrail"
+        },
+        "hashtags": {
+            "key": "hashtags",
+            "type": "text",
+            "label": "Hashtags"
         },
         "height": {
             "key": "height",

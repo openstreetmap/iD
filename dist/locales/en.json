@@ -1355,6 +1355,9 @@
                 "collection_times": {
                     "label": "Collection Times"
                 },
+                "comment": {
+                    "label": "Changeset Comment"
+                },
                 "communication_multi": {
                     "label": "Communication Types"
                 },
@@ -1566,6 +1569,9 @@
                 },
                 "handrail": {
                     "label": "Handrail"
+                },
+                "hashtags": {
+                    "label": "Hashtags"
                 },
                 "height": {
                     "label": "Height (Meters)"

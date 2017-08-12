@@ -1,0 +1,5 @@
+{
+    "key": "comment",
+    "type": "textarea",
+    "label": "Changeset Comment"
+}

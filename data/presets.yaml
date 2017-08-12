@@ -339,6 +339,9 @@ en:
       collection_times:
         # collection_times=*
         label: Collection Times
+      comment:
+        # comment=*
+        label: Changeset Comment
       communication_multi:
         # 'communication:=*'
         label: Communication Types
@@ -571,6 +574,9 @@ en:
       handrail:
         # handrail=*
         label: Handrail
+      hashtags:
+        # hashtags=*
+        label: Hashtags
       height:
         # height=*
         label: Height (Meters)
