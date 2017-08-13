@@ -23,17 +23,20 @@ var readOnlyTags = ['created_by', 'imagery_used', 'host', 'locale'];
 
 
 export function uiCommit(context) {
-    var dispatch = d3.dispatch('cancel', 'save');
+    var dispatch = d3.dispatch('cancel', 'save'),
+        _selection;
+
+    var changesetEditor = uiChangesetEditor(context)
+        .on('change', changeTags);
+    var rawTagEditor = uiRawTagEditor(context)
+        .on('change', changeTags);
 
 
     function commit(selection) {
+        _selection = selection;
+
         var osm = context.connection();
         if (!osm) return;
-
-        var changesetEditor = uiChangesetEditor(context)
-            .on('change', changeTags);
-        var rawTagEditor = uiRawTagEditor(context)
-            .on('change', changeTags);
 
         var changes = context.history().changes(),
             summary = context.history().difference().summary(),
@@ -320,7 +323,7 @@ export function uiCommit(context) {
             );
 
 
-// TODO check this below...
+// TODO check this below (maybe refactor to own module)...
 
         // Changes
         var changeSection = body.selectAll('.modal-section.commit-section')
@@ -416,29 +419,29 @@ export function uiCommit(context) {
         }
 
 
-        function checkComment(comment) {
-            // Save button disabled if there is no comment..
-            d3.selectAll('.save-section .save-button')
-                .attr('disabled', (comment.length ? null : true));
+        // function checkComment(comment) {
+        //     // Save button disabled if there is no comment..
+        //     d3.selectAll('.save-section .save-button')
+        //         .attr('disabled', (comment.length ? null : true));
 
-            // // Warn if comment mentions Google..
-            // var googleWarning = commentWarning
-            //    .html('')
-            //    .selectAll('a')
-            //    .data(comment.match(/google/i) ? [true] : []);
+        //     // // Warn if comment mentions Google..
+        //     // var googleWarning = commentWarning
+        //     //    .html('')
+        //     //    .selectAll('a')
+        //     //    .data(comment.match(/google/i) ? [true] : []);
 
-            // googleWarning.exit()
-            //     .remove();
+        //     // googleWarning.exit()
+        //     //     .remove();
 
-            // googleWarning.enter()
-            //    .append('a')
-            //    .attr('target', '_blank')
-            //    .attr('tabindex', -1)
-            //    .call(svgIcon('#icon-alert', 'inline'))
-            //    .attr('href', t('commit.google_warning_link'))
-            //    .append('span')
-            //    .text(t('commit.google_warning'));
-        }
+        //     // googleWarning.enter()
+        //     //    .append('a')
+        //     //    .attr('target', '_blank')
+        //     //    .attr('tabindex', -1)
+        //     //    .call(svgIcon('#icon-alert', 'inline'))
+        //     //    .attr('href', t('commit.google_warning_link'))
+        //     //    .append('span')
+        //     //    .text(t('commit.google_warning'));
+        // }
 
 
         // function changeComment(onInput) {
@@ -482,80 +485,84 @@ export function uiCommit(context) {
                 );
         }
 
-
-        function changeTags(changed, onInput) {
-            // if (changed.hasOwnProperty('comment')) {
-            //     if (changed.comment === undefined) {
-            //         changed.comment = '';
-            //     }
-            //     changed.comment = changed.comment.trim();
-            //     commentField
-            //         .property('value', changed.comment);
-            // }
-            if (changed.hasOwnProperty('comment')) {
-                if (changed.comment === undefined) {
-                    changed.comment = '';
-                }
-                // if (!onInput) {
-                //     changed.comment = changed.comment.trim();
-                // }
-                // commentField
-                //     .property('value', changed.comment);
-
-            }
-
-            if (changed.hasOwnProperty('review_requested')) {
-                if (changed.review_requested === undefined) {
-                    requestReviewField
-                        .property('checked', false);
-                } else {
-                    changed.review_requested = changed.review_requested.trim();
-                    requestReviewField
-                        .property('checked', isReviewRequested(changed));
-                }
-            }
-
-            updateChangeset(changed, onInput);
-
-            if (changed.hasOwnProperty('comment')) {
-                checkComment(changed.comment);
-            }
-
-            commit(selection);
-            // utilTriggerEvent(commentField, 'input');
-        }
-
-
-        function isReviewRequested(tags) {
-            var rr = tags.review_requested;
-            if (rr === undefined) return false;
-            rr = rr.trim().toLowerCase();
-            return !(rr === '' || rr === 'no');
-        }
-
-
-        function updateChangeset(changed, onInput) {
-            var tags = _.clone(changeset.tags);
-
-            _.forEach(changed, function(v, k) {
-                k = k.trim().substr(0, 255);
-                if (readOnlyTags.indexOf(k) !== -1) return;
-
-                if (k !== '' && v !== undefined) {
-                    if (!onInput) {
-                        tags[k] = v.trim().substr(0, 255);
-                    }
-                } else {
-                    delete tags[k];
-                }
-            });
-
-            if (!_.isEqual(changeset.tags, tags)) {
-                changeset = changeset.update({ tags: tags });
-            }
-        }
-
     }
+
+    function changeTags(changed, onInput) {
+        // if (changed.hasOwnProperty('comment')) {
+        //     if (changed.comment === undefined) {
+        //         changed.comment = '';
+        //     }
+        //     changed.comment = changed.comment.trim();
+        //     commentField
+        //         .property('value', changed.comment);
+        // }
+        if (changed.hasOwnProperty('comment')) {
+            if (changed.comment === undefined) {
+                changed.comment = '';
+            }
+            // if (!onInput) {
+            //     changed.comment = changed.comment.trim();
+            // }
+            // commentField
+            //     .property('value', changed.comment);
+
+        }
+
+        // if (changed.hasOwnProperty('review_requested')) {
+            // if (changed.review_requested === undefined) {
+                // requestReviewField
+                //     .property('checked', false);
+            // } else {
+                // changed.review_requested = changed.review_requested.trim();
+                // requestReviewField
+                //     .property('checked', isReviewRequested(changed));
+            // }
+        // }
+
+        updateChangeset(changed, onInput);
+
+        // if (changed.hasOwnProperty('comment')) {
+        //     checkComment(changed.comment);
+        // }
+
+        if (_selection) {
+            _selection.call(commit);
+        }
+        // utilTriggerEvent(commentField, 'input');
+    }
+
+
+    function isReviewRequested(tags) {
+        var rr = tags.review_requested;
+        if (rr === undefined) return false;
+        rr = rr.trim().toLowerCase();
+        return !(rr === '' || rr === 'no');
+    }
+
+
+    function updateChangeset(changed, onInput) {
+        var tags = _.clone(changeset.tags);
+
+        _.forEach(changed, function(v, k) {
+            k = k.trim().substr(0, 255);
+            if (readOnlyTags.indexOf(k) !== -1) return;
+
+            if (k !== '' && v !== undefined) {
+                if (onInput) {
+                    tags[k] = v;
+                } else {
+                    tags[k] = v.trim().substr(0, 255);
+                }
+            } else {
+                delete tags[k];
+            }
+        });
+
+        if (!_.isEqual(changeset.tags, tags)) {
+            changeset = changeset.update({ tags: tags });
+        }
+    }
+
 
 
     commit.reset = function() {
