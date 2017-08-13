@@ -63,7 +63,7 @@
         {
             "countryCodes": ["us"],
             "format": [
-                ["housenumber", "street"],
+                ["housenumber", "street", "unit"],
                 ["city", "state", "postcode"]
             ]
         },

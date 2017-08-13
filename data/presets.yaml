@@ -84,7 +84,7 @@ en:
         # access=*
         label: Access
       address:
-        # 'addr:block_number=*, addr:city=*, addr:block_number=*, addr:conscriptionnumber=*, addr:county=*, addr:country=*, addr:county=*, addr:district=*, addr:floor=*, addr:hamlet=*, addr:housename=*, addr:housenumber=*, addr:neighbourhood=*, addr:place=*, addr:postcode=*, addr:province=*, addr:quarter=*, addr:state=*, addr:street=*, addr:subdistrict=*, addr:suburb=*'
+        # 'addr:block_number=*, addr:city=*, addr:block_number=*, addr:conscriptionnumber=*, addr:county=*, addr:country=*, addr:county=*, addr:district=*, addr:floor=*, addr:hamlet=*, addr:housename=*, addr:housenumber=*, addr:neighbourhood=*, addr:place=*, addr:postcode=*, addr:province=*, addr:quarter=*, addr:state=*, addr:street=*, addr:subdistrict=*, addr:suburb=*, addr:unit=*'
         label: Address
         placeholders:
           block_number: Block Number
@@ -117,6 +117,7 @@ en:
           subdistrict!vn: Ward/Commune/Townlet
           suburb: Suburb
           suburb!jp: Ward
+          unit: Unit
       admin_level:
         # admin_level=*
         label: Admin Level
@@ -3556,6 +3557,7 @@ en:
       natural/wetland:
         # natural=wetland
         name: Wetland
+        # 'terms: bog,marsh,reedbed,swamp,tidalflat'
         terms: '<translate with synonyms or related terms for ''Wetland'', separated by commas>'
       natural/wood:
         # natural=wood
