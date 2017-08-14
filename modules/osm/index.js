@@ -1,18 +1,19 @@
 export { osmChangeset } from './changeset';
-export { osmEntity } from './entity';
+export { osmEntity } from './entityFactory';
 export { osmNode } from './node';
 export { osmRelation } from './relation';
 export { osmWay } from './way';
-
+export { Entity as EntityStatics } from './entityStatic';
 export {
-    osmIntersection,
-    osmTurn,
-    osmInferRestriction
-} from './intersection';
+    isInstanceOfEntity,
+    isInstanceOfNode,
+    isInstanceOfWay,
+    isInstanceOfRelation
+} from './misc';
 
-export {
-    osmLanes
-} from './lanes';
+export { osmIntersection, osmTurn, osmInferRestriction } from './intersection';
+
+export { osmLanes } from './lanes';
 
 export {
     osmIsSimpleMultipolygonOuterMember,
@@ -20,8 +21,4 @@ export {
     osmJoinWays
 } from './multipolygon';
 
-export {
-    osmOneWayTags,
-    osmPavedTags,
-    osmIsInterestingTag
-} from './tags';
+export { osmOneWayTags, osmPavedTags, osmIsInterestingTag } from './tags';
