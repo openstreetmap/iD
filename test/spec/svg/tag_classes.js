@@ -7,156 +7,156 @@ describe('iD.svgTagClasses', function () {
 
     it('adds no classes to elements whose datum has no tags', function() {
         selection
-            .datum(iD.Entity())
+            .datum(iD.Way())
             .call(iD.svgTagClasses());
         expect(selection.attr('class')).to.equal(null);
     });
 
     it('adds classes for primary tag key and key-value', function() {
         selection
-            .datum(iD.Entity({tags: {highway: 'primary'}}))
+            .datum(iD.Way({tags: {highway: 'primary'}}))
             .call(iD.svgTagClasses());
         expect(selection.attr('class')).to.equal('tag-highway tag-highway-primary');
     });
 
     it('adds only one primary tag', function() {
         selection
-            .datum(iD.Entity({tags: {highway: 'primary', railway: 'rail'}}))
+            .datum(iD.Way({tags: {highway: 'primary', railway: 'rail'}}))
             .call(iD.svgTagClasses());
         expect(selection.attr('class')).to.equal('tag-highway tag-highway-primary');
     });
 
     it('orders primary tags', function() {
         selection
-            .datum(iD.Entity({tags: {railway: 'rail', highway: 'primary'}}))
+            .datum(iD.Way({tags: {railway: 'rail', highway: 'primary'}}))
             .call(iD.svgTagClasses());
         expect(selection.attr('class')).to.equal('tag-highway tag-highway-primary');
     });
 
     it('adds status tag when status in primary value (`railway=abandoned`)', function() {
         selection
-            .datum(iD.Entity({tags: {railway: 'abandoned'}}))
+            .datum(iD.Way({tags: {railway: 'abandoned'}}))
             .call(iD.svgTagClasses());
         expect(selection.attr('class')).to.equal('tag-railway tag-status tag-status-abandoned');
     });
 
     it('adds status tag when status in key and value matches "yes" (railway=rail + abandoned=yes)', function() {
         selection
-            .datum(iD.Entity({tags: {railway: 'rail', abandoned: 'yes'}}))
+            .datum(iD.Way({tags: {railway: 'rail', abandoned: 'yes'}}))
             .call(iD.svgTagClasses());
         expect(selection.attr('class')).to.equal('tag-railway tag-railway-rail tag-status tag-status-abandoned');
     });
 
     it('adds status tag when status in key and value matches primary (railway=rail + abandoned=railway)', function() {
         selection
-            .datum(iD.Entity({tags: {railway: 'rail', abandoned: 'railway'}}))
+            .datum(iD.Way({tags: {railway: 'rail', abandoned: 'railway'}}))
             .call(iD.svgTagClasses());
         expect(selection.attr('class')).to.equal('tag-railway tag-railway-rail tag-status tag-status-abandoned');
     });
 
     it('adds primary and status tag when status in key and no primary (abandoned=railway)', function() {
         selection
-            .datum(iD.Entity({tags: {abandoned: 'railway'}}))
+            .datum(iD.Way({tags: {abandoned: 'railway'}}))
             .call(iD.svgTagClasses());
         expect(selection.attr('class')).to.equal('tag-railway tag-status tag-status-abandoned');
     });
 
     it('does not add status tag for different primary tag (highway=path + abandoned=railway)', function() {
         selection
-            .datum(iD.Entity({tags: {highway: 'path', abandoned: 'railway'}}))
+            .datum(iD.Way({tags: {highway: 'path', abandoned: 'railway'}}))
             .call(iD.svgTagClasses());
         expect(selection.attr('class')).to.equal('tag-highway tag-highway-path');
     });
 
     it('adds secondary tags', function() {
         selection
-            .datum(iD.Entity({tags: {highway: 'primary', bridge: 'yes'}}))
+            .datum(iD.Way({tags: {highway: 'primary', bridge: 'yes'}}))
             .call(iD.svgTagClasses());
         expect(selection.attr('class')).to.equal('tag-highway tag-highway-primary tag-bridge tag-bridge-yes');
     });
 
     it('adds no bridge=no tags', function() {
         selection
-            .datum(iD.Entity({tags: {bridge: 'no'}}))
+            .datum(iD.Way({tags: {bridge: 'no'}}))
             .call(iD.svgTagClasses());
         expect(selection.attr('class')).to.equal(null);
     });
 
     it('adds tag-unpaved for highway=track with no surface tagging', function() {
         selection
-            .datum(iD.Entity({tags: {highway: 'track'}}))
+            .datum(iD.Way({tags: {highway: 'track'}}))
             .call(iD.svgTagClasses());
         expect(selection.classed('tag-unpaved')).to.be.true;
     });
 
     it('does not add tag-unpaved for highway=track with explicit paved surface tagging', function() {
         selection
-            .datum(iD.Entity({tags: {highway: 'track', surface: 'asphalt'}}))
+            .datum(iD.Way({tags: {highway: 'track', surface: 'asphalt'}}))
             .call(iD.svgTagClasses());
         expect(selection.classed('tag-unpaved')).to.be.false;
 
         selection
-            .datum(iD.Entity({tags: {highway: 'track', tracktype: 'grade1'}}))
+            .datum(iD.Way({tags: {highway: 'track', tracktype: 'grade1'}}))
             .call(iD.svgTagClasses());
         expect(selection.classed('tag-unpaved')).to.be.false;
     });
 
     it('adds tag-unpaved for highway=track with explicit unpaved surface tagging', function() {
         selection
-            .datum(iD.Entity({tags: {highway: 'track', surface: 'dirt'}}))
+            .datum(iD.Way({tags: {highway: 'track', surface: 'dirt'}}))
             .call(iD.svgTagClasses());
         expect(selection.classed('tag-unpaved')).to.be.true;
 
         selection
-            .datum(iD.Entity({tags: {highway: 'track', tracktype: 'grade3'}}))
+            .datum(iD.Way({tags: {highway: 'track', tracktype: 'grade3'}}))
             .call(iD.svgTagClasses());
         expect(selection.classed('tag-unpaved')).to.be.true;
     });
 
     it('does not add tag-unpaved for other highway types with no surface tagging', function() {
         selection
-            .datum(iD.Entity({tags: {highway: 'tertiary'}}))
+            .datum(iD.Way({tags: {highway: 'tertiary'}}))
             .call(iD.svgTagClasses());
         expect(selection.classed('tag-unpaved')).to.be.false;
 
         selection
-            .datum(iD.Entity({tags: {highway: 'foo'}}))
+            .datum(iD.Way({tags: {highway: 'foo'}}))
             .call(iD.svgTagClasses());
         expect(selection.classed('tag-unpaved')).to.be.false;
     });
 
     it('does not add tag-unpaved for other highway types with explicit paved surface tagging', function() {
         selection
-            .datum(iD.Entity({tags: {highway: 'tertiary', surface: 'asphalt'}}))
+            .datum(iD.Way({tags: {highway: 'tertiary', surface: 'asphalt'}}))
             .call(iD.svgTagClasses());
         expect(selection.classed('tag-unpaved')).to.be.false;
 
         selection
-            .datum(iD.Entity({tags: {highway: 'foo', tracktype: 'grade1'}}))
+            .datum(iD.Way({tags: {highway: 'foo', tracktype: 'grade1'}}))
             .call(iD.svgTagClasses());
         expect(selection.classed('tag-unpaved')).to.be.false;
     });
 
     it('adds tag-unpaved for other highway types with explicit unpaved surface tagging', function() {
         selection
-            .datum(iD.Entity({tags: {highway: 'tertiary', surface: 'dirt'}}))
+            .datum(iD.Way({tags: {highway: 'tertiary', surface: 'dirt'}}))
             .call(iD.svgTagClasses());
         expect(selection.classed('tag-unpaved')).to.be.true;
 
         selection
-            .datum(iD.Entity({tags: {highway: 'foo', tracktype: 'grade3'}}))
+            .datum(iD.Way({tags: {highway: 'foo', tracktype: 'grade3'}}))
             .call(iD.svgTagClasses());
         expect(selection.classed('tag-unpaved')).to.be.true;
     });
 
     it('does not add tag-unpaved for non-highways', function() {
         selection
-            .datum(iD.Entity({tags: {railway: 'abandoned', surface: 'gravel'}}))
+            .datum(iD.Way({tags: {railway: 'abandoned', surface: 'gravel'}}))
             .call(iD.svgTagClasses());
         expect(selection.classed('tag-unpaved')).to.be.false;
 
         selection
-            .datum(iD.Entity({tags: {amenity: 'parking', surface: 'dirt'}}))
+            .datum(iD.Way({tags: {amenity: 'parking', surface: 'dirt'}}))
             .call(iD.svgTagClasses());
         expect(selection.classed('tag-unpaved')).to.be.false;
     });
@@ -164,7 +164,7 @@ describe('iD.svgTagClasses', function () {
     it('adds tags based on the result of the `tags` accessor', function() {
         var primary = function () { return { highway: 'primary'}; };
         selection
-            .datum(iD.Entity())
+            .datum(iD.Way())
             .call(iD.svgTagClasses().tags(primary));
         expect(selection.attr('class')).to.equal('tag-highway tag-highway-primary');
     });
@@ -172,7 +172,7 @@ describe('iD.svgTagClasses', function () {
     it('removes classes for tags that are no longer present', function() {
         selection
             .attr('class', 'tag-highway tag-highway-primary')
-            .datum(iD.Entity())
+            .datum(iD.Way())
             .call(iD.svgTagClasses());
         expect(selection.attr('class')).to.equal('');
     });
@@ -180,7 +180,7 @@ describe('iD.svgTagClasses', function () {
     it('preserves existing non-"tag-"-prefixed classes', function() {
         selection
             .attr('class', 'selected')
-            .datum(iD.Entity())
+            .datum(iD.Way())
             .call(iD.svgTagClasses());
         expect(selection.attr('class')).to.equal('selected');
     });
@@ -188,7 +188,7 @@ describe('iD.svgTagClasses', function () {
     it('works on SVG elements', function() {
         selection = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'g'));
         selection
-            .datum(iD.Entity())
+            .datum(iD.Way())
             .call(iD.svgTagClasses());
         expect(selection.attr('class')).to.equal(null);
     });

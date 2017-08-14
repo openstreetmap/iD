@@ -3,18 +3,18 @@ import { coreGraph } from '../../core/graph';
 import { osmEntity } from '../entityFactory';
 import { Entity } from '../entityStatic';
 import { entityBase } from '../entityBase';
-import { osmNode, Node } from '../node';
-import { osmWay, Way } from '../way';
-import { osmRelation, Relation } from '../relation';
+import { osmNode } from '../node';
+import { osmWay } from '../way';
+import { osmRelation } from '../relation';
 
 describe('iD.osmEntity', function() {
     it('returns a subclass of the appropriate type', function() {
-        expect(osmEntity({ type: 'node' })).toBeInstanceOf(Node);
-        expect(osmEntity({ type: 'way' })).toBeInstanceOf(Way);
-        expect(osmEntity({ type: 'relation' })).toBeInstanceOf(Relation);
-        expect(osmEntity({ id: 'n1' })).toBeInstanceOf(Node);
-        expect(osmEntity({ id: 'w1' })).toBeInstanceOf(Way);
-        expect(osmEntity({ id: 'r1' })).toBeInstanceOf(Relation);
+        expect(osmEntity({ type: 'node' })).toBeInstanceOf(osmNode);
+        expect(osmEntity({ type: 'way' })).toBeInstanceOf(osmWay);
+        expect(osmEntity({ type: 'relation' })).toBeInstanceOf(osmRelation);
+        expect(osmEntity({ id: 'n1' })).toBeInstanceOf(osmNode);
+        expect(osmEntity({ id: 'w1' })).toBeInstanceOf(osmWay);
+        expect(osmEntity({ id: 'r1' })).toBeInstanceOf(osmRelation);
     });
 
     // if (debug) {
@@ -51,7 +51,7 @@ describe('iD.osmEntity', function() {
         it('returns a new Entity', function() {
             var n = osmEntity({ id: 'n' }),
                 result = n.copy(null, {});
-            expect(result).toBeInstanceOf(Node);
+            expect(result).toBeInstanceOf(osmNode);
             expect(result).not.toBe(n);
         });
 
@@ -93,7 +93,7 @@ describe('iD.osmEntity', function() {
         it('returns a new Entity', function() {
             var a = osmEntity({ id: 'r1' }),
                 b = a.update({});
-            expect(b instanceof Relation).toBe(true);
+            expect(b instanceof osmRelation).toBe(true);
             expect(a).not.toBe(b);
         });
 
@@ -139,7 +139,7 @@ describe('iD.osmEntity', function() {
         it('returns a new Entity if changed', function() {
             var a = osmEntity({ id: 'n1', tags: { a: 'a' } }),
                 b = a.mergeTags({ a: 'b' });
-            expect(b instanceof Node).toBe(true);
+            expect(b instanceof osmNode).toBe(true);
             expect(a).not.toBe(b);
         });
 

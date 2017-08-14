@@ -3,9 +3,10 @@ import _ from 'lodash';
 import { coreGraph } from '../../core/graph';
 import { geoExtent } from '../../geo/index';
 
-import { osmNode, Node } from '../node';
-import { osmWay, Way } from '../way';
-import { osmRelation, Relation } from '../relation';
+import { osmNode } from '../node';
+import { osmWay } from '../way';
+import { osmRelation } from '../relation';
+
 
 describe('iD.osmRelation', function () {
     // if (iD.debug) {
@@ -15,7 +16,7 @@ describe('iD.osmRelation', function () {
     // }
 
     it('returns a relation', function () {
-        expect(osmRelation()).toBeInstanceOf(Relation);
+        expect(osmRelation()).toBeInstanceOf(osmRelation);
         expect(osmRelation().type).toBe('relation');
     });
 
@@ -40,7 +41,7 @@ describe('iD.osmRelation', function () {
             var r = osmRelation({id: 'r'}),
                 result = r.copy(null, {});
 
-            expect(result).toBeInstanceOf(Relation);
+            expect(result).toBeInstanceOf(osmRelation);
             expect(result).not.toBe(r);
         });
 
@@ -72,10 +73,10 @@ describe('iD.osmRelation', function () {
                 result = r.copy(graph, copies);
 
             expect(Object.keys(copies)).toHaveLength(5);
-            expect(copies.w).toBeInstanceOf(Way);
-            expect(copies.a).toBeInstanceOf(Node);
-            expect(copies.b).toBeInstanceOf(Node);
-            expect(copies.c).toBeInstanceOf(Node);
+            expect(copies.w).toBeInstanceOf(osmWay);
+            expect(copies.a).toBeInstanceOf(osmNode);
+            expect(copies.b).toBeInstanceOf(osmNode);
+            expect(copies.c).toBeInstanceOf(osmNode);
             expect(result.members[0].id).not.toBe(r.members[0].id);
             expect(result.members[0].role).toBe(r.members[0].role);
         });
@@ -89,9 +90,9 @@ describe('iD.osmRelation', function () {
             r1.copy(graph, copies);
 
             expect(Object.keys(copies)).toHaveLength(3);
-            expect(copies.r1).toBeInstanceOf(Relation);
-            expect(copies.r2).toBeInstanceOf(Relation);
-            expect(copies.w).toBeInstanceOf(Way);
+            expect(copies.r1).toBeInstanceOf(osmRelation);
+            expect(copies.r2).toBeInstanceOf(osmRelation);
+            expect(copies.w).toBeInstanceOf(osmWay);
             expect(copies.r1.members[0].id).toBe(copies.r2.id);
             expect(copies.r1.members[1].id).toBe(copies.w.id);
             expect(copies.r2.members[0].id).toBe(copies.w.id);
@@ -579,15 +580,15 @@ describe('iD.osmRelation', function () {
         it('orders existing relations newest-first', function () {
             var a = osmRelation({ id: 'r1' }),
                 b = osmRelation({ id: 'r2' });
-            expect(Relation.creationOrder(a, b)).toBeGreaterThan(0);
-            expect(Relation.creationOrder(b, a)).toBeLessThan(0);
+            expect(osmRelation.creationOrder(a, b)).toBeGreaterThan(0);
+            expect(osmRelation.creationOrder(b, a)).toBeLessThan(0);
         });
 
         it('orders new relations newest-first', function () {
             var a = osmRelation({ id: 'r-1' }),
                 b = osmRelation({ id: 'r-2' });
-            expect(Relation.creationOrder(a, b)).toBeGreaterThan(0);
-            expect(Relation.creationOrder(b, a)).toBeLessThan(0);
+            expect(osmRelation.creationOrder(a, b)).toBeGreaterThan(0);
+            expect(osmRelation.creationOrder(b, a)).toBeLessThan(0);
         });
     });
 });

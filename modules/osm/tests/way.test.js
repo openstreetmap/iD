@@ -1,8 +1,7 @@
 import { coreGraph } from '../../core/graph';
 
-import { osmNode, Node } from '../node';
-import { osmWay, Way } from '../way';
-
+import { osmNode } from '../node';
+import { osmWay } from '../way';
 
 describe('iD.osmWay', function() {
     // if (iD.debug) {
@@ -12,7 +11,7 @@ describe('iD.osmWay', function() {
     // }
 
     it('returns a way', function() {
-        expect(osmWay()).toBeInstanceOf(Way);
+        expect(osmWay()).toBeInstanceOf(osmWay);
         expect(osmWay().type).toBe('way');
     });
 
@@ -37,7 +36,7 @@ describe('iD.osmWay', function() {
             var w = osmWay({ id: 'w' }),
                 result = w.copy(null, {});
 
-            expect(result).toBeInstanceOf(Way);
+            expect(result).toBeInstanceOf(osmWay);
             expect(result).not.toBe(w);
         });
 
@@ -67,8 +66,8 @@ describe('iD.osmWay', function() {
                 result = w.copy(graph, copies);
 
             expect(Object.keys(copies)).toHaveLength(3);
-            expect(copies.a).toBeInstanceOf(Node);
-            expect(copies.b).toBeInstanceOf(Node);
+            expect(copies.a).toBeInstanceOf(osmNode);
+            expect(copies.b).toBeInstanceOf(osmNode);
             expect(copies.a).not.toBe(w.nodes[0]);
             expect(copies.b).not.toBe(w.nodes[1]);
             expect(result.nodes).toEqual([copies.a.id, copies.b.id]);

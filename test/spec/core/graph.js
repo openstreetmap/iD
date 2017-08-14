@@ -1,19 +1,19 @@
 describe('iD.Graph', function() {
     describe('constructor', function () {
         it('accepts an entities Array', function () {
-            var entity = iD.Entity(),
+            var entity = iD.Node(),
                 graph = iD.Graph([entity]);
             expect(graph.entity(entity.id)).to.equal(entity);
         });
 
         it('accepts a Graph', function () {
-            var entity = iD.Entity(),
+            var entity = iD.Node(),
                 graph = iD.Graph(iD.Graph([entity]));
             expect(graph.entity(entity.id)).to.equal(entity);
         });
 
         it('copies other\'s entities', function () {
-            var entity = iD.Entity(),
+            var entity = iD.Node(),
                 base   = iD.Graph([entity]),
                 graph  = iD.Graph(base);
             expect(graph.entities).not.to.equal(base.entities);

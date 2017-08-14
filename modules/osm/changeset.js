@@ -11,7 +11,7 @@ export function osmChangeset() {
     }
 }
 
-osmChangeset.prototype = Object.assign({}, entityBase,  {
+osmChangeset.prototype = _.assign({}, entityBase,  {
 
     type: 'changeset',
 

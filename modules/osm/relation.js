@@ -13,14 +13,14 @@ import { Entity } from './entityStatic';
 
 
 export function osmRelation() {
-    return new Relation().initialize(arguments);
+    if (!(this instanceof osmRelation)) {
+        return (new osmRelation()).initialize(arguments);
+    } else if (arguments.length) {
+        this.initialize(arguments);
+    }
 }
 
-export function Relation() {
-    return this;
-}
-
-Relation.creationOrder = function(a, b) {
+osmRelation.creationOrder = function(a, b) {
     var aId = parseInt(Entity.id.toOSM(a.id), 10);
     var bId = parseInt(Entity.id.toOSM(b.id), 10);
 
@@ -28,30 +28,30 @@ Relation.creationOrder = function(a, b) {
     return bId - aId;
 };
 
-Relation.prototype = Object.assign({}, entityBase, {
+osmRelation.prototype = _.assign({}, entityBase, {
     type: 'relation',
     members: [],
 
     baseCopy: function(resolver, copies) {
         if (copies[this.id]) return copies[this.id];
 
-        var copy = new Relation().initialize([
+        var copy = new osmRelation(
             this,
             {
                 id: undefined,
                 user: undefined,
                 version: undefined
             }
-        ]);
+        );
         copies[this.id] = copy;
         return copy;
     },
     update: function(attrs) {
-        return new Relation().initialize([
+        return new osmRelation(
             this,
             attrs,
             { v: 1 + (this.v || 0) }
-        ]);
+        );
     },
     copy: function(resolver, copies) {
         if (copies[this.id]) return copies[this.id];

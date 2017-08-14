@@ -3,14 +3,14 @@ import { entityBase } from './entityBase';
 import { geoExtent } from '../geo/index';
 
 export function osmNode() {
-    return new Node().initialize(arguments);
+    if (!(this instanceof osmNode)) {
+        return (new osmNode()).initialize(arguments);
+    } else if (arguments.length) {
+        this.initialize(arguments);
+    }
 }
 
-export function Node() {
-    return this;
-}
-
-Node.prototype = Object.assign({}, entityBase, {
+osmNode.prototype = _.assign({}, entityBase, {
     type: 'node',
 
     extent: function() {
@@ -18,11 +18,11 @@ Node.prototype = Object.assign({}, entityBase, {
     },
     copy: function(resolver, copies) {
         if (copies[this.id]) return copies[this.id];
-        var copy = new Node().initialize([this, {
+        var copy = new osmNode(this, {
             id: undefined,
             user: undefined,
             version: undefined
-        }]);
+        });
         copies[this.id] = copy;
 
         return copy;
@@ -34,7 +34,7 @@ Node.prototype = Object.assign({}, entityBase, {
         });
     },
     update: function(attrs) {
-        return new Node().initialize([this, attrs, { v: 1 + (this.v || 0) }]);
+        return new osmNode(this, attrs, { v: 1 + (this.v || 0) });
     },
     move: function(loc) {
         return this.update({ loc: loc });
@@ -157,4 +157,3 @@ Node.prototype = Object.assign({}, entityBase, {
     }
 });
 
-// export { Node };

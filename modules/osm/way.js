@@ -8,30 +8,29 @@ import { areaKeys } from '../core/context';
 import { entityBase } from './entityBase';
 import { Entity } from './entityStatic';
 
-
 export function osmWay() {
-    return new Way().initialize(arguments);
+    if (!(this instanceof osmWay)) {
+        return (new osmWay()).initialize(arguments);
+    } else if (arguments.length) {
+        this.initialize(arguments);
+    }
 }
 
-export function Way() {
-    return this;
-}
-
-Way.prototype = Object.assign({}, entityBase, {
+osmWay.prototype = _.assign({}, entityBase, {
     type: 'way',
     nodes: [],
 
     baseCopy: function(resolver, copies) {
         if (copies[this.id]) return copies[this.id];
 
-        var copy = new Way().initialize([
+        var copy = new osmWay().initialize(
             this,
             {
                 id: undefined,
                 user: undefined,
                 version: undefined
             }
-        ]);
+        );
         copies[this.id] = copy;
         return copy;
     },
@@ -201,7 +200,7 @@ Way.prototype = Object.assign({}, entityBase, {
     },
 
     update: function(attrs) {
-        return new Way().initialize([this, attrs, { v: 1 + (this.v || 0) }]);
+        return new osmWay(this, attrs, { v: 1 + (this.v || 0) });
     },
     geometry: function(graph) {
         return graph.transient(this, 'geometry', function() {
