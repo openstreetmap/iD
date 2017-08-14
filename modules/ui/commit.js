@@ -50,19 +50,21 @@ export function uiCommit(context) {
             comment = '';
         }
 
+        var tags;
         if (!changeset) {
-            var detected = utilDetect(),
-                tags = {
-                    comment: comment,
-                    created_by: ('iD ' + context.version).substr(0, 255),
-                    imagery_used: context.history().imageryUsed().join(';').substr(0, 255),
-                    host: detected.host.substr(0, 255),
-                    locale: detected.locale.substr(0, 255)
-                };
+            var detected = utilDetect();
+            tags = {
+                comment: comment,
+                created_by: ('iD ' + context.version).substr(0, 255),
+                imagery_used: context.history().imageryUsed().join(';').substr(0, 255),
+                host: detected.host.substr(0, 255),
+                locale: detected.locale.substr(0, 255)
+            };
 
             changeset = new osmChangeset({ tags: tags });
         }
 
+        tags = _.clone(changeset.tags);
 
         var header = selection.selectAll('.header')
             .data([0]);
@@ -93,7 +95,8 @@ export function uiCommit(context) {
 
         changesetSection
             .call(changesetEditor
-                .changeset(changeset)
+                .changesetID(changeset.id)
+                .tags(tags)
             );
 
 
@@ -157,41 +160,50 @@ export function uiCommit(context) {
 
 
         // Warnings
-        var warnings = body.selectAll('div.warning-section')
-            .data([context.history().validate(changes)]);
+        var warnings = context.history().validate(changes);
+        var warningSection = body.selectAll('div.warning-section')
+            .data(warnings.length ? [0] : []);
 
-        warnings = warnings.enter()
+        warningSection.exit()
+            .remove();
+
+        var warningEnter = warningSection.enter()
             .append('div')
-            .attr('class', 'modal-section warning-section fillL2')
-            .style('display', function(d) { return _.isEmpty(d) ? 'none' : null; })
-            .merge(warnings);
+            .attr('class', 'modal-section warning-section fillL2');
 
-        warnings
+        warningEnter
             .append('h3')
             .text(t('commit.warnings'));
 
-        warnings
+        warningEnter
             .append('ul')
             .attr('class', 'changeset-list');
 
-        var warningLi = warnings.select('ul').selectAll('li')
-            .data(function(d) { return d; });
+        warningSection = warningEnter
+            .merge(warningSection);
 
-        warningLi = warningLi.enter()
+
+        var warningItems = warningSection.select('ul').selectAll('li')
+            .data(warnings);
+
+        warningItems.exit()
+            .remove();
+
+        warningItems = warningItems.enter()
             .append('li')
             .on('mouseover', mouseover)
             .on('mouseout', mouseout)
             .on('click', warningClick)
-            .merge(warningLi);
+            .merge(warningItems);
 
-        warningLi
+        warningItems
             .call(svgIcon('#icon-alert', 'pre-text'));
 
-        warningLi
+        warningItems
             .append('strong')
             .text(function(d) { return d.message; });
 
-        warningLi.filter(function(d) { return d.tooltip; })
+        warningItems.filter(function(d) { return d.tooltip; })
             .call(tooltip()
                 .title(function(d) { return d.tooltip; })
                 .placement('top')

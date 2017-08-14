@@ -1370,6 +1370,9 @@ button.save.has-count .count::before {
     padding: 0 20px 20px 20px;
     font-weight: bold;
 }
+.changeset-editor .more-fields {
+    padding: 15px 20px 0 20px;
+}
 
 .more-fields label {
     display: flex;

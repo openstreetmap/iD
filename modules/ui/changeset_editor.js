@@ -1,5 +1,4 @@
 import * as d3 from 'd3';
-import _ from 'lodash';
 import { d3combobox } from '../lib/d3.combobox.js';
 import { t } from '../util/locale';
 import { uiField } from './field';
@@ -13,19 +12,26 @@ import {
 export function uiChangesetEditor(context) {
     var dispatch = d3.dispatch('change'),
         fieldsArr,
-        changeset;
+        tags,
+        changesetId;
 
 
     function changesetEditor(selection) {
-        var tags = _.clone(changeset.tags);
+        render(selection);
+    }
+
+
+    function render(selection) {
+        var initial = false;
 
         if (!fieldsArr) {
+            initial = true;
             var presets = context.presets();
 
             fieldsArr = [
-                uiField(context, presets.field('comment'), changeset),
-                uiField(context, presets.field('source'), changeset, { show: false }),
-                uiField(context, presets.field('hashtags'), changeset, { show: false }),
+                uiField(context, presets.field('comment'), null, { show: true, revert: false }),
+                uiField(context, presets.field('source'), null, { show: false, revert: false }),
+                uiField(context, presets.field('hashtags'), null, { show: false, revert: false }),
             ];
 
             fieldsArr.forEach(function(field) {
@@ -50,7 +56,7 @@ export function uiChangesetEditor(context) {
 
         form = form.enter()
             .append('div')
-            .attr('class', 'preset-form inspector-inner fillL3')
+            .attr('class', 'preset-form')
             .merge(form);
 
 
@@ -76,6 +82,12 @@ export function uiChangesetEditor(context) {
                     .call(d.render);
             });
 
+
+        if (initial) {
+            var node = d3.select('#preset-input-comment').node();
+            node && node.focus();
+            node && node.select();
+        }
 
         notShown = notShown.map(function(field) {
             return {
@@ -129,16 +141,25 @@ export function uiChangesetEditor(context) {
                 .on('accept', function (d) {
                     var field = d.field;
                     field.show = true;
-                    changesetEditor(selection);
+                    render(selection);
                     field.focus();
                 })
             );
     }
 
 
-    changesetEditor.changeset = function(_) {
-        if (!arguments.length) return changeset;
-        changeset = _;
+    changesetEditor.tags = function(_) {
+        if (!arguments.length) return tags;
+        tags = _;
+        // Don't reset fieldsArr here.
+        return changesetEditor;
+    };
+
+
+    changesetEditor.changesetID = function(_) {
+        if (!arguments.length) return changesetId;
+        if (changesetId === _) return changesetEditor;
+        changesetId = _;
         fieldsArr = null;
         return changesetEditor;
     };
