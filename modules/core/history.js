@@ -4,7 +4,7 @@ import * as Validations from '../validations/index';
 import { coreDifference } from './difference';
 import { coreGraph } from './graph';
 import { coreTree } from './tree';
-import { osmEntity } from '../osm/entity';
+import { osmEntity, EntityStatics } from '../osm/index';
 import { uiLoading } from '../ui/index';
 import { utilSessionMutex } from '../util/index';
 import { utilRebind } from '../util/rebind';
@@ -388,7 +388,7 @@ export function coreHistory(context) {
 
                 _.forEach(i.graph.entities, function(entity, id) {
                     if (entity) {
-                        var key = osmEntity.key(entity);
+                        var key = EntityStatics.key(entity);
                         allEntities[key] = entity;
                         modified.push(key);
                     } else {
@@ -423,7 +423,7 @@ export function coreHistory(context) {
                 entities: _.values(allEntities),
                 baseEntities: _.values(baseEntities),
                 stack: s,
-                nextIDs: osmEntity.id.next,
+                nextIDs: EntityStatics.id.next,
                 index: index
             });
         },
@@ -433,14 +433,14 @@ export function coreHistory(context) {
             var h = JSON.parse(json),
                 loadComplete = true;
 
-            osmEntity.id.next = h.nextIDs;
+            EntityStatics.id.next = h.nextIDs;
             index = h.index;
 
             if (h.version === 2 || h.version === 3) {
                 var allEntities = {};
 
                 h.entities.forEach(function(entity) {
-                    allEntities[osmEntity.key(entity)] = osmEntity(entity);
+                    allEntities[EntityStatics.key(entity)] = osmEntity(entity);
                 });
 
                 if (h.version === 3) {

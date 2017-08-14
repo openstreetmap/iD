@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { osmPavedTags } from '../osm/tags';
+import { osmPavedTags } from '../osm/index';
 
 
 export function svgTagClasses() {

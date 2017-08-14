@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import { t } from '../util/locale';
 import { modeSelect } from '../modes/index';
-import { osmEntity } from '../osm/index';
+import { EntityStatics } from '../osm/index';
 import { svgIcon } from '../svg/index';
 import { utilDisplayName } from '../util/index';
 
@@ -52,7 +52,7 @@ export function uiSelectionList(context, selectedIDs) {
                 .filter(function(entity) { return entity; });
 
             var items = list.selectAll('.feature-list-item')
-                .data(entities, osmEntity.key);
+                .data(entities, EntityStatics.key);
 
             items.exit()
                 .remove();

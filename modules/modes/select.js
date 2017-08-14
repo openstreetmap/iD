@@ -22,7 +22,7 @@ import {
 
 import {
     osmNode,
-    osmWay
+    isInstanceofWay
 } from '../osm/index';
 
 import { modeBrowse } from './browse';
@@ -239,7 +239,7 @@ export function modeSelect(context, selectedIDs) {
             var target = d3.select(d3.event.target),
                 datum = target.datum();
 
-            if (datum instanceof osmWay && !target.classed('fill')) {
+            if (isInstanceofWay(datum) && !target.classed('fill')) {
                 var choice = geoChooseEdge(context.childNodes(datum), context.mouse(), context.projection),
                     prev = datum.nodes[choice.index - 1],
                     next = datum.nodes[choice.index];

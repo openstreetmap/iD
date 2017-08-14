@@ -11,7 +11,7 @@ import {
 } from '../actions/index';
 
 import { modeSelect } from '../modes/index';
-import { osmEntity, osmRelation } from '../osm/index';
+import { EntityStatics, osmRelation } from '../osm/index';
 import { services } from '../services/index';
 import { svgIcon } from '../svg/index';
 import { uiDisclosure } from './disclosure';
@@ -156,7 +156,7 @@ export function uiRawMembershipEditor(context) {
 
             var items = list.selectAll('li.member-row-normal')
                 .data(memberships, function(d) {
-                    return osmEntity.key(d.relation) + ',' + d.index;
+                    return EntityStatics.key(d.relation) + ',' + d.index;
                 });
 
             items.exit()
