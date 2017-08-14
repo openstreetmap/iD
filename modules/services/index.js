@@ -1,6 +1,6 @@
 import serviceMapillary from './mapillary';
 import serviceNominatim from './nominatim';
-import serviceOsm from './osm';
+import serviceOsm from './osm.js';
 import serviceTaginfo from './taginfo';
 import serviceWikidata from './wikidata';
 import serviceWikipedia from './wikipedia';

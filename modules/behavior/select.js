@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { geoEuclideanDistance } from '../geo';
 import { modeBrowse, modeSelect } from '../modes';
-import { osmEntity } from '../osm';
+import { isInstanceOfEntity } from '../osm/index';
 
 
 export function behaviorSelect(context) {
@@ -109,7 +109,7 @@ export function behaviorSelect(context) {
             datum = datum.parents[0];
         }
 
-        if (!(datum instanceof osmEntity)) {
+        if (!(isInstanceOfEntity(datum))) {
             // clicked nothing..
             if (!isMultiselect && mode.id !== 'browse') {
                 context.enter(modeBrowse(context));

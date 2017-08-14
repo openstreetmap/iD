@@ -1,5 +1,5 @@
 import { t } from '../util/locale';
-import { osmIsSimpleMultipolygonOuterMember } from '../osm';
+import { osmIsSimpleMultipolygonOuterMember } from '../osm/index';
 
 
 export function validationOldMultipolygon() {

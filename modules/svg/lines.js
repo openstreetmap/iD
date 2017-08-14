@@ -7,7 +7,7 @@ import {
     svgTagClasses
 } from './index';
 
-import { osmEntity, osmSimpleMultipolygonOuterMember } from '../osm';
+import { EntityStatics, osmSimpleMultipolygonOuterMember } from '../osm/index';
 import { utilDetect } from '../util/detect';
 
 
@@ -48,13 +48,13 @@ export function svgLines(projection, context) {
             var lines = selection
                 .selectAll('path')
                 .filter(filter)
-                .data(getPathData(isSelected), osmEntity.key);
+                .data(getPathData(isSelected), EntityStatics.key);
 
             lines.exit()
                 .remove();
 
             // Optimization: call simple TagClasses only on enter selection. This
-            // works because osmEntity.key is defined to include the entity v attribute.
+            // works because EntityStatics.key is defined to include the entity v attribute.
             lines.enter()
                 .append('path')
                 .attr('class', function(d) {

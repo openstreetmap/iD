@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import { utilRebind } from '../../util/rebind';
 import { t } from '../../util/locale';
 import { actionReverse } from '../../actions';
-import { osmOneWayTags } from '../../osm';
+import { osmOneWayTags } from '../../osm/index';
 import { svgIcon } from '../../svg';
 
 export { uiFieldCheck as uiFieldDefaultCheck };

@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { t } from '../util/locale';
 import { d3combobox } from '../lib/d3.combobox.js';
-import { osmChangeset } from '../osm';
+import { osmChangeset } from '../osm/index';
 import { modeSelect } from '../modes';
 import { svgIcon } from '../svg';
 import { tooltip } from '../util/tooltip';
