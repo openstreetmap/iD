@@ -440,7 +440,8 @@
         "comment": {
             "key": "comment",
             "type": "textarea",
-            "label": "Changeset Comment"
+            "label": "Changeset Comment",
+            "placeholder": "Brief description of your contributions (required)"
         },
         "communication_multi": {
             "key": "communication:",
@@ -1637,7 +1638,8 @@
             "type": "text",
             "icon": "source",
             "universal": true,
-            "label": "Source"
+            "label": "Source",
+            "placeholder": "survey, local knowledge, aerial imagery"
         },
         "sport_ice": {
             "key": "sport",

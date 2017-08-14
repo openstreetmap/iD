@@ -3,5 +3,6 @@
     "type": "text",
     "icon": "source",
     "universal": true,
-    "label": "Source"
+    "label": "Source",
+    "placeholder": "survey, local knowledge, aerial imagery"
 }

@@ -328,8 +328,6 @@
         },
         "commit": {
             "title": "Upload to OpenStreetMap",
-            "description_placeholder": "Brief description of your contributions (required)",
-            "message_label": "Changeset Comment",
             "upload_explanation": "The changes you upload will be visible on all maps that use OpenStreetMap data.",
             "upload_explanation_with_user": "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
             "request_review": "I would like someone to review my edits.",
@@ -1356,7 +1354,8 @@
                     "label": "Collection Times"
                 },
                 "comment": {
-                    "label": "Changeset Comment"
+                    "label": "Changeset Comment",
+                    "placeholder": "Brief description of your contributions (required)"
                 },
                 "communication_multi": {
                     "label": "Communication Types"
@@ -2101,7 +2100,8 @@
                     "label": "Type"
                 },
                 "source": {
-                    "label": "Source"
+                    "label": "Source",
+                    "placeholder": "survey, local knowledge, aerial imagery"
                 },
                 "sport_ice": {
                     "label": "Sports"

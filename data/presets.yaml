@@ -342,6 +342,8 @@ en:
       comment:
         # comment=*
         label: Changeset Comment
+        # comment field placeholder
+        placeholder: Brief description of your contributions (required)
       communication_multi:
         # 'communication:=*'
         label: Communication Types
@@ -1225,6 +1227,8 @@ en:
       source:
         # source=*
         label: Source
+        # source field placeholder
+        placeholder: 'survey, local knowledge, aerial imagery'
       sport:
         # sport=*
         label: Sports
