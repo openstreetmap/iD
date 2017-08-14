@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import _ from 'lodash';
 import { d3combobox } from '../lib/d3.combobox.js';
 import { t } from '../util/locale';
 import { uiField } from './field';
@@ -83,13 +84,6 @@ export function uiChangesetEditor(context) {
             });
 
 
-        if (initial) {
-            var node = d3.select('#preset-input-comment').node();
-            if (node) {
-                node.focus();
-                node.select();
-            }
-        }
 
         notShown = notShown.map(function(field) {
             return {
@@ -147,6 +141,40 @@ export function uiChangesetEditor(context) {
                     field.focus();
                 })
             );
+
+
+
+        if (initial) {
+            var commentField = d3.select('#preset-input-comment'),
+                commentNode = commentField.node();
+
+            if (commentNode) {
+                commentNode.focus();
+                commentNode.select();
+            }
+
+            var osm = context.connection();
+            if (osm) {
+                osm.userChangesets(function (err, changesets) {
+                    if (err) return;
+
+                    var comments = changesets.map(function(changeset) {
+                        return {
+                            title: changeset.tags.comment,
+                            value: changeset.tags.comment
+                        };
+                    });
+
+                    commentField
+                        .call(d3combobox()
+                            .container(context.container())
+                            .caseSensitive(true)
+                            .data(_.uniqBy(comments, 'title'))
+                        );
+                });
+            }
+        }
+
     }
 
 
