@@ -85,8 +85,10 @@ export function uiChangesetEditor(context) {
 
         if (initial) {
             var node = d3.select('#preset-input-comment').node();
-            node && node.focus();
-            node && node.select();
+            if (node) {
+                node.focus();
+                node.select();
+            }
         }
 
         notShown = notShown.map(function(field) {
