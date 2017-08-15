@@ -2,6 +2,7 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { d3combobox } from '../lib/d3.combobox.js';
 import { t } from '../util/locale';
+import { svgIcon } from '../svg';
 import { uiField } from './field';
 import {
     utilGetSetValue,
@@ -84,7 +85,6 @@ export function uiChangesetEditor(context) {
             });
 
 
-
         notShown = notShown.map(function(field) {
             return {
                 title: field.label(),
@@ -143,7 +143,6 @@ export function uiChangesetEditor(context) {
             );
 
 
-
         if (initial) {
             var commentField = d3.select('#preset-input-comment'),
                 commentNode = commentField.node();
@@ -174,6 +173,45 @@ export function uiChangesetEditor(context) {
                 });
             }
         }
+
+        var matches = tags.comment.match(/google/i);
+        var commentWarning = d3.select('.form-field-comment').selectAll('.comment-warning')
+            .data(matches ? [0] : []);
+
+        commentWarning.exit()
+            .transition()
+            .style('opacity', 0)
+            .remove();
+
+        var commentEnter = commentWarning.enter()
+            .insert('div', '.tag-reference-body')
+            .attr('class', 'field-warning comment-warning')
+            .style('opacity', 0);
+
+        commentEnter
+            .append('a')
+            .attr('target', '_blank')
+            .attr('tabindex', -1)
+            .call(svgIcon('#icon-alert', 'inline'))
+            .attr('href', t('commit.google_warning_link'))
+            .append('span')
+            .text(t('commit.google_warning'));
+
+        commentEnter
+            .transition()
+            .style('opacity', 1);
+
+
+        // var changeSetInfo = fieldSection.append('div')
+        //     .attr('class', 'changeset-info');
+
+        // changeSetInfo.append('a')
+        //     .attr('target', '_blank')
+        //     .attr('tabindex', -1)
+        //     .call(svgIcon('#icon-out-link', 'inline'))
+        //     .attr('href', t('commit.about_changeset_comments_link'))
+        //     .append('span')
+        //     .text(t('commit.about_changeset_comments'));
 
     }
 

@@ -1,7 +1,6 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { t } from '../util/locale';
-// import { d3combobox } from '../lib/d3.combobox.js';
 import { osmChangeset } from '../osm';
 import { modeSelect } from '../modes';
 import { svgIcon } from '../svg';
@@ -13,8 +12,7 @@ import {
     utilDisplayName,
     utilDisplayType,
     utilEntityOrMemberSelector,
-    utilRebind,
-    // utilTriggerEvent
+    utilRebind
 } from '../util';
 
 
@@ -98,65 +96,6 @@ export function uiCommit(context) {
                 .changesetID(changeset.id)
                 .tags(tags)
             );
-
-
-        // // Fields
-        // var fieldSection = body
-        //     .append('div')
-        //     .attr('class', 'modal-section form-field commit-form');
-
-        // fieldSection
-        //     .append('label')
-        //     .attr('class', 'form-label')
-        //     .text(t('commit.message_label'));
-
-        // var commentField = fieldSection
-        //     .append('textarea')
-        //     .attr('class', 'commit-form-comment')
-        //     .attr('placeholder', t('commit.description_placeholder'))
-        //     .attr('maxlength', 255)
-        //     .property('value', comment)
-        //     .on('input.save', changeComment(true))
-        //     .on('change.save', changeComment())
-        //     .on('blur.save', function() {
-        //         context.storage('comment', this.value);
-        //         context.storage('commentDate', Date.now());
-        //     });
-
-
-        // commentField.node().select();
-
-        // osm.userChangesets(function (err, changesets) {
-        //     if (err) return;
-
-        //     var comments = changesets.map(function(changeset) {
-        //         return {
-        //             title: changeset.tags.comment,
-        //             value: changeset.tags.comment
-        //         };
-        //     });
-
-        //     commentField
-        //         .call(d3combobox()
-        //             .container(context.container())
-        //             .caseSensitive(true)
-        //             .data(_.uniqBy(comments, 'title'))
-        //         );
-        // });
-
-        // var commentWarning = fieldSection.append('div')
-        //     .attr('class', 'field-warning comment-warning');
-
-        // var changeSetInfo = fieldSection.append('div')
-        //     .attr('class', 'changeset-info');
-
-        // changeSetInfo.append('a')
-        //     .attr('target', '_blank')
-        //     .attr('tabindex', -1)
-        //     .call(svgIcon('#icon-out-link', 'inline'))
-        //     .attr('href', t('commit.about_changeset_comments_link'))
-        //     .append('span')
-        //     .text(t('commit.about_changeset_comments'));
 
 
         // Warnings
@@ -309,7 +248,7 @@ export function uiCommit(context) {
 
         buttonSection.selectAll('.save-button')
             .attr('disabled', function() {
-                var n = d3.select('.commit-form textarea').node();
+                var n = d3.select('#preset-input-comment').node();
                 return (n && n.value.length) ? null : true;
             })
             .on('click.save', function() {
@@ -392,11 +331,6 @@ export function uiCommit(context) {
             .style('opacity', 1);
 
 
-        // // Call changeComment() off the bat, in case a changeset
-        // // comment is recovered from localStorage
-        // utilTriggerEvent(commentField, 'input');
-
-
         function mouseover(d) {
             if (d.entity) {
                 context.surface().selectAll(
@@ -431,58 +365,6 @@ export function uiCommit(context) {
         }
 
 
-        // function checkComment(comment) {
-        //     // Save button disabled if there is no comment..
-        //     d3.selectAll('.save-section .save-button')
-        //         .attr('disabled', (comment.length ? null : true));
-
-        //     // // Warn if comment mentions Google..
-        //     // var googleWarning = commentWarning
-        //     //    .html('')
-        //     //    .selectAll('a')
-        //     //    .data(comment.match(/google/i) ? [true] : []);
-
-        //     // googleWarning.exit()
-        //     //     .remove();
-
-        //     // googleWarning.enter()
-        //     //    .append('a')
-        //     //    .attr('target', '_blank')
-        //     //    .attr('tabindex', -1)
-        //     //    .call(svgIcon('#icon-alert', 'inline'))
-        //     //    .attr('href', t('commit.google_warning_link'))
-        //     //    .append('span')
-        //     //    .text(t('commit.google_warning'));
-        // }
-
-
-        // function changeComment(onInput) {
-        //     return function() {
-                // var comment = commentField.property('value').trim();
-                // if (!onInput) {
-                //     commentField.property('value', comment);
-                // }
-
-                // checkComment(comment);
-
-                // var changeset = updateChangeset({ comment: comment }, onInput);
-                // var expanded = !tagSection.selectAll('a.hide-toggle.expanded').empty();
-
-                // changesetSection
-                //     .call(changesetEditor
-                //         .changeset(changeset)
-                //     );
-
-                // tagSection
-                //     .call(rawTagEditor
-                //         .expanded(expanded)
-                //         .readOnlyTags(readOnlyTags)
-                //         .tags(_.clone(changeset.tags))
-                //     );
-        //     };
-        // }
-
-
         function toggleRequestReview() {
             var rr = requestReviewField.property('checked');
             updateChangeset({ review_requested: (rr ? 'yes' : undefined) });
@@ -499,48 +381,19 @@ export function uiCommit(context) {
 
     }
 
+
     function changeTags(changed, onInput) {
-        // if (changed.hasOwnProperty('comment')) {
-        //     if (changed.comment === undefined) {
-        //         changed.comment = '';
-        //     }
-        //     changed.comment = changed.comment.trim();
-        //     commentField
-        //         .property('value', changed.comment);
-        // }
         if (changed.hasOwnProperty('comment')) {
             if (changed.comment === undefined) {
                 changed.comment = '';
             }
-            // if (!onInput) {
-            //     changed.comment = changed.comment.trim();
-            // }
-            // commentField
-            //     .property('value', changed.comment);
-
         }
 
-        // if (changed.hasOwnProperty('review_requested')) {
-            // if (changed.review_requested === undefined) {
-                // requestReviewField
-                //     .property('checked', false);
-            // } else {
-                // changed.review_requested = changed.review_requested.trim();
-                // requestReviewField
-                //     .property('checked', isReviewRequested(changed));
-            // }
-        // }
-
         updateChangeset(changed, onInput);
-
-        // if (changed.hasOwnProperty('comment')) {
-        //     checkComment(changed.comment);
-        // }
 
         if (_selection) {
             _selection.call(commit);
         }
-        // utilTriggerEvent(commentField, 'input');
     }
 
 
