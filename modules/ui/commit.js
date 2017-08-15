@@ -387,6 +387,10 @@ export function uiCommit(context) {
             if (changed.comment === undefined) {
                 changed.comment = '';
             }
+            if (!onInput) {
+                context.storage('comment', changed.comment);
+                context.storage('commentDate', Date.now());
+            }
         }
 
         updateChangeset(changed, onInput);
