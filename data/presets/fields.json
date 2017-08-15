@@ -1635,11 +1635,17 @@
         },
         "source": {
             "key": "source",
-            "type": "text",
+            "type": "semiCombo",
             "icon": "source",
             "universal": true,
-            "label": "Source",
-            "placeholder": "survey, local knowledge, aerial imagery"
+            "label": "Sources",
+            "options": [
+                "survey",
+                "local knowledge",
+                "gps",
+                "aerial imagery",
+                "streetlevel imagery"
+            ]
         },
         "sport_ice": {
             "key": "sport",

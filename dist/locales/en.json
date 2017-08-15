@@ -2100,8 +2100,7 @@
                     "label": "Type"
                 },
                 "source": {
-                    "label": "Source",
-                    "placeholder": "survey, local knowledge, aerial imagery"
+                    "label": "Sources"
                 },
                 "sport_ice": {
                     "label": "Sports"

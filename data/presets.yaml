@@ -1226,9 +1226,7 @@ en:
         label: People Served
       source:
         # source=*
-        label: Source
-        # source field placeholder
-        placeholder: 'survey, local knowledge, aerial imagery'
+        label: Sources
       sport:
         # sport=*
         label: Sports
