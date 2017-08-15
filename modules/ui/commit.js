@@ -2,18 +2,12 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { t } from '../util/locale';
 import { osmChangeset } from '../osm';
-import { modeSelect } from '../modes';
-import { svgIcon } from '../svg';
-import { tooltip } from '../util/tooltip';
 import { uiChangesetEditor } from './changeset_editor';
+import { uiCommitChanges } from './commit_changes';
+import { uiCommitWarnings } from './commit_warnings';
 import { uiRawTagEditor } from './raw_tag_editor';
 import { utilDetect } from '../util/detect';
-import {
-    utilDisplayName,
-    utilDisplayType,
-    utilEntityOrMemberSelector,
-    utilRebind
-} from '../util';
+import { utilRebind } from '../util';
 
 
 var changeset;
@@ -28,6 +22,8 @@ export function uiCommit(context) {
         .on('change', changeTags);
     var rawTagEditor = uiRawTagEditor(context)
         .on('change', changeTags);
+    var commitChanges = uiCommitChanges(context);
+    var commitWarnings = uiCommitWarnings(context);
 
 
     function commit(selection) {
@@ -36,9 +32,7 @@ export function uiCommit(context) {
         var osm = context.connection();
         if (!osm) return;
 
-        var changes = context.history().changes(),
-            summary = context.history().difference().summary(),
-            comment = context.storage('comment') || '',
+        var comment = context.storage('comment') || '',
             commentDate = +context.storage('commentDate') || 0,
             currDate = Date.now(),
             cutoff = 2 * 86400 * 1000;   // 2 days
@@ -99,54 +93,7 @@ export function uiCommit(context) {
 
 
         // Warnings
-        var warnings = context.history().validate(changes);
-        var warningSection = body.selectAll('div.warning-section')
-            .data(warnings.length ? [0] : []);
-
-        warningSection.exit()
-            .remove();
-
-        var warningEnter = warningSection.enter()
-            .append('div')
-            .attr('class', 'modal-section warning-section fillL2');
-
-        warningEnter
-            .append('h3')
-            .text(t('commit.warnings'));
-
-        warningEnter
-            .append('ul')
-            .attr('class', 'changeset-list');
-
-        warningSection = warningEnter
-            .merge(warningSection);
-
-
-        var warningItems = warningSection.select('ul').selectAll('li')
-            .data(warnings);
-
-        warningItems.exit()
-            .remove();
-
-        warningItems = warningItems.enter()
-            .append('li')
-            .on('mouseover', mouseover)
-            .on('mouseout', mouseout)
-            .on('click', warningClick)
-            .merge(warningItems);
-
-        warningItems
-            .call(svgIcon('#icon-alert', 'pre-text'));
-
-        warningItems
-            .append('strong')
-            .text(function(d) { return d.message; });
-
-        warningItems.filter(function(d) { return d.tooltip; })
-            .call(tooltip()
-                .title(function(d) { return d.tooltip; })
-                .placement('top')
-            );
+        body.call(commitWarnings);
 
 
         // Upload Explanation
@@ -274,95 +221,8 @@ export function uiCommit(context) {
             );
 
 
-// TODO check this below (maybe refactor to own module)...
-
-        // Changes
-        var changeSection = body.selectAll('.modal-section.commit-section')
-            .data([0]);
-
-        var changeEnter = changeSection.enter()
-            .append('div')
-            .attr('class', 'commit-section modal-section fillL2');
-
-        changeEnter
-            .append('h3')
-            .text(t('commit.changes', { count: summary.length }));
-
-        var li = changeEnter
-            .append('ul')
-            .attr('class', 'changeset-list')
-            .selectAll('li')
-            .data(summary);
-
-        li = li.enter()
-            .append('li')
-            .on('mouseover', mouseover)
-            .on('mouseout', mouseout)
-            .on('click', zoomToEntity)
-            .merge(li);
-
-        li.each(function(d) {
-            d3.select(this)
-                .call(svgIcon('#icon-' + d.entity.geometry(d.graph), 'pre-text ' + d.changeType));
-        });
-
-        li.append('span')
-            .attr('class', 'change-type')
-            .text(function(d) { return t('commit.' + d.changeType) + ' '; });
-
-        li.append('strong')
-            .attr('class', 'entity-type')
-            .text(function(d) {
-                var matched = context.presets().match(d.entity, d.graph);
-                return (matched && matched.name()) || utilDisplayType(d.entity.id);
-            });
-
-        li.append('span')
-            .attr('class', 'entity-name')
-            .text(function(d) {
-                var name = utilDisplayName(d.entity) || '',
-                    string = '';
-                if (name !== '') string += ':';
-                return string += ' ' + name;
-            });
-
-        li.style('opacity', 0)
-            .transition()
-            .style('opacity', 1);
-
-
-        function mouseover(d) {
-            if (d.entity) {
-                context.surface().selectAll(
-                    utilEntityOrMemberSelector([d.entity.id], context.graph())
-                ).classed('hover', true);
-            }
-        }
-
-
-        function mouseout() {
-            context.surface().selectAll('.hover')
-                .classed('hover', false);
-        }
-
-
-        function warningClick(d) {
-            if (d.entity) {
-                context.map().zoomTo(d.entity);
-                context.enter(modeSelect(context, [d.entity.id]));
-            }
-        }
-
-
-        function zoomToEntity(change) {
-            var entity = change.entity;
-            if (change.changeType !== 'deleted' &&
-                context.graph().entity(entity.id).geometry(context.graph()) !== 'vertex') {
-                context.map().zoomTo(entity);
-                context.surface().selectAll(utilEntityOrMemberSelector([entity.id], context.graph()))
-                    .classed('hover', true);
-            }
-        }
+        // Change summary
+        body.call(commitChanges);
 
 
         function toggleRequestReview() {
@@ -378,7 +238,6 @@ export function uiCommit(context) {
                     .tags(_.clone(changeset.tags))
                 );
         }
-
     }
 
 
@@ -431,7 +290,6 @@ export function uiCommit(context) {
             changeset = changeset.update({ tags: tags });
         }
     }
-
 
 
     commit.reset = function() {

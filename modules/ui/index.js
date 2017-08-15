@@ -5,6 +5,8 @@ export { uiBackground } from './background';
 export { uiChangesetEditor } from './changeset_editor';
 export { uiCmd } from './cmd';
 export { uiCommit } from './commit';
+export { uiCommitChanges } from './commit_changes';
+export { uiCommitWarnings } from './commit_warnings';
 export { uiConfirm } from './confirm';
 export { uiConflicts } from './conflicts';
 export { uiContributors } from './contributors';
