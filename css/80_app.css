@@ -1131,13 +1131,13 @@ button.save.has-count .count::before {
     margin: 0 20px 10px 20px;
 }
 
-.preset-editor .preset-form {
+.preset-editor .form-fields-container {
     padding: 10px;
     margin: 0 10px 10px 10px;
     border-radius: 8px;
 }
 
-.preset-editor .preset-form:empty {
+.preset-editor .form-fields-container:empty {
     display: none;
 }
 

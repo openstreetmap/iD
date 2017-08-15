@@ -18,6 +18,7 @@ export { uiFeatureInfo } from './feature_info';
 export { uiFeatureList } from './feature_list';
 export { uiField } from './field';
 export { uiFlash } from './flash';
+export { uiFormFields } from './form_fields';
 export { uiFullScreen } from './full_screen';
 export { uiGeolocate } from './geolocate';
 export { uiHelp } from './help';
