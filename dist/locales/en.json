@@ -1570,7 +1570,8 @@
                     "label": "Handrail"
                 },
                 "hashtags": {
-                    "label": "Hashtags"
+                    "label": "Hashtags",
+                    "placeholder": "#example"
                 },
                 "height": {
                     "label": "Height (Meters)"

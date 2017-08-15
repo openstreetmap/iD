@@ -796,8 +796,9 @@
         },
         "hashtags": {
             "key": "hashtags",
-            "type": "text",
-            "label": "Hashtags"
+            "type": "semiCombo",
+            "label": "Hashtags",
+            "placeholder": "#example"
         },
         "height": {
             "key": "height",
