@@ -84,12 +84,14 @@ export function uiChangesetEditor(context) {
             }
         }
 
+        // Add comment warning
         var matches = tags.comment.match(/google/i);
         var commentWarning = selection.select('.form-field-comment').selectAll('.comment-warning')
             .data(matches ? [0] : []);
 
         commentWarning.exit()
             .transition()
+            .duration(200)
             .style('opacity', 0)
             .remove();
 
@@ -109,20 +111,8 @@ export function uiChangesetEditor(context) {
 
         commentEnter
             .transition()
+            .duration(200)
             .style('opacity', 1);
-
-
-        // var changeSetInfo = fieldSection.append('div')
-        //     .attr('class', 'changeset-info');
-
-        // changeSetInfo.append('a')
-        //     .attr('target', '_blank')
-        //     .attr('tabindex', -1)
-        //     .call(svgIcon('#icon-out-link', 'inline'))
-        //     .attr('href', t('commit.about_changeset_comments_link'))
-        //     .append('span')
-        //     .text(t('commit.about_changeset_comments'));
-
     }
 
 
