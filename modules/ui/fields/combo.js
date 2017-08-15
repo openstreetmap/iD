@@ -161,12 +161,17 @@ export function uiFieldCombo(field, context) {
             query = country + ':';
         }
 
-        taginfo[fn]({
+        var params = {
             debounce: (q !== ''),
             key: field.key,
-            geometry: context.geometry(entity.id),
             query: query
-        }, function(err, data) {
+        };
+
+        if (entity) {
+            params.geometry = context.geometry(entity.id);
+        }
+
+        taginfo[fn](params, function(err, data) {
             if (err) return;
             if (hasCountryPrefix) {
                 data = _.filter(data, function(d) {
