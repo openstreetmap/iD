@@ -1,60 +1,37 @@
 import _ from 'lodash';
-import { debug } from '../index';
+
 import { osmIsInterestingTag } from './tags';
 import { dataDeprecated } from '../../data/index';
+import { osmUtil } from './util';
 
-
-export function osmEntity(attrs) {
-    // For prototypal inheritance.
-    if (this instanceof osmEntity) return;
-
-    // Create the appropriate subtype.
-    if (attrs && attrs.type) {
-        return osmEntity[attrs.type].apply(this, arguments);
-    } else if (attrs && attrs.id) {
-        return osmEntity[osmEntity.id.type(attrs.id)].apply(this, arguments);
+// @DEPRECATION: directly creating osmEntity would be deprecated
+export function osmEntity() {
+    if (!(this instanceof osmEntity)) {
+        return (new osmEntity()).initialize(arguments);
+    } else if (arguments.length) {
+        this.initialize(arguments);
     }
-
-    // Initialize a generic Entity (used only in tests).
-    return (new osmEntity()).initialize(arguments);
 }
-
-
-osmEntity.id = function(type) {
-    return osmEntity.id.fromOSM(type, osmEntity.id.next[type]--);
-};
-
-
-osmEntity.id.next = {
-    changeset: -1, node: -1, way: -1, relation: -1
-};
-
-
-osmEntity.id.fromOSM = function(type, id) {
-    return type[0] + id;
-};
-
-
-osmEntity.id.toOSM = function(id) {
-    return id.slice(1);
-};
-
-
-osmEntity.id.type = function(id) {
-    return { 'c': 'changeset', 'n': 'node', 'w': 'way', 'r': 'relation' }[id[0]];
-};
-
-
-// A function suitable for use as the second argument to d3.selection#data().
-osmEntity.key = function(entity) {
-    return entity.id + 'v' + (entity.v || 0);
-};
-
 
 osmEntity.prototype = {
 
     tags: {},
 
+    copy: function(resolver, copies) {
+        if (copies[this.id]) return copies[this.id];
+        var copy = new osmEntity(this, {
+            id: undefined,
+            user: undefined,
+            version: undefined
+        });
+        copies[this.id] = copy;
+
+        return copy;
+    },
+
+    update: function(attrs) {
+        return new osmEntity(this, attrs, { v: 1 + (this.v || 0) });
+    },
 
     initialize: function(sources) {
         for (var i = 0; i < sources.length; ++i) {
@@ -71,48 +48,22 @@ osmEntity.prototype = {
         }
 
         if (!this.id && this.type) {
-            this.id = osmEntity.id(this.type);
+            this.id = osmUtil.id(this.type);
         }
         if (!this.hasOwnProperty('visible')) {
             this.visible = true;
         }
 
-        if (debug) {
-            Object.freeze(this);
-            Object.freeze(this.tags);
-
-            if (this.loc) Object.freeze(this.loc);
-            if (this.nodes) Object.freeze(this.nodes);
-            if (this.members) Object.freeze(this.members);
-        }
-
         return this;
     },
 
-
-    copy: function(resolver, copies) {
-        if (copies[this.id])
-            return copies[this.id];
-
-        var copy = osmEntity(this, {id: undefined, user: undefined, version: undefined});
-        copies[this.id] = copy;
-
-        return copy;
-    },
-
-
     osmId: function() {
-        return osmEntity.id.toOSM(this.id);
+        return osmUtil.id.toOSM(this.id);
     },
 
 
     isNew: function() {
         return this.osmId() < 0;
-    },
-
-
-    update: function(attrs) {
-        return osmEntity(this, attrs, {v: 1 + (this.v || 0)});
     },
 
 

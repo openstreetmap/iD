@@ -3,7 +3,7 @@ import { d3combobox } from '../lib/d3.combobox.js';
 import { t } from '../util/locale';
 import { actionChangeMember, actionDeleteMember } from '../actions';
 import { modeBrowse, modeSelect } from '../modes';
-import { osmEntity } from '../osm';
+import { osmUtil } from '../osm/index';
 import { svgIcon } from '../svg';
 import { services } from '../services';
 import { uiDisclosure } from './disclosure';
@@ -90,8 +90,8 @@ export function uiRawMemberEditor(context) {
 
             var items = list.selectAll('li')
                 .data(memberships, function(d) {
-                    return osmEntity.key(d.relation) + ',' + d.index + ',' +
-                        (d.member ? osmEntity.key(d.member) : 'incomplete');
+                    return osmUtil.key(d.relation) + ',' + d.index + ',' +
+                        (d.member ? osmUtil.key(d.member) : 'incomplete');
                 });
 
             items.exit()

@@ -1,11 +1,14 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
+
 import { geoExtent, geoCross } from '../geo/index';
 import { osmEntity } from './entity';
 import { osmLanes } from './lanes';
 import { osmOneWayTags } from './tags';
-import { areaKeys } from '../core/context';
+import {osmUtil} from './util';
 
+// Need to deprecate this.
+import { areaKeys as globalAreaKeys } from '../core/context';
 
 export function osmWay() {
     if (!(this instanceof osmWay)) {
@@ -16,8 +19,6 @@ export function osmWay() {
 }
 
 
-osmEntity.way = osmWay;
-
 osmWay.prototype = Object.create(osmEntity.prototype);
 
 
@@ -26,11 +27,27 @@ _.extend(osmWay.prototype, {
     nodes: [],
 
 
+    baseCopy: function(resolver, copies) {
+        if (copies[this.id]) return copies[this.id];
+
+        var copy = osmWay(
+            this,
+            {
+                id: undefined,
+                user: undefined,
+                version: undefined
+            }
+        );
+        copies[this.id] = copy;
+        return copy;
+    },
+
+
     copy: function(resolver, copies) {
         if (copies[this.id])
             return copies[this.id];
 
-        var copy = osmEntity.prototype.copy.call(this, resolver, copies);
+        var copy = this.baseCopy(resolver, copies);
 
         var nodes = this.nodes.map(function(id) {
             return resolver.entity(id).copy(resolver, copies).id;
@@ -40,6 +57,11 @@ _.extend(osmWay.prototype, {
         copies[this.id] = copy;
 
         return copy;
+    },
+
+
+    update: function(attrs) {
+        return osmWay(this, attrs, { v: 1 + (this.v || 0) });
     },
 
 
@@ -151,7 +173,8 @@ _.extend(osmWay.prototype, {
     },
 
 
-    isArea: function() {
+    isArea: function(areaKeys) {
+        if (!areaKeys) areaKeys = globalAreaKeys;
         // `highway` and `railway` are typically linear features, but there
         // are a few exceptions that should be treated as areas, even in the
         // absence of a proper `area=yes` or `areaKeys` tag.. see #4194
@@ -384,7 +407,7 @@ _.extend(osmWay.prototype, {
                 '@id': this.osmId(),
                 '@version': this.version || 0,
                 nd: _.map(this.nodes, function(id) {
-                    return { keyAttributes: { ref: osmEntity.id.toOSM(id) } };
+                    return { keyAttributes: { ref: osmUtil.id.toOSM(id) } };
                 }),
                 tag: _.map(this.tags, function(v, k) {
                     return { keyAttributes: { k: k, v: v } };

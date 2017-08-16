@@ -1,13 +1,15 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { osmEntity } from './entity';
-import { osmJoinWays } from './multipolygon';
+
 import {
     geoExtent,
     geoPolygonContainsPolygon,
     geoPolygonIntersectsPolygon
 } from '../geo/index';
 
+import { osmEntity } from './entity';
+import { osmJoinWays } from './multipolygon';
+import { osmUtil} from './util';
 
 export function osmRelation() {
     if (!(this instanceof osmRelation)) {
@@ -18,14 +20,12 @@ export function osmRelation() {
 }
 
 
-osmEntity.relation = osmRelation;
-
 osmRelation.prototype = Object.create(osmEntity.prototype);
 
 
 osmRelation.creationOrder = function(a, b) {
-    var aId = parseInt(osmEntity.id.toOSM(a.id), 10);
-    var bId = parseInt(osmEntity.id.toOSM(b.id), 10);
+    var aId = parseInt(osmUtil.id.toOSM(a.id), 10);
+    var bId = parseInt(osmUtil.id.toOSM(b.id), 10);
 
     if (aId < 0 || bId < 0) return aId - bId;
     return bId - aId;
@@ -37,11 +37,27 @@ _.extend(osmRelation.prototype, {
     members: [],
 
 
+    baseCopy: function(resolver, copies) {
+        if (copies[this.id]) return copies[this.id];
+
+        var copy = osmRelation(
+            this,
+            {
+                id: undefined,
+                user: undefined,
+                version: undefined
+            }
+        );
+        copies[this.id] = copy;
+        return copy;
+    },
+
+
     copy: function(resolver, copies) {
         if (copies[this.id])
             return copies[this.id];
 
-        var copy = osmEntity.prototype.copy.call(this, resolver, copies);
+        var copy = this.baseCopy(resolver, copies);
 
         var members = this.members.map(function(member) {
             return _.extend({}, member, { id: resolver.entity(member.id).copy(resolver, copies).id });
@@ -51,6 +67,15 @@ _.extend(osmRelation.prototype, {
         copies[this.id] = copy;
 
         return copy;
+    },
+
+
+    update: function(attrs) {
+        return osmRelation(
+            this,
+            attrs,
+            { v: 1 + (this.v || 0) }
+        );
     },
 
 
@@ -188,7 +213,7 @@ _.extend(osmRelation.prototype, {
                         keyAttributes: {
                             type: member.type,
                             role: member.role,
-                            ref: osmEntity.id.toOSM(member.id)
+                            ref: osmUtil.id.toOSM(member.id)
                         }
                     };
                 }),

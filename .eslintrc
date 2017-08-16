@@ -2,10 +2,17 @@
     "env": {
         "browser": true,
         "node": true,
-        "es6": true
+        "es6": true,
+        "jest/globals": true
+        
     },
     "extends": [
-        "eslint:recommended"
+        "eslint:recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings"
+    ],
+    "plugins": [
+        "jest"
     ],
     "globals": {
         "d3": false

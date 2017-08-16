@@ -6,7 +6,7 @@ import { svgDebug } from './debug';
 import { svgGpx } from './gpx';
 import { svgMapillaryImages } from './mapillary_images';
 import { svgMapillarySigns } from './mapillary_signs';
-import { svgOsm } from './osm';
+import { svgOsm } from './osm.js';
 
 
 export function svgLayers(projection, context) {

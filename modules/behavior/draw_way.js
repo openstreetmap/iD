@@ -11,7 +11,7 @@ import {
 import { behaviorDraw } from './draw';
 import { geoChooseEdge, geoEdgeEqual } from '../geo';
 import { modeBrowse, modeSelect } from '../modes';
-import { osmNode, osmWay } from '../osm';
+import { osmNode, osmWay } from '../osm/index';
 import { utilEntitySelector } from '../util';
 
 

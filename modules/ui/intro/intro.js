@@ -5,7 +5,7 @@ import { localize } from './helper';
 import { coreGraph } from '../../core/graph';
 import { dataIntroGraph } from '../../../data/intro_graph.json';
 import { modeBrowse } from '../../modes/browse';
-import { osmEntity } from '../../osm/entity';
+import { osmEntity } from '../../osm/index';
 import { services } from '../../services';
 import { svgIcon } from '../../svg/icon';
 import { uiCurtain } from '../curtain';

@@ -10,9 +10,9 @@ export function osmNode() {
     }
 }
 
-osmEntity.node = osmNode;
 
 osmNode.prototype = Object.create(osmEntity.prototype);
+
 
 _.extend(osmNode.prototype, {
 
@@ -21,6 +21,24 @@ _.extend(osmNode.prototype, {
 
     extent: function() {
         return new geoExtent(this.loc);
+    },
+
+
+    copy: function(resolver, copies) {
+        if (copies[this.id]) return copies[this.id];
+        var copy = osmNode(this, {
+            id: undefined,
+            user: undefined,
+            version: undefined
+        });
+        copies[this.id] = copy;
+
+        return copy;
+    },
+
+
+    update: function(attrs) {
+        return osmNode(this, attrs, { v: 1 + (this.v || 0) });
     },
 
 

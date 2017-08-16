@@ -3,7 +3,7 @@ import * as sexagesimal from '@mapbox/sexagesimal';
 import { t } from '../util/locale';
 import { geoExtent, geoChooseEdge } from '../geo/index';
 import { modeSelect } from '../modes/index';
-import { osmEntity } from '../osm/index';
+import { osmUtil } from '../osm/index';
 import { svgIcon } from '../svg/index';
 import { services } from '../services/index';
 
@@ -149,7 +149,7 @@ export function uiFeatureList(context) {
                 // https://github.com/openstreetmap/iD/issues/1890
                 if (d.osm_type && d.osm_id) {
                     result.push({
-                        id: osmEntity.id.fromOSM(d.osm_type, d.osm_id),
+                        id: osmUtil.id.fromOSM(d.osm_type, d.osm_id),
                         geometry: d.osm_type === 'relation' ? 'relation' : d.osm_type === 'way' ? 'line' : 'point',
                         type: d.type !== 'yes' ? (d.type.charAt(0).toUpperCase() + d.type.slice(1)).replace('_', ' ')
                                                : (d.class.charAt(0).toUpperCase() + d.class.slice(1)).replace('_', ' '),

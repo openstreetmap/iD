@@ -22,7 +22,7 @@ import {
 
 import {
     osmNode,
-    osmWay
+    osmWay,
 } from '../osm/index';
 
 import { modeBrowse } from './browse';

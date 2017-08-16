@@ -1,4 +1,4 @@
-import { osmNode } from '../osm/node';
+import { osmNode } from '../osm/index';
 
 
 // Disconect the ways at the given node.
