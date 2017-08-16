@@ -5,16 +5,16 @@ import { osmNode } from '../node';
 import { osmWay } from '../way';
 import { osmRelation } from '../relation';
 import { osmUtil } from '../util';
-import { entityFactory } from '../entityFactory';
+import { osmEntityFactory } from '../entityFactory';
 
 describe('iD.osmEntity', function() {
     it('returns a subclass of the appropriate type', function() {
-        expect(entityFactory({ type: 'node' })).toBeInstanceOf(osmNode);
-        expect(entityFactory({ type: 'way' })).toBeInstanceOf(osmWay);
-        expect(entityFactory({ type: 'relation' })).toBeInstanceOf(osmRelation);
-        expect(entityFactory({ id: 'n1' })).toBeInstanceOf(osmNode);
-        expect(entityFactory({ id: 'w1' })).toBeInstanceOf(osmWay);
-        expect(entityFactory({ id: 'r1' })).toBeInstanceOf(osmRelation);
+        expect(osmEntityFactory({ type: 'node' })).toBeInstanceOf(osmNode);
+        expect(osmEntityFactory({ type: 'way' })).toBeInstanceOf(osmWay);
+        expect(osmEntityFactory({ type: 'relation' })).toBeInstanceOf(osmRelation);
+        expect(osmEntityFactory({ id: 'n1' })).toBeInstanceOf(osmNode);
+        expect(osmEntityFactory({ id: 'w1' })).toBeInstanceOf(osmWay);
+        expect(osmEntityFactory({ id: 'r1' })).toBeInstanceOf(osmRelation);
     });
 
     // if (debug) {
@@ -49,14 +49,14 @@ describe('iD.osmEntity', function() {
 
     describe('#copy', function() {
         it('returns a new Entity', function() {
-            var n = entityFactory({ id: 'n' }),
+            var n = osmEntityFactory({ id: 'n' }),
                 result = n.copy(null, {});
             expect(result).toBeInstanceOf(osmEntity);
             expect(result).not.toBe(n);
         });
 
         it('adds the new Entity to input object', function() {
-            var n = entityFactory({ id: 'n' }),
+            var n = osmEntityFactory({ id: 'n' }),
                 copies = {},
                 result = n.copy(null, copies);
             expect(Object.keys(copies)).toHaveLength(1);
@@ -64,7 +64,7 @@ describe('iD.osmEntity', function() {
         });
 
         it('returns an existing copy in input object', function() {
-            var n = entityFactory({ id: 'n' }),
+            var n = osmEntityFactory({ id: 'n' }),
                 copies = {},
                 result1 = n.copy(null, copies),
                 result2 = n.copy(null, copies);
@@ -73,7 +73,7 @@ describe('iD.osmEntity', function() {
         });
 
         it('resets \'id\', \'user\', and \'version\' properties', function() {
-            var n = entityFactory({ id: 'n', version: 10, user: 'user' }),
+            var n = osmEntityFactory({ id: 'n', version: 10, user: 'user' }),
                 copies = {};
             n.copy(null, copies);
             expect(copies.n.isNew()).toBeTruthy();
@@ -82,7 +82,7 @@ describe('iD.osmEntity', function() {
         });
 
         it('copies tags', function() {
-            var n = entityFactory({ id: 'n', tags: { foo: 'foo' } }),
+            var n = osmEntityFactory({ id: 'n', tags: { foo: 'foo' } }),
                 copies = {};
             n.copy(null, copies);
             expect(copies.n.tags).toBe(n.tags);
@@ -91,7 +91,7 @@ describe('iD.osmEntity', function() {
 
     describe('#update', function() {
         it('returns a new Entity', function() {
-            var a = entityFactory({ id: 'r1' }),
+            var a = osmEntityFactory({ id: 'r1' }),
                 b = a.update({});
             expect(b instanceof osmRelation).toBe(true);
             expect(a).not.toBe(b);
@@ -99,79 +99,79 @@ describe('iD.osmEntity', function() {
 
         it('updates the specified attributes', function() {
             var tags = { foo: 'bar' },
-                e = entityFactory({ id: 'w1' }).update({ tags: tags });
+                e = osmEntityFactory({ id: 'w1' }).update({ tags: tags });
             expect(e.tags).toBe(tags);
         });
 
         it('preserves existing attributes', function() {
-            var e = entityFactory({ id: 'w1' });
+            var e = osmEntityFactory({ id: 'w1' });
             expect(e.id).toBe('w1');
         });
 
         it('doesn\'t modify the input', function() {
             var attrs = { tags: { foo: 'bar' } };
-            entityFactory({ id: 'w1' }).update(attrs);
+            osmEntityFactory({ id: 'w1' }).update(attrs);
             expect(attrs).toEqual({ tags: { foo: 'bar' } });
         });
 
         it('doesn\'t copy prototype properties', function() {
             expect(
-                entityFactory({ id: 'w1' }).update({}).hasOwnProperty('update')
+                osmEntityFactory({ id: 'w1' }).update({}).hasOwnProperty('update')
             ).toBe(false);
         });
 
         it('sets v to 1 if previously undefined', function() {
-            expect(entityFactory({ id: 'w1' }).update({}).v).toBe(1);
+            expect(osmEntityFactory({ id: 'w1' }).update({}).v).toBe(1);
         });
 
         it('increments v', function() {
-            expect(entityFactory({ id: 'w1', v: 1 }).update({}).v).toBe(2);
+            expect(osmEntityFactory({ id: 'w1', v: 1 }).update({}).v).toBe(2);
         });
     });
 
     describe('#mergeTags', function() {
         it('returns self if unchanged', function() {
-            var a = entityFactory({ id: 'w1', tags: { a: 'a' } }),
+            var a = osmEntityFactory({ id: 'w1', tags: { a: 'a' } }),
                 b = a.mergeTags({ a: 'a' });
             expect(a).toBe(b);
         });
 
         it('returns a new Entity if changed', function() {
-            var a = entityFactory({ id: 'n1', tags: { a: 'a' } }),
+            var a = osmEntityFactory({ id: 'n1', tags: { a: 'a' } }),
                 b = a.mergeTags({ a: 'b' });
             expect(b instanceof osmNode).toBe(true);
             expect(a).not.toBe(b);
         });
 
         it('merges tags', function() {
-            var a = entityFactory({ id: 'r1', tags: { a: 'a' } }),
+            var a = osmEntityFactory({ id: 'r1', tags: { a: 'a' } }),
                 b = a.mergeTags({ b: 'b' });
             expect(b.tags).toEqual({ a: 'a', b: 'b' });
         });
 
         it('combines non-conflicting tags', function() {
-            var a = entityFactory({ id: 'n1', tags: { a: 'a' } }),
+            var a = osmEntityFactory({ id: 'n1', tags: { a: 'a' } }),
                 b = a.mergeTags({ a: 'a' });
             expect(b.tags).toEqual({ a: 'a' });
         });
 
         it('combines conflicting tags with semicolons', function() {
-            var a = entityFactory({ id: 'w1', tags: { a: 'a' } }),
+            var a = osmEntityFactory({ id: 'w1', tags: { a: 'a' } }),
                 b = a.mergeTags({ a: 'b' });
             expect(b.tags).toEqual({ a: 'a;b' });
         });
 
         it('combines combined tags', function() {
-            var a = entityFactory({ id: 'w1', tags: { a: 'a;b' } }),
-                b = entityFactory({ id: 'w1', tags: { a: 'b' } });
+            var a = osmEntityFactory({ id: 'w1', tags: { a: 'a;b' } }),
+                b = osmEntityFactory({ id: 'w1', tags: { a: 'b' } });
 
             expect(a.mergeTags(b.tags).tags).toEqual({ a: 'a;b' });
             expect(b.mergeTags(a.tags).tags).toEqual({ a: 'b;a' });
         });
 
         it('combines combined tags with whitespace', function() {
-            var a = entityFactory({ id: 'w1', tags: { a: 'a; b' } }),
-                b = entityFactory({ id: 'n1', tags: { a: 'b' } });
+            var a = osmEntityFactory({ id: 'w1', tags: { a: 'a; b' } }),
+                b = osmEntityFactory({ id: 'n1', tags: { a: 'b' } });
 
             expect(a.mergeTags(b.tags).tags).toEqual({ a: 'a;b' });
             expect(b.mergeTags(a.tags).tags).toEqual({ a: 'b;a' });
@@ -180,9 +180,9 @@ describe('iD.osmEntity', function() {
 
     describe('#osmId', function() {
         it('returns an OSM ID as a string', function() {
-            expect(entityFactory({ id: 'w1234' }).osmId()).toEqual('1234');
-            expect(entityFactory({ id: 'n1234' }).osmId()).toEqual('1234');
-            expect(entityFactory({ id: 'r1234' }).osmId()).toEqual('1234');
+            expect(osmEntityFactory({ id: 'w1234' }).osmId()).toEqual('1234');
+            expect(osmEntityFactory({ id: 'n1234' }).osmId()).toEqual('1234');
+            expect(osmEntityFactory({ id: 'r1234' }).osmId()).toEqual('1234');
         });
     });
 

@@ -25,6 +25,7 @@ export function osmEntityFactory(attrs) {
 }
 
 // DEPRECATION: this will be deprecated in future iD release.
+//  use osmEntityFactory instead.
 export function legacyOsmEntity() {
     return osmEntityFactory.apply(this, arguments);
 }
