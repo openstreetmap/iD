@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import _ from 'lodash';
 import { t, textDirection } from '../../util/locale';
 import { localize } from './helper';
 
@@ -88,6 +89,13 @@ export function uiIntro(context) {
         var curtain = uiCurtain();
         selection.call(curtain);
 
+        // store that the user started the walkthrough..
+        context.storage('walkthrough_started', 'yes');
+
+        // restore previous walkthrough progress..
+        var storedProgress = context.storage('walkthrough_progress') || '';
+        var progress = storedProgress.split(';').filter(Boolean);
+
         var chapters = chapterFlow.map(function(chapter, i) {
             var s = chapterUi[chapter](context, curtain.reveal)
                 .on('done', function() {
@@ -102,11 +110,25 @@ export function uiIntro(context) {
                         d3.select('button.chapter-' + next)
                             .classed('next', true);
                     }
+
+                    // store walkthrough progress..
+                    progress.push(chapter);
+                    context.storage('walkthrough_progress', _.uniq(progress).join(';'));
                 });
             return s;
         });
 
         chapters[chapters.length - 1].on('startEditing', function() {
+            // store walkthrough progress..
+            progress.push('startEditing');
+            context.storage('walkthrough_progress', _.uniq(progress).join(';'));
+
+            // store if walkthrough is completed..
+            var incomplete = _.difference(chapterFlow, progress);
+            if (!incomplete.length) {
+                context.storage('walkthrough_completed', 'yes');
+            }
+
             curtain.remove();
             navwrap.remove();
             d3.selectAll('#map .layer-background').style('opacity', opacity);
