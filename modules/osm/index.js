@@ -11,9 +11,9 @@ export {
 } from './multipolygon';
 export { osmOneWayTags, osmPavedTags, osmIsInterestingTag } from './tags';
 
-export { entityFactory } from './entityFactory';
+export { osmEntityFactory } from './entityFactory';
 
-// DEPRECATION, use entityFactory instead.
+// DEPRECATION, use osmEntityFactory instead.
 export { legacyOsmEntity as osmEntity } from './entityFactory';
 
 export { osmUtil } from './util';

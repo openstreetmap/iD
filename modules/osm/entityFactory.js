@@ -6,7 +6,7 @@ import { osmRelation } from './relation';
 import { osmChangeset } from './changeset';
 import { osmEntity } from './entity';
 
-export function entityFactory(attrs) {
+export function osmEntityFactory(attrs) {
     // For prototypal inheritance.
     // Create the appropriate subtype.
     var type = attrs && (attrs.type || osmUtil.id.type(attrs.id));
@@ -26,7 +26,7 @@ export function entityFactory(attrs) {
 
 // DEPRECATION: this will be deprecated in future iD release.
 export function legacyOsmEntity() {
-    return entityFactory.apply(this, arguments);
+    return osmEntityFactory.apply(this, arguments);
 }
 legacyOsmEntity.id = osmUtil.id;
 legacyOsmEntity.key = osmUtil.key;

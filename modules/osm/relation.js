@@ -40,7 +40,7 @@ _.extend(osmRelation.prototype, {
     baseCopy: function(resolver, copies) {
         if (copies[this.id]) return copies[this.id];
 
-        var copy = new osmRelation(
+        var copy = osmRelation(
             this,
             {
                 id: undefined,
@@ -71,7 +71,7 @@ _.extend(osmRelation.prototype, {
 
 
     update: function(attrs) {
-        return new osmRelation(
+        return osmRelation(
             this,
             attrs,
             { v: 1 + (this.v || 0) }

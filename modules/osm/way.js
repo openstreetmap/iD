@@ -30,7 +30,7 @@ _.extend(osmWay.prototype, {
     baseCopy: function(resolver, copies) {
         if (copies[this.id]) return copies[this.id];
 
-        var copy = new osmWay(
+        var copy = osmWay(
             this,
             {
                 id: undefined,
@@ -61,7 +61,7 @@ _.extend(osmWay.prototype, {
 
 
     update: function(attrs) {
-        return new osmWay(this, attrs, { v: 1 + (this.v || 0) });
+        return osmWay(this, attrs, { v: 1 + (this.v || 0) });
     },
 
 

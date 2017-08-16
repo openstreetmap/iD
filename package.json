@@ -23,7 +23,9 @@
     "lint": "eslint *.js js/id test/spec modules",
     "prepublish": "npm run all",
     "start": "node development_server.js develop",
-    "test": "npm-run-all -s lint build test:**",
+    "test": "npm-run-all -s lint test:jest build test:phantom",
+    "jest:watch": "jest --watch",
+    "test:jest": "jest",
     "test:phantom": "phantomjs --web-security=no node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index.html spec",
     "translations": "node data/update_locales"
   },

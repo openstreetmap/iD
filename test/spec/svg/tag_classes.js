@@ -188,7 +188,6 @@ describe('iD.svgTagClasses', function () {
     it('works on SVG elements', function() {
         selection = d3.select(document.createElementNS('http://www.w3.org/2000/svg', 'g'));
        var x = iD.Entity();
-       console.log(x);
         selection
             .datum(iD.Entity())
             .call(iD.svgTagClasses());

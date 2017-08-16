@@ -26,7 +26,7 @@ _.extend(osmNode.prototype, {
 
     copy: function(resolver, copies) {
         if (copies[this.id]) return copies[this.id];
-        var copy = new osmNode(this, {
+        var copy = osmNode(this, {
             id: undefined,
             user: undefined,
             version: undefined
@@ -38,7 +38,7 @@ _.extend(osmNode.prototype, {
 
 
     update: function(attrs) {
-        return new osmNode(this, attrs, { v: 1 + (this.v || 0) });
+        return osmNode(this, attrs, { v: 1 + (this.v || 0) });
     },
 
 
