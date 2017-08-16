@@ -260,6 +260,30 @@ export function uiCommit(context) {
     }
 
 
+    function findHashtags(tags) {
+        return _.unionBy(commentTags(), hashTags(), function (s) {
+            return s.toLowerCase();
+        });
+
+        // Extract hashtags from `comment`
+        function commentTags() {
+            return tags.comment.match(/#[^\s\#]+/g);
+        }
+
+        // Extract and clean hashtags from `hashtags`
+        function hashTags() {
+            var t = tags.hashtags || '';
+            return t
+                .split(/[,;\s]+/)
+                .map(function (s) {
+                    if (s[0] !== '#') { s = '#' + s; }    // prepend '#'
+                    var matched = s.match(/#[^\s\#]+/g);  // match valid hashtags
+                    return matched && matched[0];
+                }).filter(Boolean);                       // exclude falsey
+        }
+    }
+
+
     function isReviewRequested(tags) {
         var rr = tags.review_requested;
         if (rr === undefined) return false;
@@ -285,6 +309,13 @@ export function uiCommit(context) {
                 delete tags[k];
             }
         });
+
+        if (!onInput) {
+            var hashtags = findHashtags(tags);
+            if (hashtags.length) {
+                tags.hashtags = hashtags.join(';').substr(0, 255);
+            }
+        }
 
         if (!_.isEqual(changeset.tags, tags)) {
             changeset = changeset.update({ tags: tags });

@@ -5,7 +5,7 @@ import { t } from '../util/locale';
 import { svgIcon } from '../svg';
 import { uiField } from './field';
 import { uiFormFields } from './form_fields';
-import { utilRebind } from '../util';
+import { utilRebind, utilTriggerEvent } from '../util';
 
 
 export function uiChangesetEditor(context) {
@@ -62,6 +62,10 @@ export function uiChangesetEditor(context) {
                 commentNode.select();
             }
 
+            // trigger a 'blur' event so that comment field can be cleaned
+            // and checked for hashtags, even if retrieved from localstorage
+            utilTriggerEvent(commentField, 'blur');
+
             var osm = context.connection();
             if (osm) {
                 osm.userChangesets(function (err, changesets) {
@@ -84,10 +88,10 @@ export function uiChangesetEditor(context) {
             }
         }
 
-        // Add comment warning
-        var matches = tags.comment.match(/google/i);
+        // Add warning if comment mentions Google
+        var hasGoogle = tags.comment.match(/google/i);
         var commentWarning = selection.select('.form-field-comment').selectAll('.comment-warning')
-            .data(matches ? [0] : []);
+            .data(hasGoogle ? [0] : []);
 
         commentWarning.exit()
             .transition()
