@@ -1,11 +1,14 @@
 import { coreGraph } from '../../core/graph';
 
-import { osmNode} from '../node';
+import { osmEntity } from '../entity';
+import { osmNode } from '../node';
 import { osmWay } from '../way';
 
 describe('iD.osmNode', function () {
     it('returns a node', function () {
         expect(osmNode()).toBeInstanceOf(osmNode);
+        expect(osmNode()).toBeInstanceOf(osmEntity);
+        expect(osmNode()).toBeInstanceOf(Object);
         expect(osmNode().type).toBe('node');
     });
 

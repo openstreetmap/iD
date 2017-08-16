@@ -5,7 +5,7 @@ import { coreGraph } from '../../core/graph';
 import { osmNode } from '../node';
 import { osmWay } from '../way';
 import { osmRelation } from '../relation';
-import {osmIntersection} from '../intersection';
+import { osmIntersection } from '../intersection';
 
 describe('osmIntersection', function() {
     describe('highways', function() {

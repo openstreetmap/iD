@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import { dataFeatureIcons } from '../../data/index';
-import { EntityStatics } from '../osm/index';
+import { osmUtil } from '../osm/index';
 import { svgPointTransform } from './index';
 
 
@@ -112,7 +112,7 @@ export function svgVertices(projection, context) {
             z = (zoom < 17 ? 0 : zoom < 18 ? 1 : 2);
 
         var groups = selection
-            .data(vertices, EntityStatics.key);
+            .data(vertices, osmUtil.key);
 
         groups.exit()
             .remove();

@@ -1,12 +1,14 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
+
 import { geoExtent, geoCross } from '../geo/index';
+import { osmEntity } from './entity';
 import { osmLanes } from './lanes';
 import { osmOneWayTags } from './tags';
-import { areaKeys } from '../core/context';
+import {osmUtil} from './util';
 
-import { entityBase } from './entityBase';
-import { Entity } from './entityStatic';
+// Need to deprecate this.
+import { areaKeys as globalAreaKeys } from '../core/context';
 
 export function osmWay() {
     if (!(this instanceof osmWay)) {
@@ -16,14 +18,19 @@ export function osmWay() {
     }
 }
 
-osmWay.prototype = _.assign({}, entityBase, {
+
+osmWay.prototype = Object.create(osmEntity.prototype);
+
+
+_.extend(osmWay.prototype, {
     type: 'way',
     nodes: [],
+
 
     baseCopy: function(resolver, copies) {
         if (copies[this.id]) return copies[this.id];
 
-        var copy = new osmWay().initialize(
+        var copy = new osmWay(
             this,
             {
                 id: undefined,
@@ -35,8 +42,10 @@ osmWay.prototype = _.assign({}, entityBase, {
         return copy;
     },
 
+
     copy: function(resolver, copies) {
-        if (copies[this.id]) return copies[this.id];
+        if (copies[this.id])
+            return copies[this.id];
 
         var copy = this.baseCopy(resolver, copies);
 
@@ -49,6 +58,12 @@ osmWay.prototype = _.assign({}, entityBase, {
 
         return copy;
     },
+
+
+    update: function(attrs) {
+        return new osmWay(this, attrs, { v: 1 + (this.v || 0) });
+    },
+
 
     extent: function(resolver) {
         return resolver.transient(this, 'extent', function() {
@@ -63,27 +78,32 @@ osmWay.prototype = _.assign({}, entityBase, {
         });
     },
 
+
     first: function() {
         return this.nodes[0];
     },
+
 
     last: function() {
         return this.nodes[this.nodes.length - 1];
     },
 
+
     contains: function(node) {
         return this.nodes.indexOf(node) >= 0;
     },
+
 
     affix: function(node) {
         if (this.nodes[0] === node) return 'prefix';
         if (this.nodes[this.nodes.length - 1] === node) return 'suffix';
     },
 
+
     layer: function() {
         // explicit layer tag, clamp between -10, 10..
         if (isFinite(this.tags.layer)) {
-            return Math.max(-10, Math.min(+this.tags.layer, 10));
+            return Math.max(-10, Math.min(+(this.tags.layer), 10));
         }
 
         // implied layer tag..
@@ -103,46 +123,45 @@ osmWay.prototype = _.assign({}, entityBase, {
         return 0;
     },
 
+
     isOneWay: function() {
         // explicit oneway tag..
-        if (['yes', '1', '-1'].indexOf(this.tags.oneway) !== -1) {
-            return true;
-        }
-        if (['no', '0'].indexOf(this.tags.oneway) !== -1) {
-            return false;
-        }
+        if (['yes', '1', '-1'].indexOf(this.tags.oneway) !== -1) { return true; }
+        if (['no', '0'].indexOf(this.tags.oneway) !== -1) { return false; }
 
         // implied oneway tag..
         for (var key in this.tags) {
-            if (key in osmOneWayTags && this.tags[key] in osmOneWayTags[key])
+            if (key in osmOneWayTags && (this.tags[key] in osmOneWayTags[key]))
                 return true;
         }
         return false;
     },
 
+
     lanes: function() {
         return osmLanes(this);
     },
 
+
     isClosed: function() {
         return this.nodes.length > 1 && this.first() === this.last();
     },
+
 
     isConvex: function(resolver) {
         if (!this.isClosed() || this.isDegenerate()) return null;
 
         var nodes = _.uniq(resolver.childNodes(this)),
             coords = _.map(nodes, 'loc'),
-            curr = 0,
-            prev = 0;
+            curr = 0, prev = 0;
 
         for (var i = 0; i < coords.length; i++) {
-            var o = coords[(i + 1) % coords.length],
+            var o = coords[(i+1) % coords.length],
                 a = coords[i],
-                b = coords[(i + 2) % coords.length],
+                b = coords[(i+2) % coords.length],
                 res = geoCross(o, a, b);
 
-            curr = res > 0 ? 1 : res < 0 ? -1 : 0;
+            curr = (res > 0) ? 1 : (res < 0) ? -1 : 0;
             if (curr === 0) {
                 continue;
             } else if (prev && curr !== prev) {
@@ -153,8 +172,9 @@ osmWay.prototype = _.assign({}, entityBase, {
         return true;
     },
 
-    isArea: function(_areaKeys) {
-        _areaKeys = _areaKeys || areaKeys; 
+
+    isArea: function(areaKeys) {
+        if (!areaKeys) areaKeys = globalAreaKeys;
         // `highway` and `railway` are typically linear features, but there
         // are a few exceptions that should be treated as areas, even in the
         // absence of a proper `area=yes` or `areaKeys` tag.. see #4194
@@ -172,10 +192,12 @@ osmWay.prototype = _.assign({}, entityBase, {
             }
         };
 
-        if (this.tags.area === 'yes') return true;
-        if (!this.isClosed() || this.tags.area === 'no') return false;
+        if (this.tags.area === 'yes')
+            return true;
+        if (!this.isClosed() || this.tags.area === 'no')
+            return false;
         for (var key in this.tags) {
-            if (key in _areaKeys && !(this.tags[key] in _areaKeys[key])) {
+            if (key in areaKeys && !(this.tags[key] in areaKeys[key])) {
                 return true;
             }
             if (key in lineKeys && this.tags[key] in lineKeys[key]) {
@@ -185,9 +207,11 @@ osmWay.prototype = _.assign({}, entityBase, {
         return false;
     },
 
+
     isDegenerate: function() {
         return _.uniq(this.nodes).length < (this.isArea() ? 3 : 2);
     },
+
 
     areAdjacent: function(n1, n2) {
         for (var i = 0; i < this.nodes.length; i++) {
@@ -199,14 +223,13 @@ osmWay.prototype = _.assign({}, entityBase, {
         return false;
     },
 
-    update: function(attrs) {
-        return new osmWay(this, attrs, { v: 1 + (this.v || 0) });
-    },
+
     geometry: function(graph) {
         return graph.transient(this, 'geometry', function() {
             return this.isArea() ? 'area' : 'line';
         });
     },
+
 
     // If this way is not closed, append the beginning node to the end of the nodelist to close it.
     close: function() {
@@ -217,6 +240,7 @@ osmWay.prototype = _.assign({}, entityBase, {
         nodes.push(nodes[0]);
         return this.update({ nodes: nodes });
     },
+
 
     // If this way is closed, remove any connector nodes from the end of the nodelist to unclose it.
     unclose: function() {
@@ -235,6 +259,7 @@ osmWay.prototype = _.assign({}, entityBase, {
         nodes = nodes.filter(noRepeatNodes);
         return this.update({ nodes: nodes });
     },
+
 
     // Adds a node (id) in front of the node which is currently at position index.
     // If index is undefined, the node will be added to the end of the way for linear ways,
@@ -261,11 +286,7 @@ osmWay.prototype = _.assign({}, entityBase, {
 
             // leading connectors..
             var i = 1;
-            while (
-                i < nodes.length &&
-                nodes.length > 2 &&
-                nodes[i] === connector
-            ) {
+            while (i < nodes.length && nodes.length > 2 && nodes[i] === connector) {
                 nodes.splice(i, 1);
                 if (index > i) index--;
             }
@@ -283,15 +304,13 @@ osmWay.prototype = _.assign({}, entityBase, {
         nodes = nodes.filter(noRepeatNodes);
 
         // If the way was closed before, append a connector node to keep it closed..
-        if (
-            isClosed &&
-            (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])
-        ) {
+        if (isClosed && (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])) {
             nodes.push(nodes[0]);
         }
 
         return this.update({ nodes: nodes });
     },
+
 
     // Replaces the node which is currently at position index with the given node (id).
     // Consecutive duplicates are eliminated including existing ones.
@@ -312,11 +331,7 @@ osmWay.prototype = _.assign({}, entityBase, {
 
             // leading connectors..
             var i = 1;
-            while (
-                i < nodes.length &&
-                nodes.length > 2 &&
-                nodes[i] === connector
-            ) {
+            while (i < nodes.length && nodes.length > 2 && nodes[i] === connector) {
                 nodes.splice(i, 1);
                 if (index > i) index--;
             }
@@ -325,7 +340,7 @@ osmWay.prototype = _.assign({}, entityBase, {
             i = nodes.length - 1;
             while (i > 0 && nodes.length > 1 && nodes[i] === connector) {
                 nodes.splice(i, 1);
-                if (index === i) index = 0; // update leading connector instead
+                if (index === i) index = 0;  // update leading connector instead
                 i = nodes.length - 1;
             }
         }
@@ -334,15 +349,13 @@ osmWay.prototype = _.assign({}, entityBase, {
         nodes = nodes.filter(noRepeatNodes);
 
         // If the way was closed before, append a connector node to keep it closed..
-        if (
-            isClosed &&
-            (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])
-        ) {
+        if (isClosed && (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])) {
             nodes.push(nodes[0]);
         }
 
-        return this.update({ nodes: nodes });
+        return this.update({nodes: nodes});
     },
+
 
     // Replaces each occurrence of node id needle with replacement.
     // Consecutive duplicates are eliminated including existing ones.
@@ -360,15 +373,13 @@ osmWay.prototype = _.assign({}, entityBase, {
         nodes = nodes.filter(noRepeatNodes);
 
         // If the way was closed before, append a connector node to keep it closed..
-        if (
-            isClosed &&
-            (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])
-        ) {
+        if (isClosed && (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])) {
             nodes.push(nodes[0]);
         }
 
-        return this.update({ nodes: nodes });
+        return this.update({nodes: nodes});
     },
+
 
     // Removes each occurrence of node id needle with replacement.
     // Consecutive duplicates are eliminated including existing ones.
@@ -378,21 +389,17 @@ osmWay.prototype = _.assign({}, entityBase, {
             isClosed = this.isClosed();
 
         nodes = nodes
-            .filter(function(node) {
-                return node !== id;
-            })
+            .filter(function(node) { return node !== id; })
             .filter(noRepeatNodes);
 
         // If the way was closed before, append a connector node to keep it closed..
-        if (
-            isClosed &&
-            (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])
-        ) {
+        if (isClosed && (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])) {
             nodes.push(nodes[0]);
         }
 
-        return this.update({ nodes: nodes });
+        return this.update({nodes: nodes});
     },
+
 
     asJXON: function(changeset_id) {
         var r = {
@@ -400,7 +407,7 @@ osmWay.prototype = _.assign({}, entityBase, {
                 '@id': this.osmId(),
                 '@version': this.version || 0,
                 nd: _.map(this.nodes, function(id) {
-                    return { keyAttributes: { ref: Entity.id.toOSM(id) } };
+                    return { keyAttributes: { ref: osmUtil.id.toOSM(id) } };
                 }),
                 tag: _.map(this.tags, function(v, k) {
                     return { keyAttributes: { k: k, v: v } };
@@ -412,6 +419,7 @@ osmWay.prototype = _.assign({}, entityBase, {
         }
         return r;
     },
+
 
     asGeoJSON: function(resolver) {
         return resolver.transient(this, 'GeoJSON', function() {
@@ -429,6 +437,7 @@ osmWay.prototype = _.assign({}, entityBase, {
             }
         });
     },
+
 
     area: function(resolver) {
         return resolver.transient(this, 'area', function() {
@@ -456,6 +465,7 @@ osmWay.prototype = _.assign({}, entityBase, {
         });
     }
 });
+
 
 // Filter function to eliminate consecutive duplicates.
 function noRepeatNodes(node, i, arr) {

@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import { d3keybinding } from '../lib/d3.keybinding.js';
-import { isInstanceOfEntity } from '../osm/index';
+import { osmIsEntity } from '../osm/index';
 import { utilRebind } from '../util/rebind';
 
 
@@ -101,7 +101,7 @@ export function behaviorHover(context) {
             _selection.selectAll('.hover-suppressed')
                 .classed('hover-suppressed', false);
 
-            if (isInstanceOfEntity(target) && target.id !== newId) {
+            if (osmIsEntity(target) && target.id !== newId) {
 
                 // If drawing a way, don't hover on a node that was just placed. #3974
                 var mode = context.mode() && context.mode().id;

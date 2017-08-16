@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { EntityStatics, osmIsSimpleMultipolygonOuterMember } from '../osm/index';
+import { osmUtil, osmIsSimpleMultipolygonOuterMember } from '../osm/index';
 import { svgPath, svgTagClasses } from './index';
 
 
@@ -78,7 +78,7 @@ export function svgAreas(projection, context) {
 
         var clipPaths = context.surface().selectAll('defs').selectAll('.clipPath')
            .filter(filter)
-           .data(data.clip, EntityStatics.key);
+           .data(data.clip, osmUtil.key);
 
         clipPaths.exit()
            .remove();
@@ -110,7 +110,7 @@ export function svgAreas(projection, context) {
         var paths = areagroup
             .selectAll('path')
             .filter(filter)
-            .data(function(layer) { return data[layer]; }, EntityStatics.key);
+            .data(function(layer) { return data[layer]; }, osmUtil.key);
 
         paths.exit()
             .remove();

@@ -1,17 +1,14 @@
 import { coreGraph } from '../../core/graph';
 
+import { osmEntity } from '../entity';
 import { osmNode } from '../node';
 import { osmWay } from '../way';
 
 describe('iD.osmWay', function() {
-    // if (iD.debug) {
-    //     it('freezes nodes', function () {
-    //         expect(Object.isFrozen(osmWay().nodes)).toBe(true);
-    //     });
-    // }
 
     it('returns a way', function() {
         expect(osmWay()).toBeInstanceOf(osmWay);
+        expect(osmWay()).toBeInstanceOf(osmEntity);
         expect(osmWay().type).toBe('way');
     });
 

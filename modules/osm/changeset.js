@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import { entityBase } from './entityBase';
-import { geoExtent } from '../geo';
+import { osmEntity } from './entity';
+import { geoExtent } from '../geo/index';
 
 
 export function osmChangeset() {
@@ -11,8 +11,11 @@ export function osmChangeset() {
     }
 }
 
-osmChangeset.prototype = _.assign({}, entityBase,  {
+osmChangeset.prototype = Object.create(osmEntity.prototype);
 
+
+_.extend(osmChangeset.prototype,  {
+    
     type: 'changeset',
 
 
@@ -21,13 +24,10 @@ osmChangeset.prototype = _.assign({}, entityBase,  {
     },
 
 
-    geometry: function() {
-        return 'changeset';
-    },
-
     update: function(attrs) {
         return new osmChangeset(this, attrs, {v: 1 + (this.v || 0)});
     },
+
 
     copy: function(resolver, copies) {
         if (copies[this.id]) return copies[this.id];
@@ -40,6 +40,12 @@ osmChangeset.prototype = _.assign({}, entityBase,  {
 
         return copy;
     },
+
+
+    geometry: function() {
+        return 'changeset';
+    },
+
 
     asJXON: function() {
         return {

@@ -1,4 +1,4 @@
-describe.skip('iD.osmEntity', function () {
+describe('iD.osmEntity', function () {
     it('returns a subclass of the appropriate type', function () {
         expect(iD.Entity({type: 'node'})).be.an.instanceOf(iD.Node);
         expect(iD.Entity({type: 'way'})).be.an.instanceOf(iD.Way);
@@ -20,18 +20,18 @@ describe.skip('iD.osmEntity', function () {
 
     describe('.id', function () {
         it('generates unique IDs', function () {
-            expect(iD.EntityStatics.id('node')).not.to.equal(iD.EntityStatics.id('node'));
+            expect(iD.Entity.id('node')).not.to.equal(iD.Entity.id('node'));
         });
 
         describe('.fromOSM', function () {
             it('returns a ID string unique across entity types', function () {
-                expect(iD.EntityStatics.id.fromOSM('node', '1')).to.equal('n1');
+                expect(iD.Entity.id.fromOSM('node', '1')).to.equal('n1');
             });
         });
 
         describe('.toOSM', function () {
             it('reverses fromOSM', function () {
-                expect(iD.EntityStatics.id.toOSM(iD.EntityStatics.id.fromOSM('node', '1'))).to.equal('1');
+                expect(iD.Entity.id.toOSM(iD.Entity.id.fromOSM('node', '1'))).to.equal('1');
             });
         });
     });

@@ -1,5 +1,5 @@
 describe('iD.osmNode', function () {
-    it.skip('returns a node', function () {
+    it('returns a node', function () {
         expect(iD.Node()).to.be.an.instanceOf(iD.Node);
         expect(iD.Node().type).to.equal('node');
     });

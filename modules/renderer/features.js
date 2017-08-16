@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { EntityStatics } from '../osm/index';
+import { osmUtil } from '../osm/index';
 import { utilRebind } from '../util/rebind';
 
 
@@ -300,7 +300,7 @@ export function rendererFeatures(context) {
 
 
     features.clearEntity = function(entity) {
-        delete _cache[EntityStatics.key(entity)];
+        delete _cache[osmUtil.key(entity)];
     };
 
 
@@ -312,7 +312,7 @@ export function rendererFeatures(context) {
     features.getMatches = function(entity, resolver, geometry) {
         if (geometry === 'vertex' || geometry === 'relation') return {};
 
-        var ent = EntityStatics.key(entity);
+        var ent = osmUtil.key(entity);
         if (!_cache[ent]) {
             _cache[ent] = {};
         }
@@ -338,7 +338,7 @@ export function rendererFeatures(context) {
                     if (entity.type === 'way') {
                         var parents = features.getParents(entity, resolver, geometry);
                         if (parents.length === 1 && parents[0].isMultipolygon()) {
-                            var pkey = EntityStatics.key(parents[0]);
+                            var pkey = osmUtil.key(parents[0]);
                             if (_cache[pkey] && _cache[pkey].matches) {
                                 matches = _.clone(_cache[pkey].matches);
                                 continue;
@@ -361,7 +361,7 @@ export function rendererFeatures(context) {
     features.getParents = function(entity, resolver, geometry) {
         if (geometry === 'point') return [];
 
-        var ent = EntityStatics.key(entity);
+        var ent = osmUtil.key(entity);
         if (!_cache[ent]) {
             _cache[ent] = {};
         }

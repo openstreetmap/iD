@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { dataFeatureIcons } from '../../data/index';
-import { EntityStatics } from '../osm/index';
+import { osmUtil } from '../osm/index';
 import { svgPointTransform, svgTagClasses } from './index';
 
 
@@ -30,7 +30,7 @@ export function svgPoints(projection, context) {
 
         var groups = layer.selectAll('g.point')
             .filter(filter)
-            .data(points, EntityStatics.key);
+            .data(points, osmUtil.key);
 
         groups.exit()
             .remove();

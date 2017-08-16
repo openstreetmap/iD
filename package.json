@@ -68,6 +68,7 @@
     "rollup-plugin-commonjs": "8.1.0",
     "rollup-plugin-json": "2.2.0",
     "rollup-plugin-node-resolve": "3.0.0",
+    "rollup-plugin-sizes": "^0.4.0",
     "shelljs": "^0.7.5",
     "shx": "^0.2.1",
     "sinon": "^2.3.0",

@@ -12,7 +12,7 @@ import {
     geoPathLength
 } from '../geo/index';
 
-import { EntityStatics } from '../osm/index';
+import { osmUtil } from '../osm/index';
 import { utilDetect } from '../util/detect';
 
 import {
@@ -106,7 +106,7 @@ export function svgLabels(projection, context) {
     function drawLinePaths(selection, entities, filter, classes, labels) {
         var paths = selection.selectAll('path')
             .filter(filter)
-            .data(entities, EntityStatics.key);
+            .data(entities, osmUtil.key);
 
         paths.exit()
             .remove();
@@ -124,7 +124,7 @@ export function svgLabels(projection, context) {
     function drawLineLabels(selection, entities, filter, classes, labels) {
         var texts = selection.selectAll('text.' + classes)
             .filter(filter)
-            .data(entities, EntityStatics.key);
+            .data(entities, osmUtil.key);
 
         texts.exit()
             .remove();
@@ -140,7 +140,7 @@ export function svgLabels(projection, context) {
 
         texts.selectAll('.textpath')
             .filter(filter)
-            .data(entities, EntityStatics.key)
+            .data(entities, osmUtil.key)
             .attr('startOffset', '50%')
             .attr('xlink:href', function(d) { return '#labelpath-' + d.id; })
             .text(utilDisplayNameForPath);
@@ -150,7 +150,7 @@ export function svgLabels(projection, context) {
     function drawPointLabels(selection, entities, filter, classes, labels) {
         var texts = selection.selectAll('text.' + classes)
             .filter(filter)
-            .data(entities, EntityStatics.key);
+            .data(entities, osmUtil.key);
 
         texts.exit()
             .remove();
@@ -187,7 +187,7 @@ export function svgLabels(projection, context) {
     function drawAreaIcons(selection, entities, filter, classes, labels) {
         var icons = selection.selectAll('use.' + classes)
             .filter(filter)
-            .data(entities, EntityStatics.key);
+            .data(entities, osmUtil.key);
 
         icons.exit()
             .remove();

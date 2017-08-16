@@ -1,9 +1,9 @@
 import * as d3 from 'd3';
 
-import { osmChangeset } from '../changeset';
 import { osmNode } from '../node';
-import { osmWay } from '../way';
 import { osmRelation } from '../relation';
+import { osmWay } from '../way';
+import { osmChangeset } from '../changeset';
 
 describe('osmChangeset', function () {
     it('returns a changeset', function () {
@@ -53,17 +53,20 @@ describe('osmChangeset', function () {
         });
 
         it('includes creations ordered by nodes, ways, relations', function() {
-            var n = osmNode({ loc: [0, 0] }),
-                w = osmWay(),
-                r = osmRelation(),
-                c = osmChangeset({ id: '1234' }),
-                changes = { created: [r, w, n], modified: [], deleted: [] },
-                jxon = c.osmChangeJXON(changes);
+            var n = osmNode({ loc: [0, 0] });
+            var w = osmWay();
+            var r = osmRelation();
+            var c = osmChangeset({ id: '1234' });
+            var changes = { created: [r, w, n], modified: [], deleted: [] };
+            var jxon = c.osmChangeJXON(changes);
 
             expect(d3.entries(jxon.osmChange.create)).toEqual([
                 { key: 'node', value: [n.asJXON('1234').node] },
                 { key: 'way', value: [w.asJXON('1234').way] },
-                { key: 'relation', value: [r.asJXON('1234').relation] }
+                {
+                    key: 'relation',
+                    value: [r.asJXON('1234').relation]
+                }
             ]);
         });
 

@@ -5,7 +5,7 @@ import { JXON } from '../util/jxon';
 import { d3geoTile } from '../lib/d3.geo.tile';
 import { geoExtent } from '../geo';
 import {
-    EntityStatics,
+    osmUtil,
     osmNode,
     osmRelation,
     osmWay
@@ -103,7 +103,7 @@ var parsers = {
     node: function nodeData(obj) {
         var attrs = obj.attributes;
         return new osmNode({
-            id: EntityStatics.id.fromOSM('node', attrs.id.value),
+            id: osmUtil.id.fromOSM('node', attrs.id.value),
             visible: getVisible(attrs),
             version: attrs.version.value,
             changeset: attrs.changeset && attrs.changeset.value,
@@ -118,7 +118,7 @@ var parsers = {
     way: function wayData(obj) {
         var attrs = obj.attributes;
         return new osmWay({
-            id: EntityStatics.id.fromOSM('way', attrs.id.value),
+            id: osmUtil.id.fromOSM('way', attrs.id.value),
             visible: getVisible(attrs),
             version: attrs.version.value,
             changeset: attrs.changeset && attrs.changeset.value,
@@ -133,7 +133,7 @@ var parsers = {
     relation: function relationData(obj) {
         var attrs = obj.attributes;
         return new osmRelation({
-            id: EntityStatics.id.fromOSM('relation', attrs.id.value),
+            id: osmUtil.id.fromOSM('relation', attrs.id.value),
             visible: getVisible(attrs),
             version: attrs.version.value,
             changeset: attrs.changeset && attrs.changeset.value,
@@ -252,8 +252,8 @@ export default {
 
 
     loadEntity: function(id, callback) {
-        var type = EntityStatics.id.type(id),
-            osmID = EntityStatics.id.toOSM(id);
+        var type = osmUtil.id.type(id),
+            osmID = osmUtil.id.toOSM(id);
 
         this.loadFromAPI(
             '/api/0.6/' + type + '/' + osmID + (type !== 'node' ? '/full' : ''),
@@ -265,8 +265,8 @@ export default {
 
 
     loadEntityVersion: function(id, version, callback) {
-        var type = EntityStatics.id.type(id),
-            osmID = EntityStatics.id.toOSM(id);
+        var type = osmUtil.id.type(id),
+            osmID = osmUtil.id.toOSM(id);
 
         this.loadFromAPI(
             '/api/0.6/' + type + '/' + osmID + '/' + version,
@@ -279,9 +279,9 @@ export default {
 
     loadMultiple: function(ids, callback) {
         var that = this;
-        _.each(_.groupBy(_.uniq(ids), EntityStatics.id.type), function(v, k) {
+        _.each(_.groupBy(_.uniq(ids), osmUtil.id.type), function(v, k) {
             var type = k + 's',
-                osmIDs = _.map(v, EntityStatics.id.toOSM);
+                osmIDs = _.map(v, osmUtil.id.toOSM);
 
             _.each(_.chunk(osmIDs, 150), function(arr) {
                 that.loadFromAPI(

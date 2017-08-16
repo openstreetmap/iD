@@ -5,7 +5,7 @@ describe('iD.osmRelation', function () {
         });
     }
 
-    it.skip('returns a relation', function () {
+    it('returns a relation', function () {
         expect(iD.Relation()).to.be.an.instanceOf(iD.Relation);
         expect(iD.Relation().type).to.equal('relation');
     });
@@ -27,7 +27,7 @@ describe('iD.osmRelation', function () {
     });
 
     describe('#copy', function () {
-        it.skip('returns a new Relation', function () {
+        it('returns a new Relation', function () {
             var r = iD.Relation({id: 'r'}),
                 result = r.copy(null, {});
 
@@ -52,7 +52,7 @@ describe('iD.osmRelation', function () {
             expect(result1).to.equal(result2);
         });
 
-        it.skip('deep copies members', function () {
+        it('deep copies members', function () {
             var a = iD.Node({id: 'a'}),
                 b = iD.Node({id: 'b'}),
                 c = iD.Node({id: 'c'}),

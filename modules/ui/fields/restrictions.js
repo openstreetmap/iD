@@ -10,7 +10,7 @@ import {
     osmIntersection,
     osmInferRestriction,
     osmTurn,
-    isInstanceOfEntity
+    osmIsEntity
 } from '../../osm/index';
 
 import {
@@ -146,7 +146,7 @@ export function uiFieldRestrictions(field, context) {
                 .call(breathe);
 
             var datum = d3.event.target.__data__;
-            if (isInstanceOfEntity(datum)) {
+            if (osmIsEntity(datum)) {
                 fromNodeID = intersection.adjacentNodeId(datum.id);
                 render();
             } else if (datum instanceof osmTurn) {
