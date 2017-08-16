@@ -11,11 +11,18 @@ import { utilRebind } from '../util';
 
 
 var changeset;
-var readOnlyTags = ['created_by', 'imagery_used', 'host', 'locale'];
+var readOnlyTags = [
+    'changesets_count',
+    'created_by',
+    'imagery_used',
+    'host',
+    'locale'
+];
 
 
 export function uiCommit(context) {
     var dispatch = d3.dispatch('cancel', 'save'),
+        userDetails,
         _selection;
 
     var changesetEditor = uiChangesetEditor(context)
@@ -121,6 +128,8 @@ export function uiCommit(context) {
             if (err) return;
 
             var userLink = d3.select(document.createElement('div'));
+
+            userDetails = user;
 
             if (user.image_url) {
                 userLink
@@ -321,6 +330,13 @@ export function uiCommit(context) {
             } else {
                 context.storage('hashtags', null);
             }
+        }
+
+        // always update userdetails, just in case user reauthenticates as someone else
+        if (userDetails && userDetails.changesets_count !== undefined) {
+            tags.changesets_count = String(userDetails.changesets_count);
+        } else {
+            delete tags.changesets_count;
         }
 
         if (!_.isEqual(changeset.tags, tags)) {
