@@ -12,11 +12,11 @@ import { utilRebind } from '../util';
 
 var changeset;
 var readOnlyTags = [
-    'changesets_count',
-    'created_by',
-    'imagery_used',
-    'host',
-    'locale'
+    /^changesets_count$/,
+    /^created_by$/,
+    /^imagery_used$/,
+    /^host$/,
+    /^locale$/
 ];
 
 

@@ -175,7 +175,12 @@ export function uiRawTagEditor(context) {
 
 
         function isReadOnly(d) {
-            return readOnlyTags.indexOf(d.key) !== -1;
+            for (var i = 0; i < readOnlyTags.length; i++) {
+                if (d.key.match(readOnlyTags[i]) !== null) {
+                    return true;
+                }
+            }
+            return false;
         }
 
 
