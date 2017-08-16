@@ -34,12 +34,14 @@ export function uiCommit(context) {
 
         var comment = context.storage('comment') || '',
             commentDate = +context.storage('commentDate') || 0,
+            hashtags = context.storage('hashtags'),
             currDate = Date.now(),
             cutoff = 2 * 86400 * 1000;   // 2 days
 
-        // expire the stored comment if it is too old - #3947
+        // expire stored comment and hashtags after cutoff datetime - #3947
         if (commentDate > currDate || currDate - commentDate > cutoff) {
             comment = '';
+            hashtags = undefined;
         }
 
         var tags;
@@ -49,6 +51,7 @@ export function uiCommit(context) {
                 comment: comment,
                 created_by: ('iD ' + context.version).substr(0, 255),
                 imagery_used: context.history().imageryUsed().join(';').substr(0, 255),
+                hashtags: hashtags,
                 host: detected.host.substr(0, 255),
                 locale: detected.locale.substr(0, 255)
             };
@@ -311,9 +314,12 @@ export function uiCommit(context) {
         });
 
         if (!onInput) {
-            var hashtags = findHashtags(tags);
-            if (hashtags.length) {
-                tags.hashtags = hashtags.join(';').substr(0, 255);
+            var arr = findHashtags(tags);
+            if (arr.length) {
+                tags.hashtags = arr.join(';').substr(0, 255);
+                context.storage('hashtags', tags.hashtags);
+            } else {
+                context.storage('hashtags', null);
             }
         }
 
