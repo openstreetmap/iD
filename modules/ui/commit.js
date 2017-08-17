@@ -59,10 +59,13 @@ export function uiCommit(context) {
                 comment: comment,
                 created_by: ('iD ' + context.version).substr(0, 255),
                 imagery_used: context.history().imageryUsed().join(';').substr(0, 255),
-                hashtags: hashtags,
                 host: detected.host.substr(0, 255),
                 locale: detected.locale.substr(0, 255)
             };
+
+            if (hashtags) {
+                tags.hashtags = hashtags;
+            }
 
             changeset = new osmChangeset({ tags: tags });
         }
@@ -329,6 +332,7 @@ export function uiCommit(context) {
                 tags.hashtags = arr.join(';').substr(0, 255);
                 context.storage('hashtags', tags.hashtags);
             } else {
+                delete tags.hashtags;
                 context.storage('hashtags', null);
             }
         }
