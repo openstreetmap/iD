@@ -61,6 +61,13 @@
             ]
         },
         {
+            "countryCodes": ["au"],
+            "format": [
+                ["housenumber", "street", "unit"],
+                ["city", "province", "postcode"]
+            ]
+        },
+        {
             "countryCodes": ["us"],
             "format": [
                 ["housenumber", "street", "unit"],
