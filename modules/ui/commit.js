@@ -14,6 +14,7 @@ var changeset;
 var readOnlyTags = [
     /^changesets_count$/,
     /^created_by$/,
+    /^ideditor:/,
     /^imagery_used$/,
     /^host$/,
     /^locale$/
@@ -335,6 +336,25 @@ export function uiCommit(context) {
         // always update userdetails, just in case user reauthenticates as someone else
         if (userDetails && userDetails.changesets_count !== undefined) {
             tags.changesets_count = String(userDetails.changesets_count);
+
+            // first 100 edits - new user
+            if (parseInt(tags.changesets_count, 10) < 100) {
+                var s;
+                s = context.storage('walkthrough_completed');
+                if (s) {
+                    tags['ideditor:walkthrough_completed'] = s;
+                }
+
+                s = context.storage('walkthrough_progress');
+                if (s) {
+                    tags['ideditor:walkthrough_progress'] = s;
+                }
+
+                s = context.storage('walkthrough_started');
+                if (s) {
+                    tags['ideditor:walkthrough_started'] = s;
+                }
+            }
         } else {
             delete tags.changesets_count;
         }
