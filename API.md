@@ -8,28 +8,32 @@ iD supports several URL parameters. When constructing a URL to a standalone inst
 of iD (e.g. `http://preview.ideditor.com/release/`), the following parameters are available
 in the hash portion of the URL:
 
-* `map` - A slash separated `zoom/latitude/longitude`.  Example:
-  `map=20.00/38.90085/-77.02271`
-* `id` - The character 'n', 'w', or 'r', followed by the OSM ID of a node,
+* __`map`__ - A slash separated `zoom/latitude/longitude`.<br/>
+   _Example:_ `map=20.00/38.90085/-77.02271`
+* __`id`__ - The character 'n', 'w', or 'r', followed by the OSM ID of a node,
    way or relation, respectively. Selects the specified entity, and, unless
    a `map` parameter is also provided, centers the map on it.
-* `background` - The value from a `sourcetag` property in iD's
+* __`background`__ - The value from a `sourcetag` property in iD's
   [imagery list](https://github.com/openstreetmap/iD/blob/master/data/imagery.json),
   or a custom tile URL. A custom URL is specified in the format `custom:<url>`,
   where the URL can contain the standard tile URL placeholders `{x}`, `{y}` and
   `{z}`/`{zoom}`, `{ty}` for flipped TMS-style Y coordinates, and `{switch:a,b,c}` for
-  DNS multiplexing.  Example:
-  `background=custom:https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png`
-* `gpx` - A custom URL for loading a gpx track.  Specifying a `gpx` parameter will
-  automatically enable the gpx layer for display.  Example:
-  `gpx=https://tasks.hotosm.org/project/592/task/16.gpx`
-* `offset` - imagery offset in meters, formatted as `east,north`.  Example:
-  `offset=-10,5`
-* `comment` - Prefills the changeset comment box, for use when integrating iD with
-  external task management or quality assurance tools.  Example:
-  `comment=CAR%20crisis%2C%20refugee%20areas%20in%20Cameroon%20%23hotosm-task-592`.
-* `rtl=true` - Force iD into right-to-left mode (useful for testing).
-* `walkthrough=true` - Start the walkthrough automatically
+  DNS multiplexing.<br/>
+  _Example:_ `background=custom:https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png`
+* __`gpx`__ - A custom URL for loading a gpx track.  Specifying a `gpx` parameter will
+  automatically enable the gpx layer for display.<br/>
+  _Example:_ `gpx=https://tasks.hotosm.org/project/592/task/16.gpx`
+* __`offset`__ - imagery offset in meters, formatted as `east,north`.<br/>
+  _Example:_ `offset=-10,5`
+* __`comment`__ - Prefills the changeset comment. Pass a url encoded string.<br/>
+  _Example:_ `comment=CAR%20crisis%2C%20refugee%20areas%20in%20Cameroon`
+* __`hashtags`__ - Prefills the changeset hashtags.  Pass a url encoded list of event
+  hashtags separated by commas, semicolons, or spaces.  Leading '#' symbols are
+  optional and will be added automatically. (Note that hashtag-like strings are
+  automatically detected in the `comment`).<br/>
+  _Example:_ `hashtags=%23hotosm-task-592,%23MissingMaps`
+* __`rtl=true`__ - Force iD into right-to-left mode (useful for testing).
+* __`walkthrough=true`__ - Start the walkthrough automatically
 
 ##### iD on openstreetmap.org (Rails Port)
 
@@ -37,14 +41,15 @@ When constructing a URL to an instance of iD embedded in the OpenStreetMap Rails
 Port (e.g. `http://www.openstreetmap.org/edit?editor=id`), the following parameters
 are available as regular URL query parameters:
 
-* `map` - same as standalone
-* `lat`, `lon`, `zoom` - Self-explanatory.
-* `node`, `way`, `relation` - Select the specified entity.
-* `background` - same as standalone
-* `gpx` - same as standalone
-* `offset` - same as standalone
-* `comment` - same as standalone
-* `walkthrough` - same as standalone
+* __`map`__ - same as standalone
+* __`lat`__, __`lon`__, __`zoom`__ - Self-explanatory.
+* __`node`__, __`way`__, __`relation`__ - Select the specified entity.
+* __`background`__ - same as standalone
+* __`gpx`__ - same as standalone
+* __`offset`__ - same as standalone
+* __`comment`__ - same as standalone
+* __`hashtags`__ - same as standalone
+* __`walkthrough`__ - same as standalone
 
 
 ## CSS selectors

@@ -10,7 +10,10 @@ import { utilRebind } from '../util';
 export function uiField(context, presetField, entity, options) {
     options = _.extend({
         show: true,
-        wrap: true
+        wrap: true,
+        remove: true,
+        revert: true,
+        info: true
     }, options);
 
     var dispatch = d3.dispatch('change'),
@@ -24,7 +27,7 @@ export function uiField(context, presetField, entity, options) {
             dispatch.call('change', field, t, onInput);
         });
 
-    if (field.impl.entity) {
+    if (entity && field.impl.entity) {
         field.impl.entity(entity);
     }
 
@@ -34,6 +37,7 @@ export function uiField(context, presetField, entity, options) {
 
 
     function isModified() {
+        if (!entity) return false;
         var original = context.graph().base().entities[entity.id];
         return _.some(field.keys, function(key) {
             return original ? tags[key] !== original.tags[key] : tags[key];
@@ -51,6 +55,7 @@ export function uiField(context, presetField, entity, options) {
     function revert(d) {
         d3.event.stopPropagation();
         d3.event.preventDefault();
+        if (!entity) return false;
 
         var original = context.graph().base().entities[entity.id],
             t = {};
@@ -96,19 +101,23 @@ export function uiField(context, presetField, entity, options) {
                 .append('div')
                 .attr('class', 'form-label-button-wrap');
 
-            wrap
-                .append('button')
-                .attr('class', 'remove-icon')
-                .attr('tabindex', -1)
-                .call(svgIcon('#operation-delete'));
+            if (options.remove) {
+                wrap
+                    .append('button')
+                    .attr('class', 'remove-icon')
+                    .attr('tabindex', -1)
+                    .call(svgIcon('#operation-delete'));
+            }
 
-            wrap
-                .append('button')
-                .attr('class', 'modified-icon')
-                .attr('tabindex', -1)
-                .call(
-                    (textDirection === 'rtl') ? svgIcon('#icon-redo') : svgIcon('#icon-undo')
-                );
+            if (options.revert) {
+                wrap
+                    .append('button')
+                    .attr('class', 'modified-icon')
+                    .attr('tabindex', -1)
+                    .call(
+                        (textDirection === 'rtl') ? svgIcon('#icon-redo') : svgIcon('#icon-undo')
+                    );
+            }
         }
 
 
@@ -126,7 +135,7 @@ export function uiField(context, presetField, entity, options) {
             .classed('modified', isModified())
             .classed('present', isPresent())
             .each(function(d) {
-                if (options.wrap) {
+                if (options.wrap && options.info) {
                     var referenceKey = d.key;
                     if (d.type === 'multiCombo') {   // lookup key without the trailing ':'
                         referenceKey = referenceKey.replace(/:$/, '');
@@ -141,7 +150,7 @@ export function uiField(context, presetField, entity, options) {
                 d3.select(this)
                     .call(d.impl);
 
-                if (options.wrap) {
+                if (options.wrap && options.info) {
                     d3.select(this)
                         .call(reference.body)
                         .select('.form-label-button-wrap')

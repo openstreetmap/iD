@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 
+import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
 import { JXON } from '../util/jxon';
 
@@ -33,6 +34,8 @@ export function modeSave(context) {
     var mode = {
         id: 'save'
     };
+
+    var keybinding = d3keybinding('select');
 
     var commit = uiCommit(context)
         .on('cancel', cancel)
@@ -360,6 +363,12 @@ export function modeSave(context) {
             context.ui().sidebar.show(commit);
         }
 
+        keybinding
+            .on('⎋', cancel, true);
+
+        d3.select(document)
+            .call(keybinding);
+
         context.container().selectAll('#content')
             .attr('class', 'inactive');
 
@@ -381,6 +390,8 @@ export function modeSave(context) {
 
 
     mode.exit = function() {
+        keybinding.off();
+
         context.container().selectAll('#content')
             .attr('class', 'active');
 

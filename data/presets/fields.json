@@ -437,6 +437,12 @@
             "type": "text",
             "label": "Collection Times"
         },
+        "comment": {
+            "key": "comment",
+            "type": "textarea",
+            "label": "Changeset Comment",
+            "placeholder": "Brief description of your contributions (required)"
+        },
         "communication_multi": {
             "key": "communication:",
             "type": "multiCombo",
@@ -787,6 +793,12 @@
             "key": "handrail",
             "type": "check",
             "label": "Handrail"
+        },
+        "hashtags": {
+            "key": "hashtags",
+            "type": "semiCombo",
+            "label": "Hashtags",
+            "placeholder": "#example"
         },
         "height": {
             "key": "height",
@@ -1624,10 +1636,17 @@
         },
         "source": {
             "key": "source",
-            "type": "text",
+            "type": "semiCombo",
             "icon": "source",
             "universal": true,
-            "label": "Source"
+            "label": "Sources",
+            "options": [
+                "survey",
+                "local knowledge",
+                "gps",
+                "aerial imagery",
+                "streetlevel imagery"
+            ]
         },
         "sport_ice": {
             "key": "sport",

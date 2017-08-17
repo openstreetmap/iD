@@ -37,7 +37,9 @@ export function behaviorHash(context) {
         var center = map.center(),
             zoom = map.zoom(),
             precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2)),
-            q = _.omit(utilStringQs(window.location.hash.substring(1)), ['comment', 'walkthrough']),
+            q = _.omit(utilStringQs(window.location.hash.substring(1)),
+                ['comment', 'hashtags', 'walkthrough']
+            ),
             newParams = {};
 
         delete q.id;
@@ -97,6 +99,10 @@ export function behaviorHash(context) {
             if (q.comment) {
                 context.storage('comment', q.comment);
                 context.storage('commentDate', Date.now());
+            }
+
+            if (q.hashtags) {
+                context.storage('hashtags', q.hashtags);
             }
 
             if (q.walkthrough === 'true') {
