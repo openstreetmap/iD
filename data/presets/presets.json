@@ -3366,6 +3366,7 @@
             "fields": [
                 "name",
                 "operator",
+                "height",
                 "opening_hours"
             ],
             "geometry": [
@@ -3407,6 +3408,7 @@
             "fields": [
                 "name",
                 "operator",
+                "height",
                 "opening_hours"
             ],
             "geometry": [
