@@ -1,8 +1,9 @@
 import _ from 'lodash';
 import { t } from '../util/locale';
-import { behaviorOperation } from '../behavior/index';
-import { geoExtent } from '../geo/index';
-import { modeRotate } from '../modes/index';
+import { behaviorOperation } from '../behavior';
+import { geoExtent } from '../geo';
+import { modeRotate } from '../modes';
+import { utilGetAllNodes } from '../util';
 
 
 export function operationRotate(selectedIDs, context) {
@@ -18,13 +19,8 @@ export function operationRotate(selectedIDs, context) {
 
 
     operation.available = function() {
-        return _.some(selectedIDs, hasArea);
-
-        function hasArea(id) {
-            var entity = context.entity(id);
-            return (entity.type === 'way' && entity.isClosed()) ||
-                (entity.type ==='relation' && entity.isMultipolygon());
-        }
+        var nodes = utilGetAllNodes(selectedIDs, context.graph());
+        return _.uniqBy(nodes, function(n) { return n.loc; }).length >= 2;
     };
 
 

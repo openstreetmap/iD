@@ -1,10 +1,9 @@
 import * as d3 from 'd3';
 import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
-
-import { actionRotate } from '../actions/index';
-import { behaviorEdit } from '../behavior/index';
-
+import { actionRotate } from '../actions';
+import { behaviorEdit } from '../behavior';
+import { geoInterp } from '../geo';
 import {
     modeBrowse,
     modeSelect
@@ -17,7 +16,7 @@ import {
     operationOrthogonalize,
     operationReflectLong,
     operationReflectShort
-} from '../operations/index';
+} from '../operations';
 
 import {
     polygonHull as d3polygonHull,
@@ -71,7 +70,13 @@ export function modeRotate(context, entityIDs) {
             var nodes = utilGetAllNodes(entityIDs, context.graph()),
                 points = nodes.map(function(n) { return projection(n.loc); });
 
-            pivot = d3polygonCentroid(d3polygonHull(points));
+            if (points.length === 1) {  // degenerate case
+                pivot = points[0];
+            } else if (points.length === 2) {
+                pivot = geoInterp(points[0], points[1], 0.5);
+            } else {
+                pivot = d3polygonCentroid(d3polygonHull(points));
+            }
             prevAngle = undefined;
         }
 
