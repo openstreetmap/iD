@@ -1,7 +1,6 @@
 {
     "icon": "park",
     "fields": [
-        "species",
         "leaf_type_singular",
         "leaf_cycle_singular",
         "denotation"

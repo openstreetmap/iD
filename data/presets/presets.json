@@ -3341,7 +3341,6 @@
             "icon": "zoo",
             "fields": [
                 "name",
-                "species",
                 "operator"
             ],
             "geometry": [
@@ -9861,7 +9860,6 @@
         "natural/tree": {
             "icon": "park",
             "fields": [
-                "species",
                 "leaf_type_singular",
                 "leaf_cycle_singular",
                 "denotation"

@@ -1629,13 +1629,6 @@
             "universal": true,
             "label": "Source"
         },
-        "species": {
-            "key": "species",
-            "type": "localized",
-            "label": "Scientific Name",
-            "universal": true,
-            "placeholder": "Scientific name of the species"
-        },
         "sport_ice": {
             "key": "sport",
             "type": "semiCombo",

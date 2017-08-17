@@ -1219,11 +1219,6 @@ en:
       source:
         # source=*
         label: Source
-      species:
-        # species=*
-        label: Scientific Name
-        # species field placeholder
-        placeholder: Scientific name of the species
       sport:
         # sport=*
         label: Sports
