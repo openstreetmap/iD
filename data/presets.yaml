@@ -1219,6 +1219,11 @@ en:
       source:
         # source=*
         label: Source
+      species:
+        # species=*
+        label: Scientific Name
+        # species field placeholder
+        placeholder: Scientific name of the species
       sport:
         # sport=*
         label: Sports
@@ -2101,6 +2106,71 @@ en:
         # 'area:highway=*'
         name: Road Surface
         terms: '<translate with synonyms or related terms for ''Road Surface'', separated by commas>'
+      attraction/amusement_ride:
+        # attraction=amusement_ride
+        name: Amusement Ride
+        # 'terms: theme park,carnival ride'
+        terms: '<translate with synonyms or related terms for ''Amusement Ride'', separated by commas>'
+      attraction/animal:
+        # attraction=animal
+        name: Animal
+        # 'terms: zoo,theme park,animal park,lion,tiger,bear'
+        terms: '<translate with synonyms or related terms for ''Animal'', separated by commas>'
+      attraction/big_wheel:
+        # attraction=big_wheel
+        name: Big Wheel
+        # 'terms: ferris wheel,theme park,amusement ride'
+        terms: '<translate with synonyms or related terms for ''Big Wheel'', separated by commas>'
+      attraction/bumper_car:
+        # attraction=bumper_car
+        name: Bumper Car
+        # 'terms: theme park,dodgem cars,autoscooter'
+        terms: '<translate with synonyms or related terms for ''Bumper Car'', separated by commas>'
+      attraction/bungee_jumping:
+        # attraction=bungee_jumping
+        name: Bungee Jumping
+        # 'terms: theme park,bungy jumping,jumping platform'
+        terms: '<translate with synonyms or related terms for ''Bungee Jumping'', separated by commas>'
+      attraction/carousel:
+        # attraction=carousel
+        name: Carousel
+        # 'terms: theme park,roundabout,merry-go-round,galloper,jumper,horseabout,flying horses'
+        terms: '<translate with synonyms or related terms for ''Carousel'', separated by commas>'
+      attraction/dark_ride:
+        # attraction=dark_ride
+        name: Dark Ride
+        # 'terms: theme park,ghost train'
+        terms: '<translate with synonyms or related terms for ''Dark Ride'', separated by commas>'
+      attraction/drop_tower:
+        # attraction=drop_tower
+        name: Drop Tower
+        # 'terms: theme park,amusement ride,gondola,tower,big drop'
+        terms: '<translate with synonyms or related terms for ''Drop Tower'', separated by commas>'
+      attraction/pirate_ship:
+        # attraction=pirate_ship
+        name: Pirate Ship
+        # 'terms: theme park,carnival ride,amusement ride'
+        terms: '<translate with synonyms or related terms for ''Pirate Ship'', separated by commas>'
+      attraction/river_rafting:
+        # attraction=river_rafting
+        name: River Rafting
+        # 'terms: theme park,aquatic park,water park,rafting simulator,river rafting ride,river rapids ride'
+        terms: '<translate with synonyms or related terms for ''River Rafting'', separated by commas>'
+      attraction/roller_coaster:
+        # attraction=roller_coaster
+        name: Roller Coaster
+        # 'terms: theme park,amusement ride'
+        terms: '<translate with synonyms or related terms for ''Roller Coaster'', separated by commas>'
+      attraction/train:
+        # attraction=train
+        name: Tourist Train
+        # 'terms: theme park,rackless train,road train,Tschu-Tschu train,dotto train,park train'
+        terms: '<translate with synonyms or related terms for ''Tourist Train'', separated by commas>'
+      attraction/water_slide:
+        # attraction=water_slide
+        name: Water Slide
+        # 'terms: theme park,aquatic park,water park,flumes,water chutes,hydroslides'
+        terms: '<translate with synonyms or related terms for ''Water Slide'', separated by commas>'
       barrier:
         # barrier=*
         name: Barrier
@@ -3556,6 +3626,7 @@ en:
       natural/wetland:
         # natural=wetland
         name: Wetland
+        # 'terms: bog,marsh,reedbed,swamp,tidalflat'
         terms: '<translate with synonyms or related terms for ''Wetland'', separated by commas>'
       natural/wood:
         # natural=wood

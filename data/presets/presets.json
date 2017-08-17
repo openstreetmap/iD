@@ -3317,6 +3317,295 @@
             },
             "name": "Road Surface"
         },
+        "attraction/amusement_ride": {
+            "icon": "amusement-park",
+            "fields": [
+                "name",
+                "operator",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "theme park",
+                "carnival ride"
+            ],
+            "tags": {
+                "attraction": "amusement_ride"
+            },
+            "name": "Amusement Ride"
+        },
+        "attraction/animal": {
+            "icon": "zoo",
+            "fields": [
+                "name",
+                "species",
+                "operator"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "zoo",
+                "theme park",
+                "animal park",
+                "lion",
+                "tiger",
+                "bear"
+            ],
+            "tags": {
+                "attraction": "animal"
+            },
+            "name": "Animal"
+        },
+        "attraction/big_wheel": {
+            "icon": "amusement-park",
+            "fields": [
+                "name",
+                "operator",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point"
+            ],
+            "terms": [
+                "ferris wheel",
+                "theme park",
+                "amusement ride"
+            ],
+            "tags": {
+                "attraction": "big_wheel"
+            },
+            "name": "Big Wheel"
+        },
+        "attraction/bumper_car": {
+            "icon": "car",
+            "fields": [
+                "name",
+                "operator",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "theme park",
+                "dodgem cars",
+                "autoscooter"
+            ],
+            "tags": {
+                "attraction": "bumper_car"
+            },
+            "name": "Bumper Car"
+        },
+        "attraction/bungee_jumping": {
+            "icon": "pitch",
+            "fields": [
+                "name",
+                "operator",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "theme park",
+                "bungy jumping",
+                "jumping platform"
+            ],
+            "tags": {
+                "attraction": "bungee_jumping"
+            },
+            "name": "Bungee Jumping"
+        },
+        "attraction/carousel": {
+            "icon": "horse-riding",
+            "fields": [
+                "name",
+                "operator",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "theme park",
+                "roundabout",
+                "merry-go-round",
+                "galloper",
+                "jumper",
+                "horseabout",
+                "flying horses"
+            ],
+            "tags": {
+                "attraction": "carousel"
+            },
+            "name": "Carousel"
+        },
+        "attraction/dark_ride": {
+            "icon": "rail-metro",
+            "fields": [
+                "name",
+                "operator",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "line",
+                "area"
+            ],
+            "terms": [
+                "theme park",
+                "ghost train"
+            ],
+            "tags": {
+                "attraction": "dark_ride"
+            },
+            "name": "Dark Ride"
+        },
+        "attraction/drop_tower": {
+            "icon": "poi-tower",
+            "fields": [
+                "name",
+                "operator",
+                "height",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "theme park",
+                "amusement ride",
+                "gondola",
+                "tower",
+                "big drop"
+            ],
+            "tags": {
+                "attraction": "drop_tower"
+            },
+            "name": "Drop Tower"
+        },
+        "attraction/pirate_ship": {
+            "icon": "amusement-park",
+            "fields": [
+                "name",
+                "operator",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point"
+            ],
+            "terms": [
+                "theme park",
+                "carnival ride",
+                "amusement ride"
+            ],
+            "tags": {
+                "attraction": "pirate_ship"
+            },
+            "name": "Pirate Ship"
+        },
+        "attraction/river_rafting": {
+            "icon": "ferry",
+            "fields": [
+                "name",
+                "operator",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "line"
+            ],
+            "terms": [
+                "theme park",
+                "aquatic park",
+                "water park",
+                "rafting simulator",
+                "river rafting ride",
+                "river rapids ride"
+            ],
+            "tags": {
+                "attraction": "river_rafting"
+            },
+            "name": "River Rafting"
+        },
+        "attraction/roller_coaster": {
+            "icon": "amusement-park",
+            "fields": [
+                "name",
+                "operator",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "theme park",
+                "amusement ride"
+            ],
+            "tags": {
+                "attraction": "roller_coaster"
+            },
+            "name": "Roller Coaster"
+        },
+        "attraction/train": {
+            "icon": "rail",
+            "fields": [
+                "name",
+                "operator",
+                "fee",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "line"
+            ],
+            "terms": [
+                "theme park",
+                "rackless train",
+                "road train",
+                "Tschu-Tschu train",
+                "dotto train",
+                "park train"
+            ],
+            "tags": {
+                "attraction": "train"
+            },
+            "name": "Tourist Train"
+        },
+        "attraction/water_slide": {
+            "icon": "swimming",
+            "fields": [
+                "name",
+                "operator",
+                "opening_hours"
+            ],
+            "geometry": [
+                "line",
+                "area"
+            ],
+            "terms": [
+                "theme park",
+                "aquatic park",
+                "water park",
+                "flumes",
+                "water chutes",
+                "hydroslides"
+            ],
+            "tags": {
+                "attraction": "water_slide"
+            },
+            "name": "Water Slide"
+        },
         "barrier": {
             "icon": "roadblock",
             "geometry": [
@@ -9570,6 +9859,7 @@
         "natural/tree": {
             "icon": "park",
             "fields": [
+                "species",
                 "leaf_type_singular",
                 "leaf_cycle_singular",
                 "denotation"
@@ -9694,7 +9984,13 @@
             "tags": {
                 "natural": "wetland"
             },
-            "terms": [],
+            "terms": [
+                "bog",
+                "marsh",
+                "reedbed",
+                "swamp",
+                "tidalflat"
+            ],
             "name": "Wetland"
         },
         "natural/wood": {

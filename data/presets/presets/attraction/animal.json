@@ -1,0 +1,24 @@
+{
+    "icon": "zoo",
+    "fields": [
+        "name",
+        "species",
+        "operator"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "zoo",
+        "theme park",
+        "animal park",
+        "lion",
+        "tiger",
+        "bear"
+    ],
+    "tags": {
+        "attraction": "animal"
+    },
+    "name": "Animal"
+}

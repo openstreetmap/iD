@@ -1,0 +1,25 @@
+{
+    "icon": "horse-riding",
+    "fields": [
+        "name",
+        "operator",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "theme park",
+        "roundabout",
+        "merry-go-round",
+        "galloper",
+        "jumper",
+        "horseabout",
+        "flying horses"
+    ],
+    "tags": {
+        "attraction": "carousel"
+    },
+    "name": "Carousel"
+}

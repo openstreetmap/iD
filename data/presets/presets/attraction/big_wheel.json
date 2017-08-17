@@ -1,0 +1,20 @@
+{
+    "icon": "amusement-park",
+    "fields": [
+        "name",
+        "operator",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "ferris wheel",
+        "theme park",
+        "amusement ride"
+    ],
+    "tags": {
+        "attraction": "big_wheel"
+    },
+    "name": "Big Wheel"
+}

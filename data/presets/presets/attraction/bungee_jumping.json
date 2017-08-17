@@ -1,0 +1,21 @@
+{
+    "icon": "pitch",
+    "fields": [
+        "name",
+        "operator",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "theme park",
+        "bungy jumping",
+        "jumping platform"
+    ],
+    "tags": {
+        "attraction": "bungee_jumping"
+    },
+    "name": "Bungee Jumping"
+}

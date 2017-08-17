@@ -1,0 +1,7 @@
+{
+    "key": "species",
+    "type": "localized",
+    "label": "Scientific Name",
+    "universal": true,
+    "placeholder": "Scientific name of the species"
+}
