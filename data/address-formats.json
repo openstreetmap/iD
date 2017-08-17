@@ -2,7 +2,7 @@
     "dataAddressFormats": [
         {
             "format": [
-                ["housenumber", "street"],
+                ["housenumber", "street", "unit"],
                 ["city", "postcode"]
             ]
         },
@@ -10,7 +10,7 @@
             "countryCodes": ["gb"],
             "format": [
                 ["housename"],
-                ["housenumber", "street"],
+                ["housenumber", "street", "unit"],
                 ["city", "postcode"]
             ]
         },
@@ -18,7 +18,7 @@
             "countryCodes": ["ie"],
             "format": [
                 ["housename"],
-                ["housenumber", "street"],
+                ["housenumber", "street", "unit"],
                 ["city"],
                 ["postcode"]
             ]
@@ -31,21 +31,21 @@
                 "pt", "se", "si", "sk", "sm", "va"
             ],
             "format": [
-                ["street", "housenumber"],
+                ["unit","street", "housenumber"],
                 ["postcode", "city"]
             ]
         },
         {
             "countryCodes": ["fr", "lu", "mo"],
             "format": [
-                ["housenumber", "street"],
+                ["unit","housenumber", "street"],
                 ["postcode", "city"]
             ]
         },
         {
             "countryCodes": ["br"],
             "format": [
-                ["street"],
+                ["street","unit"],
                 ["housenumber", "suburb"],
                 ["city", "postcode"]
             ]
@@ -53,7 +53,7 @@
         {
             "countryCodes": ["vn"],
             "format": [
-                ["housenumber", "street"],
+                ["housenumber", "street","unit"],
                 ["subdistrict"],
                 ["district"],
                 ["city"],
@@ -77,7 +77,7 @@
         {
             "countryCodes": ["ca"],
             "format": [
-                ["housenumber", "street"],
+                ["housenumber", "street","unit"],
                 ["city", "province", "postcode"]
             ]
         },
@@ -86,7 +86,7 @@
             "format": [
                 ["postcode", "city", "district"],
                 ["place", "street"],
-                ["housenumber", "floor"]
+                ["housenumber", "floor","unit"]
             ]
         },
         {
@@ -114,7 +114,7 @@
             "countryCodes": ["tr"],
             "format": [
                 ["neighbourhood"],
-                ["street", "housenumber"],
+                ["street", "housenumber", "unit"],
                 ["postcode", "district", "city"]
             ]
         },
@@ -122,14 +122,14 @@
             "countryCodes": ["ua"],
             "format": [
                 ["housenumber", "postcode"],
-                ["street"]
+                ["street", "unit"]
             ]
         },
         {
             "countryCodes": ["cn"],
             "format": [
                 ["postcode", "province"],
-                ["city"],
+                ["city", "unit"],
                 ["district"],
                 ["street", "housenumber"]
             ]
