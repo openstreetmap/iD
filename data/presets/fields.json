@@ -1650,6 +1650,17 @@
                 "streetlevel imagery"
             ]
         },
+        "speciality_clinic": {
+            "key": "healthcare:speciality",
+            "type": "semiCombo",
+            "label": "Specialties",
+            "strings": {
+                "options": {
+                    "abortion": "Abortion",
+                    "fertility": "Fertility"
+                }
+            }
+        },
         "speciality": {
             "key": "healthcare:speciality",
             "type": "semiCombo",

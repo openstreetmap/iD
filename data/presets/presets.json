@@ -1155,6 +1155,7 @@
             "icon": "hospital",
             "fields": [
                 "name",
+                "speciality_clinic",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -1165,10 +1166,24 @@
             ],
             "terms": [
                 "medical",
-                "urgentcare"
+                "urgentcare",
+                "abortion",
+                "fertility"
             ],
             "tags": {
                 "amenity": "clinic"
+            },
+            "addTags": {
+                "amenity": "clinic",
+                "healthcare": "clinic"
+            },
+            "removeTags": {
+                "amenity": "clinic",
+                "healthcare": "clinic"
+            },
+            "reference": {
+                "key": "amenity",
+                "value": "clinic"
             },
             "name": "Clinic"
         },
@@ -6001,6 +6016,7 @@
                 "name",
                 "operator",
                 "address",
+                "building_area",
                 "blood_components",
                 "opening_hours",
                 "ref"

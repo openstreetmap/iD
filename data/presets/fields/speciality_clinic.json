@@ -1,0 +1,11 @@
+{
+    "key": "healthcare:speciality",
+    "type": "semiCombo",
+    "label": "Specialties",
+    "strings": {
+        "options": {
+            "abortion": "Abortion",
+            "fertility": "Fertility"
+        }
+    }
+}

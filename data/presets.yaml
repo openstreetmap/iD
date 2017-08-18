@@ -1233,6 +1233,14 @@ en:
       speciality:
         # 'healthcare:speciality=*'
         label: Specialties
+      speciality_clinic:
+        # 'healthcare:speciality=*'
+        label: Specialties
+        options:
+          # 'healthcare:speciality=abortion'
+          abortion: Abortion
+          # 'healthcare:speciality=fertility'
+          fertility: Fertility
       sport:
         # sport=*
         label: Sports
@@ -1670,7 +1678,7 @@ en:
       amenity/clinic:
         # amenity=clinic
         name: Clinic
-        # 'terms: medical,urgentcare'
+        # 'terms: medical,urgentcare,abortion,fertility'
         terms: '<translate with synonyms or related terms for ''Clinic'', separated by commas>'
       amenity/clock:
         # amenity=clock

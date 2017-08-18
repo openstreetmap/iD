@@ -2104,6 +2104,13 @@
                 "source": {
                     "label": "Sources"
                 },
+                "speciality_clinic": {
+                    "label": "Specialties",
+                    "options": {
+                        "abortion": "Abortion",
+                        "fertility": "Fertility"
+                    }
+                },
                 "speciality": {
                     "label": "Specialties"
                 },
@@ -2530,7 +2537,7 @@
                 },
                 "amenity/clinic": {
                     "name": "Clinic",
-                    "terms": "medical,urgentcare"
+                    "terms": "medical,urgentcare,abortion,fertility"
                 },
                 "amenity/clock": {
                     "name": "Clock",

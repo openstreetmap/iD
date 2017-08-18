@@ -4,6 +4,7 @@
         "name",
         "operator",
         "address",
+        "building_area",
         "blood_components",
         "opening_hours",
         "ref"
