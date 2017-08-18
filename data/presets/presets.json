@@ -6091,6 +6091,7 @@
                 "name",
                 "operator",
                 "speciality",
+                "building_area",
                 "address",
                 "opening_hours",
                 "ref"
