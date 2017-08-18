@@ -607,6 +607,58 @@
             "key": "area:highway"
         },
         {
+            "key": "attraction",
+            "value": "amusement_ride"
+        },
+        {
+            "key": "attraction",
+            "value": "animal"
+        },
+        {
+            "key": "attraction",
+            "value": "big_wheel"
+        },
+        {
+            "key": "attraction",
+            "value": "bumper_car"
+        },
+        {
+            "key": "attraction",
+            "value": "bungee_jumping"
+        },
+        {
+            "key": "attraction",
+            "value": "carousel"
+        },
+        {
+            "key": "attraction",
+            "value": "dark_ride"
+        },
+        {
+            "key": "attraction",
+            "value": "drop_tower"
+        },
+        {
+            "key": "attraction",
+            "value": "pirate_ship"
+        },
+        {
+            "key": "attraction",
+            "value": "river_rafting"
+        },
+        {
+            "key": "attraction",
+            "value": "roller_coaster"
+        },
+        {
+            "key": "attraction",
+            "value": "train"
+        },
+        {
+            "key": "attraction",
+            "value": "water_slide"
+        },
+        {
             "key": "barrier"
         },
         {
