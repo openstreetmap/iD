@@ -1301,6 +1301,18 @@
             "tags": {
                 "amenity": "dentist"
             },
+            "addTags": {
+                "amenity": "dentist",
+                "healthcare": "dentist"
+            },
+            "removeTags": {
+                "amenity": "dentist",
+                "healthcare": "dentist"
+            },
+            "reference": {
+                "key": "amenity",
+                "value": "dentist"
+            },
             "name": "Dentist"
         },
         "amenity/doctors": {
@@ -1595,6 +1607,18 @@
             ],
             "tags": {
                 "amenity": "hospital"
+            },
+            "addTags": {
+                "amenity": "hospital",
+                "healthcare": "hospital"
+            },
+            "removeTags": {
+                "amenity": "hospital",
+                "healthcare": "hospital"
+            },
+            "reference": {
+                "key": "amenity",
+                "value": "hospital"
             },
             "name": "Hospital Grounds"
         },
@@ -5998,6 +6022,29 @@
                 "healthcare": "blood_donation"
             },
             "name": "Blood Donor Center"
+        },
+        "healthcare/hospice": {
+            "icon": "hospital",
+            "fields": [
+                "name",
+                "operator",
+                "building_area",
+                "address",
+                "opening_hours",
+                "ref"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "terminal",
+                "illness"
+            ],
+            "tags": {
+                "healthcare": "hospice"
+            },
+            "name": "Hospice"
         },
         "healthcare/specialist": {
             "icon": "hospital",

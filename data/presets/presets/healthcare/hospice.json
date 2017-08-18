@@ -1,0 +1,23 @@
+{
+    "icon": "hospital",
+    "fields": [
+        "name",
+        "operator",
+        "building_area",
+        "address",
+        "opening_hours",
+        "ref"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "terminal",
+        "illness"
+    ],
+    "tags": {
+        "healthcare": "hospice"
+    },
+    "name": "Hospice"
+}

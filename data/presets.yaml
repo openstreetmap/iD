@@ -2732,6 +2732,11 @@ en:
         name: Blood Donor Center
         # 'terms: blood bank,blood donation,blood transfusion,apheresis,plasmapheresis,plateletpheresis,stem cell donation'
         terms: '<translate with synonyms or related terms for ''Blood Donor Center'', separated by commas>'
+      healthcare/hospice:
+        # healthcare=hospice
+        name: Hospice
+        # 'terms: terminal,illness'
+        terms: '<translate with synonyms or related terms for ''Hospice'', separated by commas>'
       healthcare/specialist:
         # healthcare=yes
         name: Healthcare Specialist

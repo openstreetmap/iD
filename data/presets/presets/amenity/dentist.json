@@ -17,5 +17,17 @@
     "tags": {
         "amenity": "dentist"
     },
+    "addTags": {
+        "amenity": "dentist",
+        "healthcare": "dentist"
+    },
+    "removeTags": {
+        "amenity": "dentist",
+        "healthcare": "dentist"
+    },
+    "reference": {
+        "key": "amenity",
+        "value": "dentist"
+    },
     "name": "Dentist"
 }
