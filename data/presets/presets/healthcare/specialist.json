@@ -1,0 +1,22 @@
+{
+    "icon": "hospital",
+    "fields": [
+        "name",
+        "operator",
+        "speciality",
+        "address",
+        "opening_hours",
+        "ref"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "special"
+    ],
+    "tags": {
+        "healthcare": "yes"
+    },
+    "name": "Healthcare Specialist"
+}

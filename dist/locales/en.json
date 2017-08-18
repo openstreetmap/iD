@@ -2104,6 +2104,9 @@
                 "source": {
                     "label": "Sources"
                 },
+                "speciality": {
+                    "label": "Speciality"
+                },
                 "sport_ice": {
                     "label": "Sports"
                 },
@@ -3476,6 +3479,10 @@
                 "healthcare/blood_donation": {
                     "name": "Blood Donor Center",
                     "terms": "blood bank,blood donation,blood transfusion,apheresis,plasmapheresis,plateletpheresis,stem cell donation"
+                },
+                "healthcare/specialist": {
+                    "name": "Healthcare Specialist",
+                    "terms": "special"
                 },
                 "highway/bridleway": {
                     "name": "Bridle Path",

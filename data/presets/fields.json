@@ -1650,6 +1650,11 @@
                 "streetlevel imagery"
             ]
         },
+        "speciality": {
+            "key": "healthcare:speciality",
+            "type": "semiCombo",
+            "label": "Speciality"
+        },
         "sport_ice": {
             "key": "sport",
             "type": "semiCombo",

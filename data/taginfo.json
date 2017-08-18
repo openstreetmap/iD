@@ -1186,6 +1186,10 @@
             "value": "blood_donation"
         },
         {
+            "key": "healthcare",
+            "value": "yes"
+        },
+        {
             "key": "highway",
             "value": "bridleway"
         },
