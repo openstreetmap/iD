@@ -61,7 +61,7 @@
             ]
         },
         {
-            "countryCodes": ["au"],
+            "countryCodes": ["au","ca"],
             "format": [
                 ["housenumber", "street", "unit"],
                 ["city", "province", "postcode"]
@@ -72,13 +72,6 @@
             "format": [
                 ["housenumber", "street", "unit"],
                 ["city", "state", "postcode"]
-            ]
-        },
-        {
-            "countryCodes": ["ca"],
-            "format": [
-                ["housenumber", "street","unit"],
-                ["city", "province", "postcode"]
             ]
         },
         {
