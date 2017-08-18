@@ -1161,7 +1161,8 @@
                         "subdistrict": "Subdistrict",
                         "subdistrict!vn": "Ward/Commune/Townlet",
                         "suburb": "Suburb",
-                        "suburb!jp": "Ward"
+                        "suburb!jp": "Ward",
+                        "unit": "Unit"
                     }
                 },
                 "admin_level": {
@@ -4218,7 +4219,7 @@
                 },
                 "natural/wetland": {
                     "name": "Wetland",
-                    "terms": ""
+                    "terms": "bog,marsh,reedbed,swamp,tidalflat"
                 },
                 "natural/wood": {
                     "name": "Wood",
