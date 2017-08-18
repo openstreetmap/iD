@@ -1232,7 +1232,7 @@ en:
         label: Sources
       speciality:
         # 'healthcare:speciality=*'
-        label: Speciality
+        label: Specialties
       sport:
         # sport=*
         label: Sports
