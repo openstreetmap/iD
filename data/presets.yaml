@@ -2737,6 +2737,11 @@ en:
         name: Hospice
         # 'terms: terminal,illness'
         terms: '<translate with synonyms or related terms for ''Hospice'', separated by commas>'
+      healthcare/midwife:
+        # healthcare=midwife
+        name: Midwife
+        # 'terms: pregnancy,childbirth'
+        terms: '<translate with synonyms or related terms for ''Midwife'', separated by commas>'
       healthcare/specialist:
         # healthcare=yes
         name: Healthcare Specialist
