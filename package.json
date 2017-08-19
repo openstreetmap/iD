@@ -21,7 +21,6 @@
     "dist:svg:id": "node svg/spriteify.js --svg svg/iD-sprite.src.svg --json svg/iD-sprite.json > dist/img/iD-sprite.svg",
     "imagery": "node data/update_imagery",
     "lint": "eslint *.js js/id test/spec modules",
-    "prepublish": "npm run all",
     "start": "node development_server.js develop",
     "test": "npm-run-all -s lint build test:**",
     "test:phantom": "phantomjs --web-security=no node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index.html spec",
