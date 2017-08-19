@@ -122,8 +122,7 @@
             "countryCodes": ["cn"],
             "format": [
                 ["postcode", "province"],
-                ["city", "unit"],
-                ["district"],
+                ["city", "district"],
                 ["street", "housenumber"]
             ]
         }
