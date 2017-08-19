@@ -49,7 +49,8 @@ This is only necessary the first time so that the build process can create symbo
 To run the current development version of iD on your own computer:
 
 1. Create a local `git clone` of the project, then `cd` into the project folder
-2. Run `npm install`  (this will run the `prepublish` script that builds everything)
+2. Run `npm install`
+3. Run `npm run all`
 3. Run `npm start`
 4. Open `http://localhost:8080/` in a web browser
 
