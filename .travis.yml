@@ -4,5 +4,7 @@ node_js:
   - "6"
   - "8"
 sudo: required
+before_script:
+  - npm run all
 after_success:
   - ./scripts/txpush.sh
