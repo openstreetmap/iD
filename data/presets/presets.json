@@ -1316,7 +1316,8 @@
                 "area"
             ],
             "terms": [
-                "medic*"
+                "medic*",
+                "physician"
             ],
             "tags": {
                 "amenity": "doctors"
@@ -10073,6 +10074,25 @@
             "terms": [],
             "name": "Office"
         },
+        "office/physician": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "office": "physician"
+            },
+            "searchable": false,
+            "name": "Physician"
+        },
         "office/travel_agent": {
             "icon": "suitcase",
             "fields": [
@@ -10454,25 +10474,6 @@
             },
             "terms": [],
             "name": "NGO Office"
-        },
-        "office/physician": {
-            "icon": "commercial",
-            "fields": [
-                "name",
-                "address",
-                "building_area",
-                "opening_hours"
-            ],
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "tags": {
-                "office": "physician"
-            },
-            "terms": [],
-            "name": "Physician"
         },
         "office/political_party": {
             "icon": "commercial",

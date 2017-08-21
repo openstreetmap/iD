@@ -1707,7 +1707,7 @@ en:
       amenity/doctors:
         # amenity=doctors
         name: Doctor
-        # 'terms: medic*'
+        # 'terms: medic*,physician'
         terms: '<translate with synonyms or related terms for ''Doctor'', separated by commas>'
       amenity/dojo:
         # amenity=dojo
@@ -3728,7 +3728,6 @@ en:
       office/physician:
         # office=physician
         name: Physician
-        terms: '<translate with synonyms or related terms for ''Physician'', separated by commas>'
       office/political_party:
         # office=political_party
         name: Political Party
