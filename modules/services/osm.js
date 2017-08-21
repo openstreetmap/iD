@@ -19,6 +19,7 @@ var dispatch = d3.dispatch('authLoading', 'authDone', 'change', 'loading', 'load
     blacklists = ['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*'],
     inflight = {},
     loadedTiles = {},
+    entityCache = {},
     tileZoom = 16,
     oauth = osmAuth({
         url: urlroot,
@@ -158,7 +159,13 @@ function parse(xml) {
         var child = children[i],
             parser = parsers[child.nodeName];
         if (parser) {
+            var uid = child.nodeName + child.attributes.id.value;
+            if (entityCache[uid]) {
+                console.log(uid, 'is cached');
+                continue;
+            }
             entities.push(parser(child));
+            entityCache[uid] = true;
         }
     }
 
