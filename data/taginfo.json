@@ -481,6 +481,10 @@
         },
         {
             "key": "amenity",
+            "value": "shower"
+        },
+        {
+            "key": "amenity",
             "value": "social_facility"
         },
         {
