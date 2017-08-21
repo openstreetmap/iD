@@ -1958,6 +1958,11 @@ en:
         name: Shelter
         # 'terms: lean-to,gazebo,picnic'
         terms: '<translate with synonyms or related terms for ''Shelter'', separated by commas>'
+      amenity/shower:
+        # amenity=shower
+        name: Shower
+        # 'terms: gelato'
+        terms: '<translate with synonyms or related terms for ''Shower'', separated by commas>'
       amenity/social_facility:
         # amenity=social_facility
         name: Social Facility

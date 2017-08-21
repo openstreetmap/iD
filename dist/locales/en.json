@@ -2765,6 +2765,10 @@
                     "name": "Shelter",
                     "terms": "lean-to,gazebo,picnic"
                 },
+                "amenity/shower": {
+                    "name": "Shower",
+                    "terms": "gelato"
+                },
                 "amenity/social_facility": {
                     "name": "Social Facility",
                     "terms": ""
