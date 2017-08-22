@@ -1961,7 +1961,7 @@ en:
       amenity/shower:
         # amenity=shower
         name: Shower
-        # 'terms: gelato'
+        # 'terms: rain closet'
         terms: '<translate with synonyms or related terms for ''Shower'', separated by commas>'
       amenity/social_facility:
         # amenity=social_facility

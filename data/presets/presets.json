@@ -2581,7 +2581,7 @@
                 "area"
             ],
             "terms": [
-                "gelato"
+                "rain closet"
             ],
             "tags": {
                 "amenity": "shower"
@@ -6230,7 +6230,6 @@
             "fields": [
                 "name",
                 "oneway",
-                "maxspeed",
                 "lanes",
                 "surface",
                 "structure",

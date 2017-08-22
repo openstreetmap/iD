@@ -2559,7 +2559,7 @@
                 },
                 "amenity/doctors": {
                     "name": "Doctor",
-                    "terms": "medic*"
+                    "terms": "medic*,physician"
                 },
                 "amenity/dojo": {
                     "name": "Dojo / Martial Arts Academy",
@@ -2767,7 +2767,7 @@
                 },
                 "amenity/shower": {
                     "name": "Shower",
-                    "terms": "gelato"
+                    "terms": "rain closet"
                 },
                 "amenity/social_facility": {
                     "name": "Social Facility",
@@ -4293,6 +4293,10 @@
                     "name": "Office",
                     "terms": ""
                 },
+                "office/physician": {
+                    "name": "Physician",
+                    "terms": ""
+                },
                 "office/travel_agent": {
                     "name": "Travel Agency",
                     "terms": ""
@@ -4363,10 +4367,6 @@
                 },
                 "office/ngo": {
                     "name": "NGO Office",
-                    "terms": ""
-                },
-                "office/physician": {
-                    "name": "Physician",
                     "terms": ""
                 },
                 "office/political_party": {
