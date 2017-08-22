@@ -11,7 +11,7 @@ import {
     osmWay
 } from '../osm';
 
-import { utilRebind } from '../util';
+import { utilRebind, utilIdleWorker } from '../util';
 
 
 var dispatch = d3.dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded'),
@@ -101,10 +101,10 @@ function getVisible(attrs) {
 
 
 var parsers = {
-    node: function nodeData(obj) {
+    node: function nodeData(obj, uid) {
         var attrs = obj.attributes;
         return new osmNode({
-            id: osmEntity.id.fromOSM('node', attrs.id.value),
+            id:uid,
             visible: getVisible(attrs),
             version: attrs.version.value,
             changeset: attrs.changeset && attrs.changeset.value,
@@ -116,10 +116,10 @@ var parsers = {
         });
     },
 
-    way: function wayData(obj) {
+    way: function wayData(obj, uid) {
         var attrs = obj.attributes;
         return new osmWay({
-            id: osmEntity.id.fromOSM('way', attrs.id.value),
+            id: uid,
             visible: getVisible(attrs),
             version: attrs.version.value,
             changeset: attrs.changeset && attrs.changeset.value,
@@ -131,10 +131,10 @@ var parsers = {
         });
     },
 
-    relation: function relationData(obj) {
+    relation: function relationData(obj, uid) {
         var attrs = obj.attributes;
         return new osmRelation({
-            id: osmEntity.id.fromOSM('relation', attrs.id.value),
+            id: uid,
             visible: getVisible(attrs),
             version: attrs.version.value,
             changeset: attrs.changeset && attrs.changeset.value,
@@ -148,28 +148,23 @@ var parsers = {
 };
 
 
-function parse(xml) {
+function parse(xml, callback) {
     if (!xml || !xml.childNodes) return;
 
     var root = xml.childNodes[0],
-        children = root.childNodes,
-        entities = [];
+        children = root.childNodes;
 
-    for (var i = 0, l = children.length; i < l; i++) {
-        var child = children[i],
-            parser = parsers[child.nodeName];
+    function parseChild(child) {
+        var parser = parsers[child.nodeName];
         if (parser) {
-            var uid = child.nodeName + child.attributes.id.value;
+            var uid = osmEntity.id.fromOSM(child.nodeName, child.attributes.id.value);
             if (entityCache[uid]) {
-                console.log(uid, 'is cached');
-                continue;
+                return null;
             }
-            entities.push(parser(child));
-            entityCache[uid] = true;
+            return parser(child, uid);
         }
     }
-
-    return entities;
+    utilIdleWorker(children, parseChild, callback);
 }
 
 
@@ -244,7 +239,13 @@ export default {
                 }
 
                 if (callback) {
-                    callback(err, parse(xml));
+                    if (err) return callback(err, null);
+                    parse(xml, function (entities) {
+                        for (var i in entities) {
+                            entityCache[entities[i].id] = true;
+                        }
+                        callback(null, entities);
+                    });
                 }
             }
         }
