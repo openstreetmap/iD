@@ -1992,6 +1992,10 @@
         },
         {
             "key": "office",
+            "value": "physician"
+        },
+        {
+            "key": "office",
             "value": "travel_agent"
         },
         {
@@ -2061,10 +2065,6 @@
         {
             "key": "office",
             "value": "ngo"
-        },
-        {
-            "key": "office",
-            "value": "physician"
         },
         {
             "key": "office",

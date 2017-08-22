@@ -11,7 +11,8 @@
         "area"
     ],
     "terms": [
-        "medic*"
+        "medic*",
+        "physician"
     ],
     "tags": {
         "amenity": "doctors"
