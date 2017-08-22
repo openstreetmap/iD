@@ -32,6 +32,7 @@ import { utilGetDimensions } from '../util/dimensions';
 
 
 
+
 export function rendererMap(context) {
 
     var dimensions = [1, 1],
@@ -57,6 +58,20 @@ export function rendererMap(context) {
         mouse,
         mousemove;
 
+    // var debouncedTransformStart = () => requestAnimationFrame(() => transformStart = projection.transform());
+    // var setProjectionTransformStart = () => debSetTransformStart(projection.transform());
+
+    // var debSetTransformStart = _.debounce((val) => transformStart = val, 50);
+
+    // const debouncedTransform
+    // var projectIdleCb;
+    var savedToDrawVertices;
+    var saveToDrawLines;
+    var saveToDrawArea;
+    var saveToDrawMidpoints;
+    var saveToDrawLabels;
+    var saveToDrawPoints;
+
     var zoom = d3.zoom()
             .scaleExtent([ztok(2), ztok(24)])
             .interpolate(d3.interpolate)
@@ -64,8 +79,28 @@ export function rendererMap(context) {
             .on('zoom', zoomPan);
 
     var _selection = d3.select(null);
+    var isRenderScheduled = false;
+    var pendingRedrawCall;
+    function initiateRedraw() {
+        // Reset the boolean so future redraws can be set.
+        isRenderScheduled = false;
+        redraw.apply(this, arguments);
+    }
+    
+    function scheduleRedraw() {
+        // Only schedule the redraw if one has not already been set.
+        if (isRenderScheduled) return;
+    
+        isRenderScheduled = true;
+    
+        pendingRedrawCall = requestIdleCallback(() => initiateRedraw.apply(this, arguments), { timeout: 1400 });
+    }
 
-
+    function cancelPendingRedraw() {
+        isRenderScheduled = false;
+        window.cancelIdleCallback(pendingRedrawCall);
+    }
+        
     function map(selection) {
 
         _selection = selection;
@@ -266,6 +301,67 @@ export function rendererMap(context) {
             .call(drawLabels, graph, data, filter, dimensions, !difference && !extent)
             .call(drawPoints, graph, data, filter);
 
+        // var toDrawVertices = (selection) => {
+        //     // window.cancelIdleCallback(savedToDrawVertices); 
+        //     savedToDrawVertices = requestIdleCallback(() => {
+        //         drawVertices(selection, graph, data, filter, map.extent(), map.zoom());
+        //         setProjectionTransformStart();
+        //         toDrawLines(selection);
+        //     }, {timeout: 150});
+        // };
+
+        // var toDrawLines = (selection) => {
+        //     // window.cancelIdleCallback(saveToDrawLines); 
+        //     saveToDrawLines = requestIdleCallback(() => {
+        //         drawLines(selection, graph, data, filter);
+        //         // setProjectionTransformStart();
+        //         toDrawAreas(selection);
+        //     }, {timeout: 150});
+        // };
+
+        // var toDrawAreas = (selection) => {
+        //     // window.cancelIdleCallback(saveToDrawArea); 
+        //     saveToDrawArea = requestIdleCallback(() => {
+        //         drawAreas(selection, graph, data, filter);
+        //         // setProjectionTransformStart();
+        //         toDrawMidpoints(selection);
+        //     }, {timeout: 150});
+        // };
+
+        // var toDrawMidpoints = (selection) => {
+        //     // window.cancelIdleCallback(saveToDrawMidpoints); 
+        //     saveToDrawMidpoints = requestIdleCallback(() => {
+        //         drawMidpoints(selection,graph, data, filter, map.trimmedExtent());
+        //         // setProjectionTransformStart();
+        //         toDrawLabels(selection);
+        //     }, {timeout: 150});
+        // };
+
+        // var toDrawLabels = (selection) => {
+        //     // window.cancelIdleCallback(saveToDrawLabels);
+        //     saveToDrawLabels = requestIdleCallback(() => {
+        //         drawLabels(selection, graph, data, filter, dimensions, !difference && !extent);
+        //         // setProjectionTransformStart();
+        //         toDrawPoints(selection);
+        //     }, {timeout: 150});
+        // };
+
+        // var toDrawPoints =  (selection) => {
+        //     // window.cancelIdleCallback(saveToDrawPoints);
+        //     saveToDrawPoints = requestIdleCallback(() => {
+        //         drawPoints(selection, graph, data, filter);
+        //         setProjectionTransformStart();
+        //     }, {timeout: 150});
+        // };
+    
+        // surface.selectAll('.data-layer-osm')
+        //     .call(toDrawVertices)
+            // .call(toDrawLines)
+            // .call(toDrawAreas)
+            // .call(toDrawMidpoints)
+            // .call(toDrawLabels)
+            // .call(toDrawPoints);
+
         dispatch.call('drawn', this, {full: true});
     }
 
@@ -403,11 +499,11 @@ export function rendererMap(context) {
     }
 
 
-    var queueRedraw = _.throttle(redraw, 750);
+    var queueRedraw = scheduleRedraw;
 
 
     var immediateRedraw = function(difference, extent) {
-        if (!difference && !extent) queueRedraw.cancel();
+        if (!difference && !extent) cancelPendingRedraw();
         redraw(difference, extent);
     };
 
