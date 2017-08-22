@@ -1221,9 +1221,15 @@ button.save.has-count .count::before {
     display: inline-block;
 }
 
-.form-field > input,
-.form-field > textarea,
-.form-field .preset-input-wrap {
+.form-field-input-wrap {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.form-field-input-wrap > input,
+.form-field-input-wrap > textarea,
+.form-field-input-wrap > .preset-input-wrap {
+    flex: 1 1 auto;
     border: 1px solid #ccc;
     min-height: 30px;
     border-top: 0;
@@ -1231,7 +1237,7 @@ button.save.has-count .count::before {
     overflow: hidden;
 }
 
-.form-field textarea {
+.form-field-input-wrap textarea {
     height: 65px;
 }
 
@@ -1653,7 +1659,7 @@ input[type=number] {
 #preset-input-maxspeed {
     border-right: none;
     border-radius: 0 0 0 4px;
-    width: 80%;
+    width: 50%;
 }
 [dir='rtl'] #preset-input-maxspeed {
     border-right: 1px solid #ccc;
@@ -1661,12 +1667,9 @@ input[type=number] {
 }
 
 .form-field .maxspeed-unit {
-    border-radius: 0 0 4px 0;
-    width: 20%;
-}
-[dir='rtl'] .form-field .maxspeed-unit {
-    border-right: 0;
-    border-radius: 0 0 0 4px;
+    flex: 1 1 auto;
+    border-radius: 0;
+    width: 25%;
 }
 
 /* Wikipedia field */
@@ -1690,14 +1693,14 @@ input[type=number] {
 }
 
 /* Localized field */
-.form-field .localized-main {
+/*.form-field .localized-main {
     padding-right: 12%;
 }
 [dir='rtl'] .form-field .localized-main {
     padding-left: 12%;
     padding-right: 10px;
 }
-
+*/
 .form-field .button-input-action {
     position: relative;
     right: 1px;
@@ -1717,10 +1720,18 @@ input[type=number] {
     border-radius: 0 0 0 4px;
 }
 
+.form-field .button-input-action.more-icon {
+    margin: 0;
+    right: 0px;
+    border-right-width: 1px;
+    border-left-width: 0px;
+}
+
+/*
 .form-field .localized-wrap {
     padding: 0 10px;
 }
-
+*/
 .form-field .localized-wrap .entry {
     position: relative;
     overflow: hidden;

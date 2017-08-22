@@ -115,6 +115,18 @@
             "description": "If true, replace spaces with underscores in the tag value (combo type fields)",
             "type": "boolean",
             "default": true
+        },
+        "subfields": {
+            "description": "Subfields that can be added to this field.",
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+                "type": "string",
+                "enum": [
+                    "conditional",
+                    "localized"
+                ]
+            }
         }
     },
     "additionalProperties": false

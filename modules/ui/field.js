@@ -80,29 +80,38 @@ export function uiField(context, presetField, entity, options) {
     }
 
 
+    function showMore() {
+        d3.event.stopPropagation();
+        d3.event.preventDefault();
+    }
+
+
     field.render = function(selection) {
+        var subfields = field.subfields;
+
+        // Field container
         var container = selection.selectAll('.form-field')
             .data([field]);
 
-        // Enter
-        var enter = container.enter()
+        var containerEnter = container.enter()
             .append('div')
             .attr('class', function(d) { return 'form-field form-field-' + d.id; })
             .classed('nowrap', !options.wrap);
 
+        // Label and buttons
         if (options.wrap) {
-            var label = enter
+            var labelEnter = containerEnter
                 .append('label')
                 .attr('class', 'form-label')
                 .attr('for', function(d) { return 'preset-input-' + d.id; })
                 .text(function(d) { return d.label(); });
 
-            var wrap = label
+            var buttonEnter = labelEnter
                 .append('div')
                 .attr('class', 'form-label-button-wrap');
 
             if (options.remove) {
-                wrap
+                buttonEnter
                     .append('button')
                     .attr('class', 'remove-icon')
                     .attr('tabindex', -1)
@@ -110,20 +119,23 @@ export function uiField(context, presetField, entity, options) {
             }
 
             if (options.revert) {
-                wrap
+                buttonEnter
                     .append('button')
                     .attr('class', 'modified-icon')
                     .attr('tabindex', -1)
-                    .call(
-                        (textDirection === 'rtl') ? svgIcon('#icon-redo') : svgIcon('#icon-undo')
-                    );
+                    .call(svgIcon(textDirection === 'rtl' ? '#icon-redo' : '#icon-undo'));
             }
         }
+
+        // Field Input
+        containerEnter
+            .append('div')
+            .attr('class', 'form-field-input-wrap');
 
 
         // Update
         container = container
-            .merge(enter);
+            .merge(containerEnter);
 
         container.selectAll('.form-label-button-wrap .remove-icon')
             .on('click', remove);
@@ -133,32 +145,56 @@ export function uiField(context, presetField, entity, options) {
 
         container
             .classed('modified', isModified())
-            .classed('present', isPresent())
-            .each(function(d) {
-                if (options.wrap && options.info) {
-                    var referenceKey = d.key;
-                    if (d.type === 'multiCombo') {   // lookup key without the trailing ':'
-                        referenceKey = referenceKey.replace(/:$/, '');
-                    }
-                    var reference = uiTagReference(d.reference || { key: referenceKey }, context);
+            .classed('present', isPresent());
 
-                    if (state === 'hover') {
-                        reference.showing(false);
-                    }
-                }
+        var formWrap = container.select('.form-field-input-wrap');
 
-                d3.select(this)
-                    .call(d.impl);
+        formWrap
+            .call(field.impl);
 
-                if (options.wrap && options.info) {
-                    d3.select(this)
-                        .call(reference.body)
-                        .select('.form-label-button-wrap')
-                        .call(reference.button);
-                }
+        var moreButton = formWrap.selectAll('.more-icon')
+            .data(subfields ? [0] : []);
 
-                d.impl.tags(tags);
-            });
+        moreButton = moreButton.enter()
+            .append('button')
+            .attr('class', 'button-input-action more-icon minor')
+            .attr('tabindex', -1)
+            .call(svgIcon('#icon-more'))
+            .merge(moreButton);
+
+        moreButton
+            .on('click', showMore);
+
+
+        if (options.wrap && options.info) {
+            var referenceKey = field.key;
+            if (field.type === 'multiCombo') {   // lookup key without the trailing ':'
+                referenceKey = referenceKey.replace(/:$/, '');
+            }
+            var reference = uiTagReference(field.reference || { key: referenceKey }, context);
+
+            if (state === 'hover') {
+                reference.showing(false);
+            }
+
+            container
+                .call(reference.body)
+                .select('.form-label-button-wrap')
+                .call(reference.button);
+        }
+
+        var subfields = container.selectAll('.subfield-section')
+            .data(subfields || []);
+
+        subfields = subfields.enter()
+            .append('div')
+            .attr('class', 'subfield-section')
+            .text('subfields')
+            .merge(subfields);
+
+
+        field.impl.tags(tags);
+
     };
 
 
