@@ -59,7 +59,7 @@
     "phantomjs-prebuilt": "~2.1.11",
     "request": "^2.81.0",
     "rollup": "0.45.2",
-    "rollup-plugin-commonjs": "8.1.0",
+    "rollup-plugin-commonjs": "8.1.1",
     "rollup-plugin-json": "2.2.0",
     "rollup-plugin-node-resolve": "3.0.0",
     "shelljs": "^0.7.5",
