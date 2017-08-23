@@ -32,7 +32,7 @@
     "marked": "0.3.6",
     "osm-auth": "1.0.2",
     "rbush": "2.0.1",
-    "@mapbox/sexagesimal": "1.0.0",
+    "@mapbox/sexagesimal": "1.1.0",
     "@mapbox/togeojson": "0.16.0",
     "wmf-sitematrix": "0.1.4"
   },
