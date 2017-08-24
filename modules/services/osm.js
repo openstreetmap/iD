@@ -180,6 +180,7 @@ export default {
         userDetails = undefined;
         rateLimitError = undefined;
         _.forEach(inflight, abortRequest);
+        entityCache = {};
         loadedTiles = {};
         inflight = {};
         return this;
