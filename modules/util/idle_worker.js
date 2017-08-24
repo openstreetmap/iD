@@ -14,14 +14,14 @@ export function utilIdleWorker(tasks, processor, callback) {
 
         // more tasks are left, we might need more idleCallbacks
         if (currentPos < totalTasks) {
-            return window.requestIdleCallback(deadline => worker(deadline));
+            return window.requestIdleCallback(function(deadline) {worker(deadline);});
         } 
 
         // tasks are completed
         return callback(processed);
     }
 
-    window.requestIdleCallback(deadline => worker(deadline));
+    window.requestIdleCallback(function(deadline) {worker(deadline);});
 }
 
 // shim
