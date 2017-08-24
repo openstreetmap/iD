@@ -6,7 +6,7 @@ export function utilIdleWorker(tasks, processor, callback) {
     function worker(deadline) {
         while (deadline.timeRemaining() > 0 && currentPos < totalTasks) {
             var result = processor(tasks[currentPos]);
-           
+
             // if falsy dont add to the processed list
             if (result) processed.push(result);
             currentPos++;
@@ -15,7 +15,7 @@ export function utilIdleWorker(tasks, processor, callback) {
         // more tasks are left, we might need more idleCallbacks
         if (currentPos < totalTasks) {
             return window.requestIdleCallback(function(deadline) {worker(deadline);});
-        } 
+        }
 
         // tasks are completed
         return callback(processed);

@@ -148,7 +148,8 @@ var parsers = {
 };
 
 
-function parse(xml, callback) {
+function parse(xml, callback, options) {
+    options = _.extend({ cache: true }, options);
     if (!xml || !xml.childNodes) return;
 
     var root = xml.childNodes[0],
@@ -158,12 +159,13 @@ function parse(xml, callback) {
         var parser = parsers[child.nodeName];
         if (parser) {
             var uid = osmEntity.id.fromOSM(child.nodeName, child.attributes.id.value);
-            if (entityCache[uid]) {
+            if (options.cache && entityCache[uid]) {
                 return null;
             }
             return parser(child, uid);
         }
     }
+
     utilIdleWorker(children, parseChild, callback);
 }
 
@@ -216,7 +218,8 @@ export default {
     },
 
 
-    loadFromAPI: function(path, callback) {
+    loadFromAPI: function(path, callback, options) {
+        options = _.extend({ cache: true }, options);
         var that = this;
 
         function done(err, xml) {
@@ -242,11 +245,13 @@ export default {
                 if (callback) {
                     if (err) return callback(err, null);
                     parse(xml, function (entities) {
-                        for (var i in entities) {
-                            entityCache[entities[i].id] = true;
+                        if (options.cache) {
+                            for (var i in entities) {
+                                entityCache[entities[i].id] = true;
+                            }
                         }
                         callback(null, entities);
-                    });
+                    }, options);
                 }
             }
         }
@@ -275,13 +280,15 @@ export default {
 
     loadEntityVersion: function(id, version, callback) {
         var type = osmEntity.id.type(id),
-            osmID = osmEntity.id.toOSM(id);
+            osmID = osmEntity.id.toOSM(id),
+            options = { cache: false };
 
         this.loadFromAPI(
             '/api/0.6/' + type + '/' + osmID + '/' + version,
             function(err, entities) {
                 if (callback) callback(err, { data: entities });
-            }
+            },
+            options
         );
     },
 
