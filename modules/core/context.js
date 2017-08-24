@@ -16,7 +16,6 @@ import { utilRebind } from '../util/rebind';
 import { utilCallWhenIdle } from '../util/index';
 
 
-
 export var areaKeys = {};
 
 export function setAreaKeys(value) {
