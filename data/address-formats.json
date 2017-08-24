@@ -53,7 +53,7 @@
         {
             "countryCodes": ["vn"],
             "format": [
-                ["housenumber", "street","unit"],
+                ["housenumber", "street"],
                 ["subdistrict"],
                 ["district"],
                 ["city"],
@@ -122,8 +122,7 @@
             "countryCodes": ["cn"],
             "format": [
                 ["postcode", "province"],
-                ["city", "unit"],
-                ["district"],
+                ["city", "district"],
                 ["street", "housenumber"]
             ]
         }

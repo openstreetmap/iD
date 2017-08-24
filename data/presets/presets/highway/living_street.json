@@ -3,7 +3,6 @@
     "fields": [
         "name",
         "oneway",
-        "maxspeed",
         "lanes",
         "surface",
         "structure",

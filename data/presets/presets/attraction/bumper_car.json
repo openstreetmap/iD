@@ -1,9 +1,8 @@
 {
-    "icon": "hospital",
+    "icon": "car",
     "fields": [
         "name",
-        "address",
-        "building_area",
+        "operator",
         "opening_hours"
     ],
     "geometry": [
@@ -11,11 +10,12 @@
         "area"
     ],
     "terms": [
-        "medic*",
-        "physician"
+        "theme park",
+        "dodgem cars",
+        "autoscooter"
     ],
     "tags": {
-        "amenity": "doctors"
+        "attraction": "bumper_car"
     },
-    "name": "Doctor"
+    "name": "Bumper Car"
 }

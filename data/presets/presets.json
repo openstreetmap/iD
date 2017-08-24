@@ -1316,7 +1316,8 @@
                 "area"
             ],
             "terms": [
-                "medic*"
+                "medic*",
+                "physician"
             ],
             "tags": {
                 "amenity": "doctors"
@@ -2565,6 +2566,28 @@
             },
             "name": "Shelter"
         },
+        "amenity/shower": {
+            "icon": "water",
+            "fields": [
+                "operator",
+                "opening_hours",
+                "fee",
+                "supervised",
+                "building_area"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "terms": [
+                "rain closet"
+            ],
+            "tags": {
+                "amenity": "shower"
+            },
+            "name": "Shower"
+        },
         "amenity/social_facility": {
             "icon": "poi-social-facility",
             "fields": [
@@ -3316,6 +3339,296 @@
                 "area:highway": "*"
             },
             "name": "Road Surface"
+        },
+        "attraction/amusement_ride": {
+            "icon": "amusement-park",
+            "fields": [
+                "name",
+                "operator",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "theme park",
+                "carnival ride"
+            ],
+            "tags": {
+                "attraction": "amusement_ride"
+            },
+            "name": "Amusement Ride"
+        },
+        "attraction/animal": {
+            "icon": "zoo",
+            "fields": [
+                "name",
+                "operator"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "zoo",
+                "theme park",
+                "animal park",
+                "lion",
+                "tiger",
+                "bear"
+            ],
+            "tags": {
+                "attraction": "animal"
+            },
+            "name": "Animal"
+        },
+        "attraction/big_wheel": {
+            "icon": "amusement-park",
+            "fields": [
+                "name",
+                "operator",
+                "height",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point"
+            ],
+            "terms": [
+                "ferris wheel",
+                "theme park",
+                "amusement ride"
+            ],
+            "tags": {
+                "attraction": "big_wheel"
+            },
+            "name": "Big Wheel"
+        },
+        "attraction/bumper_car": {
+            "icon": "car",
+            "fields": [
+                "name",
+                "operator",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "theme park",
+                "dodgem cars",
+                "autoscooter"
+            ],
+            "tags": {
+                "attraction": "bumper_car"
+            },
+            "name": "Bumper Car"
+        },
+        "attraction/bungee_jumping": {
+            "icon": "pitch",
+            "fields": [
+                "name",
+                "operator",
+                "height",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "theme park",
+                "bungy jumping",
+                "jumping platform"
+            ],
+            "tags": {
+                "attraction": "bungee_jumping"
+            },
+            "name": "Bungee Jumping"
+        },
+        "attraction/carousel": {
+            "icon": "horse-riding",
+            "fields": [
+                "name",
+                "operator",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "theme park",
+                "roundabout",
+                "merry-go-round",
+                "galloper",
+                "jumper",
+                "horseabout",
+                "flying horses"
+            ],
+            "tags": {
+                "attraction": "carousel"
+            },
+            "name": "Carousel"
+        },
+        "attraction/dark_ride": {
+            "icon": "rail-metro",
+            "fields": [
+                "name",
+                "operator",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "line",
+                "area"
+            ],
+            "terms": [
+                "theme park",
+                "ghost train"
+            ],
+            "tags": {
+                "attraction": "dark_ride"
+            },
+            "name": "Dark Ride"
+        },
+        "attraction/drop_tower": {
+            "icon": "poi-tower",
+            "fields": [
+                "name",
+                "operator",
+                "height",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "theme park",
+                "amusement ride",
+                "gondola",
+                "tower",
+                "big drop"
+            ],
+            "tags": {
+                "attraction": "drop_tower"
+            },
+            "name": "Drop Tower"
+        },
+        "attraction/pirate_ship": {
+            "icon": "amusement-park",
+            "fields": [
+                "name",
+                "operator",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point"
+            ],
+            "terms": [
+                "theme park",
+                "carnival ride",
+                "amusement ride"
+            ],
+            "tags": {
+                "attraction": "pirate_ship"
+            },
+            "name": "Pirate Ship"
+        },
+        "attraction/river_rafting": {
+            "icon": "ferry",
+            "fields": [
+                "name",
+                "operator",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "line"
+            ],
+            "terms": [
+                "theme park",
+                "aquatic park",
+                "water park",
+                "rafting simulator",
+                "river rafting ride",
+                "river rapids ride"
+            ],
+            "tags": {
+                "attraction": "river_rafting"
+            },
+            "name": "River Rafting"
+        },
+        "attraction/roller_coaster": {
+            "icon": "amusement-park",
+            "fields": [
+                "name",
+                "operator",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "theme park",
+                "amusement ride"
+            ],
+            "tags": {
+                "attraction": "roller_coaster"
+            },
+            "name": "Roller Coaster"
+        },
+        "attraction/train": {
+            "icon": "rail",
+            "fields": [
+                "name",
+                "operator",
+                "fee",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "line"
+            ],
+            "terms": [
+                "theme park",
+                "rackless train",
+                "road train",
+                "Tschu-Tschu train",
+                "dotto train",
+                "park train"
+            ],
+            "tags": {
+                "attraction": "train"
+            },
+            "name": "Tourist Train"
+        },
+        "attraction/water_slide": {
+            "icon": "swimming",
+            "fields": [
+                "name",
+                "operator",
+                "opening_hours"
+            ],
+            "geometry": [
+                "line",
+                "area"
+            ],
+            "terms": [
+                "theme park",
+                "aquatic park",
+                "water park",
+                "flumes",
+                "water chutes",
+                "hydroslides"
+            ],
+            "tags": {
+                "attraction": "water_slide"
+            },
+            "name": "Water Slide"
         },
         "barrier": {
             "icon": "roadblock",
@@ -5380,6 +5693,27 @@
             },
             "name": "Fire Hydrant"
         },
+        "emergency/life_ring": {
+            "icon": "circle-stroked",
+            "fields": [
+                "ref",
+                "operator"
+            ],
+            "geometry": [
+                "point",
+                "vertex"
+            ],
+            "terms": [
+                "life buoy",
+                "kisby ring",
+                "kisbie ring",
+                "perry buoy"
+            ],
+            "tags": {
+                "emergency": "life_ring"
+            },
+            "name": "Life Ring"
+        },
         "emergency/phone": {
             "icon": "emergency-phone",
             "fields": [
@@ -5896,7 +6230,6 @@
             "fields": [
                 "name",
                 "oneway",
-                "maxspeed",
                 "lanes",
                 "surface",
                 "structure",
@@ -6588,7 +6921,8 @@
         },
         "highway/traffic_mirror": {
             "geometry": [
-                "point"
+                "point",
+                "vertex"
             ],
             "tags": {
                 "highway": "traffic_mirror"
@@ -9761,6 +10095,25 @@
             "terms": [],
             "name": "Office"
         },
+        "office/physician": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "office": "physician"
+            },
+            "searchable": false,
+            "name": "Physician"
+        },
         "office/travel_agent": {
             "icon": "suitcase",
             "fields": [
@@ -10142,25 +10495,6 @@
             },
             "terms": [],
             "name": "NGO Office"
-        },
-        "office/physician": {
-            "icon": "commercial",
-            "fields": [
-                "name",
-                "address",
-                "building_area",
-                "opening_hours"
-            ],
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "tags": {
-                "office": "physician"
-            },
-            "terms": [],
-            "name": "Physician"
         },
         "office/political_party": {
             "icon": "commercial",

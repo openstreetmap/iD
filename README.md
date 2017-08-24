@@ -48,8 +48,26 @@ This is only necessary the first time so that the build process can create symbo
 
 To run the current development version of iD on your own computer:
 
-1. Create a local `git clone` of the project, then `cd` into the project folder
-2. Run `npm install`  (this will run the `prepublish` script that builds everything)
+#### Cloning the repository
+
+The repository is reasonably large. and it's unlikely that you need the full history. If you are happy to wait for it all to download, run:
+
+```
+git clone https://github.com/openstreetmap/iD.git
+```
+
+To clone only the most recent version, instead use a 'shallow clone':
+
+```
+git clone --depth=1 https://github.com/openstreetmap/iD.git
+```
+
+If you want to add in the full history later on, perhaps to run `git blame` or `git log`, run `git fetch --depth=1000000`
+
+#### Building iD
+1. `cd` into the newly cloned project folder
+2. Run `npm install`
+3. Run `npm run all`
 3. Run `npm start`
 4. Open `http://localhost:8080/` in a web browser
 

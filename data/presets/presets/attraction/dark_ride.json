@@ -1,21 +1,21 @@
 {
-    "icon": "hospital",
+    "icon": "rail-metro",
     "fields": [
         "name",
-        "address",
-        "building_area",
+        "operator",
         "opening_hours"
     ],
     "geometry": [
         "point",
+        "line",
         "area"
     ],
     "terms": [
-        "medic*",
-        "physician"
+        "theme park",
+        "ghost train"
     ],
     "tags": {
-        "amenity": "doctors"
+        "attraction": "dark_ride"
     },
-    "name": "Doctor"
+    "name": "Dark Ride"
 }

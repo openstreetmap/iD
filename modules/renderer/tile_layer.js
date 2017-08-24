@@ -7,7 +7,7 @@ import { utilPrefixCSSProperty } from '../util';
 
 export function rendererTileLayer(context) {
     var tileSize = 256,
-        tile = d3geoTile(),
+        geotile = d3geoTile(),
         projection,
         cache = {},
         tileOrigin,
@@ -40,7 +40,8 @@ export function rendererTileLayer(context) {
         return [
             Math.floor(t[0] * power),
             Math.floor(t[1] * power),
-            t[2] + distance];
+            t[2] + distance
+        ];
     }
 
 
@@ -74,14 +75,31 @@ export function rendererTileLayer(context) {
 
     // Update tiles based on current state of `projection`.
     function background(selection) {
-        tile.scale(projection.scale() * 2 * Math.PI)
-            .translate(projection.translate());
+        z = Math.max(Math.log(projection.scale() * 2 * Math.PI) / Math.log(2) - 8, 0);
+
+        var pixelOffset;
+        if (source) {
+            pixelOffset = [
+                source.offset()[0] * Math.pow(2, z),
+                source.offset()[1] * Math.pow(2, z)
+            ];
+        } else {
+            pixelOffset = [0, 0];
+        }
+
+        var translate = [
+            projection.translate()[0] + pixelOffset[0],
+            projection.translate()[1] + pixelOffset[1]
+        ];
+
+        geotile
+            .scale(projection.scale() * 2 * Math.PI)
+            .translate(translate);
 
         tileOrigin = [
-            projection.scale() * Math.PI - projection.translate()[0],
-            projection.scale() * Math.PI - projection.translate()[1]];
-
-        z = Math.max(Math.log(projection.scale() * 2 * Math.PI) / Math.log(2) - 8, 0);
+            projection.scale() * Math.PI - translate[0],
+            projection.scale() * Math.PI - translate[1]
+        ];
 
         render(selection);
     }
@@ -96,7 +114,7 @@ export function rendererTileLayer(context) {
         var showDebug = context.getDebug('tile') && !source.overlay;
 
         if (source.validZoom(z)) {
-            tile().forEach(function(d) {
+            geotile().forEach(function(d) {
                 addSource(d);
                 if (d[3] === '') return;
                 if (typeof d[3] !== 'string') return; // Workaround for #2295
@@ -114,11 +132,6 @@ export function rendererTileLayer(context) {
                 return cache[r[3]] !== false;
             });
         }
-
-        var pixelOffset = [
-            source.offset()[0] * Math.pow(2, z),
-            source.offset()[1] * Math.pow(2, z)
-        ];
 
 
         function load(d) {
@@ -143,16 +156,16 @@ export function rendererTileLayer(context) {
             var _ts = tileSize * Math.pow(2, z - d[2]);
             var scale = tileSizeAtZoom(d, z);
             return 'translate(' +
-                ((d[0] * _ts) - tileOrigin[0] + pixelOffset[0]) + 'px,' +
-                ((d[1] * _ts) - tileOrigin[1] + pixelOffset[1]) + 'px)' +
+                ((d[0] * _ts) - tileOrigin[0]) + 'px,' +
+                ((d[1] * _ts) - tileOrigin[1]) + 'px) ' +
                 'scale(' + scale + ',' + scale + ')';
         }
 
         function tileCenter(d) {
             var _ts = tileSize * Math.pow(2, z - d[2]);
             return [
-                ((d[0] * _ts) - tileOrigin[0] + pixelOffset[0] + (_ts / 2)),
-                ((d[1] * _ts) - tileOrigin[1] + pixelOffset[1] + (_ts / 2))
+                ((d[0] * _ts) - tileOrigin[0] + (_ts / 2)),
+                ((d[1] * _ts) - tileOrigin[1] + (_ts / 2))
             ];
         }
 
@@ -164,7 +177,7 @@ export function rendererTileLayer(context) {
 
         // Pick a representative tile near the center of the viewport
         // (This is useful for sampling the imagery vintage)
-        var dims = tile.size(),
+        var dims = geotile.size(),
             mapCenter = [dims[0] / 2, dims[1] / 2],
             minDist = Math.max(dims[0], dims[1]),
             nearCenter;
@@ -261,8 +274,8 @@ export function rendererTileLayer(context) {
 
 
     background.dimensions = function(_) {
-        if (!arguments.length) return tile.size();
-        tile.size(_);
+        if (!arguments.length) return geotile.size();
+        geotile.size(_);
         return background;
     };
 
@@ -271,7 +284,7 @@ export function rendererTileLayer(context) {
         if (!arguments.length) return source;
         source = _;
         cache = {};
-        tile.scaleExtent(source.scaleExtent);
+        geotile.scaleExtent(source.scaleExtent);
         return background;
     };
 

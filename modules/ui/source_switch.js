@@ -16,9 +16,8 @@ export function uiSourceSwitch(context) {
         var live = d3.select(this)
             .classed('live');
 
-        context.connection()
-            .switch(live ? keys[1] : keys[0]);
-
+        context.history().clearSaved();
+        context.connection().switch(live ? keys[1] : keys[0]);
         context.enter(modeBrowse(context));
         context.flush();
 

@@ -2559,7 +2559,7 @@
                 },
                 "amenity/doctors": {
                     "name": "Doctor",
-                    "terms": "medic*"
+                    "terms": "medic*,physician"
                 },
                 "amenity/dojo": {
                     "name": "Dojo / Martial Arts Academy",
@@ -2765,6 +2765,10 @@
                     "name": "Shelter",
                     "terms": "lean-to,gazebo,picnic"
                 },
+                "amenity/shower": {
+                    "name": "Shower",
+                    "terms": "rain closet"
+                },
                 "amenity/social_facility": {
                     "name": "Social Facility",
                     "terms": ""
@@ -2892,6 +2896,58 @@
                 "area/highway": {
                     "name": "Road Surface",
                     "terms": ""
+                },
+                "attraction/amusement_ride": {
+                    "name": "Amusement Ride",
+                    "terms": "theme park,carnival ride"
+                },
+                "attraction/animal": {
+                    "name": "Animal",
+                    "terms": "zoo,theme park,animal park,lion,tiger,bear"
+                },
+                "attraction/big_wheel": {
+                    "name": "Big Wheel",
+                    "terms": "ferris wheel,theme park,amusement ride"
+                },
+                "attraction/bumper_car": {
+                    "name": "Bumper Car",
+                    "terms": "theme park,dodgem cars,autoscooter"
+                },
+                "attraction/bungee_jumping": {
+                    "name": "Bungee Jumping",
+                    "terms": "theme park,bungy jumping,jumping platform"
+                },
+                "attraction/carousel": {
+                    "name": "Carousel",
+                    "terms": "theme park,roundabout,merry-go-round,galloper,jumper,horseabout,flying horses"
+                },
+                "attraction/dark_ride": {
+                    "name": "Dark Ride",
+                    "terms": "theme park,ghost train"
+                },
+                "attraction/drop_tower": {
+                    "name": "Drop Tower",
+                    "terms": "theme park,amusement ride,gondola,tower,big drop"
+                },
+                "attraction/pirate_ship": {
+                    "name": "Pirate Ship",
+                    "terms": "theme park,carnival ride,amusement ride"
+                },
+                "attraction/river_rafting": {
+                    "name": "River Rafting",
+                    "terms": "theme park,aquatic park,water park,rafting simulator,river rafting ride,river rapids ride"
+                },
+                "attraction/roller_coaster": {
+                    "name": "Roller Coaster",
+                    "terms": "theme park,amusement ride"
+                },
+                "attraction/train": {
+                    "name": "Tourist Train",
+                    "terms": "theme park,rackless train,road train,Tschu-Tschu train,dotto train,park train"
+                },
+                "attraction/water_slide": {
+                    "name": "Water Slide",
+                    "terms": "theme park,aquatic park,water park,flumes,water chutes,hydroslides"
                 },
                 "barrier": {
                     "name": "Barrier",
@@ -3356,6 +3412,10 @@
                 "emergency/fire_hydrant": {
                     "name": "Fire Hydrant",
                     "terms": "fire plug"
+                },
+                "emergency/life_ring": {
+                    "name": "Life Ring",
+                    "terms": "life buoy,kisby ring,kisbie ring,perry buoy"
                 },
                 "emergency/phone": {
                     "name": "Emergency Phone",
@@ -4233,6 +4293,10 @@
                     "name": "Office",
                     "terms": ""
                 },
+                "office/physician": {
+                    "name": "Physician",
+                    "terms": ""
+                },
                 "office/travel_agent": {
                     "name": "Travel Agency",
                     "terms": ""
@@ -4303,10 +4367,6 @@
                 },
                 "office/ngo": {
                     "name": "NGO Office",
-                    "terms": ""
-                },
-                "office/physician": {
-                    "name": "Physician",
                     "terms": ""
                 },
                 "office/political_party": {
