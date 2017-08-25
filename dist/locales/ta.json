@@ -614,9 +614,6 @@
                 "generator/type": {
                     "label": "வகை"
                 },
-                "golf_hole": {
-                    "label": "குறிப்பு"
-                },
                 "handicap": {
                     "label": "ஊனமுற்றோர்",
                     "placeholder": "1-18"
@@ -864,9 +861,6 @@
                 "railway": {
                     "label": "வகை"
                 },
-                "ref": {
-                    "label": "குறிப்பு"
-                },
                 "relation": {
                     "label": "வகை"
                 },
@@ -914,9 +908,6 @@
                 "smoking": {
                     "label": "புகைப்பிடித்தல்"
                 },
-                "source": {
-                    "label": "மூலம்"
-                },
                 "stars": {
                     "label": "நட்சத்திரங்கள்"
                 },
@@ -963,9 +954,6 @@
                 },
                 "trees": {
                     "label": "மரங்கள்"
-                },
-                "tunnel": {
-                    "label": "சுரங்கம்"
                 },
                 "visibility": {
                     "label": "பார்க்கூடிய நிலை"

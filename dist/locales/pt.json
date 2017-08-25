@@ -328,10 +328,9 @@
         },
         "commit": {
             "title": "Enviar para o OpenStreetMap",
-            "description_placeholder": "Pequena descrição das tuas contribuições (necessário)",
-            "message_label": "Comentário das Alterações",
             "upload_explanation": "As alterações que enviar ficarão visíveis em todos os mapas que usem dados do OpenStreetMap.",
             "upload_explanation_with_user": "As alterações que enviar como {user} ficarão visíveis em todos os mapas que usem dados do OpenStreetMap.",
+            "request_review": "Gostaria que alguém revisse as minhas edições.",
             "save": "Enviar",
             "cancel": "Cancelar",
             "changes": "{count} Alterações",
@@ -444,7 +443,7 @@
             },
             "add": "Adicionar",
             "none": "Nenhum",
-            "node": "Nó",
+            "node": "Ponto",
             "way": "Linha",
             "relation": "Relação",
             "location": "Localização",
@@ -674,6 +673,7 @@
             "ok": "OK",
             "graph": {
                 "block_number": "<value for addr:block_number>",
+                "city": "Três Rios",
                 "county": "<value for addr:county>",
                 "district": "<value for addr:district>",
                 "hamlet": "<value for addr:hamlet>",
@@ -684,29 +684,203 @@
                 "state": "<value for addr:state>",
                 "subdistrict": "<value for addr:subdistrict>",
                 "suburb": "<value for addr:suburb>",
-                "countrycode": "pt"
+                "countrycode": "pt",
+                "name": {
+                    "1st-avenue": "Avenida 1",
+                    "2nd-avenue": "Avenida 2",
+                    "4th-avenue": "Avenida 4",
+                    "5th-avenue": "Avenida 5",
+                    "6th-avenue": "Avenida 6",
+                    "6th-street": "Rua 6",
+                    "7th-avenue": "Avenida 7",
+                    "8th-avenue": "Avenida 8",
+                    "9th-avenue": "Avenida 9",
+                    "10th-avenue": "Avenida 10",
+                    "11th-avenue": "Avenida 11",
+                    "12th-avenue": "Avenida 12",
+                    "adams-street": "Rua Adão",
+                    "andrews-elementary-school": "Escola Primária de Lucerne",
+                    "andrews-street": "Rua André",
+                    "armitage-street": "Rua Armindo",
+                    "barrows-school": "Escola de Belonce",
+                    "battle-street": "Rua da Batalha",
+                    "bennett-street": "Rua de Bendita",
+                    "bowman-park": "Parque Bela Vista",
+                    "constantine-street": "Rua Constantino",
+                    "douglas-avenue": "Avenida Diogo",
+                    "east-street": "Rua Este",
+                    "flower-street": "Rua das Flores",
+                    "french-street": "Rua Francesa",
+                    "garden-street": "Rua dos Jardins",
+                    "grant-avenue": "Grande Avenida",
+                    "main-street-cafe": "Café da Rua Principal",
+                    "main-street": "Rua Principal",
+                    "market-street": "Rua do Mercado",
+                    "memory-isle-park": "Parque da Ilha da Memória",
+                    "memory-isle": "Ilha da Memória",
+                    "middle-street": "Rua Central",
+                    "pine-street": "Rua dos Pinheiros",
+                    "pizza-hut": "Pizza Hut",
+                    "river-drive": "Viela do Rio",
+                    "river-road": "Estrada do Rio",
+                    "river-street": "Rua do Rio",
+                    "south-street": "Rua do Sul",
+                    "southern-michigan-bank": "Banco do Sul",
+                    "spring-street": "Rua da Nascente",
+                    "water-street": "Rua da Água",
+                    "west-street": "Rua Oeste"
+                }
             },
             "welcome": {
-                "welcome": "bem vindo! Este tutorial irá ensiná-lo o básico de como editar no OpenStreetMap ",
-                "practice": "Toda a informação contida neste guia, é a apenas para praticar e qualquer alteração que faça durante este guia, não serão guardadas."
+                "title": "Bem-vindo ",
+                "welcome": "Bem-vindo! Este guia passo-a-passo irá ensiná-lo o básico de como editar no OpenStreetMap ",
+                "practice": "Toda a informação contida neste guia, é a apenas para praticar e qualquer alteração que faça durante este guia, não serão guardadas.",
+                "words": "Este guia passo-a-passo mostra algumas palavras e conceitos novos. Quando for mostrada uma palavra nova, irá aparecer em *itálico*.",
+                "mouse": "Pode utilizar qualquer dispositivo de entrada de dados para editar o mapa, mas este guia passo-a-passo pressupõe que tem um rato com os botões esquerdo e direito. **Se quiser ligar um rato, faça-o agora e clique depois em OK.**",
+                "leftclick": "Quando este guia pedir para clicar ou clicar 2 vezes, quer dizer com o botão esquerdo do rato. Num ecrã tátil pode ser um clique simples ou um toque com o dedo. **Clique com o botão esquerdo {num} vezes.**",
+                "rightclick": "Por vezes também vamos pedir para clicar com o botão direito do rato. Isto pode ser o mesmo que Control-clique ou toque com 2 dedos num ecrã tátil. O seu teclado também pode ter uma tecla 'menu' que funcione como o botão direito do rato. **Clique com o botão direito {num} vezes.**",
+                "chapters": "Até agora tudo bem! Pode usar os botões abaixo para saltar tópicos em qualquer altura ou para reler um tópico anterior se se perder. Vamos começar! **Clique '{next}' para continuar.**"
             },
             "navigation": {
                 "title": "Navegação",
-                "points_lines_areas": "Os elementos do mapa são representados em *pontos, linhas ou áreas.*"
+                "drag": "A área principal do mapa mostra dados do OpenStreetMap por cima de um fundo.{br}Pode arrastar o mapa pressionado e mantendo premido o botão esquerdo do rato. Também pode usar as teclas de setas no seu teclado. **Arraste o mapa agora!**",
+                "zoom": "Pode aproximar ou afastar com a roda do rato ou ecrã tátil, ou clicando no botões {plus} / {minus}. **Experimente agora!**",
+                "features": "Usamos a palavra *elementos* para descrever as coisas que aparecem no mapa. Qualquer coisa no mundo real pode ser mapeada como um elemento no OpenStreetMap.",
+                "points_lines_areas": "Os elementos do mapa são representados em *pontos, linhas ou áreas.*",
+                "nodes_ways": "No OpenStreetMap, os pontos são por vezes chamados *nós* e as linhas e áreas são chamadas por vezes *vias*.",
+                "click_townhall": "Todos os elementos no mapa podem ser selecionados clicando neles. **Clique no ponto para o selecionar.**",
+                "selected_townhall": "Fantástico\" O ponto está agora selecionado. Os elementos selecionados são mostrados com uma cor a piscar a rodear os elementos.",
+                "editor_townhall": "Quando um elemento é selecionado, é mostrado o *editor de elementos* ao lado do mapa.",
+                "preset_townhall": "A parte de cima do editor de elementos mostra o tipo de elemento. Este ponto é {preset}.",
+                "fields_townhall": "A parte central do editor de elementos contém  *campos* que mostram os atributos do elemento, como o nome e endereço.",
+                "close_townhall": "**Feche o editor de elementos com a tecla ESC ou pressionando o botão {button} no canto superior.**",
+                "search_street": "Também pode pesquisar por elementos na vista atual, ou no mapa mundial. **Pesquise agora por '{name}'.**",
+                "choose_street": "**Escolha {name} da lista para selecioná-lo.**",
+                "selected_street": "Fantástico! {name} está agora selecionado.",
+                "editor_street": "Os campos mostrados para uma rua são diferentes dos campos mostrados para uma câmara municipal/junta de freguesia.{br}Para esta rua selecionada, o editor de elementos mostra campos como '{field1}' e '{field2}'. **Feche o editor de elementos com a tecla ESC ou pressionando o botão {button}.**",
+                "play": "Tente mover o mapa clicando em outros elementos para ver que tipos de coisas podem ser adicionadas ao OpenStreetMap. **Quanto estiver pronto para ver o próximo capítulo clique em '{next}'.**"
             },
             "points": {
-                "title": "Pontos"
+                "title": "Pontos",
+                "add_point": "Os *pontos* podem ser usados para representar elementos como lojas, restaurantes e monumentos.{br}Estes marcam uma localização específica e descrevem o que se encontra nesse ponto. **Clique no botão de ponto {button} para adicionar um novo ponto.**",
+                "place_point": "Para colocar o novo ponto no mapa, posicione o cursor do rato onde o pondo deve estar e de seguida clique com o botão esquerdo do rato ou pressione a tecla Espaço. **Mova o cursor para cima deste edifício e então clique com o botão esquerdo ou com a tecla Espaço.**",
+                "search_cafe": "Existem muitos tipos de elementos que podem ser representados com pontos. O ponto que adicionou é um café. **Pesquise um '{preset}'.**",
+                "choose_cafe": "**Escolha {preset} na lista.**",
+                "feature_editor": "O ponto está agora marcado como café. Usando o editor de elementos podemos adicionar mais informação sobre o café",
+                "add_name": "No OpenStreetMap, todos os campos são opcionais e não há problema em deixar um campo vazio se não tiver a certeza.{br}Façamos de conta que tem mais informações sobre este café e sabe o nome dele. **Adicione o nome ao café.**",
+                "add_close": "O editor de elementos irá memorizar automaticamente todas as alterações que fez. **Quando terminar de adicionar o nome, use a tecla ESC, ENTER ou clique no botão {button} para fechar o editor de elementos.**",
+                "reselect": "Muitas vezes já existirá no mapa o ponto que quer adicionar, mas este poderá conter erros ou estar incompleto. **Clique no ponto do café que criou para o selecionar.**",
+                "update": "Vamos agora adicionar mais informações sobre este café. Pode alterar o nome, o tipo de comida servida ou adicionar um endereço. **Altere as informações do café.**",
+                "update_close": "**Quando terminar de alterar o café, use a tecla ESC, ENTER ou clique no botão {button} para fechar o editor de elementos.**",
+                "rightclick": "Pode clicar com o botão direito do rato em qualquer elemento para ver o *menu de edição*, que mostra uma lista de operações de edição que podem ser feitas. **Clique com o botão direito do rato para selecionar o ponto que criou e mostrar o menu de edição.**",
+                "delete": "Não há problema em eliminar elementos que não existam na realidade.{br}Eliminar um elemento do OpenStreetMap remove-o do mapa que todos usam, por isso deve ter a certeza que algo não existe ou deixou de existir antes de o eliminar. **Clique no botão {button} para eliminar o ponto.**",
+                "undo": "Pode sempre desfazer quaisquer alterações antes de gravar o que alterou no OpenStreetMap. **Clique no botão {button} para desfazer a eliminação o ter o ponto de volta.**",
+                "play": "Agora que sabe criar e editar pontos, tente criar mais alguns para praticar! **Quando estiver pronto para o próximo capítulo, clique em '{next}'.**"
             },
             "areas": {
-                "title": "Áreas"
+                "title": "Áreas",
+                "add_playground": "As *áreas* são usadas para mostrar os limites de elementos como lagos, edifícios,  áreas residenciais, etc.{br}Também se usam áreas para mapear com mais detalhe certos elementos que possa mapear normalmente com pontos. **Clique no botão de Área {button} para adicionar uma nova área.**",
+                "start_playground": "Vamos adicionar este parque infantil ao mapa desenhando a área dele. As áreas são desenhadas colocando *pontos* ao longo das bordas do elemento. **Clique ou use a tecla Espaço para colocar um ponto inicial num dos cantos do parque infantil.**",
+                "continue_playground": "Continue a desenhar a área colocando mais pontos ao longo das bordas do parque infantil. Pode-se ligar a área a vias pedonais existentes.{br}Dica: pode manter premida a tecla '{alt}' para impedir que os pontos sejam ligados automaticamente a outros elementos. **Continue a desenhar a área do parque infantil.**",
+                "finish_playground": "Termine a área carregando na tecla Enter. **Termine agora a área do parque infantil.**",
+                "search_playground": "**Pesquise por '{preset}'.**",
+                "choose_playground": "**Escolha {preset} na lista.**",
+                "add_field": "Este parque infantil não tem um nome oficial, por isso não iremos adicionar nada no campo Nome.{br}Em vez disso vamos adicionar mais algumas informações sobre o parque infantil no campo Descrição. **Clique na lista em Adicionar Campo.**",
+                "choose_field": "**Escolha {field} na lista.**",
+                "retry_add_field": "Não selecionou o campo {field}. Vamos tentar de novo.",
+                "describe_playground": "**Adicione uma descrição e clique depois no botão {button} para fechar o editor de elementos.**",
+                "play": "Boa trabalho! Tente desenhar mais algumas áreas e veja que outros tipos de elementos de áreas podem ser adicionados ao  OpenStreetMap. **Quando estiver pronto para ver o próximo capítulo clique em '{next}'.**"
             },
             "lines": {
-                "title": "Linhas"
+                "title": "Linhas",
+                "add_line": "As *linhas* são usadas para representar elementos como estradas, ferrovias, rios, etc. **Clique no botão {button} para adicionar uma nova linha.**",
+                "start_line": "Aqui está uma rua que não está mapeada. Vamos adicioná-la!{br}No OpenStreetMap as linhas devem ser desenhadas pelo centro da estrada. Pode arrastar e aproximar a vista do mapa se  for necessário. **Comece uma nova linha clicando no início superior da rua que falta.**"
             },
             "startediting": {
                 "title": "Começar a editar",
                 "save": "Não se esqueça de gravar as suas alterações regularmente clicando neste botão!",
                 "start": "Começar a editar o mapa!"
+            }
+        },
+        "shortcuts": {
+            "title": "Atalhos de teclado",
+            "tooltip": "Mostrar o ecrã com os atalhos de teclado.",
+            "toggle": {
+                "key": "?"
+            },
+            "key": {
+                "alt": "Alt",
+                "backspace": "Retroceder (←)",
+                "cmd": "Cmd",
+                "ctrl": "Ctrl",
+                "delete": "Delete",
+                "del": "Del",
+                "end": "End",
+                "enter": "Enter",
+                "esc": "Esc",
+                "home": "Home",
+                "option": "Option",
+                "pause": "Pause",
+                "pgdn": "PgDn",
+                "pgup": "PgUp",
+                "return": "Parágrafo (         )",
+                "shift": "Shift",
+                "space": "Espaço"
+            },
+            "browsing": {
+                "navigation": {
+                    "title": "Navegação"
+                },
+                "help": {
+                    "title": "Ajuda",
+                    "help": "Mostrar documentação de ajuda",
+                    "keyboard": "Mostrar atalhos de teclado"
+                },
+                "display_options": {
+                    "title": "Mostrar opções",
+                    "background": "Mostrar opções do fundo",
+                    "background_switch": "Mudar para o último fundo usado",
+                    "map_data": "Mostrar opções dos dados do mapa",
+                    "fullscreen": "Entrar no modo ecrã completo"
+                },
+                "vertex_selected": {
+                    "previous": "Ir para o ponto anterior",
+                    "next": "Ir para o ponto seguinte",
+                    "first": "Ir para o primeiro ponto",
+                    "last": "Ir para o último ponto"
+                }
+            },
+            "editing": {
+                "title": "Editar",
+                "drawing": {
+                    "title": "Desenhar"
+                },
+                "operations": {
+                    "title": "Operações",
+                    "continue_line": "Continuar uma linha no ponto selecionado",
+                    "disconnect": "Desligar elementos no ponto selecionado",
+                    "split": "Separar uma linha em duas no ponto selecionado",
+                    "reverse": "Inverter uma linha",
+                    "move": "Mover elementos selecionados",
+                    "rotate": "Rodar elementos selecionados",
+                    "orthogonalize": "Endireitar linha / Esquadrar cantos da área",
+                    "circularize": "Circularizar uma linha fechada ou área",
+                    "delete": "Eliminar elementos selecionados"
+                },
+                "commands": {
+                    "title": "Comandos",
+                    "copy": "Copiar elementos selecionados",
+                    "paste": "Colar elementos copiados",
+                    "undo": "Desfazer a última ação",
+                    "redo": "Refazer a última ação",
+                    "save": "Gravar alterações"
+                }
+            },
+            "tools": {
+                "title": "Ferramentas",
+                "info": {
+                    "title": "Informação"
+                }
             }
         },
         "presets": {
@@ -834,7 +1008,8 @@
                         "subdistrict": "Subdistrito",
                         "subdistrict!vn": "Ward/Commune/Townlet",
                         "suburb": "Subúrbio ",
-                        "suburb!jp": "Ward"
+                        "suburb!jp": "Ward",
+                        "unit": "Unidade"
                     }
                 },
                 "admin_level": {
@@ -954,6 +1129,10 @@
                 "brand": {
                     "label": "Marca"
                 },
+                "bridge": {
+                    "label": "Tipo",
+                    "placeholder": "Padrão"
+                },
                 "building": {
                     "label": "Edifício"
                 },
@@ -1013,11 +1192,18 @@
                         "clockwise": "Sentido dos ponteiros do relógio"
                     }
                 },
+                "clothes": {
+                    "label": "Roupas"
+                },
                 "club": {
                     "label": "Tipo"
                 },
                 "collection_times": {
                     "label": "Horário de recolha"
+                },
+                "comment": {
+                    "label": "Comentário das Alterações",
+                    "placeholder": "Breve descrição das suas alterações (obrigatório)"
                 },
                 "communication_multi": {
                     "label": "Tipos de Comunicações"
@@ -1028,6 +1214,9 @@
                 "contact/webcam": {
                     "label": "URL da webcam",
                     "placeholder": "http://example.com/"
+                },
+                "content": {
+                    "label": "Conteúdo"
                 },
                 "country": {
                     "label": "País"
@@ -1049,6 +1238,10 @@
                 },
                 "currency_multi": {
                     "label": "Tipos de moeda"
+                },
+                "cutting": {
+                    "label": "Tipo",
+                    "placeholder": "Padrão"
                 },
                 "cycle_network": {
                     "label": "Rede"
@@ -1135,6 +1328,10 @@
                     "label": "Email",
                     "placeholder": "exemplo@exemplo.com"
                 },
+                "embankment": {
+                    "label": "Tipo",
+                    "placeholder": "Padrão"
+                },
                 "emergency": {
                     "label": "Emergência"
                 },
@@ -1175,6 +1372,10 @@
                 "fixme": {
                     "label": "Corrigir"
                 },
+                "ford": {
+                    "label": "Tipo",
+                    "placeholder": "Padrão"
+                },
                 "fuel": {
                     "label": "Combustível"
                 },
@@ -1196,15 +1397,15 @@
                 "generator/method": {
                     "label": "Método"
                 },
+                "generator/output/electricity": {
+                    "label": "Potência de Saída",
+                    "placeholder": "50 MW, 100 MW, 200 MW..."
+                },
                 "generator/source": {
                     "label": "Fonte das informações"
                 },
                 "generator/type": {
                     "label": "Tipo"
-                },
-                "golf_hole": {
-                    "label": "Referência",
-                    "placeholder": "Número do buraco (1-18)"
                 },
                 "grape_variety": {
                     "label": "Variedades de Castas"
@@ -1215,6 +1416,10 @@
                 },
                 "handrail": {
                     "label": "Corrimão"
+                },
+                "hashtags": {
+                    "label": "Hashtags",
+                    "placeholder": "#exemplo"
                 },
                 "height": {
                     "label": "Altura (metros)"
@@ -1290,7 +1495,8 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "layer": {
-                    "label": "Camada"
+                    "label": "Camada",
+                    "placeholder": "0"
                 },
                 "leaf_cycle": {
                     "label": "Ciclo das folhas",
@@ -1560,6 +1766,10 @@
                 "plant": {
                     "label": "Planta"
                 },
+                "plant/output/electricity": {
+                    "label": "Potência de Saída",
+                    "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
                 "population": {
                     "label": "População"
                 },
@@ -1589,7 +1799,29 @@
                     }
                 },
                 "ref": {
-                    "label": "Referência"
+                    "label": "Código de referência "
+                },
+                "ref_aeroway_gate": {
+                    "label": "Número da Porta"
+                },
+                "ref_golf_hole": {
+                    "label": "Número do buraco",
+                    "placeholder": "1-18"
+                },
+                "ref_highway_junction": {
+                    "label": "Número da junção"
+                },
+                "ref_platform": {
+                    "label": "Número da plataforma"
+                },
+                "ref_road_number": {
+                    "label": "Número da estrada"
+                },
+                "ref_route": {
+                    "label": "Número da rota"
+                },
+                "ref_stop_position": {
+                    "label": "Número da paragem"
                 },
                 "relation": {
                     "label": "Tipo"
@@ -1705,7 +1937,7 @@
                     "label": "Público-Alvo"
                 },
                 "source": {
-                    "label": "Fonte das informações"
+                    "label": "Fontes"
                 },
                 "sport": {
                     "label": "Desportos"
@@ -1845,6 +2077,10 @@
                     "label": "Árvores"
                 },
                 "tunnel": {
+                    "label": "Tipo",
+                    "placeholder": "Padrão"
+                },
+                "tunnel_waterway": {
                     "label": "Túnel"
                 },
                 "vending": {
@@ -2235,6 +2471,9 @@
                     "name": "Igreja",
                     "terms": "Igreija, Cristão, Abadia, Alminha, Alminhas, Basílica, Betel, Casa de Adoração, Casa de Deus, Carmelo, Catedral, Capela, Capelinha, Colegiada, Congregação, Convento, Cruzeiro, Ermida, Mosteiro, Oratório, Paróquia, Salão do Reino  Sé"
                 },
+                "amenity/place_of_worship/hindu": {
+                    "name": "Templo Hindu"
+                },
                 "amenity/place_of_worship/jewish": {
                     "name": "Sinagoga",
                     "terms": "Judaico, Sinagoga, Judeu"
@@ -2242,6 +2481,12 @@
                 "amenity/place_of_worship/muslim": {
                     "name": "Mesquita",
                     "terms": "Muçulmano"
+                },
+                "amenity/place_of_worship/sikh": {
+                    "name": "Templo Sikh"
+                },
+                "amenity/place_of_worship/taoist": {
+                    "name": "Templo Taoista"
                 },
                 "amenity/planetarium": {
                     "name": "Planetário",
@@ -2308,6 +2553,9 @@
                 "amenity/shelter": {
                     "name": "Abrigo",
                     "terms": "Shelter"
+                },
+                "amenity/shower": {
+                    "name": "Chuveiro"
                 },
                 "amenity/social_facility": {
                     "name": "Centro social",
@@ -2404,6 +2652,9 @@
                     "name": "Veterinário",
                     "terms": "Veterinary, Veterinária, Animais, Veterenário, Médico, Médicos, Médica, Médicas"
                 },
+                "amenity/waste/dog_excrement": {
+                    "name": "Balde para excrementos de cães"
+                },
                 "amenity/waste_basket": {
                     "name": "Caixote do lixo",
                     "terms": "Caixotes, Papeleira, Lixo, Reciclagem, Cesto"
@@ -2430,6 +2681,12 @@
                 "area/highway": {
                     "name": "Área de estrada",
                     "terms": "Road Surface"
+                },
+                "attraction/roller_coaster": {
+                    "name": "Montanha Russa"
+                },
+                "attraction/train": {
+                    "name": "Comboio Turístico"
                 },
                 "barrier": {
                     "name": "Barreira",
@@ -2974,7 +3231,8 @@
                     "terms": "Bicicleta"
                 },
                 "highway/elevator": {
-                    "name": "Elevador"
+                    "name": "Elevador",
+                    "terms": "Elevador, Ascensor"
                 },
                 "highway/footway": {
                     "name": "Caminho pedonal",
@@ -3612,6 +3870,12 @@
                     "name": "Estação de captação e tratamento de águas",
                     "terms": "Water Works, Captação de água"
                 },
+                "man_made/watermill": {
+                    "name": "Moinho de água"
+                },
+                "man_made/windmill": {
+                    "name": "Moinho de água"
+                },
                 "man_made/works": {
                     "name": "Fábrica",
                     "terms": "indústria, manofatura, manofaturação, fabrico, fabricar, works"
@@ -3808,8 +4072,7 @@
                     "terms": "NGO Office, Organização, Organização Não Governamental, NGO, ONG"
                 },
                 "office/physician": {
-                    "name": "Médico especialista",
-                    "terms": "Physician, Doutor, Médico, Medicina, ortopedista, Fisioterapeuta, Otorrino, Otorrinolaringologista,  Dermatologista, Pediatra, Pediatria, Cardiologista, Cardiologia, Endocrinologia, Endocrinologista, Ginecologia, Ginecologista, Obstetrícia, Obstetra, Hematologia, Hematologista, Homeopatia, Mastologia, Mastologista, Nefrologia, Nefrologista, Neurologia, Neurologista, Patologia, Patologista, Pneumologia, Pneumologista, Proctologia, Proctologista, Psiquiatria, Psiquiatra, Radiologia, Radiologista, Reumatologia, Reumatologista, Urologia, Urologista"
+                    "name": "Médico especialista"
                 },
                 "office/political_party": {
                     "name": "Sede/filial de partido político",
@@ -3894,6 +4157,12 @@
                 "power/generator": {
                     "name": "Central de geração de energia",
                     "terms": "Power Generator, Gerador Elétrico, Energia Eólica, Energia Solar, Energia Termoeléctrica, Energia Nuclear, Central de Energia"
+                },
+                "power/generator/source_nuclear": {
+                    "name": "Reactor nuclear"
+                },
+                "power/generator/source_wind": {
+                    "name": "Turbina de vento"
                 },
                 "power/line": {
                     "name": "Linha de alta tensão",
@@ -4811,6 +5080,13 @@
                 },
                 "description": "Imagem aérea DigitalGlobe Standard ",
                 "name": "Imagem aérea DigitalGlobe Standard "
+            },
+            "EsriWorldImagery": {
+                "attribution": {
+                    "text": "Termos e Opinião"
+                },
+                "description": "Imagens aéreas Esri.",
+                "name": "Imagens aéreas Esri."
             },
             "MAPNIK": {
                 "attribution": {

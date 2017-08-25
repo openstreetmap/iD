@@ -328,10 +328,9 @@
         },
         "commit": {
             "title": "Enviar para o OpenStreetMap",
-            "description_placeholder": "Breve descrição de suas contribuições (obrigatório)",
-            "message_label": "Comentário sobre as Alterações",
             "upload_explanation": "As alterações que você enviar ficarão visíveis em todos os mapas que usam dados do OpenStreetMap. Atenção: NÃO é permitido copiar nomes de ruas do Google Maps, Bing, Here, mapas impressos ou quaisquer fontes que possuam copyright.",
             "upload_explanation_with_user": "As alterações que você enviar como {user} estarão visíveis em todos os mapas que usam os dados do OpenStreetMap.<br><br>\n<strong>Atenção:</strong> NÃO é permitido copiar nomes de ruas do Google Maps, Bing, Here, mapas impressos ou quaisquer fontes que possuam copyright.",
+            "request_review": "Eu gostaria que alguém revisasse minhas edições.",
             "save": "Enviar",
             "cancel": "Cancelar",
             "changes": "{count} mudanças",
@@ -347,6 +346,49 @@
         "contributors": {
             "list": "Edições de {users}",
             "truncated_list": "Edições de {users} e {count} outros"
+        },
+        "info_panels": {
+            "key": "I",
+            "background": {
+                "key": "B",
+                "title": "Fundo",
+                "zoom": "Zoom",
+                "vintage": "Vintage",
+                "unknown": "Desconhecido",
+                "show_tiles": "Mostrar moisaco",
+                "hide_tiles": "Ocultar moisaco"
+            },
+            "history": {
+                "key": "H",
+                "title": "Histórico",
+                "selected": "{n} selecionado",
+                "version": "Versão",
+                "last_edit": "Última Edição",
+                "edited_by": "Editado por",
+                "changeset": "Conjunto de alterações",
+                "unknown": "Desconhecido",
+                "link_text": "Histórico no openstreetmap.org"
+            },
+            "location": {
+                "key": "L",
+                "title": "Localização",
+                "unknown_location": "Localização Desconhecida"
+            },
+            "measurement": {
+                "key": "M",
+                "title": "Medição",
+                "selected": "{n} selecionado",
+                "geometry": "Geometria",
+                "closed": "fechado",
+                "center": "Centro",
+                "perimeter": "Perímetro",
+                "length": "Comprimento",
+                "area": "Área",
+                "centroid": "Centróide",
+                "location": "Localização",
+                "metric": "Métrico",
+                "imperial": "Imperial"
+            }
         },
         "geometry": {
             "point": "ponto",
@@ -410,6 +452,7 @@
         "background": {
             "title": "Imagem de Fundo",
             "description": "Configurações da imagem de fundo",
+            "key": "B",
             "percent_brightness": "Brilho de {opacity}%",
             "none": "Nenhum",
             "best_imagery": "Melhor imagem de satélite conhecida para esta localização",
@@ -422,12 +465,14 @@
             "offset": "Arraste em qualquer ponto da área cinza abaixo para ajustar o deslocamento da imagem, ou entre com o valor do deslocamento em metros.",
             "minimap": {
                 "description": "Minimapa",
-                "tooltip": "Afastar a visualização do mapa para facilitar a localização da área atualmente mostrada."
+                "tooltip": "Afastar a visualização do mapa para facilitar a localização da área atualmente mostrada.",
+                "key": "/"
             }
         },
         "map_data": {
             "title": "Dados do Mapa",
             "description": "Dados do Mapa",
+            "key": "F",
             "data_layers": "Camadas de Dados",
             "fill_area": "Areas de Preenchimento",
             "map_features": "Elementos do Mapa",
@@ -486,7 +531,8 @@
         "area_fill": {
             "wireframe": {
                 "description": "Sem Preenchimento (Somente Traço)",
-                "tooltip": "Ativar o modo traço torna mais fácil enxergar as imagens de fundo."
+                "tooltip": "Ativar o modo traço torna mais fácil enxergar as imagens de fundo.",
+                "key": "W"
             },
             "partial": {
                 "description": "Preenchimento Parcial",
@@ -499,7 +545,9 @@
         },
         "restore": {
             "heading": "Você tem alterações não salvas",
-            "description": "Deseja restaurar as alterações não salvas da sessão anterior?"
+            "description": "Deseja restaurar as alterações não salvas da sessão anterior?",
+            "restore": "Restaurar minhas modificações",
+            "reset": "Descartar minhas modificações"
         },
         "save": {
             "title": "Salvar",
@@ -609,6 +657,7 @@
         },
         "help": {
             "title": "Ajuda",
+            "key": "H",
             "help": "# Ajuda\n\nEste é um editor para [OpenStreetMap](http://www.openstreetmap.org/), o mapa mundial livre e editável. Você pode usá-lo para adicionar e atualizar de dados em sua área,  tornando um mapa mundi de código aberto melhor para todos.\n\nAs edições que você fizer nesse mapa serão visíveis para todos que usam OpenStreetMap. Para fazer uma edição você precisará se [identificar](https://www.openstreetmap.org/login).\n\nO [editor iD](http://ideditor.com/) é um projeto colaborativo com o [código fonte disponível no GitHub](https://github.com/openstreetmap/iD).\n",
             "roads": "# Estradas\n\nVocê pode criar, corrigir e excluir estradas com este editor. Estradas podem ser de vários tipos: caminhos, estradas, trilhas, ciclovias e muito mais - qualquer segmento onde se passa, mesmo que às vezes, pode ser mapeado.\n\n### Selecionando\n\nClique em uma estrada para selecioná-la. Um esboço deve tornar-se visível, junto com um pequeno menu de ferramentas no mapa e uma barra lateral mostrando mais informações sobre a estrada.\n\n### Modificando\n\nMuitas vezes você vai encontrar estradas que não estão alinhadas com as imagens por trás delas ou com uma faixa de GPS. Você pode ajustar estas estradas para que elas fiquem no lugar certo.\n\nPrimeiro clique no caminho que você deseja alterar. Isso irá destacá-lo e mostrar pontos de controle ao longo dela que você pode arrastar para locais melhores. Se o que você deseja é adicionar novos pontos de controle para obter mais detalhes, clique duas vezes em uma parte da estrada sem um ponto, e um ponto será adicionado.\n\nSe a estrada se conecta a uma outra estrada, mas não está corretamente conectada no mapa, você pode arrastar um de seus pontos de controle para a outra estrada a fim de juntá-las. Ter estradas que se conectam é importante para o mapa e essencial para fornecer instruções de direção.\n\nVocê também pode clicar na ferramenta 'Mover' ou pressione a tecla 'M' para mover o caminho inteiro de uma vez, e em seguida, clique novamente para salvar esse movimento.\n\n### Apagando\n\nSe uma estrada está completamente errada - você pode ver que ela não existe nas imagens de satélite e, junto a isso, ter confirmado localmente que ela não existe - você pode apagá-la do mapa. Seja cauteloso ao excluir objetos - como qualquer outra edição, os resultados são vistos por todos, e como as imagens de satélite podem estar desatualizadas, a estrada pode simplesmente ser recém-construída.\n\nVocê pode excluir um caminho, clicando sobre ele para selecioná-lo, em seguida, clicar no ícone de lixeira ou pressionando a tecla 'Delete'.\n\n### Criando\n\nEncontrou um lugar onde deveria ter uma estrada, mas não tem? Clique no botão 'Linha' no canto superior esquerdo do editor ou pressione a tecla de atalho '2' para começar a desenhar uma linha.\n\nClique no início da estrada no mapa para começar a desenhar. Se a estrada se ramifica de uma estrada existente, comece clicando sobre o lugar onde eles se conectam.\n\nEm seguida, clique em pontos ao longo da estrada para que ela siga o caminho certo, de acordo com imagens de satélite ou GPS. Se a estrada que você está desenhando atravessa outra estrada, ligue-as clicando sobre o ponto de intersecção. Quando você terminar de desenhar, clique duas vezes ou pressione 'Voltar' ou 'Enter' no seu teclado.\n",
             "gps": "# GPS\n\nOs dados de GPS são as fontes mais confiáveis do OpenStreetMap. Este editor suporta trilhas locais - arquivos '.gpx'. Você pode utilizar aplicativos de celular ou aparelhos de GPS para coletar esse tipo de trilha. Para informações sobre como realizar levantamento com GPS, leia [Mapeando com smartphone, GPS ou papel](http://learnosm.org/pt/mobile-mapping/).\n\nPara usar uma trilha GPX para mapeamento, arraste e solte o arquivo GPX no editor de mapa iD. Caso seja reconhecida, será adicionada ao mapa como linhas roxo-claras. Clique no menu 'Dados do Mapa', no lado direito, para ativar, desativar ou focar o zoom nesta nova camada alimentada pelo GPX.\n\nA trilha GPX não é diretamente enviada ao OpenStreetMap - a melhor maneira para usá-la é desenhar no mapa, usando-a como um guia para os novos elementos que você adicionar, e também [enviá-lo ao OpenStreetMap](http://www.openstreetmap.org/trace/create) para que outros usuários possam usá-la.\n",
@@ -796,6 +845,7 @@
                 "title": "Áreas",
                 "add_playground": "*Áreas* são usadas para representar os limites de elementos como lagos, edifícios, e áreas residenciais.{br}Elas também podem ser usadas para um mapeamento mais detalhado de muitos elementos que você normalmente mapearia com pontos. **Clique no botão {button} Área para adicionar uma nova área.**",
                 "start_playground": "Vamos adicionar este parquinho ao mapa desenhando uma área. Áreas podem ser traçadas colocando *nós* ao longo do limite exterior do elemento. **Clique com o mouse ou pressione a barra de espaço para posicionar um nó inicial em um dos cantos do parquinho.**",
+                "continue_playground": "Continue desenhando a área colocando mais nós ao longo da borda do campo de recreação. É bom conectar a área as vias de caminhada existentes.{br} Dica: você pode pressionar a tecla '{alt}' para evitar que os nós se conectem a outros recursos. **Continue a desenhar uma área para o campo de recreação.**",
                 "finish_playground": "Termine a área pressionando Enter, ou clicando novamente no primeiro ou último nó. **Termine de desenhar a área do parquinho.**",
                 "search_playground": "**Procure por '{preset}'.**",
                 "choose_playground": "**Escolha {preset} na lista.**",
@@ -860,6 +910,8 @@
             },
             "startediting": {
                 "title": "Começar a editar",
+                "help": "Agora você está pronto para editar NO OpenStreetMap!{br.} Você pode reproduzir este passo a passo a qualquer momento ou ver mais documentações clicando no botão Ajuda {button} ou pressionando a tecla '{key}'.",
+                "shortcuts": "Você pode ver uma lista de comandos juntamente com seus atalhos de teclado pressionando a tecla '{key}'.",
                 "save": "Não esqueça de salvar suas alterações regularmente!",
                 "start": "Começar a mapear!"
             }
@@ -867,6 +919,9 @@
         "shortcuts": {
             "title": "Atalhos de teclado",
             "tooltip": "Mostra a tela de atalhos de teclado.",
+            "toggle": {
+                "key": "?"
+            },
             "key": {
                 "alt": "Alt",
                 "backspace": "Backspace",
@@ -894,6 +949,7 @@
                 "title": "Navegar",
                 "navigation": {
                     "title": "Navegação",
+                    "pan": "Mapa panôramico",
                     "zoom": "Aumentar/Diminuir ",
                     "zoom_more": "Aumentar/Diminuir Bastante"
                 },
@@ -907,7 +963,9 @@
                     "background": "Mostrar opções de imagem de fundo",
                     "background_switch": "Voltar para a última imagem de fundo",
                     "map_data": "Mostre as opções dos dados do mapa",
-                    "fullscreen": "Entrar no modo de tela cheia"
+                    "fullscreen": "Entrar no modo de tela cheia",
+                    "wireframe": "Alternar modo wireframe",
+                    "minimap": "Alternar minimapa"
                 },
                 "selecting": {
                     "title": "Selecione um recurso",
@@ -915,9 +973,11 @@
                     "select_multi": "Selecione multiplos recursos"
                 },
                 "with_selected": {
-                    "title": "Com o recurso selecionado"
+                    "title": "Com o recurso selecionado",
+                    "edit_menu": "Alterna menu de edição"
                 },
                 "vertex_selected": {
+                    "title": "Com nó selecionado",
                     "previous": "Pule para o nó anterior ",
                     "next": "Pule para o próximo nó",
                     "first": "Pule para o primeiro nó",
@@ -930,27 +990,49 @@
                     "title": "Desenhar",
                     "add_point": "modo 'Adicionar ponto' ",
                     "add_line": "modo 'Adicionar linha'",
-                    "add_area": "modo 'Adicionar area'"
+                    "add_area": "modo 'Adicionar area'",
+                    "place_point": "Adicione um ponto",
+                    "stop_line": "Concluir desenhando uma linha ou área"
                 },
                 "operations": {
                     "title": "Operações",
-                    "reverse": "Reverter a linha"
+                    "continue_line": "Continuar a linha no nó selecionado",
+                    "merge": "Combinar (juntar) elementos selecionados",
+                    "disconnect": "Desconectar elementos no nó selecionado",
+                    "split": "Dividir a linha em duas no nó selecionado",
+                    "reverse": "Reverter a linha",
+                    "move": "Mover elementos selecionados",
+                    "rotate": "Girar elementos selecionados",
+                    "circularize": "Circularizar uma linha fechada ou área",
+                    "reflect_long": "Refletir elementos ao longo do eixo mais longo",
+                    "reflect_short": "Refletir elementos ao longo do eixo mais curto",
+                    "delete": "Excluir elementos selecionados"
                 },
                 "commands": {
                     "title": "Comandos",
+                    "copy": "Copiar elementos selecionados",
+                    "paste": "Colar elementos copiados",
                     "undo": "Desfazer última ação",
                     "redo": "Refazer última ação",
                     "save": "Salvar alterações"
                 }
             },
             "tools": {
-                "title": "Ferramentas"
+                "title": "Ferramentas",
+                "info": {
+                    "title": "Informações",
+                    "all": "Alterna todos os painéis de informação",
+                    "background": "Alterna painel de fundo",
+                    "history": "Alterna painel de histórico",
+                    "location": "Alterna painel de localização",
+                    "measurement": "Alterna painel de medição"
+                }
             }
         },
         "presets": {
             "categories": {
                 "category-barrier": {
-                    "name": "Elementos de Barreira"
+                    "name": "Elementos de Barreiras"
                 },
                 "category-building": {
                     "name": "Tipos de Edificações"
@@ -1072,7 +1154,8 @@
                         "subdistrict": "Sub-Bairro",
                         "subdistrict!vn": "Ward/Commune/Townlet",
                         "suburb": "Bairro",
-                        "suburb!jp": "Ward"
+                        "suburb!jp": "Ward",
+                        "unit": "Unidade"
                     }
                 },
                 "admin_level": {
@@ -1192,6 +1275,10 @@
                 "brand": {
                     "label": "Marca"
                 },
+                "bridge": {
+                    "label": "Tipo",
+                    "placeholder": "Padrão"
+                },
                 "building": {
                     "label": "Edifício"
                 },
@@ -1251,11 +1338,18 @@
                         "clockwise": "Sentido Horário"
                     }
                 },
+                "clothes": {
+                    "label": "Roupas"
+                },
                 "club": {
                     "label": "Tipo"
                 },
                 "collection_times": {
                     "label": "Horários de Coleta"
+                },
+                "comment": {
+                    "label": "Comentário do Changeset",
+                    "placeholder": "Breve descrição das suas contribuições (obrigatório)"
                 },
                 "communication_multi": {
                     "label": "Tipos de Comunicação"
@@ -1266,6 +1360,9 @@
                 "contact/webcam": {
                     "label": "URL da Webcam",
                     "placeholder": "http://exemplo.com.br/"
+                },
+                "content": {
+                    "label": "Conteúdo"
                 },
                 "country": {
                     "label": "País"
@@ -1287,6 +1384,10 @@
                 },
                 "currency_multi": {
                     "label": "Tipos de Moeda"
+                },
+                "cutting": {
+                    "label": "Tipo",
+                    "placeholder": "Padrão"
                 },
                 "cycle_network": {
                     "label": "Rede"
@@ -1373,6 +1474,10 @@
                     "label": "Email",
                     "placeholder": "example@example.com"
                 },
+                "embankment": {
+                    "label": "Tipo",
+                    "placeholder": "Padrão"
+                },
                 "emergency": {
                     "label": "Emergência"
                 },
@@ -1413,6 +1518,10 @@
                 "fixme": {
                     "label": "Corrija-me"
                 },
+                "ford": {
+                    "label": "Tipo",
+                    "placeholder": "Padrão"
+                },
                 "fuel": {
                     "label": "Combustível"
                 },
@@ -1434,15 +1543,15 @@
                 "generator/method": {
                     "label": "Método"
                 },
+                "generator/output/electricity": {
+                    "label": "Potência",
+                    "placeholder": "50 MW, 100 MW, 200 MW..."
+                },
                 "generator/source": {
                     "label": "Fonte"
                 },
                 "generator/type": {
                     "label": "Tipo"
-                },
-                "golf_hole": {
-                    "label": "Nº do buraco",
-                    "placeholder": "Número do buraco (1-18)"
                 },
                 "grape_variety": {
                     "label": "Variedades de Uva"
@@ -1453,6 +1562,10 @@
                 },
                 "handrail": {
                     "label": "Corrimão"
+                },
+                "hashtags": {
+                    "label": "Hashtags",
+                    "placeholder": "#exemplo"
                 },
                 "height": {
                     "label": "Altura (Metros)"
@@ -1513,6 +1626,9 @@
                 },
                 "kerb": {
                     "label": "Meio-fio"
+                },
+                "label": {
+                    "label": "Etiqueta"
                 },
                 "lamp_type": {
                     "label": "Tipo"
@@ -1585,6 +1701,9 @@
                 "man_made": {
                     "label": "Tipo"
                 },
+                "manhole": {
+                    "label": "Tipo"
+                },
                 "map_size": {
                     "label": "Cobertura"
                 },
@@ -1604,6 +1723,9 @@
                 },
                 "maxweight": {
                     "label": "Peso Máximo"
+                },
+                "milestone_position": {
+                    "label": "Posição do Marco"
                 },
                 "mtb/scale": {
                     "label": "Dificuldade para Mountain Biking",
@@ -1792,6 +1914,10 @@
                 "plant": {
                     "label": "Planta"
                 },
+                "plant/output/electricity": {
+                    "label": "Potência",
+                    "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
                 "population": {
                     "label": "População"
                 },
@@ -1821,7 +1947,37 @@
                     }
                 },
                 "ref": {
-                    "label": "Código de referência"
+                    "label": "Código de Referência"
+                },
+                "ref_aeroway_gate": {
+                    "label": "Número do Portão"
+                },
+                "ref_golf_hole": {
+                    "label": "Número do Buraco",
+                    "placeholder": "1-18"
+                },
+                "ref_highway_junction": {
+                    "label": "Número do Entroncamento"
+                },
+                "ref_platform": {
+                    "label": "Número da Plataforma"
+                },
+                "ref_road_number": {
+                    "label": "Número da Estrada"
+                },
+                "ref_route": {
+                    "label": "Número da Rota"
+                },
+                "ref_runway": {
+                    "label": "Número da Pista",
+                    "placeholder": "Ex. 01L/19R"
+                },
+                "ref_stop_position": {
+                    "label": "Número da Parada"
+                },
+                "ref_taxiway": {
+                    "label": "Nome da Pista de Taxiamento",
+                    "placeholder": "Ex. A5"
                 },
                 "relation": {
                     "label": "Tipo"
@@ -1937,7 +2093,7 @@
                     "label": "Público Alvo"
                 },
                 "source": {
-                    "label": "Fonte"
+                    "label": "Fontes"
                 },
                 "sport": {
                     "label": "Esportes"
@@ -2077,6 +2233,10 @@
                     "label": "Árvores"
                 },
                 "tunnel": {
+                    "label": "Tipo",
+                    "placeholder": "Padrão"
+                },
+                "tunnel_waterway": {
                     "label": "Túnel"
                 },
                 "vending": {
@@ -2207,7 +2367,7 @@
                     "terms": "Pista de pouso e decolagem"
                 },
                 "aeroway/taxiway": {
-                    "name": "Pista de taxiamento",
+                    "name": "Pista de Taxiamento",
                     "terms": "Taxiway"
                 },
                 "aeroway/terminal": {
@@ -2471,6 +2631,9 @@
                     "name": "Igreja",
                     "terms": "Igreja, Capela"
                 },
+                "amenity/place_of_worship/hindu": {
+                    "name": "Templo Hindu"
+                },
                 "amenity/place_of_worship/jewish": {
                     "name": "Sinagoga",
                     "terms": "Sinagoga"
@@ -2478,6 +2641,15 @@
                 "amenity/place_of_worship/muslim": {
                     "name": "Mesquita",
                     "terms": "Mesquita"
+                },
+                "amenity/place_of_worship/shinto": {
+                    "name": "Capela Xintoísta"
+                },
+                "amenity/place_of_worship/sikh": {
+                    "name": "Templo Sique"
+                },
+                "amenity/place_of_worship/taoist": {
+                    "name": "Templo Taoísta"
                 },
                 "amenity/planetarium": {
                     "name": "Planetário",
@@ -2538,9 +2710,15 @@
                     "name": "Escola",
                     "terms": "Área Escolar, Terreno Escolar, Pátio Escolar"
                 },
+                "amenity/scrapyard": {
+                    "name": "Ferro Velho"
+                },
                 "amenity/shelter": {
                     "name": "Abrigo contra Intempéries",
                     "terms": "Abrigo contra Intempéries"
+                },
+                "amenity/shower": {
+                    "name": "Ducha"
                 },
                 "amenity/social_facility": {
                     "name": "Unidade de Assistência Social",
@@ -2640,6 +2818,9 @@
                     "name": "Veterinário",
                     "terms": "Veterinário, Médico veterinário, pet, animal de estimação, animais"
                 },
+                "amenity/waste/dog_excrement": {
+                    "name": "Lixeira para excrementos de cães"
+                },
                 "amenity/waste_basket": {
                     "name": "Lixeira",
                     "terms": "Cesto de Lixo, Lixeira, Balde de Lixo"
@@ -2667,6 +2848,27 @@
                 "area/highway": {
                     "name": "Superfície da estrada",
                     "terms": "Superfície rodoviária, pavimentação"
+                },
+                "attraction/animal": {
+                    "name": "Animal"
+                },
+                "attraction/big_wheel": {
+                    "name": "Roda Gigante"
+                },
+                "attraction/bumper_car": {
+                    "name": "Carro Choque"
+                },
+                "attraction/carousel": {
+                    "name": "Carrossel"
+                },
+                "attraction/pirate_ship": {
+                    "name": "Navio Pirata"
+                },
+                "attraction/roller_coaster": {
+                    "name": "Montanha Russa"
+                },
+                "attraction/water_slide": {
+                    "name": "Toboágua"
                 },
                 "barrier": {
                     "name": "Barreira",
@@ -3238,8 +3440,8 @@
                     "terms": "Autoestrada, Via Expressa, Via rápida"
                 },
                 "highway/motorway_junction": {
-                    "name": "Acesso / Saída de Autoestrada",
-                    "terms": "Acesso / Saída de Autoestrada"
+                    "name": "Entroncamento / Saída de Autoestrada",
+                    "terms": "Acesso / Saída de Autoestrada, Junção / Saída de Autoestrada"
                 },
                 "highway/motorway_link": {
                     "name": "Ligação de Autoestrada",
@@ -3411,7 +3613,7 @@
                 },
                 "junction": {
                     "name": "Entroncamento",
-                    "terms": "Encruzilhada, junção"
+                    "terms": "Encruzilhada, Junção"
                 },
                 "landuse": {
                     "name": "Uso da terra",
@@ -3855,6 +4057,12 @@
                     "name": "Estação de Tratamento de Água",
                     "terms": "Tratamento de Água"
                 },
+                "man_made/watermill": {
+                    "name": "Moinho de Água"
+                },
+                "man_made/windmill": {
+                    "name": "Moinho de Vento"
+                },
                 "man_made/works": {
                     "name": "Fábrica",
                     "terms": "Fábrica, Planta de produção, chão de fábrica,"
@@ -4044,8 +4252,7 @@
                     "terms": "ONG Escritório, Departamento de ONG, Organização não governamental"
                 },
                 "office/physician": {
-                    "name": "Médico",
-                    "terms": "médico, consultório, doutor, consulta"
+                    "name": "Médico"
                 },
                 "office/political_party": {
                     "name": "Escritório de Partido Político",
@@ -4131,6 +4338,12 @@
                     "name": "Gerador de Energia",
                     "terms": "Gerador, Energia"
                 },
+                "power/generator/source_nuclear": {
+                    "name": "Reator Nuclear"
+                },
+                "power/generator/source_wind": {
+                    "name": "Turbina Eólica"
+                },
                 "power/line": {
                     "name": "Linha de Transmissão",
                     "terms": "Fio Elétrico, Condutor Elétrico, Linha de Transmissão"
@@ -4197,6 +4410,9 @@
                     "name": "Cruzamento de Ferrovia (Estrada)",
                     "terms": "Passagem de Nível (Estrada)"
                 },
+                "railway/milestone": {
+                    "name": "Marco de Ferrovia"
+                },
                 "railway/monorail": {
                     "name": "Monotrilho",
                     "terms": "Monotrilho"
@@ -4213,6 +4429,9 @@
                     "name": "Trilho de trem",
                     "terms": "Trilho"
                 },
+                "railway/signal": {
+                    "name": "Sinal de Ferrovia"
+                },
                 "railway/station": {
                     "name": "Estação Ferroviária",
                     "terms": "Estação Ferroviária"
@@ -4224,6 +4443,9 @@
                 "railway/subway_entrance": {
                     "name": "Entrada de Metrô",
                     "terms": "Entrada de Estação de Metrô, Metrô, Estação, Transporte Público"
+                },
+                "railway/switch": {
+                    "name": "Desvio Ferroviário"
                 },
                 "railway/tram": {
                     "name": "Trilho de bonde",
@@ -5138,6 +5360,20 @@
                     "text": "© Michael Spreng, CC by-SA 3.0, dados do mapa Colaboradores do OpenStreetMap, ODbL 1.0"
                 },
                 "name": "Trilhas marcadas: esportes de inverno"
+            },
+            "basemap.at": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Mapa base da Áustria, baseado em dados governamentais.",
+                "name": "basemap.at"
+            },
+            "basemap.at-orthofoto": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Ortofotomapa fornecido por basemap.at. Sucessor de geoimage.at imagery.",
+                "name": "Ortofotomapa geoimage.at"
             },
             "hike_n_bike": {
                 "attribution": {

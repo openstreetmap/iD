@@ -328,8 +328,6 @@
         },
         "commit": {
             "title": "Carica su OpenStreetMap",
-            "description_placeholder": "Una breve descrizione delle tue modifiche (obbligatoria)",
-            "message_label": "Commento al gruppo di modifiche",
             "upload_explanation": "Le modifiche che carichi saranno visibili su tutte le mappe che usano i dati di OpenStreetMap.",
             "upload_explanation_with_user": "Le modifiche che carichi come {user} saranno visibili su tutte le mappe che usano i dati di OpenStreetMap.",
             "save": "Carica",
@@ -1462,10 +1460,6 @@
                 "generator/type": {
                     "label": "Tipo"
                 },
-                "golf_hole": {
-                    "label": "Codice",
-                    "placeholder": "Numero buca (1-18)"
-                },
                 "grape_variety": {
                     "label": "Varietà"
                 },
@@ -1842,9 +1836,6 @@
                         "container": "Contenitore"
                     }
                 },
-                "ref": {
-                    "label": "Riferimento"
-                },
                 "relation": {
                     "label": "Tipo"
                 },
@@ -1957,9 +1948,6 @@
                 },
                 "social_facility_for": {
                     "label": "Tipo di utenza"
-                },
-                "source": {
-                    "label": "Fonte"
                 },
                 "sport": {
                     "label": "Sport"
@@ -2097,9 +2085,6 @@
                 },
                 "trees": {
                     "label": "Alberi"
-                },
-                "tunnel": {
-                    "label": "Tunnel"
                 },
                 "vending": {
                     "label": "Beni venduti"
@@ -4066,8 +4051,7 @@
                     "terms": "ong,ngo,onu,associazione,non profit,nonprofit,no profit,onlus,non lucrativa,senza fini di lucro,cooperativa,cooperazione"
                 },
                 "office/physician": {
-                    "name": "Medico",
-                    "terms": "medico,chirurgo,ambulatorio"
+                    "name": "Medico"
                 },
                 "office/political_party": {
                     "name": "Sede di partito",

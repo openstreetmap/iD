@@ -2,27 +2,235 @@
     "dv": {
         "modes": {
             "add_area": {
+                "title": "އިމާރާތްތައް",
                 "description": "ޕާރކުތަކާއި، އިމާރާތްތަކާއި އަދިވެސް ފާހަގަކުރެވޭ ތަންތަން ހިމަނުއްވާ"
             },
             "add_line": {
+                "title": "ރޮނގު",
                 "description": "ހައިވޭއާއި، މަގުތަކާއި، ދުވާރާއި އަދި އެހެނިހެން ރޮނގުތައް ހިމަނުއްވާ"
             },
             "add_point": {
+                "title": "ލޮކޭޝަން ޕޮއިންޓް",
                 "description": "ރެސްޓޯރަންޓްތަކާއި، ފާހަގަކުރެވޭ ބިނާތަކާއި، ޕޯސްޓް ފޮށިތަކާއި، އެހެނިހެން މުހިއްމު ތަންތަން ހިމަނުއްވާ"
             }
         },
+        "operations": {
+            "add": {
+                "annotation": {
+                    "point": "މައުލޫމާތެއް އިތުރުކުރައްވައިފި."
+                }
+            },
+            "start": {
+                "annotation": {
+                    "line": "ރޮނގެއް އިތުރުކުރަން ފަށައިފި",
+                    "area": "ސަރަޙައްދެއް އިތުރުކުރަން ފަށައިފި"
+                }
+            },
+            "continue": {
+                "title": "ކުރިއަަށްދޭ",
+                "description": "މިރޮނގު ކުރިއަށްގެންދޭ",
+                "not_eligible": "މިރޮޮނގު މިތަނުގައި ކުރިއަކަށް ނުގެންދެވޭނެ",
+                "annotation": {
+                    "line": "ކުރިިއަށް ގެންދިޔަ ރޮނގު",
+                    "area": "ކުރިއަށް ގެންދިޔަ ސަރަޙައްދު"
+                }
+            },
+            "change_tags": {
+                "annotation": "ޓެގެއް ބަދަލުކުރުން"
+            },
+            "circularize": {
+                "title": "މިސަރަޙައްދު ވަށްބުރަކަށް ބަދަލުކުރައްވާ",
+                "description": {
+                    "line": "މިިރޮނގު ވަށްބުރަކަށް ހައްދަވާ"
+                },
+                "not_closed": "މިި ވަށްބުރަކަށް ނުހެދޭނެ "
+            },
+            "orthogonalize": {
+                "description": {
+                    "area": "މިސަރަޙައްދުގެ ކަންތައް ހަތަރެސްކަން ކުރައްވާ"
+                },
+                "annotation": {
+                    "area": "މިސަރަޙައްދުގެ ކަންތައް ހަތަރެސްކަން ކުރައްވާ"
+                },
+                "not_squarish": "މި ހަތަރެސްކަނަކަށް ނުހެދޭނެ"
+            },
+            "delete": {
+                "title": "ޑިލީޓްކުރުން",
+                "description": {
+                    "single": "އެއްްކޮށް ޑިލީޓްކޮށްލާ."
+                }
+            },
+            "disconnect": {
+                "title": "ވަކިކުރުން",
+                "description": "މި ރޮނގުތަކާއި، ސަރަޙައްދުތައް ވަކިކުރައްވާ",
+                "not_connected": "އެންމެ ރޮނގެއް އޮތުމުން ޑިސްކަނެކްޓް ޓޫލް ބޭނުމެއް ނުކުރެވޭނެ"
+            },
+            "move": {
+                "title": "ކުރިއަށް",
+                "description": {
+                    "single": "މިބަައި އެހެން ތަނަކަށް ބަދަލުކުރައްވާ",
+                    "multiple": "މިބަައި އެހެން ތަނަކަށް ބަދަލުކުރައްވާ"
+                }
+            },
+            "reflect": {
+                "title": {
+                    "long": "ދިގުމިނަށް ގެނައި ބަދަލު",
+                    "short": "ކުރުމިނަށް ގެނައި ބަދަލު"
+                },
+                "description": {
+                    "long": {
+                        "single": "އެންމެ ދުރަށް ދެވޭ ހިސާބަށް މިމައުލޫމާތު އެއްކުރައްވާ"
+                    },
+                    "short": {
+                        "single": "އެންމެ ކުައިރިއަށް ދެވޭނެހެން މިމައުލޫމާތު އެއްކުރައްވާ"
+                    }
+                }
+            },
+            "rotate": {
+                "title": "އަނބުރާލާ",
+                "description": {
+                    "single": "މެދު ޕޮއިންޓާ ދިމާވާނެހެން އަނބުރާލާ"
+                }
+            },
+            "reverse": {
+                "title": "ދާދިމާ ބަދަލުކުރުމަށް",
+                "description": "މިރޮނގު އަނެއް ކޮޅަށް ދާނެހެން ހައްދަވާ"
+            },
+            "split": {
+                "title": "ބައިކޮށްލާ",
+                "description": {
+                    "line": "މިރޮނގު ދެބަޔަށް ބައިކޮށްލާ"
+                },
+                "not_eligible": "ފަށާއިރު ނުވަތަ ނިންމާއިރު ބައި ނުކުރެވޭނެ ރޮނގުތައް"
+            }
+        },
+        "undo": {
+            "tooltip": "ރަނގަޅުކުރޭ: {action}",
+            "nothing": "ރަނގަޅުކުރަންޖެހޭ ތަނެެއް ނެތް"
+        },
+        "redo": {
+            "tooltip": "އަލުން ހައްދަވާ: {action}",
+            "nothing": "އަލުން ހަދަންޖެހޭ ތަނެއް ނެތް"
+        },
+        "tooltip_keyhint": "ޝޯރޓްކަޓް:",
+        "translate": {
+            "translate": "އެކި ބަސްބަހުން ބޭނުންކުރާ ނަންތައް",
+            "localized_translation_label": "އެހެން ބަހަކުން ކިޔާ ނަން",
+            "localized_translation_language": "ބަސްް ޚިޔާރުކުރައްވާ",
+            "localized_translation_name": "ނަން"
+        },
+        "help_translate": "އެކި ބަސްބަހުން ބޭނުންކުރާ ނަންތައް",
+        "info_panels": {
+            "measurement": {
+                "area": "އިމާރާތްތައް"
+            }
+        },
+        "geometry": {
+            "point": "ލޮކޭޝަން ޕޮއިންޓް",
+            "line": "ރޮނގު",
+            "area": "އިމާރާތްތައް"
+        },
+        "geocoder": {
+            "search": "މުޅި ދުނިޔެއިން ބެލުމަށް ހޯދާ",
+            "no_results_visible": "ޗާޓުގައި ތިހޯދާ މައުލޫމާތެއް ނެތް"
+        },
         "inspector": {
+            "all_fields": "ހުރިހާ މަޢުލޫމާތެއް",
+            "all_tags": "ޓެގްތައް",
+            "all_relations": "ޗާޓަުގައި ހިމެނޭ ހުރިހާ ބައިތަކެއް",
+            "choose": "ކަޮންކަހަލަ މައުލޫމާތެއްކަން ފާހަގަކުރޭ",
+            "search": "ހޯދާ",
+            "feature_list": "ފާހަގަކުރެވޭ ތަންތަން ހޯދާ",
+            "radio": {
+                "structure": {
+                    "type": "އެކިިބާވަތްތަކުގެ ތަންތަން"
+                }
+            },
             "add_fields": "ޗާާޓަށް މައުލޫމާތު އެއްކުރައްވާ"
+        },
+        "background": {
+            "description": "ސެޓެލައިޓް މެޕް"
+        },
+        "map_data": {
+            "data_layers": "ފަށަލަތައް"
+        },
+        "save": {
+            "title": "ސޭވްކުރައްވާ",
+            "help": "ގެެނައި ބަދަލުތައް ބެލުމަށްފަހު، އެހެން ފަރާތްތަކަށް އޯޕަން ސްޓްރީޓް މެޕަށް އަޕްލޯޑްކުރައްވާ",
+            "no_changes": "އެއްވެސް ބަދަލެއް އަދި ނުގެނޭ"
+        },
+        "help": {
+            "title": "އެހީ ހޯއްދަވާ",
+            "help": "# އެހީ ހޯއްދަވާ\n\nމިއީ އޯޕަން ސްޓްރީޓް މެޕްގެ އެޑިޓަރެއް. އޯޕަން ސްޓްރީޓް މެޕަކީ ހިލޭ އަދި އެޑިޓްކުރެވޭ ދުނިޔޭގެ ޗާޓެއް\n\nތިސަރަޙައްދުގެ ހުރިހާ މައުލޫމާތެއް އޯޕަން ސްޓްރީޓް މެޕްގައި ހިމެނޭނެ، މިއީ، ހުރިހާ އެންމެނަށް ފަސޭހަވާނެހެން މުޅި ދުނިޔޭގެ ހުރިހާ ހިސާބެއްގައި ބޭނުންކުރަމުންދާ ޗާޓެއް\n\nމިޗާޓަށް ގެންނަވާ ބަދަލުތައް އޯޕަން ސްޓްރީޓް މެޕް ބޭނުންކުރާ ހުރިހާ ފަރާތްތަކަށް ފެންނާނެ\n\nIn order to make an edit, you'll need to\n[log in](https://www.openstreetmap.org/login).\n\nThe [iD editor](http://ideditor.com/) is a collaborative project with [sourcecode available on GitHub](https://github.com/openstreetmap/iD).\n"
+        },
+        "shortcuts": {
+            "browsing": {
+                "help": {
+                    "title": "އެހީ ހޯއްދަވާ",
+                    "help": "އެހީ ހޯއްދަވާ"
+                }
+            },
+            "editing": {
+                "commands": {
+                    "undo": "ރަނގަޅުކުރޭ",
+                    "redo": "އަލުން ހައްދަވާ",
+                    "save": "ގެނައި ބަދަލުތައް ސޭވްކުރައްވާ"
+                }
+            }
         },
         "presets": {
             "categories": {
+                "category-barrier": {
+                    "name": "ފާރުތައް"
+                },
                 "category-building": {
                     "name": "އެކި ވައްތަރުގެ އިމާރާތް"
+                },
+                "category-landuse": {
+                    "name": "ބިން ބޭނުންކުރާގޮތުގެ ފާހަގަތައް"
+                },
+                "category-natural-area": {
+                    "name": "ގުދުރަތީ ގޮތުން ފާހަގަކުރެވޭ ތަންތަން"
+                },
+                "category-natural-line": {
+                    "name": "ގުދުރަތީ ގޮތުން ފާހަގަކުރެވޭ ތަންތަން"
+                },
+                "category-natural-point": {
+                    "name": "ގުދުރަތީ ގޮތުން ފާހަގަކުރެވޭ ތަންތަން"
+                },
+                "category-path": {
+                    "name": "ދުުވާރު/ ބައިސިކަލް ދުއްވާ މަގު"
+                },
+                "category-rail": {
+                    "name": "ރޭލު މަގު"
+                },
+                "category-road": {
+                    "name": "ތަފާތު މަގުތައް"
                 }
             },
             "fields": {
+                "access": {
+                    "label": "ހުއްދަދެވޭ ތަންތަން",
+                    "types": {
+                        "access": "ހަުރިހާ އެންމެނަށް ވަދެވޭ",
+                        "bicycle": "ބައިސިކަލް ދުއްވޭތޯ ނުވަތަ ނޫންތޯ",
+                        "foot": "ހިނގާފައި އުޅޭ މަގުތައް",
+                        "horse": "އަސް",
+                        "motor_vehicle": "އުޅަނދުފަހަރަށް ވަދެވޭތޯ ނުވަތަ ނޫންތޯ"
+                    }
+                },
+                "access_simple": {
+                    "label": "ހުއްދަދެވޭ ތަންތަން"
+                },
                 "address": {
-                    "label": "އެޑްރެސް"
+                    "label": "އެޑްރެސް",
+                    "placeholders": {
+                        "city": "ސިިޓީ",
+                        "city!jp": "ސިިޓީ/އަވަށް/Village/Tokyo Special Ward",
+                        "city!vn": "ސިިޓީ/އަވަށް",
+                        "district!vn": "Arrondissement/އަވަށް/District",
+                        "place": "ތަނުގެ ނަން"
+                    }
                 },
                 "building": {
                     "label": "އިމާރާތް"
@@ -30,15 +238,107 @@
                 "building_area": {
                     "label": "އިމާރާތް"
                 },
-                "structure": {
-                    "options": {
-                        "bridge": "ފާލަން"
+                "capacity": {
+                    "label": "ރެސްޓޯރަންޓުގެ ޖާގަ"
+                },
+                "cuisine": {
+                    "label": "ރެސްްޓޯރަންޓްގެ ޚާއްސަ ރަހަތައް"
+                },
+                "cycleway": {
+                    "label": "ބަައިސިކަލް ދުއްވޭ މަގުތައް",
+                    "types": {
+                        "cycleway:left": "ވައަތް ފަރާތް",
+                        "cycleway:right": "ކަނާތް ފަރާތް"
                     }
+                },
+                "delivery": {
+                    "label": "ޑެލިވަރީކުރުން"
+                },
+                "denomination": {
+                    "label": "ދީން"
+                },
+                "fire_hydrant/type": {
+                    "options": {
+                        "pond": "ފެންގަނޑު"
+                    }
+                },
+                "generator/source": {
+                    "label": "ޗާޓަށް މައުލޫމާތު ދިން ފަރާތް"
+                },
+                "internet_access": {
+                    "label": "އިންްޓަރނެޓް ލިބޭތޯ ނުވަތަ ނޫންތޯ"
+                },
+                "lanes": {
+                    "label": "ގޯޅިތަކުގެ އަދަދު"
+                },
+                "levels": {
+                    "label": "ލެެވެލްތައް"
+                },
+                "maxheight": {
+                    "label": "އެންމެ އުސް އުޅަނދުތައް"
+                },
+                "maxspeed": {
+                    "label": "ދުުއްވޭ އެންމެ ބާރު ސްޕީޑު"
+                },
+                "name": {
+                    "label": "ނަން",
+                    "placeholder": "ޢާއްމު ނަންތައް"
+                },
+                "oneway": {
+                    "label": "އެެއްކޮޅަށް ދުއްވާ މަގު"
+                },
+                "oneway_yes": {
+                    "label": "އެެއްކޮޅަށް ދުއްވާ މަގު"
+                },
+                "opening_hours": {
+                    "label": "ރެސްޓޯރަންޓް ހުޅުވިފައި ހުންނަ ވަގުތު"
+                },
+                "operator": {
+                    "label": "ރެސްޓޯރަންޓް ހިންގާ ފަރާތް"
+                },
+                "outdoor_seating": {
+                    "label": "ބޭރުގައި އިށީނދެވޭ ގޮތަށް ހުރި ރެސްޓޯރަންޓް"
+                },
+                "parking": {
+                    "options": {
+                        "surface": "މަގު"
+                    }
+                },
+                "smoking": {
+                    "label": "ދުންފަތުގެ އިސްތިޢުމާލުކުރުން ހުއްދަ"
+                },
+                "sport": {
+                    "label": "ކުޅިވަރު ސްޓޭޑިއަމް"
+                },
+                "sport_ice": {
+                    "label": "ކުޅިވަރު ސްޓޭޑިއަމް"
+                },
+                "sport_racing_motor": {
+                    "label": "ކުޅިވަރު ސްޓޭޑިއަމް"
+                },
+                "sport_racing_nonmotor": {
+                    "label": "ކުޅިވަރު ސްޓޭޑިއަމް"
+                },
+                "structure": {
+                    "label": "އެކި މަގުތަކުގެ އޮނިގަނޑު",
+                    "options": {
+                        "bridge": "ފާލަން",
+                        "tunnel": "ޓަނަލް"
+                    }
+                },
+                "surface": {
+                    "label": "މަގު"
+                },
+                "takeaway": {
+                    "label": "ޓޭކްއަވޭ ރެސްޓޯރަންޓް"
                 }
             },
             "presets": {
                 "address": {
                     "name": "އެޑްރެސް"
+                },
+                "aeroway/runway": {
+                    "name": "އެއާރޕޯޓް ރަންވޭ"
                 },
                 "aeroway/terminal": {
                     "name": "އެއާރޕޯޓް ގިމަތަ"
@@ -55,20 +355,95 @@
                 "amenity/cinema": {
                     "name": "ސިނަމާ"
                 },
+                "amenity/fast_food": {
+                    "name": "ފާސްޓް ފުޑް"
+                },
+                "amenity/hospital": {
+                    "name": "ހޮސްޕިޓަލް"
+                },
+                "amenity/library": {
+                    "name": "ލައިބްރަރީ"
+                },
                 "amenity/parking": {
                     "name": "ކާރު ޕާރކުކުރާ ސަރަޙައްދު"
+                },
+                "amenity/place_of_worship": {
+                    "name": "އަޅުކަންކުރާ ތަންތަން"
                 },
                 "amenity/place_of_worship/muslim": {
                     "name": "މިސްކިތް"
                 },
+                "amenity/restaurant": {
+                    "name": "ރެސްޓޯރަންޓް"
+                },
+                "amenity/school": {
+                    "name": "ސްކޫލު ބިން"
+                },
+                "amenity/toilets": {
+                    "name": "ފާޚާނާ"
+                },
+                "area": {
+                    "name": "އިމާރާތްތައް"
+                },
+                "area/highway": {
+                    "name": "މަގު"
+                },
                 "building": {
                     "name": "އިމާރާތް"
+                },
+                "building/apartments": {
+                    "name": "އެޕާރޓްމަންޓްތައް"
                 },
                 "building/commercial": {
                     "name": "ވިިޔަފާރި ޢިމާރާތްތައް"
                 },
+                "building/house": {
+                    "name": "ގެެދޮރު"
+                },
+                "building/industrial": {
+                    "name": "ސިނާާޢީ ޢިމާރާތްތައް"
+                },
+                "building/public": {
+                    "name": "ސަރުކާރު އިމާރާތްތައް"
+                },
+                "building/residential": {
+                    "name": "މީީހުން ދިރިއުޅޭ ޢިމާރާތްތައް"
+                },
+                "footway/crosswalk": {
+                    "name": "ކަަފިހި ހުރަސް"
+                },
+                "highway": {
+                    "name": "ހައިވޭ"
+                },
                 "highway/bus_stop": {
                     "name": "ބަސް ހުއްޓި"
+                },
+                "highway/crosswalk": {
+                    "name": "ކަަފިހި ހުރަސް"
+                },
+                "highway/path": {
+                    "name": "ދުވާރު"
+                },
+                "highway/primary": {
+                    "name": "މައި މަގު"
+                },
+                "highway/residential": {
+                    "name": "މީހުުން ދިރިއުޅޭ މަގުތައް"
+                },
+                "highway/service": {
+                    "name": "ޚިދުމަތްދޭ މަގުތައް"
+                },
+                "highway/tertiary": {
+                    "name": "ބާރުބޮޑު މަގުތައް"
+                },
+                "highway/track": {
+                    "name": "ނުހަދާ މަގުތައް"
+                },
+                "highway/unclassified": {
+                    "name": "ފާހަަގަނުކުރެވޭ ކުދި މަގުތައް"
+                },
+                "landuse/aquaculture": {
+                    "name": "އެެކުއާކަލްޗަރ"
                 },
                 "landuse/cemetery": {
                     "name": "ސަހަރާ"
@@ -76,14 +451,140 @@
                 "landuse/commercial": {
                     "name": "ވިޔަފާރި ސަރަޙައްދު"
                 },
+                "landuse/farm": {
+                    "name": "ދަނޑުވެރި ސަރަޙައްދުތައް"
+                },
+                "landuse/farmland": {
+                    "name": "ދަނޑުވެރި ސަރަޙައްދުތައް"
+                },
+                "landuse/forest": {
+                    "name": "ޖަންގަލި"
+                },
+                "landuse/grass": {
+                    "name": "ވިނަގަނޑު"
+                },
+                "landuse/industrial": {
+                    "name": "ސިނާޢީ ސަރަޙައްދު"
+                },
+                "landuse/landfill": {
+                    "name": "ކުނި އުކާލާ ސަރަޙައްދު"
+                },
+                "landuse/military": {
+                    "name": "އަސްކަރީ ސަރަޙައްދު"
+                },
+                "landuse/residential": {
+                    "name": "މީހުން ދިރިއުޅޭ ސަރަޙައްދު"
+                },
+                "landuse/retail": {
+                    "name": "ވިޔަފާރި ސަރަޙައްދު"
+                },
+                "leisure/marina": {
+                    "name": "ޔޮޓު މެރީނާ"
+                },
+                "leisure/park": {
+                    "name": "ޕާރކުތައް"
+                },
+                "leisure/pitch/cricket": {
+                    "name": "ކްރިކެޓް ކުޅޭ ސަރަޙައްދު"
+                },
+                "leisure/sports_centre": {
+                    "name": "ކުުޅިވަރު މަރުކަޒު"
+                },
+                "leisure/stadium": {
+                    "name": "ސްޓޭޑިއަމް"
+                },
                 "man_made/bridge": {
                     "name": "ފާލަން"
+                },
+                "man_made/pier": {
+                    "name": "ބަނދަރު"
+                },
+                "natural/bare_rock": {
+                    "name": "ފަރުބަދަ ފަދަ ތަންތަން"
                 },
                 "natural/beach": {
                     "name": "މޫދު ސަރަޙައްދު"
                 },
+                "natural/coastline": {
+                    "name": "އައްސޭރިފަށް"
+                },
+                "natural/water": {
+                    "name": "ފެން"
+                },
+                "natural/water/lake": {
+                    "name": "ކޯރު"
+                },
+                "natural/water/pond": {
+                    "name": "ފެންގަނޑު"
+                },
+                "natural/wetland": {
+                    "name": "ޗަކަ ގަނޑު"
+                },
+                "natural/wood": {
+                    "name": "ޖަންގަލި"
+                },
+                "office/government": {
+                    "name": "ސަރުކާރު އޮފީސްތައް"
+                },
+                "office/travel_agent": {
+                    "name": "ޓްރެވެލް އޭޖެންސީ"
+                },
+                "place": {
+                    "name": "ތަނުގެ ނަން"
+                },
+                "place/city": {
+                    "name": "ސިިޓީ"
+                },
+                "place/island": {
+                    "name": "ރަށް"
+                },
+                "place/locality": {
+                    "name": "ރަށްްފުށު"
+                },
+                "place/town": {
+                    "name": "އަވަށް"
+                },
+                "point": {
+                    "name": "ލޮކޭޝަން ޕޮއިންޓް"
+                },
+                "power/line": {
+                    "name": "ކަރަންޓް ވިއުގަ"
+                },
+                "route/ferry": {
+                    "name": "ފެރީއަށްދާ މަގުތައް"
+                },
+                "shop": {
+                    "name": "ފިހާރަ"
+                },
                 "shop/car_repair": {
                     "name": "ކާާރު ހަދައިދޭ ގަރާޖް"
+                },
+                "shop/hardware": {
+                    "name": "ހާރޑްވެއާރ ފިހާރަ"
+                },
+                "shop/mobile_phone": {
+                    "name": "މޯބައިލް ފޯނު ވިއްކާ ފިހާރަ"
+                },
+                "shop/supermarket": {
+                    "name": "ސުޕަރމާރކެޓް"
+                },
+                "shop/travel_agency": {
+                    "name": "ޓްރެވެލް އޭޖެންސީ"
+                },
+                "tourism/hotel": {
+                    "name": "ހޮޓާ"
+                },
+                "type/route/ferry": {
+                    "name": "ފެރީއަށްދާ މަގުތައް"
+                },
+                "waterway": {
+                    "name": "ކަނޑުމަގު"
+                },
+                "waterway/canal": {
+                    "name": "ކެނެލް"
+                },
+                "waterway/dock": {
+                    "name": "ބޯޓުފަހަރު ބަނދަރުކުރާ ސަރަޙައްދު"
                 }
             }
         }

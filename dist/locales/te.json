@@ -510,9 +510,6 @@
                 "shop": {
                     "label": "రకం"
                 },
-                "source": {
-                    "label": "మూలం"
-                },
                 "structure": {
                     "options": {
                         "bridge": "వంతెన",

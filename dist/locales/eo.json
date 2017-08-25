@@ -328,10 +328,9 @@
         },
         "commit": {
             "title": "Alŝuti al OpenStreetMap",
-            "description_placeholder": "Konciza priskribo de viaj kontribuaĵoj (nepra)",
-            "message_label": "Ŝanĝara komento",
             "upload_explanation": "Ŝanĝoj alŝutotaj de vi estos videblaj sur ĉiuj mapoj, kiuj uzas datumojn de OpenStreetMap.",
             "upload_explanation_with_user": "Ŝanĝoj alŝutataj kiel {user} estos videblaj sur ĉiuj mapoj, kiuj uzas datumojn de OpenStreetMap.",
+            "request_review": "Mi volas por ke iu kontrolu miajn ŝanĝojn.",
             "save": "Alŝuti",
             "cancel": "Nuligi",
             "changes": "{count} ŝanĝoj",
@@ -1160,7 +1159,8 @@
                         "subdistrict": "Subdistrikto",
                         "subdistrict!vn": "Kvartalo/Komunumo/Urbeto",
                         "suburb": "Suburbo",
-                        "suburb!jp": "Kvartalo"
+                        "suburb!jp": "Kvartalo",
+                        "unit": "Unueco"
                     }
                 },
                 "admin_level": {
@@ -1280,6 +1280,10 @@
                 "brand": {
                     "label": "Marko"
                 },
+                "bridge": {
+                    "label": "Speco",
+                    "placeholder": "Norma"
+                },
                 "building": {
                     "label": "Konstruaĵo"
                 },
@@ -1348,6 +1352,10 @@
                 "collection_times": {
                     "label": "Repreno je"
                 },
+                "comment": {
+                    "label": "Ŝanĝara komento",
+                    "placeholder": "Konciza priskribo de viaj kontribuaĵoj (nepra)"
+                },
                 "communication_multi": {
                     "label": "Komunikada tipo"
                 },
@@ -1381,6 +1389,10 @@
                 },
                 "currency_multi": {
                     "label": "Valut-tipoj"
+                },
+                "cutting": {
+                    "label": "Speco",
+                    "placeholder": "Norma"
                 },
                 "cycle_network": {
                     "label": "Reto"
@@ -1467,6 +1479,10 @@
                     "label": "Retpoŝtadreso",
                     "placeholder": "ekzemplo@ekzemplo.com"
                 },
+                "embankment": {
+                    "label": "Speco",
+                    "placeholder": "Norma"
+                },
                 "emergency": {
                     "label": "Je danĝero"
                 },
@@ -1507,6 +1523,10 @@
                 "fixme": {
                     "label": "Riparu min!"
                 },
+                "ford": {
+                    "label": "Speco",
+                    "placeholder": "Norma"
+                },
                 "fuel": {
                     "label": "Brulaĵo"
                 },
@@ -1538,10 +1558,6 @@
                 "generator/type": {
                     "label": "Tipo"
                 },
-                "golf_hole": {
-                    "label": "Referenco",
-                    "placeholder": "Numero de truo (1-18)"
-                },
                 "grape_variety": {
                     "label": "Specoj de vinberujoj"
                 },
@@ -1551,6 +1567,10 @@
                 },
                 "handrail": {
                     "label": "Apogrelo"
+                },
+                "hashtags": {
+                    "label": "Ŝlosilvortoj",
+                    "placeholder": "#ekzemplo"
                 },
                 "height": {
                     "label": "Alto (metroj)"
@@ -1626,7 +1646,8 @@
                     "placeholder": "1, 2, 3…"
                 },
                 "layer": {
-                    "label": "Tavolo"
+                    "label": "Tavolo",
+                    "placeholder": "0"
                 },
                 "leaf_cycle": {
                     "label": "Foli-ciklo",
@@ -1708,6 +1729,10 @@
                 },
                 "maxweight": {
                     "label": "Maksimuma pezo"
+                },
+                "milestone_position": {
+                    "label": "Pozicio de mejloŝtono",
+                    "placeholder": "Distanco kun unu dekum-precizo (123.4)"
                 },
                 "mtb/scale": {
                     "label": "Montbicikla malfacileco",
@@ -1931,6 +1956,36 @@
                 "ref": {
                     "label": "Referenco"
                 },
+                "ref_aeroway_gate": {
+                    "label": "Enireja numero"
+                },
+                "ref_golf_hole": {
+                    "label": "Trua numero",
+                    "placeholder": "1-18"
+                },
+                "ref_highway_junction": {
+                    "label": "Vojkruciĝa numero"
+                },
+                "ref_platform": {
+                    "label": "Kaja numero"
+                },
+                "ref_road_number": {
+                    "label": "Voja numero"
+                },
+                "ref_route": {
+                    "label": "Kursa numero"
+                },
+                "ref_runway": {
+                    "label": "Numero de avia dromo",
+                    "placeholder": "ekz. 01L/19R"
+                },
+                "ref_stop_position": {
+                    "label": "Halteja numero"
+                },
+                "ref_taxiway": {
+                    "label": "Nomo de aŭtokur-strato",
+                    "placeholder": "ekz. A5"
+                },
                 "relation": {
                     "label": "Speco"
                 },
@@ -2045,7 +2100,7 @@
                     "label": "Alcela grupo"
                 },
                 "source": {
-                    "label": "Fonto"
+                    "label": "Fontoj"
                 },
                 "sport": {
                     "label": "Sportoj"
@@ -2185,6 +2240,10 @@
                     "label": "Arboj"
                 },
                 "tunnel": {
+                    "label": "Speco",
+                    "placeholder": "Norma"
+                },
+                "tunnel_waterway": {
                     "label": "Tunelo"
                 },
                 "vending": {
@@ -2478,7 +2537,7 @@
                 },
                 "amenity/fast_food": {
                     "name": "Rapidmanĝejo",
-                    "terms": "rapimanghejo,rapidmangxejo,manĝetejo,sandviĉejo,makdonaldo,fritbudo,fastfood,kebabo,hotdogo,hamburgero"
+                    "terms": "rapimanghejo,rapidmangxejo,manĝetejo,sandviĉejo,makdonaldo,fritbudo,fastfood,kebabo,hotdogo,hamburgero,picejo"
                 },
                 "amenity/ferry_terminal": {
                     "name": "Pramstacio",
@@ -2670,6 +2729,10 @@
                     "name": "Ŝirmejo",
                     "terms": "shirmejo,sxirmejo,ŝedo,budo,ŝirmo"
                 },
+                "amenity/shower": {
+                    "name": "Duŝejo",
+                    "terms": "duŝo,dushejo,dusxejo,banado"
+                },
                 "amenity/social_facility": {
                     "name": "Socia servejo",
                     "terms": "socia servo,socia helpo"
@@ -2799,6 +2862,58 @@
                 "area/highway": {
                     "name": "Vojpavimo",
                     "terms": "pavimo,kovraĵo,surfaco"
+                },
+                "attraction/amusement_ride": {
+                    "name": "Allogaĵo amuzparka",
+                    "terms": "atrakcio,allogajho,allogajxo,amuzparko"
+                },
+                "attraction/animal": {
+                    "name": "Besto",
+                    "terms": "bestoĝardeno,kaĝo,leono,,tigro,elefanto"
+                },
+                "attraction/big_wheel": {
+                    "name": "Spektoradego",
+                    "terms": "giganta radego,radego de Ferris,granda radego"
+                },
+                "attraction/bumper_car": {
+                    "name": "Kolizi-aŭtetoj (allogaĵo)",
+                    "terms": "koliziaj aŭtetoj,aŭtetoj,dodgem"
+                },
+                "attraction/bungee_jumping": {
+                    "name": "Saltado sur ŝnuro",
+                    "terms": "ŝnur-saltado,ŝnursaltado,bungee"
+                },
+                "attraction/carousel": {
+                    "name": "Karuselo",
+                    "terms": "karuselo"
+                },
+                "attraction/dark_ride": {
+                    "name": "Fantoma trajno (allogaĵo)",
+                    "terms": "dark ride,timiga trajno,promenveturo"
+                },
+                "attraction/drop_tower": {
+                    "name": "Defala turo (allogaĵo)",
+                    "terms": "turo,drop tower"
+                },
+                "attraction/pirate_ship": {
+                    "name": "Pirata ŝipo (allogaĵo)",
+                    "terms": "ŝipo,shipo,sxipo,piratŝipo"
+                },
+                "attraction/river_rafting": {
+                    "name": "Malsuprenflosado",
+                    "terms": "flosado,akva promenveturo"
+                },
+                "attraction/roller_coaster": {
+                    "name": "Onda fervojo",
+                    "terms": "reltobogano"
+                },
+                "attraction/train": {
+                    "name": "Trajneto (allogaĵo)",
+                    "terms": "turisma trajno,turisma vagonareto,vagonareto"
+                },
+                "attraction/water_slide": {
+                    "name": "Akva glitejo",
+                    "terms": "akvoglitejo,glitejo,akvoparko"
                 },
                 "barrier": {
                     "name": "Barilo",
@@ -3237,6 +3352,10 @@
                 "emergency/fire_hydrant": {
                     "name": "Hidranto",
                     "terms": "akvokrano,fajrohidranto"
+                },
+                "emergency/life_ring": {
+                    "name": "Savoringo",
+                    "terms": "sekurigilo,ringo"
                 },
                 "emergency/no": {
                     "name": "Vivsav-serva aliro: ne"
@@ -4007,6 +4126,10 @@
                     "name": "Stratkanala (pluvakvo) kovrilo",
                     "terms": "stratkanalo,kloako,kanalo,pluvakvo"
                 },
+                "manhole/telecom": {
+                    "name": "Stratkanala (telekomunikado) kovrilo",
+                    "terms": "stratkanalo,kabloj,subteraj kabloj,telefonaj kabloj"
+                },
                 "natural": {
                     "name": "Natura objekto",
                     "terms": "naturo"
@@ -4192,8 +4315,7 @@
                     "terms": "neregistara organizaĵo,ne-registara organizaĵo"
                 },
                 "office/physician": {
-                    "name": "Kabineto de kuracisto",
-                    "terms": "kuracisto,doktoro,sanigisto"
+                    "name": "Kabineto de kuracisto"
                 },
                 "office/political_party": {
                     "name": "Oficejo de politika partio",
@@ -4333,9 +4455,17 @@
                     "name": "Eksa relvojo (neekzistanta)",
                     "terms": "eksa fervojlinio,trako,relvojo"
                 },
+                "railway/buffer_stop": {
+                    "name": "Trakfina baraĵo",
+                    "terms": "trakfino,relfino,finrelo,baraĵo"
+                },
                 "railway/crossing": {
                     "name": "Traknivela pasejo (por piedirantoj)",
                     "terms": "pasejo,nivelpasejo,trenpasejo,trairejo,trajnpasejo"
+                },
+                "railway/derail": {
+                    "name": "Trakfina dereligilo",
+                    "terms": "relŝuo,relfino,finrelo"
                 },
                 "railway/disused": {
                     "name": "Forlasita relvojo",
@@ -4353,6 +4483,10 @@
                     "name": "Traknivela pasejo (por aŭtoj)",
                     "terms": "pasejo,nivelpasejo,trenpasejo,trajnpasejo"
                 },
+                "railway/milestone": {
+                    "name": "Mejloŝtono fervoja",
+                    "terms": "fervoja mejloŝtono"
+                },
                 "railway/monorail": {
                     "name": "Relvojo unurela",
                     "terms": "unurela fervojo,unurelvojo,fervojo"
@@ -4369,6 +4503,10 @@
                     "name": "Relvojo normalŝpura",
                     "terms": "erlvojo,relparo,trako,normalŝpura,larĝŝpura"
                 },
+                "railway/signal": {
+                    "name": "Fervojaj trafiklumoj",
+                    "terms": "semaforo,signalilo,haltmontrilo"
+                },
                 "railway/station": {
                     "name": "Stacidomo fervoja",
                     "terms": "fervoja stacidomo"
@@ -4380,6 +4518,14 @@
                 "railway/subway_entrance": {
                     "name": "Metroa enirejo",
                     "terms": "enirejo al metroo,metroo"
+                },
+                "railway/switch": {
+                    "name": "Relŝanĝilo",
+                    "terms": "relshanghilo,relsxangxilo,trakforko"
+                },
+                "railway/train_wash": {
+                    "name": "Vagonar-purigejo",
+                    "terms": "purigejo,purigilo,vagonara purigejo,trajnpurigejo,vagonarpurigejo,trajnopurigejo,trajnolavejo"
                 },
                 "railway/tram": {
                     "name": "Relvojo trama",
@@ -4509,8 +4655,8 @@
                     "terms": "fromaĝoj,fromaghoj,fromagxoj"
                 },
                 "shop/chemist": {
-                    "name": "Drogejo",
-                    "terms": "drogejo"
+                    "name": "Kosmetikaĵa (ankaŭ purigaĵoj) vendejo",
+                    "terms": "drogejo,kosmetikaĵoj,beligaĵoj,drogerio"
                 },
                 "shop/chocolate": {
                     "name": "Ĉokolada vendejo",
@@ -4541,7 +4687,7 @@
                     "terms": "fotokopiilo,lumkopiilo,kopiilo,ksero"
                 },
                 "shop/cosmetics": {
-                    "name": "Kosmetikaĵa vendejo",
+                    "name": "Kosmetikaĵa (persona higieno) vendejo",
                     "terms": "kosmetikaĵoj,kosmetikajhoj,kosmetikajxoj,drogejo,beligaĵoj,kosmetikoj,drogerio"
                 },
                 "shop/craft": {
@@ -4629,7 +4775,7 @@
                 },
                 "shop/gift": {
                     "name": "Suvenira vendejo",
-                    "terms": "suveniroj,memoraĵoj,vojaĝmemoraĵoj"
+                    "terms": "suveniroj,memoraĵoj,vojaĝmemoraĵoj,donacoj,donaĵoj"
                 },
                 "shop/greengrocer": {
                     "name": "Legom-butiko",

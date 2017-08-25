@@ -328,8 +328,6 @@
         },
         "commit": {
             "title": "Envoyer vers OpenStreetMap",
-            "description_placeholder": "Brève description de vos contributions (requis)",
-            "message_label": "Commentaire du groupe de modifications",
             "upload_explanation": "Les modifications envoyées seront visibles sur toutes les cartes qui utilisent les données d'OpenStreetMap.",
             "upload_explanation_with_user": "Les modifications envoyées en tant que {user} seront visibles sur toutes les cartes qui utilisent les données d'OpenStreetMap.",
             "save": "Envoyer",
@@ -347,6 +345,49 @@
         "contributors": {
             "list": "Modifications de {users}",
             "truncated_list": "Modifications de {users} et de {count} autres"
+        },
+        "info_panels": {
+            "key": "I",
+            "background": {
+                "key": "B",
+                "title": "Fond",
+                "zoom": "Zoom",
+                "vintage": "Vintage",
+                "unknown": "Inconnu",
+                "show_tiles": "Afficher la couche",
+                "hide_tiles": "Masquer le couche"
+            },
+            "history": {
+                "key": "H",
+                "title": "Historique",
+                "selected": "{n} dans la sélection",
+                "version": "Version",
+                "last_edit": "Dernière édition",
+                "edited_by": "Edité par",
+                "changeset": "Groupe de modification",
+                "unknown": "Inconnu",
+                "link_text": "Historique sur openstreetmap.org"
+            },
+            "location": {
+                "key": "L",
+                "title": "Emplacement",
+                "unknown_location": "Emplacement inconnu"
+            },
+            "measurement": {
+                "key": "M",
+                "title": "Mesures",
+                "selected": "{n} dans la sélection",
+                "geometry": "Geométrie",
+                "closed": "fermé",
+                "center": "Centre",
+                "perimeter": "Périmètre",
+                "length": "Longueur",
+                "area": "Superficie",
+                "centroid": "Centroïde",
+                "location": "Emplacement",
+                "metric": "Métrique",
+                "imperial": "Anglo-saxon"
+            }
         },
         "geometry": {
             "point": "point",
@@ -410,6 +451,7 @@
         "background": {
             "title": "Fond de carte",
             "description": "Paramètres du fond de carte",
+            "key": "B",
             "percent_brightness": "{opacity}% luminosité",
             "none": "Aucun",
             "best_imagery": "Meilleur fond de carte connu pour cet endroit",
@@ -422,12 +464,14 @@
             "offset": "«Glissez» partout dans la zone grise ci-dessous pour ajuster le décalage d'image, ou entrez les valeurs de décalage en mètres.",
             "minimap": {
                 "description": "Minicarte",
-                "tooltip": "Montre une carte de vue d'ensemble pour aider à localiser la zone actuellement affichée."
+                "tooltip": "Montre une carte de vue d'ensemble pour aider à localiser la zone actuellement affichée.",
+                "key": "/"
             }
         },
         "map_data": {
             "title": "Données cartographiques",
             "description": "Données cartographiques",
+            "key": "F",
             "data_layers": "Calques de données",
             "fill_area": "Remplissage des zones",
             "map_features": "Éléments de la carte",
@@ -486,7 +530,8 @@
         "area_fill": {
             "wireframe": {
                 "description": "Pas de remplissage (Filaire)",
-                "tooltip": "Activer le mode filaire facilite la vue de l'imagerie aérienne."
+                "tooltip": "Activer le mode filaire facilite la vue de l'imagerie aérienne.",
+                "key": "W"
             },
             "partial": {
                 "description": "Remplissage partiel",
@@ -499,7 +544,9 @@
         },
         "restore": {
             "heading": "Vous avez des changements non sauvegardés.",
-            "description": "Vous avez des changements non sauvegardés d'une précédente édition. Souhaitez-vous restaurer ces changements ?"
+            "description": "Vous avez des changements non sauvegardés d'une précédente édition. Souhaitez-vous restaurer ces changements ?",
+            "restore": "Restaurer mes modifications",
+            "reset": "Abandonner mes modifications"
         },
         "save": {
             "title": "Sauvegarder...",
@@ -589,7 +636,7 @@
             "out": "Dézoomer"
         },
         "cannot_zoom": "Impossible de zoomer plus en arrière dans ce mode.",
-        "full_screen": "Basculer en plein écran",
+        "full_screen": "Afficher/cacher le plein écran",
         "gpx": {
             "local_layer": "Fichier local",
             "drag_drop": "Glissez-déposez un fichier .gpx, .geojson ou .kml sur la page, ou cliquez sur le bouton de droite pour le rechercher dans votre ordinateur.",
@@ -609,6 +656,7 @@
         },
         "help": {
             "title": "Aide",
+            "key": "H",
             "help": "# Aide\n\nCeci est un éditeur pour [OpenStreetMap](http://www.openstreetmap.org/), la\ncarte du monde libre et éditable. Vous pouvez l'utiliser pour ajouter ou mettre à jour\nles données dans votre zone, et participer ainsi à la réalisation d'une carte du monde libre et à données ouvertes\nmeilleure pour tout le monde.\n\nLes modifications que vous réaliserez sur cette carte seront visibles par tous les utilisateurs d'OpenStreetMap. Pour commencer à modifier, vous devez vous [connecter](https://www.openstreetmap.org/login).\n\nL'[éditeur iD](http://ideditor.com/) est un projet collaboratif dont le [code\nsource est disponible sur GitHub](https://github.com/openstreetmap/iD).\n",
             "editing_saving": "# Édition & sauvegarde\n\nCet éditeur est conçu pour fonctionner de façon connecté et vous êtes\nactuellement en train de l'utiliser depuis un site web.\n\n### Sélection des éléments\n\nPour sélectionner un élément de la carte comme une route ou un point d’intérêt,\nil faut cliquer dessus sur la carte. Il sera alors mis en surbrillance et un\npanneau latéral s’ouvrira avec tous ses détails élément ainsi qu'un menu des\nactions disponibles pour cet élément.\n\nPour sélectionner plusieurs éléments, laisser appuyer sur la touche «Shift» du\nclavier. Pendant ce temps, vous pouvez au choix sélectionner les différents\néléments directement ou dessiner une zone rectangulaire à l'aide de la souris.\nLorsque le bouton de la souris est relâché, tous les objets à l'intérieur du\nrectangle seront sélectionnés.\n\n### Sauvegarde des modifications\n\nLorsque vous modifiez la carte (par exemple modification de routes, bâtiments\net places), ces changements sont conservés localement en attendant que vous\nles sauvegardiez sur le serveur. En cas d'erreur, il est possible d'annuler les\nchangements en cliquant sur le bouton idoine. De façon similaire il est possible\nde ré-appliquer un changement qui a été annulé.\n\nLorsque vous souhaitez sauvegarder sur le serveur vos changements, appuyer sur\nle bouton «Sauvegarder». La liste de vos modifications s'affichera alors, vous\npermettant de vérifier vos modifications. Par ailleurs, l'éditeur vous\npréviendra et conseillera si quelque chose semble incorrect.\n\nSi tout semble correct, vous pourrez alors écrire un commentaire du travail\neffectué (par exemple «Ajout d'une boulangerie») puis il faudra à nouveau\nappuyer sur le bouton «Sauvegarder» pour envoyer les changements sur\n[OpenStreetMap.org](http://www.openstreetmap.org/). Vos changements seront\nvisible par tous peu de temps après.\n\nSi vous ne pouvez pas terminer vos changements en une seule fois, vous pouvez\nfermer la fenêtre de l'éditeur. Vos changements seront enregistrés localement.\nLorsque vous ouvrirez à nouveau l'éditeur, sur le même ordinateur et avec le\nmême navigateur Web, l'éditeur vous proposera de récupérer le travail de la\nséance précédente.\n\n### Utilisation de l'éditeur\n\nVous pouvez consulter la [liste des raccourcis claviers](https://wiki.openstreetmap.org/wiki/FR:ID/Shortcuts).\n",
             "roads": "# Routes\n\nVous pouvez créer, mettre à jour et supprimer des routes à l'aide de l'éditeur. Il peut s'agir de tous types de routes : chemins, autoroutes, pistes cyclables, et plus encore : toute voie régulièrement fréquentée peut être cartographiée.\n\n### Sélection\n\nCliquez sur une route pour la sélectionner. Elle sera alors surlignée et un menu 'outils' apparaîtra sur la carte, ainsi qu'une barre d'état affichant des informations supplémentaires.\n\n### Modification\n\nIl est fréquent que les routes ne soient pas bien alignées avec l'imagerie satellite ou avec les traces GPS. Vous pouvez ajuster et corriger la position des routes.\n\nCliquez d'abord sur la route à modifier. Elle est alors surlignée et des points de contrôle apparaissent qui permettent de corriger sa position. Pour ajouter des points de contrôle, double-cliquez sur un segment de la route sans nœuds.\n\nSi la route est connectée à une autre, mais que la connexion est incorrecte, vous pouvez déplacer un de ses points de contrôle sur la seconde route pour corriger la connexion. Des routes bien connectées sont essentielles pour la carte et pour fournir de bonnes informations d'itinéraire.\n\nVous pouvez également cliquer sur l'outil 'Déplacer' ou appuyer sur le raccourci `M` pour déplacer l'ensemble de la route en une fois, puis cliquer de nouveau une fois pour sauvegarder le déplacement.\n\n### Suppression\n\nSi une route est complètement fausse - c'est-à-dire qu'elle n'apparaît pas sur l'image satellite, et que dans l'idéal, vous avez confirmé qu'elle n'existe pas sur le terrain - vous pouvez la supprimer, ce qui l'enlèvera de la carte. Faites attention lorsque vous supprimez des éléments : comme n'importe quelle autre modification, le résultat sera visible par tout le monde sur la carte. Les photos aériennes sont souvent dépassées et la route est peut-être tout simplement récente.\n\nPour supprimer une route, sélectionnez-la en cliquant dessus, puis cliquez sur l'icône 'Poubelle' ou appuyez sur la touche 'Suppr'.\n\n### Création\n\nVous avez constaté qu'une route de votre connaissance manque à la carte ? Cliquez sur l'icône 'Ligne' en haut à gauche de l'éditeur ou appuyez sur le raccourci `2` pour dessiner une route.\n\nPour commencer le dessin, cliquez sur l'endroit où commence la route. Si elle commence à l'embranchement d'une autre route, commencez le dessin en cliquant à l'endroit de la connexion.\n\nCliquez ensuite régulièrement le long de la route pour ajouter des points, en utilisant l'imagerie satellite comme référence. Si la route que vous dessinez croise une autre route, connectez les deux en cliquant à l'endroit de l'intersection. Lorsque vous avez terminé le dessin, double-cliquez ou appuyez sur 'Entrée'.\n",
@@ -861,6 +909,8 @@
             },
             "startediting": {
                 "title": "Sortir du tutoriel et contribuer",
+                "help": "Vous êtes maintenant prêt pour contribuer à OpenStreetMap !{br}Vous pouvez recommencer ce tutorial à tout moment ou lire plus de documentation en cliquant sur le {button} bouton Aide ou en pressant la touche '{key}'.",
+                "shortcuts": "Vous pouvez voir une liste des commandes avec leur raccourci clavier en pressant la touche '{key}'.",
                 "save": "N'oubliez pas de sauver régulièrement vos modifications !",
                 "start": "Commencer à cartographier !"
             }
@@ -868,6 +918,9 @@
         "shortcuts": {
             "title": "Raccourcis clavier",
             "tooltip": "Afficher la page de raccourcis clavier",
+            "toggle": {
+                "key": "?"
+            },
             "key": {
                 "alt": "Alt",
                 "backspace": "Retour",
@@ -911,7 +964,7 @@
                     "background_switch": "Reprendre l'imagerie précédemment utilisée",
                     "map_data": "Accéder aux options d'affichage des données",
                     "fullscreen": "Passer en plein écran",
-                    "wireframe": "Basculer le mode filaire",
+                    "wireframe": "Afficher/cacher le mode filaire",
                     "minimap": "Afficher/cacher mini-carte"
                 },
                 "selecting": {
@@ -966,6 +1019,17 @@
                     "undo": "Annuler la dernière action",
                     "redo": "Rétablir la dernière action",
                     "save": "Enregistrer les modifications"
+                }
+            },
+            "tools": {
+                "title": "Outils",
+                "info": {
+                    "title": "Information",
+                    "all": "Afficher/cacher le panneau général",
+                    "background": "Afficher/cacher le panneau fond",
+                    "history": "Afficher/cacher le panneau d'historique",
+                    "location": "Afficher/cacher le panneau de localisation",
+                    "measurement": "Afficher/cacher le panneau de mesure"
                 }
             }
         },
@@ -1273,6 +1337,9 @@
                         "clockwise": "Sens horaire"
                     }
                 },
+                "clothes": {
+                    "label": "Vêtements"
+                },
                 "club": {
                     "label": "Type"
                 },
@@ -1288,6 +1355,9 @@
                 "contact/webcam": {
                     "label": "adresse de visioconférence",
                     "placeholder": "http://example.com/"
+                },
+                "content": {
+                    "label": "Contenu"
                 },
                 "country": {
                     "label": "Pays"
@@ -1456,15 +1526,15 @@
                 "generator/method": {
                     "label": "Méthode"
                 },
+                "generator/output/electricity": {
+                    "label": "Puissance",
+                    "placeholder": "50 MW, 100 MW, 200 MW..."
+                },
                 "generator/source": {
                     "label": "Source"
                 },
                 "generator/type": {
                     "label": "Type"
-                },
-                "golf_hole": {
-                    "label": "Référence",
-                    "placeholder": "Numéro du trou (1-18)"
                 },
                 "grape_variety": {
                     "label": "Cépages"
@@ -1536,6 +1606,9 @@
                 "kerb": {
                     "label": "Aménagement de trottoir, Abaissement (bateau)"
                 },
+                "label": {
+                    "label": "Étiquette"
+                },
                 "lamp_type": {
                     "label": "Type"
                 },
@@ -1605,6 +1678,9 @@
                     "label": "Lieu"
                 },
                 "man_made": {
+                    "label": "Type"
+                },
+                "manhole": {
                     "label": "Type"
                 },
                 "map_size": {
@@ -1814,6 +1890,10 @@
                 "plant": {
                     "label": "Type de plante"
                 },
+                "plant/output/electricity": {
+                    "label": "Puissance",
+                    "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
                 "population": {
                     "label": "Population"
                 },
@@ -1843,7 +1923,29 @@
                     }
                 },
                 "ref": {
-                    "label": "Référence"
+                    "label": "Code d'identification"
+                },
+                "ref_aeroway_gate": {
+                    "label": "Numéro de porte"
+                },
+                "ref_golf_hole": {
+                    "label": "Numéro du trou",
+                    "placeholder": "1-18"
+                },
+                "ref_highway_junction": {
+                    "label": "Identifiant de l'embranchement"
+                },
+                "ref_platform": {
+                    "label": "Identifiant du quai"
+                },
+                "ref_road_number": {
+                    "label": "Identifiant de la route"
+                },
+                "ref_route": {
+                    "label": "Identifiant de l'itinéraire"
+                },
+                "ref_stop_position": {
+                    "label": "Identifiant de l'arrêt"
                 },
                 "relation": {
                     "label": "Type"
@@ -1957,9 +2059,6 @@
                 },
                 "social_facility_for": {
                     "label": "Personnes aidées"
-                },
-                "source": {
-                    "label": "Source"
                 },
                 "sport": {
                     "label": "Sport"
@@ -2097,9 +2196,6 @@
                 },
                 "trees": {
                     "label": "Arbres"
-                },
-                "tunnel": {
-                    "label": "Tunnel"
                 },
                 "vending": {
                     "label": "Marchandise proposée"
@@ -2493,6 +2589,10 @@
                     "name": "Église chrétienne",
                     "terms": "Église, Culte chrétien"
                 },
+                "amenity/place_of_worship/hindu": {
+                    "name": "Temple hindou",
+                    "terms": "<translate with synonyms or related terms for 'Hindu Temple', separated by commas>"
+                },
                 "amenity/place_of_worship/jewish": {
                     "name": "Synagogue",
                     "terms": "Synagogue"
@@ -2500,6 +2600,18 @@
                 "amenity/place_of_worship/muslim": {
                     "name": "Mosquée",
                     "terms": "Mosquée"
+                },
+                "amenity/place_of_worship/shinto": {
+                    "name": "Shintoïste",
+                    "terms": "<translate with synonyms or related terms for 'Shinto Shrine', separated by commas>"
+                },
+                "amenity/place_of_worship/sikh": {
+                    "name": "Temple Sikh",
+                    "terms": "<translate with synonyms or related terms for 'Sikh Temple', separated by commas>"
+                },
+                "amenity/place_of_worship/taoist": {
+                    "name": "Temple Taoïste",
+                    "terms": "<translate with synonyms or related terms for 'Taoist Temple', separated by commas>"
                 },
                 "amenity/planetarium": {
                     "name": "Planétarium",
@@ -2550,7 +2662,7 @@
                 },
                 "amenity/restaurant": {
                     "name": "Restaurant",
-                    "terms": "Restaurant"
+                    "terms": "Restaurant,brasserie"
                 },
                 "amenity/sanitary_dump_station": {
                     "name": "Station de vidange sanitaire",
@@ -2559,6 +2671,10 @@
                 "amenity/school": {
                     "name": "Établissement scolaire - élémentaire ou secondaire",
                     "terms": "école élémentaire, école primaire, collège, lycée, \ncycles primaires et secondaires, enseignements élémentaire et secondaire, \nenseignement élémentaire, enseignement secondaire, \nétablissement d'enseignement élémentaire, établissement d'enseignement secondaire, \nécole, écoliers, CP-CE1-CE2-CM1-CM2, college, lycee, school"
+                },
+                "amenity/scrapyard": {
+                    "name": "Ferraille",
+                    "terms": "<translate with synonyms or related terms for 'Scrap Yard', separated by commas>"
                 },
                 "amenity/shelter": {
                     "name": "Abri",
@@ -2661,6 +2777,10 @@
                 "amenity/veterinary": {
                     "name": "Vétérinaire",
                     "terms": "Vétérinaire"
+                },
+                "amenity/waste/dog_excrement": {
+                    "name": "Bac à excrément de chien",
+                    "terms": "<translate with synonyms or related terms for 'Dog Excrement Bin', separated by commas>"
                 },
                 "amenity/waste_basket": {
                     "name": "Poubelle pour piétons",
@@ -2940,7 +3060,7 @@
                 },
                 "craft/brewery": {
                     "name": "Brasserie",
-                    "terms": "Brasserie"
+                    "terms": "Brasserie, brasserie artisanale"
                 },
                 "craft/carpenter": {
                     "name": "Menuisier / Charpentier",
@@ -2961,6 +3081,10 @@
                 "craft/confectionery": {
                     "name": "Confiseur",
                     "terms": "Confiserie"
+                },
+                "craft/distillery": {
+                    "name": "Distillerie",
+                    "terms": "<translate with synonyms or related terms for 'Distillery', separated by commas>"
                 },
                 "craft/dressmaker": {
                     "name": "Couturier",
@@ -3873,9 +3997,29 @@
                     "name": "Usine d'eau potable",
                     "terms": "Usine d'eau potable"
                 },
+                "man_made/watermill": {
+                    "name": "Moulin à eau",
+                    "terms": "<translate with synonyms or related terms for 'Watermill', separated by commas>"
+                },
+                "man_made/windmill": {
+                    "name": "Moulin à vent",
+                    "terms": "<translate with synonyms or related terms for 'Windmill', separated by commas>"
+                },
                 "man_made/works": {
                     "name": "Usine",
                     "terms": "Usine"
+                },
+                "manhole": {
+                    "name": "Bouche d'égout",
+                    "terms": "<translate with synonyms or related terms for 'Manhole', separated by commas>"
+                },
+                "manhole/drain": {
+                    "name": "Collecteur d'eaux pluviales",
+                    "terms": "<translate with synonyms or related terms for 'Storm Drain', separated by commas>"
+                },
+                "manhole/telecom": {
+                    "name": "Puit de télécommunication",
+                    "terms": "<translate with synonyms or related terms for 'Telecom Manhole', separated by commas>"
                 },
                 "natural": {
                     "name": "Nature",
@@ -4062,8 +4206,7 @@
                     "terms": "ONG"
                 },
                 "office/physician": {
-                    "name": "Médecin",
-                    "terms": "Médecin, Docteur"
+                    "name": "Médecin"
                 },
                 "office/political_party": {
                     "name": "Parti politique",
@@ -4149,6 +4292,14 @@
                     "name": "Génératrice",
                     "terms": "Génératrice"
                 },
+                "power/generator/source_nuclear": {
+                    "name": "Centrale nucléaire",
+                    "terms": "<translate with synonyms or related terms for 'Nuclear Reactor', separated by commas>"
+                },
+                "power/generator/source_wind": {
+                    "name": "Centrale éolienne",
+                    "terms": "<translate with synonyms or related terms for 'Wind Turbine', separated by commas>"
+                },
                 "power/line": {
                     "name": "Ligne électrique majeure",
                     "terms": "Ligne électrique"
@@ -4194,6 +4345,10 @@
                 "railway/abandoned": {
                     "name": "Voie ferrée déposée",
                     "terms": "Voie ferrée abandonnée"
+                },
+                "railway/buffer_stop": {
+                    "name": "Butoir",
+                    "terms": "<translate with synonyms or related terms for 'Buffer Stop', separated by commas>"
                 },
                 "railway/crossing": {
                     "name": "Passage à niveau (piétons)",
@@ -5046,6 +5201,198 @@
                     "name": "Seuil",
                     "terms": "Petit barrage,Seuil"
                 }
+            }
+        },
+        "imagery": {
+            "Bing": {
+                "description": "Images satellite et aérienne.",
+                "name": "Images aériennes Bing"
+            },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "Termes & commentaires"
+                },
+                "description": "Images satellite DigitalGlobe premium",
+                "name": "Images DigitalGlobe premium"
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "Termes & commentaires"
+                },
+                "description": "Images satellite DigitalGlobe standard",
+                "name": "Images DigitalGlobe standard"
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "© contributeurs OpenStreetMap, CC-BY-SA"
+                },
+                "description": "Couche OpenStreetMap par défaut",
+                "name": "OpenStreetMap (Standard)"
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "Images satellite DigitalGlobe premium"
+                },
+                "description": "Images satellite et aérienne",
+                "name": "Satellite Mapbox "
+            },
+            "New_and_Misaligned_TIGER_Roads-2013": {
+                "description": "Au niveau de zoom 16+, carte du domaine public issue du recensement américain. A des niveaux de zooms inférieur, les changements depuis 2006, moins les changements déjà incorporés dans OpenStreetMap",
+                "name": "Routes TIGER nouvelles & mal alignées"
+            },
+            "OSM_Inspector-Addresses": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, contributeurs OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OSM inspector : Adresses"
+            },
+            "OSM_Inspector-Geometry": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, contributeurs OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Geometrie"
+            },
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, contributeurs OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Autoroutes"
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, contributeurs OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Surface"
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, contributeurs OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OSM Inspector : Lieux"
+            },
+            "OSM_Inspector-Routing": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, contributeurs OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Itinéraire"
+            },
+            "OSM_Inspector-Tagging": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, contributeurs OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OSM Inspector: Étiqueter"
+            },
+            "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, données cartographiques des contributeurs OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Vélo"
+            },
+            "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, données cartographiques des contributeurs OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Randonnée"
+            },
+            "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, données cartographiques des contributeurs OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: MTB"
+            },
+            "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, données cartographiques des contributeurs OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Patinage"
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, données cartographiques des contributeurs OpenStreetMap, ODbL 1.0"
+                },
+                "name": "Waymarked Trails: Sports d'hiver"
+            },
+            "basemap.at": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Carte de base de l'Autriche, basée sur des données gouvernementales.",
+                "name": "basemap.at"
+            },
+            "basemap.at-orthofoto": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Couche orthophoto fournie par basemap.at \"successeur\" de geoimage.at.",
+                "name": "Orthophoto basemap.at"
+            },
+            "hike_n_bike": {
+                "attribution": {
+                    "text": "© contributeurs OpenStreetMap"
+                },
+                "name": "Randonnée & Vélo"
+            },
+            "mapbox_locator_overlay": {
+                "attribution": {
+                    "text": "Termes & commentaires"
+                },
+                "description": "Montrer les fonctionnalités majeures pour vous aider à vous orienter.",
+                "name": "Couche localisateur"
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "© contributeurs OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OpenPT Map (couche)"
+            },
+            "osm-gps": {
+                "attribution": {
+                    "text": "© contributeurs OpenStreetMap"
+                },
+                "description": "Traces GPS publiques téléchargés sur OpenStreetMap",
+                "name": "Traces GPS OpenStreetMap"
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "© contributeurs OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (Standard Noir & Blanc)"
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "© contributeurs OpenStreetMap, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (style allemand)"
+            },
+            "qa_no_address": {
+                "attribution": {
+                    "text": "Simon Poole, données © contributeurs OpenStreetMap"
+                },
+                "name": "Pas d'adresse QA"
+            },
+            "skobbler": {
+                "attribution": {
+                    "text": "© Tuile: données skobbler Map : contributeurs OpenStreetMap"
+                },
+                "name": "skobbler"
+            },
+            "stamen-terrain-background": {
+                "attribution": {
+                    "text": "Map tiles par Stamen Design, sous CC BY 3.0"
+                },
+                "name": "Stamen Terrain"
+            },
+            "tf-cycle": {
+                "attribution": {
+                    "text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
+                },
+                "name": "Thunderforest OpenCycleMap"
+            },
+            "tf-landscape": {
+                "attribution": {
+                    "text": "Cartes © Thunderforest, données © contributeurs OpenStreetMap"
+                },
+                "name": "Thunderforest Landscape"
             }
         }
     }

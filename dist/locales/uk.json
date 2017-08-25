@@ -328,10 +328,9 @@
         },
         "commit": {
             "title": "Завантажити до OpenStreetMap",
-            "description_placeholder": "Стислий опис ваших дій (обовʼязково)",
-            "message_label": "Пояснення до набору змін",
             "upload_explanation": "Зміни, зроблені вами, з’являться на всіх мапах, що використовують дані OpenStreetMap.",
             "upload_explanation_with_user": "Зміни, зроблені вами під іменем {user}, з’являться на всіх мапах, що використовують дані OpenStreetMap.",
+            "request_review": "Було б гарно, якби хтось перевірив мою роботу.",
             "save": "Зберегти",
             "cancel": "Скасувати",
             "changes": "{count} Змін",
@@ -1162,7 +1161,8 @@
                         "subdistrict": "Підрайон",
                         "subdistrict!vn": "Округ/Комуна/Селище",
                         "suburb": "Передмістя",
-                        "suburb!jp": "Округ"
+                        "suburb!jp": "Округ",
+                        "unit": "Блок"
                     }
                 },
                 "admin_level": {
@@ -1282,6 +1282,10 @@
                 "brand": {
                     "label": "Марка"
                 },
+                "bridge": {
+                    "label": "Тип",
+                    "placeholder": "Типово"
+                },
                 "building": {
                     "label": "Будинок"
                 },
@@ -1341,11 +1345,18 @@
                         "clockwise": "За годинниковою стрілкою"
                     }
                 },
+                "clothes": {
+                    "label": "Одяг"
+                },
                 "club": {
                     "label": "Тип"
                 },
                 "collection_times": {
                     "label": "Час виїмки пошти"
+                },
+                "comment": {
+                    "label": "Коментар до пакету правок",
+                    "placeholder": "Стислий опис ваших дій (обовʼязково)"
                 },
                 "communication_multi": {
                     "label": "Траслює сигнал"
@@ -1356,6 +1367,9 @@
                 "contact/webcam": {
                     "label": "URL веб-камери",
                     "placeholder": "http://example.com/"
+                },
+                "content": {
+                    "label": "Вміст"
                 },
                 "country": {
                     "label": "Країна"
@@ -1377,6 +1391,10 @@
                 },
                 "currency_multi": {
                     "label": "Валюта"
+                },
+                "cutting": {
+                    "label": "Тип",
+                    "placeholder": "Типово"
                 },
                 "cycle_network": {
                     "label": "Мережа"
@@ -1463,6 +1481,10 @@
                     "label": "Е-пошта",
                     "placeholder": "example@example.com"
                 },
+                "embankment": {
+                    "label": "Тип",
+                    "placeholder": "Типово"
+                },
                 "emergency": {
                     "label": "Аварійні служби"
                 },
@@ -1503,6 +1525,10 @@
                 "fixme": {
                     "label": "Потребує виправлення"
                 },
+                "ford": {
+                    "label": "Тип",
+                    "placeholder": "Типово"
+                },
                 "fuel": {
                     "label": "АЗС"
                 },
@@ -1524,15 +1550,15 @@
                 "generator/method": {
                     "label": "Метод"
                 },
+                "generator/output/electricity": {
+                    "label": "Вихідна потужність",
+                    "placeholder": "50 МВт, 100 МВт, 200 МВт…"
+                },
                 "generator/source": {
                     "label": "Джерело"
                 },
                 "generator/type": {
                     "label": "Тип"
-                },
-                "golf_hole": {
-                    "label": "Лунка",
-                    "placeholder": "Номер лунки (1-18)"
                 },
                 "grape_variety": {
                     "label": "Сорти винограду"
@@ -1543,6 +1569,10 @@
                 },
                 "handrail": {
                     "label": "Перила"
+                },
+                "hashtags": {
+                    "label": "Хеш-теґ",
+                    "placeholder": "#зразок"
                 },
                 "height": {
                     "label": "Висота (в метрах)"
@@ -1618,7 +1648,8 @@
                     "placeholder": "1, 2, 3…"
                 },
                 "layer": {
-                    "label": "Шар"
+                    "label": "Шар",
+                    "placeholder": "0"
                 },
                 "leaf_cycle": {
                     "label": "Сезонність",
@@ -1700,6 +1731,10 @@
                 },
                 "maxweight": {
                     "label": "Обмеження ваги"
+                },
+                "milestone_position": {
+                    "label": "Кілометрова позначка",
+                    "placeholder": "Відстань з точністю 1/10 (123.4)"
                 },
                 "mtb/scale": {
                     "label": "Рівень складності для гірських велосипедів",
@@ -1888,6 +1923,10 @@
                 "plant": {
                     "label": "Рослини"
                 },
+                "plant/output/electricity": {
+                    "label": "Вихідна потужність",
+                    "placeholder": "500 МВт, 1000 МВт, 2000 МВт…"
+                },
                 "population": {
                     "label": "Населення"
                 },
@@ -1918,6 +1957,36 @@
                 },
                 "ref": {
                     "label": "Номер"
+                },
+                "ref_aeroway_gate": {
+                    "label": "Номер виходу на посадку"
+                },
+                "ref_golf_hole": {
+                    "label": "Номер лунки",
+                    "placeholder": "1-18"
+                },
+                "ref_highway_junction": {
+                    "label": "Номер з'їзду/виїзду"
+                },
+                "ref_platform": {
+                    "label": "Номер платформи"
+                },
+                "ref_road_number": {
+                    "label": "Номер дороги"
+                },
+                "ref_route": {
+                    "label": "Номер маршрута"
+                },
+                "ref_runway": {
+                    "label": "Номер злітної смуги",
+                    "placeholder": "Напр. 01L/19R"
+                },
+                "ref_stop_position": {
+                    "label": "Номер зупинки"
+                },
+                "ref_taxiway": {
+                    "label": "Назва руліжної дорожки",
+                    "placeholder": "напр. A5"
                 },
                 "relation": {
                     "label": "Тип"
@@ -2033,7 +2102,7 @@
                     "label": "Обслуговуються"
                 },
                 "source": {
-                    "label": "Джерело"
+                    "label": "Джерела"
                 },
                 "sport": {
                     "label": "Спорт"
@@ -2173,6 +2242,10 @@
                     "label": "Дерева"
                 },
                 "tunnel": {
+                    "label": "Тип",
+                    "placeholder": "Типово"
+                },
+                "tunnel_waterway": {
                     "label": "Тунель"
                 },
                 "vending": {
@@ -2233,7 +2306,7 @@
                 },
                 "aerialway/chair_lift": {
                     "name": "Крісельний підйомник",
-                    "terms": "Chair lift, rhsctkmybq gslqjvybr, крісельний підйомник"
+                    "terms": "Chair lift,rhsctkmybq gslqjvybr,крісельний,підйомник,витяг"
                 },
                 "aerialway/drag_lift": {
                     "name": "Бугельний підйомник",
@@ -2241,7 +2314,7 @@
                 },
                 "aerialway/gondola": {
                     "name": "Гондоли",
-                    "terms": "Gondola, Ujyljkb, гондола"
+                    "terms": "gondola,ujyljkb,гондола"
                 },
                 "aerialway/goods": {
                     "name": "Вантажна канатна дорога",
@@ -2249,7 +2322,7 @@
                 },
                 "aerialway/magic_carpet": {
                     "name": "Стрічковий транспортер",
-                    "terms": "стрічковий транспортер, стрічковий підйомник, конвеєрний підйомник, cnhsxrjdbq nhfcgjhnth, cnhsxrjdbq gslqkvybr, rjydt'hybq gslqjvybr, magic carpet lift"
+                    "terms": "стрічковий,транспортер,підйомник,конвеєрний,cnhsxrjdbq nhfcgjhnth,cnhsxrjdbq gslqkvybr,rjydt'hybq gslqjvybr,magic carpet lift"
                 },
                 "aerialway/mixed_lift": {
                     "name": "Змішаний підйомник",
@@ -2257,34 +2330,34 @@
                 },
                 "aerialway/platter": {
                     "name": "Платерний підйомник",
-                    "terms": "круг, платер, підйомник, лижі"
+                    "terms": "круг,платер,підйомник,лижі"
                 },
                 "aerialway/pylon": {
                     "name": "Опора канатної дороги",
-                    "terms": "Опора, канатна дорога"
+                    "terms": "Опора,канатна,дорога,витяг"
                 },
                 "aerialway/rope_tow": {
                     "name": "Бугельний підйомник",
-                    "terms": "бугель, підйомник, лижі"
+                    "terms": "бугель,підйомник,лижі,витяг"
                 },
                 "aerialway/station": {
                     "name": "Станція канатної дороги",
-                    "terms": "канатна, підвісна, дорога, станція"
+                    "terms": "канатна,підвісна,дорога,станція,витяг"
                 },
                 "aerialway/t-bar": {
                     "name": "Анкерний підйомник",
-                    "terms": "підйомник, анкер, бугель, лижі"
+                    "terms": "підйомник,анкер,бугель,лижі,витяг"
                 },
                 "aeroway": {
                     "name": "Аеропорт"
                 },
                 "aeroway/aerodrome": {
                     "name": "Аеропорт",
-                    "terms": "Airport, аеропорт, аеродром, летовище, fthjgjhn, fthjlhjv, ktnjdbot"
+                    "terms": "airport,аеропорт,аеродром,летовище,fthjgjhn,fthjlhjv,ktnjdbot"
                 },
                 "aeroway/apron": {
                     "name": "Перон",
-                    "terms": "Apron, перон, gthjy"
+                    "terms": "Apron,перон,gthjy"
                 },
                 "aeroway/gate": {
                     "name": "Вихід на посадку",
@@ -2292,15 +2365,15 @@
                 },
                 "aeroway/hangar": {
                     "name": "Ангар",
-                    "terms": "Hangar, fyufh, ангар"
+                    "terms": "Hangar,fyufh,ангар"
                 },
                 "aeroway/helipad": {
                     "name": "Вертолітний майданчик",
-                    "terms": "Helipad, dthnjksnybq vfqlfyxbr, вертоліт, вертодром, вертольотний майданчик"
+                    "terms": "helipad,dthnjksnybq vfqlfyxbr,вертоліт,вертодром,вертольотний,майданчик,гелікоптер"
                 },
                 "aeroway/runway": {
                     "name": "Злітно-посадкова смуга",
-                    "terms": "Runway, pksnyj-gjcflrjdf cveuf, посадкова смуга, злітна смуга"
+                    "terms": "Runway,pksnyj-gjcflrjdf cveuf,посадкова смуга,злітна смуга"
                 },
                 "aeroway/taxiway": {
                     "name": "Руліжна доріжка",
@@ -2327,35 +2400,35 @@
                 },
                 "amenity/arts_centre": {
                     "name": "Мистецький центр",
-                    "terms": "Arts Center,vbcntwmrbq wtynh, галерея, мистецький центр"
+                    "terms": "Arts Center,vbcntwmrbq wtynh,галерея,мистецький центр"
                 },
                 "amenity/atm": {
                     "name": "Банкомат",
-                    "terms": "ATM, fyrjvfn, банкомат"
+                    "terms": "ATM,fyrjvfn,банкомат"
                 },
                 "amenity/bank": {
                     "name": "Банк",
-                    "terms": "Bank, dfyr, каса, rfcf, кредитна спілка, rhtlbnyf cgskrf, скарбниця, казначейство, rfpyfxtqcndj, відділення, dsllsktyyz, кредит, rhtlbn, депозит, ltgjpbn, платіж, gkfns;,  готівка, ujnsdrf, переказ"
+                    "terms": "bank,банк,dfyr,каса,rfcf,кредитна спілка,rhtlbnyfcgskrf,скарбниця,казначейство,rfpyfxtqcndj,відділення,dsllsktyyz,кредит,rhtlbn,депозит,ltgjpbn,платіж,gkfns,готівка,ujnsdrf,переказ"
                 },
                 "amenity/bar": {
                     "name": "Бар",
-                    "terms": "Bar, fh, бар"
+                    "terms": "бар,пиво,напої,алкоголь"
                 },
                 "amenity/bbq": {
                     "name": "Барбекю/мангал",
-                    "terms": "мангал, барбекю, гриль, дрова, вогонь, шашлик"
+                    "terms": "мангал,барбекю,гриль,дрова,вогонь,шашлик"
                 },
                 "amenity/bench": {
                     "name": "Лавка",
-                    "terms": "Bench, kfdrf, лавка"
+                    "terms": "bench,kfdrf,лавка"
                 },
                 "amenity/bicycle_parking": {
                     "name": "Вело-парковка",
-                    "terms": "Bicycle Parking, dtkj-gfhrjdrf, велопарковка"
+                    "terms": "Bicycle Parking,dtkj-gfhrjdrf,велопарковка,ровер,велосипед"
                 },
                 "amenity/bicycle_rental": {
                     "name": "Прокат велосипедів",
-                    "terms": "Bicycle Rental, ghjrfn dtkjcbgtlsd, прокат велосипедів"
+                    "terms": "Bicycle Rental,ghjrfn dtkjcbgtlsd,прокат,велосипед"
                 },
                 "amenity/bicycle_repair_station": {
                     "name": "Станція ремонту велосипедів",
@@ -2363,35 +2436,35 @@
                 },
                 "amenity/biergarten": {
                     "name": "Пивний садок",
-                    "terms": "пиво, лавка, їжа, тепло, напої, beer, biergarten, відпочинок"
+                    "terms": "пиво,лавка,їжа,тепло,напої,beer,biergarten, відпочинок"
                 },
                 "amenity/boat_rental": {
                     "name": "Прокат човнів",
-                    "terms": "Boat Rental,ghjrfn xjdysd, катамарани, прокат човнів"
+                    "terms": "Boat Rental,ghjrfn xjdysd,катамаран,прокат,човни,човен"
                 },
                 "amenity/bureau_de_change": {
                     "name": "Обмін валют",
-                    "terms": "валюта, долар, євро, курс, біржа, банк"
+                    "terms": "валюта,долар,євро,курс,біржа,банк,обміник,міняло,пункт"
                 },
                 "amenity/bus_station": {
                     "name": "Автобусна станція",
-                    "terms": "Bus Station, fdnjecyf cnfywsz, автобусна станція, вокзал"
+                    "terms": "Bus Station,fdnjecyf cnfywsz,автобус,станція,вокзал"
                 },
                 "amenity/cafe": {
                     "name": "Кафе",
-                    "terms": "Cafe, rfat, кафе, кава"
+                    "terms": "cafe,кафе,кава,чай,бістро"
                 },
                 "amenity/car_rental": {
                     "name": "Прокат автомобілів",
-                    "terms": "Car Rental, ghjrfn fdnjvjsksd, прокат машин"
+                    "terms": "Car Rental,ghjrfn fdnjvjsksd,прокат,оренда,машина,автівка"
                 },
                 "amenity/car_sharing": {
                     "name": "Короткострокова оренда автомобіля",
-                    "terms": "Car Sharing, rjhjnrjcnhjrjdf jhtylf fdnjvjskz, пошук попутників"
+                    "terms": "Car Sharing, rjhjnrjcnhjrjdf jhtylf fdnjvjskz,пошук попутників,каршерінг"
                 },
                 "amenity/car_wash": {
                     "name": "Автомийка",
-                    "terms": "Car Wash, fdnjvbqrf, мийка, автомийка"
+                    "terms": "Car Wash, fdnjvbqrf,мийка,автомийка"
                 },
                 "amenity/casino": {
                     "name": "Казино",
@@ -2399,11 +2472,11 @@
                 },
                 "amenity/charging_station": {
                     "name": "Зарядна станція",
-                    "terms": "Charging station, pfhzlyf cnfywsz, зарядна станція"
+                    "terms": "Charging station,pfhzlyf cnfywsz,зарядна,станція,зарядка,суперчарджер,електро"
                 },
                 "amenity/childcare": {
                     "name": "Дитяча кімната",
-                    "terms": "дитяча кімната, догляд, діти"
+                    "terms": "дитяча кімната,догляд,діти"
                 },
                 "amenity/cinema": {
                     "name": "Кінотеатр",
@@ -2567,6 +2640,10 @@
                     "name": "Церква",
                     "terms": "Church, wthrdf, храм, собор, костьол"
                 },
+                "amenity/place_of_worship/hindu": {
+                    "name": "Індуський храм",
+                    "terms": "гарбагриха,манду,пуджа,храм,святиня"
+                },
                 "amenity/place_of_worship/jewish": {
                     "name": "Синагога",
                     "terms": "Synagogue, cbyfujuf, синагога, іудаїзм"
@@ -2574,6 +2651,18 @@
                 "amenity/place_of_worship/muslim": {
                     "name": "Мечеть",
                     "terms": "Mosque, vtxtnm, мечеть, мусульманство"
+                },
+                "amenity/place_of_worship/shinto": {
+                    "name": "Синтоїстська святиня",
+                    "terms": "камі,торі"
+                },
+                "amenity/place_of_worship/sikh": {
+                    "name": "Храм сикхів",
+                    "terms": "гурудвара,храм"
+                },
+                "amenity/place_of_worship/taoist": {
+                    "name": "Даосский храм",
+                    "terms": "даос,монастир,храм"
                 },
                 "amenity/planetarium": {
                     "name": "Планетарій",
@@ -2740,6 +2829,10 @@
                     "name": "Ветеринарна лікарня",
                     "terms": "Veterinary, dtnthbyfhyf ksrfhyz, ветринар, втиринарна лікарня"
                 },
+                "amenity/waste/dog_excrement": {
+                    "name": "Контейнер для собачих екскрементів",
+                    "terms": "контейнер,сміття,собака,екскременти,мусор,гімно,кавалок"
+                },
                 "amenity/waste_basket": {
                     "name": "Бак для сміття",
                     "terms": "Waste Basket, fr lkz cvsnnz, кошик для сміття, сміття"
@@ -2767,6 +2860,58 @@
                 "area/highway": {
                     "name": "Покриття дороги",
                     "terms": "дорога,покриття,асфальт,бруківка,пісок,грунт,трава"
+                },
+                "attraction/amusement_ride": {
+                    "name": "Атракціони",
+                    "terms": "розваги,тематичний,парк,атраціони,каруселі"
+                },
+                "attraction/animal": {
+                    "name": "Звірі",
+                    "terms": "зоопарк,тематичний,парк,звірі,леви,тигри,медведі"
+                },
+                "attraction/big_wheel": {
+                    "name": "Оглядове колесо",
+                    "terms": "огляд,колесо,чортове,тематичний,парк,розваги,атракціони"
+                },
+                "attraction/bumper_car": {
+                    "name": "Бамперні машинки",
+                    "terms": "автодром,машинки,тематичний,парк,розваги"
+                },
+                "attraction/bungee_jumping": {
+                    "name": "Тарзанка",
+                    "terms": "тарзанка,банджі,джампінг,розваги тематичний,парк,платформа"
+                },
+                "attraction/carousel": {
+                    "name": "Карусель",
+                    "terms": "карусель,парк,атракціон,розваги"
+                },
+                "attraction/dark_ride": {
+                    "name": "Кімната жахів",
+                    "terms": "потяг,привід,жахи,розваги,парк"
+                },
+                "attraction/drop_tower": {
+                    "name": "Падіння з вежі",
+                    "terms": "парк,атракціони,вежа,вільне,падіння,кидок"
+                },
+                "attraction/pirate_ship": {
+                    "name": "Піратській корабель",
+                    "terms": "парк,розваги,корабель,човен,пірати,велика,гойдалка"
+                },
+                "attraction/river_rafting": {
+                    "name": "Катання річковими порогами",
+                    "terms": "розваги,прак,пороги,річка,вода,сплав,імітація"
+                },
+                "attraction/roller_coaster": {
+                    "name": "Американські гірки",
+                    "terms": "парк,гірки,атракціони"
+                },
+                "attraction/train": {
+                    "name": "Туристичний потяг",
+                    "terms": "парк,розваги,атракціон,потяг,чух-чух"
+                },
+                "attraction/water_slide": {
+                    "name": "Водні гірки",
+                    "terms": "парк,аквапрак,вода,розваги,гірки,спуск"
                 },
                 "barrier": {
                     "name": "Перепони",
@@ -3205,6 +3350,10 @@
                 "emergency/fire_hydrant": {
                     "name": "Пожежний гідрант",
                     "terms": "Fire Hydrant,gjtybq uslhfyn, пожежний гідрант"
+                },
+                "emergency/life_ring": {
+                    "name": "Рятувальний круг",
+                    "terms": "круг,рятувальний,буй,жилет"
                 },
                 "emergency/no": {
                     "name": "Немає доступу для аварійно-рятувальних служб"
@@ -3955,6 +4104,14 @@
                     "name": "Водозабір",
                     "terms": "Water Works, djljpfsh, водозабір"
                 },
+                "man_made/watermill": {
+                    "name": "Водяний млин",
+                    "terms": "вода,млин,колесо,борошно"
+                },
+                "man_made/windmill": {
+                    "name": "Вітряний млин",
+                    "terms": "вітер,вітряк,млин,колесо,борошно"
+                },
                 "man_made/works": {
                     "name": "Фабрика",
                     "terms": "фабрика,завод,підприємство,виробництво,робота"
@@ -3966,6 +4123,10 @@
                 "manhole/drain": {
                     "name": "Дренажний колодязь",
                     "terms": "люк,дренаж,колодязь,каналізація"
+                },
+                "manhole/telecom": {
+                    "name": "Телекомунікаційний колодязь",
+                    "terms": "люк,колодязь,кабель,зв'язок,телефон,інтернет,діра,дріт"
                 },
                 "natural": {
                     "name": "Природа",
@@ -4152,8 +4313,7 @@
                     "terms": "офіс неурядової організації"
                 },
                 "office/physician": {
-                    "name": "Лікар",
-                    "terms": "доктор, медицина"
+                    "name": "Лікар"
                 },
                 "office/political_party": {
                     "name": "Політична партія",
@@ -4239,6 +4399,14 @@
                     "name": "Електростанція",
                     "terms": "Power Generator, tktrnhjcnfywsz, електростанція"
                 },
+                "power/generator/source_nuclear": {
+                    "name": "Ядерний реактор",
+                    "terms": "реактор,радіація,ядро,ділення,ядерний"
+                },
+                "power/generator/source_wind": {
+                    "name": "Вітро-електро установка",
+                    "terms": "генератор,вітер,вітряк,електрика,турбіна"
+                },
                 "power/line": {
                     "name": "Лінія електропередачі високої напруги",
                     "terms": "Power Line, ksysz tktrnhjgthtlfxs dbcjrj yfgheub, Лінія електропередачі високої напруги, ЛЕП"
@@ -4285,9 +4453,17 @@
                     "name": "Занедбані колії",
                     "terms": "Abandoned Railway,pfytlfys gjks, покинуті колії"
                 },
+                "railway/buffer_stop": {
+                    "name": "Буферний упор",
+                    "terms": "буфер,стоп,зупника"
+                },
                 "railway/crossing": {
                     "name": "Залізничний перехід (пішохідний)",
                     "terms": "залізниця,потяг,рейки,пішоход,перехід,шлагбаум,світлофор,поїзд,(пішохідний)"
+                },
+                "railway/derail": {
+                    "name": "Залізничний дерейлер",
+                    "terms": "дерейлер,перепона,залізниця,рейки"
                 },
                 "railway/disused": {
                     "name": "Колії, що не використовуються",
@@ -4305,6 +4481,10 @@
                     "name": "Залізничний переїзд (автомобілний)",
                     "terms": "залізниця,потяг,рейки,автомобіль,перехід,шлагбаум,світлофор,поїзд,(автомобільний),дорога,шлях"
                 },
+                "railway/milestone": {
+                    "name": "Кілометровий знак",
+                    "terms": "знак,залізниця,кілометр"
+                },
                 "railway/monorail": {
                     "name": "Монорейка",
                     "terms": "Monorail, vjyjhtqrf, монорейка"
@@ -4321,6 +4501,10 @@
                     "name": "Рейки",
                     "terms": "Rail,htqrb, колії"
                 },
+                "railway/signal": {
+                    "name": "Семафор",
+                    "terms": "залізниця,сигнал,семафор,світлофор"
+                },
                 "railway/station": {
                     "name": "Залізнична станція",
                     "terms": "Railway Station, pfkspybxyf cnfywsz, залізнична станція"
@@ -4332,6 +4516,14 @@
                 "railway/subway_entrance": {
                     "name": "Вхід до метро",
                     "terms": "Subway Entrance, dsl lj vtnhj, вхід в метро"
+                },
+                "railway/switch": {
+                    "name": "Залізнична стрілка",
+                    "terms": "стрілка,залізниця,рейки"
+                },
+                "railway/train_wash": {
+                    "name": "Мийка для вагонів",
+                    "terms": "мийка,вагон,залізниця"
                 },
                 "railway/tram": {
                     "name": "Трамвай",

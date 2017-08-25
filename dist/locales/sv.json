@@ -328,10 +328,9 @@
         },
         "commit": {
             "title": "Ladda upp till OpenStreetMap",
-            "description_placeholder": "Kortfattad beskrivning av ditt bidrag (obligatoriskt)",
-            "message_label": "Ändringskommentar",
             "upload_explanation": "De redigeringar du bidrar med kommer att synas på alla kartor som använder OpenStreetMaps data.",
             "upload_explanation_with_user": "De redigeringar du bidrar med som {user} kommer att synas på alla kartor som använder OpenStreetMaps data.",
+            "request_review": "Jag vill att någon granskar mina ändringar.",
             "save": "Ladda upp",
             "cancel": "Avbryt",
             "changes": "{count} ändringar",
@@ -1162,7 +1161,8 @@
                         "subdistrict": "Deldistrikt",
                         "subdistrict!vn": "Stadsdel/Kommun/Ort",
                         "suburb": "Stadsdel",
-                        "suburb!jp": "Stadsdel"
+                        "suburb!jp": "Stadsdel",
+                        "unit": "Enhet/port/trappa"
                     }
                 },
                 "admin_level": {
@@ -1282,6 +1282,10 @@
                 "brand": {
                     "label": "Varumärke"
                 },
+                "bridge": {
+                    "label": "Typ",
+                    "placeholder": "Standard"
+                },
                 "building": {
                     "label": "Byggnad"
                 },
@@ -1350,6 +1354,10 @@
                 "collection_times": {
                     "label": "Hämtningstider"
                 },
+                "comment": {
+                    "label": "Ändringskommentar",
+                    "placeholder": "Kortfattad beskrivning av ditt bidrag (obligatoriskt)"
+                },
                 "communication_multi": {
                     "label": "Kommunikationstyper"
                 },
@@ -1383,6 +1391,10 @@
                 },
                 "currency_multi": {
                     "label": "Valutor"
+                },
+                "cutting": {
+                    "label": "Typ",
+                    "placeholder": "Standard"
                 },
                 "cycle_network": {
                     "label": "Nätverk"
@@ -1469,6 +1481,10 @@
                     "label": "E-post",
                     "placeholder": "exempel@exempel.se"
                 },
+                "embankment": {
+                    "label": "Typ",
+                    "placeholder": "Standard"
+                },
                 "emergency": {
                     "label": "Akut"
                 },
@@ -1507,7 +1523,11 @@
                     }
                 },
                 "fixme": {
-                    "label": "Ordna mig"
+                    "label": "Fixa mig"
+                },
+                "ford": {
+                    "label": "Typ",
+                    "placeholder": "Standard"
                 },
                 "fuel": {
                     "label": "Bränsle"
@@ -1540,10 +1560,6 @@
                 "generator/type": {
                     "label": "Typ"
                 },
-                "golf_hole": {
-                    "label": "Referens",
-                    "placeholder": "Hålnummer (1-18)"
-                },
                 "grape_variety": {
                     "label": "druvsorter"
                 },
@@ -1553,6 +1569,10 @@
                 },
                 "handrail": {
                     "label": "Ledstång"
+                },
+                "hashtags": {
+                    "label": "Hashtaggar",
+                    "placeholder": "#exempel"
                 },
                 "height": {
                     "label": "Höjd (meter)"
@@ -1628,7 +1648,8 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "layer": {
-                    "label": "Lager"
+                    "label": "Lager",
+                    "placeholder": "0"
                 },
                 "leaf_cycle": {
                     "label": "Lövcykel",
@@ -1710,6 +1731,10 @@
                 },
                 "maxweight": {
                     "label": "Maxvikt"
+                },
+                "milestone_position": {
+                    "label": "Position förhållande till kilometerstolpe",
+                    "placeholder": "Distans med en decimal (123.4)"
                 },
                 "mtb/scale": {
                     "label": "Mountainbike-svårighet",
@@ -1931,7 +1956,37 @@
                     }
                 },
                 "ref": {
-                    "label": "Referens"
+                    "label": "Referenskod"
+                },
+                "ref_aeroway_gate": {
+                    "label": "Gatenummer"
+                },
+                "ref_golf_hole": {
+                    "label": "Hålnummer",
+                    "placeholder": "1-18"
+                },
+                "ref_highway_junction": {
+                    "label": "Avfartsnummer"
+                },
+                "ref_platform": {
+                    "label": "Plattformsnummer"
+                },
+                "ref_road_number": {
+                    "label": "Vägnummer"
+                },
+                "ref_route": {
+                    "label": "Ruttnummer"
+                },
+                "ref_runway": {
+                    "label": "Nummer på start- och landningsbana",
+                    "placeholder": "t.ex. 01L/19R"
+                },
+                "ref_stop_position": {
+                    "label": "Hållplatsnummer"
+                },
+                "ref_taxiway": {
+                    "label": "Namn på taxibana",
+                    "placeholder": "t.ex. A5"
                 },
                 "relation": {
                     "label": "Typ"
@@ -2047,7 +2102,7 @@
                     "label": "Människohjälp"
                 },
                 "source": {
-                    "label": "Källa"
+                    "label": "Källor"
                 },
                 "sport": {
                     "label": "Sporter"
@@ -2187,6 +2242,10 @@
                     "label": "Träd"
                 },
                 "tunnel": {
+                    "label": "Typ",
+                    "placeholder": "Standard"
+                },
+                "tunnel_waterway": {
                     "label": "Tunnel"
                 },
                 "vending": {
@@ -2672,6 +2731,10 @@
                     "name": "Väderskydd",
                     "terms": "Skydd, tak över huvudet, hydda, vindskydd, koja, väntkur, grotta, väderskydd, lusthus, picknick"
                 },
+                "amenity/shower": {
+                    "name": "Dusch",
+                    "terms": "Dusch, duschutrymme, duschkabin, duschbad, badrum, duschrum"
+                },
                 "amenity/social_facility": {
                     "name": "Social inrättning",
                     "terms": "Social inrättning, social hjälp, social, socialen, uteliggare, hjälparbete, välgörenhetsorganisationer, välgörenhet"
@@ -2801,6 +2864,58 @@
                 "area/highway": {
                     "name": "Vägbeläggning",
                     "terms": "Vägyta, vägplan, köryta, promenatyta, torg"
+                },
+                "attraction/amusement_ride": {
+                    "name": "Åkattraktion",
+                    "terms": "Åkattraktion, karusell, nöjeskarusell, nöjespark, temapark, tivoli"
+                },
+                "attraction/animal": {
+                    "name": "Djur",
+                    "terms": "Djur, zoo, temapark, djurpark, lejon, tiger, björn, apa,  zoologisk trädgård, akvarium, fiskar"
+                },
+                "attraction/big_wheel": {
+                    "name": "Pariserhjul",
+                    "terms": "Pariserhjul, stort hjul, nöjespark, temapark, tivoli, åkattraktion, karusell, nöjeskarusell"
+                },
+                "attraction/bumper_car": {
+                    "name": "Radiobilar",
+                    "terms": "Radiobilar, radiobil, nöjespark, temapark, tivoli, åkattraktion"
+                },
+                "attraction/bungee_jumping": {
+                    "name": "Bungyjump",
+                    "terms": "Bungyjump,  bungee jump, nöjespark, temapark, tivoli, hopplattform"
+                },
+                "attraction/carousel": {
+                    "name": "Karusell (roterande)",
+                    "terms": "Karusell,  nöjespark, temapark, tivoli, åkattraktion, nöjeskarusell"
+                },
+                "attraction/dark_ride": {
+                    "name": "Mörk åktur",
+                    "terms": "Mörk åktur, spöktåg, åkattraktion, karusell, nöjeskarusell, nöjespark, temapark, tivoli"
+                },
+                "attraction/drop_tower": {
+                    "name": "Fritt fall",
+                    "terms": "Fritt fall, åkattraktion, karusell, nöjeskarusell, nöjespark, temapark, tivoli"
+                },
+                "attraction/pirate_ship": {
+                    "name": "Båtgunga",
+                    "terms": "Båtgunga, piratskepp, vikingaskepp, gunga, gungande båt, roterande båt, Åkattraktion, karusell, nöjeskarusell, nöjespark, temapark, tivoli"
+                },
+                "attraction/river_rafting": {
+                    "name": "Forsränning",
+                    "terms": "Forsränning, forsbana, Vattenbana, fors, Åkattraktion, karusell, nöjeskarusell, nöjespark, temapark, tivoli"
+                },
+                "attraction/roller_coaster": {
+                    "name": "Berg- och dalbana",
+                    "terms": "berg- och dalbana, berg-och-dalbana, bergochdalbana, bergodalbana, berg-och-dal-bana, dalbana, åkattraktion, temapark, nöjespark, tivoli"
+                },
+                "attraction/train": {
+                    "name": "Turisttåg (ej på räls)",
+                    "terms": "turisttåg,  Tschu-Tschu, vägtåg, stadståg, Tuff tuff-tåg, sightseeing, sightseeingtåg"
+                },
+                "attraction/water_slide": {
+                    "name": "Vattenrutschbana",
+                    "terms": "vattenrutschbana, vattenrutschkana, rutschkana"
                 },
                 "barrier": {
                     "name": "Barriär",
@@ -3239,6 +3354,10 @@
                 "emergency/fire_hydrant": {
                     "name": "Brandpost",
                     "terms": "Brandpost, vattenpost, brandsläckning, vattenpost, brandslang"
+                },
+                "emergency/life_ring": {
+                    "name": "Livboj",
+                    "terms": "livboj, frälsarkrans, livräddningsboj, livräddning"
                 },
                 "emergency/no": {
                     "name": "Åtkomst för utryckningsfordon - Nej"
@@ -4009,6 +4128,10 @@
                     "name": "Dagvattenbrunn",
                     "terms": "Dagvatten, dagvattenbrunn, dränering, regn, regnvatten, dagbrunn, avlopp, avloppsvatten, avloppsbrunn, smältvatten, spillvatten, avrinning"
                 },
+                "manhole/telecom": {
+                    "name": "Manhålslucka för telekom",
+                    "terms": "Manhålslucka för telekom, gatubrunn, brunn, telekom, telefoni, manhålslucka, Brunnslock, manlucka, manhål, tele, tele-brunn"
+                },
                 "natural": {
                     "name": "Naturlig",
                     "terms": "Naturligt, naturlig, natur, skyddsområde, naturanvändning, geologi"
@@ -4194,8 +4317,7 @@
                     "terms": "Icke-statlig organisation, organisation, hjälporganisation, fackförening, ideell förening, ideell, förening, icke-kommersiell, frivilligorganisation, frivillig, intresseorganisation"
                 },
                 "office/physician": {
-                    "name": "Läkare",
-                    "terms": "Läkare, husläkare, doktorspraktik, medicinare"
+                    "name": "Läkare"
                 },
                 "office/political_party": {
                     "name": "Politiskt parti",
@@ -4335,9 +4457,17 @@
                     "name": "Riven järnväg",
                     "terms": "Riven järnväg, borttagen järnväg"
                 },
+                "railway/buffer_stop": {
+                    "name": "Stoppbock",
+                    "terms": "Stoppbock, Buffert, Buffertstopp, stoppblock"
+                },
                 "railway/crossing": {
                     "name": "Järnvägskorsning (stig)",
                     "terms": "korsning, järnvägskorsning, järnvägsövergång, järnvägspassage, plankorsning, spårpassage, tågövergång, tågkorsning, tågpassage, stig, gångväg, cykelväg, övergångsställe, gångpassage, cykelpassage"
+                },
+                "railway/derail": {
+                    "name": "Spårspärr",
+                    "terms": "Spårspärr, omläggningsanordning, utspårare"
                 },
                 "railway/disused": {
                     "name": "Oanvänd järnväg",
@@ -4355,6 +4485,10 @@
                     "name": "Järnvägskorsning (väg)",
                     "terms": "korsning, järnvägskorsning, järnvägsövergång, järnvägspassage, plankorsning, spårpassage, tågövergång, tågkorsning, tågpassage"
                 },
+                "railway/milestone": {
+                    "name": "Kilometerstolpe vid järnväg",
+                    "terms": "Kilometerstolpe, kilometertavla, avståndsmärke, milsten, referenstavla, kilometerpåle"
+                },
                 "railway/monorail": {
                     "name": "Monorail",
                     "terms": "Monorail, enskensbana, balkbana"
@@ -4371,6 +4505,10 @@
                     "name": "Räls",
                     "terms": "Räls, järnvägsspår, spår, bana"
                 },
+                "railway/signal": {
+                    "name": "Järnvägssignal",
+                    "terms": "järnvägssignal, signal, ljus, järnvägsljus, semafor, försignal,  huvudsignal, dvärgsignal"
+                },
                 "railway/station": {
                     "name": "Järnvägsstation",
                     "terms": "Järnvägsstation, station, central, centralstation, tåg, tågstation"
@@ -4382,6 +4520,14 @@
                 "railway/subway_entrance": {
                     "name": "Tunnelbaneingång",
                     "terms": "Tunnelbaneingång, tunnelbanenergång, t-baneingång, t-banenedgång"
+                },
+                "railway/switch": {
+                    "name": "Järnvägsväxel",
+                    "terms": "Järnvägsväxel, växel, järnvägskorsning, korsning, korsningsväxel"
+                },
+                "railway/train_wash": {
+                    "name": "Tågtvätt",
+                    "terms": "Tågtvätt, loktvätt, tvätthall"
                 },
                 "railway/tram": {
                     "name": "Spårvagn",

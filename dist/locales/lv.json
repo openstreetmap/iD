@@ -459,9 +459,6 @@
                 "railway": {
                     "label": "Tips"
                 },
-                "ref": {
-                    "label": "Atskaites punkts"
-                },
                 "religion": {
                     "label": "Reliģija"
                 },
@@ -473,9 +470,6 @@
                 },
                 "shop": {
                     "label": "Tips"
-                },
-                "source": {
-                    "label": "Avots"
                 },
                 "structure": {
                     "label": "Objekts",

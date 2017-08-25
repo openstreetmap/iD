@@ -328,8 +328,6 @@
         },
         "commit": {
             "title": "Postavi na OpenStreetMap",
-            "description_placeholder": "Kratak opis tvog doprinosa (obavezno)",
-            "message_label": "Komentar za promjene",
             "upload_explanation": "Promjene koje postaviš biti će vidljive na svim kartama koje koriste podatke OpenStreetMapa.",
             "upload_explanation_with_user": "Promjene koje postaviš kao {user} biti će vidljive na svim kartama koje koriste podatke OpenStreetMapa.",
             "save": "Postavi",
@@ -1343,10 +1341,6 @@
                 "generator/type": {
                     "label": "Vrsta"
                 },
-                "golf_hole": {
-                    "label": "Redni broj",
-                    "placeholder": "Broj rupa (1-18)"
-                },
                 "handicap": {
                     "label": "Smetnja",
                     "placeholder": "1-18"
@@ -1621,9 +1615,6 @@
                 "railway": {
                     "label": "Vrsta"
                 },
-                "ref": {
-                    "label": "Broj ceste"
-                },
                 "relation": {
                     "label": "Vrsta"
                 },
@@ -1710,9 +1701,6 @@
                     },
                     "placeholder": "Mali kotačići, kotači, off-road"
                 },
-                "source": {
-                    "label": "Izvor"
-                },
                 "structure": {
                     "label": "Konstrukcija",
                     "options": {
@@ -1785,9 +1773,6 @@
                 },
                 "trees": {
                     "label": "Drveće"
-                },
-                "tunnel": {
-                    "label": "Tunel"
                 },
                 "vending": {
                     "label": "Vrsta robe"

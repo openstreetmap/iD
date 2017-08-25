@@ -511,9 +511,6 @@
                 "railway": {
                     "label": "类型"
                 },
-                "ref": {
-                    "label": "参考"
-                },
                 "relation": {
                     "label": "类型"
                 },
@@ -531,9 +528,6 @@
                 },
                 "shop": {
                     "label": "类型"
-                },
-                "source": {
-                    "label": "来源"
                 },
                 "structure": {
                     "label": "结构",

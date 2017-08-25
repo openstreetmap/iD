@@ -505,10 +505,6 @@
                 "generator/type": {
                     "label": "Vrsta"
                 },
-                "golf_hole": {
-                    "label": "Referenca",
-                    "placeholder": "Rupa broj (1-18)"
-                },
                 "handicap": {
                     "label": "Hendikep",
                     "placeholder": "1-18"
@@ -629,9 +625,6 @@
                 "railway": {
                     "label": "Vrsta"
                 },
-                "ref": {
-                    "label": "Referenca"
-                },
                 "relation": {
                     "label": "Vrsta"
                 },
@@ -659,9 +652,6 @@
                 "shop": {
                     "label": "Vrsta"
                 },
-                "source": {
-                    "label": "Izvor"
-                },
                 "structure": {
                     "label": "Struktura",
                     "options": {
@@ -686,9 +676,6 @@
                 },
                 "trail_visibility": {
                     "label": "Vidljivost traga"
-                },
-                "tunnel": {
-                    "label": "Tunel"
                 },
                 "vending": {
                     "label": "Vrsta dobara"
@@ -1642,8 +1629,7 @@
                     "terms": "Nevladin ured,ured NVO,NVO kancelarija"
                 },
                 "office/physician": {
-                    "name": "Ljekar",
-                    "terms": "ljekar,doktor"
+                    "name": "Ljekar"
                 },
                 "office/political_party": {
                     "name": "Politička stranka",

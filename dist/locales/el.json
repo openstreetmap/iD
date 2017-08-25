@@ -291,8 +291,6 @@
         },
         "commit": {
             "title": "Μεταφόρτωση στο OpenStreetMap",
-            "description_placeholder": "Σύντομη περιγραφή των συνεισφορών σας (απαιτείται)",
-            "message_label": "Σχόλιο Αλλαγών",
             "upload_explanation": "Οι αλλαγές που θα ανεβάσετε θα είναι ορατές σε όλους τους χάρτες που χρησιμοποιούν δεδομένα OpenStreetMap.",
             "upload_explanation_with_user": "Οι αλλαγές που θα ανεβάσετε ως {user} θα είναι ορατές σε όλους τους χάρτες που χρησιμοποιούν δεδομένα OpenStreetMap.",
             "save": "Μεταφόρτωση",
@@ -310,6 +308,28 @@
         "contributors": {
             "list": "Επεξεργασίες από {users}",
             "truncated_list": "Επεξεργασίες από {users} και {count} άλλους"
+        },
+        "info_panels": {
+            "background": {
+                "title": "Υπόβαθρο"
+            },
+            "history": {
+                "title": "Ιστορικό",
+                "selected": "{n} επιλεγμένα",
+                "version": "Έκδοση"
+            },
+            "location": {
+                "title": "Τοποθεσία"
+            },
+            "measurement": {
+                "title": "Μέτρηση",
+                "geometry": "Γεωμετρία",
+                "center": "Κέντρο",
+                "perimeter": "Περίμετρος",
+                "length": "Μήκος",
+                "area": "Περιοχή",
+                "location": "Τοποθεσία"
+            }
         },
         "geometry": {
             "point": "σημείο",
@@ -383,7 +403,8 @@
             "offset": "Σύρετε οπουδήποτε στην γκρίζα περιοχή παρακάτω για να προσαρμόσετε την απόκλιση της εικόνας ή εισαγάγετε τις τιμές της απόκλισης σε μέτρα.",
             "minimap": {
                 "description": "Μικροχάρτης",
-                "tooltip": "Προβολή ενός χάρτη σε σμίκρυνση, για να σας βοηθήσει να εντοπίσετε την περιοχή που εμφανίζεται αυτή τη στιγμή."
+                "tooltip": "Προβολή ενός χάρτη σε σμίκρυνση, για να σας βοηθήσει να εντοπίσετε την περιοχή που εμφανίζεται αυτή τη στιγμή.",
+                "key": "/"
             }
         },
         "map_data": {
@@ -436,7 +457,8 @@
                 "tooltip": "Γραμμές Μεταφοράς Ρεύματος, Μονάδες Ηλεκτροπαραγωγής, Υποσταθμοί, κτλ."
             },
             "past_future": {
-                "description": "Παρελθόν/Μέλλον"
+                "description": "Παρελθόν/Μέλλον",
+                "tooltip": "Προτεινόμενο, Υπό Κατασκευή, Εγκαταλειμμένο, Κατεδαφισμένο, κλπ."
             },
             "others": {
                 "description": "Άλλα",
@@ -462,7 +484,7 @@
             "title": "Αποθήκευση",
             "no_changes": "Δεν υπάρχουν αλλαγές για αποθήκευση.",
             "unknown_error_details": "Παρακαλώ επιβεβαιώστε ότι είστε συνδεδεμένοι στο διαδίκτυο.",
-            "uploading": "Μεταφόρτωση στο OpenStreetMap...",
+            "uploading": "Μεταφόρτωση αλλαγών στο OpenStreetMap...",
             "unsaved_changes": "Έχετε μη αποθηκευμένες αλλαγές",
             "conflict": {
                 "header": "Επίλυση επεξεργασιών σε διένεξη",
@@ -500,6 +522,7 @@
         },
         "splash": {
             "welcome": "Καλώς ήλθατε στον iD επεξεργαστή για το OpenStreetMap",
+            "text": "Το iD είναι ένα φιλικό αλλά ισχυρό εργαλείο για συνεισφορά στον καλύτερο του κόσμου, ελεύθερο, παγκόσμιο χάρτη. Αυτή είναι η έκδοση {version}. Για περισσότερες πληροφορίες δείτε το {website} και αναφέρετε bugs στο {github}.",
             "walkthrough": "Ξεκινήστε την Περιήγηση",
             "start": "Επεξεργασία Τώρα"
         },
@@ -546,6 +569,7 @@
                 "district": "<value for addr:district>",
                 "hamlet": "<value for addr:hamlet>",
                 "neighbourhood": "<value for addr:neighbourhood>",
+                "postcode": "49093",
                 "province": "<value for addr:province>",
                 "quarter": "<value for addr:quarter>",
                 "state": "<value for addr:state>",
@@ -557,7 +581,8 @@
                 "title": "Πλοήγηση"
             },
             "points": {
-                "title": "Σημεία"
+                "title": "Σημεία",
+                "choose_cafe": "**Επιλέξτε {preset} από τη λίστα.**"
             },
             "areas": {
                 "title": "Περιοχές"
@@ -565,10 +590,35 @@
             "lines": {
                 "title": "Γραμμές"
             },
+            "buildings": {
+                "title": "Κτίρια"
+            },
             "startediting": {
                 "title": "Εκκίνηση Επεξεργασίας",
                 "save": "Μην ξεχνάτε να αποθηκεύετε συχνά τις αλλαγές σας!",
                 "start": "Αρχίστε να χαρτογραφείτε!"
+            }
+        },
+        "shortcuts": {
+            "toggle": {
+                "key": "?"
+            },
+            "or": "-ή-",
+            "browsing": {
+                "help": {
+                    "title": "Βοήθεια"
+                }
+            },
+            "editing": {
+                "commands": {
+                    "title": "Εντολές"
+                }
+            },
+            "tools": {
+                "title": "Εργαλεία",
+                "info": {
+                    "title": "Πληροφορίες"
+                }
             }
         },
         "presets": {
@@ -715,6 +765,7 @@
                     "label": "Θερμαινόμενο"
                 },
                 "aerialway/occupancy": {
+                    "label": "Χωρητικότητα",
                     "placeholder": "2, 4, 8..."
                 },
                 "aerialway/summer/access": {
@@ -788,7 +839,8 @@
                     "options": {
                         "plasma": "πλάσμα",
                         "platelets": "αιμοπετάλια",
-                        "stemcells": "δείγματα βλαστοκυττάρων"
+                        "stemcells": "δείγματα βλαστοκυττάρων",
+                        "whole": "ολικό αίμα"
                     }
                 },
                 "board_type": {
@@ -869,6 +921,9 @@
                 "contact/webcam": {
                     "placeholder": "http://example.com/"
                 },
+                "content": {
+                    "label": "Περιεχόμενο"
+                },
                 "country": {
                     "label": "Χώρα"
                 },
@@ -883,6 +938,9 @@
                 },
                 "crossing": {
                     "label": "Είδος"
+                },
+                "cuisine": {
+                    "label": "Κουζίνες"
                 },
                 "currency_multi": {
                     "label": "Νομίσματα"
@@ -1017,15 +1075,15 @@
                 "generator/method": {
                     "label": "Μέθοδος"
                 },
+                "generator/output/electricity": {
+                    "label": "Ισχύς Εξόδου",
+                    "placeholder": "50 MW, 100 MW, 200 MW..."
+                },
                 "generator/source": {
                     "label": "Πηγή"
                 },
                 "generator/type": {
                     "label": "Τύπος"
-                },
-                "golf_hole": {
-                    "label": "Αναφορά",
-                    "placeholder": "Αριθμός τρύπας (1-18)"
                 },
                 "grape_variety": {
                     "label": "Ποικιλία Αμπελιού"
@@ -1046,12 +1104,18 @@
                 "historic": {
                     "label": "Είδος"
                 },
+                "historic/civilization": {
+                    "label": "Ιστορικός Πολιτισμός"
+                },
                 "hoops": {
                     "label": "Ρακέτες",
                     "placeholder": "1, 2, 4..."
                 },
                 "iata": {
                     "label": "IATA"
+                },
+                "icao": {
+                    "label": "ICAO"
                 },
                 "incline": {
                     "label": "Κλίση"
@@ -1065,6 +1129,9 @@
                 },
                 "information": {
                     "label": "Είδος"
+                },
+                "inscription": {
+                    "label": "Επιγραφή"
                 },
                 "internet_access": {
                     "label": "Πρόσβαση στο διαδίκτυο",
@@ -1117,6 +1184,7 @@
                 "leaf_type": {
                     "label": "Είδος φυλλώματος",
                     "options": {
+                        "broadleaved": "Πλατύφυλλα",
                         "leafless": "Χωρίς φύλλωμα",
                         "mixed": "Μεικτά"
                     }
@@ -1124,6 +1192,7 @@
                 "leaf_type_singular": {
                     "label": "Είδος φυλλώματος",
                     "options": {
+                        "broadleaved": "Πλατύφυλλο",
                         "leafless": "Χωρίς φύλλωμα"
                     }
                 },
@@ -1162,6 +1231,9 @@
                 },
                 "maxstay": {
                     "label": "Μέγιστη παραμονή"
+                },
+                "maxweight": {
+                    "label": "Μέγιστο Βάρος"
                 },
                 "mtb/scale": {
                     "label": "Δυσκολία Ορεινής Ποδηλασίας",
@@ -1292,6 +1364,13 @@
                 "place": {
                     "label": "Είδος"
                 },
+                "plant": {
+                    "label": "Φυτό"
+                },
+                "plant/output/electricity": {
+                    "label": "Ισχύς Εξόδου",
+                    "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
                 "population": {
                     "label": "Πληθυσμός"
                 },
@@ -1310,8 +1389,12 @@
                         "centre": "Κέντρο Ανακύκλωσης"
                     }
                 },
-                "ref": {
-                    "label": "Αναφορά"
+                "ref_aeroway_gate": {
+                    "label": "Αριθμός Πύλης"
+                },
+                "ref_golf_hole": {
+                    "label": "Αριθμός Τρύπας",
+                    "placeholder": "1-18"
                 },
                 "relation": {
                     "label": "Είδος"
@@ -1324,6 +1407,9 @@
                 },
                 "restrictions": {
                     "label": "Απαγορεύσεις Στροφών"
+                },
+                "rooms": {
+                    "label": "Δωμάτια"
                 },
                 "route": {
                     "label": "Είδος"
@@ -1356,6 +1442,12 @@
                 },
                 "service": {
                     "label": "Τύπος"
+                },
+                "service/bicycle": {
+                    "label": "Υπηρεσίες"
+                },
+                "service/vehicle": {
+                    "label": "Υπηρεσίες"
                 },
                 "service_rail": {
                     "options": {
@@ -1394,9 +1486,6 @@
                 "social_facility": {
                     "label": "Είδος"
                 },
-                "source": {
-                    "label": "Πηγή"
-                },
                 "sport": {
                     "label": "Αθλήματα"
                 },
@@ -1414,6 +1503,9 @@
                 },
                 "start_date": {
                     "label": "Ημερομηνία Έναρξης"
+                },
+                "step_count": {
+                    "label": "Αριθμός Σκαλοπατιών"
                 },
                 "stop": {
                     "label": "Είδος Στοπ",
@@ -1451,6 +1543,7 @@
                     "label": "Είδος Επιτήρησης",
                     "options": {
                         "ALPR": "Αυτόματος Αναγνώστης Πινακίδων Κυκλοφορίας",
+                        "camera": "Κάμερα",
                         "guard": "Φύλακας"
                     }
                 },
@@ -1511,9 +1604,6 @@
                 },
                 "trees": {
                     "label": "Δέντρα"
-                },
-                "tunnel": {
-                    "label": "Σήραγγα"
                 },
                 "vending": {
                     "label": "Είδος αγαθών"
@@ -1630,16 +1720,15 @@
                     "terms": "Μπάρμπεκιου, γκριλ"
                 },
                 "amenity/bench": {
-                    "name": "Παγκάκι",
-                    "terms": "Παγκάκι"
+                    "name": "Παγκάκι"
                 },
                 "amenity/bicycle_parking": {
                     "name": "Χώρος Στάθμευσης Ποδηλάτων",
                     "terms": "Πάρκινγκ ποδηλάτων, μπάρες, κάγκελα για ποδήλατα, θέσεις στάθμευσης ποδηλάτων"
                 },
                 "amenity/bicycle_rental": {
-                    "name": "Ενοικίαση Ποδηλάτων",
-                    "terms": "Ενοικίαση ποδηλάτων"
+                    "name": "Ενοικιαζόμενα Ποδηλάτα",
+                    "terms": "Κοινόχρηστα Ποδήλατα, Ενοικίαση Ποδηλάτων"
                 },
                 "amenity/biergarten": {
                     "name": "Κήπος Μπυραρίας",
@@ -1735,8 +1824,8 @@
                     "name": "Τερματικό Φέρυ Μποτ"
                 },
                 "amenity/fire_station": {
-                    "name": "Πυροσβεστική",
-                    "terms": "Πυροσβεστικός σταθμός, Πυροσβεστική, 199"
+                    "name": "Πυροσβεστικός Σταθμός",
+                    "terms": "Πυροσβεστική, 199"
                 },
                 "amenity/fountain": {
                     "name": "Σιντριβάνι",
@@ -1744,7 +1833,7 @@
                 },
                 "amenity/fuel": {
                     "name": "Βενζινάδικο",
-                    "terms": "Σταθμός καυσίμων, Βενζινάδικο, Πρατήριο καυσίμων"
+                    "terms": "Σταθμός καυσίμων, Πρατήριο καυσίμων"
                 },
                 "amenity/grave_yard": {
                     "name": "Κοιμητήριο",
@@ -1807,6 +1896,9 @@
                     "name": "Εκκλησία",
                     "terms": "Εκκλησία, ξωκλήσι, εκκλησάκι, ναός, ιερός ναός"
                 },
+                "amenity/place_of_worship/hindu": {
+                    "name": "Ινδουιστικός Ναός"
+                },
                 "amenity/place_of_worship/jewish": {
                     "name": "Συναγωγή",
                     "terms": "Συναγωγή"
@@ -1820,8 +1912,8 @@
                     "terms": "Πλανητάριο"
                 },
                 "amenity/police": {
-                    "name": "Αστυνομία",
-                    "terms": "Αστυνομία, Αστυνομικό τμήμα, τροχαία, ΕΛ.ΑΣ."
+                    "name": "Αστυνομικό Τμήμα",
+                    "terms": "Αστυνομία, τροχαία, ΕΛ.ΑΣ."
                 },
                 "amenity/post_box": {
                     "name": "Γραμματοκιβώτιο",
@@ -1832,15 +1924,15 @@
                     "terms": "Ταχυδρομείο"
                 },
                 "amenity/prison": {
-                    "name": "Χώρος φυλακής",
-                    "terms": "Σωφρονιστικό ίδρυμα"
+                    "name": "Χώρος Φυλακής",
+                    "terms": "Σωφρονιστικό ίδρυμα, Φυλακή"
                 },
                 "amenity/pub": {
                     "name": "Παμπ",
                     "terms": "Παμπ"
                 },
                 "amenity/public_bookcase": {
-                    "name": "Δημόσια ανταλλακτική βιβλιοθήκη",
+                    "name": "Δημόσια Ανταλλακτική Βιβλιοθήκη",
                     "terms": "Δημόσια βιβλιοθήκη"
                 },
                 "amenity/recycling": {
@@ -1859,7 +1951,7 @@
                 },
                 "amenity/school": {
                     "name": "Χώρος Σχολείου",
-                    "terms": "δημοτικό, γυμνάσιο, λύκειο"
+                    "terms": "σχολείο, δημοτικό, γυμνάσιο, λύκειο"
                 },
                 "amenity/shelter": {
                     "name": "Στέγαστρο"
@@ -1902,7 +1994,7 @@
                 },
                 "amenity/university": {
                     "name": "Χώρος Πανεπιστημίου",
-                    "terms": "Πανεπιστημιούπολη, Πανεπιστήμιο, campus, ΤΕΙ, ΑΤΕΙ"
+                    "terms": "Πανεπιστημιούπολη, Πανεπιστήμιο, campus, ΤΕΙ, ΑΤΕΙ, ΑΕΙ"
                 },
                 "amenity/vending_machine/cigarettes": {
                     "name": "Αυτόματος πωλητής τσιγάρων"
@@ -1934,6 +2026,9 @@
                 "amenity/waste_disposal": {
                     "name": "Κάδος απορριμμάτων",
                     "terms": "Κάδος σκουπιδιών"
+                },
+                "amenity/watering_place": {
+                    "name": "Ποτίστρα Ζώων"
                 },
                 "area": {
                     "name": "Περιοχή",
@@ -2024,7 +2119,7 @@
                 },
                 "building/chapel": {
                     "name": "Παρεκκλήσι",
-                    "terms": "Παρεκκλήσι, Κτίριο Παρεκκλησίου"
+                    "terms": "Παρεκκλήσι, Κτίριο Παρεκκλησίου, Ξωκκλήσι, Εξωκκλήσι"
                 },
                 "building/church": {
                     "name": "Κτίριο Εκκλησίας",
@@ -2080,7 +2175,7 @@
                     "terms": "Βιομηχανικό κτήριο"
                 },
                 "building/kindergarten": {
-                    "name": "Κτίριο Νηπιαγωγείου/Παιδικού σταθμού"
+                    "name": "Κτίριο Νηπιαγωγείου/Παιδικού Σταθμού"
                 },
                 "building/public": {
                     "name": "Δημόσιο Κτίριο",
@@ -2112,6 +2207,9 @@
                 },
                 "building/warehouse": {
                     "name": "Αποθήκη"
+                },
+                "craft": {
+                    "name": "Τέχνη"
                 },
                 "craft/basket_maker": {
                     "name": "Καλαθάς"
@@ -2152,12 +2250,18 @@
                     "name": "Ηλεκτρολόγος",
                     "terms": "ηλεκτροτεχνίτης"
                 },
+                "craft/electronics_repair": {
+                    "name": "Μαγαζί Επισκευής Ηλεκτρονικών"
+                },
                 "craft/gardener": {
                     "name": "Κηπουρός"
                 },
                 "craft/glaziery": {
                     "name": "Υαλουργία",
                     "terms": "Υαλουργός, τζαμάς, τζάμια, βιτρό, γυάλινα αντικείμενα, παράθυρα, υαλογραφία"
+                },
+                "craft/hvac": {
+                    "name": "HVAC"
                 },
                 "craft/jeweler": {
                     "name": "Κοσμηματοπώλης"
@@ -2203,6 +2307,9 @@
                 },
                 "craft/stonemason": {
                     "name": "Λιθοποιός"
+                },
+                "craft/sweep": {
+                    "name": "Καπνοδοχοκαθαριστής"
                 },
                 "craft/tailor": {
                     "name": "Ραφτική"
@@ -2268,6 +2375,9 @@
                     "name": "Τρύπα Γηπέδου Γκολφ",
                     "terms": "Τρύπα Γηπέδου Γκολφ"
                 },
+                "healthcare/blood_donation": {
+                    "name": "Κέντρο Αιμοδοσίας"
+                },
                 "highway": {
                     "name": "Αυτοκινητόδρομος"
                 },
@@ -2288,6 +2398,10 @@
                 "highway/cycleway": {
                     "name": "Ποδηλατόδρομος",
                     "terms": "Διαδρομή ποδηλάτων, Δρόμος ποδηλάτων, ποδηλατολωρίδα"
+                },
+                "highway/elevator": {
+                    "name": "Ανελκυστήρας",
+                    "terms": "Ασανσέρ"
                 },
                 "highway/footway": {
                     "name": "Μονοπάτι",
@@ -2440,6 +2554,10 @@
                 },
                 "landuse/allotments": {
                     "name": "Κοινωτικοί Κήποι"
+                },
+                "landuse/aquaculture": {
+                    "name": "Ιχθυοτροφείο",
+                    "terms": "Ιχθυοκαλλιέργεια"
                 },
                 "landuse/basin": {
                     "name": "Κανάλι Αποστράγγισης",
@@ -2598,6 +2716,9 @@
                     "name": "Μαρίνα",
                     "terms": "Μαρίνα"
                 },
+                "leisure/miniature_golf": {
+                    "name": "Μίνι Γκολφ"
+                },
                 "leisure/nature_reserve": {
                     "name": "Προστατευόμενος Βιότοπος"
                 },
@@ -2713,6 +2834,12 @@
                     "name": "Σωλήνωση",
                     "terms": "Αγωγός, σωλήνας"
                 },
+                "man_made/pumping_station": {
+                    "name": "Αντλιοστάσιο"
+                },
+                "man_made/silo": {
+                    "name": "Σιλό"
+                },
                 "man_made/storage_tank": {
                     "name": "Δεξαμενή Αποθήκευσης"
                 },
@@ -2744,6 +2871,12 @@
                 "man_made/water_works": {
                     "name": "Υδραυλικά Έργα",
                     "terms": "Υδραυλικά έργα"
+                },
+                "man_made/watermill": {
+                    "name": "Νερόμυλος"
+                },
+                "man_made/windmill": {
+                    "name": "Ανεμόμυλος"
                 },
                 "man_made/works": {
                     "name": "Εργοστάσιο",
@@ -2929,8 +3062,8 @@
                     "terms": "Πόλη"
                 },
                 "place/hamlet": {
-                    "name": "Χωριουδάκι",
-                    "terms": "Χωριουδάκι, Οικισμός"
+                    "name": "Οικισμός",
+                    "terms": "Χωριουδάκι"
                 },
                 "place/island": {
                     "name": "Νησί",
@@ -2964,6 +3097,9 @@
                 "power/generator": {
                     "name": "Γεννήτρια Ρεύματος",
                     "terms": "ηλεκτρική γεννήτρια"
+                },
+                "power/generator/source_wind": {
+                    "name": "Ανεμογεννήτρια"
                 },
                 "power/line": {
                     "name": "Καλώδιο Ρεύματος",
@@ -3189,6 +3325,7 @@
                     "name": "Κατάστημα Επίπλων"
                 },
                 "shop/garden_centre": {
+                    "name": "Κέντρο Κήπου",
                     "terms": "Φυτώριο"
                 },
                 "shop/gift": {
@@ -3263,6 +3400,9 @@
                 "shop/organic": {
                     "name": "Κατάστημα βιολογικών προϊόντων"
                 },
+                "shop/paint": {
+                    "name": "Χρωματοπωλείο"
+                },
                 "shop/perfumery": {
                     "name": "Κατάστημα Αρωμάτων"
                 },
@@ -3273,6 +3413,9 @@
                 "shop/photo": {
                     "name": "Φωτογραφείο",
                     "terms": "φωτογράφος"
+                },
+                "shop/radiotechnics": {
+                    "name": "Μαγαζί Ηλεκτρονικών Εξαρτημάτων"
                 },
                 "shop/seafood": {
                     "name": "Κατάστημα Θαλασσινών",
@@ -3343,6 +3486,9 @@
                 "shop/window_blind": {
                     "name": "Κατάστημα σκιάστρων παραθύρου",
                     "terms": "Κατάστημα σκιάστρων παραθύρου, κατάστημα ρολών παραθύρου, γρίλιες"
+                },
+                "shop/wine": {
+                    "name": "Κάβα Κρασιών"
                 },
                 "tourism": {
                     "name": "Τουρισμός",
@@ -3523,8 +3669,8 @@
                     "terms": "Ποτάμι"
                 },
                 "waterway/riverbank": {
-                    "name": "Όχθη Ποταμιού",
-                    "terms": "Όχθη ποταμιού"
+                    "name": "Όχθη Ποταμού",
+                    "terms": "Όχθη Ποταμιού"
                 },
                 "waterway/stream": {
                     "name": "Ρέμα",
@@ -3535,7 +3681,167 @@
                 },
                 "waterway/weir": {
                     "name": "Υδατοφράκτης",
-                    "terms": "Υδατοφράκτης"
+                    "terms": "Υδατοφράχτης"
+                }
+            }
+        },
+        "imagery": {
+            "Bing": {
+                "description": "Δορυφορική και εναέρια εικόνα."
+            },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "Όροι και σχόλια"
+                },
+                "description": "Δορυφορική εικόνα Premium DigitalGlobe."
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "Όροι και σχόλια"
+                },
+                "description": "Δορυφορική εικόνα Standard DigitalGlobe."
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                },
+                "description": "Η προεπιλεγμένη στρώση του OpenStreetMap."
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "Όροι και σχόλια"
+                },
+                "description": "Δορυφορική και εναέρια εικόνα."
+            },
+            "OSM_Inspector-Addresses": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                }
+            },
+            "OSM_Inspector-Geometry": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                }
+            },
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                }
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                }
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                }
+            },
+            "OSM_Inspector-Routing": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                }
+            },
+            "OSM_Inspector-Tagging": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
+                }
+            },
+            "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, δεδομένα χάρτη OpenStreetMap contributors, ODbL 1.0"
+                }
+            },
+            "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, δεδομένα χάρτη OpenStreetMap contributors, ODbL 1.0"
+                }
+            },
+            "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, δεδομένα χάρτη OpenStreetMap contributors, ODbL 1.0"
+                }
+            },
+            "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, δεδομένα χάρτη OpenStreetMap contributors, ODbL 1.0"
+                }
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© Michael Spreng, CC by-SA 3.0, δεδομένα χάρτη OpenStreetMap contributors, ODbL 1.0"
+                }
+            },
+            "basemap.at": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "name": "basemap.at"
+            },
+            "basemap.at-orthofoto": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Ορθοφωτογραφική στρώση που παρέχεται από το basemap.at. \"Διάδοχος\" των εικόνων του geoimage.at.",
+                "name": "basemap.at Ορθοφωτογραφία"
+            },
+            "hike_n_bike": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors"
+                }
+            },
+            "mapbox_locator_overlay": {
+                "attribution": {
+                    "text": "Όροι και σχόλια"
+                }
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                }
+            },
+            "osm-gps": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors"
+                },
+                "description": "Δημόσια ίχνη GPS που έχουν μεταφορτωθεί στο OpenStreetMap.",
+                "name": "Ίχνη GPS OpenStreetMap."
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                }
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                }
+            },
+            "qa_no_address": {
+                "attribution": {
+                    "text": "Simon Poole, Δεδομένα © OpenStreetMap contributors"
+                }
+            },
+            "skobbler": {
+                "attribution": {
+                    "text": "© Πλακίδια: skobbler Δεδομένα χάρτη: OpenStreetMap contributors"
+                },
+                "name": "skobbler"
+            },
+            "stamen-terrain-background": {
+                "attribution": {
+                    "text": "Πλακίδια χάρτη από Stamen Design, υπό CC BY 3.0"
+                }
+            },
+            "tf-cycle": {
+                "attribution": {
+                    "text": "Χάρτες © Thunderforest, Δεδομένα © OpenStreetMap contributors"
+                }
+            },
+            "tf-landscape": {
+                "attribution": {
+                    "text": "Χάρτες © Thunderforest, Δεδομένα © OpenStreetMap contributors"
                 }
             }
         }

@@ -328,8 +328,6 @@
         },
         "commit": {
             "title": "OpenStreetMapへアップロード",
-            "description_placeholder": "投稿内容についての短い説明（必須）",
-            "message_label": "変更セットのコメント",
             "upload_explanation": "あなたがアップロードした編集内容は、OpenStreetMapを利用しているすべてのユーザが閲覧できるようになります。",
             "upload_explanation_with_user": "編集した内容を {user} アカウントでアップロードし、OpenStreetMapを利用しているすべてのユーザが閲覧できるようにします。",
             "save": "アップロード",
@@ -1357,10 +1355,6 @@
                 "generator/type": {
                     "label": "タイプ"
                 },
-                "golf_hole": {
-                    "label": "参照",
-                    "placeholder": "ホール (1-18)"
-                },
                 "grape_variety": {
                     "label": "ブドウの品種"
                 },
@@ -1737,8 +1731,14 @@
                         "container": "コンテナ"
                     }
                 },
-                "ref": {
-                    "label": "管理番号"
+                "ref_highway_junction": {
+                    "label": "ジャンクション番号"
+                },
+                "ref_platform": {
+                    "label": "プラットホーム番号"
+                },
+                "ref_road_number": {
+                    "label": "道路番号"
                 },
                 "relation": {
                     "label": "タイプ"
@@ -1852,9 +1852,6 @@
                 },
                 "social_facility_for": {
                     "label": "対象者"
-                },
-                "source": {
-                    "label": "情報源"
                 },
                 "sport": {
                     "label": "スポーツ"
@@ -1992,9 +1989,6 @@
                 },
                 "trees": {
                     "label": "木の数"
-                },
-                "tunnel": {
-                    "label": "トンネル"
                 },
                 "vending": {
                     "label": "販売商品の種別"
@@ -2396,6 +2390,10 @@
                     "name": "モスク",
                     "terms": "モスク"
                 },
+                "amenity/place_of_worship/shinto": {
+                    "name": "神社",
+                    "terms": "神社, 大社, 神宮, 天満宮, 稲荷, 八幡, 天神, 社"
+                },
                 "amenity/planetarium": {
                     "name": "プラネタリウム",
                     "terms": "プラネターリアム"
@@ -2454,6 +2452,10 @@
                 "amenity/school": {
                     "name": "学校の敷地",
                     "terms": "学校の敷地, 校庭"
+                },
+                "amenity/scrapyard": {
+                    "name": "自動車解体場",
+                    "terms": "自動車解体場, 解体, スクラップ, 解体屋"
                 },
                 "amenity/shelter": {
                     "name": "（風雨をしのぐための）休憩所",
@@ -2590,8 +2592,8 @@
                     "terms": "障害物, バリア"
                 },
                 "barrier/block": {
-                    "name": "車止め",
-                    "terms": "ブロック"
+                    "name": "車止めブロック",
+                    "terms": "ブロック, 車止め"
                 },
                 "barrier/bollard": {
                     "name": "車止め杭",
@@ -3776,6 +3778,10 @@
                     "name": "工場",
                     "terms": "工場"
                 },
+                "manhole": {
+                    "name": "マンホール",
+                    "terms": "マンホール, 潜孔, 人孔"
+                },
                 "natural": {
                     "name": "自然",
                     "terms": "自然"
@@ -3961,8 +3967,7 @@
                     "terms": "ＮＧＯ事務所"
                 },
                 "office/physician": {
-                    "name": "医者",
-                    "terms": "医者"
+                    "name": "医者"
                 },
                 "office/political_party": {
                     "name": "政党事務所",
@@ -4048,6 +4053,10 @@
                     "name": "発電機",
                     "terms": "発電機, 発電所"
                 },
+                "power/generator/source_wind": {
+                    "name": "風力発電機",
+                    "terms": "風力発電機, 風力発電, 風車, 風力原動機, 風力タービン"
+                },
                 "power/line": {
                     "name": "送電線",
                     "terms": "送電線"
@@ -4094,9 +4103,17 @@
                     "name": "線路跡",
                     "terms": "鉄道跡, 線路跡, 廃線跡"
                 },
+                "railway/buffer_stop": {
+                    "name": "車止め（鉄道）",
+                    "terms": "車止め, "
+                },
                 "railway/crossing": {
                     "name": "踏切 (歩道)",
                     "terms": "踏切 (歩道), 歩行者用踏切"
+                },
+                "railway/derail": {
+                    "name": "脱線器",
+                    "terms": "脱線器, 脱線機, 脱線ポイント, 脱線転轍機, 車止め, 安全側線"
                 },
                 "railway/disused": {
                     "name": "休止線路",
@@ -4114,6 +4131,10 @@
                     "name": "踏切 (車道)",
                     "terms": "踏切 (車道), 踏切"
                 },
+                "railway/milestone": {
+                    "name": "鉄道距離標",
+                    "terms": "距離標, 距離, キロポスト"
+                },
                 "railway/monorail": {
                     "name": "モノレール",
                     "terms": "モノレール"
@@ -4130,6 +4151,10 @@
                     "name": "線路",
                     "terms": "線路"
                 },
+                "railway/signal": {
+                    "name": "鉄道信号機",
+                    "terms": "鉄道信号機, 信号機, 信号"
+                },
                 "railway/station": {
                     "name": "鉄道駅（停車場）",
                     "terms": "鉄道駅, 駅, 停車場"
@@ -4142,13 +4167,21 @@
                     "name": "地下鉄の出入口",
                     "terms": "地下鉄の出入口"
                 },
+                "railway/switch": {
+                    "name": "分岐器",
+                    "terms": "分岐器, ポイント, 分岐機, 分岐点, 分岐, 転轍機, スイッチ"
+                },
+                "railway/train_wash": {
+                    "name": "洗車機（鉄道用）",
+                    "terms": "洗車機, 洗車"
+                },
                 "railway/tram": {
                     "name": "路面電車",
-                    "terms": "路面電車"
+                    "terms": "路面電車, トラム, LRT"
                 },
                 "railway/tram_stop": {
-                    "name": "電停",
-                    "terms": "電停, 停留所"
+                    "name": "路面電車停留所",
+                    "terms": "電停, 停留所, 駅, 停車場, 路面電車, 路面電車停留所, のりば"
                 },
                 "relation": {
                     "name": "リレーション",

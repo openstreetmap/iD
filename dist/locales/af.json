@@ -482,9 +482,6 @@
                 "railway": {
                     "label": "Tipe"
                 },
-                "ref": {
-                    "label": "Verwyssing"
-                },
                 "relation": {
                     "label": "Tipe"
                 },
@@ -508,9 +505,6 @@
                 },
                 "shop": {
                     "label": "Tipe"
-                },
-                "source": {
-                    "label": "Bro"
                 },
                 "structure": {
                     "label": "Struktuur",

@@ -678,9 +678,6 @@
                 "railway": {
                     "label": "Tegund"
                 },
-                "ref": {
-                    "label": "Heimildir"
-                },
                 "relation": {
                     "label": "Tegund"
                 },
@@ -714,9 +711,6 @@
                 "smoking": {
                     "label": "Reykingar"
                 },
-                "source": {
-                    "label": "Uppruni"
-                },
                 "structure": {
                     "label": "Mannvirki",
                     "options": {
@@ -741,9 +735,6 @@
                 },
                 "trees": {
                     "label": "Tré"
-                },
-                "tunnel": {
-                    "label": "Göng"
                 },
                 "water": {
                     "label": "Tegund"

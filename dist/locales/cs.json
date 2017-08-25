@@ -328,8 +328,6 @@
         },
         "commit": {
             "title": "Nahrát na OpenStreetMap",
-            "description_placeholder": "Stručný popis vašich úprav (povinné)",
-            "message_label": "Komentář změnové sady",
             "upload_explanation": "Vámi provedené změny budou viditelné na všech mapách postavených na datech z OpenStreetMap.",
             "upload_explanation_with_user": "Změny provedené pod jménem {user} budou viditelné na všech mapách postavených na datech z OpenStreetMap.",
             "save": "Nahrát",
@@ -1389,10 +1387,6 @@
                 "generator/type": {
                     "label": "Typ"
                 },
-                "golf_hole": {
-                    "label": "Číslo",
-                    "placeholder": "Číslo jamky (1-18)"
-                },
                 "grape_variety": {
                     "label": "Odrůda vína"
                 },
@@ -1769,9 +1763,6 @@
                         "container": "Kontejner"
                     }
                 },
-                "ref": {
-                    "label": "Označení"
-                },
                 "relation": {
                     "label": "Typ"
                 },
@@ -1884,9 +1875,6 @@
                 },
                 "social_facility_for": {
                     "label": "Komu slouží"
-                },
-                "source": {
-                    "label": "Zdroj"
                 },
                 "sport": {
                     "label": "Sporty"
@@ -2024,9 +2012,6 @@
                 },
                 "trees": {
                     "label": "Stromy"
-                },
-                "tunnel": {
-                    "label": "Tunel"
                 },
                 "vending": {
                     "label": "Druh zboží"
@@ -3989,8 +3974,7 @@
                     "terms": "nezisková organizace,neziskovka,nevládní organizace"
                 },
                 "office/physician": {
-                    "name": "Praktický lékař",
-                    "terms": "lékař,praktický lékař,medik,ordinace,doktor,praktický doktor"
+                    "name": "Praktický lékař"
                 },
                 "office/political_party": {
                     "name": "Politická strana",

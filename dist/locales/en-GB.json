@@ -328,8 +328,6 @@
         },
         "commit": {
             "title": "Upload to OpenStreetMap",
-            "description_placeholder": "Brief description of your contributions (required)",
-            "message_label": "Changeset Comment",
             "upload_explanation": "The changes you upload will be visible on all maps that use OpenStreetMap data.",
             "upload_explanation_with_user": "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
             "save": "Upload",
@@ -1230,7 +1228,7 @@
                     "label": "Type"
                 },
                 "atm": {
-                    "label": "ATM"
+                    "label": "Cash Machine"
                 },
                 "backrest": {
                     "label": "Backrest"
@@ -1281,6 +1279,10 @@
                 },
                 "brand": {
                     "label": "Brand"
+                },
+                "bridge": {
+                    "label": "Type",
+                    "placeholder": "Default"
                 },
                 "building": {
                     "label": "Building"
@@ -1384,6 +1386,10 @@
                 "currency_multi": {
                     "label": "Currency Types"
                 },
+                "cutting": {
+                    "label": "Type",
+                    "placeholder": "Default"
+                },
                 "cycle_network": {
                     "label": "Network"
                 },
@@ -1469,6 +1475,10 @@
                     "label": "Email",
                     "placeholder": "example@example.com"
                 },
+                "embankment": {
+                    "label": "Type",
+                    "placeholder": "Default"
+                },
                 "emergency": {
                     "label": "Emergency"
                 },
@@ -1509,6 +1519,10 @@
                 "fixme": {
                     "label": "Fix Me"
                 },
+                "ford": {
+                    "label": "Type",
+                    "placeholder": "Default"
+                },
                 "fuel": {
                     "label": "Fuel"
                 },
@@ -1539,10 +1553,6 @@
                 },
                 "generator/type": {
                     "label": "Type"
-                },
-                "golf_hole": {
-                    "label": "Reference",
-                    "placeholder": "Hole number (1-18)"
                 },
                 "grape_variety": {
                     "label": "Grape Varieties"
@@ -1628,7 +1638,8 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "layer": {
-                    "label": "Layer"
+                    "label": "Layer",
+                    "placeholder": "0"
                 },
                 "leaf_cycle": {
                     "label": "Leaf Cycle",
@@ -1680,7 +1691,7 @@
                     "placeholder": "2, 4, 6..."
                 },
                 "lit": {
-                    "label": "Street Lighting"
+                    "label": "Lit"
                 },
                 "location": {
                     "label": "Location"
@@ -1710,6 +1721,10 @@
                 },
                 "maxweight": {
                     "label": "Max Weight"
+                },
+                "milestone_position": {
+                    "label": "Milestone Position",
+                    "placeholder": "Distance to one decimal (123.4)"
                 },
                 "mtb/scale": {
                     "label": "Mountain Biking Difficulty",
@@ -1931,7 +1946,37 @@
                     }
                 },
                 "ref": {
-                    "label": "Reference"
+                    "label": "Reference Code"
+                },
+                "ref_aeroway_gate": {
+                    "label": "Gate Number"
+                },
+                "ref_golf_hole": {
+                    "label": "Hole Number",
+                    "placeholder": "1-18"
+                },
+                "ref_highway_junction": {
+                    "label": "Junction Number"
+                },
+                "ref_platform": {
+                    "label": "Platform Number"
+                },
+                "ref_road_number": {
+                    "label": "Road Number"
+                },
+                "ref_route": {
+                    "label": "Route Number"
+                },
+                "ref_runway": {
+                    "label": "Runway Number",
+                    "placeholder": "e.g. 01L/19R"
+                },
+                "ref_stop_position": {
+                    "label": "Stop Number"
+                },
+                "ref_taxiway": {
+                    "label": "Taxiway Name",
+                    "placeholder": "e.g. A5"
                 },
                 "relation": {
                     "label": "Type"
@@ -2045,9 +2090,6 @@
                 },
                 "social_facility_for": {
                     "label": "People Served"
-                },
-                "source": {
-                    "label": "Source"
                 },
                 "sport": {
                     "label": "Sports"
@@ -2187,6 +2229,10 @@
                     "label": "Trees"
                 },
                 "tunnel": {
+                    "label": "Type",
+                    "placeholder": "Default"
+                },
+                "tunnel_waterway": {
                     "label": "Tunnel"
                 },
                 "vending": {
@@ -2319,7 +2365,7 @@
                     "name": "Arts Centre"
                 },
                 "amenity/atm": {
-                    "name": "ATM"
+                    "name": "Cash Machine"
                 },
                 "amenity/bank": {
                     "name": "Bank"
@@ -3420,7 +3466,7 @@
                     "name": "American Football Field"
                 },
                 "leisure/pitch/baseball": {
-                    "name": "Baseball"
+                    "name": "Baseball Diamond"
                 },
                 "leisure/pitch/basketball": {
                     "name": "Basketball Court"
@@ -3963,7 +4009,7 @@
                     "name": "Carpet Store"
                 },
                 "shop/charity": {
-                    "name": "Charity Store"
+                    "name": "Charity Shop"
                 },
                 "shop/cheese": {
                     "name": "Cheese Store"

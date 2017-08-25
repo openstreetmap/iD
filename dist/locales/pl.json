@@ -328,10 +328,9 @@
         },
         "commit": {
             "title": "Prześlij do OpenStreetMap",
-            "description_placeholder": "Zwięzły opis Twoich zmian (wymagany)",
-            "message_label": "Opis zmian",
             "upload_explanation": "Zmiany, które wyślesz będą widoczne na wszystkich mapach używających danych OpenStreetMap.",
             "upload_explanation_with_user": "Zmiany, które wyślesz jako {user} będą widoczne na wszystkich mapach używających danych OpenStreetMap.",
+            "request_review": "Chcę, aby ktoś przejrzał moje edycje.",
             "save": "Prześlij",
             "cancel": "Anuluj",
             "changes": "{count} zmian/zmiany",
@@ -1162,7 +1161,8 @@
                         "subdistrict": "Sub-dystrykt",
                         "subdistrict!vn": "Osiedle/Wspólnota/Miasteczko",
                         "suburb": "Dzielnica",
-                        "suburb!jp": "Osiedle"
+                        "suburb!jp": "Osiedle",
+                        "unit": "Jednostka"
                     }
                 },
                 "admin_level": {
@@ -1282,6 +1282,10 @@
                 "brand": {
                     "label": "Marka"
                 },
+                "bridge": {
+                    "label": "Rodzaj",
+                    "placeholder": "Domyślny"
+                },
                 "building": {
                     "label": "Budynek"
                 },
@@ -1341,11 +1345,17 @@
                         "clockwise": "Zgodnie ze wskazówkami zegara"
                     }
                 },
+                "clothes": {
+                    "label": "Ubrania"
+                },
                 "club": {
                     "label": "Typ"
                 },
                 "collection_times": {
                     "label": "Godziny odbioru"
+                },
+                "comment": {
+                    "placeholder": "Krótki opis dla Twoich zmian (wymagany)"
                 },
                 "communication_multi": {
                     "label": "Typ komunikacji"
@@ -1356,6 +1366,9 @@
                 "contact/webcam": {
                     "label": "Adres kamery internetowej",
                     "placeholder": "http://example.com"
+                },
+                "content": {
+                    "label": "Zawartość"
                 },
                 "country": {
                     "label": "Kraj"
@@ -1377,6 +1390,10 @@
                 },
                 "currency_multi": {
                     "label": "Typy środków płatności"
+                },
+                "cutting": {
+                    "label": "Rodzaj",
+                    "placeholder": "Domyślny"
                 },
                 "cycle_network": {
                     "label": "Sieć"
@@ -1463,6 +1480,10 @@
                     "label": "E-mail",
                     "placeholder": "przyklad@example.com"
                 },
+                "embankment": {
+                    "label": "Rodzaj",
+                    "placeholder": "Domyślny"
+                },
                 "emergency": {
                     "label": "W razie niebezpieczeństwa"
                 },
@@ -1503,6 +1524,10 @@
                 "fixme": {
                     "label": "Popraw mnie (fixme)"
                 },
+                "ford": {
+                    "label": "Rodzaj",
+                    "placeholder": "Domyślny"
+                },
                 "fuel": {
                     "label": "Paliwo"
                 },
@@ -1524,15 +1549,15 @@
                 "generator/method": {
                     "label": "Metoda"
                 },
+                "generator/output/electricity": {
+                    "label": "Moc wyjściowa",
+                    "placeholder": "50 MW, 100 MW, 200 MW..."
+                },
                 "generator/source": {
                     "label": "Źródło energii"
                 },
                 "generator/type": {
                     "label": "Typ"
-                },
-                "golf_hole": {
-                    "label": "Numer referencyjny",
-                    "placeholder": "Numer dołka (1-18)"
                 },
                 "grape_variety": {
                     "label": "Odmiany winorośli"
@@ -1543,6 +1568,10 @@
                 },
                 "handrail": {
                     "label": "Poręcz"
+                },
+                "hashtags": {
+                    "label": "Hasztagi",
+                    "placeholder": "#przykład"
                 },
                 "height": {
                     "label": "Wysokość (metry)"
@@ -1618,7 +1647,8 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "layer": {
-                    "label": "Warstwa"
+                    "label": "Warstwa",
+                    "placeholder": "0"
                 },
                 "leaf_cycle": {
                     "label": "Cykl życiowy",
@@ -1700,6 +1730,9 @@
                 },
                 "maxweight": {
                     "label": "Maksymalna masa całkowita"
+                },
+                "milestone_position": {
+                    "placeholder": "Odległość do jednego miejsca po przecinku (123,4)"
                 },
                 "mtb/scale": {
                     "label": "Skala trudności dla rowerów górskich",
@@ -1888,6 +1921,10 @@
                 "plant": {
                     "label": "Roślina"
                 },
+                "plant/output/electricity": {
+                    "label": "Moc wyjściowa",
+                    "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
                 "population": {
                     "label": "Liczba ludności"
                 },
@@ -1917,7 +1954,26 @@
                     }
                 },
                 "ref": {
-                    "label": "Numer referencyjny"
+                    "label": "Kod referencyjny"
+                },
+                "ref_aeroway_gate": {
+                    "label": "Numer bramki"
+                },
+                "ref_golf_hole": {
+                    "label": "Numer dołka",
+                    "placeholder": "1-18"
+                },
+                "ref_platform": {
+                    "label": "Numer peronu"
+                },
+                "ref_road_number": {
+                    "label": "Numer drogi"
+                },
+                "ref_runway": {
+                    "placeholder": "np. 01L/19P"
+                },
+                "ref_taxiway": {
+                    "placeholder": "np. A5"
                 },
                 "relation": {
                     "label": "Typ"
@@ -2033,7 +2089,7 @@
                     "label": "Grupa docelowa"
                 },
                 "source": {
-                    "label": "Źródło danych"
+                    "label": "Źródła"
                 },
                 "sport": {
                     "label": "Sport"
@@ -2173,6 +2229,10 @@
                     "label": "Drzewa"
                 },
                 "tunnel": {
+                    "label": "Rodzaj",
+                    "placeholder": "Domyślny"
+                },
+                "tunnel_waterway": {
                     "label": "Tunel"
                 },
                 "vending": {
@@ -2567,6 +2627,9 @@
                     "name": "Kościół",
                     "terms": "chrześcijaństwo,opactwo,bazylika,katedra,prezbiterium,kaplica,dom Boży,dom modlitwy,misja,oratorium,parafia,sanktuarium,świątynia,tabernakulum"
                 },
+                "amenity/place_of_worship/hindu": {
+                    "name": "Świątynia hinduistyczna"
+                },
                 "amenity/place_of_worship/jewish": {
                     "name": "Synagoga",
                     "terms": "synagoga"
@@ -2574,6 +2637,15 @@
                 "amenity/place_of_worship/muslim": {
                     "name": "Meczet",
                     "terms": "meczet"
+                },
+                "amenity/place_of_worship/shinto": {
+                    "name": "Sanktuarium shintoistyczne"
+                },
+                "amenity/place_of_worship/sikh": {
+                    "name": "Świątynia sikhizmu"
+                },
+                "amenity/place_of_worship/taoist": {
+                    "name": "Świątynia taoistyczna"
                 },
                 "amenity/planetarium": {
                     "name": "Planetarium",
@@ -2740,6 +2812,9 @@
                     "name": "Weterynarz",
                     "terms": "Zakład weterynaryjny, lecznica dla zwierząt"
                 },
+                "amenity/waste/dog_excrement": {
+                    "name": "Kosz na psie odchody"
+                },
                 "amenity/waste_basket": {
                     "name": "Kosz na śmieci",
                     "terms": "kosz,kubeł,śmietnik"
@@ -2767,6 +2842,15 @@
                 "area/highway": {
                     "name": "Nawierzchnia",
                     "terms": "typ nawierzchni"
+                },
+                "attraction/animal": {
+                    "name": "Zwierzę"
+                },
+                "attraction/carousel": {
+                    "name": "Karuzela"
+                },
+                "attraction/pirate_ship": {
+                    "name": "Statek piracki"
                 },
                 "barrier": {
                     "name": "Bariera",
@@ -3955,6 +4039,12 @@
                     "name": "Zakład uzdatniania wody",
                     "terms": "Filtracja wody,wodociągi"
                 },
+                "man_made/watermill": {
+                    "name": "Młyn wodny"
+                },
+                "man_made/windmill": {
+                    "name": "Wiatrak"
+                },
                 "man_made/works": {
                     "name": "Fabryka",
                     "terms": "zakład produkcyjny"
@@ -3966,6 +4056,9 @@
                 "manhole/drain": {
                     "name": "Kanalizacja burzowa",
                     "terms": "Kanalizacja deszczowa, burzowiec"
+                },
+                "manhole/telecom": {
+                    "name": "Węzeł telekomunikacyjny"
                 },
                 "natural": {
                     "name": "Natura",
@@ -4152,8 +4245,7 @@
                     "terms": "stowarzyszenie, fundacja,ngo"
                 },
                 "office/physician": {
-                    "name": "Lekarz",
-                    "terms": "lekarz, gabinet lekarski"
+                    "name": "Lekarz"
                 },
                 "office/political_party": {
                     "name": "Partia polityczna",
@@ -4239,6 +4331,13 @@
                     "name": "Elektrownia",
                     "terms": "generator,prądnica,wytwornica"
                 },
+                "power/generator/source_nuclear": {
+                    "name": "Reaktor jądrowy"
+                },
+                "power/generator/source_wind": {
+                    "name": "Turbina wiatrowa",
+                    "terms": "turbina wiatrowa, wiatrak, generator"
+                },
                 "power/line": {
                     "name": "Linia elektryczna",
                     "terms": "lina wysokiego napięcia, lina energetyczna"
@@ -4285,9 +4384,15 @@
                     "name": "Rozebrany tor",
                     "terms": "rozebrany tor"
                 },
+                "railway/buffer_stop": {
+                    "name": "Bufor zatrzymania"
+                },
                 "railway/crossing": {
                     "name": "przejście kolejowe (ścieżka)",
                     "terms": "przejście kolejowe"
+                },
+                "railway/derail": {
+                    "name": "Przekaźnik kolejowy"
                 },
                 "railway/disused": {
                     "name": "Nieużywany tor",
@@ -4332,6 +4437,9 @@
                 "railway/subway_entrance": {
                     "name": "Wejście do metra",
                     "terms": "Wejście do metra"
+                },
+                "railway/train_wash": {
+                    "name": "Myjnia pociągów"
                 },
                 "railway/tram": {
                     "name": "Tramwaj",

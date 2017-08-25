@@ -328,10 +328,9 @@
         },
         "commit": {
             "title": "Pošlji na OpenStreetMap",
-            "description_placeholder": "Kratek opis sprememb (zahtevan vpis)",
-            "message_label": "Povzetek sprememb",
             "upload_explanation": "Spremembe, ki ji boste naložili, bodo vidne na vseh zemljevidih, ki uporabljajo podatke OpenStreetMap.",
             "upload_explanation_with_user": "Spremembe, ki jih objavite kot uporabnik {user}, bodo vidne na vseh zemljevidih, ki uporabljajo podatke OpenStreetMap.",
+            "request_review": "Nekdo naj preveri moje urejanje.",
             "save": "Pošlji",
             "cancel": "Prekliči",
             "changes": "{count} sprememb",
@@ -1282,6 +1281,10 @@
                 "brand": {
                     "label": "Znamka"
                 },
+                "bridge": {
+                    "label": "Vrsta",
+                    "placeholder": "Privzeto"
+                },
                 "building": {
                     "label": "Zgradba"
                 },
@@ -1341,6 +1344,9 @@
                         "clockwise": "V smeri urinega kazalca"
                     }
                 },
+                "clothes": {
+                    "label": "Oblačila"
+                },
                 "club": {
                     "label": "Vrsta"
                 },
@@ -1356,6 +1362,9 @@
                 "contact/webcam": {
                     "label": "Naslov URL spletne kamere",
                     "placeholder": "http://www.naslov.si/"
+                },
+                "content": {
+                    "label": "Vsebina"
                 },
                 "country": {
                     "label": "Država"
@@ -1524,15 +1533,14 @@
                 "generator/method": {
                     "label": "Način"
                 },
+                "generator/output/electricity": {
+                    "placeholder": "50 MW, 100 MW, 200 MW ..."
+                },
                 "generator/source": {
                     "label": "Vir podatkov"
                 },
                 "generator/type": {
                     "label": "Vrsta"
-                },
-                "golf_hole": {
-                    "label": "Referenca",
-                    "placeholder": "Številka luknje (1-18)"
                 },
                 "grape_variety": {
                     "label": "Sorte vinske trte"
@@ -1882,6 +1890,9 @@
                 "plant": {
                     "label": "Rastlina"
                 },
+                "plant/output/electricity": {
+                    "placeholder": "500 MW, 1000 MW, 2000 MW ..."
+                },
                 "population": {
                     "label": "Število prebivalcev"
                 },
@@ -1911,7 +1922,13 @@
                     }
                 },
                 "ref": {
-                    "label": "Referenca"
+                    "label": "Sklicna številka"
+                },
+                "ref_aeroway_gate": {
+                    "label": "Številka vrat"
+                },
+                "ref_golf_hole": {
+                    "label": "Številka luknje"
                 },
                 "relation": {
                     "label": "Vrsta"
@@ -2022,9 +2039,6 @@
                 },
                 "social_facility": {
                     "label": "Vrsta"
-                },
-                "source": {
-                    "label": "Vir"
                 },
                 "sport": {
                     "label": "Vrste športa"
@@ -2163,7 +2177,7 @@
                 "trees": {
                     "label": "Drevesa"
                 },
-                "tunnel": {
+                "tunnel_waterway": {
                     "label": "Predor"
                 },
                 "vending": {
@@ -2552,6 +2566,9 @@
                     "name": "Cerkev",
                     "terms": "stolnica,katedrala,bogoslužje"
                 },
+                "amenity/place_of_worship/hindu": {
+                    "name": "Hindujski tempel"
+                },
                 "amenity/place_of_worship/jewish": {
                     "name": "Sinagoga",
                     "terms": "židovski verski objekt,  judovski verski objekt, judovska sinagoga, judaizem"
@@ -2709,6 +2726,9 @@
                 "amenity/veterinary": {
                     "name": "Veterinar",
                     "terms": "veterinarska klinika,klinika za pse,klinika za mačke"
+                },
+                "amenity/waste/dog_excrement": {
+                    "name": "Koš za pasje iztrebke"
                 },
                 "amenity/waste_basket": {
                     "name": "Koš za odpadke",
@@ -3857,6 +3877,12 @@
                     "name": "Vodovod",
                     "terms": "vodno črpališče,vodno zajetje"
                 },
+                "man_made/watermill": {
+                    "name": "Vodni mlin"
+                },
+                "man_made/windmill": {
+                    "name": "Mlin na veter"
+                },
                 "man_made/works": {
                     "name": "Tovarna",
                     "terms": "tvornica,obrat,fabrika"
@@ -3864,6 +3890,9 @@
                 "manhole": {
                     "name": "Jašek",
                     "terms": "jašek, vhodna odprtina, kanalizacija, elektro, vodovod, telekom, cestni jašek"
+                },
+                "manhole/drain": {
+                    "name": "Odtočni kanal"
                 },
                 "natural": {
                     "name": "Naravna prvina",
@@ -4040,8 +4069,7 @@
                     "terms": "nevladna organizacija"
                 },
                 "office/physician": {
-                    "name": "Ambulanta",
-                    "terms": "zdravnik,zdravnica"
+                    "name": "Ambulanta"
                 },
                 "office/political_party": {
                     "name": "Politična stranka",
@@ -4124,6 +4152,12 @@
                 "power/generator": {
                     "name": "Elektrarna",
                     "terms": "agregat,električni generator"
+                },
+                "power/generator/source_nuclear": {
+                    "name": "Jedrski reaktor"
+                },
+                "power/generator/source_wind": {
+                    "name": "Vetrna turbina"
                 },
                 "power/line": {
                     "name": "Daljnovod (stolpi)",
@@ -4215,6 +4249,9 @@
                 "railway/subway_entrance": {
                     "name": "Vhod podzemne železnice",
                     "terms": "vhod v podzemno železnico"
+                },
+                "railway/switch": {
+                    "name": "Kretnica"
                 },
                 "railway/tram": {
                     "name": "Tramvaj",
@@ -4937,7 +4974,8 @@
                 "name": "Posnetki Mapbox Satellite"
             },
             "New_and_Misaligned_TIGER_Roads-2013": {
-                "description": "Pri približanju do ravni 16+ so podatki zemljevida v javni domeni z dovoljenjem US Census. Pri večjih približanjih, pa so prikazane le spremembe od leta 2006 naprej, neupoštevajoč sprememb, ki so že vključene v OpenStreetMap"
+                "description": "Pri približanju do ravni 16+ so podatki zemljevida v javni domeni z dovoljenjem US Census. Pri večjih približanjih, pa so prikazane le spremembe od leta 2006 naprej, neupoštevajoč sprememb, ki so že vključene v OpenStreetMap",
+                "name": "Nove in nenatančno vrisane poti TIGER"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {

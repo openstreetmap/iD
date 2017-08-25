@@ -328,10 +328,9 @@
         },
         "commit": {
             "title": "上傳到開放街圖",
-            "description_placeholder": "你的貢獻摘要(必填)",
-            "message_label": "編輯變動註解",
             "upload_explanation": "你的修改將會在所有使用OpenStreetMap資料的地圖上看到。",
             "upload_explanation_with_user": "你以 {user} 具名的修改將會在所有使用OpenStreetMap資料的地圖上看到。",
+            "request_review": "我需要其他人檢視查核我的編輯。",
             "save": "上傳",
             "cancel": "取消",
             "changes": "{count}  變動數",
@@ -1162,7 +1161,8 @@
                         "subdistrict": "分區",
                         "subdistrict!vn": "行政區／社區／小市鎮",
                         "suburb": "細區",
-                        "suburb!jp": "行政區"
+                        "suburb!jp": "行政區",
+                        "unit": "單位"
                     }
                 },
                 "admin_level": {
@@ -1282,6 +1282,10 @@
                 "brand": {
                     "label": "品牌"
                 },
+                "bridge": {
+                    "label": "類型",
+                    "placeholder": "預設"
+                },
                 "building": {
                     "label": "建築物"
                 },
@@ -1350,6 +1354,10 @@
                 "collection_times": {
                     "label": "收集時間"
                 },
+                "comment": {
+                    "label": "編輯變動留言",
+                    "placeholder": "你的貢獻摘要(必填)"
+                },
                 "communication_multi": {
                     "label": "通訊類型"
                 },
@@ -1383,6 +1391,10 @@
                 },
                 "currency_multi": {
                     "label": "貨幣種類"
+                },
+                "cutting": {
+                    "label": "類型",
+                    "placeholder": "預設"
                 },
                 "cycle_network": {
                     "label": "單車網路"
@@ -1469,6 +1481,10 @@
                     "label": "Email",
                     "placeholder": "example@example.com"
                 },
+                "embankment": {
+                    "label": "類型",
+                    "placeholder": "預設"
+                },
                 "emergency": {
                     "label": "緊急"
                 },
@@ -1509,6 +1525,10 @@
                 "fixme": {
                     "label": "修復我"
                 },
+                "ford": {
+                    "label": "類型",
+                    "placeholder": "預設"
+                },
                 "fuel": {
                     "label": "燃料"
                 },
@@ -1540,10 +1560,6 @@
                 "generator/type": {
                     "label": "種類"
                 },
-                "golf_hole": {
-                    "label": "編號",
-                    "placeholder": "球洞編號(1－18)"
-                },
                 "grape_variety": {
                     "label": "葡萄品種"
                 },
@@ -1553,6 +1569,10 @@
                 },
                 "handrail": {
                     "label": "扶手"
+                },
+                "hashtags": {
+                    "label": "主題標籤",
+                    "placeholder": "#範例"
                 },
                 "height": {
                     "label": "高度 (公尺)"
@@ -1628,7 +1648,8 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "layer": {
-                    "label": "層"
+                    "label": "層",
+                    "placeholder": "0"
                 },
                 "leaf_cycle": {
                     "label": "落葉期",
@@ -1710,6 +1731,10 @@
                 },
                 "maxweight": {
                     "label": "最大承重"
+                },
+                "milestone_position": {
+                    "label": "里程碑位置",
+                    "placeholder": "距離，顯示一位小數 (123.4)"
                 },
                 "mtb/scale": {
                     "label": "越越單車難度",
@@ -1931,7 +1956,37 @@
                     }
                 },
                 "ref": {
-                    "label": "編號"
+                    "label": "參考編號"
+                },
+                "ref_aeroway_gate": {
+                    "label": "閘門編號"
+                },
+                "ref_golf_hole": {
+                    "label": "球洞編號",
+                    "placeholder": "1-18"
+                },
+                "ref_highway_junction": {
+                    "label": "路口編號"
+                },
+                "ref_platform": {
+                    "label": "站台編號"
+                },
+                "ref_road_number": {
+                    "label": "道路邊號"
+                },
+                "ref_route": {
+                    "label": "路線編號"
+                },
+                "ref_runway": {
+                    "label": "跑道編號",
+                    "placeholder": "範例：01L/19R"
+                },
+                "ref_stop_position": {
+                    "label": "站體編號"
+                },
+                "ref_taxiway": {
+                    "label": "滑行道號碼",
+                    "placeholder": "範例：A5"
                 },
                 "relation": {
                     "label": "種類"
@@ -2187,6 +2242,10 @@
                     "label": "樹"
                 },
                 "tunnel": {
+                    "label": "類型",
+                    "placeholder": "預設"
+                },
+                "tunnel_waterway": {
                     "label": "隧道"
                 },
                 "vending": {
@@ -2672,6 +2731,10 @@
                     "name": "涼亭",
                     "terms": "遮雨棚,亭,亭子"
                 },
+                "amenity/shower": {
+                    "name": "淋浴間",
+                    "terms": "淋浴間,淋浴"
+                },
                 "amenity/social_facility": {
                     "name": "社福機構",
                     "terms": "社福設施"
@@ -2801,6 +2864,58 @@
                 "area/highway": {
                     "name": "路面材質",
                     "terms": "路面材質,路面"
+                },
+                "attraction/amusement_ride": {
+                    "name": "遊樂園",
+                    "terms": "<translate with synonyms or related terms for 'Amusement Ride', separated by commas>"
+                },
+                "attraction/animal": {
+                    "name": "動物",
+                    "terms": "<translate with synonyms or related terms for 'Animal', separated by commas>"
+                },
+                "attraction/big_wheel": {
+                    "name": "摩天輪",
+                    "terms": "<translate with synonyms or related terms for 'Big Wheel', separated by commas>"
+                },
+                "attraction/bumper_car": {
+                    "name": "碰碰車",
+                    "terms": "<translate with synonyms or related terms for 'Bumper Car', separated by commas>"
+                },
+                "attraction/bungee_jumping": {
+                    "name": "高空彈跳",
+                    "terms": "<translate with synonyms or related terms for 'Bungee Jumping', separated by commas>"
+                },
+                "attraction/carousel": {
+                    "name": "旋轉木馬",
+                    "terms": "<translate with synonyms or related terms for 'Carousel', separated by commas>"
+                },
+                "attraction/dark_ride": {
+                    "name": "黑暗探險",
+                    "terms": "<translate with synonyms or related terms for 'Dark Ride', separated by commas>"
+                },
+                "attraction/drop_tower": {
+                    "name": "自由落體",
+                    "terms": "<translate with synonyms or related terms for 'Drop Tower', separated by commas>"
+                },
+                "attraction/pirate_ship": {
+                    "name": "海盜船",
+                    "terms": "<translate with synonyms or related terms for 'Pirate Ship', separated by commas>"
+                },
+                "attraction/river_rafting": {
+                    "name": "激流船",
+                    "terms": "<translate with synonyms or related terms for 'River Rafting', separated by commas>"
+                },
+                "attraction/roller_coaster": {
+                    "name": "雲霄飛車",
+                    "terms": "<translate with synonyms or related terms for 'Roller Coaster', separated by commas>"
+                },
+                "attraction/train": {
+                    "name": "遊樂園小火車",
+                    "terms": "<translate with synonyms or related terms for 'Tourist Train', separated by commas>"
+                },
+                "attraction/water_slide": {
+                    "name": "滑水道",
+                    "terms": "<translate with synonyms or related terms for 'Water Slide', separated by commas>"
                 },
                 "barrier": {
                     "name": "柵欄",
@@ -3239,6 +3354,10 @@
                 "emergency/fire_hydrant": {
                     "name": "消防栓",
                     "terms": "消防栓,消防設施,"
+                },
+                "emergency/life_ring": {
+                    "name": "救生圈",
+                    "terms": "救生圈"
                 },
                 "emergency/no": {
                     "name": "不開放緊急通行"
@@ -3683,8 +3802,8 @@
                     "terms": "鐵路通道"
                 },
                 "landuse/recreation_ground": {
-                    "name": "遊樂場",
-                    "terms": "遊樂場,遊樂園"
+                    "name": "遊憩區",
+                    "terms": "休憩區,遊樂場,遊樂園"
                 },
                 "landuse/residential": {
                     "name": "住宅區",
@@ -4009,6 +4128,10 @@
                     "name": "排水系統",
                     "terms": "排水系統,排水道"
                 },
+                "manhole/telecom": {
+                    "name": "電信公司人孔",
+                    "terms": "電信公司人孔,電信人孔"
+                },
                 "natural": {
                     "name": "自然景觀",
                     "terms": "自然物件"
@@ -4194,8 +4317,7 @@
                     "terms": "NGO辦公室"
                 },
                 "office/physician": {
-                    "name": "醫務所",
-                    "terms": "醫務室"
+                    "name": "醫務所"
                 },
                 "office/political_party": {
                     "name": "政黨辦公室",
@@ -4335,9 +4457,17 @@
                     "name": "鐵路線遺跡",
                     "terms": "舊鐵路線"
                 },
+                "railway/buffer_stop": {
+                    "name": "緩衝站",
+                    "terms": "緩衝站"
+                },
                 "railway/crossing": {
                     "name": "鐵路平交道（路徑）",
                     "terms": "鐵路平交道,平交道"
+                },
+                "railway/derail": {
+                    "name": "鐵路脫軌器",
+                    "terms": "鐵路脫軌器"
                 },
                 "railway/disused": {
                     "name": "廢棄鐵路",
@@ -4355,6 +4485,10 @@
                     "name": "鐵路平交道（道路）",
                     "terms": "鐵路平交道,平交道"
                 },
+                "railway/milestone": {
+                    "name": "鐵路里程碑",
+                    "terms": "鐵路里程碑"
+                },
                 "railway/monorail": {
                     "name": "單軌電車",
                     "terms": "畢軌電車"
@@ -4371,6 +4505,10 @@
                     "name": "鐵軌",
                     "terms": "路軌"
                 },
+                "railway/signal": {
+                    "name": "鐵道信號",
+                    "terms": "鐵道信號"
+                },
                 "railway/station": {
                     "name": "火車站",
                     "terms": "鐵路站,車站,高鐵站"
@@ -4382,6 +4520,14 @@
                 "railway/subway_entrance": {
                     "name": "捷運入口",
                     "terms": "地鐵入口,地下鐵入口,捷運出入口,地鐵出入口,地下鐵出入口"
+                },
+                "railway/switch": {
+                    "name": "鐵路轉轍器",
+                    "terms": "鐵路轉轍器"
+                },
+                "railway/train_wash": {
+                    "name": "火車清洗處",
+                    "terms": "火車清洗處"
                 },
                 "railway/tram": {
                     "name": "電車",

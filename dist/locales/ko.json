@@ -328,8 +328,6 @@
         },
         "commit": {
             "title": "오픈스트리트맵에 올리기",
-            "description_placeholder": "기여 내역에 대해 간단히 설명(필수)",
-            "message_label": "바뀜집합 덧글",
             "upload_explanation": "올린 변경사항은 오픈스트리트맵 자료를 사용하는 모든 지도에 보여집니다.",
             "upload_explanation_with_user": "{user} 사용자로 올린 변경사항은 오픈스트리트맵 자료를 사용하는 모든 지도에 보여집니다.",
             "save": "올리기",
@@ -362,7 +360,31 @@
                 "key": "H",
                 "selected": "{n}개 선택함",
                 "version": "버전",
-                "last_edit": "최근 편집"
+                "last_edit": "최근 편집",
+                "edited_by": "편집:",
+                "changeset": "바뀜집합",
+                "unknown": "알 수 없음",
+                "link_text": "openstreetmap.org에서의 기록"
+            },
+            "location": {
+                "key": "L",
+                "title": "위치",
+                "unknown_location": "알 수 없는 위치"
+            },
+            "measurement": {
+                "key": "M",
+                "title": "측정",
+                "selected": "{n}개 선택함",
+                "geometry": "기하적",
+                "closed": "닫음",
+                "center": "가운데",
+                "perimeter": "둘레",
+                "length": "길이",
+                "area": "넓이",
+                "centroid": "중심",
+                "location": "위치",
+                "metric": "미터법",
+                "imperial": "임페리얼"
             }
         },
         "geometry": {
@@ -520,7 +542,9 @@
         },
         "restore": {
             "heading": "저장하지 않은 변경사항이 있습니다",
-            "description": "이전 편집 기간에 저장하지 않은 변경사항을 복구하겠습니까?"
+            "description": "이전 편집 기간에 저장하지 않은 변경사항을 복구하겠습니까?",
+            "restore": "변경점 복구",
+            "reset": "변경점 재설정"
         },
         "save": {
             "title": "저장",
@@ -1312,10 +1336,6 @@
                 "generator/type": {
                     "label": "유형"
                 },
-                "golf_hole": {
-                    "label": "참조",
-                    "placeholder": "홀 수 (1-18)"
-                },
                 "grape_variety": {
                     "label": "포도 품종"
                 },
@@ -1692,9 +1712,6 @@
                         "container": "컨테이너"
                     }
                 },
-                "ref": {
-                    "label": "참조"
-                },
                 "relation": {
                     "label": "유형"
                 },
@@ -1807,9 +1824,6 @@
                 },
                 "social_facility_for": {
                     "label": "제공되는 사람들"
-                },
-                "source": {
-                    "label": "참조 정보"
                 },
                 "sport": {
                     "label": "스포츠"
@@ -1947,9 +1961,6 @@
                 },
                 "trees": {
                     "label": "나무"
-                },
-                "tunnel": {
-                    "label": "터널"
                 },
                 "vending": {
                     "label": "상품 종류"

@@ -93,6 +93,34 @@
                 "subdistrict": "<value for addr:subdistrict>",
                 "suburb": "<value for addr:suburb>",
                 "countrycode": "in"
+            },
+            "welcome": {
+                "title": "स्वागतम"
+            },
+            "points": {
+                "title": "बिंद"
+            }
+        },
+        "shortcuts": {
+            "or": "या",
+            "browsing": {
+                "navigation": {
+                    "zoom": "ज़ूम इन / ज़ूम आउट"
+                },
+                "help": {
+                    "title": "सहायता"
+                }
+            },
+            "editing": {
+                "drawing": {
+                    "title": "चित्रांकन"
+                },
+                "operations": {
+                    "reverse": "रेखा को उल्टा करें"
+                },
+                "commands": {
+                    "title": "आदेश"
+                }
             }
         },
         "presets": {

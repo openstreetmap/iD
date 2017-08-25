@@ -2,7 +2,7 @@
     "yue": {
         "modes": {
             "add_area": {
-                "title": "範圍Up",
+                "title": "範圍",
                 "description": "加公園、建築物、湖或者其他範圍入去地圖度。",
                 "tail": "喺地圖度撳一下就可以開始畫範圍，好似公園呀、湖呀、或者建築物呀咁。"
             },
@@ -251,8 +251,6 @@
         },
         "commit": {
             "title": "傳上去公家街圖",
-            "description_placeholder": "簡述你做過啲乜（必填）",
-            "message_label": "變更留言",
             "upload_explanation": "你嘅修改，傳咗上去公家街圖。凢用公家街圖資料，地圖都會見到。",
             "upload_explanation_with_user": "你以{user}名義，修改傳咗上去公家街圖。凢用公家街圖資料，地圖都會見到。",
             "save": "傳上",
@@ -988,10 +986,6 @@
                 "generator/type": {
                     "label": "類"
                 },
-                "golf_hole": {
-                    "label": "參攷",
-                    "placeholder": "洞數（一到十八）"
-                },
                 "handicap": {
                     "label": "差點",
                     "placeholder": "1-18"
@@ -1327,9 +1321,6 @@
                 "recycling_accepts": {
                     "label": "收得"
                 },
-                "ref": {
-                    "label": "參攷"
-                },
                 "relation": {
                     "label": "類"
                 },
@@ -1428,9 +1419,6 @@
                     },
                     "placeholder": "轆仔、有轆、越野⋯⋯"
                 },
-                "source": {
-                    "label": "來源"
-                },
                 "stars": {
                     "label": "星級"
                 },
@@ -1519,9 +1507,6 @@
                 },
                 "trees": {
                     "label": "樹"
-                },
-                "tunnel": {
-                    "label": "隧道"
                 },
                 "vending": {
                     "label": "貨類"
@@ -2447,8 +2432,7 @@
                     "terms": "NGO Office,志顠機構寫字樓,非政府組織"
                 },
                 "office/physician": {
-                    "name": "醫生",
-                    "terms": "Physician,醫生"
+                    "name": "醫生"
                 },
                 "office/political_party": {
                     "name": "政黨",
@@ -3006,6 +2990,12 @@
                 },
                 "description": "衞星同般空相。",
                 "name": "輿圖盒衛星"
+            },
+            "tf-cycle": {
+                "name": "雷林公家單車地圖"
+            },
+            "tf-landscape": {
+                "name": "雷林地勢"
             }
         }
     }
