@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import { uiFeatureList } from './feature_list';
 import { uiInspector } from './inspector';
-import { uiNotice } from './notice';
 
 
 export function uiSidebar(context) {
@@ -15,8 +14,6 @@ export function uiSidebar(context) {
             .attr('class', 'feature-list-pane')
             .call(uiFeatureList(context));
 
-        selection
-            .call(uiNotice(context));
 
         var inspectorWrap = selection
             .append('div')
