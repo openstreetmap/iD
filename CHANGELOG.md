@@ -121,6 +121,7 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 
 #### :rocket: Presets
 
+* Add signpost term to guidepost preset ([#4277], thanks [@JamesKingdom])
 * Remove maxspeed field from living street ([#4260], thanks [@JamesKingdom])
 * Make `office=physician` non-searchable ([#4255], thanks [@M1dgard])
 * Add preset for `amenity=shower` ([#4256], thanks [@JamesKingdom])
@@ -139,6 +140,7 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 * Replace generic "Reference" field with more specific named fields ([#4180], thanks [@JamesKingdom])
 * Add preset for Telecom Manhole ([#4185], thanks [@JamesKingdom])
 
+[#4277]: https://github.com/openstreetmap/iD/issues/4277
 [#4260]: https://github.com/openstreetmap/iD/issues/4260
 [#4255]: https://github.com/openstreetmap/iD/issues/4255
 [#4256]: https://github.com/openstreetmap/iD/issues/4256
