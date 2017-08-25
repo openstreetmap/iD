@@ -22,3 +22,5 @@ export { utilSuggestNames } from './suggest_names';
 export { utilTagText } from './util';
 export { utilTriggerEvent } from './trigger_event';
 export { utilWrap } from './util';
+export { utilIdleWorker} from './idle_worker';
+export { utilCallWhenIdle } from './call_when_idle';

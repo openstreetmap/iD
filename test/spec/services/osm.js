@@ -320,6 +320,24 @@ describe('iD.serviceOsm', function () {
                 [200, { 'Content-Type': 'text/xml' }, wayXML]);
             server.respond();
         });
+
+        it('does not ignore repeat requests', function(done) {
+            var id = 'n1';
+            connection.loadEntity(id, function(err1, result1) {
+                var entity1 = _.find(result1.data, function(e1) { return e1.id === id; });
+                expect(entity1).to.be.an.instanceOf(iD.Node);
+                connection.loadEntity(id, function(err2, result2) {
+                    var entity2 = _.find(result2.data, function(e2) { return e2.id === id; });
+                    expect(entity2).to.be.an.instanceOf(iD.Node);
+                    done();
+                });
+                server.respond();
+            });
+
+            server.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/node/1',
+                [200, { 'Content-Type': 'text/xml' }, nodeXML]);
+            server.respond();
+        });
     });
 
     describe('#loadEntityVersion', function () {
@@ -363,6 +381,24 @@ describe('iD.serviceOsm', function () {
                 [200, { 'Content-Type': 'text/xml' }, wayXML]);
             server.respond();
         });
+
+        it('does not ignore repeat requests', function(done) {
+            var id = 'n1';
+            connection.loadEntityVersion(id, 1, function(err1, result1) {
+                var entity1 = _.find(result1.data, function(e1) { return e1.id === id; });
+                expect(entity1).to.be.an.instanceOf(iD.Node);
+                connection.loadEntityVersion(id, 1, function(err2, result2) {
+                    var entity2 = _.find(result2.data, function(e2) { return e2.id === id; });
+                    expect(entity2).to.be.an.instanceOf(iD.Node);
+                    done();
+                });
+                server.respond();
+            });
+
+            server.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/node/1/1',
+                [200, { 'Content-Type': 'text/xml' }, nodeXML]);
+            server.respond();
+        });
     });
 
     describe('#loadMultiple', function () {
@@ -376,6 +412,7 @@ describe('iD.serviceOsm', function () {
 
         it('loads nodes');
         it('loads ways');
+        it('does not ignore repeat requests');
 
     });
 

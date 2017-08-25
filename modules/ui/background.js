@@ -4,7 +4,7 @@ import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t, textDirection } from '../util/locale';
 import { geoMetersToOffset, geoOffsetToMeters } from '../geo/index';
 import { utilDetect } from '../util/detect';
-import { utilSetTransform } from '../util/index';
+import { utilSetTransform, utilCallWhenIdle } from '../util/index';
 import { svgIcon } from '../svg/index';
 import { uiMapInMap } from './map_in_map';
 import { uiCmd } from './cmd';
@@ -540,7 +540,7 @@ export function uiBackground(context) {
             );
 
         context.map()
-            .on('move.background-update', _.debounce(update, 1000));
+            .on('move.background-update', _.debounce(utilCallWhenIdle(update), 1000));
 
         context.background()
             .on('change.background-update', update);

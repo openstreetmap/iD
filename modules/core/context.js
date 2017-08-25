@@ -13,6 +13,7 @@ import { services } from '../services/index';
 import { uiInit } from '../ui/init';
 import { utilDetect } from '../util/detect';
 import { utilRebind } from '../util/rebind';
+import { utilCallWhenIdle } from '../util/index';
 
 
 export var areaKeys = {};
@@ -83,9 +84,9 @@ export function coreContext() {
 
 
     /* Connection */
-    function entitiesLoaded(err, result) {
+    var entitiesLoaded = utilCallWhenIdle(function entitiesLoaded(err, result) {
         if (!err) history.merge(result.data, result.extent);
-    }
+    });
 
     context.preauth = function(options) {
         if (connection) {
@@ -94,7 +95,7 @@ export function coreContext() {
         return context;
     };
 
-    context.loadTiles = function(projection, dimensions, callback) {
+    context.loadTiles = utilCallWhenIdle(function(projection, dimensions, callback) {
         function done(err, result) {
             entitiesLoaded(err, result);
             if (callback) callback(err, result);
@@ -102,7 +103,7 @@ export function coreContext() {
         if (connection) {
             connection.loadTiles(projection, dimensions, done);
         }
-    };
+    });
 
     context.loadEntity = function(id, callback) {
         function done(err, result) {
