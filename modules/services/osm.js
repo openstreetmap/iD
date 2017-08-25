@@ -267,13 +267,15 @@ export default {
 
     loadEntity: function(id, callback) {
         var type = osmEntity.id.type(id),
-            osmID = osmEntity.id.toOSM(id);
+            osmID = osmEntity.id.toOSM(id),
+            options = { cache: false };
 
         this.loadFromAPI(
             '/api/0.6/' + type + '/' + osmID + (type !== 'node' ? '/full' : ''),
             function(err, entities) {
                 if (callback) callback(err, { data: entities });
-            }
+            },
+            options
         );
     },
 
@@ -295,16 +297,19 @@ export default {
 
     loadMultiple: function(ids, callback) {
         var that = this;
+
         _.each(_.groupBy(_.uniq(ids), osmEntity.id.type), function(v, k) {
             var type = k + 's',
-                osmIDs = _.map(v, osmEntity.id.toOSM);
+                osmIDs = _.map(v, osmEntity.id.toOSM),
+                options = { cache: false };
 
             _.each(_.chunk(osmIDs, 150), function(arr) {
                 that.loadFromAPI(
                     '/api/0.6/' + type + '?' + type + '=' + arr.join(),
                     function(err, entities) {
                         if (callback) callback(err, { data: entities });
-                    }
+                    },
+                    options
                 );
             });
         });

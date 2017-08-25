@@ -321,13 +321,14 @@ describe('iD.serviceOsm', function () {
             server.respond();
         });
 
-        it('ignores repeat requests using entityCache', function(done) {
+        it('does not ignore repeat requests', function(done) {
             var id = 'n1';
-            connection.loadEntity(id, function(err, result) {
-                var entity = _.find(result.data, function(e) { return e.id === id; });
-                expect(entity).to.be.an.instanceOf(iD.Node);
-                connection.loadEntity(id, function(err, result) {
-                    expect(result.data).to.eql([]);
+            connection.loadEntity(id, function(err1, result1) {
+                var entity1 = _.find(result1.data, function(e1) { return e1.id === id; });
+                expect(entity1).to.be.an.instanceOf(iD.Node);
+                connection.loadEntity(id, function(err2, result2) {
+                    var entity2 = _.find(result2.data, function(e2) { return e2.id === id; });
+                    expect(entity2).to.be.an.instanceOf(iD.Node);
                     done();
                 });
                 server.respond();
@@ -411,6 +412,7 @@ describe('iD.serviceOsm', function () {
 
         it('loads nodes');
         it('loads ways');
+        it('does not ignore repeat requests');
 
     });
 
