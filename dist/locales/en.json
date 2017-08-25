@@ -5131,7 +5131,7 @@
                 },
                 "tourism/information/guidepost": {
                     "name": "Guidepost",
-                    "terms": ""
+                    "terms": "signpost"
                 },
                 "tourism/information/map": {
                     "name": "Map",

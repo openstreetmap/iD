@@ -4591,6 +4591,7 @@ en:
       tourism/information/guidepost:
         # 'tourism=information, information=guidepost'
         name: Guidepost
+        # 'terms: signpost'
         terms: '<translate with synonyms or related terms for ''Guidepost'', separated by commas>'
       tourism/information/map:
         # 'tourism=information, information=map'
