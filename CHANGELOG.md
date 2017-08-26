@@ -76,7 +76,7 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 * Change to 80px arrow key panning (this matches Leaflet default) ([#4207])
 * Smoother border around the round vertex preset icon circles ([#4190])
 * Render railway platform slightly different from sidewalk ([#4182])
-* Treat a few special tags as areas even in the absense of a proper `area=yes` tag. ([#4194])
+* Treat a few special tags as areas even in the absence of a proper `area=yes` tag. ([#4194])
 
 [#4230]: https://github.com/openstreetmap/iD/issues/4230
 [#4207]: https://github.com/openstreetmap/iD/issues/4207
