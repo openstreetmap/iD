@@ -5353,6 +5353,13 @@
                 "description": "Standard DigitalGlobe-satellitfoton.",
                 "name": "DigitalGlobe Standard-bilder"
             },
+            "EsriWorldImagery": {
+                "attribution": {
+                    "text": "Villkor & feedback"
+                },
+                "description": "Esri världsflygfoto.",
+                "name": "Esri världsflygfoto"
+            },
             "MAPNIK": {
                 "attribution": {
                     "text": "© OpenStreetMaps bidragsgivare, CC-BY-SA"

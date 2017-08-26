@@ -5332,7 +5332,7 @@
         },
         "imagery": {
             "Bing": {
-                "description": "Супутникові та аерофотознімки",
+                "description": "Супутникові та аерофотознімки.",
                 "name": "Знімки Bing"
             },
             "DigitalGlobe-Premium": {

@@ -2849,17 +2849,33 @@
                     "name": "Superfície da estrada",
                     "terms": "Superfície rodoviária, pavimentação"
                 },
+                "attraction/amusement_ride": {
+                    "name": "Brinquedo de parque de diversões",
+                    "terms": "atração, parque de diversões, montanha russa, camicase, ranger, kamikase, navio pirata"
+                },
                 "attraction/animal": {
-                    "name": "Animal"
+                    "name": "Animal",
+                    "terms": "Animal de zoológico"
                 },
                 "attraction/big_wheel": {
-                    "name": "Roda Gigante"
+                    "name": "Roda Gigante",
+                    "terms": "roda panorâmica"
                 },
                 "attraction/bumper_car": {
-                    "name": "Carro Choque"
+                    "name": "Carrinhos de bate-bate",
+                    "terms": "carro choque, carrinho choque, carro de batida, carrinho de batida, bumper"
                 },
                 "attraction/carousel": {
-                    "name": "Carrossel"
+                    "name": "Carrossel",
+                    "terms": "maxambomba, trivoli"
+                },
+                "attraction/dark_ride": {
+                    "name": "Trem Fantasma",
+                    "terms": "escuro, brinquedo, fechado"
+                },
+                "attraction/drop_tower": {
+                    "name": "Torre de Queda Livre",
+                    "terms": "big tower"
                 },
                 "attraction/pirate_ship": {
                     "name": "Navio Pirata"
@@ -2868,7 +2884,8 @@
                     "name": "Montanha Russa"
                 },
                 "attraction/water_slide": {
-                    "name": "Toboágua"
+                    "name": "Toboágua",
+                    "terms": "tobogã, tobogan, escorregador"
                 },
                 "barrier": {
                     "name": "Barreira",
@@ -4067,6 +4084,18 @@
                     "name": "Fábrica",
                     "terms": "Fábrica, Planta de produção, chão de fábrica,"
                 },
+                "manhole": {
+                    "name": "Poço de visita",
+                    "terms": "bueiro, poço de inspeção"
+                },
+                "manhole/drain": {
+                    "name": "Boca de lobo",
+                    "terms": "grelha de sarjeta, caixa de captação, drenagem"
+                },
+                "manhole/telecom": {
+                    "name": "Poço de visita de telefone",
+                    "terms": "poço de inspeção de telefone"
+                },
                 "natural": {
                     "name": "Natural",
                     "terms": "Natural"
@@ -4970,7 +4999,7 @@
                 },
                 "tourism/attraction": {
                     "name": "Atração Turística",
-                    "terms": "Atração Turística"
+                    "terms": "ponto turístico"
                 },
                 "tourism/camp_site": {
                     "name": "Local de Acampamento",

@@ -355,18 +355,18 @@
                 "zoom": "Aproximar",
                 "vintage": "Vintage",
                 "unknown": "Desconhecido",
-                "show_tiles": "Mostrar rmoisaco",
-                "hide_tiles": "Ocultar moisaco"
+                "show_tiles": "Mostrar Telas",
+                "hide_tiles": "Ocultar Telas"
             },
             "history": {
                 "key": "H",
                 "title": "Histórico",
-                "selected": "(n) selecionados",
+                "selected": "{n} selecionado",
                 "version": "Versão",
                 "last_edit": "Última edição",
                 "edited_by": "Editado por",
                 "changeset": "Conjunto de alterações",
-                "unknown": "Desconhecidos",
+                "unknown": "Desconhecido",
                 "link_text": "Histórico em openstreetmap.org"
             },
             "location": {
@@ -377,7 +377,7 @@
             "measurement": {
                 "key": "M",
                 "title": "Medição",
-                "selected": "(n) selecionados",
+                "selected": "{n} selecionado",
                 "geometry": "Geometria",
                 "closed": "Fechado",
                 "center": "Centro",
@@ -459,7 +459,7 @@
             "switch": "Mudar para este fundo",
             "custom": "Personalizado",
             "custom_button": "Editar fundo personalizando",
-            "custom_prompt": "Submeta um modelo de moisaco via. Tokens válidos: - {zoom}/{z}, {x}, {y} para Z/X/Y esquema de moisaco - {ty} for flipped TMS-style Y coordinates - {u} for quadtile scheme - {switch:a,b,c} for DNS server multiplexingExample:{example}",
+            "custom_prompt": "Introduza um modelo de URL de telas. Tokens válidos:\n   - {zoom}/{z}, {x}, {y} para o esquema de telas Z/X/Y\n   - {ty} para coordenadas Y invertidas do estilo TMS\n   - {u} para o esquema quadtile\n   - {switch:a,b,c} para servidor DNS multiplexing\n\nExemplo:\n{example}",
             "fix_misalignment": "Corrigir o alinhamento da imagem",
             "imagery_source_faq": "Qual é a origem desta imagem?",
             "reset": "reiniciar",
@@ -547,8 +547,8 @@
         "restore": {
             "heading": "Tem alterações por gravar",
             "description": "Tem alterações feitas numa sessão anterior por gravar. Quer recuperar essas alterações?",
-            "restore": "Restaurar as minhas alterações",
-            "reset": "Desfazer as minhas alterações"
+            "restore": "Recuperar as minhas alterações",
+            "reset": "Eliminar as minhas alterações"
         },
         "save": {
             "title": "Gravar",
@@ -619,8 +619,8 @@
         "validations": {
             "disconnected_highway": "Rodovia desligada",
             "disconnected_highway_tooltip": "As estradas devem estar ligadas a outras estradas ou entradas de edifícios.",
-            "old_multipolygon": "Tags de multi-polígono na parte exterior ",
-            "old_multipolygon_tooltip": "Este tipo de multi-polígono está fore de uso. Por favor ajuste as tags ao multi-polígono principal em vez de colocar na parte exterior ",
+            "old_multipolygon": "Etiquetas de multi-polígono na linha exterior",
+            "old_multipolygon_tooltip": "Este tipo de multi-polígono está em desuso. Por favor mude as etiquetas da linha exterior para o multi-polígono.",
             "untagged_point": "Ponto sem etiquetas",
             "untagged_point_tooltip": "Escolha um elemento que indique o que este ponto representa.",
             "untagged_line": "Linha sem etiquetas",
@@ -698,6 +698,7 @@
                     "10th-avenue": "Avenida 10",
                     "11th-avenue": "Avenida 11",
                     "12th-avenue": "Avenida 12",
+                    "access-point-employment": "Agência de Emprego Televi",
                     "adams-street": "Rua Adão",
                     "andrews-elementary-school": "Escola Primária de Lucerne",
                     "andrews-street": "Rua André",
@@ -706,35 +707,89 @@
                     "battle-street": "Rua da Batalha",
                     "bennett-street": "Rua de Bendita",
                     "bowman-park": "Parque Bela Vista",
+                    "conrail-railroad": "Ferrovia do Sul",
+                    "conservation-park": "Parque da Conservação",
                     "constantine-street": "Rua Constantino",
+                    "cushman-street": "Rua Custódio",
+                    "dollar-tree": "Árvore do Pelourinho",
                     "douglas-avenue": "Avenida Diogo",
                     "east-street": "Rua Este",
+                    "elm-street": "Rua dos Elmos",
                     "flower-street": "Rua das Flores",
+                    "foster-street": "Rua Francisco",
                     "french-street": "Rua Francesa",
                     "garden-street": "Rua dos Jardins",
+                    "gem-pawnbroker": "Penhoras Arlindo",
+                    "golden-finch-framing": "Molduras Aro Dourado",
                     "grant-avenue": "Grande Avenida",
+                    "hoffman-pond": "Lagoa da Represa",
+                    "hoffman-street": "Rua Hortência",
+                    "hook-avenue": "Avenida Pedro",
+                    "jefferson-street": "Rua Alfazema",
+                    "kelsey-street": "Rua Vasco",
+                    "lafayette-park": "Parque da Mata",
+                    "las-coffee-cafe": "Café Livração",
+                    "lincoln-avenue": "Avenida Afonso",
+                    "lowrys-books": "Livraria Leitura",
+                    "lynns-garage": "Oficina Pentecosta",
+                    "main-street-barbell": "Rua Principal",
                     "main-street-cafe": "Café da Rua Principal",
+                    "main-street-fitness": "Ginásio Central",
                     "main-street": "Rua Principal",
+                    "maple-street": "Rua Ácer",
+                    "marina-park": "Parque da Marginal",
                     "market-street": "Rua do Mercado",
                     "memory-isle-park": "Parque da Ilha da Memória",
                     "memory-isle": "Ilha da Memória",
+                    "michigan-avenue": "Avenida dos Ministérios",
                     "middle-street": "Rua Central",
+                    "millard-street": "Rua Milheirós",
+                    "moore-street": "Rua dos Pinheiros",
+                    "morris-avenue": "Avenida da Mata",
+                    "mural-mall": "Centro Comercial das Boticas",
+                    "paisanos-bar-and-grill": "Bar Piano",
+                    "paparazzi-tattoo": "Tatuagens Matias",
+                    "pealer-street": "Rua do Pelourinho",
                     "pine-street": "Rua dos Pinheiros",
                     "pizza-hut": "Pizza Hut",
+                    "portage-avenue": "Avenida dos Pinheiros",
+                    "portage-river": "Rio Tejo",
                     "river-drive": "Viela do Rio",
                     "river-road": "Estrada do Rio",
                     "river-street": "Rua do Rio",
+                    "riverside-cemetery": "Cemitério Central",
+                    "riverwalk-trail": "Trilho do Rio",
+                    "riviera-theatre": "Teatro Nacional",
+                    "rocky-river": "Rio Pedregulho",
+                    "saint-joseph-river": "Rio Douro",
+                    "scidmore-park": "Parque dos Embondeiros",
+                    "scouter-park": "Parque nas Palmeiras",
                     "south-street": "Rua do Sul",
                     "southern-michigan-bank": "Banco do Sul",
                     "spring-street": "Rua da Nascente",
+                    "sturgeon-river-road": "Rua dos Carpinteiros",
+                    "three-rivers-city-hall": "Câmara Municipal de Três-Rios",
+                    "three-rivers-elementary-school": "Infantário de Três-Rios",
+                    "three-rivers-fire-department": "Quartel de Bombeiros de Três-Rios",
+                    "three-rivers-high-school": "Escola Secundária de Três-Rios",
+                    "three-rivers-middle-school": "Escola Primária de Três-Rios",
+                    "three-rivers-municipal-airport": "Aeroporto Municipal de Três-Rios",
+                    "three-rivers-post-office": "Estação de Correios de Três-Rios",
+                    "three-rivers-public-library": "Biblioteca Pública de Três-Rios",
+                    "three-rivers": "Três-Rios",
+                    "unique-jewelry": "Joalharia Oliveira",
+                    "walnut-street": "Rua das Amendoeiras",
+                    "washington-street": "Rua dos Moinhos",
                     "water-street": "Rua da Água",
-                    "west-street": "Rua Oeste"
+                    "west-street": "Rua Oeste",
+                    "wheeler-street": "Rua da Borracha",
+                    "wood-street": "Rua das Madeiras"
                 }
             },
             "welcome": {
                 "title": "Bem-vindo ",
                 "welcome": "Bem-vindo! Este guia passo-a-passo irá ensiná-lo o básico de como editar no OpenStreetMap ",
-                "practice": "Toda a informação contida neste guia, é a apenas para praticar e qualquer alteração que faça durante este guia, não serão guardadas.",
+                "practice": "Toda a informação neste guia é a apenas para praticar e as alterações que fizer durante este guia não serão gravadas.",
                 "words": "Este guia passo-a-passo mostra algumas palavras e conceitos novos. Quando for mostrada uma palavra nova, irá aparecer em *itálico*.",
                 "mouse": "Pode utilizar qualquer dispositivo de entrada de dados para editar o mapa, mas este guia passo-a-passo pressupõe que tem um rato com os botões esquerdo e direito. **Se quiser ligar um rato, faça-o agora e clique depois em OK.**",
                 "leftclick": "Quando este guia pedir para clicar ou clicar 2 vezes, quer dizer com o botão esquerdo do rato. Num ecrã tátil pode ser um clique simples ou um toque com o dedo. **Clique com o botão esquerdo {num} vezes.**",
@@ -749,14 +804,14 @@
                 "points_lines_areas": "Os elementos do mapa são representados em *pontos, linhas ou áreas.*",
                 "nodes_ways": "No OpenStreetMap, os pontos são por vezes chamados *nós* e as linhas e áreas são chamadas por vezes *vias*.",
                 "click_townhall": "Todos os elementos no mapa podem ser selecionados clicando neles. **Clique no ponto para o selecionar.**",
-                "selected_townhall": "Fantástico\" O ponto está agora selecionado. Os elementos selecionados são mostrados com uma cor a piscar a rodear os elementos.",
+                "selected_townhall": "Fantástico! O ponto está agora selecionado. Os elementos selecionados são mostrados com uma cor a piscar a rodear os elementos.",
                 "editor_townhall": "Quando um elemento é selecionado, é mostrado o *editor de elementos* ao lado do mapa.",
                 "preset_townhall": "A parte de cima do editor de elementos mostra o tipo de elemento. Este ponto é {preset}.",
                 "fields_townhall": "A parte central do editor de elementos contém  *campos* que mostram os atributos do elemento, como o nome e endereço.",
-                "close_townhall": "**Feche o editor de elementos com a tecla ESC ou pressionando o botão {button} no canto superior.**",
+                "close_townhall": "**Feche o editor de elementos com a tecla Esc ou pressionando o botão {button} no canto superior.**",
                 "search_street": "Também pode pesquisar por elementos na vista atual, ou no mapa mundial. **Pesquise agora por '{name}'.**",
-                "choose_street": "**Escolha {name} da lista para selecioná-lo.**",
-                "selected_street": "Fantástico! {name} está agora selecionado.",
+                "choose_street": "**Escolha \"{name}\" da lista para selecioná-lo.**",
+                "selected_street": "Fantástico! \"{name}\" está agora selecionado.",
                 "editor_street": "Os campos mostrados para uma rua são diferentes dos campos mostrados para uma câmara municipal/junta de freguesia.{br}Para esta rua selecionada, o editor de elementos mostra campos como '{field1}' e '{field2}'. **Feche o editor de elementos com a tecla ESC ou pressionando o botão {button}.**",
                 "play": "Tente mover o mapa clicando em outros elementos para ver que tipos de coisas podem ser adicionadas ao OpenStreetMap. **Quanto estiver pronto para ver o próximo capítulo clique em '{next}'.**"
             },
@@ -764,17 +819,17 @@
                 "title": "Pontos",
                 "add_point": "Os *pontos* podem ser usados para representar elementos como lojas, restaurantes e monumentos.{br}Estes marcam uma localização específica e descrevem o que se encontra nesse ponto. **Clique no botão de ponto {button} para adicionar um novo ponto.**",
                 "place_point": "Para colocar o novo ponto no mapa, posicione o cursor do rato onde o pondo deve estar e de seguida clique com o botão esquerdo do rato ou pressione a tecla Espaço. **Mova o cursor para cima deste edifício e então clique com o botão esquerdo ou com a tecla Espaço.**",
-                "search_cafe": "Existem muitos tipos de elementos que podem ser representados com pontos. O ponto que adicionou é um café. **Pesquise um '{preset}'.**",
-                "choose_cafe": "**Escolha {preset} na lista.**",
+                "search_cafe": "Existem muitos tipos de elementos que podem ser representados com pontos. O ponto que adicionou é um café. **Pesquise por '{preset}'.**",
+                "choose_cafe": "**Escolha \"{preset}\" na lista.**",
                 "feature_editor": "O ponto está agora marcado como café. Usando o editor de elementos podemos adicionar mais informação sobre o café",
                 "add_name": "No OpenStreetMap, todos os campos são opcionais e não há problema em deixar um campo vazio se não tiver a certeza.{br}Façamos de conta que tem mais informações sobre este café e sabe o nome dele. **Adicione o nome ao café.**",
-                "add_close": "O editor de elementos irá memorizar automaticamente todas as alterações que fez. **Quando terminar de adicionar o nome, use a tecla ESC, ENTER ou clique no botão {button} para fechar o editor de elementos.**",
+                "add_close": "O editor de elementos irá memorizar automaticamente todas as alterações que fez. **Quando terminar de adicionar o nome, use a tecla Esc, Enter ou clique no botão {button} para fechar o editor de elementos.**",
                 "reselect": "Muitas vezes já existirá no mapa o ponto que quer adicionar, mas este poderá conter erros ou estar incompleto. **Clique no ponto do café que criou para o selecionar.**",
                 "update": "Vamos agora adicionar mais informações sobre este café. Pode alterar o nome, o tipo de comida servida ou adicionar um endereço. **Altere as informações do café.**",
-                "update_close": "**Quando terminar de alterar o café, use a tecla ESC, ENTER ou clique no botão {button} para fechar o editor de elementos.**",
+                "update_close": "**Quando terminar de alterar o café, use a tecla Esc, Enter ou clique no botão {button} para fechar o editor de elementos.**",
                 "rightclick": "Pode clicar com o botão direito do rato em qualquer elemento para ver o *menu de edição*, que mostra uma lista de operações de edição que podem ser feitas. **Clique com o botão direito do rato para selecionar o ponto que criou e mostrar o menu de edição.**",
                 "delete": "Não há problema em eliminar elementos que não existam na realidade.{br}Eliminar um elemento do OpenStreetMap remove-o do mapa que todos usam, por isso deve ter a certeza que algo não existe ou deixou de existir antes de o eliminar. **Clique no botão {button} para eliminar o ponto.**",
-                "undo": "Pode sempre desfazer quaisquer alterações antes de gravar o que alterou no OpenStreetMap. **Clique no botão {button} para desfazer a eliminação o ter o ponto de volta.**",
+                "undo": "Pode sempre desfazer quaisquer alterações antes de gravar o que alterou no OpenStreetMap. **Clique no botão {button} para desfazer a eliminação e obter o ponto de volta.**",
                 "play": "Agora que sabe criar e editar pontos, tente criar mais alguns para praticar! **Quando estiver pronto para o próximo capítulo, clique em '{next}'.**"
             },
             "areas": {
@@ -784,17 +839,59 @@
                 "continue_playground": "Continue a desenhar a área colocando mais pontos ao longo das bordas do parque infantil. Pode-se ligar a área a vias pedonais existentes.{br}Dica: pode manter premida a tecla '{alt}' para impedir que os pontos sejam ligados automaticamente a outros elementos. **Continue a desenhar a área do parque infantil.**",
                 "finish_playground": "Termine a área carregando na tecla Enter. **Termine agora a área do parque infantil.**",
                 "search_playground": "**Pesquise por '{preset}'.**",
-                "choose_playground": "**Escolha {preset} na lista.**",
+                "choose_playground": "**Escolha \"{preset}\" na lista.**",
                 "add_field": "Este parque infantil não tem um nome oficial, por isso não iremos adicionar nada no campo Nome.{br}Em vez disso vamos adicionar mais algumas informações sobre o parque infantil no campo Descrição. **Clique na lista em Adicionar Campo.**",
-                "choose_field": "**Escolha {field} na lista.**",
-                "retry_add_field": "Não selecionou o campo {field}. Vamos tentar de novo.",
+                "choose_field": "**Escolha \"{field}\" na lista.**",
+                "retry_add_field": "Não selecionou o campo \"{field}\". Vamos tentar de novo.",
                 "describe_playground": "**Adicione uma descrição e clique depois no botão {button} para fechar o editor de elementos.**",
                 "play": "Boa trabalho! Tente desenhar mais algumas áreas e veja que outros tipos de elementos de áreas podem ser adicionados ao  OpenStreetMap. **Quando estiver pronto para ver o próximo capítulo clique em '{next}'.**"
             },
             "lines": {
                 "title": "Linhas",
                 "add_line": "As *linhas* são usadas para representar elementos como estradas, ferrovias, rios, etc. **Clique no botão {button} para adicionar uma nova linha.**",
-                "start_line": "Aqui está uma rua que não está mapeada. Vamos adicioná-la!{br}No OpenStreetMap as linhas devem ser desenhadas pelo centro da estrada. Pode arrastar e aproximar a vista do mapa se  for necessário. **Comece uma nova linha clicando no início superior da rua que falta.**"
+                "start_line": "Aqui está uma rua que não está mapeada. Vamos adicioná-la!{br}No OpenStreetMap as linhas devem ser desenhadas pelo centro da estrada. Pode arrastar e aproximar a vista do mapa se  for necessário. **Comece uma nova linha clicando no início superior da rua que falta.**",
+                "intersect": "Clique ou pressione a tecla Espaço para adicionar mais pontos à linha.{br}As estradas e outros tipos de linhas fazem normalmente parte de redes maiores. É importante que estas linhas estejam ligadas corretamente a outras para que programas de roteamento funcionem bem. **Clique em \"{name}\" para criar um cruzamento que ligue as 2 linhas.**",
+                "retry_intersect": "A estrada tem de cruzar com a \"{name}\". Tente de novo!",
+                "continue_line": "Continue a desenhar a linha para a nova estrada. Lembre-se que pode arrastar e aproximar o mapa se for necessário.{br}Quando terminar de desenhar, clique no último ponto de novo. **Termine de desenhar a estrada.**",
+                "choose_category_road": "**Selecione \"{category}\" na lista.**",
+                "choose_preset_residential": "Existem muitos tipos diferentes de estradas, mas esta é uma rua residencial. **Escolha o tipo \"{preset}\".**",
+                "retry_preset_residential": "Não selecionou o tipo \"{preset}\". **Clique aqui para selecionar novamente.**",
+                "name_road": "**Atribua um nome à rua e carregue depois na tecla Esc, Enter ou clique no botão {button} para fechar o editor de elementos.**",
+                "did_name_road": "Parece que está bom! A segui iremos aprender como corrigir a forma geométrica de uma linha.",
+                "update_line": "Por vezes é necessário alterar a forma geométrica de uma linha existente. Aqui está uma rua que não parece bem desenhada.",
+                "add_node": "Podemos adicionar alguns pontos a esta linha para melhorar a sua forma geométrica. Uma forma de adicionar um ponto é com um clique duplo na linha onde se quer adicionar o ponto. **Faça agora um clique duplo na linha para criar um ponto.**",
+                "start_drag_endpoint": "Quando está selecionada uma linha, pode pode deslocar os pontos desta clicando e mantendo premido o botão do rato enquanto arrasta. **Arraste o ponto do fim para o local onde estas estradas devem cruzar.**",
+                "finish_drag_endpoint": "Este sítio parece bom. **Liberte o botão esquerdo do rato para terminar o arrastar.**",
+                "start_drag_midpoint": "Aparecem pequenos triângulos/setas no centro de cada segmento entre 2 pontos. Outra forma de criar um novo ponto é arrastar um desses triângulos centrais para uma nova localização. **Arraste um triângulo central para criar um novo ponto ao longo da curva da estrada.**",
+                "continue_drag_midpoint": "Esta linha está muito melhor! Continue a corrigir a linha com clique duplo ou arrastando os triângulos centrais até que a curva esteja de acordo com a estrada. **Quando achar que a estrada está bem desenhada clique em OK.**",
+                "delete_lines": "Não há problema eliminar linhas de estradas que não existam ou tenham deixado de existir na realidade.{br}Aqui está um exemplo de uma estrada projetada com o nome \"{street}\" mas que nunca chegou a ser construída. Podemos melhorar este mapa eliminando as linhas a mais.",
+                "rightclick_intersection": "A última estrada existente é a \"{street1}\", por isso teremos de *dividir* a rua \"{street2}\" neste cruzamento e eliminar o que esta acima do cruzamento. **Clique com o botão direito do rato no ponto do cruzamento.**",
+                "split_intersection": "**Clique no botão {button} para dividir a \"{street}\".**",
+                "retry_split": "Não clicou no botão de dividir. Tente de novo.",
+                "did_split_multi": "Bom trabalho! A \"{street1}\" está agora dividida em 2 linhas. A linha de cima pode ser agora eliminada. **Clique na linha de cima da \"{street2}\" para a selecionar.**",
+                "did_split_single": "**Clique na linha de cima da \"{street2}\" para a selecionar.**",
+                "multi_select": "\"{selected}\" está agora selecionada. Vamos selecionar também a \"{other1}\". Pode usar a tecla Shift e clicar para selecionar vários elementos. **Use a tecla Shift e clique em \"{other2}\".**",
+                "multi_rightclick": "Boa! Estão selecionadas ambas as linhas a eliminar. **Clique com o botão direito do rato numa das linhas para mostrar o menu de edição.**",
+                "multi_delete": "**Clique no botão {button} para eliminar estas linhas a mais.**",
+                "retry_delete": "Não clicou no botão de Eliminar. Tende de novo.",
+                "play": "Fantástico! Use os conhecimentos que aprendeu neste capítulo para praticar a edição de mais linhas. **Quando estiver pronto para ver o próximo capítulo clique em '{next}'.**"
+            },
+            "buildings": {
+                "title": "Edifícios",
+                "add_building": "O OpenStreetMap é a maior base de dados de edifícios do mundo.{br}Pode ajudar a melhorar este mapa desenhando novos edifícios que ainda não estejam mapeados. **Clique no botão da área {button} para adicionar uma nova área.**",
+                "start_building": "Vamos adicionar esta casa ao mapa desenhando o seu contorno.{br}Os edifícios devem ser desenhados em redor da área destes da forma mais rigorosa possível. **Clique ou pressione a tecla Espaço para adicionar um ponto inicial num dos cantos do edifício.**",
+                "continue_building": "Continue a adicionar mais pontos para desenhar o contorno do edifício. Lembre-se que pode aproximar se quiser ver melhor a área.{br}Termine o edifício com a tecla Espaço ou clicando de novo no primeiro ou no último ponto desenhado. **Termine o desenho do edifício.**",
+                "retry_building": "Parece que teve alguns problemas em colocar os pontos nos cantos do edifício. Tende de novo!",
+                "choose_category_building": "**Escolha \"{category}\" na lista.**",
+                "choose_preset_house": "Existem muitos tipos diferentes de edifícios, mas este é uma casa.{br}Se não tiver a certeza do tipo de edifício escolha o tipo genérico \"Edifício\". **Escolha agora o tipo \"{preset}\".**",
+                "close": "**Carregue na tecla Esc ou clique no botão {button} para fechar o editor de elementos.**",
+                "rightclick_building": "**Clique com o botão direito do rato no edifício para selecionar o edifício que criou e mostrar o menu de edição.**",
+                "square_building": "A casa que acabou de desenhar irá ficar melhor com cantos retangulares perfeitos. **Clique no botão {button} para pôr em esquadria os cantos do edifício.**",
+                "retry_square": "Não clicou no botão de Esquadrar. Tente de novo.",
+                "done_square": "Reparou que os cantos do edifício se moveram para ficar em esquadria? Vamos aprender outro truque.",
+                "add_tank": "Vamos desenhar este depósito de água circular. **Clique no botão de área {button} para adicionar uma nova área.**",
+                "start_tank": "Não se preocupe. Não é preciso desenhar um círculo perfeito. Apenas desenhe o contorno do edifício circular com alguns pontos. **Clique ou pressione a tecla Espaço para colocar um ponto inicial numa das bordas do depósito.**",
+                "continue_tank": "Adicione mais alguns pontos à volta do contorno.{br}Termine a área pressionando a tecla Enter ou clicando de novo no último ou primeiro ponto. **Termine de desenhar o depósito.**"
             },
             "startediting": {
                 "title": "Começar a editar",
@@ -827,9 +924,12 @@
                 "shift": "Shift",
                 "space": "Espaço"
             },
+            "or": "-ou-",
             "browsing": {
                 "navigation": {
-                    "title": "Navegação"
+                    "title": "Navegação",
+                    "pan": "Deslocar mapa",
+                    "zoom": "Aproximar / Afastar"
                 },
                 "help": {
                     "title": "Ajuda",
@@ -841,7 +941,12 @@
                     "background": "Mostrar opções do fundo",
                     "background_switch": "Mudar para o último fundo usado",
                     "map_data": "Mostrar opções dos dados do mapa",
-                    "fullscreen": "Entrar no modo ecrã completo"
+                    "fullscreen": "Entrar no modo ecrã completo",
+                    "wireframe": "Ativar/desativar modo linhas",
+                    "minimap": "Mostrar/esconder mini-mapa"
+                },
+                "with_selected": {
+                    "edit_menu": "Mostrar/esconder menu de edição"
                 },
                 "vertex_selected": {
                     "previous": "Ir para o ponto anterior",
@@ -853,11 +958,16 @@
             "editing": {
                 "title": "Editar",
                 "drawing": {
-                    "title": "Desenhar"
+                    "title": "Desenhar",
+                    "add_point": "Modo 'adicionar ponto'",
+                    "add_line": "Modo 'adicionar linha'",
+                    "add_area": "Modo 'adicionar área'",
+                    "stop_line": "Terminar de desenhar uma linha ou área"
                 },
                 "operations": {
                     "title": "Operações",
                     "continue_line": "Continuar uma linha no ponto selecionado",
+                    "merge": "Combinar (fundir) elementos selecionados",
                     "disconnect": "Desligar elementos no ponto selecionado",
                     "split": "Separar uma linha em duas no ponto selecionado",
                     "reverse": "Inverter uma linha",
@@ -865,6 +975,8 @@
                     "rotate": "Rodar elementos selecionados",
                     "orthogonalize": "Endireitar linha / Esquadrar cantos da área",
                     "circularize": "Circularizar uma linha fechada ou área",
+                    "reflect_long": "Refletir os elementos ao longo do eixo mais longo",
+                    "reflect_short": "Refletir os elementos ao longo do eixo mais curto",
                     "delete": "Eliminar elementos selecionados"
                 },
                 "commands": {
@@ -879,7 +991,12 @@
             "tools": {
                 "title": "Ferramentas",
                 "info": {
-                    "title": "Informação"
+                    "title": "Informação",
+                    "all": "Mostrar/esconder todos os painéis de informação",
+                    "background": "Mostrar/esconder painel de fundo",
+                    "history": "Mostrar/esconder painel de histórico",
+                    "location": "Mostrar/esconder painel de localização",
+                    "measurement": "Mostrar/esconder painel de medição"
                 }
             }
         },
@@ -1809,7 +1926,7 @@
                     "placeholder": "1-18"
                 },
                 "ref_highway_junction": {
-                    "label": "Número da junção"
+                    "label": "Número do cruzamento"
                 },
                 "ref_platform": {
                     "label": "Número da plataforma"
@@ -2608,7 +2725,7 @@
                     "terms": "University Grounds, Universidade, Faculdade, Instituto, Politécnico"
                 },
                 "amenity/vending_machine": {
-                    "name": "undefined"
+                    "name": "Máquina de Venda Automática"
                 },
                 "amenity/vending_machine/cigarettes": {
                     "name": "Máquina de tabaco",
@@ -2672,7 +2789,7 @@
                     "terms": "RV Drinking Water, Água, Caravana, Autocaravana"
                 },
                 "amenity/watering_place": {
-                    "name": "Local para bebedouro para animais "
+                    "name": "Bebedouro de animais "
                 },
                 "area": {
                     "name": "Área",
@@ -2960,7 +3077,7 @@
                     "terms": "Confectionery, Bolos, Pastelaria"
                 },
                 "craft/distillery": {
-                    "name": "Distilaria"
+                    "name": "Destilaria"
                 },
                 "craft/dressmaker": {
                     "name": "Costureira",
@@ -3677,7 +3794,7 @@
                     "terms": "Basquetebol, Quadra de Basquetebol, Basketball Court"
                 },
                 "leisure/pitch/beachvolleyball": {
-                    "name": "Campo de volley de praia",
+                    "name": "Campo de voleibol de praia",
                     "terms": "Vólei, campo, praia, voleibol, volley"
                 },
                 "leisure/pitch/bowls": {
@@ -3729,7 +3846,7 @@
                 },
                 "leisure/running_track": {
                     "name": "Pista de atletismo ",
-                    "terms": "Pista, corrida, jogging, competição"
+                    "terms": "Pista, corrida, jogging, atletismo, atleta"
                 },
                 "leisure/slipway": {
                     "name": "Rampa para barcos",
@@ -3874,14 +3991,14 @@
                     "name": "Moinho de água"
                 },
                 "man_made/windmill": {
-                    "name": "Moinho de água"
+                    "name": "Moinho de vento"
                 },
                 "man_made/works": {
                     "name": "Fábrica",
                     "terms": "indústria, manofatura, manofaturação, fabrico, fabricar, works"
                 },
                 "manhole": {
-                    "name": "Sumidouro"
+                    "name": "Poço de visita"
                 },
                 "manhole/drain": {
                     "name": "Drenagem",
@@ -4136,7 +4253,7 @@
                     "terms": "Square"
                 },
                 "place/suburb": {
-                    "name": "Suburbio",
+                    "name": "Subúrbio",
                     "terms": "periferia, subúrbio, bairro, quarteirão, margem, limite"
                 },
                 "place/town": {
@@ -4159,7 +4276,7 @@
                     "terms": "Power Generator, Gerador Elétrico, Energia Eólica, Energia Solar, Energia Termoeléctrica, Energia Nuclear, Central de Energia"
                 },
                 "power/generator/source_nuclear": {
-                    "name": "Reactor nuclear"
+                    "name": "Reator nuclear"
                 },
                 "power/generator/source_wind": {
                     "name": "Turbina de vento"
@@ -4500,7 +4617,7 @@
                     "terms": "Garden Center, Flores, Artigos para jardinagem, Jardinagem, Jardinajem"
                 },
                 "shop/gas": {
-                    "name": "undefined",
+                    "name": "Loja de Botijas de Gás",
                     "terms": "gás, botija, propano, gpl, bilha, redutor, garrafa, recarga, fogão"
                 },
                 "shop/gift": {
@@ -5064,22 +5181,22 @@
         },
         "imagery": {
             "Bing": {
-                "description": "Imagens aéreas e de satélite",
-                "name": "Imagem aérea Bing "
+                "description": "Imagens aéreas e de satélite.",
+                "name": "Imagens aéreas Bing"
             },
             "DigitalGlobe-Premium": {
                 "attribution": {
                     "text": "Termos e opinião"
                 },
-                "description": "Imagem satélite DigitalGlobe Premium ",
-                "name": "Imagem aérea DigitalGlobe Premium "
+                "description": "Imagens de satélite DigitalGlobe Premium.",
+                "name": "Imagens aéreas DigitalGlobe Premium"
             },
             "DigitalGlobe-Standard": {
                 "attribution": {
-                    "text": "Termos e opinião "
+                    "text": "Termos e opinião"
                 },
-                "description": "Imagem aérea DigitalGlobe Standard ",
-                "name": "Imagem aérea DigitalGlobe Standard "
+                "description": "Imagens aéreas DigitalGlobe Standard.",
+                "name": "Imagens aéreas DigitalGlobe Standard"
             },
             "EsriWorldImagery": {
                 "attribution": {
@@ -5092,15 +5209,15 @@
                 "attribution": {
                     "text": "© contribuidores OpenStreetMap, CC-BY-SA"
                 },
-                "description": "A versão normal do OpenStreetMap.",
-                "name": "OpenStreetMap (Normal)"
+                "description": "A camada padrão do OpenStreetMap.",
+                "name": "OpenStreetMap (Padrão)"
             },
             "Mapbox": {
                 "attribution": {
                     "text": "Termos e opinião"
                 },
-                "description": "Imagens aéreas e de satélite",
-                "name": "Imagem aérea Mapbox"
+                "description": "Imagens aéreas e de satélite.",
+                "name": "Imagens aéreas Mapbox"
             },
             "New_and_Misaligned_TIGER_Roads-2013": {
                 "description": "No nível de zoom acima de 16, os dados são do domínio público dos Censos dos EUA. Nos níveis de zoom inferiores, apenas alterações desde 2006 exceto alterações já incorporadas no OpenStreetMap",
@@ -5194,7 +5311,7 @@
             },
             "hike_n_bike": {
                 "attribution": {
-                    "text": "Contribuidores © OpenStreetMap"
+                    "text": "© Contribuidores OpenStreetMap"
                 },
                 "name": "Bicicleta & caminhadas"
             },
@@ -5207,7 +5324,7 @@
             },
             "openpt_map": {
                 "attribution": {
-                    "text": "Contribuidores © OpenStreetMap, CC-BY-SA"
+                    "text": "© Contribuidores OpenStreetMap, CC-BY-SA"
                 },
                 "name": "OpenPT Map (sobreposição)"
             },
@@ -5215,14 +5332,14 @@
                 "attribution": {
                     "text": "© contribuidores OpenStreetMap"
                 },
-                "description": "Registos de GPS públicos enviados para o OpenStreetMap",
-                "name": "registos GPS do OpenStreetMap"
+                "description": "Registos de GPS públicos enviados para o OpenStreetMap.",
+                "name": "Trilhos GPS do OpenStreetMap"
             },
             "osm-mapnik-black_and_white": {
                 "attribution": {
                     "text": "© contribuidores OpenStreetMap, CC-BY-SA"
                 },
-                "name": "OpenStreetMap (Normal em preto e branco)"
+                "name": "OpenStreetMap (Preto e Branco Padrão)"
             },
             "osm-mapnik-german_style": {
                 "attribution": {
@@ -5232,31 +5349,31 @@
             },
             "qa_no_address": {
                 "attribution": {
-                    "text": "Simon Poole, dados contribuidores © OpenStreetMap"
+                    "text": "Simon Poole, dados © contribuidores OpenStreetMap"
                 },
                 "name": "QA Sem morada"
             },
             "skobbler": {
                 "attribution": {
-                    "text": "© moisaco: skobbler, dados do mapa contribuidores © OpenStreetMap"
+                    "text": "© Telas: skobbler, dados do mapa © contribuidores OpenStreetMap"
                 },
                 "name": "skobbler"
             },
             "stamen-terrain-background": {
                 "attribution": {
-                    "text": "moisaco do mapa por Stamen Design, sob licença CC BY 3.0"
+                    "text": "Telas do mapa por Stamen Design, sob licença CC BY 3.0"
                 },
                 "name": "Terreno Stamen"
             },
             "tf-cycle": {
                 "attribution": {
-                    "text": "Mapa © Thunderforest, dados do mapa contribuidores © OpenStreetMap"
+                    "text": "Mapas © Thunderforest, dados do mapa © contribuidores OpenStreetMap"
                 },
                 "name": "Thunderforest OpenCycleMap"
             },
             "tf-landscape": {
                 "attribution": {
-                    "text": "Mapa © Thunderforest, dados do mapa contribuidores © OpenStreetMap"
+                    "text": "Mapas © Thunderforest, dados do mapa © contribuidores OpenStreetMap"
                 },
                 "name": "Thunderforest Landscape"
             }

@@ -5353,6 +5353,13 @@
                 "description": "Standard DigitalGlobe 衛星圖",
                 "name": "DigitalGlobe Standard 空照圖"
             },
+            "EsriWorldImagery": {
+                "attribution": {
+                    "text": "使用條款與回饋"
+                },
+                "description": "Esri 世界衛星圖。",
+                "name": "Esri 世界衛星圖"
+            },
             "MAPNIK": {
                 "attribution": {
                     "text": "© OpenStreetMap 貢獻者，CC-BY-SA"

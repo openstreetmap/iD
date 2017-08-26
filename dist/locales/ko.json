@@ -1712,6 +1712,15 @@
                         "container": "컨테이너"
                     }
                 },
+                "ref_highway_junction": {
+                    "label": "나들목/분기점 번호"
+                },
+                "ref_road_number": {
+                    "label": "노선번호"
+                },
+                "ref_route": {
+                    "label": "노선번호"
+                },
                 "relation": {
                     "label": "유형"
                 },
@@ -1844,7 +1853,7 @@
                     "label": "시작 날짜"
                 },
                 "step_count": {
-                    "label": "걸음 수"
+                    "label": "계단 수"
                 },
                 "stop": {
                     "label": "정지 유형",

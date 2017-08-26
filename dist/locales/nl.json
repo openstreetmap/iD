@@ -1039,7 +1039,7 @@
         "presets": {
             "categories": {
                 "category-barrier": {
-                    "name": "Afscheidingsobjecten"
+                    "name": "Afscheidingsobjectdetails"
                 },
                 "category-building": {
                     "name": "Gebouwobjecten"
@@ -2574,7 +2574,8 @@
                     "terms": "ziekenhuis,hospitaal,ziekenhuisgrond,hospitaalgrond,ziekenhuisgebied,hospitaalgebied,kliniek"
                 },
                 "amenity/hunting_stand": {
-                    "name": "Jachthut"
+                    "name": "Jachthut",
+                    "terms": "jachttoren,hoogzit"
                 },
                 "amenity/ice_cream": {
                     "name": "Ĳskraam",
@@ -2728,6 +2729,9 @@
                     "name": "Beschutting",
                     "terms": "afdak,schuilplaats,bescherming,beschutting,wachthuisje,wachthokje,bushokje,buskotje"
                 },
+                "amenity/shower": {
+                    "name": "Douche"
+                },
                 "amenity/social_facility": {
                     "name": "Sociale Faciliteit",
                     "terms": "OCMW,kansarmen,hulp,hulpcentrum"
@@ -2784,7 +2788,8 @@
                     "terms": "verkoopautomaat"
                 },
                 "amenity/vending_machine/cigarettes": {
-                    "name": "Sigarettenautomaat"
+                    "name": "Sigarettenautomaat",
+                    "terms": "sigarettenautomaat,tabaksautomaat"
                 },
                 "amenity/vending_machine/condoms": {
                     "name": "Condoomautomaat",
@@ -2865,7 +2870,8 @@
                     "name": "Dier"
                 },
                 "attraction/big_wheel": {
-                    "name": "Reuzenrad"
+                    "name": "Reuzenrad",
+                    "terms": "reuzenrat"
                 },
                 "attraction/bumper_car": {
                     "name": "Botsautootjes",
@@ -2882,6 +2888,25 @@
                 "attraction/dark_ride": {
                     "name": "Darkride",
                     "terms": "spookhuis,thema-attractie"
+                },
+                "attraction/drop_tower": {
+                    "name": "Valtoren"
+                },
+                "attraction/pirate_ship": {
+                    "name": "Piratenschip",
+                    "terms": "piratenschip,piratenboot"
+                },
+                "attraction/river_rafting": {
+                    "name": "Rivierraften"
+                },
+                "attraction/roller_coaster": {
+                    "name": "Achtbaan"
+                },
+                "attraction/train": {
+                    "name": "Toeristentrein"
+                },
+                "attraction/water_slide": {
+                    "name": "Waterglijbaan"
                 },
                 "barrier": {
                     "name": "Barrière",
@@ -3307,6 +3332,9 @@
                 },
                 "emergency/fire_hydrant": {
                     "name": "Brandkraan"
+                },
+                "emergency/life_ring": {
+                    "name": "Reddingsboei"
                 },
                 "emergency/no": {
                     "name": "Toegang voor hulpdiensten: nee"
@@ -4315,7 +4343,8 @@
                     "terms": "stroom,elektriciteit,energieopwekking,windmolen,windturbine,zonnepaneel,elektriciteitscentrale,energiecentrale,kerncentrale"
                 },
                 "power/generator/source_nuclear": {
-                    "name": "Kernreactor"
+                    "name": "Kernreactor",
+                    "terms": "kernreactor,kerncentrale"
                 },
                 "power/generator/source_wind": {
                     "name": "Windturbine",
@@ -4345,7 +4374,8 @@
                     "terms": "stroom,elektriciteit,energievoorzieningen,transformator,distributie,transformatiecabine,laagspanning,hoogspanning,voltage,spanning,onderstation,klein onderstation,distributiecabine,ondercentrale"
                 },
                 "power/tower": {
-                    "name": "Hoogspanningsmast"
+                    "name": "Hoogspanningsmast",
+                    "terms": "hoogspanningsmast"
                 },
                 "power/transformer": {
                     "name": "Transformator",
@@ -4372,6 +4402,10 @@
                 "railway/crossing": {
                     "name": "Spoorwegovergang (pad)",
                     "terms": "gelijkvloerse overgang,gelijkgrondse overgang,overweg,spooroverweg,treinkruising,treinsporen"
+                },
+                "railway/derail": {
+                    "name": "Ontspoorblok",
+                    "terms": "ontspoorinrichting,ontspoorblok,stopontspoorblok"
                 },
                 "railway/disused": {
                     "name": "Ongebruikte spoorweg (sporen nog aanwezig)",
@@ -4490,7 +4524,8 @@
                     "terms": "sanitairwinkel"
                 },
                 "shop/beauty": {
-                    "name": "Schoonheidssalon"
+                    "name": "Schoonheidssalon",
+                    "terms": "schoonheidswinkel,schoonheidsspeciaalzaak"
                 },
                 "shop/beauty/nails": {
                     "name": "Nagelsalon",
@@ -4513,7 +4548,8 @@
                     "terms": "fietsenwinkel"
                 },
                 "shop/bookmaker": {
-                    "name": "Bookmaker (gokkantoor)"
+                    "name": "Bookmaker (gokkantoor)",
+                    "terms": "bookmaker"
                 },
                 "shop/books": {
                     "name": "Boekwinkel",
@@ -4544,7 +4580,8 @@
                     "terms": "garage,autohersteller"
                 },
                 "shop/carpet": {
-                    "name": "Tapijtwinkel"
+                    "name": "Tapijtwinkel",
+                    "terms": "vloerbedekkingswinkel,vloerbedekkingsspeciaalzaak"
                 },
                 "shop/charity": {
                     "name": "Winkel van goed doel",
@@ -4575,24 +4612,28 @@
                     "terms": "IT,ICT,hardware,software,electronica,laptop"
                 },
                 "shop/confectionery": {
-                    "name": "Snoepwinkel"
+                    "name": "Snoepwinkel",
+                    "terms": "snoepwinkel"
                 },
                 "shop/convenience": {
                     "name": "Gemakswinkel",
                     "terms": "buurtsuper,kruidenier,buurtwinkel,tankstationwinkel"
                 },
                 "shop/copyshop": {
-                    "name": "Copyshop"
+                    "name": "Copyshop",
+                    "terms": "kopieshop,kopieerwinkel"
                 },
                 "shop/cosmetics": {
                     "name": "Cosmeticawinkel",
                     "terms": "parfumerie"
                 },
                 "shop/craft": {
-                    "name": "Schilder- en Tekengereedschapswinkel"
+                    "name": "Schilder- en Tekengereedschapswinkel",
+                    "terms": "kunstbenodigdhedenwinkel,knutselwinkel"
                 },
                 "shop/curtain": {
-                    "name": "Gordijnenwinkel"
+                    "name": "Gordijnenwinkel",
+                    "terms": "gordijnenwinkel,gordijnenzaak"
                 },
                 "shop/dairy": {
                     "name": "Zuivelhandel",
@@ -4682,7 +4723,8 @@
                     "terms": "kapper"
                 },
                 "shop/hardware": {
-                    "name": "Bouwmarkt"
+                    "name": "Bouwmarkt",
+                    "terms": "bouwcentrum,bouwmaterialenspeciaalzaak"
                 },
                 "shop/hearing_aids": {
                     "name": "Hoorapparatenwinkel",
@@ -4709,10 +4751,12 @@
                     "terms": "juwelier"
                 },
                 "shop/kiosk": {
-                    "name": "Krantenkiosk"
+                    "name": "Krantenkiosk",
+                    "terms": "kiosk,nieuwskiosk,krantenwinkel,krantenkiosk"
                 },
                 "shop/kitchen": {
-                    "name": "Keukenontwerpwinkel"
+                    "name": "Keukenontwerpwinkel",
+                    "terms": "keukendesignwinkel,keukendesignzaak,keukenwinkel,keukenzaak"
                 },
                 "shop/laundry": {
                     "name": "Wasserette",
@@ -5211,6 +5255,13 @@
                 },
                 "description": "DigitalGlobe standaard satellietbeelden",
                 "name": "DigitalGlobe-standaardbeelden"
+            },
+            "EsriWorldImagery": {
+                "attribution": {
+                    "text": "Voorwaarden & Terugkoppeling"
+                },
+                "description": "Esri world imagery",
+                "name": "Esri World Imagery"
             },
             "MAPNIK": {
                 "attribution": {
