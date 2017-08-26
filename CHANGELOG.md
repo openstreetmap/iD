@@ -26,6 +26,16 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.4.1
+##### August 26, 2017
+
+#### :bug: Bugfixes
+
+* Write post-save count, not pre-save count to the changesets_count tag ([#4283])
+
+[#4283]: https://github.com/openstreetmap/iD/issues/4283
+
+
 # 2.4.0
 ##### August 25, 2017
 
