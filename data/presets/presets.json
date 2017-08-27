@@ -5663,7 +5663,8 @@
                 "phone"
             ],
             "geometry": [
-                "point"
+                "point",
+                "vertex"
             ],
             "terms": [
                 "AED"
