@@ -565,8 +565,7 @@ en:
 
       To select multiple features, hold down the 'Shift' key. Then either click
       on the features you want to select, or drag on the map to draw a contour
-      around the elements you want to select. All the points inside the lasso
-      area will be selected.
+      around those features. All the points inside the lasso area will be selected.
 
       ### Saving Edits
 
