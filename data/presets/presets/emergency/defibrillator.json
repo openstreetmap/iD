@@ -1,6 +1,7 @@
 {
     "icon": "defibrillator",
     "fields": [
+        "ref",
         "access",
         "opening_hours",
         "indoor",
