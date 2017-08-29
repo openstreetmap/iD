@@ -4781,6 +4781,10 @@ en:
         # type=site
         name: Site
         terms: '<translate with synonyms or related terms for ''Site'', separated by commas>'
+      type/waterway:
+        # type=waterway
+        name: Waterway
+        terms: '<translate with synonyms or related terms for ''Waterway'', separated by commas>'
       vertex:
         name: Other
         terms: '<translate with synonyms or related terms for ''Other'', separated by commas>'

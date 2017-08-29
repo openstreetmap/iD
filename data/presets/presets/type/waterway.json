@@ -1,0 +1,15 @@
+{
+    "geometry": [
+        "relation"
+    ],
+    "tags": {
+        "type": "waterway"
+    },
+    "name": "Waterway",
+    "icon": "waterway-river",
+    "fields": [
+        "name",
+        "waterway",
+        "ref"
+    ]
+}

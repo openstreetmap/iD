@@ -2995,6 +2995,10 @@
             "value": "site"
         },
         {
+            "key": "type",
+            "value": "waterway"
+        },
+        {
             "key": "waterway",
             "value": "boatyard"
         },

@@ -5309,6 +5309,10 @@
                     "name": "Site",
                     "terms": ""
                 },
+                "type/waterway": {
+                    "name": "Waterway",
+                    "terms": ""
+                },
                 "vertex": {
                     "name": "Other",
                     "terms": ""
