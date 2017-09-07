@@ -24,11 +24,18 @@
             ]
         },
         {
+            "countryCodes": ["at", "ch", "de"],
+            "format": [
+                ["street", "housenumber"],
+                ["postcode", "city"]
+            ]
+        },
+        {
             "countryCodes": [
-                "ad", "at", "ba", "be", "ch", "cz",
-                "de", "dk", "es", "fi", "gr", "hr",
-                "is", "it", "li", "nl", "no", "pl",
-                "pt", "se", "si", "sk", "sm", "va"
+                "ad", "ba", "be", "cz", "dk", "es",
+                "fi", "gr", "hr", "is", "it", "li",
+                "nl", "no", "pl", "pt", "se", "si",
+                "sk", "sm", "va"
             ],
             "format": [
                 ["unit","street", "housenumber"],

@@ -452,6 +452,11 @@ en:
       drive_through:
         # drive_through=*
         label: Drive-Through
+      duration:
+        # duration=*
+        label: Duration
+        # duration field placeholder
+        placeholder: '00:00'
       electrified:
         # electrified=*
         label: Electrification
