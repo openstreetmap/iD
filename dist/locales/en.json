@@ -1464,6 +1464,10 @@
                 "drive_through": {
                     "label": "Drive-Through"
                 },
+                "duration": {
+                    "label": "Duration",
+                    "placeholder": "00:00"
+                },
                 "electrified": {
                     "label": "Electrification",
                     "placeholder": "Contact Line, Electrified Rail...",
