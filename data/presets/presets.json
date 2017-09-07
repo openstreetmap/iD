@@ -11639,7 +11639,6 @@
             "icon": "shop",
             "fields": [
                 "name",
-                "artwork_type",
                 "operator",
                 "address",
                 "building_area",
@@ -14149,7 +14148,6 @@
             "icon": "art-gallery",
             "fields": [
                 "name",
-                "artwork_type",
                 "operator",
                 "address",
                 "building_area",
