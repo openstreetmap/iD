@@ -4,7 +4,10 @@
         "line"
     ],
     "fields": [
-        "name"
+        "name",
+        "operator",
+        "duration",
+        "access"
     ],
     "tags": {
         "route": "ferry"

@@ -5745,9 +5745,36 @@
             ],
             "name": "Entrance/Exit"
         },
+        "footway/crossing-raised": {
+            "fields": [
+                "crossing",
+                "access",
+                "surface",
+                "kerb",
+                "tactile_paving"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "highway": "footway",
+                "footway": "crossing",
+                "traffic_calming": "table"
+            },
+            "reference": {
+                "key": "traffic_calming",
+                "value": "table"
+            },
+            "terms": [
+                "flat top",
+                "hump",
+                "speed",
+                "slow"
+            ],
+            "name": "Raised Street Crossing"
+        },
         "footway/crossing": {
             "fields": [
-                "name",
                 "crossing",
                 "access",
                 "surface",
@@ -5768,10 +5795,40 @@
             "terms": [],
             "name": "Street Crossing"
         },
+        "footway/crosswalk-raised": {
+            "icon": "highway-footway",
+            "fields": [
+                "crossing",
+                "access",
+                "surface",
+                "kerb",
+                "tactile_paving"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "highway": "footway",
+                "footway": "crossing",
+                "crossing": "zebra",
+                "traffic_calming": "table"
+            },
+            "reference": {
+                "key": "traffic_calming",
+                "value": "table"
+            },
+            "terms": [
+                "zebra crossing",
+                "flat top",
+                "hump",
+                "speed",
+                "slow"
+            ],
+            "name": "Raised Pedestrian Crosswalk"
+        },
         "footway/crosswalk": {
             "icon": "highway-footway",
             "fields": [
-                "name",
                 "crossing",
                 "access",
                 "surface",
@@ -5798,7 +5855,6 @@
         "footway/sidewalk": {
             "icon": "highway-footway",
             "fields": [
-                "name",
                 "surface",
                 "lit",
                 "width",
@@ -6098,9 +6154,33 @@
             ],
             "name": "Indoor Corridor"
         },
+        "highway/crossing-raised": {
+            "fields": [
+                "crossing",
+                "kerb",
+                "tactile_paving"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "highway": "crossing",
+                "traffic_calming": "table"
+            },
+            "reference": {
+                "key": "traffic_calming",
+                "value": "table"
+            },
+            "terms": [
+                "flat top",
+                "hump",
+                "speed",
+                "slow"
+            ],
+            "name": "Raised Street Crossing"
+        },
         "highway/crossing": {
             "fields": [
-                "name",
                 "crossing",
                 "kerb",
                 "tactile_paving"
@@ -6118,10 +6198,37 @@
             "terms": [],
             "name": "Street Crossing"
         },
+        "highway/crosswalk-raised": {
+            "icon": "poi-foot",
+            "fields": [
+                "crossing",
+                "kerb",
+                "tactile_paving"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "highway": "crossing",
+                "crossing": "zebra",
+                "traffic_calming": "table"
+            },
+            "reference": {
+                "key": "traffic_calming",
+                "value": "table"
+            },
+            "terms": [
+                "zebra crossing",
+                "flat top",
+                "hump",
+                "speed",
+                "slow"
+            ],
+            "name": "Raised Pedestrian Crosswalk"
+        },
         "highway/crosswalk": {
             "icon": "poi-foot",
             "fields": [
-                "name",
                 "crossing",
                 "kerb",
                 "tactile_paving"
@@ -6232,6 +6339,7 @@
             "fields": [
                 "name",
                 "oneway",
+                "maxspeed",
                 "lanes",
                 "surface",
                 "structure",
@@ -11464,7 +11572,10 @@
                 "line"
             ],
             "fields": [
-                "name"
+                "name",
+                "operator",
+                "duration",
+                "access"
             ],
             "tags": {
                 "route": "ferry"
@@ -11636,7 +11747,6 @@
             "icon": "shop",
             "fields": [
                 "name",
-                "artwork_type",
                 "operator",
                 "address",
                 "building_area",
@@ -14146,7 +14256,6 @@
             "icon": "art-gallery",
             "fields": [
                 "name",
-                "artwork_type",
                 "operator",
                 "address",
                 "building_area",
@@ -14643,20 +14752,18 @@
                 "surface"
             ],
             "geometry": [
-                "vertex",
-                "line"
+                "vertex"
             ],
+            "tags": {
+                "traffic_calming": "table"
+            },
             "terms": [
                 "flat top",
                 "hump",
                 "speed",
                 "slow"
             ],
-            "tags": {
-                "highway": "crossing",
-                "traffic_calming": "table"
-            },
-            "name": "Raised Pedestrian Crossing"
+            "name": "Speed Table"
         },
         "type/multipolygon": {
             "geometry": [

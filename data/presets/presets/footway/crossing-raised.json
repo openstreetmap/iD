@@ -1,5 +1,4 @@
 {
-    "icon": "highway-footway",
     "fields": [
         "crossing",
         "access",
@@ -13,14 +12,17 @@
     "tags": {
         "highway": "footway",
         "footway": "crossing",
-        "crossing": "zebra"
+        "traffic_calming": "table"
     },
     "reference": {
-        "key": "highway",
-        "value": "crossing"
+        "key": "traffic_calming",
+        "value": "table"
     },
     "terms": [
-        "zebra crossing"
+        "flat top",
+        "hump",
+        "speed",
+        "slow"
     ],
-    "name": "Pedestrian Crosswalk"
+    "name": "Raised Street Crossing"
 }
