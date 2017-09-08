@@ -1,11 +1,4 @@
 {
-    "geometry": [
-        "relation"
-    ],
-    "tags": {
-        "type": "route_master"
-    },
-    "name": "Route Master",
     "icon": "route-master",
     "fields": [
         "name",
@@ -13,5 +6,12 @@
         "ref",
         "operator",
         "network"
-    ]
+    ],
+    "geometry": [
+        "relation"
+    ],
+    "tags": {
+        "type": "route_master"
+    },
+    "name": "Route Master"
 }

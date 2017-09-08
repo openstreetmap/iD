@@ -1,5 +1,8 @@
 {
-    "name": "Right Turn Only",
+    "icon": "restriction-only-right-turn",
+    "fields": [
+        "except"
+    ],
     "geometry": [
         "relation"
     ],
@@ -7,8 +10,5 @@
         "type": "restriction",
         "restriction": "only_right_turn"
     },
-    "fields": [
-        "except"
-    ],
-    "icon": "restriction-only-right-turn"
+    "name": "Right Turn Only"
 }
