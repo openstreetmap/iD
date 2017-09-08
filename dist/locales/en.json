@@ -3429,9 +3429,17 @@
                     "name": "Entrance/Exit",
                     "terms": ""
                 },
+                "footway/crossing-raised": {
+                    "name": "Raised Street Crossing",
+                    "terms": "flat top,hump,speed,slow"
+                },
                 "footway/crossing": {
                     "name": "Street Crossing",
                     "terms": ""
+                },
+                "footway/crosswalk-raised": {
+                    "name": "Raised Pedestrian Crosswalk",
+                    "terms": "zebra crossing,flat top,hump,speed,slow"
                 },
                 "footway/crosswalk": {
                     "name": "Pedestrian Crosswalk",
@@ -3501,9 +3509,17 @@
                     "name": "Indoor Corridor",
                     "terms": "gallery,hall,hallway,indoor,passage,passageway"
                 },
+                "highway/crossing-raised": {
+                    "name": "Raised Street Crossing",
+                    "terms": "flat top,hump,speed,slow"
+                },
                 "highway/crossing": {
                     "name": "Street Crossing",
                     "terms": ""
+                },
+                "highway/crosswalk-raised": {
+                    "name": "Raised Pedestrian Crosswalk",
+                    "terms": "zebra crossing,flat top,hump,speed,slow"
                 },
                 "highway/crosswalk": {
                     "name": "Pedestrian Crosswalk",
@@ -5206,7 +5222,7 @@
                     "terms": "audible lines,sleeper lines,growlers"
                 },
                 "traffic_calming/table": {
-                    "name": "Raised Pedestrian Crossing",
+                    "name": "Speed Table",
                     "terms": "flat top,hump,speed,slow"
                 },
                 "type/multipolygon": {

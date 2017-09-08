@@ -1134,8 +1134,16 @@
             "key": "entrance"
         },
         {
+            "key": "traffic_calming",
+            "value": "table"
+        },
+        {
             "key": "footway",
             "value": "crossing"
+        },
+        {
+            "key": "traffic_calming",
+            "value": "table"
         },
         {
             "key": "crossing",
@@ -1206,8 +1214,16 @@
             "value": "corridor"
         },
         {
+            "key": "traffic_calming",
+            "value": "table"
+        },
+        {
             "key": "highway",
             "value": "crossing"
+        },
+        {
+            "key": "traffic_calming",
+            "value": "table"
         },
         {
             "key": "crossing",
