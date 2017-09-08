@@ -14766,6 +14766,7 @@
             "name": "Speed Table"
         },
         "type/multipolygon": {
+            "icon": "multipolygon",
             "geometry": [
                 "area",
                 "relation"
@@ -14775,23 +14776,22 @@
             },
             "removeTags": {},
             "name": "Multipolygon",
-            "icon": "multipolygon",
             "searchable": false,
             "matchScore": 0.1
         },
         "type/boundary": {
+            "icon": "boundary",
+            "fields": [
+                "name",
+                "boundary"
+            ],
             "geometry": [
                 "relation"
             ],
             "tags": {
                 "type": "boundary"
             },
-            "name": "Boundary",
-            "icon": "boundary",
-            "fields": [
-                "name",
-                "boundary"
-            ]
+            "name": "Boundary"
         },
         "type/boundary/administrative": {
             "icon": "boundary",
@@ -14813,22 +14813,25 @@
             "name": "Administrative Boundary"
         },
         "type/restriction": {
+            "icon": "restriction",
+            "fields": [
+                "name",
+                "restriction",
+                "except"
+            ],
             "geometry": [
                 "relation"
             ],
             "tags": {
                 "type": "restriction"
             },
-            "name": "Restriction",
-            "icon": "restriction",
-            "fields": [
-                "name",
-                "restriction",
-                "except"
-            ]
+            "name": "Restriction"
         },
         "type/restriction/no_left_turn": {
-            "name": "No Left Turn",
+            "icon": "restriction-no-left-turn",
+            "fields": [
+                "except"
+            ],
             "geometry": [
                 "relation"
             ],
@@ -14836,13 +14839,13 @@
                 "type": "restriction",
                 "restriction": "no_left_turn"
             },
+            "name": "No Left Turn"
+        },
+        "type/restriction/no_right_turn": {
+            "icon": "restriction-no-right-turn",
             "fields": [
                 "except"
             ],
-            "icon": "restriction-no-left-turn"
-        },
-        "type/restriction/no_right_turn": {
-            "name": "No Right Turn",
             "geometry": [
                 "relation"
             ],
@@ -14850,13 +14853,13 @@
                 "type": "restriction",
                 "restriction": "no_right_turn"
             },
+            "name": "No Right Turn"
+        },
+        "type/restriction/no_straight_on": {
+            "icon": "restriction-no-straight-on",
             "fields": [
                 "except"
             ],
-            "icon": "restriction-no-right-turn"
-        },
-        "type/restriction/no_straight_on": {
-            "name": "No Straight On",
             "geometry": [
                 "relation"
             ],
@@ -14864,13 +14867,13 @@
                 "type": "restriction",
                 "restriction": "no_straight_on"
             },
+            "name": "No Straight On"
+        },
+        "type/restriction/no_u_turn": {
+            "icon": "restriction-no-u-turn",
             "fields": [
                 "except"
             ],
-            "icon": "restriction-no-straight-on"
-        },
-        "type/restriction/no_u_turn": {
-            "name": "No U-turn",
             "geometry": [
                 "relation"
             ],
@@ -14878,13 +14881,13 @@
                 "type": "restriction",
                 "restriction": "no_u_turn"
             },
+            "name": "No U-turn"
+        },
+        "type/restriction/only_left_turn": {
+            "icon": "restriction-only-left-turn",
             "fields": [
                 "except"
             ],
-            "icon": "restriction-no-u-turn"
-        },
-        "type/restriction/only_left_turn": {
-            "name": "Left Turn Only",
             "geometry": [
                 "relation"
             ],
@@ -14892,13 +14895,13 @@
                 "type": "restriction",
                 "restriction": "only_left_turn"
             },
+            "name": "Left Turn Only"
+        },
+        "type/restriction/only_right_turn": {
+            "icon": "restriction-only-right-turn",
             "fields": [
                 "except"
             ],
-            "icon": "restriction-only-left-turn"
-        },
-        "type/restriction/only_right_turn": {
-            "name": "Right Turn Only",
             "geometry": [
                 "relation"
             ],
@@ -14906,13 +14909,13 @@
                 "type": "restriction",
                 "restriction": "only_right_turn"
             },
+            "name": "Right Turn Only"
+        },
+        "type/restriction/only_straight_on": {
+            "icon": "restriction-only-straight-on",
             "fields": [
                 "except"
             ],
-            "icon": "restriction-only-right-turn"
-        },
-        "type/restriction/only_straight_on": {
-            "name": "No Turns",
             "geometry": [
                 "relation"
             ],
@@ -14920,19 +14923,9 @@
                 "type": "restriction",
                 "restriction": "only_straight_on"
             },
-            "fields": [
-                "except"
-            ],
-            "icon": "restriction-only-straight-on"
+            "name": "No Turns"
         },
         "type/route_master": {
-            "geometry": [
-                "relation"
-            ],
-            "tags": {
-                "type": "route_master"
-            },
-            "name": "Route Master",
             "icon": "route-master",
             "fields": [
                 "name",
@@ -14940,16 +14933,16 @@
                 "ref",
                 "operator",
                 "network"
-            ]
-        },
-        "type/route": {
+            ],
             "geometry": [
                 "relation"
             ],
             "tags": {
-                "type": "route"
+                "type": "route_master"
             },
-            "name": "Route",
+            "name": "Route Master"
+        },
+        "type/route": {
             "icon": "route",
             "fields": [
                 "name",
@@ -14957,9 +14950,23 @@
                 "ref_route",
                 "operator",
                 "network"
-            ]
+            ],
+            "geometry": [
+                "relation"
+            ],
+            "tags": {
+                "type": "route"
+            },
+            "name": "Route"
         },
         "type/route/bicycle": {
+            "icon": "route-bicycle",
+            "fields": [
+                "name",
+                "ref_route",
+                "network_bicycle",
+                "cycle_network"
+            ],
             "geometry": [
                 "relation"
             ],
@@ -14967,16 +14974,16 @@
                 "type": "route",
                 "route": "bicycle"
             },
-            "name": "Cycle Route",
-            "icon": "route-bicycle",
+            "name": "Cycle Route"
+        },
+        "type/route/bus": {
+            "icon": "route-bus",
             "fields": [
                 "name",
                 "ref_route",
-                "network_bicycle",
-                "cycle_network"
-            ]
-        },
-        "type/route/bus": {
+                "operator",
+                "network"
+            ],
             "geometry": [
                 "relation"
             ],
@@ -14984,16 +14991,14 @@
                 "type": "route",
                 "route": "bus"
             },
-            "name": "Bus Route",
-            "icon": "route-bus",
-            "fields": [
-                "name",
-                "ref_route",
-                "operator",
-                "network"
-            ]
+            "name": "Bus Route"
         },
         "type/route/detour": {
+            "icon": "route-detour",
+            "fields": [
+                "name",
+                "ref_route"
+            ],
             "geometry": [
                 "relation"
             ],
@@ -15001,14 +15006,16 @@
                 "type": "route",
                 "route": "detour"
             },
-            "name": "Detour Route",
-            "icon": "route-detour",
-            "fields": [
-                "name",
-                "ref_route"
-            ]
+            "name": "Detour Route"
         },
         "type/route/ferry": {
+            "icon": "route-ferry",
+            "fields": [
+                "name",
+                "ref_route",
+                "operator",
+                "network"
+            ],
             "geometry": [
                 "relation"
             ],
@@ -15016,16 +15023,16 @@
                 "type": "route",
                 "route": "ferry"
             },
-            "name": "Ferry Route",
-            "icon": "route-ferry",
+            "name": "Ferry Route"
+        },
+        "type/route/foot": {
+            "icon": "route-foot",
             "fields": [
                 "name",
                 "ref_route",
                 "operator",
-                "network"
-            ]
-        },
-        "type/route/foot": {
+                "network_foot"
+            ],
             "geometry": [
                 "relation"
             ],
@@ -15033,16 +15040,16 @@
                 "type": "route",
                 "route": "foot"
             },
-            "name": "Foot Route",
+            "name": "Foot Route"
+        },
+        "type/route/hiking": {
             "icon": "route-foot",
             "fields": [
                 "name",
                 "ref_route",
                 "operator",
                 "network_foot"
-            ]
-        },
-        "type/route/hiking": {
+            ],
             "geometry": [
                 "relation"
             ],
@@ -15050,16 +15057,16 @@
                 "type": "route",
                 "route": "hiking"
             },
-            "name": "Hiking Route",
-            "icon": "route-foot",
+            "name": "Hiking Route"
+        },
+        "type/route/horse": {
+            "icon": "route-horse",
             "fields": [
                 "name",
                 "ref_route",
                 "operator",
-                "network_foot"
-            ]
-        },
-        "type/route/horse": {
+                "network_horse"
+            ],
             "geometry": [
                 "relation"
             ],
@@ -15067,16 +15074,15 @@
                 "type": "route",
                 "route": "horse"
             },
-            "name": "Riding Route",
-            "icon": "route-horse",
+            "name": "Riding Route"
+        },
+        "type/route/pipeline": {
+            "icon": "route-pipeline",
             "fields": [
                 "name",
                 "ref_route",
-                "operator",
-                "network_horse"
-            ]
-        },
-        "type/route/pipeline": {
+                "operator"
+            ],
             "geometry": [
                 "relation"
             ],
@@ -15084,15 +15090,15 @@
                 "type": "route",
                 "route": "pipeline"
             },
-            "name": "Pipeline Route",
-            "icon": "route-pipeline",
+            "name": "Pipeline Route"
+        },
+        "type/route/power": {
+            "icon": "route-power",
             "fields": [
                 "name",
                 "ref_route",
                 "operator"
-            ]
-        },
-        "type/route/power": {
+            ],
             "geometry": [
                 "relation"
             ],
@@ -15100,15 +15106,15 @@
                 "type": "route",
                 "route": "power"
             },
-            "name": "Power Route",
-            "icon": "route-power",
+            "name": "Power Route"
+        },
+        "type/route/road": {
+            "icon": "route-road",
             "fields": [
                 "name",
                 "ref_route",
-                "operator"
-            ]
-        },
-        "type/route/road": {
+                "network_road"
+            ],
             "geometry": [
                 "relation"
             ],
@@ -15116,15 +15122,16 @@
                 "type": "route",
                 "route": "road"
             },
-            "name": "Road Route",
-            "icon": "route-road",
+            "name": "Road Route"
+        },
+        "type/route/train": {
+            "icon": "route-train",
             "fields": [
                 "name",
                 "ref_route",
-                "network_road"
-            ]
-        },
-        "type/route/train": {
+                "operator",
+                "network"
+            ],
             "geometry": [
                 "relation"
             ],
@@ -15132,16 +15139,16 @@
                 "type": "route",
                 "route": "train"
             },
-            "name": "Train Route",
-            "icon": "route-train",
+            "name": "Train Route"
+        },
+        "type/route/tram": {
+            "icon": "route-tram",
             "fields": [
                 "name",
                 "ref_route",
                 "operator",
                 "network"
-            ]
-        },
-        "type/route/tram": {
+            ],
             "geometry": [
                 "relation"
             ],
@@ -15149,43 +15156,36 @@
                 "type": "route",
                 "route": "tram"
             },
-            "name": "Tram Route",
-            "icon": "route-tram",
-            "fields": [
-                "name",
-                "ref_route",
-                "operator",
-                "network"
-            ]
+            "name": "Tram Route"
         },
         "type/site": {
+            "icon": "relation",
+            "fields": [
+                "name",
+                "site"
+            ],
             "geometry": [
                 "relation"
             ],
             "tags": {
                 "type": "site"
             },
-            "name": "Site",
-            "icon": "relation",
-            "fields": [
-                "name",
-                "site"
-            ]
+            "name": "Site"
         },
         "type/waterway": {
+            "icon": "route-water",
+            "fields": [
+                "name",
+                "waterway",
+                "ref"
+            ],
             "geometry": [
                 "relation"
             ],
             "tags": {
                 "type": "waterway"
             },
-            "name": "Waterway",
-            "icon": "waterway-river",
-            "fields": [
-                "name",
-                "waterway",
-                "ref"
-            ]
+            "name": "Waterway"
         },
         "vertex": {
             "name": "Other",
