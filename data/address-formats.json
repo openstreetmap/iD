@@ -34,12 +34,20 @@
             "countryCodes": [
                 "ad", "ba", "be", "cz", "dk", "es",
                 "fi", "gr", "hr", "is", "it", "li",
-                "nl", "no", "pl", "pt", "se", "si",
-                "sk", "sm", "va"
+                "nl", "no", "pt", "se", "si", "sk",
+                "sm", "va"
             ],
             "format": [
                 ["unit","street", "housenumber"],
                 ["postcode", "city"]
+            ]
+        },
+        {
+            "countryCodes": ["pl"],
+            "format": [
+                ["street", "housenumber"],
+                ["postcode"],
+                ["place", "city"]
             ]
         },
         {
