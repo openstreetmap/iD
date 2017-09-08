@@ -2751,7 +2751,7 @@ en:
         # 'terms: pregnancy,childbirth'
         terms: '<translate with synonyms or related terms for ''Midwife'', separated by commas>'
       healthcare/specialist:
-        # healthcare=yes
+        # 'healthcare:speciality=*'
         name: Healthcare Specialist
         # 'terms: special'
         terms: '<translate with synonyms or related terms for ''Healthcare Specialist'', separated by commas>'

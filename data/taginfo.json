@@ -1194,8 +1194,7 @@
             "value": "midwife"
         },
         {
-            "key": "healthcare",
-            "value": "yes"
+            "key": "healthcare:speciality"
         },
         {
             "key": "highway",

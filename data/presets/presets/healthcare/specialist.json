@@ -17,7 +17,13 @@
         "special"
     ],
     "tags": {
-        "healthcare": "yes"
+        "healthcare:speciality": "*"
+    },
+    "addTags": {
+        "healthcare:speciality": "general"
+    },
+    "removeTags": {
+        "healthcare:speciality": "general"
     },
     "name": "Healthcare Specialist"
 }
