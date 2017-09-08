@@ -29,8 +29,8 @@ export function actionReflect(reflectIds, projection) {
             ssrAngle = 0,
             c1 = hull[0];
 
-        for (var i = 0; i < hull.length - 1; i++) {
-            var c2 = hull[i + 1],
+        for (var i = 0; i <= hull.length - 1; i++) {
+            var c2 = (i === hull.length - 1) ? hull[0] : hull[i + 1],
                 angle = Math.atan2(c2[1] - c1[1], c2[0] - c1[0]),
                 poly = geoRotate(hull, -angle, centroid),
                 extent = poly.reduce(function(extent, point) {

@@ -1,4 +1,11 @@
 {
+    "icon": "route-ferry",
+    "fields": [
+        "name",
+        "ref_route",
+        "operator",
+        "network"
+    ],
     "geometry": [
         "relation"
     ],
@@ -6,12 +13,5 @@
         "type": "route",
         "route": "ferry"
     },
-    "name": "Ferry Route",
-    "icon": "route-ferry",
-    "fields": [
-        "name",
-        "ref_route",
-        "operator",
-        "network"
-    ]
+    "name": "Ferry Route"
 }

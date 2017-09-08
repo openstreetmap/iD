@@ -238,12 +238,15 @@
     "route-ferry":              { "viewBox": "660 200 60 60" },
     "route-pipeline":           { "viewBox": "720 200 60 60" },
     "route-power":              { "viewBox": "780 200 60 60" },
+    "route-water":              { "viewBox": "840 200 60 60" },
     "route-master":             { "viewBox": "0 260 60 60" },
 
     "route-bicycle-stroke":      { "fill": "currentColor" },
     "route-foot-stroke":         { "fill": "currentColor" },
     "route-horse-stroke":        { "fill": "currentColor" },
     "route-ferry-stroke":        { "fill": "currentColor" },
+    "route-water-stroke1":       { "fill": "currentColor" },
+    "route-water-stroke2":       { "fill": "currentColor" },
 
     "restriction-no-straight-on":   { "viewBox": "60 260 60 60" },
     "restriction-no-u-turn":        { "viewBox": "120 260 60 60" },

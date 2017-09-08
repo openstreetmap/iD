@@ -1,6 +1,5 @@
 {
     "fields": [
-        "name",
         "crossing",
         "access",
         "surface",

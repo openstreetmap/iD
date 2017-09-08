@@ -328,8 +328,6 @@
         },
         "commit": {
             "title": "Subir a OpenStreetMap",
-            "description_placeholder": "Breve descripción de sus contribuciones (requerido)",
-            "message_label": "Comentario del conjunto de cambios",
             "upload_explanation": "Los cambios que sube serán visibles en todos los mapas que usen datos de OpenStreetMap.",
             "upload_explanation_with_user": "Los cambios que sube como {user} serán visibles en todos los mapas que usen datos de OpenStreetMap.",
             "save": "Subir",
@@ -1052,7 +1050,7 @@
                     "name": "Elementos de uso de suelo"
                 },
                 "category-natural-area": {
-                    "name": "Elementos naturales de área"
+                    "name": "Elementos naturales"
                 },
                 "category-natural-line": {
                     "name": "Elementos naturales lineales"
@@ -1076,7 +1074,7 @@
                     "name": "Elementos de ruta"
                 },
                 "category-water-area": {
-                    "name": "Elementos de agua de área"
+                    "name": "Elementos de agua"
                 },
                 "category-water-line": {
                     "name": "Elementos de agua lineales"
@@ -1155,7 +1153,7 @@
                         "postcode": "Código postal",
                         "province": "Provincia",
                         "province!jp": "Prefectura - Japón",
-                        "quarter": "Barrio",
+                        "quarter": "Barrio - Quarter",
                         "quarter!jp": "Ōaza / Machi - Japón",
                         "state": "Estado",
                         "street": "Calle",
@@ -1540,10 +1538,6 @@
                 "generator/type": {
                     "label": "Tipo"
                 },
-                "golf_hole": {
-                    "label": "Referencia",
-                    "placeholder": "Número de hoyo (1-18)"
-                },
                 "grape_variety": {
                     "label": "Variedades de uva"
                 },
@@ -1710,6 +1704,10 @@
                 },
                 "maxweight": {
                     "label": "Peso máximo"
+                },
+                "milestone_position": {
+                    "label": "Posición del hito kilométrico",
+                    "placeholder": "Distancia a un decimal (123.4)"
                 },
                 "mtb/scale": {
                     "label": "Dificultad de bicicleta de montaña",
@@ -1903,7 +1901,7 @@
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
                 "population": {
-                    "label": "Población"
+                    "label": "Cantidad de población"
                 },
                 "power": {
                     "label": "Tipo"
@@ -1931,7 +1929,29 @@
                     }
                 },
                 "ref": {
-                    "label": "Referencia"
+                    "label": "Código de referencia"
+                },
+                "ref_aeroway_gate": {
+                    "label": "Número de puerta"
+                },
+                "ref_golf_hole": {
+                    "label": "Número de hoyo",
+                    "placeholder": "1-18"
+                },
+                "ref_highway_junction": {
+                    "label": "Número de intersección"
+                },
+                "ref_platform": {
+                    "label": "Número de plataforma"
+                },
+                "ref_road_number": {
+                    "label": "Número de la carretera"
+                },
+                "ref_route": {
+                    "label": "Número de ruta"
+                },
+                "ref_stop_position": {
+                    "label": "Número de parada"
                 },
                 "relation": {
                     "label": "Tipo"
@@ -2045,9 +2065,6 @@
                 },
                 "social_facility_for": {
                     "label": "Personas atendidas"
-                },
-                "source": {
-                    "label": "Fuente"
                 },
                 "sport": {
                     "label": "Deportes"
@@ -2185,9 +2202,6 @@
                 },
                 "trees": {
                     "label": "Árboles"
-                },
-                "tunnel": {
-                    "label": "Túnel"
                 },
                 "vending": {
                     "label": "Tipo de producto"
@@ -2583,7 +2597,7 @@
                 },
                 "amenity/place_of_worship/hindu": {
                     "name": "Templo hindú",
-                    "terms": "Templo, hindú, Grbrgrih, Mandu, adoración, capilla, templo, santuario"
+                    "terms": "hindú, india, hinduismo, garbhargriha, mandu, mandir, culto, capilla, templo, santuario, sagrario, ermita"
                 },
                 "amenity/place_of_worship/jewish": {
                     "name": "Sinagoga",
@@ -2595,15 +2609,15 @@
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Santuario sintoísta",
-                    "terms": "Santuario, Shinto, sintoísta, Kami, Torii, capilla, templo"
+                    "terms": "shinto, sintoísmo, shintoísmo, kami, koshitsu, jinja, shuha, minzoku, culto, capilla, templo, santuario, sagrario, ermita"
                 },
                 "amenity/place_of_worship/sikh": {
                     "name": "Templo Sij",
-                    "terms": "Templo, Sij, Sikh, Gurudwara"
+                    "terms": "sikh, sij, sijismo, india, gurudwara, culto, capilla, templo, santuario"
                 },
                 "amenity/place_of_worship/taoist": {
                     "name": "Templo Taoísta",
-                    "terms": "Templo, Taoísta, monasterio"
+                    "terms": "taoísta, daoísta, taoísmo, daoísmo, china, filosofía, monasterio, culto, capilla, templo, santuario"
                 },
                 "amenity/planetarium": {
                     "name": "Planetario",
@@ -2666,7 +2680,7 @@
                 },
                 "amenity/scrapyard": {
                     "name": "Depósito de chatarra",
-                    "terms": "Depósito de chatarra, cementerio de coches, auto, coche, vehículo, basura, metal, objetos salvados, chatarra, naufragio, desguace"
+                    "terms": "auto, automóvil, coche, carro, vehículo, basura, metal, objetos salvados, chatarra, naufragio, desguace, depósito, almacén, triturador, reciclaje, desguace, deshuesadero, chivera, yonke, junker"
                 },
                 "amenity/shelter": {
                     "name": "Refugio",
@@ -2772,7 +2786,7 @@
                 },
                 "amenity/waste/dog_excrement": {
                     "name": "Recipiente para excremento de perro",
-                    "terms": "Basura, tacho, recipiente, caca, excremento, perro"
+                    "terms": "basura, tacho, recipiente, caca, excremento, popo, perro"
                 },
                 "amenity/waste_basket": {
                     "name": "Papelera",
@@ -3991,11 +4005,11 @@
                 },
                 "man_made/watermill": {
                     "name": "Molino de agua",
-                    "terms": "agua, rueda, molino"
+                    "terms": "agua, hidráulico, caz, azud, aceña, rueda, turbina, paleta, molino, noria, moler"
                 },
                 "man_made/windmill": {
                     "name": "Molino de viento",
-                    "terms": "Viento, rueda, molino"
+                    "terms": "viento, eólico, granja, rueda, molino, turbina, extraer agua, bombeo"
                 },
                 "man_made/works": {
                     "name": "Fábrica",
@@ -4008,6 +4022,10 @@
                 "manhole/drain": {
                     "name": "Desagüe pluvial",
                     "terms": "Cubierta, tapa, desagüe, agujero, pozo, lluvia, alcantarillado, tormenta, boca de tormenta, alcantarillado pluvial"
+                },
+                "manhole/telecom": {
+                    "name": "Pozo de telecomunicaciones",
+                    "terms": "telecomunicaciones, teléfono, pozo, boca de inspección, pozo de registro, abertura, boca de acceso"
                 },
                 "natural": {
                     "name": "Natural",
@@ -4094,16 +4112,16 @@
                     "terms": "volcán, lava, magma, ceniza, cráter"
                 },
                 "natural/water": {
-                    "name": "Lámina de agua",
-                    "terms": "río, agua, lago, laguna, albufera, ibón, estanque, embalse, pantano, balsa, cuerpo de agua, aguas, lámina de agua"
+                    "name": "Cuerpo de agua",
+                    "terms": "río, agua, lago, laguna, albufera, ibón, estanque, embalse, pantano, balsa, cuerpo de agua, aguas, lámina de agua, poza de agua, charca"
                 },
                 "natural/water/lake": {
                     "name": "Lago",
-                    "terms": "lago, laguna, ibón"
+                    "terms": "lago, laguna, ibón, lago pequeño, laguito"
                 },
                 "natural/water/pond": {
                     "name": "Estanque",
-                    "terms": "estanque, charco, charca, laguna"
+                    "terms": "estanque, poza de agua, lago de molino, lago de montaña, ibón, piscina natural, remanso, charca"
                 },
                 "natural/water/reservoir": {
                     "name": "Embalse",
@@ -4194,8 +4212,7 @@
                     "terms": "ONG, organización no gubernamental, Oficina de la ONG"
                 },
                 "office/physician": {
-                    "name": "Médico",
-                    "terms": "médico, médica, curador, curandero, doctor, facultativo, clínico"
+                    "name": "Médico"
                 },
                 "office/political_party": {
                     "name": "Partido político",
@@ -4247,12 +4264,12 @@
                     "terms": "paraje, rincón"
                 },
                 "place/neighbourhood": {
-                    "name": "Vecindario",
+                    "name": "Barrio / Vecindario",
                     "terms": "barrio, vecindario, vecindad, urbanización, colonia"
                 },
                 "place/quarter": {
-                    "name": "Sub-municipio / Barrio",
-                    "terms": "sub-municipio, sub-distrito, sector, cuadrante, delegación, localidad, barrio, vecindario"
+                    "name": "Sub-municipio / Barrio - Quarter",
+                    "terms": "submunicipio, subdistrito, sector, cuadrante, delegación, localidad, barrio, vecindario, quarter"
                 },
                 "place/square": {
                     "name": "Plaza",
@@ -4263,11 +4280,11 @@
                     "terms": "municipio, división administrativa, division administrativa, burgo, delegación, delegacion, localidad"
                 },
                 "place/town": {
-                    "name": "Ciudad pequeña",
+                    "name": "Pueblo / Ciudad pequeña",
                     "terms": "ciudad, pueblo, municipio"
                 },
                 "place/village": {
-                    "name": "Población",
+                    "name": "Población / Aldea",
                     "terms": "población, aldea, pueblo, poblado"
                 },
                 "point": {
@@ -4335,9 +4352,17 @@
                     "name": "Vía de ferrocarril abandonada",
                     "terms": "Ferrocarril abandonado, traza abandonada"
                 },
+                "railway/buffer_stop": {
+                    "name": "Parachoques deslizante",
+                    "terms": "Parachoques deslizante, tope, amortiguador"
+                },
                 "railway/crossing": {
                     "name": "Cruce de ferrocarril (sendero)",
                     "terms": "cruce, tren, ferrocarril, sendero, senda, cruce ferroviario, paso a nivel"
+                },
+                "railway/derail": {
+                    "name": "Calce descarrilador ferroviario",
+                    "terms": "Calce, descarrilador, ferroviario"
                 },
                 "railway/disused": {
                     "name": "Vía de ferrocarril en desuso",
@@ -4355,6 +4380,10 @@
                     "name": "Cruce de ferrocarril (carretera)",
                     "terms": "cruce, tren, ferrocarril, carretera, camino, cruce ferroviario, paso a nivel"
                 },
+                "railway/milestone": {
+                    "name": "Hito kilométrico ferroviario",
+                    "terms": "hito, señal, marcador, kilométrico, mojón, vía, via, férrea, ferroviaria, ferroviario, ferrocarril, tren"
+                },
                 "railway/monorail": {
                     "name": "Monorraíl",
                     "terms": "monorraíl, monorriel, monocarril"
@@ -4371,6 +4400,10 @@
                     "name": "Vía de ferrocarril",
                     "terms": "Rail, ferrocarril, riel, tren, raíl, vía"
                 },
+                "railway/signal": {
+                    "name": "Señal ferroviaria",
+                    "terms": "señal, señalización, luces, vía, via, férrea, ferroviaria, ferroviario, ferrocarril, tren"
+                },
                 "railway/station": {
                     "name": "Estación de ferrocarril",
                     "terms": "Estación de Ferrocarril, estaciones de ferrocarril, estación de tren"
@@ -4382,6 +4415,14 @@
                 "railway/subway_entrance": {
                     "name": "Boca de metro",
                     "terms": "entrada de metro, entrada de subte,  entrada, ingreso, acceso"
+                },
+                "railway/switch": {
+                    "name": "Desvío ferroviario",
+                    "terms": "desvío, desvio, vía, via, férrea, ferroviaria, ferroviario, ferrocarril, tren"
+                },
+                "railway/train_wash": {
+                    "name": "Instalación de lavado de trenes",
+                    "terms": "lavado, lavadero, limpieza, tren, ferroviario, ferrocarril"
                 },
                 "railway/tram": {
                     "name": "Tranvía",
@@ -5308,7 +5349,7 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Capa de ortofoto proporcionada por basemap.at. \"Sucesor\" de las imágenes de geoimage.at.",
+                "description": "Capa de ortofoto proporcionada por basemap.at. «Sucesor» de las imágenes aéreas de geoimage.at.",
                 "name": "Ortofoto de basemap.at"
             },
             "hike_n_bike": {

@@ -18,7 +18,8 @@ import { utilDetect } from '../util/detect';
 import {
     utilDisplayName,
     utilDisplayNameForPath,
-    utilEntitySelector
+    utilEntitySelector,
+    utilCallWhenIdle
 } from '../util/index';
 
 
@@ -652,7 +653,7 @@ export function svgLabels(projection, context) {
     }
 
 
-    var throttleFilterLabels = _.throttle(filterLabels, 100);
+    var throttleFilterLabels = _.throttle(utilCallWhenIdle(filterLabels), 100);
 
 
     drawLabels.observe = function(selection) {

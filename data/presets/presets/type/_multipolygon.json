@@ -1,4 +1,5 @@
 {
+    "icon": "multipolygon",
     "geometry": [
         "area",
         "relation"
@@ -8,7 +9,6 @@
     },
     "removeTags": {},
     "name": "Multipolygon",
-    "icon": "multipolygon",
     "searchable": false,
     "matchScore": 0.1
 }

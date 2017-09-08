@@ -339,10 +339,11 @@ export function uiCommit(context) {
 
         // always update userdetails, just in case user reauthenticates as someone else
         if (userDetails && userDetails.changesets_count !== undefined) {
-            tags.changesets_count = String(userDetails.changesets_count);
+            var changesetsCount = parseInt(userDetails.changesets_count, 10) + 1;  // #4283
+            tags.changesets_count = String(changesetsCount);
 
             // first 100 edits - new user
-            if (parseInt(tags.changesets_count, 10) < 100) {
+            if (changesetsCount <= 100) {
                 var s;
                 s = context.storage('walkthrough_completed');
                 if (s) {

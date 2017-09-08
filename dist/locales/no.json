@@ -327,8 +327,6 @@
         },
         "commit": {
             "title": "Last opp til OpenStreetMap",
-            "description_placeholder": "Kort beskrivelse av dine bidrag (påkrevet)",
-            "message_label": "Kommentar til endringssettet",
             "upload_explanation": "Endringene du laster opp vil være synlige på alle kart som bruker dataene til OpenStreetMap.",
             "upload_explanation_with_user": "Endringene du laster opp som {user} vil være synlige på alle kart som bruker dataene til OpenStreetMap.",
             "save": "Last opp",
@@ -925,10 +923,6 @@
                 "generator/type": {
                     "label": "Type"
                 },
-                "golf_hole": {
-                    "label": "Referanse",
-                    "placeholder": "Hull nummer (1-18)"
-                },
                 "handicap": {
                     "label": "Handikapp",
                     "placeholder": "1-18"
@@ -1203,9 +1197,6 @@
                 "railway": {
                     "label": "Type"
                 },
-                "ref": {
-                    "label": "Referanse"
-                },
                 "relation": {
                     "label": "Type"
                 },
@@ -1239,9 +1230,6 @@
                 "smoking": {
                     "label": "Røyking"
                 },
-                "source": {
-                    "label": "Kilde"
-                },
                 "structure": {
                     "label": "Struktur",
                     "options": {
@@ -1272,9 +1260,6 @@
                 },
                 "trees": {
                     "label": "Trær"
-                },
-                "tunnel": {
-                    "label": "Tunnel"
                 },
                 "water": {
                     "label": "Type"

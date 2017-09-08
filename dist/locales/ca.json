@@ -328,8 +328,6 @@
         },
         "commit": {
             "title": "Puja a l'OpenStreetMap",
-            "description_placeholder": "Breu descripció de les teves contribucions (necessari)",
-            "message_label": "Comentari del conjunt de canvis",
             "upload_explanation": "Els canvis que deseu seran visibles a tots els mapes que utilitzin dades d'OpenStreetMap.",
             "upload_explanation_with_user": "Els canvis que deseu com a {user} seran visibles en tots els mapes que utilitzin dades d'OpenStreetMap.",
             "save": "Puja",
@@ -1231,10 +1229,6 @@
                 "generator/type": {
                     "label": "Tipus"
                 },
-                "golf_hole": {
-                    "label": "Referència",
-                    "placeholder": "Número de forat (1-18)"
-                },
                 "handicap": {
                     "label": "Handicap",
                     "placeholder": "1-18"
@@ -1599,9 +1593,6 @@
                         "container": "Contenidor"
                     }
                 },
-                "ref": {
-                    "label": "Referència"
-                },
                 "relation": {
                     "label": "Tipus"
                 },
@@ -1708,9 +1699,6 @@
                 },
                 "social_facility": {
                     "label": "Tipus"
-                },
-                "source": {
-                    "label": "Font"
                 },
                 "sport": {
                     "label": "Esports"
@@ -1843,9 +1831,6 @@
                 },
                 "trees": {
                     "label": "Arbres"
-                },
-                "tunnel": {
-                    "label": "Túnel"
                 },
                 "vending": {
                     "label": "Tipus de mercaderies"
@@ -3411,8 +3396,7 @@
                     "name": "Oficina d'ONG"
                 },
                 "office/physician": {
-                    "name": "Metge",
-                    "terms": "Metgessa, Doctor, Doctora"
+                    "name": "Metge"
                 },
                 "office/political_party": {
                     "name": "Local de partit polític",

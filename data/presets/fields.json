@@ -623,6 +623,12 @@
             "type": "check",
             "label": "Drive-Through"
         },
+        "duration": {
+            "key": "duration",
+            "type": "text",
+            "label": "Duration",
+            "placeholder": "00:00"
+        },
         "electrified": {
             "key": "electrified",
             "type": "combo",

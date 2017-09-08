@@ -481,6 +481,10 @@
         },
         {
             "key": "amenity",
+            "value": "shower"
+        },
+        {
+            "key": "amenity",
             "value": "social_facility"
         },
         {
@@ -1120,14 +1124,26 @@
         },
         {
             "key": "emergency",
+            "value": "life_ring"
+        },
+        {
+            "key": "emergency",
             "value": "phone"
         },
         {
             "key": "entrance"
         },
         {
+            "key": "traffic_calming",
+            "value": "table"
+        },
+        {
             "key": "footway",
             "value": "crossing"
+        },
+        {
+            "key": "traffic_calming",
+            "value": "table"
         },
         {
             "key": "crossing",
@@ -1209,8 +1225,16 @@
             "value": "corridor"
         },
         {
+            "key": "traffic_calming",
+            "value": "table"
+        },
+        {
             "key": "highway",
             "value": "crossing"
+        },
+        {
+            "key": "traffic_calming",
+            "value": "table"
         },
         {
             "key": "crossing",
@@ -1995,6 +2019,10 @@
         },
         {
             "key": "office",
+            "value": "physician"
+        },
+        {
+            "key": "office",
             "value": "travel_agent"
         },
         {
@@ -2064,10 +2092,6 @@
         {
             "key": "office",
             "value": "ngo"
-        },
-        {
-            "key": "office",
-            "value": "physician"
         },
         {
             "key": "office",
@@ -2996,6 +3020,10 @@
         {
             "key": "type",
             "value": "site"
+        },
+        {
+            "key": "type",
+            "value": "waterway"
         },
         {
             "key": "waterway",

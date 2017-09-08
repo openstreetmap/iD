@@ -452,6 +452,11 @@ en:
       drive_through:
         # drive_through=*
         label: Drive-Through
+      duration:
+        # duration=*
+        label: Duration
+        # duration field placeholder
+        placeholder: '00:00'
       electrified:
         # electrified=*
         label: Electrification
@@ -1718,7 +1723,7 @@ en:
       amenity/doctors:
         # amenity=doctors
         name: Doctor
-        # 'terms: medic*'
+        # 'terms: medic*,physician'
         terms: '<translate with synonyms or related terms for ''Doctor'', separated by commas>'
       amenity/dojo:
         # amenity=dojo
@@ -1969,6 +1974,11 @@ en:
         name: Shelter
         # 'terms: lean-to,gazebo,picnic'
         terms: '<translate with synonyms or related terms for ''Shelter'', separated by commas>'
+      amenity/shower:
+        # amenity=shower
+        name: Shower
+        # 'terms: rain closet'
+        terms: '<translate with synonyms or related terms for ''Shower'', separated by commas>'
       amenity/social_facility:
         # amenity=social_facility
         name: Social Facility
@@ -2656,6 +2666,11 @@ en:
         name: Fire Hydrant
         # 'terms: fire plug'
         terms: '<translate with synonyms or related terms for ''Fire Hydrant'', separated by commas>'
+      emergency/life_ring:
+        # emergency=life_ring
+        name: Life Ring
+        # 'terms: life buoy,kisby ring,kisbie ring,perry buoy'
+        terms: '<translate with synonyms or related terms for ''Life Ring'', separated by commas>'
       emergency/no:
         # emergency=no
         name: Emergency Access No
@@ -2680,11 +2695,21 @@ en:
         # 'highway=footway, footway=crossing'
         name: Street Crossing
         terms: '<translate with synonyms or related terms for ''Street Crossing'', separated by commas>'
+      footway/crossing-raised:
+        # 'highway=footway, footway=crossing, traffic_calming=table'
+        name: Raised Street Crossing
+        # 'terms: flat top,hump,speed,slow'
+        terms: '<translate with synonyms or related terms for ''Raised Street Crossing'', separated by commas>'
       footway/crosswalk:
         # 'highway=footway, footway=crossing, crossing=zebra'
         name: Pedestrian Crosswalk
         # 'terms: zebra crossing'
         terms: '<translate with synonyms or related terms for ''Pedestrian Crosswalk'', separated by commas>'
+      footway/crosswalk-raised:
+        # 'highway=footway, footway=crossing, crossing=zebra, traffic_calming=table'
+        name: Raised Pedestrian Crosswalk
+        # 'terms: zebra crossing,flat top,hump,speed,slow'
+        terms: '<translate with synonyms or related terms for ''Raised Pedestrian Crosswalk'', separated by commas>'
       footway/sidewalk:
         # 'highway=footway, footway=sidewalk'
         name: Sidewalk
@@ -2776,11 +2801,21 @@ en:
         # highway=crossing
         name: Street Crossing
         terms: '<translate with synonyms or related terms for ''Street Crossing'', separated by commas>'
+      highway/crossing-raised:
+        # 'highway=crossing, traffic_calming=table'
+        name: Raised Street Crossing
+        # 'terms: flat top,hump,speed,slow'
+        terms: '<translate with synonyms or related terms for ''Raised Street Crossing'', separated by commas>'
       highway/crosswalk:
         # 'highway=crossing, crossing=zebra'
         name: Pedestrian Crosswalk
         # 'terms: zebra crossing'
         terms: '<translate with synonyms or related terms for ''Pedestrian Crosswalk'', separated by commas>'
+      highway/crosswalk-raised:
+        # 'highway=crossing, crossing=zebra, traffic_calming=table'
+        name: Raised Pedestrian Crosswalk
+        # 'terms: zebra crossing,flat top,hump,speed,slow'
+        terms: '<translate with synonyms or related terms for ''Raised Pedestrian Crosswalk'', separated by commas>'
       highway/cycleway:
         # highway=cycleway
         name: Cycle Path
@@ -3749,7 +3784,6 @@ en:
       office/physician:
         # office=physician
         name: Physician
-        terms: '<translate with synonyms or related terms for ''Physician'', separated by commas>'
       office/political_party:
         # office=political_party
         name: Political Party
@@ -4608,6 +4642,7 @@ en:
       tourism/information/guidepost:
         # 'tourism=information, information=guidepost'
         name: Guidepost
+        # 'terms: signpost'
         terms: '<translate with synonyms or related terms for ''Guidepost'', separated by commas>'
       tourism/information/map:
         # 'tourism=information, information=map'
@@ -4690,10 +4725,10 @@ en:
         # 'terms: audible lines,sleeper lines,growlers'
         terms: '<translate with synonyms or related terms for ''Rumble Strip'', separated by commas>'
       traffic_calming/table:
-        # 'highway=crossing, traffic_calming=table'
-        name: Raised Pedestrian Crossing
+        # traffic_calming=table
+        name: Speed Table
         # 'terms: flat top,hump,speed,slow'
-        terms: '<translate with synonyms or related terms for ''Raised Pedestrian Crossing'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Speed Table'', separated by commas>'
       type/boundary:
         # type=boundary
         name: Boundary
@@ -4797,6 +4832,10 @@ en:
         # type=site
         name: Site
         terms: '<translate with synonyms or related terms for ''Site'', separated by commas>'
+      type/waterway:
+        # type=waterway
+        name: Waterway
+        terms: '<translate with synonyms or related terms for ''Waterway'', separated by commas>'
       vertex:
         name: Other
         terms: '<translate with synonyms or related terms for ''Other'', separated by commas>'

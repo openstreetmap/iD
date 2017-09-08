@@ -46,7 +46,7 @@
                 "title": "Devam et",
                 "description": "Bu çizgiye devam et.",
                 "not_eligible": "Burada çizgi devam ettirilemez.",
-                "multiple": "Burada birden fazla çizgi devam ettirilebilir. Bir çizgi seçmek için, Shift tuşuna bas ve çizginin üzerine tıkla.",
+                "multiple": "Burada birden fazla çizgi devam ettirilebilir. Bir çizgi seçmek için, Shift tuşuna bas ve çizginin üzerine tı",
                 "annotation": {
                     "line": "Çizgiye devam edildi.",
                     "area": "Alana devam edildi."
@@ -328,8 +328,6 @@
         },
         "commit": {
             "title": "OpenStreetMap'e Yükle",
-            "description_placeholder": "Yaptığın değişiklikleri kısaca açıkla (zorunlu)",
-            "message_label": "Değişlikle ilgili Açıklama",
             "upload_explanation": "Yüklediğin değişiklikler OpenStreetMap verilerini kullanan bütün haritalarda görülebilecek. ",
             "upload_explanation_with_user": "{user} olarak yüklediğin değişiklikler OpenStreetMap verilerini kullanan bütün haritalarda görülebilecek. ",
             "save": "Yükle",
@@ -1393,15 +1391,15 @@
                 "generator/method": {
                     "label": "Yöntem"
                 },
+                "generator/output/electricity": {
+                    "label": "Güç Çıkışı",
+                    "placeholder": "50 MW, 100 MW, 200 MW..."
+                },
                 "generator/source": {
                     "label": "Kaynak"
                 },
                 "generator/type": {
                     "label": "Tür"
-                },
-                "golf_hole": {
-                    "label": "Referans",
-                    "placeholder": "Çukur Numarası (1-18)"
                 },
                 "grape_variety": {
                     "label": "Meyve Çeşitleri"
@@ -1473,6 +1471,9 @@
                 "kerb": {
                     "label": "Kaldırım Taşı"
                 },
+                "label": {
+                    "label": "İsim"
+                },
                 "lamp_type": {
                     "label": "Tür"
                 },
@@ -1542,6 +1543,9 @@
                     "label": "Konum"
                 },
                 "man_made": {
+                    "label": "Tür"
+                },
+                "manhole": {
                     "label": "Tür"
                 },
                 "map_size": {
@@ -1751,6 +1755,10 @@
                 "plant": {
                     "label": "Enerji Santrali"
                 },
+                "plant/output/electricity": {
+                    "label": "Güç Çıkışı",
+                    "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
                 "population": {
                     "label": "Nüfus"
                 },
@@ -1780,7 +1788,29 @@
                     }
                 },
                 "ref": {
-                    "label": "Kaynak"
+                    "label": "Referans Kodu"
+                },
+                "ref_aeroway_gate": {
+                    "label": "Kapı Numarası"
+                },
+                "ref_golf_hole": {
+                    "label": "Delik No",
+                    "placeholder": "1-18"
+                },
+                "ref_highway_junction": {
+                    "label": "Kesişim Numarası"
+                },
+                "ref_platform": {
+                    "label": "Platform Numarası"
+                },
+                "ref_road_number": {
+                    "label": "Yol Numarası"
+                },
+                "ref_route": {
+                    "label": "Rota Numarası"
+                },
+                "ref_stop_position": {
+                    "label": "Durak Numarası"
                 },
                 "relation": {
                     "label": "Tür"
@@ -1894,9 +1924,6 @@
                 },
                 "social_facility_for": {
                     "label": "Hedef Kitle"
-                },
-                "source": {
-                    "label": "Kaynak"
                 },
                 "sport": {
                     "label": "Spor"
@@ -2034,9 +2061,6 @@
                 },
                 "trees": {
                     "label": "Ağaçlar"
-                },
-                "tunnel": {
-                    "label": "Tünel"
                 },
                 "vending": {
                     "label": "Ürün Çeşidi"
@@ -3795,8 +3819,8 @@
                     "terms": "Kule"
                 },
                 "man_made/wastewater_plant": {
-                    "name": "Atıksu Santrali",
-                    "terms": "Atıksu Santrali"
+                    "name": "Su Arıtma Tesisleri",
+                    "terms": "Su Arıtma Tesisleri, Atıksu Santrali"
                 },
                 "man_made/water_tower": {
                     "name": "Su Kulesi",
@@ -3807,8 +3831,16 @@
                     "terms": "Su Kuyusu"
                 },
                 "man_made/water_works": {
-                    "name": "Su Arıtma Tesisi",
-                    "terms": "Su Arıtma Tesisi"
+                    "name": "Su Şebekesi",
+                    "terms": "Su Şebekesi, Su Dağıtım İstasyonu, İçme Suyu Tesisleri"
+                },
+                "man_made/watermill": {
+                    "name": "Su Değirmeni",
+                    "terms": "Su Değirmeni"
+                },
+                "man_made/windmill": {
+                    "name": "Yel Değirmeni",
+                    "terms": "Yel Değirmeni"
                 },
                 "man_made/works": {
                     "name": "Fabrika",
@@ -3999,8 +4031,7 @@
                     "terms": "Sivil Toplum Örgütü"
                 },
                 "office/physician": {
-                    "name": "Hekim",
-                    "terms": "Hekim"
+                    "name": "Hekim"
                 },
                 "office/political_party": {
                     "name": "Siyasi Parti",
@@ -4982,6 +5013,95 @@
                 "waterway/weir": {
                     "name": "Su Bendi",
                     "terms": "Su Bendi, Su Seddi"
+                }
+            }
+        },
+        "imagery": {
+            "MAPNIK": {
+                "attribution": {
+                    "text": "© OpenStreetMap destekçileri, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (Klasik)"
+            },
+            "OSM_Inspector-Addresses": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap destekçileri, CC-BY-SA"
+                }
+            },
+            "OSM_Inspector-Geometry": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap destekçileri, CC-BY-SA"
+                }
+            },
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap destekçileri, CC-BY-SA"
+                }
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap destekçileri, CC-BY-SA"
+                }
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap destekçileri, CC-BY-SA"
+                }
+            },
+            "OSM_Inspector-Routing": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap destekçileri, CC-BY-SA"
+                }
+            },
+            "OSM_Inspector-Tagging": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, OpenStreetMap destekçileri, CC-BY-SA"
+                }
+            },
+            "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, harita verileri OpenStreetMap destekçileri, ODbL 1.0"
+                }
+            },
+            "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, harita verileri OpenStreetMap destekçileri, ODbL 1.0"
+                }
+            },
+            "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, harita verileri OpenStreetMap destekçileri, ODbL 1.0"
+                }
+            },
+            "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, harita verileri OpenStreetMap destekçileri, ODbL 1.0"
+                }
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© Michael Spreng, CC by-SA 3.0, harita verileri OpenStreetMap destekçileri, ODbL 1.0"
+                }
+            },
+            "hike_n_bike": {
+                "attribution": {
+                    "text": "© OpenStreetMap destekçileri"
+                }
+            },
+            "osm-gps": {
+                "attribution": {
+                    "text": "© OpenStreetMap destekçileri"
+                }
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "© OpenStreetMap destekçileri, CC-BY-SA"
+                },
+                "name": "OpenStreetMap (Siyah & Beyaz)"
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "© OpenStreetMap destekçileri, CC-BY-SA"
                 }
             }
         }

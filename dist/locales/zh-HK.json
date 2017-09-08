@@ -328,8 +328,6 @@
         },
         "commit": {
             "title": "上傳到 OpenStreetMap",
-            "description_placeholder": "簡述你的貢獻 (必填)",
-            "message_label": "變動留言",
             "upload_explanation": "你上載的變更會出現在其他使用 OpenStreetMap 資料的地圖。",
             "upload_explanation_with_user": "你以{user}的名字上載的變更會出現在其他使用 OpenStreetMap 資料的地圖。",
             "save": "上載",
@@ -347,6 +345,24 @@
         "contributors": {
             "list": "由{users}編輯",
             "truncated_list": "由 {users} 和另外 {count} 人編輯"
+        },
+        "info_panels": {
+            "key": "I",
+            "history": {
+                "key": "H"
+            },
+            "location": {
+                "key": "L"
+            },
+            "measurement": {
+                "key": "M",
+                "title": "測量",
+                "geometry": "幾何",
+                "center": "中心點",
+                "perimeter": "周界",
+                "length": "長度",
+                "area": "面積"
+            }
         },
         "geometry": {
             "point": "點",
@@ -410,6 +426,7 @@
         "background": {
             "title": "背景",
             "description": "背景設定",
+            "key": "B",
             "percent_brightness": "{opacity}% 亮度",
             "none": "無",
             "best_imagery": "這地點最為人所知的背景影像",
@@ -422,12 +439,14 @@
             "offset": "於以下灰色範圍內平移或者輸入以米量度的誤差值就可校正對位誤差。",
             "minimap": {
                 "description": "小地圖",
-                "tooltip": "顯示縮小地圖以確定現在被顯示範圍的位置"
+                "tooltip": "顯示縮小地圖以確定現在被顯示範圍的位置",
+                "key": "/"
             }
         },
         "map_data": {
             "title": "地圖資料",
             "description": "地圖資料",
+            "key": "F",
             "data_layers": "資料圖層",
             "fill_area": "填滿範圍",
             "map_features": "地圖特徵",
@@ -486,7 +505,8 @@
         "area_fill": {
             "wireframe": {
                 "description": "不填滿 (以線條顯示)",
-                "tooltip": "啟用框線模式，很容易就看到背景影像。"
+                "tooltip": "啟用框線模式，很容易就看到背景影像。",
+                "key": "W"
             },
             "partial": {
                 "description": "部分填滿",
@@ -607,6 +627,7 @@
         },
         "help": {
             "title": "說明",
+            "key": "H",
             "help": "# 說明\n\n這是[OpenStreetMap]的編輯器 (http://www.openstreetmap.org/)，\n免費而且可以編輯的世界地圖。你可以用來新增和更新\n在你附近的資料，令這個開放源碼和開放資料的地圖\n變得更好。\n你在這地圖裡所作的變更會令其他使用OpenStreetMap的人看得到。\n如要編輯，你需要[登入] (https://www.openstreetmap.org/login)。\n\n[iD 編輯器](http://ideditor.com/)是一個共同合作計劃，[原始碼可在GitHub找到](https://github.com/openstreetmap/iD)。\n",
             "roads": "# 道路\n\n你可以用編輯器創造、修改和刪除道路。道路有不同種類：\n行人路、公路、步行徑、單車徑等等 — 所有路段都可以畫出來。\n\n### 選擇\n\n按一下道路就可選擇。道路的輪廓就會顯現出來，\n小工具選單也會一併顯示在地圖上，\n而道路的更多資訊就會顯示在旁邊的版面。\n\n### 修改\n\n間中你會看到道路並不是與背景圖像或者\nGPS軌跡對齊。你可以調節這些道路，使它們\n在正確的地方。\n\n首先按一下你要更改的道路。道路會顯現出來，你可以\n拖拉道路上的控制點至更佳位置。如果\n你想使道路有更仔細顯示，你可以增加控制點，\n在道路上沒有節的地方按兩下，就可增加一個控制點。\n\n如果道路與另一道路相連，但不是妥善地在地圖上\n連接著，你可以拖拉其中一個控制點至另一條道路上\n，便它們連接。令道路連接是十分重要的，而且是\n駕駛方向的重要資訊。\n\n你可以按一下'移動'工具或者按'M'快速鍵去移動整條\n路，然後按多一下就會將那一次動作儲存。\n\n### 刪除\n\n如果道路完全不正確 — 你在衛星圖像裡看不到，\n而最好實地證實它並不存在 — 你就可以刪除\n它，從地圖中移除。刪除特徵時要特別小心 —\n與其他編輯一樣，每一個人都會看得到結果而衛星圖像\n通常都不是最新的，所以道路可能是新建的。\n\n你可以按一下想刪除的道路，然後\n按垃圾桶圖示或按'Delete'鍵。\n\n### 創造\n\n發現某個地方的道路不在嗎？按一下編輯器\n左上方的'綫'圖示或者按'2'快速鍵就可以\n開始繪畫一條新綫。\n\n在地圖上按一下就可以開始繪畫道路的開端。如果道路\n是現有道路的分支，你可以從分支處按一下開始繪畫。\n\n然後跟據衛星圖像或者GPS，沿著道路的點，\n使它跟著正確的路徑。如果你繪畫的道路與另一道路\n相交，在它們的相交點按一下就可將它們連接。當你\n完成繪畫，按兩下或者按'Return'或'Enter'鍵。\n\n",
             "gps": "# GPS\n\nGPS 追蹤是OpenStreetMap 的寶貴資料來源。這個編輯器\n支援你電腦內的 `.gpx` 檔案。使用智能電話的\n一些應用程式或個人GPS更體就可以搜集得到\n這類的GPS軌跡。\n\n要知道如何運用GPS測量，\n請參閱[用智能電話、GPS或紙繪地圖](http://learnosm.org/en/mobile-mapping/)。\n\n要使用GPX的軌跡繪畫地圖，拖放GPX檔案到編輯器上。\n如辨認得到，它就會於地圖上新增為鮮紫色的綫。\n按'地圖資料'選單右側就可顯示、\n隱藏或縮放這個新的GPX圖層。\n\nGPX軌跡不會直接上載至 OpenStreetMap - 最好的用法\n就要用來繪畫新的地圖、協助你新增特徵、\n或者用來[上載至OpenStreetMap](http://www.openstreetmap.org/trace/create)\n供其他使用者使用。\n",
@@ -675,6 +696,28 @@
         },
         "shortcuts": {
             "title": "鍵盤快速鍵",
+            "toggle": {
+                "key": "?"
+            },
+            "key": {
+                "alt": "Alt",
+                "backspace": "Backspace",
+                "cmd": "Cmd",
+                "ctrl": "Ctrl",
+                "delete": "Delete",
+                "del": "Del",
+                "end": "End",
+                "enter": "Enter",
+                "esc": "Esc",
+                "home": "Home",
+                "option": "Option",
+                "pause": "Pause",
+                "pgdn": "PgDn",
+                "pgup": "PgUp",
+                "return": "Return",
+                "shift": "Shift",
+                "space": "Space"
+            },
             "browsing": {
                 "title": "瀏覽",
                 "navigation": {
@@ -704,7 +747,20 @@
                 }
             },
             "editing": {
-                "title": "編輯"
+                "title": "編輯",
+                "operations": {
+                    "delete": "刪除已選擇特徵"
+                },
+                "commands": {
+                    "copy": "複製已選擇特徵",
+                    "paste": "貼上已複製特徵",
+                    "undo": "還原上一個動作",
+                    "redo": "重做上一個動作",
+                    "save": "儲存變更"
+                }
+            },
+            "tools": {
+                "title": "工具"
             }
         },
         "presets": {
@@ -952,6 +1008,10 @@
                 "brand": {
                     "label": "品牌"
                 },
+                "bridge": {
+                    "label": "種類",
+                    "placeholder": "預設"
+                },
                 "building": {
                     "label": "建築物"
                 },
@@ -1011,6 +1071,9 @@
                         "clockwise": "順時針"
                     }
                 },
+                "clothes": {
+                    "label": "衣物"
+                },
                 "club": {
                     "label": "種類"
                 },
@@ -1026,6 +1089,9 @@
                 "contact/webcam": {
                     "label": "網路相機 URL",
                     "placeholder": "http://example.com/"
+                },
+                "content": {
+                    "label": "內容"
                 },
                 "country": {
                     "label": "國"
@@ -1047,6 +1113,9 @@
                 },
                 "currency_multi": {
                     "label": "外幣種類"
+                },
+                "cutting": {
+                    "label": "種類"
                 },
                 "cycle_network": {
                     "label": "網絡"
@@ -1133,6 +1202,9 @@
                     "label": "電郵",
                     "placeholder": "example@example.com"
                 },
+                "embankment": {
+                    "label": "類"
+                },
                 "emergency": {
                     "label": "急症室"
                 },
@@ -1173,6 +1245,10 @@
                 "fixme": {
                     "label": "整好我"
                 },
+                "ford": {
+                    "label": "類",
+                    "placeholder": "預設"
+                },
                 "fuel": {
                     "label": "燃料"
                 },
@@ -1194,15 +1270,14 @@
                 "generator/method": {
                     "label": "方法"
                 },
+                "generator/output/electricity": {
+                    "placeholder": "50 MW, 100 MW, 200 MW..."
+                },
                 "generator/source": {
                     "label": "來源"
                 },
                 "generator/type": {
                     "label": "種類"
-                },
-                "golf_hole": {
-                    "label": "參攷",
-                    "placeholder": "洞數（一到十八）"
                 },
                 "grape_variety": {
                     "label": "葡萄種類"
@@ -1285,7 +1360,8 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "layer": {
-                    "label": "層"
+                    "label": "層",
+                    "placeholder": "0"
                 },
                 "leaf_cycle": {
                     "label": "換葉週期",
@@ -1344,6 +1420,9 @@
                 },
                 "man_made": {
                     "label": "類別"
+                },
+                "manhole": {
+                    "label": "種類"
                 },
                 "map_size": {
                     "label": "覆蓋範圍"
@@ -1552,6 +1631,9 @@
                 "plant": {
                     "label": "植物"
                 },
+                "plant/output/electricity": {
+                    "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
                 "population": {
                     "label": "人口"
                 },
@@ -1581,7 +1663,37 @@
                     }
                 },
                 "ref": {
-                    "label": "參考"
+                    "label": "參考編號"
+                },
+                "ref_aeroway_gate": {
+                    "label": "登機閘編號"
+                },
+                "ref_golf_hole": {
+                    "label": "洞編號",
+                    "placeholder": "1-18"
+                },
+                "ref_highway_junction": {
+                    "label": "交匯處編號"
+                },
+                "ref_platform": {
+                    "label": "月台編號"
+                },
+                "ref_road_number": {
+                    "label": "道路編號"
+                },
+                "ref_route": {
+                    "label": "幹線編號"
+                },
+                "ref_runway": {
+                    "label": "跑道編號",
+                    "placeholder": "例如 01L/19R"
+                },
+                "ref_stop_position": {
+                    "label": "車站編號"
+                },
+                "ref_taxiway": {
+                    "label": "滑行道編號",
+                    "placeholder": "例如 A5"
                 },
                 "relation": {
                     "label": "類別"
@@ -1695,9 +1807,6 @@
                 },
                 "social_facility_for": {
                     "label": "服務對象"
-                },
-                "source": {
-                    "label": "來源"
                 },
                 "sport": {
                     "label": "運動"
@@ -1837,6 +1946,10 @@
                     "label": "樹"
                 },
                 "tunnel": {
+                    "label": "種類",
+                    "placeholder": "預設"
+                },
+                "tunnel_waterway": {
                     "label": "隧道"
                 },
                 "vending": {
@@ -2231,6 +2344,10 @@
                     "name": "敎堂",
                     "terms": "Christian,Church,基督敎堂,基督教堂,天主堂,天主敎堂,天主教堂,敎堂,教堂,聖堂"
                 },
+                "amenity/place_of_worship/hindu": {
+                    "name": "印度廟",
+                    "terms": "Hindu Temple, 印度教廟"
+                },
                 "amenity/place_of_worship/jewish": {
                     "name": "猶太廟",
                     "terms": "Synagogue,jewish,猶太寺,猶太廟,猶太教堂"
@@ -2238,6 +2355,18 @@
                 "amenity/place_of_worship/muslim": {
                     "name": "清真寺",
                     "terms": "Mosque,Muslim,回教寺,回教廟,清真廟,清真寺"
+                },
+                "amenity/place_of_worship/shinto": {
+                    "name": "神道廟",
+                    "terms": "Shinto Shrine, 神道教廟"
+                },
+                "amenity/place_of_worship/sikh": {
+                    "name": "錫克廟",
+                    "terms": "Sikh Temple, 錫克廟"
+                },
+                "amenity/place_of_worship/taoist": {
+                    "name": "道觀",
+                    "terms": "Taoist Temple, 道教廟"
                 },
                 "amenity/planetarium": {
                     "name": "天象廳",
@@ -2297,6 +2426,10 @@
                 "amenity/school": {
                     "name": "學校範圍",
                     "terms": "學校,中學,小學,學校用地,學校範圍,國際學校"
+                },
+                "amenity/scrapyard": {
+                    "name": "廢料場",
+                    "terms": "Scrap Yard, 廢車場, 廢物場"
                 },
                 "amenity/shelter": {
                     "name": "涼亭",
@@ -2399,6 +2532,10 @@
                 "amenity/veterinary": {
                     "name": "獸醫",
                     "terms": "獸醫, 動物醫生"
+                },
+                "amenity/waste/dog_excrement": {
+                    "name": "狗糞收集箱",
+                    "terms": "Dog Excrement Bin, 狗屎收集箱"
                 },
                 "amenity/waste_basket": {
                     "name": "垃圾桶",
@@ -2699,6 +2836,10 @@
                 "craft/confectionery": {
                     "name": "甜點店",
                     "terms": "糕餅店,糕點店"
+                },
+                "craft/distillery": {
+                    "name": "蒸餾酒廠",
+                    "terms": "Distillery, 蒸餾所"
                 },
                 "craft/dressmaker": {
                     "name": "女裝裁縫",
@@ -3611,6 +3752,14 @@
                     "name": "濾水廠",
                     "terms": "Water Works,供水廠,水務設施,淨水廠"
                 },
+                "man_made/watermill": {
+                    "name": "水車",
+                    "terms": "Watermill, 水磨"
+                },
+                "man_made/windmill": {
+                    "name": "風車",
+                    "terms": "Windmill, 風車"
+                },
                 "man_made/works": {
                     "name": "工廠",
                     "terms": "Factory, 工場"
@@ -3800,8 +3949,7 @@
                     "terms": "NGO Office,志願機構寫字樓,非政府組織,志願組織"
                 },
                 "office/physician": {
-                    "name": "醫生",
-                    "terms": "Physician,醫生"
+                    "name": "醫生"
                 },
                 "office/political_party": {
                     "name": "政黨",

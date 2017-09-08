@@ -1,7 +1,6 @@
 {
     "icon": "highway-footway",
     "fields": [
-        "name",
         "surface",
         "lit",
         "width",

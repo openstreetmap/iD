@@ -9,30 +9,30 @@
             "add_line": {
                 "title": "Joon",
                 "description": "Lisa kaardile teid, tänavaid, jalgteid, ojasid ja teisi jooni.",
-                "tail": "Joone (tee, rada, marsruut vms) joonistamiseks kliki kaardil."
+                "tail": "Klõpsa kaardil, et alustada tee, raja või marsruudi joonistamist."
             },
             "add_point": {
                 "title": "Punkt",
                 "description": "Lisa kaardile restorane, monumente, postkaste ja muid punkte.",
-                "tail": "Klõpsa kaardil punkti lisamiseks."
+                "tail": "Klõpsa kaardil, et lisada punkt."
             },
             "browse": {
                 "title": "Sirvi",
                 "description": "Nihuta ja suumi kaarti."
             },
             "draw_area": {
-                "tail": "Alale punkti lisamiseks tee klikk. Ala lõpetamiseks tee klikk ala esimesele punktile."
+                "tail": "Klõpsa, et lisada alale sõlm. Et ala lõpetada, klõpsa esimesel sõlmel."
             },
             "draw_line": {
-                "tail": "Joonele punktide lisamiseks tee hiirega klikk. Tee klikk teiste joonte peale, et jooni ühendada ja topeltklikk, et joont lõpetada."
+                "tail": "Klõpsa, et lisada joonele sõlm. Et jooni ühendada, klõpsa teistel joontel ja tee topeltklõps, et joon lõpetada."
             }
         },
         "operations": {
             "add": {
                 "annotation": {
                     "point": "Punkt lisatud.",
-                    "vertex": "Joonele lisatud punkt.",
-                    "relation": "Seos lisatud."
+                    "vertex": "Joonele lisatud sõlm.",
+                    "relation": "Relatsioon lisatud."
                 }
             },
             "start": {
@@ -102,30 +102,34 @@
             "delete": {
                 "title": "Kustuta",
                 "description": {
-                    "single": "Kustutad see nähtus jäädavalt.",
-                    "multiple": "Kustuta need nähtused jäädavalt"
+                    "single": "Kustutad see objekt jäädavalt.",
+                    "multiple": "Kustuta need objektid jäädavalt."
                 },
                 "annotation": {
                     "point": "Punkt kustutatud.",
-                    "vertex": "Punkt kustutatud joonelt.",
+                    "vertex": "Sõlm kustutatud joonelt.",
                     "line": "Joon kustutatud.",
                     "area": "Ala kustutatud.",
-                    "relation": "Seos kustutatud.",
-                    "multiple": "{n} nähtust kustutatud."
+                    "relation": "Relatsioon kustutatud.",
+                    "multiple": "{n} objekti kustutatud."
+                },
+                "part_of_relation": {
+                    "single": "Objekti ei saa kustutada, sest see on osa suuremast relatsioonist. Pead kõigepealt selle relatsioonist eemaldama.",
+                    "multiple": "Objekte ei saa kustutada, sest need on osa suurematest relatsioonidest. Pead kõigepealt need relatsioonidest eemaldama."
                 }
             },
             "add_member": {
                 "annotation": "Lisatud relatsiooni liige."
             },
             "delete_member": {
-                "annotation": "Seose liige kustutatud."
+                "annotation": "Relatsiooni liige kustutatud."
             },
             "connect": {
                 "annotation": {
                     "point": "Joon ühendatud punktiga.",
                     "vertex": "Joon ühendatud teise joonega.",
-                    "line": "Tee on ühendatud jooneks.",
-                    "area": "Tee on ühendatud alaks."
+                    "line": "Joon ühendatud joonega.",
+                    "area": "Joon ühendatud alaga."
                 }
             },
             "disconnect": {
@@ -142,8 +146,8 @@
                 "key": "C",
                 "annotation": "Ühendatud {n} objekti.",
                 "not_eligible": "Neid objekte ei saa ühendada.",
-                "restriction": "Neid objekte ei saa ühendada kuna vähemalt üks neist on seose \"{relation}\" liige.",
-                "incomplete_relation": "Neid objekte ei saa ühendada, kuna vähemalt üks neist ei ole täielikult laetud.",
+                "restriction": "Neid objekte ei saa ühendada, kuna vähemalt üks neist on relatsiooni \"{relation}\" liige.",
+                "incomplete_relation": "Neid objekte ei saa ühendada, kuna vähemalt üks neist ei ole täielikult alla laaditud.",
                 "conflicting_tags": "Neid objekte ei saa ühendada kuna osa nende silte on konfliktsete väärtusega."
             },
             "move": {
@@ -155,14 +159,14 @@
                 "key": "M",
                 "annotation": {
                     "point": "Punkt nihutatud.",
-                    "vertex": "Nihutatud Joone punkti.",
+                    "vertex": "Nihutatud joone sõlm.",
                     "line": "Nihutatud joont.",
                     "area": "Nihutatud ala.",
                     "multiple": "Liigutatud mitut objekti."
                 },
                 "incomplete_relation": {
-                    "single": "Seda objekti ei saa liigutada kuna see ei ole veel täielikult alla laetud.",
-                    "multiple": "Neid objekte ei saa liigutada kuna nad ei ole veel täielikult alla laetud."
+                    "single": "Seda objekti ei saa liigutada, kuna see ei ole veel täielikult alla laaditud.",
+                    "multiple": "Neid objekte ei saa liigutada, kuna need ei ole veel täielikult alla laaditud."
                 }
             },
             "reflect": {
@@ -197,6 +201,10 @@
             },
             "rotate": {
                 "title": "Pööra",
+                "description": {
+                    "single": "Pööra objekti ümber keskpunkti.",
+                    "multiple": "Pööra objekte ümber nende keskpunkti."
+                },
                 "key": "R",
                 "annotation": {
                     "line": "Pööratud joont.",
@@ -206,14 +214,14 @@
             },
             "reverse": {
                 "title": "Pööra ümber",
-                "description": "Pööra tee vastassuunda.",
+                "description": "Pööra joon vastassuunda.",
                 "key": "V",
                 "annotation": "Tee on pööratud."
             },
             "split": {
                 "title": "Tükelda",
                 "description": {
-                    "line": "Tükelda see joon kaheks sellest punktist.",
+                    "line": "Tükelda joon selle sõlme kohalt kaheks.",
                     "area": "Jaga selle ala piir kaheks."
                 },
                 "key": "X",
@@ -226,9 +234,9 @@
             },
             "restriction": {
                 "help": {
-                    "toggle": "Kliki, et määrata pöörde piiranguid.",
-                    "toggle_on": "Kliki, et lisada \"{restriction}\" piirang.",
-                    "toggle_off": "Kliki, et eemaldada \"{restriction}\" piirang."
+                    "toggle": "Klõpsa, et vahetada pöörde piiranguid.",
+                    "toggle_on": "Klõpsa, et lisada piirang \"{restriction}\".",
+                    "toggle_off": "Klõpsa, et eemaldada piirang \"{restriction}\"."
                 },
                 "annotation": {
                     "create": "Lisatud pöörde piirang",
@@ -237,7 +245,7 @@
             }
         },
         "undo": {
-            "tooltip": "Tühista: : {action}",
+            "tooltip": "Võta tagasi: {action}",
             "nothing": "Pole midagi tagasi võtta."
         },
         "redo": {
@@ -245,7 +253,7 @@
             "nothing": "Pole midagi uuesti teha."
         },
         "tooltip_keyhint": "Kiirvalik:",
-        "browser_notice": "See redaktor on toetatud järgnevates veebilehitsejates: Firefox, Chrome, Safari, Opera, ja Internet Explorer 11 ning uuemates. Palun uuenda oma veebilehitsejat või kasuta Potlatch 2'te kaardi muutmiseks.",
+        "browser_notice": "Seda redaktorit toetavad järgmised brauserid: Firefox, Chrome, Safari, Opera ning Internet Explorer 11 ja uuemad. Palun uuenda oma brauser või kasuta redaktorit Potlatch 2, et kaarti muuta.",
         "translate": {
             "translate": "Tõlgi",
             "localized_translation_label": "Mitmekeelne nimi",
@@ -255,7 +263,7 @@
         "zoom_in_edit": "Muutmiseks suumi sisse",
         "login": "Logi sisse",
         "logout": "Logi välja",
-        "loading_auth": "OpenStreetMap'iga ühendamine...",
+        "loading_auth": "OpenStreetMapiga ühendamine...",
         "report_a_bug": "Teata veast",
         "help_translate": "Aita tõlkida",
         "feature_info": {
@@ -263,19 +271,18 @@
             "hidden_details": "Need objektid on hetkel peidetud: {details}"
         },
         "commit": {
-            "title": "Lae OpenStreetMapi",
-            "description_placeholder": "Oma muudatuste lühikirjeldus (nõutud)",
-            "message_label": "Muutuskogumi kommentaar",
-            "upload_explanation": "Su salvestatavad muudatused on nähtaval kõikidel kaartidel mis kasutavad OpenStreetMap-i andmeid.",
-            "upload_explanation_with_user": "Su kasutajana {user} salvestatavad muudatused on nähtaval kõikidel kaartidel, mis kasutavad OpenStreetMap-i andmeid.",
-            "save": "Salvesta",
-            "cancel": "Tühista",
-            "changes": "{count} Muudatust",
+            "title": "Laadi OpenStreetMapi",
+            "upload_explanation": "Muudatused, mille üles laadid, on nähtavad kõikidel kaartidel, mis kasutavad OpenStreetMapi andmeid.",
+            "upload_explanation_with_user": "Muudatused, mille kasutajana {user} üles laadid, on nähtavad kõikidel kaartidel, mis kasutavad OpenStreetMapi andmeid.",
+            "save": "Laadi üles",
+            "cancel": "Loobu",
+            "changes": "{count} muudatust",
             "warnings": "Hoiatused",
             "modified": "Muudetud",
             "deleted": "Kustutatud",
             "created": "Loodud",
-            "google_warning": "Sa mainisid Google'it selles kommentaaris: palun arvesta, et Google Maps'ist andmete kopeerimine on rangelt keelatud."
+            "about_changeset_comments": "Muudatuskogumi kommentaaride kohta",
+            "google_warning": "Mainisid selles kommentaaris Google'it. Palun arvesta, et Google Mapsist andmete kopeerimine on rangelt keelatud."
         },
         "contributors": {
             "list": "Muutjad: {users}",
@@ -301,16 +308,16 @@
             "no_documentation_combination": "Selle sildi kohta puudub dokumentatsioon",
             "no_documentation_key": "Selle objektiliigi kohta puudub informatsioon",
             "show_more": "Näita rohkem",
-            "view_on_osm": "Vaata openstreetmap.org lehel",
+            "view_on_osm": "Vaata asukohas openstreetmap.org",
             "all_fields": "Kõik väljad",
             "all_tags": "Kõik sildid",
             "all_members": "Kõik liikmed",
-            "all_relations": "Kõik seosed",
-            "new_relation": "Uus seos...",
+            "all_relations": "Kõik relatsioonid",
+            "new_relation": "Uus relatsioon...",
             "role": "Roll",
             "choose": "Vali objekti liik",
             "results": "{n} tulemust otsingule {search}",
-            "reference": "Vaata OpenStreetMap Wiki lehel",
+            "reference": "Vaata OpenStreetMapi vikis",
             "back_tooltip": "Muuda objekti",
             "remove": "Eemalda",
             "search": "Otsi",
@@ -322,7 +329,7 @@
             "check": {
                 "yes": "Jah",
                 "no": "Ei",
-                "reverser": "Muuda Suunda"
+                "reverser": "Muuda suunda"
             },
             "radio": {
                 "structure": {
@@ -333,16 +340,16 @@
             },
             "add": "Lisa",
             "none": "Puudub",
-            "node": "Punkt",
+            "node": "Sõlm",
             "way": "Joon",
-            "relation": "Seos",
+            "relation": "Relatsioon",
             "location": "Asukoht",
             "add_fields": "Lisa väli:"
         },
         "background": {
             "title": "Taust",
             "description": "Tausta seaded",
-            "percent_brightness": "{opacity}% heledus",
+            "percent_brightness": "heledus {opacity}%",
             "none": "Puudub",
             "custom": "Kohandatud",
             "custom_button": "Muuda kohandatud tausta",
@@ -350,7 +357,7 @@
             "reset": "lähtesta",
             "offset": "Lohista alumist halli kasti, et sättida kattekaardi nihet või siseta nihe meetrites.",
             "minimap": {
-                "description": "Minikaart",
+                "description": "Pisikaart",
                 "tooltip": "Näita väljasuumitud kaarti, et aidata tuvastada kuvatud ala."
             }
         },
@@ -388,15 +395,15 @@
                 "tooltip": "Metsad, põllumaad, pargid, elamumaa, ärimaa.."
             },
             "boundaries": {
-                "description": "Piirjooned",
-                "tooltip": "Administratiivpiirid"
+                "description": "Piirid",
+                "tooltip": "Halduspiirid"
             },
             "water": {
                 "description": "Veekogud",
                 "tooltip": "Jõed, järved, tiigid, hoidlad.."
             },
             "rail": {
-                "description": "Raudtee taristu",
+                "description": "Raudteetaristu",
                 "tooltip": "Raudteed"
             },
             "power": {
@@ -428,16 +435,18 @@
         },
         "restore": {
             "heading": "Sul on salvestamata muudatusi",
-            "description": "Kas soovid taastada eelmise sessiooni käigus tehtud muudatused?"
+            "description": "Kas soovid taastada eelmise seansi käigus tehtud muudatused?",
+            "restore": "Taasta muudatused",
+            "reset": "Hülga muudatused"
         },
         "save": {
             "title": "Salvesta",
-            "help": "Vaata oma muudatused üle ning lae need OpenStreetMap'i, tehes need teistele kasutajatele nähtavaks.",
+            "help": "Vaata muudatused üle ja laadi need OpenStreetMapi, et teha need teistele kasutajatele nähtavaks.",
             "no_changes": "Salvestamist vajavad muudatused puuduvad.",
-            "error": "Salvestamise tekkisid vead",
+            "error": "Salvestamisel esines tõrkeid",
             "status_code": "Server vastas olekukoodiga {code}",
             "unknown_error_details": "Palun kontrolli Internetiühendust.",
-            "uploading": "Muudatuste üleslaadimine OpenStreetMap'i.",
+            "uploading": "Muudatuste üleslaadimine OpenStreetMapi...",
             "unsaved_changes": "Sul on salvestamata muudatusi",
             "conflict": {
                 "header": "Lahenda konfliktsed muudatused",
@@ -448,35 +457,35 @@
                 "keep_remote": "Kasuta tema oma",
                 "restore": "Taasta",
                 "delete": "Jäta kustutatuna",
-                "download_changes": "Või lae alla oma muudatused.",
+                "download_changes": "Või laadi alla oma muudatused.",
                 "done": "Kõik konfliktid lahendatud!",
-                "help": "Teine kasutaja muutis kaardil samu objekte mida sinagi.\nKlikkides allolevatele objektidele näed konflikti detaile ning saad valida\nkas säilitada sinu või teise tasutaja muudatused.\n"
+                "help": "Teine kasutaja muutis kaardil mõnd objekti, mida sinagi muutsid.\nKlõpsa allpool igal objektil, et näha konflikti üksikasju ja et valida, kas säilitada\nenda muudatused või teise kasutaja muudatused.\n"
             }
         },
         "merge_remote_changes": {
             "conflict": {
-                "deleted": "See objekt on kustutatud {user} poolt.",
-                "location": "See objekt on nii sinu kui {user} poolt liigutatud.",
-                "nodelist": "Sõlmi on muudetud nii sinu kui ka {user} poolt.",
-                "memberlist": "Seose liikmeid on muudetud nii sinu kui ka {user} poolt.",
-                "tags": "Sina määrasid <b>{tag}</b> lipiku väärtuseks \"{local}\", {user} aga määras \"{remote}\"."
+                "deleted": "Kasutaja {user} on selle objekti kustutanud.",
+                "location": "Seda objekti olete liigutanud nii sina kui ka kasutaja {user}.",
+                "nodelist": "Sõlmi olete muutnud nii sina kui ka kasutaja {user}.",
+                "memberlist": "Relatsiooni liikmeid olete muutnud nii sina kui ka kasutaja {user}.",
+                "tags": "Määrasid sildi <b>{tag}</b> väärtuseks \"{local}\", {user} aga määras väärtuseks \"{remote}\"."
             }
         },
         "success": {
             "edited_osm": "Sa täiendasid OSM-i!",
-            "just_edited": "Sa täiendasid just OpenStreetMap-i!",
-            "view_on_osm": "Vaata OSM lehel",
-            "facebook": "Jaga Facebook-is",
+            "just_edited": "Täiendasid just OpenStreetMapi!",
+            "view_on_osm": "Vaata OSM-is",
+            "facebook": "Jaga Facebookis",
             "twitter": "Jaga Twitteris",
             "google": "Jaga Google+-is",
-            "help_html": "Sinu muudatused peaksid ilmuma \"Standard\" kihil mõne minuti jooksul. Teistel kihtidel aga ka teatud teatud objektidega võib kauem minna.",
-            "help_link_text": "Detailid"
+            "help_html": "Sinu muudatused peaksid ilmuma kihil \"Standard\" mõne minuti jooksul. Teiste kihtide ja teatud objektidega võib kauem minna.",
+            "help_link_text": "Üksikasjad"
         },
         "confirm": {
-            "cancel": "Tühista"
+            "cancel": "Loobu"
         },
         "splash": {
-            "welcome": "Tere tulemast kasutama iD OpenStreetMap redaktorit",
+            "welcome": "Tere tulemast OpenStreetMapi redaktorisse iD",
             "text": "iD on kasutajasõbralik ja samas võimas töövahend parima vaba maailmakaardi täiendamiseks. See on versioon {version}. Rohkem infot võib leida veebilehelt {website} ja vigadest saab teatada lehel {github}.",
             "walkthrough": "Alusta tutvustust",
             "start": "Alusta muutmist"
@@ -497,8 +506,8 @@
             "untagged_point": "Sildistamata punkt",
             "untagged_line": "Sildistamata joon",
             "untagged_area": "Sildistamata ala",
-            "untagged_relation": "Sildisamatta seos",
-            "many_deletions": "Sa oled kustutamas {n} objekti. Oled sa kindel, et soovid seda teha? See kustutab need kaardilt, mida kõik teised näevad openstreetmap.org lehel.",
+            "untagged_relation": "Sildistamata relatsioon",
+            "many_deletions": "Oled kustutamas {n} objekti. Kas oled sa kindel, et soovid seda teha? See kustutab need kaardilt, mida kõik näevad aadressil openstreetmap.org.",
             "tag_suggests_area": "Silt {tag} viitab, et joon peaks olema ala, kuid see pole ala.",
             "deprecated_tags": "Iganenud sildid: {tags}"
         },
@@ -511,7 +520,7 @@
         "gpx": {
             "local_layer": "Lokaalne fail",
             "drag_drop": "Lohista lehele .gpx, .geojson või .kml fail või kliki nuppu paremal et sirvida",
-            "zoom": "Suumi tasandini",
+            "zoom": "Suumi kihini",
             "browse": "Sirvi faili"
         },
         "mapillary_images": {
@@ -672,6 +681,9 @@
                         "postcode": "Sihtnumber",
                         "street": "Tänav"
                     }
+                },
+                "admin_level": {
+                    "label": "Haldusüksuse järk"
                 },
                 "aerialway/access": {
                     "options": {
@@ -879,9 +891,6 @@
                 "gauge": {
                     "label": "Rööpalaius"
                 },
-                "golf_hole": {
-                    "label": "Viide"
-                },
                 "handrail": {
                     "label": "Käsipuu"
                 },
@@ -929,7 +938,7 @@
                     "label": "Kõrguse piirang"
                 },
                 "maxspeed": {
-                    "label": "Kiirusepiirang"
+                    "label": "Kiiruspiirang"
                 },
                 "name": {
                     "label": "Nimi",
@@ -1050,9 +1059,6 @@
                         "container": "Konteiner"
                     }
                 },
-                "ref": {
-                    "label": "Viide"
-                },
                 "relation": {
                     "label": "Tüüp"
                 },
@@ -1136,9 +1142,6 @@
                 "social_facility": {
                     "label": "Tüüp"
                 },
-                "source": {
-                    "label": "Allikas"
-                },
                 "stop": {
                     "label": "Tüüp",
                     "options": {
@@ -1193,9 +1196,6 @@
                 },
                 "trees": {
                     "label": "Puud"
-                },
-                "tunnel": {
-                    "label": "Tunnel"
                 },
                 "visibility": {
                     "label": "Nähtavus"
@@ -1654,7 +1654,7 @@
                     "terms": "Sein,vall"
                 },
                 "boundary/administrative": {
-                    "name": "Administratiivpiir"
+                    "name": "Halduspiir"
                 },
                 "building": {
                     "name": "Hoone",
@@ -2003,7 +2003,7 @@
                     "terms": "Majadevaheline,elutänav,elamu,linna"
                 },
                 "highway/mini_roundabout": {
-                    "name": "Mini-ringtee"
+                    "name": "Väike ringtee"
                 },
                 "highway/motorway": {
                     "name": "Kiirtee",
@@ -2376,7 +2376,7 @@
                 },
                 "leisure/slipway": {
                     "name": "Slipp",
-                    "terms": "Slip, mini-sadam"
+                    "terms": "Slipp, väikesadam"
                 },
                 "leisure/sports_centre": {
                     "name": "Spordikeskus",
@@ -2678,7 +2678,7 @@
                     "terms": "pooljaam"
                 },
                 "railway/level_crossing": {
-                    "name": "Raudtee ülesõit",
+                    "name": "Raudtee-ülesõidukoht",
                     "terms": "ülesõit,ristumine,rongi"
                 },
                 "railway/monorail": {
@@ -3248,7 +3248,7 @@
                     "name": "Loomaaed"
                 },
                 "traffic_calming": {
-                    "name": "Liikluse rahustus"
+                    "name": "Liikluse aeglustamine"
                 },
                 "traffic_calming/bump": {
                     "name": "Kiirusepiiraja",
@@ -3290,7 +3290,7 @@
                     "name": "Piir"
                 },
                 "type/boundary/administrative": {
-                    "name": "Administratiivpiir"
+                    "name": "Halduspiir"
                 },
                 "type/restriction": {
                     "name": "Piirang"

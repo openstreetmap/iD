@@ -357,9 +357,6 @@
                 "generator/source": {
                     "label": "แหล่งที่มา"
                 },
-                "golf_hole": {
-                    "placeholder": "หมายเลขหลุม (1-18)"
-                },
                 "internet_access": {
                     "label": "การเข้าใช้อินเทอร์เน็ต",
                     "options": {

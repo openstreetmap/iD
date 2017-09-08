@@ -328,10 +328,9 @@
         },
         "commit": {
             "title": "Hochladen zu OpenStreetMap",
-            "description_placeholder": "Eine kurze Beschreibung deiner Beiträge (erforderlich)",
-            "message_label": "Änderungssatz-Kommentar",
             "upload_explanation": "Änderungen, die du hoch lädst, werden auf allen Karten sichtbar, die OpenStreetMap nutzen.",
             "upload_explanation_with_user": "Änderungen, die du als {user} hoch lädst, werden auf allen Karten sichtbar, die OpenStreetMap nutzen.",
+            "request_review": "Ich will meine Änderungen von jemanden überprüfen lassen.",
             "save": "Hochladen",
             "cancel": "Abbrechen",
             "changes": "{count} Änderungen",
@@ -1162,7 +1161,8 @@
                         "subdistrict": "Stadtbezirk",
                         "subdistrict!vn": "Bezirk/Gemeinde/Städtchen",
                         "suburb": "Stadtteil",
-                        "suburb!jp": "Bezirk"
+                        "suburb!jp": "Bezirk",
+                        "unit": "Unit"
                     }
                 },
                 "admin_level": {
@@ -1282,6 +1282,10 @@
                 "brand": {
                     "label": "Marke"
                 },
+                "bridge": {
+                    "label": "Typ",
+                    "placeholder": "Standard"
+                },
                 "building": {
                     "label": "Gebäude"
                 },
@@ -1350,6 +1354,10 @@
                 "collection_times": {
                     "label": "Leerungszeiten"
                 },
+                "comment": {
+                    "label": "Änderrungssatz Kommentar",
+                    "placeholder": "Kurze Beschreibung deines Beitrags (erforderlich)"
+                },
                 "communication_multi": {
                     "label": "Kommunikation..."
                 },
@@ -1383,6 +1391,10 @@
                 },
                 "currency_multi": {
                     "label": "Währungen"
+                },
+                "cutting": {
+                    "label": "Typ",
+                    "placeholder": "Standard"
                 },
                 "cycle_network": {
                     "label": "Netzwerk"
@@ -1469,6 +1481,10 @@
                     "label": "Email",
                     "placeholder": "example@example.com"
                 },
+                "embankment": {
+                    "label": "Typ",
+                    "placeholder": "Standard"
+                },
                 "emergency": {
                     "label": "Notfall"
                 },
@@ -1509,6 +1525,10 @@
                 "fixme": {
                     "label": "Korrigiere mich"
                 },
+                "ford": {
+                    "label": "Typ",
+                    "placeholder": "Standard"
+                },
                 "fuel": {
                     "label": "Kraftstoff"
                 },
@@ -1540,10 +1560,6 @@
                 "generator/type": {
                     "label": "Typ"
                 },
-                "golf_hole": {
-                    "label": "Loch-Nummer",
-                    "placeholder": "1-18"
-                },
                 "grape_variety": {
                     "label": "Traubensorten"
                 },
@@ -1553,6 +1569,10 @@
                 },
                 "handrail": {
                     "label": "Geländer"
+                },
+                "hashtags": {
+                    "label": "Hashtags",
+                    "placeholder": "#Beispiel"
                 },
                 "height": {
                     "label": "Höhe (in Meter)"
@@ -1628,7 +1648,8 @@
                     "placeholder": "1, 2, 3 …"
                 },
                 "layer": {
-                    "label": "Ebene"
+                    "label": "Ebene",
+                    "placeholder": "0"
                 },
                 "leaf_cycle": {
                     "label": "Blätterzyklus",
@@ -1710,6 +1731,10 @@
                 },
                 "maxweight": {
                     "label": "Maximalgewicht"
+                },
+                "milestone_position": {
+                    "label": "Meilensteinposition entlang einer Strecke",
+                    "placeholder": "Position auf eine Dezimalstelle (123,4)"
                 },
                 "mtb/scale": {
                     "label": "Mountainbike-Schwierigkeitsgrad",
@@ -1931,7 +1956,37 @@
                     }
                 },
                 "ref": {
-                    "label": "Referenz"
+                    "label": "Referenzcode"
+                },
+                "ref_aeroway_gate": {
+                    "label": "Gatenummer"
+                },
+                "ref_golf_hole": {
+                    "label": "Lochnummer",
+                    "placeholder": "1-18"
+                },
+                "ref_highway_junction": {
+                    "label": "Verkehrsknotennummer"
+                },
+                "ref_platform": {
+                    "label": "Wartestellennummer"
+                },
+                "ref_road_number": {
+                    "label": "Straßennummer"
+                },
+                "ref_route": {
+                    "label": "Routennummer"
+                },
+                "ref_runway": {
+                    "label": "Startbahn Nummer",
+                    "placeholder": "z.B. 01L/19R"
+                },
+                "ref_stop_position": {
+                    "label": "Haltepunktnummer"
+                },
+                "ref_taxiway": {
+                    "label": "Rollbahn Name",
+                    "placeholder": "z.B. A5"
                 },
                 "relation": {
                     "label": "Typ"
@@ -2047,7 +2102,7 @@
                     "label": "Unterstützter Personenkreis"
                 },
                 "source": {
-                    "label": "Quelle"
+                    "label": "Quellen"
                 },
                 "sport": {
                     "label": "Sport"
@@ -2187,6 +2242,10 @@
                     "label": "Bäume"
                 },
                 "tunnel": {
+                    "label": "Typ",
+                    "placeholder": "Standard"
+                },
+                "tunnel_waterway": {
                     "label": "Tunnel"
                 },
                 "vending": {
@@ -2583,7 +2642,7 @@
                 },
                 "amenity/place_of_worship/hindu": {
                     "name": "Hindutempel",
-                    "terms": "<translate with synonyms or related terms for 'Hindu Temple', separated by commas>"
+                    "terms": "<translate with synonyms or related terms for 'Hindu Temple', separated by commas>hinduistisch"
                 },
                 "amenity/place_of_worship/jewish": {
                     "name": "Sy­n­a­go­ge",
@@ -2595,15 +2654,15 @@
                 },
                 "amenity/place_of_worship/shinto": {
                     "name": "Shintō-Schrein",
-                    "terms": "<translate with synonyms or related terms for 'Shinto Shrine', separated by commas>"
+                    "terms": "<translate with synonyms or related terms for 'Shinto Shrine', separated by commas>Weg der Götter, Shintoismus"
                 },
                 "amenity/place_of_worship/sikh": {
                     "name": "Sikh-Tempel",
-                    "terms": "<translate with synonyms or related terms for 'Sikh Temple', separated by commas>"
+                    "terms": "<translate with synonyms or related terms for 'Sikh Temple', separated by commas>Sikhismus"
                 },
                 "amenity/place_of_worship/taoist": {
                     "name": "Tao-Tempel",
-                    "terms": "<translate with synonyms or related terms for 'Taoist Temple', separated by commas>"
+                    "terms": "<translate with synonyms or related terms for 'Taoist Temple', separated by commas>Taoism, Dao"
                 },
                 "amenity/planetarium": {
                     "name": "Planetarium",
@@ -2671,6 +2730,10 @@
                 "amenity/shelter": {
                     "name": "Unterstand",
                     "terms": "Unterstand, , Wetterschutz, Schutzdach, Schutzraum, Wetterpilz"
+                },
+                "amenity/shower": {
+                    "name": "Dusche",
+                    "terms": "Dusche"
                 },
                 "amenity/social_facility": {
                     "name": "Sozialeinrichtung",
@@ -2772,7 +2835,7 @@
                 },
                 "amenity/waste/dog_excrement": {
                     "name": "Hundekotabfalleimer",
-                    "terms": "<translate with synonyms or related terms for 'Dog Excrement Bin', separated by commas>"
+                    "terms": "<translate with synonyms or related terms for 'Dog Excrement Bin', separated by commas>Hundeexkrementbehälter"
                 },
                 "amenity/waste_basket": {
                     "name": "Mülleimer",
@@ -2801,6 +2864,58 @@
                 "area/highway": {
                     "name": "Straßenbelag",
                     "terms": "Straßenbelag, Straßenoberfläche, Straßenzustand"
+                },
+                "attraction/amusement_ride": {
+                    "name": "Vergnügungsfahrt",
+                    "terms": "Vergnügungsfahrt, Fahrbetrieb"
+                },
+                "attraction/animal": {
+                    "name": "Tier",
+                    "terms": "Tier"
+                },
+                "attraction/big_wheel": {
+                    "name": "Riesenrad",
+                    "terms": "Riesenrad"
+                },
+                "attraction/bumper_car": {
+                    "name": "Autodrom",
+                    "terms": "Autodrom"
+                },
+                "attraction/bungee_jumping": {
+                    "name": "Bungee Jumping",
+                    "terms": "Bungee Jumping"
+                },
+                "attraction/carousel": {
+                    "name": "Karussell",
+                    "terms": "Karussell"
+                },
+                "attraction/dark_ride": {
+                    "name": "Geisterbahn",
+                    "terms": "Geisterbahn"
+                },
+                "attraction/drop_tower": {
+                    "name": "Fallturm",
+                    "terms": "Fallturm"
+                },
+                "attraction/pirate_ship": {
+                    "name": "Piratenschiff",
+                    "terms": "Piratenschiff"
+                },
+                "attraction/river_rafting": {
+                    "name": "Rafting",
+                    "terms": "Rafting"
+                },
+                "attraction/roller_coaster": {
+                    "name": "Achterbahn",
+                    "terms": "Achterbahn"
+                },
+                "attraction/train": {
+                    "name": "Touristenzug",
+                    "terms": "Touristenzug"
+                },
+                "attraction/water_slide": {
+                    "name": "Wasserrutsche",
+                    "terms": "Wasserrutsche, Wasserrutschbahn"
                 },
                 "barrier": {
                     "name": "Barriere",
@@ -3240,6 +3355,10 @@
                     "name": "Hydrant",
                     "terms": "Hydrant,Löschwasserentnahmestelle"
                 },
+                "emergency/life_ring": {
+                    "name": "Rettungsring",
+                    "terms": "Rettungsring"
+                },
                 "emergency/no": {
                     "name": "keine Notzufahrt"
                 },
@@ -3261,8 +3380,8 @@
                     "terms": "Eingang/Ausgang, Zugang/Abgang, Einfahrt/Ausfahrt, Eintritt/Austritt"
                 },
                 "footway/crossing": {
-                    "name": "Straßenkreuzung",
-                    "terms": "Straßenkreuzung, Kreuzung"
+                    "name": "Fußgängerüberweg",
+                    "terms": "Fußgängerüberweg, Fußwegstraßenkreuzung, Überweg"
                 },
                 "footway/crosswalk": {
                     "name": "Fußgängerüberweg",
@@ -4009,6 +4128,10 @@
                     "name": "Regenwasserabfluss",
                     "terms": "Regenwasserabfluss, Straßenablauf, Einlaufgitter"
                 },
+                "manhole/telecom": {
+                    "name": "Telekommunikationskabel-Wartungszugang",
+                    "terms": "Telekommunikationskabel-Wartungszugang"
+                },
                 "natural": {
                     "name": "Natur",
                     "terms": "natürlich"
@@ -4194,8 +4317,7 @@
                     "terms": "NRO, Nichtregierungsorganisation"
                 },
                 "office/physician": {
-                    "name": "Arztpraxis",
-                    "terms": "Praxis"
+                    "name": "Arztpraxis"
                 },
                 "office/political_party": {
                     "name": "Partei",
@@ -4256,7 +4378,7 @@
                 },
                 "place/square": {
                     "name": "Platz",
-                    "terms": "Platz"
+                    "terms": "Platz, Plaza, Vorplatz, Dorfplatz, Kirchplatz, Fußgängerplatz"
                 },
                 "place/suburb": {
                     "name": "Stadtteil / Vorort",
@@ -4335,9 +4457,17 @@
                     "name": "Ehemalige Eisenbahnstrecke",
                     "terms": "Abgebaute Eisenbahnstrecke, Verfallene Eisenbahn, Aufgegebene Bahnstrecke"
                 },
+                "railway/buffer_stop": {
+                    "name": "Prellbock",
+                    "terms": "<translate with synonyms or related terms for 'Buffer Stop', separated by commas>Puffer, Pufferwehr, Gleisabschlussbock"
+                },
                 "railway/crossing": {
                     "name": "Bahnübergang (Pfad)",
                     "terms": "Eisenbahnübergang (Fußgänger),Eisenbahnfussgängerkreuzung"
+                },
+                "railway/derail": {
+                    "name": "Gleissperre",
+                    "terms": "Gleissicherung"
                 },
                 "railway/disused": {
                     "name": "Unbenutzte Eisenbahnstrecke",
@@ -4355,6 +4485,10 @@
                     "name": "Bahnübergang (Straße)",
                     "terms": "Eisenbagnkreuzung (Straße), Eisenbahnstraßenkreuzung"
                 },
+                "railway/milestone": {
+                    "name": "Eisenbahn Meilenstein",
+                    "terms": "Eisenbahnmeilenstein entlang einer Strecke"
+                },
                 "railway/monorail": {
                     "name": "Einschienenbahn",
                     "terms": "Einschienenbahn"
@@ -4371,6 +4505,10 @@
                     "name": "Eisenbahnschienen",
                     "terms": "Gleise, Eisenbahnschienen, Schiene"
                 },
+                "railway/signal": {
+                    "name": "Eisenbahnsignal",
+                    "terms": "<translate with synonyms or related terms for 'Railway Signal', separated by commas>"
+                },
                 "railway/station": {
                     "name": "Bahnhof",
                     "terms": "Bahnhof, Haltestelle"
@@ -4382,6 +4520,14 @@
                 "railway/subway_entrance": {
                     "name": "U-Bahn-Eingang",
                     "terms": "U-Bahn-Eingang, Eingang zur U-Bahn"
+                },
+                "railway/switch": {
+                    "name": "Eisenbahnweiche",
+                    "terms": "Eisenbahnkreuzungsweiche"
+                },
+                "railway/train_wash": {
+                    "name": "Zugwäsche",
+                    "terms": "Zugwaschstraße, Zugwaschanlage"
                 },
                 "railway/tram": {
                     "name": "Straßenbahngleise",
@@ -5206,6 +5352,13 @@
                 },
                 "description": "Standard-DigitalGlobe-Satellitenbilder",
                 "name": "DigitalGlobe Standard"
+            },
+            "EsriWorldImagery": {
+                "attribution": {
+                    "text": "Bedingungen & Feedback"
+                },
+                "description": "Esri world imagery.",
+                "name": "Esri World Imagery"
             },
             "MAPNIK": {
                 "attribution": {

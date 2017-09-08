@@ -26,6 +26,155 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.4.1
+##### August 26, 2017
+
+#### :bug: Bugfixes
+
+* Write post-save count, not pre-save count to the changesets_count tag ([#4283])
+
+[#4283]: https://github.com/openstreetmap/iD/issues/4283
+
+
+# 2.4.0
+##### August 25, 2017
+
+#### :mega: Release Highlights
+
+* :artificial_satellite: We added a **new global imagery layer**: Esri World Imagery<br/>
+Thank you Esri for making your imagery available for OSM use!<br/>
+_Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>)_
+
+#### :tada: New Features
+
+* Updates to save workflow ([#4223]):
+  * Add `review_requested` changeset tag and checkbox ([#4133], thanks [@kepta])
+  * Add `source` changeset tag and multiselect field
+  * Add `hashtags` changeset tag, API parameter, and auto fill hashtags from `comment` ([#2834])
+  * Write changeset tags for new mappers to indicate walkthrough progress - These tags all start with `ideditor:` ([#3968])
+  * Write changeset tag for `changesets_count` - it will contain `"0"` for someone making their first edit ([#3968])
+  * Refactor `uiCommit` into several smaller modules
+* Add `addr:unit` input to address field for many countries ([#4235], thanks [@JamesKingdom])
+* Make rotation and reflection operations available for more geometry types ([#4237])
+* Change raw tag editor `readOnlyTags` function to accept array of regular expressions
+* `name` field is no longer automatically added to every preset ([#4200], [#4210], [#4201] thanks [@JamesKingdom])
+* Field refactor ([#3914], [#4214])
+  * Add options for fields, allow unwrapped fields (no label, buttons, etc)
+  * `uiField` can now be used anywhere, not just inside the preset editor
+  * Rename `uiPreset` -> `uiPresetEditor` (consistent with raw tag editor, raw member editor, etc)
+
+[#4237]: https://github.com/openstreetmap/iD/issues/4237
+[#4235]: https://github.com/openstreetmap/iD/issues/4235
+[#4133]: https://github.com/openstreetmap/iD/issues/4133
+[#4223]: https://github.com/openstreetmap/iD/issues/4223
+[#4214]: https://github.com/openstreetmap/iD/issues/4214
+[#4210]: https://github.com/openstreetmap/iD/issues/4210
+[#4201]: https://github.com/openstreetmap/iD/issues/4201
+[#4200]: https://github.com/openstreetmap/iD/issues/4200
+[#3968]: https://github.com/openstreetmap/iD/issues/3968
+[#3914]: https://github.com/openstreetmap/iD/issues/3914
+[#2834]: https://github.com/openstreetmap/iD/issues/2834
+[@kepta]: https://github.com/kepta
+[@JamesKingdom]: https://github.com/JamesKingdom
+
+
+#### :sparkles: Usability
+
+* In save mode, <kbd>esc</kbd> should cancel and return to browse mode ([#4230])
+* Recognize more kinds of concrete surface as "paved"
+* When drawing, ignore accidental clicks on mode buttons ([#4042])
+* Change to 80px arrow key panning (this matches Leaflet default) ([#4207])
+* Smoother border around the round vertex preset icon circles ([#4190])
+* Render railway platform slightly different from sidewalk ([#4182])
+* Treat a few special tags as areas even in the absence of a proper `area=yes` tag. ([#4194])
+
+[#4230]: https://github.com/openstreetmap/iD/issues/4230
+[#4207]: https://github.com/openstreetmap/iD/issues/4207
+[#4194]: https://github.com/openstreetmap/iD/issues/4194
+[#4190]: https://github.com/openstreetmap/iD/issues/4190
+[#4182]: https://github.com/openstreetmap/iD/issues/4182
+[#4042]: https://github.com/openstreetmap/iD/issues/4042
+
+
+#### :bug: Bugfixes
+
+* Include imagery offset when calculating tiles for background layer ([#4232])
+* Return to browse mode when zooming out beyond edit limit ([#4184])
+* Make sure bool url params actually contain value 'true' ([#4222])
+
+[#4232]: https://github.com/openstreetmap/iD/issues/4232
+[#4222]: https://github.com/openstreetmap/iD/issues/4222
+[#4184]: https://github.com/openstreetmap/iD/issues/4184
+
+
+#### :earth_asia: Localization
+
+* Update Chinese address format ([#4248], thanks [@Stenive])
+* Swap placement of increment/decrement spin buttons when RTL
+* Fix RTL styling for info panel close buttons
+* Fix RTL styling for spin control and form buttons
+
+[#4248]: https://github.com/openstreetmap/iD/issues/4248
+[@Stenive]: https://github.com/Stenive
+
+
+#### :hourglass: Performance
+
+* Use `requestIdleCallback` in supported browsers for deferred data fetching ([#4259], thanks [@kepta])
+  * Avoid reparsing duplicate entities that appear across adjacent OSM tiles
+  * Schedule parsing as a low priority task
+  * Schedule redraws during idle browser times
+
+[#4259]: https://github.com/openstreetmap/iD/issues/4259
+[@kepta]: https://github.com/kepta
+
+
+#### :rocket: Presets
+
+* Add signpost term to guidepost preset ([#4277], thanks [@JamesKingdom])
+* Remove maxspeed field from living street ([#4260], thanks [@JamesKingdom])
+* Make `office=physician` non-searchable ([#4255], thanks [@M1dgard])
+* Add preset for `amenity=shower` ([#4256], thanks [@JamesKingdom])
+* Add preset for `emergency=life_ring` ([#4251], thanks [@JamesKingdom])
+* Allow traffic mirror preset on vertex ([#4250], thanks [@JamesKingdom])
+* Add presets for many theme park attractions ([#4236], thanks [@willemarcel])
+* Improve search terms for wetland preset ([#4226], thanks [@boothym])
+* Add jetty search term to `amenity=pier` preset ([#4224], thanks [@boothym])
+* Remove `bin=yes` from excrement bag vending machine ([#4191])
+* Improve search terms for group home and social facility presets ([#4219], thanks [@JamesKingdom])
+* Allow aerialway station to be drawn as an area ([#4217], thanks [@JamesKingdom])
+* Improve search terms for T-bar lift ([#4217], thanks [@JamesKingdom])
+* Add hedge preset to barrier category ([#4215], thanks [@Stalfur])
+* Add railway presets for Derailer, Milestone, Signal, Switch, Train Wash and icons ([#4196], thanks [@JamesKingdom])
+* Add railway preset for Buffer Stop, and icon ([#4192], thanks [@JamesKingdom])
+* Replace generic "Reference" field with more specific named fields ([#4180], thanks [@JamesKingdom])
+* Add preset for Telecom Manhole ([#4185], thanks [@JamesKingdom])
+
+[#4277]: https://github.com/openstreetmap/iD/issues/4277
+[#4260]: https://github.com/openstreetmap/iD/issues/4260
+[#4255]: https://github.com/openstreetmap/iD/issues/4255
+[#4256]: https://github.com/openstreetmap/iD/issues/4256
+[#4251]: https://github.com/openstreetmap/iD/issues/4251
+[#4250]: https://github.com/openstreetmap/iD/issues/4250
+[#4236]: https://github.com/openstreetmap/iD/issues/4236
+[#4226]: https://github.com/openstreetmap/iD/issues/4226
+[#4224]: https://github.com/openstreetmap/iD/issues/4224
+[#4219]: https://github.com/openstreetmap/iD/issues/4219
+[#4217]: https://github.com/openstreetmap/iD/issues/4217
+[#4215]: https://github.com/openstreetmap/iD/issues/4215
+[#4196]: https://github.com/openstreetmap/iD/issues/4196
+[#4192]: https://github.com/openstreetmap/iD/issues/4192
+[#4191]: https://github.com/openstreetmap/iD/issues/4191
+[#4185]: https://github.com/openstreetmap/iD/issues/4185
+[#4180]: https://github.com/openstreetmap/iD/issues/4180
+
+[@JamesKingdom]: https://github.com/JamesKingdom
+[@M1dgard]: https://github.com/M1dgard
+[@willemarcel]: https://github.com/willemarcel
+[@boothym]: https://github.com/boothym
+[@Stalfur]: https://github.com/Stalfur
+
+
 # 2.3.2
 ##### July 24, 2017
 

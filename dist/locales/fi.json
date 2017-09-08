@@ -256,8 +256,6 @@
         },
         "commit": {
             "title": "Tallenna OpenStreetMapiin",
-            "description_placeholder": "Lyhyt kuvaus karttaan tehdyistä muutoksista (pakollinen)",
-            "message_label": "Muutoskokoelman kommentti",
             "upload_explanation": "Palvelimelle tallennettavat muutokset tulevat pian näkyviin kaikkiin OpenStreetMap-kartta-aineistoa käyttäviin palveluihin.",
             "upload_explanation_with_user": "Muutokset tallennetaan palvelimelle käyttäjätunnisteella {user} ja tulevat pian näkyviin kaikkiin OpenStreetMap-kartta-aineistoa käyttäviin palveluihin.",
             "save": "Tallenna",
@@ -1163,10 +1161,6 @@
                 "generator/type": {
                     "label": "Tyyppi"
                 },
-                "golf_hole": {
-                    "label": "Väylänumero",
-                    "placeholder": "Väylänumero (1-18)"
-                },
                 "handicap": {
                     "label": "Tasoitussuositus (HCP)",
                     "placeholder": "1-18"
@@ -1537,9 +1531,6 @@
                         "container": "Säiliö"
                     }
                 },
-                "ref": {
-                    "label": "Tie- tai linjanumero"
-                },
                 "relation": {
                     "label": "Tyyppi"
                 },
@@ -1652,9 +1643,6 @@
                 "social_facility_for": {
                     "label": "Kohderyhmä"
                 },
-                "source": {
-                    "label": "Lähde"
-                },
                 "stars": {
                     "label": "Tähdet"
                 },
@@ -1757,9 +1745,6 @@
                 },
                 "trees": {
                     "label": "Puut"
-                },
-                "tunnel": {
-                    "label": "Tunneli"
                 },
                 "visibility": {
                     "label": "Näkyvyys",

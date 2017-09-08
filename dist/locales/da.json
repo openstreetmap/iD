@@ -2,7 +2,7 @@
     "da": {
         "modes": {
             "add_area": {
-                "title": "Område",
+                "title": "Områdechangeset",
                 "description": "Tilføj parker, bygninger, søer, eller andre områder til kortet.",
                 "tail": "Klik på kortet for at påbegynde et område, såsom en park, sø eller bygning."
             },
@@ -328,8 +328,6 @@
         },
         "commit": {
             "title": "Upload til OpenStreetMap",
-            "description_placeholder": "Skriv en kort beskrivelse af dit bidrag (påkrævet)",
-            "message_label": "Ændringssætkommentarer",
             "upload_explanation": "De ændringer du uploader vil blive synlige på alle kort der bruger OpenStreetMap-data.",
             "upload_explanation_with_user": "Ændringer du uploader under brugernavnet {user} vil blive synlige på alle kort der bruger OpenStreetMap-data.",
             "save": "Upload",
@@ -347,6 +345,49 @@
         "contributors": {
             "list": "Redigeringer af {users}",
             "truncated_list": "Redigeringer af {users} og {count} andre"
+        },
+        "info_panels": {
+            "key": "I",
+            "background": {
+                "key": "B",
+                "title": "Baggrund",
+                "zoom": "Zoom",
+                "vintage": "Årgang",
+                "unknown": "Ukendt",
+                "show_tiles": "Vis Kort-fliser",
+                "hide_tiles": "Skjul Kort-fliser"
+            },
+            "history": {
+                "key": "H",
+                "title": "Historik",
+                "selected": "{n} markerede",
+                "version": "Version",
+                "last_edit": "Sidst ændret",
+                "edited_by": "Ændret af",
+                "changeset": "Ændringssæt",
+                "unknown": "Ukendt",
+                "link_text": "Historik på openstreetmap.org"
+            },
+            "location": {
+                "key": "L",
+                "title": "Lokation",
+                "unknown_location": "Ukendt lokation"
+            },
+            "measurement": {
+                "key": "M",
+                "title": "Målinger",
+                "selected": "{n} markeret",
+                "geometry": "Geometri",
+                "closed": "lukket",
+                "center": "Centrum",
+                "perimeter": "Omkreds",
+                "length": "Længde",
+                "area": "Areal",
+                "centroid": "Geometrisk centrum",
+                "location": "Lokation",
+                "metric": "Metrisk",
+                "imperial": "Imperial"
+            }
         },
         "geometry": {
             "point": "punkt",
@@ -410,24 +451,28 @@
         "background": {
             "title": "Baggrund",
             "description": "Baggrundsindstillinger",
+            "key": "B",
             "percent_brightness": "{opacity} % lysstyrke",
             "none": "Ingen",
             "best_imagery": "Bedst kendte luftfotokilde for denne her lokalitet",
             "switch": "Skift tilbage til denne baggrund",
             "custom": "Brugerdefineret",
             "custom_button": "Rediger brugerdefineret baggrund",
+            "custom_prompt": "Indtast en URL-skabelon for kort-fliser. Gyldige formater er:\n   - {zoom}/{z}, {x}, {y} til Z/X/Y flise-skemaer\n   - {ty} til omvendte Y-koordinater i TMS-stil\n   - {u} til quad-flise-skemaer\n   - {switch:a,b,c} til multipleksning af DNS-server\n\nEksempel:\n{example}",
             "fix_misalignment": "Juster billedets offset",
             "imagery_source_faq": "Hvem er ophavsmand til luftfotoet?",
             "reset": "nulstil",
             "offset": "Træk et hvert sted i det grå område nedenfor for at justere billedets offset eller indtast offset-værdien i meter.",
             "minimap": {
                 "description": "Minikort",
-                "tooltip": "Vis et udzommet kort for at hjælpe med at lokalisere det viste område."
+                "tooltip": "Vis et udzommet kort for at hjælpe med at lokalisere det viste område.",
+                "key": "/"
             }
         },
         "map_data": {
             "title": "Kortdata",
             "description": "Kortdata",
+            "key": "F",
             "data_layers": "Datalag",
             "fill_area": "Udfyldning af områder",
             "map_features": "Kortobjekter",
@@ -486,7 +531,8 @@
         "area_fill": {
             "wireframe": {
                 "description": "Ingen fyld (trådnet)",
-                "tooltip": "At slå visning med trådnet til gør det let at se baggrundsbilledet."
+                "tooltip": "At slå visning med trådnet til gør det let at se baggrundsbilledet.",
+                "key": "W"
             },
             "partial": {
                 "description": "Delvist udfyldt",
@@ -499,7 +545,9 @@
         },
         "restore": {
             "heading": "Du har ændringer der ikke er gemt endnu",
-            "description": "Ønsker du at gendanne ikke gemte ændringer fra en tidligere redigeringssession?"
+            "description": "Ønsker du at gendanne ikke gemte ændringer fra en tidligere redigeringssession?",
+            "restore": "Gendan mine ændringer",
+            "reset": "Kasser mine ændringer"
         },
         "save": {
             "title": "Gem",
@@ -609,6 +657,7 @@
         },
         "help": {
             "title": "Hjælp",
+            "key": "H",
             "help": "# Hjælp\n\nDette er et redigeringsværktøj til [OpenStreetMap](http://www.openstreetmap.org/), det åbne og redigerbare verdenskort. Du kan bruge dette værktøj til at opdatere geodata i dit lokalområde. Derved skaber du et bedre verdenskort med open source og frie geodata til gavn for alle.\n\nDine ændringer på kortet vil blive synligt for alle og enhver der benytter OpenStreetMap. For at lave redigeringer skal du være [logget ind](https://www.openstreetmap.org/login).\n\nDette værktøj, kaldet [iD-editoren](http://ideditor.com/), er et kollaborativt projekt og dets [kildekode er tilgængelig på GitHub](https://github.com/openstreetmap/iD).\n",
             "roads": "# Veje\n\nDu kan oprette, tilrette og slette veje med dette tegneværktøj. Veje kan være af mange forskellige typer: stier, landeveje, spor, cykelstier m.v. Enhver ofte benyttet rute kan kortlægges.\n\n### Markering\n\nKlik på en vej for at markere den. Et omrids dukker op sammen med en lille værktøjsmenu og et sidepanel der viser flere oplysninger om vejen.\n\n### Ændring\n\nOfte ses veje der ikke er justeret i forhold til luftfotoet bag dem eller i forhold til et GPS-spor. Du kan justere disse veje så de er placeret rigtigt.\n\nKlik først på vejen du vil ændre. Dette fremhæver den og viser kontrolpunkter langs med den som kan trækkes det rigtige sted hen. Hvis du har brug for flere kontrolpunkter for at gøre vejen mere detaljeret, kan du dobbeltklikke på en del af vejen, så tilføjes et nyt punkt her.\n\nHvis vejen er forbundet til andre veje, men ikke er korrekt forbundet på kortet, så træk et af kontrolpunkterne hen på den anden vej for at koble dem sammen. Det er vigtigt for kortet, faktisk vitalt for rutevejledninger, at veje er forbundet.\n\nDu kan også klikke på flytteværktøjet eller trykke på tastegenvejen \"M\" for at flytte hele vejen på en gang, og så klikke igen for at gemme flytningen.\n\n### Sletning\n\nHvis en vej er helt forkert - du kan ikke se den på et luftfoto og du har ideelt set fået bekræftet at vejen ikke findes lokalt - så kan du slette vejen. Men pas på med at slette hvad andre har lavet - som med andre ændringer er resultatet synligt for alle, og luftfoto kan være forældede så vejen kunne være bygget i mellemtiden.\n\nDu kan slette en bygning ved at vælge den og klikke på skraldespands-ikonet - alternativt kan du bruge slet-tasten på dit tastatur.\n\n### Oprettelse\n\nHar du fundet et sted hvor der skulle være en vej, men den er ikke på kortet? Klik på Linje-ikonet i øverste venstre del af tegneværktøjet eller klik på tastegenvejen \"2\" for at tegne en linje.\n\nKlik på begyndelsen af vejen for at påbegynde den. Hvis vejen forgrener sig fra en eksisterende vej, så begynd vejen der hvor de er forbundet.\n\nKlik derefter på punkter på vejens forløb så det passer med luftfoto eller GPS-spor. Hvis vejen du tegner krydser en anden vej, så kobl dem sammen ved at klikke på punktet hvor de skærer hinanden. Når du er færdig med at tegne, så dobbeltklik eller tryk på enter-tasten på tastaturet.\n",
             "gps": "# GPS\n\nIndsamlede GPS-spor er en værdifuld kilde til data for OpenStreetMap. Denne editor understøtter lokale spor – '.gpx'-filer på din lokale computer. Du kan indsamle denne form for GPS-spor med en række smartphone-applikationer såvel som personlige GPS-enheder.\n\nLæs artiklen [Mapping with a Smartphone, GPS or Paper](http://learnosm.org/en/mobile-mapping/) (på engelsk) for nærmere information om, hvordan du optager et GPS-spor.\n\nFor at bruge et GPX-spor til kortlægning, skal du trække og slippe  GPX-filen over på kort-editoren. Hvis sporet bliver accepteret, vil det blive tilføjet kortet som en lys lilla linje. Klik på \"Kortdata\"-menuen til højre for at aktivere, deaktivere eller zoome til dette nye GPX-drevne lag.\n\nGPX-sporet bliver ikke direkte uploadet til OpenStreetMap, men vises kun i den nuværende redigeringssession i iD. Den bedste måde at bruge sporet på, er at tegne på kortet mens du bruger sporet som en rettesnor til de nye objekter,\ndu tilføjer. {Upload det også gerne til OpenStreetMap](http://www.openstreetmap.org/trace/create), så andre brugere kan bruge det.\n",
@@ -1168,6 +1217,9 @@
                         "clockwise": "Med uret"
                     }
                 },
+                "clothes": {
+                    "label": "Beklædning"
+                },
                 "club": {
                     "label": "Type"
                 },
@@ -1183,6 +1235,9 @@
                 "contact/webcam": {
                     "label": "Webcam-URL",
                     "placeholder": "http://example.com/"
+                },
+                "content": {
+                    "label": "Indhold"
                 },
                 "country": {
                     "label": "Land"
@@ -1351,15 +1406,15 @@
                 "generator/method": {
                     "label": "Metode"
                 },
+                "generator/output/electricity": {
+                    "label": "Udgangseffekt",
+                    "placeholder": "50 MW, 100 MW, 200 MW..."
+                },
                 "generator/source": {
                     "label": "Kilde"
                 },
                 "generator/type": {
                     "label": "Type"
-                },
-                "golf_hole": {
-                    "label": "Reference",
-                    "placeholder": "Hulnummer (1-18)"
                 },
                 "grape_variety": {
                     "label": "Vinsorteliste"
@@ -1431,6 +1486,9 @@
                 "kerb": {
                     "label": "Kantsten"
                 },
+                "label": {
+                    "label": "Opmærkning"
+                },
                 "lamp_type": {
                     "label": "Type"
                 },
@@ -1500,6 +1558,9 @@
                     "label": "Lokalitet"
                 },
                 "man_made": {
+                    "label": "Type"
+                },
+                "manhole": {
                     "label": "Type"
                 },
                 "map_size": {
@@ -1709,6 +1770,10 @@
                 "plant": {
                     "label": "Kraftstation"
                 },
+                "plant/output/electricity": {
+                    "label": "Udgangseffekt",
+                    "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
                 "population": {
                     "label": "Befolkning"
                 },
@@ -1738,7 +1803,29 @@
                     }
                 },
                 "ref": {
-                    "label": "Reference"
+                    "label": "Referencekode"
+                },
+                "ref_aeroway_gate": {
+                    "label": "Gate-nummer"
+                },
+                "ref_golf_hole": {
+                    "label": "Hulnummer",
+                    "placeholder": "1-18"
+                },
+                "ref_highway_junction": {
+                    "label": "Krydsnummer"
+                },
+                "ref_platform": {
+                    "label": "Spornummer"
+                },
+                "ref_road_number": {
+                    "label": "Vejnummer"
+                },
+                "ref_route": {
+                    "label": "Rutenummer"
+                },
+                "ref_stop_position": {
+                    "label": "Stoppestedsnummer"
                 },
                 "relation": {
                     "label": "Type"
@@ -1852,9 +1939,6 @@
                 },
                 "social_facility_for": {
                     "label": "Serviceret gruppe"
-                },
-                "source": {
-                    "label": "Kilde"
                 },
                 "sport": {
                     "label": "Sportsgren"
@@ -1992,9 +2076,6 @@
                 },
                 "trees": {
                     "label": "Træer"
-                },
-                "tunnel": {
-                    "label": "Tunnel"
                 },
                 "vending": {
                     "label": "Varetype"
@@ -2388,6 +2469,10 @@
                     "name": "Kirke",
                     "terms": "Kirke, Folkekirke"
                 },
+                "amenity/place_of_worship/hindu": {
+                    "name": "Hindu-tempel",
+                    "terms": "tempel,hindu"
+                },
                 "amenity/place_of_worship/jewish": {
                     "name": "Synagoge",
                     "terms": "Synagoge, Jødisk Synagoge"
@@ -2395,6 +2480,18 @@
                 "amenity/place_of_worship/muslim": {
                     "name": "Moské",
                     "terms": "Moske, Moské"
+                },
+                "amenity/place_of_worship/shinto": {
+                    "name": "Shinto-tempel",
+                    "terms": "tempel,shinto,shin,kami"
+                },
+                "amenity/place_of_worship/sikh": {
+                    "name": "Sikh-tempel",
+                    "terms": "sikh,tempel"
+                },
+                "amenity/place_of_worship/taoist": {
+                    "name": "Taoistisk tempel",
+                    "terms": "tao,taoisme,tempel"
                 },
                 "amenity/planetarium": {
                     "name": "Planetarium",
@@ -2454,6 +2551,10 @@
                 "amenity/school": {
                     "name": "Skolegrund",
                     "terms": "Skoleområde, Skolegrund"
+                },
+                "amenity/scrapyard": {
+                    "name": "Skrotplads",
+                    "terms": "skrald,skrot,genbrug,affald"
                 },
                 "amenity/shelter": {
                     "name": "Shelter",
@@ -2556,6 +2657,10 @@
                 "amenity/veterinary": {
                     "name": "Dyrlæge",
                     "terms": "Dyrlæge, Veterinærdyrlæge"
+                },
+                "amenity/waste/dog_excrement": {
+                    "name": "Affaldsspand til hundeekskrementer",
+                    "terms": "lort,hund,ekskrement"
                 },
                 "amenity/waste_basket": {
                     "name": "Skraldespand",
@@ -2857,6 +2962,10 @@
                     "name": "Slikbutik",
                     "terms": "Slikbutik, Chokoladeforretning"
                 },
+                "craft/distillery": {
+                    "name": "Distelleri",
+                    "terms": "distellering,alkohol,sprit"
+                },
                 "craft/dressmaker": {
                     "name": "Skrædder",
                     "terms": "Skrædder, Systue"
@@ -2866,7 +2975,8 @@
                     "terms": "Elektriker, Elektrikerfirma"
                 },
                 "craft/electronics_repair": {
-                    "name": "Elektronikværksted"
+                    "name": "Elektronikværksted",
+                    "terms": "reparation,elektronik"
                 },
                 "craft/gardener": {
                     "name": "Gartner",
@@ -3126,7 +3236,8 @@
                     "terms": "Cykelsti"
                 },
                 "highway/elevator": {
-                    "name": "Elevator"
+                    "name": "Elevator",
+                    "terms": "paternoster"
                 },
                 "highway/footway": {
                     "name": "Gangsti",
@@ -3766,9 +3877,25 @@
                     "name": "Vandforsyning",
                     "terms": "Vandforsyning, Vandværk"
                 },
+                "man_made/watermill": {
+                    "name": "Vandmølle",
+                    "terms": "mølle"
+                },
+                "man_made/windmill": {
+                    "name": "Vindmølle",
+                    "terms": "mølle"
+                },
                 "man_made/works": {
                     "name": "Fabrik",
                     "terms": "Fabrik, Fremstillingsvirksomhed, Produktionsvirksomhed"
+                },
+                "manhole": {
+                    "name": "Brønd",
+                    "terms": "dæksel,kloak"
+                },
+                "manhole/drain": {
+                    "name": "Regnafløb",
+                    "terms": "storm,regn,afløb"
                 },
                 "natural": {
                     "name": "Naturlig",
@@ -3955,8 +4082,7 @@
                     "terms": "NGO kontor, NGO"
                 },
                 "office/physician": {
-                    "name": "Læge",
-                    "terms": "Læge, Doktor"
+                    "name": "Læge"
                 },
                 "office/political_party": {
                     "name": "Politisk parti",
@@ -4041,6 +4167,14 @@
                 "power/generator": {
                     "name": "Kraftværk",
                     "terms": "Kraftværk"
+                },
+                "power/generator/source_nuclear": {
+                    "name": "Atomreaktor",
+                    "terms": "atom,nuklear,kernekraft"
+                },
+                "power/generator/source_wind": {
+                    "name": "Vindmølle",
+                    "terms": "mølle,vind,strøm"
                 },
                 "power/line": {
                     "name": "Elledning",
@@ -4172,7 +4306,8 @@
                     "terms": "Antikvitetsforretning, Antikvitetsbutik"
                 },
                 "shop/appliance": {
-                    "name": "Hvidevareforretning"
+                    "name": "Hvidevareforretning",
+                    "terms": "hvidevare,køleskab,ovn,vaskemaskine"
                 },
                 "shop/art": {
                     "name": "Kunstbutik",
@@ -4344,7 +4479,7 @@
                 },
                 "shop/farm": {
                     "name": "Fødevarestand",
-                    "terms": "Fødevarestand, Frugtstand"
+                    "terms": "fødevarestand,frugtstand,gårdbutik,stalddørssalg"
                 },
                 "shop/fashion": {
                     "name": "Modebutik",
