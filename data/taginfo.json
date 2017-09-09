@@ -1640,6 +1640,10 @@
         },
         {
             "key": "leisure",
+            "value": "hackerspace"
+        },
+        {
+            "key": "leisure",
             "value": "horse_riding"
         },
         {

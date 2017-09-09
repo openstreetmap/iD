@@ -3937,6 +3937,10 @@
                     "name": "Golf Course",
                     "terms": "links"
                 },
+                "leisure/hackerspace": {
+                    "name": "Hackerspace",
+                    "terms": "makerspace,hackspace,hacklab"
+                },
                 "leisure/horse_riding": {
                     "name": "Horseback Riding Facility",
                     "terms": "equestrian,stable"

@@ -8456,6 +8456,26 @@
             },
             "name": "Golf Course"
         },
+        "leisure/hackerspace": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "website"
+            ],
+            "geometry": [
+                "point"
+            ],
+            "terms": [
+                "makerspace",
+                "hackspace",
+                "hacklab"
+            ],
+            "tags": {
+                "leisure": "hackerspace"
+            },
+            "name": "Hackerspace"
+        },
         "leisure/horse_riding": {
             "icon": "horse-riding",
             "fields": [

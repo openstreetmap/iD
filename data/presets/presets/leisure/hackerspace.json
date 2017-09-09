@@ -1,0 +1,20 @@
+{
+    "icon": "commercial",
+    "fields": [
+        "name",
+        "address",
+        "website"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "makerspace",
+        "hackspace",
+        "hacklab"
+    ],
+    "tags": {
+        "leisure": "hackerspace"
+    },
+    "name": "Hackerspace"
+}

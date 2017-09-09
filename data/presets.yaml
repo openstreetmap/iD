@@ -3256,6 +3256,11 @@ en:
         name: Golf Course
         # 'terms: links'
         terms: '<translate with synonyms or related terms for ''Golf Course'', separated by commas>'
+      leisure/hackerspace:
+        # leisure=hackerspace
+        name: Hackerspace
+        # 'terms: makerspace,hackspace,hacklab'
+        terms: '<translate with synonyms or related terms for ''Hackerspace'', separated by commas>'
       leisure/horse_riding:
         # leisure=horse_riding
         name: Horseback Riding Facility
