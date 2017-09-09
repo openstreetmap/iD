@@ -889,8 +889,7 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
-                "area"
+                "vertex"
             ],
             "terms": [
                 "bike",
@@ -1088,8 +1087,7 @@
                 "capacity"
             ],
             "geometry": [
-                "point",
-                "area"
+                "point"
             ],
             "tags": {
                 "amenity": "charging_station"
@@ -3200,8 +3198,7 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
-                "area"
+                "vertex"
             ],
             "tags": {
                 "amenity": "waste_basket"
@@ -6301,8 +6298,7 @@
                 "access"
             ],
             "geometry": [
-                "line",
-                "area"
+                "line"
             ],
             "terms": [
                 "hike",
