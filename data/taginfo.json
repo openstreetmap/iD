@@ -557,6 +557,10 @@
         },
         {
             "key": "vending",
+            "value": "feminine_hygiene"
+        },
+        {
+            "key": "vending",
             "value": "newspapers"
         },
         {
