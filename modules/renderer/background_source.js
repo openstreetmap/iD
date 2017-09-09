@@ -228,6 +228,56 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
 };
 
 
+
+rendererBackgroundSource.Esri = function(data) {
+
+    // don't request blank tiles, instead overzoom real tiles - #4327
+    if (data.template.match(/blankTile/) === null) {
+        data.template = data.template + '?blankTile=false';
+    }
+
+    var esri = rendererBackgroundSource(data),
+        cache = {};
+
+    esri.getVintage = function(center, tileCoord, callback) {
+        var tileId = tileCoord.slice(0, 3).join('/');
+            // FIXME: construct service URL
+            // zoom = Math.min(tileCoord[2], esri.scaleExtent[1]),
+            // centerPoint = center[1] + ',' + center[0],  // lat,lng
+            // url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial/' + centerPoint +
+            //     '?zl=' + zoom + '&key=' + key + '&jsonp={callback}';
+
+        if (!cache[tileId]) {
+            cache[tileId] = {};
+        }
+        if (cache[tileId] && cache[tileId].vintage) {
+            return callback(null, cache[tileId].vintage);
+        }
+
+        // FIXME: remove dummy result:
+        callback(null, { start: null, end: null, range: '? - ?'});
+
+        // FIXME: call service instead:
+        // jsonpRequest(url, function(result) {
+        //     var err = (!result && 'Unknown Error') || result.errorDetails;
+        //     if (err) {
+        //         return callback(err);
+        //     } else {
+        //         var vintage = {
+        //             start: localeDateString(result.resourceSets[0].resources[0].vintageStart),
+        //             end: localeDateString(result.resourceSets[0].resources[0].vintageEnd)
+        //         };
+        //         vintage.range = vintageRange(vintage);
+        //         cache[tileId].vintage = vintage;
+        //         return callback(null, vintage);
+        //     }
+        // });
+    };
+
+    return esri;
+};
+
+
 rendererBackgroundSource.None = function() {
     var source = rendererBackgroundSource({ id: 'none', template: '' });
 
