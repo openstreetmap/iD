@@ -2847,7 +2847,7 @@
                 },
                 "amenity/vending_machine/feminine_hygiene": {
                     "name": "Feminine Hygiene Vending Machine",
-                    "terms": "condom, tampon, pad, woman, women, menstrual hygiene products, personal care"
+                    "terms": "condom,tampon,pad,woman,women,menstrual hygiene products,personal care"
                 },
                 "amenity/vending_machine/newspapers": {
                     "name": "Newspaper Vending Machine",
