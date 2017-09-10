@@ -278,6 +278,7 @@ en:
       title: Background
       zoom: Zoom
       vintage: Vintage
+      source: Source
       unknown: Unknown
       show_tiles: Show Tiles
       hide_tiles: Hide Tiles

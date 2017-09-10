@@ -8,7 +8,7 @@ export function uiPanelBackground(context) {
     var currSource = null;
     var currZoom = '';
     var currVintage = '';
-
+    var currEsriSource = '';
 
     function redraw(selection) {
         if (currSource !== background.baseLayerSource().name()) {
@@ -45,6 +45,14 @@ export function uiPanelBackground(context) {
             debouncedGetVintage(selection);
         }
 
+        if (currSource === 'Esri World Imagery') {
+            list
+                .append('li')
+                .text(t('info_panels.background.source') + ': ')
+                .append('span')
+                .attr('class', 'source')
+                .text(currEsriSource);
+        }
         var toggle = context.getDebug('tile') ? 'hide_tiles' : 'show_tiles';
 
         selection
@@ -78,6 +86,12 @@ export function uiPanelBackground(context) {
             currVintage = (result && result.range) || t('info_panels.background.unknown');
             selection.selectAll('.vintage')
                 .text(currVintage);
+            // metadata from Esri can tell us the specific provider
+            if (result.source) {
+                currEsriSource = result.source;
+                selection.selectAll('.source')
+                    .text(currEsriSource);
+            }
         });
     }
 
