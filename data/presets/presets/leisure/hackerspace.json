@@ -1,22 +1,23 @@
 {
-    "icon": "poi-bowling",
+    "icon": "commercial",
     "fields": [
         "name",
-        "operator",
         "address",
         "building_area",
         "opening_hours",
-        "smoking"
+        "website"
     ],
     "geometry": [
         "point",
         "area"
     ],
     "terms": [
-      "bowling center"
+        "makerspace",
+        "hackspace",
+        "hacklab"
     ],
     "tags": {
-        "leisure": "bowling_alley"
+        "leisure": "hackerspace"
     },
-    "name": "Bowling Alley"
+    "name": "Hackerspace"
 }

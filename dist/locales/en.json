@@ -3899,7 +3899,7 @@
                 },
                 "leisure/bowling_alley": {
                     "name": "Bowling Alley",
-                    "terms": ""
+                    "terms": "bowling center"
                 },
                 "leisure/common": {
                     "name": "Common",
@@ -3936,6 +3936,10 @@
                 "leisure/golf_course": {
                     "name": "Golf Course",
                     "terms": "links"
+                },
+                "leisure/hackerspace": {
+                    "name": "Hackerspace",
+                    "terms": "makerspace,hackspace,hacklab"
                 },
                 "leisure/horse_riding": {
                     "name": "Horseback Riding Facility",

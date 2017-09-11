@@ -8277,7 +8277,9 @@
                 "point",
                 "area"
             ],
-            "terms": [],
+            "terms": [
+                "bowling center"
+            ],
             "tags": {
                 "leisure": "bowling_alley"
             },
@@ -8461,6 +8463,29 @@
                 "leisure": "golf_course"
             },
             "name": "Golf Course"
+        },
+        "leisure/hackerspace": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours",
+                "website"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "makerspace",
+                "hackspace",
+                "hacklab"
+            ],
+            "tags": {
+                "leisure": "hackerspace"
+            },
+            "name": "Hackerspace"
         },
         "leisure/horse_riding": {
             "icon": "horse-riding",
