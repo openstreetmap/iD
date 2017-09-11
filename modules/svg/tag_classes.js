@@ -10,7 +10,7 @@ export function svgTagClasses() {
         ],
         statuses = [
             'proposed', 'construction', 'disused', 'abandoned', 'dismantled',
-            'razed', 'demolished', 'obliterated'
+            'razed', 'demolished', 'obliterated', 'intermittent'
         ],
         secondaries = [
             'oneway', 'bridge', 'tunnel', 'embankment', 'cutting', 'barrier',
