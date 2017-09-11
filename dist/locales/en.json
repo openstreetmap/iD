@@ -1619,6 +1619,9 @@
                 "inscription": {
                     "label": "Inscription"
                 },
+                "intermittent": {
+                    "label": "Intermittent"
+                },
                 "internet_access": {
                     "label": "Internet Access",
                     "options": {
@@ -5384,6 +5387,10 @@
                 "waterway/sanitary_dump_station": {
                     "name": "Marine Toilet Disposal",
                     "terms": "Boat,Watercraft,Sanitary,Dump Station,Pumpout,Pump out,Elsan,CDP,CTDP,Chemical Toilet"
+                },
+                "waterway/stream_intermittent": {
+                    "name": "Intermittent Stream",
+                    "terms": "arroyo,beck,branch,brook,burn,course,creek,drift,flood,flow,gully,run,runnel,rush,spate,spritz,tributary,wadi,wash,watercourse"
                 },
                 "waterway/stream": {
                     "name": "Stream",

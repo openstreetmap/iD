@@ -3,7 +3,8 @@
     "fields": [
         "name",
         "tunnel_waterway",
-        "width"
+        "width",
+        "intermittent"
     ],
     "geometry": [
         "line"

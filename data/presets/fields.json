@@ -875,6 +875,11 @@
             "type": "textarea",
             "label": "Inscription"
         },
+        "intermittent": {
+            "key": "intermittent",
+            "type": "check",
+            "label": "Intermittent"
+        },
         "internet_access": {
             "key": "internet_access",
             "type": "combo",

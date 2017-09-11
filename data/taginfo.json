@@ -3063,6 +3063,10 @@
             "value": "sanitary_dump_station"
         },
         {
+            "key": "intermittent",
+            "value": "yes"
+        },
+        {
             "key": "waterway",
             "value": "stream"
         },

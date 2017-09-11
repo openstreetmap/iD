@@ -10035,6 +10035,10 @@
         },
         "natural/spring": {
             "icon": "water",
+            "fields": [
+                "name",
+                "intermittent"
+            ],
             "geometry": [
                 "point",
                 "vertex"
@@ -10112,11 +10116,12 @@
         },
         "natural/water/lake": {
             "icon": "water",
+            "fields": [
+                "name",
+                "intermittent"
+            ],
             "geometry": [
                 "area"
-            ],
-            "fields": [
-                "name"
             ],
             "tags": {
                 "natural": "water",
@@ -10135,11 +10140,12 @@
         },
         "natural/water/pond": {
             "icon": "water",
+            "fields": [
+                "name",
+                "intermittent"
+            ],
             "geometry": [
                 "area"
-            ],
-            "fields": [
-                "name"
             ],
             "tags": {
                 "natural": "water",
@@ -10160,11 +10166,12 @@
         },
         "natural/water/reservoir": {
             "icon": "water",
+            "fields": [
+                "name",
+                "intermittent"
+            ],
             "geometry": [
                 "area"
-            ],
-            "fields": [
-                "name"
             ],
             "tags": {
                 "natural": "water",
@@ -15268,7 +15275,8 @@
             "icon": "waterway-canal",
             "fields": [
                 "name",
-                "width"
+                "width",
+                "intermittent"
             ],
             "geometry": [
                 "line"
@@ -15297,7 +15305,8 @@
         "waterway/ditch": {
             "icon": "waterway-ditch",
             "fields": [
-                "tunnel_waterway"
+                "tunnel_waterway",
+                "intermittent"
             ],
             "geometry": [
                 "line"
@@ -15333,7 +15342,8 @@
         "waterway/drain": {
             "icon": "waterway-stream",
             "fields": [
-                "tunnel_waterway"
+                "tunnel_waterway",
+                "intermittent"
             ],
             "geometry": [
                 "line"
@@ -15372,7 +15382,8 @@
             "fields": [
                 "name",
                 "tunnel_waterway",
-                "width"
+                "width",
+                "intermittent"
             ],
             "geometry": [
                 "line"
@@ -15438,12 +15449,56 @@
             },
             "name": "Marine Toilet Disposal"
         },
+        "waterway/stream_intermittent": {
+            "icon": "waterway-stream",
+            "fields": [
+                "name",
+                "tunnel_waterway",
+                "width",
+                "intermittent"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "terms": [
+                "arroyo",
+                "beck",
+                "branch",
+                "brook",
+                "burn",
+                "course",
+                "creek",
+                "drift",
+                "flood",
+                "flow",
+                "gully",
+                "run",
+                "runnel",
+                "rush",
+                "spate",
+                "spritz",
+                "tributary",
+                "wadi",
+                "wash",
+                "watercourse"
+            ],
+            "tags": {
+                "waterway": "stream",
+                "intermittent": "yes"
+            },
+            "reference": {
+                "key": "waterway",
+                "value": "stream"
+            },
+            "name": "Intermittent Stream"
+        },
         "waterway/stream": {
             "icon": "waterway-stream",
             "fields": [
                 "name",
                 "tunnel_waterway",
-                "width"
+                "width",
+                "intermittent"
             ],
             "geometry": [
                 "line"
@@ -15497,7 +15552,8 @@
             "fields": [
                 "name",
                 "height",
-                "width"
+                "width",
+                "intermittent"
             ],
             "geometry": [
                 "vertex"

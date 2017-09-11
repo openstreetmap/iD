@@ -630,6 +630,9 @@ en:
       inscription:
         # inscription=*
         label: Inscription
+      intermittent:
+        # intermittent=*
+        label: Intermittent
       internet_access:
         # internet_access=*
         label: Internet Access
@@ -4876,6 +4879,11 @@ en:
         name: Stream
         # 'terms: beck,branch,brook,burn,course,creek,current,drift,flood,flow,freshet,race,rill,rindle,rivulet,run,runnel,rush,spate,spritz,surge,tide,torrent,tributary,watercourse'
         terms: '<translate with synonyms or related terms for ''Stream'', separated by commas>'
+      waterway/stream_intermittent:
+        # 'waterway=stream, intermittent=yes'
+        name: Intermittent Stream
+        # 'terms: arroyo,beck,branch,brook,burn,course,creek,drift,flood,flow,gully,run,runnel,rush,spate,spritz,tributary,wadi,wash,watercourse'
+        terms: '<translate with synonyms or related terms for ''Intermittent Stream'', separated by commas>'
       waterway/water_point:
         # waterway=water_point
         name: Marine Drinking Water

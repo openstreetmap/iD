@@ -1,10 +1,11 @@
 {
     "icon": "water",
+    "fields": [
+        "name",
+        "intermittent"
+    ],
     "geometry": [
         "area"
-    ],
-    "fields": [
-        "name"
     ],
     "tags": {
         "natural": "water",
