@@ -101,7 +101,7 @@ export function uiFormFields(context) {
                 .minItems(1)
                 .on('accept', function (d) {
                     var field = d.field;
-                    field.show = true;
+                    field.show();
                     render(selection);
                     if (field.type !== 'semiCombo' && field.type !== 'multiCombo') {
                         field.focus();
