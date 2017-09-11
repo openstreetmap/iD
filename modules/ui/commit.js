@@ -292,7 +292,9 @@ export function uiCommit(context) {
 
         // Extract hashtags from `comment`
         function commentTags() {
-            return tags.comment.match(/#[\w-]+/g);
+            return tags.comment
+                .replace(/http\S*/g, '')  // drop anything that looks like a URL - #4289
+                .match(/#[\w-]+/g);
         }
 
         // Extract and clean hashtags from `hashtags`
