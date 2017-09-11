@@ -1836,6 +1836,13 @@
             "type": "typeCombo",
             "label": "Type"
         },
+        "tourism_attraction": {
+            "key": "tourism",
+            "default": "attraction",
+            "type": "typeCombo",
+            "universal": true,
+            "label": "Tourism"
+        },
         "tourism": {
             "key": "tourism",
             "type": "typeCombo",

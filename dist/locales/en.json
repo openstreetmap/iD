@@ -2206,6 +2206,9 @@
                 "tomb": {
                     "label": "Type"
                 },
+                "tourism_attraction": {
+                    "label": "Tourism"
+                },
                 "tourism": {
                     "label": "Type"
                 },
