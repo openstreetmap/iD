@@ -40,29 +40,31 @@ export function uiCommit(context) {
         var osm = context.connection();
         if (!osm) return;
 
-        var comment = context.storage('comment') || '',
-            commentDate = +context.storage('commentDate') || 0,
-            hashtags = context.storage('hashtags'),
+        // expire stored comment and hashtags after cutoff datetime - #3947
+        var commentDate = +context.storage('commentDate') || 0,
             currDate = Date.now(),
             cutoff = 2 * 86400 * 1000;   // 2 days
-
-        // expire stored comment and hashtags after cutoff datetime - #3947
         if (commentDate > currDate || currDate - commentDate > cutoff) {
-            comment = '';
-            hashtags = undefined;
+            context.storage('comment', null);
+            context.storage('hashtags', null);
         }
 
         var tags;
         if (!changeset) {
             var detected = utilDetect();
             tags = {
-                comment: comment,
+                comment: context.storage('comment') || '',
                 created_by: ('iD ' + context.version).substr(0, 255),
                 imagery_used: context.history().imageryUsed().join(';').substr(0, 255),
                 host: detected.host.substr(0, 255),
                 locale: detected.locale.substr(0, 255)
             };
 
+            // call findHashtags initially - this will remove stored
+            // hashtags if any hashtags are found in the comment - #4304
+            findHashtags(tags, true);
+
+            var hashtags = context.storage('hashtags');
             if (hashtags) {
                 tags.hashtags = hashtags;
             }
@@ -276,8 +278,15 @@ export function uiCommit(context) {
     }
 
 
-    function findHashtags(tags) {
-        return _.unionBy(commentTags(), hashTags(), function (s) {
+    function findHashtags(tags, commentOnly) {
+        var inComment = commentTags(),
+            inHashTags = hashTags();
+
+        if (inComment !== null) {                    // when hashtags are detected in comment...
+            context.storage('hashtags', null);       // always remove stored hashtags - #4304
+            if (commentOnly) { inHashTags = null; }  // optionally override hashtags field
+        }
+        return _.unionBy(inComment, inHashTags, function (s) {
             return s.toLowerCase();
         });
 
@@ -327,7 +336,9 @@ export function uiCommit(context) {
         });
 
         if (!onInput) {
-            var arr = findHashtags(tags);
+            // when changing the comment, override hashtags with any found in comment.
+            var commentOnly = changed.hasOwnProperty('comment') && (changed.comment !== '');
+            var arr = findHashtags(tags, commentOnly);
             if (arr.length) {
                 tags.hashtags = arr.join(';').substr(0, 255);
                 context.storage('hashtags', tags.hashtags);
