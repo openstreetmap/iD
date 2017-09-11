@@ -29,6 +29,7 @@ export function uiStatus(context) {
                                 osm.authenticate();
                             });
                     } else {
+                        // eslint-disable-next-line no-warning-comments
                         // TODO: nice messages for different error types
                         selection.text(t('status.error'));
                     }

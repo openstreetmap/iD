@@ -20,4 +20,5 @@ mocha.setup({
 });
 
 expect = chai.expect;
+// eslint-disable-next-line no-unused-vars
 var d3 = iD.d3;

@@ -279,6 +279,9 @@ en:
       zoom: Zoom
       vintage: Vintage
       source: Source
+      description: Description
+      resolution: Resolution
+      accuracy: Accuracy
       unknown: Unknown
       show_tiles: Show Tiles
       hide_tiles: Hide Tiles

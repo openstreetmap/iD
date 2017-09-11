@@ -133,7 +133,7 @@ export function rendererBackgroundSource(data) {
     source.copyrightNotices = function() {};
 
 
-    source.getVintage = function(center, tileCoord, callback) {
+    source.getMetadata = function(center, tileCoord, callback) {
         var vintage = {
             start: localeDateString(source.startDate),
             end: localeDateString(source.endDate)
@@ -190,7 +190,7 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     };
 
 
-    bing.getVintage = function(center, tileCoord, callback) {
+    bing.getMetadata = function(center, tileCoord, callback) {
         var tileId = tileCoord.slice(0, 3).join('/'),
             zoom = Math.min(tileCoord[2], 21),
             centerPoint = center[1] + ',' + center[0],  // lat,lng
@@ -240,7 +240,7 @@ rendererBackgroundSource.Esri = function(data) {
     var esri = rendererBackgroundSource(data),
         cache = {};
 
-    esri.getVintage = function(center, tileCoord, callback) {
+    esri.getMetadata = function(center, tileCoord, callback) {
         var tileId = tileCoord.slice(0, 3).join('/'),
             zoom = Math.min(tileCoord[2], esri.scaleExtent[1]),
             centerPoint = center[0] + ',' + center[1],  // long, lat (as it should be)
@@ -268,9 +268,15 @@ rendererBackgroundSource.Esri = function(data) {
             return callback(null, cache[tileId].vintage);
         }
 
-        // accurate metadata is only available at zoom 13 and closer
+        // accurate metadata is only available >= 13
         if (metadataLayer === 99) {
-            callback(null, { range: '', source: ' '});
+            callback(null, {
+                range: 'Unknown',
+                source: 'Unknown',
+                description: 'Unknown',
+                resolution: 'Unknown',
+                accuracy: 'Unknown'
+            });
         } else {
             jsonpRequest(url, function(result) {
                 var err = !result || result.features.length < 1;
@@ -280,9 +286,13 @@ rendererBackgroundSource.Esri = function(data) {
                     var vintage = {
                         // pass through the discrete capture date from metadata
                         range: localeDateString(result.features[0].attributes.SRC_DATE2),
-                        source: result.features[0].attributes.NICE_DESC
+                        source: result.features[0].attributes.NICE_NAME,
+                        description: result.features[0].attributes.NICE_DESC,
+                        resolution: result.features[0].attributes.SRC_RES,
+                        accuracy: result.features[0].attributes.SRC_ACC,
+
                     };
-    
+
                     cache[tileId].vintage = vintage;
                     return callback(null, vintage);
                 }

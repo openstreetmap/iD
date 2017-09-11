@@ -8,7 +8,11 @@ export function uiPanelBackground(context) {
     var currSource = null;
     var currZoom = '';
     var currVintage = '';
-    var currEsriSource = '';
+
+    var currProvider = '';
+    var currDescription = '';
+    var currResolution = '';
+    var currAccuracy = '';
 
     function redraw(selection) {
         if (currSource !== background.baseLayerSource().name()) {
@@ -42,7 +46,7 @@ export function uiPanelBackground(context) {
             .text(currVintage);
 
         if (!currVintage) {
-            debouncedGetVintage(selection);
+            debouncedGetMetadata(selection);
         }
 
         if (currSource === 'Esri World Imagery') {
@@ -51,7 +55,25 @@ export function uiPanelBackground(context) {
                 .text(t('info_panels.background.source') + ': ')
                 .append('span')
                 .attr('class', 'source')
-                .text(currEsriSource);
+                .text(currProvider);
+            list
+                .append('li')
+                .text(t('info_panels.background.description') + ': ')
+                .append('span')
+                .attr('class', 'description')
+                .text(currDescription);
+            list
+                .append('li')
+                .text(t('info_panels.background.resolution') + ': ')
+                .append('span')
+                .attr('class', 'resolution')
+                .text(currResolution);
+            list
+                .append('li')
+                .text(t('info_panels.background.accuracy') + ': ')
+                .append('span')
+                .attr('class', 'accuracy')
+                .text(currAccuracy);
         }
         var toggle = context.getDebug('tile') ? 'hide_tiles' : 'show_tiles';
 
@@ -68,8 +90,8 @@ export function uiPanelBackground(context) {
     }
 
 
-    var debouncedGetVintage = _.debounce(getVintage, 250);
-    function getVintage(selection) {
+    var debouncedGetMetadata = _.debounce(getMetadata, 250);
+    function getMetadata(selection) {
         var tile = d3.select('.layer-background img.tile-center');   // tile near viewport center
         if (tile.empty()) return;
 
@@ -82,15 +104,24 @@ export function uiPanelBackground(context) {
             .text(currZoom);
 
         if (!d || !d.length >= 3) return;
-        background.baseLayerSource().getVintage(center, d, function(err, result) {
+        background.baseLayerSource().getMetadata(center, d, function(err, result) {
             currVintage = (result && result.range) || t('info_panels.background.unknown');
             selection.selectAll('.vintage')
                 .text(currVintage);
             // metadata from Esri can tell us the specific provider
             if (result.source) {
-                currEsriSource = result.source;
+                currSource = result.source;
                 selection.selectAll('.source')
-                    .text(currEsriSource);
+                    .text(currSource);
+                currDescription = result.description;
+                selection.selectAll('.description')
+                    .text(currDescription);
+                currResolution = result.resolution;
+                selection.selectAll('.resolution')
+                    .text(currResolution + ' (m)');
+                currAccuracy = result.accuracy;
+                selection.selectAll('.accuracy')
+                    .text(currAccuracy + ' (m)');
             }
         });
     }
@@ -104,7 +135,7 @@ export function uiPanelBackground(context) {
                 selection.call(redraw);
             })
             .on('move.info-background', function() {
-                selection.call(debouncedGetVintage);
+                selection.call(debouncedGetMetadata);
             });
 
     };
