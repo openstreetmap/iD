@@ -283,7 +283,7 @@ export function uiCommit(context) {
 
         // Extract hashtags from `comment`
         function commentTags() {
-            return tags.comment.match(/#[^\s\#]+/g);
+            return tags.comment.match(/#[\w-]+/g);
         }
 
         // Extract and clean hashtags from `hashtags`
@@ -293,7 +293,7 @@ export function uiCommit(context) {
                 .split(/[,;\s]+/)
                 .map(function (s) {
                     if (s[0] !== '#') { s = '#' + s; }    // prepend '#'
-                    var matched = s.match(/#[^\s\#]+/g);  // match valid hashtags
+                    var matched = s.match(/#[\w-]+/g);    // match valid hashtags
                     return matched && matched[0];
                 }).filter(Boolean);                       // exclude falsey
         }
