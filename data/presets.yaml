@@ -3212,6 +3212,7 @@ en:
       leisure/bowling_alley:
         # leisure=bowling_alley
         name: Bowling Alley
+        # 'terms: bowling center'
         terms: '<translate with synonyms or related terms for ''Bowling Alley'', separated by commas>'
       leisure/common:
         # leisure=common

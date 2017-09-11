@@ -8271,7 +8271,9 @@
                 "point",
                 "area"
             ],
-            "terms": [],
+            "terms": [
+                "bowling center"
+            ],
             "tags": {
                 "leisure": "bowling_alley"
             },
@@ -8461,10 +8463,13 @@
             "fields": [
                 "name",
                 "address",
+                "building_area",
+                "opening_hours",
                 "website"
             ],
             "geometry": [
-                "point"
+                "point",
+                "area"
             ],
             "terms": [
                 "makerspace",
