@@ -40,9 +40,7 @@ export function uiPanelBackground(context) {
                 .text(metadata[k]);
         });
 
-        if (!metadata.zoom) {
-            debouncedGetMetadata(selection);
-        }
+        debouncedGetMetadata(selection);
 
         var toggle = context.getDebug('tile') ? 'hide_tiles' : 'show_tiles';
 
@@ -94,14 +92,6 @@ export function uiPanelBackground(context) {
             _.without(metadataKeys, 'zoom', 'vintage')
                 .forEach(function(k) {
                     var val = result[k];
-
-                    // append units to numeric data
-                    if (k === 'resolution' || k === 'accuracy') {
-                        if (val && isFinite(val)) {
-                            val += ' m';
-                        }
-                    }
-
                     metadata[k] = val;
                     selection.selectAll('.background-info-list-' + k)
                         .classed('hide', !val)

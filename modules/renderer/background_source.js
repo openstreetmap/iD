@@ -255,6 +255,7 @@ rendererBackgroundSource.Esri = function(data) {
         var tileId = tileCoord.slice(0, 3).join('/'),
             zoom = Math.min(tileCoord[2], esri.scaleExtent[1]),
             centerPoint = center[0] + ',' + center[1],  // long, lat (as it should be)
+            unknown = t('info_panels.background.unknown'),
             metadataLayer,
             vintage = {},
             metadata = {};
@@ -294,10 +295,10 @@ rendererBackgroundSource.Esri = function(data) {
             };
             metadata = {
                 vintage: null,
-                source: t('info_panels.background.unknown'),
-                description: t('info_panels.background.unknown'),
-                resolution: t('info_panels.background.unknown'),
-                accuracy: t('info_panels.background.unknown')
+                source: unknown,
+                description: unknown,
+                resolution: unknown,
+                accuracy: unknown
             };
 
             callback(null, metadata);
@@ -328,14 +329,28 @@ rendererBackgroundSource.Esri = function(data) {
                     };
                     metadata = {
                         vintage: vintage,
-                        source: result.features[0].attributes.NICE_NAME,
-                        description: result.features[0].attributes.NICE_DESC,
-                        resolution: result.features[0].attributes.SRC_RES,
-                        accuracy: result.features[0].attributes.SRC_ACC,
+                        source: clean(result.features[0].attributes.NICE_NAME),
+                        description: clean(result.features[0].attributes.NICE_DESC),
+                        resolution: clean(result.features[0].attributes.SRC_RES),
+                        accuracy: clean(result.features[0].attributes.SRC_ACC)
                     };
+
+                    // append units - meters
+                    if (isFinite(metadata.resolution)) {
+                        metadata.resolution += ' m';
+                    }
+                    if (isFinite(metadata.accuracy)) {
+                        metadata.accuracy += ' m';
+                    }
 
                     cache[tileId].metadata = metadata;
                     return callback(null, metadata);
+
+
+                    function clean(val) {
+                        return String(val).trim() || unknown;
+                    }
+
                 }
             });
         }
