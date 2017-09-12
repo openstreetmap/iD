@@ -160,6 +160,7 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
         url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?include=ImageryProviders&key=' +
             key + '&jsonp={callback}',
         cache = {},
+        inflight = {},
         providers = [];
 
     jsonpRequest(url, function(json) {
@@ -199,6 +200,8 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
             url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial/' + centerPoint +
                 '?zl=' + zoom + '&key=' + key + '&jsonp={callback}';
 
+        if (inflight[tileId]) return;
+
         if (!cache[tileId]) {
             cache[tileId] = {};
         }
@@ -206,7 +209,10 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
             return callback(null, cache[tileId].metadata);
         }
 
+        inflight[tileId] = true;
         jsonpRequest(url, function(result) {
+            delete inflight[tileId];
+
             var err = (!result && 'Unknown Error') || result.errorDetails;
             if (err) {
                 return callback(err);
@@ -242,7 +248,8 @@ rendererBackgroundSource.Esri = function(data) {
     }
 
     var esri = rendererBackgroundSource(data),
-        cache = {};
+        cache = {},
+        inflight = {};
 
     esri.getMetadata = function(center, tileCoord, callback) {
         var tileId = tileCoord.slice(0, 3).join('/'),
@@ -251,6 +258,8 @@ rendererBackgroundSource.Esri = function(data) {
             metadataLayer,
             vintage = {},
             metadata = {};
+
+        if (inflight[tileId]) return;
 
         switch (true) {
             case zoom >= 19:
@@ -294,7 +303,10 @@ rendererBackgroundSource.Esri = function(data) {
             callback(null, metadata);
 
         } else {
+            inflight[tileId] = true;
             jsonpRequest(url, function(result) {
+                delete inflight[tileId];
+
                 var err;
                 if (!result) {
                     err = 'Unknown Error';
