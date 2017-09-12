@@ -6,7 +6,7 @@ import { t } from '../../util/locale';
 export function uiPanelBackground(context) {
     var background = context.background();
     var currSourceName = null;
-    var metadata = { zoom: '', vintage: '' };
+    var metadata = {};
     var metadataKeys = [
         'zoom', 'vintage', 'source', 'description', 'resolution', 'accuracy'
     ];
@@ -16,7 +16,7 @@ export function uiPanelBackground(context) {
     function redraw(selection) {
         if (currSourceName !== background.baseLayerSource().name()) {
             currSourceName = background.baseLayerSource().name();
-            metadata = { zoom: '', vintage: '' };
+            metadata = {};
         }
 
         selection.html('');
@@ -40,7 +40,7 @@ export function uiPanelBackground(context) {
                 .text(metadata[k]);
         });
 
-        if (!metadata.vintage) {
+        if (!metadata.zoom) {
             debouncedGetMetadata(selection);
         }
 
@@ -72,7 +72,9 @@ export function uiPanelBackground(context) {
 
         // update zoom
         metadata.zoom = String(zoom);
-        selection.selectAll('.background-info-span-zoom')
+        selection.selectAll('.background-info-list-zoom')
+            .classed('hide', false)
+            .selectAll('.background-info-span-zoom')
             .text(metadata.zoom);
 
         if (!d || !d.length >= 3) return;
@@ -83,7 +85,9 @@ export function uiPanelBackground(context) {
             // update vintage
             var vintage = result.vintage;
             metadata.vintage = (vintage && vintage.range) || t('info_panels.background.unknown');
-            selection.selectAll('.background-info-span-vintage')
+            selection.selectAll('.background-info-list-vintage')
+                .classed('hide', false)
+                .selectAll('.background-info-span-vintage')
                 .text(metadata.vintage);
 
             // update other metdata
