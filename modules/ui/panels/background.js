@@ -5,20 +5,18 @@ import { t } from '../../util/locale';
 
 export function uiPanelBackground(context) {
     var background = context.background();
-    var currSource = null;
-    var currZoom = '';
-    var currVintage = '';
+    var currSourceName = null;
+    var metadata = { zoom: '', vintage: '' };
+    var metadataKeys = [
+        'zoom', 'vintage', 'source', 'description', 'resolution', 'accuracy'
+    ];
 
-    var currProvider = '';
-    var currDescription = '';
-    var currResolution = '';
-    var currAccuracy = '';
+    var debouncedRedraw = _.debounce(redraw, 250);
 
     function redraw(selection) {
-        if (currSource !== background.baseLayerSource().name()) {
-            currSource = background.baseLayerSource().name();
-            currZoom = '';
-            currVintage = '';
+        if (currSourceName !== background.baseLayerSource().name()) {
+            currSourceName = background.baseLayerSource().name();
+            metadata = { zoom: '', vintage: '' };
         }
 
         selection.html('');
@@ -29,52 +27,23 @@ export function uiPanelBackground(context) {
 
         list
             .append('li')
-            .text(currSource);
+            .text(currSourceName);
 
-        list
-            .append('li')
-            .text(t('info_panels.background.zoom') + ': ')
-            .append('span')
-            .attr('class', 'zoom')
-            .text(currZoom);
+        metadataKeys.forEach(function(k) {
+            list
+                .append('li')
+                .attr('class', 'background-info-list-' + k)
+                .classed('hide', !metadata[k])
+                .text(t('info_panels.background.' + k) + ': ')
+                .append('span')
+                .attr('class', 'background-info-span-' + k)
+                .text(metadata[k]);
+        });
 
-        list
-            .append('li')
-            .text(t('info_panels.background.vintage') + ': ')
-            .append('span')
-            .attr('class', 'vintage')
-            .text(currVintage);
-
-        if (!currVintage) {
+        if (!metadata.vintage) {
             debouncedGetMetadata(selection);
         }
 
-        if (currSource === 'Esri World Imagery') {
-            list
-                .append('li')
-                .text(t('info_panels.background.source') + ': ')
-                .append('span')
-                .attr('class', 'source')
-                .text(currProvider);
-            list
-                .append('li')
-                .text(t('info_panels.background.description') + ': ')
-                .append('span')
-                .attr('class', 'description')
-                .text(currDescription);
-            list
-                .append('li')
-                .text(t('info_panels.background.resolution') + ': ')
-                .append('span')
-                .attr('class', 'resolution')
-                .text(currResolution);
-            list
-                .append('li')
-                .text(t('info_panels.background.accuracy') + ': ')
-                .append('span')
-                .attr('class', 'accuracy')
-                .text(currAccuracy);
-        }
         var toggle = context.getDebug('tile') ? 'hide_tiles' : 'show_tiles';
 
         selection
@@ -91,38 +60,50 @@ export function uiPanelBackground(context) {
 
 
     var debouncedGetMetadata = _.debounce(getMetadata, 250);
+
     function getMetadata(selection) {
         var tile = d3.select('.layer-background img.tile-center');   // tile near viewport center
         if (tile.empty()) return;
 
-        var d = tile.datum(),
+        var sourceName = currSourceName,
+            d = tile.datum(),
             zoom = (d && d.length >= 3 && d[2]) || Math.floor(context.map().zoom()),
             center = context.map().center();
 
-        currZoom = String(zoom);
-        selection.selectAll('.zoom')
-            .text(currZoom);
+        // update zoom
+        metadata.zoom = String(zoom);
+        selection.selectAll('.background-info-span-zoom')
+            .text(metadata.zoom);
 
         if (!d || !d.length >= 3) return;
+
         background.baseLayerSource().getMetadata(center, d, function(err, result) {
-            currVintage = (result && result.range) || t('info_panels.background.unknown');
-            selection.selectAll('.vintage')
-                .text(currVintage);
-            // metadata from Esri can tell us the specific provider
-            if (result.source) {
-                currSource = result.source;
-                selection.selectAll('.source')
-                    .text(currSource);
-                currDescription = result.description;
-                selection.selectAll('.description')
-                    .text(currDescription);
-                currResolution = result.resolution;
-                selection.selectAll('.resolution')
-                    .text(currResolution + ' (m)');
-                currAccuracy = result.accuracy;
-                selection.selectAll('.accuracy')
-                    .text(currAccuracy + ' (m)');
-            }
+            if (err || currSourceName !== sourceName) return;
+
+            // update vintage
+            var vintage = result.vintage;
+            metadata.vintage = (vintage && vintage.range) || t('info_panels.background.unknown');
+            selection.selectAll('.background-info-span-vintage')
+                .text(metadata.vintage);
+
+            // update other metdata
+            _.without(metadataKeys, 'zoom', 'vintage')
+                .forEach(function(k) {
+                    var val = result[k];
+
+                    // append units to numeric data
+                    if (k === 'resolution' || k === 'accuracy') {
+                        if (val && isFinite(val)) {
+                            val += ' m';
+                        }
+                    }
+
+                    metadata[k] = val;
+                    selection.selectAll('.background-info-list-' + k)
+                        .classed('hide', !val)
+                        .selectAll('.background-info-span-' + k)
+                        .text(val);
+                });
         });
     }
 
@@ -132,7 +113,7 @@ export function uiPanelBackground(context) {
 
         context.map()
             .on('drawn.info-background', function() {
-                selection.call(redraw);
+                selection.call(debouncedRedraw);
             })
             .on('move.info-background', function() {
                 selection.call(debouncedGetMetadata);
