@@ -3,6 +3,7 @@
     "fields": [
         "name",
         "operator",
+        "healthcare/speciality",
         "building_area",
         "address",
         "opening_hours"
@@ -12,8 +13,12 @@
         "area"
     ],
     "terms": [
-        "pregnancy",
-        "childbirth"
+        "baby",
+        "childbirth",
+        "delivery",
+        "labour",
+        "labor",
+        "pregnancy"
     ],
     "tags": {
         "healthcare": "midwife"

@@ -3,6 +3,7 @@
     "fields": [
         "name",
         "operator",
+        "healthcare/speciality",
         "blood_components",
         "address",
         "building_area",

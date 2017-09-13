@@ -13,11 +13,12 @@
         "area"
     ],
     "terms": [
-        "terminal",
-        "illness"
+        "physical",
+        "therapist",
+        "therapy"
     ],
     "tags": {
-        "healthcare": "hospice"
+        "healthcare": "physiotherapist"
     },
-    "name": "Hospice"
+    "name": "Physiotherapist"
 }

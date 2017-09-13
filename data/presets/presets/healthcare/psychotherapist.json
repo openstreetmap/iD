@@ -13,11 +13,17 @@
         "area"
     ],
     "terms": [
-        "terminal",
-        "illness"
+        "anxiety",
+        "counselor",
+        "depression",
+        "mental health",
+        "mind",
+        "suicide",
+        "therapist",
+        "therapy"
     ],
     "tags": {
-        "healthcare": "hospice"
+        "healthcare": "psychotherapist"
     },
-    "name": "Hospice"
+    "name": "Psychotherapist"
 }

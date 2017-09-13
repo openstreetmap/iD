@@ -13,11 +13,12 @@
         "area"
     ],
     "terms": [
-        "terminal",
-        "illness"
+        "ear",
+        "hearing",
+        "sound"
     ],
     "tags": {
-        "healthcare": "hospice"
+        "healthcare": "audiologist"
     },
-    "name": "Hospice"
+    "name": "Audiologist"
 }

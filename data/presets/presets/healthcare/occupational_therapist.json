@@ -13,11 +13,11 @@
         "area"
     ],
     "terms": [
-        "terminal",
-        "illness"
+        "therapist",
+        "therapy"
     ],
     "tags": {
-        "healthcare": "hospice"
+        "healthcare": "occupational_therapist"
     },
-    "name": "Hospice"
+    "name": "Occupational Therapist"
 }

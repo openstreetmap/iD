@@ -13,11 +13,13 @@
         "area"
     ],
     "terms": [
-        "terminal",
-        "illness"
+        "speech",
+        "therapist",
+        "therapy",
+        "voice"
     ],
     "tags": {
-        "healthcare": "hospice"
+        "healthcare": "speech_therapist"
     },
-    "name": "Hospice"
+    "name": "Speech Therapist"
 }

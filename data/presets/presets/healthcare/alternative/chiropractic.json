@@ -13,11 +13,13 @@
         "area"
     ],
     "terms": [
-        "terminal",
-        "illness"
+        "back",
+        "pain",
+        "spine"
     ],
     "tags": {
-        "healthcare": "hospice"
+        "healthcare": "alternative",
+        "healthcare:speciality": "chiropractic"
     },
-    "name": "Hospice"
+    "name": "Chiropractor"
 }

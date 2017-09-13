@@ -13,11 +13,14 @@
         "area"
     ],
     "terms": [
-        "terminal",
-        "illness"
+        "eye",
+        "glasses",
+        "lasik",
+        "lenses",
+        "vision"
     ],
     "tags": {
-        "healthcare": "hospice"
+        "healthcare": "optometrist"
     },
-    "name": "Hospice"
+    "name": "Optometrist"
 }

@@ -13,11 +13,12 @@
         "area"
     ],
     "terms": [
-        "terminal",
-        "illness"
+        "rehab",
+        "therapist",
+        "therapy"
     ],
     "tags": {
-        "healthcare": "hospice"
+        "healthcare": "rehabilitation"
     },
-    "name": "Hospice"
+    "name": "Rehabilitation Facility"
 }

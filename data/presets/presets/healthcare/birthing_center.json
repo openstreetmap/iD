@@ -13,11 +13,15 @@
         "area"
     ],
     "terms": [
-        "terminal",
-        "illness"
+        "baby",
+        "childbirth",
+        "delivery",
+        "labour",
+        "labor",
+        "pregnancy"
     ],
     "tags": {
-        "healthcare": "hospice"
+        "healthcare": "birthing_center"
     },
-    "name": "Hospice"
+    "name": "Birthing Center"
 }

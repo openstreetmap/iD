@@ -13,11 +13,11 @@
         "area"
     ],
     "terms": [
-        "terminal",
-        "illness"
+        "foot",
+        "feet"
     ],
     "tags": {
-        "healthcare": "hospice"
+        "healthcare": "podiatrist"
     },
-    "name": "Hospice"
+    "name": "Podiatrist"
 }
