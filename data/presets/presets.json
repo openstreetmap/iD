@@ -29336,6 +29336,7 @@
             ],
             "fields": [
                 "name",
+                "speciality_clinic",
                 "address",
                 "building_area",
                 "opening_hours"

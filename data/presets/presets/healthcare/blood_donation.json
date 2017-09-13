@@ -3,11 +3,10 @@
     "fields": [
         "name",
         "operator",
+        "blood_components",
         "address",
         "building_area",
-        "blood_components",
-        "opening_hours",
-        "ref"
+        "opening_hours"
     ],
     "geometry": [
         "point",
