@@ -345,14 +345,13 @@ rendererBackgroundSource.Esri = function(data) {
 
                     cache[tileId].metadata = metadata;
                     return callback(null, metadata);
-
-
-                    function clean(val) {
-                        return String(val).trim() || unknown;
-                    }
-
                 }
             });
+        }
+
+
+        function clean(val) {
+            return String(val).trim() || unknown;
         }
     };
 
