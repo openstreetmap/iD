@@ -3,7 +3,8 @@
     "fields": [
         "name",
         "height",
-        "width"
+        "width",
+        "intermittent"
     ],
     "geometry": [
         "vertex"

@@ -133,13 +133,15 @@ export function rendererBackgroundSource(data) {
     source.copyrightNotices = function() {};
 
 
-    source.getVintage = function(center, tileCoord, callback) {
+    source.getMetadata = function(center, tileCoord, callback) {
         var vintage = {
             start: localeDateString(source.startDate),
             end: localeDateString(source.endDate)
         };
         vintage.range = vintageRange(vintage);
-        callback(null, vintage);
+
+        var metadata = { vintage: vintage };
+        callback(null, metadata);
     };
 
 
@@ -158,6 +160,7 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
         url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?include=ImageryProviders&key=' +
             key + '&jsonp={callback}',
         cache = {},
+        inflight = {},
         providers = [];
 
     jsonpRequest(url, function(json) {
@@ -190,21 +193,26 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     };
 
 
-    bing.getVintage = function(center, tileCoord, callback) {
+    bing.getMetadata = function(center, tileCoord, callback) {
         var tileId = tileCoord.slice(0, 3).join('/'),
             zoom = Math.min(tileCoord[2], 21),
             centerPoint = center[1] + ',' + center[0],  // lat,lng
             url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial/' + centerPoint +
                 '?zl=' + zoom + '&key=' + key + '&jsonp={callback}';
 
+        if (inflight[tileId]) return;
+
         if (!cache[tileId]) {
             cache[tileId] = {};
         }
-        if (cache[tileId] && cache[tileId].vintage) {
-            return callback(null, cache[tileId].vintage);
+        if (cache[tileId] && cache[tileId].metadata) {
+            return callback(null, cache[tileId].metadata);
         }
 
+        inflight[tileId] = true;
         jsonpRequest(url, function(result) {
+            delete inflight[tileId];
+
             var err = (!result && 'Unknown Error') || result.errorDetails;
             if (err) {
                 return callback(err);
@@ -214,8 +222,10 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
                     end: localeDateString(result.resourceSets[0].resources[0].vintageEnd)
                 };
                 vintage.range = vintageRange(vintage);
-                cache[tileId].vintage = vintage;
-                return callback(null, vintage);
+
+                var metadata = { vintage: vintage };
+                cache[tileId].metadata = metadata;
+                return callback(null, metadata);
             }
         });
     };
@@ -225,6 +235,127 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
 
 
     return bing;
+};
+
+
+
+rendererBackgroundSource.Esri = function(data) {
+
+    // don't request blank tiles, instead overzoom real tiles - #4327
+    // deprecated technique, but it works (for now)
+    if (data.template.match(/blankTile/) === null) {
+        data.template = data.template + '?blankTile=false';
+    }
+
+    var esri = rendererBackgroundSource(data),
+        cache = {},
+        inflight = {};
+
+    esri.getMetadata = function(center, tileCoord, callback) {
+        var tileId = tileCoord.slice(0, 3).join('/'),
+            zoom = Math.min(tileCoord[2], esri.scaleExtent[1]),
+            centerPoint = center[0] + ',' + center[1],  // long, lat (as it should be)
+            unknown = t('info_panels.background.unknown'),
+            metadataLayer,
+            vintage = {},
+            metadata = {};
+
+        if (inflight[tileId]) return;
+
+        switch (true) {
+            case zoom >= 19:
+                metadataLayer = 3;
+                break;
+            case zoom >= 17:
+                metadataLayer = 2;
+                break;
+            case zoom >= 13:
+                metadataLayer = 0;
+                break;
+            default:
+                metadataLayer = 99;
+        }
+
+        // build up query using the layer appropriate to the current zoom
+        var url = 'https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/' + metadataLayer + '/query?returnGeometry=false&geometry=' + centerPoint + '&inSR=4326&geometryType=esriGeometryPoint&outFields=*&f=json&callback={callback}';
+
+        if (!cache[tileId]) {
+            cache[tileId] = {};
+        }
+        if (cache[tileId] && cache[tileId].metadata) {
+            return callback(null, cache[tileId].metadata);
+        }
+
+        // accurate metadata is only available >= 13
+        if (metadataLayer === 99) {
+            vintage = {
+                start: null,
+                end: null,
+                range: null
+            };
+            metadata = {
+                vintage: null,
+                source: unknown,
+                description: unknown,
+                resolution: unknown,
+                accuracy: unknown
+            };
+
+            callback(null, metadata);
+
+        } else {
+            inflight[tileId] = true;
+            jsonpRequest(url, function(result) {
+                delete inflight[tileId];
+
+                var err;
+                if (!result) {
+                    err = 'Unknown Error';
+                } else if (result.features && result.features.length < 1) {
+                    err = 'No Results';
+                } else if (result.error && result.error.message) {
+                    err = result.error.message;
+                }
+
+                if (err) {
+                    return callback(err);
+                } else {
+                    // pass through the discrete capture date from metadata
+                    var captureDate = localeDateString(result.features[0].attributes.SRC_DATE2);
+                    vintage = {
+                        start: captureDate,
+                        end: captureDate,
+                        range: captureDate
+                    };
+                    metadata = {
+                        vintage: vintage,
+                        source: clean(result.features[0].attributes.NICE_NAME),
+                        description: clean(result.features[0].attributes.NICE_DESC),
+                        resolution: clean(result.features[0].attributes.SRC_RES),
+                        accuracy: clean(result.features[0].attributes.SRC_ACC)
+                    };
+
+                    // append units - meters
+                    if (isFinite(metadata.resolution)) {
+                        metadata.resolution += ' m';
+                    }
+                    if (isFinite(metadata.accuracy)) {
+                        metadata.accuracy += ' m';
+                    }
+
+                    cache[tileId].metadata = metadata;
+                    return callback(null, metadata);
+                }
+            });
+        }
+
+
+        function clean(val) {
+            return String(val).trim() || unknown;
+        }
+    };
+
+    return esri;
 };
 
 

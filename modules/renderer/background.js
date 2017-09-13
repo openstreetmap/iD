@@ -243,6 +243,8 @@ export function rendererBackground(context) {
         backgroundSources = dataImagery.map(function(source) {
             if (source.type === 'bing') {
                 return rendererBackgroundSource.Bing(source, dispatch);
+            } else if (source.id === 'EsriWorldImagery') {
+                return rendererBackgroundSource.Esri(source);
             } else {
                 return rendererBackgroundSource(source);
             }

@@ -255,8 +255,8 @@ export function rendererTileLayer(context) {
                 .each(function(d) {
                     var span = d3.select(this);
                     var center = context.projection.invert(tileCenter(d));
-                    source.getVintage(center, d, function(err, result) {
-                        span.text((result && result.range) ||
+                    source.getMetadata(center, d, function(err, result) {
+                        span.text((result && result.vintage && result.vintage.range) ||
                             t('info_panels.background.vintage') + ': ' + t('info_panels.background.unknown')
                         );
                     });

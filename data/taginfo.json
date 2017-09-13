@@ -557,6 +557,10 @@
         },
         {
             "key": "vending",
+            "value": "feminine_hygiene"
+        },
+        {
+            "key": "vending",
             "value": "newspapers"
         },
         {
@@ -1644,6 +1648,10 @@
         {
             "key": "leisure",
             "value": "golf_course"
+        },
+        {
+            "key": "leisure",
+            "value": "hackerspace"
         },
         {
             "key": "leisure",
@@ -3064,6 +3072,10 @@
         {
             "key": "waterway",
             "value": "sanitary_dump_station"
+        },
+        {
+            "key": "intermittent",
+            "value": "yes"
         },
         {
             "key": "waterway",

@@ -47,19 +47,19 @@ export function presetPreset(id, preset, fields) {
     };
 
 
-    var name = preset.name || '';
+    var origName = preset.name || '';
     preset.name = function() {
         if (preset.suggestion) {
             id = id.split('/');
             id = id[0] + '/' + id[1];
-            return name + ' - ' + t('presets.presets.' + id + '.name');
+            return origName + ' - ' + t('presets.presets.' + id + '.name');
         }
-        return preset.t('name', {'default': name});
+        return preset.t('name', { 'default': origName });
     };
 
-
+    var origTerms = (preset.terms || []).join();
     preset.terms = function() {
-        return preset.t('terms', {'default': ''}).toLowerCase().trim().split(/\s*,+\s*/);
+        return preset.t('terms', { 'default': origTerms }).toLowerCase().trim().split(/\s*,+\s*/);
     };
 
 

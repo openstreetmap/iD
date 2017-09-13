@@ -18,6 +18,7 @@ export function uiField(context, presetField, entity, options) {
 
     var dispatch = d3.dispatch('change'),
         field = _.clone(presetField),
+        show = options.show,
         state = '',
         tags = {};
 
@@ -32,8 +33,6 @@ export function uiField(context, presetField, entity, options) {
     }
 
     field.keys = field.keys || [field.key];
-
-    field.show = options.show;
 
 
     function isModified() {
@@ -176,8 +175,18 @@ export function uiField(context, presetField, entity, options) {
     };
 
 
+    field.show = function() {
+        show = true;
+        if (field.default && field.key && tags[field.key] !== field.default) {
+            var t = {};
+            t[field.key] = field.default;
+            dispatch.call('change', this, t);
+        }
+    };
+
+
     field.isShown = function() {
-        return field.show || _.some(field.keys, function(key) { return !!tags[key]; });
+        return show || _.some(field.keys, function(key) { return !!tags[key]; });
     };
 
 

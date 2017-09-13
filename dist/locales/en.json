@@ -354,6 +354,10 @@
                 "title": "Background",
                 "zoom": "Zoom",
                 "vintage": "Vintage",
+                "source": "Source",
+                "description": "Description",
+                "resolution": "Resolution",
+                "accuracy": "Accuracy",
                 "unknown": "Unknown",
                 "show_tiles": "Show Tiles",
                 "hide_tiles": "Hide Tiles"
@@ -1619,6 +1623,9 @@
                 "inscription": {
                     "label": "Inscription"
                 },
+                "intermittent": {
+                    "label": "Intermittent"
+                },
                 "internet_access": {
                     "label": "Internet Access",
                     "options": {
@@ -2212,6 +2219,9 @@
                 },
                 "tomb": {
                     "label": "Type"
+                },
+                "tourism_attraction": {
+                    "label": "Tourism"
                 },
                 "tourism": {
                     "label": "Type"
@@ -2854,6 +2864,10 @@
                 "amenity/vending_machine/excrement_bags": {
                     "name": "Excrement Bag Vending Machine",
                     "terms": "excrement bags,poop,dog,animal"
+                },
+                "amenity/vending_machine/feminine_hygiene": {
+                    "name": "Feminine Hygiene Vending Machine",
+                    "terms": "condom,tampon,pad,woman,women,menstrual hygiene products,personal care"
                 },
                 "amenity/vending_machine/newspapers": {
                     "name": "Newspaper Vending Machine",
@@ -3917,7 +3931,7 @@
                 },
                 "leisure/bowling_alley": {
                     "name": "Bowling Alley",
-                    "terms": ""
+                    "terms": "bowling center"
                 },
                 "leisure/common": {
                     "name": "Common",
@@ -3954,6 +3968,10 @@
                 "leisure/golf_course": {
                     "name": "Golf Course",
                     "terms": "links"
+                },
+                "leisure/hackerspace": {
+                    "name": "Hackerspace",
+                    "terms": "makerspace,hackspace,hacklab"
                 },
                 "leisure/horse_riding": {
                     "name": "Horseback Riding Facility",
@@ -5398,6 +5416,10 @@
                 "waterway/sanitary_dump_station": {
                     "name": "Marine Toilet Disposal",
                     "terms": "Boat,Watercraft,Sanitary,Dump Station,Pumpout,Pump out,Elsan,CDP,CTDP,Chemical Toilet"
+                },
+                "waterway/stream_intermittent": {
+                    "name": "Intermittent Stream",
+                    "terms": "arroyo,beck,branch,brook,burn,course,creek,drift,flood,flow,gully,run,runnel,rush,spate,spritz,tributary,wadi,wash,watercourse"
                 },
                 "waterway/stream": {
                     "name": "Stream",

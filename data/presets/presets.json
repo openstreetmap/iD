@@ -889,8 +889,7 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
-                "area"
+                "vertex"
             ],
             "terms": [
                 "bike",
@@ -1088,8 +1087,7 @@
                 "capacity"
             ],
             "geometry": [
-                "point",
-                "area"
+                "point"
             ],
             "tags": {
                 "amenity": "charging_station"
@@ -3090,6 +3088,35 @@
             },
             "name": "Excrement Bag Vending Machine"
         },
+        "amenity/vending_machine/feminine_hygiene": {
+            "icon": "poi-vending-machine",
+            "fields": [
+                "operator",
+                "payment_multi",
+                "currency_multi"
+            ],
+            "geometry": [
+                "point"
+            ],
+            "terms": [
+                "condom",
+                "tampon",
+                "pad",
+                "woman",
+                "women",
+                "menstrual hygiene products",
+                "personal care"
+            ],
+            "tags": {
+                "amenity": "vending_machine",
+                "vending": "feminine_hygiene"
+            },
+            "reference": {
+                "key": "vending",
+                "value": "feminine_hygiene"
+            },
+            "name": "Feminine Hygiene Vending Machine"
+        },
         "amenity/vending_machine/newspapers": {
             "icon": "poi-vending-machine",
             "fields": [
@@ -3251,8 +3278,7 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
-                "area"
+                "vertex"
             ],
             "tags": {
                 "amenity": "waste_basket"
@@ -6428,8 +6454,7 @@
                 "access"
             ],
             "geometry": [
-                "line",
-                "area"
+                "line"
             ],
             "terms": [
                 "hike",
@@ -8379,7 +8404,9 @@
                 "point",
                 "area"
             ],
-            "terms": [],
+            "terms": [
+                "bowling center"
+            ],
             "tags": {
                 "leisure": "bowling_alley"
             },
@@ -8563,6 +8590,29 @@
                 "leisure": "golf_course"
             },
             "name": "Golf Course"
+        },
+        "leisure/hackerspace": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours",
+                "website"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "makerspace",
+                "hackspace",
+                "hacklab"
+            ],
+            "tags": {
+                "leisure": "hackerspace"
+            },
+            "name": "Hackerspace"
         },
         "leisure/horse_riding": {
             "icon": "horse-riding",
@@ -10112,6 +10162,10 @@
         },
         "natural/spring": {
             "icon": "water",
+            "fields": [
+                "name",
+                "intermittent"
+            ],
             "geometry": [
                 "point",
                 "vertex"
@@ -10189,11 +10243,12 @@
         },
         "natural/water/lake": {
             "icon": "water",
+            "fields": [
+                "name",
+                "intermittent"
+            ],
             "geometry": [
                 "area"
-            ],
-            "fields": [
-                "name"
             ],
             "tags": {
                 "natural": "water",
@@ -10212,11 +10267,12 @@
         },
         "natural/water/pond": {
             "icon": "water",
+            "fields": [
+                "name",
+                "intermittent"
+            ],
             "geometry": [
                 "area"
-            ],
-            "fields": [
-                "name"
             ],
             "tags": {
                 "natural": "water",
@@ -10237,11 +10293,12 @@
         },
         "natural/water/reservoir": {
             "icon": "water",
+            "fields": [
+                "name",
+                "intermittent"
+            ],
             "geometry": [
                 "area"
-            ],
-            "fields": [
-                "name"
             ],
             "tags": {
                 "natural": "water",
@@ -15345,7 +15402,8 @@
             "icon": "waterway-canal",
             "fields": [
                 "name",
-                "width"
+                "width",
+                "intermittent"
             ],
             "geometry": [
                 "line"
@@ -15374,7 +15432,8 @@
         "waterway/ditch": {
             "icon": "waterway-ditch",
             "fields": [
-                "tunnel_waterway"
+                "tunnel_waterway",
+                "intermittent"
             ],
             "geometry": [
                 "line"
@@ -15410,7 +15469,8 @@
         "waterway/drain": {
             "icon": "waterway-stream",
             "fields": [
-                "tunnel_waterway"
+                "tunnel_waterway",
+                "intermittent"
             ],
             "geometry": [
                 "line"
@@ -15449,7 +15509,8 @@
             "fields": [
                 "name",
                 "tunnel_waterway",
-                "width"
+                "width",
+                "intermittent"
             ],
             "geometry": [
                 "line"
@@ -15515,12 +15576,56 @@
             },
             "name": "Marine Toilet Disposal"
         },
+        "waterway/stream_intermittent": {
+            "icon": "waterway-stream",
+            "fields": [
+                "name",
+                "tunnel_waterway",
+                "width",
+                "intermittent"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "terms": [
+                "arroyo",
+                "beck",
+                "branch",
+                "brook",
+                "burn",
+                "course",
+                "creek",
+                "drift",
+                "flood",
+                "flow",
+                "gully",
+                "run",
+                "runnel",
+                "rush",
+                "spate",
+                "spritz",
+                "tributary",
+                "wadi",
+                "wash",
+                "watercourse"
+            ],
+            "tags": {
+                "waterway": "stream",
+                "intermittent": "yes"
+            },
+            "reference": {
+                "key": "waterway",
+                "value": "stream"
+            },
+            "name": "Intermittent Stream"
+        },
         "waterway/stream": {
             "icon": "waterway-stream",
             "fields": [
                 "name",
                 "tunnel_waterway",
-                "width"
+                "width",
+                "intermittent"
             ],
             "geometry": [
                 "line"
@@ -15574,7 +15679,8 @@
             "fields": [
                 "name",
                 "height",
-                "width"
+                "width",
+                "intermittent"
             ],
             "geometry": [
                 "vertex"

@@ -56,13 +56,23 @@ export function presetCollection(collection) {
             var leading_name = _.filter(searchable, function(a) {
                     return leading(a.name().toLowerCase());
                 }).sort(function(a, b) {
-                    var i;
+                    var aCompare = a.name().toLowerCase(),
+                        bCompare = b.name().toLowerCase(),
+                        i;
+
+                    // priority if search string matches preset name exactly - #4325
+                    if (value === aCompare) return -1;
+                    if (value === bCompare) return 1;
+
+                    // priority for higher matchScore
                     i = b.originalScore - a.originalScore;
                     if (i !== 0) return i;
 
-                    i = a.name().toLowerCase().indexOf(value) - b.name().toLowerCase().indexOf(value);
+                    // priority if search string appears earlier in preset name
+                    i = aCompare.indexOf(value) - bCompare.indexOf(value);
                     if (i !== 0) return i;
 
+                    // priority for shorter preset names
                     return a.name().length - b.name().length;
                 });
 

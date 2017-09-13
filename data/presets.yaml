@@ -630,6 +630,9 @@ en:
       inscription:
         # inscription=*
         label: Inscription
+      intermittent:
+        # intermittent=*
+        label: Intermittent
       internet_access:
         # internet_access=*
         label: Internet Access
@@ -1358,6 +1361,9 @@ en:
       tourism:
         # tourism=*
         label: Type
+      tourism_attraction:
+        # tourism=*
+        label: Tourism
       tower/construction:
         # 'tower:construction=*'
         label: Construction
@@ -2064,6 +2070,11 @@ en:
         name: Excrement Bag Vending Machine
         # 'terms: excrement bags,poop,dog,animal'
         terms: '<translate with synonyms or related terms for ''Excrement Bag Vending Machine'', separated by commas>'
+      amenity/vending_machine/feminine_hygiene:
+        # 'amenity=vending_machine, vending=feminine_hygiene'
+        name: Feminine Hygiene Vending Machine
+        # 'terms: condom,tampon,pad,woman,women,menstrual hygiene products,personal care'
+        terms: '<translate with synonyms or related terms for ''Feminine Hygiene Vending Machine'', separated by commas>'
       amenity/vending_machine/news_papers:
         # 'amenity=vending_machine, vending=news_papers'
         name: Newspaper Vending Machine
@@ -3233,6 +3244,7 @@ en:
       leisure/bowling_alley:
         # leisure=bowling_alley
         name: Bowling Alley
+        # 'terms: bowling center'
         terms: '<translate with synonyms or related terms for ''Bowling Alley'', separated by commas>'
       leisure/common:
         # leisure=common
@@ -3277,6 +3289,11 @@ en:
         name: Golf Course
         # 'terms: links'
         terms: '<translate with synonyms or related terms for ''Golf Course'', separated by commas>'
+      leisure/hackerspace:
+        # leisure=hackerspace
+        name: Hackerspace
+        # 'terms: makerspace,hackspace,hacklab'
+        terms: '<translate with synonyms or related terms for ''Hackerspace'', separated by commas>'
       leisure/horse_riding:
         # leisure=horse_riding
         name: Horseback Riding Facility
@@ -4891,6 +4908,11 @@ en:
         name: Stream
         # 'terms: beck,branch,brook,burn,course,creek,current,drift,flood,flow,freshet,race,rill,rindle,rivulet,run,runnel,rush,spate,spritz,surge,tide,torrent,tributary,watercourse'
         terms: '<translate with synonyms or related terms for ''Stream'', separated by commas>'
+      waterway/stream_intermittent:
+        # 'waterway=stream, intermittent=yes'
+        name: Intermittent Stream
+        # 'terms: arroyo,beck,branch,brook,burn,course,creek,drift,flood,flow,gully,run,runnel,rush,spate,spritz,tributary,wadi,wash,watercourse'
+        terms: '<translate with synonyms or related terms for ''Intermittent Stream'', separated by commas>'
       waterway/water_point:
         # waterway=water_point
         name: Marine Drinking Water

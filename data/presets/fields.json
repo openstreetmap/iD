@@ -875,6 +875,11 @@
             "type": "textarea",
             "label": "Inscription"
         },
+        "intermittent": {
+            "key": "intermittent",
+            "type": "check",
+            "label": "Intermittent"
+        },
         "internet_access": {
             "key": "internet_access",
             "type": "combo",
@@ -1846,6 +1851,13 @@
             "key": "tomb",
             "type": "typeCombo",
             "label": "Type"
+        },
+        "tourism_attraction": {
+            "key": "tourism",
+            "default": "attraction",
+            "type": "typeCombo",
+            "universal": true,
+            "label": "Tourism"
         },
         "tourism": {
             "key": "tourism",

@@ -73,7 +73,7 @@
     background-color: rgba(0, 0, 0, 0.4);
     padding: 0 4px;
     border-radius: 4px;
-    transform: translate(-50%, -120%) !important;
+    top: -25px;
 }
 
 #mly .domRenderer .Attribution {
