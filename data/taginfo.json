@@ -244,6 +244,14 @@
             "value": "clinic"
         },
         {
+            "key": "healthcare:speciality",
+            "value": "abortion"
+        },
+        {
+            "key": "healthcare:speciality",
+            "value": "fertility"
+        },
+        {
             "key": "amenity",
             "value": "clock"
         },
@@ -1206,6 +1214,22 @@
         },
         {
             "key": "healthcare",
+            "value": "alternative"
+        },
+        {
+            "key": "healthcare:speciality",
+            "value": "chiropractic"
+        },
+        {
+            "key": "healthcare",
+            "value": "audiologist"
+        },
+        {
+            "key": "healthcare",
+            "value": "birthing_center"
+        },
+        {
+            "key": "healthcare",
             "value": "blood_donation"
         },
         {
@@ -1215,6 +1239,34 @@
         {
             "key": "healthcare",
             "value": "midwife"
+        },
+        {
+            "key": "healthcare",
+            "value": "occupational_therapist"
+        },
+        {
+            "key": "healthcare",
+            "value": "optometrist"
+        },
+        {
+            "key": "healthcare",
+            "value": "physiotherapist"
+        },
+        {
+            "key": "healthcare",
+            "value": "podiatrist"
+        },
+        {
+            "key": "healthcare",
+            "value": "psychotherapist"
+        },
+        {
+            "key": "healthcare",
+            "value": "rehabilitation"
+        },
+        {
+            "key": "healthcare",
+            "value": "speech_therapist"
         },
         {
             "key": "highway",

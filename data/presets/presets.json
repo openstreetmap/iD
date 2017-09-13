@@ -1184,6 +1184,64 @@
             },
             "name": "Clinic"
         },
+        "amenity/clinic/abortion": {
+            "icon": "hospital",
+            "fields": [
+                "name",
+                "operator",
+                "healthcare/speciality",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [],
+            "tags": {
+                "amenity": "clinic",
+                "healthcare": "clinic",
+                "healthcare:speciality": "abortion"
+            },
+            "reference": {
+                "key": "amenity",
+                "value": "clinic"
+            },
+            "name": "Abortion Clinic"
+        },
+        "amenity/clinic/fertility": {
+            "icon": "hospital",
+            "fields": [
+                "name",
+                "operator",
+                "healthcare/speciality",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "egg",
+                "fertility",
+                "reproductive",
+                "sperm",
+                "ovulation"
+            ],
+            "tags": {
+                "amenity": "clinic",
+                "healthcare": "clinic",
+                "healthcare:speciality": "fertility"
+            },
+            "reference": {
+                "key": "amenity",
+                "value": "clinic"
+            },
+            "name": "Fertility Clinic"
+        },
         "amenity/clock": {
             "icon": "poi-clock",
             "fields": [
@@ -6184,11 +6242,126 @@
             ],
             "name": "Healthcare Facility"
         },
+        "healthcare/alternative": {
+            "icon": "hospital",
+            "fields": [
+                "name",
+                "operator",
+                "healthcare/speciality",
+                "building_area",
+                "address",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "acupuncture",
+                "anthroposophical",
+                "applied_kinesiology",
+                "aromatherapy",
+                "ayurveda",
+                "heabalism",
+                "homeopathy",
+                "hydrotherapy",
+                "hypnosis",
+                "naturopathy",
+                "osteopathy",
+                "reflexology",
+                "reiki",
+                "shiatsu",
+                "traditional",
+                "tuina",
+                "unani"
+            ],
+            "tags": {
+                "healthcare": "alternative"
+            },
+            "name": "Alternative Medicine"
+        },
+        "healthcare/alternative/chiropractic": {
+            "icon": "hospital",
+            "fields": [
+                "name",
+                "operator",
+                "healthcare/speciality",
+                "building_area",
+                "address",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "back",
+                "pain",
+                "spine"
+            ],
+            "tags": {
+                "healthcare": "alternative",
+                "healthcare:speciality": "chiropractic"
+            },
+            "name": "Chiropractor"
+        },
+        "healthcare/audiologist": {
+            "icon": "hospital",
+            "fields": [
+                "name",
+                "operator",
+                "healthcare/speciality",
+                "building_area",
+                "address",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "ear",
+                "hearing",
+                "sound"
+            ],
+            "tags": {
+                "healthcare": "audiologist"
+            },
+            "name": "Audiologist"
+        },
+        "healthcare/birthing_center": {
+            "icon": "hospital",
+            "fields": [
+                "name",
+                "operator",
+                "healthcare/speciality",
+                "building_area",
+                "address",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "baby",
+                "childbirth",
+                "delivery",
+                "labour",
+                "labor",
+                "pregnancy"
+            ],
+            "tags": {
+                "healthcare": "birthing_center"
+            },
+            "name": "Birthing Center"
+        },
         "healthcare/blood_donation": {
             "icon": "blood-bank",
             "fields": [
                 "name",
                 "operator",
+                "healthcare/speciality",
                 "blood_components",
                 "address",
                 "building_area",
@@ -6217,6 +6390,7 @@
             "fields": [
                 "name",
                 "operator",
+                "healthcare/speciality",
                 "building_area",
                 "address",
                 "opening_hours"
@@ -6239,6 +6413,7 @@
             "fields": [
                 "name",
                 "operator",
+                "healthcare/speciality",
                 "building_area",
                 "address",
                 "opening_hours"
@@ -6248,13 +6423,191 @@
                 "area"
             ],
             "terms": [
-                "pregnancy",
-                "childbirth"
+                "baby",
+                "childbirth",
+                "delivery",
+                "labour",
+                "labor",
+                "pregnancy"
             ],
             "tags": {
                 "healthcare": "midwife"
             },
             "name": "Midwife"
+        },
+        "healthcare/occupational_therapist": {
+            "icon": "hospital",
+            "fields": [
+                "name",
+                "operator",
+                "healthcare/speciality",
+                "building_area",
+                "address",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "therapist",
+                "therapy"
+            ],
+            "tags": {
+                "healthcare": "occupational_therapist"
+            },
+            "name": "Occupational Therapist"
+        },
+        "healthcare/optometrist": {
+            "icon": "hospital",
+            "fields": [
+                "name",
+                "operator",
+                "healthcare/speciality",
+                "building_area",
+                "address",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "eye",
+                "glasses",
+                "lasik",
+                "lenses",
+                "vision"
+            ],
+            "tags": {
+                "healthcare": "optometrist"
+            },
+            "name": "Optometrist"
+        },
+        "healthcare/physiotherapist": {
+            "icon": "hospital",
+            "fields": [
+                "name",
+                "operator",
+                "healthcare/speciality",
+                "building_area",
+                "address",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "physical",
+                "therapist",
+                "therapy"
+            ],
+            "tags": {
+                "healthcare": "physiotherapist"
+            },
+            "name": "Physiotherapist"
+        },
+        "healthcare/podiatrist": {
+            "icon": "hospital",
+            "fields": [
+                "name",
+                "operator",
+                "healthcare/speciality",
+                "building_area",
+                "address",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "foot",
+                "feet"
+            ],
+            "tags": {
+                "healthcare": "podiatrist"
+            },
+            "name": "Podiatrist"
+        },
+        "healthcare/psychotherapist": {
+            "icon": "hospital",
+            "fields": [
+                "name",
+                "operator",
+                "healthcare/speciality",
+                "building_area",
+                "address",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "anxiety",
+                "counselor",
+                "depression",
+                "mental health",
+                "mind",
+                "suicide",
+                "therapist",
+                "therapy"
+            ],
+            "tags": {
+                "healthcare": "psychotherapist"
+            },
+            "name": "Psychotherapist"
+        },
+        "healthcare/rehabilitation": {
+            "icon": "hospital",
+            "fields": [
+                "name",
+                "operator",
+                "healthcare/speciality",
+                "building_area",
+                "address",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "rehab",
+                "therapist",
+                "therapy"
+            ],
+            "tags": {
+                "healthcare": "rehabilitation"
+            },
+            "name": "Rehabilitation Facility"
+        },
+        "healthcare/speech_therapist": {
+            "icon": "hospital",
+            "fields": [
+                "name",
+                "operator",
+                "healthcare/speciality",
+                "building_area",
+                "address",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "speech",
+                "therapist",
+                "therapy",
+                "voice"
+            ],
+            "tags": {
+                "healthcare": "speech_therapist"
+            },
+            "name": "Speech Therapist"
         },
         "highway/bridleway": {
             "fields": [

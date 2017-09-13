@@ -1686,6 +1686,15 @@ en:
         name: Clinic
         # 'terms: medical,urgentcare'
         terms: '<translate with synonyms or related terms for ''Clinic'', separated by commas>'
+      amenity/clinic/abortion:
+        # 'amenity=clinic, healthcare=clinic, healthcare:speciality=abortion'
+        name: Abortion Clinic
+        terms: '<translate with synonyms or related terms for ''Abortion Clinic'', separated by commas>'
+      amenity/clinic/fertility:
+        # 'amenity=clinic, healthcare=clinic, healthcare:speciality=fertility'
+        name: Fertility Clinic
+        # 'terms: egg,fertility,reproductive,sperm,ovulation'
+        terms: '<translate with synonyms or related terms for ''Fertility Clinic'', separated by commas>'
       amenity/clock:
         # amenity=clock
         name: Clock
@@ -2771,6 +2780,26 @@ en:
         name: Healthcare Facility
         # 'terms: clinic,doctor,disease,health,institution,sick,surgery,wellness'
         terms: '<translate with synonyms or related terms for ''Healthcare Facility'', separated by commas>'
+      healthcare/alternative:
+        # healthcare=alternative
+        name: Alternative Medicine
+        # 'terms: acupuncture,anthroposophical,applied_kinesiology,aromatherapy,ayurveda,heabalism,homeopathy,hydrotherapy,hypnosis,naturopathy,osteopathy,reflexology,reiki,shiatsu,traditional,tuina,unani'
+        terms: '<translate with synonyms or related terms for ''Alternative Medicine'', separated by commas>'
+      healthcare/alternative/chiropractic:
+        # 'healthcare=alternative, healthcare:speciality=chiropractic'
+        name: Chiropractor
+        # 'terms: back,pain,spine'
+        terms: '<translate with synonyms or related terms for ''Chiropractor'', separated by commas>'
+      healthcare/audiologist:
+        # healthcare=audiologist
+        name: Audiologist
+        # 'terms: ear,hearing,sound'
+        terms: '<translate with synonyms or related terms for ''Audiologist'', separated by commas>'
+      healthcare/birthing_center:
+        # healthcare=birthing_center
+        name: Birthing Center
+        # 'terms: baby,childbirth,delivery,labour,labor,pregnancy'
+        terms: '<translate with synonyms or related terms for ''Birthing Center'', separated by commas>'
       healthcare/blood_donation:
         # healthcare=blood_donation
         name: Blood Donor Center
@@ -2784,8 +2813,43 @@ en:
       healthcare/midwife:
         # healthcare=midwife
         name: Midwife
-        # 'terms: pregnancy,childbirth'
+        # 'terms: baby,childbirth,delivery,labour,labor,pregnancy'
         terms: '<translate with synonyms or related terms for ''Midwife'', separated by commas>'
+      healthcare/occupational_therapist:
+        # healthcare=occupational_therapist
+        name: Occupational Therapist
+        # 'terms: therapist,therapy'
+        terms: '<translate with synonyms or related terms for ''Occupational Therapist'', separated by commas>'
+      healthcare/optometrist:
+        # healthcare=optometrist
+        name: Optometrist
+        # 'terms: eye,glasses,lasik,lenses,vision'
+        terms: '<translate with synonyms or related terms for ''Optometrist'', separated by commas>'
+      healthcare/physiotherapist:
+        # healthcare=physiotherapist
+        name: Physiotherapist
+        # 'terms: physical,therapist,therapy'
+        terms: '<translate with synonyms or related terms for ''Physiotherapist'', separated by commas>'
+      healthcare/podiatrist:
+        # healthcare=podiatrist
+        name: Podiatrist
+        # 'terms: foot,feet'
+        terms: '<translate with synonyms or related terms for ''Podiatrist'', separated by commas>'
+      healthcare/psychotherapist:
+        # healthcare=psychotherapist
+        name: Psychotherapist
+        # 'terms: anxiety,counselor,depression,mental health,mind,suicide,therapist,therapy'
+        terms: '<translate with synonyms or related terms for ''Psychotherapist'', separated by commas>'
+      healthcare/rehabilitation:
+        # healthcare=rehabilitation
+        name: Rehabilitation Facility
+        # 'terms: rehab,therapist,therapy'
+        terms: '<translate with synonyms or related terms for ''Rehabilitation Facility'', separated by commas>'
+      healthcare/speech_therapist:
+        # healthcare=speech_therapist
+        name: Speech Therapist
+        # 'terms: speech,therapist,therapy,voice'
+        terms: '<translate with synonyms or related terms for ''Speech Therapist'', separated by commas>'
       highway:
         # highway=*
         name: Highway

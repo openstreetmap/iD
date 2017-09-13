@@ -2549,6 +2549,14 @@
                     "name": "Clinic",
                     "terms": "medical,urgentcare"
                 },
+                "amenity/clinic/abortion": {
+                    "name": "Abortion Clinic",
+                    "terms": ""
+                },
+                "amenity/clinic/fertility": {
+                    "name": "Fertility Clinic",
+                    "terms": "egg,fertility,reproductive,sperm,ovulation"
+                },
                 "amenity/clock": {
                     "name": "Clock",
                     "terms": ""
@@ -3517,6 +3525,22 @@
                     "name": "Healthcare Facility",
                     "terms": "clinic,doctor,disease,health,institution,sick,surgery,wellness"
                 },
+                "healthcare/alternative": {
+                    "name": "Alternative Medicine",
+                    "terms": "acupuncture,anthroposophical,applied_kinesiology,aromatherapy,ayurveda,heabalism,homeopathy,hydrotherapy,hypnosis,naturopathy,osteopathy,reflexology,reiki,shiatsu,traditional,tuina,unani"
+                },
+                "healthcare/alternative/chiropractic": {
+                    "name": "Chiropractor",
+                    "terms": "back,pain,spine"
+                },
+                "healthcare/audiologist": {
+                    "name": "Audiologist",
+                    "terms": "ear,hearing,sound"
+                },
+                "healthcare/birthing_center": {
+                    "name": "Birthing Center",
+                    "terms": "baby,childbirth,delivery,labour,labor,pregnancy"
+                },
                 "healthcare/blood_donation": {
                     "name": "Blood Donor Center",
                     "terms": "blood bank,blood donation,blood transfusion,apheresis,plasmapheresis,plateletpheresis,stem cell donation"
@@ -3527,7 +3551,35 @@
                 },
                 "healthcare/midwife": {
                     "name": "Midwife",
-                    "terms": "pregnancy,childbirth"
+                    "terms": "baby,childbirth,delivery,labour,labor,pregnancy"
+                },
+                "healthcare/occupational_therapist": {
+                    "name": "Occupational Therapist",
+                    "terms": "therapist,therapy"
+                },
+                "healthcare/optometrist": {
+                    "name": "Optometrist",
+                    "terms": "eye,glasses,lasik,lenses,vision"
+                },
+                "healthcare/physiotherapist": {
+                    "name": "Physiotherapist",
+                    "terms": "physical,therapist,therapy"
+                },
+                "healthcare/podiatrist": {
+                    "name": "Podiatrist",
+                    "terms": "foot,feet"
+                },
+                "healthcare/psychotherapist": {
+                    "name": "Psychotherapist",
+                    "terms": "anxiety,counselor,depression,mental health,mind,suicide,therapist,therapy"
+                },
+                "healthcare/rehabilitation": {
+                    "name": "Rehabilitation Facility",
+                    "terms": "rehab,therapist,therapy"
+                },
+                "healthcare/speech_therapist": {
+                    "name": "Speech Therapist",
+                    "terms": "speech,therapist,therapy,voice"
                 },
                 "highway/bridleway": {
                     "name": "Bridle Path",
