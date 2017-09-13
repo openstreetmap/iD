@@ -1153,7 +1153,8 @@
             "icon": "hospital",
             "fields": [
                 "name",
-                "speciality_clinic",
+                "operator",
+                "healthcare/speciality",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -1164,9 +1165,7 @@
             ],
             "terms": [
                 "medical",
-                "urgentcare",
-                "abortion",
-                "fertility"
+                "urgentcare"
             ],
             "tags": {
                 "amenity": "clinic"
@@ -1299,6 +1298,8 @@
             "icon": "dentist",
             "fields": [
                 "name",
+                "operator",
+                "healthcare/speciality",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -1332,6 +1333,8 @@
             "icon": "hospital",
             "fields": [
                 "name",
+                "operator",
+                "healthcare/speciality",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -1599,6 +1602,7 @@
             "fields": [
                 "name",
                 "operator",
+                "healthcare/speciality",
                 "address",
                 "emergency"
             ],
@@ -6143,11 +6147,10 @@
             "fields": [
                 "name",
                 "operator",
+                "blood_components",
                 "address",
                 "building_area",
-                "blood_components",
-                "opening_hours",
-                "ref"
+                "opening_hours"
             ],
             "geometry": [
                 "point",
@@ -6174,8 +6177,7 @@
                 "operator",
                 "building_area",
                 "address",
-                "opening_hours",
-                "ref"
+                "opening_hours"
             ],
             "geometry": [
                 "point",
@@ -6197,8 +6199,7 @@
                 "operator",
                 "building_area",
                 "address",
-                "opening_hours",
-                "ref"
+                "opening_hours"
             ],
             "geometry": [
                 "point",
@@ -6212,35 +6213,6 @@
                 "healthcare": "midwife"
             },
             "name": "Midwife"
-        },
-        "healthcare/specialist": {
-            "icon": "hospital",
-            "fields": [
-                "name",
-                "operator",
-                "speciality",
-                "building_area",
-                "address",
-                "opening_hours",
-                "ref"
-            ],
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "terms": [
-                "special"
-            ],
-            "tags": {
-                "healthcare:speciality": "*"
-            },
-            "addTags": {
-                "healthcare:speciality": "general"
-            },
-            "removeTags": {
-                "healthcare:speciality": "general"
-            },
-            "name": "Healthcare Specialist"
         },
         "highway/bridleway": {
             "fields": [
@@ -29336,7 +29308,8 @@
             ],
             "fields": [
                 "name",
-                "speciality_clinic",
+                "operator",
+                "healthcare/speciality",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -29356,6 +29329,8 @@
             ],
             "fields": [
                 "name",
+                "operator",
+                "healthcare/speciality",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -29375,6 +29350,8 @@
             ],
             "fields": [
                 "name",
+                "operator",
+                "healthcare/speciality",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -29394,6 +29371,8 @@
             ],
             "fields": [
                 "name",
+                "operator",
+                "healthcare/speciality",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -29413,6 +29392,8 @@
             ],
             "fields": [
                 "name",
+                "operator",
+                "healthcare/speciality",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -29432,6 +29413,8 @@
             ],
             "fields": [
                 "name",
+                "operator",
+                "healthcare/speciality",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -29451,6 +29434,8 @@
             ],
             "fields": [
                 "name",
+                "operator",
+                "healthcare/speciality",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -29470,6 +29455,8 @@
             ],
             "fields": [
                 "name",
+                "operator",
+                "healthcare/speciality",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -29489,6 +29476,8 @@
             ],
             "fields": [
                 "name",
+                "operator",
+                "healthcare/speciality",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -29508,6 +29497,8 @@
             ],
             "fields": [
                 "name",
+                "operator",
+                "healthcare/speciality",
                 "address",
                 "building_area",
                 "opening_hours"
@@ -38790,6 +38781,7 @@
             "fields": [
                 "name",
                 "operator",
+                "healthcare/speciality",
                 "address",
                 "emergency"
             ],
@@ -38809,6 +38801,7 @@
             "fields": [
                 "name",
                 "operator",
+                "healthcare/speciality",
                 "address",
                 "emergency"
             ],
@@ -38828,6 +38821,7 @@
             "fields": [
                 "name",
                 "operator",
+                "healthcare/speciality",
                 "address",
                 "emergency"
             ],
@@ -38847,6 +38841,7 @@
             "fields": [
                 "name",
                 "operator",
+                "healthcare/speciality",
                 "address",
                 "emergency"
             ],
@@ -38866,6 +38861,7 @@
             "fields": [
                 "name",
                 "operator",
+                "healthcare/speciality",
                 "address",
                 "emergency"
             ],
@@ -38885,6 +38881,7 @@
             "fields": [
                 "name",
                 "operator",
+                "healthcare/speciality",
                 "address",
                 "emergency"
             ],
@@ -38904,6 +38901,7 @@
             "fields": [
                 "name",
                 "operator",
+                "healthcare/speciality",
                 "address",
                 "emergency"
             ],
@@ -38923,6 +38921,7 @@
             "fields": [
                 "name",
                 "operator",
+                "healthcare/speciality",
                 "address",
                 "emergency"
             ],
@@ -38942,6 +38941,7 @@
             "fields": [
                 "name",
                 "operator",
+                "healthcare/speciality",
                 "address",
                 "emergency"
             ],
@@ -38961,6 +38961,7 @@
             "fields": [
                 "name",
                 "operator",
+                "healthcare/speciality",
                 "address",
                 "emergency"
             ],
@@ -38980,6 +38981,7 @@
             "fields": [
                 "name",
                 "operator",
+                "healthcare/speciality",
                 "address",
                 "emergency"
             ],

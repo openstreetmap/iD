@@ -1582,6 +1582,9 @@
                     "label": "Hashtags",
                     "placeholder": "#example"
                 },
+                "healthcare/speciality": {
+                    "label": "Specialties"
+                },
                 "height": {
                     "label": "Height (Meters)"
                 },
@@ -2115,16 +2118,6 @@
                 "source": {
                     "label": "Sources"
                 },
-                "speciality_clinic": {
-                    "label": "Specialties",
-                    "options": {
-                        "abortion": "Abortion",
-                        "fertility": "Fertility"
-                    }
-                },
-                "speciality": {
-                    "label": "Specialties"
-                },
                 "sport_ice": {
                     "label": "Sports"
                 },
@@ -2551,7 +2544,7 @@
                 },
                 "amenity/clinic": {
                     "name": "Clinic",
-                    "terms": "medical,urgentcare,abortion,fertility"
+                    "terms": "medical,urgentcare"
                 },
                 "amenity/clock": {
                     "name": "Clock",
@@ -3528,10 +3521,6 @@
                 "healthcare/midwife": {
                     "name": "Midwife",
                     "terms": "pregnancy,childbirth"
-                },
-                "healthcare/specialist": {
-                    "name": "Healthcare Specialist",
-                    "terms": "special"
                 },
                 "highway/bridleway": {
                     "name": "Bridle Path",

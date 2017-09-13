@@ -587,6 +587,9 @@ en:
         label: Hashtags
         # hashtags field placeholder
         placeholder: '#example'
+      healthcare/speciality:
+        # 'healthcare:speciality=*'
+        label: Specialties
       height:
         # height=*
         label: Height (Meters)
@@ -1238,17 +1241,6 @@ en:
       source:
         # source=*
         label: Sources
-      speciality:
-        # 'healthcare:speciality=*'
-        label: Specialties
-      speciality_clinic:
-        # 'healthcare:speciality=*'
-        label: Specialties
-        options:
-          # 'healthcare:speciality=abortion'
-          abortion: Abortion
-          # 'healthcare:speciality=fertility'
-          fertility: Fertility
       sport:
         # sport=*
         label: Sports
@@ -1689,7 +1681,7 @@ en:
       amenity/clinic:
         # amenity=clinic
         name: Clinic
-        # 'terms: medical,urgentcare,abortion,fertility'
+        # 'terms: medical,urgentcare'
         terms: '<translate with synonyms or related terms for ''Clinic'', separated by commas>'
       amenity/clock:
         # amenity=clock
@@ -2786,11 +2778,6 @@ en:
         name: Midwife
         # 'terms: pregnancy,childbirth'
         terms: '<translate with synonyms or related terms for ''Midwife'', separated by commas>'
-      healthcare/specialist:
-        # 'healthcare:speciality=*'
-        name: Healthcare Specialist
-        # 'terms: special'
-        terms: '<translate with synonyms or related terms for ''Healthcare Specialist'', separated by commas>'
       highway:
         # highway=*
         name: Highway

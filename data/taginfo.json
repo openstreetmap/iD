@@ -1214,9 +1214,6 @@
             "value": "midwife"
         },
         {
-            "key": "healthcare:speciality"
-        },
-        {
             "key": "highway",
             "value": "bridleway"
         },

@@ -2,7 +2,8 @@
     "icon": "hospital",
     "fields": [
         "name",
-        "speciality_clinic",
+        "operator",
+        "healthcare/speciality",
         "address",
         "building_area",
         "opening_hours"
@@ -13,9 +14,7 @@
     ],
     "terms": [
         "medical",
-        "urgentcare",
-        "abortion",
-        "fertility"
+        "urgentcare"
     ],
     "tags": {
         "amenity": "clinic"
