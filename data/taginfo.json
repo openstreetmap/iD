@@ -1202,6 +1202,9 @@
             "value": "water_hazard"
         },
         {
+            "key": "healthcare"
+        },
+        {
             "key": "healthcare",
             "value": "blood_donation"
         },

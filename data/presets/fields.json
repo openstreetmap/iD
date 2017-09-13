@@ -808,6 +808,11 @@
             "label": "Hashtags",
             "placeholder": "#example"
         },
+        "healthcare": {
+            "key": "healthcare",
+            "type": "typeCombo",
+            "label": "Type"
+        },
         "healthcare/speciality": {
             "key": "healthcare:speciality",
             "type": "semiCombo",

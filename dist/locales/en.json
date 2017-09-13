@@ -1582,6 +1582,9 @@
                     "label": "Hashtags",
                     "placeholder": "#example"
                 },
+                "healthcare": {
+                    "label": "Type"
+                },
                 "healthcare/speciality": {
                     "label": "Specialties"
                 },
@@ -3509,6 +3512,10 @@
                 "golf/water_hazard_line": {
                     "name": "Water Hazard",
                     "terms": ""
+                },
+                "healthcare": {
+                    "name": "Healthcare Facility",
+                    "terms": "clinic,doctor,disease,health,institution,sick,surgery,wellness"
                 },
                 "healthcare/blood_donation": {
                     "name": "Blood Donor Center",

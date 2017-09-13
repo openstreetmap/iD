@@ -587,6 +587,9 @@ en:
         label: Hashtags
         # hashtags field placeholder
         placeholder: '#example'
+      healthcare:
+        # healthcare=*
+        label: Type
       healthcare/speciality:
         # 'healthcare:speciality=*'
         label: Specialties
@@ -2763,6 +2766,11 @@ en:
         # golf=water_hazard
         name: Water Hazard
         terms: '<translate with synonyms or related terms for ''Water Hazard'', separated by commas>'
+      healthcare:
+        # healthcare=*
+        name: Healthcare Facility
+        # 'terms: clinic,doctor,disease,health,institution,sick,surgery,wellness'
+        terms: '<translate with synonyms or related terms for ''Healthcare Facility'', separated by commas>'
       healthcare/blood_donation:
         # healthcare=blood_donation
         name: Blood Donor Center
