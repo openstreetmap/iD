@@ -1,6 +1,11 @@
 import * as d3 from 'd3';
 import { t } from '../util/locale';
+import { JXON } from '../util/jxon';
+import { actionDiscardTags } from '../actions';
+import { osmChangeset } from '../osm';
 import { svgIcon } from '../svg';
+import { utilDetect } from '../util/detect';
+
 import {
     utilDisplayName,
     utilDisplayType,
@@ -9,10 +14,13 @@ import {
 
 
 export function uiCommitChanges(context) {
+    var detected = utilDetect();
+
 
     function commitChanges(selection) {
 
-        var summary = context.history().difference().summary();
+        var history = context.history(),
+            summary = history.difference().summary();
 
         var container = selection.selectAll('.modal-section.commit-section')
             .data([0]);
@@ -83,6 +91,36 @@ export function uiCommitChanges(context) {
             .on('mouseover', mouseover)
             .on('mouseout', mouseout)
             .on('click', zoomToEntity);
+
+
+        // Download changeset link
+        var changeset = new osmChangeset({ id: 'CHANGEME' }),
+            changes = history.changes(actionDiscardTags(history.difference())),
+            data = JXON.stringify(changeset.osmChangeJXON(changes)),
+            uri = 'data:text/xml,' + encodeURIComponent(data);
+
+        var downloadLink = container.selectAll('.download-changes')
+            .data([0]);
+
+        var enter = downloadLink.enter()
+            .append('a')
+            .attr('class', 'download-changes')
+            .attr('href', uri)                     // no IE11 ?
+            .attr('download', 'changes.osc')       // no IE11 ?
+            // .attr('target', '_blank')           // maybe IE11 ?
+            .call(svgIcon('#icon-load', 'inline'));
+
+        enter
+            .append('span')
+            .text(t('commit.download_changes'));
+
+        downloadLink
+            .merge(enter)
+            .on('click.download', function() {
+                if (!detected.ie) return;         // yes IE11 ?
+                var win = window.open(uri, '_blank');
+                win.focus();
+            });
 
 
         function mouseover(d) {

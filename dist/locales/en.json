@@ -334,6 +334,7 @@
             "save": "Upload",
             "cancel": "Cancel",
             "changes": "{count} Changes",
+            "download_changes": "Download OsmChange file",
             "warnings": "Warnings",
             "modified": "Modified",
             "deleted": "Deleted",

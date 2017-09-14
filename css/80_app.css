@@ -3532,6 +3532,7 @@ img.tile-removing {
     border: 1px solid #ccc;
     border-radius: 4px;
     background: #fff;
+    margin-bottom: 10px;
 }
 
 .mode-save .warning-section {

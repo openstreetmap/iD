@@ -249,6 +249,7 @@ export function modeSave(context) {
             selection.call(uiConflicts(context)
                 .list(conflicts)
                 .on('download', function() {
+                    // FIXME:
                     var data = JXON.stringify(changeset.update({ id: 'CHANGEME' }).osmChangeJXON(origChanges)),
                         win = window.open('data:text/xml,' + encodeURIComponent(data), '_blank');
                     win.focus();
