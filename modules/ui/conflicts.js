@@ -1,14 +1,18 @@
 import * as d3 from 'd3';
 import { t } from '../util/locale';
-import { geoExtent } from '../geo/index';
-import { svgIcon } from '../svg/index';
-import { utilEntityOrMemberSelector } from '../util/index';
+import { JXON } from '../util/jxon';
+import { geoExtent } from '../geo';
+import { osmChangeset } from '../osm';
+import { svgIcon } from '../svg';
+import { utilDetect } from '../util/detect';
+import { utilEntityOrMemberSelector } from '../util';
 import { utilRebind } from '../util/rebind';
 
 
 export function uiConflicts(context) {
-    var dispatch = d3.dispatch('download', 'cancel', 'save'),
-        list;
+    var dispatch = d3.dispatch('cancel', 'save'),
+        origChanges,
+        conflictList;
 
 
     function conflicts(selection) {
@@ -30,14 +34,28 @@ export function uiConflicts(context) {
             .append('div')
             .attr('class', 'body fillL');
 
+
+        // Download changes link
+        var detected = utilDetect(),
+            changeset = new osmChangeset({ id: 'CHANGEME' }),
+            data = JXON.stringify(changeset.osmChangeJXON(origChanges)),
+            uri = 'data:text/xml,' + encodeURIComponent(data);
+
         body
             .append('div')
             .attr('class', 'conflicts-help')
             .text(t('save.conflict.help'))
             .append('a')
             .attr('class', 'conflicts-download')
+            .attr('href', uri)                     // no IE11 ?
+            .attr('download', 'changes.osc')       // no IE11 ?
+            // .attr('target', '_blank')           // maybe IE11 ?
             .text(t('save.conflict.download_changes'))
-            .on('click.download', function() { dispatch.call('download'); });
+            .on('click.download', function() {
+                if (!detected.ie) return;         // yes IE11 ?
+                var win = window.open(uri, '_blank');
+                win.focus();
+            });
 
         body
             .append('div')
@@ -57,7 +75,7 @@ export function uiConflicts(context) {
 
         buttons
             .append('button')
-            .attr('disabled', list.length > 1)
+            .attr('disabled', conflictList.length > 1)
             .attr('class', 'action conflicts-button col6')
             .text(t('save.title'))
             .on('click.try_again', function() { dispatch.call('save'); });
@@ -71,12 +89,12 @@ export function uiConflicts(context) {
 
 
     function showConflict(selection, index) {
-        if (index < 0 || index >= list.length) return;
+        if (index < 0 || index >= conflictList.length) return;
 
         var parent = d3.select(selection.node().parentNode);
 
         // enable save button if this is the last conflict being reviewed..
-        if (index === list.length - 1) {
+        if (index === conflictList.length - 1) {
             window.setTimeout(function() {
                 parent.select('.conflicts-button')
                     .attr('disabled', null);
@@ -90,7 +108,7 @@ export function uiConflicts(context) {
 
         var item = selection
             .selectAll('.conflict')
-            .data([list[index]]);
+            .data([conflictList[index]]);
 
         var enter = item.enter()
             .append('div')
@@ -99,7 +117,7 @@ export function uiConflicts(context) {
         enter
             .append('h4')
             .attr('class', 'conflict-count')
-            .text(t('save.conflict.count', { num: index + 1, total: list.length }));
+            .text(t('save.conflict.count', { num: index + 1, total: conflictList.length }));
 
         enter
             .append('a')
@@ -141,7 +159,7 @@ export function uiConflicts(context) {
             .attr('class', 'conflict-nav-button action col6')
             .attr('disabled', function(d, i) {
                 return (i === 0 && index === 0) ||
-                    (i === 1 && index === list.length - 1) || null;
+                    (i === 1 && index === conflictList.length - 1) || null;
             })
             .on('click', function(d, i) {
                 var container = parent.select('.conflict-container'),
@@ -252,8 +270,15 @@ export function uiConflicts(context) {
     //     ]
     // }
     conflicts.list = function(_) {
-        if (!arguments.length) return list;
-        list = _;
+        if (!arguments.length) return conflictList;
+        conflictList = _;
+        return conflicts;
+    };
+
+
+    conflicts.origChanges = function(_) {
+        if (!arguments.length) return origChanges;
+        origChanges = _;
         return conflicts;
     };
 
