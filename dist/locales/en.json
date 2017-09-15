@@ -334,7 +334,7 @@
             "save": "Upload",
             "cancel": "Cancel",
             "changes": "{count} Changes",
-            "download_changes": "Download OsmChange file",
+            "download_changes": "Download osmChange file",
             "warnings": "Warnings",
             "modified": "Modified",
             "deleted": "Deleted",
@@ -573,7 +573,7 @@
                 "keep_remote": "Use theirs",
                 "restore": "Restore",
                 "delete": "Leave Deleted",
-                "download_changes": "Or download your changes.",
+                "download_changes": "Or download osmChange file",
                 "done": "All conflicts resolved!",
                 "help": "Another user changed some of the same map features you changed.\nClick on each feature below for more details about the conflict, and choose whether to keep\nyour changes or the other user's changes.\n"
             }
