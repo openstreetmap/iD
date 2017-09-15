@@ -5,7 +5,7 @@
         "area"
     ],
     "fields": [
-        "ref",
+        "name",
         "iata",
         "icao",
         "operator",

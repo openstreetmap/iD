@@ -1,0 +1,102 @@
+/* waterways */
+
+.preset-icon .icon.tag-waterway.other-line {
+    color: #77d3de;
+    fill: #77d3de;
+}
+.preset-icon .icon.category-water,
+.preset-icon .icon.tag-route-ferry,
+.preset-icon .icon.tag-type-waterway,
+.preset-icon .icon.tag-waterway {
+    color: #77d3de;
+    fill: #fff;
+}
+
+path.fill.tag-waterway {
+    stroke: rgba(119, 211, 222, 0.3);
+    fill: rgba(119, 211, 222, 0.3);
+}
+path.casing.tag-waterway {
+    stroke: #3d6c71;
+}
+path.stroke.tag-waterway {
+    stroke: #77d3de;
+}
+
+
+/* narrow waterways (default) */
+
+path.shadow.tag-waterway {
+    stroke-width: 16;
+}
+path.casing.tag-waterway {
+    stroke-width: 7;
+}
+path.stroke.tag-waterway {
+    stroke-width: 5;
+}
+
+.low-zoom path.shadow.tag-waterway {
+    stroke-width: 12;
+}
+.low-zoom path.casing.tag-waterway {
+    stroke-width: 5;
+}
+.low-zoom path.stroke.tag-waterway {
+    stroke-width: 3;
+}
+
+
+/* wide waterways (river) */
+
+path.shadow.tag-waterway-river {
+    stroke-width: 20;
+}
+path.casing.tag-waterway-river {
+    stroke-width: 10;
+}
+path.stroke.tag-waterway-river {
+    stroke-width: 8;
+}
+
+.low-zoom path.shadow.tag-waterway-river {
+    stroke-width: 16;
+}
+.low-zoom path.casing.tag-waterway-river {
+    stroke-width: 7;
+}
+.low-zoom path.stroke.tag-waterway-river {
+    stroke-width: 5;
+}
+
+
+/* ditch */
+
+.preset-icon .icon.tag-waterway-ditch {
+    color: #8eabf3;
+}
+path.stroke.tag-waterway-ditch {
+    stroke: #8eabf3;
+}
+
+
+/* waterway areas */
+
+path.area.stroke.tag-waterway-dock,
+path.area.stroke.tag-waterway-boatyard,
+path.area.stroke.tag-waterway-fuel {
+    stroke: white;
+    stroke-width: 1;
+}
+path.area.casing.tag-waterway-dock,
+path.area.casing.tag-waterway-boatyard,
+path.area.casing.tag-waterway-fuel {
+    stroke: none;
+}
+path.area.fill.tag-waterway-dock,
+path.area.fill.tag-waterway-boatyard,
+path.area.fill.tag-waterway-fuel {
+    stroke: rgba(255, 255, 255, 0.3);
+    fill: rgba(255, 255, 255, 0.3);
+}
+

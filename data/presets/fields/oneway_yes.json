@@ -1,6 +1,6 @@
 {
     "key": "oneway",
-    "type": "check",
+    "type": "onewayCheck",
     "label": "One Way",
     "strings": {
         "options": {

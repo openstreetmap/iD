@@ -41,6 +41,7 @@
             "railway/level_crossing",
             "highway/traffic_signals",
             "highway/turning_circle",
+            "highway/turning_loop",
             "traffic_calming",
             "highway/mini_roundabout",
             "highway/motorway_junction",
@@ -50,6 +51,7 @@
             "category-route",
             "category-restriction",
             "type/boundary",
+            "type/waterway",
             "type/multipolygon",
             "type/site",
             "relation"

@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import { d3keybinding } from '../lib/d3.keybinding.js';
 import { uiCmd } from './cmd';
+import { utilDetect } from '../util/detect';
 
 
 export function uiFullScreen(context) {
@@ -73,9 +74,9 @@ export function uiFullScreen(context) {
         // button.append('span')
         //     .attr('class', 'icon full-screen');
 
-        keybinding
-            .on('f11', fullScreen)
-            .on(uiCmd('⌘⇧F'), fullScreen);
+        var detected = utilDetect();
+        var keys = detected.os === 'mac' ? [uiCmd('⌃⌘F'), 'f11'] : ['f11'];
+        keybinding.on(keys, fullScreen);
 
         d3.select(document)
             .call(keybinding);

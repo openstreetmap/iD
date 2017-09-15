@@ -1,10 +1,11 @@
 {
     "icon": "highway-cycleway",
     "fields": [
+        "name",
+        "oneway",
         "surface",
         "lit",
         "width",
-        "oneway",
         "structure",
         "access"
     ],

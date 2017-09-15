@@ -1,8 +1,10 @@
 {
-    "icon": "fire-station",
+    "icon": "poi-fire-hydrant",
     "fields": [
         "fire_hydrant/type",
-        "fire_hydrant/position"
+        "fire_hydrant/position",
+        "ref",
+        "operator"
     ],
     "geometry": [
         "point",

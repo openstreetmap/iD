@@ -1,7 +1,10 @@
 /* globals chai:false */
 
 iD.debug = true;
+
+// disable things that use the network
 iD.data.imagery = [];
+_.forEach(iD.services, function(v,k) { delete iD.services[k]; });
 
 mocha.setup({
     ui: 'bdd',
@@ -17,17 +20,5 @@ mocha.setup({
 });
 
 expect = chai.expect;
+// eslint-disable-next-line no-unused-vars
 var d3 = iD.d3;
-
-chai.use(function (chai, utils) {
-    var flag = utils.flag;
-
-    chai.Assertion.addMethod('classed', function (className) {
-        this.assert(
-            flag(this, 'object').classed(className)
-            , 'expected #{this} to be classed #{exp}'
-            , 'expected #{this} not to be classed #{exp}'
-            , className
-        );
-    });
-});

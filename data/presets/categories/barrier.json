@@ -1,12 +1,13 @@
 {
+    "icon": "roadblock",
     "geometry": "line",
     "name": "Barrier Features",
-    "icon": "roadblock",
     "members": [
         "barrier/fence",
         "barrier/wall",
         "barrier/ditch",
         "barrier/gate",
+        "barrier/hedge",
         "barrier"
     ]
 }

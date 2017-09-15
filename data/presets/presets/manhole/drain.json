@@ -1,0 +1,24 @@
+{
+    "icon": "water",
+    "fields": [
+        "operator",
+        "ref"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "manhole": "drain"
+    },
+    "terms": [
+        "cover",
+        "drain",
+        "hole",
+        "rain",
+        "sewer",
+        "sewage",
+        "storm"
+    ],
+    "name": "Storm Drain"
+}

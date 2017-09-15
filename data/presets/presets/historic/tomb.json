@@ -1,0 +1,17 @@
+{
+    "icon": "cemetery",
+    "fields": [
+        "name",
+        "tomb",
+        "building_area",
+        "inscription"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "historic": "tomb"
+    },
+    "name": "Tomb"
+}

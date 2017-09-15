@@ -10,8 +10,9 @@ import { uiRawMemberEditor } from './raw_member_editor';
 import { uiRawMembershipEditor } from './raw_membership_editor';
 import { uiRawTagEditor } from './raw_tag_editor';
 import { uiTagReference } from './tag_reference';
-import { uiPreset } from './preset';
-import { utilRebind } from '../util/rebind';
+import { uiPresetEditor } from './preset_editor';
+import { utilRebind } from '../util';
+
 
 export function uiEntityEditor(context) {
     var dispatch = d3.dispatch('choose'),
@@ -19,18 +20,18 @@ export function uiEntityEditor(context) {
         coalesceChanges = false,
         modified = false,
         base,
-        id,
+        entityId,
         activePreset,
         reference;
 
-    var presetEditor = uiPreset(context)
+    var presetEditor = uiPresetEditor(context)
         .on('change', changeTags);
     var rawTagEditor = uiRawTagEditor(context)
         .on('change', changeTags);
 
 
     function entityEditor(selection) {
-        var entity = context.entity(id),
+        var entity = context.entity(entityId),
             tags = _.clone(entity.tags);
 
         // Header
@@ -45,8 +46,7 @@ export function uiEntityEditor(context) {
         enter
             .append('button')
             .attr('class', 'fl preset-reset preset-choose')
-            .append('span')
-            .html((textDirection === 'rtl') ? '&#9658;' : '&#9668;');
+            .call(svgIcon((textDirection === 'rtl') ? '#icon-forward' : '#icon-backward'));
 
         enter
             .append('button')
@@ -63,7 +63,9 @@ export function uiEntityEditor(context) {
             .merge(enter);
 
         header.selectAll('.preset-reset')
-            .on('click', function() { dispatch.call('choose', this, activePreset); });
+            .on('click', function() {
+                dispatch.call('choose', this, activePreset);
+            });
 
 
         // Body
@@ -88,7 +90,7 @@ export function uiEntityEditor(context) {
 
         enter
             .append('div')
-            .attr('class', 'inspector-border inspector-preset');
+            .attr('class', 'inspector-border preset-editor');
 
         enter
             .append('div')
@@ -102,6 +104,12 @@ export function uiEntityEditor(context) {
             .append('div')
             .attr('class', 'raw-membership-editor inspector-inner');
 
+        enter
+            .append('input')
+            .attr('type', 'text')
+            .attr('class', 'key-trap');
+
+
         // Update
         body = body
             .merge(enter);
@@ -113,35 +121,41 @@ export function uiEntityEditor(context) {
             .call(reference.body);
 
         body.selectAll('.preset-reset')
-            .on('click', function() { dispatch.call('choose', this, activePreset); });
+            .on('click', function() {
+                dispatch.call('choose', this, activePreset);
+            });
 
         body.select('.preset-list-item button')
             .call(uiPresetIcon()
-                .geometry(context.geometry(id))
-                .preset(activePreset));
+                .geometry(context.geometry(entityId))
+                .preset(activePreset)
+            );
 
         body.select('.preset-list-item .label')
             .text(activePreset.name());
 
-        body.select('.inspector-preset')
+        body.select('.preset-editor')
             .call(presetEditor
                 .preset(activePreset)
-                .entityID(id)
+                .entityID(entityId)
                 .tags(tags)
-                .state(state));
+                .state(state)
+            );
 
         body.select('.raw-tag-editor')
             .call(rawTagEditor
                 .preset(activePreset)
-                .entityID(id)
+                .entityID(entityId)
                 .tags(tags)
-                .state(state));
+                .state(state)
+            );
 
         if (entity.type === 'relation') {
             body.select('.raw-member-editor')
                 .style('display', 'block')
                 .call(uiRawMemberEditor(context)
-                    .entityID(id));
+                    .entityID(entityId)
+                );
         } else {
             body.select('.raw-member-editor')
                 .style('display', 'none');
@@ -149,8 +163,18 @@ export function uiEntityEditor(context) {
 
         body.select('.raw-membership-editor')
             .call(uiRawMembershipEditor(context)
-                .entityID(id));
+                .entityID(entityId)
+            );
 
+        body.select('.key-trap')
+            .on('keydown.key-trap', function() {
+                // On tabbing, send focus back to the first field on the inspector-body
+                // (probably the `name` field) #4159
+                if (d3.event.keyCode === 9 && !d3.event.shiftKey) {
+                    d3.event.preventDefault();
+                    body.select('input').node().focus();
+                }
+            });
 
         context.history()
             .on('change.entity-editor', historyChanged);
@@ -159,7 +183,7 @@ export function uiEntityEditor(context) {
         function historyChanged() {
             if (state === 'hide') return;
 
-            var entity = context.hasEntity(id),
+            var entity = context.hasEntity(entityId),
                 graph = context.graph();
             if (!entity) return;
 
@@ -174,9 +198,7 @@ export function uiEntityEditor(context) {
 
         function cleanVal(k, v) {
             function keepSpaces(k) {
-                var whitelist = ['opening_hours', 'service_times', 'collection_times',
-                    'operating_times', 'smoking_hours', 'happy_hours'];
-                return _.some(whitelist, function(s) { return k.indexOf(s) !== -1; });
+                return k.match(/_hours|_times/) !== null;
             }
 
             var blacklist = ['description', 'note', 'fixme'];
@@ -188,7 +210,6 @@ export function uiEntityEditor(context) {
 
             // The code below is not intended to validate websites and emails.
             // It is only intended to prevent obvious copy-paste errors. (#2323)
-
             // clean website- and email-like tags
             if (k.indexOf('website') !== -1 ||
                 k.indexOf('email') !== -1 ||
@@ -214,7 +235,7 @@ export function uiEntityEditor(context) {
     // Tag changes that fire on input can all get coalesced into a single
     // history operation when the user leaves the field.  #2342
     function changeTags(changed, onInput) {
-        var entity = context.entity(id),
+        var entity = context.entity(entityId),
             annotation = t('operations.change_tags.annotation'),
             tags = _.clone(entity.tags);
 
@@ -230,9 +251,9 @@ export function uiEntityEditor(context) {
 
         if (!_.isEqual(entity.tags, tags)) {
             if (coalesceChanges) {
-                context.overwrite(actionChangeTags(id, tags), annotation);
+                context.overwrite(actionChangeTags(entityId, tags), annotation);
             } else {
-                context.perform(actionChangeTags(id, tags), annotation);
+                context.perform(actionChangeTags(entityId, tags), annotation);
                 coalesceChanges = !!onInput;
             }
         }
@@ -255,10 +276,10 @@ export function uiEntityEditor(context) {
 
 
     entityEditor.entityID = function(_) {
-        if (!arguments.length) return id;
-        id = _;
+        if (!arguments.length) return entityId;
+        entityId = _;
         base = context.graph();
-        entityEditor.preset(context.presets().match(context.entity(id), base));
+        entityEditor.preset(context.presets().match(context.entity(entityId), base));
         entityEditor.modified(false);
         coalesceChanges = false;
         return entityEditor;
@@ -269,7 +290,7 @@ export function uiEntityEditor(context) {
         if (!arguments.length) return activePreset;
         if (_ !== activePreset) {
             activePreset = _;
-            reference = uiTagReference(activePreset.reference(context.geometry(id)), context)
+            reference = uiTagReference(activePreset.reference(context.geometry(entityId)), context)
                 .showing(false);
         }
         return entityEditor;

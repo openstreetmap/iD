@@ -1,8 +1,9 @@
 import _ from 'lodash';
 import { t } from '../util/locale';
-import { actionReflect } from '../actions/index';
-import { behaviorOperation } from '../behavior/index';
-import { geoExtent } from '../geo/index';
+import { actionReflect } from '../actions';
+import { behaviorOperation } from '../behavior';
+import { geoExtent } from '../geo';
+import { utilGetAllNodes } from '../util';
 
 
 export function operationReflectShort(selectedIDs, context) {
@@ -26,18 +27,13 @@ export function operationReflect(selectedIDs, context, axis) {
     var operation = function() {
         var action = actionReflect(selectedIDs, context.projection)
             .useLongAxis(Boolean(axis === 'long'));
-        context.perform(action, t('operations.reflect.annotation.' + axis + '.' + multi));
+        context.perform(action, operation.annotation());
     };
 
 
     operation.available = function() {
-        return _.some(selectedIDs, hasArea);
-
-        function hasArea(id) {
-            var entity = context.entity(id);
-            return (entity.type === 'way' && entity.isClosed()) ||
-                (entity.type ==='relation' && entity.isMultipolygon());
-        }
+        var nodes = utilGetAllNodes(selectedIDs, context.graph());
+        return _.uniqBy(nodes, function(n) { return n.loc; }).length >= 3;
     };
 
 
@@ -67,9 +63,14 @@ export function operationReflect(selectedIDs, context, axis) {
     };
 
 
+    operation.annotation = function() {
+        return t('operations.reflect.annotation.' + axis + '.' + multi);
+    };
+
+
     operation.id = 'reflect-' + axis;
     operation.keys = [t('operations.reflect.key.' + axis)];
-    operation.title = t('operations.reflect.title');
+    operation.title = t('operations.reflect.title.' + axis);
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;

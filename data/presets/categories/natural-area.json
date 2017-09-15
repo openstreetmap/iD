@@ -1,7 +1,7 @@
 {
+    "icon": "natural",
     "geometry": "area",
     "name": "Natural Features",
-    "icon": "natural",
     "members": [
         "natural/water",
         "natural/wood",

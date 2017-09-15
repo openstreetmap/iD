@@ -1,5 +1,5 @@
 describe('d3.combobox', function() {
-    var body, content, input, combobox;
+    var body, container, content, input, combobox;
 
     var data = [
         {title: 'foo', value: 'foo'},
@@ -62,14 +62,16 @@ describe('d3.combobox', function() {
 
     beforeEach(function() {
         body = d3.select('body');
-        content = body.append('div');
+        container = body.append('div').attr('class', 'id-container');
+        content = container.append('div');
         input = content.append('input');
         combobox = iD.lib.d3combobox();
     });
 
     afterEach(function() {
-        content.remove();
         body.selectAll('.combobox').remove();
+        content.remove();
+        container.remove();
     });
 
     function focusTypeahead(input) {
@@ -79,7 +81,21 @@ describe('d3.combobox', function() {
 
     it('adds the combobox-input class', function() {
         input.call(combobox);
-        expect(input).to.be.classed('combobox-input');
+        expect(input.classed('combobox-input')).to.be.true;
+    });
+
+    it('adds combobox under body by default', function() {
+        input.call(combobox.data(data));
+        focusTypeahead(input);
+        expect(d3.select('body > div.combobox').nodes().length).to.equal(1);
+        expect(d3.select('.id-container > div.combobox').nodes().length).to.equal(0);
+    });
+
+    it('adds combobox under container with container option', function() {
+        input.call(combobox.container(container).data(data));
+        focusTypeahead(input);
+        expect(d3.select('body > div.combobox').nodes().length).to.equal(0);
+        expect(d3.select('.id-container > div.combobox').nodes().length).to.equal(1);
     });
 
     it('shows a menu of entries on focus', function() {

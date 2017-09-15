@@ -25,7 +25,11 @@ export function addTranslation(id, value) {
 export function t(s, o, loc) {
     loc = loc || currentLocale;
 
-    var path = s.split('.').reverse();
+    var path = s
+        .split('.')
+        .map(function(s) { return s.replace('<TX_DOT>', '.'); })
+        .reverse();
+
     var rep = translations[loc];
 
     while (rep !== undefined && path.length) rep = rep[path.pop()];

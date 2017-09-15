@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import _ from 'lodash';
 
 
 /*
@@ -13,27 +14,74 @@ import * as d3 from 'd3';
 export function d3keybinding(namespace) {
     var bindings = [];
 
-    function matches(binding, event) {
-        for (var p in binding.event) {
-            if (event[p] !== binding.event[p])
-                return false;
-        }
-        return true;
-    }
 
     function testBindings(isCapturing) {
-        for (var i = 0; i < bindings.length; i++) {
-            var binding = bindings[i];
+        var didMatch = false,
+            i, binding;
 
-            if (!!binding.capture === isCapturing && matches(binding, d3.event)) {
+        // Most key shortcuts will accept either lower or uppercase ('h' or 'H'),
+        // so we don't strictly match on the shift key, but we prioritize
+        // shifted bindings first, and fallback to unshifted only if no match.
+        // (This lets us differentiate between '←'/'⇧←' or '⌘Z'/'⌘⇧Z')
+
+        // priority match shifted bindings first
+        for (i = 0; i < bindings.length; i++) {
+            binding = bindings[i];
+            if (!binding.event.modifiers.shiftKey) continue;  // no shift
+            if (!!binding.capture !== isCapturing) continue;
+            if (matches(binding, true)) {
+                binding.callback();
+                didMatch = true;
+            }
+        }
+
+        // then unshifted bindings
+        if (didMatch) return;
+        for (i = 0; i < bindings.length; i++) {
+            binding = bindings[i];
+            if (binding.event.modifiers.shiftKey) continue;   // shift
+            if (!!binding.capture !== isCapturing) continue;
+            if (matches(binding, false)) {
                 binding.callback();
             }
         }
+
+
+        function matches(binding, testShift) {
+            var event = d3.event;
+            if (event.key !== undefined) {
+                if (binding.event.key === undefined) {
+                    return false;
+                } else if (_.isArray(binding.event.key)) {
+                    if (binding.event.key.map(function(s) { return s.toLowerCase(); }).indexOf(event.key.toLowerCase()) === -1)
+                        return false;
+                } else {
+                    if (event.key.toLowerCase() !== binding.event.key.toLowerCase())
+                        return false;
+                }
+            } else {
+                // check keycodes if browser doesn't support KeyboardEvent.key
+                if (event.keyCode !== binding.event.keyCode)
+                    return false;
+            }
+
+            // test modifier keys
+            if (!(event.ctrlKey && event.altKey)) {  // if both are set, assume AltGr and skip it - #4096
+                if (event.ctrlKey !== binding.event.modifiers.ctrlKey) return false;
+                if (event.altKey !== binding.event.modifiers.altKey) return false;
+            }
+            if (event.metaKey !== binding.event.modifiers.metaKey) return false;
+            if (testShift && event.shiftKey !== binding.event.modifiers.shiftKey) return false;
+
+            return true;
+        }
     }
+
 
     function capture() {
         testBindings(true);
     }
+
 
     function bubble() {
         var tagName = d3.select(d3.event.target).node().tagName;
@@ -43,12 +91,14 @@ export function d3keybinding(namespace) {
         testBindings(false);
     }
 
+
     function keybinding(selection) {
         selection = selection || d3.select(document);
         selection.on('keydown.capture' + namespace, capture, true);
         selection.on('keydown.bubble' + namespace, bubble, false);
         return keybinding;
     }
+
 
     keybinding.off = function(selection) {
         bindings = [];
@@ -58,17 +108,21 @@ export function d3keybinding(namespace) {
         return keybinding;
     };
 
+
     keybinding.on = function(codes, callback, capture) {
         var arr = [].concat(codes);
         for (var i = 0; i < arr.length; i++) {
             var code = arr[i];
             var binding = {
                 event: {
-                    keyCode: 0,
-                    shiftKey: false,
-                    ctrlKey: false,
-                    altKey: false,
-                    metaKey: false
+                    key: undefined,
+                    keyCode: 0, // only for browsers that don't support KeyboardEvent.key
+                    modifiers: {
+                        shiftKey: false,
+                        ctrlKey: false,
+                        altKey: false,
+                        metaKey: false
+                    }
                 },
                 capture: capture,
                 callback: callback
@@ -78,12 +132,15 @@ export function d3keybinding(namespace) {
 
             for (var j = 0; j < code.length; j++) {
                 // Normalise matching errors
-                if (code[j] === '++') code[i] = '+';
+                if (code[j] === '++') code[j] = '+';
 
                 if (code[j] in d3keybinding.modifierCodes) {
-                    binding.event[d3keybinding.modifierProperties[d3keybinding.modifierCodes[code[j]]]] = true;
-                } else if (code[j] in d3keybinding.keyCodes) {
-                    binding.event.keyCode = d3keybinding.keyCodes[code[j]];
+                    binding.event.modifiers[d3keybinding.modifierProperties[d3keybinding.modifierCodes[code[j]]]] = true;
+                } else {
+                    binding.event.key = d3keybinding.keys[code[j]] || code[j];
+                    if (code[j] in d3keybinding.keyCodes) {
+                        binding.event.keyCode = d3keybinding.keyCodes[code[j]];
+                    }
                 }
             }
 
@@ -113,6 +170,107 @@ d3keybinding.modifierProperties = {
     17: 'ctrlKey',
     18: 'altKey',
     91: 'metaKey'
+};
+
+d3keybinding.keys = {
+    // Backspace key, on Mac: ⌫ (Backspace)
+    '⌫': 'Backspace', backspace: 'Backspace',
+    // Tab Key, on Mac: ⇥ (Tab), on Windows ⇥⇥
+    '⇥': 'Tab', '⇆': 'Tab', tab: 'Tab',
+    // Return key, ↩
+    '↩': 'Enter', 'return': 'Enter', enter: 'Enter', '⌅': 'Enter',
+    // Pause/Break key
+    'pause': 'Pause', 'pause-break': 'Pause',
+    // Caps Lock key, ⇪
+    '⇪': 'CapsLock', caps: 'CapsLock', 'caps-lock': 'CapsLock',
+    // Escape key, on Mac: ⎋, on Windows: Esc
+    '⎋': ['Escape', 'Esc'], escape: ['Escape', 'Esc'], esc: ['Escape', 'Esc'],
+    // Space key
+    space: [' ', 'Spacebar'],
+    // Page-Up key, or pgup, on Mac: ↖
+    '↖': 'PageUp', pgup: 'PageUp', 'page-up': 'PageUp',
+    // Page-Down key, or pgdown, on Mac: ↘
+    '↘': 'PageDown', pgdown: 'PageDown', 'page-down': 'PageDown',
+    // END key, on Mac: ⇟
+    '⇟': 'End', end: 'End',
+    // HOME key, on Mac: ⇞
+    '⇞': 'Home', home: 'Home',
+    // Insert key, or ins
+    ins: 'Insert', insert: 'Insert',
+    // Delete key, on Mac: ⌦ (Delete)
+    '⌦': ['Delete', 'Del'], del: ['Delete', 'Del'], 'delete': ['Delete', 'Del'],
+    // Left Arrow Key, or ←
+    '←': ['ArrowLeft', 'Left'], left: ['ArrowLeft', 'Left'], 'arrow-left': ['ArrowLeft', 'Left'],
+    // Up Arrow Key, or ↑
+    '↑': ['ArrowUp', 'Up'], up: ['ArrowUp', 'Up'], 'arrow-up': ['ArrowUp', 'Up'],
+    // Right Arrow Key, or →
+    '→': ['ArrowRight', 'Right'], right: ['ArrowRight', 'Right'], 'arrow-right': ['ArrowRight', 'Right'],
+    // Up Arrow Key, or ↓
+    '↓': ['ArrowDown', 'Down'], down: ['ArrowDown', 'Down'], 'arrow-down': ['ArrowDown', 'Down'],
+    // odities, stuff for backward compatibility (browsers and code):
+    // Num-Multiply, or *
+    '*': ['*', 'Multiply'], star: ['*', 'Multiply'], asterisk: ['*', 'Multiply'], multiply: ['*', 'Multiply'],
+    // Num-Plus or +
+    '+': ['+', 'Add'], 'plus': ['+', 'Add'],
+    // Num-Subtract, or -
+    '-': ['-', 'Subtract'], subtract: ['-', 'Subtract'], 'dash': ['-', 'Subtract'],
+    // Semicolon
+    semicolon: ';',
+    // = or equals
+    equals: '=',
+    // Comma, or ,
+    comma: ',',
+    // Period, or ., or full-stop
+    period: '.', 'full-stop': '.',
+    // Slash, or /, or forward-slash
+    slash: '/', 'forward-slash': '/',
+    // Tick, or `, or back-quote
+    tick: '`', 'back-quote': '`',
+    // Open bracket, or [
+    'open-bracket': '[',
+    // Back slash, or \
+    'back-slash': '\\',
+    // Close backet, or ]
+    'close-bracket': ']',
+    // Apostrophe, or Quote, or '
+    quote: '\'', apostrophe: '\'',
+    // NUMPAD 0-9
+    'num-0': '0',
+    'num-1': '1',
+    'num-2': '2',
+    'num-3': '3',
+    'num-4': '4',
+    'num-5': '5',
+    'num-6': '6',
+    'num-7': '7',
+    'num-8': '8',
+    'num-9': '9',
+    // F1-F25
+    f1: 'F1',
+    f2: 'F2',
+    f3: 'F3',
+    f4: 'F4',
+    f5: 'F5',
+    f6: 'F6',
+    f7: 'F7',
+    f8: 'F8',
+    f9: 'F9',
+    f10: 'F10',
+    f11: 'F11',
+    f12: 'F12',
+    f13: 'F13',
+    f14: 'F14',
+    f15: 'F15',
+    f16: 'F16',
+    f17: 'F17',
+    f18: 'F18',
+    f19: 'F19',
+    f20: 'F20',
+    f21: 'F21',
+    f22: 'F22',
+    f23: 'F23',
+    f24: 'F24',
+    f25: 'F25'
 };
 
 d3keybinding.keyCodes = {

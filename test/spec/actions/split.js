@@ -456,17 +456,19 @@ describe('iD.actionSplit', function () {
                     iD.Way({id: '-', nodes: ['a', 'b', 'c']}),
                     iD.Way({id: '~', nodes: ['c', 'd']}),
                     iD.Relation({id: 'r', tags: {type: type}, members: [
-                        {id: '-', role: 'from'},
-                        {id: '~', role: 'to'},
-                        {id: 'c', role: 'via'}]})
+                        {id: '-', role: 'from', type: 'way'},
+                        {id: '~', role: 'to', type: 'way'},
+                        {id: 'c', role: 'via', type: 'node'}
+                    ]})
                 ]);
 
             graph = iD.actionSplit('b', ['='])(graph);
 
             expect(graph.entity('r').members).to.eql([
-                {id: '=', role: 'from'},
-                {id: '~', role: 'to'},
-                {id: 'c', role: 'via'}]);
+                {id: '=', role: 'from', type: 'way'},
+                {id: '~', role: 'to', type: 'way'},
+                {id: 'c', role: 'via', type: 'node'}
+            ]);
         });
 
         it('updates a restriction\'s \'to\' role', function () {
@@ -488,17 +490,54 @@ describe('iD.actionSplit', function () {
                     iD.Way({id: '-', nodes: ['a', 'b', 'c']}),
                     iD.Way({id: '~', nodes: ['c', 'd']}),
                     iD.Relation({id: 'r', tags: {type: type}, members: [
-                        {id: '~', role: 'from'},
-                        {id: '-', role: 'to'},
-                        {id: 'c', role: 'via'}]})
+                        {id: '~', role: 'from', type: 'way'},
+                        {id: '-', role: 'to', type: 'way'},
+                        {id: 'c', role: 'via', type: 'node'}
+                    ]})
                 ]);
 
             graph = iD.actionSplit('b', ['='])(graph);
 
             expect(graph.entity('r').members).to.eql([
-                {id: '~', role: 'from'},
-                {id: '=', role: 'to'},
-                {id: 'c', role: 'via'}]);
+                {id: '~', role: 'from', type: 'way'},
+                {id: '=', role: 'to', type: 'way'},
+                {id: 'c', role: 'via', type: 'node'}
+            ]);
+        });
+
+
+        it('updates both \'to\' and \'from\' roles for u-turn restrictions', function () {
+            // Situation:
+            //    a ----> b ----> c ~~~~ d
+            // A restriction from ---- to ---- via c.
+            //
+            // Split at b.
+            //
+            // Expected result:
+            //    a ----> b ====> c ~~~~ d
+            // A restriction from ==== to ==== via c.
+            //
+            var graph = iD.Graph([
+                    iD.Node({id: 'a'}),
+                    iD.Node({id: 'b'}),
+                    iD.Node({id: 'c'}),
+                    iD.Node({id: 'd'}),
+                    iD.Way({id: '-', nodes: ['a', 'b', 'c']}),
+                    iD.Way({id: '~', nodes: ['c', 'd']}),
+                    iD.Relation({id: 'r', tags: {type: type}, members: [
+                        {id: '-', role: 'from', type: 'way'},
+                        {id: '-', role: 'to', type: 'way'},
+                        {id: 'c', role: 'via', type: 'node'}
+                    ]})
+                ]);
+
+            graph = iD.actionSplit('b', ['='])(graph);
+
+            expect(graph.entity('r').members).to.eql([
+                {id: '=', role: 'from', type: 'way'},
+                {id: '=', role: 'to', type: 'way'},
+                {id: 'c', role: 'via', type: 'node'}
+            ]);
         });
 
         it('leaves unaffected restrictions unchanged', function () {
@@ -520,17 +559,19 @@ describe('iD.actionSplit', function () {
                     iD.Way({id: '-', nodes: ['c', 'b', 'a']}),
                     iD.Way({id: '~', nodes: ['c', 'd']}),
                     iD.Relation({id: 'r', tags: {type: type}, members: [
-                        {id: '-', role: 'from'},
-                        {id: '~', role: 'to'},
-                        {id: 'c', role: 'via'}]})
+                        {id: '-', role: 'from', type: 'way'},
+                        {id: '~', role: 'to', type: 'way'},
+                        {id: 'c', role: 'via', type: 'node'}
+                    ]})
                 ]);
 
             graph = iD.actionSplit('b', ['='])(graph);
 
             expect(graph.entity('r').members).to.eql([
-                {id: '-', role: 'from'},
-                {id: '~', role: 'to'},
-                {id: 'c', role: 'via'}]);
+                {id: '-', role: 'from', type: 'way'},
+                {id: '~', role: 'to', type: 'way'},
+                {id: 'c', role: 'via', type: 'node'}
+            ]);
         });
     });
 });

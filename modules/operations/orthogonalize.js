@@ -13,7 +13,7 @@ export function operationOrthogonalize(selectedIDs, context) {
 
 
     var operation = function() {
-        context.perform(action, t('operations.orthogonalize.annotation.' + geometry));
+        context.perform(action, operation.annotation());
     };
 
 
@@ -41,6 +41,11 @@ export function operationOrthogonalize(selectedIDs, context) {
         return disable ?
             t('operations.orthogonalize.' + disable) :
             t('operations.orthogonalize.description.' + geometry);
+    };
+
+
+    operation.annotation = function() {
+        return t('operations.orthogonalize.annotation.' + geometry);
     };
 
 

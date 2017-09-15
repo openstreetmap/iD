@@ -1,4 +1,9 @@
 {
+    "icon": "water",
+    "fields": [
+        "name",
+        "intermittent"
+    ],
     "geometry": [
         "point",
         "vertex"

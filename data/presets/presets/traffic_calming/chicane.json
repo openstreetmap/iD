@@ -1,4 +1,5 @@
 {
+    "icon": "poi-warning",
     "fields": [
         "parallel_direction"
     ],

@@ -36,6 +36,52 @@ _.extend(osmNode.prototype, {
     },
 
 
+    isDegenerate: function() {
+        return !(
+            Array.isArray(this.loc) && this.loc.length === 2 &&
+            this.loc[0] >= -180 && this.loc[0] <= 180 &&
+            this.loc[1] >= -90 && this.loc[1] <= 90
+        );
+    },
+
+
+    isEndpoint: function(resolver) {
+        return resolver.transient(this, 'isEndpoint', function() {
+            var id = this.id;
+            return resolver.parentWays(this).filter(function(parent) {
+                return !parent.isClosed() && !!parent.affix(id);
+            }).length > 0;
+        });
+    },
+
+
+    isConnected: function(resolver) {
+        return resolver.transient(this, 'isConnected', function() {
+            var parents = resolver.parentWays(this);
+
+            function isLine(entity) {
+                return entity.geometry(resolver) === 'line' &&
+                    entity.hasInterestingTags();
+            }
+
+            // vertex is connected to multiple parent lines
+            if (parents.length > 1 && _.some(parents, isLine)) {
+                return true;
+
+            } else if (parents.length === 1) {
+                var way = parents[0],
+                    nodes = way.nodes.slice();
+                if (way.isClosed()) { nodes.pop(); }  // ignore connecting node if closed
+
+                // return true if vertex appears multiple times (way is self intersecting)
+                return nodes.indexOf(this.id) !== nodes.lastIndexOf(this.id);
+            }
+
+            return false;
+        });
+    },
+
+
     isIntersection: function(resolver) {
         return resolver.transient(this, 'isIntersection', function() {
             return resolver.parentWays(this).filter(function(parent) {

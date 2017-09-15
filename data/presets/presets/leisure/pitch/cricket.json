@@ -1,0 +1,21 @@
+{
+    "icon": "cricket",
+    "fields": [
+        "surface",
+        "lit"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "pitch",
+        "sport": "cricket"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "cricket"
+    },
+    "terms": [],
+    "name": "Cricket Field"
+}

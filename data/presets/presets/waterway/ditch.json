@@ -1,7 +1,8 @@
 {
     "icon": "waterway-ditch",
     "fields": [
-        "tunnel"
+        "tunnel_waterway",
+        "intermittent"
     ],
     "geometry": [
         "line"

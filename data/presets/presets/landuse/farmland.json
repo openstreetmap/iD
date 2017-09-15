@@ -1,8 +1,10 @@
 {
     "icon": "farm",
     "fields": [
+        "name",
         "operator",
-        "crop"
+        "crop",
+        "produce"
     ],
     "geometry": [
         "area"

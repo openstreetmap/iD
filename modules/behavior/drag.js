@@ -19,9 +19,8 @@ import {
       than `x`, `y`, `dx`, and `dy` properties.
     * The `end` event is not dispatched if no movement occurs.
     * An `off` function is available that unbinds the drag's internal event handlers.
-    * Delegation is supported via the `delegate` function.
-
  */
+
 export function behaviorDrag() {
     var event = d3.dispatch('start', 'move', 'end'),
         origin = null,
@@ -30,10 +29,22 @@ export function behaviorDrag() {
         event_, target, surface;
 
 
+    var d3_event_userSelectProperty = utilPrefixCSSProperty('UserSelect'),
+        d3_event_userSelectSuppress = function() {
+            var selection = d3.selection(),
+                select = selection.style(d3_event_userSelectProperty);
+            selection.style(d3_event_userSelectProperty, 'none');
+            return function() {
+                selection.style(d3_event_userSelectProperty, select);
+            };
+        };
+
+
     function d3_eventCancel() {
         d3.event.stopPropagation();
         d3.event.preventDefault();
     }
+
 
     function eventOf(thiz, argumentz) {
         return function(e1) {
@@ -42,25 +53,8 @@ export function behaviorDrag() {
         };
     }
 
-    var d3_event_userSelectProperty = utilPrefixCSSProperty('UserSelect'),
-        d3_event_userSelectSuppress = d3_event_userSelectProperty ?
-            function () {
-                var selection = d3.selection(),
-                    select = selection.style(d3_event_userSelectProperty);
-                selection.style(d3_event_userSelectProperty, 'none');
-                return function () {
-                    selection.style(d3_event_userSelectProperty, select);
-                };
-            } :
-            function (type) {
-                var w = d3.select(window).on('selectstart.' + type, d3_eventCancel);
-                return function () {
-                    w.on('selectstart.' + type, null);
-                };
-            };
 
-
-    function mousedown() {
+    function dragstart() {
         target = this;
         event_ = eventOf(target, arguments);
 
@@ -71,7 +65,7 @@ export function behaviorDrag() {
             started = false,
             selectEnable = d3_event_userSelectSuppress(touchId !== null ? 'drag-' + touchId : 'drag');
 
-        var w = d3.select(window)
+        d3.select(window)
             .on(touchId !== null ? 'touchmove.drag-' + touchId : 'mousemove.drag', dragmove)
             .on(touchId !== null ? 'touchend.drag-' + touchId : 'mouseup.drag', dragend, true);
 
@@ -82,10 +76,13 @@ export function behaviorDrag() {
             offset = [0, 0];
         }
 
-        if (touchId === null) d3.event.stopPropagation();
+        if (touchId === null) {
+            d3.event.stopPropagation();
+        }
+
 
         function point() {
-            var p = target.parentNode || surface;
+            var p = surface || target.parentNode;
             return touchId !== null ? d3.touches(p).filter(function(p) {
                 return p.identifier === touchId;
             })[0] : d3.mouse(p);
@@ -102,9 +99,7 @@ export function behaviorDrag() {
 
             if (!started) {
                 started = true;
-                event_({
-                    type: 'start'
-                });
+                event_({ type: 'start' });
             }
 
             origin_ = p;
@@ -120,30 +115,34 @@ export function behaviorDrag() {
 
         function dragend() {
             if (started) {
-                event_({
-                    type: 'end'
-                });
+                event_({ type: 'end' });
 
                 d3_eventCancel();
-                if (d3.event.target === eventTarget) w.on('click.drag', click, true);
+                if (d3.event.target === eventTarget) {
+                    d3.select(window)
+                        .on('click.drag', click, true);
+                }
             }
 
-            w.on(touchId !== null ? 'touchmove.drag-' + touchId : 'mousemove.drag', null)
+            d3.select(window)
+                .on(touchId !== null ? 'touchmove.drag-' + touchId : 'mousemove.drag', null)
                 .on(touchId !== null ? 'touchend.drag-' + touchId : 'mouseup.drag', null);
+
             selectEnable();
         }
 
 
         function click() {
             d3_eventCancel();
-            w.on('click.drag', null);
+            d3.select(window)
+                .on('click.drag', null);
         }
     }
 
 
     function drag(selection) {
         var matchesSelector = utilPrefixDOMProperty('matchesSelector'),
-            delegate = mousedown;
+            delegate = dragstart;
 
         if (selector) {
             delegate = function() {
@@ -152,24 +151,26 @@ export function behaviorDrag() {
                 for (; target && target !== root; target = target.parentNode) {
                     if (target[matchesSelector](selector) &&
                             (!filter || filter(target.__data__))) {
-                        return mousedown.call(target, target.__data__);
+                        return dragstart.call(target, target.__data__);
                     }
                 }
             };
         }
 
-        selection.on('mousedown.drag' + selector, delegate)
+        selection
+            .on('mousedown.drag' + selector, delegate)
             .on('touchstart.drag' + selector, delegate);
     }
 
 
     drag.off = function(selection) {
-        selection.on('mousedown.drag' + selector, null)
+        selection
+            .on('mousedown.drag' + selector, null)
             .on('touchstart.drag' + selector, null);
     };
 
 
-    drag.delegate = function(_) {
+    drag.selector = function(_) {
         if (!arguments.length) return selector;
         selector = _;
         return drag;

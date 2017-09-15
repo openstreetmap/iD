@@ -1,0 +1,22 @@
+{
+    "icon": "heart",
+    "fields": [
+        "name",
+        "club",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "club": "*"
+    },
+    "terms": [
+        "social"
+    ],
+    "name": "Club"
+}

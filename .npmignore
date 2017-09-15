@@ -1,8 +1,9 @@
 .DS_Store
 .travis.yml
-data/data.js
-docs/
-node_modules/
-test/
+/.tx/
+/data/data.js
+/docs/
+/node_modules/
+/test/
 npm-debug.log
 transifex.auth

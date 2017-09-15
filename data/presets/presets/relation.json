@@ -4,6 +4,7 @@
     "tags": {},
     "geometry": ["relation"],
     "fields": [
+        "name",
         "relation"
     ]
 }

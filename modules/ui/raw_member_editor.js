@@ -1,13 +1,17 @@
 import * as d3 from 'd3';
 import { d3combobox } from '../lib/d3.combobox.js';
 import { t } from '../util/locale';
-import { actionChangeMember, actionDeleteMember } from '../actions/index';
-import { modeBrowse, modeSelect } from '../modes/index';
-import { osmEntity } from '../osm/index';
-import { svgIcon } from '../svg/index';
-import { services } from '../services/index';
+import { actionChangeMember, actionDeleteMember } from '../actions';
+import { modeBrowse, modeSelect } from '../modes';
+import { osmEntity } from '../osm';
+import { svgIcon } from '../svg';
+import { services } from '../services';
 import { uiDisclosure } from './disclosure';
-import { utilDisplayName, utilDisplayType } from '../util/index';
+import {
+    utilDisplayName,
+    utilDisplayType,
+    utilNoAuto
+} from '../util';
 
 
 export function uiRawMemberEditor(context) {
@@ -47,7 +51,7 @@ export function uiRawMemberEditor(context) {
         var entity = context.entity(id),
             memberships = [];
 
-        entity.members.forEach(function(member, index) {
+        entity.members.slice(0, 1000).forEach(function(member, index) {
             memberships.push({
                 index: index,
                 id: member.id,
@@ -58,8 +62,9 @@ export function uiRawMemberEditor(context) {
             });
         });
 
+        var gt = entity.members.length > 1000 ? '>' : '';
         selection.call(uiDisclosure()
-            .title(t('inspector.all_members') + ' (' + memberships.length + ')')
+            .title(t('inspector.all_members') + ' (' + gt + memberships.length + ')')
             .expanded(true)
             .on('toggled', toggled)
             .content(content)
@@ -131,6 +136,7 @@ export function uiRawMemberEditor(context) {
                 .property('type', 'text')
                 .attr('maxlength', 255)
                 .attr('placeholder', t('inspector.role'))
+                .call(utilNoAuto)
                 .property('value', function(d) { return d.role; })
                 .on('change', changeRole);
 
@@ -164,6 +170,7 @@ export function uiRawMemberEditor(context) {
                 }
 
                 role.call(d3combobox()
+                    .container(context.container())
                     .fetcher(function(role, callback) {
                         var rtype = entity.tags.type;
                         taginfo.roles({

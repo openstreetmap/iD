@@ -1,5 +1,7 @@
 {
+    "icon": "wheelchair",
     "fields": [
+        "name",
         "operator",
         "address",
         "building_area",
@@ -15,12 +17,18 @@
     "terms": [
         "old",
         "senior",
-        "living"
+        "living",
+        "care home",
+        "assisted living"
     ],
     "tags": {
         "amenity": "social_facility",
         "social_facility": "group_home",
         "social_facility:for": "senior"
+    },
+    "reference": {
+        "key": "social_facility",
+        "value": "group_home"
     },
     "name": "Elderly Group Home"
 }

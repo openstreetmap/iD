@@ -1,6 +1,7 @@
 {
-    "icon": "marker-stroked",
+    "icon": "poi-tool",
     "fields": [
+        "name",
         "craft",
         "operator",
         "address",

@@ -1,7 +1,7 @@
 {
+    "icon": "route",
     "geometry": "relation",
     "name": "Route Features",
-    "icon": "route",
     "members": [
         "type/route/road",
         "type/route/bicycle",

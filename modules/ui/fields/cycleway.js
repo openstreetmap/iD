@@ -1,10 +1,13 @@
 import * as d3 from 'd3';
 import { d3combobox } from '../../lib/d3.combobox.js';
-import { utilRebind } from '../../util/rebind';
-import { utilGetSetValue } from '../../util/get_set_value';
+import {
+    utilGetSetValue,
+    utilNoAuto,
+    utilRebind
+} from '../../util';
 
 
-export function uiFieldCycleway(field) {
+export function uiFieldCycleway(field, context) {
     var dispatch = d3.dispatch('change'),
         items = d3.select(null);
 
@@ -52,8 +55,13 @@ export function uiFieldCycleway(field) {
             .append('input')
             .attr('type', 'text')
             .attr('class', function(d) { return 'preset-input-cycleway preset-input-' + stripcolon(d); })
+            .call(utilNoAuto)
             .each(function(d) {
-                d3.select(this).call(d3combobox().data(cycleway.options(d)));
+                d3.select(this)
+                    .call(d3combobox()
+                        .container(context.container())
+                        .data(cycleway.options(d))
+                    );
             });
 
 

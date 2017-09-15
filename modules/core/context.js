@@ -13,6 +13,7 @@ import { services } from '../services/index';
 import { uiInit } from '../ui/init';
 import { utilDetect } from '../util/detect';
 import { utilRebind } from '../util/rebind';
+import { utilCallWhenIdle } from '../util/index';
 
 
 export var areaKeys = {};
@@ -23,11 +24,30 @@ export function setAreaKeys(value) {
 
 
 export function coreContext() {
+    var context = {};
+    context.version = '2.4.1';
+
+    // create a special translation that contains the keys in place of the strings
+    var tkeys = _.cloneDeep(dataEn);
+    var parents = [];
+
+    function traverser(v, k, obj) {
+        parents.push(k);
+        if (_.isObject(v)) {
+            _.forOwn(v, traverser);
+        } else if (_.isString(v)) {
+            obj[k] = parents.join('.');
+        }
+        parents.pop();
+    }
+
+    _.forOwn(tkeys, traverser);
+    addTranslation('_tkeys_', tkeys);
+
     addTranslation('en', dataEn);
     setLocale('en');
 
-    var dispatch = d3.dispatch('enter', 'exit', 'change'),
-        context = {};
+    var dispatch = d3.dispatch('enter', 'exit', 'change');
 
     // https://github.com/openstreetmap/iD/issues/772
     // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
@@ -64,29 +84,35 @@ export function coreContext() {
 
 
     /* Connection */
-    function entitiesLoaded(err, result) {
+    var entitiesLoaded = utilCallWhenIdle(function entitiesLoaded(err, result) {
         if (!err) history.merge(result.data, result.extent);
-    }
+    });
 
     context.preauth = function(options) {
-        connection.switch(options);
+        if (connection) {
+            connection.switch(options);
+        }
         return context;
     };
 
-    context.loadTiles = function(projection, dimensions, callback) {
+    context.loadTiles = utilCallWhenIdle(function(projection, dimensions, callback) {
         function done(err, result) {
             entitiesLoaded(err, result);
             if (callback) callback(err, result);
         }
-        connection.loadTiles(projection, dimensions, done);
-    };
+        if (connection) {
+            connection.loadTiles(projection, dimensions, done);
+        }
+    });
 
     context.loadEntity = function(id, callback) {
         function done(err, result) {
             entitiesLoaded(err, result);
             if (callback) callback(err, result);
         }
-        connection.loadEntity(id, done);
+        if (connection) {
+            connection.loadEntity(id, done);
+        }
     };
 
     context.zoomToEntity = function(id, zoomTo) {
@@ -117,7 +143,9 @@ export function coreContext() {
     context.minEditableZoom = function(_) {
         if (!arguments.length) return minEditableZoom;
         minEditableZoom = _;
-        connection.tileZoom(_);
+        if (connection) {
+            connection.tileZoom(_);
+        }
         return context;
     };
 
@@ -131,9 +159,25 @@ export function coreContext() {
     };
 
     context.save = function() {
-        if (inIntro || (mode && mode.id === 'save') || d3.select('.modal').size()) return;
-        history.save();
-        if (history.hasChanges()) return t('save.unsaved_changes');
+        // no history save, no message onbeforeunload
+        if (inIntro || d3.select('.modal').size()) return;
+
+        var canSave;
+        if (mode && mode.id === 'save') {
+            canSave = false;
+        } else {
+            canSave = context.selectedIDs().every(function(id) {
+                var entity = context.hasEntity(id);
+                return entity && !entity.isDegenerate();
+            });
+        }
+
+        if (canSave) {
+            history.save();
+        }
+        if (history.hasChanges()) {
+            return t('save.unsaved_changes');
+        }
     };
 
 
@@ -223,12 +267,8 @@ export function coreContext() {
     context.layers = function() { return map.layers; };
     context.surface = function() { return map.surface; };
     context.editable = function() { return map.editable(); };
-
     context.surfaceRect = function() {
-        // Work around a bug in Firefox.
-        //   http://stackoverflow.com/questions/18153989/
-        //   https://bugzilla.mozilla.org/show_bug.cgi?id=530985
-        return context.surface().node().parentNode.getBoundingClientRect();
+        return map.surface.node().getBoundingClientRect();
     };
 
 
@@ -255,13 +295,14 @@ export function coreContext() {
 
 
     /* Container */
-    var container, embed;
+    var container = d3.select(document.body);
     context.container = function(_) {
         if (!arguments.length) return container;
         container = _;
         container.classed('id-container', true);
         return context;
     };
+    var embed;
     context.embed = function(_) {
         if (!arguments.length) return embed;
         embed = _;
@@ -346,9 +387,9 @@ export function coreContext() {
 
 
     /* Init */
-    context.version = '2.0.1';
 
     context.projection = geoRawMercator();
+    context.curtainProjection = geoRawMercator();
 
     locale = utilDetect().locale;
     if (locale && !dataLocales.hasOwnProperty(locale)) {

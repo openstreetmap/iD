@@ -109,7 +109,7 @@ export function actionSplit(nodeId, newWayIds) {
             if (relation.isRestriction()) {
                 var via = relation.memberByRole('via');
                 if (via && wayB.contains(via.id)) {
-                    relation = relation.updateMember({id: wayB.id}, relation.memberById(wayA.id).index);
+                    relation = relation.replaceMember(wayA, wayB);
                     graph = graph.replace(relation);
                 }
             } else {

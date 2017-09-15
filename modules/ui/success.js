@@ -11,9 +11,6 @@ export function uiSuccess(context) {
 
 
     function success(selection) {
-        var message = (changeset.comment || t('success.edited_osm')).substring(0, 130) +
-            ' ' + context.connection().changesetURL(changeset.id);
-
         var header = selection
             .append('div')
             .attr('class', 'header fillL');
@@ -46,14 +43,29 @@ export function uiSuccess(context) {
             .append('span')
             .text(t('success.help_link_text'));
 
-        var changesetURL = context.connection().changesetURL(changeset.id);
+        var osm = context.connection();
+        if (!osm) return;
 
-        body
+        var changesetURL = osm.changesetURL(changeset.id);
+
+        var viewOnOsm = body
             .append('a')
             .attr('class', 'button col12 osm')
             .attr('target', '_blank')
-            .attr('href', changesetURL)
+            .attr('href', changesetURL);
+
+        viewOnOsm
+            .append('svg')
+            .attr('class', 'logo logo-osm')
+            .append('use')
+            .attr('xlink:href', '#logo-osm');
+
+        viewOnOsm
+            .append('div')
             .text(t('success.view_on_osm'));
+
+        var message = (changeset.tags.comment || t('success.edited_osm')).substring(0, 130) +
+            ' ' + changesetURL;
 
         var sharing = {
             facebook: 'https://facebook.com/sharer/sharer.php?u=' + encodeURIComponent(changesetURL),

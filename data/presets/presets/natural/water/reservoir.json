@@ -1,11 +1,19 @@
 {
     "icon": "water",
+    "fields": [
+        "name",
+        "intermittent"
+    ],
     "geometry": [
         "area"
     ],
     "tags": {
         "natural": "water",
         "water": "reservoir"
+    },
+    "reference": {
+        "key": "natural",
+        "value": "water"
     },
     "name": "Reservoir"
 }

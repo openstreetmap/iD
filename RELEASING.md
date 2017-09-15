@@ -14,13 +14,13 @@ on the iD project, and then create this file with contents like<br><pre>
 ### Update master branch
 ```bash
 $  git checkout master
-$  npm run translations
-$  git add . && git commit -m 'npm run translations'
 $  rm -rf node_modules/editor-layer-index/
 $  npm install
 $  npm run imagery
 $  npm run all
 $  git add . && git commit -m 'npm run imagery'
+$  npm run translations
+$  git add . && git commit -m 'npm run translations'
 $  Update `CHANGELOG.md`
 $  Update version number in `modules/core/context.js`, `package.json`
 $  git add . && git commit -m 'A.B.C'

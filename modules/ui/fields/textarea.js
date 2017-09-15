@@ -1,7 +1,10 @@
 import * as d3 from 'd3';
 import { t } from '../../util/locale';
-import { utilGetSetValue } from '../../util/get_set_value';
-import { utilRebind } from '../../util/rebind';
+import {
+    utilGetSetValue,
+    utilNoAuto,
+    utilRebind
+} from '../../util';
 
 
 export function uiFieldTextarea(field) {
@@ -18,6 +21,7 @@ export function uiFieldTextarea(field) {
             .attr('id', 'preset-input-' + field.id)
             .attr('placeholder', field.placeholder() || t('inspector.unknown'))
             .attr('maxlength', 255)
+            .call(utilNoAuto)
             .on('input', change(true))
             .on('blur', change())
             .on('change', change())

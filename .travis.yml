@@ -2,5 +2,9 @@ language: node_js
 node_js:
   - "4"
   - "6"
-  - "7"
-sudo: false
+  - "8"
+sudo: required
+before_script:
+  - npm run all
+after_success:
+  - ./scripts/txpush.sh

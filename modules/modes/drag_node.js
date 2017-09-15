@@ -34,32 +34,52 @@ export function modeDragNode(context) {
         activeIDs,
         wasMidpoint,
         isCancelled,
+        lastLoc,
         selectedIDs = [],
         hover = behaviorHover(context).altDisables(true).on('hover', context.ui().sidebar.hover),
         edit = behaviorEdit(context);
 
 
+    function vecSub(a, b) {
+        return [a[0] - b[0], a[1] - b[1]];
+    }
+
     function edge(point, size) {
-        var pad = [30, 100, 30, 100];
-        if (point[0] > size[0] - pad[0]) return [-10, 0];
-        else if (point[0] < pad[2]) return [10, 0];
-        else if (point[1] > size[1] - pad[1]) return [0, -10];
-        else if (point[1] < pad[3]) return [0, 10];
-        return null;
+        var pad = [80, 20, 50, 20],   // top, right, bottom, left
+            x = 0,
+            y = 0;
+
+        if (point[0] > size[0] - pad[1])
+            x = -10;
+        if (point[0] < pad[3])
+            x = 10;
+        if (point[1] > size[1] - pad[2])
+            y = -10;
+        if (point[1] < pad[0])
+            y = 10;
+
+        if (x || y) {
+            return [x, y];
+        } else {
+            return null;
+        }
     }
 
 
-    function startNudge(nudge) {
+    function startNudge(entity, nudge) {
         if (nudgeInterval) window.clearInterval(nudgeInterval);
         nudgeInterval = window.setInterval(function() {
             context.pan(nudge);
+            doMove(entity, nudge);
         }, 50);
     }
 
 
     function stopNudge() {
-        if (nudgeInterval) window.clearInterval(nudgeInterval);
-        nudgeInterval = null;
+        if (nudgeInterval) {
+            window.clearInterval(nudgeInterval);
+            nudgeInterval = null;
+        }
     }
 
 
@@ -79,12 +99,15 @@ export function modeDragNode(context) {
 
 
     function start(entity) {
+        wasMidpoint = entity.type === 'midpoint';
+
         isCancelled = d3.event.sourceEvent.shiftKey ||
             context.features().hasHiddenConnections(entity, context.graph());
 
-        if (isCancelled) return behavior.cancel();
+        if (isCancelled) {
+            return behavior.cancel();
+        }
 
-        wasMidpoint = entity.type === 'midpoint';
         if (wasMidpoint) {
             var midpoint = entity;
             entity = osmNode();
@@ -97,53 +120,63 @@ export function modeDragNode(context) {
             context.perform(actionNoop());
         }
 
+        // activeIDs generate no pointer events.  This prevents the node or vertex
+        // being dragged from trying to connect to itself or its parent element.
         activeIDs = _.map(context.graph().parentWays(entity), 'id');
         activeIDs.push(entity.id);
+        setActiveElements();
+
         context.enter(mode);
     }
 
 
     function datum() {
-        if (d3.event.sourceEvent.altKey) {
+        var event = d3.event && d3.event.sourceEvent;
+        if (!event || event.altKey) {
             return {};
+        } else {
+            return event.target.__data__ || {};
         }
-
-        return d3.event.sourceEvent.target.__data__ || {};
     }
 
 
-    // via https://gist.github.com/shawnbot/4166283
-    function childOf(p, c) {
-        if (p === c) return false;
-        while (c && c !== p) c = c.parentNode;
-        return c === p;
-    }
+    function doMove(entity, nudge) {
+        nudge = nudge || [0, 0];
 
+        var currPoint = (d3.event && d3.event.point) || context.projection(lastLoc),
+            currMouse = vecSub(currPoint, nudge),
+            loc = context.projection.invert(currMouse),
+            d = datum();
 
-    function move(entity) {
-        if (isCancelled) return;
-        d3.event.sourceEvent.stopPropagation();
-
-        var nudge = childOf(context.container().node(),
-            d3.event.sourceEvent.toElement) &&
-            edge(d3.event.point, context.map().dimensions());
-
-        if (nudge) startNudge(nudge);
-        else stopNudge();
-
-        var loc = context.projection.invert(d3.event.point);
-
-        var d = datum();
-        if (d.type === 'node' && d.id !== entity.id) {
-            loc = d.loc;
-        } else if (d.type === 'way' && !d3.select(d3.event.sourceEvent.target).classed('fill')) {
-            loc = geoChooseEdge(context.childNodes(d), context.mouse(), context.projection).loc;
+        if (!nudgeInterval) {
+            if (d.type === 'node' && d.id !== entity.id) {
+                loc = d.loc;
+            } else if (d.type === 'way' && !d3.select(d3.event.sourceEvent.target).classed('fill')) {
+                loc = geoChooseEdge(context.childNodes(d), context.mouse(), context.projection).loc;
+            }
         }
 
         context.replace(
             actionMoveNode(entity.id, loc),
             moveAnnotation(entity)
         );
+
+        lastLoc = loc;
+    }
+
+
+    function move(entity) {
+        if (isCancelled) return;
+        d3.event.sourceEvent.stopPropagation();
+        lastLoc = context.projection.invert(d3.event.point);
+
+        doMove(entity);
+        var nudge = edge(d3.event.point, context.map().dimensions());
+        if (nudge) {
+            startNudge(entity, nudge);
+        } else {
+            stopNudge();
+        }
     }
 
 
@@ -183,7 +216,7 @@ export function modeDragNode(context) {
         });
 
         if (reselection.length) {
-            context.enter(modeSelect(context, reselection).suppressMenu(true));
+            context.enter(modeSelect(context, reselection));
         } else {
             context.enter(modeBrowse(context));
         }
@@ -203,8 +236,8 @@ export function modeDragNode(context) {
 
 
     var behavior = behaviorDrag()
-        .delegate('g.node, g.point, g.midpoint')
-        .surface(context.surface().node())
+        .selector('g.node, g.point, g.midpoint')
+        .surface(d3.select('#map').node())
         .origin(origin)
         .on('start', start)
         .on('move', move)

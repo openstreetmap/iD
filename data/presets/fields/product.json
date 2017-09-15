@@ -1,5 +1,5 @@
 {
     "key": "product",
-    "type": "combo",
-    "label": "Product"
+    "type": "semiCombo",
+    "label": "Products"
 }

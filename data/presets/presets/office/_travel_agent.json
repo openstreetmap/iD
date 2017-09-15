@@ -1,6 +1,7 @@
 {
     "icon": "suitcase",
     "fields": [
+        "name",
         "address",
         "building_area",
         "opening_hours"
@@ -12,6 +13,10 @@
     ],
     "tags": {
         "office": "travel_agent"
+    },
+    "reference": {
+        "key": "shop",
+        "value": "travel_agency"
     },
     "terms": [],
     "name": "Travel Agency",

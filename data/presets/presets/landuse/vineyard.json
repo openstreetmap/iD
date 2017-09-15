@@ -1,12 +1,23 @@
 {
     "fields": [
-        "operator"
+        "name",
+        "operator",
+        "grape_variety"
     ],
     "geometry": [
         "area"
     ],
     "tags": {
         "landuse": "vineyard"
+    },
+    "addTags": {
+        "landuse": "vineyard",
+        "crop": "grape"
+    },
+    "removeTags": {
+        "landuse": "vineyard",
+        "crop": "grape",
+        "grape_variety": "*"
     },
     "terms": [
         "grape",

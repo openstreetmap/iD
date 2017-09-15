@@ -128,8 +128,12 @@
             "value": "terminal"
         },
         {
-            "key": "office",
-            "value": "coworking"
+            "key": "amenity",
+            "value": "coworking_space"
+        },
+        {
+            "key": "amenity",
+            "value": "nursing_home"
         },
         {
             "key": "amenity",
@@ -138,6 +142,18 @@
         {
             "key": "amenity",
             "value": "swimming_pool"
+        },
+        {
+            "key": "amenity",
+            "value": "animal_boarding"
+        },
+        {
+            "key": "amenity",
+            "value": "animal_breeding"
+        },
+        {
+            "key": "amenity",
+            "value": "animal_shelter"
         },
         {
             "key": "amenity",
@@ -228,6 +244,14 @@
             "value": "clinic"
         },
         {
+            "key": "healthcare:speciality",
+            "value": "abortion"
+        },
+        {
+            "key": "healthcare:speciality",
+            "value": "fertility"
+        },
+        {
             "key": "amenity",
             "value": "clock"
         },
@@ -266,6 +290,10 @@
         {
             "key": "amenity",
             "value": "drinking_water"
+        },
+        {
+            "key": "amenity",
+            "value": "driving_school"
         },
         {
             "key": "amenity",
@@ -352,6 +380,10 @@
             "value": "parking"
         },
         {
+            "key": "shelter_type",
+            "value": "pavilion"
+        },
+        {
             "key": "amenity",
             "value": "pharmacy"
         },
@@ -369,11 +401,27 @@
         },
         {
             "key": "religion",
+            "value": "hindu"
+        },
+        {
+            "key": "religion",
             "value": "jewish"
         },
         {
             "key": "religion",
             "value": "muslim"
+        },
+        {
+            "key": "religion",
+            "value": "shinto"
+        },
+        {
+            "key": "religion",
+            "value": "sikh"
+        },
+        {
+            "key": "religion",
+            "value": "taoist"
         },
         {
             "key": "amenity",
@@ -433,7 +481,15 @@
         },
         {
             "key": "amenity",
+            "value": "scrapyard"
+        },
+        {
+            "key": "amenity",
             "value": "shelter"
+        },
+        {
+            "key": "amenity",
+            "value": "shower"
         },
         {
             "key": "amenity",
@@ -450,6 +506,10 @@
         {
             "key": "social_facility:for",
             "value": "homeless"
+        },
+        {
+            "key": "social_facility:for",
+            "value": "senior"
         },
         {
             "key": "amenity",
@@ -480,6 +540,14 @@
             "value": "university"
         },
         {
+            "key": "amenity",
+            "value": "vending_machine"
+        },
+        {
+            "key": "vending",
+            "value": "news_papers"
+        },
+        {
             "key": "vending",
             "value": "cigarettes"
         },
@@ -497,7 +565,11 @@
         },
         {
             "key": "vending",
-            "value": "news_papers"
+            "value": "feminine_hygiene"
+        },
+        {
+            "key": "vending",
+            "value": "newspapers"
         },
         {
             "key": "vending",
@@ -517,10 +589,6 @@
         },
         {
             "key": "amenity",
-            "value": "vending_machine"
-        },
-        {
-            "key": "amenity",
             "value": "veterinary"
         },
         {
@@ -536,8 +604,16 @@
             "value": "waste_transfer_station"
         },
         {
+            "key": "waste",
+            "value": "dog_excrement"
+        },
+        {
             "key": "amenity",
             "value": "water_point"
+        },
+        {
+            "key": "amenity",
+            "value": "watering_place"
         },
         {
             "key": "area",
@@ -545,6 +621,58 @@
         },
         {
             "key": "area:highway"
+        },
+        {
+            "key": "attraction",
+            "value": "amusement_ride"
+        },
+        {
+            "key": "attraction",
+            "value": "animal"
+        },
+        {
+            "key": "attraction",
+            "value": "big_wheel"
+        },
+        {
+            "key": "attraction",
+            "value": "bumper_car"
+        },
+        {
+            "key": "attraction",
+            "value": "bungee_jumping"
+        },
+        {
+            "key": "attraction",
+            "value": "carousel"
+        },
+        {
+            "key": "attraction",
+            "value": "dark_ride"
+        },
+        {
+            "key": "attraction",
+            "value": "drop_tower"
+        },
+        {
+            "key": "attraction",
+            "value": "pirate_ship"
+        },
+        {
+            "key": "attraction",
+            "value": "river_rafting"
+        },
+        {
+            "key": "attraction",
+            "value": "roller_coaster"
+        },
+        {
+            "key": "attraction",
+            "value": "train"
+        },
+        {
+            "key": "attraction",
+            "value": "water_slide"
         },
         {
             "key": "barrier"
@@ -769,6 +897,9 @@
             "value": "camp_pitch"
         },
         {
+            "key": "club"
+        },
+        {
             "key": "craft"
         },
         {
@@ -833,11 +964,19 @@
         },
         {
             "key": "craft",
+            "value": "distillery"
+        },
+        {
+            "key": "craft",
             "value": "dressmaker"
         },
         {
             "key": "craft",
             "value": "electrician"
+        },
+        {
+            "key": "craft",
+            "value": "electronics_repair"
         },
         {
             "key": "craft",
@@ -997,14 +1136,26 @@
         },
         {
             "key": "emergency",
+            "value": "life_ring"
+        },
+        {
+            "key": "emergency",
             "value": "phone"
         },
         {
             "key": "entrance"
         },
         {
+            "key": "traffic_calming",
+            "value": "table"
+        },
+        {
             "key": "footway",
             "value": "crossing"
+        },
+        {
+            "key": "traffic_calming",
+            "value": "table"
         },
         {
             "key": "crossing",
@@ -1059,8 +1210,63 @@
             "value": "water_hazard"
         },
         {
+            "key": "healthcare"
+        },
+        {
+            "key": "healthcare",
+            "value": "alternative"
+        },
+        {
+            "key": "healthcare:speciality",
+            "value": "chiropractic"
+        },
+        {
+            "key": "healthcare",
+            "value": "audiologist"
+        },
+        {
+            "key": "healthcare",
+            "value": "birthing_center"
+        },
+        {
             "key": "healthcare",
             "value": "blood_donation"
+        },
+        {
+            "key": "healthcare",
+            "value": "hospice"
+        },
+        {
+            "key": "healthcare",
+            "value": "midwife"
+        },
+        {
+            "key": "healthcare",
+            "value": "occupational_therapist"
+        },
+        {
+            "key": "healthcare",
+            "value": "optometrist"
+        },
+        {
+            "key": "healthcare",
+            "value": "physiotherapist"
+        },
+        {
+            "key": "healthcare",
+            "value": "podiatrist"
+        },
+        {
+            "key": "healthcare",
+            "value": "psychotherapist"
+        },
+        {
+            "key": "healthcare",
+            "value": "rehabilitation"
+        },
+        {
+            "key": "healthcare",
+            "value": "speech_therapist"
         },
         {
             "key": "highway",
@@ -1075,8 +1281,16 @@
             "value": "corridor"
         },
         {
+            "key": "traffic_calming",
+            "value": "table"
+        },
+        {
             "key": "highway",
             "value": "crossing"
+        },
+        {
+            "key": "traffic_calming",
+            "value": "table"
         },
         {
             "key": "crossing",
@@ -1085,6 +1299,10 @@
         {
             "key": "highway",
             "value": "cycleway"
+        },
+        {
+            "key": "highway",
+            "value": "elevator"
         },
         {
             "key": "highway",
@@ -1184,6 +1402,10 @@
         },
         {
             "key": "highway",
+            "value": "speed_camera"
+        },
+        {
+            "key": "highway",
             "value": "steps"
         },
         {
@@ -1263,6 +1485,10 @@
         },
         {
             "key": "historic",
+            "value": "tomb"
+        },
+        {
+            "key": "historic",
             "value": "wayside_cross"
         },
         {
@@ -1283,6 +1509,10 @@
         {
             "key": "landuse",
             "value": "allotments"
+        },
+        {
+            "key": "landuse",
+            "value": "aquaculture"
         },
         {
             "key": "landuse",
@@ -1323,6 +1553,10 @@
         {
             "key": "landuse",
             "value": "grass"
+        },
+        {
+            "key": "landuse",
+            "value": "harbour"
         },
         {
             "key": "landuse",
@@ -1398,6 +1632,10 @@
         },
         {
             "key": "landuse",
+            "value": "railway"
+        },
+        {
+            "key": "landuse",
             "value": "recreation_ground"
         },
         {
@@ -1465,6 +1703,10 @@
         },
         {
             "key": "leisure",
+            "value": "hackerspace"
+        },
+        {
+            "key": "leisure",
             "value": "horse_riding"
         },
         {
@@ -1509,7 +1751,19 @@
         },
         {
             "key": "sport",
+            "value": "beachvolleyball"
+        },
+        {
+            "key": "sport",
             "value": "bowls"
+        },
+        {
+            "key": "sport",
+            "value": "cricket"
+        },
+        {
+            "key": "sport",
+            "value": "equestrian"
         },
         {
             "key": "sport",
@@ -1526,6 +1780,10 @@
         {
             "key": "sport",
             "value": "soccer"
+        },
+        {
+            "key": "sport",
+            "value": "table_tennis"
         },
         {
             "key": "sport",
@@ -1684,7 +1942,26 @@
         },
         {
             "key": "man_made",
+            "value": "watermill"
+        },
+        {
+            "key": "man_made",
+            "value": "windmill"
+        },
+        {
+            "key": "man_made",
             "value": "works"
+        },
+        {
+            "key": "manhole"
+        },
+        {
+            "key": "manhole",
+            "value": "drain"
+        },
+        {
+            "key": "manhole",
+            "value": "telecom"
         },
         {
             "key": "natural"
@@ -1794,7 +2071,15 @@
             "value": "wood"
         },
         {
+            "key": "noexit",
+            "value": "yes"
+        },
+        {
             "key": "office"
+        },
+        {
+            "key": "office",
+            "value": "physician"
         },
         {
             "key": "office",
@@ -1857,16 +2142,16 @@
             "value": "lawyer"
         },
         {
+            "key": "lawyer",
+            "value": "notary"
+        },
+        {
             "key": "office",
             "value": "newspaper"
         },
         {
             "key": "office",
             "value": "ngo"
-        },
-        {
-            "key": "office",
-            "value": "physician"
         },
         {
             "key": "office",
@@ -1889,11 +2174,11 @@
         },
         {
             "key": "place",
-            "value": "city"
+            "value": "farm"
         },
         {
             "key": "place",
-            "value": "farm"
+            "value": "city"
         },
         {
             "key": "place",
@@ -1914,6 +2199,10 @@
         {
             "key": "place",
             "value": "neighbourhood"
+        },
+        {
+            "key": "place",
+            "value": "quarter"
         },
         {
             "key": "place",
@@ -1938,6 +2227,14 @@
         {
             "key": "power",
             "value": "generator"
+        },
+        {
+            "key": "generator:method",
+            "value": "fission"
+        },
+        {
+            "key": "generator:method",
+            "value": "wind_turbine"
         },
         {
             "key": "power",
@@ -1981,7 +2278,15 @@
         },
         {
             "key": "railway",
+            "value": "buffer_stop"
+        },
+        {
+            "key": "railway",
             "value": "crossing"
+        },
+        {
+            "key": "railway",
+            "value": "derail"
         },
         {
             "key": "railway",
@@ -2001,6 +2306,10 @@
         },
         {
             "key": "railway",
+            "value": "milestone"
+        },
+        {
+            "key": "railway",
             "value": "monorail"
         },
         {
@@ -2017,6 +2326,10 @@
         },
         {
             "key": "railway",
+            "value": "signal"
+        },
+        {
+            "key": "railway",
             "value": "station"
         },
         {
@@ -2026,6 +2339,18 @@
         {
             "key": "railway",
             "value": "subway"
+        },
+        {
+            "key": "railway",
+            "value": "switch"
+        },
+        {
+            "key": "railway",
+            "value": "wash"
+        },
+        {
+            "key": "railway",
+            "value": "tram_stop"
         },
         {
             "key": "railway",
@@ -2057,6 +2382,10 @@
         {
             "key": "shop",
             "value": "antiques"
+        },
+        {
+            "key": "shop",
+            "value": "appliance"
         },
         {
             "key": "shop",
@@ -2260,6 +2589,10 @@
         },
         {
             "key": "shop",
+            "value": "gas"
+        },
+        {
+            "key": "shop",
             "value": "gift"
         },
         {
@@ -2388,6 +2721,10 @@
         },
         {
             "key": "shop",
+            "value": "perfumery"
+        },
+        {
+            "key": "shop",
             "value": "pet"
         },
         {
@@ -2485,6 +2822,10 @@
         {
             "key": "shop",
             "value": "video"
+        },
+        {
+            "key": "shop",
+            "value": "watches"
         },
         {
             "key": "shop",
@@ -2741,6 +3082,10 @@
             "value": "site"
         },
         {
+            "key": "type",
+            "value": "waterway"
+        },
+        {
             "key": "waterway",
             "value": "boatyard"
         },
@@ -2779,6 +3124,10 @@
         {
             "key": "waterway",
             "value": "sanitary_dump_station"
+        },
+        {
+            "key": "intermittent",
+            "value": "yes"
         },
         {
             "key": "waterway",

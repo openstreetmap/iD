@@ -1,0 +1,18 @@
+{
+    "icon": "poi-tool",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "craft": "electronics_repair"
+    },
+    "name": "Electronics Repair Shop"
+}

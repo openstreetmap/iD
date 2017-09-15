@@ -1,12 +1,15 @@
 {
+    "icon": "aerialway",
     "geometry": [
         "point",
-        "vertex"
+        "vertex",
+        "area"
     ],
     "fields": [
         "aerialway/access",
         "aerialway/summer/access",
-        "elevation"
+        "elevation",
+        "building_area"
     ],
     "tags": {
         "aerialway": "station"

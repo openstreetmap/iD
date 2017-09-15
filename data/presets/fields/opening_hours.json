@@ -1,5 +1,6 @@
 {
     "key": "opening_hours",
-    "type": "text",
-    "label": "Hours"
+    "type": "combo",
+    "label": "Hours",
+    "snake_case": false
 }

@@ -12,14 +12,14 @@ export function presetCollection(collection) {
 
 
         item: function(id) {
-            return _.find(collection, function(d) {
+            return _.find(this.collection, function(d) {
                 return d.id === id;
             });
         },
 
 
         matchGeometry: function(geometry) {
-            return presetCollection(collection.filter(function(d) {
+            return presetCollection(this.collection.filter(function(d) {
                 return d.matchGeometry(geometry);
             }));
         },
@@ -44,10 +44,10 @@ export function presetCollection(collection) {
 
             value = value.toLowerCase();
 
-            var searchable = _.filter(collection, function(a) {
+            var searchable = _.filter(this.collection, function(a) {
                     return a.searchable !== false && a.suggestion !== true;
                 }),
-                suggestions = _.filter(collection, function(a) {
+                suggestions = _.filter(this.collection, function(a) {
                     return a.suggestion === true;
                 });
 
@@ -56,9 +56,24 @@ export function presetCollection(collection) {
             var leading_name = _.filter(searchable, function(a) {
                     return leading(a.name().toLowerCase());
                 }).sort(function(a, b) {
-                    var i = a.name().toLowerCase().indexOf(value) - b.name().toLowerCase().indexOf(value);
-                    if (i === 0) return a.name().length - b.name().length;
-                    else return i;
+                    var aCompare = a.name().toLowerCase(),
+                        bCompare = b.name().toLowerCase(),
+                        i;
+
+                    // priority if search string matches preset name exactly - #4325
+                    if (value === aCompare) return -1;
+                    if (value === bCompare) return 1;
+
+                    // priority for higher matchScore
+                    i = b.originalScore - a.originalScore;
+                    if (i !== 0) return i;
+
+                    // priority if search string appears earlier in preset name
+                    i = aCompare.indexOf(value) - bCompare.indexOf(value);
+                    if (i !== 0) return i;
+
+                    // priority for shorter preset names
+                    return a.name().length - b.name().length;
                 });
 
             // matches value to preset.terms values

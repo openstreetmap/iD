@@ -1,5 +1,8 @@
 {
     "name": "Area",
+    "fields": [
+        "name"
+    ],
     "tags": {
         "area": "yes"
     },

@@ -1,6 +1,7 @@
 {
     "icon": "water",
     "fields": [
+        "name",
         "bath/type",
         "bath/open_air",
         "bath/sand_bath",

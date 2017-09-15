@@ -1,5 +1,4 @@
 import * as d3 from 'd3';
-import { transition as d3transition } from 'd3';
 import _ from 'lodash';
 
 
@@ -12,13 +11,6 @@ export function behaviorBreathe() {
         params = {},
         done = false,
         timer;
-
-
-    // This is a workaround for a bug in rollup v0.36
-    // https://github.com/rollup/rollup/issues/984
-    // The symbol for this default export is not used anywhere, but it
-    // needs to be called in order to be included in the bundle.
-    var t = d3transition();
 
 
     function ratchetyInterpolator(a, b, steps, units) {
@@ -102,8 +94,8 @@ export function behaviorBreathe() {
                 p.tag = tag;
                 p.from.opacity = opacity * 0.6;
                 p.to.opacity = opacity * 1.25;
-                p.from.width = width * 0.9;
-                p.to.width = width * (tag === 'circle' ? 1.5 : 1.25);
+                p.from.width = width * 0.7;
+                p.to.width = width * (tag === 'circle' ? 1.5 : 1);
                 params[d.id] = p;
             });
     }

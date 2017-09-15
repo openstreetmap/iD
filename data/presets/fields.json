@@ -81,9 +81,11 @@
             "keys": [
                 "addr:block_number",
                 "addr:city",
+                "addr:block_number",
                 "addr:conscriptionnumber",
                 "addr:county",
                 "addr:country",
+                "addr:county",
                 "addr:district",
                 "addr:floor",
                 "addr:hamlet",
@@ -97,7 +99,8 @@
                 "addr:state",
                 "addr:street",
                 "addr:subdistrict",
-                "addr:suburb"
+                "addr:suburb",
+                "addr:unit"
             ],
             "reference": {
                 "key": "addr"
@@ -107,25 +110,37 @@
             "label": "Address",
             "strings": {
                 "placeholders": {
-                    "block_number": "Block number",
+                    "block_number": "Block Number",
+                    "block_number!jp": "Block No.",
                     "city": "City",
+                    "city!jp": "City/Town/Village/Tokyo Special Ward",
+                    "city!vn": "City/Town",
                     "conscriptionnumber": "123",
-                    "county": "County",
                     "country": "Country",
+                    "county": "County",
+                    "county!jp": "District",
                     "district": "District",
+                    "district!vn": "Arrondissement/Town/District",
                     "floor": "Floor",
                     "hamlet": "Hamlet",
                     "housename": "Housename",
                     "housenumber": "123",
+                    "housenumber!jp": "Building No./Lot No.",
                     "neighbourhood": "Neighbourhood",
+                    "neighbourhood!jp": "Chōme/Aza/Koaza",
                     "place": "Place",
                     "postcode": "Postcode",
                     "province": "Province",
+                    "province!jp": "Prefecture",
                     "quarter": "Quarter",
+                    "quarter!jp": "Ōaza/Machi",
                     "state": "State",
                     "street": "Street",
                     "subdistrict": "Subdistrict",
-                    "suburb": "Suburb"
+                    "subdistrict!vn": "Ward/Commune/Townlet",
+                    "suburb": "Suburb",
+                    "suburb!jp": "Ward",
+                    "unit": "Unit"
                 }
             }
         },
@@ -200,6 +215,21 @@
             "key": "amenity",
             "type": "typeCombo",
             "label": "Type"
+        },
+        "animal_boarding": {
+            "key": "animal_boarding",
+            "type": "semiCombo",
+            "label": "For Animals"
+        },
+        "animal_breeding": {
+            "key": "animal_breeding",
+            "type": "semiCombo",
+            "label": "For Animals"
+        },
+        "animal_shelter": {
+            "key": "animal_shelter",
+            "type": "semiCombo",
+            "label": "For Animals"
         },
         "area/highway": {
             "key": "area:highway",
@@ -301,6 +331,12 @@
             "type": "text",
             "label": "Brand"
         },
+        "bridge": {
+            "key": "bridge",
+            "type": "typeCombo",
+            "label": "Type",
+            "placeholder": "Default"
+        },
         "building_area": {
             "key": "building",
             "type": "combo",
@@ -388,10 +424,31 @@
                 }
             }
         },
+        "clothes": {
+            "key": "clothes",
+            "type": "semiCombo",
+            "label": "Clothes"
+        },
+        "club": {
+            "key": "club",
+            "type": "typeCombo",
+            "label": "Type"
+        },
         "collection_times": {
             "key": "collection_times",
             "type": "text",
             "label": "Collection Times"
+        },
+        "comment": {
+            "key": "comment",
+            "type": "textarea",
+            "label": "Changeset Comment",
+            "placeholder": "Brief description of your contributions (required)"
+        },
+        "communication_multi": {
+            "key": "communication:",
+            "type": "multiCombo",
+            "label": "Communication Types"
         },
         "construction": {
             "key": "construction",
@@ -408,7 +465,7 @@
         "content": {
             "key": "content",
             "type": "combo",
-            "label": "Contents"
+            "label": "Content"
         },
         "country": {
             "key": "country",
@@ -427,8 +484,8 @@
         },
         "crop": {
             "key": "crop",
-            "type": "combo",
-            "label": "Crop"
+            "type": "semiCombo",
+            "label": "Crops"
         },
         "crossing": {
             "key": "crossing",
@@ -437,13 +494,19 @@
         },
         "cuisine": {
             "key": "cuisine",
-            "type": "combo",
-            "label": "Cuisine"
+            "type": "semiCombo",
+            "label": "Cuisines"
         },
         "currency_multi": {
             "key": "currency:",
             "type": "multiCombo",
             "label": "Currency Types"
+        },
+        "cutting": {
+            "key": "cutting",
+            "type": "typeCombo",
+            "label": "Type",
+            "placeholder": "Default"
         },
         "cycle_network": {
             "key": "cycle_network",
@@ -560,6 +623,12 @@
             "type": "check",
             "label": "Drive-Through"
         },
+        "duration": {
+            "key": "duration",
+            "type": "text",
+            "label": "Duration",
+            "placeholder": "00:00"
+        },
         "electrified": {
             "key": "electrified",
             "type": "combo",
@@ -587,6 +656,12 @@
             "placeholder": "example@example.com",
             "universal": true,
             "label": "Email"
+        },
+        "embankment": {
+            "key": "embankment",
+            "type": "typeCombo",
+            "label": "Type",
+            "placeholder": "Default"
         },
         "emergency": {
             "key": "emergency",
@@ -652,6 +727,12 @@
             "label": "Fix Me",
             "universal": true
         },
+        "ford": {
+            "key": "ford",
+            "type": "typeCombo",
+            "label": "Type",
+            "placeholder": "Default"
+        },
         "fuel_multi": {
             "key": "fuel:",
             "type": "multiCombo",
@@ -689,6 +770,12 @@
             "type": "combo",
             "label": "Method"
         },
+        "generator/output/electricity": {
+            "key": "generator:output:electricity",
+            "type": "text",
+            "label": "Power Output",
+            "placeholder": "50 MW, 100 MW, 200 MW..."
+        },
         "generator/source": {
             "key": "generator:source",
             "type": "combo",
@@ -699,11 +786,10 @@
             "type": "combo",
             "label": "Type"
         },
-        "golf_hole": {
-            "key": "ref",
-            "type": "text",
-            "label": "Reference",
-            "placeholder": "Hole number (1-18)"
+        "grape_variety": {
+            "key": "grape_variety",
+            "type": "semiCombo",
+            "label": "Grape Varieties"
         },
         "handicap": {
             "key": "handicap",
@@ -715,6 +801,25 @@
             "key": "handrail",
             "type": "check",
             "label": "Handrail"
+        },
+        "hashtags": {
+            "key": "hashtags",
+            "type": "semiCombo",
+            "label": "Hashtags",
+            "placeholder": "#example"
+        },
+        "healthcare": {
+            "key": "healthcare",
+            "type": "typeCombo",
+            "label": "Type"
+        },
+        "healthcare/speciality": {
+            "key": "healthcare:speciality",
+            "type": "semiCombo",
+            "reference": {
+                "key": "healthcare"
+            },
+            "label": "Specialties"
         },
         "height": {
             "key": "height",
@@ -730,6 +835,11 @@
             "key": "historic",
             "type": "typeCombo",
             "label": "Type"
+        },
+        "historic/civilization": {
+            "key": "historic:civilization",
+            "type": "combo",
+            "label": "Historic Civilization"
         },
         "hoops": {
             "key": "hoops",
@@ -773,6 +883,16 @@
             "type": "typeCombo",
             "label": "Type"
         },
+        "inscription": {
+            "key": "inscription",
+            "type": "textarea",
+            "label": "Inscription"
+        },
+        "intermittent": {
+            "key": "intermittent",
+            "type": "check",
+            "label": "Intermittent"
+        },
         "internet_access": {
             "key": "internet_access",
             "type": "combo",
@@ -800,7 +920,12 @@
         "kerb": {
             "key": "kerb",
             "type": "combo",
-            "label": "Curb Ramp"
+            "label": "Curb"
+        },
+        "label": {
+            "key": "label",
+            "type": "textarea",
+            "label": "Label"
         },
         "lamp_type": {
             "key": "lamp_type",
@@ -820,8 +945,9 @@
         },
         "layer": {
             "key": "layer",
-            "type": "combo",
-            "label": "Layer"
+            "type": "number",
+            "label": "Layer",
+            "placeholder": "0"
         },
         "leaf_cycle_singular": {
             "key": "leaf_cycle",
@@ -912,6 +1038,11 @@
             "type": "typeCombo",
             "label": "Type"
         },
+        "manhole": {
+            "key": "manhole",
+            "type": "typeCombo",
+            "label": "Type"
+        },
         "map_size": {
             "key": "map_size",
             "type": "typeCombo",
@@ -953,6 +1084,18 @@
                 "2 day"
             ],
             "snake_case": false
+        },
+        "maxweight": {
+            "key": "maxweight",
+            "type": "combo",
+            "label": "Max Weight",
+            "snake_case": false
+        },
+        "milestone_position": {
+            "key": "railway:position",
+            "type": "text",
+            "placeholder": "Distance to one decimal (123.4)",
+            "label": "Milestone Position"
         },
         "mtb/scale": {
             "key": "mtb:scale",
@@ -1006,6 +1149,7 @@
             "key": "name",
             "type": "localized",
             "label": "Name",
+            "universal": true,
             "placeholder": "Common name (if any)"
         },
         "natural": {
@@ -1079,7 +1223,7 @@
         },
         "oneway_yes": {
             "key": "oneway",
-            "type": "check",
+            "type": "onewayCheck",
             "label": "One Way",
             "strings": {
                 "options": {
@@ -1091,7 +1235,7 @@
         },
         "oneway": {
             "key": "oneway",
-            "type": "check",
+            "type": "onewayCheck",
             "label": "One Way",
             "strings": {
                 "options": {
@@ -1103,8 +1247,9 @@
         },
         "opening_hours": {
             "key": "opening_hours",
-            "type": "text",
-            "label": "Hours"
+            "type": "combo",
+            "label": "Hours",
+            "snake_case": false
         },
         "operator": {
             "key": "operator",
@@ -1227,6 +1372,12 @@
             "type": "combo",
             "label": "Plant"
         },
+        "plant/output/electricity": {
+            "key": "plant:output:electricity",
+            "type": "text",
+            "label": "Power Output",
+            "placeholder": "500 MW, 1000 MW, 2000 MW..."
+        },
         "population": {
             "key": "population",
             "type": "text",
@@ -1242,10 +1393,15 @@
             "type": "typeCombo",
             "label": "Type"
         },
+        "produce": {
+            "key": "produce",
+            "type": "semiCombo",
+            "label": "Produce"
+        },
         "product": {
             "key": "product",
-            "type": "combo",
-            "label": "Product"
+            "type": "semiCombo",
+            "label": "Products"
         },
         "railway": {
             "key": "railway",
@@ -1269,10 +1425,58 @@
                 }
             }
         },
+        "ref_aeroway_gate": {
+            "key": "ref",
+            "type": "text",
+            "label": "Gate Number"
+        },
+        "ref_golf_hole": {
+            "key": "ref",
+            "type": "text",
+            "label": "Hole Number",
+            "placeholder": "1-18"
+        },
+        "ref_highway_junction": {
+            "key": "ref",
+            "type": "text",
+            "label": "Junction Number"
+        },
+        "ref_platform": {
+            "key": "ref",
+            "type": "text",
+            "label": "Platform Number"
+        },
+        "ref_road_number": {
+            "key": "ref",
+            "type": "text",
+            "label": "Road Number"
+        },
+        "ref_route": {
+            "key": "ref",
+            "type": "text",
+            "label": "Route Number"
+        },
+        "ref_runway": {
+            "key": "ref",
+            "type": "text",
+            "label": "Runway Number",
+            "placeholder": "e.g. 01L/19R"
+        },
+        "ref_stop_position": {
+            "key": "ref",
+            "type": "text",
+            "label": "Stop Number"
+        },
+        "ref_taxiway": {
+            "key": "ref",
+            "type": "text",
+            "label": "Taxiway Name",
+            "placeholder": "e.g. A5"
+        },
         "ref": {
             "key": "ref",
             "type": "text",
-            "label": "Reference"
+            "label": "Reference Code"
         },
         "relation": {
             "key": "type",
@@ -1365,6 +1569,11 @@
                 }
             }
         },
+        "service_times": {
+            "key": "service_times",
+            "type": "text",
+            "label": "Service Times"
+        },
         "service": {
             "key": "service",
             "type": "combo",
@@ -1379,6 +1588,11 @@
         },
         "service/bicycle": {
             "key": "service:bicycle:",
+            "type": "multiCombo",
+            "label": "Services"
+        },
+        "service/vehicle": {
+            "key": "service:vehicle:",
             "type": "multiCombo",
             "label": "Services"
         },
@@ -1448,15 +1662,22 @@
         },
         "source": {
             "key": "source",
-            "type": "text",
+            "type": "semiCombo",
             "icon": "source",
             "universal": true,
-            "label": "Source"
+            "label": "Sources",
+            "options": [
+                "survey",
+                "local knowledge",
+                "gps",
+                "aerial imagery",
+                "streetlevel imagery"
+            ]
         },
         "sport_ice": {
             "key": "sport",
-            "type": "combo",
-            "label": "Sport",
+            "type": "semiCombo",
+            "label": "Sports",
             "options": [
                 "skating",
                 "hockey",
@@ -1465,29 +1686,43 @@
                 "ice_stock"
             ]
         },
-        "sport_racing": {
+        "sport_racing_motor": {
             "key": "sport",
-            "type": "combo",
-            "label": "Sport",
+            "type": "semiCombo",
+            "label": "Sports",
             "options": [
+                "motor",
+                "karting",
+                "motocross"
+            ]
+        },
+        "sport_racing_nonmotor": {
+            "key": "sport",
+            "type": "semiCombo",
+            "label": "Sports",
+            "options": [
+                "bmx",
                 "cycling",
                 "dog_racing",
                 "horse_racing",
-                "karting",
-                "motor",
-                "motocross",
                 "running"
             ]
         },
         "sport": {
             "key": "sport",
-            "type": "combo",
-            "label": "Sport"
+            "type": "semiCombo",
+            "label": "Sports"
         },
         "stars": {
             "key": "stars",
             "type": "number",
             "label": "Stars"
+        },
+        "start_date": {
+            "key": "start_date",
+            "type": "text",
+            "universal": true,
+            "label": "Start Date"
         },
         "step_count": {
             "key": "step_count",
@@ -1506,7 +1741,7 @@
             }
         },
         "structure": {
-            "type": "radio",
+            "type": "structureRadio",
             "keys": [
                 "bridge",
                 "tunnel",
@@ -1609,6 +1844,18 @@
             "type": "check",
             "label": "Toll"
         },
+        "tomb": {
+            "key": "tomb",
+            "type": "typeCombo",
+            "label": "Type"
+        },
+        "tourism_attraction": {
+            "key": "tourism",
+            "default": "attraction",
+            "type": "typeCombo",
+            "universal": true,
+            "label": "Tourism"
+        },
         "tourism": {
             "key": "tourism",
             "type": "typeCombo",
@@ -1669,13 +1916,19 @@
         },
         "trees": {
             "key": "trees",
-            "type": "combo",
+            "type": "semiCombo",
             "label": "Trees"
         },
-        "tunnel": {
+        "tunnel_waterway": {
             "key": "tunnel",
             "type": "combo",
             "label": "Tunnel"
+        },
+        "tunnel": {
+            "key": "tunnel",
+            "type": "typeCombo",
+            "label": "Type",
+            "placeholder": "Default"
         },
         "vending": {
             "key": "vending",

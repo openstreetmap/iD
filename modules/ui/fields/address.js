@@ -10,25 +10,19 @@ import {
 } from '../../geo/index';
 
 import { services } from '../../services/index';
-import { utilRebind } from '../../util/rebind';
-import { utilGetSetValue } from '../../util/get_set_value';
+import {
+    utilGetSetValue,
+    utilNoAuto,
+    utilRebind
+} from '../../util';
 
 
 export function uiFieldAddress(field, context) {
     var dispatch = d3.dispatch('init', 'change'),
-        nominatim = services.nominatim,
+        nominatim = services.geocoder,
         wrap = d3.select(null),
         isInitialized = false,
         entity;
-
-    var widths = {
-        housenumber: 1/3,
-        street: 2/3,
-        city: 2/3,
-        state: 1/4,
-        postcode: 1/3
-    };
-
 
     function getNearStreets() {
         var extent = entity.extent(context.graph()),
@@ -98,7 +92,6 @@ export function uiFieldAddress(field, context) {
         }
     }
 
-
     function getNearValues(key) {
         var extent = entity.extent(context.graph()),
             l = extent.center(),
@@ -127,8 +120,13 @@ export function uiFieldAddress(field, context) {
         if (err) return;
 
         var addressFormat = _.find(dataAddressFormats, function (a) {
-            return a && a.countryCodes && _.includes(a.countryCodes, countryCode);
+            return a && a.countryCodes && _.includes(a.countryCodes, countryCode.toLowerCase());
         }) || _.first(dataAddressFormats);
+
+        var widths = addressFormat.widths || {
+            housenumber: 1/3, street: 2/3,
+            city: 2/3, state: 1/4, postcode: 1/3
+        };
 
         function row(r) {
             // Normalize widths.
@@ -144,7 +142,7 @@ export function uiFieldAddress(field, context) {
             });
         }
 
-        wrap.selectAll('div')
+        wrap.selectAll('div.addr-row')
             .data(addressFormat.format)
             .enter()
             .append('div')
@@ -154,29 +152,38 @@ export function uiFieldAddress(field, context) {
             .enter()
             .append('input')
             .property('type', 'text')
-            .attr('placeholder', function (d) { return field.t('placeholders.' + d.id); })
+            .attr('placeholder', function (d) {
+                var localkey = d.id + '!' + countryCode.toLowerCase(),
+                    tkey = field.strings.placeholders[localkey] ? localkey : d.id;
+                return field.t('placeholders.' + tkey);
+            })
             .attr('class', function (d) { return 'addr-' + d.id; })
+            .call(utilNoAuto)
             .style('width', function (d) { return d.width * 100 + '%'; });
 
         // Update
-        var addrTags = [
+
+        // setup dropdowns for common address tags
+        var dropdowns = addressFormat.dropdowns || [
             'city', 'county', 'country', 'district', 'hamlet',
             'neighbourhood', 'place', 'postcode', 'province',
             'quarter', 'state', 'street', 'subdistrict', 'suburb'
         ];
 
         // If fields exist for any of these tags, create dropdowns to pick nearby values..
-        addrTags.forEach(function(tag) {
+        dropdowns.forEach(function(tag) {
             var nearValues = (tag === 'street') ? getNearStreets
                     : (tag === 'city') ? getNearCities
                     : getNearValues;
 
-            wrap.selectAll('.addr-' + tag)
+            wrap.selectAll('input.addr-' + tag)
                 .call(d3combobox()
+                    .container(context.container())
                     .minItems(1)
                     .fetcher(function(value, callback) {
                         callback(nearValues('addr:' + tag));
-                    }));
+                    })
+                );
         });
 
         wrap.selectAll('input')
@@ -201,7 +208,6 @@ export function uiFieldAddress(field, context) {
             .append('div')
             .attr('class', 'preset-input-wrap')
             .merge(wrap);
-
 
         if (nominatim && entity) {
             var center = entity.extent(context.graph()).center();

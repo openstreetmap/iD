@@ -1,9 +1,11 @@
 import * as d3 from 'd3';
 import { utilRebind } from '../../modules/util/rebind';
+import { utilTriggerEvent } from '../../modules/util/trigger_event';
 
 
 export function d3combobox() {
-    var event = d3.dispatch('accept'),
+    var dispatch = d3.dispatch('accept'),
+        container = d3.select(document.body),
         data = [],
         suggestions = [],
         minItems = 2,
@@ -20,10 +22,10 @@ export function d3combobox() {
 
     var combobox = function(input, attachTo) {
         var idx = -1,
-            container = d3.select(document.body)
+            wrapper = container
                 .selectAll('div.combobox')
                 .filter(function(d) { return d === input.node(); }),
-            shown = !container.empty();
+            shown = !wrapper.empty();
 
         input
             .classed('combobox-input', true)
@@ -70,7 +72,7 @@ export function d3combobox() {
 
         function show() {
             if (!shown) {
-                container = d3.select(document.body)
+                wrapper = container
                     .insert('div', ':first-child')
                     .datum(input.node())
                     .attr('class', 'combobox')
@@ -82,7 +84,7 @@ export function d3combobox() {
                         d3.event.preventDefault();
                     });
 
-                d3.select(document.body)
+                d3.select('body')
                     .on('scroll.combobox', render, true);
 
                 shown = true;
@@ -92,9 +94,9 @@ export function d3combobox() {
         function hide() {
             if (shown) {
                 idx = -1;
-                container.remove();
+                wrapper.remove();
 
-                d3.select(document.body)
+                d3.select('body')
                     .on('scroll.combobox', null);
 
                 shown = false;
@@ -116,8 +118,8 @@ export function d3combobox() {
                    break;
                // tab
                case 9:
-                   container.selectAll('a.selected').each(function (d) {
-                       event.call('accept', this, d);
+                   wrapper.selectAll('a.selected').each(function (d) {
+                       dispatch.call('accept', this, d);
                    });
                    hide();
                    break;
@@ -147,8 +149,8 @@ export function d3combobox() {
                     break;
                 // return
                 case 13:
-                    container.selectAll('a.selected').each(function (d) {
-                       event.call('accept', this, d);
+                    wrapper.selectAll('a.selected').each(function (d) {
+                       dispatch.call('accept', this, d);
                     });
                     hide();
                     break;
@@ -217,7 +219,7 @@ export function d3combobox() {
                 return;
             }
 
-            var options = container
+            var options = wrapper
                 .selectAll('a.combobox-option')
                 .data(suggestions, function(d) { return d.value; });
 
@@ -239,7 +241,7 @@ export function d3combobox() {
             var node = attachTo ? attachTo.node() : input.node(),
                 rect = node.getBoundingClientRect();
 
-            container
+            wrapper
                 .style('left', rect.left + 'px')
                 .style('width', rect.width + 'px')
                 .style('top', rect.height + rect.top + 'px');
@@ -251,16 +253,15 @@ export function d3combobox() {
         }
 
         function ensureVisible() {
-            var node = container.selectAll('a.selected').node();
+            var node = wrapper.selectAll('a.selected').node();
             if (node) node.scrollIntoView();
         }
 
         function accept(d) {
             if (!shown) return;
-            input
-                .property('value', d.value)
-                .dispatch('change');
-            event.call('accept', this, d);
+            input.property('value', d.value);
+            utilTriggerEvent(input, 'change');
+            dispatch.call('accept', this, d);
             hide();
         }
     };
@@ -289,7 +290,13 @@ export function d3combobox() {
         return combobox;
     };
 
-    return utilRebind(combobox, event, 'on');
+    combobox.container = function(_) {
+        if (!arguments.length) return container;
+        container = _;
+        return combobox;
+    };
+
+    return utilRebind(combobox, dispatch, 'on');
 }
 
 
@@ -306,6 +313,6 @@ d3combobox.off = function(input) {
                 .on('mousedown', null);
         });
 
-    d3.select(document.body)
+    d3.select('body')
         .on('scroll.combobox', null);
 };

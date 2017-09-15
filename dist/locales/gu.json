@@ -101,19 +101,32 @@
             },
             "delete": {
                 "title": "ડેલીટ",
-                "description": "ઑબ્જેક્ટ ને હમેશ માટે ડેલીટ કરો.",
                 "annotation": {
                     "point": "પોઈન્ટ ને ડેલીટ કરો.",
                     "vertex": "નોડ ની રસ્તા પર થી ડેલીટ કરો.",
                     "line": "લીટી ને ડેલીટ કરો.",
                     "area": "વિસ્તાર ને ડેલીટ કરો.",
-                    "relation": "સંબંધ ને ડેલીટ કરો.",
-                    "multiple": "ડેલીટ {સંખ} ઑબ્જેક્ટ્સ."
+                    "relation": "સંબંધ ને ડેલીટ કરો."
                 }
             }
         },
         "splash": {
             "welcome": "ઓપેન સ્ટ્રીટ માપ ના આઇ ડી ઍડિટર મા આપનુ સ્વાગત છે."
+        },
+        "intro": {
+            "graph": {
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "in"
+            }
         }
     }
 }

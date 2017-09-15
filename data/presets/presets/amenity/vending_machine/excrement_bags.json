@@ -1,8 +1,8 @@
 {
+    "icon": "poi-vending-machine",
     "fields": [
         "operator",
         "fee",
-        "bin",
         "payment_multi",
         "currency_multi"
     ],
@@ -18,6 +18,10 @@
     "tags": {
         "amenity": "vending_machine",
         "vending": "excrement_bags"
+    },
+    "reference": {
+        "key": "vending",
+        "value": "excrement_bags"
     },
     "name": "Excrement Bag Vending Machine"
 }

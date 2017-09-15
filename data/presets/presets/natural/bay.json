@@ -1,7 +1,11 @@
 {
+    "icon": "poi-beach",
     "geometry": [
         "point",
         "area"
+    ],
+    "fields": [
+        "name"
     ],
     "tags": {
         "natural": "bay"

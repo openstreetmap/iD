@@ -1,14 +1,15 @@
 {
     "icon": "highway-motorway-link",
     "fields": [
+        "name",
+        "ref_road_number",
         "oneway_yes",
         "maxspeed",
-        "structure",
-        "access",
         "lanes",
         "surface",
+        "structure",
         "maxheight",
-        "ref"
+        "access"
     ],
     "geometry": [
         "line"

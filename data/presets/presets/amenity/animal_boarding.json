@@ -1,0 +1,31 @@
+{
+    "icon": "veterinary",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "animal_boarding"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "boarding",
+        "cat",
+        "dog",
+        "horse",
+        "kitten",
+        "pet boarding",
+        "pet care",
+        "pet hotel",
+        "puppy",
+        "reptile"
+    ],
+    "tags": {
+        "amenity": "animal_boarding"
+    },
+    "name": "Animal Boarding Facility"
+}

@@ -1,5 +1,9 @@
 {
-    "name": "Administrative Boundary",
+    "icon": "boundary",
+    "fields": [
+        "name",
+        "admin_level"
+    ],
     "geometry": [
         "relation"
     ],
@@ -7,8 +11,9 @@
         "type": "boundary",
         "boundary": "administrative"
     },
-    "fields": [
-        "admin_level"
-    ],
-    "icon": "boundary"
+    "reference": {
+        "key": "boundary",
+        "value": "administrative"
+    },
+    "name": "Administrative Boundary"
 }

@@ -15,6 +15,7 @@ export function coreHistory(context) {
         dispatch = d3.dispatch('change', 'undone', 'redone'),
         lock = utilSessionMutex('lock'),
         duration = 150,
+        checkpoints = {},
         stack, index, tree;
 
 
@@ -160,24 +161,26 @@ export function coreHistory(context) {
         },
 
 
-        pop: function() {
+        pop: function(n) {
             d3.select(document).interrupt('history.perform');
 
             var previous = stack[index].graph;
-            if (index > 0) {
+            if (isNaN(+n) || +n < 0) {
+                n = 1;
+            }
+            while (n-- > 0 && index > 0) {
                 index--;
                 stack.pop();
-                return change(previous);
             }
+            return change(previous);
         },
 
 
+        // Back to the previous annotated state or index = 0.
         undo: function() {
             d3.select(document).interrupt('history.perform');
 
             var previous = stack[index].graph;
-
-            // Pop to the next annotated state.
             while (index > 0) {
                 index--;
                 if (stack[index].annotation) break;
@@ -188,16 +191,21 @@ export function coreHistory(context) {
         },
 
 
+        // Forward to the next annotated state.
         redo: function() {
             d3.select(document).interrupt('history.perform');
 
             var previous = stack[index].graph;
-            while (index < stack.length - 1) {
-                index++;
-                if (stack[index].annotation) break;
+            var tryIndex = index;
+            while (tryIndex < stack.length - 1) {
+                tryIndex++;
+                if (stack[tryIndex].annotation) {
+                    index = tryIndex;
+                    dispatch.call('redone', this, stack[index]);
+                    break;
+                }
             }
 
-            dispatch.call('redone', this, stack[index]);
             return change(previous);
         },
 
@@ -278,12 +286,93 @@ export function coreHistory(context) {
         },
 
 
-        reset: function() {
-            stack = [{graph: coreGraph()}];
-            index = 0;
-            tree = coreTree(stack[0].graph);
+        // save the current history state
+        checkpoint: function(key) {
+            checkpoints[key] = {
+                stack: _.cloneDeep(stack),
+                index: index
+            };
+            return history;
+        },
+
+
+        // restore history state to a given checkpoint or reset completely
+        reset: function(key) {
+            if (key !== undefined && checkpoints.hasOwnProperty(key)) {
+                stack = _.cloneDeep(checkpoints[key].stack);
+                index = checkpoints[key].index;
+            } else {
+                stack = [{graph: coreGraph()}];
+                index = 0;
+                tree = coreTree(stack[0].graph);
+                checkpoints = {};
+            }
             dispatch.call('change');
             return history;
+        },
+
+
+        toIntroGraph: function() {
+            var nextId = { n: 0, r: 0, w: 0 },
+                permIds = {},
+                graph = this.graph(),
+                baseEntities = {};
+
+            // clone base entities..
+            _.forEach(graph.base().entities, function(entity) {
+                var copy = _.cloneDeepWith(entity, customizer);
+                baseEntities[copy.id] = copy;
+            });
+
+            // replace base entities with head entities..
+            _.forEach(graph.entities, function(entity, id) {
+                if (entity) {
+                    var copy = _.cloneDeepWith(entity, customizer);
+                    baseEntities[copy.id] = copy;
+                } else {
+                    delete baseEntities[id];
+                }
+            });
+
+            // swap temporary for permanent ids..
+            _.forEach(baseEntities, function(entity) {
+                if (Array.isArray(entity.nodes)) {
+                    entity.nodes = entity.nodes.map(function(node) {
+                        return permIds[node] || node;
+                    });
+                }
+                if (Array.isArray(entity.members)) {
+                    entity.members = entity.members.map(function(member) {
+                        member.id = permIds[member.id] || member.id;
+                        return member;
+                    });
+                }
+            });
+
+            return JSON.stringify({ dataIntroGraph: baseEntities });
+
+
+            function customizer(src) {
+                var copy = _.omit(_.cloneDeep(src), ['type', 'user', 'v', 'version', 'visible']);
+                if (_.isEmpty(copy.tags)) {
+                    delete copy.tags;
+                }
+
+                if (Array.isArray(copy.loc)) {
+                    copy.loc[0] = +copy.loc[0].toFixed(6);
+                    copy.loc[1] = +copy.loc[1].toFixed(6);
+                }
+
+                var match = src.id.match(/([nrw])-\d*/);  // temporary id
+                if (match !== null) {
+                    var nrw = match[1], permId;
+                    do { permId = nrw + (++nextId[nrw]); }
+                    while (baseEntities.hasOwnProperty(permId));
+
+                    copy.id = permIds[src.id] = permId;
+                }
+                return copy;
+            }
         },
 
 
@@ -365,6 +454,7 @@ export function coreHistory(context) {
                     // When we restore a modified way, we also need to fetch any missing
                     // childnodes that would normally have been downloaded with it.. #2142
                     if (loadChildNodes) {
+                        var osm = context.connection();
                         var missing =  _(baseEntities)
                                 .filter({ type: 'way' })
                                 .map('nodes')
@@ -373,7 +463,7 @@ export function coreHistory(context) {
                                 .reject(function(n) { return stack[0].graph.hasEntity(n); })
                                 .value();
 
-                        if (!_.isEmpty(missing)) {
+                        if (!_.isEmpty(missing) && osm) {
                             loadComplete = false;
                             context.redrawEnable(false);
 
@@ -391,8 +481,7 @@ export function coreHistory(context) {
 
                                     // fetch older versions of nodes that were deleted..
                                     _.each(visible.false, function(entity) {
-                                        context.connection()
-                                            .loadEntityVersion(entity.id, +entity.version - 1, childNodesLoaded);
+                                        osm.loadEntityVersion(entity.id, +entity.version - 1, childNodesLoaded);
                                     });
                                 }
 
@@ -403,7 +492,7 @@ export function coreHistory(context) {
                                 }
                             };
 
-                            context.connection().loadMultiple(missing, childNodesLoaded);
+                            osm.loadMultiple(missing, childNodesLoaded);
                         }
                     }
                 }

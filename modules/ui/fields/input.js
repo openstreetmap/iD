@@ -1,9 +1,13 @@
 import * as d3 from 'd3';
-import { t } from '../../util/locale';
-import { dataPhoneFormats } from '../../../data/index';
-import { services } from '../../services/index';
-import { utilRebind } from '../../util/rebind';
-import { utilGetSetValue } from '../../util/get_set_value';
+import { t, textDirection } from '../../util/locale';
+import { dataPhoneFormats } from '../../../data';
+import { services } from '../../services';
+import {
+    utilGetSetValue,
+    utilNoAuto,
+    utilRebind
+} from '../../util';
+
 
 export {
     uiFieldText as uiFieldUrl,
@@ -15,7 +19,7 @@ export {
 
 export function uiFieldText(field, context) {
     var dispatch = d3.dispatch('change'),
-        nominatim = services.nominatim,
+        nominatim = services.geocoder,
         input,
         entity;
 
@@ -31,6 +35,7 @@ export function uiFieldText(field, context) {
             .attr('type', field.type)
             .attr('id', fieldId)
             .attr('placeholder', field.placeholder() || t('inspector.unknown'))
+            .call(utilNoAuto)
             .merge(input);
 
         input
@@ -47,6 +52,8 @@ export function uiFieldText(field, context) {
             });
 
         } else if (field.type === 'number') {
+            var rtl = (textDirection === 'rtl');
+
             input.attr('type', 'text');
 
             var spinControl = selection.selectAll('.spin-control')
@@ -58,14 +65,14 @@ export function uiFieldText(field, context) {
 
             enter
                 .append('button')
-                .datum(1)
-                .attr('class', 'increment')
+                .datum(rtl ? 1 : -1)
+                .attr('class', rtl ? 'increment' : 'decrement')
                 .attr('tabindex', -1);
 
             enter
                 .append('button')
-                .datum(-1)
-                .attr('class', 'decrement')
+                .datum(rtl ? -1 : 1)
+                .attr('class', rtl ? 'decrement' : 'increment')
                 .attr('tabindex', -1);
 
             spinControl = spinControl

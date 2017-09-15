@@ -2,18 +2,25 @@
     "icon": "pitch",
     "fields": [
         "surface",
-        "sport_racing",
+        "sport_racing_nonmotor",
         "lit",
         "width",
         "lanes"
     ],
     "geometry": [
         "point",
-        "line"
+        "line",
+        "area"
     ],
     "tags": {
         "leisure": "track",
         "sport": "running"
     },
-    "name": "Running Track"
+    "terms": [
+        "race*",
+        "running",
+        "sprint",
+        "track"
+    ],
+    "name": "Racetrack (Running)"
 }

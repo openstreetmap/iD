@@ -5,8 +5,6 @@ describe('iD.behaviorHash', function () {
 
     beforeEach(function () {
         context = iD.Context();
-        context.connection().loadTiles = function () {};   // Neuter connection
-
         var container = d3.select(document.createElement('div'));
         context.container(container);
         container.call(context.map());
@@ -15,6 +13,7 @@ describe('iD.behaviorHash', function () {
 
     afterEach(function () {
         hash.off();
+        location.hash = '';
     });
 
     it('sets hadHash if location.hash is present', function () {
@@ -43,14 +42,14 @@ describe('iD.behaviorHash', function () {
         location.hash = 'map=20.00/38.87952/-77.02405';
     });
 
-    it('stores the current zoom and coordinates in location.hash on map move events', function () {
+    it('stores the current zoom and coordinates in location.hash on map move events', function (done) {
         location.hash = '';
         hash();
-        var clock = sinon.useFakeTimers();
         context.map().center([-77.0, 38.9]);
         context.map().zoom(2.0);
-        clock.tick(500);
-        expect(location.hash).to.equal('#map=2.00/38.9/-77.0');
-        clock.restore();
+        window.setTimeout(function() {
+            expect(location.hash).to.equal('#map=2.00/38.9/-77.0');
+            done();
+        }, 300);
     });
 });

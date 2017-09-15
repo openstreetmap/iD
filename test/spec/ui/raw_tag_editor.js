@@ -1,6 +1,5 @@
 describe('iD.uiRawTagEditor', function() {
-    var taglist, element,
-        entity, context;
+    var taglist, element, entity, context;
 
     function render(tags) {
         taglist = iD.uiRawTagEditor(context)
@@ -10,6 +9,7 @@ describe('iD.uiRawTagEditor', function() {
 
         element = d3.select('body')
             .append('div')
+            .attr('class', 'ui-wrap')
             .call(taglist);
     }
 
@@ -21,8 +21,10 @@ describe('iD.uiRawTagEditor', function() {
     });
 
     afterEach(function () {
-        element.remove();
+        d3.selectAll('.ui-wrap')
+            .remove();
     });
+
 
     it('creates input elements for each key-value pair', function () {
         expect(element.selectAll('input[value=highway]')).not.to.be.empty;

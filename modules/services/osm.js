@@ -3,18 +3,23 @@ import _ from 'lodash';
 import osmAuth from 'osm-auth';
 import { JXON } from '../util/jxon';
 import { d3geoTile } from '../lib/d3.geo.tile';
-import { geoExtent } from '../geo/index';
-import { osmEntity, osmNode, osmRelation, osmWay } from '../osm/index';
-import { utilDetect } from '../util/detect';
-import { utilRebind } from '../util/rebind';
+import { geoExtent } from '../geo';
+import {
+    osmEntity,
+    osmNode,
+    osmRelation,
+    osmWay
+} from '../osm';
+
+import { utilRebind, utilIdleWorker } from '../util';
+
 
 var dispatch = d3.dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded'),
-    useHttps = window.location.protocol === 'https:',
-    protocol = useHttps ? 'https:' : 'http:',
-    urlroot = protocol + '//www.openstreetmap.org',
+    urlroot = 'https://www.openstreetmap.org',
     blacklists = ['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*'],
     inflight = {},
     loadedTiles = {},
+    entityCache = {},
     tileZoom = 16,
     oauth = osmAuth({
         url: urlroot,
@@ -24,6 +29,7 @@ var dispatch = d3.dispatch('authLoading', 'authDone', 'change', 'loading', 'load
         done: authDone
     }),
     rateLimitError,
+    userChangesets,
     userDetails,
     off;
 
@@ -69,7 +75,7 @@ function getTags(obj) {
         var attrs = elems[i].attributes;
         tags[attrs.k.value] = attrs.v.value;
     }
-    
+
     return tags;
 }
 
@@ -95,60 +101,72 @@ function getVisible(attrs) {
 
 
 var parsers = {
-    node: function nodeData(obj) {
+    node: function nodeData(obj, uid) {
         var attrs = obj.attributes;
         return new osmNode({
-            id: osmEntity.id.fromOSM('node', attrs.id.value),
-            loc: getLoc(attrs),
+            id:uid,
+            visible: getVisible(attrs),
             version: attrs.version.value,
+            changeset: attrs.changeset && attrs.changeset.value,
+            timestamp: attrs.timestamp && attrs.timestamp.value,
             user: attrs.user && attrs.user.value,
-            tags: getTags(obj),
-            visible: getVisible(attrs)
+            uid: attrs.uid && attrs.uid.value,
+            loc: getLoc(attrs),
+            tags: getTags(obj)
         });
     },
 
-    way: function wayData(obj) {
+    way: function wayData(obj, uid) {
         var attrs = obj.attributes;
         return new osmWay({
-            id: osmEntity.id.fromOSM('way', attrs.id.value),
+            id: uid,
+            visible: getVisible(attrs),
             version: attrs.version.value,
+            changeset: attrs.changeset && attrs.changeset.value,
+            timestamp: attrs.timestamp && attrs.timestamp.value,
             user: attrs.user && attrs.user.value,
+            uid: attrs.uid && attrs.uid.value,
             tags: getTags(obj),
             nodes: getNodes(obj),
-            visible: getVisible(attrs)
         });
     },
 
-    relation: function relationData(obj) {
+    relation: function relationData(obj, uid) {
         var attrs = obj.attributes;
         return new osmRelation({
-            id: osmEntity.id.fromOSM('relation', attrs.id.value),
+            id: uid,
+            visible: getVisible(attrs),
             version: attrs.version.value,
+            changeset: attrs.changeset && attrs.changeset.value,
+            timestamp: attrs.timestamp && attrs.timestamp.value,
             user: attrs.user && attrs.user.value,
+            uid: attrs.uid && attrs.uid.value,
             tags: getTags(obj),
-            members: getMembers(obj),
-            visible: getVisible(attrs)
+            members: getMembers(obj)
         });
     }
 };
 
 
-function parse(xml) {
+function parse(xml, callback, options) {
+    options = _.extend({ cache: true }, options);
     if (!xml || !xml.childNodes) return;
 
     var root = xml.childNodes[0],
-        children = root.childNodes,
-        entities = [];
+        children = root.childNodes;
 
-    for (var i = 0, l = children.length; i < l; i++) {
-        var child = children[i],
-            parser = parsers[child.nodeName];
+    function parseChild(child) {
+        var parser = parsers[child.nodeName];
         if (parser) {
-            entities.push(parser(child));
+            var uid = osmEntity.id.fromOSM(child.nodeName, child.attributes.id.value);
+            if (options.cache && entityCache[uid]) {
+                return null;
+            }
+            return parser(child, uid);
         }
     }
 
-    return entities;
+    utilIdleWorker(children, parseChild, callback);
 }
 
 
@@ -160,9 +178,11 @@ export default {
 
 
     reset: function() {
+        userChangesets = undefined;
         userDetails = undefined;
         rateLimitError = undefined;
         _.forEach(inflight, abortRequest);
+        entityCache = {};
         loadedTiles = {};
         inflight = {};
         return this;
@@ -188,12 +208,18 @@ export default {
     },
 
 
+    historyURL: function(entity) {
+        return urlroot + '/' + entity.type + '/' + entity.osmId() + '/history';
+    },
+
+
     userURL: function(username) {
         return urlroot + '/user/' + username;
     },
 
 
-    loadFromAPI: function(path, callback) {
+    loadFromAPI: function(path, callback, options) {
+        options = _.extend({ cache: true }, options);
         var that = this;
 
         function done(err, xml) {
@@ -217,7 +243,15 @@ export default {
                 }
 
                 if (callback) {
-                    callback(err, parse(xml));
+                    if (err) return callback(err, null);
+                    parse(xml, function (entities) {
+                        if (options.cache) {
+                            for (var i in entities) {
+                                entityCache[entities[i].id] = true;
+                            }
+                        }
+                        callback(null, entities);
+                    }, options);
                 }
             }
         }
@@ -233,42 +267,49 @@ export default {
 
     loadEntity: function(id, callback) {
         var type = osmEntity.id.type(id),
-            osmID = osmEntity.id.toOSM(id);
+            osmID = osmEntity.id.toOSM(id),
+            options = { cache: false };
 
         this.loadFromAPI(
             '/api/0.6/' + type + '/' + osmID + (type !== 'node' ? '/full' : ''),
             function(err, entities) {
                 if (callback) callback(err, { data: entities });
-            }
+            },
+            options
         );
     },
 
 
     loadEntityVersion: function(id, version, callback) {
         var type = osmEntity.id.type(id),
-            osmID = osmEntity.id.toOSM(id);
+            osmID = osmEntity.id.toOSM(id),
+            options = { cache: false };
 
         this.loadFromAPI(
             '/api/0.6/' + type + '/' + osmID + '/' + version,
             function(err, entities) {
                 if (callback) callback(err, { data: entities });
-            }
+            },
+            options
         );
     },
 
 
     loadMultiple: function(ids, callback) {
         var that = this;
+
         _.each(_.groupBy(_.uniq(ids), osmEntity.id.type), function(v, k) {
             var type = k + 's',
-                osmIDs = _.map(v, osmEntity.id.toOSM);
+                osmIDs = _.map(v, osmEntity.id.toOSM),
+                options = { cache: false };
 
             _.each(_.chunk(osmIDs, 150), function(arr) {
                 that.loadFromAPI(
                     '/api/0.6/' + type + '?' + type + '=' + arr.join(),
                     function(err, entities) {
                         if (callback) callback(err, { data: entities });
-                    }
+                    },
+                    options
                 );
             });
         });
@@ -280,99 +321,47 @@ export default {
     },
 
 
-    // Generate Changeset XML. Returns a string.
-    changesetJXON: function(tags) {
-        return {
-            osm: {
-                changeset: {
-                    tag: _.map(tags, function(value, key) {
-                        return { '@k': key, '@v': value };
-                    }),
-                    '@version': 0.6,
-                    '@generator': 'iD'
-                }
-            }
-        };
-    },
+    putChangeset: function(changeset, changes, callback) {
 
-
-    // Generate [osmChange](http://wiki.openstreetmap.org/wiki/OsmChange)
-    // XML. Returns a string.
-    osmChangeJXON: function(changeset_id, changes) {
-        function nest(x, order) {
-            var groups = {};
-            for (var i = 0; i < x.length; i++) {
-                var tagName = Object.keys(x[i])[0];
-                if (!groups[tagName]) groups[tagName] = [];
-                groups[tagName].push(x[i][tagName]);
-            }
-            var ordered = {};
-            order.forEach(function(o) {
-                if (groups[o]) ordered[o] = groups[o];
-            });
-            return ordered;
-        }
-
-        function rep(entity) {
-            return entity.asJXON(changeset_id);
-        }
-
-        return {
-            osmChange: {
-                '@version': 0.6,
-                '@generator': 'iD',
-                'create': nest(changes.created.map(rep), ['node', 'way', 'relation']),
-                'modify': nest(changes.modified.map(rep), ['node', 'way', 'relation']),
-                'delete': _.extend(nest(changes.deleted.map(rep), ['relation', 'way', 'node']), {'@if-unused': true})
-            }
-        };
-    },
-
-
-    changesetTags: function(version, comment, imageryUsed) {
-        var detected = utilDetect(),
-            tags = {
-                created_by: ('iD ' + version).substr(0, 255),
-                imagery_used: imageryUsed.join(';').substr(0, 255),
-                host: detected.host.substr(0, 255),
-                locale: detected.locale.substr(0, 255)
-            };
-
-        if (comment) {
-            tags.comment = comment.substr(0, 255);
-        }
-
-        return tags;
-    },
-
-
-    putChangeset: function(changes, version, comment, imageryUsed, callback) {
-        var that = this;
+        // Create the changeset..
         oauth.xhr({
-                method: 'PUT',
-                path: '/api/0.6/changeset/create',
+            method: 'PUT',
+            path: '/api/0.6/changeset/create',
+            options: { header: { 'Content-Type': 'text/xml' } },
+            content: JXON.stringify(changeset.asJXON())
+        }, createdChangeset);
+
+
+        function createdChangeset(err, changeset_id) {
+            if (err) return callback(err);
+            changeset = changeset.update({ id: changeset_id });
+
+            // Upload the changeset..
+            oauth.xhr({
+                method: 'POST',
+                path: '/api/0.6/changeset/' + changeset_id + '/upload',
                 options: { header: { 'Content-Type': 'text/xml' } },
-                content: JXON.stringify(that.changesetJXON(that.changesetTags(version, comment, imageryUsed)))
-            }, function(err, changeset_id) {
-                if (err) return callback(err);
-                oauth.xhr({
-                    method: 'POST',
-                    path: '/api/0.6/changeset/' + changeset_id + '/upload',
-                    options: { header: { 'Content-Type': 'text/xml' } },
-                    content: JXON.stringify(that.osmChangeJXON(changeset_id, changes))
-                }, function(err) {
-                    if (err) return callback(err);
-                    // POST was successful, safe to call the callback.
-                    // Still attempt to close changeset, but ignore response because #2667
-                    // Add delay to allow for postgres replication #1646 #2678
-                    window.setTimeout(function() { callback(null, changeset_id); }, 2500);
-                    oauth.xhr({
-                        method: 'PUT',
-                        path: '/api/0.6/changeset/' + changeset_id + '/close',
-                        options: { header: { 'Content-Type': 'text/xml' } }
-                    }, function() { return true; });
-                });
-            });
+                content: JXON.stringify(changeset.osmChangeJXON(changes))
+            }, uploadedChangeset);
+        }
+
+
+        function uploadedChangeset(err) {
+            if (err) return callback(err);
+
+            // Upload was successful, safe to call the callback.
+            // Add delay to allow for postgres replication #1646 #2678
+            window.setTimeout(function() {
+                callback(null, changeset);
+            }, 2500);
+
+            // Still attempt to close changeset, but ignore response because #2667
+            oauth.xhr({
+                method: 'PUT',
+                path: '/api/0.6/changeset/' + changeset.id + '/close',
+                options: { header: { 'Content-Type': 'text/xml' } }
+            }, function() { return true; });
+        }
     },
 
 
@@ -393,10 +382,18 @@ export default {
                 image_url = img[0].getAttribute('href');
             }
 
+            var changesets = u.getElementsByTagName('changesets'),
+                changesets_count = 0;
+
+            if (changesets && changesets[0] && changesets[0].getAttribute('count')) {
+                changesets_count = changesets[0].getAttribute('count');
+            }
+
             userDetails = {
+                id: u.attributes.id.value,
                 display_name: u.attributes.display_name.value,
                 image_url: image_url,
-                id: u.attributes.id.value
+                changesets_count: changesets_count
             };
 
             callback(undefined, userDetails);
@@ -407,6 +404,11 @@ export default {
 
 
     userChangesets: function(callback) {
+        if (userChangesets) {
+            callback(undefined, userChangesets);
+            return;
+        }
+
         this.userDetails(function(err, user) {
             if (err) {
                 callback(err);
@@ -417,11 +419,16 @@ export default {
                 if (err) {
                     callback(err);
                 } else {
-                    callback(undefined, Array.prototype.map.call(changesets.getElementsByTagName('changeset'),
+                    userChangesets = Array.prototype.map.call(
+                        changesets.getElementsByTagName('changeset'),
                         function (changeset) {
                             return { tags: getTags(changeset) };
                         }
-                    ));
+                    ).filter(function (changeset) {
+                        var comment = changeset.tags.comment;
+                        return comment && comment !== '';
+                    });
+                    callback(undefined, userChangesets);
                 }
             }
 
@@ -549,8 +556,10 @@ export default {
             loading: authLoading,
             done: authDone
         }, options));
+
         dispatch.call('change');
         this.reset();
+        this.userChangesets(function() {});  // eagerly load user details/changesets
         return this;
     },
 
@@ -569,6 +578,7 @@ export default {
 
 
     logout: function() {
+        userChangesets = undefined;
         userDetails = undefined;
         oauth.logout();
         dispatch.call('change');
@@ -577,12 +587,17 @@ export default {
 
 
     authenticate: function(callback) {
+        var that = this;
+        userChangesets = undefined;
         userDetails = undefined;
+
         function done(err, res) {
             rateLimitError = undefined;
             dispatch.call('change');
             if (callback) callback(err, res);
+            that.userChangesets(function() {});  // eagerly load user details/changesets
         }
+
         return oauth.authenticate(done);
     }
 };

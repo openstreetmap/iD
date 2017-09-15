@@ -1,7 +1,11 @@
 {
+    "icon": "mountain",
     "geometry": [
         "point",
         "area"
+    ],
+    "fields": [
+        "name"
     ],
     "terms": [
         "archipelago",

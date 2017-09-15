@@ -106,6 +106,36 @@ export function svgGpx(projection, context, dispatch) {
     }
 
 
+    function getExtension(fileName) {
+        if (_.isUndefined(fileName)) {
+            return '';
+        }
+
+        var lastDotIndex = fileName.lastIndexOf('.');
+        if (lastDotIndex < 0) {
+            return '';
+        }
+
+        return fileName.substr(lastDotIndex);
+    }
+
+
+    function parseSaveAndZoom(extension, data) {
+        switch (extension) {
+            default:
+                drawGpx.geojson(toGeoJSON.gpx(toDom(data))).fitZoom();
+                break;
+            case '.kml':
+                drawGpx.geojson(toGeoJSON.kml(toDom(data))).fitZoom();
+                break;
+            case '.geojson':
+            case '.json':
+                drawGpx.geojson(JSON.parse(data)).fitZoom();
+                break;
+        }
+    }
+
+
     drawGpx.showLabels = function(_) {
         if (!arguments.length) return showLabels;
         showLabels = _;
@@ -139,7 +169,8 @@ export function svgGpx(projection, context, dispatch) {
     drawGpx.url = function(url) {
         d3.text(url, function(err, data) {
             if (!err) {
-                drawGpx.geojson(toGeoJSON.gpx(toDom(data)));
+                var extension = getExtension(url);
+                parseSaveAndZoom(extension, data);
             }
         });
         return this;
@@ -151,9 +182,13 @@ export function svgGpx(projection, context, dispatch) {
         var f = fileList[0],
             reader = new FileReader();
 
-        reader.onload = function(e) {
-            drawGpx.geojson(toGeoJSON.gpx(toDom(e.target.result))).fitZoom();
-        };
+        reader.onload = (function(file) {
+            var extension = getExtension(file.name);
+
+            return function (e) {
+                parseSaveAndZoom(extension, e.target.result);
+            };
+        })(f);
 
         reader.readAsText(f);
         return this;
@@ -168,11 +203,29 @@ export function svgGpx(projection, context, dispatch) {
             viewport = map.trimmedExtent().polygon(),
             coords = _.reduce(geojson.features, function(coords, feature) {
                 var c = feature.geometry.coordinates;
-                return _.union(coords, feature.geometry.type === 'Point' ? [c] : c);
+
+                /* eslint-disable no-fallthrough */
+                switch (feature.geometry.type) {
+                    case 'Point':
+                        c = [c];
+                    case 'MultiPoint':
+                    case 'LineString':
+                        break;
+
+                    case 'MultiPolygon':
+                        c = _.flatten(c);
+                    case 'Polygon':
+                    case 'MultiLineString':
+                        c = _.flatten(c);
+                        break;
+                }
+                /* eslint-enable no-fallthrough */
+
+                return _.union(coords, c);
             }, []);
 
         if (!geoPolygonIntersectsPolygon(viewport, coords, true)) {
-            var extent = geoExtent(d3.geoBounds(geojson));
+            var extent = geoExtent(d3.geoBounds({ type: 'LineString', coordinates: coords }));
             map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
         }
 

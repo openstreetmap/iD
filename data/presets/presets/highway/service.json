@@ -1,13 +1,14 @@
 {
     "icon": "highway-service",
     "fields": [
+        "name",
         "service",
         "oneway",
         "maxspeed",
-        "structure",
-        "access",
         "surface",
-        "maxheight"
+        "structure",
+        "maxheight",
+        "access"
     ],
     "geometry": [
         "line"

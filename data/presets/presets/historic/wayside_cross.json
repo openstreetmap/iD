@@ -1,5 +1,9 @@
 {
     "icon": "religious-christian",
+    "fields": [
+        "name",
+        "inscription"
+    ],
     "geometry": [
         "point",
         "vertex",

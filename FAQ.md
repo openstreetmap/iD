@@ -10,7 +10,8 @@ Please see [CONTRIBUTING.md](https://github.com/openstreetmap/iD/blob/master/CON
 
 To report an issue with missing or cloudy imagery:
 * _For Mapbox Satellite layer:_ Use [this imagery request tool](https://www.mapbox.com/bites/00240/#3/0.00/0.00) to zoom to the location with the issue and draw a box around it.
-* _For Bing Satellite layer:_ Open the location in [Bing Maps](https://www.bing.com/maps) and click the "Report a problem" link on the sidebar.
+* _For Bing Satellite layer:_ Open the location in [Bing Maps](https://www.bing.com/maps), click the "Feedback" button and choose "Report a map problem" option.
+* _For Esri World Imagery:_ You can open a new issue using the [Imagery Map Feedback tool](https://www.arcgis.com/home/item.html?id=ebdfa4146680410bb952c7d532ea5407).
 
 iD's list of available background imagery sources come from the [editor-layer-index](https://github.com/osmlab/editor-layer-index)
 project.  If you know of a more recent imagery source that is licensed for this use,

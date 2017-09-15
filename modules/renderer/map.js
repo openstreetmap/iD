@@ -1,10 +1,12 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { t } from '../util/locale';
+import { geoExtent } from '../geo';
 
-import { utilRebind } from '../util/rebind';
-import { utilBindOnce } from '../util/bind_once';
-import { utilGetDimensions } from '../util/dimensions';
+import {
+    modeBrowse,
+    modeSelect
+} from '../modes';
 
 import {
     svgAreas,
@@ -14,18 +16,20 @@ import {
     svgMidpoints,
     svgPoints,
     svgVertices
-} from '../svg/index';
+} from '../svg';
 
-import { geoExtent } from '../geo/index';
-import { modeSelect } from '../modes/select';
+import { uiFlash } from '../ui';
 
 import {
     utilFastMouse,
-    utilSetTransform,
-    utilFunctor
-} from '../util/index';
+    utilFunctor,
+    utilRebind,
+    utilSetTransform
+} from '../util';
 
-import { uiFlash } from '../ui/index';
+import { utilBindOnce } from '../util/bind_once';
+import { utilGetDimensions } from '../util/dimensions';
+
 
 
 export function rendererMap(context) {
@@ -33,15 +37,17 @@ export function rendererMap(context) {
     var dimensions = [1, 1],
         dispatch = d3.dispatch('move', 'drawn'),
         projection = context.projection,
+        curtainProjection = context.curtainProjection,
         dblclickEnabled = true,
         redrawEnabled = true,
         transformStart = projection.transform(),
+        transformLast,
         transformed = false,
         minzoom = 0,
         drawLayers = svgLayers(projection, context),
         drawPoints = svgPoints(projection, context),
         drawVertices = svgVertices(projection, context),
-        drawLines = svgLines(projection),
+        drawLines = svgLines(projection, context),
         drawAreas = svgAreas(projection, context),
         drawMidpoints = svgMidpoints(projection, context),
         drawLabels = svgLabels(projection, context),
@@ -58,8 +64,27 @@ export function rendererMap(context) {
             .on('zoom', zoomPan);
 
     var _selection = d3.select(null);
+    var isRedrawScheduled = false;
+    var pendingRedrawCall;
 
+    function scheduleRedraw() {
+        // Only schedule the redraw if one has not already been set.
+        if (isRedrawScheduled) return;
+        isRedrawScheduled = true;
+        var that = this;
+        var args = arguments;
+        pendingRedrawCall = requestIdleCallback(function () {
+            // Reset the boolean so future redraws can be set.
+            isRedrawScheduled = false;
+            redraw.apply(that, args);
+        }, { timeout: 1400 });
+    }
 
+    function cancelPendingRedraw() {
+        isRedrawScheduled = false;
+        window.cancelIdleCallback(pendingRedrawCall);
+    }
+        
     function map(selection) {
 
         _selection = selection;
@@ -67,17 +92,22 @@ export function rendererMap(context) {
         context
             .on('change.map', immediateRedraw);
 
-        context.connection()
-            .on('change.map', immediateRedraw);
+        var osm = context.connection();
+        if (osm) {
+            osm.on('change.map', immediateRedraw);
+        }
 
         context.history()
             .on('change.map', immediateRedraw)
-            .on('undone.context redone.context', function(stack) {
+            .on('undone.map redone.map', function(stack) {
+                var mode = context.mode().id;
+                if (mode !== 'browse' && mode !== 'select') return;
+
                 var followSelected = false;
                 if (Array.isArray(stack.selectedIDs)) {
                     followSelected = (stack.selectedIDs.length === 1 && stack.selectedIDs[0][0] === 'n');
                     context.enter(
-                        modeSelect(context, stack.selectedIDs).suppressMenu(true).follow(followSelected)
+                        modeSelect(context, stack.selectedIDs).follow(followSelected)
                     );
                 }
                 if (!followSelected && stack.transform) {
@@ -99,7 +129,8 @@ export function rendererMap(context) {
 
         selection
             .on('dblclick.map', dblClick)
-            .call(zoom, projection.transform());
+            .call(zoom)
+            .call(zoom.transform, projection.transform());
 
         supersurface = selection.append('div')
             .attr('id', 'supersurface')
@@ -261,6 +292,7 @@ export function rendererMap(context) {
     function editOff() {
         context.features().resetStats();
         surface.selectAll('.layer-osm *').remove();
+        context.enter(modeBrowse(context));
         dispatch.call('drawn', this, {full: true});
     }
 
@@ -274,7 +306,9 @@ export function rendererMap(context) {
 
 
     function zoomPan(manualEvent) {
-        var eventTransform = (manualEvent || d3.event).transform;
+        var event = (manualEvent || d3.event),
+            source = event.sourceEvent,
+            eventTransform = event.transform;
 
         if (transformStart.x === eventTransform.x &&
             transformStart.y === eventTransform.y &&
@@ -282,13 +316,33 @@ export function rendererMap(context) {
             return;  // no change
         }
 
+        // Normalize mousewheel - #3029
+        // If wheel delta is provided in LINE units, recalculate it in PIXEL units
+        // We are essentially redoing the calculations that occur here:
+        //   https://github.com/d3/d3-zoom/blob/78563a8348aa4133b07cac92e2595c2227ca7cd7/src/zoom.js#L203
+        // See this for more info:
+        //   https://github.com/basilfx/normalize-wheel/blob/master/src/normalizeWheel.js
+        if (source && source.type === 'wheel' && source.deltaMode === 1 /* LINE */) {
+            // pick sensible scroll amount if user scrolling fast or slow..
+            var lines = Math.abs(source.deltaY),
+                scroll = lines > 2 ? 40 : lines * 10;
+
+            var t0 = transformed ? transformLast : transformStart,
+                p0 = mouse(source),
+                p1 = t0.invert(p0),
+                k2 = t0.k * Math.pow(2, -source.deltaY * scroll / 500),
+                x2 = p0[0] - p1[0] * k2,
+                y2 = p0[1] - p1[1] * k2;
+
+            eventTransform = d3.zoomIdentity.translate(x2,y2).scale(k2);
+            _selection.node().__zoom = eventTransform;
+        }
+
         if (ktoz(eventTransform.k * 2 * Math.PI) < minzoom) {
             surface.interrupt();
-            uiFlash(context.container())
-                .select('.content')
-                .text(t('cannot_zoom'));
+            uiFlash().text(t('cannot_zoom'));
             setZoom(context.minEditableZoom(), true);
-            queueRedraw();
+            scheduleRedraw();
             dispatch.call('move', this, map);
             return;
         }
@@ -299,9 +353,19 @@ export function rendererMap(context) {
             tX = (eventTransform.x / scale - transformStart.x) * scale,
             tY = (eventTransform.y / scale - transformStart.y) * scale;
 
+        if (context.inIntro()) {
+            curtainProjection.transform({
+                x: eventTransform.x - tX,
+                y: eventTransform.y - tY,
+                k: eventTransform.k
+            });
+        }
+
+        mousemove = event;
         transformed = true;
+        transformLast = eventTransform;
         utilSetTransform(supersurface, tX, tY, scale);
-        queueRedraw();
+        scheduleRedraw();
 
         dispatch.call('move', this, map);
     }
@@ -310,9 +374,13 @@ export function rendererMap(context) {
     function resetTransform() {
         if (!transformed) return false;
 
-        surface.selectAll('.radial-menu').interrupt().remove();
+        // deprecation warning - Radial Menu to be removed in iD v3
+        surface.selectAll('.edit-menu, .radial-menu').interrupt().remove();
         utilSetTransform(supersurface, 0, 0);
         transformed = false;
+        if (context.inIntro()) {
+            curtainProjection.transform(projection.transform());
+        }
         return true;
     }
 
@@ -354,11 +422,9 @@ export function rendererMap(context) {
     }
 
 
-    var queueRedraw = _.throttle(redraw, 750);
-
 
     var immediateRedraw = function(difference, extent) {
-        if (!difference && !extent) queueRedraw.cancel();
+        if (!difference && !extent) cancelPendingRedraw();
         redraw(difference, extent);
     };
 
@@ -527,7 +593,7 @@ export function rendererMap(context) {
         mouse = utilFastMouse(supersurface.node());
         setCenter(center);
 
-        queueRedraw();
+        scheduleRedraw();
         return map;
     };
 
@@ -556,7 +622,7 @@ export function rendererMap(context) {
             dispatch.call('move', this, map);
         }
 
-        queueRedraw();
+        scheduleRedraw();
         return map;
     };
 
@@ -568,9 +634,7 @@ export function rendererMap(context) {
 
         if (z2 < minzoom) {
             surface.interrupt();
-            uiFlash(context.container())
-                .select('.content')
-                .text(t('cannot_zoom'));
+            uiFlash().text(t('cannot_zoom'));
             z2 = context.minEditableZoom();
         }
 
@@ -578,7 +642,7 @@ export function rendererMap(context) {
             dispatch.call('move', this, map);
         }
 
-        queueRedraw();
+        scheduleRedraw();
         return map;
     };
 
@@ -601,7 +665,7 @@ export function rendererMap(context) {
             dispatch.call('move', this, map);
         }
 
-        queueRedraw();
+        scheduleRedraw();
         return map;
     };
 

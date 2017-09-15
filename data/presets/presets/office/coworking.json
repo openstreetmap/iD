@@ -1,6 +1,7 @@
 {
     "icon": "commercial",
     "fields": [
+        "name",
         "address",
         "building_area",
         "opening_hours",
@@ -18,6 +19,10 @@
     ],
     "tags": {
         "office": "coworking"
+    },
+    "reference": {
+        "key": "amenity",
+        "value": "coworking_space"
     },
     "name": "Coworking Space"
 }

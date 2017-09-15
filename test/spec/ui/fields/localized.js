@@ -1,13 +1,14 @@
 describe('iD.uiFieldLocalized', function() {
-    var selection, field;
+    var context, selection, field;
 
     beforeEach(function() {
+        context = iD.Context();
         selection = d3.select(document.createElement('div'));
         field = iD.presetField('test', {key: 'name'});
     });
 
     it('adds a blank set of fields when the + button is clicked', function() {
-        var localized = iD.uiFieldLocalized(field, {});
+        var localized = iD.uiFieldLocalized(field, context);
         selection.call(localized);
         happen.click(selection.selectAll('.localized-add').node());
         expect(selection.selectAll('.localized-lang').nodes().length).to.equal(1);
@@ -15,7 +16,7 @@ describe('iD.uiFieldLocalized', function() {
     });
 
     it('doesn\'t create a tag when the value is empty', function() {
-        var localized = iD.uiFieldLocalized(field, {});
+        var localized = iD.uiFieldLocalized(field, context);
         selection.call(localized);
         happen.click(selection.selectAll('.localized-add').node());
 
@@ -29,7 +30,7 @@ describe('iD.uiFieldLocalized', function() {
     });
 
     it('doesn\'t create a tag when the name is empty', function() {
-        var localized = iD.uiFieldLocalized(field, {});
+        var localized = iD.uiFieldLocalized(field, context);
         selection.call(localized);
         happen.click(selection.selectAll('.localized-add').node());
 
@@ -43,7 +44,7 @@ describe('iD.uiFieldLocalized', function() {
     });
 
     it('creates a tag after setting language then value', function() {
-        var localized = iD.uiFieldLocalized(field, {});
+        var localized = iD.uiFieldLocalized(field, context);
         selection.call(localized);
         happen.click(selection.selectAll('.localized-add').node());
 
@@ -59,7 +60,7 @@ describe('iD.uiFieldLocalized', function() {
     });
 
     it('creates a tag after setting value then language', function() {
-        var localized = iD.uiFieldLocalized(field, {});
+        var localized = iD.uiFieldLocalized(field, context);
         selection.call(localized);
         happen.click(selection.selectAll('.localized-add').node());
 
@@ -75,7 +76,7 @@ describe('iD.uiFieldLocalized', function() {
     });
 
     it('changes an existing language', function() {
-        var localized = iD.uiFieldLocalized(field, {});
+        var localized = iD.uiFieldLocalized(field, context);
         selection.call(localized);
         localized.tags({'name:de': 'Value'});
 
@@ -90,7 +91,7 @@ describe('iD.uiFieldLocalized', function() {
     });
 
     it('ignores similar keys like `old_name`', function() {
-        var localized = iD.uiFieldLocalized(field, {});
+        var localized = iD.uiFieldLocalized(field, context);
         selection.call(localized);
         localized.tags({'old_name:de': 'Value'});
 
@@ -99,7 +100,7 @@ describe('iD.uiFieldLocalized', function() {
     });
 
     it('removes the tag when the language is emptied', function() {
-        var localized = iD.uiFieldLocalized(field, {});
+        var localized = iD.uiFieldLocalized(field, context);
         selection.call(localized);
         localized.tags({'name:de': 'Value'});
 
@@ -112,7 +113,7 @@ describe('iD.uiFieldLocalized', function() {
     });
 
     it('removes the tag when the value is emptied', function() {
-        var localized = iD.uiFieldLocalized(field, {});
+        var localized = iD.uiFieldLocalized(field, context);
         selection.call(localized);
         localized.tags({'name:de': 'Value'});
 

@@ -1,7 +1,9 @@
 {
     "icon": "hospital",
     "fields": [
+        "name",
         "operator",
+        "healthcare/speciality",
         "address",
         "emergency"
     ],
@@ -13,11 +15,9 @@
         "clinic",
         "doctor",
         "emergency room",
-        "health service",
-        "hospice",
+        "health",
         "infirmary",
         "institution",
-        "nursing home",
         "sanatorium",
         "sanitarium",
         "sick",
@@ -26,6 +26,18 @@
     ],
     "tags": {
         "amenity": "hospital"
+    },
+    "addTags": {
+        "amenity": "hospital",
+        "healthcare": "hospital"
+    },
+    "removeTags": {
+        "amenity": "hospital",
+        "healthcare": "hospital"
+    },
+    "reference": {
+        "key": "amenity",
+        "value": "hospital"
     },
     "name": "Hospital Grounds"
 }

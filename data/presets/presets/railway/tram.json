@@ -7,11 +7,17 @@
         "railway": "tram"
     },
     "fields": [
+        "name",
         "structure",
         "gauge",
         "electrified",
         "service_rail"
     ],
-    "terms": ["streetcar"],
+    "terms": [
+        "light rail",
+        "streetcar",
+        "tram",
+        "trolley"
+    ],
     "name": "Tram"
 }

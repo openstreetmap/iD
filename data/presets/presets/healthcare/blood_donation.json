@@ -1,11 +1,13 @@
 {
-    "icon": "hospital",
+    "icon": "blood-bank",
     "fields": [
+        "name",
         "operator",
-        "address",
+        "healthcare/speciality",
         "blood_components",
-        "opening_hours",
-        "ref"
+        "address",
+        "building_area",
+        "opening_hours"
     ],
     "geometry": [
         "point",
@@ -25,4 +27,3 @@
     },
     "name": "Blood Donor Center"
 }
- 

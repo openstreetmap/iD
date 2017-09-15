@@ -35,7 +35,11 @@ export function uiModes(context) {
             .attr('tabindex', -1)
             .attr('class', function(mode) { return mode.id + ' add-button col4'; })
             .on('click.mode-buttons', function(mode) {
-                if (mode.id === context.mode().id) {
+                // When drawing, ignore accidental clicks on mode buttons - #4042
+                var currMode = context.mode().id;
+                if (currMode.match(/^draw/) !== null) return;
+
+                if (mode.id === currMode) {
                     context.enter(modeBrowse(context));
                 } else {
                     context.enter(mode);
@@ -82,9 +86,15 @@ export function uiModes(context) {
 
         var keybinding = d3keybinding('mode-buttons');
 
-        modes.forEach(function(m) {
-            keybinding.on(m.key, function() {
-                if (editable()) context.enter(m);
+        modes.forEach(function(mode) {
+            keybinding.on(mode.key, function() {
+                if (editable()) {
+                    if (mode.id === context.mode().id) {
+                        context.enter(modeBrowse(context));
+                    } else {
+                        context.enter(mode);
+                    }
+                }
             });
         });
 

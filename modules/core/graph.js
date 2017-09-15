@@ -34,6 +34,12 @@ coreGraph.prototype = {
 
     entity: function(id) {
         var entity = this.entities[id];
+
+        //https://github.com/openstreetmap/iD/issues/3973#issuecomment-307052376
+        if (!entity) {
+            entity = this.entities.__proto__[id];  // eslint-disable-line no-proto
+        }
+
         if (!entity) {
             throw new Error('entity ' + id + ' not found');
         }

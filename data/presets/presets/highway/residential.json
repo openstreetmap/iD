@@ -1,14 +1,15 @@
 {
     "icon": "highway-residential",
     "fields": [
+        "name",
         "oneway",
         "maxspeed",
-        "structure",
-        "access",
         "lanes",
         "surface",
+        "structure",
         "maxheight",
-        "cycleway"
+        "cycleway",
+        "access"
     ],
     "geometry": [
         "line"

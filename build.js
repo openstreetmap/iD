@@ -17,9 +17,6 @@ const suggestions = require('name-suggestion-index/name-suggestions.json');
 const symlinks = {
     'land.html': 'dist/land.html',
     'img': 'dist/img',
-    'css/img': '../dist/img',
-    'test/css': '../css',
-    'test/img': '../dist/img'
 };
 
 for (var target of Object.keys(symlinks)) {
@@ -69,7 +66,8 @@ fs.writeFileSync('data/taginfo.json', JSON.stringify(taginfo, null, 4));
 
 // Push changes from data/core.yaml into en.json
 var core = YAML.load(fs.readFileSync('data/core.yaml', 'utf8'));
-var en = _.merge(core, { en: { presets: tstrings }});
+var imagery = YAML.load(fs.readFileSync('node_modules/editor-layer-index/i18n/en.yaml', 'utf8'));
+var en = _.merge(core, { en: { presets: tstrings }}, imagery);
 fs.writeFileSync('dist/locales/en.json', JSON.stringify(en, null, 4));
 
 process.exit();

@@ -15,6 +15,14 @@ import {
 export function svgMidpoints(projection, context) {
 
     return function drawMidpoints(selection, graph, entities, filter, extent) {
+        var layer = selection.selectAll('.layer-hit');
+
+        var mode = context.mode();
+        if (mode && mode.id !== 'select') {
+            layer.selectAll('g.midpoint').remove();
+            return;
+        }
+
         var poly = extent.polygon(),
             midpoints = {};
 
@@ -85,8 +93,6 @@ export function svgMidpoints(projection, context) {
             return false;
         }
 
-
-        var layer = selection.selectAll('.layer-hit');
 
         var groups = layer
             .selectAll('g.midpoint')

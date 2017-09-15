@@ -1,13 +1,19 @@
 {
     "icon": "highway-unclassified",
     "fields": [
+        "name",
         "oneway",
         "surface",
-        "sport_racing",
+        "sport_racing_motor",
+        "lit",
+        "width",
+        "lanes",
         "structure"
     ],
     "geometry": [
-        "line"
+        "point",
+        "line",
+        "area"
     ],
     "tags": {
         "highway": "raceway"
@@ -18,8 +24,12 @@
     },
     "terms": [
         "auto*",
+        "formula one",
+        "kart",
+        "motocross",
+        "nascar",
         "race*",
-        "nascar"
+        "track"
     ],
-    "name": "Motor Raceway"
+    "name": "Racetrack (Motorsport)"
 }

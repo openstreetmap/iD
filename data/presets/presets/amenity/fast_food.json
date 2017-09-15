@@ -1,6 +1,7 @@
 {
     "icon": "fast-food",
     "fields": [
+        "name",
         "cuisine",
         "operator",
         "address",

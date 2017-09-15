@@ -1,32 +1,29 @@
 import _ from 'lodash';
 import { t } from '../util/locale';
-import { actionDeleteMultiple } from '../actions/index';
-import { behaviorOperation } from '../behavior/index';
-import { geoSphericalDistance } from '../geo/index';
-import { modeBrowse, modeSelect } from '../modes/index';
-import { uiCmd } from '../ui/index';
+import { actionDeleteMultiple } from '../actions';
+import { behaviorOperation } from '../behavior';
+import { geoExtent, geoSphericalDistance } from '../geo';
+import { modeBrowse, modeSelect } from '../modes';
+import { uiCmd } from '../ui';
 
 
 export function operationDelete(selectedIDs, context) {
     var multi = (selectedIDs.length === 1 ? 'single' : 'multiple'),
-        action = actionDeleteMultiple(selectedIDs);
+        action = actionDeleteMultiple(selectedIDs),
+        extent = selectedIDs.reduce(function(extent, id) {
+                return extent.extend(context.entity(id).extent(context.graph()));
+            }, geoExtent());
 
 
     var operation = function() {
-        var annotation,
-            nextSelectedID;
+        var nextSelectedID;
 
-        if (selectedIDs.length > 1) {
-            annotation = t('operations.delete.annotation.multiple', { n: selectedIDs.length });
-
-        } else {
+        if (selectedIDs.length === 1) {
             var id = selectedIDs[0],
                 entity = context.entity(id),
                 geometry = context.geometry(id),
                 parents = context.graph().parentWays(entity),
                 parent = parents[0];
-
-            annotation = t('operations.delete.annotation.' + geometry);
 
             // Select the next closest node in the way.
             if (geometry === 'vertex' && parent.nodes.length > 2) {
@@ -47,12 +44,10 @@ export function operationDelete(selectedIDs, context) {
             }
         }
 
-        context.perform(action, annotation);
+        context.perform(action, operation.annotation());
 
         if (nextSelectedID && context.hasEntity(nextSelectedID)) {
-            context.enter(
-                modeSelect(context, [nextSelectedID]).follow(true).suppressMenu(true)
-            );
+            context.enter(modeSelect(context, [nextSelectedID]).follow(true));
         } else {
             context.enter(modeBrowse(context));
         }
@@ -67,7 +62,9 @@ export function operationDelete(selectedIDs, context) {
 
     operation.disabled = function() {
         var reason;
-        if (_.some(selectedIDs, context.hasHiddenConnections)) {
+        if (extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
+            reason = 'too_large';
+        } else if (_.some(selectedIDs, context.hasHiddenConnections)) {
             reason = 'connected_to_hidden';
         } else if (_.some(selectedIDs, protectedMember)) {
             reason = 'part_of_relation';
@@ -105,6 +102,13 @@ export function operationDelete(selectedIDs, context) {
         return disable ?
             t('operations.delete.' + disable + '.' + multi) :
             t('operations.delete.description' + '.' + multi);
+    };
+
+
+    operation.annotation = function() {
+        return selectedIDs.length === 1 ?
+            t('operations.delete.annotation.' + context.geometry(selectedIDs[0])) :
+            t('operations.delete.annotation.multiple', { n: selectedIDs.length });
     };
 
 

@@ -132,6 +132,32 @@ describe('iD.History', function () {
             var difference = history.pop();
             expect(spy).to.have.been.calledWith(difference);
         });
+
+        it('pops n times', function () {
+            history.perform(action, 'annotation1');
+            history.perform(action, 'annotation2');
+            history.perform(action, 'annotation3');
+            history.pop(2);
+            expect(history.undoAnnotation()).to.equal('annotation1');
+        });
+
+        it('pops 0 times', function () {
+            history.perform(action, 'annotation1');
+            history.perform(action, 'annotation2');
+            history.perform(action, 'annotation3');
+            history.pop(0);
+            expect(history.undoAnnotation()).to.equal('annotation3');
+        });
+
+        it('pops 1 time if argument is invalid', function () {
+            history.perform(action, 'annotation1');
+            history.perform(action, 'annotation2');
+            history.perform(action, 'annotation3');
+            history.pop('foo');
+            expect(history.undoAnnotation()).to.equal('annotation2');
+            history.pop(-1);
+            expect(history.undoAnnotation()).to.equal('annotation1');
+        });
     });
 
     describe('#overwrite', function () {
@@ -214,12 +240,21 @@ describe('iD.History', function () {
             expect(history.redo().changes()).to.eql({});
         });
 
-        it('emits an redone event', function () {
-            history.perform(action);
+        it('does redo into an annotated state', function () {
+            history.perform(action, 'annotation');
+            history.on('redone', spy);
             history.undo();
-            history.on('change', spy);
             history.redo();
+            expect(history.undoAnnotation()).to.equal('annotation');
             expect(spy).to.have.been.called;
+        });
+
+        it('does not redo into a non-annotated state', function () {
+            history.perform(action);
+            history.on('redone', spy);
+            history.undo();
+            history.redo();
+            expect(spy).not.to.have.been.called;
         });
 
         it('emits a change event', function () {
@@ -274,6 +309,36 @@ describe('iD.History', function () {
             history.reset();
             expect(history.undoAnnotation()).to.be.undefined;
             expect(history.redoAnnotation()).to.be.undefined;
+        });
+
+        it('emits a change event', function () {
+            history.on('change', spy);
+            history.reset();
+            expect(spy).to.have.been.called;
+        });
+    });
+
+    describe('#checkpoint', function () {
+        it('saves and resets to checkpoints', function () {
+            history.perform(action, 'annotation1');
+            history.perform(action, 'annotation2');
+            history.perform(action, 'annotation3');
+            history.checkpoint('check1');
+            history.perform(action, 'annotation4');
+            history.perform(action, 'annotation5');
+            history.checkpoint('check2');
+            history.perform(action, 'annotation6');
+            history.perform(action, 'annotation7');
+            history.perform(action, 'annotation8');
+
+            history.reset('check1');
+            expect(history.undoAnnotation()).to.equal('annotation3');
+
+            history.reset('check2');
+            expect(history.undoAnnotation()).to.equal('annotation5');
+
+            history.reset('check1');
+            expect(history.undoAnnotation()).to.equal('annotation3');
         });
 
         it('emits a change event', function () {

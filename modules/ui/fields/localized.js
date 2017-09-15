@@ -7,9 +7,12 @@ import { services } from '../../services/index';
 import { svgIcon } from '../../svg/index';
 import { tooltip } from '../../util/tooltip';
 import { utilDetect } from '../../util/detect';
-import { utilGetSetValue } from '../../util/get_set_value';
-import { utilRebind } from '../../util/rebind';
-import { utilSuggestNames } from '../../util/index';
+import {
+    utilGetSetValue,
+    utilNoAuto,
+    utilRebind,
+    utilSuggestNames
+} from '../../util';
 
 
 export function uiFieldLocalized(field, context) {
@@ -31,13 +34,16 @@ export function uiFieldLocalized(field, context) {
             .attr('id', 'preset-input-' + field.id)
             .attr('class', 'localized-main')
             .attr('placeholder', field.placeholder())
+            .call(utilNoAuto)
             .merge(input);
 
         if (field.id === 'name') {
             var preset = context.presets().match(entity, context.graph());
-            input.call(d3combobox().fetcher(
-                utilSuggestNames(preset, dataSuggestions)
-            ));
+            input
+                .call(d3combobox()
+                    .container(context.container())
+                    .fetcher(utilSuggestNames(preset, dataSuggestions))
+                );
         }
 
         input
@@ -167,7 +173,10 @@ export function uiFieldLocalized(field, context) {
         innerWrap.attr('class', 'entry')
             .each(function() {
                 var wrap = d3.select(this);
-                var langcombo = d3combobox().fetcher(fetcher).minItems(0);
+                var langcombo = d3combobox()
+                    .container(context.container())
+                    .fetcher(fetcher)
+                    .minItems(0);
 
                 var label = wrap
                     .append('label')

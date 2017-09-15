@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
 import { d3keybinding } from '../lib/d3.keybinding.js';
+import { t } from '../util/locale';
 import { svgDebug, svgGpx } from '../svg/index';
 import { geoRawMercator } from '../geo/index';
 import { rendererTileLayer } from '../renderer/index';
@@ -15,7 +16,6 @@ function vecScale(a, b) { return [ a[0] * b, a[1] * b ]; }
 
 
 export function uiMapInMap(context) {
-    var key = '/';
 
 
     function map_in_map(selection) {
@@ -325,7 +325,7 @@ export function uiMapInMap(context) {
         redraw();
 
         var keybinding = d3keybinding('map-in-map')
-            .on(key, toggle);
+            .on(t('background.minimap.key'), toggle);
 
         d3.select(document)
             .call(keybinding);

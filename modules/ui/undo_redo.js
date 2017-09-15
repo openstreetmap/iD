@@ -11,12 +11,12 @@ export function uiUndoRedo(context) {
     var commands = [{
         id: 'undo',
         cmd: uiCmd('⌘Z'),
-        action: function() { if (!(context.inIntro() || saving())) context.undo(); },
+        action: function() { if (!saving()) context.undo(); },
         annotation: function() { return context.history().undoAnnotation(); }
     }, {
         id: 'redo',
         cmd: uiCmd('⌘⇧Z'),
-        action: function() {if (!(context.inIntro() || saving())) context.redo(); },
+        action: function() { if (!saving()) context.redo(); },
         annotation: function() { return context.history().redoAnnotation(); }
     }];
 
@@ -40,7 +40,7 @@ export function uiUndoRedo(context) {
             .data(commands)
             .enter()
             .append('button')
-            .attr('class', 'col6 disabled')
+            .attr('class', function(d) { return 'col6 disabled ' + d.id + '-button'; })
             .on('click', function(d) { return d.action(); })
             .call(tooltipBehavior);
 

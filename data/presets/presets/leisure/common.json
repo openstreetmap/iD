@@ -1,7 +1,11 @@
 {
+    "icon": "poi-foot",
     "geometry": [
         "point",
         "area"
+    ],
+    "fields": [
+        "name"
     ],
     "terms": [
         "open space"

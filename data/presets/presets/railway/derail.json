@@ -1,0 +1,13 @@
+{
+    "icon": "roadblock",
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "railway": "derail"
+    },
+    "terms": [
+        "derailer"
+    ],
+    "name": "Railway Derailer"
+}

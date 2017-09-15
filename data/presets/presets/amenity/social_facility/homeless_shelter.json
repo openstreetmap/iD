@@ -1,5 +1,7 @@
 {
+    "icon": "poi-social-facility",
     "fields": [
+        "name",
         "operator",
         "address",
         "building_area",
@@ -24,6 +26,10 @@
         "amenity": "social_facility",
         "social_facility": "shelter",
         "social_facility:for": "homeless"
+    },
+    "reference": {
+        "key": "social_facility",
+        "value": "shelter"
     },
     "name": "Homeless Shelter"
 }

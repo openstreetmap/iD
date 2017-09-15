@@ -1,18 +1,60 @@
 import * as d3 from 'd3';
 import { d3keybinding } from '../lib/d3.keybinding.js';
+import { uiFlash } from '../ui';
 
 
 /* Creates a keybinding behavior for an operation */
-export function behaviorOperation(context) {
+export function behaviorOperation() {
     var which, keybinding;
 
 
+    function drawIcon(selection) {
+        var button = selection
+            .append('svg')
+            .attr('class', 'operation-icon')
+            .append('g')
+            .attr('class', 'radial-menu-item radial-menu-item-' + which.id)
+            .attr('transform', 'translate(10,10)')
+            .classed('disabled', which.disabled());
+
+        button
+            .append('circle')
+            .attr('r', 9);
+
+        button
+            .append('use')
+            .attr('transform', 'translate(-7,-7)')
+            .attr('width', '14')
+            .attr('height', '14')
+            .attr('xlink:href', '#operation-' + which.id);
+
+        return selection;
+    }
+
+
     var behavior = function () {
-        if (which) {
+        if (which && which.available()) {
             keybinding = d3keybinding('behavior.key.' + which.id);
             keybinding.on(which.keys, function() {
                 d3.event.preventDefault();
-                if (which.available() && !which.disabled() && !context.inIntro()) {
+                var disabled = which.disabled();
+
+                if (disabled) {
+                    uiFlash(3000)
+                        .html('')
+                        .call(drawIcon)
+                        .append('div')
+                        .attr('class', 'operation-tip')
+                        .text(which.tooltip);
+
+                } else {
+                    uiFlash(1500)
+                        .html('')
+                        .call(drawIcon)
+                        .append('div')
+                        .attr('class', 'operation-tip')
+                        .text(which.annotation() || which.title);
+
                     which();
                 }
             });

@@ -1,4 +1,11 @@
 {
+    "icon": "route-foot",
+    "fields": [
+        "name",
+        "ref_route",
+        "operator",
+        "network_foot"
+    ],
     "geometry": [
         "relation"
     ],
@@ -6,11 +13,5 @@
         "type": "route",
         "route": "hiking"
     },
-    "name": "Hiking Route",
-    "icon": "route-foot",
-    "fields": [
-        "ref",
-        "operator",
-        "network_foot"
-    ]
+    "name": "Hiking Route"
 }

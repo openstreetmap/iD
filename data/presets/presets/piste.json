@@ -1,6 +1,7 @@
 {
     "icon": "skiing",
     "fields": [
+        "name",
         "piste/type",
         "piste/difficulty",
         "piste/grooming",

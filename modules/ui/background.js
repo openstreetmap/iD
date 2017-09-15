@@ -2,10 +2,9 @@ import * as d3 from 'd3';
 import _ from 'lodash';
 import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t, textDirection } from '../util/locale';
-import { rendererBackgroundSource } from '../renderer/index';
 import { geoMetersToOffset, geoOffsetToMeters } from '../geo/index';
 import { utilDetect } from '../util/detect';
-import { utilSetTransform } from '../util/index';
+import { utilSetTransform, utilCallWhenIdle } from '../util/index';
 import { svgIcon } from '../svg/index';
 import { uiMapInMap } from './map_in_map';
 import { uiCmd } from './cmd';
@@ -14,7 +13,7 @@ import { tooltip } from '../util/tooltip';
 
 
 export function uiBackground(context) {
-    var key = 'B',
+    var key = t('background.key'),
         detected = utilDetect(),
         opacities = [1, 0.75, 0.5, 0.25],
         directions = [
@@ -24,7 +23,7 @@ export function uiBackground(context) {
             ['bottom', [0, 0.5]]],
         opacityDefault = (context.storage('background-opacity') !== null) ?
             (+context.storage('background-opacity')) : 1.0,
-        customTemplate = context.storage('background-custom-template') || '',
+        customSource = context.background().findSource('custom'),
         previous;
 
     // Can be 0 from <1.3.0 use or due to issue #1923.
@@ -60,7 +59,10 @@ export function uiBackground(context) {
         function setTooltips(selection) {
             selection.each(function(d, i, nodes) {
                 var item = d3.select(this).select('label'),
-                    placement = (i < nodes.length / 2) ? 'bottom' : 'top';
+                    span = item.select('span'),
+                    placement = (i < nodes.length / 2) ? 'bottom' : 'top',
+                    description = d.description(),
+                    isOverflowing = (span.property('clientWidth') !== span.property('scrollWidth'));
 
                 if (d === previous) {
                     item.call(tooltip()
@@ -68,13 +70,13 @@ export function uiBackground(context) {
                         .html(true)
                         .title(function() {
                             var tip = '<div>' + t('background.switch') + '</div>';
-                            return uiTooltipHtml(tip, uiCmd('⌘B'));
+                            return uiTooltipHtml(tip, uiCmd('⌘' + key));
                         })
                     );
-                } else if (d.description) {
+                } else if (description || isOverflowing) {
                     item.call(tooltip()
                         .placement(placement)
-                        .title(d.description)
+                        .title(description || d.name())
                     );
                 } else {
                     item.call(tooltip().destroy);
@@ -88,7 +90,7 @@ export function uiBackground(context) {
                 return context.background().showsLayer(d);
             }
 
-            content.selectAll('.layer, .custom_layer')
+            content.selectAll('.layer')
                 .classed('active', active)
                 .classed('switch', function(d) { return d === previous; })
                 .call(setTooltips)
@@ -98,6 +100,10 @@ export function uiBackground(context) {
 
 
         function clickSetSource(d) {
+            if (d.id === 'custom' && !d.template()) {
+                return editCustom();
+            }
+
             d3.event.preventDefault();
             previous = context.background().baseLayerSource();
             context.background().baseLayerSource(d);
@@ -108,20 +114,19 @@ export function uiBackground(context) {
 
         function editCustom() {
             d3.event.preventDefault();
-            var template = window.prompt(t('background.custom_prompt'), customTemplate);
+            var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
+            var template = window.prompt(
+                t('background.custom_prompt', { example: example }),
+                customSource.template() || example
+            );
+
             if (template) {
-                setCustom(template);
+                context.storage('background-custom-template', template);
+                customSource.template(template);
+                clickSetSource(customSource);
             } else {
                 selectLayer();
             }
-        }
-
-
-        function setCustom(template) {
-            context.storage('background-custom-template', template);
-            var d = rendererBackgroundSource.Custom(template);
-            content.selectAll('.custom_layer').datum(d);
-            clickSetSource(d);
         }
 
 
@@ -145,9 +150,19 @@ export function uiBackground(context) {
                 .remove();
 
             var enter = layerLinks.enter()
-                .insert('li', '.custom_layer')
+                .append('li')
                 .attr('class', 'layer')
+                .classed('layer-custom', function(d) { return d.id === 'custom'; })
                 .classed('best', function(d) { return d.best(); });
+
+            enter.filter(function(d) { return d.id === 'custom'; })
+                .append('button')
+                .attr('class', 'layer-browse')
+                .call(tooltip()
+                    .title(t('background.custom_button'))
+                    .placement((textDirection === 'rtl') ? 'right' : 'left'))
+                .on('click', editCustom)
+                .call(svgIcon('#icon-search'));
 
             enter.filter(function(d) { return d.best(); })
                 .append('div')
@@ -183,12 +198,6 @@ export function uiBackground(context) {
             overlayList.call(drawList, 'checkbox', clickSetOverlay, function(d) { return d.overlay; });
 
             selectLayer();
-
-            var source = context.background().baseLayerSource();
-            if (source.id === 'custom') {
-                customTemplate = source.template;
-            }
-
             updateOffsetVal();
         }
 
@@ -307,13 +316,19 @@ export function uiBackground(context) {
 
 
         function toggle() {
-            if (d3.event) d3.event.preventDefault();
+            if (d3.event) {
+                d3.event.preventDefault();
+            }
             tooltipBehavior.hide(button);
             setVisible(!button.classed('active'));
         }
 
 
         function quickSwitch() {
+            if (d3.event) {
+                d3.event.stopImmediatePropagation();
+                d3.event.preventDefault();
+            }
             if (previous) {
                 clickSetSource(previous);
             }
@@ -326,15 +341,21 @@ export function uiBackground(context) {
                 shown = show;
 
                 if (show) {
-                    selection.on('mousedown.background-inside', function() {
-                        d3.event.stopPropagation();
-                    });
+                    selection
+                        .on('mousedown.background-inside', function() {
+                            d3.event.stopPropagation();
+                        });
+
                     content
                         .style('display', 'block')
                         .style('right', '-300px')
                         .transition()
                         .duration(200)
                         .style('right', '0px');
+
+                    content.selectAll('.layer')
+                        .call(setTooltips);
+
                 } else {
                     content
                         .style('display', 'block')
@@ -345,7 +366,9 @@ export function uiBackground(context) {
                         .on('end', function() {
                             d3.select(this).style('display', 'none');
                         });
-                    selection.on('mousedown.background-inside', null);
+
+                    selection
+                        .on('mousedown.background-inside', null);
                 }
             }
         }
@@ -397,45 +420,12 @@ export function uiBackground(context) {
             .style('opacity', function(d) { return 1.25 - d; });
 
 
-        /* background switcher */
+        /* background list */
 
         var backgroundList = content
             .append('ul')
             .attr('class', 'layer-list')
             .attr('dir', 'auto');
-
-        var custom = backgroundList
-            .append('li')
-            .attr('class', 'custom_layer')
-            .datum(rendererBackgroundSource.Custom());
-
-        custom
-            .append('button')
-            .attr('class', 'layer-browse')
-            .call(tooltip()
-                .title(t('background.custom_button'))
-                .placement((textDirection === 'rtl') ? 'right' : 'left'))
-            .on('click', editCustom)
-            .call(svgIcon('#icon-search'));
-
-        var label = custom
-            .append('label');
-
-        label
-            .append('input')
-            .attr('type', 'radio')
-            .attr('name', 'layers')
-            .on('change', function () {
-                if (customTemplate) {
-                    setCustom(customTemplate);
-                } else {
-                    editCustom();
-                }
-            });
-
-        label
-            .append('span')
-            .text(t('background.custom'));
 
         content
             .append('div')
@@ -447,6 +437,9 @@ export function uiBackground(context) {
             .attr('href', 'https://github.com/openstreetmap/iD/blob/master/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
             .append('span')
             .text(t('background.imagery_source_faq'));
+
+
+        /* overlay list */
 
         var overlayList = content
             .append('ul')
@@ -463,7 +456,7 @@ export function uiBackground(context) {
             .append('label')
             .call(tooltip()
                 .html(true)
-                .title(uiTooltipHtml(t('background.minimap.tooltip'), '/'))
+                .title(uiTooltipHtml(t('background.minimap.tooltip'), t('background.minimap.key')))
                 .placement('top')
             );
 
@@ -547,7 +540,7 @@ export function uiBackground(context) {
             );
 
         context.map()
-            .on('move.background-update', _.debounce(update, 1000));
+            .on('move.background-update', _.debounce(utilCallWhenIdle(update), 1000));
 
         context.background()
             .on('change.background-update', update);
@@ -558,9 +551,8 @@ export function uiBackground(context) {
 
         var keybinding = d3keybinding('background')
             .on(key, toggle)
-            .on(uiCmd('⌘B'), quickSwitch)
-            .on('F', hide)
-            .on('H', hide);
+            .on(uiCmd('⌘' + key), quickSwitch)
+            .on([t('map_data.key'), t('help.key')], hide);
 
         d3.select(document)
             .call(keybinding);
