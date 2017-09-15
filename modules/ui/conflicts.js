@@ -34,28 +34,46 @@ export function uiConflicts(context) {
             .append('div')
             .attr('class', 'body fillL');
 
+        var conflictsHelp = body
+            .append('div')
+            .attr('class', 'conflicts-help')
+            .text(t('save.conflict.help'));
+
 
         // Download changes link
         var detected = utilDetect(),
             changeset = new osmChangeset({ id: 'CHANGEME' }),
             data = JXON.stringify(changeset.osmChangeJXON(origChanges)),
-            uri = 'data:text/xml,' + encodeURIComponent(data);
+            uri = 'data:text/xml;charset=utf-8,' + encodeURIComponent(data);
 
-        body
-            .append('div')
-            .attr('class', 'conflicts-help')
-            .text(t('save.conflict.help'))
+        var linkEnter = conflictsHelp.selectAll('.download-changes')
+            .data([0])
+            .enter()
             .append('a')
-            .attr('class', 'conflicts-download')
-            .attr('href', uri)                     // no IE11 ?
-            .attr('download', 'changes.osc')       // no IE11 ?
-            // .attr('target', '_blank')           // maybe IE11 ?
-            .text(t('save.conflict.download_changes'))
-            .on('click.download', function() {
-                if (!detected.ie) return;         // yes IE11 ?
-                var win = window.open(uri, '_blank');
-                win.focus();
-            });
+            .attr('class', 'download-changes');
+
+        if (detected.download) {      // all except IE11 and Edge
+            linkEnter                 // download the data uri as a file
+                .attr('href', uri)
+                .attr('download', 'changes.osc')
+                .call(svgIcon('#icon-load', 'inline'))
+                .append('span')
+                .text(t('save.conflict.download_changes'));
+
+        } else {                      // IE11 and Edge
+            linkEnter                 // open data uri in a new tab
+                .attr('target', '_blank')
+                .call(svgIcon('#icon-load', 'inline'))
+                .append('span')
+                .text(t('save.conflict.download_changes'));
+
+            linkEnter
+                .on('click.download', function() {
+                    var win = window.open(uri, '_blank');
+                    win.focus();
+                });
+        }
+
 
         body
             .append('div')

@@ -97,30 +97,35 @@ export function uiCommitChanges(context) {
         var changeset = new osmChangeset({ id: 'CHANGEME' }),
             changes = history.changes(actionDiscardTags(history.difference())),
             data = JXON.stringify(changeset.osmChangeJXON(changes)),
-            uri = 'data:text/xml,' + encodeURIComponent(data);
+            uri = 'data:text/xml;charset=utf-8,' + encodeURIComponent(data);
 
-        var downloadLink = container.selectAll('.download-changes')
-            .data([0]);
-
-        var enter = downloadLink.enter()
+        var linkEnter = container.selectAll('.download-changes')
+            .data([0])
+            .enter()
             .append('a')
-            .attr('class', 'download-changes')
-            .attr('href', uri)                     // no IE11 ?
-            .attr('download', 'changes.osc')       // no IE11 ?
-            // .attr('target', '_blank')           // maybe IE11 ?
-            .call(svgIcon('#icon-load', 'inline'));
+            .attr('class', 'download-changes');
 
-        enter
-            .append('span')
-            .text(t('commit.download_changes'));
+        if (detected.download) {      // all except IE11 and Edge
+            linkEnter                 // download the data uri as a file
+                .attr('href', uri)
+                .attr('download', 'changes.osc')
+                .call(svgIcon('#icon-load', 'inline'))
+                .append('span')
+                .text(t('commit.download_changes'));
 
-        downloadLink
-            .merge(enter)
-            .on('click.download', function() {
-                if (!detected.ie) return;         // yes IE11 ?
-                var win = window.open(uri, '_blank');
-                win.focus();
-            });
+        } else {                      // IE11 and Edge
+            linkEnter                 // open data uri in a new tab
+                .attr('target', '_blank')
+                .call(svgIcon('#icon-load', 'inline'))
+                .append('span')
+                .text(t('commit.download_changes'));
+
+            linkEnter
+                .on('click.download', function() {
+                    var win = window.open(uri, '_blank');
+                    win.focus();
+                });
+        }
 
 
         function mouseover(d) {
