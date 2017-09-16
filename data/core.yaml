@@ -563,9 +563,10 @@ en:
 
       ### Selecting Features
 
-      To select a map feature, like a road or point of interest, click
-      on it on the map. This will highlight the selected feature, open a panel with
-      details about it, and show a menu of things you can do with the feature.
+      To select a map feature, like a road or point of interest, click on it on
+      the map. This will highlight the selected feature and load a sidebar with
+      details about it. If you right-click on it, it will show a menu of things
+      you can do with the feature.
 
       To select multiple features, hold down the 'Shift' key. Then either click
       on the features you want to select, or drag on the map to draw a contour
@@ -606,8 +607,8 @@ en:
       ### Selecting
 
       Click on a road to select it. An outline should become visible, along
-      with a small tools menu on the map and a sidebar showing more information
-      about the road.
+      with a sidebar showing more information about the road. If you right-click
+      on it, you'll have a menu of actions you can apply on the road.
 
       ### Modifying
 
@@ -625,8 +626,9 @@ en:
       order to join them. Having roads connect is important for the map
       and essential for providing driving directions.
 
-      You can also click the 'Move' tool or press the `M` shortcut key to move the entire road at
-      one time, and then click again to save that movement.
+      You can also right-click on it and select the 'Move' tool, or simply press
+      the `M` shortcut key, to move the entire road at one time, and then click
+      again to save that movement.
 
       ### Deleting
 
@@ -742,8 +744,9 @@ en:
       ### Selecting
 
       You can select a building by clicking on its border. This will highlight the
-      building and open a small tools menu and a sidebar showing more information
-      about the building.
+      building and load a sidebar showing more information about the building.
+      If you right-click on it, it will show a menu of actions you can execute
+      in the building.
 
       ### Modifying
 
