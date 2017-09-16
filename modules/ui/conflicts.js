@@ -42,8 +42,11 @@ export function uiConflicts(context) {
 
         // Download changes link
         var detected = utilDetect(),
-            changeset = new osmChangeset({ id: 'CHANGEME' }),
-            data = JXON.stringify(changeset.osmChangeJXON(origChanges)),
+            changeset = new osmChangeset();
+
+        delete changeset.id;  // Export without chnageset_id
+
+        var data = JXON.stringify(changeset.osmChangeJXON(origChanges)),
             uri = 'data:text/xml;charset=utf-8,' + encodeURIComponent(data);
 
         var linkEnter = conflictsHelp.selectAll('.download-changes')

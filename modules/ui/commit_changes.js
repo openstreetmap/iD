@@ -94,9 +94,12 @@ export function uiCommitChanges(context) {
 
 
         // Download changeset link
-        var changeset = new osmChangeset({ id: 'CHANGEME' }),
-            changes = history.changes(actionDiscardTags(history.difference())),
-            data = JXON.stringify(changeset.osmChangeJXON(changes)),
+        var changeset = new osmChangeset().update({ id: undefined }),
+            changes = history.changes(actionDiscardTags(history.difference()));
+
+        delete changeset.id;  // Export without chnageset_id
+
+        var data = JXON.stringify(changeset.osmChangeJXON(changes)),
             uri = 'data:text/xml;charset=utf-8,' + encodeURIComponent(data);
 
         var linkEnter = container.selectAll('.download-changes')
