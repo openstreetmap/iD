@@ -260,6 +260,7 @@ en:
     save: Upload
     cancel: Cancel
     changes: "{count} Changes"
+    download_changes: Download osmChange file
     warnings: Warnings
     modified: Modified
     deleted: Deleted
@@ -463,7 +464,7 @@ en:
       keep_remote: Use theirs
       restore: Restore
       delete: Leave Deleted
-      download_changes: Or download your changes.
+      download_changes: Or download osmChange file
       done: "All conflicts resolved!"
       help: |
         Another user changed some of the same map features you changed.

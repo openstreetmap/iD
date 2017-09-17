@@ -1,6 +1,11 @@
 import * as d3 from 'd3';
 import { t } from '../util/locale';
+import { JXON } from '../util/jxon';
+import { actionDiscardTags } from '../actions';
+import { osmChangeset } from '../osm';
 import { svgIcon } from '../svg';
+import { utilDetect } from '../util/detect';
+
 import {
     utilDisplayName,
     utilDisplayType,
@@ -9,10 +14,13 @@ import {
 
 
 export function uiCommitChanges(context) {
+    var detected = utilDetect();
+
 
     function commitChanges(selection) {
 
-        var summary = context.history().difference().summary();
+        var history = context.history(),
+            summary = history.difference().summary();
 
         var container = selection.selectAll('.modal-section.commit-section')
             .data([0]);
@@ -83,6 +91,41 @@ export function uiCommitChanges(context) {
             .on('mouseover', mouseover)
             .on('mouseout', mouseout)
             .on('click', zoomToEntity);
+
+
+        // Download changeset link
+        var changeset = new osmChangeset().update({ id: undefined }),
+            changes = history.changes(actionDiscardTags(history.difference()));
+
+        delete changeset.id;  // Export without chnageset_id
+
+        var data = JXON.stringify(changeset.osmChangeJXON(changes)),
+            blob = new Blob([data], {type: 'text/xml;charset=utf-8;'}),
+            fileName = 'changes.osc';
+
+        var linkEnter = container.selectAll('.download-changes')
+            .data([0])
+            .enter()
+            .append('a')
+            .attr('class', 'download-changes');
+
+        if (detected.download) {      // All except IE11 and Edge
+            linkEnter                 // download the data as a file
+                .attr('href', window.URL.createObjectURL(blob))
+                .attr('download', fileName);
+
+        } else {                      // IE11 and Edge
+            linkEnter                 // open data uri in a new tab
+                .attr('target', '_blank')
+                .on('click.download', function() {
+                    navigator.msSaveBlob(blob, fileName);
+                });
+        }
+
+        linkEnter
+            .call(svgIcon('#icon-load', 'inline'))
+            .append('span')
+            .text(t('commit.download_changes'));
 
 
         function mouseover(d) {

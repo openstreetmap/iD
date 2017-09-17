@@ -110,6 +110,8 @@ export function utilDetect(force) {
 
     detected.filedrop = (window.FileReader && 'ondrop' in window);
 
+    detected.download = !(detected.ie || detected.browser.toLowerCase() === 'edge');
+
     function nav(x) {
         return navigator.userAgent.indexOf(x) !== -1;
     }

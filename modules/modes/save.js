@@ -3,7 +3,6 @@ import _ from 'lodash';
 
 import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
-import { JXON } from '../util/jxon';
 
 import {
     actionDiscardTags,
@@ -248,11 +247,7 @@ export function modeSave(context) {
 
             selection.call(uiConflicts(context)
                 .list(conflicts)
-                .on('download', function() {
-                    var data = JXON.stringify(changeset.update({ id: 'CHANGEME' }).osmChangeJXON(origChanges)),
-                        win = window.open('data:text/xml,' + encodeURIComponent(data), '_blank');
-                    win.focus();
-                })
+                .origChanges(origChanges)
                 .on('cancel', function() {
                     history.pop();
                     selection.remove();
