@@ -3628,18 +3628,17 @@ img.tile-removing {
 
 .notice {
     position: absolute;
-    top: 0;
-    bottom: 0;
+    top: 50%;
+    bottom: 50%;
     left: 0;
     right: 0;
     text-align: center;
-    background: #fff;
 }
 
 .notice .zoom-to {
     margin: auto;
     width: 80%;
-    height: 100px;
+    height: 80px;
     border-radius: 5px;
     line-height: 40px;
     color: #000;
@@ -4203,4 +4202,3 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     width: 100px;
     color: #7092FF;
 }
-

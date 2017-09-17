@@ -22,6 +22,7 @@ import { uiLoading } from './loading';
 import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
 import { uiModes } from './modes';
+import { uiNotice } from './notice';
 import { uiRestore } from './restore';
 import { uiSave } from './save';
 import { uiScale } from './scale';
@@ -82,7 +83,8 @@ export function uiInit(context) {
 
         content
             .call(uiMapInMap(context))
-            .call(uiInfo(context));
+            .call(uiInfo(context))
+            .call(uiNotice(context));
 
         bar
             .append('div')
