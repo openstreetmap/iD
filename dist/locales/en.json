@@ -5507,6 +5507,13 @@
                 "description": "Standard DigitalGlobe satellite imagery.",
                 "name": "DigitalGlobe Standard Imagery"
             },
+            "EsriWorldImagery": {
+                "attribution": {
+                    "text": "Terms & Feedback"
+                },
+                "description": "Esri world imagery.",
+                "name": "Esri World Imagery"
+            },
             "MAPNIK": {
                 "attribution": {
                     "text": "© OpenStreetMap contributors, CC-BY-SA"

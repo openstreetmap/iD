@@ -12,7 +12,7 @@ export function uiNotice(context) {
 
         var button = div
             .append('button')
-            .attr('class', 'zoom-to notice')
+            .attr('class', 'zoom-to notice fillD')
             .on('click', function() { context.map().zoom(context.minEditableZoom()); });
 
         button

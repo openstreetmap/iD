@@ -3637,20 +3637,20 @@ img.tile-removing {
 
 .notice .zoom-to {
     margin: auto;
-    width: 80%;
+    width: 300px;
     height: 80px;
-    border-radius: 5px;
-    line-height: 40px;
-    color: #000;
-    opacity: 0.9;
+    font-size: 150%;
+    border-radius: 8px;
 }
 
 .notice .zoom-to:hover {
-    background: #d8e1ff;
+    background: rgba(0,0,0,0.6);
 }
 
 .notice .zoom-to .icon {
-    margin-top: 10px;
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
     margin-right: 10px;
 }
 [dir='rtl'] .notice .zoom-to .icon {
