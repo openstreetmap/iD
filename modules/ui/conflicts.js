@@ -47,7 +47,8 @@ export function uiConflicts(context) {
         delete changeset.id;  // Export without chnageset_id
 
         var data = JXON.stringify(changeset.osmChangeJXON(origChanges)),
-            uri = 'data:text/xml;charset=utf-8,' + encodeURIComponent(data);
+            blob = new Blob([data], {type: 'text/xml;charset=utf-8;'}),
+            fileName = 'changes.osc';
 
         var linkEnter = conflictsHelp.selectAll('.download-changes')
             .data([0])
@@ -55,27 +56,23 @@ export function uiConflicts(context) {
             .append('a')
             .attr('class', 'download-changes');
 
-        if (detected.download) {      // all except IE11 and Edge
-            linkEnter                 // download the data uri as a file
-                .attr('href', uri)
-                .attr('download', 'changes.osc')
-                .call(svgIcon('#icon-load', 'inline'))
-                .append('span')
-                .text(t('save.conflict.download_changes'));
+        if (detected.download) {      // All except IE11 and Edge
+            linkEnter                 // download the data as a file
+                .attr('href', window.URL.createObjectURL(blob))
+                .attr('download', fileName);
 
         } else {                      // IE11 and Edge
             linkEnter                 // open data uri in a new tab
                 .attr('target', '_blank')
-                .call(svgIcon('#icon-load', 'inline'))
-                .append('span')
-                .text(t('save.conflict.download_changes'));
-
-            linkEnter
                 .on('click.download', function() {
-                    var win = window.open(uri, '_blank');
-                    win.focus();
+                    navigator.msSaveBlob(blob, fileName);
                 });
         }
+
+        linkEnter
+            .call(svgIcon('#icon-load', 'inline'))
+            .append('span')
+            .text(t('save.conflict.download_changes'));
 
 
         body
