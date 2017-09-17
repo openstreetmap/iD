@@ -198,7 +198,7 @@ export default {
 
 
     entityURL: function(entity) {
-        return urlroot + '/' + entity.type + '/' + entity.osmId();
+        return url + '/api/0.6/' + entity.type + '/' + entity.osmId()
     },
 
 
@@ -368,29 +368,10 @@ export default {
         function done(err, user_details) {
             if (err) return callback(err);
 
-            var u = user_details.getElementsByTagName('user')[0],
-                img = u.getElementsByTagName('img'),
-                image_url = '';
-
-            if (img && img[0] && img[0].getAttribute('href')) {
-                image_url = img[0].getAttribute('href');
+            callback(undefined, {
+                id: 'anonymous'
+              })
             }
-
-            var changesets = u.getElementsByTagName('changesets'),
-                changesets_count = 0;
-
-            if (changesets && changesets[0] && changesets[0].getAttribute('count')) {
-                changesets_count = changesets[0].getAttribute('count');
-            }
-
-            userDetails = {
-                id: u.attributes.id.value,
-                display_name: u.attributes.display_name.value,
-                image_url: image_url,
-                changesets_count: changesets_count
-            };
-
-            callback(undefined, userDetails);
         }
 
         oauth.xhr({ method: 'GET', path: '/api/0.6/user/details' }, done);
@@ -543,8 +524,7 @@ export default {
 
 
     switch: function(options) {
-        urlroot = options.urlroot;
-
+        url = options.url
         oauth.options(_.extend({
             url: urlroot,
             loading: authLoading,
