@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import osmAuth from 'osm-auth';
+import osmAuth from '../osm/auth';
 import { JXON } from '../util/jxon';
 import { d3geoTile } from '../lib/d3.geo.tile';
 import { geoExtent } from '../geo';
@@ -21,13 +21,7 @@ var dispatch = d3.dispatch('authLoading', 'authDone', 'change', 'loading', 'load
     loadedTiles = {},
     entityCache = {},
     tileZoom = 16,
-    oauth = osmAuth({
-        url: urlroot,
-        oauth_consumer_key: '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
-        oauth_secret: 'aB3jKq1TRsCOUrfOIZ6oQMEDmv2ptV76PA54NGLL',
-        loading: authLoading,
-        done: authDone
-    }),
+    oauth = osmAuth(),
     rateLimitError,
     userChangesets,
     userDetails,
