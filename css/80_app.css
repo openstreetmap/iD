@@ -3530,6 +3530,10 @@ img.tile-removing {
     margin-bottom: 10px;
 }
 
+.mode-save .request-review label {
+    cursor: pointer;
+}
+
 .mode-save .changeset-list {
     border: 1px solid #ccc;
     border-radius: 4px;

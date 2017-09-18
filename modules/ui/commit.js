@@ -157,24 +157,33 @@ export function uiCommit(context) {
         });
 
 
+        // Request Review
         var requestReview = saveSection.selectAll('.request-review')
             .data([0]);
 
-        requestReview = requestReview.enter()
-            .append('p')
-            .attr('class', 'request-review')
-            .text(t('commit.request_review'))
-            .merge(requestReview);
+        // Enter
+        var requestReviewEnter = requestReview.enter()
+            .append('div')
+            .attr('class', 'request-review');
 
-        var requestReviewField = requestReview.selectAll('input')
-            .data([0]);
+        var labelEnter = requestReviewEnter
+            .append('label')
+            .attr('for', 'commit-input-request-review');
 
-        requestReviewField = requestReviewField.enter()
+        labelEnter
             .append('input')
             .attr('type', 'checkbox')
-            .merge(requestReviewField);
+            .attr('id', 'commit-input-request-review');
 
-        requestReviewField
+        labelEnter
+            .append('span')
+            .text(t('commit.request_review'));
+
+        // Update
+        requestReview = requestReview
+            .merge(requestReviewEnter);
+
+        var requestReviewInput = requestReview.selectAll('input')
             .property('checked', isReviewRequested(changeset.tags))
             .on('change', toggleRequestReview);
 
@@ -244,7 +253,7 @@ export function uiCommit(context) {
 
 
         function toggleRequestReview() {
-            var rr = requestReviewField.property('checked');
+            var rr = requestReviewInput.property('checked');
             updateChangeset({ review_requested: (rr ? 'yes' : undefined) });
 
             var expanded = !tagSection.selectAll('a.hide-toggle.expanded').empty();
