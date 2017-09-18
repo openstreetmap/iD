@@ -1750,6 +1750,9 @@
                 "maxweight": {
                     "label": "Max Weight"
                 },
+                "memorial": {
+                    "label": "Type"
+                },
                 "milestone_position": {
                     "label": "Milestone Position",
                     "placeholder": "Distance to one decimal (123.4)"

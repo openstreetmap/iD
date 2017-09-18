@@ -777,6 +777,9 @@ en:
       maxweight:
         # maxweight=*
         label: Max Weight
+      memorial:
+        # memorial=*
+        label: Type
       milestone_position:
         # 'railway:position=*'
         label: Milestone Position

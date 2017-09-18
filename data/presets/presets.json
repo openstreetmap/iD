@@ -7753,6 +7753,7 @@
             "icon": "monument",
             "fields": [
                 "name",
+                "memorial",
                 "inscription"
             ],
             "geometry": [

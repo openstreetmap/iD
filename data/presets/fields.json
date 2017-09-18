@@ -1091,6 +1091,11 @@
             "label": "Max Weight",
             "snake_case": false
         },
+        "memorial": {
+            "key": "memorial",
+            "type": "typeCombo",
+            "label": "Type"
+        },
         "milestone_position": {
             "key": "railway:position",
             "type": "text",
