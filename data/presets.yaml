@@ -4354,8 +4354,6 @@ en:
       shop/furnace:
         # shop=furnace
         name: Furnace Store
-        # 'terms: oven,stove'
-        terms: '<translate with synonyms or related terms for ''Furnace Store'', separated by commas>'
       shop/furniture:
         # shop=furniture
         name: Furniture Store

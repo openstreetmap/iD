@@ -4702,6 +4702,10 @@
                     "name": "Fishmonger",
                     "terms": ""
                 },
+                "shop/furnace": {
+                    "name": "Furnace Store",
+                    "terms": "oven,stove"
+                },
                 "shop/vacant": {
                     "name": "Vacant Shop",
                     "terms": ""
@@ -4909,10 +4913,6 @@
                 "shop/funeral_directors": {
                     "name": "Funeral Home",
                     "terms": "undertaker,memorial home"
-                },
-                "shop/furnace": {
-                    "name": "Furnace Store",
-                    "terms": "oven,stove"
                 },
                 "shop/furniture": {
                     "name": "Furniture Store",

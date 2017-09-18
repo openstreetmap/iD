@@ -2369,6 +2369,10 @@
         },
         {
             "key": "shop",
+            "value": "furnace"
+        },
+        {
+            "key": "shop",
             "value": "vacant"
         },
         {
@@ -2574,10 +2578,6 @@
         {
             "key": "shop",
             "value": "funeral_directors"
-        },
-        {
-            "key": "shop",
-            "value": "furnace"
         },
         {
             "key": "shop",

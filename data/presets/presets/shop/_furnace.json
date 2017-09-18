@@ -18,5 +18,6 @@
     "tags": {
         "shop": "furnace"
     },
-    "name": "Furnace Store"
+    "name": "Furnace Store",
+    "searchable": false
 }
