@@ -1495,14 +1495,15 @@ button.save.has-count .count::before {
 }
 
 .form-field-multicombo li {
+    display: inline-flex;
+    flex-flow: row nowrap;
+    align-items: center;
     background-color: #eff2f7;
     border: 1px solid #ccd5e3;
     border-radius: 4px;
     line-height: 25px;
-    display: inline-block;
     padding: 2px 5px;
     margin: 3px;
-    height: 30px;
 }
 
 .form-field-multicombo a {
@@ -1520,6 +1521,7 @@ button.save.has-count .count::before {
     border: 1px solid #ddd;
     width: 100px;
     margin: 3px;
+    height: 31px;
 }
 
 .form-field-multicombo .combobox-caret {
