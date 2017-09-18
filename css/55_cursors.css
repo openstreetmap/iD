@@ -101,6 +101,5 @@
 
 .turn rect,
 .turn circle {
-    cursor: pointer; /* Opera */
-    cursor: url(img/cursor-pointer.png) 6 1, pointer; /* FF */
+    cursor: pointer;
 }

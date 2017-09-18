@@ -116,8 +116,7 @@ button,
 .checkselect label:hover,
 .opacity-options li,
 .radial-menu-item {
-    cursor: pointer; /* Opera */
-    cursor: url(img/cursor-pointer.png) 6 1, pointer; /* FF */
+    cursor: pointer;
 }
 
 h2 {
