@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { d3keybinding } from '../lib/d3.keybinding.js';
+
 import {
     modeAddArea,
     modeAddLine,
@@ -53,12 +54,6 @@ export function uiModes(context) {
                 })
             );
 
-        context.map()
-            .on('move.modes', _.debounce(update, 500));
-
-        context
-            .on('enter.modes', update);
-
         buttons
             .each(function(d) {
                 d3.select(this)
@@ -100,6 +95,17 @@ export function uiModes(context) {
 
         d3.select(document)
             .call(keybinding);
+
+
+        var debouncedUpdate = _.debounce(update, 500, { leading: true, trailing: true });
+
+        context.map()
+            .on('move.modes', debouncedUpdate)
+            .on('drawn.modes', debouncedUpdate);
+
+        context
+            .on('enter.modes', update);
+
 
 
         function update() {
