@@ -13,7 +13,9 @@ export function uiNotice(context) {
         var button = div
             .append('button')
             .attr('class', 'zoom-to notice fillD')
-            .on('click', function() { context.map().zoom(context.minEditableZoom()); });
+            .on('click', function() {
+                context.map().zoom(context.minEditableZoom());
+            });
 
         button
             .call(svgIcon('#icon-plus', 'pre-text'))
@@ -23,7 +25,8 @@ export function uiNotice(context) {
 
 
         function disableTooHigh() {
-            div.style('display', context.editable() ? 'none' : 'block');
+            var canEdit = context.map().zoom() >= context.minEditableZoom();
+            div.style('display', canEdit ? 'none' : 'block');
         }
 
         context.map()
