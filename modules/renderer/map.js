@@ -84,7 +84,7 @@ export function rendererMap(context) {
         isRedrawScheduled = false;
         window.cancelIdleCallback(pendingRedrawCall);
     }
-        
+
     function map(selection) {
 
         _selection = selection;
@@ -756,6 +756,9 @@ export function rendererMap(context) {
 
 
     map.editable = function() {
+        var osmLayer = surface.selectAll('.data-layer-osm');
+        if (!osmLayer.empty() && osmLayer.classed('disabled')) return false;
+
         return map.zoom() >= context.minEditableZoom();
     };
 

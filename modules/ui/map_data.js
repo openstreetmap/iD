@@ -76,11 +76,6 @@ export function uiMapData(context) {
         }
 
 
-        function clickGpx() {
-            toggleLayer('gpx');
-        }
-
-
         function clickMapillaryImages() {
             toggleLayer('mapillary-images');
             if (!showsLayer('mapillary-images')) {
@@ -191,27 +186,77 @@ export function uiMapData(context) {
         }
 
 
+        function drawOsmItem(selection) {
+            var osm = layers.layer('osm'),
+                showsOsm = osm.enabled();
+
+            var ul = selection
+                .selectAll('.layer-list-osm')
+                .data(osm ? [0] : []);
+
+            // Exit
+            ul.exit()
+                .remove();
+
+            // Enter
+            var ulEnter = ul.enter()
+                .append('ul')
+                .attr('class', 'layer-list layer-list-osm');
+
+            var liEnter = ulEnter
+                .append('li')
+                .attr('class', 'list-item-osm');
+
+            var labelEnter = liEnter
+                .append('label')
+                .call(tooltip()
+                    .title(t('map_data.layers.osm.tooltip'))
+                    .placement('top')
+                );
+
+            labelEnter
+                .append('input')
+                .attr('type', 'checkbox')
+                .on('change', function() { toggleLayer('osm'); });
+
+            labelEnter
+                .append('span')
+                .text(t('map_data.layers.osm.title'));
+
+            // Update
+            ul = ul
+                .merge(ulEnter);
+
+            ul.selectAll('.list-item-osm')
+                .classed('active', showsOsm)
+                .selectAll('input')
+                .property('checked', showsOsm);
+        }
+
+
         function drawGpxItem(selection) {
             var gpx = layers.layer('gpx'),
                 hasGpx = gpx && gpx.hasGpx(),
                 showsGpx = hasGpx && gpx.enabled();
 
-            var gpxLayerItem = selection
+            var ul = selection
                 .selectAll('.layer-list-gpx')
                 .data(gpx ? [0] : []);
 
             // Exit
-            gpxLayerItem.exit()
+            ul.exit()
                 .remove();
 
             // Enter
-            var enter = gpxLayerItem.enter()
+            var ulEnter = ul.enter()
                 .append('ul')
-                .attr('class', 'layer-list layer-list-gpx')
-                .append('li')
-                .classed('list-item-gpx', true);
+                .attr('class', 'layer-list layer-list-gpx');
 
-            enter
+            var liEnter = ulEnter
+                .append('li')
+                .attr('class', 'list-item-gpx');
+
+            liEnter
                 .append('button')
                 .attr('class', 'list-item-gpx-extent')
                 .call(tooltip()
@@ -224,12 +269,13 @@ export function uiMapData(context) {
                 })
                 .call(svgIcon('#icon-search'));
 
-            enter
+            liEnter
                 .append('button')
                 .attr('class', 'list-item-gpx-browse')
                 .call(tooltip()
                     .title(t('gpx.browse'))
-                    .placement((textDirection === 'rtl') ? 'right' : 'left'))
+                    .placement((textDirection === 'rtl') ? 'right' : 'left')
+                )
                 .on('click', function() {
                     d3.select(document.createElement('input'))
                         .attr('type', 'file')
@@ -240,33 +286,33 @@ export function uiMapData(context) {
                 })
                 .call(svgIcon('#icon-geolocate'));
 
-            var labelGpx = enter
+            var labelEnter = liEnter
                 .append('label')
-                .call(tooltip().title(t('gpx.drag_drop')).placement('top'));
+                .call(tooltip()
+                    .title(t('gpx.drag_drop'))
+                    .placement('top')
+                );
 
-            labelGpx
+            labelEnter
                 .append('input')
                 .attr('type', 'checkbox')
-                .on('change', clickGpx);
+                .on('change', function() { toggleLayer('gpx'); });
 
-            labelGpx
+            labelEnter
                 .append('span')
                 .text(t('gpx.local_layer'));
 
-
             // Update
-            gpxLayerItem = gpxLayerItem
-                .merge(enter);
+            ul = ul
+                .merge(ulEnter);
 
-            gpxLayerItem
+            ul.selectAll('.list-item-gpx')
                 .classed('active', showsGpx)
+                .selectAll('label')
+                .classed('deemphasize', !hasGpx)
                 .selectAll('input')
                 .property('disabled', !hasGpx)
                 .property('checked', showsGpx);
-
-            gpxLayerItem
-                .selectAll('label')
-                .classed('deemphasize', !hasGpx);
         }
 
 
@@ -324,11 +370,16 @@ export function uiMapData(context) {
 
 
         function update() {
-            dataLayerContainer.call(drawMapillaryItems);
-            dataLayerContainer.call(drawGpxItem);
+            dataLayerContainer
+                .call(drawOsmItem)
+                .call(drawMapillaryItems)
+                .call(drawGpxItem);
 
-            fillList.call(drawList, fills, 'radio', 'area_fill', setFill, showsFill);
-            featureList.call(drawList, features, 'checkbox', 'feature', clickFeature, showsFeature);
+            fillList
+                .call(drawList, fills, 'radio', 'area_fill', setFill, showsFill);
+
+            featureList
+                .call(drawList, features, 'checkbox', 'feature', clickFeature, showsFeature);
         }
 
 
