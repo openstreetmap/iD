@@ -16,6 +16,8 @@
         id = iD.Context()
             .assetPath('dist/');
 
+        id.features().disable('boundaries');
+
         id.ui()(document.getElementById('id-container'), function() {
             iD.d3.select('#about-list')
                 .insert('li', '.user-list')
