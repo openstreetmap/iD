@@ -41,7 +41,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
         layer
             .style('opacity', 0)
             .transition()
-            .duration(500)
+            .duration(250)
             .style('opacity', 1)
             .on('end', function () { dispatch.call('change'); });
     }
@@ -57,7 +57,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
         layer
             .transition()
-            .duration(500)
+            .duration(250)
             .style('opacity', 0)
             .on('end', editOff);
     }
