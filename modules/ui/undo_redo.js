@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+import _ from 'lodash';
 import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg/index';
@@ -11,18 +12,18 @@ export function uiUndoRedo(context) {
     var commands = [{
         id: 'undo',
         cmd: uiCmd('⌘Z'),
-        action: function() { if (!saving()) context.undo(); },
+        action: function() { if (editable()) context.undo(); },
         annotation: function() { return context.history().undoAnnotation(); }
     }, {
         id: 'redo',
         cmd: uiCmd('⌘⇧Z'),
-        action: function() { if (!saving()) context.redo(); },
+        action: function() { if (editable()) context.redo(); },
         annotation: function() { return context.history().redoAnnotation(); }
     }];
 
 
-    function saving() {
-        return context.mode().id === 'save';
+    function editable() {
+        return context.editable() && context.mode().id !== 'save';
     }
 
 
@@ -64,15 +65,23 @@ export function uiUndoRedo(context) {
         d3.select(document)
             .call(keybinding);
 
+
+        var debouncedUpdate = _.debounce(update, 500, { leading: true, trailing: true });
+
+        context.map()
+            .on('move.undo_redo', debouncedUpdate)
+            .on('drawn.undo_redo', debouncedUpdate);
+
         context.history()
             .on('change.undo_redo', update);
 
         context
             .on('enter.undo_redo', update);
 
+
         function update() {
             buttons
-                .property('disabled', saving())
+                .property('disabled', !editable())
                 .classed('disabled', function(d) { return !d.annotation(); })
                 .each(function() {
                     var selection = d3.select(this);
