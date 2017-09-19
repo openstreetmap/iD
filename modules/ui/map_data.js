@@ -335,7 +335,8 @@ export function uiMapData(context) {
                             key = (d === 'wireframe' ? t('area_fill.wireframe.key') : null);
 
                         if (name === 'feature' && autoHiddenFeature(d)) {
-                            tip += '<div>' + t('map_data.autohidden') + '</div>';
+                            var msg = showsLayer('osm') ? t('map_data.autohidden') : t('map_data.osmhidden');
+                            tip += '<div>' + msg + '</div>';
                         }
                         return uiTooltipHtml(tip, key);
                     })

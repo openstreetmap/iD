@@ -488,7 +488,8 @@
             },
             "fill_area": "Fill Areas",
             "map_features": "Map Features",
-            "autohidden": "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them."
+            "autohidden": "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them.",
+            "osmhidden": "These features have been automatically hidden because the OpenStreetMap layer is hidden."
         },
         "feature": {
             "points": {
