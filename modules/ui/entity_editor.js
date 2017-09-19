@@ -183,11 +183,19 @@ export function uiEntityEditor(context) {
         function historyChanged() {
             if (state === 'hide') return;
 
-            var entity = context.hasEntity(entityId),
-                graph = context.graph();
+            var entity = context.hasEntity(entityId);
+            var graph = context.graph();
             if (!entity) return;
 
-            entityEditor.preset(context.presets().match(entity, graph));
+            var match = context.presets().match(entity, graph);
+            var activePreset = entityEditor.preset();
+            var weakPreset = activePreset && _.isEmpty(activePreset.addTags);
+
+            // A "weak" preset doesn't set any tags. (e.g. "Address")
+            // Don't replace a weak preset with a fallback preset (e.g. "Point")
+            if (!(weakPreset && match.isFallback())) {
+                entityEditor.preset(match);
+            }
             entityEditor.modified(base !== graph);
             entityEditor(selection);
         }

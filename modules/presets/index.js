@@ -32,8 +32,9 @@ export function presetIndex() {
 
     all.match = function(entity, resolver) {
         var geometry = entity.geometry(resolver);
+        var address;
 
-        // Treat entities on addr:interpolation lines as points, not vertices (#3241)
+        // Treat entities on addr:interpolation lines as points, not vertices - #3241
         if (geometry === 'vertex' && entity.isOnAddressLine(resolver)) {
             geometry = 'point';
         }
@@ -43,6 +44,12 @@ export function presetIndex() {
             match;
 
         for (var k in entity.tags) {
+            // If any part of an address is present,
+            // allow fallback to "Address" preset - #4353
+            if (k.match(/^addr:/) !== null && geometryMatches['addr:*']) {
+                address = geometryMatches['addr:*'][0];
+            }
+
             var keyMatches = geometryMatches[k];
             if (!keyMatches) continue;
 
@@ -53,6 +60,10 @@ export function presetIndex() {
                     match = keyMatches[i];
                 }
             }
+        }
+
+        if (address && (!match || match.isFallback())) {
+            match = address;
         }
 
         return match || all.item(geometry);

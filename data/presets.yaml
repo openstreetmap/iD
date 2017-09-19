@@ -1465,7 +1465,7 @@ en:
         label: Wikipedia
     presets:
       address:
-        # 'addr:housenumber=*'
+        # 'addr:*=*'
         name: Address
         terms: '<translate with synonyms or related terms for ''Address'', separated by commas>'
       advertising/billboard:

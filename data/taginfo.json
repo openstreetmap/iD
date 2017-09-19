@@ -41,7 +41,7 @@
             "key": "waterway"
         },
         {
-            "key": "addr:housenumber"
+            "key": "addr:*"
         },
         {
             "key": "advertising",

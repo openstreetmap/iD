@@ -158,12 +158,15 @@
                 "area"
             ],
             "tags": {
-                "addr:housenumber": "*"
+                "addr:*": "*"
             },
             "addTags": {},
             "removeTags": {},
+            "reference": {
+                "key": "addr"
+            },
             "name": "Address",
-            "matchScore": 0.3
+            "matchScore": 0.15
         },
         "advertising/billboard": {
             "fields": [
@@ -12109,16 +12112,16 @@
             "name": "Tram"
         },
         "relation": {
-            "name": "Relation",
             "icon": "relation",
-            "tags": {},
-            "geometry": [
-                "relation"
-            ],
             "fields": [
                 "name",
                 "relation"
-            ]
+            ],
+            "geometry": [
+                "relation"
+            ],
+            "tags": {},
+            "name": "Relation"
         },
         "route/ferry": {
             "icon": "ferry-line",

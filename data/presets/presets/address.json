@@ -8,10 +8,13 @@
         "area"
     ],
     "tags": {
-        "addr:housenumber": "*"
+        "addr:*": "*"
     },
     "addTags": {},
     "removeTags": {},
+    "reference": {
+        "key": "addr"
+    },
     "name": "Address",
-    "matchScore": 0.3
+    "matchScore": 0.15
 }
