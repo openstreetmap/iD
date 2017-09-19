@@ -153,15 +153,17 @@
                 "address"
             ],
             "geometry": [
-                "point"
+                "point",
+                "vertex",
+                "area"
             ],
             "tags": {
                 "addr:housenumber": "*"
             },
             "addTags": {},
             "removeTags": {},
-            "matchScore": 0.2,
-            "name": "Address"
+            "name": "Address",
+            "matchScore": 0.3
         },
         "advertising/billboard": {
             "fields": [
@@ -3466,16 +3468,16 @@
             "name": "Animal Watering Place"
         },
         "area": {
-            "name": "Area",
             "fields": [
                 "name"
+            ],
+            "geometry": [
+                "area"
             ],
             "tags": {
                 "area": "yes"
             },
-            "geometry": [
-                "area"
-            ],
+            "name": "Area",
             "matchScore": 0.1
         },
         "area/highway": {
@@ -9689,14 +9691,14 @@
             "name": "Water Park"
         },
         "line": {
-            "name": "Line",
             "fields": [
                 "name"
             ],
-            "tags": {},
             "geometry": [
                 "line"
             ],
+            "tags": {},
+            "name": "Line",
             "matchScore": 0.1
         },
         "man_made": {
@@ -11464,14 +11466,14 @@
             "name": "Village"
         },
         "point": {
-            "name": "Point",
             "fields": [
                 "name"
             ],
-            "tags": {},
             "geometry": [
                 "point"
             ],
+            "tags": {},
+            "name": "Point",
             "matchScore": 0.1
         },
         "power/sub_station": {
@@ -15741,14 +15743,14 @@
             "name": "Waterway"
         },
         "vertex": {
-            "name": "Other",
-            "tags": {},
             "fields": [
                 "name"
             ],
             "geometry": [
                 "vertex"
             ],
+            "tags": {},
+            "name": "Other",
             "matchScore": 0.1
         },
         "waterway/boatyard": {

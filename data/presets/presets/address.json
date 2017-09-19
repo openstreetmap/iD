@@ -3,13 +3,15 @@
         "address"
     ],
     "geometry": [
-        "point"
+        "point",
+        "vertex",
+        "area"
     ],
     "tags": {
         "addr:housenumber": "*"
     },
     "addTags": {},
     "removeTags": {},
-    "matchScore": 0.2,
-    "name": "Address"
+    "name": "Address",
+    "matchScore": 0.3
 }
