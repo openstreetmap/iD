@@ -2786,7 +2786,7 @@ en:
       healthcare/alternative:
         # healthcare=alternative
         name: Alternative Medicine
-        # 'terms: acupuncture,anthroposophical,applied_kinesiology,aromatherapy,ayurveda,heabalism,homeopathy,hydrotherapy,hypnosis,naturopathy,osteopathy,reflexology,reiki,shiatsu,traditional,tuina,unani'
+        # 'terms: acupuncture,anthroposophical,applied kinesiology,aromatherapy,ayurveda,herbalism,homeopathy,hydrotherapy,hypnosis,naturopathy,osteopathy,reflexology,reiki,shiatsu,traditional,tuina,unani'
         terms: '<translate with synonyms or related terms for ''Alternative Medicine'', separated by commas>'
       healthcare/alternative/chiropractic:
         # 'healthcare=alternative, healthcare:speciality=chiropractic'
@@ -2836,7 +2836,7 @@ en:
       healthcare/podiatrist:
         # healthcare=podiatrist
         name: Podiatrist
-        # 'terms: foot,feet'
+        # 'terms: foot,feet,nails'
         terms: '<translate with synonyms or related terms for ''Podiatrist'', separated by commas>'
       healthcare/psychotherapist:
         # healthcare=psychotherapist

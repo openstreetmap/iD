@@ -6264,10 +6264,10 @@
             "terms": [
                 "acupuncture",
                 "anthroposophical",
-                "applied_kinesiology",
+                "applied kinesiology",
                 "aromatherapy",
                 "ayurveda",
-                "heabalism",
+                "herbalism",
                 "homeopathy",
                 "hydrotherapy",
                 "hypnosis",
@@ -6529,7 +6529,8 @@
             ],
             "terms": [
                 "foot",
-                "feet"
+                "feet",
+                "nails"
             ],
             "tags": {
                 "healthcare": "podiatrist"
