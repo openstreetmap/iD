@@ -3538,7 +3538,7 @@
                 },
                 "healthcare/alternative": {
                     "name": "Alternative Medicine",
-                    "terms": "acupuncture,anthroposophical,applied_kinesiology,aromatherapy,ayurveda,heabalism,homeopathy,hydrotherapy,hypnosis,naturopathy,osteopathy,reflexology,reiki,shiatsu,traditional,tuina,unani"
+                    "terms": "acupuncture,anthroposophical,applied kinesiology,aromatherapy,ayurveda,herbalism,homeopathy,hydrotherapy,hypnosis,naturopathy,osteopathy,reflexology,reiki,shiatsu,traditional,tuina,unani"
                 },
                 "healthcare/alternative/chiropractic": {
                     "name": "Chiropractor",
@@ -3578,7 +3578,7 @@
                 },
                 "healthcare/podiatrist": {
                     "name": "Podiatrist",
-                    "terms": "foot,feet"
+                    "terms": "foot,feet,nails"
                 },
                 "healthcare/psychotherapist": {
                     "name": "Psychotherapist",
