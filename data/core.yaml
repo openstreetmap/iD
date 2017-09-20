@@ -591,8 +591,8 @@ en:
       and warnings if something doesn't seem right about the changes.
 
       If everything looks good, you can enter a short comment explaining the change
-      you made, and click 'Save' again to post the changes
-      to [OpenStreetMap.org](http://www.openstreetmap.org/), where they are visible
+      you made, and click 'Upload' to post the changes to
+      [OpenStreetMap.org](http://www.openstreetmap.org/), where they will be visible
       to all other users and available for others to build and improve upon.
 
       If you can't finish your edits in one sitting, you can leave the editor
@@ -644,8 +644,8 @@ en:
       like any other edit, the results are seen by everyone and satellite imagery
       is often out of date, so the road could simply be newly built.
 
-      You can delete a road by clicking on it to select it, then clicking the
-      trash can icon or pressing the 'Delete' key.
+      You can delete a road by clicking on it to select it, then pressing the 'Delete'
+      key or right-clicking it and then clicking the trash can icon.
 
       ### Creating
 
@@ -758,7 +758,8 @@ en:
 
       Sometimes buildings are incorrectly placed or have incorrect tags.
 
-      To move an entire building, select it, then click the 'Move' tool. Move your
+      To move an entire building, select it and press the 'M' shortcut key,
+      or right-click it and select the 'Move' tool. Move your
       mouse to shift the building, and click when it's correctly placed.
 
       To fix the specific shape of a building, click and drag the nodes that form
@@ -784,8 +785,8 @@ en:
       like any other edit, the results are seen by everyone and satellite imagery
       is often out of date, so the building could simply be newly built.
 
-      You can delete a building by clicking on it to select it, then clicking the
-      trash can icon or pressing the 'Delete' key.
+      You can delete a building by clicking on it to select it, then pressing the 'Delete'
+      key, or right-clicking it and then clicking the trash can icon.
     relations: |
       # Relations
 
@@ -795,10 +796,10 @@ en:
       highway, and *multipolygons*, which group together several lines that define
       a complex area (one with several pieces or holes in it like a donut).
 
-      The group of features in a relation are called *members*. In the sidebar, you can
-      see which relations a feature is a member of, and click on a relation there
-      to select the it. When the relation is selected, you can see all of its
-      members listed in the sidebar and highlighted on the map.
+      The group of features in a relation are called *members*. In the bottom of the
+      sidebar, you can see which relations a feature is a member of, and click on a
+      relation there will select it. When the relation is selected, you can see all of
+      its members listed in the sidebar and highlighted on the map.
 
       For the most part, iD will take care of maintaining relations automatically
       while you edit. The main thing you should be aware of is that if you delete a
@@ -820,7 +821,8 @@ en:
 
       You can create multipolygons with holes using the "Merge" tool. Draw two areas (inner
       and outer), hold the Shift key and click on each of them to select them both, and then
-      click the "Merge" (+) button.
+      press the 'C' shortcut key. Other option is to select both, and then right-click one
+      of the and click the "Merge" (+) button.
   intro:
     done: done
     ok: OK
