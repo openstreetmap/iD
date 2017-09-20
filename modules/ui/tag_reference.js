@@ -170,8 +170,14 @@ export function uiTagReference(tag) {
 
 
     tagReference.body = function(selection) {
+
+        var tagid = tag.rtype || (tag.key + '-' + tag.value);
+
         body = selection.selectAll('.tag-reference-body')
-            .data([0]);
+            .data([tagid], function(d) { return d; });
+
+        body.exit()
+            .remove();
 
         body = body.enter()
             .append('div')
