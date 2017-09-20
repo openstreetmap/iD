@@ -70,7 +70,12 @@ body {
 
 .limiter {
     position: relative;
-    max-width: 1200px;
+    /*max-width: 1200px;*/
+    display: flex;
+}
+
+[dir='rtl'] .limiter {
+    flex-direction: row-reverse;
 }
 
 .spinner {
@@ -276,6 +281,25 @@ table.tags, table.tags td, table.tags th {
 .col10   { float:left; width:83.3333%; }
 .col11   { float:left; width:91.6666%; }
 .col12   { float:left; width:100.0000%; }
+
+
+/* Sizing
+------------------------------------------------------- */
+
+.w0 { width:04.1666%; }
+.w1 { width:08.3333%; min-width: 70px;}
+.w2 { width:16.6666%; }
+.w3 { width:25.0000%; }
+.w4 { width:33.3333%; }
+.w5 { width:41.6666%; }
+.w6 { width:50.0000%; }
+.w7 { width:58.3333%; }
+.w8 { width:66.6666%; }
+.w9 { width:75.0000%; }
+.w10 { width:83.3333%; }
+.w11 { width:91.6666%; }
+.w12 { width:100.0000%; }
+
 
 /* UI Lists
 ------------------------------------------------------- */
@@ -3998,7 +4022,12 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
 
 @media only screen and (max-width: 840px) {
     /* override hide for save button */
-    #bar .save .label { display: block;}
+    /*#bar .save .label { display: block;}*/
+    .button-wrap > .add-button > .label,
+    .button-wrap > .save > .label {
+        display: none;
+    }
+    .button-wrap > .add-button > .icon.pre-text { margin-right: 0; }
 }
 
 @media screen and (max-width: 1200px) {
