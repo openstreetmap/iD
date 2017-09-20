@@ -95,17 +95,17 @@ export function uiInit(context) {
 
         limiter
             .append('div')
-            .attr('class', 'button-wrap joined col3')
+            .attr('class', 'button-wrap joined w3')
             .call(uiModes(context), limiter);
 
         limiter
             .append('div')
-            .attr('class', 'button-wrap joined col1')
+            .attr('class', 'button-wrap joined w1')
             .call(uiUndoRedo(context));
 
         limiter
             .append('div')
-            .attr('class', 'button-wrap col1')
+            .attr('class', 'button-wrap w1')
             .call(uiSave(context));
 
         bar
