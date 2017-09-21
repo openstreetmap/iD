@@ -73,7 +73,7 @@ export function uiInit(context) {
         var bar = content
             .append('div')
             .attr('id', 'bar')
-            .attr('class', 'fillD');
+            .attr('class', 'fillD w12');
 
         content
             .append('div')
@@ -86,26 +86,26 @@ export function uiInit(context) {
             .call(uiInfo(context))
             .call(uiNotice(context));
 
-        bar
-            .append('div')
-            .attr('class', 'spacer col4');
+        // bar
+        //     .append('div')
+        //     .attr('class', 'spacer col4');
 
         var limiter = bar.append('div')
             .attr('class', 'limiter');
 
         limiter
             .append('div')
-            .attr('class', 'button-wrap joined w3')
+            .attr('class', 'button-wrap joined')
             .call(uiModes(context), limiter);
 
         limiter
             .append('div')
-            .attr('class', 'button-wrap joined w1')
+            .attr('class', 'button-wrap joined')
             .call(uiUndoRedo(context));
 
         limiter
             .append('div')
-            .attr('class', 'button-wrap w1')
+            .attr('class', 'button-wrap')
             .call(uiSave(context));
 
         bar
