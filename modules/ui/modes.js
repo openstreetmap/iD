@@ -34,7 +34,7 @@ export function uiModes(context) {
         buttons = buttons.enter()
             .append('button')
             .attr('tabindex', -1)
-            .attr('class', function(mode) { return mode.id + ' add-button col4'; })
+            .attr('class', function(mode) { return mode.id + ' add-button'; })
             .on('click.mode-buttons', function(mode) {
                 // When drawing, ignore accidental clicks on mode buttons - #4042
                 var currMode = context.mode().id;
