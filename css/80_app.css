@@ -300,7 +300,6 @@ table.tags, table.tags td, table.tags th {
 .w11 { width:91.6666%; }
 .w12 { width:100.0000%; }
 
-
 /* UI Lists
 ------------------------------------------------------- */
 
@@ -469,6 +468,16 @@ button.minor:hover {
     background-color: #f1f1f1;
 }
 
+button.add-button,
+button.save {
+    padding: 10px 20px;
+}
+
+button.undo-button,
+button.redo-button {
+    padding: 10px;
+}
+
 .button-wrap {
     display: inline-block;
     padding-right:10px;
@@ -604,10 +613,10 @@ button.save.has-count .count::before {
 .icon.pre-text {
     margin-right: 5px;
 }
-[dir='rtl'] .icon.pre-text {
+/*[dir='rtl'] .icon.pre-text {
   margin-left: 5px;
   margin-right: 0;
-}
+}*/
 
 .icon.light {
     color: #fff;
@@ -638,14 +647,14 @@ button.save.has-count .count::before {
 ------------------------------------------------------- */
 
 #bar {
-    position: fixed;
-    padding: 10px 0;
-    left: 0;
+    position: absolute;
+    padding: 10px;
+    /*left: 0;
     top: 0;
-    right: 0;
+    right: 0;*/
     height: 60px;
     z-index: 9;
-    min-width: 768px;
+    /*min-width: 768px;*/
 }
 
 [dir='rtl'] #bar .spacer,
@@ -4027,7 +4036,15 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
     .button-wrap > .save > .label {
         display: none;
     }
+
     .button-wrap > .add-button > .icon.pre-text { margin-right: 0; }
+
+    .icon.pre-text { margin-right: 0; }
+
+    button.add-button,
+    button.save {
+        padding: 10px;
+    }
 }
 
 @media screen and (max-width: 1200px) {
@@ -4036,6 +4053,8 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
 
 @media screen and (max-width: 1000px) {
     #userLink { display: none !important; }
+
+
 }
 
 @media screen and (max-width: 900px) {
