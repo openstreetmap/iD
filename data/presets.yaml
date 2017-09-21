@@ -3602,6 +3602,7 @@ en:
       man_made/survey_point:
         # man_made=survey_point
         name: Survey Point
+        # 'terms: trig point,triangulation pillar,trigonometrical station'
         terms: '<translate with synonyms or related terms for ''Survey Point'', separated by commas>'
       man_made/tower:
         # man_made=tower

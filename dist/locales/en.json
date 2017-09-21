@@ -4250,7 +4250,7 @@
                 },
                 "man_made/survey_point": {
                     "name": "Survey Point",
-                    "terms": ""
+                    "terms": "trig point,triangulation pillar,trigonometrical station"
                 },
                 "man_made/tower": {
                     "name": "Tower",

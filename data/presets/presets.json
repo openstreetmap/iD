@@ -10059,6 +10059,11 @@
                 "point",
                 "vertex"
             ],
+            "terms": [
+                "trig point",
+                "triangulation pillar",
+                "trigonometrical station"
+            ],
             "tags": {
                 "man_made": "survey_point"
             },
