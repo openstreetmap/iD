@@ -2290,6 +2290,22 @@
                         "area": "Over 20m (65ft)"
                     }
                 },
+                "volcano/status": {
+                    "label": "Volcano Status",
+                    "options": {
+                        "active": "Active",
+                        "dormant": "Dormant",
+                        "extinct": "Extinct"
+                    }
+                },
+                "volcano/type": {
+                    "label": "Volcano Type",
+                    "options": {
+                        "stratovolcano": "Stratovolcano",
+                        "shield": "Shield",
+                        "scoria": "Scoria"
+                    }
+                },
                 "wall": {
                     "label": "Type"
                 },

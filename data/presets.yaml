@@ -1434,6 +1434,26 @@ en:
           house: Up to 5m (16ft)
           # visibility=street
           street: 5 to 20m (16 to 65ft)
+      volcano/status:
+        # 'volcano:status=*'
+        label: Volcano Status
+        options:
+          # 'volcano:status=active'
+          active: Active
+          # 'volcano:status=dormant'
+          dormant: Dormant
+          # 'volcano:status=extinct'
+          extinct: Extinct
+      volcano/type:
+        # 'volcano:type=*'
+        label: Volcano Type
+        options:
+          # 'volcano:type=scoria'
+          scoria: Scoria
+          # 'volcano:type=shield'
+          shield: Shield
+          # 'volcano:type=stratovolcano'
+          stratovolcano: Stratovolcano
       wall:
         # wall=*
         label: Type

@@ -10587,7 +10587,9 @@
             "icon": "volcano",
             "fields": [
                 "name",
-                "elevation"
+                "elevation",
+                "volcano/status",
+                "volcano/type"
             ],
             "geometry": [
                 "point",

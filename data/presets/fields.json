@@ -1952,6 +1952,30 @@
                 }
             }
         },
+        "volcano/status": {
+            "key": "volcano:status",
+            "type": "combo",
+            "label": "Volcano Status",
+            "strings": {
+                "options": {
+                    "active": "Active",
+                    "dormant": "Dormant",
+                    "extinct": "Extinct"
+                }
+            }
+        },
+        "volcano/type": {
+            "key": "volcano:type",
+            "type": "combo",
+            "label": "Volcano Type",
+            "strings": {
+                "options": {
+                    "stratovolcano": "Stratovolcano",
+                    "shield": "Shield",
+                    "scoria": "Scoria"
+                }
+            }
+        },
         "wall": {
             "key": "wall",
             "type": "combo",

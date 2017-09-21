@@ -1,0 +1,12 @@
+{
+    "key": "volcano:type",
+    "type": "combo",
+    "label": "Volcano Type",
+    "strings": {
+        "options": {
+            "stratovolcano": "Stratovolcano",
+            "shield": "Shield",
+            "scoria": "Scoria"
+        }
+    }
+}
