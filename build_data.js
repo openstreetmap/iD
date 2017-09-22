@@ -7,71 +7,97 @@ const jsonschema = require('jsonschema');
 const path = require('path');
 const shell = require('shelljs');
 const YAML = require('js-yaml');
+var colors = require('colors/safe');
 
 const fieldSchema = require('./data/presets/schema/field.json');
 const presetSchema = require('./data/presets/schema/preset.json');
 const suggestions = require('name-suggestion-index/name-suggestions.json');
 
+module.exports = function buildData(isDevelopment) {
+    var building;
+    return function() {
+        // Note: even though this function is sync adding
+        // the `building` variable for consistency and future proofing
+        if (building) return;
+        building = true;
+        console.log('building data');
+        console.time(colors.green('data built'));
 
-// Create symlinks if necessary..  { 'target': 'source' }
-const symlinks = {
-    'land.html': 'dist/land.html',
-    'img': 'dist/img',
+        // Create symlinks if necessary..  { 'target': 'source' }
+        const symlinks = {
+            'land.html': 'dist/land.html',
+            img: 'dist/img'
+        };
+
+        for (var target of Object.keys(symlinks)) {
+            if (!shell.test('-L', target)) {
+                console.log(
+                    `Creating symlink:  ${target} -> ${symlinks[target]}`
+                );
+                shell.ln('-sf', symlinks[target], target);
+            }
+        }
+
+        // Translation strings
+        var tstrings = {
+            categories: {},
+            fields: {},
+            presets: {}
+        };
+
+        // Start clean
+        shell.rm('-f', [
+            'data/presets/categories.json',
+            'data/presets/fields.json',
+            'data/presets/presets.json',
+            'data/presets.yaml',
+            'data/taginfo.json',
+            'dist/locales/en.json'
+        ]);
+
+        var categories = generateCategories(tstrings);
+        var fields = generateFields(tstrings);
+        var presets = generatePresets(tstrings);
+        var defaults = read('data/presets/defaults.json');
+        var translations = generateTranslations(fields, presets, tstrings);
+        var taginfo = generateTaginfo(presets);
+
+        // Additional consistency checks
+        validateCategoryPresets(categories, presets);
+        validatePresetFields(presets, fields);
+        validateDefaults(defaults, categories, presets);
+
+        // Save individual data files
+        fs.writeFileSync(
+            'data/presets/categories.json',
+            JSON.stringify({ categories: categories }, null, 4)
+        );
+        fs.writeFileSync(
+            'data/presets/fields.json',
+            JSON.stringify({ fields: fields }, null, 4)
+        );
+        fs.writeFileSync(
+            'data/presets/presets.json',
+            JSON.stringify({ presets: presets }, null, 4)
+        );
+        fs.writeFileSync('data/presets.yaml', translationsToYAML(translations));
+        fs.writeFileSync('data/taginfo.json', JSON.stringify(taginfo, null, 4));
+
+        // Push changes from data/core.yaml into en.json
+        var core = YAML.load(fs.readFileSync('data/core.yaml', 'utf8'));
+        var imagery = YAML.load(
+            fs.readFileSync(
+                'node_modules/editor-layer-index/i18n/en.yaml',
+                'utf8'
+            )
+        );
+        var en = _.merge(core, { en: { presets: tstrings } }, imagery);
+        fs.writeFileSync('dist/locales/en.json', JSON.stringify(en, null, 4));
+
+        console.timeEnd(colors.green('data built'));
+        building = false;
+    };
 };
-
-for (var target of Object.keys(symlinks)) {
-    if (!shell.test('-L', target)) {
-        console.log(`Creating symlink:  ${target} -> ${symlinks[target]}`);
-        shell.ln('-sf', symlinks[target], target);
-    }
-}
-
-
-// Translation strings
-var tstrings = {
-    categories: {},
-    fields: {},
-    presets: {}
-};
-
-
-// Start clean
-shell.rm('-f', [
-    'data/presets/categories.json',
-    'data/presets/fields.json',
-    'data/presets/presets.json',
-    'data/presets.yaml',
-    'data/taginfo.json',
-    'dist/locales/en.json'
-]);
-
-var categories = generateCategories();
-var fields = generateFields();
-var presets = generatePresets();
-var defaults = read('data/presets/defaults.json');
-var translations = generateTranslations(fields, presets);
-var taginfo = generateTaginfo(presets);
-
-// Additional consistency checks
-validateCategoryPresets(categories, presets);
-validatePresetFields(presets, fields);
-validateDefaults(defaults, categories, presets);
-
-// Save individual data files
-fs.writeFileSync('data/presets/categories.json', JSON.stringify({ categories: categories }, null, 4));
-fs.writeFileSync('data/presets/fields.json', JSON.stringify({ fields: fields }, null, 4));
-fs.writeFileSync('data/presets/presets.json', JSON.stringify({ presets: presets }, null, 4));
-fs.writeFileSync('data/presets.yaml', translationsToYAML(translations));
-fs.writeFileSync('data/taginfo.json', JSON.stringify(taginfo, null, 4));
-
-// Push changes from data/core.yaml into en.json
-var core = YAML.load(fs.readFileSync('data/core.yaml', 'utf8'));
-var imagery = YAML.load(fs.readFileSync('node_modules/editor-layer-index/i18n/en.yaml', 'utf8'));
-var en = _.merge(core, { en: { presets: tstrings }}, imagery);
-fs.writeFileSync('dist/locales/en.json', JSON.stringify(en, null, 4));
-
-// process.exit();
-
 
 function read(f) {
     return JSON.parse(fs.readFileSync(f, 'utf8'));
@@ -92,7 +118,7 @@ function validate(file, instance, schema) {
     }
 }
 
-function generateCategories() {
+function generateCategories(tstrings) {
     var categories = {};
     glob.sync(__dirname + '/data/presets/categories/*.json').forEach(function(file) {
         var field = read(file),
@@ -105,7 +131,7 @@ function generateCategories() {
     return categories;
 }
 
-function generateFields() {
+function generateFields(tstrings) {
     var fields = {};
     glob.sync(__dirname + '/data/presets/fields/**/*.json').forEach(function(file) {
         var field = read(file),
@@ -185,7 +211,7 @@ function stripLeadingUnderscores(str) {
     return str.split('/').map(function(s) { return s.replace(/^_/,''); }).join('/');
 }
 
-function generatePresets() {
+function generatePresets(tstrings) {
     var presets = {};
 
     glob.sync(__dirname + '/data/presets/presets/**/*.json').forEach(function(file) {
@@ -206,7 +232,7 @@ function generatePresets() {
 
 }
 
-function generateTranslations(fields, presets) {
+function generateTranslations(fields, presets, tstrings) {
     var translations = _.cloneDeep(tstrings);
 
     _.forEach(translations.fields, function(field, id) {
