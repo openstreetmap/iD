@@ -68,11 +68,7 @@ export function modeSave(context) {
 
         context.container().call(loading);
 
-        if (toCheck.length) {
-            osm.loadMultiple(toLoad, loaded);
-        } else {
-            upload();
-        }
+        upload();
 
 
         function withChildNodes(ids, graph) {

@@ -1,12 +1,17 @@
 {
-  "name": "iD",
-  "version": "2.4.1",
-  "description": "A friendly editor for OpenStreetMap",
+  "name": "@digidem/id",
+  "version": "3.0.0",
+  "description": "iD Editor for osm-p2p & mapeo-desktop",
   "main": "iD.js",
-  "repository": "openstreetmap/iD",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/digidem/iD-mapeo.git"
+  },
   "keywords": [
     "editor",
-    "openstreetmap"
+    "openstreetmap",
+    "mapeo",
+    "osm-p2p"
   ],
   "license": "ISC",
   "scripts": {
@@ -73,9 +78,21 @@
     "xmlbuilder": "^9.0.1"
   },
   "greenkeeper": {
+    "ignore": [
+      "@mapbox/maki"
+    ],
     "label": "chore-greenkeeper"
   },
   "engines": {
     "node": ">=4.0.0"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/digidem/iD-mapeo/issues"
+  },
+  "homepage": "https://github.com/digidem/iD-mapeo#readme",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "author": ""
 }
