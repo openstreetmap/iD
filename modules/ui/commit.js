@@ -52,13 +52,12 @@ export function uiCommit(context) {
         var tags;
         if (!changeset) {
             var detected = utilDetect();
-            tags = {
-                comment: context.storage('comment') || '',
-                created_by: ('iD ' + context.version).substr(0, 255),
-                imagery_used: context.history().imageryUsed().join(';').substr(0, 255),
-                host: detected.host.substr(0, 255),
-                locale: detected.locale.substr(0, 255)
-            };
+            var tags = {
+              created_by: 'iD ' + iD.version,
+              imagery_used: imageryUsed.join(';'),
+              host: (window.location.origin + window.location.pathname),
+              locale: detected.locale
+            }
 
             // call findHashtags initially - this will remove stored
             // hashtags if any hashtags are found in the comment - #4304
