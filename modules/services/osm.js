@@ -21,7 +21,11 @@ var dispatch = d3.dispatch('authLoading', 'authDone', 'change', 'loading', 'load
     loadedTiles = {},
     entityCache = {},
     tileZoom = 16,
-    oauth = osmAuth(),
+    oauth = osmAuth({
+      url: urlroot,
+      loading: authLoading,
+      done: authDone
+    }),
     rateLimitError,
     userChangesets,
     userDetails,
@@ -198,7 +202,7 @@ export default {
 
 
     entityURL: function(entity) {
-        return url + '/api/0.6/' + entity.type + '/' + entity.osmId()
+        return urlroot + '/' + entity.type + '/' + entity.osmId();
     },
 
 
@@ -524,7 +528,7 @@ export default {
 
 
     switch: function(options) {
-        url = options.url
+        urlroot = options.urlroot;
         oauth.options(_.extend({
             url: urlroot,
             loading: authLoading,
