@@ -56,6 +56,22 @@ body {
     transition-duration: 200ms;
 }
 
+/* Firefox has its own ideas about fixed positioning when a css filter is active - #4348 */
+/* https://stackoverflow.com/questions/37949942/firefox-position-bug-by-parent-with-filter */
+@-moz-document url-prefix() {
+    #content > #bar {
+        width: 100vw;
+    }
+    #content.inactive > #bar > .spacer.col4 {
+        width: 0px;
+    }
+    #content.active > #bar > .spacer.col4 {
+        width: 33.3333%;
+        transition-duration: 200ms;
+        transition-timing-function: step-end;
+    }
+}
+
 #defs {
     /* Can't be display: none or the clippaths are ignored. */
     position: absolute;
