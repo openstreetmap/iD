@@ -1044,6 +1044,9 @@ en:
       playground/baby:
         # baby=*
         label: Baby Seat
+      playground/max_age:
+        # max_age=*
+        label: Maximum Age
       population:
         # population=*
         label: Population

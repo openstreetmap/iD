@@ -1958,6 +1958,9 @@
                 "playground/baby": {
                     "label": "Baby Seat"
                 },
+                "playground/max_age": {
+                    "label": "Maximum Age"
+                },
                 "population": {
                     "label": "Population"
                 },

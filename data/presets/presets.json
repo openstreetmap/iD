@@ -9492,6 +9492,13 @@
         },
         "leisure/playground": {
             "icon": "playground",
+            "fields": [
+                "name",
+                "operator",
+                "surface",
+                "playground/max_age",
+                "access_simple"
+            ],
             "geometry": [
                 "point",
                 "area"
@@ -56332,6 +56339,13 @@
                 "point",
                 "area"
             ],
+            "fields": [
+                "name",
+                "operator",
+                "surface",
+                "playground/max_age",
+                "access_simple"
+            ],
             "suggestion": true
         },
         "leisure/playground/놀이터": {
@@ -56344,6 +56358,13 @@
             "geometry": [
                 "point",
                 "area"
+            ],
+            "fields": [
+                "name",
+                "operator",
+                "surface",
+                "playground/max_age",
+                "access_simple"
             ],
             "suggestion": true
         },

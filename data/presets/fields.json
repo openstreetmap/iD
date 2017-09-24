@@ -1388,6 +1388,11 @@
             "type": "check",
             "label": "Baby Seat"
         },
+        "playground/max_age": {
+            "key": "max_age",
+            "type": "text",
+            "label": "Maximum Age"
+        },
         "population": {
             "key": "population",
             "type": "text",
