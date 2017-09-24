@@ -1383,6 +1383,11 @@
             "label": "Power Output",
             "placeholder": "500 MW, 1000 MW, 2000 MW..."
         },
+        "playground/baby": {
+            "key": "baby",
+            "type": "check",
+            "label": "Baby Seat"
+        },
         "population": {
             "key": "population",
             "type": "text",

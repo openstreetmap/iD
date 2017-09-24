@@ -1041,6 +1041,9 @@ en:
         label: Power Output
         # plant/output/electricity field placeholder
         placeholder: '500 MW, 1000 MW, 2000 MW...'
+      playground/baby:
+        # baby=*
+        label: Baby Seat
       population:
         # population=*
         label: Population
@@ -3962,6 +3965,64 @@ en:
         # place=village
         name: Village
         terms: '<translate with synonyms or related terms for ''Village'', separated by commas>'
+      playground/balance_beam:
+        # playground=balancebeam
+        name: Balance Beam
+        terms: '<translate with synonyms or related terms for ''Balance Beam'', separated by commas>'
+      playground/basket_spinner:
+        # playground=basketrotator
+        name: Basket Spinner
+        # 'terms: basket rotator'
+        terms: '<translate with synonyms or related terms for ''Basket Spinner'', separated by commas>'
+      playground/basket_swing:
+        # playground=basketswing
+        name: Basket Swing
+        terms: '<translate with synonyms or related terms for ''Basket Swing'', separated by commas>'
+      playground/climbing_frame:
+        # playground=climbingframe
+        name: Climbing Frame
+        terms: '<translate with synonyms or related terms for ''Climbing Frame'', separated by commas>'
+      playground/cushion:
+        # playground=cushion
+        name: Bouncy Cushion
+        terms: '<translate with synonyms or related terms for ''Bouncy Cushion'', separated by commas>'
+      playground/horizontal_bar:
+        # playground=horizontal_bar
+        name: Horizontal Bar
+        # 'terms: high bar'
+        terms: '<translate with synonyms or related terms for ''Horizontal Bar'', separated by commas>'
+      playground/rocker:
+        # playground=springy
+        name: Springy Rocker
+        terms: '<translate with synonyms or related terms for ''Springy Rocker'', separated by commas>'
+      playground/roundabout:
+        # playground=roundabout
+        name: Play Roundabout
+        terms: '<translate with synonyms or related terms for ''Play Roundabout'', separated by commas>'
+      playground/sandpit:
+        # playground=sandpit
+        name: Sandpit
+        terms: '<translate with synonyms or related terms for ''Sandpit'', separated by commas>'
+      playground/seesaw:
+        # playground=seesaw
+        name: Seesaw
+        terms: '<translate with synonyms or related terms for ''Seesaw'', separated by commas>'
+      playground/slide:
+        # playground=slide
+        name: Slide
+        terms: '<translate with synonyms or related terms for ''Slide'', separated by commas>'
+      playground/structure:
+        # playground=structure
+        name: Play Structure
+        terms: '<translate with synonyms or related terms for ''Play Structure'', separated by commas>'
+      playground/swing:
+        # playground=swing
+        name: Swing
+        terms: '<translate with synonyms or related terms for ''Swing'', separated by commas>'
+      playground/zipwire:
+        # playground=zipwire
+        name: Zip Wire
+        terms: '<translate with synonyms or related terms for ''Zip Wire'', separated by commas>'
       point:
         name: Point
         terms: '<translate with synonyms or related terms for ''Point'', separated by commas>'
