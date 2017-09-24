@@ -48,10 +48,10 @@ function build() {
     console.time('Rebuilt');
 
     rollup.rollup({
-        entry: './modules/id.js',
+        input: './modules/id.js',
         plugins: [
             nodeResolve({
-                jsnext: true, main: true, browser: false
+                module: true, main: true, browser: false
             }),
             commonjs(),
             json()
@@ -60,9 +60,9 @@ function build() {
     }).then(function (bundle) {
         bundle.write({
             format: 'iife',
-            dest: 'dist/iD.js',
-            sourceMap: true,
-            useStrict: false
+            file: 'dist/iD.js',
+            sourcemap: true,
+            strict: false
         });
         building = false;
         cache = bundle;
