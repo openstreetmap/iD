@@ -1,12 +1,12 @@
-import _ from 'lodash';
-import { geoEdgeEqual } from '../geo/index';
+import _intersection from 'lodash-es/intersection';
+import { geoEdgeEqual } from '../geo';
 
 
 export function actionAddMidpoint(midpoint, node) {
     return function(graph) {
         graph = graph.replace(node.move(midpoint.loc));
 
-        var parents = _.intersection(
+        var parents = _intersection(
             graph.parentWays(graph.entity(midpoint.edge[0])),
             graph.parentWays(graph.entity(midpoint.edge[1])));
 
