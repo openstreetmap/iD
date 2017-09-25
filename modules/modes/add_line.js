@@ -3,11 +3,11 @@ import {
     actionAddEntity,
     actionAddMidpoint,
     actionAddVertex
-} from '../actions/index';
+} from '../actions';
 
-import { behaviorAddWay } from '../behavior/index';
+import { behaviorAddWay } from '../behavior';
 import { modeDrawLine } from './index';
-import { osmNode, osmWay } from '../osm/index';
+import { osmNode, osmWay } from '../osm';
 
 
 export function modeAddLine(context) {
