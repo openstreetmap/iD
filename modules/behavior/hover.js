@@ -1,5 +1,11 @@
-import * as d3 from 'd3';
-import { d3keybinding } from '../lib/d3.keybinding.js';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import { osmEntity } from '../osm/index';
 import { utilRebind } from '../util/rebind';
 
@@ -14,8 +20,8 @@ import { utilRebind } from '../util/rebind';
    have the .hover class.
  */
 export function behaviorHover(context) {
-    var dispatch = d3.dispatch('hover'),
-        _selection = d3.select(null),
+    var dispatch = d3_dispatch('hover'),
+        _selection = d3_select(null),
         newId = null,
         buttonDown,
         altDisables,
@@ -23,7 +29,7 @@ export function behaviorHover(context) {
 
 
     function keydown() {
-        if (altDisables && d3.event.keyCode === d3keybinding.modifierCodes.alt) {
+        if (altDisables && d3_event.keyCode === d3_keybinding.modifierCodes.alt) {
             _selection.selectAll('.hover')
                 .classed('hover-suppressed', true)
                 .classed('hover', false);
@@ -37,7 +43,7 @@ export function behaviorHover(context) {
 
 
     function keyup() {
-        if (altDisables && d3.event.keyCode === d3keybinding.modifierCodes.alt) {
+        if (altDisables && d3_event.keyCode === d3_keybinding.modifierCodes.alt) {
             _selection.selectAll('.hover-suppressed')
                 .classed('hover-suppressed', false)
                 .classed('hover', true);
@@ -59,35 +65,35 @@ export function behaviorHover(context) {
             .on('mouseout.hover', mouseout)
             .on('mousedown.hover', mousedown);
 
-        d3.select(window)
+        d3_select(window)
             .on('keydown.hover', keydown)
             .on('keyup.hover', keyup);
 
 
         function mouseover() {
             if (buttonDown) return;
-            var target = d3.event.target;
+            var target = d3_event.target;
             enter(target ? target.__data__ : null);
         }
 
 
         function mouseout() {
             if (buttonDown) return;
-            var target = d3.event.relatedTarget;
+            var target = d3_event.relatedTarget;
             enter(target ? target.__data__ : null);
         }
 
 
         function mousedown() {
             buttonDown = true;
-            d3.select(window)
+            d3_select(window)
                 .on('mouseup.hover', mouseup, true);
         }
 
 
         function mouseup() {
             buttonDown = false;
-            d3.select(window)
+            d3_select(window)
                 .on('mouseup.hover', null, true);
         }
 
@@ -118,7 +124,7 @@ export function behaviorHover(context) {
                     });
                 }
 
-                var suppressed = altDisables && d3.event && d3.event.altKey;
+                var suppressed = altDisables && d3_event && d3_event.altKey;
 
                 _selection.selectAll(selector)
                     .classed(suppressed ? 'hover-suppressed' : 'hover', true);
@@ -147,7 +153,7 @@ export function behaviorHover(context) {
             .on('mouseout.hover', null)
             .on('mousedown.hover', null);
 
-        d3.select(window)
+        d3_select(window)
             .on('keydown.hover', null)
             .on('keyup.hover', null);
     };

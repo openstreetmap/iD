@@ -1,7 +1,18 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _without from 'lodash-es/without';
+
+import {
+    event as d3_event,
+    mouse as d3_mouse,
+    select as d3_select
+} from 'd3-selection';
+
 import { geoEuclideanDistance } from '../geo';
-import { modeBrowse, modeSelect } from '../modes';
+
+import {
+    modeBrowse,
+    modeSelect
+} from '../modes';
+
 import { osmEntity } from '../osm';
 
 
@@ -13,12 +24,12 @@ export function behaviorSelect(context) {
 
 
     function point() {
-        return d3.mouse(context.container().node());
+        return d3_mouse(context.container().node());
     }
 
 
     function keydown() {
-        var e = d3.event;
+        var e = d3_event;
         if (e && e.shiftKey) {
             context.surface()
                 .classed('behavior-multiselect', true);
@@ -32,7 +43,7 @@ export function behaviorSelect(context) {
 
 
     function keyup() {
-        var e = d3.event;
+        var e = d3_event;
         if (!e || !e.shiftKey) {
             context.surface()
                 .classed('behavior-multiselect', false);
@@ -49,7 +60,7 @@ export function behaviorSelect(context) {
 
     function mousedown() {
         if (!p1) p1 = point();
-        d3.select(window)
+        d3_select(window)
             .on('mouseup.select', mouseup, true);
 
         var isShowAlways = +context.storage('edit-menu-show-always') === 1;
@@ -58,7 +69,7 @@ export function behaviorSelect(context) {
 
 
     function mousemove() {
-        if (d3.event) lastMouse = d3.event;
+        if (d3_event) lastMouse = d3_event;
     }
 
 
@@ -68,7 +79,7 @@ export function behaviorSelect(context) {
 
 
     function contextmenu() {
-        var e = d3.event;
+        var e = d3_event;
         e.preventDefault();
         e.stopPropagation();
 
@@ -87,7 +98,7 @@ export function behaviorSelect(context) {
 
 
     function click() {
-        d3.select(window)
+        d3_select(window)
             .on('mouseup.select', null, true);
 
         if (!p1) return;
@@ -99,9 +110,9 @@ export function behaviorSelect(context) {
             return;
         }
 
-        var isMultiselect = d3.event.shiftKey || d3.select('#surface .lasso').node(),
+        var isMultiselect = d3_event.shiftKey || d3_select('#surface .lasso').node(),
             isShowAlways = +context.storage('edit-menu-show-always') === 1,
-            datum = d3.event.target.__data__ || (lastMouse && lastMouse.target.__data__),
+            datum = d3_event.target.__data__ || (lastMouse && lastMouse.target.__data__),
             mode = context.mode();
 
 
@@ -136,7 +147,7 @@ export function behaviorSelect(context) {
                         mode.suppressMenu(false).reselect();
                     } else {
                         // deselect clicked entity, then reenter select mode or return to browse mode..
-                        selectedIDs = _.without(selectedIDs, datum.id);
+                        selectedIDs = _without(selectedIDs, datum.id);
                         context.enter(selectedIDs.length ? modeSelect(context, selectedIDs) : modeBrowse(context));
                     }
                 } else {
@@ -157,17 +168,17 @@ export function behaviorSelect(context) {
         suppressMenu = true;
         p1 = null;
 
-        d3.select(window)
+        d3_select(window)
             .on('keydown.select', keydown)
             .on('keyup.select', keyup)
             .on('contextmenu.select-window', function() {
                 // Edge and IE really like to show the contextmenu on the
                 // menubar when user presses a keyboard menu button
                 // even after we've already preventdefaulted the key event.
-                var e = d3.event;
+                var e = d3_event;
                 if (+e.clientX === 0 && +e.clientY === 0) {
-                    d3.event.preventDefault();
-                    d3.event.stopPropagation();
+                    d3_event.preventDefault();
+                    d3_event.stopPropagation();
                 }
             });
 
@@ -176,7 +187,7 @@ export function behaviorSelect(context) {
             .on('mousemove.select', mousemove)
             .on('contextmenu.select', contextmenu);
 
-        if (d3.event && d3.event.shiftKey) {
+        if (d3_event && d3_event.shiftKey) {
             context.surface()
                 .classed('behavior-multiselect', true);
         }
@@ -184,7 +195,7 @@ export function behaviorSelect(context) {
 
 
     behavior.off = function(selection) {
-        d3.select(window)
+        d3_select(window)
             .on('keydown.select', null)
             .on('keyup.select', null)
             .on('contextmenu.select-window', null)
