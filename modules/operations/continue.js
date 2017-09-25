@@ -1,14 +1,16 @@
-import _ from 'lodash';
+import _extend from 'lodash-es/extend';
+import _groupBy from 'lodash-es/groupBy';
+
 import { t } from '../util/locale';
-import { modeDrawLine } from '../modes/index';
-import { behaviorOperation } from '../behavior/index';
+import { modeDrawLine } from '../modes';
+import { behaviorOperation } from '../behavior';
 
 
 export function operationContinue(selectedIDs, context) {
     var graph = context.graph(),
         entities = selectedIDs.map(function(id) { return graph.entity(id); }),
-        geometries = _.extend({ line: [], vertex: [] },
-            _.groupBy(entities, function(entity) { return entity.geometry(graph); })),
+        geometries = _extend({ line: [], vertex: [] },
+            _groupBy(entities, function(entity) { return entity.geometry(graph); })),
         vertex = geometries.vertex[0];
 
 
