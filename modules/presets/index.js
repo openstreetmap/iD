@@ -1,4 +1,8 @@
-import _ from 'lodash';
+import _bind from 'lodash-es/bind';
+import _forEach from 'lodash-es/forEach';
+import _reject from 'lodash-es/reject';
+import _uniq from 'lodash-es/uniq';
+
 import { data } from '../../data/index';
 import { presetCategory } from './category';
 import { presetCollection } from './collection';
@@ -84,7 +88,7 @@ export function presetIndex() {
     all.areaKeys = function() {
         var areaKeys = {},
             ignore = ['barrier', 'highway', 'footway', 'railway', 'type'],  // probably a line..
-            presets = _.reject(all.collection, 'suggestion');
+            presets = _reject(all.collection, 'suggestion');
 
         // whitelist
         presets.forEach(function(d) {
@@ -125,26 +129,26 @@ export function presetIndex() {
         index = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
 
         if (d.fields) {
-            _.forEach(d.fields, function(d, id) {
+            _forEach(d.fields, function(d, id) {
                 fields[id] = presetField(id, d);
                 if (d.universal) universal.push(fields[id]);
             });
         }
 
         if (d.presets) {
-            _.forEach(d.presets, function(d, id) {
+            _forEach(d.presets, function(d, id) {
                 all.collection.push(presetPreset(id, d, fields));
             });
         }
 
         if (d.categories) {
-            _.forEach(d.categories, function(d, id) {
+            _forEach(d.categories, function(d, id) {
                 all.collection.push(presetCategory(id, d, all));
             });
         }
 
         if (d.defaults) {
-            var getItem = _.bind(all.item, all);
+            var getItem = _bind(all.item, all);
             defaults = {
                 area: presetCollection(d.defaults.area.map(getItem)),
                 line: presetCollection(d.defaults.line.map(getItem)),
@@ -179,13 +183,13 @@ export function presetIndex() {
 
     all.defaults = function(geometry, n) {
         var rec = recent.matchGeometry(geometry).collection.slice(0, 4),
-            def = _.uniq(rec.concat(defaults[geometry].collection)).slice(0, n - 1);
-        return presetCollection(_.uniq(rec.concat(def).concat(all.item(geometry))));
+            def = _uniq(rec.concat(defaults[geometry].collection)).slice(0, n - 1);
+        return presetCollection(_uniq(rec.concat(def).concat(all.item(geometry))));
     };
 
     all.choose = function(preset) {
         if (!preset.isFallback()) {
-            recent = presetCollection(_.uniq([preset].concat(recent.collection)));
+            recent = presetCollection(_uniq([preset].concat(recent.collection)));
         }
         return all;
     };

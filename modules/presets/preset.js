@@ -1,10 +1,13 @@
-import _ from 'lodash';
+import _clone from 'lodash-es/clone';
+import _keys from 'lodash-es/keys';
+import _omit from 'lodash-es/omit';
+
 import { t } from '../util/locale';
 import { areaKeys } from '../core/context';
 
 
 export function presetPreset(id, preset, fields) {
-    preset = _.clone(preset);
+    preset = _clone(preset);
 
     preset.id = id;
     preset.fields = (preset.fields || []).map(getFields);
@@ -71,7 +74,7 @@ export function presetPreset(id, preset, fields) {
 
     var reference = preset.reference || {};
     preset.reference = function(geometry) {
-        var key = reference.key || Object.keys(_.omit(preset.tags, 'name'))[0],
+        var key = reference.key || Object.keys(_omit(preset.tags, 'name'))[0],
             value = reference.value || preset.tags[key];
 
         if (geometry === 'relation' && key === 'type') {
@@ -93,7 +96,7 @@ export function presetPreset(id, preset, fields) {
 
     var removeTags = preset.removeTags || preset.tags;
     preset.removeTags = function(tags, geometry) {
-        tags = _.omit(tags, _.keys(removeTags));
+        tags = _omit(tags, _keys(removeTags));
 
         for (var f in preset.fields) {
             var field = preset.fields[f];
@@ -111,7 +114,7 @@ export function presetPreset(id, preset, fields) {
     preset.applyTags = function(tags, geometry) {
         var k;
 
-        tags = _.clone(tags);
+        tags = _clone(tags);
 
         for (k in applyTags) {
             if (applyTags[k] === '*') {
