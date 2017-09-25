@@ -1,4 +1,10 @@
-import _ from 'lodash';
+import _compact from 'lodash-es/compact';
+import _extend from 'lodash-es/extend';
+import _filter from 'lodash-es/filter';
+import _find from 'lodash-es/find';
+import _map from 'lodash-es/map';
+import _values from 'lodash-es/values';
+
 import { osmEntity } from './entity';
 import { geoExtent } from '../geo';
 
@@ -16,7 +22,7 @@ osmEntity.changeset = osmChangeset;
 
 osmChangeset.prototype = Object.create(osmEntity.prototype);
 
-_.extend(osmChangeset.prototype, {
+_extend(osmChangeset.prototype, {
 
     type: 'changeset',
 
@@ -35,7 +41,7 @@ _.extend(osmChangeset.prototype, {
         return {
             osm: {
                 changeset: {
-                    tag: _.map(this.tags, function(value, key) {
+                    tag: _map(this.tags, function(value, key) {
                         return { '@k': key, '@v': value };
                     }),
                     '@version': 0.6,
@@ -71,7 +77,7 @@ _.extend(osmChangeset.prototype, {
 
             // find a referenced relation in the current changeset
             function resolve(item) {
-                return _.find(relations, function(relation) {
+                return _find(relations, function(relation) {
                     return item.keyAttributes.type === 'relation'
                         && item.keyAttributes.ref === relation['@id'];
                 });
@@ -79,7 +85,7 @@ _.extend(osmChangeset.prototype, {
 
             // a new item is an item that has not been already processed
             function isNew(item) {
-                return !sorted[ item['@id'] ] && !_.find(processing, function(proc) {
+                return !sorted[ item['@id'] ] && !_find(processing, function(proc) {
                     return proc['@id'] === item['@id'];
                 });
             }
@@ -100,7 +106,7 @@ _.extend(osmChangeset.prototype, {
 
                 while (processing.length > 0) {
                     var next = processing[0],
-                    deps = _.filter(_.compact(next.member.map(resolve)), isNew);
+                    deps = _filter(_compact(next.member.map(resolve)), isNew);
                     if (deps.length === 0) {
                         sorted[next['@id']] = next;
                         processing.shift();
@@ -110,7 +116,7 @@ _.extend(osmChangeset.prototype, {
                 }
             }
 
-            changes.relation = _.values(sorted);
+            changes.relation = _values(sorted);
             return changes;
         }
 
@@ -124,7 +130,7 @@ _.extend(osmChangeset.prototype, {
                 '@generator': 'iD',
                 'create': sort(nest(changes.created.map(rep), ['node', 'way', 'relation'])),
                 'modify': nest(changes.modified.map(rep), ['node', 'way', 'relation']),
-                'delete': _.extend(nest(changes.deleted.map(rep), ['relation', 'way', 'node']), { '@if-unused': true })
+                'delete': _extend(nest(changes.deleted.map(rep), ['relation', 'way', 'node']), { '@if-unused': true })
             }
         };
     },
