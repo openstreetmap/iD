@@ -70,7 +70,7 @@ var imagery = YAML.load(fs.readFileSync('node_modules/editor-layer-index/i18n/en
 var en = _.merge(core, { en: { presets: tstrings }}, imagery);
 fs.writeFileSync('dist/locales/en.json', JSON.stringify(en, null, 4));
 
-process.exit();
+// process.exit();
 
 
 function read(f) {

@@ -36,6 +36,13 @@ if (isDevelopment) {
         });
     });
 
+    // gaze(['data/**/*.{js,json}'], function(err, watcher) {
+    //     watcher.on('all', function() {
+    //         build();
+    //     });
+    // });
+
+
     gaze(['modules/**/*.js', 'data/**/*.{js,json}'], function(err, watcher) {
         watcher.on('all', function() {
             build();

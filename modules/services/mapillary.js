@@ -236,32 +236,31 @@ function searchLimited(psize, limit, projection, rtree) {
     limit = limit || 3;
 
     var partitions = partitionViewport(psize, projection);
-    console.time('previous');
+    var results;
 
-    var x =  _.flatten(_.map(partitions, function(extent) {
+    // console.time('previous');
+    results =  _.flatten(_.map(partitions, function(extent) {
         return rtree.search(extent.bbox())
             .slice(0, limit)
             .map(function(d) { return d.data; });
     }));
-    console.timeEnd('previous');
+    // console.timeEnd('previous');
 
-    console.time('new');
-    var a = partitions.reduce(function(prev, curr) {
-        var searchResult = rtree.search(curr.bbox());
-        // searchResult will always be an array
-        if (searchResult.length === 0) return prev;
+    // console.time('new');
+    // results = partitions.reduce(function(result, extent) {
+    //     var found = rtree.search(extent.bbox())
+    //         .map(function(d) { return d.data; })
+    //         .sort(function(a, b) {
+    //             return a.loc[1] - b.loc[1];
+    //             // return a.key.localeCompare(b.key);
+    //         })
+    //         .slice(0, limit);
 
-        return prev.concat(searchResult
-                .slice(0, limit)
-                .map(function(d) {
-                    return d.data;
-                })
-                .sort(function(a, b) {
-                    return a.key.localeCompare(b.key);
-                }));
-    }, []);
-    console.timeEnd('new');
-    return a;
+    //     return (found.length ? result.concat(found) : result);
+    // }, []);
+    // console.timeEnd('new');
+
+    return results;
 }
 
 
