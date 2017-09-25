@@ -236,11 +236,32 @@ function searchLimited(psize, limit, projection, rtree) {
     limit = limit || 3;
 
     var partitions = partitionViewport(psize, projection);
-    return _.flatten(_.compact(_.map(partitions, function(extent) {
+    console.time('previous');
+
+    var x =  _.flatten(_.map(partitions, function(extent) {
         return rtree.search(extent.bbox())
             .slice(0, limit)
             .map(function(d) { return d.data; });
-    })));
+    }));
+    console.timeEnd('previous');
+
+    console.time('new');
+    var a = partitions.reduce(function(prev, curr) {
+        var searchResult = rtree.search(curr.bbox());
+        // searchResult will always be an array
+        if (searchResult.length === 0) return prev;
+
+        return prev.concat(searchResult
+                .slice(0, limit)
+                .map(function(d) {
+                    return d.data;
+                })
+                .sort(function(a, b) {
+                    return a.key.localeCompare(b.key);
+                }));
+    }, []);
+    console.timeEnd('new');
+    return a;
 }
 
 
