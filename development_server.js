@@ -1,22 +1,50 @@
 /* eslint-disable no-console */
 
-var fs = require('fs');
-var rollup = require('rollup');
-var nodeResolve = require('rollup-plugin-node-resolve');
-var commonjs = require('rollup-plugin-commonjs');
-var json = require('rollup-plugin-json');
 var http = require('http');
 var gaze = require('gaze');
 var ecstatic = require('ecstatic');
+var colors = require('colors/safe');
 
-var building = false;
-var cache;
-if (process.argv[2] === 'develop') {
-    build();
+var isDevelopment = process.argv[2] === 'develop';
 
-    gaze(['modules/**/*.js', 'data/**/*.{js,json}'], function(err, watcher) {
+var buildData = require('./build_data')(isDevelopment);
+var buildSrc = require('./build_src')(isDevelopment);
+var buildCSS = require('./build_css')(isDevelopment);
+
+buildData();
+buildSrc();
+buildCSS();
+
+if (isDevelopment) {
+    gaze(['css/**/*.css'], function(err, watcher) {
         watcher.on('all', function() {
-            build();
+            buildCSS();
+        });
+    });
+
+    gaze(
+        [
+            'data/**/*.{js,json}',
+            // ignore the output files of `buildData`
+            '!data/presets/categories.json',
+            '!data/presets/fields.json',
+            '!data/presets/presets.json',
+            '!data/presets.yaml',
+            '!data/taginfo.json',
+            '!dist/locales/en.json'
+        ],
+        function(err, watcher) {
+            watcher.on('all', function() {
+                buildData();
+                // need to recompute js files when data changes
+                buildSrc();
+            });
+        }
+    );
+
+    gaze(['modules/**/*.js'], function(err, watcher) {
+        watcher.on('all', function() {
+            buildSrc();
         });
     });
 
@@ -24,53 +52,5 @@ if (process.argv[2] === 'develop') {
         ecstatic({ root: __dirname, cache: 0 })
     ).listen(8080);
 
-    console.log('Listening on :8080');
-
-} else {
-    build();
+    console.log(colors.red('Listening on :8080'));
 }
-
-
-
-function unlink(f) {
-    try { fs.unlinkSync(f); } catch (e) { /* noop */ }
-}
-
-function build() {
-    if (building) return;
-
-    // Start clean
-    unlink('dist/iD.js');
-    unlink('dist/iD.js.map');
-
-    building = true;
-    console.log('Rebuilding');
-    console.time('Rebuilt');
-
-    rollup.rollup({
-        entry: './modules/id.js',
-        plugins: [
-            nodeResolve({
-                jsnext: true, main: true, browser: false
-            }),
-            commonjs(),
-            json()
-        ],
-        cache: cache
-    }).then(function (bundle) {
-        bundle.write({
-            format: 'iife',
-            dest: 'dist/iD.js',
-            sourceMap: true,
-            useStrict: false
-        });
-        building = false;
-        cache = bundle;
-        console.timeEnd('Rebuilt');
-    }, function(err) {
-        building = false;
-        cache = undefined;
-        console.error(err);
-    });
-}
-
