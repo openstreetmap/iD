@@ -22,11 +22,25 @@ if (isDevelopment) {
         });
     });
 
-    gaze(['data/**/*.{js,json}'], function(err, watcher) {
-        watcher.on('all', function() {
-            buildData();
-        });
-    });
+    gaze(
+        [
+            'data/**/*.{js,json}',
+            // ignore the output files of `buildData`
+            '!data/presets/categories.json',
+            '!data/presets/fields.json',
+            '!data/presets/presets.json',
+            '!data/presets.yaml',
+            '!data/taginfo.json',
+            '!dist/locales/en.json'
+        ],
+        function(err, watcher) {
+            watcher.on('all', function() {
+                buildData();
+                // need to recompute js files when data changes
+                buildSrc();
+            });
+        }
+    );
 
     gaze(['modules/**/*.js'], function(err, watcher) {
         watcher.on('all', function() {
