@@ -9497,6 +9497,7 @@
                 "operator",
                 "surface",
                 "playground/max_age",
+                "playground/min_age",
                 "access_simple"
             ],
             "geometry": [
@@ -11601,7 +11602,7 @@
             "name": "Seesaw"
         },
         "playground/slide": {
-            "icon": "entrance",
+            "icon": "playground",
             "geometry": [
                 "point",
                 "line"
@@ -56344,6 +56345,7 @@
                 "operator",
                 "surface",
                 "playground/max_age",
+                "playground/min_age",
                 "access_simple"
             ],
             "suggestion": true
@@ -56364,6 +56366,7 @@
                 "operator",
                 "surface",
                 "playground/max_age",
+                "playground/min_age",
                 "access_simple"
             ],
             "suggestion": true

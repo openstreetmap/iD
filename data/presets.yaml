@@ -1047,6 +1047,9 @@ en:
       playground/max_age:
         # max_age=*
         label: Maximum Age
+      playground/min_age:
+        # max_age=*
+        label: Minimum Age
       population:
         # population=*
         label: Population

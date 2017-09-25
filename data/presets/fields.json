@@ -1390,8 +1390,13 @@
         },
         "playground/max_age": {
             "key": "max_age",
-            "type": "text",
+            "type": "number",
             "label": "Maximum Age"
+        },
+        "playground/min_age": {
+            "key": "max_age",
+            "type": "number",
+            "label": "Minimum Age"
         },
         "population": {
             "key": "population",

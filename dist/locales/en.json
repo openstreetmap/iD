@@ -1961,6 +1961,9 @@
                 "playground/max_age": {
                     "label": "Maximum Age"
                 },
+                "playground/min_age": {
+                    "label": "Minimum Age"
+                },
                 "population": {
                     "label": "Population"
                 },
