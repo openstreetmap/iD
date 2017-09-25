@@ -1,13 +1,14 @@
-import * as d3 from 'd3';
+import { select as d3_select } from 'd3-selection';
 import { t } from '../util/locale';
-import { d3geoTile } from '../lib/d3.geo.tile';
+
+import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 import { geoEuclideanDistance } from '../geo';
 import { utilPrefixCSSProperty } from '../util';
 
 
 export function rendererTileLayer(context) {
     var tileSize = 256,
-        geotile = d3geoTile(),
+        geotile = d3_geoTile(),
         projection,
         cache = {},
         tileOrigin,
@@ -136,7 +137,7 @@ export function rendererTileLayer(context) {
 
         function load(d) {
             cache[d[3]] = true;
-            d3.select(this)
+            d3_select(this)
                 .on('error', null)
                 .on('load', null)
                 .classed('tile-loaded', true);
@@ -145,7 +146,7 @@ export function rendererTileLayer(context) {
 
         function error(d) {
             cache[d[3]] = false;
-            d3.select(this)
+            d3_select(this)
                 .on('error', null)
                 .on('load', null)
                 .remove();
@@ -200,7 +201,7 @@ export function rendererTileLayer(context) {
             .classed('tile-removing', true)
             .classed('tile-center', false)
             .each(function() {
-                var tile = d3.select(this);
+                var tile = d3_select(this);
                 window.setTimeout(function() {
                     if (tile.classed('tile-removing')) {
                         tile.remove();
@@ -253,7 +254,7 @@ export function rendererTileLayer(context) {
             debug
                 .selectAll('.tile-label-debug-vintage')
                 .each(function(d) {
-                    var span = d3.select(this);
+                    var span = d3_select(this);
                     var center = context.projection.invert(tileCenter(d));
                     source.getMetadata(center, d, function(err, result) {
                         span.text((result && result.vintage && result.vintage.range) ||

@@ -1,15 +1,18 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { data } from '../../data/index';
-import { geoExtent, geoMetersToOffset, geoOffsetToMeters} from '../geo/index';
+import _find from 'lodash-es/find';
+
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { select as d3_select } from 'd3-selection';
+
+import { data } from '../../data';
+import { geoExtent, geoMetersToOffset, geoOffsetToMeters} from '../geo';
 import { rendererBackgroundSource } from './background_source';
 import { rendererTileLayer } from './tile_layer';
-import { utilQsString, utilStringQs } from '../util/index';
+import { utilQsString, utilStringQs } from '../util';
 import { utilRebind } from '../util/rebind';
 
 
 export function rendererBackground(context) {
-    var dispatch = d3.dispatch('change'),
+    var dispatch = d3_dispatch('change'),
         baseLayer = rendererTileLayer(context).projection(context.projection),
         overlayLayers = [],
         backgroundSources;
@@ -35,7 +38,7 @@ export function rendererBackground(context) {
             .insert('div', '.layer-data')
             .attr('class', 'layer layer-overlay')
             .merge(overlays)
-            .each(function(layer) { d3.select(this).call(layer); });
+            .each(function(layer) { d3_select(this).call(layer); });
     }
 
 
@@ -161,7 +164,7 @@ export function rendererBackground(context) {
 
 
     background.findSource = function(id) {
-        return _.find(backgroundSources, function(d) {
+        return _find(backgroundSources, function(d) {
             return d.id && d.id === id;
         });
     };
@@ -263,7 +266,7 @@ export function rendererBackground(context) {
 
         // Decide which background layer to display
         if (!requested && extent) {
-            best = _.find(this.sources(extent), function(s) { return s.best(); });
+            best = _find(this.sources(extent), function(s) { return s.best(); });
         }
         if (requested && requested.indexOf('custom:') === 0) {
             template = requested.replace(/^custom:/, '');
@@ -279,7 +282,7 @@ export function rendererBackground(context) {
             );
         }
 
-        var locator = _.find(backgroundSources, function(d) {
+        var locator = _find(backgroundSources, function(d) {
             return d.overlay && d.default;
         });
 

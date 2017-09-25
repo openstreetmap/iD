@@ -1,7 +1,10 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _clone from 'lodash-es/clone';
+import _some from 'lodash-es/some';
+
+import { geoArea as d3_geoArea } from 'd3-geo';
+
 import { t } from '../util/locale';
-import { geoExtent, geoPolygonIntersectsPolygon } from '../geo/index';
+import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
 import { jsonpRequest } from '../util/jsonp_request';
 
 
@@ -25,7 +28,7 @@ function vintageRange(vintage) {
 
 
 export function rendererBackgroundSource(data) {
-    var source = _.clone(data),
+    var source = _clone(data),
         offset = [0, 0],
         name = source.name,
         description = source.description,
@@ -69,7 +72,7 @@ export function rendererBackgroundSource(data) {
 
     source.area = function() {
         if (!data.polygon) return Number.MAX_VALUE;  // worldwide
-        var area = d3.geoArea({ type: 'MultiPolygon', coordinates: [ data.polygon ] });
+        var area = d3_geoArea({ type: 'MultiPolygon', coordinates: [ data.polygon ] });
         return isNaN(area) ? 0 : area;
     };
 
@@ -182,7 +185,7 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     bing.copyrightNotices = function(zoom, extent) {
         zoom = Math.min(zoom, 21);
         return providers.filter(function(provider) {
-            return _.some(provider.areas, function(area) {
+            return _some(provider.areas, function(area) {
                 return extent.intersects(area.extent) &&
                     area.zoom[0] <= zoom &&
                     area.zoom[1] >= zoom;
