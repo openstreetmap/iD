@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import _debounce from 'lodash-es/debounce';
+
 import { t } from '../../util/locale';
 import { services } from '../../services';
 
@@ -49,7 +50,7 @@ export function uiPanelLocation(context) {
     }
 
 
-    var debouncedGetLocation = _.debounce(getLocation, 250);
+    var debouncedGetLocation = _debounce(getLocation, 250);
     function getLocation(selection, coord) {
         if (!services.geocoder) {
             currLocation = t('info_panels.location.unknown_location');
