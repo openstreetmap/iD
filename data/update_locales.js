@@ -1,10 +1,12 @@
 /* Downloads the latest translations from Transifex */
 
-var request = require('request').defaults({ maxSockets: 1 }),
-    yaml = require('js-yaml'),
-    fs = require('fs'),
-    stringify = require('json-stable-stringify'),
-    _ = require('lodash');
+const _isEmpty = require('lodash/isEmpty');
+const _merge = require('lodash/merge');
+
+var request = require('request').defaults({ maxSockets: 1 });
+var yaml = require('js-yaml');
+var fs = require('fs');
+var stringify = require('json-stable-stringify');
 
 var resources = ['core', 'presets', 'imagery'];
 var outdir = './dist/locales/';
@@ -32,16 +34,16 @@ var sourceCore = yaml.load(fs.readFileSync('./data/core.yaml', 'utf8')),
 asyncMap(resources, getResource, function(err, locales) {
     if (err) return console.log(err);
 
-    var locale = _.merge(sourceCore, sourcePresets, sourceImagery),
+    var locale = _merge(sourceCore, sourcePresets, sourceImagery),
         dataLocales = {};
 
     locales.forEach(function(l) {
-        locale = _.merge(locale, l);
+        locale = _merge(locale, l);
     });
 
     asyncMap(Object.keys(locale),
         function(code, done) {
-            if (code === 'en' || _.isEmpty(locale[code])) {
+            if (code === 'en' || _isEmpty(locale[code])) {
                 done();
             } else {
                 var obj = {};

@@ -4,7 +4,7 @@ iD.debug = true;
 
 // disable things that use the network
 iD.data.imagery = [];
-_.forEach(iD.services, function(v,k) { delete iD.services[k]; });
+for (var k in iD.services) { delete iD.services[k]; }
 
 mocha.setup({
     ui: 'bdd',
@@ -20,5 +20,3 @@ mocha.setup({
 });
 
 expect = chai.expect;
-// eslint-disable-next-line no-unused-vars
-var d3 = iD.d3;

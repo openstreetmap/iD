@@ -49,6 +49,7 @@
     "js-yaml": "^3.9.0",
     "jsonschema": "^1.1.0",
     "json-stable-stringify": "^1.0.1",
+    "lodash": "^4.17.0",
     "@mapbox/maki": "^4.0.0",
     "mapillary-js": "2.8.0",
     "minimist": "^1.2.0",

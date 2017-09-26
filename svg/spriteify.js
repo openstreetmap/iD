@@ -1,15 +1,14 @@
 #!/usr/bin/env node
-
 'use strict';
+
+var _merge = require('lodash/merge');
 
 var argv = require('minimist')(process.argv.slice(2));
 if (argv.help || argv.h || !argv.svg) {
     return help();
 }
-
 var fs = require('fs');
 var json = (argv.json ? JSON.parse(fs.readFileSync(argv.json)) : {});
-var _ = require('lodash');
 var xml2js = require('xml2js');
 
 xmlToJs(argv.svg, function (err, obj) {
@@ -66,7 +65,7 @@ function transform(source) {
         var id = source['#attr'].id,
             replace = (id && json[id] !== undefined) ? json[id] : {};
 
-        target['#attr'] = _.merge(source['#attr'], replace);
+        target['#attr'] = _merge(source['#attr'], replace);
         if (replace.viewBox !== undefined) {
             target['#name'] = 'symbol';
         }

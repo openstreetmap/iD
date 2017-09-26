@@ -41,7 +41,6 @@ export { uiPresetEditor as uiPreset } from './ui/preset_editor';
 
 export var debug = false;
 
-import * as d3 from 'd3';
 import * as lib from './lib/index';
 
-export { d3, lib };
+export { lib };
