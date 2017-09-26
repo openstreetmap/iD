@@ -1,4 +1,10 @@
-import * as d3 from 'd3';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
 import { t } from '../../util/locale';
 import { modeBrowse, modeSelect } from '../../modes';
 import { utilRebind } from '../../util/rebind';
@@ -6,7 +12,7 @@ import { icon, pointBox, transitionTime } from './helper';
 
 
 export function uiIntroNavigation(context, reveal) {
-    var dispatch = d3.dispatch('done'),
+    var dispatch = d3_dispatch('done'),
         timeouts = [],
         hallId = 'n2061',
         townHall = [-85.63591, 41.94285],
@@ -28,8 +34,8 @@ export function uiIntroNavigation(context, reveal) {
 
 
     function eventCancel() {
-        d3.event.stopPropagation();
-        d3.event.preventDefault();
+        d3_event.stopPropagation();
+        d3_event.preventDefault();
     }
 
 
@@ -250,7 +256,7 @@ export function uiIntroNavigation(context, reveal) {
         if (!isTownHallSelected()) return clickTownHall();
 
         // disallow scrolling
-        d3.select('.inspector-wrap').on('wheel.intro', eventCancel);
+        d3_select('.inspector-wrap').on('wheel.intro', eventCancel);
 
         var onClick = function() { continueTo(presetTownHall); };
 
@@ -272,7 +278,7 @@ export function uiIntroNavigation(context, reveal) {
         function continueTo(nextStep) {
             context.on('exit.intro', null);
             context.history().on('change.intro', null);
-            d3.select('.inspector-wrap').on('wheel.intro', null);
+            d3_select('.inspector-wrap').on('wheel.intro', null);
             nextStep();
         }
     }
@@ -282,9 +288,9 @@ export function uiIntroNavigation(context, reveal) {
         if (!isTownHallSelected()) return clickTownHall();
 
         // reset pane, in case user happened to change it..
-        d3.select('.inspector-wrap .panewrap').style('right', '0%');
+        d3_select('.inspector-wrap .panewrap').style('right', '0%');
         // disallow scrolling
-        d3.select('.inspector-wrap').on('wheel.intro', eventCancel);
+        d3_select('.inspector-wrap').on('wheel.intro', eventCancel);
 
         // preset match, in case the user happened to change it.
         var entity = context.entity(context.selectedIDs()[0]);
@@ -310,7 +316,7 @@ export function uiIntroNavigation(context, reveal) {
         function continueTo(nextStep) {
             context.on('exit.intro', null);
             context.history().on('change.intro', null);
-            d3.select('.inspector-wrap').on('wheel.intro', null);
+            d3_select('.inspector-wrap').on('wheel.intro', null);
             nextStep();
         }
     }
@@ -320,9 +326,9 @@ export function uiIntroNavigation(context, reveal) {
         if (!isTownHallSelected()) return clickTownHall();
 
         // reset pane, in case user happened to change it..
-        d3.select('.inspector-wrap .panewrap').style('right', '0%');
+        d3_select('.inspector-wrap .panewrap').style('right', '0%');
         // disallow scrolling
-        d3.select('.inspector-wrap').on('wheel.intro', eventCancel);
+        d3_select('.inspector-wrap').on('wheel.intro', eventCancel);
 
         var onClick = function() { continueTo(closeTownHall); };
 
@@ -344,7 +350,7 @@ export function uiIntroNavigation(context, reveal) {
         function continueTo(nextStep) {
             context.on('exit.intro', null);
             context.history().on('change.intro', null);
-            d3.select('.inspector-wrap').on('wheel.intro', null);
+            d3_select('.inspector-wrap').on('wheel.intro', null);
             nextStep();
         }
     }
@@ -354,7 +360,7 @@ export function uiIntroNavigation(context, reveal) {
         if (!isTownHallSelected()) return clickTownHall();
 
         var selector = '.entity-editor-pane button.preset-close svg use';
-        var href = d3.select(selector).attr('href') || '#icon-close';
+        var href = d3_select(selector).attr('href') || '#icon-close';
 
         reveal('.entity-editor-pane',
             t('intro.navigation.close_townhall', { button: icon(href, 'pre-text') })
@@ -367,7 +373,7 @@ export function uiIntroNavigation(context, reveal) {
         context.history().on('change.intro', function() {
             // update the close icon in the tooltip if the user edits something.
             var selector = '.entity-editor-pane button.preset-close svg use';
-            var href = d3.select(selector).attr('href') || '#icon-close';
+            var href = d3_select(selector).attr('href') || '#icon-close';
 
             reveal('.entity-editor-pane',
                 t('intro.navigation.close_townhall', { button: icon(href, 'pre-text') }),
@@ -396,14 +402,14 @@ export function uiIntroNavigation(context, reveal) {
                 t('intro.navigation.search_street', { name: t('intro.graph.name.spring-street') })
             );
 
-            d3.select('.search-header input')
+            d3_select('.search-header input')
                 .on('keyup.intro', checkSearchResult);
         }, msec + 100);
     }
 
 
     function checkSearchResult() {
-        var first = d3.select('.feature-list-item:nth-child(0n+2)'),  // skip "No Results" item
+        var first = d3_select('.feature-list-item:nth-child(0n+2)'),  // skip "No Results" item
             firstName = first.select('.entity-name'),
             name = t('intro.graph.name.spring-street');
 
@@ -417,14 +423,14 @@ export function uiIntroNavigation(context, reveal) {
                 continueTo(selectedStreet);
             });
 
-            d3.select('.search-header input')
+            d3_select('.search-header input')
                 .on('keydown.intro', eventCancel, true)
                 .on('keyup.intro', null);
         }
 
         function continueTo(nextStep) {
             context.on('exit.intro', null);
-            d3.select('.search-header input')
+            d3_select('.search-header input')
                 .on('keydown.intro', null)
                 .on('keyup.intro', null);
             nextStep();
@@ -490,7 +496,7 @@ export function uiIntroNavigation(context, reveal) {
 
     function editorStreet() {
         var selector = '.entity-editor-pane button.preset-close svg use';
-        var href = d3.select(selector).attr('href') || '#icon-close';
+        var href = d3_select(selector).attr('href') || '#icon-close';
 
         reveal('.entity-editor-pane',
             t('intro.navigation.editor_street', {
@@ -507,7 +513,7 @@ export function uiIntroNavigation(context, reveal) {
         context.history().on('change.intro', function() {
             // update the close icon in the tooltip if the user edits something.
             var selector = '.entity-editor-pane button.preset-close svg use';
-            var href = d3.select(selector).attr('href') || '#icon-close';
+            var href = d3_select(selector).attr('href') || '#icon-close';
 
             reveal('.entity-editor-pane',
                 t('intro.navigation.editor_street', {
@@ -548,8 +554,8 @@ export function uiIntroNavigation(context, reveal) {
         context.on('enter.intro exit.intro', null);
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
-        d3.select('.inspector-wrap').on('wheel.intro', null);
-        d3.select('.search-header input').on('keydown.intro keyup.intro', null);
+        d3_select('.inspector-wrap').on('wheel.intro', null);
+        d3_select('.search-header input').on('keydown.intro keyup.intro', null);
     };
 
 

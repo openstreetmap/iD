@@ -1,4 +1,5 @@
-import * as d3 from 'd3';
+import { select as d3_select } from 'd3-selection';
+
 import { t } from '../../util/locale';
 import { geoSphericalDistance } from '../../geo';
 
@@ -160,7 +161,7 @@ export function isMostlySquare(points) {
 export function selectMenuItem(operation) {
     var selector = '.edit-menu .edit-menu-item-' + operation +
         ', .radial-menu .radial-menu-item-' + operation;
-    return d3.select(selector);
+    return d3_select(selector);
 }
 
 

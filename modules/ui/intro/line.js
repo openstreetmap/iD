@@ -1,5 +1,12 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _some from 'lodash-es/some';
+
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
 import { t, textDirection } from '../../util/locale';
 import { geoSphericalDistance } from '../../geo';
 import { modeBrowse, modeSelect } from '../../modes';
@@ -8,7 +15,7 @@ import { icon, pad, selectMenuItem, transitionTime } from './helper';
 
 
 export function uiIntroLine(context, reveal) {
-    var dispatch = d3.dispatch('done'),
+    var dispatch = d3_dispatch('done'),
         timeouts = [],
         tulipRoadId = null,
         flowerRoadId = 'w646',
@@ -44,8 +51,8 @@ export function uiIntroLine(context, reveal) {
 
 
     function eventCancel() {
-        d3.event.stopPropagation();
-        d3.event.preventDefault();
+        d3_event.stopPropagation();
+        d3_event.preventDefault();
     }
 
 
@@ -191,8 +198,8 @@ export function uiIntroLine(context, reveal) {
         if (!entity) return false;
 
         var drawNodes = context.graph().childNodes(entity);
-        return _.some(drawNodes, function(node) {
-            return _.some(context.graph().parentWays(node), function(parent) {
+        return _some(drawNodes, function(node) {
+            return _some(context.graph().parentWays(node), function(parent) {
                 return parent.id === flowerRoadId;
             });
         });
@@ -200,7 +207,7 @@ export function uiIntroLine(context, reveal) {
 
 
     function retryIntersect() {
-        d3.select(window).on('mousedown.intro', eventCancel, true);
+        d3_select(window).on('mousedown.intro', eventCancel, true);
 
         var box = pad(tulipRoadIntersection, 80, context);
         reveal(box,
@@ -245,15 +252,15 @@ export function uiIntroLine(context, reveal) {
             return chapter.restart();
         });
 
-        var button = d3.select('.preset-category-road .preset-list-button');
+        var button = d3_select('.preset-category-road .preset-list-button');
         if (button.empty()) return chapter.restart();
 
         // disallow scrolling
-        d3.select('.inspector-wrap').on('wheel.intro', eventCancel);
+        d3_select('.inspector-wrap').on('wheel.intro', eventCancel);
 
         timeout(function() {
             // reset pane, in case user somehow happened to change it..
-            d3.select('.inspector-wrap .panewrap').style('right', '-100%');
+            d3_select('.inspector-wrap .panewrap').style('right', '-100%');
 
             reveal(button.node(),
                 t('intro.lines.choose_category_road', { category: roadCategory.name() })
@@ -266,8 +273,8 @@ export function uiIntroLine(context, reveal) {
         }, 400);  // after editor pane visible
 
         function continueTo(nextStep) {
-            d3.select('.inspector-wrap').on('wheel.intro', null);
-            d3.select('.preset-list-button').on('click.intro', null);
+            d3_select('.inspector-wrap').on('wheel.intro', null);
+            d3_select('.preset-list-button').on('click.intro', null);
             context.on('exit.intro', null);
             nextStep();
         }
@@ -283,7 +290,7 @@ export function uiIntroLine(context, reveal) {
             return chapter.restart();
         });
 
-        var subgrid = d3.select('.preset-category-road .subgrid');
+        var subgrid = d3_select('.preset-category-road .subgrid');
         if (subgrid.empty()) return chapter.restart();
 
         subgrid.selectAll(':not(.preset-highway-residential) .preset-list-button')
@@ -304,7 +311,7 @@ export function uiIntroLine(context, reveal) {
         }, 300);
 
         function continueTo(nextStep) {
-            d3.select('.preset-list-button').on('click.intro', null);
+            d3_select('.preset-list-button').on('click.intro', null);
             context.on('exit.intro', null);
             nextStep();
         }
@@ -322,10 +329,10 @@ export function uiIntroLine(context, reveal) {
         });
 
         // disallow scrolling
-        d3.select('.inspector-wrap').on('wheel.intro', eventCancel);
+        d3_select('.inspector-wrap').on('wheel.intro', eventCancel);
 
         timeout(function() {
-            var button = d3.select('.entity-editor-pane .preset-list-button');
+            var button = d3_select('.entity-editor-pane .preset-list-button');
 
             reveal(button.node(),
                 t('intro.lines.retry_preset_residential', { preset: residentialPreset.name() })
@@ -338,8 +345,8 @@ export function uiIntroLine(context, reveal) {
         }, 500);
 
         function continueTo(nextStep) {
-            d3.select('.inspector-wrap').on('wheel.intro', null);
-            d3.select('.preset-list-button').on('click.intro', null);
+            d3_select('.inspector-wrap').on('wheel.intro', null);
+            d3_select('.preset-list-button').on('click.intro', null);
             context.on('exit.intro', null);
             nextStep();
         }
@@ -953,7 +960,7 @@ export function uiIntroLine(context, reveal) {
             reveal(box, t('intro.lines.multi_rightclick'), { duration: 0 });
         });
 
-        d3.select(window).on('click.intro contextmenu.intro', function() {
+        d3_select(window).on('click.intro contextmenu.intro', function() {
             timeout(function() {
                 var ids = context.selectedIDs();
                 if (ids.length === 2 &&
@@ -983,7 +990,7 @@ export function uiIntroLine(context, reveal) {
 
         function continueTo(nextStep) {
             context.map().on('move.intro drawn.intro', null);
-            d3.select(window).on('click.intro contextmenu.intro', null, true);
+            d3_select(window).on('click.intro contextmenu.intro', null, true);
             context.history().on('change.intro', null);
             nextStep();
         }
@@ -1072,12 +1079,12 @@ export function uiIntroLine(context, reveal) {
 
     chapter.exit = function() {
         timeouts.forEach(window.clearTimeout);
-        d3.select(window).on('mousedown.intro', null, true);
+        d3_select(window).on('mousedown.intro', null, true);
         context.on('enter.intro exit.intro', null);
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
-        d3.select('.inspector-wrap').on('wheel.intro', null);
-        d3.select('.preset-list-button').on('click.intro', null);
+        d3_select('.inspector-wrap').on('wheel.intro', null);
+        d3_select('.preset-list-button').on('click.intro', null);
     };
 
 
