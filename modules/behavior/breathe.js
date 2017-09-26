@@ -73,31 +73,29 @@ export function behaviorBreathe() {
 
 
     function calcAnimationParams(selection) {
-        selection
-            .call(reset)
-            .each(function(d) {
-                var s = d3.select(this),
-                    tag = s.node().tagName,
-                    p = {'from': {}, 'to': {}},
-                    opacity, width;
+        selection.call(reset).each(function(d) {
+            var s = d3.select(this),
+                tag = s.node().tagName,
+                p = { from: {}, to: {} },
+                opacity,
+                width;
 
-                // determine base opacity and width
-                if (tag === 'circle') {
-                    opacity = parseFloat(s.style('fill-opacity') || 0.5);
-                    width = parseFloat(s.style('r') || 15.5);
-                } else {
-                    opacity = parseFloat(s.style('stroke-opacity') || 0.7);
-                    width = parseFloat(s.style('stroke-width') || 10);
-                }
+            if (tag === 'circle') {
+                opacity = 0.5;
+                width = 10;
+            } else {
+                opacity = 0.7;
+                width = 10;
+            }
 
-                // calculate from/to interpolation params..
-                p.tag = tag;
-                p.from.opacity = opacity * 0.6;
-                p.to.opacity = opacity * 1.25;
-                p.from.width = width * 0.7;
-                p.to.width = width * (tag === 'circle' ? 1.5 : 1);
-                params[d.id] = p;
-            });
+            // calculate from/to interpolation params..
+            p.tag = tag;
+            p.from.opacity = opacity * 0.6;
+            p.to.opacity = opacity * 1.25;
+            p.from.width = width * 0.7;
+            p.to.width = width * (tag === 'circle' ? 1.5 : 1);
+            params[d.id] = p;
+        });
     }
 
 
