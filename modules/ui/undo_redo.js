@@ -1,8 +1,14 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { d3keybinding } from '../lib/d3.keybinding.js';
+import _debounce from 'lodash-es/debounce';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+
 import { t, textDirection } from '../util/locale';
-import { svgIcon } from '../svg/index';
+import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
 import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
@@ -54,19 +60,19 @@ export function uiUndoRedo(context) {
                     iconName = 'undo';
                 }
             }
-            d3.select(this)
+            d3_select(this)
                 .call(svgIcon('#icon-' + iconName));
         });
 
-        var keybinding = d3keybinding('undo')
-            .on(commands[0].cmd, function() { d3.event.preventDefault(); commands[0].action(); })
-            .on(commands[1].cmd, function() { d3.event.preventDefault(); commands[1].action(); });
+        var keybinding = d3_keybinding('undo')
+            .on(commands[0].cmd, function() { d3_event.preventDefault(); commands[0].action(); })
+            .on(commands[1].cmd, function() { d3_event.preventDefault(); commands[1].action(); });
 
-        d3.select(document)
+        d3_select(document)
             .call(keybinding);
 
 
-        var debouncedUpdate = _.debounce(update, 500, { leading: true, trailing: true });
+        var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
 
         context.map()
             .on('move.undo_redo', debouncedUpdate)
@@ -84,7 +90,7 @@ export function uiUndoRedo(context) {
                 .property('disabled', !editable())
                 .classed('disabled', function(d) { return !d.annotation(); })
                 .each(function() {
-                    var selection = d3.select(this);
+                    var selection = d3_select(this);
                     if (selection.property('tooltipVisible')) {
                         selection.call(tooltipBehavior.show);
                     }

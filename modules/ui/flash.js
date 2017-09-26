@@ -1,6 +1,8 @@
-import * as d3 from 'd3';
+import { select as d3_select } from 'd3-selection';
+import { timeout as d3_timeout } from 'd3-timer';
 
 var timer;
+
 
 export function uiFlash(showDuration) {
     showDuration = showDuration || 1500;
@@ -9,12 +11,12 @@ export function uiFlash(showDuration) {
         timer.stop();
     }
 
-    d3.select('#footer-wrap')
+    d3_select('#footer-wrap')
         .attr('class', 'footer-hide');
-    d3.select('#flash-wrap')
+    d3_select('#flash-wrap')
         .attr('class', 'footer-show');
 
-    var content = d3.select('#flash-wrap').selectAll('.content')
+    var content = d3_select('#flash-wrap').selectAll('.content')
         .data([0]);
 
     content = content.enter()
@@ -22,11 +24,11 @@ export function uiFlash(showDuration) {
         .attr('class', 'content')
         .merge(content);
 
-    timer = d3.timeout(function() {
+    timer = d3_timeout(function() {
         timer = null;
-        d3.select('#footer-wrap')
+        d3_select('#footer-wrap')
             .attr('class', 'footer-show');
-        d3.select('#flash-wrap')
+        d3_select('#flash-wrap')
             .attr('class', 'footer-hide');
     }, showDuration);
 

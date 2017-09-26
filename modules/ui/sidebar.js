@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _throttle from 'lodash-es/throttle';
 import { uiFeatureList } from './feature_list';
 import { uiInspector } from './inspector';
 
@@ -49,7 +49,7 @@ export function uiSidebar(context) {
         }
 
 
-        sidebar.hover = _.throttle(hover, 200);
+        sidebar.hover = _throttle(hover, 200);
 
 
         sidebar.select = function(id, newFeature) {

@@ -1,8 +1,12 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { d3keybinding } from '../lib/d3.keybinding.js';
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+
 import { t, textDirection } from '../util/locale';
-import { svgIcon } from '../svg/index';
+import { svgIcon } from '../svg';
 import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
 
@@ -40,7 +44,7 @@ export function uiMapData(context) {
 
 
         function setFill(d) {
-            _.each(fills, function(opt) {
+            fills.forEach(function(opt) {
                 context.surface().classed('fill-' + opt, Boolean(opt === d));
             });
 
@@ -263,8 +267,8 @@ export function uiMapData(context) {
                     .title(t('gpx.zoom'))
                     .placement((textDirection === 'rtl') ? 'right' : 'left'))
                 .on('click', function() {
-                    d3.event.preventDefault();
-                    d3.event.stopPropagation();
+                    d3_event.preventDefault();
+                    d3_event.stopPropagation();
                     gpx.fitZoom();
                 })
                 .call(svgIcon('#icon-search'));
@@ -277,10 +281,10 @@ export function uiMapData(context) {
                     .placement((textDirection === 'rtl') ? 'right' : 'left')
                 )
                 .on('click', function() {
-                    d3.select(document.createElement('input'))
+                    d3_select(document.createElement('input'))
                         .attr('type', 'file')
                         .on('change', function() {
-                            gpx.files(d3.event.target.files);
+                            gpx.files(d3_event.target.files);
                         })
                         .node().click();
                 })
@@ -390,16 +394,16 @@ export function uiMapData(context) {
 
 
         function togglePanel() {
-            if (d3.event) d3.event.preventDefault();
+            if (d3_event) d3_event.preventDefault();
             tooltipBehavior.hide(button);
             setVisible(!button.classed('active'));
         }
 
 
         function toggleWireframe() {
-            if (d3.event) {
-                d3.event.preventDefault();
-                d3.event.stopPropagation();
+            if (d3_event) {
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
             }
             setFill((fillSelected === 'wireframe' ? fillDefault : 'wireframe'));
             context.map().pan([0,0]);  // trigger a redraw
@@ -414,7 +418,7 @@ export function uiMapData(context) {
                 if (show) {
                     update();
                     selection.on('mousedown.map_data-inside', function() {
-                        return d3.event.stopPropagation();
+                        return d3_event.stopPropagation();
                     });
                     content.style('display', 'block')
                         .style('right', '-300px')
@@ -428,7 +432,7 @@ export function uiMapData(context) {
                         .duration(200)
                         .style('right', '-300px')
                         .on('end', function() {
-                            d3.select(this).style('display', 'none');
+                            d3_select(this).style('display', 'none');
                         });
                     selection.on('mousedown.map_data-inside', null);
                 }
@@ -464,10 +468,10 @@ export function uiMapData(context) {
             .classed('hide-toggle', true)
             .classed('expanded', true)
             .on('click', function() {
-                var exp = d3.select(this).classed('expanded');
+                var exp = d3_select(this).classed('expanded');
                 dataLayerContainer.style('display', exp ? 'none' : 'block');
-                d3.select(this).classed('expanded', !exp);
-                d3.event.preventDefault();
+                d3_select(this).classed('expanded', !exp);
+                d3_event.preventDefault();
             });
 
         var dataLayerContainer = content
@@ -484,10 +488,10 @@ export function uiMapData(context) {
             .classed('hide-toggle', true)
             .classed('expanded', false)
             .on('click', function() {
-                var exp = d3.select(this).classed('expanded');
+                var exp = d3_select(this).classed('expanded');
                 fillContainer.style('display', exp ? 'none' : 'block');
-                d3.select(this).classed('expanded', !exp);
-                d3.event.preventDefault();
+                d3_select(this).classed('expanded', !exp);
+                d3_event.preventDefault();
             });
 
         var fillContainer = content
@@ -508,10 +512,10 @@ export function uiMapData(context) {
             .classed('hide-toggle', true)
             .classed('expanded', false)
             .on('click', function() {
-                var exp = d3.select(this).classed('expanded');
+                var exp = d3_select(this).classed('expanded');
                 featureContainer.style('display', exp ? 'none' : 'block');
-                d3.select(this).classed('expanded', !exp);
-                d3.event.preventDefault();
+                d3_select(this).classed('expanded', !exp);
+                d3_event.preventDefault();
             });
 
         var featureContainer = content
@@ -529,12 +533,12 @@ export function uiMapData(context) {
 
         setFill(fillDefault);
 
-        var keybinding = d3keybinding('features')
+        var keybinding = d3_keybinding('features')
             .on(key, togglePanel)
             .on(t('area_fill.wireframe.key'), toggleWireframe)
             .on([t('background.key'), t('help.key')], hidePanel);
 
-        d3.select(document)
+        d3_select(document)
             .call(keybinding);
 
         context.surface().on('mousedown.map_data-outside', hidePanel);

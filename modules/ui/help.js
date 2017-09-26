@@ -1,6 +1,11 @@
-import * as d3 from 'd3';
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+
 import marked from 'marked';
-import { d3keybinding } from '../lib/d3.keybinding.js';
 import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg';
 import { uiIntro } from './intro';
@@ -40,7 +45,7 @@ export function uiHelp(context) {
 
 
         function toggle() {
-            if (d3.event) d3.event.preventDefault();
+            if (d3_event) d3_event.preventDefault();
             tooltipBehavior.hide(button);
             setVisible(!button.classed('active'));
         }
@@ -53,7 +58,7 @@ export function uiHelp(context) {
 
                 if (show) {
                     selection.on('mousedown.help-inside', function() {
-                        return d3.event.stopPropagation();
+                        return d3_event.stopPropagation();
                     });
                     pane.style('display', 'block')
                         .style('right', '-500px')
@@ -66,7 +71,7 @@ export function uiHelp(context) {
                         .duration(200)
                         .style('right', '-500px')
                         .on('end', function() {
-                            d3.select(this).style('display', 'none');
+                            d3_select(this).style('display', 'none');
                         });
                     selection.on('mousedown.help-inside', null);
                 }
@@ -212,11 +217,11 @@ export function uiHelp(context) {
 
         clickHelp(docs[0], 0);
 
-        var keybinding = d3keybinding('help')
+        var keybinding = d3_keybinding('help')
             .on(key, toggle)
             .on([t('background.key'), t('map_data.key')], hide);
 
-        d3.select(document)
+        d3_select(document)
             .call(keybinding);
 
         context.surface().on('mousedown.help-outside', hide);

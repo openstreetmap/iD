@@ -1,6 +1,7 @@
 import { t } from '../util/locale';
 import { utilDetect } from '../util/detect';
 
+
 // Translate a MacOS key command into the appropriate Windows/Linux equivalent.
 // For example, ⌘Z -> Ctrl+Z
 export var uiCmd = function (code) {

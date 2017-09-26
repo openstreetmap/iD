@@ -1,15 +1,16 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { d3keybinding } from '../lib/d3.keybinding.js';
+import _debounce from 'lodash-es/debounce';
+
+import { select as d3_select } from 'd3-selection';
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 
 import {
     modeAddArea,
     modeAddLine,
     modeAddPoint,
     modeBrowse
-} from '../modes/index';
+} from '../modes';
 
-import { svgIcon } from '../svg/index';
+import { svgIcon } from '../svg';
 import { tooltip } from '../util/tooltip';
 import { uiTooltipHtml } from './tooltipHtml';
 
@@ -56,7 +57,7 @@ export function uiModes(context) {
 
         buttons
             .each(function(d) {
-                d3.select(this)
+                d3_select(this)
                     .call(svgIcon('#icon-' + d.button, 'pre-text'));
             });
 
@@ -79,7 +80,7 @@ export function uiModes(context) {
                     .classed('mode-' + exited.id, false);
             });
 
-        var keybinding = d3keybinding('mode-buttons');
+        var keybinding = d3_keybinding('mode-buttons');
 
         modes.forEach(function(mode) {
             keybinding.on(mode.key, function() {
@@ -93,11 +94,11 @@ export function uiModes(context) {
             });
         });
 
-        d3.select(document)
+        d3_select(document)
             .call(keybinding);
 
 
-        var debouncedUpdate = _.debounce(update, 500, { leading: true, trailing: true });
+        var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
 
         context.map()
             .on('move.modes', debouncedUpdate)

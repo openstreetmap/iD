@@ -1,4 +1,10 @@
-import * as d3 from 'd3';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
 import { t } from '../util/locale';
 import { JXON } from '../util/jxon';
 import { geoExtent } from '../geo';
@@ -10,7 +16,7 @@ import { utilRebind } from '../util/rebind';
 
 
 export function uiConflicts(context) {
-    var dispatch = d3.dispatch('cancel', 'save'),
+    var dispatch = d3_dispatch('cancel', 'save'),
         origChanges,
         conflictList;
 
@@ -109,7 +115,7 @@ export function uiConflicts(context) {
     function showConflict(selection, index) {
         if (index < 0 || index >= conflictList.length) return;
 
-        var parent = d3.select(selection.node().parentNode);
+        var parent = d3_select(selection.node().parentNode);
 
         // enable save button if this is the last conflict being reviewed..
         if (index === conflictList.length - 1) {
@@ -144,7 +150,7 @@ export function uiConflicts(context) {
             .text(function(d) { return d.name; })
             .on('click', function(d) {
                 zoomToEntity(d.id);
-                d3.event.preventDefault();
+                d3_event.preventDefault();
             });
 
         var details = enter
@@ -190,7 +196,7 @@ export function uiConflicts(context) {
                 container
                     .call(showConflict, index + sign);
 
-                d3.event.preventDefault();
+                d3_event.preventDefault();
             });
 
         item.exit()
@@ -235,9 +241,9 @@ export function uiConflicts(context) {
 
 
     function choose(ul, datum) {
-        if (d3.event) d3.event.preventDefault();
+        if (d3_event) d3_event.preventDefault();
 
-        d3.select(ul)
+        d3_select(ul)
             .selectAll('li')
             .classed('active', function(d) { return d === datum; })
             .selectAll('input')

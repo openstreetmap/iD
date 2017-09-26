@@ -1,5 +1,5 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _throttle from 'lodash-es/throttle';
+import { select as d3_select } from 'd3-selection';
 import { t } from '../util/locale';
 
 
@@ -28,19 +28,19 @@ export function uiAttribution(context) {
             .attr('class', 'attribution')
             .each(function(d) {
                 if (d.terms_html) {
-                    d3.select(this)
+                    d3_select(this)
                         .html(d.terms_html);
                     return;
                 }
 
                 var selection;
                 if (d.terms_url) {
-                    selection = d3.select(this)
+                    selection = d3_select(this)
                         .append('a')
                         .attr('href', d.terms_url)
                         .attr('target', '_blank');
                 } else {
-                    selection = d3.select(this);
+                    selection = d3_select(this);
                 }
 
 
@@ -98,7 +98,7 @@ export function uiAttribution(context) {
             .on('change.attribution', update);
 
         context.map()
-            .on('move.attribution', _.throttle(update, 400, {leading: false}));
+            .on('move.attribution', _throttle(update, 400, {leading: false}));
 
         update();
     };

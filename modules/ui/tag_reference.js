@@ -1,16 +1,22 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _find from 'lodash-es/find';
+import _omit from 'lodash-es/omit';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
 import { t } from '../util/locale';
 import { utilDetect } from '../util/detect';
-import { services } from '../services/index';
-import { svgIcon } from '../svg/index';
+import { services } from '../services';
+import { svgIcon } from '../svg';
 
 
 export function uiTagReference(tag) {
     var taginfo = services.taginfo,
         tagReference = {},
-        button = d3.select(null),
-        body = d3.select(null),
+        button = d3_select(null),
+        body = d3_select(null),
         loaded,
         showing;
 
@@ -20,7 +26,7 @@ export function uiTagReference(tag) {
             localized;
 
         if (locale !== 'pt-br') {  // see #3776, prefer 'pt' over 'pt-br'
-            localized = _.find(data, function(d) {
+            localized = _find(data, function(d) {
                 return d.lang.toLowerCase() === locale;
             });
             if (localized) return localized;
@@ -30,14 +36,14 @@ export function uiTagReference(tag) {
         // 'en' if the language is 'en-US'
         if (locale.indexOf('-') !== -1) {
             var first = locale.split('-')[0];
-            localized = _.find(data, function(d) {
+            localized = _find(data, function(d) {
                 return d.lang.toLowerCase() === first;
             });
             if (localized) return localized;
         }
 
         // finally fall back to english
-        return _.find(data, function(d) {
+        return _find(data, function(d) {
             return d.lang.toLowerCase() === 'en';
         });
     }
@@ -59,7 +65,7 @@ export function uiTagReference(tag) {
 
             if (!docs || !docs.title) {
                 if (param.hasOwnProperty('value')) {
-                    load(_.omit(param, 'value'));   // retry with key only
+                    load(_omit(param, 'value'));   // retry with key only
                 } else {
                     body
                         .append('p')
@@ -76,7 +82,7 @@ export function uiTagReference(tag) {
                     .attr('class', 'tag-reference-wiki-image')
                     .attr('src', docs.image.thumb_url_prefix + '100' + docs.image.thumb_url_suffix)
                     .on('load', function() { done(); })
-                    .on('error', function() { d3.select(this).remove(); done(); });
+                    .on('error', function() { d3_select(this).remove(); done(); });
             } else {
                 done();
             }
@@ -156,8 +162,8 @@ export function uiTagReference(tag) {
 
         button
             .on('click', function () {
-                d3.event.stopPropagation();
-                d3.event.preventDefault();
+                d3_event.stopPropagation();
+                d3_event.preventDefault();
                 if (showing) {
                     hide();
                 } else if (loaded) {
