@@ -2221,6 +2221,62 @@
             "value": "village"
         },
         {
+            "key": "playground",
+            "value": "balancebeam"
+        },
+        {
+            "key": "playground",
+            "value": "basketrotator"
+        },
+        {
+            "key": "playground",
+            "value": "basketswing"
+        },
+        {
+            "key": "playground",
+            "value": "climbingframe"
+        },
+        {
+            "key": "playground",
+            "value": "cushion"
+        },
+        {
+            "key": "playground",
+            "value": "horizontal_bar"
+        },
+        {
+            "key": "playground",
+            "value": "springy"
+        },
+        {
+            "key": "playground",
+            "value": "roundabout"
+        },
+        {
+            "key": "playground",
+            "value": "sandpit"
+        },
+        {
+            "key": "playground",
+            "value": "seesaw"
+        },
+        {
+            "key": "playground",
+            "value": "slide"
+        },
+        {
+            "key": "playground",
+            "value": "structure"
+        },
+        {
+            "key": "playground",
+            "value": "swing"
+        },
+        {
+            "key": "playground",
+            "value": "zipwire"
+        },
+        {
             "key": "power",
             "value": "sub_station"
         },
