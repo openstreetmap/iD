@@ -1,4 +1,10 @@
-import * as d3 from 'd3';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
+import {
+    select as d3_select,
+    event as d3_event
+} from 'd3-selection';
+
 import { utilRebind } from '../../util/rebind';
 import { t } from '../../util/locale';
 import { actionReverse } from '../../actions';
@@ -10,14 +16,14 @@ export { uiFieldCheck as uiFieldOnewayCheck };
 
 
 export function uiFieldCheck(field, context) {
-    var dispatch = d3.dispatch('change'),
+    var dispatch = d3_dispatch('change'),
         options = field.strings && field.strings.options,
         values = [],
         texts = [],
-        input = d3.select(null),
-        text = d3.select(null),
-        label = d3.select(null),
-        reverser = d3.select(null),
+        input = d3_select(null),
+        text = d3_select(null),
+        label = d3_select(null),
+        reverser = d3_select(null),
         impliedYes,
         entityId,
         value;
@@ -58,7 +64,7 @@ export function uiFieldCheck(field, context) {
 
 
     function reverserHidden() {
-        if (!d3.select('div.inspector-hover').empty()) return true;
+        if (!d3_select('div.inspector-hover').empty()) return true;
         return !(value === 'yes' || (impliedYes && !value));
     }
 
@@ -121,7 +127,7 @@ export function uiFieldCheck(field, context) {
                 var t = {};
                 t[field.key] = values[(values.indexOf(value) + 1) % values.length];
                 dispatch.call('change', this, t);
-                d3.event.stopPropagation();
+                d3_event.stopPropagation();
             });
 
         if (field.type === 'onewayCheck') {
@@ -130,13 +136,13 @@ export function uiFieldCheck(field, context) {
             reverser
                 .call(reverserSetText)
                 .on('click', function() {
-                    d3.event.preventDefault();
-                    d3.event.stopPropagation();
+                    d3_event.preventDefault();
+                    d3_event.stopPropagation();
                     context.perform(
                         actionReverse(entityId),
                         t('operations.reverse.annotation')
                     );
-                    d3.select(this)
+                    d3_select(this)
                         .call(reverserSetText);
                 });
         }

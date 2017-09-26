@@ -1,10 +1,12 @@
-import * as d3 from 'd3';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { select as d3_select } from 'd3-selection';
+
 import { utilRebind } from '../../util/rebind';
 import { utilGetDimensions } from '../../util/dimensions';
 
 
 export function uiFieldLanes(field, context) {
-    var dispatch = d3.dispatch('change'),
+    var dispatch = d3_dispatch('change'),
         LANE_WIDTH = 40,
         LANE_HEIGHT = 200,
         wayID,
@@ -13,7 +15,7 @@ export function uiFieldLanes(field, context) {
     function lanes(selection) {
         lanesData = context.entity(wayID).lanes();
 
-        if (!d3.select('.inspector-wrap.inspector-hidden').empty() || !selection.node().parentNode) {
+        if (!d3_select('.inspector-wrap.inspector-hidden').empty() || !selection.node().parentNode) {
             selection.call(lanes.off);
             return;
         }

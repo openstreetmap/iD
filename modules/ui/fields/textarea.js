@@ -1,4 +1,6 @@
-import * as d3 from 'd3';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { select as d3_select } from 'd3-selection';
+
 import { t } from '../../util/locale';
 import {
     utilGetSetValue,
@@ -8,8 +10,8 @@ import {
 
 
 export function uiFieldTextarea(field) {
-    var dispatch = d3.dispatch('change'),
-        input = d3.select(null);
+    var dispatch = d3_dispatch('change'),
+        input = d3_select(null);
 
 
     function textarea(selection) {

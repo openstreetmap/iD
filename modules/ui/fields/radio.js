@@ -1,4 +1,9 @@
-import * as d3 from 'd3';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+import {
+    select as d3_select,
+    selectAll as d3_selectAll
+} from 'd3-selection';
+
 import { t } from '../../util/locale';
 import { uiField } from '../field';
 import { utilRebind } from '../../util';
@@ -8,11 +13,11 @@ export { uiFieldRadio as uiFieldStructureRadio };
 
 
 export function uiFieldRadio(field, context) {
-    var dispatch = d3.dispatch('change'),
-        placeholder = d3.select(null),
-        wrap = d3.select(null),
-        labels = d3.select(null),
-        radios = d3.select(null),
+    var dispatch = d3_dispatch('change'),
+        placeholder = d3_select(null),
+        wrap = d3_select(null),
+        labels = d3_select(null),
+        radios = d3_select(null),
         typeField,
         layerField,
         oldType = {},
@@ -21,7 +26,7 @@ export function uiFieldRadio(field, context) {
 
     function selectedKey() {
         var selector = '.form-field-structure .toggle-list label.active input',
-            node = d3.selectAll(selector);
+            node = d3_selectAll(selector);
         return !node.empty() && node.datum();
     }
 
@@ -212,7 +217,7 @@ export function uiFieldRadio(field, context) {
         }
 
         radios.each(function(d) {
-            var active = d3.select(this).property('checked');
+            var active = d3_select(this).property('checked');
             if (active) activeKey = d;
 
             if (field.key) {
