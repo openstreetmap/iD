@@ -1,4 +1,4 @@
-import * as d3 from 'd3';
+import { select as d3_select } from 'd3-selection';
 import { osmPavedTags } from '../osm/tags';
 
 
@@ -102,7 +102,7 @@ export function svgTagClasses() {
             classes = classes.trim();
 
             if (classes !== value) {
-                d3.select(this).attr('class', classes);
+                d3_select(this).attr('class', classes);
             }
         });
     };

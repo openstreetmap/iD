@@ -1,5 +1,9 @@
-import * as d3 from 'd3';
-import { geoEuclideanDistance } from '../geo/index';
+import {
+    geoIdentity as d3_geoIdentity,
+    geoStream as d3_geoStream
+} from 'd3-geo';
+
+import { geoEuclideanDistance } from '../geo';
 
 
 export function svgOneWaySegments(projection, graph, dt) {
@@ -9,14 +13,14 @@ export function svgOneWaySegments(projection, graph, dt) {
             i = 0,
             offset = dt,
             segments = [],
-            clip = d3.geoIdentity().clipExtent(projection.clipExtent()).stream,
+            clip = d3_geoIdentity().clipExtent(projection.clipExtent()).stream,
             coordinates = graph.childNodes(entity).map(function(n) {
                 return n.loc;
             });
 
         if (entity.tags.oneway === '-1') coordinates.reverse();
 
-        d3.geoStream({
+        d3_geoStream({
             type: 'LineString',
             coordinates: coordinates
         }, projection.stream(clip({
