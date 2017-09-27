@@ -20,3 +20,5 @@ mocha.setup({
 });
 
 expect = chai.expect;
+
+window.d3 = iD.d3;   // TODO: remove

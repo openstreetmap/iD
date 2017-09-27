@@ -1,3 +1,5 @@
+import * as d3 from 'd3';  // TODO: remove (needed for tests?)
+
 export * from './actions/index';
 export * from './behavior/index';
 export * from './core/index';
@@ -43,4 +45,4 @@ export var debug = false;
 
 import * as lib from './lib/index';
 
-export { lib };
+export { lib, d3 };
