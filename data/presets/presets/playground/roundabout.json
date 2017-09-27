@@ -1,0 +1,14 @@
+{
+    "icon": "stadium",
+    "fields": [
+        "bench"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "playground": "roundabout"
+    },
+    "name": "Play Roundabout"
+}

@@ -1,5 +1,4 @@
 /* global Mapillary:false */
-import _compact from 'lodash-es/compact';
 import _filter from 'lodash-es/filter';
 import _find from 'lodash-es/find';
 import _flatten from 'lodash-es/flatten';
@@ -256,11 +255,31 @@ function searchLimited(psize, limit, projection, rtree) {
     limit = limit || 3;
 
     var partitions = partitionViewport(psize, projection);
-    return _flatten(_compact(_map(partitions, function(extent) {
+    var results;
+
+    // console.time('previous');
+    results =  _flatten(_map(partitions, function(extent) {
         return rtree.search(extent.bbox())
             .slice(0, limit)
             .map(function(d) { return d.data; });
-    })));
+    }));
+    // console.timeEnd('previous');
+
+    // console.time('new');
+    // results = partitions.reduce(function(result, extent) {
+    //     var found = rtree.search(extent.bbox())
+    //         .map(function(d) { return d.data; })
+    //         .sort(function(a, b) {
+    //             return a.loc[1] - b.loc[1];
+    //             // return a.key.localeCompare(b.key);
+    //         })
+    //         .slice(0, limit);
+
+    //     return (found.length ? result.concat(found) : result);
+    // }, []);
+    // console.timeEnd('new');
+
+    return results;
 }
 
 

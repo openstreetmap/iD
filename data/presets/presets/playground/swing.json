@@ -1,0 +1,14 @@
+{
+    "icon": "playground",
+    "fields": [
+        "playground/baby",
+        "wheelchair"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "playground": "swing"
+    },
+    "name": "Swing"
+}

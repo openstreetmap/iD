@@ -9,11 +9,33 @@ var json = require('rollup-plugin-json');
 var http = require('http');
 var gaze = require('gaze');
 var ecstatic = require('ecstatic');
+var glob = require('glob');
+var concat = require('concat-files');
+
+function makeCSS() {
+    glob('css/**/*.css', function (er, files) {
+        if (er) console.error(er);   
+        concat(files, 'dist/iD.css', function (err) {
+            if (err) console.error(err);
+            console.log('css built');
+        });
+    }); 
+}
 
 var building = false;
 var cache;
-if (process.argv[2] === 'develop') {
+
+var isDevelopment = process.argv[2] === 'develop';
+
+if (isDevelopment) {
     build();
+    makeCSS();
+
+    gaze(['css/**/*.css'], function(err, watcher) {
+        watcher.on('all', function() {
+            makeCSS();
+        });
+    });
 
     gaze(['modules/**/*.js', 'data/**/*.{js,json}'], function(err, watcher) {
         watcher.on('all', function() {
@@ -29,6 +51,7 @@ if (process.argv[2] === 'develop') {
 
 } else {
     build();
+    makeCSS();
 }
 
 
