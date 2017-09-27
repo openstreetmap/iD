@@ -1,8 +1,19 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _chunk from 'lodash-es/chunk';
+import _extend from 'lodash-es/extend';
+import _forEach from 'lodash-es/forEach';
+import _filter from 'lodash-es/filter';
+import _find from 'lodash-es/find';
+import _groupBy from 'lodash-es/groupBy';
+import _isEmpty from 'lodash-es/isEmpty';
+import _map from 'lodash-es/map';
+import _uniq from 'lodash-es/uniq';
+
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { xml as d3_xml } from 'd3-request';
+
 import osmAuth from 'osm-auth';
 import { JXON } from '../util/jxon';
-import { d3geoTile } from '../lib/d3.geo.tile';
+import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 import { geoExtent } from '../geo';
 import {
     osmEntity,
@@ -14,7 +25,7 @@ import {
 import { utilRebind, utilIdleWorker } from '../util';
 
 
-var dispatch = d3.dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded'),
+var dispatch = d3_dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded'),
     urlroot = 'https://www.openstreetmap.org',
     blacklists = ['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*'],
     inflight = {},
@@ -149,7 +160,7 @@ var parsers = {
 
 
 function parse(xml, callback, options) {
-    options = _.extend({ cache: true }, options);
+    options = _extend({ cache: true }, options);
     if (!xml || !xml.childNodes) return;
 
     var root = xml.childNodes[0],
@@ -181,7 +192,7 @@ export default {
         userChangesets = undefined;
         userDetails = undefined;
         rateLimitError = undefined;
-        _.forEach(inflight, abortRequest);
+        _forEach(inflight, abortRequest);
         entityCache = {};
         loadedTiles = {};
         inflight = {};
@@ -219,7 +230,7 @@ export default {
 
 
     loadFromAPI: function(path, callback, options) {
-        options = _.extend({ cache: true }, options);
+        options = _extend({ cache: true }, options);
         var that = this;
 
         function done(err, xml) {
@@ -260,7 +271,7 @@ export default {
             return oauth.xhr({ method: 'GET', path: path }, done);
         } else {
             var url = urlroot + path;
-            return d3.xml(url).get(done);
+            return d3_xml(url).get(done);
         }
     },
 
@@ -298,12 +309,12 @@ export default {
     loadMultiple: function(ids, callback) {
         var that = this;
 
-        _.each(_.groupBy(_.uniq(ids), osmEntity.id.type), function(v, k) {
+        _forEach(_groupBy(_uniq(ids), osmEntity.id.type), function(v, k) {
             var type = k + 's',
-                osmIDs = _.map(v, osmEntity.id.toOSM),
+                osmIDs = _map(v, osmEntity.id.toOSM),
                 options = { cache: false };
 
-            _.each(_.chunk(osmIDs, 150), function(arr) {
+            _forEach(_chunk(osmIDs, 150), function(arr) {
                 that.loadFromAPI(
                     '/api/0.6/' + type + '?' + type + '=' + arr.join(),
                     function(err, entities) {
@@ -463,7 +474,7 @@ export default {
             }
         }
 
-        d3.xml(urlroot + '/api/capabilities').get()
+        d3_xml(urlroot + '/api/capabilities').get()
             .on('load', done)
             .on('error', callback);
     },
@@ -493,7 +504,7 @@ export default {
                 s / 2 - projection.translate()[1]
             ];
 
-        var tiles = d3geoTile()
+        var tiles = d3_geoTile()
             .scaleExtent([tileZoom, tileZoom])
             .scale(s)
             .size(dimensions)
@@ -510,8 +521,8 @@ export default {
                 };
             });
 
-        _.filter(inflight, function(v, i) {
-            var wanted = _.find(tiles, function(tile) {
+        _filter(inflight, function(v, i) {
+            var wanted = _find(tiles, function(tile) {
                 return i === tile.id;
             });
             if (!wanted) delete inflight[i];
@@ -523,7 +534,7 @@ export default {
 
             if (loadedTiles[id] || inflight[id]) return;
 
-            if (_.isEmpty(inflight)) {
+            if (_isEmpty(inflight)) {
                 dispatch.call('loading');
             }
 
@@ -536,10 +547,10 @@ export default {
                     }
 
                     if (callback) {
-                        callback(err, _.extend({ data: parsed }, tile));
+                        callback(err, _extend({ data: parsed }, tile));
                     }
 
-                    if (_.isEmpty(inflight)) {
+                    if (_isEmpty(inflight)) {
                         dispatch.call('loaded');
                     }
                 }
@@ -551,7 +562,7 @@ export default {
     switch: function(options) {
         urlroot = options.urlroot;
 
-        oauth.options(_.extend({
+        oauth.options(_extend({
             url: urlroot,
             loading: authLoading,
             done: authDone

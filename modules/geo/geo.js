@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import _every from 'lodash-es/every';
+import _some from 'lodash-es/some';
 
 
 export function geoRoundCoords(c) {
@@ -239,7 +240,7 @@ export function geoPointInPolygon(point, polygon) {
 
 
 export function geoPolygonContainsPolygon(outer, inner) {
-    return _.every(inner, function(point) {
+    return _every(inner, function(point) {
         return geoPointInPolygon(point, outer);
     });
 }
@@ -258,7 +259,7 @@ export function geoPolygonIntersectsPolygon(outer, inner, checkSegments) {
     }
 
     function testPoints(outer, inner) {
-        return _.some(inner, function(point) {
+        return _some(inner, function(point) {
             return geoPointInPolygon(point, outer);
         });
     }

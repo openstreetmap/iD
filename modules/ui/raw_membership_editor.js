@@ -1,6 +1,14 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { d3combobox } from '../lib/d3.combobox.js';
+import _extend from 'lodash-es/extend';
+import _filter from 'lodash-es/filter';
+import _groupBy from 'lodash-es/groupBy';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import { d3combobox as d3_combobox } from '../lib/d3.combobox.js';
+
 import { t } from '../util/locale';
 
 import {
@@ -8,14 +16,14 @@ import {
     actionAddMember,
     actionChangeMember,
     actionDeleteMember
-} from '../actions/index';
+} from '../actions';
 
-import { modeSelect } from '../modes/index';
-import { osmEntity, osmRelation } from '../osm/index';
-import { services } from '../services/index';
-import { svgIcon } from '../svg/index';
+import { modeSelect } from '../modes';
+import { osmEntity, osmRelation } from '../osm';
+import { services } from '../services';
+import { svgIcon } from '../svg';
 import { uiDisclosure } from './disclosure';
-import { utilDisplayName, utilNoAuto } from '../util/index';
+import { utilDisplayName, utilNoAuto } from '../util';
 
 
 export function uiRawMembershipEditor(context) {
@@ -24,15 +32,15 @@ export function uiRawMembershipEditor(context) {
 
 
     function selectRelation(d) {
-        d3.event.preventDefault();
+        d3_event.preventDefault();
         context.enter(modeSelect(context, [d.relation.id]));
     }
 
 
     function changeRole(d) {
-        var role = d3.select(this).property('value');
+        var role = d3_select(this).property('value');
         context.perform(
-            actionChangeMember(d.relation.id, _.extend({}, d.member, { role: role }), d.index),
+            actionChangeMember(d.relation.id, _extend({}, d.member, { role: role }), d.index),
             t('operations.change_role.annotation')
         );
     }
@@ -99,10 +107,10 @@ export function uiRawMembershipEditor(context) {
         });
 
         // Dedupe identical names by appending relation id - see #2891
-        var dupeGroups = _(result)
-            .groupBy('value')
-            .filter(function(v) { return v.length > 1; })
-            .value();
+        var dupeGroups = _filter(
+            _groupBy(result, 'value'),
+            function(v) { return v.length > 1; }
+        );
 
         dupeGroups.forEach(function(group) {
             group.forEach(function(obj) {
@@ -245,7 +253,7 @@ export function uiRawMembershipEditor(context) {
                 .merge(enter);
 
             newrow.selectAll('.member-entity-input')
-                .call(d3combobox()
+                .call(d3_combobox()
                     .container(context.container())
                     .minItems(1)
                     .fetcher(function(value, callback) { callback(relations(value)); })
@@ -277,7 +285,7 @@ export function uiRawMembershipEditor(context) {
 
 
             function bindTypeahead(d) {
-                var row = d3.select(this),
+                var row = d3_select(this),
                     role = row.selectAll('input.member-role');
 
                 function sort(value, data) {
@@ -293,7 +301,7 @@ export function uiRawMembershipEditor(context) {
                     return sameletter.concat(other);
                 }
 
-                role.call(d3combobox()
+                role.call(d3_combobox()
                     .container(context.container())
                     .fetcher(function(role, callback) {
                         var rtype = d.relation.tags.type;
@@ -310,10 +318,10 @@ export function uiRawMembershipEditor(context) {
 
 
             function unbind() {
-                var row = d3.select(this);
+                var row = d3_select(this);
 
                 row.selectAll('input.member-role')
-                    .call(d3combobox.off);
+                    .call(d3_combobox.off);
             }
         }
     }

@@ -1,5 +1,6 @@
-import * as d3 from 'd3';
-import { d3combobox } from '../lib/d3.combobox.js';
+import { select as d3_select } from 'd3-selection';
+import { d3combobox as d3_combobox } from '../lib/d3.combobox.js';
+
 import { t } from '../util/locale';
 import { utilGetSetValue, utilNoAuto } from '../util';
 
@@ -45,7 +46,7 @@ export function uiFormFields(context) {
         fields
             .order()
             .each(function(d) {
-                d3.select(this)
+                d3_select(this)
                     .call(d.render);
             });
 
@@ -95,7 +96,7 @@ export function uiFormFields(context) {
                 }
                 return placeholder.slice(0,3).join(', ') + ((placeholder.length > 3) ? '…' : '');
             })
-            .call(d3combobox()
+            .call(d3_combobox()
                 .container(context.container())
                 .data(notShown)
                 .minItems(1)

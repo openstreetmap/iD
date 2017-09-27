@@ -1,15 +1,17 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _debounce from 'lodash-es/debounce';
+
+import { select as d3_select } from 'd3-selection';
+
 import { t } from '../util/locale';
 import { svgIcon } from '../svg/index';
 
 
 export function uiContributors(context) {
     var osm = context.connection(),
-        debouncedUpdate = _.debounce(function() { update(); }, 1000),
+        debouncedUpdate = _debounce(function() { update(); }, 1000),
         limit = 4,
         hidden = false,
-        wrap = d3.select(null);
+        wrap = d3_select(null);
 
 
     function update() {
@@ -28,7 +30,7 @@ export function uiContributors(context) {
         wrap.html('')
             .call(svgIcon('#icon-nearby', 'pre-text light'));
 
-        var userList = d3.select(document.createElement('span'));
+        var userList = d3_select(document.createElement('span'));
 
         userList.selectAll()
             .data(subset)
@@ -41,7 +43,7 @@ export function uiContributors(context) {
             .text(String);
 
         if (u.length > limit) {
-            var count = d3.select(document.createElement('span'));
+            var count = d3_select(document.createElement('span'));
 
             count.append('a')
                 .attr('target', '_blank')

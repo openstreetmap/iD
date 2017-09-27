@@ -1,5 +1,5 @@
 import { t } from '../util/locale';
-import { svgIcon } from '../svg/index';
+import { svgIcon } from '../svg';
 
 
 export function uiViewOnOSM(context) {

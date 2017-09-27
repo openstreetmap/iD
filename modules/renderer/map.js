@@ -1,5 +1,21 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _compact from 'lodash-es/compact';
+import _map from 'lodash-es/map';
+import _values from 'lodash-es/values';
+
+import { set as d3_set } from 'd3-collection';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { interpolate as d3_interpolate } from 'd3-interpolate';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import {
+    zoom as d3_zoom,
+    zoomIdentity as d3_zoomIdentity
+} from 'd3-zoom';
+
 import { t } from '../util/locale';
 import { geoExtent } from '../geo';
 
@@ -35,7 +51,7 @@ import { utilGetDimensions } from '../util/dimensions';
 export function rendererMap(context) {
 
     var dimensions = [1, 1],
-        dispatch = d3.dispatch('move', 'drawn'),
+        dispatch = d3_dispatch('move', 'drawn'),
         projection = context.projection,
         curtainProjection = context.curtainProjection,
         dblclickEnabled = true,
@@ -51,19 +67,19 @@ export function rendererMap(context) {
         drawAreas = svgAreas(projection, context),
         drawMidpoints = svgMidpoints(projection, context),
         drawLabels = svgLabels(projection, context),
-        supersurface = d3.select(null),
-        wrapper = d3.select(null),
-        surface = d3.select(null),
+        supersurface = d3_select(null),
+        wrapper = d3_select(null),
+        surface = d3_select(null),
         mouse,
         mousemove;
 
-    var zoom = d3.zoom()
+    var zoom = d3_zoom()
             .scaleExtent([ztok(2), ztok(24)])
-            .interpolate(d3.interpolate)
+            .interpolate(d3_interpolate)
             .filter(zoomEventFilter)
             .on('zoom', zoomPan);
 
-    var _selection = d3.select(null);
+    var _selection = d3_select(null);
     var isRedrawScheduled = false;
     var pendingRedrawCall;
 
@@ -150,19 +166,19 @@ export function rendererMap(context) {
         surface
             .call(drawLabels.observe)
             .on('mousedown.zoom', function() {
-                if (d3.event.button === 2) {
-                    d3.event.stopPropagation();
+                if (d3_event.button === 2) {
+                    d3_event.stopPropagation();
                 }
             }, true)
             .on('mouseup.zoom', function() {
                 if (resetTransform()) immediateRedraw();
             })
             .on('mousemove.map', function() {
-                mousemove = d3.event;
+                mousemove = d3_event;
             })
             .on('mouseover.vertices', function() {
                 if (map.editable() && !transformed) {
-                    var hover = d3.event.target.__data__;
+                    var hover = d3_event.target.__data__;
                     surface.selectAll('.data-layer-osm')
                         .call(drawVertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
                     dispatch.call('drawn', this, {full: false});
@@ -170,7 +186,7 @@ export function rendererMap(context) {
             })
             .on('mouseout.vertices', function() {
                 if (map.editable() && !transformed) {
-                    var hover = d3.event.relatedTarget && d3.event.relatedTarget.__data__;
+                    var hover = d3_event.relatedTarget && d3_event.relatedTarget.__data__;
                     surface.selectAll('.data-layer-osm')
                         .call(drawVertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
                     dispatch.call('drawn', this, {full: false});
@@ -204,7 +220,7 @@ export function rendererMap(context) {
         // This can happen if a previous `mousedown` occurred without a `mouseup`.
         // If we detect this, dispatch `mouseup` to complete the orphaned gesture,
         // so that d3-zoom won't stop propagation of new `mousedown` events.
-        if (d3.event.type === 'mousedown') {
+        if (d3_event.type === 'mousedown') {
             var hasOrphan = false;
             var listeners = window.__on;
             for (var i = 0; i < listeners.length; i++) {
@@ -228,7 +244,7 @@ export function rendererMap(context) {
             }
         }
 
-        return d3.event.button !== 2;   // ignore right clicks
+        return d3_event.button !== 2;   // ignore right clicks
     }
 
 
@@ -253,7 +269,7 @@ export function rendererMap(context) {
 
         if (difference) {
             var complete = difference.complete(map.extent());
-            data = _.compact(_.values(complete));
+            data = _compact(_values(complete));
             filter = function(d) { return d.id in complete; };
             features.clear(data);
 
@@ -266,7 +282,7 @@ export function rendererMap(context) {
 
             if (extent) {
                 data = context.intersects(map.extent().intersection(extent));
-                var set = d3.set(_.map(data, 'id'));
+                var set = d3_set(_map(data, 'id'));
                 filter = function(d) { return set.has(d.id); };
 
             } else {
@@ -299,14 +315,14 @@ export function rendererMap(context) {
 
     function dblClick() {
         if (!dblclickEnabled) {
-            d3.event.preventDefault();
-            d3.event.stopImmediatePropagation();
+            d3_event.preventDefault();
+            d3_event.stopImmediatePropagation();
         }
     }
 
 
     function zoomPan(manualEvent) {
-        var event = (manualEvent || d3.event),
+        var event = (manualEvent || d3_event),
             source = event.sourceEvent,
             eventTransform = event.transform;
 
@@ -334,7 +350,7 @@ export function rendererMap(context) {
                 x2 = p0[0] - p1[0] * k2,
                 y2 = p0[1] - p1[1] * k2;
 
-            eventTransform = d3.zoomIdentity.translate(x2,y2).scale(k2);
+            eventTransform = d3_zoomIdentity.translate(x2,y2).scale(k2);
             _selection.node().__zoom = eventTransform;
         }
 
@@ -444,7 +460,7 @@ export function rendererMap(context) {
 
 
     map.mouse = function() {
-        var event = mousemove || d3.event;
+        var event = mousemove || d3_event;
         if (event) {
             var s;
             while ((s = event.sourceEvent)) { event = s; }
@@ -484,7 +500,7 @@ export function rendererMap(context) {
                 .transition()
                 .duration(duration)
                 .on('start', function() { map.startEase(); })
-                .call(zoom.transform, d3.zoomIdentity.translate(t2.x, t2.y).scale(t2.k));
+                .call(zoom.transform, d3_zoomIdentity.translate(t2.x, t2.y).scale(t2.k));
         } else {
             projection.transform(t2);
             transformStart = t2;
@@ -517,7 +533,7 @@ export function rendererMap(context) {
                 .transition()
                 .duration(duration)
                 .on('start', function() { map.startEase(); })
-                .call(zoom.transform, d3.zoomIdentity.translate(t[0], t[1]).scale(k2));
+                .call(zoom.transform, d3_zoomIdentity.translate(t[0], t[1]).scale(k2));
         } else {
             projection.translate(t);
             transformStart = projection.transform();
@@ -547,7 +563,7 @@ export function rendererMap(context) {
                 .transition()
                 .duration(duration)
                 .on('start', function() { map.startEase(); })
-                .call(zoom.transform, d3.zoomIdentity.translate(t[0], t[1]).scale(k));
+                .call(zoom.transform, d3_zoomIdentity.translate(t[0], t[1]).scale(k));
         } else {
             projection.translate(t);
             transformStart = projection.transform();
@@ -570,7 +586,7 @@ export function rendererMap(context) {
                 .transition()
                 .duration(duration)
                 .on('start', function() { map.startEase(); })
-                .call(zoom.transform, d3.zoomIdentity.translate(t[0], t[1]).scale(k));
+                .call(zoom.transform, d3_zoomIdentity.translate(t[0], t[1]).scale(k));
         } else {
             projection.translate(t);
             transformStart = projection.transform();

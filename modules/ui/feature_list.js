@@ -1,4 +1,8 @@
-import * as d3 from 'd3';
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
 import * as sexagesimal from '@mapbox/sexagesimal';
 import { t } from '../util/locale';
 import { geoExtent, geoChooseEdge } from '../geo/index';
@@ -59,7 +63,7 @@ export function uiFeatureList(context) {
         function keypress() {
             var q = search.property('value'),
                 items = list.selectAll('.feature-list-item');
-            if (d3.event.keyCode === 13 && q.length && items.size()) {
+            if (d3_event.keyCode === 13 && q.length && items.size()) {
                 click(items.datum());
             }
         }
@@ -224,7 +228,7 @@ export function uiFeatureList(context) {
                 .attr('class', 'label');
 
             label.each(function(d) {
-                d3.select(this)
+                d3_select(this)
                     .call(svgIcon('#icon-' + d.geometry, 'pre-text'));
             });
 
@@ -262,7 +266,7 @@ export function uiFeatureList(context) {
 
 
         function click(d) {
-            d3.event.preventDefault();
+            d3_event.preventDefault();
             if (d.location) {
                 context.map().centerZoom([d.location[1], d.location[0]], 20);
             }

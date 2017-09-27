@@ -1,5 +1,11 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _debounce from 'lodash-es/debounce';
+import _without from 'lodash-es/without';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
 import { t } from '../../util/locale';
 
 
@@ -11,7 +17,7 @@ export function uiPanelBackground(context) {
         'zoom', 'vintage', 'source', 'description', 'resolution', 'accuracy'
     ];
 
-    var debouncedRedraw = _.debounce(redraw, 250);
+    var debouncedRedraw = _debounce(redraw, 250);
 
     function redraw(selection) {
         if (currSourceName !== background.baseLayerSource().name()) {
@@ -50,17 +56,17 @@ export function uiPanelBackground(context) {
             .attr('href', '#')
             .attr('class', 'button button-toggle-tiles')
             .on('click', function() {
-                d3.event.preventDefault();
+                d3_event.preventDefault();
                 context.setDebug('tile', !context.getDebug('tile'));
                 selection.call(redraw);
             });
     }
 
 
-    var debouncedGetMetadata = _.debounce(getMetadata, 250);
+    var debouncedGetMetadata = _debounce(getMetadata, 250);
 
     function getMetadata(selection) {
-        var tile = d3.select('.layer-background img.tile-center');   // tile near viewport center
+        var tile = d3_select('.layer-background img.tile-center');   // tile near viewport center
         if (tile.empty()) return;
 
         var sourceName = currSourceName,
@@ -89,7 +95,7 @@ export function uiPanelBackground(context) {
                 .text(metadata.vintage);
 
             // update other metdata
-            _.without(metadataKeys, 'zoom', 'vintage')
+            _without(metadataKeys, 'zoom', 'vintage')
                 .forEach(function(k) {
                     var val = result[k];
                     metadata[k] = val;

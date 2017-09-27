@@ -1,4 +1,6 @@
-import _ from 'lodash';
+import _some from 'lodash-es/some';
+import _uniqBy from 'lodash-es/uniqBy';
+
 import { t } from '../util/locale';
 import { actionReflect } from '../actions';
 import { behaviorOperation } from '../behavior';
@@ -33,7 +35,7 @@ export function operationReflect(selectedIDs, context, axis) {
 
     operation.available = function() {
         var nodes = utilGetAllNodes(selectedIDs, context.graph());
-        return _.uniqBy(nodes, function(n) { return n.loc; }).length >= 3;
+        return _uniqBy(nodes, function(n) { return n.loc; }).length >= 3;
     };
 
 
@@ -41,9 +43,9 @@ export function operationReflect(selectedIDs, context, axis) {
         var reason;
         if (extent.area() && extent.percentContainedIn(context.extent()) < 0.8) {
             reason = 'too_large';
-        } else if (_.some(selectedIDs, context.hasHiddenConnections)) {
+        } else if (_some(selectedIDs, context.hasHiddenConnections)) {
             reason = 'connected_to_hidden';
-        } else if (_.some(selectedIDs, incompleteRelation)) {
+        } else if (_some(selectedIDs, incompleteRelation)) {
             reason = 'incomplete_relation';
         }
         return reason;

@@ -1,5 +1,9 @@
 import { actionDeleteNode } from './delete_node';
-import { geoEuclideanDistance, geoInterp } from '../geo/index';
+
+import {
+    geoEuclideanDistance,
+    geoInterp
+} from '../geo';
 
 
 /*

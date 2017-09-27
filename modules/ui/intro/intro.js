@@ -1,5 +1,12 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _difference from 'lodash-es/difference';
+import _uniq from 'lodash-es/uniq';
+import _values from 'lodash-es/values';
+
+import {
+    select as d3_select,
+    selectAll as d3_selectAll
+} from 'd3-selection';
+
 import { t, textDirection } from '../../util/locale';
 import { localize } from './helper';
 
@@ -63,7 +70,7 @@ export function uiIntro(context) {
             zoom = context.map().zoom(),
             background = context.background().baseLayerSource(),
             overlays = context.background().overlayLayerSources(),
-            opacity = d3.selectAll('#map .layer-background').style('opacity'),
+            opacity = d3_selectAll('#map .layer-background').style('opacity'),
             loadedTiles = osm && osm.loadedTiles(),
             baseEntities = context.history().graph().base().entities,
             countryCode = services.geocoder.countryCode;
@@ -74,7 +81,7 @@ export function uiIntro(context) {
         // Load semi-real data used in intro
         if (osm) { osm.toggle(false).reset(); }
         context.history().reset();
-        context.history().merge(d3.values(coreGraph().load(introGraph).entities));
+        context.history().merge(_values(coreGraph().load(introGraph).entities));
         context.history().checkpoint('initial');
         context.background().bing();
         overlays.forEach(function (d) { context.background().toggleOverlayLayer(d); });
@@ -84,7 +91,7 @@ export function uiIntro(context) {
             callback(null, t('intro.graph.countrycode'));
         };
 
-        d3.selectAll('#map .layer-background').style('opacity', 1);
+        d3_selectAll('#map .layer-background').style('opacity', 1);
 
         var curtain = uiCurtain();
         selection.call(curtain);
@@ -107,13 +114,13 @@ export function uiIntro(context) {
 
                     if (i < chapterFlow.length - 1) {
                         var next = chapterFlow[i + 1];
-                        d3.select('button.chapter-' + next)
+                        d3_select('button.chapter-' + next)
                             .classed('next', true);
                     }
 
                     // store walkthrough progress..
                     progress.push(chapter);
-                    context.storage('walkthrough_progress', _.uniq(progress).join(';'));
+                    context.storage('walkthrough_progress', _uniq(progress).join(';'));
                 });
             return s;
         });
@@ -121,19 +128,19 @@ export function uiIntro(context) {
         chapters[chapters.length - 1].on('startEditing', function() {
             // store walkthrough progress..
             progress.push('startEditing');
-            context.storage('walkthrough_progress', _.uniq(progress).join(';'));
+            context.storage('walkthrough_progress', _uniq(progress).join(';'));
 
             // store if walkthrough is completed..
-            var incomplete = _.difference(chapterFlow, progress);
+            var incomplete = _difference(chapterFlow, progress);
             if (!incomplete.length) {
                 context.storage('walkthrough_completed', 'yes');
             }
 
             curtain.remove();
             navwrap.remove();
-            d3.selectAll('#map .layer-background').style('opacity', opacity);
+            d3_selectAll('#map .layer-background').style('opacity', opacity);
             if (osm) { osm.toggle(true).reset().loadedTiles(loadedTiles); }
-            context.history().reset().merge(d3.values(baseEntities));
+            context.history().reset().merge(_values(baseEntities));
             context.background().baseLayerSource(background);
             overlays.forEach(function (d) { context.background().toggleOverlayLayer(d); });
             if (history) { context.history().fromJSON(history, false); }

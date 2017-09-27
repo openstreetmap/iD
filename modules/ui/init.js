@@ -1,5 +1,10 @@
-import * as d3 from 'd3';
-import { d3keybinding } from '../lib/d3.keybinding.js';
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 
@@ -249,14 +254,14 @@ export function uiInit(context) {
             map.dimensions(mapDimensions);
         }
 
-        d3.select(window)
+        d3_select(window)
             .on('resize.editor', onResize);
 
         onResize();
 
         function pan(d) {
             return function() {
-                d3.event.preventDefault();
+                d3_event.preventDefault();
                 context.pan(d, 100);
             };
         }
@@ -265,8 +270,8 @@ export function uiInit(context) {
         // pan amount
         var pa = 80;
 
-        var keybinding = d3keybinding('main')
-            .on('⌫', function() { d3.event.preventDefault(); })
+        var keybinding = d3_keybinding('main')
+            .on('⌫', function() { d3_event.preventDefault(); })
             .on('←', pan([pa, 0]))
             .on('↑', pan([0, pa]))
             .on('→', pan([-pa, 0]))
@@ -276,7 +281,7 @@ export function uiInit(context) {
             .on(['⇧→', uiCmd('⌘→')], pan([-mapDimensions[0], 0]))
             .on(['⇧↓', uiCmd('⌘↓')], pan([0, -mapDimensions[1]]));
 
-        d3.select(document)
+        d3_select(document)
             .call(keybinding);
 
         context.enter(modeBrowse(context));
@@ -319,7 +324,7 @@ export function uiInit(context) {
 
     function ui(node, callback) {
         renderCallback = callback;
-        var container = d3.select(node);
+        var container = d3_select(node);
         context.container(container);
         context.loadLocale(function(err) {
             if (!err) {

@@ -1,11 +1,23 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { d3keybinding } from '../lib/d3.keybinding.js';
+import _debounce from 'lodash-es/debounce';
+
+import {
+    descending as d3_descending,
+    ascending as d3_ascending
+} from 'd3-array';
+
+import {
+    event as d3_event,
+    select as d3_select,
+    selectAll as d3_selectAll
+} from 'd3-selection';
+
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+
 import { t, textDirection } from '../util/locale';
-import { geoMetersToOffset, geoOffsetToMeters } from '../geo/index';
+import { geoMetersToOffset, geoOffsetToMeters } from '../geo';
 import { utilDetect } from '../util/detect';
-import { utilSetTransform, utilCallWhenIdle } from '../util/index';
-import { svgIcon } from '../svg/index';
+import { utilSetTransform, utilCallWhenIdle } from '../util';
+import { svgIcon } from '../svg';
 import { uiMapInMap } from './map_in_map';
 import { uiCmd } from './cmd';
 import { uiTooltipHtml } from './tooltipHtml';
@@ -35,7 +47,7 @@ export function uiBackground(context) {
         function sortSources(a, b) {
             return a.best() && !b.best() ? -1
                 : b.best() && !a.best() ? 1
-                : d3.descending(a.area(), b.area()) || d3.ascending(a.name(), b.name()) || 0;
+                : d3_descending(a.area(), b.area()) || d3_ascending(a.name(), b.name()) || 0;
         }
 
 
@@ -58,7 +70,7 @@ export function uiBackground(context) {
 
         function setTooltips(selection) {
             selection.each(function(d, i, nodes) {
-                var item = d3.select(this).select('label'),
+                var item = d3_select(this).select('label'),
                     span = item.select('span'),
                     placement = (i < nodes.length / 2) ? 'bottom' : 'top',
                     description = d.description(),
@@ -104,7 +116,7 @@ export function uiBackground(context) {
                 return editCustom();
             }
 
-            d3.event.preventDefault();
+            d3_event.preventDefault();
             previous = context.background().baseLayerSource();
             context.background().baseLayerSource(d);
             selectLayer();
@@ -113,7 +125,7 @@ export function uiBackground(context) {
 
 
         function editCustom() {
-            d3.event.preventDefault();
+            d3_event.preventDefault();
             var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
             var template = window.prompt(
                 t('background.custom_prompt', { example: example }),
@@ -131,7 +143,7 @@ export function uiBackground(context) {
 
 
         function clickSetOverlay(d) {
-            d3.event.preventDefault();
+            d3_event.preventDefault();
             context.background().toggleOverlayLayer(d);
             selectLayer();
             document.activeElement.blur();
@@ -207,12 +219,12 @@ export function uiBackground(context) {
                 x = +meters[0].toFixed(2),
                 y = +meters[1].toFixed(2);
 
-            d3.selectAll('.nudge-inner-rect')
+            d3_selectAll('.nudge-inner-rect')
                 .select('input')
                 .classed('error', false)
                 .property('value', x + ', ' + y);
 
-            d3.selectAll('.nudge-reset')
+            d3_selectAll('.nudge-reset')
                 .classed('disabled', function() {
                     return (x === 0 && y === 0);
                 });
@@ -220,7 +232,7 @@ export function uiBackground(context) {
 
 
         function resetOffset() {
-            if (d3.event.button !== 0) return;
+            if (d3_event.button !== 0) return;
             context.background().offset([0, 0]);
             updateOffsetVal();
         }
@@ -233,7 +245,7 @@ export function uiBackground(context) {
 
 
         function buttonOffset(d) {
-            if (d3.event.button !== 0) return;
+            if (d3_event.button !== 0) return;
             var timeout = window.setTimeout(function() {
                     interval = window.setInterval(nudge.bind(null, d), 100);
                 }, 500),
@@ -242,12 +254,12 @@ export function uiBackground(context) {
             function doneNudge() {
                 window.clearTimeout(timeout);
                 window.clearInterval(interval);
-                d3.select(window)
+                d3_select(window)
                     .on('mouseup.buttonoffset', null, true)
                     .on('mousedown.buttonoffset', null, true);
             }
 
-            d3.select(window)
+            d3_select(window)
                 .on('mouseup.buttonoffset', doneNudge, true)
                 .on('mousedown.buttonoffset', doneNudge, true);
 
@@ -256,8 +268,8 @@ export function uiBackground(context) {
 
 
         function inputOffset() {
-            if (d3.event.button !== 0) return;
-            var input = d3.select(this);
+            if (d3_event.button !== 0) return;
+            var input = d3_select(this);
             var d = input.node().value;
 
             if (d === '') return resetOffset();
@@ -278,16 +290,16 @@ export function uiBackground(context) {
 
 
         function dragOffset() {
-            if (d3.event.button !== 0) return;
-            var origin = [d3.event.clientX, d3.event.clientY];
+            if (d3_event.button !== 0) return;
+            var origin = [d3_event.clientX, d3_event.clientY];
 
             context.container()
                 .append('div')
                 .attr('class', 'nudge-surface');
 
-            d3.select(window)
+            d3_select(window)
                 .on('mousemove.offset', function() {
-                    var latest = [d3.event.clientX, d3.event.clientY];
+                    var latest = [d3_event.clientX, d3_event.clientY];
                     var d = [
                         -(origin[0] - latest[0]) / 4,
                         -(origin[1] - latest[1]) / 4
@@ -297,16 +309,16 @@ export function uiBackground(context) {
                     nudge(d);
                 })
                 .on('mouseup.offset', function() {
-                    if (d3.event.button !== 0) return;
-                    d3.selectAll('.nudge-surface')
+                    if (d3_event.button !== 0) return;
+                    d3_selectAll('.nudge-surface')
                         .remove();
 
-                    d3.select(window)
+                    d3_select(window)
                         .on('mousemove.offset', null)
                         .on('mouseup.offset', null);
                 });
 
-            d3.event.preventDefault();
+            d3_event.preventDefault();
         }
 
 
@@ -316,8 +328,8 @@ export function uiBackground(context) {
 
 
         function toggle() {
-            if (d3.event) {
-                d3.event.preventDefault();
+            if (d3_event) {
+                d3_event.preventDefault();
             }
             tooltipBehavior.hide(button);
             setVisible(!button.classed('active'));
@@ -325,9 +337,9 @@ export function uiBackground(context) {
 
 
         function quickSwitch() {
-            if (d3.event) {
-                d3.event.stopImmediatePropagation();
-                d3.event.preventDefault();
+            if (d3_event) {
+                d3_event.stopImmediatePropagation();
+                d3_event.preventDefault();
             }
             if (previous) {
                 clickSetSource(previous);
@@ -343,7 +355,7 @@ export function uiBackground(context) {
                 if (show) {
                     selection
                         .on('mousedown.background-inside', function() {
-                            d3.event.stopPropagation();
+                            d3_event.stopPropagation();
                         });
 
                     content
@@ -364,7 +376,7 @@ export function uiBackground(context) {
                         .duration(200)
                         .style('right', '-300px')
                         .on('end', function() {
-                            d3.select(this).style('display', 'none');
+                            d3_select(this).style('display', 'none');
                         });
 
                     selection
@@ -466,7 +478,7 @@ export function uiBackground(context) {
             .attr('type', 'checkbox')
             .on('change', function() {
                 uiMapInMap.toggle();
-                d3.event.preventDefault();
+                d3_event.preventDefault();
             });
 
         minimapLabel
@@ -487,11 +499,11 @@ export function uiBackground(context) {
             .classed('hide-toggle', true)
             .classed('expanded', false)
             .on('click', function() {
-                if (d3.event.button !== 0) return;
-                var exp = d3.select(this).classed('expanded');
+                if (d3_event.button !== 0) return;
+                var exp = d3_select(this).classed('expanded');
                 nudgeContainer.style('display', exp ? 'none' : 'block');
-                d3.select(this).classed('expanded', !exp);
-                d3.event.preventDefault();
+                d3_select(this).classed('expanded', !exp);
+                d3_event.preventDefault();
             });
 
         var nudgeContainer = adjustments
@@ -515,8 +527,8 @@ export function uiBackground(context) {
             .append('input')
             .on('change', inputOffset)
             .on('mousedown', function() {
-                if (d3.event.button !== 0) return;
-                d3.event.stopPropagation();
+                if (d3_event.button !== 0) return;
+                d3_event.stopPropagation();
             });
 
         nudgeContainer
@@ -526,7 +538,7 @@ export function uiBackground(context) {
             .append('button')
             .attr('class', function(d) { return d[0] + ' nudge'; })
             .on('mousedown', function(d) {
-                if (d3.event.button !== 0) return;
+                if (d3_event.button !== 0) return;
                 buttonOffset(d[1]);
             });
 
@@ -540,7 +552,7 @@ export function uiBackground(context) {
             );
 
         context.map()
-            .on('move.background-update', _.debounce(utilCallWhenIdle(update), 1000));
+            .on('move.background-update', _debounce(utilCallWhenIdle(update), 1000));
 
         context.background()
             .on('change.background-update', update);
@@ -549,12 +561,12 @@ export function uiBackground(context) {
         update();
         setOpacity(opacityDefault);
 
-        var keybinding = d3keybinding('background')
+        var keybinding = d3_keybinding('background')
             .on(key, toggle)
             .on(uiCmd('⌘' + key), quickSwitch)
             .on([t('map_data.key'), t('help.key')], hide);
 
-        d3.select(document)
+        d3_select(document)
             .call(keybinding);
 
         context.surface().on('mousedown.background-outside', hide);

@@ -1,6 +1,12 @@
 /* eslint-disable no-console */
 
-const _ = require('lodash');
+const _cloneDeep = require('lodash/cloneDeep');
+const _extend = require('lodash/extend');
+const _forEach = require('lodash/forEach');
+const _isEmpty = require('lodash/isEmpty');
+const _merge = require('lodash/merge');
+const _toPairs = require('lodash/toPairs');
+
 const fs = require('fs');
 const glob = require('glob');
 const jsonschema = require('jsonschema');
@@ -67,7 +73,7 @@ fs.writeFileSync('data/taginfo.json', JSON.stringify(taginfo, null, 4));
 // Push changes from data/core.yaml into en.json
 var core = YAML.load(fs.readFileSync('data/core.yaml', 'utf8'));
 var imagery = YAML.load(fs.readFileSync('node_modules/editor-layer-index/i18n/en.yaml', 'utf8'));
-var en = _.merge(core, { en: { presets: tstrings }}, imagery);
+var en = _merge(core, { en: { presets: tstrings }}, imagery);
 fs.writeFileSync('dist/locales/en.json', JSON.stringify(en, null, 4));
 
 process.exit();
@@ -147,7 +153,7 @@ function suggestionsToPresets(presets) {
                     delete existing[name];
                 }
                 if (!existing[name]) {
-                    tags = _.extend({name: name.replace(/"/g, '')}, suggestions[key][value][name].tags);
+                    tags = _extend({name: name.replace(/"/g, '')}, suggestions[key][value][name].tags);
                     addSuggestion(item, tags, name.replace(/"/g, ''), count);
                 }
             }
@@ -164,7 +170,7 @@ function suggestionsToPresets(presets) {
         }
 
         presets[category.replace(/"/g, '')] = {
-            tags: parent.tags ? _.merge(tags, parent.tags) : tags,
+            tags: parent.tags ? _merge(tags, parent.tags) : tags,
             name: name,
             icon: parent.icon,
             geometry: parent.geometry,
@@ -201,20 +207,20 @@ function generatePresets() {
         presets[id] = preset;
     });
 
-    presets = _.merge(presets, suggestionsToPresets(presets));
+    presets = _merge(presets, suggestionsToPresets(presets));
     return presets;
 
 }
 
 function generateTranslations(fields, presets) {
-    var translations = _.cloneDeep(tstrings);
+    var translations = _cloneDeep(tstrings);
 
-    _.forEach(translations.fields, function(field, id) {
+    _forEach(translations.fields, function(field, id) {
         var f = fields[id];
         if (f.keys) {
-            field['label#'] = _.each(f.keys).map(function(key) { return key + '=*'; }).join(', ');
-            if (!_.isEmpty(field.options)) {
-                _.each(field.options, function(v,k) {
+            field['label#'] = _forEach(f.keys).map(function(key) { return key + '=*'; }).join(', ');
+            if (!_isEmpty(field.options)) {
+                _forEach(field.options, function(v,k) {
                     if (id === 'access') {
                         field.options[k]['title#'] = field.options[k]['description#'] = 'access=' + k;
                     } else {
@@ -224,8 +230,8 @@ function generateTranslations(fields, presets) {
             }
         } else if (f.key) {
             field['label#'] = f.key + '=*';
-            if (!_.isEmpty(field.options)) {
-                _.each(field.options, function(v,k) {
+            if (!_isEmpty(field.options)) {
+                _forEach(field.options, function(v,k) {
                     field.options[k + '#'] = f.key + '=' + k;
                 });
             }
@@ -236,10 +242,10 @@ function generateTranslations(fields, presets) {
         }
     });
 
-    _.forEach(translations.presets, function(preset, id) {
+    _forEach(translations.presets, function(preset, id) {
         var p = presets[id];
-        if (!_.isEmpty(p.tags))
-            preset['name#'] = _.toPairs(p.tags).map(function(pair) { return pair[0] + '=' + pair[1]; }).join(', ');
+        if (!_isEmpty(p.tags))
+            preset['name#'] = _toPairs(p.tags).map(function(pair) { return pair[0] + '=' + pair[1]; }).join(', ');
         if (p.searchable !== false) {
             if (p.terms && p.terms.length)
                 preset['terms#'] = 'terms: ' + p.terms.join();
@@ -269,7 +275,7 @@ function generateTaginfo(presets) {
         'tags': []
     };
 
-    _.forEach(presets, function(preset) {
+    _forEach(presets, function(preset) {
         if (preset.suggestion)
             return;
 
@@ -291,7 +297,7 @@ function generateTaginfo(presets) {
 }
 
 function validateCategoryPresets(categories, presets) {
-    _.forEach(categories, function(category) {
+    _forEach(categories, function(category) {
         if (category.members) {
             category.members.forEach(function(preset) {
                 if (presets[preset] === undefined) {
@@ -304,7 +310,7 @@ function validateCategoryPresets(categories, presets) {
 }
 
 function validatePresetFields(presets, fields) {
-    _.forEach(presets, function(preset) {
+    _forEach(presets, function(preset) {
         if (preset.fields) {
             preset.fields.forEach(function(field) {
                 if (fields[field] === undefined) {
@@ -317,7 +323,7 @@ function validatePresetFields(presets, fields) {
 }
 
 function validateDefaults (defaults, categories, presets) {
-    _.forEach(defaults.defaults, function (members, name) {
+    _forEach(defaults.defaults, function (members, name) {
         members.forEach(function (id) {
             if (!presets[id] && !categories[id]) {
                 console.error('Unknown category or preset: ' + id + ' in default ' + name);

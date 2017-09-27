@@ -1,6 +1,10 @@
-import _ from 'lodash';
+import _extend from 'lodash-es/extend';
+import _map from 'lodash-es/map';
+import _some from 'lodash-es/some';
+
 import { osmEntity } from './entity';
-import { geoExtent } from '../geo/index';
+import { geoExtent } from '../geo';
+
 
 export function osmNode() {
     if (!(this instanceof osmNode)) {
@@ -14,7 +18,7 @@ osmEntity.node = osmNode;
 
 osmNode.prototype = Object.create(osmEntity.prototype);
 
-_.extend(osmNode.prototype, {
+_extend(osmNode.prototype, {
 
     type: 'node',
 
@@ -65,7 +69,7 @@ _.extend(osmNode.prototype, {
             }
 
             // vertex is connected to multiple parent lines
-            if (parents.length > 1 && _.some(parents, isLine)) {
+            if (parents.length > 1 && _some(parents, isLine)) {
                 return true;
 
             } else if (parents.length === 1) {
@@ -121,7 +125,7 @@ _.extend(osmNode.prototype, {
                 '@lon': this.loc[0],
                 '@lat': this.loc[1],
                 '@version': (this.version || 0),
-                tag: _.map(this.tags, function(v, k) {
+                tag: _map(this.tags, function(v, k) {
                     return { keyAttributes: { k: k, v: v } };
                 })
             }

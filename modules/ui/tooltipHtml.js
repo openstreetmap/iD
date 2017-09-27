@@ -1,5 +1,6 @@
 import { t } from '../util/locale';
 
+
 export function uiTooltipHtml(text, key, heading) {
     var s = '';
 

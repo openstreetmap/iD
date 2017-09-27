@@ -1,4 +1,5 @@
-import * as d3 from 'd3';
+import { select as d3_select } from 'd3-selection';
+
 import { t } from '../util/locale';
 import { JXON } from '../util/jxon';
 import { actionDiscardTags } from '../actions';
@@ -50,7 +51,7 @@ export function uiCommitChanges(context) {
 
         itemsEnter
             .each(function(d) {
-                d3.select(this)
+                d3_select(this)
                     .call(svgIcon('#icon-' + d.entity.geometry(d.graph), 'pre-text ' + d.changeType));
             });
 

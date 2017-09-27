@@ -1,7 +1,8 @@
-import _ from 'lodash';
+import _uniq from 'lodash-es/uniq';
+
 import { t } from '../util/locale';
-import { actionCircularize } from '../actions/index';
-import { behaviorOperation } from '../behavior/index';
+import { actionCircularize } from '../actions';
+import { behaviorOperation } from '../behavior';
 
 
 export function operationCircularize(selectedIDs, context) {
@@ -20,7 +21,7 @@ export function operationCircularize(selectedIDs, context) {
     operation.available = function() {
         return selectedIDs.length === 1 &&
             entity.type === 'way' &&
-            _.uniq(entity.nodes).length > 1;
+            _uniq(entity.nodes).length > 1;
     };
 
 

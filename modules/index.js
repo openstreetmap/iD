@@ -1,3 +1,5 @@
+import * as d3 from 'd3';  // TODO: remove (needed for tests?)
+
 export * from './actions/index';
 export * from './behavior/index';
 export * from './core/index';
@@ -41,8 +43,6 @@ export { uiPresetEditor as uiPreset } from './ui/preset_editor';
 
 export var debug = false;
 
-import * as d3 from 'd3';
-import * as _ from 'lodash';
 import * as lib from './lib/index';
 
-export { d3, _, lib };
+export { lib, d3 };

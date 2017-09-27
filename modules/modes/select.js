@@ -1,9 +1,18 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { d3keybinding } from '../lib/d3.keybinding.js';
+import _intersection from 'lodash-es/intersection';
+import _map from 'lodash-es/map';
+import _uniq from 'lodash-es/uniq';
+import _values from 'lodash-es/values';
+import _without from 'lodash-es/without';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
 
-import { actionAddMidpoint } from '../actions/index';
+import { actionAddMidpoint } from '../actions';
 
 import {
     behaviorBreathe,
@@ -12,18 +21,18 @@ import {
     behaviorLasso,
     behaviorPaste,
     behaviorSelect
-} from '../behavior/index';
+} from '../behavior';
 
 import {
     geoExtent,
     geoChooseEdge,
     geoPointInPolygon
-} from '../geo/index';
+} from '../geo';
 
 import {
     osmNode,
     osmWay
-} from '../osm/index';
+} from '../osm';
 
 import { modeBrowse } from './browse';
 import { modeDragNode } from './drag_node';
@@ -45,7 +54,7 @@ export function modeSelect(context, selectedIDs) {
         button: 'browse'
     };
 
-    var keybinding = d3keybinding('select'),
+    var keybinding = d3_keybinding('select'),
         timeout = null,
         behaviors = [
             behaviorCopy(context),
@@ -102,13 +111,13 @@ export function modeSelect(context, selectedIDs) {
                 return [];  // selection includes some not vertexes
             }
 
-            var currParents = _.map(graph.parentWays(entity), 'id');
+            var currParents = _map(graph.parentWays(entity), 'id');
             if (!commonParents.length) {
                 commonParents = currParents;
                 continue;
             }
 
-            commonParents = _.intersection(commonParents, currParents);
+            commonParents = _intersection(commonParents, currParents);
             if (!commonParents.length) {
                 return [];
             }
@@ -177,7 +186,7 @@ export function modeSelect(context, selectedIDs) {
 
     function toggleMenu() {
         // deprecation warning - Radial Menu to be removed in iD v3
-        if (d3.select('.edit-menu, .radial-menu').empty()) {
+        if (d3_select('.edit-menu, .radial-menu').empty()) {
             positionMenu();
             showMenu();
         } else {
@@ -236,7 +245,7 @@ export function modeSelect(context, selectedIDs) {
 
 
         function dblclick() {
-            var target = d3.select(d3.event.target),
+            var target = d3_select(d3_event.target),
                 datum = target.datum();
 
             if (datum instanceof osmWay && !target.classed('fill')) {
@@ -249,16 +258,16 @@ export function modeSelect(context, selectedIDs) {
                     t('operations.add.annotation.vertex')
                 );
 
-                d3.event.preventDefault();
-                d3.event.stopPropagation();
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
 
             } else if (datum.type === 'midpoint') {
                 context.perform(
                     actionAddMidpoint({loc: datum.loc, edge: datum.edge}, osmNode()),
                     t('operations.add.annotation.vertex'));
 
-                d3.event.preventDefault();
-                d3.event.stopPropagation();
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
             }
         }
 
@@ -289,7 +298,7 @@ export function modeSelect(context, selectedIDs) {
             if (selection.empty()) {
                 // Return to browse mode if selected DOM elements have
                 // disappeared because the user moved them out of view..
-                var source = d3.event && d3.event.type === 'zoom' && d3.event.sourceEvent;
+                var source = d3_event && d3_event.type === 'zoom' && d3_event.sourceEvent;
                 if (drawn && source && (source.type === 'mousemove' || source.type === 'touchmove')) {
                     context.enter(modeBrowse(context));
                 }
@@ -306,7 +315,7 @@ export function modeSelect(context, selectedIDs) {
 
 
         function firstVertex() {
-            d3.event.preventDefault();
+            d3_event.preventDefault();
             var parent = singularParent();
             if (parent) {
                 var way = context.entity(parent);
@@ -318,7 +327,7 @@ export function modeSelect(context, selectedIDs) {
 
 
         function lastVertex() {
-            d3.event.preventDefault();
+            d3_event.preventDefault();
             var parent = singularParent();
             if (parent) {
                 var way = context.entity(parent);
@@ -330,7 +339,7 @@ export function modeSelect(context, selectedIDs) {
 
 
         function previousVertex() {
-            d3.event.preventDefault();
+            d3_event.preventDefault();
             var parent = singularParent();
             if (!parent) return;
 
@@ -354,7 +363,7 @@ export function modeSelect(context, selectedIDs) {
 
 
         function nextVertex() {
-            d3.event.preventDefault();
+            d3_event.preventDefault();
             var parent = singularParent();
             if (!parent) return;
 
@@ -378,8 +387,8 @@ export function modeSelect(context, selectedIDs) {
 
 
         function nextParent() {
-            d3.event.preventDefault();
-            var parents = _.uniq(commonParents());
+            d3_event.preventDefault();
+            var parents = _uniq(commonParents());
             if (!parents || parents.length < 2) return;
 
             var index = parents.indexOf(relatedParent);
@@ -402,7 +411,7 @@ export function modeSelect(context, selectedIDs) {
 
         if (!checkSelectedIDs()) return;
 
-        var operations = _.without(d3.values(Operations), Operations.operationDelete)
+        var operations = _without(_values(Operations), Operations.operationDelete)
                 .map(function(o) { return o(selectedIDs, context); })
                 .filter(function(o) { return o.available(); });
 
@@ -434,7 +443,7 @@ export function modeSelect(context, selectedIDs) {
             .on('⎋', esc, true)
             .on('space', toggleMenu);
 
-        d3.select(document)
+        d3_select(document)
             .call(keybinding);
 
 

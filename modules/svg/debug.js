@@ -1,10 +1,12 @@
-import * as d3 from 'd3';
-import { geoPolygonIntersectsPolygon } from '../geo/index';
+import { geoPath as d3_geoPath } from 'd3-geo';
+import { select as d3_select } from 'd3-selection';
+
+import { geoPolygonIntersectsPolygon } from '../geo';
 import {
     data,
     dataImperial,
     dataDriveLeft
-} from '../../data/index';
+} from '../../data';
 
 
 export function svgDebug(projection, context) {
@@ -24,7 +26,7 @@ export function svgDebug(projection, context) {
             showsImagery = context.getDebug('imagery'),
             showsImperial = context.getDebug('imperial'),
             showsDriveLeft = context.getDebug('driveLeft'),
-            path = d3.geoPath(projection);
+            path = d3_geoPath(projection);
 
 
         var debugData = [];
@@ -45,7 +47,7 @@ export function svgDebug(projection, context) {
         }
 
 
-        var legend = d3.select('#content')
+        var legend = d3_select('#content')
             .selectAll('.debug-legend')
             .data(debugData.length ? [0] : []);
 

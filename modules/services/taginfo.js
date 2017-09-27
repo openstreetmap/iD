@@ -1,5 +1,10 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _debounce from 'lodash-es/debounce';
+import _extend from 'lodash-es/extend';
+import _forEach from 'lodash-es/forEach';
+import _omit from 'lodash-es/omit';
+
+import { json as d3_json } from 'd3-request';
+
 import { utilQsString } from '../util';
 
 
@@ -59,7 +64,7 @@ function setSortMembers(params) {
 
 
 function clean(params) {
-    return _.omit(params, ['geometry', 'debounce']);
+    return _omit(params, ['geometry', 'debounce']);
 }
 
 
@@ -131,14 +136,14 @@ function sortKeys(a, b) {
 }
 
 
-var debouncedRequest = _.debounce(request, 500, { leading: false });
+var debouncedRequest = _debounce(request, 500, { leading: false });
 
 function request(url, params, exactMatch, callback, loaded) {
     if (inflight[url]) return;
 
     if (checkCache(url, params, exactMatch, callback)) return;
 
-    inflight[url] = d3.json(url, function (err, data) {
+    inflight[url] = d3_json(url, function (err, data) {
         delete inflight[url];
         loaded(err, data);
     });
@@ -194,7 +199,7 @@ export default {
 
 
     reset: function() {
-        _.forEach(inflight, function(req) { req.abort(); });
+        _forEach(inflight, function(req) { req.abort(); });
         inflight = {};
     },
 
@@ -202,7 +207,7 @@ export default {
     keys: function(params, callback) {
         var doRequest = params.debounce ? debouncedRequest : request;
         params = clean(setSort(params));
-        params = _.extend({ rp: 10, sortname: 'count_all', sortorder: 'desc', page: 1 }, params);
+        params = _extend({ rp: 10, sortname: 'count_all', sortorder: 'desc', page: 1 }, params);
 
         var url = apibase + 'keys/all?' + utilQsString(params);
         doRequest(url, params, false, callback, function(err, d) {
@@ -221,7 +226,7 @@ export default {
     multikeys: function(params, callback) {
         var doRequest = params.debounce ? debouncedRequest : request;
         params = clean(setSort(params));
-        params = _.extend({ rp: 25, sortname: 'count_all', sortorder: 'desc', page: 1 }, params);
+        params = _extend({ rp: 25, sortname: 'count_all', sortorder: 'desc', page: 1 }, params);
         var prefix = params.query;
 
         var url = apibase + 'keys/all?' + utilQsString(params);
@@ -248,7 +253,7 @@ export default {
 
         var doRequest = params.debounce ? debouncedRequest : request;
         params = clean(setSort(setFilter(params)));
-        params = _.extend({ rp: 25, sortname: 'count_all', sortorder: 'desc', page: 1 }, params);
+        params = _extend({ rp: 25, sortname: 'count_all', sortorder: 'desc', page: 1 }, params);
 
         var url = apibase + 'key/values?' + utilQsString(params);
         doRequest(url, params, false, callback, function(err, d) {
@@ -275,7 +280,7 @@ export default {
         var doRequest = params.debounce ? debouncedRequest : request;
         var geometry = params.geometry;
         params = clean(setSortMembers(params));
-        params = _.extend({ rp: 25, sortname: 'count_all_members', sortorder: 'desc', page: 1 }, params);
+        params = _extend({ rp: 25, sortname: 'count_all_members', sortorder: 'desc', page: 1 }, params);
 
         var url = apibase + 'relation/roles?' + utilQsString(params);
         doRequest(url, params, true, callback, function(err, d) {

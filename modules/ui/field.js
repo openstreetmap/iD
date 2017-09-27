@@ -1,5 +1,14 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _clone from 'lodash-es/clone';
+import _extend from 'lodash-es/extend';
+import _some from 'lodash-es/some';
+
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
 import { textDirection } from '../util/locale';
 import { svgIcon } from '../svg';
 import { uiFields } from './fields';
@@ -8,7 +17,7 @@ import { utilRebind } from '../util';
 
 
 export function uiField(context, presetField, entity, options) {
-    options = _.extend({
+    options = _extend({
         show: true,
         wrap: true,
         remove: true,
@@ -16,8 +25,8 @@ export function uiField(context, presetField, entity, options) {
         info: true
     }, options);
 
-    var dispatch = d3.dispatch('change'),
-        field = _.clone(presetField),
+    var dispatch = d3_dispatch('change'),
+        field = _clone(presetField),
         show = options.show,
         state = '',
         tags = {};
@@ -38,22 +47,22 @@ export function uiField(context, presetField, entity, options) {
     function isModified() {
         if (!entity) return false;
         var original = context.graph().base().entities[entity.id];
-        return _.some(field.keys, function(key) {
+        return _some(field.keys, function(key) {
             return original ? tags[key] !== original.tags[key] : tags[key];
         });
     }
 
 
     function isPresent() {
-        return _.some(field.keys, function(key) {
+        return _some(field.keys, function(key) {
             return tags[key];
         });
     }
 
 
     function revert(d) {
-        d3.event.stopPropagation();
-        d3.event.preventDefault();
+        d3_event.stopPropagation();
+        d3_event.preventDefault();
         if (!entity) return false;
 
         var original = context.graph().base().entities[entity.id],
@@ -67,8 +76,8 @@ export function uiField(context, presetField, entity, options) {
 
 
     function remove(d) {
-        d3.event.stopPropagation();
-        d3.event.preventDefault();
+        d3_event.stopPropagation();
+        d3_event.preventDefault();
 
         var t = {};
         d.keys.forEach(function(key) {
@@ -146,11 +155,11 @@ export function uiField(context, presetField, entity, options) {
                     }
                 }
 
-                d3.select(this)
+                d3_select(this)
                     .call(d.impl);
 
                 if (options.wrap && options.info) {
-                    d3.select(this)
+                    d3_select(this)
                         .call(reference.body)
                         .select('.form-label-button-wrap')
                         .call(reference.button);
@@ -186,7 +195,7 @@ export function uiField(context, presetField, entity, options) {
 
 
     field.isShown = function() {
-        return show || _.some(field.keys, function(key) { return !!tags[key]; });
+        return show || _some(field.keys, function(key) { return !!tags[key]; });
     };
 
 

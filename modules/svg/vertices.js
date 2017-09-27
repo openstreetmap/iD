@@ -1,6 +1,7 @@
-import * as d3 from 'd3';
-import { dataFeatureIcons } from '../../data/index';
-import { osmEntity } from '../osm/index';
+import _values from 'lodash-es/values';
+
+import { dataFeatureIcons } from '../../data';
+import { osmEntity } from '../osm';
 import { svgPointTransform } from './index';
 
 
@@ -194,7 +195,7 @@ export function svgVertices(projection, context) {
         var layer = selection.selectAll('.layer-hit');
 
         layer.selectAll('g.vertex.vertex-hover')
-            .call(draw, d3.values(hovered), 'vertex-hover', graph, zoom);
+            .call(draw, _values(hovered), 'vertex-hover', graph, zoom);
     }
 
 

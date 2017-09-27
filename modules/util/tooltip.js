@@ -1,5 +1,6 @@
-import * as d3 from 'd3';
+import { select as d3_select } from 'd3-selection';
 import { utilFunctor } from './index';
+
 
 export function tooltip() {
   var tooltip = function(selection) {
@@ -82,7 +83,7 @@ export function tooltip() {
 
 
   function setup() {
-    var root = d3.select(this),
+    var root = d3_select(this),
         animate = animation.apply(this, arguments),
         tip = root.selectAll('.tooltip').data([0]);
 
@@ -114,7 +115,7 @@ export function tooltip() {
 
 
   function show() {
-    var root = d3.select(this),
+    var root = d3_select(this),
       content = title.apply(this, arguments),
       tip = root.selectAll('.tooltip')
         .classed('in', true),
@@ -152,7 +153,7 @@ export function tooltip() {
 
 
   function hide() {
-    d3.select(this).selectAll('.tooltip')
+    d3_select(this).selectAll('.tooltip')
       .classed('in', false);
 
     this.tooltipVisible = false;
@@ -172,7 +173,7 @@ export function tooltip() {
 
 
 function getPosition(node) {
-  var mode = d3.select(node).style('position');
+  var mode = d3_select(node).style('position');
   if (mode === 'absolute' || mode === 'static') {
     return {
       x: node.offsetLeft,

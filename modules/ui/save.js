@@ -1,8 +1,15 @@
-import * as d3 from 'd3';
-import { d3keybinding } from '../lib/d3.keybinding.js';
+import { interpolateRgb as d3_interpolateRgb } from 'd3-interpolate';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+
 import { t } from '../util/locale';
-import { modeSave } from '../modes/index';
-import { svgIcon } from '../svg/index';
+import { modeSave } from '../modes';
+import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
 import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
@@ -19,7 +26,7 @@ export function uiSave(context) {
 
 
     function save() {
-        d3.event.preventDefault();
+        d3_event.preventDefault();
         if (!context.inIntro() && !saving() && history.hasChanges()) {
             context.enter(modeSave(context));
         }
@@ -32,10 +39,10 @@ export function uiSave(context) {
             return null;
         } else if (numChanges <= 50) {
             step = numChanges / 50;
-            return d3.interpolateRgb('#fff', '#ff8')(step);  // white -> yellow
+            return d3_interpolateRgb('#fff', '#ff8')(step);  // white -> yellow
         } else {
             step = Math.min((numChanges - 50) / 50, 1.0);
-            return d3.interpolateRgb('#ff8', '#f88')(step);  // yellow -> red
+            return d3_interpolateRgb('#ff8', '#f88')(step);  // yellow -> red
         }
     }
 
@@ -93,10 +100,10 @@ export function uiSave(context) {
         updateCount();
 
 
-        var keybinding = d3keybinding('save')
+        var keybinding = d3_keybinding('save')
             .on(key, save, true);
 
-        d3.select(document)
+        d3_select(document)
             .call(keybinding);
 
         context.history()

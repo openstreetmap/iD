@@ -2,6 +2,7 @@
 
 var fs = require('fs');
 var rollup = require('rollup');
+var includePaths = require('rollup-plugin-includepaths');
 var nodeResolve = require('rollup-plugin-node-resolve');
 var commonjs = require('rollup-plugin-commonjs');
 var json = require('rollup-plugin-json');
@@ -73,8 +74,15 @@ function build() {
     rollup.rollup({
         entry: './modules/id.js',
         plugins: [
+            includePaths({
+                paths: [
+                    'node_modules/d3/node_modules'  // for npm 2
+                ]
+            }),
             nodeResolve({
-                jsnext: true, main: true, browser: false
+                module: true,
+                main: true,
+                browser: false
             }),
             commonjs(),
             json()

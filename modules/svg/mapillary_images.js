@@ -1,14 +1,14 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _throttle from 'lodash-es/throttle';
+import { select as d3_select } from 'd3-selection';
 import { svgPointTransform } from './point_transform';
-import { services } from '../services/index';
+import { services } from '../services';
 
 
 export function svgMapillaryImages(projection, context, dispatch) {
-    var throttledRedraw = _.throttle(function () { dispatch.call('change'); }, 1000),
+    var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000),
         minZoom = 12,
         minViewfieldZoom = 17,
-        layer = d3.select(null),
+        layer = d3_select(null),
         _mapillary;
 
 

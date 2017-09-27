@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import _filter from 'lodash-es/filter';
+
 import { t } from '../../util/locale';
 import { svgIcon } from '../../svg';
 
@@ -91,7 +92,7 @@ export function uiPanelHistory(context) {
 
 
     function redraw(selection) {
-        var selected = _.filter(context.selectedIDs(), function(e) { return context.hasEntity(e); }),
+        var selected = _filter(context.selectedIDs(), function(e) { return context.hasEntity(e); }),
             singular = selected.length === 1 ? selected[0] : null;
 
         osm = context.connection();

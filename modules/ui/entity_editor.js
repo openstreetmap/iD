@@ -1,10 +1,21 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _clone from 'lodash-es/clone';
+import _forEach from 'lodash-es/forEach';
+import _isEmpty from 'lodash-es/isEmpty';
+import _isEqual from 'lodash-es/isEqual';
+import _some from 'lodash-es/some';
+
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
+import {
+    event as d3_event,
+    selectAll as d3_selectAll
+} from 'd3-selection';
+
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
-import { actionChangeTags } from '../actions/index';
-import { modeBrowse } from '../modes/index';
-import { svgIcon } from '../svg/index';
+import { actionChangeTags } from '../actions';
+import { modeBrowse } from '../modes';
+import { svgIcon } from '../svg';
 import { uiPresetIcon } from './preset_icon';
 import { uiRawMemberEditor } from './raw_member_editor';
 import { uiRawMembershipEditor } from './raw_membership_editor';
@@ -15,7 +26,7 @@ import { utilRebind } from '../util';
 
 
 export function uiEntityEditor(context) {
-    var dispatch = d3.dispatch('choose'),
+    var dispatch = d3_dispatch('choose'),
         state = 'select',
         coalesceChanges = false,
         modified = false,
@@ -32,7 +43,7 @@ export function uiEntityEditor(context) {
 
     function entityEditor(selection) {
         var entity = context.entity(entityId),
-            tags = _.clone(entity.tags);
+            tags = _clone(entity.tags);
 
         // Header
         var header = selection.selectAll('.header')
@@ -170,8 +181,8 @@ export function uiEntityEditor(context) {
             .on('keydown.key-trap', function() {
                 // On tabbing, send focus back to the first field on the inspector-body
                 // (probably the `name` field) #4159
-                if (d3.event.keyCode === 9 && !d3.event.shiftKey) {
-                    d3.event.preventDefault();
+                if (d3_event.keyCode === 9 && !d3_event.shiftKey) {
+                    d3_event.preventDefault();
                     body.select('input').node().focus();
                 }
             });
@@ -189,7 +200,7 @@ export function uiEntityEditor(context) {
 
             var match = context.presets().match(entity, graph);
             var activePreset = entityEditor.preset();
-            var weakPreset = activePreset && _.isEmpty(activePreset.addTags);
+            var weakPreset = activePreset && _isEmpty(activePreset.addTags);
 
             // A "weak" preset doesn't set any tags. (e.g. "Address")
             // Don't replace a weak preset with a fallback preset (e.g. "Point")
@@ -210,7 +221,7 @@ export function uiEntityEditor(context) {
             }
 
             var blacklist = ['description', 'note', 'fixme'];
-            if (_.some(blacklist, function(s) { return k.indexOf(s) !== -1; })) return v;
+            if (_some(blacklist, function(s) { return k.indexOf(s) !== -1; })) return v;
 
             var cleaned = v.split(';')
                 .map(function(s) { return s.trim(); })
@@ -245,9 +256,9 @@ export function uiEntityEditor(context) {
     function changeTags(changed, onInput) {
         var entity = context.entity(entityId),
             annotation = t('operations.change_tags.annotation'),
-            tags = _.clone(entity.tags);
+            tags = _clone(entity.tags);
 
-        _.forEach(changed, function(v, k) {
+        _forEach(changed, function(v, k) {
             if (v !== undefined || tags.hasOwnProperty(k)) {
                 tags[k] = v;
             }
@@ -257,7 +268,7 @@ export function uiEntityEditor(context) {
             tags = clean(tags);
         }
 
-        if (!_.isEqual(entity.tags, tags)) {
+        if (!_isEqual(entity.tags, tags)) {
             if (coalesceChanges) {
                 context.overwrite(actionChangeTags(entityId, tags), annotation);
             } else {
@@ -271,7 +282,7 @@ export function uiEntityEditor(context) {
     entityEditor.modified = function(_) {
         if (!arguments.length) return modified;
         modified = _;
-        d3.selectAll('button.preset-close use')
+        d3_selectAll('button.preset-close use')
             .attr('xlink:href', (modified ? '#icon-apply' : '#icon-close'));
     };
 

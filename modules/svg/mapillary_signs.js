@@ -1,12 +1,13 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { services } from '../services/index';
+import _some from 'lodash-es/some';
+import _throttle from 'lodash-es/throttle';
+import { select as d3_select } from 'd3-selection';
+import { services } from '../services';
 
 
 export function svgMapillarySigns(projection, context, dispatch) {
-    var throttledRedraw = _.throttle(function () { dispatch.call('change'); }, 1000),
+    var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000),
         minZoom = 12,
-        layer = d3.select(null),
+        layer = d3_select(null),
         _mapillary;
 
 
@@ -91,7 +92,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
             .attr('width', '24px')      // for Firefox
             .attr('height', '24px')     // for Firefox
             .classed('selected', function(d) {
-                return _.some(d.detections, function(detection) {
+                return _some(d.detections, function(detection) {
                     return detection.image_key === imageKey;
                 });
             })

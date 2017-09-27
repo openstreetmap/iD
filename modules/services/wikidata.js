@@ -1,5 +1,5 @@
 import { jsonpRequest } from '../util/jsonp_request';
-import { utilQsString } from '../util/index';
+import { utilQsString } from '../util';
 
 
 var endpoint = 'https://www.wikidata.org/w/api.php?';

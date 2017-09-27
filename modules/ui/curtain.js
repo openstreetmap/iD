@@ -1,4 +1,10 @@
-import * as d3 from 'd3';
+import { easeLinear as d3_easeLinear } from 'd3-ease';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
 import { textDirection } from '../util/locale';
 import { uiToggle } from './toggle';
 
@@ -6,9 +12,9 @@ import { uiToggle } from './toggle';
 // Tooltips and svg mask used to highlight certain features
 export function uiCurtain() {
 
-    var surface = d3.select(null),
-        tooltip = d3.select(null),
-        darkness = d3.select(null);
+    var surface = d3_select(null),
+        tooltip = d3_select(null),
+        darkness = d3_select(null);
 
     function curtain(selection) {
         surface = selection
@@ -25,7 +31,7 @@ export function uiCurtain() {
             .attr('y', 0)
             .attr('class', 'curtain-darkness');
 
-        d3.select(window).on('resize.curtain', resize);
+        d3_select(window).on('resize.curtain', resize);
 
         tooltip = selection.append('div')
             .attr('class', 'tooltip')
@@ -66,7 +72,7 @@ export function uiCurtain() {
      */
     curtain.reveal = function(box, text, options) {
         if (typeof box === 'string') {
-            box = d3.select(box).node();
+            box = d3_select(box).node();
         }
         if (box && box.getBoundingClientRect) {
             box = copyBox(box.getBoundingClientRect());
@@ -78,7 +84,7 @@ export function uiCurtain() {
         if (options.tooltipBox) {
             tooltipBox = options.tooltipBox;
             if (typeof tooltipBox === 'string') {
-                tooltipBox = d3.select(tooltipBox).node();
+                tooltipBox = d3_select(tooltipBox).node();
             }
             if (tooltipBox && tooltipBox.getBoundingClientRect) {
                 tooltipBox = copyBox(tooltipBox.getBoundingClientRect());
@@ -113,7 +119,7 @@ export function uiCurtain() {
                 var button = tooltip.selectAll('.button-section .button.action');
                 button
                     .on('click', function() {
-                        d3.event.preventDefault();
+                        d3_event.preventDefault();
                         options.buttonCallback();
                     });
             }
@@ -231,7 +237,7 @@ export function uiCurtain() {
             selection = darkness
                 .transition()
                 .duration(duration || 600)
-                .ease(d3.easeLinear);
+                .ease(d3_easeLinear);
         }
 
         selection
@@ -254,7 +260,7 @@ export function uiCurtain() {
     curtain.remove = function() {
         surface.remove();
         tooltip.remove();
-        d3.select(window).on('resize.curtain', null);
+        d3_select(window).on('resize.curtain', null);
     };
 
 

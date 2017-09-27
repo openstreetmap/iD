@@ -1,12 +1,14 @@
-import _ from 'lodash';
+import _extend from 'lodash-es/extend';
+import _groupBy from 'lodash-es/groupBy';
+import _uniq from 'lodash-es/uniq';
 
 
 export function actionMerge(ids) {
 
     function groupEntitiesByGeometry(graph) {
         var entities = ids.map(function(id) { return graph.entity(id); });
-        return _.extend({point: [], area: [], line: [], relation: []},
-            _.groupBy(entities, function(entity) { return entity.geometry(graph); }));
+        return _extend({point: [], area: [], line: [], relation: []},
+            _groupBy(entities, function(entity) { return entity.geometry(graph); }));
     }
 
 
@@ -23,7 +25,7 @@ export function actionMerge(ids) {
                 graph = graph.replace(parent.replaceMember(point, target));
             });
 
-            var nodes = _.uniq(graph.childNodes(target)),
+            var nodes = _uniq(graph.childNodes(target)),
                 removeNode = point;
 
             for (var i = 0; i < nodes.length; i++) {
