@@ -178,7 +178,7 @@ function suggestionsToPresets(presets) {
                     delete existing[name];
                 }
                 if (!existing[name]) {
-                    tags = _.extend({name: name.replace(/"/g, '')}, suggestions[key][value][name].tags);
+                    tags = _extend({name: name.replace(/"/g, '')}, suggestions[key][value][name].tags);
                     addSuggestion(item, tags, name.replace(/"/g, ''), count);
                 }
             }
@@ -380,7 +380,7 @@ function writeEnJson(tstrings) {
     return Promise.all([readCoreYaml, readImagery]).then(function(data) {
         var core = YAML.load(data[0]);
         var imagery = YAML.load(data[1]);
-        var en = _.merge(core, { en: { presets: tstrings } }, imagery);
+        var en = _merge(core, { en: { presets: tstrings } }, imagery);
         return writeFileProm(
             'dist/locales/en.json',
             JSON.stringify(en, null, 4)
