@@ -9,14 +9,26 @@ module.exports = function buildCSS(isDevelopment) {
         console.log('building css');
         console.time(colors.green('css built'));
         building = true;
-        glob('css/**/*.css', function (er, files) {
-            if (er) console.error(er);   
-            concat(files, 'dist/iD.css', function (err) {
-                if (err) console.error(err);
+        return concatFilesProm('css/**/*.css', 'dist/iD.css')
+            .then(function () {
                 console.timeEnd(colors.green('css built'));
-                building = false;                
+                building = false;    
+            })
+            .catch(function (err) {
+                console.error(err);
+                process.exit(1);
             });
-        }); 
     };
 };
 
+function concatFilesProm(globPath, output) {
+    return new Promise(function (res, rej) {
+        glob(globPath, function (er, files) {
+            if (er) return rej(er);
+            concat(files, output, function (err) {
+                if (err) return rej(err);
+                res();
+            });
+        }); 
+    });
+}

@@ -1,4 +1,3 @@
-
 var fs = require('fs');
 var rollup = require('rollup');
 var nodeResolve = require('rollup-plugin-node-resolve');
@@ -12,40 +11,49 @@ module.exports = function buildSrc(isDevelopment) {
     var building = false;
     return function() {
         if (building) return;
-    
+
         // Start clean
         unlink('dist/iD.js');
         unlink('dist/iD.js.map');
-    
-        building = true;
+
         console.log('building src');
         console.time(colors.green('src built'));
+
+        building = true;
     
-        rollup.rollup({
-            entry: './modules/id.js',
-            plugins: [
-                nodeResolve({
-                    jsnext: true, main: true, browser: false
-                }),
-                commonjs(),
-                json()
-            ],
-            cache: cache
-        }).then(function (bundle) {
-            bundle.write({
-                format: 'iife',
-                dest: 'dist/iD.js',
-                sourceMap: true,
-                useStrict: false
+        return rollup
+            .rollup({
+                entry: './modules/id.js',
+                plugins: [
+                    nodeResolve({
+                        jsnext: true,
+                        main: true,
+                        browser: false
+                    }),
+                    commonjs(),
+                    json()
+                ],
+                cache: cache
+            })
+            .then(function(bundle) {
+                cache = bundle;
+                return bundle.write({
+                    format: 'iife',
+                    dest: 'dist/iD.js',
+                    sourceMap: true,
+                    useStrict: false
+                });
+            })
+            .then(function() {
+                building = false;
+                console.timeEnd(colors.green('src built'));
+            })
+            .catch(function(err) {
+                building = false;
+                cache = undefined;
+                console.error(err);
+                process.exit(1);
             });
-            building = false;
-            cache = bundle;
-            console.timeEnd(colors.green('src built'));
-        }, function(err) {
-            building = false;
-            cache = undefined;
-            console.error(err);
-        });
     };
 };
 

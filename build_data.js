@@ -68,34 +68,33 @@ module.exports = function buildData(isDevelopment) {
         validateDefaults(defaults, categories, presets);
 
         // Save individual data files
-        fs.writeFileSync(
-            'data/presets/categories.json',
-            JSON.stringify({ categories: categories }, null, 4)
-        );
-        fs.writeFileSync(
-            'data/presets/fields.json',
-            JSON.stringify({ fields: fields }, null, 4)
-        );
-        fs.writeFileSync(
-            'data/presets/presets.json',
-            JSON.stringify({ presets: presets }, null, 4)
-        );
-        fs.writeFileSync('data/presets.yaml', translationsToYAML(translations));
-        fs.writeFileSync('data/taginfo.json', JSON.stringify(taginfo, null, 4));
+        var tasks = [
+            writeFileProm(
+                'data/presets/categories.json',
+                JSON.stringify({ categories: categories }, null, 4)
+            ),
+            writeFileProm(
+                'data/presets/fields.json',
+                JSON.stringify({ fields: fields }, null, 4)
+            ),
+            writeFileProm(
+                'data/presets/presets.json',
+                JSON.stringify({ presets: presets }, null, 4)
+            ),
+            writeFileProm('data/presets.yaml', translationsToYAML(translations)),
+            writeFileProm('data/taginfo.json', JSON.stringify(taginfo, null, 4)),
+            writeEnJson(tstrings)
+        ];
 
-        // Push changes from data/core.yaml into en.json
-        var core = YAML.load(fs.readFileSync('data/core.yaml', 'utf8'));
-        var imagery = YAML.load(
-            fs.readFileSync(
-                'node_modules/editor-layer-index/i18n/en.yaml',
-                'utf8'
-            )
-        );
-        var en = _.merge(core, { en: { presets: tstrings } }, imagery);
-        fs.writeFileSync('dist/locales/en.json', JSON.stringify(en, null, 4));
-
-        console.timeEnd(colors.green('data built'));
-        building = false;
+        return Promise.all(tasks)
+            .then(function () {
+                console.timeEnd(colors.green('data built'));
+                building = false;
+            })
+            .catch(function (err) {
+                console.error(err);
+                process.exit(1);
+            });
     };
 };
 
@@ -363,4 +362,45 @@ function translationsToYAML(translations) {
 
     return YAML.safeDump({ en: { presets: translations }}, { sortKeys: commentFirst, lineWidth: -1 })
         .replace(/\'.*#\':/g, '#');
+}
+
+function writeEnJson(tstrings) {
+    var readCoreYaml = readFileProm('data/core.yaml', 'utf8');
+    var readImagery = readFileProm(
+        'node_modules/editor-layer-index/i18n/en.yaml',
+        'utf8'
+    );
+
+    return Promise.all([readCoreYaml, readImagery]).then(function(data) {
+        var core = YAML.load(data[0]);
+        var imagery = YAML.load(data[1]);
+        var en = _.merge(core, { en: { presets: tstrings } }, imagery);
+        return writeFileProm(
+            'dist/locales/en.json',
+            JSON.stringify(en, null, 4)
+        );
+    });
+}
+
+function writeFileProm(path, content) {
+    return new Promise(function(res, rej) {
+        fs.writeFile(path, content, function(err) {
+            if (err) {
+                return rej(err);
+            }
+            res();
+        });
+    });
+}
+
+
+function readFileProm(path, options) {
+    return new Promise(function(res, rej) {
+        fs.readFile(path, options, function(err, data) {
+            if (err) {
+                return rej(err);
+            }
+            res(data);
+        });
+    });
 }

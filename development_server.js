@@ -11,8 +11,11 @@ var buildData = require('./build_data')(isDevelopment);
 var buildSrc = require('./build_src')(isDevelopment);
 var buildCSS = require('./build_css')(isDevelopment);
 
-buildData();
-buildSrc();
+buildData()
+.then(function () {
+    return buildSrc();
+});
+
 buildCSS();
 
 if (isDevelopment) {
@@ -35,9 +38,11 @@ if (isDevelopment) {
         ],
         function(err, watcher) {
             watcher.on('all', function() {
-                buildData();
-                // need to recompute js files when data changes
-                buildSrc();
+                buildData()
+                    .then(function () {
+                        // need to recompute js files when data changes
+                        buildSrc();
+                    });
             });
         }
     );
