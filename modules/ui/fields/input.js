@@ -1,4 +1,6 @@
-import * as d3 from 'd3';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { event as d3_event } from 'd3-selection';
+
 import { t, textDirection } from '../../util/locale';
 import { dataPhoneFormats } from '../../../data';
 import { services } from '../../services';
@@ -18,7 +20,7 @@ export {
 
 
 export function uiFieldText(field, context) {
-    var dispatch = d3.dispatch('change'),
+    var dispatch = d3_dispatch('change'),
         nominatim = services.geocoder,
         input,
         entity;
@@ -80,7 +82,7 @@ export function uiFieldText(field, context) {
 
             spinControl.selectAll('button')
                 .on('click', function(d) {
-                    d3.event.preventDefault();
+                    d3_event.preventDefault();
                     var num = parseInt(input.node().value || 0, 10);
                     if (!isNaN(num)) input.node().value = num + d;
                     change()();

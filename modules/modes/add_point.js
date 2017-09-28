@@ -1,8 +1,8 @@
 import { t } from '../util/locale';
-import { actionAddEntity } from '../actions/index';
-import { behaviorDraw } from '../behavior/index';
+import { actionAddEntity } from '../actions';
+import { behaviorDraw } from '../behavior';
 import { modeBrowse, modeSelect } from './index';
-import { osmNode } from '../osm/index';
+import { osmNode } from '../osm';
 
 
 export function modeAddPoint(context) {

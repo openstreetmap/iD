@@ -1,4 +1,4 @@
-import { geoLonToMeters, geoMetersToLon } from '../geo/index';
+import { geoLonToMeters, geoMetersToLon } from '../geo';
 import { utilDetect } from '../util/detect';
 
 

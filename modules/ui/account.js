@@ -1,6 +1,7 @@
-import * as d3 from 'd3';
+import { event as d3_event } from 'd3-selection';
+
 import { t } from '../util/locale';
-import { svgIcon } from '../svg/index';
+import { svgIcon } from '../svg';
 
 
 export function uiAccount(context) {
@@ -53,7 +54,7 @@ export function uiAccount(context) {
                 .attr('href', '#')
                 .text(t('logout'))
                 .on('click.logout', function() {
-                    d3.event.preventDefault();
+                    d3_event.preventDefault();
                     osm.logout();
                 });
         });

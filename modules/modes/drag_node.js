@@ -1,27 +1,33 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _map from 'lodash-es/map';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
 import { t } from '../util/locale';
+
 import {
     actionAddMidpoint,
     actionConnect,
     actionMoveNode,
     actionNoop
-} from '../actions/index';
+} from '../actions';
 
 import {
     behaviorEdit,
     behaviorHover,
     behaviorDrag
-} from '../behavior/index';
+} from '../behavior';
 
 import {
     modeBrowse,
     modeSelect
 } from './index';
 
-import { geoChooseEdge } from '../geo/index';
-import { osmNode } from '../osm/index';
-import { utilEntitySelector } from '../util/index';
+import { geoChooseEdge } from '../geo';
+import { osmNode } from '../osm';
+import { utilEntitySelector } from '../util';
 
 
 export function modeDragNode(context) {
@@ -101,7 +107,7 @@ export function modeDragNode(context) {
     function start(entity) {
         wasMidpoint = entity.type === 'midpoint';
 
-        isCancelled = d3.event.sourceEvent.shiftKey ||
+        isCancelled = d3_event.sourceEvent.shiftKey ||
             context.features().hasHiddenConnections(entity, context.graph());
 
         if (isCancelled) {
@@ -122,7 +128,7 @@ export function modeDragNode(context) {
 
         // activeIDs generate no pointer events.  This prevents the node or vertex
         // being dragged from trying to connect to itself or its parent element.
-        activeIDs = _.map(context.graph().parentWays(entity), 'id');
+        activeIDs = _map(context.graph().parentWays(entity), 'id');
         activeIDs.push(entity.id);
         setActiveElements();
 
@@ -131,7 +137,7 @@ export function modeDragNode(context) {
 
 
     function datum() {
-        var event = d3.event && d3.event.sourceEvent;
+        var event = d3_event && d3_event.sourceEvent;
         if (!event || event.altKey) {
             return {};
         } else {
@@ -143,7 +149,7 @@ export function modeDragNode(context) {
     function doMove(entity, nudge) {
         nudge = nudge || [0, 0];
 
-        var currPoint = (d3.event && d3.event.point) || context.projection(lastLoc),
+        var currPoint = (d3_event && d3_event.point) || context.projection(lastLoc),
             currMouse = vecSub(currPoint, nudge),
             loc = context.projection.invert(currMouse),
             d = datum();
@@ -151,7 +157,7 @@ export function modeDragNode(context) {
         if (!nudgeInterval) {
             if (d.type === 'node' && d.id !== entity.id) {
                 loc = d.loc;
-            } else if (d.type === 'way' && !d3.select(d3.event.sourceEvent.target).classed('fill')) {
+            } else if (d.type === 'way' && !d3_select(d3_event.sourceEvent.target).classed('fill')) {
                 loc = geoChooseEdge(context.childNodes(d), context.mouse(), context.projection).loc;
             }
         }
@@ -167,11 +173,11 @@ export function modeDragNode(context) {
 
     function move(entity) {
         if (isCancelled) return;
-        d3.event.sourceEvent.stopPropagation();
-        lastLoc = context.projection.invert(d3.event.point);
+        d3_event.sourceEvent.stopPropagation();
+        lastLoc = context.projection.invert(d3_event.point);
 
         doMove(entity);
-        var nudge = edge(d3.event.point, context.map().dimensions());
+        var nudge = edge(d3_event.point, context.map().dimensions());
         if (nudge) {
             startNudge(entity, nudge);
         } else {
@@ -237,7 +243,7 @@ export function modeDragNode(context) {
 
     var behavior = behaviorDrag()
         .selector('g.node, g.point, g.midpoint')
-        .surface(d3.select('#map').node())
+        .surface(d3_select('#map').node())
         .origin(origin)
         .on('start', start)
         .on('move', move)

@@ -1,5 +1,12 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _uniq from 'lodash-es/uniq';
+
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
 import { t, textDirection } from '../../util/locale';
 import { modeBrowse, modeSelect } from '../../modes';
 import { utilRebind } from '../../util/rebind';
@@ -7,7 +14,7 @@ import { icon, pad, isMostlySquare, selectMenuItem, transitionTime } from './hel
 
 
 export function uiIntroBuilding(context, reveal) {
-    var dispatch = d3.dispatch('done'),
+    var dispatch = d3_dispatch('done'),
         house = [-85.62815, 41.95638],
         tank = [-85.62732, 41.95347],
         buildingCatetory = context.presets().item('category-building'),
@@ -29,8 +36,8 @@ export function uiIntroBuilding(context, reveal) {
 
 
     function eventCancel() {
-        d3.event.stopPropagation();
-        d3.event.preventDefault();
+        d3_event.stopPropagation();
+        d3_event.preventDefault();
     }
 
 
@@ -148,7 +155,7 @@ export function uiIntroBuilding(context, reveal) {
                 var graph = context.graph(),
                     way = context.entity(context.selectedIDs()[0]),
                     nodes = graph.childNodes(way),
-                    points = _.uniq(nodes).map(function(n) { return context.projection(n.loc); });
+                    points = _uniq(nodes).map(function(n) { return context.projection(n.loc); });
 
                 if (isMostlySquare(points)) {
                     houseId = way.id;
@@ -200,13 +207,13 @@ export function uiIntroBuilding(context, reveal) {
         }
 
         // disallow scrolling
-        d3.select('.inspector-wrap').on('wheel.intro', eventCancel);
+        d3_select('.inspector-wrap').on('wheel.intro', eventCancel);
 
         timeout(function() {
             // reset pane, in case user somehow happened to change it..
-            d3.select('.inspector-wrap .panewrap').style('right', '-100%');
+            d3_select('.inspector-wrap .panewrap').style('right', '-100%');
 
-            var button = d3.select('.preset-category-building .preset-list-button');
+            var button = d3_select('.preset-category-building .preset-list-button');
 
             reveal(button.node(),
                 t('intro.buildings.choose_category_building', { category: buildingCatetory.name() })
@@ -231,8 +238,8 @@ export function uiIntroBuilding(context, reveal) {
         });
 
         function continueTo(nextStep) {
-            d3.select('.inspector-wrap').on('wheel.intro', null);
-            d3.select('.preset-list-button').on('click.intro', null);
+            d3_select('.inspector-wrap').on('wheel.intro', null);
+            d3_select('.preset-list-button').on('click.intro', null);
             context.on('enter.intro', null);
             nextStep();
         }
@@ -249,13 +256,13 @@ export function uiIntroBuilding(context, reveal) {
         }
 
         // disallow scrolling
-        d3.select('.inspector-wrap').on('wheel.intro', eventCancel);
+        d3_select('.inspector-wrap').on('wheel.intro', eventCancel);
 
         timeout(function() {
             // reset pane, in case user somehow happened to change it..
-            d3.select('.inspector-wrap .panewrap').style('right', '-100%');
+            d3_select('.inspector-wrap .panewrap').style('right', '-100%');
 
-            var button = d3.select('.preset-building-house .preset-list-button');
+            var button = d3_select('.preset-building-house .preset-list-button');
 
             reveal(button.node(),
                 t('intro.buildings.choose_preset_house', { preset: housePreset.name() }),
@@ -281,8 +288,8 @@ export function uiIntroBuilding(context, reveal) {
         });
 
         function continueTo(nextStep) {
-            d3.select('.inspector-wrap').on('wheel.intro', null);
-            d3.select('.preset-list-button').on('click.intro', null);
+            d3_select('.inspector-wrap').on('wheel.intro', null);
+            d3_select('.preset-list-button').on('click.intro', null);
             context.on('enter.intro', null);
             nextStep();
         }
@@ -541,13 +548,13 @@ export function uiIntroBuilding(context, reveal) {
         }
 
         // disallow scrolling
-        d3.select('.inspector-wrap').on('wheel.intro', eventCancel);
+        d3_select('.inspector-wrap').on('wheel.intro', eventCancel);
 
         timeout(function() {
             // reset pane, in case user somehow happened to change it..
-            d3.select('.inspector-wrap .panewrap').style('right', '-100%');
+            d3_select('.inspector-wrap .panewrap').style('right', '-100%');
 
-            d3.select('.preset-search-input')
+            d3_select('.preset-search-input')
                 .on('keydown.intro', null)
                 .on('keyup.intro', checkPresetSearch);
 
@@ -567,11 +574,11 @@ export function uiIntroBuilding(context, reveal) {
                 context.enter(modeSelect(context, [tankId]));
 
                 // reset pane, in case user somehow happened to change it..
-                d3.select('.inspector-wrap .panewrap').style('right', '-100%');
+                d3_select('.inspector-wrap .panewrap').style('right', '-100%');
                 // disallow scrolling
-                d3.select('.inspector-wrap').on('wheel.intro', eventCancel);
+                d3_select('.inspector-wrap').on('wheel.intro', eventCancel);
 
-                d3.select('.preset-search-input')
+                d3_select('.preset-search-input')
                     .on('keydown.intro', null)
                     .on('keyup.intro', checkPresetSearch);
 
@@ -584,7 +591,7 @@ export function uiIntroBuilding(context, reveal) {
         });
 
         function checkPresetSearch() {
-            var first = d3.select('.preset-list-item:first-child');
+            var first = d3_select('.preset-list-item:first-child');
 
             if (first.classed('preset-man_made-storage_tank')) {
                 reveal(first.select('.preset-list-button').node(),
@@ -592,7 +599,7 @@ export function uiIntroBuilding(context, reveal) {
                     { duration: 300 }
                 );
 
-                d3.select('.preset-search-input')
+                d3_select('.preset-search-input')
                     .on('keydown.intro', eventCancel, true)
                     .on('keyup.intro', null);
 
@@ -603,10 +610,10 @@ export function uiIntroBuilding(context, reveal) {
         }
 
         function continueTo(nextStep) {
-            d3.select('.inspector-wrap').on('wheel.intro', null);
+            d3_select('.inspector-wrap').on('wheel.intro', null);
             context.on('enter.intro', null);
             context.history().on('change.intro', null);
-            d3.select('.preset-search-input').on('keydown.intro keyup.intro', null);
+            d3_select('.preset-search-input').on('keydown.intro keyup.intro', null);
             nextStep();
         }
     }
@@ -773,9 +780,9 @@ export function uiIntroBuilding(context, reveal) {
         context.on('enter.intro exit.intro', null);
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
-        d3.select('.inspector-wrap').on('wheel.intro', null);
-        d3.select('.preset-search-input').on('keydown.intro keyup.intro', null);
-        d3.select('.more-fields .combobox-input').on('click.intro', null);
+        d3_select('.inspector-wrap').on('wheel.intro', null);
+        d3_select('.preset-search-input').on('keydown.intro keyup.intro', null);
+        d3_select('.more-fields .combobox-input').on('click.intro', null);
     };
 
 

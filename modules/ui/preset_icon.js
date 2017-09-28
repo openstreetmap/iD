@@ -1,7 +1,8 @@
-import * as d3 from 'd3';
-import { dataFeatureIcons } from '../../data/index';
-import { svgIcon } from '../svg/index';
-import { utilFunctor } from '../util/index';
+import { select as d3_select } from 'd3-selection';
+
+import { dataFeatureIcons } from '../../data';
+import { svgIcon } from '../svg';
+import { utilFunctor } from '../util';
 
 
 export function uiPresetIcon() {
@@ -26,7 +27,7 @@ export function uiPresetIcon() {
 
 
     function render() {
-        var selection = d3.select(this),
+        var selection = d3_select(this),
             p = preset.apply(this, arguments),
             geom = geometry.apply(this, arguments),
             picon = getIcon(p, geom),

@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _uniq from 'lodash-es/uniq';
 import { actionDeleteRelation } from './delete_relation';
 
 
@@ -26,7 +26,7 @@ export function actionDeleteWay(wayId) {
                 }
             });
 
-        _.uniq(way.nodes).forEach(function(nodeId) {
+        _uniq(way.nodes).forEach(function(nodeId) {
             graph = graph.replace(way.removeNode(nodeId));
 
             var node = graph.entity(nodeId);

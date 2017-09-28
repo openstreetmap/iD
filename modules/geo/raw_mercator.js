@@ -1,4 +1,12 @@
-import * as d3 from 'd3';
+import {
+    geoMercatorRaw as d3_geoMercatorRaw,
+    geoTransform as d3_geoTransform
+} from 'd3-geo';
+
+import {
+    zoomIdentity as d3_zoomIdentity
+} from 'd3-zoom';
+
 
 /*
     Bypasses features of D3's default projection stream pipeline that are unnecessary:
@@ -7,7 +15,7 @@ import * as d3 from 'd3';
     * Resampling
 */
 export function geoRawMercator() {
-    var project = d3.geoMercatorRaw,
+    var project = d3_geoMercatorRaw,
         k = 512 / Math.PI, // scale
         x = 0, y = 0, // translate
         clipExtent = [[0, 0], [0, 0]];
@@ -48,7 +56,7 @@ export function geoRawMercator() {
 
 
     projection.transform = function(_) {
-        if (!arguments.length) return d3.zoomIdentity.translate(x, y).scale(k);
+        if (!arguments.length) return d3_zoomIdentity.translate(x, y).scale(k);
         x = +_.x;
         y = +_.y;
         k = +_.k;
@@ -56,7 +64,7 @@ export function geoRawMercator() {
     };
 
 
-    projection.stream = d3.geoTransform({
+    projection.stream = d3_geoTransform({
         point: function(x, y) {
             x = projection([x, y]);
             this.stream.point(x[0], x[1]);

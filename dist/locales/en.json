@@ -1955,6 +1955,15 @@
                     "label": "Power Output",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
+                "playground/baby": {
+                    "label": "Baby Seat"
+                },
+                "playground/max_age": {
+                    "label": "Maximum Age"
+                },
+                "playground/min_age": {
+                    "label": "Minimum Age"
+                },
                 "population": {
                     "label": "Population"
                 },
@@ -4570,6 +4579,62 @@
                 },
                 "place/village": {
                     "name": "Village",
+                    "terms": ""
+                },
+                "playground/balance_beam": {
+                    "name": "Balance Beam",
+                    "terms": ""
+                },
+                "playground/basket_spinner": {
+                    "name": "Basket Spinner",
+                    "terms": "basket rotator"
+                },
+                "playground/basket_swing": {
+                    "name": "Basket Swing",
+                    "terms": ""
+                },
+                "playground/climbing_frame": {
+                    "name": "Climbing Frame",
+                    "terms": ""
+                },
+                "playground/cushion": {
+                    "name": "Bouncy Cushion",
+                    "terms": ""
+                },
+                "playground/horizontal_bar": {
+                    "name": "Horizontal Bar",
+                    "terms": "high bar"
+                },
+                "playground/rocker": {
+                    "name": "Springy Rocker",
+                    "terms": ""
+                },
+                "playground/roundabout": {
+                    "name": "Play Roundabout",
+                    "terms": ""
+                },
+                "playground/sandpit": {
+                    "name": "Sandpit",
+                    "terms": ""
+                },
+                "playground/seesaw": {
+                    "name": "Seesaw",
+                    "terms": ""
+                },
+                "playground/slide": {
+                    "name": "Slide",
+                    "terms": ""
+                },
+                "playground/structure": {
+                    "name": "Play Structure",
+                    "terms": ""
+                },
+                "playground/swing": {
+                    "name": "Swing",
+                    "terms": ""
+                },
+                "playground/zipwire": {
+                    "name": "Zip Wire",
                     "terms": ""
                 },
                 "point": {

@@ -1,27 +1,33 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { d3keybinding } from '../lib/d3.keybinding.js';
+import _invert from 'lodash-es/invert';
+import _mapValues from 'lodash-es/mapValues';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 
 import {
     actionCopyEntities,
     actionMove
-} from '../actions/index';
+} from '../actions';
 
 import {
     geoExtent,
     geoPointInPolygon
-} from '../geo/index';
+} from '../geo/';
 
-import { modeMove } from '../modes/index';
-import { uiCmd } from '../ui/index';
+import { modeMove } from '../modes';
+import { uiCmd } from '../ui';
 
 
 export function behaviorPaste(context) {
-    var keybinding = d3keybinding('paste');
+    var keybinding = d3_keybinding('paste');
 
 
     function doPaste() {
-        d3.event.preventDefault();
+        d3_event.preventDefault();
 
         var baseGraph = context.graph(),
             mouse = context.mouse(),
@@ -41,7 +47,7 @@ export function behaviorPaste(context) {
         context.perform(action);
 
         var copies = action.copies();
-        var originals = _.invert(_.mapValues(copies, 'id'));
+        var originals = _invert(_mapValues(copies, 'id'));
         for (var id in copies) {
             var oldEntity = oldGraph.entity(id),
                 newEntity = copies[id];
@@ -74,13 +80,13 @@ export function behaviorPaste(context) {
 
     function paste() {
         keybinding.on(uiCmd('⌘V'), doPaste);
-        d3.select(document).call(keybinding);
+        d3_select(document).call(keybinding);
         return paste;
     }
 
 
     paste.off = function() {
-        d3.select(document).call(keybinding.off);
+        d3_select(document).call(keybinding.off);
     };
 
 

@@ -1,6 +1,8 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { d3combobox } from '../lib/d3.combobox.js';
+import _uniqBy from 'lodash-es/uniqBy';
+
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { d3combobox as d3_combobox } from '../lib/d3.combobox.js';
+
 import { t } from '../util/locale';
 import { svgIcon } from '../svg';
 import { uiField } from './field';
@@ -9,7 +11,7 @@ import { utilRebind, utilTriggerEvent } from '../util';
 
 
 export function uiChangesetEditor(context) {
-    var dispatch = d3.dispatch('change'),
+    var dispatch = d3_dispatch('change'),
         formFields = uiFormFields(context),
         fieldsArr,
         tags,
@@ -79,10 +81,10 @@ export function uiChangesetEditor(context) {
                     });
 
                     commentField
-                        .call(d3combobox()
+                        .call(d3_combobox()
                             .container(context.container())
                             .caseSensitive(true)
-                            .data(_.uniqBy(comments, 'title'))
+                            .data(_uniqBy(comments, 'title'))
                         );
                 });
             }

@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import _clone from 'lodash-es/clone';
+
 import { t } from '../util/locale';
 
 import {
@@ -9,9 +10,22 @@ import {
 } from '../actions';
 
 import { behaviorDraw } from './draw';
-import { geoChooseEdge, geoEdgeEqual } from '../geo';
-import { modeBrowse, modeSelect } from '../modes';
-import { osmNode, osmWay } from '../osm';
+
+import {
+    geoChooseEdge,
+    geoEdgeEqual
+} from '../geo';
+
+import {
+    modeBrowse,
+    modeSelect
+} from '../modes';
+
+import {
+    osmNode,
+    osmWay
+} from '../osm';
+
 import { utilEntitySelector } from '../util';
 
 
@@ -37,7 +51,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
         end = osmNode({ id: 'nEnd', loc: context.map().mouseCoordinates() });
         segment = osmWay({ id: 'wTemp',
             nodes: typeof index === 'undefined' ? [start.id, end.id] : [end.id, start.id],
-            tags: _.clone(origWay.tags)
+            tags: _clone(origWay.tags)
         });
     } else {
         end = osmNode({ loc: context.map().mouseCoordinates() });

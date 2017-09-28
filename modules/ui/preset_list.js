@@ -1,5 +1,12 @@
-import * as d3 from 'd3';
-import { d3keybinding } from '../lib/d3.keybinding.js';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+
 import { t, textDirection } from '../util/locale';
 import { actionChangePreset } from '../actions/index';
 import { operationDelete } from '../operations/index';
@@ -11,7 +18,7 @@ import { utilNoAuto, utilRebind } from '../util';
 
 
 export function uiPresetList(context) {
-    var dispatch = d3.dispatch('choose'),
+    var dispatch = d3_dispatch('choose'),
         id,
         currentPreset,
         autofocus = false;
@@ -57,26 +64,26 @@ export function uiPresetList(context) {
         function keydown() {
             // hack to let delete shortcut work when search is autofocused
             if (search.property('value').length === 0 &&
-                (d3.event.keyCode === d3keybinding.keyCodes['⌫'] ||
-                 d3.event.keyCode === d3keybinding.keyCodes['⌦'])) {
-                d3.event.preventDefault();
-                d3.event.stopPropagation();
+                (d3_event.keyCode === d3_keybinding.keyCodes['⌫'] ||
+                 d3_event.keyCode === d3_keybinding.keyCodes['⌦'])) {
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
                 operationDelete([id], context)();
             } else if (search.property('value').length === 0 &&
-                (d3.event.ctrlKey || d3.event.metaKey) &&
-                d3.event.keyCode === d3keybinding.keyCodes.z) {
-                d3.event.preventDefault();
-                d3.event.stopPropagation();
+                (d3_event.ctrlKey || d3_event.metaKey) &&
+                d3_event.keyCode === d3_keybinding.keyCodes.z) {
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
                 context.undo();
-            } else if (!d3.event.ctrlKey && !d3.event.metaKey) {
-                d3.select(this).on('keydown', null);
+            } else if (!d3_event.ctrlKey && !d3_event.metaKey) {
+                d3_select(this).on('keydown', null);
             }
         }
 
         function keypress() {
             // enter
             var value = search.property('value');
-            if (d3.event.keyCode === 13 && value.length) {
+            if (d3_event.keyCode === 13 && value.length) {
                 list.selectAll('.preset-list-item:first-child').datum().choose();
             }
         }
@@ -146,7 +153,7 @@ export function uiPresetList(context) {
             .append('div')
             .attr('class', function(item) { return 'preset-list-item preset-' + item.preset.id.replace('/', '-'); })
             .classed('current', function(item) { return item.preset === currentPreset; })
-            .each(function(item) { d3.select(this).call(item); })
+            .each(function(item) { d3_select(this).call(item); })
             .style('opacity', 0)
             .transition()
             .style('opacity', 1);
@@ -168,12 +175,12 @@ export function uiPresetList(context) {
                     .geometry(context.geometry(id))
                     .preset(preset))
                 .on('click', function() {
-                    var isExpanded = d3.select(this).classed('expanded');
+                    var isExpanded = d3_select(this).classed('expanded');
                     var iconName = isExpanded ?
                         (textDirection === 'rtl' ? '#icon-backward' : '#icon-forward') : '#icon-down';
-                    d3.select(this)
+                    d3_select(this)
                         .classed('expanded', !isExpanded);
-                    d3.select(this).selectAll('div.label svg.icon use')
+                    d3_select(this).selectAll('div.label svg.icon use')
                         .attr('href', iconName);
                     item.choose();
                 });
@@ -258,7 +265,7 @@ export function uiPresetList(context) {
         };
 
         item.help = function() {
-            d3.event.stopPropagation();
+            d3_event.stopPropagation();
             item.reference.toggle();
         };
 

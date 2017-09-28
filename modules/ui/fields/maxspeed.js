@@ -1,8 +1,11 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { d3combobox } from '../../lib/d3.combobox.js';
-import { dataImperial } from '../../../data/index';
-import { geoPointInPolygon } from '../../geo/index';
+import _some from 'lodash-es/some';
+
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { select as d3_select } from 'd3-selection';
+import { d3combobox as d3_combobox } from '../../lib/d3.combobox.js';
+
+import { dataImperial } from '../../../data';
+import { geoPointInPolygon } from '../../geo';
 import {
     utilGetSetValue,
     utilNoAuto,
@@ -11,11 +14,11 @@ import {
 
 
 export function uiFieldMaxspeed(field, context) {
-    var dispatch = d3.dispatch('change'),
+    var dispatch = d3_dispatch('change'),
         entity,
         isImperial,
-        unitInput = d3.select(null),
-        input = d3.select(null),
+        unitInput = d3_select(null),
+        input = d3_select(null),
         combobox;
 
     var metricValues = [20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
@@ -23,10 +26,10 @@ export function uiFieldMaxspeed(field, context) {
 
 
     function maxspeed(selection) {
-        combobox = d3combobox()
+        combobox = d3_combobox()
             .container(context.container());
 
-        var unitCombobox = d3combobox()
+        var unitCombobox = d3_combobox()
             .container(context.container())
             .data(['km/h', 'mph'].map(comboValues));
 
@@ -49,8 +52,8 @@ export function uiFieldMaxspeed(field, context) {
         var childNodes = context.graph().childNodes(context.entity(entity.id)),
             loc = childNodes[~~(childNodes.length/2)].loc;
 
-        isImperial = _.some(dataImperial.features, function(f) {
-            return _.some(f.geometry.coordinates, function(d) {
+        isImperial = _some(dataImperial.features, function(f) {
+            return _some(f.geometry.coordinates, function(d) {
                 return geoPointInPolygon(loc, d);
             });
         });

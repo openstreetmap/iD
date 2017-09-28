@@ -1,13 +1,32 @@
 /* global Mapillary:false */
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _filter from 'lodash-es/filter';
+import _find from 'lodash-es/find';
+import _flatten from 'lodash-es/flatten';
+import _forEach from 'lodash-es/forEach';
+import _isEmpty from 'lodash-es/isEmpty';
+import _map from 'lodash-es/map';
+import _some from 'lodash-es/some';
+
+import { range as d3_range } from 'd3-array';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
+import {
+    request as d3_request,
+    json as d3_json
+} from 'd3-request';
+
+import {
+    select as d3_select,
+    selectAll as d3_selectAll
+} from 'd3-selection';
+
 import rbush from 'rbush';
-import { utilRebind } from '../util/rebind';
-import { d3geoTile } from '../lib/d3.geo.tile';
+
+import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
+import { geoExtent } from '../geo';
+import { svgIcon } from '../svg';
 import { utilDetect } from '../util/detect';
-import { geoExtent } from '../geo/index';
-import { svgIcon } from '../svg/index';
-import { utilQsString } from '../util/index';
+import { utilQsString, utilRebind } from '../util';
 
 
 var apibase = 'https://a.mapillary.com/v3/',
@@ -16,7 +35,7 @@ var apibase = 'https://a.mapillary.com/v3/',
     clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
     maxResults = 1000,
     tileZoom = 14,
-    dispatch = d3.dispatch('loadedImages', 'loadedSigns'),
+    dispatch = d3_dispatch('loadedImages', 'loadedSigns'),
     mapillaryCache,
     mapillaryClicks,
     mapillaryImage,
@@ -60,7 +79,7 @@ function getTiles(projection) {
             s / 2 - projection.translate()[0],
             s / 2 - projection.translate()[1]];
 
-    return d3geoTile()
+    return d3_geoTile()
         .scaleExtent([tileZoom, tileZoom])
         .scale(s)
         .size(projection.clipExtent()[1])
@@ -89,8 +108,8 @@ function loadTiles(which, url, projection) {
             return !nearNullIsland(t.xyz[0], t.xyz[1], t.xyz[2]);
         });
 
-    _.filter(which.inflight, function(v, k) {
-        var wanted = _.find(tiles, function(tile) { return k === (tile.id + ',0'); });
+    _filter(which.inflight, function(v, k) {
+        var wanted = _find(tiles, function(tile) { return k === (tile.id + ',0'); });
         if (!wanted) delete which.inflight[k];
         return !wanted;
     }).map(abortRequest);
@@ -118,7 +137,7 @@ function loadNextTilePage(which, currZoom, url, tile) {
 
     var id = tile.id + ',' + String(nextPage);
     if (cache.loaded[id] || cache.inflight[id]) return;
-    cache.inflight[id] = d3.request(nextURL)
+    cache.inflight[id] = d3_request(nextURL)
         .mimeType('application/json')
         .response(function(xhr) {
             var linkHeader = xhr.getResponseHeader('Link');
@@ -214,8 +233,8 @@ function parsePagination(links) {
 function partitionViewport(psize, projection) {
     var dimensions = projection.clipExtent()[1];
     psize = psize || 16;
-    var cols = d3.range(0, dimensions[0], psize),
-        rows = d3.range(0, dimensions[1], psize),
+    var cols = d3_range(0, dimensions[0], psize),
+        rows = d3_range(0, dimensions[1], psize),
         partitions = [];
 
     rows.forEach(function(y) {
@@ -239,7 +258,7 @@ function searchLimited(psize, limit, projection, rtree) {
     var results;
 
     // console.time('previous');
-    results =  _.flatten(_.map(partitions, function(extent) {
+    results =  _flatten(_map(partitions, function(extent) {
         return rtree.search(extent.bbox())
             .slice(0, limit)
             .map(function(d) { return d.data; });
@@ -280,10 +299,10 @@ export default {
 
         if (cache) {
             if (cache.images && cache.images.inflight) {
-                _.forEach(cache.images.inflight, abortRequest);
+                _forEach(cache.images.inflight, abortRequest);
             }
             if (cache.objects && cache.objects.inflight) {
-                _.forEach(cache.objects.inflight, abortRequest);
+                _forEach(cache.objects.inflight, abortRequest);
             }
         }
 
@@ -349,7 +368,7 @@ export default {
         if (!mapillarySignDefs) {
             mapillarySignSprite = context.asset('img/traffic-signs/traffic-signs.png');
             mapillarySignDefs = {};
-            d3.json(context.asset('img/traffic-signs/traffic-signs.json'), function(err, data) {
+            d3_json(context.asset('img/traffic-signs/traffic-signs.json'), function(err, data) {
                 if (err) return;
                 mapillarySignDefs = data;
             });
@@ -359,7 +378,7 @@ export default {
 
     loadViewer: function(context) {
         var that = this;
-        var wrap = d3.select('#content').selectAll('.mapillary-wrap')
+        var wrap = d3_select('#content').selectAll('.mapillary-wrap')
             .data([0]);
 
         var enter = wrap.enter()
@@ -382,7 +401,7 @@ export default {
             .classed('active', false);
 
         // load mapillary-viewercss
-        d3.select('head').selectAll('#mapillary-viewercss')
+        d3_select('head').selectAll('#mapillary-viewercss')
             .data([0])
             .enter()
             .append('link')
@@ -391,7 +410,7 @@ export default {
             .attr('href', context.asset(viewercss));
 
         // load mapillary-viewerjs
-        d3.select('head').selectAll('#mapillary-viewerjs')
+        d3_select('head').selectAll('#mapillary-viewerjs')
             .data([0])
             .enter()
             .append('script')
@@ -401,7 +420,7 @@ export default {
 
 
     showViewer: function() {
-        d3.select('#content')
+        d3_select('#content')
             .selectAll('.mapillary-wrap')
             .classed('hidden', false)
             .selectAll('.mly-wrapper')
@@ -412,13 +431,13 @@ export default {
 
 
     hideViewer: function() {
-        d3.select('#content')
+        d3_select('#content')
             .selectAll('.mapillary-wrap')
             .classed('hidden', true)
             .selectAll('.mly-wrapper')
             .classed('active', false);
 
-        d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
+        d3_selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
             .classed('selected', false);
 
         mapillaryImage = null;
@@ -495,14 +514,14 @@ export default {
             mapillaryClicks.push(imageKey);
         }
 
-        d3.selectAll('.layer-mapillary-images .viewfield-group')
+        d3_selectAll('.layer-mapillary-images .viewfield-group')
             .classed('selected', function(d) {
                 return d.key === imageKey;
             });
 
-        d3.selectAll('.layer-mapillary-signs .icon-sign')
+        d3_selectAll('.layer-mapillary-signs .icon-sign')
             .classed('selected', function(d) {
-                return _.some(d.detections, function(detection) {
+                return _some(d.detections, function(detection) {
                     return detection.image_key === imageKey;
                 });
             });
@@ -517,12 +536,12 @@ export default {
             return d.toLocaleString(undefined, { timeZone: 'UTC' });
         }
 
-        var selected = d3.selectAll('.layer-mapillary-images .viewfield-group.selected');
+        var selected = d3_selectAll('.layer-mapillary-images .viewfield-group.selected');
         if (selected.empty()) return this;
 
         var datum = selected.datum();
         var timestamp = localeTimestamp(datum.captured_at);
-        var attribution = d3.select('.mapillary-js-dom .Attribution');
+        var attribution = d3_select('.mapillary-js-dom .Attribution');
         var capturedAt = attribution.selectAll('.captured-at');
         if (capturedAt.empty()) {
             attribution
@@ -545,8 +564,8 @@ export default {
         if (!mapillaryViewer) return;
 
         var detections = mapillaryCache.detections[mapillaryImage];
-        _.each(detections, function(data, k) {
-            if (_.isEmpty(data)) {
+        _forEach(detections, function(data, k) {
+            if (_isEmpty(data)) {
                 loadDetection(k);
             } else {
                 var tag = makeTag(data);
@@ -564,7 +583,7 @@ export default {
                     client_id: clientId,
                 });
 
-            d3.request(url)
+            d3_request(url)
                 .mimeType('application/json')
                 .response(function(xhr) {
                     return JSON.parse(xhr.responseText);

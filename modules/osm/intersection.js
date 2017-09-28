@@ -1,4 +1,10 @@
-import _ from 'lodash';
+import _each from 'lodash-es/each';
+import _extend from 'lodash-es/extend';
+import _find from 'lodash-es/find';
+import _indexOf from 'lodash-es/indexOf';
+import _keys from 'lodash-es/keys';
+import _values from 'lodash-es/values';
+
 import { geoAngle } from '../geo/index';
 import { osmWay } from './way';
 
@@ -6,7 +12,7 @@ import { osmWay } from './way';
 export function osmTurn(turn) {
     if (!(this instanceof osmTurn))
         return new osmTurn(turn);
-    _.extend(this, turn);
+    _extend(this, turn);
 }
 
 
@@ -49,7 +55,7 @@ export function osmIntersection(graph, vertexId) {
                 indexA = 1;
                 indexB = way.nodes.length - 2;
             } else {
-                splitIndex = _.indexOf(way.nodes, vertex.id, 1);  // split at vertexid
+                splitIndex = _indexOf(way.nodes, vertex.id, 1);  // split at vertexid
                 wayA = osmWay({id: way.id + '-a', tags: way.tags, nodes: way.nodes.slice(0, splitIndex + 1)});
                 wayB = osmWay({id: way.id + '-b', tags: way.tags, nodes: way.nodes.slice(splitIndex)});
                 indexA = splitIndex - 1;
@@ -70,13 +76,13 @@ export function osmIntersection(graph, vertexId) {
 
     var intersection = {
         highways: highways,
-        ways: _.values(highways),
+        ways: _values(highways),
         graph: graph
     };
 
 
     intersection.adjacentNodeId = function(fromWayId) {
-        return _.find(_.keys(highways), function(k) {
+        return _find(_keys(highways), function(k) {
             return highways[k].id === fromWayId;
         });
     };
@@ -125,7 +131,7 @@ export function osmIntersection(graph, vertexId) {
             via = { node: vertex.id },
             turns = [];
 
-        _.each(highways, function(end, adjacentNodeId) {
+        _each(highways, function(end, adjacentNodeId) {
             if (end === start)
                 return;
 

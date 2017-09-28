@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import _values from 'lodash-es/values';
+
 import {
     svgPointTransform,
     svgTagClasses
@@ -9,7 +10,7 @@ import {
     geoEuclideanDistance,
     geoInterp,
     geoLineIntersection
-} from '../geo/index';
+} from '../geo';
 
 
 export function svgMidpoints(projection, context) {
@@ -97,7 +98,7 @@ export function svgMidpoints(projection, context) {
         var groups = layer
             .selectAll('g.midpoint')
             .filter(midpointFilter)
-            .data(_.values(midpoints), function(d) { return d.id; });
+            .data(_values(midpoints), function(d) { return d.id; });
 
         groups.exit()
             .remove();

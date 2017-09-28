@@ -1,0 +1,11 @@
+{
+    "icon": "playground",
+    "geometry": [
+        "point",
+        "line"
+    ],
+    "tags": {
+        "playground": "zipwire"
+    },
+    "name": "Zip Wire"
+}

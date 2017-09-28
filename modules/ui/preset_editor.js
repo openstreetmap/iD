@@ -1,4 +1,10 @@
-import * as d3 from 'd3';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
 import { t } from '../util/locale';
 import { modeBrowse } from '../modes';
 import { uiDisclosure } from './disclosure';
@@ -8,7 +14,7 @@ import { utilRebind } from '../util';
 
 
 export function uiPresetEditor(context) {
-    var dispatch = d3.dispatch('change'),
+    var dispatch = d3_dispatch('change'),
         formFields = uiFormFields(context),
         expandedPreference = (context.storage('preset_fields.expanded') !== 'false'),
         state,
@@ -85,7 +91,7 @@ export function uiPresetEditor(context) {
         selection.selectAll('.wrap-form-field input')
             .on('keydown', function() {
                 // if user presses enter, and combobox is not active, accept edits..
-                if (d3.event.keyCode === 13 && d3.select('.combobox').empty()) {
+                if (d3_event.keyCode === 13 && d3_select('.combobox').empty()) {
                     context.enter(modeBrowse(context));
                 }
             });

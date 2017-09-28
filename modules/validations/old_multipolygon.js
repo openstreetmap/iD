@@ -4,7 +4,6 @@ import { osmIsSimpleMultipolygonOuterMember } from '../osm';
 
 export function validationOldMultipolygon() {
 
-
     return function validation(changes, graph) {
         var warnings = [];
         for (var i = 0; i < changes.created.length; i++) {

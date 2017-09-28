@@ -1,5 +1,7 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
 
 
 /*
@@ -48,11 +50,11 @@ export function d3keybinding(namespace) {
 
 
         function matches(binding, testShift) {
-            var event = d3.event;
+            var event = d3_event;
             if (event.key !== undefined) {
                 if (binding.event.key === undefined) {
                     return false;
-                } else if (_.isArray(binding.event.key)) {
+                } else if (Array.isArray(binding.event.key)) {
                     if (binding.event.key.map(function(s) { return s.toLowerCase(); }).indexOf(event.key.toLowerCase()) === -1)
                         return false;
                 } else {
@@ -84,7 +86,7 @@ export function d3keybinding(namespace) {
 
 
     function bubble() {
-        var tagName = d3.select(d3.event.target).node().tagName;
+        var tagName = d3_select(d3_event.target).node().tagName;
         if (tagName === 'INPUT' || tagName === 'SELECT' || tagName === 'TEXTAREA') {
             return;
         }
@@ -93,7 +95,7 @@ export function d3keybinding(namespace) {
 
 
     function keybinding(selection) {
-        selection = selection || d3.select(document);
+        selection = selection || d3_select(document);
         selection.on('keydown.capture' + namespace, capture, true);
         selection.on('keydown.bubble' + namespace, bubble, false);
         return keybinding;
@@ -102,7 +104,7 @@ export function d3keybinding(namespace) {
 
     keybinding.off = function(selection) {
         bindings = [];
-        selection = selection || d3.select(document);
+        selection = selection || d3_select(document);
         selection.on('keydown.capture' + namespace, null);
         selection.on('keydown.bubble' + namespace, null);
         return keybinding;

@@ -3,6 +3,7 @@ var rollup = require('rollup');
 var nodeResolve = require('rollup-plugin-node-resolve');
 var commonjs = require('rollup-plugin-commonjs');
 var json = require('rollup-plugin-json');
+var includePaths = require('rollup-plugin-includepaths');
 var colors = require('colors/safe');
 
 
@@ -25,6 +26,11 @@ module.exports = function buildSrc(isDevelopment) {
             .rollup({
                 entry: './modules/id.js',
                 plugins: [
+                    includePaths({
+                        paths: [
+                            'node_modules/d3/node_modules'  // for npm 2
+                        ]
+                    }),
                     nodeResolve({
                         jsnext: true,
                         main: true,
