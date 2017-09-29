@@ -333,7 +333,6 @@ export function uiMapData(context) {
                 if (err) {
                     return console.log(err);
                 }
-                data = JSON.parse(data);
 
                 /*
                 if (data.extent) {
@@ -350,7 +349,11 @@ export function uiMapData(context) {
                     .classed('hide', false)
 
                 if (data.layers && data.layers.length) {
-                    // MapServer layer selector
+                    // MapServer layer selector is visible
+                    d3.select('.geoservice-table')
+                        .classed('hide', true);
+                    d3.selectAll('.layer-counted button')
+                        .property('disabled', true);
                     layerSelect.html('')
                         .classed('hide', false)
                         .on('change', function() {
@@ -374,12 +377,27 @@ export function uiMapData(context) {
                 if (!data.fields || !data.fields.length) {
                     return;
                 }
+                
+                // re-enable download buttons
+                d3.selectAll('.layer-counted button')
+                    .property('disabled', false);
+                    
+                // fetch one record for sample values
+                var sample_url = metadata_url.split('/metadata')[0] + '/query?where=1%3D1&returnGeometry=false&outFields=*&f=json';
+                d3.json(sample_url, function (err, data) {
+                    var samplePick = data.features[0].attributes;
+                    var fields = Object.keys(samplePick);
+                    _.map(fields, function (field) {
+                        d3.select('.sample-value.x' + field)
+                            .text(samplePick[field]);
+                    });
+                });
 
-                // call for count of import features
+                // make a count of local (current viewport) and global features
                 var counter_url = metadata_url.split('/metadata')[0] + '/query?where=1%3D1&returnCountOnly=true&f=json';
                 d3.selectAll('.layer-counted').classed('hide', false);
-                d3.text(counter_url, function (err, data) {
-                    var count = JSON.parse(data).count;
+                d3.json(counter_url, function (err, data) {
+                    var count = data.count;
                     d3.selectAll('.layer-counted .global').text(count);
                 });
                 var bounds = context.map().trimmedExtent().bbox();
@@ -394,8 +412,8 @@ export function uiMapData(context) {
                 counter_url += '&geometryType=esriGeometryEnvelope';
                 counter_url += '&spatialRel=esriSpatialRelIntersects';
                 counter_url += '&inSR=4326';
-                d3.text(counter_url, function (err, data) {
-                    var count = JSON.parse(data).count;
+                d3.json(counter_url, function (err, data) {
+                    var count = data.count;
                     d3.selectAll('.layer-counted .local').text(count);
                 });
 
@@ -425,7 +443,8 @@ export function uiMapData(context) {
                 }
 
                 var geoserviceTable = d3.selectAll('.geoservice-table')
-                    .html('<thead class="tag-row"><th>Include?</th><th>GeoService field</th><th>(optional) OSM tag</th></thead>');
+                    .html('<thead class="tag-row"><th>Field</th><th>Sample value</th><th>Include?</th><th>(optional) OSM tag</th></thead>')
+                    .classed('hide', false);
 
                 if (data.supportedQueryFormats && data.supportedQueryFormats.toLowerCase().indexOf('geojson') > -1) {
                     geoserviceLayer.format('geojson');
@@ -441,6 +460,13 @@ export function uiMapData(context) {
 
                     var row = geoserviceTable.append('tr')
                         .attr('class', 'preview');
+
+                    row.append('td').text(field.alias || field.name);
+                    
+                    row.append('td')
+                        .attr('class', 'sample-value x' + field.name)
+                        .text('loading');
+
                     row.append('td').append('input')
                         .attr('class', field.name.replace(/\s/g, '_'))
                         .attr('type', 'checkbox')
@@ -469,7 +495,6 @@ export function uiMapData(context) {
                             }
                             geoserviceLayer.fields(fields);
                         });
-                    row.append('td').text(field.alias || field.name);
                     // row.append('td').text(samplefeature.properties[keys[r]] || '');
 
                     var suggestedKeys = d3combobox().fetcher(getFetcher()).minItems(0);
@@ -551,7 +576,7 @@ export function uiMapData(context) {
                         }
                         metadata_url = (metadata_url.join('/') + '/metadata?f=json').replace(/\/\//g, '/').replace(':/', '://');
 
-                        d3.text(metadata_url, previewGeoService);
+                        d3.json(metadata_url, previewGeoService);
                     });
 
                 layerPreview = urlEntry.append('div')
@@ -812,11 +837,13 @@ export function uiMapData(context) {
                 };
                 pane.append('button')
                     .attr('class', 'url final local')
+                    .property('disabled', true)
                     .text('Load In View')
                     .on('click', function() { startLoad(false); });
                 pane.append('button')
                     .attr('class', 'url final global')
                     .attr('style', 'margin-right: 10px')
+                    .property('disabled', true)
                     .text('Load Globally')
                     .on('click', function() { startLoad(true); });
             }

@@ -579,8 +579,10 @@ export function svgGeoService(projection, context, dispatch) {
                             .attr('xlink:href', '#' + tag[0] + '-15');
             }
 
-            presetBox.selectAll('label.preset-prompt').text('OSM preset: ');
-            presetBox.selectAll('span.preset-prompt').text(preset.id);
+            //presetBox.selectAll('label.preset-prompt').text('OSM preset: ');
+            //presetBox.selectAll('span.preset-prompt').text(preset.id);
+            presetBox.selectAll('.preset-prompt')
+                .classed('hide', true);
             presetBox.selectAll('button, .preset-icon-fill, .preset-icon')
                 .classed('hide', false);
             this.internalPreset = preset;
@@ -600,6 +602,8 @@ export function svgGeoService(projection, context, dispatch) {
             // removing preset status
             presetBox.selectAll('.preset label.preset-prompt')
                 .text('Optional: match features to a OSM preset');
+            presetBox.selectAll('.preset-prompt')
+                .classed('hide', false);
             presetBox.selectAll('.preset span.preset-prompt, .preset svg')
                 .html('');
             presetBox.selectAll('.preset button, .preset-icon-fill, .preset-icon')

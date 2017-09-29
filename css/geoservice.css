@@ -154,8 +154,12 @@ text.geoservice {
 }
 
 .geoservice-pane .preset .combobox-input {
-    width: 50%;
+    max-width: 45%;
     margin-left: 10%;
+}
+
+.geoservice-pane .preset .combobox-caret {
+    margin-top: 10px;
 }
 
 .geoservice-pane .point-in-polygon, .geoservice-pane .merge-lines, .geoservice-pane .overlap-buildings {
