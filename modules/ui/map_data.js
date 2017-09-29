@@ -383,7 +383,7 @@ export function uiMapData(context) {
                     .property('disabled', false);
                     
                 // fetch one record for sample values
-                var sample_url = metadata_url.split('/metadata')[0] + '/query?where=1%3D1&returnGeometry=false&outFields=*&f=json';
+                var sample_url = metadata_url.split('/metadata')[0] + '/query?where=1%3D1&returnGeometry=false&outFields=*&f=json&resultRecordCount=1';
                 d3.json(sample_url, function (err, data) {
                     var samplePick = data.features[0].attributes;
                     var fields = Object.keys(samplePick);
