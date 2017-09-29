@@ -13,13 +13,14 @@ const jsonschema = require('jsonschema');
 const path = require('path');
 const shell = require('shelljs');
 const YAML = require('js-yaml');
-var colors = require('colors/safe');
+const colors = require('colors/safe');
 
 const fieldSchema = require('./data/presets/schema/field.json');
 const presetSchema = require('./data/presets/schema/preset.json');
 const suggestions = require('name-suggestion-index/name-suggestions.json');
 
-module.exports = function buildData(isDevelopment) {
+
+module.exports = function buildData() {
     var building;
     return function() {
         // Note: even though this function is sync adding

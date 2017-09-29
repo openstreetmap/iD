@@ -1,8 +1,11 @@
-var glob = require('glob');
-var concat = require('concat-files');
-var colors = require('colors/safe');
+/* eslint-disable no-console */
 
-module.exports = function buildCSS(isDevelopment) {
+const glob = require('glob');
+const concat = require('concat-files');
+const colors = require('colors/safe');
+
+
+module.exports = function buildCSS() {
     var building = false;
     return function () {
         if (building) return;
@@ -12,7 +15,7 @@ module.exports = function buildCSS(isDevelopment) {
         return concatFilesProm('css/**/*.css', 'dist/iD.css')
             .then(function () {
                 console.timeEnd(colors.green('css built'));
-                building = false;    
+                building = false;
             })
             .catch(function (err) {
                 console.error(err);
@@ -29,6 +32,6 @@ function concatFilesProm(globPath, output) {
                 if (err) return rej(err);
                 res();
             });
-        }); 
+        });
     });
 }

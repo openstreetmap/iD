@@ -1,13 +1,15 @@
-var fs = require('fs');
-var rollup = require('rollup');
-var nodeResolve = require('rollup-plugin-node-resolve');
-var commonjs = require('rollup-plugin-commonjs');
-var json = require('rollup-plugin-json');
-var includePaths = require('rollup-plugin-includepaths');
-var colors = require('colors/safe');
+/* eslint-disable no-console */
+
+const fs = require('fs');
+const rollup = require('rollup');
+const nodeResolve = require('rollup-plugin-node-resolve');
+const commonjs = require('rollup-plugin-commonjs');
+const json = require('rollup-plugin-json');
+const includePaths = require('rollup-plugin-includepaths');
+const colors = require('colors/safe');
 
 
-module.exports = function buildSrc(isDevelopment) {
+module.exports = function buildSrc() {
     var cache;
     var building = false;
     return function() {
@@ -21,7 +23,7 @@ module.exports = function buildSrc(isDevelopment) {
         console.time(colors.green('src built'));
 
         building = true;
-    
+
         return rollup
             .rollup({
                 entry: './modules/id.js',
