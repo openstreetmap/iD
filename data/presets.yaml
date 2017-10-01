@@ -3369,7 +3369,7 @@ en:
       leisure/fitness_station:
         # leisure=fitness_station
         name: Outdoor Fitness Station
-        # 'terms: fitness,gym'
+        # 'terms: fitness,gym,trim trail'
         terms: '<translate with synonyms or related terms for ''Outdoor Fitness Station'', separated by commas>'
       leisure/garden:
         # leisure=garden

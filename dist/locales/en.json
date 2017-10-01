@@ -4043,7 +4043,7 @@
                 },
                 "leisure/fitness_station": {
                     "name": "Outdoor Fitness Station",
-                    "terms": "fitness,gym"
+                    "terms": "fitness,gym,trim trail"
                 },
                 "leisure/garden": {
                     "name": "Garden",
