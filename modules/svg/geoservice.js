@@ -49,16 +49,10 @@ export function svgGeoService(projection, context, dispatch) {
         if (!geojson || !geojson.features) {
             return;
         }
-
-        try {
-            pointInPolygon = d3.selectAll('.point-in-polygon input').property('checked');
-        } catch(e) { }
-        try {
-            mergeLines = d3.selectAll('.merge-lines input').property('checked');
-        } catch(e) { }
-        try {
-            overlapBuildings = d3.selectAll('.overlap-buildings input').property('checked');
-        } catch(e) { }
+        
+        pointInPolygon = d3.selectAll('.point-in-polygon input').property('checked');
+        mergeLines = d3.selectAll('.merge-lines input').property('checked');
+        overlapBuildings = d3.selectAll('.overlap-buildings input').property('checked');
 
         function fetchVisibleBuildings(callback, selector) {
             var buildings = d3.selectAll(selector || 'path.tag-building');
@@ -633,7 +627,8 @@ export function svgGeoService(projection, context, dispatch) {
         drawGeoService.fmt = fmt;
         return this;
     };
-
+    
+    // importFields is an object with each key corresponding to true / false based on whether it should be imported
     drawGeoService.fields = function(fields) {
         if (!arguments.length) return (drawGeoService.importFields || []);
         drawGeoService.importFields = fields;
@@ -672,7 +667,14 @@ export function svgGeoService(projection, context, dispatch) {
             url += '&maxAllowableOffset=0.000005';
         }
         if (url.indexOf('outFields=') === -1) {
-            url += '&outFields=' + (drawGeoService.fields().join(',') || '*');
+            var allFields = drawGeoService.fields();
+            var selectFields = [];
+            _.map(Object.keys(allFields), function (field) {
+                if (allFields[field]) {
+                    selectFields.push(field);
+                }
+            });
+            url += '&outFields=' + (selectFields.join(',') || '*');
         }
 
         // turn iD Editor bounds into a query
@@ -705,13 +707,12 @@ export function svgGeoService(projection, context, dispatch) {
 
         var that = this;
         // console.log('final GeoService URL: ' + url);
-        d3.text(url, function(err, data) {
+        d3.json(url, function(err, data) {
             if (err) {
                 console.log('GeoService URL did not load');
                 console.error(err);
             } else {
                 // convert EsriJSON text to GeoJSON object
-                data = JSON.parse(data);
                 var jsondl = (fmt === 'geojson') ? data : fromEsri.fromEsri(data);
 
                 // warn if went over server's maximum results count
