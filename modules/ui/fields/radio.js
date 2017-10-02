@@ -1,3 +1,6 @@
+import _clone from 'lodash-es/clone';
+import _pull from 'lodash-es/pull';
+
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import {
     select as d3_select,
@@ -18,6 +21,7 @@ export function uiFieldRadio(field, context) {
         wrap = d3_select(null),
         labels = d3_select(null),
         radios = d3_select(null),
+        radioData = _clone(field.options || field.keys),
         typeField,
         layerField,
         oldType = {},
@@ -51,7 +55,7 @@ export function uiFieldRadio(field, context) {
         placeholder = wrap.selectAll('.placeholder');
 
         labels = wrap.selectAll('label')
-            .data(field.options || field.keys);
+            .data(radioData);
 
         enter = labels.enter()
             .append('label');
@@ -152,8 +156,10 @@ export function uiFieldRadio(field, context) {
                     .on('change', changeLayer);
             }
             layerField.tags(tags);
+            field.keys.push('layer');
         } else {
             layerField = null;
+            _pull(field.keys, 'layer');
         }
 
         var layerItem = list.selectAll('.structure-layer-item')
