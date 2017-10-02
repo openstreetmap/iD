@@ -25,8 +25,7 @@ export function uiFieldRadio(field, context) {
 
 
     function selectedKey() {
-        var selector = '.form-field-structure .toggle-list label.active input',
-            node = d3_selectAll(selector);
+        var node = wrap.selectAll('.toggle-list label.active input');
         return !node.empty() && node.datum();
     }
 
@@ -85,7 +84,7 @@ export function uiFieldRadio(field, context) {
 
 
         var extrasWrap = selection.selectAll('.structure-extras-wrap')
-                .data(selected ? [0] : []);
+            .data(selected ? [0] : []);
 
         extrasWrap.exit()
             .remove();

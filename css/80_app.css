@@ -1420,12 +1420,12 @@ button.save.has-count .count::before {
 /* preset form cycleway */
 /* preset form structure extras */
 
-.form-field-structure .structure-extras-wrap li,
+.structure-extras-wrap li,
 .form-field-cycleway .preset-input-wrap li,
 .form-field-access .preset-input-wrap li {
     border-bottom: 1px solid #ccc;
 }
-.form-field-structure .structure-extras-wrap li:last-child,
+.structure-extras-wrap li:last-child,
 .form-field-cycleway .preset-input-wrap li:last-child,
 .form-field-access .preset-input-wrap li:last-child {
     border-bottom: 0;
