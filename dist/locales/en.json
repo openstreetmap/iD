@@ -2166,6 +2166,13 @@
                         "minor": "Minor Road"
                     }
                 },
+                "structure_waterway": {
+                    "label": "Structure",
+                    "placeholder": "Unknown",
+                    "options": {
+                        "tunnel": "Tunnel"
+                    }
+                },
                 "structure": {
                     "label": "Structure",
                     "placeholder": "Unknown",
@@ -2277,9 +2284,6 @@
                 },
                 "trees": {
                     "label": "Trees"
-                },
-                "tunnel_waterway": {
-                    "label": "Tunnel"
                 },
                 "tunnel": {
                     "label": "Type",

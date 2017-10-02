@@ -1298,6 +1298,14 @@ en:
           tunnel: Tunnel
         # structure field placeholder
         placeholder: Unknown
+      structure_waterway:
+        # tunnel=*
+        label: Structure
+        options:
+          # tunnel=yes
+          tunnel: Tunnel
+        # structure_waterway field placeholder
+        placeholder: Unknown
       studio:
         # studio=*
         label: Type
@@ -1424,9 +1432,6 @@ en:
         label: Type
         # tunnel field placeholder
         placeholder: Default
-      tunnel_waterway:
-        # tunnel=*
-        label: Tunnel
       vending:
         # vending=*
         label: Type of Goods

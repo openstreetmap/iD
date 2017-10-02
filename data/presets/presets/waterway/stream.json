@@ -2,7 +2,7 @@
     "icon": "waterway-stream",
     "fields": [
         "name",
-        "tunnel_waterway",
+        "structure_waterway",
         "width",
         "intermittent"
     ],

@@ -1,11 +1,9 @@
 import _clone from 'lodash-es/clone';
 import _pull from 'lodash-es/pull';
+import _union from 'lodash-es/union';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import {
-    select as d3_select,
-    selectAll as d3_selectAll
-} from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { t } from '../../util/locale';
 import { uiField } from '../field';
@@ -156,7 +154,7 @@ export function uiFieldRadio(field, context) {
                     .on('change', changeLayer);
             }
             layerField.tags(tags);
-            field.keys.push('layer');
+            field.keys = _union(field.keys, ['layer']);
         } else {
             layerField = null;
             _pull(field.keys, 'layer');
@@ -200,7 +198,16 @@ export function uiFieldRadio(field, context) {
         if (!key) return;
 
         var val = t[key];
-        if (val !== 'no') oldType[key] = val;
+        if (val !== 'no') {
+            oldType[key] = val;
+        }
+
+        if (field.type === 'structureRadio') {
+            if (val === 'no' || (key !== 'bridge' && key !== 'tunnel')) {
+                t.layer = undefined;
+            }
+        }
+
         dispatch.call('change', this, t, onInput);
     }
 
@@ -269,6 +276,12 @@ export function uiFieldRadio(field, context) {
         }
 
         if (field.type === 'structureRadio') {
+            // For waterways without a tunnel tag, set 'culvert' as
+            // the oldType to default to if the user picks 'tunnel'
+            if (!!tags.waterway && !oldType.tunnel) {
+                oldType.tunnel = 'culvert';
+            }
+
             wrap.call(structureExtras, tags);
         }
     };

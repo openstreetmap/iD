@@ -1750,6 +1750,19 @@
                 }
             }
         },
+        "structure_waterway": {
+            "type": "structureRadio",
+            "keys": [
+                "tunnel"
+            ],
+            "label": "Structure",
+            "placeholder": "Unknown",
+            "strings": {
+                "options": {
+                    "tunnel": "Tunnel"
+                }
+            }
+        },
         "structure": {
             "type": "structureRadio",
             "keys": [
@@ -1928,11 +1941,6 @@
             "key": "trees",
             "type": "semiCombo",
             "label": "Trees"
-        },
-        "tunnel_waterway": {
-            "key": "tunnel",
-            "type": "combo",
-            "label": "Tunnel"
         },
         "tunnel": {
             "key": "tunnel",
