@@ -57,5 +57,5 @@ if (isDevelopment) {
         ecstatic({ root: __dirname, cache: 0 })
     ).listen(8080);
 
-    console.log(colors.red('Listening on :8080'));
+    console.log(colors.yellow('Listening on :8080'));
 }
