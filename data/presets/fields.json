@@ -5,21 +5,11 @@
             "type": "combo",
             "label": "Allowed Access",
             "options": [
+                "yes",
                 "permissive",
                 "private",
                 "customers",
                 "no"
-            ]
-        },
-        "access_toilets": {
-            "key": "access",
-            "type": "combo",
-            "label": "Access",
-            "options": [
-                "yes",
-                "permissive",
-                "private",
-                "customers"
             ]
         },
         "access": {

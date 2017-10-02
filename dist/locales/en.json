@@ -1097,9 +1097,6 @@
                 "access_simple": {
                     "label": "Allowed Access"
                 },
-                "access_toilets": {
-                    "label": "Access"
-                },
                 "access": {
                     "label": "Allowed Access",
                     "placeholder": "Not Specified",

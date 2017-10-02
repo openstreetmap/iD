@@ -2,7 +2,7 @@
     "icon": "poi-storage-tank",
     "fields": [
         "operator",
-        "access_toilets",
+        "access_simple",
         "fee",
         "water_point"
     ],

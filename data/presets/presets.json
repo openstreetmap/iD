@@ -2594,7 +2594,7 @@
             "icon": "poi-storage-tank",
             "fields": [
                 "operator",
-                "access_toilets",
+                "access_simple",
                 "fee",
                 "water_point"
             ],
@@ -2953,7 +2953,7 @@
                 "toilets/disposal",
                 "operator",
                 "building_area",
-                "access_toilets",
+                "access_simple",
                 "gender",
                 "fee",
                 "diaper"
@@ -16105,7 +16105,7 @@
             "fields": [
                 "name",
                 "operator",
-                "access_toilets",
+                "access_simple",
                 "fee",
                 "water_point"
             ],
