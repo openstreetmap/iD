@@ -1,7 +1,8 @@
 {
     "icon": "golf",
     "fields": [
-        "golf_hole",
+        "name",
+        "ref_golf_hole",
         "par",
         "handicap"
     ],

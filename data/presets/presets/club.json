@@ -1,6 +1,7 @@
 {
     "icon": "heart",
     "fields": [
+        "name",
         "club",
         "operator",
         "address",

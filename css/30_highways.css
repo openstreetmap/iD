@@ -13,10 +13,11 @@ path.stroke.tag-highway {
 
 /* highway areas */
 
-path.stroke.area.tag-highway {
+path.stroke.area.tag-highway,
+.low-zoom path.stroke.area.tag-highway {
     stroke: #fff;
     stroke-dasharray: none;
-    stroke-width: 2;
+    stroke-width: 1;
 }
 
 /* wide highways */
@@ -459,6 +460,20 @@ path.stroke.tag-service {
 path.casing.tag-highway-service,
 path.casing.tag-service {
     stroke:#666;
+}
+
+/* with `service=* tag`  (e.g. parking_aisle, alley, drive-through */
+.preset-icon .icon.highway-service.tag-service {
+    color: #dcd9b9;
+    fill: #666;
+}
+path.stroke.tag-highway-service.tag-service,
+path.stroke.tag-service.tag-service {
+    stroke: #dcd9b9;
+}
+path.casing.tag-highway-service.tag-service,
+path.casing.tag-service.tag-service {
+    stroke: #666;
 }
 
 .preset-icon .icon.highway-track {

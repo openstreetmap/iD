@@ -254,13 +254,13 @@ en:
     rateLimit: The API is limiting anonymous connections.  You can fix this by logging in.
   commit:
     title: Upload to OpenStreetMap
-    description_placeholder: Brief description of your contributions (required)
-    message_label: Changeset Comment
     upload_explanation: "The changes you upload will be visible on all maps that use OpenStreetMap data."
     upload_explanation_with_user: "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data."
+    request_review: "I would like someone to review my edits."
     save: Upload
     cancel: Cancel
     changes: "{count} Changes"
+    download_changes: Download osmChange file
     warnings: Warnings
     modified: Modified
     deleted: Deleted
@@ -279,6 +279,10 @@ en:
       title: Background
       zoom: Zoom
       vintage: Vintage
+      source: Source
+      description: Description
+      resolution: Resolution
+      accuracy: Accuracy
       unknown: Unknown
       show_tiles: Show Tiles
       hide_tiles: Hide Tiles
@@ -386,9 +390,14 @@ en:
     description: Map Data
     key: F
     data_layers: Data Layers
+    layers:
+      osm:
+        tooltip: Map data from OpenStreetMap
+        title: OpenStreetMap data
     fill_area: Fill Areas
     map_features: Map Features
     autohidden: "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them."
+    osmhidden: "These features have been automatically hidden because the OpenStreetMap layer is hidden."
   feature:
     points:
       description: Points
@@ -460,7 +469,7 @@ en:
       keep_remote: Use theirs
       restore: Restore
       delete: Leave Deleted
-      download_changes: Or download your changes.
+      download_changes: Or download osmChange file
       done: "All conflicts resolved!"
       help: |
         Another user changed some of the same map features you changed.
@@ -560,13 +569,14 @@ en:
 
       ### Selecting Features
 
-      To select a map feature, like a road or point of interest, click
-      on it on the map. This will highlight the selected feature, open a panel with
-      details about it, and show a menu of things you can do with the feature.
+      To select a map feature, like a road or point of interest, click on it on
+      the map. This will highlight the selected feature and load a sidebar with
+      details about it. If you right-click on it, it will show a menu of things
+      you can do with the feature.
 
       To select multiple features, hold down the 'Shift' key. Then either click
-      on the features you want to select, or drag on the map to draw a rectangle.
-      This will draw a box and select all the points within it.
+      on the features you want to select, or drag on the map to draw a contour
+      around those features. All the points inside the lasso area will be selected.
 
       ### Saving Edits
 
@@ -581,8 +591,8 @@ en:
       and warnings if something doesn't seem right about the changes.
 
       If everything looks good, you can enter a short comment explaining the change
-      you made, and click 'Save' again to post the changes
-      to [OpenStreetMap.org](http://www.openstreetmap.org/), where they are visible
+      you made, and click 'Upload' to post the changes to
+      [OpenStreetMap.org](http://www.openstreetmap.org/), where they will be visible
       to all other users and available for others to build and improve upon.
 
       If you can't finish your edits in one sitting, you can leave the editor
@@ -602,8 +612,8 @@ en:
       ### Selecting
 
       Click on a road to select it. An outline should become visible, along
-      with a small tools menu on the map and a sidebar showing more information
-      about the road.
+      with a sidebar showing more information about the road. If you right-click
+      on it, you'll have a menu of actions you can apply on the road.
 
       ### Modifying
 
@@ -621,8 +631,9 @@ en:
       order to join them. Having roads connect is important for the map
       and essential for providing driving directions.
 
-      You can also click the 'Move' tool or press the `M` shortcut key to move the entire road at
-      one time, and then click again to save that movement.
+      You can also right-click on it and select the 'Move' tool, or simply press
+      the `M` shortcut key, to move the entire road at one time, and then click
+      again to save that movement.
 
       ### Deleting
 
@@ -632,8 +643,8 @@ en:
       like any other edit, the results are seen by everyone and satellite imagery
       is often out of date, so the road could simply be newly built.
 
-      You can delete a road by clicking on it to select it, then clicking the
-      trash can icon or pressing the 'Delete' key.
+      You can delete a road by clicking on it to select it, then pressing the 'Delete'
+      key or right-clicking it and then clicking the trash can icon.
 
       ### Creating
 
@@ -738,14 +749,16 @@ en:
       ### Selecting
 
       You can select a building by clicking on its border. This will highlight the
-      building and open a small tools menu and a sidebar showing more information
-      about the building.
+      building and load a sidebar showing more information about the building.
+      If you right-click on it, it will show a menu of actions you can execute
+      in the building.
 
       ### Modifying
 
       Sometimes buildings are incorrectly placed or have incorrect tags.
 
-      To move an entire building, select it, then click the 'Move' tool. Move your
+      To move an entire building, select it and press the 'M' shortcut key,
+      or right-click it and select the 'Move' tool. Move your
       mouse to shift the building, and click when it's correctly placed.
 
       To fix the specific shape of a building, click and drag the nodes that form
@@ -771,8 +784,8 @@ en:
       like any other edit, the results are seen by everyone and satellite imagery
       is often out of date, so the building could simply be newly built.
 
-      You can delete a building by clicking on it to select it, then clicking the
-      trash can icon or pressing the 'Delete' key.
+      You can delete a building by clicking on it to select it, then pressing the 'Delete'
+      key, or right-clicking it and then clicking the trash can icon.
     relations: |
       # Relations
 
@@ -782,10 +795,10 @@ en:
       highway, and *multipolygons*, which group together several lines that define
       a complex area (one with several pieces or holes in it like a donut).
 
-      The group of features in a relation are called *members*. In the sidebar, you can
-      see which relations a feature is a member of, and click on a relation there
-      to select the it. When the relation is selected, you can see all of its
-      members listed in the sidebar and highlighted on the map.
+      The group of features in a relation are called *members*. In the bottom of the
+      sidebar, you can see which relations a feature is a member of, and click on a
+      relation there will select it. When the relation is selected, you can see all of
+      its members listed in the sidebar and highlighted on the map.
 
       For the most part, iD will take care of maintaining relations automatically
       while you edit. The main thing you should be aware of is that if you delete a
@@ -807,7 +820,9 @@ en:
 
       You can create multipolygons with holes using the "Merge" tool. Draw two areas (inner
       and outer), hold the Shift key and click on each of them to select them both, and then
-      click the "Merge" (+) button.
+      press the 'C' shortcut key. Other option is to select both, and then right-click one
+      of them and click the "Merge" (+) button.
+
     geoservices: |
       # GeoServices
 

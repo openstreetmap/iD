@@ -1,0 +1,30 @@
+{
+    "icon": "poi-hinduist",
+    "fields": [
+        "name",
+        "denomination",
+        "building_area",
+        "address",
+        "service_times"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "garbhargriha",
+        "mandu",
+        "puja",
+        "shrine",
+        "temple"
+    ],
+    "tags": {
+        "amenity": "place_of_worship",
+        "religion": "hindu"
+    },
+    "reference": {
+        "key": "amenity",
+        "value": "place_of_worship"
+    },
+    "name": "Hindu Temple"
+}

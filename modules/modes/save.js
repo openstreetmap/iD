@@ -1,8 +1,20 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _clone from 'lodash-es/clone';
+import _difference from 'lodash-es/difference';
+import _filter from 'lodash-es/filter';
+import _each from 'lodash-es/each';
+import _map from 'lodash-es/map';
+import _reduce from 'lodash-es/reduce';
+import _union from 'lodash-es/union';
+import _uniq from 'lodash-es/uniq';
+import _without from 'lodash-es/without';
 
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
-import { JXON } from '../util/jxon';
 
 import {
     actionDiscardTags,
@@ -50,9 +62,11 @@ export function modeSave(context) {
         operationDelete(deletions, context)();
     }
 
+    var keybinding = d3_keybinding('select');
+
     var commit = uiCommit(context)
-            .on('cancel', cancel)
-            .on('save', save);
+        .on('cancel', cancel)
+        .on('save', save);
 
 
     function cancel() {
@@ -62,16 +76,19 @@ export function modeSave(context) {
 
     function save(changeset, tryAgain) {
 
-        var loading = uiLoading(context).message(t('save.uploading')).blocking(true),
+        var osm = context.connection(),
+            loading = uiLoading(context).message(t('save.uploading')).blocking(true),
             history = context.history(),
             origChanges = history.changes(actionDiscardTags(history.difference())),
             localGraph = context.graph(),
             remoteGraph = coreGraph(history.base(), true),
-            modified = _.filter(history.difference().summary(), {changeType: 'modified'}),
-            toCheck = _.map(_.map(modified, 'entity'), 'id'),
+            modified = _filter(history.difference().summary(), {changeType: 'modified'}),
+            toCheck = _map(_map(modified, 'entity'), 'id'),
             toLoad = withChildNodes(toCheck, localGraph),
             conflicts = [],
             errors = [];
+
+        if (!osm) return;
 
         if (!tryAgain) {
             history.perform(actionNoop());  // checkpoint
@@ -80,19 +97,19 @@ export function modeSave(context) {
         context.container().call(loading);
 
         if (toCheck.length) {
-            context.connection().loadMultiple(toLoad, loaded);
+            osm.loadMultiple(toLoad, loaded);
         } else {
             upload();
         }
 
 
         function withChildNodes(ids, graph) {
-            return _.uniq(_.reduce(ids, function(result, id) {
+            return _uniq(_reduce(ids, function(result, id) {
                 var entity = graph.entity(id);
                 if (entity.type === 'way') {
                     try {
                         var cn = graph.childNodes(entity);
-                        result.push.apply(result, _.map(_.filter(cn, 'version'), 'id'));
+                        result.push.apply(result, _map(_filter(cn, 'version'), 'id'));
                     } catch (err) {
                         /* eslint-disable no-console */
                         if (typeof console !== 'undefined') console.error(err);
@@ -100,7 +117,7 @@ export function modeSave(context) {
                     }
                 }
                 return result;
-            }, _.clone(ids)));
+            }, _clone(ids)));
         }
 
 
@@ -117,25 +134,25 @@ export function modeSave(context) {
 
             } else {
                 var loadMore = [];
-                _.each(result.data, function(entity) {
+                _each(result.data, function(entity) {
                     remoteGraph.replace(entity);
-                    toLoad = _.without(toLoad, entity.id);
+                    toLoad = _without(toLoad, entity.id);
 
                     // Because loadMultiple doesn't download /full like loadEntity,
                     // need to also load children that aren't already being checked..
                     if (!entity.visible) return;
                     if (entity.type === 'way') {
                         loadMore.push.apply(loadMore,
-                            _.difference(entity.nodes, toCheck, toLoad, loadMore));
+                            _difference(entity.nodes, toCheck, toLoad, loadMore));
                     } else if (entity.type === 'relation' && entity.isMultipolygon()) {
                         loadMore.push.apply(loadMore,
-                            _.difference(_.map(entity.members, 'id'), toCheck, toLoad, loadMore));
+                            _difference(_map(entity.members, 'id'), toCheck, toLoad, loadMore));
                     }
                 });
 
                 if (loadMore.length) {
                     toLoad.push.apply(toLoad, loadMore);
-                    context.connection().loadMultiple(loadMore, loaded);
+                    osm.loadMultiple(loadMore, loaded);
                 }
 
                 if (!toLoad.length) {
@@ -150,7 +167,7 @@ export function modeSave(context) {
                 return { id: id, text: text, action: function() { history.replace(action); } };
             }
             function formatUser(d) {
-                return '<a href="' + context.connection().userURL(d) + '" target="_blank">' + d + '</a>';
+                return '<a href="' + osm.userURL(d) + '" target="_blank">' + d + '</a>';
             }
             function entityName(entity) {
                 return utilDisplayName(entity) || (utilDisplayType(entity.id) + ' ' + entity.id);
@@ -160,7 +177,7 @@ export function modeSave(context) {
                 if (local.version !== remote.version) return false;
 
                 if (local.type === 'way') {
-                    var children = _.union(local.nodes, remote.nodes);
+                    var children = _union(local.nodes, remote.nodes);
 
                     for (var i = 0; i < children.length; i++) {
                         var a = localGraph.hasEntity(children[i]),
@@ -173,7 +190,7 @@ export function modeSave(context) {
                 return true;
             }
 
-            _.each(toCheck, function(id) {
+            _each(toCheck, function(id) {
                 var local = localGraph.entity(id),
                     remote = remoteGraph.entity(id);
 
@@ -217,9 +234,9 @@ export function modeSave(context) {
             } else {
                 var changes = history.changes(actionDiscardTags(history.difference()));
                 if (changes.modified.length || changes.created.length || changes.deleted.length) {
-                    context.connection().putChangeset(changeset, changes, uploadCallback);
+                    osm.putChangeset(changeset, changes, uploadCallback);
                 } else {        // changes were insignificant or reverted by user
-                    d3.select('.inspector-wrap *').remove();
+                    d3_select('.inspector-wrap *').remove();
                     loading.close();
                     context.flush();
                     cancel();
@@ -240,7 +257,7 @@ export function modeSave(context) {
                 success(changeset);
                 // Add delay to allow for postgres replication #1646 #2678
                 window.setTimeout(function() {
-                    d3.select('.inspector-wrap *').remove();
+                    d3_select('.inspector-wrap *').remove();
                     loading.close();
                     context.flush();
                 }, 2500);
@@ -258,11 +275,7 @@ export function modeSave(context) {
 
             selection.call(uiConflicts(context)
                 .list(conflicts)
-                .on('download', function() {
-                    var data = JXON.stringify(changeset.update({ id: 'CHANGEME' }).osmChangeJXON(origChanges)),
-                        win = window.open('data:text/xml,' + encodeURIComponent(data), '_blank');
-                    win.focus();
-                })
+                .origChanges(origChanges)
                 .on('cancel', function() {
                     history.pop();
                     selection.remove();
@@ -272,7 +285,7 @@ export function modeSave(context) {
                         if (conflicts[i].chosen === 1) {  // user chose "keep theirs"
                             var entity = context.hasEntity(conflicts[i].id);
                             if (entity && entity.type === 'way') {
-                                var children = _.uniq(entity.nodes);
+                                var children = _uniq(entity.nodes);
                                 for (var j = 0; j < children.length; j++) {
                                     history.replace(actionRevert(children[j]));
                                 }
@@ -323,14 +336,14 @@ export function modeSave(context) {
                 .classed('hide-toggle', true)
                 .text(function(d) { return d.msg || t('save.unknown_error_details'); })
                 .on('click', function() {
-                    var error = d3.select(this),
-                        detail = d3.select(this.nextElementSibling),
+                    var error = d3_select(this),
+                        detail = d3_select(this.nextElementSibling),
                         exp = error.classed('expanded');
 
                     detail.style('display', exp ? 'none' : 'block');
                     error.classed('expanded', !exp);
 
-                    d3.event.preventDefault();
+                    d3_event.preventDefault();
                 });
 
             var details = enter
@@ -373,13 +386,22 @@ export function modeSave(context) {
             context.ui().sidebar.show(commit);
         }
 
+        keybinding
+            .on('⎋', cancel, true);
+
+        d3_select(document)
+            .call(keybinding);
+
         context.container().selectAll('#content')
             .attr('class', 'inactive');
 
-        if (context.connection().authenticated()) {
+        var osm = context.connection();
+        if (!osm) return;
+
+        if (osm.authenticated()) {
             done();
         } else {
-            context.connection().authenticate(function(err) {
+            osm.authenticate(function(err) {
                 if (err) {
                     cancel();
                 } else {
@@ -391,6 +413,8 @@ export function modeSave(context) {
 
 
     mode.exit = function() {
+        keybinding.off();
+
         context.container().selectAll('#content')
             .attr('class', 'active');
 

@@ -1,12 +1,13 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { services } from '../services/index';
+import _some from 'lodash-es/some';
+import _throttle from 'lodash-es/throttle';
+import { select as d3_select } from 'd3-selection';
+import { services } from '../services';
 
 
 export function svgMapillarySigns(projection, context, dispatch) {
-    var throttledRedraw = _.throttle(function () { dispatch.call('change'); }, 1000),
+    var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000),
         minZoom = 12,
-        layer = d3.select(null),
+        layer = d3_select(null),
         _mapillary;
 
 
@@ -56,9 +57,20 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
         context.map().centerEase(d.loc);
 
+        var selected = mapillary.selectedImage(),
+            imageKey;
+
+        // Pick one of the images the sign was detected in,
+        // preference given to an image already selected.
+        d.detections.forEach(function(detection) {
+            if (!imageKey || selected === detection.image_key) {
+                imageKey = detection.image_key;
+            }
+        });
+
         mapillary
-            .selectedImage(d.key, true)
-            .updateViewer(d.key, context)
+            .selectedImage(imageKey, true)
+            .updateViewer(imageKey, context)
             .showViewer();
     }
 
@@ -77,9 +89,13 @@ export function svgMapillarySigns(projection, context, dispatch) {
         var enter = signs.enter()
             .append('foreignObject')
             .attr('class', 'icon-sign')
-            .attr('width', '32px')      // for Firefox
-            .attr('height', '32px')     // for Firefox
-            .classed('selected', function(d) { return d.key === imageKey; })
+            .attr('width', '24px')      // for Firefox
+            .attr('height', '24px')     // for Firefox
+            .classed('selected', function(d) {
+                return _some(d.detections, function(detection) {
+                    return detection.image_key === imageKey;
+                });
+            })
             .on('click', click);
 
         enter
@@ -89,8 +105,8 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
         signs
             .merge(enter)
-            .attr('x', function(d) { return projection(d.loc)[0] - 16; })   // offset by -16px to
-            .attr('y', function(d) { return projection(d.loc)[1] - 16; });  // center signs on loc
+            .attr('x', function(d) { return projection(d.loc)[0] - 12; })   // offset by -12px to
+            .attr('y', function(d) { return projection(d.loc)[1] - 12; });  // center signs on loc
     }
 
 

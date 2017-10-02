@@ -48,7 +48,9 @@ export var osmPavedTags = {
     'surface': {
         'paved': true,
         'asphalt': true,
-        'concrete': true
+        'concrete': true,
+        'concrete:lanes': true,
+        'concrete:plates': true
     },
     'tracktype': {
         'grade1': true

@@ -1,17 +1,22 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _debounce from 'lodash-es/debounce';
+
+import { select as d3_select } from 'd3-selection';
+
 import { t } from '../util/locale';
 import { svgIcon } from '../svg/index';
 
 
 export function uiContributors(context) {
-    var debouncedUpdate = _.debounce(function() { update(); }, 1000),
+    var osm = context.connection(),
+        debouncedUpdate = _debounce(function() { update(); }, 1000),
         limit = 4,
         hidden = false,
-        wrap = d3.select(null);
+        wrap = d3_select(null);
 
 
     function update() {
+        if (!osm) return;
+
         var users = {},
             entities = context.intersects(context.map().extent());
 
@@ -25,26 +30,26 @@ export function uiContributors(context) {
         wrap.html('')
             .call(svgIcon('#icon-nearby', 'pre-text light'));
 
-        var userList = d3.select(document.createElement('span'));
+        var userList = d3_select(document.createElement('span'));
 
         userList.selectAll()
             .data(subset)
             .enter()
             .append('a')
             .attr('class', 'user-link')
-            .attr('href', function(d) { return context.connection().userURL(d); })
+            .attr('href', function(d) { return osm.userURL(d); })
             .attr('target', '_blank')
             .attr('tabindex', -1)
             .text(String);
 
         if (u.length > limit) {
-            var count = d3.select(document.createElement('span'));
+            var count = d3_select(document.createElement('span'));
 
             count.append('a')
                 .attr('target', '_blank')
                 .attr('tabindex', -1)
                 .attr('href', function() {
-                    return context.connection().changesetsURL(context.map().center(), context.map().zoom());
+                    return osm.changesetsURL(context.map().center(), context.map().zoom());
                 })
                 .text(u.length - limit + 1);
 
@@ -71,10 +76,11 @@ export function uiContributors(context) {
 
 
     return function(selection) {
+        if (!osm) return;
         wrap = selection;
         update();
 
-        context.connection().on('loaded.contributors', debouncedUpdate);
+        osm.on('loaded.contributors', debouncedUpdate);
         context.map().on('move.contributors', debouncedUpdate);
     };
 }

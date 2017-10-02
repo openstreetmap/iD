@@ -1,6 +1,7 @@
 {
     "icon": "restaurant",
     "fields": [
+        "name",
         "cuisine",
         "operator",
         "address",

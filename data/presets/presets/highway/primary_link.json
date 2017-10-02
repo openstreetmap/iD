@@ -1,12 +1,13 @@
 {
     "icon": "highway-primary-link",
     "fields": [
+        "name",
         "oneway",
         "maxspeed",
         "lanes",
         "surface",
         "maxheight",
-        "ref",
+        "ref_road_number",
         "cycleway",
         "structure",
         "access"

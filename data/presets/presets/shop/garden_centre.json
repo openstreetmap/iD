@@ -1,6 +1,7 @@
 {
     "icon": "garden-center",
     "fields": [
+        "name",
         "operator",
         "address",
         "building_area",

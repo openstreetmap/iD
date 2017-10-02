@@ -1,6 +1,7 @@
 {
     "icon": "wheelchair",
     "fields": [
+        "name",
         "operator",
         "address",
         "building_area",

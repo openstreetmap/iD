@@ -1,7 +1,7 @@
 import {
-    polygonHull as d3polygonHull,
-    polygonCentroid as d3polygonCentroid
-} from 'd3';
+    polygonHull as d3_polygonHull,
+    polygonCentroid as d3_polygonCentroid
+} from 'd3-polygon';
 
 import {
     geoEuclideanDistance,
@@ -22,15 +22,15 @@ export function actionReflect(reflectIds, projection) {
     // http://gis.stackexchange.com/questions/3739/generalisation-strategies-for-building-outlines/3756#3756
     function getSmallestSurroundingRectangle(graph, nodes) {
         var points = nodes.map(function(n) { return projection(n.loc); }),
-            hull = d3polygonHull(points),
-            centroid = d3polygonCentroid(hull),
+            hull = d3_polygonHull(points),
+            centroid = d3_polygonCentroid(hull),
             minArea = Infinity,
             ssrExtent = [],
             ssrAngle = 0,
             c1 = hull[0];
 
-        for (var i = 0; i < hull.length - 1; i++) {
-            var c2 = hull[i + 1],
+        for (var i = 0; i <= hull.length - 1; i++) {
+            var c2 = (i === hull.length - 1) ? hull[0] : hull[i + 1],
                 angle = Math.atan2(c2[1] - c1[1], c2[0] - c1[0]),
                 poly = geoRotate(hull, -angle, centroid),
                 extent = poly.reduce(function(extent, point) {

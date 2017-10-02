@@ -1,5 +1,6 @@
 import { t } from '../util/locale';
-import { behaviorDrawWay } from '../behavior/index';
+import { behaviorDrawWay } from '../behavior';
+
 
 export function modeDrawLine(context, wayId, startGraph, affix) {
     var mode = {

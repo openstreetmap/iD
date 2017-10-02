@@ -1,6 +1,10 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { geoExtent, geoCross } from '../geo/index';
+import _extend from 'lodash-es/extend';
+import _map from 'lodash-es/map';
+import _uniq from 'lodash-es/uniq';
+
+import { geoArea as d3_geoArea } from 'd3-geo';
+
+import { geoExtent, geoCross } from '../geo';
 import { osmEntity } from './entity';
 import { osmLanes } from './lanes';
 import { osmOneWayTags } from './tags';
@@ -21,7 +25,7 @@ osmEntity.way = osmWay;
 osmWay.prototype = Object.create(osmEntity.prototype);
 
 
-_.extend(osmWay.prototype, {
+_extend(osmWay.prototype, {
     type: 'way',
     nodes: [],
     approvedForEdit: null,
@@ -129,8 +133,8 @@ _.extend(osmWay.prototype, {
     isConvex: function(resolver) {
         if (!this.isClosed() || this.isDegenerate()) return null;
 
-        var nodes = _.uniq(resolver.childNodes(this)),
-            coords = _.map(nodes, 'loc'),
+        var nodes = _uniq(resolver.childNodes(this)),
+            coords = _map(nodes, 'loc'),
             curr = 0, prev = 0;
 
         for (var i = 0; i < coords.length; i++) {
@@ -152,6 +156,23 @@ _.extend(osmWay.prototype, {
 
 
     isArea: function() {
+        // `highway` and `railway` are typically linear features, but there
+        // are a few exceptions that should be treated as areas, even in the
+        // absence of a proper `area=yes` or `areaKeys` tag.. see #4194
+        var lineKeys = {
+            highway: {
+                rest_area: true,
+                services: true
+            },
+            railway: {
+                roundhouse: true,
+                station: true,
+                traverser: true,
+                turntable: true,
+                wash: true
+            }
+        };
+
         if (this.tags.area === 'yes')
             return true;
         if (!this.isClosed() || this.tags.area === 'no')
@@ -160,13 +181,16 @@ _.extend(osmWay.prototype, {
             if (key in areaKeys && !(this.tags[key] in areaKeys[key])) {
                 return true;
             }
+            if (key in lineKeys && this.tags[key] in lineKeys[key]) {
+                return true;
+            }
         }
         return false;
     },
 
 
     isDegenerate: function() {
-        return _.uniq(this.nodes).length < (this.isArea() ? 3 : 2);
+        return _uniq(this.nodes).length < (this.isArea() ? 3 : 2);
     },
 
 
@@ -363,10 +387,10 @@ _.extend(osmWay.prototype, {
             way: {
                 '@id': this.osmId(),
                 '@version': this.version || 0,
-                nd: _.map(this.nodes, function(id) {
+                nd: _map(this.nodes, function(id) {
                     return { keyAttributes: { ref: osmEntity.id.toOSM(id) } };
                 }),
-                tag: _.map(this.tags, function(v, k) {
+                tag: _map(this.tags, function(v, k) {
                     return { keyAttributes: { k: k, v: v } };
                 })
             }
@@ -380,7 +404,7 @@ _.extend(osmWay.prototype, {
 
     asGeoJSON: function(resolver) {
         return resolver.transient(this, 'GeoJSON', function() {
-            var coordinates = _.map(resolver.childNodes(this), 'loc');
+            var coordinates = _map(resolver.childNodes(this), 'loc');
             if (this.isArea() && this.isClosed()) {
                 return {
                     type: 'Polygon',
@@ -402,20 +426,20 @@ _.extend(osmWay.prototype, {
 
             var json = {
                 type: 'Polygon',
-                coordinates: [_.map(nodes, 'loc')]
+                coordinates: [_map(nodes, 'loc')]
             };
 
             if (!this.isClosed() && nodes.length) {
                 json.coordinates[0].push(nodes[0].loc);
             }
 
-            var area = d3.geoArea(json);
+            var area = d3_geoArea(json);
 
             // Heuristic for detecting counterclockwise winding order. Assumes
             // that OpenStreetMap polygons are not hemisphere-spanning.
             if (area > 2 * Math.PI) {
                 json.coordinates[0] = json.coordinates[0].reverse();
-                area = d3.geoArea(json);
+                area = d3_geoArea(json);
             }
 
             return isNaN(area) ? 0 : area;

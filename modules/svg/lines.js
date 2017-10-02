@@ -1,5 +1,11 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _groupBy from 'lodash-es/groupBy';
+import _filter from 'lodash-es/filter';
+import _flatten from 'lodash-es/flatten';
+import _forOwn from 'lodash-es/forOwn';
+import _map from 'lodash-es/map';
+
+import { range as d3_range } from 'd3-array';
+
 import {
     svgOneWaySegments,
     svgPath,
@@ -108,14 +114,11 @@ export function svgLines(projection, context) {
         }
 
         ways = ways.filter(getPath);
-        pathdata = _.groupBy(ways, function(way) { return way.layer(); });
+        pathdata = _groupBy(ways, function(way) { return way.layer(); });
 
-        _.forOwn(pathdata, function(v, k) {
-            onewaydata[k] = _(v)
-                .filter(function(d) { return d.isOneWay(); })
-                .map(svgOneWaySegments(projection, graph, 35))
-                .flatten()
-                .valueOf();
+        _forOwn(pathdata, function(v, k) {
+            var arr = _filter(v, function(d) { return d.isOneWay(); });
+            onewaydata[k] = _flatten(_map(arr, svgOneWaySegments(projection, graph, 35)));
         });
 
 
@@ -123,7 +126,7 @@ export function svgLines(projection, context) {
 
         var layergroup = layer
             .selectAll('g.layergroup')
-            .data(d3.range(-10, 11));
+            .data(d3_range(-10, 11));
 
         layergroup = layergroup.enter()
             .append('g')

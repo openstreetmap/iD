@@ -1,6 +1,7 @@
 {
     "icon": "poi-military",
     "fields": [
+        "name",
         "building_area"
     ],
     "geometry": [

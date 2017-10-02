@@ -1,6 +1,7 @@
 {
     "icon": "pitch",
     "fields": [
+        "name",
         "sport",
         "address",
         "opening_hours"
@@ -14,7 +15,8 @@
     },
     "terms": [
         "fitness",
-        "gym"
+        "gym",
+        "trim trail"
     ],
     "name": "Outdoor Fitness Station"
 }

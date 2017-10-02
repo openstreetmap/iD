@@ -1,12 +1,14 @@
-import * as d3 from 'd3';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { select as d3_select } from 'd3-selection';
+
 import { t } from '../util/locale';
 import { tooltip } from '../util/tooltip';
-import { svgIcon } from '../svg/index';
+import { svgIcon } from '../svg';
 import { utilRebind } from '../util/rebind';
 
 
 export function uiSuccess(context) {
-    var dispatch = d3.dispatch('cancel'),
+    var dispatch = d3_dispatch('cancel'),
         changeset;
 
 
@@ -43,8 +45,10 @@ export function uiSuccess(context) {
             .append('span')
             .text(t('success.help_link_text'));
 
-        var changesetURL = context.connection().changesetURL(changeset.id);
+        var osm = context.connection();
+        if (!osm) return;
 
+        var changesetURL = osm.changesetURL(changeset.id);
 
         var viewOnOsm = body
             .append('a')
@@ -62,18 +66,17 @@ export function uiSuccess(context) {
             .append('div')
             .text(t('success.view_on_osm'));
 
-
         var message = (changeset.tags.comment || t('success.edited_osm')).substring(0, 130) +
-            ' ' + context.connection().changesetURL(changeset.id);
+            ' ' + changesetURL;
 
-        var sharing = {
-            facebook: 'https://facebook.com/sharer/sharer.php?u=' + encodeURIComponent(changesetURL),
-            twitter: 'https://twitter.com/intent/tweet?source=webclient&text=' + encodeURIComponent(message),
-            google: 'https://plus.google.com/share?url=' + encodeURIComponent(changesetURL)
-        };
+        var sharing = [
+            { key: 'facebook', value: 'https://facebook.com/sharer/sharer.php?u=' + encodeURIComponent(changesetURL) },
+            { key: 'twitter', value: 'https://twitter.com/intent/tweet?source=webclient&text=' + encodeURIComponent(message) },
+            { key: 'google', value: 'https://plus.google.com/share?url=' + encodeURIComponent(changesetURL) }
+        ];
 
         body.selectAll('.button.social')
-            .data(d3.entries(sharing))
+            .data(sharing)
             .enter()
             .append('a')
             .attr('class', 'button social col4')
@@ -82,7 +85,7 @@ export function uiSuccess(context) {
             .call(tooltip()
                 .title(function(d) { return t('success.' + d.key); })
                 .placement('bottom'))
-            .each(function(d) { d3.select(this).call(svgIcon('#logo-' + d.key, 'social')); });
+            .each(function(d) { d3_select(this).call(svgIcon('#logo-' + d.key, 'social')); });
     }
 
 

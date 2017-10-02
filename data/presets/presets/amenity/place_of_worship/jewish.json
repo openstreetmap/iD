@@ -1,6 +1,7 @@
 {
     "icon": "religious-jewish",
     "fields": [
+        "name",
         "denomination",
         "building_area",
         "address",

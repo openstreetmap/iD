@@ -1,15 +1,18 @@
-import * as d3 from 'd3';
+import { event as d3_event } from 'd3-selection';
+
 import { t } from '../util/locale';
-import { svgIcon } from '../svg/index';
+import { svgIcon } from '../svg';
 
 
 export function uiStatus(context) {
-    var connection = context.connection();
+    var osm = context.connection();
+
 
     return function(selection) {
+        if (!osm) return;
 
         function update() {
-            connection.status(function(err, apiStatus) {
+            osm.status(function(err, apiStatus) {
                 selection.html('');
 
                 if (err) {
@@ -23,10 +26,11 @@ export function uiStatus(context) {
                             .append('span')
                             .text(t('login'))
                             .on('click.login', function() {
-                                d3.event.preventDefault();
-                                connection.authenticate();
+                                d3_event.preventDefault();
+                                osm.authenticate();
                             });
                     } else {
+                        // eslint-disable-next-line no-warning-comments
                         // TODO: nice messages for different error types
                         selection.text(t('status.error'));
                     }
@@ -41,8 +45,7 @@ export function uiStatus(context) {
             });
         }
 
-        connection
-            .on('change', function() { update(selection); });
+        osm.on('change', function() { update(selection); });
 
         window.setInterval(update, 90000);
         update(selection);

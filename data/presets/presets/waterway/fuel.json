@@ -1,6 +1,7 @@
 {
     "icon": "fuel",
     "fields": [
+        "name",
         "operator",
         "address",
         "opening_hours",

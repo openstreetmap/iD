@@ -1,0 +1,32 @@
+{
+    "icon": "poi-nuclear",
+    "fields": [
+        "operator",
+        "generator/source",
+        "generator/method",
+        "generator/type",
+        "generator/output/electricity"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [
+        "fission",
+        "generator",
+        "nuclear",
+        "nuke",
+        "reactor"
+    ],
+    "tags": {
+        "power": "generator",
+        "generator:source": "nuclear",
+        "generator:method": "fission"
+    },
+    "reference": {
+        "key": "generator:source",
+        "value": "nuclear"
+    },
+    "name": "Nuclear Reactor"
+}

@@ -1,18 +1,47 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { t, currentLocale, addTranslation, setLocale } from '../util/locale';
+import _cloneDeep from 'lodash-es/cloneDeep';
+import _debounce from 'lodash-es/debounce';
+import _each from 'lodash-es/each';
+import _find from 'lodash-es/find';
+import _forOwn from 'lodash-es/forOwn';
+import _isObject from 'lodash-es/isObject';
+import _isString from 'lodash-es/isString';
+
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { json as d3_json } from 'd3-request';
+import { select as d3_select } from 'd3-selection';
+
+import {
+    t,
+    currentLocale,
+    addTranslation,
+    setLocale
+} from '../util/locale';
+
 import { coreHistory } from './history';
-import { dataLocales, dataEn } from '../../data/index';
+
+import {
+    dataLocales,
+    dataEn
+} from '../../data';
+
 import { geoRawMercator } from '../geo/raw_mercator';
 import { modeSelect } from '../modes/select';
-import { presetIndex } from '../presets/index';
-import { rendererBackground } from '../renderer/background';
-import { rendererFeatures } from '../renderer/features';
-import { rendererMap } from '../renderer/map';
-import { services } from '../services/index';
+import { presetIndex } from '../presets';
+
+import {
+    rendererBackground,
+    rendererFeatures,
+    rendererMap
+} from '../renderer';
+
+import { services } from '../services';
 import { uiInit } from '../ui/init';
 import { utilDetect } from '../util/detect';
-import { utilRebind } from '../util/rebind';
+
+import {
+    utilCallWhenIdle,
+    utilRebind
+} from '../util';
 
 
 export var areaKeys = {};
@@ -24,29 +53,29 @@ export function setAreaKeys(value) {
 
 export function coreContext() {
     var context = {};
-    context.version = '2.3.0';
+    context.version = '2.4.1';
 
     // create a special translation that contains the keys in place of the strings
-    var tkeys = _.cloneDeep(dataEn);
+    var tkeys = _cloneDeep(dataEn);
     var parents = [];
 
     function traverser(v, k, obj) {
         parents.push(k);
-        if (_.isObject(v)) {
-            _.forOwn(v, traverser);
-        } else if (_.isString(v)) {
+        if (_isObject(v)) {
+            _forOwn(v, traverser);
+        } else if (_isString(v)) {
             obj[k] = parents.join('.');
         }
         parents.pop();
     }
 
-    _.forOwn(tkeys, traverser);
+    _forOwn(tkeys, traverser);
     addTranslation('_tkeys_', tkeys);
 
     addTranslation('en', dataEn);
     setLocale('en');
 
-    var dispatch = d3.dispatch('enter', 'exit', 'change');
+    var dispatch = d3_dispatch('enter', 'exit', 'change');
 
     // https://github.com/openstreetmap/iD/issues/772
     // http://mathiasbynens.be/notes/localstorage-pattern#comment-9
@@ -83,36 +112,42 @@ export function coreContext() {
 
 
     /* Connection */
-    function entitiesLoaded(err, result) {
+    var entitiesLoaded = utilCallWhenIdle(function entitiesLoaded(err, result) {
         if (!err) history.merge(result.data, result.extent);
-    }
+    });
 
     context.preauth = function(options) {
-        connection.switch(options);
+        if (connection) {
+            connection.switch(options);
+        }
         return context;
     };
 
-    context.loadTiles = function(projection, dimensions, callback) {
+    context.loadTiles = utilCallWhenIdle(function(projection, dimensions, callback) {
         function done(err, result) {
             entitiesLoaded(err, result);
             if (callback) callback(err, result);
         }
-        connection.loadTiles(projection, dimensions, done);
-    };
+        if (connection) {
+            connection.loadTiles(projection, dimensions, done);
+        }
+    });
 
     context.loadEntity = function(id, callback) {
         function done(err, result) {
             entitiesLoaded(err, result);
             if (callback) callback(err, result);
         }
-        connection.loadEntity(id, done);
+        if (connection) {
+            connection.loadEntity(id, done);
+        }
     };
 
     context.zoomToEntity = function(id, zoomTo) {
         if (zoomTo !== false) {
             this.loadEntity(id, function(err, result) {
                 if (err) return;
-                var entity = _.find(result.data, function(e) { return e.id === id; });
+                var entity = _find(result.data, function(e) { return e.id === id; });
                 if (entity) { map.zoomTo(entity); }
             });
         }
@@ -136,7 +171,9 @@ export function coreContext() {
     context.minEditableZoom = function(_) {
         if (!arguments.length) return minEditableZoom;
         minEditableZoom = _;
-        connection.tileZoom(_);
+        if (connection) {
+            connection.tileZoom(_);
+        }
         return context;
     };
 
@@ -151,7 +188,7 @@ export function coreContext() {
 
     context.save = function() {
         // no history save, no message onbeforeunload
-        if (inIntro || d3.select('.modal').size()) return;
+        if (inIntro || d3_select('.modal').size()) return;
 
         var canSave;
         if (mode && mode.id === 'save') {
@@ -286,7 +323,7 @@ export function coreContext() {
 
 
     /* Container */
-    var container = d3.select(document.body);
+    var container = d3_select(document.body);
     context.container = function(_) {
         if (!arguments.length) return container;
         container = _;
@@ -341,7 +378,7 @@ export function coreContext() {
     context.loadLocale = function(callback) {
         if (locale && locale !== 'en' && dataLocales.hasOwnProperty(locale)) {
             localePath = localePath || context.asset('locales/' + locale + '.json');
-            d3.json(localePath, function(err, result) {
+            d3_json(localePath, function(err, result) {
                 if (!err) {
                     addTranslation(locale, result[locale]);
                     setLocale(locale);
@@ -366,7 +403,7 @@ export function coreContext() {
     /* reset (aka flush) */
     context.reset = context.flush = function() {
         context.debouncedSave.cancel();
-        _.each(services, function(service) {
+        _each(services, function(service) {
             if (service && typeof service.reset === 'function') {
                 service.reset(context);
             }
@@ -394,7 +431,7 @@ export function coreContext() {
 
     // Debounce save, since it's a synchronous localStorage write,
     // and history changes can happen frequently (e.g. when dragging).
-    context.debouncedSave = _.debounce(context.save, 350);
+    context.debouncedSave = _debounce(context.save, 350);
     function withDebouncedSave(fn) {
         return function() {
             var result = fn.apply(history, arguments);
@@ -427,7 +464,7 @@ export function coreContext() {
     context.zoomOutFurther = map.zoomOutFurther;
     context.redrawEnable = map.redrawEnable;
 
-    _.each(services, function(service) {
+    _each(services, function(service) {
         if (service && typeof service.init === 'function') {
             service.init(context);
         }

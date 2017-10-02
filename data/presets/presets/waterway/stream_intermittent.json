@@ -1,0 +1,43 @@
+{
+    "icon": "waterway-stream",
+    "fields": [
+        "name",
+        "structure_waterway",
+        "width",
+        "intermittent"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "terms": [
+        "arroyo",
+        "beck",
+        "branch",
+        "brook",
+        "burn",
+        "course",
+        "creek",
+        "drift",
+        "flood",
+        "flow",
+        "gully",
+        "run",
+        "runnel",
+        "rush",
+        "spate",
+        "spritz",
+        "tributary",
+        "wadi",
+        "wash",
+        "watercourse"
+    ],
+    "tags": {
+        "waterway": "stream",
+        "intermittent": "yes"
+    },
+    "reference": {
+        "key": "waterway",
+        "value": "stream"
+    },
+    "name": "Intermittent Stream"
+}

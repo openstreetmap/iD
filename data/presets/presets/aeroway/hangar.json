@@ -3,6 +3,7 @@
         "area"
     ],
     "fields": [
+        "name",
         "building_area"
     ],
     "tags": {

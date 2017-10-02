@@ -1,6 +1,11 @@
 {
-    "name": "Other",
+    "fields": [
+        "name"
+    ],
+    "geometry": [
+        "vertex"
+    ],
     "tags": {},
-    "geometry": ["vertex"],
+    "name": "Other",
     "matchScore": 0.1
 }

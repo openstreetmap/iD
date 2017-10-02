@@ -1,0 +1,19 @@
+{
+    "icon": "buddhism",
+    "fields": [
+        "building_area"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "water",
+        "wheel",
+        "mill"
+    ],
+    "tags": {
+        "man_made": "watermill"
+    },
+    "name": "Watermill"
+}

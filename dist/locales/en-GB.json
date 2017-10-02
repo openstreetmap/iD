@@ -328,10 +328,9 @@
         },
         "commit": {
             "title": "Upload to OpenStreetMap",
-            "description_placeholder": "Brief description of your contributions (required)",
-            "message_label": "Changeset Comment",
             "upload_explanation": "The changes you upload will be visible on all maps that use OpenStreetMap data.",
             "upload_explanation_with_user": "The changes you upload as {user} will be visible on all maps that use OpenStreetMap data.",
+            "request_review": "I would like someone to review my edits.",
             "save": "Upload",
             "cancel": "Cancel",
             "changes": "{count} Changes",
@@ -547,7 +546,9 @@
         },
         "restore": {
             "heading": "You have unsaved changes",
-            "description": "Do you wish to restore unsaved changes from a previous editing session?"
+            "description": "Do you wish to restore unsaved changes from a previous editing session?",
+            "restore": "Restore my changes",
+            "reset": "Discard my changes"
         },
         "save": {
             "title": "Save",
@@ -1228,7 +1229,7 @@
                     "label": "Type"
                 },
                 "atm": {
-                    "label": "ATM"
+                    "label": "Cash Machine"
                 },
                 "backrest": {
                     "label": "Backrest"
@@ -1260,7 +1261,7 @@
                     "label": "Type"
                 },
                 "bin": {
-                    "label": "Waste Bin"
+                    "label": "Rubbish Bin"
                 },
                 "blood_components": {
                     "label": "Blood Components",
@@ -1279,6 +1280,10 @@
                 },
                 "brand": {
                     "label": "Brand"
+                },
+                "bridge": {
+                    "label": "Type",
+                    "placeholder": "Default"
                 },
                 "building": {
                     "label": "Building"
@@ -1339,6 +1344,9 @@
                         "clockwise": "Clockwise"
                     }
                 },
+                "clothes": {
+                    "label": "Clothes"
+                },
                 "club": {
                     "label": "Type"
                 },
@@ -1356,7 +1364,7 @@
                     "placeholder": "http://example.com/"
                 },
                 "content": {
-                    "label": "Contents"
+                    "label": "Content"
                 },
                 "country": {
                     "label": "Country"
@@ -1378,6 +1386,10 @@
                 },
                 "currency_multi": {
                     "label": "Currency Types"
+                },
+                "cutting": {
+                    "label": "Type",
+                    "placeholder": "Default"
                 },
                 "cycle_network": {
                     "label": "Network"
@@ -1464,6 +1476,10 @@
                     "label": "Email",
                     "placeholder": "example@example.com"
                 },
+                "embankment": {
+                    "label": "Type",
+                    "placeholder": "Default"
+                },
                 "emergency": {
                     "label": "Emergency"
                 },
@@ -1504,6 +1520,10 @@
                 "fixme": {
                     "label": "Fix Me"
                 },
+                "ford": {
+                    "label": "Type",
+                    "placeholder": "Default"
+                },
                 "fuel": {
                     "label": "Fuel"
                 },
@@ -1525,15 +1545,15 @@
                 "generator/method": {
                     "label": "Method"
                 },
+                "generator/output/electricity": {
+                    "label": "Power Output",
+                    "placeholder": "50 MW, 100 MW, 200 MW..."
+                },
                 "generator/source": {
                     "label": "Source"
                 },
                 "generator/type": {
                     "label": "Type"
-                },
-                "golf_hole": {
-                    "label": "Reference",
-                    "placeholder": "Hole number (1-18)"
                 },
                 "grape_variety": {
                     "label": "Grape Varieties"
@@ -1605,6 +1625,9 @@
                 "kerb": {
                     "label": "Kerb"
                 },
+                "label": {
+                    "label": "Label"
+                },
                 "lamp_type": {
                     "label": "Type"
                 },
@@ -1616,7 +1639,8 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "layer": {
-                    "label": "Layer"
+                    "label": "Layer",
+                    "placeholder": "0"
                 },
                 "leaf_cycle": {
                     "label": "Leaf Cycle",
@@ -1668,12 +1692,15 @@
                     "placeholder": "2, 4, 6..."
                 },
                 "lit": {
-                    "label": "Street Lighting"
+                    "label": "Lit"
                 },
                 "location": {
                     "label": "Location"
                 },
                 "man_made": {
+                    "label": "Type"
+                },
+                "manhole": {
                     "label": "Type"
                 },
                 "map_size": {
@@ -1695,6 +1722,10 @@
                 },
                 "maxweight": {
                     "label": "Max Weight"
+                },
+                "milestone_position": {
+                    "label": "Milestone Position",
+                    "placeholder": "Distance to one decimal (123.4)"
                 },
                 "mtb/scale": {
                     "label": "Mountain Biking Difficulty",
@@ -1883,6 +1914,10 @@
                 "plant": {
                     "label": "Plant"
                 },
+                "plant/output/electricity": {
+                    "label": "Power Output",
+                    "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
                 "population": {
                     "label": "Population"
                 },
@@ -1912,7 +1947,37 @@
                     }
                 },
                 "ref": {
-                    "label": "Reference"
+                    "label": "Reference Code"
+                },
+                "ref_aeroway_gate": {
+                    "label": "Gate Number"
+                },
+                "ref_golf_hole": {
+                    "label": "Hole Number",
+                    "placeholder": "1-18"
+                },
+                "ref_highway_junction": {
+                    "label": "Junction Number"
+                },
+                "ref_platform": {
+                    "label": "Platform Number"
+                },
+                "ref_road_number": {
+                    "label": "Road Number"
+                },
+                "ref_route": {
+                    "label": "Route Number"
+                },
+                "ref_runway": {
+                    "label": "Runway Number",
+                    "placeholder": "e.g. 01L/19R"
+                },
+                "ref_stop_position": {
+                    "label": "Stop Number"
+                },
+                "ref_taxiway": {
+                    "label": "Taxiway Name",
+                    "placeholder": "e.g. A5"
                 },
                 "relation": {
                     "label": "Type"
@@ -2026,9 +2091,6 @@
                 },
                 "social_facility_for": {
                     "label": "People Served"
-                },
-                "source": {
-                    "label": "Source"
                 },
                 "sport": {
                     "label": "Sports"
@@ -2168,6 +2230,10 @@
                     "label": "Trees"
                 },
                 "tunnel": {
+                    "label": "Type",
+                    "placeholder": "Default"
+                },
+                "tunnel_waterway": {
                     "label": "Tunnel"
                 },
                 "vending": {
@@ -2300,7 +2366,7 @@
                     "name": "Arts Centre"
                 },
                 "amenity/atm": {
-                    "name": "ATM"
+                    "name": "Cash Machine"
                 },
                 "amenity/bank": {
                     "name": "Bank"
@@ -2480,11 +2546,23 @@
                 "amenity/place_of_worship/christian": {
                     "name": "Church"
                 },
+                "amenity/place_of_worship/hindu": {
+                    "name": "Hindu Temple"
+                },
                 "amenity/place_of_worship/jewish": {
                     "name": "Synagogue"
                 },
                 "amenity/place_of_worship/muslim": {
                     "name": "Mosque"
+                },
+                "amenity/place_of_worship/shinto": {
+                    "name": "Shinto Shrine"
+                },
+                "amenity/place_of_worship/sikh": {
+                    "name": "Sikh Temple"
+                },
+                "amenity/place_of_worship/taoist": {
+                    "name": "Taoist Temple"
                 },
                 "amenity/planetarium": {
                     "name": "Planetarium"
@@ -2531,6 +2609,9 @@
                 },
                 "amenity/school": {
                     "name": "School Grounds"
+                },
+                "amenity/scrapyard": {
+                    "name": "Scrap Yard"
                 },
                 "amenity/shelter": {
                     "name": "Shelter"
@@ -2610,8 +2691,11 @@
                 "amenity/veterinary": {
                     "name": "Veterinary"
                 },
+                "amenity/waste/dog_excrement": {
+                    "name": "Dog Excrement Bin"
+                },
                 "amenity/waste_basket": {
-                    "name": "Waste Basket"
+                    "name": "Rubbish Bin"
                 },
                 "amenity/waste_disposal": {
                     "name": "Garbage Dumpster"
@@ -3383,7 +3467,7 @@
                     "name": "American Football Field"
                 },
                 "leisure/pitch/baseball": {
-                    "name": "Baseball"
+                    "name": "Baseball Diamond"
                 },
                 "leisure/pitch/basketball": {
                     "name": "Basketball Court"
@@ -3535,8 +3619,20 @@
                 "man_made/water_works": {
                     "name": "Water Works"
                 },
+                "man_made/watermill": {
+                    "name": "Watermill"
+                },
+                "man_made/windmill": {
+                    "name": "Windmill"
+                },
                 "man_made/works": {
                     "name": "Factory"
+                },
+                "manhole": {
+                    "name": "Manhole"
+                },
+                "manhole/drain": {
+                    "name": "Storm Drain"
                 },
                 "natural": {
                     "name": "Natural"
@@ -3745,6 +3841,12 @@
                 "power/generator": {
                     "name": "Power Generator"
                 },
+                "power/generator/source_nuclear": {
+                    "name": "Nuclear Reactor"
+                },
+                "power/generator/source_wind": {
+                    "name": "Wind Turbine"
+                },
                 "power/line": {
                     "name": "Power Line"
                 },
@@ -3908,7 +4010,7 @@
                     "name": "Carpet Store"
                 },
                 "shop/charity": {
-                    "name": "Charity Store"
+                    "name": "Charity Shop"
                 },
                 "shop/cheese": {
                     "name": "Cheese Store"

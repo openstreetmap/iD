@@ -1,6 +1,7 @@
 {
     "icon": "bus",
     "fields": [
+        "name",
         "operator",
         "address",
         "capacity",

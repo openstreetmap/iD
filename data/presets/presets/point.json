@@ -1,6 +1,11 @@
 {
-    "name": "Point",
+    "fields": [
+        "name"
+    ],
+    "geometry": [
+        "point"
+    ],
     "tags": {},
-    "geometry": ["point"],
+    "name": "Point",
     "matchScore": 0.1
 }

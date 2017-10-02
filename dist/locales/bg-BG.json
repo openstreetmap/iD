@@ -740,9 +740,6 @@
                 "railway": {
                     "label": "Вид"
                 },
-                "ref": {
-                    "label": "Забележка"
-                },
                 "relation": {
                     "label": "Вид"
                 },
@@ -766,9 +763,6 @@
                 },
                 "shop": {
                     "label": "Вид"
-                },
-                "source": {
-                    "label": "Източник"
                 },
                 "structure": {
                     "label": "Структура",

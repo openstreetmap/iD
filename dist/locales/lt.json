@@ -328,8 +328,6 @@
         },
         "commit": {
             "title": "Įkelti į OpenStreetMap",
-            "description_placeholder": "Trumpas jūsų indėlio aprašymas (privalomas)",
-            "message_label": "Pakeitimo komentaras",
             "upload_explanation": "Jūsų įkeliami pakeitimai bus matomi visuose žemėlapiuose, naudojančiuose OpenStreetMap duomenis.",
             "upload_explanation_with_user": "Pakeitimai, kuriuos jūs įkeliate kaip naudotojas {user} bus matomi visuose žemėlapiuose, naudojančiuose OpenStreetMap duomenis.",
             "save": "Įkelti",
@@ -966,9 +964,6 @@
                 "contact/webcam": {
                     "placeholder": "http://pavyzdys.lt/"
                 },
-                "content": {
-                    "label": "Turinys"
-                },
                 "country": {
                     "label": "Šalis"
                 },
@@ -1119,10 +1114,6 @@
                 },
                 "generator/type": {
                     "label": "Tipas"
-                },
-                "golf_hole": {
-                    "label": "Nuoroda",
-                    "placeholder": "Duobutės numeris (1-18)"
                 },
                 "handicap": {
                     "label": "Neįgaliesiems",
@@ -1450,9 +1441,6 @@
                         "container": "Konteineris"
                     }
                 },
-                "ref": {
-                    "label": "Šaltinis"
-                },
                 "relation": {
                     "label": "Tipas"
                 },
@@ -1541,9 +1529,6 @@
                         "impassable": "Nepravažiuojama / jokiam ratuotam transportui"
                     }
                 },
-                "source": {
-                    "label": "Šaltinis"
-                },
                 "stars": {
                     "label": "Žvaigždutės"
                 },
@@ -1622,9 +1607,6 @@
                 },
                 "trees": {
                     "label": "Medžiai"
-                },
-                "tunnel": {
-                    "label": "Tunelis"
                 },
                 "vending": {
                     "label": "Prekių tipas"
@@ -2764,8 +2746,7 @@
                     "terms": "laikraštis"
                 },
                 "office/physician": {
-                    "name": "Gydytojas",
-                    "terms": "Daktaras"
+                    "name": "Gydytojas"
                 },
                 "office/political_party": {
                     "name": "Politinė partija",

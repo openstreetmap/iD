@@ -139,7 +139,7 @@
                         "shortcuts": ["3"],
                         "text": "shortcuts.editing.drawing.add_area"
                     }, {
-                        "shortcuts": ["shortcuts.key.space"],
+                        "shortcuts": ["Left-click", "shortcuts.key.space"],
                         "text": "shortcuts.editing.drawing.place_point"
                     }, {
                         "shortcuts": ["⌥"],

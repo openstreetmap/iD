@@ -38,6 +38,7 @@
                 document.getElementById('id-container').className = 'unsupported';
             } else {
                 var id = iD.Context();
+                id.features().disable('boundaries');
                 id.ui()(document.getElementById('id-container'));
             }
         </script>

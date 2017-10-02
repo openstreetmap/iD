@@ -225,7 +225,6 @@
             "readonly": "API dalam kondisi hanya-baca. Anda perlu menunggu untuk menyimpan perubahan."
         },
         "commit": {
-            "description_placeholder": "Penjelasan singkat dari kontribusi Anda (harus diisi)",
             "upload_explanation": "Perubahan yang anda unggah akan tampil di seluruh peta yang menggunakan data OpenStreetMap.",
             "upload_explanation_with_user": "Perubahan yang anda unggah sebagai {user} akan tampil di seluruh peta yang menggunakan data OpenStreetMap.",
             "cancel": "Batal",
@@ -784,9 +783,6 @@
                 "generator/type": {
                     "label": "Tipe"
                 },
-                "golf_hole": {
-                    "label": "Referensi"
-                },
                 "handicap": {
                     "placeholder": "1-18"
                 },
@@ -972,9 +968,6 @@
                 "railway": {
                     "label": "Tipe"
                 },
-                "ref": {
-                    "label": "Referensi"
-                },
                 "relation": {
                     "label": "Tipe"
                 },
@@ -1027,9 +1020,6 @@
                     },
                     "placeholder": "Tidak, Terpisah, Ya..."
                 },
-                "source": {
-                    "label": "Sumber"
-                },
                 "structure": {
                     "label": "Struktur",
                     "options": {
@@ -1073,9 +1063,6 @@
                 },
                 "trees": {
                     "label": "Pepohonan"
-                },
-                "tunnel": {
-                    "label": "Terowongan"
                 },
                 "water": {
                     "label": "Tipe"

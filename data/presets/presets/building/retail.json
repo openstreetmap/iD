@@ -1,6 +1,7 @@
 {
     "icon": "commercial",
     "fields": [
+        "name",
         "address",
         "levels",
         "smoking"

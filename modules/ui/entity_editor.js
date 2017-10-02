@@ -1,39 +1,50 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _clone from 'lodash-es/clone';
+import _forEach from 'lodash-es/forEach';
+import _isEmpty from 'lodash-es/isEmpty';
+import _isEqual from 'lodash-es/isEqual';
+import _some from 'lodash-es/some';
+
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
+import {
+    event as d3_event,
+    selectAll as d3_selectAll
+} from 'd3-selection';
+
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
-import { actionChangeTags } from '../actions/index';
-import { modeBrowse } from '../modes/index';
-import { svgIcon } from '../svg/index';
+import { actionChangeTags } from '../actions';
+import { modeBrowse } from '../modes';
+import { svgIcon } from '../svg';
 import { uiPresetIcon } from './preset_icon';
 import { uiRawMemberEditor } from './raw_member_editor';
 import { uiRawMembershipEditor } from './raw_membership_editor';
 import { uiRawTagEditor } from './raw_tag_editor';
 import { uiTagReference } from './tag_reference';
-import { uiPreset } from './preset';
+import { uiPresetEditor } from './preset_editor';
 import { utilRebind } from '../util';
 
 import { operationDelete } from '../operations/index';
 
 export function uiEntityEditor(context) {
-    var dispatch = d3.dispatch('choose'),
+    var dispatch = d3_dispatch('choose'),
         state = 'select',
         coalesceChanges = false,
         modified = false,
         base,
-        id,
+        entityId,
         activePreset,
         reference;
 
-    var presetEditor = uiPreset(context)
+    var presetEditor = uiPresetEditor(context)
         .on('change', changeTags);
     var rawTagEditor = uiRawTagEditor(context)
         .on('change', changeTags);
 
 
     function entityEditor(selection) {
-        var entity = context.entity(id),
-            tags = _.clone(entity.tags);
+        var entity = context.entity(entityId),
+            tags = _clone(entity.tags);
 
         // Header
         var header = selection.selectAll('.header')
@@ -64,7 +75,9 @@ export function uiEntityEditor(context) {
             .merge(enter);
 
         header.selectAll('.preset-reset')
-            .on('click', function() { dispatch.call('choose', this, activePreset); });
+            .on('click', function() {
+                dispatch.call('choose', this, activePreset);
+            });
 
 
         // Body
@@ -134,7 +147,7 @@ export function uiEntityEditor(context) {
 
         enter
             .append('div')
-            .attr('class', 'inspector-border inspector-preset');
+            .attr('class', 'inspector-border preset-editor');
 
         enter
             .append('div')
@@ -148,6 +161,12 @@ export function uiEntityEditor(context) {
             .append('div')
             .attr('class', 'raw-membership-editor inspector-inner');
 
+        enter
+            .append('input')
+            .attr('type', 'text')
+            .attr('class', 'key-trap');
+
+
         // Update
         body = body
             .merge(enter);
@@ -159,35 +178,41 @@ export function uiEntityEditor(context) {
             .call(reference.body);
 
         body.selectAll('.preset-reset')
-            .on('click', function() { dispatch.call('choose', this, activePreset); });
+            .on('click', function() {
+                dispatch.call('choose', this, activePreset);
+            });
 
         body.select('.preset-list-item button')
             .call(uiPresetIcon()
-                .geometry(context.geometry(id))
-                .preset(activePreset));
+                .geometry(context.geometry(entityId))
+                .preset(activePreset)
+            );
 
         body.select('.preset-list-item .label')
             .text(activePreset.name());
 
-        body.select('.inspector-preset')
+        body.select('.preset-editor')
             .call(presetEditor
                 .preset(activePreset)
-                .entityID(id)
+                .entityID(entityId)
                 .tags(tags)
-                .state(state));
+                .state(state)
+            );
 
         body.select('.raw-tag-editor')
             .call(rawTagEditor
                 .preset(activePreset)
-                .entityID(id)
+                .entityID(entityId)
                 .tags(tags)
-                .state(state));
+                .state(state)
+            );
 
         if (entity.type === 'relation') {
             body.select('.raw-member-editor')
                 .style('display', 'block')
                 .call(uiRawMemberEditor(context)
-                    .entityID(id));
+                    .entityID(entityId)
+                );
         } else {
             body.select('.raw-member-editor')
                 .style('display', 'none');
@@ -195,8 +220,18 @@ export function uiEntityEditor(context) {
 
         body.select('.raw-membership-editor')
             .call(uiRawMembershipEditor(context)
-                .entityID(id));
+                .entityID(entityId)
+            );
 
+        body.select('.key-trap')
+            .on('keydown.key-trap', function() {
+                // On tabbing, send focus back to the first field on the inspector-body
+                // (probably the `name` field) #4159
+                if (d3_event.keyCode === 9 && !d3_event.shiftKey) {
+                    d3_event.preventDefault();
+                    body.select('input').node().focus();
+                }
+            });
 
         context.history()
             .on('change.entity-editor', historyChanged);
@@ -205,11 +240,19 @@ export function uiEntityEditor(context) {
         function historyChanged() {
             if (state === 'hide') return;
 
-            var entity = context.hasEntity(id),
-                graph = context.graph();
+            var entity = context.hasEntity(entityId);
+            var graph = context.graph();
             if (!entity) return;
 
-            entityEditor.preset(context.presets().match(entity, graph));
+            var match = context.presets().match(entity, graph);
+            var activePreset = entityEditor.preset();
+            var weakPreset = activePreset && _isEmpty(activePreset.addTags);
+
+            // A "weak" preset doesn't set any tags. (e.g. "Address")
+            // Don't replace a weak preset with a fallback preset (e.g. "Point")
+            if (!(weakPreset && match.isFallback())) {
+                entityEditor.preset(match);
+            }
             entityEditor.modified(base !== graph);
             entityEditor(selection);
         }
@@ -227,7 +270,7 @@ export function uiEntityEditor(context) {
             }
 
             var blacklist = ['description', 'note', 'fixme'];
-            if (_.some(blacklist, function(s) { return k.indexOf(s) !== -1; })) return v;
+            if (_some(blacklist, function(s) { return k.indexOf(s) !== -1; })) return v;
 
             var cleaned = v.split(';')
                 .map(function(s) { return s.trim(); })
@@ -260,11 +303,11 @@ export function uiEntityEditor(context) {
     // Tag changes that fire on input can all get coalesced into a single
     // history operation when the user leaves the field.  #2342
     function changeTags(changed, onInput) {
-        var entity = context.entity(id),
+        var entity = context.entity(entityId),
             annotation = t('operations.change_tags.annotation'),
-            tags = _.clone(entity.tags);
+            tags = _clone(entity.tags);
 
-        _.forEach(changed, function(v, k) {
+        _forEach(changed, function(v, k) {
             if (v !== undefined || tags.hasOwnProperty(k)) {
                 tags[k] = v;
             }
@@ -274,11 +317,11 @@ export function uiEntityEditor(context) {
             tags = clean(tags);
         }
 
-        if (!_.isEqual(entity.tags, tags)) {
+        if (!_isEqual(entity.tags, tags)) {
             if (coalesceChanges) {
-                context.overwrite(actionChangeTags(id, tags), annotation);
+                context.overwrite(actionChangeTags(entityId, tags), annotation);
             } else {
-                context.perform(actionChangeTags(id, tags), annotation);
+                context.perform(actionChangeTags(entityId, tags), annotation);
                 coalesceChanges = !!onInput;
             }
         }
@@ -288,7 +331,7 @@ export function uiEntityEditor(context) {
     entityEditor.modified = function(_) {
         if (!arguments.length) return modified;
         modified = _;
-        d3.selectAll('button.preset-close use')
+        d3_selectAll('button.preset-close use')
             .attr('xlink:href', (modified ? '#icon-apply' : '#icon-close'));
     };
 
@@ -301,10 +344,10 @@ export function uiEntityEditor(context) {
 
 
     entityEditor.entityID = function(_) {
-        if (!arguments.length) return id;
-        id = _;
+        if (!arguments.length) return entityId;
+        entityId = _;
         base = context.graph();
-        entityEditor.preset(context.presets().match(context.entity(id), base));
+        entityEditor.preset(context.presets().match(context.entity(entityId), base));
         entityEditor.modified(false);
         coalesceChanges = false;
         return entityEditor;
@@ -315,7 +358,7 @@ export function uiEntityEditor(context) {
         if (!arguments.length) return activePreset;
         if (_ !== activePreset) {
             activePreset = _;
-            reference = uiTagReference(activePreset.reference(context.geometry(id)), context)
+            reference = uiTagReference(activePreset.reference(context.geometry(entityId)), context)
                 .showing(false);
         }
         return entityEditor;

@@ -1,6 +1,7 @@
 {
     "icon": "fire-station",
     "fields": [
+        "name",
         "operator",
         "address",
         "building_area"

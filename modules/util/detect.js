@@ -92,7 +92,7 @@ export function utilDetect(force) {
     // detect text direction
     var q = utilStringQs(window.location.hash.substring(1));
     var lang = dataLocales[detected.locale];
-    if ((lang && lang.rtl) || q.hasOwnProperty('rtl')) {
+    if ((lang && lang.rtl) || (q.rtl === 'true')) {
         detected.textDirection = 'rtl';
     } else {
         detected.textDirection = 'ltr';
@@ -109,6 +109,8 @@ export function utilDetect(force) {
     detected.host = origin + loc.pathname;
 
     detected.filedrop = (window.FileReader && 'ondrop' in window);
+
+    detected.download = !(detected.ie || detected.browser.toLowerCase() === 'edge');
 
     function nav(x) {
         return navigator.userAgent.indexOf(x) !== -1;

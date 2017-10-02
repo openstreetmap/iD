@@ -51,6 +51,7 @@
             "category-route",
             "category-restriction",
             "type/boundary",
+            "type/waterway",
             "type/multipolygon",
             "type/site",
             "relation"

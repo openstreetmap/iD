@@ -1,4 +1,5 @@
-import * as d3 from 'd3';
+import _map from 'lodash-es/map';
+
 import { t, textDirection } from './locale';
 import { utilDetect } from './detect';
 import { remove as removeDiacritics } from 'diacritics';
@@ -6,8 +7,8 @@ import { fixRTLTextForSvg, rtlRegex } from './svg_paths_rtl_fix';
 
 
 export function utilTagText(entity) {
-    return d3.entries(entity.tags).map(function(e) {
-        return e.key + '=' + e.value;
+    return _map(entity.tags, function(v, k) {
+        return k + '=' + v;
     }).join(', ');
 }
 

@@ -1,5 +1,5 @@
 describe('iD.serviceOsm', function () {
-    var context, connection, spy;
+    var context, connection, server, spy;
 
     function login() {
         if (!connection) return;
@@ -17,12 +17,25 @@ describe('iD.serviceOsm', function () {
         connection.logout();
     }
 
+    before(function() {
+        iD.services.osm = iD.serviceOsm;
+    });
+
+    after(function() {
+        delete iD.services.osm;
+    });
+
     beforeEach(function () {
+        server = sinon.fakeServer.create();
         context = iD.Context();
         connection = context.connection();
         connection.switch({ urlroot: 'http://www.openstreetmap.org' });
         connection.reset();
         spy = sinon.spy();
+    });
+
+    afterEach(function() {
+        server.restore();
     });
 
 
@@ -109,8 +122,7 @@ describe('iD.serviceOsm', function () {
     });
 
     describe('#loadFromAPI', function () {
-        var server,
-            path = '/api/0.6/map?bbox=-74.542,40.655,-74.541,40.656',
+        var path = '/api/0.6/map?bbox=-74.542,40.655,-74.541,40.656',
             response = '<?xml version="1.0" encoding="UTF-8"?>' +
                 '<osm version="0.6">' +
                 '  <bounds minlat="40.655" minlon="-74.542" maxlat="40.656" maxlon="-74.541' +
@@ -267,8 +279,7 @@ describe('iD.serviceOsm', function () {
     });
 
     describe('#loadEntity', function () {
-        var server,
-            nodeXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
+        var nodeXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
                 '<node id="1" version="1" changeset="1" lat="0" lon="0" visible="true" timestamp="2009-03-07T03:26:33Z"></node>' +
                 '</osm>',
             wayXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
@@ -309,11 +320,28 @@ describe('iD.serviceOsm', function () {
                 [200, { 'Content-Type': 'text/xml' }, wayXML]);
             server.respond();
         });
+
+        it('does not ignore repeat requests', function(done) {
+            var id = 'n1';
+            connection.loadEntity(id, function(err1, result1) {
+                var entity1 = _.find(result1.data, function(e1) { return e1.id === id; });
+                expect(entity1).to.be.an.instanceOf(iD.Node);
+                connection.loadEntity(id, function(err2, result2) {
+                    var entity2 = _.find(result2.data, function(e2) { return e2.id === id; });
+                    expect(entity2).to.be.an.instanceOf(iD.Node);
+                    done();
+                });
+                server.respond();
+            });
+
+            server.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/node/1',
+                [200, { 'Content-Type': 'text/xml' }, nodeXML]);
+            server.respond();
+        });
     });
 
     describe('#loadEntityVersion', function () {
-        var server,
-            nodeXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
+        var nodeXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
                 '<node id="1" version="1" changeset="1" lat="0" lon="0" visible="true" timestamp="2009-03-07T03:26:33Z"></node>' +
                 '</osm>',
             wayXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
@@ -353,10 +381,27 @@ describe('iD.serviceOsm', function () {
                 [200, { 'Content-Type': 'text/xml' }, wayXML]);
             server.respond();
         });
+
+        it('does not ignore repeat requests', function(done) {
+            var id = 'n1';
+            connection.loadEntityVersion(id, 1, function(err1, result1) {
+                var entity1 = _.find(result1.data, function(e1) { return e1.id === id; });
+                expect(entity1).to.be.an.instanceOf(iD.Node);
+                connection.loadEntityVersion(id, 1, function(err2, result2) {
+                    var entity2 = _.find(result2.data, function(e2) { return e2.id === id; });
+                    expect(entity2).to.be.an.instanceOf(iD.Node);
+                    done();
+                });
+                server.respond();
+            });
+
+            server.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/node/1/1',
+                [200, { 'Content-Type': 'text/xml' }, nodeXML]);
+            server.respond();
+        });
     });
 
     describe('#loadMultiple', function () {
-        var server;
         beforeEach(function() {
             server = sinon.fakeServer.create();
         });
@@ -367,12 +412,13 @@ describe('iD.serviceOsm', function () {
 
         it('loads nodes');
         it('loads ways');
+        it('does not ignore repeat requests');
 
     });
 
 
     describe('#userChangesets', function() {
-        var server, userDetailsFn;
+        var userDetailsFn;
 
         beforeEach(function() {
             server = sinon.fakeServer.create();
@@ -477,8 +523,7 @@ describe('iD.serviceOsm', function () {
 
 
     describe('API capabilities', function() {
-        var server,
-            capabilitiesXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
+        var capabilitiesXML = '<?xml version="1.0" encoding="UTF-8"?><osm>' +
             '<api>' +
             '<version minimum="0.6" maximum="0.6"/>' +
             '<area maximum="0.25"/>' +

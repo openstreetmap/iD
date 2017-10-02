@@ -8,7 +8,7 @@ or learn more by visiting our project page on GitHub:  :octocat: https://github.
 _Breaking changes, which may affect downstream projects or sites that embed iD, are marked with a_ :warning:
 
 <!--
-  # A.B.C
+# A.B.C
 ##### MMM DD, YYYY
 
 #### :newspaper: News
@@ -26,17 +26,243 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.4.1
+##### August 26, 2017
+
+#### :bug: Bugfixes
+
+* Write post-save count, not pre-save count to the changesets_count tag ([#4283])
+
+[#4283]: https://github.com/openstreetmap/iD/issues/4283
+
+
+# 2.4.0
+##### August 25, 2017
+
+#### :mega: Release Highlights
+
+* :artificial_satellite: We added a **new global imagery layer**: Esri World Imagery<br/>
+Thank you Esri for making your imagery available for OSM use!<br/>
+_Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>)_
+
+#### :tada: New Features
+
+* Updates to save workflow ([#4223]):
+  * Add `review_requested` changeset tag and checkbox ([#4133], thanks [@kepta])
+  * Add `source` changeset tag and multiselect field
+  * Add `hashtags` changeset tag, API parameter, and auto fill hashtags from `comment` ([#2834])
+  * Write changeset tags for new mappers to indicate walkthrough progress - These tags all start with `ideditor:` ([#3968])
+  * Write changeset tag for `changesets_count` - it will contain `"0"` for someone making their first edit ([#3968])
+  * Refactor `uiCommit` into several smaller modules
+* Add `addr:unit` input to address field for many countries ([#4235], thanks [@JamesKingdom])
+* Make rotation and reflection operations available for more geometry types ([#4237])
+* Change raw tag editor `readOnlyTags` function to accept array of regular expressions
+* `name` field is no longer automatically added to every preset ([#4200], [#4210], [#4201] thanks [@JamesKingdom])
+* Field refactor ([#3914], [#4214])
+  * Add options for fields, allow unwrapped fields (no label, buttons, etc)
+  * `uiField` can now be used anywhere, not just inside the preset editor
+  * Rename `uiPreset` -> `uiPresetEditor` (consistent with raw tag editor, raw member editor, etc)
+
+[#4237]: https://github.com/openstreetmap/iD/issues/4237
+[#4235]: https://github.com/openstreetmap/iD/issues/4235
+[#4133]: https://github.com/openstreetmap/iD/issues/4133
+[#4223]: https://github.com/openstreetmap/iD/issues/4223
+[#4214]: https://github.com/openstreetmap/iD/issues/4214
+[#4210]: https://github.com/openstreetmap/iD/issues/4210
+[#4201]: https://github.com/openstreetmap/iD/issues/4201
+[#4200]: https://github.com/openstreetmap/iD/issues/4200
+[#3968]: https://github.com/openstreetmap/iD/issues/3968
+[#3914]: https://github.com/openstreetmap/iD/issues/3914
+[#2834]: https://github.com/openstreetmap/iD/issues/2834
+[@kepta]: https://github.com/kepta
+[@JamesKingdom]: https://github.com/JamesKingdom
+
+
+#### :sparkles: Usability
+
+* In save mode, <kbd>esc</kbd> should cancel and return to browse mode ([#4230])
+* Recognize more kinds of concrete surface as "paved"
+* When drawing, ignore accidental clicks on mode buttons ([#4042])
+* Change to 80px arrow key panning (this matches Leaflet default) ([#4207])
+* Smoother border around the round vertex preset icon circles ([#4190])
+* Render railway platform slightly different from sidewalk ([#4182])
+* Treat a few special tags as areas even in the absence of a proper `area=yes` tag. ([#4194])
+
+[#4230]: https://github.com/openstreetmap/iD/issues/4230
+[#4207]: https://github.com/openstreetmap/iD/issues/4207
+[#4194]: https://github.com/openstreetmap/iD/issues/4194
+[#4190]: https://github.com/openstreetmap/iD/issues/4190
+[#4182]: https://github.com/openstreetmap/iD/issues/4182
+[#4042]: https://github.com/openstreetmap/iD/issues/4042
+
+
+#### :bug: Bugfixes
+
+* Include imagery offset when calculating tiles for background layer ([#4232])
+* Return to browse mode when zooming out beyond edit limit ([#4184])
+* Make sure bool url params actually contain value 'true' ([#4222])
+
+[#4232]: https://github.com/openstreetmap/iD/issues/4232
+[#4222]: https://github.com/openstreetmap/iD/issues/4222
+[#4184]: https://github.com/openstreetmap/iD/issues/4184
+
+
+#### :earth_asia: Localization
+
+* Update Chinese address format ([#4248], thanks [@Stenive])
+* Swap placement of increment/decrement spin buttons when RTL
+* Fix RTL styling for info panel close buttons
+* Fix RTL styling for spin control and form buttons
+
+[#4248]: https://github.com/openstreetmap/iD/issues/4248
+[@Stenive]: https://github.com/Stenive
+
+
+#### :hourglass: Performance
+
+* Use `requestIdleCallback` in supported browsers for deferred data fetching ([#4259], thanks [@kepta])
+  * Avoid reparsing duplicate entities that appear across adjacent OSM tiles
+  * Schedule parsing as a low priority task
+  * Schedule redraws during idle browser times
+
+[#4259]: https://github.com/openstreetmap/iD/issues/4259
+[@kepta]: https://github.com/kepta
+
+
+#### :rocket: Presets
+
+* Add signpost term to guidepost preset ([#4277], thanks [@JamesKingdom])
+* Remove maxspeed field from living street ([#4260], thanks [@JamesKingdom])
+* Make `office=physician` non-searchable ([#4255], thanks [@M1dgard])
+* Add preset for `amenity=shower` ([#4256], thanks [@JamesKingdom])
+* Add preset for `emergency=life_ring` ([#4251], thanks [@JamesKingdom])
+* Allow traffic mirror preset on vertex ([#4250], thanks [@JamesKingdom])
+* Add presets for many theme park attractions ([#4236], thanks [@willemarcel])
+* Improve search terms for wetland preset ([#4226], thanks [@boothym])
+* Add jetty search term to `amenity=pier` preset ([#4224], thanks [@boothym])
+* Remove `bin=yes` from excrement bag vending machine ([#4191])
+* Improve search terms for group home and social facility presets ([#4219], thanks [@JamesKingdom])
+* Allow aerialway station to be drawn as an area ([#4217], thanks [@JamesKingdom])
+* Improve search terms for T-bar lift ([#4217], thanks [@JamesKingdom])
+* Add hedge preset to barrier category ([#4215], thanks [@Stalfur])
+* Add railway presets for Derailer, Milestone, Signal, Switch, Train Wash and icons ([#4196], thanks [@JamesKingdom])
+* Add railway preset for Buffer Stop, and icon ([#4192], thanks [@JamesKingdom])
+* Replace generic "Reference" field with more specific named fields ([#4180], thanks [@JamesKingdom])
+* Add preset for Telecom Manhole ([#4185], thanks [@JamesKingdom])
+
+[#4277]: https://github.com/openstreetmap/iD/issues/4277
+[#4260]: https://github.com/openstreetmap/iD/issues/4260
+[#4255]: https://github.com/openstreetmap/iD/issues/4255
+[#4256]: https://github.com/openstreetmap/iD/issues/4256
+[#4251]: https://github.com/openstreetmap/iD/issues/4251
+[#4250]: https://github.com/openstreetmap/iD/issues/4250
+[#4236]: https://github.com/openstreetmap/iD/issues/4236
+[#4226]: https://github.com/openstreetmap/iD/issues/4226
+[#4224]: https://github.com/openstreetmap/iD/issues/4224
+[#4219]: https://github.com/openstreetmap/iD/issues/4219
+[#4217]: https://github.com/openstreetmap/iD/issues/4217
+[#4215]: https://github.com/openstreetmap/iD/issues/4215
+[#4196]: https://github.com/openstreetmap/iD/issues/4196
+[#4192]: https://github.com/openstreetmap/iD/issues/4192
+[#4191]: https://github.com/openstreetmap/iD/issues/4191
+[#4185]: https://github.com/openstreetmap/iD/issues/4185
+[#4180]: https://github.com/openstreetmap/iD/issues/4180
+
+[@JamesKingdom]: https://github.com/JamesKingdom
+[@M1dgard]: https://github.com/M1dgard
+[@willemarcel]: https://github.com/willemarcel
+[@boothym]: https://github.com/boothym
+[@Stalfur]: https://github.com/Stalfur
+
+
+# 2.3.2
+##### July 24, 2017
+
+#### :tada: New Features
+
+* Display capture date on the attribution line at bottom of Mapillary viewer ([#4156])
+* Highlight detected objects and signs in Mapillary images ([#3772], [#4148], thanks [@kepta])
+
+[#4156]: https://github.com/openstreetmap/iD/issues/4156
+[#4148]: https://github.com/openstreetmap/iD/issues/4148
+[#3772]: https://github.com/openstreetmap/iD/issues/3772
+[@kepta]: https://github.com/kepta
+
+#### :sparkles: Usability
+
+* Prevent user from tabbing from fields in the sidebar to the browser's address bar ([#4159])
+* Distinguish between default vs. tagged `service=*` highways and railways ([#4157])
+* Fix styles for several aeroway, highway, railway mapped as areas ([#4167])
+* Change rendering for non-grass sport pitches (basketball, skateboard, beachvolleyball)
+* Render `railway=platform` like sidewalks and footpaths
+* Place pasted point at cursor (not offset) when pasting while dragging the map ([#4155])
+
+[#4167]: https://github.com/openstreetmap/iD/issues/4167
+[#4159]: https://github.com/openstreetmap/iD/issues/4159
+[#4157]: https://github.com/openstreetmap/iD/issues/4157
+[#4155]: https://github.com/openstreetmap/iD/issues/4155
+
+#### :bug: Bugfixes
+
+* Make expandable sidebar sections work with incognito mode ([#4159])
+* Remember the chosen custom background when set by url ([#4162], [#4165], thanks [@pgiraud])
+* Fix: <kbd>⌘⇧B</kbd> / <kbd>Ctrl+Shift+B</kbd> should not also swap the background like <kbd>⌘B</kbd> / <kbd>Ctrl+B</kbd> ([#4153])
+
+[#4165]: https://github.com/openstreetmap/iD/issues/4165
+[#4162]: https://github.com/openstreetmap/iD/issues/4162
+[#4159]: https://github.com/openstreetmap/iD/issues/4159
+[#4153]: https://github.com/openstreetmap/iD/issues/4153
+[@pgiraud]: https://github.com/pgiraud
+
+#### :rocket: Presets
+
+* Add presets, icons for Wind and Nuclear `power=generator`, and `output:electricity` field
+* Add presets, icons for Shinto, Taoist, Hindu, Sikh `amenity=place_of_worship` ([#4175])
+* Add preset for Dog Excrement Bin, `waste=dog_excrement` ([#4172], thanks [@JamesKingdom])
+* Add Clothes field to Clothing Store, Botique, Fashion ([#4149])
+* Change caption for content field from "Contents" to "Content" ([#4169])
+* Add presets for Windmill and Watermill ([#4168])
+
+[#4175]: https://github.com/openstreetmap/iD/issues/4175
+[#4172]: https://github.com/openstreetmap/iD/issues/4172
+[#4169]: https://github.com/openstreetmap/iD/issues/4169
+[#4168]: https://github.com/openstreetmap/iD/issues/4168
+[#4149]: https://github.com/openstreetmap/iD/issues/4149
+[@JamesKingdom]: https://github.com/JamesKingdom
+
+
+# 2.3.1
+##### July 11, 2017
+
+#### :sparkles: Usability
+
+* Display left click icon for "Place a point" on keyboard shortcuts screen
+
+#### :bug: Bugfixes
+
+* Don't lose the imagery offset when switching between "Custom" and another background imagery layer ([#3982])
+* After splitting a way, update all matching relation members (fix for broken u-turn relations) ([#4140])
+
+[#3982]: https://github.com/openstreetmap/iD/issues/3982
+[#4140]: https://github.com/openstreetmap/iD/issues/4140
+
+
 # 2.3.0
 ##### July 7, 2017
 
 #### :tada: New Features
 
 * Toggleable information panels can be used to expose more advanced features without cluttering the UI ([#4121])
-  * <kbd>⌘I</kbd>: Toggle all info panels (by default, will toggle the Measurement panel)
-  * <kbd>⌘⇧M</kbd>: Toggle Measurement Panel - Show selected object area, length, perimeter, calculate center, etc.
-  * <kbd>⌘⇧L</kbd>: Toggle Location Panel - Show location coordinates ([#2183]) and reverse geocode ([#2515])
-  * <kbd>⌘⇧H</kbd>: Toggle History Panel - Show last edited by ([#2273]), links to user and changeset info, object history ([#3761])
-  * <kbd>⌘⇧B</kbd>: Toggle Background Panel - Show imagery age if available ([#2492]), and toggle tile debugging
+  * <kbd>⌘I</kbd> / <kbd>Ctrl+I</kbd>: Toggle visibility of all info panels
+  (by default, will toggle the Measurement panel)
+  * <kbd>⌘⇧M</kbd> / <kbd>Ctrl+Shift+M</kbd> : Toggle Measurement Panel<br/>
+  Show selected object area, length, perimeter, calculate center, etc.
+  * <kbd>⌘⇧L</kbd> / <kbd>Ctrl+Shift+L</kbd> : Toggle Location Panel<br/>
+  Show location coordinates ([#2183]) and reverse geocode ([#2515])
+  * <kbd>⌘⇧H</kbd> / <kbd>Ctrl+Shift+H</kbd> : Toggle History Panel<br/>
+  Show last edited by ([#2273]), links to user and changeset info, object history ([#3761])
+  * <kbd>⌘⇧B</kbd> / <kbd>Ctrl+Shift+B</kbd> : Toggle Background Panel<br/>
+  Show imagery age if available ([#2492]), and toggle tile debugging
 
 [#4121]: https://github.com/openstreetmap/iD/issues/4121
 [#3761]: https://github.com/openstreetmap/iD/issues/3761

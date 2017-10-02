@@ -1,11 +1,11 @@
-# iD - friendly JavaScript editor for [OpenStreetMap](http://www.openstreetmap.org/)
+# iD - friendly JavaScript editor for [OpenStreetMap](https://www.openstreetmap.org/)
 
 [![Build Status](https://travis-ci.org/openstreetmap/iD.svg?branch=master)](https://travis-ci.org/openstreetmap/iD)
 [![Greenkeeper badge](https://badges.greenkeeper.io/openstreetmap/iD.svg)](https://greenkeeper.io/)
 
 ## Basics
 
-* iD is a JavaScript [OpenStreetMap](http://www.openstreetmap.org/) editor.
+* iD is a JavaScript [OpenStreetMap](https://www.openstreetmap.org/) editor.
 * It's intentionally simple. It lets you do the most basic tasks while
   not breaking other people's data.
 * It supports all popular modern desktop browsers: Chrome, Firefox, Safari,
@@ -27,9 +27,9 @@ if you're looking for something to do.
 Come on in, the water's lovely. More help? Ping `jfire` or `bhousel` on:
 * [OpenStreetMap US Slack](https://osmus-slack.herokuapp.com/)
 (`#dev` or `#general` channels)
-* [OpenStreetMap IRC](http://wiki.openstreetmap.org/wiki/IRC)
+* [OpenStreetMap IRC](https://wiki.openstreetmap.org/wiki/IRC)
 (`irc.oftc.net`, in `#iD` or `#osm-dev` or `#osm`)
-* [OpenStreetMap `dev` mailing list](http://wiki.openstreetmap.org/wiki/Mailing_lists)
+* [OpenStreetMap `dev` mailing list](https://wiki.openstreetmap.org/wiki/Mailing_lists)
 
 ## Prerequisites
 
@@ -48,8 +48,27 @@ This is only necessary the first time so that the build process can create symbo
 
 To run the current development version of iD on your own computer:
 
-1. Create a local `git clone` of the project, then `cd` into the project folder
-2. Run `npm install`  (this will run the `prepublish` script that builds everything)
+#### Cloning the repository
+
+The repository is reasonably large, and it's unlikely that you need the full history. If you are happy to wait for it all to download, run:
+
+```
+git clone https://github.com/openstreetmap/iD.git
+```
+
+To clone only the most recent version, instead use a 'shallow clone':
+
+```
+git clone --depth=1 https://github.com/openstreetmap/iD.git
+```
+
+If you want to add in the full history later on, perhaps to run `git blame` or `git log`, run `git fetch --depth=1000000`
+
+#### Building iD
+
+1. `cd` into the newly cloned project folder
+2. Run `npm install`
+3. Run `npm run all`
 3. Run `npm start`
 4. Open `http://localhost:8080/` in a web browser
 

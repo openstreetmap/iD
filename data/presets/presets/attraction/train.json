@@ -1,0 +1,25 @@
+{
+    "icon": "rail",
+    "fields": [
+        "name",
+        "operator",
+        "fee",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "line"
+    ],
+    "terms": [
+        "theme park",
+        "rackless train",
+        "road train",
+        "Tschu-Tschu train",
+        "dotto train",
+        "park train"
+    ],
+    "tags": {
+        "attraction": "train"
+    },
+    "name": "Tourist Train"
+}

@@ -1,7 +1,9 @@
 {
     "icon": "hospital",
     "fields": [
+        "name",
         "operator",
+        "healthcare/speciality",
         "address",
         "emergency"
     ],
@@ -24,6 +26,18 @@
     ],
     "tags": {
         "amenity": "hospital"
+    },
+    "addTags": {
+        "amenity": "hospital",
+        "healthcare": "hospital"
+    },
+    "removeTags": {
+        "amenity": "hospital",
+        "healthcare": "hospital"
+    },
+    "reference": {
+        "key": "amenity",
+        "value": "hospital"
     },
     "name": "Hospital Grounds"
 }

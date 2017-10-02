@@ -1,4 +1,4 @@
-import * as d3 from 'd3';
+import { select as d3_select } from 'd3-selection';
 import { osmPavedTags } from '../osm/tags';
 
 
@@ -10,11 +10,11 @@ export function svgTagClasses() {
         ],
         statuses = [
             'proposed', 'construction', 'disused', 'abandoned', 'dismantled',
-            'razed', 'demolished', 'obliterated'
+            'razed', 'demolished', 'obliterated', 'intermittent'
         ],
         secondaries = [
             'oneway', 'bridge', 'tunnel', 'embankment', 'cutting', 'barrier',
-            'surface', 'tracktype', 'crossing'
+            'surface', 'tracktype', 'crossing', 'service', 'sport'
         ],
         tagClassRe = /^tag-/,
         tags = function(entity) { return entity.tags; };
@@ -102,7 +102,7 @@ export function svgTagClasses() {
             classes = classes.trim();
 
             if (classes !== value) {
-                d3.select(this).attr('class', classes);
+                d3_select(this).attr('class', classes);
             }
         });
     };

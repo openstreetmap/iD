@@ -1,5 +1,9 @@
-import * as d3 from 'd3';
-import { geoRoundCoords } from '../geo/index';
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import { geoRoundCoords } from '../geo';
 import { textDirection } from '../util/locale';
 import { uiTooltipHtml } from './tooltipHtml';
 
@@ -102,20 +106,20 @@ export function uiEditMenu(context, operations) {
             })
             .attr('xlink:href', function (d) { return '#operation-' + d.id; });
 
-        tooltip = d3.select(document.body)
+        tooltip = d3_select(document.body)
             .append('div')
             .attr('class', 'tooltip-inner edit-menu-tooltip');
 
 
         function click(operation) {
-            d3.event.stopPropagation();
+            d3_event.stopPropagation();
             if (operation.disabled()) return;
             operation();
             editMenu.close();
         }
 
         function mousedown() {
-            d3.event.stopPropagation();  // https://github.com/openstreetmap/iD/issues/1869
+            d3_event.stopPropagation();  // https://github.com/openstreetmap/iD/issues/1869
         }
 
         function mouseover(d, i) {

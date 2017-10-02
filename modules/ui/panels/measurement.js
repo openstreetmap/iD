@@ -1,13 +1,16 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _filter from 'lodash-es/filter';
+
+import { event as d3_event } from 'd3-selection';
+
+import {
+    geoLength as d3_geoLength,
+    geoCentroid as d3_geoCentroid
+} from 'd3-geo';
+
 import { t } from '../../util/locale';
 import { geoExtent } from '../../geo';
 import { utilDetect } from '../../util/detect';
 
-import {
-    geoLength as d3GeoLength,
-    geoCentroid as d3GeoCentroid
-} from 'd3';
 
 
 export function uiPanelMeasurement(context) {
@@ -111,7 +114,7 @@ export function uiPanelMeasurement(context) {
 
     function redraw(selection) {
         var resolver = context.graph(),
-            selected = _.filter(context.selectedIDs(), function(e) { return context.hasEntity(e); }),
+            selected = _filter(context.selectedIDs(), function(e) { return context.hasEntity(e); }),
             singular = selected.length === 1 ? selected[0] : null,
             extent = geoExtent(),
             entity;
@@ -153,9 +156,9 @@ export function uiPanelMeasurement(context) {
         if (geometry === 'line' || geometry === 'area') {
             var closed = (entity.type === 'relation') || (entity.isClosed() && !entity.isDegenerate()),
                 feature = entity.asGeoJSON(resolver),
-                length = radiansToMeters(d3GeoLength(toLineString(feature))),
+                length = radiansToMeters(d3_geoLength(toLineString(feature))),
                 lengthLabel = t('info_panels.measurement.' + (closed ? 'perimeter' : 'length')),
-                centroid = d3GeoCentroid(feature);
+                centroid = d3_geoCentroid(feature);
 
             list
                 .append('li')
@@ -188,7 +191,7 @@ export function uiPanelMeasurement(context) {
                 .attr('href', '#')
                 .attr('class', 'button button-toggle-units')
                 .on('click', function() {
-                    d3.event.preventDefault();
+                    d3_event.preventDefault();
                     isImperial = !isImperial;
                     selection.call(redraw);
                 });

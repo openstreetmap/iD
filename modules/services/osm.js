@@ -1,8 +1,19 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _chunk from 'lodash-es/chunk';
+import _extend from 'lodash-es/extend';
+import _forEach from 'lodash-es/forEach';
+import _filter from 'lodash-es/filter';
+import _find from 'lodash-es/find';
+import _groupBy from 'lodash-es/groupBy';
+import _isEmpty from 'lodash-es/isEmpty';
+import _map from 'lodash-es/map';
+import _uniq from 'lodash-es/uniq';
+
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { xml as d3_xml } from 'd3-request';
+
 import osmAuth from 'osm-auth';
 import { JXON } from '../util/jxon';
-import { d3geoTile } from '../lib/d3.geo.tile';
+import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 import { geoExtent } from '../geo';
 import {
     osmEntity,
@@ -11,14 +22,15 @@ import {
     osmWay
 } from '../osm';
 
-import { utilRebind } from '../util';
+import { utilRebind, utilIdleWorker } from '../util';
 
 
-var dispatch = d3.dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded'),
+var dispatch = d3_dispatch('authLoading', 'authDone', 'change', 'loading', 'loaded'),
     urlroot = 'https://www.openstreetmap.org',
     blacklists = ['.*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*'],
     inflight = {},
     loadedTiles = {},
+    entityCache = {},
     tileZoom = 16,
     oauth = osmAuth({
         url: urlroot,
@@ -100,10 +112,10 @@ function getVisible(attrs) {
 
 
 var parsers = {
-    node: function nodeData(obj) {
+    node: function nodeData(obj, uid) {
         var attrs = obj.attributes;
         return new osmNode({
-            id: osmEntity.id.fromOSM('node', attrs.id.value),
+            id:uid,
             visible: getVisible(attrs),
             version: attrs.version.value,
             changeset: attrs.changeset && attrs.changeset.value,
@@ -115,10 +127,10 @@ var parsers = {
         });
     },
 
-    way: function wayData(obj) {
+    way: function wayData(obj, uid) {
         var attrs = obj.attributes;
         return new osmWay({
-            id: osmEntity.id.fromOSM('way', attrs.id.value),
+            id: uid,
             visible: getVisible(attrs),
             version: attrs.version.value,
             changeset: attrs.changeset && attrs.changeset.value,
@@ -130,10 +142,10 @@ var parsers = {
         });
     },
 
-    relation: function relationData(obj) {
+    relation: function relationData(obj, uid) {
         var attrs = obj.attributes;
         return new osmRelation({
-            id: osmEntity.id.fromOSM('relation', attrs.id.value),
+            id: uid,
             visible: getVisible(attrs),
             version: attrs.version.value,
             changeset: attrs.changeset && attrs.changeset.value,
@@ -147,22 +159,25 @@ var parsers = {
 };
 
 
-function parse(xml) {
+function parse(xml, callback, options) {
+    options = _extend({ cache: true }, options);
     if (!xml || !xml.childNodes) return;
 
     var root = xml.childNodes[0],
-        children = root.childNodes,
-        entities = [];
+        children = root.childNodes;
 
-    for (var i = 0, l = children.length; i < l; i++) {
-        var child = children[i],
-            parser = parsers[child.nodeName];
+    function parseChild(child) {
+        var parser = parsers[child.nodeName];
         if (parser) {
-            entities.push(parser(child));
+            var uid = osmEntity.id.fromOSM(child.nodeName, child.attributes.id.value);
+            if (options.cache && entityCache[uid]) {
+                return null;
+            }
+            return parser(child, uid);
         }
     }
 
-    return entities;
+    utilIdleWorker(children, parseChild, callback);
 }
 
 
@@ -177,7 +192,8 @@ export default {
         userChangesets = undefined;
         userDetails = undefined;
         rateLimitError = undefined;
-        _.forEach(inflight, abortRequest);
+        _forEach(inflight, abortRequest);
+        entityCache = {};
         loadedTiles = {};
         inflight = {};
         return this;
@@ -213,7 +229,8 @@ export default {
     },
 
 
-    loadFromAPI: function(path, callback) {
+    loadFromAPI: function(path, callback, options) {
+        options = _extend({ cache: true }, options);
         var that = this;
 
         function done(err, xml) {
@@ -241,7 +258,15 @@ export default {
                 }
 
                 if (callback) {
-                    callback(err, parse(xml));
+                    if (err) return callback(err, null);
+                    parse(xml, function (entities) {
+                        if (options.cache) {
+                            for (var i in entities) {
+                                entityCache[entities[i].id] = true;
+                            }
+                        }
+                        callback(null, entities);
+                    }, options);
                 }
             }
         }
@@ -250,49 +275,56 @@ export default {
             return oauth.xhr({ method: 'GET', path: path }, done);
         } else {
             var url = urlroot + path;
-            return d3.xml(url).get(done);
+            return d3_xml(url).get(done);
         }
     },
 
 
     loadEntity: function(id, callback) {
         var type = osmEntity.id.type(id),
-            osmID = osmEntity.id.toOSM(id);
+            osmID = osmEntity.id.toOSM(id),
+            options = { cache: false };
 
         this.loadFromAPI(
             '/api/0.6/' + type + '/' + osmID + (type !== 'node' ? '/full' : ''),
             function(err, entities) {
                 if (callback) callback(err, { data: entities });
-            }
+            },
+            options
         );
     },
 
 
     loadEntityVersion: function(id, version, callback) {
         var type = osmEntity.id.type(id),
-            osmID = osmEntity.id.toOSM(id);
+            osmID = osmEntity.id.toOSM(id),
+            options = { cache: false };
 
         this.loadFromAPI(
             '/api/0.6/' + type + '/' + osmID + '/' + version,
             function(err, entities) {
                 if (callback) callback(err, { data: entities });
-            }
+            },
+            options
         );
     },
 
 
     loadMultiple: function(ids, callback) {
         var that = this;
-        _.each(_.groupBy(_.uniq(ids), osmEntity.id.type), function(v, k) {
-            var type = k + 's',
-                osmIDs = _.map(v, osmEntity.id.toOSM);
 
-            _.each(_.chunk(osmIDs, 150), function(arr) {
+        _forEach(_groupBy(_uniq(ids), osmEntity.id.type), function(v, k) {
+            var type = k + 's',
+                osmIDs = _map(v, osmEntity.id.toOSM),
+                options = { cache: false };
+
+            _forEach(_chunk(osmIDs, 150), function(arr) {
                 that.loadFromAPI(
                     '/api/0.6/' + type + '?' + type + '=' + arr.join(),
                     function(err, entities) {
                         if (callback) callback(err, { data: entities });
-                    }
+                    },
+                    options
                 );
             });
         });
@@ -446,7 +478,7 @@ export default {
             }
         }
 
-        d3.xml(urlroot + '/api/capabilities').get()
+        d3_xml(urlroot + '/api/capabilities').get()
             .on('load', done)
             .on('error', callback);
     },
@@ -476,7 +508,7 @@ export default {
                 s / 2 - projection.translate()[1]
             ];
 
-        var tiles = d3geoTile()
+        var tiles = d3_geoTile()
             .scaleExtent([tileZoom, tileZoom])
             .scale(s)
             .size(dimensions)
@@ -493,8 +525,8 @@ export default {
                 };
             });
 
-        _.filter(inflight, function(v, i) {
-            var wanted = _.find(tiles, function(tile) {
+        _filter(inflight, function(v, i) {
+            var wanted = _find(tiles, function(tile) {
                 return i === tile.id;
             });
             if (!wanted) delete inflight[i];
@@ -506,7 +538,7 @@ export default {
 
             if (loadedTiles[id] || inflight[id]) return;
 
-            if (_.isEmpty(inflight)) {
+            if (_isEmpty(inflight)) {
                 dispatch.call('loading');
             }
 
@@ -519,10 +551,10 @@ export default {
                     }
 
                     if (callback) {
-                        callback(err, _.extend({ data: parsed }, tile));
+                        callback(err, _extend({ data: parsed }, tile));
                     }
 
-                    if (_.isEmpty(inflight)) {
+                    if (_isEmpty(inflight)) {
                         dispatch.call('loaded');
                     }
                 }
@@ -534,7 +566,7 @@ export default {
     switch: function(options) {
         urlroot = options.urlroot;
 
-        oauth.options(_.extend({
+        oauth.options(_extend({
             url: urlroot,
             loading: authLoading,
             done: authDone

@@ -328,8 +328,6 @@
         },
         "commit": {
             "title": "Subir a OpenStreetMap",
-            "description_placeholder": "Breve descripción de sus contribuciones (requerido)",
-            "message_label": "Comentario del conjunto de cambios",
             "upload_explanation": "Los cambios que sube serán visibles en todos los mapas que usen datos de OpenStreetMap.",
             "upload_explanation_with_user": "Los cambios que sube como {user} serán visibles en todos los mapas que usen datos de OpenStreetMap.",
             "save": "Subir",
@@ -352,22 +350,33 @@
             "key": "I",
             "background": {
                 "key": "B",
-                "title": "Fondo"
+                "title": "Fondo",
+                "zoom": "Acercamiento",
+                "vintage": "Época",
+                "unknown": "Desconocido",
+                "show_tiles": "Mostrar teselas",
+                "hide_tiles": "Ocultar teselas"
             },
             "history": {
                 "key": "H",
                 "title": "Historial",
+                "selected": "{n} seleccionado",
                 "version": "Versión",
                 "last_edit": "Última edición",
                 "edited_by": "Editado por",
                 "changeset": "Conjunto de cambios",
+                "unknown": "Desconocido",
                 "link_text": "Historial en openstreetmap.org"
             },
             "location": {
-                "key": "L"
+                "key": "L",
+                "title": "Ubicación",
+                "unknown_location": "Ubicación desconocida"
             },
             "measurement": {
                 "key": "M",
+                "title": "Medición",
+                "selected": "{n} seleccionado",
                 "geometry": "Geometría",
                 "closed": "cerrada",
                 "center": "Centro",
@@ -375,6 +384,7 @@
                 "length": "Longitud",
                 "area": "Área",
                 "centroid": "Centroide",
+                "location": "Ubicación",
                 "metric": "Métrico",
                 "imperial": "Imperial"
             }
@@ -448,13 +458,15 @@
             "switch": "Volver a este fondo",
             "custom": "Personalizado",
             "custom_button": "Editar fondo personalizado",
+            "custom_prompt": "Introduzca una plantilla URL de tesela. Los tokens válidos son:\n  - {zoom}/{z}, {x}, {y} para el esquema de tesela Z / X / Y\n  - {ty} para coordenadas Y invertidas del estilo TMS\n  - {u} para el esquema cuádruple\n  - {switch:a,b,c} para la multiplexación del servidor DNS\n\nEjemplo:\n{example}",
             "fix_misalignment": "Ajustar desplazamiento de imágenes",
             "imagery_source_faq": "¿De dónde vienen estas imágenes?",
             "reset": "reiniciar",
             "offset": "Arrastre en cualquier lugar del área gris de abajo para ajustar el desplazamiento de imágenes, o introduzca los valores de desplazamiento en metros.",
             "minimap": {
                 "description": "Minimapa",
-                "tooltip": "Mostrar una vista alejada del mapa para ayudar a ubicar el área que se muestra actualmente."
+                "tooltip": "Mostrar una vista alejada del mapa para ayudar a ubicar el área que se muestra actualmente.",
+                "key": "/"
             }
         },
         "map_data": {
@@ -533,7 +545,9 @@
         },
         "restore": {
             "heading": "Tiene cambios sin guardar",
-            "description": "¿Quiere recuperar los cambios no guardados de una sesión de edición previa?"
+            "description": "¿Quiere recuperar los cambios no guardados de una sesión de edición previa?",
+            "restore": "Restaurar mis cambios",
+            "reset": "Descartar mis cambios"
         },
         "save": {
             "title": "Guardar",
@@ -832,6 +846,7 @@
                 "title": "Áreas",
                 "add_playground": "Las *áreas* son utilizadas para mostrar los límites de elementos como lagos, edificios y áreas residenciales.{br}Estos pueden ser utilizados para mapear con más detalle muchos elementos que normalmente podría mapear como puntos. **Haga clic en el botón área {button} para añadir una nueva área.**",
                 "start_playground": "Vamos a añadir esta zona de juegos al mapa dibujando un área.  Las áreas se dibujan colocando *nodos* a lo largo del borde exterior del elemento. **Haga clic o presione la barra espaciadora para colocar un nodo inicial en una de las esquinas de la zona de juegos.**",
+                "continue_playground": "Continúe dibujando el área colocando más nodos a lo largo del borde del patio. Está bien conectar el área a los caminos existentes.{br}Consejo: Puede mantener pulsada la tecla '{alt}' para evitar que los nodos se conecten a otros elementos. **Continuar dibujando un área para el patio de recreo.**",
                 "finish_playground": "Termine el área presionando la tecla retorno, o haciendo clic nuevamente en el primer o último nodo. **Termine de dibujar un área para la zona de juegos.**",
                 "search_playground": "**Busque '{preset}'.**",
                 "choose_playground": "**Elija {preset} de la lista.**",
@@ -896,6 +911,8 @@
             },
             "startediting": {
                 "title": "Empezar a editar",
+                "help": "Ahora está listo para editar OpenStreetMap.{br}Puede volver a reproducir este tutorial en cualquier momento o ver más documentación haciendo clic en el botón {button} o pulsando la tecla '{key}'.",
+                "shortcuts": "Puede ver una lista de comandos junto con sus atajos de teclado pulsando la tecla '{key}'.",
                 "save": "¡No olvide guardar sus cambios regularmente!",
                 "start": "¡Comience a mapear!"
             }
@@ -903,6 +920,9 @@
         "shortcuts": {
             "title": "Atajos de teclado",
             "tooltip": "Muestra la pantalla de atajos de teclado.",
+            "toggle": {
+                "key": "?"
+            },
             "key": {
                 "alt": "Alt",
                 "backspace": "Retroceso",
@@ -1002,6 +1022,17 @@
                     "redo": "Rehace la última acción",
                     "save": "Guarda cambios"
                 }
+            },
+            "tools": {
+                "title": "Herramientas",
+                "info": {
+                    "title": "Información",
+                    "all": "Alternar todos los paneles de información",
+                    "background": "Alternar panel de fondo",
+                    "history": "Alternar panel de historial",
+                    "location": "Alternar panel de ubicación",
+                    "measurement": "Alternar panel de medición"
+                }
             }
         },
         "presets": {
@@ -1019,7 +1050,7 @@
                     "name": "Elementos de uso de suelo"
                 },
                 "category-natural-area": {
-                    "name": "Elementos naturales de área"
+                    "name": "Elementos naturales"
                 },
                 "category-natural-line": {
                     "name": "Elementos naturales lineales"
@@ -1043,7 +1074,7 @@
                     "name": "Elementos de ruta"
                 },
                 "category-water-area": {
-                    "name": "Elementos de agua de área"
+                    "name": "Elementos de agua"
                 },
                 "category-water-line": {
                     "name": "Elementos de agua lineales"
@@ -1101,35 +1132,35 @@
                     "label": "Dirección",
                     "placeholders": {
                         "block_number": "Número de manzana",
-                        "block_number!jp": "Nro. de manzana",
+                        "block_number!jp": "Nro. de manzana - Japón",
                         "city": "Ciudad",
-                        "city!jp": "Ciudad / Pueblo / Aldea / Barrio especial de Tokio",
+                        "city!jp": "Ciudad / Pueblo / Aldea / Barrio especial de Tokio - Japón",
                         "city!vn": "Ciudad / Pueblo",
                         "conscriptionnumber": "123",
                         "country": "País",
                         "county": "Condado",
-                        "county!jp": "Distrito",
+                        "county!jp": "Distrito - Japón",
                         "district": "Distrito",
                         "district!vn": "Arrondissement / Pueblo / Distrito",
                         "floor": "Piso",
                         "hamlet": "Aldea / Caserío",
                         "housename": "Nombre de la casa",
                         "housenumber": "123",
-                        "housenumber!jp": "Nro. de edificio/Nro. de lote",
+                        "housenumber!jp": "Nro. de edificio / Nro. de lote - Japón",
                         "neighbourhood": "Barrio",
-                        "neighbourhood!jp": "Chōme / Aza / Koaza",
+                        "neighbourhood!jp": "Chōme / Aza / Koaza - Japón",
                         "place": "Lugar",
                         "postcode": "Código postal",
                         "province": "Provincia",
-                        "province!jp": "Prefectura",
-                        "quarter": "Quarter",
-                        "quarter!jp": "Ōaza / Machi",
+                        "province!jp": "Prefectura - Japón",
+                        "quarter": "Barrio - Quarter",
+                        "quarter!jp": "Ōaza / Machi - Japón",
                         "state": "Estado",
                         "street": "Calle",
                         "subdistrict": "Subdistrito",
                         "subdistrict!vn": "Barrio / Comuna / Pueblito",
                         "suburb": "Suburbio",
-                        "suburb!jp": "Ward"
+                        "suburb!jp": "Ward - Japón"
                     }
                 },
                 "admin_level": {
@@ -1307,6 +1338,9 @@
                         "anticlockwise": "En sentido antihorario",
                         "clockwise": "En sentido horario"
                     }
+                },
+                "clothes": {
+                    "label": "Ropa"
                 },
                 "club": {
                     "label": "Tipo"
@@ -1494,15 +1528,15 @@
                 "generator/method": {
                     "label": "Método"
                 },
+                "generator/output/electricity": {
+                    "label": "Potencia de salida",
+                    "placeholder": "50 MW, 100 MW, 200 MW..."
+                },
                 "generator/source": {
                     "label": "Fuente"
                 },
                 "generator/type": {
                     "label": "Tipo"
-                },
-                "golf_hole": {
-                    "label": "Referencia",
-                    "placeholder": "Número de hoyo (1-18)"
                 },
                 "grape_variety": {
                     "label": "Variedades de uva"
@@ -1573,6 +1607,9 @@
                 },
                 "kerb": {
                     "label": "Bordillo/Cordón"
+                },
+                "label": {
+                    "label": "Etiqueta"
                 },
                 "lamp_type": {
                     "label": "Tipo"
@@ -1645,6 +1682,9 @@
                 "man_made": {
                     "label": "Tipo"
                 },
+                "manhole": {
+                    "label": "Tipo"
+                },
                 "map_size": {
                     "label": "Cobertura"
                 },
@@ -1664,6 +1704,10 @@
                 },
                 "maxweight": {
                     "label": "Peso máximo"
+                },
+                "milestone_position": {
+                    "label": "Posición del hito kilométrico",
+                    "placeholder": "Distancia a un decimal (123.4)"
                 },
                 "mtb/scale": {
                     "label": "Dificultad de bicicleta de montaña",
@@ -1852,8 +1896,12 @@
                 "plant": {
                     "label": "Planta"
                 },
+                "plant/output/electricity": {
+                    "label": "Potencia de salida",
+                    "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
                 "population": {
-                    "label": "Población"
+                    "label": "Cantidad de población"
                 },
                 "power": {
                     "label": "Tipo"
@@ -1881,7 +1929,29 @@
                     }
                 },
                 "ref": {
-                    "label": "Referencia"
+                    "label": "Código de referencia"
+                },
+                "ref_aeroway_gate": {
+                    "label": "Número de puerta"
+                },
+                "ref_golf_hole": {
+                    "label": "Número de hoyo",
+                    "placeholder": "1-18"
+                },
+                "ref_highway_junction": {
+                    "label": "Número de intersección"
+                },
+                "ref_platform": {
+                    "label": "Número de plataforma"
+                },
+                "ref_road_number": {
+                    "label": "Número de la carretera"
+                },
+                "ref_route": {
+                    "label": "Número de ruta"
+                },
+                "ref_stop_position": {
+                    "label": "Número de parada"
                 },
                 "relation": {
                     "label": "Tipo"
@@ -1995,9 +2065,6 @@
                 },
                 "social_facility_for": {
                     "label": "Personas atendidas"
-                },
-                "source": {
-                    "label": "Fuente"
                 },
                 "sport": {
                     "label": "Deportes"
@@ -2135,9 +2202,6 @@
                 },
                 "trees": {
                     "label": "Árboles"
-                },
-                "tunnel": {
-                    "label": "Túnel"
                 },
                 "vending": {
                     "label": "Tipo de producto"
@@ -2531,6 +2595,10 @@
                     "name": "Iglesia cristiana",
                     "terms": "templo, capilla, parroquia, santuario, ermita, oratorio, iglesia, oratorio, la iglesia"
                 },
+                "amenity/place_of_worship/hindu": {
+                    "name": "Templo hindú",
+                    "terms": "hindú, india, hinduismo, garbhargriha, mandu, mandir, culto, capilla, templo, santuario, sagrario, ermita"
+                },
                 "amenity/place_of_worship/jewish": {
                     "name": "Sinagoga",
                     "terms": "templo, aljama, sinagoga, judío, religión"
@@ -2538,6 +2606,18 @@
                 "amenity/place_of_worship/muslim": {
                     "name": "Mezquita",
                     "terms": "mezquita, morabito, rábida, musulmán, religión"
+                },
+                "amenity/place_of_worship/shinto": {
+                    "name": "Santuario sintoísta",
+                    "terms": "shinto, sintoísmo, shintoísmo, kami, koshitsu, jinja, shuha, minzoku, culto, capilla, templo, santuario, sagrario, ermita"
+                },
+                "amenity/place_of_worship/sikh": {
+                    "name": "Templo Sij",
+                    "terms": "sikh, sij, sijismo, india, gurudwara, culto, capilla, templo, santuario"
+                },
+                "amenity/place_of_worship/taoist": {
+                    "name": "Templo Taoísta",
+                    "terms": "taoísta, daoísta, taoísmo, daoísmo, china, filosofía, monasterio, culto, capilla, templo, santuario"
                 },
                 "amenity/planetarium": {
                     "name": "Planetario",
@@ -2597,6 +2677,10 @@
                 "amenity/school": {
                     "name": "Terreno escolar",
                     "terms": "terreno, área, suelo, recinto escolar, escolar, escuela, colegio, centro educativo, unidad educativa, primaria, secundaria, secundario, instituto"
+                },
+                "amenity/scrapyard": {
+                    "name": "Depósito de chatarra",
+                    "terms": "auto, automóvil, coche, carro, vehículo, basura, metal, objetos salvados, chatarra, naufragio, desguace, depósito, almacén, triturador, reciclaje, desguace, deshuesadero, chivera, yonke, junker"
                 },
                 "amenity/shelter": {
                     "name": "Refugio",
@@ -2699,6 +2783,10 @@
                 "amenity/veterinary": {
                     "name": "Veterinario",
                     "terms": "veterinario, veterinaria, albéitar, mascotas, animales, perros, gatos"
+                },
+                "amenity/waste/dog_excrement": {
+                    "name": "Recipiente para excremento de perro",
+                    "terms": "basura, tacho, recipiente, caca, excremento, popo, perro"
                 },
                 "amenity/waste_basket": {
                     "name": "Papelera",
@@ -3915,9 +4003,29 @@
                     "name": "Planta potabilizadora de agua",
                     "terms": "potabilizadora, ETAP, planta potabilizadora, abastecimiento de agua, agua potable"
                 },
+                "man_made/watermill": {
+                    "name": "Molino de agua",
+                    "terms": "agua, hidráulico, caz, azud, aceña, rueda, turbina, paleta, molino, noria, moler"
+                },
+                "man_made/windmill": {
+                    "name": "Molino de viento",
+                    "terms": "viento, eólico, granja, rueda, molino, turbina, extraer agua, bombeo"
+                },
                 "man_made/works": {
                     "name": "Fábrica",
                     "terms": "factoría, manofactura, industria, taller, ensamblaje, planta, materia prima, fabricado, producción, fabricación, ingenio, procesadora, refinería, cervecería, azucarera"
+                },
+                "manhole": {
+                    "name": "Pozo de inspección",
+                    "terms": "Cubierta, tapa, agujero, alcantarillado, telecomunicaciones, pozo, sumidero, boca de alcantarilla, boca de inspección, pozo de registro, abertura, boca de acceso"
+                },
+                "manhole/drain": {
+                    "name": "Desagüe pluvial",
+                    "terms": "Cubierta, tapa, desagüe, agujero, pozo, lluvia, alcantarillado, tormenta, boca de tormenta, alcantarillado pluvial"
+                },
+                "manhole/telecom": {
+                    "name": "Pozo de telecomunicaciones",
+                    "terms": "telecomunicaciones, teléfono, pozo, boca de inspección, pozo de registro, abertura, boca de acceso"
                 },
                 "natural": {
                     "name": "Natural",
@@ -4004,16 +4112,16 @@
                     "terms": "volcán, lava, magma, ceniza, cráter"
                 },
                 "natural/water": {
-                    "name": "Lámina de agua",
-                    "terms": "río, agua, lago, laguna, albufera, ibón, estanque, embalse, pantano, balsa, cuerpo de agua, aguas, lámina de agua"
+                    "name": "Cuerpo de agua",
+                    "terms": "río, agua, lago, laguna, albufera, ibón, estanque, embalse, pantano, balsa, cuerpo de agua, aguas, lámina de agua, poza de agua, charca"
                 },
                 "natural/water/lake": {
                     "name": "Lago",
-                    "terms": "lago, laguna, ibón"
+                    "terms": "lago, laguna, ibón, lago pequeño, laguito"
                 },
                 "natural/water/pond": {
                     "name": "Estanque",
-                    "terms": "estanque, charco, charca, laguna"
+                    "terms": "estanque, poza de agua, lago de molino, lago de montaña, ibón, piscina natural, remanso, charca"
                 },
                 "natural/water/reservoir": {
                     "name": "Embalse",
@@ -4104,8 +4212,7 @@
                     "terms": "ONG, organización no gubernamental, Oficina de la ONG"
                 },
                 "office/physician": {
-                    "name": "Médico",
-                    "terms": "médico, médica, curador, curandero, doctor, facultativo, clínico"
+                    "name": "Médico"
                 },
                 "office/political_party": {
                     "name": "Partido político",
@@ -4157,27 +4264,27 @@
                     "terms": "paraje, rincón"
                 },
                 "place/neighbourhood": {
-                    "name": "Vecindario",
+                    "name": "Barrio / Vecindario",
                     "terms": "barrio, vecindario, vecindad, urbanización, colonia"
                 },
                 "place/quarter": {
-                    "name": "Sub-Borough / Quarter",
-                    "terms": "sub-distrito, cuadrante, delegación, localidad, barrio, vecindario"
+                    "name": "Sub-municipio / Barrio - Quarter",
+                    "terms": "submunicipio, subdistrito, sector, cuadrante, delegación, localidad, barrio, vecindario, quarter"
                 },
                 "place/square": {
                     "name": "Plaza",
                     "terms": "plaza"
                 },
                 "place/suburb": {
-                    "name": "Borough / Suburbio",
-                    "terms": "distrito, suburbio"
+                    "name": "Municipio / Suburbio",
+                    "terms": "municipio, división administrativa, division administrativa, burgo, delegación, delegacion, localidad"
                 },
                 "place/town": {
-                    "name": "Ciudad pequeña",
+                    "name": "Pueblo / Ciudad pequeña",
                     "terms": "ciudad, pueblo, municipio"
                 },
                 "place/village": {
-                    "name": "Población",
+                    "name": "Población / Aldea",
                     "terms": "población, aldea, pueblo, poblado"
                 },
                 "point": {
@@ -4190,6 +4297,14 @@
                 "power/generator": {
                     "name": "Generador de energía",
                     "terms": "subestación, generador, generador eléctrico, generador de electricidad, generador de potencia"
+                },
+                "power/generator/source_nuclear": {
+                    "name": "Reactor nuclear",
+                    "terms": "Fisión, generador, nuclear, reactor"
+                },
+                "power/generator/source_wind": {
+                    "name": "Turbina eólica",
+                    "terms": "Generador, turbina, molino de viento, viento, eólico, eolico"
                 },
                 "power/line": {
                     "name": "Línea de alta tensión",
@@ -4237,9 +4352,17 @@
                     "name": "Vía de ferrocarril abandonada",
                     "terms": "Ferrocarril abandonado, traza abandonada"
                 },
+                "railway/buffer_stop": {
+                    "name": "Parachoques deslizante",
+                    "terms": "Parachoques deslizante, tope, amortiguador"
+                },
                 "railway/crossing": {
                     "name": "Cruce de ferrocarril (sendero)",
                     "terms": "cruce, tren, ferrocarril, sendero, senda, cruce ferroviario, paso a nivel"
+                },
+                "railway/derail": {
+                    "name": "Calce descarrilador ferroviario",
+                    "terms": "Calce, descarrilador, ferroviario"
                 },
                 "railway/disused": {
                     "name": "Vía de ferrocarril en desuso",
@@ -4257,6 +4380,10 @@
                     "name": "Cruce de ferrocarril (carretera)",
                     "terms": "cruce, tren, ferrocarril, carretera, camino, cruce ferroviario, paso a nivel"
                 },
+                "railway/milestone": {
+                    "name": "Hito kilométrico ferroviario",
+                    "terms": "hito, señal, marcador, kilométrico, mojón, vía, via, férrea, ferroviaria, ferroviario, ferrocarril, tren"
+                },
                 "railway/monorail": {
                     "name": "Monorraíl",
                     "terms": "monorraíl, monorriel, monocarril"
@@ -4273,6 +4400,10 @@
                     "name": "Vía de ferrocarril",
                     "terms": "Rail, ferrocarril, riel, tren, raíl, vía"
                 },
+                "railway/signal": {
+                    "name": "Señal ferroviaria",
+                    "terms": "señal, señalización, luces, vía, via, férrea, ferroviaria, ferroviario, ferrocarril, tren"
+                },
                 "railway/station": {
                     "name": "Estación de ferrocarril",
                     "terms": "Estación de Ferrocarril, estaciones de ferrocarril, estación de tren"
@@ -4284,6 +4415,14 @@
                 "railway/subway_entrance": {
                     "name": "Boca de metro",
                     "terms": "entrada de metro, entrada de subte,  entrada, ingreso, acceso"
+                },
+                "railway/switch": {
+                    "name": "Desvío ferroviario",
+                    "terms": "desvío, desvio, vía, via, férrea, ferroviaria, ferroviario, ferrocarril, tren"
+                },
+                "railway/train_wash": {
+                    "name": "Instalación de lavado de trenes",
+                    "terms": "lavado, lavadero, limpieza, tren, ferroviario, ferrocarril"
                 },
                 "railway/tram": {
                     "name": "Tranvía",
@@ -5198,6 +5337,20 @@
                     "text": "© Sarah Hoffmann, CC by-SA 3.0, datos del mapa contribuidores OpenStreetMap, ODbL 1.0"
                 },
                 "name": "Waymarked Trails: Deportes de invierno"
+            },
+            "basemap.at": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Mapa base de Austria, basado en datos del gobierno.",
+                "name": "basemap.at"
+            },
+            "basemap.at-orthofoto": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Capa de ortofoto proporcionada por basemap.at. «Sucesor» de las imágenes aéreas de geoimage.at.",
+                "name": "Ortofoto de basemap.at"
             },
             "hike_n_bike": {
                 "attribution": {

@@ -1,8 +1,11 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _assign from 'lodash-es/assign';
+import _forEach from 'lodash-es/forEach';
+
+import { json as d3_json } from 'd3-request';
+
 import rbush from 'rbush';
-import { geoExtent } from '../geo/index';
-import { utilQsString } from '../util/index';
+import { geoExtent } from '../geo';
+import { utilQsString } from '../util';
 
 
 var apibase = 'https://nominatim.openstreetmap.org/',
@@ -18,7 +21,7 @@ export default {
     },
 
     reset: function() {
-        _.forEach(inflight, function(req) { req.abort(); });
+        _forEach(inflight, function(req) { req.abort(); });
         inflight = {};
         nominatimCache = rbush();
     },
@@ -50,7 +53,7 @@ export default {
         var url = apibase + 'reverse?' + utilQsString(params);
         if (inflight[url]) return;
 
-        inflight[url] = d3.json(url, function(err, result) {
+        inflight[url] = d3_json(url, function(err, result) {
             delete inflight[url];
 
             if (err) {
@@ -60,7 +63,7 @@ export default {
             }
 
             var extent = geoExtent(location).padByMeters(200);
-            nominatimCache.insert(_.assign(extent.bbox(), {data: result}));
+            nominatimCache.insert(_assign(extent.bbox(), {data: result}));
 
             callback(null, result);
         });
@@ -72,7 +75,7 @@ export default {
         var url = apibase + 'search/' + searchVal + '?limit=10&format=json';
         if (inflight[url]) return;
 
-        inflight[url] = d3.json(url, function(err, result) {
+        inflight[url] = d3_json(url, function(err, result) {
             delete inflight[url];
             callback(err, result);
         });

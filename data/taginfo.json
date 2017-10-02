@@ -41,7 +41,7 @@
             "key": "waterway"
         },
         {
-            "key": "addr:housenumber"
+            "key": "addr:*"
         },
         {
             "key": "advertising",
@@ -244,6 +244,14 @@
             "value": "clinic"
         },
         {
+            "key": "healthcare:speciality",
+            "value": "abortion"
+        },
+        {
+            "key": "healthcare:speciality",
+            "value": "fertility"
+        },
+        {
             "key": "amenity",
             "value": "clock"
         },
@@ -393,11 +401,27 @@
         },
         {
             "key": "religion",
+            "value": "hindu"
+        },
+        {
+            "key": "religion",
             "value": "jewish"
         },
         {
             "key": "religion",
             "value": "muslim"
+        },
+        {
+            "key": "religion",
+            "value": "shinto"
+        },
+        {
+            "key": "religion",
+            "value": "sikh"
+        },
+        {
+            "key": "religion",
+            "value": "taoist"
         },
         {
             "key": "amenity",
@@ -462,6 +486,10 @@
         {
             "key": "amenity",
             "value": "shelter"
+        },
+        {
+            "key": "amenity",
+            "value": "shower"
         },
         {
             "key": "amenity",
@@ -537,6 +565,10 @@
         },
         {
             "key": "vending",
+            "value": "feminine_hygiene"
+        },
+        {
+            "key": "vending",
             "value": "newspapers"
         },
         {
@@ -572,6 +604,10 @@
             "value": "waste_transfer_station"
         },
         {
+            "key": "waste",
+            "value": "dog_excrement"
+        },
+        {
             "key": "amenity",
             "value": "water_point"
         },
@@ -585,6 +621,58 @@
         },
         {
             "key": "area:highway"
+        },
+        {
+            "key": "attraction",
+            "value": "amusement_ride"
+        },
+        {
+            "key": "attraction",
+            "value": "animal"
+        },
+        {
+            "key": "attraction",
+            "value": "big_wheel"
+        },
+        {
+            "key": "attraction",
+            "value": "bumper_car"
+        },
+        {
+            "key": "attraction",
+            "value": "bungee_jumping"
+        },
+        {
+            "key": "attraction",
+            "value": "carousel"
+        },
+        {
+            "key": "attraction",
+            "value": "dark_ride"
+        },
+        {
+            "key": "attraction",
+            "value": "drop_tower"
+        },
+        {
+            "key": "attraction",
+            "value": "pirate_ship"
+        },
+        {
+            "key": "attraction",
+            "value": "river_rafting"
+        },
+        {
+            "key": "attraction",
+            "value": "roller_coaster"
+        },
+        {
+            "key": "attraction",
+            "value": "train"
+        },
+        {
+            "key": "attraction",
+            "value": "water_slide"
         },
         {
             "key": "barrier"
@@ -1048,14 +1136,26 @@
         },
         {
             "key": "emergency",
+            "value": "life_ring"
+        },
+        {
+            "key": "emergency",
             "value": "phone"
         },
         {
             "key": "entrance"
         },
         {
+            "key": "traffic_calming",
+            "value": "table"
+        },
+        {
             "key": "footway",
             "value": "crossing"
+        },
+        {
+            "key": "traffic_calming",
+            "value": "table"
         },
         {
             "key": "crossing",
@@ -1110,8 +1210,63 @@
             "value": "water_hazard"
         },
         {
+            "key": "healthcare"
+        },
+        {
+            "key": "healthcare",
+            "value": "alternative"
+        },
+        {
+            "key": "healthcare:speciality",
+            "value": "chiropractic"
+        },
+        {
+            "key": "healthcare",
+            "value": "audiologist"
+        },
+        {
+            "key": "healthcare",
+            "value": "birthing_center"
+        },
+        {
             "key": "healthcare",
             "value": "blood_donation"
+        },
+        {
+            "key": "healthcare",
+            "value": "hospice"
+        },
+        {
+            "key": "healthcare",
+            "value": "midwife"
+        },
+        {
+            "key": "healthcare",
+            "value": "occupational_therapist"
+        },
+        {
+            "key": "healthcare",
+            "value": "optometrist"
+        },
+        {
+            "key": "healthcare",
+            "value": "physiotherapist"
+        },
+        {
+            "key": "healthcare",
+            "value": "podiatrist"
+        },
+        {
+            "key": "healthcare",
+            "value": "psychotherapist"
+        },
+        {
+            "key": "healthcare",
+            "value": "rehabilitation"
+        },
+        {
+            "key": "healthcare",
+            "value": "speech_therapist"
         },
         {
             "key": "highway",
@@ -1126,8 +1281,16 @@
             "value": "corridor"
         },
         {
+            "key": "traffic_calming",
+            "value": "table"
+        },
+        {
             "key": "highway",
             "value": "crossing"
+        },
+        {
+            "key": "traffic_calming",
+            "value": "table"
         },
         {
             "key": "crossing",
@@ -1540,6 +1703,10 @@
         },
         {
             "key": "leisure",
+            "value": "hackerspace"
+        },
+        {
+            "key": "leisure",
             "value": "horse_riding"
         },
         {
@@ -1775,6 +1942,14 @@
         },
         {
             "key": "man_made",
+            "value": "watermill"
+        },
+        {
+            "key": "man_made",
+            "value": "windmill"
+        },
+        {
+            "key": "man_made",
             "value": "works"
         },
         {
@@ -1783,6 +1958,10 @@
         {
             "key": "manhole",
             "value": "drain"
+        },
+        {
+            "key": "manhole",
+            "value": "telecom"
         },
         {
             "key": "natural"
@@ -1900,6 +2079,10 @@
         },
         {
             "key": "office",
+            "value": "physician"
+        },
+        {
+            "key": "office",
             "value": "travel_agent"
         },
         {
@@ -1972,10 +2155,6 @@
         },
         {
             "key": "office",
-            "value": "physician"
-        },
-        {
-            "key": "office",
             "value": "political_party"
         },
         {
@@ -2042,12 +2221,76 @@
             "value": "village"
         },
         {
+            "key": "playground",
+            "value": "balancebeam"
+        },
+        {
+            "key": "playground",
+            "value": "basketrotator"
+        },
+        {
+            "key": "playground",
+            "value": "basketswing"
+        },
+        {
+            "key": "playground",
+            "value": "climbingframe"
+        },
+        {
+            "key": "playground",
+            "value": "cushion"
+        },
+        {
+            "key": "playground",
+            "value": "horizontal_bar"
+        },
+        {
+            "key": "playground",
+            "value": "springy"
+        },
+        {
+            "key": "playground",
+            "value": "roundabout"
+        },
+        {
+            "key": "playground",
+            "value": "sandpit"
+        },
+        {
+            "key": "playground",
+            "value": "seesaw"
+        },
+        {
+            "key": "playground",
+            "value": "slide"
+        },
+        {
+            "key": "playground",
+            "value": "structure"
+        },
+        {
+            "key": "playground",
+            "value": "swing"
+        },
+        {
+            "key": "playground",
+            "value": "zipwire"
+        },
+        {
             "key": "power",
             "value": "sub_station"
         },
         {
             "key": "power",
             "value": "generator"
+        },
+        {
+            "key": "generator:method",
+            "value": "fission"
+        },
+        {
+            "key": "generator:method",
+            "value": "wind_turbine"
         },
         {
             "key": "power",
@@ -2091,7 +2334,15 @@
         },
         {
             "key": "railway",
+            "value": "buffer_stop"
+        },
+        {
+            "key": "railway",
             "value": "crossing"
+        },
+        {
+            "key": "railway",
+            "value": "derail"
         },
         {
             "key": "railway",
@@ -2111,6 +2362,10 @@
         },
         {
             "key": "railway",
+            "value": "milestone"
+        },
+        {
+            "key": "railway",
             "value": "monorail"
         },
         {
@@ -2127,6 +2382,10 @@
         },
         {
             "key": "railway",
+            "value": "signal"
+        },
+        {
+            "key": "railway",
             "value": "station"
         },
         {
@@ -2136,6 +2395,14 @@
         {
             "key": "railway",
             "value": "subway"
+        },
+        {
+            "key": "railway",
+            "value": "switch"
+        },
+        {
+            "key": "railway",
+            "value": "wash"
         },
         {
             "key": "railway",
@@ -2155,6 +2422,10 @@
         {
             "key": "shop",
             "value": "fishmonger"
+        },
+        {
+            "key": "shop",
+            "value": "furnace"
         },
         {
             "key": "shop",
@@ -2363,10 +2634,6 @@
         {
             "key": "shop",
             "value": "funeral_directors"
-        },
-        {
-            "key": "shop",
-            "value": "furnace"
         },
         {
             "key": "shop",
@@ -2871,6 +3138,10 @@
             "value": "site"
         },
         {
+            "key": "type",
+            "value": "waterway"
+        },
+        {
             "key": "waterway",
             "value": "boatyard"
         },
@@ -2909,6 +3180,10 @@
         {
             "key": "waterway",
             "value": "sanitary_dump_station"
+        },
+        {
+            "key": "intermittent",
+            "value": "yes"
         },
         {
             "key": "waterway",

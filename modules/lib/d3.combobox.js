@@ -1,11 +1,21 @@
-import * as d3 from 'd3';
-import { utilRebind } from '../../modules/util/rebind';
-import { utilTriggerEvent } from '../../modules/util/trigger_event';
+import {
+    dispatch as d3_dispatch
+} from 'd3-dispatch';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import {
+    utilRebind,
+    utilTriggerEvent
+} from '../../modules/util';
 
 
 export function d3combobox() {
-    var dispatch = d3.dispatch('accept'),
-        container = d3.select(document.body),
+    var dispatch = d3_dispatch('accept'),
+        container = d3_select(document.body),
         data = [],
         suggestions = [],
         minItems = 2,
@@ -38,7 +48,7 @@ export function d3combobox() {
                 var parent = this.parentNode,
                     sibling = this.nextSibling;
 
-                var caret = d3.select(parent).selectAll('.combobox-caret')
+                var caret = d3_select(parent).selectAll('.combobox-caret')
                     .filter(function(d) { return d === input.node(); })
                     .data([input.node()]);
 
@@ -51,8 +61,8 @@ export function d3combobox() {
                     .on('mousedown', function () {
                         // prevent the form element from blurring. it blurs
                         // on mousedown
-                        d3.event.stopPropagation();
-                        d3.event.preventDefault();
+                        d3_event.stopPropagation();
+                        d3_event.preventDefault();
                         if (!shown) {
                             input.node().focus();
                             fetch('', render);
@@ -81,10 +91,10 @@ export function d3combobox() {
                     .style('left', '0px')
                     .on('mousedown', function () {
                         // prevent moving focus out of the text field
-                        d3.event.preventDefault();
+                        d3_event.preventDefault();
                     });
 
-                d3.select('body')
+                d3_select('body')
                     .on('scroll.combobox', render, true);
 
                 shown = true;
@@ -96,7 +106,7 @@ export function d3combobox() {
                 idx = -1;
                 wrapper.remove();
 
-                d3.select('body')
+                d3_select('body')
                     .on('scroll.combobox', null);
 
                 shown = false;
@@ -104,7 +114,7 @@ export function d3combobox() {
         }
 
         function keydown() {
-           switch (d3.event.keyCode) {
+           switch (d3_event.keyCode) {
                // backspace, delete
                case 8:
                case 46:
@@ -125,24 +135,24 @@ export function d3combobox() {
                    break;
                // return
                case 13:
-                   d3.event.preventDefault();
+                   d3_event.preventDefault();
                    break;
                // up arrow
                case 38:
                    nav(-1);
-                   d3.event.preventDefault();
+                   d3_event.preventDefault();
                    break;
                // down arrow
                case 40:
                    nav(+1);
-                   d3.event.preventDefault();
+                   d3_event.preventDefault();
                    break;
            }
-           d3.event.stopPropagation();
+           d3_event.stopPropagation();
         }
 
         function keyup() {
-            switch (d3.event.keyCode) {
+            switch (d3_event.keyCode) {
                 // escape
                 case 27:
                     hide();
@@ -308,11 +318,11 @@ d3combobox.off = function(input) {
         .on('keyup.typeahead', null)
         .on('input.typeahead', null)
         .each(function() {
-            d3.select(this.parentNode).selectAll('.combobox-caret')
+            d3_select(this.parentNode).selectAll('.combobox-caret')
                 .filter(function(d) { return d === input.node(); })
                 .on('mousedown', null);
         });
 
-    d3.select('body')
+    d3_select('body')
         .on('scroll.combobox', null);
 };

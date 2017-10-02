@@ -9,6 +9,7 @@
                 "barrier/wall",
                 "barrier/ditch",
                 "barrier/gate",
+                "barrier/hedge",
                 "barrier"
             ]
         },

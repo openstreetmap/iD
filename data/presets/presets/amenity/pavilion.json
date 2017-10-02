@@ -2,7 +2,7 @@
     "icon": "shelter",
     "fields": [
         "bin",
-		"bench"
+        "bench"
     ],
     "geometry": [
         "point",
@@ -11,7 +11,7 @@
     ],
     "tags": {
         "amenity": "shelter",
-	"shelter_type": "pavilion"
+    "shelter_type": "pavilion"
     },
     "name": "Pavilion"
 }

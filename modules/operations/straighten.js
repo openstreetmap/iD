@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import _uniq from 'lodash-es/uniq';
+
 import { t } from '../util/locale';
 import { actionStraighten } from '../actions/index';
 import { behaviorOperation } from '../behavior/index';
@@ -19,7 +20,7 @@ export function operationStraighten(selectedIDs, context) {
         return selectedIDs.length === 1 &&
             entity.type === 'way' &&
             !entity.isClosed() &&
-            _.uniq(entity.nodes).length > 2;
+            _uniq(entity.nodes).length > 2;
     };
 
 
