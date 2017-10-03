@@ -5035,13 +5035,13 @@
                 "area"
             ],
             "terms": [
-                "sweets",
+                "sweet",
                 "candy"
             ],
             "tags": {
                 "craft": "confectionery"
             },
-            "name": "Confectionery"
+            "name": "Candy Maker"
         },
         "craft/distillery": {
             "icon": "poi-storage-tank",
@@ -13075,6 +13075,9 @@
             "geometry": [
                 "point",
                 "area"
+            ],
+            "terms": [
+                "sweet"
             ],
             "tags": {
                 "shop": "confectionery"
