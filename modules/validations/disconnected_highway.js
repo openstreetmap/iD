@@ -3,7 +3,6 @@ import { t } from '../util/locale';
 
 export function validationDisconnectedHighway() {
 
-
     function isDisconnectedHighway(entity, graph) {
         if (!entity.tags.highway) return false;
         if (entity.geometry(graph) !== 'line') return false;

@@ -1,9 +1,19 @@
-import * as d3 from 'd3';
-import { d3keybinding } from '../lib/d3.keybinding.js';
-import { t } from '../util/locale';
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
 
-import { actionRotate } from '../actions/index';
-import { behaviorEdit } from '../behavior/index';
+import {
+    polygonHull as d3_polygonHull,
+    polygonCentroid as d3_polygonCentroid
+} from 'd3-polygon';
+
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+
+import { t } from '../util/locale';
+import { actionRotate } from '../actions';
+import { behaviorEdit } from '../behavior';
+import { geoInterp } from '../geo';
 
 import {
     modeBrowse,
@@ -17,12 +27,7 @@ import {
     operationOrthogonalize,
     operationReflectLong,
     operationReflectShort
-} from '../operations/index';
-
-import {
-    polygonHull as d3polygonHull,
-    polygonCentroid as d3polygonCentroid
-} from 'd3';
+} from '../operations';
 
 import { utilGetAllNodes } from '../util';
 
@@ -33,7 +38,7 @@ export function modeRotate(context, entityIDs) {
         button: 'browse'
     };
 
-    var keybinding = d3keybinding('rotate'),
+    var keybinding = d3_keybinding('rotate'),
         behaviors = [
             behaviorEdit(context),
             operationCircularize(entityIDs, context).behavior,
@@ -71,7 +76,13 @@ export function modeRotate(context, entityIDs) {
             var nodes = utilGetAllNodes(entityIDs, context.graph()),
                 points = nodes.map(function(n) { return projection(n.loc); });
 
-            pivot = d3polygonCentroid(d3polygonHull(points));
+            if (points.length === 1) {  // degenerate case
+                pivot = points[0];
+            } else if (points.length === 2) {
+                pivot = geoInterp(points[0], points[1], 0.5);
+            } else {
+                pivot = d3_polygonCentroid(d3_polygonHull(points));
+            }
             prevAngle = undefined;
         }
 
@@ -91,7 +102,7 @@ export function modeRotate(context, entityIDs) {
 
 
     function finish() {
-        d3.event.stopPropagation();
+        d3_event.stopPropagation();
         context.enter(modeSelect(context, entityIDs));
     }
 
@@ -123,7 +134,7 @@ export function modeRotate(context, entityIDs) {
             .on('⎋', cancel)
             .on('↩', finish);
 
-        d3.select(document)
+        d3_select(document)
             .call(keybinding);
     };
 

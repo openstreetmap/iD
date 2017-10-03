@@ -1,8 +1,18 @@
-import * as d3 from 'd3';
-import { d3combobox } from '../lib/d3.combobox.js';
+import _map from 'lodash-es/map';
+
+import { ascending as d3_ascending } from 'd3-array';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import { d3combobox as d3_combobox } from '../lib/d3.combobox.js';
+
 import { t } from '../util/locale';
-import { services } from '../services/index';
-import { svgIcon } from '../svg/index';
+import { services } from '../services';
+import { svgIcon } from '../svg';
 import { uiDisclosure } from './disclosure';
 import { uiTagReference } from './tag_reference';
 import {
@@ -14,10 +24,11 @@ import {
 
 export function uiRawTagEditor(context) {
     var taginfo = services.taginfo,
-        dispatch = d3.dispatch('change'),
-        expanded = context.storage('raw_tag_editor.expanded') === 'true',
-        readOnlyTags = [],
+        dispatch = d3_dispatch('change'),
+        expandedPreference = (context.storage('raw_tag_editor.expanded') === 'true'),
+        expandedCurrent = expandedPreference,
         updatePreference = true,
+        readOnlyTags = [],
         showBlank = false,
         newRow,
         state,
@@ -31,13 +42,15 @@ export function uiRawTagEditor(context) {
 
         selection.call(uiDisclosure()
             .title(t('inspector.all_tags') + ' (' + count + ')')
-            .expanded(expanded)
+            .expanded(expandedCurrent)
             .on('toggled', toggled)
             .content(content)
         );
 
         function toggled(expanded) {
+            expandedCurrent = expanded;
             if (updatePreference) {
+                expandedPreference = expanded;
                 context.storage('raw_tag_editor.expanded', expanded);
             }
             if (expanded) {
@@ -48,7 +61,9 @@ export function uiRawTagEditor(context) {
 
 
     function content(wrap) {
-        var entries = d3.entries(tags);
+        var entries = _map(tags, function(v, k) {
+            return { key: k, value: v };
+        });
 
         if (!entries.length || showBlank) {
             showBlank = false;
@@ -125,12 +140,12 @@ export function uiRawTagEditor(context) {
             .sort(function(a, b) {
                 return (a.key === newRow && b.key !== newRow) ? 1
                     : (a.key !== newRow && b.key === newRow) ? -1
-                    : d3.ascending(a.key, b.key);
+                    : d3_ascending(a.key, b.key);
             });
 
         items
             .each(function(tag) {
-                var row = d3.select(this),
+                var row = d3_select(this),
                     key = row.select('input.key'),      // propagate bound data to child
                     value = row.select('input.value');  // propagate bound data to child
 
@@ -172,12 +187,17 @@ export function uiRawTagEditor(context) {
 
 
         function isReadOnly(d) {
-            return readOnlyTags.indexOf(d.key) !== -1;
+            for (var i = 0; i < readOnlyTags.length; i++) {
+                if (d.key.match(readOnlyTags[i]) !== null) {
+                    return true;
+                }
+            }
+            return false;
         }
 
 
         function pushMore() {
-            if (d3.event.keyCode === 9 && !d3.event.shiftKey &&
+            if (d3_event.keyCode === 9 && !d3_event.shiftKey &&
                 list.selectAll('li:last-child input.value').node() === this) {
                 addTag();
             }
@@ -188,7 +208,7 @@ export function uiRawTagEditor(context) {
             if (isReadOnly({ key: key })) return;
             var geometry = context.geometry(id);
 
-            key.call(d3combobox()
+            key.call(d3_combobox()
                 .container(context.container())
                 .fetcher(function(value, callback) {
                     taginfo.keys({
@@ -200,7 +220,7 @@ export function uiRawTagEditor(context) {
                     });
                 }));
 
-            value.call(d3combobox()
+            value.call(d3_combobox()
                 .container(context.container())
                 .fetcher(function(value, callback) {
                     taginfo.values({
@@ -230,13 +250,13 @@ export function uiRawTagEditor(context) {
 
 
         function unbind() {
-            var row = d3.select(this);
+            var row = d3_select(this);
 
             row.selectAll('input.key')
-                .call(d3combobox.off);
+                .call(d3_combobox.off);
 
             row.selectAll('input.value')
-                .call(d3combobox.off);
+                .call(d3_combobox.off);
         }
 
 
@@ -291,7 +311,7 @@ export function uiRawTagEditor(context) {
             var tag = {};
             tag[d.key] = undefined;
             dispatch.call('change', this, tag);
-            d3.select(this.parentNode).remove();
+            d3_select(this.parentNode).remove();
         }
 
 
@@ -319,10 +339,10 @@ export function uiRawTagEditor(context) {
         if (!arguments.length) return preset;
         preset = _;
         if (preset.isFallback()) {
-            expanded = true;
+            expandedCurrent = true;
             updatePreference = false;
         } else {
-            expanded = context.storage('raw_tag_editor.expanded') === 'true';
+            expandedCurrent = expandedPreference;
             updatePreference = true;
         }
         return rawTagEditor;
@@ -344,8 +364,8 @@ export function uiRawTagEditor(context) {
 
 
     rawTagEditor.expanded = function(_) {
-        if (!arguments.length) return expanded;
-        expanded = _;
+        if (!arguments.length) return expandedCurrent;
+        expandedCurrent = _;
         updatePreference = false;
         return rawTagEditor;
     };

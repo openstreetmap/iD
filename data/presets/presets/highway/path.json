@@ -1,6 +1,7 @@
 {
     "icon": "highway-path",
     "fields": [
+        "name",
         "surface",
         "width",
         "structure",

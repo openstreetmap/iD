@@ -1,0 +1,25 @@
+{
+    "icon": "hospital",
+    "fields": [
+        "name",
+        "operator",
+        "healthcare/speciality",
+        "building_area",
+        "address",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "back",
+        "pain",
+        "spine"
+    ],
+    "tags": {
+        "healthcare": "alternative",
+        "healthcare:speciality": "chiropractic"
+    },
+    "name": "Chiropractor"
+}

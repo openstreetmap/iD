@@ -1,13 +1,32 @@
 /* global Mapillary:false */
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _filter from 'lodash-es/filter';
+import _find from 'lodash-es/find';
+import _flatten from 'lodash-es/flatten';
+import _forEach from 'lodash-es/forEach';
+import _isEmpty from 'lodash-es/isEmpty';
+import _map from 'lodash-es/map';
+import _some from 'lodash-es/some';
+
+import { range as d3_range } from 'd3-array';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
+import {
+    request as d3_request,
+    json as d3_json
+} from 'd3-request';
+
+import {
+    select as d3_select,
+    selectAll as d3_selectAll
+} from 'd3-selection';
+
 import rbush from 'rbush';
-import { utilRebind } from '../util/rebind';
-import { d3geoTile } from '../lib/d3.geo.tile';
+
+import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
+import { geoExtent } from '../geo';
+import { svgIcon } from '../svg';
 import { utilDetect } from '../util/detect';
-import { geoExtent } from '../geo/index';
-import { svgIcon } from '../svg/index';
-import { utilQsString } from '../util/index';
+import { utilQsString, utilRebind } from '../util';
 
 
 var apibase = 'https://a.mapillary.com/v3/',
@@ -16,7 +35,7 @@ var apibase = 'https://a.mapillary.com/v3/',
     clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
     maxResults = 1000,
     tileZoom = 14,
-    dispatch = d3.dispatch('loadedImages', 'loadedSigns'),
+    dispatch = d3_dispatch('loadedImages', 'loadedSigns'),
     mapillaryCache,
     mapillaryClicks,
     mapillaryImage,
@@ -60,7 +79,7 @@ function getTiles(projection) {
             s / 2 - projection.translate()[0],
             s / 2 - projection.translate()[1]];
 
-    return d3geoTile()
+    return d3_geoTile()
         .scaleExtent([tileZoom, tileZoom])
         .scale(s)
         .size(projection.clipExtent()[1])
@@ -89,8 +108,8 @@ function loadTiles(which, url, projection) {
             return !nearNullIsland(t.xyz[0], t.xyz[1], t.xyz[2]);
         });
 
-    _.filter(which.inflight, function(v, k) {
-        var wanted = _.find(tiles, function(tile) { return k === (tile.id + ',0'); });
+    _filter(which.inflight, function(v, k) {
+        var wanted = _find(tiles, function(tile) { return k === (tile.id + ',0'); });
         if (!wanted) delete which.inflight[k];
         return !wanted;
     }).map(abortRequest);
@@ -118,7 +137,7 @@ function loadNextTilePage(which, currZoom, url, tile) {
 
     var id = tile.id + ',' + String(nextPage);
     if (cache.loaded[id] || cache.inflight[id]) return;
-    cache.inflight[id] = d3.request(nextURL)
+    cache.inflight[id] = d3_request(nextURL)
         .mimeType('application/json')
         .response(function(xhr) {
             var linkHeader = xhr.getResponseHeader('Link');
@@ -128,30 +147,60 @@ function loadNextTilePage(which, currZoom, url, tile) {
                     cache.nextURL[tile.id] = pagination.next;
                 }
             }
-
-            return JSON.parse(xhr.responseText); })
+            return JSON.parse(xhr.responseText);
+        })
         .get(function(err, data) {
             cache.loaded[id] = true;
             delete cache.inflight[id];
             if (err || !data.features || !data.features.length) return;
 
-            var features = [],
-                feature, loc, d;
+            var features = data.features.map(function(feature) {
+                var loc = feature.geometry.coordinates,
+                    d;
 
-            for (var i = 0; i < data.features.length; i++) {
-                feature = data.features[i];
-                loc = feature.geometry.coordinates;
-                d = { key: feature.properties.key, loc: loc };
-                if (which === 'images') d = { ca: feature.properties.ca, key: feature.properties.key, loc: loc };
-                if (which === 'signs') d = { key: feature.properties.detections[0].image_key, loc: loc, value: feature.properties.value };
+                if (which === 'images') {
+                    d = {
+                        loc: loc,
+                        key: feature.properties.key,
+                        ca: feature.properties.ca,
+                        captured_at: feature.properties.captured_at,
+                        pano: feature.properties.pano
+                    };
+                } else if (which === 'objects') {
+                    d = {
+                        loc: loc,
+                        key: feature.properties.key,
+                        value: feature.properties.value,
+                        package: feature.properties.package,
+                        detections: feature.properties.detections
+                    };
 
-                features.push({minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d});
-            }
+                    // cache image_key -> detection_key
+                    feature.properties.detections.forEach(function(detection) {
+                        var ik = detection.image_key;
+                        var dk = detection.detection_key;
+                        if (!mapillaryCache.detections[ik]) {
+                            mapillaryCache.detections[ik] = {};
+                        }
+                        if (!mapillaryCache.detections[ik][dk]) {
+                            mapillaryCache.detections[ik][dk] = {};
+                        }
+                    });
+                }
+
+                return {
+                    minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
+                };
+            });
 
             cache.rtree.load(features);
 
-            if (which === 'images') dispatch.call('loadedImages');
-            if (which === 'signs') dispatch.call('loadedSigns');
+            if (which === 'images') {
+                dispatch.call('loadedImages');
+            } else if (which === 'objects') {
+                dispatch.call('loadedSigns');
+            }
+
             if (data.features.length === maxResults) {  // more pages to load
                 cache.nextPage[tile.id] = nextPage + 1;
                 loadNextTilePage(which, currZoom, url, tile);
@@ -184,8 +233,8 @@ function parsePagination(links) {
 function partitionViewport(psize, projection) {
     var dimensions = projection.clipExtent()[1];
     psize = psize || 16;
-    var cols = d3.range(0, dimensions[0], psize),
-        rows = d3.range(0, dimensions[1], psize),
+    var cols = d3_range(0, dimensions[0], psize),
+        rows = d3_range(0, dimensions[1], psize),
         partitions = [];
 
     rows.forEach(function(y) {
@@ -206,11 +255,31 @@ function searchLimited(psize, limit, projection, rtree) {
     limit = limit || 3;
 
     var partitions = partitionViewport(psize, projection);
-    return _.flatten(_.compact(_.map(partitions, function(extent) {
+    var results;
+
+    // console.time('previous');
+    results =  _flatten(_map(partitions, function(extent) {
         return rtree.search(extent.bbox())
             .slice(0, limit)
             .map(function(d) { return d.data; });
-    })));
+    }));
+    // console.timeEnd('previous');
+
+    // console.time('new');
+    // results = partitions.reduce(function(result, extent) {
+    //     var found = rtree.search(extent.bbox())
+    //         .map(function(d) { return d.data; })
+    //         .sort(function(a, b) {
+    //             return a.loc[1] - b.loc[1];
+    //             // return a.key.localeCompare(b.key);
+    //         })
+    //         .slice(0, limit);
+
+    //     return (found.length ? result.concat(found) : result);
+    // }, []);
+    // console.timeEnd('new');
+
+    return results;
 }
 
 
@@ -230,16 +299,17 @@ export default {
 
         if (cache) {
             if (cache.images && cache.images.inflight) {
-                _.forEach(cache.images.inflight, abortRequest);
+                _forEach(cache.images.inflight, abortRequest);
             }
-            if (cache.signs && cache.signs.inflight) {
-                _.forEach(cache.signs.inflight, abortRequest);
+            if (cache.objects && cache.objects.inflight) {
+                _forEach(cache.objects.inflight, abortRequest);
             }
         }
 
         mapillaryCache = {
             images: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() },
-            signs:  { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() }
+            objects:  { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() },
+            detections: {}
         };
 
         mapillaryImage = null;
@@ -255,7 +325,7 @@ export default {
 
     signs: function(projection) {
         var psize = 32, limit = 3;
-        return searchLimited(psize, limit, projection, mapillaryCache.signs.rtree);
+        return searchLimited(psize, limit, projection, mapillaryCache.objects.rtree);
     },
 
 
@@ -292,13 +362,13 @@ export default {
 
     loadSigns: function(context, projection) {
         var url = apibase + 'objects?';
-        loadTiles('signs', url, projection);
+        loadTiles('objects', url, projection);
 
         // load traffic sign defs
         if (!mapillarySignDefs) {
             mapillarySignSprite = context.asset('img/traffic-signs/traffic-signs.png');
             mapillarySignDefs = {};
-            d3.json(context.asset('img/traffic-signs/traffic-signs.json'), function(err, data) {
+            d3_json(context.asset('img/traffic-signs/traffic-signs.json'), function(err, data) {
                 if (err) return;
                 mapillarySignDefs = data;
             });
@@ -308,7 +378,7 @@ export default {
 
     loadViewer: function(context) {
         var that = this;
-        var wrap = d3.select('#content').selectAll('.mapillary-wrap')
+        var wrap = d3_select('#content').selectAll('.mapillary-wrap')
             .data([0]);
 
         var enter = wrap.enter()
@@ -331,7 +401,7 @@ export default {
             .classed('active', false);
 
         // load mapillary-viewercss
-        d3.select('head').selectAll('#mapillary-viewercss')
+        d3_select('head').selectAll('#mapillary-viewercss')
             .data([0])
             .enter()
             .append('link')
@@ -340,7 +410,7 @@ export default {
             .attr('href', context.asset(viewercss));
 
         // load mapillary-viewerjs
-        d3.select('head').selectAll('#mapillary-viewerjs')
+        d3_select('head').selectAll('#mapillary-viewerjs')
             .data([0])
             .enter()
             .append('script')
@@ -350,7 +420,7 @@ export default {
 
 
     showViewer: function() {
-        d3.select('#content')
+        d3_select('#content')
             .selectAll('.mapillary-wrap')
             .classed('hidden', false)
             .selectAll('.mly-wrapper')
@@ -361,13 +431,13 @@ export default {
 
 
     hideViewer: function() {
-        d3.select('#content')
+        d3_select('#content')
             .selectAll('.mapillary-wrap')
             .classed('hidden', true)
             .selectAll('.mly-wrapper')
             .classed('active', false);
 
-        d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
+        d3_selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
             .classed('selected', false);
 
         mapillaryImage = null;
@@ -398,7 +468,8 @@ export default {
                 baseImageSize: 320,
                 component: {
                     cover: false,
-                    keyboard: false
+                    keyboard: false,
+                    tag: true
                 }
             };
 
@@ -406,12 +477,27 @@ export default {
             mapillaryViewer.on('nodechanged', nodeChanged);
         }
 
+        // nodeChanged: called after the viewer has changed images and is ready.
+        //
+        // There is some logic here to batch up clicks into a mapillaryClicks array
+        // because the user might click on a lot of markers quickly and nodechanged
+        // may be called out of order asychronously.
+        //
+        // Clicks are added to the array in `selectedImage` and removed here.
+        //
         function nodeChanged(node) {
+            mapillaryViewer.getComponent('tag').removeAll();  // remove previous detections
+
             var clicks = mapillaryClicks;
             var index = clicks.indexOf(node.key);
-            if (index > -1) {    // nodechange initiated from clicking on a marker..
+            if (index > -1) {    // `nodechanged` initiated from clicking on a marker..
                 clicks.splice(index, 1);
-            } else {             // nodechange initiated from the Mapillary viewer controls..
+                // If `node.key` matches the current mapillaryImage, call `selectedImage()`
+                // one more time to update the detections and attribution..
+                if (node.key === mapillaryImage) {
+                    that.selectedImage(node.key, false);
+                }
+            } else {             // `nodechanged` initiated from the Mapillary viewer controls..
                 var loc = node.computedLatLon ? [node.computedLatLon.lon, node.computedLatLon.lat] : [node.latLon.lon, node.latLon.lat];
                 context.map().centerEase(loc);
                 that.selectedImage(node.key, false);
@@ -422,16 +508,147 @@ export default {
 
     selectedImage: function(imageKey, fromClick) {
         if (!arguments.length) return mapillaryImage;
-
         mapillaryImage = imageKey;
+
         if (fromClick) {
             mapillaryClicks.push(imageKey);
         }
 
-        d3.selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
-            .classed('selected', function(d) { return d.key === imageKey; });
+        d3_selectAll('.layer-mapillary-images .viewfield-group')
+            .classed('selected', function(d) {
+                return d.key === imageKey;
+            });
+
+        d3_selectAll('.layer-mapillary-signs .icon-sign')
+            .classed('selected', function(d) {
+                return _some(d.detections, function(detection) {
+                    return detection.image_key === imageKey;
+                });
+            });
+
+        if (!imageKey)  return this;
+
+
+        function localeTimestamp(s) {
+            if (!s) return null;
+            var d = new Date(s);
+            if (isNaN(d.getTime())) return null;
+            return d.toLocaleString(undefined, { timeZone: 'UTC' });
+        }
+
+        var selected = d3_selectAll('.layer-mapillary-images .viewfield-group.selected');
+        if (selected.empty()) return this;
+
+        var datum = selected.datum();
+        var timestamp = localeTimestamp(datum.captured_at);
+        var attribution = d3_select('.mapillary-js-dom .Attribution');
+        var capturedAt = attribution.selectAll('.captured-at');
+        if (capturedAt.empty()) {
+            attribution
+                .append('span')
+                .text('|');
+            capturedAt = attribution
+                .append('span')
+                .attr('class', 'captured-at');
+        }
+        capturedAt
+            .text(timestamp);
+
+        this.updateDetections();
 
         return this;
+    },
+
+
+    updateDetections: function() {
+        if (!mapillaryViewer) return;
+
+        var detections = mapillaryCache.detections[mapillaryImage];
+        _forEach(detections, function(data, k) {
+            if (_isEmpty(data)) {
+                loadDetection(k);
+            } else {
+                var tag = makeTag(data);
+                if (tag) {
+                    var tagComponent = mapillaryViewer.getComponent('tag');
+                    tagComponent.add([tag]);
+                }
+            }
+        });
+
+
+        function loadDetection(detectionKey) {
+            var url = apibase + 'detections/'+
+                detectionKey + '?' + utilQsString({
+                    client_id: clientId,
+                });
+
+            d3_request(url)
+                .mimeType('application/json')
+                .response(function(xhr) {
+                    return JSON.parse(xhr.responseText);
+                })
+                .get(function(err, data) {
+                    if (!data || !data.properties) return;
+
+                    var ik = data.properties.image_key;
+                    mapillaryCache.detections[ik][detectionKey] = data;
+
+                    if (mapillaryImage === ik) {
+                        var tag = makeTag(data);
+                        if (tag) {
+                            var tagComponent = mapillaryViewer.getComponent('tag');
+                            tagComponent.add([tag]);
+                        }
+                    }
+                });
+        }
+
+
+        function makeTag(data) {
+            var valueParts = data.properties.value.split('--');
+            if (valueParts.length !== 3) return;
+
+            var text = valueParts[1].replace(/-/g, ' ');
+            var tag;
+
+            // Currently only two shapes <Polygon|Point>
+            if (data.properties.shape.type === 'Polygon') {
+                var polygonGeometry = new Mapillary
+                    .TagComponent
+                    .PolygonGeometry(data.properties.shape.coordinates[0]);
+
+                tag = new Mapillary.TagComponent.OutlineTag(
+                    data.properties.key,
+                    polygonGeometry,
+                    {
+                        text: text,
+                        textColor: 0xffff00,
+                        lineColor: 0xffff00,
+                        lineWidth: 2,
+                        fillColor: 0xffff00,
+                        fillOpacity: 0.3,
+                    }
+                );
+
+            } else if (data.properties.shape.type === 'Point') {
+                var pointGeometry = new Mapillary
+                    .TagComponent
+                    .PointGeometry(data.properties.shape.coordinates[0]);
+
+                tag = new Mapillary.TagComponent.SpotTag(
+                    data.properties.key,
+                    pointGeometry,
+                    {
+                        text: text,
+                        color: 0xffff00,
+                        textColor: 0xffff00
+                    }
+                );
+            }
+
+            return tag;
+        }
     },
 
 

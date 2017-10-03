@@ -1,6 +1,7 @@
 {
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "tags": {
         "highway": "traffic_mirror"

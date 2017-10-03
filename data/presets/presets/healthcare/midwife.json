@@ -1,0 +1,27 @@
+{
+    "icon": "hospital",
+    "fields": [
+        "name",
+        "operator",
+        "healthcare/speciality",
+        "building_area",
+        "address",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "baby",
+        "childbirth",
+        "delivery",
+        "labour",
+        "labor",
+        "pregnancy"
+    ],
+    "tags": {
+        "healthcare": "midwife"
+    },
+    "name": "Midwife"
+}

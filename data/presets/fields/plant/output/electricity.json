@@ -1,0 +1,6 @@
+{
+    "key": "plant:output:electricity",
+    "type": "text",
+    "label": "Power Output",
+    "placeholder": "500 MW, 1000 MW, 2000 MW..."
+}

@@ -1,9 +1,14 @@
-import * as d3 from 'd3';
-import { d3keybinding } from '../lib/d3.keybinding.js';
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+
 import { t } from '../util/locale';
 import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
-import { uiInfoPanels } from './panels/index';
+import { uiInfoPanels } from './panels';
 
 
 export function uiInfo(context) {
@@ -35,7 +40,7 @@ export function uiInfo(context) {
                 .duration(200)
                 .style('opacity', 0)
                 .on('end', function(d) {
-                    d3.select(this)
+                    d3_select(this)
                         .call(panels[d].off)
                         .remove();
                 });
@@ -72,13 +77,16 @@ export function uiInfo(context) {
             // redraw the panels
             infoPanels.selectAll('.panel-content')
                 .each(function(d) {
-                    d3.select(this).call(panels[d]);
+                    d3_select(this).call(panels[d]);
                 });
         }
 
 
         function toggle(which) {
-            if (d3.event) d3.event.preventDefault();
+            if (d3_event) {
+                d3_event.stopImmediatePropagation();
+                d3_event.preventDefault();
+            }
 
             var activeids = ids.filter(function(k) { return active[k]; });
 
@@ -110,7 +118,7 @@ export function uiInfo(context) {
 
         redraw();
 
-        var keybinding = d3keybinding('info')
+        var keybinding = d3_keybinding('info')
             .on(uiCmd('⌘' + t('info_panels.key')), toggle);
 
         ids.forEach(function(k) {
@@ -120,7 +128,7 @@ export function uiInfo(context) {
                 .on(uiCmd('⌘⇧' + key), function() { toggle(k); });
         });
 
-        d3.select(document)
+        d3_select(document)
             .call(keybinding);
     }
 

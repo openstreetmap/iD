@@ -3,7 +3,6 @@
     "fields": [
         "operator",
         "fee",
-        "bin",
         "payment_multi",
         "currency_multi"
     ],

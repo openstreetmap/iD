@@ -1,4 +1,10 @@
 {
+    "icon": "route-pipeline",
+    "fields": [
+        "name",
+        "ref_route",
+        "operator"
+    ],
     "geometry": [
         "relation"
     ],
@@ -6,10 +12,5 @@
         "type": "route",
         "route": "pipeline"
     },
-    "name": "Pipeline Route",
-    "icon": "route-pipeline",
-    "fields": [
-        "ref",
-        "operator"
-    ]
+    "name": "Pipeline Route"
 }

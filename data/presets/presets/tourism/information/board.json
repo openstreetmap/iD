@@ -1,6 +1,7 @@
 {
     "icon": "information",
     "fields": [
+        "name",
         "operator",
         "board_type"
     ],

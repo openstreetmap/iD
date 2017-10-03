@@ -1,11 +1,12 @@
-import _ from 'lodash';
+import _without from 'lodash-es/without';
 import { t } from '../util/locale';
+
 
 export function validationMissingTag() {
 
     // Slightly stricter check than Entity#isUsed (#3091)
     function hasTags(entity, graph) {
-        return _.without(Object.keys(entity.tags), 'area', 'name').length > 0 ||
+        return _without(Object.keys(entity.tags), 'area', 'name').length > 0 ||
             graph.parentRelations(entity).length > 0;
     }
 

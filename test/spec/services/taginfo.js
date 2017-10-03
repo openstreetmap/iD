@@ -1,6 +1,15 @@
 describe('iD.serviceTaginfo', function() {
     var server, taginfo;
 
+
+    before(function() {
+        iD.services.taginfo = iD.serviceTaginfo;
+    });
+
+    after(function() {
+        delete iD.services.taginfo;
+    });
+
     beforeEach(function() {
         server = sinon.fakeServer.create();
         taginfo = iD.services.taginfo;

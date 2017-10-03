@@ -1,5 +1,9 @@
-import * as d3 from 'd3';
-import { d3keybinding } from '../lib/d3.keybinding.js';
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import { uiFlash } from '../ui';
 
 
@@ -34,9 +38,9 @@ export function behaviorOperation() {
 
     var behavior = function () {
         if (which && which.available()) {
-            keybinding = d3keybinding('behavior.key.' + which.id);
+            keybinding = d3_keybinding('behavior.key.' + which.id);
             keybinding.on(which.keys, function() {
-                d3.event.preventDefault();
+                d3_event.preventDefault();
                 var disabled = which.disabled();
 
                 if (disabled) {
@@ -58,7 +62,7 @@ export function behaviorOperation() {
                     which();
                 }
             });
-            d3.select(document).call(keybinding);
+            d3_select(document).call(keybinding);
         }
         return behavior;
     };
@@ -66,7 +70,7 @@ export function behaviorOperation() {
 
     behavior.off = function() {
         if (keybinding) {
-            d3.select(document).call(keybinding.off);
+            d3_select(document).call(keybinding.off);
         }
     };
 

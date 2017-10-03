@@ -268,11 +268,10 @@ of each new section of documentation should be of the form
 # GPS
 ```
 
-This will be used for navigation and as its title in iD. Documentation is
-shown in alphabetical order, so most documentation is prefixed with `02-` and
-so on in order to keep it in a certain order.
-
-To add a new piece of documentation, simply add to [core.yaml](/data/core.yaml) in the same format as the rest.
+This will be used for navigation and as its title in iD. To add a new piece
+of documentation, simply add to [/data/core.yaml](/data/core.yaml) in the
+same format as the rest, include your new corresponding `docKey` in
+[/modules/ui/help.js](/modules/ui/help.js) and call `npm run build`.
 
 
 ## Adding or Refining Presets

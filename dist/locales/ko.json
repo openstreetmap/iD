@@ -328,8 +328,6 @@
         },
         "commit": {
             "title": "오픈스트리트맵에 올리기",
-            "description_placeholder": "기여 내역에 대해 간단히 설명(필수)",
-            "message_label": "바뀜집합 덧글",
             "upload_explanation": "올린 변경사항은 오픈스트리트맵 자료를 사용하는 모든 지도에 보여집니다.",
             "upload_explanation_with_user": "{user} 사용자로 올린 변경사항은 오픈스트리트맵 자료를 사용하는 모든 지도에 보여집니다.",
             "save": "올리기",
@@ -347,6 +345,47 @@
         "contributors": {
             "list": "{users} 사용자의 편집",
             "truncated_list": "{users} 사용자와 다른 {count}명의 편집"
+        },
+        "info_panels": {
+            "key": "I",
+            "background": {
+                "key": "B",
+                "title": "배경",
+                "zoom": "확대",
+                "unknown": "알 수 없음",
+                "show_tiles": "타일 나타내기",
+                "hide_tiles": "타일 숨기기"
+            },
+            "history": {
+                "key": "H",
+                "selected": "{n}개 선택함",
+                "version": "버전",
+                "last_edit": "최근 편집",
+                "edited_by": "편집:",
+                "changeset": "바뀜집합",
+                "unknown": "알 수 없음",
+                "link_text": "openstreetmap.org에서의 기록"
+            },
+            "location": {
+                "key": "L",
+                "title": "위치",
+                "unknown_location": "알 수 없는 위치"
+            },
+            "measurement": {
+                "key": "M",
+                "title": "측정",
+                "selected": "{n}개 선택함",
+                "geometry": "기하적",
+                "closed": "닫음",
+                "center": "가운데",
+                "perimeter": "둘레",
+                "length": "길이",
+                "area": "넓이",
+                "centroid": "중심",
+                "location": "위치",
+                "metric": "미터법",
+                "imperial": "임페리얼"
+            }
         },
         "geometry": {
             "point": "점",
@@ -503,7 +542,9 @@
         },
         "restore": {
             "heading": "저장하지 않은 변경사항이 있습니다",
-            "description": "이전 편집 기간에 저장하지 않은 변경사항을 복구하겠습니까?"
+            "description": "이전 편집 기간에 저장하지 않은 변경사항을 복구하겠습니까?",
+            "restore": "변경점 복구",
+            "reset": "변경점 재설정"
         },
         "save": {
             "title": "저장",
@@ -641,10 +682,13 @@
                 "countrycode": "kr",
                 "name": {
                     "main-street": "중앙로",
+                    "pizza-hut": "피자헛",
                     "three-rivers-city-hall": "삼천시청",
                     "three-rivers-elementary-school": "삼천초등학교",
+                    "three-rivers-fire-department": "삼천소방서",
                     "three-rivers-high-school": "삼천고등학교",
                     "three-rivers-middle-school": "삼천중학교",
+                    "three-rivers-municipal-airport": "삼천공항",
                     "three-rivers-post-office": "삼천우체국",
                     "three-rivers-public-library": "삼천도서관"
                 }
@@ -698,13 +742,16 @@
                 "choose_category_road": "**목록에서 {category}을 선택하세요.**",
                 "choose_preset_residential": "여기에 도로의 여러 종류가 있지만, 지금 선택된 것은 주거 도로입니다. **{preset} 유형을 선택하세요**",
                 "retry_preset_residential": "{preset} 유형을 선택하지 않았습니다. **다시 선택하려면 여기를 클릭하세요**",
+                "split_intersection": "**{button} 버튼을 눌러 {street}을(를) 분할하세요.**",
                 "retry_split": "Split 버튼을 클릭하지 않았습니다. 다시 시도하세요.",
+                "multi_delete": "**{button} 버튼을 눌러 여분의 줄을 삭제하세요.**",
                 "retry_delete": "Delete 버튼을 클릭하지 않았습니다. 다시 시도하세요."
             },
             "buildings": {
                 "title": "건물",
                 "retry_building": "건물 모서리에 교점을 설치하는 데 문제가 있는것 같습니다. 다시해보십시요!",
                 "choose_category_building": "**목록에서 {category}을 선택하세요.**",
+                "rightclick_building": "**마우스 오른쪽 버튼을 눌러 당신이 만든 빌딩을 선택하고 편집 메뉴를 표시하세요.**",
                 "retry_square": "Square 버튼을 클릭하지 않았습니다. 다시 시도하세요.",
                 "search_tank": "**'{preset}'을 검색하세요.**",
                 "choose_tank": "**목록에서 {preset}을 선택하세요.**"
@@ -718,6 +765,9 @@
         "shortcuts": {
             "title": "키보드 단축키",
             "tooltip": "화면에 키보드 단축키를 보여줍니다.",
+            "toggle": {
+                "key": "?"
+            },
             "key": {
                 "alt": "Alt",
                 "backspace": "Backspace",
@@ -731,6 +781,7 @@
                 "home": "Home",
                 "option": "Option",
                 "pause": "Pause",
+                "pgdn": "PgDn",
                 "pgup": "Pgup",
                 "return": "Return",
                 "shift": "Shift",
@@ -1112,9 +1163,6 @@
                     "label": "웹캠 URL",
                     "placeholder": "http://example.com/"
                 },
-                "content": {
-                    "label": "내용"
-                },
                 "country": {
                     "label": "국가"
                 },
@@ -1287,10 +1335,6 @@
                 },
                 "generator/type": {
                     "label": "유형"
-                },
-                "golf_hole": {
-                    "label": "참조",
-                    "placeholder": "홀 수 (1-18)"
                 },
                 "grape_variety": {
                     "label": "포도 품종"
@@ -1668,8 +1712,14 @@
                         "container": "컨테이너"
                     }
                 },
-                "ref": {
-                    "label": "참조"
+                "ref_highway_junction": {
+                    "label": "나들목/분기점 번호"
+                },
+                "ref_road_number": {
+                    "label": "노선번호"
+                },
+                "ref_route": {
+                    "label": "노선번호"
                 },
                 "relation": {
                     "label": "유형"
@@ -1784,9 +1834,6 @@
                 "social_facility_for": {
                     "label": "제공되는 사람들"
                 },
-                "source": {
-                    "label": "참조 정보"
-                },
                 "sport": {
                     "label": "스포츠"
                 },
@@ -1806,7 +1853,7 @@
                     "label": "시작 날짜"
                 },
                 "step_count": {
-                    "label": "걸음 수"
+                    "label": "계단 수"
                 },
                 "stop": {
                     "label": "정지 유형",
@@ -1923,9 +1970,6 @@
                 },
                 "trees": {
                     "label": "나무"
-                },
-                "tunnel": {
-                    "label": "터널"
                 },
                 "vending": {
                     "label": "상품 종류"
@@ -4614,6 +4658,51 @@
             "Waymarked_Trails-Cycling": {
                 "attribution": {
                     "text": "© Sarah Hoffmann, CC by-SA 3.0, 맵 데이터 OpenStreetMap 기여자, ODbL 1.0"
+                }
+            },
+            "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, 맵 데이터 OpenStreetMap 기여자, ODbL 1.0"
+                }
+            },
+            "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, 맵 데이터 OpenStreetMap 기여자, ODbL 1.0"
+                }
+            },
+            "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, 맵 데이터 OpenStreetMap 기여자, ODbL 1.0"
+                }
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© Michael Spreng, CC by-SA 3.0, 맵 데이터 OpenStreetMap 기여자, ODbL 1.0"
+                }
+            },
+            "hike_n_bike": {
+                "attribution": {
+                    "text": "© OpenStreetMap 기여자"
+                }
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "© OpenStreetMap 기여자, CC-BY-SA"
+                }
+            },
+            "osm-gps": {
+                "attribution": {
+                    "text": "© OpenStreetMap 기여자"
+                }
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "© OpenStreetMap 기여자, CC-BY-SA"
+                }
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "© OpenStreetMap 기여자, CC-BY-SA"
                 }
             }
         }

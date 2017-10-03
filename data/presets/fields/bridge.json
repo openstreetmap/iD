@@ -1,0 +1,6 @@
+{
+    "key": "bridge",
+    "type": "typeCombo",
+    "label": "Type",
+    "placeholder": "Default"
+}

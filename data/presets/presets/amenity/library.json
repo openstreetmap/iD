@@ -1,6 +1,7 @@
 {
     "icon": "library",
     "fields": [
+        "name",
         "operator",
         "building_area",
         "address",

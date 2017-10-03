@@ -36,6 +36,9 @@
         "de": {
             "rtl": false
         },
+        "dv": {
+            "rtl": true
+        },
         "el": {
             "rtl": false
         },
@@ -49,6 +52,9 @@
             "rtl": false
         },
         "et": {
+            "rtl": false
+        },
+        "eu": {
             "rtl": false
         },
         "fa": {

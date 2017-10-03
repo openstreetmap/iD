@@ -2,11 +2,14 @@ describe('iD.uiConfirm', function () {
     var elem;
 
     beforeEach(function() {
-        elem = d3.select('body').append('div');
+        elem = d3.select('body')
+            .append('div')
+            .attr('id', 'confirm-wrap');
     });
 
     afterEach(function() {
-        elem.remove();
+        d3.select('#confirm-wrap')
+            .remove();
     });
 
     it('can be instantiated', function () {

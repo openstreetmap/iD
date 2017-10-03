@@ -1,6 +1,7 @@
 {
     "icon": "residential-community",
     "fields": [
+        "name",
         "address",
         "levels"
     ],

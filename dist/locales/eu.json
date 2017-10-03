@@ -1,0 +1,74 @@
+{
+    "eu": {
+        "modes": {
+            "add_area": {
+                "title": "Lekua",
+                "description": "Parkeak, eraikuntzak, lakuak edo beste leku motak gehitu mapari.",
+                "tail": "Mapan klikatu leku bat marrazten hasteko; parke, laku edo eraikuntza bat adibidez."
+            },
+            "add_line": {
+                "title": "Lerroa",
+                "description": "Autopistak, kaleak, bidezidorrak, kanalak edo bestelako lerroak gehitu mapari.",
+                "tail": "Mapa klikatu errepide, bide edo ibilbide bat marrazten hasteko."
+            },
+            "add_point": {
+                "title": "Puntua",
+                "description": "Jatetxeak, monumentuak, postontziak edo beste puntu motak gehitu mapari.",
+                "tail": "Mapa klikatu puntu bat gehitzeko."
+            },
+            "browse": {
+                "title": "Esploratu",
+                "description": "Mapan mugitu."
+            },
+            "draw_area": {
+                "tail": "Klikatu zure lekuari oharrak gehitzeko. Klikatu lehen nodoa lekuarekin bukatzeko."
+            },
+            "draw_line": {
+                "tail": "Klikatu lerroari node gehiago ipintzeko. Klikatu beste lerroei konektatzeko, eta bitan klikatu lerroa bukatzeko."
+            }
+        },
+        "operations": {
+            "add": {
+                "annotation": {
+                    "point": "Puntua gehitu da.",
+                    "vertex": "Nodoa gehitu zaio bideari.",
+                    "relation": "Harremana gehitu da."
+                }
+            },
+            "start": {
+                "annotation": {
+                    "line": "Lerroa hasi da.",
+                    "area": "Lekua hasi da."
+                }
+            },
+            "continue": {
+                "key": "A",
+                "title": "Jarraitu",
+                "description": "Lerro hau jarraitu.",
+                "not_eligible": "Ezin da lerrorik jarraitu hemen.",
+                "multiple": "Hainbat lerro jarrai daitezke hemen. Lerro bat hautatzeko, sakatu Shift eta klikatu lerroa aukeratzeko.",
+                "annotation": {
+                    "line": "Lerroa jarraitu da.",
+                    "area": "Lekua jarraitu da."
+                }
+            },
+            "cancel_draw": {
+                "annotation": "Marrazketa bertan behera utzi da."
+            },
+            "change_role": {
+                "annotation": "Harremaneko kide baten rola aldatu da."
+            },
+            "change_tags": {
+                "annotation": "Etiketak aldatu dira."
+            },
+            "circularize": {
+                "title": "Biribildu",
+                "description": {
+                    "line": "Lerro hau biribila egin.",
+                    "area": "Leku hau biribila egin."
+                },
+                "key": "O"
+            }
+        }
+    }
+}

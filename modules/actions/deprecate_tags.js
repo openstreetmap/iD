@@ -1,12 +1,16 @@
-import _ from 'lodash';
-import { dataDeprecated } from '../../data/index';
+import _assign from 'lodash-es/assign';
+import _clone from 'lodash-es/clone';
+import _omit from 'lodash-es/omit';
+import _toPairs from 'lodash-es/toPairs';
+
+import { dataDeprecated } from '../../data';
 
 
 export function actionDeprecateTags(entityId) {
 
     return function(graph) {
         var entity = graph.entity(entityId),
-            newtags = _.clone(entity.tags),
+            newtags = _clone(entity.tags),
             change = false,
             rule;
 
@@ -14,8 +18,8 @@ export function actionDeprecateTags(entityId) {
         for (var i = 0; i < dataDeprecated.length; i++) {
 
             rule = dataDeprecated[i];
-            var match = _.toPairs(rule.old)[0],
-                replacements = rule.replace ? _.toPairs(rule.replace) : null;
+            var match = _toPairs(rule.old)[0],
+                replacements = rule.replace ? _toPairs(rule.replace) : null;
 
             if (entity.tags[match[0]] && match[1] === '*') {
 
@@ -27,7 +31,7 @@ export function actionDeprecateTags(entityId) {
                 change = true;
 
             } else if (entity.tags[match[0]] === match[1]) {
-                newtags = _.assign({}, rule.replace || {}, _.omit(newtags, match[0]));
+                newtags = _assign({}, rule.replace || {}, _omit(newtags, match[0]));
                 change = true;
             }
         }

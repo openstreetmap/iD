@@ -1,7 +1,6 @@
 describe('iD.uiFieldWikipedia', function() {
     var entity, context, selection, field;
 
-
     function changeTags(changed) {
         var e = context.entity(entity.id),
             annotation = 'Changed tags.',
@@ -17,6 +16,16 @@ describe('iD.uiFieldWikipedia', function() {
             context.perform(iD.actionChangeTags(e.id, tags), annotation);
         }
     }
+
+    before(function() {
+        iD.services.wikipedia = iD.serviceWikipedia;
+        iD.services.wikidata = iD.serviceWikidata;
+    });
+
+    after(function() {
+        delete iD.services.wikipedia;
+        delete iD.services.wikidata;
+    });
 
     beforeEach(function() {
         entity = iD.Node({id: 'n12345'});
@@ -95,7 +104,7 @@ describe('iD.uiFieldWikipedia', function() {
         var wikipedia = iD.uiFieldWikipedia(field, context).entity(entity);
         wikipedia.on('change', changeTags);
         selection.call(wikipedia);
-        window.JSONP_DELAY = 20;
+        window.JSONP_DELAY = 60;
 
         var spy = sinon.spy();
         wikipedia.on('change.spy', spy);
@@ -105,21 +114,27 @@ describe('iD.uiFieldWikipedia', function() {
         iD.utilGetSetValue(selection.selectAll('.wiki-title'), 'Skip');
         happen.once(selection.selectAll('.wiki-title').node(), { type: 'change' });
         happen.once(selection.selectAll('.wiki-title').node(), { type: 'blur' });
+
+        // t0
         expect(context.entity(entity.id).tags.wikidata).to.be.undefined;
 
-        // Set title to "Title" after 10ms
+        // t30:  graph change - Set title to "Title"
         window.setTimeout(function() {
             iD.utilGetSetValue(selection.selectAll('.wiki-title'), 'Title');
             happen.once(selection.selectAll('.wiki-title').node(), { type: 'change' });
             happen.once(selection.selectAll('.wiki-title').node(), { type: 'blur' });
-        }, 10);
+        }, 30);
 
-        // wikidata not set (t0 + 20ms) after wikipedia="skip" because graph changed
+        // t60:  at t0 + 60ms (JSONP_DELAY), wikidata SHOULD NOT be set because graph has changed.
+
+        // t70:  check that wikidata unchanged
         window.setTimeout(function() {
             expect(context.entity(entity.id).tags.wikidata).to.be.undefined;
-        }, 25);
+        }, 70);
 
-        // wikidata set (t10 + 20ms) after wikipedia="title" because graph unchanged
+        // t90:  at t30 + 60ms (JSONP_DELAY), wikidata SHOULD be set because graph is unchanged.
+
+        // t100:  check that wikidata has changed
         window.setTimeout(function() {
             expect(context.entity(entity.id).tags.wikidata).to.equal('Q216353');
 
@@ -129,7 +144,7 @@ describe('iD.uiFieldWikipedia', function() {
             expect(spy.getCall(2)).to.have.been.calledWith({ wikipedia: 'de:Title' });  // 'Title' on change +10ms
             expect(spy.getCall(3)).to.have.been.calledWith({ wikipedia: 'de:Title' });  // 'Title' on blur   +10ms
             done();
-        }, 35);
+        }, 100);
 
     });
 });

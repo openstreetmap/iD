@@ -1,6 +1,7 @@
 {
     "icon": "highway-residential",
     "fields": [
+        "name",
         "oneway",
         "maxspeed",
         "lanes",

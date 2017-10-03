@@ -1,6 +1,7 @@
 {
     "icon": "place-of-worship",
     "fields": [
+        "name",
         "address",
         "levels"
     ],

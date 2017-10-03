@@ -10,6 +10,12 @@
     "tags": {
         "natural": "wetland"
     },
-    "terms": [],
+    "terms": [
+        "bog",
+        "marsh",
+        "reedbed",
+        "swamp",
+        "tidalflat"
+    ],
     "name": "Wetland"
 }

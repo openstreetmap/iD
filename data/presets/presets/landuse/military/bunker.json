@@ -1,6 +1,7 @@
 {
     "icon": "poi-military",
     "fields": [
+        "name",
         "bunker_type",
         "building_area"
     ],

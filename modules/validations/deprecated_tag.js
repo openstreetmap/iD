@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import _isEmpty from 'lodash-es/isEmpty';
+
 import { t } from '../util/locale';
 import { utilTagText } from '../util/index';
 
@@ -11,7 +12,7 @@ export function validationDeprecatedTag() {
             var change = changes.created[i],
                 deprecatedTags = change.deprecatedTags();
 
-            if (!_.isEmpty(deprecatedTags)) {
+            if (!_isEmpty(deprecatedTags)) {
                 var tags = utilTagText({ tags: deprecatedTags });
                 warnings.push({
                     id: 'deprecated_tags',

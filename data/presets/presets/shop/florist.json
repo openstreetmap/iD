@@ -1,6 +1,7 @@
 {
     "icon": "florist",
     "fields": [
+        "name",
         "operator",
         "address",
         "building_area",

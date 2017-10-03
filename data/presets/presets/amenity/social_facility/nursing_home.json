@@ -1,6 +1,7 @@
 {
     "icon": "wheelchair",
     "fields": [
+        "name",
         "operator",
         "address",
         "building_area",
@@ -18,7 +19,8 @@
         "living",
         "nursing",
         "old",
-        "senior"
+        "senior",
+        "assisted living"
     ],
     "tags": {
         "amenity": "social_facility",

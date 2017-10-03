@@ -1,5 +1,5 @@
 import { t } from '../util/locale';
-import { uiIntro } from './intro/index';
+import { uiIntro } from './intro';
 import { uiModal } from './modal';
 
 

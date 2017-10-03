@@ -1,3 +1,5 @@
+import * as d3 from 'd3';  // TODO: remove (needed for tests?)
+
 export * from './actions/index';
 export * from './behavior/index';
 export * from './core/index';
@@ -37,11 +39,10 @@ export { rendererFeatures as Features } from './renderer/features';
 export { rendererMap as Map } from './renderer/map';
 export { rendererTileLayer as TileLayer } from './renderer/tile_layer';
 export { utilDetect as Detect } from './util/detect';
+export { uiPresetEditor as uiPreset } from './ui/preset_editor';
 
 export var debug = false;
 
-import * as d3 from 'd3';
-import * as _ from 'lodash';
 import * as lib from './lib/index';
 
-export { d3, _, lib };
+export { lib, d3 };

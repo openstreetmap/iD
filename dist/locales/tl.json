@@ -303,7 +303,6 @@
         },
         "commit": {
             "title": "Nai-upload sa OpenStreetMap",
-            "description_placeholder": "Maikling paglalarawan ng iyong mga kontribusyon (kailangan)",
             "upload_explanation": "Ang mga pagbabagong na-upload ay makikita sa lahat ng mapang gumagamit ng datos ng OpenStreetMap.",
             "upload_explanation_with_user": "Ang mga pagbabagong na-upload bilang {user} ay makikita sa lahat ng mapang gumagamit ng datos ng OpenStreetMap.",
             "save": "I-upload",
@@ -849,9 +848,6 @@
                 "contact/webcam": {
                     "label": "URL ng webcam",
                     "placeholder": "http://example.com/"
-                },
-                "content": {
-                    "label": "Mga nilalaman"
                 },
                 "country": {
                     "label": "bansa"

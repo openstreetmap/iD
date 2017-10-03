@@ -1,37 +1,43 @@
-import * as d3 from 'd3';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
+import {
+    select as d3_select,
+    event as d3_event
+} from 'd3-selection';
+
 import { t } from '../../util/locale';
 
 import {
     behaviorBreathe,
     behaviorHover
-} from '../../behavior/index';
+} from '../../behavior';
 
 import {
     osmEntity,
     osmIntersection,
     osmInferRestriction,
     osmTurn
-} from '../../osm/index';
+} from '../../osm';
 
 import {
     actionRestrictTurn,
     actionUnrestrictTurn
-} from '../../actions/index';
+} from '../../actions';
 
 import {
     geoExtent,
     geoRawMercator
-} from '../../geo/index';
+} from '../../geo';
 
 import {
     svgLayers,
     svgLines,
     svgTurns,
     svgVertices
-} from '../../svg/index';
+} from '../../svg';
 
 import { utilRebind } from '../../util/rebind';
-import { utilFunctor } from '../../util/index';
+import { utilFunctor } from '../../util';
 
 import {
     utilGetDimensions,
@@ -40,7 +46,7 @@ import {
 
 
 export function uiFieldRestrictions(field, context) {
-    var dispatch = d3.dispatch('change'),
+    var dispatch = d3_dispatch('change'),
         breathe = behaviorBreathe(context),
         hover = behaviorHover(context),
         initialized = false,
@@ -50,7 +56,7 @@ export function uiFieldRestrictions(field, context) {
 
     function restrictions(selection) {
         // if form field is hidden or has detached from dom, clean up.
-        if (!d3.select('.inspector-wrap.inspector-hidden').empty() || !selection.node().parentNode) {
+        if (!d3_select('.inspector-wrap.inspector-hidden').empty() || !selection.node().parentNode) {
             selection.call(restrictions.off);
             return;
         }
@@ -133,7 +139,7 @@ export function uiFieldRestrictions(field, context) {
         context.history()
             .on('change.restrictions', render);
 
-        d3.select(window)
+        d3_select(window)
             .on('resize.restrictions', function() {
                 utilSetDimensions(wrap, null);
                 render();
@@ -145,7 +151,7 @@ export function uiFieldRestrictions(field, context) {
                 .call(breathe.off)
                 .call(breathe);
 
-            var datum = d3.event.target.__data__;
+            var datum = d3_event.target.__data__;
             if (datum instanceof osmEntity) {
                 fromNodeID = intersection.adjacentNodeId(datum.id);
                 render();
@@ -166,7 +172,7 @@ export function uiFieldRestrictions(field, context) {
 
 
         function mouseover() {
-            var datum = d3.event.target.__data__;
+            var datum = d3_event.target.__data__;
             if (datum instanceof osmTurn) {
                 var graph = context.graph(),
                     presets = context.presets(),
@@ -236,7 +242,7 @@ export function uiFieldRestrictions(field, context) {
         context.history()
             .on('change.restrictions', null);
 
-        d3.select(window)
+        d3_select(window)
             .on('resize.restrictions', null);
     };
 

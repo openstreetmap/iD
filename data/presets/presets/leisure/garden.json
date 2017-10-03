@@ -1,6 +1,7 @@
 {
     "icon": "garden",
     "fields": [
+        "name",
         "access_simple"
     ],
     "geometry": [

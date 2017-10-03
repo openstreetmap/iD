@@ -16,8 +16,10 @@
         id = iD.Context()
             .assetPath('dist/');
 
+        id.features().disable('boundaries');
+
         id.ui()(document.getElementById('id-container'), function() {
-            iD.d3.select('#about-list')
+            id.container().select('#about-list')
                 .insert('li', '.user-list')
                 .attr('class', 'source-switch')
                 .call(iD.uiSourceSwitch(id)

@@ -1,6 +1,7 @@
 {
     "icon": "landmark",
     "fields": [
+        "name",
         "inscription"
     ],
     "geometry": [

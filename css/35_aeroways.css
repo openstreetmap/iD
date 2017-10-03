@@ -1,10 +1,11 @@
 /* aeroways */
 
 /* areas */
-path.stroke.area.tag-aeroway {
-    stroke:#fff;
+path.stroke.area.tag-aeroway,
+.low-zoom path.stroke.area.tag-aeroway {
+    stroke: #fff;
     stroke-dasharray: none;
-    stroke-width: 2;
+    stroke-width: 1;
 }
 
 /* narrow aeroways (taxiway) */

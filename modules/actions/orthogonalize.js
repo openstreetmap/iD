@@ -1,6 +1,12 @@
-import _ from 'lodash';
+import _clone from 'lodash-es/clone';
+import _uniq from 'lodash-es/uniq';
+
 import { actionDeleteNode } from './delete_node';
-import { geoEuclideanDistance, geoInterp } from '../geo/index';
+import {
+    geoEuclideanDistance,
+    geoInterp
+} from '../geo';
+
 
 /*
  * Based on https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/potlatch2/tools/Quadrilateralise.as
@@ -17,7 +23,7 @@ export function actionOrthogonalize(wayId, projection) {
 
         var way = graph.entity(wayId),
             nodes = graph.childNodes(way),
-            points = _.uniq(nodes).map(function(n) { return projection(n.loc); }),
+            points = _uniq(nodes).map(function(n) { return projection(n.loc); }),
             corner = {i: 0, dotp: 1},
             epsilon = 1e-4,
             node, loc, score, motions, i, j;
@@ -38,7 +44,7 @@ export function actionOrthogonalize(wayId, projection) {
 
         } else {
             var best,
-                originalPoints = _.clone(points);
+                originalPoints = _clone(points);
             score = Infinity;
 
             for (i = 0; i < 1000; i++) {
@@ -48,7 +54,7 @@ export function actionOrthogonalize(wayId, projection) {
                 }
                 var newScore = squareness(points);
                 if (newScore < score) {
-                    best = _.clone(points);
+                    best = _clone(points);
                     score = newScore;
                 }
                 if (score < epsilon) {
@@ -176,7 +182,7 @@ export function actionOrthogonalize(wayId, projection) {
     action.disabled = function(graph) {
         var way = graph.entity(wayId),
             nodes = graph.childNodes(way),
-            points = _.uniq(nodes).map(function(n) { return projection(n.loc); });
+            points = _uniq(nodes).map(function(n) { return projection(n.loc); });
 
         if (squareness(points)) {
             return false;

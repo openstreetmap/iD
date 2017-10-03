@@ -1,5 +1,8 @@
 {
     "icon": "car",
+    "fields": [
+        "name"
+    ],
     "geometry": [
         "point",
         "vertex",

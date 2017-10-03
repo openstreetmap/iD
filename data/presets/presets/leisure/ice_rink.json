@@ -1,6 +1,7 @@
 {
     "icon": "pitch",
     "fields": [
+        "name",
         "seasonal",
         "sport_ice",
         "operator",

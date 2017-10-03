@@ -1,8 +1,16 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _assign from 'lodash-es/assign';
+import _omit from 'lodash-es/omit';
+import _throttle from 'lodash-es/throttle';
+
+import { select as d3_select } from 'd3-selection';
+
 import { geoSphericalDistance } from '../geo';
 import { modeBrowse } from '../modes';
-import { utilQsString, utilStringQs } from '../util';
+
+import {
+    utilQsString,
+    utilStringQs
+} from '../util';
 
 
 export function behaviorHash(context) {
@@ -37,7 +45,9 @@ export function behaviorHash(context) {
         var center = map.center(),
             zoom = map.zoom(),
             precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2)),
-            q = _.omit(utilStringQs(window.location.hash.substring(1)), ['comment', 'walkthrough']),
+            q = _omit(utilStringQs(window.location.hash.substring(1)),
+                ['comment', 'hashtags', 'walkthrough']
+            ),
             newParams = {};
 
         delete q.id;
@@ -59,7 +69,8 @@ export function behaviorHash(context) {
         }
         */
 
-        return '#' + utilQsString(_.assign(q, newParams), true);
+        // pretty sure its _assign now?
+        return '#' + utilQsString(_assign(q, newParams), true);
     };
 
 
@@ -72,7 +83,7 @@ export function behaviorHash(context) {
     }
 
 
-    var throttledUpdate = _.throttle(update, 500);
+    var throttledUpdate = _throttle(update, 500);
 
 
     function hashchange() {
@@ -90,7 +101,7 @@ export function behaviorHash(context) {
         context
             .on('enter.hash', throttledUpdate);
 
-        d3.select(window)
+        d3_select(window)
             .on('hashchange.hash', hashchange);
 
         if (window.location.hash) {
@@ -106,7 +117,11 @@ export function behaviorHash(context) {
                 context.storage('commentDate', Date.now());
             }
 
-            if (q.walkthrough) {
+            if (q.hashtags) {
+                context.storage('hashtags', q.hashtags);
+            }
+
+            if (q.walkthrough === 'true') {
                 hash.startWalkthrough = true;
             }
 
@@ -128,7 +143,7 @@ export function behaviorHash(context) {
         context
             .on('enter.hash', null);
 
-        d3.select(window)
+        d3_select(window)
             .on('hashchange.hash', null);
 
         window.location.hash = '';

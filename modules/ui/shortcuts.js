@@ -1,7 +1,11 @@
-import * as d3 from 'd3';
+import {
+    select as d3_select,
+    selectAll as d3_selectAll
+} from 'd3-selection';
+
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 
 import { t } from '../util/locale';
-import { d3keybinding } from '../lib/d3.keybinding.js';
 import { dataShortcuts } from '../../data';
 import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
@@ -16,9 +20,9 @@ export function uiShortcuts() {
     var savedSelection;
 
 
-    var keybinding = d3keybinding('shortcuts')
+    var keybinding = d3_keybinding('shortcuts')
         .on(t('shortcuts.toggle.key'), function () {
-            if (d3.selectAll('.modal-shortcuts').size()) {  // already showing
+            if (d3_selectAll('.modal-shortcuts').size()) {  // already showing
                 if (modalSelection) {
                     modalSelection.close();
                     modalSelection = null;
@@ -29,7 +33,7 @@ export function uiShortcuts() {
             }
         });
 
-    d3.select(document)
+    d3_select(document)
         .call(keybinding);
 
 
@@ -158,7 +162,7 @@ export function uiShortcuts() {
             })
             .enter()
             .each(function () {
-                var selection = d3.select(this);
+                var selection = d3_select(this);
 
                 selection
                     .append('kbd')
@@ -190,7 +194,7 @@ export function uiShortcuts() {
             })
             .enter()
             .each(function (d, i, nodes) {
-                var selection = d3.select(this);
+                var selection = d3_select(this);
                 var click = d.shortcut.toLowerCase().match(/(.*).click/);
 
                 if (click && click[1]) {
@@ -217,7 +221,7 @@ export function uiShortcuts() {
         shortcutKeys
             .filter(function(d) { return d.gesture; })
             .each(function () {
-                var selection = d3.select(this);
+                var selection = d3_select(this);
 
                 selection
                     .append('span')

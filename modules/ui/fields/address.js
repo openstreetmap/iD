@@ -1,15 +1,21 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { d3combobox } from '../../lib/d3.combobox.js';
-import { dataAddressFormats } from '../../../data/index';
+import _find from 'lodash-es/find';
+import _includes from 'lodash-es/includes';
+import _reduce from 'lodash-es/reduce';
+import _uniqBy from 'lodash-es/uniqBy';
+
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { select as d3_select } from 'd3-selection';
+import { d3combobox as d3_combobox } from '../../lib/d3.combobox.js';
+
+import { dataAddressFormats } from '../../../data';
 
 import {
     geoExtent,
     geoChooseEdge,
     geoSphericalDistance
-} from '../../geo/index';
+} from '../../geo';
 
-import { services } from '../../services/index';
+import { services } from '../../services';
 import {
     utilGetSetValue,
     utilNoAuto,
@@ -18,9 +24,9 @@ import {
 
 
 export function uiFieldAddress(field, context) {
-    var dispatch = d3.dispatch('init', 'change'),
+    var dispatch = d3_dispatch('init', 'change'),
         nominatim = services.geocoder,
-        wrap = d3.select(null),
+        wrap = d3_select(null),
         isInitialized = false,
         entity;
 
@@ -46,7 +52,7 @@ export function uiFieldAddress(field, context) {
                 return a.dist - b.dist;
             });
 
-        return _.uniqBy(streets, 'value');
+        return _uniqBy(streets, 'value');
 
         function isAddressable(d) {
             return d.tags.highway && d.tags.name && d.type === 'way';
@@ -72,7 +78,7 @@ export function uiFieldAddress(field, context) {
                 return a.dist - b.dist;
             });
 
-        return _.uniqBy(cities, 'value');
+        return _uniqBy(cities, 'value');
 
 
         function isAddressable(d) {
@@ -112,16 +118,16 @@ export function uiFieldAddress(field, context) {
                 return a.dist - b.dist;
             });
 
-        return _.uniqBy(results, 'value');
+        return _uniqBy(results, 'value');
     }
 
 
     function initCallback(err, countryCode) {
         if (err) return;
 
-        var addressFormat = _.find(dataAddressFormats, function (a) {
-            return a && a.countryCodes && _.includes(a.countryCodes, countryCode.toLowerCase());
-        }) || _.first(dataAddressFormats);
+        var addressFormat = _find(dataAddressFormats, function (a) {
+            return a && a.countryCodes && _includes(a.countryCodes, countryCode.toLowerCase());
+        }) || dataAddressFormats[0];
 
         var widths = addressFormat.widths || {
             housenumber: 1/3, street: 2/3,
@@ -130,7 +136,7 @@ export function uiFieldAddress(field, context) {
 
         function row(r) {
             // Normalize widths.
-            var total = _.reduce(r, function(sum, field) {
+            var total = _reduce(r, function(sum, field) {
                 return sum + (widths[field] || 0.5);
             }, 0);
 
@@ -177,7 +183,7 @@ export function uiFieldAddress(field, context) {
                     : getNearValues;
 
             wrap.selectAll('input.addr-' + tag)
-                .call(d3combobox()
+                .call(d3_combobox()
                     .container(context.container())
                     .minItems(1)
                     .fetcher(function(value, callback) {

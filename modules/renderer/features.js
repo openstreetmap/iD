@@ -1,6 +1,12 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { osmEntity } from '../osm/index';
+import _clone from 'lodash-es/clone';
+import _groupBy from 'lodash-es/groupBy';
+import _reduce from 'lodash-es/reduce';
+import _some from 'lodash-es/some';
+import _union from 'lodash-es/union';
+
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
+import { osmEntity } from '../osm';
 import { utilRebind } from '../util/rebind';
 
 
@@ -48,7 +54,7 @@ export function rendererFeatures(context) {
         'obliterated': true
     };
 
-    var dispatch = d3.dispatch('change', 'redraw'),
+    var dispatch = d3_dispatch('change', 'redraw'),
         _cullFactor = 1,
         _cache = {},
         _features = {},
@@ -255,7 +261,7 @@ export function rendererFeatures(context) {
 
     features.gatherStats = function(d, resolver, dimensions) {
         var needsRedraw = false,
-            type = _.groupBy(d, function(ent) { return ent.type; }),
+            type = _groupBy(d, function(ent) { return ent.type; }),
             entities = [].concat(type.relation || [], type.way || [], type.node || []),
             currHidden, geometry, matches, i, j;
 
@@ -345,7 +351,7 @@ export function rendererFeatures(context) {
                         if (parents.length === 1 && parents[0].isMultipolygon()) {
                             var pkey = osmEntity.key(parents[0]);
                             if (_cache[pkey] && _cache[pkey].matches) {
-                                matches = _.clone(_cache[pkey].matches);
+                                matches = _clone(_cache[pkey].matches);
                                 continue;
                             }
                         }
@@ -426,11 +432,11 @@ export function rendererFeatures(context) {
         }
 
         // gather ways connected to child nodes..
-        connections = _.reduce(childNodes, function(result, e) {
-            return resolver.isShared(e) ? _.union(result, resolver.parentWays(e)) : result;
+        connections = _reduce(childNodes, function(result, e) {
+            return resolver.isShared(e) ? _union(result, resolver.parentWays(e)) : result;
         }, connections);
 
-        return connections.length ? _.some(connections, function(e) {
+        return connections.length ? _some(connections, function(e) {
             return features.isHidden(e, resolver, e.geometry(resolver));
         }) : false;
     };

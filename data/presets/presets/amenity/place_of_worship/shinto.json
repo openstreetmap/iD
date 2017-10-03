@@ -1,0 +1,27 @@
+{
+    "icon": "poi-shintoist",
+    "fields": [
+        "name",
+        "denomination",
+        "building_area",
+        "address",
+        "service_times"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "kami",
+        "torii"
+    ],
+    "tags": {
+        "amenity": "place_of_worship",
+        "religion": "shinto"
+    },
+    "reference": {
+        "key": "amenity",
+        "value": "place_of_worship"
+    },
+    "name": "Shinto Shrine"
+}

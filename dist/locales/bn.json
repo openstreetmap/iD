@@ -3,18 +3,18 @@
         "modes": {
             "add_area": {
                 "title": "এলাকা",
-                "description": "ম্যাপে উদ্যান, দালান, জলাশয় অথবা অন্যান্য এলাকা সংযোজন করুন",
-                "tail": "একটি এলাকা, যেমন উদ্যান, জলাশয় অথবা দালান অাঁকা শুরু করার জন্য ম্যাপে ক্লিক করুন।"
+                "description": "মানচিত্রে উদ্যান, দালান, জলাশয় অথবা অন্যান্য এলাকা সংযোজন করুন।",
+                "tail": "একটি এলাকা, যেমন উদ্যান, জলাশয় অথবা দালান অাঁকা শুরু করার জন্য মানচিত্রে ক্লিক করুন।"
             },
             "add_line": {
                 "title": "রেখা",
-                "description": "ম্যাপে রাজপথ, রাস্তা, পথচারী পথ, খাল অথবা অন্য কোন রেখা সংযোজন করুন।",
-                "tail": "রাস্তা, পথ অথবা গমনপথ অাঁকা শুরু করার জন্য ম্যাপে ক্লিক করুন।"
+                "description": "মানচিত্রে রাজপথ, রাস্তা, পথচারী পথ, খাল অথবা অন্য কোন রেখা সংযোজন করুন।",
+                "tail": "রাস্তা, পথ অথবা গমনপথ অাঁকা শুরু করার জন্য মানচিত্রে ক্লিক করুন।"
             },
             "add_point": {
                 "title": "বিন্দু",
-                "description": "ম্যাপে রেস্তোরাঁ, স্মৃতিস্তম্ভ, ডাকবাক্স অথবা অন্য কোন স্থান সংযোজন করুন।",
-                "tail": "বিন্দু সংযোজন করার জন্য ম্যাপে ক্লিক করুন।"
+                "description": "মানচিত্রে রেস্তোরাঁ, স্মৃতিস্তম্ভ, ডাকবাক্স অথবা অন্য কোন স্থান সংযোজন করুন।",
+                "tail": "বিন্দু সংযোজন করার জন্য মানচিত্রে ক্লিক করুন।"
             },
             "browse": {
                 "title": "ঘুরে ফিরে দেখুন",
@@ -42,7 +42,7 @@
                 }
             },
             "continue": {
-                "key": "এ",
+                "key": "A",
                 "title": "\t\nচালিয়ে যান",
                 "description": "এই রেখাকে প্রলম্বিত করুন.",
                 "not_eligible": "কোন রেখাকে এখানে প্রলম্বিত করা যাবে না.",
@@ -75,7 +75,7 @@
                     "line": "এই লাইন এর কোনসমূহ বর্গাকৃতি করুন.",
                     "area": "এই ক্ষেত্রটির কোনসমূহ বর্গাকৃতি করুন."
                 },
-                "key": "এস",
+                "key": "S",
                 "annotation": {
                     "line": "একটি রেখার কোনাগুলিকে চৌকো করা হয়েছে।",
                     "area": "একটি এলাকার কোনাগুলিকে চৌকো করা হয়েছে।"
@@ -84,7 +84,7 @@
             "straighten": {
                 "title": "সোজা করুন",
                 "description": "এই রেখাটিকে সোজা করুন",
-                "key": "এস",
+                "key": "S",
                 "annotation": "একটি রেখাকে সোজা করা হয়েছে।"
             },
             "delete": {
@@ -130,6 +130,12 @@
                     "vertex": "একটি গমনপথে একটি নোডকে সরানো হয়েছে।",
                     "line": "একটি রেখাকে সরানো হয়েছে।",
                     "area": "একটি এলাকাকে সরানো হয়েছে।"
+                }
+            },
+            "reflect": {
+                "key": {
+                    "long": "T",
+                    "short": "Y"
                 }
             },
             "rotate": {
@@ -179,14 +185,23 @@
             "localized_translation_name": "নাম"
         },
         "zoom_in_edit": "সম্পাদনার জন্য জুম ইন করুন",
+        "login": "প্রবেশ করুন",
         "logout": "বেরিয়ে যান",
-        "loading_auth": "ওপেনস্ট্রীটম্যাপ-এর সাথে যোগাযোগ করা হচ্ছে ...",
+        "loading_auth": "ওপেনস্ট্রীটম্যাপে সংযোগ করা হচ্ছে ...",
+        "report_a_bug": "সমস্যা প্রতিবেদন করুন",
+        "help_translate": "অনুবাদ সাহায্য",
+        "feature_info": {
+            "hidden_warning": "{count}টি লুকানো বৈশিষ্ট্য"
+        },
         "status": {
             "error": "API-এর সাথে যোগাযোগ করা যাচ্ছে না।",
             "offline": "API-টি এই মুহুর্তে অফলাইন। একটু পরে চেষ্টা করুন।"
         },
         "commit": {
+            "title": "ওপেনস্ট্রীটম্যাপে আপলোড করুন",
+            "save": "আপলোড করুন",
             "cancel": "বাতিল করুন",
+            "changes": "{count}টি পরিবর্তন",
             "warnings": "সতর্ক বার্তাসমুহ",
             "modified": "পরিবর্তিত",
             "deleted": "মুছে ফেলা হয়েছে",
@@ -196,9 +211,41 @@
             "list": "পরিবর্তনগুলি এদের করা - {users}",
             "truncated_list": "পরিবর্তনগুলি এদের - {users} এবং অারো {count}জনের করা"
         },
+        "info_panels": {
+            "key": "I",
+            "background": {
+                "key": "B",
+                "zoom": "জুম",
+                "unknown": "অজানা"
+            },
+            "history": {
+                "key": "H",
+                "title": "ইতিহাস",
+                "selected": "{n}টি নির্বাচিত",
+                "version": "সংস্করণ",
+                "last_edit": "শেষ সম্পাদনা",
+                "edited_by": "সম্পাদনা করেছেন",
+                "unknown": "অজানা"
+            },
+            "location": {
+                "key": "L",
+                "title": "অবস্থান",
+                "unknown_location": "অজানা অবস্থান"
+            },
+            "measurement": {
+                "key": "M",
+                "selected": "{n}টি নির্বাচিত",
+                "length": "দৈর্ঘ্য",
+                "location": "অবস্থান"
+            }
+        },
+        "geometry": {
+            "point": "বিন্দু",
+            "line": "রেখা"
+        },
         "geocoder": {
             "search": "দুনিয়াজুরে খুজুন...",
-            "no_results_visible": "দৃশ্যমান ম্যাপ-এ কোন ফলাফল নেই",
+            "no_results_visible": "দৃশ্যমান মানচিত্রে কোন ফলাফল নেই",
             "no_results_worldwide": "কোন ফলাফল পাওয়া যায় নি।"
         },
         "geolocate": {
@@ -224,40 +271,54 @@
             "incomplete": "<ডাউনলোড করা হয়নি>",
             "feature_list": "বৈশিষ্ট্যসমূহ খুজুন",
             "edit": "বৈশিষ্ট্য সম্পাদনা করুন",
-            "none": "কিছুনা"
+            "check": {
+                "yes": "হ্যাঁ",
+                "no": "না"
+            },
+            "add": "যোগ করুন",
+            "none": "কিছুনা",
+            "location": "অবস্থান"
         },
         "background": {
             "title": "পটভূমি",
             "description": "পটভূমি নির্ধারণ",
             "percent_brightness": "{opacity}% উজ্জ্বলতা",
             "none": "কিছুনা",
-            "reset": "রিসেট"
+            "reset": "রিসেট",
+            "minimap": {
+                "key": "/"
+            }
+        },
+        "map_data": {
+            "title": "মানচিত্রের উপাত্ত",
+            "description": "মানচিত্রের উপাত্ত",
+            "key": "F"
         },
         "restore": {
-            "heading": "অাপনার কিছু পরিবর্তন সেভ করা বাকি অাছে",
+            "heading": "অাপনার কিছু পরিবর্তন সংরক্ষণ করা বাকি অাছে",
             "description": "আপনি কি আগের সম্পাদনা সময়কালের অসংরক্ষিত পরিবর্তনসমূহ পুনরূদ্ধার করতে চান?"
         },
         "save": {
-            "title": "সেভ করুন",
-            "no_changes": "সেভ করার মত কোন পরিবর্তন বাকি নেই।",
-            "unsaved_changes": "অাপনার কিছু পরিবর্তন সেভ করা বাকি অাছে।"
+            "title": "সংরক্ষণ করুন",
+            "no_changes": "সংরক্ষণ করার মত কোন পরিবর্তন বাকি নেই।",
+            "unsaved_changes": "অাপনার কিছু পরিবর্তন সংরক্ষণ করা বাকি অাছে"
         },
         "success": {
-            "edited_osm": "ওপেনস্ট্রীটম্যাপ-এ পরিবর্তন করেছেন!",
-            "just_edited": "অাপনি এইমাত্র ওপেনস্ট্রীটম্যাপ-এ পরিবর্তন করলেন!",
-            "view_on_osm": "ওপেনস্ট্রীটম্যাপ-এ দেখুন",
+            "edited_osm": "ওপেনস্ট্রীটম্যাপ সম্পাদিত হয়েছে!",
+            "just_edited": "অাপনি এইমাত্র ওপেনস্ট্রীটম্যাপ সম্পাদন করলেন!",
+            "view_on_osm": "ওপেনস্ট্রীটম্যাপে দেখুন",
             "facebook": "ফেসবুক-এ জানান",
             "twitter": "টুইটার-এ জানান",
             "google": "গুগল+ এ জানান"
         },
         "splash": {
-            "welcome": "iD ওপেনস্ট্রীটম্যাপ এডিটর-এ অাপনাকে স্বাগতম",
+            "welcome": "iD ওপেনস্ট্রীটম্যাপ সম্পাদকে অাপনাকে স্বাগতম",
             "walkthrough": "ওয়াকথ্রু শুরু করুন",
             "start": "এখুনি পরিবর্তন করুন"
         },
         "source_switch": {
             "live": "সরাসরি",
-            "lose_changes": "অাপনার কিছু পরিবর্তন সেভ করা বাকি অাছে। ম্যাপ সার্ভার পরিবর্তন করলে সেই পরিবর্তনগুলি হারিয়ে যাবে। অাপনি কি ম্যাপ সার্ভার পরিবর্তন করার ব্যপারে নিঃসঙ্কোচ?",
+            "lose_changes": "অাপনার কিছু পরিবর্তন সংরক্ষণ করা বাকি অাছে। মানচিত্রের সার্ভার পরিবর্তন করলে সেই পরিবর্তনগুলি হারিয়ে যাবে। অাপনি কি মানচিত্রের সার্ভার পরিবর্তন করার ব্যপারে নিশ্চিত?",
             "dev": "ডেভ"
         },
         "tag_reference": {
@@ -289,7 +350,7 @@
                 "neighbourhood": "<value for addr:neighbourhood>",
                 "province": "<value for addr:province>",
                 "quarter": "<value for addr:quarter>",
-                "state": "<value for addr:state>",
+                "state": "MI",
                 "subdistrict": "<value for addr:subdistrict>",
                 "suburb": "<value for addr:suburb>",
                 "countrycode": "bd"
@@ -308,8 +369,15 @@
             },
             "startediting": {
                 "title": "পরিবর্তন করা শুরু করুন",
-                "save": "অাপনার পরিবর্তনগুলি নিয়মিত সেভ করতে ভুলবেন না!",
-                "start": "ম্যাপ অাঁকা শুরু করুন!"
+                "save": "অাপনার পরিবর্তনগুলি নিয়মিত সংরক্ষণ করতে ভুলবেন না!",
+                "start": "মানচিত্রকরণ শুরু করুন!"
+            }
+        },
+        "shortcuts": {
+            "editing": {
+                "commands": {
+                    "save": "পরিবর্তন সংরক্ষণ করুন"
+                }
             }
         },
         "presets": {
@@ -317,22 +385,22 @@
                 "access": {
                     "options": {
                         "designated": {
-                            "description": "কোন চিহ্ন বা স্থানীয় অাইন অনুযায়ী প্রবেশ অনুমোদিত।"
+                            "description": "কোন চিহ্ন বা স্থানীয় অাইন অনুযায়ী প্রবেশ অনুমোদিত"
                         },
                         "destination": {
-                            "description": "শুধুমাত্র কোন গন্তব্যে পৌছানোর জন্য প্রবেশ অনুমোদিত।",
+                            "description": "শুধুমাত্র কোন গন্তব্যে পৌছানোর জন্য প্রবেশ অনুমোদিত",
                             "title": "গন্তব্য"
                         },
                         "no": {
-                            "description": "জনসাধারনের প্রবেশ অনুমোদিত নয়।",
+                            "description": "জনসাধারনের প্রবেশ অনুমোদিত নয়",
                             "title": "নিষিদ্ধ"
                         },
                         "permissive": {
-                            "description": "প্রবেশ অনুমোদিত, যতক্ষন অব্দি এর মালিক অনুমতি প্রত্যাহার না করছেন।",
+                            "description": "প্রবেশ অনুমোদিত, যতক্ষন অব্দি এর মালিক অনুমতি প্রত্যাহার না করছেন",
                             "title": "অনুমতিসূচক"
                         },
                         "private": {
-                            "description": "প্রত্যেক ব্যক্তির জন্য মালিক-এর অনুমতি থাকলে প্রবেশ অনুমোদিত।",
+                            "description": "প্রত্যেক ব্যক্তির জন্য মালিকের অনুমতি থাকলে প্রবেশ অনুমোদিত",
                             "title": "একান্ত"
                         },
                         "yes": {
@@ -341,6 +409,7 @@
                         }
                     },
                     "types": {
+                        "access": "সব",
                         "bicycle": "সাইকেল",
                         "foot": "পদচালন",
                         "horse": "ঘোড়া",
@@ -354,27 +423,32 @@
                     "label": "ঠিকানা",
                     "placeholders": {
                         "city": "শহর",
+                        "conscriptionnumber": "১২৩",
                         "country": "দেশ",
+                        "county": "দেশ",
+                        "county!jp": "জেলা",
                         "district": "জেলা",
                         "housename": "বাড়ির নাম",
                         "housenumber": "১২৩",
                         "place": "জায়গা",
-                        "postcode": "পিনকোড",
+                        "postcode": "ডাককোড",
+                        "province": "প্রদেশ",
                         "state": "রাজ্য",
-                        "street": "স্ট্রীট",
+                        "street": "রাস্তা",
                         "subdistrict": "উপজেলা",
-                        "suburb": "শহরতলি"
+                        "suburb": "শহরতলি",
+                        "unit": "একক"
                     }
                 },
                 "aerialway": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "aerialway/access": {
                     "label": "প্রবেশ করা",
                     "options": {
                         "both": "উভয়",
                         "entry": "প্রবেশ",
-                        "exit": "প্রস্থাণ"
+                        "exit": "প্রস্থান"
                     }
                 },
                 "aerialway/capacity": {
@@ -390,32 +464,35 @@
                     "options": {
                         "both": "উভয়",
                         "entry": "প্রবেশ",
-                        "exit": "প্রস্থাণ"
+                        "exit": "প্রস্থান"
                     }
                 },
                 "aeroway": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "amenity": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
+                },
+                "area/highway": {
+                    "label": "ধরন"
                 },
                 "artist": {
                     "label": "শিল্পী"
                 },
                 "artwork_type": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "atm": {
                     "label": "এটিএম"
                 },
                 "barrier": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "bicycle_parking": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "boundary": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "building": {
                     "label": "দালান"
@@ -424,11 +501,11 @@
                     "label": "দালান"
                 },
                 "capacity": {
-                    "label": "বহন/সহন-ক্ষমতা",
+                    "label": "ধারণক্ষমতা",
                     "placeholder": "৫০, ১০০, ২০০..."
                 },
                 "cardinal_direction": {
-                    "label": "দিক/অভিমুখ",
+                    "label": "দিক",
                     "options": {
                         "E": "পূর্ব",
                         "N": "উত্তর",
@@ -438,7 +515,7 @@
                     }
                 },
                 "clock_direction": {
-                    "label": "দিক/অভিমুখ",
+                    "label": "দিক",
                     "options": {
                         "anticlockwise": "ঘড়ির কাটার উল্টো দিকে",
                         "clockwise": "ঘড়ির কাটার দিকে"
@@ -448,13 +525,13 @@
                     "label": "সংগ্রহের সময়"
                 },
                 "construction": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "country": {
                     "label": "দেশ"
                 },
                 "crossing": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "description": {
                     "label": "বর্ননা"
@@ -466,7 +543,7 @@
                     "label": "জরুরি"
                 },
                 "entrance": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "except": {
                     "label": "ব্যতিক্রম"
@@ -479,7 +556,7 @@
                     "label": "মূল্য"
                 },
                 "fire_hydrant/type": {
-                    "label": "টাইপ",
+                    "label": "ধরন",
                     "options": {
                         "pond": "পুকুর",
                         "wall": "দেয়াল"
@@ -498,17 +575,17 @@
                     "label": "উৎস"
                 },
                 "generator/type": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "handicap": {
                     "label": "বিকলাঙ্গ",
                     "placeholder": "১-১৮"
                 },
                 "highway": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "historic": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "hoops": {
                     "placeholder": "১, ২, ৪..."
@@ -517,7 +594,7 @@
                     "label": "ঝোকা"
                 },
                 "information": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "internet_access": {
                     "label": "ইন্টারনেট সুবিধা",
@@ -526,11 +603,11 @@
                         "terminal": "টার্মিনাল",
                         "wired": "তারযুক্ত",
                         "wlan": "তারবিহীন",
-                        "yes": "হ্যা"
+                        "yes": "হ্যাঁ"
                     }
                 },
                 "landuse": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "lanes": {
                     "label": "লেন",
@@ -540,7 +617,7 @@
                     "label": "স্তর"
                 },
                 "leisure": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "length": {
                     "label": "দৈর্ঘ্য (মিটার)"
@@ -553,7 +630,7 @@
                     "label": "অবস্থান"
                 },
                 "man_made": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "maxspeed": {
                     "label": "গতিসীমা",
@@ -570,10 +647,10 @@
                     "label": "নেটওয়ার্ক"
                 },
                 "note": {
-                    "label": "নোট"
+                    "label": "টীকা"
                 },
                 "office": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "oneway": {
                     "label": "একমুখো"
@@ -585,53 +662,47 @@
                     "label": "ঘন্টা"
                 },
                 "operator": {
-                    "label": "অপারেটর"
+                    "label": "পরিচালক"
                 },
                 "parking": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "phone": {
-                    "label": "দূরভাষ",
+                    "label": "ফোন",
                     "placeholder": "+৩১ ৪২ ১২৩ ৪৫৬৭"
                 },
                 "place": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "power": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "railway": {
-                    "label": "টাইপ"
-                },
-                "ref": {
-                    "label": "রেফারেন্স"
+                    "label": "ধরন"
                 },
                 "relation": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "religion": {
                     "label": "ধর্ম"
                 },
                 "restriction": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "route": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "route_master": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "service": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "shelter": {
                     "label": "ছাউনি"
                 },
                 "shop": {
-                    "label": "টাইপ"
-                },
-                "source": {
-                    "label": "উৎস"
+                    "label": "ধরন"
                 },
                 "structure": {
                     "label": "কাঠামো",
@@ -645,20 +716,20 @@
                     "label": "উপরিভাগ"
                 },
                 "tourism": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "water": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "waterway": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "website": {
                     "label": "ওয়েবসাইট",
                     "placeholder": "http://example.com/"
                 },
                 "wetland": {
-                    "label": "টাইপ"
+                    "label": "ধরন"
                 },
                 "wikipedia": {
                     "label": "উইকিপিডিয়া"
@@ -747,7 +818,7 @@
                     "name": "বৌদ্ধ মন্দির"
                 },
                 "amenity/place_of_worship/christian": {
-                    "name": "গির্যা"
+                    "name": "গির্জা"
                 },
                 "amenity/place_of_worship/muslim": {
                     "name": "মসজিদ"
@@ -771,7 +842,7 @@
                     "name": "সাঁতার কাটার পুকুর"
                 },
                 "amenity/telephone": {
-                    "name": "দুরভাষ"
+                    "name": "টেলিফোন"
                 },
                 "amenity/theatre": {
                     "name": "থিয়েটার"
@@ -792,7 +863,7 @@
                     "name": "বেড়া"
                 },
                 "barrier/gate": {
-                    "name": "গেট"
+                    "name": "ফটক"
                 },
                 "barrier/wall": {
                     "name": "দেয়াল"
@@ -834,7 +905,7 @@
                     "name": "বাস স্টপ"
                 },
                 "highway/cycleway": {
-                    "name": "সাইকেল-এর রাস্তা"
+                    "name": "সাইকেলের রাস্তা"
                 },
                 "highway/footway": {
                     "name": "ফুটপাত"
@@ -855,7 +926,7 @@
                     "name": "অজানা রাস্তা"
                 },
                 "highway/secondary": {
-                    "name": "সেকেন্ডারি রোড"
+                    "name": "দ্বিতীয় স্তরের রাস্তা"
                 },
                 "highway/service": {
                     "name": "সার্ভিস রোড"
@@ -867,10 +938,10 @@
                     "name": "সিঁড়ি"
                 },
                 "highway/tertiary": {
-                    "name": "টারশিয়ারি রোড"
+                    "name": "প্রশাখা রাস্তা"
                 },
                 "highway/traffic_signals": {
-                    "name": "ট্রাফিক সিগনাল"
+                    "name": "ট্রাফিক সংকেত"
                 },
                 "highway/trunk": {
                     "name": "ট্রাঙ্ক রোড"
@@ -951,7 +1022,7 @@
                     "name": "স্টেডিয়াম"
                 },
                 "leisure/swimming_pool": {
-                    "name": "সাঁতার কাটার পুকুর"
+                    "name": "সুইমিং পুল"
                 },
                 "line": {
                     "name": "রেখা"
@@ -960,7 +1031,7 @@
                     "name": "মানুষ নির্মিত"
                 },
                 "man_made/lighthouse": {
-                    "name": "আলোকস্তম্ভ"
+                    "name": "বাতিঘর"
                 },
                 "man_made/pier": {
                     "name": "জাহাজঘাটা"
@@ -1008,7 +1079,7 @@
                     "name": "জল"
                 },
                 "natural/water/lake": {
-                    "name": "জলাশয়"
+                    "name": "হ্রদ"
                 },
                 "natural/water/pond": {
                     "name": "পুকুর"
@@ -1104,7 +1175,7 @@
                     "name": "বেকারি"
                 },
                 "shop/bicycle": {
-                    "name": "সাইকেল-এর দোকান"
+                    "name": "সাইকেলের দোকান"
                 },
                 "shop/boutique": {
                     "name": "বুটিক"
@@ -1119,13 +1190,13 @@
                     "name": "গাড়ির যন্ত্রাংশের দোকান"
                 },
                 "shop/car_repair": {
-                    "name": "গাড়ি মেরামত-এর দোকান"
+                    "name": "গাড়ি মেরামতের দোকান"
                 },
                 "shop/clothes": {
-                    "name": "জামাকাপড়-এর দোকান"
+                    "name": "জামাকাপড়ের দোকান"
                 },
                 "shop/computer": {
-                    "name": "কম্পিউটার-এর দোকান"
+                    "name": "কম্পিউটারের দোকান"
                 },
                 "shop/department_store": {
                     "name": "ডিপার্টমেন্ট স্টোর"
@@ -1146,7 +1217,7 @@
                     "name": "অাসবাবপত্রের দোকান"
                 },
                 "shop/gift": {
-                    "name": "উপহার-এর দোকান"
+                    "name": "উপহারের দোকান"
                 },
                 "shop/mall": {
                     "name": "মল"
@@ -1155,7 +1226,7 @@
                     "name": "মোবাইল ফোন-এর দোকান"
                 },
                 "shop/music": {
-                    "name": "সগীত-এর দোকান"
+                    "name": "সঙ্গীতের দোকান"
                 },
                 "shop/optician": {
                     "name": "চক্ষুরোগের চিকিত্সক"
@@ -1212,7 +1283,7 @@
                     "name": "প্রশাসনিক সীমানা"
                 },
                 "type/route/bicycle": {
-                    "name": "সাইকেল-এর রাস্তা"
+                    "name": "সাইকেলের রাস্তা"
                 },
                 "vertex": {
                     "name": "অন্যান্য"
@@ -1236,7 +1307,71 @@
                     "name": "নদীতীর"
                 },
                 "waterway/stream": {
-                    "name": "জলধারা"
+                    "name": "পানিস্রোত"
+                }
+            }
+        },
+        "imagery": {
+            "Bing": {
+                "description": "উপগ্রহ ও আকাশস্থ চিত্রাবলী।",
+                "name": "বিং আকাশস্থ চিত্রাবলী"
+            },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "শর্তাবলী ও প্রতিক্রিয়া"
+                }
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "শর্তাবলী ও প্রতিক্রিয়া"
+                }
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "© ওপেনস্ট্রীটম্যাপ অবদানকারীগণ, সিসি-বাই-এসএ"
+                },
+                "name": "ওপেনস্ট্রীটম্যাপ (মানক)"
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "শর্তাবলী ও প্রতিক্রিয়া"
+                },
+                "description": "উপগ্রহ ও আকাশস্থ চিত্রাবলী।",
+                "name": "ম্যাপবক্স উপগ্রহ"
+            },
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, ওপেনস্ট্রীটম্যাপ অবদানকারীগণ, সিসি-বাই-এসএ"
+                }
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, ওপেনস্ট্রীটম্যাপ অবদানকারীগণ, সিসি-বাই-এসএ"
+                }
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, ওপেনস্ট্রীটম্যাপ অবদানকারীগণ, সিসি-বাই-এসএ"
+                }
+            },
+            "OSM_Inspector-Routing": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, ওপেনস্ট্রীটম্যাপ অবদানকারীগণ, সিসি-বাই-এসএ"
+                }
+            },
+            "OSM_Inspector-Tagging": {
+                "attribution": {
+                    "text": "© Geofabrik GmbH, ওপেনস্ট্রীটম্যাপ অবদানকারীগণ, সিসি-বাই-এসএ"
+                }
+            },
+            "hike_n_bike": {
+                "attribution": {
+                    "text": "© ওপেনস্ট্রীটম্যাপ অবদানকারীগণ"
+                }
+            },
+            "mapbox_locator_overlay": {
+                "attribution": {
+                    "text": "শর্তাবলী ও প্রতিক্রিয়া"
                 }
             }
         }

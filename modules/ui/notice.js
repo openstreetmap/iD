@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import _debounce from 'lodash-es/debounce';
+
 import { t } from '../util/locale';
 import { svgIcon } from '../svg/index';
 
@@ -12,8 +13,10 @@ export function uiNotice(context) {
 
         var button = div
             .append('button')
-            .attr('class', 'zoom-to notice')
-            .on('click', function() { context.map().zoom(context.minEditableZoom()); });
+            .attr('class', 'zoom-to notice fillD')
+            .on('click', function() {
+                context.map().zoom(context.minEditableZoom());
+            });
 
         button
             .call(svgIcon('#icon-plus', 'pre-text'))
@@ -23,11 +26,12 @@ export function uiNotice(context) {
 
 
         function disableTooHigh() {
-            div.style('display', context.editable() ? 'none' : 'block');
+            var canEdit = context.map().zoom() >= context.minEditableZoom();
+            div.style('display', canEdit ? 'none' : 'block');
         }
 
         context.map()
-            .on('move.notice', _.debounce(disableTooHigh, 500));
+            .on('move.notice', _debounce(disableTooHigh, 500));
 
         disableTooHigh();
     };

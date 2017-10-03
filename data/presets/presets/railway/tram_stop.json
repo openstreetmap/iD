@@ -1,6 +1,7 @@
 {
     "icon": "rail-light",
     "fields": [
+        "name",
         "network",
         "operator"
     ],

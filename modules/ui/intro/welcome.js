@@ -1,10 +1,15 @@
-import * as d3 from 'd3';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
 import { t } from '../../util/locale';
 import { utilRebind } from '../../util/rebind';
 
 
 export function uiIntroWelcome(context, reveal) {
-    var dispatch = d3.dispatch('done'),
+    var dispatch = d3_dispatch('done'),
         listener = clickListener();
 
     var chapter = {
@@ -66,7 +71,7 @@ export function uiIntroWelcome(context, reveal) {
 
         listener.on('click', function(which) {
             if (which === 'left') {
-                d3.select('.curtain-tooltip.intro-mouse .counter')
+                d3_select('.curtain-tooltip.intro-mouse .counter')
                     .text(String(++counter));
 
                 if (counter === times) {
@@ -107,7 +112,7 @@ export function uiIntroWelcome(context, reveal) {
 
         listener.on('click', function(which) {
             if (which === 'right') {
-                d3.select('.curtain-tooltip.intro-mouse .counter')
+                d3_select('.curtain-tooltip.intro-mouse .counter')
                     .text(String(++counter));
 
                 if (counter === times) {
@@ -155,9 +160,9 @@ export function uiIntroWelcome(context, reveal) {
 
 
 function clickListener() {
-    var dispatch = d3.dispatch('click'),
+    var dispatch = d3_dispatch('click'),
         minTime = 120,
-        tooltip = d3.select(null),
+        tooltip = d3_select(null),
         down = {};
 
     // `down` keeps track of which buttons/keys are down.
@@ -166,20 +171,20 @@ function clickListener() {
     //   on Windows a contextmenu event happens after keyup/mouseup
 
     function keydown() {
-        if (d3.event.keyCode === 93)  {   // context menu
-            d3.event.preventDefault();
-            d3.event.stopPropagation();
-            down.menu = d3.event.timeStamp;
+        if (d3_event.keyCode === 93)  {   // context menu
+            d3_event.preventDefault();
+            d3_event.stopPropagation();
+            down.menu = d3_event.timeStamp;
             tooltip.classed('rightclick', true);
         }
     }
 
 
     function keyup() {
-        if (d3.event.keyCode === 93)  {   // context menu
-            d3.event.preventDefault();
-            d3.event.stopPropagation();
-            var endTime = d3.event.timeStamp,
+        if (d3_event.keyCode === 93)  {   // context menu
+            d3_event.preventDefault();
+            d3_event.stopPropagation();
+            var endTime = d3_event.timeStamp,
                 startTime = down.menu || endTime,
                 delay = (endTime - startTime < minTime) ? minTime : 0;
 
@@ -194,23 +199,23 @@ function clickListener() {
 
 
     function mousedown() {
-        var button = d3.event.button;
-        if (button === 0 && !d3.event.ctrlKey) {
+        var button = d3_event.button;
+        if (button === 0 && !d3_event.ctrlKey) {
             tooltip.classed('leftclick', true);
         } else if (button === 2) {
             tooltip.classed('rightclick', true);
         }
-        down[button] = d3.event.timeStamp;
+        down[button] = d3_event.timeStamp;
     }
 
 
     function mouseup() {
-        var button = d3.event.button,
-            endTime = d3.event.timeStamp,
+        var button = d3_event.button,
+            endTime = d3_event.timeStamp,
             startTime = down[button] || endTime,
             delay = (endTime - startTime < minTime) ? minTime : 0;
 
-        if (button === 0 && !d3.event.ctrlKey) {
+        if (button === 0 && !d3_event.ctrlKey) {
             window.setTimeout(function() {
                 tooltip.classed('leftclick', false);
                 down[button] = undefined;  // delayed, for Windows
@@ -235,8 +240,8 @@ function clickListener() {
 
 
     function contextmenu() {
-        d3.event.preventDefault();
-        d3.event.stopPropagation();
+        d3_event.preventDefault();
+        d3_event.stopPropagation();
         if (!down[2] && !down.menu) {
             tooltip.classed('rightclick', true);
             window.setTimeout(function() {
@@ -251,7 +256,7 @@ function clickListener() {
         tooltip = selection;
         down = {};
 
-        d3.select(window)
+        d3_select(window)
             .on('keydown.intro', keydown)
             .on('keyup.intro', keyup)
             .on('mousedown.intro', mousedown)
@@ -261,7 +266,7 @@ function clickListener() {
 
 
     behavior.off = function() {
-        d3.select(window)
+        d3_select(window)
             .on('keydown.intro', null)
             .on('keyup.intro', null)
             .on('mousedown.intro', null)

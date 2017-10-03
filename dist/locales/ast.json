@@ -298,8 +298,6 @@
         },
         "commit": {
             "title": "Xubir a OpenStreetMap",
-            "description_placeholder": "Descripción curtia de les collaboraciones (riquío)",
-            "message_label": "Comentariu del conxuntu de cambios",
             "upload_explanation": "Los cambios que xuba tarán visibles en tolos mapes qu'usen los datos d'OpenStreetMap.",
             "upload_explanation_with_user": "Los cambios que xubas como {user} tarán visibles en tolos mapes qu'usen datos d'OpenStreetMap.",
             "save": "Xubir",
@@ -907,9 +905,6 @@
                 "construction": {
                     "label": "Tipu"
                 },
-                "content": {
-                    "label": "Conteníu"
-                },
                 "country": {
                     "label": "País"
                 },
@@ -1060,10 +1055,6 @@
                 },
                 "generator/type": {
                     "label": "Tipu"
-                },
-                "golf_hole": {
-                    "label": "Referencia",
-                    "placeholder": "Númberu de furacu (1-18)"
                 },
                 "handicap": {
                     "label": "Handicap",
@@ -1398,9 +1389,6 @@
                         "container": "Contenedor"
                     }
                 },
-                "ref": {
-                    "label": "Referencia"
-                },
                 "relation": {
                     "label": "Tipu"
                 },
@@ -1502,9 +1490,6 @@
                     },
                     "placeholder": "Patinos, ruedes, too terrén"
                 },
-                "source": {
-                    "label": "Fonte"
-                },
                 "stars": {
                     "label": "Estrelles"
                 },
@@ -1596,9 +1581,6 @@
                 },
                 "trees": {
                     "label": "Árboles"
-                },
-                "tunnel": {
-                    "label": "Túnel"
                 },
                 "vending": {
                     "label": "Tipu de mercancía"

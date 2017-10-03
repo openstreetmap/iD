@@ -1,20 +1,28 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _debounce from 'lodash-es/debounce';
+import _without from 'lodash-es/without';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
 import { t } from '../../util/locale';
 
 
 export function uiPanelBackground(context) {
     var background = context.background();
-    var currSource = null;
-    var currZoom = '';
-    var currVintage = '';
+    var currSourceName = null;
+    var metadata = {};
+    var metadataKeys = [
+        'zoom', 'vintage', 'source', 'description', 'resolution', 'accuracy'
+    ];
 
+    var debouncedRedraw = _debounce(redraw, 250);
 
     function redraw(selection) {
-        if (currSource !== background.baseLayerSource().name()) {
-            currSource = background.baseLayerSource().name();
-            currZoom = '';
-            currVintage = '';
+        if (currSourceName !== background.baseLayerSource().name()) {
+            currSourceName = background.baseLayerSource().name();
+            metadata = {};
         }
 
         selection.html('');
@@ -25,25 +33,20 @@ export function uiPanelBackground(context) {
 
         list
             .append('li')
-            .text(currSource);
+            .text(currSourceName);
 
-        list
-            .append('li')
-            .text(t('info_panels.background.zoom') + ': ')
-            .append('span')
-            .attr('class', 'zoom')
-            .text(currZoom);
+        metadataKeys.forEach(function(k) {
+            list
+                .append('li')
+                .attr('class', 'background-info-list-' + k)
+                .classed('hide', !metadata[k])
+                .text(t('info_panels.background.' + k) + ': ')
+                .append('span')
+                .attr('class', 'background-info-span-' + k)
+                .text(metadata[k]);
+        });
 
-        list
-            .append('li')
-            .text(t('info_panels.background.vintage') + ': ')
-            .append('span')
-            .attr('class', 'vintage')
-            .text(currVintage);
-
-        if (!currVintage) {
-            debouncedGetVintage(selection);
-        }
+        debouncedGetMetadata(selection);
 
         var toggle = context.getDebug('tile') ? 'hide_tiles' : 'show_tiles';
 
@@ -53,31 +56,54 @@ export function uiPanelBackground(context) {
             .attr('href', '#')
             .attr('class', 'button button-toggle-tiles')
             .on('click', function() {
-                d3.event.preventDefault();
+                d3_event.preventDefault();
                 context.setDebug('tile', !context.getDebug('tile'));
                 selection.call(redraw);
             });
     }
 
 
-    var debouncedGetVintage = _.debounce(getVintage, 250);
-    function getVintage(selection) {
-        var tile = d3.select('.layer-background img.tile-center');   // tile near viewport center
+    var debouncedGetMetadata = _debounce(getMetadata, 250);
+
+    function getMetadata(selection) {
+        var tile = d3_select('.layer-background img.tile-center');   // tile near viewport center
         if (tile.empty()) return;
 
-        var d = tile.datum(),
+        var sourceName = currSourceName,
+            d = tile.datum(),
             zoom = (d && d.length >= 3 && d[2]) || Math.floor(context.map().zoom()),
             center = context.map().center();
 
-        currZoom = String(zoom);
-        selection.selectAll('.zoom')
-            .text(currZoom);
+        // update zoom
+        metadata.zoom = String(zoom);
+        selection.selectAll('.background-info-list-zoom')
+            .classed('hide', false)
+            .selectAll('.background-info-span-zoom')
+            .text(metadata.zoom);
 
         if (!d || !d.length >= 3) return;
-        background.baseLayerSource().getVintage(center, d, function(err, result) {
-            currVintage = (result && result.range) || t('info_panels.background.unknown');
-            selection.selectAll('.vintage')
-                .text(currVintage);
+
+        background.baseLayerSource().getMetadata(center, d, function(err, result) {
+            if (err || currSourceName !== sourceName) return;
+
+            // update vintage
+            var vintage = result.vintage;
+            metadata.vintage = (vintage && vintage.range) || t('info_panels.background.unknown');
+            selection.selectAll('.background-info-list-vintage')
+                .classed('hide', false)
+                .selectAll('.background-info-span-vintage')
+                .text(metadata.vintage);
+
+            // update other metdata
+            _without(metadataKeys, 'zoom', 'vintage')
+                .forEach(function(k) {
+                    var val = result[k];
+                    metadata[k] = val;
+                    selection.selectAll('.background-info-list-' + k)
+                        .classed('hide', !val)
+                        .selectAll('.background-info-span-' + k)
+                        .text(val);
+                });
         });
     }
 
@@ -87,10 +113,10 @@ export function uiPanelBackground(context) {
 
         context.map()
             .on('drawn.info-background', function() {
-                selection.call(redraw);
+                selection.call(debouncedRedraw);
             })
             .on('move.info-background', function() {
-                selection.call(debouncedGetVintage);
+                selection.call(debouncedGetMetadata);
             });
 
     };

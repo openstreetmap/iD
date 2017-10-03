@@ -21,7 +21,8 @@
         "addr:state",
         "addr:street",
         "addr:subdistrict",
-        "addr:suburb"
+        "addr:suburb",
+        "addr:unit"
     ],
     "reference": {"key": "addr"},
     "icon": "address",
@@ -58,7 +59,8 @@
           "subdistrict": "Subdistrict",
           "subdistrict!vn": "Ward/Commune/Townlet",
           "suburb": "Suburb",
-          "suburb!jp": "Ward"
+          "suburb!jp": "Ward",
+          "unit": "Unit"
         }
     }
 }

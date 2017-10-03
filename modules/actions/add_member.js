@@ -1,4 +1,4 @@
-import { osmJoinWays } from '../osm/index';
+import { osmJoinWays } from '../osm';
 
 
 export function actionAddMember(relationId, member, memberIndex) {

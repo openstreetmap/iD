@@ -1,0 +1,24 @@
+{
+    "icon": "poi-tower",
+    "fields": [
+        "name",
+        "operator",
+        "height",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "theme park",
+        "amusement ride",
+        "gondola",
+        "tower",
+        "big drop"
+    ],
+    "tags": {
+        "attraction": "drop_tower"
+    },
+    "name": "Drop Tower"
+}

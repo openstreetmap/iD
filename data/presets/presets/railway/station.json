@@ -1,6 +1,7 @@
 {
     "icon": "rail",
     "fields": [
+        "name",
         "network",
         "operator",
         "address",

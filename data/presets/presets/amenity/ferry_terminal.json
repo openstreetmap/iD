@@ -1,6 +1,7 @@
 {
     "icon": "ferry",
     "fields": [
+        "name",
         "network",
         "operator",
         "address",

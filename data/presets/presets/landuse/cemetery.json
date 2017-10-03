@@ -1,6 +1,7 @@
 {
     "icon": "cemetery",
     "fields": [
+        "name",
         "religion",
         "denomination"
     ],

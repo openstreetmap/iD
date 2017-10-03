@@ -1,6 +1,7 @@
 {
     "icon": "gaming",
     "fields": [
+        "name",
         "operator",
         "address",
         "building_area",

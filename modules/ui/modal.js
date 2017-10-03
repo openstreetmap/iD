@@ -1,10 +1,15 @@
-import * as d3 from 'd3';
-import { d3keybinding } from '../lib/d3.keybinding.js';
-import { svgIcon } from '../svg/index';
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+
+import { svgIcon } from '../svg';
 
 
 export function uiModal(selection, blocking) {
-    var keybinding = d3keybinding('modal');
+    var keybinding = d3_keybinding('modal');
     var previous = selection.select('div.modal');
     var animate = previous.empty();
 
@@ -40,7 +45,7 @@ export function uiModal(selection, blocking) {
 
     if (!blocking) {
         shaded.on('click.remove-modal', function() {
-            if (d3.event.target === this) {
+            if (d3_event.target === this) {
                 shaded.close();
             }
         });
@@ -54,7 +59,7 @@ export function uiModal(selection, blocking) {
             .on('⌫', shaded.close)
             .on('⎋', shaded.close);
 
-        d3.select(document)
+        d3_select(document)
             .call(keybinding);
     }
 
