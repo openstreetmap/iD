@@ -15,7 +15,6 @@ import { uiRawTagEditor } from './raw_tag_editor';
 import { utilDetect } from '../util/detect';
 import { utilRebind } from '../util';
 
-
 var changeset;
 var readOnlyTags = [
     /^changesets_count$/,
@@ -26,7 +25,6 @@ var readOnlyTags = [
     /^locale$/,
     /^source$/
 ];
-
 
 export function uiCommit(context) {
     var dispatch = d3_dispatch('cancel', 'save'),
@@ -40,28 +38,14 @@ export function uiCommit(context) {
     var commitChanges = uiCommitChanges(context);
     var commitWarnings = uiCommitWarnings(context);
 
-    // if a GeoService was imported, pass the source url through,
-    // along with mandatory, user editable field for the import discussion
-    if (context.history().source() ){
-        tags.source = context.history().source();
-        tags.import_discussion = '';
-    }
-
-    changeset = new osmChangeset({ tags: tags });
-
     function commit(selection) {
         _selection = selection;
 
         var osm = context.connection();
         if (!osm) return;
 
-        var changes = context.history().changes(),
-            summary = context.history().difference().summary(),
-            rawTagEditor = uiRawTagEditor(context).on('change', changeTags),
-            comment = context.storage('comment') || '',
-            importDiscussion = context.storage('importDiscussion') || '',
-            // expire stored comment and hashtags after cutoff datetime - #3947
-            commentDate = +context.storage('commentDate') || 0,
+        // expire stored comment and hashtags after cutoff datetime - #3947
+        var commentDate = +context.storage('commentDate') || 0,
             currDate = Date.now(),
             cutoff = 2 * 86400 * 1000;   // 2 days
         if (commentDate > currDate || currDate - commentDate > cutoff) {
@@ -69,81 +53,6 @@ export function uiCommit(context) {
             context.storage('hashtags', null);
         }
 
-        selection
-            .append('div')
-            .attr('class', 'header fillL')
-            .append('h3')
-            .text(t('commit.title'));
-
-        var body = selection
-            .append('div')
-            .attr('class', 'body');
-
-        var commentSection = body
-            .append('div')
-            .attr('class', 'modal-section form-field commit-form');
-
-        commentSection
-            .append('label')
-            .attr('class', 'form-label')
-            .text(t('commit.message_label'));
-
-        var commentField = commentSection
-            .append('textarea')
-            .attr('class', 'commit-form-comment')
-            .attr('placeholder', t('commit.description_placeholder'))
-            .attr('maxlength', 255)
-            .property('value', comment)
-            .on('input.save', change(true))
-            .on('change.save', change())
-            .on('blur.save', function() {
-                context.storage('comment', this.value);
-                context.storage('commentDate', Date.now());
-            });
-
-
-        commentField.node().select();
-
-        if (tags.source) {
-            var discussionSection = body
-            .append('div')
-            .attr('class', 'modal-section form-field commit-form');
-
-            discussionSection
-                .append('label')
-                .attr('class', 'form-label')
-                .text('Import Discussion');
-
-            var discussionField = discussionSection
-                .append('textarea')
-                .attr('class', 'commit-form-comment')
-                .attr('placeholder', 'imports@openstreetmap.org discussion thread (required)')
-                .attr('maxlength', 255)
-                .property('value', importDiscussion)
-                .on('input.save', change(true))
-                .on('change.save', change())
-                .on('blur.save', function() {
-                    context.storage('importDiscussion', this.value);
-                });
-        }
-
-        context.connection().userChangesets(function (err, changesets) {
-            if (err) return;
-
-            var comments = changesets.map(function(changeset) {
-                return {
-                    title: changeset.tags.comment,
-                    value: changeset.tags.comment
-                };
-            });
-
-            commentField
-                .call(d3combobox()
-                    .container(context.container())
-                    .caseSensitive(true)
-                    .data(_.uniqBy(comments, 'title'))
-                );
-        });
         var tags;
         if (!changeset) {
             var detected = utilDetect();
@@ -154,6 +63,13 @@ export function uiCommit(context) {
                 host: detected.host.substr(0, 255),
                 locale: detected.locale.substr(0, 255)
             };
+
+            /* if a GeoService was imported, pass the source url through,
+            along with mandatory, user editable field for the import discussion */
+            if (context.history().source()) {
+                tags.source = context.history().source();
+                tags.import_discussion = '';
+            }
 
             // call findHashtags initially - this will remove stored
             // hashtags if any hashtags are found in the comment - #4304
@@ -421,21 +337,6 @@ export function uiCommit(context) {
         rr = rr.trim().toLowerCase();
         return !(rr === '' || rr === 'no');
     }
-
-    var changeset = updateChangeset({ comment: comment });
-
-    if (discussionField) {
-        var discussion = discussionField.property('value').trim();
-        if (!onInput) {
-            discussionField.property('value', discussion);
-        }
-
-        checkComment(discussion);
-
-        var changeset = updateChangeset({ import_discussion: discussion });
-    }
-
-    var expanded = !tagSection.selectAll('a.hide-toggle.expanded').empty();
 
     function updateChangeset(changed, onInput) {
         var tags = _clone(changeset.tags);

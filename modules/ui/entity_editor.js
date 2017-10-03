@@ -8,7 +8,8 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import {
     event as d3_event,
-    selectAll as d3_selectAll
+    selectAll as d3_selectAll,
+    select as d3_select
 } from 'd3-selection';
 
 import { t, textDirection } from '../util/locale';
@@ -102,7 +103,7 @@ export function uiEntityEditor(context) {
                 this.focusEntity.approvedForEdit = 'approved';
                 context.history().on('change.save')();
                 // apply a CSS class to any point / line / polygon approved
-                d3.selectAll('.layer-osm .' + this.focusEntity.id)
+                d3_selectAll('.layer-osm .' + this.focusEntity.id)
                     .classed('import-approved', true)
                     .classed('import-edited', false)
                     .classed('import-rejected', false);
@@ -118,11 +119,11 @@ export function uiEntityEditor(context) {
                         actionChangeTags(this.focusEntity.id, this.focusEntity.importOriginal),
                         'merged import item tags'
                     );
-                    d3.selectAll('.layer-osm .' + this.focusEntity.id).classed('import-edited', false);
+                    d3_selectAll('.layer-osm .' + this.focusEntity.id).classed('import-edited', false);
                 } else {
                     // show object red for rejected
                     this.focusEntity.approvedForEdit = 'rejected';
-                    d3.selectAll('.layer-osm .' + this.focusEntity.id)
+                    d3_selectAll('.layer-osm .' + this.focusEntity.id)
                         .classed('import-approved', false)
                         .classed('import-edited', false)
                         .classed('import-rejected', true);
@@ -132,7 +133,7 @@ export function uiEntityEditor(context) {
             }).bind(this));
 
         // show import approval section?
-        d3.selectAll('.import-approve').classed('hide', (!entity.approvedForEdit) || (entity.approvedForEdit === 'approved') || (d3.select('input[name="approvalProcess"]:checked').property('value') === 'all'));
+        d3_selectAll('.import-approve').classed('hide', (!entity.approvedForEdit) || (entity.approvedForEdit === 'approved') || (d3_select('input[name="approvalProcess"]:checked').property('value') === 'all'));
 
         enter
             .append('div')

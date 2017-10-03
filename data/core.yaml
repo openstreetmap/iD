@@ -826,7 +826,7 @@ en:
     geoservices: |
       # GeoServices
 
-      The GeoService tool allows you to fetch live JSON from ArcGIS Open Data](https://hub.arcgis.com/pages/open-data)) and verify the accuracy of individual features before importing them into OpenStreetMap.
+      The GeoService tool allows you to fetch live JSON from [ArcGIS Open Data](https://hub.arcgis.com/pages/open-data)and verify the accuracy of individual features before importing them into OpenStreetMap.
 
       ### Import/Guidelines
 

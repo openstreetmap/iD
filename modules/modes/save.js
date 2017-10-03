@@ -47,10 +47,10 @@ export function modeSave(context) {
         id: 'save'
     };
 
-    if (d3.select('input[name="approvalProcess"]:checked').property('value') === 'individual') {
+    if (d3_select('input[name="approvalProcess"]:checked').property('value') === 'individual') {
         // when clicking the save button, filter out entities which were not approved manually
         var deletions = [];
-        _.map(window.importedEntities, function(entity) {
+        _map(window.importedEntities, function(entity) {
             try {
                 if ((entity.approvedForEdit !== 'approved' && entity.approvedForEdit !== 'unchanged') && context.entity(entity.id)) {
                     deletions.push(entity.id);
