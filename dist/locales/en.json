@@ -1389,6 +1389,14 @@
                 "craft": {
                     "label": "Type"
                 },
+                "crane_type": {
+                    "label": "Crane Type",
+                    "options": {
+                        "portal_crane": "Portal crane",
+                        "floor-mounted_crane": "Floor-mounted crane",
+                        "travel_lift": "Travel Lift"
+                    }
+                },
                 "crop": {
                     "label": "Crops"
                 },
@@ -4212,6 +4220,10 @@
                 },
                 "man_made/chimney": {
                     "name": "Chimney",
+                    "terms": ""
+                },
+                "man_made/crane": {
+                    "name": "Crane",
                     "terms": ""
                 },
                 "man_made/cutline": {

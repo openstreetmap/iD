@@ -365,6 +365,16 @@ en:
       craft:
         # craft=*
         label: Type
+      crane_type:
+        # 'crane:type=*'
+        label: Crane Type
+        options:
+          # 'crane:type=floor-mounted_crane'
+          floor-mounted_crane: Floor-mounted crane
+          # 'crane:type=portal_crane'
+          portal_crane: Portal crane
+          # 'crane:type=travel_lift'
+          travel_lift: Travel Lift
       crop:
         # crop=*
         label: Crops
@@ -3558,6 +3568,10 @@ en:
         # man_made=chimney
         name: Chimney
         terms: '<translate with synonyms or related terms for ''Chimney'', separated by commas>'
+      man_made/crane:
+        # man_made=crane
+        name: Crane
+        terms: '<translate with synonyms or related terms for ''Crane'', separated by commas>'
       man_made/cutline:
         # man_made=cutline
         name: Cut line

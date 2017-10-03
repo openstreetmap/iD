@@ -9791,6 +9791,22 @@
             },
             "name": "Chimney"
         },
+        "man_made/crane": {
+            "fields": [
+                "operator",
+                "height",
+                "crane_type"
+            ],
+            "geometry": [
+                "point",
+                "line",
+                "area"
+            ],
+            "tags": {
+                "man_made": "crane"
+            },
+            "name": "Crane"
+        },
         "man_made/cutline": {
             "geometry": [
                 "line"

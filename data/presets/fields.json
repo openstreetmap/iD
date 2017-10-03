@@ -472,6 +472,18 @@
             "type": "typeCombo",
             "label": "Type"
         },
+        "crane_type": {
+            "key": "crane:type",
+            "type": "combo",
+            "label": "Crane Type",
+            "strings": {
+                "options": {
+                    "portal_crane": "Portal crane",
+                    "floor-mounted_crane": "Floor-mounted crane",
+                    "travel_lift": "Travel Lift"
+                }
+            }
+        },
         "crop": {
             "key": "crop",
             "type": "semiCombo",

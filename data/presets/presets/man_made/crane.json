@@ -1,0 +1,16 @@
+{
+    "fields": [
+        "operator",
+        "height",
+        "crane_type"
+    ],
+    "geometry": [
+        "point",
+        "line",
+        "area"
+    ],
+    "tags": {
+        "man_made": "crane"
+    },
+    "name": "Crane"
+}
