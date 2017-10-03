@@ -2530,9 +2530,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Clockmaker'', separated by commas>'
       craft/confectionery:
         # craft=confectionery
-        name: Confectionery
-        # 'terms: sweets,candy'
-        terms: '<translate with synonyms or related terms for ''Confectionery'', separated by commas>'
+        name: Candy Maker
+        # 'terms: sweet,candy'
+        terms: '<translate with synonyms or related terms for ''Candy Maker'', separated by commas>'
       craft/distillery:
         # craft=distillery
         name: Distillery
@@ -4352,6 +4352,7 @@ en:
       shop/confectionery:
         # shop=confectionery
         name: Candy Store
+        # 'terms: sweet'
         terms: '<translate with synonyms or related terms for ''Candy Store'', separated by commas>'
       shop/convenience:
         # shop=convenience

@@ -3307,8 +3307,8 @@
                     "terms": ""
                 },
                 "craft/confectionery": {
-                    "name": "Confectionery",
-                    "terms": "sweets,candy"
+                    "name": "Candy Maker",
+                    "terms": "sweet,candy"
                 },
                 "craft/distillery": {
                     "name": "Distillery",
@@ -4928,7 +4928,7 @@
                 },
                 "shop/confectionery": {
                     "name": "Candy Store",
-                    "terms": ""
+                    "terms": "sweet"
                 },
                 "shop/convenience": {
                     "name": "Convenience Store",
