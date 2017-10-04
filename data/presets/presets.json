@@ -9795,7 +9795,7 @@
             "fields": [
                 "operator",
                 "height",
-                "crane_type"
+                "crane/type"
             ],
             "geometry": [
                 "point",

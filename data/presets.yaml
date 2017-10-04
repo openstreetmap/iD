@@ -365,14 +365,14 @@ en:
       craft:
         # craft=*
         label: Type
-      crane_type:
+      crane/type:
         # 'crane:type=*'
         label: Crane Type
         options:
           # 'crane:type=floor-mounted_crane'
-          floor-mounted_crane: Floor-mounted crane
+          floor-mounted_crane: Floor-mounted Crane
           # 'crane:type=portal_crane'
-          portal_crane: Portal crane
+          portal_crane: Portal Crane
           # 'crane:type=travel_lift'
           travel_lift: Travel Lift
       crop:
