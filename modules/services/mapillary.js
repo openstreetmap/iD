@@ -43,8 +43,7 @@ var apibase = 'https://a.mapillary.com/v3/',
     mapillarySignSprite,
     mapillaryViewer;
 
-export const sequenceCache = new Map();
-window.sequenceCache = sequenceCache;
+export var sequenceCache = new Map();
 
 function abortRequest(i) {
     i.abort();
@@ -295,7 +294,6 @@ function searchLimited(psize, limit, projection, rtree) {
 export default {
 
     init: function() {
-        window.mapi = this;
         if (!mapillaryCache) {
             this.reset();
         }
