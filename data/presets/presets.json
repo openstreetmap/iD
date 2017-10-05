@@ -7385,7 +7385,8 @@
         "highway/speed_camera": {
             "icon": "attraction",
             "geometry": [
-                "point"
+                "point",
+                "vertex"
             ],
             "fields": [
                 "ref"
@@ -10015,7 +10016,8 @@
         "man_made/surveillance_camera": {
             "icon": "attraction",
             "geometry": [
-                "point"
+                "point",
+                "vertex"
             ],
             "fields": [
                 "surveillance",
@@ -10049,7 +10051,8 @@
         "man_made/surveillance": {
             "icon": "attraction",
             "geometry": [
-                "point"
+                "point",
+                "vertex"
             ],
             "fields": [
                 "surveillance",
