@@ -1592,7 +1592,7 @@
                     "label": "Handrail"
                 },
                 "hashtags": {
-                    "label": "Hashtags",
+                    "label": "Suggested Hashtags",
                     "placeholder": "#example"
                 },
                 "healthcare": {
