@@ -9793,6 +9793,7 @@
             "name": "Chimney"
         },
         "man_made/crane": {
+            "icon": "poi-crane",
             "fields": [
                 "operator",
                 "height",
