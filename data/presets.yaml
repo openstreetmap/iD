@@ -535,6 +535,9 @@ en:
           underground: Underground
           # 'fire_hydrant:type=wall'
           wall: Wall
+      fitness_station_type:
+        # fitness_station=*
+        label: Fitness Station Type
       fixme:
         # fixme=*
         label: Fix Me

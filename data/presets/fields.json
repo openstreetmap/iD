@@ -723,6 +723,11 @@
                 }
             }
         },
+        "fitness_station_type": {
+            "key": "fitness_station",
+            "type": "combo",
+            "label": "Fitness Station Type"
+        },
         "fixme": {
             "key": "fixme",
             "type": "textarea",

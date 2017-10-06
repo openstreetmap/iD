@@ -1543,6 +1543,9 @@
                         "pond": "Pond"
                     }
                 },
+                "fitness_station_type": {
+                    "label": "Fitness Station Type"
+                },
                 "fixme": {
                     "label": "Fix Me"
                 },
