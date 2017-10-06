@@ -83,8 +83,16 @@ export function uiIntro(context) {
         context.history().reset();
         context.history().merge(_values(coreGraph().load(introGraph).entities));
         context.history().checkpoint('initial');
-        context.background().bing();
-        overlays.forEach(function (d) { context.background().toggleOverlayLayer(d); });
+
+        var esri = context.background().findSource('EsriWorldImagery');
+        if (esri) {
+            context.background().baseLayerSource(esri);
+        } else {
+            context.background().bing();
+        }
+        overlays.forEach(function (d) {
+            context.background().toggleOverlayLayer(d);
+        });
 
         // Mock geocoder
         services.geocoder.countryCode = function(location, callback) {
