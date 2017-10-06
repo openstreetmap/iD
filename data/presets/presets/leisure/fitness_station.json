@@ -3,7 +3,6 @@
     "fields": [
         "name",
         "fitness_station_type",
-        "address",
         "opening_hours"
     ],
     "geometry": [
