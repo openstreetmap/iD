@@ -9802,6 +9802,7 @@
             "geometry": [
                 "point",
                 "line",
+                "vertex",
                 "area"
             ],
             "tags": {

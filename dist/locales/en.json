@@ -5632,10 +5632,6 @@
                 "description": "Satellite and aerial imagery.",
                 "name": "Mapbox Satellite"
             },
-            "New_and_Misaligned_TIGER_Roads-2013": {
-                "description": "At zoom level 16+, public domain map data from the US Census. At lower zooms, only changes since 2006 minus changes already incorporated into OpenStreetMap",
-                "name": "New & Misaligned TIGER Roads"
-            },
             "OSM_Inspector-Addresses": {
                 "attribution": {
                     "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
@@ -5677,6 +5673,17 @@
                     "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
                 },
                 "name": "OSM Inspector: Tagging"
+            },
+            "US-TIGER-Roads-2012": {
+                "name": "TIGER Roads 2012"
+            },
+            "US-TIGER-Roads-2014": {
+                "description": "At zoom level 16+, public domain map data from the US Census. At lower zooms, only changes since 2006 minus changes already incorporated into OpenStreetMap",
+                "name": "TIGER Roads 2014"
+            },
+            "US-TIGER-Roads-2017": {
+                "description": "Yellow = Public domain map data from the US Census. Red = Data not found in OpenStreetMap",
+                "name": "TIGER Roads 2017"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
