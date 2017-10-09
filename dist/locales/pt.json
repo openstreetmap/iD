@@ -2272,6 +2272,9 @@
                     },
                     "placeholder": "Sólido, intermédio, macio..."
                 },
+                "trade": {
+                    "label": "Tipo"
+                },
                 "traffic_calming": {
                     "label": "Tipo"
                 },
@@ -4573,10 +4576,6 @@
                     "name": "Barra Fixa Horizontal",
                     "terms": "Barra Horizontal"
                 },
-                "playground/rocker": {
-                    "name": "Cavalo de Mola",
-                    "terms": "Mola"
-                },
                 "playground/roundabout": {
                     "name": "Gira-Gira",
                     "terms": "Girar"
@@ -5187,6 +5186,10 @@
                     "name": "Bilheteira",
                     "terms": "Ticket Seller, Bilheteria, Bilhete, Ingresso"
                 },
+                "shop/tiles": {
+                    "name": "Loja de telhas",
+                    "terms": "<translate with synonyms or related terms for 'Tile Shop', separated by commas>"
+                },
                 "shop/tobacco": {
                     "name": "Tabacaria",
                     "terms": "Tobacco Shop, Loja de Tabaco, Cachimbo, Cigarrilha, Tabaco"
@@ -5194,6 +5197,10 @@
                 "shop/toys": {
                     "name": "Loja de brinquedos",
                     "terms": "Loja de Brinquedos"
+                },
+                "shop/trade": {
+                    "name": "Loja de Trocas",
+                    "terms": "<translate with synonyms or related terms for 'Trade Shop', separated by commas>"
                 },
                 "shop/travel_agency": {
                     "name": "Agência de viagens",

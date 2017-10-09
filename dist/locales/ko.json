@@ -2707,6 +2707,9 @@
                     "name": "학교 부지",
                     "terms": "학교 부지"
                 },
+                "amenity/scrapyard": {
+                    "name": "폐차장"
+                },
                 "amenity/shelter": {
                     "name": "대피소",
                     "terms": "대피소, 피난소"
@@ -3402,9 +3405,37 @@
                     "name": "워터 해저드",
                     "terms": "워터 해저드"
                 },
+                "healthcare": {
+                    "name": "의료 시설"
+                },
+                "healthcare/alternative": {
+                    "name": "대체의학"
+                },
+                "healthcare/alternative/chiropractic": {
+                    "name": "카이로프랙틱"
+                },
+                "healthcare/audiologist": {
+                    "name": "청능사"
+                },
                 "healthcare/blood_donation": {
                     "name": "헌혈의 집",
                     "terms": "헌혈의 집, 헌혈 센터"
+                },
+                "healthcare/hospice": {
+                    "name": "호스피스"
+                },
+                "healthcare/midwife": {
+                    "name": "조산사",
+                    "terms": "산파"
+                },
+                "healthcare/optometrist": {
+                    "name": "검안사"
+                },
+                "healthcare/physiotherapist": {
+                    "name": "물리치료사"
+                },
+                "healthcare/speech_therapist": {
+                    "name": "언어치료사"
                 },
                 "highway": {
                     "name": "도로"
@@ -3988,6 +4019,9 @@
                     "name": "굴뚝",
                     "terms": "굴뚝"
                 },
+                "man_made/crane": {
+                    "name": "크레인"
+                },
                 "man_made/cutline": {
                     "name": "숲 경계선",
                     "terms": "숲 경계선"
@@ -4350,6 +4384,27 @@
                 "place/village": {
                     "name": "촌",
                     "terms": "촌"
+                },
+                "playground/balance_beam": {
+                    "name": "평균대"
+                },
+                "playground/climbing_frame": {
+                    "name": "정글짐"
+                },
+                "playground/horizontal_bar": {
+                    "name": "철봉"
+                },
+                "playground/sandpit": {
+                    "name": "모래밭"
+                },
+                "playground/seesaw": {
+                    "name": "시소"
+                },
+                "playground/slide": {
+                    "name": "미끄럼틀"
+                },
+                "playground/swing": {
+                    "name": "그네"
                 },
                 "point": {
                     "name": "점",

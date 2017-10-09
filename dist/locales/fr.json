@@ -4504,9 +4504,6 @@
                 "playground/horizontal_bar": {
                     "name": "Barre fixe"
                 },
-                "playground/rocker": {
-                    "name": "Cheval à ressort"
-                },
                 "playground/roundabout": {
                     "name": "Tourniquet"
                 },
@@ -5107,6 +5104,10 @@
                     "name": "Boutique de vente de billets",
                     "terms": "Boutique de vente de billets,Billetterie"
                 },
+                "shop/tiles": {
+                    "name": "Magasin de carrelage",
+                    "terms": "carrelage,dalle de sol,faïence"
+                },
                 "shop/tobacco": {
                     "name": "Bureau de tabac",
                     "terms": "Buraliste"
@@ -5114,6 +5115,10 @@
                 "shop/toys": {
                     "name": "Magasin de jouets",
                     "terms": "Magasin de jouets"
+                },
+                "shop/trade": {
+                    "name": "Grossiste",
+                    "terms": "Grossiste"
                 },
                 "shop/travel_agency": {
                     "name": "Agence de voyages",

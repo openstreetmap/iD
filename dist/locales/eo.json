@@ -2270,6 +2270,9 @@
                     },
                     "placeholder": "Firma, plejparte firma, mola…"
                 },
+                "trade": {
+                    "label": "Varoj"
+                },
                 "traffic_calming": {
                     "label": "Speco"
                 },
@@ -4573,7 +4576,7 @@
                 },
                 "playground/rocker": {
                     "name": "Balancilo risorta",
-                    "terms": "ĉevaleto"
+                    "terms": "ĉevaleto,risorto"
                 },
                 "playground/roundabout": {
                     "name": "Karuseleto (infanludilo)",
@@ -5185,6 +5188,10 @@
                     "name": "Biletejo",
                     "terms": "biletoj,biletvendejo"
                 },
+                "shop/tiles": {
+                    "name": "Kahela vendejo",
+                    "terms": "kaheloj,kahelaro,planko,platoj"
+                },
                 "shop/tobacco": {
                     "name": "Tabaka vendejo",
                     "terms": "tabako,cigaredoj,cigaroj"
@@ -5192,6 +5199,10 @@
                 "shop/toys": {
                     "name": "Ludila vendejo",
                     "terms": "ludiloj,ludilvendejo,amuziloj,infanoj"
+                },
+                "shop/trade": {
+                    "name": "Pogranda vendejo",
+                    "terms": "staplo,magazeno,vendejego"
                 },
                 "shop/travel_agency": {
                     "name": "Vojaĝa oficejo",

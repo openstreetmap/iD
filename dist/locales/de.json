@@ -494,7 +494,7 @@
         "feature": {
             "points": {
                 "description": "Punkte",
-                "tooltip": "Point of Interest"
+                "tooltip": "Sehenswürdigkeit"
             },
             "traffic_roads": {
                 "description": "Hauptstraßen",
@@ -672,7 +672,7 @@
             "title": "Hilfe",
             "key": "H",
             "help": "#Hilfe\n\nDies ist der iD Editor für [OpenStreetMap](http://www.openstreetmap.org/), der freien und bearbeitbaren Weltkarte. Du kannst ihn verwenden, um Daten in deiner Umgebung hinzuzufügen oder zu verbessern und so diese Karte mit freien Quellen und freien Daten für jeden verbessern.\n\nDeine Bearbeitungen werden für alle Nutzer von OpenStreetMap sichtbar. Um Bearbeitungen vornehmen zu können, musst du [einloggen](https://www.openstreetmap.org/login).\n\nDer [iD Editor](http://ideditor.com/) ist ein Gemeinschaftsprojekt, dessen [Quellcode auf GitHub](https://github.com/openstreetmap/iD) verfügbar ist.\n",
-            "editing_saving": "# Bearbeiten & Speichern\n\nDieser Editor ist gedacht um hauptsächlich online zu arbeiten und du verwendest ihn gerade auf einer Webseite.\n\n### Objekte auswählen\n\nUm ein Objekt wie eine Straße oder einen interessanten Punkt auszuwählen, klicke dieses auf der Karte an. Dadurch wird das Objekt hervorgehoben und es werden links in der Seitenleiste die Objektdetails angezeigt. Durch Rechtsklicken auf das Objekt bekommst du das Bearbeitungsmenu für das Objekt.\n\nMehrere Objekte kannst du auswählen, indem du die Shift-Taste gedrückt hältst. Dann klicke entweder einzeln auf die gewünschten Objekte oder ziehe mit der Maus einen Rahmen auf, damit die Punkte im Rahmen ausgewählt werden.\n\n### Speichern der Änderungen\n\nWenn du Straßen, Gebäude, oder Plätze bearbeitet hast, dann sind deine Änderungen nur lokal gespeichert, bis du sie zum Server hochlädst. Mach dir keine Sorge wegen Fehler: Du kannst Änderungen jederzeit mit dem Rückgängig-Knopf rückgängig machen oder über den Wiederherstellen-Knopf wiederherstellen.\n\nKlicke auf „Speichern“, um eine Gruppe von Änderungen abzuschließen, beispielsweise wenn du in einem Gebiet fertig bist und woanders weiter arbeiten willst. Du bekommst dann die Liste der Änderungen und manchmal auch nützliche Warnungen angezeigt, wenn etwas falsch sein könnte. Du kannst dann überprüfen, was du gerade geändert hast.\n\nWenn alles gut aussieht, solltest du einen kurzen Kommentar schreiben, der deine Änderungen erklärt. Klicke dann auf \"Hochladen“, um die Änderungen auf [OpenStreetMap.org](http://www.openstreetmap.org/) zu speichern, dort werden sie für alle anderen Benutzer sichtbar und diese können darauf aufbauen.\n\nWenn du deine Änderungen in einer Sitzung nicht fertigstellen kann, schließe einfach den Browser-Tab. Wenn du die Seite wieder öffnest (mit dem gleichen Rechner und Browser) wird dir angeboten, deine Änderungen wiederherzustellen.\n\n### Benutzung des Editors\n\nDu kannst die Liste der Tastenkürzel mit dem '?'-Knopf ansehen.\n",
+            "editing_saving": "# Bearbeiten & Speichern\n\nDieser Editor ist gedacht um hauptsächlich online zu arbeiten und du verwendest ihn gerade auf einer Webseite.\n\n### Objekte auswählen\n\nUm ein Objekt wie eine Straße oder eine Sehenswürdigkeit auszuwählen, klicke dieses auf der Karte an. Dadurch wird das Objekt hervorgehoben und es werden links in der Seitenleiste die Objektdetails angezeigt. Durch Rechtsklicken auf das Objekt bekommst du das Bearbeitungsmenu für das Objekt.\n\nMehrere Objekte kannst du auswählen, indem du die Shift-Taste gedrückt hältst. Dann klicke entweder einzeln auf die gewünschten Objekte oder ziehe mit der Maus einen Rahmen auf, damit die Punkte im Rahmen ausgewählt werden.\n\n### Speichern der Änderungen\n\nWenn du Straßen, Gebäude, oder Plätze bearbeitet hast, dann sind deine Änderungen nur lokal gespeichert, bis du sie zum Server hochlädst. Mach dir keine Sorge wegen Fehler: Du kannst Änderungen jederzeit mit dem Rückgängig-Knopf rückgängig machen oder über den Wiederherstellen-Knopf wiederherstellen.\n\nKlicke auf „Speichern“, um eine Gruppe von Änderungen abzuschließen, beispielsweise wenn du in einem Gebiet fertig bist und woanders weiter arbeiten willst. Du bekommst dann die Liste der Änderungen und manchmal auch nützliche Warnungen angezeigt, wenn etwas falsch sein könnte. Du kannst dann überprüfen, was du gerade geändert hast.\n\nWenn alles gut aussieht, solltest du einen kurzen Kommentar schreiben, der deine Änderungen erklärt. Klicke dann auf \"Hochladen“, um die Änderungen auf [OpenStreetMap.org](http://www.openstreetmap.org/) zu speichern, dort werden sie für alle anderen Benutzer sichtbar und diese können darauf aufbauen.\n\nWenn du deine Änderungen in einer Sitzung nicht fertigstellen kannst, schließe einfach den Browser-Tab. Wenn du die Seite wieder öffnest (mit dem gleichen Rechner und Browser) wird dir angeboten, deine Änderungen wiederherzustellen.\n\n### Benutzung des Editors\n\nDu kannst die Liste der Tastenkürzel mit dem '?'-Knopf ansehen.\n",
             "roads": "# Wege\n\nMit diesem Editor kannst du Wege erstellen, verbessern und löschen. Es gibt alle Arten von Wegen: Wanderwege, Straßen, Bürgersteige, Autobahnen, Eisenbahnschienen oder Fahrradwege; jeder oft benutzte Abschnitt sollte abbildbar sein.\n\n### Auswählen\n\nKlicke auf einen Weg um ihn auszuwählen. Er wird dann hervorgehoben und und es werden links in der Seitenleiste die Wegdetails angezeigt. Durch Rechtsklicken auf den Weg bekommst du das Bearbeitungsmenu für den Weg.\n\n### Verbessern\n\nOft sieht man, dass Wege nicht mit dem Bildmaterial oder einer GPS-Spur übereinstimmen. Du kannst den Weg so anpassen, dass er an der richtigen Stelle ist.\n\nZuerst klickst du auf den Weg den du ändern willst. Dieser wird nun hervorgehoben und es werden die Knoten und Kontrollpunkte des Weges angezeigt. Diese kannst du an die richtigen Stelle verschieben. Wenn du neue Knoten hinzufügen möchtest, klicke doppelt zwischen den Knoten auf die Linie und es wird ein neuer Knoten erzeugt. Du kannst auch einen Dreiecks-Pfeil auf der Linie anklicken und verschieben.\n\nWenn zwei Wege in Wirklichkeit mit einander verbunden sind, aber auf der Karte nicht, kannst du sie verbinden, indem du einen Knoten des einen Weges auf den anderen Weg ziehst. Dass Wege verbunden sind, ist wichtig für die Karte und erforderlich für die Nutzung von Straßenroutern.\n\nDu kannst den Weg auch Rechtsklicken und das „Bewegen“-Werkzeug nutzen oder „M“ drücken, um den kompletten Weg zu verschieben. Beende die Aktion mit einem Klick.\n\n### Löschen\n\nWenn du weißt, dass ein Weg nicht existiert, kannst du ihn löschen, um ihn von der Karte zu entfernen. Sei beim Löschen von Objekten - wie immer beim Bearbeiten - vorsichtig, da die Ergebnisse von jedem gesehen werden können und die Satellitenbilder oft veraltet sind; der Weg wurde vielleicht einfach neu gebaut.\n\nDu kannst Wege löschen, indem du sie rechtsklickst und das Papierkorbsymbol auswählst oder die „Entfernen“-Taste drückst.\n\n### Erstellen\n\nDu kennst einen Weg, der nicht eingezeichnet ist? Dann klicke auf das „Linien“-Symbol oben links im Editor oder drücke die Taste „2“ und beginne mit dem Zeichnen einer Linie.\n\nKlicke dort hin, wo der Weg anfängt. Sollte er von einer bereits existierenden Straße abzweigen, klicke an der entsprechenden Stelle auf diese Straße.\n\nZeichne nun den Weg, indem du Knoten anhand des Bildmaterials oder der GPS-Spur entlang des Weges setzt. Sollte der Weg einen anderen kreuzen, klicke auf den Kreuzungspunkt, um beide Wege zu verbinden. Wenn du mit dem Zeichnen fertig bist, klicke doppelt oder drücke „Enter“ auf der Tastatur, um den Weg abzuschließen.\n",
             "gps": "# GPS\n\nGesammelte GPS-Tracks sind eine wertvolle Datenquelle für OpenStreetMap. Dieser Editor unterstützt lokale GPS-Tracks - `.gpx`-Dateien auf deinem Computer. Du kannst GPS-Tracks mit Hilfe von  zahlreichen Smartphone-Apps oder mit GPS-Geräten aufnehmen.\n\nFür Informationen über das Aufzeichnen von GPS-Daten kannst du dir folgende Anleitung durchlesen: [Kartierung mit Smartphone, GPS oder Papier](http://learnosm.org/de/mobile-mapping/)\n\nUm einen GPS-Track fürs Mapping zu verwenden, ziehe ihn einfach auf die Karte. Wenn er erkannt wurde, wird der Track als hell-lila Linie auf der Karte dargestellt.\nKlicke auf das Kartendaten-Menü rechts, um die neue Ebene mit dem Track zu aktivieren/deaktivieren oder zoome zum Gebiet des Tracks.\n\nDer GPS-Track wird nicht automatisch direkt zu OpenStreetMap hochgeladen. Am besten verwendest du ihn als Orientierung um neue Objekte zu zeichnen. Möchtest du den GPS-Track jedem zugänglich machen, kannst du ihn [nach OpenStreetMap hochladen](http://www.openstreetmap.org/trace/create)\n",
             "imagery": "# Bildmaterial\n\nHintergrundbilder sind eine wichtige Quelle für das Kartografieren. Eine Kombination aus Luftbildern von Flugzeugen, Satellitenbilder und freien Quellen sind im Editor über das Hintergrundeinstellungs-Menü auf der rechten Seite verfügbar.\n\nAls Standard sind die [Bing](http://www.bing.com/maps/)-Satellitenbilder ausgewählt. Je nach angezeigter Gegend werden dir verschiedene andere Quellen angezeigt. In einigen Länder wie Deutschland, Österreich, Schweiz oder den USA steht zum Teil sehr hochauflösendes Bildmaterial zur Verfügung.\n\nBildmaterial ist manchmal durch Fehler der Anbieter gegenüber den Kartendaten versetzt. Wenn du feststellst, dass viele Wege gegenüber dem Hintergrund versetzt sind, dann verschiebe nicht die Wege damit sie zum Hintergrund passen. Du kannst das Hintergrund-Bildmaterial verschieben, bis es zu den bestehenden Objekten passt. Um das Bildmaterial anzupassen, klicke auf „Bildmaterial-Versatz anpassen“ unten in den Hintergrundeinstellungen.\n",
@@ -2271,6 +2271,9 @@
                         "grade5": "Grad 5 - Weich: Erdboden/Sand/Gras/Bewuchs"
                     },
                     "placeholder": "Fest, Großenteils fest, Weich …"
+                },
+                "trade": {
+                    "label": "Typ"
                 },
                 "traffic_calming": {
                     "label": "Typ"
@@ -4574,8 +4577,8 @@
                     "terms": "Reckstange"
                 },
                 "playground/rocker": {
-                    "name": "Einzelwippe",
-                    "terms": "Einzelwippe, Spiralfedersitz"
+                    "name": "Springreiter",
+                    "terms": "Springreiter"
                 },
                 "playground/roundabout": {
                     "name": "Karussell",
@@ -5187,6 +5190,10 @@
                     "name": "Eintrittskartenverkäufer",
                     "terms": "Ticketoffice,Kartenbüro,Eintrittskartengeschäft"
                 },
+                "shop/tiles": {
+                    "name": "Fliesenhändler",
+                    "terms": "Fliesenhändler, Fliesengeschäft"
+                },
                 "shop/tobacco": {
                     "name": "Trafik",
                     "terms": "Traffik,Tabakwarengeschäft"
@@ -5194,6 +5201,10 @@
                 "shop/toys": {
                     "name": "Spielwarengeschäft",
                     "terms": "Spielwarengeschäft, Spielzeughandlung, Spielzeugladen, Spielzeuggeschäft"
+                },
+                "shop/trade": {
+                    "name": "Baustoffhandel",
+                    "terms": "Baustoffhandel, Baumarkt"
                 },
                 "shop/travel_agency": {
                     "name": "Reisebüro",

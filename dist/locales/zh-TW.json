@@ -4576,10 +4576,6 @@
                     "name": "單槓",
                     "terms": "<translate with synonyms or related terms for 'Horizontal Bar', separated by commas>"
                 },
-                "playground/rocker": {
-                    "name": "彈簧搖桿",
-                    "terms": "<translate with synonyms or related terms for 'Springy Rocker', separated by commas>"
-                },
                 "playground/roundabout": {
                     "name": "旋轉輪",
                     "terms": "<translate with synonyms or related terms for 'Play Roundabout', separated by commas>"
@@ -5201,6 +5197,10 @@
                 "shop/toys": {
                     "name": "玩具店",
                     "terms": "玩具店"
+                },
+                "shop/trade": {
+                    "name": "材料行",
+                    "terms": "材料行,供應商,貿易商"
                 },
                 "shop/travel_agency": {
                     "name": "旅行社",
