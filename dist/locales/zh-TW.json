@@ -334,6 +334,7 @@
             "save": "上傳",
             "cancel": "取消",
             "changes": "{count}  變動數",
+            "download_changes": "下載 osmChange 檔案",
             "warnings": "警告",
             "modified": "已修改",
             "deleted": "已刪除",
@@ -354,6 +355,10 @@
                 "title": "背景",
                 "zoom": "縮放",
                 "vintage": "年代",
+                "source": "來源",
+                "description": "描述",
+                "resolution": "解析度",
+                "accuracy": "準確度",
                 "unknown": "未知",
                 "show_tiles": "顯示圖磚",
                 "hide_tiles": "隱藏圖磚"
@@ -475,9 +480,16 @@
             "description": "地圖圖資",
             "key": "F",
             "data_layers": "資料圖層",
+            "layers": {
+                "osm": {
+                    "tooltip": "來自開放街圖的地圖資料",
+                    "title": "開放街圖資料"
+                }
+            },
             "fill_area": "填充選項",
             "map_features": "地圖圖徵",
-            "autohidden": "因為螢幕中的特徵太多，這些特徵已被自動隱藏。請放大再修編。"
+            "autohidden": "因為螢幕中的特徵太多，這些特徵已被自動隱藏。請放大再修編。",
+            "osmhidden": "因為開放街圖的圖層隱藏，所以這些圖徽已自動隱藏。"
         },
         "feature": {
             "points": {
@@ -568,7 +580,7 @@
                 "keep_remote": "使用他們的",
                 "restore": "復原",
                 "delete": "放棄資料",
-                "download_changes": "下載你做的變動",
+                "download_changes": "或下載 osmChange 檔案",
                 "done": "所有衝突已解決！",
                 "help": "另一個使用者變更了您變更的相同的某些圖徽。\n在每個圖徽下面點選以取得更多衝突的資訊，並選取要保留\n您的變更或是其他使用者的變更。\n"
             }
@@ -660,7 +672,7 @@
             "title": "說明文件",
             "key": "H",
             "help": "# 說明\n\n這是[開放街圖](http://www.openstreetmap.org/)的編輯器。\n開放街圖是自由及可編輯的世界地圖。您可以用這個編輯器來添加和更新您所在區域的地圖資料，令這個開源和開放資料的世界地圖變得更好。\n\n您在地圖上所做的編輯，將會讓所有使用開放街圖的人看到。為了編輯，您需要先[登入](https://www.openstreetmap.org/login)。\n\n[iD編輯器](http://ideditor.com/) 採用開源方式合作開發的專案， [原始碼可在GitHub找到](https://github.com/openstreetmap/iD)。\n",
-            "editing_saving": "# 編輯和儲存\n\n這個編輯器設計上主要為了在線上運作，現在你正透過網路連線。\n\n### 選擇圖徵\n\n要選擇圖徵，像是道路或是興趣點，請點一下地圖。\n這會高亮度顯示選擇的圖徵，並且開啟有詳細資訊的面版，\n顯示所有你能對圖徵做的動作。\n要選擇多個圖徵，你必須按住'Shift'鍵。\n接著按你想選擇的圖徵，或是拖拉地圖來畫出長方形。\n這樣做會畫出方框選擇所有在範圍裡的點。\n\n### 儲存編輯\n\n當你編輯道路、建築和地方等變動時，\n這些資料會儲存在本地空間，直到你上傳到伺服器。\n不要擔心你可能會犯錯，你可以按復原按鈕恢復變動，\n以及按重覆按鍵重覆動作。\n\n按'儲存'結束這一串編輯 - 舉例來說，\n如果你完成繪製城鎮裡的一區，想要開始畫新的一區。你有機會回顧先前你做的事情，而編輯器提供有用的建議，\n而且如果出錯時會警告。\n\n如果所有東西都看起來都好的時候，你可以輸入簡短的評論，解釋你的變動，\n接著再次按'儲存'輸出變動到[OpenStreetMap.org](http://www.openstreetmap.org/)，\n之後會讓大家都看得到，並且繼續繪製和改進。\n如果你無法在一次的時間裡完成編輯，你可以關係編輯器視窗，之後再回來 (相同瀏覽器和電腦)，\n編輯器程式會詢問你是否恢復你的工作。\n\n### 使用編輯器\n\n你可以按 `?`顯示鍵盤快速鍵清單。\n",
+            "editing_saving": "# 編輯和儲存\n\n這個編輯器設計上主要為了在線上運作，現在你正透過網路連線在網路上存取它。\n\n### 選擇圖徵\n\n要選擇圖徵，像是道路或是興趣點，請點一下地圖。\n這會高亮度顯示選擇的圖徵，並且開啟有詳細資訊的面版，\n顯示所有你能對圖徵做的動作。\n要選擇多個圖徵，你必須按住'Shift'鍵。\n接著按你想選擇的圖徵，或是拖拉地圖來畫出長方形。\n這樣做會畫出方框選擇所有在範圍裡的點。\n\n### 儲存編輯\n\n當你編輯道路、建築和地方等變動時，\n這些資料會儲存在本地空間，直到你上傳到伺服器。\n不要擔心你可能會犯錯，你可以按復原按鈕恢復變動，\n以及按重覆按鍵重覆動作。\n\n按'儲存'結束這一串編輯 - 舉例來說，\n如果你完成繪製城鎮裡的一區，想要開始畫新的一區。你有機會回顧先前你做的事情，而編輯器提供有用的建議，\n而且如果出錯時會警告。\n\n如果所有東西都看起來都好的時候，你可以輸入簡短的評論，解釋你的變動，\n接著再次按'儲存'輸出變動到[OpenStreetMap.org](http://www.openstreetmap.org/)，\n之後會讓大家都看得到，並且繼續繪製和改進。\n如果你無法在一次的時間裡完成編輯，你可以關係編輯器視窗，之後再回來 (相同瀏覽器和電腦)，\n編輯器程式會詢問你是否恢復你的工作。\n\n### 使用編輯器\n\n你可以按 `?`顯示鍵盤快速鍵清單。\n",
             "roads": "# 道路\n\n您可以利用這個編輯器創建，修復，及刪除道路。道路可以有很多種：行人路徑，公路，步道，單車路線等等 － 任何經常使用的路段都可製圖。\n\n### 選擇道路\n\n按圖上的道路以選擇該道路。道路的輪廓會以高亮度顯示，而同時地圖上會出現小工具選單，旁邊亦會彈出面板，顯示有關該道路的資訊。\n\n### 修改道路\n\n您或會經常注意到，道路並非對齊在背景中顯示的衛星圖像或GPS軌跡。您可以調整這些道路，讓他們位於正確的位置。\n\n首先，按您想修訂的道路。這會將道路以高亮度顯示，並顯示沿著這道路的節點，你可以拖曳這些節點到更好的位置。如果您想增加細節，可以為道路添加新的節點，點擊兩下道路上沒有節點的部分，便可在該處増加節點。\n\n如果道路連接到另一條道路，但在地圖上並未妥善連接，你可以拖曳道路的其中一個節點到另一條道路上，以連接兩條道路。連接好道路，對地圖非常重要，特別是對提供駕駛指示的應用程序而言，是必要的。\n\n您也可以按下'移動'工具或按`M`快速鍵，來移動整條道路，然後按一下以完成移動的動作。\n\n### 刪除道路\n\n如果一條道路完全不正確 － 您看到它在衛星圖像上不存在，並最好實地證實它根本不存在 － 您可以將道路刪除，這會從地圖中將之移除。刪除物件時務必要小心 － 像任何其他的編輯，結果會被大家看見，而衛星圖像往往會過時，因此該道路或許只是新建的。\n\n要刪除道路，您可以按住它以選擇，然後按下垃圾桶圖標，或按 ’Delete’ 鍵。\n\n### 繪製新道路\n\n發現某處應有一條道路，但地圖上沒有？按編輯器左上方的'線'按鈕，或按下`2`快速鍵，以開始繪製線段。\n\n在地圖上點擊道路的開端，以開始繪製道路。如果道路從一條現有的道路分支出來，應點擊兩者連接的地方，以開始繪製。\n\n然後按住沿著道路的點，以根據衛星影像或GPS軌跡，正確地繪製道路。如果您繪製的道路如果與另一條道路交匯，請點擊相交點以將它們連接起來。當您完成繪製後，可按兩下滑鼠或按鍵盤上的 'Return' 或 ’Enter’ 鍵。\n\n",
             "gps": "# GPS\n\nGPS 資料是 OpenStreetMap 最可靠的資料來源. 這個編輯器支援 `.gpx` 的軌跡檔。 你可以使用智慧型手機的程式或個人 GPS 硬體去搜集。\n\n關於如何進行 GPS 資料搜集, 可參考 [Mapping with a smartphone, GPS, or paper](http://learnosm.org/en/mobile-mapping/)。\n\n當要使用 GPX 軌跡檔去繪圖時，你可以直接拖拉 GPX 檔案至地圖編輯器上，如果編輯器識別到軌跡檔時，它將用亮紫色把軌跡顯示在地圖上。你可以點擊右側的 'Map Data' 選單去顯示、隱藏或縮放這個軌跡所產生的圖層。\n\n這個 GPX 軌跡並沒有上傳至 OpenStreetMap，但這種方式適合於當你想把軌跡當成參考資料去繪製新的地圖時，當然你也可以[上傳軌跡至 OpenStreetMap](http://www.openstreetmap.org/trace/create) 供其它人使用。\n",
             "imagery": "# 圖像\n\n空照圖是繪製地圖重要的資料來源。在畫面右方的'背景圖像設定'選單中，可選擇使用的圖像，\n他們分別為空照圖、衛星影像和其他可自由編輯的圖像資源。\n\n編輯器預設使用[Bing Maps](http://www.bing.com/maps/)的衛星圖層，\n但當您平移或縮放地圖至一個新的地理區域，或可使用新的資源。\n在一些國家，像美國、法國和丹麥，部分區域有非常高品質的圖像。\n\n圖像會與地圖數據有所偏移。如果你看見很多的道路與背景有偏移，請不要立刻將它們全部搬移以與背景刎合。相反，你可以在「背景設定」選單中，點擊下方的「校準底圖」，以調整圖像以配合現有地圖數據。\n\n圖像有時候或會因為圖像提供者方面的誤差，與地圖資料有所偏移。\n如果您看到有很多路與背景是平移錯位的，請不要立刻將它們全部搬移以與背景刎合。\n您只需要點擊圖像設定介面底部的'校準'來調整圖像，讓它符合現有資料。\n",
@@ -1126,9 +1138,6 @@
                 "access_simple": {
                     "label": "允許通行"
                 },
-                "access_toilets": {
-                    "label": "開放與否"
-                },
                 "address": {
                     "label": "地址",
                     "placeholders": {
@@ -1380,6 +1389,14 @@
                 "craft": {
                     "label": "種類"
                 },
+                "crane/type": {
+                    "label": "起重機類型",
+                    "options": {
+                        "floor-mounted_crane": "落地式起重機",
+                        "portal_crane": "門式起重機",
+                        "travel_lift": "移動式起重機"
+                    }
+                },
                 "crop": {
                     "label": "作物"
                 },
@@ -1463,6 +1480,10 @@
                 },
                 "drive_through": {
                     "label": "得來速"
+                },
+                "duration": {
+                    "label": "時間",
+                    "placeholder": "00:00"
                 },
                 "electrified": {
                     "label": "電氣化",
@@ -1571,8 +1592,14 @@
                     "label": "扶手"
                 },
                 "hashtags": {
-                    "label": "主題標籤",
+                    "label": "建議的資料標籤",
                     "placeholder": "#範例"
+                },
+                "healthcare": {
+                    "label": "類型"
+                },
+                "healthcare/speciality": {
+                    "label": "專科"
                 },
                 "height": {
                     "label": "高度 (公尺)"
@@ -1614,6 +1641,9 @@
                 },
                 "inscription": {
                     "label": "題詞"
+                },
+                "intermittent": {
+                    "label": "週期性的"
                 },
                 "internet_access": {
                     "label": "網際網絡存取",
@@ -1731,6 +1761,9 @@
                 },
                 "maxweight": {
                     "label": "最大承重"
+                },
+                "memorial": {
+                    "label": "類型"
                 },
                 "milestone_position": {
                     "label": "里程碑位置",
@@ -1926,6 +1959,15 @@
                 "plant/output/electricity": {
                     "label": "電力輸出",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
+                },
+                "playground/baby": {
+                    "label": "嬰兒座椅"
+                },
+                "playground/max_age": {
+                    "label": "最大年齡"
+                },
+                "playground/min_age": {
+                    "label": "最小年齡"
                 },
                 "population": {
                     "label": "人口數"
@@ -2143,6 +2185,13 @@
                     },
                     "placeholder": "未知種類"
                 },
+                "structure_waterway": {
+                    "label": "結構體",
+                    "options": {
+                        "tunnel": "隧道"
+                    },
+                    "placeholder": "未知"
+                },
                 "studio": {
                     "label": "種類"
                 },
@@ -2202,6 +2251,9 @@
                 "tourism": {
                     "label": "種類"
                 },
+                "tourism_attraction": {
+                    "label": "旅遊"
+                },
                 "tower/construction": {
                     "label": "建材",
                     "placeholder": "拉線、鋼格、偽裝、..."
@@ -2219,6 +2271,9 @@
                         "grade5": "柔性鋪面：只有土壤、砂土與草地"
                     },
                     "placeholder": "堅硬地面、硬物鋪面、軟鋪面"
+                },
+                "trade": {
+                    "label": "類型"
                 },
                 "traffic_calming": {
                     "label": "種類"
@@ -2245,9 +2300,6 @@
                     "label": "類型",
                     "placeholder": "預設"
                 },
-                "tunnel_waterway": {
-                    "label": "隧道"
-                },
                 "vending": {
                     "label": "貨品種類"
                 },
@@ -2257,6 +2309,22 @@
                         "area": "超過 20 公尺（65 英呎）",
                         "house": "約 5 公尺（16 英呎）",
                         "street": "5 到 20 公尺（16 到 65 英呎）"
+                    }
+                },
+                "volcano/status": {
+                    "label": "火山狀態",
+                    "options": {
+                        "active": "活",
+                        "dormant": "休眠",
+                        "extinct": "死"
+                    }
+                },
+                "volcano/type": {
+                    "label": "火山類型",
+                    "options": {
+                        "scoria": "火山渣",
+                        "shield": "盾狀",
+                        "stratovolcano": "複式火山"
                     }
                 },
                 "wall": {
@@ -2485,6 +2553,14 @@
                 "amenity/clinic": {
                     "name": "診所",
                     "terms": "診療所,醫務所"
+                },
+                "amenity/clinic/abortion": {
+                    "name": "墮胎診所",
+                    "terms": "墮胎診所"
+                },
+                "amenity/clinic/fertility": {
+                    "name": "生產診所",
+                    "terms": "生產診所"
                 },
                 "amenity/clock": {
                     "name": "時鐘",
@@ -2805,6 +2881,10 @@
                 "amenity/vending_machine/excrement_bags": {
                     "name": "糞便袋販賣機",
                     "terms": "糞便袋自動販賣機,販賣機"
+                },
+                "amenity/vending_machine/feminine_hygiene": {
+                    "name": "女性衛生用品自動販賣機",
+                    "terms": "女性衛生用品自動販賣機,衛生棉自動販賣機,棉條自動販賣機"
                 },
                 "amenity/vending_machine/news_papers": {
                     "name": "報紙販賣機"
@@ -3186,8 +3266,8 @@
                     "terms": "製鐘店"
                 },
                 "craft/confectionery": {
-                    "name": "甜點店",
-                    "terms": "糕餅店"
+                    "name": "糖果製造商",
+                    "terms": "<translate with synonyms or related terms for 'Candy Maker', separated by commas>"
                 },
                 "craft/distillery": {
                     "name": "酒廠",
@@ -3383,9 +3463,17 @@
                     "name": "行人穿越道",
                     "terms": "行人穿越道"
                 },
+                "footway/crossing-raised": {
+                    "name": "突起穿越道",
+                    "terms": "突起穿越道,穿越道"
+                },
                 "footway/crosswalk": {
                     "name": "人行穿越道",
                     "terms": "斑馬線"
+                },
+                "footway/crosswalk-raised": {
+                    "name": "突起行人穿越道",
+                    "terms": "突起行人穿越道,行人穿越道"
                 },
                 "footway/sidewalk": {
                     "name": "人行道",
@@ -3435,9 +3523,65 @@
                     "name": "水障礙區",
                     "terms": "水障礙區"
                 },
+                "healthcare": {
+                    "name": "醫療設施",
+                    "terms": "醫療設施"
+                },
+                "healthcare/alternative": {
+                    "name": "替代療法",
+                    "terms": "替代療法"
+                },
+                "healthcare/alternative/chiropractic": {
+                    "name": "脊骨神經醫師",
+                    "terms": "脊骨神經醫師,脊骨按摩治療師,脊椎指壓治療者"
+                },
+                "healthcare/audiologist": {
+                    "name": "聽覺矯正",
+                    "terms": "聽覺矯正"
+                },
+                "healthcare/birthing_center": {
+                    "name": "生育中心",
+                    "terms": "生育中心,分娩中心"
+                },
                 "healthcare/blood_donation": {
                     "name": "捐血中心",
                     "terms": "捐血中心,捐血站,捐血車"
+                },
+                "healthcare/hospice": {
+                    "name": "安養院",
+                    "terms": "安養院"
+                },
+                "healthcare/midwife": {
+                    "name": "助產士",
+                    "terms": "助產士"
+                },
+                "healthcare/occupational_therapist": {
+                    "name": "職能治療師",
+                    "terms": "職能治療師"
+                },
+                "healthcare/optometrist": {
+                    "name": "驗光師",
+                    "terms": "驗光師"
+                },
+                "healthcare/physiotherapist": {
+                    "name": "物理治療師",
+                    "terms": "物理治療師"
+                },
+                "healthcare/podiatrist": {
+                    "name": "足科醫師",
+                    "terms": "足科醫師,足科醫生"
+                },
+                "healthcare/psychotherapist": {
+                    "name": "心理治療師",
+                    "terms": "心理治療師"
+                },
+                "healthcare/rehabilitation": {
+                    "name": "復建設施",
+                    "terms": "復建設施"
+                },
+                "healthcare/speech_therapist": {
+                    "name": "語言治療師",
+                    "terms": "語言治療師"
                 },
                 "highway": {
                     "name": "道路"
@@ -3458,9 +3602,17 @@
                     "name": "十字路口",
                     "terms": "十字路口"
                 },
+                "highway/crossing-raised": {
+                    "name": "突起穿越道",
+                    "terms": "突起穿越道,穿越道"
+                },
                 "highway/crosswalk": {
                     "name": "行人穿越道",
                     "terms": "行人穿越道"
+                },
+                "highway/crosswalk-raised": {
+                    "name": "突起行人穿越道",
+                    "terms": "突起行人穿越道,行人穿越道"
                 },
                 "highway/cycleway": {
                     "name": "單車路線",
@@ -3869,6 +4021,10 @@
                     "name": "高爾夫球場",
                     "terms": "高爾夫球場"
                 },
+                "leisure/hackerspace": {
+                    "name": "駭客空間",
+                    "terms": "駭客空間"
+                },
                 "leisure/horse_riding": {
                     "name": "騎馬場",
                     "terms": "馬場,騎馬設施"
@@ -4020,6 +4176,10 @@
                 "man_made/chimney": {
                     "name": "煙囪",
                     "terms": "煙筒"
+                },
+                "man_made/crane": {
+                    "name": "起重機",
+                    "terms": "起重機"
                 },
                 "man_made/cutline": {
                     "name": "山林分界線",
@@ -4392,6 +4552,62 @@
                     "name": "村鎮",
                     "terms": "村落,village"
                 },
+                "playground/balance_beam": {
+                    "name": "平衡木",
+                    "terms": "平衡木"
+                },
+                "playground/basket_spinner": {
+                    "name": "籃子旋轉器",
+                    "terms": "<translate with synonyms or related terms for 'Basket Spinner', separated by commas>"
+                },
+                "playground/basket_swing": {
+                    "name": "籃子鞦韆",
+                    "terms": "<translate with synonyms or related terms for 'Basket Swing', separated by commas>"
+                },
+                "playground/climbing_frame": {
+                    "name": "攀爬架",
+                    "terms": "<translate with synonyms or related terms for 'Climbing Frame', separated by commas>"
+                },
+                "playground/cushion": {
+                    "name": "彈力靠墊",
+                    "terms": "<translate with synonyms or related terms for 'Bouncy Cushion', separated by commas>"
+                },
+                "playground/horizontal_bar": {
+                    "name": "單槓",
+                    "terms": "<translate with synonyms or related terms for 'Horizontal Bar', separated by commas>"
+                },
+                "playground/rocker": {
+                    "name": "彈簧搖桿",
+                    "terms": "<translate with synonyms or related terms for 'Springy Rocker', separated by commas>"
+                },
+                "playground/roundabout": {
+                    "name": "旋轉輪",
+                    "terms": "<translate with synonyms or related terms for 'Play Roundabout', separated by commas>"
+                },
+                "playground/sandpit": {
+                    "name": "沙坑",
+                    "terms": "<translate with synonyms or related terms for 'Sandpit', separated by commas>"
+                },
+                "playground/seesaw": {
+                    "name": "蹺蹺板",
+                    "terms": "<translate with synonyms or related terms for 'Seesaw', separated by commas>"
+                },
+                "playground/slide": {
+                    "name": "溜滑梯",
+                    "terms": "<translate with synonyms or related terms for 'Slide', separated by commas>"
+                },
+                "playground/structure": {
+                    "name": "遊樂場設施",
+                    "terms": "<translate with synonyms or related terms for 'Play Structure', separated by commas>"
+                },
+                "playground/swing": {
+                    "name": "鞦韆",
+                    "terms": "<translate with synonyms or related terms for 'Swing', separated by commas>"
+                },
+                "playground/zipwire": {
+                    "name": "Zip Wire",
+                    "terms": "<translate with synonyms or related terms for 'Zip Wire', separated by commas>"
+                },
                 "point": {
                     "name": "點",
                     "terms": "點"
@@ -4760,8 +4976,7 @@
                     "terms": "禮儀公司"
                 },
                 "shop/furnace": {
-                    "name": "火爐店",
-                    "terms": "鍋爐店"
+                    "name": "火爐店"
                 },
                 "shop/furniture": {
                     "name": "傢具店",
@@ -4975,6 +5190,10 @@
                     "name": "賣票亭",
                     "terms": "售票處"
                 },
+                "shop/tiles": {
+                    "name": "磁磚商店",
+                    "terms": "磁磚商店,磁磚店,瓷磚商店,瓷磚店"
+                },
                 "shop/tobacco": {
                     "name": "菸店",
                     "terms": "香菸店"
@@ -5163,8 +5382,8 @@
                     "terms": "起皺狹長路段"
                 },
                 "traffic_calming/table": {
-                    "name": "隆起行人穿越道",
-                    "terms": "隆起行人穿越道"
+                    "name": "減速丘",
+                    "terms": "減速丘"
                 },
                 "type/boundary": {
                     "name": "邊界",
@@ -5269,6 +5488,10 @@
                     "name": "地點",
                     "terms": "場地"
                 },
+                "type/waterway": {
+                    "name": "水路",
+                    "terms": "水路"
+                },
                 "vertex": {
                     "name": "其他",
                     "terms": "其他"
@@ -5319,6 +5542,10 @@
                 "waterway/stream": {
                     "name": "溪流",
                     "terms": "小溪"
+                },
+                "waterway/stream_intermittent": {
+                    "name": "週期性水流",
+                    "terms": "週期性水流"
                 },
                 "waterway/water_point": {
                     "name": "海洋飲用水",
@@ -5374,10 +5601,6 @@
                 "description": "衛星與空照圖",
                 "name": "Mapbox 衛星圖"
             },
-            "New_and_Misaligned_TIGER_Roads-2013": {
-                "description": "在縮放等級 16 以上的資料是從美國人口普查局的公眾領域圖資取得的。較低縮放等級的則僅有自2006年開放街圖刪除部份不合授權條款的資料後併入開放街圖的資料",
-                "name": "新的且並未對齊的 TIGER 道路"
-            },
             "OSM_Inspector-Addresses": {
                 "attribution": {
                     "text": "© Geofabrik GmbH, OpenStreetMap 貢獻者，CC-BY-SA"
@@ -5419,6 +5642,17 @@
                     "text": "© Geofabrik GmbH, OpenStreetMap 貢獻者，CC-BY-SA"
                 },
                 "name": "OSM 檢查器：標籤"
+            },
+            "US-TIGER-Roads-2012": {
+                "name": "TIGER 道路 2012"
+            },
+            "US-TIGER-Roads-2014": {
+                "description": "在縮放等級 16 以上的資料是從美國人口普查局的公眾領域圖資取得的。較低縮放等級的則僅有自2006年開放街圖刪除部份不合授權條款的資料後併入開放街圖的資料",
+                "name": "TIGER 道路 2014"
+            },
+            "US-TIGER-Roads-2017": {
+                "description": "黃 = 自美國人口普查局的公共領域地圖資料取得。紅 = 在開放街圖上找不到資料",
+                "name": "TIGER 道路 2017"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {

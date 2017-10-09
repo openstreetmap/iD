@@ -339,9 +339,6 @@
                 "access_simple": {
                     "label": "அனுமதிக்கப்பட்ட அணுகல்"
                 },
-                "access_toilets": {
-                    "label": "நுழைவு"
-                },
                 "address": {
                     "label": "முகவரி",
                     "placeholders": {

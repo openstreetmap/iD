@@ -796,9 +796,6 @@
                 "access_simple": {
                     "label": "ಅನುಮತಿಸಲಾದ ಪ್ರವೇಶ‍"
                 },
-                "access_toilets": {
-                    "label": "ಪ್ರವೇಶ"
-                },
                 "address": {
                     "label": "ವಿಳಾಸ",
                     "placeholders": {
@@ -1679,9 +1676,6 @@
                 },
                 "craft/clockmaker": {
                     "name": "ಗಡಿಯಾರ ಮಾಡುವವ"
-                },
-                "craft/confectionery": {
-                    "name": "ಸಿಹಿಯಂಗಡಿ"
                 },
                 "craft/gardener": {
                     "name": "ತೋಟದ ಮಾಲಿ"

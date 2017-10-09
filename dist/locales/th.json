@@ -245,9 +245,6 @@
                 "access_simple": {
                     "label": "อนุญาตการเข้าถึง"
                 },
-                "access_toilets": {
-                    "label": "การเข้าถึง"
-                },
                 "address": {
                     "label": "ที่อยู่",
                     "placeholders": {
