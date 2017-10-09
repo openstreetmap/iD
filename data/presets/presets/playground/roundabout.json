@@ -10,5 +10,8 @@
     "tags": {
         "playground": "roundabout"
     },
-    "name": "Play Roundabout"
+    "name": "Play Roundabout",
+    "terms": [
+        "merry-go-round"
+    ]
 }
