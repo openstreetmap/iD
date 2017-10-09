@@ -73,6 +73,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 
 #### :bug: Bugfixes
 
+* Fix overlapping in preset list when multiple tag references are expanded ([#4023], [#4412], thanks [@jleh])
 * Clicking delete button on the structure field (bridge, tunnel, etc.) should remove `layer=*` value also
 * Disable source switcher during walkthrough, ([#4402], thanks [@pwelby])
 * Prevent topbar buttons from moving in Firefox during save mode when css filter is active ([#4348])
@@ -86,6 +87,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Avoid requesting blank tiles from Esri World Imagery ([#4327], thanks [@jgravois])
 * Fix reflect actions to be invertable ([#4300], [#4328], thanks [@leegenes])
 
+[#4412]: https://github.com/openstreetmap/iD/issues/4412
 [#4402]: https://github.com/openstreetmap/iD/issues/4402
 [#4354]: https://github.com/openstreetmap/iD/issues/4354
 [#4349]: https://github.com/openstreetmap/iD/issues/4349
@@ -98,6 +100,8 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [#4289]: https://github.com/openstreetmap/iD/issues/4289
 [#4282]: https://github.com/openstreetmap/iD/issues/4282
 [#4209]: https://github.com/openstreetmap/iD/issues/4209
+[#4023]: https://github.com/openstreetmap/iD/issues/4023
+[@jleh]: https://github.com/jleh
 [@pwelby]: https://github.com/pwelby
 [@jgravois]: https://github.com/jgravois
 [@leegenes]: https://github.com/leegenes
@@ -121,6 +125,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 
 #### :rocket: Presets
 
+* Add Tile Shop and Trade Shop presets ([#4410], thanks [@TheGreenToaster])
 * Allow camera presets to be placed on vertex geometry (e.g. along walls) ([#4400], thanks [@JamesKingdom])
 * Add preset for `man_made=crane` ([#4374], thanks [@willemarcel])
 * Rename "Confectionery" to "Candy Maker" and add "sweet" as search term ([#4388], thanks [@JamesKingdom])
@@ -145,6 +150,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 * Allow Defibrillator preset to be placed on vertex geometry (e.g. along walls) ([#4290], [#4287] thanks [@JamesKingdom])
 * Add name field back to Wood preset ([#4200], thanks [@JamesKingdom])
 
+[#4410]: https://github.com/openstreetmap/iD/issues/4410
 [#4400]: https://github.com/openstreetmap/iD/issues/4400
 [#4388]: https://github.com/openstreetmap/iD/issues/4388
 [#4375]: https://github.com/openstreetmap/iD/issues/4375
@@ -174,6 +180,7 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [#4260]: https://github.com/openstreetmap/iD/issues/4260
 [#4200]: https://github.com/openstreetmap/iD/issues/4200
 [#3589]: https://github.com/openstreetmap/iD/issues/3589
+[@TheGreenToaster]: https://github.com/TheGreenToaster
 [@JamesKingdom]: https://github.com/JamesKingdom
 [@willemarcel]: https://github.com/willemarcel
 [@boothym]: https://github.com/boothym
