@@ -26,6 +26,35 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.4.3
+##### October 9, 2017
+
+#### :bug: Bugfixes
+
+* Include unicode characters in hashtag matching ([#4398], [#4419], thanks [@mojodna])
+* Allow common punctuation to split hashtags ([#4412], thanks [@mojodna])
+
+[#4419]: https://github.com/openstreetmap/iD/issues/4419
+[#4412]: https://github.com/openstreetmap/iD/issues/4412
+[#4398]: https://github.com/openstreetmap/iD/issues/4398
+[@mojodna]: https://github.com/mojodna
+
+
+#### :mortar_board: Walkthrough
+
+* Make sure "Add Field" scrolls into view during "Area" chapter of walkthrough ([#4417])
+
+[#4417]: https://github.com/openstreetmap/iD/issues/4417
+
+
+#### :rocket: Presets
+
+* Refined playground presets terms for Spring Rider and Play Roundabout ([#4415], thanks, [@1ec5])
+
+[#4415]: https://github.com/openstreetmap/iD/issues/4415
+[@1ec5]: https://github.com/1ec5
+
+
 # 2.4.2
 ##### October 8, 2017
 
