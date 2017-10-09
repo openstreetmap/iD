@@ -14613,6 +14613,25 @@
             },
             "name": "Toy Store"
         },
+        "shop/trade": {
+            "icon": "shop",
+            "fields": [
+                "name",
+                "trade",
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "shop": "trade"
+            },
+            "name": "Trade Shop"
+        },
         "shop/travel_agency": {
             "icon": "suitcase",
             "fields": [

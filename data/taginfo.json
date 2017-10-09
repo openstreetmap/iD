@@ -2861,6 +2861,10 @@
         },
         {
             "key": "shop",
+            "value": "trade"
+        },
+        {
+            "key": "shop",
             "value": "travel_agency"
         },
         {
