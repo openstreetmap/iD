@@ -2853,11 +2853,19 @@
         },
         {
             "key": "shop",
+            "value": "tiles"
+        },
+        {
+            "key": "shop",
             "value": "tobacco"
         },
         {
             "key": "shop",
             "value": "toys"
+        },
+        {
+            "key": "shop",
+            "value": "trade"
         },
         {
             "key": "shop",

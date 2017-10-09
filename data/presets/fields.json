@@ -1922,6 +1922,11 @@
                 }
             }
         },
+        "trade": {
+            "key": "trade",
+            "type": "typeCombo",
+            "label": "Type"
+        },
         "traffic_calming": {
             "key": "traffic_calming",
             "type": "typeCombo",

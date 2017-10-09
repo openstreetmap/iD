@@ -1410,6 +1410,9 @@ en:
           grade5: 'Soft: soil/sand/grass'
         # tracktype field placeholder
         placeholder: 'Solid, Mostly Solid, Soft...'
+      trade:
+        # trade=*
+        label: Type
       traffic_calming:
         # traffic_calming=*
         label: Type
@@ -4698,6 +4701,10 @@ en:
         # shop=ticket
         name: Ticket Seller
         terms: '<translate with synonyms or related terms for ''Ticket Seller'', separated by commas>'
+      shop/tiles:
+        # shop=tiles
+        name: Tile Shop
+        terms: '<translate with synonyms or related terms for ''Tile Shop'', separated by commas>'
       shop/tobacco:
         # shop=tobacco
         name: Tobacco Shop
@@ -4706,6 +4713,10 @@ en:
         # shop=toys
         name: Toy Store
         terms: '<translate with synonyms or related terms for ''Toy Store'', separated by commas>'
+      shop/trade:
+        # shop=trade
+        name: Trade Shop
+        terms: '<translate with synonyms or related terms for ''Trade Shop'', separated by commas>'
       shop/travel_agency:
         # shop=travel_agency
         name: Travel Agency

@@ -2272,6 +2272,9 @@
                         "grade5": "Soft: soil/sand/grass"
                     }
                 },
+                "trade": {
+                    "label": "Type"
+                },
                 "traffic_calming": {
                     "label": "Type"
                 },
@@ -5230,12 +5233,20 @@
                     "name": "Ticket Seller",
                     "terms": ""
                 },
+                "shop/tiles": {
+                    "name": "Tile Shop",
+                    "terms": ""
+                },
                 "shop/tobacco": {
                     "name": "Tobacco Shop",
                     "terms": ""
                 },
                 "shop/toys": {
                     "name": "Toy Store",
+                    "terms": ""
+                },
+                "shop/trade": {
+                    "name": "Trade Shop",
                     "terms": ""
                 },
                 "shop/travel_agency": {
