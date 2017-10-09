@@ -4018,11 +4018,13 @@ en:
         terms: '<translate with synonyms or related terms for ''Horizontal Bar'', separated by commas>'
       playground/rocker:
         # playground=springy
-        name: Springy Rocker
-        terms: '<translate with synonyms or related terms for ''Springy Rocker'', separated by commas>'
+        name: Spring Rider
+        # 'terms: spring rocker,springy rocker'
+        terms: '<translate with synonyms or related terms for ''Spring Rider'', separated by commas>'
       playground/roundabout:
         # playground=roundabout
         name: Play Roundabout
+        # 'terms: merry-go-round'
         terms: '<translate with synonyms or related terms for ''Play Roundabout'', separated by commas>'
       playground/sandpit:
         # playground=sandpit

@@ -11586,7 +11586,11 @@
             "tags": {
                 "playground": "springy"
             },
-            "name": "Springy Rocker"
+            "name": "Spring Rider",
+            "terms": [
+                "spring rocker",
+                "springy rocker"
+            ]
         },
         "playground/roundabout": {
             "icon": "stadium",
@@ -11600,7 +11604,10 @@
             "tags": {
                 "playground": "roundabout"
             },
-            "name": "Play Roundabout"
+            "name": "Play Roundabout",
+            "terms": [
+                "merry-go-round"
+            ]
         },
         "playground/sandpit": {
             "icon": "playground",
