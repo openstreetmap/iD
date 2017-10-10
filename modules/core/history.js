@@ -578,15 +578,19 @@ export function coreHistory(context) {
 
         // is iD not open in another window and it detects that
         // there's a history stored in async storage that's recoverable?
-        restorableChanges: function() {
+        restorableChanges: function(callback) {
             var isLocked = lock.locked();
 
             if (isLocked) {
-                return Promise.resolve(true);
+                return callback(true);
             }
 
-            return context.asyncStorage(getKey('saved_history')).then(function(savedHistory) {
-                return !!savedHistory;
+            return context.asyncStorage(getKey('saved_history'), function(err, savedHistory) {
+                if (err) {
+                    return callback(false);
+                }
+
+                callback(!!savedHistory);
             });
         },
 
@@ -595,8 +599,8 @@ export function coreHistory(context) {
         restore: function() {
             if (!lock.locked()) return;
 
-            context.asyncStorage(getKey('saved_history')).then(function(json) {
-                if (json) history.fromJSON(json, true);
+            context.asyncStorage(getKey('saved_history'), function(err, json) {
+                if (!err && json) history.fromJSON(json, true);
             });
         },
 

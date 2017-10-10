@@ -8,7 +8,7 @@ export function uiRestore(context) {
         if (!context.history().lock())
             return;
 
-        context.history().restorableChanges().then(function(restorableChanges) {
+        context.history().restorableChanges(function(restorableChanges) {
             if (!restorableChanges) {
                 return;
             }

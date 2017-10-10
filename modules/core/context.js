@@ -104,15 +104,20 @@ export function coreContext() {
         }
     };
 
-    context.asyncStorage = function(k, v) {
+    context.asyncStorage = function(k, v, callback) {
         var action;
 
-        if (arguments.length === 1) {
-            action = localforage.getItem(k);
+        if (typeof v === 'function') {
+            callback = v;
+            v = undefined;
+        }
+
+        if (v === undefined) {
+            action = localforage.getItem(k, callback);
         } else if (v === null) {
-            action = localforage.removeItem(k);
+            action = localforage.removeItem(k, callback);
         } else {
-            action = localforage.setItem(k, v);
+            action = localforage.setItem(k, v, callback);
         }
 
         return action.catch(function(err) {
