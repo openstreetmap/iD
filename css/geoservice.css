@@ -205,8 +205,16 @@ text.geoservice {
     background-color: #a6f3a6;
 }
 
+.import-approve button:first-child:hover {
+    background-color: #80fa80;
+}
+
 .import-approve button:last-child {
-    background-color: #ff6c6c;
+    background-color: #fca5a5;
+}
+
+.import-approve button:last-child:hover {
+    background-color: #fc7d7d;
 }
 
 g.point.import-approved .stroke {
