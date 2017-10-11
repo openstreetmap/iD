@@ -46,7 +46,7 @@
                 "title": "Jätka",
                 "description": "Jätka seda joont.",
                 "not_eligible": "Joont ei saa siit jätkata.",
-                "multiple": "Siit saab jätkata mitut joont. Joone valimiseks hoia all Shift klahvi ja tee klikk joonele.",
+                "multiple": "Siit saab jätkata mitut joont. Et joon valida, hoia all tõstuklahvi Shift ja klõpsa joont.",
                 "annotation": {
                     "line": "Joon jätkatud.",
                     "area": "Ala jätkatud."
@@ -72,7 +72,7 @@
                     "line": "Joon tehtud ringikujuliseks.",
                     "area": "Ala tehtud ringikujuliseks."
                 },
-                "not_closed": "Seda ei saa teha ringikujuliseks kuna see ei ole silmus.",
+                "not_closed": "Seda ei saa teha ringikujuliseks, kuna see ei ole silmus.",
                 "too_large": "Seda ei saa teha ringikujuliseks, kuna see ei ole täielikult nähtaval.",
                 "connected_to_hidden": "Seda ei saa teha ringikujuliseks, kuna see on ühendatud peidetud objektiga."
             },
@@ -87,7 +87,7 @@
                     "line": "Joone nurgad täisnurgastatud.",
                     "area": "Ala nurgad täisnurgastatud."
                 },
-                "not_squarish": "Seda ei saa teha täisnurkseks kuna see ei ole nurgeline.",
+                "not_squarish": "Seda ei saa teha täisnurkseks, kuna see ei ole nurgeline.",
                 "too_large": "Seda ei saa teha täisnurkseks, kuna see ei ole täielikult nähtaval.",
                 "connected_to_hidden": "Seda ei saa teha täisnurkseks, kuna see on ühendatud peidetud objektiga."
             },
@@ -96,7 +96,7 @@
                 "description": "Tee see joon sirgeks.",
                 "key": "S",
                 "annotation": "Joon tehti sirgeks.",
-                "too_bendy": "Seda ei saa sirgeks teha kuna see painduks liiga palju.",
+                "too_bendy": "Seda ei saa sirgeks teha, kuna see painduks liiga palju.",
                 "connected_to_hidden": "Seda ei saa teha sirgeks, kuna see on ühendatud peidetud objektiga."
             },
             "delete": {
@@ -112,6 +112,10 @@
                     "area": "Ala kustutatud.",
                     "relation": "Relatsioon kustutatud.",
                     "multiple": "{n} objekti kustutatud."
+                },
+                "too_large": {
+                    "single": "Seda objekti ei saa kustutada, sest piisavalt suur osa sellest pole praegu nähtaval.",
+                    "multiple": "Neid objekte ei saa kustutada, sest piisavalt suur osa neist pole praegu nähtaval."
                 },
                 "part_of_relation": {
                     "single": "Objekti ei saa kustutada, sest see on osa suuremast relatsioonist. Pead kõigepealt selle relatsioonist eemaldama.",
@@ -138,7 +142,8 @@
                 "key": "D",
                 "annotation": "Lahtiühendatud jooned/alad.",
                 "not_connected": "Siin pole piisavalt jooni/alasid lahtiühendamiseks.",
-                "connected_to_hidden": "Seda ei saa lahti ühendada, kuna see on ühendatud peidetud objektiga."
+                "connected_to_hidden": "Seda ei saa lahti ühendada, kuna see on ühendatud peidetud objektiga.",
+                "relation": "Seda ei saa lahti ühendada, sest see ühendab relatsiooni liikmeid."
             },
             "merge": {
                 "title": "Ühenda",
@@ -148,7 +153,7 @@
                 "not_eligible": "Neid objekte ei saa ühendada.",
                 "restriction": "Neid objekte ei saa ühendada, kuna vähemalt üks neist on relatsiooni \"{relation}\" liige.",
                 "incomplete_relation": "Neid objekte ei saa ühendada, kuna vähemalt üks neist ei ole täielikult alla laaditud.",
-                "conflicting_tags": "Neid objekte ei saa ühendada kuna osa nende silte on konfliktsete väärtusega."
+                "conflicting_tags": "Neid objekte ei saa ühendada, kuna osa nende silte on konfliktsete väärtustega."
             },
             "move": {
                 "title": "Liiguta",
@@ -167,6 +172,10 @@
                 "incomplete_relation": {
                     "single": "Seda objekti ei saa liigutada, kuna see ei ole veel täielikult alla laaditud.",
                     "multiple": "Neid objekte ei saa liigutada, kuna need ei ole veel täielikult alla laaditud."
+                },
+                "too_large": {
+                    "single": "Seda objekti ei saa liigutada, sest piisavalt suur osa sellest pole praegu nähtaval.",
+                    "multiple": "Neid objekte ei saa liigutada, sest piisavalt suur osa neist pole praegu nähtaval."
                 }
             },
             "reflect": {
@@ -197,6 +206,10 @@
                         "single": "Objekt peegeldatud lühkest telge pidi.",
                         "multiple": "Objektid peegeldatud lühkest telge pidi."
                     }
+                },
+                "too_large": {
+                    "single": "Seda objekti ei saa peegeldada, sest piisavalt suur osa sellest pole praegu nähtaval.",
+                    "multiple": "Neid objekte ei saa peegeldada, sest piisavalt suur osa neist pole praegu nähtaval."
                 }
             },
             "rotate": {
@@ -210,6 +223,10 @@
                     "line": "Pööratud joont.",
                     "area": "Pööratud ala.",
                     "multiple": "Pööratud mitut objekti."
+                },
+                "too_large": {
+                    "single": "Seda objekti ei saa pöörata, sest piisavalt suur osa sellest pole praegu nähtaval.",
+                    "multiple": "Neid objekte ei saa pöörata, sest piisavalt suur osa neist pole praegu nähtaval."
                 }
             },
             "reverse": {
@@ -230,7 +247,7 @@
                     "area": "Ala välispiir tükeldatud."
                 },
                 "not_eligible": "Jooni ei saa tükeldada nende algusest või lõpust.",
-                "connected_to_hidden": "Seda ei saa tükedada kuna see on ühendatud peidetud objektiga."
+                "connected_to_hidden": "Seda ei saa tükeldada, kuna see on ühendatud peidetud objektiga."
             },
             "restriction": {
                 "help": {
@@ -274,6 +291,7 @@
             "title": "Laadi OpenStreetMapi",
             "upload_explanation": "Muudatused, mille üles laadid, on nähtavad kõikidel kaartidel, mis kasutavad OpenStreetMapi andmeid.",
             "upload_explanation_with_user": "Muudatused, mille kasutajana {user} üles laadid, on nähtavad kõikidel kaartidel, mis kasutavad OpenStreetMapi andmeid.",
+            "request_review": "Ma soovin, et keegi vaataks minu muudatused üle.",
             "save": "Laadi üles",
             "cancel": "Loobu",
             "changes": "{count} muudatust",
@@ -457,7 +475,6 @@
                 "keep_remote": "Kasuta tema oma",
                 "restore": "Taasta",
                 "delete": "Jäta kustutatuna",
-                "download_changes": "Või laadi alla oma muudatused.",
                 "done": "Kõik konfliktid lahendatud!",
                 "help": "Teine kasutaja muutis kaardil mõnd objekti, mida sinagi muutsid.\nKlõpsa allpool igal objektil, et näha konflikti üksikasju ja et valida, kas säilitada\nenda muudatused või teise kasutaja muudatused.\n"
             }
@@ -519,7 +536,7 @@
         "full_screen": "Lülita täisekraanile",
         "gpx": {
             "local_layer": "Lokaalne fail",
-            "drag_drop": "Lohista lehele .gpx, .geojson või .kml fail või kliki nuppu paremal et sirvida",
+            "drag_drop": "Lohista lehele .gpx-, .geojson- või .kml-fail või klõpsa nuppu paremal, et sirvida",
             "zoom": "Suumi kihini",
             "browse": "Sirvi faili"
         },
@@ -617,19 +634,19 @@
             },
             "fields": {
                 "access": {
-                    "label": "Lubatud ligipääs",
+                    "label": "Pääs lubatud",
                     "options": {
                         "designated": {
-                            "description": "Pääs antud märkide või kindlate kohalike seadustega",
+                            "description": "Pääs lubatud märkide või kohalike eriseadustega",
                             "title": "Määratud"
                         },
                         "destination": {
-                            "description": "Lubatud ainult sihtpunkti pääsemiseks",
+                            "description": "Pääs lubatud ainult sihtpunkti jõudmiseks",
                             "title": "Sihtkoht"
                         },
                         "dismount": {
-                            "description": "Läbipääs lubatud vaid käekõrval liikudes.",
-                            "title": "Käekõrval"
+                            "description": "Pääs lubatud, kui liikleja tuleb sadulast maha",
+                            "title": "Sadulast maas"
                         },
                         "no": {
                             "description": "Avalik juurdepääs puudub",
@@ -658,10 +675,7 @@
                     }
                 },
                 "access_simple": {
-                    "label": "Lubatud juurdepääs"
-                },
-                "access_toilets": {
-                    "label": "Juurdepääs"
+                    "label": "Pääs lubatud"
                 },
                 "address": {
                     "label": "Aadress",
@@ -671,8 +685,8 @@
                         "conscriptionnumber": "123",
                         "country": "Riik",
                         "county": "Maakond",
-                        "county!jp": "Rajoon",
-                        "district": "Rajoon",
+                        "county!jp": "Ringkond",
+                        "district": "Ringkond",
                         "floor": "Korrus",
                         "housename": "Maja nimetus",
                         "housenumber": "123",
@@ -727,13 +741,13 @@
                     "label": "Prügikast"
                 },
                 "board_type": {
-                    "label": "Tüü"
+                    "label": "Tüüp"
                 },
                 "boundary": {
                     "label": "Tüüp"
                 },
                 "brand": {
-                    "label": "Bränd"
+                    "label": "Tootemark"
                 },
                 "building": {
                     "label": "Hoone"
@@ -765,6 +779,10 @@
                 },
                 "collection_times": {
                     "label": "Tühjendusajad"
+                },
+                "comment": {
+                    "label": "Muudatuskogumi kommentaar",
+                    "placeholder": "Sinu kaastöö lühikirjeldus (nõutav)"
                 },
                 "construction": {
                     "label": "Tüüp"
@@ -798,7 +816,7 @@
                     "label": "Rattarajad",
                     "options": {
                         "lane": {
-                            "description": "Jalgrattarada mis on eraldatud muust liilusest värvitud joonega",
+                            "description": "Rattarada, mis on eraldatud autoliiklusest värvitud joonega",
                             "title": "Tavaline rattarada"
                         },
                         "none": {
@@ -806,23 +824,23 @@
                             "title": "Puudub"
                         },
                         "opposite": {
-                            "description": "Jalgrattarada mis võimaldab ühesuunalisel teel liikuda mõlemas suunas",
+                            "description": "Rattarada, mis võimaldab liikuda ühesuunalisel tänaval mõlemas suunas",
                             "title": "Kontrasuunaline rattarada"
                         },
                         "opposite_lane": {
-                            "description": "Rattarada mis on muu liiklusega võrreldes vastupidise sõidusuunaga",
+                            "description": "Rattarada, mis kulgeb muu liikluse suhtes vastassuunas",
                             "title": "Vastupidise suunaga rattarada"
                         },
                         "share_busway": {
-                            "description": "Rattarada mis on jagatud ühistranspordirajaga",
+                            "description": "Rattarada, mis on jagatud ühistranspordirajaga",
                             "title": "Ühistranspordiga jagatud rattarada"
                         },
                         "shared_lane": {
-                            "description": "Rattarada mis ei ole ülejäänud liiklusest (mootorsõidukitest) kuidagi eraldatud",
+                            "description": "Rattarada, mis ei ole muust liiklusest eraldatud",
                             "title": "Jagatud rattarada"
                         },
                         "track": {
-                            "description": "Rattarada mis on liiklusest eraldatud füüsilise barjääriga",
+                            "description": "Rattarada, mis on liiklusest eraldatud füüsilise tõkkega",
                             "title": "Eraldatud rattarada"
                         }
                     },
@@ -851,20 +869,20 @@
                     "options": {
                         "contact_line": "Kontaktliin",
                         "no": "Ei",
-                        "rail": "Elektrifitseeritud raudtee",
+                        "rail": "Elektriraudtee",
                         "yes": "Jah (määratlemata)"
                     },
-                    "placeholder": "Kontaktliin, elektrifitseeritud, ei..."
+                    "placeholder": "Kontaktliin, elektriraudtee..."
                 },
                 "elevation": {
                     "label": "Kõrgus merepinnast"
                 },
                 "email": {
-                    "label": "Email",
+                    "label": "E-posti aadress",
                     "placeholder": "näide@näide.ee"
                 },
                 "emergency": {
-                    "label": "Häda"
+                    "label": "Hädaabi"
                 },
                 "entrance": {
                     "label": "Tüüp"
@@ -917,7 +935,7 @@
                     "label": "Internetipääsu tasu"
                 },
                 "internet_access/ssid": {
-                    "label": "SSID (Võrgu nimi)"
+                    "label": "SSID (võrgu nimi)"
                 },
                 "lanes": {
                     "label": "Sõiduread"
@@ -942,7 +960,7 @@
                 },
                 "name": {
                     "label": "Nimi",
-                    "placeholder": "Üldine nimi (kui on)"
+                    "placeholder": "Üldlevinud nimi (kui on)"
                 },
                 "natural": {
                     "label": "Looduslik"
@@ -1814,10 +1832,6 @@
                 },
                 "craft/clockmaker": {
                     "name": "Kellassepp"
-                },
-                "craft/confectionery": {
-                    "name": "Kondiiter",
-                    "terms": "Maiustused"
                 },
                 "craft/dressmaker": {
                     "name": "Rätsep",
@@ -2911,8 +2925,7 @@
                     "terms": "kirstud, puusärgid, matused"
                 },
                 "shop/furnace": {
-                    "name": "Küttepood",
-                    "terms": "küttekaup,ahjupood,katlad"
+                    "name": "Küttepood"
                 },
                 "shop/furniture": {
                     "name": "Mööblipood"
@@ -3281,10 +3294,6 @@
                 "traffic_calming/rumble_strip": {
                     "name": "Täristi",
                     "terms": "põristi,põrin,tärin,värin,väristaja,müra,triibud,risti jooned,jooned"
-                },
-                "traffic_calming/table": {
-                    "name": "Tõstetud ülekäik",
-                    "terms": "kõrgendatud,künnis,aeglustus,ülekäigurada"
                 },
                 "type/boundary": {
                     "name": "Piir"

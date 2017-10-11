@@ -5,6 +5,10 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import {
+    interpolateNumber as d3_interpolateNumber
+} from 'd3-interpolate';
+
 import { t } from '../../util/locale';
 import { modeBrowse, modeSelect } from '../../modes';
 import { utilRebind } from '../../util/rebind';
@@ -300,15 +304,37 @@ export function uiIntroArea(context, reveal) {
                 return continueTo(play);
             }
 
-            reveal('.more-fields .combobox-input',
-                t('intro.areas.add_field'),
-                { duration: 300 }
-            );
+            // scroll "Add field" into view
+            var box = d3_select('.more-fields').node().getBoundingClientRect();
+            if (box.top > 300) {
+                var pane = d3_select('.entity-editor-pane .inspector-body');
+                var start = pane.node().scrollTop;
+                var end = start + (box.top - 300);
 
-            d3_select('.more-fields .combobox-input')
-                .on('click.intro', function() {
-                    continueTo(chooseDescriptionField);
-                });
+                pane
+                    .transition()
+                    .duration(250)
+                    .tween('scroll.inspector', function() {
+                        var node = this;
+                        var i = d3_interpolateNumber(start, end);
+                        return function(t) {
+                            node.scrollTop = i(t);
+                        };
+                    });
+            }
+
+            timeout(function() {
+                reveal('.more-fields .combobox-input',
+                    t('intro.areas.add_field'),
+                    { duration: 300 }
+                );
+
+                d3_select('.more-fields .combobox-input')
+                    .on('click.intro', function() {
+                        continueTo(chooseDescriptionField);
+                    });
+            }, 300);  // after "Add Field" visible
+
         }, 400);  // after editor pane visible
 
         context.on('exit.intro', function() {

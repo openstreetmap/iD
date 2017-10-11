@@ -138,9 +138,6 @@
                         "horse": "घोडा"
                     }
                 },
-                "access_toilets": {
-                    "label": "पहुँच"
-                },
                 "address": {
                     "label": "ठेगाना",
                     "placeholders": {

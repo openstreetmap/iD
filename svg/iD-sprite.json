@@ -317,6 +317,7 @@
     "poi-sikhist":              { "viewBox": "625 335 15 15" },
     "poi-taoist":               { "viewBox": "640 335 15 15" },
     "poi-milestone":            { "viewBox": "655 335 15 15" },
+    "poi-crane":                { "viewBox": "670 335 15 15" },
 
     "poi-vending-machine-shape":   { "fill": "currentColor" },
     "poi-dice-shape":              { "fill": "currentColor" },
@@ -336,6 +337,7 @@
     "poi-sikhist-shape":           { "fill": "currentColor" },
     "poi-taoist-shape":            { "fill": "currentColor" },
     "poi-milestone-shape":         { "fill": "currentColor" },
+    "poi-crane-shape":             { "fill": "currentColor" },
 
     "poi-vertex":               { "viewBox": "400 350 15 15" },
 

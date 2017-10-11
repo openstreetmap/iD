@@ -42,7 +42,7 @@
                 }
             },
             "continue": {
-                "key": "A",
+                "key": "م",
                 "title": "إكمال",
                 "description": "إكمال هذا الخط.",
                 "not_eligible": "لا يوجد خط يمكن إكماله هنا.",
@@ -67,7 +67,7 @@
                     "line": "اجعل هذا الخط دائري.",
                     "area": "إجعل هذه المساحة دائرية."
                 },
-                "key": "O",
+                "key": "د",
                 "annotation": {
                     "line": "تم جعل خط دائري.",
                     "area": "تم جعل مساحة دائرية."
@@ -82,7 +82,7 @@
                     "line": "ربّع زوايا هذا الخط.",
                     "area": "ربّع زوايا هذه المنطقة."
                 },
-                "key": "S",
+                "key": "ر",
                 "annotation": {
                     "line": "ربّع زوايا الخط.",
                     "area": "ربّع زوايا المنطقة."
@@ -94,7 +94,7 @@
             "straighten": {
                 "title": "مستقيم",
                 "description": "اجعل هذا الخط مستقيماً.",
-                "key": "S",
+                "key": "س",
                 "annotation": "جعل الخط مستقيما.",
                 "too_bendy": "هذا لا يمكن أن يستقيم لأنه ينحني كثيرا.",
                 "connected_to_hidden": "هذا الخط لا يمكن جعله مستقيما لأنه متصل بعنصر مخفي."
@@ -147,7 +147,7 @@
             "disconnect": {
                 "title": "قطع اﻹتصال",
                 "description": "فصل هذه الخطوط والمناطق عن بعضها البعض.",
-                "key": "D",
+                "key": "ف",
                 "annotation": "فصل الخطوط/المناطق.",
                 "not_connected": "لا توجد خطوط/مناطق كافية هنا لفصلها.",
                 "connected_to_hidden": "لا يمكن فصلها لأنها متصلة بعنصر مخفي.",
@@ -156,7 +156,7 @@
             "merge": {
                 "title": "دمج",
                 "description": "دمج هذه العناصر.",
-                "key": "C",
+                "key": "د",
                 "annotation": "تم دمج {n} عناصر.",
                 "not_eligible": "لا يمكن دمج هذه العناصر.",
                 "not_adjacent": "لا يمكن دمج هذه العناصر لأن نقاط نهاياتها غير متصلة.",
@@ -330,9 +330,11 @@
             "title": "رفع على OpenStreetMap",
             "upload_explanation": "التغييرات التي قمت برفعها سوف تظهر على كل الخرائط التي تستخدم بيانات OpenStreetMap.",
             "upload_explanation_with_user": "التغييرات التي سترفعها كـ {user} سوف تظهر على كل الخرائط التي تستخدم بيانات OpenStreetMap فيما بعد.",
+            "request_review": "أرغب بأن يراجع أحد ما تعديلاتي.",
             "save": "رفع",
             "cancel": "إلغاء",
             "changes": "عدد التغييرات: {count}",
+            "download_changes": "تنزيل ملف osmChange",
             "warnings": "تحذيرات",
             "modified": "عُدلت",
             "deleted": "حُذفت",
@@ -347,23 +349,39 @@
             "truncated_list": "حُرر بواسطة {users} و {count} آخرون"
         },
         "info_panels": {
-            "key": "I",
+            "key": "م",
             "background": {
                 "key": "خ",
                 "title": "الخلفية",
                 "zoom": "تقريب",
+                "description": "الوصف",
                 "unknown": "مجهول"
             },
             "history": {
+                "key": "ت",
+                "title": "التأريخ",
+                "selected": "{n} مختارة",
                 "version": "الإصدار",
                 "last_edit": "آخر تعديل",
-                "edited_by": "تم التعديل بواسطة"
+                "edited_by": "تم التعديل بواسطة",
+                "changeset": "التغييرات",
+                "unknown": "غير معروف",
+                "link_text": "التأريخ على openstreetmap.org"
             },
             "location": {
+                "key": "ق",
                 "title": "الموقع",
                 "unknown_location": "الموقع غير معروف"
             },
             "measurement": {
+                "key": "ق",
+                "title": "القياسات",
+                "selected": "{n} مختارة",
+                "center": "المركز",
+                "perimeter": "المحيط",
+                "length": "الطول",
+                "area": "المساحة",
+                "location": "الموقع",
                 "metric": "متري",
                 "imperial": "امبراطوري"
             }
@@ -452,9 +470,16 @@
             "description": "بيانات الخريطة",
             "key": "ب",
             "data_layers": "طبقات البيانات",
+            "layers": {
+                "osm": {
+                    "tooltip": "بيانات الخريطة من OpenStreetMap",
+                    "title": "بيانات OpenStreetMap"
+                }
+            },
             "fill_area": "ملء المساحات",
             "map_features": "عناصر الخريطة",
-            "autohidden": "لقد تم إخفاء هذه العناصر تلقائيا بسبب وجود الكثير من العناصر القريبة منها والتي ستؤدي لظهور الكثير جدا من العناصر المتداخلة مع بعضها. بإمكانك التكبير لتعديلهم."
+            "autohidden": "لقد تم إخفاء هذه العناصر تلقائيا بسبب وجود الكثير من العناصر القريبة منها والتي ستؤدي لظهور الكثير جدا من العناصر المتداخلة مع بعضها. بإمكانك التكبير لتعديلهم.",
+            "osmhidden": "تم إخفاء هذه العناصر تلقائيا لان طبقة OpenStreetMap مخفية."
         },
         "feature": {
             "points": {
@@ -545,7 +570,7 @@
                 "keep_remote": "استخدام تعديلاتهم",
                 "restore": "استعادة",
                 "delete": "تركها محذوفة",
-                "download_changes": "أو قم بتنزيل تغييراتك.",
+                "download_changes": "أو قم بتنزيل ملف osmChange",
                 "done": "تم حل جميع التعارضات!",
                 "help": "قام مستخدم آخر بتعديل نفس العناصر التي قمت بتعديلها أنت على الخريطة.\nانقر على كل عنصر أدناه لمزيد من التفاصيل عن التضارب الحاصل،\nواختر ما إذا ما كنت ترغب بالاحتفاظ بتعديلاتك أو بتعديلات المستخدم الآخر.\n"
             }
@@ -555,7 +580,8 @@
                 "deleted": "تم حذف هذا العنصر من قِبل {user}.",
                 "location": "تم تحريك هذا العنصر بواسطتك أونت و {user}.",
                 "nodelist": "تم تغيير نقاط التلاقي بواسطتك أنت و {user}.",
-                "memberlist": "تم تغيير أعضاء العلاقة التي غيرتها أنت والمستخدم {user}."
+                "memberlist": "تم تغيير أعضاء العلاقة التي غيرتها أنت والمستخدم {user}.",
+                "tags": "قمت بتغيير الوسم <b>{tag}</b> إلى \"{local}\" و {user} قام بتغييره إلى \"{remote}\"."
             }
         },
         "success": {
@@ -632,8 +658,9 @@
         "help": {
             "title": "المساعدة",
             "key": "م",
-            "help": "#المساعدة\nهذا محرر خرائط لخدمة الخرائط الحُرة [OpenStreetMap](http://www.openstreetmap.org/)\nالخرائط الحُرة والقابلة للتعديل للعالم، بامكانك استخدامها لإضافة او تعديل معلومات تتعلق بمنطقتك, لتوفير خدمات مفتوحة المصدر وبيانات مفتوحة المصدر للعالم\nالإضافات التي تقوم بها ستكون ظاهرة للعالم من مستخدمي خدمة الخرائط مفتوحة المصدر OpenStreetMap. حتى تبدأ بتحرير الخرائط، يجب عليك تسجيل الدخول إلى الخدمة [تسجيل الدخول](https://www.openstreetmap.org/login).\nهذا المحرر  [iD editor](http://ideditor.com/) هو عمل مشترك ويمكن الحصول على مصدر الكود عبر موقع [GitHub](https://github.com/openstreetmap/iD).\n",
-            "editing_saving": "# التحرير والحفظ\n\nهذا المُحرر مصمم في الأساس للعمل أثناء الاتصال بالإنترنت، وأنت الآن تعمل\nعليه من خلال موقع الويب.\n\n### تحديد العناصر على الخريطة\n\nلتحديد عنصر على الخريطة كطريق أو نقطة مثلا انقر عليه مباشرة بزر الفأرة الأيسر،\nسيؤدي ذلك لتحديدها وظهور لون بارز عليها أو على حدودها ويستمر في الوميض أثناء التحديد، ومن ثم ظهور التفاصيل الخاصة بالعنصر المُحدد في اللوحة الجانبية.\nويمكنك النقر عليها مجددا بزر الفأرة الأيمن لتظهر قائمة بالعمليات التي يمكن تنفيذها على العنصر المُحدد.\n\nلتحديد عدد من العناصر في نفس الوقت, اضغط مع الاستمرار بالضغط على مفتاح \"Shift\". ثم انقر\nعلى العناصر التي ترغب بتحديدها, أو انقر بزر الفأرة الأيسر مع الاستمرار بالنقر والسحب على الخريطة لرسم مساحة حُرّة.\nسيقوم ذلك بتحديد جميع النقاط الواقعة داخل المساحة المرسومة.\n\n### حفظ التعديلات\n\nعند قيامك بالتغييرات في الخرائط كتعديل الطُرق، والمباني، والأماكن، وغير ذلك. يتم تخزين وحفظ هذه التغييرات محليا (على جهازك) حتى تقوم بحفظ ورفع هذه التعديلات على الخادوم عبر الإنترنت. لا تقلق عند قيامك بتعديل أو إجراء خاطيء\nيمكنك التراجع عن الإجراءات والتغييرات التي قمت بها عن طريق الضغط على زر التراجع, أو العودة عن التراجع عن طريق زر الإعادة بجانب زر التراجع.\n\nانقر على 'حفظ' لإنهاء مجموعة من التعديلات - على سبيل المثال، إذا كنت قد انتهيت من\nالتعديلات في منطقة في مدينة ما وترغب في البدء بتعديل منطقة جديدة. ستكون لديك الفرصة\nلمراجعة وحفظ ما أتممته، وسيقدم لك المحرر اقتراحات مفيدة وتحذيرات\nفي حال أن هناك شيئا ما لا يبدو سليما حول تغييراتك التي قمت بها.\n\nإذا كان كل شيء يبدو جيدًا، يمكنك إدخال تعليق صغير تشرح فيه التغيير\nالذي قمت به، ثم أنقر على 'رفع' لنشر التغييرات\nعلى [OpenStreetMap.org](http://www.openstreetmap.org/), حيث تصبح مرئية\nلجميع المستخدمين الآخرين، ومتاحة للآخرين لتعديلها أو تحسينها عند الحاجة.\n\nإذا لم تتمكن من إنهاء تعديلاتك في جلسة واحدة، يمكنك ترك نافذة المحرر\nوالعودة فيما بعد (على نفس المتصفح والحاسوب), وسيعرض عليك تطبيق المحرر\nاستعادة تعديلاتك الأخيرة الغير محفوظة.\n\n### استخدام المحرر\n\nA list of available keyboard shortcuts can be found [here](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n"
+            "help": "#المساعدة\nهذا محرر خرائط لخدمة الخرائط الحُرة [OpenStreetMap](http://www.openstreetmap.org/)\nالخرائط الحُرة والقابلة للتعديل للعالم، بامكانك استخدامها لإضافة أو تعديل معلومات تتعلق بمنطقتك, لتوفير خدمات مفتوحة المصدر وبيانات مفتوحة المصدر للعالم\n\nالإضافات التي تقوم بها ستكون ظاهرة للعالم لمستخدمي خدمة الخرائط مفتوحة المصدر OpenStreetMap. حتى تبدأ بتحرير الخرائط، يجب عليك [تسجيل الدخول](https://www.openstreetmap.org/login).\nهذا المحرر  [iD editor](http://ideditor.com/) هو عمل مشترك ومفتوح المصدر حيث يمكن الحصول على مصدر الكود عبر موقع [GitHub](https://github.com/openstreetmap/iD).\n",
+            "editing_saving": "#التحرير والحفظ:\nهذا المُحرر مصمم في الأساس للعمل أثناء الاتصال بالإنترنت، وأنت الآن تعمل عليه من خلال موقع الويب.\n\n###تحديد العناصر على الخريطة:\nلتحديد عنصر على الخريطة كطريق أو نقطة مثلا انقر عليه مباشرة بزر الفأرة الأيسر، سيؤدي ذلك لتحديدها وظهور لون بارز عليها أو على حدودها ويستمر في الوميض أثناء التحديد، ومن ثم ظهور التفاصيل الخاصة بالعنصر المُحدد في اللوحة الجانبية. ويمكنك النقر عليها مجددا بزر الفأرة الأيمن لتظهر قائمة بالعمليات التي يمكن تنفيذها على العنصر المُحدد.\n\nلتحديد عدد من العناصر في نفس الوقت, اضغط مع الاستمرار بالضغط على مفتاح \"Shift\". ثم انقر على العناصر التي ترغب بتحديدها, أو انقر بزر الفأرة الأيسر مع الاستمرار بالنقر والسحب على الخريطة لرسم مساحة حُرّة. سيقوم ذلك بتحديد جميع النقاط الواقعة داخل المساحة المرسومة.\n\n###حفظ التعديلات:\nعند قيامك بالتغييرات في الخرائط كتعديل الطُرق، والمباني، والأماكن، وغير ذلك. يتم تخزين وحفظ هذه التغييرات محليا (على جهازك) حتى تقوم بحفظ ورفع هذه التعديلات على الخادوم عبر الإنترنت. لا تقلق عند قيامك بتعديل أو إجراء خاطيء يمكنك التراجع عن الإجراءات والتغييرات التي قمت بها عن طريق الضغط على زر التراجع, أو العودة عن التراجع عن طريق زر الإعادة بجانب زر التراجع.\n\nانقر على 'حفظ' لإنهاء مجموعة من التعديلات - على سبيل المثال، إذا كنت قد انتهيت من التعديلات في منطقة في مدينة ما وترغب في البدء بتعديل منطقة جديدة. ستكون لديك الفرصة لمراجعة وحفظ ما أتممته، وسيقدم لك المحرر اقتراحات مفيدة وتحذيرات في حال أن هناك شيئا ما لا يبدو سليما حول تغييراتك التي قمت بها.\n\nإذا كان كل شيء يبدو جيدًا، يمكنك إدخال تعليق صغير تشرح فيه التغيير الذي قمت به، ثم أنقر على 'رفع' لنشر التغييرات على OpenStreetMap.org, حيث تصبح مرئية لجميع المستخدمين الآخرين، ومتاحة للآخرين لتعديلها أو تحسينها عند الحاجة.\n\nإذا لم تتمكن من إنهاء تعديلاتك في جلسة واحدة، يمكنك ترك نافذة المحرر والعودة فيما بعد (على نفس المتصفح والحاسوب), وسيعرض عليك تطبيق المحرر استعادة تعديلاتك الأخيرة الغير محفوظة.\n\n###استخدام المحرر:\n\nيمكنك عرض قائمة باختصارات لوحة المفاتيح عن طريق الضغط على مفتاح '؟'.\n",
+            "roads": "# الطرق:\n\nYou can create, fix, and delete roads with this editor. Roads can be all\nkinds: paths, highways, trails, cycleways, and more - any often-crossed\nsegment should be mappable.\n\n### التحديد والاختيار:\n\nClick on a road to select it. An outline should become visible, along\nwith a sidebar showing more information about the road. If you right-click\non it, you'll have a menu of actions you can apply on the road.\n\n### التعديل:\n\nOften you'll see roads that aren't aligned to the imagery behind them\nor to a GPS track. You can adjust these roads so they are in the correct\nplace.\n\nFirst click on the road you want to change. This will highlight it and show\ncontrol points along it that you can drag to better locations. If\nyou want to add new control points for more detail, double-click a part\nof the road without a node, and one will be added.\n\nIf the road connects to another road, but doesn't properly connect on\nthe map, you can drag one of its control points onto the other road in\norder to join them. Having roads connect is important for the map\nand essential for providing driving directions.\n\nYou can also right-click on it and select the 'Move' tool, or simply press\nthe `M` shortcut key, to move the entire road at one time, and then click\nagain to save that movement.\n\n### الحذف:\n\nIf a road is entirely incorrect - you can see that it doesn't exist in satellite\nimagery and ideally have confirmed locally that it's not present - you can delete\nit, which removes it from the map. Be cautious when deleting features -\nlike any other edit, the results are seen by everyone and satellite imagery\nis often out of date, so the road could simply be newly built.\n\nYou can delete a road by clicking on it to select it, then pressing the 'Delete'\nkey or right-clicking it and then clicking the trash can icon.\n\n### الإنشاء:\n\nFound somewhere there should be a road but there isn't? Click the 'Line'\nicon in the top-left of the editor or press the shortcut key `2` to start drawing\na line.\n\nClick on the start of the road on the map to start drawing. If the road\nbranches off from an existing road, start by clicking on the place where they connect.\n\nThen click on points along the road so that it follows the right path, according\nto satellite imagery or GPS. If the road you are drawing crosses another road, connect\nit by clicking on the intersection point. When you're done drawing, double-click\nor press 'Return' or 'Enter' on your keyboard.\n"
         },
         "intro": {
             "done": "تم",
@@ -648,20 +675,66 @@
                 "postcode": "49093",
                 "province": "<value for addr:province>",
                 "quarter": "<value for addr:quarter>",
-                "state": "<value for addr:state>",
+                "state": "MI",
                 "subdistrict": "<value for addr:subdistrict>",
                 "suburb": "<value for addr:suburb>",
                 "countrycode": "us",
                 "name": {
+                    "1st-avenue": "الجادة 1",
+                    "2nd-avenue": "الجادة 2",
+                    "4th-avenue": "الجادة 4",
+                    "5th-avenue": "الجادة 5",
+                    "6th-avenue": "الجادة 6",
+                    "6th-street": "شارع 6",
+                    "7th-avenue": "الجادة 7",
+                    "8th-avenue": "الجادة 8",
+                    "9th-avenue": "الجادة 9",
+                    "10th-avenue": "الجادة 10",
+                    "11th-avenue": "الجادة 11",
+                    "12th-avenue": "الجادة 12",
+                    "access-point-employment": "مكتب التوظيف",
+                    "adams-street": "شارع آدامز",
+                    "andrews-elementary-school": "مدسة أندروز الإبتدائية",
+                    "andrews-street": "شارع أندروز",
+                    "armitage-street": "شارع أرميتاج",
+                    "barrows-school": "مدرسة باروز",
+                    "battle-street": "شارع المعركة",
+                    "bennett-street": "شارع بينيت",
+                    "bowman-park": "حديقة بومان",
+                    "conrail-railroad": "خط سكك حديد كونرايل",
+                    "conservation-park": "حديقة محمية",
                     "constantine-street": "شارع قسنطينة",
+                    "cushman-street": "شارع كوشمان",
+                    "dollar-tree": "شجرة دولار",
+                    "douglas-avenue": "جادة دوغلاس",
                     "east-street": "الشارع الشرقي",
-                    "flower-street": "شارع الأزهار",
+                    "elm-street": "شارع المحروسة",
+                    "flower-street": "شارع الزهرة",
+                    "foster-street": "شارع فوستر",
                     "french-street": "الشارع الفرنسي",
-                    "lafayette-park": "حديقة لافايات",
-                    "lincoln-avenue": "نهج لينكولن",
+                    "garden-street": "شارع الحديقة",
+                    "gem-pawnbroker": "جوهرة بونبروكر",
+                    "grant-avenue": "جادة جرانت",
+                    "hoffman-pond": "بركة ماء هوفمان",
+                    "hoffman-street": "شارع هوفمان",
+                    "hook-avenue": "جادة هوك",
+                    "jefferson-street": "شارع جيفرسون",
+                    "kelsey-street": "شارع كيلسي",
+                    "lafayette-park": "حديقة لافاييت",
+                    "las-coffee-cafe": "مقهى لاس كوفي",
+                    "lincoln-avenue": "جادة لينكولن",
+                    "main-street-cafe": "مقهى الشارع الرئيسي",
+                    "main-street-fitness": "مركز لياقة بدنية",
+                    "main-street": "الشارع الرئيسي",
+                    "maple-street": "شارع القيقب",
+                    "marina-park": "حديقة مارينا",
+                    "michigan-avenue": "جادة ميشيغان",
+                    "middle-street": "الشارع الأوسط",
                     "pizza-hut": "بيتزا هت",
                     "saint-joseph-river": "نهر القديس يوسف",
                     "south-street": "الشارع الجنوبي",
+                    "spring-street": "شارع الربيع",
+                    "three-rivers-fire-department": "قسم إطفاء الثلاثة أنهار",
                     "washington-street": "شارع واشنطن",
                     "west-street": "الشارع الغربي"
                 }
@@ -685,12 +758,12 @@
                 "click_townhall": "جميع العناصر على الخريطة يمكن تحديدها عن طريق النقر عليها. **انقر على النقطة لتحديدها.**",
                 "selected_townhall": "رائع! ، تم تحديد النقطة. العناصر المُحددة تظهر بحد متوهج ينبض باستمرار.",
                 "editor_townhall": "عند تحديد عنصر، فإن *محرر العناصر* يظهر إلى جانب الخريطة على اليمين.",
-                "preset_townhall": "في الجزء العلوي من محرر العناصر يظهر نوع العنصر. هذه النقطة هي {preset}.",
+                "preset_townhall": "في الجزء العلوي من محرر العناصر يظهر نوع العنصر. تلك النقطة المُختارة هي {preset}.",
                 "fields_townhall": "الجزء الأوسط من محرر العناصر يحتوي على *حقول* تعرض صفات وخصائص العنصر المُختار، مثل اسم العنصر وعنوانه.",
                 "close_townhall": "**يمكنك غلق محرر العناصر عن طريق الضغط على مفتاح الهروب في لوحة المفاتيح \"Esc\" أو النقر على زرّ {button} في الركن العلوي من محرر العناصر.**",
                 "search_street": "يمكنك أيضا البحث عن العناصر المختلفة في العرض الحالي، أو في جميع أنحاء العالم. **ابحث عن '{name}'.**",
-                "choose_street": "**اختر {name} من القائمة لاختيارها**",
-                "selected_street": "رائع! {name} مختارة الآن.",
+                "choose_street": "**اختر {name} من القائمة لاختياره**",
+                "selected_street": "رائع! {name} مختار الآن.",
                 "editor_street": "الحقول التي تظهر للشارع مختلفة عن الحقول التي تظهر لمبنى البلدية.{br}لهذا الشارع المختار، فإن محرر العناصر يُظهر حقول مثل '{field1}' و '{field2}'. **أغلق محرر العناصر عن طريق الضغط على مفتاح الهروب 'Esc' من لوحة المفاتيح أو عن طريق النقر على زرّ {button}.**",
                 "play": "جرّب تحريك الخريطة وانقر على بعض العناصر الأخرى لرؤية أنواع العناصر المختلفة التي يمكن إضافتها على OpenStreetMap. **عندما تكون مستعدًا للانتقال للجزء التالي من الجولة، أنقر '{next}'.**"
             },
@@ -742,12 +815,14 @@
                 "start_drag_endpoint": "عند اختيار خط ما، يمكنك سحب أي من نقاطه المكونه له عن طريق النقر بالزر الأيسر مع الاستمرار بالنقر والسحب. **اسحب نقطة النهاية للخط إلى حيث يجب أن تتقاطع هذه الطرق.**",
                 "finish_drag_endpoint": "هذه البقعة تبدو جيدة. **أترك الزرّ الأيسر للفأرة لإنهاء السحب.**",
                 "start_drag_midpoint": "تظهر مثلثات صغيرة عند *نقاط المنتصف* بين كل نقطتين. ومن الطرق الأخرى لإنشاء نقطة جديدة هو سحب هذه المثلثات الصغيرة إلى مكان مختلف. **اسحب مثلث نقطة الوسط لإنشاء نقطة جديدة على طول منحنى الطريق.**",
-                "continue_drag_midpoint": "هذا الخط يبدو أفضل بكثير! استمر بتعديل هذا الخط عن طريق النقر المزدوج عليه أو سحب مثلثات المنتصف لإنشاء نقط جديدة ومطابقة هذه النقط على الطريق ليأخذ المنحنى نفس شكل الطريق. **عند رضائك عن شكل المنحنى ومطابقته لشكل الطريق، أنقر \"موافق\".**",
+                "continue_drag_midpoint": "هذا الخط يبدو أفضل بكثير! استمر بتعديل هذا الخط عن طريق النقر المزدوج عليه أو سحب مثلثات المنتصف لإنشاء نقط جديدة ومطابقة هذه النقط على الطريق ليأخذ المنحنى نفس شكل الطريق. **عند رضائك عن شكل المنحنى ومطابقته لشكل الطريق، انقر \"موافق\".**",
                 "split_intersection": "**انقر على زرّ {button} لفصل {street}.**",
                 "retry_split": "لم تقم بالنقر على زر الفصل. حاول مجددا."
             },
             "buildings": {
-                "title": "المباني"
+                "title": "المباني",
+                "close": "**اضغط زرّ الهروب \"Esc\" أو انقر على زرّ {button} لإغلاق محرر العناصر.**",
+                "rightclick_building": "**انقر بالزرّ الأيمن لاختيار المبنى الذي أنشأته وعرض قائعة التحرير.**"
             },
             "startediting": {
                 "title": "ابدأ بالتحرير",
@@ -888,9 +963,6 @@
                 },
                 "access_simple": {
                     "label": "الدخول مسموح"
-                },
-                "access_toilets": {
-                    "label": "الدخول"
                 },
                 "address": {
                     "label": "العنوان",
@@ -1527,6 +1599,7 @@
                     "label": "النوع",
                     "options": {
                         "downhill": "انحدار",
+                        "ice_skate": "تزلج على الجليد",
                         "playground": "ساحة لعب"
                     }
                 },
@@ -1544,6 +1617,15 @@
                 },
                 "recycling_type": {
                     "label": "نوع إعادة التدوير"
+                },
+                "ref": {
+                    "label": "الرمز المرجعي"
+                },
+                "ref_aeroway_gate": {
+                    "label": "رقم البوابة"
+                },
+                "ref_golf_hole": {
+                    "label": "رقم الحفرة"
                 },
                 "relation": {
                     "label": "النوع"
@@ -2027,8 +2109,8 @@
                     "terms": "دورات مياه, مراحيض"
                 },
                 "amenity/townhall": {
-                    "name": "قاعة البلدة",
-                    "terms": "قاعة البلدة"
+                    "name": "مبنى البلدية",
+                    "terms": "البلدية"
                 },
                 "amenity/university": {
                     "name": "أرض جامعة",
@@ -2127,9 +2209,48 @@
                     "name": "شقق",
                     "terms": "شقق, شقة, بيت"
                 },
+                "building/barn": {
+                    "name": "حظيرة",
+                    "terms": "مخزن; اسطبل"
+                },
+                "building/bunker": {
+                    "name": "ملجأ محصّن"
+                },
+                "building/cabin": {
+                    "name": "كوخ",
+                    "terms": "<translate with synonyms or related terms for 'Cabin', separated by commas>"
+                },
+                "building/cathedral": {
+                    "name": "مبنى كاتدرائية",
+                    "terms": "<translate with synonyms or related terms for 'Cathedral Building', separated by commas>"
+                },
+                "building/chapel": {
+                    "name": "مبنى معبد",
+                    "terms": "<translate with synonyms or related terms for 'Chapel Building', separated by commas>"
+                },
+                "building/church": {
+                    "name": "مبنى كنيسة",
+                    "terms": "كنيسة; معبد"
+                },
+                "building/college": {
+                    "name": "مبنى كلية",
+                    "terms": "كلية; جامعة"
+                },
                 "building/commercial": {
                     "name": "مبني تجاري",
                     "terms": "مبنى تجاري"
+                },
+                "building/construction": {
+                    "name": "مبنى تحت الإنشاء",
+                    "terms": "تحت الانشاء; "
+                },
+                "building/detached": {
+                    "name": "منزل منفصل",
+                    "terms": "مستقل; منفصل"
+                },
+                "building/dormitory": {
+                    "name": "سكن مجمع",
+                    "terms": "مهجع; سكن; سكن جامعي"
                 },
                 "building/entrance": {
                     "name": "مدخل ومخرج"
@@ -2143,14 +2264,15 @@
                     "terms": "جراج; جراج سيارات; موقف; موقف سيارات; ركن; ركنة"
                 },
                 "building/greenhouse": {
-                    "name": "بيت بلاستيكي"
+                    "name": "دفيئة زراعية"
                 },
                 "building/hospital": {
                     "name": "مبنى مستشفى",
                     "terms": "مستشفى; مبنى مستشفى"
                 },
                 "building/hotel": {
-                    "name": "مبنى فندق"
+                    "name": "مبنى فندق",
+                    "terms": "فندق"
                 },
                 "building/house": {
                     "name": "منزل",
@@ -2158,21 +2280,39 @@
                 },
                 "building/hut": {
                     "name": "كوخ",
-                    "terms": "كوخ"
+                    "terms": "كوخ; قش"
                 },
                 "building/industrial": {
                     "name": "مبنى صناعي",
                     "terms": "مبنى صناعي"
                 },
+                "building/kindergarten": {
+                    "name": "مبنى روضة أطفال",
+                    "terms": "روضة; أطفال"
+                },
                 "building/public": {
-                    "name": "مبنى عمومي"
+                    "name": "مبنى عمومي",
+                    "terms": "عام; عمومي"
                 },
                 "building/residential": {
                     "name": "مبنى سكني",
                     "terms": "مبنى سكني"
                 },
+                "building/retail": {
+                    "name": "مبنى بيع بالتجزئة",
+                    "terms": "تجزئة"
+                },
                 "building/roof": {
-                    "name": "سقف"
+                    "name": "سقف",
+                    "terms": "غطاء"
+                },
+                "building/school": {
+                    "name": "مبنى مدرسة",
+                    "terms": "<translate with synonyms or related terms for 'School Building', separated by commas>"
+                },
+                "building/semidetached_house": {
+                    "name": "مبنى شبه منفصل",
+                    "terms": "<translate with synonyms or related terms for 'Semi-Detached House', separated by commas>"
                 },
                 "building/train_station": {
                     "name": "محطة قطار"
@@ -2225,8 +2365,8 @@
                     "terms": "محطة إسعاف, محطة اسعاف"
                 },
                 "emergency/fire_hydrant": {
-                    "name": "خرطوم مطافئ",
-                    "terms": "خرطوم مطافئ"
+                    "name": "خرطوم إطفاء",
+                    "terms": "خرطوم; مطافئ; إطفاء; اطفاء"
                 },
                 "emergency/phone": {
                     "name": "هاتف طوارئ",
@@ -2544,7 +2684,8 @@
                     "terms": "حديقة كلاب"
                 },
                 "leisure/firepit": {
-                    "name": "حفرة نار"
+                    "name": "موقد نار",
+                    "terms": "موقد"
                 },
                 "leisure/garden": {
                     "name": "حديقة",
@@ -3223,6 +3364,10 @@
                     "name": "محل تصوير",
                     "terms": "متجر تظّهير الصور، محل تصوير، مصور"
                 },
+                "shop/pyrotechnics": {
+                    "name": "متجر ألعاب نارية",
+                    "terms": "ألعاب نارية"
+                },
                 "shop/shoes": {
                     "name": "محل بيع أحذية",
                     "terms": "محل بيع أحذية"
@@ -3527,9 +3672,14 @@
                 "description": "صور الأقمار الصناعية القياسية لـ DigitalGlobe",
                 "name": "صور DigitalGlobe القياسية"
             },
+            "EsriWorldImagery": {
+                "attribution": {
+                    "text": "الشروط والملاحظات"
+                }
+            },
             "MAPNIK": {
                 "attribution": {
-                    "text": "© مساهمو خرائط الشارع المفتوحة، رخصة المشاع الإبداعي"
+                    "text": "© مساهمو خرائط الشارع المفتوحة، رخصة المشاع الإبداعي CC-BY-SA"
                 },
                 "description": "الطبقة الافتراضية لخرائط الشارع المفتوحة.",
                 "name": "خرائط الشارع المفتوحة (قياسي)"

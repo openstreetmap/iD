@@ -334,6 +334,7 @@
             "save": "Upload",
             "cancel": "Cancel",
             "changes": "{count} Changes",
+            "download_changes": "Download osmChange file",
             "warnings": "Warnings",
             "modified": "Modified",
             "deleted": "Deleted",
@@ -354,6 +355,10 @@
                 "title": "Background",
                 "zoom": "Zoom",
                 "vintage": "Vintage",
+                "source": "Source",
+                "description": "Description",
+                "resolution": "Resolution",
+                "accuracy": "Accuracy",
                 "unknown": "Unknown",
                 "show_tiles": "Show Tiles",
                 "hide_tiles": "Hide Tiles"
@@ -475,9 +480,16 @@
             "description": "Map Data",
             "key": "F",
             "data_layers": "Data Layers",
+            "layers": {
+                "osm": {
+                    "tooltip": "Map data from OpenStreetMap",
+                    "title": "OpenStreetMap data"
+                }
+            },
             "fill_area": "Fill Areas",
             "map_features": "Map Features",
-            "autohidden": "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them."
+            "autohidden": "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them.",
+            "osmhidden": "These features have been automatically hidden because the OpenStreetMap layer is hidden."
         },
         "feature": {
             "points": {
@@ -568,7 +580,7 @@
                 "keep_remote": "Use theirs",
                 "restore": "Restore",
                 "delete": "Leave Deleted",
-                "download_changes": "Or download your changes.",
+                "download_changes": "Or download osmChange file",
                 "done": "All conflicts resolved!",
                 "help": "Another user changed some of the same map features you changed.\nClick on each feature below for more details about the conflict, and choose whether to keep\nyour changes or the other user's changes.\n"
             }
@@ -660,14 +672,14 @@
             "title": "Help",
             "key": "H",
             "help": "# Help\n\nThis is an editor for [OpenStreetMap](http://www.openstreetmap.org/), the\nfree and editable map of the World. You can use it to add and update\ndata in your area, making an open-source and open-data map of the world\nbetter for everyone.\n\nEdits that you make on this map will be visible to everyone who uses\nOpenStreetMap. In order to make an edit, you'll need to\n[log in](https://www.openstreetmap.org/login).\n\nThe [iD editor](http://ideditor.com/) is a collaborative project with [source\ncode available on GitHub](https://github.com/openstreetmap/iD).\n",
-            "editing_saving": "# Editing & Saving\n\nThis editor is designed to work primarily online, and you're accessing\nit through a website right now.\n\n### Selecting Features\n\nTo select a map feature, like a road or point of interest, click\non it on the map. This will highlight the selected feature, open a panel with\ndetails about it, and show a menu of things you can do with the feature.\n\nTo select multiple features, hold down the 'Shift' key. Then either click\non the features you want to select, or drag on the map to draw a rectangle.\nThis will draw a box and select all the points within it.\n\n### Saving Edits\n\nWhen you make changes like editing roads, buildings, and places, these are\nstored locally until you save them to the server. Don't worry if you make\na mistake - you can undo changes by clicking the undo button, and redo\nchanges by clicking the redo button.\n\nClick 'Save' to finish a group of edits - for instance, if you've completed\nan area of town and would like to start on a new area. You'll have a chance\nto review what you've done, and the editor supplies helpful suggestions\nand warnings if something doesn't seem right about the changes.\n\nIf everything looks good, you can enter a short comment explaining the change\nyou made, and click 'Save' again to post the changes\nto [OpenStreetMap.org](http://www.openstreetmap.org/), where they are visible\nto all other users and available for others to build and improve upon.\n\nIf you can't finish your edits in one sitting, you can leave the editor\nwindow and come back (on the same browser and computer), and the\neditor application will offer to restore your work.\n\n### Using the editor\n\nYou can view a list of keyboard shortcuts by pressing the `?` key.\n",
-            "roads": "# Roads\n\nYou can create, fix, and delete roads with this editor. Roads can be all\nkinds: paths, highways, trails, cycleways, and more - any often-crossed\nsegment should be mappable.\n\n### Selecting\n\nClick on a road to select it. An outline should become visible, along\nwith a small tools menu on the map and a sidebar showing more information\nabout the road.\n\n### Modifying\n\nOften you'll see roads that aren't aligned to the imagery behind them\nor to a GPS track. You can adjust these roads so they are in the correct\nplace.\n\nFirst click on the road you want to change. This will highlight it and show\ncontrol points along it that you can drag to better locations. If\nyou want to add new control points for more detail, double-click a part\nof the road without a node, and one will be added.\n\nIf the road connects to another road, but doesn't properly connect on\nthe map, you can drag one of its control points onto the other road in\norder to join them. Having roads connect is important for the map\nand essential for providing driving directions.\n\nYou can also click the 'Move' tool or press the `M` shortcut key to move the entire road at\none time, and then click again to save that movement.\n\n### Deleting\n\nIf a road is entirely incorrect - you can see that it doesn't exist in satellite\nimagery and ideally have confirmed locally that it's not present - you can delete\nit, which removes it from the map. Be cautious when deleting features -\nlike any other edit, the results are seen by everyone and satellite imagery\nis often out of date, so the road could simply be newly built.\n\nYou can delete a road by clicking on it to select it, then clicking the\ntrash can icon or pressing the 'Delete' key.\n\n### Creating\n\nFound somewhere there should be a road but there isn't? Click the 'Line'\nicon in the top-left of the editor or press the shortcut key `2` to start drawing\na line.\n\nClick on the start of the road on the map to start drawing. If the road\nbranches off from an existing road, start by clicking on the place where they connect.\n\nThen click on points along the road so that it follows the right path, according\nto satellite imagery or GPS. If the road you are drawing crosses another road, connect\nit by clicking on the intersection point. When you're done drawing, double-click\nor press 'Return' or 'Enter' on your keyboard.\n",
+            "editing_saving": "# Editing & Saving\n\nThis editor is designed to work primarily online, and you're accessing\nit through a website right now.\n\n### Selecting Features\n\nTo select a map feature, like a road or point of interest, click on it on\nthe map. This will highlight the selected feature and load a sidebar with\ndetails about it. If you right-click on it, it will show a menu of things\nyou can do with the feature.\n\nTo select multiple features, hold down the 'Shift' key. Then either click\non the features you want to select, or drag on the map to draw a contour\naround those features. All the points inside the lasso area will be selected.\n\n### Saving Edits\n\nWhen you make changes like editing roads, buildings, and places, these are\nstored locally until you save them to the server. Don't worry if you make\na mistake - you can undo changes by clicking the undo button, and redo\nchanges by clicking the redo button.\n\nClick 'Save' to finish a group of edits - for instance, if you've completed\nan area of town and would like to start on a new area. You'll have a chance\nto review what you've done, and the editor supplies helpful suggestions\nand warnings if something doesn't seem right about the changes.\n\nIf everything looks good, you can enter a short comment explaining the change\nyou made, and click 'Upload' to post the changes to\n[OpenStreetMap.org](http://www.openstreetmap.org/), where they will be visible\nto all other users and available for others to build and improve upon.\n\nIf you can't finish your edits in one sitting, you can leave the editor\nwindow and come back (on the same browser and computer), and the\neditor application will offer to restore your work.\n\n### Using the editor\n\nYou can view a list of keyboard shortcuts by pressing the `?` key.\n",
+            "roads": "# Roads\n\nYou can create, fix, and delete roads with this editor. Roads can be all\nkinds: paths, highways, trails, cycleways, and more - any often-crossed\nsegment should be mappable.\n\n### Selecting\n\nClick on a road to select it. An outline should become visible, along\nwith a sidebar showing more information about the road. If you right-click\non it, you'll have a menu of actions you can apply on the road.\n\n### Modifying\n\nOften you'll see roads that aren't aligned to the imagery behind them\nor to a GPS track. You can adjust these roads so they are in the correct\nplace.\n\nFirst click on the road you want to change. This will highlight it and show\ncontrol points along it that you can drag to better locations. If\nyou want to add new control points for more detail, double-click a part\nof the road without a node, and one will be added.\n\nIf the road connects to another road, but doesn't properly connect on\nthe map, you can drag one of its control points onto the other road in\norder to join them. Having roads connect is important for the map\nand essential for providing driving directions.\n\nYou can also right-click on it and select the 'Move' tool, or simply press\nthe `M` shortcut key, to move the entire road at one time, and then click\nagain to save that movement.\n\n### Deleting\n\nIf a road is entirely incorrect - you can see that it doesn't exist in satellite\nimagery and ideally have confirmed locally that it's not present - you can delete\nit, which removes it from the map. Be cautious when deleting features -\nlike any other edit, the results are seen by everyone and satellite imagery\nis often out of date, so the road could simply be newly built.\n\nYou can delete a road by clicking on it to select it, then pressing the 'Delete'\nkey or right-clicking it and then clicking the trash can icon.\n\n### Creating\n\nFound somewhere there should be a road but there isn't? Click the 'Line'\nicon in the top-left of the editor or press the shortcut key `2` to start drawing\na line.\n\nClick on the start of the road on the map to start drawing. If the road\nbranches off from an existing road, start by clicking on the place where they connect.\n\nThen click on points along the road so that it follows the right path, according\nto satellite imagery or GPS. If the road you are drawing crosses another road, connect\nit by clicking on the intersection point. When you're done drawing, double-click\nor press 'Return' or 'Enter' on your keyboard.\n",
             "gps": "# GPS\n\nCollected GPS traces are one valuable source of data for OpenStreetMap. This editor\nsupports local traces - `.gpx` files on your local computer. You can collect\nthis kind of GPS trace with a number of smartphone applications as well as\npersonal GPS hardware.\n\nFor information on how to perform a GPS survey, read\n[Mapping with a smartphone, GPS, or paper](http://learnosm.org/en/mobile-mapping/).\n\nTo use a GPX track for mapping, drag and drop the GPX file onto the map\neditor. If it's recognised, it will be added to the map as a bright purple\nline. Click on the 'Map Data' menu on the right side to enable,\ndisable, or zoom to this new GPX-powered layer.\n\nThe GPX track isn't directly uploaded to OpenStreetMap - the best way to\nuse it is to draw on the map, using it as a guide for the new features that\nyou add, and also to [upload it to OpenStreetMap](http://www.openstreetmap.org/trace/create)\nfor other users to use.\n",
             "imagery": "# Imagery\n\nAerial imagery is an important resource for mapping. A combination of\naeroplane flyovers, satellite views, and freely-compiled sources are available\nin the editor under the 'Background Settings' menu on the right.\n\nBy default a [Bing Maps](http://www.bing.com/maps/) satellite layer is\npresented in the editor, but as you pan and zoom the map to new geographical\nareas, new sources will become available. Some countries, like the United Kingdom, United\nStates, France, and Denmark have very high-quality imagery available for some areas.\n\nImagery is sometimes offset from the map data because of a mistake on the\nimagery provider's side. If you see a lot of roads shifted from the background,\ndon't immediately move them all to match the background. Instead you can adjust\nthe imagery so that it matches the existing data by clicking 'Fix alignment' at\nthe bottom of the Background Settings UI.\n",
             "addresses": "# Addresses\n\nAddresses are some of the most useful information for the map.\n\nAlthough addresses are often represented as parts of streets, in OpenStreetMap\nthey're recorded as attributes of buildings and places along streets.\n\nYou can add address information to places mapped as building outlines\nas well as those mapped as single points. The optimal source of address\ndata is from an on-the-ground survey or personal knowledge - as with any\nother feature, copying from commercial sources like Google Maps is strictly\nforbidden.\n",
             "inspector": "# Using the Inspector\n\nThe inspector is the section on the left side of the page that allows you to\nedit the details of the selected feature.\n\n### Selecting a Feature Type\n\nAfter you add a point, line, or area, you can choose what type of feature it\nis, like whether it's a highway or residential road, supermarket or cafe.\nThe inspector will display buttons for common feature types, and you can\nfind others by typing what you're looking for in the search box.\n\nClick the 'i' in the bottom-right-hand corner of a feature type button to\nlearn more about it. Click a button to choose that type.\n\n### Using Forms and Editing Tags\n\nAfter you choose a feature type, or when you select a feature that already\nhas a type assigned, the inspector will display fields with details about\nthe feature like its name and address.\n\nBelow the fields you see, you can click the 'Add field' dropdown to add\nother details, like a Wikipedia link, wheelchair access, and more.\n\nAt the bottom of the inspector, click 'Additional tags' to add arbitrary\nother tags to the element. [Taginfo](http://taginfo.openstreetmap.org/) is a\ngreat resource for learn more about popular tag combinations.\n\nChanges you make in the inspector are automatically applied to the map.\nYou can undo them at any time by clicking the 'Undo' button.\n",
-            "buildings": "# Buildings\n\nOpenStreetMap is the World's largest database of buildings. You can create\nand improve this database.\n\n### Selecting\n\nYou can select a building by clicking on its border. This will highlight the\nbuilding and open a small tools menu and a sidebar showing more information\nabout the building.\n\n### Modifying\n\nSometimes buildings are incorrectly placed or have incorrect tags.\n\nTo move an entire building, select it, then click the 'Move' tool. Move your\nmouse to shift the building, and click when it's correctly placed.\n\nTo fix the specific shape of a building, click and drag the nodes that form\nits border into better places.\n\n### Creating\n\nOne of the main questions around adding buildings to the map is that\nOpenStreetMap records buildings both as shapes and points. The rule of thumb\nis to _map a building as a shape whenever possible_, and map companies, homes,\namenities, and other things that operate out of buildings as points placed\nwithin the building shape.\n\nStart drawing a building as a shape by clicking the 'Area' button in the top\nleft of the interface, and end it either by pressing 'Return' on your keyboard\nor clicking on the first node drawn to close the shape.\n\n### Deleting\n\nIf a building is entirely incorrect - you can see that it doesn't exist in satellite\nimagery and ideally have confirmed locally that it's not present - you can delete\nit, which removes it from the map. Be cautious when deleting features -\nlike any other edit, the results are seen by everyone and satellite imagery\nis often out of date, so the building could simply be newly built.\n\nYou can delete a building by clicking on it to select it, then clicking the\ntrash can icon or pressing the 'Delete' key.\n",
-            "relations": "# Relations\n\nA relation is a special type of feature in OpenStreetMap that groups together\nother features. For example, two common types of relations are *route relations*,\nwhich group together sections of road that belong to a specific freeway or\nhighway, and *multipolygons*, which group together several lines that define\na complex area (one with several pieces or holes in it like a donut).\n\nThe group of features in a relation are called *members*. In the sidebar, you can\nsee which relations a feature is a member of, and click on a relation there\nto select the it. When the relation is selected, you can see all of its\nmembers listed in the sidebar and highlighted on the map.\n\nFor the most part, iD will take care of maintaining relations automatically\nwhile you edit. The main thing you should be aware of is that if you delete a\nsection of road to redraw it more accurately, you should make sure that the\nnew section is a member of the same relations as the original.\n\n## Editing Relations\n\nIf you want to edit relations, here are the basics.\n\nTo add a feature to a relation, select the feature, click the \"+\" button in the\n\"All relations\" section of the sidebar, and select or type the name of the relation.\n\nTo create a new relation, select the first feature that should be a member,\nclick the \"+\" button in the \"All relations\" section, and select \"New relation...\".\n\nTo remove a feature from a relation, select the feature and click the trash\nbutton next to the relation you want to remove it from.\n\nYou can create multipolygons with holes using the \"Merge\" tool. Draw two areas (inner\nand outer), hold the Shift key and click on each of them to select them both, and then\nclick the \"Merge\" (+) button.\n"
+            "buildings": "# Buildings\n\nOpenStreetMap is the world's largest database of buildings. You can create\nand improve this database.\n\n### Selecting\n\nYou can select a building by clicking on its border. This will highlight the\nbuilding and load a sidebar showing more information about the building.\nIf you right-click on it, it will show a menu of actions you can execute\nin the building.\n\n### Modifying\n\nSometimes buildings are incorrectly placed or have incorrect tags.\n\nTo move an entire building, select it and press the 'M' shortcut key,\nor right-click it and select the 'Move' tool. Move your\nmouse to shift the building, and click when it's correctly placed.\n\nTo fix the specific shape of a building, click and drag the nodes that form\nits border into better places.\n\n### Creating\n\nOne of the main questions around adding buildings to the map is that\nOpenStreetMap records buildings both as shapes and points. The rule of thumb\nis to _map a building as a shape whenever possible_, and map companies, homes,\namenities, and other things that operate out of buildings as points placed\nwithin the building shape.\n\nStart drawing a building as a shape by clicking the 'Area' button in the top\nleft of the interface, and end it either by pressing 'Return' on your keyboard\nor clicking on the first node drawn to close the shape.\n\n### Deleting\n\nIf a building is entirely incorrect - you can see that it doesn't exist in satellite\nimagery and ideally have confirmed locally that it's not present - you can delete\nit, which removes it from the map. Be cautious when deleting features -\nlike any other edit, the results are seen by everyone and satellite imagery\nis often out of date, so the building could simply be newly built.\n\nYou can delete a building by clicking on it to select it, then pressing the 'Delete'\nkey, or right-clicking it and then clicking the trash can icon.\n",
+            "relations": "# Relations\n\nA relation is a special type of feature in OpenStreetMap that groups together\nother features. For example, two common types of relations are *route relations*,\nwhich group together sections of road that belong to a specific freeway or\nhighway, and *multipolygons*, which group together several lines that define\na complex area (one with several pieces or holes in it like a donut).\n\nThe group of features in a relation are called *members*. In the bottom of the\nsidebar, you can see which relations a feature is a member of, and click on a\nrelation there will select it. When the relation is selected, you can see all of\nits members listed in the sidebar and highlighted on the map.\n\nFor the most part, iD will take care of maintaining relations automatically\nwhile you edit. The main thing you should be aware of is that if you delete a\nsection of road to redraw it more accurately, you should make sure that the\nnew section is a member of the same relations as the original.\n\n## Editing Relations\n\nIf you want to edit relations, here are the basics.\n\nTo add a feature to a relation, select the feature, click the \"+\" button in the\n\"All relations\" section of the sidebar, and select or type the name of the relation.\n\nTo create a new relation, select the first feature that should be a member,\nclick the \"+\" button in the \"All relations\" section, and select \"New relation...\".\n\nTo remove a feature from a relation, select the feature and click the trash\nbutton next to the relation you want to remove it from.\n\nYou can create multipolygons with holes using the \"Merge\" tool. Draw two areas (inner\nand outer), hold the Shift key and click on each of them to select them both, and then\npress the 'C' shortcut key. Other option is to select both, and then right-click one\nof the and click the \"Merge\" (+) button.\n"
         },
         "intro": {
             "done": "done",
@@ -1126,9 +1138,6 @@
                 "access_simple": {
                     "label": "Allowed Access"
                 },
-                "access_toilets": {
-                    "label": "Access"
-                },
                 "address": {
                     "label": "Address",
                     "placeholders": {
@@ -1161,7 +1170,8 @@
                         "subdistrict": "Subdistrict",
                         "subdistrict!vn": "Ward/Commune/Townlet",
                         "suburb": "Suburb",
-                        "suburb!jp": "Ward"
+                        "suburb!jp": "Ward",
+                        "unit": "Unit"
                     }
                 },
                 "admin_level": {
@@ -1353,6 +1363,10 @@
                 "collection_times": {
                     "label": "Collection Times"
                 },
+                "comment": {
+                    "label": "Changeset Comment",
+                    "placeholder": "Brief description of your contributions (required)"
+                },
                 "communication_multi": {
                     "label": "Communication Types"
                 },
@@ -1374,6 +1388,14 @@
                 },
                 "craft": {
                     "label": "Type"
+                },
+                "crane/type": {
+                    "label": "Crane Type",
+                    "options": {
+                        "floor-mounted_crane": "Floor-mounted Crane",
+                        "portal_crane": "Portal Crane",
+                        "travel_lift": "Travel Lift"
+                    }
                 },
                 "crop": {
                     "label": "Crops"
@@ -1458,6 +1480,10 @@
                 },
                 "drive_through": {
                     "label": "Drive-Through"
+                },
+                "duration": {
+                    "label": "Duration",
+                    "placeholder": "00:00"
                 },
                 "electrified": {
                     "label": "Electrification",
@@ -1565,6 +1591,16 @@
                 "handrail": {
                     "label": "Handrail"
                 },
+                "hashtags": {
+                    "label": "Suggested Hashtags",
+                    "placeholder": "#example"
+                },
+                "healthcare": {
+                    "label": "Type"
+                },
+                "healthcare/speciality": {
+                    "label": "Specialties"
+                },
                 "height": {
                     "label": "Height (Meters)"
                 },
@@ -1605,6 +1641,9 @@
                 },
                 "inscription": {
                     "label": "Inscription"
+                },
+                "intermittent": {
+                    "label": "Intermittent"
                 },
                 "internet_access": {
                     "label": "Internet Access",
@@ -1722,6 +1761,9 @@
                 },
                 "maxweight": {
                     "label": "Max Weight"
+                },
+                "memorial": {
+                    "label": "Type"
                 },
                 "milestone_position": {
                     "label": "Milestone Position",
@@ -1918,6 +1960,15 @@
                     "label": "Power Output",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
+                "playground/baby": {
+                    "label": "Baby Seat"
+                },
+                "playground/max_age": {
+                    "label": "Maximum Age"
+                },
+                "playground/min_age": {
+                    "label": "Minimum Age"
+                },
                 "population": {
                     "label": "Population"
                 },
@@ -2092,6 +2143,9 @@
                 "social_facility_for": {
                     "label": "People Served"
                 },
+                "source": {
+                    "label": "Sources"
+                },
                 "sport": {
                     "label": "Sports"
                 },
@@ -2127,6 +2181,13 @@
                         "cutting": "Cutting",
                         "embankment": "Embankment",
                         "ford": "Ford",
+                        "tunnel": "Tunnel"
+                    },
+                    "placeholder": "Unknown"
+                },
+                "structure_waterway": {
+                    "label": "Structure",
+                    "options": {
                         "tunnel": "Tunnel"
                     },
                     "placeholder": "Unknown"
@@ -2190,6 +2251,9 @@
                 "tourism": {
                     "label": "Type"
                 },
+                "tourism_attraction": {
+                    "label": "Tourism"
+                },
                 "tower/construction": {
                     "label": "Construction",
                     "placeholder": "Guyed, Lattice, Concealed, ..."
@@ -2207,6 +2271,9 @@
                         "grade5": "Soft: soil/sand/grass"
                     },
                     "placeholder": "Solid, Mostly Solid, Soft..."
+                },
+                "trade": {
+                    "label": "Type"
                 },
                 "traffic_calming": {
                     "label": "Type"
@@ -2233,9 +2300,6 @@
                     "label": "Type",
                     "placeholder": "Default"
                 },
-                "tunnel_waterway": {
-                    "label": "Tunnel"
-                },
                 "vending": {
                     "label": "Type of Goods"
                 },
@@ -2245,6 +2309,22 @@
                         "area": "Over 20m (65ft)",
                         "house": "Up to 5m (16ft)",
                         "street": "5 to 20m (16 to 65ft)"
+                    }
+                },
+                "volcano/status": {
+                    "label": "Volcano Status",
+                    "options": {
+                        "active": "Active",
+                        "dormant": "Dormant",
+                        "extinct": "Extinct"
+                    }
+                },
+                "volcano/type": {
+                    "label": "Volcano Type",
+                    "options": {
+                        "scoria": "Scoria",
+                        "shield": "Shield",
+                        "stratovolcano": "Stratovolcano"
                     }
                 },
                 "wall": {
@@ -2427,6 +2507,12 @@
                 },
                 "amenity/clinic": {
                     "name": "Clinic"
+                },
+                "amenity/clinic/abortion": {
+                    "name": "Abortion Clinic"
+                },
+                "amenity/clinic/fertility": {
+                    "name": "Fertility Clinic"
                 },
                 "amenity/clock": {
                     "name": "Clock"
@@ -2616,6 +2702,9 @@
                 "amenity/shelter": {
                     "name": "Shelter"
                 },
+                "amenity/shower": {
+                    "name": "Shower"
+                },
                 "amenity/social_facility": {
                     "name": "Social Facility"
                 },
@@ -2670,6 +2759,9 @@
                 "amenity/vending_machine/excrement_bags": {
                     "name": "Excrement Bag Vending Machine"
                 },
+                "amenity/vending_machine/feminine_hygiene": {
+                    "name": "Feminine Hygiene Vending Machine"
+                },
                 "amenity/vending_machine/news_papers": {
                     "name": "Newspaper Vending Machine"
                 },
@@ -2714,6 +2806,45 @@
                 },
                 "area/highway": {
                     "name": "Road Surface"
+                },
+                "attraction/amusement_ride": {
+                    "name": "Amusement Ride"
+                },
+                "attraction/animal": {
+                    "name": "Animal"
+                },
+                "attraction/big_wheel": {
+                    "name": "Big Wheel"
+                },
+                "attraction/bumper_car": {
+                    "name": "Bumper Car"
+                },
+                "attraction/bungee_jumping": {
+                    "name": "Bungee Jumping"
+                },
+                "attraction/carousel": {
+                    "name": "Carousel"
+                },
+                "attraction/dark_ride": {
+                    "name": "Ghost Train"
+                },
+                "attraction/drop_tower": {
+                    "name": "Drop Tower"
+                },
+                "attraction/pirate_ship": {
+                    "name": "Pirate Ship"
+                },
+                "attraction/river_rafting": {
+                    "name": "River Rafting"
+                },
+                "attraction/roller_coaster": {
+                    "name": "Roller Coaster"
+                },
+                "attraction/train": {
+                    "name": "Tourist Train"
+                },
+                "attraction/water_slide": {
+                    "name": "Water Slide"
                 },
                 "barrier": {
                     "name": "Barrier"
@@ -2920,7 +3051,7 @@
                     "name": "Clockmaker"
                 },
                 "craft/confectionery": {
-                    "name": "Confectionery"
+                    "name": "Candy Maker"
                 },
                 "craft/distillery": {
                     "name": "Distillery"
@@ -3051,6 +3182,9 @@
                 "emergency/fire_hydrant": {
                     "name": "Fire Hydrant"
                 },
+                "emergency/life_ring": {
+                    "name": "Life Ring"
+                },
                 "emergency/no": {
                     "name": "Emergency Access No"
                 },
@@ -3072,8 +3206,14 @@
                 "footway/crossing": {
                     "name": "Street Crossing"
                 },
+                "footway/crossing-raised": {
+                    "name": "Raised Street Crossing"
+                },
                 "footway/crosswalk": {
                     "name": "Pedestrian Crosswalk"
+                },
+                "footway/crosswalk-raised": {
+                    "name": "Raised Pedestrian Crosswalk"
                 },
                 "footway/sidewalk": {
                     "name": "Pavement",
@@ -3112,8 +3252,50 @@
                 "golf/water_hazard_line": {
                     "name": "Water Hazard"
                 },
+                "healthcare": {
+                    "name": "Healthcare Facility"
+                },
+                "healthcare/alternative": {
+                    "name": "Alternative Medicine"
+                },
+                "healthcare/alternative/chiropractic": {
+                    "name": "Chiropractor"
+                },
+                "healthcare/audiologist": {
+                    "name": "Audiologist"
+                },
+                "healthcare/birthing_center": {
+                    "name": "Birthing Center"
+                },
                 "healthcare/blood_donation": {
                     "name": "Blood Donor Centre"
+                },
+                "healthcare/hospice": {
+                    "name": "Hospice"
+                },
+                "healthcare/midwife": {
+                    "name": "Midwife"
+                },
+                "healthcare/occupational_therapist": {
+                    "name": "Occupational Therapist"
+                },
+                "healthcare/optometrist": {
+                    "name": "Optometrist"
+                },
+                "healthcare/physiotherapist": {
+                    "name": "Physiotherapist"
+                },
+                "healthcare/podiatrist": {
+                    "name": "Podiatrist"
+                },
+                "healthcare/psychotherapist": {
+                    "name": "Psychotherapist"
+                },
+                "healthcare/rehabilitation": {
+                    "name": "Rehabilitation Facility"
+                },
+                "healthcare/speech_therapist": {
+                    "name": "Speech Therapist"
                 },
                 "highway": {
                     "name": "Highway"
@@ -3130,8 +3312,14 @@
                 "highway/crossing": {
                     "name": "Street Crossing"
                 },
+                "highway/crossing-raised": {
+                    "name": "Raised Street Crossing"
+                },
                 "highway/crosswalk": {
                     "name": "Pedestrian Crosswalk"
+                },
+                "highway/crosswalk-raised": {
+                    "name": "Raised Pedestrian Crosswalk"
                 },
                 "highway/cycleway": {
                     "name": "Cycle Path"
@@ -3439,6 +3627,9 @@
                 "leisure/golf_course": {
                     "name": "Golf Course"
                 },
+                "leisure/hackerspace": {
+                    "name": "Hackerspace"
+                },
                 "leisure/horse_riding": {
                     "name": "Horseback Riding Facility"
                 },
@@ -3553,6 +3744,9 @@
                 "man_made/chimney": {
                     "name": "Chimney"
                 },
+                "man_made/crane": {
+                    "name": "Crane"
+                },
                 "man_made/cutline": {
                     "name": "Cut line"
                 },
@@ -3633,6 +3827,9 @@
                 },
                 "manhole/drain": {
                     "name": "Storm Drain"
+                },
+                "manhole/telecom": {
+                    "name": "Telecom Manhole"
                 },
                 "natural": {
                     "name": "Natural"
@@ -3832,6 +4029,48 @@
                 "place/village": {
                     "name": "Village"
                 },
+                "playground/balance_beam": {
+                    "name": "Balance Beam"
+                },
+                "playground/basket_spinner": {
+                    "name": "Basket Spinner"
+                },
+                "playground/basket_swing": {
+                    "name": "Basket Swing"
+                },
+                "playground/climbing_frame": {
+                    "name": "Climbing Frame"
+                },
+                "playground/cushion": {
+                    "name": "Bouncy Cushion"
+                },
+                "playground/horizontal_bar": {
+                    "name": "Horizontal Bar"
+                },
+                "playground/rocker": {
+                    "name": "Springy Rocker"
+                },
+                "playground/roundabout": {
+                    "name": "Play Roundabout"
+                },
+                "playground/sandpit": {
+                    "name": "Sandpit"
+                },
+                "playground/seesaw": {
+                    "name": "Seesaw"
+                },
+                "playground/slide": {
+                    "name": "Slide"
+                },
+                "playground/structure": {
+                    "name": "Play Structure"
+                },
+                "playground/swing": {
+                    "name": "Swing"
+                },
+                "playground/zipwire": {
+                    "name": "Zip Wire"
+                },
                 "point": {
                     "name": "Point"
                 },
@@ -3883,8 +4122,14 @@
                 "railway/abandoned": {
                     "name": "Abandoned Railway"
                 },
+                "railway/buffer_stop": {
+                    "name": "Buffer Stop"
+                },
                 "railway/crossing": {
                     "name": "Railway Crossing (Path)"
+                },
+                "railway/derail": {
+                    "name": "Railway Derailer"
                 },
                 "railway/disused": {
                     "name": "Disused Railway"
@@ -3898,6 +4143,9 @@
                 "railway/level_crossing": {
                     "name": "Railway Crossing (Road)"
                 },
+                "railway/milestone": {
+                    "name": "Railway Milestone"
+                },
                 "railway/monorail": {
                     "name": "Monorail"
                 },
@@ -3910,6 +4158,9 @@
                 "railway/rail": {
                     "name": "Rail"
                 },
+                "railway/signal": {
+                    "name": "Railway Signal"
+                },
                 "railway/station": {
                     "name": "Railway Station"
                 },
@@ -3918,6 +4169,12 @@
                 },
                 "railway/subway_entrance": {
                     "name": "Subway Entrance"
+                },
+                "railway/switch": {
+                    "name": "Railway Switch"
+                },
+                "railway/train_wash": {
+                    "name": "Train Wash"
                 },
                 "railway/tram": {
                     "name": "Tram"
@@ -4255,11 +4512,17 @@
                 "shop/ticket": {
                     "name": "Ticket Seller"
                 },
+                "shop/tiles": {
+                    "name": "Tile Shop"
+                },
                 "shop/tobacco": {
                     "name": "Tobacco Shop"
                 },
                 "shop/toys": {
                     "name": "Toy Store"
+                },
+                "shop/trade": {
+                    "name": "Trade Shop"
                 },
                 "shop/travel_agency": {
                     "name": "Travel Agency"
@@ -4397,7 +4660,7 @@
                     "name": "Rumble Strip"
                 },
                 "traffic_calming/table": {
-                    "name": "Raised Pedestrian Crossing"
+                    "name": "Speed Table"
                 },
                 "type/boundary": {
                     "name": "Boundary"
@@ -4477,6 +4740,9 @@
                 "type/site": {
                     "name": "Site"
                 },
+                "type/waterway": {
+                    "name": "Waterway"
+                },
                 "vertex": {
                     "name": "Other"
                 },
@@ -4516,6 +4782,9 @@
                 "waterway/stream": {
                     "name": "Stream"
                 },
+                "waterway/stream_intermittent": {
+                    "name": "Intermittent Stream"
+                },
                 "waterway/water_point": {
                     "name": "Marine Drinking Water"
                 },
@@ -4546,6 +4815,13 @@
                 "description": "Standard DigitalGlobe satellite imagery.",
                 "name": "DigitalGlobe Standard Imagery"
             },
+            "EsriWorldImagery": {
+                "attribution": {
+                    "text": "Terms & Feedback"
+                },
+                "description": "Esri world imagery.",
+                "name": "Esri World Imagery"
+            },
             "MAPNIK": {
                 "attribution": {
                     "text": "© OpenStreetMap contributors, CC-BY-SA"
@@ -4559,10 +4835,6 @@
                 },
                 "description": "Satellite and aerial imagery.",
                 "name": "Mapbox Satellite"
-            },
-            "New_and_Misaligned_TIGER_Roads-2013": {
-                "description": "At zoom level 16+, public domain map data from the US Census. At lower zooms, only changes since 2006 minus changes already incorporated into OpenStreetMap",
-                "name": "New & Misaligned TIGER Roads"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -4605,6 +4877,16 @@
                     "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
                 },
                 "name": "OSM Inspector: Tagging"
+            },
+            "US-TIGER-Roads-2012": {
+                "name": "TIGER Roads 2012"
+            },
+            "US-TIGER-Roads-2014": {
+                "description": "At zoom level 16+, public domain map data from the US Census. At lower zooms, only changes since 2006 minus changes already incorporated into OpenStreetMap",
+                "name": "TIGER Roads 2014"
+            },
+            "US-TIGER-Roads-2017": {
+                "name": "TIGER Roads 2017"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {

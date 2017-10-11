@@ -567,7 +567,6 @@
                 "keep_remote": "Gunakan kepunyaan mereka",
                 "restore": "Kembalikan",
                 "delete": "Tinggalkan yang Dipadam",
-                "download_changes": "Atau muat turun perubahan anda.",
                 "done": "Kesemua pertikaian telah diselesaikan!",
                 "help": "Pengguna lain mengubah beberapa ciri peta yang sama yang anda ubah.\nKlik pada setiap ciri di bawah untuk maklumat lanjut tentang pertikaian, dan pilih sama ada untuk menyimpan\nperubahan anda atau perubahan pengguna lain.\n"
             }
@@ -840,9 +839,6 @@
                 },
                 "access_simple": {
                     "label": "Akses dibenarkan"
-                },
-                "access_toilets": {
-                    "label": "Akses"
                 },
                 "address": {
                     "label": "Alamat",
@@ -1996,10 +1992,6 @@
                 },
                 "description": "Imejan satelit dan udara.",
                 "name": "Mapbox Satellite"
-            },
-            "New_and_Misaligned_TIGER_Roads-2013": {
-                "description": "Pada tahap zoom 16+, data peta domain awam dari Banci AS. Pada zoom yang lebih rendah, hanya perubahan sejak 2006 tolak perubahan yang telah dimasukkan ke dalam OpenStreetMap",
-                "name": "Jalan-jalan TIGER Baru & Tidak Sejajar"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {

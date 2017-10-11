@@ -440,7 +440,6 @@
                 "keep_remote": "Folosește cel de-al lor",
                 "restore": "Restaurează",
                 "delete": "Lasă șterse",
-                "download_changes": "Sau descarcă schimbările tale.",
                 "done": "Toate conflictele au fost rezolvate!"
             }
         },
@@ -799,9 +798,6 @@
                 },
                 "access_simple": {
                     "label": "Acces Permis"
-                },
-                "access_toilets": {
-                    "label": "Acces"
                 },
                 "address": {
                     "label": "Adresă",
@@ -2356,9 +2352,6 @@
                 "craft/clockmaker": {
                     "terms": "<translate with synonyms or related terms for 'Clockmaker', separated by commas>"
                 },
-                "craft/confectionery": {
-                    "terms": "<translate with synonyms or related terms for 'Confectionery', separated by commas>"
-                },
                 "craft/distillery": {
                     "terms": "<translate with synonyms or related terms for 'Distillery', separated by commas>"
                 },
@@ -3782,9 +3775,6 @@
                     "name": "Casă Funerală",
                     "terms": "<translate with synonyms or related terms for 'Funeral Home', separated by commas>"
                 },
-                "shop/furnace": {
-                    "terms": "<translate with synonyms or related terms for 'Furnace Store', separated by commas>"
-                },
                 "shop/furniture": {
                     "name": "Magazin de Mobilă",
                     "terms": "<translate with synonyms or related terms for 'Furniture Store', separated by commas>"
@@ -4158,9 +4148,6 @@
                 "traffic_calming/rumble_strip": {
                     "terms": "<translate with synonyms or related terms for 'Rumble Strip', separated by commas>"
                 },
-                "traffic_calming/table": {
-                    "terms": "<translate with synonyms or related terms for 'Raised Pedestrian Crossing', separated by commas>"
-                },
                 "type/boundary": {
                     "name": "Graniță",
                     "terms": "<translate with synonyms or related terms for 'Boundary', separated by commas>"
@@ -4351,9 +4338,6 @@
                 },
                 "description": "Satelit și imagini aeriane.",
                 "name": "Satelit Mapbox"
-            },
-            "New_and_Misaligned_TIGER_Roads-2013": {
-                "name": "Străzi TIGER Noi & Alineate Greșit"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {

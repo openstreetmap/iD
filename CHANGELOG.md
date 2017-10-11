@@ -26,6 +26,196 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.4.3
+##### October 9, 2017
+
+#### :bug: Bugfixes
+
+* Include unicode characters in hashtag matching ([#4398], [#4419], thanks [@mojodna])
+* Allow common punctuation to split hashtags ([#4412], thanks [@mojodna])
+
+[#4419]: https://github.com/openstreetmap/iD/issues/4419
+[#4412]: https://github.com/openstreetmap/iD/issues/4412
+[#4398]: https://github.com/openstreetmap/iD/issues/4398
+[@mojodna]: https://github.com/mojodna
+
+
+#### :mortar_board: Walkthrough
+
+* Make sure "Add Field" scrolls into view during "Area" chapter of walkthrough ([#4417])
+
+[#4417]: https://github.com/openstreetmap/iD/issues/4417
+
+
+#### :rocket: Presets
+
+* Refined playground presets terms for Spring Rider and Play Roundabout ([#4415], thanks, [@1ec5])
+
+[#4415]: https://github.com/openstreetmap/iD/issues/4415
+[@1ec5]: https://github.com/1ec5
+
+
+# 2.4.2
+##### October 8, 2017
+
+#### :tada: New Features
+
+* Upgraded to TIGER 2017 overlay layer (thanks, [@iandees])
+* Improve tunnel field on waterway presets to include `layer=*` subfield ([#4384])
+* Standardize on one "simple" access field (for parking, toilets, swimming pools) that includes "yes" option ([#4383])
+* Treat OSM data layer like other vector layers and give it a show/hide toggle on the Map Data pane ([#2904])
+* Add link at bottom of save screen to download your changes as an osmChange file ([#4346], [#4350])
+* Allow universal fields to have default values (related: [#4323])
+* Display vintage and other metadata in the Background Panel for Esri World Imagery layer ([#4335], thanks [@jgravois])
+
+[#4384]: https://github.com/openstreetmap/iD/issues/4384
+[#4383]: https://github.com/openstreetmap/iD/issues/4383
+[#4350]: https://github.com/openstreetmap/iD/issues/4350
+[#4346]: https://github.com/openstreetmap/iD/issues/4346
+[#4335]: https://github.com/openstreetmap/iD/issues/4335
+[#4323]: https://github.com/openstreetmap/iD/issues/4323
+[#2904]: https://github.com/openstreetmap/iD/issues/2904
+[@iandees]: https://github.com/iandees
+[@jgravois]: https://github.com/jgravois
+
+
+#### :sparkles: Usability
+
+* Change label for hashtag field to "Suggested Hashtags") ([#4396] thanks [@arka-nitd])
+* Match generic Address preset for point, vertex, area, and if any part of the address is present ([#4353])
+* Hide administrative boundaries by default ([#4292])
+* Disable Undo/Redo when map is not editable ([#4358])
+* Use the browser's pointer cursor (before it was a mix of browser pointer and custom cursor)
+* Move "zoom to edit" button on top of map, allowing search when zoomed out ([#4279], [#3679], thanks [@leegenes])
+* Sort preset with higher priority in preset list when search matches name exactly ([#4325])
+
+[#4396]: https://github.com/openstreetmap/iD/issues/4396
+[#4358]: https://github.com/openstreetmap/iD/issues/4358
+[#4353]: https://github.com/openstreetmap/iD/issues/4353
+[#4325]: https://github.com/openstreetmap/iD/issues/4325
+[#4292]: https://github.com/openstreetmap/iD/issues/4292
+[#4279]: https://github.com/openstreetmap/iD/issues/4279
+[#3679]: https://github.com/openstreetmap/iD/issues/3679
+[@arka-nitd]: https://github.com/arka-nitd
+[@leegenes]: https://github.com/leegenes
+
+
+#### :bug: Bugfixes
+
+* Fix overlapping in preset list when multiple tag references are expanded ([#4023], [#4412], thanks [@jleh])
+* Clicking delete button on the structure field (bridge, tunnel, etc.) should remove `layer=*` value also
+* Disable source switcher during walkthrough, ([#4402], thanks [@pwelby])
+* Prevent topbar buttons from moving in Firefox during save mode when css filter is active ([#4348])
+* Refresh tag popup documentation when user switches presets ([#4209])
+* Fix "request review" checkbox and button alignment ([#4354])
+* Fix multiselect items that span more than one line ([#4349])
+* Fix labels for detected objects in Mapillary viewer ([#4282])
+* Ignore URLish fragments when detecting hashtags in changeset comment ([#4289])
+* Several changes to avoid storing stale hashtags ([#4304])
+* Match fewer punctuation characters in hashtags ([#4303])
+* Avoid requesting blank tiles from Esri World Imagery ([#4327], thanks [@jgravois])
+* Fix reflect actions to be invertable ([#4300], [#4328], thanks [@leegenes])
+
+[#4412]: https://github.com/openstreetmap/iD/issues/4412
+[#4402]: https://github.com/openstreetmap/iD/issues/4402
+[#4354]: https://github.com/openstreetmap/iD/issues/4354
+[#4349]: https://github.com/openstreetmap/iD/issues/4349
+[#4348]: https://github.com/openstreetmap/iD/issues/4348
+[#4328]: https://github.com/openstreetmap/iD/issues/4328
+[#4327]: https://github.com/openstreetmap/iD/issues/4327
+[#4304]: https://github.com/openstreetmap/iD/issues/4304
+[#4303]: https://github.com/openstreetmap/iD/issues/4303
+[#4300]: https://github.com/openstreetmap/iD/issues/4300
+[#4289]: https://github.com/openstreetmap/iD/issues/4289
+[#4282]: https://github.com/openstreetmap/iD/issues/4282
+[#4209]: https://github.com/openstreetmap/iD/issues/4209
+[#4023]: https://github.com/openstreetmap/iD/issues/4023
+[@jleh]: https://github.com/jleh
+[@pwelby]: https://github.com/pwelby
+[@jgravois]: https://github.com/jgravois
+[@leegenes]: https://github.com/leegenes
+
+
+#### :earth_asia: Localization
+
+* Improve Address format for Poland ([#4328], thanks [@Teiron])
+* Improve Phone formats for Austria, Ivory Coast and Benin ([#4314], thanks [@manfredbrandl])
+* Remove `addr:unit` from Germany, Austria, Switzerland addresses fields ([#4301], thanks [@manfredbrandl])
+* Remove `addr:unit` from Brazil addresses field ([#4284], thanks [@willemarcel])
+
+[#4328]: https://github.com/openstreetmap/iD/issues/4328
+[#4314]: https://github.com/openstreetmap/iD/issues/4314
+[#4301]: https://github.com/openstreetmap/iD/issues/4301
+[#4284]: https://github.com/openstreetmap/iD/issues/4284
+[@Teiron]: https://github.com/Teiron
+[@manfredbrandl]: https://github.com/manfredbrandl
+[@willemarcel]: https://github.com/willemarcel
+
+
+#### :rocket: Presets
+
+* Add Tile Shop and Trade Shop presets ([#4410], thanks [@TheGreenToaster])
+* Allow camera presets to be placed on vertex geometry (e.g. along walls) ([#4400], thanks [@JamesKingdom])
+* Add preset for `man_made=crane` ([#4374], thanks [@willemarcel])
+* Rename "Confectionery" to "Candy Maker" and add "sweet" as search term ([#4388], thanks [@JamesKingdom])
+* Add "trim trail" as a search term for Fitness Station preset
+* Add several presets for common playground equipment ([#4352], [#4375], thanks [@JamesKingdom])
+* Add fields for volcano type and status ([#4366], [#4365] thanks [@JamesKingdom])
+* Add "trig point" search term to Survey Point preset ([#4367], thanks [@JamesKingdom])
+* Fix misspellings in healthcare preset search terms ([#4363], thanks [@willemarcel])
+* Add memorial type dropdown field ([#4357], thanks [@boothym])
+* Deprecate preset for `shop=furnace` ([#4347])
+* Add healthcare presets, and `healthcare=*` tags to some existing presets ([#4329], [#3589], thanks [@JamesKingdom])
+* Add `intermittent=yes` checkbox field, and Intermittent Stream preset ([#4337])
+* Add `tourism=attraction` as a universal field ([#4323])
+* Add preset for Hackerspace ([#4332], thanks [@willemarcel])
+* Add preset for Feminine Hygiene Vending Machine ([#4331], [#4275], thanks [@willemarcel])
+* Don't allow certain presets to be used on areas ([#4319], [#4330], thanks [@willemarcel])
+* Improve `traffic_calming=table` presets (raised pedestrian crossing) ([#4309])
+* Add `maxspeed=*` field back to Living Street preset ([#4260], thanks [@JamesKingdom])
+* Remove `artwork_type=*` field from Art Shop and Art Gallery presets ([#4298], thanks [@simonpoole])
+* Add additional fields (operator, duration, access) to Ferry Route preset ([#4296], thanks [@willemarcel])
+* Add Waterway relation preset ([#4318], [#4299], thanks [@JamesKingdom])
+* Allow Defibrillator preset to be placed on vertex geometry (e.g. along walls) ([#4290], [#4287] thanks [@JamesKingdom])
+* Add name field back to Wood preset ([#4200], thanks [@JamesKingdom])
+
+[#4410]: https://github.com/openstreetmap/iD/issues/4410
+[#4400]: https://github.com/openstreetmap/iD/issues/4400
+[#4388]: https://github.com/openstreetmap/iD/issues/4388
+[#4375]: https://github.com/openstreetmap/iD/issues/4375
+[#4374]: https://github.com/openstreetmap/iD/issues/4374
+[#4367]: https://github.com/openstreetmap/iD/issues/4367
+[#4366]: https://github.com/openstreetmap/iD/issues/4366
+[#4365]: https://github.com/openstreetmap/iD/issues/4365
+[#4363]: https://github.com/openstreetmap/iD/issues/4363
+[#4357]: https://github.com/openstreetmap/iD/issues/4357
+[#4352]: https://github.com/openstreetmap/iD/issues/4352
+[#4347]: https://github.com/openstreetmap/iD/issues/4347
+[#4337]: https://github.com/openstreetmap/iD/issues/4337
+[#4332]: https://github.com/openstreetmap/iD/issues/4332
+[#4331]: https://github.com/openstreetmap/iD/issues/4331
+[#4330]: https://github.com/openstreetmap/iD/issues/4330
+[#4329]: https://github.com/openstreetmap/iD/issues/4329
+[#4323]: https://github.com/openstreetmap/iD/issues/4323
+[#4319]: https://github.com/openstreetmap/iD/issues/4319
+[#4318]: https://github.com/openstreetmap/iD/issues/4318
+[#4309]: https://github.com/openstreetmap/iD/issues/4309
+[#4299]: https://github.com/openstreetmap/iD/issues/4299
+[#4298]: https://github.com/openstreetmap/iD/issues/4298
+[#4296]: https://github.com/openstreetmap/iD/issues/4296
+[#4290]: https://github.com/openstreetmap/iD/issues/4290
+[#4287]: https://github.com/openstreetmap/iD/issues/4287
+[#4275]: https://github.com/openstreetmap/iD/issues/4275
+[#4260]: https://github.com/openstreetmap/iD/issues/4260
+[#4200]: https://github.com/openstreetmap/iD/issues/4200
+[#3589]: https://github.com/openstreetmap/iD/issues/3589
+[@TheGreenToaster]: https://github.com/TheGreenToaster
+[@JamesKingdom]: https://github.com/JamesKingdom
+[@willemarcel]: https://github.com/willemarcel
+[@boothym]: https://github.com/boothym
+[@simonpoole]: https://github.com/simonpoole
+
+
 # 2.4.1
 ##### August 26, 2017
 
