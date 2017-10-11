@@ -3968,6 +3968,11 @@ en:
         name: Neighborhood
         # 'terms: neighbourhood'
         terms: '<translate with synonyms or related terms for ''Neighborhood'', separated by commas>'
+      place/plot:
+        # place=plot
+        name: Plot
+        # 'terms: tract,land,lot,parcel'
+        terms: '<translate with synonyms or related terms for ''Plot'', separated by commas>'
       place/quarter:
         # place=quarter
         name: Sub-Borough / Quarter

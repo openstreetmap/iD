@@ -11422,6 +11422,26 @@
             ],
             "name": "Neighborhood"
         },
+        "place/plot": {
+            "icon": "triangle-stroked",
+            "fields": [
+                "name"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "place": "plot"
+            },
+            "terms": [
+                "tract",
+                "land",
+                "lot",
+                "parcel"
+            ],
+            "name": "Plot"
+        },
         "place/quarter": {
             "icon": "triangle-stroked",
             "fields": [
@@ -41258,13 +41278,13 @@
             ],
             "suggestion": true
         },
-        "amenity/pharmacy/Adler Apotheke": {
+        "amenity/pharmacy/Adler-Apotheke": {
             "tags": {
-                "name": "Adler Apotheke",
+                "name": "Adler-Apotheke",
                 "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
-            "name": "Adler Apotheke",
+            "name": "Adler-Apotheke",
             "icon": "pharmacy",
             "geometry": [
                 "point",
@@ -59310,12 +59330,12 @@
             ],
             "suggestion": true
         },
-        "shop/beverages/REWE Getränkemarkt": {
+        "shop/beverages/Rewe Getränkemarkt": {
             "tags": {
-                "name": "REWE Getränkemarkt",
+                "name": "Rewe Getränkemarkt",
                 "shop": "beverages"
             },
-            "name": "REWE Getränkemarkt",
+            "name": "Rewe Getränkemarkt",
             "icon": "shop",
             "geometry": [
                 "point",
@@ -59899,12 +59919,12 @@
             ],
             "suggestion": true
         },
-        "shop/car/Citroen": {
+        "shop/car/Citroën": {
             "tags": {
-                "name": "Citroen",
+                "name": "Citroën",
                 "shop": "car"
             },
-            "name": "Citroen",
+            "name": "Citroën",
             "icon": "car",
             "geometry": [
                 "point",
@@ -66620,26 +66640,6 @@
             ],
             "suggestion": true
         },
-        "shop/convenience/Boutique": {
-            "tags": {
-                "name": "Boutique",
-                "shop": "convenience"
-            },
-            "name": "Boutique",
-            "icon": "shop",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours"
-            ],
-            "suggestion": true
-        },
         "shop/convenience/CBA": {
             "tags": {
                 "name": "CBA",
@@ -67280,12 +67280,12 @@
             ],
             "suggestion": true
         },
-        "shop/convenience/LAWSON": {
+        "shop/convenience/Lawson": {
             "tags": {
-                "name": "LAWSON",
+                "name": "Lawson",
                 "shop": "convenience"
             },
-            "name": "LAWSON",
+            "name": "Lawson",
             "icon": "shop",
             "geometry": [
                 "point",
@@ -75569,26 +75569,6 @@
             ],
             "suggestion": true
         },
-        "shop/kiosk/Kiosk": {
-            "tags": {
-                "name": "Kiosk",
-                "shop": "kiosk"
-            },
-            "name": "Kiosk",
-            "icon": "shop",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours"
-            ],
-            "suggestion": true
-        },
         "shop/kiosk/Kiosko": {
             "tags": {
                 "name": "Kiosko",
@@ -79992,26 +79972,6 @@
             ],
             "suggestion": true
         },
-        "shop/supermarket/ALDI": {
-            "tags": {
-                "name": "ALDI",
-                "shop": "supermarket"
-            },
-            "name": "ALDI",
-            "icon": "grocery",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours"
-            ],
-            "suggestion": true
-        },
         "shop/supermarket/Ahorramás": {
             "tags": {
                 "name": "Ahorramás",
@@ -80078,6 +80038,26 @@
                 "shop": "supermarket"
             },
             "name": "Albertsons",
+            "icon": "grocery",
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "suggestion": true
+        },
+        "shop/supermarket/Aldi": {
+            "tags": {
+                "name": "Aldi",
+                "shop": "supermarket"
+            },
+            "name": "Aldi",
             "icon": "grocery",
             "geometry": [
                 "point",
@@ -83432,26 +83412,6 @@
             ],
             "suggestion": true
         },
-        "shop/supermarket/NETTO": {
-            "tags": {
-                "name": "NETTO",
-                "shop": "supermarket"
-            },
-            "name": "NETTO",
-            "icon": "grocery",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours"
-            ],
-            "suggestion": true
-        },
         "shop/supermarket/NORMA": {
             "tags": {
                 "name": "NORMA",
@@ -83518,6 +83478,26 @@
                 "shop": "supermarket"
             },
             "name": "Nahkauf",
+            "icon": "grocery",
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "suggestion": true
+        },
+        "shop/supermarket/Netto": {
+            "tags": {
+                "name": "Netto",
+                "shop": "supermarket"
+            },
+            "name": "Netto",
             "icon": "grocery",
             "geometry": [
                 "point",
@@ -84112,26 +84092,6 @@
             ],
             "suggestion": true
         },
-        "shop/supermarket/REWE City": {
-            "tags": {
-                "name": "REWE City",
-                "shop": "supermarket"
-            },
-            "name": "REWE City",
-            "icon": "grocery",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours"
-            ],
-            "suggestion": true
-        },
         "shop/supermarket/Ralphs": {
             "tags": {
                 "name": "Ralphs",
@@ -84238,6 +84198,26 @@
                 "shop": "supermarket"
             },
             "name": "Rewe",
+            "icon": "grocery",
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "suggestion": true
+        },
+        "shop/supermarket/Rewe City": {
+            "tags": {
+                "name": "Rewe City",
+                "shop": "supermarket"
+            },
+            "name": "Rewe City",
             "icon": "grocery",
             "geometry": [
                 "point",
