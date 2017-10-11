@@ -1,0 +1,12 @@
+{
+    "key": "crane:type",
+    "type": "combo",
+    "label": "Crane Type",
+    "strings": {
+        "options": {
+            "portal_crane": "Portal Crane",
+            "floor-mounted_crane": "Floor-mounted Crane",
+            "travel_lift": "Travel Lift"
+        }
+    }
+}

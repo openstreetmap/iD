@@ -416,9 +416,6 @@
                         "motor_vehicle": "মোটরগাড়ি"
                     }
                 },
-                "access_toilets": {
-                    "label": "প্রবেশ করা"
-                },
                 "address": {
                     "label": "ঠিকানা",
                     "placeholders": {

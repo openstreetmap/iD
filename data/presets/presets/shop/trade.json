@@ -1,0 +1,19 @@
+{
+    "icon": "shop",
+    "fields": [
+        "name",
+        "trade",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "shop": "trade"
+    },
+    "name": "Trade Shop"
+}

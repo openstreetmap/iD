@@ -5035,13 +5035,13 @@
                 "area"
             ],
             "terms": [
-                "sweets",
+                "sweet",
                 "candy"
             ],
             "tags": {
                 "craft": "confectionery"
             },
-            "name": "Confectionery"
+            "name": "Candy Maker"
         },
         "craft/distillery": {
             "icon": "poi-storage-tank",
@@ -7385,7 +7385,8 @@
         "highway/speed_camera": {
             "icon": "attraction",
             "geometry": [
-                "point"
+                "point",
+                "vertex"
             ],
             "fields": [
                 "ref"
@@ -9791,6 +9792,24 @@
             },
             "name": "Chimney"
         },
+        "man_made/crane": {
+            "icon": "poi-crane",
+            "fields": [
+                "operator",
+                "height",
+                "crane/type"
+            ],
+            "geometry": [
+                "point",
+                "line",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "man_made": "crane"
+            },
+            "name": "Crane"
+        },
         "man_made/cutline": {
             "geometry": [
                 "line"
@@ -9999,7 +10018,8 @@
         "man_made/surveillance_camera": {
             "icon": "attraction",
             "geometry": [
-                "point"
+                "point",
+                "vertex"
             ],
             "fields": [
                 "surveillance",
@@ -10033,7 +10053,8 @@
         "man_made/surveillance": {
             "icon": "attraction",
             "geometry": [
-                "point"
+                "point",
+                "vertex"
             ],
             "fields": [
                 "surveillance",
@@ -11565,7 +11586,11 @@
             "tags": {
                 "playground": "springy"
             },
-            "name": "Springy Rocker"
+            "name": "Spring Rider",
+            "terms": [
+                "spring rocker",
+                "springy rocker"
+            ]
         },
         "playground/roundabout": {
             "icon": "stadium",
@@ -11579,7 +11604,10 @@
             "tags": {
                 "playground": "roundabout"
             },
-            "name": "Play Roundabout"
+            "name": "Play Roundabout",
+            "terms": [
+                "merry-go-round"
+            ]
         },
         "playground/sandpit": {
             "icon": "playground",
@@ -13076,6 +13104,9 @@
                 "point",
                 "area"
             ],
+            "terms": [
+                "sweet"
+            ],
             "tags": {
                 "shop": "confectionery"
             },
@@ -14553,6 +14584,24 @@
             },
             "name": "Ticket Seller"
         },
+        "shop/tiles": {
+            "icon": "shop",
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "shop": "tiles"
+            },
+            "name": "Tile Shop"
+        },
         "shop/tobacco": {
             "icon": "shop",
             "fields": [
@@ -14588,6 +14637,25 @@
                 "shop": "toys"
             },
             "name": "Toy Store"
+        },
+        "shop/trade": {
+            "icon": "shop",
+            "fields": [
+                "name",
+                "trade",
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "shop": "trade"
+            },
+            "name": "Trade Shop"
         },
         "shop/travel_agency": {
             "icon": "suitcase",
@@ -29881,6 +29949,7 @@
         "amenity/clinic/ФАП": {
             "tags": {
                 "name": "ФАП",
+                "healthcare": "clinic",
                 "amenity": "clinic"
             },
             "name": "ФАП",
@@ -29902,6 +29971,7 @@
         "amenity/dentist/Aspen Dental": {
             "tags": {
                 "name": "Aspen Dental",
+                "healthcare": "dentist",
                 "amenity": "dentist"
             },
             "name": "Aspen Dental",
@@ -29923,6 +29993,7 @@
         "amenity/dentist/Consultorio Dental": {
             "tags": {
                 "name": "Consultorio Dental",
+                "healthcare": "dentist",
                 "amenity": "dentist"
             },
             "name": "Consultorio Dental",
@@ -29944,6 +30015,7 @@
         "amenity/dentist/Dentista": {
             "tags": {
                 "name": "Dentista",
+                "healthcare": "dentist",
                 "amenity": "dentist"
             },
             "name": "Dentista",
@@ -29965,6 +30037,7 @@
         "amenity/dentist/Family Dentistry": {
             "tags": {
                 "name": "Family Dentistry",
+                "healthcare": "dentist",
                 "amenity": "dentist"
             },
             "name": "Family Dentistry",
@@ -29986,6 +30059,7 @@
         "amenity/dentist/Vitaldent": {
             "tags": {
                 "name": "Vitaldent",
+                "healthcare": "dentist",
                 "amenity": "dentist"
             },
             "name": "Vitaldent",
@@ -30007,6 +30081,7 @@
         "amenity/dentist/Стоматолог": {
             "tags": {
                 "name": "Стоматолог",
+                "healthcare": "dentist",
                 "amenity": "dentist"
             },
             "name": "Стоматолог",
@@ -30028,6 +30103,7 @@
         "amenity/dentist/Стоматологія": {
             "tags": {
                 "name": "Стоматологія",
+                "healthcare": "dentist",
                 "amenity": "dentist"
             },
             "name": "Стоматологія",
@@ -30049,6 +30125,7 @@
         "amenity/doctors/Háziorvosi rendelő": {
             "tags": {
                 "name": "Háziorvosi rendelő",
+                "healthcare": "doctor",
                 "amenity": "doctors"
             },
             "name": "Háziorvosi rendelő",
@@ -30070,6 +30147,7 @@
         "amenity/doctors/Инвитро": {
             "tags": {
                 "name": "Инвитро",
+                "healthcare": "doctor",
                 "amenity": "doctors"
             },
             "name": "Инвитро",
@@ -39353,6 +39431,7 @@
         "amenity/hospital/Cruz Roja": {
             "tags": {
                 "name": "Cruz Roja",
+                "healthcare": "hospital",
                 "amenity": "hospital"
             },
             "name": "Cruz Roja",
@@ -39373,6 +39452,7 @@
         "amenity/hospital/IMSS": {
             "tags": {
                 "name": "IMSS",
+                "healthcare": "hospital",
                 "amenity": "hospital"
             },
             "name": "IMSS",
@@ -39393,6 +39473,7 @@
         "amenity/hospital/Инфекционное отделение": {
             "tags": {
                 "name": "Инфекционное отделение",
+                "healthcare": "hospital",
                 "amenity": "hospital"
             },
             "name": "Инфекционное отделение",
@@ -39413,6 +39494,7 @@
         "amenity/hospital/Кожно-венерологический диспансер": {
             "tags": {
                 "name": "Кожно-венерологический диспансер",
+                "healthcare": "hospital",
                 "amenity": "hospital"
             },
             "name": "Кожно-венерологический диспансер",
@@ -39433,6 +39515,7 @@
         "amenity/hospital/Районная больница": {
             "tags": {
                 "name": "Районная больница",
+                "healthcare": "hospital",
                 "amenity": "hospital"
             },
             "name": "Районная больница",
@@ -39453,6 +39536,7 @@
         "amenity/hospital/Роддом": {
             "tags": {
                 "name": "Роддом",
+                "healthcare": "hospital",
                 "amenity": "hospital"
             },
             "name": "Роддом",
@@ -39473,6 +39557,7 @@
         "amenity/hospital/Родильный дом": {
             "tags": {
                 "name": "Родильный дом",
+                "healthcare": "hospital",
                 "amenity": "hospital"
             },
             "name": "Родильный дом",
@@ -39493,6 +39578,7 @@
         "amenity/hospital/Скорая помощь": {
             "tags": {
                 "name": "Скорая помощь",
+                "healthcare": "hospital",
                 "amenity": "hospital"
             },
             "name": "Скорая помощь",
@@ -39513,6 +39599,7 @@
         "amenity/hospital/ЦРБ": {
             "tags": {
                 "name": "ЦРБ",
+                "healthcare": "hospital",
                 "amenity": "hospital"
             },
             "name": "ЦРБ",
@@ -39533,6 +39620,7 @@
         "amenity/hospital/Центральная районная больница": {
             "tags": {
                 "name": "Центральная районная больница",
+                "healthcare": "hospital",
                 "amenity": "hospital"
             },
             "name": "Центральная районная больница",
@@ -39553,6 +39641,7 @@
         "amenity/hospital/โรงพยาบาลส่งเสริมสุขภาพตำบล": {
             "tags": {
                 "name": "โรงพยาบาลส่งเสริมสุขภาพตำบล",
+                "healthcare": "hospital",
                 "amenity": "hospital"
             },
             "name": "โรงพยาบาลส่งเสริมสุขภาพตำบล",
@@ -41150,6 +41239,7 @@
         "amenity/pharmacy/36.6": {
             "tags": {
                 "name": "36.6",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "36.6",
@@ -41168,12 +41258,13 @@
             ],
             "suggestion": true
         },
-        "amenity/pharmacy/Adler Apotheke": {
+        "amenity/pharmacy/Adler-Apotheke": {
             "tags": {
-                "name": "Adler Apotheke",
+                "name": "Adler-Apotheke",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
-            "name": "Adler Apotheke",
+            "name": "Adler-Apotheke",
             "icon": "pharmacy",
             "geometry": [
                 "point",
@@ -41192,6 +41283,7 @@
         "amenity/pharmacy/Alte Apotheke": {
             "tags": {
                 "name": "Alte Apotheke",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Alte Apotheke",
@@ -41213,6 +41305,7 @@
         "amenity/pharmacy/Apollo Pharmacy": {
             "tags": {
                 "name": "Apollo Pharmacy",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Apollo Pharmacy",
@@ -41234,6 +41327,7 @@
         "amenity/pharmacy/Apotek": {
             "tags": {
                 "name": "Apotek",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Apotek",
@@ -41255,6 +41349,7 @@
         "amenity/pharmacy/Apotek Hjärtat": {
             "tags": {
                 "name": "Apotek Hjärtat",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Apotek Hjärtat",
@@ -41276,6 +41371,7 @@
         "amenity/pharmacy/Apotheke am Markt": {
             "tags": {
                 "name": "Apotheke am Markt",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Apotheke am Markt",
@@ -41297,6 +41393,7 @@
         "amenity/pharmacy/Bahnhof Apotheke": {
             "tags": {
                 "name": "Bahnhof Apotheke",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Bahnhof Apotheke",
@@ -41318,6 +41415,7 @@
         "amenity/pharmacy/Bahnhof-Apotheke": {
             "tags": {
                 "name": "Bahnhof-Apotheke",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Bahnhof-Apotheke",
@@ -41339,6 +41437,7 @@
         "amenity/pharmacy/Bartell Drugs": {
             "tags": {
                 "name": "Bartell Drugs",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Bartell Drugs",
@@ -41360,6 +41459,7 @@
         "amenity/pharmacy/Benavides": {
             "tags": {
                 "name": "Benavides",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Benavides",
@@ -41381,6 +41481,7 @@
         "amenity/pharmacy/Benu": {
             "tags": {
                 "name": "Benu",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Benu",
@@ -41402,6 +41503,7 @@
         "amenity/pharmacy/Boots": {
             "tags": {
                 "name": "Boots",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Boots",
@@ -41423,6 +41525,7 @@
         "amenity/pharmacy/Botica": {
             "tags": {
                 "name": "Botica",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Botica",
@@ -41444,6 +41547,7 @@
         "amenity/pharmacy/Brunnen-Apotheke": {
             "tags": {
                 "name": "Brunnen-Apotheke",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Brunnen-Apotheke",
@@ -41465,6 +41569,7 @@
         "amenity/pharmacy/Burg-Apotheke": {
             "tags": {
                 "name": "Burg-Apotheke",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Burg-Apotheke",
@@ -41486,6 +41591,7 @@
         "amenity/pharmacy/Bären-Apotheke": {
             "tags": {
                 "name": "Bären-Apotheke",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Bären-Apotheke",
@@ -41507,6 +41613,7 @@
         "amenity/pharmacy/CVS": {
             "tags": {
                 "name": "CVS",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "CVS",
@@ -41528,6 +41635,7 @@
         "amenity/pharmacy/Camelia": {
             "tags": {
                 "name": "Camelia",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Camelia",
@@ -41549,6 +41657,7 @@
         "amenity/pharmacy/Catena": {
             "tags": {
                 "name": "Catena",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Catena",
@@ -41570,6 +41679,7 @@
         "amenity/pharmacy/Chemist Warehouse": {
             "tags": {
                 "name": "Chemist Warehouse",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Chemist Warehouse",
@@ -41591,6 +41701,7 @@
         "amenity/pharmacy/Clicks": {
             "tags": {
                 "name": "Clicks",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Clicks",
@@ -41612,6 +41723,7 @@
         "amenity/pharmacy/Cruz Azul": {
             "tags": {
                 "name": "Cruz Azul",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Cruz Azul",
@@ -41633,6 +41745,7 @@
         "amenity/pharmacy/Cruz Verde": {
             "tags": {
                 "name": "Cruz Verde",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Cruz Verde",
@@ -41654,6 +41767,7 @@
         "amenity/pharmacy/Dbam o Zdrowie": {
             "tags": {
                 "name": "Dbam o Zdrowie",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Dbam o Zdrowie",
@@ -41675,6 +41789,7 @@
         "amenity/pharmacy/Dr. Max": {
             "tags": {
                 "name": "Dr. Max",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Dr. Max",
@@ -41696,6 +41811,7 @@
         "amenity/pharmacy/Droga Raia": {
             "tags": {
                 "name": "Droga Raia",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Droga Raia",
@@ -41717,6 +41833,7 @@
         "amenity/pharmacy/Drogaria São Paulo": {
             "tags": {
                 "name": "Drogaria São Paulo",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Drogaria São Paulo",
@@ -41738,6 +41855,7 @@
         "amenity/pharmacy/Drogasil": {
             "tags": {
                 "name": "Drogasil",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Drogasil",
@@ -41759,6 +41877,7 @@
         "amenity/pharmacy/Duane Reade": {
             "tags": {
                 "name": "Duane Reade",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Duane Reade",
@@ -41780,6 +41899,7 @@
         "amenity/pharmacy/Eczane": {
             "tags": {
                 "name": "Eczane",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Eczane",
@@ -41801,6 +41921,7 @@
         "amenity/pharmacy/Engel-Apotheke": {
             "tags": {
                 "name": "Engel-Apotheke",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Engel-Apotheke",
@@ -41822,6 +41943,7 @@
         "amenity/pharmacy/Eurovaistinė": {
             "tags": {
                 "name": "Eurovaistinė",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Eurovaistinė",
@@ -41843,6 +41965,7 @@
         "amenity/pharmacy/Familiprix": {
             "tags": {
                 "name": "Familiprix",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Familiprix",
@@ -41864,6 +41987,7 @@
         "amenity/pharmacy/Farmacenter": {
             "tags": {
                 "name": "Farmacenter",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Farmacenter",
@@ -41885,6 +42009,7 @@
         "amenity/pharmacy/Farmacia Centrale": {
             "tags": {
                 "name": "Farmacia Centrale",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Farmacia Centrale",
@@ -41906,6 +42031,7 @@
         "amenity/pharmacy/Farmacia Comunale": {
             "tags": {
                 "name": "Farmacia Comunale",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Farmacia Comunale",
@@ -41927,6 +42053,7 @@
         "amenity/pharmacy/Farmacia Guadalajara": {
             "tags": {
                 "name": "Farmacia Guadalajara",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Farmacia Guadalajara",
@@ -41948,6 +42075,7 @@
         "amenity/pharmacy/Farmacia del Ahorro": {
             "tags": {
                 "name": "Farmacia del Ahorro",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Farmacia del Ahorro",
@@ -41969,6 +42097,7 @@
         "amenity/pharmacy/Farmacias Ahumada": {
             "tags": {
                 "name": "Farmacias Ahumada",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Farmacias Ahumada",
@@ -41990,6 +42119,7 @@
         "amenity/pharmacy/Farmacias Cruz Azul": {
             "tags": {
                 "name": "Farmacias Cruz Azul",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Farmacias Cruz Azul",
@@ -42011,6 +42141,7 @@
         "amenity/pharmacy/Farmacias Cruz Verde": {
             "tags": {
                 "name": "Farmacias Cruz Verde",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Farmacias Cruz Verde",
@@ -42032,6 +42163,7 @@
         "amenity/pharmacy/Farmacias Económicas": {
             "tags": {
                 "name": "Farmacias Económicas",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Farmacias Económicas",
@@ -42053,6 +42185,7 @@
         "amenity/pharmacy/Farmacias Guadalajara": {
             "tags": {
                 "name": "Farmacias Guadalajara",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Farmacias Guadalajara",
@@ -42074,6 +42207,7 @@
         "amenity/pharmacy/Farmacias SalcoBrand": {
             "tags": {
                 "name": "Farmacias SalcoBrand",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Farmacias SalcoBrand",
@@ -42095,6 +42229,7 @@
         "amenity/pharmacy/Farmacias Sana Sana": {
             "tags": {
                 "name": "Farmacias Sana Sana",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Farmacias Sana Sana",
@@ -42116,6 +42251,7 @@
         "amenity/pharmacy/Farmacias Similares": {
             "tags": {
                 "name": "Farmacias Similares",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Farmacias Similares",
@@ -42137,6 +42273,7 @@
         "amenity/pharmacy/Farmacias del Ahorro": {
             "tags": {
                 "name": "Farmacias del Ahorro",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Farmacias del Ahorro",
@@ -42158,6 +42295,7 @@
         "amenity/pharmacy/Farmacity": {
             "tags": {
                 "name": "Farmacity",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Farmacity",
@@ -42179,6 +42317,7 @@
         "amenity/pharmacy/Farmahorro": {
             "tags": {
                 "name": "Farmahorro",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Farmahorro",
@@ -42200,6 +42339,7 @@
         "amenity/pharmacy/Farmatodo": {
             "tags": {
                 "name": "Farmatodo",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Farmatodo",
@@ -42221,6 +42361,7 @@
         "amenity/pharmacy/Farmácia": {
             "tags": {
                 "name": "Farmácia",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Farmácia",
@@ -42242,6 +42383,7 @@
         "amenity/pharmacy/Felicia": {
             "tags": {
                 "name": "Felicia",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Felicia",
@@ -42263,6 +42405,7 @@
         "amenity/pharmacy/Fybeca": {
             "tags": {
                 "name": "Fybeca",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Fybeca",
@@ -42284,6 +42427,7 @@
         "amenity/pharmacy/Generika Drugstore": {
             "tags": {
                 "name": "Generika Drugstore",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Generika Drugstore",
@@ -42305,6 +42449,7 @@
         "amenity/pharmacy/Gintarinė vaistinė": {
             "tags": {
                 "name": "Gintarinė vaistinė",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Gintarinė vaistinė",
@@ -42326,6 +42471,7 @@
         "amenity/pharmacy/Guardian": {
             "tags": {
                 "name": "Guardian",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Guardian",
@@ -42347,6 +42493,7 @@
         "amenity/pharmacy/Gyógyszertár": {
             "tags": {
                 "name": "Gyógyszertár",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Gyógyszertár",
@@ -42368,6 +42515,7 @@
         "amenity/pharmacy/H-E-B Pharmacy": {
             "tags": {
                 "name": "H-E-B Pharmacy",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "H-E-B Pharmacy",
@@ -42389,6 +42537,7 @@
         "amenity/pharmacy/Hirsch-Apotheke": {
             "tags": {
                 "name": "Hirsch-Apotheke",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Hirsch-Apotheke",
@@ -42410,6 +42559,7 @@
         "amenity/pharmacy/Hubertus Apotheke": {
             "tags": {
                 "name": "Hubertus Apotheke",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Hubertus Apotheke",
@@ -42431,6 +42581,7 @@
         "amenity/pharmacy/Inkafarma": {
             "tags": {
                 "name": "Inkafarma",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Inkafarma",
@@ -42452,6 +42603,7 @@
         "amenity/pharmacy/Jean Coutu": {
             "tags": {
                 "name": "Jean Coutu",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Jean Coutu",
@@ -42473,6 +42625,7 @@
         "amenity/pharmacy/Kinney Drugs": {
             "tags": {
                 "name": "Kinney Drugs",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Kinney Drugs",
@@ -42494,6 +42647,7 @@
         "amenity/pharmacy/Kur-Apotheke": {
             "tags": {
                 "name": "Kur-Apotheke",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Kur-Apotheke",
@@ -42515,6 +42669,7 @@
         "amenity/pharmacy/Linden-Apotheke": {
             "tags": {
                 "name": "Linden-Apotheke",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Linden-Apotheke",
@@ -42536,6 +42691,7 @@
         "amenity/pharmacy/Ljekarna": {
             "tags": {
                 "name": "Ljekarna",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Ljekarna",
@@ -42557,6 +42713,7 @@
         "amenity/pharmacy/Lloyds Pharmacy": {
             "tags": {
                 "name": "Lloyds Pharmacy",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Lloyds Pharmacy",
@@ -42578,6 +42735,7 @@
         "amenity/pharmacy/Lékárna": {
             "tags": {
                 "name": "Lékárna",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Lékárna",
@@ -42599,6 +42757,7 @@
         "amenity/pharmacy/Löwen-Apotheke": {
             "tags": {
                 "name": "Löwen-Apotheke",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Löwen-Apotheke",
@@ -42620,6 +42779,7 @@
         "amenity/pharmacy/Marien-Apotheke": {
             "tags": {
                 "name": "Marien-Apotheke",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Marien-Apotheke",
@@ -42641,6 +42801,7 @@
         "amenity/pharmacy/Markt-Apotheke": {
             "tags": {
                 "name": "Markt-Apotheke",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Markt-Apotheke",
@@ -42662,6 +42823,7 @@
         "amenity/pharmacy/Mercury Drug": {
             "tags": {
                 "name": "Mercury Drug",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Mercury Drug",
@@ -42683,6 +42845,7 @@
         "amenity/pharmacy/Mifarma": {
             "tags": {
                 "name": "Mifarma",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Mifarma",
@@ -42704,6 +42867,7 @@
         "amenity/pharmacy/Mēness aptieka": {
             "tags": {
                 "name": "Mēness aptieka",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Mēness aptieka",
@@ -42725,6 +42889,7 @@
         "amenity/pharmacy/Neue Apotheke": {
             "tags": {
                 "name": "Neue Apotheke",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Neue Apotheke",
@@ -42746,6 +42911,7 @@
         "amenity/pharmacy/Pague Menos": {
             "tags": {
                 "name": "Pague Menos",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Pague Menos",
@@ -42767,6 +42933,7 @@
         "amenity/pharmacy/Panvel": {
             "tags": {
                 "name": "Panvel",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Panvel",
@@ -42788,6 +42955,7 @@
         "amenity/pharmacy/Park-Apotheke": {
             "tags": {
                 "name": "Park-Apotheke",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Park-Apotheke",
@@ -42809,6 +42977,7 @@
         "amenity/pharmacy/Pharmacie Centrale": {
             "tags": {
                 "name": "Pharmacie Centrale",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Pharmacie Centrale",
@@ -42830,6 +42999,7 @@
         "amenity/pharmacy/Pharmacie Principale": {
             "tags": {
                 "name": "Pharmacie Principale",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Pharmacie Principale",
@@ -42851,6 +43021,7 @@
         "amenity/pharmacy/Pharmacie de l'Hôtel de Ville": {
             "tags": {
                 "name": "Pharmacie de l'Hôtel de Ville",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Pharmacie de l'Hôtel de Ville",
@@ -42872,6 +43043,7 @@
         "amenity/pharmacy/Pharmacie de la Gare": {
             "tags": {
                 "name": "Pharmacie de la Gare",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Pharmacie de la Gare",
@@ -42893,6 +43065,7 @@
         "amenity/pharmacy/Pharmacie de la Mairie": {
             "tags": {
                 "name": "Pharmacie de la Mairie",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Pharmacie de la Mairie",
@@ -42914,6 +43087,7 @@
         "amenity/pharmacy/Pharmacie de la Poste": {
             "tags": {
                 "name": "Pharmacie de la Poste",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Pharmacie de la Poste",
@@ -42935,6 +43109,7 @@
         "amenity/pharmacy/Pharmacie du Centre": {
             "tags": {
                 "name": "Pharmacie du Centre",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Pharmacie du Centre",
@@ -42956,6 +43131,7 @@
         "amenity/pharmacy/Pharmacie du Marché": {
             "tags": {
                 "name": "Pharmacie du Marché",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Pharmacie du Marché",
@@ -42977,6 +43153,7 @@
         "amenity/pharmacy/Pharmacie du Parc": {
             "tags": {
                 "name": "Pharmacie du Parc",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Pharmacie du Parc",
@@ -42998,6 +43175,7 @@
         "amenity/pharmacy/Pharmaprix": {
             "tags": {
                 "name": "Pharmaprix",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Pharmaprix",
@@ -43019,6 +43197,7 @@
         "amenity/pharmacy/Pharmasave": {
             "tags": {
                 "name": "Pharmasave",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Pharmasave",
@@ -43040,6 +43219,7 @@
         "amenity/pharmacy/Punkt Apteczny": {
             "tags": {
                 "name": "Punkt Apteczny",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Punkt Apteczny",
@@ -43061,6 +43241,7 @@
         "amenity/pharmacy/Rathaus-Apotheke": {
             "tags": {
                 "name": "Rathaus-Apotheke",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Rathaus-Apotheke",
@@ -43082,6 +43263,7 @@
         "amenity/pharmacy/Rats-Apotheke": {
             "tags": {
                 "name": "Rats-Apotheke",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Rats-Apotheke",
@@ -43103,6 +43285,7 @@
         "amenity/pharmacy/Rexall": {
             "tags": {
                 "name": "Rexall",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Rexall",
@@ -43124,6 +43307,7 @@
         "amenity/pharmacy/Rite Aid": {
             "tags": {
                 "name": "Rite Aid",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Rite Aid",
@@ -43145,6 +43329,7 @@
         "amenity/pharmacy/Rose Pharmacy": {
             "tags": {
                 "name": "Rose Pharmacy",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Rose Pharmacy",
@@ -43166,6 +43351,7 @@
         "amenity/pharmacy/Rosen-Apotheke": {
             "tags": {
                 "name": "Rosen-Apotheke",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Rosen-Apotheke",
@@ -43187,6 +43373,7 @@
         "amenity/pharmacy/Rowlands Pharmacy": {
             "tags": {
                 "name": "Rowlands Pharmacy",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Rowlands Pharmacy",
@@ -43208,6 +43395,7 @@
         "amenity/pharmacy/SalcoBrand": {
             "tags": {
                 "name": "SalcoBrand",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "SalcoBrand",
@@ -43229,6 +43417,7 @@
         "amenity/pharmacy/Sana Sana": {
             "tags": {
                 "name": "Sana Sana",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Sana Sana",
@@ -43250,6 +43439,7 @@
         "amenity/pharmacy/Schloss-Apotheke": {
             "tags": {
                 "name": "Schloss-Apotheke",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Schloss-Apotheke",
@@ -43271,6 +43461,7 @@
         "amenity/pharmacy/Sensiblu": {
             "tags": {
                 "name": "Sensiblu",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Sensiblu",
@@ -43292,6 +43483,7 @@
         "amenity/pharmacy/Shoppers Drug Mart": {
             "tags": {
                 "name": "Shoppers Drug Mart",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Shoppers Drug Mart",
@@ -43313,6 +43505,7 @@
         "amenity/pharmacy/Sonnen-Apotheke": {
             "tags": {
                 "name": "Sonnen-Apotheke",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Sonnen-Apotheke",
@@ -43334,6 +43527,7 @@
         "amenity/pharmacy/South Star Drug": {
             "tags": {
                 "name": "South Star Drug",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "South Star Drug",
@@ -43355,6 +43549,7 @@
         "amenity/pharmacy/Stadt-Apotheke": {
             "tags": {
                 "name": "Stadt-Apotheke",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Stadt-Apotheke",
@@ -43376,6 +43571,7 @@
         "amenity/pharmacy/Stern-Apotheke": {
             "tags": {
                 "name": "Stern-Apotheke",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Stern-Apotheke",
@@ -43397,6 +43593,7 @@
         "amenity/pharmacy/Superdrug": {
             "tags": {
                 "name": "Superdrug",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Superdrug",
@@ -43418,6 +43615,7 @@
         "amenity/pharmacy/São João": {
             "tags": {
                 "name": "São João",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "São João",
@@ -43439,6 +43637,7 @@
         "amenity/pharmacy/The Generics Pharmacy": {
             "tags": {
                 "name": "The Generics Pharmacy",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "The Generics Pharmacy",
@@ -43460,6 +43659,7 @@
         "amenity/pharmacy/Uniprix": {
             "tags": {
                 "name": "Uniprix",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Uniprix",
@@ -43481,6 +43681,7 @@
         "amenity/pharmacy/Walgreens": {
             "tags": {
                 "name": "Walgreens",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Walgreens",
@@ -43502,6 +43703,7 @@
         "amenity/pharmacy/Walgreens Pharmacy": {
             "tags": {
                 "name": "Walgreens Pharmacy",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Walgreens Pharmacy",
@@ -43523,6 +43725,7 @@
         "amenity/pharmacy/Walmart Pharmacy": {
             "tags": {
                 "name": "Walmart Pharmacy",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Walmart Pharmacy",
@@ -43544,6 +43747,7 @@
         "amenity/pharmacy/Well Pharmacy": {
             "tags": {
                 "name": "Well Pharmacy",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Well Pharmacy",
@@ -43565,6 +43769,7 @@
         "amenity/pharmacy/centro naturista": {
             "tags": {
                 "name": "centro naturista",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "centro naturista",
@@ -43586,6 +43791,7 @@
         "amenity/pharmacy/А5": {
             "tags": {
                 "name": "А5",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "А5",
@@ -43607,6 +43813,7 @@
         "amenity/pharmacy/Айболит": {
             "tags": {
                 "name": "Айболит",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Айболит",
@@ -43628,6 +43835,7 @@
         "amenity/pharmacy/Аптека 36,6": {
             "tags": {
                 "name": "Аптека 36,6",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Аптека 36,6",
@@ -43649,6 +43857,7 @@
         "amenity/pharmacy/Аптека низких цен": {
             "tags": {
                 "name": "Аптека низких цен",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Аптека низких цен",
@@ -43670,6 +43879,7 @@
         "amenity/pharmacy/Аптека низьких цін": {
             "tags": {
                 "name": "Аптека низьких цін",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Аптека низьких цін",
@@ -43691,6 +43901,7 @@
         "amenity/pharmacy/Аптека от склада": {
             "tags": {
                 "name": "Аптека от склада",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Аптека от склада",
@@ -43712,6 +43923,7 @@
         "amenity/pharmacy/Аптека №1": {
             "tags": {
                 "name": "Аптека №1",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Аптека №1",
@@ -43733,6 +43945,7 @@
         "amenity/pharmacy/Аптечный пункт": {
             "tags": {
                 "name": "Аптечный пункт",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Аптечный пункт",
@@ -43754,6 +43967,7 @@
         "amenity/pharmacy/Арніка": {
             "tags": {
                 "name": "Арніка",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Арніка",
@@ -43775,6 +43989,7 @@
         "amenity/pharmacy/Бережная аптека": {
             "tags": {
                 "name": "Бережная аптека",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Бережная аптека",
@@ -43796,6 +44011,7 @@
         "amenity/pharmacy/Будь здоров": {
             "tags": {
                 "name": "Будь здоров",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Будь здоров",
@@ -43817,6 +44033,7 @@
         "amenity/pharmacy/Вита": {
             "tags": {
                 "name": "Вита",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Вита",
@@ -43838,6 +44055,7 @@
         "amenity/pharmacy/Горздрав": {
             "tags": {
                 "name": "Горздрав",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Горздрав",
@@ -43859,6 +44077,7 @@
         "amenity/pharmacy/Живика": {
             "tags": {
                 "name": "Живика",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Живика",
@@ -43880,6 +44099,7 @@
         "amenity/pharmacy/Здоровье": {
             "tags": {
                 "name": "Здоровье",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Здоровье",
@@ -43901,6 +44121,7 @@
         "amenity/pharmacy/Имплозия": {
             "tags": {
                 "name": "Имплозия",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Имплозия",
@@ -43922,6 +44143,7 @@
         "amenity/pharmacy/Классика": {
             "tags": {
                 "name": "Классика",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Классика",
@@ -43943,6 +44165,7 @@
         "amenity/pharmacy/Ладушка": {
             "tags": {
                 "name": "Ладушка",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Ладушка",
@@ -43964,6 +44187,7 @@
         "amenity/pharmacy/Мед-сервіс": {
             "tags": {
                 "name": "Мед-сервіс",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Мед-сервіс",
@@ -43985,6 +44209,7 @@
         "amenity/pharmacy/Мелодия здоровья": {
             "tags": {
                 "name": "Мелодия здоровья",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Мелодия здоровья",
@@ -44006,6 +44231,7 @@
         "amenity/pharmacy/Невис": {
             "tags": {
                 "name": "Невис",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Невис",
@@ -44027,6 +44253,7 @@
         "amenity/pharmacy/Норма": {
             "tags": {
                 "name": "Норма",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Норма",
@@ -44048,6 +44275,7 @@
         "amenity/pharmacy/Озерки": {
             "tags": {
                 "name": "Озерки",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Озерки",
@@ -44069,6 +44297,7 @@
         "amenity/pharmacy/Панацея": {
             "tags": {
                 "name": "Панацея",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Панацея",
@@ -44090,6 +44319,7 @@
         "amenity/pharmacy/Первая помощь": {
             "tags": {
                 "name": "Первая помощь",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Первая помощь",
@@ -44111,6 +44341,7 @@
         "amenity/pharmacy/Планета здоровья": {
             "tags": {
                 "name": "Планета здоровья",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Планета здоровья",
@@ -44132,6 +44363,7 @@
         "amenity/pharmacy/Ригла": {
             "tags": {
                 "name": "Ригла",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Ригла",
@@ -44153,6 +44385,7 @@
         "amenity/pharmacy/Семейная": {
             "tags": {
                 "name": "Семейная",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Семейная",
@@ -44174,6 +44407,7 @@
         "amenity/pharmacy/Социальная аптека": {
             "tags": {
                 "name": "Социальная аптека",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Социальная аптека",
@@ -44195,6 +44429,7 @@
         "amenity/pharmacy/Столички": {
             "tags": {
                 "name": "Столички",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Столички",
@@ -44216,6 +44451,7 @@
         "amenity/pharmacy/Фармакопейка": {
             "tags": {
                 "name": "Фармакопейка",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Фармакопейка",
@@ -44237,6 +44473,7 @@
         "amenity/pharmacy/Фармакор": {
             "tags": {
                 "name": "Фармакор",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Фармакор",
@@ -44258,6 +44495,7 @@
         "amenity/pharmacy/Фармация": {
             "tags": {
                 "name": "Фармация",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Фармация",
@@ -44279,6 +44517,7 @@
         "amenity/pharmacy/Фармленд": {
             "tags": {
                 "name": "Фармленд",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Фармленд",
@@ -44300,6 +44539,7 @@
         "amenity/pharmacy/Центральная аптека": {
             "tags": {
                 "name": "Центральная аптека",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "Центральная аптека",
@@ -44321,6 +44561,7 @@
         "amenity/pharmacy/סופר-פארם": {
             "tags": {
                 "name": "סופר-פארם",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "סופר-פארם",
@@ -44342,6 +44583,7 @@
         "amenity/pharmacy/داروخانه": {
             "tags": {
                 "name": "داروخانه",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "داروخانه",
@@ -44363,6 +44605,7 @@
         "amenity/pharmacy/داروخانه شبانه روزی": {
             "tags": {
                 "name": "داروخانه شبانه روزی",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "داروخانه شبانه روزی",
@@ -44384,6 +44627,7 @@
         "amenity/pharmacy/صيدلية": {
             "tags": {
                 "name": "صيدلية",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "صيدلية",
@@ -44405,6 +44649,7 @@
         "amenity/pharmacy/くすりの福太郎": {
             "tags": {
                 "name": "くすりの福太郎",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "くすりの福太郎",
@@ -44426,6 +44671,7 @@
         "amenity/pharmacy/さくら薬局": {
             "tags": {
                 "name": "さくら薬局",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "さくら薬局",
@@ -44447,6 +44693,7 @@
         "amenity/pharmacy/ウエルシア": {
             "tags": {
                 "name": "ウエルシア",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "ウエルシア",
@@ -44468,6 +44715,7 @@
         "amenity/pharmacy/カワチ薬品": {
             "tags": {
                 "name": "カワチ薬品",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "カワチ薬品",
@@ -44489,6 +44737,7 @@
         "amenity/pharmacy/クリエイト": {
             "tags": {
                 "name": "クリエイト",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "クリエイト",
@@ -44510,6 +44759,7 @@
         "amenity/pharmacy/サンドラッグ": {
             "tags": {
                 "name": "サンドラッグ",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "サンドラッグ",
@@ -44531,6 +44781,7 @@
         "amenity/pharmacy/スギ薬局": {
             "tags": {
                 "name": "スギ薬局",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "スギ薬局",
@@ -44552,6 +44803,7 @@
         "amenity/pharmacy/セイジョー": {
             "tags": {
                 "name": "セイジョー",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "セイジョー",
@@ -44573,6 +44825,7 @@
         "amenity/pharmacy/ツルハドラッグ": {
             "tags": {
                 "name": "ツルハドラッグ",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "ツルハドラッグ",
@@ -44594,6 +44847,7 @@
         "amenity/pharmacy/ドラッグてらしま (Drug Terashima)": {
             "tags": {
                 "name": "ドラッグてらしま (Drug Terashima)",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "ドラッグてらしま (Drug Terashima)",
@@ -44615,6 +44869,7 @@
         "amenity/pharmacy/マツモトキヨシ": {
             "tags": {
                 "name": "マツモトキヨシ",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "マツモトキヨシ",
@@ -44636,6 +44891,7 @@
         "amenity/pharmacy/丁丁藥局": {
             "tags": {
                 "name": "丁丁藥局",
+                "healthcare": "pharmacy",
                 "amenity": "pharmacy"
             },
             "name": "丁丁藥局",
@@ -59054,12 +59310,12 @@
             ],
             "suggestion": true
         },
-        "shop/beverages/REWE Getränkemarkt": {
+        "shop/beverages/Rewe Getränkemarkt": {
             "tags": {
-                "name": "REWE Getränkemarkt",
+                "name": "Rewe Getränkemarkt",
                 "shop": "beverages"
             },
-            "name": "REWE Getränkemarkt",
+            "name": "Rewe Getränkemarkt",
             "icon": "shop",
             "geometry": [
                 "point",
@@ -59643,12 +59899,12 @@
             ],
             "suggestion": true
         },
-        "shop/car/Citroen": {
+        "shop/car/Citroën": {
             "tags": {
-                "name": "Citroen",
+                "name": "Citroën",
                 "shop": "car"
             },
-            "name": "Citroen",
+            "name": "Citroën",
             "icon": "car",
             "geometry": [
                 "point",
@@ -66364,26 +66620,6 @@
             ],
             "suggestion": true
         },
-        "shop/convenience/Boutique": {
-            "tags": {
-                "name": "Boutique",
-                "shop": "convenience"
-            },
-            "name": "Boutique",
-            "icon": "shop",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours"
-            ],
-            "suggestion": true
-        },
         "shop/convenience/CBA": {
             "tags": {
                 "name": "CBA",
@@ -67024,12 +67260,12 @@
             ],
             "suggestion": true
         },
-        "shop/convenience/LAWSON": {
+        "shop/convenience/Lawson": {
             "tags": {
-                "name": "LAWSON",
+                "name": "Lawson",
                 "shop": "convenience"
             },
-            "name": "LAWSON",
+            "name": "Lawson",
             "icon": "shop",
             "geometry": [
                 "point",
@@ -75313,26 +75549,6 @@
             ],
             "suggestion": true
         },
-        "shop/kiosk/Kiosk": {
-            "tags": {
-                "name": "Kiosk",
-                "shop": "kiosk"
-            },
-            "name": "Kiosk",
-            "icon": "shop",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours"
-            ],
-            "suggestion": true
-        },
         "shop/kiosk/Kiosko": {
             "tags": {
                 "name": "Kiosko",
@@ -79736,26 +79952,6 @@
             ],
             "suggestion": true
         },
-        "shop/supermarket/ALDI": {
-            "tags": {
-                "name": "ALDI",
-                "shop": "supermarket"
-            },
-            "name": "ALDI",
-            "icon": "grocery",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours"
-            ],
-            "suggestion": true
-        },
         "shop/supermarket/Ahorramás": {
             "tags": {
                 "name": "Ahorramás",
@@ -79822,6 +80018,26 @@
                 "shop": "supermarket"
             },
             "name": "Albertsons",
+            "icon": "grocery",
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "suggestion": true
+        },
+        "shop/supermarket/Aldi": {
+            "tags": {
+                "name": "Aldi",
+                "shop": "supermarket"
+            },
+            "name": "Aldi",
             "icon": "grocery",
             "geometry": [
                 "point",
@@ -83176,26 +83392,6 @@
             ],
             "suggestion": true
         },
-        "shop/supermarket/NETTO": {
-            "tags": {
-                "name": "NETTO",
-                "shop": "supermarket"
-            },
-            "name": "NETTO",
-            "icon": "grocery",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours"
-            ],
-            "suggestion": true
-        },
         "shop/supermarket/NORMA": {
             "tags": {
                 "name": "NORMA",
@@ -83262,6 +83458,26 @@
                 "shop": "supermarket"
             },
             "name": "Nahkauf",
+            "icon": "grocery",
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "suggestion": true
+        },
+        "shop/supermarket/Netto": {
+            "tags": {
+                "name": "Netto",
+                "shop": "supermarket"
+            },
+            "name": "Netto",
             "icon": "grocery",
             "geometry": [
                 "point",
@@ -83856,26 +84072,6 @@
             ],
             "suggestion": true
         },
-        "shop/supermarket/REWE City": {
-            "tags": {
-                "name": "REWE City",
-                "shop": "supermarket"
-            },
-            "name": "REWE City",
-            "icon": "grocery",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours"
-            ],
-            "suggestion": true
-        },
         "shop/supermarket/Ralphs": {
             "tags": {
                 "name": "Ralphs",
@@ -83982,6 +84178,26 @@
                 "shop": "supermarket"
             },
             "name": "Rewe",
+            "icon": "grocery",
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "suggestion": true
+        },
+        "shop/supermarket/Rewe City": {
+            "tags": {
+                "name": "Rewe City",
+                "shop": "supermarket"
+            },
+            "name": "Rewe City",
             "icon": "grocery",
             "geometry": [
                 "point",

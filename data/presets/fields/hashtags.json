@@ -1,6 +1,6 @@
 {
     "key": "hashtags",
     "type": "semiCombo",
-    "label": "Hashtags",
+    "label": "Suggested Hashtags",
     "placeholder": "#example"
 }

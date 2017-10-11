@@ -15,7 +15,8 @@ var blacklist = {
     'tf-cycle': true,                     // 'Thunderforest OpenCycleMap'
     'qa_no_address': true,                // 'QA No Address'
 
-    'OSM-US-TIGER-Roads_Overlay-2012': true,
+    'US-TIGER-Roads-2012': true,
+    'US-TIGER-Roads-2014': true,
 
     'Waymarked_Trails-Cycling': true,
     'Waymarked_Trails-Hiking': true,

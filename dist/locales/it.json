@@ -517,7 +517,6 @@
                 "keep_remote": "Usa il loro",
                 "restore": "Ripristina",
                 "delete": "Lascia Cancellato",
-                "download_changes": "O scarica le tue modifiche.",
                 "done": "Risolti tutti i conflitti!",
                 "help": "Un altro utente ha modificato qualcuno degli elementi che hai modificato tu.\nClicca su ogni elemento sottostante per avere più dettagli sul conflitto e scegliere se mantenere la tua versione o quella dell'altro utente.\n"
             }
@@ -608,14 +607,10 @@
         "help": {
             "title": "Aiuto",
             "help": "# Aiuto\n\nQuesto è un editor per [OpenStreetMap](http://www.openstreetmap.org/), la\nmappa del mondo gratuita e modificabile. Puoi usarlo per aggiungere ed aggiornare\ndati nella tua area, creando una mappa del mondo open-source e open-data\nmigliore per tutti.\n\nLe modifiche che fai a questa mappa saranno visibili a chiunque usa\nOpenStreetMap. Per fare una modifica, avrai bisogno di [accedere](https://www.openstreetmap.org/login).\n\n[iD editor](http://ideditor.com/) è un progetto collaborativo il cui [codice\nsorgente è disponibile su GitHub](https://github.com/openstreetmap/iD).\n",
-            "editing_saving": "# Modifica e salvataggio\n\nQuesto editor è stato pensato per funzionare principalmente online\ned anche in questo momento lo stai utilizzando tramite un sito internet.\n\n### Selezione degli elementi\n\nPer selezionare un elemento della mappa, come ad esempio una\nstrada o un punto d'interesse, clicca su di esso sulla mappa. Ciò\nfarà in modo che l'elemento selezionato venga evidenziato, che si apra\nun pannello con i dettagli e che sia mostrato un menù con le azioni che è\npossibile svolgere con l'elemento stesso.\n\nPer selezionare più elementi, tieni premuto il tasto 'Maiusc', quindi clicca su ogni elemento che vuoi selezionare oppure trascina il mouse disegnando un riquadro sulla mappa. In questo modo verrà disegnato un rettangolo e tutti gli elementi contenuti in esso saranno selezionati.\n\n### Salvataggio delle modifiche\n\nQuando si effettuano dei cambiamenti, come modifiche alle strade, agli edifici e ai luoghi, questi sono memorizzati localmente, finché non deciderai di salvarli sul server. Non ti preoccupare se commetti un errore, puoi annullare l'ultima modifica premendo il pulsante Annulla mentre per ripetere una modifica annullata basta premere il pulsante Ripeti.\n\nClicca 'Salva' per terminare un gruppo di modifiche, per esempio se hai completato la zona di una città e vuoi iniziare a mappare in un'altra area. Ti verrà data la possibilità di rivedere quello che hai fatto e se qualcosa non sembra corretto, l'editor ti fornirà dei suggerimenti e degli avvertimenti.\n\nSe tutto è a posto, puoi inserire un breve commento che descriva ciò che hai fatto e cliccare 'Salva' di nuovo per spedire le modifiche [OpenStreetMap.org](http://www.openstreetmap.org/), dove saranno rese pubbliche e potranno essere usate come base per migliorare la mappa.\n\nSe non puoi terminare una modifica in una seduta, puoi abbandonare la finestra dell'editor e ritornare più tardi (sullo stesso computer e stesso browser) e l'editor ti chiederà se vuoi recuperare il tuo lavoro.\n\n### Uso dell'editor\n\nPuoi vedere una lista delle scorciatoie da tastiera premendo il tasto `?`\n",
-            "roads": "# Strade\n\nE' possibile creare, aggiustare ed eliminare le strade con questo editor. Le strade possono essere di tutti i tipi: percorsi, autostrade, cammini, piste ciclabili o altro. E' possibile mappare ogni segmento calpestabile.\n\n### Selezione\n\nCliccare su una strada per selezionarla. Verranno visualizzati un contorno e un piccolo menu strumenti sulla mappa oltre ad una barra laterale che mostra informazioni dettagliate sulla strada.\n\n### Modifica\n\nVi capiterà spesso di vedere strade non combacianti con le immagini sullo sfondo o con il tracciato GPS. E' possibile allineare queste strada in modo che si trovino nella giusta posizione.\n\nPer prima cosa cliccare sulla strada che si vuole modificare. Questo farà in modo che la strada venga evidenziata e che vengano visualizzati i punti di controllo lungo di essa che possono essere spostati in luoghi più consoni. Se si vuole aggiungere nuovi punti di controllo per aggiungere maggiori dettagli, basta fare doppio clic su parte della strada senza nodi.\n\nSe la strada è connessa ad un'altra strada ma non è ben connessa sulla mappa, è possibile spostare uno di questi punti di controllo sull'altra strada in modo da unirli. E' importante per la mappa che le strade siano correttamente connesse  anche per garantire giuste indicazioni di guida.\n\nE' possibile cliccare sullo strumento 'Sposta' o premere il tasto rapido `M` per muovere l'intera strada in una volta sola. Cliccare nuovamente per memorizzare lo spostamento.\n\n### Eliminizione\n\nSe la strada è completamente sbagliata, ovvero non compare sulle immagini satellitari e non viene rilevata nella realtà, è possibile eliminarla eliminandola dalla mappa. Attenzione ad effettuare questa operazione di eliminazione poiché, come per ogni altra modifica, i risultati vengono visti da tutti. Considera che le immagini satellitari sono spesso vecchie quindi è possibile che la strada sia stata costruita solo di recente.\n\nE' possibile eliminare una strada cliccando prima su di essa per selezionarla e poi sull'icona cestino o premendo il tasto 'Canc' della tastiera.\n\n### Creazione\n\nHai notato che in un punto della mappa dovrebbe esserci una strada ma non c'è ? Clicca sull'incona 'Linea' in alto a sinistra nell'editor o premi il tasto `2` per iniziare a disegnare una linea.\n\nCliccare sull'inizio della strada sulla mappa per iniziare a disegnarla. Se la strada  è unita ad una strada già esistente, iniziare cliccando nel punto dove sono connesse.\n\nQuindi cliccare i nuovi punti lungo la strada in modo che segua il percorso giusto dettato dall'immagine satellitare o dai dati del GPS. Se la strada che stai disegnando attraversa un'altra strada, collegala cliccando sul punto di intersezione. Quando hai finito di disegnare fai doppio clic o premi 'Invio' o 'Enter' sulla tua tastiera.\n",
             "gps": "# GPS\n\nLe tracce provenienti dal GPS sono una sorgente dati fidata per OpenStreetMap. Questo editor\nsupporta i tracciati locali - i file `.gpx` che si trovano sul tuo computer. È possibile raccogliere\nquesto tipo di tracciati GPS con un gran numero di applicazioni per smartphone\no tramite dispositivi GPS personali.\n\nPer informazioni su come effettuare un rilevamento GPS è possibile\nleggere [Mappare con uno smartphone, un GPS o una cartina](http://learnosm.org/en/mobile-mapping/).\n\nPer utilizzare un tracciato GPX al fine di effettuare una mappatura,\ntrascina il file GPX sull'editor di mappe. Se viene riconosciuto verrà\naggiunto alla mappa ed evidenziato tramite una linea violetta. Clicca\nsul menu 'Dati mappa' che si trova sulla sinistra per abilitare,\ndisabilitare o zoomare il livello creato dal file GPX.\n\nIl tracciato GPX non viene caricato direttamente su OpenStreetMap - il\nmodo migliore di utilizzarlo è quello di disegnare sulla mappa usando il\ntracciato come guida per i nuovi elementi che vuoi aggiungere e\n[caricarlo comunque su OpenStreetMap](http://www.openstreetmap.org/trace/create) per renderlo poi\ndisponibile agli altri utenti.\n",
             "imagery": "# Immagini\n\nLe immagini aeree sono un'importante risorsa per la mappatura. Una\ncombinazione di foto aeree, immagini satellitari e risorse liberamente\ncompilate sono disponibili nell'editor nel menu 'Impostazioni dello sfondo'\nsulla destra.\n\nLe immagini predefinite presentate nell'editor sono quelle satellitari di\n[Bing Maps](http://www.bing.com/maps/), ma spostando o ingrandendo\nla mappa in specifiche aree geografiche potranno essere disponibili più\nrisorse. Alcune nazioni, come Stati Uniti, Francia e Danimarca, hanno a\ndisposizione, per alcune aree, immagini ad alta definizione.\n\nLe immagini sono a volte disallineate rispetto ai dati della mappa a causa\ndi errori da parte di chi le fornisce. Se vedi numerose strade spostate\nrispetto alle immagini di sfondo non correggerle tutte subito per farle\nnuovamente combaciare. Puoi invece aggiustare l'allineamento delle immagini\nsullo sfondo in modo da ri-allinearle con i dati esistenti cliccando su\n'Allinea' in fondo al menu.\n",
             "addresses": "# Indirizzi stradali\n\nGli indirizzi sono tra le informazioni più utili per una mappa.\n\nNonostante gli indirizzi siano spesso rappresentati come parte delle strade, in OpenStreetMap\nvengono memorizzati come attributi degli edifici e dei luoghi lungo le strade.\n\nPotrai aggiungere informazioni sull'indirizzo a dei luoghi mappati come contorni di edificio\ncosì come a quelli mappati come singoli punti. La sorgente ottimale dei dati degli indirizzi\nè un rilevamento per strada o la conoscenza personale dato che copiare da sorgenti\ncommerciali come ad es. Google Maps è severamente vietato.\n",
-            "inspector": "# Utilizzo dell'inspector\n\nL'inspector è quell'elemento dell'interfaccia utente sulla parte sinistra\ndella pagina che consente di modificare i dettagli dell'elemento\nselezionato.\n\n### Selezione di un tipo di elemento\n\nDopo che è stato aggiunto un punto, una linea o un'area, è possibile\nscegliere quale tipo di caratteristica abbia, come ad esempio se si\ntratta di una strada principale o una strada residenziale, di un\nsupermarket o di un caffè. L'inspector visualizzerà i pulsanti per le\ncaratteristiche più comuni e sarà possibile trovarne altre\nsemplicemente digitando la caratteristica voluta nella casella di ricerca.\n\nFai clic sulla 'i' che si trova nell'angolo in basso a destra del pulsante\nper saperne di più. Fai clic su un pulsante per scegliere quel tipo.\n\n### Utilizzo di Form e di Tag di modifica\n\nDopo aver scelto un tipo di elemento o quando si è selezionato un\nelemento per il quale è già stato assegnato un tipo, l'inspector\nmostrerà i campi con i dettagli come ad esempio il nome e l'indirizzo.\n\nAl di sotto dei campi è possibile fare clic sulle icone per aggiungere\nulteriori dettagli come ad es. link a Wikipedia, accesso\nconsentito alle carrozzine, e altro.\n\nSotto l'inspector è possibile fare clic su 'Tag aggiuntivi' per aggiungere\narbitrariamente altri tag all'elemento. [Taginfo](http://taginfo.openstreetmap.org/) è una buona risorsa\nper imparare qualcosa sulle combinazioni di tag più comuni.\n\nLe modifiche effettuate nell'inspector vengono applicate\nautomaticamente alla mappa. E' possibile annullarle in ogni momento\ncliccando semplicemente sul pulsante 'Ripristina'.\n",
-            "buildings": "# Edifici\n\nOpenStreetMap è il più grande database online di edifici. Puoi creare e migliorare questo database.\n\n### Selezione\n\nPuoi selezionare un edificio cliccando sul suo bordo. Ciò evidenzierà l'edificio e aprirà un piccolo menu degli strumenti ed una barra laterale contenente ulteriori informazioni sull'edificio.\n\n### Modifica\n\nTalvolta gli edifici sono posizionati in maniera errata o hanno tag incorretti.\n\nPer spostare un edificio, selezionalo, quindi clicca sullo strumento 'Sposta'. Sposta il mouse per traslare l'edificio, clicca nuovamente quando è nel posto giusto.\n\nPer migliorare la forma di un edificio, clicca e sposta i nodi che formano il suo contorno in una posizione corretta.\n\n### Creazione\n\nUna delle principali diatribe sulla aggiunta degli edifici alla mappa riguarda il fatto che OpenStreetMap permette di creare edifici come aree o come singoli punti. La regola generale in questi casi è di _mappare un edificio come un'area quando possibile_, e di mappare compagnie, case, amenità e altri oggetti che operano nell'edificio come punti all'interno della forma dell'edificio.\n\nInizia a disegnare un edificio come una forma cliccando sul pulsante 'Area' nella parte alta a sinistra dell'interfaccia, e termina premendo 'Invio' sulla tastiera o cliccando sul primo nodo che hai disegnato per chiudere la forma.\n\n### Eliminazione\n\nSe un edificio è completamente sbagliato - non è presente nelle immagini satellitari e possibilmente hai controllato di persona che esso non esista davvero - puoi eliminarlo, in modo da toglierlo dalla mappa. Sii cauto quando elimini un elemento - come ogni modifica, i risultati sono visibili a tutti e le immagini satellitari sono spesso datate, perciò l'edificio potrebbe essere stato costruito nel frattempo.\n\nPuoi eliminare un edificio cliccandoci sopra per selezionarlo, quindi cliccando sull'icona del cestino o premendo il tasto 'Canc' sulla tastiera.\n\n",
-            "relations": "# Relazioni\n\nUna relazione è un particolare elemento di OpenStreetMap che raggruppa altri\nelementi. Per esempio due tipi comuni di relazione sono le *relazioni percorso*,\nche raggruppano pezzi di strada che appartengono alla stessa via o autostrada,\ne i *multipoligoni*, che raggruppano diverse linee componenti aree complesse\n(un'area con più pezzi o con dei buchi in essa come una ciambella).\n\nGli elementi di una relazione sono chiamati *membri*. Nella barra laterale puoi\nvedere di quale relazione un elemento è membro e cliccare sulla relazione per\nselezionarla. Quando una relazione viene selezionata puoi vedere l'elenco di\ntutti i suoi membri nella barra laterale e gli stessi selezionati nella mappa.\n\nNella maggior parte dei casi iD si occuperà delle relazioni automaticamente\ndurante la modifica. Controlla solo che quando cancelli un elemento per\nridisegnarlo più accuratamente, il nuovo elemento sia un membro della stessa\nrelazione dell'originale.\n\n## Modificare le Relazioni\n\nSe vuoi modificare le relazioni, ecco le basi.\n\nPer aggiungere un elemento ad una relazione seleziona l'elemento, clicca il\ntasto \"+\" nella sezione \"Tutte le relazioni\" della barra laterale e quindi seleziona\nla relazione o digita il suo nome.\n\nPer creare una nuova relazione seleziona il primo elemento che diventerà\nmembro, clicca il tasto \"+\" nella sezione \"Tutte le relazioni\" della barra laterale\ne seleziona \"Nuova relazione...\".\n\nPer rimuovere un elemento da una relazione seleziona l'elemento e clicca sul\ncestino vicino alla relazione da cui vuoi rimuoverlo.\n\nPuoi creare dei multipoligoni con dei buchi usando lo strumento \"Unisci\".\nDisegna due aree (quella esterna e quella interna), tenendo premuto il tasto\nMaiusc della tastiera clicca su ognuno di loro per selezionarli entrambi e quindi\nclicca sul tasto \"Unisci\" (+).\n"
+            "inspector": "# Utilizzo dell'inspector\n\nL'inspector è quell'elemento dell'interfaccia utente sulla parte sinistra\ndella pagina che consente di modificare i dettagli dell'elemento\nselezionato.\n\n### Selezione di un tipo di elemento\n\nDopo che è stato aggiunto un punto, una linea o un'area, è possibile\nscegliere quale tipo di caratteristica abbia, come ad esempio se si\ntratta di una strada principale o una strada residenziale, di un\nsupermarket o di un caffè. L'inspector visualizzerà i pulsanti per le\ncaratteristiche più comuni e sarà possibile trovarne altre\nsemplicemente digitando la caratteristica voluta nella casella di ricerca.\n\nFai clic sulla 'i' che si trova nell'angolo in basso a destra del pulsante\nper saperne di più. Fai clic su un pulsante per scegliere quel tipo.\n\n### Utilizzo di Form e di Tag di modifica\n\nDopo aver scelto un tipo di elemento o quando si è selezionato un\nelemento per il quale è già stato assegnato un tipo, l'inspector\nmostrerà i campi con i dettagli come ad esempio il nome e l'indirizzo.\n\nAl di sotto dei campi è possibile fare clic sulle icone per aggiungere\nulteriori dettagli come ad es. link a Wikipedia, accesso\nconsentito alle carrozzine, e altro.\n\nSotto l'inspector è possibile fare clic su 'Tag aggiuntivi' per aggiungere\narbitrariamente altri tag all'elemento. [Taginfo](http://taginfo.openstreetmap.org/) è una buona risorsa\nper imparare qualcosa sulle combinazioni di tag più comuni.\n\nLe modifiche effettuate nell'inspector vengono applicate\nautomaticamente alla mappa. E' possibile annullarle in ogni momento\ncliccando semplicemente sul pulsante 'Ripristina'.\n"
         },
         "intro": {
             "done": "fatto",
@@ -1014,7 +1009,7 @@
             },
             "fields": {
                 "access": {
-                    "label": "Permesso d'accesso",
+                    "label": "Accesso consentito",
                     "options": {
                         "designated": {
                             "description": "Accesso consentito stando ai cartelli stradali od alle norme locali",
@@ -1057,9 +1052,6 @@
                 "access_simple": {
                     "label": "Accesso consentito"
                 },
-                "access_toilets": {
-                    "label": "Accesso"
-                },
                 "address": {
                     "label": "Indirizzo",
                     "placeholders": {
@@ -1096,7 +1088,7 @@
                     }
                 },
                 "admin_level": {
-                    "label": "Livello di Amministrazione"
+                    "label": "Livello amministrativo"
                 },
                 "aerialway": {
                     "label": "Tipo"
@@ -1277,6 +1269,9 @@
                 "collection_times": {
                     "label": "Orari di raccolta"
                 },
+                "comment": {
+                    "label": "Commento del gruppo di modifiche"
+                },
                 "communication_multi": {
                     "label": "Tipi di comunicazione"
                 },
@@ -1324,7 +1319,7 @@
                         },
                         "opposite": {
                             "description": "Una corsia ciclabile per entrambe le direzioni in una via a senso unico",
-                            "title": "Corsia ciclabile in senso unico"
+                            "title": "Senso unico eccetto bici"
                         },
                         "opposite_lane": {
                             "description": "Una corsia ciclabile che corre in senso opposto a quello del traffico",
@@ -1659,7 +1654,7 @@
                 },
                 "name": {
                     "label": "Nome",
-                    "placeholder": "Nome comune (se presente)"
+                    "placeholder": "Nome proprio (se presente)"
                 },
                 "natural": {
                     "label": "Naturale"
@@ -2675,6 +2670,9 @@
                     "name": "Superificie stradale",
                     "terms": "superficie,manto stradale,materiale"
                 },
+                "attraction/roller_coaster": {
+                    "name": "Montagne russe"
+                },
                 "barrier": {
                     "name": "Barriera",
                     "terms": "Barriera"
@@ -2942,10 +2940,6 @@
                 "craft/clockmaker": {
                     "name": "Costruttore di orologi",
                     "terms": "orologi"
-                },
-                "craft/confectionery": {
-                    "name": "Negozio per dolciumi",
-                    "terms": "dolci,dolciumi,caramelle,confetti"
                 },
                 "craft/distillery": {
                     "name": "Distilleria",
@@ -3508,7 +3502,7 @@
                     "terms": "nascondiglio,soldati,caserma"
                 },
                 "landuse/military/checkpoint": {
-                    "name": "Posto di controllo",
+                    "name": "Posto di controllo (militare)",
                     "terms": "checkpoint,check point,posto di blocco"
                 },
                 "landuse/military/danger_area": {
@@ -4328,7 +4322,7 @@
                 },
                 "shop/butcher": {
                     "name": "Macellaio",
-                    "terms": "Macellaio"
+                    "terms": "macellaio,macelleria,salumiere"
                 },
                 "shop/candles": {
                     "name": "Negozio di Candele",
@@ -4462,8 +4456,7 @@
                     "terms": "funerale,cimitero"
                 },
                 "shop/furnace": {
-                    "name": "Negozio di caldaie",
-                    "terms": "forno,stufa,caldaia"
+                    "name": "Negozio di caldaie"
                 },
                 "shop/furniture": {
                     "name": "Negozio di mobili",
@@ -4864,10 +4857,6 @@
                     "name": "Rallentatore acustico",
                     "terms": "dosso acustico,bande acustiche,bande rumorose"
                 },
-                "traffic_calming/table": {
-                    "name": "Attraversamento Pedonale Sopraelevato",
-                    "terms": "attraversamento pedonale,strisce pedonali,dosso"
-                },
                 "type/boundary": {
                     "name": "Confine",
                     "terms": "Confine"
@@ -5068,10 +5057,6 @@
                 },
                 "description": "Immagini satellitari e aeree.",
                 "name": "Mapbox Satellite"
-            },
-            "New_and_Misaligned_TIGER_Roads-2013": {
-                "description": "A livelli di zoom maggiori di 16, dati in pubblico dominio di US Census. A zoom minori solo cambiamenti a partire dal 2006 meno le modifiche già incorporate in OpenStreetMap",
-                "name": "TIGER Roads nuove e disallineate"
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {

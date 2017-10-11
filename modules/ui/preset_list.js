@@ -223,7 +223,7 @@ export function uiPresetList(context) {
                 box.transition()
                     .duration(200)
                     .style('opacity', '1')
-                    .style('max-height', 200 + preset.members.collection.length * 80 + 'px')
+                    .style('max-height', 200 + preset.members.collection.length * 190 + 'px')
                     .style('padding-bottom', '20px');
             }
         };

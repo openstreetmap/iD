@@ -365,6 +365,16 @@ en:
       craft:
         # craft=*
         label: Type
+      crane/type:
+        # 'crane:type=*'
+        label: Crane Type
+        options:
+          # 'crane:type=floor-mounted_crane'
+          floor-mounted_crane: Floor-mounted Crane
+          # 'crane:type=portal_crane'
+          portal_crane: Portal Crane
+          # 'crane:type=travel_lift'
+          travel_lift: Travel Lift
       crop:
         # crop=*
         label: Crops
@@ -581,7 +591,7 @@ en:
         label: Handrail
       hashtags:
         # hashtags=*
-        label: Hashtags
+        label: Suggested Hashtags
         # hashtags field placeholder
         placeholder: '#example'
       healthcare:
@@ -1400,6 +1410,9 @@ en:
           grade5: 'Soft: soil/sand/grass'
         # tracktype field placeholder
         placeholder: 'Solid, Mostly Solid, Soft...'
+      trade:
+        # trade=*
+        label: Type
       traffic_calming:
         # traffic_calming=*
         label: Type
@@ -2530,9 +2543,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Clockmaker'', separated by commas>'
       craft/confectionery:
         # craft=confectionery
-        name: Confectionery
-        # 'terms: sweets,candy'
-        terms: '<translate with synonyms or related terms for ''Confectionery'', separated by commas>'
+        name: Candy Maker
+        # 'terms: sweet,candy'
+        terms: '<translate with synonyms or related terms for ''Candy Maker'', separated by commas>'
       craft/distillery:
         # craft=distillery
         name: Distillery
@@ -3558,6 +3571,10 @@ en:
         # man_made=chimney
         name: Chimney
         terms: '<translate with synonyms or related terms for ''Chimney'', separated by commas>'
+      man_made/crane:
+        # man_made=crane
+        name: Crane
+        terms: '<translate with synonyms or related terms for ''Crane'', separated by commas>'
       man_made/cutline:
         # man_made=cutline
         name: Cut line
@@ -4001,11 +4018,13 @@ en:
         terms: '<translate with synonyms or related terms for ''Horizontal Bar'', separated by commas>'
       playground/rocker:
         # playground=springy
-        name: Springy Rocker
-        terms: '<translate with synonyms or related terms for ''Springy Rocker'', separated by commas>'
+        name: Spring Rider
+        # 'terms: spring rocker,springy rocker'
+        terms: '<translate with synonyms or related terms for ''Spring Rider'', separated by commas>'
       playground/roundabout:
         # playground=roundabout
         name: Play Roundabout
+        # 'terms: merry-go-round'
         terms: '<translate with synonyms or related terms for ''Play Roundabout'', separated by commas>'
       playground/sandpit:
         # playground=sandpit
@@ -4352,6 +4371,7 @@ en:
       shop/confectionery:
         # shop=confectionery
         name: Candy Store
+        # 'terms: sweet'
         terms: '<translate with synonyms or related terms for ''Candy Store'', separated by commas>'
       shop/convenience:
         # shop=convenience
@@ -4683,6 +4703,10 @@ en:
         # shop=ticket
         name: Ticket Seller
         terms: '<translate with synonyms or related terms for ''Ticket Seller'', separated by commas>'
+      shop/tiles:
+        # shop=tiles
+        name: Tile Shop
+        terms: '<translate with synonyms or related terms for ''Tile Shop'', separated by commas>'
       shop/tobacco:
         # shop=tobacco
         name: Tobacco Shop
@@ -4691,6 +4715,10 @@ en:
         # shop=toys
         name: Toy Store
         terms: '<translate with synonyms or related terms for ''Toy Store'', separated by commas>'
+      shop/trade:
+        # shop=trade
+        name: Trade Shop
+        terms: '<translate with synonyms or related terms for ''Trade Shop'', separated by commas>'
       shop/travel_agency:
         # shop=travel_agency
         name: Travel Agency

@@ -202,9 +202,6 @@
                 "access_simple": {
                     "label": "अनुज्ञात प्रवेश"
                 },
-                "access_toilets": {
-                    "label": "प्रवेश"
-                },
                 "address": {
                     "label": "पता",
                     "placeholders": {

@@ -13,6 +13,7 @@ export function uiSourceSwitch(context) {
 
     function click() {
         d3_event.preventDefault();
+        if (context.inIntro()) return;
 
         if (context.history().hasChanges() &&
             !window.confirm(t('source_switch.lose_changes'))) return;
