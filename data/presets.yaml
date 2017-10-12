@@ -1319,6 +1319,9 @@ en:
       studio:
         # studio=*
         label: Type
+      substance:
+        # substance=*
+        label: Substance
       substation:
         # substation=*
         label: Type
