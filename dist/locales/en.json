@@ -2195,6 +2195,9 @@
                 "studio": {
                     "label": "Type"
                 },
+                "substance": {
+                    "label": "Substance"
+                },
                 "substation": {
                     "label": "Type"
                 },

@@ -1801,6 +1801,11 @@
             "type": "combo",
             "label": "Type"
         },
+        "substance": {
+            "key": "substance",
+            "type": "combo",
+            "label": "Substance"
+        },
         "substation": {
             "key": "substation",
             "type": "typeCombo",
