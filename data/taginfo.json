@@ -1807,6 +1807,10 @@
         },
         {
             "key": "leisure",
+            "value": "sauna"
+        },
+        {
+            "key": "leisure",
             "value": "slipway"
         },
         {

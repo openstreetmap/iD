@@ -3517,6 +3517,10 @@ en:
         name: Racetrack (Running)
         # 'terms: race*,running,sprint,track'
         terms: '<translate with synonyms or related terms for ''Racetrack (Running)'', separated by commas>'
+      leisure/sauna:
+        # leisure=sauna
+        name: Sauna
+        terms: '<translate with synonyms or related terms for ''Sauna'', separated by commas>'
       leisure/slipway:
         # leisure=slipway
         name: Slipway

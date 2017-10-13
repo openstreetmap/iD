@@ -9558,6 +9558,24 @@
             ],
             "name": "Racetrack (Running)"
         },
+        "leisure/sauna": {
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "opening_hours",
+                "access_simple",
+                "fee"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "sauna"
+            },
+            "name": "Sauna"
+        },
         "leisure/slipway": {
             "icon": "poi-beach",
             "geometry": [
