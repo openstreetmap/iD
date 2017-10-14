@@ -219,7 +219,7 @@ export function svgGpx(projection, context, dispatch) {
 
     drawGpx.getSrc = function () {
       return src;
-		};
+    };
 
     drawGpx.fitZoom = function() {
         if (!this.hasGpx()) return this;
