@@ -4172,6 +4172,10 @@
                     "name": "Racetrack (Running)",
                     "terms": "race*,running,sprint,track"
                 },
+                "leisure/sauna": {
+                    "name": "Sauna",
+                    "terms": ""
+                },
                 "leisure/slipway": {
                     "name": "Slipway",
                     "terms": "boat launch,boat ramp"
