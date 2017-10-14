@@ -271,7 +271,7 @@ export function rendererFeatures(context) {
                 _features[_keys[i]].disable();
             }
         }
-		};
+    };
 
 
     features.disable = function(k) {
