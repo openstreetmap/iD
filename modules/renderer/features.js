@@ -3,11 +3,16 @@ import _groupBy from 'lodash-es/groupBy';
 import _reduce from 'lodash-es/reduce';
 import _some from 'lodash-es/some';
 import _union from 'lodash-es/union';
+import _get from 'lodash-es/get'
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { osmEntity } from '../osm';
 import { utilRebind } from '../util/rebind';
+import {
+	utilQsString,
+	utilStringQs
+} from '../util';
 
 
 export function rendererFeatures(context) {
@@ -60,10 +65,17 @@ export function rendererFeatures(context) {
         _features = {},
         _stats = {},
         _keys = [],
-        _hidden = [];
+        _hidden = [],
+        _initFeatures = _get(utilStringQs(window.location.hash.substring(1)), 'features', '').split(',');
 
 
     function update() {
+        var q = utilStringQs(window.location.hash.substring(1));
+
+        q.features = context.features().enabledList();
+
+        window.location.replace('#' + utilQsString(q, true));
+
         _hidden = features.hidden();
         dispatch.call('change');
         dispatch.call('redraw');
@@ -71,10 +83,16 @@ export function rendererFeatures(context) {
 
 
     function defineFeature(k, filter, max) {
+        var isEnabled = true;
+
+        if (_initFeatures.length) {
+            isEnabled = _initFeatures.some(function(key){ return key === k; });
+        }
+
         _keys.push(k);
         _features[k] = {
             filter: filter,
-            enabled: true,   // whether the user wants it enabled..
+            enabled: isEnabled,   // whether the user wants it enabled..
             count: 0,
             currentMax: (max || Infinity),
             defaultMax: (max || Infinity),
@@ -197,6 +215,10 @@ export function rendererFeatures(context) {
         return _features[k] && _features[k].enabled;
     };
 
+    features.enabledList = function () {
+      return _keys.filter(function(k) { return _features[k].enabled; });
+		};
+
 
     features.disabled = function(k) {
         if (!arguments.length) {
@@ -228,6 +250,28 @@ export function rendererFeatures(context) {
             update();
         }
     };
+
+    features.enableList = function (enabledKeys) {
+        var keysForToggle = {};
+
+        for (var i = 0; i < _keys.length; i++) {
+            keysForToggle[_keys[i]] = false;
+        }
+
+        for (i = 0; i < enabledKeys.length; i++) {
+            if (_features[enabledKeys[i]]) {
+                keysForToggle[enabledKeys[i]] = true;
+            }
+        }
+
+        for (i = 0; i < _keys.length; i++) {
+            if (keysForToggle[_keys[i]]) {
+                _features[_keys[i]].enable();
+            } else {
+                _features[_keys[i]].disable();
+            }
+        }
+		};
 
 
     features.disable = function(k) {
