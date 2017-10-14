@@ -66,7 +66,7 @@ export function rendererFeatures(context) {
         _stats = {},
         _keys = [],
         _hidden = [],
-        _initFeatures = _get(utilStringQs(window.location.hash.substring(1)), 'features', '').split(',');
+        _initFeaturesStr = _get(utilStringQs(window.location.hash.substring(1)), 'features', '').trim();
 
 
     function update() {
@@ -74,7 +74,9 @@ export function rendererFeatures(context) {
 
         q.features = context.features().enabledList();
 
-        window.location.replace('#' + utilQsString(q, true));
+        if (!window.mocha) {
+            window.location.replace('#' + utilQsString(q, true));
+        }
 
         _hidden = features.hidden();
         dispatch.call('change');
@@ -85,8 +87,8 @@ export function rendererFeatures(context) {
     function defineFeature(k, filter, max) {
         var isEnabled = true;
 
-        if (_initFeatures.length) {
-            isEnabled = _initFeatures.some(function(key){ return key === k; });
+        if (_initFeaturesStr.length) {
+            isEnabled = _initFeaturesStr.split(',').some(function(key){ return key === k; });
         }
 
         _keys.push(k);
