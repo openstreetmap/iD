@@ -3,7 +3,7 @@ import _groupBy from 'lodash-es/groupBy';
 import _reduce from 'lodash-es/reduce';
 import _some from 'lodash-es/some';
 import _union from 'lodash-es/union';
-import _get from 'lodash-es/get'
+import _get from 'lodash-es/get';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
