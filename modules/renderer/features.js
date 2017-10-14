@@ -219,7 +219,7 @@ export function rendererFeatures(context) {
 
     features.enabledList = function () {
       return _keys.filter(function(k) { return _features[k].enabled; });
-		};
+    };
 
 
     features.disabled = function(k) {
