@@ -3884,6 +3884,10 @@
                     "name": "Basin",
                     "terms": ""
                 },
+                "landuse/brownfield": {
+                    "name": "Brownfield",
+                    "terms": ""
+                },
                 "landuse/cemetery": {
                     "name": "Cemetery",
                     "terms": ""
@@ -3918,6 +3922,10 @@
                 },
                 "landuse/grass": {
                     "name": "Grass",
+                    "terms": ""
+                },
+                "landuse/greenfield": {
+                    "name": "Greenfield",
                     "terms": ""
                 },
                 "landuse/harbour": {
