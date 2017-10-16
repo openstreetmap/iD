@@ -3180,6 +3180,10 @@ en:
         # landuse=basin
         name: Basin
         terms: '<translate with synonyms or related terms for ''Basin'', separated by commas>'
+      landuse/brownfield:
+        # landuse=brownfield
+        name: Brownfield
+        terms: '<translate with synonyms or related terms for ''Brownfield'', separated by commas>'
       landuse/cemetery:
         # landuse=cemetery
         name: Cemetery
@@ -3222,6 +3226,10 @@ en:
         # landuse=grass
         name: Grass
         terms: '<translate with synonyms or related terms for ''Grass'', separated by commas>'
+      landuse/greenfield:
+        # landuse=greenfield
+        name: Greenfield
+        terms: '<translate with synonyms or related terms for ''Greenfield'', separated by commas>'
       landuse/harbour:
         # landuse=harbour
         name: Harbor
