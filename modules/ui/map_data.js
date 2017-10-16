@@ -322,6 +322,7 @@ export function uiMapData(context) {
 
                     // clear the map
                     geoserviceLayer.geojson({});
+                    geoserviceLayer.fields({});
                     window.knownObjectIds = {};
                     window.importedEntities = [];
                     context.flush();
@@ -513,9 +514,11 @@ export function uiMapData(context) {
                                 geoserviceLayer.fields(fields);
 
                                 // don't allow an OSM import tag to be entered if we're not importing this field
-                                d3.select('input[name="' + field.name + '"]')
+                                var dropdown = d3.select('input[name="' + field.name + '"]')
                                     .property('value', '')
                                     .property('disabled', !this.checked);
+                                d3.select(dropdown.node().parentNode.lastChild)
+                                    .classed('hide', !this.checked);
                             });
 
                     // import to this OSM tag - suggest tags from preset
@@ -533,6 +536,11 @@ export function uiMapData(context) {
                         });
                 });
                 geoserviceLayer.fields(myFields);
+
+                // UI: hide combobox dropdown until enabled
+                // show table and OSM add tag button
+                d3.selectAll('.geoservice-table .combobox-caret')
+                    .classed('hide', true);
                 d3.selectAll('.geoservice-table, .add-tag')
                     .classed('hide', false);
             }
