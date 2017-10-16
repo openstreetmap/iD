@@ -374,7 +374,7 @@ export function uiMapData(context) {
                     _.map(data.layers, function(optLayer) {
                         layerSelect.append('option')
                             .text(optLayer.name)
-                            .attr('value', metadata_url.split('/metadata')[0] + '/' + optLayer.id);
+                            .attr('value', metadata_url.split('?f=json')[0] + '/' + optLayer.id);
                     });
                     return;
                 } else {
@@ -389,7 +389,7 @@ export function uiMapData(context) {
                     .property('disabled', false);
 
                 // fetch one record for sample values
-                var sample_url = metadata_url.split('/metadata')[0] + '/query?where=1%3D1&returnGeometry=false&outFields=*&f=json&resultRecordCount=1';
+                var sample_url = metadata_url.split('?f=json')[0] + '/query?where=1%3D1&returnGeometry=false&outFields=*&f=json&resultRecordCount=1';
                 d3.json(sample_url, function (err, data) {
                     var samplePick = data.features[0].attributes;
                     var fields = Object.keys(samplePick);
@@ -400,7 +400,7 @@ export function uiMapData(context) {
                 });
 
                 // make a count of local (current viewport) and global features
-                var counter_url = metadata_url.split('/metadata')[0] + '/query?where=1%3D1&returnCountOnly=true&f=json';
+                var counter_url = metadata_url.split('?f=json')[0] + '/query?where=1%3D1&returnCountOnly=true&f=json';
                 d3.selectAll('.layer-counted').classed('hide', false);
                 d3.json(counter_url, function (err, data) {
                     var count = data.count;
@@ -563,7 +563,7 @@ export function uiMapData(context) {
                     .attr('placeholder', 'GeoService URL')
                     // .attr('value', context.storage('geoserviceLayerUrl') || '')
                     .on('input', function(e, fixedURL) {
-                        // reformat URL ending to /layerID/metadata?f=json
+                        // reformat URL ending to /layerID?f=json
                         metadata_url = fixedURL ? fixedURL : this.value;
                         metadata_url = metadata_url.split('/');
 
@@ -597,7 +597,7 @@ export function uiMapData(context) {
                         if ((!isNaN(last * 1)) || (last.toLowerCase().indexOf('server') > -1)) {
                             metadata_url.push(last);
                         }
-                        metadata_url = (metadata_url.join('/') + '/metadata?f=json').replace(/\/\//g, '/').replace(':/', '://');
+                        metadata_url = (metadata_url.join('/') + '?f=json').replace(/\/\//g, '/').replace(':/', '://');
 
                         d3.json(metadata_url, previewGeoService);
                     });
