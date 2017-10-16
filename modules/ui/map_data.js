@@ -867,7 +867,7 @@ export function uiMapData(context) {
                     });
                 pane.append('button')
                     .attr('class', 'url final global')
-                    .attr('style', 'margin-right: 10px')
+                    .attr('style', 'margin-right: 10px; display: none;')
                     .property('disabled', true)
                     .text('Load Globally')
                     .on('click', function() {
