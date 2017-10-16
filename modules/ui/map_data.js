@@ -809,7 +809,7 @@ export function uiMapData(context) {
 
                 pane.append('div')
                     .attr('class', 'help-text hide')
-                    .text('You have now imported geo features! Close this window and manually approve data which should be added to OpenStreetMap.');
+                    .text('You have now imported geo features! Close this window and manually approve data which should be added to OpenStreetMap. You can filter the view to see only your imported data in the right sidebar.');
 
                 pane.append('div')
                     .attr('class', 'layer-counted hide')
