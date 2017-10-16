@@ -473,8 +473,8 @@ export function svgGeoService(projection, context, dispatch) {
                 // user or preset has added a key:value pair to all objects
                 osmk = convertedKeys[k].substring(4);
                 osmv = window.layerImports[convertedKeys[k]];
-                if (this.fields()[osmk]) {
-                    // this data is imported from the GeoService and not from preset
+                if (window.layerChecked[osmk]) {
+                    // this data will be imported from the GeoService and not from preset
                     continue;
                 }
             } else {

@@ -384,10 +384,6 @@ export function uiMapData(context) {
                     return;
                 }
 
-                // re-enable download buttons
-                d3.selectAll('.geoservice-pane button.url.final')
-                    .property('disabled', false);
-
                 // fetch one record for sample values
                 var sample_url = metadata_url.split('?f=json')[0] + '/query?where=1%3D1&returnGeometry=false&outFields=*&f=json&resultRecordCount=1';
                 d3.json(sample_url, function (err, data) {
@@ -419,7 +415,15 @@ export function uiMapData(context) {
                 counter_url += '&spatialRel=esriSpatialRelIntersects';
                 counter_url += '&inSR=4326';
                 d3.json(counter_url, function (err, data) {
-                    var count = data.count;
+                    var count = (data || {}).count;
+                    if (!err && count > 0) {
+                        // re-enable download buttons
+                        d3.selectAll('.geoservice-pane button.url.final')
+                            .property('disabled', false);
+                    } else {
+                        // warn user
+                        alert("No data was loaded in this area! Close the window and re-open it where data can be imported. Or enter a different GeoService.")
+                    }
                     d3.selectAll('.layer-counted .local').text(count);
                 });
 
@@ -529,8 +533,7 @@ export function uiMapData(context) {
                         });
                 });
                 geoserviceLayer.fields(myFields);
-
-                d3.selectAll('.geoservice-table')
+                d3.selectAll('.geoservice-table, .add-tag')
                     .classed('hide', false);
             }
 
@@ -747,52 +750,66 @@ export function uiMapData(context) {
                     .append('hr')
                     .attr('class', 'import-table-switch');
 
-                body.append('div')
-                    .attr('class', 'inspector-inner hide')
-                    .append('button')
-                        .attr('class', 'add-tag')
-                        .html('Add key:value to all features')
-                        .call(svgIcon('#icon-plus', 'icon light'))
-                        .on('click', function() {
-                            d3.selectAll('.import-table-switch').classed('import-table-switch', false);
-                            var row = d3.selectAll('.geoservice-table').append('tr');
-                            var uniqNum = Math.floor(Math.random() * 10000);
+                body.append('button')
+                    .attr('class', 'add-tag hide')
+                    .html('Add key:value to all features')
+                    .call(svgIcon('#icon-plus', 'icon light'))
+                    .on('click', function() {
+                        d3.selectAll('.import-table-switch').classed('import-table-switch', false);
+                        var row = d3.selectAll('.geoservice-table').append('tr');
+                        var uniqNum = Math.floor(Math.random() * 10000);
 
-                            // the checkbox
-                            row.append('td').append('input')
+                        // fill in original name and sample value columns
+                        row.append('td').text('Add');
+                        row.append('td');
+
+                        // the checkbox
+                        row.append('td')
+                            .attr('class', 'include-row')
+                            .append('input')
                                 .attr('type', 'checkbox')
                                 .property('checked', true)
                                 .property('disabled', true);
 
-                            // the 'key' field, showing the new OSM tag key
-                            var suggestedKeys = d3combobox().fetcher(getFetcher()).minItems(0);
+                        // final column stores key and value
+                        var addval = row.append('td').append('div')
+                            .attr('class', 'add-osm-key-val');
 
-                            var keyField = row.append('td').append('input')
-                                .attr('type', 'text')
-                                .attr('placeholder', 'new OSM key')
-                                .attr('class', 'import-key-' + uniqNum)
-                                .call(suggestedKeys)
-                                .on('change', function() {
-                                    if (this.name) {
-                                        window.layerImports['add_' + this.value] = window.layerImports['add_' + this.name];
-                                        delete window.layerImports['add_' + this.name];
-                                    } else {
-                                        window.layerImports['add_' + this.value] = '';
-                                    }
-                                    this.name = this.value;
-                                    d3.selectAll('.osm-key-' + uniqNum).attr('name', this.value);
-                                });
+                        // the 'key' field, showing the new OSM tag key
+                        var suggestedKeys = d3combobox().fetcher(getFetcher()).minItems(0);
 
-                            // the 'value' field setting the new OSM tag default value
-                            row.append('td').append('input')
-                                .attr('type', 'text')
-                                .attr('placeholder', 'new OSM value')
-                                .attr('class', 'osm-key-' + uniqNum)
-                                .on('change', function() {
-                                    // properties with this.name renamed to this.value
-                                    window.layerImports['add_' + this.name] = this.value;
-                                });
-                        });
+                        var keyField = addval.append('input')
+                            .attr('type', 'text')
+                            .attr('placeholder', 'new OSM key')
+                            .attr('class', 'import-key-' + uniqNum)
+                            .call(suggestedKeys)
+                            .on('change', function() {
+                                if (this.name) {
+                                    window.layerImports['add_' + this.value] = window.layerImports['add_' + this.name];
+                                    delete window.layerImports['add_' + this.name];
+                                } else {
+                                    window.layerImports['add_' + this.value] = '';
+                                }
+                                this.name = this.value;
+                                d3.selectAll('.osm-key-' + uniqNum).attr('name', this.value);
+                            });
+
+                        addval.append('div').text('=');
+
+                        // the 'value' field setting the new OSM tag default value
+                        addval.append('input')
+                            .attr('type', 'text')
+                            .attr('placeholder', 'new OSM value')
+                            .attr('class', 'osm-key-' + uniqNum)
+                            .on('change', function() {
+                                // properties with this.name renamed to this.value
+                                window.layerImports['add_' + this.name] = this.value;
+                            });
+                    });
+
+                pane.append('div')
+                    .attr('class', 'help-text hide')
+                    .text('You have now imported geo features! Close this window and manually approve data which should be added to OpenStreetMap.');
 
                 pane.append('div')
                     .attr('class', 'layer-counted hide')
@@ -837,16 +854,20 @@ export function uiMapData(context) {
 
                     // hide rows which I didn't import
                     _.map(hideFields, function (field) {
-                        console.log(d3.selectAll('.geoservice-table tr.preview.' + field));
                         d3.select('.geoservice-table tr.preview.' + field)
                             .style('display', 'none');
                     });
                     // don't show the import-or-not checkbox
                     d3.selectAll('.geoservice-table .include-row, .geoservice-table .combobox-caret')
                         .style('display', 'none');
-                    // don't let user change the corresponding OSM tag
-                    d3.selectAll('.geoservice-table .osm-counterpart')
+                    // don't let user change or add OSM tags
+                    d3.selectAll('.geoservice-table .osm-counterpart, .add-osm-key-val input')
                         .property('disabled', true);
+                    d3.selectAll('.add-tag')
+                        .style('display', 'none');
+
+                    // help text
+                    d3.selectAll('.geoservice-pane .help-text').classed('hide', false);
 
                     // change sidebar
                     d3.select('.geoservice-button-label')
@@ -882,6 +903,10 @@ export function uiMapData(context) {
             var geoservicePane = layers.layer('geoservice').pane();
             var hideMe = !geoservicePane.classed('hide');
             geoservicePane.classed('hide', hideMe);
+            if (!hideMe && d3.select('.geoservice-pane .layer-counted .local').text() === '0') {
+                d3.select('input.geoservice[type="text"]').on('input')(null,
+                    d3.select('input.geoservice[type="text"]').property('value'));
+            }
         }
 
         function editGeoService() {

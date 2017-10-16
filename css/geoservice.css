@@ -80,11 +80,12 @@ text.geoservice {
 
 .geoservice-pane button.add-tag {
     margin-top: 0;
-    color: #fff;
+    float: none;
 }
 
 .geoservice-pane .add-tag svg {
     float: left;
+    color: #444;
 }
 
 .geoservice-pane button.url {
