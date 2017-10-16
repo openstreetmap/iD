@@ -97,7 +97,21 @@ export function uiEntityEditor(context) {
             .append('div')
             .attr('class', 'inspector-border import-approve');
 
+        var statusIcon = 'neutral';
+        if (this.focusEntity.approvedForEdit === 'approved') {
+            statusIcon = 'approve';
+        } else if (this.focusEntity.approvedForEdit === 'rejected') {
+            statusIcon = 'reject';
+        }
+        d3_selectAll('.import-icon')
+            .classed('neutral approve reject', false)
+            .classed(statusIcon, true);
+        importApprove.append('span')
+            .attr('class', 'import-icon ' + statusIcon)
+            .text('___');
+
         var acceptButton = importApprove.append('button')
+            .attr('class', 'approve')
             .text('Approve')
             .on('click', function() {
                 this.focusEntity.approvedForEdit = 'approved';
@@ -107,6 +121,9 @@ export function uiEntityEditor(context) {
                     .classed('import-approved', true)
                     .classed('import-edited', false)
                     .classed('import-rejected', false);
+                d3_selectAll('.import-icon')
+                    .classed('neutral reject', false)
+                    .classed('approve', true);
             }.bind(this));
 
         var rejectButton = importApprove.append('button')
@@ -129,6 +146,9 @@ export function uiEntityEditor(context) {
                         .classed('import-rejected', true);
                     //operationDelete([this.focusEntity.id], context)();
                 }
+                d3_selectAll('.import-icon')
+                    .classed('neutral approve', false)
+                    .classed('reject', true);
                 context.history().on('change.save')();
             }).bind(this));
 

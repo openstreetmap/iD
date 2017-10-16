@@ -198,17 +198,41 @@ text.geoservice {
     text-align: center;
 }
 
+.import-approve .import-icon {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 20px;
+    top: 15px;
+    border-radius: 10px;
+}
+
+.import-approve .import-icon.neutral {
+    color: goldenrod;
+    background-color: goldenrod;
+}
+
+.import-approve .import-icon.approve {
+    color: #80fa80;
+    background-color: #80fa80;
+}
+
+.import-approve .import-icon.reject {
+    color: #fc7d7d;
+    background-color: #fc7d7d;
+}
+
 .import-approve button {
     margin: 6px;
     padding-left: 10px;
     padding-right: 10px;
 }
 
-.import-approve button:first-child {
+.import-approve button.approve {
     background-color: #a6f3a6;
 }
 
-.import-approve button:first-child:hover {
+.import-approve button.approve:hover {
     background-color: #80fa80;
 }
 

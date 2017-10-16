@@ -465,7 +465,7 @@ export function uiMapData(context) {
                 var myFields = {};
                 _.map(data.fields, function (field) {
                     // don't allow user to change how OBJECTID works or map other system-managed fields
-                    if (['OBJECTID', 'SHAPE', 'SHAPE_LENGTH', 'SHAPE_AREA', 'SHAPE.LENGTH', 'SHAPE.AREA'].indexOf(field.name.toUpperCase()) > -1) {
+                    if (['OBJECTID', 'SHAPE', 'SHAPE_LENGTH', 'SHAPE_AREA', 'SHAPE.LENGTH', 'SHAPE.AREA', 'X_COORD', 'Y_COORD'].indexOf(field.name.toUpperCase()) > -1) {
                         return;
                     }
                     myFields[field.name] = false;
