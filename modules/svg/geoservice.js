@@ -49,7 +49,7 @@ export function svgGeoService(projection, context, dispatch) {
         if (!geojson || !geojson.features) {
             return;
         }
-        
+
         pointInPolygon = d3.selectAll('.point-in-polygon input').property('checked');
         mergeLines = d3.selectAll('.merge-lines input').property('checked');
         overlapBuildings = d3.selectAll('.overlap-buildings input').property('checked');
@@ -473,6 +473,10 @@ export function svgGeoService(projection, context, dispatch) {
                 // user or preset has added a key:value pair to all objects
                 osmk = convertedKeys[k].substring(4);
                 osmv = window.layerImports[convertedKeys[k]];
+                if (this.fields()[osmk]) {
+                    // this data is imported from the GeoService and not from preset
+                    continue;
+                }
             } else {
                 var originalKey = convertedKeys[k];
                 var approval = window.layerChecked[originalKey];
@@ -627,7 +631,7 @@ export function svgGeoService(projection, context, dispatch) {
         drawGeoService.fmt = fmt;
         return this;
     };
-    
+
     // importFields is an object with each key corresponding to true / false based on whether it should be imported
     drawGeoService.fields = function(fields) {
         if (!arguments.length) return (drawGeoService.importFields || []);
@@ -688,14 +692,13 @@ export function svgGeoService(projection, context, dispatch) {
               wkid: 4326
             }
         });
-        if (this.lastBounds === bounds && this.lastProps === JSON.stringify(window.layerImports)) {
+        if (this.lastBounds === bounds) {
             // unchanged bounds, unchanged import parameters, so unchanged data
             return this;
         }
 
         // data has changed - make a query
         this.lastBounds = bounds;
-        this.lastProps = JSON.stringify(window.layerImports);
 
         // make a spatial query within the user viewport (unless the user made their own spatial query)
         if (!downloadMax && (url.indexOf('spatialRel') === -1)) {
