@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 'use strict';
 
-var _merge = require('lodash/merge');
+require = require('@std/esm')(module, { esm: 'js' }); // eslint-disable-line no-global-assign
+
+var _merge = require('lodash-es/merge').default;
 
 var argv = require('minimist')(process.argv.slice(2));
 if (argv.help || argv.h || !argv.svg) {
