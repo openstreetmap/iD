@@ -18,18 +18,20 @@ export function uiHelp(context) {
     var key = t('help.key');
 
     var docKeys = [
-        'help.help',
-        'help.editing_saving',
-        'help.roads',
-        'help.gps',
-        'help.imagery',
-        'help.addresses',
-        'help.inspector',
-        'help.buildings',
-        'help.relations'];
+        ['help.help'],
+        ['help.navigating'],
+        ['help.editing_saving'],
+        ['help.roads'],
+        ['help.gps'],
+        ['help.imagery'],
+        ['help.addresses'],
+        ['help.inspector'],
+        ['help.buildings'],
+        ['help.relations']
+        ];
 
     var docs = docKeys.map(function(key) {
-        var text = t(key);
+        var text = key.reduce(function(all,part) { return all + t(part); }, "");
         return {
             title: text.split('\n')[0].replace('#', '').trim(),
             html: marked(text.split('\n').slice(1).join('\n'))

@@ -561,6 +561,22 @@ en:
 
       The [iD editor](http://ideditor.com/) is a collaborative project with [source
       code available on GitHub](https://github.com/openstreetmap/iD).
+
+    navigating: |
+      # Navigating
+
+      This editor is designed to work primarily online, and you're accessing
+      it through a website right now.
+
+      ### Panning 
+
+      To pan the map, either klick and hole the mouse button and move the mouse
+      or use the arrow keys on the keyboard.
+
+      ### Zooming 
+
+      To zoom eigher use the mouse wheel oder klick on +/- in the right upper corner.
+
     editing_saving: |
       # Editing & Saving
 
