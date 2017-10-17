@@ -1520,6 +1520,10 @@
         },
         {
             "key": "landuse",
+            "value": "brownfield"
+        },
+        {
+            "key": "landuse",
             "value": "cemetery"
         },
         {
@@ -1553,6 +1557,10 @@
         {
             "key": "landuse",
             "value": "grass"
+        },
+        {
+            "key": "landuse",
+            "value": "greenfield"
         },
         {
             "key": "landuse",
@@ -1804,6 +1812,10 @@
         {
             "key": "sport",
             "value": "running"
+        },
+        {
+            "key": "leisure",
+            "value": "sauna"
         },
         {
             "key": "leisure",

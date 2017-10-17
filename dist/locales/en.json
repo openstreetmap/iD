@@ -3884,6 +3884,10 @@
                     "name": "Basin",
                     "terms": ""
                 },
+                "landuse/brownfield": {
+                    "name": "Brownfield",
+                    "terms": ""
+                },
                 "landuse/cemetery": {
                     "name": "Cemetery",
                     "terms": ""
@@ -3918,6 +3922,10 @@
                 },
                 "landuse/grass": {
                     "name": "Grass",
+                    "terms": ""
+                },
+                "landuse/greenfield": {
+                    "name": "Greenfield",
                     "terms": ""
                 },
                 "landuse/harbour": {
@@ -4171,6 +4179,10 @@
                 "leisure/running_track": {
                     "name": "Racetrack (Running)",
                     "terms": "race*,running,sprint,track"
+                },
+                "leisure/sauna": {
+                    "name": "Sauna",
+                    "terms": ""
                 },
                 "leisure/slipway": {
                     "name": "Slipway",

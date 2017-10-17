@@ -7956,6 +7956,19 @@
             "terms": [],
             "name": "Basin"
         },
+        "landuse/brownfield": {
+            "geometry": [
+                "area"
+            ],
+            "fields": [
+                "name"
+            ],
+            "tags": {
+                "landuse": "brownfield"
+            },
+            "terms": [],
+            "name": "Brownfield"
+        },
         "landuse/cemetery": {
             "icon": "cemetery",
             "fields": [
@@ -8098,6 +8111,19 @@
             },
             "terms": [],
             "name": "Grass"
+        },
+        "landuse/greenfield": {
+            "geometry": [
+                "area"
+            ],
+            "fields": [
+                "name"
+            ],
+            "tags": {
+                "landuse": "greenfield"
+            },
+            "terms": [],
+            "name": "Greenfield"
         },
         "landuse/harbour": {
             "icon": "harbor",
@@ -9557,6 +9583,24 @@
                 "track"
             ],
             "name": "Racetrack (Running)"
+        },
+        "leisure/sauna": {
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "opening_hours",
+                "access_simple",
+                "fee"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "sauna"
+            },
+            "name": "Sauna"
         },
         "leisure/slipway": {
             "icon": "poi-beach",

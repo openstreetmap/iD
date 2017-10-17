@@ -1,0 +1,13 @@
+{
+    "geometry": [
+        "area"
+    ],
+    "fields": [
+        "name"
+    ],
+    "tags": {
+        "landuse": "greenfield"
+    },
+    "terms": [],
+    "name": "Greenfield"
+}
