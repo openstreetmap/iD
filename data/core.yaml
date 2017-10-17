@@ -548,34 +548,40 @@ en:
     title: "Help"
     key: H
     help: |
-      # Help
+      p1: |
+        # Help
 
-      This is an editor for [OpenStreetMap](http://www.openstreetmap.org/), the
-      free and editable map of the world. You can use it to add and update
-      data in your area, making an open-source and open-data map of the world
-      better for everyone.
+        This is an editor for [OpenStreetMap](http://www.openstreetmap.org/), the
+        free and editable map of the world. You can use it to add and update
+        data in your area, making an open-source and open-data map of the world
+        better for everyone.
 
-      Edits that you make on this map will be visible to everyone who uses
-      OpenStreetMap. In order to make an edit, you'll need to
-      [log in](https://www.openstreetmap.org/login).
+      p2: |
+        Edits that you make on this map will be visible to everyone who uses
+        OpenStreetMap. In order to make an edit, you'll need to
+        [log in](https://www.openstreetmap.org/login).
 
-      The [iD editor](http://ideditor.com/) is a collaborative project with [source
-      code available on GitHub](https://github.com/openstreetmap/iD).
+      p3: |
+        The [iD editor](http://ideditor.com/) is a collaborative project with [source
+        code available on GitHub](https://github.com/openstreetmap/iD).
 
-    navigating: |
-      # Navigating
+    navigating:
+      p1: |
+        # Navigating
 
-      This editor is designed to work primarily online, and you're accessing
-      it through a website right now.
+        This editor is designed to work primarily online, and you're accessing
+        it through a website right now.
 
-      ### Panning 
+      p2: |
+        ### Panning 
 
-      To pan the map, either klick and hole the mouse button and move the mouse
-      or use the arrow keys on the keyboard.
+        To pan the map, either klick and hold the mouse button and move the mouse
+        or use the arrow keys on the keyboard.
 
-      ### Zooming 
+      p3: |
+        ### Zooming 
 
-      To zoom eigher use the mouse wheel oder klick on +/- in the right upper corner.
+        To zoom eigher use the mouse wheel or klick on +/- in the upper right corner.
 
     editing_saving: |
       # Editing & Saving

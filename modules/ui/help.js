@@ -18,8 +18,8 @@ export function uiHelp(context) {
     var key = t('help.key');
 
     var docKeys = [
-        ['help.help'],
-        ['help.navigating'],
+        ['help.help.p1','help.help.p2','help.help.p3'],
+        ['help.navigating.p1','help.navigating.p2','help.navigating.p3'],
         ['help.editing_saving'],
         ['help.roads'],
         ['help.gps'],
