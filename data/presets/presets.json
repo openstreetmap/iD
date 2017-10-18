@@ -9295,6 +9295,27 @@
             ],
             "name": "Beach Volleyball Court"
         },
+        "leisure/pitch/boules": {
+            "icon": "pitch",
+            "fields": [
+                "surface",
+                "lit"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "pitch",
+                "sport": "boules"
+            },
+            "reference": {
+                "key": "sport",
+                "value": "boules"
+            },
+            "terms": [],
+            "name": "Boules Area"
+        },
         "leisure/pitch/bowls": {
             "icon": "pitch",
             "fields": [

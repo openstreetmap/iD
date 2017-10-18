@@ -4128,6 +4128,10 @@
                     "name": "Beach Volleyball Court",
                     "terms": "volleyball"
                 },
+                "leisure/pitch/boules": {
+                    "name": "Boules Area",
+                    "terms": ""
+                },
                 "leisure/pitch/bowls": {
                     "name": "Bowling Green",
                     "terms": ""
