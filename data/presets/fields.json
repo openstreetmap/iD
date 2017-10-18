@@ -311,6 +311,11 @@
             "type": "typeCombo",
             "label": "Type"
         },
+        "boules": {
+            "key": "boules",
+            "type": "typeCombo",
+            "label": "Type"
+        },
         "boundary": {
             "key": "boundary",
             "type": "combo",
