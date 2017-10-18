@@ -103,9 +103,9 @@ describe('iD.presetCollection', function() {
             expect(col.indexOf(p.grill), 'Grill').to.eql(0);            // 1. 'Grill' (leading name)
             expect(col.indexOf(p.football), 'Football').to.eql(1);      // 2. 'Football' (leading term 'gridiron')
             expect(col.indexOf(p.sandpit), 'Sandpit').to.eql(2);        // 3. 'Sandpit' (leading tag value 'grit_bin')
-            expect(col.indexOf(p.grass1), 'Grass').to.be.within(3,4);   // 4. 'Grass' (similar name)
-            expect(col.indexOf(p.grass2), 'Ğṝȁß').to.be.within(3,4);    // 5. 'Ğṝȁß' (similar name)
-            expect(col.indexOf(p.park), 'Park').to.eql(5);              // 6. 'Park' (similar term 'grass')
+            expect(col.indexOf(p.grass1), 'Grass').to.be.within(3,5);   // 4. 'Grass' (similar name)
+            expect(col.indexOf(p.grass2), 'Ğṝȁß').to.be.within(3,5);    // 5. 'Ğṝȁß' (similar name)
+            expect(col.indexOf(p.park), 'Park').to.be.within(3,5);      // 6. 'Park' (similar term 'grass')
         });
 
         it('sorts preset with matchScore penalty below others', function() {

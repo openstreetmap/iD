@@ -57,7 +57,7 @@ describe('iD.actionMergeRemoteChanges', function () {
 
 
     function makeGraph(entities) {
-        return _.reduce(entities, function(graph, entity) {
+        return entities.reduce(function(graph, entity) {
             return graph.replace(entity);
         }, iD.Graph(base));
     }

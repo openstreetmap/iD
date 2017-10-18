@@ -52,7 +52,6 @@
     "js-yaml": "^3.9.0",
     "json-stable-stringify": "^1.0.1",
     "jsonschema": "^1.1.0",
-    "lodash": "^4.17.0",
     "mapillary-js": "2.9.0",
     "minimist": "^1.2.0",
     "mocha": "^4.0.0",
