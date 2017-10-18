@@ -1,7 +1,9 @@
 /* Downloads the latest translations from Transifex */
 
-const _isEmpty = require('lodash/isEmpty');
-const _merge = require('lodash/merge');
+require = require('@std/esm')(module, { esm: 'js' }); // eslint-disable-line no-global-assign
+
+const _isEmpty = require('lodash-es/isEmpty').default;
+const _merge = require('lodash-es/merge').default;
 
 var request = require('request').defaults({ maxSockets: 1 });
 var yaml = require('js-yaml');
