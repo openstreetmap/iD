@@ -13,25 +13,29 @@ import { uiShortcuts } from './shortcuts';
 import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
 
+import { icon } from 'intro/helper';
+
 
 export function uiHelp(context) {
     var key = t('help.key');
 
     var docKeys = [
-        ['help.help.p1','help.help.p2','help.help.p3'],
-        ['help.navigating.p1','help.navigating.p2','help.navigating.p3'],
-        ['help.editing_saving'],
-        ['help.roads'],
-        ['help.gps'],
-        ['help.imagery'],
-        ['help.addresses'],
-        ['help.inspector'],
-        ['help.buildings'],
-        ['help.relations']
+          ['help.help.',['intro','opendata','opensource']],
+          ['help.navigation.',['intro','pan','zoom']],
+          ['help.',['inspector']],
+          ['help.',['editing_saving']],
+          ['help.',['imagery']],
+          ['help.',['roads']],
+          ['help.',['buildings']],
+          ['help.',['addresses']],
+          ['help.',['gps']],
+          ['help.',['relations']]
         ];
 
+    var icont = { plus: icon('#icon-plus', 'pre-text'), minus: icon('#icon-minus', 'pre-text') };
+
     var docs = docKeys.map(function(key) {
-        var text = key.reduce(function(all,part) { return all + t(part); }, "");
+        var text = key[1].reduce(function(all,part) { return all + t(key[0].concat(part),icont); }, "");
         return {
             title: text.split('\n')[0].replace('#', '').trim(),
             html: marked(text.split('\n').slice(1).join('\n'))

@@ -547,41 +547,45 @@ en:
   help:
     title: "Help"
     key: H
-    help: |
-      p1: |
+    help:
+      intro: |
         # Help
 
-        This is an editor for [OpenStreetMap](http://www.openstreetmap.org/), the
-        free and editable map of the world. You can use it to add and update
-        data in your area, making an open-source and open-data map of the world
-        better for everyone.
+        With the iD [OpenStreetMap](http://www.openstreetmap.org/) editor your can 
+        add and update the free and editable map of the world online with your browser.
+        If you haven't done so, please [log in](https://www.openstreetmap.org/login) and start the walkthrough.
 
-      p2: |
-        Edits that you make on this map will be visible to everyone who uses
-        OpenStreetMap. In order to make an edit, you'll need to
-        [log in](https://www.openstreetmap.org/login).
+      opendata: |
+        ### Open-Data
 
-      p3: |
+        Edits that you make on this map will be available to everyone who uses
+        OpenStreetMap. It will be visible on every map based on OpenStreetMap.
+
+      opensource: |
+        ### Open-Source
+
         The [iD editor](http://ideditor.com/) is a collaborative project with [source
         code available on GitHub](https://github.com/openstreetmap/iD).
 
-    navigating:
-      p1: |
+    navigation:
+      intro: |
         # Navigating
 
-        This editor is designed to work primarily online, and you're accessing
-        it through a website right now.
+        The main map area shows OpenStreetMap data on top of a background, this help
+        is placed on top of it. On the left is the feature editor.
 
-      p2: |
+      pan: |
         ### Panning 
 
-        To pan the map, either klick and hold the mouse button and move the mouse
-        or use the arrow keys on the keyboard.
+        You can drag the map by pressing and holding the left mouse button while
+        moving the mouse around.  You can also use the arrow keys on your keyboard.
+        You can jump to your home coordinates with the idontknow button.
 
-      p3: |
+      zoom: |
         ### Zooming 
 
-        To zoom eigher use the mouse wheel or klick on +/- in the upper right corner.
+        You can zoom in or out by scrolling with the mouse wheel or trackpad,
+        or by clicking the {plus} / {minus} buttons.
 
     editing_saving: |
       # Editing & Saving
