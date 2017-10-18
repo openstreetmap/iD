@@ -35,7 +35,7 @@ export function uiHelp(context) {
     var icont = { plus: icon('#icon-plus', 'pre-text'), minus: icon('#icon-minus', 'pre-text') };
 
     var docs = docKeys.map(function(key) {
-        var text = key[1].reduce(function(all,part) { return all + t(key[0].concat(part),icont); }, "");
+        var text = key[1].reduce(function(all,part) { return all + t(key[0].concat(part),icont); }, '');
         return {
             title: text.split('\n')[0].replace('#', '').trim(),
             html: marked(text.split('\n').slice(1).join('\n'))
