@@ -135,9 +135,9 @@ export function svgAreas(projection, context) {
             .merge(paths)
             .each(function(entity) {
                 var layer = this.parentNode.__data__;
-                
+
                 if (entity.approvedForEdit) {
-                    this.setAttribute('class', entity.type + ' area geoservice-import ' + layer + ' ' + entity.id + ' import-' + entity.approvedForEdit);                
+                    this.setAttribute('class', entity.type + ' area geoservice-import ' + layer + ' ' + entity.id + ' import-' + entity.approvedForEdit);
                 } else {
                     this.setAttribute('class', entity.type + ' area geoservice-osm ' + layer + ' ' + entity.id);
                 }

@@ -256,6 +256,18 @@ path.import-approved.way.area {
     stroke: rgba(90, 225, 90, 0.3);
 }
 
+g.point.import-pending .stroke {
+    fill: goldenrod;
+}
+
+path.import-pending.way {
+    stroke: goldenrod;
+}
+
+path.import-pending.way.area {
+    stroke: rgba(218, 165, 32, 0.3);
+}
+
 g.point.import-edited .stroke {
     fill: #a6a6f3;
 }

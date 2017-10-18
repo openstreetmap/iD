@@ -119,8 +119,7 @@ export function uiEntityEditor(context) {
                 // apply a CSS class to any point / line / polygon approved
                 d3_selectAll('.layer-osm .' + this.focusEntity.id)
                     .classed('import-approved', true)
-                    .classed('import-edited', false)
-                    .classed('import-rejected', false);
+                    .classed('import-edited import-rejected import-pending', false)
                 d3_selectAll('.import-icon')
                     .classed('neutral reject', false)
                     .classed('approve', true);
@@ -141,8 +140,7 @@ export function uiEntityEditor(context) {
                     // show object red for rejected
                     this.focusEntity.approvedForEdit = 'rejected';
                     d3_selectAll('.layer-osm .' + this.focusEntity.id)
-                        .classed('import-approved', false)
-                        .classed('import-edited', false)
+                        .classed('import-approved import-edited import-pending', false)
                         .classed('import-rejected', true);
                     //operationDelete([this.focusEntity.id], context)();
                 }
