@@ -166,7 +166,7 @@ export function svgGeoService(projection, context, dispatch) {
 
             function getBuildingPoly(building) {
                 // retrieve GeoJSON for this building if it isn't already stored in gjids { }
-                var wayid = d3.select(building).attr('class').split(' ')[3];
+                var wayid = d3.select(building).attr('class').split(' ')[4];
                 var ent;
                 if (!gjids[wayid]) {
                     var nodes = [];
