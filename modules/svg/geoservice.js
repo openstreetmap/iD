@@ -528,6 +528,9 @@ export function svgGeoService(projection, context, dispatch) {
             // preset.tags { }
             // preset.fields[{ keys: [], strings: { placeholders: { } } }]
             var tag = [preset.icon, preset.id.split('/')[0], preset.id.replace('/', '-')];
+            if (preset.id.indexOf('driveway') > -1) {
+                tag = ['highway-service', 'tag-highway', 'tag-highway-service', 'tag-service', 'tag-service-driveway'];
+            }
 
             var iconHolder = presetBox.select('.preset-icon-holder')
                 .html('');
@@ -544,10 +547,10 @@ export function svgGeoService(projection, context, dispatch) {
 
                 pair.append('use')
                     .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
-                    .attr('xlink:href', '#' + tag[0]);
+                    .attr('xlink:href', '#' + tag[0].replace('tag-', ''));
                 pair.append('use')
                     .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
-                    .attr('xlink:href', '#' + tag[0] + '-15');
+                    .attr('xlink:href', '#' + tag[0].replace('tag-', '') + '-15');
 
                 // add inner icon
                 iconHolder.append('div')
@@ -566,7 +569,7 @@ export function svgGeoService(projection, context, dispatch) {
                         .attr('class', ['icon', tag[0], tag[2], 'tag-' + tag[1], 'tag-' + tag[2]].join(' '))
                         .append('use')
                             .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
-                            .attr('xlink:href', '#' + tag[2]);
+                            .attr('xlink:href', '#' + tag[2].replace('tag-', ''));
             } else {
                 iconHolder.append('div')
                     .attr('class', 'preset-icon preset-icon-28')
@@ -574,7 +577,7 @@ export function svgGeoService(projection, context, dispatch) {
                         .attr('class', 'icon ' + tag[0])
                         .append('use')
                             .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
-                            .attr('xlink:href', '#' + tag[0] + '-15');
+                            .attr('xlink:href', '#' + tag[0].replace('tag-', '') + '-15');
             }
 
             //presetBox.selectAll('label.preset-prompt').text('OSM preset: ');
