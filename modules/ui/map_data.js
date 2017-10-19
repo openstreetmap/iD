@@ -626,7 +626,11 @@ export function uiMapData(context) {
                     .attr('class', 'copyright-approved')
                     .property('checked', false)
                 copylabel.append('span')
-                    .html('The source <a href="http://wiki.openstreetmap.org/wiki/Import/ODbL_Compatibility" target="_blank">license</a> grants permission for inclusion in OpenStreetMap');
+                    .html('The source <a href="http://wiki.openstreetmap.org/wiki/Import/ODbL_Compatibility" target="_blank">license</a> grants permission for inclusion in OpenStreetMap. I have a wiki page documenting this import plan:');
+                copylabel.append('input')
+                    .attr('class', 'geoservice-import-plan')
+                    .attr('type', 'text')
+                    .attr('placeholder', 'URL on OSM Wiki');
 
                 layerSelect = layerPreview.append('div')
                     .append('select')
