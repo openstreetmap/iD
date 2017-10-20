@@ -20,16 +20,17 @@ export function uiHelp(context) {
     var key = t('help.key');
 
     var docKeys = [
-          ['help.help.',['intro','opendata','opensource']],
-          ['help.navigation.',['intro','pan','zoom']],
-          ['help.',['inspector']],
-          ['help.',['editing_saving']],
-          ['help.',['imagery']],
-          ['help.',['roads']],
-          ['help.',['buildings']],
-          ['help.',['addresses']],
-          ['help.',['gps']],
-          ['help.',['relations']]
+          ['help.help.',['intro','opendata','beforestart','opensource','othereditors']],
+          ['help.overview.',['intro','map']],
+          ['help.editing.',['intro','multiselect','changes','save','upload','comeback','shortcuts']],
+          ['help.roads.',['intro','modifyshape','connect','editingmenu','modifyfields','delete','create']],
+          ['help.buildings.',['intro','select','modify','create','delete']],
+          ['help.addresses.',['intro','single','multi']],
+          ['help.feature_editor.',['intro','select','fields','tags','bottom','undo']],
+          ['help.editing_menu.',['intro','point','line','area','node','multi']],
+          ['help.imagery.',['intro','background','offset']],
+          ['help.gps.',['intro','using']],
+          ['help.relations.',['intro','members','maintain','edit','multipolygons']]
         ];
 
     var icont = { plus: icon('#icon-plus', 'pre-text'), minus: icon('#icon-minus', 'pre-text') };

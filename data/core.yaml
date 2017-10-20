@@ -268,7 +268,7 @@ en:
     about_changeset_comments: About changeset comments
     about_changeset_comments_link: //wiki.openstreetmap.org/wiki/Good_changeset_comments
     google_warning: "You mentioned Google in this comment: remember that copying from Google Maps is strictly forbidden."
-    google_warning_link: http://www.openstreetmap.org/copyright
+    google_warning_link: https://www.openstreetmap.org/copyright
   contributors:
     list: "Edits by {users}"
     truncated_list: "Edits by {users} and {count} others"
@@ -551,15 +551,21 @@ en:
       intro: |
         # Help
 
-        With the iD [OpenStreetMap](http://www.openstreetmap.org/) editor your can 
+        With this [OpenStreetMap](https://www.openstreetmap.org/) editor you can 
         add and update the free and editable map of the world online with your browser.
-        If you haven't done so, please [log in](https://www.openstreetmap.org/login) and start the walkthrough.
 
       opendata: |
         ### Open-Data
 
         Edits that you make on this map will be available to everyone who uses
-        OpenStreetMap. It will be visible on every map based on OpenStreetMap.
+        OpenStreetMap. They can be visible on every map based on OpenStreetMap.
+
+      beforestart: |
+        ### Before you start
+
+        You should be familiar with OpenStreetMap and this editor before you start editing.
+        The best way to learn both is the walkthrough. It will take you
+        about 15 minutes and show you everything you need to do start editing.
 
       opensource: |
         ### Open-Source
@@ -567,288 +573,427 @@ en:
         The [iD editor](http://ideditor.com/) is a collaborative project with [source
         code available on GitHub](https://github.com/openstreetmap/iD).
 
-    navigation:
+      othereditors: |
+        ### Other Editors
+
+        While iD is easy to use and required only a browser, there are also other
+        [OSM-Editors](https://wiki.openstreetmap.org/wiki/Editors/).
+        Also heavily used is JOSM, a highly expandable standalone Java desktop application.
+
+    overview:
       intro: |
-        # Navigating
+        # Overview
 
-        The main map area shows OpenStreetMap data on top of a background, this help
-        is placed on top of it. On the left is the feature editor.
+        This help will introduce some new words and concepts. When we introduce a new word, we'll use *italics*.
+        We use the word *feature* to describe things that appear on the map.
+        Anything in the real world can be mapped as a feature on OpenStreetMap.
+        Features are represented using *points*, *lines*, or *areas*.
 
-      pan: |
-        ### Panning 
+        The main map area shows OpenStreetMap data on top of background imagery,
+        this help is on top of it. On the left side is the *feature editor*, there
+        you can search for features and edit feature's type and attributes.
+
+      map: |
+        ### Using the map
 
         You can drag the map by pressing and holding the left mouse button while
         moving the mouse around.  You can also use the arrow keys on your keyboard.
-        You can jump to your home coordinates with the idontknow button.
-
-      zoom: |
-        ### Zooming 
-
         You can zoom in or out by scrolling with the mouse wheel or trackpad,
         or by clicking the {plus} / {minus} buttons.
 
-    editing_saving: |
-      # Editing & Saving
+    editing:
+      intro: |
+        # Editing
+
+        To select a feature you want to edit, like a road or a building or an address, click on it on the map. 
+        Selected features are drawn with a pulsing glow and show details in the feature editor to the left.
+        If you right-click on it, the editing menu appears with operations to select.
+
+      multiselect: |
+        ### Multiselect
+        To select multiple features, hold down the 'Shift' key. Then either click on the
+        features you want to select, or drag on the map to draw a contour around those features.
+        All the points inside the lasso area will be selected.
+
+      changes: |
+        ### Changes
+
+        When you make changes like editing roads, buildings, and places, these are
+        stored locally until you save them to the server. Don't worry if you make
+        a mistake - you can undo changes by clicking the undo button, and redo
+        changes by clicking the redo button.
+
+      save: |
+        ### Save
+
+        Click 'Save' to finish a group of edits - for instance, if you've completed
+        an area of town and would like to start on a new area. You'll have a chance
+        to review what you've done, and the editor supplies helpful suggestions
+        and warnings if something doesn't seem right about the changes.
+
+      upload: |
+        ### Upload
+
+        If everything looks good, you can enter a short comment explaining the change
+        you made, and click 'Upload' to post the changes to
+        [OpenStreetMap.org](https://www.openstreetmap.org/), where they will be visible
+        to all other users and available for others to build and improve upon.
+
+      comeback: |
+        If you can't finish your edits in one sitting, you can leave the editor
+        window and come back (on the same browser and computer), and the
+        editor application will offer to restore your work.
+
+      shortcuts: |
+        ### Shortcuts
+        You can view a list of keyboard shortcuts by pressing the `?` key.
 
-      This editor is designed to work primarily online, and you're accessing
-      it through a website right now.
+    roads:
+      intro: |
+        # Roads
 
-      ### Selecting Features
+        You can create, fix, and delete roads with this editor. Roads can be all
+        kinds: paths, highways, trails, cycle ways, and more - any used segment
+        is mapable.
+
+      modifyshape: |
+        ### Modifying Shape
+
+        Often you'll see roads that aren't aligned to the imagery behind them
+        or to a GPS track. You can adjust these roads so they are in the correct
+        place.
+
+        First click on a road to select it and the pulsing glow will become visible.
+        The nodes of the road will be shown as small white circles in the road.
+        The grey circles are nodes connected to another road.
+        You can drag the nodes to better locations.
+        You can also create new nodes either by double-clicking on the road or by
+        moving the small triangles at the midpoints between nodes.
 
-      To select a map feature, like a road or point of interest, click on it on
-      the map. This will highlight the selected feature and load a sidebar with
-      details about it. If you right-click on it, it will show a menu of things
-      you can do with the feature.
+      connect: |
+        ### Connections
 
-      To select multiple features, hold down the 'Shift' key. Then either click
-      on the features you want to select, or drag on the map to draw a contour
-      around those features. All the points inside the lasso area will be selected.
+        If the road connects to another road, but doesn't properly connect on
+        the map, you can drag one of its nodes onto the other road in
+        order to join them. Having roads connect is important for the map
+        and essential for providing driving directions.
 
-      ### Saving Edits
+      editingmenu: |
+        ### Editing Menu
+
+        If you right-click the road the editing menu with several tools appears.
+        You can select the 'Move' tool, move the entire road at one time, and
+        then click again to save that movement.
+        You can also simply press the `M` shortcut key, to start the move.
 
-      When you make changes like editing roads, buildings, and places, these are
-      stored locally until you save them to the server. Don't worry if you make
-      a mistake - you can undo changes by clicking the undo button, and redo
-      changes by clicking the redo button.
+      modifyfields: |
+        ### Modifying Fields
 
-      Click 'Save' to finish a group of edits - for instance, if you've completed
-      an area of town and would like to start on a new area. You'll have a chance
-      to review what you've done, and the editor supplies helpful suggestions
-      and warnings if something doesn't seem right about the changes.
+        When a road is selected on the left side the feature editor will show
+        the type of the road and many attributes like name, speed limit, lines, and surface.
+        You can modify fields or even add new ones.
 
-      If everything looks good, you can enter a short comment explaining the change
-      you made, and click 'Upload' to post the changes to
-      [OpenStreetMap.org](http://www.openstreetmap.org/), where they will be visible
-      to all other users and available for others to build and improve upon.
+      delete: |
+        ### Deleting
 
-      If you can't finish your edits in one sitting, you can leave the editor
-      window and come back (on the same browser and computer), and the
-      editor application will offer to restore your work.
-
-      ### Using the editor
+        If a road is entirely incorrect - you can see that it doesn't exist in satellite
+        imagery and ideally have confirmed locally that it's not present - you can delete
+        it, which removes it from the map. Be cautious when deleting features -
+        like any other edit, the results are seen by everyone and satellite imagery
+        is often out of date, so the road could simply be newly built.
 
-      You can view a list of keyboard shortcuts by pressing the `?` key.
+        You can delete a road by clicking on it to select it, then pressing the 'Delete'
+        key or right-clicking it and then clicking the trash can icon.
 
-    roads: |
-      # Roads
+      create: |
+        ### Creating
 
-      You can create, fix, and delete roads with this editor. Roads can be all
-      kinds: paths, highways, trails, cycleways, and more - any often-crossed
-      segment should be mappable.
+        Found somewhere there should be a road but there isn't? Click the 'Line'
+        icon in the top-left of the editor or press the shortcut key `2` to start drawing
+        a line.
 
-      ### Selecting
-
-      Click on a road to select it. An outline should become visible, along
-      with a sidebar showing more information about the road. If you right-click
-      on it, you'll have a menu of actions you can apply on the road.
-
-      ### Modifying
+        Click on the start of the road on the map to start drawing. If the road
+        branches off from an existing road, start by clicking on the place where they connect.
 
-      Often you'll see roads that aren't aligned to the imagery behind them
-      or to a GPS track. You can adjust these roads so they are in the correct
-      place.
+        Then click on points along the road so that it follows the right path, according
+        to satellite imagery or GPS. If the road you are drawing crosses another road, connect
+        it by clicking on the intersection point. When you're done drawing, double-click
+        or press 'Return' or 'Enter' on your keyboard.
 
-      First click on the road you want to change. This will highlight it and show
-      control points along it that you can drag to better locations. If
-      you want to add new control points for more detail, double-click a part
-      of the road without a node, and one will be added.
+    buildings:
+      intro: |
+        # Buildings
 
-      If the road connects to another road, but doesn't properly connect on
-      the map, you can drag one of its control points onto the other road in
-      order to join them. Having roads connect is important for the map
-      and essential for providing driving directions.
+        OpenStreetMap is the world's largest database of buildings.
+        You can improve this database.
 
-      You can also right-click on it and select the 'Move' tool, or simply press
-      the `M` shortcut key, to move the entire road at one time, and then click
-      again to save that movement.
+      select: |
+        ### Selecting 
 
-      ### Deleting
+        You can select a building by clicking on its border. the pulsing glow will
+        will become visible, the nodes will be shown as small white circles and the
+        feature editor on the left will show the type of the building and 
+        attributes like name, levels, and address.
 
-      If a road is entirely incorrect - you can see that it doesn't exist in satellite
-      imagery and ideally have confirmed locally that it's not present - you can delete
-      it, which removes it from the map. Be cautious when deleting features -
-      like any other edit, the results are seen by everyone and satellite imagery
-      is often out of date, so the road could simply be newly built.
+      modify: |
+        ### Modifying
 
-      You can delete a road by clicking on it to select it, then pressing the 'Delete'
-      key or right-clicking it and then clicking the trash can icon.
+        Sometimes buildings are incorrectly placed or have incorrect tags.
 
-      ### Creating
+        To move an entire building, select it and press the 'M' shortcut key,
+        or right-click it and select the 'Move' tool. Move your
+        mouse to shift the building, and click when it's correctly placed.
 
-      Found somewhere there should be a road but there isn't? Click the 'Line'
-      icon in the top-left of the editor or press the shortcut key `2` to start drawing
-      a line.
+        To fix the specific shape of a building, click and drag the nodes that form
+        its border into better places.
 
-      Click on the start of the road on the map to start drawing. If the road
-      branches off from an existing road, start by clicking on the place where they connect.
+      create: |
+        ### Creating
 
-      Then click on points along the road so that it follows the right path, according
-      to satellite imagery or GPS. If the road you are drawing crosses another road, connect
-      it by clicking on the intersection point. When you're done drawing, double-click
-      or press 'Return' or 'Enter' on your keyboard.
-    gps: |
-      # GPS
+        One of the main questions around adding buildings to the map is that
+        OpenStreetMap records buildings both as shapes and points. The rule of thumb
+        is to _map a building as a shape whenever possible_, and map companies, homes,
+        amenities, and other things that operate out of buildings as points placed
+        within the building shape.
 
-      Collected GPS traces are one valuable source of data for OpenStreetMap. This editor
-      supports local traces - `.gpx` files on your local computer. You can collect
-      this kind of GPS trace with a number of smartphone applications as well as
-      personal GPS hardware.
+        Start drawing a building as a shape by clicking the 'Area' button in the top
+        left of the interface, and end it either by pressing 'Return' on your keyboard
+        or clicking on the first node drawn to close the shape.
 
-      For information on how to perform a GPS survey, read
-      [Mapping with a smartphone, GPS, or paper](http://learnosm.org/en/mobile-mapping/).
+      delete: |
+        ### Deleting
 
-      To use a GPX track for mapping, drag and drop the GPX file onto the map
-      editor. If it's recognized, it will be added to the map as a bright purple
-      line. Click on the 'Map Data' menu on the right side to enable,
-      disable, or zoom to this new GPX-powered layer.
+        If a building is entirely incorrect - you can see that it doesn't exist in satellite
+        imagery and ideally have confirmed locally that it's not present - you can delete
+        it, which removes it from the map. Be cautious when deleting features -
+        like any other edit, the results are seen by everyone and satellite imagery
+        is often out of date, so the building could simply be newly built.
 
-      The GPX track isn't directly uploaded to OpenStreetMap - the best way to
-      use it is to draw on the map, using it as a guide for the new features that
-      you add, and also to [upload it to OpenStreetMap](http://www.openstreetmap.org/trace/create)
-      for other users to use.
-    imagery: |
-      # Imagery
+        You can delete a building by clicking on it to select it, then pressing the 'Delete'
+        key, or right-clicking it and then clicking the trash can icon.
 
-      Aerial imagery is an important resource for mapping. A combination of
-      airplane flyovers, satellite views, and freely-compiled sources are available
-      in the editor under the 'Background Settings' menu on the right.
+    addresses:
+      intro: |
+        # Addresses
+        Addresses are some of the most useful information for the map.
 
-      By default a [Bing Maps](http://www.bing.com/maps/) satellite layer is
-      presented in the editor, but as you pan and zoom the map to new geographical
-      areas, new sources will become available. Some countries, like the United
-      States, France, and Denmark have very high-quality imagery available for some areas.
+        Address information can be added to OpenStreetMap using a variety of methods,
+        such as adding a simple point containing an address, adding address information
+        to a building, site or other area, or alternatively to an entrance node for the building or site. 
 
-      Imagery is sometimes offset from the map data because of a mistake on the
-      imagery provider's side. If you see a lot of roads shifted from the background,
-      don't immediately move them all to match the background. Instead you can adjust
-      the imagery so that it matches the existing data by clicking 'Fix alignment' at
-      the bottom of the Background Settings UI.
-    addresses: |
-      # Addresses
-
-      Addresses are some of the most useful information for the map.
+      single: |
+        ### One address
 
-      Although addresses are often represented as parts of streets, in OpenStreetMap
-      they're recorded as attributes of buildings and places along streets.
-
-      You can add address information to places mapped as building outlines
-      as well as those mapped as single points. The optimal source of address
-      data is from an on-the-ground survey or personal knowledge - as with any
-      other feature, copying from commercial sources like Google Maps is strictly
-      forbidden.
-    inspector: |
-      # Using the Inspector
+        Most buildings and sites have only one address, so you can add these attributes directly 
+        to the building or site. 
 
-      The inspector is the section on the left side of the page that allows you to
-      edit the details of the selected feature.
+      multi: |
+        ### More addresses
 
-      ### Selecting a Feature Type
+        Some buildings or sites have more than one address. If you know how the addresses
+        are associated with the entrances, then you should add the address information
+        to the entrances. Otherwise you can add the addresses as points inside the building.
 
-      After you add a point, line, or area, you can choose what type of feature it
-      is, like whether it's a highway or residential road, supermarket or cafe.
-      The inspector will display buttons for common feature types, and you can
-      find others by typing what you're looking for in the search box.
+    feature_editor:
+      intro: |
+        # Feature Editor
 
-      Click the 'i' in the bottom-right-hand corner of a feature type button to
-      learn more about it. Click a button to choose that type.
+        The feature editor is the section on the left side of the page that allows you to
+        edit the details of the selected feature.
 
-      ### Using Forms and Editing Tags
+      select: |
+        ### Selecting a Feature Type
 
-      After you choose a feature type, or when you select a feature that already
-      has a type assigned, the inspector will display fields with details about
-      the feature like its name and address.
+        After you add a point, line, or area, you can choose what type of feature it
+        is, like whether it's a highway or residential road, supermarket or cafe.
+        The feature editor will display buttons for common feature types, and you can
+        find others by typing what you're looking for in the search box.
+ 
+        Click the 'i' in the bottom-right-hand corner of a feature type button to
+        learn more about it. Click a button to choose that type.
 
-      Below the fields you see, you can click the 'Add field' dropdown to add
-      other details, like a Wikipedia link, wheelchair access, and more.
+      fields: |
+        ### Fields
 
-      At the bottom of the inspector, click 'Additional tags' to add arbitrary
-      other tags to the element. [Taginfo](http://taginfo.openstreetmap.org/) is a
-      great resource for learn more about popular tag combinations.
+        After you choose a feature type, or when you select a feature that already
+        has a type assigned, the feature editor will display fields with details about
+        the feature like its name or speed limit for a road or levels and address for a building. 
 
-      Changes you make in the inspector are automatically applied to the map.
-      You can undo them at any time by clicking the 'Undo' button.
-    buildings: |
-      # Buildings
+        Below the fields you see, you can click the 'Add field' dropdown to add
+        other details, like a Wikipedia link, wheelchair access, and more.
 
-      OpenStreetMap is the world's largest database of buildings. You can create
-      and improve this database.
+      tags: |
+        ### Tags
 
-      ### Selecting
+        Below that you see the tags which is how the fields are stored in OpenStreetMap.
+        If you cannot find the feature's type with the feature editor or you
+        cannot add required fields, then you can add additional tags '+' button.
 
-      You can select a building by clicking on its border. This will highlight the
-      building and load a sidebar showing more information about the building.
-      If you right-click on it, it will show a menu of actions you can execute
-      in the building.
+        You will find many tags in the [OpenStreetMap Wiki](https://wiki.openstreetmap.org/),
+        also [Taginfo](https://taginfo.openstreetmap.org/) is a
+        great resource to learn more about popular tag combinations.
+  
+      bottom: |
+        ### Relations
 
-      ### Modifying
+        At the bottom of the features editor you find all relations the object belongs to.
 
-      Sometimes buildings are incorrectly placed or have incorrect tags.
+      undo: |
+        ### Undo
 
-      To move an entire building, select it and press the 'M' shortcut key,
-      or right-click it and select the 'Move' tool. Move your
-      mouse to shift the building, and click when it's correctly placed.
+        Changes you make in the feature editor are automatically applied to the map.
+        You can undo them at any time by clicking the 'Undo' button.
 
-      To fix the specific shape of a building, click and drag the nodes that form
-      its border into better places.
+    editing_menu:
+      intro: |
+        # Editing Menu
 
-      ### Creating
+        When you right-click on a feature, the editing menu appears. Which tools are
+        in the editing menu depends whether you right-click a point, a line,
+        an area or a node of a line or an area.
 
-      One of the main questions around adding buildings to the map is that
-      OpenStreetMap records buildings both as shapes and points. The rule of thumb
-      is to _map a building as a shape whenever possible_, and map companies, homes,
-      amenities, and other things that operate out of buildings as points placed
-      within the building shape.
+      point: |
+        ### Editing Points
 
-      Start drawing a building as a shape by clicking the 'Area' button in the top
-      left of the interface, and end it either by pressing 'Return' on your keyboard
-      or clicking on the first node drawn to close the shape.
+        The edit menu of a point only contains the delete tool.
 
-      ### Deleting
+      line: |
+        ### Editing Lines
 
-      If a building is entirely incorrect - you can see that it doesn't exist in satellite
-      imagery and ideally have confirmed locally that it's not present - you can delete
-      it, which removes it from the map. Be cautious when deleting features -
-      like any other edit, the results are seen by everyone and satellite imagery
-      is often out of date, so the building could simply be newly built.
+        The edit menu of a line contains tools to circularize, move, and reflect along
+        the short or long axis, reverse the direction of the line, rotate, straighten and delete.
 
-      You can delete a building by clicking on it to select it, then pressing the 'Delete'
-      key, or right-clicking it and then clicking the trash can icon.
-    relations: |
-      # Relations
+      area: |
+        ### Editing areas
 
-      A relation is a special type of feature in OpenStreetMap that groups together
-      other features. For example, two common types of relations are *route relations*,
-      which group together sections of road that belong to a specific freeway or
-      highway, and *multipolygons*, which group together several lines that define
-      a complex area (one with several pieces or holes in it like a donut).
+        The edit menu of an area contains tools to circularize, move, square,
+        reflect along the short or long axis, rotate and delete.
 
-      The group of features in a relation are called *members*. In the bottom of the
-      sidebar, you can see which relations a feature is a member of, and click on a
-      relation there will select it. When the relation is selected, you can see all of
-      its members listed in the sidebar and highlighted on the map.
+      node: |
+        ### Editing Nodes
 
-      For the most part, iD will take care of maintaining relations automatically
-      while you edit. The main thing you should be aware of is that if you delete a
-      section of road to redraw it more accurately, you should make sure that the
-      new section is a member of the same relations as the original.
+        The edit menu of a node of a line or an area contains tools to disconnect and split
+        lines and delete. The split tool split the feature into two at the selected node.
+        The disconnect tool duplicates the selected node shared between two features
+        so that every feature has its own node. You can connect again by moving one node
+        towards the other so that the will snap into one node. You can prohibit connecting
+        by pressing the 'Alt' key while moving one node near another.
 
-      ## Editing Relations
+      multi: |
+        ### Editing two or more features at one
 
-      If you want to edit relations, here are the basics.
+        When two or more feature are selected the edit menu contains tools to move, reflect
+        along the short or long axis, rotate, and delete all selected features together.
 
-      To add a feature to a relation, select the feature, click the "+" button in the
-      "All relations" section of the sidebar, and select or type the name of the relation.
+        When two or more lines are selected and all have the same type and no differing values in fields
+        the merge tool can integrate all selected features into a single feature.
 
-      To create a new relation, select the first feature that should be a member,
-      click the "+" button in the "All relations" section, and select "New relation...".
+        When two or more areas are selected the merge tool can create a multipolygon containing all selected areas.
 
-      To remove a feature from a relation, select the feature and click the trash
-      button next to the relation you want to remove it from.
+    imagery:
+      intro: |
+        # Imagery
 
-      You can create multipolygons with holes using the "Merge" tool. Draw two areas (inner
-      and outer), hold the Shift key and click on each of them to select them both, and then
-      press the 'C' shortcut key. Other option is to select both, and then right-click one
-      of the and click the "Merge" (+) button.
+        Aerial imagery is an important resource for mapping. A combination of
+        airplane flyovers, satellite views, and freely-compiled sources are available
+        in the editor under the 'Background Settings' menu on the right.
+
+      background: |
+        ### Background
+
+        By default a [Bing Maps](https://www.bing.com/maps/) satellite layer is
+        presented in the editor, but as you pan and zoom the map to new geographical
+        areas, new sources will become available and the best for the area will be marked with a '*'.
+        Some countries, like the United States, France, and Denmark have very high-quality imagery available for some areas.
+
+      offset: |
+        ### Offset
+
+        Imagery is sometimes offset from the map data because of a mistake on the
+        imagery provider's side. If you see a lot of roads shifted from the background,
+        don't immediately move them all to match the background. Instead you can adjust
+        the imagery so that it matches the existing data by clicking 'Fix alignment' at
+        the bottom of the Background Settings UI.
+
+    gps:
+      intro: |
+        # GPS
+
+        Collected GPS traces are one valuable source of data for OpenStreetMap. This editor
+        supports local traces - `.gpx` files on your local computer. You can collect
+        this kind of GPS trace with a number of smartphone applications as well as
+        personal GPS hardware.
+
+        For information on how to perform a GPS survey, read
+        [Mapping with a smartphone, GPS, or paper](http://learnosm.org/en/mobile-mapping/).
+
+      using: |
+        ### Using
+
+        To use a GPX track for mapping, drag and drop the GPX file onto the map
+        editor. If it's recognized, it will be added to the map as a bright purple
+        line. Click on the 'Map Data' menu on the right side to enable,
+        disable, or zoom to this new GPX-powered layer.
+
+        The GPX track isn't directly uploaded to OpenStreetMap - the best way to
+        use it is to draw on the map, using it as a guide for the new features that
+        you add, and also to [upload it to OpenStreetMap](https://www.openstreetmap.org/trace/create)
+        for other users to use.
+
+    relations:
+      intro: |
+        # Relations
+
+        A relation is a special type of feature in OpenStreetMap that groups together
+        other features.  The most common type of relation is *multipolygon*, which groups
+        together several lines that define a complex area (one with several pieces or holes in it like a donut).
+
+        *Turn restrictions* are another type of relation which can be edited in the
+        feature editor when you select an intersection node common to two roads.
+        For every turn connected with the intersection you can forbid U-turn and for
+        every other road you can forbid left-turn, straight-on or right-turn.
+
+        Two other common types of relations are *route relations*, which group together
+        sections of road that belong to a specific highway, bus route, or hiking route,
+        and *boundaries*, which group together sections of boundary lines like roads,
+        rivers, plot boundaries, or other boundary lines.
+
+      members: |
+        ### Members
+
+        The group of features in a relation are called *members*. In the bottom of the
+        feature editor, you can see which relations a feature is a member of, and click on a
+        relation there will select it. When the relation is selected, you can see all of
+        its members listed in the sidebar and highlighted on the map.
+
+      maintain: |
+        ### Maintaining
+
+        For the most part, iD will take care of maintaining relations automatically
+        while you edit. The main thing you should be aware of is that if you delete a
+        section of road to redraw it more accurately, you should make sure that the
+        new section is a member of the same relations as the original.
+
+      edit: |
+        ## Editing Relations
+
+        To add a feature to a relation, select the feature, click the "+" button in the
+        "All relations" section of the feature editor, and select or type the name of the relation.
+
+        To create a new relation, select the first feature that should be a member,
+        click the "+" button in the "All relations" section, and select "New relation...".
+
+        To remove a feature from a relation, select the feature and click the trash
+        button next to the relation you want to remove it from.
+
+      multipolygons: |
+        ### Multipolygons
+
+        You can create multipolygons with holes using the "Merge" tool. Draw two areas (inner
+        and outer), hold the Shift key and click on each of them to select them both, and then
+        press the 'C' shortcut key. Other option is to select both, and then right-click one
+        of them and click the "Merge" (+) button.
+
   intro:
     done: done
     ok: OK
