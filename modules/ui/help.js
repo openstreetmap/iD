@@ -33,7 +33,22 @@ export function uiHelp(context) {
           ['help.relations.',['intro','members','maintain','edit','multipolygons']]
         ];
 
-    var icont = { plus: icon('#icon-plus', 'pre-text'), minus: icon('#icon-minus', 'pre-text') };
+    var icont = {
+          apply: icon('#icon-apply', 'pre-text'),
+          area: icon('#icon-area', 'pre-text'),
+          help: icon('#icon-help', 'pre-text'),
+          line: icon('#icon-line', 'pre-text'),
+          minus: icon('#icon-minus', 'pre-text'),
+          plus: icon('#icon-plus', 'pre-text'),
+          point: icon('#icon-point', 'pre-text'),
+          circularize: icon('#operation-circularize', 'pre-text'),
+          delete: icon('#operation-delete', 'pre-text'),
+          orthogonalize: icon('#operation-orthogonalize', 'pre-text'),
+          split: icon('#operation-split', 'pre-text'),
+          undo: icon('#operation-undo', 'pre-text'),
+          redo: icon('#operation-redo', 'pre-text'),
+          disconnect: icon('#operation-disconnect', 'pre-text')
+        };
 
     var docs = docKeys.map(function(key) {
         var text = key[1].reduce(function(all,part) { return all + t(key[0].concat(part),icont); }, '');
