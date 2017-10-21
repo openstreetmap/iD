@@ -17,9 +17,6 @@ import pointInside from 'turf-inside';
 window.layerImports = {};
 window.layerChecked = {};
 
-// prevent re-downloading and re-adding the same feature
-window.knownObjectIds = {};
-
 // keeping track of added OSM entities
 window.importedEntities = [];
 
@@ -40,16 +37,192 @@ export function svgGeoService(projection, context, dispatch) {
 
     function drawGeoService(selection) {
         var geojson = drawGeoService.geojson(),
-            enabled = drawGeoService.enabled(),
-            gjids = {},
-            pointInPolygon = false,
-            mergeLines = false,
-            overlapBuildings = false;
+            enabled = drawGeoService.enabled();
 
         if (!geojson || !geojson.features) {
             return;
         }
+        return this;
+    }
 
+    function processGeoFeature(selectfeature, preset) {
+        // when importing an object, accept users' changes to keys
+        var convertedKeys = Object.keys(window.layerImports);
+        var additionalKeys = Object.keys(selectfeature.properties);
+        for (var a = 0; a < additionalKeys.length; a++) {
+            if (!window.layerImports[additionalKeys[a]] && additionalKeys[a] !== 'OBJECTID') {
+                convertedKeys.push(additionalKeys[a]);
+            }
+        }
+
+        // keep the OBJECTID to make sure we don't download the same data multiple times
+        var outprops = {
+            OBJECTID: (selectfeature.properties.OBJECTID || (Math.random() + ''))
+        };
+
+        // convert the rest of the layer's properties
+        for (var k = 0; k < convertedKeys.length; k++) {
+            var osmk = null;
+            var osmv = null;
+
+            if (convertedKeys[k].indexOf('add_') === 0) {
+                // user or preset has added a key:value pair to all objects
+                osmk = convertedKeys[k].substring(4);
+                osmv = window.layerImports[convertedKeys[k]];
+                if (window.layerChecked[osmk]) {
+                    // this data will be imported from the GeoService and not from preset
+                    continue;
+                }
+            } else {
+                var originalKey = convertedKeys[k];
+                var approval = window.layerChecked[originalKey];
+                if (!approval) {
+                    // left unchecked, do not import
+                    continue;
+                }
+
+                // user checked or kept box checked, should be imported
+                osmv = selectfeature.properties[originalKey];
+                if (osmv) {
+                    osmk = window.layerImports[originalKey] || originalKey;
+                }
+            }
+
+            if (osmk) {
+                // user directs any transferred keys
+                outprops[osmk] = osmv;
+            }
+        }
+        selectfeature.properties = outprops;
+        return selectfeature;
+    }
+
+    drawGeoService.pane = function() {
+        if (!this.geoservicepane) {
+            this.geoservicepane = d3.selectAll('.geoservice-pane');
+        }
+        return this.geoservicepane;
+    };
+
+    drawGeoService.enabled = function(_) {
+        if (!arguments.length) return svgGeoService.enabled;
+        svgGeoService.enabled = _;
+        dispatch.call('change');
+        return this;
+    };
+
+    drawGeoService.hasData = function() {
+        var geojson = drawGeoService.geojson();
+        return (!(_.isEmpty(geojson) || _.isEmpty(geojson.features)));
+    };
+
+    drawGeoService.preset = function(preset) {
+        // get / set an individual preset, or reset to null
+        var presetBox = this.pane().selectAll('.preset');
+        if (preset) {
+            // console.log(preset)
+            // preset.tags { }
+            // preset.fields[{ keys: [], strings: { placeholders: { } } }]
+            var tag = [preset.icon, preset.id.split('/')[0], preset.id.replace('/', '-')];
+            if (preset.id.indexOf('driveway') > -1) {
+                tag = ['highway-service', 'tag-highway', 'tag-highway-service', 'tag-service', 'tag-service-driveway'];
+            }
+
+            var iconHolder = presetBox.select('.preset-icon-holder')
+                .html('');
+
+            if (!preset.icon) {
+                preset.icon = 'marker-stroked';
+            }
+            if (preset.geometry && preset.geometry[preset.geometry.length - 1] === 'area') {
+                // add background first
+                var pair = iconHolder.append('div')
+                    .attr('class', 'preset-icon preset-icon-24')
+                    .append('svg')
+                        .attr('class', ['icon', tag[0], tag[2], 'tag-' + tag[1], 'tag-' + tag[2]].join(' '));
+
+                pair.append('use')
+                    .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
+                    .attr('xlink:href', '#' + tag[0].replace('tag-', ''));
+                pair.append('use')
+                    .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
+                    .attr('xlink:href', '#' + tag[0].replace('tag-', '') + '-15');
+
+                // add inner icon
+                iconHolder.append('div')
+                    .attr('class', 'preset-icon-frame')
+                    .append('svg')
+                        .attr('class', 'icon')
+                        .append('use')
+                            .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
+                            .attr('xlink:href', '#preset-icon-frame');
+
+
+            } else if (preset.geometry && preset.geometry[preset.geometry.length - 1] === 'line') {
+                iconHolder.append('div')
+                    .attr('class', 'preset-icon preset-icon-60')
+                    .append('svg')
+                        .attr('class', ['icon', tag[0], tag[2], 'tag-' + tag[1], 'tag-' + tag[2]].join(' '))
+                        .append('use')
+                            .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
+                            .attr('xlink:href', '#' + tag[2].replace('tag-', ''));
+            } else {
+                iconHolder.append('div')
+                    .attr('class', 'preset-icon preset-icon-28')
+                    .append('svg')
+                        .attr('class', 'icon ' + tag[0])
+                        .append('use')
+                            .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
+                            .attr('xlink:href', '#' + tag[0].replace('tag-', '') + '-15');
+            }
+
+            //presetBox.selectAll('label.preset-prompt').text('OSM preset: ');
+            //presetBox.selectAll('span.preset-prompt').text(preset.id);
+            presetBox.selectAll('.preset-prompt')
+                .classed('hide', true);
+            presetBox.selectAll('button, .preset-icon-fill, .preset-icon')
+                .classed('hide', false);
+            this.internalPreset = preset;
+
+            // special geo circumstances
+            if (preset.id === 'address') {
+                return d3.selectAll('.point-in-polygon').classed('must-show', true);
+            } else if (preset.id.indexOf('cycle') > -1) {
+                return d3.selectAll('.merge-lines').classed('must-show', true);
+            } else if (preset.id.indexOf('building') > -1) {
+                return d3.selectAll('.overlap-buildings').classed('must-show', true);
+            } else {
+                console.log(preset.id);
+            }
+
+        } else if (preset === null) {
+            // removing preset status
+            presetBox.selectAll('.preset label.preset-prompt')
+                .text('Optional: match features to a OSM preset');
+            presetBox.selectAll('.preset-prompt')
+                .classed('hide', false);
+            presetBox.selectAll('.preset span.preset-prompt, .preset svg')
+                .html('');
+            presetBox.selectAll('.preset button, .preset-icon-fill, .preset-icon')
+                .classed('hide', true);
+
+            this.internalPreset = null;
+        } else {
+            return this.internalPreset;
+        }
+
+        // reset UI for point-in-polygon and merge-lines
+        d3.selectAll('.point-in-polygon, .merge-lines, .overlap-buildings')
+            .classed('must-show', false)
+            .selectAll('input')
+                .property('checked', false);
+    };
+
+    drawGeoService.geojson = function(gj) {
+        if (!arguments.length) return drawGeoService.datastore;
+        drawGeoService.datastore = gj;
+
+        var gjids = {};
         pointInPolygon = d3.selectAll('.point-in-polygon input').property('checked');
         mergeLines = d3.selectAll('.merge-lines input').property('checked');
         overlapBuildings = d3.selectAll('.overlap-buildings input').property('checked');
@@ -100,19 +273,7 @@ export function svgGeoService(projection, context, dispatch) {
             return Math.max(overlap1, overlap2);
         }
 
-        if (window.inAdd) {
-            return;
-        }
-        // console.log('download completed: mapping any new features');
-        window.inAdd = true;
-
-        _.map(geojson.features || [], function(d) {
-            // don't reload the same objects over again
-            if (window.knownObjectIds[d.properties.OBJECTID]) {
-                return;
-            }
-            window.knownObjectIds[d.properties.OBJECTID] = true;
-
+        _.map(gj.features || [], function(d) {
             var props, nodes, ln, way, rel;
             function makeEntity(loc_or_nodes) {
                 props = {
@@ -444,187 +605,6 @@ export function svgGeoService(projection, context, dispatch) {
             }
         });
 
-        window.inAdd = false;
-
-        return this;
-    }
-
-    function processGeoFeature(selectfeature, preset) {
-        // when importing an object, accept users' changes to keys
-        var convertedKeys = Object.keys(window.layerImports);
-        var additionalKeys = Object.keys(selectfeature.properties);
-        for (var a = 0; a < additionalKeys.length; a++) {
-            if (!window.layerImports[additionalKeys[a]] && additionalKeys[a] !== 'OBJECTID') {
-                convertedKeys.push(additionalKeys[a]);
-            }
-        }
-
-        // keep the OBJECTID to make sure we don't download the same data multiple times
-        var outprops = {
-            OBJECTID: (selectfeature.properties.OBJECTID || (Math.random() + ''))
-        };
-
-        // convert the rest of the layer's properties
-        for (var k = 0; k < convertedKeys.length; k++) {
-            var osmk = null;
-            var osmv = null;
-
-            if (convertedKeys[k].indexOf('add_') === 0) {
-                // user or preset has added a key:value pair to all objects
-                osmk = convertedKeys[k].substring(4);
-                osmv = window.layerImports[convertedKeys[k]];
-                if (window.layerChecked[osmk]) {
-                    // this data will be imported from the GeoService and not from preset
-                    continue;
-                }
-            } else {
-                var originalKey = convertedKeys[k];
-                var approval = window.layerChecked[originalKey];
-                if (!approval) {
-                    // left unchecked, do not import
-                    continue;
-                }
-
-                // user checked or kept box checked, should be imported
-                osmv = selectfeature.properties[originalKey];
-                if (osmv) {
-                    osmk = window.layerImports[originalKey] || originalKey;
-                }
-            }
-
-            if (osmk) {
-                // user directs any transferred keys
-                outprops[osmk] = osmv;
-            }
-        }
-        selectfeature.properties = outprops;
-        return selectfeature;
-    }
-
-    drawGeoService.pane = function() {
-        if (!this.geoservicepane) {
-            this.geoservicepane = d3.selectAll('.geoservice-pane');
-        }
-        return this.geoservicepane;
-    };
-
-    drawGeoService.enabled = function(_) {
-        if (!arguments.length) return svgGeoService.enabled;
-        svgGeoService.enabled = _;
-        dispatch.call('change');
-        return this;
-    };
-
-    drawGeoService.hasData = function() {
-        var geojson = drawGeoService.geojson();
-        return (!(_.isEmpty(geojson) || _.isEmpty(geojson.features)));
-    };
-
-    drawGeoService.preset = function(preset) {
-        // get / set an individual preset, or reset to null
-        var presetBox = this.pane().selectAll('.preset');
-        if (preset) {
-            // console.log(preset)
-            // preset.tags { }
-            // preset.fields[{ keys: [], strings: { placeholders: { } } }]
-            var tag = [preset.icon, preset.id.split('/')[0], preset.id.replace('/', '-')];
-            if (preset.id.indexOf('driveway') > -1) {
-                tag = ['highway-service', 'tag-highway', 'tag-highway-service', 'tag-service', 'tag-service-driveway'];
-            }
-
-            var iconHolder = presetBox.select('.preset-icon-holder')
-                .html('');
-
-            if (!preset.icon) {
-                preset.icon = 'marker-stroked';
-            }
-            if (preset.geometry && preset.geometry[preset.geometry.length - 1] === 'area') {
-                // add background first
-                var pair = iconHolder.append('div')
-                    .attr('class', 'preset-icon preset-icon-24')
-                    .append('svg')
-                        .attr('class', ['icon', tag[0], tag[2], 'tag-' + tag[1], 'tag-' + tag[2]].join(' '));
-
-                pair.append('use')
-                    .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
-                    .attr('xlink:href', '#' + tag[0].replace('tag-', ''));
-                pair.append('use')
-                    .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
-                    .attr('xlink:href', '#' + tag[0].replace('tag-', '') + '-15');
-
-                // add inner icon
-                iconHolder.append('div')
-                    .attr('class', 'preset-icon-frame')
-                    .append('svg')
-                        .attr('class', 'icon')
-                        .append('use')
-                            .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
-                            .attr('xlink:href', '#preset-icon-frame');
-
-
-            } else if (preset.geometry && preset.geometry[preset.geometry.length - 1] === 'line') {
-                iconHolder.append('div')
-                    .attr('class', 'preset-icon preset-icon-60')
-                    .append('svg')
-                        .attr('class', ['icon', tag[0], tag[2], 'tag-' + tag[1], 'tag-' + tag[2]].join(' '))
-                        .append('use')
-                            .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
-                            .attr('xlink:href', '#' + tag[2].replace('tag-', ''));
-            } else {
-                iconHolder.append('div')
-                    .attr('class', 'preset-icon preset-icon-28')
-                    .append('svg')
-                        .attr('class', 'icon ' + tag[0])
-                        .append('use')
-                            .attr('xmlns:xlink', 'http://www.w3.org/1999/xlink')
-                            .attr('xlink:href', '#' + tag[0].replace('tag-', '') + '-15');
-            }
-
-            //presetBox.selectAll('label.preset-prompt').text('OSM preset: ');
-            //presetBox.selectAll('span.preset-prompt').text(preset.id);
-            presetBox.selectAll('.preset-prompt')
-                .classed('hide', true);
-            presetBox.selectAll('button, .preset-icon-fill, .preset-icon')
-                .classed('hide', false);
-            this.internalPreset = preset;
-
-            // special geo circumstances
-            if (preset.id === 'address') {
-                return d3.selectAll('.point-in-polygon').classed('must-show', true);
-            } else if (preset.id.indexOf('cycle') > -1) {
-                return d3.selectAll('.merge-lines').classed('must-show', true);
-            } else if (preset.id.indexOf('building') > -1) {
-                return d3.selectAll('.overlap-buildings').classed('must-show', true);
-            } else {
-                console.log(preset.id);
-            }
-
-        } else if (preset === null) {
-            // removing preset status
-            presetBox.selectAll('.preset label.preset-prompt')
-                .text('Optional: match features to a OSM preset');
-            presetBox.selectAll('.preset-prompt')
-                .classed('hide', false);
-            presetBox.selectAll('.preset span.preset-prompt, .preset svg')
-                .html('');
-            presetBox.selectAll('.preset button, .preset-icon-fill, .preset-icon')
-                .classed('hide', true);
-
-            this.internalPreset = null;
-        } else {
-            return this.internalPreset;
-        }
-
-        // reset UI for point-in-polygon and merge-lines
-        d3.selectAll('.point-in-polygon, .merge-lines, .overlap-buildings')
-            .classed('must-show', false)
-            .selectAll('input')
-                .property('checked', false);
-    };
-
-    drawGeoService.geojson = function(gj) {
-        if (!arguments.length) return drawGeoService.datastore;
-        drawGeoService.datastore = gj;
         dispatch.call('change');
         return this;
     };
