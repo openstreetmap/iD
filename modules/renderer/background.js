@@ -304,17 +304,6 @@ export function rendererBackground(context) {
             }
         });
 
-        /*
-        if (q.geoservice) {
-            setTimeout(function() {
-                var gsLayer = context.layers().layer('geoservice');
-                if (gsLayer) {
-                    gsLayer.url(q.geoservice);
-                }
-            }, 500);
-        }
-        */
-
         if (q.gpx) {
             var gpx = context.layers().layer('gpx');
             if (gpx) {

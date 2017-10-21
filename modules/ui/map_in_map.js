@@ -244,7 +244,6 @@ export function uiMapInMap(context) {
                 .attr('class', 'map-in-map-data')
                 .merge(dataLayers)
                 .call(gpxLayer)
-                // .call(gsLayer)
                 .call(debugLayer);
 
 

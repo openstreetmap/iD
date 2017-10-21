@@ -34,7 +34,6 @@
     "lodash-es": "4.17.4",
     "marked": "0.3.6",
     "osm-auth": "1.0.2",
-    "proj4": "^2.4.3",
     "rbush": "2.0.1",
     "turf-buffer": "^3.0.12",
     "turf-inside": "^3.0.12",

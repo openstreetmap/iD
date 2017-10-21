@@ -62,13 +62,6 @@ export function behaviorHash(context) {
             '/' + center[1].toFixed(precision) +
             '/' + center[0].toFixed(precision);
 
-        /*
-        var gsLayer = context.layers().layer('geoservice').layerUrl;
-        if (gsLayer) {
-            q.geoservice = gsLayer;
-        }
-        */
-
         // pretty sure its _assign now?
         return '#' + utilQsString(_assign(q, newParams), true);
     };

@@ -25,8 +25,6 @@ import { uiTagReference } from './tag_reference';
 import { uiPresetEditor } from './preset_editor';
 import { utilRebind } from '../util';
 
-import { operationDelete } from '../operations/index';
-
 export function uiEntityEditor(context) {
     var dispatch = d3_dispatch('choose'),
         state = 'select',
@@ -142,7 +140,6 @@ export function uiEntityEditor(context) {
                     d3_selectAll('.layer-osm .' + this.focusEntity.id)
                         .classed('import-approved import-edited import-pending', false)
                         .classed('import-rejected', true);
-                    //operationDelete([this.focusEntity.id], context)();
                 }
                 d3_selectAll('.import-icon')
                     .classed('neutral approve', false)
