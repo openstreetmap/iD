@@ -1,6 +1,5 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import 'proj4';
 import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import {
     event as d3_event,
@@ -338,17 +337,6 @@ export function uiMapData(context) {
                 if (err) {
                     return console.log(err);
                 }
-
-                /*
-                if (data.extent) {
-                    var sw = [data.extent.xmin, data.extent.ymin];
-                    var ne = [data.extent.xmax, data.extent.ymax];
-                    sw = proj4(data.extent.spatialReference.wkid, 'WGS84', sw);
-                    ne = proj4(data.extent.spatialReference.wkid, 'WGS84', ne);
-                    console.log(sw);
-                    console.log(ne);
-                }
-                */
 
                 d3.selectAll('.geoservice-preview, .copyright-text')
                     .classed('hide', false)
