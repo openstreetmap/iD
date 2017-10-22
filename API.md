@@ -34,6 +34,10 @@ in the hash portion of the URL:
   _Example:_ `hashtags=%23hotosm-task-592,%23MissingMaps`
 * __`rtl=true`__ - Force iD into right-to-left mode (useful for testing).
 * __`walkthrough=true`__ - Start the walkthrough automatically
+* __`features`__ - Enables features in the list.<br/>
+  _Example:_ `features=water,service_roads,points,paths`<br/>
+  _Available features:_ `points` `traffic_roads` `service_roads` `paths` `buildings` `landuse`
+  `boundaries` `water` `rail` `power` `past_future` `others`
 
 ##### iD on openstreetmap.org (Rails Port)
 
@@ -50,6 +54,7 @@ are available as regular URL query parameters:
 * __`comment`__ - same as standalone
 * __`hashtags`__ - same as standalone
 * __`walkthrough`__ - same as standalone
+* __`features`__ - same as standalone
 
 
 ## CSS selectors
