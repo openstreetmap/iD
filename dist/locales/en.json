@@ -4587,6 +4587,10 @@
                     "name": "Island",
                     "terms": "archipelago,atoll,bar,cay,isle,islet,key,reef"
                 },
+                "place/islet": {
+                    "name": "Islet",
+                    "terms": "archipelago,atoll,bar,cay,isle,islet,key,reef"
+                },
                 "place/isolated_dwelling": {
                     "name": "Isolated Dwelling",
                     "terms": ""

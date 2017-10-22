@@ -3978,6 +3978,11 @@ en:
         name: Island
         # 'terms: archipelago,atoll,bar,cay,isle,islet,key,reef'
         terms: '<translate with synonyms or related terms for ''Island'', separated by commas>'
+      place/islet:
+        # place=islet
+        name: Islet
+        # 'terms: archipelago,atoll,bar,cay,isle,islet,key,reef'
+        terms: '<translate with synonyms or related terms for ''Islet'', separated by commas>'
       place/isolated_dwelling:
         # place=isolated_dwelling
         name: Isolated Dwelling
