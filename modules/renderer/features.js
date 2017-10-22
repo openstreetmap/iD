@@ -3,7 +3,6 @@ import _groupBy from 'lodash-es/groupBy';
 import _reduce from 'lodash-es/reduce';
 import _some from 'lodash-es/some';
 import _union from 'lodash-es/union';
-import _get from 'lodash-es/get';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
@@ -65,16 +64,13 @@ export function rendererFeatures(context) {
         _features = {},
         _stats = {},
         _keys = [],
-        _hidden = [],
-        _initFeaturesStr = _get(utilStringQs(window.location.hash.substring(1)), 'features', '').trim();
+        _hidden = [];
 
 
     function update() {
-        var q = utilStringQs(window.location.hash.substring(1));
-
-        q.features = context.features().enabledList();
-
         if (!window.mocha) {
+            var q = utilStringQs(window.location.hash.substring(1));
+            q.disable_features = features.disabled().join(',');
             window.location.replace('#' + utilQsString(q, true));
         }
 
@@ -86,10 +82,6 @@ export function rendererFeatures(context) {
 
     function defineFeature(k, filter, max) {
         var isEnabled = true;
-
-        if (_initFeaturesStr.length) {
-            isEnabled = _initFeaturesStr.split(',').some(function(key){ return key === k; });
-        }
 
         _keys.push(k);
         _features[k] = {
@@ -505,6 +497,15 @@ export function rendererFeatures(context) {
         return result;
     };
 
+
+    features.init = function() {
+        var q = utilStringQs(window.location.hash.substring(1));
+        if (q.disable_features) {
+            q.disable_features.replace(/;/g, ',').split(',').map(function(k) {
+                features.disable(k);
+            });
+        }
+    };
 
     return utilRebind(features, dispatch, 'on');
 }

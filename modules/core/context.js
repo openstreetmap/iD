@@ -471,6 +471,7 @@ export function coreContext() {
     });
 
     background.init();
+    features.init();
     presets.init();
     areaKeys = presets.areaKeys();
 
