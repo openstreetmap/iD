@@ -1,20 +1,18 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import {
     event as d3_event,
     select as d3_select
 } from 'd3-selection';
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg';
 import { uiTooltipHtml } from './tooltipHtml';
-
 import { tooltip } from '../util/tooltip';
 import { d3combobox } from '../lib/d3.combobox.js';
 
 export function uiMapData(context) {
     var key = t('map_data.key'),
-        geoserviceLayerUrl = context.storage('geoserviceLayerUrl') || '',
         geoserviceDownloadAll = true,
         features = context.features().keys(),
         layers = context.layers(),
@@ -554,7 +552,6 @@ export function uiMapData(context) {
                     .attr('type', 'text')
                     .attr('class', 'geoservice')
                     .attr('placeholder', 'GeoService URL')
-                    // .attr('value', context.storage('geoserviceLayerUrl') || '')
                     .on('input', function(e, fixedURL) {
                         // reformat URL ending to /layerID?f=json
                         metadata_url = fixedURL ? fixedURL : this.value;
@@ -617,15 +614,6 @@ export function uiMapData(context) {
                 layerSelect = layerPreview.append('div')
                     .append('select')
                     .attr('class', 'layer-select hide');
-
-                // load initial GeoService URL
-                /*
-                if (context.storage('geoserviceLayerUrl')) {
-                    setTimeout(function() {
-                        urlInput.on('input')(null, context.storage('geoserviceLayerUrl'));
-                    }, 500);
-                }
-                */
 
                 // known iD presets
                 preset = urlEntry.append('div')
@@ -913,9 +901,6 @@ export function uiMapData(context) {
         }
 
         function setGeoService(template, downloadMax) {
-            // remember GeoService URL for future visits
-            context.storage('geoserviceLayerUrl', template);
-
             // un-hide GeoService pane and buttons
             var gsLayer = layers.layer('geoservice');
             gsLayer.pane()
