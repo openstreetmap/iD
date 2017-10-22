@@ -564,69 +564,92 @@ en:
         ### Before you start
 
         You should be familiar with OpenStreetMap and this editor before you start editing.
-        The best way to learn both is the walkthrough. It will take you
-        about 15 minutes and show you everything you need to do start editing.
+        The walkthrough will teach you the basics of editing on OpenStreetMap and you will
+        practice using the editor. It takes about 15 minutes and then you can start editing.
 
       opensource: |
         ### Open-Source
 
-        The [iD editor](http://ideditor.com/) is a collaborative project with [source
+        The iD editor is a collaborative project with [source
         code available on GitHub](https://github.com/openstreetmap/iD).
 
       othereditors: |
         ### Other Editors
 
-        While iD is easy to use and required only a browser, there are also other
-        [OSM-Editors](https://wiki.openstreetmap.org/wiki/Editors/).
+        While the iD editor is easy to use and requires only a browser, there are also other
+        [OSM-Editors](https://wiki.openstreetmap.org/wiki/Editors).
         Also heavily used is JOSM, a highly expandable standalone Java desktop application.
 
     overview:
       intro: |
         # Overview
 
-        This help will introduce some new words and concepts. When we introduce a new word, we'll use *italics*.
-        We use the word *feature* to describe things that appear on the map.
-        Anything in the real world can be mapped as a feature on OpenStreetMap.
-        Features are represented using *points*, *lines*, or *areas*.
+        This help will repeat and extend information from the walkthrough, which
+        you should have done by now. If you just want to speed up editing you
+        can view a list of keyboard shortcuts by pressing the `?` key.
 
-        The main map area shows OpenStreetMap data on top of background imagery,
-        this help is on top of it. On the left side is the *feature editor*, there
-        you can search for features and edit feature's type and attributes.
+      concept: |
+        ### Concept
+
+        In OpenStreetMap we use the word *feature* to describe things that appear on the map.
+        Anything in the real world can be mapped as a feature on OpenStreetMap.
+        Features are represented using *points*, *lines*, *areas*, or *relations*.
+        Points are sometimes called nodes, especially when they are part of lines
+        or areas, which are sometimes called ways. A relation is a special type
+        of feature that groups together other features.
+
+      screen: |
+        ### Screen
+
+        This help is on top of the map area which shows OpenStreetMap data
+        on top of background imagery. On the left side is the *feature editor*,
+        there you can search for features and edit feature's type and attributes.
+        In the top row and the right column you find buttons which explain their
+        function if you hold the mouse pointer over them.
 
       map: |
-        ### Using the map
+        ### Map
 
-        You can drag the map by pressing and holding the left mouse button while
-        moving the mouse around.  You can also use the arrow keys on your keyboard.
+        You can drag the map (also called pan) by pressing and holding
+        the left mouse button while moving the mouse around.
+        You can also use the arrow keys on your keyboard, when you
+        hold `Ctrl` the map will move for one screenful.
         You can zoom in or out by scrolling with the mouse wheel or trackpad,
-        or by clicking the {plus} / {minus} buttons.
+        or by clicking the {plus} / {minus} buttons, holding `Ctrl` while
+        clicking will zoom a lot.
 
     editing:
       intro: |
         # Editing
 
-        To select a feature you want to edit, like a road or a building or an address, click on it on the map. 
-        Selected features are drawn with a pulsing glow and show details in the feature editor to the left.
-        If you right-click on it, the editing menu appears with operations to select.
+        To select a feature you want to edit, click on it on the map
+        or search for it by name in the feature editor. 
+        Selected features are drawn with a pulsing glow and in the
+        feature editor the feature's type and attributes are shown.
+        If you right-click on it, the editing menu appears.
 
       multiselect: |
         ### Multiselect
-        To select multiple features, hold down the 'Shift' key. Then either click on the
-        features you want to select, or drag on the map to draw a contour around those features.
+        To select multiple features, hold down the `Shift` key.
+        Then either click on the features you want to select,
+        or click, hold and move the mouse on the map to draw
+        a contour around those features.
         All the points inside the lasso area will be selected.
 
       changes: |
         ### Changes
 
-        When you make changes like editing roads, buildings, and places, these are
-        stored locally until you save them to the server. Don't worry if you make
-        a mistake - you can undo changes by clicking the {undo} button, and redo
-        changes by clicking the {redo} button.
+        When you make changes creating new features, improving existing
+        features by changing feature's shape, position, type, or attributes
+        or deleting features these are stored locally until you save
+        them to the server. Don't worry if you make a mistake - you
+        can undo changes by clicking the undo button, and redo
+        changes by clicking the redo button.
 
       save: |
         ### Save
 
-        Click 'Save' to finish a group of edits - for instance, if you've completed
+        Click `Save` to finish a group of edits - for instance, if you've completed
         an area of town and would like to start on a new area. You'll have a chance
         to review what you've done, and the editor supplies helpful suggestions
         and warnings if something doesn't seem right about the changes.
@@ -634,8 +657,9 @@ en:
       upload: |
         ### Upload
 
-        If everything looks good, you can enter a short comment explaining the change
-        you made, and click 'Upload' to post the changes to
+        If everything looks good, you should explain the changes you made as a
+        [changeset comment](https://wiki.openstreetmap.org/wiki/Good_changeset_comments)
+        and click `Upload` to post the changes to
         [OpenStreetMap.org](https://www.openstreetmap.org/), where they will be visible
         to all other users and available for others to build and improve upon.
 
@@ -643,10 +667,6 @@ en:
         If you can't finish your edits in one sitting, you can leave the editor
         window and come back (on the same browser and computer), and the
         editor application will offer to restore your work.
-
-      shortcuts: |
-        ### Shortcuts
-        You can view a list of keyboard shortcuts by pressing the `?` key.
 
     roads:
       intro: |
@@ -675,8 +695,12 @@ en:
 
         If the road connects to another road, but doesn't properly connect on
         the map, you can drag one of its nodes onto the other road in
-        order to join them. Having roads connect is important for the map
+        order to join them. Having roads connected properly is important for the map
         and essential for providing driving directions.
+
+        Sometimes the connecting nodes of roads are features of their own
+        like traffic lights or crosswalks. Also not-connecting nodes of a road
+        can be features like traffic signs.
 
       editingmenu: |
         ### Editing Menu
@@ -690,8 +714,8 @@ en:
         ### Modifying Fields
 
         When a road is selected on the left side the feature editor will show
-        the type of the road and many attributes like name, speed limit, lines, and surface.
-        You can modify fields or even add new ones.
+        the type of the road and many attributes like name, speed limit, lines,
+        and surface.  You can modify fields or even add new ones.
 
       delete: |
         ### Deleting
@@ -703,12 +727,12 @@ en:
         is often out of date, so the road could simply be newly built.
 
         You can delete a road by clicking on it to select it, then pressing the 'Delete'
-        key or right-clicking it and then clicking the {delete} icon.
+        key or right-clicking it and then using the {delete} tool.
 
       create: |
         ### Creating
 
-        Found somewhere there should be a road but there isn't? Click the {line}
+        Found somewhere there should be a road but there isn't? Click the {line} Line
         icon in the top-left of the editor or press the shortcut key `2` to start drawing
         a line.
 
@@ -718,7 +742,7 @@ en:
         Then click on points along the road so that it follows the right path, according
         to satellite imagery or GPS. If the road you are drawing crosses another road, connect
         it by clicking on the intersection point. When you're done drawing, double-click
-        or press 'Return' or 'Enter' on your keyboard.
+        or press `Return` or `Enter` on your keyboard.
 
     buildings:
       intro: |
@@ -740,7 +764,7 @@ en:
 
         Sometimes buildings are incorrectly placed or have incorrect tags.
 
-        To move an entire building, select it and press the 'M' shortcut key,
+        To move an entire building, select it and press the `M` shortcut key,
         or right-click it and select the 'Move' tool. Move your
         mouse to shift the building, and click when it's correctly placed.
 
@@ -756,9 +780,10 @@ en:
         amenities, and other things that operate out of buildings as points placed
         within the building shape.
 
-        Start drawing a building as a shape by clicking the {area} button in the top
-        left of the interface, and end it either by pressing 'Return' on your keyboard
-        or clicking on the first node drawn to close the shape.
+        Start drawing a building as a shape by clicking the {area} Area button in the top
+        left of the interface, and end it either by pressing `Return` on your keyboard
+        or clicking on the first node drawn or clicking again on the last node drawn
+        to close the shape.
 
       delete: |
         ### Deleting
@@ -779,20 +804,24 @@ en:
 
         Address information can be added to OpenStreetMap using a variety of methods,
         such as adding a simple point containing an address, adding address information
-        to a building, site or other area, or alternatively to an entrance node for the building or site. 
+        to a building, site or other area, or alternatively to an entrance
+        node for the building or site. 
 
       single: |
         ### One address
 
-        Most buildings and sites have only one address, so you can add these attributes directly 
-        to the building or site. 
+        Most buildings and sites have only one address, so you can add these
+        attributes directly to the building or site. 
 
       multi: |
         ### More addresses
 
-        Some buildings or sites have more than one address. If you know how the addresses
-        are associated with the entrances, then you should add the address information
-        to the entrances. Otherwise you can add the addresses as points inside the building.
+        Some buildings or sites have more than one address. You can add the
+        addresses as separate point features inside the building.
+        If you know how the addresses are associated with the entrances,
+        then you should add the address information to the entrances.
+        If you want to add an entrance to the building, create a node 
+        at its location and make this node to a feature whith type 'Entry/Exit'.
 
     feature_editor:
       intro: |
@@ -809,7 +838,7 @@ en:
         The feature editor will display buttons for common feature types, and you can
         find others by typing what you're looking for in the search box.
  
-        Click the 'i' in the bottom-right-hand corner of a feature type button to
+        Click the 'i' in the top-right-hand corner of a feature type button to
         learn more about it. Click a button to choose that type.
 
       fields: |
@@ -819,7 +848,7 @@ en:
         has a type assigned, the feature editor will display fields with details about
         the feature like its name or speed limit for a road or levels and address for a building. 
 
-        Below the fields you see, you can click the 'Add field' dropdown to add
+        Below the fields you see, you can click the `Add field` dropdown to add
         other details, like a Wikipedia link, wheelchair access, and more.
 
       tags: |
@@ -827,7 +856,7 @@ en:
 
         Below that you see the tags which is how the fields are stored in OpenStreetMap.
         If you cannot find the feature's type with the feature editor or you
-        cannot add required fields, then you can add additional tags '+' button.
+        cannot add required fields, then you can add additional tags with the `+` button.
 
         You will find many tags in the [OpenStreetMap Wiki](https://wiki.openstreetmap.org/),
         also [Taginfo](https://taginfo.openstreetmap.org/) is a
@@ -855,7 +884,7 @@ en:
       point: |
         ### Editing Points
 
-        The edit menu of a point only contains the delete tool.
+        The edit menu of a point only contains the {delete} delete tool.
 
       line: |
         ### Editing Lines
@@ -866,8 +895,8 @@ en:
       area: |
         ### Editing areas
 
-        The edit menu of an area contains tools to circularize, move, square,
-        reflect along the short or long axis, rotate and delete.
+        The edit menu of an area contains tools to circularize, move, {orthogonalize} square,
+        reflect along the short or long axis, rotate and {delete} delete.
 
       node: |
         ### Editing Nodes
@@ -877,7 +906,7 @@ en:
         The disconnect tool duplicates the selected node shared between two features
         so that every feature has its own node. You can connect again by moving one node
         towards the other so that the will snap into one node. You can prohibit connecting
-        by pressing the 'Alt' key while moving one node near another.
+        by pressing the `Alt` key while moving one node near another.
 
       multi: |
         ### Editing two or more features at one
@@ -896,14 +925,14 @@ en:
 
         Aerial imagery is an important resource for mapping. A combination of
         airplane flyovers, satellite views, and freely-compiled sources are available
-        in the editor under the 'Background Settings' menu on the right.
+        in the editor under the `Background Settings` menu on the right.
 
       background: |
         ### Background
 
         By default a [Bing Maps](https://www.bing.com/maps/) satellite layer is
         presented in the editor, but as you pan and zoom the map to new geographical
-        areas, new sources will become available and the best for the area will be marked with a '*'.
+        areas, new sources will become available and the best for the area will be marked with a `*`.
         Some countries, like the United States, France, and Denmark have very high-quality imagery available for some areas.
 
       offset: |
@@ -912,7 +941,7 @@ en:
         Imagery is sometimes offset from the map data because of a mistake on the
         imagery provider's side. If you see a lot of roads shifted from the background,
         don't immediately move them all to match the background. Instead you can adjust
-        the imagery so that it matches the existing data by clicking 'Fix alignment' at
+        the imagery so that it matches the existing data by clicking `Fix alignment` at
         the bottom of the Background Settings UI.
 
     gps:
@@ -932,7 +961,7 @@ en:
 
         To use a GPX track for mapping, drag and drop the GPX file onto the map
         editor. If it's recognized, it will be added to the map as a bright purple
-        line. Click on the 'Map Data' menu on the right side to enable,
+        line. Click on the `Map Data` menu on the right side to enable,
         disable, or zoom to this new GPX-powered layer.
 
         The GPX track isn't directly uploaded to OpenStreetMap - the best way to
@@ -945,13 +974,10 @@ en:
         # Relations
 
         A relation is a special type of feature in OpenStreetMap that groups together
-        other features.  The most common type of relation is *multipolygon*, which groups
-        together several lines that define a complex area (one with several pieces or holes in it like a donut).
-
-        *Turn restrictions* are another type of relation which can be edited in the
-        feature editor when you select an intersection node common to two roads.
-        For every turn connected with the intersection you can forbid U-turn and for
-        every other road you can forbid left-turn, straight-on or right-turn.
+        other features.  The most common type of relation is the *multipolygon*,
+        which groups together several areas to define a complex area, which may
+        consist of several pieces or has holes in it like a donut. Another often
+        used type of relation is the *Turn restriction*.
 
         Two other common types of relations are *route relations*, which group together
         sections of road that belong to a specific highway, bus route, or hiking route,
@@ -977,22 +1003,32 @@ en:
       edit: |
         ## Editing Relations
 
-        To add a feature to a relation, select the feature, click the "+" button in the
-        "All relations" section of the feature editor, and select or type the name of the relation.
+        To add a feature to a relation, select the feature, click the {plus} button
+        in the "All relations" section of the feature editor, and select or type
+        the name of the relation.
 
         To create a new relation, select the first feature that should be a member,
-        click the "+" button in the "All relations" section, and select "New relation...".
+        click the {plus} button in the "All relations" section, and select "New relation...".
 
-        To remove a feature from a relation, select the feature and click the trash
+        To remove a feature from a relation, select the feature and click the {delete} 
         button next to the relation you want to remove it from.
 
       multipolygons: |
         ### Multipolygons
 
-        You can create multipolygons with holes using the "Merge" tool. Draw two areas (inner
-        and outer), hold the Shift key and click on each of them to select them both, and then
-        press the 'C' shortcut key. Other option is to select both, and then right-click one
-        of them and click the "Merge" (+) button.
+        You can create multipolygons with holes using the "Merge" tool.
+        Draw two areas (inner and outer) and select both.
+        Then press either press the `C` shortcut key right-click one
+        of them and select the "Merge" {plus} tool.
+
+      turnrestrictions: |
+        ### Turn restrictions
+
+        You can create turn restrictions in the feature editor when you select
+        an intersection node common to two or more roads on the map.
+        For every turn connected with the intersection you can forbid U-turn and for
+        every other road you can forbid left-turn, straight-on or right-turn.
+
 
   intro:
     done: done

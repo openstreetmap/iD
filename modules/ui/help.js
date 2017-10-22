@@ -21,8 +21,8 @@ export function uiHelp(context) {
 
     var docKeys = [
           ['help.help.',['intro','opendata','beforestart','opensource','othereditors']],
-          ['help.overview.',['intro','map']],
-          ['help.editing.',['intro','multiselect','changes','save','upload','comeback','shortcuts']],
+          ['help.overview.',['intro','concept','screen','map']],
+          ['help.editing.',['intro','multiselect','changes','save','upload','comeback']],
           ['help.roads.',['intro','modifyshape','connect','editingmenu','modifyfields','delete','create']],
           ['help.buildings.',['intro','select','modify','create','delete']],
           ['help.addresses.',['intro','single','multi']],
@@ -30,7 +30,7 @@ export function uiHelp(context) {
           ['help.editing_menu.',['intro','point','line','area','node','multi']],
           ['help.imagery.',['intro','background','offset']],
           ['help.gps.',['intro','using']],
-          ['help.relations.',['intro','members','maintain','edit','multipolygons']]
+          ['help.relations.',['intro','members','maintain','edit','multipolygons','turnrestrictions']]
         ];
 
     var icont = {
@@ -47,6 +47,7 @@ export function uiHelp(context) {
           split: icon('#operation-split', 'pre-text'),
           undo: icon('#operation-undo', 'pre-text'),
           redo: icon('#operation-redo', 'pre-text'),
+          save: icon('#operation-save', 'pre-text'),
           disconnect: icon('#operation-disconnect', 'pre-text')
         };
 
