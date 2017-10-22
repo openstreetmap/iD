@@ -17,9 +17,6 @@ import pointInside from 'turf-inside';
 window.layerImports = {};
 window.layerChecked = {};
 
-// keeping track of added OSM entities
-window.importedEntities = [];
-
 export function svgGeoService(projection, context, dispatch) {
     var detected = utilDetect();
 
@@ -492,7 +489,6 @@ export function svgGeoService(projection, context, dispatch) {
                             actionAddEntity(node),
                             'adding point'
                         );
-                        window.importedEntities.push(node);
                     }
 
                 } else {
@@ -502,7 +498,6 @@ export function svgGeoService(projection, context, dispatch) {
                         actionAddEntity(node),
                         'adding point'
                     );
-                    window.importedEntities.push(node);
                 }
 
             } else if (d.geometry.type === 'LineString') {
@@ -515,10 +510,10 @@ export function svgGeoService(projection, context, dispatch) {
 
                     if (!mergeRoads.length) {
                         // none of the roads overlapped
-                        window.importedEntities.push(mapLine(d, d.geometry.coordinates));
+                        mapLine(d, d.geometry.coordinates);
                     }
                 } else {
-                    window.importedEntities.push(mapLine(d, d.geometry.coordinates));
+                    mapLine(d, d.geometry.coordinates);
                 }
 
             } else if (d.geometry.type === 'MultiLineString') {
@@ -571,12 +566,9 @@ export function svgGeoService(projection, context, dispatch) {
                     actionAddEntity(rel),
                     'adding multiple Lines as a Relation'
                 );
-                window.importedEntities.push(rel);
-
 
             } else if (d.geometry.type === 'Polygon') {
-                window.importedEntities.push(mapPolygon(d, d.geometry.coordinates));
-
+                mapPolygon(d, d.geometry.coordinates);
             } else if (d.geometry.type === 'MultiPolygon') {
                 var polygons = [];
                 for (ln = 0; ln < d.geometry.coordinates.length; ln++) {
@@ -598,8 +590,6 @@ export function svgGeoService(projection, context, dispatch) {
                     actionAddEntity(rel),
                     'adding multiple Polygons as a Relation'
                 );
-                window.importedEntities.push(rel);
-
             } else {
                 console.log('Did not recognize Geometry Type: ' + d.geometry.type);
             }

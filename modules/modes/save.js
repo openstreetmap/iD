@@ -47,20 +47,16 @@ export function modeSave(context) {
         id: 'save'
     };
 
-    if (d3_select('input[name="approvalProcess"]:checked').property('value') === 'individual') {
-        // when clicking the save button, filter out entities which were not approved manually
-        var deletions = [];
-        _map(window.importedEntities, function(entity) {
-            try {
-                if ((entity.approvedForEdit !== 'approved' && entity.approvedForEdit !== 'unchanged') && context.entity(entity.id)) {
-                    deletions.push(entity.id);
-                }
-            } catch (e) {
-                // entity was already deleted, can't be removed here
-            }
-        });
-        operationDelete(deletions, context)();
-    }
+    // filter out pending import objects
+    var deletions = [];
+    var add_or_modify = [].concat(context.changes().created);
+    add_or_modify = add_or_modify.concat(context.changes().modified);
+    _map(add_or_modify, function(entity) {
+        if (entity.approvedForEdit && entity.approvedForEdit !== 'approved' && entity.approvedForEdit !== 'unchanged') {
+            deletions.push(entity.id);
+        }
+    });
+    operationDelete(deletions, context)();
 
     var keybinding = d3_keybinding('select');
 

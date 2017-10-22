@@ -281,11 +281,7 @@ export function uiMapData(context) {
 
             var urlEntry, urlInput, copyrightable, copyLabel, unrecognizedSource, unrecognizedLabel, copyapproval, layerPreview, layerSelect, preset, presetList, presetComboBox, approvalPhase, individualApproval, allApproval, metadata_url;
 
-            // I'm going to run this filtering process but only once
-            if (window.filterInterval) {
-                clearInterval(window.filterInterval);
-            }
-            window.filterInterval = setInterval(function() {
+            d3.selectAll('.geoservice-all-opt input, .geoservice-osm-opt input, .geoservice-import-opt input').on('change', function () {
                 if (d3.select('.geoservice-all-opt input').property('checked')) {
                     d3.selectAll('.data-layer .geoservice-import, .data-layer .geoservice-osm').style('visibility', 'visible');
                 } else if (d3.select('.geoservice-osm-opt input').property('checked')) {
@@ -295,7 +291,7 @@ export function uiMapData(context) {
                     d3.selectAll('.data-layer .geoservice-osm').style('visibility', 'hidden');
                     d3.selectAll('.data-layer .geoservice-import').style('visibility', 'visible');
                 }
-            }, 300);
+            });
 
             // create GeoService layer edit pane only once
             if (this.pane) {
@@ -322,8 +318,6 @@ export function uiMapData(context) {
                     // clear the map
                     geoserviceLayer.geojson({});
                     geoserviceLayer.fields({});
-                    window.knownObjectIds = {};
-                    window.importedEntities = [];
                     context.flush();
                     populatePane(this.pane);
                 }).bind(this));
@@ -553,7 +547,7 @@ export function uiMapData(context) {
                 var body = content.append('div')
                     .attr('class', 'body');
 
-                // replacing the window.prompt with an in-browser window
+                // designing the modal window
                 urlEntry = body.append('div')
                     .attr('class', 'topurl');
                 urlInput = urlEntry.append('input')
@@ -903,7 +897,9 @@ export function uiMapData(context) {
             var geoservicePane = layers.layer('geoservice').pane();
             var hideMe = !geoservicePane.classed('hide');
             geoservicePane.classed('hide', hideMe);
-            if (!hideMe && d3.select('.geoservice-pane .layer-counted .local').text() === '0') {
+
+            // if we're re-opening this window and previously saw zero entities, might retry geoservice call
+            if (!hideMe && d3.select('.geoservice-pane .layer-counted .local').node && d3.select('.geoservice-pane .layer-counted .local').text() === '0') {
                 d3.select('input.geoservice[type="text"]').on('input')(null,
                     d3.select('input.geoservice[type="text"]').property('value'));
             }
