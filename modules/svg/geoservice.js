@@ -612,6 +612,18 @@ export function svgGeoService(projection, context, dispatch) {
         return this;
     };
 
+    drawGeoService.license = function(license_text) {
+        if (!arguments.length) return (drawGeoService.license_text || '');
+        drawGeoService.license_text = license_text;
+        return this;
+    };
+
+    drawGeoService.metadata = function(metadata_url) {
+        if (!arguments.length) return (drawGeoService.metadata_url || '');
+        drawGeoService.metadata_url = metadata_url;
+        return this;
+    };
+
     drawGeoService.url = function(true_url, downloadMax) {
         if (!this.layerUrl) {
             drawGeoService.layerUrl = true_url;
@@ -682,7 +694,6 @@ export function svgGeoService(projection, context, dispatch) {
         }
 
         var that = this;
-        // console.log('final GeoService URL: ' + url);
         d3.json(url, function(err, data) {
             if (err) {
                 console.log('GeoService URL did not load');
@@ -705,20 +716,6 @@ export function svgGeoService(projection, context, dispatch) {
             }
         });
 
-/*
-        // whenever map is moved, start 0.7s timer to re-download data from ArcGIS service
-        // unless we are downloading everything we can anyway
-        if (!downloadMax) {
-            context.map().on('move', function() {
-                if (this.timeout) {
-                    clearTimeout(this.timeout);
-                }
-                this.timeout = setTimeout(function() {
-                    this.url(true_url, downloadMax);
-                }.bind(this), 700);
-            }.bind(this));
-        }
-*/
         return this;
     };
 

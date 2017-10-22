@@ -49,9 +49,8 @@ export function modeSave(context) {
 
     // filter out pending import objects
     var deletions = [];
-    var add_or_modify = [].concat(context.changes().created);
-    add_or_modify = add_or_modify.concat(context.changes().modified);
-    _map(add_or_modify, function(entity) {
+    var added = context.changes().created.concat([]);
+    _map(added, function(entity) {
         if (entity.approvedForEdit && entity.approvedForEdit !== 'approved' && entity.approvedForEdit !== 'unchanged') {
             deletions.push(entity.id);
         }

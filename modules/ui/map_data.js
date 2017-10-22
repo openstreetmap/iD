@@ -409,17 +409,19 @@ export function uiMapData(context) {
                 });
 
                 // handle OSM / ODBL license approval
-                window.metadata = metadata_url;
-                window.license = data.copyrightText.replace(/\s/g, '');
-                if (data.copyrightText && data.copyrightText.trim().length) {
-                    if (context.storage('license-' + window.license)) {
+                var license = (data.copyrightText || '').replace(/\s/g, '');
+                geoserviceLayer.metadata(metadata_url);
+                geoserviceLayer.license(license);
+
+                if (license) {
+                    if (context.storage('license-' + license)) {
                         // user has seen and approved this license before
                         d3.selectAll('.copyright-text')
-                            .text('Copyright info (previously approved): ' + data.copyrightText);
+                            .text('Copyright info (previously approved): ' + license);
                         copyapproval.property('checked', true);
                     } else {
                         // new license
-                        d3.selectAll('.copyright-text').text('Copyright info: ' + data.copyrightText);
+                        d3.selectAll('.copyright-text').text('Copyright info: ' + license);
                         copylabel.classed('hide', false);
                     }
                 } else if (context.storage('license-' + metadata_url)) {
@@ -812,8 +814,8 @@ export function uiMapData(context) {
                         alert('This is your first time importing from this GeoService. Please confirm that it\'s license grants permission to be included in OpenStreetMap');
                         return;
                     }
-                    if (window.license || window.metadata) {
-                        context.storage('license-' + (window.license || window.metadata), 'approved');
+                    if (license || metadata_url) {
+                        context.storage('license-' + (license || metadata_url), 'approved');
                     }
 
                     var importFields = geoserviceLayer.fields();
