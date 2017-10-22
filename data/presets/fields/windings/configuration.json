@@ -1,0 +1,16 @@
+{
+    "key": "windings:configuration",
+    "type": "combo",
+    "label": "Windings configuration",
+    "strings": {
+        "options": {
+            "star": "Star",
+            "delta": "Delta",
+            "open-delta": "Open delta",
+            "zigzag": "Zig zag",
+            "open": "Open",
+            "scott": "Scott",
+            "leblanc": "Leblanc"
+        }
+    }
+}

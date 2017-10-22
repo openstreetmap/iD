@@ -1,0 +1,17 @@
+{
+    "key": "transformer",
+    "type": "combo",
+    "label": "Type of transformer",
+    "strings": {
+        "options": {
+            "distribution": "Distribution",
+            "generator": "Generator",
+            "converter": "Converter",
+            "traction": "Traction",
+            "auto": "Autotransformer",
+            "phase_angle_regulator": "Phase angle regulator",
+            "auxiliary": "Auxiliarty",
+            "yes": "Unknown"
+        }
+    }
+}
