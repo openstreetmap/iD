@@ -70,7 +70,12 @@ export function rendererFeatures(context) {
     function update() {
         if (!window.mocha) {
             var q = utilStringQs(window.location.hash.substring(1));
-            q.disable_features = features.disabled().join(',');
+            var disabled = features.disabled();
+            if (disabled.length) {
+                q.disable_features = features.disabled().join(',');
+            } else {
+                delete q.disable_features;
+            }
             window.location.replace('#' + utilQsString(q, true));
         }
 
