@@ -214,10 +214,6 @@ export function rendererFeatures(context) {
         return _features[k] && _features[k].enabled;
     };
 
-    features.enabledList = function () {
-      return _keys.filter(function(k) { return _features[k].enabled; });
-    };
-
 
     features.disabled = function(k) {
         if (!arguments.length) {
@@ -247,28 +243,6 @@ export function rendererFeatures(context) {
         if (_features[k] && !_features[k].enabled) {
             _features[k].enable();
             update();
-        }
-    };
-
-    features.enableList = function (enabledKeys) {
-        var keysForToggle = {};
-
-        for (var i = 0; i < _keys.length; i++) {
-            keysForToggle[_keys[i]] = false;
-        }
-
-        for (i = 0; i < enabledKeys.length; i++) {
-            if (_features[enabledKeys[i]]) {
-                keysForToggle[enabledKeys[i]] = true;
-            }
-        }
-
-        for (i = 0; i < _keys.length; i++) {
-            if (keysForToggle[_keys[i]]) {
-                _features[_keys[i]].enable();
-            } else {
-                _features[_keys[i]].disable();
-            }
         }
     };
 
@@ -505,10 +479,10 @@ export function rendererFeatures(context) {
 
     features.init = function() {
         var q = utilStringQs(window.location.hash.substring(1));
+
         if (q.disable_features) {
-            q.disable_features.replace(/;/g, ',').split(',').map(function(k) {
-                features.disable(k);
-            });
+            var disabled = q.disable_features.replace(/;/g, ',').split(',');
+            disabled.forEach(features.disable);
         }
     };
 

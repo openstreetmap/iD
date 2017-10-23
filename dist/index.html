@@ -36,9 +36,16 @@
             if (typeof iD == 'undefined' || !iD.Detect().support) {
                 document.getElementById('id-container').innerHTML = 'Sorry, your browser is not currently supported. Please use Potlatch 2 to edit the map.';
                 document.getElementById('id-container').className = 'unsupported';
+
             } else {
                 var id = iD.Context();
-                id.features().disable('boundaries');
+
+                // disable boundaries (unless we have an explicit disable_features list)
+                var q = iD.utilStringQs(window.location.hash.substring(1));
+                if (!q.hasOwnProperty('disable_features')) {
+                    id.features().disable('boundaries');
+                }
+
                 id.ui()(document.getElementById('id-container'));
             }
         </script>

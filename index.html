@@ -16,7 +16,11 @@
         id = iD.Context()
             .assetPath('dist/');
 
-        id.features().disable('boundaries');
+        // disable boundaries (unless we have an explicit disable_features list)
+        var q = iD.utilStringQs(window.location.hash.substring(1));
+        if (!q.hasOwnProperty('disable_features')) {
+            id.features().disable('boundaries');
+        }
 
         id.ui()(document.getElementById('id-container'), function() {
             id.container().select('#about-list')
