@@ -13,23 +13,46 @@ import { uiShortcuts } from './shortcuts';
 import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
 
+import { icon } from 'intro/helper';
+
 
 export function uiHelp(context) {
     var key = t('help.key');
 
     var docKeys = [
-        'help.help',
-        'help.editing_saving',
-        'help.roads',
-        'help.gps',
-        'help.imagery',
-        'help.addresses',
-        'help.inspector',
-        'help.buildings',
-        'help.relations'];
+          ['help.help.',['intro','opendata','beforestart','opensource','othereditors']],
+          ['help.overview.',['intro','concept','screen','map']],
+          ['help.editing.',['intro','multiselect','changes','save','upload','comeback']],
+          ['help.roads.',['intro','modifyshape','connect','editingmenu','modifyfields','delete','create']],
+          ['help.buildings.',['intro','select','modify','create','delete']],
+          ['help.addresses.',['intro','single','multi']],
+          ['help.feature_editor.',['intro','select','fields','tags','bottom','undo']],
+          ['help.editing_menu.',['intro','point','line','area','node','multi']],
+          ['help.imagery.',['intro','background','offset']],
+          ['help.gps.',['intro','using']],
+          ['help.relations.',['intro','members','maintain','edit','multipolygons','turnrestrictions']]
+        ];
+
+    var icont = {
+          apply: icon('#icon-apply', 'pre-text'),
+          area: icon('#icon-area', 'pre-text'),
+          help: icon('#icon-help', 'pre-text'),
+          line: icon('#icon-line', 'pre-text'),
+          minus: icon('#icon-minus', 'pre-text'),
+          plus: icon('#icon-plus', 'pre-text'),
+          point: icon('#icon-point', 'pre-text'),
+          circularize: icon('#operation-circularize', 'pre-text'),
+          delete: icon('#operation-delete', 'pre-text'),
+          orthogonalize: icon('#operation-orthogonalize', 'pre-text'),
+          split: icon('#operation-split', 'pre-text'),
+          undo: icon('#operation-undo', 'pre-text'),
+          redo: icon('#operation-redo', 'pre-text'),
+          save: icon('#operation-save', 'pre-text'),
+          disconnect: icon('#operation-disconnect', 'pre-text')
+        };
 
     var docs = docKeys.map(function(key) {
-        var text = t(key);
+        var text = key[1].reduce(function(all,part) { return all + t(key[0].concat(part),icont); }, '');
         return {
             title: text.split('\n')[0].replace('#', '').trim(),
             html: marked(text.split('\n').slice(1).join('\n'))
