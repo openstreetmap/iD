@@ -16205,7 +16205,7 @@
             "name": "Wet Dock / Dry Dock"
         },
         "waterway/drain": {
-            "icon": "waterway-stream",
+            "icon": "waterway-ditch",
             "fields": [
                 "structure_waterway",
                 "intermittent"
