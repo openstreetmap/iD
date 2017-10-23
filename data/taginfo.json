@@ -2210,6 +2210,10 @@
         },
         {
             "key": "place",
+            "value": "islet"
+        },
+        {
+            "key": "place",
             "value": "isolated_dwelling"
         },
         {
