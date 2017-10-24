@@ -594,6 +594,12 @@
             "label": "Description",
             "universal": true
         },
+        "devices": {
+            "key": "devices",
+            "type": "number",
+            "label": "Number of Devices",
+            "placeholder": "2"
+        },
         "diaper": {
             "key": "diaper",
             "type": "combo",
@@ -739,6 +745,12 @@
             "type": "typeCombo",
             "label": "Type",
             "placeholder": "Default"
+        },
+        "frequency": {
+            "key": "frequency",
+            "type": "number",
+            "label": "Operating Frequency",
+            "placeholder": "50"
         },
         "fuel_multi": {
             "key": "fuel:",
@@ -1316,6 +1328,12 @@
             "type": "multiCombo",
             "label": "Payment Types"
         },
+        "phases": {
+            "key": "phases",
+            "type": "number",
+            "label": "Number of Phases",
+            "placeholder": "3"
+        },
         "phone": {
             "key": "phone",
             "type": "tel",
@@ -1434,6 +1452,12 @@
             "key": "railway",
             "type": "typeCombo",
             "label": "Type"
+        },
+        "rating": {
+            "key": "rating",
+            "type": "number",
+            "label": "VA Rating",
+            "placeholder": "32000"
         },
         "recycling_accepts": {
             "key": "recycling:",
@@ -1964,6 +1988,23 @@
                 }
             }
         },
+        "transformer": {
+            "key": "transformer",
+            "type": "combo",
+            "label": "Type of Transformer",
+            "strings": {
+                "options": {
+                    "distribution": "Distribution",
+                    "generator": "Generator",
+                    "converter": "Converter",
+                    "traction": "Traction",
+                    "auto": "Autotransformer",
+                    "phase_angle_regulator": "Phase Angle Regulator",
+                    "auxiliary": "Auxiliarty",
+                    "yes": "Unknown"
+                }
+            }
+        },
         "trees": {
             "key": "trees",
             "type": "semiCombo",
@@ -2015,6 +2056,24 @@
                     "scoria": "Scoria"
                 }
             }
+        },
+        "voltage/primary": {
+            "key": "voltage:primary",
+            "type": "number",
+            "label": "Primary Voltage",
+            "placeholder": "225000"
+        },
+        "voltage/secondary": {
+            "key": "voltage:secondary",
+            "type": "number",
+            "label": "Secondary Voltage",
+            "placeholder": "400"
+        },
+        "voltage/tertiary": {
+            "key": "voltage:tertiary",
+            "type": "number",
+            "label": "Tertiary Voltage",
+            "placeholder": "20000"
         },
         "wall": {
             "key": "wall",
@@ -2076,6 +2135,28 @@
             "icon": "wikipedia",
             "universal": true,
             "label": "Wikipedia"
+        },
+        "windings": {
+            "key": "windings",
+            "type": "number",
+            "label": "Number of Windings",
+            "placeholder": "3"
+        },
+        "windings/configuration": {
+            "key": "windings:configuration",
+            "type": "combo",
+            "label": "Windings Configuration",
+            "strings": {
+                "options": {
+                    "star": "Star",
+                    "delta": "Delta",
+                    "open-delta": "Open Delta",
+                    "zigzag": "Zig Zag",
+                    "open": "Open",
+                    "scott": "Scott",
+                    "leblanc": "Leblanc"
+                }
+            }
         }
     }
 }

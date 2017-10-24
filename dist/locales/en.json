@@ -1472,6 +1472,10 @@
                 "description": {
                     "label": "Description"
                 },
+                "devices": {
+                    "label": "Number of Devices",
+                    "placeholder": "2"
+                },
                 "diaper": {
                     "label": "Diaper Changing Available"
                 },
@@ -1552,6 +1556,10 @@
                 "ford": {
                     "label": "Type",
                     "placeholder": "Default"
+                },
+                "frequency": {
+                    "label": "Operating Frequency",
+                    "placeholder": "50"
                 },
                 "fuel_multi": {
                     "label": "Fuel Types"
@@ -1911,6 +1919,10 @@
                 "payment_multi": {
                     "label": "Payment Types"
                 },
+                "phases": {
+                    "label": "Number of Phases",
+                    "placeholder": "3"
+                },
                 "phone": {
                     "label": "Phone",
                     "placeholder": "+31 42 123 4567"
@@ -1989,6 +2001,10 @@
                 },
                 "railway": {
                     "label": "Type"
+                },
+                "rating": {
+                    "label": "VA Rating",
+                    "placeholder": "32000"
                 },
                 "recycling_accepts": {
                     "label": "Accepts"
@@ -2299,6 +2315,19 @@
                         "no": "No: pathless, excellent orientation skills required"
                     }
                 },
+                "transformer": {
+                    "label": "Type of Transformer",
+                    "options": {
+                        "distribution": "Distribution",
+                        "generator": "Generator",
+                        "converter": "Converter",
+                        "traction": "Traction",
+                        "auto": "Autotransformer",
+                        "phase_angle_regulator": "Phase Angle Regulator",
+                        "auxiliary": "Auxiliarty",
+                        "yes": "Unknown"
+                    }
+                },
                 "trees": {
                     "label": "Trees"
                 },
@@ -2333,6 +2362,18 @@
                         "scoria": "Scoria"
                     }
                 },
+                "voltage/primary": {
+                    "label": "Primary Voltage",
+                    "placeholder": "225000"
+                },
+                "voltage/secondary": {
+                    "label": "Secondary Voltage",
+                    "placeholder": "400"
+                },
+                "voltage/tertiary": {
+                    "label": "Tertiary Voltage",
+                    "placeholder": "20000"
+                },
                 "wall": {
                     "label": "Type"
                 },
@@ -2360,6 +2401,22 @@
                 },
                 "wikipedia": {
                     "label": "Wikipedia"
+                },
+                "windings": {
+                    "label": "Number of Windings",
+                    "placeholder": "3"
+                },
+                "windings/configuration": {
+                    "label": "Windings Configuration",
+                    "options": {
+                        "star": "Star",
+                        "delta": "Delta",
+                        "open-delta": "Open Delta",
+                        "zigzag": "Zig Zag",
+                        "open": "Open",
+                        "scott": "Scott",
+                        "leblanc": "Leblanc"
+                    }
                 }
             },
             "presets": {
