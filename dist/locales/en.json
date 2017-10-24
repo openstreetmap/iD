@@ -3863,6 +3863,10 @@
                     "name": "Wayside Shrine",
                     "terms": ""
                 },
+                "industrial/slaughterhouse": {
+                    "name": "Slaughterhouse",
+                    "terms": "abattoir,shambles,stockyard,butchery,killing house"
+                },
                 "junction": {
                     "name": "Junction",
                     "terms": ""

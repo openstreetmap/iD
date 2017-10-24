@@ -7855,6 +7855,30 @@
             },
             "name": "Wayside Shrine"
         },
+        "industrial/slaughterhouse": {
+            "icon": "slaughterhouse",
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "abattoir",
+                "shambles",
+                "stockyard",
+                "butchery",
+                "killing house"
+            ],
+            "tags": {
+                "industrial": "slaughterhouse"
+            },
+            "name": "Slaughterhouse"
+        },
         "junction": {
             "icon": "poi-junction",
             "fields": [
