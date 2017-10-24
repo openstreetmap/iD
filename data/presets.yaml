@@ -1588,7 +1588,7 @@ en:
           # 'windings:configuration=scott'
           scott: Scott
           # 'windings:configuration=star'
-          star: Star
+          star: Star / Wye
           # 'windings:configuration=zigzag'
           zigzag: Zig Zag
     presets:

@@ -4,7 +4,7 @@
     "label": "Windings Configuration",
     "strings": {
         "options": {
-            "star": "Star",
+            "star": "Star / Wye",
             "delta": "Delta",
             "open-delta": "Open Delta",
             "zigzag": "Zig Zag",
