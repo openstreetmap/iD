@@ -1,0 +1,6 @@
+{
+    "key": "phases",
+    "type": "number",
+    "label": "Number of Phases",
+    "placeholder": "3"
+}

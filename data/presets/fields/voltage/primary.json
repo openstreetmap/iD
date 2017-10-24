@@ -1,0 +1,6 @@
+{
+    "key": "voltage:primary",
+    "type": "number",
+    "label": "Primary Voltage",
+    "placeholder": "225000"
+}
