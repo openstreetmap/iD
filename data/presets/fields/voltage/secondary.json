@@ -2,5 +2,5 @@
     "key": "voltage:secondary",
     "type": "number",
     "label": "Secondary Voltage",
-    "placeholder": "225000"
+    "placeholder": "400"
 }

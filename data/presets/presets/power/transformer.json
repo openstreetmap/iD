@@ -4,6 +4,7 @@
         "transformer",
         "location",
         "phases",
+        "frequency",
         "voltage/primary",
         "voltage/secondary",
         "voltage/tertiary",
