@@ -4942,6 +4942,7 @@ en:
       tourism/alpine_hut:
         # tourism=alpine_hut
         name: Alpine Hut
+        # 'terms: climbing hut'
         terms: '<translate with synonyms or related terms for ''Alpine Hut'', separated by commas>'
       tourism/apartment:
         # tourism=apartment
