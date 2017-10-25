@@ -1,5 +1,18 @@
 {
     "icon": "poi-power",
+    "fields": [
+        "transformer",
+        "location",
+        "rating",
+        "devices",
+        "phases",
+        "frequency",
+        "voltage/primary",
+        "voltage/secondary",
+        "voltage/tertiary",
+        "windings",
+        "windings/configuration"
+    ],
     "geometry": [
         "point",
         "vertex",

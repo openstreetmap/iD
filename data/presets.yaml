@@ -450,6 +450,11 @@ en:
       description:
         # description=*
         label: Description
+      devices:
+        # devices=*
+        label: Number of Devices
+        # devices field placeholder
+        placeholder: '1, 2, 3...'
       diaper:
         # diaper=*
         label: Diaper Changing Available
@@ -546,6 +551,9 @@ en:
         label: Type
         # ford field placeholder
         placeholder: Default
+      frequency:
+        # frequency=*
+        label: Operating Frequency
       fuel:
         # fuel=*
         label: Fuel
@@ -977,6 +985,11 @@ en:
       payment_multi:
         # 'payment:=*'
         label: Payment Types
+      phases:
+        # phases=*
+        label: Number of Phases
+        # phases field placeholder
+        placeholder: '1, 2, 3...'
       phone:
         # phone=*
         label: Phone
@@ -1078,6 +1091,9 @@ en:
       railway:
         # railway=*
         label: Type
+      rating:
+        # rating=*
+        label: Power Rating
       recycling_accepts:
         # 'recycling:=*'
         label: Accepts
@@ -1443,6 +1459,26 @@ en:
           'no': 'No: pathless, excellent orientation skills required'
         # trail_visibility field placeholder
         placeholder: 'Excellent, Good, Bad...'
+      transformer:
+        # transformer=*
+        label: Type of Transformer
+        options:
+          # transformer=auto
+          auto: Autotransformer
+          # transformer=auxiliary
+          auxiliary: Auxiliarty
+          # transformer=converter
+          converter: Converter
+          # transformer=distribution
+          distribution: Distribution
+          # transformer=generator
+          generator: Generator
+          # transformer=phase_angle_regulator
+          phase_angle_regulator: Phase Angle Regulator
+          # transformer=traction
+          traction: Traction
+          # transformer=yes
+          'yes': Unknown
       trees:
         # trees=*
         label: Trees
@@ -1484,6 +1520,15 @@ en:
           shield: Shield
           # 'volcano:type=stratovolcano'
           stratovolcano: Stratovolcano
+      voltage/primary:
+        # 'voltage:primary=*'
+        label: Primary Voltage
+      voltage/secondary:
+        # 'voltage:secondary=*'
+        label: Secondary Voltage
+      voltage/tertiary:
+        # 'voltage:tertiary=*'
+        label: Tertiary Voltage
       wall:
         # wall=*
         label: Type
@@ -1513,6 +1558,29 @@ en:
       wikipedia:
         # 'wikipedia=*, wikidata=*'
         label: Wikipedia
+      windings:
+        # windings=*
+        label: Number of Windings
+        # windings field placeholder
+        placeholder: '1, 2, 3...'
+      windings/configuration:
+        # 'windings:configuration=*'
+        label: Windings Configuration
+        options:
+          # 'windings:configuration=delta'
+          delta: Delta
+          # 'windings:configuration=leblanc'
+          leblanc: Leblanc
+          # 'windings:configuration=open'
+          open: Open
+          # 'windings:configuration=open-delta'
+          open-delta: Open Delta
+          # 'windings:configuration=scott'
+          scott: Scott
+          # 'windings:configuration=star'
+          star: Star / Wye
+          # 'windings:configuration=zigzag'
+          zigzag: Zig Zag
     presets:
       address:
         # 'addr:*=*'
