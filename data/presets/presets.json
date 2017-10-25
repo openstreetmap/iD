@@ -7855,30 +7855,6 @@
             },
             "name": "Wayside Shrine"
         },
-        "industrial/slaughterhouse": {
-            "icon": "slaughterhouse",
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "opening_hours"
-            ],
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "terms": [
-                "abattoir",
-                "shambles",
-                "stockyard",
-                "butchery",
-                "killing house"
-            ],
-            "tags": {
-                "industrial": "slaughterhouse"
-            },
-            "name": "Slaughterhouse"
-        },
         "junction": {
             "icon": "poi-junction",
             "fields": [
@@ -8180,6 +8156,47 @@
             "terms": [],
             "matchScore": 0.9,
             "name": "Industrial Area"
+        },
+        "landuse/industrial/slaughterhouse": {
+            "icon": "slaughterhouse",
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "industrial": "slaughterhouse"
+            },
+            "addTags": {
+                "landuse": "industrial",
+                "industrial": "slaughterhouse"
+            },
+            "removeTags": {
+                "landuse": "industrial",
+                "industrial": "slaughterhouse"
+            },
+            "terms": [
+                "abattoir",
+                "beef",
+                "butchery",
+                "calf",
+                "chicken",
+                "cow",
+                "killing house",
+                "meat",
+                "pig",
+                "pork",
+                "poultry",
+                "shambles",
+                "stockyard"
+            ],
+            "name": "Slaughterhouse"
         },
         "landuse/landfill": {
             "geometry": [

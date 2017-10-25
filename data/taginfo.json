@@ -1496,10 +1496,6 @@
             "value": "wayside_shrine"
         },
         {
-            "key": "industrial",
-            "value": "slaughterhouse"
-        },
-        {
             "key": "junction",
             "value": "yes"
         },
@@ -1573,6 +1569,10 @@
         {
             "key": "landuse",
             "value": "industrial"
+        },
+        {
+            "key": "industrial",
+            "value": "slaughterhouse"
         },
         {
             "key": "landuse",

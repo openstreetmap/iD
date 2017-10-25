@@ -3915,10 +3915,6 @@
                     "name": "Wayside Shrine",
                     "terms": ""
                 },
-                "industrial/slaughterhouse": {
-                    "name": "Slaughterhouse",
-                    "terms": "abattoir,shambles,stockyard,butchery,killing house"
-                },
                 "junction": {
                     "name": "Junction",
                     "terms": ""
@@ -3994,6 +3990,10 @@
                 "landuse/industrial": {
                     "name": "Industrial Area",
                     "terms": ""
+                },
+                "landuse/industrial/slaughterhouse": {
+                    "name": "Slaughterhouse",
+                    "terms": "abattoir,beef,butchery,calf,chicken,cow,killing house,meat,pig,pork,poultry,shambles,stockyard"
                 },
                 "landuse/landfill": {
                     "name": "Landfill",
