@@ -4180,9 +4180,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Bouncy Cushion'', separated by commas>'
       playground/horizontal_bar:
         # playground=horizontal_bar
-        name: Horizontal Bar
+        name: Play Horizontal Bar
         # 'terms: high bar'
-        terms: '<translate with synonyms or related terms for ''Horizontal Bar'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Play Horizontal Bar'', separated by commas>'
       playground/rocker:
         # playground=springy
         name: Spring Rider
