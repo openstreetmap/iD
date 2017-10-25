@@ -1,6 +1,6 @@
 {
     "key": "rating",
-    "type": "number",
-    "label": "VA Rating",
-    "placeholder": "32000"
+    "type": "combo",
+    "label": "Power Rating",
+    "snake_case": false
 }

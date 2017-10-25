@@ -2,5 +2,5 @@
     "key": "devices",
     "type": "number",
     "label": "Number of Devices",
-    "placeholder": "2"
+    "placeholder": "1, 2, 3..."
 }

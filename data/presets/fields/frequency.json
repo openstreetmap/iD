@@ -1,6 +1,5 @@
 {
     "key": "frequency",
-    "type": "number",
-    "label": "Operating Frequency",
-    "placeholder": "50"
+    "type": "combo",
+    "label": "Operating Frequency"
 }

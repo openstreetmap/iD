@@ -1474,7 +1474,7 @@
                 },
                 "devices": {
                     "label": "Number of Devices",
-                    "placeholder": "2"
+                    "placeholder": "1, 2, 3..."
                 },
                 "diaper": {
                     "label": "Diaper Changing Available"
@@ -1558,8 +1558,7 @@
                     "placeholder": "Default"
                 },
                 "frequency": {
-                    "label": "Operating Frequency",
-                    "placeholder": "50"
+                    "label": "Operating Frequency"
                 },
                 "fuel_multi": {
                     "label": "Fuel Types"
@@ -1921,7 +1920,7 @@
                 },
                 "phases": {
                     "label": "Number of Phases",
-                    "placeholder": "3"
+                    "placeholder": "1, 2, 3..."
                 },
                 "phone": {
                     "label": "Phone",
@@ -2003,8 +2002,7 @@
                     "label": "Type"
                 },
                 "rating": {
-                    "label": "VA Rating",
-                    "placeholder": "32000"
+                    "label": "Power Rating"
                 },
                 "recycling_accepts": {
                     "label": "Accepts"
@@ -2363,16 +2361,13 @@
                     }
                 },
                 "voltage/primary": {
-                    "label": "Primary Voltage",
-                    "placeholder": "225000"
+                    "label": "Primary Voltage"
                 },
                 "voltage/secondary": {
-                    "label": "Secondary Voltage",
-                    "placeholder": "400"
+                    "label": "Secondary Voltage"
                 },
                 "voltage/tertiary": {
-                    "label": "Tertiary Voltage",
-                    "placeholder": "20000"
+                    "label": "Tertiary Voltage"
                 },
                 "wall": {
                     "label": "Type"
@@ -2404,7 +2399,7 @@
                 },
                 "windings": {
                     "label": "Number of Windings",
-                    "placeholder": "3"
+                    "placeholder": "1, 2, 3..."
                 },
                 "windings/configuration": {
                     "label": "Windings Configuration",

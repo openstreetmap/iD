@@ -2,5 +2,5 @@
     "key": "windings",
     "type": "number",
     "label": "Number of Windings",
-    "placeholder": "3"
+    "placeholder": "1, 2, 3..."
 }

@@ -1,6 +1,5 @@
 {
     "key": "voltage:primary",
-    "type": "number",
-    "label": "Primary Voltage",
-    "placeholder": "225000"
+    "type": "combo",
+    "label": "Primary Voltage"
 }

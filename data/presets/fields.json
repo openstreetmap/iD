@@ -598,7 +598,7 @@
             "key": "devices",
             "type": "number",
             "label": "Number of Devices",
-            "placeholder": "2"
+            "placeholder": "1, 2, 3..."
         },
         "diaper": {
             "key": "diaper",
@@ -748,9 +748,8 @@
         },
         "frequency": {
             "key": "frequency",
-            "type": "number",
-            "label": "Operating Frequency",
-            "placeholder": "50"
+            "type": "combo",
+            "label": "Operating Frequency"
         },
         "fuel_multi": {
             "key": "fuel:",
@@ -1332,7 +1331,7 @@
             "key": "phases",
             "type": "number",
             "label": "Number of Phases",
-            "placeholder": "3"
+            "placeholder": "1, 2, 3..."
         },
         "phone": {
             "key": "phone",
@@ -1455,9 +1454,9 @@
         },
         "rating": {
             "key": "rating",
-            "type": "number",
-            "label": "VA Rating",
-            "placeholder": "32000"
+            "type": "combo",
+            "label": "Power Rating",
+            "snake_case": false
         },
         "recycling_accepts": {
             "key": "recycling:",
@@ -2059,21 +2058,18 @@
         },
         "voltage/primary": {
             "key": "voltage:primary",
-            "type": "number",
-            "label": "Primary Voltage",
-            "placeholder": "225000"
+            "type": "combo",
+            "label": "Primary Voltage"
         },
         "voltage/secondary": {
             "key": "voltage:secondary",
-            "type": "number",
-            "label": "Secondary Voltage",
-            "placeholder": "400"
+            "type": "combo",
+            "label": "Secondary Voltage"
         },
         "voltage/tertiary": {
             "key": "voltage:tertiary",
-            "type": "number",
-            "label": "Tertiary Voltage",
-            "placeholder": "20000"
+            "type": "combo",
+            "label": "Tertiary Voltage"
         },
         "wall": {
             "key": "wall",
@@ -2140,7 +2136,7 @@
             "key": "windings",
             "type": "number",
             "label": "Number of Windings",
-            "placeholder": "3"
+            "placeholder": "1, 2, 3..."
         },
         "windings/configuration": {
             "key": "windings:configuration",

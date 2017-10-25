@@ -454,7 +454,7 @@ en:
         # devices=*
         label: Number of Devices
         # devices field placeholder
-        placeholder: '2'
+        placeholder: '1, 2, 3...'
       diaper:
         # diaper=*
         label: Diaper Changing Available
@@ -554,8 +554,6 @@ en:
       frequency:
         # frequency=*
         label: Operating Frequency
-        # frequency field placeholder
-        placeholder: '50'
       fuel:
         # fuel=*
         label: Fuel
@@ -991,7 +989,7 @@ en:
         # phases=*
         label: Number of Phases
         # phases field placeholder
-        placeholder: '3'
+        placeholder: '1, 2, 3...'
       phone:
         # phone=*
         label: Phone
@@ -1095,9 +1093,7 @@ en:
         label: Type
       rating:
         # rating=*
-        label: VA Rating
-        # rating field placeholder
-        placeholder: '32000'
+        label: Power Rating
       recycling_accepts:
         # 'recycling:=*'
         label: Accepts
@@ -1527,18 +1523,12 @@ en:
       voltage/primary:
         # 'voltage:primary=*'
         label: Primary Voltage
-        # voltage/primary field placeholder
-        placeholder: '225000'
       voltage/secondary:
         # 'voltage:secondary=*'
         label: Secondary Voltage
-        # voltage/secondary field placeholder
-        placeholder: '400'
       voltage/tertiary:
         # 'voltage:tertiary=*'
         label: Tertiary Voltage
-        # voltage/tertiary field placeholder
-        placeholder: '20000'
       wall:
         # wall=*
         label: Type
@@ -1572,7 +1562,7 @@ en:
         # windings=*
         label: Number of Windings
         # windings field placeholder
-        placeholder: '3'
+        placeholder: '1, 2, 3...'
       windings/configuration:
         # 'windings:configuration=*'
         label: Windings Configuration

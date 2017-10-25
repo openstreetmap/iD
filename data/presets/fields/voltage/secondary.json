@@ -1,6 +1,5 @@
 {
     "key": "voltage:secondary",
-    "type": "number",
-    "label": "Secondary Voltage",
-    "placeholder": "400"
+    "type": "combo",
+    "label": "Secondary Voltage"
 }

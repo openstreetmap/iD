@@ -1,6 +1,5 @@
 {
     "key": "voltage:tertiary",
-    "type": "number",
-    "label": "Tertiary Voltage",
-    "placeholder": "20000"
+    "type": "combo",
+    "label": "Tertiary Voltage"
 }
