@@ -501,7 +501,6 @@
                 "keep_remote": "Usar lo ayeno",
                 "restore": "Restaurar",
                 "delete": "Dexar desaniciao",
-                "download_changes": "O descargar los tos cambeos",
                 "done": "¡Iguaos tolos conflictos!"
             }
         },
@@ -746,9 +745,6 @@
                 },
                 "access_simple": {
                     "label": "Accesu permitíu"
-                },
-                "access_toilets": {
-                    "label": "Accesu"
                 },
                 "address": {
                     "label": "Direición",
@@ -2236,10 +2232,6 @@
                     "name": "Reloxería",
                     "terms": "Reloxeru"
                 },
-                "craft/confectionery": {
-                    "name": "Pastelería",
-                    "terms": "Confitería, Tartes,"
-                },
                 "craft/dressmaker": {
                     "name": "Modista",
                     "terms": "Xastre, modista"
@@ -3543,9 +3535,6 @@
                 },
                 "traffic_calming/rumble_strip": {
                     "name": "Bandes sonores"
-                },
-                "traffic_calming/table": {
-                    "name": "Pasu de peatones eleváu"
                 },
                 "type/boundary": {
                     "name": "Llende"

@@ -3,17 +3,17 @@
         "modes": {
             "add_area": {
                 "title": "Område",
-                "description": "Legg til parker, bygninger, innsjøer eller andre området på kartet.",
-                "tail": "Trykk på kartet for å starte og tegne et område, slik som en park, innsjø eller bygning."
+                "description": "Legg til parker, bygninger, innsjøer eller andre områder på kartet.",
+                "tail": "Trykk på kartet for å starte å tegne et område, slik som en park, innsjø eller bygning."
             },
             "add_line": {
                 "title": "Linje",
                 "description": "Legg til hovedveier, gater, gangveier, kanaler eller andre linjer på kartet.",
-                "tail": "Trykk på kartet for å begynne og tegne en vei, sti eller rute."
+                "tail": "Trykk på kartet for å begynne å tegne en vei, sti eller rute."
             },
             "add_point": {
                 "title": "Punkt",
-                "description": "Legg till restauranter, monumenter, postbokser eller andre punkter på kartet.",
+                "description": "Legg til restauranter, monumenter, postbokser eller andre punkter på kartet.",
                 "tail": "Trykk på kartet for å legge til et punkt."
             },
             "browse": {
@@ -21,24 +21,24 @@
                 "description": "Flytt og forstørr/forminsk kartet."
             },
             "draw_area": {
-                "tail": "Klikk for å legge til området ditt. Klikk på den første noden for å bli ferdig med området"
+                "tail": "Klikk for å legge til noder til området ditt. Klikk på den første noden for å bli ferdig med området."
             },
             "draw_line": {
-                "tail": "Klikk for å legge til flere noder på linjen. Klikk på andre linjer for å sammenkoble dem, og dobbelklikk for å avslutte linjen."
+                "tail": "Klikk for å legge til flere noder på linjen. Klikk på andre linjer for å sammenkoble dem, og dobbeltklikk for å avslutte linjen."
             }
         },
         "operations": {
             "add": {
                 "annotation": {
-                    "point": "Legg til et punkt.",
-                    "vertex": "Legg til et punkt til veien.",
+                    "point": "La til et punkt.",
+                    "vertex": "La til et punkt til veien.",
                     "relation": "La til en relasjon."
                 }
             },
             "start": {
                 "annotation": {
                     "line": "Startet en linje.",
-                    "area": "Startet et areal."
+                    "area": "Startet et område."
                 }
             },
             "continue": {
@@ -46,10 +46,10 @@
                 "title": "Fortsett",
                 "description": "Videreføre en linje.",
                 "not_eligible": "Ingen linje kan bli videreført her.",
-                "multiple": "Flere linjer kan videreføres her. For å velge en linje, hold Shift knappen og klikk på en linje for å velge den.",
+                "multiple": "Flere linjer kan videreføres her. For å velge en linje, hold Shift-knappen og klikk på en linje for å velge den.",
                 "annotation": {
                     "line": "Videreførte en linje.",
-                    "area": "Videreførte et areal."
+                    "area": "Videreførte et område."
                 }
             },
             "cancel_draw": {
@@ -100,17 +100,17 @@
                 "connected_to_hidden": "Denne linjen kan ikke rettes fordi den er koblet til en skjult kartegenskap."
             },
             "delete": {
-                "title": "Fjern",
+                "title": "Slett",
                 "description": {
                     "single": "Slett denne kartegenskapen permanent.",
                     "multiple": "Slett disse kartegenskapene permanent."
                 },
                 "annotation": {
-                    "point": "Fjern et punkt.",
-                    "vertex": "Fjernet en node fra veien.",
-                    "line": "Fjernet en linje.",
-                    "area": "Fjernet et areal.",
-                    "relation": "Fjernet en relasjon.",
+                    "point": "Slettet et punkt.",
+                    "vertex": "Slett en node fra en vei.",
+                    "line": "Slettet en linje.",
+                    "area": "Slettet et område.",
+                    "relation": "Slettet en relasjon.",
                     "multiple": "Slettet {n} kartegenskaper."
                 },
                 "too_large": {
@@ -141,11 +141,11 @@
                     "point": "Koblet en vei til et punkt.",
                     "vertex": "Koblet en vei til en annen.",
                     "line": "Koblet en vei til en linje.",
-                    "area": "Koblet en vei til et areal."
+                    "area": "Koblet en vei til et område."
                 }
             },
             "disconnect": {
-                "title": "Kobl fra",
+                "title": "Koble fra",
                 "description": "Koble disse linjene/areane fra hverandre",
                 "key": "D",
                 "annotation": "Frakoblet linjer/områder.",
@@ -154,14 +154,14 @@
                 "relation": "Denne kan ikke frakobles fordi den kobler sammen flere medlemmer av en relasjon."
             },
             "merge": {
-                "title": "Knytt sammen",
+                "title": "Slå sammen",
                 "description": "Slå sammen disse kartegenskapene.",
                 "key": "C",
                 "annotation": "{n} kartegenskaper er slått sammen.",
                 "not_eligible": "Disse kartegenskapene kan ikke bli slått sammen.",
-                "not_adjacent": "Disse objektene kan ikke bli slått sammen da ytterpunktene ikke er sammenkoblet.",
+                "not_adjacent": "Disse objektene kan ikke bli slått sammen da endepunktene ikke er sammenkoblet.",
                 "restriction": "Disse kartegenskapene kan ikke bli slått sammen fordi minst en er et medlem av en \"{relation}\" relasjon.",
-                "incomplete_relation": "Disse funksjonene kan ikke bli knyttet sammen fordi hvertfall én av dem er ikke ferdig nedlastet.",
+                "incomplete_relation": "Disse kartegenskapene kan ikke bli slått sammen fordi minst én av dem er ikke ferdig nedlastet.",
                 "conflicting_tags": "Disse kartegenskapene kan ikke bli slått sammen fordi noen av deres merker har konfliktskapende verdier."
             },
             "move": {
@@ -173,9 +173,9 @@
                 "key": "M",
                 "annotation": {
                     "point": "Flyttet et punkt.",
-                    "vertex": "Flyttet en node til en vei.",
+                    "vertex": "Flyttet en node i en vei.",
                     "line": "Flyttet en linje.",
-                    "area": "Flyttet et areal.",
+                    "area": "Flyttet et område.",
                     "multiple": "Flyttet flere kartegenskaper."
                 },
                 "incomplete_relation": {
@@ -242,7 +242,7 @@
                 "key": "R",
                 "annotation": {
                     "line": "Rotér en linje.",
-                    "area": "Rotér et areal.",
+                    "area": "Rotér et område.",
                     "multiple": "Rotér flere objekter."
                 },
                 "incomplete_relation": {
@@ -274,12 +274,12 @@
                 "key": "X",
                 "annotation": {
                     "line": "Splitt en linje",
-                    "area": "Del et områdes yttergrense.",
-                    "multiple": "Del {n} linjer/yttergrenser."
+                    "area": "Splitt et områdes yttergrense.",
+                    "multiple": "Splitt {n} linjer/yttergrenser."
                 },
-                "not_eligible": "Linjers endepunkter kan ikke deles.",
-                "multiple_ways": "Det er for mange linjer til at det kan deles.",
-                "connected_to_hidden": "Dette/denne kan ikke deles da det er koblet til et skjult objekt."
+                "not_eligible": "Linjers endepunkter kan ikke splittes.",
+                "multiple_ways": "Det er for mange linjer til at det kan splittes.",
+                "connected_to_hidden": "Dette/denne kan ikke splittes da det er koblet til et skjult objekt."
             },
             "restriction": {
                 "help": {
@@ -295,6 +295,7 @@
             }
         },
         "undo": {
+            "tooltip": "Angre: {action}",
             "nothing": "Ingen ting å gjøre."
         },
         "redo": {
@@ -329,12 +330,13 @@
             "title": "Last opp til OpenStreetMap",
             "upload_explanation": "Endringene du laster opp vil være synlige på alle kart som bruker dataene til OpenStreetMap.",
             "upload_explanation_with_user": "Endringene du laster opp som {user} vil være synlige på alle kart som bruker dataene til OpenStreetMap.",
+            "request_review": "Jeg ønsker at noen skal gjennomgå endringene mine.",
             "save": "Last opp",
             "cancel": "Avbryt",
             "changes": "{count} endringer",
             "warnings": "Advarsler",
             "modified": "Endret",
-            "deleted": "Fjernet",
+            "deleted": "Slettet",
             "created": "Opprettet",
             "about_changeset_comments": "Angående kommentarer til endringssett",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
@@ -344,6 +346,46 @@
         "contributors": {
             "list": "Redigeringer utført av {users}",
             "truncated_list": "Endringer av {users} og {count} andre"
+        },
+        "info_panels": {
+            "key": "I",
+            "background": {
+                "key": "B",
+                "title": "Bakgrunn",
+                "zoom": "Zoom",
+                "source": "Kilde",
+                "description": "Beskrivelse",
+                "resolution": "Oppløsning",
+                "accuracy": "Nøyaktighet",
+                "unknown": "Ukjent",
+                "show_tiles": "Vis fliser",
+                "hide_tiles": "Skjul fliser"
+            },
+            "history": {
+                "key": "H",
+                "title": "Historik",
+                "selected": "{n} valgt",
+                "version": "Versjon",
+                "last_edit": "Siste endring",
+                "edited_by": "Endret av",
+                "changeset": "Endringssett",
+                "unknown": "Ukjent",
+                "link_text": "Historikk på openstreetmap.org"
+            },
+            "location": {
+                "key": "L",
+                "title": "Lokasjon",
+                "unknown_location": "Ukjent lokasjon"
+            },
+            "measurement": {
+                "key": "M",
+                "title": "Måling",
+                "selected": "{n} valgt",
+                "geometry": "Geometri",
+                "closed": "lukket",
+                "length": "Lengde",
+                "area": "Område"
+            }
         },
         "geometry": {
             "point": "punkt",
@@ -374,8 +416,8 @@
             "role": "Rolle",
             "choose": "Velg egenskapstype",
             "results": "{n} resultater for {search}",
-            "reference": "Les mere på OpenStreetMap Wiki",
-            "back_tooltip": "Endre funksjon",
+            "reference": "Les mer på OpenStreetMap Wiki",
+            "back_tooltip": "Endre kartegenskap",
             "remove": "Fjern",
             "search": "Søk",
             "multiselect": "Valgte kartegenskaper",
@@ -406,24 +448,32 @@
         "background": {
             "title": "Bakgrunn",
             "description": "Bakgrunnsinnstillinger",
+            "key": "B",
             "percent_brightness": "{opacity}% lysstyrke",
             "none": "Ingen",
             "best_imagery": "Den beste ortofotokilden til denne plasseringen",
             "switch": "Bytt tilbake til denne bakgrunnen",
             "custom": "Egendefinert",
             "custom_button": "Endre egendefinert bakgrunn",
+            "custom_prompt": "Skriv inn en URL-mal. Gyldige symboler er:\n   - {zoom}/{z}, {x}, {y} for Z/X/Y flisordning\n   - {ty} for snudde Y-koordinater med TMS-stil\n   - {u} for quadtile-ordning\n   - {switch:a,b,c} for DNS server multiplexing\n\nEksempel:\n{example}",
             "fix_misalignment": "Finjuster ortofotoet",
             "imagery_source_faq": "Hvor kommer dette ortofotoet fra?",
             "reset": "tilbakestill",
             "offset": "Dra hvor som helst i det grå feltet under for justere ortofotoet. Du kan også angi justeringsverdiene i meter.",
             "minimap": {
-                "description": "Mini-kart"
+                "description": "Mini-kart",
+                "tooltip": "Vis et kart som er zoomet ut for å hjelpe med å lokalisere området som vises.",
+                "key": "/"
             }
         },
         "map_data": {
+            "title": "Kartdata",
+            "description": "Kartdata",
+            "key": "F",
             "data_layers": "Datalag",
             "fill_area": "Fyll områder",
-            "map_features": "Kartegenskaper"
+            "map_features": "Kartegenskaper",
+            "autohidden": "Disse kartegenskapene har blitt automatisk skjult fordi for mange ville blitt vist på skjermen. Du kan zoome inn for å redigere dem."
         },
         "feature": {
             "points": {
@@ -438,14 +488,15 @@
             },
             "paths": {
                 "description": "Stier",
-                "tooltip": "Fortau, gangveier, sykkelveier etc."
+                "tooltip": "Fortau, gangveier, sykkelveier osv."
             },
             "buildings": {
                 "description": "Bygninger",
-                "tooltip": "Bygninger, skur, garasjer etc."
+                "tooltip": "Bygninger, skur, garasjer osv."
             },
             "landuse": {
-                "description": "Kartegenskaper for arealbruk"
+                "description": "Kartegenskaper for arealbruk",
+                "tooltip": "Skoger, dyrket mark, parker, boligområder, kommersielle områder osv."
             },
             "boundaries": {
                 "description": "Grenser",
@@ -453,7 +504,7 @@
             },
             "water": {
                 "description": "Vannrelaterte egenskaper",
-                "tooltip": "Elver, innsjøer, bekker, badedammer etc."
+                "tooltip": "Elver, innsjøer, bekker, badedammer osv."
             },
             "rail": {
                 "description": "Jernbanerelaterte egenskaper",
@@ -461,7 +512,7 @@
             },
             "power": {
                 "description": "Kartegenskaper for kraftanlegg",
-                "tooltip": "Kraftlinjer, kraftverk etc."
+                "tooltip": "Kraftlinjer, kraftverk osv."
             },
             "others": {
                 "description": "Andre",
@@ -470,7 +521,9 @@
         },
         "area_fill": {
             "wireframe": {
-                "description": "Ingen fyll (wireframe)"
+                "description": "Ingen fyll (wireframe)",
+                "tooltip": "Ved å skru på wireframe-modus blir det enklere å se bakgrunnsbilder",
+                "key": "W"
             },
             "partial": {
                 "description": "Delvis fylt"
@@ -480,20 +533,40 @@
             }
         },
         "restore": {
-            "heading": "Du har ulagrede endringer"
+            "heading": "Du har ulagrede endringer",
+            "description": "Ønsker du å gjenopprette ulagrede endringer fra en tidligere redigeringsøkt?",
+            "restore": "Gjenopprett mine endringer",
+            "reset": "Forkast endringene mine"
         },
         "save": {
             "title": "Lagre",
+            "help": "Gå gjennom endringene dine og last dem opp til OpenStreetMap, og gjør dem synlige for andre brukere.",
             "no_changes": "Ingen endringer å lagre.",
+            "error": "Feil oppsto under lagring.",
+            "status_code": "Serveren returnerte statuskode {code}",
+            "unknown_error_details": "Sørg for at du er koblet til internett",
+            "uploading": "Laster opp endringer til OpenStreetMap...",
             "unsaved_changes": "Du har ulagrede endringer",
             "conflict": {
+                "header": "Løs opp i endringer i konflikt med dine",
+                "count": "Konflikt {num} av {total}",
                 "previous": "< Forrige",
                 "next": "Neste >",
                 "keep_local": "Behold min",
                 "keep_remote": "Bruk de andre sin",
+                "restore": "Gjenopprett",
                 "delete": "Behold som slettet",
-                "download_changes": "Eller last ned dine endringer",
-                "done": "Alle konflikter er løst!"
+                "done": "Alle konflikter er løst!",
+                "help": "En annen bruker endret noen av de samme kartegenskapene som du har endret.\nKlikk på hver kartegenskap nedenfor for å få mer informasjon om konflikten, og velge om du vil beholde\ndine endringer eller den andre brukerens endringer.\n"
+            }
+        },
+        "merge_remote_changes": {
+            "conflict": {
+                "deleted": "Denne kartegenskapen har blitt slettet av {user}.",
+                "location": "Denne kartegenskapen har blitt flyttet av både deg og {user}.",
+                "nodelist": "Noder har blitt endret av både deg og {user}.",
+                "memberlist": "Relasjonsmedlemmer har blitt endret av både deg og {user}",
+                "tags": "Du endret <b>{tag}</b>-taggen til \"{local}\" og {user} endret den til \"{remote}\"."
             }
         },
         "success": {
@@ -503,20 +576,26 @@
             "facebook": "Del på Facebook",
             "twitter": "Del på Twitter",
             "google": "Del på Google+",
-            "help_html": "Endringene dine burde vises i \"standard\" laget om et par minutter. Andre lag, og visse kartegenskaper, kan ta litt lengre tid.",
+            "help_html": "Endringene dine burde vises i \"standard\"-laget om et par minutter. Andre lag, og visse kartegenskaper, kan ta litt lengre tid.",
             "help_link_text": "Detaljer"
         },
         "confirm": {
+            "okay": "OK",
             "cancel": "Avbryt"
         },
         "splash": {
             "welcome": "Velkommen til iD OpenStreetMap editor",
+            "text": "iD er et brukervennlig, men kraftig verktøy for å bidra til verdens beste frie kart. Dette er versjon {version}. For mer informasjon, se {website} og meld om feil på {github}.",
             "walkthrough": "Begynn Gjennomgangen",
-            "start": "Rediger Nå"
+            "start": "Rediger nå"
         },
         "source_switch": {
             "live": "direkte",
-            "lose_changes": "Du har ulagrede endringer. Hvis du bytter fra kartserveren så vil du miste dem. Er du sikker på at du vil bytte server?"
+            "lose_changes": "Du har ulagrede endringer. Hvis du bytter fra kartserveren så vil du miste dem. Er du sikker på at du vil bytte server?",
+            "dev": "dev"
+        },
+        "version": {
+            "whats_new": "Hva er nytt i iD {version}"
         },
         "tag_reference": {
             "description": "Beskrivelse",
@@ -524,10 +603,17 @@
             "used_with": "brukes med {type}"
         },
         "validations": {
+            "disconnected_highway": "Koblet fra vei",
+            "disconnected_highway_tooltip": "Veier burde være koblet til andre veier eller til inngangen til bygninger.",
             "untagged_point": "Utagget punkt",
+            "untagged_point_tooltip": "Velg en kartegenskaptype som beskriver hva dette punktet er.",
             "untagged_line": "Utagget linje",
-            "untagged_area": "Utagget areal",
+            "untagged_line_tooltip": "Velg en kartegenskaptype som beskriver hva denne linjen er.",
+            "untagged_area": "Utagget område",
+            "untagged_area_tooltip": "Velg en kartegenskaptype som beskriver hva dette område er.",
             "untagged_relation": "Utagget relasjon",
+            "untagged_relation_tooltip": "Velg en kartegenskaptype som beskriver hva denne relasjonen er.",
+            "many_deletions": "Du sletter {n} kartegenskaper. Er du sikker på at du vil gjøre dette? Det vil slette dem fra kartet som alle andre ser på openstreetmap.org.",
             "tag_suggests_area": "Taggen {tag} anbefaler at linje bør være et areal, men dette er ikke et areal",
             "deprecated_tags": "Utgående tagger: {tags}"
         },
@@ -535,11 +621,33 @@
             "in": "Forstørr",
             "out": "Forminsk"
         },
+        "cannot_zoom": "Kan ikke zoome ut lenger i gjeldende modus.",
+        "full_screen": "Skru av/på fullskjerm.",
+        "gpx": {
+            "local_layer": "Lokal fil",
+            "drag_drop": "Dra og slipp en .gpx, .geojson eller .kml-fil på siden, eller trykk knappen til høyre for å bla etter fil",
+            "zoom": "Zoom til lag",
+            "browse": "Bla etter en fil"
+        },
+        "mapillary_images": {
+            "tooltip": "Bilder på gate-nivå fra Mapillary",
+            "title": "Bilde-overlegg (Mapillary)"
+        },
+        "mapillary_signs": {
+            "tooltip": "Trafikkskilt fra Mapillary (Bilde-overlegg må aktiveres)",
+            "title": "Trafikkskilt-overlegg (Mapillary)"
+        },
+        "mapillary": {
+            "view_on_mapillary": "Vis dette bildet på Mapillary"
+        },
         "help": {
-            "title": "Hjelp"
+            "title": "Hjelp",
+            "key": "H",
+            "help": "# Hjelp\n\nDette er et redigeringsverktøy for [OpenStreetMap](http://www.openstreetmap.org/),\ndet frie og redigerbare verdenskartet. Du kan bruke det til å legge til og oppdatere\ndata i ditt område, og gjøre et verdensomspennende kart med åpen kildekode og frie data\nbedre for alle.\n\nEndringer du gjør i dette kartet vil bli synlig for alle som bruker\nOpenStreetMap. For å gjøre en endring, må du\n[logge inn](https://www.openstreetmap.org/login).\n\n[Redigeringsverktøyet iD](http://ideditor.com/) er et samarbeidsprosjekt med [kildekode\ntilgjengelig på GitHub](https://github.com/openstreetmap/iD).\n"
         },
         "intro": {
             "done": "ferdig",
+            "ok": "OK",
             "graph": {
                 "block_number": "<value for addr:block_number>",
                 "county": "<value for addr:county>",
@@ -551,24 +659,241 @@
                 "state": "<value for addr:state>",
                 "subdistrict": "<value for addr:subdistrict>",
                 "suburb": "<value for addr:suburb>",
-                "countrycode": "no"
+                "countrycode": "no",
+                "name": {
+                    "1st-avenue": "1. Allé",
+                    "2nd-avenue": "2. Allé",
+                    "4th-avenue": "4. Allé",
+                    "5th-avenue": "5. Allé",
+                    "6th-avenue": "6. Allé",
+                    "6th-street": "6. Gate",
+                    "7th-avenue": "7. Allé",
+                    "8th-avenue": "8. Allé",
+                    "9th-avenue": "9. Allé",
+                    "10th-avenue": "10. Allé",
+                    "11th-avenue": "11. Allé",
+                    "12th-avenue": "12. Allé"
+                }
+            },
+            "welcome": {
+                "title": "Velkommen",
+                "welcome": "Velkommen! Denne gjennomgangen vil lære deg det grunnleggende om å redigere OpenStreetMap.",
+                "practice": "All data i denne gjennomgangen er laget for å øve deg, og ingen endringer du gjør i gjennomgangen vil bli lagret.",
+                "words": "Gjennomgangen vil introdusere noen nye ord og konsepter. Når vi introduserer et nytt ord, vil vi bruke *kursiv*.",
+                "mouse": "Du kan bruke hvilken som helst input-enhet for å redigere kartet, men gjennomgangen antar at du bruker mus med venstre og høyre museknapp. **Hvis du ønsker å koble til en mus, gjør dette nå, og klikk OK.**",
+                "leftclick": "Når denne gjennomgangen ber deg om å klikke eller dobbeltklikke, mener vi med venstre museknapp. På en museflate kan det bety et enkelt-klikk eller trykk med en enkelt finger. **Venstreklikk {num} ganger.**",
+                "rightclick": "Noen ganger ber vi deg også om å høyreklikke. Dette kan være det samme kontroll-klikk eller et trykk med to fingre på museflaten. Tastaturet ditt kan også ha en 'meny'-tast som fungerer som høyreklikk. **Høyreklikk {num} ganger.**",
+                "chapters": "Så langt, så bra! Du kan bruke knappene nedenfor for å hoppe over kapitler når som helst, eller starte et kapittel på nytt om du setter deg fast. La oss begynne! **Trykk '{next}' for å fortsette.**"
             },
             "navigation": {
-                "title": "Navigasjon"
+                "title": "Navigasjon",
+                "drag": "Hovedområdet viser OpenStreetMap-data over en bakgrunn.{br}Du kan dra kartet rundt ved å trykke og holde inn venstre museknapp mens du flytter musen rundt. Du kan også bruke piltastene på tastaturet. **Dra kartet i hvilken som helst retning!**",
+                "zoom": "Du kan forstørre/forminske (zoome) inn eller ut ved å scrolle med musehjulet eller med museflaten, eller ved å klikke {plus} / {minus}-knappene. **Zoom i kartet!**",
+                "features": "Vi bruker ordet *kartegenskaper* for å beskrive ting som finnes i kartet. Alt i den virkelige verdenen kan kartlegges som en kartegenskap på OpenStreetMap.",
+                "points_lines_areas": "Kartegenskaper er representert som *punkter, linjer eller områder.*",
+                "nodes_ways": "I OpenStreetMap kaller vi av og til punkter for *noder*, og linjer og områder for *veier*.",
+                "click_townhall": "Alle kartegenskaper kan velges ved å klikke på dem. **Klikk på punktet for å velge det.**",
+                "selected_townhall": "Bra! Punktet har nå blitt valgt. Valgte punkter vises med en pulserende glød.",
+                "editor_townhall": "Når en kartegenskap er valgt, vises *kartegenskapeditoren* ved siden av kartet.",
+                "preset_townhall": "På toppen av kartegenskapeditoren ser du kartegenskapens type. Dette punktet er en {preset}.",
+                "fields_townhall": "Den midtre delen av editoren inneholder *felter* som viser attributtene til en kartegenskap, som f.eks. navnet eller adressen til kartegenskapen.",
+                "close_townhall": "**Lukk kartegenskapeditoren ved å trykke escape, eller ved å klikke {button}-knappen i øvre hjørne.**",
+                "search_street": "Du kan også søke etter kartegenskaper i den gjeldende visningen, eller i hele verden. **Søk etter '{name}'.**",
+                "choose_street": "**Velg {name} fra listen for å velge den.**",
+                "selected_street": "Flott! {name} er nå valgt.",
+                "editor_street": "Feltene som vises for en gate er ulike feltene som vises for rådhuset.{br}For denne valgte gaten, viser kartegenskapeditoren felter som '{field1}' og '{field2}'. **Lukk kartegenskapeditoren ved å trykke escape, eller ved å klikke {button}-knappen.**",
+                "play": "Prøv å bevege på kartet og klikke på noen andre kartegenskaper for å se hva slags ting som kan legges til OpenStreetMap. **Når du er klar for å fortsette til neste kapittel, trykker du '{next}'.**"
             },
             "points": {
-                "title": "Punkter"
+                "title": "Punkter",
+                "add_point": "*Punkt* kan brukes for å representere kartegenskaper som butikker, restauranter og monumenter.{br}De markerer et bestemt sted, og beskriver hva som finnes der. **Klikk {button} punkt-knappen for å legge til nytt punkt.**",
+                "place_point": "For å plassere et nytt punkt på kartet, plasser musepekeren der punktet bør legges, og venstreklikk eller trykk mellomromtasten. **Flytt musepekeren over denne bygningen, og venstreklikk eller trykk mellomrom.**",
+                "search_cafe": "Det er mange forskjellige kartegenskaper som kan representeres med punkter. Punktet du nettopp la til er en kafé. **Søk etter '{preset}'.**",
+                "choose_cafe": "**Velg {preset} fra listen.**",
+                "feature_editor": "Punktet er nå merket som en kafé. Ved å bruke kartegenskapeditoren, kan vi legge til mer informasjon om kaféen.",
+                "add_name": "I OpenStreetMap er alle felter valgfrie, og det er greit å la et felt stå tomt om du er usikker.{br}La oss late som om du har lokal kunnskap om denne kaféen, og at du kan navnet. **Legg til et navn for kaféen.**",
+                "add_close": "Kartegenskapeditoren husker alle endringene dine automatisk. **Når du er ferdig med å legge til et navn, trykk escape, enter eller trykk {button}-knappen for å lukke kartegenskapeditoren.**",
+                "reselect": "Ofte vil punkter allerede eksistere, men inneholde feil eller være ufullstendige. Vi kan redigere eksisterende punkter. **Trykk for å velge kaféen du nettopp opprettet.**",
+                "update": "La oss fylle inn noen flere detaljer for denne kaféen. Du kan endre navnet, legge til kjøkkentype, eller legge til en adresse. **Endre detaljer om kaféen.**",
+                "update_close": "**Når du er ferdig med å oppdatere kaféen, trykk escape, enter, eller klikk {button}-knappen for å lukke kartegenskapeditoren.**",
+                "rightclick": "Du kan høyreklikke på hvilken som helst kartegenskap for å se *redigeringsmenyen*, som viser en liste over redigeringshandlinger som kan utføres. **Høyreklikk for å velge punktet du opprettet for å vise redigeringsmenyen.**",
+                "delete": "Det er greit å slette kartegenskaper som ikke finnes i den virkelige verden.{br}Ved å slette en kartegenskap fra OpenStreetMap, fjernes den fra kartet som alle bruker, så du bør forsikre deg om at kartegenskapen virkelig ikke finnes lengre før du sletter den. **Klikk på {button}-knappen for slette punktet.**",
+                "undo": "Du kan alltid angre endringer helt fram til du lagrer endringene dine i OpenStreetMap. **Trykk på {button}-knappen for å angre slettingen og få punktet tilbake.**",
+                "play": "Nå som du kan legge til og slette punkter, prøv å legge til noen flere punkt for øvingens skyld! **Når du er klar til å gå til neste kapittel, trykk '{next}'.**"
             },
             "areas": {
-                "title": "Områder"
+                "title": "Områder",
+                "add_playground": "*Områder* brukes for å avgrense kartegenskaper som innsjøer, bygninger og boligfelt.{br}De kan også brukes for detaljert kartlegging av kartegenskaper du vanligvis ville kartlagt som punkter. **Trykk på {button} Område-knappen for å lage et nytt område.**",
+                "start_playground": "La oss legge til denne lekeplassen i kartet ved å tegne et område. Områder tegnes ved å plassere *noder* langs ytterkanten av kartegenskapen. **Klikk eller trykk mellomromtasten for å plassere en startnode på et av hjørnene til lekeplassen.**",
+                "continue_playground": "Fortsett å tegne område ved å plassere flere noder langs lekeplassens ytterkant. Det er greit å koble området til eksisterende gangveier.{br}Tips: Du kan holde inne '{alt}'-tasten for å forhindre noder fra å kobles sammen med andre kartegenskaper. **Fortsett med å tegne et område for lekeplassen.**",
+                "finish_playground": "Avslutt området ved å trykke enter, eller å klikke igjen på den første eller siste noden. **Fullfør tegningen av området for lekeplassen.**",
+                "search_playground": "**Søk etter '{preset}'.**",
+                "choose_playground": "**Velg {preset} fra listen.**",
+                "add_field": "Denne lekeplassen har ikke noe offisielt navn, så vi legger ikke til noe i Navn-feltet.{br}I stedet kan vi legge til noe tilleggsinformasjon om lekeplassen i Beskrivelse-feltet. **Åpne Legg til felt-listen.**",
+                "choose_field": "**Velg {field} fra listen.**",
+                "retry_add_field": "Du valgte ikke {field}-feltet. Prøv på nytt.",
+                "describe_playground": "**Legg til en beskrivelse, og klikk deretter {button}-knappen for å lukke kartegenskapeditoren.**",
+                "play": "Godt jobbet! Prøv å tegne noen flere områder, og se hva slags andre typer områder du kan legge til i OpenStreetMap. **Når du er klar for å fortsette til neste kapittel, trykker du '{next}'.**"
             },
             "lines": {
-                "title": "Linjer"
+                "title": "Linjer",
+                "add_line": "*Linjer* brukes for å representere egenskaper som veier, jernbaner og elver. **Trykk {button} Linje-knappen for å lage en ny linje.**",
+                "start_line": "Her er det en vei som mangler. La oss legge den til!{br}I OpenStreetMap bør linjer tegnes langs midten av veien. Du kan dra kartet rundt og zoome mens du tegner om det er nødvendig. **Start en ny linje ved å klikke på toppen av den manglende veien.**",
+                "intersect": "Klikk eller trykk mellomromtasten for å legge til flere noder til linjen.{br}Veier, og mange andre typer veier, er en del av et større nettverk. Derfor er det viktig at linjene er koble sammen skikkelig for at rutingapplikasjoner skal fungere. **Klikk på {name} for å opprette et veikryss som forbinder de to linjene.**",
+                "retry_intersect": "Veien må kobles sammen med {name}. Prøv på nytt!",
+                "continue_line": "Fortsett å tegne linjen for den nye veien. Husk at du kan dra kartet rundt og zoome om det er nødvendig.{br}Når du er ferdig med å tegne, klikker du på den siste noden igjen. **Fullfør tegningen av veien.**",
+                "choose_category_road": "**Velg {category} fra listen.**",
+                "choose_preset_residential": "Det finnes mange typer veier, men dette er en boligvei. **Velg {preset}-typen.**",
+                "retry_preset_residential": "Du valgte ikke typen {preset}. **Klikk her for å velge igjen.**",
+                "name_road": "**Gi denne veien et navn og klikk deretter på escape, enter, eller klikk {button}-knappen for å lukke kartegenskapeditoren.**",
+                "did_name_road": "Det ser bra ut! Nå skal vi lære hvordan vi kan endre på formen til en linje.",
+                "update_line": "Noen ganger må du endre på formen til en eksisterende linje. Her ser du en vei som ikke ser helt riktig ut.",
+                "add_node": "Vi kan legge til noen noder til veien for å forbedre formen. En måte å legge til noder, er å dobbeltklikke linjen der du vil legge til en node. **Dobbeltklikk på linjen for å legge til en ny node.**",
+                "start_drag_endpoint": "Når en linje er valgt, kan du dra hvilken som helst av dens noder ved å klikke og holde inne venstre museknapp mens du flytter på musa. **Dra endepunktet til stedet der veien bør møtes.**",
+                "finish_drag_endpoint": "Dette stedet ser bra ut. **Slipp venstre museknapp for å fullføre flyttingen.**",
+                "start_drag_midpoint": "Det er små trekanter på *midtpunkter* mellom noder. En annen måte å lage en ny node på, er å dra et midtpunkt til et nytt sted. **Dra midpunkttrekanten for å lage en ny node langs veiens kurve.**",
+                "continue_drag_midpoint": "Denne linjen ser mye bedre ut! Fortsett med å justere linjen ved å dobbeltklikke eller å dra midtpunkter fram til at kurven samsvarer med formen på veien. **Når du er fornøyd med hvordan linjen ser ut, klikker du OK.**",
+                "delete_lines": "Det er greit å slette linjer for veier som ikke finnes i den virkelige verden.{br}Her er et eksempel hvor byen planla en {street}, men aldri bygde den. Vi kan forbedre denne delen av kartet ved å slette de ekstra linjene.",
+                "rightclick_intersection": "Den siste virkelige veien er {street1}, så vi vil *splitte* {street2} ved dette krysset og fjerne alt som ligger over den. **Høyreklikk på noden i krysset.**",
+                "split_intersection": "**Klikk på {button}-knappen for å splitte {street}.**",
+                "retry_split": "Du klikket ikke Splitt-knappen. Prøv igjen.",
+                "did_split_multi": "Flott! {street1} er nå splittet i to deler. Den øverste delen kan fjernes. **Klikk på den øvre delen av {street2} for å velge den.**",
+                "did_split_single": "**Klikk på den øvre delen av {street2} for å velge den.**",
+                "multi_select": "{selected} er nå valgt. La oss også velge {other1}. Du kan shift-klikke for å velge flere ting. **Hold inne shift mens du klikker på {other2}.**",
+                "multi_rightclick": "Bra! Begge linjene du vil fjerne er nå valgt. **Høyreklikk på en av linjene for å vise redigeringsmenyen.**",
+                "multi_delete": "**Trykk på {button}-knappen for å slette de ekstra linjene.**",
+                "retry_delete": "Du trykket ikke på Slett-knappen. Prøv igjen.",
+                "play": "Flott! Bruk ferdighetene du har lært deg i dette kapittelet til å øve deg med å redigere noen flere linjer. **Når du er klar til å fortsette til neste kapittel, trykker du '{next}'.**"
+            },
+            "buildings": {
+                "title": "Bygninger",
+                "add_building": "OpenStreetMap er verdens største databaser over bygninger.{br}Du kan hjelpe til med å forbedre denne databasen ved å tegne inn bygninger som ikke allerede har blitt kartlagt. **Trykk på {button} Område-knappen for å tegne et nytt område.**",
+                "start_building": "La oss legge til dette huset til kartet ved å tegne langs bygningens ytterkant.{br}Bygninger bør tegnes langs ytterveggene så nøyaktig som mulig. **Klikk er trykk mellomromtasten for å plassere en startnode på en av hjørnene til bygningen.**",
+                "continue_building": "Fortsett med å legge til flere noder for å tegne ytterkanten av bygningen. Husk at du kan zoome inn om du ønsker flere detaljer.{br}Fullfør bygningen ved å trykke enter, eller å trykke igjen på den første eller siste noden. **Fullfør bygningen.**",
+                "retry_building": "Det ser ut til at du hadde noen problemer med å plassere nodene på hjørnene av bygningen. Prøv igjen!",
+                "choose_category_building": "**Velg {category} fra listen.**",
+                "choose_preset_house": "Det finnes mange typer bygningen, men denne er opplagt et hus.{br}Om du ikke er sikker på typen, er det greit å bare velge den generelle typen Bygning. **Velg typen {preset}.**",
+                "close": "**Trykk escape eller på {button}-knappen for å lukke kartegenskapeditoren.**",
+                "rightclick_building": "**Høyreklikk for å velge bygningen du opprettet og vise redigeringsmenyen.**",
+                "square_building": "Huset du nettopp la til ville sett enda bedre ut om hjørnene var helt rette. **Trykk på {button}-knappen for å lage rette hjørner på bygningsområdet.**",
+                "retry_square": "Du trykket ikke på Rett hjørner-knappen. Prøv igjen.",
+                "done_square": "Så du hvordan hjørnene på bygningen ble flyttet slik at de ble helt rette? La oss lære et annet nyttig triks.",
+                "add_tank": "Nå skal vi tegne denne runde oppbevaringstanken. **Trykk på {button} Område-knappen for å lage et nytt område.**",
+                "start_tank": "Ikke vær så nøye med å tegne en perfekt sirkel. Bare tegn et område inni tanken som berører tankens ytterkanter. **Klikk eller trykk mellomromtasten for å plassere en startnode på ytterkanten av tanken.**",
+                "continue_tank": "Legg til noen flere noder langs kanten Sirkelen vil opprettes utenfor nodene du tegner.{br}Avslutt området ved å trykke enter, eller å trykke igjen på enten den første eller siste nodes. **Fullfør tegningen av tanken.**",
+                "search_tank": "**Søk etter '{preset}'.**",
+                "choose_tank": "**Velg {preset} fra listen.**",
+                "rightclick_tank": "**Høyreklikk for å velge oppbevaringstanken du nettopp lagde og vise redigeringsmenyen.**",
+                "circle_tank": "**Trykk på {button}-knappen for å gjøre tanken rund.**",
+                "retry_circle": "Du trykket ikke på Gjør rund-knappen. Prøv igjen.",
+                "play": "Bra! Prøv å tegne inn flere bygninger, og prøv noen av de andre handlingene i redigeringsmenyen. **Når du er klar til å fortsette til neste kapittel, trykker du  '{next}'.**"
             },
             "startediting": {
                 "title": "Begynn redigeringen",
+                "help": "Nå er du klar til å redigere OpenStreetMap!{br}Du kan starte denne gjennomgangen igjen når som helst eller se dokumentasjonen ved å trykke på {button} Hjelp-knappen eller ved å trykke '{key}'-tasten.",
+                "shortcuts": "Du kan se en liste over mulige handlinger og deres tilhørende tastatursnarveier ved å trykke '{key}'-tasten.",
                 "save": "Ikke glem å lagre endringene dine innimellom!",
                 "start": "Begynn kartredigeringen!"
+            }
+        },
+        "shortcuts": {
+            "title": "Tastatursnarveier",
+            "tooltip": "Viser oversikten over tastatursnarveier.",
+            "toggle": {
+                "key": "?"
+            },
+            "key": {
+                "alt": "Alt",
+                "backspace": "Backspace",
+                "cmd": "Cmd",
+                "ctrl": "Ctrl",
+                "delete": "Delete",
+                "del": "Del",
+                "end": "End",
+                "enter": "Enter",
+                "esc": "Esc",
+                "home": "Home",
+                "option": "Option",
+                "pause": "Pause",
+                "pgdn": "PgDn",
+                "pgup": "PgUp",
+                "return": "Retur",
+                "shift": "Shift",
+                "space": "Mellomrom"
+            },
+            "gesture": {
+                "drag": "dra"
+            },
+            "or": "-eller-",
+            "browsing": {
+                "title": "Bla gjennom",
+                "navigation": {
+                    "title": "Navigasjon",
+                    "pan": "Flytt kartet",
+                    "pan_more": "Flytt kartet med en hel skjermstørrelse",
+                    "zoom": "Zoom inn / Zoom ut",
+                    "zoom_more": "Zoom inn / zoom ut mye"
+                },
+                "help": {
+                    "title": "Hjelp",
+                    "help": "Hvis hjelp/dokumentasjon",
+                    "keyboard": "Vis tastatursnarveier"
+                },
+                "display_options": {
+                    "title": "Vis alternativer",
+                    "background": "Vis bakgrunnsalternativer",
+                    "background_switch": "Bytt til siste bakgrunn",
+                    "map_data": "Vis alternativer for kartdata",
+                    "fullscreen": "Gå inn i fullskjermmodus",
+                    "wireframe": "Skru av/på wireframe-modus",
+                    "minimap": "Vis mini-kart"
+                },
+                "selecting": {
+                    "title": "Velger kartegenskaper",
+                    "select_one": "Velg en enkelt kartegenskap",
+                    "select_multi": "Velg flere kartegenskaper",
+                    "lasso": "Dra en seleksjonslasso rundt kartegenskaper"
+                },
+                "with_selected": {
+                    "title": "Med valgte kartegenskaper",
+                    "edit_menu": "Vis/skjul redigeringsmeny"
+                },
+                "vertex_selected": {
+                    "title": "Med valgt node",
+                    "previous": "Hopp til siste node",
+                    "next": "Hopp til neste node",
+                    "first": "Hopp til første node",
+                    "last": "Hopp til siste node"
+                }
+            },
+            "editing": {
+                "title": "Redigerer",
+                "operations": {
+                    "title": "Operasjoner",
+                    "continue_line": "Fortsett en linje på det valgte punktet",
+                    "reverse": "Reverser en linje",
+                    "move": "Flytt valgte kartegenskaper",
+                    "rotate": "Rotér valgte kartegenskaper",
+                    "orthogonalize": "Rett ut linje / rett ut områdehjørner",
+                    "circularize": "Gjør en lukket linje eller område rundt",
+                    "reflect_long": "Speilvend kartegenskaper om sine lange akser",
+                    "reflect_short": "Speilvend kartegenskaper om sinde korte akser",
+                    "delete": "Slett valge kartegenskaper"
+                },
+                "commands": {
+                    "title": "Kommandoer",
+                    "copy": "Kopier valgte kartegenskaper",
+                    "paste": "Lim inn kopierte kartegenskaper",
+                    "undo": "Angre siste handling",
+                    "redo": "Gjør om siste handling",
+                    "save": "Lagre endringer"
+                }
+            },
+            "tools": {
+                "title": "Verktøy",
+                "info": {
+                    "title": "Informasjon"
+                }
             }
         },
         "presets": {
@@ -647,9 +972,6 @@
                 },
                 "access_simple": {
                     "label": "Tillatt for"
-                },
-                "access_toilets": {
-                    "label": "Tilgang"
                 },
                 "address": {
                     "label": "Adresse",
@@ -1633,9 +1955,6 @@
                 },
                 "craft/clockmaker": {
                     "name": "Klokkemaker"
-                },
-                "craft/confectionery": {
-                    "name": "Konfektmaker"
                 },
                 "craft/dressmaker": {
                     "name": "Syer/syerske"
@@ -2746,6 +3065,17 @@
                 },
                 "waterway/stream": {
                     "name": "Bekk"
+                }
+            }
+        },
+        "imagery": {
+            "Bing": {
+                "description": "Flyfoto og satellitt-ortofoto.",
+                "name": "Bing ortofoto"
+            },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "Vilkår og tilbakemelding"
                 }
             }
         }

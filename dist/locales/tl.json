@@ -450,7 +450,6 @@
                 "keep_remote": "Gamitin ang sa kanila.",
                 "restore": "Ibalik",
                 "delete": "Iwanang naka-delete",
-                "download_changes": "O i-download ang iyong mga pagbabago.",
                 "done": "Lahat ng hindi magkakatugma ay nalutas na!",
                 "help": "Isa pang user ang nagpalit ng parehong tumpok ng mapa na pinalit mo rin.\nI-click ang bawat tumpok para sa mga detalye ng hindi pagkakatugma, at piliin kung\npanatilihin\nang binago mo o binago ng iba.\n"
             }
@@ -633,9 +632,6 @@
                 },
                 "access_simple": {
                     "label": "Pinapayagan ng access"
-                },
-                "access_toilets": {
-                    "label": "Access"
                 },
                 "address": {
                     "label": "Address",

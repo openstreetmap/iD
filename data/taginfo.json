@@ -141,6 +141,10 @@
         },
         {
             "key": "amenity",
+            "value": "scrapyard"
+        },
+        {
+            "key": "amenity",
             "value": "swimming_pool"
         },
         {
@@ -478,10 +482,6 @@
         {
             "key": "amenity",
             "value": "school"
-        },
-        {
-            "key": "amenity",
-            "value": "scrapyard"
         },
         {
             "key": "amenity",
@@ -1520,6 +1520,10 @@
         },
         {
             "key": "landuse",
+            "value": "brownfield"
+        },
+        {
+            "key": "landuse",
             "value": "cemetery"
         },
         {
@@ -1556,11 +1560,23 @@
         },
         {
             "key": "landuse",
+            "value": "greenfield"
+        },
+        {
+            "key": "landuse",
             "value": "harbour"
         },
         {
             "key": "landuse",
             "value": "industrial"
+        },
+        {
+            "key": "industrial",
+            "value": "scrap_yard"
+        },
+        {
+            "key": "industrial",
+            "value": "slaughterhouse"
         },
         {
             "key": "landuse",
@@ -1755,6 +1771,10 @@
         },
         {
             "key": "sport",
+            "value": "boules"
+        },
+        {
+            "key": "sport",
             "value": "bowls"
         },
         {
@@ -1804,6 +1824,10 @@
         {
             "key": "sport",
             "value": "running"
+        },
+        {
+            "key": "leisure",
+            "value": "sauna"
         },
         {
             "key": "leisure",
@@ -2194,6 +2218,10 @@
         },
         {
             "key": "place",
+            "value": "islet"
+        },
+        {
+            "key": "place",
             "value": "isolated_dwelling"
         },
         {
@@ -2203,6 +2231,10 @@
         {
             "key": "place",
             "value": "neighbourhood"
+        },
+        {
+            "key": "place",
+            "value": "plot"
         },
         {
             "key": "place",
@@ -2853,11 +2885,19 @@
         },
         {
             "key": "shop",
+            "value": "tiles"
+        },
+        {
+            "key": "shop",
             "value": "tobacco"
         },
         {
             "key": "shop",
             "value": "toys"
+        },
+        {
+            "key": "shop",
+            "value": "trade"
         },
         {
             "key": "shop",

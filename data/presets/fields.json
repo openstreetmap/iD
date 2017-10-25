@@ -311,6 +311,11 @@
             "type": "typeCombo",
             "label": "Type"
         },
+        "boules": {
+            "key": "boules",
+            "type": "typeCombo",
+            "label": "Type"
+        },
         "boundary": {
             "key": "boundary",
             "type": "combo",
@@ -589,6 +594,12 @@
             "label": "Description",
             "universal": true
         },
+        "devices": {
+            "key": "devices",
+            "type": "number",
+            "label": "Number of Devices",
+            "placeholder": "1, 2, 3..."
+        },
         "diaper": {
             "key": "diaper",
             "type": "combo",
@@ -739,6 +750,11 @@
             "type": "typeCombo",
             "label": "Type",
             "placeholder": "Default"
+        },
+        "frequency": {
+            "key": "frequency",
+            "type": "combo",
+            "label": "Operating Frequency"
         },
         "fuel_multi": {
             "key": "fuel:",
@@ -1316,6 +1332,12 @@
             "type": "multiCombo",
             "label": "Payment Types"
         },
+        "phases": {
+            "key": "phases",
+            "type": "number",
+            "label": "Number of Phases",
+            "placeholder": "1, 2, 3..."
+        },
         "phone": {
             "key": "phone",
             "type": "tel",
@@ -1434,6 +1456,12 @@
             "key": "railway",
             "type": "typeCombo",
             "label": "Type"
+        },
+        "rating": {
+            "key": "rating",
+            "type": "combo",
+            "label": "Power Rating",
+            "snake_case": false
         },
         "recycling_accepts": {
             "key": "recycling:",
@@ -1806,6 +1834,11 @@
             "type": "combo",
             "label": "Type"
         },
+        "substance": {
+            "key": "substance",
+            "type": "combo",
+            "label": "Substance"
+        },
         "substation": {
             "key": "substation",
             "type": "typeCombo",
@@ -1927,6 +1960,11 @@
                 }
             }
         },
+        "trade": {
+            "key": "trade",
+            "type": "typeCombo",
+            "label": "Type"
+        },
         "traffic_calming": {
             "key": "traffic_calming",
             "type": "typeCombo",
@@ -1951,6 +1989,23 @@
                     "bad": "Bad: no markers, path sometimes invisible/pathless",
                     "horrible": "Horrible: often pathless, some orientation skills required",
                     "no": "No: pathless, excellent orientation skills required"
+                }
+            }
+        },
+        "transformer": {
+            "key": "transformer",
+            "type": "combo",
+            "label": "Type of Transformer",
+            "strings": {
+                "options": {
+                    "distribution": "Distribution",
+                    "generator": "Generator",
+                    "converter": "Converter",
+                    "traction": "Traction",
+                    "auto": "Autotransformer",
+                    "phase_angle_regulator": "Phase Angle Regulator",
+                    "auxiliary": "Auxiliarty",
+                    "yes": "Unknown"
                 }
             }
         },
@@ -2005,6 +2060,21 @@
                     "scoria": "Scoria"
                 }
             }
+        },
+        "voltage/primary": {
+            "key": "voltage:primary",
+            "type": "combo",
+            "label": "Primary Voltage"
+        },
+        "voltage/secondary": {
+            "key": "voltage:secondary",
+            "type": "combo",
+            "label": "Secondary Voltage"
+        },
+        "voltage/tertiary": {
+            "key": "voltage:tertiary",
+            "type": "combo",
+            "label": "Tertiary Voltage"
         },
         "wall": {
             "key": "wall",
@@ -2066,6 +2136,28 @@
             "icon": "wikipedia",
             "universal": true,
             "label": "Wikipedia"
+        },
+        "windings": {
+            "key": "windings",
+            "type": "number",
+            "label": "Number of Windings",
+            "placeholder": "1, 2, 3..."
+        },
+        "windings/configuration": {
+            "key": "windings:configuration",
+            "type": "combo",
+            "label": "Windings Configuration",
+            "strings": {
+                "options": {
+                    "star": "Star / Wye",
+                    "delta": "Delta",
+                    "open-delta": "Open Delta",
+                    "zigzag": "Zig Zag",
+                    "open": "Open",
+                    "scott": "Scott",
+                    "leblanc": "Leblanc"
+                }
+            }
         }
     }
 }

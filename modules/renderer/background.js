@@ -91,7 +91,7 @@ export function rendererBackground(context) {
 
         var gpx = context.layers().layer('gpx');
         if (gpx && gpx.enabled() && gpx.hasGpx()) {
-            imageryUsed.push('Local GPX');
+            imageryUsed.push(gpx.getSrc());
         }
 
         var mapillary_images = context.layers().layer('mapillary-images');

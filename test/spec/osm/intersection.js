@@ -18,7 +18,8 @@ describe('iD.osmIntersection', function() {
                 iD.Way({id: '=', nodes: ['u', '*'], tags: {highway: 'residential'}}),
                 iD.Way({id: '-', nodes: ['*'], tags: {highway: 'residential'}})
             ]);
-            expect(_.map(iD.osmIntersection(graph, '*').ways, 'id')).to.eql(['=']);
+            var ids = iD.osmIntersection(graph, '*').ways.map(function (w) { return w.id; });
+            expect(ids).to.have.same.members(['=']);
         });
 
         it('excludes coincident highways', function() {
@@ -39,7 +40,8 @@ describe('iD.osmIntersection', function() {
                 iD.Way({id: '=', nodes: ['u', '*'], tags: {highway: 'residential'}}),
                 iD.Way({id: '-', nodes: ['*', 'w']})
             ]);
-            expect(_.map(iD.osmIntersection(graph, '*').ways, 'id')).to.eql(['=']);
+            var ids = iD.osmIntersection(graph, '*').ways.map(function (w) { return w.id; });
+            expect(ids).to.have.same.members(['=']);
         });
 
         it('excludes area highways', function() {
@@ -59,7 +61,8 @@ describe('iD.osmIntersection', function() {
                 iD.Node({id: 'w'}),
                 iD.Way({id: '=', nodes: ['u', '*', 'w'], tags: {highway: 'residential'}})
             ]);
-            expect(_.map(iD.osmIntersection(graph, '*').ways, 'id')).to.eql(['=-a', '=-b']);
+            var ids = iD.osmIntersection(graph, '*').ways.map(function (w) { return w.id; });
+            expect(ids).to.have.ordered.members(['=-a', '=-b']);
         });
     });
 

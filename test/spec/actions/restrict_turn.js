@@ -21,9 +21,12 @@ describe('iD.actionRestrictTurn', function() {
 
         var r = graph.entity('r');
         expect(r.tags).to.eql({type: 'restriction', restriction: 'no_right_turn'});
-        expect(_.pick(r.memberByRole('from'), 'id', 'type')).to.eql({id: '=', type: 'way'});
-        expect(_.pick(r.memberByRole('via'), 'id', 'type')).to.eql({id: '*', type: 'node'});
-        expect(_.pick(r.memberByRole('to'), 'id', 'type')).to.eql({id: '-', type: 'way'});
+        expect(r.memberByRole('from').id).to.eql('=');
+        expect(r.memberByRole('from').type).to.eql('way');
+        expect(r.memberByRole('via').id).to.eql('*');
+        expect(r.memberByRole('via').type).to.eql('node');
+        expect(r.memberByRole('to').id).to.eql('-');
+        expect(r.memberByRole('to').type).to.eql('way');
     });
 
     it('splits the from way when necessary (forward)', function() {
@@ -49,9 +52,12 @@ describe('iD.actionRestrictTurn', function() {
 
         var r = graph.entity('r');
         expect(r.tags).to.eql({type: 'restriction', restriction: 'no_right_turn'});
-        expect(_.pick(r.memberByRole('from'), 'id', 'type')).to.eql({id: '=', type: 'way'});
-        expect(_.pick(r.memberByRole('via'), 'id', 'type')).to.eql({id: '*', type: 'node'});
-        expect(_.pick(r.memberByRole('to'), 'id', 'type')).to.eql({id: '-', type: 'way'});
+        expect(r.memberByRole('from').id).to.eql('=');
+        expect(r.memberByRole('from').type).to.eql('way');
+        expect(r.memberByRole('via').id).to.eql('*');
+        expect(r.memberByRole('via').type).to.eql('node');
+        expect(r.memberByRole('to').id).to.eql('-');
+        expect(r.memberByRole('to').type).to.eql('way');
     });
 
     it('splits the from way when necessary (backward)', function() {
@@ -77,9 +83,12 @@ describe('iD.actionRestrictTurn', function() {
 
         var r = graph.entity('r');
         expect(r.tags).to.eql({type: 'restriction', restriction: 'no_left_turn'});
-        expect(_.pick(r.memberByRole('from'), 'id', 'type')).to.eql({id: '==', type: 'way'});
-        expect(_.pick(r.memberByRole('via'), 'id', 'type')).to.eql({id: '*', type: 'node'});
-        expect(_.pick(r.memberByRole('to'), 'id', 'type')).to.eql({id: '-', type: 'way'});
+        expect(r.memberByRole('from').id).to.eql('==');
+        expect(r.memberByRole('from').type).to.eql('way');
+        expect(r.memberByRole('via').id).to.eql('*');
+        expect(r.memberByRole('via').type).to.eql('node');
+        expect(r.memberByRole('to').id).to.eql('-');
+        expect(r.memberByRole('to').type).to.eql('way');
     });
 
     it('splits the from way when necessary (straight on forward)', function() {
@@ -105,9 +114,12 @@ describe('iD.actionRestrictTurn', function() {
 
         var r = graph.entity('r');
         expect(r.tags).to.eql({type: 'restriction', restriction: 'no_straight_on'});
-        expect(_.pick(r.memberByRole('from'), 'id', 'type')).to.eql({id: '=', type: 'way'});
-        expect(_.pick(r.memberByRole('via'), 'id', 'type')).to.eql({id: '*', type: 'node'});
-        expect(_.pick(r.memberByRole('to'), 'id', 'type')).to.eql({id: '==', type: 'way'});
+        expect(r.memberByRole('from').id).to.eql('=');
+        expect(r.memberByRole('from').type).to.eql('way');
+        expect(r.memberByRole('via').id).to.eql('*');
+        expect(r.memberByRole('via').type).to.eql('node');
+        expect(r.memberByRole('to').id).to.eql('==');
+        expect(r.memberByRole('to').type).to.eql('way');
     });
 
     it('splits the from way when necessary (straight on backward)', function() {
@@ -133,9 +145,12 @@ describe('iD.actionRestrictTurn', function() {
 
         var r = graph.entity('r');
         expect(r.tags).to.eql({type: 'restriction', restriction: 'no_straight_on'});
-        expect(_.pick(r.memberByRole('from'), 'id', 'type')).to.eql({id: '==', type: 'way'});
-        expect(_.pick(r.memberByRole('via'), 'id', 'type')).to.eql({id: '*', type: 'node'});
-        expect(_.pick(r.memberByRole('to'), 'id', 'type')).to.eql({id: '=', type: 'way'});
+        expect(r.memberByRole('from').id).to.eql('==');
+        expect(r.memberByRole('from').type).to.eql('way');
+        expect(r.memberByRole('via').id).to.eql('*');
+        expect(r.memberByRole('via').type).to.eql('node');
+        expect(r.memberByRole('to').id).to.eql('=');
+        expect(r.memberByRole('to').type).to.eql('way');
     });
 
     it('splits the from way when necessary (vertex closes from)', function() {
@@ -164,9 +179,12 @@ describe('iD.actionRestrictTurn', function() {
 
         var r = graph.entity('r');
         expect(r.tags).to.eql({type: 'restriction', restriction: 'no_left_turn'});
-        expect(_.pick(r.memberByRole('from'), 'id', 'type')).to.eql({id: '--', type: 'way'});
-        expect(_.pick(r.memberByRole('via'), 'id', 'type')).to.eql({id: '*', type: 'node'});
-        expect(_.pick(r.memberByRole('to'), 'id', 'type')).to.eql({id: '=', type: 'way'});
+        expect(r.memberByRole('from').id).to.eql('--');
+        expect(r.memberByRole('from').type).to.eql('way');
+        expect(r.memberByRole('via').id).to.eql('*');
+        expect(r.memberByRole('via').type).to.eql('node');
+        expect(r.memberByRole('to').id).to.eql('=');
+        expect(r.memberByRole('to').type).to.eql('way');
     });
 
     it('splits the from/to way when necessary (vertex closes from/to)', function() {
@@ -195,9 +213,12 @@ describe('iD.actionRestrictTurn', function() {
 
         var r = graph.entity('r');
         expect(r.tags).to.eql({type: 'restriction', restriction: 'no_left_turn'});
-        expect(_.pick(r.memberByRole('from'), 'id', 'type')).to.eql({id: '-', type: 'way'});
-        expect(_.pick(r.memberByRole('via'), 'id', 'type')).to.eql({id: '*', type: 'node'});
-        expect(_.pick(r.memberByRole('to'), 'id', 'type')).to.eql({id: '--', type: 'way'});
+        expect(r.memberByRole('from').id).to.eql('-');
+        expect(r.memberByRole('from').type).to.eql('way');
+        expect(r.memberByRole('via').id).to.eql('*');
+        expect(r.memberByRole('via').type).to.eql('node');
+        expect(r.memberByRole('to').id).to.eql('--');
+        expect(r.memberByRole('to').type).to.eql('way');
     });
 
     it('splits the to way when necessary (forward)', function() {
@@ -223,9 +244,12 @@ describe('iD.actionRestrictTurn', function() {
 
         var r = graph.entity('r');
         expect(r.tags).to.eql({type: 'restriction', restriction: 'no_right_turn'});
-        expect(_.pick(r.memberByRole('from'), 'id', 'type')).to.eql({id: '-', type: 'way'});
-        expect(_.pick(r.memberByRole('via'), 'id', 'type')).to.eql({id: '*', type: 'node'});
-        expect(_.pick(r.memberByRole('to'), 'id', 'type')).to.eql({id: '==', type: 'way'});
+        expect(r.memberByRole('from').id).to.eql('-');
+        expect(r.memberByRole('from').type).to.eql('way');
+        expect(r.memberByRole('via').id).to.eql('*');
+        expect(r.memberByRole('via').type).to.eql('node');
+        expect(r.memberByRole('to').id).to.eql('==');
+        expect(r.memberByRole('to').type).to.eql('way');
     });
 
     it('splits the to way when necessary (backward)', function() {
@@ -251,9 +275,12 @@ describe('iD.actionRestrictTurn', function() {
 
         var r = graph.entity('r');
         expect(r.tags).to.eql({type: 'restriction', restriction: 'no_left_turn'});
-        expect(_.pick(r.memberByRole('from'), 'id', 'type')).to.eql({id: '-', type: 'way'});
-        expect(_.pick(r.memberByRole('via'), 'id', 'type')).to.eql({id: '*', type: 'node'});
-        expect(_.pick(r.memberByRole('to'), 'id', 'type')).to.eql({id: '=', type: 'way'});
+        expect(r.memberByRole('from').id).to.eql('-');
+        expect(r.memberByRole('from').type).to.eql('way');
+        expect(r.memberByRole('via').id).to.eql('*');
+        expect(r.memberByRole('via').type).to.eql('node');
+        expect(r.memberByRole('to').id).to.eql('=');
+        expect(r.memberByRole('to').type).to.eql('way');
     });
 
     it('splits the to way when necessary (vertex closes to)', function() {
@@ -282,9 +309,12 @@ describe('iD.actionRestrictTurn', function() {
 
         var r = graph.entity('r');
         expect(r.tags).to.eql({type: 'restriction', restriction: 'no_right_turn'});
-        expect(_.pick(r.memberByRole('from'), 'id', 'type')).to.eql({id: '=', type: 'way'});
-        expect(_.pick(r.memberByRole('via'), 'id', 'type')).to.eql({id: '*', type: 'node'});
-        expect(_.pick(r.memberByRole('to'), 'id', 'type')).to.eql({id: '--', type: 'way'});
+        expect(r.memberByRole('from').id).to.eql('=');
+        expect(r.memberByRole('from').type).to.eql('way');
+        expect(r.memberByRole('via').id).to.eql('*');
+        expect(r.memberByRole('via').type).to.eql('node');
+        expect(r.memberByRole('to').id).to.eql('--');
+        expect(r.memberByRole('to').type).to.eql('way');
     });
 
     it('splits the from/to way of a U-turn (forward)', function() {
@@ -310,9 +340,12 @@ describe('iD.actionRestrictTurn', function() {
 
         var r = graph.entity('r');
         expect(r.tags).to.eql({type: 'restriction', restriction: 'no_u_turn'});
-        expect(_.pick(r.memberByRole('from'), 'id', 'type')).to.eql({id: '=', type: 'way'});
-        expect(_.pick(r.memberByRole('via'), 'id', 'type')).to.eql({id: '*', type: 'node'});
-        expect(_.pick(r.memberByRole('to'), 'id', 'type')).to.eql({id: '=', type: 'way'});
+        expect(r.memberByRole('from').id).to.eql('=');
+        expect(r.memberByRole('from').type).to.eql('way');
+        expect(r.memberByRole('via').id).to.eql('*');
+        expect(r.memberByRole('via').type).to.eql('node');
+        expect(r.memberByRole('to').id).to.eql('=');
+        expect(r.memberByRole('to').type).to.eql('way');
     });
 
     it('splits the from/to way of a U-turn (backward)', function() {
@@ -338,9 +371,12 @@ describe('iD.actionRestrictTurn', function() {
 
         var r = graph.entity('r');
         expect(r.tags).to.eql({type: 'restriction', restriction: 'no_u_turn'});
-        expect(_.pick(r.memberByRole('from'), 'id', 'type')).to.eql({id: '==', type: 'way'});
-        expect(_.pick(r.memberByRole('via'), 'id', 'type')).to.eql({id: '*', type: 'node'});
-        expect(_.pick(r.memberByRole('to'), 'id', 'type')).to.eql({id: '==', type: 'way'});
+        expect(r.memberByRole('from').id).to.eql('==');
+        expect(r.memberByRole('from').type).to.eql('way');
+        expect(r.memberByRole('via').id).to.eql('*');
+        expect(r.memberByRole('via').type).to.eql('node');
+        expect(r.memberByRole('to').id).to.eql('==');
+        expect(r.memberByRole('to').type).to.eql('way');
     });
 
     it('infers the restriction type based on the turn angle', function() {

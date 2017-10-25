@@ -238,6 +238,9 @@ en:
       board_type:
         # board_type=*
         label: Type
+      boules:
+        # boules=*
+        label: Type
       boundary:
         # boundary=*
         label: Type
@@ -447,6 +450,11 @@ en:
       description:
         # description=*
         label: Description
+      devices:
+        # devices=*
+        label: Number of Devices
+        # devices field placeholder
+        placeholder: '1, 2, 3...'
       diaper:
         # diaper=*
         label: Diaper Changing Available
@@ -546,6 +554,9 @@ en:
         label: Type
         # ford field placeholder
         placeholder: Default
+      frequency:
+        # frequency=*
+        label: Operating Frequency
       fuel:
         # fuel=*
         label: Fuel
@@ -977,6 +988,11 @@ en:
       payment_multi:
         # 'payment:=*'
         label: Payment Types
+      phases:
+        # phases=*
+        label: Number of Phases
+        # phases field placeholder
+        placeholder: '1, 2, 3...'
       phone:
         # phone=*
         label: Phone
@@ -1078,6 +1094,9 @@ en:
       railway:
         # railway=*
         label: Type
+      rating:
+        # rating=*
+        label: Power Rating
       recycling_accepts:
         # 'recycling:=*'
         label: Accepts
@@ -1322,6 +1341,9 @@ en:
       studio:
         # studio=*
         label: Type
+      substance:
+        # substance=*
+        label: Substance
       substation:
         # substation=*
         label: Type
@@ -1413,6 +1435,9 @@ en:
           grade5: 'Soft: soil/sand/grass'
         # tracktype field placeholder
         placeholder: 'Solid, Mostly Solid, Soft...'
+      trade:
+        # trade=*
+        label: Type
       traffic_calming:
         # traffic_calming=*
         label: Type
@@ -1437,6 +1462,26 @@ en:
           'no': 'No: pathless, excellent orientation skills required'
         # trail_visibility field placeholder
         placeholder: 'Excellent, Good, Bad...'
+      transformer:
+        # transformer=*
+        label: Type of Transformer
+        options:
+          # transformer=auto
+          auto: Autotransformer
+          # transformer=auxiliary
+          auxiliary: Auxiliarty
+          # transformer=converter
+          converter: Converter
+          # transformer=distribution
+          distribution: Distribution
+          # transformer=generator
+          generator: Generator
+          # transformer=phase_angle_regulator
+          phase_angle_regulator: Phase Angle Regulator
+          # transformer=traction
+          traction: Traction
+          # transformer=yes
+          'yes': Unknown
       trees:
         # trees=*
         label: Trees
@@ -1478,6 +1523,15 @@ en:
           shield: Shield
           # 'volcano:type=stratovolcano'
           stratovolcano: Stratovolcano
+      voltage/primary:
+        # 'voltage:primary=*'
+        label: Primary Voltage
+      voltage/secondary:
+        # 'voltage:secondary=*'
+        label: Secondary Voltage
+      voltage/tertiary:
+        # 'voltage:tertiary=*'
+        label: Tertiary Voltage
       wall:
         # wall=*
         label: Type
@@ -1507,6 +1561,29 @@ en:
       wikipedia:
         # 'wikipedia=*, wikidata=*'
         label: Wikipedia
+      windings:
+        # windings=*
+        label: Number of Windings
+        # windings field placeholder
+        placeholder: '1, 2, 3...'
+      windings/configuration:
+        # 'windings:configuration=*'
+        label: Windings Configuration
+        options:
+          # 'windings:configuration=delta'
+          delta: Delta
+          # 'windings:configuration=leblanc'
+          leblanc: Leblanc
+          # 'windings:configuration=open'
+          open: Open
+          # 'windings:configuration=open-delta'
+          open-delta: Open Delta
+          # 'windings:configuration=scott'
+          scott: Scott
+          # 'windings:configuration=star'
+          star: Star / Wye
+          # 'windings:configuration=zigzag'
+          zigzag: Zig Zag
     presets:
       address:
         # 'addr:*=*'
@@ -2024,8 +2101,6 @@ en:
       amenity/scrapyard:
         # amenity=scrapyard
         name: Scrap Yard
-        # 'terms: car,junk,metal,salvage,scrap,u-pull-it,vehicle,wreck,yard'
-        terms: '<translate with synonyms or related terms for ''Scrap Yard'', separated by commas>'
       amenity/shelter:
         # amenity=shelter
         name: Shelter
@@ -3177,6 +3252,10 @@ en:
         # landuse=basin
         name: Basin
         terms: '<translate with synonyms or related terms for ''Basin'', separated by commas>'
+      landuse/brownfield:
+        # landuse=brownfield
+        name: Brownfield
+        terms: '<translate with synonyms or related terms for ''Brownfield'', separated by commas>'
       landuse/cemetery:
         # landuse=cemetery
         name: Cemetery
@@ -3219,6 +3298,10 @@ en:
         # landuse=grass
         name: Grass
         terms: '<translate with synonyms or related terms for ''Grass'', separated by commas>'
+      landuse/greenfield:
+        # landuse=greenfield
+        name: Greenfield
+        terms: '<translate with synonyms or related terms for ''Greenfield'', separated by commas>'
       landuse/harbour:
         # landuse=harbour
         name: Harbor
@@ -3228,6 +3311,16 @@ en:
         # landuse=industrial
         name: Industrial Area
         terms: '<translate with synonyms or related terms for ''Industrial Area'', separated by commas>'
+      landuse/industrial/scrap_yard:
+        # industrial=scrap_yard
+        name: Scrap Yard
+        # 'terms: car,junk,metal,salvage,scrap,u-pull-it,vehicle,wreck,yard'
+        terms: '<translate with synonyms or related terms for ''Scrap Yard'', separated by commas>'
+      landuse/industrial/slaughterhouse:
+        # industrial=slaughterhouse
+        name: Slaughterhouse
+        # 'terms: abattoir,beef,butchery,calf,chicken,cow,killing house,meat,pig,pork,poultry,shambles,stockyard'
+        terms: '<translate with synonyms or related terms for ''Slaughterhouse'', separated by commas>'
       landuse/landfill:
         # landuse=landfill
         name: Landfill
@@ -3457,6 +3550,11 @@ en:
         name: Beach Volleyball Court
         # 'terms: volleyball'
         terms: '<translate with synonyms or related terms for ''Beach Volleyball Court'', separated by commas>'
+      leisure/pitch/boules:
+        # 'leisure=pitch, sport=boules'
+        name: Boules/Bocce Court
+        # 'terms: bocce,lyonnaise,pétanque'
+        terms: '<translate with synonyms or related terms for ''Boules/Bocce Court'', separated by commas>'
       leisure/pitch/bowls:
         # 'leisure=pitch, sport=bowls'
         name: Bowling Green
@@ -3514,6 +3612,10 @@ en:
         name: Racetrack (Running)
         # 'terms: race*,running,sprint,track'
         terms: '<translate with synonyms or related terms for ''Racetrack (Running)'', separated by commas>'
+      leisure/sauna:
+        # leisure=sauna
+        name: Sauna
+        terms: '<translate with synonyms or related terms for ''Sauna'', separated by commas>'
       leisure/slipway:
         # leisure=slipway
         name: Slipway
@@ -3955,6 +4057,11 @@ en:
         name: Island
         # 'terms: archipelago,atoll,bar,cay,isle,islet,key,reef'
         terms: '<translate with synonyms or related terms for ''Island'', separated by commas>'
+      place/islet:
+        # place=islet
+        name: Islet
+        # 'terms: archipelago,atoll,bar,cay,isle,islet,key,reef'
+        terms: '<translate with synonyms or related terms for ''Islet'', separated by commas>'
       place/isolated_dwelling:
         # place=isolated_dwelling
         name: Isolated Dwelling
@@ -3968,6 +4075,11 @@ en:
         name: Neighborhood
         # 'terms: neighbourhood'
         terms: '<translate with synonyms or related terms for ''Neighborhood'', separated by commas>'
+      place/plot:
+        # place=plot
+        name: Plot
+        # 'terms: tract,land,lot,parcel'
+        terms: '<translate with synonyms or related terms for ''Plot'', separated by commas>'
       place/quarter:
         # place=quarter
         name: Sub-Borough / Quarter
@@ -4018,11 +4130,13 @@ en:
         terms: '<translate with synonyms or related terms for ''Horizontal Bar'', separated by commas>'
       playground/rocker:
         # playground=springy
-        name: Springy Rocker
-        terms: '<translate with synonyms or related terms for ''Springy Rocker'', separated by commas>'
+        name: Spring Rider
+        # 'terms: spring rocker,springy rocker'
+        terms: '<translate with synonyms or related terms for ''Spring Rider'', separated by commas>'
       playground/roundabout:
         # playground=roundabout
         name: Play Roundabout
+        # 'terms: merry-go-round'
         terms: '<translate with synonyms or related terms for ''Play Roundabout'', separated by commas>'
       playground/sandpit:
         # playground=sandpit
@@ -4701,6 +4815,10 @@ en:
         # shop=ticket
         name: Ticket Seller
         terms: '<translate with synonyms or related terms for ''Ticket Seller'', separated by commas>'
+      shop/tiles:
+        # shop=tiles
+        name: Tile Shop
+        terms: '<translate with synonyms or related terms for ''Tile Shop'', separated by commas>'
       shop/tobacco:
         # shop=tobacco
         name: Tobacco Shop
@@ -4709,6 +4827,10 @@ en:
         # shop=toys
         name: Toy Store
         terms: '<translate with synonyms or related terms for ''Toy Store'', separated by commas>'
+      shop/trade:
+        # shop=trade
+        name: Trade Shop
+        terms: '<translate with synonyms or related terms for ''Trade Shop'', separated by commas>'
       shop/travel_agency:
         # shop=travel_agency
         name: Travel Agency

@@ -377,7 +377,8 @@ describe('iD.actionSplit', function () {
 
         graph = iD.actionSplit('b', ['='])(graph);
 
-        expect(_.map(graph.entity('r').members, 'id')).to.eql(['-', '=', '~']);
+        var ids = graph.entity('r').members.map(function(m) { return m.id; });
+        expect(ids).to.have.ordered.members(['-', '=', '~']);
     });
 
     it('adds the new way to parent relations (reverse order)', function () {
@@ -403,7 +404,8 @@ describe('iD.actionSplit', function () {
 
         graph = iD.actionSplit('b', ['='])(graph);
 
-        expect(_.map(graph.entity('r').members, 'id')).to.eql(['~', '=', '-']);
+        var ids = graph.entity('r').members.map(function(m) { return m.id; });
+        expect(ids).to.have.ordered.members(['~', '=', '-']);
     });
 
     it('handles incomplete relations', function () {
@@ -417,7 +419,8 @@ describe('iD.actionSplit', function () {
 
         graph = iD.actionSplit('b', ['='])(graph);
 
-        expect(_.map(graph.entity('r').members, 'id')).to.eql(['~', '-', '=']);
+        var ids = graph.entity('r').members.map(function(m) { return m.id; });
+        expect(ids).to.have.ordered.members(['~', '-', '=']);
     });
 
     it('converts simple multipolygon to a proper multipolygon', function () {
@@ -433,7 +436,8 @@ describe('iD.actionSplit', function () {
 
         expect(graph.entity('-').tags).to.eql({});
         expect(graph.entity('r').tags).to.eql({type: 'multipolygon', natural: 'water'});
-        expect(_.map(graph.entity('r').members, 'id')).to.eql(['-', '=']);
+        var ids = graph.entity('r').members.map(function(m) { return m.id; });
+        expect(ids).to.have.ordered.members(['-', '=']);
     });
 
     ['restriction', 'restriction:bus'].forEach(function (type) {

@@ -1285,6 +1285,9 @@
                 "board_type": {
                     "label": "Type"
                 },
+                "boules": {
+                    "label": "Type"
+                },
                 "boundary": {
                     "label": "Type"
                 },
@@ -1469,6 +1472,10 @@
                 "description": {
                     "label": "Description"
                 },
+                "devices": {
+                    "label": "Number of Devices",
+                    "placeholder": "1, 2, 3..."
+                },
                 "diaper": {
                     "label": "Diaper Changing Available"
                 },
@@ -1552,6 +1559,9 @@
                 "ford": {
                     "label": "Type",
                     "placeholder": "Default"
+                },
+                "frequency": {
+                    "label": "Operating Frequency"
                 },
                 "fuel_multi": {
                     "label": "Fuel Types"
@@ -1911,6 +1921,10 @@
                 "payment_multi": {
                     "label": "Payment Types"
                 },
+                "phases": {
+                    "label": "Number of Phases",
+                    "placeholder": "1, 2, 3..."
+                },
                 "phone": {
                     "label": "Phone",
                     "placeholder": "+31 42 123 4567"
@@ -1989,6 +2003,9 @@
                 },
                 "railway": {
                     "label": "Type"
+                },
+                "rating": {
+                    "label": "Power Rating"
                 },
                 "recycling_accepts": {
                     "label": "Accepts"
@@ -2198,6 +2215,9 @@
                 "studio": {
                     "label": "Type"
                 },
+                "substance": {
+                    "label": "Substance"
+                },
                 "substation": {
                     "label": "Type"
                 },
@@ -2275,6 +2295,9 @@
                         "grade5": "Soft: soil/sand/grass"
                     }
                 },
+                "trade": {
+                    "label": "Type"
+                },
                 "traffic_calming": {
                     "label": "Type"
                 },
@@ -2291,6 +2314,19 @@
                         "bad": "Bad: no markers, path sometimes invisible/pathless",
                         "horrible": "Horrible: often pathless, some orientation skills required",
                         "no": "No: pathless, excellent orientation skills required"
+                    }
+                },
+                "transformer": {
+                    "label": "Type of Transformer",
+                    "options": {
+                        "distribution": "Distribution",
+                        "generator": "Generator",
+                        "converter": "Converter",
+                        "traction": "Traction",
+                        "auto": "Autotransformer",
+                        "phase_angle_regulator": "Phase Angle Regulator",
+                        "auxiliary": "Auxiliarty",
+                        "yes": "Unknown"
                     }
                 },
                 "trees": {
@@ -2327,6 +2363,15 @@
                         "scoria": "Scoria"
                     }
                 },
+                "voltage/primary": {
+                    "label": "Primary Voltage"
+                },
+                "voltage/secondary": {
+                    "label": "Secondary Voltage"
+                },
+                "voltage/tertiary": {
+                    "label": "Tertiary Voltage"
+                },
                 "wall": {
                     "label": "Type"
                 },
@@ -2354,6 +2399,22 @@
                 },
                 "wikipedia": {
                     "label": "Wikipedia"
+                },
+                "windings": {
+                    "label": "Number of Windings",
+                    "placeholder": "1, 2, 3..."
+                },
+                "windings/configuration": {
+                    "label": "Windings Configuration",
+                    "options": {
+                        "star": "Star / Wye",
+                        "delta": "Delta",
+                        "open-delta": "Open Delta",
+                        "zigzag": "Zig Zag",
+                        "open": "Open",
+                        "scott": "Scott",
+                        "leblanc": "Leblanc"
+                    }
                 }
             },
             "presets": {
@@ -2491,6 +2552,10 @@
                 },
                 "amenity/register_office": {
                     "name": "Register Office",
+                    "terms": ""
+                },
+                "amenity/scrapyard": {
+                    "name": "Scrap Yard",
                     "terms": ""
                 },
                 "amenity/swimming_pool": {
@@ -2832,10 +2897,6 @@
                 "amenity/school": {
                     "name": "School Grounds",
                     "terms": "academy,elementary school,middle school,high school"
-                },
-                "amenity/scrapyard": {
-                    "name": "Scrap Yard",
-                    "terms": "car,junk,metal,salvage,scrap,u-pull-it,vehicle,wreck,yard"
                 },
                 "amenity/shelter": {
                     "name": "Shelter",
@@ -3881,6 +3942,10 @@
                     "name": "Basin",
                     "terms": ""
                 },
+                "landuse/brownfield": {
+                    "name": "Brownfield",
+                    "terms": ""
+                },
                 "landuse/cemetery": {
                     "name": "Cemetery",
                     "terms": ""
@@ -3917,6 +3982,10 @@
                     "name": "Grass",
                     "terms": ""
                 },
+                "landuse/greenfield": {
+                    "name": "Greenfield",
+                    "terms": ""
+                },
                 "landuse/harbour": {
                     "name": "Harbor",
                     "terms": "boat"
@@ -3924,6 +3993,14 @@
                 "landuse/industrial": {
                     "name": "Industrial Area",
                     "terms": ""
+                },
+                "landuse/industrial/scrap_yard": {
+                    "name": "Scrap Yard",
+                    "terms": "car,junk,metal,salvage,scrap,u-pull-it,vehicle,wreck,yard"
+                },
+                "landuse/industrial/slaughterhouse": {
+                    "name": "Slaughterhouse",
+                    "terms": "abattoir,beef,butchery,calf,chicken,cow,killing house,meat,pig,pork,poultry,shambles,stockyard"
                 },
                 "landuse/landfill": {
                     "name": "Landfill",
@@ -4117,6 +4194,10 @@
                     "name": "Beach Volleyball Court",
                     "terms": "volleyball"
                 },
+                "leisure/pitch/boules": {
+                    "name": "Boules/Bocce Court",
+                    "terms": "bocce,lyonnaise,pétanque"
+                },
                 "leisure/pitch/bowls": {
                     "name": "Bowling Green",
                     "terms": ""
@@ -4168,6 +4249,10 @@
                 "leisure/running_track": {
                     "name": "Racetrack (Running)",
                     "terms": "race*,running,sprint,track"
+                },
+                "leisure/sauna": {
+                    "name": "Sauna",
+                    "terms": ""
                 },
                 "leisure/slipway": {
                     "name": "Slipway",
@@ -4565,6 +4650,10 @@
                     "name": "Island",
                     "terms": "archipelago,atoll,bar,cay,isle,islet,key,reef"
                 },
+                "place/islet": {
+                    "name": "Islet",
+                    "terms": "archipelago,atoll,bar,cay,isle,islet,key,reef"
+                },
                 "place/isolated_dwelling": {
                     "name": "Isolated Dwelling",
                     "terms": ""
@@ -4576,6 +4665,10 @@
                 "place/neighbourhood": {
                     "name": "Neighborhood",
                     "terms": "neighbourhood"
+                },
+                "place/plot": {
+                    "name": "Plot",
+                    "terms": "tract,land,lot,parcel"
                 },
                 "place/quarter": {
                     "name": "Sub-Borough / Quarter",
@@ -4622,12 +4715,12 @@
                     "terms": "high bar"
                 },
                 "playground/rocker": {
-                    "name": "Springy Rocker",
-                    "terms": ""
+                    "name": "Spring Rider",
+                    "terms": "spring rocker,springy rocker"
                 },
                 "playground/roundabout": {
                     "name": "Play Roundabout",
-                    "terms": ""
+                    "terms": "merry-go-round"
                 },
                 "playground/sandpit": {
                     "name": "Sandpit",
@@ -5233,12 +5326,20 @@
                     "name": "Ticket Seller",
                     "terms": ""
                 },
+                "shop/tiles": {
+                    "name": "Tile Shop",
+                    "terms": ""
+                },
                 "shop/tobacco": {
                     "name": "Tobacco Shop",
                     "terms": ""
                 },
                 "shop/toys": {
                     "name": "Toy Store",
+                    "terms": ""
+                },
+                "shop/trade": {
+                    "name": "Trade Shop",
                     "terms": ""
                 },
                 "shop/travel_agency": {

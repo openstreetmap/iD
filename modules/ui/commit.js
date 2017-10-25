@@ -26,6 +26,10 @@ var readOnlyTags = [
     /^locale$/
 ];
 
+// treat most punctuation (except -, _, +, &) as hashtag delimiters - #4398
+// from https://stackoverflow.com/a/25575009
+var hashtagRegex = /(#[^\u2000-\u206F\u2E00-\u2E7F\s\\'!"#$%()*,.\/:;<=>?@\[\]^`{|}~]+)/g;
+
 
 export function uiCommit(context) {
     var dispatch = d3_dispatch('cancel', 'save'),
@@ -61,7 +65,6 @@ export function uiCommit(context) {
             tags = {
                 comment: context.storage('comment') || '',
                 created_by: ('iD ' + context.version).substr(0, 255),
-                imagery_used: context.history().imageryUsed().join(';').substr(0, 255),
                 host: detected.host.substr(0, 255),
                 locale: detected.locale.substr(0, 255)
             };
@@ -79,6 +82,8 @@ export function uiCommit(context) {
         }
 
         tags = _clone(changeset.tags);
+        tags.imagery_used = context.history().imageryUsed().join(';').substr(0, 255);
+        changeset = changeset.update({ tags: tags });
 
         var header = selection.selectAll('.header')
             .data([0]);
@@ -309,7 +314,7 @@ export function uiCommit(context) {
         function commentTags() {
             return tags.comment
                 .replace(/http\S*/g, '')  // drop anything that looks like a URL - #4289
-                .match(/#[\w-]+/g);
+                .match(hashtagRegex);
         }
 
         // Extract and clean hashtags from `hashtags`
@@ -319,7 +324,7 @@ export function uiCommit(context) {
                 .split(/[,;\s]+/)
                 .map(function (s) {
                     if (s[0] !== '#') { s = '#' + s; }    // prepend '#'
-                    var matched = s.match(/#[\w-]+/g);    // match valid hashtags
+                    var matched = s.match(hashtagRegex);
                     return matched && matched[0];
                 }).filter(Boolean);                       // exclude falsey
         }

@@ -396,7 +396,6 @@
                 "keep_remote": "Gunakan milik mereka",
                 "restore": "Kembalikan",
                 "delete": "Biarkan Terhapus",
-                "download_changes": "Atau unduh perubahan Anda.",
                 "done": "Semua konflik terselesaikan!"
             }
         },
@@ -457,10 +456,8 @@
         "help": {
             "title": "Bantuan",
             "help": "# Bantuan\n\nIni adalah penyunting untuk [OpenStreetMap](http://www.openstreetmap.org/),\npeta dunia yang gratis dan dapat disunting. Anda dapat menggunakannya\nuntuk menambah dan memperbarui data di area Anda, membuat peta dunia\nbersumber dan berdata terbuka lebih baik untuk semua orang.\n\nSuntingan yang Anda buat di peta ini akan terlihat oleh semua pengguna\nOpenStreetMap. Untuk membuat suntingan, Anda perlu\n[log in](https://www.openstreetmap.org/login).\n\n[iD editor](http://ideditor.com/) adalah proyek kerja sama dengan [source\ncode available on GitHub](https://github.com/openstreetmap/iD).\n",
-            "roads": "# Jalan\n\nAnda dapat membuat, memperbaiki, dan menghapus jalan dengan penyunting ini. Jalan ada banyak\njenis: jalan setapak, jalan raya, jalan sepeda, dan sebagainya - segmen yang sering dilalui\nseharusnya dapat dipetakan.\n\n### Memilih\n\nKlik pada jalan untuk memilihnya. Sebuah garis tepi akan terlihat, dengan\nmenu peralatan kecil pada peta dan sidebar berisi informasi lebih tentang jalan tersebut.\n\n### Mengubah\n\nSeringkali Anda akan melihat jalan-jalan yang tidak segaris dengan gambar di belakangnya\natau dengan trek GPS. Anda dapat mengatur jalan-jalan ini agar mereka berada\npada posisi yang tepat.\n\nPertama, klik pada jalan yang Anda ingin ubah. Ini akan menyorotinya dan menampilkan\ntitik kendali di sepanjang jalan yang dapat Anda geser ke letak yang lebih baik. Jika\nAnda ingin menambah titik kendali untuk memerincinya, klik dua kali bagian\ndari jalan tanpa titik, dan titik kendali akan ditambah.\n\nJika jalan itu terhubung dengan jalan lain, tetapi tidak terhubung dengan baik\npada peta, Anda bisa menggeser salah satu titik kendalinya ke jalan lain tersebut untuk\nmenghubungkannya. Memastikan jalan terhubung penting untuk peta dan sangat diperlukan untuk memberikan arah berkendara.\n\nAnda dapat klik alat 'Move' atau tekan tombol pintasan 'M' untuk memindahkan keseluruhan jalan sekaligus,\nlalu klik lagi untuk menyimpan pemindahan tersebut.\n\n### Menghapus\n\nJika sebuah jalan seluruhnya salah - Anda dapat melihat bahwa itu tidak ada pada citra satelit\ndan telah mengamatinya langsung bahwa itu memang tidak ada - Anda dapat menghapusnya,\nuntuk menghilangkannya dari peta. Berhati-hatilah saat menghapus fitur -\nseperti suntingan lain, hasilnya akan terlihat oleh semua orang dan citra satelit\nseringkali sudah usang, sehingga jalan mungkin baru dibangun.\n\nAnda dapat menghapus jalan dengan klik jalan tersebut untuk memilihnya,\nlalu klik ikon tong sampah atau menekan tombol 'Delete'.\n\n### Menciptakan\n\nMenemukan tempat yang seharusnya ada jalan tapi tidak ada? Pilih ikon 'Line'\npada kiri-atas penyunting atau tekan tombol pintasan '2' untuk mulai\nmenggambar garis.\n\nKlik pada bagian awal jalan untuk mulai menggambar. Jika jalan\nbercabang dari jalan yang sudah ada, mulai dengan klik pada tempat keduanya terhubung.\n\nLalu klik pada titik-titik sepanjang jalan sehingga sesuai alur,\nmenurut citra satelit atau GPS. Jika jalan yang Anda gambar menyeberangi jalan lain,\nhubungkan jalan itu dengan mengeklik pada titik persimpangan. Saat Anda selesai menggambar, klik dua kali\natau tekan 'Return' atau 'Enter' pada papan tik.\n",
             "imagery": "# Citra\n\nCitra foto udara merupakan sumber penting untuk pemetaan. Gabungan dari\npemotretan pesawat, pandangan satelit, dan sumber terhimpun lain tersedia\ndi penyunting pada menu 'Pengaturan Latar' di sebelah kanan.\n\nBiasanya lapisan satelit [Bing Maps](http://www.bing.com/maps/) ditampilkan\ndi penyunting ini, tetapi ketika Anda geser atau perbesar tampilan di suatu wilayah baru,\nsumber baru lain akan tersedia. Di beberapa negara, seperti Amerika Serikat,\nPerancis, dan Denmark memiliki citra berkualitas tinggi yang tersedia di beberapa area.\n\nCitra kadang melenceng dari data peta karena ada kesalahan pada\npenyedia data citra. Jika Anda melihat banyak jalan yang bergeser dari latarnya,\njangan serta-merta memindahkan semuanya untuk mencocokkan latar. Justru Anda bisa menyesuaikan\ncitranya agar pas dengan data yang ada dengan mengeklik 'Perbaiki perataan' pada\nbagian bawah Pengaturan Latar.\n",
-            "addresses": "# Alamat\n\nAlamat adalah informasi yang paling penting dalam suatu peta.\n\nMeski alamat sering ditampilkan sebagai bagian dari jalan, OpenStreetMap menampilkan alamat sebagai bagian dari bangunan dan tempat-tempat di pinggir jalan.\n\nAnda dapat menambahkan alamat ke tempat-tempat berbentuk garis bangunan atau titik. Data alamat yang tepercaya diperoleh dari survei lapangan atau pengetahuan sendiri - seperti fitur lainnya, Anda tidak diperbolehkan menyalin alamat dari sumber-sumber komersial seperti Google Maps.\n",
-            "buildings": "# Bangunan\n\nOpenStreetMap ialah database terbesar dunia untuk bangunan. Kamu dapat membuat\ndan memperbaiki database ini.\n\n## Memilih\n\nKamu dapat memilih sebuah bangunan dengan mengklik pada batasnya. Hal ini akan membedakan\nbangunannya dan membuka sebuah alat kecil menu dan di sisi samping menampilkan informasi lebih lanjut\ntentang bangunan tersebut.\n\n### Mengubah\n\nTerkadang bangunan tidak diletakan pada tempatnya atau memiliki tags yang salah.\n\nUntuk memindahkan seluruh bangunan, pilih, lalu klik alat 'Move'. Geser\ntetikus kamu untuk memindahkan bangunan, dan klik ketika sudah sesuai tempatnya.\n\nUntuk memperbaiki bentuk sebuah gedung, klik dan geser sebuah sudut yang membentuk\nbatasnya ke tempat yang sesuai.\n\n### Membuat\n\nSatu pertanyaan utama terkait menambahkan bangunan ke dalam suatu peta adalah\nOpenStreetMap mencatat gedung baik dalam bentuk luasan dan titik.\n"
+            "addresses": "# Alamat\n\nAlamat adalah informasi yang paling penting dalam suatu peta.\n\nMeski alamat sering ditampilkan sebagai bagian dari jalan, OpenStreetMap menampilkan alamat sebagai bagian dari bangunan dan tempat-tempat di pinggir jalan.\n\nAnda dapat menambahkan alamat ke tempat-tempat berbentuk garis bangunan atau titik. Data alamat yang tepercaya diperoleh dari survei lapangan atau pengetahuan sendiri - seperti fitur lainnya, Anda tidak diperbolehkan menyalin alamat dari sumber-sumber komersial seperti Google Maps.\n"
         },
         "intro": {
             "done": "selesai",
@@ -535,9 +532,6 @@
                 },
                 "access_simple": {
                     "label": "Akses diperbolehkan"
-                },
-                "access_toilets": {
-                    "label": "Akses"
                 },
                 "address": {
                     "label": "Alamat",
@@ -1517,10 +1511,6 @@
                 },
                 "craft/clockmaker": {
                     "name": "Pembuat Jam"
-                },
-                "craft/confectionery": {
-                    "name": "Penganan",
-                    "terms": "Toko Kue, Toko Kudapan"
                 },
                 "craft/dressmaker": {
                     "name": "Penjahit Pakaian Wanita"
