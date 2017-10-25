@@ -22,6 +22,10 @@
         "landuse": "industrial",
         "industrial": "slaughterhouse"
     },
+    "reference": {
+        "key": "industrial",
+        "value": "slaughterhouse"
+    },
     "terms": [
         "abattoir",
         "beef",

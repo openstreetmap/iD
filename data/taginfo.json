@@ -141,6 +141,10 @@
         },
         {
             "key": "amenity",
+            "value": "scrapyard"
+        },
+        {
+            "key": "amenity",
             "value": "swimming_pool"
         },
         {
@@ -478,10 +482,6 @@
         {
             "key": "amenity",
             "value": "school"
-        },
-        {
-            "key": "amenity",
-            "value": "scrapyard"
         },
         {
             "key": "amenity",
@@ -1569,6 +1569,10 @@
         {
             "key": "landuse",
             "value": "industrial"
+        },
+        {
+            "key": "industrial",
+            "value": "scrap_yard"
         },
         {
             "key": "industrial",

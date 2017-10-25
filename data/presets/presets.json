@@ -590,6 +590,28 @@
             "name": "Register Office",
             "searchable": false
         },
+        "amenity/scrapyard": {
+            "icon": "car",
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "amenity": "scrapyard"
+            },
+            "reference": {
+                "key": "industrial",
+                "value": "scrap_yard"
+            },
+            "name": "Scrap Yard",
+            "searchable": false
+        },
         "amenity/swimming_pool": {
             "icon": "swimming",
             "geometry": [
@@ -2639,38 +2661,6 @@
                 "amenity": "school"
             },
             "name": "School Grounds"
-        },
-        "amenity/scrapyard": {
-            "icon": "car",
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "opening_hours"
-            ],
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "terms": [
-                "car",
-                "junk",
-                "metal",
-                "salvage",
-                "scrap",
-                "u-pull-it",
-                "vehicle",
-                "wreck",
-                "yard"
-            ],
-            "tags": {
-                "amenity": "scrapyard"
-            },
-            "reference": {
-                "key": "industrial",
-                "value": "scrap_yard"
-            },
-            "name": "Scrap Yard"
         },
         "amenity/shelter": {
             "icon": "shelter",
@@ -8157,6 +8147,46 @@
             "matchScore": 0.9,
             "name": "Industrial Area"
         },
+        "landuse/industrial/scrap_yard": {
+            "icon": "car",
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "industrial": "scrap_yard"
+            },
+            "addTags": {
+                "landuse": "industrial",
+                "industrial": "scrap_yard"
+            },
+            "removeTags": {
+                "landuse": "industrial",
+                "industrial": "scrap_yard"
+            },
+            "reference": {
+                "key": "industrial",
+                "value": "scrap_yard"
+            },
+            "terms": [
+                "car",
+                "junk",
+                "metal",
+                "salvage",
+                "scrap",
+                "u-pull-it",
+                "vehicle",
+                "wreck",
+                "yard"
+            ],
+            "name": "Scrap Yard"
+        },
         "landuse/industrial/slaughterhouse": {
             "icon": "slaughterhouse",
             "fields": [
@@ -8180,6 +8210,10 @@
             "removeTags": {
                 "landuse": "industrial",
                 "industrial": "slaughterhouse"
+            },
+            "reference": {
+                "key": "industrial",
+                "value": "slaughterhouse"
             },
             "terms": [
                 "abattoir",

@@ -2551,6 +2551,10 @@
                     "name": "Register Office",
                     "terms": ""
                 },
+                "amenity/scrapyard": {
+                    "name": "Scrap Yard",
+                    "terms": ""
+                },
                 "amenity/swimming_pool": {
                     "name": "Swimming Pool",
                     "terms": ""
@@ -2890,10 +2894,6 @@
                 "amenity/school": {
                     "name": "School Grounds",
                     "terms": "academy,elementary school,middle school,high school"
-                },
-                "amenity/scrapyard": {
-                    "name": "Scrap Yard",
-                    "terms": "car,junk,metal,salvage,scrap,u-pull-it,vehicle,wreck,yard"
                 },
                 "amenity/shelter": {
                     "name": "Shelter",
@@ -3990,6 +3990,10 @@
                 "landuse/industrial": {
                     "name": "Industrial Area",
                     "terms": ""
+                },
+                "landuse/industrial/scrap_yard": {
+                    "name": "Scrap Yard",
+                    "terms": "car,junk,metal,salvage,scrap,u-pull-it,vehicle,wreck,yard"
                 },
                 "landuse/industrial/slaughterhouse": {
                     "name": "Slaughterhouse",
