@@ -20,7 +20,7 @@ export function uiHelp(context) {
     var key = t('help.key');
 
     var docKeys = [
-          ['help.help.',['intro','opendata','beforestart','opensource','othereditors']],
+          ['help.help.',['intro','opendata','beforestart','opensource']],
           ['help.overview.',['intro','features','screen','navigation']],
           ['help.editing.',['intro','multiselect','edit','save','upload','comeback']],
           ['help.roads.',['intro','move','connect','attributes','delete','create']],

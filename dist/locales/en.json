@@ -684,8 +684,7 @@
                 "intro": "# Help\n\nWith this [OpenStreetMap](https://www.openstreetmap.org/) editor you can \nadd and update the free and editable map of the world online with your browser.\n",
                 "opendata": "### Open Data\n\nEdits that you make on this map will be freely available to everyone who uses\nOpenStreetMap. They can be visible on every map based on OpenStreetMap. \nThe optimal resources for mapping are on-the-ground survey, personal knowledge,\nor the provieded background. Copying from commercial sources like Google Maps is strictly forbidden.\n",
                 "beforestart": "### Before you start\n\nYou should be familiar with OpenStreetMap and this editor before you start editing.\nThe walkthrough will teach you the basics of editing on OpenStreetMap and you will\npractice using the editor. It takes about 15 minutes and then you can start editing.\n",
-                "opensource": "### Open Source\n\nThe iD editor is a collaborative project with [source\ncode available on GitHub](https://github.com/openstreetmap/iD).\n",
-                "othereditors": "### Other Editors\n\nWhile the iD editor is easy to use and requires only a browser, there are also other\n[OSM-Editors](https://wiki.openstreetmap.org/wiki/Editors).\nAlso heavily used is JOSM, a highly expandable standalone Java desktop application.\n"
+                "opensource": "### Open Source\n\nThe iD editor is a collaborative project with [source\ncode available on GitHub](https://github.com/openstreetmap/iD).\n"
             },
             "overview": {
                 "intro": "# Overview\n\nThis help will repeat and extend information from the walkthrough, which\nyou should have done by now.\n",

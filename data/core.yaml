@@ -582,13 +582,6 @@ en:
         The iD editor is a collaborative project with [source
         code available on GitHub](https://github.com/openstreetmap/iD).
 
-      othereditors: |
-        ### Other Editors
-
-        While the iD editor is easy to use and requires only a browser, there are also other
-        [OSM-Editors](https://wiki.openstreetmap.org/wiki/Editors).
-        Also heavily used is JOSM, a highly expandable standalone Java desktop application.
-
     overview:
       intro: |
         # Overview
