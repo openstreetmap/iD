@@ -543,9 +543,9 @@ en:
           underground: Underground
           # 'fire_hydrant:type=wall'
           wall: Wall
-      fitness_station_type:
+      fitness_station:
         # fitness_station=*
-        label: Fitness Station Type
+        label: Equipment Type
       fixme:
         # fixme=*
         label: Fix Me
@@ -3477,8 +3477,63 @@ en:
       leisure/fitness_station:
         # leisure=fitness_station
         name: Outdoor Fitness Station
-        # 'terms: fitness,gym,trim trail'
+        # 'terms: exercise,fitness,gym,trim trail'
         terms: '<translate with synonyms or related terms for ''Outdoor Fitness Station'', separated by commas>'
+      leisure/fitness_station/balance_beam:
+        # 'leisure=fitness_station, fitness_station=balance_beam'
+        name: Exercise Balance Beam
+        # 'terms: balance,exercise,fitness,gym,trim trail'
+        terms: '<translate with synonyms or related terms for ''Exercise Balance Beam'', separated by commas>'
+      leisure/fitness_station/box:
+        # 'leisure=fitness_station, fitness_station=box'
+        name: Exercise Box
+        # 'terms: box,exercise,fitness,gym,jump,trim trail'
+        terms: '<translate with synonyms or related terms for ''Exercise Box'', separated by commas>'
+      leisure/fitness_station/horizontal_bar:
+        # 'leisure=fitness_station, fitness_station=horizontal_bar'
+        name: Exercise Horizontal Bar
+        # 'terms: bar,chinup,chin up,exercise,fitness,gym,pullup,pull up,trim trail'
+        terms: '<translate with synonyms or related terms for ''Exercise Horizontal Bar'', separated by commas>'
+      leisure/fitness_station/horizontal_ladder:
+        # 'leisure=fitness_station, fitness_station=horizontal_ladder'
+        name: Exercise Monkey Bars
+        # 'terms: bar,chinup,chin up,exercise,fitness,gym,ladder,monkey bars,pullup,pull up,trim trail'
+        terms: '<translate with synonyms or related terms for ''Exercise Monkey Bars'', separated by commas>'
+      leisure/fitness_station/hyperextension:
+        # 'leisure=fitness_station, fitness_station=hyperextension'
+        name: Hyperextension Station
+        # 'terms: back,exercise,extension,fitness,gym,roman chair,trim trail'
+        terms: '<translate with synonyms or related terms for ''Hyperextension Station'', separated by commas>'
+      leisure/fitness_station/parallel_bars:
+        # 'leisure=fitness_station, fitness_station=parallel_bars'
+        name: Parallel Bars
+        # 'terms: bar,dip,exercise,fitness,gym,trim trail'
+        terms: '<translate with synonyms or related terms for ''Parallel Bars'', separated by commas>'
+      leisure/fitness_station/push-up:
+        # 'leisure=fitness_station, fitness_station=push-up'
+        name: Push-Up Station
+        # 'terms: bar,exercise,fitness,gym,pushup,push up,trim trail'
+        terms: '<translate with synonyms or related terms for ''Push-Up Station'', separated by commas>'
+      leisure/fitness_station/rings:
+        # 'leisure=fitness_station, fitness_station=rings'
+        name: Exercise Rings
+        # 'terms: exercise,fitness,gym,muscle up,pullup,pull up,trim trail'
+        terms: '<translate with synonyms or related terms for ''Exercise Rings'', separated by commas>'
+      leisure/fitness_station/sign:
+        # 'leisure=fitness_station, fitness_station=sign'
+        name: Exercise Instruction Sign
+        # 'terms: exercise,fitness,gym,trim trail'
+        terms: '<translate with synonyms or related terms for ''Exercise Instruction Sign'', separated by commas>'
+      leisure/fitness_station/sit-up:
+        # 'leisure=fitness_station, fitness_station=sit-up'
+        name: Sit-Up Station
+        # 'terms: crunch,exercise,fitness,gym,situp,sit up,trim trail'
+        terms: '<translate with synonyms or related terms for ''Sit-Up Station'', separated by commas>'
+      leisure/fitness_station/stairs:
+        # 'leisure=fitness_station, fitness_station=stairs'
+        name: Exercise Stairs
+        # 'terms: exercise,fitness,gym,steps,trim trail'
+        terms: '<translate with synonyms or related terms for ''Exercise Stairs'', separated by commas>'
       leisure/garden:
         # leisure=garden
         name: Garden
@@ -4104,8 +4159,8 @@ en:
         terms: '<translate with synonyms or related terms for ''Village'', separated by commas>'
       playground/balance_beam:
         # playground=balancebeam
-        name: Balance Beam
-        terms: '<translate with synonyms or related terms for ''Balance Beam'', separated by commas>'
+        name: Play Balance Beam
+        terms: '<translate with synonyms or related terms for ''Play Balance Beam'', separated by commas>'
       playground/basket_spinner:
         # playground=basketrotator
         name: Basket Spinner

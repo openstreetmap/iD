@@ -734,10 +734,10 @@
                 }
             }
         },
-        "fitness_station_type": {
+        "fitness_station": {
             "key": "fitness_station",
-            "type": "combo",
-            "label": "Fitness Station Type"
+            "type": "typeCombo",
+            "label": "Equipment Type"
         },
         "fixme": {
             "key": "fixme",

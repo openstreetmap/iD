@@ -9013,8 +9013,8 @@
         "leisure/fitness_station": {
             "icon": "pitch",
             "fields": [
-                "name",
-                "fitness_station_type",
+                "fitness_station",
+                "ref",
                 "opening_hours"
             ],
             "geometry": [
@@ -9024,12 +9024,451 @@
             "tags": {
                 "leisure": "fitness_station"
             },
+            "addTags": {
+                "leisure": "fitness_station",
+                "sport": "fitness"
+            },
+            "removeTags": {
+                "leisure": "fitness_station",
+                "sport": "fitness"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "fitness_station"
+            },
             "terms": [
+                "exercise",
                 "fitness",
                 "gym",
                 "trim trail"
             ],
             "name": "Outdoor Fitness Station"
+        },
+        "leisure/fitness_station/balance_beam": {
+            "icon": "pitch",
+            "fields": [
+                "ref",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "fitness_station",
+                "fitness_station": "balance_beam"
+            },
+            "addTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "balance_beam",
+                "sport": "fitness"
+            },
+            "removeTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "balance_beam",
+                "sport": "fitness"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "fitness_station"
+            },
+            "terms": [
+                "balance",
+                "exercise",
+                "fitness",
+                "gym",
+                "trim trail"
+            ],
+            "name": "Exercise Balance Beam"
+        },
+        "leisure/fitness_station/box": {
+            "icon": "pitch",
+            "fields": [
+                "ref",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "fitness_station",
+                "fitness_station": "box"
+            },
+            "addTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "box",
+                "sport": "fitness"
+            },
+            "removeTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "box",
+                "sport": "fitness"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "fitness_station"
+            },
+            "terms": [
+                "box",
+                "exercise",
+                "fitness",
+                "gym",
+                "jump",
+                "trim trail"
+            ],
+            "name": "Exercise Box"
+        },
+        "leisure/fitness_station/horizontal_bar": {
+            "icon": "pitch",
+            "fields": [
+                "ref",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "fitness_station",
+                "fitness_station": "horizontal_bar"
+            },
+            "addTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "horizontal_bar",
+                "sport": "fitness"
+            },
+            "removeTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "horizontal_bar",
+                "sport": "fitness"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "fitness_station"
+            },
+            "terms": [
+                "bar",
+                "chinup",
+                "chin up",
+                "exercise",
+                "fitness",
+                "gym",
+                "pullup",
+                "pull up",
+                "trim trail"
+            ],
+            "name": "Exercise Horizontal Bar"
+        },
+        "leisure/fitness_station/horizontal_ladder": {
+            "icon": "pitch",
+            "fields": [
+                "ref",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "fitness_station",
+                "fitness_station": "horizontal_ladder"
+            },
+            "addTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "horizontal_ladder",
+                "sport": "fitness"
+            },
+            "removeTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "horizontal_ladder",
+                "sport": "fitness"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "fitness_station"
+            },
+            "terms": [
+                "bar",
+                "chinup",
+                "chin up",
+                "exercise",
+                "fitness",
+                "gym",
+                "ladder",
+                "monkey bars",
+                "pullup",
+                "pull up",
+                "trim trail"
+            ],
+            "name": "Exercise Monkey Bars"
+        },
+        "leisure/fitness_station/hyperextension": {
+            "icon": "pitch",
+            "fields": [
+                "ref",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "fitness_station",
+                "fitness_station": "hyperextension"
+            },
+            "addTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "hyperextension",
+                "sport": "fitness"
+            },
+            "removeTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "hyperextension",
+                "sport": "fitness"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "fitness_station"
+            },
+            "terms": [
+                "back",
+                "exercise",
+                "extension",
+                "fitness",
+                "gym",
+                "roman chair",
+                "trim trail"
+            ],
+            "name": "Hyperextension Station"
+        },
+        "leisure/fitness_station/parallel_bars": {
+            "icon": "pitch",
+            "fields": [
+                "ref",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "fitness_station",
+                "fitness_station": "parallel_bars"
+            },
+            "addTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "parallel_bars",
+                "sport": "fitness"
+            },
+            "removeTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "parallel_bars",
+                "sport": "fitness"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "fitness_station"
+            },
+            "terms": [
+                "bar",
+                "dip",
+                "exercise",
+                "fitness",
+                "gym",
+                "trim trail"
+            ],
+            "name": "Parallel Bars"
+        },
+        "leisure/fitness_station/push-up": {
+            "icon": "pitch",
+            "fields": [
+                "ref",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "fitness_station",
+                "fitness_station": "push-up"
+            },
+            "addTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "push-up",
+                "sport": "fitness"
+            },
+            "removeTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "push-up",
+                "sport": "fitness"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "fitness_station"
+            },
+            "terms": [
+                "bar",
+                "exercise",
+                "fitness",
+                "gym",
+                "pushup",
+                "push up",
+                "trim trail"
+            ],
+            "name": "Push-Up Station"
+        },
+        "leisure/fitness_station/rings": {
+            "icon": "pitch",
+            "fields": [
+                "ref",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "fitness_station",
+                "fitness_station": "rings"
+            },
+            "addTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "rings",
+                "sport": "fitness"
+            },
+            "removeTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "rings",
+                "sport": "fitness"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "fitness_station"
+            },
+            "terms": [
+                "exercise",
+                "fitness",
+                "gym",
+                "muscle up",
+                "pullup",
+                "pull up",
+                "trim trail"
+            ],
+            "name": "Exercise Rings"
+        },
+        "leisure/fitness_station/sign": {
+            "icon": "pitch",
+            "fields": [
+                "ref",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "fitness_station",
+                "fitness_station": "sign"
+            },
+            "addTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "sign",
+                "sport": "fitness"
+            },
+            "removeTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "sign",
+                "sport": "fitness"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "fitness_station"
+            },
+            "terms": [
+                "exercise",
+                "fitness",
+                "gym",
+                "trim trail"
+            ],
+            "name": "Exercise Instruction Sign"
+        },
+        "leisure/fitness_station/sit-up": {
+            "icon": "pitch",
+            "fields": [
+                "ref",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "fitness_station",
+                "fitness_station": "sit-up"
+            },
+            "addTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "sit-up",
+                "sport": "fitness"
+            },
+            "removeTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "sit-up",
+                "sport": "fitness"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "fitness_station"
+            },
+            "terms": [
+                "crunch",
+                "exercise",
+                "fitness",
+                "gym",
+                "situp",
+                "sit up",
+                "trim trail"
+            ],
+            "name": "Sit-Up Station"
+        },
+        "leisure/fitness_station/stairs": {
+            "icon": "pitch",
+            "fields": [
+                "ref",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "fitness_station",
+                "fitness_station": "stairs"
+            },
+            "addTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "stairs",
+                "sport": "fitness"
+            },
+            "removeTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "stairs",
+                "sport": "fitness"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "fitness_station"
+            },
+            "terms": [
+                "exercise",
+                "fitness",
+                "gym",
+                "steps",
+                "trim trail"
+            ],
+            "name": "Exercise Stairs"
         },
         "leisure/garden": {
             "icon": "garden",
@@ -11704,7 +12143,7 @@
             "tags": {
                 "playground": "balancebeam"
             },
-            "name": "Balance Beam"
+            "name": "Play Balance Beam"
         },
         "playground/basket_spinner": {
             "icon": "playground",

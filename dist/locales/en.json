@@ -1550,8 +1550,8 @@
                         "pond": "Pond"
                     }
                 },
-                "fitness_station_type": {
-                    "label": "Fitness Station Type"
+                "fitness_station": {
+                    "label": "Equipment Type"
                 },
                 "fixme": {
                     "label": "Fix Me"
@@ -4132,7 +4132,51 @@
                 },
                 "leisure/fitness_station": {
                     "name": "Outdoor Fitness Station",
-                    "terms": "fitness,gym,trim trail"
+                    "terms": "exercise,fitness,gym,trim trail"
+                },
+                "leisure/fitness_station/balance_beam": {
+                    "name": "Exercise Balance Beam",
+                    "terms": "balance,exercise,fitness,gym,trim trail"
+                },
+                "leisure/fitness_station/box": {
+                    "name": "Exercise Box",
+                    "terms": "box,exercise,fitness,gym,jump,trim trail"
+                },
+                "leisure/fitness_station/horizontal_bar": {
+                    "name": "Exercise Horizontal Bar",
+                    "terms": "bar,chinup,chin up,exercise,fitness,gym,pullup,pull up,trim trail"
+                },
+                "leisure/fitness_station/horizontal_ladder": {
+                    "name": "Exercise Monkey Bars",
+                    "terms": "bar,chinup,chin up,exercise,fitness,gym,ladder,monkey bars,pullup,pull up,trim trail"
+                },
+                "leisure/fitness_station/hyperextension": {
+                    "name": "Hyperextension Station",
+                    "terms": "back,exercise,extension,fitness,gym,roman chair,trim trail"
+                },
+                "leisure/fitness_station/parallel_bars": {
+                    "name": "Parallel Bars",
+                    "terms": "bar,dip,exercise,fitness,gym,trim trail"
+                },
+                "leisure/fitness_station/push-up": {
+                    "name": "Push-Up Station",
+                    "terms": "bar,exercise,fitness,gym,pushup,push up,trim trail"
+                },
+                "leisure/fitness_station/rings": {
+                    "name": "Exercise Rings",
+                    "terms": "exercise,fitness,gym,muscle up,pullup,pull up,trim trail"
+                },
+                "leisure/fitness_station/sign": {
+                    "name": "Exercise Instruction Sign",
+                    "terms": "exercise,fitness,gym,trim trail"
+                },
+                "leisure/fitness_station/sit-up": {
+                    "name": "Sit-Up Station",
+                    "terms": "crunch,exercise,fitness,gym,situp,sit up,trim trail"
+                },
+                "leisure/fitness_station/stairs": {
+                    "name": "Exercise Stairs",
+                    "terms": "exercise,fitness,gym,steps,trim trail"
                 },
                 "leisure/garden": {
                     "name": "Garden",
@@ -4691,7 +4735,7 @@
                     "terms": ""
                 },
                 "playground/balance_beam": {
-                    "name": "Balance Beam",
+                    "name": "Play Balance Beam",
                     "terms": ""
                 },
                 "playground/basket_spinner": {
