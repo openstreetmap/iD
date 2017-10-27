@@ -1,0 +1,6 @@
+{
+    "key": "windings",
+    "type": "number",
+    "label": "Number of Windings",
+    "placeholder": "1, 2, 3..."
+}

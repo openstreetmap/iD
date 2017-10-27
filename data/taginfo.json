@@ -141,6 +141,10 @@
         },
         {
             "key": "amenity",
+            "value": "scrapyard"
+        },
+        {
+            "key": "amenity",
             "value": "swimming_pool"
         },
         {
@@ -478,10 +482,6 @@
         {
             "key": "amenity",
             "value": "school"
-        },
-        {
-            "key": "amenity",
-            "value": "scrapyard"
         },
         {
             "key": "amenity",
@@ -1571,6 +1571,14 @@
             "value": "industrial"
         },
         {
+            "key": "industrial",
+            "value": "scrap_yard"
+        },
+        {
+            "key": "industrial",
+            "value": "slaughterhouse"
+        },
+        {
             "key": "landuse",
             "value": "landfill"
         },
@@ -1648,6 +1656,10 @@
         },
         {
             "key": "landuse",
+            "value": "religious"
+        },
+        {
+            "key": "landuse",
             "value": "residential"
         },
         {
@@ -1700,6 +1712,50 @@
         {
             "key": "leisure",
             "value": "fitness_station"
+        },
+        {
+            "key": "fitness_station",
+            "value": "balance_beam"
+        },
+        {
+            "key": "fitness_station",
+            "value": "box"
+        },
+        {
+            "key": "fitness_station",
+            "value": "horizontal_bar"
+        },
+        {
+            "key": "fitness_station",
+            "value": "horizontal_ladder"
+        },
+        {
+            "key": "fitness_station",
+            "value": "hyperextension"
+        },
+        {
+            "key": "fitness_station",
+            "value": "parallel_bars"
+        },
+        {
+            "key": "fitness_station",
+            "value": "push-up"
+        },
+        {
+            "key": "fitness_station",
+            "value": "rings"
+        },
+        {
+            "key": "fitness_station",
+            "value": "sign"
+        },
+        {
+            "key": "fitness_station",
+            "value": "sit-up"
+        },
+        {
+            "key": "fitness_station",
+            "value": "stairs"
         },
         {
             "key": "leisure",

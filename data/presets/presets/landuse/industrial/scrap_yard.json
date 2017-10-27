@@ -10,6 +10,21 @@
         "point",
         "area"
     ],
+    "tags": {
+        "industrial": "scrap_yard"
+    },
+    "addTags": {
+        "landuse": "industrial",
+        "industrial": "scrap_yard"
+    },
+    "removeTags": {
+        "landuse": "industrial",
+        "industrial": "scrap_yard"
+    },
+    "reference": {
+        "key": "industrial",
+        "value": "scrap_yard"
+    },
     "terms": [
         "car",
         "junk",
@@ -21,12 +36,5 @@
         "wreck",
         "yard"
     ],
-    "tags": {
-        "amenity": "scrapyard"
-    },
-    "reference": {
-        "key": "industrial",
-        "value": "scrap_yard"
-    },
     "name": "Scrap Yard"
 }

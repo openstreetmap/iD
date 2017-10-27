@@ -1,0 +1,5 @@
+{
+    "key": "voltage:secondary",
+    "type": "combo",
+    "label": "Secondary Voltage"
+}

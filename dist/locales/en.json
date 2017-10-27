@@ -1534,6 +1534,10 @@
                 "description": {
                     "label": "Description"
                 },
+                "devices": {
+                    "label": "Number of Devices",
+                    "placeholder": "1, 2, 3..."
+                },
                 "diaper": {
                     "label": "Diaper Changing Available"
                 },
@@ -1608,12 +1612,18 @@
                         "pond": "Pond"
                     }
                 },
+                "fitness_station": {
+                    "label": "Equipment Type"
+                },
                 "fixme": {
                     "label": "Fix Me"
                 },
                 "ford": {
                     "label": "Type",
                     "placeholder": "Default"
+                },
+                "frequency": {
+                    "label": "Operating Frequency"
                 },
                 "fuel_multi": {
                     "label": "Fuel Types"
@@ -1973,6 +1983,10 @@
                 "payment_multi": {
                     "label": "Payment Types"
                 },
+                "phases": {
+                    "label": "Number of Phases",
+                    "placeholder": "1, 2, 3..."
+                },
                 "phone": {
                     "label": "Phone",
                     "placeholder": "+31 42 123 4567"
@@ -2051,6 +2065,9 @@
                 },
                 "railway": {
                     "label": "Type"
+                },
+                "rating": {
+                    "label": "Power Rating"
                 },
                 "recycling_accepts": {
                     "label": "Accepts"
@@ -2361,6 +2378,19 @@
                         "no": "No: pathless, excellent orientation skills required"
                     }
                 },
+                "transformer": {
+                    "label": "Type of Transformer",
+                    "options": {
+                        "distribution": "Distribution",
+                        "generator": "Generator",
+                        "converter": "Converter",
+                        "traction": "Traction",
+                        "auto": "Autotransformer",
+                        "phase_angle_regulator": "Phase Angle Regulator",
+                        "auxiliary": "Auxiliary",
+                        "yes": "Unknown"
+                    }
+                },
                 "trees": {
                     "label": "Trees"
                 },
@@ -2395,6 +2425,15 @@
                         "scoria": "Scoria"
                     }
                 },
+                "voltage/primary": {
+                    "label": "Primary Voltage"
+                },
+                "voltage/secondary": {
+                    "label": "Secondary Voltage"
+                },
+                "voltage/tertiary": {
+                    "label": "Tertiary Voltage"
+                },
                 "wall": {
                     "label": "Type"
                 },
@@ -2422,6 +2461,22 @@
                 },
                 "wikipedia": {
                     "label": "Wikipedia"
+                },
+                "windings": {
+                    "label": "Number of Windings",
+                    "placeholder": "1, 2, 3..."
+                },
+                "windings/configuration": {
+                    "label": "Windings Configuration",
+                    "options": {
+                        "star": "Star / Wye",
+                        "delta": "Delta",
+                        "open-delta": "Open Delta",
+                        "zigzag": "Zig Zag",
+                        "open": "Open",
+                        "scott": "Scott",
+                        "leblanc": "Leblanc"
+                    }
                 }
             },
             "presets": {
@@ -2559,6 +2614,10 @@
                 },
                 "amenity/register_office": {
                     "name": "Register Office",
+                    "terms": ""
+                },
+                "amenity/scrapyard": {
+                    "name": "Scrap Yard",
                     "terms": ""
                 },
                 "amenity/swimming_pool": {
@@ -2900,10 +2959,6 @@
                 "amenity/school": {
                     "name": "School Grounds",
                     "terms": "academy,elementary school,middle school,high school"
-                },
-                "amenity/scrapyard": {
-                    "name": "Scrap Yard",
-                    "terms": "car,junk,metal,salvage,scrap,u-pull-it,vehicle,wreck,yard"
                 },
                 "amenity/shelter": {
                     "name": "Shelter",
@@ -4001,6 +4056,14 @@
                     "name": "Industrial Area",
                     "terms": ""
                 },
+                "landuse/industrial/scrap_yard": {
+                    "name": "Scrap Yard",
+                    "terms": "car,junk,metal,salvage,scrap,u-pull-it,vehicle,wreck,yard"
+                },
+                "landuse/industrial/slaughterhouse": {
+                    "name": "Slaughterhouse",
+                    "terms": "abattoir,beef,butchery,calf,chicken,cow,killing house,meat,pig,pork,poultry,shambles,stockyard"
+                },
                 "landuse/landfill": {
                     "name": "Landfill",
                     "terms": "dump"
@@ -4077,6 +4140,10 @@
                     "name": "Recreation Ground",
                     "terms": "playing fields"
                 },
+                "landuse/religious": {
+                    "name": "Religious Area",
+                    "terms": ""
+                },
                 "landuse/residential": {
                     "name": "Residential Area",
                     "terms": ""
@@ -4131,7 +4198,51 @@
                 },
                 "leisure/fitness_station": {
                     "name": "Outdoor Fitness Station",
-                    "terms": "fitness,gym,trim trail"
+                    "terms": "exercise,fitness,gym,trim trail"
+                },
+                "leisure/fitness_station/balance_beam": {
+                    "name": "Exercise Balance Beam",
+                    "terms": "balance,exercise,fitness,gym,trim trail"
+                },
+                "leisure/fitness_station/box": {
+                    "name": "Exercise Box",
+                    "terms": "box,exercise,fitness,gym,jump,trim trail"
+                },
+                "leisure/fitness_station/horizontal_bar": {
+                    "name": "Exercise Horizontal Bar",
+                    "terms": "bar,chinup,chin up,exercise,fitness,gym,pullup,pull up,trim trail"
+                },
+                "leisure/fitness_station/horizontal_ladder": {
+                    "name": "Exercise Monkey Bars",
+                    "terms": "bar,chinup,chin up,exercise,fitness,gym,ladder,monkey bars,pullup,pull up,trim trail"
+                },
+                "leisure/fitness_station/hyperextension": {
+                    "name": "Hyperextension Station",
+                    "terms": "back,exercise,extension,fitness,gym,roman chair,trim trail"
+                },
+                "leisure/fitness_station/parallel_bars": {
+                    "name": "Parallel Bars",
+                    "terms": "bar,dip,exercise,fitness,gym,trim trail"
+                },
+                "leisure/fitness_station/push-up": {
+                    "name": "Push-Up Station",
+                    "terms": "bar,exercise,fitness,gym,pushup,push up,trim trail"
+                },
+                "leisure/fitness_station/rings": {
+                    "name": "Exercise Rings",
+                    "terms": "exercise,fitness,gym,muscle up,pullup,pull up,trim trail"
+                },
+                "leisure/fitness_station/sign": {
+                    "name": "Exercise Instruction Sign",
+                    "terms": "exercise,fitness,gym,trim trail"
+                },
+                "leisure/fitness_station/sit-up": {
+                    "name": "Sit-Up Station",
+                    "terms": "crunch,exercise,fitness,gym,situp,sit up,trim trail"
+                },
+                "leisure/fitness_station/stairs": {
+                    "name": "Exercise Stairs",
+                    "terms": "exercise,fitness,gym,steps,trim trail"
                 },
                 "leisure/garden": {
                     "name": "Garden",
@@ -4690,7 +4801,7 @@
                     "terms": ""
                 },
                 "playground/balance_beam": {
-                    "name": "Balance Beam",
+                    "name": "Play Balance Beam",
                     "terms": ""
                 },
                 "playground/basket_spinner": {
@@ -4710,7 +4821,7 @@
                     "terms": ""
                 },
                 "playground/horizontal_bar": {
-                    "name": "Horizontal Bar",
+                    "name": "Play Horizontal Bar",
                     "terms": "high bar"
                 },
                 "playground/rocker": {
@@ -5391,7 +5502,7 @@
                 },
                 "tourism/alpine_hut": {
                     "name": "Alpine Hut",
-                    "terms": ""
+                    "terms": "climbing hut"
                 },
                 "tourism/apartment": {
                     "name": "Guest Apartment / Condo",

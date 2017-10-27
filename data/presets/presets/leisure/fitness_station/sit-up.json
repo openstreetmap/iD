@@ -1,7 +1,6 @@
 {
     "icon": "pitch",
     "fields": [
-        "fitness_station",
         "ref",
         "opening_hours"
     ],
@@ -10,14 +9,17 @@
         "area"
     ],
     "tags": {
-        "leisure": "fitness_station"
+        "leisure": "fitness_station",
+        "fitness_station": "sit-up"
     },
     "addTags": {
         "leisure": "fitness_station",
+        "fitness_station": "sit-up",
         "sport": "fitness"
     },
     "removeTags": {
         "leisure": "fitness_station",
+        "fitness_station": "sit-up",
         "sport": "fitness"
     },
     "reference": {
@@ -25,10 +27,13 @@
         "value": "fitness_station"
     },
     "terms": [
+        "crunch",
         "exercise",
         "fitness",
         "gym",
+        "situp",
+        "sit up",
         "trim trail"
     ],
-    "name": "Outdoor Fitness Station"
+    "name": "Sit-Up Station"
 }
