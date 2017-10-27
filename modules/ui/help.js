@@ -73,7 +73,6 @@ export function uiHelp(context) {
           down: icon('#icon-down', 'pre-text'),
           up: icon('#icon-up', 'pre-text'),
           inspect: icon('#icon-inspect', 'pre-text'),
-          geolocate: icon('#icon-geolocate', 'pre-text'),
           move: icon('#operation-move', 'pre-text'),
           merge: icon('#operation-merge', 'pre-text'),
           copy: icon('#operation-copy', 'pre-text'),
