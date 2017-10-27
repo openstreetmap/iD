@@ -8758,6 +8758,19 @@
             ],
             "name": "Recreation Ground"
         },
+        "landuse/religious": {
+            "geometry": [
+                "area"
+            ],
+            "fields": [
+                "name"
+            ],
+            "tags": {
+                "landuse": "religious"
+            },
+            "terms": [],
+            "name": "Religious Area"
+        },
         "landuse/residential": {
             "icon": "building",
             "geometry": [

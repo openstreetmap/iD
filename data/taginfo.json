@@ -1656,6 +1656,10 @@
         },
         {
             "key": "landuse",
+            "value": "religious"
+        },
+        {
+            "key": "landuse",
             "value": "residential"
         },
         {
