@@ -15,7 +15,6 @@ import { tooltip } from '../util/tooltip';
 
 import { icon } from 'intro/helper';
 
-
 export function uiHelp(context) {
     var key = t('help.key');
 
@@ -29,27 +28,61 @@ export function uiHelp(context) {
           ['help.addresses.',['intro','nodup','recommendation','points']],
           ['help.feature_editor.',['intro','select','fields','tags','undo']],
           ['help.imagery.',['intro','background','offset']],
+          ['help.iconstools.',['icons','tools','more']],
           ['help.relations.',['intro','members','maintain','edit','multipolygons','turnrestrictions']]
         ];
 
     var icont = {
+          more: icon('#icon-more', 'pre-text'),
           apply: icon('#icon-apply', 'pre-text'),
+          alert: icon('#icon-alert', 'pre-text'),
+          avatar: icon('#icon-avatar', 'pre-text'),
+          forward: icon('#icon-forward', 'pre-text'),
+          backward: icon('#icon-backward', 'pre-text'),
+          fullscreen: icon('#icon-full-screen', 'pre-text'),
+          collapsescreen: icon('#icon-collapse-screen', 'pre-text'),
+          geolocate: icon('#icon-geolocate', 'pre-text'),
+          load: icon('#icon-load', 'pre-text'),
+          search: icon('#icon-search', 'pre-text'),
+          bug: icon('#icon-bug', 'pre-text'),
+          point: icon('#icon-point', 'pre-text'),
+          line: icon('#icon-line', 'pre-text'),
           area: icon('#icon-area', 'pre-text'),
           help: icon('#icon-help', 'pre-text'),
-          line: icon('#icon-line', 'pre-text'),
-          minus: icon('#icon-minus', 'pre-text'),
           plus: icon('#icon-plus', 'pre-text'),
-          point: icon('#icon-point', 'pre-text'),
-          mapdata: icon('#logo-layers', 'pre-text'),
+          minus: icon('#icon-minus', 'pre-text'),
+          nearby: icon('#icon-nearby', 'pre-text'),
+          outlink: icon('#icon-out-link', 'pre-text'),
+          relation: icon('#icon-relation', 'pre-text'),
+          translate: icon('#icon-translate', 'pre-text'),
           circularize: icon('#operation-circularize', 'pre-text'),
-          delete: icon('#operation-delete', 'pre-text'),
           orthogonalize: icon('#operation-orthogonalize', 'pre-text'),
           split: icon('#operation-split', 'pre-text'),
-          undo: icon('#operation-undo', 'pre-text'),
-          redo: icon('#operation-redo', 'pre-text'),
-          save: icon('#operation-save', 'pre-text'),
+          reflect_long: icon('#operation-reflect-long', 'pre-text'),
+          reflect_short: icon('#operation-reflect-short', 'pre-text'),
+          simplify: icon('#operation-simplify', 'pre-text'),
+          smooth: icon('#operation-smooth', 'pre-text'),
+          straighten: icon('#operation-straighten', 'pre-text'),
+          rotate: icon('#operation-rotate', 'pre-text'),
+          reverse: icon('#operation-reverse', 'pre-text'),
+          continue: icon('#operation-continue', 'pre-text'),
+          disconnect: icon('#operation-disconnect', 'pre-text'),
+          layers: icon('#operation-layers', 'pre-text'),
+          vertex: icon('#icon-vertex', 'pre-text'),
+          data: icon('#icon-data', 'pre-text'),
+          down: icon('#icon-down', 'pre-text'),
+          up: icon('#icon-up', 'pre-text'),
+          inspect: icon('#icon-inspect', 'pre-text'),
+          geolocate: icon('#icon-geolocate', 'pre-text'),
           move: icon('#operation-move', 'pre-text'),
-          disconnect: icon('#operation-disconnect', 'pre-text')
+          merge: icon('#operation-merge', 'pre-text'),
+          copy: icon('#operation-copy', 'pre-text'),
+          paste: icon('#operation-paste', 'pre-text'),
+          delete: icon('#operation-delete', 'pre-text'),
+          close: icon('#icon-close', 'pre-text'),
+          undo: icon('#icon-undo', 'pre-text'),
+          redo: icon('#icon-redo', 'pre-text'),
+          save: icon('#icon-save', 'pre-text')
         };
 
     var docs = docKeys.map(function(key) {
@@ -59,7 +92,6 @@ export function uiHelp(context) {
             html: marked(text.split('\n').slice(1).join('\n'))
         };
     });
-
 
     function help(selection) {
 

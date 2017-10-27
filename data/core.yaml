@@ -935,6 +935,72 @@ en:
         the imagery so that it matches the existing data by clicking 'Fix alignment' at
         the bottom of the Background Settings.
 
+    iconstools:
+      icons: |
+        # Icons & Tools
+
+        ### Top row:
+        {search} Search features
+        {point} 'Add point' mode
+        {line} 'Add line'  mode
+        {area} 'Add area' mode
+        {undo} Undo
+        {redo} Redo
+        {save} Save changes
+        ### Right column:
+        {plus} Zoom in
+        {minus} Zoom out
+        {geolocate} Show my location
+        {layers} Background settings
+        {data} Data data
+        {help} Help
+        ### Bottom row:
+        {bug} Report a bug
+        {translate} Help translate
+
+      tools: |
+        ## Tools
+
+        The editing menu has the following tools to operate on selected features:
+        {move} Move
+        {rotate} Rotate
+        {reflect_long} Reflect at long axis
+        {reflect_short} Reflect at short axis
+        {continue} Continue line
+        {reverse} Reverse direction
+        {merge} Merge features into one or create relation
+        {split} Split in two
+        {disconnect} Disconnect
+        {circularize} Circularize
+        {orthogonalize} Orthogonalize
+        {straighten} Straighten line
+        {delete} Delete
+        ### Reserved for later are:
+        {simplify} Simplify
+        {smooth} Smooth
+
+      more: |
+        ### More icons {more}
+        {apply} Apply
+        {close} Close
+        {backward} Backward
+        {forward} Forward
+        {fullscreen} Fullscreen
+        {collapsescreen} Collapse-screen
+        {up} Up
+        {down} Down
+        {relation} Relation
+        {vertex} Vertex
+        {load} Load
+        ### Reserved for later are:
+        {copy} Copy
+        {paste} Paste
+        {alert} Alert
+        {inspect} Inspect
+        {nearby} Nearby
+        {avatar} Avatar
+        {outlink} Outlink
+
     relations:
       intro: |
         # Relations
