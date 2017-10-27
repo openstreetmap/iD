@@ -445,7 +445,9 @@ export function uiMapData(context) {
                     geoserviceLayer.format('json');
                 }
 
+                // initially list all GeoService fields and set them to false (not imported)
                 var myFields = {};
+
                 _.map(data.fields, function (field) {
                     // don't allow user to change how OBJECTID works or map other system-managed fields
                     if ((['OBJECTID', 'SHAPE', 'SHAPE_LENGTH', 'SHAPE_AREA', 'SHAPE.LENGTH', 'SHAPE.AREA', 'X_COORD', 'Y_COORD'].indexOf(field.name.toUpperCase()) > -1) || (field.name.toUpperCase().indexOf('SHAPE.') === 0)) {
@@ -470,30 +472,27 @@ export function uiMapData(context) {
                         .append('input')
                             .attr('class', field.name.replace(/\s/g, '_'))
                             .attr('type', 'checkbox')
-                            .property('checked', window.layerChecked[field.name])
+                            .property('checked', typeof geoserviceLayer.fields()[field.name] === 'string')
                             .on('click', function() {
                                 // control click toggles all, otherwise change event handles it all
                                 if (d3.event.ctrlKey || d3.event.metaKey) {
                                     var allSet = this.checked;
+                                    var selectFields = geoserviceLayer.fields();
                                     d3.selectAll('.geoservice-table input[type="checkbox"]')
-                                        .property('checked', allSet)
-                                        .each(function() {
-                                            window.layerChecked[this.className] = allSet;
-                                        });
-                                    var allFields = Object.keys(geoserviceLayer.fields());
-                                    var selectFields = {};
-                                    _.map(allFields, function (field) {
-                                        selectFields[field] = true;
+                                        .property('checked', allSet);
+                                    var fieldNames = Object.keys(fields);
+                                    _.map(fieldNames, function (field) {
+                                        // set to current field-name, GeoService original name, or false (for not-imported)
+                                        selectFields[field] = allSet ? (selectFields[field] || field) : false;
                                     });
                                     geoserviceLayer.fields(selectFields);
                                 }
                             })
                             .on('change', function() {
                                 // record that this field is being imported
-                                window.layerChecked[field.name] = this.checked;
-                                var fields = geoserviceLayer.fields();
-                                fields[field.name] = this.checked;
-                                geoserviceLayer.fields(fields);
+                                var selectFields = geoserviceLayer.fields();
+                                selectFields[field.name] = this.checked ? (selectFields[field.name] || field.name) : false;
+                                geoserviceLayer.fields(selectFields);
 
                                 // don't allow an OSM import tag to be entered if we're not importing this field
                                 var dropdown = d3.select('input[name="' + field.name + '"]')
@@ -514,7 +513,7 @@ export function uiMapData(context) {
                         .call(suggestedKeys)
                         .on('change', function() {
                             // properties with this.name renamed to this.value
-                            window.layerImports[this.name] = this.value;
+                            geoserviceLayer.setField(this.name, this.value);
                         });
                 });
                 geoserviceLayer.fields(myFields);
@@ -769,10 +768,9 @@ export function uiMapData(context) {
                             .call(suggestedKeys)
                             .on('change', function() {
                                 if (this.name) {
-                                    window.layerImports['add_' + this.value] = window.layerImports['add_' + this.name];
-                                    delete window.layerImports['add_' + this.name];
+                                    geoserviceLayer.setField('add_' + this.value, 'add_' + this.name);
                                 } else {
-                                    window.layerImports['add_' + this.value] = '';
+                                    geoserviceLayer.setField('add_' + this.value, null);
                                 }
                                 this.name = this.value;
                                 d3.selectAll('.osm-key-' + uniqNum).attr('name', this.value);
@@ -787,7 +785,7 @@ export function uiMapData(context) {
                             .attr('class', 'osm-key-' + uniqNum)
                             .on('change', function() {
                                 // properties with this.name renamed to this.value
-                                window.layerImports['add_' + this.name] = this.value;
+                                geoserviceLayer.setField('add_' + this.name, this.value);
                             });
                     });
 
@@ -811,15 +809,18 @@ export function uiMapData(context) {
                     }
 
                     if (!copyapproval.property('checked')) {
-                        alert('This is your first time importing from this GeoService. Please confirm that it\'s license grants permission to be included in OpenStreetMap');
+                        alert('This is your first time importing from this GeoService. Please confirm that its license grants permission to be included in OpenStreetMap');
                         return;
                     }
-                    if (license || metadata_url) {
-                        context.storage('license-' + (license || metadata_url), 'approved');
+                    if (geoserviceLayer.license() || geoserviceLayer.metadata()) {
+                        context.storage('license-' + (geoserviceLayer.license() || geoserviceLayer.metadata()), 'approved');
                     }
 
                     var importFields = geoserviceLayer.fields();
                     var importedAtLeastOneField = false;
+                    if (geoserviceLayer.preset()) {
+                      importedAtLeastOneField = true;
+                    }
                     var hideFields = [];
                     _.map(Object.keys(importFields), function (field) {
                         if (importFields[field]) {
@@ -896,8 +897,6 @@ export function uiMapData(context) {
         }
 
         function editGeoService() {
-            // window allows user to enter a GeoService layer
-
             d3.event.preventDefault();
             toggle();
         }
@@ -914,13 +913,12 @@ export function uiMapData(context) {
             gsLayer.pane().selectAll('.topurl, .url.final').classed('hide', true);
 
             // if there is an OSM preset, add it to set tags
-            // window.layerImports = {};
             var setPreset = context.layers().layer('geoservice').preset();
             if (setPreset) {
                 // set standard tags
                 var tags = Object.keys(setPreset.tags);
                 for (var t = 0; t < tags.length; t++) {
-                    window.layerImports['add_' + tags[t]] = setPreset.tags[tags[t]];
+                    gsLayer.setField('add_' + tags[t], setPreset.tags[tags[t]]);
                 }
 
                 // suggest additional OSM tags

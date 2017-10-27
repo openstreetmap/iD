@@ -13,10 +13,6 @@ import polygonIntersect from 'turf-intersect';
 import polygonBuffer from 'turf-buffer';
 import pointInside from 'turf-inside';
 
-// dictionary matching geo-properties to OpenStreetMap tags 1:1
-window.layerImports = {};
-window.layerChecked = {};
-
 export function svgGeoService(projection, context, dispatch) {
     var detected = utilDetect();
 
@@ -42,12 +38,12 @@ export function svgGeoService(projection, context, dispatch) {
         return this;
     }
 
-    function processGeoFeature(selectfeature, preset) {
+    drawGeoService.processGeoFeature = function(selectfeature, preset) {
         // when importing an object, accept users' changes to keys
-        var convertedKeys = Object.keys(window.layerImports);
+        var convertedKeys = Object.keys(this.fields());
         var additionalKeys = Object.keys(selectfeature.properties);
         for (var a = 0; a < additionalKeys.length; a++) {
-            if (!window.layerImports[additionalKeys[a]] && additionalKeys[a] !== 'OBJECTID') {
+            if (!this.fields()[additionalKeys[a]] && additionalKeys[a] !== 'OBJECTID') {
                 convertedKeys.push(additionalKeys[a]);
             }
         }
@@ -65,14 +61,14 @@ export function svgGeoService(projection, context, dispatch) {
             if (convertedKeys[k].indexOf('add_') === 0) {
                 // user or preset has added a key:value pair to all objects
                 osmk = convertedKeys[k].substring(4);
-                osmv = window.layerImports[convertedKeys[k]];
-                if (window.layerChecked[osmk]) {
+                osmv = this.fields()[convertedKeys[k]];
+                if (this.fields()[osmk]) {
                     // this data will be imported from the GeoService and not from preset
                     continue;
                 }
             } else {
                 var originalKey = convertedKeys[k];
-                var approval = window.layerChecked[originalKey];
+                var approval = this.fields()[originalKey];
                 if (!approval) {
                     // left unchecked, do not import
                     continue;
@@ -81,7 +77,7 @@ export function svgGeoService(projection, context, dispatch) {
                 // user checked or kept box checked, should be imported
                 osmv = selectfeature.properties[originalKey];
                 if (osmv) {
-                    osmk = window.layerImports[originalKey] || originalKey;
+                    osmk = this.fields()[originalKey] || originalKey;
                 }
             }
 
@@ -117,10 +113,9 @@ export function svgGeoService(projection, context, dispatch) {
         // get / set an individual preset, or reset to null
         var presetBox = this.pane().selectAll('.preset');
         if (preset) {
-            // console.log(preset)
             // preset.tags { }
             // preset.fields[{ keys: [], strings: { placeholders: { } } }]
-            var tag = [preset.icon, preset.id.split('/')[0], preset.id.replace('/', '-')];
+            var tag = [preset.icon || '', preset.id.split('/')[0], preset.id.replace('/', '-')];
             if (preset.id.indexOf('driveway') > -1) {
                 tag = ['highway-service', 'tag-highway', 'tag-highway-service', 'tag-service', 'tag-service-driveway'];
             }
@@ -189,7 +184,7 @@ export function svgGeoService(projection, context, dispatch) {
             } else if (preset.id.indexOf('building') > -1) {
                 return d3.selectAll('.overlap-buildings').classed('must-show', true);
             } else {
-                console.log(preset.id);
+                //console.log(preset.id);
             }
 
         } else if (preset === null) {
@@ -417,7 +412,7 @@ export function svgGeoService(projection, context, dispatch) {
                     originalProperties[key] = d.properties[key];
                 });
 
-                var adjustedFeature = processGeoFeature({ properties: originalProperties }, gsLayer = context.layers().layer('geoservice').preset());
+                var adjustedFeature = obj.processGeoFeature({ properties: originalProperties }, gsLayer = context.layers().layer('geoservice').preset());
 
                 context.perform(
                     actionChangeTags(wayid, adjustedFeature.properties),
@@ -457,7 +452,7 @@ export function svgGeoService(projection, context, dispatch) {
                     var isAligned = linesMatch(importLine, gjids[wayid]);
                     if (isAligned > 0.75) {
                         matches.push(wayid);
-                        console.log('line match found: ' + wayid + ' (possible segment) val: ' + isAligned);
+                        //console.log('line match found: ' + wayid + ' (possible segment) val: ' + isAligned);
                         madeMerge = true;
                         mergeImportTags(wayid);
                     }
@@ -607,8 +602,15 @@ export function svgGeoService(projection, context, dispatch) {
 
     // importFields is an object with each key corresponding to true / false based on whether it should be imported
     drawGeoService.fields = function(fields) {
-        if (!arguments.length) return (drawGeoService.importFields || []);
+        if (!arguments.length) return (drawGeoService.importFields || {});
         drawGeoService.importFields = fields;
+        return this;
+    };
+
+    drawGeoService.setField = function(geoservice_key, osm_tag) {
+        var fields = drawGeoService.fields();
+        fields[geoservice_key] = osm_tag;
+        drawGeoService.fields(fields);
         return this;
     };
 
@@ -628,7 +630,6 @@ export function svgGeoService(projection, context, dispatch) {
         if (!this.layerUrl) {
             drawGeoService.layerUrl = true_url;
         }
-
         var fmt = drawGeoService.format() || 'json';
 
         // add necessary URL parameters to the user's URL
@@ -659,7 +660,7 @@ export function svgGeoService(projection, context, dispatch) {
             var allFields = drawGeoService.fields();
             var selectFields = [];
             _.map(Object.keys(allFields), function (field) {
-                if (allFields[field]) {
+                if (allFields[field] && field.indexOf('add_') !== 0) {
                     selectFields.push(field);
                 }
             });
@@ -708,7 +709,7 @@ export function svgGeoService(projection, context, dispatch) {
                 }
 
                 _.map(jsondl.features, function(selectfeature) {
-                    return processGeoFeature(selectfeature, that.preset());
+                    return that.processGeoFeature(selectfeature, that.preset());
                 });
 
                 // send the modified geo-features to the draw layer
