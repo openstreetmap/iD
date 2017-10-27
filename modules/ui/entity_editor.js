@@ -95,6 +95,7 @@ export function uiEntityEditor(context) {
             .append('div')
             .attr('class', 'inspector-border import-approve');
 
+        // accept/reject circle indicator
         var statusIcon = 'neutral';
         if (this.focusEntity.approvedForEdit === 'approved') {
             statusIcon = 'approve';
@@ -108,7 +109,8 @@ export function uiEntityEditor(context) {
             .attr('class', 'import-icon ' + statusIcon)
             .text('___');
 
-        var acceptButton = importApprove.append('button')
+        // accept button
+        importApprove.append('button')
             .attr('class', 'approve')
             .text('Approve')
             .on('click', function() {
@@ -117,13 +119,14 @@ export function uiEntityEditor(context) {
                 // apply a CSS class to any point / line / polygon approved
                 d3_selectAll('.layer-osm .' + this.focusEntity.id)
                     .classed('import-approved', true)
-                    .classed('import-edited import-rejected import-pending', false)
+                    .classed('import-edited import-rejected import-pending', false);
                 d3_selectAll('.import-icon')
                     .classed('neutral reject', false)
                     .classed('approve', true);
             }.bind(this));
 
-        var rejectButton = importApprove.append('button')
+        // reject button
+        importApprove.append('button')
             .text('Reject')
             .on('click', (function() {
                 if (this.focusEntity && this.focusEntity.importOriginal) {
@@ -148,7 +151,7 @@ export function uiEntityEditor(context) {
             }).bind(this));
 
         // show import approval section?
-        d3_selectAll('.import-approve').classed('hide', (!entity.approvedForEdit) || (entity.approvedForEdit === 'approved') || (d3_select('input[name="approvalProcess"]:checked').property('value') === 'all'));
+        d3_selectAll('.import-approve').classed('hide', !entity.approvedForEdit);
 
         enter
             .append('div')

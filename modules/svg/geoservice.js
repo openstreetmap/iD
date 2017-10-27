@@ -88,7 +88,7 @@ export function svgGeoService(projection, context, dispatch) {
         }
         selectfeature.properties = outprops;
         return selectfeature;
-    }
+    };
 
     drawGeoService.pane = function() {
         if (!this.geoservicepane) {
@@ -215,9 +215,10 @@ export function svgGeoService(projection, context, dispatch) {
         drawGeoService.datastore = gj;
 
         var gjids = {};
-        pointInPolygon = d3.selectAll('.point-in-polygon input').property('checked');
-        mergeLines = d3.selectAll('.merge-lines input').property('checked');
-        overlapBuildings = d3.selectAll('.overlap-buildings input').property('checked');
+        var obj = this;
+        var pointInPolygon = d3.selectAll('.point-in-polygon input').property('checked');
+        var mergeLines = d3.selectAll('.merge-lines input').property('checked');
+        var overlapBuildings = d3.selectAll('.overlap-buildings input').property('checked');
 
         function fetchVisibleBuildings(callback, selector) {
             var buildings = d3.selectAll(selector || 'path.tag-building');
@@ -225,7 +226,7 @@ export function svgGeoService(projection, context, dispatch) {
                 _.map(buildinglist2, function (buildinglist) {
                     _.map(buildinglist, function (building) {
                         callback(building);
-                    })
+                    });
                 });
             });
         }
@@ -379,7 +380,8 @@ export function svgGeoService(projection, context, dispatch) {
                         way = mapLine(d, coords[0], true);
                         return way;
                     }
-                }
+                };
+
                 if (overlapBuildings) {
                     var foundOverlap = false;
                     fetchVisibleBuildings(function(building) {
@@ -412,7 +414,8 @@ export function svgGeoService(projection, context, dispatch) {
                     originalProperties[key] = d.properties[key];
                 });
 
-                var adjustedFeature = obj.processGeoFeature({ properties: originalProperties }, gsLayer = context.layers().layer('geoservice').preset());
+                var adjustedFeature = obj.processGeoFeature({ properties: originalProperties });
+                var gsLayer = context.layers().layer('geoservice').preset();
 
                 context.perform(
                     actionChangeTags(wayid, adjustedFeature.properties),
@@ -453,7 +456,6 @@ export function svgGeoService(projection, context, dispatch) {
                     if (isAligned > 0.75) {
                         matches.push(wayid);
                         //console.log('line match found: ' + wayid + ' (possible segment) val: ' + isAligned);
-                        madeMerge = true;
                         mergeImportTags(wayid);
                     }
                 });
@@ -487,23 +489,18 @@ export function svgGeoService(projection, context, dispatch) {
                     }
 
                 } else {
-                    var node = new osmNode(props);
-                    node.approvedForEdit = 'pending';
+                    var noded = new osmNode(props);
+                    noded.approvedForEdit = 'pending';
                     context.perform(
-                        actionAddEntity(node),
+                        actionAddEntity(noded),
                         'adding point'
                     );
                 }
 
             } else if (d.geometry.type === 'LineString') {
                 if (mergeLines) {
-                    var mergeRoads = matchingRoads(d);
-                    /*
-                    _.map(mergeRoads, function(mergeRoadWayId) {
-                    });
-                    */
-
-                    if (!mergeRoads.length) {
+                    var mergeRoadsd = matchingRoads(d);
+                    if (!mergeRoadsd.length) {
                         // none of the roads overlapped
                         mapLine(d, d.geometry.coordinates);
                     }

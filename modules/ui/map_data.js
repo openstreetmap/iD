@@ -13,7 +13,6 @@ import { d3combobox } from '../lib/d3.combobox.js';
 
 export function uiMapData(context) {
     var key = t('map_data.key'),
-        geoserviceDownloadAll = true,
         features = context.features().keys(),
         layers = context.layers(),
         fills = ['wireframe', 'partial', 'full'],
@@ -216,9 +215,7 @@ export function uiMapData(context) {
         }
 
         function drawGeoServiceItem(selection) {
-            var geoserviceLayer = layers.layer('geoservice'),
-                hasData = geoserviceLayer && geoserviceLayer.hasData(),
-                showsGeoService = hasData && geoserviceLayer.enabled();
+            var geoserviceLayer = layers.layer('geoservice');
 
             var geoserviceLayerItem = selection
                 .selectAll('.layer-list-geoservice')
@@ -245,9 +242,7 @@ export function uiMapData(context) {
 
             labelGeoService.append('button')
                 .attr('class', 'layer-browse')
-                .on('click', editGeoService)
-                // the magnifying glass doesnt seem appropriate since we dont provide tools to search
-                // .call(svgIcon('#icon-search'));
+                .on('click', editGeoService);
 
             labelGeoService
                 .append('span')
@@ -277,7 +272,7 @@ export function uiMapData(context) {
                 .attr('value', 'import');
             importOpt.append('span').text('Hide OSM Layer');
 
-            var urlEntry, urlInput, copyrightable, copyLabel, unrecognizedSource, unrecognizedLabel, copyapproval, layerPreview, layerSelect, preset, presetList, presetComboBox, approvalPhase, individualApproval, allApproval, metadata_url;
+            var urlEntry, urlInput, copyrightable, copylabel, unrecognizedSource, unrecognizedLabel, copyapproval, layerPreview, layerSelect, preset, presetList, presetComboBox, metadata_url;
 
             d3.selectAll('.geoservice-all-opt input, .geoservice-osm-opt input, .geoservice-import-opt input').on('change', function () {
                 if (d3.select('.geoservice-all-opt input').property('checked')) {
@@ -322,7 +317,7 @@ export function uiMapData(context) {
 
             function hidePreviewGeoService () {
                 d3.selectAll('.geoservice-preview, .geoservice-table, .copyright-text, .layer-counted')
-                    .classed('hide', true)
+                    .classed('hide', true);
             }
 
             function previewGeoService(err, data) {
@@ -331,7 +326,7 @@ export function uiMapData(context) {
                 }
 
                 d3.selectAll('.geoservice-preview, .copyright-text')
-                    .classed('hide', false)
+                    .classed('hide', false);
 
                 if (data.layers && data.layers.length) {
                     // MapServer layer selector is visible
@@ -403,7 +398,7 @@ export function uiMapData(context) {
                             .property('disabled', false);
                     } else {
                         // warn user
-                        alert("No data was loaded in this area! Close the window and re-open it where data can be imported. Or enter a different GeoService.")
+                        alert('No data was loaded in this area! Close the window and re-open it where data can be imported. Or enter a different GeoService.');
                     }
                     d3.selectAll('.layer-counted .local').text(count);
                 });
@@ -480,7 +475,7 @@ export function uiMapData(context) {
                                     var selectFields = geoserviceLayer.fields();
                                     d3.selectAll('.geoservice-table input[type="checkbox"]')
                                         .property('checked', allSet);
-                                    var fieldNames = Object.keys(fields);
+                                    var fieldNames = Object.keys(selectFields);
                                     _.map(fieldNames, function (field) {
                                         // set to current field-name, GeoService original name, or false (for not-imported)
                                         selectFields[field] = allSet ? (selectFields[field] || field) : false;
@@ -594,7 +589,7 @@ export function uiMapData(context) {
                     });
 
                 layerPreview = urlEntry.append('div')
-                    .attr('class', 'geoservice-preview')
+                    .attr('class', 'geoservice-preview');
 
                 copyrightable = layerPreview.append('div');
                 copyrightable.append('div')
@@ -604,7 +599,7 @@ export function uiMapData(context) {
                 copyapproval = copylabel.append('input')
                     .attr('type', 'checkbox')
                     .attr('class', 'copyright-approved')
-                    .property('checked', false)
+                    .property('checked', false);
                 copylabel.append('span')
                     .html('The source <a href="http://wiki.openstreetmap.org/wiki/Import/ODbL_Compatibility" target="_blank">license</a> grants permission for inclusion in OpenStreetMap. I have a wiki page documenting this import plan:');
                 copylabel.append('input')
@@ -690,37 +685,6 @@ export function uiMapData(context) {
                 bld.append('span')
                     .text('Prevent overlapping buildings');
 
-                // using a point-in-polygon or other preset geo trickery requires us to see everything on the map
-                d3.selectAll('.point-in-polygon, .merge-lines, .overlap-buildings').on('click', function() {
-                    var globalBlocked = d3.selectAll('.point-in-polygon input').property('checked') || d3.selectAll('.merge-lines input').property('checked') || d3.selectAll('.overlap-buildings input').property('checked');
-                    d3.selectAll('button.url.final.global').property('disabled', globalBlocked);
-                });
-
-                // radio buttons to decide how data is finalized on OSM
-                approvalPhase = urlEntry.append('div')
-                    .attr('class', 'import-approval hide');
-                approvalPhase.append('h4')
-                    .text('Review data before importing?');
-
-                individualApproval = approvalPhase.append('label');
-                individualApproval.append('input')
-                    .attr('class', 'approval-individual')
-                    .attr('type', 'radio')
-                    .attr('name', 'approvalProcess')
-                    .attr('value', 'individual')
-                    .property('checked', true);
-                individualApproval.append('span')
-                    .text('Manually select import features');
-
-                allApproval = approvalPhase.append('label');
-                allApproval.append('input')
-                    .attr('class', 'approval-all')
-                    .attr('type', 'radio')
-                    .attr('name', 'approvalProcess')
-                    .attr('value', 'all');
-                allApproval.append('span')
-                    .text('Import all features by default');
-
                 body.append('table')
                     .attr('border', '1')
                     .attr('class', 'geoservice-table hide') // tag-list
@@ -761,7 +725,7 @@ export function uiMapData(context) {
                         // the 'key' field, showing the new OSM tag key
                         var suggestedKeys = d3combobox().fetcher(getFetcher()).minItems(0);
 
-                        var keyField = addval.append('input')
+                        addval.append('input')
                             .attr('type', 'text')
                             .attr('placeholder', 'new OSM key')
                             .attr('class', 'import-key-' + uniqNum)
@@ -798,7 +762,7 @@ export function uiMapData(context) {
                     .html('<span class="global"></span> features; <span class="local"></span> in current view');
 
                 // actual download buttons, with license check and memory step
-                var startLoad = function(geoserviceDownloadAll) {
+                var startLoad = function() {
                     var url = d3.select('input.geoservice').property('value');
                     var blacklists = context.connection().imageryBlacklists();
                     for (var b = 0; b < blacklists.length; b++) {
@@ -862,22 +826,14 @@ export function uiMapData(context) {
                        .style('display', 'block');
                     d3.selectAll('.layer-counted')
                         .classed('hide', true);
-                    setGeoService(d3.select('.topurl input.geoservice').property('value'), geoserviceDownloadAll);
+                    setGeoService(d3.select('.topurl input.geoservice').property('value'));
                 };
                 pane.append('button')
                     .attr('class', 'url final local')
                     .property('disabled', true)
                     .text('Load In View')
                     .on('click', function() {
-                        startLoad(false);
-                    });
-                pane.append('button')
-                    .attr('class', 'url final global')
-                    .attr('style', 'margin-right: 10px; display: none;')
-                    .property('disabled', true)
-                    .text('Load Globally')
-                    .on('click', function() {
-                        startLoad(true);
+                        startLoad();
                     });
             }
             populatePane(this.pane);
@@ -901,7 +857,7 @@ export function uiMapData(context) {
             toggle();
         }
 
-        function setGeoService(template, downloadMax) {
+        function setGeoService(template) {
             // un-hide GeoService pane and buttons
             var gsLayer = layers.layer('geoservice');
             gsLayer.pane()
@@ -928,14 +884,14 @@ export function uiMapData(context) {
                 });
             }
 
-            refreshGeoService(template, downloadMax);
+            refreshGeoService(template);
         }
 
-        function refreshGeoService(template, downloadMax) {
+        function refreshGeoService(template) {
             // start loading data onto the map
             var gsLayer = context.layers().layer('geoservice');
             gsLayer.lastBounds = null;
-            gsLayer.url(template, downloadMax);
+            gsLayer.url(template);
             gsLayer.pane().classed('hide', false);
         }
 
