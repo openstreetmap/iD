@@ -536,6 +536,28 @@ en:
     drag_drop: "Drag and drop a .gpx, .geojson or .kml file on the page, or click the button to the right to browse"
     zoom: "Zoom to layer"
     browse: "Browse for a file"
+  geoservice:
+    match_preset: "Optional: match features to a OSM preset"
+    exceeded_limit: "Service feature limit exceeded. Number fetched: "
+    enter_url: "Enter a GeoService URL"
+    add_layer: "Add GeoService Layer"
+    show_all: "Show OSM & Import"
+    hide_import: "Hide Import Layer"
+    hide_osm: "Hide OSM Layer"
+    clear_geoservice: "Clear GeoService"
+    select_layer: "select one layer"
+    success: "You have now imported geo features! Close this window and manually approve data which should be added to OpenStreetMap. You can filter the view to see only your imported data in the right sidebar."
+    no_data: "No data was loaded in this area! Close the window and re-open it where data can be imported. Or enter a different GeoService."
+    copyright:
+      approved: "Copyright information (previously approved): "
+      previous: "No copyright information provided. (previously approved)"
+      not_approved: "No copyright information provided."
+    not_valid: "The url provided not recognized as a valid GeoService"
+    plan: "The source license grants permission for inclusion in OpenStreetMap. I'm also providing a link to my import plan:"
+    verboten: "This data source matches Google or another service which is copyrighted, and not importable on OpenStreetMap."
+    first_timer: "This is your first time importing from this GeoService. Please confirm that its license grants permission to be included in OpenStreetMap"
+    no_preset: "Please use a preset or import at least one field from the GeoService"
+    view_import: "View GeoService Import"
   mapillary_images:
     tooltip: "Street-level photos from Mapillary"
     title: "Photo Overlay (Mapillary)"
@@ -822,7 +844,6 @@ en:
       and outer), hold the Shift key and click on each of them to select them both, and then
       press the 'C' shortcut key. Other option is to select both, and then right-click one
       of them and click the "Merge" (+) button.
-
     geoservices: |
       # GeoServices
 
