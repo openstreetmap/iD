@@ -1469,7 +1469,7 @@ en:
           # transformer=auto
           auto: Autotransformer
           # transformer=auxiliary
-          auxiliary: Auxiliarty
+          auxiliary: Auxiliary
           # transformer=converter
           converter: Converter
           # transformer=distribution
