@@ -3413,6 +3413,10 @@ en:
         name: Recreation Ground
         # 'terms: playing fields'
         terms: '<translate with synonyms or related terms for ''Recreation Ground'', separated by commas>'
+      landuse/religious:
+        # landuse=religious
+        name: Religious Area
+        terms: '<translate with synonyms or related terms for ''Religious Area'', separated by commas>'
       landuse/residential:
         # landuse=residential
         name: Residential Area

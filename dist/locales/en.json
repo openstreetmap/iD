@@ -4078,6 +4078,10 @@
                     "name": "Recreation Ground",
                     "terms": "playing fields"
                 },
+                "landuse/religious": {
+                    "name": "Religious Area",
+                    "terms": ""
+                },
                 "landuse/residential": {
                     "name": "Residential Area",
                     "terms": ""
