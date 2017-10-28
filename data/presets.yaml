@@ -5041,6 +5041,11 @@ en:
         # tourism=viewpoint
         name: Viewpoint
         terms: '<translate with synonyms or related terms for ''Viewpoint'', separated by commas>'
+      tourism/wilderness_hut:
+        # tourism=wilderness_hut
+        name: Wilderness Hut
+        # 'terms: wilderness hut,backcountry hut,bothy'
+        terms: '<translate with synonyms or related terms for ''Wilderness Hut'', separated by commas>'
       tourism/zoo:
         # tourism=zoo
         name: Zoo
