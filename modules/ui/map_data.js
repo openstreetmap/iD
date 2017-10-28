@@ -306,7 +306,7 @@ export function uiMapData(context) {
                     d3.selectAll('.geoservice-all-opt, .geoservice-osm-opt, .geoservice-import-opt, .clear-geoservice')
                        .style('display', 'none');
                     d3.select('.geoservice-button-label').text('Add GeoService Layer');
-                    hoverGeoService.title(t('geoservice.enter_url'))
+                    hoverGeoService.title(t('geoservice.enter_url'));
                     // clear the map
                     geoserviceLayer.geojson({});
                     geoserviceLayer.fields({});
@@ -601,7 +601,7 @@ export function uiMapData(context) {
                     .property('checked', false);
                 copylabel.append('span')
                     .html(t('geoservice.plan'));
-                var copyInput = copylabel.append('input')
+                copylabel.append('input')
                     .attr('class', 'geoservice-import-plan')
                     .attr('type', 'text')
                     .attr('placeholder', 'URL on OSM Wiki')

@@ -8,8 +8,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import {
     event as d3_event,
-    selectAll as d3_selectAll,
-    select as d3_select
+    selectAll as d3_selectAll
 } from 'd3-selection';
 
 import { t, textDirection } from '../util/locale';

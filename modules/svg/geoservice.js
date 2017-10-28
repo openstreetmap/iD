@@ -1,11 +1,12 @@
 import * as d3 from 'd3';
 import _ from 'lodash';
-import { geoExtent, geoPolygonIntersectsPolygon } from '../geo/index';
 import { osmNode, osmRelation, osmWay } from '../osm/index';
 
 import { actionAddEntity, actionChangeTags } from '../actions/index';
 
 import { utilDetect } from '../util/detect';
+import { t, textDirection } from '../util/locale';
+
 import fromEsri from 'esri-to-geojson';
 
 import polygonArea from 'area-polygon';
@@ -18,17 +19,10 @@ export function svgGeoService(projection, context, dispatch) {
 
     function init() {
         if (svgGeoService.initialized) return;  // run once
-
-        function over() {
-            d3.event.stopPropagation();
-            d3.event.preventDefault();
-            d3.event.dataTransfer.dropEffect = 'copy';
-        }
-
         svgGeoService.initialized = true;
     }
 
-    function drawGeoService(selection) {
+    function drawGeoService() {
         var geojson = drawGeoService.geojson(),
             enabled = drawGeoService.enabled();
 
@@ -415,7 +409,6 @@ export function svgGeoService(projection, context, dispatch) {
                 });
 
                 var adjustedFeature = obj.processGeoFeature({ properties: originalProperties });
-                var gsLayer = context.layers().layer('geoservice').preset();
 
                 context.perform(
                     actionChangeTags(wayid, adjustedFeature.properties),
