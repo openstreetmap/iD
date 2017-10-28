@@ -537,6 +537,8 @@ en:
     zoom: "Zoom to layer"
     browse: "Browse for a file"
   geoservice:
+    approve: "Approve"
+    reject: "Reject"
     match_preset: "Optional: match features to a OSM preset"
     exceeded_limit: "Service feature limit exceeded. Number fetched: "
     enter_url: "Enter a GeoService URL"

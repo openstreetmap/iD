@@ -111,7 +111,7 @@ export function uiEntityEditor(context) {
         // accept button
         importApprove.append('button')
             .attr('class', 'approve')
-            .text('Approve')
+            .text(t('geoservice.approve'))
             .on('click', function() {
                 this.focusEntity.approvedForEdit = 'approved';
                 context.history().on('change.save')();
@@ -126,7 +126,7 @@ export function uiEntityEditor(context) {
 
         // reject button
         importApprove.append('button')
-            .text('Reject')
+            .text(t('geoservice.reject'))
             .on('click', (function() {
                 if (this.focusEntity && this.focusEntity.importOriginal) {
                     // modified object: delete button restores original tags
