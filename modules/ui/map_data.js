@@ -234,7 +234,7 @@ export function uiMapData(context) {
                 .classed('list-item-geoservice', true);
 
             var hoverGeoService = tooltip()
-                .title('Enter a GeoService URL')
+                .title(t('geoservice.enter_url'))
                 .placement('top');
             var labelGeoService = enter
                 .append('label')
@@ -247,7 +247,7 @@ export function uiMapData(context) {
             labelGeoService
                 .append('span')
                 .attr('class', 'geoservice-button-label')
-                .text('Add GeoService Layer');
+                .text(t('geoservice.add_layer'));
 
             var allOpts = enter.append('label')
                 .attr('class', 'geoservice-all-opt');
@@ -256,23 +256,23 @@ export function uiMapData(context) {
                 .attr('name', 'import-visibility')
                 .attr('value', 'all')
                 .property('checked', 'checked');
-            allOpts.append('span').text('Show OSM & Import');
+            allOpts.append('span').text(t('geoservice.show_all'));
             var osmOpt = enter.append('label')
                 .attr('class', 'geoservice-osm-opt');
             osmOpt.append('input')
                 .attr('type', 'radio')
                 .attr('name', 'import-visibility')
                 .attr('value', 'osm');
-            osmOpt.append('span').text('Hide Import Layer');
+            osmOpt.append('span').text(t('geoservice.hide_import'));
             var importOpt = enter.append('label')
                 .attr('class', 'geoservice-import-opt');
             importOpt.append('input')
                 .attr('type', 'radio')
                 .attr('name', 'import-visibility')
                 .attr('value', 'import');
-            importOpt.append('span').text('Hide OSM Layer');
+            importOpt.append('span').text(t('geoservice.hide_osm'));
 
-            var urlEntry, urlInput, copyrightable, copylabel, unrecognizedSource, unrecognizedLabel, copyapproval, layerPreview, layerSelect, preset, presetList, presetComboBox, metadata_url;
+            var urlEntry, urlInput, copyrightable, copylabel, unrecognizedSource, unrecognizedLabel, copyapproval, layerPreview, layerSelect, preset, presetList, presetComboBox, metadata_url, plan_url;
 
             d3.selectAll('.geoservice-all-opt input, .geoservice-osm-opt input, .geoservice-import-opt input').on('change', function () {
                 if (d3.select('.geoservice-all-opt input').property('checked')) {
@@ -300,14 +300,13 @@ export function uiMapData(context) {
 
             enter.append('button')
                 .attr('class', 'clear-geoservice hide')
-                .text('Clear GeoService')
+                .text(t('geoservice.clear_geoservice'))
                 .on('click', (function() {
                     // clear the UI
                     d3.selectAll('.geoservice-all-opt, .geoservice-osm-opt, .geoservice-import-opt, .clear-geoservice')
                        .style('display', 'none');
                     d3.select('.geoservice-button-label').text('Add GeoService Layer');
-                    hoverGeoService.title('Enter a GeoService URL');
-
+                    hoverGeoService.title(t('geoservice.enter_url'))
                     // clear the map
                     geoserviceLayer.geojson({});
                     geoserviceLayer.fields({});
@@ -343,7 +342,7 @@ export function uiMapData(context) {
                             }
                         })
                         .append('option')
-                            .text('select one layer')
+                            .text(t('geoservice.select_layer'))
                             .attr('value', '')
                             .property('selected', true);
 
@@ -398,12 +397,12 @@ export function uiMapData(context) {
                             .property('disabled', false);
                     } else {
                         // warn user
-                        alert('No data was loaded in this area! Close the window and re-open it where data can be imported. Or enter a different GeoService.');
+                        alert(t('geoservice.no_data'));
                     }
                     d3.selectAll('.layer-counted .local').text(count);
                 });
 
-                // handle OSM / ODBL license approval
+                // handle OSM / ODBL license approval and appease import guidelines
                 var license = (data.copyrightText || '').replace(/\s/g, '');
                 geoserviceLayer.metadata(metadata_url);
                 geoserviceLayer.license(license);
@@ -412,21 +411,21 @@ export function uiMapData(context) {
                     if (context.storage('license-' + license)) {
                         // user has seen and approved this license before
                         d3.selectAll('.copyright-text')
-                            .text('Copyright info (previously approved): ' + license);
+                            .text(t('geoservice.copyright.approved') + license);
                         copyapproval.property('checked', true);
                     } else {
                         // new license
-                        d3.selectAll('.copyright-text').text('Copyright info: ' + license);
+                        d3.selectAll('.copyright-text').text('Copyright information: ' + license);
                         copylabel.classed('hide', false);
                     }
                 } else if (context.storage('license-' + metadata_url)) {
                     // user has seen and approved this URL before
                     d3.selectAll('.copyright-text')
-                        .text('No copyright info provided. (previously approved)');
+                        .text(t('geoservice.copyright.previous'));
                     copyapproval.property('checked', true);
                 } else {
                     // new URL, no license
-                    d3.selectAll('.copyright-text').text('No copyright info provided.');
+                    d3.selectAll('.copyright-text').text(t('geoservice.copyright.not_approved'));
                     copylabel.classed('hide', false);
                 }
 
@@ -572,7 +571,7 @@ export function uiMapData(context) {
                                 unrecognizedLabel = unrecognizedSource.append('label')
                                     .attr('class', 'hide');
                                 unrecognizedLabel.append('span')
-                                    .text('The url provided not recognized as a valid GeoService');
+                                    .text(t('geoservice.not_valid'));
                                 unrecognizedLabel.classed('hide', false);
                                 return;
                             }
@@ -601,11 +600,15 @@ export function uiMapData(context) {
                     .attr('class', 'copyright-approved')
                     .property('checked', false);
                 copylabel.append('span')
-                    .html('The source <a href="http://wiki.openstreetmap.org/wiki/Import/ODbL_Compatibility" target="_blank">license</a> grants permission for inclusion in OpenStreetMap. I have a wiki page documenting this import plan:');
-                copylabel.append('input')
+                    .html(t('geoservice.plan'));
+                var copyInput = copylabel.append('input')
                     .attr('class', 'geoservice-import-plan')
                     .attr('type', 'text')
-                    .attr('placeholder', 'URL on OSM Wiki');
+                    .attr('placeholder', 'URL on OSM Wiki')
+                    .on('input', function() {
+                        plan_url = this.value;
+                        geoserviceLayer.importPlan(plan_url);
+                    });
 
                 layerSelect = layerPreview.append('div')
                     .append('select')
@@ -616,7 +619,7 @@ export function uiMapData(context) {
                     .attr('class', 'preset');
                 preset.append('label')
                     .attr('class', 'preset-prompt')
-                    .text('Optional: match features to an OSM preset');
+                    .text(t('geoservice.match_preset'));
                 preset.append('div')
                     .attr('class', 'preset-icon-holder');
                 preset.append('span')
@@ -755,7 +758,7 @@ export function uiMapData(context) {
 
                 pane.append('div')
                     .attr('class', 'help-text hide')
-                    .text('You have now imported geo features! Close this window and manually approve data which should be added to OpenStreetMap. You can filter the view to see only your imported data in the right sidebar.');
+                    .text(t('geoservice.success'));
 
                 pane.append('div')
                     .attr('class', 'layer-counted hide')
@@ -767,13 +770,13 @@ export function uiMapData(context) {
                     var blacklists = context.connection().imageryBlacklists();
                     for (var b = 0; b < blacklists.length; b++) {
                         if (url.match(new RegExp(blacklists[b]))) {
-                            alert('This data source matches Google or another service which is copyrighted, and not importable on OpenStreetMap.');
+                            alert(t('geoservice.verboten'));
                             return;
                         }
                     }
 
                     if (!copyapproval.property('checked')) {
-                        alert('This is your first time importing from this GeoService. Please confirm that its license grants permission to be included in OpenStreetMap');
+                        alert(t('geoservice.first_timer'));
                         return;
                     }
                     if (geoserviceLayer.license() || geoserviceLayer.metadata()) {
@@ -794,7 +797,7 @@ export function uiMapData(context) {
                         }
                     });
                     if (!importedAtLeastOneField) {
-                        alert('Please use a preset or import at least one field from the GeoService');
+                        alert(t('geoservice.no_preset'));
                         return;
                     }
 
@@ -820,7 +823,7 @@ export function uiMapData(context) {
 
                     // change sidebar
                     d3.select('.geoservice-button-label')
-                        .text('View GeoService Import');
+                        .text(t('geoservice.view_import'));
                     hoverGeoService.title('View GeoService Import Details');
                     d3.selectAll('.list-item-geoservice label, .clear-geoservice')
                        .style('display', 'block');

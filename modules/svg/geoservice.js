@@ -190,7 +190,7 @@ export function svgGeoService(projection, context, dispatch) {
         } else if (preset === null) {
             // removing preset status
             presetBox.selectAll('.preset label.preset-prompt')
-                .text('Optional: match features to a OSM preset');
+                .text(t('geoservice.match_preset'));
             presetBox.selectAll('.preset-prompt')
                 .classed('hide', false);
             presetBox.selectAll('.preset span.preset-prompt, .preset svg')
@@ -623,6 +623,12 @@ export function svgGeoService(projection, context, dispatch) {
         return this;
     };
 
+    drawGeoService.importPlan = function(plan_url) {
+        if (!arguments.length) return (drawGeoService.plan_url || '');
+        drawGeoService.planUrl = plan_url;
+        return this;
+    };
+
     drawGeoService.url = function(true_url, downloadMax) {
         if (!this.layerUrl) {
             drawGeoService.layerUrl = true_url;
@@ -702,7 +708,7 @@ export function svgGeoService(projection, context, dispatch) {
 
                 // warn if went over server's maximum results count
                 if (data.exceededTransferLimit) {
-                    alert('Service returned first ' + data.features.length + ' results (maximum)');
+                    alert(t('geoservice.exceeded_limit') + data.features.length);
                 }
 
                 _.map(jsondl.features, function(selectfeature) {

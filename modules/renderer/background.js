@@ -93,6 +93,7 @@ export function rendererBackground(context) {
         if (gsLayer && gsLayer.hasData()) {
             imageryUsed.push('GeoService');
             context.history().source(gsLayer.layerUrl);
+            context.history().importPlan(gsLayer.planUrl);
         }
 
         var gpx = context.layers().layer('gpx');

@@ -23,7 +23,8 @@ var readOnlyTags = [
     /^imagery_used$/,
     /^host$/,
     /^locale$/,
-    /^source$/
+    /^source$/,
+    /^import_discussion$/
 ];
 
 // treat most punctuation (except -, _, +, &) as hashtag delimiters - #4398
@@ -73,7 +74,7 @@ export function uiCommit(context) {
             along with mandatory, user editable field for the import discussion */
             if (context.history().source()) {
                 tags.source = context.history().source();
-                tags.import_discussion = '';
+                tags.import_discussion = context.history().importPlan();
             }
 
             // call findHashtags initially - this will remove stored
