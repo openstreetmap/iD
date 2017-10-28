@@ -3,7 +3,8 @@ import {
     actionChangePreset,
     actionJoin,
     actionMerge,
-    actionMergePolygon
+    actionMergePolygon,
+    actionMergeWayNodes
 } from '../actions';
 
 import { behaviorOperation } from '../behavior';
@@ -26,7 +27,8 @@ export function operationMerge(selectedIDs, context) {
 
     var join = actionJoin(selectedIDs),
         merge = actionMerge(selectedIDs),
-        mergePolygon = actionMergePolygon(selectedIDs);
+        mergePolygon = actionMergePolygon(selectedIDs),
+        mergeWayNodes = actionMergeWayNodes(selectedIDs);
 
 
     var operation = function() {
@@ -37,8 +39,10 @@ export function operationMerge(selectedIDs, context) {
             action = join;
         } else if (!merge.disabled(origGraph)) {
             action = merge;
-        } else {
+        } else if (!mergePolygon.disabled(origGraph)) {
             action = mergePolygon;
+        } else {
+            action = mergeWayNodes;
         }
 
         context.perform(action, operation.annotation());
@@ -65,25 +69,27 @@ export function operationMerge(selectedIDs, context) {
     operation.disabled = function() {
         return join.disabled(context.graph()) &&
             merge.disabled(context.graph()) &&
-            mergePolygon.disabled(context.graph());
+            mergePolygon.disabled(context.graph()) &&
+            mergeWayNodes.disabled(context.graph());
     };
 
 
     operation.tooltip = function() {
         var j = join.disabled(context.graph()),
             m = merge.disabled(context.graph()),
-            p = mergePolygon.disabled(context.graph());
+            p = mergePolygon.disabled(context.graph()),
+            n = mergeWayNodes.disabled(context.graph());
 
-        if (j === 'restriction' && m && p) {
+        if (j === 'restriction' && m && p && n) {
             return t('operations.merge.restriction',
                 { relation: context.presets().item('type/restriction').name() });
         }
 
-        if (p === 'incomplete_relation' && j && m) {
+        if (p === 'incomplete_relation' && j && m && n) {
             return t('operations.merge.incomplete_relation');
         }
 
-        if (j && m && p) {
+        if (j && m && p && n) {
             return t('operations.merge.' + j);
         }
 

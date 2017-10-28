@@ -18,6 +18,7 @@ export { actionDiscardTags } from './discard_tags';
 export { actionDisconnect } from './disconnect';
 export { actionJoin } from './join';
 export { actionMerge } from './merge';
+export { actionMergeWayNodes } from './merge_way_nodes';
 export { actionMergePolygon } from './merge_polygon';
 export { actionMergeRemoteChanges } from './merge_remote_changes';
 export { actionMove } from './move';
