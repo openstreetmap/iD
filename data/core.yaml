@@ -566,8 +566,9 @@ en:
 
         Edits that you make on this map will be freely available to everyone who uses
         OpenStreetMap. They can be visible on every map based on OpenStreetMap. 
-        The optimal resources for mapping are on-the-ground survey, personal knowledge,
-        or the provieded background. Copying from commercial sources like Google Maps is strictly forbidden.
+        Your edits can be based on personal knowledge, on-the-ground survey, or
+        background imgagery.
+        Copying from commercial sources like Google Maps is strictly forbidden.
 
       beforestart: |
         ### Before you start
@@ -579,8 +580,10 @@ en:
       opensource: |
         ### Open Source
 
-        The iD editor is a collaborative project with [source
-        code available on GitHub](https://github.com/openstreetmap/iD).
+        This editor is called iD and you use version {version} now.
+        You can contribute and {translate} [help translating](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating)
+        or {bug} [report a bug](https://github.com/openstreetmap/iD/issues).
+        The source code is available for [contributions on GitHub](https://github.com/openstreetmap/iD).
 
     overview:
       intro: |
@@ -603,9 +606,7 @@ en:
 
         This help is on top of the map area which shows OpenStreetMap data
         on top of a background imagery. On the left side is the *feature editor*,
-        there you can search for features and edit feature's type and attributes.
-        The buttons in the top row and the right column explain their
-        function if you hold the mouse pointer over them.
+        there you can {search} search for features and edit feature's type and attributes.
 
       navigation: |
         ### Navigation
@@ -615,8 +616,8 @@ en:
         You can also use the arrow keys on your keyboard, using the keys
         while holding 'Ctrl' will move the map for one screenful.
         You can zoom in or out by scrolling with the mouse wheel or trackpad,
-        or by clicking the {plus} / {minus} buttons, holding 'Ctrl' while
-        clicking will zoom a lot.
+        or by clicking the {plus} / {minus} buttons on the top-right-hand
+        of the map, holding 'Ctrl' while clicking will zoom a lot.
 
     editing:
       intro: |
@@ -642,7 +643,8 @@ en:
         When you make changes like editing roads, building, and places
         these are stored locally until you save them to the server.
         Don't worry if you make a mistake - you can undo changes
-        by clicking the {undo} Undo button, and redo changes by clicking the {redo} Redo button.
+        by clicking the {undo} 'Undo' button, and redo changes
+        by clicking the {redo} 'Redo' button.
 
       save: |
         ### Save
@@ -735,7 +737,7 @@ en:
         ### Creating
 
         Found somewhere there should be a road but there isn't? Click the {line} Line
-        icon in the top-left of the editor or press the shortcut key `2` to start drawing
+        icon in the top-left of the map or press the shortcut key `2` to start drawing
         a line.
 
         Click on the start of the road on the map to start drawing. If the road
@@ -763,7 +765,7 @@ en:
 
         To use a GPX track for mapping, drag and drop the GPX file onto the map
         editor. If it's recognized, it will be added to the map as a bright purple
-        line. Click on the 'Map Data' menu on the right side to enable,
+        line. Click on the {data} 'Map data' menu on the right side to enable,
         disable, or zoom to this new GPX-powered layer.
 
         The GPX track isn't directly uploaded to OpenStreetMap - the best way to
@@ -826,7 +828,7 @@ en:
         is often out of date, so the building could simply be newly built.
 
         You can delete a building by clicking on it to select it, then pressing the 'Delete'
-        key, or right-clicking it and then using the {delete} Delete tool.
+        key, or right-clicking it and then using the {delete} 'Delete' tool.
 
     addresses:
       intro: |
@@ -862,7 +864,7 @@ en:
         there are other often used types like trees, towers, or poles.
 
         To create a point feature click the {point} Point icon in the top-left
-        of the editor or press the shortcut key `1` to insert a point.
+        of the map or press the shortcut key `1` to insert a point.
 
     feature_editor:
       intro: |
@@ -907,8 +909,8 @@ en:
         ### Undo & Redo
 
         Changes you make in the feature editor are automatically applied.
-        You can undo them at any time by clicking the {undo} button and redo
-        changes by clicking the {redo} Redo button.
+        You can undo them at any time by clicking the {undo} 'Undo' button and redo
+        changes by clicking the {redo} 'Redo' button.
 
     imagery:
       intro: |
@@ -916,7 +918,7 @@ en:
 
         Aerial imagery is an important resource for mapping. A combination of
         airplane flyovers, satellite views, and freely-compiled sources are available
-        in the editor under the `Background settings` menu on the right.
+        in the editor under the {layers} `Background settings` menu on the right.
 
       background: |
         ### Background
@@ -924,7 +926,7 @@ en:
         By default a [Bing Maps](https://www.bing.com/maps/) satellite layer is
         presented in the editor, but as you pan and zoom the map to new geographical
         areas, new sources from the [Open Imagery Network](https://openimagerynetwork.github.io/)
-        will become available and the best for the area will be marked with a '*'.
+        will become available.
 
       offset: |
         ### Offset
@@ -937,64 +939,65 @@ en:
 
     iconstools:
       icons: |
-        # Icons & Tools
+        # List Icons & Tools
 
-        ### Top row:
+        ### Feature editor
         {search} Search features
+
+        ### Top row
         {point} 'Add point' mode
         {line} 'Add line'  mode
         {area} 'Add area' mode
         {undo} Undo
         {redo} Redo
         {save} Save changes
-        ### Right column:
+
+        ### Right column
         {plus} Zoom in
         {minus} Zoom out
         {geolocate} Show my location
         {layers} Background settings
-        {data} Data data
+        {data} Map data
         {help} Help
-        ### Bottom row:
+
+        ### Bottom row
         {bug} Report a bug
         {translate} Help translate
 
       tools: |
-        ## Tools
+        ## Tools in the Editing Menu
 
-        The editing menu has the following tools to operate on selected features:
         {move} Move
         {rotate} Rotate
         {reflect_long} Reflect at long axis
         {reflect_short} Reflect at short axis
         {continue} Continue line
         {reverse} Reverse direction
-        {merge} Merge features into one or create relation
+        {merge} Merge selected features into one or create relation
         {split} Split in two
         {disconnect} Disconnect
         {circularize} Circularize
         {orthogonalize} Orthogonalize
         {straighten} Straighten line
         {delete} Delete
-        ### Reserved for later are:
-        {simplify} Simplify
-        {smooth} Smooth
 
-      more: |
-        ### More icons {more}
+      reserved: |
+        ### Reserved for later use are:
         {apply} Apply
         {close} Close
         {backward} Backward
         {forward} Forward
         {fullscreen} Fullscreen
-        {collapsescreen} Collapse-screen
+        {collapsescreen} Collapse screen
         {up} Up
         {down} Down
         {relation} Relation
         {vertex} Vertex
         {load} Load
-        ### Reserved for later are:
         {copy} Copy
         {paste} Paste
+        {simplify} Simplify
+        {smooth} Smooth
         {alert} Alert
         {inspect} Inspect
         {nearby} Nearby
@@ -1019,7 +1022,7 @@ en:
       members: |
         ### Members
 
-        The group of features in a relation are called *members*. In the bottom of the
+        The group of features in a relation are called *members*. At the bottom of the
         feature editor, you can see which relations a feature is a member of, and click on a
         relation there will select it. When the relation is selected, you can see all of
         its members listed in the sidebar and highlighted on the map.
@@ -1035,32 +1038,31 @@ en:
       edit: |
         ## Editing Relations
 
-        To add a feature to a relation, select the feature, click the {plus} button
+        To add a feature to a relation, select the feature, click the `+` button
         in the 'All relations' section of the feature editor, and select or type
         the name of the relation.
 
         To create a new relation, select the first feature that should be a member,
-        click the {plus} button in the 'All relations' section, and select 'New relation...'.
+        click the `+` button in the 'All relations' section, and select 'New relation...'.
 
         To remove a feature from a relation, select the feature and click the {delete} 
-        Delete button next to the relation you want to remove it from.
+        'Delete' button next to the relation you want to remove it from.
 
       multipolygons: |
         ### Multipolygons
 
         You can create multipolygons with holes using the {merge} 'Merge' tool.
-        Draw two areas (inner and outer) and select both.
+        Draw two or more areas (inner and outer) and select them.
         Then press either press the `C` shortcut key or right-click one
-        of the selected areas and select the 'Merge' {plus} tool.
+        of the selected areas and select the {merge} 'Merge' tool.
 
       turnrestrictions: |
         ### Turn restrictions
 
-        You can create turn restrictions in the feature editor when you select
-        an intersection node common to two or more roads on the map.
-        For every turn connected with the intersection you can forbid U-turn and for
-        every other road you can forbid left-turn, straight-on or right-turn.
-
+        You can create turn restrictions when you select the point at a street
+        crossing of to two or more roads on the map.
+        In the feature editor your will find a graphical tool below 'Turn Restrictions'
+        where you can select a road and disable U-turn and turns into every other road.
 
   intro:
     done: done
