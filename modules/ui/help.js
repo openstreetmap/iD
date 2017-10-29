@@ -28,7 +28,7 @@ export function uiHelp(context) {
           ['help.addresses.',['intro','nodup','recommendation','points']],
           ['help.feature_editor.',['intro','select','fields','tags','undo']],
           ['help.imagery.',['intro','background','offset']],
-          ['help.iconstools.',['icons','tools','more']],
+          ['help.iconstools.',['icons','tools']],
           ['help.relations.',['intro','members','maintain','edit','multipolygons','turnrestrictions']]
         ];
 
@@ -67,7 +67,7 @@ export function uiHelp(context) {
           reverse: icon('#operation-reverse', 'pre-text'),
           continue: icon('#operation-continue', 'pre-text'),
           disconnect: icon('#operation-disconnect', 'pre-text'),
-          layers: icon('#operation-layers', 'pre-text'),
+          layers: icon('#icon-layers', 'pre-text'),
           vertex: icon('#icon-vertex', 'pre-text'),
           data: icon('#icon-data', 'pre-text'),
           down: icon('#icon-down', 'pre-text'),
@@ -81,7 +81,8 @@ export function uiHelp(context) {
           close: icon('#icon-close', 'pre-text'),
           undo: icon('#icon-undo', 'pre-text'),
           redo: icon('#icon-redo', 'pre-text'),
-          save: icon('#icon-save', 'pre-text')
+          save: icon('#icon-save', 'pre-text'),
+          version: context.version
         };
 
     var docs = docKeys.map(function(key) {
