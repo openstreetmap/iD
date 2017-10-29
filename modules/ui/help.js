@@ -29,7 +29,7 @@ export function uiHelp(context) {
           ['help.feature_editor.',['intro','select','fields','tags','undo']],
           ['help.imagery.',['intro','background','offset']],
           ['help.iconstools.',['icons','tools']],
-          ['help.relations.',['intro','members','maintain','edit','multipolygons','turnrestrictions']]
+          ['help.relations.',['intro','types','multipolygons','turnrestrictions','maintain','edit']]
         ];
 
     var icont = {
