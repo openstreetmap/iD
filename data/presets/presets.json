@@ -16018,6 +16018,28 @@
             },
             "name": "Viewpoint"
         },
+        "tourism/wilderness_hut": {
+            "icon": "lodging",
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "building_area"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "wilderness hut",
+                "backcountry hut",
+                "bothy"
+            ],
+            "tags": {
+                "tourism": "wilderness_hut"
+            },
+            "name": "Wilderness Hut"
+        },
         "tourism/zoo": {
             "icon": "zoo",
             "fields": [
