@@ -3084,6 +3084,10 @@
         },
         {
             "key": "tourism",
+            "value": "wilderness_hut"
+        },
+        {
+            "key": "tourism",
             "value": "zoo"
         },
         {

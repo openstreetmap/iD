@@ -5990,7 +5990,7 @@
                 "crossing": "zebra"
             },
             "reference": {
-                "key": "highway",
+                "key": "footway",
                 "value": "crossing"
             },
             "terms": [
@@ -6708,7 +6708,7 @@
                 "highway": "crossing"
             },
             "reference": {
-                "key": "footway",
+                "key": "highway",
                 "value": "crossing"
             },
             "terms": [],
@@ -16017,6 +16017,28 @@
                 "tourism": "viewpoint"
             },
             "name": "Viewpoint"
+        },
+        "tourism/wilderness_hut": {
+            "icon": "lodging",
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "building_area"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "wilderness hut",
+                "backcountry hut",
+                "bothy"
+            ],
+            "tags": {
+                "tourism": "wilderness_hut"
+            },
+            "name": "Wilderness Hut"
         },
         "tourism/zoo": {
             "icon": "zoo",

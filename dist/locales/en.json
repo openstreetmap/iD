@@ -5588,6 +5588,10 @@
                     "name": "Viewpoint",
                     "terms": ""
                 },
+                "tourism/wilderness_hut": {
+                    "name": "Wilderness Hut",
+                    "terms": "wilderness hut,backcountry hut,bothy"
+                },
                 "tourism/zoo": {
                     "name": "Zoo",
                     "terms": "animal"
