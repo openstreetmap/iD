@@ -47,11 +47,10 @@ export function actionMergeWayNodes (ids) {
 
     action.disabled = function (graph) {
         function isNotWayNode (entity) { return entity.type !== 'node' || graph.parentWays(entity) <= 0; }
-        function isNotExtremeNode (node) { return !node.isEndpoint(graph); }
 
         var entities = getSelectedEntities(graph);
 
-        if (entities.some(isNotWayNode) || entities.some(isNotExtremeNode)) {
+        if (entities.some(isNotWayNode)) {
             return 'not_eligible';
         }
     };
