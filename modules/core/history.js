@@ -554,14 +554,14 @@ export function coreHistory(context) {
 
 
         save: function() {
-            if (lock.locked()) context.storage(getKey('saved_history'), history.toJSON() || null);
+            if (lock.locked()) context.asyncStorage(getKey('saved_history'), history.toJSON() || null);
             return history;
         },
 
 
         clearSaved: function() {
             context.debouncedSave.cancel();
-            if (lock.locked()) context.storage(getKey('saved_history'), null);
+            if (lock.locked()) context.asyncStorage(getKey('saved_history'), null);
             return history;
         },
 
@@ -577,18 +577,31 @@ export function coreHistory(context) {
 
 
         // is iD not open in another window and it detects that
-        // there's a history stored in localStorage that's recoverable?
-        restorableChanges: function() {
-            return lock.locked() && !!context.storage(getKey('saved_history'));
+        // there's a history stored in async storage that's recoverable?
+        restorableChanges: function(callback) {
+            var isLocked = lock.locked();
+
+            if (isLocked) {
+                return callback(true);
+            }
+
+            return context.asyncStorage(getKey('saved_history'), function(err, savedHistory) {
+                if (err) {
+                    return callback(false);
+                }
+
+                callback(!!savedHistory);
+            });
         },
 
 
-        // load history from a version stored in localStorage
+        // load history from a version stored in async storage
         restore: function() {
             if (!lock.locked()) return;
 
-            var json = context.storage(getKey('saved_history'));
-            if (json) history.fromJSON(json, true);
+            context.asyncStorage(getKey('saved_history'), function(err, json) {
+                if (!err && json) history.fromJSON(json, true);
+            });
         },
 
 

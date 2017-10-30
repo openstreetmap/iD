@@ -9,6 +9,7 @@ import _isString from 'lodash-es/isString';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-request';
 import { select as d3_select } from 'd3-selection';
+import localforage from 'localforage';
 
 import {
     t,
@@ -101,6 +102,29 @@ export function coreContext() {
             if (typeof console !== 'undefined') console.error('localStorage quota exceeded');
             /* eslint-enable no-console */
         }
+    };
+
+    context.asyncStorage = function(k, v, callback) {
+        var action;
+
+        if (typeof v === 'function') {
+            callback = v;
+            v = undefined;
+        }
+
+        if (v === undefined) {
+            action = localforage.getItem(k, callback);
+        } else if (v === null) {
+            action = localforage.removeItem(k, callback);
+        } else {
+            action = localforage.setItem(k, v, callback);
+        }
+
+        return action.catch(function(err) {
+            /* eslint-disable no-console */
+            console.error('async storage error', err);
+            /* eslint-enable no-console */
+        });
     };
 
 
@@ -431,7 +455,7 @@ export function coreContext() {
 
     // Debounce save, since it's a synchronous localStorage write,
     // and history changes can happen frequently (e.g. when dragging).
-    context.debouncedSave = _debounce(context.save, 350);
+    context.debouncedSave = _debounce(context.save, 100);
     function withDebouncedSave(fn) {
         return function() {
             var result = fn.apply(history, arguments);
