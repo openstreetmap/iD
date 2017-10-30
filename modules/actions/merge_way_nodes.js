@@ -1,4 +1,5 @@
 import _sum from 'lodash-es/sum';
+import _extend from 'lodash-es/extend';
 
 import { osmNode } from '../osm/node';
 
@@ -15,6 +16,10 @@ export function actionMergeWayNodes (ids) {
         ];
     }
 
+    function collectTags(entities) {
+       return entities.reduce(function(tags, entity) { return _extend(tags, entity.tags); }, {});
+    }
+
     function replaceWithinWays (newNode) {
         return function (graph, node) {
             return graph.parentWays(node).reduce(function (graph, way) {
@@ -29,7 +34,7 @@ export function actionMergeWayNodes (ids) {
 
     var action = function (graph) {
         var nodes = getSelectedEntities(graph),
-            newNode = new osmNode({ loc: calcAverageLoc(nodes) });
+            newNode = new osmNode({ loc: calcAverageLoc(nodes), tags: collectTags(nodes) });
 
         graph = graph.replace(newNode);
 
