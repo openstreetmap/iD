@@ -4,7 +4,7 @@ import _extend from 'lodash-es/extend';
 import { osmNode } from '../osm/node';
 
 
-export function actionMergeWayNodes (ids) {
+export function actionMergeWayNodes (ids, newNodeId) {
     function getSelectedEntities (graph) {
         return ids.map(function (id) { return graph.entity(id); });
     }
@@ -34,7 +34,7 @@ export function actionMergeWayNodes (ids) {
 
     var action = function (graph) {
         var nodes = getSelectedEntities(graph),
-            newNode = new osmNode({ loc: calcAverageLoc(nodes), tags: collectTags(nodes) });
+            newNode = new osmNode({ id: newNodeId, loc: calcAverageLoc(nodes), tags: collectTags(nodes) });
 
         graph = graph.replace(newNode);
 
