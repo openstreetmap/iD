@@ -15710,10 +15710,17 @@
                 "point",
                 "area"
             ],
+            "terms": [
+                "holiday",
+                "holiday cottage",
+                "holiday home",
+                "vacation",
+                "vacation home"
+            ],
             "tags": {
                 "tourism": "chalet"
             },
-            "name": "Chalet"
+            "name": "Holiday Cottage"
         },
         "tourism/gallery": {
             "icon": "art-gallery",

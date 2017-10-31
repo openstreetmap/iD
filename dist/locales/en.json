@@ -5467,8 +5467,8 @@
                     "terms": "Motor Home,Camper"
                 },
                 "tourism/chalet": {
-                    "name": "Chalet",
-                    "terms": ""
+                    "name": "Holiday Cottage",
+                    "terms": "holiday,holiday cottage,holiday home,vacation,vacation home"
                 },
                 "tourism/gallery": {
                     "name": "Art Gallery",

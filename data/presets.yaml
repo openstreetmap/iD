@@ -4978,8 +4978,9 @@ en:
         terms: '<translate with synonyms or related terms for ''RV Park'', separated by commas>'
       tourism/chalet:
         # tourism=chalet
-        name: Chalet
-        terms: '<translate with synonyms or related terms for ''Chalet'', separated by commas>'
+        name: Holiday Cottage
+        # 'terms: holiday,holiday cottage,holiday home,vacation,vacation home'
+        terms: '<translate with synonyms or related terms for ''Holiday Cottage'', separated by commas>'
       tourism/gallery:
         # tourism=gallery
         name: Art Gallery
