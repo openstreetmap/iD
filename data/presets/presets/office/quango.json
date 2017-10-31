@@ -15,9 +15,13 @@
       "office": "quango"
   },
   "terms": [
-    "Quasi-Autonomous Non-Government Organisation",
-    "Quasi-Autonomous Non-Government Organization",
-    "Quasi-Autonomous NGO"
+      "ngo",
+      "non government",
+      "non-government",
+      "organization",
+      "organisation",
+      "quasi autonomous",
+      "quasi-autonomous"
   ],
-  "name": "Quango Office"
+  "name": "Quasi-NGO Office"
 }

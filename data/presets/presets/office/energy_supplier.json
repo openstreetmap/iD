@@ -15,10 +15,10 @@
       "office": "energy_supplier"
   },
   "terms": [
-    "electricity",
-    "energy company",
-    "energy utility",
-    "gas utility"
+      "electricity",
+      "energy company",
+      "energy utility",
+      "gas utility"
   ],
   "name": "Energy Supplier Office"
 }

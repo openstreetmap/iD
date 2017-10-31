@@ -4599,7 +4599,7 @@
                     "terms": ""
                 },
                 "office/accountant": {
-                    "name": "Accountant",
+                    "name": "Accountant Office",
                     "terms": ""
                 },
                 "office/administrative": {
@@ -4615,7 +4615,7 @@
                     "terms": "ad,ad agency,advert agency,advertising,marketing"
                 },
                 "office/architect": {
-                    "name": "Architect",
+                    "name": "Architect Office",
                     "terms": ""
                 },
                 "office/association": {
@@ -4656,7 +4656,7 @@
                 },
                 "office/forestry": {
                     "name": "Forestry Office",
-                    "terms": "forest"
+                    "terms": "forest,ranger"
                 },
                 "office/foundation": {
                     "name": "Foundation Office",
@@ -4675,7 +4675,7 @@
                     "terms": "fiscal authorities,revenue office,tax office"
                 },
                 "office/guide": {
-                    "name": "Guide Office",
+                    "name": "Tour Guide Office",
                     "terms": "dive guide,mountain guide,tour guide"
                 },
                 "office/insurance": {
@@ -4683,8 +4683,8 @@
                     "terms": ""
                 },
                 "office/it": {
-                    "name": "IT Office",
-                    "terms": ""
+                    "name": "Information Technology Office",
+                    "terms": "computer,information,software,technology"
                 },
                 "office/lawyer": {
                     "name": "Law Office",
@@ -4699,12 +4699,12 @@
                     "terms": "relocation"
                 },
                 "office/newspaper": {
-                    "name": "Newspaper",
+                    "name": "Newspaper Office",
                     "terms": ""
                 },
                 "office/ngo": {
                     "name": "NGO Office",
-                    "terms": ""
+                    "terms": "ngo,non government,non-government,organization,organisation"
                 },
                 "office/notary": {
                     "name": "Notary Office",
@@ -4719,8 +4719,8 @@
                     "terms": "PI,private eye,private detective"
                 },
                 "office/quango": {
-                    "name": "Quango Office",
-                    "terms": "Quasi-Autonomous Non-Government Organisation,Quasi-Autonomous Non-Government Organization,Quasi-Autonomous NGO"
+                    "name": "Quasi-NGO Office",
+                    "terms": "ngo,non government,non-government,organization,organisation,quasi autonomous,quasi-autonomous"
                 },
                 "office/research": {
                     "name": "Research Office",
@@ -4739,8 +4739,8 @@
                     "terms": ""
                 },
                 "office/therapist": {
-                    "name": "Therapist",
-                    "terms": ""
+                    "name": "Therapist Office",
+                    "terms": "therapy"
                 },
                 "office/water_utility": {
                     "name": "Water Utility Office",

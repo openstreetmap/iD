@@ -11491,7 +11491,7 @@
                 "office": "accountant"
             },
             "terms": [],
-            "name": "Accountant"
+            "name": "Accountant Office"
         },
         "office/administrative": {
             "icon": "commercial",
@@ -11573,7 +11573,7 @@
                 "office": "architect"
             },
             "terms": [],
-            "name": "Architect"
+            "name": "Architect Office"
         },
         "office/association": {
             "icon": "commercial",
@@ -11788,7 +11788,8 @@
                 "office": "forestry"
             },
             "terms": [
-                "forest"
+                "forest",
+                "ranger"
             ],
             "name": "Forestry Office"
         },
@@ -11909,7 +11910,7 @@
                 "mountain guide",
                 "tour guide"
             ],
-            "name": "Guide Office"
+            "name": "Tour Guide Office"
         },
         "office/insurance": {
             "icon": "commercial",
@@ -11946,8 +11947,13 @@
             "tags": {
                 "office": "it"
             },
-            "terms": [],
-            "name": "IT Office"
+            "terms": [
+                "computer",
+                "information",
+                "software",
+                "technology"
+            ],
+            "name": "Information Technology Office"
         },
         "office/lawyer": {
             "icon": "commercial",
@@ -12036,7 +12042,7 @@
                 "office": "newspaper"
             },
             "terms": [],
-            "name": "Newspaper"
+            "name": "Newspaper Office"
         },
         "office/ngo": {
             "icon": "commercial",
@@ -12055,7 +12061,13 @@
             "tags": {
                 "office": "ngo"
             },
-            "terms": [],
+            "terms": [
+                "ngo",
+                "non government",
+                "non-government",
+                "organization",
+                "organisation"
+            ],
             "name": "NGO Office"
         },
         "office/notary": {
@@ -12136,11 +12148,15 @@
                 "office": "quango"
             },
             "terms": [
-                "Quasi-Autonomous Non-Government Organisation",
-                "Quasi-Autonomous Non-Government Organization",
-                "Quasi-Autonomous NGO"
+                "ngo",
+                "non government",
+                "non-government",
+                "organization",
+                "organisation",
+                "quasi autonomous",
+                "quasi-autonomous"
             ],
-            "name": "Quango Office"
+            "name": "Quasi-NGO Office"
         },
         "office/research": {
             "icon": "commercial",
@@ -12237,8 +12253,10 @@
             "tags": {
                 "office": "therapist"
             },
-            "terms": [],
-            "name": "Therapist"
+            "terms": [
+                "therapy"
+            ],
+            "name": "Therapist Office"
         },
         "office/water_utility": {
             "icon": "commercial",
