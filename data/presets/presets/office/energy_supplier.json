@@ -1,0 +1,24 @@
+{
+  "icon": "commercial",
+  "fields": [
+      "name",
+      "address",
+      "building_area",
+      "opening_hours"
+  ],
+  "geometry": [
+      "point",
+      "vertex",
+      "area"
+  ],
+  "tags": {
+      "office": "energy_supplier"
+  },
+  "terms": [
+    "electricity",
+    "energy company",
+    "energy utility",
+    "gas utility"
+  ],
+  "name": "Energy Supplier Office"
+}

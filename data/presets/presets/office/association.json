@@ -1,0 +1,25 @@
+{
+  "icon": "commercial",
+  "fields": [
+      "name",
+      "address",
+      "building_area",
+      "opening_hours"
+  ],
+  "geometry": [
+      "point",
+      "vertex",
+      "area"
+  ],
+  "tags": {
+      "office": "association"
+  },
+  "terms": [
+    "association",
+    "non-profit",
+    "nonprofit",
+    "organization",
+    "society"
+  ],
+  "name": "Nonprofit Organization Office"
+}

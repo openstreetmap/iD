@@ -1,0 +1,23 @@
+{
+  "icon": "commercial",
+  "fields": [
+      "name",
+      "address",
+      "building_area",
+      "opening_hours",
+      "operator"
+  ],
+  "geometry": [
+      "point",
+      "vertex",
+      "area"
+  ],
+  "tags": {
+      "office": "water_utility"
+  },
+  "terms": [
+    "water board",
+    "utility"
+  ],
+  "name": "Water Utility Office"
+}

@@ -2175,7 +2175,23 @@
         },
         {
             "key": "office",
+            "value": "adoption_agency"
+        },
+        {
+            "key": "office",
+            "value": "advertising_agency"
+        },
+        {
+            "key": "office",
             "value": "architect"
+        },
+        {
+            "key": "office",
+            "value": "association"
+        },
+        {
+            "key": "office",
+            "value": "charity"
         },
         {
             "key": "office",
@@ -2195,6 +2211,10 @@
         },
         {
             "key": "office",
+            "value": "energy_supplier"
+        },
+        {
+            "key": "office",
             "value": "estate_agent"
         },
         {
@@ -2203,11 +2223,27 @@
         },
         {
             "key": "office",
+            "value": "forestry"
+        },
+        {
+            "key": "office",
+            "value": "foundation"
+        },
+        {
+            "key": "office",
             "value": "government"
         },
         {
             "key": "government",
             "value": "register_office"
+        },
+        {
+            "key": "government",
+            "value": "tax"
+        },
+        {
+            "key": "office",
+            "value": "guide"
         },
         {
             "key": "office",
@@ -2227,6 +2263,10 @@
         },
         {
             "key": "office",
+            "value": "moving_company"
+        },
+        {
+            "key": "office",
             "value": "newspaper"
         },
         {
@@ -2235,11 +2275,31 @@
         },
         {
             "key": "office",
+            "value": "notary"
+        },
+        {
+            "key": "office",
             "value": "political_party"
         },
         {
             "key": "office",
+            "value": "private_investigator"
+        },
+        {
+            "key": "office",
+            "value": "quango"
+        },
+        {
+            "key": "office",
             "value": "research"
+        },
+        {
+            "key": "office",
+            "value": "surveyor"
+        },
+        {
+            "key": "office",
+            "value": "tax_advisor"
         },
         {
             "key": "office",
@@ -2248,6 +2308,10 @@
         {
             "key": "office",
             "value": "therapist"
+        },
+        {
+            "key": "office",
+            "value": "water_utility"
         },
         {
             "key": "piste:type"
