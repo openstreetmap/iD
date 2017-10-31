@@ -25,7 +25,7 @@ import {
 export function uiRawTagEditor(context) {
     var taginfo = services.taginfo,
         dispatch = d3_dispatch('change'),
-        expandedPreference = (context.storage('raw_tag_editor.expanded') === 'true'),
+        expandedPreference = false,
         expandedCurrent = expandedPreference,
         updatePreference = true,
         readOnlyTags = [],
@@ -35,6 +35,11 @@ export function uiRawTagEditor(context) {
         preset,
         tags,
         id;
+
+
+    context.storage('raw_tag_editor.expanded', function(err, val) {
+        expandedCurrent = expandedPreference = (val === 'true' || val === true);
+    });
 
 
     function rawTagEditor(selection) {

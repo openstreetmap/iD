@@ -4,11 +4,18 @@ import { uiModal } from './modal';
 
 
 export function uiSplash(context) {
+    var sawSplash = false;
+
+    context.storage('sawSplash', function(err, val) {
+        sawSplash = val;
+    });
+
 
     return function(selection) {
-        if (context.storage('sawSplash'))
+        if (sawSplash)
              return;
 
+        sawSplash = true;
         context.storage('sawSplash', true);
 
         var modalSelection = uiModal(selection);

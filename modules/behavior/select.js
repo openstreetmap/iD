@@ -17,10 +17,15 @@ import { osmEntity } from '../osm';
 
 
 export function behaviorSelect(context) {
-    var lastMouse = null,
+    var isShowAlways = false,
+        lastMouse = null,
         suppressMenu = true,
         tolerance = 4,
         p1 = null;
+
+    context.storage('edit-menu-show-always', function(err, val) {
+        isShowAlways = (+val === 1);
+    });
 
 
     function point() {
@@ -63,7 +68,6 @@ export function behaviorSelect(context) {
         d3_select(window)
             .on('mouseup.select', mouseup, true);
 
-        var isShowAlways = +context.storage('edit-menu-show-always') === 1;
         suppressMenu = !isShowAlways;
     }
 
@@ -111,7 +115,6 @@ export function behaviorSelect(context) {
         }
 
         var isMultiselect = d3_event.shiftKey || d3_select('#surface .lasso').node(),
-            isShowAlways = +context.storage('edit-menu-show-always') === 1,
             datum = d3_event.target.__data__ || (lastMouse && lastMouse.target.__data__),
             mode = context.mode();
 

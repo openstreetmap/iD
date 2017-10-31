@@ -16,12 +16,17 @@ import { utilRebind } from '../util';
 export function uiPresetEditor(context) {
     var dispatch = d3_dispatch('change'),
         formFields = uiFormFields(context),
-        expandedPreference = (context.storage('preset_fields.expanded') !== 'false'),
+        expandedPreference = true,
         state,
         fieldsArr,
         preset,
         tags,
         entityId;
+
+
+    context.storage('preset_fields.expanded', function(err, val) {
+        expandedPreference = (val !== 'false');
+    });
 
 
     function presetEditor(selection) {

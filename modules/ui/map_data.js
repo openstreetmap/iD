@@ -16,8 +16,13 @@ export function uiMapData(context) {
         features = context.features().keys(),
         layers = context.layers(),
         fills = ['wireframe', 'partial', 'full'],
-        fillDefault = context.storage('area-fill') || 'partial',
+        fillDefault = 'partial',
         fillSelected = fillDefault;
+
+
+    context.storage('area-fill', function(err, val) {
+        fillDefault = fillSelected = val || 'partial';
+    });
 
 
     function map_data(selection) {

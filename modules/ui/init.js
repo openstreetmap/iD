@@ -43,7 +43,9 @@ import { uiCmd } from './cmd';
 
 
 export function uiInit(context) {
-    var uiInitCounter = 0;
+    var uiInitCounter = 0,
+        splash = uiSplash(context),
+        restore = uiRestore(context);
 
 
     function render(container) {
@@ -289,8 +291,8 @@ export function uiInit(context) {
         if (!uiInitCounter++) {
             if (!hash.startWalkthrough) {
                 context.container()
-                    .call(uiSplash(context))
-                    .call(uiRestore(context));
+                    .call(splash)
+                    .call(restore);
             }
 
             context.container()

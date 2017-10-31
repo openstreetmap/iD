@@ -33,13 +33,17 @@ export function uiBackground(context) {
             ['top', [0, -0.5]],
             ['left', [-0.5, 0]],
             ['bottom', [0, 0.5]]],
-        opacityDefault = (context.storage('background-opacity') !== null) ?
-            (+context.storage('background-opacity')) : 1.0,
+        opacityDefault = 1.0,
         customSource = context.background().findSource('custom'),
         previous;
 
-    // Can be 0 from <1.3.0 use or due to issue #1923.
-    if (opacityDefault === 0) opacityDefault = 1.0;
+
+    context.storage('background-opacity', function(err, val) {
+        opacityDefault = (val !== null) ? +val : 1.0;
+
+        // Can be 0 from <1.3.0 use or due to issue #1923.
+        if (opacityDefault === 0) opacityDefault = 1.0;
+    });
 
 
     function background(selection) {
@@ -64,6 +68,7 @@ export function uiBackground(context) {
             opacityList.selectAll('li')
                 .classed('active', function(_) { return _ === d; });
 
+            opacityDefault = d;
             context.storage('background-opacity', d);
         }
 

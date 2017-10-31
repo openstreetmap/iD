@@ -14,8 +14,13 @@ import { utilRebind } from '../util/rebind';
 export function rendererBackground(context) {
     var dispatch = d3_dispatch('change'),
         baseLayer = rendererTileLayer(context).projection(context.projection),
+        storedTemplate = '',
         overlayLayers = [],
         backgroundSources;
+
+    context.storage('background-custom-template', function(err, val) {
+        storedTemplate = val || '';
+    });
 
 
     function background(selection) {
@@ -259,8 +264,7 @@ export function rendererBackground(context) {
         backgroundSources.unshift(rendererBackgroundSource.None());
 
         // Add 'Custom'
-        var template = context.storage('background-custom-template') || '';
-        var custom = rendererBackgroundSource.Custom(template);
+        var custom = rendererBackgroundSource.Custom(storedTemplate);
         backgroundSources.unshift(custom);
 
 
@@ -269,9 +273,9 @@ export function rendererBackground(context) {
             best = _find(this.sources(extent), function(s) { return s.best(); });
         }
         if (requested && requested.indexOf('custom:') === 0) {
-            template = requested.replace(/^custom:/, '');
-            background.baseLayerSource(custom.template(template));
-            context.storage('background-custom-template', template);
+            storedTemplate = requested.replace(/^custom:/, '');
+            background.baseLayerSource(custom.template(storedTemplate));
+            context.storage('background-custom-template', storedTemplate);
         } else {
             background.baseLayerSource(
                 background.findSource(requested) ||

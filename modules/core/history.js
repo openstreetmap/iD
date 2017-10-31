@@ -554,14 +554,18 @@ export function coreHistory(context) {
 
 
         save: function() {
-            if (lock.locked()) context.asyncStorage(getKey('saved_history'), history.toJSON() || null);
+            if (lock.locked()) {
+                context.storage(getKey('saved_history'), history.toJSON() || null);
+            }
             return history;
         },
 
 
         clearSaved: function() {
             context.debouncedSave.cancel();
-            if (lock.locked()) context.asyncStorage(getKey('saved_history'), null);
+            if (lock.locked()) {
+                context.storage(getKey('saved_history'), null);
+            }
             return history;
         },
 
@@ -576,22 +580,20 @@ export function coreHistory(context) {
         },
 
 
-        // is iD not open in another window and it detects that
-        // there's a history stored in async storage that's recoverable?
+        // Call callback with true only if iD is the the current window
+        // (as determined by lock) and there are changes to restore.
         restorableChanges: function(callback) {
-            var isLocked = lock.locked();
-
-            if (isLocked) {
-                return callback(true);
+            if (!lock.locked()) {
+                callback(false);
+            } else {
+                context.storage(getKey('saved_history'), function(err, json) {
+                    if (err) {
+                        callback(false);
+                    } else {
+                        callback(lock.locked() && !!json);
+                    }
+                });
             }
-
-            return context.asyncStorage(getKey('saved_history'), function(err, savedHistory) {
-                if (err) {
-                    return callback(false);
-                }
-
-                callback(!!savedHistory);
-            });
         },
 
 
@@ -599,7 +601,7 @@ export function coreHistory(context) {
         restore: function() {
             if (!lock.locked()) return;
 
-            context.asyncStorage(getKey('saved_history'), function(err, json) {
+            context.storage(getKey('saved_history'), function(err, json) {
                 if (!err && json) history.fromJSON(json, true);
             });
         },

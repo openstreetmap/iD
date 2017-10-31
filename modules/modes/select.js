@@ -67,9 +67,15 @@ export function modeSelect(context, selectedIDs) {
         ],
         inspector,
         editMenu,
+        isRadialMenu = false,
         newFeature = false,
         suppressMenu = true,
         follow = false;
+
+
+    context.storage('edit-menu-style', function(err, val) {
+        isRadialMenu = (val === 'radial');
+    });
 
 
     var wrap = context.container()
@@ -416,7 +422,6 @@ export function modeSelect(context, selectedIDs) {
                 .filter(function(o) { return o.available(); });
 
         // deprecation warning - Radial Menu to be removed in iD v3
-        var isRadialMenu = context.storage('edit-menu-style') === 'radial';
         if (isRadialMenu) {
             operations = operations.slice(0,7);
             operations.unshift(Operations.operationDelete(selectedIDs, context));

@@ -108,8 +108,11 @@ export function uiIntro(context) {
         context.storage('walkthrough_started', 'yes');
 
         // restore previous walkthrough progress..
-        var storedProgress = context.storage('walkthrough_progress') || '';
-        var progress = storedProgress.split(';').filter(Boolean);
+        var progress = [];
+        context.storage('walkthrough_progress', function(err, val) {
+            var storedProgress = val || '';
+            progress = storedProgress.split(';').filter(Boolean);
+        });
 
         var chapters = chapterFlow.map(function(chapter, i) {
             var s = chapterUi[chapter](context, curtain.reveal)
