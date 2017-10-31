@@ -646,8 +646,8 @@
             "deprecated_tags": "Deprecated tags: {tags}"
         },
         "zoom": {
-            "in": "Zoom In",
-            "out": "Zoom Out"
+            "in": "Zoom in",
+            "out": "Zoom out"
         },
         "cannot_zoom": "Cannot zoom out further in current mode.",
         "full_screen": "Toggle Full Screen",
