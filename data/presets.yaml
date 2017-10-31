@@ -4010,6 +4010,11 @@ en:
         # office=architect
         name: Architect
         terms: '<translate with synonyms or related terms for ''Architect'', separated by commas>'
+      office/association:
+        # office=association
+        name: Association
+        # 'terms: organization,non-profit,society'
+        terms: '<translate with synonyms or related terms for ''Association'', separated by commas>'
       office/company:
         # office=company
         name: Company Office

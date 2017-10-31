@@ -4606,6 +4606,10 @@
                     "name": "Architect",
                     "terms": ""
                 },
+                "office/association": {
+                    "name": "Association",
+                    "terms": "organization,non-profit,society"
+                },
                 "office/company": {
                     "name": "Company Office",
                     "terms": ""

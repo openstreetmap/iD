@@ -2175,6 +2175,10 @@
         },
         {
             "key": "office",
+            "value": "association"
+        },
+        {
+            "key": "office",
             "value": "company"
         },
         {

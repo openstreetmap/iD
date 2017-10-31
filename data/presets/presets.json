@@ -11498,6 +11498,29 @@
             "terms": [],
             "name": "Architect"
         },
+        "office/association": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "office": "association"
+            },
+            "terms": [
+                "organization",
+                "non-profit",
+                "society"
+            ],
+            "name": "Association"
+        },
         "office/company": {
             "icon": "commercial",
             "fields": [
