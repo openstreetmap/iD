@@ -12,8 +12,12 @@
       "area"
   ],
   "tags": {
-      "office": "surveyor"
+      "office": "private_investigator"
   },
-  "terms": [],
-  "name": "Surveyor Office"
+  "terms": [
+    "PI",
+    "private eye",
+    "private detective"
+  ],
+  "name": "Private Investigator Office"
 }

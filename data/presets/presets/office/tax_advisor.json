@@ -12,8 +12,11 @@
       "area"
   ],
   "tags": {
-      "office": "surveyor"
+      "office": "tax_advisor"
   },
-  "terms": [],
-  "name": "Surveyor Office"
+  "terms": [
+    "tax",
+    "tax consultant"
+  ],
+  "name": "Tax Advisor Office"
 }

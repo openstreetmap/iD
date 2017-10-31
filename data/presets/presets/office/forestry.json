@@ -12,8 +12,10 @@
       "area"
   ],
   "tags": {
-      "office": "surveyor"
+      "office": "forestry"
   },
-  "terms": [],
-  "name": "Surveyor Office"
+  "terms": [
+    "forest"
+  ],
+  "name": "Forestry Office"
 }

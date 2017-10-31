@@ -15,9 +15,11 @@
       "office": "association"
   },
   "terms": [
+    "association",
     "non-profit",
+    "nonprofit",
     "organization",
     "society"
   ],
-  "name": "Association"
+  "name": "Nonprofit Organization Office"
 }

@@ -12,8 +12,13 @@
       "area"
   ],
   "tags": {
-      "office": "surveyor"
+      "office": "energy_supplier"
   },
-  "terms": [],
-  "name": "Surveyor Office"
+  "terms": [
+    "electricity",
+    "energy company",
+    "energy utility",
+    "gas utility"
+  ],
+  "name": "Energy Supplier Office"
 }

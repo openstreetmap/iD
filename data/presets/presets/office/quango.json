@@ -12,8 +12,12 @@
       "area"
   ],
   "tags": {
-      "office": "surveyor"
+      "office": "quango"
   },
-  "terms": [],
-  "name": "Surveyor Office"
+  "terms": [
+    "Quasi-Autonomous Non-Government Organisation",
+    "Quasi-Autonomous Non-Government Organization",
+    "Quasi-Autonomous NGO"
+  ],
+  "name": "Quango Office"
 }

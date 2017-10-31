@@ -12,8 +12,10 @@
       "area"
   ],
   "tags": {
-      "office": "surveyor"
+      "office": "charity"
   },
-  "terms": [],
-  "name": "Surveyor Office"
+  "terms": [
+    "charitable organization"
+  ],
+  "name": "Charity Office"
 }

@@ -12,8 +12,10 @@
       "area"
   ],
   "tags": {
-      "office": "surveyor"
+      "office": "moving_company"
   },
-  "terms": [],
-  "name": "Surveyor Office"
+  "terms": [
+    "relocation"
+  ],
+  "name": "Moving Company Office"
 }

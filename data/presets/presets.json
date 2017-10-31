@@ -11479,6 +11479,25 @@
             "terms": [],
             "name": "Administrative Office"
         },
+        "office/adoption_agency": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "office": "adoption_agency"
+            },
+            "terms": [],
+            "name": "Adoption Agency"
+        },
         "office/advertising_agency": {
             "icon": "commercial",
             "fields": [
@@ -11540,11 +11559,34 @@
                 "office": "association"
             },
             "terms": [
+                "association",
                 "non-profit",
+                "nonprofit",
                 "organization",
                 "society"
             ],
-            "name": "Association"
+            "name": "Nonprofit Organization Office"
+        },
+        "office/charity": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "office": "charity"
+            },
+            "terms": [
+                "charitable organization"
+            ],
+            "name": "Charity Office"
         },
         "office/company": {
             "icon": "commercial",
@@ -11634,6 +11676,30 @@
             ],
             "name": "Employment Agency"
         },
+        "office/energy_supplier": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "office": "energy_supplier"
+            },
+            "terms": [
+                "electricity",
+                "energy company",
+                "energy utility",
+                "gas utility"
+            ],
+            "name": "Energy Supplier Office"
+        },
         "office/estate_agent": {
             "icon": "commercial",
             "fields": [
@@ -11671,6 +11737,46 @@
             },
             "terms": [],
             "name": "Financial Office"
+        },
+        "office/forestry": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "office": "forestry"
+            },
+            "terms": [
+                "forest"
+            ],
+            "name": "Forestry Office"
+        },
+        "office/foundation": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "office": "foundation"
+            },
+            "terms": [],
+            "name": "Foundation Office"
         },
         "office/government": {
             "icon": "commercial",
@@ -11720,6 +11826,57 @@
                 "value": "register_office"
             },
             "name": "Register Office"
+        },
+        "office/government/tax": {
+            "icon": "town-hall",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours",
+                "operator"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "fiscal authorities",
+                "revenue office",
+                "tax office"
+            ],
+            "tags": {
+                "office": "government",
+                "government": "tax"
+            },
+            "reference": {
+                "key": "government",
+                "value": "tax"
+            },
+            "name": "Tax and Revenue Office"
+        },
+        "office/guide": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "office": "guide"
+            },
+            "terms": [
+                "dive guide",
+                "mountain guide",
+                "tour guide"
+            ],
+            "name": "Guide Office"
         },
         "office/insurance": {
             "icon": "commercial",
@@ -11808,6 +11965,27 @@
             ],
             "name": "Notary Office"
         },
+        "office/moving_company": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "office": "moving_company"
+            },
+            "terms": [
+                "relocation"
+            ],
+            "name": "Moving Company Office"
+        },
         "office/newspaper": {
             "icon": "commercial",
             "fields": [
@@ -11847,6 +12025,25 @@
             "terms": [],
             "name": "NGO Office"
         },
+        "office/notary": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "office": "notary"
+            },
+            "terms": [],
+            "name": "Notary Office"
+        },
         "office/political_party": {
             "icon": "commercial",
             "fields": [
@@ -11865,6 +12062,52 @@
             },
             "terms": [],
             "name": "Political Party"
+        },
+        "office/private_investigator": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "office": "private_investigator"
+            },
+            "terms": [
+                "PI",
+                "private eye",
+                "private detective"
+            ],
+            "name": "Private Investigator Office"
+        },
+        "office/quango": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "office": "quango"
+            },
+            "terms": [
+                "Quasi-Autonomous Non-Government Organisation",
+                "Quasi-Autonomous Non-Government Organization",
+                "Quasi-Autonomous NGO"
+            ],
+            "name": "Quango Office"
         },
         "office/research": {
             "icon": "commercial",
@@ -11902,7 +12145,29 @@
                 "office": "surveyor"
             },
             "terms": [],
-            "name": "Surveyor"
+            "name": "Surveyor Office"
+        },
+        "office/tax_advisor": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "office": "tax_advisor"
+            },
+            "terms": [
+                "tax",
+                "tax consultant"
+            ],
+            "name": "Tax Advisor Office"
         },
         "office/telecommunication": {
             "icon": "commercial",
@@ -11941,6 +12206,29 @@
             },
             "terms": [],
             "name": "Therapist"
+        },
+        "office/water_utility": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours",
+                "operator"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "office": "water_utility"
+            },
+            "terms": [
+                "water board",
+                "utility"
+            ],
+            "name": "Water Utility Office"
         },
         "piste": {
             "icon": "skiing",

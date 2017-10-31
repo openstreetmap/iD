@@ -4,7 +4,8 @@
       "name",
       "address",
       "building_area",
-      "opening_hours"
+      "opening_hours",
+      "operator"
   ],
   "geometry": [
       "point",
@@ -12,8 +13,11 @@
       "area"
   ],
   "tags": {
-      "office": "surveyor"
+      "office": "water_utility"
   },
-  "terms": [],
-  "name": "Surveyor Office"
+  "terms": [
+    "water board",
+    "utility"
+  ],
+  "name": "Water Utility Office"
 }

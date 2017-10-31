@@ -12,8 +12,12 @@
       "area"
   ],
   "tags": {
-      "office": "surveyor"
+      "office": "guide"
   },
-  "terms": [],
-  "name": "Surveyor Office"
+  "terms": [
+    "dive guide",
+    "mountain guide",
+    "tour guide"
+  ],
+  "name": "Guide Office"
 }
