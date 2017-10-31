@@ -12084,7 +12084,6 @@
             "name": "Sub-Borough / Quarter"
         },
         "place/square": {
-            "icon": "poi-foot",
             "geometry": [
                 "point",
                 "area"
