@@ -310,7 +310,7 @@
             "localized_translation_language": "Choose language",
             "localized_translation_name": "Name"
         },
-        "zoom_in_edit": "Zoom in to Edit",
+        "zoom_in_edit": "Zoom in to edit",
         "login": "login",
         "logout": "logout",
         "loading_auth": "Connecting to OpenStreetMap...",
@@ -613,7 +613,7 @@
             "welcome": "Welcome to the iD OpenStreetMap editor",
             "text": "iD is a friendly but powerful tool for contributing to the world's best free world map. This is version {version}. For more information see {website} and report bugs at {github}.",
             "walkthrough": "Start the Walkthrough",
-            "start": "Edit Now"
+            "start": "Edit now"
         },
         "source_switch": {
             "live": "live",
@@ -646,8 +646,8 @@
             "deprecated_tags": "Deprecated tags: {tags}"
         },
         "zoom": {
-            "in": "Zoom In",
-            "out": "Zoom Out"
+            "in": "Zoom in",
+            "out": "Zoom out"
         },
         "cannot_zoom": "Cannot zoom out further in current mode.",
         "full_screen": "Toggle Full Screen",
