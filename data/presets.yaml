@@ -4008,9 +4008,9 @@ en:
         terms: '<translate with synonyms or related terms for ''Administrative Office'', separated by commas>'
       office/advertising_agency:
         # office=advertising_agency
-        name: Association
+        name: Advertising Agency
         # 'terms: ad,ad agency,advert agency,advertising,marketing'
-        terms: '<translate with synonyms or related terms for ''Association'', separated by commas>'
+        terms: '<translate with synonyms or related terms for ''Advertising Agency'', separated by commas>'
       office/architect:
         # office=architect
         name: Architect
@@ -4018,7 +4018,7 @@ en:
       office/association:
         # office=association
         name: Association
-        # 'terms: organization,non-profit,society'
+        # 'terms: non-profit,organization,society'
         terms: '<translate with synonyms or related terms for ''Association'', separated by commas>'
       office/company:
         # office=company
@@ -4091,6 +4091,10 @@ en:
         # office=research
         name: Research Office
         terms: '<translate with synonyms or related terms for ''Research Office'', separated by commas>'
+      office/surveyor:
+        # office=surveyor
+        name: Surveyor
+        terms: '<translate with synonyms or related terms for ''Surveyor'', separated by commas>'
       office/telecommunication:
         # office=telecommunication
         name: Telecom Office

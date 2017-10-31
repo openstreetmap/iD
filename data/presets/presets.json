@@ -11502,7 +11502,7 @@
                 "advertising",
                 "marketing"
             ],
-            "name": "Association"
+            "name": "Advertising Agency"
         },
         "office/architect": {
             "icon": "commercial",
@@ -11540,8 +11540,8 @@
                 "office": "association"
             },
             "terms": [
-                "organization",
                 "non-profit",
+                "organization",
                 "society"
             ],
             "name": "Association"
@@ -11884,6 +11884,25 @@
             },
             "terms": [],
             "name": "Research Office"
+        },
+        "office/surveyor": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "office": "surveyor"
+            },
+            "terms": [],
+            "name": "Surveyor"
         },
         "office/telecommunication": {
             "icon": "commercial",

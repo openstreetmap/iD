@@ -4603,7 +4603,7 @@
                     "terms": ""
                 },
                 "office/advertising_agency": {
-                    "name": "Association",
+                    "name": "Advertising Agency",
                     "terms": "ad,ad agency,advert agency,advertising,marketing"
                 },
                 "office/architect": {
@@ -4612,7 +4612,7 @@
                 },
                 "office/association": {
                     "name": "Association",
-                    "terms": "organization,non-profit,society"
+                    "terms": "non-profit,organization,society"
                 },
                 "office/company": {
                     "name": "Company Office",
@@ -4676,6 +4676,10 @@
                 },
                 "office/research": {
                     "name": "Research Office",
+                    "terms": ""
+                },
+                "office/surveyor": {
+                    "name": "Surveyor",
                     "terms": ""
                 },
                 "office/telecommunication": {

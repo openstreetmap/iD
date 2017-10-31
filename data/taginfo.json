@@ -2247,6 +2247,10 @@
         },
         {
             "key": "office",
+            "value": "surveyor"
+        },
+        {
+            "key": "office",
             "value": "telecommunication"
         },
         {
