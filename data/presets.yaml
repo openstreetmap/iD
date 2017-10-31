@@ -4006,6 +4006,11 @@ en:
         # office=administrative
         name: Administrative Office
         terms: '<translate with synonyms or related terms for ''Administrative Office'', separated by commas>'
+      office/advertising_agency:
+        # office=advertising_agency
+        name: Association
+        # 'terms: ad,ad agency,advert agency,advertising,marketing'
+        terms: '<translate with synonyms or related terms for ''Association'', separated by commas>'
       office/architect:
         # office=architect
         name: Architect

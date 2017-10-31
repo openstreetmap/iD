@@ -4602,6 +4602,10 @@
                     "name": "Administrative Office",
                     "terms": ""
                 },
+                "office/advertising_agency": {
+                    "name": "Association",
+                    "terms": "ad,ad agency,advert agency,advertising,marketing"
+                },
                 "office/architect": {
                     "name": "Architect",
                     "terms": ""
