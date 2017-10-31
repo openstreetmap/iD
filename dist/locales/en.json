@@ -310,7 +310,7 @@
             "localized_translation_language": "Choose language",
             "localized_translation_name": "Name"
         },
-        "zoom_in_edit": "Zoom in to Edit",
+        "zoom_in_edit": "Zoom in to edit",
         "login": "login",
         "logout": "logout",
         "loading_auth": "Connecting to OpenStreetMap...",
