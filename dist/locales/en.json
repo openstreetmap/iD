@@ -6,7 +6,7 @@
                 "description": "Add parks, buildings, lakes or other areas to the map.",
                 "tail": "Click on the map to start drawing an area, like a park, lake, or building."
             },
-            "sadd_line": {
+            "add_line": {
                 "title": "Line",
                 "description": "Add highways, streets, pedestrian paths, canals or other lines to the map.",
                 "tail": "Click on the map to start drawing a road, path, or route."
