@@ -1337,6 +1337,10 @@
             "value": "path"
         },
         {
+            "key": "area",
+            "value": "yes"
+        },
+        {
             "key": "highway",
             "value": "pedestrian"
         },

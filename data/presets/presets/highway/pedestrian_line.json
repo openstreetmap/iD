@@ -10,12 +10,18 @@
         "access"
     ],
     "geometry": [
-        "line",
-        "area"
+        "line"
     ],
     "tags": {
         "highway": "pedestrian"
     },
-    "terms": [],
+    "terms": [
+        "center",
+        "centre",
+        "plaza",
+        "quad",
+        "square",
+        "walkway"
+    ],
     "name": "Pedestrian Street"
 }

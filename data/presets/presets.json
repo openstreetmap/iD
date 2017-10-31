@@ -6993,7 +6993,34 @@
             },
             "name": "Path"
         },
-        "highway/pedestrian": {
+        "highway/pedestrian_area": {
+            "icon": "poi-foot",
+            "fields": [
+                "name",
+                "surface",
+                "lit",
+                "width",
+                "structure",
+                "access"
+            ],
+            "geometry": [
+                "area"
+            ],
+            "tags": {
+                "highway": "pedestrian",
+                "area": "yes"
+            },
+            "terms": [
+                "center",
+                "centre",
+                "plaza",
+                "quad",
+                "square",
+                "walkway"
+            ],
+            "name": "Pedestrian Area"
+        },
+        "highway/pedestrian_line": {
             "icon": "highway-footway",
             "fields": [
                 "name",
@@ -7005,13 +7032,19 @@
                 "access"
             ],
             "geometry": [
-                "line",
-                "area"
+                "line"
             ],
             "tags": {
                 "highway": "pedestrian"
             },
-            "terms": [],
+            "terms": [
+                "center",
+                "centre",
+                "plaza",
+                "quad",
+                "square",
+                "walkway"
+            ],
             "name": "Pedestrian Street"
         },
         "highway/primary_link": {

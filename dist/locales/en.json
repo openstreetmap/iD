@@ -3758,9 +3758,13 @@
                     "name": "Path",
                     "terms": "hike,hiking,trackway,trail,walk"
                 },
-                "highway/pedestrian": {
+                "highway/pedestrian_area": {
+                    "name": "Pedestrian Area",
+                    "terms": "center,centre,plaza,quad,square,walkway"
+                },
+                "highway/pedestrian_line": {
                     "name": "Pedestrian Street",
-                    "terms": ""
+                    "terms": "center,centre,plaza,quad,square,walkway"
                 },
                 "highway/primary_link": {
                     "name": "Primary Link",

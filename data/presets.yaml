@@ -3055,9 +3055,15 @@ en:
         name: Path
         # 'terms: hike,hiking,trackway,trail,walk'
         terms: '<translate with synonyms or related terms for ''Path'', separated by commas>'
-      highway/pedestrian:
+      highway/pedestrian_area:
+        # 'highway=pedestrian, area=yes'
+        name: Pedestrian Area
+        # 'terms: center,centre,plaza,quad,square,walkway'
+        terms: '<translate with synonyms or related terms for ''Pedestrian Area'', separated by commas>'
+      highway/pedestrian_line:
         # highway=pedestrian
         name: Pedestrian Street
+        # 'terms: center,centre,plaza,quad,square,walkway'
         terms: '<translate with synonyms or related terms for ''Pedestrian Street'', separated by commas>'
       highway/primary:
         # highway=primary
