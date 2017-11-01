@@ -2951,7 +2951,12 @@ img.tile-removing {
     border-radius: 2px;
     padding: 0 4px;
     margin-top: 10px;
+    margin-right: 10px;
     color: white;
+}
+[dir='rtl'] .panel-content .button {
+    margin-right: auto;
+    margin-left: 10px;
 }
 
 .panel-content-history .links a {

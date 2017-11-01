@@ -286,6 +286,8 @@ en:
       unknown: Unknown
       show_tiles: Show Tiles
       hide_tiles: Hide Tiles
+      show_vintage: Show Vintage
+      hide_vintage: Hide Vintage
     history:
       key: H
       title: History

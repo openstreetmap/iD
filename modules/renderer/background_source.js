@@ -133,6 +133,13 @@ export function rendererBackgroundSource(data) {
     };
 
 
+    /* hides a source from the list, but leaves it available for use */
+    source.isHidden = function() {
+        return source.id === 'DigitalGlobe-Premium-vintage' ||
+            source.id === 'DigitalGlobe-Standard-vintage';
+    };
+
+
     source.copyrightNotices = function() {};
 
 
