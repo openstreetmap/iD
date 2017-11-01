@@ -35,7 +35,7 @@ export function rendererBackgroundSource(data) {
         best = !!source.best,
         template = source.template;
 
-    source.scaleExtent = data.scaleExtent || [0, 20];
+    source.scaleExtent = data.scaleExtent || [0, 22];
     source.overzoom = data.overzoom !== false;
 
 
