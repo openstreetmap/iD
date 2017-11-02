@@ -1,6 +1,6 @@
 {
     "key": "devices",
     "type": "number",
-    "label": "Number of Devices",
+    "label": "Devices",
     "placeholder": "1, 2, 3..."
 }

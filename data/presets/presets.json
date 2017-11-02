@@ -12886,6 +12886,26 @@
             },
             "name": "Substation"
         },
+        "power/switch": {
+            "icon": "poi-power",
+            "fields": [
+                "switch",
+                "location",
+                "cables",
+                "voltage",
+                "operator",
+                "ref"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "power": "switch"
+            },
+            "name": "Power Switch"
+        },
         "power/tower": {
             "geometry": [
                 "vertex"

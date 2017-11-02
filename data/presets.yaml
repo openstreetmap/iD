@@ -261,6 +261,11 @@ en:
       bunker_type:
         # bunker_type=*
         label: Type
+      cables:
+        # cables=*
+        label: Cables
+        # cables field placeholder
+        placeholder: '1, 2, 3...'
       camera/direction:
         # 'camera:direction=*'
         label: Direction (Degrees Clockwise)
@@ -452,7 +457,7 @@ en:
         label: Description
       devices:
         # devices=*
-        label: Number of Devices
+        label: Devices
         # devices field placeholder
         placeholder: '1, 2, 3...'
       diaper:
@@ -990,7 +995,7 @@ en:
         label: Payment Types
       phases:
         # phases=*
-        label: Number of Phases
+        label: Phases
         # phases field placeholder
         placeholder: '1, 2, 3...'
       phone:
@@ -1372,6 +1377,18 @@ en:
       surveillance/zone:
         # 'surveillance:zone=*'
         label: Surveillance Zone
+      switch:
+        # switch=*
+        label: Type
+        options:
+          # switch=circuit_breaker
+          circuit_breaker: Circuit Breaker
+          # switch=disconnector
+          disconnector: Disconnector
+          # switch=earthing
+          earthing: Earthing
+          # switch=mechanical
+          mechanical: Mechanical
       tactile_paving:
         # tactile_paving=*
         label: Tactile Paving
@@ -1464,7 +1481,7 @@ en:
         placeholder: 'Excellent, Good, Bad...'
       transformer:
         # transformer=*
-        label: Type of Transformer
+        label: Type
         options:
           # transformer=auto
           auto: Autotransformer
@@ -1523,6 +1540,9 @@ en:
           shield: Shield
           # 'volcano:type=stratovolcano'
           stratovolcano: Stratovolcano
+      voltage:
+        # voltage=*
+        label: Voltage
       voltage/primary:
         # 'voltage:primary=*'
         label: Primary Voltage
@@ -1563,7 +1583,7 @@ en:
         label: Wikipedia
       windings:
         # windings=*
-        label: Number of Windings
+        label: Windings
         # windings field placeholder
         placeholder: '1, 2, 3...'
       windings/configuration:
@@ -4351,6 +4371,10 @@ en:
         # power=substation
         name: Substation
         terms: '<translate with synonyms or related terms for ''Substation'', separated by commas>'
+      power/switch:
+        # power=switch
+        name: Power Switch
+        terms: '<translate with synonyms or related terms for ''Power Switch'', separated by commas>'
       power/tower:
         # power=tower
         name: High-Voltage Tower

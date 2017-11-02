@@ -2466,6 +2466,10 @@
         },
         {
             "key": "power",
+            "value": "switch"
+        },
+        {
+            "key": "power",
             "value": "tower"
         },
         {

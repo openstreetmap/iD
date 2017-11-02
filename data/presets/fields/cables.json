@@ -1,6 +1,6 @@
 {
-    "key": "windings",
+    "key": "cables",
     "type": "number",
-    "label": "Windings",
+    "label": "Cables",
     "placeholder": "1, 2, 3..."
 }

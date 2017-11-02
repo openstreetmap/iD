@@ -1309,6 +1309,10 @@
                 "bunker_type": {
                     "label": "Type"
                 },
+                "cables": {
+                    "label": "Cables",
+                    "placeholder": "1, 2, 3..."
+                },
                 "camera/direction": {
                     "label": "Direction (Degrees Clockwise)",
                     "placeholder": "45, 90, 180, 270"
@@ -1475,7 +1479,7 @@
                     "label": "Description"
                 },
                 "devices": {
-                    "label": "Number of Devices",
+                    "label": "Devices",
                     "placeholder": "1, 2, 3..."
                 },
                 "diaper": {
@@ -1924,7 +1928,7 @@
                     "label": "Payment Types"
                 },
                 "phases": {
-                    "label": "Number of Phases",
+                    "label": "Phases",
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
@@ -2246,6 +2250,15 @@
                 "surveillance/zone": {
                     "label": "Surveillance Zone"
                 },
+                "switch": {
+                    "label": "Type",
+                    "options": {
+                        "mechanical": "Mechanical",
+                        "circuit_breaker": "Circuit Breaker",
+                        "disconnector": "Disconnector",
+                        "earthing": "Earthing"
+                    }
+                },
                 "tactile_paving": {
                     "label": "Tactile Paving"
                 },
@@ -2319,7 +2332,7 @@
                     }
                 },
                 "transformer": {
-                    "label": "Type of Transformer",
+                    "label": "Type",
                     "options": {
                         "distribution": "Distribution",
                         "generator": "Generator",
@@ -2365,6 +2378,9 @@
                         "scoria": "Scoria"
                     }
                 },
+                "voltage": {
+                    "label": "Voltage"
+                },
                 "voltage/primary": {
                     "label": "Primary Voltage"
                 },
@@ -2403,7 +2419,7 @@
                     "label": "Wikipedia"
                 },
                 "windings": {
-                    "label": "Number of Windings",
+                    "label": "Windings",
                     "placeholder": "1, 2, 3..."
                 },
                 "windings/configuration": {
@@ -4902,6 +4918,10 @@
                 },
                 "power/substation": {
                     "name": "Substation",
+                    "terms": ""
+                },
+                "power/switch": {
+                    "name": "Power Switch",
                     "terms": ""
                 },
                 "power/tower": {

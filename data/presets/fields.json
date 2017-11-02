@@ -349,6 +349,12 @@
             "type": "combo",
             "label": "Type"
         },
+        "cables": {
+            "key": "cables",
+            "type": "number",
+            "label": "Cables",
+            "placeholder": "1, 2, 3..."
+        },
         "camera/direction": {
             "key": "camera:direction",
             "type": "number",
@@ -597,7 +603,7 @@
         "devices": {
             "key": "devices",
             "type": "number",
-            "label": "Number of Devices",
+            "label": "Devices",
             "placeholder": "1, 2, 3..."
         },
         "diaper": {
@@ -1335,7 +1341,7 @@
         "phases": {
             "key": "phases",
             "type": "number",
-            "label": "Number of Phases",
+            "label": "Phases",
             "placeholder": "1, 2, 3..."
         },
         "phone": {
@@ -1882,6 +1888,19 @@
             "type": "combo",
             "label": "Surveillance Zone"
         },
+        "switch": {
+            "key": "switch",
+            "type": "combo",
+            "label": "Type",
+            "strings": {
+                "options": {
+                    "mechanical": "Mechanical",
+                    "circuit_breaker": "Circuit Breaker",
+                    "disconnector": "Disconnector",
+                    "earthing": "Earthing"
+                }
+            }
+        },
         "tactile_paving": {
             "key": "tactile_paving",
             "type": "check",
@@ -1996,7 +2015,7 @@
         "transformer": {
             "key": "transformer",
             "type": "combo",
-            "label": "Type of Transformer",
+            "label": "Type",
             "strings": {
                 "options": {
                     "distribution": "Distribution",
@@ -2061,6 +2080,11 @@
                     "scoria": "Scoria"
                 }
             }
+        },
+        "voltage": {
+            "key": "voltage",
+            "type": "combo",
+            "label": "Voltage"
         },
         "voltage/primary": {
             "key": "voltage:primary",
@@ -2141,7 +2165,7 @@
         "windings": {
             "key": "windings",
             "type": "number",
-            "label": "Number of Windings",
+            "label": "Windings",
             "placeholder": "1, 2, 3..."
         },
         "windings/configuration": {
