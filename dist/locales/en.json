@@ -730,7 +730,7 @@
                 "intro": "# Feature Editor\n\nThe feature editor is the section on the left side of the page that allows you to\nedit the details of the selected feature.\n",
                 "select": "### Selecting a Feature Type\n\nAfter you add a point, line, or area, you can choose what type of feature it\nis, like whether it's a highway or residential road, supermarket or cafe.\nThe feature editor will display buttons for common feature types, and you can\nfind others by typing what you're looking for in the search box.\n\nClick the 'i' in the top-right-hand corner of a feature type button to\nlearn more about it. Click a button to choose that type.\n",
                 "fields": "### Fields\n\nAfter you choose a feature type, or when you select a feature that already\nhas a type assigned, the feature editor will display fields with details about\nthe feature like its name or speed limit for a road or levels and address for a building. \n\nBelow the fields you see, you can click the `Add field` dropdown to add\nother details, like a Wikipedia link, wheelchair access, and more.\n",
-                "tags": "### Tags\n\nBelow that you see the tags which are actually stored in OpenStreetMap.\nIf you cannot find the feature's type with the feature editor or you\ncannot add required fields, then you can add additional tags with the `+` button.\n\nYou will find many tags in the [OpenStreetMap Wiki](https://wiki.openstreetmap.org/),\nalso [Taginfo](https://taginfo.openstreetmap.org/) is a\ngreat resource to learn more about popular tag combinations.\n",
+                "tags": "### Tags\n\nBelow that you see the tags which are actually stored in OpenStreetMap.\nIf you cannot find the feature's type with the feature editor or you\ncannot add required fields, then you can add additional tags with the `+` button.\n[Taginfo](https://taginfo.openstreetmap.org/) is a great resource to learn more\nabout popular tag combinations.\n",
                 "undo": "### Undo & Redo\n\nChanges you make in the feature editor are automatically applied.\nYou can undo them at any time by clicking the {undo} 'Undo' button and redo\nchanges by clicking the {redo} 'Redo' button.\n"
             },
             "imagery": {
@@ -5949,26 +5949,12 @@
                 "description": "Premium DigitalGlobe satellite imagery.",
                 "name": "DigitalGlobe Premium Imagery"
             },
-            "DigitalGlobe-Premium-vintage": {
-                "attribution": {
-                    "text": "Terms & Feedback"
-                },
-                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 14 and higher.",
-                "name": "DigitalGlobe Premium Imagery Vintage"
-            },
             "DigitalGlobe-Standard": {
                 "attribution": {
                     "text": "Terms & Feedback"
                 },
                 "description": "Standard DigitalGlobe satellite imagery.",
                 "name": "DigitalGlobe Standard Imagery"
-            },
-            "DigitalGlobe-Standard-vintage": {
-                "attribution": {
-                    "text": "Terms & Feedback"
-                },
-                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 14 and higher.",
-                "name": "DigitalGlobe Standard Imagery Vintage"
             },
             "EsriWorldImagery": {
                 "attribution": {

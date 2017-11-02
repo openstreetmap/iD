@@ -903,10 +903,8 @@ en:
         Below that you see the tags which are actually stored in OpenStreetMap.
         If you cannot find the feature's type with the feature editor or you
         cannot add required fields, then you can add additional tags with the `+` button.
-
-        You will find many tags in the [OpenStreetMap Wiki](https://wiki.openstreetmap.org/),
-        also [Taginfo](https://taginfo.openstreetmap.org/) is a
-        great resource to learn more about popular tag combinations.
+        [Taginfo](https://taginfo.openstreetmap.org/) is a great resource to learn more
+        about popular tag combinations.
   
       undo: |
         ### Undo & Redo
