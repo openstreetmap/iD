@@ -2,10 +2,10 @@
     "icon": "poi-power",
     "fields": [
         "switch",
+        "operator",
         "location",
         "cables",
         "voltage",
-        "operator",
         "ref"
     ],
     "geometry": [

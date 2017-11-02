@@ -12699,10 +12699,12 @@
             "matchScore": 0.1
         },
         "power/sub_station": {
+            "icon": "poi-power",
             "fields": [
                 "substation",
                 "operator",
-                "building"
+                "building",
+                "ref"
             ],
             "geometry": [
                 "point",
@@ -12725,7 +12727,8 @@
                 "generator/source",
                 "generator/method",
                 "generator/type",
-                "generator/output/electricity"
+                "generator/output/electricity",
+                "ref"
             ],
             "geometry": [
                 "point",
@@ -12750,7 +12753,8 @@
                 "generator/source",
                 "generator/method",
                 "generator/type",
-                "generator/output/electricity"
+                "generator/output/electricity",
+                "ref"
             ],
             "geometry": [
                 "point",
@@ -12783,7 +12787,8 @@
                 "generator/method",
                 "generator/type",
                 "generator/output/electricity",
-                "height"
+                "height",
+                "ref"
             ],
             "geometry": [
                 "point",
@@ -12809,6 +12814,12 @@
         },
         "power/line": {
             "icon": "power-line",
+            "fields": [
+                "name",
+                "operator",
+                "voltage",
+                "ref"
+            ],
             "geometry": [
                 "line"
             ],
@@ -12819,6 +12830,12 @@
         },
         "power/minor_line": {
             "icon": "power-line",
+            "fields": [
+                "name",
+                "operator",
+                "voltage",
+                "ref"
+            ],
             "geometry": [
                 "line"
             ],
@@ -12862,6 +12879,9 @@
             "name": "Power Station Grounds"
         },
         "power/pole": {
+            "fields": [
+                "ref"
+            ],
             "geometry": [
                 "vertex"
             ],
@@ -12875,7 +12895,8 @@
             "fields": [
                 "substation",
                 "operator",
-                "building"
+                "building",
+                "ref"
             ],
             "geometry": [
                 "point",
@@ -12890,10 +12911,10 @@
             "icon": "poi-power",
             "fields": [
                 "switch",
+                "operator",
                 "location",
                 "cables",
                 "voltage",
-                "operator",
                 "ref"
             ],
             "geometry": [
@@ -12907,6 +12928,9 @@
             "name": "Power Switch"
         },
         "power/tower": {
+            "fields": [
+                "ref"
+            ],
             "geometry": [
                 "vertex"
             ],
@@ -12919,6 +12943,7 @@
             "icon": "poi-power",
             "fields": [
                 "transformer",
+                "operator",
                 "location",
                 "rating",
                 "devices",
@@ -12928,7 +12953,8 @@
                 "voltage/secondary",
                 "voltage/tertiary",
                 "windings",
-                "windings/configuration"
+                "windings/configuration",
+                "ref"
             ],
             "geometry": [
                 "point",

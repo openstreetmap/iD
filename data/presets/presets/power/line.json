@@ -1,5 +1,11 @@
 {
     "icon": "power-line",
+    "fields": [
+        "name",
+        "operator",
+        "voltage",
+        "ref"
+    ],
     "geometry": [
         "line"
     ],

@@ -1,8 +1,10 @@
 {
+    "icon": "poi-power",
     "fields": [
         "substation",
         "operator",
-        "building"
+        "building",
+        "ref"
     ],
     "geometry": [
         "point",
