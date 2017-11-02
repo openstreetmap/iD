@@ -1,4 +1,4 @@
-import * as d3 from 'd3';  // TODO: remove (needed for tests?)
+//import * as d3 from 'd3';  // TODO: remove (needed for tests?)
 
 export * from './actions/index';
 export * from './behavior/index';
