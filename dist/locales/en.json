@@ -310,7 +310,7 @@
             "localized_translation_language": "Choose language",
             "localized_translation_name": "Name"
         },
-        "zoom_in_edit": "Zoom in to Edit",
+        "zoom_in_edit": "Zoom in to edit",
         "login": "login",
         "logout": "logout",
         "loading_auth": "Connecting to OpenStreetMap...",
@@ -361,7 +361,9 @@
                 "accuracy": "Accuracy",
                 "unknown": "Unknown",
                 "show_tiles": "Show Tiles",
-                "hide_tiles": "Hide Tiles"
+                "hide_tiles": "Hide Tiles",
+                "show_vintage": "Show Vintage",
+                "hide_vintage": "Hide Vintage"
             },
             "history": {
                 "key": "H",
@@ -613,7 +615,7 @@
             "welcome": "Welcome to the iD OpenStreetMap editor",
             "text": "iD is a friendly but powerful tool for contributing to the world's best free world map. This is version {version}. For more information see {website} and report bugs at {github}.",
             "walkthrough": "Start the Walkthrough",
-            "start": "Edit Now"
+            "start": "Edit now"
         },
         "source_switch": {
             "live": "live",
@@ -646,8 +648,8 @@
             "deprecated_tags": "Deprecated tags: {tags}"
         },
         "zoom": {
-            "in": "Zoom In",
-            "out": "Zoom Out"
+            "in": "Zoom in",
+            "out": "Zoom out"
         },
         "cannot_zoom": "Cannot zoom out further in current mode.",
         "full_screen": "Toggle Full Screen",
@@ -3820,9 +3822,13 @@
                     "name": "Path",
                     "terms": "hike,hiking,trackway,trail,walk"
                 },
-                "highway/pedestrian": {
+                "highway/pedestrian_area": {
+                    "name": "Pedestrian Area",
+                    "terms": "center,centre,plaza,quad,square,walkway"
+                },
+                "highway/pedestrian_line": {
                     "name": "Pedestrian Street",
-                    "terms": ""
+                    "terms": "center,centre,plaza,quad,square,walkway"
                 },
                 "highway/primary_link": {
                     "name": "Primary Link",
@@ -4657,16 +4663,32 @@
                     "terms": ""
                 },
                 "office/accountant": {
-                    "name": "Accountant",
+                    "name": "Accountant Office",
                     "terms": ""
                 },
                 "office/administrative": {
                     "name": "Administrative Office",
                     "terms": ""
                 },
-                "office/architect": {
-                    "name": "Architect",
+                "office/adoption_agency": {
+                    "name": "Adoption Agency",
                     "terms": ""
+                },
+                "office/advertising_agency": {
+                    "name": "Advertising Agency",
+                    "terms": "ad,ad agency,advert agency,advertising,marketing"
+                },
+                "office/architect": {
+                    "name": "Architect Office",
+                    "terms": ""
+                },
+                "office/association": {
+                    "name": "Nonprofit Organization Office",
+                    "terms": "association,non-profit,nonprofit,organization,society"
+                },
+                "office/charity": {
+                    "name": "Charity Office",
+                    "terms": "charitable organization"
                 },
                 "office/company": {
                     "name": "Company Office",
@@ -4684,12 +4706,24 @@
                     "name": "Employment Agency",
                     "terms": "job"
                 },
+                "office/energy_supplier": {
+                    "name": "Energy Supplier Office",
+                    "terms": "electricity,energy company,energy utility,gas utility"
+                },
                 "office/estate_agent": {
                     "name": "Real Estate Office",
                     "terms": ""
                 },
                 "office/financial": {
                     "name": "Financial Office",
+                    "terms": ""
+                },
+                "office/forestry": {
+                    "name": "Forestry Office",
+                    "terms": "forest,ranger"
+                },
+                "office/foundation": {
+                    "name": "Foundation Office",
                     "terms": ""
                 },
                 "office/government": {
@@ -4700,13 +4734,21 @@
                     "name": "Register Office",
                     "terms": "clerk,marriage,death,birth,certificate"
                 },
+                "office/government/tax": {
+                    "name": "Tax and Revenue Office",
+                    "terms": "fiscal authorities,revenue office,tax office"
+                },
+                "office/guide": {
+                    "name": "Tour Guide Office",
+                    "terms": "dive guide,mountain guide,tour guide"
+                },
                 "office/insurance": {
                     "name": "Insurance Office",
                     "terms": ""
                 },
                 "office/it": {
-                    "name": "IT Office",
-                    "terms": ""
+                    "name": "Information Technology Office",
+                    "terms": "computer,information,software,technology"
                 },
                 "office/lawyer": {
                     "name": "Law Office",
@@ -4716,29 +4758,57 @@
                     "name": "Notary Office",
                     "terms": "clerk,signature,wills,deeds,estate"
                 },
+                "office/moving_company": {
+                    "name": "Moving Company Office",
+                    "terms": "relocation"
+                },
                 "office/newspaper": {
-                    "name": "Newspaper",
+                    "name": "Newspaper Office",
                     "terms": ""
                 },
                 "office/ngo": {
                     "name": "NGO Office",
+                    "terms": "ngo,non government,non-government,organization,organisation"
+                },
+                "office/notary": {
+                    "name": "Notary Office",
                     "terms": ""
                 },
                 "office/political_party": {
                     "name": "Political Party",
                     "terms": ""
                 },
+                "office/private_investigator": {
+                    "name": "Private Investigator Office",
+                    "terms": "PI,private eye,private detective"
+                },
+                "office/quango": {
+                    "name": "Quasi-NGO Office",
+                    "terms": "ngo,non government,non-government,organization,organisation,quasi autonomous,quasi-autonomous"
+                },
                 "office/research": {
                     "name": "Research Office",
                     "terms": ""
+                },
+                "office/surveyor": {
+                    "name": "Surveyor Office",
+                    "terms": ""
+                },
+                "office/tax_advisor": {
+                    "name": "Tax Advisor Office",
+                    "terms": "tax,tax consultant"
                 },
                 "office/telecommunication": {
                     "name": "Telecom Office",
                     "terms": ""
                 },
                 "office/therapist": {
-                    "name": "Therapist",
-                    "terms": ""
+                    "name": "Therapist Office",
+                    "terms": "therapy"
+                },
+                "office/water_utility": {
+                    "name": "Water Utility Office",
+                    "terms": "water board,utility"
                 },
                 "piste": {
                     "name": "Piste/Ski Trail",
@@ -5529,8 +5599,8 @@
                     "terms": "Motor Home,Camper"
                 },
                 "tourism/chalet": {
-                    "name": "Chalet",
-                    "terms": ""
+                    "name": "Holiday Cottage",
+                    "terms": "holiday,holiday cottage,holiday home,vacation,vacation home"
                 },
                 "tourism/gallery": {
                     "name": "Art Gallery",
@@ -5822,12 +5892,26 @@
                 "description": "Premium DigitalGlobe satellite imagery.",
                 "name": "DigitalGlobe Premium Imagery"
             },
+            "DigitalGlobe-Premium-vintage": {
+                "attribution": {
+                    "text": "Terms & Feedback"
+                },
+                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 14 and higher.",
+                "name": "DigitalGlobe Premium Imagery Vintage"
+            },
             "DigitalGlobe-Standard": {
                 "attribution": {
                     "text": "Terms & Feedback"
                 },
                 "description": "Standard DigitalGlobe satellite imagery.",
                 "name": "DigitalGlobe Standard Imagery"
+            },
+            "DigitalGlobe-Standard-vintage": {
+                "attribution": {
+                    "text": "Terms & Feedback"
+                },
+                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 14 and higher.",
+                "name": "DigitalGlobe Standard Imagery Vintage"
             },
             "EsriWorldImagery": {
                 "attribution": {

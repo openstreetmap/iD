@@ -6993,7 +6993,34 @@
             },
             "name": "Path"
         },
-        "highway/pedestrian": {
+        "highway/pedestrian_area": {
+            "icon": "poi-foot",
+            "fields": [
+                "name",
+                "surface",
+                "lit",
+                "width",
+                "structure",
+                "access"
+            ],
+            "geometry": [
+                "area"
+            ],
+            "tags": {
+                "highway": "pedestrian",
+                "area": "yes"
+            },
+            "terms": [
+                "center",
+                "centre",
+                "plaza",
+                "quad",
+                "square",
+                "walkway"
+            ],
+            "name": "Pedestrian Area"
+        },
+        "highway/pedestrian_line": {
             "icon": "highway-footway",
             "fields": [
                 "name",
@@ -7005,13 +7032,19 @@
                 "access"
             ],
             "geometry": [
-                "line",
-                "area"
+                "line"
             ],
             "tags": {
                 "highway": "pedestrian"
             },
-            "terms": [],
+            "terms": [
+                "center",
+                "centre",
+                "plaza",
+                "quad",
+                "square",
+                "walkway"
+            ],
             "name": "Pedestrian Street"
         },
         "highway/primary_link": {
@@ -11408,7 +11441,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -11427,7 +11459,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -11451,14 +11482,13 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
                 "office": "accountant"
             },
             "terms": [],
-            "name": "Accountant"
+            "name": "Accountant Office"
         },
         "office/administrative": {
             "icon": "commercial",
@@ -11470,7 +11500,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -11478,6 +11507,48 @@
             },
             "terms": [],
             "name": "Administrative Office"
+        },
+        "office/adoption_agency": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "adoption_agency"
+            },
+            "terms": [],
+            "name": "Adoption Agency"
+        },
+        "office/advertising_agency": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "advertising_agency"
+            },
+            "terms": [
+                "ad",
+                "ad agency",
+                "advert agency",
+                "advertising",
+                "marketing"
+            ],
+            "name": "Advertising Agency"
         },
         "office/architect": {
             "icon": "commercial",
@@ -11489,14 +11560,57 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
                 "office": "architect"
             },
             "terms": [],
-            "name": "Architect"
+            "name": "Architect Office"
+        },
+        "office/association": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "association"
+            },
+            "terms": [
+                "association",
+                "non-profit",
+                "nonprofit",
+                "organization",
+                "society"
+            ],
+            "name": "Nonprofit Organization Office"
+        },
+        "office/charity": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "charity"
+            },
+            "terms": [
+                "charitable organization"
+            ],
+            "name": "Charity Office"
         },
         "office/company": {
             "icon": "commercial",
@@ -11509,7 +11623,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -11556,7 +11669,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -11575,7 +11687,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -11585,6 +11696,29 @@
                 "job"
             ],
             "name": "Employment Agency"
+        },
+        "office/energy_supplier": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "energy_supplier"
+            },
+            "terms": [
+                "electricity",
+                "energy company",
+                "energy utility",
+                "gas utility"
+            ],
+            "name": "Energy Supplier Office"
         },
         "office/estate_agent": {
             "icon": "commercial",
@@ -11596,7 +11730,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -11615,7 +11748,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -11623,6 +11755,45 @@
             },
             "terms": [],
             "name": "Financial Office"
+        },
+        "office/forestry": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "forestry"
+            },
+            "terms": [
+                "forest",
+                "ranger"
+            ],
+            "name": "Forestry Office"
+        },
+        "office/foundation": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "foundation"
+            },
+            "terms": [],
+            "name": "Foundation Office"
         },
         "office/government": {
             "icon": "commercial",
@@ -11634,7 +11805,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -11673,6 +11843,56 @@
             },
             "name": "Register Office"
         },
+        "office/government/tax": {
+            "icon": "town-hall",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours",
+                "operator"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "fiscal authorities",
+                "revenue office",
+                "tax office"
+            ],
+            "tags": {
+                "office": "government",
+                "government": "tax"
+            },
+            "reference": {
+                "key": "government",
+                "value": "tax"
+            },
+            "name": "Tax and Revenue Office"
+        },
+        "office/guide": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "guide"
+            },
+            "terms": [
+                "dive guide",
+                "mountain guide",
+                "tour guide"
+            ],
+            "name": "Tour Guide Office"
+        },
         "office/insurance": {
             "icon": "commercial",
             "fields": [
@@ -11683,7 +11903,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -11702,14 +11921,18 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
                 "office": "it"
             },
-            "terms": [],
-            "name": "IT Office"
+            "terms": [
+                "computer",
+                "information",
+                "software",
+                "technology"
+            ],
+            "name": "Information Technology Office"
         },
         "office/lawyer": {
             "icon": "commercial",
@@ -11721,7 +11944,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -11740,7 +11962,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -11760,6 +11981,26 @@
             ],
             "name": "Notary Office"
         },
+        "office/moving_company": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "moving_company"
+            },
+            "terms": [
+                "relocation"
+            ],
+            "name": "Moving Company Office"
+        },
         "office/newspaper": {
             "icon": "commercial",
             "fields": [
@@ -11770,14 +12011,13 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
                 "office": "newspaper"
             },
             "terms": [],
-            "name": "Newspaper"
+            "name": "Newspaper Office"
         },
         "office/ngo": {
             "icon": "commercial",
@@ -11790,14 +12030,37 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
                 "office": "ngo"
             },
-            "terms": [],
+            "terms": [
+                "ngo",
+                "non government",
+                "non-government",
+                "organization",
+                "organisation"
+            ],
             "name": "NGO Office"
+        },
+        "office/notary": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "notary"
+            },
+            "terms": [],
+            "name": "Notary Office"
         },
         "office/political_party": {
             "icon": "commercial",
@@ -11809,7 +12072,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -11817,6 +12079,54 @@
             },
             "terms": [],
             "name": "Political Party"
+        },
+        "office/private_investigator": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "private_investigator"
+            },
+            "terms": [
+                "PI",
+                "private eye",
+                "private detective"
+            ],
+            "name": "Private Investigator Office"
+        },
+        "office/quango": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "quango"
+            },
+            "terms": [
+                "ngo",
+                "non government",
+                "non-government",
+                "organization",
+                "organisation",
+                "quasi autonomous",
+                "quasi-autonomous"
+            ],
+            "name": "Quasi-NGO Office"
         },
         "office/research": {
             "icon": "commercial",
@@ -11828,7 +12138,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -11836,6 +12145,45 @@
             },
             "terms": [],
             "name": "Research Office"
+        },
+        "office/surveyor": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "surveyor"
+            },
+            "terms": [],
+            "name": "Surveyor Office"
+        },
+        "office/tax_advisor": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "tax_advisor"
+            },
+            "terms": [
+                "tax",
+                "tax consultant"
+            ],
+            "name": "Tax Advisor Office"
         },
         "office/telecommunication": {
             "icon": "commercial",
@@ -11847,7 +12195,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -11866,14 +12213,37 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
                 "office": "therapist"
             },
-            "terms": [],
-            "name": "Therapist"
+            "terms": [
+                "therapy"
+            ],
+            "name": "Therapist Office"
+        },
+        "office/water_utility": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours",
+                "operator"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "water_utility"
+            },
+            "terms": [
+                "water board",
+                "utility"
+            ],
+            "name": "Water Utility Office"
         },
         "piste": {
             "icon": "skiing",
@@ -15710,10 +16080,17 @@
                 "point",
                 "area"
             ],
+            "terms": [
+                "holiday",
+                "holiday cottage",
+                "holiday home",
+                "vacation",
+                "vacation home"
+            ],
             "tags": {
                 "tourism": "chalet"
             },
-            "name": "Chalet"
+            "name": "Holiday Cottage"
         },
         "tourism/gallery": {
             "icon": "art-gallery",

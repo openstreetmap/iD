@@ -9,12 +9,17 @@
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {
         "office": "ngo"
     },
-    "terms": [],
+    "terms": [
+        "ngo",
+        "non government",
+        "non-government",
+        "organization",
+        "organisation"
+    ],
     "name": "NGO Office"
 }

@@ -35,7 +35,7 @@ export function rendererBackgroundSource(data) {
         best = !!source.best,
         template = source.template;
 
-    source.scaleExtent = data.scaleExtent || [0, 20];
+    source.scaleExtent = data.scaleExtent || [0, 22];
     source.overzoom = data.overzoom !== false;
 
 
@@ -130,6 +130,13 @@ export function rendererBackgroundSource(data) {
 
     source.isLocatorOverlay = function() {
         return source.id === 'mapbox_locator_overlay';
+    };
+
+
+    /* hides a source from the list, but leaves it available for use */
+    source.isHidden = function() {
+        return source.id === 'DigitalGlobe-Premium-vintage' ||
+            source.id === 'DigitalGlobe-Standard-vintage';
     };
 
 

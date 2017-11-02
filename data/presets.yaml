@@ -3055,9 +3055,15 @@ en:
         name: Path
         # 'terms: hike,hiking,trackway,trail,walk'
         terms: '<translate with synonyms or related terms for ''Path'', separated by commas>'
-      highway/pedestrian:
+      highway/pedestrian_area:
+        # 'highway=pedestrian, area=yes'
+        name: Pedestrian Area
+        # 'terms: center,centre,plaza,quad,square,walkway'
+        terms: '<translate with synonyms or related terms for ''Pedestrian Area'', separated by commas>'
+      highway/pedestrian_line:
         # highway=pedestrian
         name: Pedestrian Street
+        # 'terms: center,centre,plaza,quad,square,walkway'
         terms: '<translate with synonyms or related terms for ''Pedestrian Street'', separated by commas>'
       highway/primary:
         # highway=primary
@@ -4000,16 +4006,35 @@ en:
         terms: '<translate with synonyms or related terms for ''Office'', separated by commas>'
       office/accountant:
         # office=accountant
-        name: Accountant
-        terms: '<translate with synonyms or related terms for ''Accountant'', separated by commas>'
+        name: Accountant Office
+        terms: '<translate with synonyms or related terms for ''Accountant Office'', separated by commas>'
       office/administrative:
         # office=administrative
         name: Administrative Office
         terms: '<translate with synonyms or related terms for ''Administrative Office'', separated by commas>'
+      office/adoption_agency:
+        # office=adoption_agency
+        name: Adoption Agency
+        terms: '<translate with synonyms or related terms for ''Adoption Agency'', separated by commas>'
+      office/advertising_agency:
+        # office=advertising_agency
+        name: Advertising Agency
+        # 'terms: ad,ad agency,advert agency,advertising,marketing'
+        terms: '<translate with synonyms or related terms for ''Advertising Agency'', separated by commas>'
       office/architect:
         # office=architect
-        name: Architect
-        terms: '<translate with synonyms or related terms for ''Architect'', separated by commas>'
+        name: Architect Office
+        terms: '<translate with synonyms or related terms for ''Architect Office'', separated by commas>'
+      office/association:
+        # office=association
+        name: Nonprofit Organization Office
+        # 'terms: association,non-profit,nonprofit,organization,society'
+        terms: '<translate with synonyms or related terms for ''Nonprofit Organization Office'', separated by commas>'
+      office/charity:
+        # office=charity
+        name: Charity Office
+        # 'terms: charitable organization'
+        terms: '<translate with synonyms or related terms for ''Charity Office'', separated by commas>'
       office/company:
         # office=company
         name: Company Office
@@ -4028,6 +4053,11 @@ en:
         name: Employment Agency
         # 'terms: job'
         terms: '<translate with synonyms or related terms for ''Employment Agency'', separated by commas>'
+      office/energy_supplier:
+        # office=energy_supplier
+        name: Energy Supplier Office
+        # 'terms: electricity,energy company,energy utility,gas utility'
+        terms: '<translate with synonyms or related terms for ''Energy Supplier Office'', separated by commas>'
       office/estate_agent:
         # office=estate_agent
         name: Real Estate Office
@@ -4036,6 +4066,15 @@ en:
         # office=financial
         name: Financial Office
         terms: '<translate with synonyms or related terms for ''Financial Office'', separated by commas>'
+      office/forestry:
+        # office=forestry
+        name: Forestry Office
+        # 'terms: forest,ranger'
+        terms: '<translate with synonyms or related terms for ''Forestry Office'', separated by commas>'
+      office/foundation:
+        # office=foundation
+        name: Foundation Office
+        terms: '<translate with synonyms or related terms for ''Foundation Office'', separated by commas>'
       office/government:
         # office=government
         name: Government Office
@@ -4045,14 +4084,25 @@ en:
         name: Register Office
         # 'terms: clerk,marriage,death,birth,certificate'
         terms: '<translate with synonyms or related terms for ''Register Office'', separated by commas>'
+      office/government/tax:
+        # 'office=government, government=tax'
+        name: Tax and Revenue Office
+        # 'terms: fiscal authorities,revenue office,tax office'
+        terms: '<translate with synonyms or related terms for ''Tax and Revenue Office'', separated by commas>'
+      office/guide:
+        # office=guide
+        name: Tour Guide Office
+        # 'terms: dive guide,mountain guide,tour guide'
+        terms: '<translate with synonyms or related terms for ''Tour Guide Office'', separated by commas>'
       office/insurance:
         # office=insurance
         name: Insurance Office
         terms: '<translate with synonyms or related terms for ''Insurance Office'', separated by commas>'
       office/it:
         # office=it
-        name: IT Office
-        terms: '<translate with synonyms or related terms for ''IT Office'', separated by commas>'
+        name: Information Technology Office
+        # 'terms: computer,information,software,technology'
+        terms: '<translate with synonyms or related terms for ''Information Technology Office'', separated by commas>'
       office/lawyer:
         # office=lawyer
         name: Law Office
@@ -4062,14 +4112,24 @@ en:
         name: Notary Office
         # 'terms: clerk,signature,wills,deeds,estate'
         terms: '<translate with synonyms or related terms for ''Notary Office'', separated by commas>'
+      office/moving_company:
+        # office=moving_company
+        name: Moving Company Office
+        # 'terms: relocation'
+        terms: '<translate with synonyms or related terms for ''Moving Company Office'', separated by commas>'
       office/newspaper:
         # office=newspaper
-        name: Newspaper
-        terms: '<translate with synonyms or related terms for ''Newspaper'', separated by commas>'
+        name: Newspaper Office
+        terms: '<translate with synonyms or related terms for ''Newspaper Office'', separated by commas>'
       office/ngo:
         # office=ngo
         name: NGO Office
+        # 'terms: ngo,non government,non-government,organization,organisation'
         terms: '<translate with synonyms or related terms for ''NGO Office'', separated by commas>'
+      office/notary:
+        # office=notary
+        name: Notary Office
+        terms: '<translate with synonyms or related terms for ''Notary Office'', separated by commas>'
       office/physician:
         # office=physician
         name: Physician
@@ -4077,21 +4137,46 @@ en:
         # office=political_party
         name: Political Party
         terms: '<translate with synonyms or related terms for ''Political Party'', separated by commas>'
+      office/private_investigator:
+        # office=private_investigator
+        name: Private Investigator Office
+        # 'terms: PI,private eye,private detective'
+        terms: '<translate with synonyms or related terms for ''Private Investigator Office'', separated by commas>'
+      office/quango:
+        # office=quango
+        name: Quasi-NGO Office
+        # 'terms: ngo,non government,non-government,organization,organisation,quasi autonomous,quasi-autonomous'
+        terms: '<translate with synonyms or related terms for ''Quasi-NGO Office'', separated by commas>'
       office/research:
         # office=research
         name: Research Office
         terms: '<translate with synonyms or related terms for ''Research Office'', separated by commas>'
+      office/surveyor:
+        # office=surveyor
+        name: Surveyor Office
+        terms: '<translate with synonyms or related terms for ''Surveyor Office'', separated by commas>'
+      office/tax_advisor:
+        # office=tax_advisor
+        name: Tax Advisor Office
+        # 'terms: tax,tax consultant'
+        terms: '<translate with synonyms or related terms for ''Tax Advisor Office'', separated by commas>'
       office/telecommunication:
         # office=telecommunication
         name: Telecom Office
         terms: '<translate with synonyms or related terms for ''Telecom Office'', separated by commas>'
       office/therapist:
         # office=therapist
-        name: Therapist
-        terms: '<translate with synonyms or related terms for ''Therapist'', separated by commas>'
+        name: Therapist Office
+        # 'terms: therapy'
+        terms: '<translate with synonyms or related terms for ''Therapist Office'', separated by commas>'
       office/travel_agent:
         # office=travel_agent
         name: Travel Agency
+      office/water_utility:
+        # office=water_utility
+        name: Water Utility Office
+        # 'terms: water board,utility'
+        terms: '<translate with synonyms or related terms for ''Water Utility Office'', separated by commas>'
       piste:
         # 'piste:type=*'
         name: Piste/Ski Trail
@@ -4978,8 +5063,9 @@ en:
         terms: '<translate with synonyms or related terms for ''RV Park'', separated by commas>'
       tourism/chalet:
         # tourism=chalet
-        name: Chalet
-        terms: '<translate with synonyms or related terms for ''Chalet'', separated by commas>'
+        name: Holiday Cottage
+        # 'terms: holiday,holiday cottage,holiday home,vacation,vacation home'
+        terms: '<translate with synonyms or related terms for ''Holiday Cottage'', separated by commas>'
       tourism/gallery:
         # tourism=gallery
         name: Art Gallery

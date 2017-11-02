@@ -8,12 +8,13 @@
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {
         "office": "therapist"
     },
-    "terms": [],
-    "name": "Therapist"
+    "terms": [
+        "therapy"
+    ],
+    "name": "Therapist Office"
 }
