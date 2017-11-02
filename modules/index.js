@@ -45,4 +45,5 @@ export var debug = false;
 
 import * as lib from './lib/index';
 
-export { lib, d3 };
+export { lib};
+//export { d3 };
