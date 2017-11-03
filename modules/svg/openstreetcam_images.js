@@ -81,8 +81,8 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
         context.map().centerEase(d.loc);
 
         openstreetcam
-            .selectedImage(d.key, true)
-            .updateViewer(d.key, context)
+            .selectedImage(d.key)
+            .updateViewer(d.imagePath)
             .showViewer();
     }
 

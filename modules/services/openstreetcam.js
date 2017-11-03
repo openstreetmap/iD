@@ -3,7 +3,6 @@ import _find from 'lodash-es/find';
 import _flatten from 'lodash-es/flatten';
 import _forEach from 'lodash-es/forEach';
 import _map from 'lodash-es/map';
-import _some from 'lodash-es/some';
 
 import { range as d3_range } from 'd3-array';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -125,6 +124,8 @@ function loadNextTilePage(which, currZoom, url, tile) {
 
     cache.inflight[id] = d3_request(url)
         .mimeType('application/json')
+        .header('Content-type', 'application/x-www-form-urlencoded')
+        .response(function(xhr) { return JSON.parse(xhr.responseText); })
         .post(params, function(err, data) {
             cache.loaded[id] = true;
             delete cache.inflight[id];
@@ -140,6 +141,7 @@ function loadNextTilePage(which, currZoom, url, tile) {
                         key: item.id,
                         ca: +item.heading,
                         captured_at: item.date_added,
+                        imagePath: item.name
                     };
                 }
                 return {
@@ -239,67 +241,57 @@ export default {
     },
 
 
-    loadViewer: function(context) {
-        // var that = this;
-        // var wrap = d3_select('#content').selectAll('.openstreetcam-wrap')
-        //     .data([0]);
-
-        // var enter = wrap.enter()
-        //     .append('div')
-        //     .attr('class', 'openstreetcam-wrap')
-        //     .classed('al', true)       // 'al'=left,  'ar'=right
-        //     .classed('hidden', true);
-
-        // enter
-        //     .append('button')
-        //     .attr('class', 'thumb-hide')
-        //     .on('click', function () { that.hideViewer(); })
-        //     .append('div')
-        //     .call(svgIcon('#icon-close'));
-
-        // enter
-        //     .append('div')
-        //     .attr('id', 'mly')
-        //     .attr('class', 'mly-wrapper')
-        //     .classed('active', false);
+    loadViewer: function() {
+        // add osc-wrapper
+        d3_select('#photoviewer').selectAll('.osc-wrapper')
+            .data([0])
+            .enter()
+            .append('div')
+            .attr('class', 'photo-wrapper osc-wrapper')
+            .classed('hide', true)
+            .append('img');
     },
 
 
     showViewer: function() {
-        // d3_select('#content')
-        //     .selectAll('.openstreetcam-wrap')
-        //     .classed('hidden', false)
-        //     .selectAll('.mly-wrapper')
-        //     .classed('active', true);
+        var wrap = d3_select('#photoviewer')
+            .classed('hide', false);
+
+        var isHidden = wrap.selectAll('.photo-wrapper.osc-wrapper.hide').size();
+
+        if (isHidden) {
+            wrap
+                .selectAll('.photo-wrapper:not(.osc-wrapper)')
+                .classed('hide', true);
+
+            wrap
+                .selectAll('.photo-wrapper.osc-wrapper')
+                .classed('hide', false);
+        }
 
         return this;
     },
 
 
     hideViewer: function() {
-        // d3_select('#content')
-        //     .selectAll('.openstreetcam-wrap')
-        //     .classed('hidden', true)
-        //     .selectAll('.mly-wrapper')
-        //     .classed('active', false);
+        d3_select('#photoviewer')
+            .classed('hide', true)
+            .selectAll('.photo-wrapper')
+            .classed('hide', true);
 
-        // d3_selectAll('.layer-openstreetcam-images .viewfield-group')
-        //     .classed('selected', false);
+        d3_selectAll('.layer-openstreetcam-images .viewfield-group')
+            .classed('selected', false);
 
         openstreetcamImage = null;
         return this;
     },
 
 
-    updateViewer: function(imageKey, context) {
-        if (!imageKey) return;
-
-        // if (!openstreetcamViewer) {
-        //     this.initViewer(imageKey, context);
-        // } else {
-        //     openstreetcamViewer.moveToKey(imageKey);
-        // }
-
+    updateViewer: function(imagePath) {
+        if (imagePath) {
+            d3_select('#photoviewer .osc-wrapper img')
+                .attr('src', apibase + '/' + imagePath);
+        }
         return this;
     },
 
@@ -308,40 +300,10 @@ export default {
         if (!arguments.length) return openstreetcamImage;
         openstreetcamImage = imageKey;
 
-        // d3_selectAll('.layer-openstreetcam-images .viewfield-group')
-        //     .classed('selected', function(d) {
-        //         return d.key === imageKey;
-        //     });
-
-        // if (!imageKey)  return this;
-
-
-        // function localeTimestamp(s) {
-        //     if (!s) return null;
-        //     var d = new Date(s);
-        //     if (isNaN(d.getTime())) return null;
-        //     return d.toLocaleString(undefined, { timeZone: 'UTC' });
-        // }
-
-        // var selected = d3_selectAll('.layer-openstreetcam-images .viewfield-group.selected');
-        // if (selected.empty()) return this;
-
-        // var datum = selected.datum();
-        // var timestamp = localeTimestamp(datum.captured_at);
-        // var attribution = d3_select('.openstreetcam-js-dom .Attribution');
-        // var capturedAt = attribution.selectAll('.captured-at');
-        // if (capturedAt.empty()) {
-        //     attribution
-        //         .append('span')
-        //         .text('|');
-        //     capturedAt = attribution
-        //         .append('span')
-        //         .attr('class', 'captured-at');
-        // }
-        // capturedAt
-        //     .text(timestamp);
-
-        // this.updateDetections();
+        d3_selectAll('.viewfield-group')
+            .classed('selected', function(d) {
+                return d.key === imageKey;
+            });
 
         return this;
     },

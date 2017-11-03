@@ -24,7 +24,6 @@ import rbush from 'rbush';
 
 import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 import { geoExtent } from '../geo';
-import { svgIcon } from '../svg';
 import { utilDetect } from '../util/detect';
 import { utilQsString, utilRebind } from '../util';
 
@@ -377,28 +376,14 @@ export default {
 
 
     loadViewer: function(context) {
-        var that = this;
-        var wrap = d3_select('#content').selectAll('.mapillary-wrap')
-            .data([0]);
-
-        var enter = wrap.enter()
-            .append('div')
-            .attr('class', 'mapillary-wrap')
-            .classed('al', true)       // 'al'=left,  'ar'=right
-            .classed('hidden', true);
-
-        enter
-            .append('button')
-            .attr('class', 'thumb-hide')
-            .on('click', function () { that.hideViewer(); })
-            .append('div')
-            .call(svgIcon('#icon-close'));
-
-        enter
+        // add mly-wrapper for viewer-js
+        d3_select('#photoviewer').selectAll('.mly-wrapper')
+            .data([0])
+            .enter()
             .append('div')
             .attr('id', 'mly')
-            .attr('class', 'mly-wrapper')
-            .classed('active', false);
+            .attr('class', 'photo-wrapper mly-wrapper')
+            .classed('hide', true);
 
         // load mapillary-viewercss
         d3_select('head').selectAll('#mapillary-viewercss')
@@ -420,22 +405,32 @@ export default {
 
 
     showViewer: function() {
-        d3_select('#content')
-            .selectAll('.mapillary-wrap')
-            .classed('hidden', false)
-            .selectAll('.mly-wrapper')
-            .classed('active', true);
+        var wrap = d3_select('#photoviewer')
+            .classed('hide', false);
+
+        var isHidden = wrap.selectAll('.photo-wrapper.mly-wrapper.hide').size();
+
+        if (isHidden) {
+            wrap
+                .selectAll('.photo-wrapper:not(.mly-wrapper)')
+                .classed('hide', true);
+
+            wrap
+                .selectAll('.photo-wrapper.mly-wrapper')
+                .classed('hide', false);
+
+            mapillaryViewer.resize();
+        }
 
         return this;
     },
 
 
     hideViewer: function() {
-        d3_select('#content')
-            .selectAll('.mapillary-wrap')
-            .classed('hidden', true)
-            .selectAll('.mly-wrapper')
-            .classed('active', false);
+        d3_select('#photoviewer')
+            .classed('hide', true)
+            .selectAll('.photo-wrapper')
+            .classed('hide', true);
 
         d3_selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
             .classed('selected', false);
@@ -514,7 +509,7 @@ export default {
             mapillaryClicks.push(imageKey);
         }
 
-        d3_selectAll('.layer-mapillary-images .viewfield-group')
+        d3_selectAll('.viewfield-group')
             .classed('selected', function(d) {
                 return d.key === imageKey;
             });
