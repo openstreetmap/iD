@@ -1,13 +1,15 @@
 import serviceMapillary from './mapillary';
 import serviceNominatim from './nominatim';
+import serviceOpenstreetcam from './openstreetcam';
 import serviceOsm from './osm';
 import serviceTaginfo from './taginfo';
 import serviceWikidata from './wikidata';
 import serviceWikipedia from './wikipedia';
 
 export var services = {
-    mapillary: serviceMapillary,
     geocoder: serviceNominatim,
+    mapillary: serviceMapillary,
+    openstreetcam: serviceOpenstreetcam,
     osm: serviceOsm,
     taginfo: serviceTaginfo,
     wikidata: serviceWikidata,

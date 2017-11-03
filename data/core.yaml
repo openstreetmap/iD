@@ -546,6 +546,11 @@ en:
     title: "Traffic Sign Overlay (Mapillary)"
   mapillary:
     view_on_mapillary: "View this image on Mapillary"
+  openstreetcam_images:
+    tooltip: "Street-level photos from OpenStreetCam"
+    title: "Photo Overlay (OpenStreetCam)"
+  openstreetcam:
+    view_on_openstreetcam: "View this image on OpenStreetCam"
   help:
     title: "Help"
     key: H
