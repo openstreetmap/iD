@@ -2757,10 +2757,10 @@ en:
         # craft=scaffolder
         name: Scaffolder
         terms: '<translate with synonyms or related terms for ''Scaffolder'', separated by commas>'
-      craft/sculpter:
-        # craft=sculpter
-        name: Sculpter
-        terms: '<translate with synonyms or related terms for ''Sculpter'', separated by commas>'
+      craft/sculptor:
+        # craft=sculptor
+        name: Sculptor
+        terms: '<translate with synonyms or related terms for ''Sculptor'', separated by commas>'
       craft/shoemaker:
         # craft=shoemaker
         name: Shoemaker

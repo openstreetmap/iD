@@ -5520,7 +5520,7 @@
             },
             "name": "Scaffolder"
         },
-        "craft/sculpter": {
+        "craft/sculptor": {
             "icon": "art-gallery",
             "fields": [
                 "name",
@@ -5534,9 +5534,9 @@
                 "area"
             ],
             "tags": {
-                "craft": "sculpter"
+                "craft": "sculptor"
             },
-            "name": "Sculpter"
+            "name": "Sculptor"
         },
         "craft/shoemaker": {
             "icon": "poi-tool",
