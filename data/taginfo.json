@@ -369,6 +369,10 @@
         },
         {
             "key": "amenity",
+            "value": "music_school"
+        },
+        {
+            "key": "amenity",
             "value": "nightclub"
         },
         {

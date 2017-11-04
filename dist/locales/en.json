@@ -2800,6 +2800,10 @@
                     "name": "Motorcycle Parking",
                     "terms": ""
                 },
+                "amenity/music_school": {
+                    "name": "Music School",
+                    "terms": "school of music"
+                },
                 "amenity/nightclub": {
                     "name": "Nightclub",
                     "terms": "disco*,night club,dancing,dance club"

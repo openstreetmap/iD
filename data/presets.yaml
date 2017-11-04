@@ -1971,6 +1971,11 @@ en:
         # amenity=motorcycle_parking
         name: Motorcycle Parking
         terms: '<translate with synonyms or related terms for ''Motorcycle Parking'', separated by commas>'
+      amenity/music_school:
+        # amenity=music_school
+        name: Music School
+        # 'terms: school of music'
+        terms: '<translate with synonyms or related terms for ''Music School'', separated by commas>'
       amenity/nightclub:
         # amenity=nightclub
         name: Nightclub

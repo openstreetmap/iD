@@ -1885,6 +1885,25 @@
             },
             "name": "Motorcycle Parking"
         },
+        "amenity/music_school": {
+            "icon": "school",
+            "fields": [
+                "name",
+                "operator",
+                "address"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "school of music"
+            ],
+            "tags": {
+                "amenity": "music_school"
+            },
+            "name": "Music School"
+        },
         "amenity/nightclub": {
             "icon": "bar",
             "fields": [
