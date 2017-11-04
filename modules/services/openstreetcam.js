@@ -131,6 +131,13 @@ function loadNextTilePage(which, currZoom, url, tile) {
             delete cache.inflight[id];
             if (err || !data.currentPageItems || !data.currentPageItems.length) return;
 
+            function localeDateString(s) {
+                if (!s) return null;
+                var d = new Date(s);
+                if (isNaN(d.getTime())) return null;
+                return d.toLocaleDateString();
+            }
+
             var features = data.currentPageItems.map(function(item) {
                 var loc = [+item.lng, +item.lat],
                     d;
@@ -140,8 +147,9 @@ function loadNextTilePage(which, currZoom, url, tile) {
                         loc: loc,
                         key: item.id,
                         ca: +item.heading,
-                        captured_at: item.date_added,
-                        imagePath: item.name
+                        captured_at: localeDateString(item.shot_date || item.date_added),
+                        captured_by: item.username,
+                        imagePath: item.lth_name
                     };
                 }
                 return {
@@ -288,8 +296,13 @@ export default {
 
 
     updateViewer: function(imagePath) {
+        var wrap = d3_select('#photoviewer .osc-wrapper');
+
+        wrap.selectAll('img')
+            .remove();
+
         if (imagePath) {
-            d3_select('#photoviewer .osc-wrapper img')
+            wrap.append('img')
                 .attr('src', apibase + '/' + imagePath);
         }
         return this;

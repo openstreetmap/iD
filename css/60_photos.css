@@ -23,12 +23,6 @@
     height: 100%;
 }
 
-/*#photoviewer.hide,
-.photo-wrapper.hide {
-    visibility: hidden;
-    display: block;
-}
-*/
 
 /* Mapillary Image Layer */
 .layer-mapillary-images {
@@ -151,3 +145,11 @@
     text-align: right;
 }
 
+
+/* OpenStreetCam viewer */
+.osc-wrapper {
+    background-color: #000;
+    background-image: url(img/loader-black.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+}
