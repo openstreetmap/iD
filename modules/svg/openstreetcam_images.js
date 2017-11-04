@@ -82,7 +82,7 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
 
         openstreetcam
             .selectedImage(d.key)
-            .updateViewer(d.imagePath)
+            .updateViewer(d)
             .showViewer();
     }
 

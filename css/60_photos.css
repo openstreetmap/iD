@@ -148,8 +148,25 @@
 
 /* OpenStreetCam viewer */
 .osc-wrapper {
+    position: relative;
     background-color: #000;
     background-image: url(img/loader-black.gif);
     background-position: center;
     background-repeat: no-repeat;
+}
+
+.osc-wrapper .osc-attribution {
+    width: 100%;
+    font-size: 10px;
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 4px 2px;
+    z-index: 10;
+}
+
+.osc-attribution a,
+.osc-attribution span {
+    padding: 4px 2px;
 }

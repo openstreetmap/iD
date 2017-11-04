@@ -149,7 +149,9 @@ function loadNextTilePage(which, currZoom, url, tile) {
                         ca: +item.heading,
                         captured_at: localeDateString(item.shot_date || item.date_added),
                         captured_by: item.username,
-                        imagePath: item.lth_name
+                        imagePath: item.lth_name,
+                        sequence_id: item.sequence_id,
+                        sequence_index: item.sequence_index
                     };
                 }
                 return {
@@ -257,22 +259,23 @@ export default {
             .append('div')
             .attr('class', 'photo-wrapper osc-wrapper')
             .classed('hide', true)
-            .append('img');
+            .append('div')
+            .attr('class', 'osc-attribution fillD');
     },
 
 
     showViewer: function() {
-        var wrap = d3_select('#photoviewer')
+        var viewer = d3_select('#photoviewer')
             .classed('hide', false);
 
-        var isHidden = wrap.selectAll('.photo-wrapper.osc-wrapper.hide').size();
+        var isHidden = viewer.selectAll('.photo-wrapper.osc-wrapper.hide').size();
 
         if (isHidden) {
-            wrap
+            viewer
                 .selectAll('.photo-wrapper:not(.osc-wrapper)')
                 .classed('hide', true);
 
-            wrap
+            viewer
                 .selectAll('.photo-wrapper.osc-wrapper')
                 .classed('hide', false);
         }
@@ -295,15 +298,46 @@ export default {
     },
 
 
-    updateViewer: function(imagePath) {
+    updateViewer: function(d) {
         var wrap = d3_select('#photoviewer .osc-wrapper');
 
         wrap.selectAll('img')
             .remove();
 
-        if (imagePath) {
+        if (d) {
             wrap.append('img')
-                .attr('src', apibase + '/' + imagePath);
+                .attr('src', apibase + '/' + d.imagePath);
+
+            var attribution = wrap.selectAll('.osc-attribution').html('');
+
+            if (d.captured_by) {
+                attribution
+                    .append('a')
+                    .attr('class', 'captured_by')
+                    .attr('href', apibase + '/user/' + d.captured_by)
+                    .text('@' + d.captured_by);
+
+                attribution
+                    .append('span')
+                    .text('|');
+            }
+
+            if (d.captured_at) {
+                attribution
+                    .append('span')
+                    .attr('class', 'captured_at')
+                    .text(d.captured_at);
+
+                attribution
+                    .append('span')
+                    .text('|');
+            }
+
+            attribution
+                .append('a')
+                .attr('class', 'image_link')
+                .attr('href', apibase + '/details/' + d.sequence_id + '/' + d.sequence_index)
+                .text('openstreetcam.org');
         }
         return this;
     },
