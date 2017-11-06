@@ -35,7 +35,7 @@ var apibase = 'https://a.mapillary.com/v3/',
     clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
     maxResults = 1000,
     tileZoom = 14,
-    dispatch = d3_dispatch('loadedImages', 'loadedSigns'),
+    dispatch = d3_dispatch('loadedImages', 'loadedSigns', 'loadedSequences'),
     mapillaryCache,
     mapillaryClicks,
     mapillaryImage,
@@ -43,6 +43,7 @@ var apibase = 'https://a.mapillary.com/v3/',
     mapillarySignSprite,
     mapillaryViewer;
 
+export var sequenceCache = new Map();
 
 function abortRequest(i) {
     i.abort();
@@ -186,6 +187,10 @@ function loadNextTilePage(which, currZoom, url, tile) {
                             mapillaryCache.detections[ik][dk] = {};
                         }
                     });
+                } else if (which === 'sequences') {
+                    feature.properties.coordinateProperties.image_keys.forEach(function(key) {
+                        sequenceCache.set(key, feature);
+                    });
                 }
 
                 return {
@@ -199,6 +204,8 @@ function loadNextTilePage(which, currZoom, url, tile) {
                 dispatch.call('loadedImages');
             } else if (which === 'objects') {
                 dispatch.call('loadedSigns');
+            }  else if (which === 'sequences') {
+                // dispatch.call('loadedSequences');
             }
 
             if (data.features.length === maxResults) {  // more pages to load
@@ -309,6 +316,8 @@ export default {
         mapillaryCache = {
             images: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() },
             objects:  { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() },
+            sequences:  { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() },
+            
             detections: {}
         };
 
@@ -375,6 +384,10 @@ export default {
         }
     },
 
+    loadSequences: function(projection) {
+        var url = apibase + 'sequences?';
+        loadTiles('sequences', url, projection);
+    },
 
     loadViewer: function(context) {
         var that = this;
