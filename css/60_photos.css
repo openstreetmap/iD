@@ -24,44 +24,48 @@
 }
 
 
+.viewfield-group {
+    pointer-events: visible;
+    cursor: pointer;
+}
+
+.viewfield-group * {
+    stroke-width: 1;
+    stroke: #444;
+    z-index: 50;
+}
+
+.viewfield-group.selected * {
+    stroke-width: 2;
+    stroke: #222;
+    fill: #ff5800 !important;
+    z-index: 60;
+}
+
+.viewfield-group:hover * {
+    stroke-width: 1;
+    stroke: #333;
+    fill: #ff9900 !important;
+    z-index: 70;
+}
+
+.viewfield-group:hover path.viewfield,
+.viewfield-group.selected path.viewfield,
+.viewfield-group path.viewfield {
+    stroke-width: 0;
+    fill-opacity: 0.6;
+}
+
+
 /* Mapillary Image Layer */
 .layer-mapillary-images {
     pointer-events: none;
 }
 
-.layer-mapillary-images .viewfield-group {
-    pointer-events: visible;
-    cursor: pointer; /* Opera */
-    cursor: url(img/cursor-select-mapillary.png) 6 1, pointer; /* FF */
-}
-
 .layer-mapillary-images .viewfield-group * {
-    stroke-width: 1;
-    stroke: #444;
-    fill: #ffc600;
-    z-index: 50;
+    fill: #55ff22;
 }
 
-.layer-mapillary-images .viewfield-group:hover * {
-    stroke-width: 1;
-    stroke: #333;
-    fill: #ff9900;
-    z-index: 60;
-}
-
-.layer-mapillary-images .viewfield-group.selected  * {
-    stroke-width: 2;
-    stroke: #222;
-    fill: #ff5800;
-    z-index: 60;
-}
-
-.layer-mapillary-images .viewfield-group:hover path.viewfield,
-.layer-mapillary-images .viewfield-group.selected path.viewfield,
-.layer-mapillary-images .viewfield-group path.viewfield {
-    stroke-width: 0;
-    fill-opacity: 0.6;
-}
 
 /* Mapillary Sign Layer */
 .layer-mapillary-signs {
@@ -96,37 +100,8 @@
     pointer-events: none;
 }
 
-.layer-openstreetcam-images .viewfield-group {
-    pointer-events: visible;
-    cursor: pointer;
-}
-
 .layer-openstreetcam-images .viewfield-group * {
-    stroke-width: 1;
-    stroke: #444;
-    fill: #ffc600;
-    z-index: 50;
-}
-
-.layer-openstreetcam-images .viewfield-group:hover * {
-    stroke-width: 1;
-    stroke: #333;
-    fill: #ff9900;
-    z-index: 60;
-}
-
-.layer-openstreetcam-images .viewfield-group.selected  * {
-    stroke-width: 2;
-    stroke: #222;
-    fill: #ff5800;
-    z-index: 60;
-}
-
-.layer-openstreetcam-images .viewfield-group:hover path.viewfield,
-.layer-openstreetcam-images .viewfield-group.selected path.viewfield,
-.layer-openstreetcam-images .viewfield-group path.viewfield {
-    stroke-width: 0;
-    fill-opacity: 0.6;
+    fill: #77ddff;
 }
 
 
