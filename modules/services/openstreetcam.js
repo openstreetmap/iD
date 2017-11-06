@@ -314,6 +314,7 @@ export default {
                 attribution
                     .append('a')
                     .attr('class', 'captured_by')
+                    .attr('target', '_blank')
                     .attr('href', apibase + '/user/' + d.captured_by)
                     .text('@' + d.captured_by);
 
@@ -336,6 +337,7 @@ export default {
             attribution
                 .append('a')
                 .attr('class', 'image_link')
+                .attr('target', '_blank')
                 .attr('href', apibase + '/details/' + d.sequence_id + '/' + d.sequence_index)
                 .text('openstreetcam.org');
         }

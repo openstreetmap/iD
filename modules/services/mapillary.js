@@ -539,12 +539,12 @@ export default {
         var attribution = d3_select('.mapillary-js-dom .Attribution');
         var capturedAt = attribution.selectAll('.captured-at');
         if (capturedAt.empty()) {
-            attribution
-                .append('span')
-                .text('|');
             capturedAt = attribution
-                .append('span')
+                .insert('span', ':last-child')
                 .attr('class', 'captured-at');
+            attribution
+                .insert('span', ':last-child')
+                .text('|');
         }
         capturedAt
             .text(timestamp);
