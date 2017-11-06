@@ -165,6 +165,9 @@ en:
       aeroway:
         # aeroway=*
         label: Type
+      agrarian:
+        # agrarian=*
+        label: Products
       amenity:
         # amenity=*
         label: Type
@@ -4513,6 +4516,11 @@ en:
         # shop=*
         name: Shop
         terms: '<translate with synonyms or related terms for ''Shop'', separated by commas>'
+      shop/agrarian:
+        # shop=agrarian
+        name: Agriculture Shop
+        # 'terms: agricultural inputs,agricultural machines,seeds,pesticides,fertilizer,agricultural tools'
+        terms: '<translate with synonyms or related terms for ''Agriculture Shop'', separated by commas>'
       shop/alcohol:
         # shop=alcohol
         name: Liquor Store

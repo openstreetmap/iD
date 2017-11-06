@@ -13519,6 +13519,33 @@
             "name": "Vacant Shop",
             "searchable": false
         },
+        "shop/agrarian": {
+            "icon": "shop",
+            "fields": [
+                "name",
+                "brand",
+                "agrarian",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "agricultural inputs",
+                "agricultural machines",
+                "seeds",
+                "pesticides",
+                "fertilizer",
+                "agricultural tools"
+            ],
+            "tags": {
+                "shop": "agrarian"
+            },
+            "name": "Agriculture Shop"
+        },
         "shop/alcohol": {
             "icon": "alcohol-shop",
             "fields": [
