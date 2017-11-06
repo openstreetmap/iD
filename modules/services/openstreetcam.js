@@ -150,10 +150,19 @@ function loadNextTilePage(which, currZoom, url, tile) {
                         captured_at: localeDateString(item.shot_date || item.date_added),
                         captured_by: item.username,
                         imagePath: item.lth_name,
-                        sequence_id: item.sequence_id,
-                        sequence_index: item.sequence_index
+                        sequence_id: +item.sequence_id,
+                        sequence_index: +item.sequence_index
                     };
+
+                    // cache sequence info
+                    var seq = openstreetcamCache.sequences[d.sequence_id];
+                    if (!seq) {
+                        seq = { rotation: 0, images: [] };
+                        openstreetcamCache.sequences[d.sequence_id] = seq;
+                    }
+                    seq.images[d.sequence_index] = d;
                 }
+
                 return {
                     minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
                 };
@@ -234,7 +243,7 @@ export default {
 
         openstreetcamCache = {
             images: { inflight: {}, loaded: {}, nextPage: {}, rtree: rbush() },
-            sequences: { rotation: {} }
+            sequences: {}
         };
 
         openstreetcamImage = null;
@@ -244,6 +253,33 @@ export default {
     images: function(projection) {
         var psize = 16, limit = 3;
         return searchLimited(psize, limit, projection, openstreetcamCache.images.rtree);
+    },
+
+
+    sequences: function(projection) {
+        var viewport = projection.clipExtent();
+        var min = [viewport[0][0], viewport[1][1]];
+        var max = [viewport[1][0], viewport[0][1]];
+        var bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
+        var seq_ids = {};
+
+        // all sequences for images in viewport
+        openstreetcamCache.images.rtree.search(bbox)
+            .forEach(function(d) { seq_ids[d.data.sequence_id] = true; });
+
+        // make linestrings from those sequences
+        var lineStrings = [];
+        Object.keys(seq_ids).forEach(function(seq_id) {
+            var seq = openstreetcamCache.sequences[seq_id];
+            var images = seq && seq.images;
+            if (images) {
+                lineStrings.push({
+                    type: 'LineString',
+                    coordinates: images.map(function (d) { return d.loc; }).filter(Boolean)
+                });
+            }
+        });
+        return lineStrings;
     },
 
 
@@ -275,7 +311,7 @@ export default {
 
         controlsEnter
             .append('button')
-            .text('◅');
+            .text('◄');
 
         controlsEnter
             .append('button')
@@ -289,17 +325,23 @@ export default {
 
         controlsEnter
             .append('button')
-            .text('▻');
+            .text('►');
 
 
         function rotate(deg) {
             return function() {
                 if (!openstreetcamImage) return;
-                var seq = openstreetcamImage.sequence_id;
-                var r = openstreetcamCache.sequences.rotation[seq] || 0;
+                var seq_id = openstreetcamImage.sequence_id;
+                var seq = openstreetcamCache.sequences[seq_id];
 
+                if (!seq) {
+                    seq = { rotation: 0, coords: [] };
+                    openstreetcamCache.sequences[seq_id] = seq;
+                }
+
+                var r = seq.rotation || 0;
                 r += deg;
-                openstreetcamCache.sequences.rotation[seq] = r;
+                seq.rotation = r;
 
                 d3_select('#photoviewer .osc-wrapper .osc-image')
                     .transition()
@@ -351,7 +393,8 @@ export default {
             .remove();
 
         if (d) {
-            var r = openstreetcamCache.sequences.rotation[d.sequence_id] || 0;
+            var seq = openstreetcamCache.sequences[d.sequence_id];
+            var r = (seq && seq.rotation) || 0;
 
             wrap.append('img')
                 .attr('class', 'osc-image')

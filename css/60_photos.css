@@ -24,7 +24,6 @@
     overflow: hidden;
 }
 
-
 .viewfield-group {
     pointer-events: visible;
     cursor: pointer;
@@ -57,6 +56,11 @@
     fill-opacity: 0.6;
 }
 
+.sequence {
+    stroke-width: 2;
+    fill: none;
+}
+
 
 /* Mapillary Image Layer */
 .layer-mapillary-images {
@@ -65,6 +69,10 @@
 
 .layer-mapillary-images .viewfield-group * {
     fill: #55ff22;
+}
+
+.layer-mapillary-images .sequence {
+    stroke: #55ff22;
 }
 
 
@@ -103,6 +111,10 @@
 
 .layer-openstreetcam-images .viewfield-group * {
     fill: #77ddff;
+}
+
+.layer-openstreetcam-images .sequence {
+    stroke: #77ddff;
 }
 
 

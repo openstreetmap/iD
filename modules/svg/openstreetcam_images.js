@@ -1,5 +1,11 @@
 import _throttle from 'lodash-es/throttle';
+
 import { select as d3_select } from 'd3-selection';
+import {
+    geoIdentity as d3_geoIdentity,
+    geoPath as d3_geoPath
+} from 'd3-geo';
+
 import { svgPointTransform } from './point_transform';
 import { services } from '../services';
 
@@ -95,13 +101,36 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
 
 
     function update() {
-        var openstreetcam = getOpenstreetcam(),
-            data = (openstreetcam ? openstreetcam.images(projection) : []),
-            image = openstreetcam && openstreetcam.selectedImage(),
-            imageKey = image && image.key;
+        var highZoom = ~~context.map().zoom() >= minViewfieldZoom;
+        var openstreetcam = getOpenstreetcam();
+        var sequences = (openstreetcam && highZoom ? openstreetcam.sequences(projection) : []);
+        var images = (openstreetcam ? openstreetcam.images(projection) : []);
+        var selectedImage = openstreetcam && openstreetcam.selectedImage();
+        var imageKey = selectedImage && selectedImage.key;
 
-        var markers = layer.selectAll('.viewfield-group')
-            .data(data, function(d) { return d.key; });
+        var clip = d3_geoIdentity().clipExtent(projection.clipExtent()).stream;
+        var project = projection.stream;
+        var makePath = d3_geoPath().projection({ stream: function(output) {
+            return project(clip(output));
+        }});
+
+        var lineStrings = layer.selectAll('.sequences').selectAll('.sequence')
+            .data(sequences);
+
+        lineStrings.exit()
+            .remove();
+
+        lineStrings = lineStrings.enter()
+            .append('path')
+            .attr('class', 'sequence')
+            .merge(lineStrings);
+
+        lineStrings
+            .attr('d', makePath);
+
+
+        var markers = layer.selectAll('.markers').selectAll('.viewfield-group')
+            .data(images, function(d) { return d.key; });
 
         markers.exit()
             .remove();
@@ -118,7 +147,7 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
 
 
        var viewfields = markers.selectAll('.viewfield')
-            .data(~~context.map().zoom() >= minViewfieldZoom ? [0] : []);
+            .data(highZoom ? [0] : []);
 
         viewfields.exit()
             .remove();
@@ -149,10 +178,20 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
         layer.exit()
             .remove();
 
-        layer = layer.enter()
+        var layerEnter = layer.enter()
             .append('g')
             .attr('class', 'layer-openstreetcam-images')
-            .style('display', enabled ? 'block' : 'none')
+            .style('display', enabled ? 'block' : 'none');
+
+        layerEnter
+            .append('g')
+            .attr('class', 'sequences');
+
+        layerEnter
+            .append('g')
+            .attr('class', 'markers');
+
+        layer = layerEnter
             .merge(layer);
 
         if (enabled) {
