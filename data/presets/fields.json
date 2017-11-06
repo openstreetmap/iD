@@ -1429,7 +1429,7 @@
             "label": "Maximum Age"
         },
         "playground/min_age": {
-            "key": "max_age",
+            "key": "min_age",
             "type": "number",
             "label": "Minimum Age"
         },
