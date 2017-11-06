@@ -2,7 +2,7 @@
     "icon": "shop",
     "fields": [
         "name",
-        "brand",
+        "operator",
         "agrarian",
         "address",
         "building_area",
