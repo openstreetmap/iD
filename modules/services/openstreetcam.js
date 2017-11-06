@@ -315,13 +315,13 @@ export default {
 
         controlsEnter
             .append('button')
-            .on('click.rotate-cw', rotate(90))
-            .text('↻');
+            .on('click.rotate-ccw', rotate(-90))
+            .text('⤿');
 
         controlsEnter
             .append('button')
-            .on('click.rotate-ccw', rotate(-90))
-            .text('↺');
+            .on('click.rotate-cw', rotate(90))
+            .text('⤾');
 
         controlsEnter
             .append('button')
