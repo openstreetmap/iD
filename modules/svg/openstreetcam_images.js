@@ -81,7 +81,7 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
         context.map().centerEase(d.loc);
 
         openstreetcam
-            .selectedImage(d.key)
+            .selectedImage(d)
             .updateViewer(d)
             .showViewer();
     }
@@ -97,7 +97,8 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
     function update() {
         var openstreetcam = getOpenstreetcam(),
             data = (openstreetcam ? openstreetcam.images(projection) : []),
-            imageKey = openstreetcam ? openstreetcam.selectedImage() : null;
+            image = openstreetcam && openstreetcam.selectedImage(),
+            imageKey = image && image.key;
 
         var markers = layer.selectAll('.viewfield-group')
             .data(data, function(d) { return d.key; });

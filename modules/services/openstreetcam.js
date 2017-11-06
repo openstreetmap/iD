@@ -233,7 +233,8 @@ export default {
         }
 
         openstreetcamCache = {
-            images: { inflight: {}, loaded: {}, nextPage: {}, rtree: rbush() }
+            images: { inflight: {}, loaded: {}, nextPage: {}, rtree: rbush() },
+            sequences: { rotation: {} }
         };
 
         openstreetcamImage = null;
@@ -245,6 +246,7 @@ export default {
         return searchLimited(psize, limit, projection, openstreetcamCache.images.rtree);
     },
 
+
     loadImages: function(projection) {
         var url = apibase + '/1.0/list/nearby-photos/';
         loadTiles('images', url, projection);
@@ -253,14 +255,58 @@ export default {
 
     loadViewer: function() {
         // add osc-wrapper
-        d3_select('#photoviewer').selectAll('.osc-wrapper')
-            .data([0])
-            .enter()
+        var wrap = d3_select('#photoviewer').selectAll('.osc-wrapper')
+            .data([0]);
+
+        var wrapEnter = wrap.enter()
             .append('div')
             .attr('class', 'photo-wrapper osc-wrapper')
-            .classed('hide', true)
+            .classed('hide', true);
+
+        wrapEnter
             .append('div')
             .attr('class', 'osc-attribution fillD');
+
+        var controlsEnter = wrapEnter
+            .append('div')
+            .attr('class', 'osc-controls-wrap')
+            .append('div')
+            .attr('class', 'osc-controls');
+
+        controlsEnter
+            .append('button')
+            .text('◅');
+
+        controlsEnter
+            .append('button')
+            .on('click.rotate-cw', rotate(90))
+            .text('↻');
+
+        controlsEnter
+            .append('button')
+            .on('click.rotate-ccw', rotate(-90))
+            .text('↺');
+
+        controlsEnter
+            .append('button')
+            .text('▻');
+
+
+        function rotate(deg) {
+            return function() {
+                if (!openstreetcamImage) return;
+                var seq = openstreetcamImage.sequence_id;
+                var r = openstreetcamCache.sequences.rotation[seq] || 0;
+
+                r += deg;
+                openstreetcamCache.sequences.rotation[seq] = r;
+
+                d3_select('#photoviewer .osc-wrapper .osc-image')
+                    .transition()
+                    .duration(100)
+                    .style('transform', 'rotate(' + r + 'deg)');
+            };
+        }
     },
 
 
@@ -301,11 +347,15 @@ export default {
     updateViewer: function(d) {
         var wrap = d3_select('#photoviewer .osc-wrapper');
 
-        wrap.selectAll('img')
+        wrap.selectAll('.osc-image')
             .remove();
 
         if (d) {
+            var r = openstreetcamCache.sequences.rotation[d.sequence_id] || 0;
+
             wrap.append('img')
+                .attr('class', 'osc-image')
+                .style('transform', 'rotate(' + r + 'deg)')
                 .attr('src', apibase + '/' + d.imagePath);
 
             var attribution = wrap.selectAll('.osc-attribution').html('');
@@ -345,13 +395,13 @@ export default {
     },
 
 
-    selectedImage: function(imageKey) {
+    selectedImage: function(d) {
         if (!arguments.length) return openstreetcamImage;
-        openstreetcamImage = imageKey;
+        openstreetcamImage = d;
 
         d3_selectAll('.viewfield-group')
             .classed('selected', function(d) {
-                return d.key === imageKey;
+                return d.key === openstreetcamImage.key;
             });
 
         return this;
