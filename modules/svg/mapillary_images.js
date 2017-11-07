@@ -156,7 +156,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
             .append('path')
             .attr('class', 'viewfield')
             .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
-            .attr('d', 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z');
+            .attr('d', viewfieldPath);
 
         markers.selectAll('circle')
             .data([0])
@@ -165,6 +165,15 @@ export function svgMapillaryImages(projection, context, dispatch) {
             .attr('dx', '0')
             .attr('dy', '0')
             .attr('r', '6');
+
+        function viewfieldPath() {
+            var d = this.parentNode.__data__;
+            if (d.pano) {
+                return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
+            } else {
+                return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
+            }
+        }
     }
 
 
