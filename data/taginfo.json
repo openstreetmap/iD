@@ -2593,6 +2593,10 @@
         },
         {
             "key": "shop",
+            "value": "agrarian"
+        },
+        {
+            "key": "shop",
             "value": "alcohol"
         },
         {

@@ -1226,6 +1226,9 @@
                 "aeroway": {
                     "label": "Type"
                 },
+                "agrarian": {
+                    "label": "Products"
+                },
                 "amenity": {
                     "label": "Type"
                 },
@@ -5058,6 +5061,10 @@
                 "shop/vacant": {
                     "name": "Vacant Shop",
                     "terms": ""
+                },
+                "shop/agrarian": {
+                    "name": "Agriculture Shop",
+                    "terms": "agricultural inputs,agricultural machines,seeds,pesticides,fertilizer,agricultural tools"
                 },
                 "shop/alcohol": {
                     "name": "Liquor Store",

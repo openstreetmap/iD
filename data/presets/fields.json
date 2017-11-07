@@ -201,6 +201,11 @@
             "type": "typeCombo",
             "label": "Type"
         },
+        "agrarian": {
+            "key": "agrarian",
+            "type": "semiCombo",
+            "label": "Products"
+        },
         "amenity": {
             "key": "amenity",
             "type": "typeCombo",

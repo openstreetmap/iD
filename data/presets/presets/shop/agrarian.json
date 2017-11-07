@@ -1,0 +1,27 @@
+{
+    "icon": "shop",
+    "fields": [
+        "name",
+        "operator",
+        "agrarian",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "agricultural inputs",
+        "agricultural machines",
+        "seeds",
+        "pesticides",
+        "fertilizer",
+        "agricultural tools"
+    ],
+    "tags": {
+        "shop": "agrarian"
+    },
+    "name": "Agriculture Shop"
+}
