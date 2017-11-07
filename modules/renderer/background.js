@@ -104,6 +104,11 @@ export function rendererBackground(context) {
             imageryUsed.push('Mapillary Signs');
         }
 
+        var openstreetcam_images = context.layers().layer('openstreetcam-images');
+        if (openstreetcam_images && openstreetcam_images.enabled()) {
+            imageryUsed.push('OpenStreetCam Images');
+        }
+
         context.history().imageryUsed(imageryUsed);
     };
 

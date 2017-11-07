@@ -24,7 +24,6 @@ import rbush from 'rbush';
 
 import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 import { geoExtent } from '../geo';
-import { svgIcon } from '../svg';
 import { utilDetect } from '../util/detect';
 import { utilQsString, utilRebind } from '../util';
 
@@ -166,6 +165,15 @@ function loadNextTilePage(which, currZoom, url, tile) {
                         captured_at: feature.properties.captured_at,
                         pano: feature.properties.pano
                     };
+
+                } else if (which === 'sequences') {
+                    var sk = feature.properties.key;
+                    cache.lineString[sk] = feature;  // cache sequence_key -> linestring
+                    feature.properties.coordinateProperties.image_keys.forEach(function(ik) {
+                        cache.forImage[ik] = sk;     // cache image_key -> sequence_key
+                    });
+                    return false;  // nothing to actually insert
+
                 } else if (which === 'objects') {
                     d = {
                         loc: loc,
@@ -191,11 +199,11 @@ function loadNextTilePage(which, currZoom, url, tile) {
                 return {
                     minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
                 };
-            });
+            }).filter(Boolean);
 
             cache.rtree.load(features);
 
-            if (which === 'images') {
+            if (which === 'images' || which === 'sequences') {
                 dispatch.call('loadedImages');
             } else if (which === 'objects') {
                 dispatch.call('loadedSigns');
@@ -304,11 +312,15 @@ export default {
             if (cache.objects && cache.objects.inflight) {
                 _forEach(cache.objects.inflight, abortRequest);
             }
+            if (cache.sequences && cache.sequences.inflight) {
+                _forEach(cache.sequences.inflight, abortRequest);
+            }
         }
 
         mapillaryCache = {
             images: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() },
-            objects:  { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() },
+            objects: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() },
+            sequences: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush(), forImage: {}, lineString: {} },
             detections: {}
         };
 
@@ -326,6 +338,29 @@ export default {
     signs: function(projection) {
         var psize = 32, limit = 3;
         return searchLimited(psize, limit, projection, mapillaryCache.objects.rtree);
+    },
+
+
+    sequences: function(projection) {
+        var viewport = projection.clipExtent();
+        var min = [viewport[0][0], viewport[1][1]];
+        var max = [viewport[1][0], viewport[0][1]];
+        var bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
+        var sequenceKeys = {};
+
+        // all sequences for images in viewport
+        mapillaryCache.images.rtree.search(bbox)
+            .forEach(function(d) {
+                var sk = mapillaryCache.sequences.forImage[d.data.key];
+                if (sk) {
+                    sequenceKeys[sk] = true;
+                }
+            });
+
+        // Return linestrings for the sequences
+        return Object.keys(sequenceKeys).map(function(sk) {
+            return mapillaryCache.sequences.lineString[sk];
+        });
     },
 
 
@@ -355,8 +390,8 @@ export default {
 
 
     loadImages: function(projection) {
-        var url = apibase + 'images?';
-        loadTiles('images', url, projection);
+        loadTiles('images', apibase + 'images?', projection);
+        loadTiles('sequences', apibase + 'sequences?', projection);
     },
 
 
@@ -377,28 +412,14 @@ export default {
 
 
     loadViewer: function(context) {
-        var that = this;
-        var wrap = d3_select('#content').selectAll('.mapillary-wrap')
-            .data([0]);
-
-        var enter = wrap.enter()
-            .append('div')
-            .attr('class', 'mapillary-wrap')
-            .classed('al', true)       // 'al'=left,  'ar'=right
-            .classed('hidden', true);
-
-        enter
-            .append('button')
-            .attr('class', 'thumb-hide')
-            .on('click', function () { that.hideViewer(); })
-            .append('div')
-            .call(svgIcon('#icon-close'));
-
-        enter
+        // add mly-wrapper for viewer-js
+        d3_select('#photoviewer').selectAll('.mly-wrapper')
+            .data([0])
+            .enter()
             .append('div')
             .attr('id', 'mly')
-            .attr('class', 'mly-wrapper')
-            .classed('active', false);
+            .attr('class', 'photo-wrapper mly-wrapper')
+            .classed('hide', true);
 
         // load mapillary-viewercss
         d3_select('head').selectAll('#mapillary-viewercss')
@@ -420,22 +441,32 @@ export default {
 
 
     showViewer: function() {
-        d3_select('#content')
-            .selectAll('.mapillary-wrap')
-            .classed('hidden', false)
-            .selectAll('.mly-wrapper')
-            .classed('active', true);
+        var wrap = d3_select('#photoviewer')
+            .classed('hide', false);
+
+        var isHidden = wrap.selectAll('.photo-wrapper.mly-wrapper.hide').size();
+
+        if (isHidden) {
+            wrap
+                .selectAll('.photo-wrapper:not(.mly-wrapper)')
+                .classed('hide', true);
+
+            wrap
+                .selectAll('.photo-wrapper.mly-wrapper')
+                .classed('hide', false);
+
+            mapillaryViewer.resize();
+        }
 
         return this;
     },
 
 
     hideViewer: function() {
-        d3_select('#content')
-            .selectAll('.mapillary-wrap')
-            .classed('hidden', true)
-            .selectAll('.mly-wrapper')
-            .classed('active', false);
+        d3_select('#photoviewer')
+            .classed('hide', true)
+            .selectAll('.photo-wrapper')
+            .classed('hide', true);
 
         d3_selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
             .classed('selected', false);
@@ -514,7 +545,7 @@ export default {
             mapillaryClicks.push(imageKey);
         }
 
-        d3_selectAll('.layer-mapillary-images .viewfield-group')
+        d3_selectAll('.viewfield-group')
             .classed('selected', function(d) {
                 return d.key === imageKey;
             });
@@ -544,12 +575,12 @@ export default {
         var attribution = d3_select('.mapillary-js-dom .Attribution');
         var capturedAt = attribution.selectAll('.captured-at');
         if (capturedAt.empty()) {
-            attribution
-                .append('span')
-                .text('|');
             capturedAt = attribution
-                .append('span')
+                .insert('span', ':last-child')
                 .attr('class', 'captured-at');
+            attribution
+                .insert('span', ':last-child')
+                .text('|');
         }
         capturedAt
             .text(timestamp);

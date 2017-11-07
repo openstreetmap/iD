@@ -1,48 +1,47 @@
 import _throttle from 'lodash-es/throttle';
 
+import { select as d3_select } from 'd3-selection';
 import {
     geoIdentity as d3_geoIdentity,
     geoPath as d3_geoPath
 } from 'd3-geo';
 
-import { select as d3_select } from 'd3-selection';
-
 import { svgPointTransform } from './point_transform';
 import { services } from '../services';
 
 
-export function svgMapillaryImages(projection, context, dispatch) {
+export function svgOpenstreetcamImages(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000),
         minZoom = 12,
         minViewfieldZoom = 17,
         layer = d3_select(null),
-        _mapillary;
+        _openstreetcam;
 
 
     function init() {
-        if (svgMapillaryImages.initialized) return;  // run once
-        svgMapillaryImages.enabled = false;
-        svgMapillaryImages.initialized = true;
+        if (svgOpenstreetcamImages.initialized) return;  // run once
+        svgOpenstreetcamImages.enabled = false;
+        svgOpenstreetcamImages.initialized = true;
     }
 
 
-    function getMapillary() {
-        if (services.mapillary && !_mapillary) {
-            _mapillary = services.mapillary;
-            _mapillary.event.on('loadedImages', throttledRedraw);
-        } else if (!services.mapillary && _mapillary) {
-            _mapillary = null;
+    function getOpenstreetcam() {
+        if (services.openstreetcam && !_openstreetcam) {
+            _openstreetcam = services.openstreetcam;
+            _openstreetcam.event.on('loadedImages', throttledRedraw);
+        } else if (!services.openstreetcam && _openstreetcam) {
+            _openstreetcam = null;
         }
 
-        return _mapillary;
+        return _openstreetcam;
     }
 
 
     function showLayer() {
-        var mapillary = getMapillary();
-        if (!mapillary) return;
+        var openstreetcam = getOpenstreetcam();
+        if (!openstreetcam) return;
 
-        mapillary.loadViewer(context);
+        openstreetcam.loadViewer(context);
         editOn();
 
         layer
@@ -55,9 +54,9 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     function hideLayer() {
-        var mapillary = getMapillary();
-        if (mapillary) {
-            mapillary.hideViewer();
+        var openstreetcam = getOpenstreetcam();
+        if (openstreetcam) {
+            openstreetcam.hideViewer();
         }
 
         throttledRedraw.cancel();
@@ -82,14 +81,14 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     function click(d) {
-        var mapillary = getMapillary();
-        if (!mapillary) return;
+        var openstreetcam = getOpenstreetcam();
+        if (!openstreetcam) return;
 
         context.map().centerEase(d.loc);
 
-        mapillary
-            .selectedImage(d.key, true)
-            .updateViewer(d.key, context)
+        openstreetcam
+            .selectedImage(d)
+            .updateViewer(d)
             .showViewer();
     }
 
@@ -103,10 +102,11 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
     function update() {
         var highZoom = ~~context.map().zoom() >= minViewfieldZoom;
-        var mapillary = getMapillary();
-        var images = (mapillary ? mapillary.images(projection) : []);
-        var sequences = (mapillary && highZoom ? mapillary.sequences(projection) : []);
-        var imageKey = mapillary ? mapillary.selectedImage() : null;
+        var openstreetcam = getOpenstreetcam();
+        var sequences = (openstreetcam && highZoom ? openstreetcam.sequences(projection) : []);
+        var images = (openstreetcam ? openstreetcam.images(projection) : []);
+        var selectedImage = openstreetcam && openstreetcam.selectedImage();
+        var imageKey = selectedImage && selectedImage.key;
 
         var clip = d3_geoIdentity().clipExtent(projection.clipExtent()).stream;
         var project = projection.stream;
@@ -169,18 +169,18 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     function drawImages(selection) {
-        var enabled = svgMapillaryImages.enabled,
-            mapillary = getMapillary();
+        var enabled = svgOpenstreetcamImages.enabled,
+            openstreetcam = getOpenstreetcam();
 
-        layer = selection.selectAll('.layer-mapillary-images')
-            .data(mapillary ? [0] : []);
+        layer = selection.selectAll('.layer-openstreetcam-images')
+            .data(openstreetcam ? [0] : []);
 
         layer.exit()
             .remove();
 
         var layerEnter = layer.enter()
             .append('g')
-            .attr('class', 'layer-mapillary-images')
+            .attr('class', 'layer-openstreetcam-images')
             .style('display', enabled ? 'block' : 'none');
 
         layerEnter
@@ -195,10 +195,10 @@ export function svgMapillaryImages(projection, context, dispatch) {
             .merge(layer);
 
         if (enabled) {
-            if (mapillary && ~~context.map().zoom() >= minZoom) {
+            if (openstreetcam && ~~context.map().zoom() >= minZoom) {
                 editOn();
                 update();
-                mapillary.loadImages(projection);
+                openstreetcam.loadImages(projection);
             } else {
                 editOff();
             }
@@ -207,9 +207,9 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     drawImages.enabled = function(_) {
-        if (!arguments.length) return svgMapillaryImages.enabled;
-        svgMapillaryImages.enabled = _;
-        if (svgMapillaryImages.enabled) {
+        if (!arguments.length) return svgOpenstreetcamImages.enabled;
+        svgOpenstreetcamImages.enabled = _;
+        if (svgOpenstreetcamImages.enabled) {
             showLayer();
         } else {
             hideLayer();
@@ -220,7 +220,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     drawImages.supported = function() {
-        return !!getMapillary();
+        return !!getOpenstreetcam();
     };
 
 
