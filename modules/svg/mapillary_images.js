@@ -1,5 +1,12 @@
 import _throttle from 'lodash-es/throttle';
+
+import {
+    geoIdentity as d3_geoIdentity,
+    geoPath as d3_geoPath
+} from 'd3-geo';
+
 import { select as d3_select } from 'd3-selection';
+
 import { svgPointTransform } from './point_transform';
 import { services } from '../services';
 
@@ -95,12 +102,35 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     function update() {
-        var mapillary = getMapillary(),
-            data = (mapillary ? mapillary.images(projection) : []),
-            imageKey = mapillary ? mapillary.selectedImage() : null;
+        var highZoom = ~~context.map().zoom() >= minViewfieldZoom;
+        var mapillary = getMapillary();
+        var images = (mapillary ? mapillary.images(projection) : []);
+        var sequences = (mapillary && highZoom ? mapillary.sequences(projection) : []);
+        var imageKey = mapillary ? mapillary.selectedImage() : null;
 
-        var markers = layer.selectAll('.viewfield-group')
-            .data(data, function(d) { return d.key; });
+        var clip = d3_geoIdentity().clipExtent(projection.clipExtent()).stream;
+        var project = projection.stream;
+        var makePath = d3_geoPath().projection({ stream: function(output) {
+            return project(clip(output));
+        }});
+
+        var lineStrings = layer.selectAll('.sequences').selectAll('.sequence')
+            .data(sequences);
+
+        lineStrings.exit()
+            .remove();
+
+        lineStrings = lineStrings.enter()
+            .append('path')
+            .attr('class', 'sequence')
+            .merge(lineStrings);
+
+        lineStrings
+            .attr('d', makePath);
+
+
+        var markers = layer.selectAll('.markers').selectAll('.viewfield-group')
+            .data(images, function(d) { return d.key; });
 
         markers.exit()
             .remove();
@@ -117,7 +147,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
        var viewfields = markers.selectAll('.viewfield')
-            .data(~~context.map().zoom() >= minViewfieldZoom ? [0] : []);
+            .data(highZoom ? [0] : []);
 
         viewfields.exit()
             .remove();
@@ -148,10 +178,20 @@ export function svgMapillaryImages(projection, context, dispatch) {
         layer.exit()
             .remove();
 
-        layer = layer.enter()
+        var layerEnter = layer.enter()
             .append('g')
             .attr('class', 'layer-mapillary-images')
-            .style('display', enabled ? 'block' : 'none')
+            .style('display', enabled ? 'block' : 'none');
+
+        layerEnter
+            .append('g')
+            .attr('class', 'sequences');
+
+        layerEnter
+            .append('g')
+            .attr('class', 'markers');
+
+        layer = layerEnter
             .merge(layer);
 
         if (enabled) {

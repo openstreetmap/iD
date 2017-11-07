@@ -165,6 +165,15 @@ function loadNextTilePage(which, currZoom, url, tile) {
                         captured_at: feature.properties.captured_at,
                         pano: feature.properties.pano
                     };
+
+                } else if (which === 'sequences') {
+                    var sk = feature.properties.key;
+                    cache.lineString[sk] = feature;  // cache sequence_key -> linestring
+                    feature.properties.coordinateProperties.image_keys.forEach(function(ik) {
+                        cache.forImage[ik] = sk;     // cache image_key -> sequence_key
+                    });
+                    return false;  // nothing to actually insert
+
                 } else if (which === 'objects') {
                     d = {
                         loc: loc,
@@ -190,11 +199,11 @@ function loadNextTilePage(which, currZoom, url, tile) {
                 return {
                     minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
                 };
-            });
+            }).filter(Boolean);
 
             cache.rtree.load(features);
 
-            if (which === 'images') {
+            if (which === 'images' || which === 'sequences') {
                 dispatch.call('loadedImages');
             } else if (which === 'objects') {
                 dispatch.call('loadedSigns');
@@ -303,11 +312,15 @@ export default {
             if (cache.objects && cache.objects.inflight) {
                 _forEach(cache.objects.inflight, abortRequest);
             }
+            if (cache.sequences && cache.sequences.inflight) {
+                _forEach(cache.sequences.inflight, abortRequest);
+            }
         }
 
         mapillaryCache = {
             images: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() },
-            objects:  { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() },
+            objects: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() },
+            sequences: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush(), forImage: {}, lineString: {} },
             detections: {}
         };
 
@@ -325,6 +338,29 @@ export default {
     signs: function(projection) {
         var psize = 32, limit = 3;
         return searchLimited(psize, limit, projection, mapillaryCache.objects.rtree);
+    },
+
+
+    sequences: function(projection) {
+        var viewport = projection.clipExtent();
+        var min = [viewport[0][0], viewport[1][1]];
+        var max = [viewport[1][0], viewport[0][1]];
+        var bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
+        var sequenceKeys = {};
+
+        // all sequences for images in viewport
+        mapillaryCache.images.rtree.search(bbox)
+            .forEach(function(d) {
+                var sk = mapillaryCache.sequences.forImage[d.data.key];
+                if (sk) {
+                    sequenceKeys[sk] = true;
+                }
+            });
+
+        // Return linestrings for the sequences
+        return Object.keys(sequenceKeys).map(function(sk) {
+            return mapillaryCache.sequences.lineString[sk];
+        });
     },
 
 
@@ -354,8 +390,8 @@ export default {
 
 
     loadImages: function(projection) {
-        var url = apibase + 'images?';
-        loadTiles('images', url, projection);
+        loadTiles('images', apibase + 'images?', projection);
+        loadTiles('sequences', apibase + 'sequences?', projection);
     },
 
 
