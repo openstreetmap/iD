@@ -46,21 +46,24 @@
 }
 
 .viewfield-group circle {
-    stroke: #333;
+    stroke: #555;
     stroke-width: 1;
     stroke-opacity: 0.4;
     fill-opacity: 0.4;
 }
 .viewfield-group.highlighted circle {
+    stroke: #222;
     stroke-opacity: 0.9;
     fill-opacity: 0.9;
 }
 .viewfield-group.highlighted.hovered circle {
+    stroke: #222;
     stroke-width: 2;
     stroke-opacity: 0.9;
     fill-opacity: 0.9;
 }
 .viewfield-group.highlighted.selected circle {
+    stroke: #222;
     stroke-width: 2;
     stroke-opacity: 1;
     fill-opacity: 1;
@@ -68,15 +71,19 @@
 
 .viewfield-group .viewfield {
     stroke-width: 0;
+    stroke: #222;
     fill-opacity: 0.4;
 }
 .viewfield-group.highlighted .viewfield {
+    stroke-width: 1;
     fill-opacity: 0.8;
 }
 .viewfield-group.highlighted.hovered .viewfield {
+    stroke-width: 1;
     fill-opacity: 0.8;
 }
 .viewfield-group.highlighted.selected .viewfield {
+    stroke-width: 1;
     fill-opacity: 0.9;
 }
 
@@ -108,7 +115,6 @@
 .layer-mapillary-signs {
     pointer-events: none;
 }
-
 .layer-mapillary-signs .icon-sign .icon-sign-body {
     min-width: 20px;
     height: 24px;
@@ -116,19 +122,18 @@
     outline: 2px solid transparent;
     pointer-events: visible;
     cursor: pointer;
-    z-index: 70;
+    z-index: 30;
     overflow: visible;
-}
-
-.layer-mapillary-signs .icon-sign.selected .icon-sign-body {
-    outline: 5px solid #ffee00;
-    background-color: #ffee00;
-    z-index: 80;
 }
 .layer-mapillary-signs .icon-sign:hover .icon-sign-body {
     outline: 5px solid #eebb00;
     background-color: #eebb00;
-    z-index: 80;
+    z-index: 70;
+}
+.layer-mapillary-signs .icon-sign.selected .icon-sign-body {
+    outline: 5px solid #ffee00;
+    background-color: #ffee00;
+    z-index: 40;
 }
 
 
