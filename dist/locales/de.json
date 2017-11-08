@@ -151,7 +151,7 @@
                 "annotation": "Linien/Flächen getrennt.",
                 "not_connected": "Es gibt hier nicht genug Linien/Flächen, um diese zu trennen.",
                 "connected_to_hidden": "Dieses Objekt kann nicht getrennt werden, da es mit einem versteckten Objekt verbunden ist.",
-                "relation": "Dies kann nicht getrennt werde, da es Mitglieder einer Relation verbindet."
+                "relation": "Dies kann nicht getrennt werden, da es Mitglieder einer Relation verbindet."
             },
             "merge": {
                 "title": "Vereinigen",
