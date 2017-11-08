@@ -14,7 +14,7 @@ import { services } from '../services';
 export function svgMapillaryImages(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000),
         minZoom = 12,
-        minViewfieldZoom = 17,
+        minViewfieldZoom = 18,
         layer = d3_select(null),
         _mapillary;
 
@@ -26,7 +26,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
     }
 
 
-    function getMapillary() {
+    function getService() {
         if (services.mapillary && !_mapillary) {
             _mapillary = services.mapillary;
             _mapillary.event.on('loadedImages', throttledRedraw);
@@ -39,10 +39,10 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     function showLayer() {
-        var mapillary = getMapillary();
-        if (!mapillary) return;
+        var service = getService();
+        if (!service) return;
 
-        mapillary.loadViewer(context);
+        service.loadViewer(context);
         editOn();
 
         layer
@@ -55,9 +55,9 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     function hideLayer() {
-        var mapillary = getMapillary();
-        if (mapillary) {
-            mapillary.hideViewer();
+        var service = getService();
+        if (service) {
+            service.hideViewer();
         }
 
         throttledRedraw.cancel();
@@ -82,15 +82,31 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     function click(d) {
-        var mapillary = getMapillary();
-        if (!mapillary) return;
+        var service = getService();
+        if (!service) return;
 
         context.map().centerEase(d.loc);
 
-        mapillary
-            .selectedImage(d.key, true)
-            .updateViewer(d.key, context)
+        service
+            .selectImage(d)
+            .updateViewer(d, context)
             .showViewer();
+    }
+
+
+    function mouseover(d) {
+        var service = getService();
+        var selected = d3_select('.viewfield-group.selected');
+        var datum = selected.size() && selected.datum();
+        if (service) service.setStyles(d, datum);
+    }
+
+
+    function mouseout() {
+        var service = getService();
+        var selected = d3_select('.viewfield-group.selected');
+        var datum = selected.size() && selected.datum();
+        if (service) service.setStyles(null, datum);
     }
 
 
@@ -103,10 +119,9 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
     function update() {
         var highZoom = ~~context.map().zoom() >= minViewfieldZoom;
-        var mapillary = getMapillary();
-        var images = (mapillary ? mapillary.images(projection) : []);
-        var sequences = (mapillary && highZoom ? mapillary.sequences(projection) : []);
-        var imageKey = mapillary ? mapillary.selectedImage() : null;
+        var service = getService();
+        var images = (service ? service.images(projection) : []);
+        var sequences = (service && highZoom ? service.sequences(projection) : []);
 
         var clip = d3_geoIdentity().clipExtent(projection.clipExtent()).stream;
         var project = projection.stream;
@@ -115,7 +130,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
         }});
 
         var lineStrings = layer.selectAll('.sequences').selectAll('.sequence')
-            .data(sequences);
+            .data(sequences, function(d) { return d.properties.key; });
 
         lineStrings.exit()
             .remove();
@@ -138,7 +153,8 @@ export function svgMapillaryImages(projection, context, dispatch) {
         var enter = markers.enter()
             .append('g')
             .attr('class', 'viewfield-group')
-            .classed('selected', function(d) { return d.key === imageKey; })
+            .on('mouseover', mouseover)
+            .on('mouseout', mouseout)
             .on('click', click);
 
         markers = markers
@@ -166,6 +182,12 @@ export function svgMapillaryImages(projection, context, dispatch) {
             .attr('dy', '0')
             .attr('r', '6');
 
+
+        var selected = d3_select('.viewfield-group.selected');
+        var datum = selected.size() && selected.datum();
+        if (service) service.setStyles(null, datum);
+
+
         function viewfieldPath() {
             var d = this.parentNode.__data__;
             if (d.pano) {
@@ -179,7 +201,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
     function drawImages(selection) {
         var enabled = svgMapillaryImages.enabled,
-            mapillary = getMapillary();
+            mapillary = getService();
 
         layer = selection.selectAll('.layer-mapillary-images')
             .data(mapillary ? [0] : []);
@@ -229,7 +251,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     drawImages.supported = function() {
-        return !!getMapillary();
+        return !!getService();
     };
 
 

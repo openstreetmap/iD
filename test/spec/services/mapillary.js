@@ -65,12 +65,12 @@ describe('iD.serviceMapillary', function() {
 
     describe('#reset', function() {
         it('resets cache and image', function() {
-            mapillary.cache({foo: 'bar'});
-            mapillary.selectedImage('baz');
+            mapillary.cache().foo = 'bar';
+            mapillary.selectImage({key: 'baz'});
 
             mapillary.reset();
             expect(mapillary.cache()).to.not.have.property('foo');
-            expect(mapillary.selectedImage()).to.be.null;
+            expect(mapillary.getSelectedImage()).to.be.null;
         });
     });
 
@@ -377,9 +377,9 @@ describe('iD.serviceMapillary', function() {
             };
 
             mapillary.cache().sequences.lineString['-'] = gj;
-            mapillary.cache().sequences.forImage['0'] = '-';
-            mapillary.cache().sequences.forImage['1'] = '-';
-            mapillary.cache().sequences.forImage['2'] = '-';
+            mapillary.cache().sequences.forImageKey['0'] = '-';
+            mapillary.cache().sequences.forImageKey['1'] = '-';
+            mapillary.cache().sequences.forImageKey['2'] = '-';
 
             var res = mapillary.sequences(context.projection);
             expect(res).to.deep.eql([gj]);
@@ -430,10 +430,10 @@ describe('iD.serviceMapillary', function() {
         });
     });
 
-    describe('#selectedImage', function() {
-        it('sets and gets selected image', function() {
-            mapillary.selectedImage('foo');
-            expect(mapillary.selectedImage()).to.eql('foo');
+    describe('#selectImage', function() {
+        it('gets and sets the selected image', function() {
+            mapillary.selectImage('foo');
+            expect(mapillary.getSelectedImage()).to.eql('foo');
         });
     });
 

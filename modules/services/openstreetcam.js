@@ -3,6 +3,7 @@ import _find from 'lodash-es/find';
 import _flatten from 'lodash-es/flatten';
 import _forEach from 'lodash-es/forEach';
 import _map from 'lodash-es/map';
+import _union from 'lodash-es/union';
 
 import { range as d3_range } from 'd3-array';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -24,8 +25,8 @@ var apibase = 'http://openstreetcam.org',
     maxResults = 1000,
     tileZoom = 14,
     dispatch = d3_dispatch('loadedImages'),
-    openstreetcamCache,
-    openstreetcamImage;
+    _oscCache,
+    _oscSelectedImage;
 
 
 function abortRequest(i) {
@@ -105,7 +106,7 @@ function loadTiles(which, url, projection) {
 
 
 function loadNextTilePage(which, currZoom, url, tile) {
-    var cache = openstreetcamCache[which];
+    var cache = _oscCache[which];
     var bbox = tile.extent.bbox();
     var maxPages = maxPageAtZoom(currZoom);
     var nextPage = cache.nextPage[tile.id] || 1;
@@ -150,15 +151,15 @@ function loadNextTilePage(which, currZoom, url, tile) {
                         captured_at: localeDateString(item.shot_date || item.date_added),
                         captured_by: item.username,
                         imagePath: item.lth_name,
-                        sequence_id: +item.sequence_id,
+                        sequence_id: item.sequence_id,
                         sequence_index: +item.sequence_index
                     };
 
                     // cache sequence info
-                    var seq = openstreetcamCache.sequences[d.sequence_id];
+                    var seq = _oscCache.sequences[d.sequence_id];
                     if (!seq) {
                         seq = { rotation: 0, images: [] };
-                        openstreetcamCache.sequences[d.sequence_id] = seq;
+                        _oscCache.sequences[d.sequence_id] = seq;
                     }
                     seq.images[d.sequence_index] = d;
                 }
@@ -225,7 +226,7 @@ function searchLimited(psize, limit, projection, rtree) {
 export default {
 
     init: function() {
-        if (!openstreetcamCache) {
+        if (!_oscCache) {
             this.reset();
         }
 
@@ -233,7 +234,7 @@ export default {
     },
 
     reset: function() {
-        var cache = openstreetcamCache;
+        var cache = _oscCache;
 
         if (cache) {
             if (cache.images && cache.images.inflight) {
@@ -241,18 +242,18 @@ export default {
             }
         }
 
-        openstreetcamCache = {
+        _oscCache = {
             images: { inflight: {}, loaded: {}, nextPage: {}, rtree: rbush() },
             sequences: {}
         };
 
-        openstreetcamImage = null;
+        _oscSelectedImage = null;
     },
 
 
     images: function(projection) {
         var psize = 16, limit = 3;
-        return searchLimited(psize, limit, projection, openstreetcamCache.images.rtree);
+        return searchLimited(psize, limit, projection, _oscCache.images.rtree);
     },
 
 
@@ -261,24 +262,26 @@ export default {
         var min = [viewport[0][0], viewport[1][1]];
         var max = [viewport[1][0], viewport[0][1]];
         var bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
-        var seq_ids = {};
+        var sequenceKeys = {};
 
         // all sequences for images in viewport
-        openstreetcamCache.images.rtree.search(bbox)
-            .forEach(function(d) { seq_ids[d.data.sequence_id] = true; });
+        _oscCache.images.rtree.search(bbox)
+            .forEach(function(d) { sequenceKeys[d.data.sequence_id] = true; });
 
         // make linestrings from those sequences
         var lineStrings = [];
-        Object.keys(seq_ids).forEach(function(seq_id) {
-            var seq = openstreetcamCache.sequences[seq_id];
-            var images = seq && seq.images;
-            if (images) {
-                lineStrings.push({
-                    type: 'LineString',
-                    coordinates: images.map(function (d) { return d.loc; }).filter(Boolean)
-                });
-            }
-        });
+        Object.keys(sequenceKeys)
+            .forEach(function(sequenceKey) {
+                var seq = _oscCache.sequences[sequenceKey];
+                var images = seq && seq.images;
+                if (images) {
+                    lineStrings.push({
+                        type: 'LineString',
+                        coordinates: images.map(function (d) { return d.loc; }).filter(Boolean),
+                        properties: { key: sequenceKey }
+                    });
+                }
+            });
         return lineStrings;
     },
 
@@ -334,14 +337,14 @@ export default {
 
         function rotate(deg) {
             return function() {
-                if (!openstreetcamImage) return;
-                var seq_id = openstreetcamImage.sequence_id;
-                var seq = openstreetcamCache.sequences[seq_id];
-                if (!seq) return;
+                if (!_oscSelectedImage) return;
+                var sequenceKey = _oscSelectedImage.sequence_id;
+                var sequence = _oscCache.sequences[sequenceKey];
+                if (!sequence) return;
 
-                var r = seq.rotation || 0;
+                var r = sequence.rotation || 0;
                 r += deg;
-                seq.rotation = r;
+                sequence.rotation = r;
 
                 d3_select('#photoviewer .osc-wrapper .osc-image')
                     .transition()
@@ -352,19 +355,19 @@ export default {
 
         function step(stepBy) {
             return function() {
-                if (!openstreetcamImage) return;
-                var seq_id = openstreetcamImage.sequence_id;
-                var seq = openstreetcamCache.sequences[seq_id];
-                if (!seq) return;
+                if (!_oscSelectedImage) return;
+                var sequenceKey = _oscSelectedImage.sequence_id;
+                var sequence = _oscCache.sequences[sequenceKey];
+                if (!sequence) return;
 
-                var nextIndex = openstreetcamImage.sequence_index + stepBy;
-                var nextImage = seq.images[nextIndex];
+                var nextIndex = _oscSelectedImage.sequence_index + stepBy;
+                var nextImage = sequence.images[nextIndex];
                 if (!nextImage) return;
 
                 context.map().centerEase(nextImage.loc);
 
                 that
-                    .selectedImage(nextImage)
+                    .selectImage(nextImage)
                     .updateViewer(nextImage);
             };
         }
@@ -397,10 +400,10 @@ export default {
             .selectAll('.photo-wrapper')
             .classed('hide', true);
 
-        d3_selectAll('.layer-openstreetcam-images .viewfield-group')
+        d3_selectAll('.viewfield-group, .sequence, .icon-sign')
             .classed('selected', false);
 
-        openstreetcamImage = null;
+        _oscSelectedImage = null;
         return this;
     },
 
@@ -412,8 +415,8 @@ export default {
             .remove();
 
         if (d) {
-            var seq = openstreetcamCache.sequences[d.sequence_id];
-            var r = (seq && seq.rotation) || 0;
+            var sequence = _oscCache.sequences[d.sequence_id];
+            var r = (sequence && sequence.rotation) || 0;
 
             wrap.append('img')
                 .attr('class', 'osc-image')
@@ -457,23 +460,73 @@ export default {
     },
 
 
-    selectedImage: function(d) {
-        if (!arguments.length) return openstreetcamImage;
-        openstreetcamImage = d;
+    selectImage: function(d) {
+        _oscSelectedImage = d;
 
-        d3_selectAll('.viewfield-group')
-            .classed('selected', function(d) {
-                return d.key === openstreetcamImage.key;
-            });
+        this.setStyles(null, _oscSelectedImage, true);
+
+        d3_selectAll('.icon-sign')
+            .classed('selected', false);
 
         return this;
     },
 
 
-    cache: function(_) {
-        if (!arguments.length) return openstreetcamCache;
-        openstreetcamCache = _;
+    getSelectedImage: function() {
+        return _oscSelectedImage;
+    },
+
+
+    getSequenceKeyForImage: function(d) {
+        return d && d.sequence_id;
+    },
+
+
+    getSelectedSequenceKey: function() {
+        return this.getSequenceKeyForImage(_oscSelectedImage);
+    },
+
+
+    setStyles: function(hovered, selected, reset) {
+        if (reset) {  // reset all layers
+            d3_selectAll('.viewfield-group')
+                .classed('highlighted', false)
+                .classed('hovered', false)
+                .classed('selected', false);
+
+            d3_selectAll('.sequence')
+                .classed('highlighted', false)
+                .classed('selected', false);
+        }
+
+        var hoveredImageKey = hovered && hovered.key;
+        var hoveredSequenceKey = this.getSequenceKeyForImage(hovered);
+        var hoveredSequence = hoveredSequenceKey && _oscCache.sequences[hoveredSequenceKey];
+        var hoveredImageKeys = (hoveredSequence && hoveredSequence.images.map(function (d) { return d.key; })) || [];
+
+        var selectedImageKey = selected && selected.key;
+        var selectedSequenceKey = this.getSequenceKeyForImage(selected);
+        var selectedSequence = selectedSequenceKey && _oscCache.sequences[selectedSequenceKey];
+        var selectedImageKeys = (selectedSequence && selectedSequence.images.map(function (d) { return d.key; })) || [];
+
+        // highlight sibling viewfields on either the selected or the hovered sequences
+        var highlightedImageKeys = _union(hoveredImageKeys, selectedImageKeys);
+
+        d3_selectAll('.layer-openstreetcam-images .viewfield-group')
+            .classed('highlighted', function(d) { return highlightedImageKeys.indexOf(d.key) !== -1; })
+            .classed('hovered', function(d) { return d.key === hoveredImageKey; })
+            .classed('selected', function(d) { return d.key === selectedImageKey; });
+
+        d3_selectAll('.layer-openstreetcam-images .sequence')
+            .classed('highlighted', function(d) { return d.properties.key === hoveredSequenceKey; })
+            .classed('selected', function(d) { return d.properties.key === selectedSequenceKey; });
+
         return this;
+    },
+
+
+    cache: function() {
+        return _oscCache;
     }
 
 };

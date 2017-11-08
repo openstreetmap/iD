@@ -62,12 +62,12 @@ describe('iD.serviceOpenstreetcam', function() {
 
     describe('#reset', function() {
         it('resets cache and image', function() {
-            openstreetcam.cache({foo: 'bar'});
-            openstreetcam.selectedImage('baz');
+            openstreetcam.cache().foo = 'bar';
+            openstreetcam.selectImage({key: 'baz'});
 
             openstreetcam.reset();
             expect(openstreetcam.cache()).to.not.have.property('foo');
-            expect(openstreetcam.selectedImage()).to.be.null;
+            expect(openstreetcam.getSelectedImage()).to.be.null;
         });
     });
 
@@ -251,27 +251,27 @@ describe('iD.serviceOpenstreetcam', function() {
     describe('#images', function() {
         it('returns images in the visible map area', function() {
             var features = [
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], ca: 90, sequence_id: 100, sequence_index: 0 } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], ca: 90, sequence_id: 100, sequence_index: 1 } },
-                { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], ca: 90, sequence_id: 100, sequence_index: 2 } }
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 0 } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 1 } },
+                { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], ca: 90, sequence_id: '100', sequence_index: 2 } }
             ];
 
             openstreetcam.cache().images.rtree.load(features);
             var res = openstreetcam.images(context.projection);
 
             expect(res).to.deep.eql([
-                { key: '0', loc: [10,0], ca: 90, sequence_id: 100, sequence_index: 0 },
-                { key: '1', loc: [10,0], ca: 90, sequence_id: 100, sequence_index: 1 }
+                { key: '0', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 0 },
+                { key: '1', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 1 }
             ]);
         });
 
         it('limits results no more than 3 stacked images in one spot', function() {
             var features = [
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], ca: 90, sequence_id: 100, sequence_index: 0 } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], ca: 90, sequence_id: 100, sequence_index: 1 } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '2', loc: [10,0], ca: 90, sequence_id: 100, sequence_index: 2 } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '3', loc: [10,0], ca: 90, sequence_id: 100, sequence_index: 3 } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '4', loc: [10,0], ca: 90, sequence_id: 100, sequence_index: 4 } }
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 0 } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 1 } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '2', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 2 } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '3', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 3 } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '4', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 4 } }
             ];
 
             openstreetcam.cache().images.rtree.load(features);
@@ -284,9 +284,9 @@ describe('iD.serviceOpenstreetcam', function() {
     describe('#sequences', function() {
         it('returns sequence linestrings in the visible map area', function() {
             var features = [
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], ca: 90, sequence_id: 100, sequence_index: 0 } },
-                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], ca: 90, sequence_id: 100, sequence_index: 1 } },
-                { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], ca: 90, sequence_id: 100, sequence_index: 2 } }
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 0 } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], ca: 90, sequence_id: '100', sequence_index: 1 } },
+                { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], ca: 90, sequence_id: '100', sequence_index: 2 } }
             ];
 
             openstreetcam.cache().images.rtree.load(features);
@@ -295,15 +295,16 @@ describe('iD.serviceOpenstreetcam', function() {
             var res = openstreetcam.sequences(context.projection);
             expect(res).to.deep.eql([{
                 type: 'LineString',
-                coordinates: [[10,0], [10,0], [10,1]]
+                coordinates: [[10,0], [10,0], [10,1]],
+                properties: { key: '100' }
             }]);
         });
     });
 
     describe('#selectedImage', function() {
         it('sets and gets selected image', function() {
-            openstreetcam.selectedImage('foo');
-            expect(openstreetcam.selectedImage()).to.eql('foo');
+            openstreetcam.selectImage('foo');
+            expect(openstreetcam.getSelectedImage()).to.eql('foo');
         });
     });
 
