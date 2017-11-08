@@ -96,11 +96,9 @@
 .layer-mapillary-images {
     pointer-events: none;
 }
-
 .layer-mapillary-images .viewfield-group * {
     fill: #55ff22;
 }
-
 .layer-mapillary-images .sequence {
     stroke: #55ff22;
 }
@@ -117,19 +115,19 @@
     width: 24px;
     outline: 2px solid transparent;
     pointer-events: visible;
-    cursor: pointer; /* Opera */
-    cursor: url(img/cursor-select-mapillary.png) 6 1, pointer; /* FF */
+    cursor: pointer;
     z-index: 70;
     overflow: visible;
 }
 
-.layer-mapillary-signs .icon-sign:hover .icon-sign-body {
-    outline: 2px solid rgba(255,198,0,0.8);
+.layer-mapillary-signs .icon-sign.selected .icon-sign-body {
+    outline: 5px solid #ffee00;
+    background-color: #ffee00;
     z-index: 80;
 }
-
-.layer-mapillary-signs .icon-sign.selected .icon-sign-body {
-    outline: 2px solid rgba(255,0,0,0.8);
+.layer-mapillary-signs .icon-sign:hover .icon-sign-body {
+    outline: 5px solid #eebb00;
+    background-color: #eebb00;
     z-index: 80;
 }
 
@@ -138,11 +136,9 @@
 .layer-openstreetcam-images {
     pointer-events: none;
 }
-
 .layer-openstreetcam-images .viewfield-group * {
     fill: #77ddff;
 }
-
 .layer-openstreetcam-images .sequence {
     stroke: #77ddff;
 }
@@ -151,12 +147,11 @@
 /* Mapillary viewer */
 #mly .domRenderer .TagSymbol {
     font-size: 10px;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0,0,0,0.4);
     padding: 0 4px;
     border-radius: 4px;
     top: -25px;
 }
-
 #mly .domRenderer .Attribution {
     width: 100%;
     font-size: 10px;

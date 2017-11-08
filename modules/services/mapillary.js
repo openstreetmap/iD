@@ -71,6 +71,14 @@ function maxPageAtZoom(z) {
 }
 
 
+function localeTimestamp(s) {
+    if (!s) return null;
+    var d = new Date(s);
+    if (isNaN(d.getTime())) return null;
+    return d.toLocaleString(undefined, { timeZone: 'UTC' });
+}
+
+
 function getTiles(projection) {
     var s = projection.scale() * 2 * Math.PI,
         z = Math.max(Math.log(s) / Math.log(2) - 8, 0),
@@ -399,8 +407,9 @@ export default {
 
 
     loadSigns: function(context, projection) {
-        var url = apibase + 'objects?';
-        loadTiles('objects', url, projection);
+        // if we are looking at signs, we'll actually need to fetch images too
+        loadTiles('images', apibase + 'images?', projection);
+        loadTiles('objects', apibase + 'objects?', projection);
 
         // load traffic sign defs
         if (!_mlySignDefs) {
@@ -482,13 +491,13 @@ export default {
     parsePagination: parsePagination,
 
 
-    updateViewer: function(d, context) {
-        if (!d || !d.key) return;
+    updateViewer: function(imageKey, context) {
+        if (!imageKey) return this;
 
         if (!_mlyViewer) {
-            this.initViewer(d.key, context);
+            this.initViewer(imageKey, context);
         } else {
-            _mlyViewer.moveToKey(d.key);
+            _mlyViewer.moveToKey(imageKey);
         }
 
         return this;
@@ -542,19 +551,29 @@ export default {
     },
 
 
+    // Pass the image datum itself in `d` or the `imageKey` string.
+    // This allows images to be selected from places that dont have access
+    // to the full image datum (like the street signs layer or the js viewer)
     selectImage: function(d, imageKey, fromViewer) {
         if (!d && imageKey) {
+            // If the user clicked on something that's not an image marker, we
+            // might get in here.. Cache lookup can fail, e.g. if the user
+            // clicked a streetsign, but images are loading slowly asynchronously.
+            // We'll try to carry on anyway if there is no datum.  There just
+            // might be a delay before user sees detections, captured_at, etc.
             d = _mlyCache.images.forImageKey[imageKey];
         }
 
         _mlySelectedImage = d;
-        imageKey = d && d.key;
+        var viewer = d3_select('#photoviewer');
+        if (!viewer.empty()) viewer.datum(d);
 
+        imageKey = (d && d.key) || imageKey;
         if (!fromViewer && imageKey) {
             _mlyClicks.push(imageKey);
         }
 
-        this.setStyles(null, _mlySelectedImage, true);
+        this.setStyles(null, true);
 
         d3_selectAll('.layer-mapillary-signs .icon-sign')
             .classed('selected', function(d) {
@@ -565,19 +584,9 @@ export default {
 
         if (!d) return this;
 
-
-        function localeTimestamp(s) {
-            if (!s) return null;
-            var d = new Date(s);
-            if (isNaN(d.getTime())) return null;
-            return d.toLocaleString(undefined, { timeZone: 'UTC' });
-        }
-
-        var selected = d3_selectAll('.layer-mapillary-images .viewfield-group.selected');
-        if (selected.empty()) return this;
-
-        var timestamp = localeTimestamp(d.captured_at);
+        // if viewer is just starting up, attribution might not be available yet
         var attribution = d3_select('.mapillary-js-dom .Attribution');
+        var timestamp = localeTimestamp(d.captured_at);
         var capturedAt = attribution.selectAll('.captured-at');
         if (capturedAt.empty()) {
             capturedAt = attribution
@@ -608,12 +617,7 @@ export default {
     },
 
 
-    getSelectedSequenceKey: function() {
-        return this.getSequenceKeyForImage(_mlySelectedImage);
-    },
-
-
-    setStyles: function(hovered, selected, reset) {
+    setStyles: function(hovered, reset) {
         if (reset) {  // reset all layers
             d3_selectAll('.viewfield-group')
                 .classed('highlighted', false)
@@ -630,6 +634,8 @@ export default {
         var hoveredLineString = hoveredSequenceKey && _mlyCache.sequences.lineString[hoveredSequenceKey];
         var hoveredImageKeys = (hoveredLineString && hoveredLineString.properties.coordinateProperties.image_keys) || [];
 
+        var viewer = d3_select('#photoviewer');
+        var selected = viewer.empty() ? undefined : viewer.datum();
         var selectedImageKey = selected && selected.key;
         var selectedSequenceKey = this.getSequenceKeyForImage(selected);
         var selectedLineString = selectedSequenceKey && _mlyCache.sequences.lineString[selectedSequenceKey];

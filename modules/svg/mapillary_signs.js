@@ -30,6 +30,10 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
 
     function showLayer() {
+        var service = getService();
+        if (!service) return;
+
+        service.loadViewer(context);
         editOn();
     }
 
@@ -57,13 +61,14 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
         context.map().centerEase(d.loc);
 
-        var selected = service.selectedImage(),
-            imageKey;
+        var selected = service.getSelectedImage();
+        var selectedImageKey = selected && selected.key;
+        var imageKey;
 
         // Pick one of the images the sign was detected in,
         // preference given to an image already selected.
         d.detections.forEach(function(detection) {
-            if (!imageKey || selected === detection.image_key) {
+            if (!imageKey || selectedImageKey === detection.image_key) {
                 imageKey = detection.image_key;
             }
         });
@@ -78,8 +83,9 @@ export function svgMapillarySigns(projection, context, dispatch) {
     function update() {
         var service = getService();
         var data = (service ? service.signs(projection) : []);
-        var image = service && service.getSelectedImage();
-        var imageKey = image && image.key;
+        var viewer = d3_select('#photoviewer');
+        var selected = viewer.empty() ? undefined : viewer.datum();
+        var selectedImageKey = selected && selected.key;
 
         var signs = layer.selectAll('.icon-sign')
             .data(data, function(d) { return d.key; });
@@ -94,7 +100,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
             .attr('height', '24px')     // for Firefox
             .classed('selected', function(d) {
                 return _some(d.detections, function(detection) {
-                    return detection.image_key === imageKey;
+                    return detection.image_key === selectedImageKey;
                 });
             })
             .on('click', click);

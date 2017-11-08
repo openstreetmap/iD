@@ -462,8 +462,10 @@ export default {
 
     selectImage: function(d) {
         _oscSelectedImage = d;
+        var viewer = d3_select('#photoviewer');
+        if (!viewer.empty()) viewer.datum(d);
 
-        this.setStyles(null, _oscSelectedImage, true);
+        this.setStyles(null, true);
 
         d3_selectAll('.icon-sign')
             .classed('selected', false);
@@ -482,12 +484,7 @@ export default {
     },
 
 
-    getSelectedSequenceKey: function() {
-        return this.getSequenceKeyForImage(_oscSelectedImage);
-    },
-
-
-    setStyles: function(hovered, selected, reset) {
+    setStyles: function(hovered, reset) {
         if (reset) {  // reset all layers
             d3_selectAll('.viewfield-group')
                 .classed('highlighted', false)
@@ -504,6 +501,8 @@ export default {
         var hoveredSequence = hoveredSequenceKey && _oscCache.sequences[hoveredSequenceKey];
         var hoveredImageKeys = (hoveredSequence && hoveredSequence.images.map(function (d) { return d.key; })) || [];
 
+        var viewer = d3_select('#photoviewer');
+        var selected = viewer.empty() ? undefined : viewer.datum();
         var selectedImageKey = selected && selected.key;
         var selectedSequenceKey = this.getSequenceKeyForImage(selected);
         var selectedSequence = selectedSequenceKey && _oscCache.sequences[selectedSequenceKey];

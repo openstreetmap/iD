@@ -89,24 +89,20 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
         service
             .selectImage(d)
-            .updateViewer(d, context)
+            .updateViewer(d.key, context)
             .showViewer();
     }
 
 
     function mouseover(d) {
         var service = getService();
-        var selected = d3_select('.viewfield-group.selected');
-        var datum = selected.size() && selected.datum();
-        if (service) service.setStyles(d, datum);
+        if (service) service.setStyles(d);
     }
 
 
     function mouseout() {
         var service = getService();
-        var selected = d3_select('.viewfield-group.selected');
-        var datum = selected.size() && selected.datum();
-        if (service) service.setStyles(null, datum);
+        if (service) service.setStyles(null);
     }
 
 
@@ -181,12 +177,6 @@ export function svgMapillaryImages(projection, context, dispatch) {
             .attr('dx', '0')
             .attr('dy', '0')
             .attr('r', '6');
-
-
-        var selected = d3_select('.viewfield-group.selected');
-        var datum = selected.size() && selected.datum();
-        if (service) service.setStyles(null, datum);
-
 
         function viewfieldPath() {
             var d = this.parentNode.__data__;
