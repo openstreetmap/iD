@@ -14,6 +14,7 @@ import { services } from '../services';
 export function svgMapillaryImages(projection, context, dispatch) {
     var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000),
         minZoom = 12,
+        minMarkerZoom = 16,
         minViewfieldZoom = 18,
         layer = d3_select(null),
         _mapillary;
@@ -114,10 +115,13 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
     function update() {
-        var highZoom = ~~context.map().zoom() >= minViewfieldZoom;
+        var z = ~~context.map().zoom();
+        var showMarkers = (z >= minMarkerZoom);
+        var showViewfields = (z >= minViewfieldZoom);
+
         var service = getService();
-        var images = (service ? service.images(projection) : []);
-        var sequences = (service && highZoom ? service.sequences(projection) : []);
+        var sequences = (service ? service.sequences(projection) : []);
+        var images = (service && showMarkers ? service.images(projection) : []);
 
         var clip = d3_geoIdentity().clipExtent(projection.clipExtent()).stream;
         var project = projection.stream;
@@ -125,18 +129,18 @@ export function svgMapillaryImages(projection, context, dispatch) {
             return project(clip(output));
         }});
 
-        var lineStrings = layer.selectAll('.sequences').selectAll('.sequence')
+        var traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.properties.key; });
 
-        lineStrings.exit()
+        traces.exit()
             .remove();
 
-        lineStrings = lineStrings.enter()
+        traces = traces.enter()
             .append('path')
             .attr('class', 'sequence')
-            .merge(lineStrings);
+            .merge(traces);
 
-        lineStrings
+        traces
             .attr('d', makePath);
 
 
@@ -159,7 +163,7 @@ export function svgMapillaryImages(projection, context, dispatch) {
 
 
        var viewfields = markers.selectAll('.viewfield')
-            .data(highZoom ? [0] : []);
+            .data(showViewfields ? [0] : []);
 
         viewfields.exit()
             .remove();
