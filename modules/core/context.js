@@ -112,9 +112,9 @@ export function coreContext() {
 
 
     /* Connection */
-    var entitiesLoaded = utilCallWhenIdle(function entitiesLoaded(err, result) {
+    function entitiesLoaded(err, result) {
         if (!err) history.merge(result.data, result.extent);
-    });
+    }
 
     context.preauth = function(options) {
         if (connection) {
