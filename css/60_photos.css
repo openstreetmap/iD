@@ -87,6 +87,10 @@
     fill-opacity: 0.9;
 }
 
+.viewfield-group.selected .viewfield-scale {
+    transform: scale(2,2);
+}
+
 .sequence {
     fill: none;
     stroke-width: 2;

@@ -8,9 +8,10 @@ import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 
-import { svgDefs, svgIcon } from '../svg';
-import { modeBrowse } from '../modes';
 import { behaviorHash } from '../behavior';
+import { modeBrowse } from '../modes';
+import { services } from '../services';
+import { svgDefs, svgIcon } from '../svg';
 import { utilGetDimensions } from '../util/dimensions';
 
 import { uiAccount } from './account';
@@ -248,10 +249,8 @@ export function uiInit(context) {
             .append('button')
             .attr('class', 'thumb-hide')
             .on('click', function () {
-                d3_select('#photoviewer')
-                    .classed('hide', true)
-                    .select('div')
-                    .classed('hide', true);
+                if (services.mapillary) { services.mapillary.hideViewer(); }
+                if (services.openstreetcam) { services.openstreetcam.hideViewer(); }
             })
             .append('div')
             .call(svgIcon('#icon-close'));

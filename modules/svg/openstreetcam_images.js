@@ -86,12 +86,12 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
         var service = getService();
         if (!service) return;
 
-        context.map().centerEase(d.loc);
-
         service
             .selectImage(d)
             .updateViewer(d)
             .showViewer();
+
+        context.map().centerEase(d.loc);
     }
 
 
@@ -109,12 +109,17 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
 
     function transform(d) {
         var t = svgPointTransform(projection)(d);
-        if (d.ca) t += ' rotate(' + Math.floor(d.ca) + ',0,0)';
+        if (d.ca) {
+            t += ' rotate(' + Math.floor(d.ca) + ',0,0)';
+        }
         return t;
     }
 
 
     function update() {
+        var viewer = d3_select('#photoviewer');
+        var selected = viewer.empty() ? undefined : viewer.datum();
+
         var z = ~~context.map().zoom();
         var showMarkers = (z >= minMarkerZoom);
         var showViewfields = (z >= minViewfieldZoom);
@@ -144,35 +149,36 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
             .attr('d', makePath);
 
 
-        var markers = layer.selectAll('.markers').selectAll('.viewfield-group')
+        var groups = layer.selectAll('.markers').selectAll('.viewfield-group')
             .data(images, function(d) { return d.key; });
 
-        markers.exit()
+        // exit
+        groups.exit()
             .remove();
 
-        var enter = markers.enter()
+        // enter
+        var groupsEnter = groups.enter()
             .append('g')
             .attr('class', 'viewfield-group')
             .on('mouseover', mouseover)
             .on('mouseout', mouseout)
             .on('click', click);
 
-        markers = markers
-            .merge(enter)
-            .attr('transform', transform);
+        groupsEnter
+            .append('g')
+            .attr('class', 'viewfield-scale');
 
+        // update
+        var markers = groups
+            .merge(groupsEnter)
+            .sort(function(a, b) {
+                return (a === selected) ? 1
+                    : (b === selected) ? -1
+                    : b.loc[1] - a.loc[1];  // sort Y
+            })
+            .attr('transform', transform)
+            .select('.viewfield-scale');
 
-       var viewfields = markers.selectAll('.viewfield')
-            .data(showViewfields ? [0] : []);
-
-        viewfields.exit()
-            .remove();
-
-        viewfields.enter()
-            .append('path')
-            .attr('class', 'viewfield')
-            .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
-            .attr('d', 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z');
 
         markers.selectAll('circle')
             .data([0])
@@ -181,6 +187,18 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
             .attr('dx', '0')
             .attr('dy', '0')
             .attr('r', '6');
+
+        var viewfields = markers.selectAll('.viewfield')
+            .data(showViewfields ? [0] : []);
+
+        viewfields.exit()
+            .remove();
+
+        viewfields.enter()               // viewfields may or may not be drawn...
+            .insert('path', 'circle')    // but if they are, draw below the circles
+            .attr('class', 'viewfield')
+            .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
+            .attr('d', 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z');
     }
 
 

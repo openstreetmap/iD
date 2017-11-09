@@ -475,7 +475,12 @@ export default {
 
 
     hideViewer: function() {
-        d3_select('#photoviewer')
+        _mlySelectedImage = null;
+
+        var viewer = d3_select('#photoviewer');
+        if (!viewer.empty()) viewer.datum(null);
+
+        viewer
             .classed('hide', true)
             .selectAll('.photo-wrapper')
             .classed('hide', true);
@@ -483,8 +488,7 @@ export default {
         d3_selectAll('.viewfield-group, .sequence, .icon-sign')
             .classed('selected', false);
 
-        _mlySelectedImage = null;
-        return this;
+        return this.setStyles(null, true);
     },
 
 
