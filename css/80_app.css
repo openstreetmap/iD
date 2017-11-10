@@ -3654,8 +3654,7 @@ img.tile-removing {
 
 .notice {
     position: absolute;
-    top: 50%;
-    bottom: 50%;
+    top: 45px;
     left: 0;
     right: 0;
     text-align: center;
@@ -3664,7 +3663,7 @@ img.tile-removing {
 .notice .zoom-to {
     margin: auto;
     width: 300px;
-    height: 80px;
+    height: 70px;
     font-size: 150%;
     border-radius: 8px;
 }
