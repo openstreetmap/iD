@@ -286,7 +286,6 @@
             "localized_translation_language": "Pumili ng wika",
             "localized_translation_name": "Pangalan"
         },
-        "zoom_in_edit": "Mag-zoom-in para makapag-edit",
         "login": "mag-login",
         "logout": "Mag-logout",
         "loading_auth": "Kumokonekta sa OpenStreetMap ...",
@@ -477,8 +476,7 @@
         "splash": {
             "welcome": "Maligayang pagdating sa iD OpenStreetMap editor",
             "text": "Ang iD ay isang simple ngunit magandang editor para sa pag-edit ng libreng mapa ng buong mundo.  Ito ay bersyon {version}. Para sa karagdagang impormasyon tingnan ang {website} at i-ulat ang mga bugs sa {github}.",
-            "walkthrough": "Simulan ang \"Walkthrough\"",
-            "start": "Simulan ang pag-edit"
+            "walkthrough": "Simulan ang \"Walkthrough\""
         },
         "source_switch": {
             "live": "live",
@@ -500,10 +498,6 @@
             "untagged_area_tooltip": "Pumili ng uri ng tampok na naglalarawan kung ano ang poligong ito.",
             "tag_suggests_area": "Ang tag na {tag} ay kalimitang para sa mga area o poligon sublait ito ay nasa linya lamang.",
             "deprecated_tags": "Hindi na ginagamit na \"tag\": {tags}"
-        },
-        "zoom": {
-            "in": "i-zoom in",
-            "out": "I-zoom out"
         },
         "cannot_zoom": "Hindi na pwedeng mag-zoom out sa kasalukuyang \"mode\".",
         "full_screen": "I-fullscreen",

@@ -210,7 +210,6 @@
             "localized_translation_language": "Pilih Bahasa",
             "localized_translation_name": "Nama"
         },
-        "zoom_in_edit": "Perbesar untuk bisa menyunting",
         "logout": "keluar",
         "loading_auth": "Menghubungkan dengan OpenStreetMap...",
         "report_a_bug": "Laporkan bug",
@@ -421,8 +420,7 @@
         "splash": {
             "welcome": "Selamat datang di penyuting iD OpenStreetMap",
             "text": "iD begitu bersahabat namun juga alat yang kuat untuk berperan dalam peta dunia gratis terbaik. Ini adalah versi {version}. Untuk informasi lebih lihat {website} dan laporkan kesalahan di {github}.",
-            "walkthrough": "Memulai Perjalanan",
-            "start": "Sunting Sekarang"
+            "walkthrough": "Memulai Perjalanan"
         },
         "source_switch": {
             "live": "terhubung",
@@ -443,10 +441,6 @@
             "untagged_area_tooltip": "Pilih tipe fitur yang menjelaskan apa identitas area ini.",
             "tag_suggests_area": "Penanda {tag} menyarankan garis sebaiknya dalam bentuk area, tapi ini bukan sebuah area",
             "deprecated_tags": "Tag sudah tidak dipergunakan: {tags}"
-        },
-        "zoom": {
-            "in": "Perbesar tampilan",
-            "out": "Perkecil tampilan"
         },
         "cannot_zoom": "Tidak bisa memperbesar tampilan lebih jauh dengan mode ini.",
         "full_screen": "Tombol Layar Penuh",
@@ -1566,14 +1560,8 @@
                 "craft/scaffolder": {
                     "name": "Perancah"
                 },
-                "craft/sculpter": {
-                    "name": "Pembuat Patung"
-                },
                 "craft/shoemaker": {
                     "name": "Pembuat Sepatu"
-                },
-                "craft/sweep": {
-                    "name": "Penyapu Cerobong"
                 },
                 "craft/tailor": {
                     "name": "Penjahit Pakaian Pria"
@@ -1666,9 +1654,6 @@
                 },
                 "highway/path": {
                     "name": "Jalur"
-                },
-                "highway/pedestrian": {
-                    "name": "Trotoar"
                 },
                 "highway/primary": {
                     "name": "Jalan Provinsi",
@@ -2088,14 +2073,8 @@
                     "name": "Kantor",
                     "terms": "Balai"
                 },
-                "office/accountant": {
-                    "name": "Akuntan"
-                },
                 "office/administrative": {
                     "name": "Kantor Administrasi"
-                },
-                "office/architect": {
-                    "name": "Arsitek"
                 },
                 "office/company": {
                     "name": "Kantor Perusahaan"
@@ -2118,15 +2097,8 @@
                 "office/insurance": {
                     "name": "Kantor Asuransi"
                 },
-                "office/it": {
-                    "name": "Kantor IT",
-                    "terms": "Teknologi Informasi, TI"
-                },
                 "office/lawyer": {
                     "name": "Kantor Hukum"
-                },
-                "office/newspaper": {
-                    "name": "Koran"
                 },
                 "office/ngo": {
                     "name": "Kantor LSM"
@@ -2139,9 +2111,6 @@
                 },
                 "office/telecommunication": {
                     "name": "Kantor Telekomunikasi"
-                },
-                "office/therapist": {
-                    "name": "Penerapi"
                 },
                 "office/travel_agent": {
                     "name": "Biro Perjalanan"

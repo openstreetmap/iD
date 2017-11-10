@@ -310,7 +310,6 @@
             "localized_translation_language": "Choose language",
             "localized_translation_name": "Name"
         },
-        "zoom_in_edit": "Zoom in to edit",
         "login": "login",
         "logout": "logout",
         "loading_auth": "Connecting to OpenStreetMap...",
@@ -612,8 +611,7 @@
         "splash": {
             "welcome": "Welcome to the iD OpenStreetMap editor",
             "text": "iD is a friendly but powerful tool for contributing to the World's best free World map. This is version {version}. For more information see {website} and report bugs at {github}.",
-            "walkthrough": "Start the Walkthrough",
-            "start": "Edit now"
+            "walkthrough": "Start the Walkthrough"
         },
         "source_switch": {
             "live": "live",
@@ -644,10 +642,6 @@
             "many_deletions": "You're deleting {n} features. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
             "tag_suggests_area": "The tag {tag} suggests line should be area, but it is not an area",
             "deprecated_tags": "Deprecated tags: {tags}"
-        },
-        "zoom": {
-            "in": "Zoom in",
-            "out": "Zoom out"
         },
         "cannot_zoom": "Cannot zoom out further in current mode.",
         "full_screen": "Toggle Full Screen",
@@ -3131,17 +3125,11 @@
                 "craft/scaffolder": {
                     "name": "Scaffolder"
                 },
-                "craft/sculpter": {
-                    "name": "Sculpter"
-                },
                 "craft/shoemaker": {
                     "name": "Shoemaker"
                 },
                 "craft/stonemason": {
                     "name": "Stonemason"
-                },
-                "craft/sweep": {
-                    "name": "Chimney Sweep"
                 },
                 "craft/tailor": {
                     "name": "Tailor"
@@ -3350,9 +3338,6 @@
                 },
                 "highway/path": {
                     "name": "Path"
-                },
-                "highway/pedestrian": {
-                    "name": "Pedestrian Street"
                 },
                 "highway/primary": {
                     "name": "Primary Road"
@@ -3918,14 +3903,8 @@
                 "office": {
                     "name": "Office"
                 },
-                "office/accountant": {
-                    "name": "Accountant"
-                },
                 "office/administrative": {
                     "name": "Administrative Office"
-                },
-                "office/architect": {
-                    "name": "Architect"
                 },
                 "office/company": {
                     "name": "Company Office"
@@ -3954,17 +3933,11 @@
                 "office/insurance": {
                     "name": "Insurance Office"
                 },
-                "office/it": {
-                    "name": "IT Office"
-                },
                 "office/lawyer": {
                     "name": "Law Office"
                 },
                 "office/lawyer/notary": {
                     "name": "Notary Office"
-                },
-                "office/newspaper": {
-                    "name": "Newspaper"
                 },
                 "office/ngo": {
                     "name": "NGO Office"
@@ -3980,9 +3953,6 @@
                 },
                 "office/telecommunication": {
                     "name": "Telecom Office"
-                },
-                "office/therapist": {
-                    "name": "Therapist"
                 },
                 "office/travel_agent": {
                     "name": "Travel Agency"
@@ -4029,9 +3999,6 @@
                 "place/village": {
                     "name": "Village"
                 },
-                "playground/balance_beam": {
-                    "name": "Balance Beam"
-                },
                 "playground/basket_spinner": {
                     "name": "Basket Spinner"
                 },
@@ -4043,12 +4010,6 @@
                 },
                 "playground/cushion": {
                     "name": "Bouncy Cushion"
-                },
-                "playground/horizontal_bar": {
-                    "name": "Horizontal Bar"
-                },
-                "playground/rocker": {
-                    "name": "Springy Rocker"
                 },
                 "playground/roundabout": {
                     "name": "Play Roundabout"
@@ -4583,9 +4544,6 @@
                 },
                 "tourism/caravan_site": {
                     "name": "Caravan Park"
-                },
-                "tourism/chalet": {
-                    "name": "Chalet"
                 },
                 "tourism/gallery": {
                     "name": "Art Gallery"

@@ -352,7 +352,7 @@
             "key": "I",
             "background": {
                 "key": "B",
-                "title": "Warstawa tła",
+                "title": "Warstwa tła",
                 "zoom": "Powiększenie",
                 "vintage": "Datowanie",
                 "source": "Źródło",
@@ -361,7 +361,9 @@
                 "accuracy": "Dokładność",
                 "unknown": "Nieznane",
                 "show_tiles": "Pokaż dane kafli",
-                "hide_tiles": "Ukryj dane kafli"
+                "hide_tiles": "Ukryj dane kafli",
+                "show_vintage": "Pokaż datowanie",
+                "hide_vintage": "Ukryj datowanie"
             },
             "history": {
                 "key": "H",
@@ -613,7 +615,7 @@
             "welcome": "Witamy w iD, edytorze map OpenStreetMap",
             "text": "iD jest przyjaznym, ale i jednocześnie potężnym narzędziem, dzięki któremu możesz przyczynić się do rozwoju najlepszej wolnej mapy świata. To jest wersja {version}. Więcej informacji znajdziesz na {website}, a błędy zgłosisz na {github}.",
             "walkthrough": "Rozpocznij samouczek",
-            "start": "Edytuj teraz"
+            "start": "Edytuj"
         },
         "source_switch": {
             "live": "live",
@@ -659,14 +661,21 @@
         },
         "mapillary_images": {
             "tooltip": "Zdjęcia z serwisu Mapillary",
-            "title": "Nakładka zdjęć (Mapillary)"
+            "title": "Nakładka ze zdjęciami (Mapillary)"
         },
         "mapillary_signs": {
             "tooltip": "Znaki drogowe z Mapillary (włączy Nakładkę zdjęć)",
-            "title": "Nakładka z znakami drogowymi (Mapillary)"
+            "title": "Nakładka ze znakami drogowymi (Mapillary)"
         },
         "mapillary": {
             "view_on_mapillary": "Zobacz ten obraz w Mapillary"
+        },
+        "openstreetcam_images": {
+            "tooltip": "Zdjęcia z poziomu ulicy z OpenStreetCam",
+            "title": "Nakładka ze zdjęciami (OpenStreetCam)"
+        },
+        "openstreetcam": {
+            "view_on_openstreetcam": "Zobacz to zdjęcie na OpenStreetCam"
         },
         "help": {
             "title": "Pomoc",
@@ -1217,6 +1226,9 @@
                 "aeroway": {
                     "label": "Typ"
                 },
+                "agrarian": {
+                    "label": "Asortyment"
+                },
                 "amenity": {
                     "label": "Typ"
                 },
@@ -1236,7 +1248,7 @@
                     "label": "Dzieło sztuki"
                 },
                 "artwork_type": {
-                    "label": "Typ"
+                    "label": "Rodzaj"
                 },
                 "atm": {
                     "label": "Bankomat"
@@ -1285,6 +1297,9 @@
                 "board_type": {
                     "label": "Typ"
                 },
+                "boules": {
+                    "label": "Rodzaj"
+                },
                 "boundary": {
                     "label": "Typ"
                 },
@@ -1303,6 +1318,9 @@
                 },
                 "bunker_type": {
                     "label": "Typ"
+                },
+                "cables": {
+                    "placeholder": "1, 2, 3..."
                 },
                 "camera/direction": {
                     "label": "Kierunek (w stopniach, zgodnie z ruchem wskazówek zegara)",
@@ -1389,6 +1407,14 @@
                 "craft": {
                     "label": "Typ"
                 },
+                "crane/type": {
+                    "label": "Rodzaj żurawia",
+                    "options": {
+                        "floor-mounted_crane": "Przymocowany do podłoża",
+                        "portal_crane": "Bramowy",
+                        "travel_lift": "Transportowy"
+                    }
+                },
                 "crop": {
                     "label": "Rodzaj uprawy"
                 },
@@ -1460,6 +1486,10 @@
                 },
                 "description": {
                     "label": "Opis obiektu"
+                },
+                "devices": {
+                    "label": "Liczba urządzeń",
+                    "placeholder": "1, 2, 3..."
                 },
                 "diaper": {
                     "label": "Dostępny przewijak dla dzieci"
@@ -1535,12 +1565,18 @@
                         "wall": "Mur"
                     }
                 },
+                "fitness_station": {
+                    "label": "Rodzaj urządzeń"
+                },
                 "fixme": {
                     "label": "Popraw mnie (fixme)"
                 },
                 "ford": {
                     "label": "Rodzaj",
                     "placeholder": "Domyślny"
+                },
+                "frequency": {
+                    "label": "Częstotliwość pracy"
                 },
                 "fuel": {
                     "label": "Paliwo"
@@ -1584,6 +1620,7 @@
                     "label": "Poręcz"
                 },
                 "hashtags": {
+                    "label": "Proponowane hasztagi",
                     "placeholder": "#przykład"
                 },
                 "healthcare": {
@@ -1634,7 +1671,7 @@
                     "label": "Inskrypcja"
                 },
                 "intermittent": {
-                    "label": "Okresowy"
+                    "label": "Okresowość"
                 },
                 "internet_access": {
                     "label": "Dostęp do internetu",
@@ -1899,6 +1936,10 @@
                 "payment_multi": {
                     "label": "Rodzaje płatności"
                 },
+                "phases": {
+                    "label": "Liczba faz",
+                    "placeholder": "1, 2, 3..."
+                },
                 "phone": {
                     "label": "Telefon",
                     "placeholder": "+48 42 123 4567"
@@ -1951,6 +1992,15 @@
                     "label": "Moc wyjściowa",
                     "placeholder": "500 MW, 1000 MW, 2000 MW..."
                 },
+                "playground/baby": {
+                    "label": "Dla niemowląt"
+                },
+                "playground/max_age": {
+                    "label": "Maksymalny wiek dziecka"
+                },
+                "playground/min_age": {
+                    "label": "Minimalny wiek dziecka"
+                },
                 "population": {
                     "label": "Liczba ludności"
                 },
@@ -1968,6 +2018,9 @@
                 },
                 "railway": {
                     "label": "Typ"
+                },
+                "rating": {
+                    "label": "Moc"
                 },
                 "recycling_accepts": {
                     "label": "Przyjmuje"
@@ -2167,8 +2220,18 @@
                     },
                     "placeholder": "Nieznane"
                 },
+                "structure_waterway": {
+                    "label": "Konstrukcja",
+                    "options": {
+                        "tunnel": "Tunel"
+                    },
+                    "placeholder": "Brak"
+                },
                 "studio": {
                     "label": "Typ"
+                },
+                "substance": {
+                    "label": "Substancja chemiczna"
                 },
                 "substation": {
                     "label": "Typ"
@@ -2195,6 +2258,15 @@
                 },
                 "surveillance/zone": {
                     "label": "Obszar Dozoru"
+                },
+                "switch": {
+                    "label": "Rodzaj",
+                    "options": {
+                        "circuit_breaker": "Wyłącznik",
+                        "disconnector": "Odłącznik",
+                        "earthing": "Uziemnik",
+                        "mechanical": "Mechaniczny"
+                    }
                 },
                 "tactile_paving": {
                     "label": "Wypustki dla niewidomych"
@@ -2247,6 +2319,9 @@
                     },
                     "placeholder": "Utwardzona, nieubita..."
                 },
+                "trade": {
+                    "label": "Rodzaj"
+                },
                 "traffic_calming": {
                     "label": "Rodzaj"
                 },
@@ -2264,6 +2339,16 @@
                         "no": "Żadna: brak ścieżki, wymagane świetne umiejętności orientacji w terenie"
                     },
                     "placeholder": "Doskonała, Dobra, Zła..."
+                },
+                "transformer": {
+                    "label": "Rodzaj transformatora",
+                    "options": {
+                        "auto": "Autotransformator",
+                        "auxiliary": "Potrzeb własnych",
+                        "converter": "Przekształtnik",
+                        "traction": "Trakcyjny",
+                        "yes": "Nieznany"
+                    }
                 },
                 "trees": {
                     "label": "Drzewa"
@@ -2299,6 +2384,18 @@
                         "stratovolcano": "Stratowulkan"
                     }
                 },
+                "voltage": {
+                    "label": "Napięcie"
+                },
+                "voltage/primary": {
+                    "label": "Napięcie pierwotne"
+                },
+                "voltage/secondary": {
+                    "label": "Napięcie wtórne"
+                },
+                "voltage/tertiary": {
+                    "label": "Napięcie trzeciorzędne"
+                },
                 "wall": {
                     "label": "Typ"
                 },
@@ -2326,6 +2423,22 @@
                 },
                 "wikipedia": {
                     "label": "Wikipedia"
+                },
+                "windings": {
+                    "label": "Liczba uzwojeń",
+                    "placeholder": "1, 2, 3..."
+                },
+                "windings/configuration": {
+                    "label": "Układ połączeń",
+                    "options": {
+                        "delta": "Trójkąt",
+                        "leblanc": "Leblanc",
+                        "open": "Otwarty",
+                        "open-delta": "Otwarty trójkąt",
+                        "scott": "Scott",
+                        "star": "Gwiazdowy",
+                        "zigzag": "Zygzak"
+                    }
                 }
             },
             "presets": {
@@ -2448,7 +2561,7 @@
                 },
                 "amenity/bank": {
                     "name": "Bank",
-                    "terms": "bankowość, kasa"
+                    "terms": "bankowość, kasa, skok"
                 },
                 "amenity/bar": {
                     "name": "Bar alkoholowy",
@@ -2649,6 +2762,10 @@
                     "name": "Parking dla motocyklów",
                     "terms": "miejsce postojowe dla motocyklów"
                 },
+                "amenity/music_school": {
+                    "name": "Szkoła muzyczna niepodlegająca MEN",
+                    "terms": "nauka gry, kursy muzyczne, lekcje muzyki"
+                },
                 "amenity/nightclub": {
                     "name": "Klub nocny",
                     "terms": "klub dla dorosłych, striptease"
@@ -2772,8 +2889,7 @@
                     "terms": "tereny szkolne"
                 },
                 "amenity/scrapyard": {
-                    "name": "Złomowisko",
-                    "terms": "skład złomu, składowisko złomu"
+                    "name": "Złomowisko"
                 },
                 "amenity/shelter": {
                     "name": "Schronienie",
@@ -2918,7 +3034,8 @@
                     "terms": "typ nawierzchni"
                 },
                 "attraction/amusement_ride": {
-                    "name": "przejażdżka-atrakcja (ogólna)"
+                    "name": "przejażdżka-atrakcja (ogólna)",
+                    "terms": "przejażdżka-atrakcja (ogólna)"
                 },
                 "attraction/animal": {
                     "name": "Zwierzę",
@@ -2939,6 +3056,14 @@
                 "attraction/carousel": {
                     "name": "Karuzela",
                     "terms": "karuzela"
+                },
+                "attraction/dark_ride": {
+                    "name": "Mroczna przejażdżka",
+                    "terms": "dark ride, mroczna przejażdżka, mroczny przejazd, pałac strachów"
+                },
+                "attraction/drop_tower": {
+                    "name": "Wieża Swobodnego Spadania",
+                    "terms": "wieża spadania"
                 },
                 "attraction/pirate_ship": {
                     "name": "Statek piracki",
@@ -3228,6 +3353,10 @@
                     "name": "Zegarmistrz",
                     "terms": "zegarmistrz"
                 },
+                "craft/confectionery": {
+                    "name": "Cukiernik",
+                    "terms": "cukiernik, wytwórca słodyczy"
+                },
                 "craft/distillery": {
                     "name": "Gorzelnia",
                     "terms": "wytwórnia napojów alkoholowych, destylarnia"
@@ -3329,9 +3458,9 @@
                     "name": "Rusztowania",
                     "terms": "Wyrób rusztowań"
                 },
-                "craft/sculpter": {
+                "craft/sculptor": {
                     "name": "Rzeźbiarz",
-                    "terms": "rzeźby"
+                    "terms": "rzeźbiarz"
                 },
                 "craft/shoemaker": {
                     "name": "Szewc",
@@ -3340,10 +3469,6 @@
                 "craft/stonemason": {
                     "name": "Zakład kamieniarski",
                     "terms": "kamieniarz"
-                },
-                "craft/sweep": {
-                    "name": "Kominiarz",
-                    "terms": "Kominiarz"
                 },
                 "craft/tailor": {
                     "name": "Krawiec"
@@ -3483,10 +3608,12 @@
                     "terms": "przeszkoda wodna"
                 },
                 "healthcare": {
-                    "name": "Placówka służby zdrowia"
+                    "name": "Placówka służby zdrowia",
+                    "terms": "placówka służby zdrowia"
                 },
                 "healthcare/alternative": {
-                    "name": "Medycyna alternatywna"
+                    "name": "Medycyna alternatywna",
+                    "terms": "medycyna alternatywna"
                 },
                 "healthcare/alternative/chiropractic": {
                     "name": "Kręgarz",
@@ -3559,9 +3686,17 @@
                     "name": "Przejście dla pieszych",
                     "terms": "Przejście drogowe"
                 },
+                "highway/crossing-raised": {
+                    "name": "Przejście dla pieszych-podwyższone",
+                    "terms": "podwyższone przejście dla pieszych, wyniesione przejście dla pieszych"
+                },
                 "highway/crosswalk": {
                     "name": "Przejście dla pieszych",
                     "terms": "Przejście drogowe"
+                },
+                "highway/crosswalk-raised": {
+                    "name": "Przejście dla pieszych-podwyższone i oznakowane",
+                    "terms": "podwyższone oznakowane przejście dla pieszych"
                 },
                 "highway/cycleway": {
                     "name": "Droga rowerowa",
@@ -3603,8 +3738,12 @@
                     "name": "Ścieżka/droga ",
                     "terms": "ścieżka,dróżka"
                 },
-                "highway/pedestrian": {
-                    "name": "Ciąg pieszy",
+                "highway/pedestrian_area": {
+                    "name": "Plac - deptak",
+                    "terms": "plac, skwer, deptak"
+                },
+                "highway/pedestrian_line": {
+                    "name": "Ulica - deptak",
                     "terms": "deptak"
                 },
                 "highway/primary": {
@@ -3783,6 +3922,10 @@
                     "name": "Zbiornik wodny",
                     "terms": "zbiornik,wodny,retencyjny"
                 },
+                "landuse/brownfield": {
+                    "name": "Teren pod ponowną zabudowę",
+                    "terms": "teren poprzemysłowy, teren powyburzeniowy"
+                },
                 "landuse/cemetery": {
                     "name": "Cmentarz",
                     "terms": "cmentarz"
@@ -3821,6 +3964,10 @@
                 "landuse/grass": {
                     "name": "Trawa",
                     "terms": "trawa, trawnik, "
+                },
+                "landuse/greenfield": {
+                    "name": "Teren niezabudowany",
+                    "terms": "teren niezabudowany"
                 },
                 "landuse/harbour": {
                     "name": "Port morski",
@@ -3906,6 +4053,10 @@
                     "name": "Tereny rekreacyjne",
                     "terms": "rekreacja,odpoczynek"
                 },
+                "landuse/religious": {
+                    "name": "Teren dla celów religijnych",
+                    "terms": "teren kościelny, teren religijny"
+                },
                 "landuse/residential": {
                     "name": "Zabudowa mieszkaniowa",
                     "terms": "Teren zamieszkały"
@@ -3970,6 +4121,10 @@
                     "name": "Pole golfowe",
                     "terms": "pole golfowe"
                 },
+                "leisure/hackerspace": {
+                    "name": "Hackerspace",
+                    "terms": "hackerspace, hackspace,  hacklab, makerspace, creative space "
+                },
                 "leisure/horse_riding": {
                     "name": "Jazda konna",
                     "terms": "jazda konna"
@@ -4017,6 +4172,10 @@
                 "leisure/pitch/beachvolleyball": {
                     "name": "Boisko do gry w siatkówkę plażową",
                     "terms": "Siatkówka plażowa"
+                },
+                "leisure/pitch/boules": {
+                    "name": "Bule",
+                    "terms": "bule, petanka"
                 },
                 "leisure/pitch/bowls": {
                     "name": "Pole do gry w bowls",
@@ -4070,6 +4229,10 @@
                     "name": "Bieżnia (Bieganie)",
                     "terms": "bieżnia,tor,bieg"
                 },
+                "leisure/sauna": {
+                    "name": "Sauna",
+                    "terms": "sauna"
+                },
                 "leisure/slipway": {
                     "name": "Pochylnia okrętowa",
                     "terms": "pochylnia"
@@ -4121,6 +4284,10 @@
                 "man_made/chimney": {
                     "name": "Komin",
                     "terms": "kominek"
+                },
+                "man_made/crane": {
+                    "name": "Żuraw stacjonarny",
+                    "terms": "żuraw, dźwig"
                 },
                 "man_made/cutline": {
                     "name": "Przecinka leśna",
@@ -4349,13 +4516,13 @@
                     "name": "Biuro",
                     "terms": "Biuro,"
                 },
-                "office/accountant": {
-                    "name": "Księgowy",
-                    "terms": "biuro rachunkowe, księgowość, rachun"
-                },
                 "office/administrative": {
                     "name": "Biuro samorządowe",
                     "terms": "Urząd"
+                },
+                "office/advertising_agency": {
+                    "name": "Agencja reklamowa",
+                    "terms": "reklama, agencja reklamowa"
                 },
                 "office/architect": {
                     "name": "Architekt",
@@ -4398,7 +4565,7 @@
                     "terms": "agencja ubezpieczeniowa"
                 },
                 "office/it": {
-                    "name": "Biuro firmy informatycznej",
+                    "name": "Firma informatyczna",
                     "terms": "firma it, firma informatyczna"
                 },
                 "office/lawyer": {
@@ -4409,13 +4576,21 @@
                     "name": "Notariusz",
                     "terms": "sekretarz,akt,majątek"
                 },
+                "office/moving_company": {
+                    "name": "Biuro firmy przeprowadzkowej",
+                    "terms": "przeprowadzki"
+                },
                 "office/newspaper": {
-                    "name": "Gazeta",
-                    "terms": "dziennik"
+                    "name": "Siedziba wydawcy gazety",
+                    "terms": "gazeta, dziennik, tygodnik"
                 },
                 "office/ngo": {
                     "name": "Biuro organizacji pożytku publicznego",
                     "terms": "stowarzyszenie, fundacja,ngo"
+                },
+                "office/notary": {
+                    "name": "Notariusz",
+                    "terms": "notariusz"
                 },
                 "office/physician": {
                     "name": "Lekarz"
@@ -4424,9 +4599,17 @@
                     "name": "Partia polityczna",
                     "terms": "partia polityczna"
                 },
+                "office/private_investigator": {
+                    "name": "Prywatny detektyw",
+                    "terms": "prywatny detektyw"
+                },
                 "office/research": {
                     "name": "Biuro badawcze",
                     "terms": "instytut badawczy"
+                },
+                "office/tax_advisor": {
+                    "name": "Biuro rachunkowe",
+                    "terms": "biuro rachunkowe, podatki"
                 },
                 "office/telecommunication": {
                     "name": "Biuro firmy telekomunikacyjnej",
@@ -4434,7 +4617,7 @@
                 },
                 "office/therapist": {
                     "name": "Terapeuta",
-                    "terms": "terapeuta"
+                    "terms": "terapeuta, fizjoterapeuta"
                 },
                 "office/travel_agent": {
                     "name": "Biuro podróży"
@@ -4461,6 +4644,10 @@
                     "name": "Wyspa",
                     "terms": "Wyspa"
                 },
+                "place/islet": {
+                    "name": "Wysepka",
+                    "terms": "wysepka, mała wyspa"
+                },
                 "place/isolated_dwelling": {
                     "name": "Pojedyncze zabudowania",
                     "terms": "odosobnione zabudowanie mieszkalne"
@@ -4472,6 +4659,10 @@
                 "place/neighbourhood": {
                     "name": "Sąsiedztwo",
                     "terms": "osiedle,okolica"
+                },
+                "place/plot": {
+                    "name": "Działka",
+                    "terms": "działka, ewidencja gruntów"
                 },
                 "place/quarter": {
                     "name": "Kwartał",
@@ -4493,8 +4684,32 @@
                     "name": "Wieś",
                     "terms": "wieś, wioska"
                 },
+                "playground/basket_spinner": {
+                    "name": "Kosz obrotowy",
+                    "terms": "kosz obrotowy"
+                },
+                "playground/basket_swing": {
+                    "name": "Huśtawka bocianie gniazdo",
+                    "terms": "bocianie gniazdo"
+                },
+                "playground/climbing_frame": {
+                    "name": "Drabinki",
+                    "terms": "drabinki, wspinaczka, konstrukcja do wspinania"
+                },
+                "playground/cushion": {
+                    "name": "Dmuchana trampolina",
+                    "terms": "trampolina, dmuchaniec"
+                },
+                "playground/rocker": {
+                    "name": "Bujak sprężynowy",
+                    "terms": "bujak sprężynowy, sprężynowiec"
+                },
+                "playground/roundabout": {
+                    "name": "Karuzela",
+                    "terms": "karuzela"
+                },
                 "playground/sandpit": {
-                    "name": "Piaskowanica",
+                    "name": "Piaskownica",
                     "terms": "piaskownica"
                 },
                 "playground/seesaw": {
@@ -4505,9 +4720,17 @@
                     "name": "Zjeżdzalnia",
                     "terms": "zjeżdzalnia"
                 },
+                "playground/structure": {
+                    "name": "Zestaw zabawowy",
+                    "terms": "zestaw zabawowy, budowla"
+                },
                 "playground/swing": {
                     "name": "Huśtawka",
                     "terms": "huśtawka"
+                },
+                "playground/zipwire": {
+                    "name": "Zjazd linowy",
+                    "terms": "zjazd linowy"
                 },
                 "point": {
                     "name": "Punkt",
@@ -4668,6 +4891,10 @@
                 "shop": {
                     "name": "Sklep",
                     "terms": "Sklep"
+                },
+                "shop/agrarian": {
+                    "name": "Sklep rolniczy",
+                    "terms": "rolniczy, produkcja rolna, pasze, nasiona, sprzęt rolniczy, pestycydy, części do maszyn rolniczych"
                 },
                 "shop/alcohol": {
                     "name": "Sklep monopolowy",
@@ -5091,6 +5318,10 @@
                     "name": "Sprzedaż biletów",
                     "terms": "kasa biletowa"
                 },
+                "shop/tiles": {
+                    "name": "Sklep z płytkami ceramicznymi",
+                    "terms": "płytki, gres"
+                },
                 "shop/tobacco": {
                     "name": "Sklep z tytoniem",
                     "terms": "Sklep tytoniowy"
@@ -5098,6 +5329,10 @@
                 "shop/toys": {
                     "name": "Sklep z zabawkami",
                     "terms": "zabawki, sklep zabawkarski"
+                },
+                "shop/trade": {
+                    "name": "Skład branżowy",
+                    "terms": "skład drewna, skład budowlany, hurtownia budowlana, skład opału"
                 },
                 "shop/travel_agency": {
                     "name": "Biuro podróży",
@@ -5179,8 +5414,8 @@
                     "terms": "kemping dla samochodów kempingowych"
                 },
                 "tourism/chalet": {
-                    "name": "Drewniana chata",
-                    "terms": "domek kempingowy"
+                    "name": "Domek/domki na wynajem",
+                    "terms": "domek, domki, letnisko"
                 },
                 "tourism/gallery": {
                     "name": "Galeria lub muzeum (sztuka)",
@@ -5277,6 +5512,10 @@
                 "traffic_calming/rumble_strip": {
                     "name": "Linia wibracyjna",
                     "terms": "linia wibracyjna, wibracyjne oznakowanie poziome"
+                },
+                "traffic_calming/table": {
+                    "name": "Próg zwalniający z długą płaską nawierzchnią",
+                    "terms": "długi próg zwalniający"
                 },
                 "type/boundary": {
                     "name": "Granica",
@@ -5456,7 +5695,7 @@
         },
         "imagery": {
             "Bing": {
-                "description": "Zdjęcia satelitarne i lotnicze.",
+                "description": "Zdjęcia satelitarne i lotnicze Bing.",
                 "name": "Bing (satelitarne)"
             },
             "DigitalGlobe-Premium": {
@@ -5466,6 +5705,13 @@
                 "description": "Zdjęcia satelitarne DigitalGlobe Premium.",
                 "name": "DigitalGlobe Premium (satelitarne)"
             },
+            "DigitalGlobe-Premium-vintage": {
+                "attribution": {
+                    "text": "Warunki użytkowania i opinia"
+                },
+                "description": "Granice zdjęć i data ich wykonania. Opisy są widoczne na poziomie powiększenia 14 i wyższym.",
+                "name": "Datowanie zdjęć DigitalGlobe Premium "
+            },
             "DigitalGlobe-Standard": {
                 "attribution": {
                     "text": "Warunki użytkowania i opinia"
@@ -5473,12 +5719,19 @@
                 "description": "Zdjęcia satelitarne DigitalGlobe Standard.",
                 "name": "DigitalGlobe Standard (satelitarne)"
             },
+            "DigitalGlobe-Standard-vintage": {
+                "attribution": {
+                    "text": "Warunki użytkowania i opinia"
+                },
+                "description": "Granice zdjęć i data ich wykonania. Opisy są widoczne na poziomie powiększenia 14 i wyższym.",
+                "name": "Datowanie zdjęć DigitalGlobe Standard"
+            },
             "EsriWorldImagery": {
                 "attribution": {
                     "text": "Warunki użytkowania i opinia"
                 },
-                "description": "Obrazowanie świata Esri.",
-                "name": "Obrazowanie świata Esri"
+                "description": "Zdjęcia satelitarne i lotnicze Esri.",
+                "name": "Esri (satelitarne i lotnicze)"
             },
             "MAPNIK": {
                 "attribution": {
@@ -5491,7 +5744,7 @@
                 "attribution": {
                     "text": "Warunki użytkowania i opinia"
                 },
-                "description": "Zdjęcia satelitarne i lotnicze.",
+                "description": "Zdjęcia satelitarne i lotnicze Mapbox.",
                 "name": "Mapbox Satellite (satelitarne)"
             },
             "OSM_Inspector-Addresses": {
@@ -5535,6 +5788,17 @@
                     "text": "© Geofabrik GmbH, autorzy OpenStreetMap, CC-BY-SA"
                 },
                 "name": "Inspektor OSM: Tagowanie"
+            },
+            "US-TIGER-Roads-2012": {
+                "name": "TIGER Roads 2012"
+            },
+            "US-TIGER-Roads-2014": {
+                "description": "Na poziomie powiększenia 16+ są dane public domain od US Census. Na niższych poziomach powiększenia są tylko zmiany od 2006, ale bez zmian już włączonych do OpenStreetMap",
+                "name": "TIGER Roads 2014"
+            },
+            "US-TIGER-Roads-2017": {
+                "description": "Żółty = Dane public domain od US Census. Czerwony = Brak danych w OpenStreetMap",
+                "name": "TIGER Roads 2017"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
@@ -5591,7 +5855,7 @@
                     "text": "Warunki użytkowania i opinia"
                 },
                 "description": "Pokazuje najważniejsze obiekty pomocne w orientacji.",
-                "name": "Nakładka lokalizująca"
+                "name": "Nakładka identyfikująca"
             },
             "openpt_map": {
                 "attribution": {
@@ -5622,7 +5886,7 @@
                 "attribution": {
                     "text": "Simon Poole, Dane © autorzy OpenStreetMap"
                 },
-                "name": "QA Bez Adesu"
+                "name": "QA Bez Adresu"
             },
             "skobbler": {
                 "attribution": {

@@ -164,7 +164,6 @@
             "localized_translation_language": "选择语言",
             "localized_translation_name": "名称"
         },
-        "zoom_in_edit": "放大编辑",
         "logout": "退出",
         "loading_auth": "连接OpenStreetMap...",
         "status": {
@@ -231,8 +230,7 @@
         "splash": {
             "welcome": "欢迎使用OpenStreetMap编辑器iD",
             "text": "iD编辑器是一个既易用而又功能强大的工具，以助您编辑世界上最好的自由世界地图。这是版本{version}。欲知详情，请浏览{website} 及在{github}上报告程序错误。",
-            "walkthrough": "开始练习",
-            "start": "现在编辑"
+            "walkthrough": "开始练习"
         },
         "source_switch": {
             "live": "运行模式",
@@ -250,10 +248,6 @@
             "untagged_area": "未标记的面",
             "tag_suggests_area": "{tag}这个标签建议使用在面上，但是他不是一个面",
             "deprecated_tags": "已过时标签：{tags}"
-        },
-        "zoom": {
-            "in": "放大",
-            "out": "缩小"
         },
         "cannot_zoom": "在当前模式下无法进一步缩小。",
         "help": {
@@ -1280,9 +1274,6 @@
                 },
                 "tourism/caravan_site": {
                     "name": "房车营地"
-                },
-                "tourism/chalet": {
-                    "name": "木屋"
                 },
                 "tourism/guest_house": {
                     "name": "宾馆"

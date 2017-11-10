@@ -310,7 +310,7 @@
             "localized_translation_language": "Válassz nyelvet",
             "localized_translation_name": "Név"
         },
-        "zoom_in_edit": "Szerkesztéshez nagyíts rá",
+        "zoom_in_edit": "Nagyíts a szerkesztéshez",
         "login": "bejelentkezés",
         "logout": "kijelentkezés",
         "loading_auth": "Csatlakozás az OpenStreetMap kiszolgálóhoz…",
@@ -361,7 +361,9 @@
                 "accuracy": "Pontosság",
                 "unknown": "Ismeretlen",
                 "show_tiles": "Csempék megjelenítése",
-                "hide_tiles": "Csempék elrejtése"
+                "hide_tiles": "Csempék elrejtése",
+                "show_vintage": "Évjárat mutatása",
+                "hide_vintage": "Évjárat elrejtése"
             },
             "history": {
                 "key": "H",
@@ -646,8 +648,8 @@
             "deprecated_tags": "Elavult címkék: {tags}"
         },
         "zoom": {
-            "in": "Közelítés",
-            "out": "Távolítás"
+            "in": "Nagyítás",
+            "out": "Kicsinyítés"
         },
         "cannot_zoom": "Nem lehet jobban távolítani ebben a módban.",
         "full_screen": "Váltás teljes képernyőre",
@@ -1281,6 +1283,9 @@
                 "board_type": {
                     "label": "Típus"
                 },
+                "boules": {
+                    "label": "Típus"
+                },
                 "boundary": {
                     "label": "Típus"
                 },
@@ -1299,6 +1304,9 @@
                 },
                 "bunker_type": {
                     "label": "Típus"
+                },
+                "cables": {
+                    "placeholder": "1, 2, 3..."
                 },
                 "camera/direction": {
                     "label": "Irány (fok, az óramutató járása szerint)",
@@ -1459,6 +1467,9 @@
                 },
                 "description": {
                     "label": "Leírás"
+                },
+                "devices": {
+                    "placeholder": "1, 2, 3..."
                 },
                 "diaper": {
                     "label": "Pelenkázó van"
@@ -1898,6 +1909,9 @@
                 "payment_multi": {
                     "label": "Fizetési típusok"
                 },
+                "phases": {
+                    "placeholder": "1, 2, 3..."
+                },
                 "phone": {
                     "label": "Telefonszám",
                     "placeholder": "+36 1 123 45 67"
@@ -2185,6 +2199,9 @@
                 "studio": {
                     "label": "Típus"
                 },
+                "substance": {
+                    "label": "Szállított anyag"
+                },
                 "substation": {
                     "label": "Típus"
                 },
@@ -2210,6 +2227,9 @@
                 },
                 "surveillance/zone": {
                     "label": "Megfigyelt terület"
+                },
+                "switch": {
+                    "label": "Típus"
                 },
                 "tactile_paving": {
                     "label": "Vakvezető burkolat"
@@ -2262,6 +2282,9 @@
                     },
                     "placeholder": "Szilárd, vegyes, laza…"
                 },
+                "trade": {
+                    "label": "Típus"
+                },
                 "traffic_calming": {
                     "label": "Típus"
                 },
@@ -2279,6 +2302,12 @@
                         "no": "Nincs:  úttalan, kitűnő tájékozódási képességek szükségesek"
                     },
                     "placeholder": "Kiváló, jó, rossz…"
+                },
+                "transformer": {
+                    "label": "Típus",
+                    "options": {
+                        "yes": "Ismeretlen"
+                    }
                 },
                 "trees": {
                     "label": "Fák"
@@ -2341,6 +2370,9 @@
                 },
                 "wikipedia": {
                     "label": "Wikipédia"
+                },
+                "windings": {
+                    "placeholder": "1, 2, 3..."
                 }
             },
             "presets": {
@@ -2664,6 +2696,10 @@
                     "name": "Motorkerékpár-parkoló",
                     "terms": "motoros parkoló, motor parkoló"
                 },
+                "amenity/music_school": {
+                    "name": "Zeneiskola",
+                    "terms": "<translate with synonyms or related terms for 'Music School', separated by commas>"
+                },
                 "amenity/nightclub": {
                     "name": "Diszkó",
                     "terms": "Night Club, Éjszakai bár, Diszkó"
@@ -2787,8 +2823,7 @@
                     "terms": "suli, tanítás, oktatás, nevelés, közoktatás, köznevelés"
                 },
                 "amenity/scrapyard": {
-                    "name": "Szeméttelep",
-                    "terms": "hulladékudvar,roncstelep"
+                    "name": "Szeméttelep"
                 },
                 "amenity/shelter": {
                     "name": "Esőbeálló",
@@ -3252,6 +3287,9 @@
                     "name": "Órás (falióra)",
                     "terms": "Órás"
                 },
+                "craft/confectionery": {
+                    "terms": "<translate with synonyms or related terms for 'Candy Maker', separated by commas>"
+                },
                 "craft/distillery": {
                     "name": "Párlatfőző",
                     "terms": "alkohol,ital,pálinka,szeszfőzde"
@@ -3353,9 +3391,8 @@
                     "name": "Állványépítő",
                     "terms": "ács-állványozó"
                 },
-                "craft/sculpter": {
-                    "name": "Szobrász",
-                    "terms": "Szobrász"
+                "craft/sculptor": {
+                    "terms": "<translate with synonyms or related terms for 'Sculptor', separated by commas>"
                 },
                 "craft/shoemaker": {
                     "name": "Cipész",
@@ -3364,10 +3401,6 @@
                 "craft/stonemason": {
                     "name": "Kőfaragó",
                     "terms": "Kőfaragó műhely"
-                },
-                "craft/sweep": {
-                    "name": "Kéményseprő",
-                    "terms": "Kéményseprő"
                 },
                 "craft/tailor": {
                     "name": "Szabó"
@@ -3637,9 +3670,11 @@
                     "name": "Gyalogút",
                     "terms": "Ösvény"
                 },
-                "highway/pedestrian": {
-                    "name": "Sétálóutca",
-                    "terms": "sétálóutca"
+                "highway/pedestrian_area": {
+                    "terms": "<translate with synonyms or related terms for 'Pedestrian Area', separated by commas>"
+                },
+                "highway/pedestrian_line": {
+                    "terms": "<translate with synonyms or related terms for 'Pedestrian Street', separated by commas>"
                 },
                 "highway/primary": {
                     "name": "Főút",
@@ -3817,6 +3852,10 @@
                     "name": "Vízgyűjtő medence",
                     "terms": "Vízgyűjtőterület, vízgyűjtő, vízválasztó"
                 },
+                "landuse/brownfield": {
+                    "name": "Barnamezős terület",
+                    "terms": "mező, barna, szántó"
+                },
                 "landuse/cemetery": {
                     "name": "Temető",
                     "terms": "Köztemető, sírkert"
@@ -3856,6 +3895,10 @@
                     "name": "Fű",
                     "terms": "gyep"
                 },
+                "landuse/greenfield": {
+                    "name": "Zöldmezős terület",
+                    "terms": "mező, szántó, zöld"
+                },
                 "landuse/harbour": {
                     "name": "Kikötő",
                     "terms": "kikötő, hajó"
@@ -3863,6 +3906,12 @@
                 "landuse/industrial": {
                     "name": "Ipari terület",
                     "terms": "ipar, gyárterület, gyár, ipari park"
+                },
+                "landuse/industrial/scrap_yard": {
+                    "terms": "<translate with synonyms or related terms for 'Scrap Yard', separated by commas>"
+                },
+                "landuse/industrial/slaughterhouse": {
+                    "terms": "<translate with synonyms or related terms for 'Slaughterhouse', separated by commas>"
                 },
                 "landuse/landfill": {
                     "name": "Hulladéklerakó",
@@ -3940,6 +3989,9 @@
                     "name": "Szabadidőpark",
                     "terms": "park, pihenőhely"
                 },
+                "landuse/religious": {
+                    "terms": "<translate with synonyms or related terms for 'Religious Area', separated by commas>"
+                },
                 "landuse/residential": {
                     "name": "Lakóövezet",
                     "terms": "lakótelep, lakóterület"
@@ -3995,6 +4047,39 @@
                 "leisure/fitness_station": {
                     "name": "Fitneszpark",
                     "terms": "fitnesz,sport, edzőhely"
+                },
+                "leisure/fitness_station/balance_beam": {
+                    "terms": "<translate with synonyms or related terms for 'Exercise Balance Beam', separated by commas>"
+                },
+                "leisure/fitness_station/box": {
+                    "terms": "<translate with synonyms or related terms for 'Exercise Box', separated by commas>"
+                },
+                "leisure/fitness_station/horizontal_bar": {
+                    "terms": "<translate with synonyms or related terms for 'Exercise Horizontal Bar', separated by commas>"
+                },
+                "leisure/fitness_station/horizontal_ladder": {
+                    "terms": "<translate with synonyms or related terms for 'Exercise Monkey Bars', separated by commas>"
+                },
+                "leisure/fitness_station/hyperextension": {
+                    "terms": "<translate with synonyms or related terms for 'Hyperextension Station', separated by commas>"
+                },
+                "leisure/fitness_station/parallel_bars": {
+                    "terms": "<translate with synonyms or related terms for 'Parallel Bars', separated by commas>"
+                },
+                "leisure/fitness_station/push-up": {
+                    "terms": "<translate with synonyms or related terms for 'Push-Up Station', separated by commas>"
+                },
+                "leisure/fitness_station/rings": {
+                    "terms": "<translate with synonyms or related terms for 'Exercise Rings', separated by commas>"
+                },
+                "leisure/fitness_station/sign": {
+                    "terms": "<translate with synonyms or related terms for 'Exercise Instruction Sign', separated by commas>"
+                },
+                "leisure/fitness_station/sit-up": {
+                    "terms": "<translate with synonyms or related terms for 'Sit-Up Station', separated by commas>"
+                },
+                "leisure/fitness_station/stairs": {
+                    "terms": "<translate with synonyms or related terms for 'Exercise Stairs', separated by commas>"
                 },
                 "leisure/garden": {
                     "name": "Kert",
@@ -4056,6 +4141,9 @@
                     "name": "Strandröplabda pálya",
                     "terms": "strand,röplabda,röpi,pálya"
                 },
+                "leisure/pitch/boules": {
+                    "terms": "<translate with synonyms or related terms for 'Boules/Bocce Court', separated by commas>"
+                },
                 "leisure/pitch/bowls": {
                     "name": "Gyeptekepálya",
                     "terms": "bowling pálya"
@@ -4107,6 +4195,10 @@
                 "leisure/running_track": {
                     "name": "Futópálya",
                     "terms": "futókör"
+                },
+                "leisure/sauna": {
+                    "name": "Szauna",
+                    "terms": "gőz, meleg, izzad, szauna"
                 },
                 "leisure/slipway": {
                     "name": "Sólya",
@@ -4392,16 +4484,26 @@
                     "terms": "Iroda"
                 },
                 "office/accountant": {
-                    "name": "Könyvelő",
-                    "terms": "könyvvizsgálat"
+                    "terms": "<translate with synonyms or related terms for 'Accountant Office', separated by commas>"
                 },
                 "office/administrative": {
                     "name": "Közigazgatási hivatal",
                     "terms": "hivatal, önkormányzat, hatóság"
                 },
+                "office/adoption_agency": {
+                    "terms": "<translate with synonyms or related terms for 'Adoption Agency', separated by commas>"
+                },
+                "office/advertising_agency": {
+                    "terms": "<translate with synonyms or related terms for 'Advertising Agency', separated by commas>"
+                },
                 "office/architect": {
-                    "name": "Építész",
-                    "terms": "architektúra"
+                    "terms": "<translate with synonyms or related terms for 'Architect Office', separated by commas>"
+                },
+                "office/association": {
+                    "terms": "<translate with synonyms or related terms for 'Nonprofit Organization Office', separated by commas>"
+                },
+                "office/charity": {
+                    "terms": "<translate with synonyms or related terms for 'Charity Office', separated by commas>"
                 },
                 "office/company": {
                     "name": "Vállalati iroda",
@@ -4419,6 +4521,9 @@
                     "name": "Munkaügyi központ",
                     "terms": "munkaügyi hivatal"
                 },
+                "office/energy_supplier": {
+                    "terms": "<translate with synonyms or related terms for 'Energy Supplier Office', separated by commas>"
+                },
                 "office/estate_agent": {
                     "name": "Ingatlaniroda",
                     "terms": "ingatlanközvetítő"
@@ -4426,6 +4531,12 @@
                 "office/financial": {
                     "name": "Pénzügyi vállalat irodája",
                     "terms": "pénzügy, hitelezés, kölcsön, befektetés, biztosítás"
+                },
+                "office/forestry": {
+                    "terms": "<translate with synonyms or related terms for 'Forestry Office', separated by commas>"
+                },
+                "office/foundation": {
+                    "terms": "<translate with synonyms or related terms for 'Foundation Office', separated by commas>"
                 },
                 "office/government": {
                     "name": "Kormányzati hivatal",
@@ -4435,13 +4546,18 @@
                     "name": "Anyakönyvi hivatal",
                     "terms": "anyakönyvi hivatal, házasságkötési hivatal"
                 },
+                "office/government/tax": {
+                    "terms": "<translate with synonyms or related terms for 'Tax and Revenue Office', separated by commas>"
+                },
+                "office/guide": {
+                    "terms": "<translate with synonyms or related terms for 'Tour Guide Office', separated by commas>"
+                },
                 "office/insurance": {
                     "name": "Biztosító",
                     "terms": "Biztosító"
                 },
                 "office/it": {
-                    "name": "Informatikai cég irodája",
-                    "terms": "számítástechnika, IT, információ-technológia"
+                    "terms": "<translate with synonyms or related terms for 'Information Technology Office', separated by commas>"
                 },
                 "office/lawyer": {
                     "name": "Ügyvéd",
@@ -4451,13 +4567,18 @@
                     "name": "Közjegyzői iroda",
                     "terms": "közjegyző"
                 },
+                "office/moving_company": {
+                    "terms": "<translate with synonyms or related terms for 'Moving Company Office', separated by commas>"
+                },
                 "office/newspaper": {
-                    "name": "Újságszekesztőség",
-                    "terms": "Újság, szerkesztőség, kiadó, napilap, hetilap, folyóirat"
+                    "terms": "<translate with synonyms or related terms for 'Newspaper Office', separated by commas>"
                 },
                 "office/ngo": {
                     "name": "Civil szervezet",
                     "terms": "Nonprofit szervezet, NGO, egyesület"
+                },
+                "office/notary": {
+                    "terms": "<translate with synonyms or related terms for 'Notary Office', separated by commas>"
                 },
                 "office/physician": {
                     "name": "Orvosi rendelő"
@@ -4466,20 +4587,34 @@
                     "name": "Pártiroda",
                     "terms": "pártszékház, politika, párt"
                 },
+                "office/private_investigator": {
+                    "terms": "<translate with synonyms or related terms for 'Private Investigator Office', separated by commas>"
+                },
+                "office/quango": {
+                    "terms": "<translate with synonyms or related terms for 'Quasi-NGO Office', separated by commas>"
+                },
                 "office/research": {
                     "name": "Kutatóintézet",
                     "terms": "kutatás, fejlesztés, alapkutatás"
+                },
+                "office/surveyor": {
+                    "terms": "<translate with synonyms or related terms for 'Surveyor Office', separated by commas>"
+                },
+                "office/tax_advisor": {
+                    "terms": "<translate with synonyms or related terms for 'Tax Advisor Office', separated by commas>"
                 },
                 "office/telecommunication": {
                     "name": "Távközlési cég irodája",
                     "terms": "mobilszolgáltató, telekommunikáció, telefon, internet"
                 },
                 "office/therapist": {
-                    "name": "Fizioterápiás rendelő",
-                    "terms": "gyógyász, gyógyító, fizioterápia"
+                    "terms": "<translate with synonyms or related terms for 'Therapist Office', separated by commas>"
                 },
                 "office/travel_agent": {
                     "name": "Utazási iroda"
+                },
+                "office/water_utility": {
+                    "terms": "<translate with synonyms or related terms for 'Water Utility Office', separated by commas>"
                 },
                 "piste": {
                     "name": "Sípálya",
@@ -4503,6 +4638,10 @@
                     "name": "Sziget",
                     "terms": "sziget"
                 },
+                "place/islet": {
+                    "name": "Szigetecske",
+                    "terms": "<translate with synonyms or related terms for 'Islet', separated by commas>"
+                },
                 "place/isolated_dwelling": {
                     "name": "Elszigetelt lakás",
                     "terms": "Elszigetelt otthon"
@@ -4514,6 +4653,10 @@
                 "place/neighbourhood": {
                     "name": "Környék",
                     "terms": "környék,negyed"
+                },
+                "place/plot": {
+                    "name": "Parcella",
+                    "terms": "<translate with synonyms or related terms for 'Plot', separated by commas>"
                 },
                 "place/quarter": {
                     "name": "Sub-Borough / Quarter",
@@ -4536,8 +4679,7 @@
                     "terms": "község"
                 },
                 "playground/balance_beam": {
-                    "name": "Egyensúlyozó gerenda",
-                    "terms": "gerenda,egyensúly,ügyesség,sport"
+                    "terms": "<translate with synonyms or related terms for 'Play Balance Beam', separated by commas>"
                 },
                 "playground/basket_spinner": {
                     "name": "Kosár forgó",
@@ -4556,12 +4698,10 @@
                     "terms": "párna,felfúj,ugrál"
                 },
                 "playground/horizontal_bar": {
-                    "name": "Nyújtó",
-                    "terms": "nyújtó,lóg,játék"
+                    "terms": "<translate with synonyms or related terms for 'Play Horizontal Bar', separated by commas>"
                 },
                 "playground/rocker": {
-                    "name": "Rugós hinta",
-                    "terms": "hinta,rugó,játék"
+                    "terms": "<translate with synonyms or related terms for 'Spring Rider', separated by commas>"
                 },
                 "playground/roundabout": {
                     "name": "Körforgó",
@@ -4632,6 +4772,10 @@
                 "power/substation": {
                     "name": "Alállomás",
                     "terms": "Elektromos alállomás, transzformátorállomás, trafóállomás, trafóház"
+                },
+                "power/switch": {
+                    "name": "Hálózati kapcsoló",
+                    "terms": "<translate with synonyms or related terms for 'Power Switch', separated by commas>"
                 },
                 "power/tower": {
                     "name": "Távvezetékoszlop",
@@ -5173,6 +5317,10 @@
                     "name": "Jegyárus",
                     "terms": "koncertjegy,színházjegy,interticket,hajójegy"
                 },
+                "shop/tiles": {
+                    "name": "Csempebolt",
+                    "terms": "<translate with synonyms or related terms for 'Tile Shop', separated by commas>"
+                },
                 "shop/tobacco": {
                     "name": "Dohánybolt",
                     "terms": "Nemzeti dohánybolt, dohány, cigaretta, szivar"
@@ -5180,6 +5328,10 @@
                 "shop/toys": {
                     "name": "Játékbolt",
                     "terms": "barbie,lego,hasbro,mattel,babák,fisher price,logikai,barkács,bébi,gyermek,kreatív"
+                },
+                "shop/trade": {
+                    "name": "Kereskedelmi üzlet",
+                    "terms": "<translate with synonyms or related terms for 'Trade Shop', separated by commas>"
                 },
                 "shop/travel_agency": {
                     "name": "Utazási iroda",
@@ -5262,7 +5414,7 @@
                 },
                 "tourism/chalet": {
                     "name": "Nyaralóház",
-                    "terms": "víkendház, kulcsosház"
+                    "terms": "<translate with synonyms or related terms for 'Holiday Cottage', separated by commas>"
                 },
                 "tourism/gallery": {
                     "name": "Művészeti galéria",
@@ -5319,6 +5471,9 @@
                 "tourism/viewpoint": {
                     "name": "Kilátóhely",
                     "terms": "Kilátópont"
+                },
+                "tourism/wilderness_hut": {
+                    "terms": "<translate with synonyms or related terms for 'Wilderness Hut', separated by commas>"
                 },
                 "tourism/zoo": {
                     "name": "Állatkert",
@@ -5552,12 +5707,22 @@
                 "description": "Premium DigitalGlobe műholdképek",
                 "name": "DigitalGlobe Premium felvételek"
             },
+            "DigitalGlobe-Premium-vintage": {
+                "attribution": {
+                    "text": "Feltételek és visszajelzés"
+                }
+            },
             "DigitalGlobe-Standard": {
                 "attribution": {
                     "text": "Feltételek és visszajelzés"
                 },
                 "description": "Standard DigitalGlobe műholdképek",
                 "name": "DigitalGlobe Standard felvételek"
+            },
+            "DigitalGlobe-Standard-vintage": {
+                "attribution": {
+                    "text": "Feltételek és visszajelzés"
+                }
             },
             "EsriWorldImagery": {
                 "attribution": {
@@ -5621,6 +5786,15 @@
                     "text": "© Geofabrik GmbH, OpenStreetMap-közreműködők, CC-BY-SA"
                 },
                 "name": "OSM Inspector: címkézés ellenőrzése"
+            },
+            "US-TIGER-Roads-2012": {
+                "name": "TIGER Roads 2012"
+            },
+            "US-TIGER-Roads-2014": {
+                "name": "TIGER Roads 2014"
+            },
+            "US-TIGER-Roads-2017": {
+                "name": "TIGER Roads 2017"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {

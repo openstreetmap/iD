@@ -330,9 +330,11 @@
             "title": "Carica su OpenStreetMap",
             "upload_explanation": "Le modifiche che carichi saranno visibili su tutte le mappe che usano i dati di OpenStreetMap.",
             "upload_explanation_with_user": "Le modifiche che carichi come {user} saranno visibili su tutte le mappe che usano i dati di OpenStreetMap.",
+            "request_review": "Vorrei che qualcuno controllasse le mie modifiche.",
             "save": "Carica",
             "cancel": "Annulla",
             "changes": "{count} Cambiamenti",
+            "download_changes": "Scarica file in formato osmChange",
             "warnings": "Avvertimenti",
             "modified": "Modificati",
             "deleted": "Cancellati",
@@ -345,6 +347,37 @@
         "contributors": {
             "list": "Modifiche di {users}",
             "truncated_list": "Modifiche di {users} e {count} altri"
+        },
+        "info_panels": {
+            "background": {
+                "title": "Sfondo",
+                "description": "Descrizione",
+                "resolution": "Risoluzione",
+                "accuracy": "Accuratezza",
+                "unknown": "Sconosciuto"
+            },
+            "history": {
+                "selected": "{n} selezionato/i",
+                "version": "Versione",
+                "last_edit": "Ultima modifica",
+                "edited_by": "Modificato da",
+                "changeset": "Gruppo di modifiche",
+                "unknown": "Sconosciuto",
+                "link_text": "Cronologia su openstreetmap.org"
+            },
+            "measurement": {
+                "title": "Misurazione",
+                "selected": "{n} selezionato/i",
+                "geometry": "Geometria",
+                "closed": "chiuso",
+                "center": "Centro",
+                "perimeter": "Perimetro",
+                "length": "Lunghezza",
+                "area": "Area",
+                "centroid": "Centroide",
+                "metric": "Metrico",
+                "imperial": "Imperiale"
+            }
         },
         "geometry": {
             "point": "punto",
@@ -427,9 +460,16 @@
             "title": "Dati mappa",
             "description": "Dati della mappa",
             "data_layers": "Livelli di dati",
+            "layers": {
+                "osm": {
+                    "tooltip": "Dati delle mappe da OpenStreetMap",
+                    "title": "Dati OpenStreetMap"
+                }
+            },
             "fill_area": "Riempimento aree",
             "map_features": "Elementi della mappa",
-            "autohidden": "Questi elementi sono stati automaticamente nascosti perché sarebbero stati troppi da visualizzare. Per modificarli è necessario ingrandire."
+            "autohidden": "Questi elementi sono stati automaticamente nascosti perché sarebbero stati troppi da visualizzare. Per modificarli è necessario ingrandire.",
+            "osmhidden": "Questi elementi sono stati nascosti automaticamente perché il livello OpenStreetMap è nascosto."
         },
         "feature": {
             "points": {
@@ -548,8 +588,7 @@
         "splash": {
             "welcome": "Benvenuti nell'editor OpenStreetMap iD",
             "text": "iD è un intuitivo ma potente strumento per contribuire alla migliore mappa gratuita del mondo. Questa è la versione {version}. Per ulteriori informazioni vai su {website} o segnala gli errori su {github}",
-            "walkthrough": "Inizia il Tutorial",
-            "start": "Modifica adesso"
+            "walkthrough": "Inizia il Tutorial"
         },
         "source_switch": {
             "live": "live",
@@ -580,10 +619,6 @@
             "many_deletions": "Stai per cancellare {n} elementi. Sei sicuro di volerlo fare? Questo li cancellerà dalla mappa che chiunque altro vede su openstreetmap.org.",
             "tag_suggests_area": "Il tag {tag} fa pensare che la linea sia un'area, ma non rappresenta un'area",
             "deprecated_tags": "Tag deprecati: {tags}"
-        },
-        "zoom": {
-            "in": "Ingrandisci",
-            "out": "Riduci"
         },
         "cannot_zoom": "Impossibile fare zooCannot zoom out further in current mode.",
         "full_screen": "Passa a schermo intero",
@@ -959,6 +994,12 @@
                     "undo": "Annulla l'ultima operazione",
                     "redo": "Ripeti l'ultima operazione",
                     "save": "Salva le modifiche"
+                }
+            },
+            "tools": {
+                "title": "Strumenti",
+                "info": {
+                    "title": "Informazioni"
                 }
             }
         },
@@ -3042,10 +3083,6 @@
                     "name": "Impalcature",
                     "terms": "Costruttore di impalcature"
                 },
-                "craft/sculpter": {
-                    "name": "Scultore",
-                    "terms": "Scultore"
-                },
                 "craft/shoemaker": {
                     "name": "Calzolaio",
                     "terms": "scarpe,scarpino,calzature"
@@ -3053,10 +3090,6 @@
                 "craft/stonemason": {
                     "name": "Tagliapietre",
                     "terms": "muratura"
-                },
-                "craft/sweep": {
-                    "name": "Spazzacamino",
-                    "terms": "spazzacamino,camino,comignolo"
                 },
                 "craft/tailor": {
                     "name": "Sarto"
@@ -3249,10 +3282,6 @@
                 "highway/path": {
                     "name": "Sentiero",
                     "terms": "Sentiero"
-                },
-                "highway/pedestrian": {
-                    "name": "Area Pedonale",
-                    "terms": "Pedonale"
                 },
                 "highway/primary": {
                     "name": "Primaria",
@@ -3976,17 +4005,9 @@
                     "name": "Uffici",
                     "terms": "Ufficio"
                 },
-                "office/accountant": {
-                    "name": "Contabile",
-                    "terms": "Commercialista, amministrativo, ragioniere"
-                },
                 "office/administrative": {
                     "name": "Autorità locale",
                     "terms": "Ufficio amministrativo,amministrazione,autorità locale,supervisione,comune"
-                },
-                "office/architect": {
-                    "name": "Architetto",
-                    "terms": "architetto,studio,design"
                 },
                 "office/company": {
                     "name": "Ufficio aziendale",
@@ -4024,10 +4045,6 @@
                     "name": "Assicurazione",
                     "terms": "assicurativo,sinistri,polizza assicurativa"
                 },
-                "office/it": {
-                    "name": "Ufficio informatico",
-                    "terms": "internet,web,app,applicazioni,siti web,siti internet,rete internet,computer,informatica,programmazione"
-                },
                 "office/lawyer": {
                     "name": "Studio legale",
                     "terms": "ufficio legale,legale,avvocato,avvocatura,magistrato,difensore,azzeccagarbugli"
@@ -4035,10 +4052,6 @@
                 "office/lawyer/notary": {
                     "name": "Ufficio notarile",
                     "terms": "firma,notaio,stato,burocrazia"
-                },
-                "office/newspaper": {
-                    "name": "Giornale",
-                    "terms": "testata,quotidiano,redazione"
                 },
                 "office/ngo": {
                     "name": "Organizzazione non governativa",
@@ -4058,10 +4071,6 @@
                 "office/telecommunication": {
                     "name": "Ufficio di telecomunicazioni",
                     "terms": "telecomunicazioni,telefonia"
-                },
-                "office/therapist": {
-                    "name": "Terapista",
-                    "terms": "fisioterapista,terapeuta"
                 },
                 "office/travel_agent": {
                     "name": "Agenzia di viaggi"
@@ -4756,10 +4765,6 @@
                 "tourism/caravan_site": {
                     "name": "Sosta per camper",
                     "terms": "Parco camper"
-                },
-                "tourism/chalet": {
-                    "name": "Chalet",
-                    "terms": " Casetta (chalet) "
                 },
                 "tourism/gallery": {
                     "name": "Galleria d'arte",

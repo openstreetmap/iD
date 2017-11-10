@@ -310,7 +310,7 @@
             "localized_translation_language": "選擇語言",
             "localized_translation_name": "名稱"
         },
-        "zoom_in_edit": "放大以開始編輯",
+        "zoom_in_edit": "拉近以編輯",
         "login": "登入",
         "logout": "登出",
         "loading_auth": "正在連接 OpenStreetMap...",
@@ -361,7 +361,9 @@
                 "accuracy": "準確度",
                 "unknown": "未知",
                 "show_tiles": "顯示圖磚",
-                "hide_tiles": "隱藏圖磚"
+                "hide_tiles": "隱藏圖磚",
+                "show_vintage": "顯示年份",
+                "hide_vintage": "隱藏年份"
             },
             "history": {
                 "key": "H",
@@ -613,7 +615,7 @@
             "welcome": "歡迎使用iD OpenStreetMap編輯器",
             "text": "iD編輯器是一個既易用而又功能強大的工具，以助您編輯世界上最好的自由世界地圖。這是版本{version}。欲知詳情，請瀏覽 {website} 及於{github}報告臭蟲。",
             "walkthrough": "開始新手教學",
-            "start": "現在就開始編輯"
+            "start": "現在就編輯"
         },
         "source_switch": {
             "live": "實況模式",
@@ -646,8 +648,8 @@
             "deprecated_tags": "已棄用的標籤︰{tags}"
         },
         "zoom": {
-            "in": "放大",
-            "out": "縮小"
+            "in": "拉近",
+            "out": "拉遠"
         },
         "cannot_zoom": "在此模式下不能再縮小。",
         "full_screen": "啟動全螢幕",
@@ -658,15 +660,22 @@
             "browse": "瀏覽檔案"
         },
         "mapillary_images": {
-            "tooltip": "從 Mapillary 來的街道照片",
-            "title": "照片重疊 (Mapillary)"
+            "tooltip": "從 Mapillary 來的街道級照片",
+            "title": "照片覆蓋層 (Mapillary)"
         },
         "mapillary_signs": {
             "tooltip": "從 Mapillary 而來的交通號誌（必須啟用照片重疊）",
-            "title": "紅綠燈重疊 (Mapillary)"
+            "title": "紅綠燈覆蓋層 (Mapillary)"
         },
         "mapillary": {
-            "view_on_mapillary": "在 Mapillary 看這張照片"
+            "view_on_mapillary": "在 Mapillary 檢視這張照片"
+        },
+        "openstreetcam_images": {
+            "tooltip": "從 OpenStreetCam 而來的街道級照片",
+            "title": "照片覆蓋層 (OpenStreetCam)"
+        },
+        "openstreetcam": {
+            "view_on_openstreetcam": "在 OpenStreetCam 檢視這張圖片"
         },
         "help": {
             "title": "說明文件",
@@ -1217,6 +1226,9 @@
                 "aeroway": {
                     "label": "種類"
                 },
+                "agrarian": {
+                    "label": "產品"
+                },
                 "amenity": {
                     "label": "種類"
                 },
@@ -1285,6 +1297,9 @@
                 "board_type": {
                     "label": "種類"
                 },
+                "boules": {
+                    "label": "類型"
+                },
                 "boundary": {
                     "label": "種類"
                 },
@@ -1303,6 +1318,10 @@
                 },
                 "bunker_type": {
                     "label": "類型"
+                },
+                "cables": {
+                    "label": "電纜",
+                    "placeholder": "1, 2, 3..."
                 },
                 "camera/direction": {
                     "label": "方向（順時針）",
@@ -1469,6 +1488,10 @@
                 "description": {
                     "label": "描述"
                 },
+                "devices": {
+                    "label": "裝置",
+                    "placeholder": "1, 2, 3..."
+                },
                 "diaper": {
                     "label": "有尿布台"
                 },
@@ -1543,12 +1566,18 @@
                         "wall": "牆"
                     }
                 },
+                "fitness_station": {
+                    "label": "設備類型"
+                },
                 "fixme": {
                     "label": "修復我"
                 },
                 "ford": {
                     "label": "類型",
                     "placeholder": "預設"
+                },
+                "frequency": {
+                    "label": "運作頻率"
                 },
                 "fuel": {
                     "label": "燃料"
@@ -1908,6 +1937,10 @@
                 "payment_multi": {
                     "label": "付款種類"
                 },
+                "phases": {
+                    "label": "相位數",
+                    "placeholder": "1, 2, 3..."
+                },
                 "phone": {
                     "label": "電話",
                     "placeholder": "+31 42 123 4567"
@@ -1986,6 +2019,9 @@
                 },
                 "railway": {
                     "label": "種類"
+                },
+                "rating": {
+                    "label": "電力頻率"
                 },
                 "recycling_accepts": {
                     "label": "接受"
@@ -2195,6 +2231,9 @@
                 "studio": {
                     "label": "種類"
                 },
+                "substance": {
+                    "label": "材質"
+                },
                 "substation": {
                     "label": "種類"
                 },
@@ -2220,6 +2259,15 @@
                 },
                 "surveillance/zone": {
                     "label": "監視區域"
+                },
+                "switch": {
+                    "label": "類型",
+                    "options": {
+                        "circuit_breaker": "斷路器",
+                        "disconnector": "分段開關",
+                        "earthing": "接地開關",
+                        "mechanical": "機械開關"
+                    }
                 },
                 "tactile_paving": {
                     "label": "人行道視障引導設施"
@@ -2293,6 +2341,19 @@
                     },
                     "placeholder": "良好、尚可、稍差..."
                 },
+                "transformer": {
+                    "label": "類型",
+                    "options": {
+                        "auto": "自動變壓",
+                        "auxiliary": "輔助",
+                        "converter": "變流器",
+                        "distribution": "分配",
+                        "generator": "發電機",
+                        "phase_angle_regulator": "相角調節器",
+                        "traction": "牽引",
+                        "yes": "未知"
+                    }
+                },
                 "trees": {
                     "label": "樹"
                 },
@@ -2327,6 +2388,18 @@
                         "stratovolcano": "複式火山"
                     }
                 },
+                "voltage": {
+                    "label": "伏特"
+                },
+                "voltage/primary": {
+                    "label": "主要電壓"
+                },
+                "voltage/secondary": {
+                    "label": "次要電壓"
+                },
+                "voltage/tertiary": {
+                    "label": "三次電壓"
+                },
                 "wall": {
                     "label": "種類"
                 },
@@ -2354,6 +2427,22 @@
                 },
                 "wikipedia": {
                     "label": "維基百科"
+                },
+                "windings": {
+                    "label": "線圈",
+                    "placeholder": "1, 2, 3..."
+                },
+                "windings/configuration": {
+                    "label": "繞組設定",
+                    "options": {
+                        "delta": "Delta",
+                        "leblanc": "勒布朗",
+                        "open": "開放",
+                        "open-delta": "Open Delta",
+                        "scott": "Scott",
+                        "star": "Star / Wye",
+                        "zigzag": "Zig Zag"
+                    }
                 }
             },
             "presets": {
@@ -2677,6 +2766,10 @@
                     "name": "機車停車場",
                     "terms": "機車停車場,速克達停車場,摩托車停車場"
                 },
+                "amenity/music_school": {
+                    "name": "音樂學校",
+                    "terms": "<translate with synonyms or related terms for 'Music School', separated by commas>"
+                },
                 "amenity/nightclub": {
                     "name": "夜總會",
                     "terms": "夜店"
@@ -2800,8 +2893,7 @@
                     "terms": "學校,中學,小學,國中,國小,高中,學校用地,學校範圍,School Grounds,School"
                 },
                 "amenity/scrapyard": {
-                    "name": "汽車廢料場",
-                    "terms": "汽車廢料場,廢料場,回收場"
+                    "name": "汽車廢料場"
                 },
                 "amenity/shelter": {
                     "name": "涼亭",
@@ -3370,9 +3462,9 @@
                     "name": "棚架工程",
                     "terms": "棚架工程"
                 },
-                "craft/sculpter": {
-                    "name": "雕塑工程",
-                    "terms": "雕塑工程"
+                "craft/sculptor": {
+                    "name": "雕塑家",
+                    "terms": "<translate with synonyms or related terms for 'Sculptor', separated by commas>"
                 },
                 "craft/shoemaker": {
                     "name": "鞋匠",
@@ -3381,10 +3473,6 @@
                 "craft/stonemason": {
                     "name": "切石廠",
                     "terms": "切石廠"
-                },
-                "craft/sweep": {
-                    "name": "煙囪清掃工",
-                    "terms": "煙囪清掃工"
                 },
                 "craft/tailor": {
                     "name": "裁縫"
@@ -3654,9 +3742,13 @@
                     "name": "路徑",
                     "terms": "路徑"
                 },
-                "highway/pedestrian": {
+                "highway/pedestrian_area": {
                     "name": "徒步區",
-                    "terms": "行人徒步區"
+                    "terms": "<translate with synonyms or related terms for 'Pedestrian Area', separated by commas>"
+                },
+                "highway/pedestrian_line": {
+                    "name": "人行徒步街道",
+                    "terms": "<translate with synonyms or related terms for 'Pedestrian Street', separated by commas>"
                 },
                 "highway/primary": {
                     "name": "主要道路",
@@ -3834,6 +3926,10 @@
                     "name": "水池",
                     "terms": "水池"
                 },
+                "landuse/brownfield": {
+                    "name": "棕色地帶",
+                    "terms": "棕色地帶"
+                },
                 "landuse/cemetery": {
                     "name": "墓園",
                     "terms": "墓園"
@@ -3873,6 +3969,10 @@
                     "name": "草地",
                     "terms": "草地"
                 },
+                "landuse/greenfield": {
+                    "name": "未開發地帶",
+                    "terms": "未開發地帶,未開發地區"
+                },
                 "landuse/harbour": {
                     "name": "港灣",
                     "terms": "港灣,海港"
@@ -3880,6 +3980,14 @@
                 "landuse/industrial": {
                     "name": "工業區",
                     "terms": "工業區"
+                },
+                "landuse/industrial/scrap_yard": {
+                    "name": "廢料場",
+                    "terms": "<translate with synonyms or related terms for 'Scrap Yard', separated by commas>"
+                },
+                "landuse/industrial/slaughterhouse": {
+                    "name": "屠宰場",
+                    "terms": "<translate with synonyms or related terms for 'Slaughterhouse', separated by commas>"
                 },
                 "landuse/landfill": {
                     "name": "埯埋場",
@@ -3957,6 +4065,10 @@
                     "name": "遊憩區",
                     "terms": "休憩區,遊樂場,遊樂園"
                 },
+                "landuse/religious": {
+                    "name": "宗教設施用地",
+                    "terms": "<translate with synonyms or related terms for 'Religious Area', separated by commas>"
+                },
                 "landuse/residential": {
                     "name": "住宅區",
                     "terms": "住宅用地"
@@ -4012,6 +4124,50 @@
                 "leisure/fitness_station": {
                     "name": "戶外健身站",
                     "terms": "戶外健身站,健身站"
+                },
+                "leisure/fitness_station/balance_beam": {
+                    "name": "運動平衡梁",
+                    "terms": "<translate with synonyms or related terms for 'Exercise Balance Beam', separated by commas>"
+                },
+                "leisure/fitness_station/box": {
+                    "name": "運動箱",
+                    "terms": "<translate with synonyms or related terms for 'Exercise Box', separated by commas>"
+                },
+                "leisure/fitness_station/horizontal_bar": {
+                    "name": "運動平衡單槓",
+                    "terms": "<translate with synonyms or related terms for 'Exercise Horizontal Bar', separated by commas>"
+                },
+                "leisure/fitness_station/horizontal_ladder": {
+                    "name": "橫爬架",
+                    "terms": "<translate with synonyms or related terms for 'Exercise Monkey Bars', separated by commas>"
+                },
+                "leisure/fitness_station/hyperextension": {
+                    "name": "羅馬凳站",
+                    "terms": "<translate with synonyms or related terms for 'Hyperextension Station', separated by commas>"
+                },
+                "leisure/fitness_station/parallel_bars": {
+                    "name": "雙槓",
+                    "terms": "<translate with synonyms or related terms for 'Parallel Bars', separated by commas>"
+                },
+                "leisure/fitness_station/push-up": {
+                    "name": "伏地挺身站",
+                    "terms": "<translate with synonyms or related terms for 'Push-Up Station', separated by commas>"
+                },
+                "leisure/fitness_station/rings": {
+                    "name": "運動吊環",
+                    "terms": "<translate with synonyms or related terms for 'Exercise Rings', separated by commas>"
+                },
+                "leisure/fitness_station/sign": {
+                    "name": "運動指示標誌",
+                    "terms": "<translate with synonyms or related terms for 'Exercise Instruction Sign', separated by commas>"
+                },
+                "leisure/fitness_station/sit-up": {
+                    "name": "仰臥起坐台",
+                    "terms": "<translate with synonyms or related terms for 'Sit-Up Station', separated by commas>"
+                },
+                "leisure/fitness_station/stairs": {
+                    "name": "運動椅",
+                    "terms": "<translate with synonyms or related terms for 'Exercise Stairs', separated by commas>"
                 },
                 "leisure/garden": {
                     "name": "花園",
@@ -4073,6 +4229,10 @@
                     "name": "沙灘排球場",
                     "terms": "沙灘排球場,沙灘排球"
                 },
+                "leisure/pitch/boules": {
+                    "name": "法式滾球場",
+                    "terms": "法式滾球場"
+                },
                 "leisure/pitch/bowls": {
                     "name": "保齡球綠地",
                     "terms": "保齡球綠地"
@@ -4124,6 +4284,10 @@
                 "leisure/running_track": {
                     "name": "操場(跑步)",
                     "terms": "操場"
+                },
+                "leisure/sauna": {
+                    "name": "桑拿",
+                    "terms": "桑拿,芬蘭浴,三溫暖"
                 },
                 "leisure/slipway": {
                     "name": "船架滑道",
@@ -4410,15 +4574,31 @@
                 },
                 "office/accountant": {
                     "name": "會計師事務所",
-                    "terms": "會計師樓,會計師辦公室"
+                    "terms": "<translate with synonyms or related terms for 'Accountant Office', separated by commas>"
                 },
                 "office/administrative": {
                     "name": "行政辦公室",
                     "terms": "行政辦公室"
                 },
+                "office/adoption_agency": {
+                    "name": "領養代理",
+                    "terms": "<translate with synonyms or related terms for 'Adoption Agency', separated by commas>"
+                },
+                "office/advertising_agency": {
+                    "name": "廣告代理公司",
+                    "terms": "<translate with synonyms or related terms for 'Advertising Agency', separated by commas>"
+                },
                 "office/architect": {
                     "name": "建築師事務所",
-                    "terms": "建築師樓,建築師辦公室"
+                    "terms": "<translate with synonyms or related terms for 'Architect Office', separated by commas>"
+                },
+                "office/association": {
+                    "name": "非營利組織辦公室",
+                    "terms": "<translate with synonyms or related terms for 'Nonprofit Organization Office', separated by commas>"
+                },
+                "office/charity": {
+                    "name": "慈善事業辦公室",
+                    "terms": "<translate with synonyms or related terms for 'Charity Office', separated by commas>"
                 },
                 "office/company": {
                     "name": "公司辦事處",
@@ -4436,6 +4616,10 @@
                     "name": "就業服務站",
                     "terms": "職業介紹所"
                 },
+                "office/energy_supplier": {
+                    "name": "電力供應辦公室",
+                    "terms": "<translate with synonyms or related terms for 'Energy Supplier Office', separated by commas>"
+                },
                 "office/estate_agent": {
                     "name": "房地產仲介",
                     "terms": "地產代理,房仲,不動產仲介"
@@ -4443,6 +4627,14 @@
                 "office/financial": {
                     "name": "金融機構辦公室",
                     "terms": "金融機構,金融單位"
+                },
+                "office/forestry": {
+                    "name": "林務辦公室",
+                    "terms": "<translate with synonyms or related terms for 'Forestry Office', separated by commas>"
+                },
+                "office/foundation": {
+                    "name": "基金會辦公室",
+                    "terms": "<translate with synonyms or related terms for 'Foundation Office', separated by commas>"
                 },
                 "office/government": {
                     "name": "政府辦公室",
@@ -4452,13 +4644,21 @@
                     "name": "戶政事務所",
                     "terms": "戶政事務所,戶政機關"
                 },
+                "office/government/tax": {
+                    "name": "稅務辦公室",
+                    "terms": "<translate with synonyms or related terms for 'Tax and Revenue Office', separated by commas>"
+                },
+                "office/guide": {
+                    "name": "導遊辦公室",
+                    "terms": "<translate with synonyms or related terms for 'Tour Guide Office', separated by commas>"
+                },
                 "office/insurance": {
                     "name": "保險公司辦公室",
                     "terms": "保險公司,人壽公司"
                 },
                 "office/it": {
-                    "name": "資訊科技公司辦公室",
-                    "terms": "資訊公司,IT公司"
+                    "name": "資訊公司辦公室",
+                    "terms": "<translate with synonyms or related terms for 'Information Technology Office', separated by commas>"
                 },
                 "office/lawyer": {
                     "name": "律師事務所",
@@ -4468,13 +4668,21 @@
                     "name": "公證處",
                     "terms": "公證人,民間公證人,民間公證處,Notary Office"
                 },
+                "office/moving_company": {
+                    "name": "搬家公司辦公室",
+                    "terms": "<translate with synonyms or related terms for 'Moving Company Office', separated by commas>"
+                },
                 "office/newspaper": {
-                    "name": "報社",
-                    "terms": "報社,報館"
+                    "name": "報社辦公室",
+                    "terms": "<translate with synonyms or related terms for 'Newspaper Office', separated by commas>"
                 },
                 "office/ngo": {
                     "name": "非政府機構辦公室",
                     "terms": "NGO辦公室"
+                },
+                "office/notary": {
+                    "name": "公證處",
+                    "terms": "<translate with synonyms or related terms for 'Notary Office', separated by commas>"
                 },
                 "office/physician": {
                     "name": "醫務所"
@@ -4483,20 +4691,40 @@
                     "name": "政黨辦公室",
                     "terms": "黨部,競選總部,服務處"
                 },
+                "office/private_investigator": {
+                    "name": "私家偵探辦公室",
+                    "terms": "<translate with synonyms or related terms for 'Private Investigator Office', separated by commas>"
+                },
+                "office/quango": {
+                    "name": "準非政府組織辦公室",
+                    "terms": "<translate with synonyms or related terms for 'Quasi-NGO Office', separated by commas>"
+                },
                 "office/research": {
                     "name": "研究機構",
                     "terms": "研究辦公室"
+                },
+                "office/surveyor": {
+                    "name": "測量員辦公室",
+                    "terms": "<translate with synonyms or related terms for 'Surveyor Office', separated by commas>"
+                },
+                "office/tax_advisor": {
+                    "name": "稅務顧問辦公室",
+                    "terms": "<translate with synonyms or related terms for 'Tax Advisor Office', separated by commas>"
                 },
                 "office/telecommunication": {
                     "name": "電信公司辦事處",
                     "terms": "電訊公司辦事處"
                 },
                 "office/therapist": {
-                    "name": "治療師診所",
-                    "terms": "治療師,物理治療師"
+                    "name": "治療師辦公室",
+                    "terms": "<translate with synonyms or related terms for 'Therapist Office', separated by commas>"
                 },
                 "office/travel_agent": {
                     "name": "旅行社"
+                },
+                "office/water_utility": {
+                    "name": "自來水設施辦公室",
+                    "terms": "<translate with synonyms or related terms for 'Water Utility Office', separated by commas>"
                 },
                 "piste": {
                     "name": "滑雪場",
@@ -4520,6 +4748,10 @@
                     "name": "島嶼",
                     "terms": "島,island"
                 },
+                "place/islet": {
+                    "name": "小島",
+                    "terms": "小島"
+                },
                 "place/isolated_dwelling": {
                     "name": "獨立聚落",
                     "terms": "孤立民居"
@@ -4531,6 +4763,10 @@
                 "place/neighbourhood": {
                     "name": "鄰里",
                     "terms": "四鄰,Neighborhood"
+                },
+                "place/plot": {
+                    "name": "地籍",
+                    "terms": "<translate with synonyms or related terms for 'Plot', separated by commas>"
                 },
                 "place/quarter": {
                     "name": "自治市區",
@@ -4553,8 +4789,8 @@
                     "terms": "村落,village"
                 },
                 "playground/balance_beam": {
-                    "name": "平衡木",
-                    "terms": "平衡木"
+                    "name": "平衡梁",
+                    "terms": "<translate with synonyms or related terms for 'Play Balance Beam', separated by commas>"
                 },
                 "playground/basket_spinner": {
                     "name": "籃子旋轉器",
@@ -4574,7 +4810,11 @@
                 },
                 "playground/horizontal_bar": {
                     "name": "單槓",
-                    "terms": "<translate with synonyms or related terms for 'Horizontal Bar', separated by commas>"
+                    "terms": "<translate with synonyms or related terms for 'Play Horizontal Bar', separated by commas>"
+                },
+                "playground/rocker": {
+                    "name": "彈簧椅",
+                    "terms": "<translate with synonyms or related terms for 'Spring Rider', separated by commas>"
                 },
                 "playground/roundabout": {
                     "name": "旋轉輪",
@@ -4645,6 +4885,10 @@
                 "power/substation": {
                     "name": "變電所",
                     "terms": "變電站"
+                },
+                "power/switch": {
+                    "name": "電力開關",
+                    "terms": "電力開關"
                 },
                 "power/tower": {
                     "name": "高壓電塔",
@@ -4763,6 +5007,10 @@
                 "shop": {
                     "name": "商店",
                     "terms": "商店,商行"
+                },
+                "shop/agrarian": {
+                    "name": "農用品店",
+                    "terms": "<translate with synonyms or related terms for 'Agriculture Shop', separated by commas>"
                 },
                 "shop/alcohol": {
                     "name": "酒類專賣店",
@@ -5282,8 +5530,8 @@
                     "terms": "房車營地"
                 },
                 "tourism/chalet": {
-                    "name": "木屋",
-                    "terms": "木屋"
+                    "name": "假日小屋",
+                    "terms": "<translate with synonyms or related terms for 'Holiday Cottage', separated by commas>"
                 },
                 "tourism/gallery": {
                     "name": "藝廊",
@@ -5340,6 +5588,10 @@
                 "tourism/viewpoint": {
                     "name": "觀景點",
                     "terms": "風景點"
+                },
+                "tourism/wilderness_hut": {
+                    "name": "野外小屋",
+                    "terms": "<translate with synonyms or related terms for 'Wilderness Hut', separated by commas>"
                 },
                 "tourism/zoo": {
                     "name": "動物園",
@@ -5573,12 +5825,26 @@
                 "description": "Premium DigitalGlobe 衛星圖",
                 "name": "DigitalGlobe Premium 空照圖"
             },
+            "DigitalGlobe-Premium-vintage": {
+                "attribution": {
+                    "text": "使用條款與意見回饋"
+                },
+                "description": "影像邊界與取得時間。標籤會在縮放14層級或更高時顯示。",
+                "name": "DigitalGlobe Premium 空照圖年份"
+            },
             "DigitalGlobe-Standard": {
                 "attribution": {
                     "text": "使用條款與意見回饋"
                 },
                 "description": "Standard DigitalGlobe 衛星圖",
                 "name": "DigitalGlobe Standard 空照圖"
+            },
+            "DigitalGlobe-Standard-vintage": {
+                "attribution": {
+                    "text": "使用條款與意見回饋"
+                },
+                "description": "影像邊界與取得時間。標籤會在縮放14層級或更高時顯示。",
+                "name": "DigitalGlobe Standard 空照圖年份"
             },
             "EsriWorldImagery": {
                 "attribution": {

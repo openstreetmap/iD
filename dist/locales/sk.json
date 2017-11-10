@@ -310,7 +310,6 @@
             "localized_translation_language": "Zvoľte jazyk",
             "localized_translation_name": "Meno"
         },
-        "zoom_in_edit": "Priblížiť mapu pre úpravu",
         "login": "prihlásenie",
         "logout": "odhlásiť",
         "loading_auth": "Pripája sa k OpenStreetMap...",
@@ -612,8 +611,7 @@
         "splash": {
             "welcome": "Vitajte v iD editore pre OpenStreetMap",
             "text": "iD je prívetivý ale silný nástroj pre prispievanie do najlepšej slobodnej mapy sveta. Toto je verzia {version}. Pre viac informácií navštívte {website} alebo nahlasujte chyby na {github}.",
-            "walkthrough": "Začni prehliadku",
-            "start": "Upravuj"
+            "walkthrough": "Začni prehliadku"
         },
         "source_switch": {
             "live": "pripojený",
@@ -644,10 +642,6 @@
             "many_deletions": "Chystáte sa vymazať {n} objektov. Ste si naozaj istý, že to chcete urobiť? Týmto ich vymažete z mapy na openstreetmap.org, ktorú používajú ďalší používatelia.",
             "tag_suggests_area": "Označenie {tag} predpokladá, že objekt by mal byť plochou a nie čiarou.",
             "deprecated_tags": "Neschválené označenie: {tags}"
-        },
-        "zoom": {
-            "in": "Priblížiť",
-            "out": "Oddialiť"
         },
         "cannot_zoom": "V tomto móde nemožno viac oddialiť.",
         "full_screen": "Prepni na plnú obrazovku",
@@ -2729,8 +2723,7 @@
                     "terms": "Skolsky areal,skola,druzina"
                 },
                 "amenity/scrapyard": {
-                    "name": "Vrakovisko",
-                    "terms": "vrakovisko,smetisko,šrotovisko,srotovisko"
+                    "name": "Vrakovisko"
                 },
                 "amenity/shelter": {
                     "name": "Prístrešok",
@@ -3219,10 +3212,6 @@
                     "name": "Lešenárstvo",
                     "terms": "lesenarstvo,lešenie,lesenie"
                 },
-                "craft/sculpter": {
-                    "name": "Sochár",
-                    "terms": "sochar"
-                },
                 "craft/shoemaker": {
                     "name": "Obuvník",
                     "terms": "buvnik"
@@ -3230,10 +3219,6 @@
                 "craft/stonemason": {
                     "name": "Kamenárstvo",
                     "terms": "kamenarstvo,kamenár,kamenar"
-                },
-                "craft/sweep": {
-                    "name": "Kominárstvo",
-                    "terms": "kominarstvo,kominár,kominar"
                 },
                 "craft/tailor": {
                     "name": "Krajčír"
@@ -3402,10 +3387,6 @@
                 "highway/path": {
                     "name": "Cestička",
                     "terms": "cesticka,chodnik,chodník,pešina,pesina"
-                },
-                "highway/pedestrian": {
-                    "name": "Pešia zóna",
-                    "terms": "pesia zona,namestie,námestie"
                 },
                 "highway/primary": {
                     "name": "Cesta 1. triedy",
@@ -3971,17 +3952,9 @@
                     "name": "Úrad",
                     "terms": "urad"
                 },
-                "office/accountant": {
-                    "name": "Účtovník",
-                    "terms": "uctovnik"
-                },
                 "office/administrative": {
                     "name": "Administratívny úrad",
                     "terms": "administrativny urad"
-                },
-                "office/architect": {
-                    "name": "Architekt",
-                    "terms": "Architekti"
                 },
                 "office/company": {
                     "name": "Firma",
@@ -4011,17 +3984,9 @@
                     "name": "Poistenie",
                     "terms": "poistenie"
                 },
-                "office/it": {
-                    "name": "IT služby",
-                    "terms": "IT, it sluzby,pocitace,počítače"
-                },
                 "office/lawyer": {
                     "name": "Právna kancelária",
                     "terms": "pravna kancelaria"
-                },
-                "office/newspaper": {
-                    "name": "Noviny",
-                    "terms": "noviny"
                 },
                 "office/ngo": {
                     "name": "Nezisková organizácia",
@@ -4041,10 +4006,6 @@
                 "office/telecommunication": {
                     "name": "Telekomunikácie",
                     "terms": "telekomunikacie,mobilny operator,mobilný operátor,operator,operátor"
-                },
-                "office/therapist": {
-                    "name": "Terapeut",
-                    "terms": "terapeut"
                 },
                 "office/travel_agent": {
                     "name": "Cestovná agentúra"
@@ -4679,10 +4640,6 @@
                 "tourism/caravan_site": {
                     "name": "Parkovisko pre karavany",
                     "terms": "parkovisko pre karavany,karavany,parkovisko,tabor,tábor"
-                },
-                "tourism/chalet": {
-                    "name": "Koliba",
-                    "terms": "salas,salaš,chata"
                 },
                 "tourism/gallery": {
                     "name": "Umelecká galéria"

@@ -310,7 +310,7 @@
             "localized_translation_language": "Chọn ngôn ngữ",
             "localized_translation_name": "Tên"
         },
-        "zoom_in_edit": "Phong to để Sửa đổi",
+        "zoom_in_edit": "Phong to để sửa đổi",
         "login": "đăng nhập",
         "logout": "đăng xuất",
         "loading_auth": "Đang kết nối với OpenStreetMap…",
@@ -361,7 +361,9 @@
                 "accuracy": "Độ chính xác",
                 "unknown": "Không rõ",
                 "show_tiles": "Hiện các Mảnh",
-                "hide_tiles": "Ẩn các Mảnh"
+                "hide_tiles": "Ẩn các Mảnh",
+                "show_vintage": "Hiện Lúc Chụp",
+                "hide_vintage": "Ẩn Lúc Chụp"
             },
             "history": {
                 "key": "L",
@@ -667,6 +669,13 @@
         },
         "mapillary": {
             "view_on_mapillary": "Xem hình này trên Mapillary"
+        },
+        "openstreetcam_images": {
+            "tooltip": "Hình ảnh từ con đường do OpenStreetCam cung cấp",
+            "title": "Lớp phủ Hình ảnh (OpenStreetCam)"
+        },
+        "openstreetcam": {
+            "view_on_openstreetcam": "Xem hình này trên OpenStreetCam"
         },
         "help": {
             "title": "Trợ giúp",
@@ -1122,6 +1131,9 @@
                 "aeroway": {
                     "label": "Loại"
                 },
+                "agrarian": {
+                    "label": "Sản phẩm"
+                },
                 "amenity": {
                     "label": "Loại"
                 },
@@ -1190,6 +1202,9 @@
                 "board_type": {
                     "label": "Kiểu"
                 },
+                "boules": {
+                    "label": "Kiểu"
+                },
                 "boundary": {
                     "label": "Kiểu"
                 },
@@ -1208,6 +1223,10 @@
                 },
                 "bunker_type": {
                     "label": "Kiểu"
+                },
+                "cables": {
+                    "label": "Số Cáp",
+                    "placeholder": "1, 2, 3…"
                 },
                 "camera/direction": {
                     "label": "Hướng (Độ theo Chiều Kim Đồng hồ)",
@@ -1374,6 +1393,10 @@
                 "description": {
                     "label": "Miêu tả"
                 },
+                "devices": {
+                    "label": "Số Thiết bị",
+                    "placeholder": "1, 2, 3…"
+                },
                 "diaper": {
                     "label": "Có Bàn Thay Tã"
                 },
@@ -1448,12 +1471,18 @@
                         "wall": "Tường"
                     }
                 },
+                "fitness_station": {
+                    "label": "Loại Thiết bị"
+                },
                 "fixme": {
                     "label": "Cần Sửa chữa"
                 },
                 "ford": {
                     "label": "Kiểu",
                     "placeholder": "Bình thường"
+                },
+                "frequency": {
+                    "label": "Tần số Hoạt động"
                 },
                 "fuel": {
                     "label": "Nhiên liệu"
@@ -1813,6 +1842,10 @@
                 "payment_multi": {
                     "label": "Phương thức Thanh toán"
                 },
+                "phases": {
+                    "label": "Số Pha",
+                    "placeholder": "1, 2, 3…"
+                },
                 "phone": {
                     "label": "Số Điện thoại",
                     "placeholder": "+84 1 234 5678"
@@ -1891,6 +1924,9 @@
                 },
                 "railway": {
                     "label": "Kiểu"
+                },
+                "rating": {
+                    "label": "Công suất"
                 },
                 "recycling_accepts": {
                     "label": "Nhận"
@@ -2100,6 +2136,9 @@
                 "studio": {
                     "label": "Kiểu"
                 },
+                "substance": {
+                    "label": "Chất"
+                },
                 "substation": {
                     "label": "Kiểu"
                 },
@@ -2125,6 +2164,15 @@
                 },
                 "surveillance/zone": {
                     "label": "Phạm vi Quan sát"
+                },
+                "switch": {
+                    "label": "Kiểu",
+                    "options": {
+                        "circuit_breaker": "Cầu dao",
+                        "disconnector": "Cầu dao Cách ly",
+                        "earthing": "Cầu dao Tiếp địa",
+                        "mechanical": "Cơ học"
+                    }
                 },
                 "tactile_paving": {
                     "label": "Gạch dành cho Người Khiếm thị"
@@ -2177,6 +2225,9 @@
                     },
                     "placeholder": "Rất chắc, Khá Chắc, Mềm…"
                 },
+                "trade": {
+                    "label": "Nghề"
+                },
                 "traffic_calming": {
                     "label": "Kiểu"
                 },
@@ -2194,6 +2245,19 @@
                         "no": "Không có lối đi, rất cần biết dò đường"
                     },
                     "placeholder": "Tốt, Khá, Trung bình…"
+                },
+                "transformer": {
+                    "label": "Kiểu",
+                    "options": {
+                        "auto": "Tự biến áp",
+                        "auxiliary": "Phụ tải",
+                        "converter": "Chuyển đổi",
+                        "distribution": "Phân phối",
+                        "generator": "Phát điện",
+                        "phase_angle_regulator": "Dịch pha",
+                        "traction": "Kéo",
+                        "yes": "Không rõ"
+                    }
                 },
                 "trees": {
                     "label": "Loại cây"
@@ -2229,6 +2293,18 @@
                         "stratovolcano": "Tầng"
                     }
                 },
+                "voltage": {
+                    "label": "Điện áp"
+                },
+                "voltage/primary": {
+                    "label": "Điện áp Chính"
+                },
+                "voltage/secondary": {
+                    "label": "Điện áp Thứ 2"
+                },
+                "voltage/tertiary": {
+                    "label": "Điện áp Thứ 3"
+                },
                 "wall": {
                     "label": "Kiểu"
                 },
@@ -2256,6 +2332,22 @@
                 },
                 "wikipedia": {
                     "label": "Wikipedia"
+                },
+                "windings": {
+                    "label": "Số Cuộn dây",
+                    "placeholder": "1, 2, 3…"
+                },
+                "windings/configuration": {
+                    "label": "Cách Nối Cuộn dây",
+                    "options": {
+                        "delta": "Tam giác",
+                        "leblanc": "Leblanc",
+                        "open": "Hở mạch",
+                        "open-delta": "Tam giác Hở",
+                        "scott": "Scott",
+                        "star": "Sao",
+                        "zigzag": "Chữ chi"
+                    }
                 }
             },
             "presets": {
@@ -2702,8 +2794,7 @@
                     "terms": "sân trường, sân trường học, sân nhà trường, sân trung tâm giáo dục, san truong, san truong hoc, san nha truong, san trung tam giao duc"
                 },
                 "amenity/scrapyard": {
-                    "name": "Bãi Phế liệu",
-                    "terms": "phế liệu, ve chai, rác rưởi, sắt vụn, mảnh sắt, xe hơi, xe cộ, gạch vụn, phe lieu, ve chai, rac ruoi, sat vun, manh sat, xe hoi, xe co, gach vun"
+                    "name": "Bãi Phế liệu"
                 },
                 "amenity/shelter": {
                     "name": "Nhà trú",
@@ -3272,10 +3363,6 @@
                     "name": "Xây Giàn",
                     "terms": "người xây giàn, người lắp dựng giàn, nguoi xay gian, nguoi lap dung gian"
                 },
-                "craft/sculpter": {
-                    "name": "Điêu khắc",
-                    "terms": "nhà điều khắc, thợ chạm trổ, bức tượng điêu khắc, nha dieu khac, tho cham tro, buc tuong dieu khac"
-                },
                 "craft/shoemaker": {
                     "name": "Đóng Giày",
                     "terms": "thợ đóng giày dép, người đóng giày dép, người làm giày dép, thợ sửa giày dép, người sửa giày dép, tho dong giay dep, nguoi dong giay dep, nguoi lam giay dep, tho sua giay dep, nguoi sua giay dep"
@@ -3283,10 +3370,6 @@
                 "craft/stonemason": {
                     "name": "Xây Đá",
                     "terms": "thợ xây đá, người xây đá, tho xay da, nguoi xay da"
-                },
-                "craft/sweep": {
-                    "name": "Quét Bồ hóng",
-                    "terms": "người quét bồ hóng, người cạo ống khói, thợ quét bồ hóng, thợ quét ống khói, nguoi quet bo hong, nguoi cao ong khoi, tho quet bo hong, tho quet ong khoi"
                 },
                 "craft/tailor": {
                     "name": "May Quần áo"
@@ -3555,10 +3638,6 @@
                 "highway/path": {
                     "name": "Lối",
                     "terms": "đường mòn, duong mon"
-                },
-                "highway/pedestrian": {
-                    "name": "Đường Đi bộ",
-                    "terms": "đường đi bộ, đường dành cho người đi bộ, duong di bo, duong danh cho nguoi di bo"
                 },
                 "highway/primary": {
                     "name": "Đường Chính",
@@ -4310,17 +4389,9 @@
                     "name": "Văn phòng",
                     "terms": "văn phòng, sở, van phong, so"
                 },
-                "office/accountant": {
-                    "name": "Tư vấn Kế toán",
-                    "terms": "tư vấn kế toán, kế toán viên, văn phòng kế toán, nhân viên kế toán, dịch vụ khai thuế, văn phòng khai thuế, tài chính, tài chánh, tu van ke toan, ke toan vien, van phong ke toan, nhan vien ke toan, dich vu khai thue, van phong khai thue, tai chinh, tai chanh"
-                },
                 "office/administrative": {
                     "name": "Cơ quan Địa phương",
                     "terms": "cơ quan địa phương, hội đồng địa phương, công sở địa phương, sở hành chính địa phương, co quan dia phuong, hoi dong dia phuong, cong so dia phuong, so hanh chinh dia phuong"
-                },
-                "office/architect": {
-                    "name": "Kiến trúc sư",
-                    "terms": "kiến trúc sư, kien truc su"
                 },
                 "office/company": {
                     "name": "Văn phòng Công ty",
@@ -4358,10 +4429,6 @@
                     "name": "Văn phòng Bảo hiểm",
                     "terms": "văn phòng bảo hiểm, van phong bao hiem"
                 },
-                "office/it": {
-                    "name": "Văn phòng Tin học",
-                    "terms": "văn phòng tin học, chuyên viên tin học, văn phòng công nghệ thông tin, văn phòng cntt, van phong tin hoc, chuyen vien tin hoc, van phong cong nghe thong tin, van phong cntt"
-                },
                 "office/lawyer": {
                     "name": "Văn phòng Luật sư",
                     "terms": "văn phòng luật sư, van phong luat su"
@@ -4369,10 +4436,6 @@
                 "office/lawyer/notary": {
                     "name": "Văn phòng Công chứng",
                     "terms": "văn phòng công chứng, công chứng viên, di chúc, chứng thư, van phong cong chung, cong chung vien, di chuc, chung thu"
-                },
-                "office/newspaper": {
-                    "name": "Tờ báo",
-                    "terms": "tờ báo, nhật báo, tuần báo, tạp chí, to bao, nhat bao, tuan bao, tap chi"
                 },
                 "office/ngo": {
                     "name": "Tổ chức Phi chính phủ",
@@ -4392,10 +4455,6 @@
                 "office/telecommunication": {
                     "name": "Văn phòng Viễn thông",
                     "terms": "văn phòng viễn thông, tiệm viễn thông, cửa hàng viễn thông, trụ sở công ty viễn thông, trụ sở công ti viễn thông, trụ sở cty viễn thông, van phong vien thong, tiem vien thong, cua hang vien thong, tru so cong ty vien thong, tru so cong ti vien thong, tru so cty vien thong"
-                },
-                "office/therapist": {
-                    "name": "Nhà trị liệu",
-                    "terms": "nhà trị liệu, bác sĩ chuyên khoa, thầy thuốc chuyên khoa, nha tri lieu, bac si chuyen khoa, thay thuoc chuyen khoa"
                 },
                 "office/travel_agent": {
                     "name": "Văn phòng Du lịch"
@@ -4434,6 +4493,10 @@
                     "name": "Hàng xóm",
                     "terms": "hàng xóm, khu phố, hang xom, khu pho"
                 },
+                "place/plot": {
+                    "name": "Miếng đất",
+                    "terms": "miếng đất, mảnh đất, mieng dat, manh dat"
+                },
                 "place/quarter": {
                     "name": "Khu",
                     "terms": "khu, phố, pho"
@@ -4454,10 +4517,6 @@
                     "name": "Làng",
                     "terms": "làng, thôn, ấp, lang, thon, ap"
                 },
-                "playground/balance_beam": {
-                    "name": "Cầu thăng bằng",
-                    "terms": "cầu thăng bằng, đòn cân bằng, đòn cân, cau thang bang, don can bang, don can"
-                },
                 "playground/basket_spinner": {
                     "name": "Rổ Quay",
                     "terms": "rổ quay, ro quay"
@@ -4473,10 +4532,6 @@
                 "playground/cushion": {
                     "name": "Đệm Hơi",
                     "terms": "đệm hơi, nệm hơi, dem hoi, nem hoi"
-                },
-                "playground/horizontal_bar": {
-                    "name": "Xà Đơn",
-                    "terms": "xà đơn, xà cao, ba-rơ-phích, xa don, xa cao, ba-ro-phich"
                 },
                 "playground/rocker": {
                     "name": "Thú Nhún Lò xo",
@@ -5092,6 +5147,10 @@
                     "name": "Đại lý Bán Vé",
                     "terms": "đại lý bán vé, đại lí bán vé, văn phòng bán vé, vé buổi hòa nhạc, vé buổi hoà nhạc, vé xe buýt, vé xe lửa, vé máy bay, vé phi cơ, dai ly ban ve, dai li ban ve, van phong ban ve, ve buoi hoa nhac, ve xe buyt, ve xe lua, ve may bay, ve phi co"
                 },
+                "shop/tiles": {
+                    "name": "Tiệm Ngói",
+                    "terms": "tiệm ngói, cửa hàng ngói, tiem ngoi, cua hang ngoi"
+                },
                 "shop/tobacco": {
                     "name": "Tiệm Thuốc lá",
                     "terms": "tiệm thuốc lá, cửa hàng thuốc lá, cửa hiệu thuốc lá, tiệm xì gà, cửa hàng xì gà, cửa hiệu xì gà, tiem thuoc la, cua hang thuoc la, cua hieu thuoc la, tiem xi ga, cua hang xi ga, cua hieu xi ga"
@@ -5099,6 +5158,10 @@
                 "shop/toys": {
                     "name": "Tiệm Đồ chơi",
                     "terms": "tiệm đồ chơi cho trẻ em, chỗ bán đồ chơi, cửa hàng đồ chơi, cửa hiệu đồ chơi, đồ chơi trẻ nhỏ, tiem do choi cho tre em, cho ban do choi, cua hang do choi, cua hieu do choi, do choi tre nho"
+                },
+                "shop/trade": {
+                    "name": "Tiệm Công nghiệp",
+                    "terms": "tiệm công nghiệp, cửa hàng công nghiệp, tiệm vật liệu công nghiệp, cửa hàng vật liệu công nghiệp, tiệm máy móc công nghiệp, cửa hàng máy móc công nghiệp, tiem cong nghiẹp, cua hang cong nghiep, tiem vat lieu cong nghiep, cua hang vat lieu cong nghiep, tiem may moc cong nghiep, cua hang may moc cong nghiep"
                 },
                 "shop/travel_agency": {
                     "name": "Văn phòng Du lịch",
@@ -5178,10 +5241,6 @@
                 "tourism/caravan_site": {
                     "name": "Bãi Đậu Nhà lưu động",
                     "terms": "bãi đậu nhà lưu động, sân đậu nhà lưu động, chỗ đậu nhà lưu động, nơi đậu nhà lưu động, khu nhà lưu động, bai dau nha luu dong, san dau nha luu dong, cho dau nha luu dong, noi dau nha luu dong, khu nha luu dong"
-                },
-                "tourism/chalet": {
-                    "name": "Nhà nghỉ Riêng biệt",
-                    "terms": "nhà nghỉ riêng biệt, nhà ván gỗ kiểu thụy sĩ, nhà ván gỗ kiểu thụy sỹ, nhà ván gỗ kiểu thuỵ sĩ, nhà ván gỗ kiểu thuỵ sỹ, nhà nghỉ trên núi tuyết, nha nghi rieng biet, nha van go kieu thuy si, nha van go kieu thuy sy, nha nghi tren nui tuyet"
                 },
                 "tourism/gallery": {
                     "name": "Phòng tranh",
@@ -5471,12 +5530,26 @@
                 "description": "Hình ảnh thượng hạng chụp từ vệ tinh DigitalGlobe.",
                 "name": "DigitalGlobe Thượng hạng"
             },
+            "DigitalGlobe-Premium-vintage": {
+                "attribution": {
+                    "text": "Điều khoản & Phản hồi"
+                },
+                "description": "Biên giới và ngày tháng chụp. Các nhãn xuất hiện tại mức thu phóng 14 trở lên.",
+                "name": "Lúc chụp DigitalGlobe Thượng hạng"
+            },
             "DigitalGlobe-Standard": {
                 "attribution": {
                     "text": "Điều khoản & Phản hồi"
                 },
                 "description": "Hình ảnh tiêu chuẩn chụp từ vệ tinh DigitalGlobe.",
                 "name": "DigitalGlobe Tiêu chuẩn"
+            },
+            "DigitalGlobe-Standard-vintage": {
+                "attribution": {
+                    "text": "Điều khoản & Phản hồi"
+                },
+                "description": "Biên giới và ngày tháng chụp. Các nhãn xuất hiện tại mức thu phóng 14 trở lên.",
+                "name": "Lúc chụp DigitalGlobe Tiêu chuẩn"
             },
             "EsriWorldImagery": {
                 "attribution": {

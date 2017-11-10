@@ -310,7 +310,7 @@
             "localized_translation_language": "Обрати мову",
             "localized_translation_name": "Назва"
         },
-        "zoom_in_edit": "Необхідно збільшити масштаб, щоб редагувати",
+        "zoom_in_edit": "Наблизтесь, щоб редагувати",
         "login": "вхід",
         "logout": "вийти",
         "loading_auth": "З’єднання з OpenStreetMap…",
@@ -361,7 +361,9 @@
                 "accuracy": "Точність",
                 "unknown": "Невідомо",
                 "show_tiles": "Показати тайли",
-                "hide_tiles": "Сховати тайли"
+                "hide_tiles": "Сховати тайли",
+                "show_vintage": "Показати Vintage",
+                "hide_vintage": "Приховати Vintage"
             },
             "history": {
                 "key": "Р",
@@ -667,6 +669,13 @@
         },
         "mapillary": {
             "view_on_mapillary": "Переглянути цей знімок на Mapillary"
+        },
+        "openstreetcam_images": {
+            "tooltip": "Знімки з вулиць від OpenStreetCam",
+            "title": "Фото-шар (OpenStreetCam)"
+        },
+        "openstreetcam": {
+            "view_on_openstreetcam": "Переглянути цей знімок на OpenStreetCam"
         },
         "help": {
             "title": "Довідка",
@@ -1217,6 +1226,9 @@
                 "aeroway": {
                     "label": "Тип"
                 },
+                "agrarian": {
+                    "label": " Продукція"
+                },
                 "amenity": {
                     "label": "Тип"
                 },
@@ -1285,6 +1297,9 @@
                 "board_type": {
                     "label": "Тип"
                 },
+                "boules": {
+                    "label": "Тип"
+                },
                 "boundary": {
                     "label": "Тип"
                 },
@@ -1303,6 +1318,10 @@
                 },
                 "bunker_type": {
                     "label": "Тип"
+                },
+                "cables": {
+                    "label": "Дроти",
+                    "placeholder": "1, 2, 3…"
                 },
                 "camera/direction": {
                     "label": "Напрямок (в градусах за годинниковою стрілкою)",
@@ -1469,6 +1488,10 @@
                 "description": {
                     "label": "Опис"
                 },
+                "devices": {
+                    "label": "Пристрої",
+                    "placeholder": "1, 2, 3…"
+                },
                 "diaper": {
                     "label": "Сповивальний стіл"
                 },
@@ -1543,12 +1566,18 @@
                         "wall": "Настінний"
                     }
                 },
+                "fitness_station": {
+                    "label": "Вид спорядження"
+                },
                 "fixme": {
                     "label": "Потребує виправлення"
                 },
                 "ford": {
                     "label": "Тип",
                     "placeholder": "Типово"
+                },
+                "frequency": {
+                    "label": "Робоча частота"
                 },
                 "fuel": {
                     "label": "АЗС"
@@ -1579,6 +1608,9 @@
                     "label": "Джерело"
                 },
                 "generator/type": {
+                    "label": "Тип"
+                },
+                "government": {
                     "label": "Тип"
                 },
                 "grape_variety": {
@@ -1908,6 +1940,10 @@
                 "payment_multi": {
                     "label": "Види розрахунків"
                 },
+                "phases": {
+                    "label": "Фази",
+                    "placeholder": "1, 2, 3…"
+                },
                 "phone": {
                     "label": "Телефон",
                     "placeholder": "+31 42 123 4567"
@@ -1986,6 +2022,9 @@
                 },
                 "railway": {
                     "label": "Тип"
+                },
+                "rating": {
+                    "label": "Потужність"
                 },
                 "recycling_accepts": {
                     "label": "Приймається"
@@ -2195,6 +2234,9 @@
                 "studio": {
                     "label": "Тип"
                 },
+                "substance": {
+                    "label": "Речовина"
+                },
                 "substation": {
                     "label": "Тип"
                 },
@@ -2220,6 +2262,15 @@
                 },
                 "surveillance/zone": {
                     "label": "Зона спостереження"
+                },
+                "switch": {
+                    "label": "Тип",
+                    "options": {
+                        "circuit_breaker": "Автоматичний вимикач",
+                        "disconnector": "Розʼєднувач",
+                        "earthing": "Заземлення",
+                        "mechanical": "Механічний"
+                    }
                 },
                 "tactile_paving": {
                     "label": "Тактильне покриття"
@@ -2293,6 +2344,19 @@
                     },
                     "placeholder": "Відмінна, Хороша, Погана,..."
                 },
+                "transformer": {
+                    "label": "Тип",
+                    "options": {
+                        "auto": "Автотрансформатор",
+                        "auxiliary": "Допоміжний",
+                        "converter": "Перетворювач",
+                        "distribution": "Розподільчий",
+                        "generator": "Генератор",
+                        "phase_angle_regulator": "Регулятор фазового зсуву",
+                        "traction": "Силовий",
+                        "yes": "Невідомо"
+                    }
+                },
                 "trees": {
                     "label": "Дерева"
                 },
@@ -2327,6 +2391,18 @@
                         "stratovolcano": "Стратовулкан"
                     }
                 },
+                "voltage": {
+                    "label": "Напруга"
+                },
+                "voltage/primary": {
+                    "label": "Напруга первинної обмотки"
+                },
+                "voltage/secondary": {
+                    "label": "Напруга вторинної обмотки"
+                },
+                "voltage/tertiary": {
+                    "label": "Напруга третинної обмотки"
+                },
                 "wall": {
                     "label": "Тип"
                 },
@@ -2354,6 +2430,16 @@
                 },
                 "wikipedia": {
                     "label": "Вікіпедія"
+                },
+                "windings": {
+                    "label": "Обмотки",
+                    "placeholder": "1, 2, 3…"
+                },
+                "windings/configuration": {
+                    "label": "Конфігурація обмоток",
+                    "options": {
+                        "delta": "Трикутник"
+                    }
                 }
             },
             "presets": {
@@ -2800,8 +2886,7 @@
                     "terms": "School grounds, nthbnjhsz irjkb, шкільний двір, школа"
                 },
                 "amenity/scrapyard": {
-                    "name": "Авторозборка",
-                    "terms": "авто,розборка,б/у,вживані,деталі,свалка"
+                    "name": "Авторозборка"
                 },
                 "amenity/shelter": {
                     "name": "Притулок",
@@ -3370,10 +3455,6 @@
                     "name": "Такелажник",
                     "terms": "такелаж, вантаж, будівельні ліси"
                 },
-                "craft/sculpter": {
-                    "name": "Скульптор",
-                    "terms": "скульптура, ліпити, пам’ятник, "
-                },
                 "craft/shoemaker": {
                     "name": "Чоботар",
                     "terms": "взуття, туфлі, башмак, чобіт, швець, сандалі, "
@@ -3381,10 +3462,6 @@
                 "craft/stonemason": {
                     "name": "Каменяр",
                     "terms": "каменяр, кладка, камінь, цегла, будівництво"
-                },
-                "craft/sweep": {
-                    "name": "Сажотрус",
-                    "terms": "труба, димар, сажа, димохід, дим, трубочист"
                 },
                 "craft/tailor": {
                     "name": "Кравець"
@@ -3654,10 +3731,6 @@
                     "name": "Стежка",
                     "terms": "Path, cntrf, тропа"
                 },
-                "highway/pedestrian": {
-                    "name": "Пішохідна зона",
-                    "terms": "Pedestrian Street,пішохідна,тротуар,люди,вулиця,площа,майдан"
-                },
                 "highway/primary": {
                     "name": "Головна дорога",
                     "terms": "Primary Road, ujkjdyf ljhjuf, головна дорога, основна дорога"
@@ -3834,6 +3907,10 @@
                     "name": "Водойма",
                     "terms": "Basin, djljqvf, резервуар, водойма"
                 },
+                "landuse/brownfield": {
+                    "name": "Очищене місце під забудову",
+                    "terms": "будівництво,ділянка,пустир,місце,реконструкція"
+                },
                 "landuse/cemetery": {
                     "name": "Кладовище",
                     "terms": "Cemetery, rkfljdbot, цвинтар"
@@ -3872,6 +3949,10 @@
                 "landuse/grass": {
                     "name": "Трава",
                     "terms": "Grass, nhfdf, трава"
+                },
+                "landuse/greenfield": {
+                    "name": "Ділянка під нову забудову",
+                    "terms": "будівництво,ділянка,місце,план"
                 },
                 "landuse/harbour": {
                     "name": "Гавань",
@@ -4073,6 +4154,10 @@
                     "name": "Пляжний волейбол",
                     "terms": "майданчик,площадка,волейбол,пляж,спорт,дозвілля.гра"
                 },
+                "leisure/pitch/boules": {
+                    "name": "Буль/Боке",
+                    "terms": "спорт,майданчик,шар,буль,боке"
+                },
                 "leisure/pitch/bowls": {
                     "name": "Боулз",
                     "terms": "болуз,спорт,трава,кулі,джек,кітті,вудз,бола"
@@ -4124,6 +4209,10 @@
                 "leisure/running_track": {
                     "name": "Бігова доріжка (бігуни)",
                     "terms": "біг,трек,спрінт,перегони"
+                },
+                "leisure/sauna": {
+                    "name": "Сауна",
+                    "terms": "сауна,баня,лазня,чан"
                 },
                 "leisure/slipway": {
                     "name": "Стапель",
@@ -4408,17 +4497,9 @@
                     "name": "Офіс",
                     "terms": "Office, jasc, офіс"
                 },
-                "office/accountant": {
-                    "name": "Бухгалтерська або аудиторська фірма",
-                    "terms": "Бухгалтерська або аудиторська фірма, eufknthcmrf fj felbnjhcmrf ashvf, Accountant, аудит, бухгалтер"
-                },
                 "office/administrative": {
                     "name": "Канцелярія",
                     "terms": "канцелярія, офіс"
-                },
-                "office/architect": {
-                    "name": "Архітектурне або дизайнерське бюро",
-                    "terms": "архітектор, Архітектурне або дизайнерське бюро, fhsntrnehyt fj lbpfqythcmrt hj, Architect"
                 },
                 "office/company": {
                     "name": "Офіс компанії",
@@ -4456,10 +4537,6 @@
                     "name": "Страхове бюро",
                     "terms": "страхування"
                 },
-                "office/it": {
-                    "name": "Офіс ІТ компанії ",
-                    "terms": "інформаційні технології"
-                },
                 "office/lawyer": {
                     "name": "Адвокатське бюро",
                     "terms": "адвокатура, адвокат "
@@ -4467,10 +4544,6 @@
                 "office/lawyer/notary": {
                     "name": "Нотаріус",
                     "terms": "нотаріус,контора,офіс"
-                },
-                "office/newspaper": {
-                    "name": "Газета",
-                    "terms": "новини, видавництво"
                 },
                 "office/ngo": {
                     "name": "Недержавна громадська організація",
@@ -4490,10 +4563,6 @@
                 "office/telecommunication": {
                     "name": "Телекомунікаційна компанія",
                     "terms": "Зв’язок, телекомунікації"
-                },
-                "office/therapist": {
-                    "name": "Терапевт",
-                    "terms": "терапевт, лікар, доктор"
                 },
                 "office/travel_agent": {
                     "name": "Туристична агенція"
@@ -4532,6 +4601,10 @@
                     "name": "Околиці",
                     "terms": "місцевість, район "
                 },
+                "place/plot": {
+                    "name": "Ділянка",
+                    "terms": "ділянка,дача,участок,город"
+                },
                 "place/quarter": {
                     "name": "Мікро-район/Квартал",
                     "terms": "мікрорайон,квартал,оклоток"
@@ -4552,10 +4625,6 @@
                     "name": "Село",
                     "terms": "Village, ctkj, село"
                 },
-                "playground/balance_beam": {
-                    "name": "Бревно",
-                    "terms": "бревно,баланс,балка,рівновага,балансування"
-                },
                 "playground/basket_spinner": {
                     "name": "Кошик карусель",
                     "terms": "кошик,забавка,гойдалка,крутилка,ігровий,майданчик,діти,дитячий,карусель"
@@ -4572,9 +4641,9 @@
                     "name": "Надувний замок",
                     "terms": "забавка,ігровий,майданчик,діти,дитячий,замок,надувний,горка,пригалка"
                 },
-                "playground/horizontal_bar": {
-                    "name": "Турнік",
-                    "terms": "забавка,ігровий,майданчик,діти,дитячий,турнік"
+                "playground/rocker": {
+                    "name": "Пружинна гойдалка",
+                    "terms": "забавка,ігровий,майданчик,діти,дитячий,гойдалка,конячка,літачок,мотоцикл,пружина"
                 },
                 "playground/roundabout": {
                     "name": "Карусель",
@@ -5281,10 +5350,6 @@
                     "name": "Караван-парк",
                     "terms": "RV Park, rfhfdfy-gfhr, караван-парк"
                 },
-                "tourism/chalet": {
-                    "name": "Шале",
-                    "terms": "Chalet, ifkt, шале"
-                },
                 "tourism/gallery": {
                     "name": "Художня галерея",
                     "terms": "музей,мистецтво,виставка,галерея "
@@ -5573,12 +5638,26 @@
                 "description": "Супутникові знімки DigitalGlobe Premium",
                 "name": "Знімки DigitalGlobe Premium"
             },
+            "DigitalGlobe-Premium-vintage": {
+                "attribution": {
+                    "text": "Умови використання та Відгуки"
+                },
+                "description": "Межі та дати знімків. Підписи з'являються з 14 рівня масштабування. ",
+                "name": "Знімки DigitalGlobe Premium Vintage"
+            },
             "DigitalGlobe-Standard": {
                 "attribution": {
                     "text": "Умови використання та Відгуки"
                 },
                 "description": "Супутникові знімки DigitalGlobe Standard.",
                 "name": "Знімки DigitalGlobe Standard"
+            },
+            "DigitalGlobe-Standard-vintage": {
+                "attribution": {
+                    "text": "Умови використання та Відгуки"
+                },
+                "description": "Межі та дати знімків. Підписи з'являються з 14 рівня масштабування. ",
+                "name": "Знімки DigitalGlobe Standard Vintage"
             },
             "EsriWorldImagery": {
                 "attribution": {

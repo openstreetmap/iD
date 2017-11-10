@@ -186,7 +186,6 @@
             "localized_translation_language": "Izaberite jezik",
             "localized_translation_name": "Naziv"
         },
-        "zoom_in_edit": "Uvećajte da bi ste uređivali.",
         "logout": "Odjavite se",
         "loading_auth": "Povezivanje na OpenStreetMap...",
         "status": {
@@ -265,8 +264,7 @@
         "splash": {
             "welcome": "Dobrodošli u ID - OpenStreetMap uređivač",
             "text": "ID je prijateljski ali moćan alat za doprinos najboljoj svjetskoj besplatnoj karti svijeta. Ovo je verzija {version}. Za više informacija pogledajte stranicu {website} i prijavite greške na stranici {github}.",
-            "walkthrough": "Počnite sa upoznavanjem",
-            "start": "Uređujte sada"
+            "walkthrough": "Počnite sa upoznavanjem"
         },
         "source_switch": {
             "live": "uživo",
@@ -284,10 +282,6 @@
             "untagged_area": "Neoznačeno područje",
             "tag_suggests_area": "Oznaka {tag} ukazuje da bi linija trebala biti područje, ali nije područje",
             "deprecated_tags": "Zastarjele oznake: {tags}"
-        },
-        "zoom": {
-            "in": "Uvećati",
-            "out": "Umanjiti"
         },
         "cannot_zoom": "Ne može se umanjiti više u trenutnom načinu.",
         "help": {
@@ -1096,14 +1090,8 @@
                 "craft/saddler": {
                     "name": "Sedlar"
                 },
-                "craft/sculpter": {
-                    "name": "Skulptor"
-                },
                 "craft/stonemason": {
                     "name": "Klesar"
-                },
-                "craft/sweep": {
-                    "name": "Čišćenje dimnjaka"
                 },
                 "craft/tailor": {
                     "name": "Krojač"
@@ -1569,17 +1557,9 @@
                     "name": "Ured",
                     "terms": "ured,uslužni ured"
                 },
-                "office/accountant": {
-                    "name": "Računovođa",
-                    "terms": "računovođa,ured računovođe"
-                },
                 "office/administrative": {
                     "name": "Administrativni ured",
                     "terms": "administracija,administrativni ured,ured upravljanja"
-                },
-                "office/architect": {
-                    "name": "Arhitekta",
-                    "terms": "arhitekta,arhitekt,inžinjer arhitekture"
                 },
                 "office/company": {
                     "name": "Ured kompanije",
@@ -1609,17 +1589,9 @@
                     "name": "Ured za osiguranje",
                     "terms": "ured za osiguranje,kancelarija za osiguranje"
                 },
-                "office/it": {
-                    "name": "IT ured",
-                    "terms": "IT ured,informatički ured,IT kancelarija"
-                },
                 "office/lawyer": {
                     "name": "Pravni ured",
                     "terms": "pravni ured,pravna kancelarija"
-                },
-                "office/newspaper": {
-                    "name": "Novina",
-                    "terms": "novine,novina,novinska agencija"
                 },
                 "office/ngo": {
                     "name": "Ured NVO",
@@ -1639,10 +1611,6 @@
                 "office/telecommunication": {
                     "name": "Ured telekoma",
                     "terms": "ured telekoma,ured telekom operatera,kancelarija telekom operatera"
-                },
-                "office/therapist": {
-                    "name": "Terapeut",
-                    "terms": "terapeut"
                 },
                 "office/travel_agent": {
                     "name": "Putnička agencija"
@@ -1980,10 +1948,6 @@
                 "tourism/caravan_site": {
                     "name": "Kamp park",
                     "terms": "kamp park,autokamp"
-                },
-                "tourism/chalet": {
-                    "name": "Šale",
-                    "terms": "šale,pastirska kuća"
                 },
                 "tourism/guest_house": {
                     "name": "Gostinjska kuća",

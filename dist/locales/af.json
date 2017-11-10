@@ -189,8 +189,7 @@
         },
         "splash": {
             "welcome": "Welkom by die iD OpenStreetMap program",
-            "walkthrough": "Begin die Deurloop",
-            "start": "Verander Nou"
+            "walkthrough": "Begin die Deurloop"
         },
         "source_switch": {
             "live": "lewendig",
@@ -208,10 +207,6 @@
             "untagged_area": "Area het geen kenmerk",
             "tag_suggests_area": "Die kenmerk {tag} is geoormerk vir 'n area nie vir 'n lyn nie.",
             "deprecated_tags": "Vervalde kenmerke: {tags}"
-        },
-        "zoom": {
-            "in": "Zoom in",
-            "out": "Zoom uit"
         },
         "cannot_zoom": "Kan nie verder uitzoom in die huidige mode nie.",
         "help": {
@@ -1306,9 +1301,6 @@
                 },
                 "tourism/caravan_site": {
                     "name": "RV Park"
-                },
-                "tourism/chalet": {
-                    "name": "Chalet"
                 },
                 "tourism/guest_house": {
                     "name": "Gastehuis"

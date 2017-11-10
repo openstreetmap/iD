@@ -203,7 +203,6 @@
             "localized_translation_language": "භාෂාවක් තෝරාගන්න",
             "localized_translation_name": "නම"
         },
-        "zoom_in_edit": "සංස්කරණය කිරීම සදහා සමීප කරන්න ",
         "logout": "ඉවත් වන්න ",
         "loading_auth": "OpenStreetMap වෙත සම්බන්ද වෙමින්...",
         "feature_info": {
@@ -371,8 +370,7 @@
             "cancel": "අහෝසි කරන්න"
         },
         "splash": {
-            "welcome": "iD OpenStreetMap සංස්කරණ වේදසටහන වෙත සාදරයෙන් පිළිගනිමු",
-            "start": "දෙන සංස්කරණය කරන්න"
+            "welcome": "iD OpenStreetMap සංස්කරණ වේදසටහන වෙත සාදරයෙන් පිළිගනිමු"
         },
         "source_switch": {
             "live": "සජීවී"
@@ -387,10 +385,6 @@
             "untagged_line": "සටහනක් නොයෙදූ රේකාවක්",
             "untagged_area": "සටහනක් නොයෙදූ ප්‍රදේශයක්",
             "deprecated_tags": "{tags} : බාවිතයෙන් ඉවත් කර ඇත"
-        },
-        "zoom": {
-            "in": "විශාලනය වැඩි කරන්න",
-            "out": "විශාලනය අඩු කරන්න"
         },
         "help": {
             "title": "සහය"

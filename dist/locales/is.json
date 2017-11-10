@@ -200,7 +200,6 @@
             "localized_translation_language": "Veldu tungumál",
             "localized_translation_name": "Nafn"
         },
-        "zoom_in_edit": "Þysja inn til að breyta",
         "logout": "útskrá",
         "loading_auth": "Tengist við OpenStreetMap...",
         "status": {
@@ -321,8 +320,7 @@
         "splash": {
             "welcome": "Velkomin/n í iD ritil OpenStreetMap",
             "text": "iD er notandavænt tæki til að bæta við besta fría kortagrunn heimsins. Þetta er þróunarútgáfa {version}. Þú getur fengið meiri upplýsingar á vefnum {website} og tilkynnt villur {github}.",
-            "walkthrough": "Skoða leiðarvísir",
-            "start": "Breyta núna"
+            "walkthrough": "Skoða leiðarvísir"
         },
         "source_switch": {
             "live": "raun",
@@ -340,10 +338,6 @@
             "untagged_area": "Ómerkt svæði",
             "tag_suggests_area": "Merkingin {tag} þýðir að línan ætti að vera svæði, en hún er ekki svæði",
             "deprecated_tags": "Úrelt merki: {tags}"
-        },
-        "zoom": {
-            "in": "Þysja inn",
-            "out": "Þysja út"
         },
         "cannot_zoom": "Get ekki þysjað lengra út í núverandi ham.",
         "mapillary": {
@@ -1436,17 +1430,11 @@
                 "office": {
                     "name": "Skrifstofa"
                 },
-                "office/architect": {
-                    "name": "Arkitekt"
-                },
                 "office/financial": {
                     "name": "Fjármálafyrirtæki"
                 },
                 "office/government": {
                     "name": "Opinber stofnun"
-                },
-                "office/newspaper": {
-                    "name": "Fréttablað"
                 },
                 "office/political_party": {
                     "name": "Stjórnmálaflokkur"
@@ -1730,9 +1718,6 @@
                 },
                 "tourism/caravan_site": {
                     "name": "Hjólhýsagarður"
-                },
-                "tourism/chalet": {
-                    "name": "Bjálkakofi"
                 },
                 "tourism/guest_house": {
                     "name": "Gestahús"

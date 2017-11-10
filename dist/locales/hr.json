@@ -310,7 +310,6 @@
             "localized_translation_language": "Odaberi jezik",
             "localized_translation_name": "Ime"
         },
-        "zoom_in_edit": "Približi za uređivanje",
         "login": "prijava",
         "logout": "odjava",
         "loading_auth": "Spajanje na OpenStreetMap...",
@@ -548,8 +547,7 @@
         "splash": {
             "welcome": "Dobrodošli na iD OpenStreetMap uređivač",
             "text": "iD je vrlo jednostavan ali moćan alat za doprinošenje najboljoj besplatnoj karti svijeta. Ovo je verzija {version}. Za više informacija pogledaj {website} i prijavi greške u softveru na {github}.",
-            "walkthrough": "Počni prohod",
-            "start": "Odmah uređuj"
+            "walkthrough": "Počni prohod"
         },
         "source_switch": {
             "live": "uživo",
@@ -580,10 +578,6 @@
             "many_deletions": "Brišeš {n} elemenata. Jesi li siguran/na da to želiš učiniti? Ovo će ih obrisati sa karte koju svi vide na openstreetmap.org.",
             "tag_suggests_area": "Oznaka {tag} ukazuje da bi linija trebala biti područje, ali nije područje",
             "deprecated_tags": "Zastarjele oznake: {tags}"
-        },
-        "zoom": {
-            "in": "Približi",
-            "out": "Udalji"
         },
         "cannot_zoom": "Nije moguće više udaljiti u trenutnom môdu.",
         "full_screen": "Slika preko cijelog zaslona",
@@ -2463,17 +2457,11 @@
                 "craft/scaffolder": {
                     "name": "Građevinska skela"
                 },
-                "craft/sculpter": {
-                    "name": "Kipar"
-                },
                 "craft/shoemaker": {
                     "name": "Obućar"
                 },
                 "craft/stonemason": {
                     "name": "Zidar"
-                },
-                "craft/sweep": {
-                    "name": "Dimnjačar"
                 },
                 "craft/tailor": {
                     "name": "Krojač"
@@ -2589,9 +2577,6 @@
                 },
                 "highway/path": {
                     "name": "Staza"
-                },
-                "highway/pedestrian": {
-                    "name": "Pješačka zona"
                 },
                 "highway/primary": {
                     "name": "Državna cesta"
@@ -3042,12 +3027,6 @@
                     "name": "Ured",
                     "terms": "ured,kancelarija"
                 },
-                "office/accountant": {
-                    "name": "Računovođa"
-                },
-                "office/architect": {
-                    "name": "Arhitekt"
-                },
                 "office/educational_institution": {
                     "name": "Obrazovna ustanova"
                 },
@@ -3057,14 +3036,8 @@
                 "office/insurance": {
                     "name": "Ured osiguravajućeg društva"
                 },
-                "office/it": {
-                    "name": "Informatički ured"
-                },
                 "office/lawyer": {
                     "name": "Odvjetnički ured"
-                },
-                "office/newspaper": {
-                    "name": "Redakcija novina"
                 },
                 "office/ngo": {
                     "name": "Nevladina organizacija"
@@ -3080,9 +3053,6 @@
                 },
                 "office/telecommunication": {
                     "name": "Ured za telekomunikacije"
-                },
-                "office/therapist": {
-                    "name": "Psihoterapeut"
                 },
                 "office/travel_agent": {
                     "name": "Putnička agencija"
@@ -3612,10 +3582,6 @@
                 "tourism/caravan_site": {
                     "name": "Parkiralište za kamp kućice",
                     "terms": "park za rekreativna vozila,park za kamp-prikolice,RV park,kamp,kamp za kamp kućice,kamp za kamp prikolice,kamp prikolica,park za kamp prikolice,kamp za kamp-prikolice"
-                },
-                "tourism/chalet": {
-                    "name": "Bungalov",
-                    "terms": "planinarski dom,planinska koliba,koliba,planinarski,planinarska"
                 },
                 "tourism/gallery": {
                     "name": "Umjetnička galerija"

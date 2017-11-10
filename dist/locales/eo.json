@@ -360,7 +360,9 @@
                 "accuracy": "Akurateco",
                 "unknown": "Nekonata",
                 "show_tiles": "Montri kahelojn",
-                "hide_tiles": "Kaŝi kahelojn"
+                "hide_tiles": "Kaŝi kahelojn",
+                "show_vintage": "Montri fot-daton",
+                "hide_vintage": "Kaŝi fot-daton"
             },
             "history": {
                 "key": "H",
@@ -665,6 +667,13 @@
         },
         "mapillary": {
             "view_on_mapillary": "Montri ĉi tiun bildon en Mapillary"
+        },
+        "openstreetcam_images": {
+            "tooltip": "Strat-niveloj fotoj de OpenStreetCam",
+            "title": "Fotara surtavolo (OpenStreetCam)"
+        },
+        "openstreetcam": {
+            "view_on_openstreetcam": "Montri tiun ĉi bildon ĉe OpenStreetCam"
         },
         "help": {
             "title": "Helpo",
@@ -1215,6 +1224,9 @@
                 "aeroway": {
                     "label": "Speco"
                 },
+                "agrarian": {
+                    "label": "Produktaĵoj"
+                },
                 "amenity": {
                     "label": "Speco"
                 },
@@ -1283,6 +1295,9 @@
                 "board_type": {
                     "label": "Speco"
                 },
+                "boules": {
+                    "label": "Speco"
+                },
                 "boundary": {
                     "label": "Speco"
                 },
@@ -1301,6 +1316,10 @@
                 },
                 "bunker_type": {
                     "label": "Speco"
+                },
+                "cables": {
+                    "label": "Kabloj",
+                    "placeholder": "1, 2, 3…"
                 },
                 "camera/direction": {
                     "label": "Direkto (horloĝdirekte en gradoj)",
@@ -1467,6 +1486,10 @@
                 "description": {
                     "label": "Priskribo"
                 },
+                "devices": {
+                    "label": "Aparatoj",
+                    "placeholder": "1, 2, 3…"
+                },
                 "diaper": {
                     "label": "Tablo por travindotukado"
                 },
@@ -1541,12 +1564,18 @@
                         "wall": "Muro"
                     }
                 },
+                "fitness_station": {
+                    "label": "Speco de ekzerc-ilaro"
+                },
                 "fixme": {
                     "label": "Riparu min!"
                 },
                 "ford": {
                     "label": "Speco",
                     "placeholder": "Norma"
+                },
+                "frequency": {
+                    "label": "Frekvenco"
                 },
                 "fuel": {
                     "label": "Brulaĵo"
@@ -1906,6 +1935,10 @@
                 "payment_multi": {
                     "label": "Pagmanieroj"
                 },
+                "phases": {
+                    "label": "Fazoj",
+                    "placeholder": "1, 2, 3…"
+                },
                 "phone": {
                     "label": "Telefono",
                     "placeholder": "+31 42 1231 4567"
@@ -1984,6 +2017,9 @@
                 },
                 "railway": {
                     "label": "Tipo"
+                },
+                "rating": {
+                    "label": "Eliga povo"
                 },
                 "recycling_accepts": {
                     "label": "Akceptanta"
@@ -2193,6 +2229,9 @@
                 "studio": {
                     "label": "Speco"
                 },
+                "substance": {
+                    "label": "Substanco"
+                },
                 "substation": {
                     "label": "Speco"
                 },
@@ -2218,6 +2257,15 @@
                 },
                 "surveillance/zone": {
                     "label": "Gardata areo"
+                },
+                "switch": {
+                    "label": "Tipo",
+                    "options": {
+                        "circuit_breaker": "Malŝaltilo kurent-limiganta (441-14-20)",
+                        "disconnector": "Malkonektilo (441-14-05)",
+                        "earthing": "Ŝaltilo alteriga (441-14-07)",
+                        "mechanical": "Meĥanika (441-14-10)"
+                    }
                 },
                 "tactile_paving": {
                     "label": "Reliefo por blinduloj"
@@ -2291,6 +2339,19 @@
                     },
                     "placeholder": "Bonega, bona, malbona…"
                 },
+                "transformer": {
+                    "label": "Tipo",
+                    "options": {
+                        "auto": "Komun-transformilo (aŭtotransformilo)",
+                        "auxiliary": "Helpa (intern-sistema)",
+                        "converter": "Konvertilo",
+                        "distribution": "Distribu-transformilo",
+                        "generator": "Blok-transformilo",
+                        "phase_angle_regulator": "Fazangul-alĝustigilo",
+                        "traction": "Kontaktrela",
+                        "yes": "Nekonata"
+                    }
+                },
                 "trees": {
                     "label": "Arboj"
                 },
@@ -2325,6 +2386,18 @@
                         "stratovolcano": "Tavolovulkano (stratovulkano)"
                     }
                 },
+                "voltage": {
+                    "label": "Tensio"
+                },
+                "voltage/primary": {
+                    "label": "Unua tensio"
+                },
+                "voltage/secondary": {
+                    "label": "Dua tensio"
+                },
+                "voltage/tertiary": {
+                    "label": "Tria tensio"
+                },
                 "wall": {
                     "label": "Speco"
                 },
@@ -2352,6 +2425,22 @@
                 },
                 "wikipedia": {
                     "label": "Vikipedio"
+                },
+                "windings": {
+                    "label": "Volvaĵoj",
+                    "placeholder": "1, 2, 3…"
+                },
+                "windings/configuration": {
+                    "label": "Aranĝo de volvaĵoj",
+                    "options": {
+                        "delta": "IEC 421-10-02 (delta / triangula)",
+                        "leblanc": "IEC 421-10-07 (Leblanc)",
+                        "open": "IEC 421-10-05 (malfermita)",
+                        "open-delta": "IEC 421-10-03 (malfermita delta)",
+                        "scott": "IEC 421-10-06 (Scott)",
+                        "star": " IEC 421-10-01 (stel-forma)",
+                        "zigzag": "IEC 421-10-04 (zigzaga)"
+                    }
                 }
             },
             "presets": {
@@ -2675,6 +2764,10 @@
                     "name": "Motorcikla parkumejo",
                     "terms": "motorciklejo,motociklejo"
                 },
+                "amenity/music_school": {
+                    "name": "Muzika lernejo",
+                    "terms": "muziklernejo"
+                },
                 "amenity/nightclub": {
                     "name": "Noktoklubejo",
                     "terms": "noktoklubo,diskoteko,dancejo,noktklubo,klubo nokta,nokta klubo"
@@ -2798,8 +2891,7 @@
                     "terms": "lernejo,edukejo,instruejo"
                 },
                 "amenity/scrapyard": {
-                    "name": "Ferrubejo",
-                    "terms": "aŭtovrakejo,vrakejo,feraĵejo,recikliga centro,rubejo"
+                    "name": "Ferrubejo"
                 },
                 "amenity/shelter": {
                     "name": "Ŝirmejo",
@@ -3368,9 +3460,9 @@
                     "name": "Skafaldista oficejo",
                     "terms": "skafaldo,trabaro,trabaĵo,trabaĵaro"
                 },
-                "craft/sculpter": {
-                    "name": "Skulptista laborejo",
-                    "terms": "skulptisto,skulptejo"
+                "craft/sculptor": {
+                    "name": "Laborejo de skulptisto",
+                    "terms": "skulptisto"
                 },
                 "craft/shoemaker": {
                     "name": "Ŝuista laborejo",
@@ -3379,10 +3471,6 @@
                 "craft/stonemason": {
                     "name": "Ŝton-tranĉista laborejo",
                     "terms": "ŝtontranĉisto,shtontranchisto,sxtontrancxisto,ŝtonisto,shtonisto,sxtonisto"
-                },
-                "craft/sweep": {
-                    "name": "Kamenpurigista oficejo",
-                    "terms": "kamenoisto,kamenpurigisto,kamentubisto"
                 },
                 "craft/tailor": {
                     "name": "Tajlora laborejo (ĉefe viraj vestoj)"
@@ -3652,9 +3740,13 @@
                     "name": "Vojeto (piedpremita)",
                     "terms": "vojo,pado,irejo,piedvojeto"
                 },
-                "highway/pedestrian": {
+                "highway/pedestrian_area": {
+                    "name": "Piedirada areo",
+                    "terms": "trotuaro,irejo,piedirejo,promenejo,promenvojo"
+                },
+                "highway/pedestrian_line": {
                     "name": "Piedirada strato",
-                    "terms": "trotuaro,irejo,piedirejo,pavimo"
+                    "terms": "trotuaro,irejo,piedirejo,pavimo,promenejo,promenvojo"
                 },
                 "highway/primary": {
                     "name": "Vojo unua-ranga",
@@ -3832,6 +3924,10 @@
                     "name": "Baseno (artefarita lageto)",
                     "terms": "akvo,akvejo,akvujo,lageto,lago,rezervujo"
                 },
+                "landuse/brownfield": {
+                    "name": "Konstruejo (post industria tereno)",
+                    "terms": "bruna kampo,kampo"
+                },
                 "landuse/cemetery": {
                     "name": "Tombejo",
                     "terms": "tombarejo,mortintejo,enterigejo,sepultejo,nekropolo"
@@ -3871,6 +3967,10 @@
                     "name": "Herbotapiŝo",
                     "terms": "gazono,herbejo"
                 },
+                "landuse/greenfield": {
+                    "name": "Konstruejo (virga tereno)",
+                    "terms": "verda kampo,kampo"
+                },
                 "landuse/harbour": {
                     "name": "Haveno",
                     "terms": "marhaveno,ŝipejo"
@@ -3878,6 +3978,14 @@
                 "landuse/industrial": {
                     "name": "Industria tereno",
                     "terms": "industrio,fabriko"
+                },
+                "landuse/industrial/scrap_yard": {
+                    "name": "Ferrubejo",
+                    "terms": "aŭtovrakejo,vrakejo,feraĵejo,recikliga centro,rubejo"
+                },
+                "landuse/industrial/slaughterhouse": {
+                    "name": "Buĉejo",
+                    "terms": "buchejo,bucxejo,porkmortigejo.porkomortigejo,mortigejo"
                 },
                 "landuse/landfill": {
                     "name": "Rubodeponejo",
@@ -3955,6 +4063,10 @@
                     "name": "Ripoza tereno",
                     "terms": "ripozejo,distro"
                 },
+                "landuse/religious": {
+                    "name": "Religia tereno",
+                    "terms": "preĝejo,monaĥejo"
+                },
                 "landuse/residential": {
                     "name": "Privatdoma tereno",
                     "terms": "loĝejo,domo"
@@ -4010,6 +4122,50 @@
                 "leisure/fitness_station": {
                     "name": "Ekzerc-parko (eksterdoma)",
                     "terms": "ripozgimnastiko,gimnastikejo,gimnastejo"
+                },
+                "leisure/fitness_station/balance_beam": {
+                    "name": "Ŝtipo ekvilibra",
+                    "terms": "shtipo,sxtipo,ekvilibrilo,balancilo"
+                },
+                "leisure/fitness_station/box": {
+                    "name": "Ekzerca skatolo (por salti)",
+                    "terms": "gimnastika skatolo,ĉevalo gimnastika"
+                },
+                "leisure/fitness_station/horizontal_bar": {
+                    "name": "Horizontala stango",
+                    "terms": "reko,alta stango"
+                },
+                "leisure/fitness_station/horizontal_ladder": {
+                    "name": "Horizontala ŝtupetaro",
+                    "terms": "gimnastikaj simiaj stangoj"
+                },
+                "leisure/fitness_station/hyperextension": {
+                    "name": "Dors-muskol-ekzercilo",
+                    "terms": "dorsaj muskoloj,distranĉilo"
+                },
+                "leisure/fitness_station/parallel_bars": {
+                    "name": "Du paralelaj stangoj",
+                    "terms": "paralelaj stangoj,rekoj"
+                },
+                "leisure/fitness_station/push-up": {
+                    "name": "Puŝlev-ekzercilo",
+                    "terms": "puŝlevoj,pusxlevoj,pushlevoj,kuŝapogo"
+                },
+                "leisure/fitness_station/rings": {
+                    "name": "Ekzercaj ringegoj",
+                    "terms": "ringegoj"
+                },
+                "leisure/fitness_station/sign": {
+                    "name": "Inform-tabulo pri ekzerco",
+                    "terms": "informtabulo,informsigno,signo"
+                },
+                "leisure/fitness_station/sit-up": {
+                    "name": "Ventr-muskol-ekzercilo",
+                    "terms": "ventraj muskoloj"
+                },
+                "leisure/fitness_station/stairs": {
+                    "name": "Ekzerca ŝtuparo",
+                    "terms": "ŝtuparo"
                 },
                 "leisure/garden": {
                     "name": "Ĝardeno",
@@ -4071,6 +4227,10 @@
                     "name": "Plaĝ-flugpilkada ludkampo",
                     "terms": "flugpilkadejo,retpilkadejo,volejbalejo,plaĝa flugpilkado, plagha flugpilkado,plagxa flugpilkado"
                 },
+                "leisure/pitch/boules": {
+                    "name": "Globludo grunda (Boules)",
+                    "terms": "globludo,bocce,lyonnaise,pétanque,petanque,grunda globludo"
+                },
                 "leisure/pitch/bowls": {
                     "name": "Globlud-herbeja (bowls) ludkampo",
                     "terms": "bowls,globludo,herbejglobludo"
@@ -4122,6 +4282,10 @@
                 "leisure/running_track": {
                     "name": "Kurejo",
                     "terms": "dromo,kurado"
+                },
+                "leisure/sauna": {
+                    "name": "Ŝvitbanejo",
+                    "terms": "shvitbanejo,sxvitbanejo,saŭno,sauxno,sauno,naĝejo,baseno"
                 },
                 "leisure/slipway": {
                     "name": "Ŝipglitejo",
@@ -4408,15 +4572,31 @@
                 },
                 "office/accountant": {
                     "name": "Oficejo de kontisto",
-                    "terms": "kontisto,librotenisto,kontregistristo"
+                    "terms": "kontisto,librotenisto,librotenanto"
                 },
                 "office/administrative": {
                     "name": "Administra oficejo",
                     "terms": "administrado"
                 },
+                "office/adoption_agency": {
+                    "name": "Oficejo de adopto",
+                    "terms": "adoptoficejo,agentejo de adopto,orfejo"
+                },
+                "office/advertising_agency": {
+                    "name": "Oficejo de reklamo",
+                    "terms": "reklamejo,reklamistejo,merkatado"
+                },
                 "office/architect": {
                     "name": "Oficejo de arĥitekturisto",
-                    "terms": "arĥitekto,arkitekto,arhxitekto,arĥitekturisto,arkitekturisto,arhxitekturisto,konstruisto"
+                    "terms": "arĥitekto,arhhitekto,arhxitekto,arkitekto,kontruisto"
+                },
+                "office/association": {
+                    "name": "Oficejo de ne-profit-cela organizaĵo",
+                    "terms": "neprofitcela organizaĵo,neprofitdona organizaĵo,organizaĵo,neregistara organizaĵo,senprofitcela organizaĵo"
+                },
+                "office/charity": {
+                    "name": "Oficejo de almoza organizaĵo",
+                    "terms": "almoza organizaĵo,karitata organizaĵo,karita organizaĵo"
                 },
                 "office/company": {
                     "name": "Oficejo de firmao",
@@ -4434,6 +4614,10 @@
                     "name": "Dungoficejo",
                     "terms": "dungado,labora agentejo,senlaborula oficejo,dungejo"
                 },
+                "office/energy_supplier": {
+                    "name": "Oficejo de elektr-provizanto",
+                    "terms": "elektroprovizanto,energiprovizanto"
+                },
                 "office/estate_agent": {
                     "name": "Oficejo de nemoveblaĵisto",
                     "terms": "nemoveblaĵisto,domvendisto"
@@ -4441,6 +4625,14 @@
                 "office/financial": {
                     "name": "Financa oficejo",
                     "terms": "financisto"
+                },
+                "office/forestry": {
+                    "name": "Oficejo de arbar-mastrumo",
+                    "terms": "arbarmastrumado,forsto,arbarkultivo"
+                },
+                "office/foundation": {
+                    "name": "Oficejo de fondaĵo",
+                    "terms": "fondaĵo,fondajho,fondajxo,fondacio"
                 },
                 "office/government": {
                     "name": "Registara oficejo",
@@ -4450,13 +4642,21 @@
                     "name": "Oficejo de civila stato",
                     "terms": "civila stato,civilstato,geedzeco"
                 },
+                "office/government/tax": {
+                    "name": "Oficejo de imposto",
+                    "terms": "imposto,impostkolekto,depago"
+                },
+                "office/guide": {
+                    "name": "Oficejo de vojaĝ-gvido",
+                    "terms": "vojaĝgvidado,vojaghgvidado,vojagxgvidado,ekskurso,gvidado"
+                },
                 "office/insurance": {
                     "name": "Oficejo de asekur-kompanio",
                     "terms": "asekurkompanio,asekur-kompanio,asekuragento,asekuristo"
                 },
                 "office/it": {
-                    "name": "Inform-teĥnologia oficejo",
-                    "terms": "informteĥnologio,informteknologio,programisto,komputscienco,komputoscienco,informatikisto,IT"
+                    "name": "Oficejo de inform-teĥnologia firmao",
+                    "terms": "inform-teĥnologio,informteĥnologio,komputiloj,programaro,IT"
                 },
                 "office/lawyer": {
                     "name": "Oficejo de leĝisto",
@@ -4466,13 +4666,21 @@
                     "name": "Oficejo de notario",
                     "terms": "notario,aktisto,registristo"
                 },
+                "office/moving_company": {
+                    "name": "Oficejo de transloĝiĝ-helpa firmao",
+                    "terms": "transloĝiĝo,transporto"
+                },
                 "office/newspaper": {
-                    "name": "Gazet-redaktejo",
-                    "terms": "gazetredaktejo,redaktejo,redakcio"
+                    "name": "Oficejo de redakto",
+                    "terms": "redaktejo,gazeto"
                 },
                 "office/ngo": {
                     "name": "Oficejo de neregistara organizaĵo",
                     "terms": "neregistara organizaĵo,ne-registara organizaĵo"
+                },
+                "office/notary": {
+                    "name": "Oficejo de notario",
+                    "terms": "notario,aktisto,registristo"
                 },
                 "office/physician": {
                     "name": "Kabineto de kuracisto"
@@ -4481,9 +4689,25 @@
                     "name": "Oficejo de politika partio",
                     "terms": "politika partio,politikpartio,partio"
                 },
+                "office/private_investigator": {
+                    "name": "Oficejo de detektivo",
+                    "terms": "detektivo"
+                },
+                "office/quango": {
+                    "name": "Oficejo de duon-registara organizaĵo",
+                    "terms": "organizaĵo"
+                },
                 "office/research": {
                     "name": "Oficejo de scienca esplorado",
                     "terms": "esploro,progreso,scienco"
+                },
+                "office/surveyor": {
+                    "name": "Oficejo de analiza firmao",
+                    "terms": "anketo,demandfolio,analizo,mezuro"
+                },
+                "office/tax_advisor": {
+                    "name": "Oficejo de impost-konsilo",
+                    "terms": "impostkonsilo"
                 },
                 "office/telecommunication": {
                     "name": "Oficejo de telekomunikada firmao",
@@ -4491,10 +4715,14 @@
                 },
                 "office/therapist": {
                     "name": "Kabineto de terapiisto",
-                    "terms": "terapiisto,terapeŭto,okup-terapiisto,psikologo,psiĥologo"
+                    "terms": "terapiisto,psiĥoterapiisto,psikoterapiisto,psikologo,kuracisto"
                 },
                 "office/travel_agent": {
                     "name": "Vojaĝa oficejo"
+                },
+                "office/water_utility": {
+                    "name": "Oficejo de akv-provizanta firmao",
+                    "terms": "akvoprovizo,akvokondukto"
                 },
                 "piste": {
                     "name": "Skivojo",
@@ -4518,6 +4746,10 @@
                     "name": "Insulo",
                     "terms": "insulo"
                 },
+                "place/islet": {
+                    "name": "Insuleto",
+                    "terms": "insulo"
+                },
                 "place/isolated_dwelling": {
                     "name": "Solstaranta domo",
                     "terms": "domo,kabano,ĥato,domaro"
@@ -4529,6 +4761,10 @@
                 "place/neighbourhood": {
                     "name": "Najbaraĵo",
                     "terms": "najbarajho,najbarajxo,vilaĝo,vilaĝeto,domaro,kvartalo"
+                },
+                "place/plot": {
+                    "name": "Parcelo",
+                    "terms": "terpeco,farmbieno,bieno"
                 },
                 "place/quarter": {
                     "name": "Kvartalo",
@@ -4551,8 +4787,8 @@
                     "terms": "vilagho,vilagxo,kamparo"
                 },
                 "playground/balance_beam": {
-                    "name": "Ŝtipo ekvilibra (infanludilo)",
-                    "terms": "ekvilibrilo,balancilo"
+                    "name": "Ŝtipo ekvilibra (por infanoj)",
+                    "terms": "shtipo,sxtipo,ekvilibrilo,balancilo"
                 },
                 "playground/basket_spinner": {
                     "name": "Korba turniĝilo (infanludilo)",
@@ -4571,7 +4807,7 @@
                     "terms": "salta kuseno"
                 },
                 "playground/horizontal_bar": {
-                    "name": "Horizontala stango (infanludilo)",
+                    "name": "Horizontala stango (por infanoj)",
                     "terms": "reko,alta stango"
                 },
                 "playground/rocker": {
@@ -4647,6 +4883,10 @@
                 "power/substation": {
                     "name": "Elektrosubcentralo",
                     "terms": "subcentralo,transformatoro,substacio"
+                },
+                "power/switch": {
+                    "name": "Ŝaltilo elektra",
+                    "terms": "sxaltilo,shaltilo,malŝaltilo,elektroŝaltilo,malkonektilo"
                 },
                 "power/tower": {
                     "name": "Elektrofosto (alttensia)",
@@ -4765,6 +5005,10 @@
                 "shop": {
                     "name": "Vendejo",
                     "terms": "aĉetejo"
+                },
+                "shop/agrarian": {
+                    "name": "Terkultur-investaĵa vendejo",
+                    "terms": "terkulturo,agrokulturo,agrikulturo,semoj,kripoj,furaĝoj,pesticidoj,kemiaĵoj,ĥemiaĵoj"
                 },
                 "shop/alcohol": {
                     "name": "Alkohola vendejo",
@@ -5284,8 +5528,8 @@
                     "terms": "kampadveturilo,kampveturilo"
                 },
                 "tourism/chalet": {
-                    "name": "Dometo feria (luprenebla)",
-                    "terms": "pensiono,luprenado de ĉambro,luigado de ĉambro,apartamento,gastejo"
+                    "name": "Dometo feria",
+                    "terms": "feria dometo,hoteleto,loĝejo feria,apartamento"
                 },
                 "tourism/gallery": {
                     "name": "Artgalerio",
@@ -5342,6 +5586,10 @@
                 "tourism/viewpoint": {
                     "name": "Belvidejo",
                     "terms": "videjo,vidindaĵo,rigardejo"
+                },
+                "tourism/wilderness_hut": {
+                    "name": "Sovaĝeja kabano",
+                    "terms": "sovagheja kabano,sovagxeja kabano,kabano,ĥato,ŝirmejo"
                 },
                 "tourism/zoo": {
                     "name": "Bestoĝardeno",
@@ -5575,6 +5823,13 @@
                 "description": "Detala satelita fotaro de DigitalGlobe.",
                 "name": "Detala fotaro de DigitalGlobe"
             },
+            "DigitalGlobe-Premium-vintage": {
+                "attribution": {
+                    "text": "Kondiĉoj kaj rimarkoj"
+                },
+                "description": "Limoj kaj datoj de fotoj. Etikedoj montriĝas de skal-nivelo 14.",
+                "name": "Detala fotaro de DigitalGlobe - fot-dato"
+            },
             "DigitalGlobe-Standard": {
                 "attribution": {
                     "text": "Kondiĉoj kaj rimarkoj"
@@ -5582,12 +5837,19 @@
                 "description": "Norma satelita fotaro de DigitalGlobe.",
                 "name": "Norma fotaro de DigitalGlobe"
             },
+            "DigitalGlobe-Standard-vintage": {
+                "attribution": {
+                    "text": "Kondiĉoj kaj rimarkoj"
+                },
+                "description": "Limoj kaj datoj de fotoj. Etikedoj montriĝas de skal-nivelo 14.",
+                "name": "Norma fotaro de DigitalGlobe - fot-dato"
+            },
             "EsriWorldImagery": {
                 "attribution": {
                     "text": "Kondiĉoj kaj rimarkoj"
                 },
                 "description": "Tutmonda fotaro de Esri.",
-                "name": "Tutmonda fotaro de Esri."
+                "name": "Tutmonda fotaro de Esri"
             },
             "MAPNIK": {
                 "attribution": {

@@ -310,9 +310,7 @@
             "localized_translation_language": "ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
             "localized_translation_name": "ಹೆಸರು"
         },
-        "zoom_in_edit": "ಸಂಪಾದಿಸಲು ಜೂಮ್ ಇನ್ ಮಾಡಿ",
         "login": "ಲಾಗಿನ್",
-        "logout": "ಲಾಗ್ ಔಟ್",
         "loading_auth": "ಓಪನ್ ಸ್ಟ್ರೀಟ್ ಮ್ಯಾಪ್ ಗೆ ಸಂಪರ್ಕಿಸಲಾಗುತ್ತಿದೆ.....",
         "report_a_bug": "ದೋಷವನ್ನು ವಿವರಿಸಿ. ",
         "help_translate": "ಅನುವಾದಕ್ಕೆ ನೀವು ಸಹಾಯಮಾಡಿ. ",
@@ -549,8 +547,7 @@
         },
         "splash": {
             "welcome": "ಓಪನ್ ಸ್ಟ್ರೀಟ್ ಮ್ಯಾಪ್ ಐಡಿ ಎಡಿಟರಿಗೆ ಸ್ವಾಗತ!",
-            "walkthrough": "ಸಹಾಯದರ್ಶನವನ್ನು ಪ್ರಾರಂಭಿಸಿ  ",
-            "start": "ಈಗ ಸಂಪಾದಿಸಿ"
+            "walkthrough": "ಸಹಾಯದರ್ಶನವನ್ನು ಪ್ರಾರಂಭಿಸಿ  "
         },
         "source_switch": {
             "live": "ಲೈವ್",
@@ -571,10 +568,6 @@
             "untagged_area": "ಹೆಸರುಪಟ್ಟಿಯಿಲ್ಲದ ಕ್ಷೇತ್ರ.",
             "untagged_relation": "ಟ್ಯಾಗ್ ಮಾಡಲಾಗದ ಸಂಬಂಧ",
             "deprecated_tags": "‍ಉಪಯೋಗಿಸದ ಗುರುತುಪಟ್ಟಿಗಳು: {tags}"
-        },
-        "zoom": {
-            "in": "ಹಿಗ್ಗಿಸು",
-            "out": "ಕುಗ್ಗಿಸು"
         },
         "full_screen": "‍ಪೂರ್ಣ ಪರದೆಗೆ ಹಿಂದಿರುಗು",
         "gpx": {
@@ -1686,9 +1679,6 @@
                 "craft/optician": {
                     "name": "ನೇತ್ರ ತಜ್ಞ"
                 },
-                "craft/sculpter": {
-                    "name": "ಶಿಲ್ಪಿ"
-                },
                 "craft/shoemaker": {
                     "name": "ಚಮ್ಮಾರ"
                 },
@@ -1781,9 +1771,6 @@
                 },
                 "office": {
                     "name": "ಕಚೇರಿ"
-                },
-                "office/newspaper": {
-                    "name": "ವಾರ್ತಾಪತ್ರಿಕೆ"
                 },
                 "office/physician": {
                     "name": "ವೈದ್ಯ"

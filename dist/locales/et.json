@@ -117,6 +117,10 @@
                     "single": "Seda objekti ei saa kustutada, sest piisavalt suur osa sellest pole praegu nähtaval.",
                     "multiple": "Neid objekte ei saa kustutada, sest piisavalt suur osa neist pole praegu nähtaval."
                 },
+                "incomplete_relation": {
+                    "single": "Seda objekti ei saa kustutada, kuna see ei ole veel täielikult alla laaditud.",
+                    "multiple": "Neid objekte ei saa kustutada, kuna need ei ole veel täielikult alla laaditud."
+                },
                 "part_of_relation": {
                     "single": "Objekti ei saa kustutada, sest see on osa suuremast relatsioonist. Pead kõigepealt selle relatsioonist eemaldama.",
                     "multiple": "Objekte ei saa kustutada, sest need on osa suurematest relatsioonidest. Pead kõigepealt need relatsioonidest eemaldama."
@@ -207,6 +211,10 @@
                         "multiple": "Objektid peegeldatud lühkest telge pidi."
                     }
                 },
+                "incomplete_relation": {
+                    "single": "Seda objekti ei saa peegeldada, kuna see ei ole veel täielikult alla laaditud.",
+                    "multiple": "Neid objekte ei saa peegeldada, kuna need ei ole veel täielikult alla laaditud."
+                },
                 "too_large": {
                     "single": "Seda objekti ei saa peegeldada, sest piisavalt suur osa sellest pole praegu nähtaval.",
                     "multiple": "Neid objekte ei saa peegeldada, sest piisavalt suur osa neist pole praegu nähtaval."
@@ -223,6 +231,10 @@
                     "line": "Pööratud joont.",
                     "area": "Pööratud ala.",
                     "multiple": "Pööratud mitut objekti."
+                },
+                "incomplete_relation": {
+                    "single": "Seda objekti ei saa pöörata, kuna see ei ole veel täielikult alla laaditud.",
+                    "multiple": "Neid objekte ei saa pöörata, kuna need ei ole veel täielikult alla laaditud."
                 },
                 "too_large": {
                     "single": "Seda objekti ei saa pöörata, sest piisavalt suur osa sellest pole praegu nähtaval.",
@@ -277,7 +289,6 @@
             "localized_translation_language": "Vali keel",
             "localized_translation_name": "Nimi"
         },
-        "zoom_in_edit": "Muutmiseks suumi sisse",
         "login": "Logi sisse",
         "logout": "Logi välja",
         "loading_auth": "OpenStreetMapiga ühendamine...",
@@ -295,6 +306,7 @@
             "save": "Laadi üles",
             "cancel": "Loobu",
             "changes": "{count} muudatust",
+            "download_changes": "Laadi alla osmChange-fail",
             "warnings": "Hoiatused",
             "modified": "Muudetud",
             "deleted": "Kustutatud",
@@ -305,6 +317,22 @@
         "contributors": {
             "list": "Muutjad: {users}",
             "truncated_list": "Muutjad: {users} ja {count} teist"
+        },
+        "info_panels": {
+            "background": {
+                "source": "Allikas",
+                "description": "Kirjeldus",
+                "resolution": "Resolutsioon",
+                "accuracy": "Täpsus"
+            },
+            "history": {
+                "title": "Ajalugu",
+                "version": "Versioon",
+                "last_edit": "Viimane muudatus",
+                "edited_by": "Muutis",
+                "changeset": "Muudatuskogum",
+                "unknown": "Teadmata"
+            }
         },
         "geometry": {
             "point": "punkt",
@@ -383,9 +411,16 @@
             "title": "Kaardi andmed",
             "description": "Kaardi andmed",
             "data_layers": "Andmekihid",
+            "layers": {
+                "osm": {
+                    "tooltip": "Kaardiandmed OpenStreetMapist",
+                    "title": "OpenStreetMapi andmed"
+                }
+            },
             "fill_area": "Täida alad",
             "map_features": "Kaardikuva",
-            "autohidden": "Need objektid on automaatselt peidetud, sest neid oleks ekraanil liiga palju. Suumi sisse, et neid muuta."
+            "autohidden": "Need objektid on automaatselt peidetud, sest neid oleks ekraanil liiga palju. Suumi sisse, et neid muuta.",
+            "osmhidden": "Need objektid on automaatselt peidetud, sest OpenStreetMapi kiht on peidetud."
         },
         "feature": {
             "points": {
@@ -475,6 +510,7 @@
                 "keep_remote": "Kasuta tema oma",
                 "restore": "Taasta",
                 "delete": "Jäta kustutatuna",
+                "download_changes": "Või laadi alla osmChange-fail",
                 "done": "Kõik konfliktid lahendatud!",
                 "help": "Teine kasutaja muutis kaardil mõnd objekti, mida sinagi muutsid.\nKlõpsa allpool igal objektil, et näha konflikti üksikasju ja et valida, kas säilitada\nenda muudatused või teise kasutaja muudatused.\n"
             }
@@ -504,8 +540,7 @@
         "splash": {
             "welcome": "Tere tulemast OpenStreetMapi redaktorisse iD",
             "text": "iD on kasutajasõbralik ja samas võimas töövahend parima vaba maailmakaardi täiendamiseks. See on versioon {version}. Rohkem infot võib leida veebilehelt {website} ja vigadest saab teatada lehel {github}.",
-            "walkthrough": "Alusta tutvustust",
-            "start": "Alusta muutmist"
+            "walkthrough": "Alusta tutvustust"
         },
         "source_switch": {
             "live": "live",
@@ -527,10 +562,6 @@
             "many_deletions": "Oled kustutamas {n} objekti. Kas oled sa kindel, et soovid seda teha? See kustutab need kaardilt, mida kõik näevad aadressil openstreetmap.org.",
             "tag_suggests_area": "Silt {tag} viitab, et joon peaks olema ala, kuid see pole ala.",
             "deprecated_tags": "Iganenud sildid: {tags}"
-        },
-        "zoom": {
-            "in": "Suurenda vaadet",
-            "out": "Vähenda vaadet"
         },
         "cannot_zoom": "Ei ole võimalik rohkem välja suumida selles vaates.",
         "full_screen": "Lülita täisekraanile",
@@ -912,6 +943,12 @@
                 "handrail": {
                     "label": "Käsipuu"
                 },
+                "hashtags": {
+                    "label": "Soovitatud trellsildid"
+                },
+                "healthcare/speciality": {
+                    "label": "Erialad"
+                },
                 "iata": {
                     "label": "IATA"
                 },
@@ -1160,6 +1197,9 @@
                 "social_facility": {
                     "label": "Tüüp"
                 },
+                "source": {
+                    "label": "Allikad"
+                },
                 "stop": {
                     "label": "Tüüp",
                     "options": {
@@ -1174,6 +1214,11 @@
                         "cutting": "Läbimurre",
                         "embankment": "Tamm",
                         "ford": "Koolmekoht",
+                        "tunnel": "Tunnel"
+                    }
+                },
+                "structure_waterway": {
+                    "options": {
                         "tunnel": "Tunnel"
                     }
                 },
@@ -1194,6 +1239,9 @@
                 },
                 "toll": {
                     "label": "Maksustatud"
+                },
+                "tourism_attraction": {
+                    "label": "Turism"
                 },
                 "tracktype": {
                     "label": "Raja tüüp",
@@ -1353,6 +1401,12 @@
                 },
                 "amenity/clinic": {
                     "name": "Kliinik"
+                },
+                "amenity/clinic/abortion": {
+                    "name": "Abordikliinik"
+                },
+                "amenity/clinic/fertility": {
+                    "name": "Viljakuskliinik"
                 },
                 "amenity/clock": {
                     "name": "Kell",
@@ -1608,6 +1662,15 @@
                 },
                 "area/highway": {
                     "name": "Teekate"
+                },
+                "attraction/amusement_ride": {
+                    "name": "Lõbuatraktsioon"
+                },
+                "attraction/animal": {
+                    "name": "Loom"
+                },
+                "attraction/big_wheel": {
+                    "name": "Vaateratas"
                 },
                 "barrier": {
                     "name": "Barjäär",
@@ -1913,17 +1976,11 @@
                 "craft/sawmill": {
                     "name": "Saekaater"
                 },
-                "craft/sculpter": {
-                    "name": "Skulptor"
-                },
                 "craft/shoemaker": {
                     "name": "Kingsepp"
                 },
                 "craft/stonemason": {
                     "name": "Kiviraidur"
-                },
-                "craft/sweep": {
-                    "name": "Korstnapühkija"
                 },
                 "craft/tailor": {
                     "name": "Rätsep"
@@ -1968,8 +2025,15 @@
                 "footway/crossing": {
                     "name": "Ülekäik"
                 },
+                "footway/crossing-raised": {
+                    "name": "Tõstetud ülekäik",
+                    "terms": "lame,künnis,aeglusti"
+                },
                 "footway/crosswalk": {
-                    "name": "Jalakäijate ülekäik"
+                    "name": "Ülekäigurada"
+                },
+                "footway/crosswalk-raised": {
+                    "name": "Tõstetud ülekäigurada"
                 },
                 "footway/sidewalk": {
                     "name": "Kõnnitee"
@@ -1978,9 +2042,32 @@
                     "name": "Koolmekoht",
                     "terms": "Koole"
                 },
+                "healthcare": {
+                    "name": "Tervishoiukeskus",
+                    "terms": "kliinik,arst,haigla,heaolu,taastusravi,ravi"
+                },
+                "healthcare/alternative": {
+                    "name": "Alternatiivmeditsiin"
+                },
+                "healthcare/alternative/chiropractic": {
+                    "name": "Kiropraktik"
+                },
+                "healthcare/audiologist": {
+                    "name": "Audioloog"
+                },
+                "healthcare/birthing_center": {
+                    "name": "Sünnitusmaja"
+                },
                 "healthcare/blood_donation": {
                     "name": "Verekeskus",
                     "terms": "veretalitus, vereteenistus, doonor"
+                },
+                "healthcare/hospice": {
+                    "name": "Hooldekodu",
+                    "terms": "hospiits"
+                },
+                "healthcare/midwife": {
+                    "name": "Ämmaemand"
                 },
                 "highway": {
                     "name": "Tee"
@@ -1998,9 +2085,15 @@
                 "highway/crossing": {
                     "name": "Ülekäigurada"
                 },
+                "highway/crossing-raised": {
+                    "name": "Tõstetud ristmik"
+                },
                 "highway/crosswalk": {
                     "name": "Ülekäigurada",
                     "terms": "jalakäijate ülekäik,ülekäik"
+                },
+                "highway/crosswalk-raised": {
+                    "name": "Tõstetud ülekäigurada"
                 },
                 "highway/cycleway": {
                     "name": "Rattatee"
@@ -2031,9 +2124,6 @@
                 },
                 "highway/path": {
                     "name": "Rada"
-                },
-                "highway/pedestrian": {
-                    "name": "Jalakäijate tänav"
                 },
                 "highway/primary": {
                     "name": "Põhimaantee",
@@ -2232,6 +2322,12 @@
                     "name": "Tööstuspiirkond",
                     "terms": "Tööstusala"
                 },
+                "landuse/industrial/scrap_yard": {
+                    "name": "Vanametalli kokkuost"
+                },
+                "landuse/industrial/slaughterhouse": {
+                    "name": "Tapamaja"
+                },
                 "landuse/landfill": {
                     "name": "Prügila",
                     "terms": "Prügimägi"
@@ -2388,6 +2484,9 @@
                 "leisure/running_track": {
                     "name": "Jooksurada"
                 },
+                "leisure/sauna": {
+                    "name": "Saun"
+                },
                 "leisure/slipway": {
                     "name": "Slipp",
                     "terms": "Slipp, väikesadam"
@@ -2432,6 +2531,9 @@
                 },
                 "man_made/chimney": {
                     "name": "Korsten"
+                },
+                "man_made/crane": {
+                    "name": "Kraana"
                 },
                 "man_made/cutline": {
                     "name": "Siht",
@@ -2614,6 +2716,13 @@
                 },
                 "place/island": {
                     "name": "Saar"
+                },
+                "place/islet": {
+                    "name": "Laid",
+                    "terms": "saareke,rahu,kari"
+                },
+                "place/plot": {
+                    "name": "Krunt"
                 },
                 "place/suburb": {
                     "name": "Eeslinn",
@@ -3202,10 +3311,6 @@
                     "name": "Karavanipark",
                     "terms": "autoelamu,haagissuvila,kämpimisala"
                 },
-                "tourism/chalet": {
-                    "name": "Mägimajake",
-                    "terms": "alpimaja"
-                },
                 "tourism/gallery": {
                     "name": "Kunstigalerii"
                 },
@@ -3294,6 +3399,10 @@
                 "traffic_calming/rumble_strip": {
                     "name": "Täristi",
                     "terms": "põristi,põrin,tärin,värin,väristaja,müra,triibud,risti jooned,jooned"
+                },
+                "traffic_calming/table": {
+                    "name": "Tõstetud pind",
+                    "terms": "lame,künnis,lamav politseinik,kiirustõke,tõke,liikluskünnis"
                 },
                 "type/boundary": {
                     "name": "Piir"
@@ -3419,6 +3528,10 @@
                 },
                 "waterway/stream": {
                     "name": "Oja"
+                },
+                "waterway/stream_intermittent": {
+                    "name": "Ajutine oja",
+                    "terms": "perioodiline"
                 },
                 "waterway/water_point": {
                     "name": "Joogiveepunkt (veesõidukitele)",

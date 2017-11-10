@@ -310,7 +310,6 @@
             "localized_translation_language": "اختر لغة",
             "localized_translation_name": "الاسم"
         },
-        "zoom_in_edit": "كبّر للتحرير",
         "login": "تسجيل دخول",
         "logout": "تسجيل خروج",
         "loading_auth": "جار الإتصال بـ OpenStreetMap ...",
@@ -601,8 +600,7 @@
         "splash": {
             "welcome": "مرحبا بك في محرر iD لخريطة الشارع المفتوحة OpenStreetMap.",
             "text": "محرر الخرائط ID هو محرر سهل وجذاب ولكنه أيضًا أداة قوية جدا وفعالة للمساهمة في أفضل خرائط حُرة ومجانية في العالم. هذا هو الإصدار رقم {version}. لمزيد من المعلومات انظر {website} ، كما يمكنك الإبلاغ عن العلل والمشاكل على {github}.",
-            "walkthrough": "بدء جولة تعليم",
-            "start": "حرّر الآن"
+            "walkthrough": "بدء جولة تعليم"
         },
         "source_switch": {
             "live": "حي",
@@ -631,10 +629,6 @@
             "many_deletions": "أنت على وشك حذف {n} من العناصر. هل أنت متأكد من ذلك؟ ستُحذف تلك البيانات من الخريطة التي يمكن للجميع أن يراها على openstreetmap.org.",
             "tag_suggests_area": "الوسم {tag} يقترح بأن الخط يجب أن يكون منطقة، ولكنها حاليا ليست منطقة",
             "deprecated_tags": "وسوم مهجورة: {tags}"
-        },
-        "zoom": {
-            "in": "تكبير",
-            "out": "تصغير"
         },
         "cannot_zoom": "لايمكن التصغير أكثر من ذلك في الوضع الحالي.",
         "full_screen": "التبديل إلى وضع ملء الشاشة",
@@ -1351,6 +1345,9 @@
                 "historic": {
                     "label": "النوع"
                 },
+                "historic/civilization": {
+                    "label": "الحضارة التاريخية"
+                },
                 "hoops": {
                     "placeholder": "1، 2، 4..."
                 },
@@ -1745,8 +1742,16 @@
                     },
                     "placeholder": "غير معروف"
                 },
+                "structure_waterway": {
+                    "options": {
+                        "tunnel": "نفق"
+                    }
+                },
                 "studio": {
                     "label": "النوع"
+                },
+                "substance": {
+                    "label": "مادة"
                 },
                 "substation": {
                     "label": "النوع"
@@ -1835,6 +1840,10 @@
                 "address": {
                     "name": "العنوان",
                     "terms": "عنوان"
+                },
+                "aerialway/cable_car": {
+                    "name": "تلفريك",
+                    "terms": "تلفريك، معبر هوائي"
                 },
                 "aeroway": {
                     "name": "جوي"
@@ -1965,6 +1974,9 @@
                     "name": "مياه شرب",
                     "terms": "ماء الشرب"
                 },
+                "amenity/driving_school": {
+                    "name": "مدرسة تعليم السياقة"
+                },
                 "amenity/embassy": {
                     "name": "سفارة",
                     "terms": "سفارة"
@@ -1976,6 +1988,9 @@
                 "amenity/fire_station": {
                     "name": "محطة إطفاء حريق",
                     "terms": "محطة إطفاء"
+                },
+                "amenity/food_court": {
+                    "name": "قاعة طعام"
                 },
                 "amenity/fountain": {
                     "name": "نافورة",
@@ -1995,6 +2010,9 @@
                 },
                 "amenity/internet_cafe": {
                     "name": "مقهى إنترنت"
+                },
+                "amenity/kindergarten": {
+                    "name": "روصة أطفال"
                 },
                 "amenity/library": {
                     "name": "مكتبة",
@@ -2078,6 +2096,9 @@
                 },
                 "amenity/school": {
                     "name": "أرض مدرسة"
+                },
+                "amenity/scrapyard": {
+                    "name": "مقبرة السيارات"
                 },
                 "amenity/shelter": {
                     "name": "مأوى",
@@ -2320,6 +2341,22 @@
                 "building/university": {
                     "name": "مبنى جامعي"
                 },
+                "craft/beekeeper": {
+                    "name": "مربي النحل",
+                    "terms": "مربي النحل, نحال"
+                },
+                "craft/blacksmith": {
+                    "name": "حدّاد",
+                    "terms": "حدّاد"
+                },
+                "craft/boatbuilder": {
+                    "name": "بنّاء السفن",
+                    "terms": "بنّاء السفن"
+                },
+                "craft/bookbinder": {
+                    "name": "مجلد الكتب",
+                    "terms": "مجلد الكتب"
+                },
                 "craft/brewery": {
                     "name": "مصنع بيرة",
                     "terms": "بيرة; جعة"
@@ -2330,6 +2367,14 @@
                 "craft/caterer": {
                     "name": "منظم حفلات",
                     "terms": "منظم حفلات; متعهد حفلات;حفلة;حفلات"
+                },
+                "craft/clockmaker": {
+                    "name": "ساعاتي",
+                    "terms": "ساعاتي"
+                },
+                "craft/confectionery": {
+                    "name": "حلواني",
+                    "terms": "حلواني"
                 },
                 "craft/electrician": {
                     "name": "كهربائي",
@@ -2359,6 +2404,12 @@
                 },
                 "craft/shoemaker": {
                     "name": "إسكافي"
+                },
+                "craft/tailor": {
+                    "name": "خياط"
+                },
+                "craft/tiler": {
+                    "name": "خياط"
                 },
                 "emergency/ambulance_station": {
                     "name": "محطة إسعاف",
@@ -2687,6 +2738,10 @@
                     "name": "موقد نار",
                     "terms": "موقد"
                 },
+                "leisure/fitness_centre": {
+                    "name": "مركز اللياقة البدنية",
+                    "terms": "مركز اللياقة البدنية، نادي صحي"
+                },
                 "leisure/garden": {
                     "name": "حديقة",
                     "terms": "حديقة"
@@ -2762,6 +2817,10 @@
                     "name": "مزلقة سفن",
                     "terms": "مزلقة سفن"
                 },
+                "leisure/sports_centre": {
+                    "name": "مركز رياضي",
+                    "terms": " مركز رياضي، نادي رياضي "
+                },
                 "leisure/sports_centre/swimming": {
                     "name": "مبنى حوض سباحة",
                     "terms": "حمام سباحة; حوض سباحة; حمام; حوض; سباحة; مسبح"
@@ -2773,6 +2832,10 @@
                 "leisure/swimming_pool": {
                     "name": "حوض سباحة",
                     "terms": "حمام سباحة; حوض سباحة; حمام; حوض; سباحة; مسبح"
+                },
+                "leisure/track": {
+                    "name": "مضمار سباق",
+                    "terms": "مضمار سباق"
                 },
                 "leisure/water_park": {
                     "name": "ملاهي مائية",
@@ -2862,6 +2925,10 @@
                 "man_made/water_works": {
                     "name": "محطة مياه",
                     "terms": "محطة مياه"
+                },
+                "man_made/watermill": {
+                    "name": "طاحونة مائية",
+                    "terms": "طاحونة مائية"
                 },
                 "man_made/works": {
                     "name": "مصنع",
@@ -2973,16 +3040,28 @@
                     "terms": "مكتب"
                 },
                 "office/accountant": {
-                    "name": "المحاسب",
-                    "terms": "المحاسب القانوني، المدقق، الحسابات "
+                    "name": " المحاسب ",
+                    "terms": " المحاسب القانوني، المدقق، الحسابات "
                 },
                 "office/administrative": {
                     "name": "مكتب الإداري ",
                     "terms": "إدارة، إدارة عامة، مكتب تنظيمي"
                 },
+                "office/advertising_agency": {
+                    "name": "وكالة إعلانية",
+                    "terms": "وكالة الإشهار، وكالة إعلانية"
+                },
                 "office/architect": {
-                    "name": "مهندس معماري ",
-                    "terms": "بناء، مباني، مدينة، تعمير"
+                    "name": " مهندس معماري ",
+                    "terms": " بناء، مباني، مدينة، تعمير "
+                },
+                "office/association": {
+                    "name": "جمعية ",
+                    "terms": "جمعية، منظمة غير ربحية "
+                },
+                "office/charity": {
+                    "name": "منظمة خيرية",
+                    "terms": "منظمة خيرية"
                 },
                 "office/company": {
                     "name": "مكتب شركة",
@@ -3004,29 +3083,45 @@
                     "name": "مكتب مالي",
                     "terms": "وزارة المالية، المكتب المالي والضريبي، "
                 },
+                "office/forestry": {
+                    "name": "إدارة الغابات",
+                    "terms": "إدارة الغابات"
+                },
                 "office/government": {
                     "name": "مكتب حكومي",
                     "terms": "رئاسة الوزراء، إدارة الدولة، المكتب العام، "
+                },
+                "office/government/register_office": {
+                    "name": "مكتب تسجيل",
+                    "terms": "مكتب تسجيل"
+                },
+                "office/government/tax": {
+                    "name": "مكتب الضرائب",
+                    "terms": "مكتب الضرائب"
                 },
                 "office/insurance": {
                     "name": "مكتب تأمينات",
                     "terms": "مديرية المعاشات، دائرة التأمينات الاجتماعية، إدارة التأمين"
                 },
-                "office/it": {
-                    "name": "مكتب تقنية المعلومات",
-                    "terms": "المكتب التقني، إدارة المعلوماتية، إدارة المعلومات ، هيئة التقانة"
-                },
                 "office/lawyer": {
                     "name": "مكتب قانوني ",
                     "terms": "مكتب محاماة، اﻹدارة القانونية، المحكمة،"
                 },
+                "office/lawyer/notary": {
+                    "name": "كاتب عدل / موثق",
+                    "terms": "كاتب عدل، موثق"
+                },
                 "office/newspaper": {
                     "name": "صحيفة",
-                    "terms": "جريدة، صفحة أخبار، يومية"
+                    "terms": " جريدة، صفحة أخبار، يومية "
                 },
                 "office/ngo": {
                     "name": "مكتب المنظمات الغير حكومية",
                     "terms": "مكتب الجمعيات الخيرية، هيئات العمل اﻹغائي، "
+                },
+                "office/notary": {
+                    "name": "كاتب عدل / موثق",
+                    "terms": "كاتب عدل، موثق"
                 },
                 "office/physician": {
                     "name": "طبيب"
@@ -3035,9 +3130,25 @@
                     "name": "الحزب السياسي ",
                     "terms": "حزب سياسي، الحزب السياسي، المكتب السياسي، مكتب سياسي"
                 },
+                "office/private_investigator": {
+                    "name": "مكتب محقق",
+                    "terms": "مكتب محقق"
+                },
+                "office/quango": {
+                    "name": "السلطة الإدارية المستقلة",
+                    "terms": "السلطة الإدارية المستقلة"
+                },
                 "office/research": {
                     "name": "مكتب بحوث",
                     "terms": "مكتب البحوث، مكتب اﻷبحاث، هيئة اﻷبحاث"
+                },
+                "office/surveyor": {
+                    "name": "مساح",
+                    "terms": "مساح"
+                },
+                "office/tax_advisor": {
+                    "name": "مستشار الضرائب",
+                    "terms": "مستشار الضرائب"
                 },
                 "office/telecommunication": {
                     "name": "مكتب اتصالات",
@@ -3045,10 +3156,14 @@
                 },
                 "office/therapist": {
                     "name": "المعالج",
-                    "terms": "معالج، معالج فيزيائي، طبيب، مُمرض"
+                    "terms": " معالج، معالج فيزيائي، طبيب، مُمرض "
                 },
                 "office/travel_agent": {
                     "name": "وكالة السفر"
+                },
+                "office/water_utility": {
+                    "name": "شركة المياه",
+                    "terms": "شركة المياه"
                 },
                 "place": {
                     "name": "قصر"
@@ -3079,6 +3194,14 @@
                 "place/neighbourhood": {
                     "name": "حي سكني"
                 },
+                "place/square": {
+                    "name": "ساحة",
+                    "terms": "ساحة"
+                },
+                "place/suburb": {
+                    "name": "ضاحية",
+                    "terms": "ضاحية"
+                },
                 "place/town": {
                     "name": "بلدة",
                     "terms": "بلدة"
@@ -3098,6 +3221,14 @@
                     "name": "مولد طاقة",
                     "terms": "مولد الطاقة"
                 },
+                "power/generator/source_nuclear": {
+                    "name": " محطة طاقة نووية ",
+                    "terms": " محطة طاقة نووية "
+                },
+                "power/generator/source_wind": {
+                    "name": "عنفة رياح",
+                    "terms": "عنفة رياح"
+                },
                 "power/line": {
                     "name": "خط الطاقة",
                     "terms": "خط الكهرباء , خط الطاقة"
@@ -3105,6 +3236,10 @@
                 "power/minor_line": {
                     "name": "خط كهربائي ثانوي",
                     "terms": "خط كهربائي صغير، خط طاقة صغير"
+                },
+                "power/plant": {
+                    "name": "محطة توليد الكهرباء",
+                    "terms": "محطة توليد الكهرباء، الطاقة الكهربائية"
                 },
                 "power/pole": {
                     "name": "برج كهربائي",
@@ -3135,6 +3270,10 @@
                     "name": "سكة حديدية مهجورة",
                     "terms": "سكة حديد مهجورة"
                 },
+                "railway/buffer_stop": {
+                    "name": "مصد",
+                    "terms": "مصد"
+                },
                 "railway/crossing": {
                     "name": "معبر سكة حديد (مسار)",
                     "terms": "معبر سكة حديد; معبر"
@@ -3142,6 +3281,10 @@
                 "railway/disused": {
                     "name": "سكة حديدة مهجورة",
                     "terms": "سكة حديد غير مستعملة"
+                },
+                "railway/funicular": {
+                    "name": "قطار جبلي مائل",
+                    "terms": "قطار جبلي مائل"
                 },
                 "railway/halt": {
                     "name": "موقف سكة حديد",
@@ -3439,10 +3582,6 @@
                 "tourism/caravan_site": {
                     "name": "موقف عربات كبيرة",
                     "terms": "موقف عربات كبيرة"
-                },
-                "tourism/chalet": {
-                    "name": "شاليه",
-                    "terms": "شاليه"
                 },
                 "tourism/gallery": {
                     "name": "رواق فنون"

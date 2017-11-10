@@ -310,7 +310,6 @@
             "localized_translation_language": "Selecteer taal",
             "localized_translation_name": "Naam"
         },
-        "zoom_in_edit": "Zoom in om aan te passen",
         "login": "login",
         "logout": "Afmelden",
         "loading_auth": "Aan het verbinden met OpenStreetMap …",
@@ -612,8 +611,7 @@
         "splash": {
             "welcome": "Welkom bij iD, een bewerkingsprogramma voor OpenStreetMap",
             "text": "iD biedt een gebruiksvriendelijke en krachtige manier om bij te dragen aan de beste, open wereldkaart ter wereld. Dit is versie {version}. Voor meer informatie, zie {website} en meld softwarefouten op {github}.",
-            "walkthrough": "Start de rondleiding",
-            "start": "Pas nu aan"
+            "walkthrough": "Start de rondleiding"
         },
         "source_switch": {
             "live": "live",
@@ -644,10 +642,6 @@
             "many_deletions": "Je verwijdert {n} objecten. Weet je zeker dat je dit wil doen? Dit zal ze verwijderen van de kaart die iedereen ziet op openstreetmap.org.",
             "tag_suggests_area": "De tag {tag} suggereert dat de lijn een vlak is, maar het is geen vlak",
             "deprecated_tags": "Afgeschafte tags: {tags}"
-        },
-        "zoom": {
-            "in": "Inzoomen",
-            "out": "Uitzoomen"
         },
         "cannot_zoom": "Kan niet verder uitzoomen in huidige modus",
         "full_screen": "Volledig scherm aan/uit",
@@ -2774,8 +2768,7 @@
                     "terms": "school,onderwijs,secundair onderwijs,lager onderwijs,basisschool,middelbaar,voortgezet onderwijs"
                 },
                 "amenity/scrapyard": {
-                    "name": "Sloperij",
-                    "terms": "autokerkhof,oud ijzer,wrakken,schroothoop,metaal"
+                    "name": "Sloperij"
                 },
                 "amenity/shelter": {
                     "name": "Beschutting",
@@ -3327,10 +3320,6 @@
                     "name": "Stellingenmaker",
                     "terms": "stellagemaker"
                 },
-                "craft/sculpter": {
-                    "name": "Beeldhouwer",
-                    "terms": "beeldhouwer"
-                },
                 "craft/shoemaker": {
                     "name": "Schoenmaker",
                     "terms": "schoenenmaker"
@@ -3338,10 +3327,6 @@
                 "craft/stonemason": {
                     "name": "Metselaar",
                     "terms": "metselaar"
-                },
-                "craft/sweep": {
-                    "name": "Schoorsteenveger",
-                    "terms": "schouwveger"
                 },
                 "craft/tailor": {
                     "name": "Kleermaker"
@@ -3609,10 +3594,6 @@
                 "highway/path": {
                     "name": "Pad",
                     "terms": "wandelpad,fietspad,gemengd wandelpad en fietspad,hikepad"
-                },
-                "highway/pedestrian": {
-                    "name": "Voetgangersstraat",
-                    "terms": "voetgangersgebied,voetgangerszone,autovrij gebied,autovrije zone"
                 },
                 "highway/primary": {
                     "name": "Hoofdweg",
@@ -4338,16 +4319,9 @@
                     "name": "Kantoor",
                     "terms": "bureau"
                 },
-                "office/accountant": {
-                    "name": "Boekhouder"
-                },
                 "office/administrative": {
                     "name": "Bestuurlijke instantie",
                     "terms": "administratief kantoor"
-                },
-                "office/architect": {
-                    "name": "Architect",
-                    "terms": "tekenaar"
                 },
                 "office/company": {
                     "name": "Bedrijfskantoor",
@@ -4384,10 +4358,6 @@
                     "name": "Verzekeringskantoor",
                     "terms": "verzekeringsmakelaarkantoor,makelaarkantoor"
                 },
-                "office/it": {
-                    "name": "Kantoor van computerspecialist",
-                    "terms": "computer,elektronica,hardware,software,IT,ICT"
-                },
                 "office/lawyer": {
                     "name": "Advocatenkantoor",
                     "terms": "advocatenbureau,wetsgeleerden"
@@ -4395,10 +4365,6 @@
                 "office/lawyer/notary": {
                     "name": "Notariaat",
                     "terms": "notaris,akte,testament"
-                },
-                "office/newspaper": {
-                    "name": "Krantredactie",
-                    "terms": "redactie,nieuwsredactie,krantenredactie"
                 },
                 "office/ngo": {
                     "name": "Kantoor van NGO",
@@ -4418,10 +4384,6 @@
                 "office/telecommunication": {
                     "name": "Telecomkantoor",
                     "terms": "belwinkel,gsm-winkel,telcokantoor"
-                },
-                "office/therapist": {
-                    "name": "Therapeut",
-                    "terms": "behandelaar,kliniek"
                 },
                 "office/travel_agent": {
                     "name": "Reisbureau"
@@ -4478,9 +4440,6 @@
                 },
                 "playground/climbing_frame": {
                     "name": "Klimrek"
-                },
-                "playground/rocker": {
-                    "name": "Veertoestel"
                 },
                 "playground/roundabout": {
                     "name": "Speel rotonde"
@@ -5153,10 +5112,6 @@
                 "tourism/caravan_site": {
                     "name": "Caravan-/kampeerwagenterrein",
                     "terms": "caravans,kampeerwagens,campers,motorhomes,mobilehomes,terrein voor kampeerwagens"
-                },
-                "tourism/chalet": {
-                    "name": "Chalet",
-                    "terms": "chalet,vakantiehuis,vakantiehuisje,huisje,bungalow"
                 },
                 "tourism/gallery": {
                     "name": "Kunstgallerij",

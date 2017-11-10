@@ -310,7 +310,6 @@
             "localized_translation_language": "Pasirinkti kalbą",
             "localized_translation_name": "Pavadinimas"
         },
-        "zoom_in_edit": "Padidinkite prieš redaguodami",
         "login": "prisijungti",
         "logout": "atsijungti",
         "loading_auth": "Jungiamasi prie OpenStreetMap...",
@@ -548,8 +547,7 @@
         "splash": {
             "welcome": "Jus sveikina iD OpenStreetMap redaktorius",
             "text": "iD yra draugiškas, bet galingas įrankis pildant didžiausią, atviriausią ir nemokamą/laisvą pasaulio žemėlapį. Šiuo metu naudojate versiją {version}. Daugiau informacijos rasite svetainėje {website}, o apie klaidas galite pranešti {github}.",
-            "walkthrough": "Pradėti pažingsninę demonstraciją",
-            "start": "Keisti dabar"
+            "walkthrough": "Pradėti pažingsninę demonstraciją"
         },
         "source_switch": {
             "live": "gyva",
@@ -578,10 +576,6 @@
             "many_deletions": "Jūs trinate {n} objektus. Ar tikrai norite tai padaryti? Tai ištrins juos iš žemėlapio, kurį visi kiti mato svetainėje openstreetmap.org.",
             "tag_suggests_area": "Žyma {tag} rodo, kad linija turėtų būti plotas, bet ji nėra plotas",
             "deprecated_tags": "Pasenusios žymos: {tags}"
-        },
-        "zoom": {
-            "in": "Sumažinti",
-            "out": "Padidinti"
         },
         "cannot_zoom": "Negalima atitolinti šiame režime.",
         "full_screen": "Perjungti pilną ekraną",
@@ -2192,10 +2186,6 @@
                 "craft/scaffolder": {
                     "name": "Pastolių montuotojas"
                 },
-                "craft/sculpter": {
-                    "name": "Skulptorius",
-                    "terms": "skulptorius"
-                },
                 "craft/shoemaker": {
                     "name": "Batsiuvys",
                     "terms": "Kurpius"
@@ -2203,10 +2193,6 @@
                 "craft/stonemason": {
                     "name": "Mūrininkas",
                     "terms": "mūrininkas"
-                },
-                "craft/sweep": {
-                    "name": "Kaminkrėtys",
-                    "terms": "kaminkrėtys"
                 },
                 "craft/tailor": {
                     "name": "Siuvėjas"
@@ -2294,9 +2280,6 @@
                 "highway/path": {
                     "name": "Takas",
                     "terms": "takas"
-                },
-                "highway/pedestrian": {
-                    "name": "Pėsčiųjų gatvė"
                 },
                 "highway/primary": {
                     "name": "Pagrindinis kelias"
@@ -2687,16 +2670,8 @@
                     "name": "Biuras",
                     "terms": "kontora"
                 },
-                "office/accountant": {
-                    "name": "Buhalteris",
-                    "terms": "buhalteris"
-                },
                 "office/administrative": {
                     "name": "Administracinis biuras"
-                },
-                "office/architect": {
-                    "name": "Architektas",
-                    "terms": "architektas"
                 },
                 "office/company": {
                     "name": "Kompanijos kontora"
@@ -2723,16 +2698,8 @@
                     "name": "Draudimo įstaiga",
                     "terms": "draudimas,draudimo kontora"
                 },
-                "office/it": {
-                    "name": "IT kontora",
-                    "terms": "it kontora,informacinės technologijos"
-                },
                 "office/lawyer": {
                     "name": "Advokatų kontora"
-                },
-                "office/newspaper": {
-                    "name": "Laikraštis",
-                    "terms": "laikraštis"
                 },
                 "office/physician": {
                     "name": "Gydytojas"
@@ -2747,10 +2714,6 @@
                 },
                 "office/telecommunication": {
                     "name": "Telekomunikacijų biuras"
-                },
-                "office/therapist": {
-                    "name": "Terapeutas",
-                    "terms": "Gydytojas"
                 },
                 "office/travel_agent": {
                     "name": "Kelionių agentūra"
@@ -3227,10 +3190,6 @@
                 },
                 "tourism/attraction": {
                     "name": "Turistų traukos vieta"
-                },
-                "tourism/chalet": {
-                    "name": "Sodyba",
-                    "terms": "sodyba,kaimo sodyba"
                 },
                 "tourism/guest_house": {
                     "name": "Svečių namai",

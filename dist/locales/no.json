@@ -310,7 +310,6 @@
             "localized_translation_language": "Velg språk",
             "localized_translation_name": "Navn"
         },
-        "zoom_in_edit": "Zoom inn for å redigere",
         "login": "logg inn",
         "logout": "logg ut",
         "loading_auth": "Kobler til OpenStreetMap...",
@@ -586,8 +585,7 @@
         "splash": {
             "welcome": "Velkommen til iD OpenStreetMap editor",
             "text": "iD er et brukervennlig, men kraftig verktøy for å bidra til verdens beste frie kart. Dette er versjon {version}. For mer informasjon, se {website} og meld om feil på {github}.",
-            "walkthrough": "Begynn Gjennomgangen",
-            "start": "Rediger nå"
+            "walkthrough": "Begynn Gjennomgangen"
         },
         "source_switch": {
             "live": "direkte",
@@ -616,10 +614,6 @@
             "many_deletions": "Du sletter {n} kartegenskaper. Er du sikker på at du vil gjøre dette? Det vil slette dem fra kartet som alle andre ser på openstreetmap.org.",
             "tag_suggests_area": "Taggen {tag} anbefaler at linje bør være et areal, men dette er ikke et areal",
             "deprecated_tags": "Utgående tagger: {tags}"
-        },
-        "zoom": {
-            "in": "Forstørr",
-            "out": "Forminsk"
         },
         "cannot_zoom": "Kan ikke zoome ut lenger i gjeldende modus.",
         "full_screen": "Skru av/på fullskjerm.",
@@ -2028,17 +2022,11 @@
                 "craft/scaffolder": {
                     "name": "Stillasbygger"
                 },
-                "craft/sculpter": {
-                    "name": "Skulptør"
-                },
                 "craft/shoemaker": {
                     "name": "Skomaker"
                 },
                 "craft/stonemason": {
                     "name": "Steinhugger"
-                },
-                "craft/sweep": {
-                    "name": "Feier"
                 },
                 "craft/tailor": {
                     "name": "Skredder"
@@ -2141,9 +2129,6 @@
                 },
                 "highway/path": {
                     "name": "Sti"
-                },
-                "highway/pedestrian": {
-                    "name": "Gågate"
                 },
                 "highway/primary": {
                     "name": "Primær hovedvei"
@@ -2496,17 +2481,8 @@
                 "office": {
                     "name": "Kontor"
                 },
-                "office/accountant": {
-                    "name": "Regnskapsfører"
-                },
-                "office/architect": {
-                    "name": "Arkitekt"
-                },
                 "office/lawyer": {
                     "name": "Advokatkontor"
-                },
-                "office/newspaper": {
-                    "name": "Avisredaksjon"
                 },
                 "office/political_party": {
                     "name": "Politisk parti"
@@ -2927,9 +2903,6 @@
                 },
                 "tourism/attraction": {
                     "name": "Turistattraksjon"
-                },
-                "tourism/chalet": {
-                    "name": "Hytte"
                 },
                 "tourism/gallery": {
                     "name": "Kunstgalleri"

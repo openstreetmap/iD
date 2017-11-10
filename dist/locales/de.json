@@ -151,7 +151,7 @@
                 "annotation": "Linien/Flächen getrennt.",
                 "not_connected": "Es gibt hier nicht genug Linien/Flächen, um diese zu trennen.",
                 "connected_to_hidden": "Dieses Objekt kann nicht getrennt werden, da es mit einem versteckten Objekt verbunden ist.",
-                "relation": "Dies kann nicht getrennt werde, da es Mitglieder einer Relation verbindet."
+                "relation": "Dies kann nicht getrennt werden, da es Mitglieder einer Relation verbindet."
             },
             "merge": {
                 "title": "Vereinigen",
@@ -314,7 +314,7 @@
         "login": "Login",
         "logout": "Abmelden",
         "loading_auth": "Mit OpenStreetMap verbinden …",
-        "report_a_bug": "Fehler melden",
+        "report_a_bug": "Einen Fehler melden",
         "help_translate": "Beim Übersetzen helfen",
         "feature_info": {
             "hidden_warning": "{count} versteckte Objekte",
@@ -361,7 +361,9 @@
                 "accuracy": "Genauigkeit",
                 "unknown": "Unbekannt",
                 "show_tiles": "Raster einblenden",
-                "hide_tiles": "Raster ausblenden"
+                "hide_tiles": "Raster ausblenden",
+                "show_vintage": "Aufnahmedatum anzeigen",
+                "hide_vintage": "Aufnahmedatum ausblenden"
             },
             "history": {
                 "key": "C",
@@ -408,7 +410,7 @@
             "no_results_worldwide": "Keine Ergebnisse gefunden"
         },
         "geolocate": {
-            "title": "Aktuelle Lage anzeigen",
+            "title": "Zeige meinen Standort",
             "locating": "Lokalisiere, bitte warten ..."
         },
         "inspector": {
@@ -659,7 +661,7 @@
         },
         "mapillary_images": {
             "tooltip": "Straßenfotos von Mapillary",
-            "title": "Photo-Überlagerung (Mapillary)"
+            "title": "Fotoüberlagerung (Mapillary)"
         },
         "mapillary_signs": {
             "tooltip": "Verkehrsschilder von Mapillary (bei aktivierter Fotoebene)",
@@ -667,6 +669,13 @@
         },
         "mapillary": {
             "view_on_mapillary": "Dieses Bild auf Mapillary ansehen"
+        },
+        "openstreetcam_images": {
+            "tooltip": "Straßenfotos von OpenStreetCam",
+            "title": "Fotoüberlagerung (OpenStreetCam)"
+        },
+        "openstreetcam": {
+            "view_on_openstreetcam": "Dieses Bild auf OpenStreetCam ansehen"
         },
         "help": {
             "title": "Hilfe",
@@ -686,46 +695,46 @@
             "ok": "OK",
             "graph": {
                 "block_number": "<value for addr:block_number>",
-                "city": "Graz",
+                "city": "Drei-Flüsse",
                 "county": "<value for addr:county>",
-                "district": "Innere Stadt",
+                "district": "Altstadt",
                 "hamlet": "<value for addr:hamlet>",
                 "neighbourhood": "<value for addr:neighbourhood>",
-                "postcode": "8010",
-                "province": "Steiermark",
+                "postcode": "49093",
+                "province": "Bayern",
                 "quarter": "<value for addr:quarter>",
-                "state": "<value for addr:state>",
+                "state": "BY",
                 "subdistrict": "<value for addr:subdistrict>",
                 "suburb": "<value for addr:suburb>",
-                "countrycode": "at",
+                "countrycode": "de",
                 "name": {
-                    "1st-avenue": "Allee 1",
-                    "2nd-avenue": "Allee 2",
-                    "4th-avenue": "Allee 4",
-                    "5th-avenue": "Allee 5",
-                    "6th-avenue": "Allee 6",
-                    "6th-street": "6. Straße",
-                    "7th-avenue": "7. Straße",
-                    "8th-avenue": "Allee 8",
-                    "9th-avenue": "Allee 9",
-                    "10th-avenue": "Allee 10",
-                    "11th-avenue": "11. Straße",
-                    "12th-avenue": "12. Straße",
+                    "1st-avenue": "Erste Alle",
+                    "2nd-avenue": "Zweite Allee",
+                    "4th-avenue": "Vierte Allee",
+                    "5th-avenue": "Fünfte Allee",
+                    "6th-avenue": "Sechste Allee",
+                    "6th-street": "Sechste Straße",
+                    "7th-avenue": "Siebte Straße",
+                    "8th-avenue": "Achte Allee",
+                    "9th-avenue": "Neunte Allee",
+                    "10th-avenue": "Zehnte Allee",
+                    "11th-avenue": "Elfte Straße",
+                    "12th-avenue": "Zwölfte Straße",
                     "access-point-employment": "Arbeitsmarktservice",
                     "adams-street": "Amselweg",
-                    "andrews-elementary-school": "Andreas Volkschule",
+                    "andrews-elementary-school": "Grundschule St. Anon",
                     "andrews-street": "Ahornweg",
                     "armitage-street": "Am Sportplatz",
                     "barrows-school": "Bischöfliches Gymnasium",
                     "battle-street": "Birkenweg",
                     "bennett-street": "Bergstraße",
-                    "bowman-park": "Augarten",
+                    "bowman-park": "Bayernpark",
                     "collins-drive": "Kiefernweg",
-                    "conrail-railroad": "Graz-Köflacher-Eisenbahn",
+                    "conrail-railroad": "Chiemseebahn",
                     "conservation-park": "Naturschutzgebiet",
                     "constantine-street": "Kirchgasse",
                     "cushman-street": "Kiefernweg",
-                    "dollar-tree": "GardeRobe Second Hand",
+                    "dollar-tree": "Vintys Second Hand",
                     "douglas-avenue": "Dorfallee",
                     "east-street": "Oststraße",
                     "elm-street": "Eichenweg",
@@ -741,69 +750,69 @@
                     "hook-avenue": "Hollunderweg",
                     "jefferson-street": "Jahnstraße",
                     "kelsey-street": "Kastanienweg",
-                    "lafayette-park": "Stadtpark",
-                    "las-coffee-cafe": "Tribeka Café",
+                    "lafayette-park": "Inn Park",
+                    "las-coffee-cafe": "Black Bean Café",
                     "lincoln-avenue": "Lindenstraße",
-                    "lowrys-books": "uni-buchladen",
-                    "lynns-garage": "Schönaugarage",
-                    "main-street-barbell": "Mrs. Sporty",
-                    "main-street-cafe": "Gino Caffe Muhr",
+                    "lowrys-books": "Thalia Buchladen",
+                    "lynns-garage": "A.T.U. Werkstatt",
+                    "main-street-barbell": "Bodyfit",
+                    "main-street-cafe": "Café Simon",
                     "main-street-fitness": "fitinn",
-                    "main-street": "Herrengasse",
+                    "main-street": "Lufwigstraße",
                     "maple-street": "Mühlenweg",
                     "marina-park": "Marina Park",
                     "market-street": "Markstraße",
-                    "memory-isle-park": "Gedächtnisinsel Park",
-                    "memory-isle": "Gedächtnisinsel",
-                    "michigan-avenue": "Hauptstraße",
+                    "memory-isle-park": "Donauinsel Park",
+                    "memory-isle": "Donauinsel",
+                    "michigan-avenue": "Regenbuerger Straße",
                     "middle-street": "Mittelstraße",
                     "millard-street": "Meisenweg",
                     "moore-street": "Mühlenstraße",
                     "morris-avenue": "Meisenweg",
                     "mural-mall": "Franziskanergasse",
-                    "paisanos-bar-and-grill": "Landhauskeller",
-                    "paisley-emporium": "Kastner & Öhler",
-                    "paparazzi-tattoo": "Stichtag - Tattoo & Piercing",
+                    "paisanos-bar-and-grill": "Altes Bräuhaus",
+                    "paisley-emporium": "Stadtgalerie",
+                    "paparazzi-tattoo": "Ink of Hell Tattoo",
                     "pealer-street": "Parkstraße",
                     "pine-street": "Pappelweg",
-                    "pizza-hut": "L'Osteria",
+                    "pizza-hut": "Pizzeria Gallo Nero",
                     "portage-avenue": "Alte Poststraße",
-                    "portage-river": "Grazbach",
-                    "preferred-insurance-services": "Grazer Wechselseitige",
+                    "portage-river": "Inn",
+                    "preferred-insurance-services": "Zürich Versicherungs-AG",
                     "railroad-drive": "Bahnhofstraße",
                     "river-city-appliance": "Haushaltswaren Rauch",
                     "river-drive": "Flussstraße",
                     "river-road": "Flussweg",
                     "river-street": "Ringstraße",
-                    "riverside-cemetery": "Friedhof an der Mur",
+                    "riverside-cemetery": "Innstadt Friedhof",
                     "riverwalk-trail": "Bachweg",
                     "riviera-theatre": "Schauspielhaus",
-                    "rocky-river": "Andritzbach",
-                    "saint-joseph-river": "Mur",
-                    "scidmore-park-petting-zoo": "Schloßpark Eggenberg Streichelzoo",
-                    "scidmore-park": "Schloßpark Eggenberg",
-                    "scouter-park": "Skatepark Grünanger",
+                    "rocky-river": "Ilz",
+                    "saint-joseph-river": "Inn",
+                    "scidmore-park-petting-zoo": "Klostergarten Streichelzoo",
+                    "scidmore-park": "Klostergarten",
+                    "scouter-park": "Skatepar",
                     "sherwin-williams": "Kaspar Harnisch",
                     "south-street": "Südstraße",
-                    "southern-michigan-bank": "Steiermärkische Sparkasse",
+                    "southern-michigan-bank": "Stadtsparkasse",
                     "spring-street": "Gartenstraße",
-                    "sturgeon-river-road": "Andritzbachweg",
-                    "three-rivers-city-hall": "Grazer Rathaus",
+                    "sturgeon-river-road": "Ilzbachweg",
+                    "three-rivers-city-hall": "Rathaus",
                     "three-rivers-elementary-school": "Volksschule",
                     "three-rivers-fire-department": "Feuerwehr",
                     "three-rivers-high-school": "Gymnasium",
-                    "three-rivers-middle-school": "Volksschule Ferdinandeum",
-                    "three-rivers-municipal-airport": "Flughafen Graz",
+                    "three-rivers-middle-school": "Realschule",
+                    "three-rivers-municipal-airport": "Flughafe",
                     "three-rivers-post-office": "Hauptpost",
                     "three-rivers-public-library": "Stadtbibliothek",
-                    "three-rivers": "Graz",
-                    "unique-jewelry": "Juwelier Weikhard",
+                    "three-rivers": "Drei-Flüsse-Stadt",
+                    "unique-jewelry": "Juwelie",
                     "walnut-street": "Waldstraße",
                     "washington-street": "Schillerstraße",
                     "water-street": "Bachstraße",
                     "west-street": "Weststraße",
                     "wheeler-street": "Wilhelmstraße",
-                    "william-towing": "Autowerkstatt Graz Andritz",
+                    "william-towing": "Autowerkstatt",
                     "willow-drive": "Wilhelmstraße",
                     "wood-street": "Weidenweg",
                     "world-fare": "Orange and Green"
@@ -851,7 +860,7 @@
                 "update": "Gib mehr Details über dieses Café ein. Du kannst seinen Namen ändern, angeben welche Küche dort angeboten wird oder die Adresse eingeben. **Ändere die Details des Café.**",
                 "update_close": "Wenn du das Café fertig geändet hast, drücke Escape oder oder klicke den {button} Knopf um den Objekteditor zu schließen.**",
                 "rightclick": "Du kannst jedes Objekt rechtsklicken um das *Bearbeitungs-Menü* zu sehen, welches dir die Bearbeitungs-Möglichkeiten zeigt. **Wähle des erzeugten Punkt durch Rechts-Klicken aus und zeige das Bearbeitungs-Menü.**",
-                "delete": "Du kannst Objekte löschen, die es in der echten Welt nicht gibt.{br}Löschen eines Objets aus OpenStreetMap entfernt es von der Karte, die alle benutzen. Daher solltest du sicher sein, dass das Objekt nicht mehr gibt, bevor du es löschst. **Klicke auf {button} Knopf um den Punkt zu löschen.**",
+                "delete": "Du kannst Objekte löschen, die es in der echten Welt nicht gibt.{br}Löschen eines Objekts aus OpenStreetMap entfernt es von der Karte, die alle benutzen. Daher solltest du dir sicher sein, dass es das Objekt nicht mehr gibt, bevor du es löschst. **Klicke auf {button}-Knopf um den Punkt zu löschen.**",
                 "undo": "Du kannst alle Änderungen rückgängig machen, bis du deine Bearbeitungen zu OpenStreetMap hochgeladen hast. **Klicke auf  {button} Knopf um das Löschen rückgängig zu machen und den Punkt wiederherzustellen.**",
                 "play": "Nachdem du jetzt Punkte erzeugen und bearbeiten kannst, versuche zur Übung ein paar Punkte zu erzeugen! **Wenn du zum nächsten Kapitel willst klicke '{next}'.**"
             },
@@ -977,7 +986,7 @@
                     "title": "Anzeigeoptionen",
                     "background": "Hintergrundeinstellungen ein-/ausblenden",
                     "background_switch": "Auf letzten Hintergrund zurückschalten",
-                    "map_data": "Kartendaten ein-/ausblenden",
+                    "map_data": "Kartendaten-Optionen ein-/ausblenden",
                     "fullscreen": "Vollbildmodus ein-/ausschalten",
                     "wireframe": "Gitter-Modus ein-/ausschalten",
                     "minimap": "Minimap ein-/ausblenden"
@@ -1217,6 +1226,9 @@
                 "aeroway": {
                     "label": "Typ"
                 },
+                "agrarian": {
+                    "label": "Produkte"
+                },
                 "amenity": {
                     "label": "Typ"
                 },
@@ -1285,6 +1297,9 @@
                 "board_type": {
                     "label": "Typ"
                 },
+                "boules": {
+                    "label": "Typ"
+                },
                 "boundary": {
                     "label": "Typ"
                 },
@@ -1303,6 +1318,10 @@
                 },
                 "bunker_type": {
                     "label": "Typ"
+                },
+                "cables": {
+                    "label": "Kabel",
+                    "placeholder": "1, 2, 3..."
                 },
                 "camera/direction": {
                     "label": "Ausrichtung (Winkel Im Uhrzeigersinn) ",
@@ -1469,6 +1488,10 @@
                 "description": {
                     "label": "Beschreibung"
                 },
+                "devices": {
+                    "label": "Geräte",
+                    "placeholder": "1, 2, 3..."
+                },
                 "diaper": {
                     "label": "Windelwechseln möglich"
                 },
@@ -1543,12 +1566,18 @@
                         "wall": "Wandanschluss"
                     }
                 },
+                "fitness_station": {
+                    "label": "Geräteausstattung"
+                },
                 "fixme": {
                     "label": "Korrigiere mich"
                 },
                 "ford": {
                     "label": "Typ",
                     "placeholder": "Standard"
+                },
+                "frequency": {
+                    "label": "Betriebsfrequenz"
                 },
                 "fuel": {
                     "label": "Kraftstoff"
@@ -1579,6 +1608,9 @@
                     "label": "Quelle"
                 },
                 "generator/type": {
+                    "label": "Typ"
+                },
+                "government": {
                     "label": "Typ"
                 },
                 "grape_variety": {
@@ -1643,7 +1675,7 @@
                     "label": "Inschrift"
                 },
                 "intermittent": {
-                    "label": "periodisch"
+                    "label": "Periodisch"
                 },
                 "internet_access": {
                     "label": "Internetzugang",
@@ -1908,6 +1940,10 @@
                 "payment_multi": {
                     "label": "Zahlungsarten"
                 },
+                "phases": {
+                    "label": "Phasen",
+                    "placeholder": "1, 2, 3..."
+                },
                 "phone": {
                     "label": "Telefonnummer",
                     "placeholder": "+31 42 123 4567"
@@ -1986,6 +2022,9 @@
                 },
                 "railway": {
                     "label": "Typ"
+                },
+                "rating": {
+                    "label": "Anschlussleistung"
                 },
                 "recycling_accepts": {
                     "label": "akzeptiert"
@@ -2195,6 +2234,9 @@
                 "studio": {
                     "label": "Typ"
                 },
+                "substance": {
+                    "label": "Substanz"
+                },
                 "substation": {
                     "label": "Typ"
                 },
@@ -2220,6 +2262,15 @@
                 },
                 "surveillance/zone": {
                     "label": "Überwachungszone"
+                },
+                "switch": {
+                    "label": "Typ",
+                    "options": {
+                        "circuit_breaker": "Schutzschalter",
+                        "disconnector": "Trennschalter",
+                        "earthing": "Erdung",
+                        "mechanical": "mechanisch"
+                    }
                 },
                 "tactile_paving": {
                     "label": "Oberfläche mit Blindenleitsystem"
@@ -2293,6 +2344,19 @@
                     },
                     "placeholder": "Ausgezeichnet, Gut, Schlecht …"
                 },
+                "transformer": {
+                    "label": "Typ",
+                    "options": {
+                        "auto": "Spartransformer",
+                        "auxiliary": "Eigenbedarfstransformator",
+                        "converter": "Stromrichter-Transformator",
+                        "distribution": "Masttransformator",
+                        "generator": "Generator",
+                        "phase_angle_regulator": "Querregeltransformator",
+                        "traction": "Eisenbahntransformator",
+                        "yes": "Unbekannt"
+                    }
+                },
                 "trees": {
                     "label": "Bäume"
                 },
@@ -2327,6 +2391,18 @@
                         "stratovolcano": "Schichtvulkan"
                     }
                 },
+                "voltage": {
+                    "label": "Spannung"
+                },
+                "voltage/primary": {
+                    "label": "Primärspannung"
+                },
+                "voltage/secondary": {
+                    "label": "Sekundärspannung"
+                },
+                "voltage/tertiary": {
+                    "label": "Tertiärspannung"
+                },
                 "wall": {
                     "label": "Typ"
                 },
@@ -2354,6 +2430,22 @@
                 },
                 "wikipedia": {
                     "label": "Wikipedia"
+                },
+                "windings": {
+                    "label": "Windungen",
+                    "placeholder": "1, 2, 3..."
+                },
+                "windings/configuration": {
+                    "label": "Windungskonfiguration",
+                    "options": {
+                        "delta": "Dreieckschaltung",
+                        "leblanc": "Leblanc-Schaltung",
+                        "open": " offene Wicklungen",
+                        "open-delta": "offene Dreieckschaltung",
+                        "scott": "Scott-Schaltung",
+                        "star": "Sternschaltung",
+                        "zigzag": "Zickzackschaltung"
+                    }
                 }
             },
             "presets": {
@@ -2662,7 +2754,7 @@
                     "terms": "Internetcafé, Cybercafé"
                 },
                 "amenity/kindergarten": {
-                    "name": "Kindergarten",
+                    "name": "Kindergartengelände",
                     "terms": "Kindergartengeläde,Kinderkrippengelände"
                 },
                 "amenity/library": {
@@ -2676,6 +2768,10 @@
                 "amenity/motorcycle_parking": {
                     "name": "Motorradparkplatz",
                     "terms": "Motorrad-Parkplatz"
+                },
+                "amenity/music_school": {
+                    "name": "Musikschule",
+                    "terms": "Musikschule"
                 },
                 "amenity/nightclub": {
                     "name": "Nachtklub",
@@ -2800,8 +2896,7 @@
                     "terms": "Schulhof, Schule, Realschule, Mittelschule, Grundschule, Gymnasium, Ganztagsschule, Förderschule"
                 },
                 "amenity/scrapyard": {
-                    "name": "Schrottplatz",
-                    "terms": "Schrottplatz, Sturzplatz"
+                    "name": "Schrottplatz"
                 },
                 "amenity/shelter": {
                     "name": "Unterstand",
@@ -3120,8 +3215,8 @@
                     "terms": "alleinstehendes Haus, freistehendes Haus, Einfamilienhaus"
                 },
                 "building/dormitory": {
-                    "name": "Schlafsaal",
-                    "terms": "Schlafsaal, Dormitorium"
+                    "name": "Wohnheim",
+                    "terms": "Wohnheim, Studentenwohnheim, Dormitorium"
                 },
                 "building/entrance": {
                     "name": "Eingang/Ausgang"
@@ -3261,6 +3356,10 @@
                     "name": "Partyservice",
                     "terms": "Partyservice, Speiselieferant, Lebensmittellieferant, Brötchenservice, Gastronom"
                 },
+                "craft/chimney_sweeper": {
+                    "name": "Kaminkehrer",
+                    "terms": "Kaminkehrer,Schornsteinfeger"
+                },
                 "craft/clockmaker": {
                     "name": "Uhrmacher",
                     "terms": "Uhrmacher"
@@ -3370,7 +3469,7 @@
                     "name": "Gerüstbauer",
                     "terms": "Gerüstbauer"
                 },
-                "craft/sculpter": {
+                "craft/sculptor": {
                     "name": "Bildhauer",
                     "terms": "Bildhauer"
                 },
@@ -3381,10 +3480,6 @@
                 "craft/stonemason": {
                     "name": "Steinmetz",
                     "terms": "Steinmetz"
-                },
-                "craft/sweep": {
-                    "name": "Kaminkehrer",
-                    "terms": "Kaminkehrer, Schornsteinfeger, Kaminfeger"
                 },
                 "craft/tailor": {
                     "name": "Herrenschneider"
@@ -3654,9 +3749,13 @@
                     "name": "Weg",
                     "terms": "Mehrzweck-Weg, Wanderweg, Reitweg, Radweg, Fußweg, Pfad"
                 },
-                "highway/pedestrian": {
+                "highway/pedestrian_area": {
                     "name": "Fußgängerzone",
-                    "terms": "Fußgängerzone, Fußgängerstraße"
+                    "terms": "Fußgängerzone"
+                },
+                "highway/pedestrian_line": {
+                    "name": "Fußgängerstraße",
+                    "terms": "Fußgängerstraße"
                 },
                 "highway/primary": {
                     "name": "Hauptverbindungsstraße",
@@ -3834,6 +3933,10 @@
                     "name": "Becken",
                     "terms": "Becken, Kessel"
                 },
+                "landuse/brownfield": {
+                    "name": "Altlast",
+                    "terms": "Altlast, Industriebrache, verseuchter Boden"
+                },
                 "landuse/cemetery": {
                     "name": "Friedhof",
                     "terms": "Friedhof, Friedwald"
@@ -3873,6 +3976,10 @@
                     "name": "Gras",
                     "terms": "Gras, Grünfläche, Wiese"
                 },
+                "landuse/greenfield": {
+                    "name": "Freifläche",
+                    "terms": "Freifläche, unbebaute Fläche, Bauland, Rohbauland"
+                },
                 "landuse/harbour": {
                     "name": "Hafen",
                     "terms": "Hafenanlage, Seehafen"
@@ -3880,6 +3987,14 @@
                 "landuse/industrial": {
                     "name": "Fabrikgelände",
                     "terms": "Industriegebiet, Industriegelände, Industriegegend, Industrie, Fabriken"
+                },
+                "landuse/industrial/scrap_yard": {
+                    "name": "Schrottplatz",
+                    "terms": "Schrottplatz, Autofriedhof"
+                },
+                "landuse/industrial/slaughterhouse": {
+                    "name": "Schlachthof",
+                    "terms": "Schlachthof, Schlachthaus"
                 },
                 "landuse/landfill": {
                     "name": "Deponie",
@@ -3957,6 +4072,10 @@
                     "name": "Freizeitgelände",
                     "terms": "Freizeitgelände, Erholungsgebiet, Erholungsraum"
                 },
+                "landuse/religious": {
+                    "name": "Gelände mit religiöser Nutzung",
+                    "terms": "Gelände mit religiöser Nutzung"
+                },
                 "landuse/residential": {
                     "name": "Wohngebiet",
                     "terms": "Wohngebiet, Wohnanlage, Wohngegend, Wohnregion, Wohnhäuser, Siedlungsfläche"
@@ -4002,7 +4121,7 @@
                     "terms": "Feuerstelle"
                 },
                 "leisure/fitness_centre": {
-                    "name": "Fitness Studio",
+                    "name": "Fitness-Studio",
                     "terms": "Fitness-Center,Gymnastikstudio"
                 },
                 "leisure/fitness_centre/yoga": {
@@ -4012,6 +4131,50 @@
                 "leisure/fitness_station": {
                     "name": "Freiluft-Fitness-Station",
                     "terms": "Freiluft Fitness Einrichtung"
+                },
+                "leisure/fitness_station/balance_beam": {
+                    "name": "Schwebebalken",
+                    "terms": "Balken,Schwebebaum"
+                },
+                "leisure/fitness_station/box": {
+                    "name": "Sprungbox",
+                    "terms": "Sprungbox"
+                },
+                "leisure/fitness_station/horizontal_bar": {
+                    "name": "Reck",
+                    "terms": "Reck,Reckstange"
+                },
+                "leisure/fitness_station/horizontal_ladder": {
+                    "name": "Klettergerüst",
+                    "terms": "Klettergerüst"
+                },
+                "leisure/fitness_station/hyperextension": {
+                    "name": "Hyperextension-Bank",
+                    "terms": "Hyperextension-Bank"
+                },
+                "leisure/fitness_station/parallel_bars": {
+                    "name": "Barren",
+                    "terms": "Barren"
+                },
+                "leisure/fitness_station/push-up": {
+                    "name": "Liegestützstation",
+                    "terms": "Liegestützstation"
+                },
+                "leisure/fitness_station/rings": {
+                    "name": "Ringe",
+                    "terms": "Ringe,Turnringe"
+                },
+                "leisure/fitness_station/sign": {
+                    "name": "Übungsanleitungstafel",
+                    "terms": "Übungsanleitungstafel,Übungsanleitung"
+                },
+                "leisure/fitness_station/sit-up": {
+                    "name": "Sit-Up-Station",
+                    "terms": "Sit-Up-Station"
+                },
+                "leisure/fitness_station/stairs": {
+                    "name": "Übungsstiege",
+                    "terms": "Übungsstiege,Übungsstufen"
                 },
                 "leisure/garden": {
                     "name": "Garten",
@@ -4073,6 +4236,10 @@
                     "name": "Beachvolleyballplatz",
                     "terms": "Beachvolleyballplatz"
                 },
+                "leisure/pitch/boules": {
+                    "name": "Boccia-Platz",
+                    "terms": "Boccia-Platz"
+                },
                 "leisure/pitch/bowls": {
                     "name": "Bowlingrasen",
                     "terms": "Bowling-Rasenfläche, Bowlingrasen"
@@ -4124,6 +4291,10 @@
                 "leisure/running_track": {
                     "name": "Rennbbahn (Laufen)",
                     "terms": "Rennbbahn (Laufen)Laufbahn, Laufstrecke"
+                },
+                "leisure/sauna": {
+                    "name": "Sauna",
+                    "terms": "Sauna"
                 },
                 "leisure/slipway": {
                     "name": "Slipanlage",
@@ -4409,16 +4580,32 @@
                     "terms": "Büro, Amt, Behörde"
                 },
                 "office/accountant": {
-                    "name": "Steuerberater",
-                    "terms": "Buchhalter, Buchführer, Wirtschaftsprüfer"
+                    "name": "Buchhaltungsbüro",
+                    "terms": "Steuerberatungskanzlei"
                 },
                 "office/administrative": {
                     "name": "Verwaltungsamt",
                     "terms": "Verwaltungsstelle, Öffentliche Verwaltung"
                 },
+                "office/adoption_agency": {
+                    "name": "Adoptionsagentur",
+                    "terms": "Adoptionsagentur"
+                },
+                "office/advertising_agency": {
+                    "name": "Werbeagentur",
+                    "terms": "Werbeagentur"
+                },
                 "office/architect": {
-                    "name": "Architekt",
-                    "terms": "Architekturbüro, Planungsbüro"
+                    "name": "Architekturbüro",
+                    "terms": "Architekturbüro"
+                },
+                "office/association": {
+                    "name": "Nonprofit-Organisations-Büro",
+                    "terms": "Nonprofit-Organisations-Büro"
+                },
+                "office/charity": {
+                    "name": "Wohlfahrtseinrichtung",
+                    "terms": "Wohlfahrtseinrichtung"
                 },
                 "office/company": {
                     "name": "Firma",
@@ -4436,6 +4623,10 @@
                     "name": "Arbeitsamt",
                     "terms": "Arbeitsagentur, Arbeitsvermittlung, Arbeitsvermittlungsstelle, Stellenvermittlung, Agentur für Arbeit"
                 },
+                "office/energy_supplier": {
+                    "name": "Energieversorgungsunternehmen",
+                    "terms": "Energieversorgungsunternehmen"
+                },
                 "office/estate_agent": {
                     "name": "Immobilienmakler",
                     "terms": "Makler, Immobilienhändler, Liegenschaftsverwalter, Grundstücksmakler"
@@ -4443,6 +4634,14 @@
                 "office/financial": {
                     "name": "Finanzberater",
                     "terms": "Geldberater"
+                },
+                "office/forestry": {
+                    "name": "Forstverwaltung",
+                    "terms": "Forstverwaltung"
+                },
+                "office/foundation": {
+                    "name": "Stiftung",
+                    "terms": "Stiftung"
                 },
                 "office/government": {
                     "name": "Behörde",
@@ -4452,13 +4651,21 @@
                     "name": "Standesamt",
                     "terms": "Standesamt"
                 },
+                "office/government/tax": {
+                    "name": "Finanzamt",
+                    "terms": "Finanzamt"
+                },
+                "office/guide": {
+                    "name": "Reisebüro",
+                    "terms": "Reisebüro"
+                },
                 "office/insurance": {
                     "name": "Versicherung",
                     "terms": "Versicherungsbüro"
                 },
                 "office/it": {
-                    "name": "IT-Büro",
-                    "terms": "Softwareentwickler, Softwarebüro, Programmierer, IT"
+                    "name": "Informations-Technologie-Firma",
+                    "terms": "Informations-Technologie-Firma"
                 },
                 "office/lawyer": {
                     "name": "Anwalt",
@@ -4468,13 +4675,21 @@
                     "name": "Notariat",
                     "terms": "Notariat, Notariatskanzlei, Notarbüro"
                 },
+                "office/moving_company": {
+                    "name": "Umzugsfirma",
+                    "terms": "Umzugsfirma, Spedition"
+                },
                 "office/newspaper": {
-                    "name": "Redaktion",
-                    "terms": "Zeitung, Zeitschrift"
+                    "name": "Zeitungsbüro",
+                    "terms": "Zeitungsbüro"
                 },
                 "office/ngo": {
                     "name": "Nichtregierungsorganisation",
                     "terms": "NRO, Nichtregierungsorganisation"
+                },
+                "office/notary": {
+                    "name": "Notariat",
+                    "terms": "Notariat"
                 },
                 "office/physician": {
                     "name": "Arztpraxis"
@@ -4483,9 +4698,25 @@
                     "name": "Partei",
                     "terms": "Politische Partei, Parteizentrale"
                 },
+                "office/private_investigator": {
+                    "name": "Privatdedektiv",
+                    "terms": "Privatdedektiv"
+                },
+                "office/quango": {
+                    "name": "Quasi-NGO-Büro",
+                    "terms": "Quasi-NGO-Büro"
+                },
                 "office/research": {
                     "name": "Forschungseinrichtung",
                     "terms": "Forschungsinstitut, Wissenschaftliches Institut"
+                },
+                "office/surveyor": {
+                    "name": "Vermessungstechniker",
+                    "terms": "Vermessungstechniker"
+                },
+                "office/tax_advisor": {
+                    "name": "Steuerberatungskanzlei",
+                    "terms": "Steuerberatungskanzlei"
                 },
                 "office/telecommunication": {
                     "name": "Telefongesellschaft",
@@ -4493,10 +4724,14 @@
                 },
                 "office/therapist": {
                     "name": "Therapeut",
-                    "terms": "Masseur"
+                    "terms": "Therapeut"
                 },
                 "office/travel_agent": {
                     "name": "Reisebüro"
+                },
+                "office/water_utility": {
+                    "name": "Wasserversorgungsunternehmen",
+                    "terms": "Wasserversorgungsunternehmen"
                 },
                 "piste": {
                     "name": "Piste/Skipiste",
@@ -4520,6 +4755,10 @@
                     "name": "Insel",
                     "terms": "Insel"
                 },
+                "place/islet": {
+                    "name": "Kleine Insel",
+                    "terms": "Kleine Insel, Inselchen"
+                },
                 "place/isolated_dwelling": {
                     "name": "abgelegene Siedlung",
                     "terms": "frei stehendes Haus, Einzelhaus, Einöde"
@@ -4531,6 +4770,10 @@
                 "place/neighbourhood": {
                     "name": "Wohngegend",
                     "terms": "Wohngegend, Nachbarschaft, Umgebung, Viertel, Grätzel, Kiez"
+                },
+                "place/plot": {
+                    "name": "Grundstück",
+                    "terms": "Grundstück, Parzelle"
                 },
                 "place/quarter": {
                     "name": "Gegend / Quartier",
@@ -4554,7 +4797,7 @@
                 },
                 "playground/balance_beam": {
                     "name": "Balancierbalken",
-                    "terms": "Balancierbalken, Schwebebalken"
+                    "terms": "Balancierbalken"
                 },
                 "playground/basket_spinner": {
                     "name": "Korbschaukel",
@@ -4573,8 +4816,8 @@
                     "terms": "Hüpfkissen"
                 },
                 "playground/horizontal_bar": {
-                    "name": "Reckstange",
-                    "terms": "Reckstange"
+                    "name": "Klimmzugstange",
+                    "terms": "Klimmzugstange"
                 },
                 "playground/rocker": {
                     "name": "Springreiter",
@@ -4649,6 +4892,10 @@
                 "power/substation": {
                     "name": "Umspannwerk",
                     "terms": "Umspannwerk, Transformatorenstation, Schaltanlage"
+                },
+                "power/switch": {
+                    "name": "Netzschalter",
+                    "terms": "Netzschalter, Ein/Ausschalter"
                 },
                 "power/tower": {
                     "name": "Hochspannungsmast",
@@ -4767,6 +5014,10 @@
                 "shop": {
                     "name": "Laden",
                     "terms": "Geschäft, Ladenlokal"
+                },
+                "shop/agrarian": {
+                    "name": "Geschäft für landwirtschaftliche Produktion",
+                    "terms": "Geschäft für landwirtschaftliche Produktion"
                 },
                 "shop/alcohol": {
                     "name": "Spirituosenladen",
@@ -5287,7 +5538,7 @@
                 },
                 "tourism/chalet": {
                     "name": "Ferienhaus",
-                    "terms": "Ferienhaus, Chalet"
+                    "terms": "Ferienhaus"
                 },
                 "tourism/gallery": {
                     "name": "Kunstgalerie",
@@ -5344,6 +5595,10 @@
                 "tourism/viewpoint": {
                     "name": "Aussichtspunkt",
                     "terms": "Aussichtspunkt"
+                },
+                "tourism/wilderness_hut": {
+                    "name": "unbewirtschaftete Schutzhütte",
+                    "terms": "unbewirtschaftete Schutzhütte"
                 },
                 "tourism/zoo": {
                     "name": "Zoo",
@@ -5548,7 +5803,7 @@
                     "terms": "Bach"
                 },
                 "waterway/stream_intermittent": {
-                    "name": "periodischer Bach",
+                    "name": "Periodischer Bach",
                     "terms": "periodischer Bach, periodisches Fliessgewässer"
                 },
                 "waterway/water_point": {
@@ -5577,12 +5832,26 @@
                 "description": "Premium-DigitalGlobe-Satellitenbilder",
                 "name": "DigitalGlobe Premium"
             },
+            "DigitalGlobe-Premium-vintage": {
+                "attribution": {
+                    "text": "Bedingungen & Feedback"
+                },
+                "description": "Lufbildgrenzen und Aufnahmedaten. Die Beschriftung erscheint auf Zoom Level 14 und höher.",
+                "name": "DigitalGlobe Premium Luftbildaufnahmedatum"
+            },
             "DigitalGlobe-Standard": {
                 "attribution": {
                     "text": "Bedingungen & Feedback"
                 },
                 "description": "Standard-DigitalGlobe-Satellitenbilder",
                 "name": "DigitalGlobe Standard"
+            },
+            "DigitalGlobe-Standard-vintage": {
+                "attribution": {
+                    "text": "Bedingungen & Feedback"
+                },
+                "description": "Lufbildgrenzen und Aufnahmedaten. Die Beschriftung erscheint auf Zoom Level 14 und höher.",
+                "name": "DigitalGlobe Standard Luftbildaufnahmedatum"
             },
             "EsriWorldImagery": {
                 "attribution": {
@@ -5648,15 +5917,15 @@
                 "name": "OSM-Objekteditor: Kennzeichnung"
             },
             "US-TIGER-Roads-2012": {
-                "name": "TIGER Straße 2012"
+                "name": "TIGER Straßen 2012"
             },
             "US-TIGER-Roads-2014": {
                 "description": "Bei Zoom Level 16+ Public Domain Kartendaten vom US Census. Bei niedrigeren Zoom Leves werden nur die Änderungen seit 2006 ohne die bereits nach OpenStreetMap eingearbeiteten Änderungen",
-                "name": "TIGER Straße 2014"
+                "name": "TIGER Straßen 2014"
             },
             "US-TIGER-Roads-2017": {
                 "description": "Gelb = Freie Daten vom US Census. Rot = In OpenStreetMap fehlende Daten",
-                "name": "TIGER Straße 2017"
+                "name": "TIGER Straßen 2017"
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {

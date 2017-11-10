@@ -310,7 +310,6 @@
             "localized_translation_language": "Izbor jezika",
             "localized_translation_name": "Naziv"
         },
-        "zoom_in_edit": "Za urejanje približajte pogled",
         "login": "prijava",
         "logout": "odjava",
         "loading_auth": "Vzpostavljanje povezave z OpenStreetMap ...",
@@ -611,8 +610,7 @@
         "splash": {
             "welcome": "Dobrodošli v iD, urejevalniku podatkov OpenStreetMap",
             "text": "Urejevalnik iD je zmogljivo, uporabniku prijazno orodje za vnašanje podatkov na najboljši brezplačni svetovni zemljevid. Uporabljena je zadnja različica {version}. Več podrobnosti o urejevalniku je na voljo na {website}, poročila o hroščih pa se zbirajo na spletišču {github}.",
-            "walkthrough": "Predstavitev orodja",
-            "start": "Urejevalnik"
+            "walkthrough": "Predstavitev orodja"
         },
         "source_switch": {
             "live": "objavljeno",
@@ -643,10 +641,6 @@
             "many_deletions": "Izbrisati nameravate predmete ({n}). Ali ste prepričani, da želite nadaljevati? Predmeti bodo izbrisani iz zemljevida openstreetmap.org, ki ga vidijo vsi uporabniki.",
             "tag_suggests_area": "Oznaka {tag} nakazuje, da črta opisovati območje, vendar pa ni sklenjena",
             "deprecated_tags": "Zastarele oznake: {tags}"
-        },
-        "zoom": {
-            "in": "Približaj",
-            "out": "Oddalji"
         },
         "cannot_zoom": "V trenutnem načinu nadaljnje oddaljevanje pogleda ni mogoče.",
         "full_screen": "Preklopi celozaslonski način",
@@ -3115,10 +3109,6 @@
                     "name": "Gradbeni odri",
                     "terms": "postavljalec gradbenih odrov"
                 },
-                "craft/sculpter": {
-                    "name": "Kiparstvo",
-                    "terms": "kipar,rezbar"
-                },
                 "craft/shoemaker": {
                     "name": "Čevljarstvo",
                     "terms": "čevljar"
@@ -3126,10 +3116,6 @@
                 "craft/stonemason": {
                     "name": "Klesarstvo",
                     "terms": "klesar"
-                },
-                "craft/sweep": {
-                    "name": "Dimnikarstvo",
-                    "terms": "dimnikar"
                 },
                 "craft/tailor": {
                     "name": "Krojaštvo"
@@ -3312,9 +3298,6 @@
                 "highway/path": {
                     "name": "Pot",
                     "terms": "steza,gaz"
-                },
-                "highway/pedestrian": {
-                    "name": "Ulica namenjena pešcem"
                 },
                 "highway/primary": {
                     "name": "Glavna cesta",
@@ -4004,17 +3987,9 @@
                     "name": "Urad",
                     "terms": "pisarna"
                 },
-                "office/accountant": {
-                    "name": "Računovodstvo",
-                    "terms": "računovodja,davčno svetovanje,finančno svetovanje"
-                },
                 "office/administrative": {
                     "name": "Upravna enota",
                     "terms": "Upravni urad,upravna pisarna"
-                },
-                "office/architect": {
-                    "name": "Arhitekt",
-                    "terms": "arhitekturni biro"
                 },
                 "office/company": {
                     "name": "Podjetje",
@@ -4047,20 +4022,12 @@
                     "name": "Zavarovalnica",
                     "terms": "zavarovalniški agent,zavarovalni agent,zavarovalni posrednik"
                 },
-                "office/it": {
-                    "name": "Strokovnjak za informacijske tehnologije",
-                    "terms": "IT strokovnjak,informacijski strokovnjak"
-                },
                 "office/lawyer": {
                     "name": "Pravna pisarna",
                     "terms": "pravni urad,advokat,odvetništvo"
                 },
                 "office/lawyer/notary": {
                     "name": "Notarska pisarna"
-                },
-                "office/newspaper": {
-                    "name": "Časopisna hiša",
-                    "terms": "časopis"
                 },
                 "office/ngo": {
                     "name": "Sedež nevladne organizacije",
@@ -4080,10 +4047,6 @@
                 "office/telecommunication": {
                     "name": "Telekomunikacijska pisarna",
                     "terms": "telekomunikacije,telekom"
-                },
-                "office/therapist": {
-                    "name": "Terapevt",
-                    "terms": "terapevtka,psihoterapevt,psihoterapevtka,psihiater,psihiatrinja"
                 },
                 "office/travel_agent": {
                     "name": "Potovalna agencija"
@@ -4689,10 +4652,6 @@
                 "tourism/caravan_site": {
                     "name": "Parkirišče za avtodome",
                     "terms": "parkirišče za karavaning"
-                },
-                "tourism/chalet": {
-                    "name": "Apartma",
-                    "terms": "stanovanje"
                 },
                 "tourism/gallery": {
                     "name": "Umetnostna galerija"

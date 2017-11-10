@@ -310,7 +310,6 @@
             "localized_translation_language": "選擇語言",
             "localized_translation_name": "名稱"
         },
-        "zoom_in_edit": "放大以編輯",
         "login": "登入",
         "logout": "登出",
         "loading_auth": "正在連接 OpenStreetMap...",
@@ -603,8 +602,7 @@
         "splash": {
             "welcome": "歡迎使用iD OpenStreetMap編輯器",
             "text": "iD是一個易用但功能強大的工具以便你可在世界上最好的免費地圖中作出貢獻。這個是版本{version}。你可在{website}得到更多資料和在{github}報告錯誤。",
-            "walkthrough": "開始新手教學",
-            "start": "立即編輯"
+            "walkthrough": "開始新手教學"
         },
         "source_switch": {
             "live": "實況模式",
@@ -635,10 +633,6 @@
             "many_deletions": "你正在刪除 {n} 個特徵。你確定要這樣做嗎？這樣就會將人人在 openstreetmap.org 地圖內看到的物件刪除了。",
             "tag_suggests_area": "{tag}標籤建議綫應為範圍，但這不是一個範圍。",
             "deprecated_tags": "已棄用的標籤: {tags}"
-        },
-        "zoom": {
-            "in": "放大",
-            "out": "縮細"
         },
         "cannot_zoom": "在這個模式下不能再縮小。",
         "full_screen": "切換全螢幕",
@@ -2737,8 +2731,7 @@
                     "terms": "學校,中學,小學,學校用地,學校範圍,國際學校"
                 },
                 "amenity/scrapyard": {
-                    "name": "廢料場",
-                    "terms": "Scrap Yard, 廢車場, 廢物場"
+                    "name": "廢料場"
                 },
                 "amenity/shelter": {
                     "name": "涼亭",
@@ -3303,10 +3296,6 @@
                     "name": "棚架工程",
                     "terms": "搭棚"
                 },
-                "craft/sculpter": {
-                    "name": "雕塑工程",
-                    "terms": "雕刻工程"
-                },
                 "craft/shoemaker": {
                     "name": "鞋匠",
                     "terms": "皮鞋匠"
@@ -3314,10 +3303,6 @@
                 "craft/stonemason": {
                     "name": "石匠",
                     "terms": "石工"
-                },
-                "craft/sweep": {
-                    "name": "煙囱打掃",
-                    "terms": "煙囱清掃,煙囱清潔"
                 },
                 "craft/tailor": {
                     "name": "裁縫"
@@ -3546,10 +3531,6 @@
                 "highway/path": {
                     "name": "路徑",
                     "terms": "Path,徑,路徑"
-                },
-                "highway/pedestrian": {
-                    "name": "行人專用區",
-                    "terms": "行人區, 行人專用"
                 },
                 "highway/primary": {
                     "name": "市區幹道",
@@ -4293,17 +4274,9 @@
                     "name": "辦公室",
                     "terms": "Office,寫字樓,辦公室"
                 },
-                "office/accountant": {
-                    "name": "會計師樓",
-                    "terms": "Accountant,會計師樓"
-                },
                 "office/administrative": {
                     "name": "行政樓",
                     "terms": "Administrative Office,行政樓"
-                },
-                "office/architect": {
-                    "name": "建築師樓",
-                    "terms": "Architect,則師樓,則樓,建築師樓"
                 },
                 "office/company": {
                     "name": "公司辦事處",
@@ -4341,10 +4314,6 @@
                     "name": "保險公司辦公室",
                     "terms": "Insurance Office,保險公司,保險公司寫字樓"
                 },
-                "office/it": {
-                    "name": "資訊科技公司辦公室",
-                    "terms": "IT Office,IT公司,資訊科技寫字樓,電腦公司寫字樓"
-                },
                 "office/lawyer": {
                     "name": "律師事務所",
                     "terms": "Law Office,律師事務所"
@@ -4352,10 +4321,6 @@
                 "office/lawyer/notary": {
                     "name": "公證行",
                     "terms": "Notary Office,公證人"
-                },
-                "office/newspaper": {
-                    "name": "報社",
-                    "terms": "Newspaper,報社,新聞社,通訊社"
                 },
                 "office/ngo": {
                     "name": "非政府機構辦公室",
@@ -4375,10 +4340,6 @@
                 "office/telecommunication": {
                     "name": "電訊公司辦公室",
                     "terms": "Telecom Office,電信公司,電話公司寫字樓"
-                },
-                "office/therapist": {
-                    "name": "治療師",
-                    "terms": "Therapist,治療師,醫療師"
                 },
                 "office/travel_agent": {
                     "name": "旅行社"
@@ -5105,10 +5066,6 @@
                 "tourism/caravan_site": {
                     "name": "露營車營地",
                     "terms": "RV Park,房車營地,露營車停車場,露營車營地"
-                },
-                "tourism/chalet": {
-                    "name": "木屋",
-                    "terms": "Chalet,木屋"
                 },
                 "tourism/gallery": {
                     "name": "畫廊",

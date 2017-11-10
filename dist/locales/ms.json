@@ -310,7 +310,6 @@
             "localized_translation_language": "Pilih bahasa",
             "localized_translation_name": "Nama"
         },
-        "zoom_in_edit": "Zum masuk untuk Menyunting",
         "login": "log masuk",
         "logout": "log keluar",
         "loading_auth": "Berhubung ke OpenStreetMap...",
@@ -598,8 +597,7 @@
         "splash": {
             "welcome": "Selamat datang! Ini ialah penyunting iD OpenStreetMap",
             "text": "Penyunting iD ialah suatu alat yang berkuasa tinggi tetapi sangat mudah digunakan untuk membuat sumbangan terhadap peta percuma yang terunggul di dunia. Ini ialah versi {version}. Untuk maklumat lanjut sila layari {website} dan laporkan pepijat di {github}.",
-            "walkthrough": "Mulakan Panduan",
-            "start": "Sunting Sekarang"
+            "walkthrough": "Mulakan Panduan"
         },
         "source_switch": {
             "live": "live",
@@ -630,10 +628,6 @@
             "many_deletions": "Anda memadamkan {n} ciri. Adakah anda pasti mahu melakukan ini? Ini akan memadam mereka dari peta yang dilihat oleh orang lain di openstreetmap.org.",
             "tag_suggests_area": "Tanda {tag} mencadangkan garis sepatutnya menjadi kawasan, tetapi ianya bukan kawasan",
             "deprecated_tags": "Tag-tag yang telah lapuk: {tags}"
-        },
-        "zoom": {
-            "in": "Zum Dekat",
-            "out": "Zum Jauh"
         },
         "cannot_zoom": "Had zum jauh telah dicapai dalam mod yang sedang dipakai.",
         "full_screen": "Togol Skrin Penuh",

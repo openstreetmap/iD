@@ -184,7 +184,6 @@
             "localized_translation_language": "ভাষা বেছে নিন",
             "localized_translation_name": "নাম"
         },
-        "zoom_in_edit": "সম্পাদনার জন্য জুম ইন করুন",
         "login": "প্রবেশ করুন",
         "logout": "বেরিয়ে যান",
         "loading_auth": "ওপেনস্ট্রীটম্যাপে সংযোগ করা হচ্ছে ...",
@@ -313,8 +312,7 @@
         },
         "splash": {
             "welcome": "iD ওপেনস্ট্রীটম্যাপ সম্পাদকে অাপনাকে স্বাগতম",
-            "walkthrough": "ওয়াকথ্রু শুরু করুন",
-            "start": "এখুনি পরিবর্তন করুন"
+            "walkthrough": "ওয়াকথ্রু শুরু করুন"
         },
         "source_switch": {
             "live": "সরাসরি",
@@ -332,10 +330,6 @@
             "untagged_area": "ট্যাগবিহীন এলাকা",
             "tag_suggests_area": "{tag} ট্যাগটি অনুসারে রেখাটি এলাকা হবে, কিন্তু নয়।",
             "deprecated_tags": "পুরোন ও অব্যবহৃত ট্যাগ: {tags}"
-        },
-        "zoom": {
-            "in": "জুম্ ইন",
-            "out": "জুম্ আউট"
         },
         "cannot_zoom": "বর্তমান মোডে আরও জুম আউট করা যাবে না.",
         "help": {
@@ -1093,9 +1087,6 @@
                 "office": {
                     "name": "কার্যালয়"
                 },
-                "office/newspaper": {
-                    "name": "সংবাদপত্র"
-                },
                 "office/ngo": {
                     "name": "এনজিও অফিস"
                 },
@@ -1107,9 +1098,6 @@
                 },
                 "office/telecommunication": {
                     "name": "টেলিকম অফিস"
-                },
-                "office/therapist": {
-                    "name": "থেরাপিস্ট"
                 },
                 "place": {
                     "name": "জায়গা"
