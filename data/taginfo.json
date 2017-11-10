@@ -960,6 +960,10 @@
         },
         {
             "key": "craft",
+            "value": "chimney_sweeper"
+        },
+        {
+            "key": "craft",
             "value": "clockmaker"
         },
         {
@@ -1069,10 +1073,6 @@
         {
             "key": "craft",
             "value": "stonemason"
-        },
-        {
-            "key": "craft",
-            "value": "sweep"
         },
         {
             "key": "craft",

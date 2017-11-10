@@ -3406,6 +3406,10 @@
                     "name": "Caterer",
                     "terms": ""
                 },
+                "craft/chimney_sweeper": {
+                    "name": "Chimney Sweeper",
+                    "terms": ""
+                },
                 "craft/clockmaker": {
                     "name": "Clockmaker",
                     "terms": ""
@@ -3517,10 +3521,6 @@
                 "craft/stonemason": {
                     "name": "Stonemason",
                     "terms": "masonry"
-                },
-                "craft/sweep": {
-                    "name": "Chimney Sweep",
-                    "terms": ""
                 },
                 "craft/tiler": {
                     "name": "Tiler",

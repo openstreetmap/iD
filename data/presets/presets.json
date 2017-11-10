@@ -5012,6 +5012,24 @@
             },
             "name": "Caterer"
         },
+        "craft/chimney_sweeper": {
+            "icon": "poi-chimney",
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "craft": "chimney_sweeper"
+            },
+            "name": "Chimney Sweeper"
+        },
         "craft/clockmaker": {
             "icon": "poi-clock",
             "fields": [
@@ -5579,24 +5597,6 @@
                 "craft": "stonemason"
             },
             "name": "Stonemason"
-        },
-        "craft/sweep": {
-            "icon": "poi-chimney",
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours"
-            ],
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "tags": {
-                "craft": "sweep"
-            },
-            "name": "Chimney Sweep"
         },
         "craft/tiler": {
             "icon": "poi-tool",
