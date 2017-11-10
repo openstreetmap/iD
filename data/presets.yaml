@@ -600,6 +600,9 @@ en:
       generator/type:
         # 'generator:type=*'
         label: Type
+      government:
+        # government=*
+        label: Type
       grape_variety:
         # grape_variety=*
         label: Grape Varieties

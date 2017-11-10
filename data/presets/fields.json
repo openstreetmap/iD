@@ -820,6 +820,11 @@
             "type": "combo",
             "label": "Type"
         },
+        "government": {
+            "key": "government",
+            "type": "typeCombo",
+            "label": "Type"
+        },
         "grape_variety": {
             "key": "grape_variety",
             "type": "semiCombo",

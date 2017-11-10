@@ -1610,6 +1610,9 @@
                 "generator/type": {
                     "label": "Type"
                 },
+                "government": {
+                    "label": "Type"
+                },
                 "grape_variety": {
                     "label": "Grape Varieties"
                 },
