@@ -46935,6 +46935,66 @@
             "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAABHNCSVQICAgIfAhkiAAAAxJJREFUOI3tlF9oW2UYxn9f4nKW2ixfjJGYMnuctRUZ5mhEpjdJEEaHtmsZaKHq0qt6ZdtZL3Zhk3ilIKS9Ui806UStE7Edjln8kwzEwaB6IshsmJIqK1ttZ7Qlzel2eryQhqZrsDC8EHyuvu993+/53j+8D/yPfxtip4GqH1X1owLkdHI3RSwbkbFu1yAPdx4t3hpSS6YLAM05i/vCqcmzZwpj9T6pIZYOZNArNADhsQj3RVNjtyS1DcKtiHlPIb96PTn67nJiq8++cRgJicTpQ7Yz0oHc7cQZeakzPbTyqr9iKXUr0lfbqOx7LHJgbXrux5/X9M0+G0C8SySeeWTPQPSLxu4jn1vd4tE7m4euDNclrCEvt6E+25/e6H+VuKen57vEe1b8I29b8cKyo6j6Uece6I/VK387jC70crgjMFBDPDEx8aA5aOPkG+f7FhcX9YhGZLIUBSD7VAtSsZOKNpGKNgFU710tbiJ7G0lFm9DucCL2R7uCXjTpQFZbMV6wMu+EbWnpQOIJVKcvFTuDIR+az4nmc1Zt6h4HuV9XGHjIx1D2EvrCKtLnUgE+Pig+kQ6kDeDFc9YQwJdP2rLuBlfzRjklw7yh7JJh0vfZL6Tb70IqdqRSnT/5JfQTBcZfDom4HaBiUjn5k/Xh0VYRe85ztZ11QX53K4ZQyPxwFcO0yP+2Ste9bi6XrxPbfxuvnV9g6uIfPK/dTskwURbOFfPTM2PSIeTT99Bzw4KMhERi5ICIl667OOHuYNzdQV5p/ccBxi89kUmm5vveDou06kLddvNSibasbvZGXvj9fYJGgbldAaYaI+SVVoq7ApxtCNXEH7ZyhL8+Nho00YJeoT3+6Xp0W2KtBU07NpzNlHulem2ecHmGzpUcmlGg+dp83aynitbkK99ayfwSel2tiLUTo3M4lSn3ys12ub5MsFL4O4GGWZq/fyszfvrPsfwSNZtnpw70i+jMfjPdf//MfXf7UYtrASqWQkUoeNzLtHumS0buzePJD4zjV1a5vPX9jmRT9aNGNCKbZXMn0vnfwl+e9BTflqrxKAAAAABJRU5ErkJggg=="
         },
         {
+            "id": "IBGE_Salvador_Streets",
+            "name": "Nomes de Ruas IBGE Salvador-BA",
+            "type": "tms",
+            "template": "https://api.mapbox.com/styles/v1/wille/cj8lp78dn62wl2rquim47qo0g/tiles/256/{zoom}/{x}/{y}?access_token=pk.eyJ1Ijoid2lsbGUiLCJhIjoicFNVWk5VWSJ9.hluCd0YGvYHNlFi_utWe2g",
+            "scaleExtent": [
+                0,
+                20
+            ],
+            "polygon": [
+                [
+                    [
+                        -38.489742279052734,
+                        -12.811131765117107
+                    ],
+                    [
+                        -38.54484558105469,
+                        -13.013924052026558
+                    ],
+                    [
+                        -38.47755432128906,
+                        -13.034662471471638
+                    ],
+                    [
+                        -38.33473205566406,
+                        -12.946846814654444
+                    ],
+                    [
+                        -38.30005645751953,
+                        -12.906692193510644
+                    ],
+                    [
+                        -38.33953857421875,
+                        -12.904349641337422
+                    ],
+                    [
+                        -38.35481643676758,
+                        -12.830213284310222
+                    ],
+                    [
+                        -38.38090896606445,
+                        -12.821844374997415
+                    ],
+                    [
+                        -38.40717315673828,
+                        -12.867535227819912
+                    ],
+                    [
+                        -38.46536636352539,
+                        -12.815985972925704
+                    ],
+                    [
+                        -38.489742279052734,
+                        -12.811131765117107
+                    ]
+                ]
+            ],
+            "description": "Streets geometry and names of Salvador, Bahia. Source: Faces de Logradouro - IBGE.",
+            "overlay": true
+        },
+        {
             "id": "MAPNIK",
             "name": "OpenStreetMap (Standard)",
             "type": "tms",
