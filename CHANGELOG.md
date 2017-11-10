@@ -26,6 +26,175 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+
+# 2.5.0
+##### November 10, 2017
+
+#### :mega: Release Highlights
+
+* :camera: We've added support for [OpenStreetCam](http://openstreetcam.org/) in the photo viewer!
+This brings over 100 million user-contributed photos into the iD editor for improving OpenStreetMap.<br/>
+_Check out what streetlevel photo coverage is available by opening the Map Data pane (shortcut <kbd>F</kbd>)_
+
+* :pray: Special thank you to all of our new and first-time contributors who submitted pull requests for
+[Hacktoberfest](https://hacktoberfest.digitalocean.com/)!
+
+
+#### :tada: New Features
+* Add support for OpenStreetCam ([#4499], [#3795])
+* Add support for DigitalGlobe imagery vintage overlays (see [editor-layer-index/issues/#371], thanks [@marracci])
+* Add API parameter to conditionally disable feature types ([#4439], [#4393], thanks [@ferdibiflator])
+* Display name of gpx file in `imagery_used` instead of "Local GPX" ([#4440], [#4385], thanks [@ferdibiflator])
+* Remove lodash from build scripts ([#4447], [#4378], [@DzikowskiW])
+
+[editor-layer-index/issues/#371]: https://github.com/osmlab/editor-layer-index/issues/371
+[#4499]: https://github.com/openstreetmap/iD/issues/4499
+[#4447]: https://github.com/openstreetmap/iD/issues/4447
+[#4440]: https://github.com/openstreetmap/iD/issues/4440
+[#4439]: https://github.com/openstreetmap/iD/issues/4439
+[#4393]: https://github.com/openstreetmap/iD/issues/4393
+[#4385]: https://github.com/openstreetmap/iD/issues/4385
+[#4378]: https://github.com/openstreetmap/iD/issues/4378
+[#3795]: https://github.com/openstreetmap/iD/issues/3795
+[@marracci]: https://github.com/marracci
+[@ferdibiflator]: https://github.com/ferdibiflator
+[@DzikowskiW]: https://github.com/DzikowskiW
+
+
+#### :sparkles: Usability
+* Improvements to Mapillary and OpenStreetCam usability ([#4512])
+  * Traces are the only thing drawn at low zoom, circles appear at zoom 16, viewfield cones appear at zoom 18
+  * Everything is drawn very dim by default
+  * Hovering a marker will brighten that marker, the parent trace, and other markers along the trace
+  * The selected marker is drawn bright yellow and scaled up to be extra visible
+  * Standardize on "username | captured_at | sitelink" for attribution line
+  * Render panoramic Mapillary viewfields as a sphere instead of cone ([#3154])
+* Bump default max_zoom from 20 to 22 (this affects custom imagery layers)
+* Allow spellcheck in textarea fields ([#4471])
+* Move "Zoom in to edit" button out of the way, and allow wheel events to pass through to the map ([#4482])
+* Better capitalization for "Zoom in", "Zoom out", "Edit now", "Zoom in to edit" ([#4492], thanks [@jaller94])
+
+[#4512]: https://github.com/openstreetmap/iD/issues/4512
+[#4492]: https://github.com/openstreetmap/iD/issues/4492
+[#4482]: https://github.com/openstreetmap/iD/issues/4482
+[#4471]: https://github.com/openstreetmap/iD/issues/4471
+[#3154]: https://github.com/openstreetmap/iD/issues/3154
+[@jaller94]: https://github.com/jaller94
+
+
+#### :bug: Bugfixes
+* Add code so `tunnel=building_passage` doesn't default to `layer=-1` ([#4516])
+* Clicking on a search result should take you to that location the first time ([#4276])
+* Fix label placement on areas that don't have an icon ([#4479])
+* Don't add underscores to `source=*` field ([#4475], [#4474], thanks [@octagonal])
+* Depend on `bhousel/node-diff3` which includes fix for conflict resolution node duplication bug ([#3544], [#3058])
+* Allow copying text from info panels ([#4456], [#4406], thanks [@ferdibiflator])
+* Make sure `imagery_used` field is updated if a user cancels save and makes more edits ([#4445], [#4443], thanks [@moshen])
+* Fallback Area preset should preserve the `area=yes` tag ([#4424])
+
+[#4516]: https://github.com/openstreetmap/iD/issues/4516
+[#4479]: https://github.com/openstreetmap/iD/issues/4479
+[#4475]: https://github.com/openstreetmap/iD/issues/4475
+[#4474]: https://github.com/openstreetmap/iD/issues/4474
+[#4456]: https://github.com/openstreetmap/iD/issues/4456
+[#4445]: https://github.com/openstreetmap/iD/issues/4445
+[#4443]: https://github.com/openstreetmap/iD/issues/4443
+[#4424]: https://github.com/openstreetmap/iD/issues/4424
+[#4406]: https://github.com/openstreetmap/iD/issues/4406
+[#4276]: https://github.com/openstreetmap/iD/issues/4276
+[#3544]: https://github.com/openstreetmap/iD/issues/3544
+[#3058]: https://github.com/openstreetmap/iD/issues/3058
+[@octagonal]: https://github.com/octagonal
+[@ferdibiflator]: https://github.com/ferdibiflator
+[@moshen]: https://github.com/moshen
+
+
+#### :rocket: Presets
+* Add `government=*` type field to Government Office preset ([#4517])
+* Change craft=sweep -> craft=chimney_sweeper ([#4510])
+* Add shop=agrarian preset and agrarian=* field ([#4507], thanks [@willemarcel])
+* Change max_age to min_age for min_age field ([#4506], thanks [@JamesKingdom])
+* Rename sculpter to sculptor not sculpter ([#4504], thanks [@simonpoole])
+* Add preset for music schools ([#4500], thanks [@tyrasd])
+* Add `voltage`,`operator`,`ref` fields to several `power=*` presets.
+* Add `power=switch` preset ([#4441])
+* Drop `vertex` geometry from `office=*` presets (i.e. make them like `shop=*` presets)
+* Add preset for "Pedestrian Area" (highway=pedestrian + area=yes) ([#4488])
+* Rename tourism=chalet to "Holiday Cottage" and add search terms ([#4490])
+* Remove poi-foot icon from place=square ([#4486])
+* Add several presets for common `office=*` types ([#4491], [#4489], thanks [@Nmargolis])
+* Add preset for `tourism=wilderness_hut` ([#4485], [#4483], thanks [@YuliyaVeklicheva])
+* Fix reference links for `highway=crossing`, `footway=crossing` ([#4480])
+* Add preset for `landuse=religious` ([#4478], [#4476], thanks [@YuliyaVeklicheva])
+* Add "Climbing hut" search term to alpine hut ([#4470], [#4469], thanks [@JamesKingdom])
+* Add presets for many kinds of Fitness Station equipment ([#4404], [#4373], thanks [@JamesKingdom])
+* Deprecate `amenity=scrapyard` in favor of "approved" `industrial=scrap_yard` (revert of [#3387])
+* Add `industrial=slaughterhouse` preset ([#4467], [#4466], thanks [@JamesKingdom])
+* Add `power=transformer` preset ([#4464], [#4442], thanks [@ToeBee])
+* Change drain icon to ditch ([#4462], [#4460], thanks [@AndreasHae])
+* Add preset for `place=islet` ([#4461], [#4458], thanks [@AndreasHae])
+* Add `leisure=boules` as "Boules/Bocce Court" ([#4451], [#4449], thanks [@DzikowskiW])
+* Add `landuse=brownfield` and `landuse=greenfield` presets ([#4448], [#4444], thanks [@manfredbrandl])
+* Add `leisure=sauna` preset ([#4438], [#4436], thanks [@haroldb])
+* Add `substance=*` field to pipeline preset ([#4432], [#4430], thanks [@xmile1])
+* Add `place=plot` preset ([#4427], [#4423], thanks [@humanforklift])
+
+[#4517]: https://github.com/openstreetmap/iD/issues/4517
+[#4510]: https://github.com/openstreetmap/iD/issues/4510
+[#4507]: https://github.com/openstreetmap/iD/issues/4507
+[#4506]: https://github.com/openstreetmap/iD/issues/4506
+[#4504]: https://github.com/openstreetmap/iD/issues/4504
+[#4500]: https://github.com/openstreetmap/iD/issues/4500
+[#4441]: https://github.com/openstreetmap/iD/issues/4441
+[#4488]: https://github.com/openstreetmap/iD/issues/4488
+[#4490]: https://github.com/openstreetmap/iD/issues/4490
+[#4486]: https://github.com/openstreetmap/iD/issues/4486
+[#4491]: https://github.com/openstreetmap/iD/issues/4491
+[#4489]: https://github.com/openstreetmap/iD/issues/4489
+[#4485]: https://github.com/openstreetmap/iD/issues/4485
+[#4483]: https://github.com/openstreetmap/iD/issues/4483
+[#4480]: https://github.com/openstreetmap/iD/issues/4480
+[#4478]: https://github.com/openstreetmap/iD/issues/4478
+[#4476]: https://github.com/openstreetmap/iD/issues/4476
+[#4470]: https://github.com/openstreetmap/iD/issues/4470
+[#4469]: https://github.com/openstreetmap/iD/issues/4469
+[#4404]: https://github.com/openstreetmap/iD/issues/4404
+[#4373]: https://github.com/openstreetmap/iD/issues/4373
+[#4467]: https://github.com/openstreetmap/iD/issues/4467
+[#4466]: https://github.com/openstreetmap/iD/issues/4466
+[#4464]: https://github.com/openstreetmap/iD/issues/4464
+[#4462]: https://github.com/openstreetmap/iD/issues/4462
+[#4442]: https://github.com/openstreetmap/iD/issues/4442
+[#4461]: https://github.com/openstreetmap/iD/issues/4461
+[#4460]: https://github.com/openstreetmap/iD/issues/4460
+[#4458]: https://github.com/openstreetmap/iD/issues/4458
+[#4451]: https://github.com/openstreetmap/iD/issues/4451
+[#4449]: https://github.com/openstreetmap/iD/issues/4449
+[#4448]: https://github.com/openstreetmap/iD/issues/4448
+[#4444]: https://github.com/openstreetmap/iD/issues/4444
+[#4438]: https://github.com/openstreetmap/iD/issues/4438
+[#4436]: https://github.com/openstreetmap/iD/issues/4436
+[#4432]: https://github.com/openstreetmap/iD/issues/4432
+[#4430]: https://github.com/openstreetmap/iD/issues/4430
+[#4427]: https://github.com/openstreetmap/iD/issues/4427
+[#4423]: https://github.com/openstreetmap/iD/issues/4423
+[#3387]: https://github.com/openstreetmap/iD/issues/3387
+[@willemarcel]: https://github.com/willemarcel
+[@JamesKingdom]: https://github.com/JamesKingdom
+[@simonpoole]: https://github.com/simonpoole
+[@tyrasd]: https://github.com/tyrasd
+[@Nmargolis]: https://github.com/Nmargolis
+[@YuliyaVeklicheva]: https://github.com/YuliyaVeklicheva
+[@ToeBee]: https://github.com/ToeBee
+[@AndreasHae]: https://github.com/AndreasHae
+[@DzikowskiW]: https://github.com/DzikowskiW
+[@manfredbrandl]: https://github.com/manfredbrandl
+[@haroldb]: https://github.com/haroldb
+[@xmile1]: https://github.com/xmile1
+[@humanforklift]: https://github.com/humanforklift
+
+
+
 # 2.4.3
 ##### October 9, 2017
 
