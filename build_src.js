@@ -26,7 +26,7 @@ module.exports = function buildSrc() {
 
         return rollup
             .rollup({
-                entry: './modules/id.js',
+                input: './modules/id.js',
                 plugins: [
                     includePaths({
                         paths: [
@@ -34,7 +34,7 @@ module.exports = function buildSrc() {
                         ]
                     }),
                     nodeResolve({
-                        jsnext: true,
+                        module: true,
                         main: true,
                         browser: false
                     }),
@@ -47,9 +47,9 @@ module.exports = function buildSrc() {
                 cache = bundle;
                 return bundle.write({
                     format: 'iife',
-                    dest: 'dist/iD.js',
-                    sourceMap: true,
-                    useStrict: false
+                    file: 'dist/iD.js',
+                    sourcemap: true,
+                    strict: false
                 });
             })
             .then(function() {
