@@ -306,7 +306,7 @@ export default {
 
         wrapEnter
             .append('div')
-            .attr('class', 'osc-attribution fillD');
+            .attr('class', 'photo-attribution fillD');
 
         var controlsEnter = wrapEnter
             .append('div')
@@ -427,14 +427,14 @@ export default {
                 .style('transform', 'rotate(' + r + 'deg)')
                 .attr('src', apibase + '/' + d.imagePath);
 
-            var attribution = wrap.selectAll('.osc-attribution').html('');
+            var attribution = wrap.selectAll('.photo-attribution').html('');
 
             if (d.captured_by) {
                 attribution
                     .append('a')
                     .attr('class', 'captured_by')
                     .attr('target', '_blank')
-                    .attr('href', apibase + '/user/' + d.captured_by)
+                    .attr('href', 'http://openstreetcam.org/user/' + encodeURIComponent(d.captured_by))
                     .text('@' + d.captured_by);
 
                 attribution
@@ -457,7 +457,7 @@ export default {
                 .append('a')
                 .attr('class', 'image_link')
                 .attr('target', '_blank')
-                .attr('href', apibase + '/details/' + d.sequence_id + '/' + d.sequence_index)
+                .attr('href', 'http://openstreetcam.org/details/' + d.sequence_id + '/' + d.sequence_index)
                 .text('openstreetcam.org');
         }
         return this;

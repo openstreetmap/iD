@@ -66,7 +66,7 @@ describe('iD.serviceMapillary', function() {
     describe('#reset', function() {
         it('resets cache and image', function() {
             mapillary.cache().foo = 'bar';
-            mapillary.selectImage({key: 'baz'});
+            mapillary.selectImage({ key: 'baz', loc: [10,0] });
 
             mapillary.reset();
             expect(mapillary.cache()).to.not.have.property('foo');
@@ -432,8 +432,9 @@ describe('iD.serviceMapillary', function() {
 
     describe('#selectImage', function() {
         it('gets and sets the selected image', function() {
-            mapillary.selectImage('foo');
-            expect(mapillary.getSelectedImage()).to.eql('foo');
+            var d = { key: 'baz', loc: [10,0] };
+            mapillary.selectImage(d);
+            expect(mapillary.getSelectedImage()).to.eql(d);
         });
     });
 

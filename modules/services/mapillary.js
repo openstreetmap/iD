@@ -172,6 +172,7 @@ function loadNextTilePage(which, currZoom, url, tile) {
                         key: feature.properties.key,
                         ca: feature.properties.ca,
                         captured_at: feature.properties.captured_at,
+                        captured_by: feature.properties.username,
                         pano: feature.properties.pano
                     };
                     cache.forImageKey[d.key] = d;     // cache imageKey -> image
@@ -424,14 +425,20 @@ export default {
 
 
     loadViewer: function(context) {
-        // add mly-wrapper for viewer-js
-        d3_select('#photoviewer').selectAll('.mly-wrapper')
-            .data([0])
-            .enter()
+        // add mly-wrapper
+        var wrap = d3_select('#photoviewer').selectAll('.mly-wrapper')
+            .data([0]);
+
+        var wrapEnter = wrap.enter()
             .append('div')
             .attr('id', 'mly')
             .attr('class', 'photo-wrapper mly-wrapper')
             .classed('hide', true);
+
+        wrapEnter
+            .append('div')
+            .attr('class', 'photo-attribution fillD');
+
 
         // load mapillary-viewercss
         d3_select('head').selectAll('#mapillary-viewercss')
@@ -586,25 +593,44 @@ export default {
                 });
             });
 
-        if (!d) return this;
+        var wrap = d3_select('#photoviewer .mly-wrapper');
+        var attribution = wrap.selectAll('.photo-attribution').html('');
 
-        // if viewer is just starting up, attribution might not be available yet
-        var attribution = d3_select('.mapillary-js-dom .Attribution');
-        var timestamp = localeTimestamp(d.captured_at);
-        var capturedAt = attribution.selectAll('.captured-at');
-        if (capturedAt.empty()) {
-            capturedAt = attribution
-                .insert('span', ':last-child')
-                .attr('class', 'captured-at');
+        if (d) {
+            if (d.captured_by) {
+                attribution
+                    .append('a')
+                    .attr('class', 'captured_by')
+                    .attr('target', '_blank')
+                    .attr('href', 'https://www.mapillary.com/app/user/' + encodeURIComponent(d.captured_by))
+                    .text('@' + d.captured_by);
+
+                attribution
+                    .append('span')
+                    .text('|');
+            }
+
+            if (d.captured_at) {
+                attribution
+                    .append('span')
+                    .attr('class', 'captured_at')
+                    .text(localeTimestamp(d.captured_at));
+
+                attribution
+                    .append('span')
+                    .text('|');
+            }
 
             attribution
-                .insert('span', ':last-child')
-                .text('|');
-        }
-        capturedAt
-            .text(timestamp);
+                .append('a')
+                .attr('class', 'image_link')
+                .attr('target', '_blank')
+                .attr('href', 'https://www.mapillary.com/app/?pKey=' + encodeURIComponent(d.key) +
+                    '&focus=photo&lat=' + d.loc[1] + '&lng=' + d.loc[0] + '&z=17')
+                .text('mapillary.com');
 
-        this.updateDetections(d);
+            this.updateDetections(d);
+        }
 
         return this;
     },

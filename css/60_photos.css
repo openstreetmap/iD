@@ -24,25 +24,35 @@
     overflow: hidden;
 }
 
+.photo-wrapper .photo-attribution {
+    width: 100%;
+    font-size: 10px;
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 4px 2px;
+    z-index: 10;
+}
+
+.photo-attribution a,
+.photo-attribution a:visited,
+.photo-attribution span {
+    padding: 4px 2px;
+    color: #fff;
+}
+
 /* markers and sequences */
 .viewfield-group {
     pointer-events: visible;
     cursor: pointer;
 }
 
-.viewfield-group * {
-    z-index: 50;
-}
 .viewfield-group.selected * {
     fill: #ffee00 !important;
-    z-index: 60;
 }
 .viewfield-group.hovered * {
     fill: #eebb00 !important;
-    z-index: 70;
-}
-.viewfield-group.highlighted * {
-    z-index: 60;
 }
 
 .viewfield-group circle {
@@ -162,11 +172,18 @@
     top: -25px;
 }
 #mly .domRenderer .Attribution {
-    width: 100%;
-    font-size: 10px;
-    text-align: right;
+    /* we will roll our own to avoid async update issues like #4526 */
+    display: none;
 }
 
+.mly-wrapper .photo-attribution a:active,
+.mly-wrapper .photo-attribution a:hover {
+    color: #35af6d;
+}
+
+.mly-wrapper .mapillary-js-dom {
+    z-index: 9;
+}
 
 /* OpenStreetCam viewer */
 .osc-wrapper {
@@ -177,25 +194,8 @@
     background-repeat: no-repeat;
 }
 
-.osc-wrapper .osc-attribution {
-    width: 100%;
-    font-size: 10px;
-    text-align: right;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    padding: 4px 2px;
-    z-index: 10;
-}
-
-.osc-attribution a,
-.osc-attribution a:visited,
-.osc-attribution span {
-    padding: 4px 2px;
-    color: #fff;
-}
-.osc-attribution a:active,
-.osc-attribution a:hover {
+.osc-wrapper .photo-attribution a:active,
+.osc-wrapper .photo-attribution a:hover {
     color: #77ddff;
 }
 
