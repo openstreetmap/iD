@@ -21,7 +21,7 @@ import { geoExtent } from '../geo';
 import { utilQsString, utilRebind } from '../util';
 
 
-var apibase = 'http://openstreetcam.org',
+var apibase = 'https://openstreetcam.org',
     maxResults = 1000,
     tileZoom = 14,
     dispatch = d3_dispatch('loadedImages'),
@@ -434,7 +434,7 @@ export default {
                     .append('a')
                     .attr('class', 'captured_by')
                     .attr('target', '_blank')
-                    .attr('href', 'http://openstreetcam.org/user/' + encodeURIComponent(d.captured_by))
+                    .attr('href', 'https://openstreetcam.org/user/' + encodeURIComponent(d.captured_by))
                     .text('@' + d.captured_by);
 
                 attribution
@@ -457,7 +457,7 @@ export default {
                 .append('a')
                 .attr('class', 'image_link')
                 .attr('target', '_blank')
-                .attr('href', 'http://openstreetcam.org/details/' + d.sequence_id + '/' + d.sequence_index)
+                .attr('href', 'https://openstreetcam.org/details/' + d.sequence_id + '/' + d.sequence_index)
                 .text('openstreetcam.org');
         }
         return this;
