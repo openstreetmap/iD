@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@mapbox/maki": "^4.0.0",
-    "@std/esm": "^0.14.0",
+    "@std/esm": "^0.15.0",
     "brfs": "1.4.3",
     "chai": "^4.1.0",
     "colors": "^1.1.2",
