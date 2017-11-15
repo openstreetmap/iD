@@ -91,7 +91,10 @@ export function rendererBackground(context) {
 
         var gpx = context.layers().layer('gpx');
         if (gpx && gpx.enabled() && gpx.hasGpx()) {
-            imageryUsed.push(gpx.getSrc());
+            // Include a string like '.gpx data file' or '.geojson data file'
+            var match = gpx.getSrc().match(/(kml|gpx|(?:geo)?json)$/i);
+            var extension = match ? ('.' + match[0].toLowerCase() + ' ') : '';
+            imageryUsed.push(extension + 'data file');
         }
 
         var mapillary_images = context.layers().layer('mapillary-images');
