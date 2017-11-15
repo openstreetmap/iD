@@ -337,7 +337,7 @@ export function svgLabels(projection, context) {
                 var getName = (geometry === 'line') ? utilDisplayNameForPath : utilDisplayName,
                     name = getName(entity),
                     width = name && textWidth(name, fontSize),
-                    p;
+                    p = null;
 
                 if (geometry === 'point') {
                     p = getPointLabel(entity, width, fontSize, geometry);
