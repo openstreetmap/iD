@@ -74,10 +74,10 @@ export function rendererMap(context) {
         mousemove;
 
     var zoom = d3_zoom()
-            .scaleExtent([ztok(2), ztok(24)])
-            .interpolate(d3_interpolate)
-            .filter(zoomEventFilter)
-            .on('zoom', zoomPan);
+        .scaleExtent([ztok(2), ztok(24)])
+        .interpolate(d3_interpolate)
+        .filter(zoomEventFilter)
+        .on('zoom', zoomPan);
 
     var _selection = d3_select(null);
     var isRedrawScheduled = false;
