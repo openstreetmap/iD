@@ -17,7 +17,7 @@ export function uiNotice(context) {
             .append('button')
             .attr('class', 'zoom-to notice fillD')
             .on('click', function() {
-                context.map().zoom(context.minEditableZoom());
+                context.map().zoomEase(context.minEditableZoom());
             })
             .on('wheel', function() {   // let wheel events pass through #4482
                 var e2 = new WheelEvent(d3_event.type, d3_event);
