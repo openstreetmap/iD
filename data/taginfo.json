@@ -2522,6 +2522,10 @@
         },
         {
             "key": "railway",
+            "value": "light_rail"
+        },
+        {
+            "key": "railway",
             "value": "milestone"
         },
         {

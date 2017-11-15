@@ -13158,6 +13158,28 @@
             ],
             "name": "Railway Crossing (Road)"
         },
+        "railway/light_rail": {
+            "icon": "railway-light-rail",
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "railway": "light_rail"
+            },
+            "fields": [
+                "name",
+                "structure",
+                "gauge",
+                "electrified",
+                "service_rail"
+            ],
+            "terms": [
+                "light rail",
+                "streetcar",
+                "trolley"
+            ],
+            "name": "Light Rail"
+        },
         "railway/milestone": {
             "icon": "poi-milestone",
             "geometry": [

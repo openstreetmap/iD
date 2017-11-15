@@ -4443,6 +4443,11 @@ en:
         name: Railway Crossing (Road)
         # 'terms: crossing,railroad crossing,level crossing,grade crossing,road through railroad,train crossing'
         terms: '<translate with synonyms or related terms for ''Railway Crossing (Road)'', separated by commas>'
+      railway/light_rail:
+        # railway=light_rail
+        name: Light Rail
+        # 'terms: light rail,streetcar,trolley'
+        terms: '<translate with synonyms or related terms for ''Light Rail'', separated by commas>'
       railway/milestone:
         # railway=milestone
         name: Railway Milestone

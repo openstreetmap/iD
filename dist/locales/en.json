@@ -4989,6 +4989,10 @@
                     "name": "Railway Crossing (Road)",
                     "terms": "crossing,railroad crossing,level crossing,grade crossing,road through railroad,train crossing"
                 },
+                "railway/light_rail": {
+                    "name": "Light Rail",
+                    "terms": "light rail,streetcar,trolley"
+                },
                 "railway/milestone": {
                     "name": "Railway Milestone",
                     "terms": "milestone,marker"
