@@ -1235,7 +1235,7 @@
                     "label": "类型"
                 },
                 "artist": {
-                    "label": "艺人"
+                    "label": "艺术家"
                 },
                 "artwork_type": {
                     "label": "类型"
@@ -3216,8 +3216,8 @@
                     "terms": "商业建筑"
                 },
                 "building/roof": {
-                    "name": "楼顶",
-                    "terms": "楼顶,房顶,屋顶"
+                    "name": "开放式建筑",
+                    "terms": "大棚,屋顶,上盖,开放式建筑"
                 },
                 "building/school": {
                     "name": "学校建筑",

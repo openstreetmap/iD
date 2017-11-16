@@ -1608,6 +1608,9 @@
                 "generator/type": {
                     "label": "Tipo"
                 },
+                "government": {
+                    "label": "Speco"
+                },
                 "grape_variety": {
                     "label": "Specoj de vinberujoj"
                 },
@@ -3351,6 +3354,10 @@
                     "name": "Manĝ-provizista oficejo",
                     "terms": "manghprovizado,mangxprovizado,catering"
                 },
+                "craft/chimney_sweeper": {
+                    "name": "Oficejo de kamenpurigisto",
+                    "terms": "kamenisto,kamenpurigisto,kamentubisto"
+                },
                 "craft/clockmaker": {
                     "name": "Horloĝista laborejo",
                     "terms": "horloĝisto,horloghisto,horlogxisto"
@@ -4938,6 +4945,10 @@
                 "railway/level_crossing": {
                     "name": "Traknivela pasejo (por aŭtoj)",
                     "terms": "pasejo,nivelpasejo,trenpasejo,trajnpasejo"
+                },
+                "railway/light_rail": {
+                    "name": "Fervojo malpeza",
+                    "terms": "malpeza fervojo,malpeza trajno,suburba fervojo,tramo"
                 },
                 "railway/milestone": {
                     "name": "Mejloŝtono fervoja",

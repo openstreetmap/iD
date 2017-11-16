@@ -4937,6 +4937,10 @@
                     "name": "Passage à niveau (route)",
                     "terms": "Passage à niveau (voiture)"
                 },
+                "railway/light_rail": {
+                    "name": "Métro léger",
+                    "terms": "Métro léger"
+                },
                 "railway/milestone": {
                     "name": "Borne kilométrique ferroviaire",
                     "terms": "<translate with synonyms or related terms for 'Railway Milestone', separated by commas>"
@@ -5391,8 +5395,8 @@
                     "terms": "Vendeur de poissons, fruits de mer, écailler"
                 },
                 "shop/second_hand": {
-                    "name": "Magasin caritatif",
-                    "terms": "Magasin caritatif"
+                    "name": "Dépôt-vente/produits d'occasion",
+                    "terms": "Produits de seconde main"
                 },
                 "shop/shoes": {
                     "name": "Magasin de chaussures",

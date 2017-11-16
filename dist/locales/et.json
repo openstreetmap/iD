@@ -289,6 +289,7 @@
             "localized_translation_language": "Vali keel",
             "localized_translation_name": "Nimi"
         },
+        "zoom_in_edit": "Suurenda, et redigeerida",
         "login": "Logi sisse",
         "logout": "Logi välja",
         "loading_auth": "OpenStreetMapiga ühendamine...",
@@ -540,7 +541,8 @@
         "splash": {
             "welcome": "Tere tulemast OpenStreetMapi redaktorisse iD",
             "text": "iD on kasutajasõbralik ja samas võimas töövahend parima vaba maailmakaardi täiendamiseks. See on versioon {version}. Rohkem infot võib leida veebilehelt {website} ja vigadest saab teatada lehel {github}.",
-            "walkthrough": "Alusta tutvustust"
+            "walkthrough": "Alusta tutvustust",
+            "start": "Redigeeri kohe"
         },
         "source_switch": {
             "live": "live",
@@ -562,6 +564,10 @@
             "many_deletions": "Oled kustutamas {n} objekti. Kas oled sa kindel, et soovid seda teha? See kustutab need kaardilt, mida kõik näevad aadressil openstreetmap.org.",
             "tag_suggests_area": "Silt {tag} viitab, et joon peaks olema ala, kuid see pole ala.",
             "deprecated_tags": "Iganenud sildid: {tags}"
+        },
+        "zoom": {
+            "in": "Suurenda",
+            "out": "Vähenda"
         },
         "cannot_zoom": "Ei ole võimalik rohkem välja suumida selles vaates.",
         "full_screen": "Lülita täisekraanile",

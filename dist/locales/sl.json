@@ -310,6 +310,7 @@
             "localized_translation_language": "Izbor jezika",
             "localized_translation_name": "Naziv"
         },
+        "zoom_in_edit": "Približaj za urejanje",
         "login": "prijava",
         "logout": "odjava",
         "loading_auth": "Vzpostavljanje povezave z OpenStreetMap ...",
@@ -610,7 +611,8 @@
         "splash": {
             "welcome": "Dobrodošli v iD, urejevalniku podatkov OpenStreetMap",
             "text": "Urejevalnik iD je zmogljivo, uporabniku prijazno orodje za vnašanje podatkov na najboljši brezplačni svetovni zemljevid. Uporabljena je zadnja različica {version}. Več podrobnosti o urejevalniku je na voljo na {website}, poročila o hroščih pa se zbirajo na spletišču {github}.",
-            "walkthrough": "Predstavitev orodja"
+            "walkthrough": "Predstavitev orodja",
+            "start": "Uredi takoj"
         },
         "source_switch": {
             "live": "objavljeno",
@@ -641,6 +643,10 @@
             "many_deletions": "Izbrisati nameravate predmete ({n}). Ali ste prepričani, da želite nadaljevati? Predmeti bodo izbrisani iz zemljevida openstreetmap.org, ki ga vidijo vsi uporabniki.",
             "tag_suggests_area": "Oznaka {tag} nakazuje, da črta opisovati območje, vendar pa ni sklenjena",
             "deprecated_tags": "Zastarele oznake: {tags}"
+        },
+        "zoom": {
+            "in": "Približaj",
+            "out": "Oddalji"
         },
         "cannot_zoom": "V trenutnem načinu nadaljnje oddaljevanje pogleda ni mogoče.",
         "full_screen": "Preklopi celozaslonski način",

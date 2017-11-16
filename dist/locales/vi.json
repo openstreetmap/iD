@@ -1515,6 +1515,9 @@
                 "generator/type": {
                     "label": "Kiểu"
                 },
+                "government": {
+                    "label": "Cấp"
+                },
                 "grape_variety": {
                     "label": "Loại Nho"
                 },
@@ -2671,6 +2674,10 @@
                     "name": "Chỗ Đậu Xe máy",
                     "terms": "chỗ đậu xe máy, đậu xe máy, chỗ đậu mô-tô, chỗ đậu mô tô, đậu mô-tô, chỗ đậu mô tô, chỗ đậu xe hai bánh, đậu xe hai bánh, chỗ đậu xe ba bánh, đậu xe ba bánh, cho dau xe may, dau xe may, cho dau mo-to, cho dau mo to, dau mo-to, dau mo to, cho dau xe hai banh, dau xe hai banh, cho dau xe ba banh, dau xe ba banh"
                 },
+                "amenity/music_school": {
+                    "name": "Trường Âm nhạc",
+                    "terms": "trường âm nhạc, trường dạy nhạc, trường nhạc, truong am nhac, truong day nhac, truong nhac"
+                },
                 "amenity/nightclub": {
                     "name": "Câu lạc bộ Giải trí",
                     "terms": "câu lạc bộ giải trí, clb giải trí, câu lạc bộ đêm, clb đêm, vũ trường, hộp đêm, câu lạc bộ, sàn nhảy về đêm, cau lac bo giai tri, clb giai tri, cau lac bo dem, clb dem, vu truong, hop dem, cau lac bo, san nhay ve dem"
@@ -3254,6 +3261,10 @@
                     "name": "Suất ăn",
                     "terms": "người suất ăn, nguoi suat an"
                 },
+                "craft/chimney_sweeper": {
+                    "name": "Quét Bồ hóng",
+                    "terms": "người quét bồ hóng, người cạo ống khói, thợ quét bồ hóng, thợ quét ống khói, nguoi quet bo hong, nguoi cao ong khoi, tho quet bo hong, tho quet ong khoi"
+                },
                 "craft/clockmaker": {
                     "name": "Xây Đồng hồ",
                     "terms": "thợ đồng hồ, người làm đồng hồ, người xây đồng hồ, tho dong ho, nguoi lam dong ho, nguoi xay dong ho"
@@ -3362,6 +3373,10 @@
                 "craft/scaffolder": {
                     "name": "Xây Giàn",
                     "terms": "người xây giàn, người lắp dựng giàn, nguoi xay gian, nguoi lap dung gian"
+                },
+                "craft/sculptor": {
+                    "name": "Nhà Điêu khắc",
+                    "terms": "nhà điêu khắc, thợ chạm, nha dieu khac, tho cham"
                 },
                 "craft/shoemaker": {
                     "name": "Đóng Giày",
@@ -3639,6 +3654,14 @@
                     "name": "Lối",
                     "terms": "đường mòn, duong mon"
                 },
+                "highway/pedestrian_area": {
+                    "name": "Khu vực Đi bộ",
+                    "terms": "khu vực đi bộ, quảng trường, khu vuc di bo, quang truong"
+                },
+                "highway/pedestrian_line": {
+                    "name": "Đường Đi bộ",
+                    "terms": "đường đi bộ, đường dành cho người đi bộ, duong di bo, duong danh cho nguoi di bo"
+                },
                 "highway/primary": {
                     "name": "Đường Chính",
                     "terms": "đường chính, quốc lộ, ql, xa lộ, xl, đường liên tỉnh, đlt, duong chinh, quoc lo, xa lo, duong lien tinh"
@@ -3815,6 +3838,10 @@
                     "name": "Lưu vực",
                     "terms": "lưu vực, lưu vực sông, luu vuc, luu vuc song"
                 },
+                "landuse/brownfield": {
+                    "name": "Đất Bỏ hoang",
+                    "terms": "đất bỏ hoang, dat bo hoang"
+                },
                 "landuse/cemetery": {
                     "name": "Nghĩa địa",
                     "terms": "nghĩa địa, nghĩa trang, bãi tha ma, mộ, nghia dia, nghia trang, bai tha ma, mo"
@@ -3854,6 +3881,10 @@
                     "name": "Cỏ",
                     "terms": "cỏ, đồng cỏ, bãi cỏ, co, dong co, bai co"
                 },
+                "landuse/greenfield": {
+                    "name": "Đất Chưa Khai khẩn",
+                    "terms": "đất chưa khai khẩn, đất không khai khẩn, đất chưa phát triển, đất không phát triển, dat chua khai khan, dat khong khai khan, dat chua phat trien, dat khong phat trien"
+                },
                 "landuse/harbour": {
                     "name": "Cảng",
                     "terms": "cảng, bến tàu, cang, ben tau"
@@ -3861,6 +3892,14 @@
                 "landuse/industrial": {
                     "name": "Đất Công nghiệp",
                     "terms": "đất công nghiệp, khu vực công nghiệp, vùng công nghiệp nhà máy, xưởng, dat cong nghiep, khu vuc cong nghiep, vung cong nghiep, nha may, xuong"
+                },
+                "landuse/industrial/scrap_yard": {
+                    "name": "Bãi Phế liệu",
+                    "terms": "phế liệu, ve chai, rác rưởi, sắt vụn, mảnh sắt, xe hơi, xe cộ, gạch vụn, phe lieu, ve chai, rac ruoi, sat vun, manh sat, xe hoi, xe co, gach vun"
+                },
+                "landuse/industrial/slaughterhouse": {
+                    "name": "Lò mổ",
+                    "terms": "lò mổ, lò sát sinh, lò thịt, lo mo, lo sat sinh, lo thit"
                 },
                 "landuse/landfill": {
                     "name": "Bãi rác",
@@ -3937,6 +3976,10 @@
                 "landuse/recreation_ground": {
                     "name": "Sân Giải trí",
                     "terms": "sân giải trí, sân chơi, san giai tri, san choi"
+                },
+                "landuse/religious": {
+                    "name": "Khu vực Tôn giáo",
+                    "terms": "khu vực tôn giáo, khu vuc ton giao"
                 },
                 "landuse/residential": {
                     "name": "Đất Dân cư",
@@ -4105,6 +4148,10 @@
                 "leisure/running_track": {
                     "name": "Đường Chạy",
                     "terms": "đường chạy, đường chạy đua, đường chạy điền kinh, duong chay, duong chay dua, duong chay dien kinh"
+                },
+                "leisure/sauna": {
+                    "name": "Tắm hơi",
+                    "terms": "nhà tắm hơi, phòng tắm hơi, nha tam hoi, phong tam hoi"
                 },
                 "leisure/slipway": {
                     "name": "Đường Trượt tàu",
@@ -4389,9 +4436,33 @@
                     "name": "Văn phòng",
                     "terms": "văn phòng, sở, van phong, so"
                 },
+                "office/accountant": {
+                    "name": "Văn phòng Kế toán",
+                    "terms": "tư vấn kế toán, kế toán viên, văn phòng kế toán, nhân viên kế toán, dịch vụ khai thuế, văn phòng khai thuế, tài chính, tài chánh, tu van ke toan, ke toan vien, van phong ke toan, nhan vien ke toan, dich vu khai thue, van phong khai thue, tai chinh, tai chanh"
+                },
                 "office/administrative": {
                     "name": "Cơ quan Địa phương",
                     "terms": "cơ quan địa phương, hội đồng địa phương, công sở địa phương, sở hành chính địa phương, co quan dia phuong, hoi dong dia phuong, cong so dia phuong, so hanh chinh dia phuong"
+                },
+                "office/adoption_agency": {
+                    "name": "Cơ quan Nhận Con nuoi",
+                    "terms": "cơ quan nhận con nuôi, văn phòng nhận con nuôi, co quan nhan con nuoi, van phong nhan con nuoi"
+                },
+                "office/advertising_agency": {
+                    "name": "Cơ sở Quảng cáo",
+                    "terms": "cơ sở quảng cáo, văn phòng quảng cáo, co so quang cao, van phong quang cao"
+                },
+                "office/architect": {
+                    "name": "Văn phòng Kiến trúc sư",
+                    "terms": "văn phòng kiến trúc sư, van phong kien truc su"
+                },
+                "office/association": {
+                    "name": "Tổ chức Phi lợi nhuận",
+                    "terms": "tổ chức phi lợi nhuận, tổ chức bất vụ lợi, to chuc phi loi nhuan, to chuc bat vu loi"
+                },
+                "office/charity": {
+                    "name": "Tổ chức Từ thiện",
+                    "terms": "tổ chức từ thiện, hội từ thiện, to chuc tu thien, hoi tu thien"
                 },
                 "office/company": {
                     "name": "Văn phòng Công ty",
@@ -4417,6 +4488,10 @@
                     "name": "Văn phòng Tài chính",
                     "terms": "văn phòng tài chính, văn phòng tài chánh, van phong tai chinh, van phong tai chanh"
                 },
+                "office/forestry": {
+                    "name": "Văn phòng Lâm nghiệp",
+                    "terms": "văn phòng lâm nghiệp, van phong lam nghiep"
+                },
                 "office/government": {
                     "name": "Công sở",
                     "terms": "công sở, cơ quan chính phủ, cơ quan chính quyền, cong so, co quan chinh phu, co quan chinh quyen"
@@ -4425,9 +4500,17 @@
                     "name": "Văn phòng Hộ tịch",
                     "terms": "văn phòng hộ tịch, phòng hộ tịch, sở hộ tịch, van phong ho tich, phong ho tich, so ho tich"
                 },
+                "office/government/tax": {
+                    "name": "Sở Thuế vụ",
+                    "terms": "sở thuế vụ, văn phòng thuế vụ, văn phòng khai thuế, so thue vu, van phong thue vu, van phong khai thue"
+                },
                 "office/insurance": {
                     "name": "Văn phòng Bảo hiểm",
                     "terms": "văn phòng bảo hiểm, van phong bao hiem"
+                },
+                "office/it": {
+                    "name": "Văn phòng Tin học",
+                    "terms": "văn phong tin học, văn phòng công nghệ thông tin, văn phòng cntt, van phong tin hoc, van phong cong nghe thong tin, van phong cntt"
                 },
                 "office/lawyer": {
                     "name": "Văn phòng Luật sư",
@@ -4437,9 +4520,17 @@
                     "name": "Văn phòng Công chứng",
                     "terms": "văn phòng công chứng, công chứng viên, di chúc, chứng thư, van phong cong chung, cong chung vien, di chuc, chung thu"
                 },
+                "office/newspaper": {
+                    "name": "Văn phòng Tờ báo",
+                    "terms": "văn phòng tờ báo, trụ sở tờ báo, van phong to bao, tru so to bao"
+                },
                 "office/ngo": {
                     "name": "Tổ chức Phi chính phủ",
                     "terms": "tổ chức phi chính phủ, văn phòng ngo, văn phòng ong, tổ chức phi lợi nhuận, tổ chức bất vụ lợi, quỹ từ thiện, hiệp hội thương mại, to chuc phi chinh phu, van phong ngo, van phong ong, to chuc phi loi nhuan, to chuc bat vu loi, quy tu thien, hiep hoi thuong mai"
+                },
+                "office/notary": {
+                    "name": "Văn phòng Công chứng",
+                    "terms": "văn phòng công chứng, công chứng viên, van phong cong chung, cong chung vien"
                 },
                 "office/physician": {
                     "name": "Văn phòng Bác sĩ"
@@ -4448,9 +4539,17 @@
                     "name": "Đảng Chính trị",
                     "terms": "văn phòng đảng chính trị, văn phòng đảng chánh trị, van phong dang chinh tri, van phong dang chanh tri"
                 },
+                "office/private_investigator": {
+                    "name": "Văn phòng Thám tử Tư",
+                    "terms": "văn phòng thám tử tư, van phong tham tu tu"
+                },
                 "office/research": {
                     "name": "Văn phòng Nghiên cứu",
                     "terms": "văn phòng nghiên cứu, van phong nghien cuu"
+                },
+                "office/surveyor": {
+                    "name": "Văn phòng Khảo sát",
+                    "terms": "văn phòng khảo sát, văn phòng kiểm sát, văn phòng thanh tra, van phong khao sat, van phong kiem sat, van phong thanh tra"
                 },
                 "office/telecommunication": {
                     "name": "Văn phòng Viễn thông",
@@ -4480,6 +4579,10 @@
                 "place/island": {
                     "name": "Đảo",
                     "terms": "đảo, hòn đảo, quần đảo, đảo san hô, san hô, cồn cát, cồn, đá ngầm, chỗ nông, chỗ cạn, dao, hon dao, quan dao, dao san ho, san ho, con cat, con, da ngam, cho nong, cho can"
+                },
+                "place/islet": {
+                    "name": "Đảo Nhỏ",
+                    "terms": "đảo nhỏ, hòn đảo nhỏ, dao nho, hon dao nho"
                 },
                 "place/isolated_dwelling": {
                     "name": "Chỗ ở Hẻo lánh",
@@ -4606,6 +4709,10 @@
                 "power/substation": {
                     "name": "Trạm Điện Phụ",
                     "terms": "trạm điện phụ, tram dien phu"
+                },
+                "power/switch": {
+                    "name": "Cầu dao",
+                    "terms": "cầu dao, ngắt điện, ngắt mạch, cau dao, ngat dien, ngat mach"
                 },
                 "power/tower": {
                     "name": "Cột điện Cao thế",

@@ -855,7 +855,7 @@
                 "choose_cafe": "**Välj {preset} i listan.**",
                 "feature_editor": "Punkten är nu markerad som ett café. Med hjälp av objektredigeraren kan vi lägga till mer information om caféet. ",
                 "add_name": "På OpenStreetMap är alla fält valfria, och det är ok att lämna ett fält tomt om du är osäker.{br}Låt oss låtsas att du har lokalkännedom om caféet och vet dess namn. **Lägg till ett namn på caféet.**",
-                "add_close": "Objektredigeraren komma ihåg alla dina ändringar automatiskt. **När du är klar med att lägga till ett namn, tryck Escape, Enter eller klicka på knappen {button} för att stänga objektredigeraren.**",
+                "add_close": "Objektredigeraren kommer ihåg alla dina ändringar automatiskt. **När du är klar med att lägga till ett namn, tryck Escape, Enter eller klicka på knappen {button} för att stänga objektredigeraren.**",
                 "reselect": "Ofta existerar redan punkter men är felaktiga eller ofullständiga. Vi kan ändra redan existerande punkter. **Klicka för att markera caféet du just skapade.**",
                 "update": "Låt oss fylla i lite mer information om caféet. Du kan ändra dess namn, ange vad för typ av mat som serveras eller lägga till en adress. **Ändra information om caféet.**",
                 "update_close": "**När du är färdig med att uppdatera caféet, tryck Escape, Enter eller klicka på knappen {button} för att stänga objektredigeraren.**",
@@ -872,7 +872,7 @@
                 "finish_playground": "Slutför området genom att trycka Enter eller genom att trycka igen på antingen första eller sista noden. **Rita färdigt området för lekplatsen.**",
                 "search_playground": "**Sök efter '{preset}'.**",
                 "choose_playground": "**Välj {preset} i listan.**",
-                "add_field": "Denna lekplats har inget officiellt namn, så vi anger inget i namnfältet.{br}Låt oss lägga till lite andra detaljer om lekplatsen till fältet Beskrivning. **Öppna listan för Lägg till fält.**",
+                "add_field": "Denna lekplats har inget officiellt namn, så vi anger inget i namnfältet.{br}Låt oss lägga till lite andra detaljer om lekplatsen i fältet Beskrivning. **Öppna listan för Lägg till fält.**",
                 "choose_field": "**Välj {field} i listan.**",
                 "retry_add_field": "Du valde inte fältet {field}. Låt oss försöka igen.",
                 "describe_playground": "**Ange en beskrivning och klicka sedan på knappen {button} för att stänga objektredigeraren.**",
@@ -4975,6 +4975,9 @@
                 "shop": {
                     "name": "Affär",
                     "terms": "Affär, shop, butik"
+                },
+                "shop/agrarian": {
+                    "name": "Jordbruksaffär"
                 },
                 "shop/alcohol": {
                     "name": "Vin-och-spritaffär",

@@ -360,7 +360,9 @@
                 "accuracy": "Точность",
                 "unknown": "Неизвестно",
                 "show_tiles": "Показать тайлы",
-                "hide_tiles": "Спрятать тайлы"
+                "hide_tiles": "Спрятать тайлы",
+                "show_vintage": "Показать Vintage",
+                "hide_vintage": "Скрыть Vintage"
             },
             "history": {
                 "key": "H",
@@ -610,7 +612,8 @@
         "splash": {
             "welcome": "Вас приветствует iD — редактор карт OpenStreetMap",
             "text": "Редактор iD — простой, но мощный инструмент для редактирования лучшей в мире бесплатной открытой карты. Версия программы: {version}. Дополнительную информацию смотрите на {website}, об ошибках сообщайте на {github}.",
-            "walkthrough": "Запустить обучение"
+            "walkthrough": "Запустить обучение",
+            "start": "Редактировать"
         },
         "source_switch": {
             "live": "основной",
@@ -641,6 +644,10 @@
             "many_deletions": "Вы удаляете {n} объектов. В результате они пропадут с карты, которую весь мир может видеть на openstreetmap.org. Уверены в своём решении?",
             "tag_suggests_area": "Тег {tag} обычно ставится на полигоны, но это не полигон",
             "deprecated_tags": "Теги устарели: {tags}"
+        },
+        "zoom": {
+            "in": "Приблизить",
+            "out": "Отдалить"
         },
         "cannot_zoom": "В текущем режиме дальнейшее отдаление невозможно.",
         "full_screen": "Во весь экран",
@@ -1268,6 +1275,9 @@
                 "board_type": {
                     "label": "Тип"
                 },
+                "boules": {
+                    "label": "Тип"
+                },
                 "boundary": {
                     "label": "Тип границы"
                 },
@@ -1275,7 +1285,8 @@
                     "label": "Бренд"
                 },
                 "bridge": {
-                    "label": "Тип моста"
+                    "label": "Тип моста",
+                    "placeholder": "По умолчанию"
                 },
                 "building": {
                     "label": "Тип здания / конструкция"
@@ -1285,6 +1296,9 @@
                 },
                 "bunker_type": {
                     "label": "Тип"
+                },
+                "cables": {
+                    "placeholder": "1, 2, 3…"
                 },
                 "camera/direction": {
                     "label": "Направление (в градусах по часовой стрелке)",
@@ -1359,6 +1373,9 @@
                     "label": "Адрес камеры",
                     "placeholder": "http://example.com/"
                 },
+                "content": {
+                    "label": "Содержимое"
+                },
                 "country": {
                     "label": "Страна"
                 },
@@ -1387,7 +1404,8 @@
                     "label": "Типы валюты"
                 },
                 "cutting": {
-                    "label": "Тип вырубки"
+                    "label": "Тип вырубки",
+                    "placeholder": "По умолчанию"
                 },
                 "cycle_network": {
                     "label": "Сеть"
@@ -1445,6 +1463,9 @@
                 "description": {
                     "label": "Описание"
                 },
+                "devices": {
+                    "placeholder": "1, 2, 3…"
+                },
                 "diaper": {
                     "label": "Доступно пеленание"
                 },
@@ -1458,7 +1479,8 @@
                     "label": "Доступен без выхода из машины"
                 },
                 "duration": {
-                    "label": "Продолжительность"
+                    "label": "Продолжительность",
+                    "placeholder": "00:00"
                 },
                 "electrified": {
                     "label": "Электрификация",
@@ -1478,7 +1500,8 @@
                     "placeholder": "example@example.com"
                 },
                 "embankment": {
-                    "label": "Тип насыпи"
+                    "label": "Тип насыпи",
+                    "placeholder": "По умолчанию"
                 },
                 "emergency": {
                     "label": "Экстренные службы"
@@ -1524,7 +1547,8 @@
                     "label": "Исправь меня"
                 },
                 "ford": {
-                    "label": "Тип брода"
+                    "label": "Тип брода",
+                    "placeholder": "По умолчанию"
                 },
                 "frequency": {
                     "label": "Частота действий"
@@ -1560,6 +1584,9 @@
                 "generator/type": {
                     "label": "Тип"
                 },
+                "government": {
+                    "label": "Тип"
+                },
                 "grape_variety": {
                     "label": "Сорта винограда"
                 },
@@ -1569,6 +1596,13 @@
                 },
                 "handrail": {
                     "label": "Поручни"
+                },
+                "hashtags": {
+                    "label": "Предлагаемые хештеги",
+                    "placeholder": "#пример"
+                },
+                "healthcare": {
+                    "label": "Тип"
                 },
                 "healthcare/speciality": {
                     "label": "Специальности"
@@ -1633,6 +1667,9 @@
                 "internet_access/ssid": {
                     "label": "SSID (Название сети)"
                 },
+                "kerb": {
+                    "label": "Бордюр"
+                },
                 "lamp_type": {
                     "label": "Тип"
                 },
@@ -1644,7 +1681,8 @@
                     "placeholder": "1, 2, 3…"
                 },
                 "layer": {
-                    "label": "Слой"
+                    "label": "Слой",
+                    "placeholder": "0"
                 },
                 "leaf_cycle": {
                     "label": "Цикл листвы у деревьев",
@@ -1702,6 +1740,9 @@
                     "label": "Местоположение"
                 },
                 "man_made": {
+                    "label": "Тип"
+                },
+                "manhole": {
                     "label": "Тип"
                 },
                 "map_size": {
@@ -1870,6 +1911,10 @@
                 "payment_multi": {
                     "label": "Способы оплаты"
                 },
+                "phases": {
+                    "label": "Количество фаз",
+                    "placeholder": "1, 2, 3…"
+                },
                 "phone": {
                     "label": "Телефон",
                     "placeholder": "+7 495 1234567"
@@ -1957,7 +2002,8 @@
                     "label": "Номер ворот"
                 },
                 "ref_golf_hole": {
-                    "label": "Номер лунки"
+                    "label": "Номер лунки",
+                    "placeholder": "1-18"
                 },
                 "ref_highway_junction": {
                     "label": "Номер съезда"
@@ -2170,6 +2216,12 @@
                 "surveillance/zone": {
                     "label": "Область наблюдения"
                 },
+                "switch": {
+                    "label": "Тип",
+                    "options": {
+                        "earthing": "Заземление"
+                    }
+                },
                 "tactile_paving": {
                     "label": "Тактильное покрытие"
                 },
@@ -2221,6 +2273,9 @@
                     },
                     "placeholder": "Твердая, скорее твёрдая, мягкая"
                 },
+                "trade": {
+                    "label": "Тип"
+                },
                 "traffic_calming": {
                     "label": "Тип"
                 },
@@ -2240,6 +2295,7 @@
                     "placeholder": "Отличная, хорошая, плохая…"
                 },
                 "transformer": {
+                    "label": "Тип",
                     "options": {
                         "auto": "Автотрансформатор",
                         "auxiliary": "Вспомогательный",
@@ -2255,7 +2311,8 @@
                     "label": "Деревья"
                 },
                 "tunnel": {
-                    "label": "Тип тоннеля"
+                    "label": "Тип тоннеля",
+                    "placeholder": "По умолчанию"
                 },
                 "vending": {
                     "label": "Тип товаров"
@@ -2282,6 +2339,18 @@
                         "scoria": "Шлаковый",
                         "shield": "Щитовидный"
                     }
+                },
+                "voltage": {
+                    "label": "Напряжение"
+                },
+                "voltage/primary": {
+                    "label": "Напряжение первичной обмотки"
+                },
+                "voltage/secondary": {
+                    "label": "Напряжение вторичной обмотки"
+                },
+                "voltage/tertiary": {
+                    "label": "Напряжение третичной обмотки"
                 },
                 "wall": {
                     "label": "Тип"
@@ -2311,7 +2380,12 @@
                 "wikipedia": {
                     "label": "Википедия"
                 },
+                "windings": {
+                    "label": "Обмотки",
+                    "placeholder": "1, 2, 3…"
+                },
                 "windings/configuration": {
+                    "label": "Конфигурация обмоток",
                     "options": {
                         "open": "Открытый",
                         "zigzag": "Зиг Заг"

@@ -1609,6 +1609,9 @@
                 "generator/type": {
                     "label": "Typ"
                 },
+                "government": {
+                    "label": "Rodzaj"
+                },
                 "grape_variety": {
                     "label": "Odmiany winorośli"
                 },
@@ -3349,6 +3352,10 @@
                     "name": "Catering",
                     "terms": "Żywieniowiec, katering"
                 },
+                "craft/chimney_sweeper": {
+                    "name": "Kominiarz",
+                    "terms": "kominiarz, zakład kominiarski"
+                },
                 "craft/clockmaker": {
                     "name": "Zegarmistrz",
                     "terms": "zegarmistrz"
@@ -4516,9 +4523,17 @@
                     "name": "Biuro",
                     "terms": "Biuro,"
                 },
+                "office/accountant": {
+                    "name": "Biuro rachunkowe",
+                    "terms": "biuro rachunkowe, księgowy"
+                },
                 "office/administrative": {
                     "name": "Biuro samorządowe",
                     "terms": "Urząd"
+                },
+                "office/adoption_agency": {
+                    "name": "Ośrodek adopcyjny",
+                    "terms": "ośrodek adopcyjny, adopcja"
                 },
                 "office/advertising_agency": {
                     "name": "Agencja reklamowa",
@@ -4559,6 +4574,14 @@
                 "office/government/register_office": {
                     "name": "Urząd Stanu Cywilnego",
                     "terms": "stan cywilny,śluby,metryki,rejestracja urodzin"
+                },
+                "office/government/tax": {
+                    "name": "Urząd Skarbowy",
+                    "terms": "urząd skarbowy, fiskus"
+                },
+                "office/guide": {
+                    "name": "Przewodnik turystyczny",
+                    "terms": "przewodnik turystyczny"
                 },
                 "office/insurance": {
                     "name": "Biuro ubezpieczeń",

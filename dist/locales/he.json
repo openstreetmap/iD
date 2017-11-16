@@ -53,6 +53,9 @@
             "cancel_draw": {
                 "annotation": "ביטל ציור."
             },
+            "change_role": {
+                "annotation": "שינוי התפקיד של חבר ביחס."
+            },
             "change_tags": {
                 "annotation": "שינה תגיות."
             },
@@ -62,82 +65,721 @@
                     "line": "להפוך קו זה למעגלי.",
                     "area": "להפוך איזור זה למעגלי."
                 },
+                "key": "ע",
                 "annotation": {
                     "line": "הקו עוגל",
                     "area": "האיזור עוגל."
-                }
+                },
+                "not_closed": "אי אפשר להפוך את זה למעגלי כי זאת לא לולאה.",
+                "too_large": "אי אפשר להפוך את זה למעגלי כי התצוגה של הפריט היא חלקית.",
+                "connected_to_hidden": "אי אפשר להפוך את זה למעגלי כי הפריט מחובר לתכונה נסתרת."
             },
             "orthogonalize": {
                 "title": "ריבוע",
                 "description": {
                     "line": "ריבוע פינות בקו זה",
                     "area": "ריבוע פינות באיזור זה"
+                },
+                "key": "ר",
+                "annotation": {
+                    "line": "הפיכת הקצוות של קו לריבוע.",
+                    "area": "הפיכת הקצוות של שטח לריבוע."
+                },
+                "not_squarish": "אי אפשר להפוך את זה לריבוע כי הצורה לא ריבועית.",
+                "too_large": "אי אפשר להפוך את זה לריבוע כי התצוגה של הפריט היא חלקית.",
+                "connected_to_hidden": "אי אפשר להפוך את זה לריבוע כי הפריט מחובר לתכונה נסתרת."
+            },
+            "straighten": {
+                "title": "יישור",
+                "description": "יישור הקו הזה.",
+                "key": "ש",
+                "annotation": "יישור קו.",
+                "too_bendy": "אי אפשר ליישר את הקו הזה כיוון שהוא יותר מדי מכופף.",
+                "connected_to_hidden": "אי אפשר ליישר את הקו הזה כי הוא מחובר לתכונה נסתרת."
+            },
+            "delete": {
+                "title": "מחיקה",
+                "description": {
+                    "single": "מחיקת התכונה הזו לצמיתות.",
+                    "multiple": "מחיקת התכונות האלה לצמיתות."
+                },
+                "annotation": {
+                    "point": "נמחקה נקודה.",
+                    "vertex": "נמחק מפרק מדרך.",
+                    "line": "נמחק קו.",
+                    "area": "נמחק שטח.",
+                    "relation": "נמחק יחס.",
+                    "multiple": "נמחקו {n} תכונות."
+                },
+                "too_large": {
+                    "single": "אי אפשרות למחוק תכונה זו כי הפריט לא מופיע במלואו."
+                }
+            },
+            "add_member": {
+                "annotation": "נוסף חבר ליחס."
+            },
+            "delete_member": {
+                "annotation": "חבר הוסר מהיחס."
+            },
+            "connect": {
+                "annotation": {
+                    "point": "חיבור של דרך לנקודה.",
+                    "vertex": "חיבור של דרך לדרך אחרת.",
+                    "line": "חיבור של דרך לקו.",
+                    "area": "חיבור של דרך לשטח."
+                }
+            },
+            "disconnect": {
+                "title": "ניתוק",
+                "description": "ניתוק הקווים/השטחים האלה זה מזה.",
+                "key": "נ",
+                "annotation": "קווים/שטחים מנותקים."
+            },
+            "merge": {
+                "title": "מיזוג",
+                "description": "מיזוג התכונות האלה.",
+                "key": "ז",
+                "annotation": "{n} תכונות מוזגו.",
+                "not_eligible": "אי אפשר למזג תכונות אלו."
+            },
+            "move": {
+                "title": "העברה",
+                "description": {
+                    "single": "העברת התכונה הזאת למיקום שונה.",
+                    "multiple": "העברת התכונות האלו למיקום שונה."
+                },
+                "key": "ע",
+                "annotation": {
+                    "point": "העברת נקודה.",
+                    "vertex": "העברת מפרק בדרך.",
+                    "line": "העברת קו.",
+                    "area": "העברת שטח.",
+                    "multiple": "העברת מספר תכונות."
+                }
+            },
+            "rotate": {
+                "title": "הטייה",
+                "description": {
+                    "single": "הטיית התכונה הזאת מסביב לנקודת המרכז שלה.",
+                    "multiple": "הטיית התכונות האלו סביב נקודות המרכז שלהן."
+                },
+                "key": "ט",
+                "annotation": {
+                    "line": "הטיית קו.",
+                    "area": "הטיית שטח.",
+                    "multiple": "טיית מגוון תכונות."
+                },
+                "incomplete_relation": {
+                    "single": "אי אפשר להטות תכונה זו כיוון שהיא לא התקבלה לחלוטין.",
+                    "multiple": "אי אפשר להטות את התכונות האלו כיוון שהן לא התקבלו לחלוטין."
+                },
+                "too_large": {
+                    "single": "לא ניתן להטות את התכונה הזאת כיוון שאינה גלויה מספיק.",
+                    "multiple": "לא ניתן להטות את התכונות הללו כיוון שאינן גלויות מספיק."
+                },
+                "connected_to_hidden": {
+                    "single": "לא ניתן להטות את התכונה הזאת כיוון שהיא מחוברת לתכונה נסתרת.",
+                    "multiple": "אי אפשר להטות את התכונות האלה כיוון שחלקן מחוברות לתכונות נסתרות."
+                }
+            },
+            "reverse": {
+                "title": "היפוך",
+                "description": "הפיכת הכיוון של הקו הזה.",
+                "key": "פ",
+                "annotation": "קו התהפך."
+            },
+            "split": {
+                "title": "פיצול",
+                "description": {
+                    "line": "פיצול הקו הזה לשניים במפרק הזה.",
+                    "area": "פיצול הגבול של השטח הזה לשניים.",
+                    "multiple": "פיצול הקווים/שטח של המפרק הזה לשניים."
+                },
+                "key": "צ",
+                "annotation": {
+                    "line": "פיצול קו.",
+                    "area": "פיצול גבול שטח.",
+                    "multiple": "פיצול {n} קווים/גבולות שטחים."
+                },
+                "not_eligible": "אי אפשר לפצל קווים בהתחלה או בסוף.",
+                "multiple_ways": "יש כאן יותר מדי קווים לפיצול.",
+                "connected_to_hidden": "אי אפשר לפצל את זה כי זה מחובר לתכונה נסתרת."
+            },
+            "restriction": {
+                "help": {
+                    "select": "יש ללחוץ כדי לבחור במקטע דרך.",
+                    "toggle": "יש ללחוץ כדי להפעיל/להשבית הגבלות פנייה.",
+                    "toggle_on": "יש ללחוץ כדי להוסיף הגבלה מסוג „{restriction}”.",
+                    "toggle_off": "יש ללחוץ כדי להסיר הגבלה מסוג „{restriction}”."
+                },
+                "annotation": {
+                    "create": "נוספה הגבלת פנייה",
+                    "delete": "נמחקה הגבלת פנייה"
                 }
             }
         },
+        "undo": {
+            "tooltip": "ביטול: {action}",
+            "nothing": "אין מה לבטל."
+        },
+        "redo": {
+            "tooltip": "ביצוע חוזר: {action}",
+            "nothing": "אין ביטולים לביצוע חוזר."
+        },
+        "tooltip_keyhint": "קיצור דרך:",
+        "browser_notice": "עורך זה נתמך ב־Firefox,‏ Chrome,‏ Safari,‏ Opera ו־Internet Explorer 11 ומעלה. נא לשדרג את הדפדפן שלך או להשתמש ב־Potlatch 2 כדי לערוך את המפה.",
+        "translate": {
+            "translate": "תרגום",
+            "localized_translation_label": "שם רב־לשוני",
+            "localized_translation_language": "בחירת שפה",
+            "localized_translation_name": "שם"
+        },
+        "zoom_in_edit": "יש להתקרב כדי לערוך",
+        "login": "כניסה",
+        "logout": "יציאה",
+        "loading_auth": "מתבצעת התחברות ל־OpenStreetMap…",
+        "report_a_bug": "דיווח על תקלה",
+        "help_translate": "עזרה בתרגום",
+        "feature_info": {
+            "hidden_warning": "{count} תכונות נסתרות",
+            "hidden_details": "התכונות האלו מוסתרות כרגע: {details}"
+        },
+        "status": {
+            "error": "לא ניתן להתחבר ל־API.",
+            "offline": "ה־API אינו זמין. נא לנסות לערוך מאוחר יותר.",
+            "readonly": "ה־API הוא לקריאה בלבד. יהיה עליך להמתין כדי לשמור את השינויים שלך.",
+            "rateLimit": "ה־API מגביל חיבורים אלמוניים. ניתן לתקן זאת על ידי כניסה למערכת."
+        },
+        "commit": {
+            "title": "העלאה ל־OpenStreetMap",
+            "upload_explanation": "השינויים שיועלו על ידיך יהיו גלויים בכל המפות שמשתמשות בנתונים של OpenStreetMap.",
+            "upload_explanation_with_user": "השינויים שיועלו על ידיך בשם {user} יהיו גלויים בכל המפות שמשתמשות בנתונים של OpenStreetMap.",
+            "request_review": "ארצה סיוע בסקירת העריכות שלי.",
+            "save": "העלאה",
+            "cancel": "ביטול",
+            "changes": "{count} שינויים",
+            "download_changes": "הורדת קובץ osmChange",
+            "warnings": "אזהרות",
+            "modified": "השתנה",
+            "deleted": "נמחק",
+            "created": "נוצר",
+            "about_changeset_comments": "על הערות לערכות שינויים",
+            "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
+            "google_warning": "ציינת את Google בהערה הזאת: כדאי לזכור כי העתקה ממפות Google אסורה בתכלית האיסור.",
+            "google_warning_link": "http://www.openstreetmap.org/copyright"
+        },
+        "contributors": {
+            "list": "עריכות מאת {users}",
+            "truncated_list": "עריכות מאת {users} ו־{count} נוספים"
+        },
+        "info_panels": {
+            "key": "ח",
+            "background": {
+                "key": "ר",
+                "title": "רקע",
+                "zoom": "תקריב",
+                "vintage": "סגנון מיושן",
+                "source": "מקור",
+                "description": "תיאור",
+                "resolution": "רזולוציה",
+                "accuracy": "דיוק",
+                "unknown": "לא ידוע",
+                "show_tiles": "הצגת אריחים",
+                "hide_tiles": "הסתרת אריחים",
+                "show_vintage": "הצגת סגנון מיושן",
+                "hide_vintage": "הסתרת סגנון מיושן"
+            },
+            "history": {
+                "key": "ה",
+                "title": "היסטוריה",
+                "selected": "{n} נבחרו",
+                "version": "גרסה",
+                "last_edit": "עריכה אחרונה",
+                "edited_by": "נערך על ידי",
+                "changeset": "ערכת שינויים",
+                "unknown": "לא ידוע",
+                "link_text": "היסטוריה ב־openstreetmap.org"
+            },
+            "location": {
+                "key": "ק",
+                "title": "מיקום",
+                "unknown_location": "מיקום לא ידוע"
+            },
+            "measurement": {
+                "key": "ד",
+                "title": "מדידה",
+                "selected": "{n} נבחרו",
+                "geometry": "צורה",
+                "closed": "סגורה",
+                "center": "מרכז",
+                "perimeter": "היקף",
+                "length": "אורך",
+                "area": "שטח",
+                "location": "מיקום",
+                "metric": "מטרי",
+                "imperial": "אימפריאלית"
+            }
+        },
+        "geometry": {
+            "point": "נקודה",
+            "vertex": "קודקוד",
+            "line": "קו",
+            "area": "שטח",
+            "relation": "יחס"
+        },
+        "geocoder": {
+            "search": "חיפוש בכל העולם…",
+            "no_results_visible": "אין תוצאות באזור הגלוי של המפה",
+            "no_results_worldwide": "לא נמצאו תוצאות"
+        },
+        "geolocate": {
+            "title": "הצגת המיקום שלי",
+            "locating": "בטעינה, נא להמתין…"
+        },
+        "inspector": {
+            "no_documentation_combination": "אין תיעוד זמין לצירוף תגיות זה",
+            "no_documentation_key": "אין תיעוד זמין למפתח זה",
+            "documentation_redirect": "תיעוד זה הופנה לעמוד חדש",
+            "show_more": "הצגת עוד",
+            "view_on_osm": "הצגה ב־openstreetmap.org",
+            "all_fields": "כל השדות",
+            "all_tags": "כל התגיות",
+            "all_members": "כל החברים",
+            "all_relations": "כל היחסים",
+            "new_relation": "יחס חדש…",
+            "role": "תפקיד",
+            "choose": "בחירת סוג תכונה",
+            "results": "{n} תוצאות לחיפוש {search}",
+            "reference": "הצגה בוויקי של OpenStreetMap",
+            "back_tooltip": "שינוי תכונה",
+            "remove": "הסרה",
+            "search": "חיפוש",
+            "multiselect": "תכונות נבחרות",
+            "unknown": "לא ידוע",
+            "incomplete": "<לא התקבל>",
+            "feature_list": "חיפוש תכונות",
+            "edit": "עריכת תכונה",
+            "check": {
+                "yes": "כן",
+                "no": "לא",
+                "reverser": "שינוי הכיוון"
+            },
+            "radio": {
+                "structure": {
+                    "type": "סוג",
+                    "default": "בררת מחדל",
+                    "layer": "שכבה"
+                }
+            },
+            "add": "הוספה",
+            "none": "אין",
+            "node": "מפרק",
+            "way": "דרך",
+            "relation": "יחס",
+            "location": "מיקום",
+            "add_fields": "הוספת שדה:"
+        },
+        "background": {
+            "title": "רקע",
+            "description": "הגדרות רקע",
+            "key": "ר",
+            "percent_brightness": "{opacity}% בהירות",
+            "none": "אין",
+            "best_imagery": "מקור התמונה המוכר והטוב ביותר למיקום זה",
+            "switch": "חזרה לרקע זה",
+            "custom": "התאמה אישית",
+            "custom_button": "עריכת רקע בהתאמה אישית",
+            "fix_misalignment": "התאמת הזחה של תמונת רקע",
+            "imagery_source_faq": "מאיפה מגיעה התמונה הזאת?",
+            "reset": "איפוס",
+            "offset": "ניתן לגרור כל מקום באזור האפור להלן כדי להתאים את הזחת תמונות הרקע או להקליד את ערכי ההזחה במטרים.",
+            "minimap": {
+                "description": "מפה מוקטנת",
+                "tooltip": "הצגת מפה מרוחקת כדי לסייע באיתור האיזור שמוצג כרגע.",
+                "key": "/"
+            }
+        },
+        "map_data": {
+            "title": "נתוני מפה",
+            "description": "נתוני מפה",
+            "key": "נ",
+            "data_layers": "שכבות נתונים",
+            "layers": {
+                "osm": {
+                    "tooltip": "נתוני מפה מ־OpenStreetMap",
+                    "title": "נתוני OpenStreetMap"
+                }
+            },
+            "fill_area": "אזורי מילוי",
+            "map_features": "תכונות מפה",
+            "autohidden": "תכונות אלו הוסתרו אוטומטית כיוון שעלולות להופיע יותר מדי על המסך. ניתן להתקרב כדי לערוך אותן.",
+            "osmhidden": "התכונות האלו הוסתרו אוטומטית כיוון שהשכבה ב־OpenStreetMap מוסתרת."
+        },
+        "feature": {
+            "points": {
+                "description": "נקודות",
+                "tooltip": "נקודות עניין"
+            },
+            "traffic_roads": {
+                "description": "דרכי תנועה",
+                "tooltip": "כבישים מהירים, רחובות וכו׳"
+            },
+            "service_roads": {
+                "description": "כבישי שירות",
+                "tooltip": "כבישי שירות, מתחמי חנייה, מסלולים וכו׳"
+            },
+            "paths": {
+                "description": "שבילים",
+                "tooltip": "מדרכות, שבילים להולכי רגל, שבילי אופניים וכו׳"
+            },
+            "buildings": {
+                "description": "בניינים",
+                "tooltip": "בניינים, מקלטים, חניות מקורות וכו׳"
+            },
+            "landuse": {
+                "description": "תכונות שטח",
+                "tooltip": "יערות, קרקע חקלאית, פארקים, אזורי מגורים, תעשייה וכו׳"
+            },
+            "boundaries": {
+                "description": "גבולות",
+                "tooltip": "גבולות מנהליים"
+            },
+            "water": {
+                "description": "תכונות מים",
+                "tooltip": "נחלים, נהרות, מעיינות, בריכות וכו׳"
+            },
+            "rail": {
+                "description": "תכונות רכבת",
+                "tooltip": "מסילות רכבת"
+            },
+            "power": {
+                "description": "תכונות חשמל",
+                "tooltip": "קווי חשמל, תחנות תת־קרקעיות, מפעלי אנרגיה וכו׳"
+            },
+            "past_future": {
+                "description": "עבר/עתיד",
+                "tooltip": "מקומות מוצעים, בבנייה, נטושים, הרוסים וכו׳"
+            },
+            "others": {
+                "description": "אחרים",
+                "tooltip": "כל השאר"
+            }
+        },
+        "area_fill": {
+            "wireframe": {
+                "description": "ללא מילוי (מסגרת דקיקה)",
+                "tooltip": "הפעלת מצב מסגרת דקיקה מאפשר לך לראות בקלות את התמונה ברקע.",
+                "key": "ד"
+            },
+            "partial": {
+                "description": "מילוי חלקי",
+                "tooltip": "השטחים מצויירים עם מילוי רק סביב הקצוות הפנימיים שלהם. (מומלץ לממפים מתחילים)"
+            },
+            "full": {
+                "description": "מילוי מלא",
+                "tooltip": "השטחים מצויירים עם מילוי מלא."
+            }
+        },
         "restore": {
+            "heading": "יש לך שינויים שלא נשמרו",
+            "description": "לשחזר שינויים שלא נשמרו מהפעלות עריכה קודמות?",
             "restore": "שחזור השינויים שלי",
             "reset": "התעלמות מהשינויים שלי"
         },
         "save": {
             "title": "שמירה",
-            "no_changes": "אין שינויים לשמירה"
+            "help": "סקירת השינויים שלך והעלאה שלהם ל־OpenStreetMap כדי להנגיש אותם למשתמשים אחרים.",
+            "no_changes": "אין שינויים לשמירה",
+            "error": "אירעו שגיאות בעת ניסיון השמירה",
+            "status_code": "השרת החזיר קוד מצב {code}",
+            "unknown_error_details": "נא לוודא שיש לך חיבור לאינטרנט",
+            "uploading": "השינויים נשלחים אל OpenStreetMap…",
+            "unsaved_changes": "יש לך שינויים שלא נשמרו",
+            "conflict": {
+                "header": "פתרון עריכות סותרות",
+                "count": "סתירה {num} מתוך {total}",
+                "previous": "< הקודמת",
+                "next": "הבאה >",
+                "keep_local": "להשאיר את שלי",
+                "keep_remote": "להשתמש בשלהם",
+                "restore": "שחזור",
+                "delete": "להשאיר מחוק",
+                "download_changes": "או להוריד קובץ osmChange",
+                "done": "כל הסתירות נפתרו!"
+            }
+        },
+        "merge_remote_changes": {
+            "conflict": {
+                "deleted": "תכונה זו נמחקה על ידי {user}.",
+                "location": "תכונה זו הועברה גם על ידיך וגם על ידי {user}.",
+                "nodelist": "המפרקים עברו שינוי על ידיך וגם על ידי {user}.",
+                "memberlist": "החברים ביחס עברו שינוי גם על ידיך וגם על ידי {user}."
+            }
+        },
+        "success": {
+            "just_edited": "הרגע ערכת את OpenStreetMap!",
+            "view_on_osm": "צפייה ב־OSM",
+            "facebook": "שיתוף בפייסבוק",
+            "twitter": "שיתוף בטוויטר",
+            "google": "שיתוף ב־Google+‎",
+            "help_link_text": "פרטים"
         },
         "confirm": {
+            "okay": "אישור",
             "cancel": "ביטול"
         },
+        "splash": {
+            "welcome": "ברוך בואך לעורך המפות iD של OpenStreetMap",
+            "walkthrough": "להתחיל במדריך",
+            "start": "לערוך כעת"
+        },
         "source_switch": {
-            "live": "חי"
+            "live": "חי",
+            "lose_changes": "יש לך שינויים שלא נשמרו. החלפת שרת המפות יסלק אותם. לעבור שרת?",
+            "dev": "פיתוח"
         },
         "version": {
             "whats_new": "מה חדש ב־iD {version}"
         },
         "tag_reference": {
-            "description": "תיאור"
+            "description": "תיאור",
+            "on_wiki": "{tag} ב־wiki.osm.org",
+            "used_with": "בשימוש עם {type}"
         },
+        "validations": {
+            "disconnected_highway": "דרך ראשית מנותקת",
+            "disconnected_highway_tooltip": "דרכים אמורות להיות מחוברות לדרכים אחרות או לכניסות לבניינים.",
+            "untagged_point": "נקודה ללא תיוג",
+            "untagged_point_tooltip": "נא לבחור בסוג תכונה שמתאר מה הנקודה הזו.",
+            "untagged_line": "קו ללא תיוג",
+            "untagged_line_tooltip": "נא לבחור בסוג תכונה שמתאר מה הקו הזה.",
+            "untagged_area": "שטח ללא תיוג",
+            "untagged_area_tooltip": "נא לבחור בסוג תכונה שמתאר מה השטח הזה.",
+            "untagged_relation": "יחס בלתי מתויג",
+            "untagged_relation_tooltip": "נא לבחור סוג תכונה שמתארת מה היחס הזה.",
+            "many_deletions": "בחירתך תמחק {n} תכונות. להמשיך בפעולה? אם כן, התכונות תימחקנה מהמפה לכל מי שרואה את openstreetmap.org.",
+            "tag_suggests_area": "התגית {tag} רומזת שהקו אמור להיות שטח, אך זה לא שטח",
+            "deprecated_tags": "תגיות שנזנחו: {tags}"
+        },
+        "zoom": {
+            "in": "התקרבות",
+            "out": "התרחקות"
+        },
+        "cannot_zoom": "לא ניתן להתקרב יותר במצב הנוכחי.",
+        "full_screen": "החלפת מצב מסך מלא",
         "gpx": {
-            "local_layer": "קובץ מקומי"
+            "local_layer": "קובץ מקומי",
+            "drag_drop": "יש לגרור ולהשליך קובצי ‎.gpx,‏ ‎.geojson או ‎.kml לעמוד או ללחוץ על הכפתור שמשמאל לעיון",
+            "zoom": "התקרבות לשכבה",
+            "browse": "עיון אחר קובץ"
+        },
+        "mapillary_images": {
+            "tooltip": "תמונות בהתמקדות על רחובות מ־Mapillary",
+            "title": "שכבת תמונה (Mapillary)"
+        },
+        "mapillary_signs": {
+            "tooltip": "תמרורים מ־Mapillary (חובה להפעיל שכבת תמונה)",
+            "title": "שכבת תמרורים (Mapillary)"
+        },
+        "mapillary": {
+            "view_on_mapillary": "צפייה בתמונה הזאת ב־Mapillary"
+        },
+        "openstreetcam_images": {
+            "tooltip": "תמונות בהתמקדות על רחובות מ־OpenStreetCam",
+            "title": "שכבת תמרורים (OpenStreetCam)"
+        },
+        "openstreetcam": {
+            "view_on_openstreetcam": "צפייה בתמונה הזאת ב־OpenStreetCam"
         },
         "help": {
-            "title": "עזרה"
+            "title": "עזרה",
+            "key": "ע",
+            "help": "# עזרה\n\nזהו עורך של [OpenStreetMap](http://www.openstreetmap.org/), המפה\nהעולמית החופשית והזמינה לעריכה. ניתן להשתמש בו כדי להוסיף ולעדכן\nנתונים באזור שלך, למטרת יצירת מפה עולמית בקוד פתוח ונתונים פתוחים\nשתטיב עם כולם.\n\nהעריכות שלך במפה הזאת יהיו חשופים בפני כל המשתמשים\nב־OpenStreetMap. כדי לערוך, עליך\n[להיכנס](https://www.openstreetmap.org/login).\n\n[העורך iD](http://ideditor.com/) הוא מיזם שיתופי ש[קוד\nהמקור שלו זמין ב־GitHub](https://github.com/openstreetmap/iD).\n"
         },
         "intro": {
+            "ok": "אישור",
             "graph": {
                 "block_number": "<value for addr:block_number>",
+                "city": "קריית שלושה",
                 "county": "<value for addr:county>",
                 "district": "<value for addr:district>",
                 "hamlet": "<value for addr:hamlet>",
                 "neighbourhood": "<value for addr:neighbourhood>",
+                "postcode": "9051501",
                 "province": "<value for addr:province>",
                 "quarter": "<value for addr:quarter>",
                 "state": "<value for addr:state>",
                 "subdistrict": "<value for addr:subdistrict>",
                 "suburb": "<value for addr:suburb>",
-                "countrycode": "il"
+                "countrycode": "il",
+                "name": {
+                    "1st-avenue": "אחד העם",
+                    "2nd-avenue": "שדרת הדודאים",
+                    "4th-avenue": "שדרות הארבעה",
+                    "5th-avenue": "שדרת החמישה",
+                    "8th-avenue": "שמיני עצרת",
+                    "elm-street": "רח׳ אלם",
+                    "french-street": "רח׳ צרפת",
+                    "garden-street": "רח׳ גן השקמים",
+                    "lincoln-avenue": "סמטת אשכול",
+                    "lowrys-books": "סטימצקי",
+                    "lynns-garage": "המוסך של ניסים",
+                    "main-street-barbell": "אימון משה ברחוב העצמאות",
+                    "main-street-cafe": "קפה רחוב העצמאות",
+                    "main-street-fitness": "חיטוב רחוב העצמאות",
+                    "main-street": "רחוב העצמאות",
+                    "maple-street": "רחוב דבש",
+                    "marina-park": "רחוב הנמל",
+                    "market-street": "רחוב השוק",
+                    "memory-isle-park": "פארק אבני זכרון",
+                    "memory-isle": "אבני זכרון",
+                    "millard-street": "רח׳ הרב פנחס מילר",
+                    "moore-street": "רח׳ מור",
+                    "morris-avenue": "שד׳ פישר מוריס",
+                    "mural-mall": "קניון איילון",
+                    "paisanos-bar-and-grill": "השווארמה של הרצל",
+                    "pine-street": "רחוב האורן",
+                    "pizza-hut": "פיצה פדאל",
+                    "river-drive": "כביש הנחל",
+                    "river-road": "דרך הנחל",
+                    "river-street": "רחוב הנחל",
+                    "riverside-cemetery": "בית העלמין שליד הנחל",
+                    "riverwalk-trail": "מסלול הליכה לצד הנחל",
+                    "riviera-theatre": "תאטרון עידה",
+                    "rocky-river": "נהר ששון",
+                    "saint-joseph-river": "נחל רבי עקיבא",
+                    "scidmore-park-petting-zoo": "גן חיות המחמד פרץ",
+                    "scidmore-park": "פארק פרץ",
+                    "scouter-park": "פארק מועלם",
+                    "sherwin-williams": "יחיא-עבודי",
+                    "south-street": "כפר דרום",
+                    "southern-michigan-bank": "בנק צפון אשקלון",
+                    "spring-street": "מעלה אביב",
+                    "sturgeon-river-road": "דרך נחל רביבים",
+                    "three-rivers-city-hall": "בניין העירייה של קריית שלושה",
+                    "three-rivers-elementary-school": "בית הספר היסודי של קריית שלושה",
+                    "three-rivers-fire-department": "לוחמי האש של קריית שלושה",
+                    "three-rivers-high-school": "תיכון קריית שלושה",
+                    "three-rivers-middle-school": "חטיבת קריית שלושה",
+                    "three-rivers-municipal-airport": "נמל התעופה העירוני של קריית שלושה",
+                    "three-rivers-post-office": "משרד הדואר של קריית שלושה",
+                    "three-rivers-public-library": "הספרייה הציבורית של קריית שלושה",
+                    "three-rivers": "קריית שלושה",
+                    "washington-street": "רחוב בן גוריון",
+                    "water-street": "רחוב הנחל",
+                    "world-fare": "יריד עולם"
+                }
+            },
+            "welcome": {
+                "title": "ברוך בואך",
+                "welcome": "ברוך בואך! המדריך האינטראקטיבי הזה ילמד אותך את יסודות העריכה ב־OpenStreetMap.",
+                "practice": "כל המידע במדריך הזה מיועד לתרגול בלבד וכל העריכות שתתבצענה במדריך לא תישמרנה.",
+                "words": "המדריך הזה יציג מספר מילים ורעיונות חדשים. בעת הצגת מילה חדשה נשתמש בכתב *נטוי*.",
+                "mouse": "ניתן להשתמש בכל התקן קלט כדי לערוך את המפה אך מדריך זה יוצא מנקודת הנחה שיש לך עכבר עם שני כפתורים. **אם ברצונך לחבר עכבר כדאי לעשות זאת ואז ללחוץ על אישור.**"
+            },
+            "navigation": {
+                "title": "ניווט",
+                "nodes_ways": "ב־OpenStreetMap, נקודות לעתים נקראות *מפרקים* וקווים או שטחים נעתים נקראים *דרכים*.",
+                "click_townhall": "ניתן לבחור את כל התכונות במפה על ידי לחיצה עליהם. **ניתן ללחוץ על הנקודה כדי לבחור אותה**",
+                "selected_townhall": "נהדר! הנקודה נבחרה. התכונות הנבחרות מופיעות עם זריחה מהבהבת.",
+                "close_townhall": "**יש לסגור את עורך התכונות על ידי לחיצה על escape או על הכפתור {button} בפינה העליונה.**",
+                "search_street": "ניתן גם לחפש תכונות בתצוגה הנוכחית או בכל רחבי העולם. **חיפוש אחר ‚{name}’.**",
+                "choose_street": "**יש לבחור {name} מהרשימה כדי לבחור אותו.**"
             },
             "points": {
-                "title": "נקודות"
+                "title": "נקודות",
+                "search_cafe": "ישנן מגוון תכונות שניתן לייצג בנקודות. הנקודה שהרגע הוספת היא בית קפה. **חיפוש אחר ‚{preset}’.**",
+                "choose_cafe": "**יש לבחור {preset} מהרשימה.**"
             },
             "areas": {
-                "title": "אזורים"
+                "title": "אזורים",
+                "search_playground": "**חיפוש אחר ‚{preset}’.**",
+                "choose_playground": "**יש לבחור {preset} מהרשימה.**",
+                "choose_field": "**יש לבחור {field} מהרשימה.**",
+                "retry_add_field": "לא בחרת את השדה {field}. נא לנסות שוב."
             },
             "lines": {
                 "title": "קווים",
+                "retry_intersect": "הדרך צריכה להשתלב עם {name}. נא לנסות שוב!",
+                "choose_category_road": "**יש לבחור {category} מהרשימה.**",
+                "choose_preset_residential": "ישנן מגוון סוגים של דרכים אך הדרך הזאת היא דרך עירונית. **יש לבחור בסוג {preset}.**",
+                "retry_preset_residential": "לא בחרת את הסוג {preset}. **יש ללחוץ כאן כדי לבחור שוב.**",
+                "did_name_road": "נראה מעולה! עכשיו נלמד איך לעדכן צורה של קו.",
+                "update_line": "לפעמים יש צורך לשנות צורה של קו קיים. להלן דרך שלא נראית כמו שצריך.",
+                "add_node": "נוכל להוסיף עוד מפרקים לקו זה כדי לשפר את הצורה שלו. אחת הדרכים להוסיף מפרק היא ללחוץ לחיצה כפולה על הקו במקום בו ברצונך להוסיף מפרק. **יש ללחוץ לחיצה כפולה על הקו כדי ליצור מפרק חדש.**",
+                "finish_drag_endpoint": "המיקום הזה נראה נהדר. **יש לשחרר את הכפתור השמאלי בעכבר כדי לסיים את הגרירה.**",
+                "rightclick_intersection": "הרחוב האמתי האחרון הוא {street1}, כך שאנחנו *נפצל* את {street2} בצומת הזה ונסיר את כל מה שמעליו. **יש ללחוץ עם הכפתור הימני בעכבר על מפרק הצומת.**",
+                "split_intersection": "**יש ללחוץ על הלחצן {button} כדי לפצל {street}.**",
+                "retry_split": "לא לחצת על לחצן הפיצול. נא לנסות שוב.",
+                "multi_delete": "**יש ללחוץ על הכפתור {button} כדי למחוק את הקווים העודפים.**",
                 "retry_delete": "לא לחצת על כפתור המחיקה. נא לנסות שוב."
             },
             "buildings": {
-                "title": "בניינים"
+                "title": "בניינים",
+                "add_building": "OpenStreetMap הוא מסד הנתונים הגדול ביותר של בניינים.{br}ניתן לסייע בשיפור מסד הנתונים הזה על ידי תיעוד בניינים שאינם ממופים עדיין. **יש ללחוץ על כפתור השטח {button} כדי להוסיף שטח חדש.**",
+                "start_building": "בואו נוסיף את הבית הזה למפה על ידי מעקב אחר קו מתאר החיצוני שלו.{br}יש לעקוב אחר קו המתאר החיצוני של הבניין בצורה המדויקת ביותר ככל הניתן. **יש ללחוץ על רווח כדי להציב מפרק התחלה באחת מפינות הבניין.**",
+                "retry_building": "נראה כי נתקלת בבעיה בהצבת המפרקים בפינות הבניין. נא לנסות שוב!",
+                "choose_category_building": "**יש לבחור ב{category} מהרשימה.**",
+                "choose_preset_house": "ישנו מגוון רחב של סוגי סניינים, אך הסוג הזה הוא בוודאות בית.{br}במקרה של ספק בנוגע לסוג, זה בסדר גמור פשוט לבחור בסוג מגנה גנרי. **יש לבחור את הסוג {preset}.**",
+                "close": "**יש ללחוץ על escape או על הכפתור {button} כדי לסגור את עורך התכונות.**",
+                "rightclick_building": "**ניתן לבחור את הבניין שיצרת ולהציג את תפריט העריכה בלחיצה ימנית.**",
+                "square_building": "הבית שזה עתה הוספת ייראה אפילו טוב יותר עם פינות מרובעות לחלוטין. **יש ללחוץ על הכפתור {button} כדי להפוך את צורת הבניין לריבוע.**",
+                "retry_square": "לא לחצת על הכפתור המרובע. נא לנסות שוב.",
+                "done_square": "ראית איך שפינות הבניין התגבשו לכדי צורה? יש עוד טריקים שימושיים כאלה.",
+                "add_tank": "בשלב הבא אנו נסמן את מיכל האחסון עגול הזה. **יש ללחוץ על כפתור השטח {button} כדי להוסיף שטח חדש.**",
+                "start_tank": "אל דאגה, לא חובה לצייר עיגול מושלם. עליך פשוט לצייר שטח בתוך המיכל שנוגע בקצוות שלו. **יש ללחוץ עם העכבר או עם מקש הרווח כדי להציב נקודת התחלה על קצה המיכל.**",
+                "search_tank": "**חיפוש אחר ‚{preset}’.**",
+                "choose_tank": "**יש לבחור {preset} מהרשימה.**",
+                "rightclick_tank": "**ניתן לבחור את מיכל האחסון שיצרת ולהציג את תפריט העריכה בלחיצה ימנית.**",
+                "circle_tank": "**יש ללחוץ על הכפתור {button} כדי להפוך את המיכל לעיגול.**",
+                "retry_circle": "לא לחצת על הכפתור לעיגול. נא לנסות שוב.",
+                "play": "עבודה נפלאה! כעת ניתן להתנסות באיתור מספר בניינים נוספים ולנסות פקודות אחרות בתפריט העריכה. **לאחר סיום ההתנסות, כדי לעבור לפרק הבא יש ללחוץ על ‚{next}’.**"
             },
             "startediting": {
-                "save": "לא לשכוח לשמור את השינויים שלך לעתים תכופות!"
+                "title": "להתחיל בעריכה",
+                "help": "סיימת את ההכנות לקראת עריכת OpenStreetMap!{br} ניתן לחזור על המדריך הזה בכל עת או לצפות בתיעוד נוסף על ידי לחיצה על הכפתור העזרה {button} או לחיצה על המקש ‚{key}’.",
+                "shortcuts": "ניתן לצפות ברשימה של פקודות לצד קיצורי המקלדת שלהם על ידי לחיצה על המקש ‚{key}’.",
+                "save": "לא לשכוח לשמור את השינויים שלך לעתים תכופות!",
+                "start": "בואו נתחיל למפות!"
             }
         },
         "shortcuts": {
             "title": "קיצורי מקלדת",
             "tooltip": "הצגת מסך קיצורי המקלדת",
+            "toggle": {
+                "key": "?"
+            },
+            "key": {
+                "alt": "Alt",
+                "backspace": "Backspace",
+                "cmd": "Cmd",
+                "ctrl": "Ctrl",
+                "delete": "Delete",
+                "del": "Del",
+                "end": "End",
+                "enter": "Enter",
+                "esc": "Esc",
+                "home": "Home",
+                "option": "Option",
+                "pause": "Pause",
+                "pgdn": "PgDn",
+                "pgup": "PgUp",
+                "return": "Return",
+                "shift": "Shift",
+                "space": "רווח"
+            },
+            "gesture": {
+                "drag": "גרירה"
+            },
+            "or": "-או-",
             "browsing": {
+                "title": "סיור",
                 "navigation": {
-                    "title": "ניווט"
+                    "title": "ניווט",
+                    "pan": "סריקת המפה",
+                    "pan_more": "סריקת המפה תוך מעבר מסך מלא",
+                    "zoom": "התקרבות/התרחקות",
+                    "zoom_more": "התקרבות/התרחקות בהרבה"
                 },
                 "help": {
                     "title": "עזרה",
@@ -150,6 +792,7 @@
                     "background_switch": "חזרה לרקע האחרון",
                     "map_data": "הצגת אפשרויות נתוני מפה",
                     "fullscreen": "כניסה למצב מסך מלא",
+                    "wireframe": "החלפת מצב גבול דקיק",
                     "minimap": "החלפת תצוגת מפה מוקטנת"
                 },
                 "selecting": {
@@ -160,14 +803,30 @@
                 },
                 "with_selected": {
                     "edit_menu": "החלפת תצוגה של תפריט עריכה"
+                },
+                "vertex_selected": {
+                    "previous": "קפיצה למפרק הקודם",
+                    "next": "קפיצה למפרק הבא",
+                    "first": "קפיצה למפרק הראשון",
+                    "last": "קפיצה למפרק האחרון",
+                    "change_parent": "החלפת דרך ההורה"
                 }
             },
             "editing": {
                 "title": "עריכה",
                 "drawing": {
-                    "title": "ציור"
+                    "title": "ציור",
+                    "add_point": "מצב ‚הוספת נקודה’",
+                    "add_line": "מצב ‚הוספת קו’",
+                    "add_area": "מצב ‚הוספת שטח’",
+                    "place_point": "הצבת נקודה",
+                    "disable_snap": "יש להחזיק כדי להשבית הצמדת נקודות",
+                    "stop_line": "סיום ציור קו או שטח"
                 },
                 "operations": {
+                    "continue_line": "להמשיך את הקו במפרק הנבחר",
+                    "merge": "שילוב (מיזוג) התכונות הנבחרות",
+                    "disconnect": "ניתוק תכונות במפרק הנבחר",
                     "split": "פיצול קו לשניים במפרק הנבחר",
                     "reverse": "ביפוך כיוון קו",
                     "move": "העברת התכונות הנבחרות",
@@ -187,7 +846,12 @@
             "tools": {
                 "title": "כלים",
                 "info": {
-                    "title": "מידע"
+                    "title": "מידע",
+                    "all": "החלפת מצב תצוגת כל חלוניות המידע",
+                    "background": "החלפת מצב תצוגת הרקע",
+                    "history": "החלפת מצב תצוגת חלונית היסטוריה",
+                    "location": "החלפת מצב תצוגת חלונית מיקום",
+                    "measurement": "החלפת מצב תצוגת חלונית מדידה"
                 }
             }
         }

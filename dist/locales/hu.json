@@ -670,6 +670,13 @@
         "mapillary": {
             "view_on_mapillary": "E kép megtekintése a Mapillary weboldalon"
         },
+        "openstreetcam_images": {
+            "tooltip": "Utcafotók az OpenStreetCam-ról",
+            "title": "Fotó réteg (OpenStreetCam)"
+        },
+        "openstreetcam": {
+            "view_on_openstreetcam": "A kép megtekintése az OpenStreetCam weboldalon"
+        },
         "help": {
             "title": "Súgó",
             "key": "H",
@@ -1215,6 +1222,9 @@
                 "aeroway": {
                     "label": "Típus"
                 },
+                "agrarian": {
+                    "label": "Termékek"
+                },
                 "amenity": {
                     "label": "Típus"
                 },
@@ -1583,6 +1593,9 @@
                 "generator/type": {
                     "label": "Típus"
                 },
+                "government": {
+                    "label": "Típus"
+                },
                 "grape_variety": {
                     "label": "Szőlőfajták"
                 },
@@ -1910,6 +1923,7 @@
                     "label": "Fizetési típusok"
                 },
                 "phases": {
+                    "label": "Fázisok",
                     "placeholder": "1, 2, 3..."
                 },
                 "phone": {
@@ -1990,6 +2004,9 @@
                 },
                 "railway": {
                     "label": "Típus"
+                },
+                "rating": {
+                    "label": "Generátorteljesítmény"
                 },
                 "recycling_accepts": {
                     "label": "Elfogad"
@@ -2229,7 +2246,11 @@
                     "label": "Megfigyelt terület"
                 },
                 "switch": {
-                    "label": "Típus"
+                    "label": "Típus",
+                    "options": {
+                        "circuit_breaker": "Áramkör megszakító",
+                        "earthing": "Földelés"
+                    }
                 },
                 "tactile_paving": {
                     "label": "Vakvezető burkolat"
@@ -2306,6 +2327,8 @@
                 "transformer": {
                     "label": "Típus",
                     "options": {
+                        "converter": "Átalakító",
+                        "generator": "Áramfejlesztő",
                         "yes": "Ismeretlen"
                     }
                 },
@@ -2342,6 +2365,9 @@
                         "shield": "Pajzs",
                         "stratovolcano": "Rétegvulkán"
                     }
+                },
+                "voltage": {
+                    "label": "Feszültség"
                 },
                 "wall": {
                     "label": "Típus"
@@ -3288,6 +3314,7 @@
                     "terms": "Órás"
                 },
                 "craft/confectionery": {
+                    "name": "Cukrász",
                     "terms": "<translate with synonyms or related terms for 'Candy Maker', separated by commas>"
                 },
                 "craft/distillery": {
@@ -3392,6 +3419,7 @@
                     "terms": "ács-állványozó"
                 },
                 "craft/sculptor": {
+                    "name": "Szobrász",
                     "terms": "<translate with synonyms or related terms for 'Sculptor', separated by commas>"
                 },
                 "craft/shoemaker": {
@@ -3671,9 +3699,11 @@
                     "terms": "Ösvény"
                 },
                 "highway/pedestrian_area": {
+                    "name": "Sétáló övezet",
                     "terms": "<translate with synonyms or related terms for 'Pedestrian Area', separated by commas>"
                 },
                 "highway/pedestrian_line": {
+                    "name": "Sétálóutca",
                     "terms": "<translate with synonyms or related terms for 'Pedestrian Street', separated by commas>"
                 },
                 "highway/primary": {
@@ -3908,9 +3938,11 @@
                     "terms": "ipar, gyárterület, gyár, ipari park"
                 },
                 "landuse/industrial/scrap_yard": {
+                    "name": "Szeméttelep",
                     "terms": "<translate with synonyms or related terms for 'Scrap Yard', separated by commas>"
                 },
                 "landuse/industrial/slaughterhouse": {
+                    "name": "Vágóhíd",
                     "terms": "<translate with synonyms or related terms for 'Slaughterhouse', separated by commas>"
                 },
                 "landuse/landfill": {
@@ -3990,6 +4022,7 @@
                     "terms": "park, pihenőhely"
                 },
                 "landuse/religious": {
+                    "name": "Vallási övezet",
                     "terms": "<translate with synonyms or related terms for 'Religious Area', separated by commas>"
                 },
                 "landuse/residential": {

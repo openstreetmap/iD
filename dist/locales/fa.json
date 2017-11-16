@@ -3,7 +3,7 @@
         "modes": {
             "add_area": {
                 "title": "محدوده",
-                "description": "افزودن پارک‌ها، ساختمان‌ها، دریاچه‌ها و سایر  محدوده‌ها به نقشه.",
+                "description": "افزودن پارک‌ها، ساختمان‌ها، دریاچه‌ها و سایر محدوده‌ها به نقشه.",
                 "tail": "برای کشیدن محدوده‌هایی مثل پارک، دریاچه، یا ساختمان روی نقشه کلیک کنید."
             },
             "add_line": {
@@ -299,6 +299,7 @@
             "localized_translation_language": "انتخاب زبان",
             "localized_translation_name": "نام"
         },
+        "zoom_in_edit": "برای ویرایش زوم کنید",
         "login": "ورود",
         "logout": "خروج",
         "loading_auth": "در حال اتصال به OpenStreetMap...",
@@ -315,8 +316,11 @@
             "rateLimit": "این API برای کاربران ثبت‌نام نکرده محدود است. برای رفع این مشکل میتوانید وارد شوید."
         },
         "commit": {
+            "title": "آپلود در اوپن استریت مپ",
             "upload_explanation": "تغییراتی که بارگذاری میکنید در همه ی نقشه هایی که از داده های OpenStreetMap استفاده میکنند پدیدار میشوند.",
             "upload_explanation_with_user": "تفییراتی که شما به عنوان {user} بارگذاری میکنید در همه ی نقشه هایی که از داده های OpenStreetMap استفاده میکنند پدیدار میشوند.",
+            "request_review": "مایل به بازنگری در ویرایش های خود هستم",
+            "save": "بارگزاری",
             "cancel": "لغو",
             "changes": "{count} تغییر",
             "warnings": "اخطارها",
@@ -331,6 +335,31 @@
         "contributors": {
             "list": "ویرایش توسط {users}",
             "truncated_list": "ویرایش توسط  {users} و {count}  نفر دیگر"
+        },
+        "info_panels": {
+            "background": {
+                "title": "پس زمینه",
+                "zoom": "بزرگنمایی",
+                "description": "توضیح",
+                "resolution": "وضوح",
+                "accuracy": "دقت",
+                "unknown": "نامعلوم"
+            },
+            "history": {
+                "title": "تاریخچه",
+                "last_edit": "آخرین ویرایش",
+                "unknown": "نامعلوم",
+                "link_text": "سابقه در openstreetmap.org"
+            },
+            "location": {
+                "title": "مکان"
+            },
+            "measurement": {
+                "title": "اندازه",
+                "length": "درازا",
+                "area": "ناحیه",
+                "location": "مکان"
+            }
         },
         "geometry": {
             "point": "نقطه",
@@ -374,6 +403,12 @@
             "check": {
                 "yes": "بله",
                 "no": "خیر"
+            },
+            "radio": {
+                "structure": {
+                    "default": "پیش‌فرض",
+                    "layer": "لایه"
+                }
             },
             "add": "اضافه کردن",
             "none": "هیچ",
@@ -475,7 +510,8 @@
         },
         "restore": {
             "heading": "شما تغییرات ذخیره نشده دارید",
-            "description": "آیا مایلید تغییرات ذخیره نشده جلسه قبل را بازیابی کنید؟"
+            "description": "آیا مایلید تغییرات ذخیره نشده جلسه قبل را بازیابی کنید؟",
+            "restore": " بازگردانی تغییرات من"
         },
         "save": {
             "title": "ذخیره",
@@ -536,6 +572,7 @@
             "used_with": "با  {type} استفاده شده"
         },
         "validations": {
+            "disconnected_highway": "قطع اتصال",
             "untagged_point": "نقطه برچسب نخورده",
             "untagged_point_tooltip": "یک نوع عنصر را برای توصیف موجودیت این نقطه انتخاب کنید.",
             "untagged_line": "خط برچسب گذاری نشده",
@@ -545,6 +582,10 @@
             "many_deletions": "شما در حال حذف {n} شئ هستید. مطمئنید میخواهید این کار را انجام دهید؟ این کار آنها را از نقشه ای که دیگران در openstreetmap.org میبینند حذف می کند.",
             "tag_suggests_area": "برچسب  {tag} پیشنهاد میکند خط باید یک فضا باشد، اما این یک فضا نیست",
             "deprecated_tags": "برچسب های توصیه شده: {tags}"
+        },
+        "zoom": {
+            "in": "بزرگ‌نمایی",
+            "out": "کوچک‌نمایی"
         },
         "cannot_zoom": "در حالت فعلی بیش از این نمیتوان کوچک نمایی کرد.",
         "full_screen": "تعویض صفحه‌نمایش کامل",
@@ -695,12 +736,17 @@
                 "address": {
                     "label": "آدرس",
                     "placeholders": {
+                        "block_number": "شماره بلوک ",
+                        "block_number!jp": "بلوک",
                         "city": "شهر",
+                        "city!jp": "شهر/شهرستان/روستا/بخش",
                         "city!vn": "شهر",
                         "conscriptionnumber": "123",
                         "country": "کشور",
                         "county": "کشور",
+                        "county!jp": "ناحیه",
                         "district": "منطقه",
+                        "district!vn": "محله/ شهر / منطقه",
                         "floor": "طبقه",
                         "hamlet": "دهکده",
                         "housename": "نام خانه",
@@ -709,6 +755,7 @@
                         "place": "مکان",
                         "postcode": "کدپستی",
                         "province": "استان",
+                        "province!jp": "ساختمان ریاست جمهوری",
                         "quarter": "ربع",
                         "state": "ایالت",
                         "street": "خيابان",
@@ -761,6 +808,9 @@
                 },
                 "amenity": {
                     "label": "نوع"
+                },
+                "animal_shelter": {
+                    "label": "پناهگاه حیوانات"
                 },
                 "area/highway": {
                     "label": "نوع"
@@ -4367,6 +4417,224 @@
                     "name": "بند",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بند'، با کاما جدا می‌شوند>"
                 }
+            }
+        },
+        "imagery": {
+            "Bing": {
+                "description": "نقشه های ماهواره ای aerial",
+                "name": "نقشه های Bing"
+            },
+            "DigitalGlobe-Premium": {
+                "attribution": {
+                    "text": "ارسال نظرات"
+                },
+                "description": "نقشه های ماهواره ای Premium DigitalGlobe ",
+                "name": "نقشه های DigitalGlobe Premium"
+            },
+            "DigitalGlobe-Premium-vintage": {
+                "attribution": {
+                    "text": "ارسال نظرات"
+                },
+                "description": "مرزها و تاریخ نقشه ها از زوم 14 به بالا قابل مشاهده هستند",
+                "name": "فهرست DigitalGlobe Premium"
+            },
+            "DigitalGlobe-Standard": {
+                "attribution": {
+                    "text": "ارسال نظرات"
+                },
+                "description": "نقشه های ماهواره ای استاندارد DigitalGlobe Premium",
+                "name": "نقشه های استاندارد DigitalGlobe Premium"
+            },
+            "DigitalGlobe-Standard-vintage": {
+                "attribution": {
+                    "text": "ارسال نظرات"
+                },
+                "description": "مرزها و تاریخ نقشه ها از زوم 14 به بالا قابل مشاهده هستند",
+                "name": "فهرست DigitalGlobe Premium"
+            },
+            "EsriWorldImagery": {
+                "attribution": {
+                    "text": "ارسال نظرات"
+                },
+                "description": "نقشه های Esri world ",
+                "name": "نقشه های Esri world "
+            },
+            "MAPNIK": {
+                "attribution": {
+                    "text": "©همکاران OSM و CC-BY-SA"
+                },
+                "description": "لایه پیش فرض OSM",
+                "name": "نقشه های OSM ( استاندارد)"
+            },
+            "Mapbox": {
+                "attribution": {
+                    "text": "ارسال نظرات"
+                },
+                "description": "نقشه های ماهواره ای aerial",
+                "name": "نقشه های ماهواره ای Mapbox"
+            },
+            "OSM_Inspector-Addresses": {
+                "attribution": {
+                    "text": "مرکز ژئوگرافی GmbH با همکاری OSM و CC-BY-SA"
+                },
+                "name": "بازرسی OSM : آدرسها"
+            },
+            "OSM_Inspector-Geometry": {
+                "attribution": {
+                    "text": "مرکز ژئوگرافی GmbH با همکاری OSM و CC-BY-SA"
+                },
+                "name": "بازرسی OSM : ژئومتری"
+            },
+            "OSM_Inspector-Highways": {
+                "attribution": {
+                    "text": "مرکز ژئوگرافی GmbH با همکاری OSM و CC-BY-SA"
+                },
+                "name": "بازرسی OSM : اتوبانها"
+            },
+            "OSM_Inspector-Multipolygon": {
+                "attribution": {
+                    "text": "مرکز ژئوگرافی GmbH با همکاری OSM و CC-BY-SA"
+                },
+                "name": "بازرسی OSM : محدوده"
+            },
+            "OSM_Inspector-Places": {
+                "attribution": {
+                    "text": "مرکز ژئوگرافی GmbH با همکاری OSM و CC-BY-SA"
+                },
+                "name": "بازرسی OSM : مکانها"
+            },
+            "OSM_Inspector-Routing": {
+                "attribution": {
+                    "text": "مرکز ژئوگرافی GmbH با همکاری OSM و CC-BY-SA"
+                },
+                "name": "بازرسی OSM : خطوط"
+            },
+            "OSM_Inspector-Tagging": {
+                "attribution": {
+                    "text": "مرکز ژئوگرافی GmbH با همکاری OSM و CC-BY-SA"
+                },
+                "name": "بازرسی OSM : برچسبها"
+            },
+            "US-TIGER-Roads-2012": {
+                "name": "جاده های TIGER 2012"
+            },
+            "US-TIGER-Roads-2014": {
+                "description": "از زوم +16 به بعد اطلاعات مالکیت ملکی در آمریکا دیده میشود.از زومهای کمتر فقط تغییراتی که در OSM مربوط به سال 2006 ثبت شده است قابل دیدن است",
+                "name": "جاده های TIGER 2014"
+            },
+            "US-TIGER-Roads-2017": {
+                "description": "زود = داده های دولتی سرشماری آمریکا. قرمز : داده های بدون منبع در OSM",
+                "name": "جاده های TIGER 2017"
+            },
+            "Waymarked_Trails-Cycling": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                },
+                "name": "مسیرهای مشخص شده: دوچرخه سواری"
+            },
+            "Waymarked_Trails-Hiking": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                },
+                "name": "مسیرهای مشخص شده: پیاده روی"
+            },
+            "Waymarked_Trails-MTB": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                },
+                "name": "مسیرهای مشخص شده: MTB"
+            },
+            "Waymarked_Trails-Skating": {
+                "attribution": {
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                },
+                "name": "مسیرهای مشخص شده: اسکیت"
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "attribution": {
+                    "text": "© Michael Spreng, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                },
+                "name": "مسیرهای مشخص شده: ورزشهای زمستانی"
+            },
+            "basemap.at": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "نقشه اصلی استرالیا، نقشه ثبت شده دولتی",
+                "name": "basemap.at"
+            },
+            "basemap.at-orthofoto": {
+                "attribution": {
+                    "text": "basemap.at"
+                },
+                "description": "Orthofoto layer provided by basemap.at. \"Successor\" of geoimage.at imagery.",
+                "name": "basemap.at Orthofoto"
+            },
+            "hike_n_bike": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors"
+                },
+                "name": "پیاده روی و دوچرخه سواری"
+            },
+            "mapbox_locator_overlay": {
+                "attribution": {
+                    "text": "ارسال نظرات"
+                },
+                "description": "برای کمک به شما ویژگی های اصلی نمایش میدهد.",
+                "name": "لایه یاب"
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OpenPT Map (overlay)"
+            },
+            "osm-gps": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors"
+                },
+                "description": "آپلود GPSهای عمومی در OSM",
+                "name": "ظبط مسیر در OSM"
+            },
+            "osm-mapnik-black_and_white": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "OSM ( استاندارد سیاه و سفید )"
+            },
+            "osm-mapnik-german_style": {
+                "attribution": {
+                    "text": "© OpenStreetMap contributors, CC-BY-SA"
+                },
+                "name": "SOM (نمای آلمانی)"
+            },
+            "qa_no_address": {
+                "attribution": {
+                    "text": "Simon Poole, Data ©OpenStreetMap contributors"
+                }
+            },
+            "skobbler": {
+                "attribution": {
+                    "text": "© Tiles: skobbler Map data: OpenStreetMap contributors"
+                }
+            },
+            "stamen-terrain-background": {
+                "attribution": {
+                    "text": "Map tiles by Stamen Design, under CC BY 3.0"
+                },
+                "name": "لجن زار"
+            },
+            "tf-cycle": {
+                "attribution": {
+                    "text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
+                },
+                "name": "Thunderforest OpenCycleMap"
+            },
+            "tf-landscape": {
+                "attribution": {
+                    "text": "Maps © Thunderforest, Data © OpenStreetMap contributors"
+                },
+                "name": "Thunderforest Landscape"
             }
         }
     }

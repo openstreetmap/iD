@@ -310,7 +310,7 @@
             "localized_translation_language": "Elegir idioma",
             "localized_translation_name": "Nombre"
         },
-        "zoom_in_edit": "Hacer zoom para editar",
+        "zoom_in_edit": "Acercar para editar",
         "login": "iniciar sesión",
         "logout": "Cerrar sesión",
         "loading_auth": "Conectando a OpenStreetMap...",
@@ -362,8 +362,8 @@
                 "unknown": "Desconocido",
                 "show_tiles": "Mostrar teselas",
                 "hide_tiles": "Ocultar teselas",
-                "show_vintage": "Mostrar Antiguo",
-                "hide_vintage": "Ocultar Antiguo"
+                "show_vintage": "Mostrar antigüedad",
+                "hide_vintage": "Ocultar antigüedad"
             },
             "history": {
                 "key": "H",
@@ -410,7 +410,7 @@
             "no_results_worldwide": "No hay resultados"
         },
         "geolocate": {
-            "title": "Mostrar mi localización",
+            "title": "Mostrar mi ubicación",
             "locating": "Ubicando, por favor espere..."
         },
         "inspector": {
@@ -453,7 +453,7 @@
             "node": "Nodo",
             "way": "Vía",
             "relation": "Relación",
-            "location": "Localización",
+            "location": "Ubicación",
             "add_fields": "Añadir campo:"
         },
         "background": {
@@ -466,7 +466,7 @@
             "switch": "Volver a este fondo",
             "custom": "Personalizado",
             "custom_button": "Editar fondo personalizado",
-            "custom_prompt": "Introduzca una plantilla URL de tesela. Los tokens válidos son:\n  - {zoom}/{z}, {x}, {y} para el esquema de tesela Z / X / Y\n  - {ty} para coordenadas Y invertidas del estilo TMS\n  - {u} para el esquema cuádruple\n  - {switch:a,b,c} para la multiplexación del servidor DNS\n\nEjemplo:\n{example}",
+            "custom_prompt": "Introduzca una plantilla URL de tesela. Los tokens válidos son:\n  - {zoom}/{z}, {x}, {y} para el esquema de tesela Z/X/Y\n  - {ty} para coordenadas Y invertidas del estilo TMS\n  - {u} para el esquema quadtile\n  - {switch:a,b,c} para la multiplexación del servidor DNS\n\nEjemplo:\n{example}",
             "fix_misalignment": "Ajustar desplazamiento de imágenes",
             "imagery_source_faq": "¿De dónde vienen estas imágenes?",
             "reset": "reiniciar",
@@ -648,8 +648,8 @@
             "deprecated_tags": "Etiquetas obsoletas: {tags}"
         },
         "zoom": {
-            "in": "Hacer zoom",
-            "out": "Alejar zoom"
+            "in": "Acercar",
+            "out": "Alejar"
         },
         "cannot_zoom": "No se puede alejar más la imagen en el modo actual.",
         "full_screen": "Cambiar a pantalla completa",
@@ -661,18 +661,18 @@
         },
         "mapillary_images": {
             "tooltip": "Fotos a nivel calle de Mapillary",
-            "title": "Superposición de fotos (Mapillary)"
+            "title": "Capa de fotos (Mapillary)"
         },
         "mapillary_signs": {
-            "tooltip": "Señales de tráfico de Mapillary (debe permitir superposición de fotos)",
-            "title": "Superposición de señal de tráfico (Mapillary)"
+            "tooltip": "Señales de tráfico Mapillary (debe habilitar Capa de fotos)",
+            "title": "Capa de señales de tráfico (Mapillary)"
         },
         "mapillary": {
             "view_on_mapillary": "Ver esta imagen en Mapillary"
         },
         "openstreetcam_images": {
             "tooltip": "Fotos a nivel de calle de OpenStreetCam",
-            "title": "Superposición de fotos (OpenStreetCam)"
+            "title": "Capa de fotos (OpenStreetCam)"
         },
         "openstreetcam": {
             "view_on_openstreetcam": "Ver esta imagen en OpenStreetCam"
@@ -831,7 +831,7 @@
             "navigation": {
                 "title": "Navegación",
                 "drag": "El área del mapa principal muestra los datos de OpenStreetMap encima de un fondo.{br}Puede arrastrar el mapa manteniendo presionado el botón izquierdo del ratón mientras mueve el ratón alrededor. También puede utilizar las teclas de flechas de su teclado. **¡Arrastre el mapa!**",
-                "zoom": "Puede acercar o alejar desplazándose con la rueda del ratón o el trackpad, o haciendo clic en los botones {plus} / {minus}. **¡Acerque el mapa!**",
+                "zoom": "Puede acercar o alejar desplazándose con la rueda del ratón o el trackpad, o haciendo clic en los botones {plus} / {minus}. **¡Acercar el mapa!**",
                 "features": "Utilizamos la palabra *elementos* para describir las cosas que aparecen en el mapa. Cualquier cosa en el mundo real puede ser mapeada como un elemento en OpenStreetMap.",
                 "points_lines_areas": "Las elementos del mapa se representan usando *puntos, líneas o áreas.*",
                 "nodes_ways": "En OpenStreetMap, los puntos a veces se llaman *nodos*, y las líneas y áreas a veces se llaman *vías*.",
@@ -1610,6 +1610,9 @@
                 "generator/type": {
                     "label": "Tipo"
                 },
+                "government": {
+                    "label": "Tipo"
+                },
                 "grape_variety": {
                     "label": "Variedades de uva"
                 },
@@ -2057,14 +2060,14 @@
                 },
                 "ref_runway": {
                     "label": "Número de pista de aterrizaje",
-                    "placeholder": "p.e. 01L/19R"
+                    "placeholder": "ej. 01L/19R"
                 },
                 "ref_stop_position": {
                     "label": "Número de parada"
                 },
                 "ref_taxiway": {
                     "label": "Nombre de pista de rodaje",
-                    "placeholder": "p.e. A5"
+                    "placeholder": "ej. A5"
                 },
                 "relation": {
                     "label": "Tipo"
@@ -2150,7 +2153,7 @@
                 "smoking": {
                     "label": "Fumar",
                     "options": {
-                        "dedicated": "Dedicado a los fumadores (ej: el club de los fumadores)",
+                        "dedicated": "Dedicado a los fumadores (ej.: club de fumadores)",
                         "isolated": "En áreas de fumadores, físicamente aislados",
                         "no": "No fumar en todas partes",
                         "outside": "Permitido fuera",
@@ -2429,11 +2432,11 @@
                     "label": "Wikipedia"
                 },
                 "windings": {
-                    "label": "Serpenteante",
+                    "label": "Bobinas",
                     "placeholder": "1, 2, 3..."
                 },
                 "windings/configuration": {
-                    "label": "Configuración de devanados",
+                    "label": "Configuración de bobinas",
                     "options": {
                         "delta": "Delta",
                         "leblanc": "Leblanc",
@@ -2645,11 +2648,11 @@
                 },
                 "amenity/clinic/abortion": {
                     "name": "Clínica de aborto",
-                    "terms": "aborto, embarazo, interrupción embarazo, clínica de aborto"
+                    "terms": "aborto, abotar, interrupción, embarazo, interrupción embarazo, clínica de aborto, clinica aborto"
                 },
                 "amenity/clinic/fertility": {
                     "name": "Clínica de fertilidad",
-                    "terms": "Clínica de fertilidad, clinica de fertilidad, fertilidad, reproducción, reproduccion, esperma, ovulación, ovulacion"
+                    "terms": "clínica de fertilidad, clinica de fertilidad, fertilidad, reproducción, reproduccion, esperma, ovulación, ovulacion"
                 },
                 "amenity/clock": {
                     "name": "Reloj",
@@ -2760,15 +2763,15 @@
                 },
                 "amenity/marketplace": {
                     "name": "Mercado",
-                    "terms": "mercado, mercadillo, mercado público, plaza de mercado"
+                    "terms": "mercado, mercadillo, mercado público, plaza de mercado, feria"
                 },
                 "amenity/motorcycle_parking": {
                     "name": "Aparcamiento de motocicletas",
                     "terms": "motocicleta, moto, aparcamiento, parking, estacionamiento, parqueadero, parqueo, parqueadero de motocicletas, estacionamiento de motocicletas, parqueo de motocicletas"
                 },
                 "amenity/music_school": {
-                    "name": "Conservatorio",
-                    "terms": "conservatorio, escuela de música, música, musica, instrumentos, profesor"
+                    "name": "Escuela de música",
+                    "terms": "conservatorio, academia, música, musica, musical, instrumentos musicales, escuela de música, academia de música, conservatorio de música"
                 },
                 "amenity/nightclub": {
                     "name": "Discoteca",
@@ -2901,7 +2904,7 @@
                 },
                 "amenity/shower": {
                     "name": "Ducha",
-                    "terms": "ducha, regadera"
+                    "terms": "ducha, regadera, cuarto de aseo"
                 },
                 "amenity/social_facility": {
                     "name": "Instalación social",
@@ -3038,52 +3041,52 @@
                     "terms": "superficie, revestimiento, cobertura"
                 },
                 "attraction/amusement_ride": {
-                    "name": "Atracción",
-                    "terms": "atracción de feria, juego, juego de feria, máquina de emociones mecanizada"
+                    "name": "Atracción de feria",
+                    "terms": "atracción de feria, juego, juego de feria, juegos mecánicos, máquina de emociones mecanizada"
                 },
                 "attraction/animal": {
                     "name": "Animal",
-                    "terms": "animal, atracción"
+                    "terms": "animal, atracción, parque temático, parque de animales, león, tigue, oso, zoológico"
                 },
                 "attraction/big_wheel": {
                     "name": "Noria",
-                    "terms": "rueda de la fortuna, vuelta al mundo, viaje a la luna, rueda moscovita, rueda de Chicago, rueda chicagua, rueda gigante, rueda Ferris"
+                    "terms": "rueda de la fortuna, vuelta al mundo, viaje a la luna, rueda moscovita, rueda de chicago, rueda chicagua, rueda gigante, rueda feria, juego mecánico, juego de feria"
                 },
                 "attraction/bumper_car": {
                     "name": "Autos chocadores",
-                    "terms": "autos chocadores, chocadores, autos de choque, coches de choque, coches locos, carros chocones"
+                    "terms": "autos, carros, coches, chocadores, choque, locos, chocones, autos chocadores, autos chocones, autos locos, juego mecánico, juego de feria"
                 },
                 "attraction/bungee_jumping": {
-                    "name": "Bungee",
-                    "terms": "bungee, puenting"
+                    "name": "Saldo de bungee",
+                    "terms": "salto, saltar, bungee, puenting, puente, benji, cuerda elástica, salto al vacío"
                 },
                 "attraction/carousel": {
                     "name": "Carrusel",
-                    "terms": "carrusel, tiovivo, calesita"
+                    "terms": "carrusel, tiovivo, calesita, caballitos, juego mecánico, juego de feria"
                 },
                 "attraction/dark_ride": {
                     "name": "Paseo oscuro",
-                    "terms": "viaje oscuro, feria, atracción"
+                    "terms": "viaje oscuro, tren fantasma, paseo guiado, juego de feria"
                 },
                 "attraction/drop_tower": {
                     "name": "Torre de caída",
-                    "terms": "torre de caída, atracción de feria, feria, juego, juego de feria, drop tower"
+                    "terms": "torre de caída, pilar de caída, juego mecánico, juego de feria"
                 },
                 "attraction/pirate_ship": {
                     "name": "Barco pirata",
-                    "terms": "barco pirata"
+                    "terms": "barco pirata, pirata, juego mecánico, juego de feria"
                 },
                 "attraction/river_rafting": {
-                    "name": "Rafting",
-                    "terms": "descenso de ríos, balsismo"
+                    "name": "Rafting de río",
+                    "terms": "descenso, río, balsa, balsismo, canotaje, descenso rápidos, deporte extremo, "
                 },
                 "attraction/roller_coaster": {
                     "name": "Montaña rusa",
-                    "terms": "montaña rusa"
+                    "terms": "montaña rusa, juego mecánico, juego de feria"
                 },
                 "attraction/train": {
                     "name": "Tren turístico",
-                    "terms": "tren, ferrocarril, atracción"
+                    "terms": "tren, ferrocarril, vagón, turismo, turístico"
                 },
                 "attraction/water_slide": {
                     "name": "Tobogán acuático",
@@ -3353,13 +3356,17 @@
                     "name": "Catering",
                     "terms": "abastecedor, proveedor, catering, cáterin, comida"
                 },
+                "craft/chimney_sweeper": {
+                    "name": "Deshollinador",
+                    "terms": "chimenea, fogón, hollín, limpiachimenea, limpieza de chimeneas"
+                },
                 "craft/clockmaker": {
                     "name": "Relojero",
                     "terms": "relojero, reloj, relojería"
                 },
                 "craft/confectionery": {
-                    "name": "Confitería",
-                    "terms": "confitería, confiteria, confitero"
+                    "name": "Confitero",
+                    "terms": "confite, hacer confite, dulce, fabricación de dulces, caramelos duros, caramelos de goma, gomitas, chicles, regaliz, algodón de azúcar, chocolates, trufas de chocolate, grageas, dulce de azúcar, caramelos, toffees"
                 },
                 "craft/distillery": {
                     "name": "Destilería",
@@ -3464,7 +3471,7 @@
                 },
                 "craft/sculptor": {
                     "name": "Escultor",
-                    "terms": "Escultor, artista "
+                    "terms": "escultura, artista, cincelador, imaginero, tallista, modelista, mármol, piedra, busto, escultura"
                 },
                 "craft/shoemaker": {
                     "name": "Zapatero",
@@ -3612,12 +3619,12 @@
                     "terms": "obstáculo, agua, golf"
                 },
                 "healthcare": {
-                    "name": "Centro de salud",
-                    "terms": "Centro de salud, clínica, doctor, enfermedad, salud, institución, enfermo, cirugía, bienestar"
+                    "name": "Asistencia sanitaria",
+                    "terms": "asistencia médica, atención médica, atención sanitaria, servicio de salud, seguro sanitario, caja, seguro privado, sistema de salud, clínica, doctor, consultorio, salud, institución, enfermo, cirugía, bienestar, salubridad, diagnóstico, enfermedad, lesiones, discapacidad, médicos, odontología, obstetricia, enfermería, optometría, audiología, psicología, laboratorio, fisoterapia, rehabilitación"
                 },
                 "healthcare/alternative": {
                     "name": "Medicina alternativa",
-                    "terms": "Medicina alternativa, acupuntura, antroposófico, kinesiología aplicada, aromaterapia, ayurveda, herbolario, homeopatía, hidroterapia, hipnosis, naturopatía, osteopatía, reflexología, reiki, shiatsu, tradicional, tuina, unani"
+                    "terms": "medicina alternativa, acupuntura, antroposófico, kinesiología aplicada, aromaterapia, ayurveda, herbolario, homeopatía, hidroterapia, hipnosis, naturopatía, osteopatía, reflexología, reiki, shiatsu, tradicional, tuina, unani, medicina alterna"
                 },
                 "healthcare/alternative/chiropractic": {
                     "name": "Quiropráctico",
@@ -4066,16 +4073,16 @@
                     "terms": "recreación, diversión, zona verde, patio, terreno de juegos, juegos, área de recreación"
                 },
                 "landuse/religious": {
-                    "name": "Área Religiosa",
-                    "terms": "terreno, religioso, religión, religion"
+                    "name": "Área religiosa",
+                    "terms": "terreno, religioso, religión, religion, monasterio, convento, seminario, casa de retiro, instituto religioso, capilla, templo, iglesia, lugar de oración, gruta"
                 },
                 "landuse/residential": {
                     "name": "Área residencial",
                     "terms": "área residencial, zona residencial, zona urbana, mancha urbana, urbanización, condominio"
                 },
                 "landuse/retail": {
-                    "name": "Área de tiendas y mercado minorista",
-                    "terms": "comercios, tiendas, mercado minorista"
+                    "name": "Área de tiendas",
+                    "terms": "comercios, tiendas, venta, minorista, al por menor, menudeo"
                 },
                 "landuse/vineyard": {
                     "name": "Viñedo",
@@ -4657,7 +4664,7 @@
                     "terms": "aseguradora, seguro, oficina de seguros"
                 },
                 "office/it": {
-                    "name": "Oficina de Tecnología de la Información",
+                    "name": "Oficina de tecnología de la información",
                     "terms": "computadora, información, software, tecnología, tecnologia, informática, informatica"
                 },
                 "office/lawyer": {
@@ -4941,6 +4948,10 @@
                     "name": "Cruce de ferrocarril (carretera)",
                     "terms": "cruce, tren, ferrocarril, carretera, camino, cruce ferroviario, paso a nivel"
                 },
+                "railway/light_rail": {
+                    "name": "Tren ligero",
+                    "terms": "lrt, tren, tranvía, tren urbano, tranvía urbano, tren eléctrico, tren rápido, tren ligero, tren tranvía, metro ligero"
+                },
                 "railway/milestone": {
                     "name": "Hito kilométrico ferroviario",
                     "terms": "hito, señal, marcador, kilométrico, mojón, vía, via, férrea, ferroviaria, ferroviario, ferrocarril, tren"
@@ -5010,7 +5021,7 @@
                 },
                 "shop/agrarian": {
                     "name": "Tienda de agricultura",
-                    "terms": "<translate with synonyms or related terms for 'Agriculture Shop', separated by commas>"
+                    "terms": "agricultura, agrícola, cultivo, invernadero, granja, insumos, máquinas, semillas, pesticidas, control plagas, fertilizantes, herramientas, maquinaria, tierra, huerto"
                 },
                 "shop/alcohol": {
                     "name": "Licorería",
@@ -5822,36 +5833,36 @@
                 "attribution": {
                     "text": "Términos y comentarios"
                 },
-                "description": "Imagen de satélite Premium de DigitalGlobe.",
-                "name": "Imágenes aéreas DigitalGlobe Premium"
+                "description": "Imágenes de satélite DigitalGlobe Premium.",
+                "name": "Imágenes DigitalGlobe Premium"
             },
             "DigitalGlobe-Premium-vintage": {
                 "attribution": {
-                    "text": "Términos y Observaciones"
+                    "text": "Términos y comentarios"
                 },
-                "description": "Límites de imágenes y fechas de captura. Las etiquetas aparecen en el nivel de zoom 14 y superior.",
-                "name": "Galería Antigua Premium de DigitalGlobe"
+                "description": "Límites de imágenes y fechas de captura. Las etiquetas aparecen en el nivel de acercamiento 14 y superior.",
+                "name": "Imágenes antiguas DigitalGlobe Premium"
             },
             "DigitalGlobe-Standard": {
                 "attribution": {
                     "text": "Términos y comentarios"
                 },
-                "description": "Imagen de satélite Standard de DigitalGlobe.",
-                "name": "Imágenes aéreas DigitalGlobe Standard"
+                "description": "Imagen de satélite DigitalGlobe Standard.",
+                "name": "Imágenes DigitalGlobe Standard"
             },
             "DigitalGlobe-Standard-vintage": {
                 "attribution": {
-                    "text": "Términos y Observaciones"
+                    "text": "Términos y comentarios"
                 },
-                "description": "Límites de galerías y fechas de captura. Las etiquetas aparecen en el nivel de zoom 14 y superior.",
-                "name": "Galería Antigua Estándar de DigitalGlobe"
+                "description": "Límites de imágenes y fechas de captura. Las etiquetas aparecen en el nivel de acercamiento 14 y superior.",
+                "name": "Imágenes antiguas DigitalGlobe Standard"
             },
             "EsriWorldImagery": {
                 "attribution": {
                     "text": "Términos y comentarios"
                 },
-                "description": "Imágenes Esri globales.",
-                "name": "Imágenes Esri globales"
+                "description": "Imágenes mundiales Esri.",
+                "name": "Imágenes mundiales Esri"
             },
             "MAPNIK": {
                 "attribution": {
@@ -5913,7 +5924,7 @@
                 "name": "Carreteras TIGER 2012"
             },
             "US-TIGER-Roads-2014": {
-                "description": "En nivel de acercamiento +16, datos del mapa de dominio público desde el US Census. En acercamientos inferiores, sólo cambios desde 2006 menos los cambios ya incorporados en OpenStreetMap",
+                "description": "En nivel de acercamiento 16 o más, datos del mapa de dominio público desde el US Census. En acercamientos inferiores, sólo cambios desde 2006 menos los cambios ya incorporados en OpenStreetMap",
                 "name": "Carreteras TIGER 2014"
             },
             "US-TIGER-Roads-2017": {
@@ -5961,7 +5972,7 @@
                 "attribution": {
                     "text": "basemap.at"
                 },
-                "description": "Capa de ortofoto proporcionada por basemap.at. «Sucesor» de las imágenes aéreas de geoimage.at.",
+                "description": "Capa de ortofoto proporcionada por basemap.at. «Sucesor» de las imágenes de geoimage.at.",
                 "name": "Ortofoto de basemap.at"
             },
             "hike_n_bike": {
@@ -5975,7 +5986,7 @@
                     "text": "Términos y comentarios"
                 },
                 "description": "Muestra los principales elementos que le ayudarán a orientarse.",
-                "name": "Superposición de localizador"
+                "name": "Capa de orientación"
             },
             "openpt_map": {
                 "attribution": {

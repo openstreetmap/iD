@@ -2027,7 +2027,7 @@
                     "label": "Anschlussleistung"
                 },
                 "recycling_accepts": {
-                    "label": "akzeptiert"
+                    "label": "Akzeptiert"
                 },
                 "recycling_type": {
                     "label": "Recycling Typ",
@@ -3715,7 +3715,7 @@
                 },
                 "highway/elevator": {
                     "name": "Aufzug",
-                    "terms": "Aufzug, Fahrstuhl, Lift, Personenaufzug, Aufzugsanlage"
+                    "terms": "Aufzug,Fahrstuhl,Lift,Personenaufzug,Aufzugsanlage"
                 },
                 "highway/footway": {
                     "name": "Fußweg",
@@ -4947,6 +4947,10 @@
                 "railway/level_crossing": {
                     "name": "Bahnübergang (Straße)",
                     "terms": "Eisenbagnkreuzung (Straße), Eisenbahnstraßenkreuzung"
+                },
+                "railway/light_rail": {
+                    "name": "Stadtbahngleise",
+                    "terms": "Stadtbahngleise"
                 },
                 "railway/milestone": {
                     "name": "Eisenbahn Meilenstein",

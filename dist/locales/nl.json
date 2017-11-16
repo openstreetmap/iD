@@ -3558,7 +3558,7 @@
                 },
                 "highway/cycleway": {
                     "name": "Fietspad",
-                    "terms": "rijwielpad,fietssnelweg,flitsfietspad"
+                    "terms": "rijwielpad,fietssnelweg,flitsfietspad,fietsoversteekplaats"
                 },
                 "highway/elevator": {
                     "name": "Lift"
@@ -3593,7 +3593,7 @@
                 },
                 "highway/path": {
                     "name": "Pad",
-                    "terms": "wandelpad,fietspad,gemengd wandelpad en fietspad,hikepad"
+                    "terms": "wandelpad,fietspad,gemengd wandelpad en fietspad,hikepad,fietsoversteekplaats"
                 },
                 "highway/primary": {
                     "name": "Hoofdweg",

@@ -1610,6 +1610,9 @@
                 "generator/type": {
                     "label": "Tipo"
                 },
+                "government": {
+                    "label": "Tipo"
+                },
                 "grape_variety": {
                     "label": "Variedades de Castas"
                 },
@@ -3353,6 +3356,10 @@
                     "name": "Catering",
                     "terms": "Caterer, Catering, Cattering, Comida"
                 },
+                "craft/chimney_sweeper": {
+                    "name": "Limpa-Chaminés",
+                    "terms": "chaminé, limpador de chaminés, limpar chaminés"
+                },
                 "craft/clockmaker": {
                     "name": "Relojoeiro",
                     "terms": "Clockmaker, Relógios"
@@ -4657,6 +4664,7 @@
                     "terms": "Insurance Office, Seguros, Seguro"
                 },
                 "office/it": {
+                    "name": "Escritório de Tecnologia da Informação",
                     "terms": "<translate with synonyms or related terms for 'Information Technology Office', separated by commas>"
                 },
                 "office/lawyer": {
@@ -4695,6 +4703,7 @@
                     "terms": "Detetive, Detetive Particular"
                 },
                 "office/quango": {
+                    "name": "Escritório de NGO Governamental",
                     "terms": "<translate with synonyms or related terms for 'Quasi-NGO Office', separated by commas>"
                 },
                 "office/research": {
@@ -4702,10 +4711,12 @@
                     "terms": "Research Office, Escritório de Investigação, Centro de Pesquisa"
                 },
                 "office/surveyor": {
+                    "name": "Empresa de Agrimensura",
                     "terms": "<translate with synonyms or related terms for 'Surveyor Office', separated by commas>"
                 },
                 "office/tax_advisor": {
-                    "terms": "<translate with synonyms or related terms for 'Tax Advisor Office', separated by commas>"
+                    "name": "Escritório de Assessor Fiscal",
+                    "terms": "Assessoria Fiscal, Acessoria Fiscal, Acecoria Fiscal, Açessoria Fiscal, Açecoria Fiscal, Açesoria Fiscal, Acessor Fiscal, Acecor Fiscal, Açessor Fiscal, Açecor Fiscal, Açesor Fiscal"
                 },
                 "office/telecommunication": {
                     "name": "Empresa de telecomunicações",
@@ -4937,6 +4948,10 @@
                     "name": "Passagem de nível (estrada)",
                     "terms": "Railway Crossing (Road)"
                 },
+                "railway/light_rail": {
+                    "name": "Metro Ligeiro",
+                    "terms": "Metrô leve, metro ligeiro, metropolitano de superfície, veículo leve sobre trilhos, comboio ligeiro"
+                },
                 "railway/milestone": {
                     "name": "Marco Quilométrico Ferroviário",
                     "terms": "Railway Milestone, marco quilométrico"
@@ -5003,6 +5018,10 @@
                 "shop": {
                     "name": "Loja",
                     "terms": "Loja, Venda, Vendedor"
+                },
+                "shop/agrarian": {
+                    "name": "Loja de Produtos Agrícolas",
+                    "terms": "produtos agrícolas, produtos agrículas"
                 },
                 "shop/alcohol": {
                     "name": "Loja de bebidas alcoólicas",

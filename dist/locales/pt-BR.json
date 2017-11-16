@@ -1408,7 +1408,11 @@
                     "label": "Tipo"
                 },
                 "crane/type": {
-                    "label": "Tipo de Grua"
+                    "label": "Tipo de Grua",
+                    "options": {
+                        "floor-mounted_crane": "Guindaste montado no chão",
+                        "portal_crane": "Guindaste Pórtico"
+                    }
                 },
                 "crop": {
                     "label": "Espécie cultivada"
@@ -1602,6 +1606,9 @@
                     "label": "Fonte"
                 },
                 "generator/type": {
+                    "label": "Tipo"
+                },
+                "government": {
                     "label": "Tipo"
                 },
                 "grape_variety": {
@@ -3340,6 +3347,9 @@
                     "name": "Fornecedor de refeições",
                     "terms": "Fornecedor de Mantimentos, Aprovisionador, cozinheiro, encomenda, marmita, PF, refeição,"
                 },
+                "craft/chimney_sweeper": {
+                    "name": "Limpador de Chaminé"
+                },
                 "craft/clockmaker": {
                     "name": "Relojoeiro",
                     "terms": "Relógios, relojoaria, Conserto de relógios, Reparos de relógios"
@@ -4544,6 +4554,9 @@
                     "name": "Escritório Financeiro",
                     "terms": "Escritório Financeiro, Financeiro"
                 },
+                "office/forestry": {
+                    "name": "Escritório da Administração Florestal"
+                },
                 "office/foundation": {
                     "name": "Escritório de Fundação"
                 },
@@ -4554,6 +4567,9 @@
                 "office/government/register_office": {
                     "name": "Cartório",
                     "terms": "tabelionato, registro civil, registro de imóveis"
+                },
+                "office/government/tax": {
+                    "name": "Escritório de Receita e Fisco"
                 },
                 "office/guide": {
                     "name": "Escritório de Guia Turístico"
@@ -4573,12 +4589,18 @@
                     "name": "Notário",
                     "terms": "Notário, Cartório"
                 },
+                "office/moving_company": {
+                    "name": "Escritório de Companhia de Mudanças"
+                },
                 "office/newspaper": {
                     "name": "Escritório de Jornal"
                 },
                 "office/ngo": {
                     "name": "Sede de ONG",
                     "terms": "ONG Escritório, Departamento de ONG, Organização não governamental"
+                },
+                "office/notary": {
+                    "name": "Tabelionato"
                 },
                 "office/physician": {
                     "name": "Médico"
@@ -4590,9 +4612,15 @@
                 "office/private_investigator": {
                     "name": "Escritório de Detetive"
                 },
+                "office/quango": {
+                    "name": "Escritório de Organização Não Governamental Quase Autônoma"
+                },
                 "office/research": {
                     "name": "Escritório de Pesquisa",
                     "terms": "pesquisa, pesquisas, pesquisador, escritório"
+                },
+                "office/tax_advisor": {
+                    "name": "Escritório de Assessoria Fiscal"
                 },
                 "office/telecommunication": {
                     "name": "Escritório de Telecomunicações",
@@ -4604,6 +4632,9 @@
                 },
                 "office/travel_agent": {
                     "name": "Agência de Viagens"
+                },
+                "office/water_utility": {
+                    "name": "Escritório de Companhia de Água"
                 },
                 "piste": {
                     "name": "Pista de Ski",
@@ -5424,6 +5455,9 @@
                 "tourism/viewpoint": {
                     "name": "Mirante",
                     "terms": "Mirante"
+                },
+                "tourism/wilderness_hut": {
+                    "name": "Abrigo Isolado"
                 },
                 "tourism/zoo": {
                     "name": "Zoológico",

@@ -1610,6 +1610,9 @@
                 "generator/type": {
                     "label": "種類"
                 },
+                "government": {
+                    "label": "類型"
+                },
                 "grape_variety": {
                     "label": "葡萄品種"
                 },
@@ -3352,6 +3355,10 @@
                 "craft/caterer": {
                     "name": "辦桌",
                     "terms": "辦桌,包辦伙食者,備辦宴會者"
+                },
+                "craft/chimney_sweeper": {
+                    "name": "煙囪清掃工 ",
+                    "terms": "<translate with synonyms or related terms for 'Chimney Sweeper', separated by commas>"
                 },
                 "craft/clockmaker": {
                     "name": "製鐘廠",
