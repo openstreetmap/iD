@@ -27,6 +27,42 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 -->
 
 
+# 2.5.1
+##### November 16, 2017
+
+#### :sparkles: Usability
+
+* Keep the highlighted feature selected when cancelling save mode ([#4407])
+
+[#4407]: https://github.com/openstreetmap/iD/issues/4407
+
+#### :bug: Bugfixes
+
+* Fix crash when exiting the walkthrough ([#4533])
+* Fix crash in Firefox when doing a lot of zoom (e.g. when pressing "Zoom in to edit" button) ([#4421])
+* Fix garbled label text - vertex labels being drawn over node labels ([#4473])
+* Don't use real filenames in the imagery_used field (for privacy) ([#4530])
+* Don't pull stale data from OSM after switching connection between live/dev servers ([#4288])
+* Switch OpenStreetCam from `http` to `https` to avoid mixed content issues ([#4527])
+* Fix issue where Mapillary sitelink was always linking to first image viewed ([#4526])
+
+[#4533]: https://github.com/openstreetmap/iD/issues/4533
+[#4530]: https://github.com/openstreetmap/iD/issues/4530
+[#4527]: https://github.com/openstreetmap/iD/issues/4527
+[#4526]: https://github.com/openstreetmap/iD/issues/4526
+[#4473]: https://github.com/openstreetmap/iD/issues/4473
+[#4421]: https://github.com/openstreetmap/iD/issues/4421
+[#4288]: https://github.com/openstreetmap/iD/issues/4288
+
+#### :rocket: Presets
+
+* Add preset for `railway=light_rail` ([#4531], [#4528], thanks [@Vonter])
+
+[#4531]: https://github.com/openstreetmap/iD/issues/4531
+[#4528]: https://github.com/openstreetmap/iD/issues/4528
+[@Vonter]: https://github.com/Vonter
+
+
 # 2.5.0
 ##### November 10, 2017
 
@@ -39,8 +75,8 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 * :pray: Special thank you to all of our new and first-time contributors who submitted pull requests for
 [Hacktoberfest](https://hacktoberfest.digitalocean.com/)!
 
-
 #### :tada: New Features
+
 * Add support for OpenStreetCam ([#4499], [#3795])
 * Add support for DigitalGlobe imagery vintage overlays (see [editor-layer-index/issues/#371], thanks [@marracci])
 * Add API parameter to conditionally disable feature types ([#4439], [#4393], thanks [@ferdibiflator])
@@ -60,8 +96,8 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 [@ferdibiflator]: https://github.com/ferdibiflator
 [@DzikowskiW]: https://github.com/DzikowskiW
 
-
 #### :sparkles: Usability
+
 * Improvements to Mapillary and OpenStreetCam usability ([#4512])
   * Traces are the only thing drawn at low zoom, circles appear at zoom 16, viewfield cones appear at zoom 18
   * Everything is drawn very dim by default
@@ -81,8 +117,8 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 [#3154]: https://github.com/openstreetmap/iD/issues/3154
 [@jaller94]: https://github.com/jaller94
 
-
 #### :bug: Bugfixes
+
 * Add code so `tunnel=building_passage` doesn't default to `layer=-1` ([#4516])
 * Clicking on a search result should take you to that location the first time ([#4276])
 * Fix label placement on areas that don't have an icon ([#4479])
@@ -108,20 +144,20 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 [@ferdibiflator]: https://github.com/ferdibiflator
 [@moshen]: https://github.com/moshen
 
-
 #### :rocket: Presets
+
 * Add `government=*` type field to Government Office preset ([#4517])
-* Change craft=sweep -> craft=chimney_sweeper ([#4510])
-* Add shop=agrarian preset and agrarian=* field ([#4507], thanks [@willemarcel])
-* Change max_age to min_age for min_age field ([#4506], thanks [@JamesKingdom])
-* Rename sculpter to sculptor not sculpter ([#4504], thanks [@simonpoole])
+* Change `craft=sweep` -> `craft=chimney_sweeper` ([#4510])
+* Add `shop=agrarian` preset and `agrarian=*` field ([#4507], thanks [@willemarcel])
+* Change `max_age` to `min_age` for `min_age` field ([#4506], thanks [@JamesKingdom])
+* Rename sculpter to sculptor ([#4504], thanks [@simonpoole])
 * Add preset for music schools ([#4500], thanks [@tyrasd])
 * Add `voltage`,`operator`,`ref` fields to several `power=*` presets.
 * Add `power=switch` preset ([#4441])
 * Drop `vertex` geometry from `office=*` presets (i.e. make them like `shop=*` presets)
 * Add preset for "Pedestrian Area" (highway=pedestrian + area=yes) ([#4488])
-* Rename tourism=chalet to "Holiday Cottage" and add search terms ([#4490])
-* Remove poi-foot icon from place=square ([#4486])
+* Rename `tourism=chalet` to "Holiday Cottage" and add search terms ([#4490])
+* Remove poi-foot icon from `place=square` ([#4486])
 * Add several presets for common `office=*` types ([#4491], [#4489], thanks [@Nmargolis])
 * Add preset for `tourism=wilderness_hut` ([#4485], [#4483], thanks [@YuliyaVeklicheva])
 * Fix reference links for `highway=crossing`, `footway=crossing` ([#4480])
@@ -208,13 +244,11 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 [#4398]: https://github.com/openstreetmap/iD/issues/4398
 [@mojodna]: https://github.com/mojodna
 
-
 #### :mortar_board: Walkthrough
 
 * Make sure "Add Field" scrolls into view during "Area" chapter of walkthrough ([#4417])
 
 [#4417]: https://github.com/openstreetmap/iD/issues/4417
-
 
 #### :rocket: Presets
 
@@ -247,7 +281,6 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 [@iandees]: https://github.com/iandees
 [@jgravois]: https://github.com/jgravois
 
-
 #### :sparkles: Usability
 
 * Change label for hashtag field to "Suggested Hashtags") ([#4396] thanks [@arka-nitd])
@@ -267,7 +300,6 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 [#3679]: https://github.com/openstreetmap/iD/issues/3679
 [@arka-nitd]: https://github.com/arka-nitd
 [@leegenes]: https://github.com/leegenes
-
 
 #### :bug: Bugfixes
 
@@ -304,7 +336,6 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 [@jgravois]: https://github.com/jgravois
 [@leegenes]: https://github.com/leegenes
 
-
 #### :earth_asia: Localization
 
 * Improve Address format for Poland ([#4328], thanks [@Teiron])
@@ -319,7 +350,6 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 [@Teiron]: https://github.com/Teiron
 [@manfredbrandl]: https://github.com/manfredbrandl
 [@willemarcel]: https://github.com/willemarcel
-
 
 #### :rocket: Presets
 
@@ -436,7 +466,6 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 [@kepta]: https://github.com/kepta
 [@JamesKingdom]: https://github.com/JamesKingdom
 
-
 #### :sparkles: Usability
 
 * In save mode, <kbd>esc</kbd> should cancel and return to browse mode ([#4230])
@@ -454,7 +483,6 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 [#4182]: https://github.com/openstreetmap/iD/issues/4182
 [#4042]: https://github.com/openstreetmap/iD/issues/4042
 
-
 #### :bug: Bugfixes
 
 * Include imagery offset when calculating tiles for background layer ([#4232])
@@ -464,7 +492,6 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 [#4232]: https://github.com/openstreetmap/iD/issues/4232
 [#4222]: https://github.com/openstreetmap/iD/issues/4222
 [#4184]: https://github.com/openstreetmap/iD/issues/4184
-
 
 #### :earth_asia: Localization
 
@@ -476,7 +503,6 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 [#4248]: https://github.com/openstreetmap/iD/issues/4248
 [@Stenive]: https://github.com/Stenive
 
-
 #### :hourglass: Performance
 
 * Use `requestIdleCallback` in supported browsers for deferred data fetching ([#4259], thanks [@kepta])
@@ -486,7 +512,6 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 
 [#4259]: https://github.com/openstreetmap/iD/issues/4259
 [@kepta]: https://github.com/kepta
-
 
 #### :rocket: Presets
 
