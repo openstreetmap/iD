@@ -2921,6 +2921,14 @@
         },
         "amenity/telephone": {
             "icon": "telephone",
+            "fields": [
+                "operator",
+                "phone",
+                "fee",
+                "payment_multi",
+                "covered",
+                "indoor"
+            ],
             "geometry": [
                 "point",
                 "vertex"
