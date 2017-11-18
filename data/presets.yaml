@@ -4831,8 +4831,8 @@ en:
         terms: '<translate with synonyms or related terms for ''Jeweler'', separated by commas>'
       shop/kiosk:
         # shop=kiosk
-        name: News Kiosk
-        terms: '<translate with synonyms or related terms for ''News Kiosk'', separated by commas>'
+        name: Kiosk
+        terms: '<translate with synonyms or related terms for ''Kiosk'', separated by commas>'
       shop/kitchen:
         # shop=kitchen
         name: Kitchen Design Store
