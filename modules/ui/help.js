@@ -13,29 +13,85 @@ import { uiShortcuts } from './shortcuts';
 import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
 
+import { icon } from 'intro/helper';
 
 export function uiHelp(context) {
     var key = t('help.key');
 
     var docKeys = [
-        'help.help',
-        'help.editing_saving',
-        'help.roads',
-        'help.gps',
-        'help.imagery',
-        'help.addresses',
-        'help.inspector',
-        'help.buildings',
-        'help.relations'];
+          ['help.help.',['intro','opendata','beforestart','opensource']],
+          ['help.overview.',['intro','features','screen','navigation']],
+          ['help.editing.',['intro','multiselect','edit','save','upload','comeback']],
+          ['help.roads.',['intro','move','connect','attributes','delete','create']],
+          ['help.gps.',['intro','using']],
+          ['help.buildings.',['intro','select','modify','create','delete']],
+          ['help.addresses.',['intro','nodup','recommendation','points']],
+          ['help.feature_editor.',['intro','select','fields','tags','undo']],
+          ['help.imagery.',['intro','background','offset']],
+          ['help.iconstools.',['icons','tools']],
+          ['help.relations.',['intro','types','multipolygons','turnrestrictions','maintain','edit']]
+        ];
+
+    var icont = {
+          more: icon('#icon-more', 'pre-text'),
+          apply: icon('#icon-apply', 'pre-text'),
+          alert: icon('#icon-alert', 'pre-text'),
+          avatar: icon('#icon-avatar', 'pre-text'),
+          forward: icon('#icon-forward', 'pre-text'),
+          backward: icon('#icon-backward', 'pre-text'),
+          fullscreen: icon('#icon-full-screen', 'pre-text'),
+          collapsescreen: icon('#icon-collapse-screen', 'pre-text'),
+          geolocate: icon('#icon-geolocate', 'pre-text'),
+          load: icon('#icon-load', 'pre-text'),
+          search: icon('#icon-search', 'pre-text'),
+          bug: icon('#icon-bug', 'pre-text'),
+          point: icon('#icon-point', 'pre-text'),
+          line: icon('#icon-line', 'pre-text'),
+          area: icon('#icon-area', 'pre-text'),
+          help: icon('#icon-help', 'pre-text'),
+          plus: icon('#icon-plus', 'pre-text'),
+          minus: icon('#icon-minus', 'pre-text'),
+          nearby: icon('#icon-nearby', 'pre-text'),
+          outlink: icon('#icon-out-link', 'pre-text'),
+          relation: icon('#icon-relation', 'pre-text'),
+          translate: icon('#icon-translate', 'pre-text'),
+          circularize: icon('#operation-circularize', 'pre-text'),
+          orthogonalize: icon('#operation-orthogonalize', 'pre-text'),
+          split: icon('#operation-split', 'pre-text'),
+          reflect_long: icon('#operation-reflect-long', 'pre-text'),
+          reflect_short: icon('#operation-reflect-short', 'pre-text'),
+          simplify: icon('#operation-simplify', 'pre-text'),
+          smooth: icon('#operation-smooth', 'pre-text'),
+          straighten: icon('#operation-straighten', 'pre-text'),
+          rotate: icon('#operation-rotate', 'pre-text'),
+          reverse: icon('#operation-reverse', 'pre-text'),
+          continue: icon('#operation-continue', 'pre-text'),
+          disconnect: icon('#operation-disconnect', 'pre-text'),
+          layers: icon('#icon-layers', 'pre-text'),
+          vertex: icon('#icon-vertex', 'pre-text'),
+          data: icon('#icon-data', 'pre-text'),
+          down: icon('#icon-down', 'pre-text'),
+          up: icon('#icon-up', 'pre-text'),
+          inspect: icon('#icon-inspect', 'pre-text'),
+          move: icon('#operation-move', 'pre-text'),
+          merge: icon('#operation-merge', 'pre-text'),
+          copy: icon('#operation-copy', 'pre-text'),
+          paste: icon('#operation-paste', 'pre-text'),
+          delete: icon('#operation-delete', 'pre-text'),
+          close: icon('#icon-close', 'pre-text'),
+          undo: icon('#icon-undo', 'pre-text'),
+          redo: icon('#icon-redo', 'pre-text'),
+          save: icon('#icon-save', 'pre-text'),
+          version: context.version
+        };
 
     var docs = docKeys.map(function(key) {
-        var text = t(key);
+        var text = key[1].reduce(function(all,part) { return all + t(key[0].concat(part),icont); }, '');
         return {
             title: text.split('\n')[0].replace('#', '').trim(),
             html: marked(text.split('\n').slice(1).join('\n'))
         };
     });
-
 
     function help(selection) {
 
