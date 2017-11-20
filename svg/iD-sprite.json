@@ -218,11 +218,15 @@
 
     "ferry-line":            { "viewBox": "660 140 60 60" },
     "pipeline-line":         { "viewBox": "720 140 60 60" },
+    "piste-line":            { "viewBox": "780 140 60 60" },
 
     "ferry-line-dashes":        { "fill": "inherit" },
     "ferry-line-stroke1":       { "fill": "currentColor" },
     "ferry-line-stroke2":       { "fill": "currentColor" },
     "pipeline-line-stroke":     { "fill": "currentColor" },
+    "piste-line-dashes":        { "fill": "inherit" },
+    "piste-line-stroke1":       { "fill": "currentColor" },
+    "piste-line-stroke2":       { "fill": "currentColor" },
 
     "relation":                 { "viewBox": "0 200 60 60" },
     "boundary":                 { "viewBox": "60 200 60 60" },
@@ -240,6 +244,9 @@
     "route-power":              { "viewBox": "780 200 60 60" },
     "route-water":              { "viewBox": "840 200 60 60" },
     "route-master":             { "viewBox": "0 260 60 60" },
+    "route-piste":              { "viewBox": "660 260 60 60" },
+    "route-line":               { "viewBox": "720 260 60 60" },
+    "route-subway":             { "viewBox": "780 260 60 60" },
 
     "route-bicycle-stroke":      { "fill": "currentColor" },
     "route-foot-stroke":         { "fill": "currentColor" },
@@ -247,6 +254,7 @@
     "route-ferry-stroke":        { "fill": "currentColor" },
     "route-water-stroke1":       { "fill": "currentColor" },
     "route-water-stroke2":       { "fill": "currentColor" },
+    "route-piste-stroke":        { "fill": "currentColor" },
 
     "restriction-no-straight-on":   { "viewBox": "60 260 60 60" },
     "restriction-no-u-turn":        { "viewBox": "120 260 60 60" },

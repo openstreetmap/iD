@@ -17095,7 +17095,7 @@
             "name": "Pipeline Route"
         },
         "type/route/piste": {
-            "icon": "route-foot",
+            "icon": "route-piste",
             "fields": [
                 "name",
                 "ref_route",
