@@ -3295,6 +3295,10 @@
         },
         {
             "key": "route",
+            "value": "light_rail"
+        },
+        {
+            "key": "route",
             "value": "pipeline"
         },
         {

@@ -5307,6 +5307,10 @@ en:
         # 'type=route, route=horse'
         name: Riding Route
         terms: '<translate with synonyms or related terms for ''Riding Route'', separated by commas>'
+      type/route/light_rail:
+        # 'type=route, route=light_rail'
+        name: Light Rail Route
+        terms: '<translate with synonyms or related terms for ''Light Rail Route'', separated by commas>'
       type/route/pipeline:
         # 'type=route, route=pipeline'
         name: Pipeline Route

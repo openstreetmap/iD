@@ -17061,6 +17061,23 @@
             },
             "name": "Riding Route"
         },
+        "type/route/light_rail": {
+            "icon": "route-tram",
+            "fields": [
+                "name",
+                "ref_route",
+                "operator",
+                "network"
+            ],
+            "geometry": [
+                "relation"
+            ],
+            "tags": {
+                "type": "route",
+                "route": "light_rail"
+            },
+            "name": "Light Rail Route"
+        },
         "type/route/pipeline": {
             "icon": "route-pipeline",
             "fields": [

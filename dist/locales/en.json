@@ -5769,6 +5769,10 @@
                     "name": "Riding Route",
                     "terms": ""
                 },
+                "type/route/light_rail": {
+                    "name": "Light Rail Route",
+                    "terms": ""
+                },
                 "type/route/pipeline": {
                     "name": "Pipeline Route",
                     "terms": ""

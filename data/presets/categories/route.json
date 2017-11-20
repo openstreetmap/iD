@@ -10,6 +10,7 @@
         "type/route/horse",
         "type/route/bus",
         "type/route/train",
+        "type/route/light_rail",
         "type/route/tram",
         "type/route/ferry",
         "type/route/power",
