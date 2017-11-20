@@ -558,34 +558,33 @@ en:
       intro: |
         # Help
 
-        With this [OpenStreetMap](https://www.openstreetmap.org/) editor you can
-        add and update the free and editable map of the world online with your browser.
+        Welcome to the iD editor for [OpenStreetMap](https://www.openstreetmap.org/).
+        With this editor you can update OpenStreetMap right from your web browser.
 
       opendata: |
         ### Open Data
 
-        Edits that you make on this map will be freely available to everyone who uses
-        OpenStreetMap. They can be visible on every map based on OpenStreetMap.
-        Your edits can be based on personal knowledge, on-the-ground survey, or
-        background imagery.
-        [Copying from commercial sources](https://www.openstreetmap.org/copyright)
-        like Google Maps is strictly forbidden.
+        Edits that you make on this map will be visible to everyone who uses
+        OpenStreetMap. Your edits can be based on personal knowledge, on-the-ground surveying,
+        or aerial or streetlevel imagery. Copying from commercial sources, like Google Maps,
+        [is strictly forbidden](https://www.openstreetmap.org/copyright).
 
       beforestart: |
         ### Before you start
 
         You should be familiar with OpenStreetMap and this editor before you start editing.
-        The walkthrough will teach you the basics of editing on OpenStreetMap and you will
-        practice using the editor. It takes about 15 minutes and then you can start editing.
+        iD contains a builtin walkthrough to teach you the basics of editing OpenStreetMap.
+        Click "Start the Walkthrough" on this screen to take the tutorial - it takes only
+        about 15 minutes.
 
       opensource: |
         ### Open Source
 
-        The iD editor is a collaborative project and you use version {version} now.
-        You can contribute and {translate}
-        [help translating](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating)
-        or {bug} [report a bug](https://github.com/openstreetmap/iD/issues).
-        The source code is available for [contributions on GitHub](https://github.com/openstreetmap/iD).
+        The iD editor is a collaborative open source project, and you are using version {version} now.
+        The source code is available [on GitHub](https://github.com/openstreetmap/iD).
+
+        You can help us by [translating iD](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating)
+        or [reporting bugs or suggestions](https://github.com/openstreetmap/iD/issues).
 
     overview:
       intro: |
