@@ -558,14 +558,14 @@ en:
       intro: |
         # Help
 
-        With this [OpenStreetMap](https://www.openstreetmap.org/) editor you can 
+        With this [OpenStreetMap](https://www.openstreetmap.org/) editor you can
         add and update the free and editable map of the world online with your browser.
 
       opendata: |
         ### Open Data
 
         Edits that you make on this map will be freely available to everyone who uses
-        OpenStreetMap. They can be visible on every map based on OpenStreetMap. 
+        OpenStreetMap. They can be visible on every map based on OpenStreetMap.
         Your edits can be based on personal knowledge, on-the-ground survey, or
         background imagery.
         [Copying from commercial sources](https://www.openstreetmap.org/copyright)
@@ -615,7 +615,7 @@ en:
         ### Navigation
 
         You can drag the map by pressing and holding the left mouse button
-        while moving the mouse around. This is also called panning. 
+        while moving the mouse around. This is also called panning.
         You can also use the arrow keys on your keyboard, using the keys
         while holding 'Ctrl' will move the map for one screenful.
         You can zoom in or out by scrolling with the mouse wheel or trackpad,
@@ -627,7 +627,7 @@ en:
         # Editing & Saving
 
         To select a feature you want to edit, click on it on the map
-        or search for it by name in the feature editor. 
+        or search for it by name in the feature editor.
         Selected features are drawn with a pulsing glow and in the
         feature editor the feature's type and attributes are shown.
         If you right-click on it, the editing menu appears.
@@ -786,11 +786,11 @@ en:
         What you can do with buildings applies to most types of areas.
 
       select: |
-        ### Selecting 
+        ### Selecting
 
         You can select a building by clicking on its border. the pulsing glow will
         will become visible, all nodes will be shown as circles and the
-        feature editor on the left will show the type of the building and 
+        feature editor on the left will show the type of the building and
         attributes like name, levels, and address.
 
       modify: |
@@ -883,7 +883,7 @@ en:
         is, like whether it's a highway or residential road, supermarket or cafe.
         The feature editor will display buttons for common feature types, and you can
         find others by typing what you're looking for in the search box.
- 
+
         Click the 'i' in the top-right-hand corner of a feature type button to
         learn more about it. Click a button to choose that type.
 
@@ -892,7 +892,7 @@ en:
 
         After you choose a feature type, or when you select a feature that already
         has a type assigned, the feature editor will display fields with details about
-        the feature like its name or speed limit for a road or levels and address for a building. 
+        the feature like its name or speed limit for a road or levels and address for a building.
 
         Below the fields you see, you can click the `Add field` dropdown to add
         other details, like a Wikipedia link, wheelchair access, and more.
@@ -905,7 +905,7 @@ en:
         cannot add required fields, then you can add additional tags with the `+` button.
         [Taginfo](https://taginfo.openstreetmap.org/) is a great resource to learn more
         about popular tag combinations.
-  
+
       undo: |
         ### Undo & Redo
 
@@ -1040,7 +1040,7 @@ en:
         ### Multipolygons
 
         Draw two or more areas and select them. Then press either press
-        the `C` shortcut key or right-click one of the selected areas and 
+        the `C` shortcut key or right-click one of the selected areas and
         select the {merge} 'Merge' tool.  This will create a new multipolygon
         relation with all selected areas as members. The areas will have the role
         outer except When an area is inside another area it will have the role inner
@@ -1073,7 +1073,7 @@ en:
         To create a new relation, select the first feature that should be a member,
         click the `+` button in the 'All relations' section, and select 'New relation...'.
 
-        To remove a feature from a relation, select the feature and click the {delete} 
+        To remove a feature from a relation, select the feature and click the {delete}
         'Delete' button next to the relation you want to remove it from.
 
   intro:
