@@ -5949,12 +5949,26 @@
                 "description": "Premium DigitalGlobe satellite imagery.",
                 "name": "DigitalGlobe Premium Imagery"
             },
+            "DigitalGlobe-Premium-vintage": {
+                "attribution": {
+                    "text": "Terms & Feedback"
+                },
+                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 14 and higher.",
+                "name": "DigitalGlobe Premium Imagery Vintage"
+            },
             "DigitalGlobe-Standard": {
                 "attribution": {
                     "text": "Terms & Feedback"
                 },
                 "description": "Standard DigitalGlobe satellite imagery.",
                 "name": "DigitalGlobe Standard Imagery"
+            },
+            "DigitalGlobe-Standard-vintage": {
+                "attribution": {
+                    "text": "Terms & Feedback"
+                },
+                "description": "Imagery boundaries and capture dates. Labels appear at zoom level 14 and higher.",
+                "name": "DigitalGlobe Standard Imagery Vintage"
             },
             "EsriWorldImagery": {
                 "attribution": {
