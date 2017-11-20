@@ -17143,6 +17143,23 @@
             },
             "name": "Road Route"
         },
+        "type/route/subway": {
+            "icon": "route-subway",
+            "fields": [
+                "name",
+                "ref_route",
+                "operator",
+                "network"
+            ],
+            "geometry": [
+                "relation"
+            ],
+            "tags": {
+                "type": "route",
+                "route": "subway"
+            },
+            "name": "Subway Route"
+        },
         "type/route/train": {
             "icon": "route-train",
             "fields": [

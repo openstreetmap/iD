@@ -3315,6 +3315,10 @@
         },
         {
             "key": "route",
+            "value": "subway"
+        },
+        {
+            "key": "route",
             "value": "train"
         },
         {

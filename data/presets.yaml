@@ -5327,6 +5327,10 @@ en:
         # 'type=route, route=road'
         name: Road Route
         terms: '<translate with synonyms or related terms for ''Road Route'', separated by commas>'
+      type/route/subway:
+        # 'type=route, route=subway'
+        name: Subway Route
+        terms: '<translate with synonyms or related terms for ''Subway Route'', separated by commas>'
       type/route/train:
         # 'type=route, route=train'
         name: Train Route

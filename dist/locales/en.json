@@ -5789,6 +5789,10 @@
                     "name": "Road Route",
                     "terms": ""
                 },
+                "type/route/subway": {
+                    "name": "Subway Route",
+                    "terms": ""
+                },
                 "type/route/train": {
                     "name": "Train Route",
                     "terms": ""
