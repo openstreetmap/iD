@@ -5777,6 +5777,10 @@
                     "name": "Pipeline Route",
                     "terms": ""
                 },
+                "type/route/piste": {
+                    "name": "Piste/Ski Route",
+                    "terms": ""
+                },
                 "type/route/power": {
                     "name": "Power Route",
                     "terms": ""

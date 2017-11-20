@@ -8,6 +8,7 @@
         "type/route/foot",
         "type/route/hiking",
         "type/route/horse",
+        "type/route/piste",
         "type/route/bus",
         "type/route/train",
         "type/route/light_rail",

@@ -17094,6 +17094,23 @@
             },
             "name": "Pipeline Route"
         },
+        "type/route/piste": {
+            "icon": "route-foot",
+            "fields": [
+                "name",
+                "ref_route",
+                "operator",
+                "network"
+            ],
+            "geometry": [
+                "relation"
+            ],
+            "tags": {
+                "type": "route",
+                "route": "piste"
+            },
+            "name": "Piste/Ski Route"
+        },
         "type/route/power": {
             "icon": "route-power",
             "fields": [

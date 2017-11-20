@@ -3303,6 +3303,10 @@
         },
         {
             "key": "route",
+            "value": "piste"
+        },
+        {
+            "key": "route",
             "value": "power"
         },
         {

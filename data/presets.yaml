@@ -5315,6 +5315,10 @@ en:
         # 'type=route, route=pipeline'
         name: Pipeline Route
         terms: '<translate with synonyms or related terms for ''Pipeline Route'', separated by commas>'
+      type/route/piste:
+        # 'type=route, route=piste'
+        name: Piste/Ski Route
+        terms: '<translate with synonyms or related terms for ''Piste/Ski Route'', separated by commas>'
       type/route/power:
         # 'type=route, route=power'
         name: Power Route
