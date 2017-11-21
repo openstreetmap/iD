@@ -20,12 +20,12 @@ export function uiHelp(context) {
 
     var docKeys = [
         ['help.help.',['intro','opendata','beforestart','opensource']],
-        ['help.overview.',['intro','features','navigation','keyboard']],
-        ['help.editing.',['intro','multiselect','edit','save','upload','comeback']],
-        ['help.roads.',['intro','move','connect','attributes','delete','create']],
-        ['help.buildings.',['intro','select','modify','create','delete']],
-        ['help.addresses.',['intro','nodup','recommendation','points']],
+        ['help.overview.',['intro','features','navigation']],
+        ['help.editing.',['intro','multiselect','undo_redo','save','upload','backups','keyboard']],
         ['help.feature_editor.',['intro','select','fields','tags','undo']],
+        ['help.points.',['intro','add_point','move_point','delete_point']],
+        ['help.lines.',['intro','add_line','modify_line','connect_line','disconnect_line','move_line','delete_line']],
+        ['help.areas.',['intro','point_or_area','add_area','square_area','modify_area','delete_area']],
         ['help.imagery.',['intro','sources','offset']],
         ['help.streetlevel.',['intro','using','viewer']],
         ['help.gps.',['intro','using']],
