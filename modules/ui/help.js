@@ -23,12 +23,12 @@ export function uiHelp(context) {
         ['help.overview.',['intro','features','navigation','keyboard']],
         ['help.editing.',['intro','multiselect','edit','save','upload','comeback']],
         ['help.roads.',['intro','move','connect','attributes','delete','create']],
-        ['help.gps.',['intro','using']],
-        ['help.streetlevel.',['intro','using','viewer']],
         ['help.buildings.',['intro','select','modify','create','delete']],
         ['help.addresses.',['intro','nodup','recommendation','points']],
         ['help.feature_editor.',['intro','select','fields','tags','undo']],
-        ['help.imagery.',['intro','background','offset']],
+        ['help.imagery.',['intro','sources','offset']],
+        ['help.streetlevel.',['intro','using','viewer']],
+        ['help.gps.',['intro','using']],
         ['help.relations.',['intro','types','multipolygons','turnrestrictions','maintain','edit']]
     ];
 

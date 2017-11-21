@@ -566,8 +566,8 @@ en:
 
         Edits that you make on this map will be visible to everyone who uses
         OpenStreetMap. Your edits can be based on personal knowledge, on-the-ground surveying,
-        or aerial or streetlevel imagery. Copying from commercial sources, like Google Maps,
-        [is strictly forbidden](https://www.openstreetmap.org/copyright).
+        or imagery collected from aerial or street level photos. Copying from commercial
+        sources, like Google Maps, [is strictly forbidden](https://www.openstreetmap.org/copyright).
 
       beforestart: |
         ### Before you start
@@ -751,63 +751,11 @@ en:
         it by clicking on the intersection point. When you're done drawing, double-click
         or press `Return` or `Enter` on your keyboard.
 
-    gps:
-      intro: |
-        # GPS Traces
-
-        Collected GPS traces are a valuable source of data for OpenStreetMap. This editor
-        supports `.gpx`, `.geojson`, and `.kml` files on your local computer. You can collect
-        GPS traces with a smartphone, sports watch, or other GPS device.
-
-        For information on how to perform a GPS survey, read
-        [Mapping with a smartphone, GPS, or paper](http://learnosm.org/en/mobile-mapping/).
-
-      using: |
-        ### Using
-
-        To use a GPS trace for mapping, drag and drop the data file onto the map
-        editor. If it's recognized, it will be drawn on the map as a bright purple
-        line. Click on the {data} 'Map data' panel on the side of the map to enable,
-        disable, or zoom to your GPS data.
-
-        The GPS track isn't sent to OpenStreetMap - the best way to use it is to
-        draw on the map, using it as a guide for the new features that you add.
-
-        You can also [upload your GPS data to OpenStreetMap](https://www.openstreetmap.org/trace/create)
-        for other users to use.
-
-    streetlevel:
-      intro: |
-        # Street Level Photos
-
-        Street level photos provide a ground-truth prespective of an area, useful
-        for mapping traffic signs, businesses, and other details that you can't
-        see from satellite and aerial images. The iD editor supports street level
-        photos from [Mapillary](https://www.mapillary.com) and [OpenStreetCam](https://www.openstreetcam.org).
-
-      using: |
-        ### Using
-
-        To use streetlevel photos for mapping, click on the {data} 'Map data' panel on the
-        side of the map to enable or disable the available photo layers.
-
-        When enabled, the photo layer will display a line along the sequence of photos.
-        At higher zooms you will see a circle at each photo location, and at even higher
-        zooms you will see a viewfield to indicate the direction that the photo was taken.
-
-      viewer: |
-
-        When you click on one of the photo locations, a photo viewer will appear in the
-        bottom corner of the map. The photo viewer contains controls to step forward and
-        backward in the image sequence. It will also show the username of the person who
-        captured the image, the date it was captured, and a link to view the image on
-        the original site.
-
     buildings:
       intro: |
         # Buildings & Areas
 
-        OpenStreetMap is the world's largest database of buildings.
+        OpenStreetMap is the world's largest freely-available database of buildings.
         You can improve this database. Buildings are the most used type
         of areas, others are residential areas, farmland, forests, lakes, or ponds.
         What you can do with buildings applies to most types of areas.
@@ -942,28 +890,90 @@ en:
 
     imagery:
       intro: |
-        # Imagery
+        # Background Imagery
 
-        Aerial imagery is an important resource for mapping. A combination of
-        airplane flyovers, satellite views, and freely-compiled sources are available
-        in the editor under the {layers} `Background settings` menu on the right.
+        Background imagery is an important resource for mapping, and is displayed
+        beneath the map data. This imagery can be aerial photos collected
+        from satellites, airplanes, and drones, or it can be scanned historical
+        maps or other freely available source data.
 
-      background: |
-        ### Background
+        To see which imagery sources are available for editing, click on
+        the {layers} 'Background settings' panel on the side of the map.
 
-        By default a [Bing Maps](https://www.bing.com/maps/) satellite layer is
-        presented in the editor, but as you pan and zoom the map to new geographical
-        areas, new sources from the [Open Imagery Network](https://openimagerynetwork.github.io/)
-        will become available.
+      sources: |
+        ### Sources
+
+        By default, a [Bing Maps](https://www.bing.com/maps/) satellite layer is
+        displayed in the editor. Depending on where you are editing, other imagery
+        sources will be available. Some may be newer or have higher resolution,
+        so it is always useful to check and see which layer is the best one to use
+        as a mapping reference.
 
       offset: |
         ### Offset
 
-        Imagery is sometimes offset from the map data because of a mistake on the
-        imagery provider's side. If you see a lot of roads shifted from the background,
-        don't immediately move them all to match the background. Instead you can adjust
-        the imagery so that it matches the existing data by clicking 'Fix alignment' at
-        the bottom of the Background Settings.
+        Imagery is sometimes offset slightly from accurate map data.
+
+        If you see a lot of roads or buildings shifted from the background imagery,
+        don't move them all to match the background. Instead, you can adjust
+        the background so that it matches the existing data by expanding the
+        'Adjust Imagery Offset' section at the bottom of the Background Settings pane.
+
+        Click on the small triangles to adjust the imagery offset in small steps,
+        or press the mouse down and drag within the grey square to slide the imagery
+        into alignment.
+
+    streetlevel:
+      intro: |
+        # Street Level Photos
+
+        Street level photos provide a ground-truth prespective of an area, useful
+        for mapping traffic signs, businesses, and other details that you can't
+        see from satellite and aerial images. The iD editor supports street level
+        photos from [Mapillary](https://www.mapillary.com) and [OpenStreetCam](https://www.openstreetcam.org).
+
+      using: |
+        ### Using
+
+        To use street level photos for mapping, click on the {data} 'Map data' panel on the
+        side of the map to enable or disable the available photo layers.
+
+        When enabled, the photo layer will display a line along the sequence of photos.
+        At higher zooms you will see a circle at each photo location, and at even higher
+        zooms you will see a viewfield to indicate the direction that the photo was taken.
+
+      viewer: |
+
+        When you click on one of the photo locations, a photo viewer will appear in the
+        bottom corner of the map. The photo viewer contains controls to step forward and
+        backward in the image sequence. It will also show the username of the person who
+        captured the image, the date it was captured, and a link to view the image on
+        the original site.
+
+    gps:
+      intro: |
+        # GPS Traces
+
+        Collected GPS traces are a valuable source of data for OpenStreetMap. This editor
+        supports `.gpx`, `.geojson`, and `.kml` files on your local computer. You can collect
+        GPS traces with a smartphone, sports watch, or other GPS device.
+
+        For information on how to perform a GPS survey, read
+        [Mapping with a smartphone, GPS, or paper](http://learnosm.org/en/mobile-mapping/).
+
+      using: |
+        ### Using
+
+        To use a GPS trace for mapping, drag and drop the data file onto the map
+        editor. If it's recognized, it will be drawn on the map as a bright purple
+        line. Click on the {data} 'Map data' panel on the side of the map to enable,
+        disable, or zoom to your GPS data.
+
+        The GPS track isn't sent to OpenStreetMap - the best way to use it is to
+        draw on the map, using it as a guide for the new features that you add.
+
+        You can also [upload your GPS data to OpenStreetMap](https://www.openstreetmap.org/trace/create)
+        for other users to use.
 
     relations:
       intro: |
