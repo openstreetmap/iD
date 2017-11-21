@@ -590,38 +590,33 @@ en:
       intro: |
         # Overview
 
+      navigation: |
+        ### Navigation
+
+        You can drag the map by pressing and holding the left mouse button while
+        moving the mouse around. You can also use the arrow keys on your keyboard.
+
+        You can zoom in or out by scrolling with the mouse wheel or trackpad,
+        or by clicking the {plus} / {minus} buttons along the side of the map.
+
       features: |
         ### Map Features
 
         We use the word *features* to describe things that appear on the map,
         such as roads, buildings, or points of interest. Anything in the real
-        world can be mapped as a feature on OpenStreetMap. Features are
+        world can be mapped as a feature on OpenStreetMap. Map features are
         represented on the map using *points*, *lines*, or *areas*.
 
         In OpenStreetmap, points are sometimes called *nodes*, and lines and areas
         are sometimes called *ways*.
 
-      navigation: |
-        ### Navigation
-
-        You can drag the map by pressing and holding the left mouse button
-        while moving the mouse around. This is also called *panning*.
-
-        You can zoom in or out by scrolling with the mouse wheel or trackpad,
-        or by clicking the {plus} / {minus} buttons along the side of the map.
-
-      keyboard: |
-        ### Keyboard Shortcuts
-
-        You can view a list of keyboard shortcuts by pressing the `?` key.
-
     editing:
       intro: |
         # Editing & Saving
 
-        `Left-Click` on a feature to select it. This will highlight the
-        feature with a pusling glow, and the sidebar will display more details,
-        such as its name or address.
+        `Left-click` on a feature to select it. This will highlight the
+        feature with a pusling glow, and the sidebar will display details
+        about that feature, such as it's name or address.
 
         `Right-click` on a map feature to display the editing menu, which shows
         the commands that are available, such as rotating, moving, and deleting.
@@ -636,8 +631,8 @@ en:
         then press and hold the left mouse button, and drag the mouse to draw a
         selection lasso. All of the points inside the lasso area will be selected.
 
-      edit: |
-        ### Edit
+      undo_redo: |
+        ### Undo and Redo
 
         When you make changes to the map, these are stored locally until you save
         them to the server. Don't worry if you make a mistake - until the edits are
@@ -647,11 +642,11 @@ en:
       save: |
         ### Save
 
-        Click `Save` to finish your edits and send them to the OpenStreetMap
-        server. You should remember to save your work frequently!
+        Click {save} `Save` to finish your edits and send them to OpenStreetMap.
+        You should remember to save your work frequently!
 
         On the save screen, you'll have a chance to review what you've done.
-        The editor will perform a basic check for missing data and may offer
+        iD will also perform some basic checks for missing data and may offer
         helpful suggestions and warnings if something doesn't seem right.
 
       upload: |
@@ -662,187 +657,191 @@ en:
         Then click `Upload` to send your changes to OpenStreetMap, where they will be
         merged into the map and publicly visible to everyone.
 
-      comeback: |
+      backups: |
+        ### Automatic Backups
+
         If you can't finish your edits in one sitting, for example if your computer
-        crashes or you close the browser tab, your edits are still saved locally.
-        You can come back later (on the same browser and computer), and the
-        editor will offer to restore your work.
+        crashes or you close the browser tab, your edits are still saved locally
+        in your browser's storage. You can come back later (on the same browser
+        and computer), and iD will offer to restore your work.
 
-    roads:
+      keyboard: |
+        ### Keyboard Shortcuts
+
+        You can view a list of keyboard shortcuts by pressing the `?` key.
+
+    points:
       intro: |
-        # Roads & Lines
+        # Points
 
-        You can create, fix, and delete roads with this editor. Roads can be all
-        kinds: paths, highways, trails, cycle ways, and more - any used segment
-        is mappable. Roads are the most used type of line. Other examples of
-        lines are waterways, walls, and fences. What you can do with roads
-        applies to most types of lines.
+        *Points* can be used to represent features such as shops, restaurants, and
+        monuments. They mark a specific location, and describe what's there.
 
-      modifying: |
-        ### Modifying
+      add_point: |
+        ### Adding Points
 
-        Often you'll see roads that aren't aligned to the imagery or
-        to a GPS track. You can adjust these roads so they are in the correct place.
-        Click on a road to select it. All nodes of the road will be shown as small circles.
-        You can drag the nodes to better locations.
-        You can also create new nodes either by double-clicking on the road or by
-        moving the small triangles at the midpoints between nodes.
+        To add a point, click the {point} `Point` button on the toolbar
+        at the top of the map, or press the shortcut key `1`. This will
+        change the mouse cursor to a cross symbol.
 
-      move: |
-        ### Moving
+        To place the new point on the map, position the mouse cursor where the point
+        should go, then `left-click` or press the `spacebar`.
 
-        If you `right-click` the road, the editing menu will appear.
-        You can select the {move} 'Move' tool to move the entire road at one time.
-        Then click again to place the road in its new location.
-        You can also press the `M` shortcut key to move a road.
+      move_point: |
+        ### Moving Points
 
-      connect: |
-        ### Connecting
+        To move a point, place the mouse cursor over the point, then press the left
+        mouse button and hold it down while dragging the point to its new location.
+
+      delete_point: |
+        ### Deleting Points
+
+        It's OK to delete features that don't exist in the real world. Deleting a feature
+        from OpenStreetMap removes it from the map that everyone uses, so you should make
+        sure a feature is really gone before you delete it.
+
+        To delete a point, `right-click` on the point to select it and
+        show the edit menu, then use the {delete} `Delete` command.
+        You can also press the `delete` key on your keyboard.
+
+    lines:
+      intro: |
+        # Lines & Roads
+
+        *Lines* are used to represent features such as roads, railroads, and rivers.
+        Lines should be drawn down the center of the feature that they represent.
+
+      add_line: |
+        ### Adding Lines
+
+        To add a line, click the {line} `Line` button on the toolbar
+        at the top of the map, or press the shortcut key `2`. This will
+        change the mouse cursor to a cross symbol.
+
+        Next, position the mouse cursor where the line should begin and `left-click`
+        or press the `spacebar` to begin placing nodes along the line.
+        Continue placing more nodes by `left-clicking` or pressing `spacebar`.
+        While drawing, you can zoom in or drag the map in order to add more detail.
+
+        To finish a line, press `enter` or click on the last node again.
+
+      modify_line: |
+        ### Modifying Lines
+
+        Often you'll see lines that aren't shaped correctly, for example a road
+        that does not match up with the background imagery. To adjust the shape
+        of a line, first `left-click` to select it. All nodes of the line will be
+        drawn as small circles. You can then drag the nodes to better locations.
+
+        You can also create new nodes along a line either by `double-clicking` on
+        the line or by dragging the small triangles at the midpoints between nodes.
+
+      connect_line: |
+        ### Connecting Lines
 
         Having roads connected properly is important for the map
         and essential for providing driving directions.
 
         The connections between roads are drawn with grey circles.
-        The endpoints of a road are drawn with larger white circles if they
+        The endpoints of a line are drawn with larger white circles if they
         don't connect to anything.
 
-        To connect a road to another feature, drag one of its nodes onto the
-        other feature in order to join them.
-
-        To disconnect a road from another feature, right-click the connecting
-        node and select the {disconnect} 'Disconnect' tool or press the `D`
-        shortcut key.
+        To connect a line to another feature, drag one of its nodes onto the
+        other feature to connect them.
 
         If you know that the connection has traffic lights or crosswalks,
         you can add them by selecting the connecting node and using the
         feature editor to select the correct feature's type.
 
-      attributes: |
-        ### Attributtes
+      disconnect_line: |
+        ### Disconnecting Lines
 
-        When a road is selected, the feature editor in the sidebar will show
-        the type of the road and many attributes like name, speed limit,
-        and surface. You can modify fields or even add new ones.
+        To disconnect a road from another feature, `right-click` the connecting
+        node and select the {disconnect} `Disconnect` tool.
 
-      delete: |
-        ### Deleting
+      move_line: |
+        ### Moving Lines
 
-        If a road is entirely incorrect - you can see that it doesn't exist in satellite
-        imagery and ideally have confirmed locally that it's not present - you can delete
-        it, which removes it from the map. Be cautious when deleting features -
-        like any other edit, the results are seen by everyone and satellite imagery
-        is often out of date, so the road could simply be newly built.
+        To move an entire line, `right-click` the line and select the {move}
+        `Move` tool from the editing menu. Then move the mouse, and `left-click`
+        to place the line in a new location.
 
-        You can delete a road by clicking on it to select it, then pressing the 'Delete'
-        key or right-clicking it and then using the {delete} 'Delete' tool.
+        Lines that are connected to other features will stay connected as you
+        move the line to a new location. iD may prevent you from moving a line
+        across another connected line.
 
-      create: |
-        ### Creating
+      delete_line: |
+        ### Deleting Lines
 
-        Found somewhere there should be a road but there isn't? Click the {line} Line
-        icon in the top-left of the map or press the shortcut key `2` to start drawing
-        a line.
+        If a line is entirely incorrect, for example a road that doesn't exist
+        in the real world, it's OK to delete it. Be cautious when deleting features -
+        the background imagery you are using might be outdated, and a road that
+        looks wrong could simply be newly built.
 
-        Click on the start of the road on the map to start drawing. If the road
-        branches off from an existing road, start by clicking on the place where they connect.
+        To delete a line, `right-click` on the line to select it and
+        show the edit menu, then use the {delete} `Delete` command.
+        You can also press the `delete` key on your keyboard.
 
-        Then click on points along the road so that it follows the right path, according
-        to satellite imagery or GPS. If the road you are drawing crosses another road, connect
-        it by clicking on the intersection point. When you're done drawing, double-click
-        or press `Return` or `Enter` on your keyboard.
-
-    buildings:
+    areas:
       intro: |
-        # Buildings & Areas
+        # Areas & Buildings
 
-        OpenStreetMap is the world's largest freely-available database of buildings.
-        You can improve this database. Buildings are the most used type
-        of areas, others are residential areas, farmland, forests, lakes, or ponds.
-        What you can do with buildings applies to most types of areas.
+        *Areas* are used to show the boundaries of features like lakes, buildings,
+        and residential areas. Areas should be traced around the edge of the
+        feature that they represent, for example, around the base of a building.
 
-      select: |
-        ### Selecting
+      point_or_area: |
+        ### Points or Areas?
 
-        You can select a building by clicking on its border. the pulsing glow will
-        will become visible, all nodes will be shown as circles and the
-        feature editor on the left will show the type of the building and
-        attributes like name, levels, and address.
+        Many features can be represented as points or areas.
+        It is recommended to map buildings and property outlines as areas
+        whenever possible, and to map businesses, amenities, and other features
+        that operate within buildings as points placed inside the building area.
 
-      modify: |
-        ### Modifying
+      add_area: |
+        ### Adding Areas
 
-        Sometimes buildings are incorrectly placed or have incorrect tags.
-        To move an entire building, select it and press the `M` shortcut key,
-        or right-click it and select the {move} 'Move' tool. Move your
-        mouse to shift the building, and click when it's correctly placed.
+        To add an area, click the {area} `Area` button on the toolbar
+        at the top of the map, or press the shortcut key `3`. This will
+        change the mouse cursor to a cross symbol.
 
-        To fix the specific shape of a building, click and drag the nodes that form
-        its border into better places.
+        Next, position the mouse cursor at one of the corners of the feature and `left-click`
+        or press the `spacebar` to begin placing nodes around the outer edge of
+        the area. Continue placing more nodes by `left-clicking` or pressing `spacebar`.
+        While drawing, you can zoom in or drag the map in order to add more detail.
 
-      create: |
-        ### Creating
+        To finish an area, press `enter` or click again on either the first or last node.
 
-        One of the main questions around adding buildings to the map is that
-        OpenStreetMap records buildings both as shapes and points. The rule of thumb
-        is to _map a building as a shape whenever possible_, and map companies, homes,
-        amenities, and other things that operate out of buildings as points placed
-        within the building shape.
+      square_area: |
+        ### Square Corners
 
-        Start drawing a building as a shape by clicking the {area} Area button in the top
-        left of the map, and end it either by pressing 'Return' on your keyboard
-        or clicking on the first node drawn or clicking again on the last node drawn
-        to close the shape.
+        Many area features like buildings have square corners.
+        To square the corners of an area, `right-click` the edge of the area
+        and select the {square} `Square` tool.
 
-        Then you assign the type of the building to the outline with the feature editor.
-        Most buildings are houses, if you're not sure choose the generic Building type.
+      modify_area: |
+        ### Modifying Areas
 
-      delete: |
-        ### Deleting
+        Often you'll see areas that aren't shaped correctly, for example a building
+        that does not match up with the background imagery. To adjust the shape
+        of an area, first `left-click` to select it. All nodes of the area will be
+        drawn as small circles. You can then drag the nodes to better locations.
 
-        If a building is entirely incorrect - you can see that it doesn't exist in satellite
-        imagery and ideally have confirmed locally that it's not present - you can delete
-        it, which removes it from the map. Be cautious when deleting features -
-        like any other edit, the results are seen by everyone and satellite imagery
-        is often out of date, so the building could simply be newly built.
+        You can also create new nodes along an area either by `double-clicking` on
+        the edge of the area or by dragging the small triangles at the midpoints
+        between nodes.
 
-        You can delete a building by clicking on it to select it and then pressing the `Delete`
-        key, or by right-clicking it and then using the {delete} 'Delete' tool.
+      delete_area: |
+        ### Deleting Areas
 
-    addresses:
-      intro: |
-        # Addresses & Points
+        If an area is entirely incorrect, for example a building that doesn't exist
+        in the real world, it's OK to delete it. Be cautious when deleting features -
+        the background imagery you are using might be outdated, and a building that
+        looks wrong could simply be newly built.
 
-        Addresses are some of the most useful information for the map.
-
-        Address information can be added to OpenStreetMap using a variety of methods,
-        such as adding a simple point containing an address, adding address information
-        to a building, site or other area, or alternatively to an entrance node.
-
-      nodup: |
-        ### No duplication
-
-        Usually address information doesn't need to be duplicated, e.g. when there
-        is a building outline on the map and several shops as points inside,
-        only the building should have an address.
-
-      recommendation: |
-        ### Recommendation
-
-        Most buildings and sites have only one address and it is recommended to add
-        the address to the building as a whole. If there is no building on the map
-        and you cannot draw one, you should add an address point to the map.
-
-        Some buildings or sites have more than one address. You can add the
-        addresses as separate points inside the building.
-
-      points: |
-        ### Other Points
-
-        While addresses are still the most common type of point feature,
-        there are other often used types like trees, towers, or poles.
-
-        To create a point feature click the {point} Point icon in the top-left
-        of the map or press the shortcut key `1` to insert a point.
+        To delete an area, `right-click` on the area to select it and
+        show the edit menu, then use the {delete} `Delete` command.
+        You can also press the `delete` key on your keyboard.
 
     feature_editor:
       intro: |
@@ -859,7 +858,7 @@ en:
         The feature editor will display buttons for common feature types, and you can
         find others by typing what you're looking for in the search box.
 
-        Click the 'i' in the top-right-hand corner of a feature type button to
+        Click the {inspect} icon next to the feature name to
         learn more about it. Click a button to choose that type.
 
       fields: |
@@ -885,8 +884,8 @@ en:
         ### Undo & Redo
 
         Changes you make in the feature editor are automatically applied.
-        You can undo them at any time by clicking the {undo} 'Undo' button and redo
-        changes by clicking the {redo} 'Redo' button.
+        You can undo them at any time by clicking the {undo} `Undo` button and redo
+        changes by clicking the {redo} `Redo` button.
 
     imagery:
       intro: |
@@ -897,14 +896,14 @@ en:
         from satellites, airplanes, and drones, or it can be scanned historical
         maps or other freely available source data.
 
-        To see which imagery sources are available for editing, click on
-        the {layers} 'Background settings' panel on the side of the map.
+        To see which imagery sources are available for editing, click the
+        {layers} `Background settings` button on the side of the map.
 
       sources: |
         ### Sources
 
         By default, a [Bing Maps](https://www.bing.com/maps/) satellite layer is
-        displayed in the editor. Depending on where you are editing, other imagery
+        chosen as the background image. Depending on where you are editing, other imagery
         sources will be available. Some may be newer or have higher resolution,
         so it is always useful to check and see which layer is the best one to use
         as a mapping reference.
@@ -920,8 +919,8 @@ en:
         'Adjust Imagery Offset' section at the bottom of the Background Settings pane.
 
         Click on the small triangles to adjust the imagery offset in small steps,
-        or press the mouse down and drag within the grey square to slide the imagery
-        into alignment.
+        or hold the left mouse botton and drag within the grey square to slide
+        the imagery into alignment.
 
     streetlevel:
       intro: |
@@ -935,7 +934,7 @@ en:
       using: |
         ### Using
 
-        To use street level photos for mapping, click on the {data} 'Map data' panel on the
+        To use street level photos for mapping, click the {data} `Map data` panel on the
         side of the map to enable or disable the available photo layers.
 
         When enabled, the photo layer will display a line along the sequence of photos.
@@ -966,7 +965,7 @@ en:
 
         To use a GPS trace for mapping, drag and drop the data file onto the map
         editor. If it's recognized, it will be drawn on the map as a bright purple
-        line. Click on the {data} 'Map data' panel on the side of the map to enable,
+        line. Click the {data} `Map data` panel on the side of the map to enable,
         disable, or zoom to your GPS data.
 
         The GPS track isn't sent to OpenStreetMap - the best way to use it is to
