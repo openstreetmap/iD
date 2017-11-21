@@ -24,6 +24,7 @@ export function uiHelp(context) {
         ['help.editing.',['intro','multiselect','edit','save','upload','comeback']],
         ['help.roads.',['intro','move','connect','attributes','delete','create']],
         ['help.gps.',['intro','using']],
+        ['help.streetlevel.',['intro','using','viewer']],
         ['help.buildings.',['intro','select','modify','create','delete']],
         ['help.addresses.',['intro','nodup','recommendation','points']],
         ['help.feature_editor.',['intro','select','fields','tags','undo']],

@@ -674,17 +674,16 @@ en:
 
         You can create, fix, and delete roads with this editor. Roads can be all
         kinds: paths, highways, trails, cycle ways, and more - any used segment
-        is mappable. Roads are the most used type of lines. Other examples of
+        is mappable. Roads are the most used type of line. Other examples of
         lines are waterways, walls, and fences. What you can do with roads
         applies to most types of lines.
 
       modifying: |
         ### Modifying
 
-        Often you'll see roads that aren't aligned to the imagery behind them or
+        Often you'll see roads that aren't aligned to the imagery or
         to a GPS track. You can adjust these roads so they are in the correct place.
-        Click on a road to select it and the pulsing glow will become visible.
-        All nodes of the road will be shown as small circles.
+        Click on a road to select it. All nodes of the road will be shown as small circles.
         You can drag the nodes to better locations.
         You can also create new nodes either by double-clicking on the road or by
         moving the small triangles at the midpoints between nodes.
@@ -692,33 +691,37 @@ en:
       move: |
         ### Moving
 
-        If you right-click the road the editing menu with several tools appears.
-        You can select the {move} 'Move' tool, move the entire road at one time, and
-        then click again to save that movement. You can also simply press the
-        `M` shortcut key, to start the move.
+        If you `right-click` the road, the editing menu will appear.
+        You can select the {move} 'Move' tool to move the entire road at one time.
+        Then click again to place the road in its new location.
+        You can also press the `M` shortcut key to move a road.
 
       connect: |
         ### Connecting
 
-        If the road connects to another road, but doesn't properly connect on
-        the map, you can drag one of its nodes onto the other road in
-        order to join them. The node will become grey inside.
-
         Having roads connected properly is important for the map
         and essential for providing driving directions.
-        If two road are connected on the map but not in reality,
-        you can disconnect them with right-click the connecting node and select
-        the {disconnect} 'Disconnect' tool or press the `D` shortcut key.
 
-        If you know that the crossing has traffic lights or crosswalks,
+        The connections between roads are drawn with grey circles.
+        The endpoints of a road are drawn with larger white circles if they
+        don't connect to anything.
+
+        To connect a road to another feature, drag one of its nodes onto the
+        other feature in order to join them.
+
+        To disconnect a road from another feature, right-click the connecting
+        node and select the {disconnect} 'Disconnect' tool or press the `D`
+        shortcut key.
+
+        If you know that the connection has traffic lights or crosswalks,
         you can add them by selecting the connecting node and using the
         feature editor to select the correct feature's type.
 
       attributes: |
         ### Attributtes
 
-        When a road is selected on the left side the feature editor will show
-        the type of the road and many attributes like name, speed limit, lines,
+        When a road is selected, the feature editor in the sidebar will show
+        the type of the road and many attributes like name, speed limit,
         and surface. You can modify fields or even add new ones.
 
       delete: |
@@ -746,16 +749,15 @@ en:
         Then click on points along the road so that it follows the right path, according
         to satellite imagery or GPS. If the road you are drawing crosses another road, connect
         it by clicking on the intersection point. When you're done drawing, double-click
-        or press 'Return' or 'Enter' on your keyboard.
+        or press `Return` or `Enter` on your keyboard.
 
     gps:
       intro: |
-        # GPS
+        # GPS Traces
 
-        Collected GPS traces are one valuable source of data for OpenStreetMap. This editor
-        supports local traces files (file types `.gpx`, `.geojson`, and `.kml`) on your local computer.
-        You can collect this kind of GPS trace with a number of smartphone applications as well as
-        personal GPS hardware.
+        Collected GPS traces are a valuable source of data for OpenStreetMap. This editor
+        supports `.gpx`, `.geojson`, and `.kml` files on your local computer. You can collect
+        GPS traces with a smartphone, sports watch, or other GPS device.
 
         For information on how to perform a GPS survey, read
         [Mapping with a smartphone, GPS, or paper](http://learnosm.org/en/mobile-mapping/).
@@ -763,15 +765,43 @@ en:
       using: |
         ### Using
 
-        To use a GPX track for mapping, drag and drop the GPX file onto the map
-        editor. If it's recognized, it will be added to the map as a bright purple
-        line. Click on the {data} 'Map data' menu on the right side to enable,
-        disable, or zoom to this new GPX-powered layer.
+        To use a GPS trace for mapping, drag and drop the data file onto the map
+        editor. If it's recognized, it will be drawn on the map as a bright purple
+        line. Click on the {data} 'Map data' panel on the side of the map to enable,
+        disable, or zoom to your GPS data.
 
-        The GPX track isn't directly uploaded to OpenStreetMap - the best way to
-        use it is to draw on the map, using it as a guide for the new features that
-        you add, and also to [upload it to OpenStreetMap](https://www.openstreetmap.org/trace/create)
+        The GPS track isn't sent to OpenStreetMap - the best way to use it is to
+        draw on the map, using it as a guide for the new features that you add.
+
+        You can also [upload your GPS data to OpenStreetMap](https://www.openstreetmap.org/trace/create)
         for other users to use.
+
+    streetlevel:
+      intro: |
+        # Street Level Photos
+
+        Street level photos provide a ground-truth prespective of an area, useful
+        for mapping traffic signs, businesses, and other details that you can't
+        see from satellite and aerial images. The iD editor supports street level
+        photos from [Mapillary](https://www.mapillary.com) and [OpenStreetCam](https://www.openstreetcam.org).
+
+      using: |
+        ### Using
+
+        To use streetlevel photos for mapping, click on the {data} 'Map data' panel on the
+        side of the map to enable or disable the available photo layers.
+
+        When enabled, the photo layer will display a line along the sequence of photos.
+        At higher zooms you will see a circle at each photo location, and at even higher
+        zooms you will see a viewfield to indicate the direction that the photo was taken.
+
+      viewer: |
+
+        When you click on one of the photo locations, a photo viewer will appear in the
+        bottom corner of the map. The photo viewer contains controls to step forward and
+        backward in the image sequence. It will also show the username of the person who
+        captured the image, the date it was captured, and a link to view the image on
+        the original site.
 
     buildings:
       intro: |
@@ -827,8 +857,8 @@ en:
         like any other edit, the results are seen by everyone and satellite imagery
         is often out of date, so the building could simply be newly built.
 
-        You can delete a building by clicking on it to select it, then pressing the 'Delete'
-        key, or right-clicking it and then using the {delete} 'Delete' tool.
+        You can delete a building by clicking on it to select it and then pressing the `Delete`
+        key, or by right-clicking it and then using the {delete} 'Delete' tool.
 
     addresses:
       intro: |
