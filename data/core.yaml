@@ -583,91 +583,89 @@ en:
         The iD editor is a collaborative open source project, and you are using version {version} now.
         The source code is available [on GitHub](https://github.com/openstreetmap/iD).
 
-        You can help us by [translating iD](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating)
-        or [reporting bugs or suggestions](https://github.com/openstreetmap/iD/issues).
+        You can help iD by [translating](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating)
+        or [reporting bugs](https://github.com/openstreetmap/iD/issues).
 
     overview:
       intro: |
         # Overview
 
-        This help will repeat and extend information from the walkthrough, which
-        you should have done by now.
-
       features: |
-        ### Features
+        ### Map Features
 
-        In OpenStreetMap we use the word *feature* to describe things that appear on the map.
-        Anything in the real world can be mapped as a feature on OpenStreetMap.
-        Features are represented on the map using *points*, *lines*, or *areas*.
-        Points are sometimes called nodes. Lines and areas are a connected line
-        of nodes and are sometimes called ways.
+        We use the word *features* to describe things that appear on the map,
+        such as roads, buildings, or points of interest. Anything in the real
+        world can be mapped as a feature on OpenStreetMap. Features are
+        represented on the map using *points*, *lines*, or *areas*.
 
-      screen: |
-        ### Screen
-
-        This help is on top of the map area which shows background imagery
-        and features on top of it. Here you can edit where the features are.
-        On the left side is the *feature editor*, there you can edit feature's type
-        and attributes and also {search} search for features and feature's type.
+        In OpenStreetmap, points are sometimes called *nodes*, and lines and areas
+        are sometimes called *ways*.
 
       navigation: |
         ### Navigation
 
         You can drag the map by pressing and holding the left mouse button
-        while moving the mouse around. This is also called panning.
-        You can also use the arrow keys on your keyboard, using the keys
-        while holding 'Ctrl' will move the map for one screenful.
+        while moving the mouse around. This is also called *panning*.
+
         You can zoom in or out by scrolling with the mouse wheel or trackpad,
-        or by clicking the {plus} / {minus} buttons on the top-right-hand
-        of the map, holding 'Ctrl' while clicking will zoom a lot.
+        or by clicking the {plus} / {minus} buttons along the side of the map.
+
+      keyboard: |
+        ### Keyboard Shortcuts
+
+        You can view a list of keyboard shortcuts by pressing the `?` key.
 
     editing:
       intro: |
         # Editing & Saving
 
-        To select a feature you want to edit, click on it on the map
-        or search for it by name in the feature editor.
-        Selected features are drawn with a pulsing glow and in the
-        feature editor the feature's type and attributes are shown.
-        If you right-click on it, the editing menu appears.
+        `Left-Click` on a feature to select it. This will highlight the
+        feature with a pusling glow, and the sidebar will display more details,
+        such as its name or address.
+
+        `Right-click` on a map feature to display the editing menu, which shows
+        the commands that are available, such as rotating, moving, and deleting.
 
       multiselect: |
         ### Multiselect
-        To select multiple features, hold down the 'Shift' key.
-        Then either click on the features you want to select,
-        or click, hold and move the mouse on the map to draw
-        a contour around those features.
-        All the points inside the lasso area will be selected.
+
+        `Shift-click` to select several features together.  This makes
+        it easier to move or delete multiple items.
+
+        Another way to select multiple features is to hold down the `Shift` key,
+        then press and hold the left mouse button, and drag the mouse to draw a
+        selection lasso. All of the points inside the lasso area will be selected.
 
       edit: |
         ### Edit
 
-        When you make changes like editing roads, building, and places
-        these are stored locally until you save them to the server.
-        Don't worry if you make a mistake - you can undo changes
-        by clicking the {undo} 'Undo' button, and redo changes
-        by clicking the {redo} 'Redo' button.
+        When you make changes to the map, these are stored locally until you save
+        them to the server. Don't worry if you make a mistake - until the edits are
+        saved, you can undo changes by clicking the {undo} `Undo` button, and redo
+        changes by clicking the {redo} `Redo` button.
 
       save: |
         ### Save
 
-        Click `Save` to finish a group of edits - for instance, if you've completed
-        an area of town and would like to start on a new area. You'll have a chance
-        to review what you've done, and the editor supplies helpful suggestions
-        and warnings if something doesn't seem right about the changes.
+        Click `Save` to finish your edits and send them to the OpenStreetMap
+        server. You should remember to save your work frequently!
+
+        On the save screen, you'll have a chance to review what you've done.
+        The editor will perform a basic check for missing data and may offer
+        helpful suggestions and warnings if something doesn't seem right.
 
       upload: |
         ### Upload
 
-        If everything looks good, you should explain your changes as a
-        [changeset comment](https://wiki.openstreetmap.org/wiki/Good_changeset_comments)
-        and click `Upload` to post the changes to
-        [OpenStreetMap.org](https://www.openstreetmap.org/), where they will be visible
-        to all other users and available for others to build and improve upon.
+        Before uploading your changes you must enter a
+        [changeset comment](https://wiki.openstreetmap.org/wiki/Good_changeset_comments).
+        Then click `Upload` to send your changes to OpenStreetMap, where they will be
+        merged into the map and publicly visible to everyone.
 
       comeback: |
-        If you can't finish your edits in one sitting, you can leave the editor
-        window and come back (on the same browser and computer), and the
+        If you can't finish your edits in one sitting, for example if your computer
+        crashes or you close the browser tab, your edits are still saved locally.
+        You can come back later (on the same browser and computer), and the
         editor will offer to restore your work.
 
     roads:
