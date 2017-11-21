@@ -32,7 +32,7 @@ export function uiHelp(context) {
         ['help.relations.',['intro','types','multipolygons','turnrestrictions','maintain','edit']]
     ];
 
-    var icont = {
+    var replacements = {
         more: icon('#icon-more'),
         apply: icon('#icon-apply'),
         alert: icon('#icon-alert'),
@@ -79,15 +79,15 @@ export function uiHelp(context) {
         paste: icon('#operation-paste'),
         delete: icon('#operation-delete'),
         close: icon('#icon-close'),
-        undo: icon('#icon-undo'),
-        redo: icon('#icon-redo'),
+        undo: icon(textDirection === 'rtl' ? '#icon-redo' : '#icon-undo'),
+        redo: icon(textDirection === 'rtl' ? '#icon-undo' : '#icon-redo'),
         save: icon('#icon-save'),
         version: context.version
     };
 
     var docs = docKeys.map(function(key) {
         var text = key[1].reduce(function(all, part) {
-            return all + t(key[0].concat(part), icont);
+            return all + t(key[0].concat(part), replacements);
         }, '');
         return {
             title: text.split('\n')[0].replace('#', '').trim(),
