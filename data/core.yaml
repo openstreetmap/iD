@@ -670,6 +670,55 @@ en:
 
         You can view a list of keyboard shortcuts by pressing the `?` key.
 
+    feature_editor:
+      intro: |
+        # Feature Editor
+
+        The *feature editor* appears alongside the map, and allows you to see
+        and edit all of the information for the selected feature.
+
+        The top section displays the feature's type. The middle section
+        contains *fields* showing the feature's attributes, such as its name or address.
+
+      select: |
+        ### Feature Type
+
+        You can click on the feature type to change the feature to a different type.
+        Everything that exists in the real world can be added to OpenStreetMap, so there
+        are thousands of feature types to choose from.
+
+        The type picker displays the most common feature types - such as parks, hospitals,
+        restaurants, roads, and buildings. You can search for anything by typing what you're
+        looking for in the search box. You can also click the {inspect} info icon next
+        to the feature type to learn more about it.
+
+      fields: |
+        ### Fields
+
+        The "All fields" section contains all of the feature's details that you
+        may edit. In OpenStreetMap, all of the fields are optional, and it's OK
+        to leave a field blank if you are unsure.
+
+        Each feature type will display different fields. For example, a road
+        may display fields for its surface and speed limit, but a restaurant
+        may display fields for the type of food it serves and the hours it is open.
+
+        You can also click the `Add field` dropdown to add more fields, such as
+        a description, Wikipedia link, wheelchair access, and more.
+
+      tags: |
+        ### Tags
+
+        Below the fields section, you can expand the "All tags" section to edit
+        any of the OpenStreetMap *tags* for the selected feature. Each tag
+        consists of a *key* and *value*, data elements that define all of
+        the features stored in OpenStreetMap.
+
+        Editing a feature's tags requires intermediate knowledge about OpenStreetMap.
+        You should consult resources like the [OpenStreetMap Wiki](https://wiki.openstreetmap.org/wiki/Main_Page)
+        or [Taginfo](https://taginfo.openstreetmap.org/) to learn more
+        about accepted OpenStreetMap tagging practices.
+
     points:
       intro: |
         # Points
@@ -842,50 +891,6 @@ en:
         To delete an area, `right-click` on the area to select it and
         show the edit menu, then use the {delete} `Delete` command.
         You can also press the `delete` key on your keyboard.
-
-    feature_editor:
-      intro: |
-        # Feature Editor
-
-        The feature editor is the section on the left side of the page that allows you to
-        edit the details of the selected feature.
-
-      select: |
-        ### Selecting a Feature Type
-
-        After you add a point, line, or area, you can choose what type of feature it
-        is, like whether it's a highway or residential road, supermarket or cafe.
-        The feature editor will display buttons for common feature types, and you can
-        find others by typing what you're looking for in the search box.
-
-        Click the {inspect} icon next to the feature name to
-        learn more about it. Click a button to choose that type.
-
-      fields: |
-        ### Fields
-
-        After you choose a feature type, or when you select a feature that already
-        has a type assigned, the feature editor will display fields with details about
-        the feature like its name or speed limit for a road or levels and address for a building.
-
-        Below the fields you see, you can click the `Add field` dropdown to add
-        other details, like a Wikipedia link, wheelchair access, and more.
-
-      tags: |
-        ### Tags
-
-        Below that you see the tags which are actually stored in OpenStreetMap.
-        If you cannot find the feature's type with the feature editor or you
-        cannot add required fields, then you can add additional tags with the `+` button.
-        [Taginfo](https://taginfo.openstreetmap.org/) is a great resource to learn more
-        about popular tag combinations.
-
-      undo: |
-        ### Undo & Redo
-
-        Changes you make in the feature editor are automatically applied.
-        You can undo them at any time by clicking the {undo} `Undo` button and redo
-        changes by clicking the {redo} `Redo` button.
 
     imagery:
       intro: |
