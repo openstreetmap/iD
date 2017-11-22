@@ -19,17 +19,17 @@ export function uiHelp(context) {
     var key = t('help.key');
 
     var docKeys = [
-        ['help.help.',['intro','opendata','beforestart','opensource']],
+        ['help.help.',['intro','open_data','before_start','open_source']],
         ['help.overview.',['intro','features','navigation']],
         ['help.editing.',['intro','multiselect','undo_redo','save','upload','backups','keyboard']],
         ['help.feature_editor.',['intro','select','fields','tags']],
         ['help.points.',['intro','add_point','move_point','delete_point']],
         ['help.lines.',['intro','add_line','modify_line','connect_line','disconnect_line','move_line','delete_line']],
         ['help.areas.',['intro','point_or_area','add_area','square_area','modify_area','delete_area']],
+        ['help.relations.',['intro','edit','maintain','types','multipolygons','turn_restrictions','routes','boundaries']],
         ['help.imagery.',['intro','sources','offset']],
         ['help.streetlevel.',['intro','using','viewer']],
-        ['help.gps.',['intro','using']],
-        ['help.relations.',['intro','types','multipolygons','turnrestrictions','maintain','edit']]
+        ['help.gps.',['intro','using']]
     ];
 
     var replacements = {
