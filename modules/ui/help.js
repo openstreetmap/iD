@@ -13,23 +13,82 @@ import { uiShortcuts } from './shortcuts';
 import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
 
+import { icon } from 'intro/helper';
 
 export function uiHelp(context) {
     var key = t('help.key');
 
     var docKeys = [
-        'help.help',
-        'help.editing_saving',
-        'help.roads',
-        'help.gps',
-        'help.imagery',
-        'help.addresses',
-        'help.inspector',
-        'help.buildings',
-        'help.relations'];
+        ['help.help.',['intro','open_data','before_start','open_source']],
+        ['help.overview.',['intro','features','navigation']],
+        ['help.editing.',['intro','multiselect','undo_redo','save','upload','backups','keyboard']],
+        ['help.feature_editor.',['intro','select','fields','tags']],
+        ['help.points.',['intro','add_point','move_point','delete_point']],
+        ['help.lines.',['intro','add_line','modify_line','connect_line','disconnect_line','move_line','delete_line']],
+        ['help.areas.',['intro','point_or_area','add_area','square_area','modify_area','delete_area']],
+        ['help.relations.',['intro','edit','maintain','types','multipolygons','turn_restrictions','routes','boundaries']],
+        ['help.imagery.',['intro','sources','offset']],
+        ['help.streetlevel.',['intro','using','viewer']],
+        ['help.gps.',['intro','using']]
+    ];
+
+    var replacements = {
+        more: icon('#icon-more'),
+        apply: icon('#icon-apply'),
+        alert: icon('#icon-alert'),
+        avatar: icon('#icon-avatar'),
+        forward: icon('#icon-forward'),
+        backward: icon('#icon-backward'),
+        fullscreen: icon('#icon-full-screen'),
+        collapsescreen: icon('#icon-collapse-screen'),
+        geolocate: icon('#icon-geolocate'),
+        load: icon('#icon-load'),
+        search: icon('#icon-search'),
+        bug: icon('#icon-bug'),
+        point: icon('#icon-point'),
+        line: icon('#icon-line'),
+        area: icon('#icon-area'),
+        help: icon('#icon-help'),
+        plus: icon('#icon-plus'),
+        minus: icon('#icon-minus'),
+        nearby: icon('#icon-nearby'),
+        outlink: icon('#icon-out-link'),
+        relation: icon('#icon-relation'),
+        translate: icon('#icon-translate'),
+        circularize: icon('#operation-circularize'),
+        orthogonalize: icon('#operation-orthogonalize'),
+        split: icon('#operation-split'),
+        reflect_long: icon('#operation-reflect-long'),
+        reflect_short: icon('#operation-reflect-short'),
+        simplify: icon('#operation-simplify'),
+        smooth: icon('#operation-smooth'),
+        straighten: icon('#operation-straighten'),
+        rotate: icon('#operation-rotate'),
+        reverse: icon('#operation-reverse'),
+        continue: icon('#operation-continue'),
+        disconnect: icon('#operation-disconnect'),
+        layers: icon('#icon-layers'),
+        vertex: icon('#icon-vertex'),
+        data: icon('#icon-data'),
+        down: icon('#icon-down'),
+        up: icon('#icon-up'),
+        inspect: icon('#icon-inspect'),
+        move: icon('#operation-move'),
+        merge: icon('#operation-merge'),
+        copy: icon('#operation-copy'),
+        paste: icon('#operation-paste'),
+        delete: icon('#operation-delete'),
+        close: icon('#icon-close'),
+        undo: icon(textDirection === 'rtl' ? '#icon-redo' : '#icon-undo'),
+        redo: icon(textDirection === 'rtl' ? '#icon-undo' : '#icon-redo'),
+        save: icon('#icon-save'),
+        version: context.version
+    };
 
     var docs = docKeys.map(function(key) {
-        var text = t(key);
+        var text = key[1].reduce(function(all, part) {
+            return all + t(key[0].concat(part), replacements);
+        }, '');
         return {
             title: text.split('\n')[0].replace('#', '').trim(),
             html: marked(text.split('\n').slice(1).join('\n'))
