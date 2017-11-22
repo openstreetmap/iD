@@ -687,7 +687,7 @@ en:
         Everything that exists in the real world can be added to OpenStreetMap, so there
         are thousands of feature types to choose from.
 
-        The type picker displays the most common feature types - such as parks, hospitals,
+        The type picker displays the most common feature types, such as parks, hospitals,
         restaurants, roads, and buildings. You can search for anything by typing what you're
         looking for in the search box. You can also click the {inspect} info icon next
         to the feature type to learn more about it.
@@ -791,12 +791,12 @@ en:
         Having roads connected properly is important for the map
         and essential for providing driving directions.
 
-        The connections between roads are drawn with grey circles.
+        The connections between roads are drawn with gray circles.
         The endpoints of a line are drawn with larger white circles if they
         don't connect to anything.
 
-        To connect a line to another feature, drag one of its nodes onto the
-        other feature to connect them.
+        To connect a line to another feature, drag one of the line's nodes onto
+        the other feature until both features snap together.
 
         If you know that the connection has traffic lights or crosswalks,
         you can add them by selecting the connecting node and using the
@@ -823,7 +823,7 @@ en:
         ### Deleting Lines
 
         If a line is entirely incorrect, for example a road that doesn't exist
-        in the real world, it's OK to delete it. Be cautious when deleting features -
+        in the real world, it's OK to delete it. Be careful when deleting features:
         the background imagery you are using might be outdated, and a road that
         looks wrong could simply be newly built.
 
@@ -843,9 +843,9 @@ en:
         ### Points or Areas?
 
         Many features can be represented as points or areas.
-        It is recommended to map buildings and property outlines as areas
-        whenever possible, and to map businesses, amenities, and other features
-        that operate within buildings as points placed inside the building area.
+        You should map buildings and property outlines as areas whenever
+        possible. Place points inside a building area to represent businesses,
+        amenities, and other features located inside the building.
 
       add_area: |
         ### Adding Areas
@@ -909,7 +909,7 @@ en:
 
         To add a feature to a relation, select the feature, then click the {plus}
         button in the "All relations" section of the feature editor. You can choose
-        from a list of nearby relations, or choose the 'New relation...' option.
+        from a list of nearby relations, or choose the "New relation..." option.
 
         You can also click the {delete} `Delete` button to remove the selected
         feature from the relation. If you remove all of the members from a
@@ -955,7 +955,7 @@ en:
         meet. The feature editor will display a special 'Turn Restrictions' field
         containing a model of the intersection.
 
-        In the 'Turn Restrictions' field, click to select a "from" road, and
+        In the "Turn Restrictions" field, click to select a "from" road, and
         see whether turns are allowed or restricted to any of the "to" roads.
         You can click on the turn icons to toggle them between allowed and restricted.
         iD will create relations automatically and choose the from, via, and to roles
@@ -985,10 +985,10 @@ en:
       intro: |
         # Background Imagery
 
-        Background imagery is an important resource for mapping, and is displayed
-        beneath the map data. This imagery can be aerial photos collected
-        from satellites, airplanes, and drones, or it can be scanned historical
-        maps or other freely available source data.
+        The background imagery that appears beneath the map data is an important
+        resource for mapping. This imagery can be aerial photos collected from
+        satellites, airplanes, and drones, or it can be scanned historical maps
+        or other freely available source data.
 
         To see which imagery sources are available for editing, click the
         {layers} `Background settings` button on the side of the map.
@@ -1007,13 +1007,14 @@ en:
 
         Imagery is sometimes offset slightly from accurate map data.
 
-        If you see a lot of roads or buildings shifted from the background imagery,
-        don't move them all to match the background. Instead, you can adjust
-        the background so that it matches the existing data by expanding the
-        'Adjust Imagery Offset' section at the bottom of the Background Settings pane.
+        If you see a lot of roads or buildings shifted from the background
+        imagery, it may be the imagery that's incorrect, so don't move them all
+        to match the background. Instead, you can adjust the background so that
+        it matches the existing data by expanding the "Adjust Imagery Offset"
+        section at the bottom of the Background Settings pane.
 
         Click on the small triangles to adjust the imagery offset in small steps,
-        or hold the left mouse botton and drag within the grey square to slide
+        or hold the left mouse button and drag within the grey square to slide
         the imagery into alignment.
 
     streetlevel:
@@ -1031,17 +1032,18 @@ en:
         To use street level photos for mapping, click the {data} `Map data` panel on the
         side of the map to enable or disable the available photo layers.
 
-        When enabled, the photo layer will display a line along the sequence of photos.
-        At higher zooms you will see a circle at each photo location, and at even higher
-        zooms you will see a viewfield to indicate the direction that the photo was taken.
+        When enabled, the photo layer displays a line along the sequence of
+        photos. At higher zoom levels, a circle marks at each photo location,
+        and at even higher zoom levels, a cone indicates the direction the
+        camera was facing when the photo was taken.
 
       viewer: |
 
-        When you click on one of the photo locations, a photo viewer will appear in the
-        bottom corner of the map. The photo viewer contains controls to step forward and
-        backward in the image sequence. It will also show the username of the person who
-        captured the image, the date it was captured, and a link to view the image on
-        the original site.
+        When you click on one of the photo locations, a photo viewer appears in
+        the bottom corner of the map. The photo viewer contains controls to step
+        forward and backward in the image sequence. It also shows the username
+        of the person who captured the image, the date it was captured, and a
+        link to view the image on the original site.
 
     gps:
       intro: |
