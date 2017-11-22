@@ -2617,6 +2617,13 @@ div.full-screen > button:hover {
     background:#eee;
 }
 
+.help-wrap .left-content .icon.pre-text {
+    vertical-align: text-top;
+    margin-right: 0;
+    margin-left: 0;
+    display: inline-block;
+}
+
 .help-wrap .toc {
     /* This is two columns, 41.66666 x .4 = 16.6666 */
     width:40%;
