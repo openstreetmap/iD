@@ -171,6 +171,49 @@ export function uiHelp(context) {
         ]]
     ];
 
+    var headings = {
+        'help.help.open_data_h': 3,
+        'help.help.before_start_h': 3,
+        'help.help.open_source_h': 3,
+        'help.overview.navigation_h': 3,
+        'help.overview.features_h': 3,
+        'help.editing.select_h': 3,
+        'help.editing.multiselect_h': 3,
+        'help.editing.undo_redo_h': 3,
+        'help.editing.save_h': 3,
+        'help.editing.upload_h': 3,
+        'help.editing.backups_h': 3,
+        'help.editing.keyboard_h': 3,
+        'help.feature_editor.type_h': 3,
+        'help.feature_editor.fields_h': 3,
+        'help.feature_editor.tags_h': 3,
+        'help.points.add_point_h': 3,
+        'help.points.move_point_h': 3,
+        'help.points.delete_point_h': 3,
+        'help.lines.add_line_h': 3,
+        'help.lines.modify_line_h': 3,
+        'help.lines.connect_line_h': 3,
+        'help.lines.disconnect_line_h': 3,
+        'help.lines.move_line_h': 3,
+        'help.lines.delete_line_h': 3,
+        'help.areas.point_or_area_h': 3,
+        'help.areas.add_area_h': 3,
+        'help.areas.square_area_h': 3,
+        'help.areas.modify_area_h': 3,
+        'help.areas.delete_area_h': 3,
+        'help.relations.edit_relation_h': 3,
+        'help.relations.maintain_relation_h': 3,
+        'help.relations.relation_types_h': 2,
+        'help.relations.multipolygon_h': 3,
+        'help.relations.turn_restriction_h': 3,
+        'help.relations.route_h': 3,
+        'help.relations.boundary_h': 3,
+        'help.imagery.sources_h': 3,
+        'help.imagery.offsets_h': 3,
+        'help.streetlevel.using_h': 3,
+        'help.gps.using_h': 3,
+    };
+
     var replacements = {
         point: icon('#icon-point', 'pre-text'),
         line: icon('#icon-line', 'pre-text'),
@@ -194,10 +237,13 @@ export function uiHelp(context) {
 
     // For each section, squash all the texts into a single markdown document
     var docs = docKeys.map(function(key) {
-        var tkey = 'help.' + key[0];
-        var title = t(tkey + '.title');
+        var helpkey = 'help.' + key[0];
+        var title = t(helpkey + '.title');
         var text = key[1].reduce(function(all, part) {
-            return all + t(tkey + '.' + part, replacements) + '\n\n';
+            var subkey = helpkey + '.' + part;
+            var depth = headings[subkey];                              // is this subkey a heading?
+            var hhh = depth ? Array(depth + 1).join('#') + ' ' : '';   // if so, prepend with some ##'s
+            return all + hhh + t(subkey, replacements) + '\n\n';
         }, '');
 
         return {
