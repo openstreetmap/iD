@@ -439,9 +439,6 @@ export function uiHelp(context) {
 
         d3_select(document)
             .call(keybinding);
-
-        context.surface().on('mousedown.help-outside', hide);
-        context.container().on('mousedown.help-outside', hide);
     }
 
     return help;
