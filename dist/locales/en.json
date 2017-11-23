@@ -2172,6 +2172,13 @@
                 "product": {
                     "label": "Products"
                 },
+                "public_transport_stop": {
+                    "label": "Stop type",
+                    "options": {
+                        "platform": "Where the passengers wait",
+                        "stop_position": "Where the bus stops on the road"
+                    }
+                },
                 "railway": {
                     "label": "Type"
                 },
