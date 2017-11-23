@@ -8,6 +8,7 @@ import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import marked from 'marked';
 import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg';
+import { uiCmd } from './cmd';
 import { uiIntro } from './intro';
 import { uiShortcuts } from './shortcuts';
 import { uiTooltipHtml } from './tooltipHtml';
@@ -147,8 +148,8 @@ export function uiHelp(context) {
         ]],
         ['imagery', [
             'intro',
-            'choosing',
             'sources_h',
+            'choosing',
             'sources',
             'offsets_h',
             'offset',
@@ -232,13 +233,17 @@ export function uiHelp(context) {
         undo: icon(textDirection === 'rtl' ? '#icon-redo' : '#icon-undo', 'pre-text'),
         redo: icon(textDirection === 'rtl' ? '#icon-undo' : '#icon-redo', 'pre-text'),
         save: icon('#icon-save', 'pre-text'),
+        leftclick: icon('#walkthrough-mouse', 'pre-text mouseclick', 'left'),
+        rightclick: icon('#walkthrough-mouse', 'pre-text mouseclick', 'right'),
+        shift: uiCmd.display('⇧'),
+        alt: uiCmd.display('⌥'),
+        return: uiCmd.display('↵'),
         version: context.version
     };
 
     // For each section, squash all the texts into a single markdown document
     var docs = docKeys.map(function(key) {
         var helpkey = 'help.' + key[0];
-        var title = t(helpkey + '.title');
         var text = key[1].reduce(function(all, part) {
             var subkey = helpkey + '.' + part;
             var depth = headings[subkey];                              // is this subkey a heading?
@@ -247,7 +252,7 @@ export function uiHelp(context) {
         }, '');
 
         return {
-            title: title,
+            title: t(helpkey + '.title'),
             html: marked(text.trim())
         };
     });
