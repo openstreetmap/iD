@@ -4453,6 +4453,11 @@ en:
         name: Railway Milestone
         # 'terms: milestone,marker'
         terms: '<translate with synonyms or related terms for ''Railway Milestone'', separated by commas>'
+      railway/miniature:
+        # railway=miniature
+        name: Miniature Railway
+        # 'terms: rideable miniature railway,narrow gauge railway,minimum gauge railway'
+        terms: '<translate with synonyms or related terms for ''Miniature Railway'', separated by commas>'
       railway/monorail:
         # railway=monorail
         name: Monorail

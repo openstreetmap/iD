@@ -5149,6 +5149,10 @@
                     "name": "Railway Milestone",
                     "terms": "milestone,marker"
                 },
+                "railway/miniature": {
+                    "name": "Miniature Railway",
+                    "terms": "rideable miniature railway,narrow gauge railway,minimum gauge railway"
+                },
                 "railway/monorail": {
                     "name": "Monorail",
                     "terms": ""
