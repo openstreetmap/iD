@@ -7,20 +7,19 @@ import {
 
 import {
     event as d3_event,
-    select as d3_select,
-    selectAll as d3_selectAll
+    select as d3_select
 } from 'd3-selection';
 
 import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 
 import { t, textDirection } from '../util/locale';
-import { geoMetersToOffset, geoOffsetToMeters } from '../geo';
+import { svgIcon } from '../svg';
+import { uiBackgroundOffset } from './background_offset';
+import { uiCmd } from './cmd';
+import { uiMapInMap } from './map_in_map';
+import { uiTooltipHtml } from './tooltipHtml';
 import { utilDetect } from '../util/detect';
 import { utilSetTransform, utilCallWhenIdle } from '../util';
-import { svgIcon } from '../svg';
-import { uiMapInMap } from './map_in_map';
-import { uiCmd } from './cmd';
-import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
 
 
@@ -28,15 +27,13 @@ export function uiBackground(context) {
     var key = t('background.key'),
         detected = utilDetect(),
         opacities = [1, 0.75, 0.5, 0.25],
-        directions = [
-            ['right', [0.5, 0]],
-            ['top', [0, -0.5]],
-            ['left', [-0.5, 0]],
-            ['bottom', [0, 0.5]]],
         opacityDefault = (context.storage('background-opacity') !== null) ?
             (+context.storage('background-opacity')) : 1.0,
         customSource = context.background().findSource('custom'),
         previous;
+
+    var backgroundOffset = uiBackgroundOffset(context);
+
 
     // Can be 0 from <1.3.0 use or due to issue #1923.
     if (opacityDefault === 0) opacityDefault = 1.0;
@@ -206,119 +203,16 @@ export function uiBackground(context) {
 
 
         function update() {
-            backgroundList.call(drawList, 'radio', clickSetSource, function(d) { return !d.isHidden() && !d.overlay; });
-            overlayList.call(drawList, 'checkbox', clickSetOverlay, function(d) { return !d.isHidden() && d.overlay; });
+            backgroundList
+                .call(drawList, 'radio', clickSetSource, function(d) { return !d.isHidden() && !d.overlay; });
+
+            overlayList
+                .call(drawList, 'checkbox', clickSetOverlay, function(d) { return !d.isHidden() && d.overlay; });
 
             selectLayer();
-            updateOffsetVal();
-        }
 
-
-        function updateOffsetVal() {
-            var meters = geoOffsetToMeters(context.background().offset()),
-                x = +meters[0].toFixed(2),
-                y = +meters[1].toFixed(2);
-
-            d3_selectAll('.nudge-inner-rect')
-                .select('input')
-                .classed('error', false)
-                .property('value', x + ', ' + y);
-
-            d3_selectAll('.nudge-reset')
-                .classed('disabled', function() {
-                    return (x === 0 && y === 0);
-                });
-        }
-
-
-        function resetOffset() {
-            if (d3_event.button !== 0) return;
-            context.background().offset([0, 0]);
-            updateOffsetVal();
-        }
-
-
-        function nudge(d) {
-            context.background().nudge(d, context.map().zoom());
-            updateOffsetVal();
-        }
-
-
-        function buttonOffset(d) {
-            if (d3_event.button !== 0) return;
-            var timeout = window.setTimeout(function() {
-                    interval = window.setInterval(nudge.bind(null, d), 100);
-                }, 500),
-                interval;
-
-            function doneNudge() {
-                window.clearTimeout(timeout);
-                window.clearInterval(interval);
-                d3_select(window)
-                    .on('mouseup.buttonoffset', null, true)
-                    .on('mousedown.buttonoffset', null, true);
-            }
-
-            d3_select(window)
-                .on('mouseup.buttonoffset', doneNudge, true)
-                .on('mousedown.buttonoffset', doneNudge, true);
-
-            nudge(d);
-        }
-
-
-        function inputOffset() {
-            if (d3_event.button !== 0) return;
-            var input = d3_select(this);
-            var d = input.node().value;
-
-            if (d === '') return resetOffset();
-
-            d = d.replace(/;/g, ',').split(',').map(function(n) {
-                // if n is NaN, it will always get mapped to false.
-                return !isNaN(n) && n;
-            });
-
-            if (d.length !== 2 || !d[0] || !d[1]) {
-                input.classed('error', true);
-                return;
-            }
-
-            context.background().offset(geoMetersToOffset(d));
-            updateOffsetVal();
-        }
-
-
-        function dragOffset() {
-            if (d3_event.button !== 0) return;
-            var origin = [d3_event.clientX, d3_event.clientY];
-
-            context.container()
-                .append('div')
-                .attr('class', 'nudge-surface');
-
-            d3_select(window)
-                .on('mousemove.offset', function() {
-                    var latest = [d3_event.clientX, d3_event.clientY];
-                    var d = [
-                        -(origin[0] - latest[0]) / 4,
-                        -(origin[1] - latest[1]) / 4
-                    ];
-
-                    origin = latest;
-                    nudge(d);
-                })
-                .on('mouseup.offset', function() {
-                    if (d3_event.button !== 0) return;
-                    d3_selectAll('.nudge-surface')
-                        .remove();
-
-                    d3_select(window)
-                        .on('mousemove.offset', null)
-                        .on('mouseup.offset', null);
-                });
-
-            d3_event.preventDefault();
+            offsetContainer
+                .call(backgroundOffset);
         }
 
 
@@ -387,26 +281,28 @@ export function uiBackground(context) {
 
 
         var content = selection
-                .append('div')
-                .attr('class', 'fillL map-overlay col3 content hide'),
-            tooltipBehavior = tooltip()
-                .placement((textDirection === 'rtl') ? 'right' : 'left')
-                .html(true)
-                .title(uiTooltipHtml(t('background.description'), key)),
-            button = selection
-                .append('button')
-                .attr('tabindex', -1)
-                .on('click', toggle)
-                .call(svgIcon('#icon-layers', 'light'))
-                .call(tooltipBehavior),
-            shown = false;
+            .append('div')
+            .attr('class', 'fillL map-overlay col3 content hide');
+
+        var tooltipBehavior = tooltip()
+            .placement((textDirection === 'rtl') ? 'right' : 'left')
+            .html(true)
+            .title(uiTooltipHtml(t('background.description'), key));
+
+        var button = selection
+            .append('button')
+            .attr('tabindex', -1)
+            .on('click', toggle)
+            .call(svgIcon('#icon-layers', 'light'))
+            .call(tooltipBehavior);
+
+        var shown = false;
 
 
-        /* opacity switcher */
-
+        /* add opacity switcher */
         var opawrap = content
-                .append('div')
-                .attr('class', 'opacity-options-wrapper');
+            .append('div')
+            .attr('class', 'opacity-options-wrapper');
 
         opawrap
             .append('h4')
@@ -432,27 +328,26 @@ export function uiBackground(context) {
             .style('opacity', function(d) { return 1.25 - d; });
 
 
-        /* background list */
-
+        /* add background list */
         var backgroundList = content
             .append('ul')
             .attr('class', 'layer-list')
             .attr('dir', 'auto');
 
-        content
-            .append('div')
-            .attr('class', 'imagery-faq')
-            .append('a')
-            .attr('target', '_blank')
-            .attr('tabindex', -1)
-            .call(svgIcon('#icon-out-link', 'inline'))
-            .attr('href', 'https://github.com/openstreetmap/iD/blob/master/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
-            .append('span')
-            .text(t('background.imagery_source_faq'));
+            // "Where does this imagery come from?"
+        // content
+        //     .append('div')
+        //     .attr('class', 'imagery-faq')
+        //     .append('a')
+        //     .attr('target', '_blank')
+        //     .attr('tabindex', -1)
+        //     .call(svgIcon('#icon-out-link', 'inline'))
+        //     .attr('href', 'https://github.com/openstreetmap/iD/blob/master/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
+        //     .append('span')
+        //     .text(t('background.imagery_source_faq'));
 
 
-        /* overlay list */
-
+        /* add overlay list */
         var overlayList = content
             .append('ul')
             .attr('class', 'layer-list');
@@ -462,8 +357,7 @@ export function uiBackground(context) {
             .attr('class', 'controls-list');
 
 
-        /* minimap toggle */
-
+        /* add minimap toggle */
         var minimapLabel = controls
             .append('label')
             .call(tooltip()
@@ -486,71 +380,13 @@ export function uiBackground(context) {
             .text(t('background.minimap.description'));
 
 
-        /* imagery offset controls */
-
-        var adjustments = content
+        /* add offset controls */
+        var offsetContainer = content
             .append('div')
-            .attr('class', 'adjustments');
+            .attr('class', 'background-offset');
 
-        adjustments
-            .append('a')
-            .text(t('background.fix_misalignment'))
-            .attr('href', '#')
-            .classed('hide-toggle', true)
-            .classed('expanded', false)
-            .on('click', function() {
-                if (d3_event.button !== 0) return;
-                var exp = d3_select(this).classed('expanded');
-                nudgeContainer.style('display', exp ? 'none' : 'block');
-                d3_select(this).classed('expanded', !exp);
-                d3_event.preventDefault();
-            });
 
-        var nudgeContainer = adjustments
-            .append('div')
-            .attr('class', 'nudge-container cf')
-            .style('display', 'none');
-
-        nudgeContainer
-            .append('div')
-            .attr('class', 'nudge-instructions')
-            .text(t('background.offset'));
-
-        var nudgeRect = nudgeContainer
-            .append('div')
-            .attr('class', 'nudge-outer-rect')
-            .on('mousedown', dragOffset);
-
-        nudgeRect
-            .append('div')
-            .attr('class', 'nudge-inner-rect')
-            .append('input')
-            .on('change', inputOffset)
-            .on('mousedown', function() {
-                if (d3_event.button !== 0) return;
-                d3_event.stopPropagation();
-            });
-
-        nudgeContainer
-            .append('div')
-            .selectAll('button')
-            .data(directions).enter()
-            .append('button')
-            .attr('class', function(d) { return d[0] + ' nudge'; })
-            .on('mousedown', function(d) {
-                if (d3_event.button !== 0) return;
-                buttonOffset(d[1]);
-            });
-
-        nudgeContainer
-            .append('button')
-            .attr('title', t('background.reset'))
-            .attr('class', 'nudge-reset disabled')
-            .on('click', resetOffset)
-            .call(
-                (textDirection === 'rtl') ? svgIcon('#icon-redo') : svgIcon('#icon-undo')
-            );
-
+        /* add listeners */
         context.map()
             .on('move.background-update', _debounce(utilCallWhenIdle(update), 1000));
 
