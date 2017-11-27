@@ -492,11 +492,7 @@ export function uiMapData(context) {
 
         d3_select(document)
             .call(keybinding);
-
-        context.surface().on('mousedown.map_data-outside', hidePanel);
-        context.container().on('mousedown.map_data-outside', hidePanel);
     }
-
 
     return map_data;
 }

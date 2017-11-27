@@ -568,9 +568,6 @@ export function uiBackground(context) {
 
         d3_select(document)
             .call(keybinding);
-
-        context.surface().on('mousedown.background-outside', hide);
-        context.container().on('mousedown.background-outside', hide);
     }
 
     return background;

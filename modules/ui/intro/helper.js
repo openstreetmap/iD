@@ -38,9 +38,10 @@ export function pad(locOrBox, padding, context) {
 }
 
 
-export function icon(name, svgklass) {
+export function icon(name, svgklass, useklass) {
     return '<svg class="icon ' + (svgklass || '') + '">' +
-         '<use xlink:href="' + name + '"></use></svg>';
+         '<use xlink:href="' + name + '"' +
+         (useklass ? ' class="' + useklass + '"' : '') + '></use></svg>';
 }
 
 

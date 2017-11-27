@@ -2613,12 +2613,26 @@ div.full-screen > button:hover {
 }
 
 .help-wrap .left-content .body p code {
-    padding:2px 4px;
-    background:#eee;
+    padding: 3px 4px;
+    font-size: 12px;
+    color: #555;
+    vertical-align: baseline;
+    background-color: #f6f6f6;
+    border: solid 1px #ccc;
+    margin: 0 2px;
+    border-bottom-color: #bbb;
+    border-radius: 3px;
+    box-shadow: inset 0 -1px 0 #bbb;
+}
+
+.help-wrap .left-content .icon.pre-text {
+    vertical-align: text-top;
+    margin-right: 0;
+    margin-left: 0;
+    display: inline-block;
 }
 
 .help-wrap .toc {
-    /* This is two columns, 41.66666 x .4 = 16.6666 */
     width:40%;
     float:right;
     margin-left: 20px;
@@ -2629,7 +2643,7 @@ div.full-screen > button:hover {
 .help-wrap .toc li a,
 .help-wrap .nav a {
     display: block;
-    border: 1px solid #CCC;
+    border: 1px solid #ccc;
     padding: 5px 10px;
 }
 
@@ -2643,7 +2657,7 @@ div.full-screen > button:hover {
 }
 
 .help-wrap .toc li a.selected {
-    background: #E8EBFF;
+    background: #e8ebff;
 }
 
 .help-wrap .toc li:first-child a {
@@ -2651,7 +2665,7 @@ div.full-screen > button:hover {
 }
 
 .help-wrap .toc li:nth-last-child(3) a {
-    border-bottom: 1px solid #CCC;
+    border-bottom: 1px solid #ccc;
     border-radius: 0 0 4px 4px
 }
 
@@ -3488,11 +3502,11 @@ img.tile-removing {
     box-shadow: inset 0 -1px 0 #bbb;
 }
 
-.modal-shortcuts .shortcut-keys svg.mouseclick use.left {
+svg.mouseclick use.left {
     fill: rgba(112, 146, 255, 1);
     color: rgba(112, 146, 255, 0);
 }
-.modal-shortcuts .shortcut-keys svg.mouseclick use.right {
+svg.mouseclick use.right {
     fill: rgba(112, 146, 255, 0);
     color: rgba(112, 146, 255, 1);
 }

@@ -10,21 +10,37 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { request as d3_request } from 'd3-request';
 
 import {
+    event as d3_event,
     select as d3_select,
     selectAll as d3_selectAll
 } from 'd3-selection';
+
+import {
+    zoom as d3_zoom,
+    zoomIdentity as d3_zoomIdentity
+} from 'd3-zoom';
 
 import rbush from 'rbush';
 
 import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 import { geoExtent } from '../geo';
-import { utilQsString, utilRebind } from '../util';
+
+import {
+    utilQsString,
+    utilRebind,
+    utilSetTransform
+} from '../util';
 
 
 var apibase = 'https://openstreetcam.org',
     maxResults = 1000,
     tileZoom = 14,
     dispatch = d3_dispatch('loadedImages'),
+    imgZoom = d3_zoom()
+        .extent([[0, 0], [320, 240]])
+        .translateExtent([[0, 0], [320, 240]])
+        .scaleExtent([1, 15])
+        .on('zoom', zoomPan),
     _oscCache,
     _oscSelectedImage;
 
@@ -222,6 +238,12 @@ function searchLimited(psize, limit, projection, rtree) {
 }
 
 
+function zoomPan() {
+    var t = d3_event.transform;
+    d3_select('#photoviewer .osc-image-wrap')
+        .call(utilSetTransform, t.x, t.y, t.k);
+}
+
 
 export default {
 
@@ -302,7 +324,9 @@ export default {
         var wrapEnter = wrap.enter()
             .append('div')
             .attr('class', 'photo-wrapper osc-wrapper')
-            .classed('hide', true);
+            .classed('hide', true)
+            .call(imgZoom)
+            .on('dblclick.zoom', null);
 
         wrapEnter
             .append('div')
@@ -334,6 +358,10 @@ export default {
             .on('click.forward', step(1))
             .text('►');
 
+        wrapEnter
+            .append('div')
+            .attr('class', 'osc-image-wrap');
+
 
         function rotate(deg) {
             return function() {
@@ -344,9 +372,19 @@ export default {
 
                 var r = sequence.rotation || 0;
                 r += deg;
+
+                if (r > 180) r -= 360;
+                if (r < -180) r += 360;
                 sequence.rotation = r;
 
-                d3_select('#photoviewer .osc-wrapper .osc-image')
+                var wrap = d3_select('#photoviewer .osc-wrapper');
+
+                wrap
+                    .transition()
+                    .duration(100)
+                    .call(imgZoom.transform, d3_zoomIdentity);
+
+                wrap.selectAll('.osc-image')
                     .transition()
                     .duration(100)
                     .style('transform', 'rotate(' + r + 'deg)');
@@ -414,20 +452,27 @@ export default {
 
     updateViewer: function(d) {
         var wrap = d3_select('#photoviewer .osc-wrapper');
+        var imageWrap = wrap.selectAll('.osc-image-wrap');
+        var attribution = wrap.selectAll('.photo-attribution').html('');
 
-        wrap.selectAll('.osc-image')
+        wrap
+            .transition()
+            .duration(100)
+            .call(imgZoom.transform, d3_zoomIdentity);
+
+        imageWrap
+            .selectAll('.osc-image')
             .remove();
 
         if (d) {
             var sequence = _oscCache.sequences[d.sequence_id];
             var r = (sequence && sequence.rotation) || 0;
 
-            wrap.append('img')
+            imageWrap
+                .append('img')
                 .attr('class', 'osc-image')
-                .style('transform', 'rotate(' + r + 'deg)')
-                .attr('src', apibase + '/' + d.imagePath);
-
-            var attribution = wrap.selectAll('.photo-attribution').html('');
+                .attr('src', apibase + '/' + d.imagePath)
+                .style('transform', 'rotate(' + r + 'deg)');
 
             if (d.captured_by) {
                 attribution

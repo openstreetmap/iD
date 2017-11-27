@@ -1738,6 +1738,7 @@
             "universal": true,
             "label": "Sources",
             "snake_case": false,
+            "caseSensitive": true,
             "options": [
                 "survey",
                 "local knowledge",
