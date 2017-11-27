@@ -7,15 +7,23 @@ import {
 import { t, textDirection } from '../util/locale';
 import { geoMetersToOffset, geoOffsetToMeters } from '../geo';
 import { svgIcon } from '../svg';
+import { uiDisclosure } from './disclosure';
 
 
 export function uiBackgroundOffset(context) {
+    var expandedPreference = (context.storage('background_offset.expanded') !== 'false');
     var directions = [
         ['right', [0.5, 0]],
         ['top', [0, -0.5]],
         ['left', [-0.5, 0]],
         ['bottom', [0, 0.5]]
     ];
+
+
+    function d3_eventCancel() {
+        d3_event.stopPropagation();
+        d3_event.preventDefault();
+    }
 
 
     function updateValue() {
@@ -36,7 +44,6 @@ export function uiBackgroundOffset(context) {
 
 
     function resetOffset() {
-        if (d3_event.button !== 0) return;
         context.background().offset([0, 0]);
         updateValue();
     }
@@ -48,12 +55,11 @@ export function uiBackgroundOffset(context) {
     }
 
 
-    function buttonOffset(d) {
-        if (d3_event.button !== 0) return;
+    function clickNudgeButton(d) {
+        var interval;
         var timeout = window.setTimeout(function() {
                 interval = window.setInterval(nudge.bind(null, d), 100);
             }, 500);
-        var interval;
 
         function doneNudge() {
             window.clearTimeout(timeout);
@@ -72,7 +78,6 @@ export function uiBackgroundOffset(context) {
 
 
     function inputOffset() {
-        if (d3_event.button !== 0) return;
         var input = d3_select(this);
         var d = input.node().value;
 
@@ -94,7 +99,9 @@ export function uiBackgroundOffset(context) {
 
 
     function dragOffset() {
+        d3_event.preventDefault();
         if (d3_event.button !== 0) return;
+
         var origin = [d3_event.clientX, d3_event.clientY];
 
         context.container()
@@ -121,50 +128,28 @@ export function uiBackgroundOffset(context) {
                     .on('mousemove.offset', null)
                     .on('mouseup.offset', null);
             });
-
-        d3_event.preventDefault();
     }
 
 
-    function backgroundOffset(selection) {
-
-        var adjustments = selection.selectAll('.adjustments')
+    function render(selection) {
+        var container = selection.selectAll('.nudge-container')
             .data([0]);
 
-        var adjustmentsEnter = adjustments.enter()
+        var containerEnter = container.enter()
             .append('div')
-            .attr('class', 'adjustments');
+            .attr('class', 'nudge-container cf');
 
-        adjustmentsEnter
-            .append('a')
-            .text(t('background.fix_misalignment'))
-            .attr('href', '#')
-            .classed('hide-toggle', true)
-            .classed('expanded', false)
-            .on('click', function() {
-                if (d3_event.button !== 0) return;
-                var exp = d3_select(this).classed('expanded');
-                nudgeContainer.style('display', exp ? 'none' : 'block');
-                d3_select(this).classed('expanded', !exp);
-                d3_event.preventDefault();
-            });
-
-        var nudgeContainer = adjustmentsEnter
-            .append('div')
-            .attr('class', 'nudge-container cf')
-            .style('display', 'none');
-
-        nudgeContainer
+        containerEnter
             .append('div')
             .attr('class', 'nudge-instructions')
             .text(t('background.offset'));
 
-        var nudgeRect = nudgeContainer
+        var nudgeEnter = containerEnter
             .append('div')
             .attr('class', 'nudge-outer-rect')
             .on('mousedown', dragOffset);
 
-        nudgeRect
+        nudgeEnter
             .append('div')
             .attr('class', 'nudge-inner-rect')
             .append('input')
@@ -174,25 +159,46 @@ export function uiBackgroundOffset(context) {
                 d3_event.stopPropagation();
             });
 
-        nudgeContainer
+        containerEnter
             .append('div')
             .selectAll('button')
             .data(directions).enter()
             .append('button')
             .attr('class', function(d) { return d[0] + ' nudge'; })
+            .on('contextmenu', d3_eventCancel)
             .on('mousedown', function(d) {
                 if (d3_event.button !== 0) return;
-                buttonOffset(d[1]);
+                clickNudgeButton(d[1]);
             });
 
-        nudgeContainer
+        containerEnter
             .append('button')
             .attr('title', t('background.reset'))
             .attr('class', 'nudge-reset disabled')
-            .on('click', resetOffset)
+            .on('contextmenu', d3_eventCancel)
+            .on('click', function() {
+                if (d3_event.button !== 0) return;
+                resetOffset();
+            })
             .call(svgIcon('#icon-' + (textDirection === 'rtl' ? 'redo' : 'undo')));
 
         updateValue();
+    }
+
+
+    function backgroundOffset(selection) {
+        selection
+            .call(uiDisclosure()
+                .title(t('background.fix_misalignment'))
+                .expanded(expandedPreference)
+                .on('toggled', toggled)
+                .content(render)
+            );
+
+        function toggled(expanded) {
+            expandedPreference = expanded;
+            context.storage('background_offset.expanded', expanded);
+        }
     }
 
 
