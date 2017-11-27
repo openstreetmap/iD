@@ -269,7 +269,6 @@ export function uiCommit(context) {
             updateChangeset({ review_requested: (rr ? 'yes' : undefined) });
 
             var expanded = !tagSection.selectAll('a.hide-toggle.expanded').empty();
-
             tagSection
                 .call(rawTagEditor
                     .expanded(expanded)

@@ -4,11 +4,13 @@ import { utilRebind } from '../util/rebind';
 import { uiToggle } from './toggle';
 
 
-export function uiDisclosure() {
+export function uiDisclosure(context, key, expandedDefault) {
     var dispatch = d3_dispatch('toggled'),
-        title,
-        expanded = false,
-        content = function () {};
+        _preference = (context.storage('disclosure.' + key + '.expanded')),
+        _expanded = (_preference === null ? !!expandedDefault : (_preference === 'true')),
+        _title,
+        _updatePreference = true,
+        _content = function () {};
 
 
     var disclosure = function(selection) {
@@ -22,9 +24,9 @@ export function uiDisclosure() {
             .merge(hideToggle);
 
         hideToggle
-            .text(title)
+            .text(_title)
             .on('click', toggle)
-            .classed('expanded', expanded);
+            .classed('expanded', _expanded);
 
 
         var wrap = selection.selectAll('div')
@@ -35,36 +37,46 @@ export function uiDisclosure() {
             .merge(wrap);
 
         wrap
-            .classed('hide', !expanded)
-            .call(content);
+            .classed('hide', !_expanded)
+            .call(_content);
 
 
         function toggle() {
-            expanded = !expanded;
-            hideToggle.classed('expanded', expanded);
-            wrap.call(uiToggle(expanded));
-            dispatch.call('toggled', this, expanded);
+            _expanded = !_expanded;
+            if (_updatePreference) {
+                context.storage('disclosure.' + key + '.expanded', _expanded);
+            }
+            hideToggle.classed('expanded', _expanded);
+            wrap.call(uiToggle(_expanded));
+            dispatch.call('toggled', this, _expanded);
         }
     };
 
 
     disclosure.title = function(_) {
-        if (!arguments.length) return title;
-        title = _;
+        if (!arguments.length) return _title;
+        _title = _;
         return disclosure;
     };
 
 
     disclosure.expanded = function(_) {
-        if (!arguments.length) return expanded;
-        expanded = _;
+        if (!arguments.length) return _expanded;
+        _expanded = _;
+        return disclosure;
+    };
+
+
+    disclosure.updatePreference = function(_) {
+        if (!arguments.length) return _updatePreference;
+        _updatePreference = _;
         return disclosure;
     };
 
 
     disclosure.content = function(_) {
-        if (!arguments.length) return content;
-        content = _;
+        if (!arguments.length) return _content;
+        _content = _;
         return disclosure;
     };
 

@@ -11,7 +11,6 @@ import { uiDisclosure } from './disclosure';
 
 
 export function uiBackgroundOffset(context) {
-    var expandedPreference = (context.storage('background_offset.expanded') !== 'false');
     var directions = [
         ['right', [0.5, 0]],
         ['top', [0, -0.5]],
@@ -153,11 +152,7 @@ export function uiBackgroundOffset(context) {
             .append('div')
             .attr('class', 'nudge-inner-rect')
             .append('input')
-            .on('change', inputOffset)
-            .on('mousedown', function() {
-                if (d3_event.button !== 0) return;
-                d3_event.stopPropagation();
-            });
+            .on('change', inputOffset);
 
         containerEnter
             .append('div')
@@ -188,17 +183,10 @@ export function uiBackgroundOffset(context) {
 
     function backgroundOffset(selection) {
         selection
-            .call(uiDisclosure()
+            .call(uiDisclosure(context, 'background_offset', false)
                 .title(t('background.fix_misalignment'))
-                .expanded(expandedPreference)
-                .on('toggled', toggled)
                 .content(render)
             );
-
-        function toggled(expanded) {
-            expandedPreference = expanded;
-            context.storage('background_offset.expanded', expanded);
-        }
     }
 
 
