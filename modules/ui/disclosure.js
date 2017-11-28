@@ -1,4 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { event as d3_event } from 'd3-selection';
 
 import { utilRebind } from '../util/rebind';
 import { uiToggle } from './toggle';
@@ -43,12 +44,15 @@ export function uiDisclosure(context, key, expandedDefault) {
 
 
         function toggle() {
+            d3_event.preventDefault();
+
             _expanded = !_expanded;
             if (_updatePreference) {
                 context.storage('disclosure.' + key + '.expanded', _expanded);
             }
             hideToggle.classed('expanded', _expanded);
             wrap.call(uiToggle(_expanded));
+
             dispatch.call('toggled', this, _expanded);
         }
     };
