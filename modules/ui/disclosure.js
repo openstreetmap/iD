@@ -20,7 +20,7 @@ export function uiDisclosure(context, key, expandedDefault) {
         hideToggle = hideToggle.enter()
             .append('a')
             .attr('href', '#')
-            .attr('class', 'hide-toggle')
+            .attr('class', 'hide-toggle hide-toggle-' + key)
             .merge(hideToggle);
 
         hideToggle
@@ -29,11 +29,12 @@ export function uiDisclosure(context, key, expandedDefault) {
             .classed('expanded', _expanded);
 
 
-        var wrap = selection.selectAll('div')
+        var wrap = selection.selectAll('.disclosure-wrap')
             .data([0]);
 
         wrap = wrap.enter()
             .append('div')
+            .attr('class', 'disclosure-wrap disclosure-wrap-' + key)
             .merge(wrap);
 
         wrap

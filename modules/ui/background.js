@@ -147,7 +147,7 @@ export function uiBackground(context) {
         }
 
 
-        function drawList(layerList, type, change, filter) {
+        function drawListItems(layerList, type, change, filter) {
             var sources = context.background()
                 .sources(context.map().extent())
                 .filter(filter);
@@ -204,10 +204,10 @@ export function uiBackground(context) {
 
         function update() {
             backgroundList
-                .call(drawList, 'radio', clickSetSource, function(d) { return !d.isHidden() && !d.overlay; });
+                .call(drawListItems, 'radio', clickSetSource, function(d) { return !d.isHidden() && !d.overlay; });
 
             overlayList
-                .call(drawList, 'checkbox', clickSetOverlay, function(d) { return !d.isHidden() && d.overlay; });
+                .call(drawListItems, 'checkbox', clickSetOverlay, function(d) { return !d.isHidden() && d.overlay; });
 
             selectLayer();
 
