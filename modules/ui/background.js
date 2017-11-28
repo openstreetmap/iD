@@ -16,6 +16,7 @@ import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg';
 import { uiBackgroundOffset } from './background_offset';
 import { uiCmd } from './cmd';
+import { uiDisclosure } from './disclosure';
 import { uiMapInMap } from './map_in_map';
 import { uiTooltipHtml } from './tooltipHtml';
 import { utilDetect } from '../util/detect';
@@ -24,227 +25,325 @@ import { tooltip } from '../util/tooltip';
 
 
 export function uiBackground(context) {
-    var key = t('background.key'),
-        detected = utilDetect(),
-        opacities = [1, 0.75, 0.5, 0.25],
-        opacityDefault = (context.storage('background-opacity') !== null) ?
-            (+context.storage('background-opacity')) : 1.0,
-        customSource = context.background().findSource('custom'),
-        previous;
+    var key = t('background.key');
+    var detected = utilDetect();
+    var opacities = [1, 0.75, 0.5, 0.25];
+
+    var _opacityDefault = (context.storage('background-opacity') !== null) ?
+            (+context.storage('background-opacity')) : 1.0;
+    var _customSource = context.background().findSource('custom');
+    var _previousBackground;
+    var _shown = false;
+
+    var _backgroundList = d3_select(null);
+    var _overlayList = d3_select(null);
+    var _displayOptions = d3_select(null);
+    var _offsetContainer = d3_select(null);
 
     var backgroundOffset = uiBackgroundOffset(context);
 
 
     // Can be 0 from <1.3.0 use or due to issue #1923.
-    if (opacityDefault === 0) opacityDefault = 1.0;
+    if (_opacityDefault === 0) _opacityDefault = 1.0;
 
 
-    function background(selection) {
+    function setOpacity(d) {
+        var bg = context.container().selectAll('.layer-background')
+            .transition()
+            .style('opacity', d)
+            .attr('data-opacity', d);
+
+        if (!detected.opera) {
+            utilSetTransform(bg, 0, 0);
+        }
+
+        _displayOptions.selectAll('opacity-options li')
+            .classed('active', function(_) { return _ === d; });
+
+        context.storage('background-opacity', d);
+    }
+
+
+    function setTooltips(selection) {
+        selection.each(function(d, i, nodes) {
+            var item = d3_select(this).select('label'),
+                span = item.select('span'),
+                placement = (i < nodes.length / 2) ? 'bottom' : 'top',
+                description = d.description(),
+                isOverflowing = (span.property('clientWidth') !== span.property('scrollWidth'));
+
+            if (d === _previousBackground) {
+                item.call(tooltip()
+                    .placement(placement)
+                    .html(true)
+                    .title(function() {
+                        var tip = '<div>' + t('background.switch') + '</div>';
+                        return uiTooltipHtml(tip, uiCmd('⌘' + key));
+                    })
+                );
+            } else if (description || isOverflowing) {
+                item.call(tooltip()
+                    .placement(placement)
+                    .title(description || d.name())
+                );
+            } else {
+                item.call(tooltip().destroy);
+            }
+        });
+    }
+
+
+    function updateLayerSelections(selection) {
+        function active(d) {
+            return context.background().showsLayer(d);
+        }
+
+        selection.selectAll('.layer')
+            .classed('active', active)
+            .classed('switch', function(d) { return d === _previousBackground; })
+            .call(setTooltips)
+            .selectAll('input')
+            .property('checked', active);
+    }
+
+
+    function chooseBackground(d) {
+        if (d.id === 'custom' && !d.template()) {
+            return editCustom();
+        }
+
+        d3_event.preventDefault();
+        _previousBackground = context.background().baseLayerSource();
+        context.background().baseLayerSource(d);
+        _backgroundList.call(updateLayerSelections);
+        document.activeElement.blur();
+    }
+
+
+    function editCustom() {
+        d3_event.preventDefault();
+        var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
+        var template = window.prompt(
+            t('background.custom_prompt', { example: example }),
+            _customSource.template() || example
+        );
+
+        if (template) {
+            context.storage('background-custom-template', template);
+            _customSource.template(template);
+            chooseBackground(_customSource);
+        } else {
+            _backgroundList.call(updateLayerSelections);
+        }
+    }
+
+
+    function chooseOverlay(d) {
+        d3_event.preventDefault();
+        context.background().toggleOverlayLayer(d);
+        _overlayList.call(updateLayerSelections);
+        document.activeElement.blur();
+    }
+
+
+    function drawListItems(layerList, type, change, filter) {
+        var sources = context.background()
+            .sources(context.map().extent())
+            .filter(filter);
+
+        var layerLinks = layerList.selectAll('li.layer')
+            .data(sources, function(d) { return d.name(); });
+
+        layerLinks.exit()
+            .remove();
+
+        var enter = layerLinks.enter()
+            .append('li')
+            .attr('class', 'layer')
+            .classed('layer-custom', function(d) { return d.id === 'custom'; })
+            .classed('best', function(d) { return d.best(); });
+
+        enter.filter(function(d) { return d.id === 'custom'; })
+            .append('button')
+            .attr('class', 'layer-browse')
+            .call(tooltip()
+                .title(t('background.custom_button'))
+                .placement((textDirection === 'rtl') ? 'right' : 'left')
+            )
+            .on('click', editCustom)
+            .call(svgIcon('#icon-search'));
+
+        enter.filter(function(d) { return d.best(); })
+            .append('div')
+            .attr('class', 'best')
+            .call(tooltip()
+                .title(t('background.best_imagery'))
+                .placement((textDirection === 'rtl') ? 'right' : 'left')
+            )
+            .append('span')
+            .html('&#9733;');
+
+        var label = enter
+            .append('label');
+
+        label
+            .append('input')
+            .attr('type', type)
+            .attr('name', 'layers')
+            .on('change', change);
+
+        label
+            .append('span')
+            .text(function(d) { return d.name(); });
+
+
+        layerList.selectAll('li.layer')
+            .sort(sortSources)
+            .style('display', layerList.selectAll('li.layer').data().length > 0 ? 'block' : 'none');
+
+        layerList
+            .call(updateLayerSelections);
+
 
         function sortSources(a, b) {
             return a.best() && !b.best() ? -1
                 : b.best() && !a.best() ? 1
                 : d3_descending(a.area(), b.area()) || d3_ascending(a.name(), b.name()) || 0;
         }
+    }
 
 
-        function setOpacity(d) {
-            var bg = context.container().selectAll('.layer-background')
-                .transition()
-                .style('opacity', d)
-                .attr('data-opacity', d);
+    function renderBackgroundList(selection) {
+        var container = selection.selectAll('layer-background-list')
+            .data([0]);
 
-            if (!detected.opera) {
-                utilSetTransform(bg, 0, 0);
-            }
-
-            opacityList.selectAll('li')
-                .classed('active', function(_) { return _ === d; });
-
-            context.storage('background-opacity', d);
-        }
+        _backgroundList = container.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-background-list')
+            .attr('dir', 'auto')
+            .merge(container);
+    }
 
 
-        function setTooltips(selection) {
-            selection.each(function(d, i, nodes) {
-                var item = d3_select(this).select('label'),
-                    span = item.select('span'),
-                    placement = (i < nodes.length / 2) ? 'bottom' : 'top',
-                    description = d.description(),
-                    isOverflowing = (span.property('clientWidth') !== span.property('scrollWidth'));
+    function renderOverlayList(selection) {
+        var container = selection.selectAll('layer-overlay-list')
+            .data([0]);
 
-                if (d === previous) {
-                    item.call(tooltip()
-                        .placement(placement)
-                        .html(true)
-                        .title(function() {
-                            var tip = '<div>' + t('background.switch') + '</div>';
-                            return uiTooltipHtml(tip, uiCmd('⌘' + key));
-                        })
-                    );
-                } else if (description || isOverflowing) {
-                    item.call(tooltip()
-                        .placement(placement)
-                        .title(description || d.name())
-                    );
-                } else {
-                    item.call(tooltip().destroy);
-                }
-            });
-        }
+        _overlayList = container.enter()
+            .append('ul')
+            .attr('class', 'layer-list layer-overlay-list')
+            .attr('dir', 'auto')
+            .merge(container);
+    }
 
 
-        function selectLayer() {
-            function active(d) {
-                return context.background().showsLayer(d);
-            }
+    function renderDisplayOptions(selection) {
+        var container = selection.selectAll('display-options-container')
+            .data([0]);
 
-            content.selectAll('.layer')
-                .classed('active', active)
-                .classed('switch', function(d) { return d === previous; })
-                .call(setTooltips)
-                .selectAll('input')
-                .property('checked', active);
-        }
+        var containerEnter = container.enter()
+            .append('div')
+            .attr('class', 'display-options-container controls-list');
+
+        /* add opacity switcher */
+        var opacityDivEnter = containerEnter
+            .append('div')
+            .attr('class', 'opacity-options-wrapper');
+
+        opacityDivEnter
+            .append('h5')
+            .text(t('background.brightness'));
+
+        var opacityUlEnter = opacityDivEnter.append('ul')
+            .attr('class', 'opacity-options');
+
+        opacityUlEnter.selectAll('div.opacity')
+            .data(opacities)
+            .enter()
+            .append('li')
+            .attr('data-original-title', function(d) {
+                return t('background.percent_brightness', { opacity: (d * 100) });
+            })
+            .on('click.set-opacity', setOpacity)
+            .html('<div class="select-box"></div>')
+            .call(tooltip()
+                .placement((textDirection === 'rtl') ? 'right' : 'left')
+            )
+            .append('div')
+            .attr('class', 'opacity')
+            .style('opacity', function(d) { return 1.25 - d; });
 
 
-        function clickSetSource(d) {
-            if (d.id === 'custom' && !d.template()) {
-                return editCustom();
-            }
+        /* add minimap toggle */
+        var minimapEnter = containerEnter
+            .append('div')
+            .attr('class', 'minimap-toggle-wrap');
 
-            d3_event.preventDefault();
-            previous = context.background().baseLayerSource();
-            context.background().baseLayerSource(d);
-            selectLayer();
-            document.activeElement.blur();
-        }
-
-
-        function editCustom() {
-            d3_event.preventDefault();
-            var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
-            var template = window.prompt(
-                t('background.custom_prompt', { example: example }),
-                customSource.template() || example
+        var minimapLabelEnter = minimapEnter
+            .append('label')
+            .call(tooltip()
+                .html(true)
+                .title(uiTooltipHtml(t('background.minimap.tooltip'), t('background.minimap.key')))
+                .placement('top')
             );
 
-            if (template) {
-                context.storage('background-custom-template', template);
-                customSource.template(template);
-                clickSetSource(customSource);
-            } else {
-                selectLayer();
-            }
-        }
+        minimapLabelEnter
+            .classed('minimap-toggle', true)
+            .append('input')
+            .attr('type', 'checkbox')
+            .on('change', function() {
+                uiMapInMap.toggle();
+                d3_event.preventDefault();
+            });
+
+        minimapLabelEnter
+            .append('span')
+            .text(t('background.minimap.description'));
+
+        _displayOptions = containerEnter
+            .merge(container);
+    }
 
 
-        function clickSetOverlay(d) {
+    function update() {
+        _backgroundList
+            .call(drawListItems, 'radio', chooseBackground, function(d) { return !d.isHidden() && !d.overlay; });
+
+        _overlayList
+            .call(drawListItems, 'checkbox', chooseOverlay, function(d) { return !d.isHidden() && d.overlay; });
+
+        _offsetContainer
+            .call(backgroundOffset);
+    }
+
+
+    function quickSwitch() {
+        if (d3_event) {
+            d3_event.stopImmediatePropagation();
             d3_event.preventDefault();
-            context.background().toggleOverlayLayer(d);
-            selectLayer();
-            document.activeElement.blur();
         }
-
-
-        function drawListItems(layerList, type, change, filter) {
-            var sources = context.background()
-                .sources(context.map().extent())
-                .filter(filter);
-
-            var layerLinks = layerList.selectAll('li.layer')
-                .data(sources, function(d) { return d.name(); });
-
-            layerLinks.exit()
-                .remove();
-
-            var enter = layerLinks.enter()
-                .append('li')
-                .attr('class', 'layer')
-                .classed('layer-custom', function(d) { return d.id === 'custom'; })
-                .classed('best', function(d) { return d.best(); });
-
-            enter.filter(function(d) { return d.id === 'custom'; })
-                .append('button')
-                .attr('class', 'layer-browse')
-                .call(tooltip()
-                    .title(t('background.custom_button'))
-                    .placement((textDirection === 'rtl') ? 'right' : 'left'))
-                .on('click', editCustom)
-                .call(svgIcon('#icon-search'));
-
-            enter.filter(function(d) { return d.best(); })
-                .append('div')
-                .attr('class', 'best')
-                .call(tooltip()
-                    .title(t('background.best_imagery'))
-                    .placement((textDirection === 'rtl') ? 'right' : 'left'))
-                .append('span')
-                .html('&#9733;');
-
-            var label = enter
-                .append('label');
-
-            label
-                .append('input')
-                .attr('type', type)
-                .attr('name', 'layers')
-                .on('change', change);
-
-            label
-                .append('span')
-                .text(function(d) { return d.name(); });
-
-
-            layerList.selectAll('li.layer')
-                .sort(sortSources)
-                .style('display', layerList.selectAll('li.layer').data().length > 0 ? 'block' : 'none');
+        if (_previousBackground) {
+            chooseBackground(_previousBackground);
         }
+    }
 
 
-        function update() {
-            backgroundList
-                .call(drawListItems, 'radio', clickSetSource, function(d) { return !d.isHidden() && !d.overlay; });
+    function background(selection) {
 
-            overlayList
-                .call(drawListItems, 'checkbox', clickSetOverlay, function(d) { return !d.isHidden() && d.overlay; });
-
-            selectLayer();
-
-            offsetContainer
-                .call(backgroundOffset);
-        }
-
-
-        function hide() {
+        function hidePane() {
             setVisible(false);
         }
 
-
-        function toggle() {
-            if (d3_event) {
-                d3_event.preventDefault();
-            }
-            tooltipBehavior.hide(button);
+        function togglePane() {
+            if (d3_event) d3_event.preventDefault();
+            paneTooltip.hide(button);
             setVisible(!button.classed('active'));
         }
 
-
-        function quickSwitch() {
-            if (d3_event) {
-                d3_event.stopImmediatePropagation();
-                d3_event.preventDefault();
-            }
-            if (previous) {
-                clickSetSource(previous);
-            }
-        }
-
-
         function setVisible(show) {
-            if (show !== shown) {
+            if (show !== _shown) {
                 button.classed('active', show);
-                shown = show;
+                _shown = show;
 
                 if (show) {
                     selection
@@ -252,18 +351,18 @@ export function uiBackground(context) {
                             d3_event.stopPropagation();
                         });
 
-                    content
+                    pane
                         .style('display', 'block')
                         .style('right', '-300px')
                         .transition()
                         .duration(200)
                         .style('right', '0px');
 
-                    content.selectAll('.layer')
+                    pane.selectAll('.layer')
                         .call(setTooltips);
 
                 } else {
-                    content
+                    pane
                         .style('display', 'block')
                         .style('right', '0px')
                         .transition()
@@ -280,11 +379,11 @@ export function uiBackground(context) {
         }
 
 
-        var content = selection
+        var pane = selection
             .append('div')
             .attr('class', 'fillL map-overlay col3 content hide');
 
-        var tooltipBehavior = tooltip()
+        var paneTooltip = tooltip()
             .placement((textDirection === 'rtl') ? 'right' : 'left')
             .html(true)
             .title(uiTooltipHtml(t('background.description'), key));
@@ -292,50 +391,30 @@ export function uiBackground(context) {
         var button = selection
             .append('button')
             .attr('tabindex', -1)
-            .on('click', toggle)
+            .on('click', togglePane)
             .call(svgIcon('#icon-layers', 'light'))
-            .call(tooltipBehavior);
+            .call(paneTooltip);
 
-        var shown = false;
-
-
-        /* add opacity switcher */
-        var opawrap = content
-            .append('div')
-            .attr('class', 'opacity-options-wrapper');
-
-        opawrap
-            .append('h4')
+        pane
+            .append('h3')
             .text(t('background.title'));
 
-        var opacityList = opawrap
-            .append('ul')
-            .attr('class', 'opacity-options');
-
-        opacityList.selectAll('div.opacity')
-            .data(opacities)
-            .enter()
-            .append('li')
-            .attr('data-original-title', function(d) {
-                return t('background.percent_brightness', { opacity: (d * 100) });
-            })
-            .on('click.set-opacity', setOpacity)
-            .html('<div class="select-box"></div>')
-            .call(tooltip()
-                .placement((textDirection === 'rtl') ? 'right' : 'left'))
+        // background list
+        pane
             .append('div')
-            .attr('class', 'opacity')
-            .style('opacity', function(d) { return 1.25 - d; });
+            .attr('class', 'background-background-list-container')
+            .call(uiDisclosure(context, 'background_list', true)
+                .title(t('background.backgrounds'))
+                .content(renderBackgroundList)
+            );
 
-
-        /* add background list */
-        var backgroundList = content
-            .append('ul')
-            .attr('class', 'layer-list')
-            .attr('dir', 'auto');
+        // _backgroundList = pane
+        //     .append('ul')
+        //     .attr('class', 'layer-list')
+        //     .attr('dir', 'auto');
 
             // "Where does this imagery come from?"
-        // content
+        // pane
         //     .append('div')
         //     .attr('class', 'imagery-faq')
         //     .append('a')
@@ -347,46 +426,31 @@ export function uiBackground(context) {
         //     .text(t('background.imagery_source_faq'));
 
 
-        /* add overlay list */
-        var overlayList = content
-            .append('ul')
-            .attr('class', 'layer-list');
-
-        var controls = content
+        // overlay list
+        pane
             .append('div')
-            .attr('class', 'controls-list');
-
-
-        /* add minimap toggle */
-        var minimapLabel = controls
-            .append('label')
-            .call(tooltip()
-                .html(true)
-                .title(uiTooltipHtml(t('background.minimap.tooltip'), t('background.minimap.key')))
-                .placement('top')
+            .attr('class', 'background-overlay-list-container')
+            .call(uiDisclosure(context, 'overlay_list', true)
+                .title(t('background.overlays'))
+                .content(renderOverlayList)
             );
 
-        minimapLabel
-            .classed('minimap-toggle', true)
-            .append('input')
-            .attr('type', 'checkbox')
-            .on('change', function() {
-                uiMapInMap.toggle();
-                d3_event.preventDefault();
-            });
+        // display settings
+        pane
+            .append('div')
+            .attr('class', 'background-display-options-container')
+            .call(uiDisclosure(context, 'background_display_options', true)
+                .title(t('background.display_options'))
+                .content(renderDisplayOptions)
+            );
 
-        minimapLabel
-            .append('span')
-            .text(t('background.minimap.description'));
-
-
-        /* add offset controls */
-        var offsetContainer = content
+        // offset controls
+        _offsetContainer = pane
             .append('div')
             .attr('class', 'background-offset');
 
 
-        /* add listeners */
+        // add listeners
         context.map()
             .on('move.background-update', _debounce(utilCallWhenIdle(update), 1000));
 
@@ -395,12 +459,12 @@ export function uiBackground(context) {
 
 
         update();
-        setOpacity(opacityDefault);
+        setOpacity(_opacityDefault);
 
         var keybinding = d3_keybinding('background')
-            .on(key, toggle)
+            .on(key, togglePane)
             .on(uiCmd('⌘' + key), quickSwitch)
-            .on([t('map_data.key'), t('help.key')], hide);
+            .on([t('map_data.key'), t('help.key')], hidePane);
 
         d3_select(document)
             .call(keybinding);

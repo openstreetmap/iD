@@ -2307,7 +2307,7 @@ div.full-screen > button:hover {
     padding: 5px 10px;
     cursor: pointer;
     color: #7092FF;
-    border-radius: 3px;
+    border-top: 1px solid #ccc;
 }
 
 .minimap-toggle.active {
@@ -2463,41 +2463,38 @@ div.full-screen > button:hover {
 }
 
 .background-control .nudge.right::after {
-    border-top:  5px solid transparent;
-    border-bottom:  5px solid transparent;
-    border-left:  5px solid #222;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid #222;
 }
 
 .background-control .nudge.left::after {
-    border-top:  5px solid transparent;
-    border-bottom:  5px solid transparent;
-    border-right:  5px solid #222;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 5px solid #222;
 }
 
 .background-control .nudge.top::after {
-    border-right:  5px solid transparent;
-    border-left:  5px solid transparent;
-    border-bottom:  5px solid #222;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    border-bottom: 5px solid #222;
 }
 
 .background-control .nudge.bottom::after {
-    border-right:  5px solid transparent;
-    border-left:  5px solid transparent;
-    border-top:  5px solid #222;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    border-top: 5px solid #222;
+}
+
+.opacity-options-wrapper {
+    padding: 10px;
 }
 
 .opacity-options {
     background: url(img/background-pattern-opacity.png) 0 0 repeat;
     height: 20px;
     width: 82px;
-    position: absolute;
-    right: 50px;
-    top: 20px;
     border: 1px solid #ccc;
-}
-[dir='rtl'] .opacity-options {
-    left: 50px;
-    right: auto;
 }
 
 .opacity-options li {
@@ -2513,8 +2510,6 @@ div.full-screen > button:hover {
     z-index: 9999;
 }
 
-.map-data-control li:hover .select-box,
-.map-data-control li.selected .select-box,
 .background-control li:hover .select-box,
 .background-control li.selected .select-box {
     border: 2px solid #7092ff;
@@ -2522,8 +2517,6 @@ div.full-screen > button:hover {
     opacity: .5;
 }
 
-.map-data-control li.selected:hover .select-box,
-.map-data-control li.selected .select-box,
 .background-control li.selected:hover .select-box,
 .background-control li.selected .select-box {
     opacity: 1;
