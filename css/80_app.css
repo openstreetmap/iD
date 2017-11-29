@@ -130,7 +130,6 @@ a, button, input, textarea {
 a,
 button,
 .checkselect label:hover,
-.opacity-options li,
 .radial-menu-item {
     cursor: pointer;
 }
@@ -2468,43 +2467,8 @@ div.full-screen > button:hover {
     padding: 10px;
 }
 
-.opacity-options {
-    background: url(img/background-pattern-opacity.png) 0 0 repeat;
-    height: 20px;
-    width: 82px;
-    border: 1px solid #ccc;
-}
-
-.opacity-options li {
-    height: 100%;
-    display: block;
-    float: left;
-}
-
-.opacity-options li .select-box{
-    position: absolute;
-    width: 20px;
-    height: 18px;
-    z-index: 9999;
-}
-
-.background-control li:hover .select-box,
-.background-control li.selected .select-box {
-    border: 2px solid #7092ff;
-    background: rgba(89, 123, 231, .5);
-    opacity: .5;
-}
-
-.background-control li.selected:hover .select-box,
-.background-control li.selected .select-box {
-    opacity: 1;
-}
-
-.background-control .opacity {
-    background: #222;
-    display: inline-block;
-    width: 20px;
-    height: 18px;
+.opacity-options-wrapper .opacity-value {
+    margin: 5px;
 }
 
 .map-data-control .layer-list button,

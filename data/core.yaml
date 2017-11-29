@@ -384,7 +384,6 @@ en:
     reset: reset
     display_options: Display Options
     brightness: Brightness
-    percent_brightness: "{opacity}% brightness"
     minimap:
       description: Show Minimap
       tooltip: Show a zoomed out map to help locate the area currently displayed.

@@ -29,9 +29,8 @@ import { tooltip } from '../util/tooltip';
 export function uiBackground(context) {
     var key = t('background.key');
     var detected = utilDetect();
-    var opacities = [1, 0.75, 0.5, 0.25];
 
-    var _opacityDefault = (context.storage('background-opacity') !== null) ?
+    var _opacity = (context.storage('background-opacity') !== null) ?
             (+context.storage('background-opacity')) : 1.0;
     var _customSource = context.background().findSource('custom');
     var _previousBackground;
@@ -45,24 +44,28 @@ export function uiBackground(context) {
     var backgroundOffset = uiBackgroundOffset(context);
 
 
-    // Can be 0 from <1.3.0 use or due to issue #1923.
-    if (_opacityDefault === 0) _opacityDefault = 1.0;
-
-
     function setOpacity(d) {
+        if (!d && d3_event && d3_event.target) {
+            d = d3_event.target.value;
+        }
+        // Can be 0 from <1.3.0 use or due to issue #1923.
+        if (!d) d = 1.0;
+
         var bg = context.container().selectAll('.layer-background')
-            .transition()
-            .style('opacity', d)
-            .attr('data-opacity', d);
+            .style('opacity', d);
 
         if (!detected.opera) {
             utilSetTransform(bg, 0, 0);
         }
 
-        _displayOptions.selectAll('opacity-options li')
-            .classed('active', function(_) { return _ === d; });
+        _displayOptions.selectAll('.opacity-input')
+            .property('value', d);
+
+        _displayOptions.selectAll('.opacity-value')
+            .text(Math.floor(d * 100) + '%');
 
         context.storage('background-opacity', d);
+        _opacity = d;
     }
 
 
@@ -247,36 +250,29 @@ export function uiBackground(context) {
             .append('div')
             .attr('class', 'display-options-container controls-list');
 
-        /* add opacity switcher */
+        // add opacity switcher
         var opacityDivEnter = containerEnter
             .append('div')
             .attr('class', 'opacity-options-wrapper');
 
         opacityDivEnter
             .append('h5')
-            .text(t('background.brightness'));
+            .text(t('background.brightness'))
+            .append('span')
+            .attr('class', 'opacity-value')
+            .text(Math.floor(_opacity * 100) + '%');
 
-        var opacityUlEnter = opacityDivEnter.append('ul')
-            .attr('class', 'opacity-options');
+        opacityDivEnter
+            .append('input')
+            .attr('class', 'opacity-input')
+            .attr('type', 'range')
+            .attr('min', '0.25')
+            .attr('max', '1')
+            .attr('step', '0.05')
+            .property('value', _opacity)
+            .on('input.set-opacity', setOpacity);
 
-        opacityUlEnter.selectAll('div.opacity')
-            .data(opacities)
-            .enter()
-            .append('li')
-            .attr('data-original-title', function(d) {
-                return t('background.percent_brightness', { opacity: (d * 100) });
-            })
-            .on('click.set-opacity', setOpacity)
-            .html('<div class="select-box"></div>')
-            .call(tooltip()
-                .placement((textDirection === 'rtl') ? 'right' : 'left')
-            )
-            .append('div')
-            .attr('class', 'opacity')
-            .style('opacity', function(d) { return 1.25 - d; });
-
-
-        /* add minimap toggle */
+        // add minimap toggle
         var minimapEnter = containerEnter
             .append('div')
             .attr('class', 'minimap-toggle-wrap');
@@ -403,11 +399,6 @@ export function uiBackground(context) {
                 .content(renderBackgroundList)
             );
 
-        // _backgroundList = pane
-        //     .append('ul')
-        //     .attr('class', 'layer-list')
-        //     .attr('dir', 'auto');
-
             // "Where does this imagery come from?"
         // pane
         //     .append('div')
@@ -454,7 +445,7 @@ export function uiBackground(context) {
 
 
         update();
-        setOpacity(_opacityDefault);
+        setOpacity(_opacity);
 
         var keybinding = d3_keybinding('background')
             .on(key, togglePane)
