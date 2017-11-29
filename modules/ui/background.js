@@ -396,7 +396,7 @@ export function uiBackground(context) {
             .call(paneTooltip);
 
         pane
-            .append('h3')
+            .append('h2')
             .text(t('background.title'));
 
         // background list

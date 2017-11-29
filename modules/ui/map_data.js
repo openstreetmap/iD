@@ -455,7 +455,7 @@ export function uiMapData(context) {
 
 
         pane
-            .append('h3')
+            .append('h2')
             .text(t('map_data.title'));
 
 

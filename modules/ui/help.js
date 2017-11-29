@@ -260,12 +260,12 @@ export function uiHelp(context) {
 
     function help(selection) {
 
-        function hide() {
+        function hidePane() {
             setVisible(false);
         }
 
 
-        function toggle() {
+        function togglePane() {
             if (d3_event) d3_event.preventDefault();
             tooltipBehavior.hide(button);
             setVisible(!button.classed('active'));
@@ -375,13 +375,14 @@ export function uiHelp(context) {
                 .title(uiTooltipHtml(t('help.title'), key)),
             button = selection.append('button')
                 .attr('tabindex', -1)
-                .on('click', toggle)
+                .on('click', togglePane)
                 .call(svgIcon('#icon-help', 'light'))
                 .call(tooltipBehavior),
             shown = false;
 
 
-        var toc = pane.append('ul')
+        var toc = pane
+            .append('ul')
             .attr('class', 'toc');
 
         var menuItems = toc.selectAll('li')
@@ -424,23 +425,27 @@ export function uiHelp(context) {
             .text(t('splash.walkthrough'));
 
 
-        var content = pane.append('div')
+        var content = pane
+            .append('div')
             .attr('class', 'left-content');
 
-        var doctitle = content.append('h2')
+        var doctitle = content
+            .append('h2')
             .text(t('help.title'));
 
-        var body = content.append('div')
+        var body = content
+            .append('div')
             .attr('class', 'body');
 
-        var nav = content.append('div')
+        var nav = content
+            .append('div')
             .attr('class', 'nav');
 
         clickHelp(docs[0], 0);
 
         var keybinding = d3_keybinding('help')
-            .on(key, toggle)
-            .on([t('background.key'), t('map_data.key')], hide);
+            .on(key, togglePane)
+            .on([t('background.key'), t('map_data.key')], hidePane);
 
         d3_select(document)
             .call(keybinding);
