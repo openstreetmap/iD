@@ -268,7 +268,7 @@ table th {
 }
 
 table.tags, table.tags td, table.tags th {
-    border: 1px solid #CCC;
+    border: 1px solid #ccc;
     padding: 4px;
 }
 
@@ -304,7 +304,7 @@ ul li { list-style: none;}
     display: block;
     height: 30px;
     background-color: white;
-    color: #7092FF;
+    color: #7092ff;
     cursor: pointer;
 }
 
@@ -740,6 +740,30 @@ button.save.has-count .count::before {
     position: absolute;
 }
 
+
+/* Hide-Toggle
+------------------------------------------------------- */
+
+.hide-toggle .icon.pre-text {
+    vertical-align: text-top;
+    width: 16px;
+    height: 16px;
+    margin-left: -3px;
+}
+[dir='rtl'] .hide-toggle .icon.pre-text {
+    margin-left: 0;
+    margin-right: -3px;
+}
+
+a:visited.hide-toggle,
+a.hide-toggle {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+
 /* Inspector
 ------------------------------------------------------- */
 
@@ -781,7 +805,6 @@ button.save.has-count .count::before {
     left: 0;
     bottom: 0;
 }
-
 
 .feature-list-pane .inspector-body {
     top: 120px;
@@ -1071,7 +1094,7 @@ button.save.has-count .count::before {
 
 .preset-list-item button.tag-reference-button {
     height: 100%;
-    border: 1px solid #CCC;
+    border: 1px solid #ccc;
     border-radius: 0 3px 3px 0;
     position: absolute;
     top: 0;
@@ -1143,7 +1166,7 @@ button.save.has-count .count::before {
 }
 
 .preset-editor a.hide-toggle {
-    margin: 0 20px 10px 20px;
+    margin: 0 20px 5px 20px;
 }
 
 .preset-editor .form-fields-container {
@@ -1218,7 +1241,7 @@ button.save.has-count .count::before {
 }
 [dir='rtl'] .form-label button {
     border-left: none;
-    border-right: 1px solid #CCC;
+    border-right: 1px solid #ccc;
     border-radius: 4px 0 0 0;
     width: 31px;
 }
@@ -1574,13 +1597,13 @@ input[type=number] {
     float: left;
     height: 100%;
     width: 32px;
-    border-left: 1px solid #CCC;
+    border-left: 1px solid #ccc;
     border-radius: 0;
     background: rgba(0, 0, 0, 0);
 }
 [dir='rtl'] .spin-control button{
     border-left: 0;
-    border-right: 1px solid #CCC;
+    border-right: 1px solid #ccc;
 }
 
 .spin-control button.decrement {
@@ -1604,13 +1627,13 @@ input[type=number] {
 }
 
 .spin-control button.decrement::after {
-    border-top: 5px solid #CCC;
+    border-top: 5px solid #ccc;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
 }
 
 .spin-control button.increment::after {
-    border-bottom: 5px solid #CCC;
+    border-bottom: 5px solid #ccc;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
 }
@@ -1622,7 +1645,7 @@ input[type=number] {
     display: block;
     background: white;
     padding: 5px 10px;
-    color: #7092FF;
+    color: #7092ff;
 }
 
 .checkselect label:hover {
@@ -1720,7 +1743,7 @@ input[type=number] {
     right: 1px;
     width: 32px;
     margin-left: -32px;
-    border: 1px solid #CCC;
+    border: 1px solid #ccc;
     border-top-width: 0;
     border-right-width: 0;
     border-radius: 0 0 4px 0;
@@ -1916,12 +1939,12 @@ div.combobox {
     height: 31px;
     border: 0;
     border-radius: 0;
-    border-bottom: 1px solid #CCC;
-    border-left: 1px solid #CCC;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
 }
 [dir='rtl'] .tag-row input {
     border-left: none;
-    border-right: 1px solid #CCC;
+    border-right: 1px solid #ccc;
 }
 
 .tag-row .key-wrap,
@@ -1941,14 +1964,14 @@ div.combobox {
 }
 
 .tag-row input.value {
-    border-right: 1px solid #CCC;
+    border-right: 1px solid #ccc;
 }
 [dir='rtl'] .tag-row input.value {
-    border-left: 1px solid #CCC;
+    border-left: 1px solid #ccc;
 }
 
 .tag-row:first-child input.key {
-    border-top: 1px solid #CCC;
+    border-top: 1px solid #ccc;
     border-top-left-radius: 4px;
 }
 [dir='rtl'] .tag-row:first-child input.key {
@@ -1957,14 +1980,14 @@ div.combobox {
 }
 
 .tag-row:first-child input.value {
-    border-top: 1px solid #CCC;
+    border-top: 1px solid #ccc;
 }
 
 .tag-row button {
     position: absolute;
     height: 31px;
     right: 10%;
-    border: 1px solid #CCC;
+    border: 1px solid #ccc;
     border-top-width: 0;
     border-left-width: 0;
 }
@@ -2226,14 +2249,9 @@ div.full-screen > button:hover {
     margin-bottom: 10px;
 }
 
-.map-data-control .hide-toggle,
-.background-control .hide-toggle {
-    padding-bottom: 10px;
-}
-
 .layer-list, .controls-list {
     margin-bottom: 10px;
-    border: 1px solid #CCC;
+    border: 1px solid #ccc;
     border-radius: 4px;
 }
 
@@ -2241,7 +2259,7 @@ div.full-screen > button:hover {
     position: relative;
     height: 30px;
     background-color: white;
-    color: #7092FF;
+    color: #7092ff;
 }
 
 .layer-list:empty {
@@ -2270,7 +2288,7 @@ div.full-screen > button:hover {
 
 .layer-list li.active,
 .layer-list li.switch {
-    background: #E8EBFF;
+    background: #e8ebff;
 }
 
 .layer-list li.best > div.best {
@@ -2306,56 +2324,16 @@ div.full-screen > button:hover {
     display: block;
     padding: 5px 10px;
     cursor: pointer;
-    color: #7092FF;
+    color: #7092ff;
     border-top: 1px solid #ccc;
 }
 
 .minimap-toggle.active {
-    background: #E8EBFF;
+    background: #e8ebff;
 }
 
 .minimap-toggle:hover {
     background-color: #ececec;
-}
-
-.hide-toggle {
-    display: block;
-    padding-left: 12px;
-    position: relative;
-}
-[dir='rtl'] .hide-toggle {
-    padding-left: 0;
-    padding-right: 12px;
-}
-
-.hide-toggle:before {
-    content: '';
-    display: block;
-    position: absolute;
-    height: 0;
-    width: 0;
-    left: 0;
-    top: 5px;
-    border-top:  4px solid transparent;
-    border-bottom:  4px solid transparent;
-    border-left:  8px solid #7092ff;
-}
-[dir='rtl'] .hide-toggle:before {
-    left: auto;
-    right: 0;
-    border-left: none;
-    border-right: 8px solid #7092ff;
-}
-
-.hide-toggle.expanded:before {
-    border-top:  8px solid #7092ff;
-    border-bottom: 0;
-    border-right:  4px solid transparent;
-    border-left:  4px solid transparent;
-}
-[dir='rtl'] .hide-toggle.expanded:before {
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
 }
 
 
@@ -2411,7 +2389,7 @@ div.full-screen > button:hover {
 }
 
 .nudge-container input.error {
-    border: 1px solid #FF7878;
+    border: 1px solid #ff7878;
     border-radius: 2px;
     background: #ffb;
 }
@@ -2523,10 +2501,10 @@ div.full-screen > button:hover {
 }
 
 .background-control .opacity {
-    background:#222;
-    display:inline-block;
-    width:20px;
-    height:18px;
+    background: #222;
+    display: inline-block;
+    width: 20px;
+    height: 18px;
 }
 
 .map-data-control .layer-list button,
@@ -2534,14 +2512,14 @@ div.full-screen > button:hover {
     float: right;
     height: 100%;
     width: 10%;
-    border-left: 1px solid #CCC;
+    border-left: 1px solid #ccc;
     border-radius: 0;
 }
 [dir='rtl'] .map-data-control .layer-list button,
 [dir='rtl'] .background-control .layer-list button {
     float: left;
     border-left: none;
-    border-right: 1px solid #CCC;
+    border-right: 1px solid #ccc;
 }
 
 .map-data-control .layer-list button .icon,
@@ -2574,12 +2552,12 @@ div.full-screen > button:hover {
     border-radius: 0 0 0 4px;
 }
 [dir='rtl'] .geolocate-control button {
-  border-radius: 0 0 4px 0;
+    border-radius: 0 0 4px 0;
 }
 
 .map-overlay.content {
     position: fixed;
-    top:60px;
+    top: 60px;
     bottom: 30px;
     padding: 20px 50px 20px 20px;
     right: 0;
@@ -2591,13 +2569,17 @@ div.full-screen > button:hover {
     right: auto !important;
 }
 
+.map-overlay.content > div {
+    padding-bottom: 15px;
+}
+
 /* Help */
 
 .help-control button {
     border-radius: 0 0 0 4px;
 }
 [dir='rtl'] .help-control button {
-  border-radius: 0 0 4px 0;
+    border-radius: 0 0 4px 0;
 }
 
 .help-wrap p {
@@ -2626,7 +2608,7 @@ div.full-screen > button:hover {
 }
 
 .help-wrap .toc {
-    width:40%;
+    width: 40%;
     float:right;
     margin-left: 20px;
     margin-bottom: 20px;
@@ -2703,12 +2685,12 @@ div.full-screen > button:hover {
 ------------------------------------------------------- */
 
 img.tile {
-    position:absolute;
-    transform-origin:0 0;
-    -ms-transform-origin:0 0;
-    -webkit-transform-origin:0 0;
-    -moz-transform-origin:0 0;
-    -o-transform-origin:0 0;
+    position: absolute;
+    transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
 
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -2734,11 +2716,11 @@ img.tile {
     margin-left: -50px;
     margin-top: -20px;
 
-    transform-origin:0 0;
-    -ms-transform-origin:0 0;
-    -webkit-transform-origin:0 0;
-    -moz-transform-origin:0 0;
-    -o-transform-origin:0 0;
+    transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
 
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -2763,10 +2745,10 @@ img.tile-removing {
 ------------------------------------------------------- */
 
 #map {
-    position:relative;
-    overflow:hidden;
-    height:100%;
-    background:#000;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    background: #000;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
@@ -2774,11 +2756,11 @@ img.tile-removing {
 }
 
 #supersurface {
-    transform-origin:0 0;
-    -ms-transform-origin:0 0;
-    -webkit-transform-origin:0 0;
-    -moz-transform-origin:0 0;
-    -o-transform-origin:0 0;
+    transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
 }
 
 #supersurface, .layer {
@@ -3307,7 +3289,7 @@ img.tile-removing {
 
 .modal-section {
     padding: 20px;
-    border-bottom: 1px solid #CCC;
+    border-bottom: 1px solid #ccc;
 }
 
 .modal-section.header h3 {
@@ -3340,8 +3322,8 @@ img.tile-removing {
 .modal-actions button,
 .save-success a.button {
     font-weight: normal;
-    color: #7092FF;
-    border-bottom: 1px solid #CCC;
+    color: #7092ff;
+    border-bottom: 1px solid #ccc;
     border-radius: 0;
     height: 160px;
     text-align: center;
@@ -3361,7 +3343,7 @@ img.tile-removing {
 }
 
 .modal-actions > :first-child {
-    border-right: 1px solid #CCC;
+    border-right: 1px solid #ccc;
 }
 
 .modal-section:last-child {
@@ -3371,7 +3353,7 @@ img.tile-removing {
 /* Restore Modal
 ------------------------------------------------------- */
 .modal-actions .logo-restore {
-    color: #7092FF;
+    color: #7092ff;
 }
 .modal-actions .logo-reset {
     color: #E06C5E;
@@ -3389,7 +3371,7 @@ img.tile-removing {
     padding-top: 15px;
 }
 .save-success .logo-osm {
-    color: #7092FF;
+    color: #7092ff;
     margin-bottom: 10px;
 }
 .save-success a.button.social {
@@ -3399,14 +3381,14 @@ img.tile-removing {
 .save-success .icon.social {
     height: 80px;
     width: 80px;
-    color: #7092FF;
+    color: #7092ff;
 }
 
 /* Splash Modal
 ------------------------------------------------------- */
 .modal-actions .logo-walkthrough,
 .modal-actions .logo-features {
-    color: #7092FF;
+    color: #7092ff;
 }
 
 
@@ -3597,7 +3579,7 @@ svg.mouseclick use.right {
 }
 
 .mode-save .commit-section .changeset-list button {
-    border-left: 1px solid #CCC;
+    border-left: 1px solid #ccc;
 }
 
 .changeset-list li span.count:before { content: '('; }
@@ -4154,7 +4136,7 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
 .curtain-tooltip .tooltip-inner .instruction {
     font-weight: bold;
     display: block;
-    border-top: 1px solid #CCC;
+    border-top: 1px solid #ccc;
     margin-top: 10px;
     margin-left: -20px;
     margin-right: -20px;
@@ -4232,5 +4214,5 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
 .huge-modal-button .illustration {
     height: 100px;
     width: 100px;
-    color: #7092FF;
+    color: #7092ff;
 }

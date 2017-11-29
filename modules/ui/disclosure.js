@@ -1,8 +1,10 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { event as d3_event } from 'd3-selection';
 
+import { svgIcon } from '../svg';
 import { utilRebind } from '../util/rebind';
 import { uiToggle } from './toggle';
+import { textDirection } from '../util/locale';
 
 
 export function uiDisclosure(context, key, expandedDefault) {
@@ -15,19 +17,35 @@ export function uiDisclosure(context, key, expandedDefault) {
 
 
     var disclosure = function(selection) {
-        var hideToggle = selection.selectAll('.hide-toggle')
+        var hideToggle = selection.selectAll('.hide-toggle-' + key)
             .data([0]);
 
-        hideToggle = hideToggle.enter()
+        // enter
+        var hideToggleEnter = hideToggle.enter()
             .append('a')
             .attr('href', '#')
             .attr('class', 'hide-toggle hide-toggle-' + key)
+            .call(svgIcon('', 'pre-text', 'hide-toggle-icon'));
+
+        hideToggleEnter
+            .append('span')
+            .attr('class', 'hide-toggle-text');
+
+        // update
+        hideToggle = hideToggleEnter
             .merge(hideToggle);
 
         hideToggle
-            .text(_title)
             .on('click', toggle)
             .classed('expanded', _expanded);
+
+        hideToggle.selectAll('.hide-toggle-text')
+            .text(_title);
+
+        hideToggle.selectAll('.hide-toggle-icon')
+            .attr('xlink:href', _expanded ? '#icon-down'
+                : (textDirection === 'rtl') ? '#icon-backward' : '#icon-forward'
+            );
 
 
         var wrap = selection.selectAll('.disclosure-wrap')
@@ -47,11 +65,21 @@ export function uiDisclosure(context, key, expandedDefault) {
             d3_event.preventDefault();
 
             _expanded = !_expanded;
+
             if (_updatePreference) {
                 context.storage('disclosure.' + key + '.expanded', _expanded);
             }
-            hideToggle.classed('expanded', _expanded);
-            wrap.call(uiToggle(_expanded));
+
+            hideToggle
+                .classed('expanded', _expanded);
+
+            hideToggle.selectAll('.hide-toggle-icon')
+                .attr('xlink:href', _expanded ? '#icon-down'
+                    : (textDirection === 'rtl') ? '#icon-backward' : '#icon-forward'
+                );
+
+            wrap
+                .call(uiToggle(_expanded));
 
             dispatch.call('toggled', this, _expanded);
         }
