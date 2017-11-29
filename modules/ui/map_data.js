@@ -8,7 +8,9 @@ import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import { svgIcon } from '../svg';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
+import { uiBackground } from './background';
 import { uiDisclosure } from './disclosure';
+import { uiHelp } from './help';
 import { uiTooltipHtml } from './tooltipHtml';
 
 
@@ -24,7 +26,6 @@ export function uiMapData(context) {
     var _dataLayerContainer = d3_select(null);
     var _fillList = d3_select(null);
     var _featureList = d3_select(null);
-
 
 
     function showsFeature(d) {
@@ -407,11 +408,9 @@ export function uiMapData(context) {
                 _shown = show;
 
                 if (show) {
+                    uiBackground.hidePane();
+                    uiHelp.hidePane();
                     update();
-
-                    selection.on('mousedown.map_data-inside', function() {
-                        return d3_event.stopPropagation();
-                    });
 
                     pane
                         .style('display', 'block')
@@ -430,8 +429,6 @@ export function uiMapData(context) {
                         .on('end', function() {
                             d3_select(this).style('display', 'none');
                         });
-
-                    selection.on('mousedown.map_data-inside', null);
                 }
             }
         }
@@ -501,6 +498,10 @@ export function uiMapData(context) {
 
         d3_select(document)
             .call(keybinding);
+
+        uiMapData.hidePane = hidePane;
+        uiMapData.togglePane = togglePane;
+        uiMapData.setVisible = setVisible;
     }
 
     return mapData;

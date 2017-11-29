@@ -9,7 +9,9 @@ import marked from 'marked';
 import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
+import { uiBackground } from './background';
 import { uiIntro } from './intro';
+import { uiMapData } from './map_data';
 import { uiShortcuts } from './shortcuts';
 import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
@@ -278,14 +280,15 @@ export function uiHelp(context) {
                 shown = show;
 
                 if (show) {
-                    selection.on('mousedown.help-inside', function() {
-                        return d3_event.stopPropagation();
-                    });
+                    uiBackground.hidePane();
+                    uiMapData.hidePane();
+
                     pane.style('display', 'block')
                         .style('right', '-500px')
                         .transition()
                         .duration(200)
                         .style('right', '0px');
+
                 } else {
                     pane.style('right', '0px')
                         .transition()
@@ -294,7 +297,6 @@ export function uiHelp(context) {
                         .on('end', function() {
                             d3_select(this).style('display', 'none');
                         });
-                    selection.on('mousedown.help-inside', null);
                 }
             }
         }
@@ -449,6 +451,10 @@ export function uiHelp(context) {
 
         d3_select(document)
             .call(keybinding);
+
+        uiHelp.hidePane = hidePane;
+        uiHelp.togglePane = togglePane;
+        uiHelp.setVisible = setVisible;
     }
 
     return help;

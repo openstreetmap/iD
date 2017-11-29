@@ -17,6 +17,8 @@ import { svgIcon } from '../svg';
 import { uiBackgroundOffset } from './background_offset';
 import { uiCmd } from './cmd';
 import { uiDisclosure } from './disclosure';
+import { uiHelp } from './help';
+import { uiMapData } from './map_data';
 import { uiMapInMap } from './map_in_map';
 import { uiTooltipHtml } from './tooltipHtml';
 import { utilDetect } from '../util/detect';
@@ -346,10 +348,9 @@ export function uiBackground(context) {
                 _shown = show;
 
                 if (show) {
-                    selection
-                        .on('mousedown.background-inside', function() {
-                            d3_event.stopPropagation();
-                        });
+                    uiMapData.hidePane();
+                    uiHelp.hidePane();
+                    update();
 
                     pane
                         .style('display', 'block')
@@ -357,9 +358,6 @@ export function uiBackground(context) {
                         .transition()
                         .duration(200)
                         .style('right', '0px');
-
-                    pane.selectAll('.layer')
-                        .call(setTooltips);
 
                 } else {
                     pane
@@ -371,9 +369,6 @@ export function uiBackground(context) {
                         .on('end', function() {
                             d3_select(this).style('display', 'none');
                         });
-
-                    selection
-                        .on('mousedown.background-inside', null);
                 }
             }
         }
@@ -468,6 +463,10 @@ export function uiBackground(context) {
 
         d3_select(document)
             .call(keybinding);
+
+        uiBackground.hidePane = hidePane;
+        uiBackground.togglePane = togglePane;
+        uiBackground.setVisible = setVisible;
     }
 
     return background;
