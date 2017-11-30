@@ -1,6 +1,7 @@
 import _find from 'lodash-es/find';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
 import { select as d3_select } from 'd3-selection';
 
 import { data } from '../../data';
@@ -22,11 +23,17 @@ export function rendererBackground(context) {
 
     function background(selection) {
         var baseFilter = '';
+        var blur, contrast;
+
         if (_brightness !== 1) {
             baseFilter += 'brightness(' + _brightness + ')';
         }
-        if (_sharpness !== 1) {
-            baseFilter += 'contrast(1.25)';// + _sharpness + ')';
+        if (_sharpness < 1) {  // gaussian blur
+            blur = d3_interpolateNumber(0.5, 5)(1 - _sharpness);
+            baseFilter += 'blur(' + blur + 'px)';
+        } else if (_sharpness > 1) {
+            contrast = d3_interpolateNumber(1, 1.5)(_sharpness - 1);
+            baseFilter += 'contrast(' + contrast + ')';
         }
 
         var base = selection.selectAll('.layer-background')
@@ -52,30 +59,26 @@ export function rendererBackground(context) {
 
         var maskFilter = '';
         var mixBlendMode = '';
-        if (_sharpness !== 1) {
-            var blur = Math.abs(_sharpness - 1) * 10;
-            maskFilter += 'blur(' + blur + 'px)';
+        if (_sharpness > 1) {  // apply unsharp mask
+            mixBlendMode = 'overlay';
+            maskFilter = 'saturate(0)';
 
-            if (_sharpness > 1) {
-                maskFilter += 'invert(1)';
-                mixBlendMode = 'overlay';
-            } else {
-                mixBlendMode = 'normal';
-            }
+            blur = d3_interpolateNumber(3, 0.5)(_sharpness - 1);
+            maskFilter += 'blur(' + blur + 'px) invert(1)';
 
-            // var contrast = 1 / (_sharpness || 0.1);
-            maskFilter += 'contrast(0.75)';// + contrast + ')';
+            contrast = d3_interpolateNumber(0, 1)(_sharpness - 1);
+            maskFilter += 'contrast(' + contrast + ')';
         }
 
         var mask = base.selectAll('.layer-unsharp-mask')
-            .data(_sharpness !== 1 ? [0] : []);
+            .data(_sharpness > 1 ? [0] : []);
 
         mask.exit()
             .remove();
 
         mask.enter()
             .append('div')
-            .attr('class', 'layer layer-unsharp-mask')
+            .attr('class', 'layer layer-mask layer-unsharp-mask')
             .merge(mask)
             .call(baseLayer)
             .style('-webkit-filter', maskFilter || null)

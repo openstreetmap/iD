@@ -2662,7 +2662,17 @@ img.tile {
     user-select: none;
 
     opacity: 0;
+}
 
+img.tile-loaded {
+    opacity: 1;
+}
+
+img.tile-removing {
+    opacity: 0;
+}
+
+div:not(.layer-mask) > img.tile {
     -webkit-transition: opacity 200ms linear;
     transition: opacity 200ms linear;
     -moz-transition: opacity 200ms linear;
@@ -2694,14 +2704,6 @@ img.tile {
 
 img.tile-debug {
     outline: 1px solid red;
-}
-
-img.tile-loaded {
-    opacity: 1;
-}
-
-img.tile-removing {
-    opacity: 0;
 }
 
 

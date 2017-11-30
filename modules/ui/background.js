@@ -10,6 +10,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+
 import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 
 import { t, textDirection } from '../util/locale';
@@ -71,7 +72,7 @@ export function uiBackground(context) {
             d = d3_event.target.value;
         }
 
-        d = clamp(d, 0.5, 2);
+        d = clamp(d, 0.25, 2);
         context.background().sharpness(d);
 
         _displayOptions.selectAll('.sharpness-input')
@@ -299,7 +300,7 @@ export function uiBackground(context) {
             .append('input')
             .attr('class', 'sharpness-input')
             .attr('type', 'range')
-            .attr('min', '0.5')
+            .attr('min', '0.25')
             .attr('max', '2')
             .attr('step', '0.05')
             .property('value', _sharpness)
