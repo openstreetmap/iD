@@ -4577,6 +4577,10 @@
                     "name": "Mast",
                     "terms": "antenna,broadcast tower,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,radio mast,radio tower,television tower,transmission mast,transmission tower,tv tower"
                 },
+                "man_made/monitoring_station": {
+                    "name": "Monitoring Station",
+                    "terms": "weather,earthquake,sismology,air,gps"
+                },
                 "man_made/observation": {
                     "name": "Observation Tower",
                     "terms": "lookout tower,fire tower"
