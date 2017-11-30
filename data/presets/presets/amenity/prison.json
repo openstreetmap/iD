@@ -1,6 +1,7 @@
 {
     "icon": "prison",
     "fields": [
+        "name",
         "operator",
         "address"
     ],

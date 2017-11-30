@@ -6,6 +6,9 @@
         "line",
         "area"
     ],
+    "fields": [
+        "name"
+    ],
     "tags": {
         "waterway": "dam"
     },

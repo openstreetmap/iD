@@ -21,17 +21,9 @@
         "report_a_bug": "ناردنی هەڵە",
         "help_translate": "یارمەتیدان بۆ وەرگێڕان",
         "commit": {
-            "save": "پاشەکەوتکردن",
             "cancel": "پاشگەزبوونەوە",
             "deleted": "سڕایەوە",
             "created": "دروستکرا"
-        },
-        "infobox": {
-            "closed": "داخرا",
-            "center": "ناوەند",
-            "length": "درێژی",
-            "area": "ناوچە",
-            "location": "شوێن"
         },
         "geometry": {
             "point": "خاڵ",
@@ -70,6 +62,19 @@
             "title": "یارمەتی"
         },
         "intro": {
+            "graph": {
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "tr"
+            },
             "startediting": {
                 "title": "دەستپێکردنی دەستکاری"
             }

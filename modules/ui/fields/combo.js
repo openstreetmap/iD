@@ -1,28 +1,47 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _compact from 'lodash-es/compact';
+import _filter from 'lodash-es/filter';
+import _find from 'lodash-es/find';
+import _map from 'lodash-es/map';
+import _reject from 'lodash-es/reject';
+import _remove from 'lodash-es/remove';
+import _some from 'lodash-es/some';
+import _uniq from 'lodash-es/uniq';
+
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { event as d3_event } from 'd3-selection';
+import { d3combobox as d3_combobox } from '../../lib/d3.combobox.js';
+
 import { t } from '../../util/locale';
-import { d3combobox } from '../../lib/d3.combobox.js';
-import { services } from '../../services/index';
-import { utilRebind } from '../../util/rebind';
-import { utilGetSetValue } from '../../util/get_set_value';
+import { services } from '../../services';
+import {
+    utilGetSetValue,
+    utilNoAuto,
+    utilRebind
+} from '../../util';
 
 export {
-    uiFieldCombo as uiFieldTypeCombo,
     uiFieldCombo as uiFieldMultiCombo,
-    uiFieldCombo as uiFieldNetworkCombo
+    uiFieldCombo as uiFieldNetworkCombo,
+    uiFieldCombo as uiFieldSemiCombo,
+    uiFieldCombo as uiFieldTypeCombo
 };
 
 
 export function uiFieldCombo(field, context) {
-    var dispatch = d3.dispatch('change'),
-        nominatim = services.nominatim,
+    var dispatch = d3_dispatch('change'),
+        nominatim = services.geocoder,
         taginfo = services.taginfo,
         isMulti = (field.type === 'multiCombo'),
         isNetwork = (field.type === 'networkCombo'),
+        isSemi = (field.type === 'semiCombo'),
         optstrings = field.strings && field.strings.options,
         optarray = field.options,
         snake_case = (field.snake_case || (field.snake_case === undefined)),
-        combobox = d3combobox().minItems(isMulti ? 1 : 2),
+        caseSensitive = field.caseSensitive,
+        combobox = d3_combobox()
+            .container(context.container())
+            .caseSensitive(caseSensitive)
+            .minItems(isMulti || isSemi ? 1 : 2),
         comboData = [],
         multiData = [],
         container,
@@ -57,7 +76,7 @@ export function uiFieldCombo(field, context) {
         dval = clean(dval || '');
 
         if (optstrings) {
-            var match = _.find(comboData, function(o) {
+            var match = _find(comboData, function(o) {
                 return o.key && clean(o.value) === dval;
             });
             if (match) {
@@ -79,7 +98,7 @@ export function uiFieldCombo(field, context) {
         tval = tval || '';
 
         if (optstrings) {
-            var match = _.find(comboData, function(o) { return o.key === tval && o.value; });
+            var match = _find(comboData, function(o) { return o.key === tval && o.value; });
             if (match) {
                 return match.value;
             }
@@ -94,8 +113,8 @@ export function uiFieldCombo(field, context) {
 
 
     function objectDifference(a, b) {
-        return _.reject(a, function(d1) {
-            return _.some(b, function(d2) { return d1.value === d2.value; });
+        return _reject(a, function(d1) {
+            return _some(b, function(d2) { return d1.value === d2.value; });
         });
     }
 
@@ -153,19 +172,26 @@ export function uiFieldCombo(field, context) {
         if (hasCountryPrefix) {
             query = country + ':';
         }
-        taginfo[fn]({
-            debounce: true,
+
+        var params = {
+            debounce: (q !== ''),
             key: field.key,
-            geometry: context.geometry(entity.id),
             query: query
-        }, function(err, data) {
+        };
+
+        if (entity) {
+            params.geometry = context.geometry(entity.id);
+        }
+
+        taginfo[fn](params, function(err, data) {
             if (err) return;
             if (hasCountryPrefix) {
-                data = _.filter(data, function(d) {
+                data = _filter(data, function(d) {
                     return d.value.toLowerCase().indexOf(country + ':') === 0;
                 });
             }
-            comboData = _.map(data, function(d) {
+
+            comboData = _map(data, function(d) {
                 var k = d.value;
                 if (isMulti) k = k.replace(field.key, '');
                 var v = snake_case ? unsnake(k) : k;
@@ -175,6 +201,7 @@ export function uiFieldCombo(field, context) {
                     title: isMulti ? v : d.title
                 };
             });
+
             comboData = objectDifference(comboData, multiData);
             if (callback) callback(comboData);
         });
@@ -183,16 +210,21 @@ export function uiFieldCombo(field, context) {
 
     function setPlaceholder(d) {
         var ph;
-        if (isMulti) {
+
+        if (isMulti || isSemi) {
             ph = field.placeholder() || t('inspector.add');
         } else {
-            var vals = _.map(d, 'value').filter(function(s) { return s.length < 20; }),
-                placeholders = vals.length > 1 ? vals : _.map(d, 'key');
+            var vals = _map(d, 'value').filter(function(s) { return s.length < 20; }),
+                placeholders = vals.length > 1 ? vals : _map(d, 'key');
             ph = field.placeholder() || placeholders.slice(0, 3).join(', ');
         }
 
+        if (ph.match(/(…|\.\.\.)$/) === null) {
+            ph += '…';
+        }
+
         container.selectAll('input')
-            .attr('placeholder', ph + '…');
+            .attr('placeholder', ph);
     }
 
 
@@ -200,12 +232,18 @@ export function uiFieldCombo(field, context) {
         var val = tagValue(utilGetSetValue(input)),
             t = {};
 
-        if (isMulti) {
+        if (isMulti || isSemi) {
             if (!val) return;
             container.classed('active', false);
             utilGetSetValue(input, '');
-            field.keys.push(field.key + val);
-            t[field.key + val] = 'yes';
+            if (isMulti) {
+                field.keys.push(field.key + val);
+                t[field.key + val] = 'yes';
+            } else if (isSemi) {
+                var arr = multiData.map(function(d) { return d.key; });
+                arr.push(val);
+                t[field.key] = _compact(_uniq(arr)).join(';');
+            }
             window.setTimeout(function() { input.node().focus(); }, 10);
 
         } else {
@@ -217,15 +255,22 @@ export function uiFieldCombo(field, context) {
 
 
     function removeMultikey(d) {
-        d3.event.stopPropagation();
+        d3_event.stopPropagation();
         var t = {};
-        t[d.key] = undefined;
+        if (isMulti) {
+            t[d.key] = undefined;
+        } else if (isSemi) {
+            _remove(multiData, function(md) { return md.key === d.key; });
+            var arr = multiData.map(function(md) { return md.key; });
+            arr = _compact(_uniq(arr));
+            t[field.key] = arr.length ? arr.join(';') : undefined;
+        }
         dispatch.call('change', this, t);
     }
 
 
     function combo(selection) {
-        if (isMulti) {
+        if (isMulti || isSemi) {
             container = selection.selectAll('ul').data([0]);
 
             container = container.enter()
@@ -247,6 +292,7 @@ export function uiFieldCombo(field, context) {
             .append('input')
             .attr('type', 'text')
             .attr('id', 'preset-input-' + field.id)
+            .call(utilNoAuto)
             .call(initCombo, selection)
             .merge(input);
 
@@ -261,7 +307,7 @@ export function uiFieldCombo(field, context) {
             .on('change', change)
             .on('blur', change);
 
-        if (isMulti) {
+        if (isMulti || isSemi) {
             combobox
                 .on('accept', function() {
                     input.node().blur();
@@ -275,22 +321,33 @@ export function uiFieldCombo(field, context) {
 
 
     combo.tags = function(tags) {
-        if (isMulti) {
+        if (isMulti || isSemi) {
             multiData = [];
 
-            // Build multiData array containing keys already set..
-            Object.keys(tags).forEach(function(key) {
-                if (key.indexOf(field.key) !== 0 || tags[key].toLowerCase() !== 'yes') return;
+            if (isMulti) {
+                // Build multiData array containing keys already set..
+                Object.keys(tags).forEach(function(key) {
+                    if (key.indexOf(field.key) !== 0 || tags[key].toLowerCase() !== 'yes') return;
 
-                var suffix = key.substring(field.key.length);
-                multiData.push({
-                    key: key,
-                    value: displayValue(suffix)
+                    var suffix = key.substring(field.key.length);
+                    multiData.push({
+                        key: key,
+                        value: displayValue(suffix)
+                    });
                 });
-            });
 
-            // Set keys for form-field modified (needed for undo and reset buttons)..
-            field.keys = _.map(multiData, 'key');
+                // Set keys for form-field modified (needed for undo and reset buttons)..
+                field.keys = _map(multiData, 'key');
+
+            } else if (isSemi) {
+                var arr = _compact(_uniq((tags[field.key] || '').split(';')));
+                multiData = arr.map(function(key) {
+                    return {
+                        key: key,
+                        value: displayValue(key)
+                    };
+                });
+            }
 
             // Exclude existing multikeys from combo options..
             var available = objectDifference(comboData, multiData);

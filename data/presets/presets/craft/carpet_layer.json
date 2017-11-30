@@ -1,6 +1,7 @@
 {
-    "icon": "square",
+    "icon": "poi-tool",
     "fields": [
+        "name",
         "operator",
         "address",
         "building_area",

@@ -1,6 +1,7 @@
 {
     "icon": "swimming",
     "fields": [
+        "name",
         "access_simple",
         "operator",
         "address",
@@ -15,8 +16,12 @@
         "water"
     ],
     "tags": {
-      "leisure":"sports_centre",
-      "sport":"swimming"
+      "leisure": "sports_centre",
+      "sport": "swimming"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "swimming"
     },
     "name": "Swimming Pool Facility"
 }

@@ -1,6 +1,10 @@
 {
+    "icon": "pitch",
     "geometry": [
         "area"
+    ],
+    "fields": [
+        "name"
     ],
     "tags": {
         "landuse": "recreation_ground"

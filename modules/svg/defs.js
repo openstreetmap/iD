@@ -1,4 +1,6 @@
-import * as d3 from 'd3';
+import { request as d3_request } from 'd3-request';
+import { select as d3_select } from 'd3-selection';
+
 
 /*
     A standalone SVG element that contains only a `defs` sub-element. To be
@@ -8,13 +10,13 @@ export function svgDefs(context) {
 
     function SVGSpriteDefinition(id, href) {
         return function(defs) {
-            d3.request(href)
+            d3_request(href)
                 .mimeType('image/svg+xml')
                 .response(function(xhr) { return xhr.responseXML; })
                 .get(function(err, svg) {
                     if (err) return;
                     defs.node().appendChild(
-                        d3.select(svg.documentElement).attr('id', id).node()
+                        d3_select(svg.documentElement).attr('id', id).node()
                     );
                 });
         };
@@ -40,7 +42,7 @@ export function svgDefs(context) {
             .attr('d', 'M 5 3 L 0 3 L 0 2 L 5 2 L 5 0 L 10 2.5 L 5 5 z')
             .attr('stroke', 'none')
             .attr('fill', '#000')
-            .attr('opacity', '0.5');
+            .attr('opacity', '0.75');
 
         // patterns
         var patterns = defs.selectAll('pattern')

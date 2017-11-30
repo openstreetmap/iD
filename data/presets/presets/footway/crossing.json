@@ -13,6 +13,10 @@
         "highway": "footway",
         "footway": "crossing"
     },
+    "reference": {
+        "key": "footway",
+        "value": "crossing"
+    },
     "terms": [],
     "name": "Street Crossing"
 }

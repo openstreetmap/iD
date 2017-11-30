@@ -3,6 +3,9 @@
     "geometry": [
         "area"
     ],
+    "fields": [
+        "name"
+    ],
     "tags": {
         "landuse": "retail"
     },

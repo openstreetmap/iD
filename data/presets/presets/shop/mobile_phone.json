@@ -1,6 +1,7 @@
 {
-    "icon": "mobilephone",
+    "icon": "mobile-phone",
     "fields": [
+        "name",
         "operator",
         "address",
         "building_area",

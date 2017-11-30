@@ -1,4 +1,5 @@
-import * as d3 from 'd3';
+import { interpolate as d3_interpolate } from 'd3-interpolate';
+
 import { uiEntityEditor } from './entity_editor';
 import { uiPresetList } from './preset_list';
 import { uiViewOnOSM } from './view_on_osm';
@@ -70,7 +71,7 @@ export function uiInspector(context) {
 
         function showList(preset) {
             wrap.transition()
-                .styleTween('right', function() { return d3.interpolate('0%', '-100%'); });
+                .styleTween('right', function() { return d3_interpolate('0%', '-100%'); });
 
             presetPane
                 .call(presetList.preset(preset).autofocus(true));
@@ -79,7 +80,7 @@ export function uiInspector(context) {
 
         function setPreset(preset) {
             wrap.transition()
-                .styleTween('right', function() { return d3.interpolate('-100%', '0%'); });
+                .styleTween('right', function() { return d3_interpolate('-100%', '0%'); });
 
             editorPane
                 .call(entityEditor.preset(preset));

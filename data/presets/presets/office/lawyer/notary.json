@@ -1,0 +1,29 @@
+{
+    "icon": "suitcase",
+    "fields": [
+        "name",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "lawyer",
+        "lawyer": "notary"
+    },
+    "reference": {
+        "key": "office",
+        "value": "notary"
+    },
+    "terms": [
+        "clerk",
+        "signature",
+        "wills",
+        "deeds",
+        "estate"
+    ],
+    "name": "Notary Office"
+}

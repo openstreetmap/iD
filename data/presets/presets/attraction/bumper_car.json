@@ -1,0 +1,21 @@
+{
+    "icon": "car",
+    "fields": [
+        "name",
+        "operator",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "theme park",
+        "dodgem cars",
+        "autoscooter"
+    ],
+    "tags": {
+        "attraction": "bumper_car"
+    },
+    "name": "Bumper Car"
+}

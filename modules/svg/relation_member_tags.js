@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import _extend from 'lodash-es/extend';
+
 
 export function svgRelationMemberTags(graph) {
     return function(entity) {
@@ -6,7 +7,7 @@ export function svgRelationMemberTags(graph) {
         graph.parentRelations(entity).forEach(function(relation) {
             var type = relation.tags.type;
             if (type === 'multipolygon' || type === 'boundary') {
-                tags = _.extend({}, relation.tags, tags);
+                tags = _extend({}, relation.tags, tags);
             }
         });
         return tags;

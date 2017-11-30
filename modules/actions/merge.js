@@ -1,12 +1,14 @@
-import _ from 'lodash';
+import _extend from 'lodash-es/extend';
+import _groupBy from 'lodash-es/groupBy';
+import _uniq from 'lodash-es/uniq';
 
 
 export function actionMerge(ids) {
 
     function groupEntitiesByGeometry(graph) {
         var entities = ids.map(function(id) { return graph.entity(id); });
-        return _.extend({point: [], area: [], line: [], relation: []},
-            _.groupBy(entities, function(entity) { return entity.geometry(graph); }));
+        return _extend({point: [], area: [], line: [], relation: []},
+            _groupBy(entities, function(entity) { return entity.geometry(graph); }));
     }
 
 
@@ -17,15 +19,34 @@ export function actionMerge(ids) {
 
         points.forEach(function(point) {
             target = target.mergeTags(point.tags);
+            graph = graph.replace(target);
 
             graph.parentRelations(point).forEach(function(parent) {
                 graph = graph.replace(parent.replaceMember(point, target));
             });
 
-            graph = graph.remove(point);
-        });
+            var nodes = _uniq(graph.childNodes(target)),
+                removeNode = point;
 
-        graph = graph.replace(target);
+            for (var i = 0; i < nodes.length; i++) {
+                var node = nodes[i];
+                if (graph.parentWays(node).length > 1 ||
+                    graph.parentRelations(node).length ||
+                    node.hasInterestingTags()) {
+                    continue;
+                }
+
+                // Found an uninteresting child node on the target way.
+                // Move orig point into its place to preserve point's history. #3683
+                graph = graph.replace(point.update({ tags: {}, loc: node.loc }));
+                target = target.replaceNode(node.id, point.id);
+                graph = graph.replace(target);
+                removeNode = node;
+                break;
+            }
+
+            graph = graph.remove(removeNode);
+        });
 
         return graph;
     };

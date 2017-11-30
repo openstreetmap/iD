@@ -3,13 +3,18 @@
         "address"
     ],
     "geometry": [
-        "point"
+        "point",
+        "vertex",
+        "area"
     ],
     "tags": {
-        "addr:housenumber": "*"
+        "addr:*": "*"
     },
     "addTags": {},
     "removeTags": {},
-    "matchScore": 0.2,
-    "name": "Address"
+    "reference": {
+        "key": "addr"
+    },
+    "name": "Address",
+    "matchScore": 0.15
 }

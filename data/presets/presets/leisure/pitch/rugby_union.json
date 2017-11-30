@@ -12,6 +12,10 @@
         "leisure": "pitch",
         "sport": "rugby_union"
     },
+    "reference": {
+        "key": "sport",
+        "value": "rugby_union"
+    },
     "terms": [],
     "name": "Rugby Union Field"
 }

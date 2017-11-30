@@ -1,22 +1,33 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _find from 'lodash-es/find';
+
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
+import {
+    select as d3_select,
+    event as d3_event
+} from 'd3-selection';
+
+import { d3combobox as d3_combobox } from '../../lib/d3.combobox.js';
+
 import { t } from '../../util/locale';
-import { d3combobox } from '../../lib/d3.combobox.js';
-import { dataSuggestions, dataWikipedia } from '../../../data/index';
-import { services } from '../../services/index';
-import { svgIcon } from '../../svg/index';
+import { dataSuggestions, dataWikipedia } from '../../../data';
+import { services } from '../../services';
+import { svgIcon } from '../../svg';
 import { tooltip } from '../../util/tooltip';
 import { utilDetect } from '../../util/detect';
-import { utilGetSetValue } from '../../util/get_set_value';
-import { utilRebind } from '../../util/rebind';
-import { utilSuggestNames } from '../../util/index';
+import {
+    utilGetSetValue,
+    utilNoAuto,
+    utilRebind,
+    utilSuggestNames
+} from '../../util';
 
 
 export function uiFieldLocalized(field, context) {
-    var dispatch = d3.dispatch('change', 'input'),
+    var dispatch = d3_dispatch('change', 'input'),
         wikipedia = services.wikipedia,
-        input = d3.select(null),
-        localizedInputs = d3.select(null),
+        input = d3_select(null),
+        localizedInputs = d3_select(null),
         wikiTitles,
         entity;
 
@@ -31,13 +42,16 @@ export function uiFieldLocalized(field, context) {
             .attr('id', 'preset-input-' + field.id)
             .attr('class', 'localized-main')
             .attr('placeholder', field.placeholder())
+            .call(utilNoAuto)
             .merge(input);
 
         if (field.id === 'name') {
             var preset = context.presets().match(entity, context.graph());
-            input.call(d3combobox().fetcher(
-                utilSuggestNames(preset, dataSuggestions)
-            ));
+            input
+                .call(d3_combobox()
+                    .container(context.container())
+                    .fetcher(utilSuggestNames(preset, dataSuggestions))
+                );
         }
 
         input
@@ -73,10 +87,10 @@ export function uiFieldLocalized(field, context) {
 
 
     function addNew() {
-        d3.event.preventDefault();
+        d3_event.preventDefault();
         var data = localizedInputs.selectAll('div.entry').data();
         var defaultLang = utilDetect().locale.toLowerCase().split('-')[0];
-        var langExists = _.find(data, function(datum) { return datum.lang === defaultLang;});
+        var langExists = _find(data, function(datum) { return datum.lang === defaultLang;});
         var isLangEn = defaultLang.indexOf('en') > -1;
         if (isLangEn || langExists) {
             defaultLang = '';
@@ -89,7 +103,7 @@ export function uiFieldLocalized(field, context) {
     function change(onInput) {
         return function() {
             var t = {};
-            t[field.key] = utilGetSetValue(d3.select(this)) || undefined;
+            t[field.key] = utilGetSetValue(d3_select(this)) || undefined;
             dispatch.call('change', this, t, onInput);
         };
     }
@@ -101,9 +115,9 @@ export function uiFieldLocalized(field, context) {
 
 
     function changeLang(d) {
-        var lang = utilGetSetValue(d3.select(this)),
+        var lang = utilGetSetValue(d3_select(this)),
             t = {},
-            language = _.find(dataWikipedia, function(d) {
+            language = _find(dataWikipedia, function(d) {
                 return d[0].toLowerCase() === lang.toLowerCase() ||
                     d[1].toLowerCase() === lang.toLowerCase();
             });
@@ -114,7 +128,7 @@ export function uiFieldLocalized(field, context) {
             t[key(d.lang)] = undefined;
         }
 
-        var value = utilGetSetValue(d3.select(this.parentNode)
+        var value = utilGetSetValue(d3_select(this.parentNode)
             .selectAll('.localized-value'));
 
         if (lang && value) {
@@ -131,7 +145,7 @@ export function uiFieldLocalized(field, context) {
     function changeValue(d) {
         if (!d.lang) return;
         var t = {};
-        t[key(d.lang)] = utilGetSetValue(d3.select(this)) || undefined;
+        t[key(d.lang)] = utilGetSetValue(d3_select(this)) || undefined;
         dispatch.call('change', this, t);
     }
 
@@ -166,8 +180,11 @@ export function uiFieldLocalized(field, context) {
 
         innerWrap.attr('class', 'entry')
             .each(function() {
-                var wrap = d3.select(this);
-                var langcombo = d3combobox().fetcher(fetcher).minItems(0);
+                var wrap = d3_select(this);
+                var langcombo = d3_combobox()
+                    .container(context.container())
+                    .fetcher(fetcher)
+                    .minItems(0);
 
                 var label = wrap
                     .append('label')
@@ -179,11 +196,11 @@ export function uiFieldLocalized(field, context) {
                     .append('button')
                     .attr('class', 'minor remove')
                     .on('click', function(d){
-                        d3.event.preventDefault();
+                        d3_event.preventDefault();
                         var t = {};
                         t[key(d.lang)] = undefined;
                         dispatch.call('change', this, t);
-                        d3.select(this.parentNode.parentNode)
+                        d3_select(this.parentNode.parentNode)
                             .style('top','0')
                             .style('max-height','240px')
                             .transition()
@@ -221,7 +238,7 @@ export function uiFieldLocalized(field, context) {
             .style('max-height', '240px')
             .style('opacity', '1')
             .on('end', function() {
-                d3.select(this)
+                d3_select(this)
                     .style('max-height', '')
                     .style('overflow', 'visible');
             });
@@ -230,7 +247,7 @@ export function uiFieldLocalized(field, context) {
         var entry = selection.selectAll('.entry');
 
         utilGetSetValue(entry.select('.localized-lang'), function(d) {
-                var lang = _.find(dataWikipedia, function(lang) { return lang[2] === d.lang; });
+                var lang = _find(dataWikipedia, function(lang) { return lang[2] === d.lang; });
                 return lang ? lang[1] : d.lang;
             });
 

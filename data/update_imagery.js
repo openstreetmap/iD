@@ -15,7 +15,8 @@ var blacklist = {
     'tf-cycle': true,                     // 'Thunderforest OpenCycleMap'
     'qa_no_address': true,                // 'QA No Address'
 
-    'OSM-US-TIGER-Roads_Overlay-2012': true,
+    'US-TIGER-Roads-2012': true,
+    'US-TIGER-Roads-2014': true,
 
     'Waymarked_Trails-Cycling': true,
     'Waymarked_Trails-Hiking': true,
@@ -36,21 +37,10 @@ var whitelist = [
     // Add custom sources here if needed.
 ];
 
-var descriptions = {
-    'Bing': 'Satellite and aerial imagery.',
-    'Mapbox': 'Satellite and aerial imagery.',
-    'MAPNIK': 'The default OpenStreetMap layer.'
-};
 
 sources.concat(whitelist).forEach(function(source) {
     if (source.type !== 'tms' && source.type !== 'bing') return;
     if (source.id in blacklist) return;
-
-    if (source.end_date) {
-        var endDate = new Date(source.end_date),
-            isValid = !isNaN(endDate.getTime());
-        if (isValid && endDate <= cutoffDate) return;
-    }
 
     var im = {
         id: source.id,
@@ -59,14 +49,30 @@ sources.concat(whitelist).forEach(function(source) {
         template: source.url
     };
 
-    var description = source.description || descriptions[im.id];
-    if (description) im.description = description;
+    var startDate, endDate, isValid;
+
+    if (source.end_date) {
+        endDate = new Date(source.end_date);
+        isValid = !isNaN(endDate.getTime());
+        if (isValid) {
+            if (endDate <= cutoffDate) return;  // too old
+            im.endDate = endDate;
+        }
+    }
+
+    if (source.start_date) {
+        startDate = new Date(source.start_date);
+        isValid = !isNaN(startDate.getTime());
+        if (isValid) {
+            im.startDate = startDate;
+        }
+    }
 
     var extent = source.extent || {};
     if (extent.min_zoom || extent.max_zoom) {
         im.scaleExtent = [
             extent.min_zoom || 0,
-            extent.max_zoom || 20
+            extent.max_zoom || 22
         ];
     }
 
@@ -97,7 +103,7 @@ sources.concat(whitelist).forEach(function(source) {
         im.terms_html = attribution.html;
     }
 
-    ['default', 'overlay', 'best'].forEach(function(a) {
+    ['best', 'default', 'description', 'icon', 'overlay'].forEach(function(a) {
         if (source[a]) {
             im[a] = source[a];
         }

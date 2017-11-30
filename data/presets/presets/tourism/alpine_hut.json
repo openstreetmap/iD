@@ -1,6 +1,7 @@
 {
     "icon": "lodging",
     "fields": [
+        "name",
         "operator",
         "address",
         "building_area",
@@ -11,6 +12,9 @@
     "geometry": [
         "point",
         "area"
+    ],
+    "terms": [
+        "climbing hut"
     ],
     "tags": {
         "tourism": "alpine_hut"

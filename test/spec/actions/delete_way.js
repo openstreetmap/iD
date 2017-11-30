@@ -10,8 +10,9 @@ describe('iD.actionDeleteWay', function() {
         var way      = iD.Way(),
             relation = iD.Relation({members: [{ id: way.id }, { id: 'w-2' }]}),
             action   = iD.actionDeleteWay(way.id),
-            graph    = iD.Graph([way, relation]).update(action);
-        expect(_.map(graph.entity(relation.id).members, 'id')).not.to.contain(way.id);
+            graph    = iD.Graph([way, relation]).update(action),
+            ids      = graph.entity(relation.id).members.map(function (m) { return m.id; });
+        expect(ids).not.to.contain(way.id);
     });
 
     it('deletes member nodes not referenced by another parent', function() {
@@ -69,31 +70,32 @@ describe('iD.actionDeleteWay', function() {
         expect(graph.hasEntity(relation.id)).to.be.undefined;
     });
 
-    describe('#disabled', function () {
-        it('returns \'part_of_relation\' for members of route and boundary relations', function () {
-            var a        = iD.Way({id: 'a'}),
-                b        = iD.Way({id: 'b'}),
-                route    = iD.Relation({members: [{id: 'a'}], tags: {type: 'route'}}),
-                boundary = iD.Relation({members: [{id: 'b'}], tags: {type: 'boundary'}}),
-                graph    = iD.Graph([a, b, route, boundary]);
-            expect(iD.actionDeleteWay('a').disabled(graph)).to.equal('part_of_relation');
-            expect(iD.actionDeleteWay('b').disabled(graph)).to.equal('part_of_relation');
-        });
+    // This was moved to operationDelete.  We should test operations and move this test there.
+    // describe('#disabled', function () {
+    //     it('returns \'part_of_relation\' for members of route and boundary relations', function () {
+    //         var a        = iD.Way({id: 'a'}),
+    //             b        = iD.Way({id: 'b'}),
+    //             route    = iD.Relation({members: [{id: 'a'}], tags: {type: 'route'}}),
+    //             boundary = iD.Relation({members: [{id: 'b'}], tags: {type: 'boundary'}}),
+    //             graph    = iD.Graph([a, b, route, boundary]);
+    //         expect(iD.actionDeleteWay('a').disabled(graph)).to.equal('part_of_relation');
+    //         expect(iD.actionDeleteWay('b').disabled(graph)).to.equal('part_of_relation');
+    //     });
 
-        it('returns \'part_of_relation\' for outer members of multipolygons', function () {
-            var way      = iD.Way({id: 'w'}),
-                relation = iD.Relation({members: [{id: 'w', role: 'outer'}], tags: {type: 'multipolygon'}}),
-                graph    = iD.Graph([way, relation]),
-                action   = iD.actionDeleteWay(way.id);
-            expect(action.disabled(graph)).to.equal('part_of_relation');
-        });
+    //     it('returns \'part_of_relation\' for outer members of multipolygons', function () {
+    //         var way      = iD.Way({id: 'w'}),
+    //             relation = iD.Relation({members: [{id: 'w', role: 'outer'}], tags: {type: 'multipolygon'}}),
+    //             graph    = iD.Graph([way, relation]),
+    //             action   = iD.actionDeleteWay(way.id);
+    //         expect(action.disabled(graph)).to.equal('part_of_relation');
+    //     });
 
-        it('returns falsy for inner members of multipolygons', function () {
-            var way      = iD.Way({id: 'w'}),
-                relation = iD.Relation({members: [{id: 'w', role: 'inner'}], tags: {type: 'multipolygon'}}),
-                graph    = iD.Graph([way, relation]),
-                action   = iD.actionDeleteWay(way.id);
-            expect(action.disabled(graph)).not.ok;
-        });
-    });
+    //     it('returns falsy for inner members of multipolygons', function () {
+    //         var way      = iD.Way({id: 'w'}),
+    //             relation = iD.Relation({members: [{id: 'w', role: 'inner'}], tags: {type: 'multipolygon'}}),
+    //             graph    = iD.Graph([way, relation]),
+    //             action   = iD.actionDeleteWay(way.id);
+    //         expect(action.disabled(graph)).not.ok;
+    //     });
+    // });
 });

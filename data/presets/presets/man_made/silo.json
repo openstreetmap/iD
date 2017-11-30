@@ -1,4 +1,5 @@
 {
+    "icon": "poi-silo",
     "fields": [
         "building_area",
         "crop"

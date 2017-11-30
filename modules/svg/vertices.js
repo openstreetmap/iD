@@ -1,5 +1,7 @@
-import * as d3 from 'd3';
-import { osmEntity } from '../osm/index';
+import _values from 'lodash-es/values';
+
+import { dataFeatureIcons } from '../../data';
+import { osmEntity } from '../osm';
 import { svgPointTransform } from './index';
 
 
@@ -12,6 +14,7 @@ export function svgVertices(projection, context) {
     };
 
     var hover;
+
 
     function siblingAndChildVertices(ids, graph, extent) {
         var vertices = {};
@@ -52,7 +55,7 @@ export function svgVertices(projection, context) {
     }
 
 
-    function draw(selection, vertices, klass, graph, zoom) {
+    function draw(selection, vertices, klass, graph, zoom, siblings) {
 
         function icon(entity) {
             if (entity.id in icons) return icons[entity.id];
@@ -76,6 +79,12 @@ export function svgVertices(projection, context) {
                         var i = z && icon(entity),
                             c = i ? 0.5 : 0,
                             r = rads[i ? 3 : z];
+
+                        // slightly increase the size of unconnected endpoints #3775
+                        if (entity.isEndpoint(graph) && !entity.isConnected(graph)) {
+                            r += 1.5;
+                        }
+
                         this.setAttribute('cx', c);
                         this.setAttribute('cy', -c);
                         this.setAttribute('r', r);
@@ -97,6 +106,8 @@ export function svgVertices(projection, context) {
                 });
         }
 
+
+        siblings = siblings || {};
 
         var icons = {},
             z = (zoom < 17 ? 0 : zoom < 18 ? 1 : 2);
@@ -120,10 +131,14 @@ export function svgVertices(projection, context) {
         // Vertices with icons get a `use`.
         enter.filter(function(d) { return icon(d); })
             .append('use')
-            .attr('transform', 'translate(-6, -6)')
-            .attr('xlink:href', function(d) { return '#' + icon(d) + '-12'; })
-            .attr('width', '12px')
-            .attr('height', '12px')
+            .attr('transform', 'translate(-5, -6)')
+            .attr('xlink:href', function(d) {
+                var picon = icon(d),
+                    isMaki = dataFeatureIcons.indexOf(picon) !== -1;
+                return '#' + picon + (isMaki ? '-11' : '');
+            })
+            .attr('width', '11px')
+            .attr('height', '11px')
             .each(setClass('icon'));
 
         // Vertices with tags get a fill.
@@ -134,13 +149,15 @@ export function svgVertices(projection, context) {
         groups
             .merge(enter)
             .attr('transform', svgPointTransform(projection))
+            .classed('sibling', function(entity) { return entity.id in siblings; })
             .classed('shared', function(entity) { return graph.isShared(entity); })
+            .classed('endpoint', function(entity) { return entity.isEndpoint(graph); })
             .call(setAttributes);
     }
 
 
     function drawVertices(selection, graph, entities, filter, extent, zoom) {
-        var selected = siblingAndChildVertices(context.selectedIDs(), graph, extent),
+        var siblings = siblingAndChildVertices(context.selectedIDs(), graph, extent),
             wireframe = context.surface().classed('fill-wireframe'),
             vertices = [];
 
@@ -156,9 +173,10 @@ export function svgVertices(projection, context) {
             if (geometry !== 'vertex')
                 continue;
 
-            if (entity.id in selected ||
+            if (entity.id in siblings ||
                 entity.hasInterestingTags() ||
-                entity.isIntersection(graph)) {
+                entity.isEndpoint(graph) ||
+                entity.isConnected(graph)) {
                 vertices.push(entity);
             }
         }
@@ -166,7 +184,7 @@ export function svgVertices(projection, context) {
         var layer = selection.selectAll('.layer-hit');
         layer.selectAll('g.vertex.vertex-persistent')
             .filter(filter)
-            .call(draw, vertices, 'vertex-persistent', graph, zoom);
+            .call(draw, vertices, 'vertex-persistent', graph, zoom, siblings);
 
         drawHover(selection, graph, extent, zoom);
     }
@@ -177,7 +195,7 @@ export function svgVertices(projection, context) {
         var layer = selection.selectAll('.layer-hit');
 
         layer.selectAll('g.vertex.vertex-hover')
-            .call(draw, d3.values(hovered), 'vertex-hover', graph, zoom);
+            .call(draw, _values(hovered), 'vertex-hover', graph, zoom);
     }
 
 

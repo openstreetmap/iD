@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _uniq from 'lodash-es/uniq';
 import { actionDeleteRelation } from './delete_relation';
 
 
@@ -26,7 +26,7 @@ export function actionDeleteWay(wayId) {
                 }
             });
 
-        _.uniq(way.nodes).forEach(function(nodeId) {
+        _uniq(way.nodes).forEach(function(nodeId) {
             graph = graph.replace(way.removeNode(nodeId));
 
             var node = graph.entity(nodeId);
@@ -36,21 +36,6 @@ export function actionDeleteWay(wayId) {
         });
 
         return graph.remove(way);
-    };
-
-
-    action.disabled = function(graph) {
-        var disabled = false;
-
-        graph.parentRelations(graph.entity(wayId)).forEach(function(parent) {
-            var type = parent.tags.type,
-                role = parent.memberById(wayId).role || 'outer';
-            if (type === 'route' || type === 'boundary' || (type === 'multipolygon' && role === 'outer')) {
-                disabled = 'part_of_relation';
-            }
-        });
-
-        return disabled;
     };
 
 

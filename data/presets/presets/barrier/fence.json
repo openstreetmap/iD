@@ -1,5 +1,5 @@
 {
-    "icon": "prison",
+    "icon": "fence",
     "fields": [
         "fence_type",
         "height"

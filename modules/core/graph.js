@@ -1,6 +1,10 @@
-import _ from 'lodash';
+import _assign from 'lodash-es/assign';
+import _difference from 'lodash-es/difference';
+import _includes from 'lodash-es/includes';
+import _without from 'lodash-es/without';
+
 import { debug } from '../index';
-import { utilGetPrototypeOf } from '../util/index';
+import { utilGetPrototypeOf } from '../util';
 
 
 export function coreGraph(other, mutable) {
@@ -8,9 +12,9 @@ export function coreGraph(other, mutable) {
 
     if (other instanceof coreGraph) {
         var base = other.base();
-        this.entities = _.assign(Object.create(base.entities), other.entities);
-        this._parentWays = _.assign(Object.create(base.parentWays), other._parentWays);
-        this._parentRels = _.assign(Object.create(base.parentRels), other._parentRels);
+        this.entities = _assign(Object.create(base.entities), other.entities);
+        this._parentWays = _assign(Object.create(base.parentWays), other._parentWays);
+        this._parentRels = _assign(Object.create(base.parentRels), other._parentRels);
 
     } else {
         this.entities = Object.create({});
@@ -34,6 +38,12 @@ coreGraph.prototype = {
 
     entity: function(id) {
         var entity = this.entities[id];
+
+        //https://github.com/openstreetmap/iD/issues/3973#issuecomment-307052376
+        if (!entity) {
+            entity = this.entities.__proto__[id];  // eslint-disable-line no-proto
+        }
+
         if (!entity) {
             throw new Error('entity ' + id + ' not found');
         }
@@ -167,7 +177,7 @@ coreGraph.prototype = {
             if (base.parentWays[child]) {
                 for (k = 0; k < base.parentWays[child].length; k++) {
                     id = base.parentWays[child][k];
-                    if (!this.entities.hasOwnProperty(id) && !_.includes(this._parentWays[child], id)) {
+                    if (!this.entities.hasOwnProperty(id) && !_includes(this._parentWays[child], id)) {
                         this._parentWays[child].push(id);
                     }
                 }
@@ -180,7 +190,7 @@ coreGraph.prototype = {
             if (base.parentRels[child]) {
                 for (k = 0; k < base.parentRels[child].length; k++) {
                     id = base.parentRels[child][k];
-                    if (!this.entities.hasOwnProperty(id) && !_.includes(this._parentRels[child], id)) {
+                    if (!this.entities.hasOwnProperty(id) && !_includes(this._parentRels[child], id)) {
                         this._parentRels[child].push(id);
                     }
                 }
@@ -208,8 +218,8 @@ coreGraph.prototype = {
 
             // Update parentWays
             if (oldentity && entity) {
-                removed = _.difference(oldentity.nodes, entity.nodes);
-                added = _.difference(entity.nodes, oldentity.nodes);
+                removed = _difference(oldentity.nodes, entity.nodes);
+                added = _difference(entity.nodes, oldentity.nodes);
             } else if (oldentity) {
                 removed = oldentity.nodes;
                 added = [];
@@ -218,10 +228,10 @@ coreGraph.prototype = {
                 added = entity.nodes;
             }
             for (i = 0; i < removed.length; i++) {
-                parentWays[removed[i]] = _.without(parentWays[removed[i]], oldentity.id);
+                parentWays[removed[i]] = _without(parentWays[removed[i]], oldentity.id);
             }
             for (i = 0; i < added.length; i++) {
-                ways = _.without(parentWays[added[i]], entity.id);
+                ways = _without(parentWays[added[i]], entity.id);
                 ways.push(entity.id);
                 parentWays[added[i]] = ways;
             }
@@ -230,8 +240,8 @@ coreGraph.prototype = {
 
             // Update parentRels
             if (oldentity && entity) {
-                removed = _.difference(oldentity.members, entity.members);
-                added = _.difference(entity.members, oldentity);
+                removed = _difference(oldentity.members, entity.members);
+                added = _difference(entity.members, oldentity);
             } else if (oldentity) {
                 removed = oldentity.members;
                 added = [];
@@ -240,10 +250,10 @@ coreGraph.prototype = {
                 added = entity.members;
             }
             for (i = 0; i < removed.length; i++) {
-                parentRels[removed[i].id] = _.without(parentRels[removed[i].id], oldentity.id);
+                parentRels[removed[i].id] = _without(parentRels[removed[i].id], oldentity.id);
             }
             for (i = 0; i < added.length; i++) {
-                rels = _.without(parentRels[added[i].id], entity.id);
+                rels = _without(parentRels[added[i].id], entity.id);
                 rels.push(entity.id);
                 parentRels[added[i].id] = rels;
             }

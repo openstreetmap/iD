@@ -14,16 +14,16 @@ on the iD project, and then create this file with contents like<br><pre>
 ### Update master branch
 ```bash
 $  git checkout master
-$  npm run translations
-$  git add . && git commit -m 'npm run translations'
 $  rm -rf node_modules/editor-layer-index/
 $  npm install
 $  npm run imagery
 $  npm run all
 $  git add . && git commit -m 'npm run imagery'
+$  npm run translations
+$  git add . && git commit -m 'npm run translations'
 $  Update `CHANGELOG.md`
 $  Update version number in `modules/core/context.js`, `package.json`
-$  git add . && git commit -m 'A.B.C'
+$  git add . && git commit -m 'vA.B.C'
 $  git push origin master
 ```
 
@@ -36,6 +36,8 @@ $  git add -f dist/*.css dist/*.js dist/img/*.svg dist/mapillary-js/
 $  git commit -m 'Check in build'
 $  git tag vA.B.C
 $  git push origin -f release vA.B.C
+   Open https://github.com/openstreetmap/iD/tags
+   Click "Add Release Notes" and link to the CHANGELOG
 ```
 
 ### Update openstreetmap-website
@@ -56,5 +58,5 @@ $  bundle install
 $  rm -rf vendor/assets/iD/* && vendorer
 $  git add . && git commit -m 'Update to iD vA.B.C'
 $  git push osmlab
-$  Open pull request
+   Open pull request
 ```

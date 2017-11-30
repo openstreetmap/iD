@@ -1,11 +1,11 @@
-import _ from 'lodash';
 import { actionReverse } from '../actions/reverse';
+import { osmIsInterestingTag } from './tags';
 
 
 // For fixing up rendering of multipolygons with tags on the outer member.
 // https://github.com/openstreetmap/iD/issues/613
 export function osmIsSimpleMultipolygonOuterMember(entity, graph) {
-    if (entity.type !== 'way')
+    if (entity.type !== 'way' || Object.keys(entity.tags).filter(osmIsInterestingTag).length === 0)
         return false;
 
     var parents = graph.parentRelations(entity);
@@ -13,7 +13,7 @@ export function osmIsSimpleMultipolygonOuterMember(entity, graph) {
         return false;
 
     var parent = parents[0];
-    if (!parent.isMultipolygon() || Object.keys(parent.tags).length > 1)
+    if (!parent.isMultipolygon() || Object.keys(parent.tags).filter(osmIsInterestingTag).length > 1)
         return false;
 
     var members = parent.members, member;
@@ -38,7 +38,7 @@ export function osmSimpleMultipolygonOuterMember(entity, graph) {
         return false;
 
     var parent = parents[0];
-    if (!parent.isMultipolygon() || Object.keys(parent.tags).length > 1)
+    if (!parent.isMultipolygon() || Object.keys(parent.tags).filter(osmIsInterestingTag).length > 1)
         return false;
 
     var members = parent.members, member, outerMember;
@@ -51,7 +51,14 @@ export function osmSimpleMultipolygonOuterMember(entity, graph) {
         }
     }
 
-    return outerMember && graph.hasEntity(outerMember.id);
+    if (!outerMember)
+        return false;
+
+    var outerEntity = graph.hasEntity(outerMember.id);
+    if (!outerEntity || !Object.keys(outerEntity.tags).filter(osmIsInterestingTag).length)
+        return false;
+
+    return outerEntity;
 }
 
 
@@ -96,28 +103,28 @@ export function osmJoinWays(array, graph) {
         current.nodes = nodes = resolve(member).slice();
         joined.push(current);
 
-        while (array.length && _.first(nodes) !== _.last(nodes)) {
-            first = _.first(nodes);
-            last  = _.last(nodes);
+        while (array.length && nodes[0] !== nodes[nodes.length - 1]) {
+            first = nodes[0];
+            last  = nodes[nodes.length - 1];
 
             for (i = 0; i < array.length; i++) {
                 member = array[i];
                 what = resolve(member);
 
-                if (last === _.first(what)) {
+                if (last === what[0]) {
                     how  = nodes.push;
                     what = what.slice(1);
                     break;
-                } else if (last === _.last(what)) {
+                } else if (last === what[what.length - 1]) {
                     how  = nodes.push;
                     what = what.slice(0, -1).reverse();
                     member = reverse(member);
                     break;
-                } else if (first === _.last(what)) {
+                } else if (first === what[what.length - 1]) {
                     how  = nodes.unshift;
                     what = what.slice(0, -1);
                     break;
-                } else if (first === _.first(what)) {
+                } else if (first === what[0]) {
                     how  = nodes.unshift;
                     what = what.slice(1).reverse();
                     member = reverse(member);

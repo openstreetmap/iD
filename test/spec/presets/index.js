@@ -85,13 +85,13 @@ describe('iD.presetIndex', function() {
                     geometry: ['point','area'],
                     suggestion: true
                 },
-                'golf/water_hazard': {
-                    tags: { 'golf': 'water_hazard' },
-                    geometry: ['line', 'area']
-                },
                 'highway/foo': {
                     tags: { 'highway': 'foo' },
                     geometry: ['area']
+                },
+                'leisure/track': {
+                    tags: { 'leisure': 'track' },
+                    geometry: ['line', 'area']
                 },
                 'natural': {
                     tags: { 'natural': '*' },
@@ -125,10 +125,10 @@ describe('iD.presetIndex', function() {
             expect(presets.areaKeys().natural.tree_row).to.be.true;
         });
 
-        it('does not blacklist key-values for presets with both area and line geometry', function() {
+        it('blacklists key-values for presets with both area and line geometry', function() {
             iD.data.presets = testPresets;
             var presets = iD.Context().presets();
-            expect(presets.areaKeys().golf).not.to.include.keys('water_hazard');
+            expect(presets.areaKeys().leisure).to.include.keys('track');
         });
 
         it('does not blacklist key-values for presets with neither area nor line geometry', function() {
@@ -180,7 +180,7 @@ describe('iD.presetIndex', function() {
             var presets = iD.Context().presets(),
                 way = iD.Way({ tags: { area: 'yes', highway: 'pedestrian' }}),
                 graph = iD.Graph([way]);
-            expect(presets.match(way, graph).id).to.eql('highway/pedestrian');
+            expect(presets.match(way, graph).id).to.eql('highway/pedestrian_area');
         });
     });
 

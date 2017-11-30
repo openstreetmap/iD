@@ -5,8 +5,7 @@
         "capacity"
     ],
     "geometry": [
-        "point",
-        "area"
+        "point"
     ],
     "tags": {
         "amenity": "charging_station"

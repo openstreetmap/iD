@@ -1,4 +1,4 @@
-import { geoLonToMeters, geoMetersToLon } from '../geo/index';
+import { geoLonToMeters, geoMetersToLon } from '../geo';
 import { utilDetect } from '../util/detect';
 
 
@@ -63,12 +63,13 @@ export function uiScale(context) {
             loc2 = projection.invert([maxLength, dims[1]]),
             scale = scaleDefs(loc1, loc2);
 
-        selection.select('#scalepath')
+        selection.select('#scale-path')
             .attr('d', 'M0.5,0.5v' + tickHeight + 'h' + scale.px + 'v-' + tickHeight);
 
-        selection.select('#scaletext')
-            .attr('x', scale.px + 8)
-            .attr('y', tickHeight)
+        selection.select('#scale-textgroup')
+            .attr('transform', 'translate(' + (scale.px + 8) + ',' + tickHeight + ')');
+
+        selection.select('#scale-text')
             .text(scale.text);
     }
 
@@ -79,14 +80,21 @@ export function uiScale(context) {
             selection.call(update);
         }
 
-        var g = selection.append('svg')
+        var scalegroup = selection.append('svg')
             .attr('id', 'scale')
             .on('click', switchUnits)
             .append('g')
             .attr('transform', 'translate(10,11)');
 
-        g.append('path').attr('id', 'scalepath');
-        g.append('text').attr('id', 'scaletext');
+        scalegroup
+            .append('path')
+            .attr('id', 'scale-path');
+
+        scalegroup
+            .append('g')
+            .attr('id', 'scale-textgroup')
+            .append('text')
+            .attr('id', 'scale-text');
 
         selection.call(update);
 

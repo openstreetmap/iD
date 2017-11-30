@@ -1,0 +1,10 @@
+{
+    "key": "sport",
+    "type": "semiCombo",
+    "label": "Sports",
+    "options": [
+        "motor",
+        "karting",
+        "motocross"
+    ]
+}

@@ -1,4 +1,5 @@
 {
+    "icon": "poi-fountain",
     "geometry": [
         "point",
         "area"

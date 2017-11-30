@@ -1,8 +1,10 @@
 {
     "icon": "waterway-river",
     "fields": [
-        "tunnel",
-        "width"
+        "name",
+        "structure_waterway",
+        "width",
+        "intermittent"
     ],
     "geometry": [
         "line"

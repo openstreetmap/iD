@@ -1,8 +1,17 @@
-import _ from 'lodash';
-import { osmIsSimpleMultipolygonOuterMember, osmRelation, osmWay } from '../osm/index';
-import { geoSphericalDistance } from '../geo/index';
+import _extend from 'lodash-es/extend';
+import _indexOf from 'lodash-es/indexOf';
+import _some from 'lodash-es/some';
+
 import { actionAddMember } from './add_member';
-import { utilWrap } from '../util/index';
+import { geoSphericalDistance } from '../geo';
+
+import {
+    osmIsSimpleMultipolygonOuterMember,
+    osmRelation,
+    osmWay
+} from '../osm';
+
+import { utilWrap } from '../util';
 
 
 // Split a way at the given node.
@@ -83,7 +92,7 @@ export function actionSplit(nodeId, newWayIds) {
 
         if (wayA.isClosed()) {
             var nodes = wayA.nodes.slice(0, -1),
-                idxA = _.indexOf(nodes, nodeId),
+                idxA = _indexOf(nodes, nodeId),
                 idxB = splitArea(nodes, idxA, graph);
 
             if (idxB < idxA) {
@@ -94,7 +103,7 @@ export function actionSplit(nodeId, newWayIds) {
                 nodesB = nodes.slice(idxB).concat(nodes.slice(0, idxA + 1));
             }
         } else {
-            var idx = _.indexOf(wayA.nodes, nodeId, 1);
+            var idx = _indexOf(wayA.nodes, nodeId, 1);
             nodesA = wayA.nodes.slice(0, idx + 1);
             nodesB = wayA.nodes.slice(idx);
         }
@@ -109,7 +118,7 @@ export function actionSplit(nodeId, newWayIds) {
             if (relation.isRestriction()) {
                 var via = relation.memberByRole('via');
                 if (via && wayB.contains(via.id)) {
-                    relation = relation.updateMember({id: wayB.id}, relation.memberById(wayA.id).index);
+                    relation = relation.replaceMember(wayA, wayB);
                     graph = graph.replace(relation);
                 }
             } else {
@@ -131,7 +140,7 @@ export function actionSplit(nodeId, newWayIds) {
 
         if (!isOuter && isArea) {
             var multipolygon = osmRelation({
-                tags: _.extend({}, wayA.tags, {type: 'multipolygon'}),
+                tags: _extend({}, wayA.tags, {type: 'multipolygon'}),
                 members: [
                     {id: wayA.id, role: 'outer', type: 'way'},
                     {id: wayB.id, role: 'outer', type: 'way'}
@@ -158,7 +167,7 @@ export function actionSplit(nodeId, newWayIds) {
     action.ways = function(graph) {
         var node = graph.entity(nodeId),
             parents = graph.parentWays(node),
-            hasLines = _.some(parents, function(parent) { return parent.geometry(graph) === 'line'; });
+            hasLines = _some(parents, function(parent) { return parent.geometry(graph) === 'line'; });
 
         return parents.filter(function(parent) {
             if (wayIds && wayIds.indexOf(parent.id) === -1)

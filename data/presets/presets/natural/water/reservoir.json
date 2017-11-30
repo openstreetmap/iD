@@ -1,4 +1,9 @@
 {
+    "icon": "water",
+    "fields": [
+        "name",
+        "intermittent"
+    ],
     "geometry": [
         "area"
     ],
@@ -6,6 +11,9 @@
         "natural": "water",
         "water": "reservoir"
     },
-    "icon": "water",
+    "reference": {
+        "key": "natural",
+        "value": "water"
+    },
     "name": "Reservoir"
 }

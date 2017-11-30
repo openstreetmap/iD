@@ -1,0 +1,36 @@
+{
+    "icon": "pitch",
+    "fields": [
+        "ref",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "fitness_station",
+        "fitness_station": "sign"
+    },
+    "addTags": {
+        "leisure": "fitness_station",
+        "fitness_station": "sign",
+        "sport": "fitness"
+    },
+    "removeTags": {
+        "leisure": "fitness_station",
+        "fitness_station": "sign",
+        "sport": "fitness"
+    },
+    "reference": {
+        "key": "leisure",
+        "value": "fitness_station"
+    },
+    "terms": [
+        "exercise",
+        "fitness",
+        "gym",
+        "trim trail"
+    ],
+    "name": "Exercise Instruction Sign"
+}

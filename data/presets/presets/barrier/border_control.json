@@ -1,0 +1,15 @@
+{
+    "icon": "roadblock",
+    "fields": [
+        "access",
+        "building_area"
+    ],
+    "geometry": [
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "barrier": "border_control"
+    },
+    "name": "Border Control"
+}

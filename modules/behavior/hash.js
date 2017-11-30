@@ -1,6 +1,16 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { utilQsString, utilStringQs } from '../util/index';
+import _assign from 'lodash-es/assign';
+import _omit from 'lodash-es/omit';
+import _throttle from 'lodash-es/throttle';
+
+import { select as d3_select } from 'd3-selection';
+
+import { geoSphericalDistance } from '../geo';
+import { modeBrowse } from '../modes';
+
+import {
+    utilQsString,
+    utilStringQs
+} from '../util';
 
 
 export function behaviorHash(context) {
@@ -11,39 +21,48 @@ export function behaviorHash(context) {
     var parser = function(map, s) {
         var q = utilStringQs(s);
         var args = (q.map || '').split('/').map(Number);
+
         if (args.length < 3 || args.some(isNaN)) {
             return true; // replace bogus hash
-        } else if (s !== formatter(map).slice(1)) {
-            map.centerZoom([args[2],
-                Math.min(lat, Math.max(-lat, args[1]))], args[0]);
+
+        } else if (s !== formatter(map).slice(1)) {   // hash has changed
+            var mode = context.mode(),
+                dist = geoSphericalDistance(map.center(), [args[2], args[1]]),
+                maxdist = 500;
+
+            // Don't allow the hash location to change too much while drawing
+            // This can happen if the user accidently hit the back button.  #3996
+            if (mode && mode.id.match(/^draw/) !== null && dist > maxdist) {
+                context.enter(modeBrowse(context));
+            }
+
+            map.centerZoom([args[2], Math.min(lat, Math.max(-lat, args[1]))], args[0]);
         }
     };
 
 
     var formatter = function(map) {
-        var mode = context.mode(),
-            center = map.center(),
+        var center = map.center(),
             zoom = map.zoom(),
             precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2)),
-            q = _.omit(utilStringQs(window.location.hash.substring(1)), 'comment'),
+            q = _omit(utilStringQs(window.location.hash.substring(1)),
+                ['comment', 'hashtags', 'walkthrough']
+            ),
             newParams = {};
 
-        if (mode && mode.id === 'browse') {
-            delete q.id;
-        } else {
-            var selected = context.selectedIDs().filter(function(id) {
-                return !context.entity(id).isNew();
-            });
-            if (selected.length) {
-                newParams.id = selected.join(',');
-            }
+        delete q.id;
+        var selected = context.selectedIDs().filter(function(id) {
+            return !context.entity(id).isNew();
+        });
+        if (selected.length) {
+            newParams.id = selected.join(',');
         }
 
         newParams.map = zoom.toFixed(2) +
-                '/' + center[1].toFixed(precision) +
-                '/' + center[0].toFixed(precision);
+            '/' + center[1].toFixed(precision) +
+            '/' + center[0].toFixed(precision);
 
-        return '#' + utilQsString(_.assign(q, newParams), true);
+        return '#' + utilQsString(_assign(q, newParams), true);
     };
 
 
@@ -56,7 +75,7 @@ export function behaviorHash(context) {
     }
 
 
-    var throttledUpdate = _.throttle(update, 500);
+    var throttledUpdate = _throttle(update, 500);
 
 
     function hashchange() {
@@ -74,15 +93,35 @@ export function behaviorHash(context) {
         context
             .on('enter.hash', throttledUpdate);
 
-        d3.select(window)
+        d3_select(window)
             .on('hashchange.hash', hashchange);
 
         if (window.location.hash) {
+
             var q = utilStringQs(window.location.hash.substring(1));
-            if (q.id) context.zoomToEntity(q.id.split(',')[0], !q.map);
-            if (q.comment) context.storage('comment', q.comment);
+
+            if (q.id) {
+                context.zoomToEntity(q.id.split(',')[0], !q.map);
+            }
+
+            if (q.comment) {
+                context.storage('comment', q.comment);
+                context.storage('commentDate', Date.now());
+            }
+
+            if (q.hashtags) {
+                context.storage('hashtags', q.hashtags);
+            }
+
+            if (q.walkthrough === 'true') {
+                hash.startWalkthrough = true;
+            }
+
             hashchange();
-            if (q.map) hash.hadHash = true;
+
+            if (q.map) {
+                hash.hadHash = true;
+            }
         }
     }
 
@@ -96,7 +135,7 @@ export function behaviorHash(context) {
         context
             .on('enter.hash', null);
 
-        d3.select(window)
+        d3_select(window)
             .on('hashchange.hash', null);
 
         window.location.hash = '';

@@ -1,15 +1,19 @@
 /* Downloads the latest translations from Transifex */
 
-var request = require('request').defaults({ maxSockets: 1 }),
-    yaml = require('js-yaml'),
-    fs = require('fs'),
-    stringify = require('json-stable-stringify'),
-    _ = require('lodash');
+require = require('@std/esm')(module, { esm: 'js' }); // eslint-disable-line no-global-assign
 
-var resources = ['core', 'presets'];
+const _isEmpty = require('lodash-es/isEmpty').default;
+const _merge = require('lodash-es/merge').default;
+
+var request = require('request').defaults({ maxSockets: 1 });
+var yaml = require('js-yaml');
+var fs = require('fs');
+var stringify = require('json-stable-stringify');
+
+var resources = ['core', 'presets', 'imagery'];
 var outdir = './dist/locales/';
 var api = 'https://www.transifex.com/api/2/';
-var project = api + 'project/id-editor/';
+var projectURL = api + 'project/id-editor/';
 
 
 /*
@@ -25,22 +29,23 @@ var project = api + 'project/id-editor/';
 var auth = JSON.parse(fs.readFileSync('./transifex.auth', 'utf8'));
 
 var sourceCore = yaml.load(fs.readFileSync('./data/core.yaml', 'utf8')),
-    sourcePresets = yaml.load(fs.readFileSync('./data/presets.yaml', 'utf8'));
+    sourcePresets = yaml.load(fs.readFileSync('./data/presets.yaml', 'utf8')),
+    sourceImagery = yaml.load(fs.readFileSync('./node_modules/editor-layer-index/i18n/en.yaml', 'utf8'));
 
 
 asyncMap(resources, getResource, function(err, locales) {
     if (err) return console.log(err);
 
-    var locale = _.merge(sourceCore, sourcePresets),
+    var locale = _merge(sourceCore, sourcePresets, sourceImagery),
         dataLocales = {};
 
     locales.forEach(function(l) {
-        locale = _.merge(locale, l);
+        locale = _merge(locale, l);
     });
 
     asyncMap(Object.keys(locale),
         function(code, done) {
-            if (code === 'en' || _.isEmpty(locale[code])) {
+            if (code === 'en' || _isEmpty(locale[code])) {
                 done();
             } else {
                 var obj = {};
@@ -61,11 +66,11 @@ asyncMap(resources, getResource, function(err, locales) {
 
 
 function getResource(resource, callback) {
-    resource = project + 'resource/' + resource + '/';
-    getLanguages(resource, function(err, codes) {
+    var resourceURL = projectURL + 'resource/' + resource + '/';
+    getLanguages(resourceURL, function(err, codes) {
         if (err) return callback(err);
 
-        asyncMap(codes, getLanguage(resource), function(err, results) {
+        asyncMap(codes, getLanguage(resourceURL), function(err, results) {
             if (err) return callback(err);
 
             var locale = {};
@@ -79,15 +84,17 @@ function getResource(resource, callback) {
 }
 
 
-function getLanguage(resource) {
+function getLanguage(resourceURL) {
     return function(code, callback) {
         code = code.replace(/-/g, '_');
-        var url = resource + 'translation/' + code;
-        if (code === 'vi') url += '?mode=reviewed';
+        var url = resourceURL + 'translation/' + code;
+        if (code === 'vi') { url += '?mode=reviewed'; }
+
         request.get(url, { auth : auth }, function(err, resp, body) {
             if (err) return callback(err);
             console.log(resp.statusCode + ': ' + url);
-            callback(null, yaml.load(JSON.parse(body).content)[code]);
+            var content = JSON.parse(body).content;
+            callback(null, yaml.safeLoad(content)[code]);
         });
     };
 }
@@ -120,16 +127,18 @@ function getLanguages(resource, callback) {
 
 
 function asyncMap(inputs, func, callback) {
-    var remaining = inputs.length,
-        results = [],
-        error;
+    setTimeout(function() {
+        var remaining = inputs.length,
+            results = [],
+            error;
 
-    inputs.forEach(function(d, i) {
-        func(d, function done(err, data) {
-            if (err) error = err;
-            results[i] = data;
-            remaining --;
-            if (!remaining) callback(error, results);
+        inputs.forEach(function(d, i) {
+            func(d, function done(err, data) {
+                if (err) error = err;
+                results[i] = data;
+                remaining --;
+                if (!remaining) callback(error, results);
+            });
         });
-    });
+    }, 300);
 }

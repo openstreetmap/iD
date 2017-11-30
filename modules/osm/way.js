@@ -1,6 +1,10 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { geoExtent, geoCross } from '../geo/index';
+import _extend from 'lodash-es/extend';
+import _map from 'lodash-es/map';
+import _uniq from 'lodash-es/uniq';
+
+import { geoArea as d3_geoArea } from 'd3-geo';
+
+import { geoExtent, geoCross } from '../geo';
 import { osmEntity } from './entity';
 import { osmLanes } from './lanes';
 import { osmOneWayTags } from './tags';
@@ -21,7 +25,7 @@ osmEntity.way = osmWay;
 osmWay.prototype = Object.create(osmEntity.prototype);
 
 
-_.extend(osmWay.prototype, {
+_extend(osmWay.prototype, {
     type: 'way',
     nodes: [],
 
@@ -122,15 +126,15 @@ _.extend(osmWay.prototype, {
 
 
     isClosed: function() {
-        return this.nodes.length > 0 && this.first() === this.last();
+        return this.nodes.length > 1 && this.first() === this.last();
     },
 
 
     isConvex: function(resolver) {
         if (!this.isClosed() || this.isDegenerate()) return null;
 
-        var nodes = _.uniq(resolver.childNodes(this)),
-            coords = _.map(nodes, 'loc'),
+        var nodes = _uniq(resolver.childNodes(this)),
+            coords = _map(nodes, 'loc'),
             curr = 0, prev = 0;
 
         for (var i = 0; i < coords.length; i++) {
@@ -152,6 +156,23 @@ _.extend(osmWay.prototype, {
 
 
     isArea: function() {
+        // `highway` and `railway` are typically linear features, but there
+        // are a few exceptions that should be treated as areas, even in the
+        // absence of a proper `area=yes` or `areaKeys` tag.. see #4194
+        var lineKeys = {
+            highway: {
+                rest_area: true,
+                services: true
+            },
+            railway: {
+                roundhouse: true,
+                station: true,
+                traverser: true,
+                turntable: true,
+                wash: true
+            }
+        };
+
         if (this.tags.area === 'yes')
             return true;
         if (!this.isClosed() || this.tags.area === 'no')
@@ -160,13 +181,16 @@ _.extend(osmWay.prototype, {
             if (key in areaKeys && !(this.tags[key] in areaKeys[key])) {
                 return true;
             }
+            if (key in lineKeys && this.tags[key] in lineKeys[key]) {
+                return true;
+            }
         }
         return false;
     },
 
 
     isDegenerate: function() {
-        return _.uniq(this.nodes).length < (this.isArea() ? 3 : 2);
+        return _uniq(this.nodes).length < (this.isArea() ? 3 : 2);
     },
 
 
@@ -188,46 +212,169 @@ _.extend(osmWay.prototype, {
     },
 
 
+    // If this way is not closed, append the beginning node to the end of the nodelist to close it.
+    close: function() {
+        if (this.isClosed() || !this.nodes.length) return this;
+
+        var nodes = this.nodes.slice();
+        nodes = nodes.filter(noRepeatNodes);
+        nodes.push(nodes[0]);
+        return this.update({ nodes: nodes });
+    },
+
+
+    // If this way is closed, remove any connector nodes from the end of the nodelist to unclose it.
+    unclose: function() {
+        if (!this.isClosed()) return this;
+
+        var nodes = this.nodes.slice(),
+            connector = this.first(),
+            i = nodes.length - 1;
+
+        // remove trailing connectors..
+        while (i > 0 && nodes.length > 1 && nodes[i] === connector) {
+            nodes.splice(i, 1);
+            i = nodes.length - 1;
+        }
+
+        nodes = nodes.filter(noRepeatNodes);
+        return this.update({ nodes: nodes });
+    },
+
+
+    // Adds a node (id) in front of the node which is currently at position index.
+    // If index is undefined, the node will be added to the end of the way for linear ways,
+    //   or just before the final connecting node for circular ways.
+    // Consecutive duplicates are eliminated including existing ones.
+    // Circularity is always preserved when adding a node.
     addNode: function(id, index) {
-        var nodes = this.nodes.slice();
-        nodes.splice(index === undefined ? nodes.length : index, 0, id);
-        return this.update({nodes: nodes});
+        var nodes = this.nodes.slice(),
+            isClosed = this.isClosed(),
+            max = isClosed ? nodes.length - 1 : nodes.length;
+
+        if (index === undefined) {
+            index = max;
+        }
+
+        if (index < 0 || index > max) {
+            throw new RangeError('index ' + index + ' out of range 0..' + max);
+        }
+
+        // If this is a closed way, remove all connector nodes except the first one
+        // (there may be duplicates) and adjust index if necessary..
+        if (isClosed) {
+            var connector = this.first();
+
+            // leading connectors..
+            var i = 1;
+            while (i < nodes.length && nodes.length > 2 && nodes[i] === connector) {
+                nodes.splice(i, 1);
+                if (index > i) index--;
+            }
+
+            // trailing connectors..
+            i = nodes.length - 1;
+            while (i > 0 && nodes.length > 1 && nodes[i] === connector) {
+                nodes.splice(i, 1);
+                if (index > i) index--;
+                i = nodes.length - 1;
+            }
+        }
+
+        nodes.splice(index, 0, id);
+        nodes = nodes.filter(noRepeatNodes);
+
+        // If the way was closed before, append a connector node to keep it closed..
+        if (isClosed && (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])) {
+            nodes.push(nodes[0]);
+        }
+
+        return this.update({ nodes: nodes });
     },
 
 
+    // Replaces the node which is currently at position index with the given node (id).
+    // Consecutive duplicates are eliminated including existing ones.
+    // Circularity is preserved when updating a node.
     updateNode: function(id, index) {
-        var nodes = this.nodes.slice();
+        var nodes = this.nodes.slice(),
+            isClosed = this.isClosed(),
+            max = nodes.length - 1;
+
+        if (index === undefined || index < 0 || index > max) {
+            throw new RangeError('index ' + index + ' out of range 0..' + max);
+        }
+
+        // If this is a closed way, remove all connector nodes except the first one
+        // (there may be duplicates) and adjust index if necessary..
+        if (isClosed) {
+            var connector = this.first();
+
+            // leading connectors..
+            var i = 1;
+            while (i < nodes.length && nodes.length > 2 && nodes[i] === connector) {
+                nodes.splice(i, 1);
+                if (index > i) index--;
+            }
+
+            // trailing connectors..
+            i = nodes.length - 1;
+            while (i > 0 && nodes.length > 1 && nodes[i] === connector) {
+                nodes.splice(i, 1);
+                if (index === i) index = 0;  // update leading connector instead
+                i = nodes.length - 1;
+            }
+        }
+
         nodes.splice(index, 1, id);
+        nodes = nodes.filter(noRepeatNodes);
+
+        // If the way was closed before, append a connector node to keep it closed..
+        if (isClosed && (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])) {
+            nodes.push(nodes[0]);
+        }
+
         return this.update({nodes: nodes});
     },
 
 
+    // Replaces each occurrence of node id needle with replacement.
+    // Consecutive duplicates are eliminated including existing ones.
+    // Circularity is preserved.
     replaceNode: function(needle, replacement) {
-        if (this.nodes.indexOf(needle) < 0)
-            return this;
+        var nodes = this.nodes.slice(),
+            isClosed = this.isClosed();
 
-        var nodes = this.nodes.slice();
         for (var i = 0; i < nodes.length; i++) {
             if (nodes[i] === needle) {
                 nodes[i] = replacement;
             }
         }
+
+        nodes = nodes.filter(noRepeatNodes);
+
+        // If the way was closed before, append a connector node to keep it closed..
+        if (isClosed && (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])) {
+            nodes.push(nodes[0]);
+        }
+
         return this.update({nodes: nodes});
     },
 
 
+    // Removes each occurrence of node id needle with replacement.
+    // Consecutive duplicates are eliminated including existing ones.
+    // Circularity is preserved.
     removeNode: function(id) {
-        var nodes = [];
+        var nodes = this.nodes.slice(),
+            isClosed = this.isClosed();
 
-        for (var i = 0; i < this.nodes.length; i++) {
-            var node = this.nodes[i];
-            if (node !== id && nodes[nodes.length - 1] !== node) {
-                nodes.push(node);
-            }
-        }
+        nodes = nodes
+            .filter(function(node) { return node !== id; })
+            .filter(noRepeatNodes);
 
-        // Preserve circularity
-        if (this.nodes.length > 1 && this.first() === id && this.last() === id && nodes[nodes.length - 1] !== nodes[0]) {
+        // If the way was closed before, append a connector node to keep it closed..
+        if (isClosed && (nodes.length === 1 || nodes[0] !== nodes[nodes.length - 1])) {
             nodes.push(nodes[0]);
         }
 
@@ -240,22 +387,24 @@ _.extend(osmWay.prototype, {
             way: {
                 '@id': this.osmId(),
                 '@version': this.version || 0,
-                nd: _.map(this.nodes, function(id) {
+                nd: _map(this.nodes, function(id) {
                     return { keyAttributes: { ref: osmEntity.id.toOSM(id) } };
                 }),
-                tag: _.map(this.tags, function(v, k) {
+                tag: _map(this.tags, function(v, k) {
                     return { keyAttributes: { k: k, v: v } };
                 })
             }
         };
-        if (changeset_id) r.way['@changeset'] = changeset_id;
+        if (changeset_id) {
+            r.way['@changeset'] = changeset_id;
+        }
         return r;
     },
 
 
     asGeoJSON: function(resolver) {
         return resolver.transient(this, 'GeoJSON', function() {
-            var coordinates = _.map(resolver.childNodes(this), 'loc');
+            var coordinates = _map(resolver.childNodes(this), 'loc');
             if (this.isArea() && this.isClosed()) {
                 return {
                     type: 'Polygon',
@@ -277,23 +426,29 @@ _.extend(osmWay.prototype, {
 
             var json = {
                 type: 'Polygon',
-                coordinates: [_.map(nodes, 'loc')]
+                coordinates: [_map(nodes, 'loc')]
             };
 
             if (!this.isClosed() && nodes.length) {
                 json.coordinates[0].push(nodes[0].loc);
             }
 
-            var area = d3.geoArea(json);
+            var area = d3_geoArea(json);
 
             // Heuristic for detecting counterclockwise winding order. Assumes
             // that OpenStreetMap polygons are not hemisphere-spanning.
             if (area > 2 * Math.PI) {
                 json.coordinates[0] = json.coordinates[0].reverse();
-                area = d3.geoArea(json);
+                area = d3_geoArea(json);
             }
 
             return isNaN(area) ? 0 : area;
         });
     }
 });
+
+
+// Filter function to eliminate consecutive duplicates.
+function noRepeatNodes(node, i, arr) {
+    return i === 0 || node !== arr[i - 1];
+}

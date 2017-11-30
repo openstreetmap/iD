@@ -1,6 +1,7 @@
 {
     "icon": "college",
     "fields": [
+        "name",
         "operator",
         "address",
         "internet_access",

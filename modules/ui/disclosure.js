@@ -1,10 +1,11 @@
-import * as d3 from 'd3';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
 import { utilRebind } from '../util/rebind';
 import { uiToggle } from './toggle';
 
 
 export function uiDisclosure() {
-    var dispatch = d3.dispatch('toggled'),
+    var dispatch = d3_dispatch('toggled'),
         title,
         expanded = false,
         content = function () {};

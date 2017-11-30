@@ -1,0 +1,18 @@
+{
+    "icon": "poi-crane",
+    "fields": [
+        "operator",
+        "height",
+        "crane/type"
+    ],
+    "geometry": [
+        "point",
+        "line",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "man_made": "crane"
+    },
+    "name": "Crane"
+}

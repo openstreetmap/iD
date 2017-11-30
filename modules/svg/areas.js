@@ -1,6 +1,9 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { osmEntity, osmIsSimpleMultipolygonOuterMember } from '../osm/index';
+import _map from 'lodash-es/map';
+import _values from 'lodash-es/values';
+
+import { bisector as d3_bisector } from 'd3-array';
+
+import { osmEntity, osmIsSimpleMultipolygonOuterMember } from '../osm';
 import { svgPath, svgTagClasses } from './index';
 
 
@@ -8,17 +11,18 @@ export function svgAreas(projection, context) {
     // Patterns only work in Firefox when set directly on element.
     // (This is not a bug: https://bugzilla.mozilla.org/show_bug.cgi?id=750632)
     var patterns = {
-        wetland: 'wetland',
         beach: 'beach',
-        scrub: 'scrub',
-        construction: 'construction',
-        military: 'construction',
         cemetery: 'cemetery',
-        grave_yard: 'cemetery',
-        meadow: 'meadow',
+        construction: 'construction',
         farm: 'farmland',
         farmland: 'farmland',
-        orchard: 'orchard'
+        grave_yard: 'cemetery',
+        meadow: 'meadow',
+        military: 'construction',
+        orchard: 'orchard',
+        sand: 'beach',
+        scrub: 'scrub',
+        wetland: 'wetland',
     };
 
     var patternKeys = ['landuse', 'natural', 'amenity'];
@@ -26,6 +30,8 @@ export function svgAreas(projection, context) {
 
     function setPattern(d) {
         for (var i = 0; i < patternKeys.length; i++) {
+            if (d.tags.building && d.tags.building !== 'no') continue;
+
             if (patterns.hasOwnProperty(d.tags[patternKeys[i]])) {
                 this.style.fill = this.style.stroke = 'url("#pattern-' + patterns[d.tags[patternKeys[i]]] + '")';
                 return;
@@ -58,9 +64,9 @@ export function svgAreas(projection, context) {
             }
         }
 
-        areas = d3.values(areas).filter(function hasPath(a) { return path(a.entity); });
+        areas = _values(areas).filter(function hasPath(a) { return path(a.entity); });
         areas.sort(function areaSort(a, b) { return b.area - a.area; });
-        areas = _.map(areas, 'entity');
+        areas = _map(areas, 'entity');
 
         var strokes = areas.filter(function(area) {
             return area.type === 'way';
@@ -114,7 +120,7 @@ export function svgAreas(projection, context) {
 
         var fills = selection.selectAll('.area-fill path.area').nodes();
 
-        var bisect = d3.bisector(function(node) {
+        var bisect = d3_bisector(function(node) {
             return -node.__data__.area(graph);
         }).left;
 

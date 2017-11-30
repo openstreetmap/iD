@@ -1,5 +1,8 @@
 {
-    "name": "No Turns",
+    "icon": "restriction-only-straight-on",
+    "fields": [
+        "except"
+    ],
     "geometry": [
         "relation"
     ],
@@ -7,8 +10,5 @@
         "type": "restriction",
         "restriction": "only_straight_on"
     },
-    "fields": [
-        "except"
-    ],
-    "icon": "restriction-only-straight-on"
+    "name": "No Turns"
 }

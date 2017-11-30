@@ -1,5 +1,5 @@
 import { t } from '../util/locale';
-import { svgIcon } from '../svg/index';
+import { svgIcon } from '../svg';
 
 
 export function uiViewOnOSM(context) {
@@ -13,15 +13,18 @@ export function uiViewOnOSM(context) {
         var link = selection.selectAll('.view-on-osm')
             .data([0]);
 
-        link.enter()
+        var enter = link.enter()
             .append('a')
             .attr('class', 'view-on-osm')
             .attr('target', '_blank')
-            .call(svgIcon('#icon-out-link', 'inline'))
+            .call(svgIcon('#icon-out-link', 'inline'));
+
+        enter
             .append('span')
             .text(t('inspector.view_on_osm'));
 
         link
+            .merge(enter)
             .attr('href', context.connection().entityURL(entity));
     }
 

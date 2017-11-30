@@ -1,32 +1,32 @@
-import * as d3 from 'd3';
-import { transition as d3transition } from 'd3';
-import _ from 'lodash';
+import _isEqual from 'lodash-es/isEqual';
+
+import {
+    interpolateNumber as d3_interpolateNumber,
+    quantize as d3_quantize
+} from 'd3-interpolate';
+
+import { select as d3_select } from 'd3-selection';
+import { scaleQuantize as d3_scaleQuantize } from 'd3-scale';
+import { timer as d3_timer } from 'd3-timer';
 
 
 export function behaviorBreathe() {
     var duration = 800,
         steps = 4,
         selector = '.selected.shadow, .selected .shadow',
-        selected = d3.select(null),
+        selected = d3_select(null),
         classed = '',
         params = {},
         done = false,
         timer;
 
 
-    // This is a workaround for a bug in rollup v0.36
-    // https://github.com/rollup/rollup/issues/984
-    // The symbol for this default export is not used anywhere, but it
-    // needs to be called in order to be included in the bundle.
-    var t = d3transition();
-
-
     function ratchetyInterpolator(a, b, steps, units) {
         a = parseFloat(a);
         b = parseFloat(b);
-        var sample = d3.scaleQuantize()
+        var sample = d3_scaleQuantize()
             .domain([0, 1])
-            .range(d3.quantize(d3.interpolateNumber(a, b), steps));
+            .range(d3_quantize(d3_interpolateNumber(a, b), steps));
 
         return function(t) {
             return String(sample(t)) + (units || '');
@@ -84,7 +84,7 @@ export function behaviorBreathe() {
         selection
             .call(reset)
             .each(function(d) {
-                var s = d3.select(this),
+                var s = d3_select(this),
                     tag = s.node().tagName,
                     p = {'from': {}, 'to': {}},
                     opacity, width;
@@ -102,8 +102,8 @@ export function behaviorBreathe() {
                 p.tag = tag;
                 p.from.opacity = opacity * 0.6;
                 p.to.opacity = opacity * 1.25;
-                p.from.width = width * 0.9;
-                p.to.width = width * (tag === 'circle' ? 1.5 : 1.25);
+                p.from.width = width * 0.7;
+                p.to.width = width * (tag === 'circle' ? 1.5 : 1);
                 params[d.id] = p;
             });
     }
@@ -119,7 +119,7 @@ export function behaviorBreathe() {
             return;
         }
 
-        if (!_.isEqual(currSelected.data(), selected.data()) || currClassed !== classed) {
+        if (!_isEqual(currSelected.data(), selected.data()) || currClassed !== classed) {
             selected.call(reset);
             classed = currClassed;
             selected = currSelected.call(calcAnimationParams);
@@ -137,7 +137,7 @@ export function behaviorBreathe() {
 
     var breathe = function(surface) {
         done = false;
-        timer = d3.timer(function() {
+        timer = d3_timer(function() {
             // wait for elements to actually become selected
             if (surface.selectAll(selector).empty()) {
                 return false;

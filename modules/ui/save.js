@@ -1,7 +1,15 @@
-import * as d3 from 'd3';
-import { d3keybinding } from '../lib/d3.keybinding.js';
+import { interpolateRgb as d3_interpolateRgb } from 'd3-interpolate';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+
 import { t } from '../util/locale';
-import { modeSave } from '../modes/index';
+import { modeSave } from '../modes';
+import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
 import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
@@ -18,7 +26,7 @@ export function uiSave(context) {
 
 
     function save() {
-        d3.event.preventDefault();
+        d3_event.preventDefault();
         if (!context.inIntro() && !saving() && history.hasChanges()) {
             context.enter(modeSave(context));
         }
@@ -31,15 +39,41 @@ export function uiSave(context) {
             return null;
         } else if (numChanges <= 50) {
             step = numChanges / 50;
-            return d3.interpolateRgb('#fff', '#ff8')(step);  // white -> yellow
+            return d3_interpolateRgb('#fff', '#ff8')(step);  // white -> yellow
         } else {
             step = Math.min((numChanges - 50) / 50, 1.0);
-            return d3.interpolateRgb('#ff8', '#f88')(step);  // yellow -> red
+            return d3_interpolateRgb('#ff8', '#f88')(step);  // yellow -> red
         }
     }
 
 
     return function(selection) {
+        var numChanges = 0;
+
+        function updateCount() {
+            var _ = history.difference().summary().length;
+            if (_ === numChanges) return;
+            numChanges = _;
+
+            tooltipBehavior
+                .title(uiTooltipHtml(
+                    t(numChanges > 0 ? 'save.help' : 'save.no_changes'), key)
+                );
+
+            var background = getBackground(numChanges);
+
+            button
+                .classed('disabled', numChanges === 0)
+                .classed('has-count', numChanges > 0)
+                .style('background', background);
+
+            button.select('span.count')
+                .text(numChanges)
+                .style('background', background)
+                .style('border-color', background);
+        }
+
+
         var tooltipBehavior = tooltip()
             .placement('bottom')
             .html(true)
@@ -53,6 +87,7 @@ export function uiSave(context) {
             .call(tooltipBehavior);
 
         button
+            .call(svgIcon('#icon-save', 'pre-text'))
             .append('span')
             .attr('class', 'label')
             .text(t('save.title'));
@@ -62,36 +97,17 @@ export function uiSave(context) {
             .attr('class', 'count')
             .text('0');
 
-        var keybinding = d3keybinding('undo-redo')
+        updateCount();
+
+
+        var keybinding = d3_keybinding('save')
             .on(key, save, true);
 
-        d3.select(document)
+        d3_select(document)
             .call(keybinding);
 
-        var numChanges = 0;
-
         context.history()
-            .on('change.save', function() {
-                var _ = history.difference().summary().length;
-                if (_ === numChanges)
-                    return;
-                numChanges = _;
-
-                tooltipBehavior.title(uiTooltipHtml(
-                    t(numChanges > 0 ? 'save.help' : 'save.no_changes'), key));
-
-                var background = getBackground(numChanges);
-
-                button
-                    .classed('disabled', numChanges === 0)
-                    .classed('has-count', numChanges > 0)
-                    .style('background', background);
-
-                button.select('span.count')
-                    .text(numChanges)
-                    .style('background', background)
-                    .style('border-color', background);
-            });
+            .on('change.save', updateCount);
 
         context
             .on('enter.save', function() {

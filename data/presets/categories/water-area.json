@@ -1,7 +1,7 @@
 {
+    "icon": "water",
     "geometry": "area",
     "name": "Water Features",
-    "icon": "water",
     "members": [
         "natural/water/lake",
         "natural/water/pond",

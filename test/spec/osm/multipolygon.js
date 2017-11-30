@@ -1,7 +1,100 @@
+describe('iD.osmIsSimpleMultipolygonOuterMember', function() {
+    it('returns the parent relation of a simple multipolygon outer', function() {
+        var outer = iD.Way({tags: {'natural':'wood'}}),
+            relation = iD.Relation({tags: {type: 'multipolygon'},
+                members: [{id: outer.id, role: 'outer'}]}),
+            graph = iD.Graph([outer, relation]);
+        expect(iD.osmIsSimpleMultipolygonOuterMember(outer, graph)).to.equal(relation);
+    });
+
+    it('returns the parent relation of a simple multipolygon outer, assuming role outer if unspecified', function() {
+        var outer = iD.Way({tags: {'natural':'wood'}}),
+            relation = iD.Relation({tags: {type: 'multipolygon'},
+                members: [{id: outer.id}]}),
+            graph = iD.Graph([outer, relation]);
+        expect(iD.osmIsSimpleMultipolygonOuterMember(outer, graph)).to.equal(relation);
+    });
+
+    it('returns false if entity is not a way', function() {
+        var outer = iD.Node({tags: {'natural':'wood'}}),
+            relation = iD.Relation({tags: {type: 'multipolygon'},
+                members: [{id: outer.id, role: 'outer'}]}),
+            graph = iD.Graph([outer, relation]);
+        expect(iD.osmIsSimpleMultipolygonOuterMember(outer, graph)).to.be.false;
+    });
+
+    it('returns false if entity does not have interesting tags', function() {
+        var outer = iD.Way({tags: {'tiger:reviewed':'no'}}),
+            relation = iD.Relation({tags: {type: 'multipolygon'},
+                members: [{id: outer.id, role: 'outer'}]}),
+            graph = iD.Graph([outer, relation]);
+        expect(iD.osmIsSimpleMultipolygonOuterMember(outer, graph)).to.be.false;
+    });
+
+    it('returns false if entity does not have a parent relation', function() {
+        var outer = iD.Way({tags: {'natural':'wood'}}),
+            graph = iD.Graph([outer]);
+        expect(iD.osmIsSimpleMultipolygonOuterMember(outer, graph)).to.be.false;
+    });
+
+    it('returns false if the parent is not a multipolygon', function() {
+        var outer = iD.Way({tags: {'natural':'wood'}}),
+            relation = iD.Relation({tags: {type: 'route'},
+                members: [{id: outer.id, role: 'outer'}]}),
+            graph = iD.Graph([outer, relation]);
+        expect(iD.osmIsSimpleMultipolygonOuterMember(outer, graph)).to.be.false;
+    });
+
+    it('returns false if the parent has interesting tags', function() {
+        var outer = iD.Way({tags: {'natural':'wood'}}),
+            relation = iD.Relation({tags: {natural: 'wood', type: 'multipolygon'},
+                members: [{id: outer.id, role: 'outer'}]}),
+            graph = iD.Graph([outer, relation]);
+        expect(iD.osmIsSimpleMultipolygonOuterMember(outer, graph)).to.be.false;
+    });
+
+    it('returns the parent relation of a simple multipolygon outer, ignoring uninteresting parent tags', function() {
+        var outer = iD.Way({tags: {'natural':'wood'}}),
+            relation = iD.Relation({tags: {'tiger:reviewed':'no', type: 'multipolygon'},
+                members: [{id: outer.id, role: 'outer'}]}),
+            graph = iD.Graph([outer, relation]);
+        expect(iD.osmIsSimpleMultipolygonOuterMember(outer, graph)).to.equal(relation);
+    });
+
+    it('returns false if the parent has multiple outer ways', function() {
+        var outer1 = iD.Way({tags: {'natural':'wood'}}),
+            outer2 = iD.Way({tags: {'natural':'wood'}}),
+            relation = iD.Relation({tags: {type: 'multipolygon'},
+                members: [{id: outer1.id, role: 'outer'}, {id: outer2.id, role: 'outer'}]}),
+            graph = iD.Graph([outer1, outer2, relation]);
+        expect(iD.osmIsSimpleMultipolygonOuterMember(outer1, graph)).to.be.false;
+        expect(iD.osmIsSimpleMultipolygonOuterMember(outer2, graph)).to.be.false;
+    });
+
+    it('returns false if the parent has multiple outer ways, assuming role outer if unspecified', function() {
+        var outer1 = iD.Way({tags: {'natural':'wood'}}),
+            outer2 = iD.Way({tags: {'natural':'wood'}}),
+            relation = iD.Relation({tags: {type: 'multipolygon'},
+                members: [{id: outer1.id}, {id: outer2.id}]}),
+            graph = iD.Graph([outer1, outer2, relation]);
+        expect(iD.osmIsSimpleMultipolygonOuterMember(outer1, graph)).to.be.false;
+        expect(iD.osmIsSimpleMultipolygonOuterMember(outer2, graph)).to.be.false;
+    });
+
+    it('returns false if the entity is not an outer', function() {
+        var inner = iD.Way({tags: {'natural':'wood'}}),
+            relation = iD.Relation({tags: {type: 'multipolygon'},
+                members: [{id: inner.id, role: 'inner'}]}),
+            graph = iD.Graph([inner, relation]);
+        expect(iD.osmIsSimpleMultipolygonOuterMember(inner, graph)).to.be.false;
+    });
+});
+
+
 describe('iD.osmSimpleMultipolygonOuterMember', function() {
     it('returns the outer member of a simple multipolygon', function() {
         var inner = iD.Way(),
-            outer = iD.Way(),
+            outer = iD.Way({tags: {'natural':'wood'}}),
             relation = iD.Relation({tags: {type: 'multipolygon'}, members: [
                 {id: outer.id, role: 'outer'},
                 {id: inner.id, role: 'inner'}]
@@ -14,8 +107,8 @@ describe('iD.osmSimpleMultipolygonOuterMember', function() {
 
     it('returns falsy for a complex multipolygon', function() {
         var inner = iD.Way(),
-            outer1 = iD.Way(),
-            outer2 = iD.Way(),
+            outer1 = iD.Way({tags: {'natural':'wood'}}),
+            outer2 = iD.Way({tags: {'natural':'wood'}}),
             relation = iD.Relation({tags: {type: 'multipolygon'}, members: [
                 {id: outer1.id, role: 'outer'},
                 {id: outer2.id, role: 'outer'},
@@ -36,7 +129,7 @@ describe('iD.osmSimpleMultipolygonOuterMember', function() {
             }),
             graph = iD.Graph([way, relation]);
 
-        expect(iD.osmSimpleMultipolygonOuterMember(way, graph)).to.be.undefined;
+        expect(iD.osmSimpleMultipolygonOuterMember(way, graph)).not.to.be.ok;
     });
 });
 
@@ -74,7 +167,8 @@ describe('iD.osmJoinWays', function() {
         ]);
 
         var result = iD.osmJoinWays(graph.entity('r').members, graph);
-        expect(_.map(result[0], 'id')).to.eql(['=', '-', '~']);
+        var ids = result[0].map(function (w) { return w.id; });
+        expect(ids).to.have.ordered.members(['=', '-', '~']);
     });
 
     it('reverses member tags of reversed segements', function() {

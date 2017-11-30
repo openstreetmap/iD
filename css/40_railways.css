@@ -1,0 +1,126 @@
+/* railways */
+
+.preset-icon .icon.tag-railway.other-line {
+    color: #fff;
+    fill: #777;
+}
+.preset-icon .icon.tag-railway {
+    color: #555;
+    fill: #eee;
+}
+
+/* railway areas */
+
+path.stroke.area.tag-railway,
+.low-zoom path.stroke.area.tag-railway {
+    stroke: white;
+    stroke-width: 1;
+    stroke-dasharray: none;
+}
+
+path.casing.area.tag-railway,
+.low-zoom path.casing.area.tag-railway {
+    stroke: none;
+}
+
+/* narrow widths */
+
+path.shadow.tag-railway {
+    stroke-width: 16;
+}
+path.casing.tag-railway {
+    stroke-width: 7;
+}
+path.stroke.tag-railway {
+    stroke-width: 2;
+    stroke-linecap: butt;
+    stroke-dasharray: 12,12;
+}
+
+.low-zoom path.shadow.tag-railway {
+    stroke-width: 12;
+}
+.low-zoom path.casing.tag-railway {
+    stroke-width: 5;
+}
+.low-zoom path.stroke.tag-railway {
+    stroke-width: 2;
+    stroke-dasharray: 6,6;
+}
+
+
+/* styles */
+
+path.casing.tag-railway {
+    stroke: #555;
+}
+path.stroke.tag-railway {
+    stroke: #eee;
+}
+
+
+.preset-icon .icon.tag-railway-disused,
+.preset-icon .icon.tag-railway-abandoned {
+    color: #999;
+    fill: #eee;
+}
+path.casing.tag-railway-abandoned {
+    stroke: #999;
+}
+path.stroke.tag-railway-abandoned {
+    stroke: #eee;
+}
+
+
+.preset-icon .icon.tag-railway-subway {
+    color: #222;
+    fill: #bbb;
+}
+path.casing.tag-railway-subway {
+    stroke: #222;
+}
+path.stroke.tag-railway-subway {
+    stroke: #bbb;
+}
+
+
+/* railway platforms - like sidewalks */
+
+.preset-icon .icon.highway-footway.tag-railway-platform {
+    color: #ae8681;
+    fill: #dcd9b9;
+}
+path.shadow.tag-railway-platform {
+    stroke-width: 16;
+}
+path.casing.tag-railway-platform {
+    stroke: #dcd9b9;
+    stroke-width: 5;
+    stroke-linecap: round;
+    stroke-dasharray: none;
+}
+path.stroke.tag-railway-platform {
+    stroke: #ae8681;
+    stroke-width: 3;
+    stroke-linecap: butt;
+    stroke-dasharray: 6, 6;
+}
+
+.low-zoom path.shadow.tag-railway-platform {
+    stroke-width: 12;
+}
+.low-zoom path.casing.tag-railway-platform {
+    stroke-width: 3;
+}
+.low-zoom path.stroke.tag-railway-platform {
+    stroke-width: 1;
+    stroke-linecap: butt;
+    stroke-dasharray: 3, 3;
+}
+
+g.midpoint.tag-railway-platform .fill {
+    fill: #fff;
+    stroke: #333;
+    stroke-opacity: .8;
+    opacity: .8;
+}

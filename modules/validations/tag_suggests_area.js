@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _isEmpty from 'lodash-es/isEmpty';
 import { t } from '../util/locale';
 
 
@@ -7,7 +7,7 @@ import { t } from '../util/locale';
 export function validationTagSuggestsArea() {
 
     function tagSuggestsArea(tags) {
-        if (_.isEmpty(tags)) return false;
+        if (_isEmpty(tags)) return false;
 
         var presence = ['landuse', 'amenities', 'tourism', 'shop'];
         for (var i = 0; i < presence.length; i++) {

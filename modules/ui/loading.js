@@ -1,5 +1,6 @@
 import { uiModal } from './modal';
 
+
 export function uiLoading(context) {
     var message = '',
         blocking = false,

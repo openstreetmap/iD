@@ -1,6 +1,7 @@
-import _ from 'lodash';
-import { coreDifference } from './difference';
+import _map from 'lodash-es/map';
 import rbush from 'rbush';
+
+import { coreDifference } from './difference';
 
 
 export function coreTree(head) {
@@ -59,7 +60,7 @@ export function coreTree(head) {
             updateParents(entity, insertions, {});
         }
 
-        rtree.load(_.map(insertions, entityBBox));
+        rtree.load(_map(insertions, entityBBox));
 
         return tree;
     };
@@ -87,7 +88,7 @@ export function coreTree(head) {
                 insertions[entity.id] = entity;
             });
 
-            rtree.load(_.map(insertions, entityBBox));
+            rtree.load(_map(insertions, entityBBox));
         }
 
         return rtree.search(extent.bbox()).map(function(bbox) {

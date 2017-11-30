@@ -1,13 +1,14 @@
 {
     "icon": "highway-living-street",
     "fields": [
+        "name",
         "oneway",
         "maxspeed",
-        "structure",
-        "access",
         "lanes",
         "surface",
+        "structure",
         "maxheight",
+        "access",
         "cycleway"
     ],
     "geometry": [

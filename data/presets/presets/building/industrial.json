@@ -1,6 +1,7 @@
 {
-    "icon": "industrial",
+    "icon": "industry",
     "fields": [
+        "name",
         "address",
         "levels"
     ],

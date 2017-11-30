@@ -1,6 +1,7 @@
 {
-    "icon": "building",
+    "icon": "shelter",
     "fields": [
+        "name",
         "address"
     ],
     "geometry": [

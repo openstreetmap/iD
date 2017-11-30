@@ -1,0 +1,23 @@
+{
+    "icon": "circle-stroked",
+    "fields": [
+        "operator",
+        "ref"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "manhole": "telecom"
+    },
+    "terms": [
+        "cover",
+        "phone",
+        "hole",
+        "telecom",
+        "telephone",
+        "bt"
+    ],
+    "name": "Telecom Manhole"
+}

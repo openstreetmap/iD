@@ -1,0 +1,10 @@
+{
+    "icon": "playground",
+    "geometry": [
+        "point"
+    ],
+    "tags": {
+        "playground": "basketswing"
+    },
+    "name": "Basket Swing"
+}

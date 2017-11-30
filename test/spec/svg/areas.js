@@ -32,8 +32,8 @@ describe('iD.svgAreas', function () {
 
         surface.call(iD.svgAreas(projection, context), graph, [graph.entity('w')], none);
 
-        expect(surface.select('path.way')).to.be.classed('way');
-        expect(surface.select('path.area')).to.be.classed('area');
+        expect(surface.select('path.way').classed('way')).to.be.true;
+        expect(surface.select('path.area').classed('area')).to.be.true;
     });
 
     it('adds tag classes', function () {
@@ -47,8 +47,8 @@ describe('iD.svgAreas', function () {
 
         surface.call(iD.svgAreas(projection, context), graph, [graph.entity('w')], none);
 
-        expect(surface.select('.area')).to.be.classed('tag-building');
-        expect(surface.select('.area')).to.be.classed('tag-building-yes');
+        expect(surface.select('.area').classed('tag-building')).to.be.true;
+        expect(surface.select('.area').classed('tag-building-yes')).to.be.true;
     });
 
     it('handles deletion of a way and a member vertex (#1903)', function () {
@@ -85,31 +85,31 @@ describe('iD.svgAreas', function () {
         it('stacks smaller areas above larger ones in a single render', function () {
             surface.call(iD.svgAreas(projection, context), graph, [graph.entity('s'), graph.entity('l')], none);
 
-            expect(surface.select('.area:nth-child(1)')).to.be.classed('tag-landuse-park');
-            expect(surface.select('.area:nth-child(2)')).to.be.classed('tag-building-yes');
+            expect(surface.select('.area:nth-child(1)').classed('tag-landuse-park')).to.be.true;
+            expect(surface.select('.area:nth-child(2)').classed('tag-building-yes')).to.be.true;
         });
 
         it('stacks smaller areas above larger ones in a single render (reverse)', function () {
             surface.call(iD.svgAreas(projection, context), graph, [graph.entity('l'), graph.entity('s')], none);
 
-            expect(surface.select('.area:nth-child(1)')).to.be.classed('tag-landuse-park');
-            expect(surface.select('.area:nth-child(2)')).to.be.classed('tag-building-yes');
+            expect(surface.select('.area:nth-child(1)').classed('tag-landuse-park')).to.be.true;
+            expect(surface.select('.area:nth-child(2)').classed('tag-building-yes')).to.be.true;
         });
 
         it('stacks smaller areas above larger ones in separate renders', function () {
             surface.call(iD.svgAreas(projection, context), graph, [graph.entity('s')], none);
             surface.call(iD.svgAreas(projection, context), graph, [graph.entity('l')], none);
 
-            expect(surface.select('.area:nth-child(1)')).to.be.classed('tag-landuse-park');
-            expect(surface.select('.area:nth-child(2)')).to.be.classed('tag-building-yes');
+            expect(surface.select('.area:nth-child(1)').classed('tag-landuse-park')).to.be.true;
+            expect(surface.select('.area:nth-child(2)').classed('tag-building-yes')).to.be.true;
         });
 
         it('stacks smaller areas above larger ones in separate renders (reverse)', function () {
             surface.call(iD.svgAreas(projection, context), graph, [graph.entity('l')], none);
             surface.call(iD.svgAreas(projection, context), graph, [graph.entity('s')], none);
 
-            expect(surface.select('.area:nth-child(1)')).to.be.classed('tag-landuse-park');
-            expect(surface.select('.area:nth-child(2)')).to.be.classed('tag-building-yes');
+            expect(surface.select('.area:nth-child(1)').classed('tag-landuse-park')).to.be.true;
+            expect(surface.select('.area:nth-child(2)').classed('tag-building-yes')).to.be.true;
         });
     });
 
@@ -124,7 +124,7 @@ describe('iD.svgAreas', function () {
 
         surface.call(iD.svgAreas(projection, context), graph, areas, none);
 
-        expect(surface.select('.fill')).to.be.classed('relation');
+        expect(surface.select('.fill').classed('relation')).to.be.true;
     });
 
     it('renders no strokes for multipolygon areas', function () {
@@ -153,7 +153,7 @@ describe('iD.svgAreas', function () {
 
         expect(surface.selectAll('.way.fill').size()).to.equal(0);
         expect(surface.selectAll('.relation.fill').size()).to.equal(1);
-        expect(surface.select('.relation.fill')).to.be.classed('tag-natural-wood');
+        expect(surface.select('.relation.fill').classed('tag-natural-wood')).to.be.true;
     });
 
     it('renders no strokes for a multipolygon with tags on the outer way', function() {

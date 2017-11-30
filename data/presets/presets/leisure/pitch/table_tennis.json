@@ -1,0 +1,24 @@
+{
+    "icon": "tennis",
+    "fields": [
+        "lit",
+        "access_simple"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "pitch",
+        "sport": "table_tennis"
+    },
+    "reference": {
+        "key": "sport",
+        "value": "table_tennis"
+    },
+    "terms": [
+        "table tennis",
+        "ping pong"
+    ],
+    "name": "Ping Pong Table"
+}

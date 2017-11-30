@@ -1,9 +1,11 @@
 {
-    "icon": "place-of-worship",
+    "icon": "buddhism",
     "fields": [
+        "name",
         "denomination",
         "building_area",
-        "address"
+        "address",
+        "service_times"
     ],
     "geometry": [
         "point",
@@ -21,6 +23,10 @@
     "tags": {
         "amenity": "place_of_worship",
         "religion": "buddhist"
+    },
+    "reference": {
+        "key": "amenity",
+        "value": "place_of_worship"
     },
     "name": "Buddhist Temple"
 }

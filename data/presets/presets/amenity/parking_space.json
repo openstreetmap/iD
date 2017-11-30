@@ -11,5 +11,6 @@
     "tags": {
         "amenity": "parking_space"
     },
+    "matchScore": 0.95,
     "name": "Parking Space"
 }

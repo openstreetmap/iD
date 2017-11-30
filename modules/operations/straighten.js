@@ -1,6 +1,8 @@
-import _ from 'lodash';
+import _uniq from 'lodash-es/uniq';
+
 import { t } from '../util/locale';
 import { actionStraighten } from '../actions/index';
+import { behaviorOperation } from '../behavior/index';
 
 
 export function operationStraighten(selectedIDs, context) {
@@ -9,8 +11,7 @@ export function operationStraighten(selectedIDs, context) {
 
 
     function operation() {
-        var annotation = t('operations.straighten.annotation');
-        context.perform(action, annotation);
+        context.perform(action, operation.annotation());
     }
 
 
@@ -19,7 +20,7 @@ export function operationStraighten(selectedIDs, context) {
         return selectedIDs.length === 1 &&
             entity.type === 'way' &&
             !entity.isClosed() &&
-            _.uniq(entity.nodes).length > 2;
+            _uniq(entity.nodes).length > 2;
     };
 
 
@@ -40,10 +41,15 @@ export function operationStraighten(selectedIDs, context) {
     };
 
 
+    operation.annotation = function() {
+        return t('operations.straighten.annotation');
+    };
+
+
     operation.id = 'straighten';
     operation.keys = [t('operations.straighten.key')];
     operation.title = t('operations.straighten.title');
-
+    operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
 }

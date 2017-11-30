@@ -1,6 +1,7 @@
 {
     "icon": "bank",
     "fields": [
+        "name",
         "operator",
         "currency_multi"
     ],

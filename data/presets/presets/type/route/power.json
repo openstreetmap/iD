@@ -1,4 +1,10 @@
 {
+    "icon": "route-power",
+    "fields": [
+        "name",
+        "ref_route",
+        "operator"
+    ],
     "geometry": [
         "relation"
     ],
@@ -6,10 +12,5 @@
         "type": "route",
         "route": "power"
     },
-    "name": "Power Route",
-    "icon": "route-power",
-    "fields": [
-        "ref",
-        "operator"
-    ]
+    "name": "Power Route"
 }

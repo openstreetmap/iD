@@ -1,5 +1,8 @@
 {
     "icon": "commercial",
+    "fields": [
+        "name"
+    ],
     "geometry": [
         "area"
     ],

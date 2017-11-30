@@ -1,5 +1,10 @@
 {
     "icon": "monument",
+    "fields": [
+        "name",
+        "memorial",
+        "inscription"
+    ],
     "geometry": [
         "point",
         "vertex",

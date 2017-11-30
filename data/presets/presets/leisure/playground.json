@@ -1,5 +1,13 @@
 {
     "icon": "playground",
+    "fields": [
+        "name",
+        "operator",
+        "surface",
+        "playground/max_age",
+        "playground/min_age",
+        "access_simple"
+    ],
     "geometry": [
         "point",
         "area"

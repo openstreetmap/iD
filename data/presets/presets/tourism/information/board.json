@@ -1,5 +1,7 @@
 {
+    "icon": "information",
     "fields": [
+        "name",
         "operator",
         "board_type"
     ],
@@ -10,6 +12,10 @@
     "tags": {
         "tourism": "information",
         "information": "board"
+    },
+    "reference": {
+        "key": "information",
+        "value": "board"
     },
     "name": "Information Board"
 }

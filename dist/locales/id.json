@@ -101,18 +101,13 @@
             },
             "delete": {
                 "title": "Hapus",
-                "description": "Hapus objek secara permanen.",
                 "annotation": {
                     "point": "Menghapus sebuah titik.",
                     "vertex": "Menghapus sebuah simpul dari jalan.",
                     "line": "Mengapus sebuah jalan.",
                     "area": "Menghapus sebuah area.",
-                    "relation": "Menghapus sebuah relasi.",
-                    "multiple": "Menghapus {n} obyek."
-                },
-                "incomplete_relation": "Fitur ini tidak bisa dihapus karena belum sepenuhnya terunduh.",
-                "part_of_relation": "Fitur ini tidak dapat dihapus karena merupakan bagian dari relasi lebih besar. Anda harus melepasnya dahulu dari relasi tersebut.",
-                "connected_to_hidden": "Tidak bisa dihapus karena terhubung dengan fitur tersembunyi."
+                    "relation": "Menghapus sebuah relasi."
+                }
             },
             "add_member": {
                 "annotation": "Tambahkan anggota ke sebuah relasi"
@@ -142,36 +137,27 @@
                 "key": "C",
                 "annotation": "Satukan {n} fitur.",
                 "not_eligible": "Fitur-fitur ini tidak bisa digabung.",
-                "not_adjacent": "Fitur-fitur ini tidak bisa disatukan karena tidak saling terhubung.",
                 "restriction": "Fitur-fitur ini tidak bisa disatukan karena ada setidaknya satu yang merupakan bagian dari relasi \"{relation}\".",
                 "incomplete_relation": "Fitur ini tidak bisa digabungkan karena belum sepenuhnya terunduh.",
                 "conflicting_tags": "Fitur-fitur ini tidak bisa disatukan karena beberapa nilai dari tagnya ada yang bertolak belakang."
             },
             "move": {
                 "title": "Geser",
-                "description": "Geser ini ke lokasi lain.",
                 "key": "M",
                 "annotation": {
                     "point": "Menggeser sebuah titik.",
                     "vertex": "Menggeser simpul dari sebuah jalan.",
                     "line": "Menggeser sebuah garis.",
-                    "area": "Menggeser sebuah area.",
-                    "multiple": "Menggeser beberapa obyek."
-                },
-                "incomplete_relation": "Fitur ini tidak bisa dipindahkan karena belum sepenuhnya terunduh.",
-                "too_large": "Objek ini tidak dapat dipindahkan karena baru separuhnya yang tampak di layar.",
-                "connected_to_hidden": "Tidak bisa dipindah karena terhubung dengan fitur tersembunyi."
+                    "area": "Menggeser sebuah area."
+                }
             },
             "rotate": {
                 "title": "Putar",
-                "description": "Putar obyek ini berdasar titik pusatnya.",
                 "key": "R",
                 "annotation": {
                     "line": "Memutar sebuah garis.",
                     "area": "Memutar sebuah area."
-                },
-                "too_large": "Objek ini tidak dapat diputar karena baru separuhnya yang tampak di layar.",
-                "connected_to_hidden": "Tidak bisa diputar karena terhubung dengan fitur tersembunyi."
+                }
             },
             "reverse": {
                 "title": "Balik",
@@ -224,7 +210,6 @@
             "localized_translation_language": "Pilih Bahasa",
             "localized_translation_name": "Nama"
         },
-        "zoom_in_edit": "Perbesar untuk bisa menyunting",
         "logout": "keluar",
         "loading_auth": "Menghubungkan dengan OpenStreetMap...",
         "report_a_bug": "Laporkan bug",
@@ -239,12 +224,8 @@
             "readonly": "API dalam kondisi hanya-baca. Anda perlu menunggu untuk menyimpan perubahan."
         },
         "commit": {
-            "title": "Simpan Perubahan",
-            "description_placeholder": "Penjelasan singkat dari kontribusi Anda (harus diisi)",
-            "message_label": "Komentar set perubahan",
             "upload_explanation": "Perubahan yang anda unggah akan tampil di seluruh peta yang menggunakan data OpenStreetMap.",
             "upload_explanation_with_user": "Perubahan yang anda unggah sebagai {user} akan tampil di seluruh peta yang menggunakan data OpenStreetMap.",
-            "save": "Simpan",
             "cancel": "Batal",
             "changes": "{count} Perubahan",
             "warnings": "Peringatan",
@@ -257,19 +238,6 @@
         "contributors": {
             "list": "Disunting oleh {users}",
             "truncated_list": "Disunting oleh {users} dan {count} lainnya"
-        },
-        "infobox": {
-            "selected": "{n} terpilih",
-            "geometry": "Geometri",
-            "closed": "ditutup",
-            "center": "Pusat",
-            "perimeter": "Perimeter",
-            "length": "Panjang",
-            "area": "Area",
-            "centroid": "Titik berat",
-            "location": "Letak",
-            "metric": "Metrik",
-            "imperial": "Imperial"
         },
         "geometry": {
             "point": "titik",
@@ -305,7 +273,6 @@
             "back_tooltip": "Ubah Fitur",
             "remove": "Buang",
             "search": "Cari",
-            "multiselect": "Item terpilih",
             "unknown": "Tidak diketahui",
             "incomplete": "<tak terunduh>",
             "feature_list": "Cari fitur",
@@ -410,18 +377,14 @@
         },
         "restore": {
             "heading": "Anda memiliki perubahan yang belum disimpan",
-            "description": "Apakah anda ingin mengembalikan perubahan yang belum tersimpan dari sesi penyuntingan sebelumnya?",
-            "restore": "Kembalikan",
-            "reset": "Ulang"
+            "description": "Apakah anda ingin mengembalikan perubahan yang belum tersimpan dari sesi penyuntingan sebelumnya?"
         },
         "save": {
             "title": "Simpan",
-            "help": "Simpan perubahan ke OpenStreetMap, jadikan mereka terlihat oleh pengguna lain.",
             "no_changes": "Tak ada perubahan yang bisa disimpan.",
             "error": "Kesalahan terjadi saat mencoba menyimpan",
             "status_code": "Server mengembalikan kode status {code}",
             "unknown_error_details": "Mohon pastikan Anda terhubung dengan internet.",
-            "uploading": "Mengunggah perubahan ke OpenStreetMap.",
             "unsaved_changes": "Anda mememiliki perubahan yang belum tersimpan",
             "conflict": {
                 "header": "Menyelesaikan suntingan bertentangan",
@@ -432,15 +395,11 @@
                 "keep_remote": "Gunakan milik mereka",
                 "restore": "Kembalikan",
                 "delete": "Biarkan Terhapus",
-                "download_changes": "Atau unduh perubahan Anda.",
-                "done": "Semua konflik terselesaikan!",
-                "help": "Pengguna lain mengubah beberapa fitur peta yang sama dengan yang Anda ubah.\nKlik pada tiap butir di bawah untuk penjelasan lebih tentang konfliknya, dan memilih untuk menyimpan\nperubahan Anda atau perubahan pengguna tersebut.\n"
+                "done": "Semua konflik terselesaikan!"
             }
         },
         "merge_remote_changes": {
             "conflict": {
-                "deleted": "Objek ini telah dihapus oleh {user}.",
-                "location": "Objek ini dipindahkan oleh Anda dan {user}.",
                 "nodelist": "Titik-titik diubah oleh Anda dan {user}.",
                 "memberlist": "Anggota relasi diubah Anda dan {user}.",
                 "tags": "Anda mengubah tag <b>{tag}</b> menjadi \"{local}\" dan {user} mengubahnya menjadi \"{remote}\"."
@@ -456,14 +415,12 @@
             "help_link_text": "detail"
         },
         "confirm": {
-            "okay": "Baiklah",
             "cancel": "Batal"
         },
         "splash": {
             "welcome": "Selamat datang di penyuting iD OpenStreetMap",
             "text": "iD begitu bersahabat namun juga alat yang kuat untuk berperan dalam peta dunia gratis terbaik. Ini adalah versi {version}. Untuk informasi lebih lihat {website} dan laporkan kesalahan di {github}.",
-            "walkthrough": "Memulai Perjalanan",
-            "start": "Sunting Sekarang"
+            "walkthrough": "Memulai Perjalanan"
         },
         "source_switch": {
             "live": "terhubung",
@@ -477,70 +434,51 @@
         },
         "validations": {
             "untagged_point": "Titik tanpa tag",
-            "untagged_line": "Garis tanpa tag",
-            "untagged_area": "Area tanpa tag",
-            "many_deletions": "Anda menghapus {n} obyek. Apakah anda yakin? Ini akan menghapus dari peta yang semua orang lihat pada openstreetmap.org.",
-            "tag_suggests_area": "Penanda {tag} menyarankan garis sebaiknya dalam bentuk area, tapi ini bukan sebuah area",
             "untagged_point_tooltip": "Pilih tipe fitur yang menjelaskan apa identitas poin ini.",
+            "untagged_line": "Garis tanpa tag",
             "untagged_line_tooltip": "Pilih tipe fitur yang menjelaskan apa identitas garis ini.",
+            "untagged_area": "Area tanpa tag",
             "untagged_area_tooltip": "Pilih tipe fitur yang menjelaskan apa identitas area ini.",
+            "tag_suggests_area": "Penanda {tag} menyarankan garis sebaiknya dalam bentuk area, tapi ini bukan sebuah area",
             "deprecated_tags": "Tag sudah tidak dipergunakan: {tags}"
-        },
-        "zoom": {
-            "in": "Perbesar tampilan",
-            "out": "Perkecil tampilan"
         },
         "cannot_zoom": "Tidak bisa memperbesar tampilan lebih jauh dengan mode ini.",
         "full_screen": "Tombol Layar Penuh",
-        "gpx": {
-            "local_layer": "File GPX lokal",
-            "drag_drop": "Geser dan letakan sebuah berkas .gpx di halaman, atau klik tombol ke kanan untuk menjelajah",
-            "zoom": "Perbesar ke jejak GPX",
-            "browse": "Telusuri untuk file .gpx"
-        },
         "mapillary": {
             "view_on_mapillary": "Lihat gambar ini di Mapillary"
         },
         "help": {
             "title": "Bantuan",
             "help": "# Bantuan\n\nIni adalah penyunting untuk [OpenStreetMap](http://www.openstreetmap.org/),\npeta dunia yang gratis dan dapat disunting. Anda dapat menggunakannya\nuntuk menambah dan memperbarui data di area Anda, membuat peta dunia\nbersumber dan berdata terbuka lebih baik untuk semua orang.\n\nSuntingan yang Anda buat di peta ini akan terlihat oleh semua pengguna\nOpenStreetMap. Untuk membuat suntingan, Anda perlu\n[log in](https://www.openstreetmap.org/login).\n\n[iD editor](http://ideditor.com/) adalah proyek kerja sama dengan [source\ncode available on GitHub](https://github.com/openstreetmap/iD).\n",
-            "editing_saving": "# Menyunting & Menyimpan\n\nPenyunting dirancang untuk bekerja secara daring, dan Anda mengaksesnya\nmelalui situs web sekarang.\n\n### Memilih Fitur\n\nUntuk memilih fitur peta, seperti jalan atau titik ketertarikan, klik\npada fitur di peta. Hal ini akan membuat fitur yang terpilih lebih cerah, membuka panel\nberisi perinciannya, dan menampilkan menu berisi hal-hal yang Anda dapat lakukan dengan fitur tersebut.\n\nUntuk memilih beberapa fitur, tahan tombol 'Shift'. Lalu klik pada\nfitur yang mau dipilih, atau geser pada peta untuk menggambar persegi panjang.\nIni akan menggambar sebuah kotak dan memilih semua titik di dalamnya.\n\n### Menyimpan Suntingan\n\nSaat Anda membuat perubahan seperti menyunting jalan, bangunan, dan tempat, perubahan ini\ndisimpan secara lokal sampai Anda menyimpan ke server. Jangan khawatir jika Anda\nmembuat kesalahan - Anda dapat membatalkan perubahan dengan menekan tombol undo, dan mengembalikan\nperubahan dengan menekan tombol redo.\n\nKlik 'Simpan' untuk menyelesaikan sekelompok perubahan - seperti, jika Anda telah melengkapi\nsebuah area di kota dan akan memulai di area baru lain. Anda memiliki kesempatan\nuntuk meninjau kembali apa yang telah dilakukan, dan penyunting akan memberikan saran berguna\ndan peringatan jika sesuatu terkesan janggal dengan perubahan tersebut.\n\nJika semua terlihat baik, Anda dapat memasukkan penjelasan pendek mengenai perubahan\nyang Anda buat, dan klik 'Simpan' lagi untuk mengirim perubahan\nke [OpenStreetMap.org](http://www.openstreetmap.org/), yang akan terlihat\noleh seluruh pengguna dan tersedia bagi yang lain untuk dibangun dan diperbaiki.\n\nJika Anda tidak bisa menyelesaikan suntingan dalam sekali waktu, Anda dapat meninggalkan jendela penyunting\ndan kembali (pada peramban dan komputer yang sama), dan aplikasi penyunting akan menawarkan untuk mengembalikan kembali apa yang sudah dikerjakan.\n\n### Menggunakan penyunting\n\nDaftar shortcut untuk keyboard tersedia [here](http://wiki.openstreetmap.org/wiki/ID/Shortcuts).\n",
-            "roads": "# Jalan\n\nAnda dapat membuat, memperbaiki, dan menghapus jalan dengan penyunting ini. Jalan ada banyak\njenis: jalan setapak, jalan raya, jalan sepeda, dan sebagainya - segmen yang sering dilalui\nseharusnya dapat dipetakan.\n\n### Memilih\n\nKlik pada jalan untuk memilihnya. Sebuah garis tepi akan terlihat, dengan\nmenu peralatan kecil pada peta dan sidebar berisi informasi lebih tentang jalan tersebut.\n\n### Mengubah\n\nSeringkali Anda akan melihat jalan-jalan yang tidak segaris dengan gambar di belakangnya\natau dengan trek GPS. Anda dapat mengatur jalan-jalan ini agar mereka berada\npada posisi yang tepat.\n\nPertama, klik pada jalan yang Anda ingin ubah. Ini akan menyorotinya dan menampilkan\ntitik kendali di sepanjang jalan yang dapat Anda geser ke letak yang lebih baik. Jika\nAnda ingin menambah titik kendali untuk memerincinya, klik dua kali bagian\ndari jalan tanpa titik, dan titik kendali akan ditambah.\n\nJika jalan itu terhubung dengan jalan lain, tetapi tidak terhubung dengan baik\npada peta, Anda bisa menggeser salah satu titik kendalinya ke jalan lain tersebut untuk\nmenghubungkannya. Memastikan jalan terhubung penting untuk peta dan sangat diperlukan untuk memberikan arah berkendara.\n\nAnda dapat klik alat 'Move' atau tekan tombol pintasan 'M' untuk memindahkan keseluruhan jalan sekaligus,\nlalu klik lagi untuk menyimpan pemindahan tersebut.\n\n### Menghapus\n\nJika sebuah jalan seluruhnya salah - Anda dapat melihat bahwa itu tidak ada pada citra satelit\ndan telah mengamatinya langsung bahwa itu memang tidak ada - Anda dapat menghapusnya,\nuntuk menghilangkannya dari peta. Berhati-hatilah saat menghapus fitur -\nseperti suntingan lain, hasilnya akan terlihat oleh semua orang dan citra satelit\nseringkali sudah usang, sehingga jalan mungkin baru dibangun.\n\nAnda dapat menghapus jalan dengan klik jalan tersebut untuk memilihnya,\nlalu klik ikon tong sampah atau menekan tombol 'Delete'.\n\n### Menciptakan\n\nMenemukan tempat yang seharusnya ada jalan tapi tidak ada? Pilih ikon 'Line'\npada kiri-atas penyunting atau tekan tombol pintasan '2' untuk mulai\nmenggambar garis.\n\nKlik pada bagian awal jalan untuk mulai menggambar. Jika jalan\nbercabang dari jalan yang sudah ada, mulai dengan klik pada tempat keduanya terhubung.\n\nLalu klik pada titik-titik sepanjang jalan sehingga sesuai alur,\nmenurut citra satelit atau GPS. Jika jalan yang Anda gambar menyeberangi jalan lain,\nhubungkan jalan itu dengan mengeklik pada titik persimpangan. Saat Anda selesai menggambar, klik dua kali\natau tekan 'Return' atau 'Enter' pada papan tik.\n",
             "imagery": "# Citra\n\nCitra foto udara merupakan sumber penting untuk pemetaan. Gabungan dari\npemotretan pesawat, pandangan satelit, dan sumber terhimpun lain tersedia\ndi penyunting pada menu 'Pengaturan Latar' di sebelah kanan.\n\nBiasanya lapisan satelit [Bing Maps](http://www.bing.com/maps/) ditampilkan\ndi penyunting ini, tetapi ketika Anda geser atau perbesar tampilan di suatu wilayah baru,\nsumber baru lain akan tersedia. Di beberapa negara, seperti Amerika Serikat,\nPerancis, dan Denmark memiliki citra berkualitas tinggi yang tersedia di beberapa area.\n\nCitra kadang melenceng dari data peta karena ada kesalahan pada\npenyedia data citra. Jika Anda melihat banyak jalan yang bergeser dari latarnya,\njangan serta-merta memindahkan semuanya untuk mencocokkan latar. Justru Anda bisa menyesuaikan\ncitranya agar pas dengan data yang ada dengan mengeklik 'Perbaiki perataan' pada\nbagian bawah Pengaturan Latar.\n",
-            "addresses": "# Alamat\n\nAlamat adalah informasi yang paling penting dalam suatu peta.\n\nMeski alamat sering ditampilkan sebagai bagian dari jalan, OpenStreetMap menampilkan alamat sebagai bagian dari bangunan dan tempat-tempat di pinggir jalan.\n\nAnda dapat menambahkan alamat ke tempat-tempat berbentuk garis bangunan atau titik. Data alamat yang tepercaya diperoleh dari survei lapangan atau pengetahuan sendiri - seperti fitur lainnya, Anda tidak diperbolehkan menyalin alamat dari sumber-sumber komersial seperti Google Maps.\n",
-            "buildings": "# Bangunan\n\nOpenStreetMap ialah database terbesar dunia untuk bangunan. Kamu dapat membuat\ndan memperbaiki database ini.\n\n## Memilih\n\nKamu dapat memilih sebuah bangunan dengan mengklik pada batasnya. Hal ini akan membedakan\nbangunannya dan membuka sebuah alat kecil menu dan di sisi samping menampilkan informasi lebih lanjut\ntentang bangunan tersebut.\n\n### Mengubah\n\nTerkadang bangunan tidak diletakan pada tempatnya atau memiliki tags yang salah.\n\nUntuk memindahkan seluruh bangunan, pilih, lalu klik alat 'Move'. Geser\ntetikus kamu untuk memindahkan bangunan, dan klik ketika sudah sesuai tempatnya.\n\nUntuk memperbaiki bentuk sebuah gedung, klik dan geser sebuah sudut yang membentuk\nbatasnya ke tempat yang sesuai.\n\n### Membuat\n\nSatu pertanyaan utama terkait menambahkan bangunan ke dalam suatu peta adalah\nOpenStreetMap mencatat gedung baik dalam bentuk luasan dan titik.\n"
+            "addresses": "# Alamat\n\nAlamat adalah informasi yang paling penting dalam suatu peta.\n\nMeski alamat sering ditampilkan sebagai bagian dari jalan, OpenStreetMap menampilkan alamat sebagai bagian dari bangunan dan tempat-tempat di pinggir jalan.\n\nAnda dapat menambahkan alamat ke tempat-tempat berbentuk garis bangunan atau titik. Data alamat yang tepercaya diperoleh dari survei lapangan atau pengetahuan sendiri - seperti fitur lainnya, Anda tidak diperbolehkan menyalin alamat dari sumber-sumber komersial seperti Google Maps.\n"
         },
         "intro": {
             "done": "selesai",
             "graph": {
-                "spring_st": "jalan spring"
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "id"
             },
             "navigation": {
-                "title": "Navigasi",
-                "drag": "Area peta utama menampilkan data OpenStreetMap pada bagian atas dari latar. Anda dapat bernavigasi dengan menggeser dan mengskrol, seperti peta web lainnya. **Geser petanya!**",
-                "select": "Fitur peta dapat diwakili dengan tiga cara: dengan titik, garis, atau area. Semua fitur dapat dipilih dengan mengklik mereka. **Klik sebuah titik untuk memilihnya.**",
-                "pane": "Ketika sebuah fitur dipilih, fitur editor disembunyikan. Bagian kepala menunjukkan tipe fitur dan jendela utama atribut dari fitur tersebut, seperti nama dan alamat. ** Tutup fitur editor dengan menekan {tombol} tombol di kanan atas.**"
+                "title": "Navigasi"
             },
             "points": {
-                "title": "Titik",
-                "place": "Penanda dapat di tempatkan dengan cara meng-klik peta. **Klik peta untuk meletakkan penanda baru pada atap bangunan**",
-                "search": "Terdapat banyak fitur berbeda yang dapat diwakili oleh titik. Titik yang baru anda tambahkan adalah Cafe. **Pencarian untuk '{name}'**",
-                "choose": "**Pilih Kafe dari daftar.**",
-                "describe": "Kini titik bisa ditandai sebagai cafe. Gunakan penyunting fitur, kita dapat tambahkan informasi lebih tentang fitur. **Tambahkan sebuah nama**"
+                "title": "Titik"
             },
             "areas": {
-                "title": "Area",
-                "place": "Gambar area dengan meletakan lebih banyak simpul. Selesaikan area dengan mengklik pada simpul awal. **Gambar sebuah area untuk tempat bermain.**",
-                "search": "**Pencarian untuk '{name}'.**",
-                "choose": "**Pilih Tempat-bermain dari daftar.**"
+                "title": "Area"
             },
             "lines": {
-                "title": "Garis",
-                "start": "**Mulai garis dengan mengklik pada ujung sebuah jalan.**",
-                "finish": "Garis bisa diselesaikan dengan mengklik ulang pada simpul terakhir. **Selesaikan menggambar jalan.**",
-                "road": "**Pilih Jalan dari daftar**",
-                "residential": "Ada beberapa tipe jalan berbeda, yang paling umum adalah Jalan Perumahan. **Pilih tipe jalan Perumahan**",
-                "wrong_preset": "Anda belum memilih tipe Jalan Perumahan. **Klik di sini untuk memilih lagi**"
+                "title": "Garis"
             },
             "startediting": {
                 "title": "Mulai Menyunting",
@@ -588,9 +526,6 @@
                 },
                 "access_simple": {
                     "label": "Akses diperbolehkan"
-                },
-                "access_toilets": {
-                    "label": "Akses"
                 },
                 "address": {
                     "label": "Alamat",
@@ -734,14 +669,8 @@
                 "craft": {
                     "label": "Tipe"
                 },
-                "crop": {
-                    "label": "Tanaman"
-                },
                 "crossing": {
                     "label": "Tipe"
-                },
-                "cuisine": {
-                    "label": "Masakan"
                 },
                 "cycleway": {
                     "label": "Jalur Sepeda",
@@ -841,9 +770,6 @@
                 },
                 "generator/type": {
                     "label": "Tipe"
-                },
-                "golf_hole": {
-                    "label": "Referensi"
                 },
                 "handicap": {
                     "placeholder": "1-18"
@@ -1030,9 +956,6 @@
                 "railway": {
                     "label": "Tipe"
                 },
-                "ref": {
-                    "label": "Referensi"
-                },
                 "relation": {
                     "label": "Tipe"
                 },
@@ -1085,21 +1008,6 @@
                     },
                     "placeholder": "Tidak, Terpisah, Ya..."
                 },
-                "social_facility_for": {
-                    "placeholder": "Tunawisma, Disabilitas, Anak-anak, dll"
-                },
-                "source": {
-                    "label": "Sumber"
-                },
-                "sport": {
-                    "label": "Olahraga"
-                },
-                "sport_ice": {
-                    "label": "Olahraga"
-                },
-                "sport_racing": {
-                    "label": "Olahraga"
-                },
                 "structure": {
                     "label": "Struktur",
                     "options": {
@@ -1143,9 +1051,6 @@
                 },
                 "trees": {
                     "label": "Pepohonan"
-                },
-                "tunnel": {
-                    "label": "Terowongan"
                 },
                 "water": {
                     "label": "Tipe"
@@ -1192,9 +1097,6 @@
                     "name": "Pelataran pesawat",
                     "terms": "Apron, Parkir Pesawat"
                 },
-                "aeroway/gate": {
-                    "name": "Gerbang Bandar Udara"
-                },
                 "aeroway/hangar": {
                     "name": "Hanggar"
                 },
@@ -1208,9 +1110,6 @@
                 "aeroway/taxiway": {
                     "name": "Landas hubung",
                     "terms": "Landas gelinding, Jalan rayap, Landas ancang"
-                },
-                "aeroway/terminal": {
-                    "name": "Terminal Bandara"
                 },
                 "amenity": {
                     "name": "Keramahan"
@@ -1607,10 +1506,6 @@
                 "craft/clockmaker": {
                     "name": "Pembuat Jam"
                 },
-                "craft/confectionery": {
-                    "name": "Penganan",
-                    "terms": "Toko Kue, Toko Kudapan"
-                },
                 "craft/dressmaker": {
                     "name": "Penjahit Pakaian Wanita"
                 },
@@ -1665,14 +1560,8 @@
                 "craft/scaffolder": {
                     "name": "Perancah"
                 },
-                "craft/sculpter": {
-                    "name": "Pembuat Patung"
-                },
                 "craft/shoemaker": {
                     "name": "Pembuat Sepatu"
-                },
-                "craft/sweep": {
-                    "name": "Penyapu Cerobong"
                 },
                 "craft/tailor": {
                     "name": "Penjahit Pakaian Pria"
@@ -1766,9 +1655,6 @@
                 "highway/path": {
                     "name": "Jalur"
                 },
-                "highway/pedestrian": {
-                    "name": "Trotoar"
-                },
                 "highway/primary": {
                     "name": "Jalan Provinsi",
                     "terms": "Jalan Primer, Jalan Utama"
@@ -1776,9 +1662,6 @@
                 "highway/primary_link": {
                     "name": "Jalan Penghubung Primer",
                     "terms": "Jalan Penghubung Primer"
-                },
-                "highway/raceway": {
-                    "name": "Trek Balap"
                 },
                 "highway/residential": {
                     "name": "Jalan Perumahan",
@@ -2054,9 +1937,6 @@
                     "name": "Lapangan Bermain",
                     "terms": "Tempat Bermain"
                 },
-                "leisure/running_track": {
-                    "name": "Lintasan Lari"
-                },
                 "leisure/stadium": {
                     "name": "Stadion",
                     "terms": "Stadion"
@@ -2064,9 +1944,6 @@
                 "leisure/swimming_pool": {
                     "name": "Kolam Renang",
                     "terms": "Kolam Renang"
-                },
-                "leisure/track": {
-                    "name": "Jalur Balap (tidak bermotor)"
                 },
                 "line": {
                     "name": "Garis",
@@ -2118,18 +1995,6 @@
                 "man_made/water_well": {
                     "name": "Sumur",
                     "terms": "Perigi"
-                },
-                "military/barracks": {
-                    "name": "Barak"
-                },
-                "military/bunker": {
-                    "name": "Tempat berlindung"
-                },
-                "military/danger_area": {
-                    "name": "Wilayah Bahaya"
-                },
-                "military/range": {
-                    "name": "Lingkup Militer"
                 },
                 "natural": {
                     "name": "Alami"
@@ -2208,14 +2073,8 @@
                     "name": "Kantor",
                     "terms": "Balai"
                 },
-                "office/accountant": {
-                    "name": "Akuntan"
-                },
                 "office/administrative": {
                     "name": "Kantor Administrasi"
-                },
-                "office/architect": {
-                    "name": "Arsitek"
                 },
                 "office/company": {
                     "name": "Kantor Perusahaan"
@@ -2238,15 +2097,8 @@
                 "office/insurance": {
                     "name": "Kantor Asuransi"
                 },
-                "office/it": {
-                    "name": "Kantor IT",
-                    "terms": "Teknologi Informasi, TI"
-                },
                 "office/lawyer": {
                     "name": "Kantor Hukum"
-                },
-                "office/newspaper": {
-                    "name": "Koran"
                 },
                 "office/ngo": {
                     "name": "Kantor LSM"
@@ -2259,9 +2111,6 @@
                 },
                 "office/telecommunication": {
                     "name": "Kantor Telekomunikasi"
-                },
-                "office/therapist": {
-                    "name": "Penerapi"
                 },
                 "office/travel_agent": {
                     "name": "Biro Perjalanan"

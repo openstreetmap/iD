@@ -1,10 +1,16 @@
 {
+    "icon": "power-line",
+    "fields": [
+        "name",
+        "operator",
+        "voltage",
+        "ref"
+    ],
     "geometry": [
         "line"
     ],
     "tags": {
         "power": "line"
     },
-    "name": "Power Line",
-    "icon": "power-line"
+    "name": "Power Line"
 }

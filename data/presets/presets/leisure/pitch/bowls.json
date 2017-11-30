@@ -12,6 +12,10 @@
         "leisure": "pitch",
         "sport": "bowls"
     },
+    "reference": {
+        "key": "sport",
+        "value": "bowls"
+    },
     "terms": [],
     "name": "Bowling Green"
 }

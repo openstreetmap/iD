@@ -5,8 +5,7 @@
     ],
     "geometry": [
         "point",
-        "vertex",
-        "area"
+        "vertex"
     ],
     "tags": {
         "amenity": "waste_basket"

@@ -1,151 +1,152 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _clone from 'lodash-es/clone';
+import _forEach from 'lodash-es/forEach';
+import _isEqual from 'lodash-es/isEqual';
+import _unionBy from 'lodash-es/unionBy';
+
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { select as d3_select } from 'd3-selection';
+
 import { t } from '../util/locale';
-import { d3combobox } from '../lib/d3.combobox.js';
-import { modeSelect } from '../modes/index';
-import { svgIcon } from '../svg/index';
-import { tooltip } from '../util/tooltip';
-import {
-    utilDisplayName,
-    utilDisplayType,
-    utilEntityOrMemberSelector
-} from '../util/index';
-import { utilRebind } from '../util/rebind';
-import { utilTriggerEvent } from '../util/trigger_event';
+import { osmChangeset } from '../osm';
+import { uiChangesetEditor } from './changeset_editor';
+import { uiCommitChanges } from './commit_changes';
+import { uiCommitWarnings } from './commit_warnings';
+import { uiRawTagEditor } from './raw_tag_editor';
+import { utilDetect } from '../util/detect';
+import { utilRebind } from '../util';
+
+
+var changeset;
+var readOnlyTags = [
+    /^changesets_count$/,
+    /^created_by$/,
+    /^ideditor:/,
+    /^imagery_used$/,
+    /^host$/,
+    /^locale$/
+];
+
+// treat most punctuation (except -, _, +, &) as hashtag delimiters - #4398
+// from https://stackoverflow.com/a/25575009
+var hashtagRegex = /(#[^\u2000-\u206F\u2E00-\u2E7F\s\\'!"#$%()*,.\/:;<=>?@\[\]^`{|}~]+)/g;
 
 
 export function uiCommit(context) {
-    var dispatch = d3.dispatch('cancel', 'save');
+    var dispatch = d3_dispatch('cancel', 'save'),
+        userDetails,
+        _selection;
+
+    var changesetEditor = uiChangesetEditor(context)
+        .on('change', changeTags);
+    var rawTagEditor = uiRawTagEditor(context)
+        .on('change', changeTags);
+    var commitChanges = uiCommitChanges(context);
+    var commitWarnings = uiCommitWarnings(context);
 
 
     function commit(selection) {
-        var changes = context.history().changes(),
-            summary = context.history().difference().summary();
+        _selection = selection;
 
-        selection
+        var osm = context.connection();
+        if (!osm) return;
+
+        // expire stored comment and hashtags after cutoff datetime - #3947
+        var commentDate = +context.storage('commentDate') || 0,
+            currDate = Date.now(),
+            cutoff = 2 * 86400 * 1000;   // 2 days
+        if (commentDate > currDate || currDate - commentDate > cutoff) {
+            context.storage('comment', null);
+            context.storage('hashtags', null);
+        }
+
+        var tags;
+        if (!changeset) {
+            var detected = utilDetect();
+            tags = {
+                comment: context.storage('comment') || '',
+                created_by: ('iD ' + context.version).substr(0, 255),
+                host: detected.host.substr(0, 255),
+                locale: detected.locale.substr(0, 255)
+            };
+
+            // call findHashtags initially - this will remove stored
+            // hashtags if any hashtags are found in the comment - #4304
+            findHashtags(tags, true);
+
+            var hashtags = context.storage('hashtags');
+            if (hashtags) {
+                tags.hashtags = hashtags;
+            }
+
+            changeset = new osmChangeset({ tags: tags });
+        }
+
+        tags = _clone(changeset.tags);
+        tags.imagery_used = context.history().imageryUsed().join(';').substr(0, 255);
+        changeset = changeset.update({ tags: tags });
+
+        var header = selection.selectAll('.header')
+            .data([0]);
+
+        header.enter()
             .append('div')
             .attr('class', 'header fillL')
             .append('h3')
             .text(t('commit.title'));
 
-        var body = selection
+        var body = selection.selectAll('.body')
+            .data([0]);
+
+        body = body.enter()
             .append('div')
-            .attr('class', 'body');
+            .attr('class', 'body')
+            .merge(body);
 
-        var commentSection = body
+
+        // Changeset Section
+        var changesetSection = body.selectAll('.changeset-editor')
+            .data([0]);
+
+        changesetSection = changesetSection.enter()
             .append('div')
-            .attr('class', 'modal-section form-field commit-form');
+            .attr('class', 'modal-section changeset-editor')
+            .merge(changesetSection);
 
-        commentSection
-            .append('label')
-            .attr('class', 'form-label')
-            .text(t('commit.message_label'));
-
-        var commentField = commentSection
-            .append('textarea')
-            .attr('placeholder', t('commit.description_placeholder'))
-            .attr('maxlength', 255)
-            .property('value', context.storage('comment') || '')
-            .on('input.save', checkComment)
-            .on('change.save', checkComment)
-            .on('blur.save', function() {
-                context.storage('comment', this.value);
-            });
-
-
-        commentField.node().select();
-
-        context.connection().userChangesets(function (err, changesets) {
-            if (err) return;
-
-            var comments = [];
-
-            for (var i = 0; i < changesets.length; i++) {
-                if (changesets[i].tags.comment) {
-                    comments.push({
-                        title: changesets[i].tags.comment,
-                        value: changesets[i].tags.comment
-                    });
-                }
-            }
-
-            commentField
-                .call(d3combobox().caseSensitive(true).data(comments));
-        });
-
-        var clippyArea = commentSection.append('div')
-            .attr('class', 'clippy-area');
-
-        var changeSetInfo = commentSection.append('div')
-            .attr('class', 'changeset-info');
-
-        changeSetInfo.append('a')
-            .attr('target', '_blank')
-            .attr('tabindex', -1)
-            .call(svgIcon('#icon-out-link', 'inline'))
-            .attr('href', t('commit.about_changeset_comments_link'))
-            .append('span')
-            .text(t('commit.about_changeset_comments'));
-
-
-        // Warnings
-        var warnings = body.selectAll('div.warning-section')
-            .data([context.history().validate(changes)]);
-
-        warnings = warnings.enter()
-            .append('div')
-            .attr('class', 'modal-section warning-section fillL2')
-            .style('display', function(d) { return _.isEmpty(d) ? 'none' : null; })
-            .style('background', '#ffb')
-            .merge(warnings);
-
-        warnings
-            .append('h3')
-            .text(t('commit.warnings'));
-
-        warnings
-            .append('ul')
-            .attr('class', 'changeset-list');
-
-        var warningLi = warnings.select('ul').selectAll('li')
-            .data(function(d) { return d; });
-
-        warningLi = warningLi.enter()
-            .append('li')
-            .on('mouseover', mouseover)
-            .on('mouseout', mouseout)
-            .on('click', warningClick)
-            .merge(warningLi);
-
-        warningLi
-            .call(svgIcon('#icon-alert', 'pre-text'));
-
-        warningLi
-            .append('strong')
-            .text(function(d) { return d.message; });
-
-        warningLi.filter(function(d) { return d.tooltip; })
-            .call(tooltip()
-                .title(function(d) { return d.tooltip; })
-                .placement('top')
+        changesetSection
+            .call(changesetEditor
+                .changesetID(changeset.id)
+                .tags(tags)
             );
 
 
-        // Upload Explanation
-        var saveSection = body
-            .append('div')
-            .attr('class','modal-section save-section fillL cf');
+        // Warnings
+        body.call(commitWarnings);
 
-        var prose = saveSection
+
+        // Upload Explanation
+        var saveSection = body.selectAll('.save-section')
+            .data([0]);
+
+        saveSection = saveSection.enter()
+            .append('div')
+            .attr('class','modal-section save-section fillL cf')
+            .merge(saveSection);
+
+        var prose = saveSection.selectAll('.commit-info')
+            .data([0]);
+
+        prose = prose.enter()
             .append('p')
             .attr('class', 'commit-info')
-            .html(t('commit.upload_explanation'));
+            .text(t('commit.upload_explanation'))
+            .merge(prose);
 
-
-        context.connection().userDetails(function(err, user) {
+        osm.userDetails(function(err, user) {
             if (err) return;
 
-            var userLink = d3.select(document.createElement('div'));
+            var userLink = d3_select(document.createElement('div'));
+
+            userDetails = user;
 
             if (user.image_url) {
                 userLink
@@ -158,7 +159,7 @@ export function uiCommit(context) {
                 .append('a')
                 .attr('class','user-info')
                 .text(user.display_name)
-                .attr('href', context.connection().userURL(user.display_name))
+                .attr('href', osm.userURL(user.display_name))
                 .attr('tabindex', -1)
                 .attr('target', '_blank');
 
@@ -167,155 +168,246 @@ export function uiCommit(context) {
         });
 
 
-        // Buttons
-        var buttonSection = saveSection
-            .append('div')
-            .attr('class','buttons fillL cf');
+        // Request Review
+        var requestReview = saveSection.selectAll('.request-review')
+            .data([0]);
 
-        var cancelButton = buttonSection
+        // Enter
+        var requestReviewEnter = requestReview.enter()
+            .append('div')
+            .attr('class', 'request-review');
+
+        var labelEnter = requestReviewEnter
+            .append('label')
+            .attr('for', 'commit-input-request-review');
+
+        labelEnter
+            .append('input')
+            .attr('type', 'checkbox')
+            .attr('id', 'commit-input-request-review');
+
+        labelEnter
+            .append('span')
+            .text(t('commit.request_review'));
+
+        // Update
+        requestReview = requestReview
+            .merge(requestReviewEnter);
+
+        var requestReviewInput = requestReview.selectAll('input')
+            .property('checked', isReviewRequested(changeset.tags))
+            .on('change', toggleRequestReview);
+
+
+        // Buttons
+        var buttonSection = saveSection.selectAll('.buttons')
+            .data([0]);
+
+        // enter
+        var buttonEnter = buttonSection.enter()
+            .append('div')
+            .attr('class', 'buttons fillL cf');
+
+        buttonEnter
             .append('button')
             .attr('class', 'secondary-action col5 button cancel-button')
-            .on('click.cancel', function() { dispatch.call('cancel'); });
-
-        cancelButton
             .append('span')
             .attr('class', 'label')
             .text(t('commit.cancel'));
 
-        var saveButton = buttonSection
+        buttonEnter
             .append('button')
             .attr('class', 'action col5 button save-button')
-            .attr('disabled', function() {
-                var n = d3.select('.commit-form textarea').node();
-                return (n && n.value.length) ? null : true;
-            })
-            .on('click.save', function() {
-                dispatch.call('save', this, {
-                    comment: commentField.node().value
-                });
-            });
-
-        saveButton
             .append('span')
             .attr('class', 'label')
             .text(t('commit.save'));
 
+        // update
+        buttonSection = buttonSection
+            .merge(buttonEnter);
 
-        // Changes
-        var changeSection = body
+        buttonSection.selectAll('.cancel-button')
+            .on('click.cancel', function() {
+                var selectedID = commitChanges.entityID();
+                dispatch.call('cancel', this, selectedID);
+            });
+
+        buttonSection.selectAll('.save-button')
+            .attr('disabled', function() {
+                var n = d3_select('#preset-input-comment').node();
+                return (n && n.value.length) ? null : true;
+            })
+            .on('click.save', function() {
+                dispatch.call('save', this, changeset);
+            });
+
+
+        // Raw Tag Editor
+        var tagSection = body.selectAll('.tag-section.raw-tag-editor')
+            .data([0]);
+
+        tagSection = tagSection.enter()
             .append('div')
-            .attr('class', 'commit-section modal-section fillL2');
+            .attr('class', 'modal-section tag-section raw-tag-editor')
+            .merge(tagSection);
 
-        changeSection.append('h3')
-            .text(t('commit.changes', { count: summary.length }));
-
-        var li = changeSection
-            .append('ul')
-            .attr('class', 'changeset-list')
-            .selectAll('li')
-            .data(summary);
-
-        li = li.enter()
-            .append('li')
-            .on('mouseover', mouseover)
-            .on('mouseout', mouseout)
-            .on('click', zoomToEntity)
-            .merge(li);
-
-        li.each(function(d) {
-            d3.select(this)
-                .call(svgIcon('#icon-' + d.entity.geometry(d.graph), 'pre-text ' + d.changeType));
-        });
-
-        li.append('span')
-            .attr('class', 'change-type')
-            .text(function(d) { return t('commit.' + d.changeType) + ' '; });
-
-        li.append('strong')
-            .attr('class', 'entity-type')
-            .text(function(d) {
-                var matched = context.presets().match(d.entity, d.graph);
-                return (matched && matched.name()) || utilDisplayType(d.entity.id);
-            });
-
-        li.append('span')
-            .attr('class', 'entity-name')
-            .text(function(d) {
-                var name = utilDisplayName(d.entity) || '',
-                    string = '';
-                if (name !== '') string += ':';
-                return string += ' ' + name;
-            });
-
-        li.style('opacity', 0)
-            .transition()
-            .style('opacity', 1);
+        var expanded = !tagSection.selectAll('a.hide-toggle.expanded').empty();
+        tagSection
+            .call(rawTagEditor
+                .expanded(expanded)
+                .readOnlyTags(readOnlyTags)
+                .tags(_clone(changeset.tags))
+            );
 
 
-        // Call checkComment off the bat, in case a changeset
-        // comment is recovered from localStorage
-        utilTriggerEvent(commentField, 'input');
+        // Change summary
+        body.call(commitChanges);
 
 
-        function mouseover(d) {
-            if (d.entity) {
-                context.surface().selectAll(
-                    utilEntityOrMemberSelector([d.entity.id], context.graph())
-                ).classed('hover', true);
-            }
-        }
+        function toggleRequestReview() {
+            var rr = requestReviewInput.property('checked');
+            updateChangeset({ review_requested: (rr ? 'yes' : undefined) });
 
+            var expanded = !tagSection.selectAll('a.hide-toggle.expanded').empty();
 
-        function mouseout() {
-            context.surface().selectAll('.hover')
-                .classed('hover', false);
-        }
-
-
-        function warningClick(d) {
-            if (d.entity) {
-                context.map().zoomTo(d.entity);
-                context.enter(
-                    modeSelect(context, [d.entity.id]).suppressMenu(true)
+            tagSection
+                .call(rawTagEditor
+                    .expanded(expanded)
+                    .readOnlyTags(readOnlyTags)
+                    .tags(_clone(changeset.tags))
                 );
-            }
-        }
-
-
-        function zoomToEntity(change) {
-            var entity = change.entity;
-            if (change.changeType !== 'deleted' &&
-                context.graph().entity(entity.id).geometry(context.graph()) !== 'vertex') {
-                context.map().zoomTo(entity);
-                context.surface().selectAll(
-                    utilEntityOrMemberSelector([entity.id], context.graph()))
-                    .classed('hover', true);
-            }
-        }
-
-
-        function checkComment() {
-            d3.selectAll('.save-section .save-button')
-                .attr('disabled', (this.value.length ? null : true));
-
-            var googleWarning = clippyArea
-               .html('')
-               .selectAll('a')
-               .data(this.value.match(/google/i) ? [true] : []);
-
-            googleWarning.exit()
-                .remove();
-
-            googleWarning.enter()
-               .append('a')
-               .attr('target', '_blank')
-               .attr('tabindex', -1)
-               .call(svgIcon('#icon-alert', 'inline'))
-               .attr('href', t('commit.google_warning_link'))
-               .append('span')
-               .text(t('commit.google_warning'));
         }
     }
+
+
+    function changeTags(changed, onInput) {
+        if (changed.hasOwnProperty('comment')) {
+            if (changed.comment === undefined) {
+                changed.comment = '';
+            }
+            if (!onInput) {
+                context.storage('comment', changed.comment);
+                context.storage('commentDate', Date.now());
+            }
+        }
+
+        updateChangeset(changed, onInput);
+
+        if (_selection) {
+            _selection.call(commit);
+        }
+    }
+
+
+    function findHashtags(tags, commentOnly) {
+        var inComment = commentTags(),
+            inHashTags = hashTags();
+
+        if (inComment !== null) {                    // when hashtags are detected in comment...
+            context.storage('hashtags', null);       // always remove stored hashtags - #4304
+            if (commentOnly) { inHashTags = null; }  // optionally override hashtags field
+        }
+        return _unionBy(inComment, inHashTags, function (s) {
+            return s.toLowerCase();
+        });
+
+        // Extract hashtags from `comment`
+        function commentTags() {
+            return tags.comment
+                .replace(/http\S*/g, '')  // drop anything that looks like a URL - #4289
+                .match(hashtagRegex);
+        }
+
+        // Extract and clean hashtags from `hashtags`
+        function hashTags() {
+            var t = tags.hashtags || '';
+            return t
+                .split(/[,;\s]+/)
+                .map(function (s) {
+                    if (s[0] !== '#') { s = '#' + s; }    // prepend '#'
+                    var matched = s.match(hashtagRegex);
+                    return matched && matched[0];
+                }).filter(Boolean);                       // exclude falsey
+        }
+    }
+
+
+    function isReviewRequested(tags) {
+        var rr = tags.review_requested;
+        if (rr === undefined) return false;
+        rr = rr.trim().toLowerCase();
+        return !(rr === '' || rr === 'no');
+    }
+
+
+    function updateChangeset(changed, onInput) {
+        var tags = _clone(changeset.tags);
+
+        _forEach(changed, function(v, k) {
+            k = k.trim().substr(0, 255);
+            if (readOnlyTags.indexOf(k) !== -1) return;
+
+            if (k !== '' && v !== undefined) {
+                if (onInput) {
+                    tags[k] = v;
+                } else {
+                    tags[k] = v.trim().substr(0, 255);
+                }
+            } else {
+                delete tags[k];
+            }
+        });
+
+        if (!onInput) {
+            // when changing the comment, override hashtags with any found in comment.
+            var commentOnly = changed.hasOwnProperty('comment') && (changed.comment !== '');
+            var arr = findHashtags(tags, commentOnly);
+            if (arr.length) {
+                tags.hashtags = arr.join(';').substr(0, 255);
+                context.storage('hashtags', tags.hashtags);
+            } else {
+                delete tags.hashtags;
+                context.storage('hashtags', null);
+            }
+        }
+
+        // always update userdetails, just in case user reauthenticates as someone else
+        if (userDetails && userDetails.changesets_count !== undefined) {
+            var changesetsCount = parseInt(userDetails.changesets_count, 10) + 1;  // #4283
+            tags.changesets_count = String(changesetsCount);
+
+            // first 100 edits - new user
+            if (changesetsCount <= 100) {
+                var s;
+                s = context.storage('walkthrough_completed');
+                if (s) {
+                    tags['ideditor:walkthrough_completed'] = s;
+                }
+
+                s = context.storage('walkthrough_progress');
+                if (s) {
+                    tags['ideditor:walkthrough_progress'] = s;
+                }
+
+                s = context.storage('walkthrough_started');
+                if (s) {
+                    tags['ideditor:walkthrough_started'] = s;
+                }
+            }
+        } else {
+            delete tags.changesets_count;
+        }
+
+        if (!_isEqual(changeset.tags, tags)) {
+            changeset = changeset.update({ tags: tags });
+        }
+    }
+
+
+    commit.reset = function() {
+        changeset = null;
+    };
+
 
     return utilRebind(commit, dispatch, 'on');
 }

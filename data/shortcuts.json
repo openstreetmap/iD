@@ -1,0 +1,257 @@
+{ "dataShortcuts": [
+    {
+        "tab": "browsing",
+        "text": "shortcuts.browsing.title",
+        "columns": [
+            {
+                "rows": [
+                    {
+                        "section": "navigation",
+                        "text": "shortcuts.browsing.navigation.title"
+                    }, {
+                        "shortcuts": ["↓", "↑", "←", "→"],
+                        "text": "shortcuts.browsing.navigation.pan",
+                        "separator": ","
+                    }, {
+                        "modifiers": ["⌘"],
+                        "shortcuts": ["↓", "↑", "←", "→"],
+                        "text": "shortcuts.browsing.navigation.pan_more",
+                        "separator": ","
+                    }, {
+                        "shortcuts": ["+", "-"],
+                        "text": "shortcuts.browsing.navigation.zoom",
+                        "separator": ","
+                    }, {
+                        "modifiers": ["⌘"],
+                        "shortcuts": ["+", "-"],
+                        "text": "shortcuts.browsing.navigation.zoom_more",
+                        "separator": ","
+                    },
+
+                    {
+                        "section": "help",
+                        "text": "shortcuts.browsing.help.title"
+                    }, {
+                        "shortcuts": ["help.key"],
+                        "text": "shortcuts.browsing.help.help"
+                    }, {
+                        "shortcuts": ["shortcuts.toggle.key"],
+                        "text": "shortcuts.browsing.help.keyboard"
+                    },
+
+                    {
+                        "section": "display_options",
+                        "text": "shortcuts.browsing.display_options.title"
+                    }, {
+                        "shortcuts": ["background.key"],
+                        "text": "shortcuts.browsing.display_options.background"
+                    }, {
+                        "modifiers": ["⌘"],
+                        "shortcuts": ["background.key"],
+                        "text": "shortcuts.browsing.display_options.background_switch"
+                    }, {
+                        "shortcuts": ["map_data.key"],
+                        "text": "shortcuts.browsing.display_options.map_data"
+                    }, {
+                        "modifiers": ["⌃", "⌘"],
+                        "shortcuts": ["F", "F11"],
+                        "text": "shortcuts.browsing.display_options.fullscreen"
+                    }, {
+                        "shortcuts": ["area_fill.wireframe.key"],
+                        "text": "shortcuts.browsing.display_options.wireframe"
+                    }, {
+                        "shortcuts": ["background.minimap.key"],
+                        "text": "shortcuts.browsing.display_options.minimap"
+                    }
+                ]
+            }, {
+                "rows": [
+                    {
+                        "section": "selecting",
+                        "text": "shortcuts.browsing.selecting.title"
+                    }, {
+                        "shortcuts": ["Left-click"],
+                        "text": "shortcuts.browsing.selecting.select_one"
+                    }, {
+                        "modifiers": ["⇧"],
+                        "shortcuts": ["Left-click"],
+                        "text": "shortcuts.browsing.selecting.select_multi"
+                    }, {
+                        "modifiers": ["⇧"],
+                        "shortcuts": ["Left-click"],
+                        "gesture": "shortcuts.gesture.drag",
+                        "text": "shortcuts.browsing.selecting.lasso"
+                    }, {
+                        "shortcuts": [],
+                        "text": ""
+                    },
+
+                    {
+                        "section": "with_selected",
+                        "text": "shortcuts.browsing.with_selected.title"
+                    }, {
+                        "shortcuts": ["Right-click", "shortcuts.key.space"],
+                        "text": "shortcuts.browsing.with_selected.edit_menu"
+                    }, {
+                        "shortcuts": [],
+                        "text": ""
+                    },
+
+                    {
+                        "section": "vertex_selected",
+                        "text": "shortcuts.browsing.vertex_selected.title"
+                    }, {
+                        "shortcuts": ["[", "↖"],
+                        "text": "shortcuts.browsing.vertex_selected.previous"
+                    }, {
+                        "shortcuts": ["]", "↘"],
+                        "text": "shortcuts.browsing.vertex_selected.next"
+                    }, {
+                        "shortcuts": ["{", "⇞"],
+                        "text": "shortcuts.browsing.vertex_selected.first"
+                    }, {
+                        "shortcuts": ["}", "⇟"],
+                        "text": "shortcuts.browsing.vertex_selected.last"
+                    }, {
+                        "shortcuts": ["\\", "shortcuts.key.pause"],
+                        "text": "shortcuts.browsing.vertex_selected.change_parent"
+                    }
+
+                ]
+            }
+        ]
+    }, {
+        "tab": "editing",
+        "text": "shortcuts.editing.title",
+        "columns" : [
+            {
+                "rows": [
+                    {
+                        "section": "drawing",
+                        "text": "shortcuts.editing.drawing.title"
+                    }, {
+                        "shortcuts": ["1"],
+                        "text": "shortcuts.editing.drawing.add_point"
+                    }, {
+                        "shortcuts": ["2"],
+                        "text": "shortcuts.editing.drawing.add_line"
+                    }, {
+                        "shortcuts": ["3"],
+                        "text": "shortcuts.editing.drawing.add_area"
+                    }, {
+                        "shortcuts": ["Left-click", "shortcuts.key.space"],
+                        "text": "shortcuts.editing.drawing.place_point"
+                    }, {
+                        "shortcuts": ["⌥"],
+                        "text": "shortcuts.editing.drawing.disable_snap"
+                    }, {
+                        "shortcuts": ["↵", "⎋"],
+                        "text": "shortcuts.editing.drawing.stop_line"
+                    },
+
+                    {
+                        "section": "commands",
+                        "text": "shortcuts.editing.commands.title"
+                    }, {
+                        "modifiers": ["⌘"],
+                        "shortcuts": ["C"],
+                        "text": "shortcuts.editing.commands.copy"
+                    }, {
+                        "modifiers": ["⌘"],
+                        "shortcuts": ["V"],
+                        "text": "shortcuts.editing.commands.paste"
+                    }, {
+                        "modifiers": ["⌘"],
+                        "shortcuts": ["Z"],
+                        "text": "shortcuts.editing.commands.undo"
+                    }, {
+                        "modifiers": ["⌘", "⇧"],
+                        "shortcuts": ["Z"],
+                        "text": "shortcuts.editing.commands.redo"
+                    }, {
+                        "modifiers": ["⌘"],
+                        "shortcuts": ["S"],
+                        "text": "shortcuts.editing.commands.save"
+                    }
+                ]
+            }, {
+                "rows": [
+                    {
+                        "section": "operations",
+                        "text": "shortcuts.editing.operations.title"
+                    }, {
+                        "shortcuts": ["operations.continue.key"],
+                        "text": "shortcuts.editing.operations.continue_line"
+                    }, {
+                        "shortcuts": ["operations.merge.key"],
+                        "text": "shortcuts.editing.operations.merge"
+                    }, {
+                        "shortcuts": ["operations.disconnect.key"],
+                        "text": "shortcuts.editing.operations.disconnect"
+                    }, {
+                        "shortcuts": ["operations.split.key"],
+                        "text": "shortcuts.editing.operations.split"
+                    }, {
+                        "shortcuts": ["operations.reverse.key"],
+                        "text": "shortcuts.editing.operations.reverse"
+                    }, {
+                        "shortcuts": ["operations.move.key"],
+                        "text": "shortcuts.editing.operations.move"
+                    }, {
+                        "shortcuts": ["operations.rotate.key"],
+                        "text": "shortcuts.editing.operations.rotate"
+                    }, {
+                        "shortcuts": ["operations.orthogonalize.key"],
+                        "text": "shortcuts.editing.operations.orthogonalize"
+                    }, {
+                        "shortcuts": ["operations.circularize.key"],
+                        "text": "shortcuts.editing.operations.circularize"
+                    }, {
+                        "shortcuts": ["operations.reflect.key.long"],
+                        "text": "shortcuts.editing.operations.reflect_long"
+                    }, {
+                        "shortcuts": ["operations.reflect.key.short"],
+                        "text": "shortcuts.editing.operations.reflect_short"
+                    }, {
+                        "modifiers": ["⌘"],
+                        "shortcuts": ["⌫"],
+                        "text": "shortcuts.editing.operations.delete"
+                    }
+                ]
+            }
+        ]
+    }, {
+        "tab": "tools",
+        "text": "shortcuts.tools.title",
+        "columns" : [
+            {
+                "rows": [
+                    {
+                        "section": "info",
+                        "text": "shortcuts.tools.info.title"
+                    }, {
+                        "modifiers": ["⌘"],
+                        "shortcuts": ["info_panels.key"],
+                        "text": "shortcuts.tools.info.all"
+                    }, {
+                        "modifiers": ["⌘", "⇧"],
+                        "shortcuts": ["info_panels.background.key"],
+                        "text": "shortcuts.tools.info.background"
+                    }, {
+                        "modifiers": ["⌘", "⇧"],
+                        "shortcuts": ["info_panels.history.key"],
+                        "text": "shortcuts.tools.info.history"
+                    }, {
+                        "modifiers": ["⌘", "⇧"],
+                        "shortcuts": ["info_panels.location.key"],
+                        "text": "shortcuts.tools.info.location"
+                    }, {
+                        "modifiers": ["⌘", "⇧"],
+                        "shortcuts": ["info_panels.measurement.key"],
+                        "text": "shortcuts.tools.info.measurement"
+                    }
+                ]
+            }
+        ]
+    }
+]}

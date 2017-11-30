@@ -1,14 +1,33 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { geoExtent, geoPolygonIntersectsPolygon } from '../geo/index';
+import _flatten from 'lodash-es/flatten';
+import _isEmpty from 'lodash-es/isEmpty';
+import _isUndefined from 'lodash-es/isUndefined';
+import _reduce from 'lodash-es/reduce';
+import _union from 'lodash-es/union';
+
+import {
+    geoBounds as d3_geoBounds,
+    geoPath as d3_geoPath
+} from 'd3-geo';
+
+import {
+    text as d3_text
+} from 'd3-request';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
 import { utilDetect } from '../util/detect';
-import toGeoJSON from 'togeojson';
+import toGeoJSON from '@mapbox/togeojson';
 
 
 export function svgGpx(projection, context, dispatch) {
     var showLabels = true,
         detected = utilDetect(),
-        layer;
+        layer,
+        src;
 
 
     function init() {
@@ -18,18 +37,18 @@ export function svgGpx(projection, context, dispatch) {
         svgGpx.enabled = true;
 
         function over() {
-            d3.event.stopPropagation();
-            d3.event.preventDefault();
-            d3.event.dataTransfer.dropEffect = 'copy';
+            d3_event.stopPropagation();
+            d3_event.preventDefault();
+            d3_event.dataTransfer.dropEffect = 'copy';
         }
 
-        d3.select('body')
+        d3_select('body')
             .attr('dropzone', 'copy')
             .on('drop.localgpx', function() {
-                d3.event.stopPropagation();
-                d3.event.preventDefault();
+                d3_event.stopPropagation();
+                d3_event.preventDefault();
                 if (!detected.filedrop) return;
-                drawGpx.files(d3.event.dataTransfer.files);
+                drawGpx.files(d3_event.dataTransfer.files);
             })
             .on('dragenter.localgpx', over)
             .on('dragexit.localgpx', over)
@@ -68,7 +87,7 @@ export function svgGpx(projection, context, dispatch) {
             .merge(paths);
 
 
-        var path = d3.geoPath(projection);
+        var path = d3_geoPath(projection);
 
         paths
             .attr('d', path);
@@ -106,6 +125,36 @@ export function svgGpx(projection, context, dispatch) {
     }
 
 
+    function getExtension(fileName) {
+        if (_isUndefined(fileName)) {
+            return '';
+        }
+
+        var lastDotIndex = fileName.lastIndexOf('.');
+        if (lastDotIndex < 0) {
+            return '';
+        }
+
+        return fileName.substr(lastDotIndex);
+    }
+
+
+    function parseSaveAndZoom(extension, data) {
+        switch (extension) {
+            default:
+                drawGpx.geojson(toGeoJSON.gpx(toDom(data))).fitZoom();
+                break;
+            case '.kml':
+                drawGpx.geojson(toGeoJSON.kml(toDom(data))).fitZoom();
+                break;
+            case '.geojson':
+            case '.json':
+                drawGpx.geojson(JSON.parse(data)).fitZoom();
+                break;
+        }
+    }
+
+
     drawGpx.showLabels = function(_) {
         if (!arguments.length) return showLabels;
         showLabels = _;
@@ -123,13 +172,13 @@ export function svgGpx(projection, context, dispatch) {
 
     drawGpx.hasGpx = function() {
         var geojson = svgGpx.geojson;
-        return (!(_.isEmpty(geojson) || _.isEmpty(geojson.features)));
+        return (!(_isEmpty(geojson) || _isEmpty(geojson.features)));
     };
 
 
     drawGpx.geojson = function(gj) {
         if (!arguments.length) return svgGpx.geojson;
-        if (_.isEmpty(gj) || _.isEmpty(gj.features)) return this;
+        if (_isEmpty(gj) || _isEmpty(gj.features)) return this;
         svgGpx.geojson = gj;
         dispatch.call('change');
         return this;
@@ -137,9 +186,12 @@ export function svgGpx(projection, context, dispatch) {
 
 
     drawGpx.url = function(url) {
-        d3.text(url, function(err, data) {
+        d3_text(url, function(err, data) {
             if (!err) {
-                drawGpx.geojson(toGeoJSON.gpx(toDom(data)));
+                src = url;
+
+                var extension = getExtension(url);
+                parseSaveAndZoom(extension, data);
             }
         });
         return this;
@@ -151,14 +203,23 @@ export function svgGpx(projection, context, dispatch) {
         var f = fileList[0],
             reader = new FileReader();
 
-        reader.onload = function(e) {
-            drawGpx.geojson(toGeoJSON.gpx(toDom(e.target.result))).fitZoom();
-        };
+        reader.onload = (function(file) {
+            src = file.name;
+
+            var extension = getExtension(file.name);
+
+            return function (e) {
+                parseSaveAndZoom(extension, e.target.result);
+            };
+        })(f);
 
         reader.readAsText(f);
         return this;
     };
 
+    drawGpx.getSrc = function () {
+      return src;
+    };
 
     drawGpx.fitZoom = function() {
         if (!this.hasGpx()) return this;
@@ -166,13 +227,31 @@ export function svgGpx(projection, context, dispatch) {
 
         var map = context.map(),
             viewport = map.trimmedExtent().polygon(),
-            coords = _.reduce(geojson.features, function(coords, feature) {
+            coords = _reduce(geojson.features, function(coords, feature) {
                 var c = feature.geometry.coordinates;
-                return _.union(coords, feature.geometry.type === 'Point' ? [c] : c);
+
+                /* eslint-disable no-fallthrough */
+                switch (feature.geometry.type) {
+                    case 'Point':
+                        c = [c];
+                    case 'MultiPoint':
+                    case 'LineString':
+                        break;
+
+                    case 'MultiPolygon':
+                        c = _flatten(c);
+                    case 'Polygon':
+                    case 'MultiLineString':
+                        c = _flatten(c);
+                        break;
+                }
+                /* eslint-enable no-fallthrough */
+
+                return _union(coords, c);
             }, []);
 
         if (!geoPolygonIntersectsPolygon(viewport, coords, true)) {
-            var extent = geoExtent(d3.geoBounds(geojson));
+            var extent = geoExtent(d3_geoBounds({ type: 'LineString', coordinates: coords }));
             map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
         }
 

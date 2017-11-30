@@ -1,6 +1,7 @@
 {
     "icon": "pharmacy",
     "fields": [
+        "name",
         "operator",
         "address",
         "building_area",
@@ -13,6 +14,18 @@
     ],
     "tags": {
         "amenity": "pharmacy"
+    },
+    "addTags": {
+        "amenity": "pharmacy",
+        "healthcare": "pharmacy"
+    },
+    "removeTags": {
+        "amenity": "pharmacy",
+        "healthcare": "pharmacy"
+    },
+    "reference": {
+        "key": "amenity",
+        "value": "pharmacy"
     },
     "terms": [
         "drug*",

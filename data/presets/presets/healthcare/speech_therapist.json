@@ -1,0 +1,25 @@
+{
+    "icon": "hospital",
+    "fields": [
+        "name",
+        "operator",
+        "healthcare/speciality",
+        "building_area",
+        "address",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "speech",
+        "therapist",
+        "therapy",
+        "voice"
+    ],
+    "tags": {
+        "healthcare": "speech_therapist"
+    },
+    "name": "Speech Therapist"
+}

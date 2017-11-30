@@ -5,29 +5,39 @@ This file documents efforts toward establishing a public API for iD.
 ##### iD Standalone
 
 iD supports several URL parameters. When constructing a URL to a standalone instance
-of iD (e.g. `http://openstreetmap.us/iD/release/`), the following parameters are available
+of iD (e.g. `http://preview.ideditor.com/release/`), the following parameters are available
 in the hash portion of the URL:
 
-* `map` - A slash separated `zoom/latitude/longitude`.  Example:
-  `map=20.00/38.90085/-77.02271`
-* `id` - The character 'n', 'w', or 'r', followed by the OSM ID of a node,
+* __`map`__ - A slash separated `zoom/latitude/longitude`.<br/>
+   _Example:_ `map=20.00/38.90085/-77.02271`
+* __`id`__ - The character 'n', 'w', or 'r', followed by the OSM ID of a node,
    way or relation, respectively. Selects the specified entity, and, unless
    a `map` parameter is also provided, centers the map on it.
-* `background` - The value from a `sourcetag` property in iD's
+* __`background`__ - The value from a `sourcetag` property in iD's
   [imagery list](https://github.com/openstreetmap/iD/blob/master/data/imagery.json),
   or a custom tile URL. A custom URL is specified in the format `custom:<url>`,
   where the URL can contain the standard tile URL placeholders `{x}`, `{y}` and
   `{z}`/`{zoom}`, `{ty}` for flipped TMS-style Y coordinates, and `{switch:a,b,c}` for
-  DNS multiplexing.  Example:
-  `background=custom:http://{switch:a,b,c}.tiles.mapbox.com/v4/examples.map-4l7djmvo/{z}/{x}/{y}.png`
-* `gpx` - A custom URL for loading a gpx track.  Specifying a `gpx` parameter will
-  automatically enable the gpx layer for display.  Example:
-  `gpx=https://tasks.hotosm.org/project/592/task/16.gpx`
-* `offset` - imagery offset in meters, formatted as `east,north`.  Example:
-  `offset=-10,5`
-* `comment` - Prefills the changeset comment box, for use when integrating iD with
-  external task management or quality assurance tools.  Example:
-  `comment=CAR%20crisis%2C%20refugee%20areas%20in%20Cameroon%20%23hotosm-task-592`.
+  DNS multiplexing.<br/>
+  _Example:_ `background=custom:https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png`
+* __`disable_features`__ - Disables features in the list.<br/>
+  _Example:_ `disable_features=water,service_roads,points,paths,boundaries`<br/>
+  _Available features:_ `points` `traffic_roads` `service_roads` `paths` `buildings` `landuse`
+  `boundaries` `water` `rail` `power` `past_future` `others`
+* __`gpx`__ - A custom URL for loading a gpx track.  Specifying a `gpx` parameter will
+  automatically enable the gpx layer for display.<br/>
+  _Example:_ `gpx=https://tasks.hotosm.org/project/592/task/16.gpx`
+* __`offset`__ - imagery offset in meters, formatted as `east,north`.<br/>
+  _Example:_ `offset=-10,5`
+* __`comment`__ - Prefills the changeset comment. Pass a url encoded string.<br/>
+  _Example:_ `comment=CAR%20crisis%2C%20refugee%20areas%20in%20Cameroon`
+* __`hashtags`__ - Prefills the changeset hashtags.  Pass a url encoded list of event
+  hashtags separated by commas, semicolons, or spaces.  Leading '#' symbols are
+  optional and will be added automatically. (Note that hashtag-like strings are
+  automatically detected in the `comment`).<br/>
+  _Example:_ `hashtags=%23hotosm-task-592,%23MissingMaps`
+* __`rtl=true`__ - Force iD into right-to-left mode (useful for testing).
+* __`walkthrough=true`__ - Start the walkthrough automatically
 
 ##### iD on openstreetmap.org (Rails Port)
 
@@ -35,13 +45,16 @@ When constructing a URL to an instance of iD embedded in the OpenStreetMap Rails
 Port (e.g. `http://www.openstreetmap.org/edit?editor=id`), the following parameters
 are available as regular URL query parameters:
 
-* `map` - same as standalone
-* `lat`, `lon`, `zoom` - Self-explanatory.
-* `node`, `way`, `relation` - Select the specified entity.
-* `background` - same as standalone
-* `gpx` - same as standalone
-* `offset` - same as standalone
-* `comment` - same as standalone
+* __`map`__ - same as standalone
+* __`lat`__, __`lon`__, __`zoom`__ - Self-explanatory.
+* __`node`__, __`way`__, __`relation`__ - Select the specified entity.
+* __`background`__ - same as standalone
+* __`disable_features`__ - same as standalone
+* __`gpx`__ - same as standalone
+* __`offset`__ - same as standalone
+* __`comment`__ - same as standalone
+* __`hashtags`__ - same as standalone
+* __`walkthrough`__ - same as standalone
 
 
 ## CSS selectors
@@ -124,18 +137,20 @@ indicating a bumpy surface.
 
 ### Special classes
 
-A node that is a member of two or more ways shall have the `.shared` class.
+- A node that is a member of two or more ways shall have the `.shared` class.
 
-Two or more nodes at identical coordinates shall each have an `.overlapped` class. (TODO)
+- A node that is an endpoint of a linear way shall have the `.endpoint` class.
 
-Elements comprising the entity currently under the cursor shall have the `.hover` class.
+- Two or more nodes at identical coordinates shall each have an `.overlapped` class. (TODO)
+
+- Elements comprising the entity currently under the cursor shall have the `.hover` class.
 (The `:hover` psuedo-class is insufficient when an entity's visual representation consists
 of several elements, only one of which can be `:hover`ed.)
 
-Elements that are currently active (being clicked or dragged) shall have the `.active`
+- Elements that are currently active (being clicked or dragged) shall have the `.active`
 class.
 
-Elements that are currently selected shall have the `.selected` class.
+- Elements that are currently selected shall have the `.selected` class.
 
 
 ## Customized Deployments

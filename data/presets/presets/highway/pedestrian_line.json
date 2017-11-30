@@ -1,0 +1,27 @@
+{
+    "icon": "highway-footway",
+    "fields": [
+        "name",
+        "surface",
+        "lit",
+        "width",
+        "oneway",
+        "structure",
+        "access"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "pedestrian"
+    },
+    "terms": [
+        "center",
+        "centre",
+        "plaza",
+        "quad",
+        "square",
+        "walkway"
+    ],
+    "name": "Pedestrian Street"
+}

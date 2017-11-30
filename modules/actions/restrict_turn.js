@@ -4,7 +4,7 @@ import {
     osmInferRestriction,
     osmRelation,
     osmWay
-} from '../osm/index';
+} from '../osm';
 
 
 // Create a restriction relation for `turn`, which must have the following structure:

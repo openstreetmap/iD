@@ -1,4 +1,5 @@
 {
+    "icon": "information",
     "fields": [
         "operator",
         "map_type",
@@ -11,6 +12,10 @@
     "tags": {
         "tourism": "information",
         "information": "map"
+    },
+    "reference": {
+        "key": "information",
+        "value": "map"
     },
     "name": "Map"
 }

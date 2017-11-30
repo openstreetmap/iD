@@ -1,6 +1,7 @@
 {
     "icon": "swimming",
     "fields": [
+      "name",
       "operator",
       "address"
     ],

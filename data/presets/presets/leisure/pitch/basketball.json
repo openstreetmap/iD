@@ -14,6 +14,10 @@
         "leisure": "pitch",
         "sport": "basketball"
     },
+    "reference": {
+        "key": "sport",
+        "value": "basketball"
+    },
     "terms": [],
     "name": "Basketball Court"
 }

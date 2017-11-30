@@ -13,6 +13,10 @@
         "leisure": "pitch",
         "sport": "tennis"
     },
+    "reference": {
+        "key": "sport",
+        "value": "tennis"
+    },
     "terms": [],
     "name": "Tennis Court"
 }

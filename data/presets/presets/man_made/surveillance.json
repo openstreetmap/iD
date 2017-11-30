@@ -1,7 +1,8 @@
 {
-    "icon": "camera",
+    "icon": "attraction",
     "geometry": [
-        "point"
+        "point",
+        "vertex"
     ],
     "fields": [
         "surveillance",

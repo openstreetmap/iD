@@ -1,4 +1,10 @@
-import _ from 'lodash';
+import _filter from 'lodash-es/filter';
+import _find from 'lodash-es/find';
+import _some from 'lodash-es/some';
+import _uniq from 'lodash-es/uniq';
+import _values from 'lodash-es/values';
+import _without from 'lodash-es/without';
+
 import { utilEditDistance } from '../util/index';
 
 
@@ -12,14 +18,14 @@ export function presetCollection(collection) {
 
 
         item: function(id) {
-            return _.find(collection, function(d) {
+            return _find(this.collection, function(d) {
                 return d.id === id;
             });
         },
 
 
         matchGeometry: function(geometry) {
-            return presetCollection(collection.filter(function(d) {
+            return presetCollection(this.collection.filter(function(d) {
                 return d.matchGeometry(geometry);
             }));
         },
@@ -44,31 +50,46 @@ export function presetCollection(collection) {
 
             value = value.toLowerCase();
 
-            var searchable = _.filter(collection, function(a) {
+            var searchable = _filter(this.collection, function(a) {
                     return a.searchable !== false && a.suggestion !== true;
                 }),
-                suggestions = _.filter(collection, function(a) {
+                suggestions = _filter(this.collection, function(a) {
                     return a.suggestion === true;
                 });
 
 
             // matches value to preset.name
-            var leading_name = _.filter(searchable, function(a) {
+            var leading_name = _filter(searchable, function(a) {
                     return leading(a.name().toLowerCase());
                 }).sort(function(a, b) {
-                    var i = a.name().toLowerCase().indexOf(value) - b.name().toLowerCase().indexOf(value);
-                    if (i === 0) return a.name().length - b.name().length;
-                    else return i;
+                    var aCompare = a.name().toLowerCase(),
+                        bCompare = b.name().toLowerCase(),
+                        i;
+
+                    // priority if search string matches preset name exactly - #4325
+                    if (value === aCompare) return -1;
+                    if (value === bCompare) return 1;
+
+                    // priority for higher matchScore
+                    i = b.originalScore - a.originalScore;
+                    if (i !== 0) return i;
+
+                    // priority if search string appears earlier in preset name
+                    i = aCompare.indexOf(value) - bCompare.indexOf(value);
+                    if (i !== 0) return i;
+
+                    // priority for shorter preset names
+                    return a.name().length - b.name().length;
                 });
 
             // matches value to preset.terms values
-            var leading_terms = _.filter(searchable, function(a) {
-                    return _.some(a.terms() || [], leading);
+            var leading_terms = _filter(searchable, function(a) {
+                    return _some(a.terms() || [], leading);
                 });
 
             // matches value to preset.tags values
-            var leading_tag_values = _.filter(searchable, function(a) {
-                    return _.some(_.without(_.values(a.tags || {}), '*'), leading);
+            var leading_tag_values = _filter(searchable, function(a) {
+                    return _some(_without(_values(a.tags || {}), '*'), leading);
                 });
 
 
@@ -87,13 +108,13 @@ export function presetCollection(collection) {
                 });
 
             // finds close matches to value in preset.terms
-            var similar_terms = _.filter(searchable, function(a) {
-                    return _.some(a.terms() || [], function(b) {
+            var similar_terms = _filter(searchable, function(a) {
+                    return _some(a.terms() || [], function(b) {
                         return utilEditDistance(value, b) + Math.min(value.length - b.length, 0) < 3;
                     });
                 });
 
-            var leading_suggestions = _.filter(suggestions, function(a) {
+            var leading_suggestions = _filter(suggestions, function(a) {
                     return leading(suggestionName(a.name()));
                 }).sort(function(a, b) {
                     a = suggestionName(a.name());
@@ -127,7 +148,7 @@ export function presetCollection(collection) {
                     similar_suggestions.slice(0, maxSuggestionResults)
                 ).slice(0, maxSearchResults - 1);
 
-            return presetCollection(_.uniq(results.concat(other)));
+            return presetCollection(_uniq(results.concat(other)));
         }
     };
 

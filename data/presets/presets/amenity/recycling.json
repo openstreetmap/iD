@@ -1,5 +1,5 @@
 {
-    "icon": "waste-basket",
+    "icon": "recycling",
     "fields": [
         "recycling_type",
         "recycling_accepts",

@@ -1,7 +1,13 @@
 {
+    "icon": "highway-footway",
+    "fields": [
+        "name",
+        "ref_platform",
+        "surface",
+        "lit",
+        "shelter"
+    ],
     "geometry": [
-        "point",
-        "vertex",
         "line",
         "area"
     ],

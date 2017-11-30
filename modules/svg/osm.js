@@ -1,10 +1,61 @@
-export function svgOsm() {
-    return function drawOsm(selection) {
-        var layers = selection.selectAll('.layer-osm')
-            .data(['areas', 'lines', 'hit', 'halo', 'label']);
+export function svgOsm(projection, context, dispatch) {
+    var enabled = true;
 
-        layers.enter()
+
+    function drawOsm(selection) {
+        selection.selectAll('.layer-osm')
+            .data(['areas', 'lines', 'hit', 'halo', 'label'])
+            .enter()
             .append('g')
             .attr('class', function(d) { return 'layer-osm layer-' + d; });
+    }
+
+
+    function showLayer() {
+        var layer = context.surface().selectAll('.data-layer-osm');
+        layer.interrupt();
+
+        layer
+            .classed('disabled', false)
+            .style('opacity', 0)
+            .transition()
+            .duration(250)
+            .style('opacity', 1)
+            .on('end interrupt', function () {
+                dispatch.call('change');
+            });
+    }
+
+
+    function hideLayer() {
+        var layer = context.surface().selectAll('.data-layer-osm');
+        layer.interrupt();
+
+        layer
+            .transition()
+            .duration(250)
+            .style('opacity', 0)
+            .on('end interrupt', function () {
+                layer.classed('disabled', true);
+                dispatch.call('change');
+            });
+    }
+
+
+    drawOsm.enabled = function(_) {
+        if (!arguments.length) return enabled;
+        enabled = _;
+
+        if (enabled) {
+            showLayer();
+        } else {
+            hideLayer();
+        }
+
+        dispatch.call('change');
+        return this;
     };
+
+
+    return drawOsm;
 }

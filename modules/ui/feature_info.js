@@ -1,5 +1,8 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _compact from 'lodash-es/compact';
+import _map from 'lodash-es/map';
+
+import { event as d3_event } from 'd3-selection';
+
 import { t } from '../util/locale';
 import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
@@ -10,7 +13,7 @@ export function uiFeatureInfo(context) {
         var features = context.features(),
             stats = features.stats(),
             count = 0,
-            hiddenList = _.compact(_.map(features.hidden(), function(k) {
+            hiddenList = _compact(_map(features.hidden(), function(k) {
                 if (stats[k]) {
                     count += stats[k];
                     return String(stats[k]) + ' ' + t('feature.' + k + '.description');
@@ -21,11 +24,11 @@ export function uiFeatureInfo(context) {
 
         if (hiddenList.length) {
             var tooltipBehavior = tooltip()
-                    .placement('top')
-                    .html(true)
-                    .title(function() {
-                        return uiTooltipHtml(hiddenList.join('<br/>'));
-                    });
+                .placement('top')
+                .html(true)
+                .title(function() {
+                    return uiTooltipHtml(hiddenList.join('<br/>'));
+                });
 
             var warning = selection.append('a')
                 .attr('href', '#')
@@ -35,7 +38,7 @@ export function uiFeatureInfo(context) {
                 .on('click', function() {
                     tooltipBehavior.hide(warning);
                     // open map data panel?
-                    d3.event.preventDefault();
+                    d3_event.preventDefault();
                 });
         }
 

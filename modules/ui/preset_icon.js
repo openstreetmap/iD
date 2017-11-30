@@ -1,7 +1,8 @@
-import * as d3 from 'd3';
-import { dataFeatureIcons } from '../../data/index';
-import { svgIcon } from '../svg/index';
-import { utilFunctor } from '../util/index';
+import { select as d3_select } from 'd3-selection';
+
+import { dataFeatureIcons } from '../../data';
+import { svgIcon } from '../svg';
+import { utilFunctor } from '../util';
 
 
 export function uiPresetIcon() {
@@ -13,16 +14,27 @@ export function uiPresetIcon() {
     }
 
 
+    function getIcon(p, geom) {
+        if (p.icon)
+            return p.icon;
+        else if (geom === 'line')
+            return 'other-line';
+        else if (geom === 'vertex')
+            return p.isFallback() ? '' : 'poi-vertex';
+        else
+            return 'marker-stroked';
+    }
+
+
     function render() {
-        var selection = d3.select(this),
+        var selection = d3_select(this),
             p = preset.apply(this, arguments),
             geom = geometry.apply(this, arguments),
-            picon = p.icon || (geom === 'line' ? 'other-line' : 'marker-stroked'),
-            isMaki = dataFeatureIcons.hasOwnProperty(picon + '-24');
+            picon = getIcon(p, geom),
+            isPoi = picon.match(/^poi-/) !== null,
+            isMaki = dataFeatureIcons.indexOf(picon) !== -1,
+            isFramed = (geom === 'area' || geom === 'verex');
 
-        if (picon === 'dentist') {
-            isMaki = true;  // workaround for dentist icon missing in `maki-sprite.json`
-        }
 
         function tag_classes(p) {
             var s = '';
@@ -34,6 +46,7 @@ export function uiPresetIcon() {
             }
             return s;
         }
+
 
         var fill = selection.selectAll('.preset-icon-fill')
             .data([0]);
@@ -47,18 +60,17 @@ export function uiPresetIcon() {
                 return 'preset-icon-fill preset-icon-fill-' + geom + tag_classes(p);
             });
 
-        var frame = selection.selectAll('.preset-icon-frame')
-            .data([0]);
 
-        frame = frame.enter()
+        var areaFrame = selection.selectAll('.preset-icon-frame')
+            .data((geom === 'area') ? [0] : []);
+
+        areaFrame.exit()
+            .remove();
+
+        areaFrame = areaFrame.enter()
             .append('div')
-            .call(svgIcon('#preset-icon-frame'))
-            .merge(frame);
-
-        frame
-            .attr('class', function() {
-                return 'preset-icon-frame ' + (geom === 'area' ? '' : 'hide');
-            });
+            .attr('class', 'preset-icon-frame')
+            .call(svgIcon('#preset-icon-frame'));
 
 
         var icon = selection.selectAll('.preset-icon')
@@ -71,15 +83,17 @@ export function uiPresetIcon() {
             .merge(icon);
 
         icon
-            .attr('class', 'preset-icon preset-icon-' + (isMaki ? '32' : (geom === 'area' ? '44' : '60')));
+            .attr('class', 'preset-icon preset-icon-' +
+                ((isMaki || isPoi) ? (isFramed ? '24' : '28') : (isFramed ? '44' : '60'))
+            );
 
         icon.selectAll('svg')
             .attr('class', function() {
-                return 'icon ' + picon + tag_classes(p);
+                return 'icon ' + picon + (isMaki || isPoi ? '' : tag_classes(p));
             });
 
-        icon.selectAll('use')       // workaround: maki parking-24 broken?
-            .attr('href', '#' + picon + (isMaki ? (picon === 'parking' ? '-18' : '-24') : ''));
+        icon.selectAll('use')
+            .attr('href', '#' + picon + (isMaki ? '-15' : ''));
     }
 
 

@@ -1,12 +1,16 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _extend from 'lodash-es/extend';
+import _map from 'lodash-es/map';
+import _reject from 'lodash-es/reject';
+
+import { geoArea as d3_geoArea } from 'd3-geo';
+
 import { osmEntity } from './entity';
 import { osmJoinWays } from './multipolygon';
 import {
     geoExtent,
     geoPolygonContainsPolygon,
     geoPolygonIntersectsPolygon
-} from '../geo/index';
+} from '../geo';
 
 
 export function osmRelation() {
@@ -32,7 +36,7 @@ osmRelation.creationOrder = function(a, b) {
 };
 
 
-_.extend(osmRelation.prototype, {
+_extend(osmRelation.prototype, {
     type: 'relation',
     members: [],
 
@@ -44,7 +48,7 @@ _.extend(osmRelation.prototype, {
         var copy = osmEntity.prototype.copy.call(this, resolver, copies);
 
         var members = this.members.map(function(member) {
-            return _.extend({}, member, { id: resolver.entity(member.id).copy(resolver, copies).id });
+            return _extend({}, member, { id: resolver.entity(member.id).copy(resolver, copies).id });
         });
 
         copy = copy.update({members: members});
@@ -89,7 +93,7 @@ _.extend(osmRelation.prototype, {
     indexedMembers: function() {
         var result = new Array(this.members.length);
         for (var i = 0; i < this.members.length; i++) {
-            result[i] = _.extend({}, this.members[i], {index: i});
+            result[i] = _extend({}, this.members[i], {index: i});
         }
         return result;
     },
@@ -100,7 +104,7 @@ _.extend(osmRelation.prototype, {
     memberByRole: function(role) {
         for (var i = 0; i < this.members.length; i++) {
             if (this.members[i].role === role) {
-                return _.extend({}, this.members[i], {index: i});
+                return _extend({}, this.members[i], {index: i});
             }
         }
     },
@@ -111,7 +115,7 @@ _.extend(osmRelation.prototype, {
     memberById: function(id) {
         for (var i = 0; i < this.members.length; i++) {
             if (this.members[i].id === id) {
-                return _.extend({}, this.members[i], {index: i});
+                return _extend({}, this.members[i], {index: i});
             }
         }
     },
@@ -122,7 +126,7 @@ _.extend(osmRelation.prototype, {
     memberByIdAndRole: function(id, role) {
         for (var i = 0; i < this.members.length; i++) {
             if (this.members[i].id === id && this.members[i].role === role) {
-                return _.extend({}, this.members[i], {index: i});
+                return _extend({}, this.members[i], {index: i});
             }
         }
     },
@@ -137,7 +141,7 @@ _.extend(osmRelation.prototype, {
 
     updateMember: function(member, index) {
         var members = this.members.slice();
-        members.splice(index, 1, _.extend({}, members[index], member));
+        members.splice(index, 1, _extend({}, members[index], member));
         return this.update({members: members});
     },
 
@@ -150,7 +154,7 @@ _.extend(osmRelation.prototype, {
 
 
     removeMembersWithID: function(id) {
-        var members = _.reject(this.members, function(m) { return m.id === id; });
+        var members = _reject(this.members, function(m) { return m.id === id; });
         return this.update({members: members});
     },
 
@@ -183,7 +187,7 @@ _.extend(osmRelation.prototype, {
             relation: {
                 '@id': this.osmId(),
                 '@version': this.version || 0,
-                member: _.map(this.members, function(member) {
+                member: _map(this.members, function(member) {
                     return {
                         keyAttributes: {
                             type: member.type,
@@ -192,7 +196,7 @@ _.extend(osmRelation.prototype, {
                         }
                     };
                 }),
-                tag: _.map(this.tags, function(v, k) {
+                tag: _map(this.tags, function(v, k) {
                     return { keyAttributes: { k: k, v: v } };
                 })
             }
@@ -214,7 +218,7 @@ _.extend(osmRelation.prototype, {
                     type: 'FeatureCollection',
                     properties: this.tags,
                     features: this.members.map(function (member) {
-                        return _.extend({role: member.role}, resolver.entity(member.id).asGeoJSON(resolver));
+                        return _extend({role: member.role}, resolver.entity(member.id).asGeoJSON(resolver));
                     })
                 };
             }
@@ -224,7 +228,7 @@ _.extend(osmRelation.prototype, {
 
     area: function(resolver) {
         return resolver.transient(this, 'area', function() {
-            return d3.geoArea(this.asGeoJSON(resolver));
+            return d3_geoArea(this.asGeoJSON(resolver));
         });
     },
 
@@ -266,13 +270,13 @@ _.extend(osmRelation.prototype, {
         outers = osmJoinWays(outers, resolver);
         inners = osmJoinWays(inners, resolver);
 
-        outers = outers.map(function(outer) { return _.map(outer.nodes, 'loc'); });
-        inners = inners.map(function(inner) { return _.map(inner.nodes, 'loc'); });
+        outers = outers.map(function(outer) { return _map(outer.nodes, 'loc'); });
+        inners = inners.map(function(inner) { return _map(inner.nodes, 'loc'); });
 
         var result = outers.map(function(o) {
             // Heuristic for detecting counterclockwise winding order. Assumes
             // that OpenStreetMap polygons are not hemisphere-spanning.
-            return [d3.geoArea({ type: 'Polygon', coordinates: [o] }) > 2 * Math.PI ? o.reverse() : o];
+            return [d3_geoArea({ type: 'Polygon', coordinates: [o] }) > 2 * Math.PI ? o.reverse() : o];
         });
 
         function findOuter(inner) {
@@ -294,7 +298,7 @@ _.extend(osmRelation.prototype, {
         for (var i = 0; i < inners.length; i++) {
             var inner = inners[i];
 
-            if (d3.geoArea({ type: 'Polygon', coordinates: [inner] }) < 2 * Math.PI) {
+            if (d3_geoArea({ type: 'Polygon', coordinates: [inner] }) < 2 * Math.PI) {
                 inner = inner.reverse();
             }
 

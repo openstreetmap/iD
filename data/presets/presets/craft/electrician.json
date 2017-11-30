@@ -1,6 +1,7 @@
 {
-    "icon": "marker-stroked",
+    "icon": "poi-power",
     "fields": [
+        "name",
         "operator",
         "address",
         "building_area",

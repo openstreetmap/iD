@@ -1,28 +1,42 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _clone from 'lodash-es/clone';
+import _find from 'lodash-es/find';
+
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
+import {
+    select as d3_select,
+    event as d3_event
+} from 'd3-selection';
+
+import { d3combobox as d3_combobox } from '../../lib/d3.combobox.js';
+
 import { t } from '../../util/locale';
 import { actionChangeTags } from '../../actions/index';
-import { d3combobox } from '../../lib/d3.combobox.js';
 import { dataWikipedia } from '../../../data/index';
 import { services } from '../../services/index';
 import { svgIcon } from '../../svg/index';
 import { utilDetect } from '../../util/detect';
-import { utilGetSetValue } from '../../util/get_set_value';
-import { utilRebind } from '../../util/rebind';
+import {
+    utilGetSetValue,
+    utilNoAuto,
+    utilRebind
+} from '../../util';
 
 
 export function uiFieldWikipedia(field, context) {
-    var dispatch = d3.dispatch('change'),
+    var dispatch = d3_dispatch('change'),
         wikipedia = services.wikipedia,
         wikidata = services.wikidata,
-        link = d3.select(null),
-        lang = d3.select(null),
-        title = d3.select(null),
+        link = d3_select(null),
+        lang = d3_select(null),
+        title = d3_select(null),
+        wikiURL = '',
         entity;
 
 
     function wiki(selection) {
-        var langcombo = d3combobox()
+        var langcombo = d3_combobox()
+            .container(context.container())
             .fetcher(function(value, cb) {
                 var v = value.toLowerCase();
 
@@ -35,7 +49,8 @@ export function uiFieldWikipedia(field, context) {
                 }));
             });
 
-        var titlecombo = d3combobox()
+        var titlecombo = d3_combobox()
+            .container(context.container())
             .fetcher(function(value, cb) {
                 if (!value) {
                     value = context.entity(entity.id).tags.name || '';
@@ -58,6 +73,7 @@ export function uiFieldWikipedia(field, context) {
             .attr('type', 'text')
             .attr('class', 'wiki-lang')
             .attr('placeholder', t('translate.localized_translation_language'))
+            .call(utilNoAuto)
             .merge(lang);
 
         utilGetSetValue(lang, language()[1]);
@@ -76,6 +92,7 @@ export function uiFieldWikipedia(field, context) {
             .attr('type', 'text')
             .attr('class', 'wiki-title')
             .attr('id', 'preset-input-' + field.id)
+            .call(utilNoAuto)
             .merge(title);
 
         title
@@ -84,16 +101,21 @@ export function uiFieldWikipedia(field, context) {
             .on('change', change);
 
 
-        link = selection.selectAll('a.wiki-link')
+        link = selection.selectAll('.wiki-link')
             .data([0]);
 
         link = link.enter()
-            .append('a')
-            .attr('class', 'wiki-link button-input-action minor')
+            .append('button')
+            .attr('class', 'button-input-action wiki-link minor')
             .attr('tabindex', -1)
-            .attr('target', '_blank')
-            .call(svgIcon('#icon-out-link', 'inline'))
+            .call(svgIcon('#icon-out-link'))
             .merge(link);
+
+        link
+            .on('click', function() {
+                d3_event.preventDefault();
+                if (wikiURL) window.open(wikiURL, '_blank');
+            });
     }
 
 
@@ -101,7 +123,7 @@ export function uiFieldWikipedia(field, context) {
         var value = utilGetSetValue(lang).toLowerCase();
         var locale = utilDetect().locale.toLowerCase();
         var localeLanguage;
-        return _.find(dataWikipedia, function(d) {
+        return _find(dataWikipedia, function(d) {
             if (d[2] === locale) localeLanguage = d;
             return d[0].toLowerCase() === value ||
                 d[1].toLowerCase() === value ||
@@ -124,14 +146,14 @@ export function uiFieldWikipedia(field, context) {
     function change(skipWikidata) {
         var value = utilGetSetValue(title),
             m = value.match(/https?:\/\/([-a-z]+)\.wikipedia\.org\/(?:wiki|\1-[-a-z]+)\/([^#]+)(?:#(.+))?/),
-            l = m && _.find(dataWikipedia, function(d) { return m[1] === d[2]; }),
-            anchor,
+            l = m && _find(dataWikipedia, function(d) { return m[1] === d[2]; }),
             syncTags = {};
 
         if (l) {
             // Normalize title http://www.mediawiki.org/wiki/API:Query#Title_normalization
             value = decodeURIComponent(m[2]).replace(/_/g, ' ');
             if (m[3]) {
+                var anchor;
                 try {
                     // Best-effort `anchordecode:` implementation
                     anchor = decodeURIComponent(m[3].replace(/\.([0-9A-F]{2})/g, '%$1'));
@@ -145,8 +167,10 @@ export function uiFieldWikipedia(field, context) {
             utilGetSetValue(title, value);
         }
 
-        syncTags.wikipedia = value ? language()[2] + ':' + value : undefined;
-        if (!skipWikidata) {
+        if (value) {
+            syncTags.wikipedia = language()[2] + ':' + value;
+        } else {
+            syncTags.wikipedia = undefined;
             syncTags.wikidata = undefined;
         }
 
@@ -156,34 +180,29 @@ export function uiFieldWikipedia(field, context) {
         if (skipWikidata || !value || !language()[2]) return;
 
         // attempt asynchronous update of wikidata tag..
-        var initEntityId = entity.id,
-            initWikipedia = context.entity(initEntityId).tags.wikipedia;
+        var initGraph = context.graph(),
+            initEntityId = entity.id;
 
         wikidata.itemsByTitle(language()[2], value, function(title, data) {
+            // If graph has changed, we can't apply this update.
+            if (context.graph() !== initGraph) return;
+
             if (!data || !Object.keys(data).length) return;
+
             var qids = Object.keys(data);
+            var value = qids && _find(qids, function(id) { return id.match(/^Q\d+$/); });
+            var currTags = _clone(context.entity(initEntityId).tags);
 
-            // 1. most recent change was a tag change
-            var annotation = t('operations.change_tags.annotation'),
-                currAnnotation = context.history().undoAnnotation();
-            if (currAnnotation !== annotation) return;
+            currTags.wikidata = value;
 
-            // 2. same entity exists and still selected
-            var selectedIds = context.selectedIDs(),
-                currEntityId = selectedIds.length > 0 && selectedIds[0];
-            if (currEntityId !== initEntityId) return;
+            // Coalesce the update of wikidata tag into the previous tag change
+            context.overwrite(
+                actionChangeTags(initEntityId, currTags),
+                context.history().undoAnnotation()
+            );
 
-            // 3. wikipedia value has not changed
-            var currTags = _.clone(context.entity(currEntityId).tags);
-            if (initWikipedia !== currTags.wikipedia) return;
-
-            // ok to coalesce the update of wikidata tag into the previous tag change
-            currTags.wikidata = qids && _.find(qids, function(id) {
-                return id.match(/^Q\d+$/);
-            });
-
-            context.overwrite(actionChangeTags(currEntityId, currTags), annotation);
-            dispatch.call('change', this, currTags);
+            // do not dispatch.call('change') here, because entity_editor
+            // changeTags() is not intended to be called asynchronously
         });
     }
 
@@ -191,7 +210,7 @@ export function uiFieldWikipedia(field, context) {
     wiki.tags = function(tags) {
         var value = tags[field.key] || '',
             m = value.match(/([^:]+):([^#]+)(?:#(.+))?/),
-            l = m && _.find(dataWikipedia, function(d) { return m[1] === d[2]; }),
+            l = m && _find(dataWikipedia, function(d) { return m[1] === d[2]; }),
             anchor = m && m[3];
 
         // value in correct format
@@ -206,16 +225,18 @@ export function uiFieldWikipedia(field, context) {
                     anchor = anchor.replace(/ /g, '_');
                 }
             }
-            link.attr('href', 'https://' + m[1] + '.wikipedia.org/wiki/' +
-                m[2].replace(/ /g, '_') + (anchor ? ('#' + anchor) : ''));
+            wikiURL = 'https://' + m[1] + '.wikipedia.org/wiki/' +
+                m[2].replace(/ /g, '_') + (anchor ? ('#' + anchor) : '');
 
         // unrecognized value format
         } else {
             utilGetSetValue(title, value);
             if (value && value !== '') {
                 utilGetSetValue(lang, '');
+                wikiURL = 'https://en.wikipedia.org/wiki/Special:Search?search=' + value;
+            } else {
+                wikiURL = '';
             }
-            link.attr('href', 'https://en.wikipedia.org/wiki/Special:Search?search=' + value);
         }
     };
 

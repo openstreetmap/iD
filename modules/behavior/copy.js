@@ -1,17 +1,24 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { d3keybinding } from '../lib/d3.keybinding.js';
-import { uiCmd } from '../ui/index';
+import _extend from 'lodash-es/extend';
+import _groupBy from 'lodash-es/groupBy';
+import _map from 'lodash-es/map';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+import { uiCmd } from '../ui';
 
 
 export function behaviorCopy(context) {
-    var keybinding = d3keybinding('copy');
+    var keybinding = d3_keybinding('copy');
 
 
     function groupEntities(ids, graph) {
         var entities = ids.map(function (id) { return graph.entity(id); });
-        return _.extend({relation: [], way: [], node: []},
-            _.groupBy(entities, function(entity) { return entity.type; }));
+        return _extend({relation: [], way: [], node: []},
+            _groupBy(entities, function(entity) { return entity.type; }));
     }
 
 
@@ -22,7 +29,7 @@ export function behaviorCopy(context) {
         descendants = descendants || {};
 
         if (entity.type === 'relation') {
-            children = _.map(entity.members, 'id');
+            children = _map(entity.members, 'id');
         } else if (entity.type === 'way') {
             children = entity.nodes;
         } else {
@@ -41,8 +48,7 @@ export function behaviorCopy(context) {
 
 
     function doCopy() {
-        d3.event.preventDefault();
-        if (context.inIntro()) return;
+        if (!getSelectionText()) d3_event.preventDefault();
 
         var graph = context.graph(),
             selected = groupEntities(context.selectedIDs(), graph),
@@ -77,13 +83,16 @@ export function behaviorCopy(context) {
 
     function copy() {
         keybinding.on(uiCmd('⌘C'), doCopy);
-        d3.select(document).call(keybinding);
+        d3_select(document).call(keybinding);
         return copy;
     }
 
+    function getSelectionText() {
+        return window.getSelection().toString();
+    }
 
     copy.off = function() {
-        d3.select(document).call(keybinding.off);
+        d3_select(document).call(keybinding.off);
     };
 
 

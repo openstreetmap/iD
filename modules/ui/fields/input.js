@@ -1,9 +1,15 @@
-import * as d3 from 'd3';
-import { t } from '../../util/locale';
-import { dataPhoneFormats } from '../../../data/index';
-import { services } from '../../services/index';
-import { utilRebind } from '../../util/rebind';
-import { utilGetSetValue } from '../../util/get_set_value';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { event as d3_event } from 'd3-selection';
+
+import { t, textDirection } from '../../util/locale';
+import { dataPhoneFormats } from '../../../data';
+import { services } from '../../services';
+import {
+    utilGetSetValue,
+    utilNoAuto,
+    utilRebind
+} from '../../util';
+
 
 export {
     uiFieldText as uiFieldUrl,
@@ -14,8 +20,8 @@ export {
 
 
 export function uiFieldText(field, context) {
-    var dispatch = d3.dispatch('change'),
-        nominatim = services.nominatim,
+    var dispatch = d3_dispatch('change'),
+        nominatim = services.geocoder,
         input,
         entity;
 
@@ -31,6 +37,7 @@ export function uiFieldText(field, context) {
             .attr('type', field.type)
             .attr('id', fieldId)
             .attr('placeholder', field.placeholder() || t('inspector.unknown'))
+            .call(utilNoAuto)
             .merge(input);
 
         input
@@ -47,6 +54,8 @@ export function uiFieldText(field, context) {
             });
 
         } else if (field.type === 'number') {
+            var rtl = (textDirection === 'rtl');
+
             input.attr('type', 'text');
 
             var spinControl = selection.selectAll('.spin-control')
@@ -58,14 +67,14 @@ export function uiFieldText(field, context) {
 
             enter
                 .append('button')
-                .datum(1)
-                .attr('class', 'increment')
+                .datum(rtl ? 1 : -1)
+                .attr('class', rtl ? 'increment' : 'decrement')
                 .attr('tabindex', -1);
 
             enter
                 .append('button')
-                .datum(-1)
-                .attr('class', 'decrement')
+                .datum(rtl ? -1 : 1)
+                .attr('class', rtl ? 'decrement' : 'increment')
                 .attr('tabindex', -1);
 
             spinControl = spinControl
@@ -73,7 +82,7 @@ export function uiFieldText(field, context) {
 
             spinControl.selectAll('button')
                 .on('click', function(d) {
-                    d3.event.preventDefault();
+                    d3_event.preventDefault();
                     var num = parseInt(input.node().value || 0, 10);
                     if (!isNaN(num)) input.node().value = num + d;
                     change()();

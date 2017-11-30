@@ -1,5 +1,4 @@
 export { wikipedia as dataWikipedia } from 'wmf-sitematrix';
-export { default as dataFeatureIcons } from 'maki/www/maki-sprite.json';
 export { default as dataSuggestions } from 'name-suggestion-index/name-suggestions.json';
 
 export { dataAddressFormats } from './address-formats.json';
@@ -7,6 +6,7 @@ export { dataDeprecated } from './deprecated.json';
 export { dataDiscarded } from './discarded.json';
 export { dataLocales } from './locales.json';
 export { dataPhoneFormats } from './phone-formats.json';
+export { dataShortcuts } from './shortcuts.json';
 
 export { default as dataImperial } from './imperial.json';
 export { default as dataDriveLeft } from './drive-left.json';
@@ -17,6 +17,9 @@ import { presets } from './presets/presets.json';
 import { defaults } from './presets/defaults.json';
 import { categories } from './presets/categories.json';
 import { fields } from './presets/fields.json';
+
+import maki from '@mapbox/maki';
+export var dataFeatureIcons = maki.layouts.all.all;
 
 export var data = {
     imagery: dataImagery,

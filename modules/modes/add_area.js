@@ -3,11 +3,11 @@ import {
     actionAddEntity,
     actionAddMidpoint,
     actionAddVertex
-} from '../actions/index';
+} from '../actions';
 
-import { behaviorAddWay } from '../behavior/index';
+import { behaviorAddWay } from '../behavior';
 import { modeDrawArea } from './index';
-import { osmNode, osmWay } from '../osm/index';
+import { osmNode, osmWay } from '../osm';
 
 
 export function modeAddArea(context) {
@@ -27,8 +27,15 @@ export function modeAddArea(context) {
         defaultTags = { area: 'yes' };
 
 
+    function actionClose(wayId) {
+        return function (graph) {
+            return graph.replace(graph.entity(wayId).close());
+        };
+    }
+
+
     function start(loc) {
-        var graph = context.graph(),
+        var startGraph = context.graph(),
             node = osmNode({ loc: loc }),
             way = osmWay({ tags: defaultTags });
 
@@ -36,15 +43,15 @@ export function modeAddArea(context) {
             actionAddEntity(node),
             actionAddEntity(way),
             actionAddVertex(way.id, node.id),
-            actionAddVertex(way.id, node.id)
+            actionClose(way.id)
         );
 
-        context.enter(modeDrawArea(context, way.id, graph));
+        context.enter(modeDrawArea(context, way.id, startGraph));
     }
 
 
     function startFromWay(loc, edge) {
-        var graph = context.graph(),
+        var startGraph = context.graph(),
             node = osmNode({ loc: loc }),
             way = osmWay({ tags: defaultTags });
 
@@ -52,25 +59,25 @@ export function modeAddArea(context) {
             actionAddEntity(node),
             actionAddEntity(way),
             actionAddVertex(way.id, node.id),
-            actionAddVertex(way.id, node.id),
+            actionClose(way.id),
             actionAddMidpoint({ loc: loc, edge: edge }, node)
         );
 
-        context.enter(modeDrawArea(context, way.id, graph));
+        context.enter(modeDrawArea(context, way.id, startGraph));
     }
 
 
     function startFromNode(node) {
-        var graph = context.graph(),
+        var startGraph = context.graph(),
             way = osmWay({ tags: defaultTags });
 
         context.perform(
             actionAddEntity(way),
             actionAddVertex(way.id, node.id),
-            actionAddVertex(way.id, node.id)
+            actionClose(way.id)
         );
 
-        context.enter(modeDrawArea(context, way.id, graph));
+        context.enter(modeDrawArea(context, way.id, startGraph));
     }
 
 

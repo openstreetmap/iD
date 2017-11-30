@@ -100,18 +100,13 @@
             },
             "delete": {
                 "title": "Fshij",
-                "description": "Fshij objektin përgjithmonë.",
                 "annotation": {
                     "point": "U fshi një pik.",
                     "vertex": "U fshi një nyjë nga një linjë.",
                     "line": "U fshi një vijë.",
                     "area": "U fshi një sipërfaqe.",
-                    "relation": "U fshi një lidhje.",
-                    "multiple": "U fshin {n} objekta."
-                },
-                "incomplete_relation": "Ky tipar nuk mund të fshihet sepse nuk është shkarkuar plotësisht.",
-                "part_of_relation": "Ky tipar nuk mund të fshihet sepse mer pjesë në një lidhje më të madhë. Njerë duhet ta heqësh nga lidhja.",
-                "connected_to_hidden": "Kjo nuk mund të fshihet sepse është lidhur me një tipar të fshehur."
+                    "relation": "U fshi një lidhje."
+                }
             },
             "connect": {
                 "annotation": {
@@ -137,29 +132,21 @@
             },
             "move": {
                 "title": "Lëviz",
-                "description": "Lëvizni këtë në një vend tjeter.",
                 "key": "M",
                 "annotation": {
                     "point": "U lëviz një pik.",
                     "vertex": "U lëviz një njyë në një linjë.",
                     "line": "U lëviz një vijë.",
-                    "area": "U lëviz një sipërfaqe.",
-                    "multiple": "U lëvizën disa objekte."
-                },
-                "incomplete_relation": "Ky tipar nuk mund të lëvizet sepse nuk është shkarkuar plotësisht.",
-                "too_large": "Kjo nuk mund të lëvizet sepse nuk ështe mjaftueshmërisht e dukshme.",
-                "connected_to_hidden": "Kjo nuk mund të lëvizet sepse është lidhur me një tipar të fshehur."
+                    "area": "U lëviz një sipërfaqe."
+                }
             },
             "rotate": {
                 "title": "Rotullo",
-                "description": "Rotullo këtë objekt rreth pikën e qendrës të saj.",
                 "key": "R",
                 "annotation": {
                     "line": "U rotullua një vijë.",
                     "area": "U rotullua një sipërfaqe."
-                },
-                "too_large": "Kjo nuk mund të rotullohet sepse nuk është mjaftueshmërisht e dukshme.",
-                "connected_to_hidden": "Kjo nuk mund të rotullohet është lidhur me një tipar të fshehur."
+                }
             },
             "reverse": {
                 "title": "Kthej mbrapsht",
@@ -210,7 +197,6 @@
             "localized_translation_language": "Zgjidhni gdjuhën",
             "localized_translation_name": "Emër"
         },
-        "zoom_in_edit": "Zmadhoni për të redaktuar",
         "logout": "dil",
         "loading_auth": "Lidh me OpenStreetMap...",
         "feature_info": {
@@ -223,10 +209,8 @@
             "readonly": "API-ja është vetëm për lexim. Duhet prisni për të kryer ndryshimet."
         },
         "commit": {
-            "title": "Kryej Ndryshimet",
             "upload_explanation": "Redaktimet qe ju ngarkoni do jen të dukshëm në të gjithë hartat që përdorin të dhëna OpenStreetMap.",
             "upload_explanation_with_user": "Redaktimet qe ju ngarkoni si {user} do jen të dukshëm në të gjithë hartat që përdorin të dhëna OpenStreetMap.",
-            "save": "Ruaj",
             "cancel": "Anullo",
             "changes": "{count} Ndryshime",
             "warnings": "Paralajmërime",
@@ -237,19 +221,6 @@
         "contributors": {
             "list": "Redaktime nga {users}",
             "truncated_list": "Redaktime nga {users} dhe {count} të tjerë"
-        },
-        "infobox": {
-            "selected": "{n} të zgjedhur",
-            "geometry": "Gjeometria",
-            "closed": "i mbyllur",
-            "center": "Qendra",
-            "perimeter": "Perimetri",
-            "length": "Gjatësia",
-            "area": "Sipërfaqja",
-            "centroid": "Centroida",
-            "location": "Vendndodhja",
-            "metric": "Metrik",
-            "imperial": "Perandorak"
         },
         "geometry": {
             "point": "pik",
@@ -282,7 +253,6 @@
             "back_tooltip": "Ndrysho tiparin",
             "remove": "Hiq",
             "search": "Kërko",
-            "multiselect": "Zgjidh artikuj",
             "unknown": "I panjohur",
             "feature_list": "Kërko tiparet",
             "edit": "Redakto tiparin",
@@ -308,6 +278,21 @@
             "minimap": {
                 "description": "Minihartë",
                 "tooltip": "Shfaq një hartë të zvogluar për të treguar vendosjen e zonës të dukshme."
+            }
+        },
+        "intro": {
+            "graph": {
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "al"
             }
         },
         "presets": {
@@ -445,6 +430,9 @@
                 }
             },
             "presets": {
+                "place/city": {
+                    "name": "Qytet"
+                },
                 "power/transformer": {
                     "name": "Transformator"
                 },

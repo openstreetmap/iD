@@ -1,5 +1,15 @@
-import _ from 'lodash';
-import { osmNode } from '../osm/index';
+import _each from 'lodash-es/each';
+import _every from 'lodash-es/every';
+import _filter from 'lodash-es/filter';
+import _find from 'lodash-es/find';
+import _intersection from 'lodash-es/intersection';
+import _isEqual from 'lodash-es/isEqual';
+import _isEmpty from 'lodash-es/isEmpty';
+import _map from 'lodash-es/map';
+import _without from 'lodash-es/without';
+
+import { osmNode } from '../osm';
+
 import {
   geoChooseEdge,
   geoAngle,
@@ -7,7 +17,7 @@ import {
   geoPathIntersections,
   geoPathLength,
   geoSphericalDistance
-} from '../geo/index';
+} from '../geo';
 
 
 // https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/command/MoveCommand.java
@@ -24,11 +34,11 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
             if (moveIds.indexOf(nodeId) !== -1) return true;
 
             // Allow movement of a vertex where 2 ways meet..
-            var parents = _.map(graph.parentWays(graph.entity(nodeId)), 'id');
+            var parents = _map(graph.parentWays(graph.entity(nodeId)), 'id');
             if (parents.length < 3) return true;
 
             // Restrict movement of a vertex where >2 ways meet, unless all parentWays are moving too..
-            var parentsMoving = _.every(parents, function(id) { return cache.moving[id]; });
+            var parentsMoving = _every(parents, function(id) { return cache.moving[id]; });
             if (!parentsMoving) delete cache.moving[nodeId];
 
             return parentsMoving;
@@ -67,11 +77,11 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
                     if (parents.length !== 2) return;
 
                     var moved = graph.entity(id),
-                        unmoved = _.find(parents, function(way) { return !cache.moving[way.id]; });
+                        unmoved = _find(parents, function(way) { return !cache.moving[way.id]; });
                     if (!unmoved) return;
 
                     // exclude ways that are overly connected..
-                    if (_.intersection(moved.nodes, unmoved.nodes).length > 2) return;
+                    if (_intersection(moved.nodes, unmoved.nodes).length > 2) return;
 
                     if (moved.isArea() || unmoved.isArea()) return;
 
@@ -100,7 +110,7 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
 
             cacheEntities(moveIds);
             cacheIntersections(cache.ways);
-            cache.nodes = _.filter(cache.nodes, canMove);
+            cache.nodes = _filter(cache.nodes, canMove);
 
             cache.ok = true;
         }
@@ -183,8 +193,8 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
         // don't move the vertex if it is the endpoint of both ways.
         if (isEP1 && isEP2) return graph;
 
-        var nodes1 = _.without(graph.childNodes(way1), vertex),
-            nodes2 = _.without(graph.childNodes(way2), vertex);
+        var nodes1 = _without(graph.childNodes(way1), vertex),
+            nodes2 = _without(graph.childNodes(way2), vertex);
 
         if (way1.isClosed() && way1.first() === vertex.id) nodes1.push(nodes1[0]);
         if (way2.isClosed() && way2.first() === vertex.id) nodes2.push(nodes2[0]);
@@ -225,7 +235,7 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
 
 
     function cleanupIntersections(graph) {
-        _.each(cache.intersection, function(obj) {
+        _each(cache.intersection, function(obj) {
             graph = replaceMovedVertex(obj.nodeId, obj.movedId, graph, delta);
             graph = replaceMovedVertex(obj.nodeId, obj.unmovedId, graph, null);
             graph = unZorroIntersection(obj, graph);
@@ -237,7 +247,7 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
 
     // check if moving way endpoint can cross an unmoved way, if so limit delta..
     function limitDelta(graph) {
-        _.each(cache.intersection, function(obj) {
+        _each(cache.intersection, function(obj) {
             // Don't limit movement if this is vertex joins 2 endpoints..
             if (obj.movedIsEP && obj.unmovedIsEP) return;
             // Don't limit movement if this vertex is not an endpoint anyway..
@@ -247,14 +257,14 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
                 start = projection(node.loc),
                 end = vecAdd(start, delta),
                 movedNodes = graph.childNodes(graph.entity(obj.movedId)),
-                movedPath = _.map(_.map(movedNodes, 'loc'),
+                movedPath = _map(_map(movedNodes, 'loc'),
                     function(loc) { return vecAdd(projection(loc), delta); }),
                 unmovedNodes = graph.childNodes(graph.entity(obj.unmovedId)),
-                unmovedPath = _.map(_.map(unmovedNodes, 'loc'), projection),
+                unmovedPath = _map(_map(unmovedNodes, 'loc'), projection),
                 hits = geoPathIntersections(movedPath, unmovedPath);
 
             for (var i = 0; i < hits.length; i++) {
-                if (_.isEqual(hits[i], end)) continue;
+                if (_isEqual(hits[i], end)) continue;
                 var edge = geoChooseEdge(unmovedNodes, end, projection);
                 delta = vecSub(projection(edge.loc), start);
             }
@@ -267,33 +277,22 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
 
         setupCache(graph);
 
-        if (!_.isEmpty(cache.intersection)) {
+        if (!_isEmpty(cache.intersection)) {
             limitDelta(graph);
         }
 
-        _.each(cache.nodes, function(id) {
+        _each(cache.nodes, function(id) {
             var node = graph.entity(id),
                 start = projection(node.loc),
                 end = vecAdd(start, delta);
             graph = graph.replace(node.move(projection.invert(end)));
         });
 
-        if (!_.isEmpty(cache.intersection)) {
+        if (!_isEmpty(cache.intersection)) {
             graph = cleanupIntersections(graph);
         }
 
         return graph;
-    };
-
-
-    action.disabled = function(graph) {
-        function incompleteRelation(id) {
-            var entity = graph.entity(id);
-            return entity.type === 'relation' && !entity.isComplete(graph);
-        }
-
-        if (_.some(moveIds, incompleteRelation))
-            return 'incomplete_relation';
     };
 
 

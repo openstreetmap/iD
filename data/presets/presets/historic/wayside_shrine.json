@@ -1,4 +1,9 @@
 {
+    "icon": "landmark",
+    "fields": [
+        "name",
+        "inscription"
+    ],
     "geometry": [
         "point",
         "vertex",

@@ -36,4 +36,23 @@ describe('iD.actionMerge', function () {
         expect(graph.entity('w').tags).to.eql({a: 'a', b: 'b', area: 'yes'});
         expect(graph.entity('r').members).to.eql([{id: 'w', role: 'r', type: 'way'}]);
     });
+
+    it('preserves original point if possible', function () {
+        var graph = iD.Graph([
+                iD.Node({id: 'a', loc: [1, 0], tags: {a: 'a'}}),
+                iD.Node({id: 'p', loc: [0, 0], tags: {p: 'p'}}),
+                iD.Node({id: 'q', loc: [0, 1]}),
+                iD.Way({id: 'w', nodes: ['p', 'q'], tags: {w: 'w'}})
+            ]),
+            action = iD.actionMerge(['a', 'w']);
+
+        graph = action(graph);
+        expect(graph.hasEntity('a')).to.be.ok;
+        expect(graph.hasEntity('p')).to.be.ok;
+        expect(graph.hasEntity('q')).to.be.undefined;
+        expect(graph.entity('w').tags).to.eql({a: 'a', w: 'w'});
+        expect(graph.entity('w').nodes).to.eql(['p', 'a']);
+        expect(graph.entity('a').loc[0]).to.eql(0);
+        expect(graph.entity('a').loc[1]).to.eql(1);
+    });
 });

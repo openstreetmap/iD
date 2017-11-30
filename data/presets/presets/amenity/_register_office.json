@@ -1,6 +1,7 @@
 {
     "icon": "town-hall",
     "fields": [
+        "name",
         "address",
         "building_area",
         "opening_hours",
@@ -10,10 +11,12 @@
         "point",
         "area"
     ],
-    "terms": [
-    ],
     "tags": {
         "amenity": "register_office"
+    },
+    "reference": {
+        "key": "government",
+        "value": "register_office"
     },
     "name": "Register Office",
     "searchable": false

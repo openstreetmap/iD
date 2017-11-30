@@ -1,6 +1,7 @@
 {
-    "icon": "building",
+    "icon": "garden-center",
     "fields": [
+        "name",
         "address",
         "levels"
     ],

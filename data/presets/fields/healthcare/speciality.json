@@ -1,0 +1,8 @@
+{
+    "key": "healthcare:speciality",
+    "type": "semiCombo",
+    "reference": {
+        "key": "healthcare"
+    },
+    "label": "Specialties"
+}

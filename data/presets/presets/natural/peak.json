@@ -1,6 +1,7 @@
 {
-    "icon": "triangle",
+    "icon": "mountain",
     "fields": [
+        "name",
         "elevation"
     ],
     "geometry": [

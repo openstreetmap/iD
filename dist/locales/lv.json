@@ -79,8 +79,7 @@
                     "vertex": "Mezgls dzests.",
                     "line": "Līnija dzēsta.",
                     "area": "Apgabals dzēsts.",
-                    "relation": "Relācija dzēsta.",
-                    "multiple": "{n} objekti dzēsti."
+                    "relation": "Relācija dzēsta."
                 }
             },
             "connect": {
@@ -104,16 +103,13 @@
             },
             "move": {
                 "title": "Pārvietot",
-                "description": "Pārvieto objektu.",
                 "key": "M",
                 "annotation": {
                     "point": "Punkts pārvietots.",
                     "vertex": "Mezgls pārvietots.",
                     "line": "Līnija pārvietota.",
-                    "area": "Apgabals pārvietots.",
-                    "multiple": "Vairāki objekti pārvietoti."
-                },
-                "incomplete_relation": "Šo objektu nevar pārvietot, jo tas nav pilnībā lejuplādēts."
+                    "area": "Apgabals pārvietots."
+                }
             },
             "rotate": {
                 "title": "Pagriezt",
@@ -155,23 +151,17 @@
             "translate": "Tulkot",
             "localized_translation_language": "Izvelties valodu"
         },
-        "zoom_in_edit": "Pietuvināt, lai labotu",
         "logout": "atslēgties",
         "loading_auth": "Savienojas ar OpenStreetMap...",
         "status": {
             "error": "Nevarēja savienoties ar API."
         },
         "commit": {
-            "title": "Saglabāt izmaiņas",
-            "save": "Saglabāt",
             "cancel": "Atcelt",
             "warnings": "Brīdinājumi",
             "modified": "Mainīts",
             "deleted": "Dzēsts",
             "created": "Izveidots"
-        },
-        "infobox": {
-            "geometry": "Ģeometrija"
         },
         "geocoder": {
             "search": "Meklēt pasaulē...",
@@ -217,15 +207,11 @@
         },
         "restore": {
             "heading": "Jums ir nesaglabātas izmaiņas",
-            "description": "Jums ir nesaglabātas izmaiņas no iepriekšējās labošanas sesijas. Vai vēlaties ielādēt šīs izmaiņas?",
-            "restore": "Ielādēt",
-            "reset": "Atmest"
+            "description": "Jums ir nesaglabātas izmaiņas no iepriekšējās labošanas sesijas. Vai vēlaties ielādēt šīs izmaiņas?"
         },
         "save": {
             "title": "Saglabāt",
-            "help": "Saglabā izmaiņas, padarot tās redzamas citiem.",
             "no_changes": "Nav izmaiņu, ko saglabāt.",
-            "uploading": "Augšupielādē izmaiņas",
             "unsaved_changes": "Jums ir nesaglabātas izmaiņas",
             "conflict": {
                 "restore": "Atjaunot"
@@ -240,12 +226,10 @@
             "google": "Dalīties uz Google+"
         },
         "confirm": {
-            "okay": "Labi",
             "cancel": "Atcelt"
         },
         "splash": {
-            "welcome": "Laipni lūgti iD OpenStreetMap redaktorā",
-            "start": "Labot tagad"
+            "welcome": "Laipni lūgti iD OpenStreetMap redaktorā"
         },
         "source_switch": {
             "live": "live",
@@ -260,21 +244,26 @@
         "validations": {
             "untagged_line": "Neapzīmēta līnija",
             "untagged_area": "Neapzīmēts apgabals",
-            "many_deletions": "Jūs dzēšat {n} objektus. Vai tiešām vēlaties to darīt? Tie tiks izdzēsti no kartes, ko visi var aplūkt openstreetmap.org.",
             "tag_suggests_area": "Apzīmējums {tag} parasti tiek lietots apgabaliem, bet objekts nav apgabals",
             "deprecated_tags": "Novecojuši apzīmējumi: {tags}"
-        },
-        "zoom": {
-            "in": "Pietuvināt",
-            "out": "Attālināt"
-        },
-        "gpx": {
-            "local_layer": "Vietējais GPX fails"
         },
         "help": {
             "title": "Palīdzība"
         },
         "intro": {
+            "graph": {
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "lv"
+            },
             "navigation": {
                 "title": "Navigācija"
             },
@@ -282,12 +271,10 @@
                 "title": "Punkti"
             },
             "areas": {
-                "title": "Apgabali",
-                "search": "**Meklēt '{name}'.**"
+                "title": "Apgabali"
             },
             "lines": {
-                "title": "Līnijas",
-                "start": "**Uzsāciet līniju, klikšķinot ceļa beigu punktā.**"
+                "title": "Līnijas"
             },
             "startediting": {
                 "save": "Neizmirstiet regulāri saglabāt izmaiņas!",
@@ -370,9 +357,6 @@
                 },
                 "crossing": {
                     "label": "Tips"
-                },
-                "cuisine": {
-                    "label": "Ēdiens"
                 },
                 "denomination": {
                     "label": "Denominācija"
@@ -469,9 +453,6 @@
                 "railway": {
                     "label": "Tips"
                 },
-                "ref": {
-                    "label": "Atskaites punkts"
-                },
                 "religion": {
                     "label": "Reliģija"
                 },
@@ -483,12 +464,6 @@
                 },
                 "shop": {
                     "label": "Tips"
-                },
-                "source": {
-                    "label": "Avots"
-                },
-                "sport": {
-                    "label": "Sports"
                 },
                 "structure": {
                     "label": "Objekts",

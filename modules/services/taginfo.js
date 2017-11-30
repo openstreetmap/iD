@@ -1,9 +1,16 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { utilQsString } from '../util/index';
+import _debounce from 'lodash-es/debounce';
+import _extend from 'lodash-es/extend';
+import _forEach from 'lodash-es/forEach';
+import _omit from 'lodash-es/omit';
+
+import { json as d3_json } from 'd3-request';
+
+import { utilQsString } from '../util';
 
 
-var endpoint = 'https://taginfo.openstreetmap.org/api/4/',
+var apibase = 'https://taginfo.openstreetmap.org/api/4/',
+    inflight = {},
+    popularKeys = {},
     taginfoCache = {},
     tag_sorts = {
         point: 'count_nodes',
@@ -33,31 +40,31 @@ var endpoint = 'https://taginfo.openstreetmap.org/api/4/',
     };
 
 
-function sets(parameters, n, o) {
-    if (parameters.geometry && o[parameters.geometry]) {
-        parameters[n] = o[parameters.geometry];
+function sets(params, n, o) {
+    if (params.geometry && o[params.geometry]) {
+        params[n] = o[params.geometry];
     }
-    return parameters;
+    return params;
 }
 
 
-function setFilter(parameters) {
-    return sets(parameters, 'filter', tag_filters);
+function setFilter(params) {
+    return sets(params, 'filter', tag_filters);
 }
 
 
-function setSort(parameters) {
-    return sets(parameters, 'sortname', tag_sorts);
+function setSort(params) {
+    return sets(params, 'sortname', tag_sorts);
 }
 
 
-function setSortMembers(parameters) {
-    return sets(parameters, 'sortname', tag_sort_members);
+function setSortMembers(params) {
+    return sets(params, 'sortname', tag_sort_members);
 }
 
 
-function clean(parameters) {
-    return _.omit(parameters, 'geometry', 'debounce');
+function clean(params) {
+    return _omit(params, ['geometry', 'debounce']);
 }
 
 
@@ -129,146 +136,189 @@ function sortKeys(a, b) {
 }
 
 
-var debounced = _.debounce(d3.json, 100, true);
+var debouncedRequest = _debounce(request, 500, { leading: false });
+
+function request(url, params, exactMatch, callback, loaded) {
+    if (inflight[url]) return;
+
+    if (checkCache(url, params, exactMatch, callback)) return;
+
+    inflight[url] = d3_json(url, function (err, data) {
+        delete inflight[url];
+        loaded(err, data);
+    });
+}
 
 
-function request(url, debounce, callback) {
-    if (taginfoCache[url]) {
-        callback(null, taginfoCache[url]);
-    } else if (debounce) {
-        debounced(url, done);
-    } else {
-        d3.json(url, done);
-    }
+function checkCache(url, params, exactMatch, callback) {
+    var rp = params.rp || 25,
+        testQuery = params.query || '',
+        testUrl = url;
 
-    function done(err, data) {
-        if (!err) {
-            taginfoCache[url] = data;
+    do {
+        var hit = taginfoCache[testUrl];
+
+        // exact match, or shorter match yielding fewer than max results (rp)
+        if (hit && (url === testUrl || hit.length < rp)) {
+            callback(null, hit);
+            return true;
         }
-        callback(err, data);
-    }
+
+        // don't try to shorten the query
+        if (exactMatch || !testQuery.length) return false;
+
+        // do shorten the query to see if we already have a cached result
+        // that has returned fewer than max results (rp)
+        testQuery = testQuery.slice(0, -1);
+        testUrl = url.replace(/&query=(.*?)&/, '&query=' + testQuery + '&');
+    } while (testQuery.length >= 0);
+
+    return false;
 }
 
 
 export default {
 
-    init: function() { taginfoCache = {}; },
-    reset: function() { taginfoCache = {}; },
+    init: function() {
+        inflight = {};
+        taginfoCache = {};
+        popularKeys = {};
 
-
-    keys: function(parameters, callback) {
-        var debounce = parameters.debounce;
-        parameters = clean(setSort(parameters));
-        request(endpoint + 'keys/all?' +
-            utilQsString(_.extend({
-                rp: 10,
-                sortname: 'count_all',
-                sortorder: 'desc',
-                page: 1
-            }, parameters)), debounce, function(err, d) {
-                if (err) {
-                    callback(err);
-                } else {
-                    var f = filterKeys(parameters.filter);
-                    callback(null, d.data.filter(f).sort(sortKeys).map(valKey));
-                }
-            }
-        );
+        // Fetch popular keys.  We'll exclude these from `values`
+        // lookups because they stress taginfo, and they aren't likely
+        // to yield meaningful autocomplete results.. see #3955
+        var params = { rp: 100, sortname: 'values_all', sortorder: 'desc', page: 1, debounce: false };
+        this.keys(params, function(err, data) {
+            if (err) return;
+            data.forEach(function(d) {
+                if (d.value === 'opening_hours') return;  // exception
+                popularKeys[d.value] = true;
+            });
+        });
     },
 
 
-    multikeys: function(parameters, callback) {
-        var debounce = parameters.debounce;
-        parameters = clean(setSort(parameters));
-        var prefix = parameters.query;
-        request(endpoint + 'keys/all?' +
-            utilQsString(_.extend({
-                rp: 25,
-                sortname: 'count_all',
-                sortorder: 'desc',
-                page: 1
-            }, parameters)), debounce, function(err, d) {
-                if (err) {
-                    callback(err);
-                } else {
-                    var f = filterMultikeys(prefix);
-                    callback(null, d.data.filter(f).map(valKey));
-                }
-            }
-        );
+    reset: function() {
+        _forEach(inflight, function(req) { req.abort(); });
+        inflight = {};
     },
 
 
-    values: function(parameters, callback) {
-        var debounce = parameters.debounce;
-        parameters = clean(setSort(setFilter(parameters)));
-        request(endpoint + 'key/values?' +
-            utilQsString(_.extend({
-                rp: 25,
-                sortname: 'count_all',
-                sortorder: 'desc',
-                page: 1
-            }, parameters)), debounce, function(err, d) {
-                if (err) {
-                    callback(err);
-                } else {
-                    // In most cases we prefer taginfo value results with lowercase letters.
-                    // A few OSM keys expect values to contain uppercase values (see #3377).
-                    // This is not an exhaustive list (e.g. `name` also has uppercase values)
-                    // but these are the fields where taginfo value lookup is most useful.
-                    var re = /network|taxon|genus|species/;
-                    var allowUpperCase = (parameters.key.match(re) !== null);
-                    var f = filterValues(allowUpperCase);
-                    callback(null, d.data.filter(f).map(valKeyDescription));
-                }
-            }
-        );
-    },
+    keys: function(params, callback) {
+        var doRequest = params.debounce ? debouncedRequest : request;
+        params = clean(setSort(params));
+        params = _extend({ rp: 10, sortname: 'count_all', sortorder: 'desc', page: 1 }, params);
 
-
-    roles: function(parameters, callback) {
-        var debounce = parameters.debounce;
-        var geometry = parameters.geometry;
-        parameters = clean(setSortMembers(parameters));
-        request(endpoint + 'relation/roles?' +
-            utilQsString(_.extend({
-                rp: 25,
-                sortname: 'count_all_members',
-                sortorder: 'desc',
-                page: 1
-            }, parameters)), debounce, function(err, d) {
-                if (err) {
-                    callback(err);
-                } else {
-                    var f = filterRoles(geometry);
-                    callback(null, d.data.filter(f).map(roleKey));
-                }
-            }
-        );
-    },
-
-
-    docs: function(parameters, callback) {
-        var debounce = parameters.debounce;
-        parameters = clean(setSort(parameters));
-
-        var path = 'key/wiki_pages?';
-        if (parameters.value) path = 'tag/wiki_pages?';
-        else if (parameters.rtype) path = 'relation/wiki_pages?';
-
-        request(endpoint + path + utilQsString(parameters), debounce, function(err, d) {
+        var url = apibase + 'keys/all?' + utilQsString(params);
+        doRequest(url, params, false, callback, function(err, d) {
             if (err) {
                 callback(err);
             } else {
+                var f = filterKeys(params.filter);
+                var result = d.data.filter(f).sort(sortKeys).map(valKey);
+                taginfoCache[url] = result;
+                callback(null, result);
+            }
+        });
+    },
+
+
+    multikeys: function(params, callback) {
+        var doRequest = params.debounce ? debouncedRequest : request;
+        params = clean(setSort(params));
+        params = _extend({ rp: 25, sortname: 'count_all', sortorder: 'desc', page: 1 }, params);
+        var prefix = params.query;
+
+        var url = apibase + 'keys/all?' + utilQsString(params);
+        doRequest(url, params, true, callback, function(err, d) {
+            if (err) {
+                callback(err);
+            } else {
+                var f = filterMultikeys(prefix);
+                var result = d.data.filter(f).map(valKey);
+                taginfoCache[url] = result;
+                callback(null, result);
+            }
+        });
+    },
+
+
+    values: function(params, callback) {
+        // Exclude popular keys from values lookups.. see #3955
+        var key = params.key;
+        if (key && popularKeys[key]) {
+            callback(null, []);
+            return;
+        }
+
+        var doRequest = params.debounce ? debouncedRequest : request;
+        params = clean(setSort(setFilter(params)));
+        params = _extend({ rp: 25, sortname: 'count_all', sortorder: 'desc', page: 1 }, params);
+
+        var url = apibase + 'key/values?' + utilQsString(params);
+        doRequest(url, params, false, callback, function(err, d) {
+            if (err) {
+                callback(err);
+            } else {
+                // In most cases we prefer taginfo value results with lowercase letters.
+                // A few OSM keys expect values to contain uppercase values (see #3377).
+                // This is not an exhaustive list (e.g. `name` also has uppercase values)
+                // but these are the fields where taginfo value lookup is most useful.
+                var re = /network|taxon|genus|species|brand|grape_variety|rating|:output|_hours|_times/;
+                var allowUpperCase = (params.key.match(re) !== null);
+                var f = filterValues(allowUpperCase);
+
+                var result = d.data.filter(f).map(valKeyDescription);
+                taginfoCache[url] = result;
+                callback(null, result);
+            }
+        });
+    },
+
+
+    roles: function(params, callback) {
+        var doRequest = params.debounce ? debouncedRequest : request;
+        var geometry = params.geometry;
+        params = clean(setSortMembers(params));
+        params = _extend({ rp: 25, sortname: 'count_all_members', sortorder: 'desc', page: 1 }, params);
+
+        var url = apibase + 'relation/roles?' + utilQsString(params);
+        doRequest(url, params, true, callback, function(err, d) {
+            if (err) {
+                callback(err);
+            } else {
+                var f = filterRoles(geometry);
+                var result = d.data.filter(f).map(roleKey);
+                taginfoCache[url] = result;
+                callback(null, result);
+            }
+        });
+    },
+
+
+    docs: function(params, callback) {
+        var doRequest = params.debounce ? debouncedRequest : request;
+        params = clean(setSort(params));
+
+        var path = 'key/wiki_pages?';
+        if (params.value) path = 'tag/wiki_pages?';
+        else if (params.rtype) path = 'relation/wiki_pages?';
+
+        var url = apibase + path + utilQsString(params);
+        doRequest(url, params, true, callback, function(err, d) {
+            if (err) {
+                callback(err);
+            } else {
+                taginfoCache[url] = d.data;
                 callback(null, d.data);
             }
         });
     },
 
 
-    endpoint: function(_) {
-        if (!arguments.length) return endpoint;
-        endpoint = _;
+    apibase: function(_) {
+        if (!arguments.length) return apibase;
+        apibase = _;
         return this;
     }
 

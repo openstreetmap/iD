@@ -1,10 +1,13 @@
-import _ from 'lodash';
+import _clone from 'lodash-es/clone';
+import _keys from 'lodash-es/keys';
+import _omit from 'lodash-es/omit';
+
 import { t } from '../util/locale';
 import { areaKeys } from '../core/context';
 
 
 export function presetPreset(id, preset, fields) {
-    preset = _.clone(preset);
+    preset = _clone(preset);
 
     preset.id = id;
     preset.fields = (preset.fields || []).map(getFields);
@@ -21,16 +24,18 @@ export function presetPreset(id, preset, fields) {
     };
 
 
-    var matchScore = preset.matchScore || 1;
+    preset.originalScore = preset.matchScore || 1;
+
+
     preset.matchScore = function(entity) {
         var tags = preset.tags,
             score = 0;
 
         for (var t in tags) {
             if (entity.tags[t] === tags[t]) {
-                score += matchScore;
+                score += preset.originalScore;
             } else if (tags[t] === '*' && t in entity.tags) {
-                score += matchScore / 2;
+                score += preset.originalScore / 2;
             } else {
                 return -1;
             }
@@ -45,19 +50,19 @@ export function presetPreset(id, preset, fields) {
     };
 
 
-    var name = preset.name || '';
+    var origName = preset.name || '';
     preset.name = function() {
         if (preset.suggestion) {
             id = id.split('/');
             id = id[0] + '/' + id[1];
-            return name + ' - ' + t('presets.presets.' + id + '.name');
+            return origName + ' - ' + t('presets.presets.' + id + '.name');
         }
-        return preset.t('name', {'default': name});
+        return preset.t('name', { 'default': origName });
     };
 
-
+    var origTerms = (preset.terms || []).join();
     preset.terms = function() {
-        return preset.t('terms', {'default': ''}).toLowerCase().trim().split(/\s*,+\s*/);
+        return preset.t('terms', { 'default': origTerms }).toLowerCase().trim().split(/\s*,+\s*/);
     };
 
 
@@ -67,9 +72,10 @@ export function presetPreset(id, preset, fields) {
     };
 
 
+    var reference = preset.reference || {};
     preset.reference = function(geometry) {
-        var key = Object.keys(preset.tags)[0],
-            value = preset.tags[key];
+        var key = reference.key || Object.keys(_omit(preset.tags, 'name'))[0],
+            value = reference.value || preset.tags[key];
 
         if (geometry === 'relation' && key === 'type') {
             if (value in preset.tags) {
@@ -88,9 +94,9 @@ export function presetPreset(id, preset, fields) {
     };
 
 
-    var removeTags = preset.removeTags || preset.tags;
+    var removeTags = preset.removeTags || preset.tags || {};
     preset.removeTags = function(tags, geometry) {
-        tags = _.omit(tags, _.keys(removeTags));
+        tags = _omit(tags, _keys(removeTags));
 
         for (var f in preset.fields) {
             var field = preset.fields[f];
@@ -104,11 +110,11 @@ export function presetPreset(id, preset, fields) {
     };
 
 
-    var applyTags = preset.addTags || preset.tags;
+    var applyTags = preset.addTags || preset.tags || {};
     preset.applyTags = function(tags, geometry) {
         var k;
 
-        tags = _.clone(tags);
+        tags = _clone(tags);
 
         for (k in applyTags) {
             if (applyTags[k] === '*') {
@@ -122,18 +128,21 @@ export function presetPreset(id, preset, fields) {
         // This is necessary if the geometry is already an area (e.g. user drew an area) AND any of:
         // 1. chosen preset could be either an area or a line (`barrier=city_wall`)
         // 2. chosen preset doesn't have a key in areaKeys (`railway=station`)
-        if (geometry === 'area') {
-            var needsAreaTag = true;
-            if (preset.geometry.indexOf('line') === -1) {
-                for (k in applyTags) {
-                    if (k in areaKeys) {
-                        needsAreaTag = false;
-                        break;
+        if (!applyTags.hasOwnProperty('area')) {
+            delete tags.area;
+            if (geometry === 'area') {
+                var needsAreaTag = true;
+                if (preset.geometry.indexOf('line') === -1) {
+                    for (k in applyTags) {
+                        if (k in areaKeys) {
+                            needsAreaTag = false;
+                            break;
+                        }
                     }
                 }
-            }
-            if (needsAreaTag) {
-                tags.area = 'yes';
+                if (needsAreaTag) {
+                    tags.area = 'yes';
+                }
             }
         }
 

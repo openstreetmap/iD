@@ -1,7 +1,10 @@
 {
-    "icon": "triangle",
+    "icon": "volcano",
     "fields": [
-        "elevation"
+        "name",
+        "elevation",
+        "volcano/status",
+        "volcano/type"
     ],
     "geometry": [
         "point",

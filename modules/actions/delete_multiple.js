@@ -22,14 +22,5 @@ export function actionDeleteMultiple(ids) {
     };
 
 
-    action.disabled = function(graph) {
-        for (var i = 0; i < ids.length; i++) {
-            var id = ids[i],
-                disabled = actions[graph.entity(id).type](id).disabled(graph);
-            if (disabled) return disabled;
-        }
-    };
-
-
     return action;
 }

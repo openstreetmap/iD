@@ -1,11 +1,18 @@
 {
     "icon": "golf",
+    "fields": [
+        "name"
+    ],
     "geometry": [
         "area"
     ],
     "tags": {
         "golf": "water_hazard",
         "natural": "water"
+    },
+    "reference": {
+        "key": "golf",
+        "value": "water_hazard"
     },
     "name": "Water Hazard"
 }

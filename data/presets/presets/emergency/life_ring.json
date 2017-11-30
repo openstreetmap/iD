@@ -1,0 +1,21 @@
+{
+    "icon": "circle-stroked",
+    "fields": [
+        "ref",
+        "operator"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "terms": [
+        "life buoy",
+        "kisby ring",
+        "kisbie ring",
+        "perry buoy"
+    ],
+   "tags": {
+        "emergency": "life_ring"
+    },
+    "name": "Life Ring"
+}

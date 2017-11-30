@@ -2,6 +2,16 @@ describe('iD.Features', function() {
     var dimensions = [1000, 1000],
         context, features;
 
+    function _values(obj) {
+        var result = [];
+        for (var k in obj) {
+            if (obj.hasOwnProperty(k)) {
+                result.push(obj[k]);
+            }
+        }
+        return result;
+    }
+
     beforeEach(function() {
         context = iD.Context();
         d3.select(document.createElement('div'))
@@ -64,7 +74,7 @@ describe('iD.Features', function() {
                     iD.Way({id: 'boundary', tags: {boundary: 'administrative'}, version: 1}),
                     iD.Way({id: 'fence', tags: {barrier: 'fence'}, version: 1})
                 ]),
-                all = _.values(graph.base().entities),
+                all = _values(graph.base().entities),
                 stats;
 
             features.gatherStats(all, graph, dimensions);
@@ -196,11 +206,11 @@ describe('iD.Features', function() {
                 })
 
         ]),
-        all = _.values(graph.base().entities);
+        all = _values(graph.base().entities);
 
 
         function doMatch(ids) {
-            _.each(ids, function(id) {
+            ids.forEach(function(id) {
                 var entity = graph.entity(id),
                     geometry = entity.geometry(graph);
                 expect(features.isHidden(entity, graph, geometry), 'doMatch: ' + id).to.be.true;
@@ -208,7 +218,7 @@ describe('iD.Features', function() {
         }
 
         function dontMatch(ids) {
-            _.each(ids, function(id) {
+            ids.forEach(function(id) {
                 var entity = graph.entity(id),
                     geometry = entity.geometry(graph);
                 expect(features.isHidden(entity, graph, geometry), 'dontMatch: ' + id).to.be.false;
@@ -429,7 +439,7 @@ describe('iD.Features', function() {
                 w = iD.Way({id: 'w', nodes: [a.id, b.id], tags: {highway: 'path'}, version: 1}),
                 graph = iD.Graph([a, b, w]),
                 geometry = a.geometry(graph),
-                all = _.values(graph.base().entities);
+                all = _values(graph.base().entities);
 
             features.disable('paths');
             features.gatherStats(all, graph, dimensions);
@@ -457,7 +467,7 @@ describe('iD.Features', function() {
                     version: 1
                 }),
                 graph = iD.Graph([outer, inner1, inner2, inner3, r]),
-                all = _.values(graph.base().entities);
+                all = _values(graph.base().entities);
 
             features.disable('landuse');
             features.gatherStats(all, graph, dimensions);
@@ -474,7 +484,7 @@ describe('iD.Features', function() {
                 graph = iD.Graph([a, b]),
                 ageo = a.geometry(graph),
                 bgeo = b.geometry(graph),
-                all = _.values(graph.base().entities);
+                all = _values(graph.base().entities);
 
             features.disable('points');
             features.gatherStats(all, graph, dimensions);
@@ -492,7 +502,7 @@ describe('iD.Features', function() {
                 graph.rebase([iD.Node({version: 1})], [graph]);
             }
 
-            all = _.values(graph.base().entities);
+            all = _values(graph.base().entities);
             features.gatherStats(all, graph, dimensions);
             hidden = features.hidden();
             autoHidden = features.autoHidden();
@@ -503,7 +513,7 @@ describe('iD.Features', function() {
 
             graph.rebase([iD.Node({version: 1})], [graph]);
 
-            all = _.values(graph.base().entities);
+            all = _values(graph.base().entities);
             features.gatherStats(all, graph, dimensions);
             hidden = features.hidden();
             autoHidden = features.autoHidden();
@@ -523,7 +533,7 @@ describe('iD.Features', function() {
                 graph.rebase([iD.Node({version: 1})], [graph]);
             }
 
-            all = _.values(graph.base().entities);
+            all = _values(graph.base().entities);
             features.gatherStats(all, graph, dimensions);
             hidden = features.hidden();
             autoHidden = features.autoHidden();
@@ -534,7 +544,7 @@ describe('iD.Features', function() {
 
             graph.rebase([iD.Node({version: 1})], [graph]);
 
-            all = _.values(graph.base().entities);
+            all = _values(graph.base().entities);
             features.gatherStats(all, graph, dimensions);
             hidden = features.hidden();
             autoHidden = features.autoHidden();

@@ -1,12 +1,7 @@
 describe('iD.utilSessionMutex', function() {
-    var clock, a, b;
-
-    beforeEach(function () {
-        clock = sinon.useFakeTimers(Date.now());
-    });
+    var a, b;
 
     afterEach(function() {
-        clock.restore();
         if (a) a.unlock();
         if (b) b.unlock();
     });

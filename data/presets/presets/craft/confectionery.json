@@ -1,6 +1,7 @@
 {
     "icon": "bakery",
     "fields": [
+        "name",
         "operator",
         "address",
         "building_area",
@@ -11,11 +12,11 @@
         "area"
     ],
     "terms": [
-        "sweets",
+        "sweet",
         "candy"
     ],
     "tags": {
         "craft": "confectionery"
     },
-    "name": "Confectionery"
+    "name": "Candy Maker"
 }

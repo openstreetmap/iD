@@ -1,0 +1,20 @@
+{
+    "icon": "triangle-stroked",
+    "fields": [
+        "name"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "place": "plot"
+    },
+    "terms": [
+        "tract",
+        "land",
+        "lot",
+        "parcel"
+    ],
+    "name": "Plot"
+}

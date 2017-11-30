@@ -4,9 +4,10 @@
     <meta charset='utf-8'>
     <title>Mocha Tests</title>
     <link rel='stylesheet' href='../node_modules/mocha/mocha.css'>
-    <link rel='stylesheet' href='css/map.css'>
+    <link rel='stylesheet' href='../dist/iD.css'>
+    <!-- <script src='../node_modules/d3/build/d3.js'></script> -->
 </head>
-<body>
+<body style="overflow:scroll">
     <div id='mocha'></div>
 
     <script src='../node_modules/mocha/mocha.js'></script>
@@ -58,6 +59,7 @@
     <script src='spec/actions/split.js'></script>
     <script src='spec/actions/straighten.js'></script>
     <script src='spec/actions/unrestrict_turn.js'></script>
+    <script src='spec/actions/reflect.js'></script>
 
     <script src='spec/behavior/hash.js'></script>
     <script src='spec/behavior/hover.js'></script>
@@ -75,11 +77,11 @@
 
     <script src='spec/lib/d3.combobox.js'></script>
     <script src='spec/lib/d3.keybinding.js'></script>
-    <!-- <script src='spec/lib/diff3.js'></script> -->
     <script src='spec/lib/locale.js'></script>
 
     <script src='spec/modes/add_point.js'></script>
 
+    <script src='spec/osm/changeset.js'></script>
     <script src='spec/osm/entity.js'></script>
     <script src='spec/osm/intersection.js'></script>
     <script src='spec/osm/multipolygon.js'></script>
@@ -100,6 +102,7 @@
 
     <script src='spec/services/mapillary.js'></script>
     <script src='spec/services/nominatim.js'></script>
+    <script src='spec/services/openstreetcam.js'></script>
     <script src='spec/services/osm.js'></script>
     <script src='spec/services/taginfo.js'></script>
 

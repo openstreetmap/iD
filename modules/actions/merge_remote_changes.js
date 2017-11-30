@@ -1,9 +1,19 @@
-import _ from 'lodash';
+import _clone from 'lodash-es/clone';
+import _includes from 'lodash-es/includes';
+import _isEqual from 'lodash-es/isEqual';
+import _isFunction from 'lodash-es/isFunction';
+import _keys from 'lodash-es/keys';
+import _map from 'lodash-es/map';
+import _reject from 'lodash-es/reject';
+import _union from 'lodash-es/union';
+import _uniq from 'lodash-es/uniq';
+import _without from 'lodash-es/without';
+
+import { diff3Merge } from 'node-diff3';
 import { t } from '../util/locale';
 import { actionDeleteMultiple } from './delete_multiple';
-import { osmEntity } from '../osm/index';
-import { diff3_merge } from '../util/diff3';
-import { dataDiscarded } from '../../data/index';
+import { osmEntity } from '../osm';
+import { dataDiscarded } from '../../data';
 
 
 export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser) {
@@ -12,7 +22,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
 
 
     function user(d) {
-        return _.isFunction(formatUser) ? formatUser(d) : d;
+        return _isFunction(formatUser) ? formatUser(d) : d;
     }
 
 
@@ -35,7 +45,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
 
 
     function mergeNodes(base, remote, target) {
-        if (option === 'force_local' || _.isEqual(target.nodes, remote.nodes)) {
+        if (option === 'force_local' || _isEqual(target.nodes, remote.nodes)) {
             return target;
         }
         if (option === 'force_remote') {
@@ -47,7 +57,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
             a = target.nodes || [],
             b = remote.nodes || [],
             nodes = [],
-            hunks = diff3_merge(a, o, b, true);
+            hunks = diff3Merge(a, o, b, true);
 
         for (var i = 0; i < hunks.length; i++) {
             var hunk = hunks[i];
@@ -55,11 +65,11 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
                 nodes.push.apply(nodes, hunk.ok);
             } else {
                 // for all conflicts, we can assume c.a !== c.b
-                // because `diff3_merge` called with `true` option to exclude false conflicts..
+                // because `diff3Merge` called with `true` option to exclude false conflicts..
                 var c = hunk.conflict;
-                if (_.isEqual(c.o, c.a)) {  // only changed remotely
+                if (_isEqual(c.o, c.a)) {  // only changed remotely
                     nodes.push.apply(nodes, c.b);
-                } else if (_.isEqual(c.o, c.b)) {  // only changed locally
+                } else if (_isEqual(c.o, c.b)) {  // only changed locally
                     nodes.push.apply(nodes, c.a);
                 } else {       // changed both locally and remotely
                     conflicts.push(t('merge_remote_changes.conflict.nodelist', { user: user(remote.user) }));
@@ -74,9 +84,9 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
 
     function mergeChildren(targetWay, children, updates, graph) {
         function isUsed(node, targetWay) {
-            var parentWays = _.map(graph.parentWays(node), 'id');
+            var parentWays = _map(graph.parentWays(node), 'id');
             return node.hasInterestingTags() ||
-                _.without(parentWays, targetWay.id).length > 0 ||
+                _without(parentWays, targetWay.id).length > 0 ||
                 graph.parentRelations(node).length > 0;
         }
 
@@ -138,7 +148,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
 
 
     function mergeMembers(remote, target) {
-        if (option === 'force_local' || _.isEqual(target.members, remote.members)) {
+        if (option === 'force_local' || _isEqual(target.members, remote.members)) {
             return target;
         }
         if (option === 'force_remote') {
@@ -152,10 +162,10 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
 
     function mergeTags(base, remote, target) {
         function ignoreKey(k) {
-            return _.includes(dataDiscarded, k);
+            return _includes(dataDiscarded, k);
         }
 
-        if (option === 'force_local' || _.isEqual(target.tags, remote.tags)) {
+        if (option === 'force_local' || _isEqual(target.tags, remote.tags)) {
             return target;
         }
         if (option === 'force_remote') {
@@ -166,8 +176,8 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
             o = base.tags || {},
             a = target.tags || {},
             b = remote.tags || {},
-            keys = _.reject(_.union(_.keys(o), _.keys(a), _.keys(b)), ignoreKey),
-            tags = _.clone(a),
+            keys = _reject(_union(_keys(o), _keys(a), _keys(b)), ignoreKey),
+            tags = _clone(a),
             changed = false;
 
         for (var i = 0; i < keys.length; i++) {
@@ -217,7 +227,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
 
             } else if (option === 'force_local') {
                 if (target.type === 'way') {
-                    target = mergeChildren(target, _.uniq(local.nodes), updates, graph);
+                    target = mergeChildren(target, _uniq(local.nodes), updates, graph);
                     graph = updateChildren(updates, graph);
                 }
                 return graph.replace(target);
@@ -236,7 +246,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
             // pull in any child nodes that may not be present locally..
             graph.rebase(remoteGraph.childNodes(remote), [graph], false);
             target = mergeNodes(base, remote, target);
-            target = mergeChildren(target, _.union(local.nodes, remote.nodes), updates, graph);
+            target = mergeChildren(target, _union(local.nodes, remote.nodes), updates, graph);
 
         } else if (target.type === 'relation') {
             target = mergeMembers(remote, target);

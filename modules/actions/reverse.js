@@ -1,4 +1,6 @@
-import _ from 'lodash';
+import _transform from 'lodash-es/transform';
+
+
 /*
   Order the nodes of a way in reverse order and reverse any direction dependent tags
   other than `oneway`. (We assume that correcting a backwards oneway is the primary
@@ -83,7 +85,7 @@ export function actionReverse(wayId, options) {
 
     function reverseDirectionTags(node) {
         // Update the direction based tags as appropriate then return an updated node
-        return node.update({tags: _.transform(node.tags, function(acc, tagValue, tagKey) {
+        return node.update({tags: _transform(node.tags, function(acc, tagValue, tagKey) {
             // See if this is a direction tag and reverse (or use existing value if not recognised)
             if (tagKey === 'direction') {
                 acc[tagKey] = {forward: 'backward', backward: 'forward', left: 'right', right: 'left'}[tagValue] || tagValue;
@@ -99,7 +101,7 @@ export function actionReverse(wayId, options) {
 
     function reverseTagsOnNodes(graph, nodeIds) {
         // Reverse the direction of appropriate tags attached to the nodes (#3076)
-        return _(nodeIds)
+        return nodeIds
             // Get each node from the graph
             .map(function(nodeId) { return graph.entity(nodeId);})
             // Check tags on the node, if there aren't any, we can skip

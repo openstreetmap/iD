@@ -1,17 +1,41 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _clone from 'lodash-es/clone';
+import _some from 'lodash-es/some';
+
+import { geoArea as d3_geoArea } from 'd3-geo';
+
 import { t } from '../util/locale';
-import { geoExtent, geoPolygonIntersectsPolygon } from '../geo/index';
+import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
 import { jsonpRequest } from '../util/jsonp_request';
 
 
+function localeDateString(s) {
+    if (!s) return null;
+    var d = new Date(s);
+    if (isNaN(d.getTime())) return null;
+    return d.toLocaleDateString();
+}
+
+function vintageRange(vintage) {
+    var s;
+    if (vintage.start || vintage.end) {
+        s = (vintage.start || '?');
+        if (vintage.start !== vintage.end) {
+            s += ' - ' + (vintage.end || '?');
+        }
+    }
+    return s;
+}
+
+
 export function rendererBackgroundSource(data) {
-    var source = _.clone(data),
+    var source = _clone(data),
         offset = [0, 0],
         name = source.name,
-        best = !!source.best;
+        description = source.description,
+        best = !!source.best,
+        template = source.template;
 
-    source.scaleExtent = data.scaleExtent || [0, 20];
+    source.scaleExtent = data.scaleExtent || [0, 22];
     source.overzoom = data.overzoom !== false;
 
 
@@ -30,7 +54,14 @@ export function rendererBackgroundSource(data) {
 
 
     source.name = function() {
-        return name;
+        var id_safe = source.id.replace('.', '<TX_DOT>');
+        return t('imagery.' + id_safe + '.name', { default: name });
+    };
+
+
+    source.description = function() {
+        var id_safe = source.id.replace('.', '<TX_DOT>');
+        return t('imagery.' + id_safe + '.description', { default: description });
     };
 
 
@@ -41,7 +72,7 @@ export function rendererBackgroundSource(data) {
 
     source.area = function() {
         if (!data.polygon) return Number.MAX_VALUE;  // worldwide
-        var area = d3.geoArea({ type: 'MultiPolygon', coordinates: [ data.polygon ] });
+        var area = d3_geoArea({ type: 'MultiPolygon', coordinates: [ data.polygon ] });
         return isNaN(area) ? 0 : area;
     };
 
@@ -51,8 +82,15 @@ export function rendererBackgroundSource(data) {
     };
 
 
+    source.template = function(_) {
+        if (!arguments.length) return template;
+        if (source.id === 'custom') template = _;
+        return source;
+    };
+
+
     source.url = function(coord) {
-        return data.template
+        return template
             .replace('{x}', coord[0])
             .replace('{y}', coord[1])
             // TMS-flipped y coordinate
@@ -95,7 +133,26 @@ export function rendererBackgroundSource(data) {
     };
 
 
+    /* hides a source from the list, but leaves it available for use */
+    source.isHidden = function() {
+        return source.id === 'DigitalGlobe-Premium-vintage' ||
+            source.id === 'DigitalGlobe-Standard-vintage';
+    };
+
+
     source.copyrightNotices = function() {};
+
+
+    source.getMetadata = function(center, tileCoord, callback) {
+        var vintage = {
+            start: localeDateString(source.startDate),
+            end: localeDateString(source.endDate)
+        };
+        vintage.range = vintageRange(vintage);
+
+        var metadata = { vintage: vintage };
+        callback(null, metadata);
+    };
 
 
     return source;
@@ -112,6 +169,8 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
         key = 'Arzdiw4nlOJzRwOz__qailc8NiR31Tt51dN2D7cm57NrnceZnCpgOkmJhNpGoppU', // Same as P2 and JOSM
         url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial?include=ImageryProviders&key=' +
             key + '&jsonp={callback}',
+        cache = {},
+        inflight = {},
         providers = [];
 
     jsonpRequest(url, function(json) {
@@ -129,10 +188,11 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
         dispatch.call('change');
     });
 
+
     bing.copyrightNotices = function(zoom, extent) {
         zoom = Math.min(zoom, 21);
         return providers.filter(function(provider) {
-            return _.some(provider.areas, function(area) {
+            return _some(provider.areas, function(area) {
                 return extent.intersects(area.extent) &&
                     area.zoom[0] <= zoom &&
                     area.zoom[1] >= zoom;
@@ -142,27 +202,191 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
         }).join(', ');
     };
 
-    bing.logo = 'bing_maps.png';
+
+    bing.getMetadata = function(center, tileCoord, callback) {
+        var tileId = tileCoord.slice(0, 3).join('/'),
+            zoom = Math.min(tileCoord[2], 21),
+            centerPoint = center[1] + ',' + center[0],  // lat,lng
+            url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/Aerial/' + centerPoint +
+                '?zl=' + zoom + '&key=' + key + '&jsonp={callback}';
+
+        if (inflight[tileId]) return;
+
+        if (!cache[tileId]) {
+            cache[tileId] = {};
+        }
+        if (cache[tileId] && cache[tileId].metadata) {
+            return callback(null, cache[tileId].metadata);
+        }
+
+        inflight[tileId] = true;
+        jsonpRequest(url, function(result) {
+            delete inflight[tileId];
+
+            var err = (!result && 'Unknown Error') || result.errorDetails;
+            if (err) {
+                return callback(err);
+            } else {
+                var vintage = {
+                    start: localeDateString(result.resourceSets[0].resources[0].vintageStart),
+                    end: localeDateString(result.resourceSets[0].resources[0].vintageEnd)
+                };
+                vintage.range = vintageRange(vintage);
+
+                var metadata = { vintage: vintage };
+                cache[tileId].metadata = metadata;
+                return callback(null, metadata);
+            }
+        });
+    };
+
+
     bing.terms_url = 'https://blog.openstreetmap.org/2010/11/30/microsoft-imagery-details';
 
+
     return bing;
+};
+
+
+
+rendererBackgroundSource.Esri = function(data) {
+
+    // don't request blank tiles, instead overzoom real tiles - #4327
+    // deprecated technique, but it works (for now)
+    if (data.template.match(/blankTile/) === null) {
+        data.template = data.template + '?blankTile=false';
+    }
+
+    var esri = rendererBackgroundSource(data),
+        cache = {},
+        inflight = {};
+
+    esri.getMetadata = function(center, tileCoord, callback) {
+        var tileId = tileCoord.slice(0, 3).join('/'),
+            zoom = Math.min(tileCoord[2], esri.scaleExtent[1]),
+            centerPoint = center[0] + ',' + center[1],  // long, lat (as it should be)
+            unknown = t('info_panels.background.unknown'),
+            metadataLayer,
+            vintage = {},
+            metadata = {};
+
+        if (inflight[tileId]) return;
+
+        switch (true) {
+            case zoom >= 19:
+                metadataLayer = 3;
+                break;
+            case zoom >= 17:
+                metadataLayer = 2;
+                break;
+            case zoom >= 13:
+                metadataLayer = 0;
+                break;
+            default:
+                metadataLayer = 99;
+        }
+
+        // build up query using the layer appropriate to the current zoom
+        var url = 'https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/' + metadataLayer + '/query?returnGeometry=false&geometry=' + centerPoint + '&inSR=4326&geometryType=esriGeometryPoint&outFields=*&f=json&callback={callback}';
+
+        if (!cache[tileId]) {
+            cache[tileId] = {};
+        }
+        if (cache[tileId] && cache[tileId].metadata) {
+            return callback(null, cache[tileId].metadata);
+        }
+
+        // accurate metadata is only available >= 13
+        if (metadataLayer === 99) {
+            vintage = {
+                start: null,
+                end: null,
+                range: null
+            };
+            metadata = {
+                vintage: null,
+                source: unknown,
+                description: unknown,
+                resolution: unknown,
+                accuracy: unknown
+            };
+
+            callback(null, metadata);
+
+        } else {
+            inflight[tileId] = true;
+            jsonpRequest(url, function(result) {
+                delete inflight[tileId];
+
+                var err;
+                if (!result) {
+                    err = 'Unknown Error';
+                } else if (result.features && result.features.length < 1) {
+                    err = 'No Results';
+                } else if (result.error && result.error.message) {
+                    err = result.error.message;
+                }
+
+                if (err) {
+                    return callback(err);
+                } else {
+                    // pass through the discrete capture date from metadata
+                    var captureDate = localeDateString(result.features[0].attributes.SRC_DATE2);
+                    vintage = {
+                        start: captureDate,
+                        end: captureDate,
+                        range: captureDate
+                    };
+                    metadata = {
+                        vintage: vintage,
+                        source: clean(result.features[0].attributes.NICE_NAME),
+                        description: clean(result.features[0].attributes.NICE_DESC),
+                        resolution: clean(result.features[0].attributes.SRC_RES),
+                        accuracy: clean(result.features[0].attributes.SRC_ACC)
+                    };
+
+                    // append units - meters
+                    if (isFinite(metadata.resolution)) {
+                        metadata.resolution += ' m';
+                    }
+                    if (isFinite(metadata.accuracy)) {
+                        metadata.accuracy += ' m';
+                    }
+
+                    cache[tileId].metadata = metadata;
+                    return callback(null, metadata);
+                }
+            });
+        }
+
+
+        function clean(val) {
+            return String(val).trim() || unknown;
+        }
+    };
+
+    return esri;
 };
 
 
 rendererBackgroundSource.None = function() {
     var source = rendererBackgroundSource({ id: 'none', template: '' });
 
+
     source.name = function() {
         return t('background.none');
     };
+
 
     source.imageryUsed = function() {
         return 'None';
     };
 
+
     source.area = function() {
         return -1;  // sources in background pane are sorted by area
     };
+
 
     return source;
 };
@@ -171,17 +395,21 @@ rendererBackgroundSource.None = function() {
 rendererBackgroundSource.Custom = function(template) {
     var source = rendererBackgroundSource({ id: 'custom', template: template });
 
+
     source.name = function() {
         return t('background.custom');
     };
 
+
     source.imageryUsed = function() {
-        return 'Custom (' + template + ')';
+        return 'Custom (' + source.template() + ')';
     };
+
 
     source.area = function() {
         return -2;  // sources in background pane are sorted by area
     };
+
 
     return source;
 };

@@ -1,0 +1,30 @@
+{
+    "icon": "hospital",
+    "fields": [
+        "name",
+        "healthcare",
+        "operator",
+        "healthcare/speciality",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "healthcare": "*"
+    },
+    "terms": [
+        "clinic",
+        "doctor",
+        "disease",
+        "health",
+        "institution",
+        "sick",
+        "surgery",
+        "wellness"
+    ],
+    "name": "Healthcare Facility"
+}

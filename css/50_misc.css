@@ -1,0 +1,205 @@
+/* power */
+.preset-icon .icon.tag-man_made-pipeline,
+.preset-icon .icon.tag-power {
+    color: #939393;
+    fill: #939393;
+}
+
+path.stroke.tag-power {
+    stroke: #939393;
+    stroke-width: 2;
+}
+path.casing.tag-power {
+    stroke: none;
+}
+
+
+/* boundaries */
+path.stroke.tag-boundary {
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: butt;
+    stroke-dasharray: 20, 5, 5, 5;
+}
+path.casing.tag-boundary {
+    stroke: #82B5FE;
+    stroke-width: 6;
+}
+
+path.casing.tag-boundary-protected_area,
+path.casing.tag-boundary-national_park {
+    stroke: #b0e298;
+}
+
+
+/* barriers */
+path.stroke.tag-barrier {
+    stroke: #ddd;
+    stroke-width: 3px;
+    stroke-linecap: round;
+    stroke-dasharray: 15, 5, 1, 5;
+}
+.low-zoom path.stroke.tag-barrier {
+    stroke-width: 2px;
+    stroke-linecap: butt;
+    stroke-dasharray: 8, 2, 2, 2;
+}
+
+
+/* bridges */
+path.casing.tag-bridge {
+    stroke-opacity: 0.6;
+    stroke: #000;
+    stroke-linecap: butt;
+    stroke-dasharray: none;
+}
+
+path.shadow.tag-bridge {
+    stroke-width: 24;
+}
+path.casing.tag-bridge {
+    stroke-width: 16;
+}
+.low-zoom path.shadow.tag-bridge {
+    stroke-width: 16;
+}
+.low-zoom path.casing.tag-bridge {
+    stroke-width: 10;
+}
+
+path.shadow.line.tag-railway.tag-bridge,
+path.shadow.tag-highway-living_street.tag-bridge,
+path.shadow.tag-highway-path.tag-bridge,
+path.shadow.tag-highway-corridor.tag-bridge,
+path.shadow.line.tag-highway-pedestrian.tag-bridge,
+path.shadow.tag-highway-service.tag-bridge,
+path.shadow.tag-highway-track.tag-bridge,
+path.shadow.tag-highway-steps.tag-bridge,
+path.shadow.tag-highway-footway.tag-bridge,
+path.shadow.tag-highway-cycleway.tag-bridge,
+path.shadow.tag-highway-bridleway.tag-bridge {
+    stroke-width: 18;
+}
+path.casing.line.tag-railway.tag-bridge,
+path.casing.tag-highway-living_street.tag-bridge,
+path.casing.tag-highway-path.tag-bridge,
+path.casing.tag-highway-corridor.tag-bridge,
+path.casing.line.tag-highway-pedestrian.tag-bridge,
+path.casing.tag-highway-service.tag-bridge,
+path.casing.tag-highway-track.tag-bridge,
+path.casing.tag-highway-steps.tag-bridge,
+path.casing.tag-highway-footway.tag-bridge,
+path.casing.tag-highway-cycleway.tag-bridge,
+path.casing.tag-highway-bridleway.tag-bridge {
+    stroke-width: 10;
+}
+
+.low-zoom path.shadow.line.tag-railway.tag-bridge,
+.low-zoom path.shadow.tag-highway-living_street.tag-bridge,
+.low-zoom path.shadow.tag-highway-path.tag-bridge,
+.low-zoom path.shadow.tag-highway-corridor.tag-bridge,
+.low-zoom path.shadow.line.tag-highway-pedestrian.tag-bridge,
+.low-zoom path.shadow.tag-highway-service.tag-bridge,
+.low-zoom path.shadow.tag-highway-track.tag-bridge,
+.low-zoom path.shadow.tag-highway-steps.tag-bridge,
+.low-zoom path.shadow.tag-highway-footway.tag-bridge,
+.low-zoom path.shadow.tag-highway-cycleway.tag-bridge,
+.low-zoom path.shadow.tag-highway-bridleway.tag-bridge {
+    stroke-width: 14;
+}
+.low-zoom path.casing.line.tag-railway.tag-bridge,
+.low-zoom path.casing.tag-highway-living_street.tag-bridge,
+.low-zoom path.casing.tag-highway-path.tag-bridge,
+.low-zoom path.casing.tag-highway-corridor.tag-bridge,
+.low-zoom path.casing.line.tag-highway-pedestrian.tag-bridge,
+.low-zoom path.casing.tag-highway-service.tag-bridge,
+.low-zoom path.casing.tag-highway-track.tag-bridge,
+.low-zoom path.casing.tag-highway-steps.tag-bridge,
+.low-zoom path.casing.tag-highway-footway.tag-bridge,
+.low-zoom path.casing.tag-highway-cycleway.tag-bridge,
+.low-zoom path.casing.tag-highway-bridleway.tag-bridge {
+    stroke-width: 6;
+}
+
+
+/* tunnels */
+path.stroke.tag-tunnel {
+    stroke-opacity: 0.3;
+}
+path.casing.tag-tunnel {
+    stroke-opacity: 0.5;
+    stroke-linecap: butt;
+    stroke-dasharray: none;
+}
+
+
+/* embankments / cuttings */
+path.shadow.tag-embankment,
+path.shadow.tag-cutting {
+    stroke-width: 28;
+}
+path.casing.tag-embankment,
+path.casing.tag-cutting {
+    stroke-opacity: 0.5;
+    stroke: #000;
+    stroke-width: 22;
+    stroke-dasharray: 2, 4;
+    stroke-linecap: butt;
+}
+
+.low-zoom path.shadow.tag-embankment,
+.low-zoom path.shadow.tag-cutting {
+    stroke-width: 14;
+}
+.low-zoom path.casing.tag-embankment,
+.low-zoom path.casing.tag-cutting {
+    stroke-width: 10;
+}
+
+
+/* Surface - unpaved */
+path.casing.tag-unpaved {
+    stroke: #ccc;
+    stroke-linecap: butt;
+    stroke-dasharray: 4, 3;
+}
+.low-zoom path.casing.tag-unpaved {
+    stroke-dasharray: 3, 2;
+}
+path.casing.tag-bridge.tag-unpaved {
+    stroke: #000;
+    stroke-dasharray: 4, 3;
+}
+.low-zoom path.casing.tag-bridge.tag-unpaved {
+    stroke: #000;
+    stroke-dasharray: 3, 2;
+}
+
+
+/* Status (e.g. construction, proposed, abandoned) */
+path.stroke.tag-status,
+path.casing.tag-status {
+    stroke-linecap: butt;
+    stroke-dasharray: 7, 3;
+}
+.low-zoom path.stroke.tag-status,
+.low-zoom path.casing.tag-status {
+    stroke-dasharray: 5, 2;
+}
+
+
+/* Buildings */
+path.stroke.tag-building,
+path.stroke.tag-amenity-shelter {
+    stroke: rgb(224, 110, 95);
+}
+path.fill.tag-building,
+path.fill.tag-amenity-shelter {
+    stroke: rgba(224, 110, 95, 0.3);
+    fill: rgba(224, 110, 95, 0.3);
+}
+.preset-icon-fill-area.tag-building,
+.preset-icon-fill-area.tag-amenity-shelter {
+    border-color: rgb(224, 110, 95);
+    background-color: rgba(224, 110, 95, 0.3);
+}

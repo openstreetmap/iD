@@ -1,6 +1,7 @@
 {
     "icon": "clothing-store",
     "fields": [
+        "name",
         "operator",
         "address",
         "building_area",
@@ -16,6 +17,10 @@
     ],
     "tags": {
         "craft": "tailor"
+    },
+    "reference": {
+        "key": "shop",
+        "value": "tailor"
     },
     "name": "Tailor",
     "searchable": false

@@ -1,4 +1,8 @@
-import * as d3 from 'd3';
+import {
+    geoIdentity as d3_geoIdentity,
+    geoPath as d3_geoPath
+} from 'd3-geo';
+
 
 export function svgPath(projection, graph, isArea) {
 
@@ -18,9 +22,9 @@ export function svgPath(projection, graph, isArea) {
             [viewport[0][0] - padding, viewport[0][1] - padding],
             [viewport[1][0] + padding, viewport[1][1] + padding]
         ],
-        clip = d3.geoIdentity().clipExtent(paddedExtent).stream,
+        clip = d3_geoIdentity().clipExtent(paddedExtent).stream,
         project = projection.stream,
-        path = d3.geoPath()
+        path = d3_geoPath()
             .projection({stream: function(output) { return project(clip(output)); }});
 
     return function(entity) {

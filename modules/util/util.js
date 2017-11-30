@@ -1,12 +1,14 @@
-import * as d3 from 'd3';
+import _map from 'lodash-es/map';
+
 import { t, textDirection } from './locale';
 import { utilDetect } from './detect';
 import { remove as removeDiacritics } from 'diacritics';
+import { fixRTLTextForSvg, rtlRegex } from './svg_paths_rtl_fix';
 
 
 export function utilTagText(entity) {
-    return d3.entries(entity.tags).map(function(e) {
-        return e.key + '=' + e.value;
+    return _map(entity.tags, function(v, k) {
+        return k + '=' + v;
     }).join(', ');
 }
 
@@ -32,16 +34,54 @@ export function utilEntityOrMemberSelector(ids, graph) {
 }
 
 
+export function utilGetAllNodes(ids, graph) {
+    var seen = {};
+    var nodes = [];
+    ids.forEach(getNodes);
+    return nodes;
+
+    function getNodes(id) {
+        if (seen[id]) return;
+        seen[id] = true;
+
+        var entity = graph.hasEntity(id);
+        if (!entity) return;
+
+        if (entity.type === 'node') {
+            nodes.push(entity);
+        } else if (entity.type === 'way') {
+            entity.nodes.forEach(getNodes);
+        } else {
+            entity.members.map(function(member) { return member.id; }).forEach(getNodes);
+        }
+    }
+}
+
+
 export function utilDisplayName(entity) {
     var localizedNameKey = 'name:' + utilDetect().locale.toLowerCase().split('-')[0],
         name = entity.tags[localizedNameKey] || entity.tags.name || '',
         network = entity.tags.cycle_network || entity.tags.network;
+
     if (!name && entity.tags.ref) {
         name = entity.tags.ref;
         if (network) {
             name = network + ' ' + name;
         }
     }
+
+    return name;
+}
+
+
+export function utilDisplayNameForPath(entity) {
+    var name = utilDisplayName(entity);
+    var isFirefox = utilDetect().browser.toLowerCase().indexOf('firefox') > -1;
+
+    if (!isFirefox && name && rtlRegex.test(name)) {
+        name = fixRTLTextForSvg(name);
+    }
+
     return name;
 }
 
@@ -127,7 +167,7 @@ export function utilSetTransform(el, x, y, scale) {
 
 // Calculates Levenshtein distance between two strings
 // see:  https://en.wikipedia.org/wiki/Levenshtein_distance
-// first converts the strings to lowercase and replaces diacritic marks with ascii equilivants.
+// first converts the strings to lowercase and replaces diacritic marks with ascii equivalents.
 export function utilEditDistance(a, b) {
     a = removeDiacritics(a.toLowerCase());
     b = removeDiacritics(b.toLowerCase());
@@ -211,4 +251,15 @@ export function utilFunctor(value) {
     return function() {
         return value;
     };
+}
+
+
+export function utilNoAuto(selection) {
+    var isText = (selection.size() && selection.node().tagName.toLowerCase() === 'textarea');
+
+    return selection
+        .attr('autocomplete', 'off')
+        .attr('autocorrect', 'off')
+        .attr('autocapitalize', 'off')
+        .attr('spellcheck', isText ? 'true' : 'false');
 }

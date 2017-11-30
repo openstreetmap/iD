@@ -1,14 +1,21 @@
-import * as d3 from 'd3';
-import * as sexagesimal from 'sexagesimal';
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import * as sexagesimal from '@mapbox/sexagesimal';
 import { t } from '../util/locale';
 import { geoExtent, geoChooseEdge } from '../geo/index';
 import { modeSelect } from '../modes/index';
 import { osmEntity } from '../osm/index';
 import { svgIcon } from '../svg/index';
+import { services } from '../services/index';
+
 import {
     utilDisplayName,
     utilDisplayType,
-    utilEntityOrMemberSelector
+    utilEntityOrMemberSelector,
+    utilNoAuto
 } from '../util/index';
 
 
@@ -17,28 +24,34 @@ export function uiFeatureList(context) {
 
 
     function featureList(selection) {
-        var header = selection.append('div')
+        var header = selection
+            .append('div')
             .attr('class', 'header fillL cf');
 
         header.append('h3')
             .text(t('inspector.feature_list'));
 
-        var searchWrap = selection.append('div')
+        var searchWrap = selection
+            .append('div')
             .attr('class', 'search-header');
 
-        var search = searchWrap.append('input')
+        var search = searchWrap
+            .append('input')
             .attr('placeholder', t('inspector.search'))
             .attr('type', 'search')
+            .call(utilNoAuto)
             .on('keypress', keypress)
             .on('input', inputevent);
 
         searchWrap
             .call(svgIcon('#icon-search', 'pre-text'));
 
-        var listWrap = selection.append('div')
+        var listWrap = selection
+            .append('div')
             .attr('class', 'inspector-body');
 
-        var list = listWrap.append('div')
+        var list = listWrap
+            .append('div')
             .attr('class', 'feature-list cf');
 
         context
@@ -50,7 +63,7 @@ export function uiFeatureList(context) {
         function keypress() {
             var q = search.property('value'),
                 items = list.selectAll('.feature-list-item');
-            if (d3.event.keyCode === 13 && q.length && items.size()) {
+            if (d3_event.keyCode === 13 && q.length && items.size()) {
                 click(items.datum());
             }
         }
@@ -177,16 +190,18 @@ export function uiFeatureList(context) {
             list.selectAll('.no-results-item .entity-name')
                 .text(noResultsWorldwide ? t('geocoder.no_results_worldwide') : t('geocoder.no_results_visible'));
 
-            list.selectAll('.geocode-item')
-                .data([0])
-                .enter().append('button')
-                .attr('class', 'geocode-item')
-                .on('click', geocode)
-                .append('div')
-                .attr('class', 'label')
-                .append('span')
-                .attr('class', 'entity-name')
-                .text(t('geocoder.search'));
+            if (services.geocoder) {
+              list.selectAll('.geocode-item')
+                  .data([0])
+                  .enter().append('button')
+                  .attr('class', 'geocode-item')
+                  .on('click', geocoderSearch)
+                  .append('div')
+                  .attr('class', 'label')
+                  .append('span')
+                  .attr('class', 'entity-name')
+                  .text(t('geocoder.search'));
+            }
 
             list.selectAll('.no-results-item')
                 .style('display', (value.length && !results.length) ? 'block' : 'none');
@@ -213,7 +228,7 @@ export function uiFeatureList(context) {
                 .attr('class', 'label');
 
             label.each(function(d) {
-                d3.select(this)
+                d3_select(this)
                     .call(svgIcon('#icon-' + d.geometry, 'pre-text'));
             });
 
@@ -251,7 +266,7 @@ export function uiFeatureList(context) {
 
 
         function click(d) {
-            d3.event.preventDefault();
+            d3_event.preventDefault();
             if (d.location) {
                 context.map().centerZoom([d.location[1], d.location[0]], 20);
             }
@@ -263,16 +278,15 @@ export function uiFeatureList(context) {
                         edge = geoChooseEdge(context.childNodes(d.entity), center, context.projection);
                     context.map().center(edge.loc);
                 }
-                context.enter(modeSelect(context, [d.entity.id]).suppressMenu(true));
+                context.enter(modeSelect(context, [d.entity.id]));
             } else {
                 context.zoomToEntity(d.id);
             }
         }
 
 
-        function geocode() {
-            var searchVal = encodeURIComponent(search.property('value'));
-            d3.json('https://nominatim.openstreetmap.org/search/' + searchVal + '?limit=10&format=json', function(err, resp) {
+        function geocoderSearch() {
+            services.geocoder.search(search.property('value'), function (err, resp) {
                 geocodeResults = resp || [];
                 drawList();
             });

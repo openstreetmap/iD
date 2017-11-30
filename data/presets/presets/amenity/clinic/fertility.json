@@ -1,0 +1,32 @@
+{
+    "icon": "hospital",
+    "fields": [
+        "name",
+        "operator",
+        "healthcare/speciality",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "egg",
+        "fertility",
+        "reproductive",
+        "sperm",
+        "ovulation"
+    ],
+    "tags": {
+        "amenity": "clinic",
+        "healthcare": "clinic",
+        "healthcare:speciality": "fertility"
+    },
+    "reference": {
+        "key": "amenity",
+        "value": "clinic"
+    },
+    "name": "Fertility Clinic"
+}

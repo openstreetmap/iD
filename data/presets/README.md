@@ -70,10 +70,10 @@ Fields are reusable form elements that can be associated with presets.
 Fields are defined in JSON files located under `data/presets/fields`.
 
 The field files are typically named according to their associated OSM key.
-For example, the field for the tag `access=*` is stored in the file
-`data/presets/fields/access.json`.  Note that there are exceptions to this rule
-for fields that might work differently depending on which preset is active
-(`access_simple.json`, `access_toilets.json`).
+For example, the field for the tag `sport=*` is stored in the file
+`data/presets/fields/sport.json`.  When a field has multiple versions that
+depend on which preset is active, we add a suffix to the filename:
+(`sport.json`, `sport_ice.json`, `sport_racing_motor.json`).
 
 Some keys in OSM are namespaced using colons (':').  Namespaced fields
 are nested in folders according to their tag.
@@ -111,13 +111,17 @@ The complete JSON schema for fields can be found in [`data/presets/schema/field.
 * `multiCombo` - Dropdown field for adding `yes` values to a common multikey<br/>
 (e.g. `recycling:*` -> `recycling:glass=yes`, `recycling:paper=yes`, etc.)
 * `networkCombo` - Dropdown field that helps users pick a route `network` tag (localized for editing location)
+* `semiCombo` - Dropdown field for adding multiple values to a semicolon-delimited list<br/>
+(e.g. `sport=*` -> `soccer;lacrosse;athletics;field_hockey`)
 
 **Checkboxes**
 * `check` - 3-state checkbox: `yes`, `no`, unknown (no tag)
-* `defaultcheck` - 2-state checkbox where checked produces `yes` and unchecked produces no tag
+* `defaultCheck` - 2-state checkbox where checked produces `yes` and unchecked produces no tag
+* `onewayCheck` - 3-state checkbox for `oneway` fields, with extra button for direction switching
 
 **Radio Buttons**
 * `radio` - Multiple choice radio button field
+* `structureRadio` - Multiple choice structure radio button field, with extra input for bridge/tunnel level
 
 **Special**
 * `access` - Block of dropdowns for defining the `access=*` tags on a highway

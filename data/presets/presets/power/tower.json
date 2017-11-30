@@ -1,4 +1,7 @@
 {
+    "fields": [
+        "ref"
+    ],
     "geometry": [
         "vertex"
     ],

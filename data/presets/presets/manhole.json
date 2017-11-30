@@ -1,0 +1,24 @@
+{
+    "icon": "circle-stroked",
+    "fields": [
+        "manhole",
+        "operator",
+        "label",
+        "ref"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "manhole": "*"
+    },
+    "terms": [
+        "cover",
+        "hole",
+        "sewer",
+        "sewage",
+        "telecom"
+    ],
+    "name": "Manhole"
+}

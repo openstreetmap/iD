@@ -3,7 +3,7 @@
         "line"
     ],
     "fields": [
-        "ref",
+        "ref_taxiway",
         "surface"
     ],
     "tags": {

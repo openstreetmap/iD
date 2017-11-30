@@ -1,5 +1,8 @@
 {
-    "name": "No Left Turn",
+    "icon": "restriction-no-left-turn",
+    "fields": [
+        "except"
+    ],
     "geometry": [
         "relation"
     ],
@@ -7,8 +10,5 @@
         "type": "restriction",
         "restriction": "no_left_turn"
     },
-    "fields": [
-        "except"
-    ],
-    "icon": "restriction-no-left-turn"
+    "name": "No Left Turn"
 }

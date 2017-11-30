@@ -4,6 +4,7 @@
             "category-landuse",
             "category-building",
             "category-water-area",
+            "category-natural-area",
             "leisure/park",
             "amenity/hospital",
             "amenity/place_of_worship",
@@ -17,10 +18,12 @@
             "category-path",
             "category-water-line",
             "category-barrier",
+            "category-natural-line",
             "power/line",
             "line"
         ],
         "point": [
+            "category-natural-point",
             "leisure/park",
             "amenity/hospital",
             "amenity/place_of_worship",
@@ -38,6 +41,7 @@
             "railway/level_crossing",
             "highway/traffic_signals",
             "highway/turning_circle",
+            "highway/turning_loop",
             "traffic_calming",
             "highway/mini_roundabout",
             "highway/motorway_junction",
@@ -47,6 +51,7 @@
             "category-route",
             "category-restriction",
             "type/boundary",
+            "type/waterway",
             "type/multipolygon",
             "type/site",
             "relation"

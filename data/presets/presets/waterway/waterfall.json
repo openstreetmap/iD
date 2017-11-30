@@ -1,8 +1,10 @@
 {
     "icon": "water",
     "fields": [
+        "name",
         "height",
-        "width"
+        "width",
+        "intermittent"
     ],
     "geometry": [
         "vertex"

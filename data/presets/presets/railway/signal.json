@@ -1,0 +1,15 @@
+{
+    "icon": "poi-railway-signals",
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "railway": "signal"
+    },
+    "terms": [
+        "signal",
+        "lights"
+    ],
+    "name": "Railway Signal"
+}

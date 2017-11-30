@@ -7,11 +7,15 @@
         "railway": "subway"
     },
     "fields": [
+        "name",
         "structure",
         "gauge",
         "electrified",
         "service_rail"
     ],
-    "terms": [],
+    "terms": [
+        "metro",
+        "transit"
+    ],
     "name": "Subway"
 }

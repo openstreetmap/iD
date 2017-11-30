@@ -1,6 +1,7 @@
 {
     "icon": "triangle-stroked",
     "fields": [
+        "name",
         "population"
     ],
     "geometry": [
@@ -11,8 +12,9 @@
         "place": "suburb"
     },
     "terms": [
-        "Boro",
-        "Quarter"
+        "boro",
+        "borough",
+        "quarter"
     ],
-    "name": "Borough"
+    "name": "Borough / Suburb"
 }

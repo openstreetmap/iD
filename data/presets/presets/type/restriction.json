@@ -1,14 +1,15 @@
 {
+    "icon": "restriction",
+    "fields": [
+        "name",
+        "restriction",
+        "except"
+    ],
     "geometry": [
         "relation"
     ],
     "tags": {
         "type": "restriction"
     },
-    "name": "Restriction",
-    "icon": "restriction",
-    "fields": [
-        "restriction",
-        "except"
-    ]
+    "name": "Restriction"
 }

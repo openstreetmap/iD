@@ -14,13 +14,15 @@ export * from './wikipedia';
 
 import {
     uiFieldCheck,
-    uiFieldDefaultcheck
+    uiFieldDefaultCheck,
+    uiFieldOnewayCheck
 } from './check';
 
 import {
     uiFieldCombo,
     uiFieldMultiCombo,
     uiFieldNetworkCombo,
+    uiFieldSemiCombo,
     uiFieldTypeCombo
 } from './combo';
 
@@ -32,13 +34,17 @@ import {
     uiFieldUrl
 } from './input';
 
+import {
+    uiFieldRadio,
+    uiFieldStructureRadio
+} from './radio';
+
 import { uiFieldAccess } from './access';
 import { uiFieldAddress } from './address';
 import { uiFieldCycleway } from './cycleway';
 import { uiFieldLanes } from './lanes';
 import { uiFieldLocalized } from './localized';
 import { uiFieldMaxspeed } from './maxspeed';
-import { uiFieldRadio } from './radio';
 import { uiFieldRestrictions } from './restrictions';
 import { uiFieldTextarea } from './textarea';
 import { uiFieldWikipedia } from './wikipedia';
@@ -47,22 +53,25 @@ export var uiFields = {
     access: uiFieldAccess,
     address: uiFieldAddress,
     check: uiFieldCheck,
-    defaultcheck: uiFieldDefaultcheck,
     combo: uiFieldCombo,
-    typeCombo: uiFieldTypeCombo,
+    cycleway: uiFieldCycleway,
+    defaultCheck: uiFieldDefaultCheck,
+    email: uiFieldEmail,
+    lanes: uiFieldLanes,
+    localized: uiFieldLocalized,
+    maxspeed: uiFieldMaxspeed,
     multiCombo: uiFieldMultiCombo,
     networkCombo: uiFieldNetworkCombo,
-    cycleway: uiFieldCycleway,
-    text: uiFieldText,
-    url: uiFieldUrl,
     number: uiFieldNumber,
-    email: uiFieldEmail,
-    tel: uiFieldTel,
-    localized: uiFieldLocalized,
-    lanes: uiFieldLanes,
-    maxspeed: uiFieldMaxspeed,
+    onewayCheck: uiFieldOnewayCheck,
     radio: uiFieldRadio,
     restrictions: uiFieldRestrictions,
+    semiCombo: uiFieldSemiCombo,
+    structureRadio: uiFieldStructureRadio,
+    tel: uiFieldTel,
+    text: uiFieldText,
     textarea: uiFieldTextarea,
+    typeCombo: uiFieldTypeCombo,
+    url: uiFieldUrl,
     wikipedia: uiFieldWikipedia
 };

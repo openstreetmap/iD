@@ -53,7 +53,7 @@
                 "check",
                 "combo",
                 "cycleway",
-                "defaultcheck",
+                "defaultCheck",
                 "email",
                 "lanes",
                 "localized",
@@ -61,8 +61,11 @@
                 "multiCombo",
                 "networkCombo",
                 "number",
+                "onewayCheck",
                 "radio",
                 "restrictions",
+                "semiCombo",
+                "structureRadio",
                 "tel",
                 "textarea",
                 "text",
@@ -112,6 +115,11 @@
             "description": "If true, replace spaces with underscores in the tag value (combo type fields)",
             "type": "boolean",
             "default": true
+        },
+        "caseSensitive": {
+            "description": "If true, allow case sensitive field values (combo type fields)",
+            "type": "boolean",
+            "default": false
         }
     },
     "additionalProperties": false

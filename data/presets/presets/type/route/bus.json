@@ -1,4 +1,11 @@
 {
+    "icon": "route-bus",
+    "fields": [
+        "name",
+        "ref_route",
+        "operator",
+        "network"
+    ],
     "geometry": [
         "relation"
     ],
@@ -6,11 +13,5 @@
         "type": "route",
         "route": "bus"
     },
-    "name": "Bus Route",
-    "icon": "route-bus",
-    "fields": [
-        "ref",
-        "operator",
-        "network"
-    ]
+    "name": "Bus Route"
 }

@@ -1,5 +1,7 @@
 {
+    "icon": "attraction",
     "fields": [
+        "name",
         "tourism"
     ],
     "geometry": [

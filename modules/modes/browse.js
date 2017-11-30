@@ -5,9 +5,9 @@ import {
     behaviorLasso,
     behaviorPaste,
     behaviorSelect
-} from '../behavior/index';
+} from '../behavior';
 
-import { modeDragNode } from './index';
+import { modeDragNode } from './drag_node';
 
 
 export function modeBrowse(context) {

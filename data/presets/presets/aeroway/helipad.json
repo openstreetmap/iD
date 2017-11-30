@@ -4,6 +4,9 @@
         "point",
         "area"
     ],
+    "fields": [
+        "ref"
+    ],
     "terms": [
         "helicopter",
         "helipad",

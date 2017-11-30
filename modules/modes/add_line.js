@@ -3,11 +3,11 @@ import {
     actionAddEntity,
     actionAddMidpoint,
     actionAddVertex
-} from '../actions/index';
+} from '../actions';
 
-import { behaviorAddWay } from '../behavior/index';
+import { behaviorAddWay } from '../behavior';
 import { modeDrawLine } from './index';
-import { osmNode, osmWay } from '../osm/index';
+import { osmNode, osmWay } from '../osm';
 
 
 export function modeAddLine(context) {
@@ -27,7 +27,7 @@ export function modeAddLine(context) {
 
 
     function start(loc) {
-        var baseGraph = context.graph(),
+        var startGraph = context.graph(),
             node = osmNode({ loc: loc }),
             way = osmWay();
 
@@ -37,12 +37,12 @@ export function modeAddLine(context) {
             actionAddVertex(way.id, node.id)
         );
 
-        context.enter(modeDrawLine(context, way.id, baseGraph));
+        context.enter(modeDrawLine(context, way.id, startGraph));
     }
 
 
     function startFromWay(loc, edge) {
-        var baseGraph = context.graph(),
+        var startGraph = context.graph(),
             node = osmNode({ loc: loc }),
             way = osmWay();
 
@@ -53,12 +53,12 @@ export function modeAddLine(context) {
             actionAddMidpoint({ loc: loc, edge: edge }, node)
         );
 
-        context.enter(modeDrawLine(context, way.id, baseGraph));
+        context.enter(modeDrawLine(context, way.id, startGraph));
     }
 
 
     function startFromNode(node) {
-        var baseGraph = context.graph(),
+        var startGraph = context.graph(),
             way = osmWay();
 
         context.perform(
@@ -66,7 +66,7 @@ export function modeAddLine(context) {
             actionAddVertex(way.id, node.id)
         );
 
-        context.enter(modeDrawLine(context, way.id, baseGraph));
+        context.enter(modeDrawLine(context, way.id, startGraph));
     }
 
 

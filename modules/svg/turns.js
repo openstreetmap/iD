@@ -1,4 +1,4 @@
-import { geoAngle } from '../geo/index';
+import { geoAngle } from '../geo';
 
 
 export function svgTurns(projection) {

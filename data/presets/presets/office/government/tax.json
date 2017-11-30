@@ -1,0 +1,28 @@
+{
+  "icon": "town-hall",
+  "fields": [
+      "name",
+      "address",
+      "building_area",
+      "opening_hours",
+      "operator"
+  ],
+  "geometry": [
+      "point",
+      "area"
+  ],
+  "terms": [
+      "fiscal authorities",
+      "revenue office",
+      "tax office"
+  ],
+  "tags": {
+      "office": "government",
+      "government": "tax"
+  },
+  "reference": {
+      "key": "government",
+      "value": "tax"
+  },
+  "name": "Tax and Revenue Office"
+}

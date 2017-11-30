@@ -1,0 +1,24 @@
+{
+    "icon": "ferry",
+    "fields": [
+        "name",
+        "operator",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "line"
+    ],
+    "terms": [
+        "theme park",
+        "aquatic park",
+        "water park",
+        "rafting simulator",
+        "river rafting ride",
+        "river rapids ride"
+    ],
+    "tags": {
+        "attraction": "river_rafting"
+    },
+    "name": "River Rafting"
+}

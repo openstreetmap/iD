@@ -11,6 +11,10 @@
         "leisure": "pitch",
         "sport": "baseball"
     },
+    "reference": {
+        "key": "sport",
+        "value": "baseball"
+    },
     "terms": [],
     "name": "Baseball Diamond"
 }

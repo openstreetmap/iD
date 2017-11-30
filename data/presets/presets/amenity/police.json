@@ -1,6 +1,7 @@
 {
     "icon": "police",
     "fields": [
+        "name",
         "operator",
         "address",
         "building_area"

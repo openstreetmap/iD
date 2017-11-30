@@ -1,0 +1,18 @@
+{
+    "icon": "poi-vending-machine",
+    "fields": [
+        "vending",
+        "operator",
+        "payment_multi",
+        "currency_multi"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+    ],
+    "tags": {
+        "amenity": "vending_machine"
+    },
+    "name": "Vending Machine"
+}

@@ -1,6 +1,13 @@
-import _ from 'lodash';
+import _extend from 'lodash-es/extend';
+import _groupBy from 'lodash-es/groupBy';
+import _map from 'lodash-es/map';
+
 import { actionDeleteWay } from './delete_way';
-import { osmIsInterestingTag, osmJoinWays } from '../osm/index';
+
+import {
+    osmIsInterestingTag,
+    osmJoinWays
+} from '../osm';
 
 
 // Join ways at the end node they share.
@@ -15,7 +22,7 @@ export function actionJoin(ids) {
 
     function groupEntitiesByGeometry(graph) {
         var entities = ids.map(function(id) { return graph.entity(id); });
-        return _.extend({line: []}, _.groupBy(entities, function(entity) { return entity.geometry(graph); }));
+        return _extend({line: []}, _groupBy(entities, function(entity) { return entity.geometry(graph); }));
     }
 
 
@@ -33,7 +40,7 @@ export function actionJoin(ids) {
 
         var joined = osmJoinWays(ways, graph)[0];
 
-        survivor = survivor.update({nodes: _.map(joined.nodes, 'id')});
+        survivor = survivor.update({nodes: _map(joined.nodes, 'id')});
         graph = graph.replace(survivor);
 
         joined.forEach(function(way) {
@@ -63,7 +70,7 @@ export function actionJoin(ids) {
         if (joined.length > 1)
             return 'not_adjacent';
 
-        var nodeIds = _.map(joined[0].nodes, 'id').slice(1, -1),
+        var nodeIds = _map(joined[0].nodes, 'id').slice(1, -1),
             relation,
             tags = {},
             conflicting = false;

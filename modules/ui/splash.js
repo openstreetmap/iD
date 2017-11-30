@@ -1,6 +1,5 @@
-import * as d3 from 'd3';
 import { t } from '../util/locale';
-import { uiIntro } from './intro/index';
+import { uiIntro } from './intro';
 import { uiModal } from './modal';
 
 
@@ -36,24 +35,43 @@ export function uiSplash(context) {
                 github: '<a href="https://github.com/openstreetmap/iD">github.com</a>'
             }));
 
-        var buttons = introModal
+        var buttonWrap = introModal
             .append('div')
             .attr('class', 'modal-actions cf');
 
-        buttons
+        var walkthrough = buttonWrap
             .append('button')
-            .attr('class', 'col6 walkthrough')
-            .text(t('splash.walkthrough'))
+            .attr('class', 'walkthrough col6')
             .on('click', function() {
-                d3.select(document.body).call(uiIntro(context));
+                context.container().call(uiIntro(context));
                 modalSelection.close();
             });
 
-        buttons
+        walkthrough
+            .append('svg')
+            .attr('class', 'logo logo-walkthrough')
+            .append('use')
+            .attr('xlink:href', '#logo-walkthrough');
+
+        walkthrough
+            .append('div')
+            .text(t('splash.walkthrough'));
+
+        var startEditing = buttonWrap
             .append('button')
-            .attr('class', 'col6 start')
-            .text(t('splash.start'))
+            .attr('class', 'start-editing col6')
             .on('click', modalSelection.close);
+
+        startEditing
+            .append('svg')
+            .attr('class', 'logo logo-features')
+            .append('use')
+            .attr('xlink:href', '#logo-features');
+
+        startEditing
+            .append('div')
+            .text(t('splash.start'));
+
 
         modalSelection.select('button.close')
             .attr('class','hide');

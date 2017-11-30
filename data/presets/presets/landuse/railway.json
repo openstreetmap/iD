@@ -1,0 +1,18 @@
+{
+    "icon": "rail",
+    "fields": [
+        "operator"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "landuse": "railway"
+    },
+    "terms": [
+        "rail",
+        "train",
+        "track"
+    ],
+    "name": "Railway Corridor"
+}

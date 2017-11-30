@@ -1,6 +1,7 @@
 {
     "icon": "theatre",
     "fields": [
+	    "name",
         "operator",
         "address",
         "building_area"

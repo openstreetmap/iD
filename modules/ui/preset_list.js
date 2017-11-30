@@ -1,6 +1,12 @@
-import * as d3 from 'd3';
-import { utilRebind } from '../util/rebind';
-import { d3keybinding } from '../lib/d3.keybinding.js';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+
 import { t, textDirection } from '../util/locale';
 import { actionChangePreset } from '../actions/index';
 import { operationDelete } from '../operations/index';
@@ -8,10 +14,11 @@ import { modeBrowse } from '../modes/index';
 import { svgIcon } from '../svg/index';
 import { uiPresetIcon } from './preset_icon';
 import { uiTagReference } from './tag_reference';
+import { utilNoAuto, utilRebind } from '../util';
 
 
 export function uiPresetList(context) {
-    var dispatch = d3.dispatch('choose'),
+    var dispatch = d3_dispatch('choose'),
         id,
         currentPreset,
         autofocus = false;
@@ -43,8 +50,7 @@ export function uiPresetList(context) {
                 .append('button')
                 .attr('class', 'preset-choose')
                 .on('click', function() { dispatch.call('choose', this, currentPreset); })
-                .append('span')
-                .html((textDirection === 'rtl') ? '&#9668;' : '&#9658;');
+                .call(svgIcon((textDirection === 'rtl') ? '#icon-backward' : '#icon-forward'));
         } else {
             messagewrap
                 .append('button')
@@ -58,26 +64,26 @@ export function uiPresetList(context) {
         function keydown() {
             // hack to let delete shortcut work when search is autofocused
             if (search.property('value').length === 0 &&
-                (d3.event.keyCode === d3keybinding.keyCodes['⌫'] ||
-                 d3.event.keyCode === d3keybinding.keyCodes['⌦'])) {
-                d3.event.preventDefault();
-                d3.event.stopPropagation();
+                (d3_event.keyCode === d3_keybinding.keyCodes['⌫'] ||
+                 d3_event.keyCode === d3_keybinding.keyCodes['⌦'])) {
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
                 operationDelete([id], context)();
             } else if (search.property('value').length === 0 &&
-                (d3.event.ctrlKey || d3.event.metaKey) &&
-                d3.event.keyCode === d3keybinding.keyCodes.z) {
-                d3.event.preventDefault();
-                d3.event.stopPropagation();
+                (d3_event.ctrlKey || d3_event.metaKey) &&
+                d3_event.keyCode === d3_keybinding.keyCodes.z) {
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
                 context.undo();
-            } else if (!d3.event.ctrlKey && !d3.event.metaKey) {
-                d3.select(this).on('keydown', null);
+            } else if (!d3_event.ctrlKey && !d3_event.metaKey) {
+                d3_select(this).on('keydown', null);
             }
         }
 
         function keypress() {
             // enter
             var value = search.property('value');
-            if (d3.event.keyCode === 13 && value.length) {
+            if (d3_event.keyCode === 13 && value.length) {
                 list.selectAll('.preset-list-item:first-child').datum().choose();
             }
         }
@@ -107,6 +113,7 @@ export function uiPresetList(context) {
             .attr('class', 'preset-search-input')
             .attr('placeholder', t('inspector.search'))
             .attr('type', 'search')
+            .call(utilNoAuto)
             .on('keydown', keydown)
             .on('keypress', keypress)
             .on('input', inputevent);
@@ -146,7 +153,7 @@ export function uiPresetList(context) {
             .append('div')
             .attr('class', function(item) { return 'preset-list-item preset-' + item.preset.id.replace('/', '-'); })
             .classed('current', function(item) { return item.preset === currentPreset; })
-            .each(function(item) { d3.select(this).call(item); })
+            .each(function(item) { d3_select(this).call(item); })
             .style('opacity', 0)
             .transition()
             .style('opacity', 1);
@@ -160,24 +167,32 @@ export function uiPresetList(context) {
             var wrap = selection.append('div')
                 .attr('class', 'preset-list-button-wrap category col12');
 
-            wrap.append('button')
+            var button = wrap
+                .append('button')
                 .attr('class', 'preset-list-button')
                 .classed('expanded', false)
                 .call(uiPresetIcon()
                     .geometry(context.geometry(id))
                     .preset(preset))
                 .on('click', function() {
-                    var isExpanded = d3.select(this).classed('expanded');
-                    var triangle = isExpanded ? '▶ ' :  '▼ ';
-                    d3.select(this).classed('expanded', !isExpanded);
-                    d3.select(this).selectAll('.label').text(triangle + preset.name());
+                    var isExpanded = d3_select(this).classed('expanded');
+                    var iconName = isExpanded ?
+                        (textDirection === 'rtl' ? '#icon-backward' : '#icon-forward') : '#icon-down';
+                    d3_select(this)
+                        .classed('expanded', !isExpanded);
+                    d3_select(this).selectAll('div.label svg.icon use')
+                        .attr('href', iconName);
                     item.choose();
-                })
-                .append('div')
-                .attr('class', 'label')
-                .text(function() {
-                  return '▶ ' + preset.name();
                 });
+
+            var label = button
+                .append('div')
+                .attr('class', 'label');
+
+            label
+                .call(svgIcon((textDirection === 'rtl' ? '#icon-backward' : '#icon-forward'), 'inline'))
+                .append('span')
+                .html(function() { return preset.name() + '&hellip;'; });
 
             box = selection.append('div')
                 .attr('class', 'subgrid col12')
@@ -190,6 +205,7 @@ export function uiPresetList(context) {
             sublist = box.append('div')
                 .attr('class', 'preset-list fillL3 cf fl');
         }
+
 
         item.choose = function() {
             if (!box || !sublist) return;
@@ -207,7 +223,7 @@ export function uiPresetList(context) {
                 box.transition()
                     .duration(200)
                     .style('opacity', '1')
-                    .style('max-height', 200 + preset.members.collection.length * 80 + 'px')
+                    .style('max-height', 200 + preset.members.collection.length * 190 + 'px')
                     .style('padding-bottom', '20px');
             }
         };
@@ -249,7 +265,7 @@ export function uiPresetList(context) {
         };
 
         item.help = function() {
-            d3.event.stopPropagation();
+            d3_event.stopPropagation();
             item.reference.toggle();
         };
 

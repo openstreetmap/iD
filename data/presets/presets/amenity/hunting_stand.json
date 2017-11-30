@@ -1,4 +1,5 @@
 {
+    "icon": "poi-binoculars",
     "geometry": [
         "point",
         "vertex",
@@ -6,8 +7,10 @@
     ],
     "terms": [
         "game",
+        "gun",
         "lookout",
-        "shoot",
+        "rifle",
+        "shoot*",
         "wild",
         "watch"
     ],

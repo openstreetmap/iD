@@ -93,22 +93,24 @@
             },
             "straighten": {
                 "title": "Slétta",
+                "description": "Slétta þessa línu",
+                "key": "S",
                 "annotation": "Slétti úr línu",
                 "too_bendy": "Það er ekki hægt að slétta úr þessu því að það beygir of skarplega",
                 "connected_to_hidden": "Ekki er hægt að slétta línuna þar sem hún er tengd földu eigindi."
             },
             "delete": {
                 "title": "Eyða",
-                "description": "Eyða hlut endanlega.",
+                "description": {
+                    "single": "Eyða þessu endanlega."
+                },
                 "annotation": {
                     "point": "Eyddi punkti.",
                     "vertex": "Eyddi hnút af leið.",
                     "line": "Eyddi línu.",
                     "area": "Eyddi svæði.",
-                    "relation": "Eyddi tengslum.",
-                    "multiple": "Eyddi {n} hlutum."
-                },
-                "incomplete_relation": "Ekki er hægt að eyða þessum hlut því að hann er ekki fullhlaðinn."
+                    "relation": "Eyddi tengslum."
+                }
             },
             "add_member": {
                 "annotation": "Bætti við vensl"
@@ -139,26 +141,21 @@
             },
             "move": {
                 "title": "Færa",
-                "description": "Færa þetta á annan stað.",
                 "key": "M",
                 "annotation": {
                     "point": "Færði punkt.",
                     "vertex": "Færði hnút á leið.",
                     "line": "Færði línu.",
-                    "area": "Færði svæði.",
-                    "multiple": "Færði marga hluti."
-                },
-                "incomplete_relation": "Ekki er hægt að færa þennan hlut því að hann er ekki fullhlaðinn."
+                    "area": "Færði svæði."
+                }
             },
             "rotate": {
                 "title": "Snúa",
-                "description": "Snúa þessu um miðpunkt sinn.",
                 "key": "R",
                 "annotation": {
                     "line": "Snéri línu.",
                     "area": "Snéri svæði."
-                },
-                "too_large": "Ekki er hægt að snúa þessu þar sem hluti þess er utan sjónsviðs."
+                }
             },
             "reverse": {
                 "title": "Öfugt",
@@ -203,7 +200,6 @@
             "localized_translation_language": "Veldu tungumál",
             "localized_translation_name": "Nafn"
         },
-        "zoom_in_edit": "Þysja inn til að breyta",
         "logout": "útskrá",
         "loading_auth": "Tengist við OpenStreetMap...",
         "status": {
@@ -212,10 +208,8 @@
             "readonly": "API er í lesham. Þú þarft að bíða með að vista breytingar."
         },
         "commit": {
-            "title": "Vista breytingar",
             "upload_explanation": "Breytingarnar sem þú gerir verða sýnilegar á öllum kortum sem nota OpenStreetMap gögn.",
             "upload_explanation_with_user": "Breytingarnar sem þú gerir sem {user} verða sýnilegar á öllum kortum sem nota OpenStreetMap gögn.",
-            "save": "Vista",
             "cancel": "Hætta við",
             "changes": "{count} breytingar",
             "warnings": "Aðvaranir",
@@ -251,7 +245,6 @@
             "back_tooltip": "Breyta eigindi",
             "remove": "Fjarlægja",
             "search": "Leita",
-            "multiselect": "Valdir hlutir",
             "unknown": "Óþekkt",
             "incomplete": "<ekki hlaðið niður>",
             "feature_list": "Leitareigindi",
@@ -298,20 +291,19 @@
             },
             "past_future": {
                 "tooltip": "Tillaga,  í byggingu, í eyði, niðurrif oþh"
+            },
+            "others": {
+                "tooltip": "Allt annað"
             }
         },
         "restore": {
             "heading": "Þú átt óvistaðar breytingar",
-            "description": "Viltu endurvekja óvistaðar breytingar frá því síðast?",
-            "restore": "Endurvekja",
-            "reset": "Endurstilla"
+            "description": "Viltu endurvekja óvistaðar breytingar frá því síðast?"
         },
         "save": {
             "title": "Vista",
-            "help": "Vista breytingar á OpenStreetMap, þær verða sýnilegar öðrum notendum.",
             "no_changes": "Engar breytingar til að vista.",
             "unknown_error_details": "Aðgættu hvort að nettengingin er í lagi.",
-            "uploading": "Hleð breytingum inn á OpenStreetMap.",
             "unsaved_changes": "Þú átt óvistaðar breytingar",
             "conflict": {
                 "next": "Næst >"
@@ -325,14 +317,10 @@
             "twitter": "Deila á Twitter",
             "google": "Deila á Google+"
         },
-        "confirm": {
-            "okay": "Í lagi"
-        },
         "splash": {
             "welcome": "Velkomin/n í iD ritil OpenStreetMap",
             "text": "iD er notandavænt tæki til að bæta við besta fría kortagrunn heimsins. Þetta er þróunarútgáfa {version}. Þú getur fengið meiri upplýsingar á vefnum {website} og tilkynnt villur {github}.",
-            "walkthrough": "Skoða leiðarvísir",
-            "start": "Breyta núna"
+            "walkthrough": "Skoða leiðarvísir"
         },
         "source_switch": {
             "live": "raun",
@@ -348,54 +336,60 @@
             "untagged_point": "Ómerktur punktur",
             "untagged_line": "Ómerkt lína",
             "untagged_area": "Ómerkt svæði",
-            "many_deletions": "Þú ert að eyða {n} hlutum. Viltu gera þetta? Þetta mun eyða þeim af kortinu sem allir nota á openstreetmap.org.",
             "tag_suggests_area": "Merkingin {tag} þýðir að línan ætti að vera svæði, en hún er ekki svæði",
             "deprecated_tags": "Úrelt merki: {tags}"
         },
-        "zoom": {
-            "in": "Þysja inn",
-            "out": "Þysja út"
-        },
         "cannot_zoom": "Get ekki þysjað lengra út í núverandi ham.",
-        "gpx": {
-            "local_layer": "Staðvær GPX-skrá",
-            "drag_drop": "Dragðu og slepptu .gpx skrá á síðuna eða smelltu á takkann til hægri til að fletta",
-            "zoom": "Þysja að GPX-slóð",
-            "browse": "Finna .gpx skrá"
-        },
         "mapillary": {
             "view_on_mapillary": "Skoða þessa mynd á Mapillary"
         },
         "help": {
             "title": "Hjálp",
-            "roads": "# Vegir\n\nÞú getur bætt við, lagað og eytt vegum með þessum ritli.\nVegir geta verið af öllum gerðum: slóðar, hraðbrautir, hjólastígar\nog fleira - það á að vera hægt að gera öllu slíku skil hér.\n\n### Velja\n\nSmelltu á veg til að velja hann. Útlína hans verður nú sýnileg,\násamt smá aðgerðavali á kortinu og valmynd til hliðar sem sýnir\nmeiri upplýsingar um veginn.\n\n### Breyta\n\nÞú getur komið auga á vegi sem eru ekki í samræmi við loftmyndina\ná bak við þá eða GPS-slóða. Þú getur breytt veginum þannig að hann\nfari í rétt horf.\n\nFyrst smellirðu á veginn sem þú vilt breyta. Þetta sýnir útlínur hans\nog stjórnhnúta sem þú getur dregið til. Ef þú vilt bæta við fleiri\nstjórnhnútum þá tvísmellirðu á hluta af veginum sem er ekki með\nhnút og þá bætist nýr við.\n\nEf að vegurinn tengist öðrum vegi, en tengist ekki rétt á kortinu,\nþá geturðu dregið stjórnhnút annars vegsins yfir á hinn veginn til\nað tengja þá saman. Að vegamót séu rétt staðsett er mikilvægt\nfyrir kortið og bráðnauðsynlegt fyrir ökuleiðbeiningar.\n\nÞú getur líka smellt á 'Færa' tólið eða ýtt á 'M' á lyklaborðinu\ntil að færa allan veginn í einu og smellt svo aftur til að\nbreytingin taki gildi.\n\n### Eyða\n\nEf að vegurinn er út úr kú - þú sérð á gervihnattamyndinni að\nhann er ekki þar og helst hefurðu séð með eigin augum að hann\ner ekki til - þá er hægt að eyða honum þannig að hann hverfi af\nkortinu. Farðu varlega með að eyða út hlutum - líkt og með aðrar\nbreytingar þá verða allir varir við þær og stundum eru\nloftmyndirnar úreltar, þannig að þetta gæti verið glænýr vegur.\n\nÞú getur eytt vegi með því að smella á hann svo hann sé valinn,\nsmella svo á ruslatunnutáknið eða með því að ýta á 'Delete'\ntakkann.\n\n### Búa til\n\nFannstu stað þar sem vegur ætti að vera til staðar en er ekki á\nkortinu? Smelltu á 'Lína' takkann efst til vinstri eða ýttu á\n'2' á lyklaborðinu til að byrja að teikna línu.\n\nSmelltu þar sem vegurinn hefst á kortinu til að byrja á honum.\nEf að vegurinn tengist öðrum vegi geturðu byrjað á að búa til\nvegamótin með því að smella fyrst á eldri veginn.\n\nSettu svo hnútana þar sem við á svo að vegurinn fari rétta leið,\neftir því sem GPS-slóðin eða loftmyndin sýnir. Ef að vegurinn\ná vegamót við annan veg smelltu á hann þar sem vegamótin eiga að\nvera. Þegar teikningu vegar er lokið tvísmellirðu með músinni á\nlokahnútnum eða ýtir á 'Enter' á lyklaborðinu.\n",
-            "addresses": "# Heimilisföng\n\nHeimilisföng eru einhverjar nytsömustu upplýsingarnar sem hægt er að setja á kort.\n\nÞó að heimilisföng tilheyri yfirleitt götum, þá tilheyra þau húsunum sjálfum í\nOpenStreetMap, merkt inn á byggingar og staði meðfram götum.\n\nÞú getur bætt heimimlisföngum við bæði byggingar sem eru merktar inn sem svæði\nsem og byggingar sem eru merktar inn sem punktar. Best er að heimilisföngin\nséu sett inn af þeim sem þekkja staðhætti vel - eins og með annað þá er ekki\nleyfilegt að afrita heimilisföng af öðrum vefjum, til að mynda er bannað að\nafrita af Google Maps.\n",
-            "buildings": "# Byggingar\n\nOpenStreetMap er stærsta gagnasafn heims með byggingum. Þú getur\nbætt við þetta gagnasafn.\n\n### Velja\n\nÞú getur valið byggingu með því að ýta á útlínur hennar. Þetta\nlýsir upp bygginguna og opnar tækjaslá sem og valmynd sem hefur\nað geyma frekari upplýsingar um bygginguna.\n\n### Breyta\n\nStundum eru byggingar vitlaust staðsettar eða með vitlausum\nupplýsingum.\n\nTil að færa byggingu í einu lagi er hún valin og svo smellt á 'Færa'\ntólið. Færðu músina til að hliðra byggingunni og smelltu svo þegar\nhún er komin á réttan stað.\n\n### Búa til\n\nÞegar byggingum er bætt við kort er hægt að nota bæði svæði og\npunkta. Þumalputtareglan er sú að nota svæði fyrir byggingu þegar\nhægt er, og merkja svo þau fyrirtæki, stofnanir og annað sem\nstarfa þar sem punkta innan svæðisins.\n\nBúðu til byggingu sem svæði með því að ýta á takkann 'Svæði' efst til vinstri, smelltu svo þar sem byggingin byrjar og merktu\nþannig útlínur hennar. Þú klárar bygginguna svo með því að tengja\nsíðasta hnútinn við fyrsta hnútinn eða með því að ýta á 'Enter'\ná lyklaborðinu.\n\n### Eyða\n\nEf að bygging er út úr kú - þú sérð að hún er ekki til á\nloftmyndinni og hefur helst séð með eigin augum að hún er ekki til\nstaðar - þá geturðu eytt henni af kortinu. Farðu varlega þegar þú\neyðir hlutum - breytingarnar munu sjást hjá öllum sem nota kortið\nog það getur verið að loftmyndin sé bara gömul og byggingin ný.\n\nÞú getur eytt byggingu með því að velja hana, ýta svo á\nruslatunnutáknið eða með því að ýta á 'Delete' á lyklaborðinu.\n"
+            "addresses": "# Heimilisföng\n\nHeimilisföng eru einhverjar nytsömustu upplýsingarnar sem hægt er að setja á kort.\n\nÞó að heimilisföng tilheyri yfirleitt götum, þá tilheyra þau húsunum sjálfum í\nOpenStreetMap, merkt inn á byggingar og staði meðfram götum.\n\nÞú getur bætt heimimlisföngum við bæði byggingar sem eru merktar inn sem svæði\nsem og byggingar sem eru merktar inn sem punktar. Best er að heimilisföngin\nséu sett inn af þeim sem þekkja staðhætti vel - eins og með annað þá er ekki\nleyfilegt að afrita heimilisföng af öðrum vefjum, til að mynda er bannað að\nafrita af Google Maps.\n"
         },
         "intro": {
+            "graph": {
+                "block_number": "<value for addr:block_number>",
+                "county": "<value for addr:county>",
+                "district": "<value for addr:district>",
+                "hamlet": "<value for addr:hamlet>",
+                "neighbourhood": "<value for addr:neighbourhood>",
+                "province": "<value for addr:province>",
+                "quarter": "<value for addr:quarter>",
+                "state": "<value for addr:state>",
+                "subdistrict": "<value for addr:subdistrict>",
+                "suburb": "<value for addr:suburb>",
+                "countrycode": "is",
+                "name": {
+                    "1st-avenue": "1sta breiðgata",
+                    "2nd-avenue": "2ur breiðgata",
+                    "4th-avenue": "4ða breiðgata",
+                    "5th-avenue": "5ta breiðgata",
+                    "6th-avenue": "6ta breiðgata",
+                    "6th-street": "Sjöttastræti",
+                    "7th-avenue": "7da breiðgata",
+                    "8th-avenue": "8da breiðgata",
+                    "9th-avenue": "9da breiðgata",
+                    "10th-avenue": "10da breiðgata",
+                    "11th-avenue": "11ta breiðgata",
+                    "12th-avenue": "12ta breiðgata",
+                    "adams-street": "Adamsstræti",
+                    "andrews-elementary-school": "Grunnskóli Aragötu",
+                    "andrews-street": "Aragata",
+                    "lynns-garage": "Bílskúr Lísu"
+                }
+            },
             "navigation": {
-                "title": "Leiðarvísun",
-                "drag": "Kortið sýnir OpenStreetMap gögn ofan á bakgrunni. Þú getur flakkað um með því að draga\nog skruna, rétt eins og á öðrum vefkortum. **Dragðu kortið!**",
-                "select": "Hlutir á kortinu samanstanda af einhverju af þessu þrennu: punktar, línur eða svæði. Hægt er að velja hvaða hlut á kortinu með því að smella á hann. ** Smelltu á punktinn til að velja hann.**"
+                "title": "Leiðarvísun"
             },
             "points": {
-                "title": "Punktar",
-                "search": "Það eru margvíslegir hlutir sem punktar geta staðið fyrir. Punkturinn sem þú varst að bæta við er kaffihús. **Leitaðu að '{name}'**",
-                "choose": "**Veldu kaffihús af listanum.**",
-                "describe": "Punkturinn er nú merktur sem kaffihús. Notaðu valmyndina, þá er hægt að bæta við fleiri upplýsingum. **Bættu nafni við**"
+                "title": "Punktar"
             },
             "areas": {
-                "title": "Svæði",
-                "place": "Teiknaðu svæðið með því að setja fleiri hnúta á kortið. Kláraðu svæðið með því að smella í lokin á upphafshnútinn. **Teiknaðu svæði fyrir leikvöllinn.**",
-                "search": "**Leita að '{name}'.**",
-                "choose": "**Veldu leikvöll af listanum.**"
+                "title": "Svæði"
             },
             "lines": {
-                "title": "Línur",
-                "start": "**Byrjaðu línuna með því að smella á enda vegarins.**",
-                "finish": "Hægt er að klára línur með því að smella aftur á síðasta hnútinn. **Kláraðu að teikna veginn.**",
-                "road": "**Veldu veg af listanum**",
-                "residential": "Það eru til ýmsar tegundir vega, sú algengasta er húsagata. **Veldu tegundina 'Húsagata'**"
+                "title": "Línur"
             },
             "startediting": {
                 "title": "Byrja að breyta",
@@ -438,9 +432,6 @@
                         "horse": "Hestar",
                         "motor_vehicle": "Vélknúin ökutæki"
                     }
-                },
-                "access_toilets": {
-                    "label": "Aðgangur"
                 },
                 "address": {
                     "label": "Heimilisfang",
@@ -520,14 +511,8 @@
                 "covered": {
                     "label": "Yfirbyggt"
                 },
-                "crop": {
-                    "label": "Uppskera"
-                },
                 "crossing": {
                     "label": "Tegund"
-                },
-                "cuisine": {
-                    "label": "Matarhefð"
                 },
                 "denomination": {
                     "label": "Trúardeild"
@@ -682,9 +667,6 @@
                 "railway": {
                     "label": "Tegund"
                 },
-                "ref": {
-                    "label": "Heimildir"
-                },
                 "relation": {
                     "label": "Tegund"
                 },
@@ -718,15 +700,6 @@
                 "smoking": {
                     "label": "Reykingar"
                 },
-                "source": {
-                    "label": "Uppruni"
-                },
-                "sport": {
-                    "label": "Íþrótt"
-                },
-                "sport_ice": {
-                    "label": "Íþrótt"
-                },
                 "structure": {
                     "label": "Mannvirki",
                     "options": {
@@ -751,9 +724,6 @@
                 },
                 "trees": {
                     "label": "Tré"
-                },
-                "tunnel": {
-                    "label": "Göng"
                 },
                 "water": {
                     "label": "Tegund"
@@ -790,9 +760,6 @@
                 "aeroway/apron": {
                     "name": "Tengibrú"
                 },
-                "aeroway/gate": {
-                    "name": "Flugvallarhlið"
-                },
                 "aeroway/hangar": {
                     "name": "Flugskýli"
                 },
@@ -805,9 +772,6 @@
                 },
                 "aeroway/taxiway": {
                     "name": "Flugrein"
-                },
-                "aeroway/terminal": {
-                    "name": "Flugstöð"
                 },
                 "amenity": {
                     "name": "Þjónusta"
@@ -1364,9 +1328,6 @@
                 "leisure/playground": {
                     "name": "Leikvöllur"
                 },
-                "leisure/running_track": {
-                    "name": "Hlaupabraut"
-                },
                 "leisure/slipway": {
                     "name": "Dráttarbraut"
                 },
@@ -1411,9 +1372,6 @@
                 },
                 "man_made/water_works": {
                     "name": "Vatnsveita"
-                },
-                "military/barracks": {
-                    "name": "Herbúðir"
                 },
                 "natural": {
                     "name": "Náttúrulegt"
@@ -1472,17 +1430,11 @@
                 "office": {
                     "name": "Skrifstofa"
                 },
-                "office/architect": {
-                    "name": "Arkitekt"
-                },
                 "office/financial": {
                     "name": "Fjármálafyrirtæki"
                 },
                 "office/government": {
                     "name": "Opinber stofnun"
-                },
-                "office/newspaper": {
-                    "name": "Fréttablað"
                 },
                 "office/political_party": {
                     "name": "Stjórnmálaflokkur"
@@ -1766,9 +1718,6 @@
                 },
                 "tourism/caravan_site": {
                     "name": "Hjólhýsagarður"
-                },
-                "tourism/chalet": {
-                    "name": "Bjálkakofi"
                 },
                 "tourism/guest_house": {
                     "name": "Gestahús"

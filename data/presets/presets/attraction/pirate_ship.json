@@ -1,0 +1,20 @@
+{
+    "icon": "amusement-park",
+    "fields": [
+        "name",
+        "operator",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point"
+    ],
+    "terms": [
+        "theme park",
+        "carnival ride",
+        "amusement ride"
+    ],
+    "tags": {
+        "attraction": "pirate_ship"
+    },
+    "name": "Pirate Ship"
+}

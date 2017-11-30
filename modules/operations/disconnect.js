@@ -1,10 +1,14 @@
-import _ from 'lodash';
+import _filter from 'lodash-es/filter';
+import _some from 'lodash-es/some';
+import _without from 'lodash-es/without';
+
 import { t } from '../util/locale';
 import { actionDisconnect } from '../actions/index';
+import { behaviorOperation } from '../behavior/index';
 
 
 export function operationDisconnect(selectedIDs, context) {
-    var vertices = _.filter(selectedIDs, function(entityId) {
+    var vertices = _filter(selectedIDs, function(entityId) {
         return context.geometry(entityId) === 'vertex';
     });
 
@@ -12,11 +16,12 @@ export function operationDisconnect(selectedIDs, context) {
         action = actionDisconnect(entityId);
 
     if (selectedIDs.length > 1) {
-        action.limitWays(_.without(selectedIDs, entityId));
+        action.limitWays(_without(selectedIDs, entityId));
     }
 
+
     var operation = function() {
-        context.perform(action, t('operations.disconnect.annotation'));
+        context.perform(action, operation.annotation());
     };
 
 
@@ -27,7 +32,7 @@ export function operationDisconnect(selectedIDs, context) {
 
     operation.disabled = function() {
         var reason;
-        if (_.some(selectedIDs, context.hasHiddenConnections)) {
+        if (_some(selectedIDs, context.hasHiddenConnections)) {
             reason = 'connected_to_hidden';
         }
         return action.disabled(context.graph()) || reason;
@@ -42,10 +47,15 @@ export function operationDisconnect(selectedIDs, context) {
     };
 
 
+    operation.annotation = function() {
+        return t('operations.disconnect.annotation');
+    };
+
+
     operation.id = 'disconnect';
     operation.keys = [t('operations.disconnect.key')];
     operation.title = t('operations.disconnect.title');
-
+    operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
 }

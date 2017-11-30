@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import _extend from 'lodash-es/extend';
+
 import {
     geoMetersToLat,
     geoMetersToLon
@@ -20,7 +21,7 @@ export function geoExtent(min, max) {
 
 geoExtent.prototype = new Array(2);
 
-_.extend(geoExtent.prototype, {
+_extend(geoExtent.prototype, {
 
     equals: function (obj) {
         return this[0][0] === obj[0][0] &&

@@ -1,4 +1,5 @@
-import * as d3 from 'd3';
+import { range as d3_range } from 'd3-array';
+
 
 export function d3geoTile() {
   var size = [960, 500],
@@ -17,8 +18,8 @@ export function d3geoTile() {
         k = Math.pow(2, z - z0 + 8),
         origin = [(translate[0] - scale / 2) / k, (translate[1] - scale / 2) / k],
         tiles = [],
-        cols = d3.range(Math.max(0, Math.floor(-origin[0])), Math.max(0, Math.ceil(size[0] / k - origin[0]))),
-        rows = d3.range(Math.max(0, Math.floor(-origin[1])), Math.max(0, Math.ceil(size[1] / k - origin[1])));
+        cols = d3_range(Math.max(0, Math.floor(-origin[0])), Math.max(0, Math.ceil(size[0] / k - origin[0]))),
+        rows = d3_range(Math.max(0, Math.floor(-origin[1])), Math.max(0, Math.ceil(size[1] / k - origin[1])));
 
     rows.forEach(function(y) {
       cols.forEach(function(x) {

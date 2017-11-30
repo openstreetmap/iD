@@ -1,0 +1,40 @@
+{
+    "icon": "airfield",
+    "fields": [
+        "name",
+        "iata",
+        "icao"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "military": "airfield"
+    },
+    "addTags": {
+        "landuse": "military",
+        "military": "airfield"
+    },
+    "removeTags": {
+        "landuse": "military",
+        "military": "airfield"
+    },
+    "terms": [
+        "air force",
+        "army",
+        "base",
+        "bomb",
+        "fight",
+        "force",
+        "guard",
+        "heli*",
+        "jet",
+        "marine",
+        "navy",
+        "plane",
+        "troop",
+        "war"
+    ],
+    "name": "Military Airfield"
+}

@@ -1,10 +1,10 @@
-import _ from 'lodash';
+import _clone from 'lodash-es/clone';
 import { t } from '../util/locale';
 import { presetCollection } from './collection';
 
 
 export function presetCategory(id, category, all) {
-    category = _.clone(category);
+    category = _clone(category);
 
     category.id = id;
 

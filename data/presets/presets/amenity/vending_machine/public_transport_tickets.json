@@ -1,4 +1,5 @@
 {
+    "icon": "poi-vending-machine",
     "fields": [
         "operator",
         "payment_multi",
@@ -18,6 +19,10 @@
     "tags": {
         "amenity": "vending_machine",
         "vending": "public_transport_tickets"
+    },
+    "reference": {
+        "key": "vending",
+        "value": "public_transport_tickets"
     },
     "name": "Transit Ticket Vending Machine"
 }

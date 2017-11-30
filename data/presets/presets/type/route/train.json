@@ -1,4 +1,11 @@
 {
+    "icon": "route-train",
+    "fields": [
+        "name",
+        "ref_route",
+        "operator",
+        "network"
+    ],
     "geometry": [
         "relation"
     ],
@@ -6,11 +13,5 @@
         "type": "route",
         "route": "train"
     },
-    "name": "Train Route",
-    "icon": "route-train",
-    "fields": [
-        "ref",
-        "operator",
-        "network"
-    ]
+    "name": "Train Route"
 }

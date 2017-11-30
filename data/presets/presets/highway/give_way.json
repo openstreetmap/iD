@@ -1,4 +1,5 @@
 {
+    "icon": "poi-yield",
     "fields": [
         "parallel_direction"
     ],

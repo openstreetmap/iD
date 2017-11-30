@@ -1,8 +1,8 @@
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
-import { modeBrowse } from '../modes/index';
-import { geoExtent } from '../geo/index';
-import { svgIcon } from '../svg/index';
+import { geoExtent } from '../geo';
+import { modeBrowse } from '../modes';
+import { svgIcon } from '../svg';
 import { uiLoading } from './loading';
 
 
@@ -13,6 +13,7 @@ export function uiGeolocate(context) {
 
 
     function click() {
+        if (context.inIntro()) return;
         context.enter(modeBrowse(context));
         context.container().call(locating);
         navigator.geolocation.getCurrentPosition(success, error, geoOptions);

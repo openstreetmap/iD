@@ -1,6 +1,7 @@
 {
     "icon": "bus",
     "fields": [
+        "name",
         "building_area",
         "operator",
         "internet_access",

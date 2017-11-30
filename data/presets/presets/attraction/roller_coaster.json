@@ -1,0 +1,20 @@
+{
+    "icon": "amusement-park",
+    "fields": [
+        "name",
+        "operator",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "theme park",
+        "amusement ride"
+    ],
+    "tags": {
+        "attraction": "roller_coaster"
+    },
+    "name": "Roller Coaster"
+}

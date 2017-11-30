@@ -1,6 +1,7 @@
 {
-    "icon": "building",
+    "icon": "home",
     "fields": [
+        "name",
         "address",
         "levels"
     ],

@@ -1,0 +1,29 @@
+{
+    "icon": "poi-military",
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "military": "obstacle_course"
+    },
+    "addTags": {
+        "landuse": "military",
+        "military": "obstacle_course"
+    },
+    "removeTags": {
+        "landuse": "military",
+        "military": "obstacle_course"
+    },
+    "terms": [
+        "army",
+        "base",
+        "force",
+        "guard",
+        "marine",
+        "navy",
+        "troop",
+        "war"
+    ],
+    "name": "Obstacle Course"
+}

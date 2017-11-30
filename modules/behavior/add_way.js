@@ -1,11 +1,12 @@
-import * as d3 from 'd3';
-import { utilRebind } from '../util/rebind';
-import { modeBrowse } from '../modes/index';
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
 import { behaviorDraw } from './draw';
+import { modeBrowse } from '../modes';
+import { utilRebind } from '../util/rebind';
 
 
 export function behaviorAddWay(context) {
-    var dispatch = d3.dispatch('start', 'startFromWay', 'startFromNode'),
+    var dispatch = d3_dispatch('start', 'startFromWay', 'startFromNode'),
         draw = behaviorDraw(context);
 
     var addWay = function(surface) {

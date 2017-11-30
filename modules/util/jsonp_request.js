@@ -1,4 +1,5 @@
-import * as d3 from 'd3';
+import { select as d3_select } from 'd3-selection';
+
 
 var jsonpCache = {};
 window.jsonpCache = jsonpCache;
@@ -35,7 +36,7 @@ export function jsonpRequest(url, callback) {
   }
 
   var cb = create(url),
-    script = d3.select('head')
+    script = d3_select('head')
     .append('script')
     .attr('type', 'text/javascript')
     .attr('src', url.replace(/(\{|%7B)callback(\}|%7D)/, cb));

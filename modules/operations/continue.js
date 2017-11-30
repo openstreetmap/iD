@@ -1,19 +1,23 @@
-import _ from 'lodash';
+import _extend from 'lodash-es/extend';
+import _groupBy from 'lodash-es/groupBy';
+
 import { t } from '../util/locale';
-import { modeDrawLine } from '../modes/index';
+import { modeDrawLine } from '../modes';
+import { behaviorOperation } from '../behavior';
 
 
 export function operationContinue(selectedIDs, context) {
     var graph = context.graph(),
         entities = selectedIDs.map(function(id) { return graph.entity(id); }),
-        geometries = _.extend({ line: [], vertex: [] },
-            _.groupBy(entities, function(entity) { return entity.geometry(graph); })),
+        geometries = _extend({ line: [], vertex: [] },
+            _groupBy(entities, function(entity) { return entity.geometry(graph); })),
         vertex = geometries.vertex[0];
 
 
     function candidateWays() {
         return graph.parentWays(vertex).filter(function(parent) {
             return parent.geometry(graph) === 'line' &&
+                !parent.isClosed() &&
                 parent.affix(vertex.id) &&
                 (geometries.line.length === 0 || geometries.line[0] === parent);
         });
@@ -51,10 +55,15 @@ export function operationContinue(selectedIDs, context) {
     };
 
 
+    operation.annotation = function() {
+        return t('operations.continue.annotation.line');
+    };
+
+
     operation.id = 'continue';
     operation.keys = [t('operations.continue.key')];
     operation.title = t('operations.continue.title');
-
+    operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
 }

@@ -1,0 +1,24 @@
+{
+    "icon": "hospital",
+    "fields": [
+        "name",
+        "operator",
+        "healthcare/speciality",
+        "building_area",
+        "address",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "rehab",
+        "therapist",
+        "therapy"
+    ],
+    "tags": {
+        "healthcare": "rehabilitation"
+    },
+    "name": "Rehabilitation Facility"
+}

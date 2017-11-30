@@ -1,19 +1,22 @@
-import _ from 'lodash';
-import { dataDiscarded } from '../../data/index';
+import _each from 'lodash-es/each';
+import _isEmpty from 'lodash-es/isEmpty';
+import _omit from 'lodash-es/omit';
+
+import { dataDiscarded } from '../../data';
 
 
 export function actionDiscardTags(difference) {
 
     return function(graph) {
         function discardTags(entity) {
-            if (!_.isEmpty(entity.tags)) {
+            if (!_isEmpty(entity.tags)) {
                 var tags = {};
-                _.each(entity.tags, function(v, k) {
+                _each(entity.tags, function(v, k) {
                     if (v) tags[k] = v;
                 });
 
                 graph = graph.replace(entity.update({
-                    tags: _.omit(tags, dataDiscarded)
+                    tags: _omit(tags, dataDiscarded)
                 }));
             }
         }

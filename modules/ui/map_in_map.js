@@ -1,9 +1,22 @@
-import * as d3 from 'd3';
-import { d3keybinding } from '../lib/d3.keybinding.js';
-import { svgDebug, svgGpx } from '../svg/index';
-import { geoRawMercator } from '../geo/index';
-import { rendererTileLayer } from '../renderer/index';
-import { utilSetTransform } from '../util/index';
+import { geoPath as d3_geoPath } from 'd3-geo';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import {
+    zoom as d3_zoom,
+    zoomIdentity as d3_zoomIdentity
+} from 'd3-zoom';
+
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+
+import { t } from '../util/locale';
+import { svgDebug, svgGpx } from '../svg';
+import { geoRawMercator } from '../geo';
+import { rendererTileLayer } from '../renderer';
+import { utilSetTransform } from '../util';
 import { utilGetDimensions } from '../util/dimensions';
 
 
@@ -15,7 +28,6 @@ function vecScale(a, b) { return [ a[0] * b, a[1] * b ]; }
 
 
 export function uiMapInMap(context) {
-    var key = '/';
 
 
     function map_in_map(selection) {
@@ -24,7 +36,7 @@ export function uiMapInMap(context) {
             projection = geoRawMercator(),
             gpxLayer = svgGpx(projection, context).showLabels(false),
             debugLayer = svgDebug(projection, context),
-            zoom = d3.zoom()
+            zoom = d3_zoom()
                 .scaleExtent([ztok(0.5), ztok(24)])
                 .on('start', zoomStarted)
                 .on('zoom', zoomed)
@@ -34,9 +46,9 @@ export function uiMapInMap(context) {
             skipEvents = false,
             gesture = null,
             zDiff = 6,    // by default, minimap renders at (main zoom - 6)
-            wrap = d3.select(null),
-            tiles = d3.select(null),
-            viewport = d3.select(null),
+            wrap = d3_select(null),
+            tiles = d3_select(null),
+            viewport = d3_select(null),
             tStart,  // transform at start of gesture
             tCurr,   // transform at most recent event
             timeoutId;
@@ -52,9 +64,9 @@ export function uiMapInMap(context) {
         function zoomed() {
             if (skipEvents) return;
 
-            var x = d3.event.transform.x,
-                y = d3.event.transform.y,
-                k = d3.event.transform.k,
+            var x = d3_event.transform.x,
+                y = d3_event.transform.y,
+                k = d3_event.transform.k,
                 isZooming = (k !== tStart.k),
                 isPanning = (x !== tStart.x || y !== tStart.y);
 
@@ -86,7 +98,7 @@ export function uiMapInMap(context) {
             utilSetTransform(tiles, tX, tY, scale);
             utilSetTransform(viewport, 0, 0, scale);
             isTransformed = true;
-            tCurr = d3.zoomIdentity.translate(x, y).scale(k);
+            tCurr = d3_zoomIdentity.translate(x, y).scale(k);
 
             var zMain = ktoz(context.projection.scale()),
                 zMini = ktoz(k);
@@ -217,7 +229,7 @@ export function uiMapInMap(context) {
             overlays = overlays.enter()
                 .append('div')
                 .merge(overlays)
-                .each(function(layer) { d3.select(this).call(layer); });
+                .each(function(layer) { d3_select(this).call(layer); });
 
 
             var dataLayers = tiles
@@ -237,7 +249,7 @@ export function uiMapInMap(context) {
 
             // redraw viewport bounding box
             if (gesture !== 'pan') {
-                var getPath = d3.geoPath(projection),
+                var getPath = d3_geoPath(projection),
                     bbox = { type: 'Polygon', coordinates: [context.map().extent().polygon()] };
 
                 viewport = wrap.selectAll('.map-in-map-viewport')
@@ -269,11 +281,11 @@ export function uiMapInMap(context) {
 
 
         function toggle() {
-            if (d3.event) d3.event.preventDefault();
+            if (d3_event) d3_event.preventDefault();
 
             isHidden = !isHidden;
 
-            var label = d3.select('.minimap-toggle');
+            var label = d3_select('.minimap-toggle');
             label.classed('active', !isHidden)
                 .select('input').property('checked', !isHidden);
 
@@ -324,10 +336,10 @@ export function uiMapInMap(context) {
 
         redraw();
 
-        var keybinding = d3keybinding('map-in-map')
-            .on(key, toggle);
+        var keybinding = d3_keybinding('map-in-map')
+            .on(t('background.minimap.key'), toggle);
 
-        d3.select(document)
+        d3_select(document)
             .call(keybinding);
     }
 

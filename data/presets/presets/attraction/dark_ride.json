@@ -1,0 +1,21 @@
+{
+    "icon": "rail-metro",
+    "fields": [
+        "name",
+        "operator",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "line",
+        "area"
+    ],
+    "terms": [
+        "theme park",
+        "ghost train"
+    ],
+    "tags": {
+        "attraction": "dark_ride"
+    },
+    "name": "Dark Ride"
+}

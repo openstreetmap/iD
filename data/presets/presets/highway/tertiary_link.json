@@ -1,15 +1,16 @@
 {
     "icon": "highway-tertiary-link",
     "fields": [
+        "name",
         "oneway",
         "maxspeed",
-        "structure",
-        "access",
         "lanes",
         "surface",
+        "structure",
         "maxheight",
-        "ref",
-        "cycleway"
+        "ref_road_number",
+        "cycleway",
+        "access"
     ],
     "geometry": [
         "line"

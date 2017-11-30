@@ -45,9 +45,7 @@ describe('iD.actionMergePolygon', function () {
     });
 
     function find(relation, id) {
-        return _.find(relation.members, function(d) {
-            return d.id === id;
-        });
+        return relation.members.find(function (m) { return m.id === id; });
     }
 
     it('creates a multipolygon from two closed ways', function() {

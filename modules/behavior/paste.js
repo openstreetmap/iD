@@ -1,45 +1,33 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { d3keybinding } from '../lib/d3.keybinding.js';
+import _invert from 'lodash-es/invert';
+import _mapValues from 'lodash-es/mapValues';
 
 import {
-    actionChangeTags,
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+
+import {
     actionCopyEntities,
     actionMove
-} from '../actions/index';
+} from '../actions';
 
 import {
     geoExtent,
     geoPointInPolygon
-} from '../geo/index';
+} from '../geo/';
 
-import { modeMove } from '../modes/index';
-import { uiCmd } from '../ui/index';
+import { modeMove } from '../modes';
+import { uiCmd } from '../ui';
 
 
 export function behaviorPaste(context) {
-    var keybinding = d3keybinding('paste');
-
-    function omitTag(v, k) {
-        return (
-            k === 'phone' ||
-            k === 'fax' ||
-            k === 'email' ||
-            k === 'website' ||
-            k === 'url' ||
-            k === 'note' ||
-            k === 'description' ||
-            k.indexOf('name') !== -1 ||
-            k.indexOf('wiki') === 0 ||
-            k.indexOf('addr:') === 0 ||
-            k.indexOf('contact:') === 0
-        );
-    }
+    var keybinding = d3_keybinding('paste');
 
 
     function doPaste() {
-        d3.event.preventDefault();
-        if (context.inIntro()) return;
+        d3_event.preventDefault();
 
         var baseGraph = context.graph(),
             mouse = context.mouse(),
@@ -59,15 +47,26 @@ export function behaviorPaste(context) {
         context.perform(action);
 
         var copies = action.copies();
+        var originals = _invert(_mapValues(copies, 'id'));
         for (var id in copies) {
             var oldEntity = oldGraph.entity(id),
                 newEntity = copies[id];
 
             extent._extend(oldEntity.extent(oldGraph));
-            newIDs.push(newEntity.id);
-            context.perform(
-                actionChangeTags(newEntity.id, _.omit(newEntity.tags, omitTag))
-            );
+
+            // Exclude child nodes from newIDs if their parent way was also copied.
+            var parents = context.graph().parentWays(newEntity),
+                parentCopied = false;
+            for (var i = 0; i < parents.length; i++) {
+                if (originals[parents[i].id]) {
+                    parentCopied = true;
+                    break;
+                }
+            }
+
+            if (!parentCopied) {
+                newIDs.push(newEntity.id);
+            }
         }
 
         // Put pasted objects where mouse pointer is..
@@ -81,13 +80,13 @@ export function behaviorPaste(context) {
 
     function paste() {
         keybinding.on(uiCmd('⌘V'), doPaste);
-        d3.select(document).call(keybinding);
+        d3_select(document).call(keybinding);
         return paste;
     }
 
 
     paste.off = function() {
-        d3.select(document).call(keybinding.off);
+        d3_select(document).call(keybinding.off);
     };
 
 

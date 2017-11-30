@@ -1,0 +1,34 @@
+{
+    "icon": "veterinary",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "opening_hours",
+        "animal_shelter"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "adoption",
+        "aspca",
+        "cat",
+        "dog",
+        "horse",
+        "kitten",
+        "pet care",
+        "pet rescue",
+        "puppy",
+        "raptor",
+        "reptile",
+        "rescue",
+        "spca"
+    ],
+    "tags": {
+        "amenity": "animal_shelter"
+    },
+    "name": "Animal Shelter"
+}

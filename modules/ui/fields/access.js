@@ -1,12 +1,18 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { utilRebind } from '../../util/rebind';
-import { utilGetSetValue } from '../../util/get_set_value';
-import { d3combobox } from '../../lib/d3.combobox.js';
+import _forEach from 'lodash-es/forEach';
+
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { select as d3_select } from 'd3-selection';
+import { d3combobox as d3_combobox } from '../../lib/d3.combobox.js';
+
+import {
+    utilGetSetValue,
+    utilNoAuto,
+    utilRebind
+} from '../../util';
 
 
-export function uiFieldAccess(field) {
-    var dispatch = d3.dispatch('change'),
+export function uiFieldAccess(field, context) {
+    var dispatch = d3_dispatch('change'),
         items;
 
     function access(selection) {
@@ -48,10 +54,13 @@ export function uiFieldAccess(field) {
             .attr('type', 'text')
             .attr('class', 'preset-input-access')
             .attr('id', function(d) { return 'preset-input-access-' + d; })
+            .call(utilNoAuto)
             .each(function(d) {
-                d3.select(this)
-                    .call(d3combobox()
-                        .data(access.options(d)));
+                d3_select(this)
+                    .call(d3_combobox()
+                        .container(context.container())
+                        .data(access.options(d))
+                    );
             });
 
 
@@ -66,7 +75,7 @@ export function uiFieldAccess(field) {
 
     function change(d) {
         var tag = {};
-        tag[d] = utilGetSetValue(d3.select(this)) || undefined;
+        tag[d] = utilGetSetValue(d3_select(this)) || undefined;
         dispatch.call('change', this, tag);
     }
 
@@ -206,7 +215,7 @@ export function uiFieldAccess(field) {
         items.selectAll('#preset-input-access-access')
             .attr('placeholder', 'yes');
 
-        _.forEach(placeholders[tags.highway], function(v, k) {
+        _forEach(placeholders[tags.highway], function(v, k) {
             items.selectAll('#preset-input-access-' + k)
                 .attr('placeholder', function() { return (tags.access || v); });
         });

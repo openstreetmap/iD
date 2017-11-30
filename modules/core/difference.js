@@ -1,5 +1,8 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _difference from 'lodash-es/difference';
+import _each from 'lodash-es/each';
+import _omit from 'lodash-es/omit';
+import _isEqual from 'lodash-es/isEqual';
+import _values from 'lodash-es/values';
 
 
 /*
@@ -17,11 +20,11 @@ export function coreDifference(base, head) {
 
 
     function changed(h, b) {
-        return h !== b && !_.isEqual(_.omit(h, 'v'), _.omit(b, 'v'));
+        return h !== b && !_isEqual(_omit(h, 'v'), _omit(b, 'v'));
     }
 
 
-    _.each(head.entities, function(h, id) {
+    _each(head.entities, function(h, id) {
         var b = base.entities[id];
         if (changed(h, b)) {
             changes[id] = {base: b, head: h};
@@ -30,7 +33,7 @@ export function coreDifference(base, head) {
     });
 
 
-    _.each(base.entities, function(b, id) {
+    _each(base.entities, function(b, id) {
         var h = head.entities[id];
         if (!changes[id] && changed(h, b)) {
             changes[id] = {base: b, head: h};
@@ -64,7 +67,7 @@ export function coreDifference(base, head) {
 
     difference.extantIDs = function() {
         var result = [];
-        _.each(changes, function(change, id) {
+        _each(changes, function(change, id) {
             if (change.head) result.push(id);
         });
         return result;
@@ -73,7 +76,7 @@ export function coreDifference(base, head) {
 
     difference.modified = function() {
         var result = [];
-        _.each(changes, function(change) {
+        _each(changes, function(change) {
             if (change.base && change.head) result.push(change.head);
         });
         return result;
@@ -82,7 +85,7 @@ export function coreDifference(base, head) {
 
     difference.created = function() {
         var result = [];
-        _.each(changes, function(change) {
+        _each(changes, function(change) {
             if (!change.base && change.head) result.push(change.head);
         });
         return result;
@@ -91,7 +94,7 @@ export function coreDifference(base, head) {
 
     difference.deleted = function() {
         var result = [];
-        _.each(changes, function(change) {
+        _each(changes, function(change) {
             if (change.base && !change.head) result.push(change.base);
         });
         return result;
@@ -117,7 +120,7 @@ export function coreDifference(base, head) {
             }
         }
 
-        _.each(changes, function(change) {
+        _each(changes, function(change) {
             if (change.head && change.head.geometry(head) !== 'vertex') {
                 addEntity(change.head, head, change.base ? 'modified' : 'created');
 
@@ -125,8 +128,8 @@ export function coreDifference(base, head) {
                 addEntity(change.base, base, 'deleted');
 
             } else if (change.base && change.head) { // modified vertex
-                var moved    = !_.isEqual(change.base.loc,  change.head.loc),
-                    retagged = !_.isEqual(change.base.tags, change.head.tags);
+                var moved    = !_isEqual(change.base.loc,  change.head.loc),
+                    retagged = !_isEqual(change.base.tags, change.head.tags);
 
                 if (moved) {
                     addParents(change.head);
@@ -144,7 +147,7 @@ export function coreDifference(base, head) {
             }
         });
 
-        return d3.values(relevant);
+        return _values(relevant);
     };
 
 
@@ -170,12 +173,12 @@ export function coreDifference(base, head) {
                     nb = b ? b.nodes : [],
                     diff, i;
 
-                diff = _.difference(nh, nb);
+                diff = _difference(nh, nb);
                 for (i = 0; i < diff.length; i++) {
                     result[diff[i]] = head.hasEntity(diff[i]);
                 }
 
-                diff = _.difference(nb, nh);
+                diff = _difference(nb, nh);
                 for (i = 0; i < diff.length; i++) {
                     result[diff[i]] = head.hasEntity(diff[i]);
                 }

@@ -1,12 +1,13 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { services } from '../services/index';
+import _some from 'lodash-es/some';
+import _throttle from 'lodash-es/throttle';
+import { select as d3_select } from 'd3-selection';
+import { services } from '../services';
 
 
 export function svgMapillarySigns(projection, context, dispatch) {
-    var throttledRedraw = _.throttle(function () { dispatch.call('change'); }, 1000),
+    var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000),
         minZoom = 12,
-        layer = d3.select(null),
+        layer = d3_select(null),
         _mapillary;
 
 
@@ -17,7 +18,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
     }
 
 
-    function getMapillary() {
+    function getService() {
         if (services.mapillary && !_mapillary) {
             _mapillary = services.mapillary;
             _mapillary.event.on('loadedSigns', throttledRedraw);
@@ -29,6 +30,10 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
 
     function showLayer() {
+        var service = getService();
+        if (!service) return;
+
+        service.loadViewer(context);
         editOn();
     }
 
@@ -51,22 +56,36 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
 
     function click(d) {
-        var mapillary = getMapillary();
-        if (!mapillary) return;
+        var service = getService();
+        if (!service) return;
 
         context.map().centerEase(d.loc);
 
-        mapillary
-            .selectedImage(d.key, true)
-            .updateViewer(d.key, context)
+        var selected = service.getSelectedImage();
+        var selectedImageKey = selected && selected.key;
+        var imageKey;
+
+        // Pick one of the images the sign was detected in,
+        // preference given to an image already selected.
+        d.detections.forEach(function(detection) {
+            if (!imageKey || selectedImageKey === detection.image_key) {
+                imageKey = detection.image_key;
+            }
+        });
+
+        service
+            .selectImage(null, imageKey)
+            .updateViewer(imageKey, context)
             .showViewer();
     }
 
 
     function update() {
-        var mapillary = getMapillary(),
-            data = (mapillary ? mapillary.signs(projection) : []),
-            imageKey = mapillary ? mapillary.selectedImage() : null;
+        var service = getService();
+        var data = (service ? service.signs(projection) : []);
+        var viewer = d3_select('#photoviewer');
+        var selected = viewer.empty() ? undefined : viewer.datum();
+        var selectedImageKey = selected && selected.key;
 
         var signs = layer.selectAll('.icon-sign')
             .data(data, function(d) { return d.key; });
@@ -77,29 +96,33 @@ export function svgMapillarySigns(projection, context, dispatch) {
         var enter = signs.enter()
             .append('foreignObject')
             .attr('class', 'icon-sign')
-            .attr('width', '32px')      // for Firefox
-            .attr('height', '32px')     // for Firefox
-            .classed('selected', function(d) { return d.key === imageKey; })
+            .attr('width', '24px')      // for Firefox
+            .attr('height', '24px')     // for Firefox
+            .classed('selected', function(d) {
+                return _some(d.detections, function(detection) {
+                    return detection.image_key === selectedImageKey;
+                });
+            })
             .on('click', click);
 
         enter
             .append('xhtml:body')
             .attr('class', 'icon-sign-body')
-            .html(mapillary.signHTML);
+            .html(service.signHTML);
 
         signs
             .merge(enter)
-            .attr('x', function(d) { return projection(d.loc)[0] - 16; })   // offset by -16px to
-            .attr('y', function(d) { return projection(d.loc)[1] - 16; });  // center signs on loc
+            .attr('x', function(d) { return projection(d.loc)[0] - 12; })   // offset by -12px to
+            .attr('y', function(d) { return projection(d.loc)[1] - 12; });  // center signs on loc
     }
 
 
     function drawSigns(selection) {
         var enabled = svgMapillarySigns.enabled,
-            mapillary = getMapillary();
+            service = getService();
 
         layer = selection.selectAll('.layer-mapillary-signs')
-            .data(mapillary ? [0] : []);
+            .data(service ? [0] : []);
 
         layer.exit()
             .remove();
@@ -111,10 +134,10 @@ export function svgMapillarySigns(projection, context, dispatch) {
             .merge(layer);
 
         if (enabled) {
-            if (mapillary && ~~context.map().zoom() >= minZoom) {
+            if (service && ~~context.map().zoom() >= minZoom) {
                 editOn();
                 update();
-                mapillary.loadSigns(context, projection);
+                service.loadSigns(context, projection);
             } else {
                 editOff();
             }
@@ -136,8 +159,8 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
 
     drawSigns.supported = function() {
-        var mapillary = getMapillary();
-        return (mapillary && mapillary.signsSupported());
+        var service = getService();
+        return (service && service.signsSupported());
     };
 
 

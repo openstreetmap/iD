@@ -1,5 +1,5 @@
 {
     "key": "sport",
-    "type": "combo",
-    "label": "Sport"
+    "type": "semiCombo",
+    "label": "Sports"
 }

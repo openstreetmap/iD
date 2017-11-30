@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import _map from 'lodash-es/map';
+import _uniq from 'lodash-es/uniq';
 import { actionDeleteMultiple } from './delete_multiple';
 
 
@@ -26,7 +27,7 @@ export function actionDeleteRelation(relationId) {
                 }
             });
 
-        _.uniq(_.map(relation.members, 'id')).forEach(function(memberId) {
+        _uniq(_map(relation.members, 'id')).forEach(function(memberId) {
             graph = graph.replace(relation.removeMembersWithID(memberId));
 
             var entity = graph.entity(memberId);
@@ -36,12 +37,6 @@ export function actionDeleteRelation(relationId) {
         });
 
         return graph.remove(relation);
-    };
-
-
-    action.disabled = function(graph) {
-        if (!graph.entity(relationId).isComplete(graph))
-            return 'incomplete_relation';
     };
 
 

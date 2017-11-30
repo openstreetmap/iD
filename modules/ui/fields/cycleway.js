@@ -1,12 +1,19 @@
-import * as d3 from 'd3';
-import { d3combobox } from '../../lib/d3.combobox.js';
-import { utilRebind } from '../../util/rebind';
-import { utilGetSetValue } from '../../util/get_set_value';
+import _keys from 'lodash-es/keys';
+
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { select as d3_select } from 'd3-selection';
+import { d3combobox as d3_combobox } from '../../lib/d3.combobox.js';
+
+import {
+    utilGetSetValue,
+    utilNoAuto,
+    utilRebind
+} from '../../util';
 
 
-export function uiFieldCycleway(field) {
-    var dispatch = d3.dispatch('change'),
-        items = d3.select(null);
+export function uiFieldCycleway(field, context) {
+    var dispatch = d3_dispatch('change'),
+        items = d3_select(null);
 
 
     function cycleway(selection) {
@@ -52,8 +59,13 @@ export function uiFieldCycleway(field) {
             .append('input')
             .attr('type', 'text')
             .attr('class', function(d) { return 'preset-input-cycleway preset-input-' + stripcolon(d); })
+            .call(utilNoAuto)
             .each(function(d) {
-                d3.select(this).call(d3combobox().data(cycleway.options(d)));
+                d3_select(this)
+                    .call(d3_combobox()
+                        .container(context.container())
+                        .data(cycleway.options(d))
+                    );
             });
 
 
@@ -65,8 +77,8 @@ export function uiFieldCycleway(field) {
 
 
     function change() {
-        var left = utilGetSetValue(d3.select('.preset-input-cyclewayleft')),
-            right = utilGetSetValue(d3.select('.preset-input-cyclewayright')),
+        var left = utilGetSetValue(d3_select('.preset-input-cyclewayleft')),
+            right = utilGetSetValue(d3_select('.preset-input-cyclewayright')),
             tag = {};
 
         if (left === 'none' || left === '') { left = undefined; }
@@ -94,7 +106,7 @@ export function uiFieldCycleway(field) {
 
 
     cycleway.options = function() {
-        return d3.keys(field.strings.options).map(function(option) {
+        return _keys(field.strings.options).map(function(option) {
             return {
                 title: field.t('options.' + option + '.description'),
                 value: option

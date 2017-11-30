@@ -1,0 +1,22 @@
+{
+    "icon": "water",
+    "fields": [
+        "operator",
+        "opening_hours",
+        "fee",
+        "supervised",
+        "building_area"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [
+        "rain closet"
+    ],
+    "tags": {
+        "amenity": "shower"
+    },
+    "name": "Shower"
+}

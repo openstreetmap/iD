@@ -1,6 +1,8 @@
 {
     "icon": "farm",
     "fields": [
+        "name",
+        "operator",
         "crop"
     ],
     "geometry": [

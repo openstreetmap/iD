@@ -1,9 +1,9 @@
-import _ from 'lodash';
+import _clone from 'lodash-es/clone';
 import { t } from '../util/locale';
 
 
 export function presetField(id, field) {
-    field = _.clone(field);
+    field = _clone(field);
 
     field.id = id;
 

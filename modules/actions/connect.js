@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { actionDeleteNode } from './delete_node';
 
 
@@ -18,7 +17,8 @@ import { actionDeleteNode } from './delete_node';
 //
 export function actionConnect(nodeIds) {
     return function(graph) {
-        var survivor = graph.entity(_.last(nodeIds));
+        var last = nodeIds[nodeIds.length - 1];
+        var survivor = graph.entity(last);
 
         for (var i = 0; i < nodeIds.length - 1; i++) {
             var node = graph.entity(nodeIds[i]);

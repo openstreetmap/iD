@@ -1,4 +1,5 @@
 {
+    "icon": "railway-rail",
     "geometry": [
         "line"
     ],
@@ -17,6 +18,5 @@
     "tags": {
         "railway": "funicular"
     },
-    "icon": "railway-rail",
     "name": "Funicular"
 }

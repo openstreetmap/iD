@@ -1,6 +1,8 @@
 {
     "icon": "clothing-store",
     "fields": [
+        "name",
+        "clothes",
         "operator",
         "address",
         "building_area",

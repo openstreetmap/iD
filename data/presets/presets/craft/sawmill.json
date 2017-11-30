@@ -1,6 +1,7 @@
 {
-    "icon": "park",
+    "icon": "logging",
     "fields": [
+        "name",
         "operator",
         "address",
         "building_area",

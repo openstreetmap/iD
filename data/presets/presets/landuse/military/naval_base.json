@@ -1,0 +1,34 @@
+{
+    "icon": "poi-military",
+    "fields": [
+        "name"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "military": "naval_base"
+    },
+    "addTags": {
+        "landuse": "military",
+        "military": "naval_base"
+    },
+    "removeTags": {
+        "landuse": "military",
+        "military": "naval_base"
+    },
+    "terms": [
+        "base",
+        "fight",
+        "force",
+        "guard",
+        "marine",
+        "navy",
+        "ship",
+        "sub",
+        "troop",
+        "war"
+    ],
+    "name": "Naval Base"
+}

@@ -59,29 +59,58 @@ export function utilDetect(force) {
     // Added due to incomplete svg style support. See #715
     detected.opera = (detected.browser.toLowerCase() === 'opera' && parseFloat(detected.version) < 15 );
 
-    detected.locale = (navigator.languages && navigator.languages.length)
-        ? navigator.languages[0] : (navigator.language || navigator.userLanguage || 'en-US');
+    detected.locale = (navigator.language || navigator.userLanguage || 'en-US');
+    detected.language = detected.locale.split('-')[0];
+
+    // Search `navigator.languages` for a better locale.. Prefer the first language,
+    // unless the second language is a culture-specific version of the first one, see #3842
+    if (navigator.languages && navigator.languages.length > 0) {
+        var code0 = navigator.languages[0],
+            parts0 = code0.split('-');
+
+        detected.locale = code0;
+        detected.language = parts0[0];
+
+        if (navigator.languages.length > 1 && parts0.length === 1) {
+            var code1 = navigator.languages[1],
+                parts1 = code1.split('-');
+
+            if (parts1[0] === parts0[0]) {
+                detected.locale = code1;
+            }
+        }
+    }
 
     // Loaded locale is stored in currentLocale
     // return that instead (except in the situation where 'en' might override 'en-US')
     var loadedLocale = currentLocale || 'en';
     if (loadedLocale !== 'en') {
         detected.locale = loadedLocale;
+        detected.language = detected.locale.split('-')[0];
     }
 
     // detect text direction
     var q = utilStringQs(window.location.hash.substring(1));
     var lang = dataLocales[detected.locale];
-    if ((lang && lang.rtl) || q.hasOwnProperty('rtl')) {
+    if ((lang && lang.rtl) || (q.rtl === 'true')) {
         detected.textDirection = 'rtl';
     } else {
         detected.textDirection = 'ltr';
     }
     setTextDirection(detected.textDirection);
 
-    detected.host = window.location && (window.location.origin + window.location.pathname);
+    // detect host
+    var loc = window.top.location;
+    var origin = loc.origin;
+    if (!origin) {  // for unpatched IE11
+        origin = loc.protocol + '//' + loc.hostname + (loc.port ? ':' + loc.port: '');
+    }
+
+    detected.host = origin + loc.pathname;
 
     detected.filedrop = (window.FileReader && 'ondrop' in window);
+
+    detected.download = !(detected.ie || detected.browser.toLowerCase() === 'edge');
 
     function nav(x) {
         return navigator.userAgent.indexOf(x) !== -1;

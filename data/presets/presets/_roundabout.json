@@ -3,6 +3,9 @@
         "vertex",
         "line"
     ],
+    "fields": [
+        "name"
+    ],
     "tags": {
         "junction": "roundabout"
     },

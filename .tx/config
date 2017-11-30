@@ -1,0 +1,20 @@
+[main]
+host = https://www.transifex.com
+minimum_perc = 1
+
+[id-editor.core]
+file_filter = .tx/tmp/core/<lang>.yaml
+source_file = data/core.yaml
+source_lang = en
+type = YAML
+
+[id-editor.presets]
+file_filter = .tx/tmp/presets/<lang>.yaml
+source_file = data/presets.yaml
+source_lang = en
+type = YAML
+
+[id-editor.imagery]
+file_filter = .tx/tmp/imagery/<lang>.yaml
+source_lang = en
+type = YAML

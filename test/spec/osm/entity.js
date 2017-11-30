@@ -243,4 +243,17 @@ describe('iD.osmEntity', function () {
             expect(iD.Entity({tags: {'tiger:source': 'blah', 'tiger:foo': 'bar'}}).hasInterestingTags()).to.equal(false);
         });
     });
+
+    describe('#isHighwayIntersection', function () {
+        it('returns false', function () {
+            expect(iD.Entity().isHighwayIntersection()).to.be.false;
+        });
+    });
+
+    describe('#isDegenerate', function () {
+        it('returns true', function () {
+            expect(iD.Entity().isDegenerate()).to.be.true;
+        });
+    });
+
 });

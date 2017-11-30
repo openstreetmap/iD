@@ -1,16 +1,16 @@
 {
+    "icon": "park",
     "fields": [
         "leaf_type",
         "leaf_cycle",
         "denotation"
     ],
-    "icon": "park",
     "geometry": [
         "line"
     ],
-    "terms": [],
     "tags": {
         "natural": "tree_row"
     },
+    "terms": [],
     "name": "Tree row"
 }

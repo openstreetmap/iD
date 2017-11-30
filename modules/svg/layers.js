@@ -1,22 +1,30 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { utilRebind } from '../util/rebind';
-import { utilGetDimensions, utilSetDimensions } from '../util/dimensions';
+import _difference from 'lodash-es/difference';
+import _find from 'lodash-es/find';
+import _map from 'lodash-es/map';
+import _reject from 'lodash-es/reject';
+
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { select as d3_select } from 'd3-selection';
+
 import { svgDebug } from './debug';
 import { svgGpx } from './gpx';
 import { svgMapillaryImages } from './mapillary_images';
 import { svgMapillarySigns } from './mapillary_signs';
+import { svgOpenstreetcamImages } from './openstreetcam_images';
 import { svgOsm } from './osm';
+import { utilRebind } from '../util/rebind';
+import { utilGetDimensions, utilSetDimensions } from '../util/dimensions';
 
 
 export function svgLayers(projection, context) {
-    var dispatch = d3.dispatch('change'),
-        svg = d3.select(null),
+    var dispatch = d3_dispatch('change'),
+        svg = d3_select(null),
         layers = [
             { id: 'osm', layer: svgOsm(projection, context, dispatch) },
             { id: 'gpx', layer: svgGpx(projection, context, dispatch) },
             { id: 'mapillary-images', layer: svgMapillaryImages(projection, context, dispatch) },
             { id: 'mapillary-signs',  layer: svgMapillarySigns(projection, context, dispatch) },
+            { id: 'openstreetcam-images', layer: svgOpenstreetcamImages(projection, context, dispatch) },
             { id: 'debug', layer: svgDebug(projection, context, dispatch) }
         ];
 
@@ -47,7 +55,7 @@ export function svgLayers(projection, context) {
             .append('g')
             .attr('class', function(d) { return 'data-layer data-layer-' + d.id; })
             .merge(groups)
-            .each(function(d) { d3.select(this).call(d.layer); });
+            .each(function(d) { d3_select(this).call(d.layer); });
     }
 
 
@@ -57,14 +65,14 @@ export function svgLayers(projection, context) {
 
 
     drawLayers.layer = function(id) {
-        var obj = _.find(layers, function(o) {return o.id === id;});
+        var obj = _find(layers, function(o) {return o.id === id;});
         return obj && obj.layer;
     };
 
 
     drawLayers.only = function(what) {
         var arr = [].concat(what);
-        drawLayers.remove(_.difference(_.map(layers, 'id'), arr));
+        drawLayers.remove(_difference(_map(layers, 'id'), arr));
         return this;
     };
 
@@ -72,7 +80,7 @@ export function svgLayers(projection, context) {
     drawLayers.remove = function(what) {
         var arr = [].concat(what);
         arr.forEach(function(id) {
-            layers = _.reject(layers, function(o) {return o.id === id;});
+            layers = _reject(layers, function(o) {return o.id === id;});
         });
         dispatch.call('change');
         return this;

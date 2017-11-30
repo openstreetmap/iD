@@ -1,7 +1,7 @@
 {
+    "icon": "restriction",
     "geometry": "relation",
     "name": "Restriction Features",
-    "icon": "restriction",
     "members": [
         "type/restriction/no_left_turn",
         "type/restriction/no_right_turn",

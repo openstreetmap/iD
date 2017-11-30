@@ -1,7 +1,14 @@
-import * as d3 from 'd3';
-import { d3keybinding } from '../lib/d3.keybinding.js';
+import _debounce from 'lodash-es/debounce';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+
 import { t, textDirection } from '../util/locale';
-import { svgIcon } from '../svg/index';
+import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
 import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
@@ -11,18 +18,18 @@ export function uiUndoRedo(context) {
     var commands = [{
         id: 'undo',
         cmd: uiCmd('⌘Z'),
-        action: function() { if (!(context.inIntro() || saving())) context.undo(); },
+        action: function() { if (editable()) context.undo(); },
         annotation: function() { return context.history().undoAnnotation(); }
     }, {
         id: 'redo',
         cmd: uiCmd('⌘⇧Z'),
-        action: function() {if (!(context.inIntro() || saving())) context.redo(); },
+        action: function() { if (editable()) context.redo(); },
         annotation: function() { return context.history().redoAnnotation(); }
     }];
 
 
-    function saving() {
-        return context.mode().id === 'save';
+    function editable() {
+        return context.editable() && context.mode().id !== 'save';
     }
 
 
@@ -40,7 +47,7 @@ export function uiUndoRedo(context) {
             .data(commands)
             .enter()
             .append('button')
-            .attr('class', 'col6 disabled')
+            .attr('class', function(d) { return 'col6 disabled ' + d.id + '-button'; })
             .on('click', function(d) { return d.action(); })
             .call(tooltipBehavior);
 
@@ -53,16 +60,23 @@ export function uiUndoRedo(context) {
                     iconName = 'undo';
                 }
             }
-            d3.select(this)
+            d3_select(this)
                 .call(svgIcon('#icon-' + iconName));
         });
 
-        var keybinding = d3keybinding('undo')
-            .on(commands[0].cmd, function() { d3.event.preventDefault(); commands[0].action(); })
-            .on(commands[1].cmd, function() { d3.event.preventDefault(); commands[1].action(); });
+        var keybinding = d3_keybinding('undo')
+            .on(commands[0].cmd, function() { d3_event.preventDefault(); commands[0].action(); })
+            .on(commands[1].cmd, function() { d3_event.preventDefault(); commands[1].action(); });
 
-        d3.select(document)
+        d3_select(document)
             .call(keybinding);
+
+
+        var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
+
+        context.map()
+            .on('move.undo_redo', debouncedUpdate)
+            .on('drawn.undo_redo', debouncedUpdate);
 
         context.history()
             .on('change.undo_redo', update);
@@ -70,12 +84,13 @@ export function uiUndoRedo(context) {
         context
             .on('enter.undo_redo', update);
 
+
         function update() {
             buttons
-                .property('disabled', saving())
+                .property('disabled', !editable())
                 .classed('disabled', function(d) { return !d.annotation(); })
                 .each(function() {
-                    var selection = d3.select(this);
+                    var selection = d3_select(this);
                     if (selection.property('tooltipVisible')) {
                         selection.call(tooltipBehavior.show);
                     }

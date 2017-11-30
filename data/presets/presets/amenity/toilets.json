@@ -1,10 +1,10 @@
 {
-    "icon": "toilets",
+    "icon": "toilet",
     "fields": [
         "toilets/disposal",
         "operator",
         "building_area",
-        "access_toilets",
+        "access_simple",
         "gender",
         "fee",
         "diaper"

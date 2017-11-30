@@ -1,0 +1,24 @@
+{
+    "icon": "swimming",
+    "fields": [
+        "name",
+        "operator",
+        "opening_hours"
+    ],
+    "geometry": [
+        "line",
+        "area"
+    ],
+    "terms": [
+        "theme park",
+        "aquatic park",
+        "water park",
+        "flumes",
+        "water chutes",
+        "hydroslides"
+    ],
+    "tags": {
+        "attraction": "water_slide"
+    },
+    "name": "Water Slide"
+}

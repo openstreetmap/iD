@@ -1,8 +1,10 @@
 {
-    "icon": "park2",
+    "icon": "park-alt1",
     "fields": [
+        "name",
         "leaf_type",
-        "leaf_cycle"
+        "leaf_cycle",
+        "produce"
     ],
     "geometry": [
         "area"

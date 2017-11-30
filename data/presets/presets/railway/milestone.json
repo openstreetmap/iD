@@ -1,0 +1,18 @@
+{
+    "icon": "poi-milestone",
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "fields": [
+        "milestone_position"
+    ],
+    "tags": {
+        "railway": "milestone"
+    },
+    "terms": [
+        "milestone",
+        "marker"
+    ],
+    "name": "Railway Milestone"
+}

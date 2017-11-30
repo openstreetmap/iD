@@ -1,6 +1,7 @@
 {
     "icon": "harbor",
     "fields": [
+        "name",
         "operator",
         "address",
         "capacity",

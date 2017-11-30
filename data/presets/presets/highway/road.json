@@ -1,13 +1,14 @@
 {
     "icon": "highway-road",
     "fields": [
+        "name",
         "oneway",
         "maxspeed",
-        "structure",
-        "access",
         "lanes",
         "surface",
-        "maxheight"
+        "structure",
+        "maxheight",
+        "access"
     ],
     "geometry": [
         "line"

@@ -1,8 +1,17 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { geoExtent, geoPointInPolygon } from '../geo/index';
-import { modeSelect } from '../modes/index';
-import { uiLasso } from '../ui/index';
+import _map from 'lodash-es/map';
+
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import {
+    geoExtent,
+    geoPointInPolygon
+} from '../geo';
+
+import { modeSelect } from '../modes';
+import { uiLasso } from '../ui';
 
 
 export function behaviorLasso(context) {
@@ -13,14 +22,14 @@ export function behaviorLasso(context) {
 
         function mousedown() {
             var button = 0;  // left
-            if (d3.event.button === button && d3.event.shiftKey === true) {
+            if (d3_event.button === button && d3_event.shiftKey === true) {
                 lasso = null;
 
-                selection
+                d3_select(window)
                     .on('mousemove.lasso', mousemove)
                     .on('mouseup.lasso', mouseup);
 
-                d3.event.stopPropagation();
+                d3_event.stopPropagation();
             }
         }
 
@@ -49,7 +58,7 @@ export function behaviorLasso(context) {
                 bounds = lasso.extent().map(context.projection.invert),
                 extent = geoExtent(normalize(bounds[0], bounds[1]));
 
-            return _.map(context.intersects(extent).filter(function(entity) {
+            return _map(context.intersects(extent).filter(function(entity) {
                 return entity.type === 'node' &&
                     geoPointInPolygon(context.projection(entity.loc), lasso.coordinates) &&
                     !context.features().isHidden(entity, graph, entity.geometry(graph));
@@ -58,7 +67,7 @@ export function behaviorLasso(context) {
 
 
         function mouseup() {
-            selection
+            d3_select(window)
                 .on('mousemove.lasso', null)
                 .on('mouseup.lasso', null);
 

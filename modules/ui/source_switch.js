@@ -1,6 +1,10 @@
-import * as d3 from 'd3';
+import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
 import { t } from '../util/locale';
-import { modeBrowse } from '../modes/index';
+import { modeBrowse } from '../modes';
 
 
 export function uiSourceSwitch(context) {
@@ -8,23 +12,29 @@ export function uiSourceSwitch(context) {
 
 
     function click() {
-        d3.event.preventDefault();
+        d3_event.preventDefault();
+
+        var osm = context.connection();
+        if (!osm) return;
+
+        if (context.inIntro()) return;
 
         if (context.history().hasChanges() &&
             !window.confirm(t('source_switch.lose_changes'))) return;
 
-        var live = d3.select(this)
+        var isLive = d3_select(this)
             .classed('live');
 
-        context.connection()
-            .switch(live ? keys[1] : keys[0]);
-
+        isLive = !isLive;
         context.enter(modeBrowse(context));
-        context.flush();
+        context.history().clearSaved();          // remove saved history
+        context.flush();                         // remove stored data
 
-        d3.select(this)
-            .text(live ? t('source_switch.dev') : t('source_switch.live'))
-            .classed('live', !live);
+        d3_select(this)
+            .text(isLive ? t('source_switch.live') : t('source_switch.dev'))
+            .classed('live', isLive);
+
+        osm.switch(isLive ? keys[0] : keys[1]);  // switch connection (warning: dispatches 'change' event)
     }
 
     var sourceSwitch = function(selection) {

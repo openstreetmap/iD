@@ -1,17 +1,26 @@
-import _ from 'lodash';
-import { geoPolygonContainsPolygon } from '../geo/index';
-import { osmJoinWays, osmRelation } from '../osm/index';
+import _extend from 'lodash-es/extend';
+import _groupBy from 'lodash-es/groupBy';
+import _map from 'lodash-es/map';
+import _omit from 'lodash-es/omit';
+import _some from 'lodash-es/some';
+
+import { geoPolygonContainsPolygon } from '../geo';
+
+import {
+    osmJoinWays,
+    osmRelation
+} from '../osm';
 
 
 export function actionMergePolygon(ids, newRelationId) {
 
     function groupEntities(graph) {
         var entities = ids.map(function (id) { return graph.entity(id); });
-        return _.extend({
+        return _extend({
                 closedWay: [],
                 multipolygon: [],
                 other: []
-            }, _.groupBy(entities, function(entity) {
+            }, _groupBy(entities, function(entity) {
                 if (entity.type === 'way' && entity.isClosed()) {
                     return 'closedWay';
                 } else if (entity.type === 'relation' && entity.isMultipolygon()) {
@@ -45,8 +54,8 @@ export function actionMergePolygon(ids, newRelationId) {
             return polygons.map(function(d, n) {
                 if (i === n) return null;
                 return geoPolygonContainsPolygon(
-                    _.map(d.nodes, 'loc'),
-                    _.map(w.nodes, 'loc'));
+                    _map(d.nodes, 'loc'),
+                    _map(w.nodes, 'loc'));
             });
         });
 
@@ -61,7 +70,7 @@ export function actionMergePolygon(ids, newRelationId) {
         }
 
         function isContained(d, i) {
-            return _.some(contained[i]);
+            return _some(contained[i]);
         }
 
         function filterContained(d) {
@@ -104,7 +113,7 @@ export function actionMergePolygon(ids, newRelationId) {
 
         return graph.replace(relation.update({
             members: members,
-            tags: _.omit(relation.tags, 'area')
+            tags: _omit(relation.tags, 'area')
         }));
     };
 

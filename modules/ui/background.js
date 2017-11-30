@@ -1,12 +1,23 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
-import { d3keybinding } from '../lib/d3.keybinding.js';
+import _debounce from 'lodash-es/debounce';
+
+import {
+    descending as d3_descending,
+    ascending as d3_ascending
+} from 'd3-array';
+
+import {
+    event as d3_event,
+    select as d3_select,
+    selectAll as d3_selectAll
+} from 'd3-selection';
+
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+
 import { t, textDirection } from '../util/locale';
-import { rendererBackgroundSource } from '../renderer/index';
-import { geoMetersToOffset, geoOffsetToMeters } from '../geo/index';
+import { geoMetersToOffset, geoOffsetToMeters } from '../geo';
 import { utilDetect } from '../util/detect';
-import { utilSetTransform } from '../util/index';
-import { svgIcon } from '../svg/index';
+import { utilSetTransform, utilCallWhenIdle } from '../util';
+import { svgIcon } from '../svg';
 import { uiMapInMap } from './map_in_map';
 import { uiCmd } from './cmd';
 import { uiTooltipHtml } from './tooltipHtml';
@@ -14,7 +25,7 @@ import { tooltip } from '../util/tooltip';
 
 
 export function uiBackground(context) {
-    var key = 'B',
+    var key = t('background.key'),
         detected = utilDetect(),
         opacities = [1, 0.75, 0.5, 0.25],
         directions = [
@@ -24,7 +35,7 @@ export function uiBackground(context) {
             ['bottom', [0, 0.5]]],
         opacityDefault = (context.storage('background-opacity') !== null) ?
             (+context.storage('background-opacity')) : 1.0,
-        customTemplate = context.storage('background-custom-template') || '',
+        customSource = context.background().findSource('custom'),
         previous;
 
     // Can be 0 from <1.3.0 use or due to issue #1923.
@@ -36,7 +47,7 @@ export function uiBackground(context) {
         function sortSources(a, b) {
             return a.best() && !b.best() ? -1
                 : b.best() && !a.best() ? 1
-                : d3.descending(a.area(), b.area()) || d3.ascending(a.name(), b.name()) || 0;
+                : d3_descending(a.area(), b.area()) || d3_ascending(a.name(), b.name()) || 0;
         }
 
 
@@ -59,8 +70,11 @@ export function uiBackground(context) {
 
         function setTooltips(selection) {
             selection.each(function(d, i, nodes) {
-                var item = d3.select(this).select('label'),
-                    placement = (i < nodes.length / 2) ? 'bottom' : 'top';
+                var item = d3_select(this).select('label'),
+                    span = item.select('span'),
+                    placement = (i < nodes.length / 2) ? 'bottom' : 'top',
+                    description = d.description(),
+                    isOverflowing = (span.property('clientWidth') !== span.property('scrollWidth'));
 
                 if (d === previous) {
                     item.call(tooltip()
@@ -68,13 +82,13 @@ export function uiBackground(context) {
                         .html(true)
                         .title(function() {
                             var tip = '<div>' + t('background.switch') + '</div>';
-                            return uiTooltipHtml(tip, uiCmd('⌘B'));
+                            return uiTooltipHtml(tip, uiCmd('⌘' + key));
                         })
                     );
-                } else if (d.description) {
+                } else if (description || isOverflowing) {
                     item.call(tooltip()
                         .placement(placement)
-                        .title(d.description)
+                        .title(description || d.name())
                     );
                 } else {
                     item.call(tooltip().destroy);
@@ -88,7 +102,7 @@ export function uiBackground(context) {
                 return context.background().showsLayer(d);
             }
 
-            content.selectAll('.layer, .custom_layer')
+            content.selectAll('.layer')
                 .classed('active', active)
                 .classed('switch', function(d) { return d === previous; })
                 .call(setTooltips)
@@ -98,7 +112,11 @@ export function uiBackground(context) {
 
 
         function clickSetSource(d) {
-            d3.event.preventDefault();
+            if (d.id === 'custom' && !d.template()) {
+                return editCustom();
+            }
+
+            d3_event.preventDefault();
             previous = context.background().baseLayerSource();
             context.background().baseLayerSource(d);
             selectLayer();
@@ -107,26 +125,25 @@ export function uiBackground(context) {
 
 
         function editCustom() {
-            d3.event.preventDefault();
-            var template = window.prompt(t('background.custom_prompt'), customTemplate);
+            d3_event.preventDefault();
+            var example = 'https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png';
+            var template = window.prompt(
+                t('background.custom_prompt', { example: example }),
+                customSource.template() || example
+            );
+
             if (template) {
-                setCustom(template);
+                context.storage('background-custom-template', template);
+                customSource.template(template);
+                clickSetSource(customSource);
             } else {
                 selectLayer();
             }
         }
 
 
-        function setCustom(template) {
-            context.storage('background-custom-template', template);
-            var d = rendererBackgroundSource.Custom(template);
-            content.selectAll('.custom_layer').datum(d);
-            clickSetSource(d);
-        }
-
-
         function clickSetOverlay(d) {
-            d3.event.preventDefault();
+            d3_event.preventDefault();
             context.background().toggleOverlayLayer(d);
             selectLayer();
             document.activeElement.blur();
@@ -145,9 +162,19 @@ export function uiBackground(context) {
                 .remove();
 
             var enter = layerLinks.enter()
-                .insert('li', '.custom_layer')
+                .append('li')
                 .attr('class', 'layer')
+                .classed('layer-custom', function(d) { return d.id === 'custom'; })
                 .classed('best', function(d) { return d.best(); });
+
+            enter.filter(function(d) { return d.id === 'custom'; })
+                .append('button')
+                .attr('class', 'layer-browse')
+                .call(tooltip()
+                    .title(t('background.custom_button'))
+                    .placement((textDirection === 'rtl') ? 'right' : 'left'))
+                .on('click', editCustom)
+                .call(svgIcon('#icon-search'));
 
             enter.filter(function(d) { return d.best(); })
                 .append('div')
@@ -179,16 +206,10 @@ export function uiBackground(context) {
 
 
         function update() {
-            backgroundList.call(drawList, 'radio', clickSetSource, function(d) { return !d.overlay; });
-            overlayList.call(drawList, 'checkbox', clickSetOverlay, function(d) { return d.overlay; });
+            backgroundList.call(drawList, 'radio', clickSetSource, function(d) { return !d.isHidden() && !d.overlay; });
+            overlayList.call(drawList, 'checkbox', clickSetOverlay, function(d) { return !d.isHidden() && d.overlay; });
 
             selectLayer();
-
-            var source = context.background().baseLayerSource();
-            if (source.id === 'custom') {
-                customTemplate = source.template;
-            }
-
             updateOffsetVal();
         }
 
@@ -198,12 +219,12 @@ export function uiBackground(context) {
                 x = +meters[0].toFixed(2),
                 y = +meters[1].toFixed(2);
 
-            d3.selectAll('.nudge-inner-rect')
+            d3_selectAll('.nudge-inner-rect')
                 .select('input')
                 .classed('error', false)
                 .property('value', x + ', ' + y);
 
-            d3.selectAll('.nudge-reset')
+            d3_selectAll('.nudge-reset')
                 .classed('disabled', function() {
                     return (x === 0 && y === 0);
                 });
@@ -211,7 +232,7 @@ export function uiBackground(context) {
 
 
         function resetOffset() {
-            if (d3.event.button !== 0) return;
+            if (d3_event.button !== 0) return;
             context.background().offset([0, 0]);
             updateOffsetVal();
         }
@@ -224,7 +245,7 @@ export function uiBackground(context) {
 
 
         function buttonOffset(d) {
-            if (d3.event.button !== 0) return;
+            if (d3_event.button !== 0) return;
             var timeout = window.setTimeout(function() {
                     interval = window.setInterval(nudge.bind(null, d), 100);
                 }, 500),
@@ -233,12 +254,12 @@ export function uiBackground(context) {
             function doneNudge() {
                 window.clearTimeout(timeout);
                 window.clearInterval(interval);
-                d3.select(window)
+                d3_select(window)
                     .on('mouseup.buttonoffset', null, true)
                     .on('mousedown.buttonoffset', null, true);
             }
 
-            d3.select(window)
+            d3_select(window)
                 .on('mouseup.buttonoffset', doneNudge, true)
                 .on('mousedown.buttonoffset', doneNudge, true);
 
@@ -247,8 +268,8 @@ export function uiBackground(context) {
 
 
         function inputOffset() {
-            if (d3.event.button !== 0) return;
-            var input = d3.select(this);
+            if (d3_event.button !== 0) return;
+            var input = d3_select(this);
             var d = input.node().value;
 
             if (d === '') return resetOffset();
@@ -269,16 +290,16 @@ export function uiBackground(context) {
 
 
         function dragOffset() {
-            if (d3.event.button !== 0) return;
-            var origin = [d3.event.clientX, d3.event.clientY];
+            if (d3_event.button !== 0) return;
+            var origin = [d3_event.clientX, d3_event.clientY];
 
             context.container()
                 .append('div')
                 .attr('class', 'nudge-surface');
 
-            d3.select(window)
+            d3_select(window)
                 .on('mousemove.offset', function() {
-                    var latest = [d3.event.clientX, d3.event.clientY];
+                    var latest = [d3_event.clientX, d3_event.clientY];
                     var d = [
                         -(origin[0] - latest[0]) / 4,
                         -(origin[1] - latest[1]) / 4
@@ -288,16 +309,16 @@ export function uiBackground(context) {
                     nudge(d);
                 })
                 .on('mouseup.offset', function() {
-                    if (d3.event.button !== 0) return;
-                    d3.selectAll('.nudge-surface')
+                    if (d3_event.button !== 0) return;
+                    d3_selectAll('.nudge-surface')
                         .remove();
 
-                    d3.select(window)
+                    d3_select(window)
                         .on('mousemove.offset', null)
                         .on('mouseup.offset', null);
                 });
 
-            d3.event.preventDefault();
+            d3_event.preventDefault();
         }
 
 
@@ -307,13 +328,19 @@ export function uiBackground(context) {
 
 
         function toggle() {
-            if (d3.event) d3.event.preventDefault();
+            if (d3_event) {
+                d3_event.preventDefault();
+            }
             tooltipBehavior.hide(button);
             setVisible(!button.classed('active'));
         }
 
 
         function quickSwitch() {
+            if (d3_event) {
+                d3_event.stopImmediatePropagation();
+                d3_event.preventDefault();
+            }
             if (previous) {
                 clickSetSource(previous);
             }
@@ -326,15 +353,21 @@ export function uiBackground(context) {
                 shown = show;
 
                 if (show) {
-                    selection.on('mousedown.background-inside', function() {
-                        d3.event.stopPropagation();
-                    });
+                    selection
+                        .on('mousedown.background-inside', function() {
+                            d3_event.stopPropagation();
+                        });
+
                     content
                         .style('display', 'block')
                         .style('right', '-300px')
                         .transition()
                         .duration(200)
                         .style('right', '0px');
+
+                    content.selectAll('.layer')
+                        .call(setTooltips);
+
                 } else {
                     content
                         .style('display', 'block')
@@ -343,9 +376,11 @@ export function uiBackground(context) {
                         .duration(200)
                         .style('right', '-300px')
                         .on('end', function() {
-                            d3.select(this).style('display', 'none');
+                            d3_select(this).style('display', 'none');
                         });
-                    selection.on('mousedown.background-inside', null);
+
+                    selection
+                        .on('mousedown.background-inside', null);
                 }
             }
         }
@@ -397,45 +432,12 @@ export function uiBackground(context) {
             .style('opacity', function(d) { return 1.25 - d; });
 
 
-        /* background switcher */
+        /* background list */
 
         var backgroundList = content
             .append('ul')
             .attr('class', 'layer-list')
             .attr('dir', 'auto');
-
-        var custom = backgroundList
-            .append('li')
-            .attr('class', 'custom_layer')
-            .datum(rendererBackgroundSource.Custom());
-
-        custom
-            .append('button')
-            .attr('class', 'layer-browse')
-            .call(tooltip()
-                .title(t('background.custom_button'))
-                .placement((textDirection === 'rtl') ? 'right' : 'left'))
-            .on('click', editCustom)
-            .call(svgIcon('#icon-search'));
-
-        var label = custom
-            .append('label');
-
-        label
-            .append('input')
-            .attr('type', 'radio')
-            .attr('name', 'layers')
-            .on('change', function () {
-                if (customTemplate) {
-                    setCustom(customTemplate);
-                } else {
-                    editCustom();
-                }
-            });
-
-        label
-            .append('span')
-            .text(t('background.custom'));
 
         content
             .append('div')
@@ -447,6 +449,9 @@ export function uiBackground(context) {
             .attr('href', 'https://github.com/openstreetmap/iD/blob/master/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
             .append('span')
             .text(t('background.imagery_source_faq'));
+
+
+        /* overlay list */
 
         var overlayList = content
             .append('ul')
@@ -463,7 +468,7 @@ export function uiBackground(context) {
             .append('label')
             .call(tooltip()
                 .html(true)
-                .title(uiTooltipHtml(t('background.minimap.tooltip'), '/'))
+                .title(uiTooltipHtml(t('background.minimap.tooltip'), t('background.minimap.key')))
                 .placement('top')
             );
 
@@ -473,7 +478,7 @@ export function uiBackground(context) {
             .attr('type', 'checkbox')
             .on('change', function() {
                 uiMapInMap.toggle();
-                d3.event.preventDefault();
+                d3_event.preventDefault();
             });
 
         minimapLabel
@@ -494,11 +499,11 @@ export function uiBackground(context) {
             .classed('hide-toggle', true)
             .classed('expanded', false)
             .on('click', function() {
-                if (d3.event.button !== 0) return;
-                var exp = d3.select(this).classed('expanded');
+                if (d3_event.button !== 0) return;
+                var exp = d3_select(this).classed('expanded');
                 nudgeContainer.style('display', exp ? 'none' : 'block');
-                d3.select(this).classed('expanded', !exp);
-                d3.event.preventDefault();
+                d3_select(this).classed('expanded', !exp);
+                d3_event.preventDefault();
             });
 
         var nudgeContainer = adjustments
@@ -522,8 +527,8 @@ export function uiBackground(context) {
             .append('input')
             .on('change', inputOffset)
             .on('mousedown', function() {
-                if (d3.event.button !== 0) return;
-                d3.event.stopPropagation();
+                if (d3_event.button !== 0) return;
+                d3_event.stopPropagation();
             });
 
         nudgeContainer
@@ -533,7 +538,7 @@ export function uiBackground(context) {
             .append('button')
             .attr('class', function(d) { return d[0] + ' nudge'; })
             .on('mousedown', function(d) {
-                if (d3.event.button !== 0) return;
+                if (d3_event.button !== 0) return;
                 buttonOffset(d[1]);
             });
 
@@ -547,7 +552,7 @@ export function uiBackground(context) {
             );
 
         context.map()
-            .on('move.background-update', _.debounce(update, 1000));
+            .on('move.background-update', _debounce(utilCallWhenIdle(update), 1000));
 
         context.background()
             .on('change.background-update', update);
@@ -556,17 +561,13 @@ export function uiBackground(context) {
         update();
         setOpacity(opacityDefault);
 
-        var keybinding = d3keybinding('background')
+        var keybinding = d3_keybinding('background')
             .on(key, toggle)
-            .on(uiCmd('⌘B'), quickSwitch)
-            .on('F', hide)
-            .on('H', hide);
+            .on(uiCmd('⌘' + key), quickSwitch)
+            .on([t('map_data.key'), t('help.key')], hide);
 
-        d3.select(document)
+        d3_select(document)
             .call(keybinding);
-
-        context.surface().on('mousedown.background-outside', hide);
-        context.container().on('mousedown.background-outside', hide);
     }
 
     return background;

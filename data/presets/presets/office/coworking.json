@@ -1,0 +1,28 @@
+{
+    "icon": "commercial",
+    "fields": [
+        "name",
+        "address",
+        "building_area",
+        "opening_hours",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "coworking",
+        "office"
+    ],
+    "tags": {
+        "office": "coworking"
+    },
+    "reference": {
+        "key": "amenity",
+        "value": "coworking_space"
+    },
+    "name": "Coworking Space"
+}

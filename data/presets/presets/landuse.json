@@ -1,5 +1,6 @@
 {
     "fields": [
+        "name",
         "landuse"
     ],
     "geometry": [
@@ -8,5 +9,6 @@
     "tags": {
         "landuse": "*"
     },
+    "matchScore": 0.9,
     "name": "Land Use"
 }

@@ -1,0 +1,19 @@
+{
+    "icon": "poi-elevator",
+    "fields": [
+        "access_simple",
+        "opening_hours",
+        "maxweight",
+        "ref"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "highway": "elevator"
+    },
+    "terms": [
+        "lift"
+    ],
+    "name": "Elevator"
+}

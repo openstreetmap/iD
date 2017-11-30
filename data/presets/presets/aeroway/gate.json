@@ -3,9 +3,11 @@
     "geometry": [
         "point"
     ],
-    "fields": ["ref"],
+    "fields": [
+        "ref_aeroway_gate"
+    ],
     "tags": {
         "aeroway": "gate"
     },
-    "name": "Airport gate"
+    "name": "Airport Gate"
 }

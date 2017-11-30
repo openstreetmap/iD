@@ -1,6 +1,7 @@
 {
     "icon": "school",
     "fields": [
+        "name",
         "operator",
         "address"
     ],

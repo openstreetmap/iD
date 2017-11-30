@@ -1,5 +1,5 @@
-import * as d3 from 'd3';
-import { geoExtent } from '../geo/index';
+import { select as d3_select } from 'd3-selection';
+import { geoExtent } from '../geo';
 import { uiToggle } from './toggle';
 
 
@@ -51,7 +51,7 @@ export function uiLasso(context) {
     lasso.close = function() {
         if (group) {
             group.call(uiToggle(false, function() {
-                d3.select(this).remove();
+                d3_select(this).remove();
             }));
         }
         context.container().classed('lasso', false);

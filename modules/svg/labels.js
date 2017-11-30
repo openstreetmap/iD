@@ -1,20 +1,34 @@
-import * as d3 from 'd3';
-import _ from 'lodash';
+import _map from 'lodash-es/map';
+import _some from 'lodash-es/some';
+import _throttle from 'lodash-es/throttle';
+
+import { geoPath as d3_geoPath } from 'd3-geo';
+
 import rbush from 'rbush';
+import { dataFeatureIcons } from '../../data';
+import { textDirection } from '../util/locale';
+
 import {
     geoExtent,
     geoEuclideanDistance,
     geoInterp,
     geoPolygonIntersectsPolygon,
     geoPathLength
-} from '../geo/index';
-import { osmEntity } from '../osm/index';
+} from '../geo';
+
+import { osmEntity } from '../osm';
 import { utilDetect } from '../util/detect';
-import { utilDisplayName, utilEntitySelector } from '../util/index';
+
+import {
+    utilDisplayName,
+    utilDisplayNameForPath,
+    utilEntitySelector,
+    utilCallWhenIdle
+} from '../util';
 
 
 export function svgLabels(projection, context) {
-    var path = d3.geoPath(projection),
+    var path = d3_geoPath(projection),
         detected = utilDetect(),
         baselineHack = (detected.ie || detected.browser.toLowerCase() === 'edge'),
         rdrawn = rbush(),
@@ -61,7 +75,7 @@ export function svgLabels(projection, context) {
 
     function blacklisted(preset) {
         var noIcons = ['building', 'landuse', 'natural'];
-        return _.some(noIcons, function(s) {
+        return _some(noIcons, function(s) {
             return preset.id.indexOf(s) >= 0;
         });
     }
@@ -134,7 +148,7 @@ export function svgLabels(projection, context) {
             .data(entities, osmEntity.key)
             .attr('startOffset', '50%')
             .attr('xlink:href', function(d) { return '#labelpath-' + d.id; })
-            .text(utilDisplayName);
+            .text(utilDisplayNameForPath);
     }
 
 
@@ -176,7 +190,7 @@ export function svgLabels(projection, context) {
 
 
     function drawAreaIcons(selection, entities, filter, classes, labels) {
-        var icons = selection.selectAll('use')
+        var icons = selection.selectAll('use.' + classes)
             .filter(filter)
             .data(entities, osmEntity.key);
 
@@ -185,16 +199,23 @@ export function svgLabels(projection, context) {
 
         icons = icons.enter()
             .append('use')
-            .attr('class', 'icon areaicon')
-            .attr('width', '18px')
-            .attr('height', '18px')
+            .attr('class', 'icon ' + classes)
+            .attr('width', '17px')
+            .attr('height', '17px')
             .merge(icons);
 
         icons
             .attr('transform', get(labels, 'transform'))
             .attr('xlink:href', function(d) {
-                var icon = context.presets().match(d, context.graph()).icon;
-                return '#' + icon + (icon === 'hairdresser' ? '-24': '-18');    // workaround: maki hairdresser-18 broken?
+                var preset = context.presets().match(d, context.graph()),
+                    picon = preset && preset.icon;
+
+                if (!picon)
+                    return '';
+                else {
+                    var isMaki = dataFeatureIcons.indexOf(picon) !== -1;
+                    return '#' + picon + (isMaki ? '-15' : '');
+                }
             });
     }
 
@@ -238,7 +259,7 @@ export function svgLabels(projection, context) {
                 .merge(debugboxes);
 
             debugboxes
-                .attr('d', d3.geoPath());
+                .attr('d', d3_geoPath());
         }
     }
 
@@ -313,9 +334,11 @@ export function svgLabels(projection, context) {
                 entity = labelable[k][i];
                 geometry = entity.geometry(graph);
 
-                var name = utilDisplayName(entity),
+                var getName = (geometry === 'line') ? utilDisplayNameForPath : utilDisplayName,
+                    name = getName(entity),
                     width = name && textWidth(name, fontSize),
-                    p;
+                    p = null;
+
                 if (geometry === 'point') {
                     p = getPointLabel(entity, width, fontSize, geometry);
                 } else if (geometry === 'vertex' && !lowZoom) {
@@ -346,7 +369,6 @@ export function svgLabels(projection, context) {
 
             var coord = projection(entity.loc),
                 margin = 2,
-                textDirection = detected.textDirection,
                 offset = pointOffsets[textDirection],
                 p = {
                     height: height,
@@ -381,7 +403,7 @@ export function svgLabels(projection, context) {
 
         function getLineLabel(entity, width, height) {
             var viewport = geoExtent(context.projection.clipExtent()).polygon(),
-                nodes = _.map(graph.childNodes(entity), 'loc').map(projection),
+                nodes = _map(graph.childNodes(entity), 'loc').map(projection),
                 length = geoPathLength(nodes);
 
             if (length < width + 20) return;
@@ -490,47 +512,65 @@ export function svgLabels(projection, context) {
         function getAreaLabel(entity, width, height) {
             var centroid = path.centroid(entity.asGeoJSON(graph, true)),
                 extent = entity.extent(graph),
-                entitywidth = projection(extent[1])[0] - projection(extent[0])[0];
+                areaWidth = projection(extent[1])[0] - projection(extent[0])[0];
 
-            if (isNaN(centroid[0]) || entitywidth < 20) return;
+            if (isNaN(centroid[0]) || areaWidth < 20) return;
 
-            var iconSize = 18,
-                iconX = centroid[0] - (iconSize / 2),
-                iconY = centroid[1] - (iconSize / 2),
+            var preset = context.presets().match(entity, context.graph()),
+                picon = preset && preset.icon,
+                iconSize = 17,
                 margin = 2,
-                textOffset = iconSize + margin,
-                p = { transform: 'translate(' + iconX + ',' + iconY + ')' };
+                p = {};
 
-            var bbox = {
-                minX: iconX,
-                minY: iconY,
-                maxX: iconX + iconSize,
-                maxY: iconY + iconSize
-            };
+            if (picon) {  // icon and label..
+                if (addIcon()) {
+                    addLabel(iconSize + margin);
+                    return p;
+                }
+            } else {   // label only..
+                if (addLabel(0)) {
+                    return p;
+                }
+            }
 
-            // try to add icon
-            if (tryInsert([bbox], entity.id + 'I', true)) {
-                if (width && entitywidth >= width + 20) {
-                    var labelX = centroid[0],
-                        labelY = centroid[1] + textOffset;
 
-                    bbox = {
+            function addIcon() {
+                var iconX = centroid[0] - (iconSize / 2);
+                var iconY = centroid[1] - (iconSize / 2);
+                var bbox = {
+                    minX: iconX,
+                    minY: iconY,
+                    maxX: iconX + iconSize,
+                    maxY: iconY + iconSize
+                };
+
+                if (tryInsert([bbox], entity.id + 'I', true)) {
+                    p.transform = 'translate(' + iconX + ',' + iconY + ')';
+                    return true;
+                }
+                return false;
+            }
+
+            function addLabel(yOffset) {
+                if (width && areaWidth >= width + 20) {
+                    var labelX = centroid[0];
+                    var labelY = centroid[1] + yOffset;
+                    var bbox = {
                         minX: labelX - (width / 2) - margin,
                         minY: labelY - (height / 2) - margin,
                         maxX: labelX + (width / 2) + margin,
                         maxY: labelY + (height / 2) + margin
                     };
 
-                    // try to add label
                     if (tryInsert([bbox], entity.id, true)) {
                         p.x = labelX;
                         p.y = labelY;
                         p.textAnchor = 'middle';
                         p.height = height;
+                        return true;
                     }
                 }
-
-                return p;
+                return false;
             }
         }
 
@@ -583,7 +623,8 @@ export function svgLabels(projection, context) {
         // areas
         drawAreaLabels(label, labelled.area, filter, 'arealabel', positions.area);
         drawAreaLabels(halo, labelled.area, filter, 'arealabel-halo', positions.area);
-        drawAreaIcons(label, labelled.area, filter, 'arealabel-icon', positions.area);
+        drawAreaIcons(label, labelled.area, filter, 'areaicon', positions.area);
+        drawAreaIcons(halo, labelled.area, filter, 'areaicon-halo', positions.area);
 
         // debug
         drawCollisionBoxes(label, rskipped, 'debug-skipped');
@@ -610,7 +651,7 @@ export function svgLabels(projection, context) {
         if (mouse) {
             pad = 20;
             bbox = { minX: mouse[0] - pad, minY: mouse[1] - pad, maxX: mouse[0] + pad, maxY: mouse[1] + pad };
-            ids.push.apply(ids, _.map(rdrawn.search(bbox), 'id'));
+            ids.push.apply(ids, _map(rdrawn.search(bbox), 'id'));
         }
 
         // hide labels along selected ways, or near selected vertices
@@ -625,7 +666,7 @@ export function svgLabels(projection, context) {
                 var point = context.projection(entity.loc);
                 pad = 10;
                 bbox = { minX: point[0] - pad, minY: point[1] - pad, maxX: point[0] + pad, maxY: point[1] + pad };
-                ids.push.apply(ids, _.map(rdrawn.search(bbox), 'id'));
+                ids.push.apply(ids, _map(rdrawn.search(bbox), 'id'));
             }
         }
 
@@ -634,7 +675,7 @@ export function svgLabels(projection, context) {
     }
 
 
-    var throttleFilterLabels = _.throttle(filterLabels, 100);
+    var throttleFilterLabels = _throttle(utilCallWhenIdle(filterLabels), 100);
 
 
     drawLabels.observe = function(selection) {

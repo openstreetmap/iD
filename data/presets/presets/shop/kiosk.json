@@ -1,6 +1,7 @@
 {
     "icon": "shop",
     "fields": [
+        "name",
         "operator",
         "address",
         "building_area",
@@ -13,5 +14,5 @@
     "tags": {
         "shop": "kiosk"
     },
-    "name": "News Kiosk"
+    "name": "Kiosk"
 }

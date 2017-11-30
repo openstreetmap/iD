@@ -1,4 +1,9 @@
-import _ from 'lodash';
+import _clone from 'lodash-es/clone';
+import _keys from 'lodash-es/keys';
+import _toPairs from 'lodash-es/toPairs';
+import _union from 'lodash-es/union';
+import _without from 'lodash-es/without';
+
 import { debug } from '../index';
 import { osmIsInterestingTag } from './tags';
 import { dataDeprecated } from '../../data/index';
@@ -26,7 +31,7 @@ osmEntity.id = function(type) {
 
 
 osmEntity.id.next = {
-    node: -1, way: -1, relation: -1
+    changeset: -1, node: -1, way: -1, relation: -1
 };
 
 
@@ -41,7 +46,7 @@ osmEntity.id.toOSM = function(id) {
 
 
 osmEntity.id.type = function(id) {
-    return { 'n': 'node', 'w': 'way', 'r': 'relation' }[id[0]];
+    return { 'c': 'changeset', 'n': 'node', 'w': 'way', 'r': 'relation' }[id[0]];
 };
 
 
@@ -117,7 +122,7 @@ osmEntity.prototype = {
 
 
     mergeTags: function(tags) {
-        var merged = _.clone(this.tags), changed = false;
+        var merged = _clone(this.tags), changed = false;
         for (var k in tags) {
             var t1 = merged[k],
                 t2 = tags[k];
@@ -126,7 +131,7 @@ osmEntity.prototype = {
                 merged[k] = t2;
             } else if (t1 !== t2) {
                 changed = true;
-                merged[k] = _.union(t1.split(/;\s*/), t2.split(/;\s*/)).join(';');
+                merged[k] = _union(t1.split(/;\s*/), t2.split(/;\s*/)).join(';');
             }
         }
         return changed ? this.update({tags: merged}) : this;
@@ -139,13 +144,13 @@ osmEntity.prototype = {
 
 
     isUsed: function(resolver) {
-        return _.without(Object.keys(this.tags), 'area').length > 0 ||
+        return _without(Object.keys(this.tags), 'area').length > 0 ||
             resolver.parentRelations(this).length > 0;
     },
 
 
     hasInterestingTags: function() {
-        return _.keys(this.tags).some(osmIsInterestingTag);
+        return _keys(this.tags).some(osmIsInterestingTag);
     },
 
 
@@ -153,13 +158,16 @@ osmEntity.prototype = {
         return false;
     },
 
+    isDegenerate: function() {
+        return true;
+    },
 
     deprecatedTags: function() {
-        var tags = _.toPairs(this.tags);
+        var tags = _toPairs(this.tags);
         var deprecated = {};
 
         dataDeprecated.forEach(function(d) {
-            var match = _.toPairs(d.old)[0];
+            var match = _toPairs(d.old)[0];
             tags.forEach(function(t) {
                 if (t[0] === match[0] &&
                     (t[1] === match[1] || match[1] === '*')) {

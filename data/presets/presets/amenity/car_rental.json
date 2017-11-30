@@ -1,6 +1,7 @@
 {
     "icon": "car",
     "fields": [
+        "name",
         "operator"
     ],
     "geometry": [

@@ -1,25 +1,26 @@
-import * as d3 from 'd3';
+import { event as d3_event } from 'd3-selection';
+
 import { t } from '../util/locale';
-import { modeSelect } from '../modes/index';
-import { osmEntity } from '../osm/index';
-import { svgIcon } from '../svg/index';
-import { utilDisplayName } from '../util/index';
+import { modeSelect } from '../modes';
+import { osmEntity } from '../osm';
+import { svgIcon } from '../svg';
+import { utilDisplayName } from '../util';
 
 
 export function uiSelectionList(context, selectedIDs) {
 
     function selectEntity(entity) {
-        context.enter(modeSelect(context, [entity.id]).suppressMenu(true));
+        context.enter(modeSelect(context, [entity.id]));
     }
 
 
     function deselectEntity(entity) {
-        d3.event.stopPropagation();
+        d3_event.stopPropagation();
         var index = selectedIDs.indexOf(entity.id);
         if (index > -1) {
             selectedIDs.splice(index, 1);
         }
-        context.enter(modeSelect(context, selectedIDs).suppressMenu(true));
+        context.enter(modeSelect(context, selectedIDs));
     }
 
 

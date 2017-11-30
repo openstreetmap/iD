@@ -1,0 +1,272 @@
+
+use { pointer-events: none; }
+
+/* base styles */
+.layer-osm path:not(.oneway) { fill: none; }     /* IE needs :not(.oneway) */
+
+/* the above fill: none rule affects paths in <use> shadow dom only in Firefox */
+.layer-osm use.icon path { fill: #333; }                       /* FF svg Maki icons */
+.layer-osm .turn use path { fill: #000; }                      /* FF turn restriction icons */
+#turn-only-shape2, #turn-only-u-shape2 { fill: #7092FF; }  /* FF turn-only, turn-only-u */
+#turn-no-shape2, #turn-no-u-shape2     { fill: #E06D5F; }  /* FF turn-no, turn-no-u */
+#turn-yes-shape2, #turn-yes-u-shape2   { fill: #8CD05F; }  /* FF turn-yes, turn-yes-u */
+
+g.point .shadow,
+g.vertex .shadow,
+g.midpoint .shadow {
+    pointer-events: all;
+}
+
+path.shadow {
+    pointer-events: stroke;
+}
+
+/* points */
+
+g.point .stroke {
+    stroke: #444;
+    stroke-width: 1;
+    fill: #fff;
+}
+
+g.point .shadow {
+    fill: none;
+    stroke: #f6634f;
+    stroke-width: 16;
+    stroke-opacity: 0;
+}
+
+g.point.related:not(.selected) .shadow,
+g.point.hover:not(.selected) .shadow {
+    stroke-opacity: 0.5;
+}
+
+g.point.selected .shadow {
+    stroke-opacity: 0.7;
+}
+
+g.point.active, g.point.active * {
+    pointer-events: none;
+}
+
+g.point ellipse.stroke {
+    display: none;
+}
+
+.mode-drag-node g.point.active ellipse.stroke {
+    display: block;
+}
+
+
+/* vertices and midpoints */
+
+g.vertex .fill {
+    fill: #000;
+}
+
+g.vertex .stroke {
+    stroke: #666;
+    stroke-width: 1;
+    fill: white;
+}
+
+g.vertex.shared .stroke {
+    fill: #bbb;
+}
+
+g.midpoint .fill {
+    fill: #eee;
+    stroke: #444;
+    stroke-opacity: .6;
+    opacity: .7;
+}
+
+g.vertex .shadow,
+g.midpoint .shadow {
+    stroke-width: 6;
+    fill: #f6634f;
+    fill-opacity: 0;
+}
+
+g.vertex.vertex-hover {
+    display: none;
+}
+
+.mode-draw-area g.vertex.vertex-hover,
+.mode-draw-line g.vertex.vertex-hover,
+.mode-add-area  g.vertex.vertex-hover,
+.mode-add-line  g.vertex.vertex-hover,
+.mode-add-point g.vertex.vertex-hover,
+.mode-drag-node g.vertex.vertex-hover {
+    display: block;
+}
+
+.mode-draw-area .hover-disabled g.vertex.vertex-hover,
+.mode-draw-line .hover-disabled g.vertex.vertex-hover,
+.mode-add-area  .hover-disabled g.vertex.vertex-hover,
+.mode-add-line  .hover-disabled g.vertex.vertex-hover,
+.mode-add-point .hover-disabled g.vertex.vertex-hover,
+.mode-drag-node .hover-disabled g.vertex.vertex-hover {
+    display: none;
+}
+
+g.vertex.related:not(.selected) .shadow,
+g.vertex.hover:not(.selected) .shadow,
+g.midpoint.related:not(.selected) .shadow,
+g.midpoint.hover:not(.selected) .shadow {
+    fill-opacity: 0.5;
+}
+
+g.vertex.selected .shadow {
+    fill-opacity: 0.7;
+}
+
+.mode-draw-area g.midpoint,
+.mode-draw-line g.midpoint,
+.mode-add-area g.midpoint,
+.mode-add-line g.midpoint,
+.mode-add-point g.midpoint {
+  display: none;
+}
+
+/* lines */
+
+.preset-icon .icon.other-line {
+    color: #fff;
+    fill: #777;
+}
+
+path.line {
+    stroke-linecap: round;
+    stroke-linejoin: bevel;
+}
+
+path.stroke {
+    stroke: #000;
+    stroke-width: 4;
+}
+
+path.shadow {
+    stroke: #f6634f;
+    stroke-width: 16;
+    stroke-opacity: 0;
+}
+
+path.shadow.related:not(.selected),
+path.shadow.hover:not(.selected) {
+    stroke-opacity: 0.4;
+}
+
+path.shadow.selected {
+    stroke-opacity: 0.7;
+}
+
+path.line.stroke {
+    stroke: #fff;
+    stroke-width: 2;
+}
+
+
+/* Labels / Markers */
+
+text {
+    font-size:10px;
+    pointer-events: none;
+    color: #222;
+    opacity: 1;
+}
+
+.oneway .textpath.tag-waterway {
+    fill: #002F35;
+}
+
+path.oneway {
+    stroke-width: 6px;
+}
+
+
+text.arealabel-halo,
+text.linelabel-halo,
+text.pointlabel-halo,
+text.arealabel,
+text.linelabel,
+text.pointlabel {
+    dominant-baseline: middle;
+    text-anchor: middle;
+    font-size: 12px;
+    font-weight: bold;
+    fill: #333;
+    pointer-events: none;
+    -webkit-transition: opacity 100ms linear;
+    transition: opacity 100ms linear;
+    -moz-transition: opacity 100ms linear;
+}
+
+/* Opera doesn't support dominant-baseline. See #715 */
+/* Safari 10 seems to have regressed too */
+.linelabel-halo .textpath,
+.linelabel .textpath {
+  baseline-shift: -33%;
+  dominant-baseline: auto;
+}
+
+.layer-halo text {
+    opacity: 0.7;
+    stroke: #fff;
+    stroke-width: 5px;
+    stroke-miterlimit: 1;
+}
+
+text.proximate {
+    opacity: 0;
+}
+
+text.point {
+    font-size: 10px;
+}
+
+.icon.areaicon-halo {
+    opacity: 0.6;
+    stroke: #999;
+    stroke-width: 2px;
+    stroke-miterlimit: 1;
+}
+
+.icon.areaicon {
+    fill: #222;
+    opacity: 0.8;
+}
+
+
+/* Turns */
+
+g.turn rect,
+g.turn circle {
+    fill: none;
+    pointer-events: all;
+}
+
+.form-field-restrictions .vertex {
+    pointer-events: none;
+    cursor: auto !important;
+}
+
+.lasso #map {
+    pointer-events: visibleStroke;
+}
+
+/* GPX Paths */
+
+.layer-gpx {
+    pointer-events: none;
+}
+
+path.gpx {
+    stroke: #FF26D4;
+    stroke-width: 2;
+    fill: none;
+}
+
+text.gpx {
+    fill: #FF26D4;
+}

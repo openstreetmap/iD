@@ -1,6 +1,7 @@
 {
     "icon": "commercial",
     "fields": [
+        "name",
         "office",
         "address",
         "building_area",

@@ -1,6 +1,9 @@
 {
     "icon": "hospital",
     "fields": [
+        "name",
+        "operator",
+        "healthcare/speciality",
         "address",
         "building_area",
         "opening_hours"
@@ -10,10 +13,23 @@
         "area"
     ],
     "terms": [
-        "medic*"
+        "medic*",
+        "physician"
     ],
     "tags": {
         "amenity": "doctors"
+    },
+    "addTags": {
+        "amenity": "doctors",
+        "healthcare": "doctor"
+    },
+    "removeTags": {
+        "amenity": "doctors",
+        "healthcare": "doctor"
+    },
+    "reference": {
+        "key": "amenity",
+        "value": "doctors"
     },
     "name": "Doctor"
 }

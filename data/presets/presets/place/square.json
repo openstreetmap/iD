@@ -1,0 +1,13 @@
+{
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "fields": [
+        "name"
+    ],
+    "tags": {
+        "place": "square"
+    },
+    "name": "Square"
+}
