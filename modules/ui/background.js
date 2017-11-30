@@ -30,8 +30,9 @@ export function uiBackground(context) {
     var key = t('background.key');
     var detected = utilDetect();
 
-    var _opacity = (context.storage('background-opacity') !== null) ?
+    var _brightness = (context.storage('background-opacity') !== null) ?
             (+context.storage('background-opacity')) : 1.0;
+    var _sharpness = 1;
     var _customSource = context.background().findSource('custom');
     var _previousBackground;
     var _shown = false;
@@ -43,19 +44,15 @@ export function uiBackground(context) {
 
     var backgroundOffset = uiBackgroundOffset(context);
 
+    function clamp(x, min, max) { return Math.max(min, Math.min(x, max)); }
 
-    function setOpacity(d) {
+
+    function setBrightness(d) {
         if (!d && d3_event && d3_event.target) {
             d = d3_event.target.value;
         }
-        // Can be 0 from <1.3.0 use or due to issue #1923.
-        if (!d) d = 1.0;
 
-        // var bg = context.container().selectAll('.layer-background')
-        //     .style('opacity', d);
-        // if (!detected.opera) {
-        //     utilSetTransform(bg, 0, 0);
-        // }
+        d = clamp(d, 0.25, 2);
         context.background().brightness(d);
 
         _displayOptions.selectAll('.opacity-input')
@@ -65,7 +62,25 @@ export function uiBackground(context) {
             .text(Math.floor(d * 100) + '%');
 
         context.storage('background-opacity', d);
-        _opacity = d;
+        _brightness = d;
+    }
+
+
+    function setSharpness(d) {
+        if (!d && d3_event && d3_event.target) {
+            d = d3_event.target.value;
+        }
+
+        d = clamp(d, 0.5, 2);
+        context.background().sharpness(d);
+
+        _displayOptions.selectAll('.sharpness-input')
+            .property('value', d);
+
+        _displayOptions.selectAll('.sharpness-value')
+            .text(Math.floor(d * 100) + '%');
+
+        _sharpness = d;
     }
 
 
@@ -250,27 +265,45 @@ export function uiBackground(context) {
             .append('div')
             .attr('class', 'display-options-container controls-list');
 
-        // add opacity switcher
-        var opacityDivEnter = containerEnter
+        // brightness
+        var controlsEnter = containerEnter
             .append('div')
-            .attr('class', 'opacity-options-wrapper');
+            .attr('class', 'display-controls-wrapper');
 
-        opacityDivEnter
+        controlsEnter
             .append('h5')
             .text(t('background.brightness'))
             .append('span')
             .attr('class', 'opacity-value')
-            .text(Math.floor(_opacity * 100) + '%');
+            .text(Math.floor(_brightness * 100) + '%');
 
-        opacityDivEnter
+        controlsEnter
             .append('input')
             .attr('class', 'opacity-input')
             .attr('type', 'range')
             .attr('min', '0.25')
-            .attr('max', '1')
+            .attr('max', '2')
             .attr('step', '0.05')
-            .property('value', _opacity)
-            .on('input.set-opacity', setOpacity);
+            .property('value', _brightness)
+            .on('input.set-brightness', setBrightness);
+
+        // sharpness
+        controlsEnter
+            .append('h5')
+            .text(t('background.sharpness'))
+            .append('span')
+            .attr('class', 'sharpness-value')
+            .text(Math.floor(_brightness * 100) + '%');
+
+        controlsEnter
+            .append('input')
+            .attr('class', 'sharpness-input')
+            .attr('type', 'range')
+            .attr('min', '0.5')
+            .attr('max', '2')
+            .attr('step', '0.05')
+            .property('value', _sharpness)
+            .on('input.set-sharpness', setSharpness);
 
         // add minimap toggle
         var minimapEnter = containerEnter
@@ -445,7 +478,7 @@ export function uiBackground(context) {
 
 
         update();
-        setOpacity(_opacity);
+        setBrightness(_brightness);
 
         var keybinding = d3_keybinding('background')
             .on(key, togglePane)

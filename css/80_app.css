@@ -2463,11 +2463,11 @@ div.full-screen > button:hover {
     border-top: 5px solid #222;
 }
 
-.opacity-options-wrapper {
+.display-controls-wrapper {
     padding: 10px;
 }
 
-.opacity-options-wrapper .opacity-value {
+.display-controls-wrapper h5 span {
     margin: 5px;
 }
 

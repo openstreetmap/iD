@@ -472,6 +472,7 @@
             "reset": "reset",
             "display_options": "Display Options",
             "brightness": "Brightness",
+            "sharpness": "Sharpness",
             "minimap": {
                 "description": "Show Minimap",
                 "tooltip": "Show a zoomed out map to help locate the area currently displayed.",
