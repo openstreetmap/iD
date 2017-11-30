@@ -1141,6 +1141,11 @@
             "placeholder": "Distance to one decimal (123.4)",
             "label": "Milestone Position"
         },
+        "monitoring_multi": {
+            "key": "monitoring:",
+            "type": "multiCombo",
+        "label": "Monitoring"
+        },
         "mtb/scale": {
             "key": "mtb:scale",
             "type": "combo",
