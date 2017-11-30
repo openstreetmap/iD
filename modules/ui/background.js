@@ -51,12 +51,12 @@ export function uiBackground(context) {
         // Can be 0 from <1.3.0 use or due to issue #1923.
         if (!d) d = 1.0;
 
-        var bg = context.container().selectAll('.layer-background')
-            .style('opacity', d);
-
-        if (!detected.opera) {
-            utilSetTransform(bg, 0, 0);
-        }
+        // var bg = context.container().selectAll('.layer-background')
+        //     .style('opacity', d);
+        // if (!detected.opera) {
+        //     utilSetTransform(bg, 0, 0);
+        // }
+        context.background().brightness(d);
 
         _displayOptions.selectAll('.opacity-input')
             .property('value', d);
