@@ -10556,6 +10556,7 @@
             "name": "Mast"
         },
         "man_made/monitoring_station": {
+            "icon": "poi-mast",
             "geometry": [
                 "point",
                 "area"

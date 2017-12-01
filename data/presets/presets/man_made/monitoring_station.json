@@ -1,4 +1,5 @@
 {
+    "icon": "poi-mast",
     "geometry": [
         "point",
         "area"
