@@ -3802,6 +3802,11 @@ en:
         name: Mast
         # 'terms: antenna,broadcast tower,cell phone tower,cell tower,communication mast,communication tower,guyed tower,mobile phone tower,radio mast,radio tower,television tower,transmission mast,transmission tower,tv tower'
         terms: '<translate with synonyms or related terms for ''Mast'', separated by commas>'
+      man_made/monitoring_station:
+        # man_made=monitoring_station
+        name: Monitoring Station
+        # 'terms: weather,earthquake,sismology,air,gps'
+        terms: '<translate with synonyms or related terms for ''Mast'', separated by commas>'
       man_made/observation:
         # 'man_made=tower, tower:type=observation'
         name: Observation Tower
@@ -3901,6 +3906,9 @@ en:
         name: Telecom Manhole
         # 'terms: cover,phone,hole,telecom,telephone,bt'
         terms: '<translate with synonyms or related terms for ''Telecom Manhole'', separated by commas>'
+      monitoring_multi:
+        # 'monitoring:=*'
+        label: Monitoring
       natural:
         # natural=*
         name: Natural
