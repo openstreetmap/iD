@@ -1953,6 +1953,9 @@
                     "label": "Milestone Position",
                     "placeholder": "Distance to one decimal (123.4)"
                 },
+                "monitoring_multi": {
+                    "label": "Monitoring"
+                },
                 "mtb/scale": {
                     "label": "Mountain Biking Difficulty",
                     "placeholder": "0, 1, 2, 3...",
