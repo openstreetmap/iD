@@ -4582,7 +4582,7 @@
                 },
                 "man_made/monitoring_station": {
                     "name": "Monitoring Station",
-                    "terms": "weather,earthquake,sismology,air,gps"
+                    "terms": "weather,earthquake,seismology,air,gps"
                 },
                 "man_made/observation": {
                     "name": "Observation Tower",

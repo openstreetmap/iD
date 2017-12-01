@@ -1965,6 +1965,10 @@
             "value": "mast"
         },
         {
+            "key": "man_made",
+            "value": "monitoring_station"
+        },
+        {
             "key": "tower:type",
             "value": "observation"
         },

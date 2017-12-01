@@ -817,6 +817,9 @@ en:
         label: Milestone Position
         # milestone_position field placeholder
         placeholder: Distance to one decimal (123.4)
+      monitoring_multi:
+        # 'monitoring:=*'
+        label: Monitoring
       mtb/scale:
         # 'mtb:scale=*'
         label: Mountain Biking Difficulty
@@ -3805,8 +3808,8 @@ en:
       man_made/monitoring_station:
         # man_made=monitoring_station
         name: Monitoring Station
-        # 'terms: weather,earthquake,sismology,air,gps'
-        terms: '<translate with synonyms or related terms for ''Mast'', separated by commas>'
+        # 'terms: weather,earthquake,seismology,air,gps'
+        terms: '<translate with synonyms or related terms for ''Monitoring Station'', separated by commas>'
       man_made/observation:
         # 'man_made=tower, tower:type=observation'
         name: Observation Tower
@@ -3906,9 +3909,6 @@ en:
         name: Telecom Manhole
         # 'terms: cover,phone,hole,telecom,telephone,bt'
         terms: '<translate with synonyms or related terms for ''Telecom Manhole'', separated by commas>'
-      monitoring_multi:
-        # 'monitoring:=*'
-        label: Monitoring
       natural:
         # natural=*
         name: Natural

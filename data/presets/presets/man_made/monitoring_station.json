@@ -4,17 +4,18 @@
         "area"
     ],
     "fields": [
-        "monitoring_multi"
+        "monitoring_multi",
         "operator"
     ],
     "terms": [
         "weather",
         "earthquake",
-        "sismology",
+        "seismology",
         "air",
         "gps"
     ],
     "tags": {
         "man_made": "monitoring_station"
     },
-"name": "Monitoring Station"
+    "name": "Monitoring Station"
+}
