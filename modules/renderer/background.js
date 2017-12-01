@@ -18,22 +18,26 @@ export function rendererBackground(context) {
     var _overlayLayers = [];
     var _backgroundSources = [];
     var _brightness = 1;
+    var _contrast = 1;
+    var _saturation = 1;
     var _sharpness = 1;
 
 
     function background(selection) {
         var baseFilter = '';
-        var blur, contrast;
 
         if (_brightness !== 1) {
             baseFilter += 'brightness(' + _brightness + ')';
         }
+        if (_contrast !== 1) {
+            baseFilter += 'contrast(' + _contrast + ')';
+        }
+        if (_saturation !== 1) {
+            baseFilter += 'saturate(' + _saturation + ')';
+        }
         if (_sharpness < 1) {  // gaussian blur
-            blur = d3_interpolateNumber(0.5, 5)(1 - _sharpness);
+            var blur = d3_interpolateNumber(0.5, 5)(1 - _sharpness);
             baseFilter += 'blur(' + blur + 'px)';
-        } else if (_sharpness > 1) {
-            contrast = d3_interpolateNumber(1, 1.5)(_sharpness - 1);
-            baseFilter += 'contrast(' + contrast + ')';
         }
 
         var base = selection.selectAll('.layer-background')
@@ -43,7 +47,6 @@ export function rendererBackground(context) {
             .insert('div', '.layer-data')
             .attr('class', 'layer layer-background')
             .merge(base)
-            .style('-webkit-filter', baseFilter || null)
             .style('filter', baseFilter || null);
 
 
@@ -61,13 +64,13 @@ export function rendererBackground(context) {
         var mixBlendMode = '';
         if (_sharpness > 1) {  // apply unsharp mask
             mixBlendMode = 'overlay';
-            maskFilter = 'saturate(0)';
+            maskFilter = 'saturate(0) blur(3px) invert(1)';
 
-            blur = d3_interpolateNumber(3, 0.5)(_sharpness - 1);
-            maskFilter += 'blur(' + blur + 'px) invert(1)';
+            var contrast = _sharpness - 1;
+            maskFilter += ' contrast(' + contrast + ')';
 
-            contrast = d3_interpolateNumber(0, 1)(_sharpness - 1);
-            maskFilter += 'contrast(' + contrast + ')';
+            var brightness = d3_interpolateNumber(1, 0.85)(_sharpness - 1);
+            maskFilter += ' brightness(' + brightness + ')';
         }
 
         var mask = base.selectAll('.layer-unsharp-mask')
@@ -81,7 +84,6 @@ export function rendererBackground(context) {
             .attr('class', 'layer layer-mask layer-unsharp-mask')
             .merge(mask)
             .call(baseLayer)
-            .style('-webkit-filter', maskFilter || null)
             .style('filter', maskFilter || null)
             .style('mix-blend-mode', mixBlendMode || null);
 
@@ -297,6 +299,22 @@ export function rendererBackground(context) {
     background.brightness = function(d) {
         if (!arguments.length) return _brightness;
         _brightness = d;
+        if (context.mode()) dispatch.call('change');
+        return background;
+    };
+
+
+    background.contrast = function(d) {
+        if (!arguments.length) return _contrast;
+        _contrast = d;
+        if (context.mode()) dispatch.call('change');
+        return background;
+    };
+
+
+    background.saturation = function(d) {
+        if (!arguments.length) return _saturation;
+        _saturation = d;
         if (context.mode()) dispatch.call('change');
         return background;
     };

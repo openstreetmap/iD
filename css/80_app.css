@@ -2463,11 +2463,11 @@ div.full-screen > button:hover {
     border-top: 5px solid #222;
 }
 
-.display-controls-wrapper {
+.display-options-container {
     padding: 10px;
 }
 
-.display-controls-wrapper h5 span {
+.display-options-container h5 span {
     margin: 5px;
 }
 
@@ -2662,6 +2662,10 @@ img.tile {
     user-select: none;
 
     opacity: 0;
+
+    -webkit-transition: opacity 200ms linear;
+    -moz-transition: opacity 200ms linear;
+    transition: opacity 200ms linear;
 }
 
 img.tile-loaded {
@@ -2670,12 +2674,6 @@ img.tile-loaded {
 
 img.tile-removing {
     opacity: 0;
-}
-
-div:not(.layer-mask) > img.tile {
-    -webkit-transition: opacity 200ms linear;
-    transition: opacity 200ms linear;
-    -moz-transition: opacity 200ms linear;
 }
 
 .tile-label-debug {

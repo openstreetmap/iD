@@ -384,6 +384,8 @@ en:
     reset: reset
     display_options: Display Options
     brightness: Brightness
+    contrast: Contrast
+    saturation: Saturation
     sharpness: Sharpness
     minimap:
       description: Show Minimap

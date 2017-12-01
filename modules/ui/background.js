@@ -31,9 +31,13 @@ export function uiBackground(context) {
     var key = t('background.key');
     var detected = utilDetect();
 
-    var _brightness = (context.storage('background-opacity') !== null) ?
-            (+context.storage('background-opacity')) : 1.0;
-    var _sharpness = 1;
+    var _options = {
+        brightness: (context.storage('background-opacity') !== null) ?
+            (+context.storage('background-opacity')) : 1.0,
+        contrast: 1,
+        saturation: 1,
+        sharpness: 1
+    };
     var _customSource = context.background().findSource('custom');
     var _previousBackground;
     var _shown = false;
@@ -48,40 +52,23 @@ export function uiBackground(context) {
     function clamp(x, min, max) { return Math.max(min, Math.min(x, max)); }
 
 
-    function setBrightness(d) {
-        if (!d && d3_event && d3_event.target) {
-            d = d3_event.target.value;
+    function setDisplayOption(d, val) {
+        if (!val && d3_event && d3_event.target) {
+            val = d3_event.target.value;
         }
 
-        d = clamp(d, 0.25, 2);
-        context.background().brightness(d);
+        val = clamp(val, 0.25, 2);
+        _displayOptions.selectAll('.' + d + '-input')
+            .property('value', val);
+        _displayOptions.selectAll('.' + d + '-value')
+            .text(Math.floor(val * 100) + '%');
 
-        _displayOptions.selectAll('.opacity-input')
-            .property('value', d);
+        _options[d] = val;
+        context.background()[d](val);
 
-        _displayOptions.selectAll('.opacity-value')
-            .text(Math.floor(d * 100) + '%');
-
-        context.storage('background-opacity', d);
-        _brightness = d;
-    }
-
-
-    function setSharpness(d) {
-        if (!d && d3_event && d3_event.target) {
-            d = d3_event.target.value;
+        if (d === 'brightness') {
+            context.storage('background-opacity', val);
         }
-
-        d = clamp(d, 0.25, 2);
-        context.background().sharpness(d);
-
-        _displayOptions.selectAll('.sharpness-input')
-            .property('value', d);
-
-        _displayOptions.selectAll('.sharpness-value')
-            .text(Math.floor(d * 100) + '%');
-
-        _sharpness = d;
     }
 
 
@@ -266,45 +253,34 @@ export function uiBackground(context) {
             .append('div')
             .attr('class', 'display-options-container controls-list');
 
-        // brightness
-        var controlsEnter = containerEnter
+        var sliders = ['brightness', 'contrast', 'saturation', 'sharpness'];
+
+        var controls = containerEnter.selectAll('.display-control')
+            .data(sliders);
+
+        var controlsEnter = controls.enter()
             .append('div')
-            .attr('class', 'display-controls-wrapper');
+            .attr('class', function(d) { return 'display-control display-control-' + d; });
 
         controlsEnter
             .append('h5')
-            .text(t('background.brightness'))
+            .text(function(d) { return t('background.' + d); })
             .append('span')
-            .attr('class', 'opacity-value')
-            .text(Math.floor(_brightness * 100) + '%');
+            .attr('class', function(d) { return d + '-value'; });
 
         controlsEnter
             .append('input')
-            .attr('class', 'opacity-input')
+            .attr('class', function(d) { return d + '-input'; })
             .attr('type', 'range')
             .attr('min', '0.25')
             .attr('max', '2')
             .attr('step', '0.05')
-            .property('value', _brightness)
-            .on('input.set-brightness', setBrightness);
+            .property('value', function(d) { return _options[d]; })
+            .on('input', function(d) {
+                var val = d3_select(this).property('value');
+                setDisplayOption(d, val);
+            });
 
-        // sharpness
-        controlsEnter
-            .append('h5')
-            .text(t('background.sharpness'))
-            .append('span')
-            .attr('class', 'sharpness-value')
-            .text(Math.floor(_brightness * 100) + '%');
-
-        controlsEnter
-            .append('input')
-            .attr('class', 'sharpness-input')
-            .attr('type', 'range')
-            .attr('min', '0.25')
-            .attr('max', '2')
-            .attr('step', '0.05')
-            .property('value', _sharpness)
-            .on('input.set-sharpness', setSharpness);
 
         // add minimap toggle
         var minimapEnter = containerEnter
@@ -479,7 +455,7 @@ export function uiBackground(context) {
 
 
         update();
-        setBrightness(_brightness);
+        setDisplayOption('brightness', _options.brightness);
 
         var keybinding = d3_keybinding('background')
             .on(key, togglePane)
