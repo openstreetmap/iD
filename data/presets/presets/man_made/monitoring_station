@@ -1,0 +1,20 @@
+{
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "fields": [
+        "monitoring_multi"
+        "operator"
+    ],
+    "terms": [
+        "weather",
+        "earthquake",
+        "sismology",
+        "air",
+        "gps"
+    ],
+    "tags": {
+        "man_made": "monitoring_station"
+    },
+"name": "Monitoring Station"
