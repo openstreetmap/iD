@@ -4050,7 +4050,6 @@ en:
       office/administrative:
         # office=administrative
         name: Administrative Office
-        terms: '<translate with synonyms or related terms for ''Administrative Office'', separated by commas>'
       office/adoption_agency:
         # office=adoption_agency
         name: Adoption Agency

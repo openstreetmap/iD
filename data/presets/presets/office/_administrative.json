@@ -14,5 +14,6 @@
         "office": "administrative"
     },
     "terms": [],
+    "searchable": false,
     "name": "Administrative Office"
 }

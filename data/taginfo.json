@@ -2167,6 +2167,10 @@
         },
         {
             "key": "office",
+            "value": "administrative"
+        },
+        {
+            "key": "office",
             "value": "physician"
         },
         {
@@ -2176,10 +2180,6 @@
         {
             "key": "office",
             "value": "accountant"
-        },
-        {
-            "key": "office",
-            "value": "administrative"
         },
         {
             "key": "office",

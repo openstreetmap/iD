@@ -11480,6 +11480,25 @@
             "terms": [],
             "name": "Office"
         },
+        "office/administrative": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "administrative"
+            },
+            "terms": [],
+            "searchable": false,
+            "name": "Administrative Office"
+        },
         "office/physician": {
             "icon": "commercial",
             "fields": [
@@ -11538,24 +11557,6 @@
             },
             "terms": [],
             "name": "Accountant Office"
-        },
-        "office/administrative": {
-            "icon": "commercial",
-            "fields": [
-                "name",
-                "address",
-                "building_area",
-                "opening_hours"
-            ],
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "tags": {
-                "office": "administrative"
-            },
-            "terms": [],
-            "name": "Administrative Office"
         },
         "office/adoption_agency": {
             "icon": "commercial",

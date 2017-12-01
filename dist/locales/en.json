@@ -4784,6 +4784,10 @@
                     "name": "Office",
                     "terms": ""
                 },
+                "office/administrative": {
+                    "name": "Administrative Office",
+                    "terms": ""
+                },
                 "office/physician": {
                     "name": "Physician",
                     "terms": ""
@@ -4794,10 +4798,6 @@
                 },
                 "office/accountant": {
                     "name": "Accountant Office",
-                    "terms": ""
-                },
-                "office/administrative": {
-                    "name": "Administrative Office",
                     "terms": ""
                 },
                 "office/adoption_agency": {
