@@ -14,5 +14,6 @@
     "tags": {
         "aerialway": "station"
     },
-    "name": "Aerialway Station"
+    "name": "Aerialway Station",
+    "searchable": false
 }

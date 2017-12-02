@@ -1,31 +1,31 @@
 {
-    "icon": "highway-footway",
+    "icon": "rail",
     "fields": [
         "name",
-        "ref_platform",
         "network",
         "operator",
-        "surface",
-        "lit",
-        "bench",
-        "shelter"
+        "address",
+        "building_area",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
     ],
     "geometry": [
         "point",
         "vertex",
-        "line",
         "area"
     ],
     "tags": {
-        "public_transport": "platform"
+        "public_transport": "station"
     },
     "terms": [
-        "platform",
         "public transit",
         "public transportation",
+        "station",
+        "terminal",
         "transit",
         "transportation"
     ],
-    "name": "Transit Stop / Platform",
+    "name": "Transit Station",
     "matchScore": 0.2
 }

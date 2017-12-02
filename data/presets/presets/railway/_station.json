@@ -22,5 +22,6 @@
         "train station",
         "station"
     ],
-    "name": "Railway Station"
+    "name": "Train Station",
+    "searchable": false
 }

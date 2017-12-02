@@ -17,5 +17,6 @@
         "tram",
         "trolley"
     ],
-    "name": "Tram Stop"
+    "name": "Tram Stopping Position",
+    "searchable": false
 }

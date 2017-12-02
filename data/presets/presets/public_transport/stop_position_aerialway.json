@@ -1,5 +1,5 @@
 {
-    "icon": "bus",
+    "icon": "aerialway",
     "fields": [
         "name",
         "ref_stop_position",
@@ -10,14 +10,20 @@
         "vertex"
     ],
     "tags": {
-        "public_transport": "stop_position"
+        "public_transport": "stop_position",
+        "aerialway": "yes"
+    },
+    "reference": {
+        "key": "public_transport",
+        "value": "stop_position"
     },
     "terms": [
+        "aerialway",
+        "cable car",
         "public transit",
         "public transportation",
         "transit",
         "transportation"
     ],
-    "name": "Transit Stopping Location",
-    "matchScore": 0.2
+    "name": "Aerialway Stopping Location"
 }

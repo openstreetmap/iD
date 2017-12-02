@@ -14,5 +14,6 @@
     "tags": {
         "railway": "platform"
     },
-    "name": "Railway Platform"
+    "name": "Train Stop / Platform",
+    "searchable": false
 }
