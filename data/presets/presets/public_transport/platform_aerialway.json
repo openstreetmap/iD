@@ -5,14 +5,13 @@
         "ref_platform",
         "network",
         "operator",
+        "surface",
         "lit",
         "bench",
         "shelter"
     ],
     "geometry": [
         "point",
-        "vertex",
-        "line",
         "area"
     ],
     "tags": {

@@ -2545,6 +2545,46 @@
             "value": "yes"
         },
         {
+            "key": "train",
+            "value": "yes"
+        },
+        {
+            "key": "train",
+            "value": "yes"
+        },
+        {
+            "key": "tram",
+            "value": "yes"
+        },
+        {
+            "key": "trolleybus",
+            "value": "yes"
+        },
+        {
+            "key": "public_transport",
+            "value": "platform"
+        },
+        {
+            "key": "aerialway",
+            "value": "yes"
+        },
+        {
+            "key": "bus",
+            "value": "yes"
+        },
+        {
+            "key": "ferry",
+            "value": "yes"
+        },
+        {
+            "key": "light_rail",
+            "value": "yes"
+        },
+        {
+            "key": "monorail",
+            "value": "yes"
+        },
+        {
             "key": "subway",
             "value": "yes"
         },
@@ -2567,6 +2607,10 @@
         {
             "key": "public_transport",
             "value": "station"
+        },
+        {
+            "key": "public_transport",
+            "value": "stop_area"
         },
         {
             "key": "aerialway",

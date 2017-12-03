@@ -1,5 +1,5 @@
 {
-    "icon": "bus",
+    "icon": "highway-footway",
     "fields": [
         "name",
         "ref_platform",
@@ -11,19 +11,24 @@
         "shelter"
     ],
     "geometry": [
-        "point",
-        "area"
+        "line"
     ],
     "tags": {
-        "public_transport": "platform"
+        "public_transport": "platform",
+        "aerialway": "yes"
+    },
+    "reference": {
+        "key": "public_transport",
+        "value": "platform"
     },
     "terms": [
+        "aerialway",
+        "cable car",
         "platform",
         "public transit",
         "public transportation",
         "transit",
         "transportation"
     ],
-    "name": "Transit Stop / Platform",
-    "matchScore": 0.2
+    "name": "Aerialway Stop / Platform"
 }

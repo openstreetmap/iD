@@ -12,7 +12,6 @@
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {

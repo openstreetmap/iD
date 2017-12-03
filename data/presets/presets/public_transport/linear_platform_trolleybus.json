@@ -1,5 +1,5 @@
 {
-    "icon": "bus",
+    "icon": "highway-footway",
     "fields": [
         "name",
         "ref_platform",
@@ -11,21 +11,20 @@
         "shelter"
     ],
     "geometry": [
-        "point",
-        "area"
+        "line"
     ],
     "tags": {
         "public_transport": "platform",
-        "bus": "yes"
+        "trolleybus": "yes"
     },
     "addTags": {
         "public_transport": "platform",
-        "bus": "yes",
+        "trolleybus": "yes",
         "highway": "bus_stop"
     },
     "removeTags": {
         "public_transport": "platform",
-        "bus": "yes",
+        "trolleybus": "yes",
         "highway": "bus_stop"
     },
     "reference": {
@@ -34,11 +33,16 @@
     },
     "terms": [
         "bus",
+        "electric",
         "platform",
         "public transit",
         "public transportation",
+        "streetcar",
+        "trackless",
+        "tram",
+        "trolley",
         "transit",
         "transportation"
     ],
-    "name": "Bus Stop / Platform"
+    "name": "Trolleybus Stop / Platform"
 }
