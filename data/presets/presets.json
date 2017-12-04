@@ -6660,6 +6660,7 @@
                 "name",
                 "network",
                 "operator",
+                "public_transport_stop",
                 "bench",
                 "shelter"
             ],

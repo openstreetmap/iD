@@ -1105,6 +1105,14 @@ en:
       product:
         # product=*
         label: Products
+      public_transport_stop:
+        # public_transport=*
+        label: Stop type
+        options:
+          # public_transport=platform
+          platform: Where the passengers wait
+          # public_transport=stop_position
+          stop_position: Where the bus stops on the road
       railway:
         # railway=*
         label: Type
