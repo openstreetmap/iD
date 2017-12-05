@@ -2527,6 +2527,10 @@ en:
         name: Preschool/Kindergarten Building
         # 'terms: kindergarden,pre-school'
         terms: '<translate with synonyms or related terms for ''Preschool/Kindergarten Building'', separated by commas>'
+      building/mosque:
+        # building=mosque
+        name: Mosque Building
+        terms: '<translate with synonyms or related terms for ''Mosque Building'', separated by commas>'
       building/public:
         # building=public
         name: Public Building

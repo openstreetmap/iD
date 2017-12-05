@@ -850,6 +850,10 @@
         },
         {
             "key": "building",
+            "value": "mosque"
+        },
+        {
+            "key": "building",
             "value": "public"
         },
         {

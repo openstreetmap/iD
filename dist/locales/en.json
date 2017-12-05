@@ -3445,6 +3445,10 @@
                     "name": "Preschool/Kindergarten Building",
                     "terms": "kindergarden,pre-school"
                 },
+                "building/mosque": {
+                    "name": "Mosque Building",
+                    "terms": ""
+                },
                 "building/public": {
                     "name": "Public Building",
                     "terms": ""
