@@ -1,5 +1,5 @@
 {
-    "icon": "rail-metro",
+    "icon": "poi-subway",
     "fields": [
         "name",
         "network",

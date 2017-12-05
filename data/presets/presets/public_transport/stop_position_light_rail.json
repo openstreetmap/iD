@@ -1,5 +1,5 @@
 {
-    "icon": "rail-light",
+    "icon": "poi-light-rail",
     "fields": [
         "name",
         "ref_stop_position",

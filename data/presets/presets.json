@@ -13559,7 +13559,7 @@
             "name": "Ferry Stop / Platform"
         },
         "public_transport/platform_light_rail": {
-            "icon": "rail-light",
+            "icon": "poi-light-rail",
             "fields": [
                 "name",
                 "ref_platform",
@@ -13608,7 +13608,7 @@
             "name": "Light Rail Stop / Platform"
         },
         "public_transport/platform_monorail": {
-            "icon": "rail-metro",
+            "icon": "poi-monorail",
             "fields": [
                 "name",
                 "ref_platform",
@@ -13653,7 +13653,7 @@
             "name": "Monorail Stop / Platform"
         },
         "public_transport/platform_subway": {
-            "icon": "rail-metro",
+            "icon": "poi-subway",
             "fields": [
                 "name",
                 "ref_platform",
@@ -13747,7 +13747,7 @@
             "name": "Train Stop / Platform"
         },
         "public_transport/platform_tram": {
-            "icon": "rail-light",
+            "icon": "poi-tram",
             "fields": [
                 "name",
                 "ref_platform",
@@ -13797,7 +13797,7 @@
             "name": "Tram Stop / Platform"
         },
         "public_transport/platform_trolleybus": {
-            "icon": "bus",
+            "icon": "poi-trolleybus",
             "fields": [
                 "name",
                 "ref_platform",
@@ -14006,7 +14006,7 @@
             "name": "Ferry Station / Terminal"
         },
         "public_transport/station_light_rail": {
-            "icon": "rail-light",
+            "icon": "poi-light-rail",
             "fields": [
                 "name",
                 "network",
@@ -14058,7 +14058,7 @@
             "name": "Light Rail Station"
         },
         "public_transport/station_monorail": {
-            "icon": "rail-metro",
+            "icon": "poi-monorail",
             "fields": [
                 "name",
                 "network",
@@ -14104,7 +14104,7 @@
             "name": "Monorail Station"
         },
         "public_transport/station_subway": {
-            "icon": "rail-metro",
+            "icon": "poi-subway",
             "fields": [
                 "name",
                 "network",
@@ -14241,7 +14241,7 @@
             "name": "Train Station"
         },
         "public_transport/station_tram": {
-            "icon": "rail-light",
+            "icon": "poi-tram",
             "fields": [
                 "name",
                 "network",
@@ -14282,7 +14282,7 @@
             "name": "Tram Station"
         },
         "public_transport/station_trolleybus": {
-            "icon": "bus",
+            "icon": "poi-trolleybus",
             "fields": [
                 "name",
                 "network",
@@ -14481,7 +14481,7 @@
             "name": "Ferry Stopping Location"
         },
         "public_transport/stop_position_light_rail": {
-            "icon": "rail-light",
+            "icon": "poi-light-rail",
             "fields": [
                 "name",
                 "ref_stop_position",
@@ -14524,7 +14524,7 @@
             "name": "Light Rail Stopping Location"
         },
         "public_transport/stop_position_monorail": {
-            "icon": "rail-metro",
+            "icon": "poi-monorail",
             "fields": [
                 "name",
                 "ref_stop_position",
@@ -14563,7 +14563,7 @@
             "name": "Monorail Stopping Location"
         },
         "public_transport/stop_position_subway": {
-            "icon": "rail-metro",
+            "icon": "poi-subway",
             "fields": [
                 "name",
                 "ref_stop_position",
@@ -14645,7 +14645,7 @@
             "name": "Train Stopping Location"
         },
         "public_transport/stop_position_tram": {
-            "icon": "rail-light",
+            "icon": "poi-tram",
             "fields": [
                 "name",
                 "ref_stop_position",
@@ -14689,7 +14689,7 @@
             "name": "Tram Stopping Location"
         },
         "public_transport/stop_position_trolleybus": {
-            "icon": "bus",
+            "icon": "poi-trolleybus",
             "fields": [
                 "name",
                 "ref_stop_position",
@@ -14810,7 +14810,7 @@
             "searchable": false
         },
         "railway/tram_stop": {
-            "icon": "rail-light",
+            "icon": "poi-tram",
             "fields": [
                 "name",
                 "network",
@@ -18802,7 +18802,7 @@
             "name": "Riding Route"
         },
         "type/route/light_rail": {
-            "icon": "route-tram",
+            "icon": "route-light-rail",
             "fields": [
                 "name",
                 "ref_route",
