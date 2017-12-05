@@ -1,7 +1,6 @@
 {
     "icon": "recycling",
     "fields": [
-        "recycling_type",
         "recycling_accepts",
         "collection_times"
     ],
@@ -22,5 +21,17 @@
     "tags": {
         "amenity": "recycling"
     },
-    "name": "Recycling"
+    "addTags": {
+        "amenity": "recycling",
+        "recycling_type": "container"
+    },
+    "removeTags": {
+        "amenity": "recycling",
+        "recycling_type": "container"
+    },
+    "reference": {
+        "key": "amenity",
+        "value": "recycling"
+    },
+    "name": "Recycling Container"
 }

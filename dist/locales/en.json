@@ -2184,13 +2184,6 @@
                 "recycling_accepts": {
                     "label": "Accepts"
                 },
-                "recycling_type": {
-                    "label": "Recycling Type",
-                    "options": {
-                        "container": "Container",
-                        "centre": "Recycling Center"
-                    }
-                },
                 "ref_aeroway_gate": {
                     "label": "Gate Number"
                 },
@@ -3073,7 +3066,7 @@
                     "terms": "bottle,can,dump,glass,garbage,rubbish,scrap,trash"
                 },
                 "amenity/recycling": {
-                    "name": "Recycling",
+                    "name": "Recycling Container",
                     "terms": "bin,can,bottle,glass,garbage,rubbish,scrap,trash"
                 },
                 "amenity/restaurant": {

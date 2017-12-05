@@ -1489,18 +1489,6 @@
             "type": "multiCombo",
             "label": "Accepts"
         },
-        "recycling_type": {
-            "key": "recycling_type",
-            "default": "container",
-            "type": "combo",
-            "label": "Recycling Type",
-            "strings": {
-                "options": {
-                    "container": "Container",
-                    "centre": "Recycling Center"
-                }
-            }
-        },
         "ref_aeroway_gate": {
             "key": "ref",
             "type": "text",
