@@ -49,6 +49,10 @@
         },
         {
             "key": "aerialway",
+            "value": "station"
+        },
+        {
+            "key": "aerialway",
             "value": "cable_car"
         },
         {
@@ -89,10 +93,6 @@
         },
         {
             "key": "aerialway",
-            "value": "station"
-        },
-        {
-            "key": "aerialway",
             "value": "t-bar"
         },
         {
@@ -129,7 +129,15 @@
         },
         {
             "key": "amenity",
+            "value": "bus_station"
+        },
+        {
+            "key": "amenity",
             "value": "coworking_space"
+        },
+        {
+            "key": "amenity",
+            "value": "ferry_terminal"
         },
         {
             "key": "amenity",
@@ -206,10 +214,6 @@
         {
             "key": "amenity",
             "value": "bureau_de_change"
-        },
-        {
-            "key": "amenity",
-            "value": "bus_station"
         },
         {
             "key": "amenity",
@@ -306,10 +310,6 @@
         {
             "key": "amenity",
             "value": "fast_food"
-        },
-        {
-            "key": "amenity",
-            "value": "ferry_terminal"
         },
         {
             "key": "amenity",
@@ -1274,11 +1274,11 @@
         },
         {
             "key": "highway",
-            "value": "bridleway"
+            "value": "bus_stop"
         },
         {
             "key": "highway",
-            "value": "bus_stop"
+            "value": "bridleway"
         },
         {
             "key": "highway",
@@ -2485,12 +2485,188 @@
             "value": "transformer"
         },
         {
+            "key": "aerialway",
+            "value": "yes"
+        },
+        {
+            "key": "bus",
+            "value": "yes"
+        },
+        {
+            "key": "ferry",
+            "value": "yes"
+        },
+        {
+            "key": "light_rail",
+            "value": "yes"
+        },
+        {
+            "key": "monorail",
+            "value": "yes"
+        },
+        {
+            "key": "train",
+            "value": "yes"
+        },
+        {
+            "key": "train",
+            "value": "yes"
+        },
+        {
+            "key": "tram",
+            "value": "yes"
+        },
+        {
+            "key": "trolleybus",
+            "value": "yes"
+        },
+        {
             "key": "public_transport",
             "value": "platform"
         },
         {
+            "key": "aerialway",
+            "value": "yes"
+        },
+        {
+            "key": "bus",
+            "value": "yes"
+        },
+        {
+            "key": "ferry",
+            "value": "yes"
+        },
+        {
+            "key": "light_rail",
+            "value": "yes"
+        },
+        {
+            "key": "monorail",
+            "value": "yes"
+        },
+        {
+            "key": "train",
+            "value": "yes"
+        },
+        {
+            "key": "train",
+            "value": "yes"
+        },
+        {
+            "key": "tram",
+            "value": "yes"
+        },
+        {
+            "key": "trolleybus",
+            "value": "yes"
+        },
+        {
+            "key": "public_transport",
+            "value": "platform"
+        },
+        {
+            "key": "aerialway",
+            "value": "yes"
+        },
+        {
+            "key": "bus",
+            "value": "yes"
+        },
+        {
+            "key": "ferry",
+            "value": "yes"
+        },
+        {
+            "key": "light_rail",
+            "value": "yes"
+        },
+        {
+            "key": "monorail",
+            "value": "yes"
+        },
+        {
+            "key": "subway",
+            "value": "yes"
+        },
+        {
+            "key": "railway",
+            "value": "halt"
+        },
+        {
+            "key": "train",
+            "value": "yes"
+        },
+        {
+            "key": "tram",
+            "value": "yes"
+        },
+        {
+            "key": "trolleybus",
+            "value": "yes"
+        },
+        {
+            "key": "public_transport",
+            "value": "station"
+        },
+        {
+            "key": "public_transport",
+            "value": "stop_area"
+        },
+        {
+            "key": "aerialway",
+            "value": "yes"
+        },
+        {
+            "key": "bus",
+            "value": "yes"
+        },
+        {
+            "key": "ferry",
+            "value": "yes"
+        },
+        {
+            "key": "light_rail",
+            "value": "yes"
+        },
+        {
+            "key": "monorail",
+            "value": "yes"
+        },
+        {
+            "key": "subway",
+            "value": "yes"
+        },
+        {
+            "key": "train",
+            "value": "yes"
+        },
+        {
+            "key": "tram",
+            "value": "yes"
+        },
+        {
+            "key": "trolleybus",
+            "value": "yes"
+        },
+        {
             "key": "public_transport",
             "value": "stop_position"
+        },
+        {
+            "key": "railway",
+            "value": "halt"
+        },
+        {
+            "key": "railway",
+            "value": "platform"
+        },
+        {
+            "key": "railway",
+            "value": "station"
+        },
+        {
+            "key": "railway",
+            "value": "tram_stop"
         },
         {
             "key": "railway",
@@ -2518,10 +2694,6 @@
         },
         {
             "key": "railway",
-            "value": "halt"
-        },
-        {
-            "key": "railway",
             "value": "level_crossing"
         },
         {
@@ -2546,19 +2718,11 @@
         },
         {
             "key": "railway",
-            "value": "platform"
-        },
-        {
-            "key": "railway",
             "value": "rail"
         },
         {
             "key": "railway",
             "value": "signal"
-        },
-        {
-            "key": "railway",
-            "value": "station"
         },
         {
             "key": "railway",
@@ -2575,10 +2739,6 @@
         {
             "key": "railway",
             "value": "wash"
-        },
-        {
-            "key": "railway",
-            "value": "tram_stop"
         },
         {
             "key": "railway",

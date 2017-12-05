@@ -1,0 +1,40 @@
+{
+    "icon": "rail",
+    "fields": [
+        "name",
+        "ref_stop_position",
+        "network",
+        "operator"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "public_transport": "stop_position",
+        "train": "yes"
+    },
+    "addTags": {
+        "public_transport": "stop_position",
+        "train": "yes",
+        "railway": "stop"
+    },
+    "removeTags": {
+        "public_transport": "stop_position",
+        "train": "yes",
+        "railway": "stop"
+    },
+    "reference": {
+        "key": "railway",
+        "value": "stop"
+    },
+    "terms": [
+        "public transit",
+        "public transportation",
+        "rail",
+        "track",
+        "train",
+        "transit",
+        "transportation"
+    ],
+    "name": "Train Stopping Location"
+}

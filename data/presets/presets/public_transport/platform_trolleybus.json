@@ -1,0 +1,49 @@
+{
+    "icon": "poi-trolleybus",
+    "fields": [
+        "name",
+        "ref_platform",
+        "network",
+        "operator",
+        "surface",
+        "lit",
+        "bench",
+        "shelter"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "public_transport": "platform",
+        "trolleybus": "yes"
+    },
+    "addTags": {
+        "public_transport": "platform",
+        "trolleybus": "yes",
+        "highway": "bus_stop"
+    },
+    "removeTags": {
+        "public_transport": "platform",
+        "trolleybus": "yes",
+        "highway": "bus_stop"
+    },
+    "reference": {
+        "key": "public_transport",
+        "value": "platform"
+    },
+    "terms": [
+        "bus",
+        "electric",
+        "platform",
+        "public transit",
+        "public transportation",
+        "streetcar",
+        "trackless",
+        "tram",
+        "trolley",
+        "transit",
+        "transportation"
+    ],
+    "name": "Trolleybus Stop / Platform"
+}

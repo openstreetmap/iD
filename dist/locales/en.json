@@ -2648,6 +2648,10 @@
                     "name": "Billboard",
                     "terms": ""
                 },
+                "aerialway/station": {
+                    "name": "Aerialway Station",
+                    "terms": ""
+                },
                 "aerialway/cable_car": {
                     "name": "Cable Car",
                     "terms": "tramway,ropeway"
@@ -2688,10 +2692,6 @@
                     "name": "Rope Tow Lift",
                     "terms": "handle tow,bugel lift"
                 },
-                "aerialway/station": {
-                    "name": "Aerialway Station",
-                    "terms": ""
-                },
                 "aerialway/t-bar": {
                     "name": "T-bar Lift",
                     "terms": "tbar"
@@ -2728,8 +2728,16 @@
                     "name": "Airport Terminal",
                     "terms": "airport,aerodrome"
                 },
+                "amenity/bus_station": {
+                    "name": "Bus Station / Terminal",
+                    "terms": ""
+                },
                 "amenity/coworking_space": {
                     "name": "Coworking Space",
+                    "terms": ""
+                },
+                "amenity/ferry_terminal": {
+                    "name": "Ferry Station / Terminal",
                     "terms": ""
                 },
                 "amenity/nursing_home": {
@@ -2807,10 +2815,6 @@
                 "amenity/bureau_de_change": {
                     "name": "Currency Exchange",
                     "terms": "bureau de change,money changer"
-                },
-                "amenity/bus_station": {
-                    "name": "Bus Station",
-                    "terms": ""
                 },
                 "amenity/cafe": {
                     "name": "Cafe",
@@ -2907,10 +2911,6 @@
                 "amenity/fast_food": {
                     "name": "Fast Food",
                     "terms": "restaurant,takeaway"
-                },
-                "amenity/ferry_terminal": {
-                    "name": "Ferry Terminal",
-                    "terms": ""
                 },
                 "amenity/fire_station": {
                     "name": "Fire Station",
@@ -3880,13 +3880,13 @@
                     "name": "Speech Therapist",
                     "terms": "speech,therapist,therapy,voice"
                 },
+                "highway/bus_stop": {
+                    "name": "Bus Stop / Platform",
+                    "terms": ""
+                },
                 "highway/bridleway": {
                     "name": "Bridle Path",
                     "terms": "bridleway,equestrian,horse"
-                },
-                "highway/bus_stop": {
-                    "name": "Bus Stop",
-                    "terms": ""
                 },
                 "highway/corridor": {
                     "name": "Indoor Corridor",
@@ -5108,13 +5108,189 @@
                     "name": "Transformer",
                     "terms": ""
                 },
+                "public_transport/linear_platform_aerialway": {
+                    "name": "Aerialway Stop / Platform",
+                    "terms": "aerialway,cable car,platform,public transit,public transportation,transit,transportation"
+                },
+                "public_transport/linear_platform_bus": {
+                    "name": "Bus Stop / Platform",
+                    "terms": "bus,platform,public transit,public transportation,transit,transportation"
+                },
+                "public_transport/linear_platform_ferry": {
+                    "name": "Ferry Stop / Platform",
+                    "terms": "boat,dock,ferry,pier,platform,public transit,public transportation,transit,transportation"
+                },
+                "public_transport/linear_platform_light_rail": {
+                    "name": "Light Rail Stop / Platform",
+                    "terms": "electric,light rail,platform,public transit,public transportation,rail,track,tram,trolley,transit,transportation"
+                },
+                "public_transport/linear_platform_monorail": {
+                    "name": "Monorail Stop / Platform",
+                    "terms": "monorail,platform,public transit,public transportation,rail,transit,transportation"
+                },
+                "public_transport/linear_platform_subway": {
+                    "name": "Subway Stop / Platform",
+                    "terms": "metro,platform,public transit,public transportation,rail,subway,track,transit,transportation,underground"
+                },
+                "public_transport/linear_platform_train": {
+                    "name": "Train Stop / Platform",
+                    "terms": "platform,public transit,public transportation,rail,track,train,transit,transportation"
+                },
+                "public_transport/linear_platform_tram": {
+                    "name": "Tram Stop / Platform",
+                    "terms": "electric,light rail,platform,public transit,public transportation,rail,streetcar,track,tram,trolley,transit,transportation"
+                },
+                "public_transport/linear_platform_trolleybus": {
+                    "name": "Trolleybus Stop / Platform",
+                    "terms": "bus,electric,platform,public transit,public transportation,streetcar,trackless,tram,trolley,transit,transportation"
+                },
+                "public_transport/linear_platform": {
+                    "name": "Transit Stop / Platform",
+                    "terms": "platform,public transit,public transportation,transit,transportation"
+                },
+                "public_transport/platform_aerialway": {
+                    "name": "Aerialway Stop / Platform",
+                    "terms": "aerialway,cable car,platform,public transit,public transportation,transit,transportation"
+                },
+                "public_transport/platform_bus": {
+                    "name": "Bus Stop / Platform",
+                    "terms": "bus,platform,public transit,public transportation,transit,transportation"
+                },
+                "public_transport/platform_ferry": {
+                    "name": "Ferry Stop / Platform",
+                    "terms": "boat,dock,ferry,pier,platform,public transit,public transportation,transit,transportation"
+                },
+                "public_transport/platform_light_rail": {
+                    "name": "Light Rail Stop / Platform",
+                    "terms": "electric,light rail,platform,public transit,public transportation,rail,track,tram,trolley,transit,transportation"
+                },
+                "public_transport/platform_monorail": {
+                    "name": "Monorail Stop / Platform",
+                    "terms": "monorail,platform,public transit,public transportation,rail,transit,transportation"
+                },
+                "public_transport/platform_subway": {
+                    "name": "Subway Stop / Platform",
+                    "terms": "metro,platform,public transit,public transportation,rail,subway,track,transit,transportation,underground"
+                },
+                "public_transport/platform_train": {
+                    "name": "Train Stop / Platform",
+                    "terms": "platform,public transit,public transportation,rail,track,train,transit,transportation"
+                },
+                "public_transport/platform_tram": {
+                    "name": "Tram Stop / Platform",
+                    "terms": "electric,light rail,platform,public transit,public transportation,rail,streetcar,track,tram,trolley,transit,transportation"
+                },
+                "public_transport/platform_trolleybus": {
+                    "name": "Trolleybus Stop / Platform",
+                    "terms": "bus,electric,platform,public transit,public transportation,streetcar,trackless,tram,trolley,transit,transportation"
+                },
                 "public_transport/platform": {
-                    "name": "Platform",
+                    "name": "Transit Stop / Platform",
+                    "terms": "platform,public transit,public transportation,transit,transportation"
+                },
+                "public_transport/station_aerialway": {
+                    "name": "Aerialway Station",
+                    "terms": "aerialway,cable car,public transit,public transportation,station,terminal,transit,transportation"
+                },
+                "public_transport/station_bus": {
+                    "name": "Bus Station / Terminal",
+                    "terms": "bus,public transit,public transportation,station,terminal,transit,transportation"
+                },
+                "public_transport/station_ferry": {
+                    "name": "Ferry Station / Terminal",
+                    "terms": "boat,dock,ferry,pier,public transit,public transportation,station,terminal,transit,transportation"
+                },
+                "public_transport/station_light_rail": {
+                    "name": "Light Rail Station",
+                    "terms": "electric,light rail,public transit,public transportation,rail,station,terminal,track,tram,trolley,transit,transportation"
+                },
+                "public_transport/station_monorail": {
+                    "name": "Monorail Station",
+                    "terms": "monorail,public transit,public transportation,rail,station,terminal,transit,transportation"
+                },
+                "public_transport/station_subway": {
+                    "name": "Subway Station",
+                    "terms": "metro,public transit,public transportation,rail,station,subway,terminal,track,transit,transportation,underground"
+                },
+                "public_transport/station_train_halt": {
+                    "name": "Train Station (Halt / Request)",
+                    "terms": "halt,public transit,public transportation,rail,station,track,train,transit,transportation,whistle stop"
+                },
+                "public_transport/station_train": {
+                    "name": "Train Station",
+                    "terms": "public transit,public transportation,rail,station,terminal,track,train,transit,transportation"
+                },
+                "public_transport/station_tram": {
+                    "name": "Tram Station",
+                    "terms": "electric,light rail,public transit,public transportation,rail,station,streetcar,terminal,track,tram,trolley,transit,transportation"
+                },
+                "public_transport/station_trolleybus": {
+                    "name": "Trolleybus Station / Terminal",
+                    "terms": "bus,electric,public transit,public transportation,station,streetcar,terminal,trackless,tram,trolley,transit,transportation"
+                },
+                "public_transport/station": {
+                    "name": "Transit Station",
+                    "terms": "public transit,public transportation,station,terminal,transit,transportation"
+                },
+                "public_transport/stop_area": {
+                    "name": "Transit Stop Area",
                     "terms": ""
                 },
+                "public_transport/stop_position_aerialway": {
+                    "name": "Aerialway Stopping Location",
+                    "terms": "aerialway,cable car,public transit,public transportation,transit,transportation"
+                },
+                "public_transport/stop_position_bus": {
+                    "name": "Bus Stopping Location",
+                    "terms": "bus,public transit,public transportation,transit,transportation"
+                },
+                "public_transport/stop_position_ferry": {
+                    "name": "Ferry Stopping Location",
+                    "terms": "boat,dock,ferry,pier,public transit,public transportation,transit,transportation"
+                },
+                "public_transport/stop_position_light_rail": {
+                    "name": "Light Rail Stopping Location",
+                    "terms": "electric,light rail,public transit,public transportation,rail,track,tram,trolley,transit,transportation"
+                },
+                "public_transport/stop_position_monorail": {
+                    "name": "Monorail Stopping Location",
+                    "terms": "monorail,public transit,public transportation,rail,transit,transportation"
+                },
+                "public_transport/stop_position_subway": {
+                    "name": "Subway Stopping Location",
+                    "terms": "metro,public transit,public transportation,rail,subway,track,transit,transportation,underground"
+                },
+                "public_transport/stop_position_train": {
+                    "name": "Train Stopping Location",
+                    "terms": "public transit,public transportation,rail,track,train,transit,transportation"
+                },
+                "public_transport/stop_position_tram": {
+                    "name": "Tram Stopping Location",
+                    "terms": "electric,light rail,public transit,public transportation,rail,streetcar,track,tram,trolley,transit,transportation"
+                },
+                "public_transport/stop_position_trolleybus": {
+                    "name": "Trolleybus Stopping Location",
+                    "terms": "bus,electric,public transit,public transportation,streetcar,trackless,tram,trolley,transit,transportation"
+                },
                 "public_transport/stop_position": {
-                    "name": "Stop Position",
+                    "name": "Transit Stopping Location",
+                    "terms": "public transit,public transportation,transit,transportation"
+                },
+                "railway/halt": {
+                    "name": "Train Station (Halt / Request)",
+                    "terms": "break,interrupt,rest,wait,interruption"
+                },
+                "railway/platform": {
+                    "name": "Train Stop / Platform",
                     "terms": ""
+                },
+                "railway/station": {
+                    "name": "Train Station",
+                    "terms": "train station,station"
+                },
+                "railway/tram_stop": {
+                    "name": "Tram Stopping Position",
+                    "terms": "light rail,streetcar,tram,trolley"
                 },
                 "railway/abandoned": {
                     "name": "Abandoned Railway",
@@ -5140,10 +5316,6 @@
                     "name": "Funicular",
                     "terms": "venicular,cliff railway,cable car,cable railway,funicular railway"
                 },
-                "railway/halt": {
-                    "name": "Railway Halt",
-                    "terms": "break,interrupt,rest,wait,interruption"
-                },
                 "railway/level_crossing": {
                     "name": "Railway Crossing (Road)",
                     "terms": "crossing,railroad crossing,level crossing,grade crossing,road through railroad,train crossing"
@@ -5168,10 +5340,6 @@
                     "name": "Narrow Gauge Rail",
                     "terms": "narrow gauge railway,narrow gauge railroad"
                 },
-                "railway/platform": {
-                    "name": "Railway Platform",
-                    "terms": ""
-                },
                 "railway/rail": {
                     "name": "Rail",
                     "terms": ""
@@ -5179,10 +5347,6 @@
                 "railway/signal": {
                     "name": "Railway Signal",
                     "terms": "signal,lights"
-                },
-                "railway/station": {
-                    "name": "Railway Station",
-                    "terms": "train station,station"
                 },
                 "railway/subway_entrance": {
                     "name": "Subway Entrance",
@@ -5199,10 +5363,6 @@
                 "railway/train_wash": {
                     "name": "Train Wash",
                     "terms": "wash,clean"
-                },
-                "railway/tram_stop": {
-                    "name": "Tram Stop",
-                    "terms": "light rail,streetcar,tram,trolley"
                 },
                 "railway/tram": {
                     "name": "Tram",

@@ -183,6 +183,25 @@
             },
             "name": "Billboard"
         },
+        "aerialway/station": {
+            "icon": "aerialway",
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "fields": [
+                "aerialway/access",
+                "aerialway/summer/access",
+                "elevation",
+                "building_area"
+            ],
+            "tags": {
+                "aerialway": "station"
+            },
+            "name": "Aerialway Station",
+            "searchable": false
+        },
         "aerialway/cable_car": {
             "geometry": [
                 "line"
@@ -346,24 +365,6 @@
             },
             "name": "Rope Tow Lift"
         },
-        "aerialway/station": {
-            "icon": "aerialway",
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "fields": [
-                "aerialway/access",
-                "aerialway/summer/access",
-                "elevation",
-                "building_area"
-            ],
-            "tags": {
-                "aerialway": "station"
-            },
-            "name": "Aerialway Station"
-        },
         "aerialway/t-bar": {
             "geometry": [
                 "line"
@@ -520,6 +521,26 @@
             },
             "name": "Airport Terminal"
         },
+        "amenity/bus_station": {
+            "icon": "bus",
+            "fields": [
+                "name",
+                "building_area",
+                "operator",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "amenity": "bus_station"
+            },
+            "name": "Bus Station / Terminal",
+            "searchable": false
+        },
         "amenity/coworking_space": {
             "icon": "commercial",
             "fields": [
@@ -539,6 +560,27 @@
                 "amenity": "coworking_space"
             },
             "name": "Coworking Space",
+            "searchable": false
+        },
+        "amenity/ferry_terminal": {
+            "icon": "ferry",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "address",
+                "building_area"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "terms": [],
+            "tags": {
+                "amenity": "ferry_terminal"
+            },
+            "name": "Ferry Station / Terminal",
             "searchable": false
         },
         "amenity/nursing_home": {
@@ -986,25 +1028,6 @@
                 "amenity": "bureau_de_change"
             },
             "name": "Currency Exchange"
-        },
-        "amenity/bus_station": {
-            "icon": "bus",
-            "fields": [
-                "name",
-                "building_area",
-                "operator",
-                "internet_access",
-                "internet_access/fee",
-                "internet_access/ssid"
-            ],
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "tags": {
-                "amenity": "bus_station"
-            },
-            "name": "Bus Station"
         },
         "amenity/cafe": {
             "icon": "cafe",
@@ -1547,26 +1570,6 @@
                 "takeaway"
             ],
             "name": "Fast Food"
-        },
-        "amenity/ferry_terminal": {
-            "icon": "ferry",
-            "fields": [
-                "name",
-                "network",
-                "operator",
-                "address",
-                "building_area"
-            ],
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "terms": [],
-            "tags": {
-                "amenity": "ferry_terminal"
-            },
-            "name": "Ferry Terminal"
         },
         "amenity/fire_station": {
             "icon": "fire-station",
@@ -6632,6 +6635,25 @@
             },
             "name": "Speech Therapist"
         },
+        "highway/bus_stop": {
+            "icon": "bus",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "point",
+                "vertex"
+            ],
+            "tags": {
+                "highway": "bus_stop"
+            },
+            "name": "Bus Stop / Platform",
+            "searchable": false
+        },
         "highway/bridleway": {
             "fields": [
                 "name",
@@ -6653,25 +6675,6 @@
                 "horse"
             ],
             "name": "Bridle Path"
-        },
-        "highway/bus_stop": {
-            "icon": "bus",
-            "fields": [
-                "name",
-                "network",
-                "operator",
-                "bench",
-                "shelter"
-            ],
-            "geometry": [
-                "point",
-                "vertex"
-            ],
-            "tags": {
-                "highway": "bus_stop"
-            },
-            "terms": [],
-            "name": "Bus Stop"
         },
         "highway/corridor": {
             "icon": "highway-footway",
@@ -13017,6 +13020,831 @@
             },
             "name": "Transformer"
         },
+        "public_transport/linear_platform_aerialway": {
+            "icon": "highway-footway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "aerialway": "yes"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "platform"
+            },
+            "terms": [
+                "aerialway",
+                "cable car",
+                "platform",
+                "public transit",
+                "public transportation",
+                "transit",
+                "transportation"
+            ],
+            "name": "Aerialway Stop / Platform"
+        },
+        "public_transport/linear_platform_bus": {
+            "icon": "highway-footway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "bus": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "bus": "yes",
+                "highway": "bus_stop"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "bus": "yes",
+                "highway": "bus_stop"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "platform"
+            },
+            "terms": [
+                "bus",
+                "platform",
+                "public transit",
+                "public transportation",
+                "transit",
+                "transportation"
+            ],
+            "name": "Bus Stop / Platform"
+        },
+        "public_transport/linear_platform_ferry": {
+            "icon": "highway-footway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "ferry": "yes"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "platform"
+            },
+            "terms": [
+                "boat",
+                "dock",
+                "ferry",
+                "pier",
+                "platform",
+                "public transit",
+                "public transportation",
+                "transit",
+                "transportation"
+            ],
+            "name": "Ferry Stop / Platform"
+        },
+        "public_transport/linear_platform_light_rail": {
+            "icon": "highway-footway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "light_rail": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "light_rail": "yes",
+                "railway": "platform"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "light_rail": "yes",
+                "railway": "platform"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "platform"
+            },
+            "terms": [
+                "electric",
+                "light rail",
+                "platform",
+                "public transit",
+                "public transportation",
+                "rail",
+                "track",
+                "tram",
+                "trolley",
+                "transit",
+                "transportation"
+            ],
+            "name": "Light Rail Stop / Platform"
+        },
+        "public_transport/linear_platform_monorail": {
+            "icon": "highway-footway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "monorail": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "monorail": "yes",
+                "railway": "platform"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "monorail": "yes",
+                "railway": "platform"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "platform"
+            },
+            "terms": [
+                "monorail",
+                "platform",
+                "public transit",
+                "public transportation",
+                "rail",
+                "transit",
+                "transportation"
+            ],
+            "name": "Monorail Stop / Platform"
+        },
+        "public_transport/linear_platform_subway": {
+            "icon": "highway-footway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "train": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "train": "yes",
+                "railway": "platform"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "train": "yes",
+                "railway": "platform"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "platform"
+            },
+            "terms": [
+                "metro",
+                "platform",
+                "public transit",
+                "public transportation",
+                "rail",
+                "subway",
+                "track",
+                "transit",
+                "transportation",
+                "underground"
+            ],
+            "name": "Subway Stop / Platform"
+        },
+        "public_transport/linear_platform_train": {
+            "icon": "highway-footway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "train": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "train": "yes",
+                "railway": "platform"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "train": "yes",
+                "railway": "platform"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "platform"
+            },
+            "terms": [
+                "platform",
+                "public transit",
+                "public transportation",
+                "rail",
+                "track",
+                "train",
+                "transit",
+                "transportation"
+            ],
+            "name": "Train Stop / Platform"
+        },
+        "public_transport/linear_platform_tram": {
+            "icon": "highway-footway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "tram": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "tram": "yes",
+                "railway": "platform"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "tram": "yes",
+                "railway": "platform"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "platform"
+            },
+            "terms": [
+                "electric",
+                "light rail",
+                "platform",
+                "public transit",
+                "public transportation",
+                "rail",
+                "streetcar",
+                "track",
+                "tram",
+                "trolley",
+                "transit",
+                "transportation"
+            ],
+            "name": "Tram Stop / Platform"
+        },
+        "public_transport/linear_platform_trolleybus": {
+            "icon": "highway-footway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "trolleybus": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "trolleybus": "yes",
+                "highway": "bus_stop"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "trolleybus": "yes",
+                "highway": "bus_stop"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "platform"
+            },
+            "terms": [
+                "bus",
+                "electric",
+                "platform",
+                "public transit",
+                "public transportation",
+                "streetcar",
+                "trackless",
+                "tram",
+                "trolley",
+                "transit",
+                "transportation"
+            ],
+            "name": "Trolleybus Stop / Platform"
+        },
+        "public_transport/linear_platform": {
+            "icon": "highway-footway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "public_transport": "platform"
+            },
+            "terms": [
+                "platform",
+                "public transit",
+                "public transportation",
+                "transit",
+                "transportation"
+            ],
+            "name": "Transit Stop / Platform",
+            "matchScore": 0.2
+        },
+        "public_transport/platform_aerialway": {
+            "icon": "aerialway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "aerialway": "yes"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "platform"
+            },
+            "terms": [
+                "aerialway",
+                "cable car",
+                "platform",
+                "public transit",
+                "public transportation",
+                "transit",
+                "transportation"
+            ],
+            "name": "Aerialway Stop / Platform"
+        },
+        "public_transport/platform_bus": {
+            "icon": "bus",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "bus": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "bus": "yes",
+                "highway": "bus_stop"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "bus": "yes",
+                "highway": "bus_stop"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "platform"
+            },
+            "terms": [
+                "bus",
+                "platform",
+                "public transit",
+                "public transportation",
+                "transit",
+                "transportation"
+            ],
+            "name": "Bus Stop / Platform"
+        },
+        "public_transport/platform_ferry": {
+            "icon": "ferry",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "ferry": "yes"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "platform"
+            },
+            "terms": [
+                "boat",
+                "dock",
+                "ferry",
+                "pier",
+                "platform",
+                "public transit",
+                "public transportation",
+                "transit",
+                "transportation"
+            ],
+            "name": "Ferry Stop / Platform"
+        },
+        "public_transport/platform_light_rail": {
+            "icon": "poi-light-rail",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "light_rail": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "light_rail": "yes",
+                "railway": "platform"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "light_rail": "yes",
+                "railway": "platform"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "platform"
+            },
+            "terms": [
+                "electric",
+                "light rail",
+                "platform",
+                "public transit",
+                "public transportation",
+                "rail",
+                "track",
+                "tram",
+                "trolley",
+                "transit",
+                "transportation"
+            ],
+            "name": "Light Rail Stop / Platform"
+        },
+        "public_transport/platform_monorail": {
+            "icon": "poi-monorail",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "monorail": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "monorail": "yes",
+                "railway": "platform"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "monorail": "yes",
+                "railway": "platform"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "platform"
+            },
+            "terms": [
+                "monorail",
+                "platform",
+                "public transit",
+                "public transportation",
+                "rail",
+                "transit",
+                "transportation"
+            ],
+            "name": "Monorail Stop / Platform"
+        },
+        "public_transport/platform_subway": {
+            "icon": "poi-subway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "train": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "train": "yes",
+                "railway": "platform"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "train": "yes",
+                "railway": "platform"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "platform"
+            },
+            "terms": [
+                "metro",
+                "platform",
+                "public transit",
+                "public transportation",
+                "rail",
+                "subway",
+                "track",
+                "transit",
+                "transportation",
+                "underground"
+            ],
+            "name": "Subway Stop / Platform"
+        },
+        "public_transport/platform_train": {
+            "icon": "rail",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "train": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "train": "yes",
+                "railway": "platform"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "train": "yes",
+                "railway": "platform"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "platform"
+            },
+            "terms": [
+                "platform",
+                "public transit",
+                "public transportation",
+                "rail",
+                "track",
+                "train",
+                "transit",
+                "transportation"
+            ],
+            "name": "Train Stop / Platform"
+        },
+        "public_transport/platform_tram": {
+            "icon": "poi-tram",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "tram": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "tram": "yes",
+                "railway": "platform"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "tram": "yes",
+                "railway": "platform"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "platform"
+            },
+            "terms": [
+                "electric",
+                "light rail",
+                "platform",
+                "public transit",
+                "public transportation",
+                "rail",
+                "streetcar",
+                "track",
+                "tram",
+                "trolley",
+                "transit",
+                "transportation"
+            ],
+            "name": "Tram Stop / Platform"
+        },
+        "public_transport/platform_trolleybus": {
+            "icon": "poi-trolleybus",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "trolleybus": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "trolleybus": "yes",
+                "highway": "bus_stop"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "trolleybus": "yes",
+                "highway": "bus_stop"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "platform"
+            },
+            "terms": [
+                "bus",
+                "electric",
+                "platform",
+                "public transit",
+                "public transportation",
+                "streetcar",
+                "trackless",
+                "tram",
+                "trolley",
+                "transit",
+                "transportation"
+            ],
+            "name": "Trolleybus Stop / Platform"
+        },
         "public_transport/platform": {
             "icon": "bus",
             "fields": [
@@ -13024,18 +13852,874 @@
                 "ref_platform",
                 "network",
                 "operator",
+                "surface",
+                "lit",
+                "bench",
                 "shelter"
             ],
             "geometry": [
                 "point",
-                "vertex",
-                "line",
                 "area"
             ],
             "tags": {
                 "public_transport": "platform"
             },
-            "name": "Platform"
+            "terms": [
+                "platform",
+                "public transit",
+                "public transportation",
+                "transit",
+                "transportation"
+            ],
+            "name": "Transit Stop / Platform",
+            "matchScore": 0.2
+        },
+        "public_transport/station_aerialway": {
+            "icon": "aerialway",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "aerialway/access",
+                "aerialway/summer/access",
+                "elevation",
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "station",
+                "aerialway": "yes"
+            },
+            "reference": {
+                "key": "aerialway",
+                "value": "station"
+            },
+            "terms": [
+                "aerialway",
+                "cable car",
+                "public transit",
+                "public transportation",
+                "station",
+                "terminal",
+                "transit",
+                "transportation"
+            ],
+            "name": "Aerialway Station"
+        },
+        "public_transport/station_bus": {
+            "icon": "bus",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "address",
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "station",
+                "bus": "yes"
+            },
+            "addTags": {
+                "public_transport": "station",
+                "bus": "yes",
+                "amenity": "bus_station"
+            },
+            "removeTags": {
+                "public_transport": "station",
+                "bus": "yes",
+                "amenity": "bus_station"
+            },
+            "reference": {
+                "key": "amenity",
+                "value": "bus_station"
+            },
+            "terms": [
+                "bus",
+                "public transit",
+                "public transportation",
+                "station",
+                "terminal",
+                "transit",
+                "transportation"
+            ],
+            "name": "Bus Station / Terminal"
+        },
+        "public_transport/station_ferry": {
+            "icon": "ferry",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "address",
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "station",
+                "ferry": "yes"
+            },
+            "addTags": {
+                "public_transport": "station",
+                "ferry": "yes",
+                "amenity": "ferry_terminal"
+            },
+            "removeTags": {
+                "public_transport": "station",
+                "ferry": "yes",
+                "amenity": "ferry_terminal"
+            },
+            "reference": {
+                "key": "amenity",
+                "value": "ferry_terminal"
+            },
+            "terms": [
+                "boat",
+                "dock",
+                "ferry",
+                "pier",
+                "public transit",
+                "public transportation",
+                "station",
+                "terminal",
+                "transit",
+                "transportation"
+            ],
+            "name": "Ferry Station / Terminal"
+        },
+        "public_transport/station_light_rail": {
+            "icon": "poi-light-rail",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "address",
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "station",
+                "light_rail": "yes"
+            },
+            "addTags": {
+                "public_transport": "station",
+                "light_rail": "yes",
+                "railway": "station",
+                "station": "light_rail"
+            },
+            "removeTags": {
+                "public_transport": "station",
+                "light_rail": "yes",
+                "railway": "station",
+                "station": "light_rail"
+            },
+            "reference": {
+                "key": "station",
+                "value": "light_rail"
+            },
+            "terms": [
+                "electric",
+                "light rail",
+                "public transit",
+                "public transportation",
+                "rail",
+                "station",
+                "terminal",
+                "track",
+                "tram",
+                "trolley",
+                "transit",
+                "transportation"
+            ],
+            "name": "Light Rail Station"
+        },
+        "public_transport/station_monorail": {
+            "icon": "poi-monorail",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "address",
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "station",
+                "monorail": "yes"
+            },
+            "addTags": {
+                "public_transport": "station",
+                "monorail": "yes",
+                "railway": "station"
+            },
+            "removeTags": {
+                "public_transport": "station",
+                "monorail": "yes",
+                "railway": "station"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "station"
+            },
+            "terms": [
+                "monorail",
+                "public transit",
+                "public transportation",
+                "rail",
+                "station",
+                "terminal",
+                "transit",
+                "transportation"
+            ],
+            "name": "Monorail Station"
+        },
+        "public_transport/station_subway": {
+            "icon": "poi-subway",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "address",
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "station",
+                "subway": "yes"
+            },
+            "addTags": {
+                "public_transport": "station",
+                "subway": "yes",
+                "railway": "station",
+                "station": "subway"
+            },
+            "removeTags": {
+                "public_transport": "station",
+                "subway": "yes",
+                "railway": "station",
+                "station": "subway"
+            },
+            "reference": {
+                "key": "station",
+                "value": "subway"
+            },
+            "terms": [
+                "metro",
+                "public transit",
+                "public transportation",
+                "rail",
+                "station",
+                "subway",
+                "terminal",
+                "track",
+                "transit",
+                "transportation",
+                "underground"
+            ],
+            "name": "Subway Station"
+        },
+        "public_transport/station_train_halt": {
+            "icon": "rail",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "address",
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "station",
+                "train": "yes",
+                "railway": "halt"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "halt"
+            },
+            "terms": [
+                "halt",
+                "public transit",
+                "public transportation",
+                "rail",
+                "station",
+                "track",
+                "train",
+                "transit",
+                "transportation",
+                "whistle stop"
+            ],
+            "name": "Train Station (Halt / Request)"
+        },
+        "public_transport/station_train": {
+            "icon": "rail",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "address",
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "station",
+                "train": "yes"
+            },
+            "addTags": {
+                "public_transport": "station",
+                "train": "yes",
+                "railway": "station"
+            },
+            "removeTags": {
+                "public_transport": "station",
+                "train": "yes",
+                "railway": "station"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "station"
+            },
+            "terms": [
+                "public transit",
+                "public transportation",
+                "rail",
+                "station",
+                "terminal",
+                "track",
+                "train",
+                "transit",
+                "transportation"
+            ],
+            "name": "Train Station"
+        },
+        "public_transport/station_tram": {
+            "icon": "poi-tram",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "address",
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "station",
+                "tram": "yes"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "station"
+            },
+            "terms": [
+                "electric",
+                "light rail",
+                "public transit",
+                "public transportation",
+                "rail",
+                "station",
+                "streetcar",
+                "terminal",
+                "track",
+                "tram",
+                "trolley",
+                "transit",
+                "transportation"
+            ],
+            "name": "Tram Station"
+        },
+        "public_transport/station_trolleybus": {
+            "icon": "poi-trolleybus",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "address",
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "station",
+                "trolleybus": "yes"
+            },
+            "addTags": {
+                "public_transport": "station",
+                "trolleybus": "yes",
+                "amenity": "bus_station"
+            },
+            "removeTags": {
+                "public_transport": "station",
+                "trolleybus": "yes",
+                "amenity": "bus_station"
+            },
+            "reference": {
+                "key": "amenity",
+                "value": "bus_station"
+            },
+            "terms": [
+                "bus",
+                "electric",
+                "public transit",
+                "public transportation",
+                "station",
+                "streetcar",
+                "terminal",
+                "trackless",
+                "tram",
+                "trolley",
+                "transit",
+                "transportation"
+            ],
+            "name": "Trolleybus Station / Terminal"
+        },
+        "public_transport/station": {
+            "icon": "rail",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "address",
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "station"
+            },
+            "terms": [
+                "public transit",
+                "public transportation",
+                "station",
+                "terminal",
+                "transit",
+                "transportation"
+            ],
+            "name": "Transit Station",
+            "matchScore": 0.2
+        },
+        "public_transport/stop_area": {
+            "icon": "bus",
+            "fields": [
+                "name",
+                "ref",
+                "network",
+                "operator"
+            ],
+            "geometry": [
+                "relation"
+            ],
+            "tags": {
+                "type": "public_transport",
+                "public_transport": "stop_area"
+            },
+            "addTags": {
+                "type": "public_transport",
+                "public_transport": "stop_area",
+                "public_transport:version": "2"
+            },
+            "removeTags": {
+                "type": "public_transport",
+                "public_transport": "stop_area",
+                "public_transport:version": "2"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "stop_area"
+            },
+            "name": "Transit Stop Area"
+        },
+        "public_transport/stop_position_aerialway": {
+            "icon": "aerialway",
+            "fields": [
+                "name",
+                "ref_stop_position",
+                "network",
+                "operator"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "public_transport": "stop_position",
+                "aerialway": "yes"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "stop_position"
+            },
+            "terms": [
+                "aerialway",
+                "cable car",
+                "public transit",
+                "public transportation",
+                "transit",
+                "transportation"
+            ],
+            "name": "Aerialway Stopping Location"
+        },
+        "public_transport/stop_position_bus": {
+            "icon": "bus",
+            "fields": [
+                "name",
+                "ref_stop_position",
+                "network",
+                "operator"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "public_transport": "stop_position",
+                "bus": "yes"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "stop_position"
+            },
+            "terms": [
+                "bus",
+                "public transit",
+                "public transportation",
+                "transit",
+                "transportation"
+            ],
+            "name": "Bus Stopping Location"
+        },
+        "public_transport/stop_position_ferry": {
+            "icon": "ferry",
+            "fields": [
+                "name",
+                "ref_stop_position",
+                "network",
+                "operator"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "public_transport": "stop_position",
+                "ferry": "yes"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "stop_position"
+            },
+            "terms": [
+                "boat",
+                "dock",
+                "ferry",
+                "pier",
+                "public transit",
+                "public transportation",
+                "transit",
+                "transportation"
+            ],
+            "name": "Ferry Stopping Location"
+        },
+        "public_transport/stop_position_light_rail": {
+            "icon": "poi-light-rail",
+            "fields": [
+                "name",
+                "ref_stop_position",
+                "network",
+                "operator"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "public_transport": "stop_position",
+                "light_rail": "yes"
+            },
+            "addTags": {
+                "public_transport": "stop_position",
+                "light_rail": "yes",
+                "railway": "stop"
+            },
+            "removeTags": {
+                "public_transport": "stop_position",
+                "light_rail": "yes",
+                "railway": "stop"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "stop"
+            },
+            "terms": [
+                "electric",
+                "light rail",
+                "public transit",
+                "public transportation",
+                "rail",
+                "track",
+                "tram",
+                "trolley",
+                "transit",
+                "transportation"
+            ],
+            "name": "Light Rail Stopping Location"
+        },
+        "public_transport/stop_position_monorail": {
+            "icon": "poi-monorail",
+            "fields": [
+                "name",
+                "ref_stop_position",
+                "network",
+                "operator"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "public_transport": "stop_position",
+                "monorail": "yes"
+            },
+            "addTags": {
+                "public_transport": "stop_position",
+                "monorail": "yes",
+                "railway": "stop"
+            },
+            "removeTags": {
+                "public_transport": "stop_position",
+                "monorail": "yes",
+                "railway": "stop"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "stop"
+            },
+            "terms": [
+                "monorail",
+                "public transit",
+                "public transportation",
+                "rail",
+                "transit",
+                "transportation"
+            ],
+            "name": "Monorail Stopping Location"
+        },
+        "public_transport/stop_position_subway": {
+            "icon": "poi-subway",
+            "fields": [
+                "name",
+                "ref_stop_position",
+                "network",
+                "operator"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "public_transport": "stop_position",
+                "subway": "yes"
+            },
+            "addTags": {
+                "public_transport": "stop_position",
+                "subway": "yes",
+                "railway": "stop"
+            },
+            "removeTags": {
+                "public_transport": "stop_position",
+                "subway": "yes",
+                "railway": "stop"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "stop"
+            },
+            "terms": [
+                "metro",
+                "public transit",
+                "public transportation",
+                "rail",
+                "subway",
+                "track",
+                "transit",
+                "transportation",
+                "underground"
+            ],
+            "name": "Subway Stopping Location"
+        },
+        "public_transport/stop_position_train": {
+            "icon": "rail",
+            "fields": [
+                "name",
+                "ref_stop_position",
+                "network",
+                "operator"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "public_transport": "stop_position",
+                "train": "yes"
+            },
+            "addTags": {
+                "public_transport": "stop_position",
+                "train": "yes",
+                "railway": "stop"
+            },
+            "removeTags": {
+                "public_transport": "stop_position",
+                "train": "yes",
+                "railway": "stop"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "stop"
+            },
+            "terms": [
+                "public transit",
+                "public transportation",
+                "rail",
+                "track",
+                "train",
+                "transit",
+                "transportation"
+            ],
+            "name": "Train Stopping Location"
+        },
+        "public_transport/stop_position_tram": {
+            "icon": "poi-tram",
+            "fields": [
+                "name",
+                "ref_stop_position",
+                "network",
+                "operator"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "public_transport": "stop_position",
+                "tram": "yes"
+            },
+            "addTags": {
+                "public_transport": "stop_position",
+                "tram": "yes",
+                "railway": "tram_stop"
+            },
+            "removeTags": {
+                "public_transport": "stop_position",
+                "tram": "yes",
+                "railway": "tram_stop"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "stop_position"
+            },
+            "terms": [
+                "electric",
+                "light rail",
+                "public transit",
+                "public transportation",
+                "rail",
+                "streetcar",
+                "track",
+                "tram",
+                "trolley",
+                "transit",
+                "transportation"
+            ],
+            "name": "Tram Stopping Location"
+        },
+        "public_transport/stop_position_trolleybus": {
+            "icon": "poi-trolleybus",
+            "fields": [
+                "name",
+                "ref_stop_position",
+                "network",
+                "operator"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "public_transport": "stop_position",
+                "trolleybus": "yes"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "stop_position"
+            },
+            "terms": [
+                "bus",
+                "electric",
+                "public transit",
+                "public transportation",
+                "streetcar",
+                "trackless",
+                "tram",
+                "trolley",
+                "transit",
+                "transportation"
+            ],
+            "name": "Trolleybus Stopping Location"
         },
         "public_transport/stop_position": {
             "icon": "bus",
@@ -13051,7 +14735,101 @@
             "tags": {
                 "public_transport": "stop_position"
             },
-            "name": "Stop Position"
+            "terms": [
+                "public transit",
+                "public transportation",
+                "transit",
+                "transportation"
+            ],
+            "name": "Transit Stopping Location",
+            "matchScore": 0.2
+        },
+        "railway/halt": {
+            "icon": "rail",
+            "geometry": [
+                "point",
+                "vertex"
+            ],
+            "tags": {
+                "railway": "halt"
+            },
+            "terms": [
+                "break",
+                "interrupt",
+                "rest",
+                "wait",
+                "interruption"
+            ],
+            "name": "Train Station (Halt / Request)",
+            "searchable": false
+        },
+        "railway/platform": {
+            "icon": "highway-footway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "surface",
+                "lit",
+                "shelter"
+            ],
+            "geometry": [
+                "line",
+                "area"
+            ],
+            "tags": {
+                "railway": "platform"
+            },
+            "name": "Train Stop / Platform",
+            "searchable": false
+        },
+        "railway/station": {
+            "icon": "rail",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "address",
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "railway": "station"
+            },
+            "terms": [
+                "train station",
+                "station"
+            ],
+            "name": "Train Station",
+            "searchable": false
+        },
+        "railway/tram_stop": {
+            "icon": "poi-tram",
+            "fields": [
+                "name",
+                "network",
+                "operator"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "railway": "tram_stop"
+            },
+            "terms": [
+                "light rail",
+                "streetcar",
+                "tram",
+                "trolley"
+            ],
+            "name": "Tram Stopping Position",
+            "searchable": false
         },
         "railway/abandoned": {
             "icon": "railway-abandoned",
@@ -13152,24 +14930,6 @@
                 "railway": "funicular"
             },
             "name": "Funicular"
-        },
-        "railway/halt": {
-            "icon": "rail",
-            "geometry": [
-                "point",
-                "vertex"
-            ],
-            "tags": {
-                "railway": "halt"
-            },
-            "name": "Railway Halt",
-            "terms": [
-                "break",
-                "interrupt",
-                "rest",
-                "wait",
-                "interruption"
-            ]
         },
         "railway/level_crossing": {
             "icon": "cross",
@@ -13289,24 +15049,6 @@
             ],
             "name": "Narrow Gauge Rail"
         },
-        "railway/platform": {
-            "icon": "highway-footway",
-            "fields": [
-                "name",
-                "ref_platform",
-                "surface",
-                "lit",
-                "shelter"
-            ],
-            "geometry": [
-                "line",
-                "area"
-            ],
-            "tags": {
-                "railway": "platform"
-            },
-            "name": "Railway Platform"
-        },
         "railway/rail": {
             "icon": "railway-rail",
             "geometry": [
@@ -13340,32 +15082,6 @@
                 "lights"
             ],
             "name": "Railway Signal"
-        },
-        "railway/station": {
-            "icon": "rail",
-            "fields": [
-                "name",
-                "network",
-                "operator",
-                "address",
-                "building_area",
-                "internet_access",
-                "internet_access/fee",
-                "internet_access/ssid"
-            ],
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "tags": {
-                "railway": "station"
-            },
-            "terms": [
-                "train station",
-                "station"
-            ],
-            "name": "Railway Station"
         },
         "railway/subway_entrance": {
             "icon": "entrance",
@@ -13439,27 +15155,6 @@
                 "clean"
             ],
             "name": "Train Wash"
-        },
-        "railway/tram_stop": {
-            "icon": "rail-light",
-            "fields": [
-                "name",
-                "network",
-                "operator"
-            ],
-            "geometry": [
-                "vertex"
-            ],
-            "tags": {
-                "railway": "tram_stop"
-            },
-            "terms": [
-                "light rail",
-                "streetcar",
-                "tram",
-                "trolley"
-            ],
-            "name": "Tram Stop"
         },
         "railway/tram": {
             "icon": "railway-light-rail",
@@ -17107,7 +18802,7 @@
             "name": "Riding Route"
         },
         "type/route/light_rail": {
-            "icon": "route-tram",
+            "icon": "route-light-rail",
             "fields": [
                 "name",
                 "ref_route",

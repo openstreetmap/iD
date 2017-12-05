@@ -1,0 +1,47 @@
+{
+    "icon": "rail",
+    "fields": [
+        "name",
+        "network",
+        "operator",
+        "address",
+        "building_area",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "public_transport": "station",
+        "train": "yes"
+    },
+    "addTags": {
+        "public_transport": "station",
+        "train": "yes",
+        "railway": "station"
+    },
+    "removeTags": {
+        "public_transport": "station",
+        "train": "yes",
+        "railway": "station"
+    },
+    "reference": {
+        "key": "railway",
+        "value": "station"
+    },
+    "terms": [
+        "public transit",
+        "public transportation",
+        "rail",
+        "station",
+        "terminal",
+        "track",
+        "train",
+        "transit",
+        "transportation"
+    ],
+    "name": "Train Station"
+}

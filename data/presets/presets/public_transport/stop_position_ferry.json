@@ -1,5 +1,5 @@
 {
-    "icon": "bus",
+    "icon": "ferry",
     "fields": [
         "name",
         "ref_stop_position",
@@ -10,14 +10,22 @@
         "vertex"
     ],
     "tags": {
-        "public_transport": "stop_position"
+        "public_transport": "stop_position",
+        "ferry": "yes"
+    },
+    "reference": {
+        "key": "public_transport",
+        "value": "stop_position"
     },
     "terms": [
+        "boat",
+        "dock",
+        "ferry",
+        "pier",
         "public transit",
         "public transportation",
         "transit",
         "transportation"
     ],
-    "name": "Transit Stopping Location",
-    "matchScore": 0.2
+    "name": "Ferry Stopping Location"
 }

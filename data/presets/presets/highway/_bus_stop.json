@@ -14,6 +14,6 @@
     "tags": {
         "highway": "bus_stop"
     },
-    "terms": [],
-    "name": "Bus Stop"
+    "name": "Bus Stop / Platform",
+    "searchable": false
 }

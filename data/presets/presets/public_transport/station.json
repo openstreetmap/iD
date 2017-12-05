@@ -12,15 +12,19 @@
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {
-        "railway": "station"
+        "public_transport": "station"
     },
     "terms": [
-        "train station",
-        "station"
+        "public transit",
+        "public transportation",
+        "station",
+        "terminal",
+        "transit",
+        "transportation"
     ],
-    "name": "Railway Station"
+    "name": "Transit Station",
+    "matchScore": 0.2
 }

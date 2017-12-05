@@ -1,5 +1,5 @@
 {
-    "icon": "rail-light",
+    "icon": "poi-tram",
     "fields": [
         "name",
         "network",
@@ -17,5 +17,6 @@
         "tram",
         "trolley"
     ],
-    "name": "Tram Stop"
+    "name": "Tram Stopping Position",
+    "searchable": false
 }

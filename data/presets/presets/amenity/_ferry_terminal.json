@@ -16,5 +16,6 @@
     "tags": {
         "amenity": "ferry_terminal"
     },
-    "name": "Ferry Terminal"
+    "name": "Ferry Station / Terminal",
+    "searchable": false
 }
