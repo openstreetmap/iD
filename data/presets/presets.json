@@ -4247,7 +4247,7 @@
             "name": "College Building"
         },
         "building/commercial": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -8054,7 +8054,7 @@
             "name": "Churchyard"
         },
         "landuse/commercial": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name"
             ],
@@ -8846,7 +8846,7 @@
             "name": "Residential Area"
         },
         "landuse/retail": {
-            "icon": "shop",
+            "icon": "commercial",
             "geometry": [
                 "area"
             ],
@@ -17857,7 +17857,7 @@
             "name": "Artwork"
         },
         "tourism/attraction": {
-            "icon": "monument",
+            "icon": "star",
             "fields": [
                 "name",
                 "operator",
@@ -90893,7 +90893,7 @@
                 "tourism": "attraction"
             },
             "name": "Arch",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -90912,7 +90912,7 @@
                 "tourism": "attraction"
             },
             "name": "Kursächsische Postmeilensäule",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -90931,7 +90931,7 @@
                 "tourism": "attraction"
             },
             "name": "Lavoir",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -90950,7 +90950,7 @@
                 "tourism": "attraction"
             },
             "name": "Maibaum",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -90969,7 +90969,7 @@
                 "tourism": "attraction"
             },
             "name": "Moab trail",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -90988,7 +90988,7 @@
                 "tourism": "attraction"
             },
             "name": "Moai",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -91007,7 +91007,7 @@
                 "tourism": "attraction"
             },
             "name": "OWŚ",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -91026,7 +91026,7 @@
                 "tourism": "attraction"
             },
             "name": "Sommerrodelbahn",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -91045,7 +91045,7 @@
                 "tourism": "attraction"
             },
             "name": "path continues",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -91064,7 +91064,7 @@
                 "tourism": "attraction"
             },
             "name": "path contiunes",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -91083,7 +91083,7 @@
                 "tourism": "attraction"
             },
             "name": "white blaze",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -91102,7 +91102,7 @@
                 "tourism": "attraction"
             },
             "name": "Кладбище еврейское",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -91121,7 +91121,7 @@
                 "tourism": "attraction"
             },
             "name": "Колесо обозрения",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -91140,7 +91140,7 @@
                 "tourism": "attraction"
             },
             "name": "Приусадебный парк",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -91159,7 +91159,7 @@
                 "tourism": "attraction"
             },
             "name": "Усадьба",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -91178,7 +91178,7 @@
                 "tourism": "attraction"
             },
             "name": "Хозяйственный двор",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -91197,7 +91197,7 @@
                 "tourism": "attraction"
             },
             "name": "Часовня",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -91216,7 +91216,7 @@
                 "tourism": "attraction"
             },
             "name": "дольмен",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
