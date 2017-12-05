@@ -129,7 +129,7 @@ export function coreContext() {
             if (!err) history.merge(result.data, result.extent);
             if (callback) callback(err, result);
         }
-        if (connection) {
+        if (connection && context.editable()) {
             cid = connection.getConnectionId();
             connection.loadTiles(projection, dimensions, done);
         }
