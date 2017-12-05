@@ -4177,6 +4177,10 @@
                     "name": "Greenfield",
                     "terms": ""
                 },
+                "landuse/greenhouse_horticulture": {
+                    "name": "Greenhouse Horticulture",
+                    "terms": "flower,greenhouse,horticulture,grow,vivero"
+                },
                 "landuse/harbour": {
                     "name": "Harbor",
                     "terms": "boat"

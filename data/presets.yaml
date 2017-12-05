@@ -3334,6 +3334,11 @@ en:
         # landuse=greenfield
         name: Greenfield
         terms: '<translate with synonyms or related terms for ''Greenfield'', separated by commas>'
+      landuse/greenhouse_horticulture:
+        # landuse=greenhouse_horticulture
+        name: Greenhouse Horticulture
+        # 'terms: flower,greenhouse,horticulture,grow,vivero'
+        terms: '<translate with synonyms or related terms for ''Greenhouse Horticulture'', separated by commas>'
       landuse/harbour:
         # landuse=harbour
         name: Harbor
