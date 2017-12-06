@@ -19,6 +19,8 @@ en:
       tail: Click to add nodes to your area. Click the first node to finish the area.
     draw_line:
       tail: "Click to add more nodes to the line. Click on other lines to connect to them, and double-click to end the line."
+    drag_node:
+      connected_to_hidden: This can't be edited because it is connected to a hidden feature.
   operations:
     add:
       annotation:
