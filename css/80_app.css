@@ -3052,13 +3052,13 @@ img.tile-removing {
     margin: 0 3px;
 }
 
-
 #footer {
     pointer-events: all;
     display: block;
     height: 30px;
 }
 
+/* footer flash message */
 
 #flash-wrap {
     display: flex;
@@ -3071,7 +3071,7 @@ img.tile-removing {
     left: 0;
 }
 
-#flash-wrap .content {
+.flash-content {
     display: flex;
     flex: 1 0 auto;
     flex-flow: row nowrap;
@@ -3080,15 +3080,38 @@ img.tile-removing {
     height: 30px;
 }
 
-
-#flash-wrap svg.operation-icon {
+.flash-icon {
     flex: 0 0 auto;
     width: 20px;
     height: 20px;
     margin: 0 8px;
 }
 
-#flash-wrap div.operation-tip {
+.flash-icon circle {
+    fill: #eee;
+}
+.flash-icon.disabled circle {
+    cursor: auto;
+    fill: rgba(255,255,255,0.7);
+}
+
+.flash-icon use {
+    color: #222;
+}
+.flash-icon.disabled use {
+    color: rgba(32,32,32,0.7);
+}
+
+.flash-icon.operation use {
+    fill: #222;
+    color: #79f;
+}
+.flash-icon.operation.disabled use {
+    fill: rgba(32,32,32,0.7);
+    color: rgba(40,40,40,0.7);
+}
+
+.flash-text {
     flex: 1 1 auto;
 }
 
@@ -3117,6 +3140,8 @@ img.tile-removing {
     -webkit-transition: bottom 75ms linear;
 }
 
+
+/* footer scale */
 
 #scale-block {
     vertical-align: bottom;
