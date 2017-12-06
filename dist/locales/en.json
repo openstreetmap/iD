@@ -1462,6 +1462,9 @@
                 "brand": {
                     "label": "Brand"
                 },
+                "brewery": {
+                    "label": "Draft Beers"
+                },
                 "bridge": {
                     "label": "Type",
                     "placeholder": "Default"

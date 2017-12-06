@@ -852,7 +852,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "geometry": [
                 "point",
@@ -979,7 +980,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "geometry": [
                 "point",
@@ -2449,7 +2451,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "geometry": [
                 "point",
@@ -30327,7 +30330,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -30349,7 +30353,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -30371,7 +30376,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -30393,7 +30399,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -47956,7 +47963,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -47977,7 +47985,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -47998,7 +48007,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48019,7 +48029,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48040,7 +48051,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48061,7 +48073,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48082,7 +48095,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48103,7 +48117,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48124,7 +48139,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48145,7 +48161,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48166,7 +48183,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48187,7 +48205,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48208,7 +48227,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48229,7 +48249,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48250,7 +48271,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48271,7 +48293,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48292,7 +48315,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48313,7 +48337,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48334,7 +48359,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48355,7 +48381,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48376,7 +48403,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48397,7 +48425,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48418,7 +48447,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48439,7 +48469,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48460,7 +48491,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48481,7 +48513,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48502,7 +48535,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48523,7 +48557,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48544,7 +48579,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48565,7 +48601,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48586,7 +48623,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48607,7 +48645,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48628,7 +48667,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48649,7 +48689,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48670,7 +48711,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48691,7 +48733,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48712,7 +48755,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48733,7 +48777,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48754,7 +48799,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48775,7 +48821,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48796,7 +48843,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48817,7 +48865,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48838,7 +48887,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48859,7 +48909,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48880,7 +48931,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48901,7 +48953,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48922,7 +48975,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48943,7 +48997,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48964,7 +49019,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -48985,7 +49041,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -49006,7 +49063,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -49027,7 +49085,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -49048,7 +49107,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -49069,7 +49129,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -49090,7 +49151,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -49111,7 +49173,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
