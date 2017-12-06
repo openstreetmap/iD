@@ -25,6 +25,8 @@ import rbush from 'rbush';
 import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 import { geoExtent } from '../geo';
 
+import { utilDetect } from '../util/detect';
+
 import {
     utilQsString,
     utilRebind,
@@ -150,9 +152,11 @@ function loadNextTilePage(which, currZoom, url, tile) {
 
             function localeDateString(s) {
                 if (!s) return null;
+                var detected = utilDetect();
+                var options = { day: 'numeric', month: 'short', year: 'numeric' };
                 var d = new Date(s);
                 if (isNaN(d.getTime())) return null;
-                return d.toLocaleDateString();
+                return d.toLocaleDateString(detected.locale, options);
             }
 
             var features = data.currentPageItems.map(function(item) {

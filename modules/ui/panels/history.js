@@ -2,6 +2,7 @@ import _filter from 'lodash-es/filter';
 
 import { t } from '../../util/locale';
 import { svgIcon } from '../../svg';
+import { utilDetect } from '../../util/detect';
 
 
 export function uiPanelHistory(context) {
@@ -9,11 +10,14 @@ export function uiPanelHistory(context) {
 
     function displayTimestamp(entity) {
         if (!entity.timestamp) return t('info_panels.history.unknown');
-
+        var detected = utilDetect();
+        var options = {
+            day: 'numeric', month: 'short', year: 'numeric',
+            hour: 'numeric', minute: 'numeric', second: 'numeric'
+        };
         var d = new Date(entity.timestamp);
         if (isNaN(d.getTime())) return t('info_panels.history.unknown');
-
-        return d.toLocaleString();
+        return d.toLocaleString(detected.locale, options);
     }
 
 
@@ -113,20 +117,24 @@ export function uiPanelHistory(context) {
 
         list
             .append('li')
-            .text(t('info_panels.history.version') + ': ' + entity.version);
+            .text(t('info_panels.history.version') + ':')
+            .append('span')
+            .text(entity.version);
 
         list
             .append('li')
-            .text(t('info_panels.history.last_edit') + ': ' + displayTimestamp(entity));
+            .text(t('info_panels.history.last_edit') + ':')
+            .append('span')
+            .text(displayTimestamp(entity));
 
         list
             .append('li')
-            .text(t('info_panels.history.edited_by') + ': ')
+            .text(t('info_panels.history.edited_by') + ':')
             .call(displayUser, entity);
 
         list
             .append('li')
-            .text(t('info_panels.history.changeset') + ': ')
+            .text(t('info_panels.history.changeset') + ':')
             .call(displayChangeset, entity);
 
         if (osm) {

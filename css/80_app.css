@@ -2738,7 +2738,7 @@ img.tile {
     padding: 5px;
     border-radius: 3px;
     z-index: 2;
-    margin-left: -50px;
+    margin-left: -70px;
     margin-top: -20px;
 
     transform-origin:0 0;
@@ -2959,6 +2959,12 @@ img.tile-removing {
     position: relative;
 }
 
+.panel-content li span {
+    display: inline-block;
+    white-space: nowrap;
+    margin: 0 8px;
+}
+
 .panel-content .button {
     display: inline-block;
     background: #7092ff;
@@ -2974,11 +2980,11 @@ img.tile-removing {
 }
 
 .panel-content-history .links a {
-    margin-left: 10px;
+    margin-left: 8px;
 }
 [dir='rtl'] .panel-content-history .links a {
     margin-left: auto;
-    margin-right: 10px;
+    margin-right: 8px;
 }
 
 .panel-content-history .view-history-on-osm {

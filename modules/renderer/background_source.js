@@ -6,13 +6,16 @@ import { geoArea as d3_geoArea } from 'd3-geo';
 import { t } from '../util/locale';
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
 import { jsonpRequest } from '../util/jsonp_request';
+import { utilDetect } from '../util/detect';
 
 
 function localeDateString(s) {
     if (!s) return null;
+    var detected = utilDetect();
+    var options = { day: 'numeric', month: 'short', year: 'numeric' };
     var d = new Date(s);
     if (isNaN(d.getTime())) return null;
-    return d.toLocaleDateString();
+    return d.toLocaleDateString(detected.locale, options);
 }
 
 function vintageRange(vintage) {
@@ -28,12 +31,12 @@ function vintageRange(vintage) {
 
 
 export function rendererBackgroundSource(data) {
-    var source = _clone(data),
-        offset = [0, 0],
-        name = source.name,
-        description = source.description,
-        best = !!source.best,
-        template = source.template;
+    var source = _clone(data);
+    var offset = [0, 0];
+    var name = source.name;
+    var description = source.description;
+    var best = !!source.best;
+    var template = source.template;
 
     source.scaleExtent = data.scaleExtent || [0, 22];
     source.overzoom = data.overzoom !== false;

@@ -46,7 +46,7 @@ export function uiPanelBackground(context) {
                 .append('li')
                 .attr('class', 'background-info-list-' + k)
                 .classed('hide', !metadata[k])
-                .text(t('info_panels.background.' + k) + ': ')
+                .text(t('info_panels.background.' + k) + ':')
                 .append('span')
                 .attr('class', 'background-info-span-' + k)
                 .text(metadata[k]);

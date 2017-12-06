@@ -73,9 +73,15 @@ function maxPageAtZoom(z) {
 
 function localeTimestamp(s) {
     if (!s) return null;
+    var detected = utilDetect();
+    var options = {
+        day: 'numeric', month: 'short', year: 'numeric',
+        hour: 'numeric', minute: 'numeric', second: 'numeric',
+        timeZone: 'UTC'
+    };
     var d = new Date(s);
     if (isNaN(d.getTime())) return null;
-    return d.toLocaleString(undefined, { timeZone: 'UTC' });
+    return d.toLocaleString(detected.locale, options);
 }
 
 
