@@ -29,8 +29,8 @@ import _transform from 'lodash-es/transform';
    in order to ensure associated nodes (eg a Stop Sign) is also reversed
 
     Node Keys:
-        direction=forward ⟺ direction=backward
-        direction=left ⟺ direction=right
+        *direction=forward ⟺ *direction=backward
+        *direction=left ⟺ *direction=right
         *:forward=* ⟺ *:backward=*
         *:left=* ⟺ *:right=*
 
@@ -87,7 +87,7 @@ export function actionReverse(wayId, options) {
         // Update the direction based tags as appropriate then return an updated node
         return node.update({tags: _transform(node.tags, function(acc, tagValue, tagKey) {
             // See if this is a direction tag and reverse (or use existing value if not recognised)
-            if (tagKey === 'direction') {
+            if (tagKey.match(/direction$/) !== null) {
                 acc[tagKey] = {forward: 'backward', backward: 'forward', left: 'right', right: 'left'}[tagValue] || tagValue;
             } else {
                 // Use the reverseKey method to cater for situations such as traffic_sign:forward=stop
