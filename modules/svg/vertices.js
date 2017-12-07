@@ -1,6 +1,7 @@
 import _values from 'lodash-es/values';
 
 import { dataFeatureIcons } from '../../data';
+import { geoAngle } from '../geo';
 import { osmEntity } from '../osm';
 import { svgPointTransform } from './index';
 
@@ -56,13 +57,50 @@ export function svgVertices(projection, context) {
 
 
     function draw(selection, vertices, klass, graph, zoom, siblings) {
+        siblings = siblings || {};
+        var icons = {};
+        var directions = {};
+        var z = (zoom < 17 ? 0 : zoom < 18 ? 1 : 2);
 
-        function icon(entity) {
+
+        function getIcon(entity) {
             if (entity.id in icons) return icons[entity.id];
+
             icons[entity.id] =
                 entity.hasInterestingTags() &&
                 context.presets().match(entity, graph).icon;
             return icons[entity.id];
+        }
+
+        function getDirections(entity) {
+            if (entity.id in directions) return directions[entity.id];
+
+            var dir = (entity.tags['traffic_signals:direction'] || entity.tags.direction || '').toLowerCase();
+            var stop = (entity.tags.stop || '').toLowerCase();
+            var goBackward = (dir === 'backward' || dir === 'both' || dir === 'all' || stop === 'all');
+            var goForward = (dir === 'forward' || dir === 'both' || dir === 'all' || stop === 'all');
+            if (!goForward && !goBackward) return;
+
+            var nodeIds = {};
+            graph.parentWays(entity).forEach(function (parent) {
+                var nodes = parent.nodes;
+                for (var i = 0; i < nodes.length; i++) {
+                    if (nodes[i] === entity.id) {  // match current entity
+                        if (goBackward && i > 0) {
+                            nodeIds[nodes[i - 1]] = true;
+                        }
+                        if (goForward && i < nodes.length - 1) {
+                            nodeIds[nodes[i + 1]] = true;
+                        }
+                    }
+                }
+            });
+
+            var dirAngles = Object.keys(nodeIds).map(function (nodeId) {
+                return geoAngle(entity, graph.entity(nodeId), projection) * (180 / Math.PI);
+            });
+            directions[entity.id] = dirAngles;
+            return directions[entity.id];
         }
 
         function setClass(klass) {
@@ -71,12 +109,12 @@ export function svgVertices(projection, context) {
             };
         }
 
-        function setAttributes(selection) {
+        function updateAttributes(selection) {
             ['shadow','stroke','fill'].forEach(function(klass) {
                 var rads = radiuses[klass];
                 selection.selectAll('.' + klass)
                     .each(function(entity) {
-                        var i = z && icon(entity),
+                        var i = z && getIcon(entity),
                             c = i ? 0.5 : 0,
                             r = rads[i ? 3 : z];
 
@@ -97,20 +135,12 @@ export function svgVertices(projection, context) {
             });
 
             selection.selectAll('use')
-                .each(function() {
-                    if (z) {
-                        this.removeAttribute('visibility');
-                    } else {
-                        this.setAttribute('visibility', 'hidden');
-                    }
-                });
+                .attr('visibility', (z === 0 ? 'hidden' : null));
+
+            selection.selectAll('.directiongroup')
+                .attr('visibility', (zoom < 18 ? 'hidden' : null));
         }
 
-
-        siblings = siblings || {};
-
-        var icons = {},
-            z = (zoom < 17 ? 0 : zoom < 18 ? 1 : 2);
 
         var groups = selection
             .data(vertices, osmEntity.key);
@@ -122,18 +152,34 @@ export function svgVertices(projection, context) {
             .append('g')
             .attr('class', function(d) { return 'node vertex ' + klass + ' ' + d.id; });
 
-        enter.append('circle')
+        // Directional vertices get arrows
+        var directionsEnter = enter.filter(function(d) { return getDirections(d); })
+            .append('g')
+            .each(setClass('directiongroup'));
+
+        directionsEnter.selectAll('.directional')
+            .data(function(d) { return getDirections(d); })
+            .enter()
+            .append('path')
+            .attr('class', 'directional')
+            .attr('transform', function(d) { return 'rotate(' + d + ')'; })
+            .attr('d', 'M0,0H0')
+            .attr('marker-start', 'url(#directional-marker)');
+
+        enter
+            .append('circle')
             .each(setClass('shadow'));
 
-        enter.append('circle')
+        enter
+            .append('circle')
             .each(setClass('stroke'));
 
         // Vertices with icons get a `use`.
-        enter.filter(function(d) { return icon(d); })
+        enter.filter(function(d) { return getIcon(d); })
             .append('use')
             .attr('transform', 'translate(-5, -6)')
             .attr('xlink:href', function(d) {
-                var picon = icon(d),
+                var picon = getIcon(d),
                     isMaki = dataFeatureIcons.indexOf(picon) !== -1;
                 return '#' + picon + (isMaki ? '-11' : '');
             })
@@ -146,13 +192,14 @@ export function svgVertices(projection, context) {
             .append('circle')
             .each(setClass('fill'));
 
+        // Update
         groups
             .merge(enter)
             .attr('transform', svgPointTransform(projection))
             .classed('sibling', function(entity) { return entity.id in siblings; })
             .classed('shared', function(entity) { return graph.isShared(entity); })
             .classed('endpoint', function(entity) { return entity.isEndpoint(graph); })
-            .call(setAttributes);
+            .call(updateAttributes);
     }
 
 

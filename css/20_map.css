@@ -180,10 +180,10 @@ text {
     fill: #002F35;
 }
 
-path.oneway {
+.directiongroup path.directional,
+.onewaygroup path.oneway {
     stroke-width: 6px;
 }
-
 
 text.arealabel-halo,
 text.linelabel-halo,

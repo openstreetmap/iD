@@ -26,12 +26,12 @@ export function svgDefs(context) {
     return function drawDefs(selection) {
         var defs = selection.append('defs');
 
-        // marker
+        // oneway marker
         defs.append('marker')
             .attr('id', 'oneway-marker')
-            .attr('viewBox', '0 0 10 10')
-            .attr('refY', 2.5)
+            .attr('viewBox', '0 0 10 5')
             .attr('refX', 5)
+            .attr('refY', 2.5)
             .attr('markerWidth', 2)
             .attr('markerHeight', 2)
             .attr('markerUnits', 'strokeWidth')
@@ -39,10 +39,28 @@ export function svgDefs(context) {
 
             .append('path')
             .attr('class', 'oneway')
-            .attr('d', 'M 5 3 L 0 3 L 0 2 L 5 2 L 5 0 L 10 2.5 L 5 5 z')
+            .attr('d', 'M 5,3 L 0,3 L 0,2 L 5,2 L 5,0 L 10,2.5 L 5,5 z')
             .attr('stroke', 'none')
             .attr('fill', '#000')
             .attr('opacity', '0.75');
+
+        defs.append('marker')
+            .attr('id', 'directional-marker')
+            .attr('viewBox', '0 0 15 5')
+            .attr('refX', 5.5)
+            .attr('refY', 2.5)
+            .attr('markerWidth', 7)
+            .attr('markerHeight', 7)
+            .attr('markerUnits', 'strokeWidth')
+            .attr('orient', 'auto')
+
+            .append('path')
+            .attr('class', 'directional')
+            .attr('d', 'M 10,2.5 L 9,0 L 14,2.5 L 9,5 z')
+            .attr('stroke', '#fff')
+            .attr('fill', '#333')
+            .attr('stroke-width', '0.5px')
+            .attr('stroke-opacity', '0.75');
 
         // patterns
         var patterns = defs.selectAll('pattern')
