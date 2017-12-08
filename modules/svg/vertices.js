@@ -152,19 +152,19 @@ export function svgVertices(projection, context) {
             .append('g')
             .attr('class', function(d) { return 'node vertex ' + klass + ' ' + d.id; });
 
-        // Directional vertices get arrows
+        // Directional vertices get viewfields
         var directionsEnter = enter.filter(function(d) { return getDirections(d); })
             .append('g')
-            .each(setClass('directiongroup'));
+            .each(setClass('viewfieldgroup'));
 
-        directionsEnter.selectAll('.directional')
+        directionsEnter.selectAll('.viewfield')
             .data(function(d) { return getDirections(d); })
             .enter()
             .append('path')
-            .attr('class', 'directional')
-            .attr('transform', function(d) { return 'rotate(' + d + ')'; })
+            .attr('class', 'viewfield')
+            .attr('transform', function(d) { return 'rotate(' + (d + 90) + ')'; })  // +90 because marker is oriented along Y not X
             .attr('d', 'M0,0H0')
-            .attr('marker-start', 'url(#directional-marker)');
+            .attr('marker-start', 'url(#viewfield-marker)');
 
         enter
             .append('circle')

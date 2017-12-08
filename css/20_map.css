@@ -180,8 +180,8 @@ text {
     fill: #002F35;
 }
 
-.directiongroup path.directional,
-.onewaygroup path.oneway {
+.onewaygroup path.oneway,
+.viewfieldgroup path.viewfield {
     stroke-width: 6px;
 }
 
