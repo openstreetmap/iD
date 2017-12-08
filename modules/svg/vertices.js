@@ -76,7 +76,7 @@ export function svgVertices(projection, context) {
             if (entity.id in directions) return directions[entity.id];
 
             var dir = (entity.tags['traffic_signals:direction'] || entity.tags.direction || '').toLowerCase();
-            var stop = (entity.tags.stop || '').toLowerCase();
+            var stop = ((entity.isHighwayIntersection(graph) && entity.tags.stop) || '').toLowerCase();
             var goBackward = (dir === 'backward' || dir === 'both' || dir === 'all' || stop === 'all');
             var goForward = (dir === 'forward' || dir === 'both' || dir === 'all' || stop === 'all');
             if (!goForward && !goBackward) return;
