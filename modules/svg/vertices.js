@@ -86,11 +86,11 @@ export function svgVertices(projection, context) {
                 var nodes = parent.nodes;
                 for (var i = 0; i < nodes.length; i++) {
                     if (nodes[i] === entity.id) {  // match current entity
-                        if (goBackward && i > 0) {
-                            nodeIds[nodes[i - 1]] = true;
+                        if (goForward && i > 0) {
+                            nodeIds[nodes[i - 1]] = true;  // viewfield point back to prev node
                         }
-                        if (goForward && i < nodes.length - 1) {
-                            nodeIds[nodes[i + 1]] = true;
+                        if (goBackward && i < nodes.length - 1) {
+                            nodeIds[nodes[i + 1]] = true;  // viewfield point ahead to next node
                         }
                     }
                 }
