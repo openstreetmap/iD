@@ -1,7 +1,6 @@
 import _values from 'lodash-es/values';
 
 import { dataFeatureIcons } from '../../data';
-import { geoAngle } from '../geo';
 import { osmEntity } from '../osm';
 import { svgPointTransform } from './index';
 
@@ -14,7 +13,7 @@ export function svgVertices(projection, context) {
         fill:   [1,    1.5,   1.5,  1.5]
     };
 
-    var hover;
+    var _hover;
 
 
     function siblingAndChildVertices(ids, graph, extent) {
@@ -76,86 +75,18 @@ export function svgVertices(projection, context) {
         function getDirections(entity) {
             if (entity.id in directions) return directions[entity.id];
 
-            var dir = '';
-
-            if (entity.isHighwayIntersection(graph) && (entity.tags.stop || '').toLowerCase() === 'all') {
-                // all-way stop tag on a highway intersection
-                dir = 'all';
-            } else {
-                // direction tag
-                dir = (
-                    entity.tags['railway:signal:direction'] ||
-                    entity.tags['traffic_signals:direction'] ||
-                    entity.tags.direction ||
-                    ''
-                ).toLowerCase();
-            }
-
-            // swap cardinal for numeric directions
-            var cardinal = {
-                north: 0,               n: 0,
-                northnortheast: 22,     nne: 22,
-                northeast: 45,          ne: 45,
-                eastnortheast: 67,      ene: 67,
-                east: 90,               e: 90,
-                eastsoutheast: 112,     ese: 112,
-                southeast: 135,         se: 135,
-                southsoutheast: 157,    sse: 157,
-                south: 180,             s: 180,
-                southsouthwest: 202,    ssw: 202,
-                southwest: 225,         sw: 225,
-                westsouthwest: 247,     wsw: 247,
-                west: 270,              w: 270,
-                westnorthwest: 292,     wnw: 292,
-                northwest: 315,         nw: 315,
-                northnorthwest: 337,    nnw: 337
-            };
-            if (cardinal[dir] !== undefined) {
-                dir = cardinal[dir];
-            }
-
-            // if direction tag is numeric, return early
-            if (dir !== '' && !isNaN(+dir)) {
-                directions[entity.id] = [(+dir) - 90];  // -90 because marker is oriented along Y not X
-                return directions[entity.id];
-            }
-
-            // determine which direction(s) this feature points
-            var goBackward =
-                (entity.tags['traffic_sign:backward'] || dir === 'backward' || dir === 'both' || dir === 'all');
-            var goForward =
-                (entity.tags['traffic_sign:forward'] || dir === 'forward' || dir === 'both' || dir === 'all');
-
-            if (!goForward && !goBackward) return;
-
-            var nodeIds = {};
-            graph.parentWays(entity).forEach(function (parent) {
-                var nodes = parent.nodes;
-                for (var i = 0; i < nodes.length; i++) {
-                    if (nodes[i] === entity.id) {  // match current entity
-                        if (goForward && i > 0) {
-                            nodeIds[nodes[i - 1]] = true;  // viewfield points back to prev node
-                        }
-                        if (goBackward && i < nodes.length - 1) {
-                            nodeIds[nodes[i + 1]] = true;  // viewfield points ahead to next node
-                        }
-                    }
-                }
-            });
-
-            var dirAngles = Object.keys(nodeIds).map(function (nodeId) {
-                return geoAngle(entity, graph.entity(nodeId), projection) * (180 / Math.PI);
-            });
-
-            directions[entity.id] = dirAngles;
-            return directions[entity.id];
+            var angles = entity.directions(graph, projection);
+            if (angles) directions[entity.id] = angles;
+            return angles;
         }
+
 
         function setClass(klass) {
             return function(entity) {
                 this.setAttribute('class', 'node vertex ' + klass + ' ' + entity.id);
             };
         }
+
 
         function updateAttributes(selection) {
             ['shadow','stroke','fill'].forEach(function(klass) {
@@ -185,7 +116,7 @@ export function svgVertices(projection, context) {
             selection.selectAll('use')
                 .attr('visibility', (z === 0 ? 'hidden' : null));
 
-            selection.selectAll('.directiongroup')
+            selection.selectAll('.viewfieldgroup')
                 .attr('visibility', (zoom < 18 ? 'hidden' : null));
         }
 
@@ -210,7 +141,7 @@ export function svgVertices(projection, context) {
             .enter()
             .append('path')
             .attr('class', 'viewfield')
-            .attr('transform', function(d) { return 'rotate(' + (d + 90) + ')'; })  // +90 because marker is oriented along Y not X
+            .attr('transform', function(d) { return 'rotate(' + d + ')'; })
             .attr('d', 'M0,0H0')
             .attr('marker-start', 'url(#viewfield-marker)');
 
@@ -286,7 +217,7 @@ export function svgVertices(projection, context) {
 
 
     function drawHover(selection, graph, extent, zoom) {
-        var hovered = hover ? siblingAndChildVertices([hover.id], graph, extent) : {};
+        var hovered = _hover ? siblingAndChildVertices([_hover.id], graph, extent) : {};
         var layer = selection.selectAll('.layer-hit');
 
         layer.selectAll('g.vertex.vertex-hover')
@@ -295,8 +226,8 @@ export function svgVertices(projection, context) {
 
 
     drawVertices.drawHover = function(selection, graph, target, extent, zoom) {
-        if (target === hover) return;
-        hover = target;
+        if (target === _hover) return;
+        _hover = target;
         drawHover(selection, graph, extent, zoom);
     };
 
