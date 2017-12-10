@@ -124,26 +124,14 @@ export function svgVertices(projection, context) {
         var groups = selection
             .data(vertices, osmEntity.key);
 
+        // exit
         groups.exit()
             .remove();
 
+        // enter
         var enter = groups.enter()
             .append('g')
             .attr('class', function(d) { return 'node vertex ' + klass + ' ' + d.id; });
-
-        // Directional vertices get viewfields
-        var directionsEnter = enter.filter(function(d) { return getDirections(d); })
-            .append('g')
-            .each(setClass('viewfieldgroup'));
-
-        directionsEnter.selectAll('.viewfield')
-            .data(function(d) { return getDirections(d); })
-            .enter()
-            .append('path')
-            .attr('class', 'viewfield')
-            .attr('transform', function(d) { return 'rotate(' + d + ')'; })
-            .attr('d', 'M0,0H0')
-            .attr('marker-start', 'url(#viewfield-marker)');
 
         enter
             .append('circle')
@@ -171,14 +159,44 @@ export function svgVertices(projection, context) {
             .append('circle')
             .each(setClass('fill'));
 
-        // Update
-        groups
+        // update
+        groups = groups
             .merge(enter)
             .attr('transform', svgPointTransform(projection))
             .classed('sibling', function(entity) { return entity.id in siblings; })
             .classed('shared', function(entity) { return graph.isShared(entity); })
             .classed('endpoint', function(entity) { return entity.isEndpoint(graph); })
             .call(updateAttributes);
+
+
+        // Directional vertices get viewfields
+        var dgroups = groups.filter(function(d) { return getDirections(d); })
+            .selectAll('.viewfieldgroup')
+            .data(function(d) { return klass === 'vertex-hover' ? [] : [d]; }, osmEntity.key);
+
+        // exit
+        dgroups.exit()
+            .remove();
+
+        // enter
+        var dgroupsEnter = dgroups.enter()
+            .insert('g', '.shadow')
+            .each(setClass('viewfieldgroup'));
+
+        dgroupsEnter
+            .selectAll('.viewfield')
+            .data(getDirections, function key(d) { return d; })
+            .enter()
+            .append('path')
+            .attr('class', 'viewfield')
+            .attr('d', 'M0,0H0')
+            .attr('marker-start', 'url(#viewfield-marker)');
+
+        // update
+        dgroups
+            .merge(dgroupsEnter)
+            .selectAll('.viewfield')
+            .attr('transform', function(d) { return 'rotate(' + d + ')'; });
     }
 
 
