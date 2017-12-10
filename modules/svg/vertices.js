@@ -178,24 +178,26 @@ export function svgVertices(projection, context) {
         dgroups.exit()
             .remove();
 
-        // enter
-        var dgroupsEnter = dgroups.enter()
+        // enter/update
+        dgroups = dgroups.enter()
             .insert('g', '.shadow')
-            .each(setClass('viewfieldgroup'));
+            .each(setClass('viewfieldgroup'))
+            .merge(dgroups);
 
-        dgroupsEnter
-            .selectAll('.viewfield')
-            .data(getDirections, function key(d) { return d; })
-            .enter()
+        var viewfields = dgroups.selectAll('.viewfield')
+            .data(getDirections, function key(d) { return d; });
+
+        // exit
+        viewfields.exit()
+            .remove();
+
+        // enter/update
+        viewfields.enter()
             .append('path')
             .attr('class', 'viewfield')
             .attr('d', 'M0,0H0')
-            .attr('marker-start', 'url(#viewfield-marker)');
-
-        // update
-        dgroups
-            .merge(dgroupsEnter)
-            .selectAll('.viewfield')
+            .attr('marker-start', 'url(#viewfield-marker)')
+            .merge(viewfields)
             .attr('transform', function(d) { return 'rotate(' + d + ')'; });
     }
 
