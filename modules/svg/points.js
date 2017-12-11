@@ -1,5 +1,3 @@
-import _filter from 'lodash-es/filter';
-
 import { dataFeatureIcons } from '../../data';
 import { osmEntity } from '../osm';
 import { svgPointTransform, svgTagClasses } from './index';
@@ -20,10 +18,10 @@ export function svgPoints(projection, context) {
 
 
     return function drawPoints(selection, graph, entities, filter) {
-        var wireframe = context.surface().classed('fill-wireframe'),
-            points = wireframe ? [] : _filter(entities, function(e) {
-                return e.geometry(graph) === 'point' && !e.directions(graph, projection).length;
-            });
+        var wireframe = context.surface().classed('fill-wireframe');
+        var points = wireframe ? [] : entities.filter(function(e) {
+            return e.geometry(graph) === 'point' && !e.directions(graph, projection).length;
+        });
 
         points.sort(sortY);
 
@@ -75,8 +73,8 @@ export function svgPoints(projection, context) {
         groups.select('.stroke');
         groups.select('.icon')
             .attr('xlink:href', function(entity) {
-                var preset = context.presets().match(entity, graph),
-                    picon = preset && preset.icon;
+                var preset = context.presets().match(entity, graph);
+                var picon = preset && preset.icon;
 
                 if (!picon)
                     return '';
