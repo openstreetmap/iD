@@ -59,6 +59,7 @@ export function svgVertices(projection, context) {
         siblings = siblings || {};
         var icons = {};
         var directions = {};
+        var wireframe = context.surface().classed('fill-wireframe');
         var z = (zoom < 17 ? 0 : zoom < 18 ? 1 : 2);
 
 
@@ -197,8 +198,8 @@ export function svgVertices(projection, context) {
             .append('path')
             .attr('class', 'viewfield')
             .attr('d', 'M0,0H0')
-            .attr('marker-start', 'url(#viewfield-marker)')
             .merge(viewfields)
+            .attr('marker-start', 'url(#viewfield-marker' + (wireframe ? '-wireframe' : '') + ')')
             .attr('transform', function(d) { return 'rotate(' + d + ')'; });
     }
 

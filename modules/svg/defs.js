@@ -63,6 +63,24 @@ export function svgDefs(context) {
             .attr('stroke-width', '0.5px')
             .attr('stroke-opacity', '0.75');
 
+        defs
+            .append('marker')
+            .attr('id', 'viewfield-marker-wireframe')
+            .attr('viewBox', '0 0 16 16')
+            .attr('refX', 8)
+            .attr('refY', 16)
+            .attr('markerWidth', 4)
+            .attr('markerHeight', 4)
+            .attr('markerUnits', 'strokeWidth')
+            .attr('orient', 'auto')
+            .append('path')
+            .attr('class', 'viewfield')
+            .attr('d', 'M 6,14 C 8,13.4 8,13.4 10,14 L 16,3 C 12,0 4,0 0,3 z')
+            .attr('fill', 'none')
+            .attr('stroke', '#fff')
+            .attr('stroke-width', '0.5px')
+            .attr('stroke-opacity', '0.75');
+
         // patterns
         var patterns = defs.selectAll('pattern')
             .data([
