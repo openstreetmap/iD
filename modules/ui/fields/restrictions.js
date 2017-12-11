@@ -115,7 +115,7 @@ export function uiFieldRestrictions(field, context) {
 
         surface
             .call(utilSetDimensions, d)
-            .call(drawVertices, graph, [vertex], filter, extent, z)
+            .call(drawVertices, graph, [vertex], filter, extent)
             .call(drawLines, graph, intersection.ways, filter)
             .call(drawTurns, graph, intersection.turns(fromNodeID));
 

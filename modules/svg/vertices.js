@@ -1,8 +1,14 @@
 import _values from 'lodash-es/values';
 
+import { select as d3_select } from 'd3-selection';
+
 import { dataFeatureIcons } from '../../data';
 import { osmEntity } from '../osm';
 import { svgPointTransform } from './index';
+
+
+var TAU = 2 * Math.PI;
+function ktoz(k) { return Math.log(k * TAU) / Math.LN2 - 8; }
 
 
 export function svgVertices(projection, context) {
@@ -55,11 +61,12 @@ export function svgVertices(projection, context) {
     }
 
 
-    function draw(selection, vertices, klass, graph, zoom, siblings) {
+    function draw(selection, vertices, klass, graph, siblings) {
         siblings = siblings || {};
         var icons = {};
         var directions = {};
         var wireframe = context.surface().classed('fill-wireframe');
+        var zoom = ktoz(projection.scale());
         var z = (zoom < 17 ? 0 : zoom < 18 ? 1 : 2);
 
 
@@ -95,23 +102,20 @@ export function svgVertices(projection, context) {
                 var rads = radiuses[klass];
                 selection.selectAll('.' + klass)
                     .each(function(entity) {
-                        var i = z && getIcon(entity),
-                            c = i ? 0.5 : 0,
-                            r = rads[i ? 3 : z];
+                        var i = z && getIcon(entity);
+                        var c = i ? 0.5 : 0;
+                        var r = rads[i ? 3 : z];
 
                         // slightly increase the size of unconnected endpoints #3775
                         if (entity.isEndpoint(graph) && !entity.isConnected(graph)) {
                             r += 1.5;
                         }
 
-                        this.setAttribute('cx', c);
-                        this.setAttribute('cy', -c);
-                        this.setAttribute('r', r);
-                        if (i && klass === 'fill') {
-                            this.setAttribute('visibility', 'hidden');
-                        } else {
-                            this.removeAttribute('visibility');
-                        }
+                        d3_select(this)
+                            .attr('cx', c)
+                            .attr('cy', -c)
+                            .attr('r', r)
+                            .attr('visibility', ((i && klass === 'fill') ? 'hidden' : null));
                     });
             });
 
@@ -148,8 +152,8 @@ export function svgVertices(projection, context) {
             .append('use')
             .attr('transform', 'translate(-5, -6)')
             .attr('xlink:href', function(d) {
-                var picon = getIcon(d),
-                    isMaki = dataFeatureIcons.indexOf(picon) !== -1;
+                var picon = getIcon(d);
+                var isMaki = dataFeatureIcons.indexOf(picon) !== -1;
                 return '#' + picon + (isMaki ? '-11' : '');
             })
             .attr('width', '11px')
@@ -204,14 +208,14 @@ export function svgVertices(projection, context) {
     }
 
 
-    function drawVertices(selection, graph, entities, filter, extent, zoom) {
-        var siblings = siblingAndChildVertices(context.selectedIDs(), graph, extent),
-            wireframe = context.surface().classed('fill-wireframe'),
-            vertices = [];
+    function drawVertices(selection, graph, entities, filter, extent) {
+        var siblings = siblingAndChildVertices(context.selectedIDs(), graph, extent);
+        var wireframe = context.surface().classed('fill-wireframe');
+        var vertices = [];
 
         for (var i = 0; i < entities.length; i++) {
-            var entity = entities[i],
-                geometry = entity.geometry(graph);
+            var entity = entities[i];
+            var geometry = entity.geometry(graph);
 
             if ((geometry === 'point') && (wireframe || entity.directions(graph, projection).length)) {
                 vertices.push(entity);
@@ -232,25 +236,25 @@ export function svgVertices(projection, context) {
         var layer = selection.selectAll('.layer-hit');
         layer.selectAll('g.vertex.vertex-persistent')
             .filter(filter)
-            .call(draw, vertices, 'vertex-persistent', graph, zoom, siblings);
+            .call(draw, vertices, 'vertex-persistent', graph, siblings);
 
-        drawHover(selection, graph, extent, zoom);
+        drawHover(selection, graph, extent);
     }
 
 
-    function drawHover(selection, graph, extent, zoom) {
+    function drawHover(selection, graph, extent) {
         var hovered = _hover ? siblingAndChildVertices([_hover.id], graph, extent) : {};
         var layer = selection.selectAll('.layer-hit');
 
         layer.selectAll('g.vertex.vertex-hover')
-            .call(draw, _values(hovered), 'vertex-hover', graph, zoom);
+            .call(draw, _values(hovered), 'vertex-hover', graph);
     }
 
 
-    drawVertices.drawHover = function(selection, graph, target, extent, zoom) {
+    drawVertices.drawHover = function(selection, graph, target, extent) {
         if (target === _hover) return;
         _hover = target;
-        drawHover(selection, graph, extent, zoom);
+        drawHover(selection, graph, extent);
     };
 
     return drawVertices;

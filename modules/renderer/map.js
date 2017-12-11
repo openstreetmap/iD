@@ -183,7 +183,7 @@ export function rendererMap(context) {
                 if (map.editable() && !transformed) {
                     var hover = d3_event.target.__data__;
                     surface.selectAll('.data-layer-osm')
-                        .call(drawVertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
+                        .call(drawVertices.drawHover, context.graph(), hover, map.extent());
                     dispatch.call('drawn', this, {full: false});
                 }
             })
@@ -191,7 +191,7 @@ export function rendererMap(context) {
                 if (map.editable() && !transformed) {
                     var hover = d3_event.relatedTarget && d3_event.relatedTarget.__data__;
                     surface.selectAll('.data-layer-osm')
-                        .call(drawVertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
+                        .call(drawVertices.drawHover, context.graph(), hover, map.extent());
                     dispatch.call('drawn', this, {full: false});
                 }
             });
@@ -207,7 +207,7 @@ export function rendererMap(context) {
 
                 all = context.features().filter(all, graph);
                 surface.selectAll('.data-layer-osm')
-                    .call(drawVertices, graph, all, filter, map.extent(), map.zoom())
+                    .call(drawVertices, graph, all, filter, map.extent())
                     .call(drawMidpoints, graph, all, filter, map.trimmedExtent());
                 dispatch.call('drawn', this, {full: false});
             }
@@ -297,7 +297,7 @@ export function rendererMap(context) {
         data = features.filter(data, graph);
 
         surface.selectAll('.data-layer-osm')
-            .call(drawVertices, graph, data, filter, map.extent(), map.zoom())
+            .call(drawVertices, graph, data, filter, map.extent())
             .call(drawLines, graph, data, filter)
             .call(drawAreas, graph, data, filter)
             .call(drawMidpoints, graph, data, filter, map.trimmedExtent())
