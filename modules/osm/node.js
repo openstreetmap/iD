@@ -52,19 +52,25 @@ _extend(osmNode.prototype, {
     // Inspect tags and geometry to determine which direction(s) this node/vertex points
     directions: function(resolver, projection) {
         var val;
+        var i;
 
+        // which tag to use?
         if (this.isHighwayIntersection(resolver) && (this.tags.stop || '').toLowerCase() === 'all') {
             // all-way stop tag on a highway intersection
             val = 'all';
         } else {
-            // direction tag
-            val = (
-                this.tags['camera:direction'] ||
-                this.tags['railway:signal:direction'] ||
-                this.tags['traffic_signals:direction'] ||
-                this.tags.direction ||
-                ''
-            ).toLowerCase();
+            // generic direction tag
+            val = (this.tags.direction || '').toLowerCase();
+
+            // better suffix-style direction tag
+            var re = /:direction$/i;
+            var keys = Object.keys(this.tags);
+            for (i = 0; i < keys.length; i++) {
+                if (re.test(keys[i])) {
+                    val = this.tags[keys[i]].toLowerCase();
+                    break;
+                }
+            }
         }
 
         // swap cardinal for numeric directions
@@ -105,7 +111,7 @@ _extend(osmNode.prototype, {
         var nodeIds = {};
         resolver.parentWays(this).forEach(function(parent) {
             var nodes = parent.nodes;
-            for (var i = 0; i < nodes.length; i++) {
+            for (i = 0; i < nodes.length; i++) {
                 if (nodes[i] === this.id) {  // match current entity
                     if (lookForward && i > 0) {
                         nodeIds[nodes[i - 1]] = true;  // look back to prev node
