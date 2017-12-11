@@ -22,7 +22,7 @@ export function svgPoints(projection, context) {
     return function drawPoints(selection, graph, entities, filter) {
         var wireframe = context.surface().classed('fill-wireframe'),
             points = wireframe ? [] : _filter(entities, function(e) {
-                return e.geometry(graph) === 'point';
+                return e.geometry(graph) === 'point' && !e.directions(graph, projection).length;
             });
 
         points.sort(sortY);
@@ -41,20 +41,24 @@ export function svgPoints(projection, context) {
             .attr('class', function(d) { return 'node point ' + d.id; })
             .order();
 
-        enter.append('path')
+        enter
+            .append('path')
             .call(markerPath, 'shadow');
 
-        enter.append('ellipse')
+        enter
+            .append('ellipse')
             .attr('cx', 0.5)
             .attr('cy', 1)
             .attr('rx', 6.5)
             .attr('ry', 3)
             .attr('class', 'stroke');
 
-        enter.append('path')
+        enter
+            .append('path')
             .call(markerPath, 'stroke');
 
-        enter.append('use')
+        enter
+            .append('use')
             .attr('transform', 'translate(-5, -19)')
             .attr('class', 'icon')
             .attr('width', '11px')

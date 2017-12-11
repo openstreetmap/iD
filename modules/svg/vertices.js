@@ -72,11 +72,12 @@ export function svgVertices(projection, context) {
         }
 
 
+        // memoize directions results, return false for empty arrays (for use in filter)
         function getDirections(entity) {
             if (entity.id in directions) return directions[entity.id];
 
             var angles = entity.directions(graph, projection);
-            if (angles) directions[entity.id] = angles;
+            directions[entity.id] = angles.length ? angles : false;
             return angles;
         }
 
@@ -211,7 +212,7 @@ export function svgVertices(projection, context) {
             var entity = entities[i],
                 geometry = entity.geometry(graph);
 
-            if (wireframe && geometry === 'point') {
+            if ((geometry === 'point') && (wireframe || entity.directions(graph, projection).length)) {
                 vertices.push(entity);
                 continue;
             }

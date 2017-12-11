@@ -99,7 +99,7 @@ _extend(osmNode.prototype, {
         var lookForward =
             (this.tags['traffic_sign:forward'] || val === 'forward' || val === 'both' || val === 'all');
 
-        if (!lookForward && !lookBackward) return null;
+        if (!lookForward && !lookBackward) return [];
 
         var nodeIds = {};
         resolver.parentWays(this).forEach(function(parent) {
