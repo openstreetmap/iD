@@ -59,6 +59,7 @@ _extend(osmNode.prototype, {
         } else {
             // direction tag
             val = (
+                this.tags['camera:direction'] ||
                 this.tags['railway:signal:direction'] ||
                 this.tags['traffic_signals:direction'] ||
                 this.tags.direction ||
