@@ -38,12 +38,12 @@
 
 /* Modes */
 
-.mode-draw-line .vertex.active,
+/*.mode-draw-line .vertex.active,
 .mode-draw-area .vertex.active,
 .mode-drag-node .vertex.active {
     display: none;
 }
-
+*/
 .mode-draw-line .way.active,
 .mode-draw-area .way.active,
 .mode-drag-node .active {

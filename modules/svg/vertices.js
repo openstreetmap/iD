@@ -1,3 +1,4 @@
+import _clone from 'lodash-es/clone';
 import _values from 'lodash-es/values';
 
 import { select as d3_select } from 'd3-selection';
@@ -13,55 +14,16 @@ function ktoz(k) { return Math.log(k * TAU) / Math.LN2 - 8; }
 
 export function svgVertices(projection, context) {
     var radiuses = {
-        //       z16-, z17, z18+, tagged
-        shadow: [6,    7.5,   7.5,  11.5],
-        stroke: [2.5,  3.5,   3.5,  7],
-        fill:   [1,    1.5,   1.5,  1.5]
+        //       z16-, z17,   z18+,  tagged
+        shadow: [6,    7.5,   7.5,   11.5],
+        stroke: [2.5,  3.5,   3.5,   7],
+        fill:   [1,    1.5,   1.5,   1.5]
     };
 
     var _hover;
 
 
-    function siblingAndChildVertices(ids, graph, extent) {
-        var vertices = {};
-
-        function addChildVertices(entity) {
-            if (!context.features().isHiddenFeature(entity, graph, entity.geometry(graph))) {
-                var i;
-                if (entity.type === 'way') {
-                    for (i = 0; i < entity.nodes.length; i++) {
-                        addChildVertices(graph.entity(entity.nodes[i]));
-                    }
-                } else if (entity.type === 'relation') {
-                    for (i = 0; i < entity.members.length; i++) {
-                        var member = context.hasEntity(entity.members[i].id);
-                        if (member) {
-                            addChildVertices(member);
-                        }
-                    }
-                } else if (entity.intersects(extent, graph)) {
-                    vertices[entity.id] = entity;
-                }
-            }
-        }
-
-        ids.forEach(function(id) {
-            var entity = context.hasEntity(id);
-            if (entity && entity.type === 'node') {
-                vertices[entity.id] = entity;
-                context.graph().parentWays(entity).forEach(function(entity) {
-                    addChildVertices(entity);
-                });
-            } else if (entity) {
-                addChildVertices(entity);
-            }
-        });
-
-        return vertices;
-    }
-
-
-    function draw(selection, vertices, klass, graph, siblings) {
+    function draw(selection, vertices, klass, graph, siblings, filter) {
         siblings = siblings || {};
         var icons = {};
         var directions = {};
@@ -127,7 +89,8 @@ export function svgVertices(projection, context) {
         }
 
 
-        var groups = selection
+        var groups = selection.selectAll('.vertex.' + klass)
+            .filter(filter)
             .data(vertices, osmEntity.key);
 
         // exit
@@ -178,7 +141,7 @@ export function svgVertices(projection, context) {
         // Directional vertices get viewfields
         var dgroups = groups.filter(function(d) { return getDirections(d); })
             .selectAll('.viewfieldgroup')
-            .data(function(d) { return klass === 'vertex-hover' ? [] : [d]; }, osmEntity.key);
+            .data(function(d) { return /*klass === 'vertex-hover' ? [] : */[d]; }, osmEntity.key);
 
         // exit
         dgroups.exit()
@@ -209,53 +172,104 @@ export function svgVertices(projection, context) {
 
 
     function drawVertices(selection, graph, entities, filter, extent) {
-        var siblings = siblingAndChildVertices(context.selectedIDs(), graph, extent);
         var wireframe = context.surface().classed('fill-wireframe');
-        var vertices = [];
 
+        var siblings = {};
+        getSiblingAndChildVertices(context.selectedIDs(), graph, extent);
+
+        // always render selected and sibling vertices..
+        var vertices = _clone(siblings);
+        var filterWithSiblings = function(d) { return d.id in siblings || filter(d); };
+
+        // also render important vertices from the `entities` list..
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
             var geometry = entity.geometry(graph);
 
-            if ((geometry === 'point') && (wireframe || entity.directions(graph, projection).length)) {
-                vertices.push(entity);
-                continue;
-            }
+            if ((geometry === 'point') && renderAsVertex(entity)) {
+                vertices[entity.id] = entity;
 
-            if (geometry !== 'vertex')
-                continue;
-
-            if (entity.id in siblings ||
-                entity.hasInterestingTags() ||
-                entity.isEndpoint(graph) ||
-                entity.isConnected(graph)) {
-                vertices.push(entity);
+            } else if ((geometry === 'vertex') &&
+                (entity.hasInterestingTags() || entity.isEndpoint(graph) || entity.isConnected(graph)) ) {
+                vertices[entity.id] = entity;
             }
         }
 
-        var layer = selection.selectAll('.layer-hit');
-        layer.selectAll('g.vertex.vertex-persistent')
-            .filter(filter)
-            .call(draw, vertices, 'vertex-persistent', graph, siblings);
 
-        drawHover(selection, graph, extent);
+        selection.selectAll('.layer-hit')
+            .call(draw, _values(vertices), 'vertex-persistent', graph, siblings, filterWithSiblings);
+
+//         drawHover(selection, graph, extent, true);
+
+
+        function renderAsVertex(entity) {
+            var geometry = entity.geometry(graph);
+            return (geometry === 'vertex') ||
+                (geometry === 'point' && (wireframe || entity.directions(graph, projection).length));
+        }
+
+
+        function getSiblingAndChildVertices(ids, graph, extent) {
+
+            function addChildVertices(entity) {
+                var geometry = entity.geometry(graph);
+                if (!context.features().isHiddenFeature(entity, graph, geometry)) {
+                    var i;
+                    if (entity.type === 'way') {
+                        for (i = 0; i < entity.nodes.length; i++) {
+                            var child = context.hasEntity(entity.nodes[i]);
+                            if (child) {
+                                addChildVertices(child);
+                            }
+                        }
+                    } else if (entity.type === 'relation') {
+                        for (i = 0; i < entity.members.length; i++) {
+                            var member = context.hasEntity(entity.members[i].id);
+                            if (member) {
+                                addChildVertices(member);
+                            }
+                        }
+                    } else if (renderAsVertex(entity) && entity.intersects(extent, graph)) {
+                        siblings[entity.id] = entity;
+                    }
+                }
+            }
+
+            ids.forEach(function(id) {
+                var entity = context.hasEntity(id);
+                if (!entity) return;
+
+                if (entity.type === 'node') {
+                    if (renderAsVertex(entity)) {
+                        siblings[entity.id] = entity;
+                        graph.parentWays(entity).forEach(function(entity) {
+                            addChildVertices(entity);
+                        });
+                    }
+                } else {  // way, relation
+                    addChildVertices(entity);
+                }
+            });
+
+        }
     }
 
 
-    function drawHover(selection, graph, extent) {
-        var hovered = _hover ? siblingAndChildVertices([_hover.id], graph, extent) : {};
-        var layer = selection.selectAll('.layer-hit');
-
-        layer.selectAll('g.vertex.vertex-hover')
-            .call(draw, _values(hovered), 'vertex-hover', graph);
-    }
-
-
-    drawVertices.drawHover = function(selection, graph, target, extent) {
-        if (target === _hover) return;
-        _hover = target;
-        drawHover(selection, graph, extent);
-    };
+//     function drawHover(selection, graph, extent, follow) {
+//         var hovered = _hover ? siblingAndChildVertices([_hover.id], graph, extent) : {};
+//         var wireframe = context.surface().classed('fill-wireframe');
+//         var layer = selection.selectAll('.layer-hit');
+//
+//         layer.selectAll('g.vertex.vertex-hover')
+//             .call(draw, _values(hovered), 'vertex-hover', graph, {}, false);
+//     }
+//
+//
+//     drawVertices.drawHover = function(selection, graph, target, extent) {
+//         if (target === _hover) return;
+//         _hover = target;
+//         drawHover(selection, graph, extent);
+//     };
 
     return drawVertices;
 }

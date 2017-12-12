@@ -88,7 +88,7 @@ g.midpoint .shadow {
     fill-opacity: 0;
 }
 
-g.vertex.vertex-hover {
+/*g.vertex.vertex-hover {
     display: none;
 }
 
@@ -109,7 +109,7 @@ g.vertex.vertex-hover {
 .mode-drag-node .hover-disabled g.vertex.vertex-hover {
     display: none;
 }
-
+*/
 g.vertex.related:not(.selected) .shadow,
 g.vertex.hover:not(.selected) .shadow,
 g.midpoint.related:not(.selected) .shadow,
@@ -126,7 +126,7 @@ g.vertex.selected .shadow {
 .mode-add-area g.midpoint,
 .mode-add-line g.midpoint,
 .mode-add-point g.midpoint {
-  display: none;
+    display: none;
 }
 
 /* lines */

@@ -178,38 +178,38 @@ export function rendererMap(context) {
             })
             .on('mousemove.map', function() {
                 mousemove = d3_event;
-            })
-            .on('mouseover.vertices', function() {
-                if (map.editable() && !transformed) {
-                    var hover = d3_event.target.__data__;
-                    surface.selectAll('.data-layer-osm')
-                        .call(drawVertices.drawHover, context.graph(), hover, map.extent());
-                    dispatch.call('drawn', this, {full: false});
-                }
-            })
-            .on('mouseout.vertices', function() {
-                if (map.editable() && !transformed) {
-                    var hover = d3_event.relatedTarget && d3_event.relatedTarget.__data__;
-                    surface.selectAll('.data-layer-osm')
-                        .call(drawVertices.drawHover, context.graph(), hover, map.extent());
-                    dispatch.call('drawn', this, {full: false});
-                }
             });
+            // .on('mouseover.vertices', function() {
+            //     if (map.editable() && !transformed) {
+            //         var hover = d3_event.target.__data__;
+            //         surface.selectAll('.data-layer-osm')
+            //             .call(drawVertices.drawHover, context.graph(), hover, map.extent());
+            //         dispatch.call('drawn', this, { full: false });
+            //     }
+            // })
+            // .on('mouseout.vertices', function() {
+            //     if (map.editable() && !transformed) {
+            //         var hover = d3_event.relatedTarget && d3_event.relatedTarget.__data__;
+            //         surface.selectAll('.data-layer-osm')
+            //             .call(drawVertices.drawHover, context.graph(), hover, map.extent());
+            //         dispatch.call('drawn', this, { full: false });
+            //     }
+            // });
 
         supersurface
             .call(context.background());
 
         context.on('enter.map', function() {
             if (map.editable() && !transformed) {
-                var all = context.intersects(map.extent()),
-                    filter = utilFunctor(true),
-                    graph = context.graph();
+                var all = context.intersects(map.extent());
+                var filter = utilFunctor(true);
+                var graph = context.graph();
 
                 all = context.features().filter(all, graph);
                 surface.selectAll('.data-layer-osm')
                     .call(drawVertices, graph, all, filter, map.extent())
                     .call(drawMidpoints, graph, all, filter, map.trimmedExtent());
-                dispatch.call('drawn', this, {full: false});
+                dispatch.call('drawn', this, { full: false });
             }
         });
 
@@ -265,10 +265,11 @@ export function rendererMap(context) {
 
 
     function drawVector(difference, extent) {
-        var graph = context.graph(),
-            features = context.features(),
-            all = context.intersects(map.extent()),
-            data, filter;
+        var graph = context.graph();
+        var features = context.features();
+        var all = context.intersects(map.extent());
+        var data;
+        var filter;
 
         if (difference) {
             var complete = difference.complete(map.extent());

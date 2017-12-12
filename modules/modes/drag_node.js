@@ -1,5 +1,3 @@
-import _map from 'lodash-es/map';
-
 import {
     event as d3_event,
     select as d3_select
@@ -36,15 +34,16 @@ export function modeDragNode(context) {
         id: 'drag-node',
         button: 'browse'
     };
+    var hover = behaviorHover(context).altDisables(true).on('hover', context.ui().sidebar.hover);
+    var edit = behaviorEdit(context);
 
-    var nudgeInterval,
-        activeIDs,
-        wasMidpoint,
-        isCancelled,
-        lastLoc,
-        selectedIDs = [],
-        hover = behaviorHover(context).altDisables(true).on('hover', context.ui().sidebar.hover),
-        edit = behaviorEdit(context);
+    var _nudgeInterval;
+    var _restoreSelectedIDs = [];
+    var _activeIDs = [];
+    var _wasMidpoint = false;
+    var _isCancelled = false;
+    var _dragEntity;
+    var _lastLoc;
 
 
     function vecSub(a, b) {
@@ -52,9 +51,9 @@ export function modeDragNode(context) {
     }
 
     function edge(point, size) {
-        var pad = [80, 20, 50, 20],   // top, right, bottom, left
-            x = 0,
-            y = 0;
+        var pad = [80, 20, 50, 20];   // top, right, bottom, left
+        var x = 0;
+        var y = 0;
 
         if (point[0] > size[0] - pad[1])
             x = -10;
@@ -74,8 +73,8 @@ export function modeDragNode(context) {
 
 
     function startNudge(entity, nudge) {
-        if (nudgeInterval) window.clearInterval(nudgeInterval);
-        nudgeInterval = window.setInterval(function() {
+        if (_nudgeInterval) window.clearInterval(_nudgeInterval);
+        _nudgeInterval = window.setInterval(function() {
             context.pan(nudge);
             doMove(entity, nudge);
         }, 50);
@@ -83,9 +82,9 @@ export function modeDragNode(context) {
 
 
     function stopNudge() {
-        if (nudgeInterval) {
-            window.clearInterval(nudgeInterval);
-            nudgeInterval = null;
+        if (_nudgeInterval) {
+            window.clearInterval(_nudgeInterval);
+            _nudgeInterval = null;
         }
     }
 
@@ -106,19 +105,19 @@ export function modeDragNode(context) {
 
 
     function start(entity) {
-        wasMidpoint = entity.type === 'midpoint';
+        _wasMidpoint = entity.type === 'midpoint';
         var hasHidden = context.features().hasHiddenConnections(entity, context.graph());
-        isCancelled = d3_event.sourceEvent.shiftKey || hasHidden;
+        _isCancelled = d3_event.sourceEvent.shiftKey || hasHidden;
 
 
-        if (isCancelled) {
+        if (_isCancelled) {
             if (hasHidden) {
                 uiFlash().text(t('modes.drag_node.connected_to_hidden'))();
             }
             return behavior.cancel();
         }
 
-        if (wasMidpoint) {
+        if (_wasMidpoint) {
             var midpoint = entity;
             entity = osmNode();
             context.perform(actionAddMidpoint(midpoint, entity));
@@ -130,10 +129,13 @@ export function modeDragNode(context) {
             context.perform(actionNoop());
         }
 
+        _dragEntity = entity;
+
         // activeIDs generate no pointer events.  This prevents the node or vertex
         // being dragged from trying to connect to itself or its parent element.
-        activeIDs = _map(context.graph().parentWays(entity), 'id');
-        activeIDs.push(entity.id);
+        _activeIDs = context.graph().parentWays(entity)
+            .map(function(parent) { return parent.id; });
+        _activeIDs.push(entity.id);
         setActiveElements();
 
         context.enter(mode);
@@ -153,12 +155,12 @@ export function modeDragNode(context) {
     function doMove(entity, nudge) {
         nudge = nudge || [0, 0];
 
-        var currPoint = (d3_event && d3_event.point) || context.projection(lastLoc),
-            currMouse = vecSub(currPoint, nudge),
-            loc = context.projection.invert(currMouse),
-            d = datum();
+        var currPoint = (d3_event && d3_event.point) || context.projection(_lastLoc);
+        var currMouse = vecSub(currPoint, nudge);
+        var loc = context.projection.invert(currMouse);
+        var d = datum();
 
-        if (!nudgeInterval) {
+        if (!_nudgeInterval) {
             if (d.type === 'node' && d.id !== entity.id) {
                 loc = d.loc;
             } else if (d.type === 'way' && !d3_select(d3_event.sourceEvent.target).classed('fill')) {
@@ -171,14 +173,15 @@ export function modeDragNode(context) {
             moveAnnotation(entity)
         );
 
-        lastLoc = loc;
+        _lastLoc = loc;
     }
 
 
     function move(entity) {
-        if (isCancelled) return;
+        if (_isCancelled) return;
+
         d3_event.sourceEvent.stopPropagation();
-        lastLoc = context.projection.invert(d3_event.point);
+        _lastLoc = context.projection.invert(d3_event.point);
 
         doMove(entity);
         var nudge = edge(d3_event.point, context.map().dimensions());
@@ -191,7 +194,7 @@ export function modeDragNode(context) {
 
 
     function end(entity) {
-        if (isCancelled) return;
+        if (_isCancelled) return;
 
         var d = datum();
 
@@ -208,7 +211,7 @@ export function modeDragNode(context) {
                 connectAnnotation(d)
             );
 
-        } else if (wasMidpoint) {
+        } else if (_wasMidpoint) {
             context.replace(
                 actionNoop(),
                 t('operations.add.annotation.vertex')
@@ -221,7 +224,7 @@ export function modeDragNode(context) {
             );
         }
 
-        var reselection = selectedIDs.filter(function(id) {
+        var reselection = _restoreSelectedIDs.filter(function(id) {
             return context.graph().hasEntity(id);
         });
 
@@ -240,7 +243,7 @@ export function modeDragNode(context) {
 
 
     function setActiveElements() {
-        context.surface().selectAll(utilEntitySelector(activeIDs))
+        context.surface().selectAll(utilEntitySelector(_activeIDs))
             .classed('active', true);
     }
 
@@ -287,9 +290,16 @@ export function modeDragNode(context) {
     };
 
 
-    mode.selectedIDs = function(_) {
-        if (!arguments.length) return selectedIDs;
-        selectedIDs = _;
+    mode.selectedIDs = function() {
+        if (!arguments.length) return _dragEntity ? [_dragEntity.id] : [];
+        // no assign
+        return mode;
+    };
+
+
+    mode.restoreSelectedIDs = function(_) {
+        if (!arguments.length) return _restoreSelectedIDs;
+        _restoreSelectedIDs = _;
         return mode;
     };
 

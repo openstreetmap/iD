@@ -63,7 +63,7 @@ export function modeSelect(context, selectedIDs) {
             behaviorHover(context),
             behaviorSelect(context),
             behaviorLasso(context),
-            modeDragNode(context).selectedIDs(selectedIDs).behavior
+            modeDragNode(context).restoreSelectedIDs(selectedIDs).behavior
         ],
         inspector,
         editMenu,
