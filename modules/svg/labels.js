@@ -28,13 +28,13 @@ import {
 
 
 export function svgLabels(projection, context) {
-    var path = d3_geoPath(projection),
-        detected = utilDetect(),
-        baselineHack = (detected.ie || detected.browser.toLowerCase() === 'edge'),
-        rdrawn = rbush(),
-        rskipped = rbush(),
-        textWidthCache = {},
-        entitybboxes = {};
+    var path = d3_geoPath(projection);
+    var detected = utilDetect();
+    var baselineHack = (detected.ie || detected.browser.toLowerCase() === 'edge');
+    var _rdrawn = rbush();
+    var _rskipped = rbush();
+    var _textWidthCache = {};
+    var _entitybboxes = {};
 
     // Listed from highest to lowest priority
     var labelStack = [
@@ -87,8 +87,8 @@ export function svgLabels(projection, context) {
 
 
     function textWidth(text, size, elem) {
-        var c = textWidthCache[size];
-        if (!c) c = textWidthCache[size] = {};
+        var c = _textWidthCache[size];
+        if (!c) c = _textWidthCache[size] = {};
 
         if (c[text]) {
             return c[text];
@@ -207,12 +207,12 @@ export function svgLabels(projection, context) {
         icons
             .attr('transform', get(labels, 'transform'))
             .attr('xlink:href', function(d) {
-                var preset = context.presets().match(d, context.graph()),
-                    picon = preset && preset.icon;
+                var preset = context.presets().match(d, context.graph());
+                var picon = preset && preset.icon;
 
-                if (!picon)
+                if (!picon) {
                     return '';
-                else {
+                } else {
                     var isMaki = dataFeatureIcons.indexOf(picon) !== -1;
                     return '#' + picon + (isMaki ? '-15' : '');
                 }
@@ -221,12 +221,11 @@ export function svgLabels(projection, context) {
 
 
     function drawCollisionBoxes(selection, rtree, which) {
-        var showDebug = context.getDebug('collision'),
-            classes = 'debug ' + which + ' ' +
-                (which === 'debug-skipped' ? 'orange' : 'yellow');
+        var showDebug = context.getDebug('collision');
+        var classes = 'debug ' + which + ' ' + (which === 'debug-skipped' ? 'orange' : 'yellow');
 
         var debug = selection.selectAll('.layer-label-debug')
-                .data(showDebug ? [true] : []);
+            .data(showDebug ? [true] : []);
 
         debug.exit()
             .remove();
@@ -266,26 +265,27 @@ export function svgLabels(projection, context) {
 
     function drawLabels(selection, graph, entities, filter, dimensions, fullRedraw) {
         var lowZoom = context.surface().classed('low-zoom');
+        var labelable = []
+        var i, j, k, entity, geometry;
 
-        var labelable = [], i, j, k, entity, geometry;
         for (i = 0; i < labelStack.length; i++) {
             labelable.push([]);
         }
 
         if (fullRedraw) {
-            rdrawn.clear();
-            rskipped.clear();
-            entitybboxes = {};
+            _rdrawn.clear();
+            _rskipped.clear();
+            _entitybboxes = {};
         } else {
             for (i = 0; i < entities.length; i++) {
                 entity = entities[i];
                 var toRemove = []
-                    .concat(entitybboxes[entity.id] || [])
-                    .concat(entitybboxes[entity.id + 'I'] || []);
+                    .concat(_entitybboxes[entity.id] || [])
+                    .concat(_entitybboxes[entity.id + 'I'] || []);
 
                 for (j = 0; j < toRemove.length; j++) {
-                    rdrawn.remove(toRemove[j]);
-                    rskipped.remove(toRemove[j]);
+                    _rdrawn.remove(toRemove[j]);
+                    _rskipped.remove(toRemove[j]);
                 }
             }
         }
@@ -296,17 +296,17 @@ export function svgLabels(projection, context) {
             geometry = entity.geometry(graph);
             if (geometry === 'vertex') { geometry = 'point'; }  // treat vertex like point
 
-            var preset = geometry === 'area' && context.presets().match(entity, graph),
-                icon = preset && !blacklisted(preset) && preset.icon;
+            var preset = geometry === 'area' && context.presets().match(entity, graph);
+            var icon = preset && !blacklisted(preset) && preset.icon;
 
             if (!icon && !utilDisplayName(entity))
                 continue;
 
             for (k = 0; k < labelStack.length; k++) {
-                var matchGeom = labelStack[k][0],
-                    matchKey = labelStack[k][1],
-                    matchVal = labelStack[k][2],
-                    hasVal = entity.tags[matchKey];
+                var matchGeom = labelStack[k][0];
+                var matchKey = labelStack[k][1];
+                var matchVal = labelStack[k][2];
+                var hasVal = entity.tags[matchKey];
 
                 if (geometry === matchGeom && hasVal && (matchVal === '*' || matchVal === hasVal)) {
                     labelable[k].push(entity);
@@ -330,14 +330,15 @@ export function svgLabels(projection, context) {
         // Try and find a valid label for labellable entities
         for (k = 0; k < labelable.length; k++) {
             var fontSize = labelStack[k][3];
+
             for (i = 0; i < labelable[k].length; i++) {
                 entity = labelable[k][i];
                 geometry = entity.geometry(graph);
 
-                var getName = (geometry === 'line') ? utilDisplayNameForPath : utilDisplayName,
-                    name = getName(entity),
-                    width = name && textWidth(name, fontSize),
-                    p = null;
+                var getName = (geometry === 'line') ? utilDisplayNameForPath : utilDisplayName;
+                var name = getName(entity);
+                var width = name && textWidth(name, fontSize);
+                var p = null;
 
                 if (geometry === 'point') {
                     p = getPointLabel(entity, width, fontSize, geometry);
@@ -361,24 +362,24 @@ export function svgLabels(projection, context) {
 
 
         function getPointLabel(entity, width, height, geometry) {
-            var y = (geometry === 'point' ? -12 : 0),
-                pointOffsets = {
-                    ltr: [15, y, 'start'],
-                    rtl: [-15, y, 'end']
-                };
+            var y = (geometry === 'point' ? -12 : 0);
+            var pointOffsets = {
+                ltr: [15, y, 'start'],
+                rtl: [-15, y, 'end']
+            };
 
-            var coord = projection(entity.loc),
-                margin = 2,
-                offset = pointOffsets[textDirection],
-                p = {
-                    height: height,
-                    width: width,
-                    x: coord[0] + offset[0],
-                    y: coord[1] + offset[1],
-                    textAnchor: offset[2]
-                },
-                bbox;
+            var coord = projection(entity.loc);
+            var margin = 2;
+            var offset = pointOffsets[textDirection];
+            var p = {
+                height: height,
+                width: width,
+                x: coord[0] + offset[0],
+                y: coord[1] + offset[1],
+                textAnchor: offset[2]
+            };
 
+            var bbox;
             if (textDirection === 'rtl') {
                 bbox = {
                     minX: p.x - width - margin,
@@ -402,9 +403,9 @@ export function svgLabels(projection, context) {
 
 
         function getLineLabel(entity, width, height) {
-            var viewport = geoExtent(context.projection.clipExtent()).polygon(),
-                nodes = _map(graph.childNodes(entity), 'loc').map(projection),
-                length = geoPathLength(nodes);
+            var viewport = geoExtent(context.projection.clipExtent()).polygon();
+            var nodes = _map(graph.childNodes(entity), 'loc').map(projection);
+            var length = geoPathLength(nodes);
 
             if (length < width + 20) return;
 
@@ -414,9 +415,9 @@ export function svgLabels(projection, context) {
             var margin = 3;
 
             for (var i = 0; i < lineOffsets.length; i++) {
-                var offset = lineOffsets[i],
-                    middle = offset / 100 * length,
-                    start = middle - width / 2;
+                var offset = lineOffsets[i];
+                var middle = offset / 100 * length;
+                var start = middle - width / 2;
 
                 if (start < 0 || start + width > length) continue;
 
@@ -431,8 +432,8 @@ export function svgLabels(projection, context) {
                     sub = sub.reverse();
                 }
 
-                var bboxes = [],
-                    boxsize = (height + 2) / 2;
+                var bboxes = [];
+                var boxsize = (height + 2) / 2;
 
                 for (var j = 0; j < sub.length - 1; j++) {
                     var a = sub[j];
@@ -474,12 +475,12 @@ export function svgLabels(projection, context) {
             }
 
             function subpath(nodes, from, to) {
-                var sofar = 0,
-                    start, end, i0, i1;
+                var sofar = 0;
+                var start, end, i0, i1;
 
                 for (var i = 0; i < nodes.length - 1; i++) {
-                    var a = nodes[i],
-                        b = nodes[i + 1];
+                    var a = nodes[i];
+                    var b = nodes[i + 1];
                     var current = geoEuclideanDistance(a, b);
                     var portion;
                     if (!start && sofar + current >= from) {
@@ -510,17 +511,17 @@ export function svgLabels(projection, context) {
 
 
         function getAreaLabel(entity, width, height) {
-            var centroid = path.centroid(entity.asGeoJSON(graph, true)),
-                extent = entity.extent(graph),
-                areaWidth = projection(extent[1])[0] - projection(extent[0])[0];
+            var centroid = path.centroid(entity.asGeoJSON(graph, true));
+            var extent = entity.extent(graph);
+            var areaWidth = projection(extent[1])[0] - projection(extent[0])[0];
 
             if (isNaN(centroid[0]) || areaWidth < 20) return;
 
-            var preset = context.presets().match(entity, context.graph()),
-                picon = preset && preset.icon,
-                iconSize = 17,
-                margin = 2,
-                p = {};
+            var preset = context.presets().match(entity, context.graph());
+            var picon = preset && preset.icon;
+            var iconSize = 17;
+            var margin = 2;
+            var p = {};
 
             if (picon) {  // icon and label..
                 if (addIcon()) {
@@ -576,11 +577,10 @@ export function svgLabels(projection, context) {
 
 
         function tryInsert(bboxes, id, saveSkipped) {
-            var skipped = false,
-                bbox;
+            var skipped = false;
 
             for (var i = 0; i < bboxes.length; i++) {
-                bbox = bboxes[i];
+                var bbox = bboxes[i];
                 bbox.id = id;
 
                 // Check that label is visible
@@ -588,28 +588,28 @@ export function svgLabels(projection, context) {
                     skipped = true;
                     break;
                 }
-                if (rdrawn.collides(bbox)) {
+                if (_rdrawn.collides(bbox)) {
                     skipped = true;
                     break;
                 }
             }
 
-            entitybboxes[id] = bboxes;
+            _entitybboxes[id] = bboxes;
 
             if (skipped) {
                 if (saveSkipped) {
-                    rskipped.load(bboxes);
+                    _rskipped.load(bboxes);
                 }
             } else {
-                rdrawn.load(bboxes);
+                _rdrawn.load(bboxes);
             }
 
             return !skipped;
         }
 
 
-        var label = selection.selectAll('.layer-label'),
-            halo = selection.selectAll('.layer-halo');
+        var label = selection.selectAll('.layer-label');
+        var halo = selection.selectAll('.layer-halo');
 
         // points
         drawPointLabels(label, labelled.point, filter, 'pointlabel', positions.point);
@@ -627,8 +627,8 @@ export function svgLabels(projection, context) {
         drawAreaIcons(halo, labelled.area, filter, 'areaicon-halo', positions.area);
 
         // debug
-        drawCollisionBoxes(label, rskipped, 'debug-skipped');
-        drawCollisionBoxes(label, rdrawn, 'debug-drawn');
+        drawCollisionBoxes(label, _rskipped, 'debug-skipped');
+        drawCollisionBoxes(label, _rdrawn, 'debug-drawn');
 
         selection.call(filterLabels);
     }
@@ -641,17 +641,17 @@ export function svgLabels(projection, context) {
         layers.selectAll('.proximate')
             .classed('proximate', false);
 
-        var mouse = context.mouse(),
-            graph = context.graph(),
-            selectedIDs = context.selectedIDs(),
-            ids = [],
-            pad, bbox;
+        var mouse = context.mouse();
+        var graph = context.graph();
+        var selectedIDs = context.selectedIDs();
+        var ids = [];
+        var pad, bbox;
 
         // hide labels near the mouse
         if (mouse) {
             pad = 20;
             bbox = { minX: mouse[0] - pad, minY: mouse[1] - pad, maxX: mouse[0] + pad, maxY: mouse[1] + pad };
-            ids.push.apply(ids, _map(rdrawn.search(bbox), 'id'));
+            ids.push.apply(ids, _map(_rdrawn.search(bbox), 'id'));
         }
 
         // hide labels along selected ways, or near selected vertices
@@ -666,7 +666,7 @@ export function svgLabels(projection, context) {
                 var point = context.projection(entity.loc);
                 pad = 10;
                 bbox = { minX: point[0] - pad, minY: point[1] - pad, maxX: point[0] + pad, maxY: point[1] + pad };
-                ids.push.apply(ids, _map(rdrawn.search(bbox), 'id'));
+                ids.push.apply(ids, _map(_rdrawn.search(bbox), 'id'));
             }
         }
 
