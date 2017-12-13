@@ -27,6 +27,10 @@ import {
 } from '../util';
 
 
+var TAU = 2 * Math.PI;
+function ktoz(k) { return Math.log(k * TAU) / Math.LN2 - 8; }
+
+
 export function svgLabels(projection, context) {
     var path = d3_geoPath(projection);
     var detected = utilDetect();
@@ -264,8 +268,10 @@ export function svgLabels(projection, context) {
 
 
     function drawLabels(selection, graph, entities, filter, dimensions, fullRedraw) {
-        var lowZoom = context.surface().classed('low-zoom');
-        var labelable = []
+        var wireframe = context.surface().classed('fill-wireframe');
+        var zoom = ktoz(projection.scale());
+
+        var labelable = [];
         var i, j, k, entity, geometry;
 
         for (i = 0; i < labelStack.length; i++) {
@@ -340,13 +346,23 @@ export function svgLabels(projection, context) {
                 var width = name && textWidth(name, fontSize);
                 var p = null;
 
-                if (geometry === 'point') {
-                    p = getPointLabel(entity, width, fontSize, geometry);
-                } else if (geometry === 'vertex' && !lowZoom) {
-                    // don't label vertices at low zoom because they don't have icons
-                    p = getPointLabel(entity, width, fontSize, geometry);
+                if (geometry === 'point' || geometry === 'vertex') {
+                    if (wireframe) continue;  // no point or vertex labels in wireframe
+
+                    var hasDirections = entity.directions(graph, projection).length;
+                    var renderAs;
+
+                    if (geometry === 'point' && !(zoom >= 18 && hasDirections)) {
+                        renderAs = 'point';
+                    } else {
+                        if (zoom < 17) continue;  // no vertex labels at low zooms (vertices have no icons)
+                        renderAs = 'vertex';
+                    }
+                    p = getPointLabel(entity, width, fontSize, renderAs);
+
                 } else if (geometry === 'line') {
                     p = getLineLabel(entity, width, fontSize);
+
                 } else if (geometry === 'area') {
                     p = getAreaLabel(entity, width, fontSize);
                 }
