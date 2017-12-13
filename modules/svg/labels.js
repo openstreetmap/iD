@@ -461,8 +461,8 @@ export function svgLabels(projection, context) {
 
         function getLineLabel(entity, width, height) {
             var viewport = geoExtent(context.projection.clipExtent()).polygon();
-            var nodes = _map(graph.childNodes(entity), 'loc').map(projection);
-            var length = geoPathLength(nodes);
+            var points = _map(graph.childNodes(entity), 'loc').map(projection);
+            var length = geoPathLength(points);
 
             if (length < width + 20) return;
 
@@ -479,7 +479,7 @@ export function svgLabels(projection, context) {
                 if (start < 0 || start + width > length) continue;
 
                 // generate subpath and ignore paths that are invalid or don't cross viewport.
-                var sub = subpath(nodes, start, start + width);
+                var sub = subpath(points, start, start + width);
                 if (!sub || !geoPolygonIntersectsPolygon(viewport, sub, true)) {
                     continue;
                 }
@@ -515,7 +515,7 @@ export function svgLabels(projection, context) {
                     }
                 }
 
-                if (tryInsert(bboxes, entity.id, false)) {
+                if (tryInsert(bboxes, entity.id, false)) {   // accept this one
                     return {
                         'font-size': height + 2,
                         lineString: lineString(sub),
@@ -529,17 +529,17 @@ export function svgLabels(projection, context) {
                 return !(p[0][0] < p[p.length - 1][0] && angle < Math.PI/2 && angle > -Math.PI/2);
             }
 
-            function lineString(nodes) {
-                return 'M' + nodes.join('L');
+            function lineString(points) {
+                return 'M' + points.join('L');
             }
 
-            function subpath(nodes, from, to) {
+            function subpath(points, from, to) {
                 var sofar = 0;
                 var start, end, i0, i1;
 
-                for (var i = 0; i < nodes.length - 1; i++) {
-                    var a = nodes[i];
-                    var b = nodes[i + 1];
+                for (var i = 0; i < points.length - 1; i++) {
+                    var a = points[i];
+                    var b = points[i + 1];
                     var current = geoEuclideanDistance(a, b);
                     var portion;
                     if (!start && sofar + current >= from) {
@@ -561,10 +561,10 @@ export function svgLabels(projection, context) {
                     sofar += current;
                 }
 
-                var ret = nodes.slice(i0, i1);
-                ret.unshift(start);
-                ret.push(end);
-                return ret;
+                var result = points.slice(i0, i1);
+                result.unshift(start);
+                result.push(end);
+                return result;
             }
         }
 
