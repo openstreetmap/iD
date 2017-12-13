@@ -217,7 +217,7 @@ text.pointlabel {
     stroke-miterlimit: 1;
 }
 
-text.proximate {
+text.nolabel {
     opacity: 0;
 }
 

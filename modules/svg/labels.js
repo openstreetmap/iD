@@ -304,7 +304,7 @@ export function svgLabels(projection, context) {
             geometry = entity.geometry(graph);
 
             // Insert collision boxes around interesting points/vertices
-            if (geometry === 'point' || (geometry === 'vertex' && entity.hasInterestingTags())) {
+            if (geometry === 'point' || (geometry === 'vertex' && isInterestingVertex(entity))) {
                 var hasDirections = entity.directions(graph, projection).length;
                 var markerPadding;
 
@@ -401,6 +401,19 @@ export function svgLabels(projection, context) {
                     labelled[geometry].push(entity);
                 }
             }
+        }
+
+
+        function isInterestingVertex(entity) {
+            var selectedIDs = context.selectedIDs();
+
+            return entity.hasInterestingTags() ||
+                entity.isEndpoint(graph) ||
+                entity.isConnected(graph) ||
+                selectedIDs.indexOf(entity.id) !== -1 ||
+                _some(graph.parentWays(entity), function(parent) {
+                    return selectedIDs.indexOf(parent.id) !== -1;
+                });
         }
 
 
@@ -698,8 +711,8 @@ export function svgLabels(projection, context) {
         var layers = selection
             .selectAll('.layer-label, .layer-halo');
 
-        layers.selectAll('.proximate')
-            .classed('proximate', false);
+        layers.selectAll('.nolabel')
+            .classed('nolabel', false);
 
         var mouse = context.mouse();
         var graph = context.graph();
@@ -714,25 +727,46 @@ export function svgLabels(projection, context) {
             ids.push.apply(ids, _map(_rdrawn.search(bbox), 'id'));
         }
 
-        // hide labels along selected ways, or near selected vertices
+        // hide labels on selected nodes (they look weird when dragging / haloed)
         for (var i = 0; i < selectedIDs.length; i++) {
             var entity = graph.hasEntity(selectedIDs[i]);
-            if (!entity) continue;
-            var geometry = entity.geometry(graph);
-
-            if (geometry === 'line' || geometry === 'point' || geometry === 'vertex') {
+            if (entity && entity.type === 'node') {
                 ids.push(selectedIDs[i]);
             }
-            // } else if (geometry === 'vertex') {
-            //     var point = context.projection(entity.loc);
-            //     pad = 20;
-            //     bbox = { minX: point[0] - pad, minY: point[1] - pad, maxX: point[0] + pad, maxY: point[1] + pad };
-            //     ids.push.apply(ids, _map(_rdrawn.search(bbox), 'id'));
-            // }
         }
 
         layers.selectAll(utilEntitySelector(ids))
-            .classed('proximate', true);
+            .classed('nolabel', true);
+
+
+        // draw the mouse bbox if debugging is on..
+        if (context.getDebug('collision')) {
+            var gj = bbox ? [{
+                type: 'Polygon',
+                coordinates: [[
+                    [bbox.minX, bbox.minY],
+                    [bbox.maxX, bbox.minY],
+                    [bbox.maxX, bbox.maxY],
+                    [bbox.minX, bbox.maxY],
+                    [bbox.minX, bbox.minY]
+                ]]
+            }] : [];
+
+            var debug = selection.selectAll('.layer-label-debug');
+            var debugMouse = debug.selectAll('.debug-mouse')
+                .data(gj);
+
+            // exit
+            debugMouse.exit()
+                .remove();
+
+            // enter/update
+            debugMouse.enter()
+                .append('path')
+                .attr('class', 'debug debug-mouse yellow')
+                .merge(debugMouse)
+                .attr('d', d3_geoPath());
+        }
     }
 
 
