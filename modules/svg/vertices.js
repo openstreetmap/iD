@@ -83,9 +83,6 @@ export function svgVertices(projection, context) {
 
             selection.selectAll('use')
                 .attr('visibility', (z === 0 ? 'hidden' : null));
-
-            selection.selectAll('.viewfieldgroup')
-                .attr('visibility', (zoom < 18 ? 'hidden' : null));
         }
 
 
@@ -141,7 +138,7 @@ export function svgVertices(projection, context) {
         // Directional vertices get viewfields
         var dgroups = groups.filter(function(d) { return getDirections(d); })
             .selectAll('.viewfieldgroup')
-            .data(function(d) { return /*klass === 'vertex-hover' ? [] : */[d]; }, osmEntity.key);
+            .data(function data(d) { return zoom < 18 ? [] : [d]; }, osmEntity.key);
 
         // exit
         dgroups.exit()
@@ -173,6 +170,7 @@ export function svgVertices(projection, context) {
 
     function drawVertices(selection, graph, entities, filter, extent) {
         var wireframe = context.surface().classed('fill-wireframe');
+        var zoom = ktoz(projection.scale());
 
         var siblings = {};
         getSiblingAndChildVertices(context.selectedIDs(), graph, extent);
@@ -202,10 +200,14 @@ export function svgVertices(projection, context) {
 //         drawHover(selection, graph, extent, true);
 
 
+        // Points can also render as vertices:
+        // 1. in wireframe mode or
+        // 2. at higher zooms if they have a direction
         function renderAsVertex(entity) {
             var geometry = entity.geometry(graph);
-            return (geometry === 'vertex') ||
-                (geometry === 'point' && (wireframe || entity.directions(graph, projection).length));
+            return geometry === 'vertex' || (geometry === 'point' && (
+                wireframe || (zoom > 18 && entity.directions(graph, projection).length)
+            ));
         }
 
 

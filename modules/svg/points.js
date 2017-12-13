@@ -3,6 +3,10 @@ import { osmEntity } from '../osm';
 import { svgPointTransform, svgTagClasses } from './index';
 
 
+var TAU = 2 * Math.PI;
+function ktoz(k) { return Math.log(k * TAU) / Math.LN2 - 8; }
+
+
 export function svgPoints(projection, context) {
 
     function markerPath(selection, klass) {
@@ -19,9 +23,16 @@ export function svgPoints(projection, context) {
 
     return function drawPoints(selection, graph, entities, filter) {
         var wireframe = context.surface().classed('fill-wireframe');
-        var points = wireframe ? [] : entities.filter(function(e) {
-            return e.geometry(graph) === 'point' && !e.directions(graph, projection).length;
-        });
+        var zoom = ktoz(projection.scale());
+
+        // points with a direction will render as vertices at higher zooms
+        function renderAsPoint(entity) {
+            return entity.geometry(graph) === 'point' &&
+                !(zoom >= 18 && entity.directions(graph, projection).length);
+        }
+
+        // all points will render as vertices in wireframe mode too
+        var points = wireframe ? [] : entities.filter(renderAsPoint);
 
         points.sort(sortY);
 
