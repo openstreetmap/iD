@@ -272,6 +272,7 @@ export function svgLabels(projection, context) {
         var zoom = ktoz(projection.scale());
 
         var labelable = [];
+        var renderNodeAs = {};
         var i, j, k, entity, geometry;
 
         for (i = 0; i < labelStack.length; i++) {
@@ -282,6 +283,7 @@ export function svgLabels(projection, context) {
             _rdrawn.clear();
             _rskipped.clear();
             _entitybboxes = {};
+
         } else {
             for (i = 0; i < entities.length; i++) {
                 entity = entities[i];
@@ -296,12 +298,42 @@ export function svgLabels(projection, context) {
             }
         }
 
-        // Split entities into groups specified by labelStack
+        // Loop through all the entities to do some preprocessing
         for (i = 0; i < entities.length; i++) {
             entity = entities[i];
             geometry = entity.geometry(graph);
-            if (geometry === 'vertex') { geometry = 'point'; }  // treat vertex like point
 
+            // Insert collision boxes around interesting points/vertices
+            if (geometry === 'point' || (geometry === 'vertex' && entity.hasInterestingTags())) {
+                var hasDirections = entity.directions(graph, projection).length;
+                var markerPadding;
+
+                if (!wireframe && geometry === 'point' && !(zoom >= 18 && hasDirections)) {
+                    renderNodeAs[entity.id] = 'point';
+                    markerPadding = 20;   // extra y for marker height
+                } else {
+                    renderNodeAs[entity.id] = 'vertex';
+                    markerPadding = 0;
+                }
+
+                var coord = projection(entity.loc);
+                var nodePadding = 10;
+                var bbox = {
+                    minX: coord[0] - nodePadding,
+                    minY: coord[1] - nodePadding - markerPadding,
+                    maxX: coord[0] + nodePadding,
+                    maxY: coord[1] + nodePadding
+                };
+
+                doInsert(bbox, entity.id + 'P');
+            }
+
+            // From here on, treat vertices like points
+            if (geometry === 'vertex') {
+                geometry = 'point';
+            }
+
+            // Determine which entities are label-able
             var preset = geometry === 'area' && context.presets().match(entity, graph);
             var icon = preset && !blacklisted(preset) && preset.icon;
 
@@ -347,17 +379,12 @@ export function svgLabels(projection, context) {
                 var p = null;
 
                 if (geometry === 'point' || geometry === 'vertex') {
-                    if (wireframe) continue;  // no point or vertex labels in wireframe
+                    // no point or vertex labels in wireframe mode
+                    // no vertex labels at low zooms (vertices have no icons)
+                    if (wireframe) continue;
+                    var renderAs = renderNodeAs[entity.id];
+                    if (renderAs === 'vertex' && zoom < 17) continue;
 
-                    var hasDirections = entity.directions(graph, projection).length;
-                    var renderAs;
-
-                    if (geometry === 'point' && !(zoom >= 18 && hasDirections)) {
-                        renderAs = 'point';
-                    } else {
-                        if (zoom < 17) continue;  // no vertex labels at low zooms (vertices have no icons)
-                        renderAs = 'vertex';
-                    }
                     p = getPointLabel(entity, width, fontSize, renderAs);
 
                 } else if (geometry === 'line') {
@@ -385,7 +412,7 @@ export function svgLabels(projection, context) {
             };
 
             var coord = projection(entity.loc);
-            var margin = 2;
+            var textPadding = 2;
             var offset = pointOffsets[textDirection];
             var p = {
                 height: height,
@@ -395,20 +422,21 @@ export function svgLabels(projection, context) {
                 textAnchor: offset[2]
             };
 
+            // insert a collision box for the text label..
             var bbox;
             if (textDirection === 'rtl') {
                 bbox = {
-                    minX: p.x - width - margin,
-                    minY: p.y - (height / 2) - margin,
-                    maxX: p.x + margin,
-                    maxY: p.y + (height / 2) + margin
+                    minX: p.x - width - textPadding,
+                    minY: p.y - (height / 2) - textPadding,
+                    maxX: p.x + textPadding,
+                    maxY: p.y + (height / 2) + textPadding
                 };
             } else {
                 bbox = {
-                    minX: p.x - margin,
-                    minY: p.y - (height / 2) - margin,
-                    maxX: p.x + width + margin,
-                    maxY: p.y + (height / 2) + margin
+                    minX: p.x - textPadding,
+                    minY: p.y - (height / 2) - textPadding,
+                    maxX: p.x + width + textPadding,
+                    maxY: p.y + (height / 2) + textPadding
                 };
             }
 
@@ -428,7 +456,7 @@ export function svgLabels(projection, context) {
             // % along the line to attempt to place the label
             var lineOffsets = [50, 45, 55, 40, 60, 35, 65, 30, 70,
                                25, 75, 20, 80, 15, 95, 10, 90, 5, 95];
-            var margin = 3;
+            var padding = 3;
 
             for (var i = 0; i < lineOffsets.length; i++) {
                 var offset = lineOffsets[i];
@@ -454,14 +482,16 @@ export function svgLabels(projection, context) {
                 for (var j = 0; j < sub.length - 1; j++) {
                     var a = sub[j];
                     var b = sub[j + 1];
+
+                    // split up the text into small collision boxes
                     var num = Math.max(1, Math.floor(geoEuclideanDistance(a, b) / boxsize / 2));
 
                     for (var box = 0; box < num; box++) {
                         var p = geoInterp(a, b, box / num);
-                        var x0 = p[0] - boxsize - margin;
-                        var y0 = p[1] - boxsize - margin;
-                        var x1 = p[0] + boxsize + margin;
-                        var y1 = p[1] + boxsize + margin;
+                        var x0 = p[0] - boxsize - padding;
+                        var y0 = p[1] - boxsize - padding;
+                        var x1 = p[0] + boxsize + padding;
+                        var y1 = p[1] + boxsize + padding;
 
                         bboxes.push({
                             minX: Math.min(x0, x1),
@@ -536,12 +566,12 @@ export function svgLabels(projection, context) {
             var preset = context.presets().match(entity, context.graph());
             var picon = preset && preset.icon;
             var iconSize = 17;
-            var margin = 2;
+            var padding = 2;
             var p = {};
 
             if (picon) {  // icon and label..
                 if (addIcon()) {
-                    addLabel(iconSize + margin);
+                    addLabel(iconSize + padding);
                     return p;
                 }
             } else {   // label only..
@@ -573,10 +603,10 @@ export function svgLabels(projection, context) {
                     var labelX = centroid[0];
                     var labelY = centroid[1] + yOffset;
                     var bbox = {
-                        minX: labelX - (width / 2) - margin,
-                        minY: labelY - (height / 2) - margin,
-                        maxX: labelX + (width / 2) + margin,
-                        maxY: labelY + (height / 2) + margin
+                        minX: labelX - (width / 2) - padding,
+                        minY: labelY - (height / 2) - padding,
+                        maxX: labelX + (width / 2) + padding,
+                        maxY: labelY + (height / 2) + padding
                     };
 
                     if (tryInsert([bbox], entity.id, true)) {
@@ -589,6 +619,20 @@ export function svgLabels(projection, context) {
                 }
                 return false;
             }
+        }
+
+
+        // force insert a singular bounding box
+        // singular box only, no array, id better be unique
+        function doInsert(bbox, id) {
+            bbox.id = id;
+
+            var oldbox = _entitybboxes[id];
+            if (oldbox) {
+                _rdrawn.remove(oldbox);
+            }
+            _entitybboxes[id] = bbox;
+            _rdrawn.insert(bbox);
         }
 
 
@@ -676,14 +720,15 @@ export function svgLabels(projection, context) {
             if (!entity) continue;
             var geometry = entity.geometry(graph);
 
-            if (geometry === 'line') {
+            if (geometry === 'line' || geometry === 'point' || geometry === 'vertex') {
                 ids.push(selectedIDs[i]);
-            } else if (geometry === 'vertex') {
-                var point = context.projection(entity.loc);
-                pad = 10;
-                bbox = { minX: point[0] - pad, minY: point[1] - pad, maxX: point[0] + pad, maxY: point[1] + pad };
-                ids.push.apply(ids, _map(_rdrawn.search(bbox), 'id'));
             }
+            // } else if (geometry === 'vertex') {
+            //     var point = context.projection(entity.loc);
+            //     pad = 20;
+            //     bbox = { minX: point[0] - pad, minY: point[1] - pad, maxX: point[0] + pad, maxY: point[1] + pad };
+            //     ids.push.apply(ids, _map(_rdrawn.search(bbox), 'id'));
+            // }
         }
 
         layers.selectAll(utilEntitySelector(ids))
