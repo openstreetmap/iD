@@ -54,7 +54,8 @@ export function svgVertices(projection, context) {
 
         function setClass(klass) {
             return function(entity) {
-                this.setAttribute('class', 'node vertex ' + klass + ' ' + entity.id);
+                d3_select(this)
+                    .attr('class', 'node vertex ' + klass + ' ' + entity.id);
             };
         }
 
@@ -171,9 +172,7 @@ export function svgVertices(projection, context) {
     function drawVertices(selection, graph, entities, filter, extent) {
         var wireframe = context.surface().classed('fill-wireframe');
         var zoom = ktoz(projection.scale());
-
-        var siblings = {};
-        getSiblingAndChildVertices(context.selectedIDs(), graph, extent);
+        var siblings = getSiblingAndChildVertices(context.selectedIDs(), graph, extent, wireframe, zoom);
 
         // always render selected and sibling vertices..
         var vertices = _clone(siblings);
@@ -184,7 +183,7 @@ export function svgVertices(projection, context) {
             var entity = entities[i];
             var geometry = entity.geometry(graph);
 
-            if ((geometry === 'point') && renderAsVertex(entity)) {
+            if ((geometry === 'point') && renderAsVertex(entity, graph, wireframe, zoom)) {
                 vertices[entity.id] = entity;
 
             } else if ((geometry === 'vertex') &&
@@ -193,85 +192,105 @@ export function svgVertices(projection, context) {
             }
         }
 
-
-        selection.selectAll('.layer-hit')
+        selection.selectAll('.layer-points .layer-points-vertices')
             .call(draw, _values(vertices), 'vertex-persistent', graph, siblings, filterWithSiblings);
 
-//         drawHover(selection, graph, extent, true);
+        drawTargets(selection, graph, _values(vertices), filter, extent);
 
-
-        // Points can also render as vertices:
-        // 1. in wireframe mode or
-        // 2. at higher zooms if they have a direction
-        function renderAsVertex(entity) {
-            var geometry = entity.geometry(graph);
-            return geometry === 'vertex' || (geometry === 'point' && (
-                wireframe || (zoom > 18 && entity.directions(graph, projection).length)
-            ));
-        }
-
-
-        function getSiblingAndChildVertices(ids, graph, extent) {
-
-            function addChildVertices(entity) {
-                var geometry = entity.geometry(graph);
-                if (!context.features().isHiddenFeature(entity, graph, geometry)) {
-                    var i;
-                    if (entity.type === 'way') {
-                        for (i = 0; i < entity.nodes.length; i++) {
-                            var child = context.hasEntity(entity.nodes[i]);
-                            if (child) {
-                                addChildVertices(child);
-                            }
-                        }
-                    } else if (entity.type === 'relation') {
-                        for (i = 0; i < entity.members.length; i++) {
-                            var member = context.hasEntity(entity.members[i].id);
-                            if (member) {
-                                addChildVertices(member);
-                            }
-                        }
-                    } else if (renderAsVertex(entity) && entity.intersects(extent, graph)) {
-                        siblings[entity.id] = entity;
-                    }
-                }
-            }
-
-            ids.forEach(function(id) {
-                var entity = context.hasEntity(id);
-                if (!entity) return;
-
-                if (entity.type === 'node') {
-                    if (renderAsVertex(entity)) {
-                        siblings[entity.id] = entity;
-                        graph.parentWays(entity).forEach(function(entity) {
-                            addChildVertices(entity);
-                        });
-                    }
-                } else {  // way, relation
-                    addChildVertices(entity);
-                }
-            });
-
-        }
     }
 
 
-//     function drawHover(selection, graph, extent, follow) {
-//         var hovered = _hover ? siblingAndChildVertices([_hover.id], graph, extent) : {};
-//         var wireframe = context.surface().classed('fill-wireframe');
-//         var layer = selection.selectAll('.layer-hit');
-//
-//         layer.selectAll('g.vertex.vertex-hover')
-//             .call(draw, _values(hovered), 'vertex-hover', graph, {}, false);
-//     }
-//
-//
-//     drawVertices.drawHover = function(selection, graph, target, extent) {
-//         if (target === _hover) return;
-//         _hover = target;
-//         drawHover(selection, graph, extent);
-//     };
+    function drawTargets(selection, graph, entities, filter, extent) {
+// todo coming soon
+return;
+        var layer = selection.selectAll('.layer-points .layer-points-targets');
+
+        var targets = layer.selectAll('g.vertex.target')
+            .data(entities, osmEntity.key);
+
+        // exit
+        targets.exit()
+            .remove();
+
+        // enter/update
+        targets.enter()
+            .append('circle')
+            .attr('r', radiuses.shadow[3])  // just use the biggest one for now
+            .attr('class', function(d) { return 'node vertex target ' + d.id; })
+            .merge(targets)
+            .attr('transform', svgPointTransform(projection));
+    }
+
+
+    // Points can also render as vertices:
+    // 1. in wireframe mode or
+    // 2. at higher zooms if they have a direction
+    function renderAsVertex(entity, graph, wireframe, zoom) {
+        var geometry = entity.geometry(graph);
+        return geometry === 'vertex' || (geometry === 'point' && (
+            wireframe || (zoom > 18 && entity.directions(graph, projection).length)
+        ));
+    }
+
+
+    function getSiblingAndChildVertices(ids, graph, extent, wireframe, zoom) {
+        var results = {};
+
+        function addChildVertices(entity) {
+            var geometry = entity.geometry(graph);
+            if (!context.features().isHiddenFeature(entity, graph, geometry)) {
+                var i;
+                if (entity.type === 'way') {
+                    for (i = 0; i < entity.nodes.length; i++) {
+                        var child = context.hasEntity(entity.nodes[i]);
+                        if (child) {
+                            addChildVertices(child);
+                        }
+                    }
+                } else if (entity.type === 'relation') {
+                    for (i = 0; i < entity.members.length; i++) {
+                        var member = context.hasEntity(entity.members[i].id);
+                        if (member) {
+                            addChildVertices(member);
+                        }
+                    }
+                } else if (renderAsVertex(entity, graph, wireframe, zoom) && entity.intersects(extent, graph)) {
+                    results[entity.id] = entity;
+                }
+            }
+        }
+
+        ids.forEach(function(id) {
+            var entity = context.hasEntity(id);
+            if (!entity) return;
+
+            if (entity.type === 'node') {
+                if (renderAsVertex(entity, graph, wireframe, zoom)) {
+                    results[entity.id] = entity;
+                    graph.parentWays(entity).forEach(function(entity) {
+                        addChildVertices(entity);
+                    });
+                }
+            } else {  // way, relation
+                addChildVertices(entity);
+            }
+        });
+
+        return results;
+    }
+
+
+    drawVertices.drawHover = function(selection, graph, target, extent) {
+        if (target === _hover) return;
+        _hover = target;
+
+        var wireframe = context.surface().classed('fill-wireframe');
+        var zoom = ktoz(projection.scale());
+        var hovered = _hover ? getSiblingAndChildVertices([_hover.id], graph, extent, wireframe, zoom) : {};
+        var filter = function() { return true; };
+
+        drawTargets(selection, graph, _values(hovered), filter, extent);
+    };
 
     return drawVertices;
 }

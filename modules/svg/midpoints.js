@@ -16,7 +16,7 @@ import {
 export function svgMidpoints(projection, context) {
 
     return function drawMidpoints(selection, graph, entities, filter, extent) {
-        var layer = selection.selectAll('.layer-hit');
+        var layer = selection.selectAll('.layer-points .layer-points-midpoints');
 
         var mode = context.mode();
         if (mode && mode.id !== 'select') {

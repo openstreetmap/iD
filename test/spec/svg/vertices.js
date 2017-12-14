@@ -11,19 +11,19 @@ describe('iD.svgVertices', function () {
 
 
     beforeEach(function () {
-        context = iD.Context();
+        context = iD.coreContext();
         d3.select(document.createElement('div'))
             .attr('id', 'map')
-            .call(context.map());
+            .call(context.map().centerZoom([0, 0], 17));
         surface = context.surface();
     });
 
 
     it('adds the .shared class to vertices that are members of two or more ways', function () {
-        var node = iD.Node({loc: [0, 0]});
-        var way1 = iD.Way({nodes: [node.id], tags: {highway: 'residential'}});
-        var way2 = iD.Way({nodes: [node.id], tags: {highway: 'residential'}});
-        var graph = iD.Graph([node, way1, way2]);
+        var node = iD.osmNode({loc: [0, 0]});
+        var way1 = iD.osmWay({nodes: [node.id], tags: {highway: 'residential'}});
+        var way2 = iD.osmWay({nodes: [node.id], tags: {highway: 'residential'}});
+        var graph = iD.coreGraph([node, way1, way2]);
 
         surface.call(iD.svgVertices(projection, context), graph, [node]);
         expect(surface.select('.vertex').classed('shared')).to.be.true;

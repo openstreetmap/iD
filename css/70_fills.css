@@ -44,12 +44,12 @@
     display: none;
 }
 */
-.mode-draw-line .way.active,
-.mode-draw-area .way.active,
+/*.mode-draw-line .active,
+.mode-draw-area .active,
 .mode-drag-node .active {
     pointer-events: none;
 }
-
+*/
 /* Ensure drawing doesn't interact with area fills. */
 .mode-add-point path.area.fill,
 .mode-draw-line path.area.fill,

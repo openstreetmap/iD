@@ -178,23 +178,23 @@ export function rendererMap(context) {
             })
             .on('mousemove.map', function() {
                 mousemove = d3_event;
+            })
+            .on('mouseover.vertices', function() {
+                if (map.editable() && !transformed) {
+                    var hover = d3_event.target.__data__;
+                    surface.selectAll('.data-layer-osm')
+                        .call(drawVertices.drawHover, context.graph(), hover, map.extent());
+                    dispatch.call('drawn', this, { full: false });
+                }
+            })
+            .on('mouseout.vertices', function() {
+                if (map.editable() && !transformed) {
+                    var hover = d3_event.relatedTarget && d3_event.relatedTarget.__data__;
+                    surface.selectAll('.data-layer-osm')
+                        .call(drawVertices.drawHover, context.graph(), hover, map.extent());
+                    dispatch.call('drawn', this, { full: false });
+                }
             });
-            // .on('mouseover.vertices', function() {
-            //     if (map.editable() && !transformed) {
-            //         var hover = d3_event.target.__data__;
-            //         surface.selectAll('.data-layer-osm')
-            //             .call(drawVertices.drawHover, context.graph(), hover, map.extent());
-            //         dispatch.call('drawn', this, { full: false });
-            //     }
-            // })
-            // .on('mouseout.vertices', function() {
-            //     if (map.editable() && !transformed) {
-            //         var hover = d3_event.relatedTarget && d3_event.relatedTarget.__data__;
-            //         surface.selectAll('.data-layer-osm')
-            //             .call(drawVertices.drawHover, context.graph(), hover, map.extent());
-            //         dispatch.call('drawn', this, { full: false });
-            //     }
-            // });
 
         supersurface
             .call(context.background());

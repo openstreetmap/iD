@@ -676,19 +676,9 @@ export function svgLabels(projection, context) {
 
 
         var layer = selection.selectAll('.layer-labels');
-
-        var groups = layer.selectAll('.layer-labels-group')
-            .data(['halo','label','debug']);
-
-        groups = groups.enter()
-            .append('g')
-            .attr('class', function(d) { return 'layer-labels-group layer-labels-' + d; })
-            .merge(groups);
-
         var halo = layer.selectAll('.layer-labels-halo');
         var label = layer.selectAll('.layer-labels-label');
         var debug = layer.selectAll('.layer-labels-debug');
-
 
         // points
         drawPointLabels(label, labelled.point, filter, 'pointlabel', positions.point);

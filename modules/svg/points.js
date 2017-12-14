@@ -36,7 +36,8 @@ export function svgPoints(projection, context) {
 
         points.sort(sortY);
 
-        var layer = selection.selectAll('.layer-hit');
+
+        var layer = selection.selectAll('.layer-points .layer-points-points');
 
         var groups = layer.selectAll('g.point')
             .filter(filter)

@@ -4,10 +4,22 @@ export function svgOsm(projection, context, dispatch) {
 
     function drawOsm(selection) {
         selection.selectAll('.layer-osm')
-            .data(['areas', 'lines', 'hit', 'labels'])
+            .data(['areas', 'lines', 'points', 'labels'])
             .enter()
             .append('g')
             .attr('class', function(d) { return 'layer-osm layer-' + d; });
+
+        selection.selectAll('.layer-points').selectAll('.layer-points-group')
+            .data(['points', 'midpoints', 'vertices', 'turns', 'targets'])
+            .enter()
+            .append('g')
+            .attr('class', function(d) { return 'layer-points-group layer-points-' + d; });
+
+        selection.selectAll('.layer-labels').selectAll('.layer-labels-group')
+            .data(['halo', 'label', 'debug'])
+            .enter()
+            .append('g')
+            .attr('class', function(d) { return 'layer-labels-group layer-labels-' + d; });
     }
 
 

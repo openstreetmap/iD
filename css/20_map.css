@@ -45,6 +45,7 @@ g.point.selected .shadow {
     stroke-opacity: 0.7;
 }
 
+g.vertex.active, g.vertex.active *,
 g.point.active, g.point.active * {
     pointer-events: none;
 }
@@ -88,6 +89,12 @@ g.midpoint .shadow {
     fill-opacity: 0;
 }
 
+/*debug*/
+.vertex.target {
+    fill: #f00;
+    fill-opacity: 0.5;
+}
+
 /*g.vertex.vertex-hover {
     display: none;
 }
@@ -99,6 +106,7 @@ g.midpoint .shadow {
 .mode-add-point g.vertex.vertex-hover,
 .mode-drag-node g.vertex.vertex-hover {
     display: block;
+    color: #f00;
 }
 
 .mode-draw-area .hover-disabled g.vertex.vertex-hover,
@@ -110,8 +118,9 @@ g.midpoint .shadow {
     display: none;
 }
 */
+
 g.vertex.related:not(.selected) .shadow,
-g.vertex.hover:not(.selected) .shadow,
+/*g.vertex.hover:not(.selected) .shadow,*/
 g.midpoint.related:not(.selected) .shadow,
 g.midpoint.hover:not(.selected) .shadow {
     fill-opacity: 0.5;
@@ -262,11 +271,11 @@ g.turn circle {
 }
 
 path.gpx {
-    stroke: #FF26D4;
+    stroke: #ff26d4;
     stroke-width: 2;
     fill: none;
 }
 
 text.gpx {
-    fill: #FF26D4;
+    fill: #ff26d4;
 }
