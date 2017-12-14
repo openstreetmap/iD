@@ -117,9 +117,11 @@ export function svgLabels(projection, context) {
             .filter(filter)
             .data(entities, osmEntity.key);
 
+        // exit
         paths.exit()
             .remove();
 
+        // enter/update
         paths.enter()
             .append('path')
             .style('stroke-width', get(labels, 'font-size'))
@@ -135,9 +137,11 @@ export function svgLabels(projection, context) {
             .filter(filter)
             .data(entities, osmEntity.key);
 
+        // exit
         texts.exit()
             .remove();
 
+        // enter
         texts.enter()
             .append('text')
             .attr('class', function(d, i) { return classes + ' ' + labels[i].classes + ' ' + d.id; })
@@ -145,9 +149,8 @@ export function svgLabels(projection, context) {
             .append('textPath')
             .attr('class', 'textpath');
 
-        texts = selection.selectAll('text.' + classes);
-
-        texts.selectAll('.textpath')
+        // update
+        selection.selectAll('text.' + classes).selectAll('.textpath')
             .filter(filter)
             .data(entities, osmEntity.key)
             .attr('startOffset', '50%')
@@ -161,17 +164,17 @@ export function svgLabels(projection, context) {
             .filter(filter)
             .data(entities, osmEntity.key);
 
+        // exit
         texts.exit()
             .remove();
 
-        texts = texts.enter()
+        // enter/update
+        texts.enter()
             .append('text')
             .attr('class', function(d, i) {
                 return classes + ' ' + labels[i].classes + ' ' + d.id;
             })
-            .merge(texts);
-
-        texts
+            .merge(texts)
             .attr('x', get(labels, 'x'))
             .attr('y', get(labels, 'y'))
             .style('text-anchor', get(labels, 'textAnchor'))
@@ -198,17 +201,17 @@ export function svgLabels(projection, context) {
             .filter(filter)
             .data(entities, osmEntity.key);
 
+        // exit
         icons.exit()
             .remove();
 
-        icons = icons.enter()
+        // enter/update
+        icons.enter()
             .append('use')
             .attr('class', 'icon ' + classes)
             .attr('width', '17px')
             .attr('height', '17px')
-            .merge(icons);
-
-        icons
+            .merge(icons)
             .attr('transform', get(labels, 'transform'))
             .attr('xlink:href', function(d) {
                 var preset = context.presets().match(d, context.graph());
@@ -225,22 +228,11 @@ export function svgLabels(projection, context) {
 
 
     function drawCollisionBoxes(selection, rtree, which) {
-        var showDebug = context.getDebug('collision');
         var classes = 'debug ' + which + ' ' + (which === 'debug-skipped' ? 'orange' : 'yellow');
 
-        var debug = selection.selectAll('.layer-label-debug')
-            .data(showDebug ? [true] : []);
-
-        debug.exit()
-            .remove();
-
-        debug = debug.enter()
-            .append('g')
-            .attr('class', 'layer-label-debug')
-            .merge(debug);
-
-        if (showDebug) {
-            var gj = rtree.all().map(function(d) {
+        var gj = [];
+        if (context.getDebug('collision')) {
+            gj = rtree.all().map(function(d) {
                 return { type: 'Polygon', coordinates: [[
                     [d.minX, d.minY],
                     [d.maxX, d.minY],
@@ -249,21 +241,21 @@ export function svgLabels(projection, context) {
                     [d.minX, d.minY]
                 ]]};
             });
-
-            var debugboxes = debug.selectAll('.' + which)
-                .data(gj);
-
-            debugboxes.exit()
-                .remove();
-
-            debugboxes = debugboxes.enter()
-                .append('path')
-                .attr('class', classes)
-                .merge(debugboxes);
-
-            debugboxes
-                .attr('d', d3_geoPath());
         }
+
+        var boxes = selection.selectAll('.' + which)
+            .data(gj);
+
+        // exit
+        boxes.exit()
+            .remove();
+
+        // enter/update
+        boxes.enter()
+            .append('path')
+            .attr('class', classes)
+            .merge(boxes)
+            .attr('d', d3_geoPath());
     }
 
 
@@ -465,6 +457,8 @@ export function svgLabels(projection, context) {
             var length = geoPathLength(points);
 
             if (length < width + 20) return;
+
+            // todo: properly clip points to viewport
 
             // % along the line to attempt to place the label
             var lineOffsets = [50, 45, 55, 40, 60, 35, 65, 30, 70,
@@ -681,8 +675,20 @@ export function svgLabels(projection, context) {
         }
 
 
-        var label = selection.selectAll('.layer-label');
-        var halo = selection.selectAll('.layer-halo');
+        var layer = selection.selectAll('.layer-labels');
+
+        var groups = layer.selectAll('.layer-labels-group')
+            .data(['halo','label','debug']);
+
+        groups = groups.enter()
+            .append('g')
+            .attr('class', function(d) { return 'layer-labels-group layer-labels-' + d; })
+            .merge(groups);
+
+        var halo = layer.selectAll('.layer-labels-halo');
+        var label = layer.selectAll('.layer-labels-label');
+        var debug = layer.selectAll('.layer-labels-debug');
+
 
         // points
         drawPointLabels(label, labelled.point, filter, 'pointlabel', positions.point);
@@ -700,16 +706,16 @@ export function svgLabels(projection, context) {
         drawAreaIcons(halo, labelled.area, filter, 'areaicon-halo', positions.area);
 
         // debug
-        drawCollisionBoxes(label, _rskipped, 'debug-skipped');
-        drawCollisionBoxes(label, _rdrawn, 'debug-drawn');
+        drawCollisionBoxes(debug, _rskipped, 'debug-skipped');
+        drawCollisionBoxes(debug, _rdrawn, 'debug-drawn');
 
-        selection.call(filterLabels);
+        layer.call(filterLabels);
     }
 
 
     function filterLabels(selection) {
         var layers = selection
-            .selectAll('.layer-label, .layer-halo');
+            .selectAll('.layer-labels-label, .layer-labels-halo');
 
         layers.selectAll('.nolabel')
             .classed('nolabel', false);
@@ -740,8 +746,10 @@ export function svgLabels(projection, context) {
 
 
         // draw the mouse bbox if debugging is on..
+        var debug = selection.selectAll('.layer-labels-debug');
+        var gj = [];
         if (context.getDebug('collision')) {
-            var gj = bbox ? [{
+            gj = bbox ? [{
                 type: 'Polygon',
                 coordinates: [[
                     [bbox.minX, bbox.minY],
@@ -751,22 +759,21 @@ export function svgLabels(projection, context) {
                     [bbox.minX, bbox.minY]
                 ]]
             }] : [];
-
-            var debug = selection.selectAll('.layer-label-debug');
-            var debugMouse = debug.selectAll('.debug-mouse')
-                .data(gj);
-
-            // exit
-            debugMouse.exit()
-                .remove();
-
-            // enter/update
-            debugMouse.enter()
-                .append('path')
-                .attr('class', 'debug debug-mouse yellow')
-                .merge(debugMouse)
-                .attr('d', d3_geoPath());
         }
+
+        var box = debug.selectAll('.debug-mouse')
+            .data(gj);
+
+        // exit
+        box.exit()
+            .remove();
+
+        // enter/update
+        box.enter()
+            .append('path')
+            .attr('class', 'debug debug-mouse yellow')
+            .merge(box)
+            .attr('d', d3_geoPath());
     }
 
 
