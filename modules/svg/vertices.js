@@ -1,3 +1,4 @@
+import _assign from 'lodash-es/assign';
 import _clone from 'lodash-es/clone';
 import _values from 'lodash-es/values';
 
@@ -20,10 +21,11 @@ export function svgVertices(projection, context) {
         fill:   [1,    1.5,   1.5,   1.5]
     };
 
-    var _hover;
+    var _currHover;
+    var _currHoverSiblings = {};
 
 
-    function draw(selection, vertices, klass, graph, siblings, filter) {
+    function draw(selection, graph, vertices, klass, siblings, filter) {
         siblings = siblings || {};
         var icons = {};
         var directions = {};
@@ -169,43 +171,9 @@ export function svgVertices(projection, context) {
     }
 
 
-    function drawVertices(selection, graph, entities, filter, extent) {
-        var wireframe = context.surface().classed('fill-wireframe');
-        var zoom = ktoz(projection.scale());
-        var siblings = getSiblingAndChildVertices(context.selectedIDs(), graph, extent, wireframe, zoom);
-
-        // always render selected and sibling vertices..
-        var vertices = _clone(siblings);
-        var filterWithSiblings = function(d) { return d.id in siblings || filter(d); };
-
-        // also render important vertices from the `entities` list..
-        for (var i = 0; i < entities.length; i++) {
-            var entity = entities[i];
-            var geometry = entity.geometry(graph);
-
-            if ((geometry === 'point') && renderAsVertex(entity, graph, wireframe, zoom)) {
-                vertices[entity.id] = entity;
-
-            } else if ((geometry === 'vertex') &&
-                (entity.hasInterestingTags() || entity.isEndpoint(graph) || entity.isConnected(graph)) ) {
-                vertices[entity.id] = entity;
-            }
-        }
-
-        selection.selectAll('.layer-points .layer-points-vertices')
-            .call(draw, _values(vertices), 'vertex-persistent', graph, siblings, filterWithSiblings);
-
-        drawTargets(selection, graph, _values(vertices), filter, extent);
-
-    }
-
-
-    function drawTargets(selection, graph, entities, filter, extent) {
-// todo coming soon
-return;
-        var layer = selection.selectAll('.layer-points .layer-points-targets');
-
-        var targets = layer.selectAll('g.vertex.target')
+    function drawTargets(selection, graph, entities, filter) {
+        var debugClass = 'pink';
+        var targets = selection.selectAll('.target')
             .data(entities, osmEntity.key);
 
         // exit
@@ -218,7 +186,8 @@ return;
             .attr('r', radiuses.shadow[3])  // just use the biggest one for now
             .attr('class', function(d) { return 'node vertex target ' + d.id; })
             .merge(targets)
-            .attr('transform', svgPointTransform(projection));
+            .attr('transform', svgPointTransform(projection))
+            .classed(debugClass, context.getDebug('target'));
     }
 
 
@@ -280,16 +249,66 @@ return;
     }
 
 
+    function drawVertices(selection, graph, entities, filter, extent) {
+        var wireframe = context.surface().classed('fill-wireframe');
+        var zoom = ktoz(projection.scale());
+
+        var selected = getSiblingAndChildVertices(context.selectedIDs(), graph, extent, wireframe, zoom);
+
+        // interesting vertices from the `entities` list..
+        var interesting = {};
+        for (var i = 0; i < entities.length; i++) {
+            var entity = entities[i];
+            var geometry = entity.geometry(graph);
+
+            if ((geometry === 'point') && renderAsVertex(entity, graph, wireframe, zoom)) {
+                interesting[entity.id] = entity;
+
+            } else if ((geometry === 'vertex') &&
+                (entity.hasInterestingTags() || entity.isEndpoint(graph) || entity.isConnected(graph)) ) {
+                interesting[entity.id] = entity;
+            }
+        }
+
+        // 3 sets of vertices to consider
+        // - selected + siblings
+        // - hovered + siblings
+        // - interesting entities passed in
+        var all = _assign(selected, interesting, _currHoverSiblings);
+
+        var filterWithSiblings = function(d) {
+            return d.id in selected || d.id in _currHoverSiblings || filter(d);
+        };
+        selection.selectAll('.layer-points .layer-points-vertices')
+            .call(draw, graph, _values(all), 'vertex-persistent', {}, filterWithSiblings);
+
+
+        // draw touch targets for the hovered items only
+        var filterWithHover = function(d) {
+            return d.id in _currHoverSiblings || filter(d);
+        };
+        selection.selectAll('.layer-points .layer-points-targets')
+            .call(drawTargets, graph, _values(_currHoverSiblings), filterWithHover);
+    }
+
+
     drawVertices.drawHover = function(selection, graph, target, extent) {
-        if (target === _hover) return;
-        _hover = target;
+        if (target === _currHover) return;
 
         var wireframe = context.surface().classed('fill-wireframe');
         var zoom = ktoz(projection.scale());
-        var hovered = _hover ? getSiblingAndChildVertices([_hover.id], graph, extent, wireframe, zoom) : {};
-        var filter = function() { return true; };
+        var prevHoverSiblings = _currHoverSiblings || {};
+        var filter = function(d) { return d.id in prevHoverSiblings; };
 
-        drawTargets(selection, graph, _values(hovered), filter, extent);
+        _currHover = target;
+
+        if (_currHover) {
+            _currHoverSiblings = getSiblingAndChildVertices([_currHover.id], graph, extent, wireframe, zoom);
+        } else {
+            _currHoverSiblings = {};
+        }
+
+        drawVertices(selection, graph, _values(prevHoverSiblings), filter, extent);
     };
 
     return drawVertices;

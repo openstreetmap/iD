@@ -11,9 +11,10 @@ use { pointer-events: none; }
 #turn-no-shape2, #turn-no-u-shape2     { fill: #E06D5F; }  /* FF turn-no, turn-no-u */
 #turn-yes-shape2, #turn-yes-u-shape2   { fill: #8CD05F; }  /* FF turn-yes, turn-yes-u */
 
-g.point .shadow,
-g.vertex .shadow,
-g.midpoint .shadow {
+.layer-points-group * {
+    pointer-events: none;
+}
+.layer-points-group.layer-points-targets * {
     pointer-events: all;
 }
 
@@ -45,11 +46,11 @@ g.point.selected .shadow {
     stroke-opacity: 0.7;
 }
 
-g.vertex.active, g.vertex.active *,
+/*g.vertex.active, g.vertex.active *,
 g.point.active, g.point.active * {
     pointer-events: none;
 }
-
+*/
 g.point ellipse.stroke {
     display: none;
 }
@@ -89,10 +90,10 @@ g.midpoint .shadow {
     fill-opacity: 0;
 }
 
-/*debug*/
-.vertex.target {
-    fill: #f00;
-    fill-opacity: 0.5;
+.target {
+    color: rgba(0,0,0,0);
+    fill-opacity: 0.8;
+    fill: currentColor;
 }
 
 /*g.vertex.vertex-hover {
@@ -120,7 +121,7 @@ g.midpoint .shadow {
 */
 
 g.vertex.related:not(.selected) .shadow,
-/*g.vertex.hover:not(.selected) .shadow,*/
+g.vertex.hover:not(.selected) .shadow,
 g.midpoint.related:not(.selected) .shadow,
 g.midpoint.hover:not(.selected) .shadow {
     fill-opacity: 0.5;

@@ -20,16 +20,16 @@ import { utilRebind } from '../util/rebind';
    have the .hover class.
  */
 export function behaviorHover(context) {
-    var dispatch = d3_dispatch('hover'),
-        _selection = d3_select(null),
-        newId = null,
-        buttonDown,
-        altDisables,
-        target;
+    var dispatch = d3_dispatch('hover');
+    var _selection = d3_select(null);
+    var _newId = null;
+    var _buttonDown;
+    var _altDisables;
+    var _target;
 
 
     function keydown() {
-        if (altDisables && d3_event.keyCode === d3_keybinding.modifierCodes.alt) {
+        if (_altDisables && d3_event.keyCode === d3_keybinding.modifierCodes.alt) {
             _selection.selectAll('.hover')
                 .classed('hover-suppressed', true)
                 .classed('hover', false);
@@ -43,7 +43,7 @@ export function behaviorHover(context) {
 
 
     function keyup() {
-        if (altDisables && d3_event.keyCode === d3_keybinding.modifierCodes.alt) {
+        if (_altDisables && d3_event.keyCode === d3_keybinding.modifierCodes.alt) {
             _selection.selectAll('.hover-suppressed')
                 .classed('hover-suppressed', false)
                 .classed('hover', true);
@@ -51,14 +51,14 @@ export function behaviorHover(context) {
             _selection
                 .classed('hover-disabled', false);
 
-            dispatch.call('hover', this, target ? target.id : null);
+            dispatch.call('hover', this, _target ? _target.id : null);
         }
     }
 
 
     var hover = function(selection) {
         _selection = selection;
-        newId = null;
+        _newId = null;
 
         _selection
             .on('mouseover.hover', mouseover)
@@ -71,65 +71,65 @@ export function behaviorHover(context) {
 
 
         function mouseover() {
-            if (buttonDown) return;
-            var target = d3_event.target;
-            enter(target ? target.__data__ : null);
+            if (_buttonDown) return;
+            var _target = d3_event.target;
+            enter(_target ? _target.__data__ : null);
         }
 
 
         function mouseout() {
-            if (buttonDown) return;
-            var target = d3_event.relatedTarget;
-            enter(target ? target.__data__ : null);
+            if (_buttonDown) return;
+            var _target = d3_event.relatedTarget;
+            enter(_target ? _target.__data__ : null);
         }
 
 
         function mousedown() {
-            buttonDown = true;
+            _buttonDown = true;
             d3_select(window)
                 .on('mouseup.hover', mouseup, true);
         }
 
 
         function mouseup() {
-            buttonDown = false;
+            _buttonDown = false;
             d3_select(window)
                 .on('mouseup.hover', null, true);
         }
 
 
         function enter(d) {
-            if (d === target) return;
-            target = d;
+            if (d === _target) return;
+            _target = d;
 
             _selection.selectAll('.hover')
                 .classed('hover', false);
             _selection.selectAll('.hover-suppressed')
                 .classed('hover-suppressed', false);
 
-            if (target instanceof osmEntity && target.id !== newId) {
+            if (_target instanceof osmEntity && _target.id !== _newId) {
 
                 // If drawing a way, don't hover on a node that was just placed. #3974
                 var mode = context.mode() && context.mode().id;
-                if ((mode === 'draw-line' || mode === 'draw-area') && !newId && target.type === 'node') {
-                    newId = target.id;
+                if ((mode === 'draw-line' || mode === 'draw-area') && !_newId && _target.type === 'node') {
+                    _newId = _target.id;
                     return;
                 }
 
-                var selector = '.' + target.id;
+                var selector = '.' + _target.id;
 
-                if (target.type === 'relation') {
-                    target.members.forEach(function(member) {
+                if (_target.type === 'relation') {
+                    _target.members.forEach(function(member) {
                         selector += ', .' + member.id;
                     });
                 }
 
-                var suppressed = altDisables && d3_event && d3_event.altKey;
+                var suppressed = _altDisables && d3_event && d3_event.altKey;
 
                 _selection.selectAll(selector)
                     .classed(suppressed ? 'hover-suppressed' : 'hover', true);
 
-                dispatch.call('hover', this, !suppressed && target.id);
+                dispatch.call('hover', this, !suppressed && _target.id);
 
             } else {
                 dispatch.call('hover', this, null);
@@ -147,7 +147,6 @@ export function behaviorHover(context) {
         selection
             .classed('hover-disabled', false);
 
-
         selection
             .on('mouseover.hover', null)
             .on('mouseout.hover', null)
@@ -160,8 +159,8 @@ export function behaviorHover(context) {
 
 
     hover.altDisables = function(_) {
-        if (!arguments.length) return altDisables;
-        altDisables = _;
+        if (!arguments.length) return _altDisables;
+        _altDisables = _;
         return hover;
     };
 
