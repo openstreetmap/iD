@@ -15,8 +15,8 @@ function ktoz(k) { return Math.log(k * TAU) / Math.LN2 - 8; }
 export function svgVertices(projection, context) {
     var radiuses = {
         //       z16-, z17,   z18+,  tagged
-        shadow: [6,    7.5,   7.5,   11.5],
-        stroke: [2.5,  3.5,   3.5,   7],
+        shadow: [6,    7.5,   7.5,   12],
+        stroke: [2.5,  3.5,   3.5,   8],
         fill:   [1,    1.5,   1.5,   1.5]
     };
 
@@ -68,7 +68,6 @@ export function svgVertices(projection, context) {
                 selection.selectAll('.' + klass)
                     .each(function(entity) {
                         var i = z && getIcon(entity);
-                        var c = i ? 0.5 : 0;
                         var r = rads[i ? 3 : z];
 
                         // slightly increase the size of unconnected endpoints #3775
@@ -77,8 +76,6 @@ export function svgVertices(projection, context) {
                         }
 
                         d3_select(this)
-                            .attr('cx', c)
-                            .attr('cy', -c)
                             .attr('r', r)
                             .attr('visibility', ((i && klass === 'fill') ? 'hidden' : null));
                     });
@@ -118,7 +115,7 @@ export function svgVertices(projection, context) {
             .attr('class', 'icon')
             .attr('width', '11px')
             .attr('height', '11px')
-            .attr('transform', 'translate(-5, -6)')
+            .attr('transform', 'translate(-5.5, -5.5)')
             .attr('xlink:href', function(d) {
                 var picon = getIcon(d);
                 var isMaki = dataFeatureIcons.indexOf(picon) !== -1;
