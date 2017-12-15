@@ -24,8 +24,10 @@ describe('iD.svgVertices', function () {
         var way1 = iD.osmWay({nodes: [node.id], tags: {highway: 'residential'}});
         var way2 = iD.osmWay({nodes: [node.id], tags: {highway: 'residential'}});
         var graph = iD.coreGraph([node, way1, way2]);
+        var filter = function() { return true; };
+        var extent = iD.geoExtent([0, 0], [1, 1]);
 
-        surface.call(iD.svgVertices(projection, context), graph, [node]);
+        surface.call(iD.svgVertices(projection, context), graph, [node], filter, extent);
         expect(surface.select('.vertex').classed('shared')).to.be.true;
     });
 });
