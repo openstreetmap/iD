@@ -207,7 +207,7 @@ export function rendererMap(context) {
 
                 all = context.features().filter(all, graph);
                 surface.selectAll('.data-layer-osm')
-                    .call(drawVertices, graph, all, filter, map.extent())
+                    .call(drawVertices.drawSelected, graph, all, map.extent())
                     .call(drawMidpoints, graph, all, filter, map.trimmedExtent());
                 dispatch.call('drawn', this, { full: false });
             }
@@ -268,6 +268,7 @@ export function rendererMap(context) {
         var graph = context.graph();
         var features = context.features();
         var all = context.intersects(map.extent());
+        var fullRedraw = false;
         var data;
         var filter;
 
@@ -291,6 +292,7 @@ export function rendererMap(context) {
 
             } else {
                 data = all;
+                fullRedraw = true;
                 filter = utilFunctor(true);
             }
         }
@@ -298,11 +300,11 @@ export function rendererMap(context) {
         data = features.filter(data, graph);
 
         surface.selectAll('.data-layer-osm')
-            .call(drawVertices, graph, data, filter, map.extent())
+            .call(drawVertices, graph, data, filter, map.extent(), fullRedraw)
             .call(drawLines, graph, data, filter)
             .call(drawAreas, graph, data, filter)
             .call(drawMidpoints, graph, data, filter, map.trimmedExtent())
-            .call(drawLabels, graph, data, filter, dimensions, !difference && !extent)
+            .call(drawLabels, graph, data, filter, dimensions, fullRedraw)
             .call(drawPoints, graph, data, filter);
 
         dispatch.call('drawn', this, {full: true});

@@ -14,6 +14,7 @@ use { pointer-events: none; }
 .layer-points-group * {
     pointer-events: none;
 }
+.layer-points-group.layer-points-midpoints *,
 .layer-points-group.layer-points-targets * {
     pointer-events: all;
 }
@@ -95,30 +96,6 @@ g.midpoint .shadow {
     fill-opacity: 0.8;
     fill: currentColor;
 }
-
-/*g.vertex.vertex-hover {
-    display: none;
-}
-
-.mode-draw-area g.vertex.vertex-hover,
-.mode-draw-line g.vertex.vertex-hover,
-.mode-add-area  g.vertex.vertex-hover,
-.mode-add-line  g.vertex.vertex-hover,
-.mode-add-point g.vertex.vertex-hover,
-.mode-drag-node g.vertex.vertex-hover {
-    display: block;
-    color: #f00;
-}
-
-.mode-draw-area .hover-disabled g.vertex.vertex-hover,
-.mode-draw-line .hover-disabled g.vertex.vertex-hover,
-.mode-add-area  .hover-disabled g.vertex.vertex-hover,
-.mode-add-line  .hover-disabled g.vertex.vertex-hover,
-.mode-add-point .hover-disabled g.vertex.vertex-hover,
-.mode-drag-node .hover-disabled g.vertex.vertex-hover {
-    display: none;
-}
-*/
 
 g.vertex.related:not(.selected) .shadow,
 g.vertex.hover:not(.selected) .shadow,

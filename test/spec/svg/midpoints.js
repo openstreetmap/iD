@@ -20,7 +20,7 @@ describe('iD.svgMidpoints', function () {
             selectedIDs: function() { return _selectedIDs; }
         });
 
-        var map = d3.select(document.createElement('div'))
+        d3.select(document.createElement('div'))
             .attr('id', 'map')
             .call(context.map().centerZoom([0, 0], 17));
 

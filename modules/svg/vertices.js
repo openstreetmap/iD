@@ -1,5 +1,4 @@
 import _assign from 'lodash-es/assign';
-import _clone from 'lodash-es/clone';
 import _values from 'lodash-es/values';
 
 import { select as d3_select } from 'd3-selection';
@@ -21,12 +20,21 @@ export function svgVertices(projection, context) {
         fill:   [1,    1.5,   1.5,   1.5]
     };
 
-    var _currHover;
-    var _currHoverSiblings = {};
+    var _currHoverTarget;
+    var _currPersistent = {};
+    var _currHover = {};
+    var _prevHover = {};
+    var _currSelected = {};
+    var _prevSelected = {};
 
 
-    function draw(selection, graph, vertices, klass, siblings, filter) {
-        siblings = siblings || {};
+    function sortY(a, b) {
+        return b.loc[1] - a.loc[1];
+    }
+
+
+    function draw(selection, graph, vertices, sets, filter) {
+        sets = sets || { selected: {}, important: {}, hovered: {} };
         var icons = {};
         var directions = {};
         var wireframe = context.surface().classed('fill-wireframe');
@@ -54,16 +62,8 @@ export function svgVertices(projection, context) {
         }
 
 
-        function setClass(klass) {
-            return function(entity) {
-                d3_select(this)
-                    .attr('class', 'node vertex ' + klass + ' ' + entity.id);
-            };
-        }
-
-
         function updateAttributes(selection) {
-            ['shadow','stroke','fill'].forEach(function(klass) {
+            ['shadow', 'stroke', 'fill'].forEach(function(klass) {
                 var rads = radiuses[klass];
                 selection.selectAll('.' + klass)
                     .each(function(entity) {
@@ -88,8 +88,9 @@ export function svgVertices(projection, context) {
                 .attr('visibility', (z === 0 ? 'hidden' : null));
         }
 
+        vertices.sort(sortY);
 
-        var groups = selection.selectAll('.vertex.' + klass)
+        var groups = selection.selectAll('g.vertex')
             .filter(filter)
             .data(vertices, osmEntity.key);
 
@@ -100,41 +101,42 @@ export function svgVertices(projection, context) {
         // enter
         var enter = groups.enter()
             .append('g')
-            .attr('class', function(d) { return 'node vertex ' + klass + ' ' + d.id; });
+            .attr('class', function(d) { return 'node vertex ' + d.id; })
+            .order();
 
         enter
             .append('circle')
-            .each(setClass('shadow'));
+            .attr('class', 'shadow');
 
         enter
             .append('circle')
-            .each(setClass('stroke'));
+            .attr('class', 'stroke');
 
         // Vertices with icons get a `use`.
         enter.filter(function(d) { return getIcon(d); })
             .append('use')
+            .attr('class', 'icon')
+            .attr('width', '11px')
+            .attr('height', '11px')
             .attr('transform', 'translate(-5, -6)')
             .attr('xlink:href', function(d) {
                 var picon = getIcon(d);
                 var isMaki = dataFeatureIcons.indexOf(picon) !== -1;
                 return '#' + picon + (isMaki ? '-11' : '');
-            })
-            .attr('width', '11px')
-            .attr('height', '11px')
-            .each(setClass('icon'));
+            });
 
         // Vertices with tags get a fill.
         enter.filter(function(d) { return d.hasInterestingTags(); })
             .append('circle')
-            .each(setClass('fill'));
+            .attr('class', 'fill');
 
         // update
         groups = groups
             .merge(enter)
             .attr('transform', svgPointTransform(projection))
-            .classed('sibling', function(entity) { return entity.id in siblings; })
-            .classed('shared', function(entity) { return graph.isShared(entity); })
-            .classed('endpoint', function(entity) { return entity.isEndpoint(graph); })
+            .classed('sibling', function(d) { return d.id in sets.selected; })
+            .classed('shared', function(d) { return graph.isShared(d); })
+            .classed('endpoint', function(d) { return d.isEndpoint(graph); })
             .call(updateAttributes);
 
 
@@ -150,7 +152,7 @@ export function svgVertices(projection, context) {
         // enter/update
         dgroups = dgroups.enter()
             .insert('g', '.shadow')
-            .each(setClass('viewfieldgroup'))
+            .attr('class', 'viewfieldgroup')
             .merge(dgroups);
 
         var viewfields = dgroups.selectAll('.viewfield')
@@ -174,6 +176,7 @@ export function svgVertices(projection, context) {
     function drawTargets(selection, graph, entities, filter) {
         var debugClass = 'pink';
         var targets = selection.selectAll('.target')
+            .filter(filter)
             .data(entities, osmEntity.key);
 
         // exit
@@ -202,7 +205,7 @@ export function svgVertices(projection, context) {
     }
 
 
-    function getSiblingAndChildVertices(ids, graph, extent, wireframe, zoom) {
+    function getSiblingAndChildVertices(ids, graph, wireframe, zoom) {
         var results = {};
 
         function addChildVertices(entity) {
@@ -223,7 +226,7 @@ export function svgVertices(projection, context) {
                             addChildVertices(member);
                         }
                     }
-                } else if (renderAsVertex(entity, graph, wireframe, zoom) && entity.intersects(extent, graph)) {
+                } else if (renderAsVertex(entity, graph, wireframe, zoom)) {
                     results[entity.id] = entity;
                 }
             }
@@ -249,66 +252,98 @@ export function svgVertices(projection, context) {
     }
 
 
-    function drawVertices(selection, graph, entities, filter, extent) {
+    function drawVertices(selection, graph, entities, filter, extent, fullRedraw) {
         var wireframe = context.surface().classed('fill-wireframe');
         var zoom = ktoz(projection.scale());
+        var mode = context.mode();
+        var isDrawing = mode && /^(add|draw|drag)/.test(mode.id);
 
-        var selected = getSiblingAndChildVertices(context.selectedIDs(), graph, extent, wireframe, zoom);
+        // Collect important vertices from the `entities` list..
+        // (during a paritial redraw, it will not contain everything)
+        if (fullRedraw) {
+            _currPersistent = {};
+        }
 
-        // interesting vertices from the `entities` list..
-        var interesting = {};
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
             var geometry = entity.geometry(graph);
 
             if ((geometry === 'point') && renderAsVertex(entity, graph, wireframe, zoom)) {
-                interesting[entity.id] = entity;
+                _currPersistent[entity.id] = entity;
 
             } else if ((geometry === 'vertex') &&
                 (entity.hasInterestingTags() || entity.isEndpoint(graph) || entity.isConnected(graph)) ) {
-                interesting[entity.id] = entity;
+                _currPersistent[entity.id] = entity;
+
+            } else if (!fullRedraw) {
+                delete _currPersistent[entity.id];
             }
         }
 
-        // 3 sets of vertices to consider
-        // - selected + siblings
-        // - hovered + siblings
-        // - interesting entities passed in
-        var all = _assign(selected, interesting, _currHoverSiblings);
+        // 3 sets of vertices to consider:
+        var sets = {
+            persistent: _currPersistent,  // persistent = important vertices (render always)
+            selected: _currSelected,      // selected + siblings of selected (render always)
+            hovered: _currHover           // hovered + siblings of hovered (render only in draw modes)
+        };
 
-        var filterWithSiblings = function(d) {
-            return d.id in selected || d.id in _currHoverSiblings || filter(d);
+        var all = _assign({}, _currPersistent, _currSelected, (isDrawing ? _currHover : {}));
+
+        // Draw the vertices..
+        // The filter function controls the scope of what objects d3 will touch (exit/enter/update)
+        // It's important to adjust the filter function to expand the scope beyond whatever entities were passed in.
+        var filterRendered = function(d) {
+            return d.id in _currPersistent || d.id in _currSelected || d.id in _currHover || filter(d);
         };
         selection.selectAll('.layer-points .layer-points-vertices')
-            .call(draw, graph, _values(all), 'vertex-persistent', {}, filterWithSiblings);
+            .call(draw, graph, visible(all), sets, filterRendered);
 
-
-        // draw touch targets for the hovered items only
-        var filterWithHover = function(d) {
-            return d.id in _currHoverSiblings || filter(d);
-        };
+        // Draw touch targets..
         selection.selectAll('.layer-points .layer-points-targets')
-            .call(drawTargets, graph, _values(_currHoverSiblings), filterWithHover);
+            .call(drawTargets, graph, visible(all), filterRendered);
+
+
+        function visible(which) {
+            return _values(which).filter(function (entity) {
+                return entity.intersects(extent, graph);
+            });
+        }
     }
 
 
+    // partial redraw - only update the selected items..
+    drawVertices.drawSelected = function(selection, graph, target, extent) {
+        var wireframe = context.surface().classed('fill-wireframe');
+        var zoom = ktoz(projection.scale());
+
+        _prevSelected = _currSelected || {};
+        _currSelected = getSiblingAndChildVertices(context.selectedIDs(), graph, wireframe, zoom);
+
+        // note that drawVertices will add `_currSelected` automatically if needed..
+        var filter = function(d) { return d.id in _prevSelected; };
+        drawVertices(selection, graph, _values(_prevSelected), filter, extent, false);
+    };
+
+
+    // partial redraw - only update the hovered items..
     drawVertices.drawHover = function(selection, graph, target, extent) {
-        if (target === _currHover) return;
+        if (target === _currHoverTarget) return;  // continue only if something changed
 
         var wireframe = context.surface().classed('fill-wireframe');
         var zoom = ktoz(projection.scale());
-        var prevHoverSiblings = _currHoverSiblings || {};
-        var filter = function(d) { return d.id in prevHoverSiblings; };
 
-        _currHover = target;
+        _prevHover = _currHover || {};
+        _currHoverTarget = target;
 
-        if (_currHover) {
-            _currHoverSiblings = getSiblingAndChildVertices([_currHover.id], graph, extent, wireframe, zoom);
+        if (_currHoverTarget) {
+            _currHover = getSiblingAndChildVertices([_currHoverTarget.id], graph, wireframe, zoom);
         } else {
-            _currHoverSiblings = {};
+            _currHover = {};
         }
 
-        drawVertices(selection, graph, _values(prevHoverSiblings), filter, extent);
+        // note that drawVertices will add `_currHover` automatically if needed..
+        var filter = function(d) { return d.id in _prevHover; };
+        drawVertices(selection, graph, _values(_prevHover), filter, extent, false);
     };
 
     return drawVertices;
