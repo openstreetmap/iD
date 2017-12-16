@@ -21,7 +21,31 @@ export function svgPoints(projection, context) {
     }
 
 
-    return function drawPoints(selection, graph, entities, filter) {
+    function drawTargets(selection, graph, entities, filter) {
+        var debugClass = 'pink';
+        var targets = selection.selectAll('.point.target')
+            .filter(filter)
+            .data(entities, function key(d) { return d.id; });
+
+        // exit
+        targets.exit()
+            .remove();
+
+        // enter/update
+        targets.enter()
+            .append('rect')
+            .attr('x', -15)
+            .attr('y', -30)
+            .attr('width', 30)
+            .attr('height', 36)
+            .attr('class', function(d) { return 'node point target ' + d.id; })
+            .merge(targets)
+            .attr('transform', svgPointTransform(projection))
+            .classed(debugClass, context.getDebug('target'));
+    }
+
+
+    function drawPoints(selection, graph, entities, filter) {
         var wireframe = context.surface().classed('fill-wireframe');
         var zoom = ktoz(projection.scale());
 
@@ -95,5 +119,13 @@ export function svgPoints(projection, context) {
                     return '#' + picon + (isMaki ? '-11' : '');
                 }
             });
-    };
+
+
+        // touch targets
+        selection.selectAll('.layer-points .layer-points-targets')
+            .call(drawTargets, graph, points, filter);
+    }
+
+
+    return drawPoints;
 }

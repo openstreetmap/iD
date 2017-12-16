@@ -15,17 +15,44 @@ import {
 
 export function svgMidpoints(projection, context) {
 
-    return function drawMidpoints(selection, graph, entities, filter, extent) {
+
+    function drawTargets(selection, graph, entities, filter) {
+        var debugClass = 'pink';
+        var targets = selection.selectAll('.midpoint.target')
+            .filter(filter)
+            .data(entities, function key(d) { return d.id; });
+
+        // exit
+        targets.exit()
+            .remove();
+
+        // enter/update
+        targets.enter()
+            .append('circle')
+            .attr('r', 12)
+            .attr('class', function(d) { return 'midpoint target ' + d.id; })
+            .merge(targets)
+            .attr('transform', svgPointTransform(projection))
+            .classed(debugClass, context.getDebug('target'));
+    }
+
+
+    function drawMidpoints(selection, graph, entities, filter, extent) {
         var layer = selection.selectAll('.layer-points .layer-points-midpoints');
 
         var mode = context.mode();
         if (mode && mode.id !== 'select') {
-            layer.selectAll('g.midpoint').remove();
+            layer.selectAll('g.midpoint')
+                .remove();
+
+            selection.selectAll('.layer-points .layer-points-targets .midpoint.target')
+                .remove();
+
             return;
         }
 
-        var poly = extent.polygon(),
-            midpoints = {};
+        var poly = extent.polygon();
+        var midpoints = {};
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
@@ -40,16 +67,16 @@ export function svgMidpoints(projection, context) {
             var nodes = graph.childNodes(entity);
             for (var j = 0; j < nodes.length - 1; j++) {
 
-                var a = nodes[j],
-                    b = nodes[j + 1],
-                    id = [a.id, b.id].sort().join('-');
+                var a = nodes[j];
+                var b = nodes[j + 1];
+                var id = [a.id, b.id].sort().join('-');
 
                 if (midpoints[id]) {
                     midpoints[id].parents.push(entity);
                 } else {
                     if (geoEuclideanDistance(projection(a.loc), projection(b.loc)) > 40) {
-                        var point = geoInterp(a.loc, b.loc, 0.5),
-                            loc = null;
+                        var point = geoInterp(a.loc, b.loc, 0.5);
+                        var loc = null;
 
                         if (extent.intersects(point)) {
                             loc = point;
@@ -107,22 +134,24 @@ export function svgMidpoints(projection, context) {
             .insert('g', ':first-child')
             .attr('class', 'midpoint');
 
-        enter.append('polygon')
+        enter
+            .append('polygon')
             .attr('points', '-6,8 10,0 -6,-8')
             .attr('class', 'shadow');
 
-        enter.append('polygon')
+        enter
+            .append('polygon')
             .attr('points', '-3,4 5,0 -3,-4')
             .attr('class', 'fill');
 
         groups = groups
             .merge(enter)
             .attr('transform', function(d) {
-                var translate = svgPointTransform(projection),
-                    a = graph.entity(d.edge[0]),
-                    b = graph.entity(d.edge[1]),
-                    angleVal = Math.round(geoAngle(a, b, projection) * (180 / Math.PI));
-                return translate(d) + ' rotate(' + angleVal + ')';
+                var translate = svgPointTransform(projection);
+                var a = graph.entity(d.edge[0]);
+                var b = graph.entity(d.edge[1]);
+                var angle = geoAngle(a, b, projection) * (180 / Math.PI);
+                return translate(d) + ' rotate(' + angle + ')';
             })
             .call(svgTagClasses().tags(
                 function(d) { return d.parents[0].tags; }
@@ -132,5 +161,11 @@ export function svgMidpoints(projection, context) {
         groups.select('polygon.shadow');
         groups.select('polygon.fill');
 
-    };
+
+        // Draw touch targets..
+        selection.selectAll('.layer-points .layer-points-targets')
+            .call(drawTargets, graph, _values(midpoints), midpointFilter);
+    }
+
+    return drawMidpoints;
 }

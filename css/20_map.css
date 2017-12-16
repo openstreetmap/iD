@@ -7,19 +7,19 @@ use { pointer-events: none; }
 /* the above fill: none rule affects paths in <use> shadow dom only in Firefox */
 .layer-osm use.icon path { fill: #333; }                       /* FF svg Maki icons */
 .layer-osm .turn use path { fill: #000; }                      /* FF turn restriction icons */
-#turn-only-shape2, #turn-only-u-shape2 { fill: #7092FF; }  /* FF turn-only, turn-only-u */
-#turn-no-shape2, #turn-no-u-shape2     { fill: #E06D5F; }  /* FF turn-no, turn-no-u */
-#turn-yes-shape2, #turn-yes-u-shape2   { fill: #8CD05F; }  /* FF turn-yes, turn-yes-u */
+#turn-only-shape2, #turn-only-u-shape2 { fill: #7092ff; }  /* FF turn-only, turn-only-u */
+#turn-no-shape2, #turn-no-u-shape2     { fill: #e06d5f; }  /* FF turn-no, turn-no-u */
+#turn-yes-shape2, #turn-yes-u-shape2   { fill: #8cd05f; }  /* FF turn-yes, turn-yes-u */
 
 .layer-points-group * {
     pointer-events: none;
 }
-.layer-points-group.layer-points-midpoints *,
 .layer-points-group.layer-points-targets * {
     pointer-events: all;
 }
 
-path.shadow {
+.layer-areas path.shadow,
+.layer-lines path.shadow {
     pointer-events: stroke;
 }
 
@@ -47,11 +47,6 @@ g.point.selected .shadow {
     stroke-opacity: 0.7;
 }
 
-/*g.vertex.active, g.vertex.active *,
-g.point.active, g.point.active * {
-    pointer-events: none;
-}
-*/
 g.point ellipse.stroke {
     display: none;
 }
@@ -108,13 +103,6 @@ g.vertex.selected .shadow {
     fill-opacity: 0.7;
 }
 
-.mode-draw-area g.midpoint,
-.mode-draw-line g.midpoint,
-.mode-add-area g.midpoint,
-.mode-add-line g.midpoint,
-.mode-add-point g.midpoint {
-    display: none;
-}
 
 /* lines */
 

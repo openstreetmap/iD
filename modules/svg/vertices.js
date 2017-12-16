@@ -14,7 +14,7 @@ function ktoz(k) { return Math.log(k * TAU) / Math.LN2 - 8; }
 
 export function svgVertices(projection, context) {
     var radiuses = {
-        //       z16-, z17,   z18+,  tagged
+        //       z16-, z17,   z18+,  w/icon
         shadow: [6,    7.5,   7.5,   12],
         stroke: [2.5,  3.5,   3.5,   8],
         fill:   [1,    1.5,   1.5,   1.5]
@@ -172,7 +172,7 @@ export function svgVertices(projection, context) {
 
     function drawTargets(selection, graph, entities, filter) {
         var debugClass = 'pink';
-        var targets = selection.selectAll('.target')
+        var targets = selection.selectAll('.vertex.target')
             .filter(filter)
             .data(entities, function key(d) { return d.id; });
 
@@ -211,14 +211,14 @@ export function svgVertices(projection, context) {
                 var i;
                 if (entity.type === 'way') {
                     for (i = 0; i < entity.nodes.length; i++) {
-                        var child = context.hasEntity(entity.nodes[i]);
+                        var child = graph.hasEntity(entity.nodes[i]);
                         if (child) {
                             addChildVertices(child);
                         }
                     }
                 } else if (entity.type === 'relation') {
                     for (i = 0; i < entity.members.length; i++) {
-                        var member = context.hasEntity(entity.members[i].id);
+                        var member = graph.hasEntity(entity.members[i].id);
                         if (member) {
                             addChildVertices(member);
                         }
@@ -230,7 +230,7 @@ export function svgVertices(projection, context) {
         }
 
         ids.forEach(function(id) {
-            var entity = context.hasEntity(id);
+            var entity = graph.hasEntity(id);
             if (!entity) return;
 
             if (entity.type === 'node') {
@@ -302,7 +302,7 @@ export function svgVertices(projection, context) {
 
         function currentVisible(which) {
             return Object.keys(which)
-                .map(context.hasEntity)   // the current version of this entity
+                .map(graph.hasEntity, graph)     // the current version of this entity
                 .filter(function (entity) { return entity && entity.intersects(extent, graph); });
         }
     }
