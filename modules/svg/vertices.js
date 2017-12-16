@@ -174,7 +174,7 @@ export function svgVertices(projection, context) {
         var debugClass = 'pink';
         var targets = selection.selectAll('.target')
             .filter(filter)
-            .data(entities, osmEntity.key);
+            .data(entities, function key(d) { return d.id; });
 
         // exit
         targets.exit()
