@@ -38,18 +38,6 @@
 
 /* Modes */
 
-/*.mode-draw-line .vertex.active,
-.mode-draw-area .vertex.active,
-.mode-drag-node .vertex.active {
-    display: none;
-}
-*/
-/*.mode-draw-line .active,
-.mode-draw-area .active,
-.mode-drag-node .active {
-    pointer-events: none;
-}
-*/
 /* Ensure drawing doesn't interact with area fills. */
 .mode-add-point path.area.fill,
 .mode-draw-line path.area.fill,

@@ -20,31 +20,35 @@ import {
 import { utilRebind } from '../util/rebind';
 
 
-var usedTails = {};
-var disableSpace = false;
-var lastSpace = null;
+var _usedTails = {};
+var _disableSpace = false;
+var _lastSpace = null;
 
 
 export function behaviorDraw(context) {
-    var dispatch = d3_dispatch('move', 'click', 'clickWay',
-            'clickNode', 'undo', 'cancel', 'finish'),
-        keybinding = d3_keybinding('draw'),
-        hover = behaviorHover(context)
-            .altDisables(true)
-            .on('hover', context.ui().sidebar.hover),
-        tail = behaviorTail(),
-        edit = behaviorEdit(context),
-        closeTolerance = 4,
-        tolerance = 12,
-        mouseLeave = false,
-        lastMouse = null;
+    var dispatch = d3_dispatch(
+        'move', 'click', 'clickWay', 'clickNode', 'undo', 'cancel', 'finish'
+    );
+
+    var keybinding = d3_keybinding('draw');
+
+    var hover = behaviorHover(context)
+        .altDisables(true)
+        .on('hover', context.ui().sidebar.hover);
+    var tail = behaviorTail();
+    var edit = behaviorEdit(context);
+
+    var closeTolerance = 4;
+    var tolerance = 12;
+    var _mouseLeave = false;
+    var _lastMouse = null;
 
 
     function datum() {
         if (d3_event.altKey) return {};
 
         if (d3_event.type === 'keydown') {
-            return (lastMouse && lastMouse.target.__data__) || {};
+            return (_lastMouse && _lastMouse.target.__data__) || {};
         } else {
             return d3_event.target.__data__ || {};
         }
@@ -60,17 +64,17 @@ export function behaviorDraw(context) {
             })[0] : d3_mouse(p);
         }
 
-        var element = d3_select(this),
-            touchId = d3_event.touches ? d3_event.changedTouches[0].identifier : null,
-            t1 = +new Date(),
-            p1 = point();
+        var element = d3_select(this);
+        var touchId = d3_event.touches ? d3_event.changedTouches[0].identifier : null;
+        var t1 = +new Date();
+        var p1 = point();
 
         element.on('mousemove.draw', null);
 
         d3_select(window).on('mouseup.draw', function() {
-            var t2 = +new Date(),
-                p2 = point(),
-                dist = geoEuclideanDistance(p1, p2);
+            var t2 = +new Date();
+            var p2 = point();
+            var dist = geoEuclideanDistance(p1, p2);
 
             element.on('mousemove.draw', mousemove);
             d3_select(window).on('mouseup.draw', null);
@@ -95,33 +99,33 @@ export function behaviorDraw(context) {
 
 
     function mousemove() {
-        lastMouse = d3_event;
+        _lastMouse = d3_event;
         dispatch.call('move', this, datum());
     }
 
 
     function mouseenter() {
-        mouseLeave = false;
+        _mouseLeave = false;
     }
 
 
     function mouseleave() {
-        mouseLeave = true;
+        _mouseLeave = true;
     }
 
 
     function click() {
         var d = datum();
         if (d.type === 'way') {
-            var dims = context.map().dimensions(),
-                mouse = context.mouse(),
-                pad = 5,
-                trySnap = mouse[0] > pad && mouse[0] < dims[0] - pad &&
+            var dims = context.map().dimensions();
+            var mouse = context.mouse();
+            var pad = 5;
+            var trySnap = mouse[0] > pad && mouse[0] < dims[0] - pad &&
                     mouse[1] > pad && mouse[1] < dims[1] - pad;
 
             if (trySnap) {
-                var choice = geoChooseEdge(context.childNodes(d), context.mouse(), context.projection),
-                    edge = [d.nodes[choice.index - 1], d.nodes[choice.index]];
+                var choice = geoChooseEdge(context.childNodes(d), context.mouse(), context.projection);
+                var edge = [d.nodes[choice.index - 1], d.nodes[choice.index]];
                 dispatch.call('clickWay', this, choice.loc, edge);
             } else {
                 dispatch.call('click', this, context.map().mouseCoordinates());
@@ -141,23 +145,23 @@ export function behaviorDraw(context) {
         d3_event.stopPropagation();
 
         var currSpace = context.mouse();
-        if (disableSpace && lastSpace) {
-            var dist = geoEuclideanDistance(lastSpace, currSpace);
+        if (_disableSpace && _lastSpace) {
+            var dist = geoEuclideanDistance(_lastSpace, currSpace);
             if (dist > tolerance) {
-                disableSpace = false;
+                _disableSpace = false;
             }
         }
 
-        if (disableSpace || mouseLeave || !lastMouse) return;
+        if (_disableSpace || _mouseLeave || !_lastMouse) return;
 
         // user must move mouse or release space bar to allow another click
-        lastSpace = currSpace;
-        disableSpace = true;
+        _lastSpace = currSpace;
+        _disableSpace = true;
 
         d3_select(window).on('keyup.space-block', function() {
             d3_event.preventDefault();
             d3_event.stopPropagation();
-            disableSpace = false;
+            _disableSpace = false;
             d3_select(window).on('keyup.space-block', null);
         });
 
@@ -187,7 +191,7 @@ export function behaviorDraw(context) {
         context.install(hover);
         context.install(edit);
 
-        if (!context.inIntro() && !usedTails[tail.text()]) {
+        if (!context.inIntro() && !_usedTails[tail.text()]) {
             context.install(tail);
         }
 
@@ -217,9 +221,9 @@ export function behaviorDraw(context) {
         context.uninstall(hover);
         context.uninstall(edit);
 
-        if (!context.inIntro() && !usedTails[tail.text()]) {
+        if (!context.inIntro() && !_usedTails[tail.text()]) {
             context.uninstall(tail);
-            usedTails[tail.text()] = true;
+            _usedTails[tail.text()] = true;
         }
 
         selection

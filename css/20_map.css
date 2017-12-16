@@ -18,6 +18,13 @@ use { pointer-events: none; }
     pointer-events: all;
 }
 
+/*.mode-draw-line .active,
+.mode-draw-area .active,
+*/
+.mode-drag-node .active {
+    pointer-events: none;
+}
+
 .layer-areas path.shadow,
 .layer-lines path.shadow {
     pointer-events: stroke;

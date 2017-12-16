@@ -161,10 +161,15 @@ export function modeDragNode(context) {
         var d = datum();
 
         if (!_nudgeInterval) {
+            // try to snap
             if (d.type === 'node' && d.id !== entity.id) {
                 loc = d.loc;
             } else if (d.type === 'way' && !d3_select(d3_event.sourceEvent.target).classed('fill')) {
-                loc = geoChooseEdge(context.childNodes(d), context.mouse(), context.projection).loc;
+                var childNodes = context.childNodes(d);
+                var childIDs = childNodes.map(function(node) { return node.id; });
+                if (childIDs.indexOf(entity.id) === -1) {
+                    loc = geoChooseEdge(childNodes, context.mouse(), context.projection).loc;
+                }
             }
         }
 
