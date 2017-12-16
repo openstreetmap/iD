@@ -284,7 +284,7 @@ export function svgVertices(projection, context) {
             hovered: _currHover           // hovered + siblings of hovered (render only in draw modes)
         };
 
-        var all = _assign({}, _currPersistent, _currSelected, (isDrawing ? _currHover : {}));
+        var all = _assign({}, (isDrawing ? _currHover : {}), _currSelected, _currPersistent);
 
         // Draw the vertices..
         // The filter function controls the scope of what objects d3 will touch (exit/enter/update)
@@ -293,17 +293,17 @@ export function svgVertices(projection, context) {
             return d.id in _currPersistent || d.id in _currSelected || d.id in _currHover || filter(d);
         };
         selection.selectAll('.layer-points .layer-points-vertices')
-            .call(draw, graph, visible(all), sets, filterRendered);
+            .call(draw, graph, currentVisible(all), sets, filterRendered);
 
         // Draw touch targets..
         selection.selectAll('.layer-points .layer-points-targets')
-            .call(drawTargets, graph, visible(all), filterRendered);
+            .call(drawTargets, graph, currentVisible(all), filterRendered);
 
 
-        function visible(which) {
-            return _values(which).filter(function (entity) {
-                return entity.intersects(extent, graph);
-            });
+        function currentVisible(which) {
+            return Object.keys(which)
+                .map(context.hasEntity)   // the current version of this entity
+                .filter(function (entity) { return entity && entity.intersects(extent, graph); });
         }
     }
 

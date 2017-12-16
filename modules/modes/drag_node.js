@@ -249,7 +249,7 @@ export function modeDragNode(context) {
 
 
     var behavior = behaviorDrag()
-        .selector('g.node, g.midpoint')
+        .selector('.vertex.target, g.point, g.midpoint')
         .surface(d3_select('#map').node())
         .origin(origin)
         .on('start', start)
