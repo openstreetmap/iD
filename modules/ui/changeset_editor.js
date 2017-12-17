@@ -120,16 +120,16 @@ export function uiChangesetEditor(context) {
             }
         }
     
-        numChars = tags.comment.length;
+        var numChars = tags.comment.length;
         var background = getBackground(numChars);
         var bordercolor = getBorderColor(numChars);
         
         selection.select('.form-field-comment').selectAll('.form-label')
             .style('background' ,  background)
-            .style('border-color' , bordercolor)
+            .style('border-color' , bordercolor);
         
         selection.select('.form-field-comment').selectAll('.combobox-input')
-            .style('border-color' , bordercolor)
+            .style('border-color' , bordercolor);
         
         // Add warning if comment is short
         var isShort = (tags.comment.length < SHORT);
