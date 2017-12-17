@@ -331,6 +331,11 @@
             "type": "text",
             "label": "Brand"
         },
+        "brewery": {
+            "key": "brewery",
+            "type": "semiCombo",
+            "label": "Draft Beers"
+        },
         "bridge": {
             "key": "bridge",
             "type": "typeCombo",

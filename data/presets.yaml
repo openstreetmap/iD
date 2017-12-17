@@ -250,6 +250,9 @@ en:
       brand:
         # brand=*
         label: Brand
+      brewery:
+        # brewery=*
+        label: Draft Beers
       bridge:
         # bridge=*
         label: Type
