@@ -2,6 +2,7 @@ import _uniqBy from 'lodash-es/uniqBy';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { d3combobox as d3_combobox } from '../lib/d3.combobox.js';
+import { interpolateRgb as d3_interpolateRgb } from 'd3-interpolate';
 
 import { t } from '../util/locale';
 import { svgIcon } from '../svg';
@@ -90,23 +91,93 @@ export function uiChangesetEditor(context) {
             }
         }
 
-        // Add warning if comment mentions Google
-        var hasGoogle = tags.comment.match(/google/i);
-        var commentWarning = selection.select('.form-field-comment').selectAll('.comment-warning')
-            .data(hasGoogle ? [0] : []);
+        // Change style if comment is short
+        var SHORT = 25;
+        var ENOUGH = 50;
+        function getBackground(numChars) {
+            var step;
+            if (numChars <= SHORT) {
+                step = numChars / SHORT;
+                return d3_interpolateRgb('#f6d3ce', '#ffffbb')(step);  // light red -> yellow
+            } else if (numChars <= ENOUGH) {
+                step = Math.min((numChars - SHORT) / (ENOUGH - SHORT), 1.0);
+                return d3_interpolateRgb('#ffffbb', '#f6f6f6')(step);  // yellow -> default-grey
+            } else {
+                return null; // default (inherit)
+            }
+        }
 
-        commentWarning.exit()
+        function getBorderColor(numChars) {
+            var step;
+            if (numChars <= SHORT) {
+                step = numChars / SHORT;
+                return d3_interpolateRgb('#e06e5f', '#cccccc')(step);  // strong red -> default-grey
+            // } else if (numChars <= ENOUGH) {
+            //     step = Math.min((numChars - SHORT) / (ENOUGH - SHORT), 1.0);
+            //    return d3_interpolateRgb('#f6d3ce', '#cccccc')(step);  // light red -> default-grey
+            } else {
+                return null; // default (inherit)
+            }
+        }
+    
+        numChars = tags.comment.length;
+        var background = getBackground(numChars);
+        var bordercolor = getBorderColor(numChars);
+        
+        selection.select('.form-field-comment').selectAll('.form-label')
+            .style('background' ,  background)
+            .style('border-color' , bordercolor)
+        
+        selection.select('.form-field-comment').selectAll('.combobox-input')
+            .style('border-color' , bordercolor)
+        
+        // Add warning if comment is short
+        var isShort = (tags.comment.length < SHORT);
+        var commentShortWarning = selection.select('.form-field-comment').selectAll('.comment-short-warning')
+            .data(isShort ? [0] : []);
+
+        commentShortWarning.exit()
             .transition()
             .duration(200)
             .style('opacity', 0)
             .remove();
 
-        var commentEnter = commentWarning.enter()
+        var commentShortEnter = commentShortWarning.enter()
             .insert('div', '.tag-reference-body')
-            .attr('class', 'field-warning comment-warning')
+            .attr('class', 'field-warning comment-short-warning')
             .style('opacity', 0);
 
-        commentEnter
+        commentShortEnter
+            .append('a')
+            .attr('target', '_blank')
+            .attr('tabindex', -1)
+            .call(svgIcon('#icon-alert', 'inline'))
+            .attr('href', t('commit.about_changeset_comments_link'))
+            .append('span')
+            .text(t('commit.short_changeset_comment_warning'));
+
+        commentShortEnter
+            .transition()
+            .duration(200)
+            .style('opacity', 1);
+
+        // Add warning if comment mentions Google
+        var hasGoogle = tags.comment.match(/google/i);
+        var commentGoogleWarning = selection.select('.form-field-comment').selectAll('.comment-google-warning')
+            .data(hasGoogle ? [0] : []);
+
+        commentGoogleWarning.exit()
+            .transition()
+            .duration(200)
+            .style('opacity', 0)
+            .remove();
+
+        var commentGoogleEnter = commentGoogleWarning.enter()
+            .insert('div', '.tag-reference-body')
+            .attr('class', 'field-warning comment-google-warning')
+            .style('opacity', 0);
+
+        commentGoogleEnter
             .append('a')
             .attr('target', '_blank')
             .attr('tabindex', -1)
@@ -115,7 +186,7 @@ export function uiChangesetEditor(context) {
             .append('span')
             .text(t('commit.google_warning'));
 
-        commentEnter
+        commentGoogleEnter
             .transition()
             .duration(200)
             .style('opacity', 1);
