@@ -660,9 +660,10 @@ path.casing.tag-highway.tag-highway-lane-yellow-dash
     stroke-linecap: butt;
 }
 
-/*double lane*/
+/*doublelane*/
 
 path.stroke.tag-highway.tag-highway-lane-yellow-solid-double,
+path.stroke.tag-highway.tag-highway-lane-yellow-dash-double,
 path.stroke.tag-highway.tag-highway-lane-yellow-solid-dash,
 path.stroke.tag-highway.tag-highway-lane-white-solid-double,
 path.stroke.tag-highway.tag-highway-lane-white-dash-double
@@ -671,6 +672,7 @@ path.stroke.tag-highway.tag-highway-lane-white-dash-double
 }
 
 path.stroke.tag-highway.tag-highway-lane-yellow-solid-double,
+path.stroke.tag-highway.tag-highway-lane-yellow-dash-double,
 path.stroke.tag-highway.tag-highway-lane-yellow-solid-dash,
 path.stroke.tag-highway.tag-highway-lane-white-solid-double,
 path.stroke.tag-highway.tag-highway-lane-white-dash-double
@@ -678,6 +680,7 @@ path.stroke.tag-highway.tag-highway-lane-white-dash-double
     stroke-width:2px;
 }
 .low-zoom path.stroke.tag-highway.tag-highway-lane-yellow-solid-double,
+.low-zoom path.stroke.tag-highway.tag-highway-lane-yellow-dash-double,
 .low-zoom path.stroke.tag-highway.tag-highway-lane-yellow-solid-dash,
 .low-zoom path.stroke.tag-highway.tag-highway-lane-white-solid-double,
 .low-zoom path.stroke.tag-highway.tag-highway-lane-white-dash-double
@@ -685,6 +688,7 @@ path.stroke.tag-highway.tag-highway-lane-white-dash-double
     stroke-width:1px;
 }
 path.casing.tag-highway.tag-highway-lane-yellow-solid-double,
+path.casing.tag-highway.tag-highway-lane-yellow-dash-double,
 path.casing.tag-highway.tag-highway-lane-yellow-solid-dash,
 path.casing.tag-highway.tag-highway-lane-white-solid-double,
 path.casing.tag-highway.tag-highway-lane-white-dash-double
@@ -692,6 +696,7 @@ path.casing.tag-highway.tag-highway-lane-white-dash-double
     stroke-width:5px;
 }
 .low-zoom path.casing.tag-highway.tag-highway-lane-yellow-solid-double,
+.low-zoom path.casing.tag-highway.tag-highway-lane-yellow-dash-double,
 .low-zoom path.casing.tag-highway.tag-highway-lane-yellow-solid-dash,
 .low-zoom path.casing.tag-highway.tag-highway-lane-white-solid-double,
 .low-zoom path.casing.tag-highway.tag-highway-lane-white-dash-double
@@ -699,13 +704,18 @@ path.casing.tag-highway.tag-highway-lane-white-dash-double
     stroke-width:3px;
 }
 
-path.casing.tag-highway.tag-highway-lane-yellow-solid-dash,
+path.casing.tag-highway.tag-highway-lane-yellow-dash-double,
 path.casing.tag-highway.tag-highway-lane-white-dash-double,
-path.stroke.tag-highway.tag-highway-lane-yellow-solid-dash,
+path.stroke.tag-highway.tag-highway-lane-yellow-dash-double,
 path.stroke.tag-highway.tag-highway-lane-white-dash-double
 {
     stroke-dasharray: 10;
     stroke-linecap:butt;
+}
+path.casing.tag-highway.tag-highway-lane-yellow-solid-dash,
+path.stroke.tag-highway.tag-highway-lane-yellow-solid-dash
+{
+    stroke-dasharray: 5;
 }
 
 path.casing.tag-highway.tag-highway-lane-white-solid-double,
@@ -714,6 +724,7 @@ path.casing.tag-highway.tag-highway-lane-white-dash-double
     stroke:white;
 }
 path.casing.tag-highway.tag-highway-lane-yellow-solid-double,
+path.casing.tag-highway.tag-highway-lane-yellow-dash-double,
 path.casing.tag-highway.tag-highway-lane-yellow-solid-dash
 {
     stroke:orange;
