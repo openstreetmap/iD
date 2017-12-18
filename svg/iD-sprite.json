@@ -93,6 +93,7 @@
     "highway-lane-yellow-dash-double":  { "viewBox": "900 260 60 60" },
     "highway-lane-white-solid-double":  { "viewBox": "900 140 60 60" },
     "highway-lane-white-dash-double":   { "viewBox": "900 200 60 60" },
+    "highway-lane-centerline":          { "viewBox": "840 260 60 60" },
     "highway-road":             { "viewBox": "0 80 60 60" },
     "highway-track":            { "viewBox": "60 80 60 60" },
     "highway-living-street":    { "viewBox": "120 80 60 60" },
@@ -168,6 +169,8 @@
     "highway-lane-yellow-solid-dash-stroke1":           { "fill": "currentColor" },
     "highway-lane-yellow-dash-double-casing1":          { "fill": "inherit" },
     "highway-lane-yellow-dash-double-stroke1":          { "fill": "currentColor" },
+    "highway-lane-centerline-casing1":          { "fill": "inherit" },
+    "highway-lane-centerline-stroke1":          { "fill": "currentColor" },
 
     "highway-road-casing1":           { "fill": "inherit" },
     "highway-road-stroke1":           { "fill": "currentColor" },

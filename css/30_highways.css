@@ -730,3 +730,14 @@ path.casing.tag-highway.tag-highway-lane-yellow-solid-dash
     stroke:orange;
 }
 
+/*lane center line*/
+path.stroke.tag-highway.tag-highway-lane-centerline
+{
+    stroke-width: 2px;
+    stroke:#8cd05f;
+}
+path.casing.tag-highway.tag-highway-lane-centerline
+{
+    display: none;
+}
+

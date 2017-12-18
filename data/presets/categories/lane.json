@@ -12,6 +12,7 @@
     "highway/yellow-solid-dash",
     "highway/yellow-dash-double",
     "highway/yellow-solid-double",
+    "highway/lane-centerline",
     "highway/lane"
   ]
 }

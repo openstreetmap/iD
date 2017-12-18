@@ -3853,6 +3853,10 @@
                     "name": "双白实线",
                     "terms": "实线,白色,双"
                 },
+                "highway/lane-centerline": {
+                    "name": "车道中心线",
+                    "terms": "车道,中心"
+                },
 
                 "historic": {
                     "name": "历史地点",
