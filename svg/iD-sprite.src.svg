@@ -1372,8 +1372,8 @@
       <path d="M802.5,35 L799.625,41 L798,41 L797,42 L797,44 L798.406,44 L798,45 L798,50 L798,51 L798,51 C798,51 798.608,51.608 799,52 L800,52 L804,52 L806,53 L814,53 L816,52 L820,52 L821,52 L822,51 L822,51 L822,50 L822,45 L821.594,44 L823,44 L823,42 L822,41 L820.375,41 L817.5,35 z M803.5,38 L816.5,38 L818,42 L817,43 L803,43 L802,42 z M801,46 L804,46 L805,48 L805,49 L801,49 L800,48 L800,47 z M816,46 L819,46 L820,47 L820,48 L819,49 L815,49 L815,48 z M799,53 L799,55 L800,56 L803,56 L804,55 L804,53 z M816,53 L816,55 L817,56 L820,56 L821,55 L821,53 z" fill="#989898" id="path23923"/>
     </g>
     <g id="highway-lane-white-dash">
-      <path d="M847,60 L893,60" fill-opacity="0" stroke="#000000" stroke-width="10"/>
-      <path d="M847,60 L893,60" fill-opacity="0" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="3,2"/>
+      <path d="M847,60 L893,60" fill-opacity="0" stroke="#000000" stroke-width="10" stroke-dasharray="60,60"/>
+      <path d="M847,60 L893,60" fill-opacity="0" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="6,6"/>
       <path d="M862.5,35 L859.625,41 L858,41 L857,42 L857,44 L858.406,44 L858,45 L858,50 L858,51 L858,51 C858,51 858.608,51.608 859,52 L860,52 L864,52 L866,53 L874,53 L876,52 L880,52 L881,52 L882,51 L882,51 L882,50 L882,45 L881.594,44 L883,44 L883,42 L882,41 L880.375,41 L877.5,35 z M863.5,38 L876.5,38 L878,42 L877,43 L863,43 L862,42 z M861,46 L864,46 L865,48 L865,49 L861,49 L860,48 L860,47 z M876,46 L879,46 L880,47 L880,48 L879,49 L875,49 L875,48 z M859,53 L859,55 L860,56 L863,56 L864,55 L864,53 z M876,53 L876,55 L877,56 L880,56 L881,55 L881,53 z" fill="#989898" id="path23923"/>
     </g>
     <g id="highway-lane-yellow-solid">
@@ -1389,9 +1389,15 @@
     </g>
     <g id="highway-lane-yellow-solid-dash">
       <path d="M847,181 L893,181" fill-opacity="0" stroke="#000000" stroke-width="10"/>
-      <path d="M847,178 L893,178" fill-opacity="0" stroke="#F3A703" stroke-width="1" stroke-dasharray="3,2"/>
+      <path d="M847,178 L893,178" fill-opacity="0" stroke="#F3A703" stroke-width="1" stroke-dasharray="6,6"/>
       <path d="M847,184 L893,184" fill-opacity="0" stroke="#F3A703" stroke-width="1"/>
       <path d="M862.5,155 L859.625,161 L858,161 L857,162 L857,164 L858.406,164 L858,165 L858,170 L858,171 L858,171 C858,171 858.608,171.608 859,172 L860,172 L864,172 L866,173 L874,173 L876,172 L880,172 L881,172 L882,171 L882,171 L882,170 L882,165 L881.594,164 L883,164 L883,162 L882,161 L880.375,161 L877.5,155 z M863.5,158 L876.5,158 L878,162 L877,163 L863,163 L862,162 z M861,166 L864,166 L865,168 L865,169 L861,169 L860,168 L860,167 z M876,166 L879,166 L880,167 L880,168 L879,169 L875,169 L875,168 z M859,173 L859,175 L860,176 L863,176 L864,175 L864,173 z M876,173 L876,175 L877,176 L880,176 L881,175 L881,173 z" fill="#989898" id="path23923"/>
+    </g>
+    <g id="highway-lane-yellow-dash-double">
+      <path d="M907,301 L953,301" fill-opacity="0" stroke="#000000" stroke-width="10"/>
+      <path d="M907,298 L953,298" fill-opacity="0" stroke="#F3A703" stroke-width="1" stroke-dasharray="6,6"/>
+      <path d="M907,304 L953,304" fill-opacity="0" stroke="#F3A703" stroke-width="1" stroke-dasharray="6,6"/>
+      <path d="M922.5,275 L919.625,281 L918,281 L917,282 L917,284 L918.406,284 L918,285 L918,290 L918,291 L918,291 C918,291 918.608,291.608 919,292 L920,292 L924,292 L926,293 L934,293 L936,292 L940,292 L941,292 L942,291 L942,291 L942,290 L942,285 L941.594,284 L943,284 L943,282 L942,281 L940.375,281 L937.5,275 z M923.5,278 L936.5,278 L938,282 L937,283 L923,283 L922,282 z M921,286 L924,286 L925,288 L925,289 L921,289 L920,288 L920,287 z M936,286 L939,286 L940,287 L940,288 L939,289 L935,289 L935,288 z M919,293 L919,295 L920,296 L923,296 L924,295 L924,293 z M936,293 L936,295 L937,296 L940,296 L941,295 L941,293 z" fill="#989898" id="path23923"/>
     </g>
     <g id="highway-lane-white-solid-double">
       <path d="M907,181 L953,181" fill-opacity="0" stroke="#000000" stroke-width="10"/>
@@ -1401,13 +1407,13 @@
     </g>
     <g id="highway-lane-white-dash-double">
       <path d="M907,241 L953,241" fill-opacity="0" stroke="#000000" stroke-width="10"/>
-      <path d="M907,238 L953,238" fill-opacity="0" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="3,2"/>
-      <path d="M907,244 L953,244" fill-opacity="0" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="3,2"/>
+      <path d="M907,238 L953,238" fill-opacity="0" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="6,6"/>
+      <path d="M907,244 L953,244" fill-opacity="0" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="6,6"/>
       <path d="M922.5,215 L919.625,221 L918,221 L917,222 L917,224 L918.406,224 L918,225 L918,230 L918,231 L918,231 C918,231 918.608,231.608 919,232 L920,232 L924,232 L926,233 L934,233 L936,232 L940,232 L941,232 L942,231 L942,231 L942,230 L942,225 L941.594,224 L943,224 L943,222 L942,221 L940.375,221 L937.5,215 z M923.5,218 L936.5,218 L938,222 L937,223 L923,223 L922,222 z M921,226 L924,226 L925,228 L925,229 L921,229 L920,228 L920,227 z M936,226 L939,226 L940,227 L940,228 L939,229 L935,229 L935,228 z M919,233 L919,235 L920,236 L923,236 L924,235 L924,233 z M936,233 L936,235 L937,236 L940,236 L941,235 L941,233 z" fill="#989898" id="path23923"/>
     </g>
     <g id="highway-lane-yellow-dash">
       <path d="M907,60 L953,60" fill-opacity="0" stroke="#000000" stroke-width="10"/>
-      <path d="M907,60 L953,60" fill-opacity="0" stroke="#FFA703" stroke-width="1" stroke-dasharray="3,2"/>
+      <path d="M907,60 L953,60" fill-opacity="0" stroke="#FFA703" stroke-width="1" stroke-dasharray="6,6"/>
       <path d="M922.5,35 L919.625,41 L918,41 L917,42 L917,44 L918.406,44 L918,45 L918,50 L918,51 L918,51 C918,51 918.608,51.608 919,52 L920,52 L924,52 L926,53 L934,53 L936,52 L940,52 L941,52 L942,51 L942,51 L942,50 L942,45 L941.594,44 L943,44 L943,42 L942,41 L940.375,41 L937.5,35 z M923.5,38 L936.5,38 L938,42 L937,43 L923,43 L922,42 z M921,46 L924,46 L925,48 L925,49 L921,49 L920,48 L920,47 z M936,46 L939,46 L940,47 L940,48 L939,49 L935,49 L935,48 z M919,53 L919,55 L920,56 L923,56 L924,55 L924,53 z M936,53 L936,55 L937,56 L940,56 L941,55 L941,53 z" fill="#989898" id="path23923"/>
     </g>
   </g>

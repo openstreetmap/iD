@@ -1093,6 +1093,10 @@
                 },
                 "category-water-line": {
                     "name": "水体"
+                },
+                "category-lane": {
+                    "name": "车道线",
+                    "terms": "车道,线"
                 }
             },
             "fields": {
@@ -3809,6 +3813,47 @@
                     "name": "小型/未分级道路",
                     "terms": "小型/未分级道路"
                 },
+                "highway/lane": {
+                    "name": "车道线",
+                    "terms": "车道线"
+                },
+                "highway/white-dash": {
+                    "name": "白虚线",
+                    "terms": "虚线,白色,单"
+                },
+                "highway/white-solid": {
+                    "name": "白实线",
+                    "terms": "实线,白色,单"
+                },
+                "highway/yellow-dash": {
+                    "name": "黄虚线",
+                    "terms": "虚线,黄色,单"
+                },
+                "highway/yellow-solid": {
+                    "name": "黄实线",
+                    "terms": "实线,黄色,单"
+                },
+                "highway/yellow-dash-double": {
+                    "name": "双黄虚线",
+                    "terms": "虚线,黄色,双"
+                },
+                "highway/yellow-solid-double": {
+                    "name": "双黄实线",
+                    "terms": "实线,黄色,双"
+                },
+                "highway/yellow-solid-dash": {
+                    "name": "双黄虚实线",
+                    "terms": "实线,虚线,虚实线,黄色,双"
+                },
+                "highway/white-dash-double": {
+                    "name": "双白虚线",
+                    "terms": "虚线,白色,双"
+                },
+                "highway/white-solid-double": {
+                    "name": "双白实线",
+                    "terms": "实线,白色,双"
+                },
+
                 "historic": {
                     "name": "历史地点",
                     "terms": "历史遗迹,史迹"

@@ -1,7 +1,7 @@
 {
   "icon": "highway-lane-white-solid",
   "geometry": "line",
-  "name": "Road Lanes",
+  "name": "Lane",
   "members": [
     "highway/white-dash",
     "highway/white-solid",
