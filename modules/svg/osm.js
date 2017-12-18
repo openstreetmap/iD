@@ -9,6 +9,18 @@ export function svgOsm(projection, context, dispatch) {
             .append('g')
             .attr('class', function(d) { return 'layer-osm layer-' + d; });
 
+        selection.selectAll('.layer-areas').selectAll('.layer-areas-group')
+            .data(['areas', 'targets'])
+            .enter()
+            .append('g')
+            .attr('class', function(d) { return 'layer-areas-group layer-areas-' + d; });
+
+        selection.selectAll('.layer-lines').selectAll('.layer-lines-group')
+            .data(['lines', 'targets'])
+            .enter()
+            .append('g')
+            .attr('class', function(d) { return 'layer-lines-group layer-lines-' + d; });
+
         selection.selectAll('.layer-points').selectAll('.layer-points-group')
             .data(['points', 'midpoints', 'vertices', 'turns', 'targets'])
             .enter()

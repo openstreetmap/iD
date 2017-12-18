@@ -36,13 +36,33 @@ export function svgLines(projection, context) {
     };
 
 
+    function drawTargets(selection, graph, entities, filter) {
+        var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
+        var getPath = svgPath(projection, graph);
+
+        var targets = selection.selectAll('.line.target')
+            .filter(filter)
+            .data(entities, function key(d) { return d.id; });
+
+        // exit
+        targets.exit()
+            .remove();
+
+        // enter/update
+        targets.enter()
+            .append('path')
+            .merge(targets)
+            .attr('d', getPath)
+            .attr('class', function(d) { return 'way line target  ' + fillClass + d.id; });
+    }
+
+
     function drawLines(selection, graph, entities, filter) {
 
-
         function waystack(a, b) {
-            var selected = context.selectedIDs(),
-                scoreA = selected.indexOf(a.id) !== -1 ? 20 : 0,
-                scoreB = selected.indexOf(b.id) !== -1 ? 20 : 0;
+            var selected = context.selectedIDs();
+            var scoreA = selected.indexOf(a.id) !== -1 ? 20 : 0;
+            var scoreB = selected.indexOf(b.id) !== -1 ? 20 : 0;
 
             if (a.tags.highway) { scoreA -= highway_stack[a.tags.highway]; }
             if (b.tags.highway) { scoreB -= highway_stack[b.tags.highway]; }
@@ -91,15 +111,15 @@ export function svgLines(projection, context) {
         }
 
 
-        var getPath = svgPath(projection, graph),
-            ways = [],
-            pathdata = {},
-            onewaydata = {},
-            oldMultiPolygonOuters = {};
+        var getPath = svgPath(projection, graph);
+        var ways = [];
+        var pathdata = {};
+        var onewaydata = {};
+        var oldMultiPolygonOuters = {};
 
         for (var i = 0; i < entities.length; i++) {
-            var entity = entities[i],
-                outer = osmSimpleMultipolygonOuterMember(entity, graph);
+            var entity = entities[i];
+            var outer = osmSimpleMultipolygonOuterMember(entity, graph);
             if (outer) {
                 ways.push(entity.mergeTags(outer.tags));
                 oldMultiPolygonOuters[outer.id] = true;
@@ -117,7 +137,7 @@ export function svgLines(projection, context) {
         });
 
 
-        var layer = selection.selectAll('.layer-lines');
+        var layer = selection.selectAll('.layer-lines .layer-lines-lines');
 
         var layergroup = layer
             .selectAll('g.layergroup')
@@ -164,8 +184,8 @@ export function svgLines(projection, context) {
             .selectAll('path')
             .filter(filter)
             .data(
-                function() { return onewaydata[this.parentNode.__data__] || []; },
-                function(d) { return [d.id, d.index]; }
+                function data() { return onewaydata[this.parentNode.__data__] || []; },
+                function key(d) { return [d.id, d.index]; }
             );
 
         oneways.exit()
@@ -181,6 +201,11 @@ export function svgLines(projection, context) {
         if (detected.ie) {
             oneways.each(function() { this.parentNode.insertBefore(this, this); });
         }
+
+
+        // touch targets
+        selection.selectAll('.layer-lines .layer-lines-targets')
+            .call(drawTargets, graph, ways, filter);
     }
 
 

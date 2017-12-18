@@ -171,7 +171,7 @@ export function svgVertices(projection, context) {
 
 
     function drawTargets(selection, graph, entities, filter) {
-        var debugClass = 'pink';
+        var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
         var targets = selection.selectAll('.vertex.target')
             .filter(filter)
             .data(entities, function key(d) { return d.id; });
@@ -184,10 +184,9 @@ export function svgVertices(projection, context) {
         targets.enter()
             .append('circle')
             .attr('r', radiuses.shadow[3])  // just use the biggest one for now
-            .attr('class', function(d) { return 'node vertex target ' + d.id; })
             .merge(targets)
-            .attr('transform', svgPointTransform(projection))
-            .classed(debugClass, context.getDebug('target'));
+            .attr('class', function(d) { return 'node vertex target ' + fillClass + d.id; })
+            .attr('transform', svgPointTransform(projection));
     }
 
 

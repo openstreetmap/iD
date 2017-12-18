@@ -22,7 +22,7 @@ export function svgPoints(projection, context) {
 
 
     function drawTargets(selection, graph, entities, filter) {
-        var debugClass = 'pink';
+        var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
         var targets = selection.selectAll('.point.target')
             .filter(filter)
             .data(entities, function key(d) { return d.id; });
@@ -34,14 +34,13 @@ export function svgPoints(projection, context) {
         // enter/update
         targets.enter()
             .append('rect')
-            .attr('x', -15)
-            .attr('y', -30)
-            .attr('width', 30)
-            .attr('height', 36)
-            .attr('class', function(d) { return 'node point target ' + d.id; })
+            .attr('x', -10)
+            .attr('y', -26)
+            .attr('width', 20)
+            .attr('height', 30)
             .merge(targets)
-            .attr('transform', svgPointTransform(projection))
-            .classed(debugClass, context.getDebug('target'));
+            .attr('class', function(d) { return 'node point target ' + fillClass + d.id; })
+            .attr('transform', svgPointTransform(projection));
     }
 
 

@@ -41,7 +41,29 @@ export function svgAreas(projection, context) {
     }
 
 
-    return function drawAreas(selection, graph, entities, filter) {
+    function drawTargets(selection, graph, entities, filter) {
+        var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
+        var getPath = svgPath(projection, graph);
+
+        var targets = selection.selectAll('.area.target')
+            .filter(filter)
+            .data(entities, function key(d) { return d.id; });
+
+        // exit
+        targets.exit()
+            .remove();
+
+        // enter/update
+        targets.enter()
+            .append('path')
+            .merge(targets)
+            .attr('d', getPath)
+            .attr('class', function(d) { return 'way area target  ' + fillClass + d.id; });
+    }
+
+
+
+    function drawAreas(selection, graph, entities, filter) {
         var path = svgPath(projection, graph, true),
             areas = {},
             multipolygon;
@@ -99,7 +121,7 @@ export function svgAreas(projection, context) {
            .attr('d', path);
 
 
-        var layer = selection.selectAll('.layer-areas');
+        var layer = selection.selectAll('.layer-areas .layer-areas-areas');
 
         var areagroup = layer
             .selectAll('g.areagroup')
@@ -145,5 +167,12 @@ export function svgAreas(projection, context) {
             })
             .call(svgTagClasses())
             .attr('d', path);
-    };
+
+
+        // touch targets
+        selection.selectAll('.layer-areas .layer-areas-targets')
+            .call(drawTargets, graph, data.stroke, filter);
+    }
+
+    return drawAreas;
 }

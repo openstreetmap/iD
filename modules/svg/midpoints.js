@@ -17,7 +17,7 @@ export function svgMidpoints(projection, context) {
 
 
     function drawTargets(selection, graph, entities, filter) {
-        var debugClass = 'pink';
+        var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
         var targets = selection.selectAll('.midpoint.target')
             .filter(filter)
             .data(entities, function key(d) { return d.id; });
@@ -30,10 +30,9 @@ export function svgMidpoints(projection, context) {
         targets.enter()
             .append('circle')
             .attr('r', 12)
-            .attr('class', function(d) { return 'midpoint target ' + d.id; })
             .merge(targets)
-            .attr('transform', svgPointTransform(projection))
-            .classed(debugClass, context.getDebug('target'));
+            .attr('class', function(d) { return 'node midpoint target ' + fillClass + d.id; })
+            .attr('transform', svgPointTransform(projection));
     }
 
 

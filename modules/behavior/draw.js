@@ -116,6 +116,9 @@ export function behaviorDraw(context) {
 
     function click() {
         var d = datum();
+
+        // Try to snap..
+        // See also: `modes/drag_node.js doMove()`
         if (d.type === 'way') {
             var dims = context.map().dimensions();
             var mouse = context.mouse();

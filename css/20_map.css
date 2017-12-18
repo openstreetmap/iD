@@ -14,17 +14,24 @@
     pointer-events: none;
 }
 
-/* Line/Area shadows and point/vertex targets are interactive */
+/* `.target` objects are interactive */
 /* They can be picked up, clicked, hovered, or things can connect to them */
-.layer-areas path.shadow,
-.layer-lines path.shadow {
-    pointer-events: stroke;
-}
-.layer-points-targets * {
-    pointer-events: all;
+.node.target {
+    pointer-events: fill;
+    fill-opacity: 0.8;
+    fill: currentColor;
+    stroke: none;
 }
 
-/* .active objects (currently being drawn or dragged) are not interactive */
+.way.target {
+    pointer-events: stroke;
+    fill: none;
+    stroke-width: 10;
+    stroke-opacity: 0.8;
+    stroke: currentColor;
+}
+
+/* `.active` objects (currently being drawn or dragged) are not interactive */
 /* This is important to allow the events to drop through to whatever is */
 /* below them on the map, so you can still hover and connect to other things. */
 .layer-osm .active {
@@ -93,12 +100,6 @@ g.midpoint .shadow {
     stroke-width: 6;
     fill: #f6634f;
     fill-opacity: 0;
-}
-
-.target {
-    color: rgba(0,0,0,0);
-    fill-opacity: 0.8;
-    fill: currentColor;
 }
 
 g.vertex.related:not(.selected) .shadow,

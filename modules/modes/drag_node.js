@@ -131,8 +131,8 @@ export function modeDragNode(context) {
 
         _dragEntity = entity;
 
-        // activeIDs generate no pointer events.  This prevents the node or vertex
-        // being dragged from trying to connect to itself or its parent element.
+        // `.active` elements have `pointer-events: none`.
+        // This prevents the node or vertex being dragged from trying to connect to itself.
         _activeIDs = context.graph().parentWays(entity)
             .map(function(parent) { return parent.id; });
         _activeIDs.push(entity.id);
@@ -158,17 +158,25 @@ export function modeDragNode(context) {
         var currPoint = (d3_event && d3_event.point) || context.projection(_lastLoc);
         var currMouse = vecSub(currPoint, nudge);
         var loc = context.projection.invert(currMouse);
-        var d = datum();
 
         if (!_nudgeInterval) {
-            // try to snap
+            // If we're not nudging at the edge of the viewport, try to snap..
+            // See also `behavior/draw.js click()`
+            var d = datum();
+
+            // Snap to a node (not self)
             if (d.type === 'node' && d.id !== entity.id) {
                 loc = d.loc;
+
+            // Snap to a way (not an area fill)
             } else if (d.type === 'way' && !d3_select(d3_event.sourceEvent.target).classed('fill')) {
-                var childNodes = context.childNodes(d);
-                var childIDs = childNodes.map(function(node) { return node.id; });
-                if (childIDs.indexOf(entity.id) === -1) {
-                    loc = geoChooseEdge(childNodes, context.mouse(), context.projection).loc;
+
+                // var childNodes = context.childNodes(d);
+                // var childIDs = childNodes.map(function(node) { return node.id; });
+                var choice = geoChooseEdge(context.childNodes(d), context.mouse(), context.projection);
+                // (not along a segment adjacent to self)
+                if (entity.id !== d.nodes[choice.index - 1] && entity.id !== d.nodes[choice.index]) {
+                    loc = choice.loc;
                 }
             }
         }
