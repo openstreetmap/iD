@@ -602,3 +602,120 @@ g.midpoint.tag-highway-bridleway .fill {
     stroke-opacity: .8;
     opacity: .8;
 }
+
+/* highway lanes*/
+/* single lanes*/
+path.stroke.tag-highway.tag-highway-lane,
+path.stroke.tag-highway.tag-highway-lane-white-solid,
+path.stroke.tag-highway.tag-highway-lane-white-dash {
+    stroke: #fff;
+}
+path.stroke.tag-highway.tag-highway-lane-yellow-solid,
+path.stroke.tag-highway.tag-highway-lane-yellow-dash {
+    stroke: orange;
+}
+path.stroke.tag-highway.tag-highway-lane,
+path.stroke.tag-highway.tag-highway-lane-white-solid,
+path.stroke.tag-highway.tag-highway-lane-white-dash,
+path.stroke.tag-highway.tag-highway-lane-yellow-solid,
+path.stroke.tag-highway.tag-highway-lane-yellow-dash {
+    stroke-width: 2px;
+}
+.low-zoom path.stroke.tag-highway.tag-highway-lane,
+.low-zoom path.stroke.tag-highway.tag-highway-lane-white-solid,
+.low-zoom path.stroke.tag-highway.tag-highway-lane-white-dash,
+.low-zoom path.stroke.tag-highway.tag-highway-lane-yellow-solid,
+.low-zoom path.stroke.tag-highway.tag-highway-lane-yellow-dash {
+    stroke-width: 1px;
+}
+path.casing.tag-highway.tag-highway-lane,
+path.casing.tag-highway.tag-highway-lane-white-solid,
+path.casing.tag-highway.tag-highway-lane-white-dash,
+path.casing.tag-highway.tag-highway-lane-yellow-solid,
+path.casing.tag-highway.tag-highway-lane-yellow-dash {
+    stroke: black;
+}
+path.casing.tag-highway.tag-highway-lane,
+path.casing.tag-highway.tag-highway-lane-white-solid,
+path.casing.tag-highway.tag-highway-lane-white-dash,
+path.casing.tag-highway.tag-highway-lane-yellow-solid,
+path.casing.tag-highway.tag-highway-lane-yellow-dash {
+    stroke-width: 5px;
+}
+.low-zoom path.casing.tag-highway.tag-highway-lane,
+.low-zoom path.casing.tag-highway.tag-highway-lane-white-solid,
+.low-zoom path.casing.tag-highway.tag-highway-lane-white-dash,
+.low-zoom path.casing.tag-highway.tag-highway-lane-yellow-solid,
+.low-zoom path.casing.tag-highway.tag-highway-lane-yellow-dash {
+    stroke-width: 3px;
+}
+
+
+path.stroke.tag-highway.tag-highway-lane-white-dash,
+path.stroke.tag-highway.tag-highway-lane-yellow-dash,
+path.casing.tag-highway.tag-highway-lane-white-dash,
+path.casing.tag-highway.tag-highway-lane-yellow-dash
+{
+    stroke-dasharray: 10;
+    stroke-linecap: butt;
+}
+
+/*double lane*/
+
+path.stroke.tag-highway.tag-highway-lane-yellow-solid-double,
+path.stroke.tag-highway.tag-highway-lane-yellow-solid-dash,
+path.stroke.tag-highway.tag-highway-lane-white-solid-double,
+path.stroke.tag-highway.tag-highway-lane-white-dash-double
+{
+    stroke:black;
+}
+
+path.stroke.tag-highway.tag-highway-lane-yellow-solid-double,
+path.stroke.tag-highway.tag-highway-lane-yellow-solid-dash,
+path.stroke.tag-highway.tag-highway-lane-white-solid-double,
+path.stroke.tag-highway.tag-highway-lane-white-dash-double
+{
+    stroke-width:2px;
+}
+.low-zoom path.stroke.tag-highway.tag-highway-lane-yellow-solid-double,
+.low-zoom path.stroke.tag-highway.tag-highway-lane-yellow-solid-dash,
+.low-zoom path.stroke.tag-highway.tag-highway-lane-white-solid-double,
+.low-zoom path.stroke.tag-highway.tag-highway-lane-white-dash-double
+{
+    stroke-width:1px;
+}
+path.casing.tag-highway.tag-highway-lane-yellow-solid-double,
+path.casing.tag-highway.tag-highway-lane-yellow-solid-dash,
+path.casing.tag-highway.tag-highway-lane-white-solid-double,
+path.casing.tag-highway.tag-highway-lane-white-dash-double
+{
+    stroke-width:5px;
+}
+.low-zoom path.casing.tag-highway.tag-highway-lane-yellow-solid-double,
+.low-zoom path.casing.tag-highway.tag-highway-lane-yellow-solid-dash,
+.low-zoom path.casing.tag-highway.tag-highway-lane-white-solid-double,
+.low-zoom path.casing.tag-highway.tag-highway-lane-white-dash-double
+{
+    stroke-width:3px;
+}
+
+path.casing.tag-highway.tag-highway-lane-yellow-solid-dash,
+path.casing.tag-highway.tag-highway-lane-white-dash-double,
+path.stroke.tag-highway.tag-highway-lane-yellow-solid-dash,
+path.stroke.tag-highway.tag-highway-lane-white-dash-double
+{
+    stroke-dasharray: 10;
+    stroke-linecap:butt;
+}
+
+path.casing.tag-highway.tag-highway-lane-white-solid-double,
+path.casing.tag-highway.tag-highway-lane-white-dash-double
+{
+    stroke:white;
+}
+path.casing.tag-highway.tag-highway-lane-yellow-solid-double,
+path.casing.tag-highway.tag-highway-lane-yellow-solid-dash
+{
+    stroke:orange;
+}
+

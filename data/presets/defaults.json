@@ -14,6 +14,7 @@
         ],
         "line": [
             "category-road",
+            "category-lane",
             "category-rail",
             "category-path",
             "category-water-line",

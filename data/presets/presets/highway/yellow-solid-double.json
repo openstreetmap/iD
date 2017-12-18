@@ -1,0 +1,17 @@
+{
+  "icon": "highway-lane-yellow-solid-double",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "line"
+  ],
+  "tags": {
+    "highway": "lane-yellow-solid-double"
+  },
+  "reference": {
+    "key": "lane",
+    "value": "yellow-solid-double"
+  },
+  "name": "lane-yellow-solid-double"
+}

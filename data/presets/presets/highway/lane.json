@@ -1,0 +1,15 @@
+{
+  "icon": "highway-lane-white-solid",
+  "fields": [
+    "name",
+    "lane"
+  ],
+  "geometry": [
+    "line"
+  ],
+  "tags": {
+    "highway": "lane"
+  },
+  "terms": [],
+  "name": "Road lane"
+}

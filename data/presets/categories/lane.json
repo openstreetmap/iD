@@ -1,0 +1,17 @@
+{
+  "icon": "highway-lane-white-solid",
+  "geometry": "line",
+  "name": "Road Lanes",
+  "members": [
+    "highway/white-dash",
+    "highway/white-solid",
+    "highway/yellow-dash",
+    "highway/yellow-solid",
+    "highway/white-dash-double",
+    "highway/white-solid-double",
+    "highway/yellow-solid-dash",
+    "highway/yellow-dash-double",
+    "highway/yellow-solid-double",
+    "highway/lane"
+  ]
+}
