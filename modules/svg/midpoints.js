@@ -14,7 +14,7 @@ import {
 
 
 export function svgMidpoints(projection, context) {
-
+    var targetRadius = 8;
 
     function drawTargets(selection, graph, entities, filter) {
         var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
@@ -29,7 +29,7 @@ export function svgMidpoints(projection, context) {
         // enter/update
         targets.enter()
             .append('circle')
-            .attr('r', 12)
+            .attr('r', targetRadius)
             .merge(targets)
             .attr('class', function(d) { return 'node midpoint target ' + fillClass + d.id; })
             .attr('transform', svgPointTransform(projection));

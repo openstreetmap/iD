@@ -23,6 +23,7 @@ export function svgVertices(projection, context) {
     var _prevHover = {};
     var _currSelected = {};
     var _prevSelected = {};
+    var _radii = {};
 
 
     function sortY(a, b) {
@@ -40,6 +41,7 @@ export function svgVertices(projection, context) {
 
     function draw(selection, graph, vertices, sets, filter) {
         sets = sets || { selected: {}, important: {}, hovered: {} };
+
         var icons = {};
         var directions = {};
         var wireframe = context.surface().classed('fill-wireframe');
@@ -80,9 +82,13 @@ export function svgVertices(projection, context) {
                             r += 1.5;
                         }
 
+                        if (klass === 'shadow') {   // remember this value, so we don't need to
+                            _radii[entity.id] = r;  // recompute it when we draw the touch targets
+                        }
+
                         d3_select(this)
                             .attr('r', r)
-                            .attr('visibility', ((i && klass === 'fill') ? 'hidden' : null));
+                            .attr('visibility', (i && klass === 'fill') ? 'hidden' : null);
                     });
             });
 
@@ -188,7 +194,7 @@ export function svgVertices(projection, context) {
         // enter/update
         targets.enter()
             .append('circle')
-            .attr('r', radiuses.shadow[3])  // just use the biggest one for now
+            .attr('r', function(d) { return _radii[d.id] || radiuses.shadow[3]; })
             .merge(targets)
             .attr('class', function(d) { return 'node vertex target ' + fillClass + d.id; })
             .attr('transform', svgPointTransform(projection));
@@ -259,12 +265,13 @@ export function svgVertices(projection, context) {
         var mode = context.mode();
         var isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
 
-        // Collect important vertices from the `entities` list..
-        // (during a paritial redraw, it will not contain everything)
         if (fullRedraw) {
             _currPersistent = {};
+            _radii = {};
         }
 
+        // Collect important vertices from the `entities` list..
+        // (during a paritial redraw, it will not contain everything)
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
             var geometry = entity.geometry(graph);
@@ -282,7 +289,7 @@ export function svgVertices(projection, context) {
                     keep = true;
                 }
                 // partial redraw in select mode - probably because the user double clicked a way.
-                if (!fullRedraw && mode.id === 'select') {
+                if (!fullRedraw && mode && mode.id === 'select') {
                     _currSelected[entity.id] = entity;
                 }
             }
