@@ -268,15 +268,27 @@ export function svgVertices(projection, context) {
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
             var geometry = entity.geometry(graph);
+            var keep = false;
 
+            // a point that looks like a vertex..
             if ((geometry === 'point') && renderAsVertex(entity, graph, wireframe, zoom)) {
                 _currPersistent[entity.id] = entity;
+                keep = true;
 
-            } else if ((geometry === 'vertex') &&
-                (entity.hasInterestingTags() || entity.isEndpoint(graph) || entity.isConnected(graph)) ) {
-                _currPersistent[entity.id] = entity;
+            // a vertex of some importance..
+            } else if (geometry === 'vertex') {
+                if (entity.hasInterestingTags() || entity.isEndpoint(graph) || entity.isConnected(graph)) {
+                    _currPersistent[entity.id] = entity;
+                    keep = true;
+                }
+                // partial redraw in select mode - probably because the user double clicked a way.
+                if (!fullRedraw && mode.id === 'select') {
+                    _currSelected[entity.id] = entity;
+                }
+            }
 
-            } else if (!fullRedraw) {
+            // whatever this is, it's not a persistent vertex..
+            if (!keep && !fullRedraw) {
                 delete _currPersistent[entity.id];
             }
         }

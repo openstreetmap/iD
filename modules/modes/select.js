@@ -245,13 +245,13 @@ export function modeSelect(context, selectedIDs) {
 
 
         function dblclick() {
-            var target = d3_select(d3_event.target),
-                datum = target.datum();
+            var target = d3_select(d3_event.target);
+            var datum = target.datum();
 
-            if (datum instanceof osmWay && !target.classed('fill')) {
-                var choice = geoChooseEdge(context.childNodes(datum), context.mouse(), context.projection),
-                    prev = datum.nodes[choice.index - 1],
-                    next = datum.nodes[choice.index];
+            if (datum instanceof osmWay && target.classed('target')) {
+                var choice = geoChooseEdge(context.childNodes(datum), context.mouse(), context.projection);
+                var prev = datum.nodes[choice.index - 1];
+                var next = datum.nodes[choice.index];
 
                 context.perform(
                     actionAddMidpoint({loc: choice.loc, edge: [prev, next]}, osmNode()),
