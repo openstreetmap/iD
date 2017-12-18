@@ -192,5 +192,12 @@ export function modeMove(context, entityIDs, baseGraph) {
     };
 
 
+    mode.selectedIDs = function() {
+        if (!arguments.length) return entityIDs;
+        // no assign
+        return mode;
+    };
+
+
     return mode;
 }

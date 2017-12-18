@@ -155,5 +155,12 @@ export function modeRotate(context, entityIDs) {
     };
 
 
+    mode.selectedIDs = function() {
+        if (!arguments.length) return entityIDs;
+        // no assign
+        return mode;
+    };
+
+
     return mode;
 }
