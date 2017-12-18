@@ -32,6 +32,14 @@ export function svgVertices(projection, context) {
         return b.loc[1] - a.loc[1];
     }
 
+    // Avoid exit/enter if we're just moving stuff around.
+    // The node will get a new version but we only need to run the update selection.
+    function fastEntityKey(d) {
+        var mode = context.mode();
+        var isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
+        return isMoving ? d.id : osmEntity.key(d);
+    }
+
 
     function draw(selection, graph, vertices, sets, filter) {
         sets = sets || { selected: {}, important: {}, hovered: {} };
@@ -89,7 +97,7 @@ export function svgVertices(projection, context) {
 
         var groups = selection.selectAll('g.vertex')
             .filter(filter)
-            .data(vertices, osmEntity.key);
+            .data(vertices, fastEntityKey);
 
         // exit
         groups.exit()
@@ -252,7 +260,7 @@ export function svgVertices(projection, context) {
         var wireframe = context.surface().classed('fill-wireframe');
         var zoom = ktoz(projection.scale());
         var mode = context.mode();
-        var isDrawing = mode && /^(add|draw|drag)/.test(mode.id);
+        var isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
 
         // Collect important vertices from the `entities` list..
         // (during a paritial redraw, it will not contain everything)
@@ -283,7 +291,7 @@ export function svgVertices(projection, context) {
             hovered: _currHover           // hovered + siblings of hovered (render only in draw modes)
         };
 
-        var all = _assign({}, (isDrawing ? _currHover : {}), _currSelected, _currPersistent);
+        var all = _assign({}, (isMoving ? _currHover : {}), _currSelected, _currPersistent);
 
         // Draw the vertices..
         // The filter function controls the scope of what objects d3 will touch (exit/enter/update)

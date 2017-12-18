@@ -21,6 +21,15 @@ export function svgPoints(projection, context) {
     }
 
 
+    // Avoid exit/enter if we're just moving stuff around.
+    // The node will get a new version but we only need to run the update selection.
+    function fastEntityKey(d) {
+        var mode = context.mode();
+        var isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
+        return isMoving ? d.id : osmEntity.key(d);
+    }
+
+
     function drawTargets(selection, graph, entities, filter) {
         var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
         var targets = selection.selectAll('.point.target')
@@ -64,7 +73,7 @@ export function svgPoints(projection, context) {
 
         var groups = layer.selectAll('g.point')
             .filter(filter)
-            .data(points, osmEntity.key);
+            .data(points, fastEntityKey);
 
         groups.exit()
             .remove();
