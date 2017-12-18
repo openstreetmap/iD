@@ -2,91 +2,127 @@ import _every from 'lodash-es/every';
 import _some from 'lodash-es/some';
 
 
-export function geoRoundCoords(c) {
-    return [Math.floor(c[0]), Math.floor(c[1])];
+// constants
+var TAU = 2 * Math.PI;
+var EQUATORIAL_RADIUS = 6356752.314245179;
+var POLAR_RADIUS = 6378137.0;
+
+
+// vector addition
+export function geoVecAdd(a, b) {
+    return [ a[0] + b[0], a[1] + b[1] ];
 }
 
+// vector subtraction
+export function geoVecSubtract(a, b) {
+    return [ a[0] - b[0], a[1] - b[1] ];
+}
 
+// vector multiplication
+export function geoVecScale(a, b) {
+    return [ a[0] * b, a[1] * b ];
+}
+
+// vector rounding (was: geoRoundCoordinates)
+export function geoVecFloor(a) {
+    return [ Math.floor(a[0]), Math.floor(a[1]) ];
+}
+
+// linear interpolation
 export function geoInterp(p1, p2, t) {
-    return [p1[0] + (p2[0] - p1[0]) * t,
-            p1[1] + (p2[1] - p1[1]) * t];
+    return [
+        p1[0] + (p2[0] - p1[0]) * t,
+        p1[1] + (p2[1] - p1[1]) * t
+    ];
 }
 
 
-// 2D cross product of OA and OB vectors, i.e. z-component of their 3D cross product.
+// dot product
+export function geoDot(a, b, origin) {
+    origin = origin || [0, 0];
+    return (a[0] - origin[0]) * (b[0] - origin[0]) +
+        (a[1] - origin[1]) * (b[1] - origin[1]);
+}
+
+
+// 2D cross product of OA and OB vectors, returns magnitude of Z vector
 // Returns a positive value, if OAB makes a counter-clockwise turn,
 // negative for clockwise turn, and zero if the points are collinear.
-export function geoCross(o, a, b) {
-    return (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
+export function geoCross(a, b, origin) {
+    origin = origin || [0, 0];
+    return (a[0] - origin[0]) * (b[1] - origin[1]) -
+        (a[1] - origin[1]) * (b[0] - origin[0]);
 }
 
 
 // http://jsperf.com/id-dist-optimization
 export function geoEuclideanDistance(a, b) {
-    var x = a[0] - b[0], y = a[1] - b[1];
+    var x = a[0] - b[0];
+    var y = a[1] - b[1];
     return Math.sqrt((x * x) + (y * y));
 }
 
 
-// using WGS84 polar radius (6356752.314245179 m)
-// const = 2 * PI * r / 360
 export function geoLatToMeters(dLat) {
-    return dLat * 110946.257617;
+    return dLat * (TAU * POLAR_RADIUS / 360);
 }
 
 
-// using WGS84 equatorial radius (6378137.0 m)
-// const = 2 * PI * r / 360
 export function geoLonToMeters(dLon, atLat) {
     return Math.abs(atLat) >= 90 ? 0 :
-        dLon * 111319.490793 * Math.abs(Math.cos(atLat * (Math.PI/180)));
+        dLon * (TAU * EQUATORIAL_RADIUS / 360) * Math.abs(Math.cos(atLat * (Math.PI / 180)));
 }
 
 
-// using WGS84 polar radius (6356752.314245179 m)
-// const = 2 * PI * r / 360
 export function geoMetersToLat(m) {
-    return m / 110946.257617;
+    return m / (TAU * POLAR_RADIUS / 360);
 }
 
 
-// using WGS84 equatorial radius (6378137.0 m)
-// const = 2 * PI * r / 360
 export function geoMetersToLon(m, atLat) {
     return Math.abs(atLat) >= 90 ? 0 :
-        m / 111319.490793 / Math.abs(Math.cos(atLat * (Math.PI/180)));
+        m / (TAU * EQUATORIAL_RADIUS / 360) / Math.abs(Math.cos(atLat * (Math.PI / 180)));
 }
 
 
-export function geoOffsetToMeters(offset) {
-    var equatRadius = 6356752.314245179,
-        polarRadius = 6378137.0,
-        tileSize = 256;
-
+export function geoOffsetToMeters(offset, tileSize) {
+    tileSize = tileSize || 256;
     return [
-        offset[0] * 2 * Math.PI * equatRadius / tileSize,
-        -offset[1] * 2 * Math.PI * polarRadius / tileSize
+        offset[0] * TAU * EQUATORIAL_RADIUS / tileSize,
+        -offset[1] * TAU * POLAR_RADIUS / tileSize
     ];
 }
 
 
-export function geoMetersToOffset(meters) {
-    var equatRadius = 6356752.314245179,
-        polarRadius = 6378137.0,
-        tileSize = 256;
-
+export function geoMetersToOffset(meters, tileSize) {
+    tileSize = tileSize || 256;
     return [
-        meters[0] * tileSize / (2 * Math.PI * equatRadius),
-        -meters[1] * tileSize / (2 * Math.PI * polarRadius)
+        meters[0] * tileSize / (TAU * EQUATORIAL_RADIUS),
+        -meters[1] * tileSize / (TAU * POLAR_RADIUS)
     ];
 }
 
 
 // Equirectangular approximation of spherical distances on Earth
 export function geoSphericalDistance(a, b) {
-    var x = geoLonToMeters(a[0] - b[0], (a[1] + b[1]) / 2),
-        y = geoLatToMeters(a[1] - b[1]);
+    var x = geoLonToMeters(a[0] - b[0], (a[1] + b[1]) / 2);
+    var y = geoLatToMeters(a[1] - b[1]);
     return Math.sqrt((x * x) + (y * y));
+}
+
+
+// zoom to scale
+export function geoZoomToScale(z, tileSize) {
+    tileSize = tileSize || 256;
+    return tileSize * Math.pow(2, z) / TAU;
+}
+
+
+// scale to zoom
+export function geoScaleToZoom(k, tileSize) {
+    tileSize = tileSize || 256;
+    var log2ts = Math.log(tileSize) * Math.LOG2E;
+    return Math.log(k * TAU) / Math.LN2 - log2ts;
 }
 
 
@@ -122,23 +158,18 @@ export function geoRotate(points, angle, around) {
 // the closest vertex on that edge. Returns an object with the `index` of the
 // chosen edge, the chosen `loc` on that edge, and the `distance` to to it.
 export function geoChooseEdge(nodes, point, projection) {
-    var dist = geoEuclideanDistance,
-        points = nodes.map(function(n) { return projection(n.loc); }),
-        min = Infinity,
-        idx, loc;
-
-    function dot(p, q) {
-        return p[0] * q[0] + p[1] * q[1];
-    }
+    var dist = geoEuclideanDistance;
+    var points = nodes.map(function(n) { return projection(n.loc); });
+    var min = Infinity;
+    var idx;
+    var loc;
 
     for (var i = 0; i < points.length - 1; i++) {
-        var o = points[i],
-            s = [points[i + 1][0] - o[0],
-                 points[i + 1][1] - o[1]],
-            v = [point[0] - o[0],
-                 point[1] - o[1]],
-            proj = dot(v, s) / dot(s, s),
-            p;
+        var o = points[i];
+        var s = geoVecSubtract(points[i + 1], o);
+        var v = geoVecSubtract(point, o);
+        var proj = geoDot(v, s) / geoDot(s, s);
+        var p;
 
         if (proj < 0) {
             p = o;
@@ -169,25 +200,18 @@ export function geoChooseEdge(nodes, point, projection) {
 // This uses the vector cross product approach described below:
 //  http://stackoverflow.com/a/565282/786339
 export function geoLineIntersection(a, b) {
-    function subtractPoints(point1, point2) {
-        return [point1[0] - point2[0], point1[1] - point2[1]];
-    }
-    function crossProduct(point1, point2) {
-        return point1[0] * point2[1] - point1[1] * point2[0];
-    }
-
-    var p = [a[0][0], a[0][1]],
-        p2 = [a[1][0], a[1][1]],
-        q = [b[0][0], b[0][1]],
-        q2 = [b[1][0], b[1][1]],
-        r = subtractPoints(p2, p),
-        s = subtractPoints(q2, q),
-        uNumerator = crossProduct(subtractPoints(q, p), r),
-        denominator = crossProduct(r, s);
+    var p = [a[0][0], a[0][1]];
+    var p2 = [a[1][0], a[1][1]];
+    var q = [b[0][0], b[0][1]];
+    var q2 = [b[1][0], b[1][1]];
+    var r = geoVecSubtract(p2, p);
+    var s = geoVecSubtract(q2, q);
+    var uNumerator = geoCross(geoVecSubtract(q, p), r);
+    var denominator = geoCross(r, s);
 
     if (uNumerator && denominator) {
-        var u = uNumerator / denominator,
-            t = crossProduct(subtractPoints(q, p), s) / denominator;
+        var u = uNumerator / denominator;
+        var t = geoCross(geoVecSubtract(q, p), s) / denominator;
 
         if ((t >= 0) && (t <= 1) && (u >= 0) && (u <= 1)) {
             return geoInterp(p, p2, t);
@@ -202,10 +226,12 @@ export function geoPathIntersections(path1, path2) {
     var intersections = [];
     for (var i = 0; i < path1.length - 1; i++) {
         for (var j = 0; j < path2.length - 1; j++) {
-            var a = [ path1[i], path1[i+1] ],
-                b = [ path2[j], path2[j+1] ],
-                hit = geoLineIntersection(a, b);
-            if (hit) intersections.push(hit);
+            var a = [ path1[i], path1[i+1] ];
+            var b = [ path2[j], path2[j+1] ];
+            var hit = geoLineIntersection(a, b);
+            if (hit) {
+                intersections.push(hit);
+            }
         }
     }
     return intersections;
@@ -222,9 +248,9 @@ export function geoPathIntersections(path1, path2) {
 // http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
 //
 export function geoPointInPolygon(point, polygon) {
-    var x = point[0],
-        y = point[1],
-        inside = false;
+    var x = point[0];
+    var y = point[1];
+    var inside = false;
 
     for (var i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
         var xi = polygon[i][0], yi = polygon[i][1];
@@ -250,8 +276,8 @@ export function geoPolygonIntersectsPolygon(outer, inner, checkSegments) {
     function testSegments(outer, inner) {
         for (var i = 0; i < outer.length - 1; i++) {
             for (var j = 0; j < inner.length - 1; j++) {
-                var a = [ outer[i], outer[i+1] ],
-                    b = [ inner[j], inner[j+1] ];
+                var a = [ outer[i], outer[i +1 ] ];
+                var b = [ inner[j], inner[j + 1] ];
                 if (geoLineIntersection(a, b)) return true;
             }
         }

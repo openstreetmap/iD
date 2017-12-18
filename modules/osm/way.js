@@ -133,15 +133,16 @@ _extend(osmWay.prototype, {
     isConvex: function(resolver) {
         if (!this.isClosed() || this.isDegenerate()) return null;
 
-        var nodes = _uniq(resolver.childNodes(this)),
-            coords = _map(nodes, 'loc'),
-            curr = 0, prev = 0;
+        var nodes = _uniq(resolver.childNodes(this));
+        var coords = _map(nodes, 'loc');
+        var curr = 0;
+        var prev = 0;
 
         for (var i = 0; i < coords.length; i++) {
-            var o = coords[(i+1) % coords.length],
-                a = coords[i],
-                b = coords[(i+2) % coords.length],
-                res = geoCross(o, a, b);
+            var o = coords[(i+1) % coords.length];
+            var a = coords[i];
+            var b = coords[(i+2) % coords.length];
+            var res = geoCross(a, b, o);
 
             curr = (res > 0) ? 1 : (res < 0) ? -1 : 0;
             if (curr === 0) {

@@ -13,7 +13,8 @@ import {
     geoEuclideanDistance,
     geoInterp,
     geoPolygonIntersectsPolygon,
-    geoPathLength
+    geoPathLength,
+    geoScaleToZoom
 } from '../geo';
 
 import { osmEntity } from '../osm';
@@ -26,9 +27,6 @@ import {
     utilCallWhenIdle
 } from '../util';
 
-
-var TAU = 2 * Math.PI;
-function ktoz(k) { return Math.log(k * TAU) / Math.LN2 - 8; }
 
 
 export function svgLabels(projection, context) {
@@ -261,7 +259,7 @@ export function svgLabels(projection, context) {
 
     function drawLabels(selection, graph, entities, filter, dimensions, fullRedraw) {
         var wireframe = context.surface().classed('fill-wireframe');
-        var zoom = ktoz(projection.scale());
+        var zoom = geoScaleToZoom(projection.scale());
 
         var labelable = [];
         var renderNodeAs = {};

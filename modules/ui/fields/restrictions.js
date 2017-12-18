@@ -26,7 +26,8 @@ import {
 
 import {
     geoExtent,
-    geoRawMercator
+    geoRawMercator,
+    geoZoomToScale
 } from '../../geo';
 
 import {
@@ -84,7 +85,7 @@ export function uiFieldRestrictions(field, context) {
         var z = 24;
 
         projection
-            .scale(256 * Math.pow(2, z) / (2 * Math.PI));
+            .scale(geoZoomToScale(z));
 
         var s = projection(vertex.loc);
 

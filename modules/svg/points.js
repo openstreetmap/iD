@@ -1,10 +1,7 @@
 import { dataFeatureIcons } from '../../data';
+import { geoScaleToZoom } from '../geo';
 import { osmEntity } from '../osm';
 import { svgPointTransform, svgTagClasses } from './index';
-
-
-var TAU = 2 * Math.PI;
-function ktoz(k) { return Math.log(k * TAU) / Math.LN2 - 8; }
 
 
 export function svgPoints(projection, context) {
@@ -55,7 +52,7 @@ export function svgPoints(projection, context) {
 
     function drawPoints(selection, graph, entities, filter) {
         var wireframe = context.surface().classed('fill-wireframe');
-        var zoom = ktoz(projection.scale());
+        var zoom = geoScaleToZoom(projection.scale());
 
         // points with a direction will render as vertices at higher zooms
         function renderAsPoint(entity) {

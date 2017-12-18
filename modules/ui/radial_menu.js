@@ -3,7 +3,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { geoRoundCoords } from '../geo';
+import { geoVecFloor } from '../geo';
 import { uiTooltipHtml } from './tooltipHtml';
 
 
@@ -58,7 +58,7 @@ export function uiRadialMenu(context, operations) {
             .attr('class', function(d) { return 'radial-menu-item radial-menu-item-' + d.id; })
             .classed('disabled', function(d) { return d.disabled(); })
             .attr('transform', function(d, i) {
-                return 'translate(' + geoRoundCoords([
+                return 'translate(' + geoVecFloor([
                         r * Math.sin(a0 + i * a),
                         r * Math.cos(a0 + i * a)]).join(',') + ')';
             });

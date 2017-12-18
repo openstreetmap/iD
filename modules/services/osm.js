@@ -500,8 +500,8 @@ export default {
             }
 
             // update blacklists
-            var elements = xml.getElementsByTagName('blacklist'),
-                regexes = [];
+            var elements = xml.getElementsByTagName('blacklist');
+            var regexes = [];
             for (var i = 0; i < elements.length; i++) {
                 var regex = elements[i].getAttribute('regex');  // needs unencode?
                 if (regex) {
@@ -516,8 +516,8 @@ export default {
             if (rateLimitError) {
                 callback(rateLimitError, 'rateLimited');
             } else {
-                var apiStatus = xml.getElementsByTagName('status'),
-                    val = apiStatus[0].getAttribute('api');
+                var apiStatus = xml.getElementsByTagName('status');
+                var val = apiStatus[0].getAttribute('api');
 
                 callback(undefined, val);
             }
@@ -544,14 +544,14 @@ export default {
     loadTiles: function(projection, dimensions, callback) {
         if (off) return;
 
-        var that = this,
-            s = projection.scale() * 2 * Math.PI,
-            z = Math.max(Math.log(s) / Math.log(2) - 8, 0),
-            ts = 256 * Math.pow(2, z - tileZoom),
-            origin = [
-                s / 2 - projection.translate()[0],
-                s / 2 - projection.translate()[1]
-            ];
+        var that = this;
+        var s = projection.scale() * 2 * Math.PI;
+        var z = Math.max(Math.log(s) / Math.log(2) - 8, 0);
+        var ts = 256 * Math.pow(2, z - tileZoom);
+        var origin = [
+            s / 2 - projection.translate()[0],
+            s / 2 - projection.translate()[1]
+        ];
 
         var tiles = d3_geoTile()
             .scaleExtent([tileZoom, tileZoom])
@@ -559,8 +559,8 @@ export default {
             .size(dimensions)
             .translate(projection.translate())()
             .map(function(tile) {
-                var x = tile[0] * ts - origin[0],
-                    y = tile[1] * ts - origin[1];
+                var x = tile[0] * ts - origin[0];
+                var y = tile[1] * ts - origin[1];
 
                 return {
                     id: tile.toString(),

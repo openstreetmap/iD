@@ -1,11 +1,8 @@
 describe('iD.svgPoints', function () {
-    var TAU = 2 * Math.PI;
-    function ztok(z) { return 256 * Math.pow(2, z) / TAU; }
-
     var context, surface;
     var projection = d3.geoProjection(function(x, y) { return [x, -y]; })
         .translate([0, 0])
-        .scale(ztok(17))
+        .scale(iD.geoZoomToScale(17))
         .clipExtent([[0, 0], [Infinity, Infinity]]);
 
     beforeEach(function () {

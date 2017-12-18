@@ -1,60 +1,96 @@
 describe('iD.geo', function() {
-    describe('geoRoundCoords', function() {
-        it('rounds coordinates', function() {
-            expect(iD.geoRoundCoords([0.1, 1])).to.eql([0, 1]);
-            expect(iD.geoRoundCoords([0, 1])).to.eql([0, 1]);
-            expect(iD.geoRoundCoords([0, 1.1])).to.eql([0, 1]);
+
+    describe('geoVecAdd', function() {
+        it('adds vectors', function() {
+            expect(iD.geoVecAdd([1, 2], [3, 4])).to.eql([4, 6]);
+            expect(iD.geoVecAdd([1, 2], [0, 0])).to.eql([1, 2]);
+            expect(iD.geoVecAdd([1, 2], [-3, -4])).to.eql([-2, -2]);
+        });
+    });
+
+    describe('geoVecSubtract', function() {
+        it('subtracts vectors', function() {
+            expect(iD.geoVecSubtract([1, 2], [3, 4])).to.eql([-2, -2]);
+            expect(iD.geoVecSubtract([1, 2], [0, 0])).to.eql([1, 2]);
+            expect(iD.geoVecSubtract([1, 2], [-3, -4])).to.eql([4, 6]);
+        });
+    });
+
+    describe('geoVecScale', function() {
+        it('multiplies vectors', function() {
+            expect(iD.geoVecScale([1, 2], 0)).to.eql([0, 0]);
+            expect(iD.geoVecScale([1, 2], 1)).to.eql([1, 2]);
+            expect(iD.geoVecScale([1, 2], 2)).to.eql([2, 4]);
+            expect(iD.geoVecScale([1, 2], 0.5)).to.eql([0.5, 1]);
+        });
+    });
+
+    describe('geoVecFloor (was: geoRoundCoordinates)', function() {
+        it('rounds vectors', function() {
+            expect(iD.geoVecFloor([0.1, 1])).to.eql([0, 1]);
+            expect(iD.geoVecFloor([0, 1])).to.eql([0, 1]);
+            expect(iD.geoVecFloor([0, 1.1])).to.eql([0, 1]);
         });
     });
 
     describe('geoInterp', function() {
         it('interpolates halfway', function() {
-            var a = [0, 0],
-                b = [10, 10];
+            var a = [0, 0];
+            var b = [10, 10];
             expect(iD.geoInterp(a, b, 0.5)).to.eql([5, 5]);
         });
         it('interpolates to one side', function() {
-            var a = [0, 0],
-                b = [10, 10];
+            var a = [0, 0];
+            var b = [10, 10];
             expect(iD.geoInterp(a, b, 0)).to.eql([0, 0]);
         });
     });
 
+    describe('geoDot', function() {
+        it('dot product of right angle is zero', function() {
+            var a = [1, 0];
+            var b = [0, 1];
+            expect(iD.geoDot(a, b)).to.eql(0);
+        });
+        it('dot product of same vector multiplies', function() {
+            var a = [2, 0];
+            var b = [2, 0];
+            expect(iD.geoDot(a, b)).to.eql(4);
+        });
+    });
+
     describe('geoCross', function() {
-        it('cross product of right hand turn is positive', function() {
-            var o = [0, 0],
-                a = [2, 0],
-                b = [0, 2];
-            expect(iD.geoCross(o, a, b)).to.eql(4);
+        it('2D cross product of right hand turn is positive', function() {
+            var a = [2, 0];
+            var b = [0, 2];
+            expect(iD.geoCross(a, b)).to.eql(4);
         });
-        it('cross product of left hand turn is negative', function() {
-            var o = [0, 0],
-                a = [2, 0],
-                b = [0, -2];
-            expect(iD.geoCross(o, a, b)).to.eql(-4);
+        it('2D cross product of left hand turn is negative', function() {
+            var a = [2, 0];
+            var b = [0, -2];
+            expect(iD.geoCross(a, b)).to.eql(-4);
         });
-        it('cross product of colinear points is zero', function() {
-            var o = [0, 0],
-                a = [-2, 0],
-                b = [2, 0];
-            expect(iD.geoCross(o, a, b)).to.equal(0);
+        it('2D cross product of colinear points is zero', function() {
+            var a = [-2, 0];
+            var b = [2, 0];
+            expect(iD.geoCross(a, b)).to.equal(0);
         });
     });
 
     describe('geoEuclideanDistance', function() {
         it('distance between two same points is zero', function() {
-            var a = [0, 0],
-                b = [0, 0];
+            var a = [0, 0];
+            var b = [0, 0];
             expect(iD.geoEuclideanDistance(a, b)).to.eql(0);
         });
         it('a straight 10 unit line is 10', function() {
-            var a = [0, 0],
-                b = [10, 0];
+            var a = [0, 0];
+            var b = [10, 0];
             expect(iD.geoEuclideanDistance(a, b)).to.eql(10);
         });
         it('a pythagorean triangle is right', function() {
-            var a = [0, 0],
-                b = [4, 3];
+            var a = [0, 0];
+            var b = [4, 3];
             expect(iD.geoEuclideanDistance(a, b)).to.eql(5);
         });
     });
@@ -64,10 +100,10 @@ describe('iD.geo', function() {
             expect(iD.geoLatToMeters(0)).to.eql(0);
         });
         it('1 degree latitude is approx 111 km', function() {
-            expect(iD.geoLatToMeters(1)).to.be.within(110E3, 112E3);
+            expect(iD.geoLatToMeters(1)).to.be.closeTo(111319, 10);
         });
         it('-1 degree latitude is approx -111 km', function() {
-            expect(iD.geoLatToMeters(-1)).to.be.within(-112E3, -110E3);
+            expect(iD.geoLatToMeters(-1)).to.be.closeTo(-111319, 10);
         });
     });
 
@@ -76,21 +112,21 @@ describe('iD.geo', function() {
             expect(iD.geoLonToMeters(0, 0)).to.eql(0);
         });
         it('distance of 1 degree longitude varies with latitude', function() {
-            expect(iD.geoLonToMeters(1,  0)).to.be.within(110E3, 112E3);
-            expect(iD.geoLonToMeters(1, 15)).to.be.within(107E3, 108E3);
-            expect(iD.geoLonToMeters(1, 30)).to.be.within(96E3, 97E3);
-            expect(iD.geoLonToMeters(1, 45)).to.be.within(78E3, 79E3);
-            expect(iD.geoLonToMeters(1, 60)).to.be.within(55E3, 56E3);
-            expect(iD.geoLonToMeters(1, 75)).to.be.within(28E3, 29E3);
+            expect(iD.geoLonToMeters(1,  0)).to.be.closeTo(110946, 10);
+            expect(iD.geoLonToMeters(1, 15)).to.be.closeTo(107165, 10);
+            expect(iD.geoLonToMeters(1, 30)).to.be.closeTo(96082, 10);
+            expect(iD.geoLonToMeters(1, 45)).to.be.closeTo(78450, 10);
+            expect(iD.geoLonToMeters(1, 60)).to.be.closeTo(55473, 10);
+            expect(iD.geoLonToMeters(1, 75)).to.be.closeTo(28715, 10);
             expect(iD.geoLonToMeters(1, 90)).to.eql(0);
         });
         it('distance of -1 degree longitude varies with latitude', function() {
-            expect(iD.geoLonToMeters(-1,   0)).to.be.within(-112E3, -110E3);
-            expect(iD.geoLonToMeters(-1, -15)).to.be.within(-108E3, -107E3);
-            expect(iD.geoLonToMeters(-1, -30)).to.be.within(-97E3, -96E3);
-            expect(iD.geoLonToMeters(-1, -45)).to.be.within(-79E3, -78E3);
-            expect(iD.geoLonToMeters(-1, -60)).to.be.within(-56E3, -55E3);
-            expect(iD.geoLonToMeters(-1, -75)).to.be.within(-29E3, -28E3);
+            expect(iD.geoLonToMeters(-1,  -0)).to.be.closeTo(-110946, 10);
+            expect(iD.geoLonToMeters(-1, -15)).to.be.closeTo(-107165, 10);
+            expect(iD.geoLonToMeters(-1, -30)).to.be.closeTo(-96082, 10);
+            expect(iD.geoLonToMeters(-1, -45)).to.be.closeTo(-78450, 10);
+            expect(iD.geoLonToMeters(-1, -60)).to.be.closeTo(-55473, 10);
+            expect(iD.geoLonToMeters(-1, -75)).to.be.closeTo(-28715, 10);
             expect(iD.geoLonToMeters(-1, -90)).to.eql(0);
         });
     });
@@ -100,10 +136,10 @@ describe('iD.geo', function() {
             expect(iD.geoMetersToLat(0)).to.eql(0);
         });
         it('111 km is approx 1 degree latitude', function() {
-            expect(iD.geoMetersToLat(111E3)).to.be.within(0.995, 1.005);
+            expect(iD.geoMetersToLat(111319)).to.be.closeTo(1, 0.0001);
         });
         it('-111 km is approx -1 degree latitude', function() {
-            expect(iD.geoMetersToLat(-111E3)).to.be.within(-1.005, -0.995);
+            expect(iD.geoMetersToLat(-111319)).to.be.closeTo(-1, 0.0001);
         });
     });
 
@@ -112,22 +148,22 @@ describe('iD.geo', function() {
             expect(iD.geoMetersToLon(0, 0)).to.eql(0);
         });
         it('distance of 1 degree longitude varies with latitude', function() {
-            expect(iD.geoMetersToLon(111320,  0)).to.be.within(0.995, 1.005);
-            expect(iD.geoMetersToLon(107551, 15)).to.be.within(0.995, 1.005);
-            expect(iD.geoMetersToLon(96486,  30)).to.be.within(0.995, 1.005);
-            expect(iD.geoMetersToLon(78847,  45)).to.be.within(0.995, 1.005);
-            expect(iD.geoMetersToLon(55800,  60)).to.be.within(0.995, 1.005);
-            expect(iD.geoMetersToLon(28902,  75)).to.be.within(0.995, 1.005);
+            expect(iD.geoMetersToLon(110946,  0)).to.be.closeTo(1, 1e-4);
+            expect(iD.geoMetersToLon(107165, 15)).to.be.closeTo(1, 1e-4);
+            expect(iD.geoMetersToLon(96082,  30)).to.be.closeTo(1, 1e-4);
+            expect(iD.geoMetersToLon(78450,  45)).to.be.closeTo(1, 1e-4);
+            expect(iD.geoMetersToLon(55473,  60)).to.be.closeTo(1, 1e-4);
+            expect(iD.geoMetersToLon(28715,  75)).to.be.closeTo(1, 1e-4);
             expect(iD.geoMetersToLon(1, 90)).to.eql(0);
         });
         it('distance of -1 degree longitude varies with latitude', function() {
-            expect(iD.geoMetersToLon(-111320,  0)).to.be.within(-1.005, -0.995);
-            expect(iD.geoMetersToLon(-107551, 15)).to.be.within(-1.005, -0.995);
-            expect(iD.geoMetersToLon(-96486,  30)).to.be.within(-1.005, -0.995);
-            expect(iD.geoMetersToLon(-78847,  45)).to.be.within(-1.005, -0.995);
-            expect(iD.geoMetersToLon(-55800,  60)).to.be.within(-1.005, -0.995);
-            expect(iD.geoMetersToLon(-28902,  75)).to.be.within(-1.005, -0.995);
-            expect(iD.geoMetersToLon(-1, 90)).to.eql(0);
+            expect(iD.geoMetersToLon(-110946,  -0)).to.be.closeTo(-1, 1e-4);
+            expect(iD.geoMetersToLon(-107165, -15)).to.be.closeTo(-1, 1e-4);
+            expect(iD.geoMetersToLon(-96082,  -30)).to.be.closeTo(-1, 1e-4);
+            expect(iD.geoMetersToLon(-78450,  -45)).to.be.closeTo(-1, 1e-4);
+            expect(iD.geoMetersToLon(-55473,  -60)).to.be.closeTo(-1, 1e-4);
+            expect(iD.geoMetersToLon(-28715,  -75)).to.be.closeTo(-1, 1e-4);
+            expect(iD.geoMetersToLon(-1, -90)).to.eql(0);
         });
     });
 
@@ -159,43 +195,61 @@ describe('iD.geo', function() {
 
     describe('geoSphericalDistance', function() {
         it('distance between two same points is zero', function() {
-            var a = [0, 0],
-                b = [0, 0];
+            var a = [0, 0];
+            var b = [0, 0];
             expect(iD.geoSphericalDistance(a, b)).to.eql(0);
         });
         it('a straight 1 degree line at the equator is aproximately 111 km', function() {
-            var a = [0, 0],
-                b = [1, 0];
-            expect(iD.geoSphericalDistance(a, b)).to.be.within(110E3, 112E3);
+            var a = [0, 0];
+            var b = [1, 0];
+            expect(iD.geoSphericalDistance(a, b)).to.be.closeTo(110946, 10);
         });
         it('a pythagorean triangle is (nearly) right', function() {
-            var a = [0, 0],
-                b = [4, 3];
-            expect(iD.geoSphericalDistance(a, b)).to.be.within(555E3, 556E3);
+            var a = [0, 0];
+            var b = [4, 3];
+            expect(iD.geoSphericalDistance(a, b)).to.be.closeTo(555282, 10);
         });
         it('east-west distances at high latitude are shorter', function() {
-            var a = [0, 60],
-                b = [1, 60];
-            expect(iD.geoSphericalDistance(a, b)).to.be.within(55E3, 56E3);
+            var a = [0, 60];
+            var b = [1, 60];
+            expect(iD.geoSphericalDistance(a, b)).to.be.closeTo(55473, 10);
         });
         it('north-south distances at high latitude are not shorter', function() {
-            var a = [0, 60],
-                b = [0, 61];
-            expect(iD.geoSphericalDistance(a, b)).to.be.within(110E3, 112E3);
+            var a = [0, 60];
+            var b = [0, 61];
+            expect(iD.geoSphericalDistance(a, b)).to.be.closeTo(111319, 10);
+        });
+    });
+
+    describe('geoZoomToScale', function() {
+        it('converts from zoom to projection scale (tileSize = 256)', function() {
+            expect(iD.geoZoomToScale(17)).to.be.closeTo(5340353.715440872, 1e-6);
+        });
+        it('converts from zoom to projection scale (tileSize = 512)', function() {
+            expect(iD.geoZoomToScale(17, 512)).to.be.closeTo(10680707.430881744, 1e-6);
+        });
+    });
+
+    describe('geoScaleToZoom', function() {
+        it('converts from projection scale to zoom (tileSize = 256)', function() {
+            expect(iD.geoScaleToZoom(5340353.715440872)).to.be.closeTo(17, 1e-6);
+        });
+        it('converts from projection scale to zoom (tileSize = 512)', function() {
+            expect(iD.geoScaleToZoom(10680707.430881744, 512)).to.be.closeTo(17, 1e-6);
         });
     });
 
     describe('geoEdgeEqual', function() {
         it('returns false for inequal edges', function() {
-            expect(iD.geoEdgeEqual(['a','b'], ['a','c'])).to.be.false;
+            expect(iD.geoEdgeEqual(['a', 'b'], ['a', 'c'])).to.be.false;
         });
 
         it('returns true for equal edges along same direction', function() {
-            expect(iD.geoEdgeEqual(['a','b'], ['a','b'])).to.be.true;
+            expect(iD.geoEdgeEqual(['a', 'b'], ['a', 'b'])).to.be.true;
         });
 
         it('returns true for equal edges along opposite direction', function() {
-            expect(iD.geoEdgeEqual(['a','b'], ['b','a'])).to.be.true;
+            expect(iD.geoEdgeEqual(['a', 'b'], ['b', 'a'])).to.be.true;
         });
     });
 
@@ -211,10 +265,10 @@ describe('iD.geo', function() {
 
     describe('geoRotate', function() {
         it('rotates points around [0, 0]', function() {
-            var points = [[5, 0], [5, 1]],
-                angle = Math.PI,
-                around = [0, 0],
-                result = iD.geoRotate(points, angle, around);
+            var points = [[5, 0], [5, 1]];
+            var angle = Math.PI;
+            var around = [0, 0];
+            var result = iD.geoRotate(points, angle, around);
             expect(result[0][0]).to.be.closeTo(-5, 1e-6);
             expect(result[0][1]).to.be.closeTo(0, 1e-6);
             expect(result[1][0]).to.be.closeTo(-5, 1e-6);
@@ -222,10 +276,10 @@ describe('iD.geo', function() {
         });
 
         it('rotates points around [3, 0]', function() {
-            var points = [[5, 0], [5, 1]],
-                angle = Math.PI,
-                around = [3, 0],
-                result = iD.geoRotate(points, angle, around);
+            var points = [[5, 0], [5, 1]];
+            var angle = Math.PI;
+            var around = [3, 0];
+            var result = iD.geoRotate(points, angle, around);
             expect(result[0][0]).to.be.closeTo(1, 1e-6);
             expect(result[0][1]).to.be.closeTo(0, 1e-6);
             expect(result[1][0]).to.be.closeTo(1, 1e-6);
@@ -246,7 +300,7 @@ describe('iD.geo', function() {
         });
 
         it('returns undefined properties for a degenerate way (single node)', function() {
-            expect(iD.geoChooseEdge([iD.Node({loc: [0, 0]})], [0, 0], projection)).to.eql({
+            expect(iD.geoChooseEdge([iD.osmNode({loc: [0, 0]})], [0, 0], projection)).to.eql({
                 index: undefined,
                 distance: Infinity,
                 loc: undefined
@@ -259,14 +313,10 @@ describe('iD.geo', function() {
             //     c
             //
             // * = [2, 0]
-            var a = [0, 0],
-                b = [5, 0],
-                c = [2, 1],
-                nodes = [
-                    iD.Node({loc: a}),
-                    iD.Node({loc: b})
-                ];
-
+            var a = [0, 0];
+            var b = [5, 0];
+            var c = [2, 1];
+            var nodes = [ iD.osmNode({loc: a}), iD.osmNode({loc: b}) ];
             var choice = iD.geoChooseEdge(nodes, c, projection);
             expect(choice.index).to.eql(1);
             expect(choice.distance).to.eql(1);
@@ -274,14 +324,10 @@ describe('iD.geo', function() {
         });
 
         it('returns the starting vertex when the orthogonal projection is < 0', function() {
-            var a = [0, 0],
-                b = [5, 0],
-                c = [-3, 4],
-                nodes = [
-                    iD.Node({loc: a}),
-                    iD.Node({loc: b})
-                ];
-
+            var a = [0, 0];
+            var b = [5, 0];
+            var c = [-3, 4];
+            var nodes = [ iD.osmNode({loc: a}), iD.osmNode({loc: b}) ];
             var choice = iD.geoChooseEdge(nodes, c, projection);
             expect(choice.index).to.eql(1);
             expect(choice.distance).to.eql(5);
@@ -289,14 +335,10 @@ describe('iD.geo', function() {
         });
 
         it('returns the ending vertex when the orthogonal projection is > 1', function() {
-            var a = [0, 0],
-                b = [5, 0],
-                c = [8, 4],
-                nodes = [
-                    iD.Node({loc: a}),
-                    iD.Node({loc: b})
-                ];
-
+            var a = [0, 0];
+            var b = [5, 0];
+            var c = [8, 4];
+            var nodes = [ iD.osmNode({loc: a}), iD.osmNode({loc: b}) ];
             var choice = iD.geoChooseEdge(nodes, c, projection);
             expect(choice.index).to.eql(1);
             expect(choice.distance).to.eql(5);
@@ -306,28 +348,28 @@ describe('iD.geo', function() {
 
     describe('geoLineIntersection', function() {
         it('returns null if lines are colinear with overlap', function() {
-            var a = [[0, 0], [10, 0]],
-                b = [[-5, 0], [5, 0]];
+            var a = [[0, 0], [10, 0]];
+            var b = [[-5, 0], [5, 0]];
             expect(iD.geoLineIntersection(a, b)).to.be.null;
         });
         it('returns null if lines are colinear but disjoint', function() {
-            var a = [[5, 0], [10, 0]],
-                b = [[-10, 0], [-5, 0]];
+            var a = [[5, 0], [10, 0]];
+            var b = [[-10, 0], [-5, 0]];
             expect(iD.geoLineIntersection(a, b)).to.be.null;
         });
         it('returns null if lines are parallel', function() {
-            var a = [[0, 0], [10, 0]],
-                b = [[0, 5], [10, 5]];
+            var a = [[0, 0], [10, 0]];
+            var b = [[0, 5], [10, 5]];
             expect(iD.geoLineIntersection(a, b)).to.be.null;
         });
         it('returns the intersection point between 2 lines', function() {
-            var a = [[0, 0], [10, 0]],
-                b = [[5, 10], [5, -10]];
+            var a = [[0, 0], [10, 0]];
+            var b = [[5, 10], [5, -10]];
             expect(iD.geoLineIntersection(a, b)).to.eql([5, 0]);
         });
         it('returns null if lines are not parallel but not intersecting', function() {
-            var a = [[0, 0], [10, 0]],
-                b = [[-5, 10], [-5, -10]];
+            var a = [[0, 0], [10, 0]];
+            var b = [[-5, 10], [-5, -10]];
             expect(iD.geoLineIntersection(a, b)).to.be.null;
         });
     });
@@ -339,12 +381,7 @@ describe('iD.geo', function() {
             expect(iD.geoPointInPolygon(point, poly)).to.be.true;
         });
         it('says a point outside of a polygon is outside', function() {
-            var poly = [
-                [0, 0],
-                [0, 1],
-                [1, 1],
-                [1, 0],
-                [0, 0]];
+            var poly = [[0, 0], [0, 1], [1, 1], [1, 0], [0, 0]];
             var point = [0.5, 1.5];
             expect(iD.geoPointInPolygon(point, poly)).to.be.false;
         });

@@ -4,12 +4,9 @@ import _values from 'lodash-es/values';
 import { select as d3_select } from 'd3-selection';
 
 import { dataFeatureIcons } from '../../data';
+import { geoScaleToZoom } from '../geo';
 import { osmEntity } from '../osm';
 import { svgPointTransform } from './index';
-
-
-var TAU = 2 * Math.PI;
-function ktoz(k) { return Math.log(k * TAU) / Math.LN2 - 8; }
 
 
 export function svgVertices(projection, context) {
@@ -46,7 +43,7 @@ export function svgVertices(projection, context) {
         var icons = {};
         var directions = {};
         var wireframe = context.surface().classed('fill-wireframe');
-        var zoom = ktoz(projection.scale());
+        var zoom = geoScaleToZoom(projection.scale());
         var z = (zoom < 17 ? 0 : zoom < 18 ? 1 : 2);
 
 
@@ -258,7 +255,7 @@ export function svgVertices(projection, context) {
 
     function drawVertices(selection, graph, entities, filter, extent, fullRedraw) {
         var wireframe = context.surface().classed('fill-wireframe');
-        var zoom = ktoz(projection.scale());
+        var zoom = geoScaleToZoom(projection.scale());
         var mode = context.mode();
         var isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
 
@@ -318,7 +315,7 @@ export function svgVertices(projection, context) {
     // partial redraw - only update the selected items..
     drawVertices.drawSelected = function(selection, graph, target, extent) {
         var wireframe = context.surface().classed('fill-wireframe');
-        var zoom = ktoz(projection.scale());
+        var zoom = geoScaleToZoom(projection.scale());
 
         _prevSelected = _currSelected || {};
         _currSelected = getSiblingAndChildVertices(context.selectedIDs(), graph, wireframe, zoom);
@@ -334,7 +331,7 @@ export function svgVertices(projection, context) {
         if (target === _currHoverTarget) return;  // continue only if something changed
 
         var wireframe = context.surface().classed('fill-wireframe');
-        var zoom = ktoz(projection.scale());
+        var zoom = geoScaleToZoom(projection.scale());
 
         _prevHover = _currHover || {};
         _currHoverTarget = target;
