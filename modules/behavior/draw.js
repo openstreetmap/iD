@@ -14,7 +14,8 @@ import { behaviorTail } from './tail';
 
 import {
     geoChooseEdge,
-    geoEuclideanDistance
+    geoEuclideanDistance,
+    geoViewportEdge
 } from '../geo';
 
 import { utilRebind } from '../util/rebind';
@@ -115,31 +116,28 @@ export function behaviorDraw(context) {
 
 
     function click() {
-        var d = datum();
+        var trySnap = geoViewportEdge(context.mouse, context.map().dimensions()) !== null;
 
-        // Try to snap..
-        // See also: `modes/drag_node.js doMove()`
-        if (d.type === 'way') {
-            var dims = context.map().dimensions();
-            var mouse = context.mouse();
-            var pad = 5;
-            var trySnap = mouse[0] > pad && mouse[0] < dims[0] - pad &&
-                    mouse[1] > pad && mouse[1] < dims[1] - pad;
+        if (trySnap) {
+            // If we're not at the edge of the viewport, try to snap..
+            // See also: `modes/drag_node.js doMove()`
+            var d = datum();
 
-            if (trySnap) {
+            // Snap to a node
+            if (d.type === 'node') {
+                dispatch.call('clickNode', this, d);
+                return;
+
+            // Snap to a way (not an area fill)
+            } else if (d.type === 'way' && !d3_select(d3_event.sourceEvent.target).classed('fill')) {
                 var choice = geoChooseEdge(context.childNodes(d), context.mouse(), context.projection);
                 var edge = [d.nodes[choice.index - 1], d.nodes[choice.index]];
                 dispatch.call('clickWay', this, choice.loc, edge);
-            } else {
-                dispatch.call('click', this, context.map().mouseCoordinates());
+                return;
             }
-
-        } else if (d.type === 'node') {
-            dispatch.call('clickNode', this, d);
-
-        } else {
-            dispatch.call('click', this, context.map().mouseCoordinates());
         }
+
+        dispatch.call('click', this, context.map().mouseCoordinates());
     }
 
 

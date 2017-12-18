@@ -23,7 +23,7 @@ import {
     modeSelect
 } from './index';
 
-import { geoChooseEdge } from '../geo';
+import { geoChooseEdge, geoViewportEdge } from '../geo';
 import { osmNode } from '../osm';
 import { utilEntitySelector } from '../util';
 import { uiFlash } from '../ui';
@@ -48,27 +48,6 @@ export function modeDragNode(context) {
 
     function vecSub(a, b) {
         return [a[0] - b[0], a[1] - b[1]];
-    }
-
-    function edge(point, size) {
-        var pad = [80, 20, 50, 20];   // top, right, bottom, left
-        var x = 0;
-        var y = 0;
-
-        if (point[0] > size[0] - pad[1])
-            x = -10;
-        if (point[0] < pad[3])
-            x = 10;
-        if (point[1] > size[1] - pad[2])
-            y = -10;
-        if (point[1] < pad[0])
-            y = 10;
-
-        if (x || y) {
-            return [x, y];
-        } else {
-            return null;
-        }
     }
 
 
@@ -197,7 +176,7 @@ export function modeDragNode(context) {
         _lastLoc = context.projection.invert(d3_event.point);
 
         doMove(entity);
-        var nudge = edge(d3_event.point, context.map().dimensions());
+        var nudge = geoViewportEdge(d3_event.point, context.map().dimensions());
         if (nudge) {
             startNudge(entity, nudge);
         } else {

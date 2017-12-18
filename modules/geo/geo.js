@@ -275,3 +275,27 @@ export function geoPathLength(path) {
     }
     return length;
 }
+
+
+// If the given point is at the edge of the padded viewport,
+// return a vector that will nudge the viewport in that direction
+export function geoViewportEdge(point, dimensions) {
+    var pad = [80, 20, 50, 20];   // top, right, bottom, left
+    var x = 0;
+    var y = 0;
+
+    if (point[0] > dimensions[0] - pad[1])
+        x = -10;
+    if (point[0] < pad[3])
+        x = 10;
+    if (point[1] > dimensions[1] - pad[2])
+        y = -10;
+    if (point[1] < pad[0])
+        y = 10;
+
+    if (x || y) {
+        return [x, y];
+    } else {
+        return null;
+    }
+}

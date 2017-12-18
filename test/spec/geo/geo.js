@@ -411,4 +411,36 @@ describe('iD.geo', function() {
             expect(iD.geoPathLength(path)).to.eql(0);
         });
     });
+
+    describe('geoViewportEdge', function() {
+        var dimensions = [1000, 1000];
+        it('returns null if the point is not at the edge', function() {
+            expect(iD.geoViewportEdge([500, 500], dimensions)).to.be.null;
+        });
+        it('nudges top edge', function() {
+            expect(iD.geoViewportEdge([500, 5], dimensions)).to.eql([0, 10]);
+        });
+        it('nudges top-right corner', function() {
+            expect(iD.geoViewportEdge([995, 5], dimensions)).to.eql([-10, 10]);
+        });
+        it('nudges right edge', function() {
+            expect(iD.geoViewportEdge([995, 500], dimensions)).to.eql([-10, 0]);
+        });
+        it('nudges bottom-right corner', function() {
+            expect(iD.geoViewportEdge([995, 995], dimensions)).to.eql([-10, -10]);
+        });
+        it('nudges bottom edge', function() {
+            expect(iD.geoViewportEdge([500, 995], dimensions)).to.eql([0, -10]);
+        });
+        it('nudges bottom-left corner', function() {
+            expect(iD.geoViewportEdge([5, 995], dimensions)).to.eql([10, -10]);
+        });
+        it('nudges left edge', function() {
+            expect(iD.geoViewportEdge([5, 500], dimensions)).to.eql([10, 0]);
+        });
+        it('nudges top-left corner', function() {
+            expect(iD.geoViewportEdge([5, 5], dimensions)).to.eql([10, 10]);
+        });
+    });
+
 });

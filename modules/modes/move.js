@@ -8,6 +8,7 @@ import { t } from '../util/locale';
 
 import { actionMove } from '../actions';
 import { behaviorEdit } from '../behavior';
+import { geoViewportEdge } from '../geo';
 
 import {
     modeBrowse,
@@ -30,23 +31,24 @@ export function modeMove(context, entityIDs, baseGraph) {
         button: 'browse'
     };
 
-    var keybinding = d3_keybinding('move'),
-        behaviors = [
-            behaviorEdit(context),
-            operationCircularize(entityIDs, context).behavior,
-            operationDelete(entityIDs, context).behavior,
-            operationOrthogonalize(entityIDs, context).behavior,
-            operationReflectLong(entityIDs, context).behavior,
-            operationReflectShort(entityIDs, context).behavior,
-            operationRotate(entityIDs, context).behavior
-        ],
-        annotation = entityIDs.length === 1 ?
-            t('operations.move.annotation.' + context.geometry(entityIDs[0])) :
-            t('operations.move.annotation.multiple'),
-        prevGraph,
-        cache,
-        origin,
-        nudgeInterval;
+    var keybinding = d3_keybinding('move');
+    var behaviors = [
+        behaviorEdit(context),
+        operationCircularize(entityIDs, context).behavior,
+        operationDelete(entityIDs, context).behavior,
+        operationOrthogonalize(entityIDs, context).behavior,
+        operationReflectLong(entityIDs, context).behavior,
+        operationReflectShort(entityIDs, context).behavior,
+        operationRotate(entityIDs, context).behavior
+    ];
+    var annotation = entityIDs.length === 1 ?
+        t('operations.move.annotation.' + context.geometry(entityIDs[0])) :
+        t('operations.move.annotation.multiple');
+
+    var _prevGraph;
+    var _cache;
+    var _origin;
+    var _nudgeInterval;
 
 
     function vecSub(a, b) {
@@ -54,52 +56,30 @@ export function modeMove(context, entityIDs, baseGraph) {
     }
 
 
-    function edge(point, size) {
-        var pad = [80, 20, 50, 20],   // top, right, bottom, left
-            x = 0,
-            y = 0;
-
-        if (point[0] > size[0] - pad[1])
-            x = -10;
-        if (point[0] < pad[3])
-            x = 10;
-        if (point[1] > size[1] - pad[2])
-            y = -10;
-        if (point[1] < pad[0])
-            y = 10;
-
-        if (x || y) {
-            return [x, y];
-        } else {
-            return null;
-        }
-    }
-
-
     function doMove(nudge) {
         nudge = nudge || [0, 0];
 
         var fn;
-        if (prevGraph !== context.graph()) {
-            cache = {};
-            origin = context.map().mouseCoordinates();
+        if (_prevGraph !== context.graph()) {
+            _cache = {};
+            _origin = context.map().mouseCoordinates();
             fn = context.perform;
         } else {
             fn = context.overwrite;
         }
 
-        var currMouse = context.mouse(),
-            origMouse = context.projection(origin),
-            delta = vecSub(vecSub(currMouse, origMouse), nudge);
+        var currMouse = context.mouse();
+        var origMouse = context.projection(_origin);
+        var delta = vecSub(vecSub(currMouse, origMouse), nudge);
 
-        fn(actionMove(entityIDs, delta, context.projection, cache), annotation);
-        prevGraph = context.graph();
+        fn(actionMove(entityIDs, delta, context.projection, _cache), annotation);
+        _prevGraph = context.graph();
     }
 
 
     function startNudge(nudge) {
-        if (nudgeInterval) window.clearInterval(nudgeInterval);
-        nudgeInterval = window.setInterval(function() {
+        if (_nudgeInterval) window.clearInterval(_nudgeInterval);
+        _nudgeInterval = window.setInterval(function() {
             context.pan(nudge);
             doMove(nudge);
         }, 50);
@@ -107,16 +87,16 @@ export function modeMove(context, entityIDs, baseGraph) {
 
 
     function stopNudge() {
-        if (nudgeInterval) {
-            window.clearInterval(nudgeInterval);
-            nudgeInterval = null;
+        if (_nudgeInterval) {
+            window.clearInterval(_nudgeInterval);
+            _nudgeInterval = null;
         }
     }
 
 
     function move() {
         doMove();
-        var nudge = edge(context.mouse(), context.map().dimensions());
+        var nudge = geoViewportEdge(context.mouse(), context.map().dimensions());
         if (nudge) {
             startNudge(nudge);
         } else {
@@ -150,9 +130,9 @@ export function modeMove(context, entityIDs, baseGraph) {
 
 
     mode.enter = function() {
-        origin = context.map().mouseCoordinates();
-        prevGraph = null;
-        cache = {};
+        _origin = context.map().mouseCoordinates();
+        _prevGraph = null;
+        _cache = {};
 
         behaviors.forEach(function(behavior) {
             context.install(behavior);

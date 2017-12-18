@@ -38,66 +38,67 @@ export function modeRotate(context, entityIDs) {
         button: 'browse'
     };
 
-    var keybinding = d3_keybinding('rotate'),
-        behaviors = [
-            behaviorEdit(context),
-            operationCircularize(entityIDs, context).behavior,
-            operationDelete(entityIDs, context).behavior,
-            operationMove(entityIDs, context).behavior,
-            operationOrthogonalize(entityIDs, context).behavior,
-            operationReflectLong(entityIDs, context).behavior,
-            operationReflectShort(entityIDs, context).behavior
-        ],
-        annotation = entityIDs.length === 1 ?
-            t('operations.rotate.annotation.' + context.geometry(entityIDs[0])) :
-            t('operations.rotate.annotation.multiple'),
-        prevGraph,
-        prevAngle,
-        prevTransform,
-        pivot;
+    var keybinding = d3_keybinding('rotate');
+    var behaviors = [
+        behaviorEdit(context),
+        operationCircularize(entityIDs, context).behavior,
+        operationDelete(entityIDs, context).behavior,
+        operationMove(entityIDs, context).behavior,
+        operationOrthogonalize(entityIDs, context).behavior,
+        operationReflectLong(entityIDs, context).behavior,
+        operationReflectShort(entityIDs, context).behavior
+    ];
+    var annotation = entityIDs.length === 1 ?
+        t('operations.rotate.annotation.' + context.geometry(entityIDs[0])) :
+        t('operations.rotate.annotation.multiple');
+
+    var _prevGraph;
+    var _prevAngle;
+    var _prevTransform;
+    var _pivot;
 
 
     function doRotate() {
         var fn;
-        if (context.graph() !== prevGraph) {
+        if (context.graph() !== _prevGraph) {
             fn = context.perform;
         } else {
             fn = context.replace;
         }
 
-        // projection changed, recalculate pivot
+        // projection changed, recalculate _pivot
         var projection = context.projection;
         var currTransform = projection.transform();
-        if (!prevTransform ||
-            currTransform.k !== prevTransform.k ||
-            currTransform.x !== prevTransform.x ||
-            currTransform.y !== prevTransform.y) {
+        if (!_prevTransform ||
+            currTransform.k !== _prevTransform.k ||
+            currTransform.x !== _prevTransform.x ||
+            currTransform.y !== _prevTransform.y) {
 
-            var nodes = utilGetAllNodes(entityIDs, context.graph()),
-                points = nodes.map(function(n) { return projection(n.loc); });
+            var nodes = utilGetAllNodes(entityIDs, context.graph());
+            var points = nodes.map(function(n) { return projection(n.loc); });
 
             if (points.length === 1) {  // degenerate case
-                pivot = points[0];
+                _pivot = points[0];
             } else if (points.length === 2) {
-                pivot = geoInterp(points[0], points[1], 0.5);
+                _pivot = geoInterp(points[0], points[1], 0.5);
             } else {
-                pivot = d3_polygonCentroid(d3_polygonHull(points));
+                _pivot = d3_polygonCentroid(d3_polygonHull(points));
             }
-            prevAngle = undefined;
+            _prevAngle = undefined;
         }
 
 
-        var currMouse = context.mouse(),
-            currAngle = Math.atan2(currMouse[1] - pivot[1], currMouse[0] - pivot[0]);
+        var currMouse = context.mouse();
+        var currAngle = Math.atan2(currMouse[1] - _pivot[1], currMouse[0] - _pivot[0]);
 
-        if (typeof prevAngle === 'undefined') prevAngle = currAngle;
-        var delta = currAngle - prevAngle;
+        if (typeof _prevAngle === 'undefined') _prevAngle = currAngle;
+        var delta = currAngle - _prevAngle;
 
-        fn(actionRotate(entityIDs, pivot, delta, projection), annotation);
+        fn(actionRotate(entityIDs, _pivot, delta, projection), annotation);
 
-        prevTransform = currTransform;
-        prevAngle = currAngle;
-        prevGraph = context.graph();
+        _prevTransform = currTransform;
+        _prevAngle = currAngle;
+        _prevGraph = context.graph();
     }
 
 
