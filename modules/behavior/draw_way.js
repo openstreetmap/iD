@@ -13,7 +13,8 @@ import { behaviorDraw } from './draw';
 
 import {
     geoChooseEdge,
-    geoEdgeEqual
+    geoEdgeEqual,
+    geoViewportEdge
 } from '../geo';
 
 import {
@@ -31,17 +32,18 @@ import { utilEntitySelector } from '../util';
 
 export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
 
-    var origWay = context.entity(wayId),
-        isArea = context.geometry(wayId) === 'area',
-        tempEdits = 0,
-        annotation = t((origWay.isDegenerate() ?
-            'operations.start.annotation.' :
-            'operations.continue.annotation.') + context.geometry(wayId)),
-        draw = behaviorDraw(context),
-        startIndex,
-        start,
-        end,
-        segment;
+    var origWay = context.entity(wayId);
+    var isArea = context.geometry(wayId) === 'area';
+    var tempEdits = 0;
+    var annotation = t((origWay.isDegenerate() ?
+        'operations.start.annotation.' :
+        'operations.continue.annotation.') + context.geometry(wayId));
+    var draw = behaviorDraw(context);
+    var _activeIDs = [];
+    var startIndex;
+    var start;
+    var end;
+    var segment;
 
 
     // initialize the temporary drawing entities
@@ -49,7 +51,8 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
         startIndex = typeof index === 'undefined' ? origWay.nodes.length - 1 : 0;
         start = osmNode({ id: 'nStart', loc: context.entity(origWay.nodes[startIndex]).loc });
         end = osmNode({ id: 'nEnd', loc: context.map().mouseCoordinates() });
-        segment = osmWay({ id: 'wTemp',
+        segment = osmWay({
+            id: 'wTemp',
             nodes: typeof index === 'undefined' ? [start.id, end.id] : [end.id, start.id],
             tags: _clone(origWay.tags)
         });
@@ -70,20 +73,11 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
 
     function move(datum) {
         var loc;
-
         if (datum.type === 'node' && datum.id !== end.id) {
             loc = datum.loc;
 
         } else if (datum.type === 'way') {
-            var dims = context.map().dimensions(),
-                mouse = context.mouse(),
-                pad = 5,
-                trySnap = mouse[0] > pad && mouse[0] < dims[0] - pad &&
-                    mouse[1] > pad && mouse[1] < dims[1] - pad;
-
-            if (trySnap) {
-                loc = geoChooseEdge(context.childNodes(datum), context.mouse(), context.projection).loc;
-            }
+            loc = geoChooseEdge(context.childNodes(datum), context.mouse(), context.projection).loc;
         }
 
         if (!loc) {
@@ -110,8 +104,8 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
 
 
     function setActiveElements() {
-        var active = isArea ? [wayId, end.id] : [segment.id, start.id, end.id];
-        context.surface().selectAll(utilEntitySelector(active))
+        _activeIDs = isArea ? [wayId, end.id] : [segment.id, start.id, end.id];
+        context.surface().selectAll(utilEntitySelector(_activeIDs))
             .classed('active', true);
     }
 
@@ -323,6 +317,13 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
         }, 1000);
 
         context.enter(modeBrowse(context));
+    };
+
+
+    drawWay.activeIDs = function() {
+        if (!arguments.length) return _activeIDs;
+        // no assign
+        return drawWay;
     };
 
 

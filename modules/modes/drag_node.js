@@ -123,7 +123,7 @@ export function modeDragNode(context) {
 
     function datum() {
         var event = d3_event && d3_event.sourceEvent;
-        if (!event || event.altKey) {
+        if (!event || event.altKey || !d3_select(event.target).classed('target')) {
             return {};
         } else {
             return event.target.__data__ || {};
@@ -147,11 +147,8 @@ export function modeDragNode(context) {
             if (d.type === 'node' && d.id !== entity.id) {
                 loc = d.loc;
 
-            // Snap to a way (not an area fill)
-            } else if (d.type === 'way' && !d3_select(d3_event.sourceEvent.target).classed('fill')) {
-
-                // var childNodes = context.childNodes(d);
-                // var childIDs = childNodes.map(function(node) { return node.id; });
+            // Snap to a way
+            } else if (d.type === 'way') {
                 var choice = geoChooseEdge(context.childNodes(d), context.mouse(), context.projection);
                 // (not along a segment adjacent to self)
                 if (entity.id !== d.nodes[choice.index - 1] && entity.id !== d.nodes[choice.index]) {
@@ -274,6 +271,7 @@ export function modeDragNode(context) {
         context.map()
             .on('drawn.drag-node', null);
 
+        _activeIDs = [];
         context.surface()
             .selectAll('.active')
             .classed('active', false);
@@ -284,6 +282,13 @@ export function modeDragNode(context) {
 
     mode.selectedIDs = function() {
         if (!arguments.length) return _dragEntity ? [_dragEntity.id] : [];
+        // no assign
+        return mode;
+    };
+
+
+    mode.activeIDs = function() {
+        if (!arguments.length) return _activeIDs;
         // no assign
         return mode;
     };

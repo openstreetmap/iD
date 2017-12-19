@@ -199,8 +199,9 @@ export function rendererMap(context) {
         supersurface
             .call(context.background());
 
-        context.on('enter.map', function() {
+        context.on('enter.map',  function() {
             if (map.editable() && !transformed) {
+                // redraw immediately the objects that are affected by a chnage in selectedIDs.
                 var all = context.intersects(map.extent());
                 var filter = utilFunctor(true);
                 var graph = context.graph();
@@ -210,6 +211,9 @@ export function rendererMap(context) {
                     .call(drawVertices.drawSelected, graph, all, map.extent())
                     .call(drawMidpoints, graph, all, filter, map.trimmedExtent());
                 dispatch.call('drawn', this, { full: false });
+
+                // redraw everything else later
+                scheduleRedraw();
             }
         });
 

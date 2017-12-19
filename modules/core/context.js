@@ -255,6 +255,13 @@ export function coreContext() {
             return [];
         }
     };
+    context.activeIDs = function() {
+        if (mode && mode.activeIDs) {
+            return mode.activeIDs();
+        } else {
+            return [];
+        }
+    };
 
 
     /* Behaviors */

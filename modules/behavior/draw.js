@@ -48,11 +48,17 @@ export function behaviorDraw(context) {
     function datum() {
         if (d3_event.altKey) return {};
 
+        var element;
         if (d3_event.type === 'keydown') {
-            return (_lastMouse && _lastMouse.target.__data__) || {};
+            element = _lastMouse && _lastMouse.target;
         } else {
-            return d3_event.target.__data__ || {};
+            element = d3_event.target;
         }
+
+        // When drawing, connect only to things classed as targets..
+        // (this excludes area fills and active drawing elements)
+        var selection = d3_select(element);
+        return (selection.classed('target') && element.__data__) || {};
     }
 
 
@@ -116,8 +122,7 @@ export function behaviorDraw(context) {
 
 
     function click() {
-        var trySnap = geoViewportEdge(context.mouse, context.map().dimensions()) !== null;
-
+        var trySnap = geoViewportEdge(context.mouse(), context.map().dimensions()) === null;
         if (trySnap) {
             // If we're not at the edge of the viewport, try to snap..
             // See also: `modes/drag_node.js doMove()`
@@ -128,8 +133,8 @@ export function behaviorDraw(context) {
                 dispatch.call('clickNode', this, d);
                 return;
 
-            // Snap to a way (not an area fill)
-            } else if (d.type === 'way' && !d3_select(d3_event.sourceEvent.target).classed('fill')) {
+            // Snap to a way
+            } else if (d.type === 'way') {
                 var choice = geoChooseEdge(context.childNodes(d), context.mouse(), context.projection);
                 var edge = [d.nodes[choice.index - 1], d.nodes[choice.index]];
                 dispatch.call('clickWay', this, choice.loc, edge);

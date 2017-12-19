@@ -39,10 +39,13 @@ export function svgLines(projection, context) {
     function drawTargets(selection, graph, entities, filter) {
         var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
         var getPath = svgPath(projection, graph);
+        var passive = entities.filter(function(d) {
+            return context.activeIDs().indexOf(d.id) === -1;
+        });
 
         var targets = selection.selectAll('.line.target')
             .filter(filter)
-            .data(entities, function key(d) { return d.id; });
+            .data(passive, function key(d) { return d.id; });
 
         // exit
         targets.exit()

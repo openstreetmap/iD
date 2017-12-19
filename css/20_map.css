@@ -26,7 +26,7 @@
 .way.target {
     pointer-events: stroke;
     fill: none;
-    stroke-width: 10;
+    stroke-width: 12;
     stroke-opacity: 0.8;
     stroke: currentColor;
 }

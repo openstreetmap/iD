@@ -33,5 +33,9 @@
 .fill-partial path.area.fill {
     fill-opacity: 0;
     stroke-width: 60px;
+    pointer-events: none;
+}
+.mode-browse .fill-partial path.area.fill,
+.mode-select .fill-partial path.area.fill {
     pointer-events: visibleStroke;
 }
