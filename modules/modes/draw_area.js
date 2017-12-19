@@ -43,8 +43,11 @@ export function modeDrawArea(context, wayId, startGraph) {
         return [wayId];
     };
 
-    mode.activeIDs = function() {
-        return (behavior && behavior.activeIDs()) || [];
+    // mode.activeIDs = function() {
+    //     return (behavior && behavior.activeIDs()) || [];
+    // };
+    mode.activeID = function() {
+        return (behavior && behavior.activeID()) || [];
     };
 
 

@@ -44,7 +44,8 @@ export function modeDragNode(context) {
 
     var _nudgeInterval;
     var _restoreSelectedIDs = [];
-    var _activeIDs = [];
+    // var _activeIDs = [];
+    var _activeID;
     var _wasMidpoint = false;
     var _isCancelled = false;
     var _dragEntity;
@@ -112,9 +113,9 @@ export function modeDragNode(context) {
 
         // `.active` elements have `pointer-events: none`.
         // This prevents the node or vertex being dragged from trying to connect to itself.
-        _activeIDs = context.graph().parentWays(entity)
-            .map(function(parent) { return parent.id; });
-        _activeIDs.push(entity.id);
+        // _activeIDs = context.graph().parentWays(entity).map(function(parent) { return parent.id; });
+        // _activeIDs.push(entity.id);
+        _activeID = entity.id;
         setActiveElements();
 
         context.enter(mode);
@@ -232,7 +233,9 @@ export function modeDragNode(context) {
 
 
     function setActiveElements() {
-        context.surface().selectAll(utilEntitySelector(_activeIDs))
+        // context.surface().selectAll(utilEntitySelector(_activeIDs))
+        //     .classed('active', true);
+        context.surface().selectAll('.' + _activeID)
             .classed('active', true);
     }
 
@@ -271,7 +274,8 @@ export function modeDragNode(context) {
         context.map()
             .on('drawn.drag-node', null);
 
-        _activeIDs = [];
+        // _activeIDs = [];
+        _activeID = null;
         context.surface()
             .selectAll('.active')
             .classed('active', false);
@@ -287,8 +291,13 @@ export function modeDragNode(context) {
     };
 
 
-    mode.activeIDs = function() {
-        if (!arguments.length) return _activeIDs;
+    // mode.activeIDs = function() {
+    //     if (!arguments.length) return _activeIDs;
+    //     // no assign
+    //     return mode;
+    // };
+    mode.activeID = function() {
+        if (!arguments.length) return _activeID;
         // no assign
         return mode;
     };

@@ -45,7 +45,8 @@ export function svgAreas(projection, context) {
         var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
         var getPath = svgPath(projection, graph);
         var passive = entities.filter(function(d) {
-            return context.activeIDs().indexOf(d.id) === -1;
+            return true;
+            // return context.activeIDs().indexOf(d.id) === -1;
         });
 
         var targets = selection.selectAll('.area.target')

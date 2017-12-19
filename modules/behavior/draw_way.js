@@ -38,7 +38,8 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
         'operations.start.annotation.' :
         'operations.continue.annotation.') + context.geometry(wayId));
     var draw = behaviorDraw(context);
-    var _activeIDs = [];
+    // var _activeIDs = [];
+    var _activeID;
     var startIndex;
     var start;
     var end;
@@ -103,8 +104,11 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
 
 
     function setActiveElements() {
-        _activeIDs = isArea ? [wayId, end.id] : [segment.id, start.id, end.id];
-        context.surface().selectAll(utilEntitySelector(_activeIDs))
+        // _activeIDs = isArea ? [wayId, end.id] : [segment.id, start.id, end.id];
+        // context.surface().selectAll(utilEntitySelector(_activeIDs))
+        //     .classed('active', true);
+        _activeID = end.id;
+        context.surface().selectAll('.' + end.id)
             .classed('active', true);
     }
 
@@ -319,8 +323,13 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
     };
 
 
-    drawWay.activeIDs = function() {
-        if (!arguments.length) return _activeIDs;
+    // drawWay.activeIDs = function() {
+    //     if (!arguments.length) return _activeIDs;
+    //     // no assign
+    //     return drawWay;
+    // };
+    drawWay.activeID = function() {
+        if (!arguments.length) return _activeID;
         // no assign
         return drawWay;
     };

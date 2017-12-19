@@ -183,13 +183,16 @@ export function svgVertices(projection, context) {
 
     function drawTargets(selection, graph, entities, filter) {
         var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
-        var passive = entities.filter(function(d) {
-            return context.activeIDs().indexOf(d.id) === -1;
-        });
 
+        // no targets for entities that are active, or adjacent to active.
+        function passive(d) {
+            return d.id !== context.activeID();
+        }
+
+        var data = entities.filter(passive);
         var targets = selection.selectAll('.vertex.target')
             .filter(filter)
-            .data(passive, function key(d) { return d.id; });
+            .data(data, function key(d) { return d.id; });
 
         // exit
         targets.exit()
