@@ -208,7 +208,7 @@ export function rendererMap(context) {
 
                 all = context.features().filter(all, graph);
                 surface.selectAll('.data-layer-osm')
-                    .call(drawVertices.drawSelected, graph, all, map.extent())
+                    .call(drawVertices.drawSelected, graph, map.extent())
                     .call(drawMidpoints, graph, all, filter, map.trimmedExtent());
                 dispatch.call('drawn', this, { full: false });
 
@@ -269,6 +269,7 @@ export function rendererMap(context) {
 
 
     function drawVector(difference, extent) {
+        var mode = context.mode();
         var graph = context.graph();
         var features = context.features();
         var all = context.intersects(map.extent());
@@ -302,6 +303,13 @@ export function rendererMap(context) {
         }
 
         data = features.filter(data, graph);
+
+        if (mode && mode.id === 'select') {
+            // update selected vertices - the user might have just double-clicked a way,
+            // creating a new vertex, triggering a partial redraw without a mode change
+            surface.selectAll('.data-layer-osm')
+                .call(drawVertices.drawSelected, graph, map.extent());
+        }
 
         surface.selectAll('.data-layer-osm')
             .call(drawVertices, graph, data, filter, map.extent(), fullRedraw)

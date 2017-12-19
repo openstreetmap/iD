@@ -287,15 +287,10 @@ export function svgVertices(projection, context) {
                 keep = true;
 
             // a vertex of some importance..
-            } else if (geometry === 'vertex') {
-                if (entity.hasInterestingTags() || entity.isEndpoint(graph) || entity.isConnected(graph)) {
-                    _currPersistent[entity.id] = entity;
-                    keep = true;
-                }
-                // partial redraw in select mode - probably because the user double clicked a way.
-                if (!fullRedraw && mode && mode.id === 'select') {
-                    _currSelected[entity.id] = entity;
-                }
+            } else if (geometry === 'vertex' &&
+                (entity.hasInterestingTags() || entity.isEndpoint(graph) || entity.isConnected(graph))) {
+                _currPersistent[entity.id] = entity;
+                keep = true;
             }
 
             // whatever this is, it's not a persistent vertex..
@@ -336,7 +331,7 @@ export function svgVertices(projection, context) {
 
 
     // partial redraw - only update the selected items..
-    drawVertices.drawSelected = function(selection, graph, target, extent) {
+    drawVertices.drawSelected = function(selection, graph, extent) {
         var wireframe = context.surface().classed('fill-wireframe');
         var zoom = geoScaleToZoom(projection.scale());
 

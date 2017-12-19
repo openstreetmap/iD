@@ -13,8 +13,7 @@ import { behaviorDraw } from './draw';
 
 import {
     geoChooseEdge,
-    geoEdgeEqual,
-    geoViewportEdge
+    geoEdgeEqual
 } from '../geo';
 
 import {
