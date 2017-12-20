@@ -1,0 +1,17 @@
+{
+  "icon": "highway-lane-centerline",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "line"
+  ],
+  "tags": {
+    "highway": "lane-centerline"
+  },
+  "reference": {
+    "key": "lane",
+    "value": "lane-centerline"
+  },
+  "name": "lane-centerline"
+}
