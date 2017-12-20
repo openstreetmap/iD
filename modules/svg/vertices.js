@@ -182,17 +182,75 @@ export function svgVertices(projection, context) {
 
 
     function drawTargets(selection, graph, entities, filter) {
-        var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
+        var targetClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
+        var nopeClass = context.getDebug('target') ? 'red ' : 'nocolor ';
+        var activeID = context.activeID();
+        var data = { targets: [], nopes: [] };
 
-        // no targets for entities that are active, or adjacent to active.
+        // Touch targets control which other vertices we can drag a vertex onto.
+        // - the activeID - nope
+        // - next to the activeID - yes (vertices will be merged)
+        // - 2 away from the activeID - nope (would create a self intersecting segment)
+        // - all others on a closed way - nope (would create a self intersecting polygon)
+        //
+        // 0 = active vertex - no touch/connect
+        // 1 = passive vertex - yes touch/connect
+        // 2 = adjacent vertex - special rules
         function passive(d) {
-            return d.id !== context.activeID();
+            if (!activeID) return 1;
+            if (activeID === d.id) return 0;
+
+            var parents = graph.parentWays(d);
+            var i, j;
+
+            for (i = 0; i < parents.length; i++) {
+                var nodes = parents[i].nodes;
+                var isClosed = parents[i].isClosed();
+                for (j = 0; j < nodes.length; j++) {   // find this vertex, look nearby
+                    if (nodes[j] === d.id) {
+                        var ix1 = j - 2;
+                        var ix2 = j - 1;
+                        var ix3 = j + 1;
+                        var ix4 = j + 2;
+
+                        if (isClosed) {  // wraparound if needed
+                            var max = nodes.length - 1;
+                            if (ix1 < 0)   ix1 = max + ix1;
+                            if (ix2 < 0)   ix2 = max + ix2;
+                            if (ix3 > max) ix3 = ix3 - max;
+                            if (ix4 > max) ix4 = ix4 - max;
+                        }
+
+                        if (nodes[ix1] === activeID) return 0;        // prevent self intersect
+                        else if (nodes[ix2] === activeID) return 2;   // adjacent - ok!
+                        else if (nodes[ix3] === activeID) return 2;   // adjacent - ok!
+                        else if (nodes[ix4] === activeID) return 0;   // prevent self intersect
+                        else if (isClosed && nodes.indexOf(activeID) !== -1) return 0;  // prevent self intersect
+                    }
+                }
+            }
+
+            return 1;
         }
 
-        var data = entities.filter(passive);
-        var targets = selection.selectAll('.vertex.target')
+
+        entities.forEach(function(node) {
+            if (activeID === node.id) return;   // draw no vertex on the activeID
+
+            var currType = passive(node);
+            if (currType !== 0) {
+                data.targets.push(node);        // passive or adjacent - allow to connect
+            } else {
+                data.nopes.push({
+                    id: node.id + '-nope',      // not a real osmNode, break the id on purpose
+                    loc: node.loc
+                });
+            }
+        });
+
+        var targets = selection.selectAll('.vertex.target-allowed')
             .filter(filter)
-            .data(data, function key(d) { return d.id; });
+            .data(data.targets, function key(d) { return d.id; });
 
         // exit
         targets.exit()
@@ -201,9 +259,26 @@ export function svgVertices(projection, context) {
         // enter/update
         targets.enter()
             .append('circle')
-            .attr('r', function(d) { return _radii[d.id] || radiuses.shadow[3]; })
+            .attr('r', function(d) { return (_radii[d.id] || radiuses.shadow[3]); })
             .merge(targets)
-            .attr('class', function(d) { return 'node vertex target ' + fillClass + d.id; })
+            .attr('class', function(d) { return 'node vertex target target-allowed ' + targetClass + d.id; })
+            .attr('transform', svgPointTransform(projection));
+
+
+        // NOPE
+        var nopes = selection.selectAll('.vertex.target-nope')
+            .data(data.nopes, function key(d) { return d.id; });
+
+        // exit
+        nopes.exit()
+            .remove();
+
+        // enter/update
+        nopes.enter()
+            .append('circle')
+            .attr('r', function(d) { return (_radii[d.id.replace('-nope','')] || radiuses.shadow[3]); })
+            .merge(nopes)
+            .attr('class', function(d) { return 'node vertex target target-nope ' + nopeClass + d.id; })
             .attr('transform', svgPointTransform(projection));
     }
 
@@ -321,8 +396,11 @@ export function svgVertices(projection, context) {
             .call(draw, graph, currentVisible(all), sets, filterRendered);
 
         // Draw touch targets..
+        var filterTargets = function(d) {
+            return isMoving ? true : filterRendered(d);
+        };
         selection.selectAll('.layer-points .layer-points-targets')
-            .call(drawTargets, graph, currentVisible(all), filterRendered);
+            .call(drawTargets, graph, currentVisible(all), filterTargets);
 
 
         function currentVisible(which) {

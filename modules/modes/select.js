@@ -246,7 +246,10 @@ export function modeSelect(context, selectedIDs) {
 
         function dblclick() {
             var target = d3_select(d3_event.target);
+
             var datum = target.datum();
+            var entity = datum && datum.id && context.hasEntity(datum.id);
+            if (entity) datum = entity;
 
             if (datum instanceof osmWay && target.classed('target')) {
                 var choice = geoChooseEdge(context.childNodes(datum), context.mouse(), context.projection);

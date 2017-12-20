@@ -6,7 +6,6 @@ import {
 } from 'd3-selection';
 
 import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
-import { osmEntity } from '../osm/index';
 import { utilRebind } from '../util/rebind';
 
 
@@ -107,19 +106,20 @@ export function behaviorHover(context) {
             _selection.selectAll('.hover-suppressed')
                 .classed('hover-suppressed', false);
 
-            if (_target instanceof osmEntity && _target.id !== _newId) {
+            var entity = _target && _target.id && context.hasEntity(_target.id);
+            if (entity && entity.id !== _newId) {
 
                 // If drawing a way, don't hover on a node that was just placed. #3974
                 var mode = context.mode() && context.mode().id;
-                if ((mode === 'draw-line' || mode === 'draw-area') && !_newId && _target.type === 'node') {
-                    _newId = _target.id;
+                if ((mode === 'draw-line' || mode === 'draw-area') && !_newId && entity.type === 'node') {
+                    _newId = entity.id;
                     return;
                 }
 
-                var selector = '.' + _target.id;
+                var selector = '.' + entity.id;
 
-                if (_target.type === 'relation') {
-                    _target.members.forEach(function(member) {
+                if (entity.type === 'relation') {
+                    entity.members.forEach(function(member) {
                         selector += ', .' + member.id;
                     });
                 }
@@ -129,7 +129,7 @@ export function behaviorHover(context) {
                 _selection.selectAll(selector)
                     .classed(suppressed ? 'hover-suppressed' : 'hover', true);
 
-                dispatch.call('hover', this, !suppressed && _target.id);
+                dispatch.call('hover', this, !suppressed && entity.id);
 
             } else {
                 dispatch.call('hover', this, null);

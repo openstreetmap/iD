@@ -58,7 +58,10 @@ export function behaviorDraw(context) {
         // When drawing, connect only to things classed as targets..
         // (this excludes area fills and active drawing elements)
         var selection = d3_select(element);
-        return (selection.classed('target') && element.__data__) || {};
+        if (selection.classed('target')) return {};
+
+        var d = selection.datum();
+        return (d && d.id && context.hasEntity(d.id)) || {};
     }
 
 

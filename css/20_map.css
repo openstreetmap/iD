@@ -31,6 +31,12 @@
     stroke: currentColor;
 }
 
+/* `.target-nope` objects are explicitly forbidden to join to */
+.node.target.target-nope,
+.way.target.target-nope {
+    cursor: not-allowed;
+}
+
 /* `.active` objects (currently being drawn or dragged) are not interactive */
 /* This is important to allow the events to drop through to whatever is */
 /* below them on the map, so you can still hover and connect to other things. */

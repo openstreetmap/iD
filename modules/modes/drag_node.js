@@ -127,7 +127,8 @@ export function modeDragNode(context) {
         if (!event || event.altKey || !d3_select(event.target).classed('target')) {
             return {};
         } else {
-            return event.target.__data__ || {};
+            var d = event.target.__data__;
+            return (d && d.id && context.hasEntity(d.id)) || {};
         }
     }
 

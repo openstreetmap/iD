@@ -17,10 +17,10 @@ import { osmEntity } from '../osm';
 
 
 export function behaviorSelect(context) {
-    var lastMouse = null,
-        suppressMenu = true,
-        tolerance = 4,
-        p1 = null;
+    var lastMouse = null;
+    var suppressMenu = true;
+    var tolerance = 4;
+    var p1 = null;
 
 
     function point() {
@@ -102,19 +102,21 @@ export function behaviorSelect(context) {
             .on('mouseup.select', null, true);
 
         if (!p1) return;
-        var p2 = point(),
-            dist = geoEuclideanDistance(p1, p2);
+        var p2 = point();
+        var dist = geoEuclideanDistance(p1, p2);
 
         p1 = null;
         if (dist > tolerance) {
             return;
         }
 
-        var isMultiselect = d3_event.shiftKey || d3_select('#surface .lasso').node(),
-            isShowAlways = +context.storage('edit-menu-show-always') === 1,
-            datum = d3_event.target.__data__ || (lastMouse && lastMouse.target.__data__),
-            mode = context.mode();
+        var isMultiselect = d3_event.shiftKey || d3_select('#surface .lasso').node();
+        var isShowAlways = +context.storage('edit-menu-show-always') === 1;
+        var datum = d3_event.target.__data__ || (lastMouse && lastMouse.target.__data__);
+        var mode = context.mode();
 
+        var entity = datum && datum.id && context.hasEntity(datum.id);
+        if (entity) datum = entity;
 
         if (datum && datum.type === 'midpoint') {
             datum = datum.parents[0];

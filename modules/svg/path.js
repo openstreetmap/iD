@@ -15,23 +15,27 @@ export function svgPath(projection, graph, isArea) {
     // When drawing areas, pad viewport by 65px in each direction to allow
     // for 60px area fill stroke (see ".fill-partial path.fill" css rule)
 
-    var cache = {},
-        padding = isArea ? 65 : 5,
-        viewport = projection.clipExtent(),
-        paddedExtent = [
-            [viewport[0][0] - padding, viewport[0][1] - padding],
-            [viewport[1][0] + padding, viewport[1][1] + padding]
-        ],
-        clip = d3_geoIdentity().clipExtent(paddedExtent).stream,
-        project = projection.stream,
-        path = d3_geoPath()
-            .projection({stream: function(output) { return project(clip(output)); }});
+    var cache = {};
+    var padding = isArea ? 65 : 5;
+    var viewport = projection.clipExtent();
+    var paddedExtent = [
+        [viewport[0][0] - padding, viewport[0][1] - padding],
+        [viewport[1][0] + padding, viewport[1][1] + padding]
+    ];
+    var clip = d3_geoIdentity().clipExtent(paddedExtent).stream;
+    var project = projection.stream;
+    var path = d3_geoPath()
+        .projection({stream: function(output) { return project(clip(output)); }});
 
-    return function(entity) {
+    var svgpath = function(entity) {
         if (entity.id in cache) {
             return cache[entity.id];
         } else {
             return cache[entity.id] = path(entity.asGeoJSON(graph));
         }
     };
+
+    svgpath.geojson = path;
+
+    return svgpath;
 }
