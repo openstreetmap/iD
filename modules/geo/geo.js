@@ -157,14 +157,17 @@ export function geoRotate(points, angle, around) {
 // projection onto that edge, if such a projection exists, or the distance to
 // the closest vertex on that edge. Returns an object with the `index` of the
 // chosen edge, the chosen `loc` on that edge, and the `distance` to to it.
-export function geoChooseEdge(nodes, point, projection) {
+export function geoChooseEdge(nodes, point, projection, skipID) {
     var dist = geoEuclideanDistance;
     var points = nodes.map(function(n) { return projection(n.loc); });
+    var ids = nodes.map(function(n) { return n.id; });
     var min = Infinity;
     var idx;
     var loc;
 
     for (var i = 0; i < points.length - 1; i++) {
+        if (ids[i] === skipID || ids[i + 1] === skipID) continue;
+
         var o = points[i];
         var s = geoVecSubtract(points[i + 1], o);
         var v = geoVecSubtract(point, o);
@@ -187,11 +190,11 @@ export function geoChooseEdge(nodes, point, projection) {
         }
     }
 
-    return {
-        index: idx,
-        distance: min,
-        loc: loc
-    };
+    if (idx !== undefined) {
+        return { index: idx, distance: min, loc: loc };
+    } else {
+        return null;
+    }
 }
 
 

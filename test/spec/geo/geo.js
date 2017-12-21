@@ -291,20 +291,12 @@ describe('iD.geo', function() {
         var projection = function (l) { return l; };
         projection.invert = projection;
 
-        it('returns undefined properties for a degenerate way (no nodes)', function() {
-            expect(iD.geoChooseEdge([], [0, 0], projection)).to.eql({
-                index: undefined,
-                distance: Infinity,
-                loc: undefined
-            });
+        it('returns null for a degenerate way (no nodes)', function() {
+            expect(iD.geoChooseEdge([], [0, 0], projection)).to.be.null;
         });
 
-        it('returns undefined properties for a degenerate way (single node)', function() {
-            expect(iD.geoChooseEdge([iD.osmNode({loc: [0, 0]})], [0, 0], projection)).to.eql({
-                index: undefined,
-                distance: Infinity,
-                loc: undefined
-            });
+        it('returns null for a degenerate way (single node)', function() {
+            expect(iD.geoChooseEdge([iD.osmNode({loc: [0, 0]})], [0, 0], projection)).to.be.null;
         });
 
         it('calculates the orthogonal projection of a point onto a segment', function() {
@@ -343,6 +335,67 @@ describe('iD.geo', function() {
             expect(choice.index).to.eql(1);
             expect(choice.distance).to.eql(5);
             expect(choice.loc).to.eql([5, 0]);
+        });
+
+        it('skips the given nodeID at end of way', function() {
+            //
+            // a --*-- b
+            //     e   |
+            //     |   |
+            //     d - c
+            //
+            // * = [2, 0]
+            var a = [0, 0];
+            var b = [5, 0];
+            var c = [5, 5];
+            var d = [2, 5];
+            var e = [2, 0.1];  // e.g. user is dragging e onto ab
+            var nodes = [
+                iD.osmNode({id: 'a', loc: a}),
+                iD.osmNode({id: 'b', loc: b}),
+                iD.osmNode({id: 'c', loc: c}),
+                iD.osmNode({id: 'd', loc: d}),
+                iD.osmNode({id: 'e', loc: e})
+            ];
+            var choice = iD.geoChooseEdge(nodes, e, projection, 'e');
+            expect(choice.index).to.eql(1);
+            expect(choice.distance).to.eql(0.1);
+            expect(choice.loc).to.eql([2, 0]);
+        });
+
+        it('skips the given nodeID in middle of way', function() {
+            //
+            // a --*-- b
+            //     d   |
+            //   /   \ |
+            // e       c
+            //
+            // * = [2, 0]
+            var a = [0, 0];
+            var b = [5, 0];
+            var c = [5, 5];
+            var d = [2, 0.1];  // e.g. user is dragging d onto ab
+            var e = [0, 5];
+            var nodes = [
+                iD.osmNode({id: 'a', loc: a}),
+                iD.osmNode({id: 'b', loc: b}),
+                iD.osmNode({id: 'c', loc: c}),
+                iD.osmNode({id: 'd', loc: d}),
+                iD.osmNode({id: 'e', loc: e})
+            ];
+            var choice = iD.geoChooseEdge(nodes, d, projection, 'd');
+            expect(choice.index).to.eql(1);
+            expect(choice.distance).to.eql(0.1);
+            expect(choice.loc).to.eql([2, 0]);
+        });
+
+        it('returns null if all nodes are skipped', function() {
+            var nodes = [
+                iD.osmNode({id: 'a', loc: [0, 0]}),
+                iD.osmNode({id: 'b', loc: [5, 0]}),
+            ];
+            var choice = iD.geoChooseEdge(nodes, [2, 2], projection, 'a');
+            expect(choice).to.be.null;
         });
     });
 
