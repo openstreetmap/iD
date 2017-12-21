@@ -6,7 +6,7 @@ import { select as d3_select } from 'd3-selection';
 import { dataFeatureIcons } from '../../data';
 import { geoScaleToZoom } from '../geo';
 import { osmEntity } from '../osm';
-import { svgPointTransform } from './index';
+import { svgPassiveVertex, svgPointTransform } from './index';
 
 
 export function svgVertices(projection, context) {
@@ -187,67 +187,22 @@ export function svgVertices(projection, context) {
         var activeID = context.activeID();
         var data = { targets: [], nopes: [] };
 
-        // Touch targets control which other vertices we can drag a vertex onto.
-        // - the activeID - nope
-        // - next to the activeID - yes (vertices will be merged)
-        // - 2 away from the activeID - nope (would create a self intersecting segment)
-        // - all others on a closed way - nope (would create a self intersecting polygon)
-        //
-        // 0 = active vertex - no touch/connect
-        // 1 = passive vertex - yes touch/connect
-        // 2 = adjacent vertex - special rules
-        function passive(d) {
-            if (!activeID) return 1;
-            if (activeID === d.id) return 0;
-
-            var parents = graph.parentWays(d);
-            var i, j;
-
-            for (i = 0; i < parents.length; i++) {
-                var nodes = parents[i].nodes;
-                var isClosed = parents[i].isClosed();
-                for (j = 0; j < nodes.length; j++) {   // find this vertex, look nearby
-                    if (nodes[j] === d.id) {
-                        var ix1 = j - 2;
-                        var ix2 = j - 1;
-                        var ix3 = j + 1;
-                        var ix4 = j + 2;
-
-                        if (isClosed) {  // wraparound if needed
-                            var max = nodes.length - 1;
-                            if (ix1 < 0)   ix1 = max + ix1;
-                            if (ix2 < 0)   ix2 = max + ix2;
-                            if (ix3 > max) ix3 = ix3 - max;
-                            if (ix4 > max) ix4 = ix4 - max;
-                        }
-
-                        if (nodes[ix1] === activeID) return 0;        // prevent self intersect
-                        else if (nodes[ix2] === activeID) return 2;   // adjacent - ok!
-                        else if (nodes[ix3] === activeID) return 2;   // adjacent - ok!
-                        else if (nodes[ix4] === activeID) return 0;   // prevent self intersect
-                        else if (isClosed && nodes.indexOf(activeID) !== -1) return 0;  // prevent self intersect
-                    }
-                }
-            }
-
-            return 1;
-        }
-
-
         entities.forEach(function(node) {
-            if (activeID === node.id) return;   // draw no vertex on the activeID
+            if (activeID === node.id) return;   // draw no target on the activeID
 
-            var currType = passive(node);
+            var currType = svgPassiveVertex(node, graph, activeID);
             if (currType !== 0) {
-                data.targets.push(node);        // passive or adjacent - allow to connect
+                data.targets.push(node);     // passive or adjacent - allow to connect
             } else {
                 data.nopes.push({
-                    id: node.id + '-nope',      // not a real osmNode, break the id on purpose
+                    id: node.id + '-nope',   // not a real osmNode, break the id on purpose
                     loc: node.loc
                 });
             }
         });
 
+
+        // Targets allow hover and vertex snapping
         var targets = selection.selectAll('.vertex.target-allowed')
             .filter(filter)
             .data(data.targets, function key(d) { return d.id; });

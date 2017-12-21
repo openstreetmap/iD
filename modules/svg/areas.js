@@ -4,7 +4,7 @@ import _values from 'lodash-es/values';
 import { bisector as d3_bisector } from 'd3-array';
 
 import { osmEntity, osmIsSimpleMultipolygonOuterMember } from '../osm';
-import { svgPath, svgTagClasses } from './index';
+import { svgPath, svgSegmentWay, svgTagClasses } from './index';
 
 
 export function svgAreas(projection, context) {
@@ -42,16 +42,25 @@ export function svgAreas(projection, context) {
 
 
     function drawTargets(selection, graph, entities, filter) {
-        var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
-        var getPath = svgPath(projection, graph);
-        var passive = entities.filter(function(d) {
-            return true;
-            // return context.activeIDs().indexOf(d.id) === -1;
+        var targetClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
+        var nopeClass = context.getDebug('target') ? 'red ' : 'nocolor ';
+        var getPath = svgPath(projection).geojson;
+        var activeID = context.activeID();
+
+        // The targets and nopes will be MultiLineString sub-segments of the ways
+        var data = { targets: [], nopes: [] };
+
+        entities.forEach(function(way) {
+            var features = svgSegmentWay(way, graph, activeID);
+            data.targets.push.apply(data.targets, features.passive);
+            data.nopes.push.apply(data.nopes, features.active);
         });
 
-        var targets = selection.selectAll('.area.target')
+
+        // Targets allow hover and vertex snapping
+        var targets = selection.selectAll('.area.target-allowed')
             .filter(filter)
-            .data(passive, function key(d) { return d.id; });
+            .data(data.targets, function key(d) { return d.id; });
 
         // exit
         targets.exit()
@@ -62,7 +71,23 @@ export function svgAreas(projection, context) {
             .append('path')
             .merge(targets)
             .attr('d', getPath)
-            .attr('class', function(d) { return 'way area target  ' + fillClass + d.id; });
+            .attr('class', function(d) { return 'way area target target-allowed ' + targetClass + d.id; });
+
+
+        // NOPE
+        var nopes = selection.selectAll('.area.target-nope')
+            .data(data.nopes, function key(d) { return d.id; });
+
+        // exit
+        nopes.exit()
+            .remove();
+
+        // enter/update
+        nopes.enter()
+            .append('path')
+            .merge(nopes)
+            .attr('d', getPath)
+            .attr('class', function(d) { return 'way area target target-nope ' + nopeClass + d.id; });
     }
 
 

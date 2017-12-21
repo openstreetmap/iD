@@ -1,12 +1,8 @@
-import { geoPath as d3_geoPath } from 'd3-geo';
 import { select as d3_select } from 'd3-selection';
 
 import { geoPolygonIntersectsPolygon } from '../geo';
-import {
-    data,
-    dataImperial,
-    dataDriveLeft
-} from '../../data';
+import { data, dataImperial, dataDriveLeft } from '../../data';
+import { svgPath } from './index';
 
 
 export function svgDebug(projection, context) {
@@ -27,8 +23,6 @@ export function svgDebug(projection, context) {
         var showsImperial = context.getDebug('imperial');
         var showsDriveLeft = context.getDebug('driveLeft');
         var showsTouchTargets = context.getDebug('target');
-        var path = d3_geoPath(projection);
-
 
         var debugData = [];
         if (showsTile) {
@@ -134,7 +128,7 @@ export function svgDebug(projection, context) {
 
         // update
         layer.selectAll('path')
-            .attr('d', path);
+            .attr('d', svgPath(projection).geojson);
     }
 
 
