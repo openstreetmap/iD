@@ -33,7 +33,7 @@
     "marked": "0.3.7",
     "node-diff3": "bhousel/node-diff3.git#v0.1.0",
     "osm-auth": "1.0.2",
-    "rbush": "2.0.1",
+    "rbush": "2.0.2",
     "wmf-sitematrix": "0.1.4"
   },
   "devDependencies": {
