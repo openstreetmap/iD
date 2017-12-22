@@ -110,19 +110,19 @@ export function behaviorDrag() {
             if (dx === 0 && dy === 0)
                 return;
 
-            if (!started) {
-                started = true;
-                _event({ type: 'start' });
-            }
-
             startOrigin = p;
             d3_eventCancel();
 
-            _event({
-                type: 'move',
-                point: [p[0] + offset[0],  p[1] + offset[1]],
-                delta: [dx, dy]
-            });
+            if (!started) {
+                started = true;
+                _event({ type: 'start' });
+            } else {
+                _event({
+                    type: 'move',
+                    point: [p[0] + offset[0],  p[1] + offset[1]],
+                    delta: [dx, dy]
+                });
+            }
         }
 
 
