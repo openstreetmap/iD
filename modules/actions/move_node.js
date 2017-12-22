@@ -1,7 +1,18 @@
-// https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/command/MoveCommand.java
-// https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MoveNodeAction.as
-export function actionMoveNode(nodeId, loc) {
-    return function(graph) {
-        return graph.replace(graph.entity(nodeId).move(loc));
+import { geoInterp } from '../geo';
+
+export function actionMoveNode(nodeID, toLoc) {
+
+    var action = function(graph, t) {
+        if (t === null || !isFinite(t)) t = 1;
+        t = Math.min(Math.max(+t, 0), 1);
+
+        var node = graph.entity(nodeID);
+        return graph.replace(
+            node.move(geoInterp(node.loc, toLoc, t))
+        );
     };
+
+    action.transitionable = true;
+
+    return action;
 }
