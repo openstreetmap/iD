@@ -131,7 +131,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
         return function(graph) {
             return graph
                 .replace(end)
-                .replace(origWay.addNode(end.id));
+                .replace(origWay.addNode(end.id, index));
         };
     }
 
@@ -139,7 +139,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
     function _actionReplaceDrawNode(newNode) {
         return function(graph) {
             return graph
-                .replace(origWay.addNode(newNode.id))
+                .replace(origWay.addNode(newNode.id, index))
                 .remove(end);
         };
     }
