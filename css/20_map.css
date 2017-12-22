@@ -29,6 +29,8 @@
     stroke-width: 12;
     stroke-opacity: 0.8;
     stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 /* `.target-nope` objects are explicitly forbidden to join to */

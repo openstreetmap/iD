@@ -41,9 +41,7 @@ export function modeDrawLine(context, wayId, startGraph, affix) {
         return [wayId];
     };
 
-    // mode.activeIDs = function() {
-    //     return (behavior && behavior.activeIDs()) || [];
-    // };
+
     mode.activeID = function() {
         return (behavior && behavior.activeID()) || [];
     };

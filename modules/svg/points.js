@@ -31,7 +31,6 @@ export function svgPoints(projection, context) {
         var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
         var passive = entities.filter(function(d) {
             return d.id !== context.activeID();
-            // return context.activeIDs().indexOf(d.id) === -1;
         });
 
         var targets = selection.selectAll('.point.target')

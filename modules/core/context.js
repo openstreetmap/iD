@@ -255,13 +255,6 @@ export function coreContext() {
             return [];
         }
     };
-    // context.activeIDs = function() {
-    //     if (mode && mode.activeIDs) {
-    //         return mode.activeIDs();
-    //     } else {
-    //         return [];
-    //     }
-    // };
     context.activeID = function() {
         return mode && mode.activeID && mode.activeID();
     };

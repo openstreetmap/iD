@@ -12,25 +12,10 @@ import {
     actionNoop
 } from '../actions';
 
-import {
-    behaviorEdit,
-    behaviorHover,
-    behaviorDrag
-} from '../behavior';
-
-import {
-    modeBrowse,
-    modeSelect
-} from './index';
-
-import {
-    geoChooseEdge,
-    geoVecSubtract,
-    geoViewportEdge
-} from '../geo';
-
+import { behaviorEdit, behaviorHover, behaviorDrag } from '../behavior';
+import { geoChooseEdge, geoVecSubtract, geoViewportEdge } from '../geo';
+import { modeBrowse, modeSelect } from './index';
 import { osmNode } from '../osm';
-import { utilEntitySelector } from '../util';
 import { uiFlash } from '../ui';
 
 
@@ -39,16 +24,15 @@ export function modeDragNode(context) {
         id: 'drag-node',
         button: 'browse'
     };
-    var hover = behaviorHover(context).altDisables(true).on('hover', context.ui().sidebar.hover);
+    var hover = behaviorHover(context).altDisables(true)
+        .on('hover', context.ui().sidebar.hover);
     var edit = behaviorEdit(context);
 
     var _nudgeInterval;
     var _restoreSelectedIDs = [];
-    // var _activeIDs = [];
-    var _activeID;
     var _wasMidpoint = false;
     var _isCancelled = false;
-    var _dragEntity;
+    var _activeEntity;
     var _lastLoc;
 
 
@@ -94,7 +78,7 @@ export function modeDragNode(context) {
             if (hasHidden) {
                 uiFlash().text(t('modes.drag_node.connected_to_hidden'))();
             }
-            return behavior.cancel();
+            return drag.cancel();
         }
 
         if (_wasMidpoint) {
@@ -103,20 +87,15 @@ export function modeDragNode(context) {
             context.perform(actionAddMidpoint(midpoint, entity));
 
             var vertex = context.surface().selectAll('.' + entity.id);
-            behavior.target(vertex.node(), entity);
+            drag.target(vertex.node(), entity);
 
         } else {
             context.perform(actionNoop());
         }
 
-        _dragEntity = entity;
-
-        // `.active` elements have `pointer-events: none`.
-        // This prevents the node or vertex being dragged from trying to connect to itself.
-        // _activeIDs = context.graph().parentWays(entity).map(function(parent) { return parent.id; });
-        // _activeIDs.push(entity.id);
-        _activeID = entity.id;
-        setActiveElements();
+        _activeEntity = entity;
+        context.surface().selectAll('.' + _activeEntity.id)
+            .classed('active', true);
 
         context.enter(mode);
     }
@@ -127,8 +106,7 @@ export function modeDragNode(context) {
         if (!event || event.altKey || !d3_select(event.target).classed('target')) {
             return {};
         } else {
-            var d = event.target.__data__;
-            return (d && d.id && context.hasEntity(d.id)) || {};
+            return event.target.__data__ || {};
         }
     }
 
@@ -140,20 +118,21 @@ export function modeDragNode(context) {
         var currMouse = geoVecSubtract(currPoint, nudge);
         var loc = context.projection.invert(currMouse);
 
-        if (!_nudgeInterval) {
-            // If we're not nudging at the edge of the viewport, try to snap..
-            // See also `behavior/draw.js click()`
+        if (!_nudgeInterval) {   // If not nudging at the edge of the viewport, try to snap..
+            // related code
+            // - `mode/drag_node.js`     `doMode()`
+            // - `behavior/draw.js`      `click()`
+            // - `behavior/draw_way.js`  `move()`
             var d = datum();
+            var target = d && d.id && context.hasEntity(d.id);
 
-            // Snap to a node (not self)
-            if (d.type === 'node' && d.id !== entity.id) {
-                loc = d.loc;
-
-            // Snap to a way
-            } else if (d.type === 'way') {
-                var choice = geoChooseEdge(context.childNodes(d), context.mouse(), context.projection);
-                // (not along a segment adjacent to self)
-                if (entity.id !== d.nodes[choice.index - 1] && entity.id !== d.nodes[choice.index]) {
+            if (target && target.type === 'node') {
+                loc = target.loc;
+            } else if (target && target.type === 'way') {
+                var choice = geoChooseEdge(
+                    context.childNodes(target), context.mouse(), context.projection, entity.id
+                );
+                if (choice) {
                     loc = choice.loc;
                 }
             }
@@ -188,18 +167,22 @@ export function modeDragNode(context) {
         if (_isCancelled) return;
 
         var d = datum();
+        var target = d && d.id && context.hasEntity(d.id);
 
-        if (d.type === 'way') {
-            var choice = geoChooseEdge(context.childNodes(d), context.mouse(), context.projection);
+        if (target && target.type === 'way') {
+            var choice = geoChooseEdge(context.childNodes(target), context.mouse(), context.projection, entity.id);
             context.replace(
-                actionAddMidpoint({ loc: choice.loc, edge: [d.nodes[choice.index - 1], d.nodes[choice.index]] }, entity),
-                connectAnnotation(d)
+                actionAddMidpoint({
+                    loc: choice.loc,
+                    edge: [target.nodes[choice.index - 1], target.nodes[choice.index]]
+                }, entity),
+                connectAnnotation(target)
             );
 
-        } else if (d.type === 'node' && d.id !== entity.id) {
+        } else if (target && target.type === 'node') {
             context.replace(
-                actionConnect([d.id, entity.id]),
-                connectAnnotation(d)
+                actionConnect([target.id, entity.id]),
+                connectAnnotation(target)
             );
 
         } else if (_wasMidpoint) {
@@ -228,20 +211,12 @@ export function modeDragNode(context) {
 
 
     function cancel() {
-        behavior.cancel();
+        drag.cancel();
         context.enter(modeBrowse(context));
     }
 
 
-    function setActiveElements() {
-        // context.surface().selectAll(utilEntitySelector(_activeIDs))
-        //     .classed('active', true);
-        context.surface().selectAll('.' + _activeID)
-            .classed('active', true);
-    }
-
-
-    var behavior = behaviorDrag()
+    var drag = behaviorDrag()
         .selector('.layer-points-targets .target')
         .surface(d3_select('#map').node())
         .origin(origin)
@@ -256,11 +231,6 @@ export function modeDragNode(context) {
 
         context.history()
             .on('undone.drag-node', cancel);
-
-        context.map()
-            .on('drawn.drag-node', setActiveElements);
-
-        setActiveElements();
     };
 
 
@@ -275,8 +245,8 @@ export function modeDragNode(context) {
         context.map()
             .on('drawn.drag-node', null);
 
-        // _activeIDs = [];
-        _activeID = null;
+        _activeEntity = null;
+
         context.surface()
             .selectAll('.active')
             .classed('active', false);
@@ -286,19 +256,14 @@ export function modeDragNode(context) {
 
 
     mode.selectedIDs = function() {
-        if (!arguments.length) return _dragEntity ? [_dragEntity.id] : [];
+        if (!arguments.length) return _activeEntity ? [_activeEntity.id] : [];
         // no assign
         return mode;
     };
 
 
-    // mode.activeIDs = function() {
-    //     if (!arguments.length) return _activeIDs;
-    //     // no assign
-    //     return mode;
-    // };
     mode.activeID = function() {
-        if (!arguments.length) return _activeID;
+        if (!arguments.length) return _activeEntity && _activeEntity.id;
         // no assign
         return mode;
     };
@@ -311,7 +276,7 @@ export function modeDragNode(context) {
     };
 
 
-    mode.behavior = behavior;
+    mode.behavior = drag;
 
 
     return mode;

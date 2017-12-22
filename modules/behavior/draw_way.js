@@ -10,37 +10,22 @@ import {
 } from '../actions';
 
 import { behaviorDraw } from './draw';
-
-import {
-    geoChooseEdge,
-    geoEdgeEqual
-} from '../geo';
-
-import {
-    modeBrowse,
-    modeSelect
-} from '../modes';
-
-import {
-    osmNode,
-    osmWay
-} from '../osm';
-
-import { utilEntitySelector } from '../util';
+import { geoChooseEdge, geoEdgeEqual } from '../geo';
+import { modeBrowse, modeSelect } from '../modes';
+import { osmNode, osmWay } from '../osm';
 
 
 export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
-
     var origWay = context.entity(wayId);
     var isArea = context.geometry(wayId) === 'area';
-    var tempEdits = 0;
     var annotation = t((origWay.isDegenerate() ?
         'operations.start.annotation.' :
-        'operations.continue.annotation.') + context.geometry(wayId));
-    var draw = behaviorDraw(context);
-    // var _activeIDs = [];
-    var _activeID;
-    var startIndex;
+        'operations.continue.annotation.') + context.geometry(wayId)
+    );
+    var behavior = behaviorDraw(context);
+    var _tempEdits = 0;
+    var _startIndex;
+
     var start;
     var end;
     var segment;
@@ -48,9 +33,15 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
 
     // initialize the temporary drawing entities
     if (!isArea) {
-        startIndex = typeof index === 'undefined' ? origWay.nodes.length - 1 : 0;
-        start = osmNode({ id: 'nStart', loc: context.entity(origWay.nodes[startIndex]).loc });
-        end = osmNode({ id: 'nEnd', loc: context.map().mouseCoordinates() });
+        _startIndex = (typeof index === 'undefined' ? origWay.nodes.length - 1 : 0);
+        start = osmNode({
+            id: 'nStart',
+            loc: context.entity(origWay.nodes[_startIndex]).loc
+        });
+        end = osmNode({
+            id: 'nEnd',
+            loc: context.map().mouseCoordinates()
+        });
         segment = osmWay({
             id: 'wTemp',
             nodes: typeof index === 'undefined' ? [start.id, end.id] : [end.id, start.id],
@@ -63,21 +54,30 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
     // Push an annotated state for undo to return back to.
     // We must make sure to remove this edit later.
     context.perform(actionNoop(), annotation);
-    tempEdits++;
+    _tempEdits++;
 
     // Add the temporary drawing entities to the graph.
     // We must make sure to remove this edit later.
     context.perform(AddDrawEntities());
-    tempEdits++;
+    _tempEdits++;
 
 
+    // related code
+    // - `mode/drag_node.js`     `doMode()`
+    // - `behavior/draw.js`      `click()`
+    // - `behavior/draw_way.js`  `move()`
     function move(datum) {
         var loc;
-        if (datum.type === 'node' && datum.id !== end.id) {
+        var target = datum && datum.id && context.hasEntity(datum.id);
+        if (target && target.type === 'node') {   // snap to node
             loc = datum.loc;
-
-        } else if (datum.type === 'way') {
-            loc = geoChooseEdge(context.childNodes(datum), context.mouse(), context.projection).loc;
+        } else if (target && target.type === 'way') {   // snap to way
+            var choice = geoChooseEdge(
+                context.childNodes(target), context.mouse(), context.projection, end.id
+            );
+            if (choice) {
+                loc = choice.loc;
+            }
         }
 
         if (!loc) {
@@ -93,7 +93,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
         // Undo popped the history back to the initial annotated no-op edit.
         // Remove initial no-op edit and whatever edit happened immediately before it.
         context.pop(2);
-        tempEdits = 0;
+        _tempEdits = 0;
 
         if (context.hasEntity(wayId)) {
             context.enter(mode);
@@ -104,17 +104,14 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
 
 
     function setActiveElements() {
-        // _activeIDs = isArea ? [wayId, end.id] : [segment.id, start.id, end.id];
-        // context.surface().selectAll(utilEntitySelector(_activeIDs))
-        //     .classed('active', true);
-        _activeID = end.id;
         context.surface().selectAll('.' + end.id)
             .classed('active', true);
     }
 
 
     var drawWay = function(surface) {
-        draw.on('move', move)
+        behavior
+            .on('move', move)
             .on('click', drawWay.add)
             .on('clickWay', drawWay.addWay)
             .on('clickNode', drawWay.addNode)
@@ -128,7 +125,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
 
         setActiveElements();
 
-        surface.call(draw);
+        surface.call(behavior);
 
         context.history()
             .on('undone.draw', undone);
@@ -139,8 +136,8 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
         // Drawing was interrupted unexpectedly.
         // This can happen if the user changes modes,
         // clicks geolocate button, a hashchange event occurs, etc.
-        if (tempEdits) {
-            context.pop(tempEdits);
+        if (_tempEdits) {
+            context.pop(_tempEdits);
             while (context.graph() !== startGraph) {
                 context.pop();
             }
@@ -149,7 +146,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
         context.map()
             .on('drawn.draw', null);
 
-        surface.call(draw.off)
+        surface.call(behavior.off)
             .selectAll('.active')
             .classed('active', false);
 
@@ -201,12 +198,18 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
 
 
     // Accept the current position of the temporary node and continue drawing.
-    drawWay.add = function(loc) {
+    drawWay.add = function(loc, datum) {
+// shouldn't happen now?
         // prevent duplicate nodes
-        var last = context.hasEntity(origWay.nodes[origWay.nodes.length - (isArea ? 2 : 1)]);
-        if (last && last.loc[0] === loc[0] && last.loc[1] === loc[1]) return;
+        // var last = context.hasEntity(origWay.nodes[origWay.nodes.length - (isArea ? 2 : 1)]);
+        // if (last && last.loc[0] === loc[0] && last.loc[1] === loc[1]) return;
 
-        context.pop(tempEdits);
+        if (datum && datum.id && /-nope/.test(datum.id)) {  // can't click here
+            return;
+        }
+
+        context.pop(_tempEdits);
+        _tempEdits = 0;
 
         if (isArea) {
             context.perform(
@@ -222,31 +225,30 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
             );
         }
 
-        tempEdits = 0;
         context.enter(mode);
     };
 
 
     // Connect the way to an existing way.
     drawWay.addWay = function(loc, edge) {
-        if (isArea) {
-            context.pop(tempEdits);
+        context.pop(_tempEdits);
+        _tempEdits = 0;
 
+        if (isArea) {
             context.perform(
                 AddDrawEntities(),
                 actionAddMidpoint({ loc: loc, edge: edge}, end),
                 annotation
             );
         } else {
-            var previousEdge = startIndex ?
-                [origWay.nodes[startIndex], origWay.nodes[startIndex - 1]] :
-                [origWay.nodes[0], origWay.nodes[1]];
+// shouldn't happen now?
+            // var previousEdge = _startIndex ?
+            //     [origWay.nodes[_startIndex], origWay.nodes[_startIndex - 1]] :
+            //     [origWay.nodes[0], origWay.nodes[1]];
 
-            // Avoid creating duplicate segments
-            if (geoEdgeEqual(edge, previousEdge))
-                return;
-
-            context.pop(tempEdits);
+            // // Avoid creating duplicate segments
+            // if (geoEdgeEqual(edge, previousEdge))
+            //     return;
 
             var newNode = osmNode({ loc: loc });
             context.perform(
@@ -256,7 +258,6 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
             );
         }
 
-        tempEdits = 0;
         context.enter(mode);
     };
 
@@ -264,23 +265,25 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
     // Connect the way to an existing node and continue drawing.
     drawWay.addNode = function(node) {
         // Avoid creating duplicate segments
-        if (origWay.areAdjacent(node.id, origWay.nodes[origWay.nodes.length - 1])) return;
+// shouldn't happen now?
+        // if (origWay.areAdjacent(node.id, origWay.nodes[origWay.nodes.length - 1])) return;
 
         // Clicks should not occur on the drawing node, however a space keypress can
         // sometimes grab that node's datum (before it gets classed as `active`?)  #4016
-        if (node.id === end.id) {
-            drawWay.add(node.loc);
-            return;
-        }
+// shouldn't happen now?
+        // if (node.id === end.id) {
+        //     drawWay.add(node.loc);
+        //     return;
+        // }
 
-        context.pop(tempEdits);
+        context.pop(_tempEdits);
+        _tempEdits = 0;
 
         context.perform(
             ReplaceDrawEntities(node),
             annotation
         );
 
-        tempEdits = 0;
         context.enter(mode);
     };
 
@@ -289,8 +292,8 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
     // If the way has enough nodes to be valid, it's selected.
     // Otherwise, delete everything and return to browse mode.
     drawWay.finish = function() {
-        context.pop(tempEdits);
-        tempEdits = 0;
+        context.pop(_tempEdits);
+        _tempEdits = 0;
 
         var way = context.hasEntity(wayId);
         if (!way || way.isDegenerate()) {
@@ -308,8 +311,8 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
 
     // Cancel the draw operation, delete everything, and return to browse mode.
     drawWay.cancel = function() {
-        context.pop(tempEdits);
-        tempEdits = 0;
+        context.pop(_tempEdits);
+        _tempEdits = 0;
 
         while (context.graph() !== startGraph) {
             context.pop();
@@ -323,20 +326,15 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
     };
 
 
-    // drawWay.activeIDs = function() {
-    //     if (!arguments.length) return _activeIDs;
-    //     // no assign
-    //     return drawWay;
-    // };
     drawWay.activeID = function() {
-        if (!arguments.length) return _activeID;
+        if (!arguments.length) return end.id;
         // no assign
         return drawWay;
     };
 
 
     drawWay.tail = function(text) {
-        draw.tail(text);
+        behavior.tail(text);
         return drawWay;
     };
 

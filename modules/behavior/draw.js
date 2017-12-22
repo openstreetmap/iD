@@ -33,8 +33,7 @@ export function behaviorDraw(context) {
 
     var keybinding = d3_keybinding('draw');
 
-    var hover = behaviorHover(context)
-        .altDisables(true)
+    var hover = behaviorHover(context).altDisables(true)
         .on('hover', context.ui().sidebar.hover);
     var tail = behaviorTail();
     var edit = behaviorEdit(context);
@@ -58,10 +57,8 @@ export function behaviorDraw(context) {
         // When drawing, connect only to things classed as targets..
         // (this excludes area fills and active drawing elements)
         var selection = d3_select(element);
-        if (selection.classed('target')) return {};
-
-        var d = selection.datum();
-        return (d && d.id && context.hasEntity(d.id)) || {};
+        if (!selection.classed('target')) return {};
+        return selection.datum();
     }
 
 
@@ -124,28 +121,33 @@ export function behaviorDraw(context) {
     }
 
 
+    // related code
+    // - `mode/drag_node.js`     `doMode()`
+    // - `behavior/draw.js`      `click()`
+    // - `behavior/draw_way.js`  `move()`
     function click() {
+        var d = datum();
+        var target = d && d.id && context.hasEntity(d.id);
+
         var trySnap = geoViewportEdge(context.mouse(), context.map().dimensions()) === null;
         if (trySnap) {
-            // If we're not at the edge of the viewport, try to snap..
-            // See also: `modes/drag_node.js doMove()`
-            var d = datum();
-
-            // Snap to a node
-            if (d.type === 'node') {
-                dispatch.call('clickNode', this, d);
+            if (target && target.type === 'node') {   // Snap to a node
+                dispatch.call('clickNode', this, target);
                 return;
 
-            // Snap to a way
-            } else if (d.type === 'way') {
-                var choice = geoChooseEdge(context.childNodes(d), context.mouse(), context.projection);
-                var edge = [d.nodes[choice.index - 1], d.nodes[choice.index]];
-                dispatch.call('clickWay', this, choice.loc, edge);
-                return;
+            } else if (target && target.type === 'way') {   // Snap to a way
+                var choice = geoChooseEdge(
+                    context.childNodes(target), context.mouse(), context.projection, context.activeID()
+                );
+                if (choice) {
+                    var edge = [target.nodes[choice.index - 1], target.nodes[choice.index]];
+                    dispatch.call('clickWay', this, choice.loc, edge);
+                    return;
+                }
             }
         }
 
-        dispatch.call('click', this, context.map().mouseCoordinates());
+        dispatch.call('click', this, context.map().mouseCoordinates(), d);
     }
 
 
