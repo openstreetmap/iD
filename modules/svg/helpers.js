@@ -245,6 +245,9 @@ export function svgSegmentWay(way, graph, activeID) {
         features.active.push({
             'type': 'Feature',
             'id': way.id + '-nope',   // break the ids on purpose
+            'properties': {
+                'originalID': way.id
+            },
             'geometry': {
                 'type': 'MultiLineString',
                 'coordinates': coordGroups.active

@@ -76,6 +76,7 @@ export function svgAreas(projection, context) {
 
         // NOPE
         var nopes = selection.selectAll('.area.target-nope')
+            .filter(function(d) { return filter({ id: d.properties.originalID }); })
             .data(data.nopes, function key(d) { return d.id; });
 
         // exit

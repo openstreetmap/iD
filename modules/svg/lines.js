@@ -72,6 +72,7 @@ export function svgLines(projection, context) {
 
         // NOPE
         var nopes = selection.selectAll('.line.target-nope')
+            .filter(function(d) { return filter({ id: d.properties.originalID }); })
             .data(data.nopes, function key(d) { return d.id; });
 
         // exit
@@ -101,6 +102,11 @@ export function svgLines(projection, context) {
 
 
         function drawLineGroup(selection, klass, isSelected) {
+            // Note: Don't add `.selected` class in draw modes
+            var mode = context.mode();
+            var isDrawing = mode && /^draw/.test(mode.id);
+            var selectedClass = (!isDrawing && isSelected) ? 'selected ' : '';
+
             var lines = selection
                 .selectAll('path')
                 .filter(filter)
@@ -109,13 +115,13 @@ export function svgLines(projection, context) {
             lines.exit()
                 .remove();
 
-            // Optimization: call simple TagClasses only on enter selection. This
+            // Optimization: Call expensive TagClasses only on enter selection. This
             // works because osmEntity.key is defined to include the entity v attribute.
             lines.enter()
                 .append('path')
                 .attr('class', function(d) {
-                    return 'way line ' + klass + ' ' + d.id + (isSelected ? ' selected' : '') +
-                        (oldMultiPolygonOuters[d.id] ? ' old-multipolygon' : '');
+                    var oldMPClass = oldMultiPolygonOuters[d.id] ? 'old-multipolygon ' : '';
+                    return 'way line ' + klass + ' ' + selectedClass + oldMPClass + d.id;
                 })
                 .call(svgTagClasses())
                 .merge(lines)

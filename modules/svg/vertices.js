@@ -196,6 +196,7 @@ export function svgVertices(projection, context) {
             } else {
                 data.nopes.push({
                     id: node.id + '-nope',   // not a real osmNode, break the id on purpose
+                    originalID: node.id,
                     loc: node.loc
                 });
             }
@@ -222,6 +223,7 @@ export function svgVertices(projection, context) {
 
         // NOPE
         var nopes = selection.selectAll('.vertex.target-nope')
+            .filter(function(d) { return filter({ id: d.originalID }); })
             .data(data.nopes, function key(d) { return d.id; });
 
         // exit
@@ -351,11 +353,8 @@ export function svgVertices(projection, context) {
             .call(draw, graph, currentVisible(all), sets, filterRendered);
 
         // Draw touch targets..
-        var filterTargets = function(d) {
-            return isMoving ? true : filterRendered(d);
-        };
         selection.selectAll('.layer-points .layer-points-targets')
-            .call(drawTargets, graph, currentVisible(all), filterTargets);
+            .call(drawTargets, graph, currentVisible(all), filterRendered);
 
 
         function currentVisible(which) {
