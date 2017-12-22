@@ -31,6 +31,7 @@
     "icon-up":                  { "viewBox": "580 0 20 20" },
     "icon-down":                { "viewBox": "600 0 20 20" },
     "icon-more":                { "viewBox": "620 0 20 20" },
+    "icon-no":                  { "viewBox": "640 0 20 20" },
 
     "icon-alert-shape":               { "fill": "currentColor" },
     "icon-point-shape":               { "fill": "currentColor" },
@@ -68,6 +69,7 @@
     "icon-up-shape":                  { "fill": "currentColor" },
     "icon-down-shape":                { "fill": "currentColor" },
     "icon-more-shape":                { "fill": "currentColor" },
+    "icon-no-shape":                  { "fill": "currentColor" },
 
     "highway-motorway":         { "viewBox": "0 20 60 60" },
     "highway-trunk":            { "viewBox": "60 20 60 60" },
@@ -218,11 +220,15 @@
 
     "ferry-line":            { "viewBox": "660 140 60 60" },
     "pipeline-line":         { "viewBox": "720 140 60 60" },
+    "piste-line":            { "viewBox": "780 140 60 60" },
 
     "ferry-line-dashes":        { "fill": "inherit" },
     "ferry-line-stroke1":       { "fill": "currentColor" },
     "ferry-line-stroke2":       { "fill": "currentColor" },
     "pipeline-line-stroke":     { "fill": "currentColor" },
+    "piste-line-dashes":        { "fill": "inherit" },
+    "piste-line-stroke1":       { "fill": "currentColor" },
+    "piste-line-stroke2":       { "fill": "currentColor" },
 
     "relation":                 { "viewBox": "0 200 60 60" },
     "boundary":                 { "viewBox": "60 200 60 60" },
@@ -240,6 +246,10 @@
     "route-power":              { "viewBox": "780 200 60 60" },
     "route-water":              { "viewBox": "840 200 60 60" },
     "route-master":             { "viewBox": "0 260 60 60" },
+    "route-light-rail":         { "viewBox": "600 260 60 60" },
+    "route-piste":              { "viewBox": "660 260 60 60" },
+    "route-line":               { "viewBox": "720 260 60 60" },
+    "route-subway":             { "viewBox": "780 260 60 60" },
 
     "route-bicycle-stroke":      { "fill": "currentColor" },
     "route-foot-stroke":         { "fill": "currentColor" },
@@ -247,6 +257,7 @@
     "route-ferry-stroke":        { "fill": "currentColor" },
     "route-water-stroke1":       { "fill": "currentColor" },
     "route-water-stroke2":       { "fill": "currentColor" },
+    "route-piste-stroke":        { "fill": "currentColor" },
 
     "restriction-no-straight-on":   { "viewBox": "60 260 60 60" },
     "restriction-no-u-turn":        { "viewBox": "120 260 60 60" },
@@ -278,6 +289,11 @@
     "poi-shintoist":            { "viewBox": "640 320 15 15" },
     "poi-buffer-stop":          { "viewBox": "655 320 15 15" },
     "poi-railway-signals":      { "viewBox": "670 320 15 15" },
+    "poi-monorail":             { "viewBox": "685 320 15 15" },
+    "poi-tram":                 { "viewBox": "700 320 15 15" },
+    "poi-subway":               { "viewBox": "715 320 15 15" },
+    "poi-light-rail":           { "viewBox": "730 320 15 15" },
+    "poi-trolleybus":           { "viewBox": "745 320 15 15" },
 
     "poi-foot-shape":              { "fill": "currentColor" },
     "poi-traffic-signals-shape":   { "fill": "currentColor" },
@@ -298,6 +314,11 @@
     "poi-shintoist-shape":         { "fill": "currentColor" },
     "poi-buffer-stop-shape":       { "fill": "currentColor" },
     "poi-railway-signals-shape":   { "fill": "currentColor" },
+    "poi-monorail-shape":          { "fill": "currentColor" },
+    "poi-tram-shape":              { "fill": "currentColor" },
+    "poi-subway-shape":            { "fill": "currentColor" },
+    "poi-light-rail-shape":        { "fill": "currentColor" },
+    "poi-trolleybus-shape":        { "fill": "currentColor" },
 
     "poi-vending-machine":      { "viewBox": "400 335 15 15" },
     "poi-dice":                 { "viewBox": "415 335 15 15" },

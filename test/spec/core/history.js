@@ -362,13 +362,27 @@ describe('iD.History', function () {
                 node2 = iD.Node({id: 'n2'}),
                 node3 = iD.Node({id: 'n3'});
             history.merge([node1, node2, node3]);
-            history.perform(iD.actionAddEntity(node_1)); // addition
-            history.perform(iD.actionChangeTags('n2', {k: 'v'})); // modification
-            history.perform(iD.actionDeleteNode('n3')); // deletion
+            history.perform(iD.actionAddEntity(node_1));           // addition
+            history.perform(iD.actionChangeTags('n2', {k: 'v'}));  // modification
+            history.perform(iD.actionDeleteNode('n3'));            // deletion
+
             var json = JSON.parse(history.toJSON());
+            var node_1_json = JSON.parse(JSON.stringify(node_1));
+            var node1_json = JSON.parse(JSON.stringify(node1));
+            var node2_json = JSON.parse(JSON.stringify(node2));
+            var node2_upd_json = JSON.parse(JSON.stringify(node2.update({tags: {k: 'v'}})));
+            var node3_json = JSON.parse(JSON.stringify(node3));
+
             expect(json.version).to.eql(3);
-            expect( _.isEqual(json.entities, [node_1, node2.update({tags: {k: 'v'}})]) ).to.be.ok;
-            expect( _.isEqual(json.baseEntities, [node2, node3]) ).to.be.ok;
+            expect(json.entities).to.deep.own.include(node_1_json);
+            expect(json.entities).to.not.include(node1_json);
+            expect(json.entities).to.deep.own.include(node2_upd_json);
+            expect(json.entities).to.not.include(node3_json);
+
+            expect(json.baseEntities).to.not.include(node_1_json);
+            expect(json.baseEntities).to.not.include(node1_json);
+            expect(json.baseEntities).to.deep.own.include(node2_json);
+            expect(json.baseEntities).to.deep.own.include(node3_json);
         });
     });
 

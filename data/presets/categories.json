@@ -21,6 +21,7 @@
                 "building",
                 "building/house",
                 "building/apartments",
+                "building/retail",
                 "building/commercial",
                 "building/industrial",
                 "building/residential"
@@ -55,7 +56,8 @@
                 "landuse/meadow",
                 "landuse/aquaculture",
                 "landuse/cemetery",
-                "landuse/military"
+                "landuse/military",
+                "landuse/religious"
             ]
         },
         "category-natural-area": {
@@ -107,7 +109,7 @@
                 "highway/footway",
                 "highway/cycleway",
                 "highway/bridleway",
-                "highway/pedestrian"
+                "highway/pedestrian_line"
             ]
         },
         "category-rail": {
@@ -171,9 +173,12 @@
                 "type/route/foot",
                 "type/route/hiking",
                 "type/route/horse",
+                "type/route/piste",
                 "type/route/bus",
                 "type/route/train",
+                "type/route/light_rail",
                 "type/route/tram",
+                "type/route/subway",
                 "type/route/ferry",
                 "type/route/power",
                 "type/route/pipeline",

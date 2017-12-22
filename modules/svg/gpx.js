@@ -26,7 +26,8 @@ import toGeoJSON from '@mapbox/togeojson';
 export function svgGpx(projection, context, dispatch) {
     var showLabels = true,
         detected = utilDetect(),
-        layer;
+        layer,
+        src;
 
 
     function init() {
@@ -187,6 +188,8 @@ export function svgGpx(projection, context, dispatch) {
     drawGpx.url = function(url) {
         d3_text(url, function(err, data) {
             if (!err) {
+                src = url;
+
                 var extension = getExtension(url);
                 parseSaveAndZoom(extension, data);
             }
@@ -201,6 +204,8 @@ export function svgGpx(projection, context, dispatch) {
             reader = new FileReader();
 
         reader.onload = (function(file) {
+            src = file.name;
+
             var extension = getExtension(file.name);
 
             return function (e) {
@@ -212,6 +217,9 @@ export function svgGpx(projection, context, dispatch) {
         return this;
     };
 
+    drawGpx.getSrc = function () {
+      return src;
+    };
 
     drawGpx.fitZoom = function() {
         if (!this.hasGpx()) return this;

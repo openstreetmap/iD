@@ -1,5 +1,5 @@
 {
-    "key": "max_age",
+    "key": "min_age",
     "type": "number",
     "label": "Minimum Age"
 }

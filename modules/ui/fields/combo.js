@@ -37,8 +37,10 @@ export function uiFieldCombo(field, context) {
         optstrings = field.strings && field.strings.options,
         optarray = field.options,
         snake_case = (field.snake_case || (field.snake_case === undefined)),
+        caseSensitive = field.caseSensitive,
         combobox = d3_combobox()
             .container(context.container())
+            .caseSensitive(caseSensitive)
             .minItems(isMulti || isSemi ? 1 : 2),
         comboData = [],
         multiData = [],

@@ -1,0 +1,13 @@
+{
+  "geometry": [
+    "area"
+  ],
+  "fields": [
+    "name"
+  ],
+  "tags": {
+    "landuse": "religious"
+  },
+  "terms": [],
+  "name": "Religious Area"
+}

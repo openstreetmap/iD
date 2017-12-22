@@ -54,6 +54,7 @@ describe('iD.serviceMapillary', function() {
             var cache = mapillary.cache();
             expect(cache).to.have.property('images');
             expect(cache).to.have.property('objects');
+            expect(cache).to.have.property('sequences');
             expect(cache).to.have.property('detections');
 
             mapillary.init();
@@ -64,12 +65,12 @@ describe('iD.serviceMapillary', function() {
 
     describe('#reset', function() {
         it('resets cache and image', function() {
-            mapillary.cache({foo: 'bar'});
-            mapillary.selectedImage('baz');
+            mapillary.cache().foo = 'bar';
+            mapillary.selectImage({ key: 'baz', loc: [10,0] });
 
             mapillary.reset();
             expect(mapillary.cache()).to.not.have.property('foo');
-            expect(mapillary.selectedImage()).to.be.null;
+            expect(mapillary.getSelectedImage()).to.be.null;
         });
     });
 
@@ -348,6 +349,44 @@ describe('iD.serviceMapillary', function() {
         });
     });
 
+
+    describe('#sequences', function() {
+        it('returns sequence linestrings in the visible map area', function() {
+            var features = [
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '0', loc: [10,0], ca: 90 } },
+                { minX: 10, minY: 0, maxX: 10, maxY: 0, data: { key: '1', loc: [10,0], ca: 90 } },
+                { minX: 10, minY: 1, maxX: 10, maxY: 1, data: { key: '2', loc: [10,1], ca: 90 } }
+            ];
+
+            mapillary.cache().images.rtree.load(features);
+
+            var gj = {
+                type: 'Feature',
+                geometry: {
+                    type: 'LineString',
+                    coordinates: [[10,0], [10,0], [10,1]],
+                    properties: {
+                        key: '-',
+                        pano: false,
+                        coordinateProperties: {
+                            cas: [90, 90, 90],
+                            image_keys: ['0', '1', '2']
+                        }
+                    }
+                }
+            };
+
+            mapillary.cache().sequences.lineString['-'] = gj;
+            mapillary.cache().sequences.forImageKey['0'] = '-';
+            mapillary.cache().sequences.forImageKey['1'] = '-';
+            mapillary.cache().sequences.forImageKey['2'] = '-';
+
+            var res = mapillary.sequences(context.projection);
+            expect(res).to.deep.eql([gj]);
+        });
+    });
+
+
     describe('#signsSupported', function() {
         it('returns false for Internet Explorer', function() {
             ua = 'Trident/7.0; rv:11.0';
@@ -391,10 +430,11 @@ describe('iD.serviceMapillary', function() {
         });
     });
 
-    describe('#selectedImage', function() {
-        it('sets and gets selected image', function() {
-            mapillary.selectedImage('foo');
-            expect(mapillary.selectedImage()).to.eql('foo');
+    describe('#selectImage', function() {
+        it('gets and sets the selected image', function() {
+            var d = { key: 'baz', loc: [10,0] };
+            mapillary.selectImage(d);
+            expect(mapillary.getSelectedImage()).to.eql(d);
         });
     });
 

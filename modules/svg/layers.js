@@ -11,6 +11,7 @@ import { svgGeoService } from './geoservice';
 import { svgGpx } from './gpx';
 import { svgMapillaryImages } from './mapillary_images';
 import { svgMapillarySigns } from './mapillary_signs';
+import { svgOpenstreetcamImages } from './openstreetcam_images';
 import { svgOsm } from './osm';
 import { utilRebind } from '../util/rebind';
 import { utilGetDimensions, utilSetDimensions } from '../util/dimensions';
@@ -25,6 +26,7 @@ export function svgLayers(projection, context) {
             { id: 'gpx', layer: svgGpx(projection, context, dispatch) },
             { id: 'mapillary-images', layer: svgMapillaryImages(projection, context, dispatch) },
             { id: 'mapillary-signs',  layer: svgMapillarySigns(projection, context, dispatch) },
+            { id: 'openstreetcam-images', layer: svgOpenstreetcamImages(projection, context, dispatch) },
             { id: 'debug', layer: svgDebug(projection, context, dispatch) }
         ];
 

@@ -18,6 +18,7 @@ export function operationDelete(selectedIDs, context) {
 
     var operation = function() {
         var nextSelectedID;
+        var nextSelectedLoc;
 
         if (selectedIDs.length === 1) {
             var id = selectedIDs[0],
@@ -27,7 +28,7 @@ export function operationDelete(selectedIDs, context) {
                 parent = parents[0];
 
             // Select the next closest node in the way.
-            if (geometry === 'vertex' && parent.nodes.length > 2) {
+            if (geometry === 'vertex') {
                 var nodes = parent.nodes,
                     i = nodes.indexOf(id);
 
@@ -42,13 +43,19 @@ export function operationDelete(selectedIDs, context) {
                 }
 
                 nextSelectedID = nodes[i];
+                nextSelectedLoc = context.entity(nextSelectedID).loc;
             }
         }
 
         context.perform(action, operation.annotation());
 
-        if (nextSelectedID && context.hasEntity(nextSelectedID)) {
-            context.enter(modeSelect(context, [nextSelectedID]).follow(true));
+        if (nextSelectedID && nextSelectedLoc) {
+            if (context.hasEntity(nextSelectedID)) {
+                context.enter(modeSelect(context, [nextSelectedID]).follow(true));
+            } else {
+                context.map().centerEase(nextSelectedLoc);
+                context.enter(modeBrowse(context));
+            }
         } else {
             context.enter(modeBrowse(context));
         }

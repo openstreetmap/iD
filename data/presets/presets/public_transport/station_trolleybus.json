@@ -1,0 +1,50 @@
+{
+    "icon": "poi-trolleybus",
+    "fields": [
+        "name",
+        "network",
+        "operator",
+        "address",
+        "building_area",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "public_transport": "station",
+        "trolleybus": "yes"
+    },
+    "addTags": {
+        "public_transport": "station",
+        "trolleybus": "yes",
+        "amenity": "bus_station"
+    },
+    "removeTags": {
+        "public_transport": "station",
+        "trolleybus": "yes",
+        "amenity": "bus_station"
+    },
+    "reference": {
+        "key": "amenity",
+        "value": "bus_station"
+    },
+    "terms": [
+        "bus",
+        "electric",
+        "public transit",
+        "public transportation",
+        "station",
+        "streetcar",
+        "terminal",
+        "trackless",
+        "tram",
+        "trolley",
+        "transit",
+        "transportation"
+    ],
+    "name": "Trolleybus Station / Terminal"
+}

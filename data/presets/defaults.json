@@ -50,6 +50,7 @@
         "relation": [
             "category-route",
             "category-restriction",
+            "public_transport/stop_area",
             "type/boundary",
             "type/waterway",
             "type/multipolygon",

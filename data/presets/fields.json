@@ -201,6 +201,11 @@
             "type": "typeCombo",
             "label": "Type"
         },
+        "agrarian": {
+            "key": "agrarian",
+            "type": "semiCombo",
+            "label": "Products"
+        },
         "amenity": {
             "key": "amenity",
             "type": "typeCombo",
@@ -311,6 +316,11 @@
             "type": "typeCombo",
             "label": "Type"
         },
+        "boules": {
+            "key": "boules",
+            "type": "typeCombo",
+            "label": "Type"
+        },
         "boundary": {
             "key": "boundary",
             "type": "combo",
@@ -320,6 +330,11 @@
             "key": "brand",
             "type": "text",
             "label": "Brand"
+        },
+        "brewery": {
+            "key": "brewery",
+            "type": "semiCombo",
+            "label": "Draft Beers"
         },
         "bridge": {
             "key": "bridge",
@@ -343,6 +358,12 @@
             "key": "bunker_type",
             "type": "combo",
             "label": "Type"
+        },
+        "cables": {
+            "key": "cables",
+            "type": "number",
+            "label": "Cables",
+            "placeholder": "1, 2, 3..."
         },
         "camera/direction": {
             "key": "camera:direction",
@@ -589,6 +610,12 @@
             "label": "Description",
             "universal": true
         },
+        "devices": {
+            "key": "devices",
+            "type": "number",
+            "label": "Devices",
+            "placeholder": "1, 2, 3..."
+        },
         "diaper": {
             "key": "diaper",
             "type": "combo",
@@ -723,6 +750,11 @@
                 }
             }
         },
+        "fitness_station": {
+            "key": "fitness_station",
+            "type": "typeCombo",
+            "label": "Equipment Type"
+        },
         "fixme": {
             "key": "fixme",
             "type": "textarea",
@@ -734,6 +766,11 @@
             "type": "typeCombo",
             "label": "Type",
             "placeholder": "Default"
+        },
+        "frequency": {
+            "key": "frequency",
+            "type": "combo",
+            "label": "Operating Frequency"
         },
         "fuel_multi": {
             "key": "fuel:",
@@ -786,6 +823,11 @@
         "generator/type": {
             "key": "generator:type",
             "type": "combo",
+            "label": "Type"
+        },
+        "government": {
+            "key": "government",
+            "type": "typeCombo",
             "label": "Type"
         },
         "grape_variety": {
@@ -1104,6 +1146,11 @@
             "placeholder": "Distance to one decimal (123.4)",
             "label": "Milestone Position"
         },
+        "monitoring_multi": {
+            "key": "monitoring:",
+            "type": "multiCombo",
+            "label": "Monitoring"
+        },
         "mtb/scale": {
             "key": "mtb:scale",
             "type": "combo",
@@ -1311,6 +1358,12 @@
             "type": "multiCombo",
             "label": "Payment Types"
         },
+        "phases": {
+            "key": "phases",
+            "type": "number",
+            "label": "Phases",
+            "placeholder": "1, 2, 3..."
+        },
         "phone": {
             "key": "phone",
             "type": "tel",
@@ -1396,7 +1449,7 @@
             "label": "Maximum Age"
         },
         "playground/min_age": {
-            "key": "max_age",
+            "key": "min_age",
             "type": "number",
             "label": "Minimum Age"
         },
@@ -1430,22 +1483,16 @@
             "type": "typeCombo",
             "label": "Type"
         },
+        "rating": {
+            "key": "rating",
+            "type": "combo",
+            "label": "Power Rating",
+            "snake_case": false
+        },
         "recycling_accepts": {
             "key": "recycling:",
             "type": "multiCombo",
             "label": "Accepts"
-        },
-        "recycling_type": {
-            "key": "recycling_type",
-            "default": "container",
-            "type": "combo",
-            "label": "Recycling Type",
-            "strings": {
-                "options": {
-                    "container": "Container",
-                    "centre": "Recycling Center"
-                }
-            }
         },
         "ref_aeroway_gate": {
             "key": "ref",
@@ -1688,6 +1735,8 @@
             "icon": "source",
             "universal": true,
             "label": "Sources",
+            "snake_case": false,
+            "caseSensitive": true,
             "options": [
                 "survey",
                 "local knowledge",
@@ -1801,6 +1850,11 @@
             "type": "combo",
             "label": "Type"
         },
+        "substance": {
+            "key": "substance",
+            "type": "combo",
+            "label": "Substance"
+        },
         "substation": {
             "key": "substation",
             "type": "typeCombo",
@@ -1842,6 +1896,19 @@
             "key": "surveillance:zone",
             "type": "combo",
             "label": "Surveillance Zone"
+        },
+        "switch": {
+            "key": "switch",
+            "type": "combo",
+            "label": "Type",
+            "strings": {
+                "options": {
+                    "mechanical": "Mechanical",
+                    "circuit_breaker": "Circuit Breaker",
+                    "disconnector": "Disconnector",
+                    "earthing": "Earthing"
+                }
+            }
         },
         "tactile_paving": {
             "key": "tactile_paving",
@@ -1954,6 +2021,23 @@
                 }
             }
         },
+        "transformer": {
+            "key": "transformer",
+            "type": "combo",
+            "label": "Type",
+            "strings": {
+                "options": {
+                    "distribution": "Distribution",
+                    "generator": "Generator",
+                    "converter": "Converter",
+                    "traction": "Traction",
+                    "auto": "Autotransformer",
+                    "phase_angle_regulator": "Phase Angle Regulator",
+                    "auxiliary": "Auxiliary",
+                    "yes": "Unknown"
+                }
+            }
+        },
         "trees": {
             "key": "trees",
             "type": "semiCombo",
@@ -2005,6 +2089,26 @@
                     "scoria": "Scoria"
                 }
             }
+        },
+        "voltage": {
+            "key": "voltage",
+            "type": "combo",
+            "label": "Voltage"
+        },
+        "voltage/primary": {
+            "key": "voltage:primary",
+            "type": "combo",
+            "label": "Primary Voltage"
+        },
+        "voltage/secondary": {
+            "key": "voltage:secondary",
+            "type": "combo",
+            "label": "Secondary Voltage"
+        },
+        "voltage/tertiary": {
+            "key": "voltage:tertiary",
+            "type": "combo",
+            "label": "Tertiary Voltage"
         },
         "wall": {
             "key": "wall",
@@ -2066,6 +2170,28 @@
             "icon": "wikipedia",
             "universal": true,
             "label": "Wikipedia"
+        },
+        "windings": {
+            "key": "windings",
+            "type": "number",
+            "label": "Windings",
+            "placeholder": "1, 2, 3..."
+        },
+        "windings/configuration": {
+            "key": "windings:configuration",
+            "type": "combo",
+            "label": "Windings Configuration",
+            "strings": {
+                "options": {
+                    "star": "Star / Wye",
+                    "delta": "Delta",
+                    "open-delta": "Open Delta",
+                    "zigzag": "Zig Zag",
+                    "open": "Open",
+                    "scott": "Scott",
+                    "leblanc": "Leblanc"
+                }
+            }
         }
     }
 }

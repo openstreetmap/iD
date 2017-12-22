@@ -8,9 +8,10 @@ import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import { t, textDirection } from '../util/locale';
 import { tooltip } from '../util/tooltip';
 
-import { svgDefs, svgIcon } from '../svg/index';
-import { modeBrowse } from '../modes/index';
-import { behaviorHash } from '../behavior/index';
+import { behaviorHash } from '../behavior';
+import { modeBrowse } from '../modes';
+import { services } from '../services';
+import { svgDefs, svgIcon } from '../svg';
 import { utilGetDimensions } from '../util/dimensions';
 
 import { uiAccount } from './account';
@@ -236,6 +237,23 @@ export function uiInit(context) {
             .attr('class', 'user-list')
             .attr('tabindex', -1)
             .call(uiContributors(context));
+
+
+        var photoviewer = content
+            .append('div')
+            .attr('id', 'photoviewer')
+            .classed('al', true)       // 'al'=left,  'ar'=right
+            .classed('hide', true);
+
+        photoviewer
+            .append('button')
+            .attr('class', 'thumb-hide')
+            .on('click', function () {
+                if (services.mapillary) { services.mapillary.hideViewer(); }
+                if (services.openstreetcam) { services.openstreetcam.hideViewer(); }
+            })
+            .append('div')
+            .call(svgIcon('#icon-close'));
 
 
         window.onbeforeunload = function() {

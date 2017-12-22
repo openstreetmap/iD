@@ -1,0 +1,41 @@
+{
+    "icon": "poi-tram",
+    "fields": [
+        "name",
+        "network",
+        "operator",
+        "address",
+        "building_area",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "public_transport": "station",
+        "tram": "yes"
+    },
+    "reference": {
+        "key": "public_transport",
+        "value": "station"
+    },
+    "terms": [
+        "electric",
+        "light rail",
+        "public transit",
+        "public transportation",
+        "rail",
+        "station",
+        "streetcar",
+        "terminal",
+        "track",
+        "tram",
+        "trolley",
+        "transit",
+        "transportation"
+    ],
+    "name": "Tram Station"
+}

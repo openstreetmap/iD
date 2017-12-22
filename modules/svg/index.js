@@ -11,6 +11,7 @@ export { svgMapillaryImages } from './mapillary_images.js';
 export { svgMapillarySigns } from './mapillary_signs.js';
 export { svgMidpoints } from './midpoints.js';
 export { svgOneWaySegments } from './one_way_segments.js';
+export { svgOpenstreetcamImages } from './openstreetcam_images.js';
 export { svgOsm } from './osm.js';
 export { svgPath } from './path.js';
 export { svgPointTransform } from './point_transform.js';

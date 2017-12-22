@@ -1,0 +1,41 @@
+{
+    "icon": "pitch",
+    "fields": [
+        "ref",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "fitness_station",
+        "fitness_station": "horizontal_bar"
+    },
+    "addTags": {
+        "leisure": "fitness_station",
+        "fitness_station": "horizontal_bar",
+        "sport": "fitness"
+    },
+    "removeTags": {
+        "leisure": "fitness_station",
+        "fitness_station": "horizontal_bar",
+        "sport": "fitness"
+    },
+    "reference": {
+        "key": "leisure",
+        "value": "fitness_station"
+    },
+    "terms": [
+        "bar",
+        "chinup",
+        "chin up",
+        "exercise",
+        "fitness",
+        "gym",
+        "pullup",
+        "pull up",
+        "trim trail"
+    ],
+    "name": "Exercise Horizontal Bar"
+}

@@ -1,0 +1,42 @@
+{
+    "icon": "poi-subway",
+    "fields": [
+        "name",
+        "ref_stop_position",
+        "network",
+        "operator"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "public_transport": "stop_position",
+        "subway": "yes"
+    },
+    "addTags": {
+        "public_transport": "stop_position",
+        "subway": "yes",
+        "railway": "stop"
+    },
+    "removeTags": {
+        "public_transport": "stop_position",
+        "subway": "yes",
+        "railway": "stop"
+    },
+    "reference": {
+        "key": "railway",
+        "value": "stop"
+    },
+    "terms": [
+        "metro",
+        "public transit",
+        "public transportation",
+        "rail",
+        "subway",
+        "track",
+        "transit",
+        "transportation",
+        "underground"
+    ],
+    "name": "Subway Stopping Location"
+}

@@ -1,0 +1,46 @@
+{
+    "icon": "rail",
+    "fields": [
+        "name",
+        "ref_platform",
+        "network",
+        "operator",
+        "surface",
+        "lit",
+        "bench",
+        "shelter"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "public_transport": "platform",
+        "train": "yes"
+    },
+    "addTags": {
+        "public_transport": "platform",
+        "train": "yes",
+        "railway": "platform"
+    },
+    "removeTags": {
+        "public_transport": "platform",
+        "train": "yes",
+        "railway": "platform"
+    },
+    "reference": {
+        "key": "railway",
+        "value": "platform"
+    },
+    "terms": [
+        "platform",
+        "public transit",
+        "public transportation",
+        "rail",
+        "track",
+        "train",
+        "transit",
+        "transportation"
+    ],
+    "name": "Train Stop / Platform"
+}

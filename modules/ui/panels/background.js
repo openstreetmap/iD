@@ -20,8 +20,11 @@ export function uiPanelBackground(context) {
     var debouncedRedraw = _debounce(redraw, 250);
 
     function redraw(selection) {
-        if (currSourceName !== background.baseLayerSource().name()) {
-            currSourceName = background.baseLayerSource().name();
+        var source = background.baseLayerSource(),
+            isDG = (source.id.match(/^DigitalGlobe/i) !== null);
+
+        if (currSourceName !== source.name()) {
+            currSourceName = source.name();
             metadata = {};
         }
 
@@ -36,11 +39,14 @@ export function uiPanelBackground(context) {
             .text(currSourceName);
 
         metadataKeys.forEach(function(k) {
+            // DigitalGlobe vintage is available in raster layers for now.
+            if (isDG && k === 'vintage') return;
+
             list
                 .append('li')
                 .attr('class', 'background-info-list-' + k)
                 .classed('hide', !metadata[k])
-                .text(t('info_panels.background.' + k) + ': ')
+                .text(t('info_panels.background.' + k) + ':')
                 .append('span')
                 .attr('class', 'background-info-span-' + k)
                 .text(metadata[k]);
@@ -48,11 +54,11 @@ export function uiPanelBackground(context) {
 
         debouncedGetMetadata(selection);
 
-        var toggle = context.getDebug('tile') ? 'hide_tiles' : 'show_tiles';
+        var toggleTiles = context.getDebug('tile') ? 'hide_tiles' : 'show_tiles';
 
         selection
             .append('a')
-            .text(t('info_panels.background.' + toggle))
+            .text(t('info_panels.background.' + toggleTiles))
             .attr('href', '#')
             .attr('class', 'button button-toggle-tiles')
             .on('click', function() {
@@ -60,6 +66,34 @@ export function uiPanelBackground(context) {
                 context.setDebug('tile', !context.getDebug('tile'));
                 selection.call(redraw);
             });
+
+        if (isDG) {
+            var key = source.id + '-vintage';
+            var sourceVintage = context.background().findSource(key);
+            var showsVintage = context.background().showsLayer(sourceVintage);
+            var toggleVintage = showsVintage ? 'hide_vintage' : 'show_vintage';
+            selection
+                .append('a')
+                .text(t('info_panels.background.' + toggleVintage))
+                .attr('href', '#')
+                .attr('class', 'button button-toggle-vintage')
+                .on('click', function() {
+                    d3_event.preventDefault();
+                    context.background().toggleOverlayLayer(sourceVintage);
+                    selection.call(redraw);
+                });
+        }
+
+        // disable if necessary
+        ['DigitalGlobe-Premium', 'DigitalGlobe-Standard'].forEach(function(layerId) {
+            if (source.id !== layerId) {
+                var key = layerId + '-vintage';
+                var sourceVintage = context.background().findSource(key);
+                if (context.background().showsLayer(sourceVintage)) {
+                    context.background().toggleOverlayLayer(sourceVintage);
+                }
+            }
+        });
     }
 
 

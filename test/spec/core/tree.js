@@ -182,18 +182,15 @@ describe('iD.Tree', function() {
                 tree = iD.Tree(graph),
                 n1 = iD.Node({id: 'n1', loc: [1, 1]}),
                 n2 = iD.Node({id: 'n2', loc: [3, 3]}),
-                way = iD.Way({nodes: ['n1', 'n2']}),
+                way = iD.Way({id: 'w1', nodes: ['n1', 'n2']}),
                 extent = iD.geoExtent([0, 0], [4, 4]);
 
             graph = graph.replace(n1).replace(n2).replace(way);
             expect(tree.intersects(extent, graph)).to.eql([n1, n2, way]);
 
             graph = graph.replace(n1.move([1.1,1.1])).replace(n2.move([2.1,2.1]));
-            expect(
-                _.map(tree.intersects(extent, graph),'id').sort()
-            ).to.eql(
-                _.map([n1, n2, way],'id').sort()
-            );
+            var intersects = tree.intersects(extent, graph).map(function(e) { return e.id; });
+            expect(intersects).to.have.same.members(['n1','n2','w1']);
         });
 
         it('doesn\'t include removed entities', function() {

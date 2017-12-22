@@ -72,7 +72,7 @@ sources.concat(whitelist).forEach(function(source) {
     if (extent.min_zoom || extent.max_zoom) {
         im.scaleExtent = [
             extent.min_zoom || 0,
-            extent.max_zoom || 20
+            extent.max_zoom || 22
         ];
     }
 

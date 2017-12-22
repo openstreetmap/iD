@@ -235,7 +235,6 @@
             "localized_translation_language": "揀話",
             "localized_translation_name": "名"
         },
-        "zoom_in_edit": "放大去改",
         "logout": "簽走",
         "loading_auth": "駁上去公家街圖⋯⋯",
         "report_a_bug": "報錯",
@@ -468,8 +467,7 @@
         "splash": {
             "welcome": "歡迎來到艾第公家街圖造圖。",
             "text": "艾第爾件架生，易用之時，亦功用多多，用來投稿修改去，世界至好，任用嘅世界地圖片。現時版本係{version}。想多啲資料，睇下 {website}同埋去{github}報告出錯。",
-            "walkthrough": "開始逐步解釋",
-            "start": "卽改"
+            "walkthrough": "開始逐步解釋"
         },
         "source_switch": {
             "live": "運行之中",
@@ -490,10 +488,6 @@
             "untagged_area_tooltip": "揀種地貌，兼且寫呢範圍係乜來。",
             "tag_suggests_area": "{tag}籤話條綫係範圍，實情佢唔係。",
             "deprecated_tags": "廢籤：{tags}"
-        },
-        "zoom": {
-            "in": "放大",
-            "out": "縮細"
         },
         "cannot_zoom": "今下模式，無得再縮。",
         "full_screen": "來回全螢幕",
@@ -2367,17 +2361,9 @@
                     "name": "寫字樓",
                     "terms": "Office,寫字樓,辦公室"
                 },
-                "office/accountant": {
-                    "name": "會計師樓",
-                    "terms": "Accountant,會計師樓"
-                },
                 "office/administrative": {
                     "name": "行政樓",
                     "terms": "Administrative Office,行政樓"
-                },
-                "office/architect": {
-                    "name": "則樓",
-                    "terms": "Architect,則師樓,則樓,建築師樓"
                 },
                 "office/company": {
                     "name": "公司寫字樓",
@@ -2407,17 +2393,9 @@
                     "name": "保險公司寫字樓",
                     "terms": "Insurance Office,保險公司,保險公司寫字樓"
                 },
-                "office/it": {
-                    "name": "電腦資訊寫字樓",
-                    "terms": "IT Office,IT公司,資訊工藝寫字樓,資訊技藝寫字樓,資訊科技寫字樓,電腦公司寫字樓"
-                },
                 "office/lawyer": {
                     "name": "律師事務所",
                     "terms": "Law Office,律師事務所"
-                },
-                "office/newspaper": {
-                    "name": "報社",
-                    "terms": "Newspaper,報社,新聞社,通訊社"
                 },
                 "office/ngo": {
                     "name": "志顠機構寫字樓",
@@ -2437,10 +2415,6 @@
                 "office/telecommunication": {
                     "name": "電話公司寫字樓",
                     "terms": "Telecom Office,電信公司,電話公司寫字樓"
-                },
-                "office/therapist": {
-                    "name": "治療師",
-                    "terms": "Therapist,治療師,醫療師"
                 },
                 "office/travel_agent": {
                     "name": "旅行社"
@@ -2797,10 +2771,6 @@
                 "tourism/caravan_site": {
                     "name": "露營車營地",
                     "terms": "RV Park,房車營地,露營車停車場,露營車營地"
-                },
-                "tourism/chalet": {
-                    "name": "木屋",
-                    "terms": "Chalet,木屋"
                 },
                 "tourism/guest_house": {
                     "name": "賓館",

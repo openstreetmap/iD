@@ -1,0 +1,19 @@
+{
+    "icon": "school",
+    "fields": [
+        "name",
+        "operator",
+        "address"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "terms": [
+        "school of music"
+    ],
+    "tags": {
+        "amenity": "music_school"
+    },
+    "name": "Music School"
+}

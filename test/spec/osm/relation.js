@@ -343,7 +343,10 @@ describe('iD.osmRelation', function () {
 
             expect(json.type).to.equal('FeatureCollection');
             expect(json.properties).to.eql({type: 'type'});
-            expect(json.features).to.eql([_.extend({role: 'role'}, a.asGeoJSON(g))]);
+
+            var nodejson = a.asGeoJSON(g);
+            nodejson.role = 'role';
+            expect(json.features).to.eql([nodejson]);
         });
     });
 

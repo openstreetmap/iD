@@ -48,7 +48,7 @@ export function behaviorCopy(context) {
 
 
     function doCopy() {
-        d3_event.preventDefault();
+        if (!getSelectionText()) d3_event.preventDefault();
 
         var graph = context.graph(),
             selected = groupEntities(context.selectedIDs(), graph),
@@ -87,6 +87,9 @@ export function behaviorCopy(context) {
         return copy;
     }
 
+    function getSelectionText() {
+        return window.getSelection().toString();
+    }
 
     copy.off = function() {
         d3_select(document).call(keybinding.off);

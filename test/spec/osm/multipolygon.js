@@ -167,7 +167,8 @@ describe('iD.osmJoinWays', function() {
         ]);
 
         var result = iD.osmJoinWays(graph.entity('r').members, graph);
-        expect(_.map(result[0], 'id')).to.eql(['=', '-', '~']);
+        var ids = result[0].map(function (w) { return w.id; });
+        expect(ids).to.have.ordered.members(['=', '-', '~']);
     });
 
     it('reverses member tags of reversed segements', function() {
