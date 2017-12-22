@@ -345,7 +345,7 @@ export function svgVertices(projection, context) {
 
         // Draw the vertices..
         // The filter function controls the scope of what objects d3 will touch (exit/enter/update)
-        // It's important to adjust the filter function to expand the scope beyond whatever entities were passed in.
+        // Adjust the filter function to expand the scope beyond whatever entities were passed in.
         var filterRendered = function(d) {
             return d.id in _currPersistent || d.id in _currSelected || d.id in _currHover || filter(d);
         };
@@ -353,8 +353,12 @@ export function svgVertices(projection, context) {
             .call(draw, graph, currentVisible(all), sets, filterRendered);
 
         // Draw touch targets..
+        // When drawing, render all targets (not just those affected by a partial redraw)
+        var filterTouch = function(d) {
+            return isMoving ? true : filterRendered(d);
+        };
         selection.selectAll('.layer-points .layer-points-targets')
-            .call(drawTargets, graph, currentVisible(all), filterRendered);
+            .call(drawTargets, graph, currentVisible(all), filterTouch);
 
 
         function currentVisible(which) {

@@ -201,16 +201,34 @@ export function rendererMap(context) {
 
         context.on('enter.map',  function() {
             if (map.editable() && !transformed) {
-                // redraw immediately the objects that are affected by a chnage in selectedIDs.
-                var all = context.intersects(map.extent());
-                var filter = utilFunctor(true);
-                var graph = context.graph();
 
-                all = context.features().filter(all, graph);
+                // redraw immediately any objects affected by a change in selectedIDs.
+                var graph = context.graph();
+                var selectedAndParents = {};
+                context.selectedIDs().forEach(function(id) {
+                    var entity = graph.hasEntity(id);
+                    if (entity) {
+                        selectedAndParents[entity.id] = entity;
+                        if (entity.type === 'node') {
+                            graph.parentWays(entity).forEach(function(parent) {
+                                selectedAndParents[parent.id] = parent;
+                            });
+                        }
+                    }
+                });
+                var data = _values(selectedAndParents);
+                var filter = function(d) { return d.id in selectedAndParents; };
+
+                data = context.features().filter(data, graph);
+
                 surface.selectAll('.data-layer-osm')
                     .call(drawVertices.drawSelected, graph, map.extent())
-                    .call(drawMidpoints, graph, all, filter, map.trimmedExtent());
+                    .call(drawLines, graph, data, filter)
+                    .call(drawAreas, graph, data, filter)
+                    .call(drawMidpoints, graph, data, filter, map.trimmedExtent());
+
                 dispatch.call('drawn', this, { full: false });
+
 
                 // redraw everything else later
                 scheduleRedraw();
