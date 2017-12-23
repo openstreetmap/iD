@@ -4,15 +4,20 @@ describe('iD.uiFieldWikipedia', function() {
     function changeTags(changed) {
         var e = context.entity(entity.id),
             annotation = 'Changed tags.',
-            tags = _.clone(e.tags);
+            tags = JSON.parse(JSON.stringify(e.tags)),   // deep copy
+            didChange = false;
 
-        _.forEach(changed, function(v, k) {
-            if (v !== undefined || tags.hasOwnProperty(k)) {
-                tags[k] = v;
+        for (var k in changed) {
+            if (changed.hasOwnProperty(k)) {
+                var v = changed[k];
+                if (tags[k] !== v && (v !== undefined || tags.hasOwnProperty(k))) {
+                    tags[k] = v;
+                    didChange = true;
+                }
             }
-        });
+        }
 
-        if (!_.isEqual(e.tags, tags)) {
+        if (didChange) {
             context.perform(iD.actionChangeTags(e.id, tags), annotation);
         }
     }

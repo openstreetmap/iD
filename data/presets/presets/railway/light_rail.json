@@ -1,0 +1,22 @@
+{
+    "icon": "railway-light-rail",
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "railway": "light_rail"
+    },
+    "fields": [
+        "name",
+        "structure",
+        "gauge",
+        "electrified",
+        "service_rail"
+    ],
+    "terms": [
+        "light rail",
+        "streetcar",
+        "trolley"
+    ],
+    "name": "Light Rail"
+}

@@ -180,7 +180,7 @@ describe('iD.presetIndex', function() {
             var presets = iD.Context().presets(),
                 way = iD.Way({ tags: { area: 'yes', highway: 'pedestrian' }}),
                 graph = iD.Graph([way]);
-            expect(presets.match(way, graph).id).to.eql('highway/pedestrian');
+            expect(presets.match(way, graph).id).to.eql('highway/pedestrian_area');
         });
     });
 

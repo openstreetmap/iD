@@ -1,0 +1,39 @@
+{
+    "icon": "poi-monorail",
+    "fields": [
+        "name",
+        "ref_stop_position",
+        "network",
+        "operator"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "public_transport": "stop_position",
+        "monorail": "yes"
+    },
+    "addTags": {
+        "public_transport": "stop_position",
+        "monorail": "yes",
+        "railway": "stop"
+    },
+    "removeTags": {
+        "public_transport": "stop_position",
+        "monorail": "yes",
+        "railway": "stop"
+    },
+    "reference": {
+        "key": "railway",
+        "value": "stop"
+    },
+    "terms": [
+        "monorail",
+        "public transit",
+        "public transportation",
+        "rail",
+        "transit",
+        "transportation"
+    ],
+    "name": "Monorail Stopping Location"
+}

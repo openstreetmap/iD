@@ -187,7 +187,6 @@
             "localized_translation_language": "భాషను ఎంచుకోండి",
             "localized_translation_name": "పేరు"
         },
-        "zoom_in_edit": "మార్చడానికి దగ్గరగా వీక్షించు",
         "logout": "నిష్క్రమించు",
         "loading_auth": "ఓపెన్‌స్ట్రీట్‌మ్యాపుకి అనుసంధానిస్తున్నాం…",
         "help_translate": "అనువాదనకు సహకరించండి",
@@ -314,15 +313,10 @@
             "cancel": "రద్దుచేయి"
         },
         "splash": {
-            "walkthrough": "దర్శన మొదలుపెట్టు",
-            "start": "ఇప్పుడే సవరించండి"
+            "walkthrough": "దర్శన మొదలుపెట్టు"
         },
         "tag_reference": {
             "description": "వివరణ"
-        },
-        "zoom": {
-            "in": "దగ్గరగా వీక్షించు",
-            "out": "దూరంగా వీక్షించు"
         },
         "help": {
             "title": "సహాయం"

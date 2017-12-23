@@ -219,15 +219,8 @@
         "confirm": {
             "cancel": "ரத்து"
         },
-        "splash": {
-            "start": "இப்போது திருத்து"
-        },
         "tag_reference": {
             "description": "விளக்கம்"
-        },
-        "zoom": {
-            "in": "பெரிதாக்கு",
-            "out": "சிறிதாக்கு"
         },
         "help": {
             "title": "உதவி"
@@ -1253,12 +1246,6 @@
                 },
                 "office": {
                     "name": "அலுவலகம்"
-                },
-                "office/accountant": {
-                    "name": "கணக்காளர்"
-                },
-                "office/newspaper": {
-                    "name": "செய்தித்தாள்"
                 },
                 "place": {
                     "name": "இடம்"

@@ -1,0 +1,17 @@
+{
+    "icon": "route-subway",
+    "fields": [
+        "name",
+        "ref_route",
+        "operator",
+        "network"
+    ],
+    "geometry": [
+        "relation"
+    ],
+    "tags": {
+        "type": "route",
+        "route": "subway"
+    },
+    "name": "Subway Route"
+}

@@ -16,7 +16,7 @@
         "crossing": "zebra"
     },
     "reference": {
-        "key": "highway",
+        "key": "footway",
         "value": "crossing"
     },
     "terms": [

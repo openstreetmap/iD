@@ -310,7 +310,6 @@
             "localized_translation_language": "Escoller idioma",
             "localized_translation_name": "Nome"
         },
-        "zoom_in_edit": "Fai zoom para editar.",
         "login": "loguear",
         "logout": "saír",
         "loading_auth": "Conectando con OpenStreetMap...",
@@ -612,8 +611,7 @@
         "splash": {
             "welcome": "Benvido ao editor de OpenStreetMap iD",
             "text": "iD é unha amigable pero potente ferramenta para contribuir ao mellor mapa libre do mundo. Esta é a versión {version}. Para obter máis información visita {website} e informa de erros en {github}.",
-            "walkthrough": "Comezar o titorial",
-            "start": "Editar agora"
+            "walkthrough": "Comezar o titorial"
         },
         "source_switch": {
             "live": "en liña",
@@ -644,10 +642,6 @@
             "many_deletions": "Ti estás a borrar {n} elementos. Estás seguro de que queres facer isto? Isto o borrará do mapa e ninguén o verá en openstreetmap.org.",
             "tag_suggests_area": "A etiqueta {tag} suxire que a liña debería ser unha área, pero non é unha área.",
             "deprecated_tags": "Etiquetas obsoletas: {tags}"
-        },
-        "zoom": {
-            "in": "Ampliar",
-            "out": "Reducir"
         },
         "cannot_zoom": "Non se pode reducir máis no modo actual.",
         "full_screen": "Pasar a pantalla completa",
@@ -1170,7 +1164,8 @@
                         "subdistrict": "Subdistrito",
                         "subdistrict!vn": "Ward/Commune/Townlet",
                         "suburb": "Barrio",
-                        "suburb!jp": "Barrio"
+                        "suburb!jp": "Barrio",
+                        "unit": "Departamento"
                     }
                 },
                 "admin_level": {
@@ -1284,6 +1279,9 @@
                 "board_type": {
                     "label": "Tipo"
                 },
+                "boules": {
+                    "label": "Tipo"
+                },
                 "boundary": {
                     "label": "Tipo"
                 },
@@ -1388,6 +1386,9 @@
                 "craft": {
                     "label": "Tipo"
                 },
+                "crane/type": {
+                    "label": "Tipo de grúa"
+                },
                 "crop": {
                     "label": "Cultivos"
                 },
@@ -1459,6 +1460,9 @@
                 },
                 "description": {
                     "label": "Descrición completa"
+                },
+                "devices": {
+                    "placeholder": "1, 2, 3..."
                 },
                 "diaper": {
                     "label": "Con área de cambia-cueiros "
@@ -1541,6 +1545,9 @@
                     "label": "Tipo",
                     "placeholder": "Por defecto"
                 },
+                "frequency": {
+                    "label": "Frecuencia de operación"
+                },
                 "fuel": {
                     "label": "Combustible"
                 },
@@ -1583,6 +1590,7 @@
                     "label": "Carretilla"
                 },
                 "hashtags": {
+                    "label": "Cancelos suxeridos",
                     "placeholder": "#exemplo"
                 },
                 "healthcare": {
@@ -1631,6 +1639,9 @@
                 },
                 "inscription": {
                     "label": "Inscrición"
+                },
+                "intermittent": {
+                    "label": "Intermitente"
                 },
                 "internet_access": {
                     "label": "Acceso a internet",
@@ -1895,6 +1906,9 @@
                 "payment_multi": {
                     "label": "Tipos de pagamento"
                 },
+                "phases": {
+                    "placeholder": "1, 2, 3..."
+                },
                 "phone": {
                     "label": "Teléfono",
                     "placeholder": "+34 989 12 34 56"
@@ -1970,6 +1984,9 @@
                 },
                 "railway": {
                     "label": "Tipo"
+                },
+                "rating": {
+                    "label": "Potencia"
                 },
                 "recycling_accepts": {
                     "label": "Acepta"
@@ -2179,6 +2196,9 @@
                 "studio": {
                     "label": "Tipo"
                 },
+                "substance": {
+                    "label": "Substancia"
+                },
                 "substation": {
                     "label": "Tipo"
                 },
@@ -2256,6 +2276,9 @@
                     },
                     "placeholder": "Sólido, maiormente sólido, brando..."
                 },
+                "trade": {
+                    "label": "Tipo"
+                },
                 "traffic_calming": {
                     "label": "Tipo"
                 },
@@ -2273,6 +2296,17 @@
                         "no": "Non: sen camiño, requírense excelentes habilidades de orientación"
                     },
                     "placeholder": "Excelente, bo, malo..."
+                },
+                "transformer": {
+                    "options": {
+                        "auto": "Autotransformador",
+                        "converter": "Conversor",
+                        "distribution": "Distribución",
+                        "generator": "Xerador",
+                        "phase_angle_regulator": "Desfasador",
+                        "traction": "Tracción",
+                        "yes": "Descoñecido"
+                    }
                 },
                 "trees": {
                     "label": "Árbores"
@@ -2328,6 +2362,21 @@
                 },
                 "wikipedia": {
                     "label": "Wikipedia"
+                },
+                "windings": {
+                    "placeholder": "1, 2, 3..."
+                },
+                "windings/configuration": {
+                    "label": "Configuración dos devanados",
+                    "options": {
+                        "delta": "Triángulo",
+                        "leblanc": "Leblanc",
+                        "open": "Independentes",
+                        "open-delta": "Triángulo aberto",
+                        "scott": "Scott",
+                        "star": "Estrela",
+                        "zigzag": "Zig-zag"
+                    }
                 }
             },
             "presets": {
@@ -3216,10 +3265,6 @@
                     "name": "Andamista",
                     "terms": "andamios, andamista"
                 },
-                "craft/sculpter": {
-                    "name": "Escultor",
-                    "terms": "escultor, artista"
-                },
                 "craft/shoemaker": {
                     "name": "Zapateiro",
                     "terms": "zapateiro, zapatos"
@@ -3227,9 +3272,6 @@
                 "craft/stonemason": {
                     "name": "Albanel",
                     "terms": "albanel, canteiro, pedra"
-                },
-                "craft/sweep": {
-                    "name": "Limpa Chemineas"
                 },
                 "craft/tailor": {
                     "name": "Xastre"
@@ -3398,10 +3440,6 @@
                 },
                 "highway/path": {
                     "name": "Camiño"
-                },
-                "highway/pedestrian": {
-                    "name": "Rúa peonil",
-                    "terms": "rúa, peonil, peatonal"
                 },
                 "highway/primary": {
                     "name": "Estrada primaria",
@@ -4033,15 +4071,8 @@
                 "office": {
                     "name": "Oficina"
                 },
-                "office/accountant": {
-                    "name": "Contador",
-                    "terms": "contador, contable, contabilidade"
-                },
                 "office/administrative": {
                     "name": "Administración local"
-                },
-                "office/architect": {
-                    "name": "Arquitecto"
                 },
                 "office/company": {
                     "name": "Oficina de empresa"
@@ -4071,10 +4102,6 @@
                     "name": "Oficina de seguros",
                     "terms": "seguros, aseguradora"
                 },
-                "office/it": {
-                    "name": "Oficina TIC",
-                    "terms": "it, tic, informática, computación, telecomunicacións"
-                },
                 "office/lawyer": {
                     "name": "Bufete",
                     "terms": "bufete, avogados, legal"
@@ -4082,9 +4109,6 @@
                 "office/lawyer/notary": {
                     "name": "Notaría",
                     "terms": "notaría, notario"
-                },
-                "office/newspaper": {
-                    "name": "Xornal"
                 },
                 "office/ngo": {
                     "name": "Oficina ONG"
@@ -4101,10 +4125,6 @@
                 },
                 "office/telecommunication": {
                     "name": "Oficina de telecomunicacións"
-                },
-                "office/therapist": {
-                    "name": "Terapeuta",
-                    "terms": "terapeuta, fisioterapeuta, fisio"
                 },
                 "office/travel_agent": {
                     "name": "Axencia de viaxes"
@@ -4671,13 +4691,10 @@
                     "name": "Área de camping"
                 },
                 "tourism/caravan_site": {
-                    "name": "Parque de Caravanas"
-                },
-                "tourism/chalet": {
-                    "name": "Chalé"
+                    "name": "Parque de caravanas"
                 },
                 "tourism/gallery": {
-                    "name": "Galería de Arte"
+                    "name": "Galería de arte"
                 },
                 "tourism/guest_house": {
                     "name": "Hostal",

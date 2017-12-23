@@ -1,0 +1,21 @@
+{
+    "icon": "ferry",
+    "fields": [
+        "name",
+        "network",
+        "operator",
+        "address",
+        "building_area"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "terms": [],
+    "tags": {
+        "amenity": "ferry_terminal"
+    },
+    "name": "Ferry Station / Terminal",
+    "searchable": false
+}

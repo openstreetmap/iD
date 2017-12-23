@@ -65,7 +65,6 @@ export function uiCommit(context) {
             tags = {
                 comment: context.storage('comment') || '',
                 created_by: ('iD ' + context.version).substr(0, 255),
-                imagery_used: context.history().imageryUsed().join(';').substr(0, 255),
                 host: detected.host.substr(0, 255),
                 locale: detected.locale.substr(0, 255)
             };
@@ -90,6 +89,8 @@ export function uiCommit(context) {
         }
 
         tags = _clone(changeset.tags);
+        tags.imagery_used = context.history().imageryUsed().join(';').substr(0, 255);
+        changeset = changeset.update({ tags: tags });
 
         var header = selection.selectAll('.header')
             .data([0]);
@@ -234,7 +235,8 @@ export function uiCommit(context) {
 
         buttonSection.selectAll('.cancel-button')
             .on('click.cancel', function() {
-                dispatch.call('cancel');
+                var selectedID = commitChanges.entityID();
+                dispatch.call('cancel', this, selectedID);
             });
 
         buttonSection.selectAll('.save-button')

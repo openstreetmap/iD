@@ -15,6 +15,7 @@ import {
 
 
 export function uiCommitChanges(context) {
+    var _entityID;
     var detected = utilDetect();
 
 
@@ -91,7 +92,7 @@ export function uiCommitChanges(context) {
         items
             .on('mouseover', mouseover)
             .on('mouseout', mouseout)
-            .on('click', zoomToEntity);
+            .on('click', click);
 
 
         // Download changeset link
@@ -144,16 +145,26 @@ export function uiCommitChanges(context) {
         }
 
 
-        function zoomToEntity(change) {
-            var entity = change.entity;
-            if (change.changeType !== 'deleted' &&
-                context.graph().entity(entity.id).geometry(context.graph()) !== 'vertex') {
+        function click(change) {
+            if (change.changeType === 'deleted') {
+                _entityID = null;
+            } else {
+                var entity = change.entity;
+                _entityID = change.entity.id;
                 context.map().zoomTo(entity);
-                context.surface().selectAll(utilEntityOrMemberSelector([entity.id], context.graph()))
+                context.surface().selectAll(utilEntityOrMemberSelector([_entityID], context.graph()))
                     .classed('hover', true);
             }
         }
     }
+
+
+    commitChanges.entityID = function(_) {
+        if (!arguments.length) return _entityID;
+        _entityID = _;
+        return commitChanges;
+    };
+
 
 
     return commitChanges;

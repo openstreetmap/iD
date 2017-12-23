@@ -183,6 +183,25 @@
             },
             "name": "Billboard"
         },
+        "aerialway/station": {
+            "icon": "aerialway",
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "fields": [
+                "aerialway/access",
+                "aerialway/summer/access",
+                "elevation",
+                "building_area"
+            ],
+            "tags": {
+                "aerialway": "station"
+            },
+            "name": "Aerialway Station",
+            "searchable": false
+        },
         "aerialway/cable_car": {
             "geometry": [
                 "line"
@@ -346,24 +365,6 @@
             },
             "name": "Rope Tow Lift"
         },
-        "aerialway/station": {
-            "icon": "aerialway",
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "fields": [
-                "aerialway/access",
-                "aerialway/summer/access",
-                "elevation",
-                "building_area"
-            ],
-            "tags": {
-                "aerialway": "station"
-            },
-            "name": "Aerialway Station"
-        },
         "aerialway/t-bar": {
             "geometry": [
                 "line"
@@ -520,6 +521,26 @@
             },
             "name": "Airport Terminal"
         },
+        "amenity/bus_station": {
+            "icon": "bus",
+            "fields": [
+                "name",
+                "building_area",
+                "operator",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "amenity": "bus_station"
+            },
+            "name": "Bus Station / Terminal",
+            "searchable": false
+        },
         "amenity/coworking_space": {
             "icon": "commercial",
             "fields": [
@@ -539,6 +560,27 @@
                 "amenity": "coworking_space"
             },
             "name": "Coworking Space",
+            "searchable": false
+        },
+        "amenity/ferry_terminal": {
+            "icon": "ferry",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "address",
+                "building_area"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "terms": [],
+            "tags": {
+                "amenity": "ferry_terminal"
+            },
+            "name": "Ferry Station / Terminal",
             "searchable": false
         },
         "amenity/nursing_home": {
@@ -588,6 +630,28 @@
                 "value": "register_office"
             },
             "name": "Register Office",
+            "searchable": false
+        },
+        "amenity/scrapyard": {
+            "icon": "car",
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "amenity": "scrapyard"
+            },
+            "reference": {
+                "key": "industrial",
+                "value": "scrap_yard"
+            },
+            "name": "Scrap Yard",
             "searchable": false
         },
         "amenity/swimming_pool": {
@@ -788,7 +852,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "geometry": [
                 "point",
@@ -915,7 +980,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "geometry": [
                 "point",
@@ -964,25 +1030,6 @@
                 "amenity": "bureau_de_change"
             },
             "name": "Currency Exchange"
-        },
-        "amenity/bus_station": {
-            "icon": "bus",
-            "fields": [
-                "name",
-                "building_area",
-                "operator",
-                "internet_access",
-                "internet_access/fee",
-                "internet_access/ssid"
-            ],
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "tags": {
-                "amenity": "bus_station"
-            },
-            "name": "Bus Station"
         },
         "amenity/cafe": {
             "icon": "cafe",
@@ -1526,26 +1573,6 @@
             ],
             "name": "Fast Food"
         },
-        "amenity/ferry_terminal": {
-            "icon": "ferry",
-            "fields": [
-                "name",
-                "network",
-                "operator",
-                "address",
-                "building_area"
-            ],
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "terms": [],
-            "tags": {
-                "amenity": "ferry_terminal"
-            },
-            "name": "Ferry Terminal"
-        },
         "amenity/fire_station": {
             "icon": "fire-station",
             "fields": [
@@ -1833,7 +1860,7 @@
                 "name",
                 "operator",
                 "address",
-                "building_area",
+                "building",
                 "opening_hours"
             ],
             "geometry": [
@@ -1862,6 +1889,25 @@
                 "amenity": "motorcycle_parking"
             },
             "name": "Motorcycle Parking"
+        },
+        "amenity/music_school": {
+            "icon": "school",
+            "fields": [
+                "name",
+                "operator",
+                "address"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "school of music"
+            ],
+            "tags": {
+                "amenity": "music_school"
+            },
+            "name": "Music School"
         },
         "amenity/nightclub": {
             "icon": "bar",
@@ -2405,7 +2451,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "geometry": [
                 "point",
@@ -2497,11 +2544,12 @@
             "name": "Ranger Station"
         },
         "amenity/recycling_centre": {
-            "icon": "waste-basket",
+            "icon": "recycling",
             "fields": [
                 "name",
                 "operator",
                 "address",
+                "building",
                 "opening_hours",
                 "recycling_accepts"
             ],
@@ -2523,12 +2571,15 @@
                 "amenity": "recycling",
                 "recycling_type": "centre"
             },
+            "reference": {
+                "key": "recycling_type",
+                "value": "*"
+            },
             "name": "Recycling Center"
         },
         "amenity/recycling": {
             "icon": "recycling",
             "fields": [
-                "recycling_type",
                 "recycling_accepts",
                 "collection_times"
             ],
@@ -2549,7 +2600,19 @@
             "tags": {
                 "amenity": "recycling"
             },
-            "name": "Recycling"
+            "addTags": {
+                "amenity": "recycling",
+                "recycling_type": "container"
+            },
+            "removeTags": {
+                "amenity": "recycling",
+                "recycling_type": "container"
+            },
+            "reference": {
+                "key": "amenity",
+                "value": "recycling"
+            },
+            "name": "Recycling Container"
         },
         "amenity/restaurant": {
             "icon": "restaurant",
@@ -2639,38 +2702,6 @@
                 "amenity": "school"
             },
             "name": "School Grounds"
-        },
-        "amenity/scrapyard": {
-            "icon": "car",
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "opening_hours"
-            ],
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "terms": [
-                "car",
-                "junk",
-                "metal",
-                "salvage",
-                "scrap",
-                "u-pull-it",
-                "vehicle",
-                "wreck",
-                "yard"
-            ],
-            "tags": {
-                "amenity": "scrapyard"
-            },
-            "reference": {
-                "key": "industrial",
-                "value": "scrap_yard"
-            },
-            "name": "Scrap Yard"
         },
         "amenity/shelter": {
             "icon": "shelter",
@@ -2912,6 +2943,14 @@
         },
         "amenity/telephone": {
             "icon": "telephone",
+            "fields": [
+                "operator",
+                "phone",
+                "fee",
+                "payment_multi",
+                "covered",
+                "indoor"
+            ],
             "geometry": [
                 "point",
                 "vertex"
@@ -4227,7 +4266,7 @@
             "name": "College Building"
         },
         "building/commercial": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -4448,6 +4487,22 @@
             },
             "matchScore": 0.5,
             "name": "Preschool/Kindergarten Building"
+        },
+        "building/mosque": {
+            "icon": "place-of-worship",
+            "fields": [
+                "name",
+                "address",
+                "levels"
+            ],
+            "geometry": [
+                "area"
+            ],
+            "tags": {
+                "building": "mosque"
+            },
+            "matchScore": 0.5,
+            "name": "Mosque Building"
         },
         "building/public": {
             "icon": "building",
@@ -5003,6 +5058,24 @@
             },
             "name": "Caterer"
         },
+        "craft/chimney_sweeper": {
+            "icon": "poi-chimney",
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "craft": "chimney_sweeper"
+            },
+            "name": "Chimney Sweeper"
+        },
         "craft/clockmaker": {
             "icon": "poi-clock",
             "fields": [
@@ -5511,7 +5584,7 @@
             },
             "name": "Scaffolder"
         },
-        "craft/sculpter": {
+        "craft/sculptor": {
             "icon": "art-gallery",
             "fields": [
                 "name",
@@ -5525,9 +5598,9 @@
                 "area"
             ],
             "tags": {
-                "craft": "sculpter"
+                "craft": "sculptor"
             },
-            "name": "Sculpter"
+            "name": "Sculptor"
         },
         "craft/shoemaker": {
             "icon": "poi-tool",
@@ -5570,24 +5643,6 @@
                 "craft": "stonemason"
             },
             "name": "Stonemason"
-        },
-        "craft/sweep": {
-            "icon": "poi-chimney",
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours"
-            ],
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "tags": {
-                "craft": "sweep"
-            },
-            "name": "Chimney Sweep"
         },
         "craft/tiler": {
             "icon": "poi-tool",
@@ -6000,7 +6055,7 @@
                 "crossing": "zebra"
             },
             "reference": {
-                "key": "highway",
+                "key": "footway",
                 "value": "crossing"
             },
             "terms": [
@@ -6615,6 +6670,25 @@
             },
             "name": "Speech Therapist"
         },
+        "highway/bus_stop": {
+            "icon": "bus",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "point",
+                "vertex"
+            ],
+            "tags": {
+                "highway": "bus_stop"
+            },
+            "name": "Bus Stop / Platform",
+            "searchable": false
+        },
         "highway/bridleway": {
             "fields": [
                 "name",
@@ -6636,25 +6710,6 @@
                 "horse"
             ],
             "name": "Bridle Path"
-        },
-        "highway/bus_stop": {
-            "icon": "bus",
-            "fields": [
-                "name",
-                "network",
-                "operator",
-                "bench",
-                "shelter"
-            ],
-            "geometry": [
-                "point",
-                "vertex"
-            ],
-            "tags": {
-                "highway": "bus_stop"
-            },
-            "terms": [],
-            "name": "Bus Stop"
         },
         "highway/corridor": {
             "icon": "highway-footway",
@@ -6718,7 +6773,7 @@
                 "highway": "crossing"
             },
             "reference": {
-                "key": "footway",
+                "key": "highway",
                 "value": "crossing"
             },
             "terms": [],
@@ -7003,7 +7058,34 @@
             },
             "name": "Path"
         },
-        "highway/pedestrian": {
+        "highway/pedestrian_area": {
+            "icon": "poi-foot",
+            "fields": [
+                "name",
+                "surface",
+                "lit",
+                "width",
+                "structure",
+                "access"
+            ],
+            "geometry": [
+                "area"
+            ],
+            "tags": {
+                "highway": "pedestrian",
+                "area": "yes"
+            },
+            "terms": [
+                "center",
+                "centre",
+                "plaza",
+                "quad",
+                "square",
+                "walkway"
+            ],
+            "name": "Pedestrian Area"
+        },
+        "highway/pedestrian_line": {
             "icon": "highway-footway",
             "fields": [
                 "name",
@@ -7015,13 +7097,19 @@
                 "access"
             ],
             "geometry": [
-                "line",
-                "area"
+                "line"
             ],
             "tags": {
                 "highway": "pedestrian"
             },
-            "terms": [],
+            "terms": [
+                "center",
+                "centre",
+                "plaza",
+                "quad",
+                "square",
+                "walkway"
+            ],
             "name": "Pedestrian Street"
         },
         "highway/primary_link": {
@@ -7956,6 +8044,20 @@
             "terms": [],
             "name": "Basin"
         },
+        "landuse/brownfield": {
+            "geometry": [
+                "area"
+            ],
+            "fields": [
+                "name"
+            ],
+            "tags": {
+                "landuse": "brownfield"
+            },
+            "terms": [],
+            "matchScore": 0.9,
+            "name": "Brownfield"
+        },
         "landuse/cemetery": {
             "icon": "cemetery",
             "fields": [
@@ -7988,7 +8090,7 @@
             "name": "Churchyard"
         },
         "landuse/commercial": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name"
             ],
@@ -7999,6 +8101,7 @@
                 "landuse": "commercial"
             },
             "terms": [],
+            "matchScore": 0.9,
             "name": "Commercial Area"
         },
         "landuse/construction": {
@@ -8099,6 +8202,42 @@
             "terms": [],
             "name": "Grass"
         },
+        "landuse/greenfield": {
+            "geometry": [
+                "area"
+            ],
+            "fields": [
+                "name"
+            ],
+            "tags": {
+                "landuse": "greenfield"
+            },
+            "terms": [],
+            "matchScore": 0.9,
+            "name": "Greenfield"
+        },
+        "landuse/greenhouse_horticulture": {
+            "icon": "garden",
+            "fields": [
+                "name",
+                "operator"
+            ],
+            "geometry": [
+                "area"
+            ],
+            "terms": [
+                "flower",
+                "greenhouse",
+                "horticulture",
+                "grow",
+                "vivero"
+            ],
+            "tags": {
+                "landuse": "greenhouse_horticulture"
+            },
+            "matchScore": 0.9,
+            "name": "Greenhouse Horticulture"
+        },
         "landuse/harbour": {
             "icon": "harbor",
             "fields": [
@@ -8131,6 +8270,91 @@
             "matchScore": 0.9,
             "name": "Industrial Area"
         },
+        "landuse/industrial/scrap_yard": {
+            "icon": "car",
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "industrial": "scrap_yard"
+            },
+            "addTags": {
+                "landuse": "industrial",
+                "industrial": "scrap_yard"
+            },
+            "removeTags": {
+                "landuse": "industrial",
+                "industrial": "scrap_yard"
+            },
+            "reference": {
+                "key": "industrial",
+                "value": "scrap_yard"
+            },
+            "terms": [
+                "car",
+                "junk",
+                "metal",
+                "salvage",
+                "scrap",
+                "u-pull-it",
+                "vehicle",
+                "wreck",
+                "yard"
+            ],
+            "name": "Scrap Yard"
+        },
+        "landuse/industrial/slaughterhouse": {
+            "icon": "slaughterhouse",
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "industrial": "slaughterhouse"
+            },
+            "addTags": {
+                "landuse": "industrial",
+                "industrial": "slaughterhouse"
+            },
+            "removeTags": {
+                "landuse": "industrial",
+                "industrial": "slaughterhouse"
+            },
+            "reference": {
+                "key": "industrial",
+                "value": "slaughterhouse"
+            },
+            "terms": [
+                "abattoir",
+                "beef",
+                "butchery",
+                "calf",
+                "chicken",
+                "cow",
+                "killing house",
+                "meat",
+                "pig",
+                "pork",
+                "poultry",
+                "shambles",
+                "stockyard"
+            ],
+            "name": "Slaughterhouse"
+        },
         "landuse/landfill": {
             "geometry": [
                 "area"
@@ -8147,6 +8371,7 @@
             "name": "Landfill"
         },
         "landuse/meadow": {
+            "icon": "garden",
             "geometry": [
                 "area"
             ],
@@ -8657,6 +8882,19 @@
             ],
             "name": "Recreation Ground"
         },
+        "landuse/religious": {
+            "geometry": [
+                "area"
+            ],
+            "fields": [
+                "name"
+            ],
+            "tags": {
+                "landuse": "religious"
+            },
+            "terms": [],
+            "name": "Religious Area"
+        },
         "landuse/residential": {
             "icon": "building",
             "geometry": [
@@ -8666,10 +8904,11 @@
                 "landuse": "residential"
             },
             "terms": [],
+            "matchScore": 0.9,
             "name": "Residential Area"
         },
         "landuse/retail": {
-            "icon": "shop",
+            "icon": "commercial",
             "geometry": [
                 "area"
             ],
@@ -8679,6 +8918,7 @@
             "tags": {
                 "landuse": "retail"
             },
+            "matchScore": 0.9,
             "name": "Retail Area"
         },
         "landuse/vineyard": {
@@ -8912,9 +9152,8 @@
         "leisure/fitness_station": {
             "icon": "pitch",
             "fields": [
-                "name",
-                "sport",
-                "address",
+                "fitness_station",
+                "ref",
                 "opening_hours"
             ],
             "geometry": [
@@ -8924,12 +9163,451 @@
             "tags": {
                 "leisure": "fitness_station"
             },
+            "addTags": {
+                "leisure": "fitness_station",
+                "sport": "fitness"
+            },
+            "removeTags": {
+                "leisure": "fitness_station",
+                "sport": "fitness"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "fitness_station"
+            },
             "terms": [
+                "exercise",
                 "fitness",
                 "gym",
                 "trim trail"
             ],
             "name": "Outdoor Fitness Station"
+        },
+        "leisure/fitness_station/balance_beam": {
+            "icon": "pitch",
+            "fields": [
+                "ref",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "fitness_station",
+                "fitness_station": "balance_beam"
+            },
+            "addTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "balance_beam",
+                "sport": "fitness"
+            },
+            "removeTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "balance_beam",
+                "sport": "fitness"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "fitness_station"
+            },
+            "terms": [
+                "balance",
+                "exercise",
+                "fitness",
+                "gym",
+                "trim trail"
+            ],
+            "name": "Exercise Balance Beam"
+        },
+        "leisure/fitness_station/box": {
+            "icon": "pitch",
+            "fields": [
+                "ref",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "fitness_station",
+                "fitness_station": "box"
+            },
+            "addTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "box",
+                "sport": "fitness"
+            },
+            "removeTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "box",
+                "sport": "fitness"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "fitness_station"
+            },
+            "terms": [
+                "box",
+                "exercise",
+                "fitness",
+                "gym",
+                "jump",
+                "trim trail"
+            ],
+            "name": "Exercise Box"
+        },
+        "leisure/fitness_station/horizontal_bar": {
+            "icon": "pitch",
+            "fields": [
+                "ref",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "fitness_station",
+                "fitness_station": "horizontal_bar"
+            },
+            "addTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "horizontal_bar",
+                "sport": "fitness"
+            },
+            "removeTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "horizontal_bar",
+                "sport": "fitness"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "fitness_station"
+            },
+            "terms": [
+                "bar",
+                "chinup",
+                "chin up",
+                "exercise",
+                "fitness",
+                "gym",
+                "pullup",
+                "pull up",
+                "trim trail"
+            ],
+            "name": "Exercise Horizontal Bar"
+        },
+        "leisure/fitness_station/horizontal_ladder": {
+            "icon": "pitch",
+            "fields": [
+                "ref",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "fitness_station",
+                "fitness_station": "horizontal_ladder"
+            },
+            "addTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "horizontal_ladder",
+                "sport": "fitness"
+            },
+            "removeTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "horizontal_ladder",
+                "sport": "fitness"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "fitness_station"
+            },
+            "terms": [
+                "bar",
+                "chinup",
+                "chin up",
+                "exercise",
+                "fitness",
+                "gym",
+                "ladder",
+                "monkey bars",
+                "pullup",
+                "pull up",
+                "trim trail"
+            ],
+            "name": "Exercise Monkey Bars"
+        },
+        "leisure/fitness_station/hyperextension": {
+            "icon": "pitch",
+            "fields": [
+                "ref",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "fitness_station",
+                "fitness_station": "hyperextension"
+            },
+            "addTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "hyperextension",
+                "sport": "fitness"
+            },
+            "removeTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "hyperextension",
+                "sport": "fitness"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "fitness_station"
+            },
+            "terms": [
+                "back",
+                "exercise",
+                "extension",
+                "fitness",
+                "gym",
+                "roman chair",
+                "trim trail"
+            ],
+            "name": "Hyperextension Station"
+        },
+        "leisure/fitness_station/parallel_bars": {
+            "icon": "pitch",
+            "fields": [
+                "ref",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "fitness_station",
+                "fitness_station": "parallel_bars"
+            },
+            "addTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "parallel_bars",
+                "sport": "fitness"
+            },
+            "removeTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "parallel_bars",
+                "sport": "fitness"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "fitness_station"
+            },
+            "terms": [
+                "bar",
+                "dip",
+                "exercise",
+                "fitness",
+                "gym",
+                "trim trail"
+            ],
+            "name": "Parallel Bars"
+        },
+        "leisure/fitness_station/push-up": {
+            "icon": "pitch",
+            "fields": [
+                "ref",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "fitness_station",
+                "fitness_station": "push-up"
+            },
+            "addTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "push-up",
+                "sport": "fitness"
+            },
+            "removeTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "push-up",
+                "sport": "fitness"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "fitness_station"
+            },
+            "terms": [
+                "bar",
+                "exercise",
+                "fitness",
+                "gym",
+                "pushup",
+                "push up",
+                "trim trail"
+            ],
+            "name": "Push-Up Station"
+        },
+        "leisure/fitness_station/rings": {
+            "icon": "pitch",
+            "fields": [
+                "ref",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "fitness_station",
+                "fitness_station": "rings"
+            },
+            "addTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "rings",
+                "sport": "fitness"
+            },
+            "removeTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "rings",
+                "sport": "fitness"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "fitness_station"
+            },
+            "terms": [
+                "exercise",
+                "fitness",
+                "gym",
+                "muscle up",
+                "pullup",
+                "pull up",
+                "trim trail"
+            ],
+            "name": "Exercise Rings"
+        },
+        "leisure/fitness_station/sign": {
+            "icon": "pitch",
+            "fields": [
+                "ref",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "fitness_station",
+                "fitness_station": "sign"
+            },
+            "addTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "sign",
+                "sport": "fitness"
+            },
+            "removeTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "sign",
+                "sport": "fitness"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "fitness_station"
+            },
+            "terms": [
+                "exercise",
+                "fitness",
+                "gym",
+                "trim trail"
+            ],
+            "name": "Exercise Instruction Sign"
+        },
+        "leisure/fitness_station/sit-up": {
+            "icon": "pitch",
+            "fields": [
+                "ref",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "fitness_station",
+                "fitness_station": "sit-up"
+            },
+            "addTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "sit-up",
+                "sport": "fitness"
+            },
+            "removeTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "sit-up",
+                "sport": "fitness"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "fitness_station"
+            },
+            "terms": [
+                "crunch",
+                "exercise",
+                "fitness",
+                "gym",
+                "situp",
+                "sit up",
+                "trim trail"
+            ],
+            "name": "Sit-Up Station"
+        },
+        "leisure/fitness_station/stairs": {
+            "icon": "pitch",
+            "fields": [
+                "ref",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "fitness_station",
+                "fitness_station": "stairs"
+            },
+            "addTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "stairs",
+                "sport": "fitness"
+            },
+            "removeTags": {
+                "leisure": "fitness_station",
+                "fitness_station": "stairs",
+                "sport": "fitness"
+            },
+            "reference": {
+                "key": "leisure",
+                "value": "fitness_station"
+            },
+            "terms": [
+                "exercise",
+                "fitness",
+                "gym",
+                "steps",
+                "trim trail"
+            ],
+            "name": "Exercise Stairs"
         },
         "leisure/garden": {
             "icon": "garden",
@@ -9269,6 +9947,32 @@
             ],
             "name": "Beach Volleyball Court"
         },
+        "leisure/pitch/boules": {
+            "icon": "pitch",
+            "fields": [
+                "boules",
+                "surface",
+                "lit"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "pitch",
+                "sport": "boules"
+            },
+            "reference": {
+                "key": "sport",
+                "value": "boules"
+            },
+            "terms": [
+                "bocce",
+                "lyonnaise",
+                "pétanque"
+            ],
+            "name": "Boules/Bocce Court"
+        },
         "leisure/pitch/bowls": {
             "icon": "pitch",
             "fields": [
@@ -9557,6 +10261,24 @@
                 "track"
             ],
             "name": "Racetrack (Running)"
+        },
+        "leisure/sauna": {
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "opening_hours",
+                "access_simple",
+                "fee"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "leisure": "sauna"
+            },
+            "name": "Sauna"
         },
         "leisure/slipway": {
             "icon": "poi-beach",
@@ -9899,6 +10621,28 @@
             },
             "name": "Mast"
         },
+        "man_made/monitoring_station": {
+            "icon": "poi-mast",
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "fields": [
+                "monitoring_multi",
+                "operator"
+            ],
+            "terms": [
+                "weather",
+                "earthquake",
+                "seismology",
+                "air",
+                "gps"
+            ],
+            "tags": {
+                "man_made": "monitoring_station"
+            },
+            "name": "Monitoring Station"
+        },
         "man_made/observation": {
             "icon": "poi-tower",
             "geometry": [
@@ -9953,7 +10697,8 @@
             "icon": "pipeline-line",
             "fields": [
                 "location",
-                "operator"
+                "operator",
+                "substance"
             ],
             "geometry": [
                 "line"
@@ -10801,6 +11546,25 @@
             "terms": [],
             "name": "Office"
         },
+        "office/administrative": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "administrative"
+            },
+            "terms": [],
+            "searchable": false,
+            "name": "Administrative Office"
+        },
         "office/physician": {
             "icon": "commercial",
             "fields": [
@@ -10811,7 +11575,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -10830,7 +11593,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -10854,16 +11616,15 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
                 "office": "accountant"
             },
             "terms": [],
-            "name": "Accountant"
+            "name": "Accountant Office"
         },
-        "office/administrative": {
+        "office/adoption_agency": {
             "icon": "commercial",
             "fields": [
                 "name",
@@ -10873,14 +11634,37 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
-                "office": "administrative"
+                "office": "adoption_agency"
             },
             "terms": [],
-            "name": "Administrative Office"
+            "name": "Adoption Agency"
+        },
+        "office/advertising_agency": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "advertising_agency"
+            },
+            "terms": [
+                "ad",
+                "ad agency",
+                "advert agency",
+                "advertising",
+                "marketing"
+            ],
+            "name": "Advertising Agency"
         },
         "office/architect": {
             "icon": "commercial",
@@ -10892,14 +11676,57 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
                 "office": "architect"
             },
             "terms": [],
-            "name": "Architect"
+            "name": "Architect Office"
+        },
+        "office/association": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "association"
+            },
+            "terms": [
+                "association",
+                "non-profit",
+                "nonprofit",
+                "organization",
+                "society"
+            ],
+            "name": "Nonprofit Organization Office"
+        },
+        "office/charity": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "charity"
+            },
+            "terms": [
+                "charitable organization"
+            ],
+            "name": "Charity Office"
         },
         "office/company": {
             "icon": "commercial",
@@ -10912,7 +11739,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -10959,7 +11785,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -10978,7 +11803,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -10988,6 +11812,29 @@
                 "job"
             ],
             "name": "Employment Agency"
+        },
+        "office/energy_supplier": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "energy_supplier"
+            },
+            "terms": [
+                "electricity",
+                "energy company",
+                "energy utility",
+                "gas utility"
+            ],
+            "name": "Energy Supplier Office"
         },
         "office/estate_agent": {
             "icon": "commercial",
@@ -10999,7 +11846,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -11018,7 +11864,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -11027,7 +11872,7 @@
             "terms": [],
             "name": "Financial Office"
         },
-        "office/government": {
+        "office/forestry": {
             "icon": "commercial",
             "fields": [
                 "name",
@@ -11037,7 +11882,46 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
+                "area"
+            ],
+            "tags": {
+                "office": "forestry"
+            },
+            "terms": [
+                "forest",
+                "ranger"
+            ],
+            "name": "Forestry Office"
+        },
+        "office/foundation": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "foundation"
+            },
+            "terms": [],
+            "name": "Foundation Office"
+        },
+        "office/government": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "government",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
                 "area"
             ],
             "tags": {
@@ -11076,6 +11960,56 @@
             },
             "name": "Register Office"
         },
+        "office/government/tax": {
+            "icon": "town-hall",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours",
+                "operator"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "fiscal authorities",
+                "revenue office",
+                "tax office"
+            ],
+            "tags": {
+                "office": "government",
+                "government": "tax"
+            },
+            "reference": {
+                "key": "government",
+                "value": "tax"
+            },
+            "name": "Tax and Revenue Office"
+        },
+        "office/guide": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "guide"
+            },
+            "terms": [
+                "dive guide",
+                "mountain guide",
+                "tour guide"
+            ],
+            "name": "Tour Guide Office"
+        },
         "office/insurance": {
             "icon": "commercial",
             "fields": [
@@ -11086,7 +12020,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -11105,14 +12038,18 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
                 "office": "it"
             },
-            "terms": [],
-            "name": "IT Office"
+            "terms": [
+                "computer",
+                "information",
+                "software",
+                "technology"
+            ],
+            "name": "Information Technology Office"
         },
         "office/lawyer": {
             "icon": "commercial",
@@ -11124,7 +12061,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -11143,7 +12079,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -11163,6 +12098,26 @@
             ],
             "name": "Notary Office"
         },
+        "office/moving_company": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "moving_company"
+            },
+            "terms": [
+                "relocation"
+            ],
+            "name": "Moving Company Office"
+        },
         "office/newspaper": {
             "icon": "commercial",
             "fields": [
@@ -11173,14 +12128,13 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
                 "office": "newspaper"
             },
             "terms": [],
-            "name": "Newspaper"
+            "name": "Newspaper Office"
         },
         "office/ngo": {
             "icon": "commercial",
@@ -11193,14 +12147,37 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
                 "office": "ngo"
             },
-            "terms": [],
+            "terms": [
+                "ngo",
+                "non government",
+                "non-government",
+                "organization",
+                "organisation"
+            ],
             "name": "NGO Office"
+        },
+        "office/notary": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "notary"
+            },
+            "terms": [],
+            "name": "Notary Office"
         },
         "office/political_party": {
             "icon": "commercial",
@@ -11212,7 +12189,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -11220,6 +12196,54 @@
             },
             "terms": [],
             "name": "Political Party"
+        },
+        "office/private_investigator": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "private_investigator"
+            },
+            "terms": [
+                "PI",
+                "private eye",
+                "private detective"
+            ],
+            "name": "Private Investigator Office"
+        },
+        "office/quango": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "quango"
+            },
+            "terms": [
+                "ngo",
+                "non government",
+                "non-government",
+                "organization",
+                "organisation",
+                "quasi autonomous",
+                "quasi-autonomous"
+            ],
+            "name": "Quasi-NGO Office"
         },
         "office/research": {
             "icon": "commercial",
@@ -11231,7 +12255,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -11239,6 +12262,45 @@
             },
             "terms": [],
             "name": "Research Office"
+        },
+        "office/surveyor": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "surveyor"
+            },
+            "terms": [],
+            "name": "Surveyor Office"
+        },
+        "office/tax_advisor": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "tax_advisor"
+            },
+            "terms": [
+                "tax",
+                "tax consultant"
+            ],
+            "name": "Tax Advisor Office"
         },
         "office/telecommunication": {
             "icon": "commercial",
@@ -11250,7 +12312,6 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
@@ -11269,14 +12330,37 @@
             ],
             "geometry": [
                 "point",
-                "vertex",
                 "area"
             ],
             "tags": {
                 "office": "therapist"
             },
-            "terms": [],
-            "name": "Therapist"
+            "terms": [
+                "therapy"
+            ],
+            "name": "Therapist Office"
+        },
+        "office/water_utility": {
+            "icon": "commercial",
+            "fields": [
+                "name",
+                "address",
+                "building_area",
+                "opening_hours",
+                "operator"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "office": "water_utility"
+            },
+            "terms": [
+                "water board",
+                "utility"
+            ],
+            "name": "Water Utility Office"
         },
         "piste": {
             "icon": "skiing",
@@ -11376,6 +12460,30 @@
             },
             "name": "Island"
         },
+        "place/islet": {
+            "icon": "mountain",
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "fields": [
+                "name"
+            ],
+            "terms": [
+                "archipelago",
+                "atoll",
+                "bar",
+                "cay",
+                "isle",
+                "islet",
+                "key",
+                "reef"
+            ],
+            "tags": {
+                "place": "islet"
+            },
+            "name": "Islet"
+        },
         "place/isolated_dwelling": {
             "icon": "home",
             "geometry": [
@@ -11422,6 +12530,26 @@
             ],
             "name": "Neighborhood"
         },
+        "place/plot": {
+            "icon": "triangle-stroked",
+            "fields": [
+                "name"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "place": "plot"
+            },
+            "terms": [
+                "tract",
+                "land",
+                "lot",
+                "parcel"
+            ],
+            "name": "Plot"
+        },
         "place/quarter": {
             "icon": "triangle-stroked",
             "fields": [
@@ -11443,7 +12571,6 @@
             "name": "Sub-Borough / Quarter"
         },
         "place/square": {
-            "icon": "poi-foot",
             "geometry": [
                 "point",
                 "area"
@@ -11515,7 +12642,7 @@
             "tags": {
                 "playground": "balancebeam"
             },
-            "name": "Balance Beam"
+            "name": "Play Balance Beam"
         },
         "playground/basket_spinner": {
             "icon": "playground",
@@ -11576,7 +12703,7 @@
             "tags": {
                 "playground": "horizontal_bar"
             },
-            "name": "Horizontal Bar"
+            "name": "Play Horizontal Bar"
         },
         "playground/rocker": {
             "icon": "playground",
@@ -11689,10 +12816,12 @@
             "matchScore": 0.1
         },
         "power/sub_station": {
+            "icon": "poi-power",
             "fields": [
                 "substation",
                 "operator",
-                "building"
+                "building",
+                "ref"
             ],
             "geometry": [
                 "point",
@@ -11715,7 +12844,8 @@
                 "generator/source",
                 "generator/method",
                 "generator/type",
-                "generator/output/electricity"
+                "generator/output/electricity",
+                "ref"
             ],
             "geometry": [
                 "point",
@@ -11740,7 +12870,8 @@
                 "generator/source",
                 "generator/method",
                 "generator/type",
-                "generator/output/electricity"
+                "generator/output/electricity",
+                "ref"
             ],
             "geometry": [
                 "point",
@@ -11773,7 +12904,8 @@
                 "generator/method",
                 "generator/type",
                 "generator/output/electricity",
-                "height"
+                "height",
+                "ref"
             ],
             "geometry": [
                 "point",
@@ -11799,6 +12931,12 @@
         },
         "power/line": {
             "icon": "power-line",
+            "fields": [
+                "name",
+                "operator",
+                "voltage",
+                "ref"
+            ],
             "geometry": [
                 "line"
             ],
@@ -11809,6 +12947,12 @@
         },
         "power/minor_line": {
             "icon": "power-line",
+            "fields": [
+                "name",
+                "operator",
+                "voltage",
+                "ref"
+            ],
             "geometry": [
                 "line"
             ],
@@ -11852,6 +12996,9 @@
             "name": "Power Station Grounds"
         },
         "power/pole": {
+            "fields": [
+                "ref"
+            ],
             "geometry": [
                 "vertex"
             ],
@@ -11865,7 +13012,8 @@
             "fields": [
                 "substation",
                 "operator",
-                "building"
+                "building",
+                "ref"
             ],
             "geometry": [
                 "point",
@@ -11876,7 +13024,30 @@
             },
             "name": "Substation"
         },
+        "power/switch": {
+            "icon": "poi-power",
+            "fields": [
+                "switch",
+                "operator",
+                "location",
+                "cables",
+                "voltage",
+                "ref"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "power": "switch"
+            },
+            "name": "Power Switch"
+        },
         "power/tower": {
+            "fields": [
+                "ref"
+            ],
             "geometry": [
                 "vertex"
             ],
@@ -11887,6 +13058,21 @@
         },
         "power/transformer": {
             "icon": "poi-power",
+            "fields": [
+                "transformer",
+                "operator",
+                "location",
+                "rating",
+                "devices",
+                "phases",
+                "frequency",
+                "voltage/primary",
+                "voltage/secondary",
+                "voltage/tertiary",
+                "windings",
+                "windings/configuration",
+                "ref"
+            ],
             "geometry": [
                 "point",
                 "vertex",
@@ -11897,6 +13083,831 @@
             },
             "name": "Transformer"
         },
+        "public_transport/linear_platform_aerialway": {
+            "icon": "highway-footway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "aerialway": "yes"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "platform"
+            },
+            "terms": [
+                "aerialway",
+                "cable car",
+                "platform",
+                "public transit",
+                "public transportation",
+                "transit",
+                "transportation"
+            ],
+            "name": "Aerialway Stop / Platform"
+        },
+        "public_transport/linear_platform_bus": {
+            "icon": "highway-footway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "bus": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "bus": "yes",
+                "highway": "bus_stop"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "bus": "yes",
+                "highway": "bus_stop"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "platform"
+            },
+            "terms": [
+                "bus",
+                "platform",
+                "public transit",
+                "public transportation",
+                "transit",
+                "transportation"
+            ],
+            "name": "Bus Stop / Platform"
+        },
+        "public_transport/linear_platform_ferry": {
+            "icon": "highway-footway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "ferry": "yes"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "platform"
+            },
+            "terms": [
+                "boat",
+                "dock",
+                "ferry",
+                "pier",
+                "platform",
+                "public transit",
+                "public transportation",
+                "transit",
+                "transportation"
+            ],
+            "name": "Ferry Stop / Platform"
+        },
+        "public_transport/linear_platform_light_rail": {
+            "icon": "highway-footway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "light_rail": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "light_rail": "yes",
+                "railway": "platform"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "light_rail": "yes",
+                "railway": "platform"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "platform"
+            },
+            "terms": [
+                "electric",
+                "light rail",
+                "platform",
+                "public transit",
+                "public transportation",
+                "rail",
+                "track",
+                "tram",
+                "trolley",
+                "transit",
+                "transportation"
+            ],
+            "name": "Light Rail Stop / Platform"
+        },
+        "public_transport/linear_platform_monorail": {
+            "icon": "highway-footway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "monorail": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "monorail": "yes",
+                "railway": "platform"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "monorail": "yes",
+                "railway": "platform"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "platform"
+            },
+            "terms": [
+                "monorail",
+                "platform",
+                "public transit",
+                "public transportation",
+                "rail",
+                "transit",
+                "transportation"
+            ],
+            "name": "Monorail Stop / Platform"
+        },
+        "public_transport/linear_platform_subway": {
+            "icon": "highway-footway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "train": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "train": "yes",
+                "railway": "platform"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "train": "yes",
+                "railway": "platform"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "platform"
+            },
+            "terms": [
+                "metro",
+                "platform",
+                "public transit",
+                "public transportation",
+                "rail",
+                "subway",
+                "track",
+                "transit",
+                "transportation",
+                "underground"
+            ],
+            "name": "Subway Stop / Platform"
+        },
+        "public_transport/linear_platform_train": {
+            "icon": "highway-footway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "train": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "train": "yes",
+                "railway": "platform"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "train": "yes",
+                "railway": "platform"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "platform"
+            },
+            "terms": [
+                "platform",
+                "public transit",
+                "public transportation",
+                "rail",
+                "track",
+                "train",
+                "transit",
+                "transportation"
+            ],
+            "name": "Train Stop / Platform"
+        },
+        "public_transport/linear_platform_tram": {
+            "icon": "highway-footway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "tram": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "tram": "yes",
+                "railway": "platform"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "tram": "yes",
+                "railway": "platform"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "platform"
+            },
+            "terms": [
+                "electric",
+                "light rail",
+                "platform",
+                "public transit",
+                "public transportation",
+                "rail",
+                "streetcar",
+                "track",
+                "tram",
+                "trolley",
+                "transit",
+                "transportation"
+            ],
+            "name": "Tram Stop / Platform"
+        },
+        "public_transport/linear_platform_trolleybus": {
+            "icon": "highway-footway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "trolleybus": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "trolleybus": "yes",
+                "highway": "bus_stop"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "trolleybus": "yes",
+                "highway": "bus_stop"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "platform"
+            },
+            "terms": [
+                "bus",
+                "electric",
+                "platform",
+                "public transit",
+                "public transportation",
+                "streetcar",
+                "trackless",
+                "tram",
+                "trolley",
+                "transit",
+                "transportation"
+            ],
+            "name": "Trolleybus Stop / Platform"
+        },
+        "public_transport/linear_platform": {
+            "icon": "highway-footway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "public_transport": "platform"
+            },
+            "terms": [
+                "platform",
+                "public transit",
+                "public transportation",
+                "transit",
+                "transportation"
+            ],
+            "name": "Transit Stop / Platform",
+            "matchScore": 0.2
+        },
+        "public_transport/platform_aerialway": {
+            "icon": "aerialway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "aerialway": "yes"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "platform"
+            },
+            "terms": [
+                "aerialway",
+                "cable car",
+                "platform",
+                "public transit",
+                "public transportation",
+                "transit",
+                "transportation"
+            ],
+            "name": "Aerialway Stop / Platform"
+        },
+        "public_transport/platform_bus": {
+            "icon": "bus",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "bus": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "bus": "yes",
+                "highway": "bus_stop"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "bus": "yes",
+                "highway": "bus_stop"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "platform"
+            },
+            "terms": [
+                "bus",
+                "platform",
+                "public transit",
+                "public transportation",
+                "transit",
+                "transportation"
+            ],
+            "name": "Bus Stop / Platform"
+        },
+        "public_transport/platform_ferry": {
+            "icon": "ferry",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "ferry": "yes"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "platform"
+            },
+            "terms": [
+                "boat",
+                "dock",
+                "ferry",
+                "pier",
+                "platform",
+                "public transit",
+                "public transportation",
+                "transit",
+                "transportation"
+            ],
+            "name": "Ferry Stop / Platform"
+        },
+        "public_transport/platform_light_rail": {
+            "icon": "poi-light-rail",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "light_rail": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "light_rail": "yes",
+                "railway": "platform"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "light_rail": "yes",
+                "railway": "platform"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "platform"
+            },
+            "terms": [
+                "electric",
+                "light rail",
+                "platform",
+                "public transit",
+                "public transportation",
+                "rail",
+                "track",
+                "tram",
+                "trolley",
+                "transit",
+                "transportation"
+            ],
+            "name": "Light Rail Stop / Platform"
+        },
+        "public_transport/platform_monorail": {
+            "icon": "poi-monorail",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "monorail": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "monorail": "yes",
+                "railway": "platform"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "monorail": "yes",
+                "railway": "platform"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "platform"
+            },
+            "terms": [
+                "monorail",
+                "platform",
+                "public transit",
+                "public transportation",
+                "rail",
+                "transit",
+                "transportation"
+            ],
+            "name": "Monorail Stop / Platform"
+        },
+        "public_transport/platform_subway": {
+            "icon": "poi-subway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "train": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "train": "yes",
+                "railway": "platform"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "train": "yes",
+                "railway": "platform"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "platform"
+            },
+            "terms": [
+                "metro",
+                "platform",
+                "public transit",
+                "public transportation",
+                "rail",
+                "subway",
+                "track",
+                "transit",
+                "transportation",
+                "underground"
+            ],
+            "name": "Subway Stop / Platform"
+        },
+        "public_transport/platform_train": {
+            "icon": "rail",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "train": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "train": "yes",
+                "railway": "platform"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "train": "yes",
+                "railway": "platform"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "platform"
+            },
+            "terms": [
+                "platform",
+                "public transit",
+                "public transportation",
+                "rail",
+                "track",
+                "train",
+                "transit",
+                "transportation"
+            ],
+            "name": "Train Stop / Platform"
+        },
+        "public_transport/platform_tram": {
+            "icon": "poi-tram",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "tram": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "tram": "yes",
+                "railway": "platform"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "tram": "yes",
+                "railway": "platform"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "platform"
+            },
+            "terms": [
+                "electric",
+                "light rail",
+                "platform",
+                "public transit",
+                "public transportation",
+                "rail",
+                "streetcar",
+                "track",
+                "tram",
+                "trolley",
+                "transit",
+                "transportation"
+            ],
+            "name": "Tram Stop / Platform"
+        },
+        "public_transport/platform_trolleybus": {
+            "icon": "poi-trolleybus",
+            "fields": [
+                "name",
+                "ref_platform",
+                "network",
+                "operator",
+                "surface",
+                "lit",
+                "bench",
+                "shelter"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "platform",
+                "trolleybus": "yes"
+            },
+            "addTags": {
+                "public_transport": "platform",
+                "trolleybus": "yes",
+                "highway": "bus_stop"
+            },
+            "removeTags": {
+                "public_transport": "platform",
+                "trolleybus": "yes",
+                "highway": "bus_stop"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "platform"
+            },
+            "terms": [
+                "bus",
+                "electric",
+                "platform",
+                "public transit",
+                "public transportation",
+                "streetcar",
+                "trackless",
+                "tram",
+                "trolley",
+                "transit",
+                "transportation"
+            ],
+            "name": "Trolleybus Stop / Platform"
+        },
         "public_transport/platform": {
             "icon": "bus",
             "fields": [
@@ -11904,18 +13915,874 @@
                 "ref_platform",
                 "network",
                 "operator",
+                "surface",
+                "lit",
+                "bench",
                 "shelter"
             ],
             "geometry": [
                 "point",
-                "vertex",
-                "line",
                 "area"
             ],
             "tags": {
                 "public_transport": "platform"
             },
-            "name": "Platform"
+            "terms": [
+                "platform",
+                "public transit",
+                "public transportation",
+                "transit",
+                "transportation"
+            ],
+            "name": "Transit Stop / Platform",
+            "matchScore": 0.2
+        },
+        "public_transport/station_aerialway": {
+            "icon": "aerialway",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "aerialway/access",
+                "aerialway/summer/access",
+                "elevation",
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "station",
+                "aerialway": "yes"
+            },
+            "reference": {
+                "key": "aerialway",
+                "value": "station"
+            },
+            "terms": [
+                "aerialway",
+                "cable car",
+                "public transit",
+                "public transportation",
+                "station",
+                "terminal",
+                "transit",
+                "transportation"
+            ],
+            "name": "Aerialway Station"
+        },
+        "public_transport/station_bus": {
+            "icon": "bus",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "address",
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "station",
+                "bus": "yes"
+            },
+            "addTags": {
+                "public_transport": "station",
+                "bus": "yes",
+                "amenity": "bus_station"
+            },
+            "removeTags": {
+                "public_transport": "station",
+                "bus": "yes",
+                "amenity": "bus_station"
+            },
+            "reference": {
+                "key": "amenity",
+                "value": "bus_station"
+            },
+            "terms": [
+                "bus",
+                "public transit",
+                "public transportation",
+                "station",
+                "terminal",
+                "transit",
+                "transportation"
+            ],
+            "name": "Bus Station / Terminal"
+        },
+        "public_transport/station_ferry": {
+            "icon": "ferry",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "address",
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "station",
+                "ferry": "yes"
+            },
+            "addTags": {
+                "public_transport": "station",
+                "ferry": "yes",
+                "amenity": "ferry_terminal"
+            },
+            "removeTags": {
+                "public_transport": "station",
+                "ferry": "yes",
+                "amenity": "ferry_terminal"
+            },
+            "reference": {
+                "key": "amenity",
+                "value": "ferry_terminal"
+            },
+            "terms": [
+                "boat",
+                "dock",
+                "ferry",
+                "pier",
+                "public transit",
+                "public transportation",
+                "station",
+                "terminal",
+                "transit",
+                "transportation"
+            ],
+            "name": "Ferry Station / Terminal"
+        },
+        "public_transport/station_light_rail": {
+            "icon": "poi-light-rail",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "address",
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "station",
+                "light_rail": "yes"
+            },
+            "addTags": {
+                "public_transport": "station",
+                "light_rail": "yes",
+                "railway": "station",
+                "station": "light_rail"
+            },
+            "removeTags": {
+                "public_transport": "station",
+                "light_rail": "yes",
+                "railway": "station",
+                "station": "light_rail"
+            },
+            "reference": {
+                "key": "station",
+                "value": "light_rail"
+            },
+            "terms": [
+                "electric",
+                "light rail",
+                "public transit",
+                "public transportation",
+                "rail",
+                "station",
+                "terminal",
+                "track",
+                "tram",
+                "trolley",
+                "transit",
+                "transportation"
+            ],
+            "name": "Light Rail Station"
+        },
+        "public_transport/station_monorail": {
+            "icon": "poi-monorail",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "address",
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "station",
+                "monorail": "yes"
+            },
+            "addTags": {
+                "public_transport": "station",
+                "monorail": "yes",
+                "railway": "station"
+            },
+            "removeTags": {
+                "public_transport": "station",
+                "monorail": "yes",
+                "railway": "station"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "station"
+            },
+            "terms": [
+                "monorail",
+                "public transit",
+                "public transportation",
+                "rail",
+                "station",
+                "terminal",
+                "transit",
+                "transportation"
+            ],
+            "name": "Monorail Station"
+        },
+        "public_transport/station_subway": {
+            "icon": "poi-subway",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "address",
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "station",
+                "subway": "yes"
+            },
+            "addTags": {
+                "public_transport": "station",
+                "subway": "yes",
+                "railway": "station",
+                "station": "subway"
+            },
+            "removeTags": {
+                "public_transport": "station",
+                "subway": "yes",
+                "railway": "station",
+                "station": "subway"
+            },
+            "reference": {
+                "key": "station",
+                "value": "subway"
+            },
+            "terms": [
+                "metro",
+                "public transit",
+                "public transportation",
+                "rail",
+                "station",
+                "subway",
+                "terminal",
+                "track",
+                "transit",
+                "transportation",
+                "underground"
+            ],
+            "name": "Subway Station"
+        },
+        "public_transport/station_train_halt": {
+            "icon": "rail",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "address",
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "station",
+                "train": "yes",
+                "railway": "halt"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "halt"
+            },
+            "terms": [
+                "halt",
+                "public transit",
+                "public transportation",
+                "rail",
+                "station",
+                "track",
+                "train",
+                "transit",
+                "transportation",
+                "whistle stop"
+            ],
+            "name": "Train Station (Halt / Request)"
+        },
+        "public_transport/station_train": {
+            "icon": "rail",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "address",
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "station",
+                "train": "yes"
+            },
+            "addTags": {
+                "public_transport": "station",
+                "train": "yes",
+                "railway": "station"
+            },
+            "removeTags": {
+                "public_transport": "station",
+                "train": "yes",
+                "railway": "station"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "station"
+            },
+            "terms": [
+                "public transit",
+                "public transportation",
+                "rail",
+                "station",
+                "terminal",
+                "track",
+                "train",
+                "transit",
+                "transportation"
+            ],
+            "name": "Train Station"
+        },
+        "public_transport/station_tram": {
+            "icon": "poi-tram",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "address",
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "station",
+                "tram": "yes"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "station"
+            },
+            "terms": [
+                "electric",
+                "light rail",
+                "public transit",
+                "public transportation",
+                "rail",
+                "station",
+                "streetcar",
+                "terminal",
+                "track",
+                "tram",
+                "trolley",
+                "transit",
+                "transportation"
+            ],
+            "name": "Tram Station"
+        },
+        "public_transport/station_trolleybus": {
+            "icon": "poi-trolleybus",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "address",
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "station",
+                "trolleybus": "yes"
+            },
+            "addTags": {
+                "public_transport": "station",
+                "trolleybus": "yes",
+                "amenity": "bus_station"
+            },
+            "removeTags": {
+                "public_transport": "station",
+                "trolleybus": "yes",
+                "amenity": "bus_station"
+            },
+            "reference": {
+                "key": "amenity",
+                "value": "bus_station"
+            },
+            "terms": [
+                "bus",
+                "electric",
+                "public transit",
+                "public transportation",
+                "station",
+                "streetcar",
+                "terminal",
+                "trackless",
+                "tram",
+                "trolley",
+                "transit",
+                "transportation"
+            ],
+            "name": "Trolleybus Station / Terminal"
+        },
+        "public_transport/station": {
+            "icon": "rail",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "address",
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "public_transport": "station"
+            },
+            "terms": [
+                "public transit",
+                "public transportation",
+                "station",
+                "terminal",
+                "transit",
+                "transportation"
+            ],
+            "name": "Transit Station",
+            "matchScore": 0.2
+        },
+        "public_transport/stop_area": {
+            "icon": "bus",
+            "fields": [
+                "name",
+                "ref",
+                "network",
+                "operator"
+            ],
+            "geometry": [
+                "relation"
+            ],
+            "tags": {
+                "type": "public_transport",
+                "public_transport": "stop_area"
+            },
+            "addTags": {
+                "type": "public_transport",
+                "public_transport": "stop_area",
+                "public_transport:version": "2"
+            },
+            "removeTags": {
+                "type": "public_transport",
+                "public_transport": "stop_area",
+                "public_transport:version": "2"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "stop_area"
+            },
+            "name": "Transit Stop Area"
+        },
+        "public_transport/stop_position_aerialway": {
+            "icon": "aerialway",
+            "fields": [
+                "name",
+                "ref_stop_position",
+                "network",
+                "operator"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "public_transport": "stop_position",
+                "aerialway": "yes"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "stop_position"
+            },
+            "terms": [
+                "aerialway",
+                "cable car",
+                "public transit",
+                "public transportation",
+                "transit",
+                "transportation"
+            ],
+            "name": "Aerialway Stopping Location"
+        },
+        "public_transport/stop_position_bus": {
+            "icon": "bus",
+            "fields": [
+                "name",
+                "ref_stop_position",
+                "network",
+                "operator"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "public_transport": "stop_position",
+                "bus": "yes"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "stop_position"
+            },
+            "terms": [
+                "bus",
+                "public transit",
+                "public transportation",
+                "transit",
+                "transportation"
+            ],
+            "name": "Bus Stopping Location"
+        },
+        "public_transport/stop_position_ferry": {
+            "icon": "ferry",
+            "fields": [
+                "name",
+                "ref_stop_position",
+                "network",
+                "operator"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "public_transport": "stop_position",
+                "ferry": "yes"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "stop_position"
+            },
+            "terms": [
+                "boat",
+                "dock",
+                "ferry",
+                "pier",
+                "public transit",
+                "public transportation",
+                "transit",
+                "transportation"
+            ],
+            "name": "Ferry Stopping Location"
+        },
+        "public_transport/stop_position_light_rail": {
+            "icon": "poi-light-rail",
+            "fields": [
+                "name",
+                "ref_stop_position",
+                "network",
+                "operator"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "public_transport": "stop_position",
+                "light_rail": "yes"
+            },
+            "addTags": {
+                "public_transport": "stop_position",
+                "light_rail": "yes",
+                "railway": "stop"
+            },
+            "removeTags": {
+                "public_transport": "stop_position",
+                "light_rail": "yes",
+                "railway": "stop"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "stop"
+            },
+            "terms": [
+                "electric",
+                "light rail",
+                "public transit",
+                "public transportation",
+                "rail",
+                "track",
+                "tram",
+                "trolley",
+                "transit",
+                "transportation"
+            ],
+            "name": "Light Rail Stopping Location"
+        },
+        "public_transport/stop_position_monorail": {
+            "icon": "poi-monorail",
+            "fields": [
+                "name",
+                "ref_stop_position",
+                "network",
+                "operator"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "public_transport": "stop_position",
+                "monorail": "yes"
+            },
+            "addTags": {
+                "public_transport": "stop_position",
+                "monorail": "yes",
+                "railway": "stop"
+            },
+            "removeTags": {
+                "public_transport": "stop_position",
+                "monorail": "yes",
+                "railway": "stop"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "stop"
+            },
+            "terms": [
+                "monorail",
+                "public transit",
+                "public transportation",
+                "rail",
+                "transit",
+                "transportation"
+            ],
+            "name": "Monorail Stopping Location"
+        },
+        "public_transport/stop_position_subway": {
+            "icon": "poi-subway",
+            "fields": [
+                "name",
+                "ref_stop_position",
+                "network",
+                "operator"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "public_transport": "stop_position",
+                "subway": "yes"
+            },
+            "addTags": {
+                "public_transport": "stop_position",
+                "subway": "yes",
+                "railway": "stop"
+            },
+            "removeTags": {
+                "public_transport": "stop_position",
+                "subway": "yes",
+                "railway": "stop"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "stop"
+            },
+            "terms": [
+                "metro",
+                "public transit",
+                "public transportation",
+                "rail",
+                "subway",
+                "track",
+                "transit",
+                "transportation",
+                "underground"
+            ],
+            "name": "Subway Stopping Location"
+        },
+        "public_transport/stop_position_train": {
+            "icon": "rail",
+            "fields": [
+                "name",
+                "ref_stop_position",
+                "network",
+                "operator"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "public_transport": "stop_position",
+                "train": "yes"
+            },
+            "addTags": {
+                "public_transport": "stop_position",
+                "train": "yes",
+                "railway": "stop"
+            },
+            "removeTags": {
+                "public_transport": "stop_position",
+                "train": "yes",
+                "railway": "stop"
+            },
+            "reference": {
+                "key": "railway",
+                "value": "stop"
+            },
+            "terms": [
+                "public transit",
+                "public transportation",
+                "rail",
+                "track",
+                "train",
+                "transit",
+                "transportation"
+            ],
+            "name": "Train Stopping Location"
+        },
+        "public_transport/stop_position_tram": {
+            "icon": "poi-tram",
+            "fields": [
+                "name",
+                "ref_stop_position",
+                "network",
+                "operator"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "public_transport": "stop_position",
+                "tram": "yes"
+            },
+            "addTags": {
+                "public_transport": "stop_position",
+                "tram": "yes",
+                "railway": "tram_stop"
+            },
+            "removeTags": {
+                "public_transport": "stop_position",
+                "tram": "yes",
+                "railway": "tram_stop"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "stop_position"
+            },
+            "terms": [
+                "electric",
+                "light rail",
+                "public transit",
+                "public transportation",
+                "rail",
+                "streetcar",
+                "track",
+                "tram",
+                "trolley",
+                "transit",
+                "transportation"
+            ],
+            "name": "Tram Stopping Location"
+        },
+        "public_transport/stop_position_trolleybus": {
+            "icon": "poi-trolleybus",
+            "fields": [
+                "name",
+                "ref_stop_position",
+                "network",
+                "operator"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "public_transport": "stop_position",
+                "trolleybus": "yes"
+            },
+            "reference": {
+                "key": "public_transport",
+                "value": "stop_position"
+            },
+            "terms": [
+                "bus",
+                "electric",
+                "public transit",
+                "public transportation",
+                "streetcar",
+                "trackless",
+                "tram",
+                "trolley",
+                "transit",
+                "transportation"
+            ],
+            "name": "Trolleybus Stopping Location"
         },
         "public_transport/stop_position": {
             "icon": "bus",
@@ -11931,7 +14798,101 @@
             "tags": {
                 "public_transport": "stop_position"
             },
-            "name": "Stop Position"
+            "terms": [
+                "public transit",
+                "public transportation",
+                "transit",
+                "transportation"
+            ],
+            "name": "Transit Stopping Location",
+            "matchScore": 0.2
+        },
+        "railway/halt": {
+            "icon": "rail",
+            "geometry": [
+                "point",
+                "vertex"
+            ],
+            "tags": {
+                "railway": "halt"
+            },
+            "terms": [
+                "break",
+                "interrupt",
+                "rest",
+                "wait",
+                "interruption"
+            ],
+            "name": "Train Station (Halt / Request)",
+            "searchable": false
+        },
+        "railway/platform": {
+            "icon": "highway-footway",
+            "fields": [
+                "name",
+                "ref_platform",
+                "surface",
+                "lit",
+                "shelter"
+            ],
+            "geometry": [
+                "line",
+                "area"
+            ],
+            "tags": {
+                "railway": "platform"
+            },
+            "name": "Train Stop / Platform",
+            "searchable": false
+        },
+        "railway/station": {
+            "icon": "rail",
+            "fields": [
+                "name",
+                "network",
+                "operator",
+                "address",
+                "building_area",
+                "internet_access",
+                "internet_access/fee",
+                "internet_access/ssid"
+            ],
+            "geometry": [
+                "point",
+                "vertex",
+                "area"
+            ],
+            "tags": {
+                "railway": "station"
+            },
+            "terms": [
+                "train station",
+                "station"
+            ],
+            "name": "Train Station",
+            "searchable": false
+        },
+        "railway/tram_stop": {
+            "icon": "poi-tram",
+            "fields": [
+                "name",
+                "network",
+                "operator"
+            ],
+            "geometry": [
+                "vertex"
+            ],
+            "tags": {
+                "railway": "tram_stop"
+            },
+            "terms": [
+                "light rail",
+                "streetcar",
+                "tram",
+                "trolley"
+            ],
+            "name": "Tram Stopping Position",
+            "searchable": false
         },
         "railway/abandoned": {
             "icon": "railway-abandoned",
@@ -12033,24 +14994,6 @@
             },
             "name": "Funicular"
         },
-        "railway/halt": {
-            "icon": "rail",
-            "geometry": [
-                "point",
-                "vertex"
-            ],
-            "tags": {
-                "railway": "halt"
-            },
-            "name": "Railway Halt",
-            "terms": [
-                "break",
-                "interrupt",
-                "rest",
-                "wait",
-                "interruption"
-            ]
-        },
         "railway/level_crossing": {
             "icon": "cross",
             "geometry": [
@@ -12069,6 +15012,28 @@
             ],
             "name": "Railway Crossing (Road)"
         },
+        "railway/light_rail": {
+            "icon": "railway-light-rail",
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "railway": "light_rail"
+            },
+            "fields": [
+                "name",
+                "structure",
+                "gauge",
+                "electrified",
+                "service_rail"
+            ],
+            "terms": [
+                "light rail",
+                "streetcar",
+                "trolley"
+            ],
+            "name": "Light Rail"
+        },
         "railway/milestone": {
             "icon": "poi-milestone",
             "geometry": [
@@ -12086,6 +15051,28 @@
                 "marker"
             ],
             "name": "Railway Milestone"
+        },
+        "railway/miniature": {
+            "icon": "railway-rail",
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "railway": "miniature"
+            },
+            "fields": [
+                "name",
+                "structure",
+                "gauge",
+                "electrified",
+                "service_rail"
+            ],
+            "terms": [
+                "rideable miniature railway",
+                "narrow gauge railway",
+                "minimum gauge railway"
+            ],
+            "name": "Miniature Railway"
         },
         "railway/monorail": {
             "icon": "railway-monorail",
@@ -12125,24 +15112,6 @@
             ],
             "name": "Narrow Gauge Rail"
         },
-        "railway/platform": {
-            "icon": "highway-footway",
-            "fields": [
-                "name",
-                "ref_platform",
-                "surface",
-                "lit",
-                "shelter"
-            ],
-            "geometry": [
-                "line",
-                "area"
-            ],
-            "tags": {
-                "railway": "platform"
-            },
-            "name": "Railway Platform"
-        },
         "railway/rail": {
             "icon": "railway-rail",
             "geometry": [
@@ -12176,32 +15145,6 @@
                 "lights"
             ],
             "name": "Railway Signal"
-        },
-        "railway/station": {
-            "icon": "rail",
-            "fields": [
-                "name",
-                "network",
-                "operator",
-                "address",
-                "building_area",
-                "internet_access",
-                "internet_access/fee",
-                "internet_access/ssid"
-            ],
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "tags": {
-                "railway": "station"
-            },
-            "terms": [
-                "train station",
-                "station"
-            ],
-            "name": "Railway Station"
         },
         "railway/subway_entrance": {
             "icon": "entrance",
@@ -12275,27 +15218,6 @@
                 "clean"
             ],
             "name": "Train Wash"
-        },
-        "railway/tram_stop": {
-            "icon": "rail-light",
-            "fields": [
-                "name",
-                "network",
-                "operator"
-            ],
-            "geometry": [
-                "vertex"
-            ],
-            "tags": {
-                "railway": "tram_stop"
-            },
-            "terms": [
-                "light rail",
-                "streetcar",
-                "tram",
-                "trolley"
-            ],
-            "name": "Tram Stop"
         },
         "railway/tram": {
             "icon": "railway-light-rail",
@@ -12430,6 +15352,33 @@
             },
             "name": "Vacant Shop",
             "searchable": false
+        },
+        "shop/agrarian": {
+            "icon": "shop",
+            "fields": [
+                "name",
+                "operator",
+                "agrarian",
+                "address",
+                "building_area",
+                "opening_hours"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "agricultural inputs",
+                "agricultural machines",
+                "seeds",
+                "pesticides",
+                "fertilizer",
+                "agricultural tools"
+            ],
+            "tags": {
+                "shop": "agrarian"
+            },
+            "name": "Agriculture Shop"
         },
         "shop/alcohol": {
             "icon": "alcohol-shop",
@@ -13808,7 +16757,7 @@
             "tags": {
                 "shop": "kiosk"
             },
-            "name": "News Kiosk"
+            "name": "Kiosk"
         },
         "shop/kitchen": {
             "icon": "shop",
@@ -14895,6 +17844,9 @@
                 "point",
                 "area"
             ],
+            "terms": [
+                "climbing hut"
+            ],
             "tags": {
                 "tourism": "alpine_hut"
             },
@@ -14968,7 +17920,7 @@
             "name": "Artwork"
         },
         "tourism/attraction": {
-            "icon": "monument",
+            "icon": "star",
             "fields": [
                 "name",
                 "operator",
@@ -15054,10 +18006,17 @@
                 "point",
                 "area"
             ],
+            "terms": [
+                "holiday",
+                "holiday cottage",
+                "holiday home",
+                "vacation",
+                "vacation home"
+            ],
             "tags": {
                 "tourism": "chalet"
             },
-            "name": "Chalet"
+            "name": "Holiday Cottage"
         },
         "tourism/gallery": {
             "icon": "art-gallery",
@@ -15360,6 +18319,28 @@
                 "tourism": "viewpoint"
             },
             "name": "Viewpoint"
+        },
+        "tourism/wilderness_hut": {
+            "icon": "lodging",
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "building_area"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "terms": [
+                "wilderness hut",
+                "backcountry hut",
+                "bothy"
+            ],
+            "tags": {
+                "tourism": "wilderness_hut"
+            },
+            "name": "Wilderness Hut"
         },
         "tourism/zoo": {
             "icon": "zoo",
@@ -15883,6 +18864,23 @@
             },
             "name": "Riding Route"
         },
+        "type/route/light_rail": {
+            "icon": "route-light-rail",
+            "fields": [
+                "name",
+                "ref_route",
+                "operator",
+                "network"
+            ],
+            "geometry": [
+                "relation"
+            ],
+            "tags": {
+                "type": "route",
+                "route": "light_rail"
+            },
+            "name": "Light Rail Route"
+        },
         "type/route/pipeline": {
             "icon": "route-pipeline",
             "fields": [
@@ -15898,6 +18896,23 @@
                 "route": "pipeline"
             },
             "name": "Pipeline Route"
+        },
+        "type/route/piste": {
+            "icon": "route-piste",
+            "fields": [
+                "name",
+                "ref_route",
+                "operator",
+                "network"
+            ],
+            "geometry": [
+                "relation"
+            ],
+            "tags": {
+                "type": "route",
+                "route": "piste"
+            },
+            "name": "Piste/Ski Route"
         },
         "type/route/power": {
             "icon": "route-power",
@@ -15930,6 +18945,23 @@
                 "route": "road"
             },
             "name": "Road Route"
+        },
+        "type/route/subway": {
+            "icon": "route-subway",
+            "fields": [
+                "name",
+                "ref_route",
+                "operator",
+                "network"
+            ],
+            "geometry": [
+                "relation"
+            ],
+            "tags": {
+                "type": "route",
+                "route": "subway"
+            },
+            "name": "Subway Route"
         },
         "type/route/train": {
             "icon": "route-train",
@@ -16090,7 +19122,7 @@
             "name": "Wet Dock / Dry Dock"
         },
         "waterway/drain": {
-            "icon": "waterway-stream",
+            "icon": "waterway-ditch",
             "fields": [
                 "structure_waterway",
                 "intermittent"
@@ -27298,7 +30330,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -27320,7 +30353,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -27342,7 +30376,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -27364,7 +30399,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -44927,7 +47963,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -44948,7 +47985,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -44969,7 +48007,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -44990,7 +48029,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45011,7 +48051,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45032,7 +48073,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45053,7 +48095,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45074,7 +48117,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45095,7 +48139,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45116,7 +48161,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45137,7 +48183,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45158,7 +48205,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45179,7 +48227,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45200,7 +48249,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45221,7 +48271,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45242,7 +48293,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45263,7 +48315,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45284,7 +48337,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45305,7 +48359,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45326,7 +48381,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45347,7 +48403,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45368,7 +48425,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45389,7 +48447,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45410,7 +48469,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45431,7 +48491,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45452,7 +48513,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45473,7 +48535,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45494,7 +48557,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45515,7 +48579,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45536,7 +48601,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45557,7 +48623,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45578,7 +48645,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45599,7 +48667,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45620,7 +48689,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45641,7 +48711,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45662,7 +48733,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45683,7 +48755,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45704,7 +48777,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45725,7 +48799,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45746,7 +48821,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45767,7 +48843,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45788,7 +48865,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45809,7 +48887,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45830,7 +48909,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45851,7 +48931,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45872,7 +48953,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45893,7 +48975,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45914,7 +48997,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45935,7 +49019,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45956,7 +49041,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45977,7 +49063,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -45998,7 +49085,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -46019,7 +49107,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -46040,7 +49129,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -46061,7 +49151,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -46082,7 +49173,8 @@
                 "building_area",
                 "opening_hours",
                 "smoking",
-                "outdoor_seating"
+                "outdoor_seating",
+                "brewery"
             ],
             "suggestion": true
         },
@@ -87924,7 +91016,7 @@
                 "tourism": "attraction"
             },
             "name": "Arch",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -87943,7 +91035,7 @@
                 "tourism": "attraction"
             },
             "name": "Kursächsische Postmeilensäule",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -87962,7 +91054,7 @@
                 "tourism": "attraction"
             },
             "name": "Lavoir",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -87981,7 +91073,7 @@
                 "tourism": "attraction"
             },
             "name": "Maibaum",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -88000,7 +91092,7 @@
                 "tourism": "attraction"
             },
             "name": "Moab trail",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -88019,7 +91111,7 @@
                 "tourism": "attraction"
             },
             "name": "Moai",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -88038,7 +91130,7 @@
                 "tourism": "attraction"
             },
             "name": "OWŚ",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -88057,7 +91149,7 @@
                 "tourism": "attraction"
             },
             "name": "Sommerrodelbahn",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -88076,7 +91168,7 @@
                 "tourism": "attraction"
             },
             "name": "path continues",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -88095,7 +91187,7 @@
                 "tourism": "attraction"
             },
             "name": "path contiunes",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -88114,7 +91206,7 @@
                 "tourism": "attraction"
             },
             "name": "white blaze",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -88133,7 +91225,7 @@
                 "tourism": "attraction"
             },
             "name": "Кладбище еврейское",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -88152,7 +91244,7 @@
                 "tourism": "attraction"
             },
             "name": "Колесо обозрения",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -88171,7 +91263,7 @@
                 "tourism": "attraction"
             },
             "name": "Приусадебный парк",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -88190,7 +91282,7 @@
                 "tourism": "attraction"
             },
             "name": "Усадьба",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -88209,7 +91301,7 @@
                 "tourism": "attraction"
             },
             "name": "Хозяйственный двор",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -88228,7 +91320,7 @@
                 "tourism": "attraction"
             },
             "name": "Часовня",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",
@@ -88247,7 +91339,7 @@
                 "tourism": "attraction"
             },
             "name": "дольмен",
-            "icon": "monument",
+            "icon": "star",
             "geometry": [
                 "point",
                 "vertex",

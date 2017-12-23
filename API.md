@@ -20,6 +20,10 @@ in the hash portion of the URL:
   `{z}`/`{zoom}`, `{ty}` for flipped TMS-style Y coordinates, and `{switch:a,b,c}` for
   DNS multiplexing.<br/>
   _Example:_ `background=custom:https://{switch:a,b,c}.tile.openstreetmap.org/{zoom}/{x}/{y}.png`
+* __`disable_features`__ - Disables features in the list.<br/>
+  _Example:_ `disable_features=water,service_roads,points,paths,boundaries`<br/>
+  _Available features:_ `points` `traffic_roads` `service_roads` `paths` `buildings` `landuse`
+  `boundaries` `water` `rail` `power` `past_future` `others`
 * __`gpx`__ - A custom URL for loading a gpx track.  Specifying a `gpx` parameter will
   automatically enable the gpx layer for display.<br/>
   _Example:_ `gpx=https://tasks.hotosm.org/project/592/task/16.gpx`
@@ -45,6 +49,7 @@ are available as regular URL query parameters:
 * __`lat`__, __`lon`__, __`zoom`__ - Self-explanatory.
 * __`node`__, __`way`__, __`relation`__ - Select the specified entity.
 * __`background`__ - same as standalone
+* __`disable_features`__ - same as standalone
 * __`gpx`__ - same as standalone
 * __`offset`__ - same as standalone
 * __`comment`__ - same as standalone

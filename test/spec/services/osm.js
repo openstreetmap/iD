@@ -52,6 +52,21 @@ describe('iD.serviceOsm', function () {
         expect(connection.changesetURL(2)).to.match(/^https:/);
     });
 
+    describe('#getConnectionId', function() {
+        it('changes the connection id every time connection is reset', function() {
+            var cid1 = connection.getConnectionId();
+            connection.reset();
+            var cid2 = connection.getConnectionId();
+            expect(cid2).to.be.above(cid1);
+        });
+        it('changes the connection id every time connection is switched', function() {
+            var cid1 = connection.getConnectionId();
+            connection.switch({ urlroot: 'https://api06.dev.openstreetmap.org' });
+            var cid2 = connection.getConnectionId();
+            expect(cid2).to.be.above(cid1);
+        });
+    });
+
     describe('#changesetURL', function() {
         it('provides a changeset url', function() {
             expect(connection.changesetURL(2)).to.eql('http://www.openstreetmap.org/changeset/2');
@@ -298,7 +313,7 @@ describe('iD.serviceOsm', function () {
         it('loads a node', function(done) {
             var id = 'n1';
             connection.loadEntity(id, function(err, result) {
-                var entity = _.find(result.data, function(e) { return e.id === id; });
+                var entity = result.data.find(function(e) { return e.id === id; });
                 expect(entity).to.be.an.instanceOf(iD.Node);
                 done();
             });
@@ -311,7 +326,7 @@ describe('iD.serviceOsm', function () {
         it('loads a way', function(done) {
             var id = 'w1';
             connection.loadEntity(id, function(err, result) {
-                var entity = _.find(result.data, function(e) { return e.id === id; });
+                var entity = result.data.find(function(e) { return e.id === id; });
                 expect(entity).to.be.an.instanceOf(iD.Way);
                 done();
             });
@@ -324,10 +339,10 @@ describe('iD.serviceOsm', function () {
         it('does not ignore repeat requests', function(done) {
             var id = 'n1';
             connection.loadEntity(id, function(err1, result1) {
-                var entity1 = _.find(result1.data, function(e1) { return e1.id === id; });
+                var entity1 = result1.data.find(function(e1) { return e1.id === id; });
                 expect(entity1).to.be.an.instanceOf(iD.Node);
                 connection.loadEntity(id, function(err2, result2) {
-                    var entity2 = _.find(result2.data, function(e2) { return e2.id === id; });
+                    var entity2 = result2.data.find(function(e2) { return e2.id === id; });
                     expect(entity2).to.be.an.instanceOf(iD.Node);
                     done();
                 });
@@ -359,7 +374,7 @@ describe('iD.serviceOsm', function () {
         it('loads a node', function(done) {
             var id = 'n1';
             connection.loadEntityVersion(id, 1, function(err, result) {
-                var entity = _.find(result.data, function(e) { return e.id === id; });
+                var entity = result.data.find(function(e) { return e.id === id; });
                 expect(entity).to.be.an.instanceOf(iD.Node);
                 done();
             });
@@ -372,7 +387,7 @@ describe('iD.serviceOsm', function () {
         it('loads a way', function(done) {
             var id = 'w1';
             connection.loadEntityVersion(id, 1, function(err, result) {
-                var entity = _.find(result.data, function(e) { return e.id === id; });
+                var entity = result.data.find(function(e) { return e.id === id; });
                 expect(entity).to.be.an.instanceOf(iD.Way);
                 done();
             });
@@ -385,10 +400,10 @@ describe('iD.serviceOsm', function () {
         it('does not ignore repeat requests', function(done) {
             var id = 'n1';
             connection.loadEntityVersion(id, 1, function(err1, result1) {
-                var entity1 = _.find(result1.data, function(e1) { return e1.id === id; });
+                var entity1 = result1.data.find(function(e1) { return e1.id === id; });
                 expect(entity1).to.be.an.instanceOf(iD.Node);
                 connection.loadEntityVersion(id, 1, function(err2, result2) {
-                    var entity2 = _.find(result2.data, function(e2) { return e2.id === id; });
+                    var entity2 = result2.data.find(function(e2) { return e2.id === id; });
                     expect(entity2).to.be.an.instanceOf(iD.Node);
                     done();
                 });

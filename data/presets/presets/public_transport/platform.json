@@ -5,16 +5,25 @@
         "ref_platform",
         "network",
         "operator",
+        "surface",
+        "lit",
+        "bench",
         "shelter"
     ],
     "geometry": [
         "point",
-        "vertex",
-        "line",
         "area"
     ],
     "tags": {
         "public_transport": "platform"
     },
-    "name": "Platform"
+    "terms": [
+        "platform",
+        "public transit",
+        "public transportation",
+        "transit",
+        "transportation"
+    ],
+    "name": "Transit Stop / Platform",
+    "matchScore": 0.2
 }

@@ -1,9 +1,8 @@
 {
     "icon": "pitch",
     "fields": [
-        "name",
-        "sport",
-        "address",
+        "fitness_station",
+        "ref",
         "opening_hours"
     ],
     "geometry": [
@@ -13,7 +12,20 @@
     "tags": {
         "leisure": "fitness_station"
     },
+    "addTags": {
+        "leisure": "fitness_station",
+        "sport": "fitness"
+    },
+    "removeTags": {
+        "leisure": "fitness_station",
+        "sport": "fitness"
+    },
+    "reference": {
+        "key": "leisure",
+        "value": "fitness_station"
+    },
     "terms": [
+        "exercise",
         "fitness",
         "gym",
         "trim trail"

@@ -31,6 +31,7 @@ var dispatch = d3_dispatch('authLoading', 'authDone', 'change', 'loading', 'load
     inflight = {},
     loadedTiles = {},
     entityCache = {},
+    connectionId = 1,
     tileZoom = 16,
     oauth = osmAuth({
         url: urlroot,
@@ -189,6 +190,7 @@ export default {
 
 
     reset: function() {
+        connectionId++;
         userChangesets = undefined;
         userDetails = undefined;
         rateLimitError = undefined;
@@ -197,6 +199,11 @@ export default {
         loadedTiles = {};
         inflight = {};
         return this;
+    },
+
+
+    getConnectionId: function() {
+        return connectionId;
     },
 
 
@@ -232,8 +239,14 @@ export default {
     loadFromAPI: function(path, callback, options) {
         options = _extend({ cache: true }, options);
         var that = this;
+        var cid = connectionId;
 
         function done(err, xml) {
+            if (that.getConnectionId() !== cid) {
+                if (callback) callback({ message: 'Connection Switched', status: -1 });
+                return;
+            }
+
             var isAuthenticated = that.authenticated();
 
             // 400 Bad Request, 401 Unauthorized, 403 Forbidden
@@ -333,6 +346,8 @@ export default {
 
 
     putChangeset: function(changeset, changes, callback) {
+        var that = this;
+        var cid = connectionId;
 
         // Create the changeset..
         oauth.xhr({
@@ -344,7 +359,13 @@ export default {
 
 
         function createdChangeset(err, changeset_id) {
-            if (err) return callback(err);
+            if (err) {
+                return callback(err);
+            }
+            if (that.getConnectionId() !== cid) {
+                return callback({ message: 'Connection Switched', status: -1 });
+            }
+
             changeset = changeset.update({ id: changeset_id });
 
             // Upload the changeset..
@@ -366,12 +387,16 @@ export default {
                 callback(null, changeset);
             }, 2500);
 
-            // Still attempt to close changeset, but ignore response because #2667
-            oauth.xhr({
-                method: 'PUT',
-                path: '/api/0.6/changeset/' + changeset.id + '/close',
-                options: { header: { 'Content-Type': 'text/xml' } }
-            }, function() { return true; });
+            // At this point, we don't really care if the connection was switched..
+            // Only try to close the changeset if we're still talking to the same server.
+            if (that.getConnectionId() === cid) {
+                // Still attempt to close changeset, but ignore response because #2667
+                oauth.xhr({
+                    method: 'PUT',
+                    path: '/api/0.6/changeset/' + changeset.id + '/close',
+                    options: { header: { 'Content-Type': 'text/xml' } }
+                }, function() { return true; });
+            }
         }
     },
 
@@ -382,8 +407,16 @@ export default {
             return;
         }
 
+        var that = this;
+        var cid = connectionId;
+
         function done(err, user_details) {
-            if (err) return callback(err);
+            if (err) {
+                return callback(err);
+            }
+            if (that.getConnectionId() !== cid) {
+                return callback({ message: 'Connection Switched', status: -1 });
+            }
 
             var u = user_details.getElementsByTagName('user')[0],
                 img = u.getElementsByTagName('img'),
@@ -420,27 +453,36 @@ export default {
             return;
         }
 
+        var that = this;
+        var cid = connectionId;
+
         this.userDetails(function(err, user) {
             if (err) {
-                callback(err);
-                return;
+                return callback(err);
+            }
+            if (that.getConnectionId() !== cid) {
+                return callback({ message: 'Connection Switched', status: -1 });
             }
 
             function done(err, changesets) {
                 if (err) {
-                    callback(err);
-                } else {
-                    userChangesets = Array.prototype.map.call(
-                        changesets.getElementsByTagName('changeset'),
-                        function (changeset) {
-                            return { tags: getTags(changeset) };
-                        }
-                    ).filter(function (changeset) {
-                        var comment = changeset.tags.comment;
-                        return comment && comment !== '';
-                    });
-                    callback(undefined, userChangesets);
+                    return callback(err);
                 }
+                if (that.getConnectionId() !== cid) {
+                    return callback({ message: 'Connection Switched', status: -1 });
+                }
+
+                userChangesets = Array.prototype.map.call(
+                    changesets.getElementsByTagName('changeset'),
+                    function (changeset) {
+                        return { tags: getTags(changeset) };
+                    }
+                ).filter(function (changeset) {
+                    var comment = changeset.tags.comment;
+                    return comment && comment !== '';
+                });
+
+                callback(undefined, userChangesets);
             }
 
             oauth.xhr({ method: 'GET', path: '/api/0.6/changesets?user=' + user.id }, done);
@@ -449,7 +491,14 @@ export default {
 
 
     status: function(callback) {
+        var that = this;
+        var cid = connectionId;
+
         function done(xml) {
+            if (that.getConnectionId() !== cid) {
+                return callback({ message: 'Connection Switched', status: -1 }, 'connectionSwitched');
+            }
+
             // update blacklists
             var elements = xml.getElementsByTagName('blacklist'),
                 regexes = [];
@@ -568,9 +617,9 @@ export default {
             done: authDone
         }, options));
 
-        dispatch.call('change');
         this.reset();
         this.userChangesets(function() {});  // eagerly load user details/changesets
+        dispatch.call('change');
         return this;
     },
 
@@ -599,10 +648,19 @@ export default {
 
     authenticate: function(callback) {
         var that = this;
+        var cid = connectionId;
         userChangesets = undefined;
         userDetails = undefined;
 
         function done(err, res) {
+            if (err) {
+                if (callback) callback(err);
+                return;
+            }
+            if (that.getConnectionId() !== cid) {
+                if (callback) callback({ message: 'Connection Switched', status: -1 });
+                return;
+            }
             rateLimitError = undefined;
             dispatch.call('change');
             if (callback) callback(err, res);

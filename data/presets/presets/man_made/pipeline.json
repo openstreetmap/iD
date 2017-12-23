@@ -2,7 +2,8 @@
     "icon": "pipeline-line",
     "fields": [
         "location",
-        "operator"
+        "operator",
+        "substance"
     ],
     "geometry": [
         "line"

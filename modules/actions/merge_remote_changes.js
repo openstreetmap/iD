@@ -9,10 +9,10 @@ import _union from 'lodash-es/union';
 import _uniq from 'lodash-es/uniq';
 import _without from 'lodash-es/without';
 
+import { diff3Merge } from 'node-diff3';
 import { t } from '../util/locale';
 import { actionDeleteMultiple } from './delete_multiple';
 import { osmEntity } from '../osm';
-import { diff3_merge } from '../util/diff3';
 import { dataDiscarded } from '../../data';
 
 
@@ -57,7 +57,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
             a = target.nodes || [],
             b = remote.nodes || [],
             nodes = [],
-            hunks = diff3_merge(a, o, b, true);
+            hunks = diff3Merge(a, o, b, true);
 
         for (var i = 0; i < hunks.length; i++) {
             var hunk = hunks[i];
@@ -65,7 +65,7 @@ export function actionMergeRemoteChanges(id, localGraph, remoteGraph, formatUser
                 nodes.push.apply(nodes, hunk.ok);
             } else {
                 // for all conflicts, we can assume c.a !== c.b
-                // because `diff3_merge` called with `true` option to exclude false conflicts..
+                // because `diff3Merge` called with `true` option to exclude false conflicts..
                 var c = hunk.conflict;
                 if (_isEqual(c.o, c.a)) {  // only changed remotely
                     nodes.push.apply(nodes, c.b);

@@ -1,0 +1,20 @@
+{
+    "icon": "poi-power",
+    "fields": [
+        "switch",
+        "operator",
+        "location",
+        "cables",
+        "voltage",
+        "ref"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "power": "switch"
+    },
+    "name": "Power Switch"
+}

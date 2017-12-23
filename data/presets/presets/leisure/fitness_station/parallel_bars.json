@@ -1,0 +1,38 @@
+{
+    "icon": "pitch",
+    "fields": [
+        "ref",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "leisure": "fitness_station",
+        "fitness_station": "parallel_bars"
+    },
+    "addTags": {
+        "leisure": "fitness_station",
+        "fitness_station": "parallel_bars",
+        "sport": "fitness"
+    },
+    "removeTags": {
+        "leisure": "fitness_station",
+        "fitness_station": "parallel_bars",
+        "sport": "fitness"
+    },
+    "reference": {
+        "key": "leisure",
+        "value": "fitness_station"
+    },
+    "terms": [
+        "bar",
+        "dip",
+        "exercise",
+        "fitness",
+        "gym",
+        "trim trail"
+    ],
+    "name": "Parallel Bars"
+}

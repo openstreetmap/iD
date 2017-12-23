@@ -8,6 +8,10 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { osmEntity } from '../osm';
 import { utilRebind } from '../util/rebind';
+import {
+	utilQsString,
+	utilStringQs
+} from '../util';
 
 
 export function rendererFeatures(context) {
@@ -64,6 +68,17 @@ export function rendererFeatures(context) {
 
 
     function update() {
+        if (!window.mocha) {
+            var q = utilStringQs(window.location.hash.substring(1));
+            var disabled = features.disabled();
+            if (disabled.length) {
+                q.disable_features = features.disabled().join(',');
+            } else {
+                delete q.disable_features;
+            }
+            window.location.replace('#' + utilQsString(q, true));
+        }
+
         _hidden = features.hidden();
         dispatch.call('change');
         dispatch.call('redraw');
@@ -71,10 +86,12 @@ export function rendererFeatures(context) {
 
 
     function defineFeature(k, filter, max) {
+        var isEnabled = true;
+
         _keys.push(k);
         _features[k] = {
             filter: filter,
-            enabled: true,   // whether the user wants it enabled..
+            enabled: isEnabled,   // whether the user wants it enabled..
             count: 0,
             currentMax: (max || Infinity),
             defaultMax: (max || Infinity),
@@ -464,6 +481,15 @@ export function rendererFeatures(context) {
         return result;
     };
 
+
+    features.init = function() {
+        var q = utilStringQs(window.location.hash.substring(1));
+
+        if (q.disable_features) {
+            var disabled = q.disable_features.replace(/;/g, ',').split(',');
+            disabled.forEach(features.disable);
+        }
+    };
 
     return utilRebind(features, dispatch, 'on');
 }

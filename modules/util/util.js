@@ -255,9 +255,11 @@ export function utilFunctor(value) {
 
 
 export function utilNoAuto(selection) {
+    var isText = (selection.size() && selection.node().tagName.toLowerCase() === 'textarea');
+
     return selection
         .attr('autocomplete', 'off')
         .attr('autocorrect', 'off')
         .attr('autocapitalize', 'off')
-        .attr('spellcheck', 'false');
+        .attr('spellcheck', isText ? 'true' : 'false');
 }

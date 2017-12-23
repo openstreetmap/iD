@@ -9,61 +9,40 @@ import { uiFlash } from '../ui';
 
 /* Creates a keybinding behavior for an operation */
 export function behaviorOperation() {
-    var which, keybinding;
-
-
-    function drawIcon(selection) {
-        var button = selection
-            .append('svg')
-            .attr('class', 'operation-icon')
-            .append('g')
-            .attr('class', 'radial-menu-item radial-menu-item-' + which.id)
-            .attr('transform', 'translate(10,10)')
-            .classed('disabled', which.disabled());
-
-        button
-            .append('circle')
-            .attr('r', 9);
-
-        button
-            .append('use')
-            .attr('transform', 'translate(-7,-7)')
-            .attr('width', '14')
-            .attr('height', '14')
-            .attr('xlink:href', '#operation-' + which.id);
-
-        return selection;
-    }
-
+    var _operation, keybinding;
 
     var behavior = function () {
-        if (which && which.available()) {
-            keybinding = d3_keybinding('behavior.key.' + which.id);
-            keybinding.on(which.keys, function() {
+        if (_operation && _operation.available()) {
+            keybinding = d3_keybinding('behavior.key.' + _operation.id);
+            keybinding.on(_operation.keys, function() {
                 d3_event.preventDefault();
-                var disabled = which.disabled();
+                var disabled = _operation.disabled();
+                var flash;
 
                 if (disabled) {
-                    uiFlash(3000)
-                        .html('')
-                        .call(drawIcon)
-                        .append('div')
-                        .attr('class', 'operation-tip')
-                        .text(which.tooltip);
+                    flash = uiFlash()
+                        .duration(4000)
+                        .iconName('#operation-' + _operation.id)
+                        .iconClass('operation disabled')
+                        .text(_operation.tooltip);
+
+                    flash();
 
                 } else {
-                    uiFlash(1500)
-                        .html('')
-                        .call(drawIcon)
-                        .append('div')
-                        .attr('class', 'operation-tip')
-                        .text(which.annotation() || which.title);
+                    flash = uiFlash()
+                        .duration(2000)
+                        .iconName('#operation-' + _operation.id)
+                        .iconClass('operation')
+                        .text(_operation.annotation() || _operation.title);
 
-                    which();
+                    flash();
+                    _operation();
                 }
             });
+
             d3_select(document).call(keybinding);
         }
+
         return behavior;
     };
 
@@ -76,8 +55,8 @@ export function behaviorOperation() {
 
 
     behavior.which = function (_) {
-        if (!arguments.length) return which;
-        which = _;
+        if (!arguments.length) return _operation;
+        _operation = _;
         return behavior;
     };
 

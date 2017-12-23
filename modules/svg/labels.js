@@ -337,7 +337,7 @@ export function svgLabels(projection, context) {
                 var getName = (geometry === 'line') ? utilDisplayNameForPath : utilDisplayName,
                     name = getName(entity),
                     width = name && textWidth(name, fontSize),
-                    p;
+                    p = null;
 
                 if (geometry === 'point') {
                     p = getPointLabel(entity, width, fontSize, geometry);
@@ -512,47 +512,65 @@ export function svgLabels(projection, context) {
         function getAreaLabel(entity, width, height) {
             var centroid = path.centroid(entity.asGeoJSON(graph, true)),
                 extent = entity.extent(graph),
-                entitywidth = projection(extent[1])[0] - projection(extent[0])[0];
+                areaWidth = projection(extent[1])[0] - projection(extent[0])[0];
 
-            if (isNaN(centroid[0]) || entitywidth < 20) return;
+            if (isNaN(centroid[0]) || areaWidth < 20) return;
 
-            var iconSize = 20,
-                iconX = centroid[0] - (iconSize / 2),
-                iconY = centroid[1] - (iconSize / 2),
+            var preset = context.presets().match(entity, context.graph()),
+                picon = preset && preset.icon,
+                iconSize = 17,
                 margin = 2,
-                textOffset = iconSize + margin,
-                p = { transform: 'translate(' + iconX + ',' + iconY + ')' };
+                p = {};
 
-            var bbox = {
-                minX: iconX,
-                minY: iconY,
-                maxX: iconX + iconSize,
-                maxY: iconY + iconSize
-            };
+            if (picon) {  // icon and label..
+                if (addIcon()) {
+                    addLabel(iconSize + margin);
+                    return p;
+                }
+            } else {   // label only..
+                if (addLabel(0)) {
+                    return p;
+                }
+            }
 
-            // try to add icon
-            if (tryInsert([bbox], entity.id + 'I', true)) {
-                if (width && entitywidth >= width + 20) {
-                    var labelX = centroid[0],
-                        labelY = centroid[1] + textOffset;
 
-                    bbox = {
+            function addIcon() {
+                var iconX = centroid[0] - (iconSize / 2);
+                var iconY = centroid[1] - (iconSize / 2);
+                var bbox = {
+                    minX: iconX,
+                    minY: iconY,
+                    maxX: iconX + iconSize,
+                    maxY: iconY + iconSize
+                };
+
+                if (tryInsert([bbox], entity.id + 'I', true)) {
+                    p.transform = 'translate(' + iconX + ',' + iconY + ')';
+                    return true;
+                }
+                return false;
+            }
+
+            function addLabel(yOffset) {
+                if (width && areaWidth >= width + 20) {
+                    var labelX = centroid[0];
+                    var labelY = centroid[1] + yOffset;
+                    var bbox = {
                         minX: labelX - (width / 2) - margin,
                         minY: labelY - (height / 2) - margin,
                         maxX: labelX + (width / 2) + margin,
                         maxY: labelY + (height / 2) + margin
                     };
 
-                    // try to add label
                     if (tryInsert([bbox], entity.id, true)) {
                         p.x = labelX;
                         p.y = labelY;
                         p.textAnchor = 'middle';
                         p.height = height;
+                        return true;
                     }
                 }
-
-                return p;
+                return false;
             }
         }
 

@@ -5,7 +5,8 @@
         "generator/source",
         "generator/method",
         "generator/type",
-        "generator/output/electricity"
+        "generator/output/electricity",
+        "ref"
     ],
     "geometry": [
         "point",

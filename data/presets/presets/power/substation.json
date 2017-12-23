@@ -3,7 +3,8 @@
     "fields": [
         "substation",
         "operator",
-        "building"
+        "building",
+        "ref"
     ],
     "geometry": [
         "point",

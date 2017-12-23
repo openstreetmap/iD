@@ -1,0 +1,47 @@
+{
+    "icon": "highway-footway",
+    "fields": [
+        "name",
+        "ref_platform",
+        "network",
+        "operator",
+        "surface",
+        "lit",
+        "bench",
+        "shelter"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "public_transport": "platform",
+        "train": "yes"
+    },
+    "addTags": {
+        "public_transport": "platform",
+        "train": "yes",
+        "railway": "platform"
+    },
+    "removeTags": {
+        "public_transport": "platform",
+        "train": "yes",
+        "railway": "platform"
+    },
+    "reference": {
+        "key": "railway",
+        "value": "platform"
+    },
+    "terms": [
+        "metro",
+        "platform",
+        "public transit",
+        "public transportation",
+        "rail",
+        "subway",
+        "track",
+        "transit",
+        "transportation",
+        "underground"
+    ],
+    "name": "Subway Stop / Platform"
+}

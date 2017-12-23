@@ -7,7 +7,7 @@ describe('iD.actionAddMember', function() {
 
     describe('inserts way members at a sensible index', function() {
         function members(graph) {
-            return _.map(graph.entity('r').members, 'id');
+            return graph.entity('r').members.map(function (m) { return m.id; });
         }
 
         specify('no members', function() {

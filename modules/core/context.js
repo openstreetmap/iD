@@ -53,7 +53,7 @@ export function setAreaKeys(value) {
 
 export function coreContext() {
     var context = {};
-    context.version = '2.4.3';
+    context.version = '2.5.1';
 
     // create a special translation that contains the keys in place of the strings
     var tkeys = _cloneDeep(dataEn);
@@ -112,10 +112,6 @@ export function coreContext() {
 
 
     /* Connection */
-    var entitiesLoaded = utilCallWhenIdle(function entitiesLoaded(err, result) {
-        if (!err) history.merge(result.data, result.extent);
-    });
-
     context.preauth = function(options) {
         if (connection) {
             connection.switch(options);
@@ -124,39 +120,51 @@ export function coreContext() {
     };
 
     context.loadTiles = utilCallWhenIdle(function(projection, dimensions, callback) {
+        var cid;
         function done(err, result) {
-            entitiesLoaded(err, result);
+            if (connection.getConnectionId() !== cid) {
+                if (callback) callback({ message: 'Connection Switched', status: -1 });
+                return;
+            }
+            if (!err) history.merge(result.data, result.extent);
             if (callback) callback(err, result);
         }
-        if (connection) {
+        if (connection && context.editable()) {
+            cid = connection.getConnectionId();
             connection.loadTiles(projection, dimensions, done);
         }
     });
 
-    context.loadEntity = function(id, callback) {
+    context.loadEntity = function(entityId, callback) {
+        var cid;
         function done(err, result) {
-            entitiesLoaded(err, result);
+            if (connection.getConnectionId() !== cid) {
+                if (callback) callback({ message: 'Connection Switched', status: -1 });
+                return;
+            }
+            if (!err) history.merge(result.data, result.extent);
             if (callback) callback(err, result);
         }
         if (connection) {
-            connection.loadEntity(id, done);
+            cid = connection.getConnectionId();
+            connection.loadEntity(entityId, done);
         }
     };
 
-    context.zoomToEntity = function(id, zoomTo) {
+    context.zoomToEntity = function(entityId, zoomTo) {
         if (zoomTo !== false) {
-            this.loadEntity(id, function(err, result) {
+            this.loadEntity(entityId, function(err, result) {
                 if (err) return;
-                var entity = _find(result.data, function(e) { return e.id === id; });
+                var entity = _find(result.data, function(e) { return e.id === entityId; });
                 if (entity) { map.zoomTo(entity); }
             });
         }
 
         map.on('drawn.zoomToEntity', function() {
-            if (!context.hasEntity(id)) return;
+            if (!context.hasEntity(entityId)) return;
             map.on('drawn.zoomToEntity', null);
             context.on('enter.zoomToEntity', null);
-            context.enter(modeSelect(context, [id]));
+            context.enter(modeSelect(context, [entityId]));
         });
 
         context.on('enter.zoomToEntity', function() {
@@ -471,6 +479,7 @@ export function coreContext() {
     });
 
     background.init();
+    features.init();
     presets.init();
     areaKeys = presets.areaKeys();
 

@@ -280,7 +280,6 @@
             "localized_translation_language": "Escoyer idioma",
             "localized_translation_name": "Nome"
         },
-        "zoom_in_edit": "Averar pa editar",
         "login": "aniciu de sesión",
         "logout": "zarrar sesión",
         "loading_auth": "Coneutando con OpenStreetMap...",
@@ -520,8 +519,7 @@
         "splash": {
             "welcome": "Bienllegáu al editor d'OpenStreetMap iD",
             "text": "iD ye una ferramienta amistosa pero potente pa collaborar col meyor mapamundi llibre del mundu. Esta ye la versión {version}. Pa más información visite {website} ya informe de fallos en {github}.",
-            "walkthrough": "Aniciar la Visita guiada",
-            "start": "Editar yá"
+            "walkthrough": "Aniciar la Visita guiada"
         },
         "source_switch": {
             "live": "en vivo",
@@ -544,10 +542,6 @@
             "untagged_area": "Área ensin etiquetar",
             "tag_suggests_area": "La etiqueta {tag} suxer que la llinia tendría de ser un área, pero nun ye un area",
             "deprecated_tags": "Etiquetes anticuaes: {tags}"
-        },
-        "zoom": {
-            "in": "Averar",
-            "out": "Alloñar"
         },
         "full_screen": "Conmutar pantalla completa",
         "gpx": {
@@ -2309,17 +2303,11 @@
                 "craft/scaffolder": {
                     "name": "Montaxe d'andamios"
                 },
-                "craft/sculpter": {
-                    "name": "Escultor"
-                },
                 "craft/shoemaker": {
                     "name": "Zapateru"
                 },
                 "craft/stonemason": {
                     "name": "Canteru"
-                },
-                "craft/sweep": {
-                    "name": "Llimpieza de chimenees"
                 },
                 "craft/tailor": {
                     "name": "Sastre"
@@ -2477,9 +2465,6 @@
                 },
                 "highway/path": {
                     "name": "Camín"
-                },
-                "highway/pedestrian": {
-                    "name": "Cai peatonal"
                 },
                 "highway/primary": {
                     "name": "Carretera autonómica"
@@ -2926,16 +2911,9 @@
                     "name": "Oficina",
                     "terms": "Despachu"
                 },
-                "office/accountant": {
-                    "name": "Contable"
-                },
                 "office/administrative": {
                     "name": "Oficina alministrativa",
                     "terms": "Alministración,Centru municipal"
-                },
-                "office/architect": {
-                    "name": "Arquitectu",
-                    "terms": "Arquitectura,Construcción"
                 },
                 "office/company": {
                     "name": "Oficina d'empresa",
@@ -2963,15 +2941,8 @@
                     "name": "Oficina de seguros",
                     "terms": "Aseguradora,Seguros,Riesgu"
                 },
-                "office/it": {
-                    "name": "Despachu de teunoloxía de la información"
-                },
                 "office/lawyer": {
                     "name": "Despachu d'abogaos"
-                },
-                "office/newspaper": {
-                    "name": "Periódicu",
-                    "terms": "Revista, Boletín"
                 },
                 "office/ngo": {
                     "name": "ONG",
@@ -2988,9 +2959,6 @@
                 },
                 "office/telecommunication": {
                     "name": "Oficina de telecomunicaciones"
-                },
-                "office/therapist": {
-                    "name": "Terapeuta"
                 },
                 "office/travel_agent": {
                     "name": "Axencia de viaxes"
@@ -3469,9 +3437,6 @@
                 },
                 "tourism/caravan_site": {
                     "name": "Aparcaderu d'autocaravanes"
-                },
-                "tourism/chalet": {
-                    "name": "Casa d'aldea"
                 },
                 "tourism/gallery": {
                     "name": "Galería d'arte"

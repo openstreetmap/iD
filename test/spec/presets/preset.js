@@ -97,7 +97,7 @@ describe('iD.presetPreset', function() {
             expect(preset.applyTags({}, 'point')).to.eql({});
         });
 
-        context('for a preset with no tag in areaKeys', function() {
+        describe('for a preset with no tag in areaKeys', function() {
             var preset = iD.presetPreset('test', {geometry: ['line', 'area'], tags: {name: 'testname', highway: 'pedestrian'}});
 
             it('doesn\'t add area=yes to non-areas', function() {
@@ -109,10 +109,14 @@ describe('iD.presetPreset', function() {
             });
         });
 
-        context('for a preset with a tag in areaKeys', function() {
-            var preset = iD.presetPreset('test', {geometry: ['area'], tags: {name: 'testname', natural: 'water'}});
-            it('doesn\'t add area=yes', function() {
+        describe('for a preset with a tag in areaKeys', function() {
+            it('doesn\'t add area=yes automatically', function() {
+                var preset = iD.presetPreset('test', {geometry: ['area'], tags: {name: 'testname', natural: 'water'}});
                 expect(preset.applyTags({}, 'area')).to.eql({name: 'testname', natural: 'water'});
+            });
+            it('does add area=yes if asked to', function() {
+                var preset = iD.presetPreset('test', {geometry: ['area'], tags: {name: 'testname', area: 'yes'}});
+                expect(preset.applyTags({}, 'area')).to.eql({name: 'testname', area: 'yes'});
             });
         });
     });

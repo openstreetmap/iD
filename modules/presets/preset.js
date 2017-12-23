@@ -94,7 +94,7 @@ export function presetPreset(id, preset, fields) {
     };
 
 
-    var removeTags = preset.removeTags || preset.tags;
+    var removeTags = preset.removeTags || preset.tags || {};
     preset.removeTags = function(tags, geometry) {
         tags = _omit(tags, _keys(removeTags));
 
@@ -110,7 +110,7 @@ export function presetPreset(id, preset, fields) {
     };
 
 
-    var applyTags = preset.addTags || preset.tags;
+    var applyTags = preset.addTags || preset.tags || {};
     preset.applyTags = function(tags, geometry) {
         var k;
 
@@ -128,19 +128,21 @@ export function presetPreset(id, preset, fields) {
         // This is necessary if the geometry is already an area (e.g. user drew an area) AND any of:
         // 1. chosen preset could be either an area or a line (`barrier=city_wall`)
         // 2. chosen preset doesn't have a key in areaKeys (`railway=station`)
-        delete tags.area;
-        if (geometry === 'area') {
-            var needsAreaTag = true;
-            if (preset.geometry.indexOf('line') === -1) {
-                for (k in applyTags) {
-                    if (k in areaKeys) {
-                        needsAreaTag = false;
-                        break;
+        if (!applyTags.hasOwnProperty('area')) {
+            delete tags.area;
+            if (geometry === 'area') {
+                var needsAreaTag = true;
+                if (preset.geometry.indexOf('line') === -1) {
+                    for (k in applyTags) {
+                        if (k in areaKeys) {
+                            needsAreaTag = false;
+                            break;
+                        }
                     }
                 }
-            }
-            if (needsAreaTag) {
-                tags.area = 'yes';
+                if (needsAreaTag) {
+                    tags.area = 'yes';
+                }
             }
         }
 

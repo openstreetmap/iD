@@ -212,7 +212,6 @@
             "localized_translation_language": "Alege limba",
             "localized_translation_name": "Nume"
         },
-        "zoom_in_edit": "Mărește pentru a edita",
         "login": "login",
         "logout": "logout",
         "loading_auth": "Conectare la OpenStreetMap..",
@@ -463,8 +462,7 @@
         },
         "splash": {
             "welcome": "Bine ai venit în editorul iD OpenStreetMap",
-            "walkthrough": "Începe ghidul",
-            "start": "Editează acum"
+            "walkthrough": "Începe ghidul"
         },
         "source_switch": {
             "live": "live",
@@ -487,10 +485,6 @@
             "untagged_relation": "Relație fără taguri",
             "tag_suggests_area": "Tag-ul {tag} sugerează că linia trebuie sa fie o suprafață, dar nu e.",
             "deprecated_tags": "Tag-uri învechite: {tags}"
-        },
-        "zoom": {
-            "in": "Mărește",
-            "out": "Micșorează"
         },
         "gpx": {
             "local_layer": "Fișier local",
@@ -1995,9 +1989,6 @@
                     "name": "Școală",
                     "terms": "<translate with synonyms or related terms for 'School Grounds', separated by commas>"
                 },
-                "amenity/scrapyard": {
-                    "terms": "<translate with synonyms or related terms for 'Scrap Yard', separated by commas>"
-                },
                 "amenity/shelter": {
                     "terms": "<translate with synonyms or related terms for 'Shelter', separated by commas>"
                 },
@@ -2436,19 +2427,12 @@
                 "craft/scaffolder": {
                     "terms": "<translate with synonyms or related terms for 'Scaffolder', separated by commas>"
                 },
-                "craft/sculpter": {
-                    "name": "Sculptor",
-                    "terms": "<translate with synonyms or related terms for 'Sculpter', separated by commas>"
-                },
                 "craft/shoemaker": {
                     "name": "Cizmar",
                     "terms": "<translate with synonyms or related terms for 'Shoemaker', separated by commas>"
                 },
                 "craft/stonemason": {
                     "terms": "<translate with synonyms or related terms for 'Stonemason', separated by commas>"
-                },
-                "craft/sweep": {
-                    "terms": "<translate with synonyms or related terms for 'Chimney Sweep', separated by commas>"
                 },
                 "craft/tiler": {
                     "terms": "<translate with synonyms or related terms for 'Tiler', separated by commas>"
@@ -2600,10 +2584,6 @@
                 "highway/path": {
                     "name": "Potecă",
                     "terms": "<translate with synonyms or related terms for 'Path', separated by commas>"
-                },
-                "highway/pedestrian": {
-                    "name": "Drum Pietonal",
-                    "terms": "<translate with synonyms or related terms for 'Pedestrian Street', separated by commas>"
                 },
                 "highway/primary": {
                     "name": "Drum principal",
@@ -3303,17 +3283,9 @@
                     "name": "Oficiu",
                     "terms": "<translate with synonyms or related terms for 'Office', separated by commas>"
                 },
-                "office/accountant": {
-                    "name": "Socotitor",
-                    "terms": "<translate with synonyms or related terms for 'Accountant', separated by commas>"
-                },
                 "office/administrative": {
                     "name": "Oficiu Administrativ",
                     "terms": "<translate with synonyms or related terms for 'Administrative Office', separated by commas>"
-                },
-                "office/architect": {
-                    "name": "Arhitect",
-                    "terms": "<translate with synonyms or related terms for 'Architect', separated by commas>"
                 },
                 "office/company": {
                     "name": "Oficiu de Companie",
@@ -3349,10 +3321,6 @@
                     "name": "Oficiu de Asigurare",
                     "terms": "<translate with synonyms or related terms for 'Insurance Office', separated by commas>"
                 },
-                "office/it": {
-                    "name": "Oficiu IT",
-                    "terms": "<translate with synonyms or related terms for 'IT Office', separated by commas>"
-                },
                 "office/lawyer": {
                     "name": "Cabinet de Avocatură",
                     "terms": "<translate with synonyms or related terms for 'Law Office', separated by commas>"
@@ -3360,10 +3328,6 @@
                 "office/lawyer/notary": {
                     "name": "Notar",
                     "terms": "<translate with synonyms or related terms for 'Notary Office', separated by commas>"
-                },
-                "office/newspaper": {
-                    "name": "Ziar",
-                    "terms": "<translate with synonyms or related terms for 'Newspaper', separated by commas>"
                 },
                 "office/ngo": {
                     "name": "Oficiu NGO",
@@ -3383,10 +3347,6 @@
                 "office/telecommunication": {
                     "name": "Oficiu Telecom",
                     "terms": "<translate with synonyms or related terms for 'Telecom Office', separated by commas>"
-                },
-                "office/therapist": {
-                    "name": "Terapist",
-                    "terms": "<translate with synonyms or related terms for 'Therapist', separated by commas>"
                 },
                 "office/travel_agent": {
                     "name": "Agenție de Călătorii"
@@ -4054,10 +4014,6 @@
                 },
                 "tourism/caravan_site": {
                     "terms": "<translate with synonyms or related terms for 'RV Park', separated by commas>"
-                },
-                "tourism/chalet": {
-                    "name": "Șalet",
-                    "terms": "<translate with synonyms or related terms for 'Chalet', separated by commas>"
                 },
                 "tourism/gallery": {
                     "name": "Galerie de Artă",

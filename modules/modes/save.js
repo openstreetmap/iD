@@ -24,7 +24,11 @@ import {
 } from '../actions';
 
 import { coreGraph } from '../core';
-import { modeBrowse } from './index';
+
+import {
+    modeBrowse,
+    modeSelect
+} from './index';
 
 import {
     uiConflicts,
@@ -64,8 +68,12 @@ export function modeSave(context) {
         .on('save', save);
 
 
-    function cancel() {
-        context.enter(modeBrowse(context));
+    function cancel(selectedID) {
+        if (selectedID) {
+            context.enter(modeSelect(context, [selectedID]));
+        } else {
+            context.enter(modeBrowse(context));
+        }
     }
 
 

@@ -310,7 +310,6 @@
             "localized_translation_language": "Dil seç",
             "localized_translation_name": "İsim"
         },
-        "zoom_in_edit": "Düzenlemek için görüntüyü yakınlaştır.",
         "login": "giriş yap",
         "logout": "çıkış yap",
         "loading_auth": "OpenStreetMap'e bağlanıyor...",
@@ -345,6 +344,24 @@
         "contributors": {
             "list": "{users} tarafından yapılmış değişiklikler",
             "truncated_list": "{users} ve {count} başka kişi tarafından yapılmış değişiklikler"
+        },
+        "info_panels": {
+            "background": {
+                "zoom": "Yakınlaştırma",
+                "source": "Kaynak",
+                "description": "Açıklama",
+                "resolution": "Çözüm",
+                "accuracy": "Doğruluk",
+                "unknown": "Bilinmeyen"
+            },
+            "history": {
+                "version": "Versiyon",
+                "changeset": "Değişiklik Kümesi"
+            },
+            "measurement": {
+                "title": "Ölçüm",
+                "length": "Uzunluk"
+            }
         },
         "geometry": {
             "point": "nokta",
@@ -552,8 +569,7 @@
         "splash": {
             "welcome": "OpenStreetMap Editörü iD'ye Hoşgeldin",
             "text": "iD, dünyanın en iyi ve bedava haritasına katkıda bulunmak için, kullanılması kolay ve güçlü bir araç. Bu sürüm {version}. Daha çok bilgi için {website} sayfasına git ve hataları {github} aracılığıyla bildir.",
-            "walkthrough": "Eğitime Başla",
-            "start": "Şimdi Düzenle"
+            "walkthrough": "Eğitime Başla"
         },
         "source_switch": {
             "live": "canlı",
@@ -582,10 +598,6 @@
             "many_deletions": "Şu an {n} adet nesneyi siliyorsun. Bunu yapmak istediğinden emin misin? Bu, ilgili tüm nesneleri openstreetmap.org haritasından silecektir.",
             "tag_suggests_area": "{tag} etiketi buranın alan olmasını ima ediyor, ama burası alan değil.",
             "deprecated_tags": "Kullanımdan kaldırılmış etiketler: {tags}"
-        },
-        "zoom": {
-            "in": "Yaklaş",
-            "out": "Uzaklaş"
         },
         "cannot_zoom": "Bu modda daha fazla uzaklaşılamaz.",
         "full_screen": "Tam Ekran",
@@ -1205,6 +1217,9 @@
                         "anticlockwise": "Saat Yönünün Tersine",
                         "clockwise": "Saat Yönünde"
                     }
+                },
+                "clothes": {
+                    "label": "Çamaşırlar"
                 },
                 "club": {
                     "label": "Cins"
@@ -2012,6 +2027,11 @@
                     },
                     "placeholder": "Bilinmiyor"
                 },
+                "structure_waterway": {
+                    "options": {
+                        "tunnel": "Tünel"
+                    }
+                },
                 "studio": {
                     "label": "Tür"
                 },
@@ -2601,8 +2621,7 @@
                     "terms": "Okul, Okul Bahçesi"
                 },
                 "amenity/scrapyard": {
-                    "name": "Hurdalık",
-                    "terms": "Hurdalık, Hurda Toplama Yeri"
+                    "name": "Hurdalık"
                 },
                 "amenity/shelter": {
                     "name": "Barınak",
@@ -3147,10 +3166,6 @@
                     "name": "İskeleci",
                     "terms": "İskeleci, Yapı Kurma Ustası"
                 },
-                "craft/sculpter": {
-                    "name": "Heykeltraş",
-                    "terms": "Heykeltraş"
-                },
                 "craft/shoemaker": {
                     "name": "Ayakkabıcı",
                     "terms": "Ayakkabıcı"
@@ -3158,10 +3173,6 @@
                 "craft/stonemason": {
                     "name": "Duvarcı",
                     "terms": "Duvarcı"
-                },
-                "craft/sweep": {
-                    "name": "Baca Temizleyicisi",
-                    "terms": "Baca Temizleyicisi"
                 },
                 "craft/tailor": {
                     "name": "Terzi"
@@ -3362,10 +3373,6 @@
                 "highway/path": {
                     "name": "Patika",
                     "terms": "Patika, Yol"
-                },
-                "highway/pedestrian": {
-                    "name": "Yaya Yolu",
-                    "terms": "Yaya Yolu, Çarşı"
                 },
                 "highway/primary": {
                     "name": "Anayol",
@@ -4097,17 +4104,9 @@
                     "name": "Ofis",
                     "terms": "Ofis, Büro"
                 },
-                "office/accountant": {
-                    "name": "Muhasebeci",
-                    "terms": "Muhasebeci"
-                },
                 "office/administrative": {
                     "name": "İdari Ofis",
                     "terms": "İdari Ofis"
-                },
-                "office/architect": {
-                    "name": "Mimar",
-                    "terms": "Mimar"
                 },
                 "office/company": {
                     "name": "Şirket",
@@ -4145,10 +4144,6 @@
                     "name": "Sigorta Acentesi",
                     "terms": "Sigorta Acentesi"
                 },
-                "office/it": {
-                    "name": "Bilgi Teknolojileri Ofisi",
-                    "terms": "Bilgi Teknolojileri Ofisi"
-                },
                 "office/lawyer": {
                     "name": "Hukuk Bürosu",
                     "terms": "Hukuk Bürosu"
@@ -4156,10 +4151,6 @@
                 "office/lawyer/notary": {
                     "name": "Noter",
                     "terms": "Noter"
-                },
-                "office/newspaper": {
-                    "name": "Gazete",
-                    "terms": "Gazete"
                 },
                 "office/ngo": {
                     "name": "Sivil Toplum Örgütü",
@@ -4179,10 +4170,6 @@
                 "office/telecommunication": {
                     "name": "Haberleşme Bürosu",
                     "terms": "Haberleşme Bürosu, Telekomünikasyon Bürosu, Telekom Bürosu"
-                },
-                "office/therapist": {
-                    "name": "Terapist",
-                    "terms": "Terapist"
                 },
                 "office/travel_agent": {
                     "name": "Seyahat Acentesi"
@@ -4878,10 +4865,6 @@
                     "name": "Karavan Parkı",
                     "terms": "Karavan Parkı"
                 },
-                "tourism/chalet": {
-                    "name": "Tatil Evi",
-                    "terms": "Tatil Evi, Yayla Evi, Ahşap Ev, Dağ Evi, Küçük Köşk"
-                },
                 "tourism/gallery": {
                     "name": "Sanat Galerisi",
                     "terms": "Sanat Galerisi"
@@ -5197,22 +5180,26 @@
             "OSM_Inspector-Addresses": {
                 "attribution": {
                     "text": "© Geofabrik GmbH, OpenStreetMap destekçileri, CC-BY-SA"
-                }
+                },
+                "name": "OSM Müfettişi: Adresler"
             },
             "OSM_Inspector-Geometry": {
                 "attribution": {
                     "text": "© Geofabrik GmbH, OpenStreetMap destekçileri, CC-BY-SA"
-                }
+                },
+                "name": "OSM Müfettişi: Geometri"
             },
             "OSM_Inspector-Highways": {
                 "attribution": {
                     "text": "© Geofabrik GmbH, OpenStreetMap destekçileri, CC-BY-SA"
-                }
+                },
+                "name": "OSM Müfettişi: Karayolları"
             },
             "OSM_Inspector-Multipolygon": {
                 "attribution": {
                     "text": "© Geofabrik GmbH, OpenStreetMap destekçileri, CC-BY-SA"
-                }
+                },
+                "name": "OSM Müfettiş: Alan"
             },
             "OSM_Inspector-Places": {
                 "attribution": {
@@ -5274,6 +5261,12 @@
             "mapbox_locator_overlay": {
                 "attribution": {
                     "text": "Şartlar & Geri Bildirim"
+                },
+                "name": "Yer Belirleyici Yerleşimi"
+            },
+            "openpt_map": {
+                "attribution": {
+                    "text": "© OpenStreetMap katkıda bulunan kullanıcılar, CC-BY-SA"
                 }
             },
             "osm-gps": {

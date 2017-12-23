@@ -6,6 +6,7 @@ import _forEach from 'lodash-es/forEach';
 import _isEmpty from 'lodash-es/isEmpty';
 import _map from 'lodash-es/map';
 import _some from 'lodash-es/some';
+import _union from 'lodash-es/union';
 
 import { range as d3_range } from 'd3-array';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -24,7 +25,6 @@ import rbush from 'rbush';
 
 import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
 import { geoExtent } from '../geo';
-import { svgIcon } from '../svg';
 import { utilDetect } from '../util/detect';
 import { utilQsString, utilRebind } from '../util';
 
@@ -36,12 +36,12 @@ var apibase = 'https://a.mapillary.com/v3/',
     maxResults = 1000,
     tileZoom = 14,
     dispatch = d3_dispatch('loadedImages', 'loadedSigns'),
-    mapillaryCache,
-    mapillaryClicks,
-    mapillaryImage,
-    mapillarySignDefs,
-    mapillarySignSprite,
-    mapillaryViewer;
+    _mlyCache,
+    _mlyClicks,
+    _mlySelectedImage,
+    _mlySignDefs,
+    _mlySignSprite,
+    _mlyViewer;
 
 
 function abortRequest(i) {
@@ -68,6 +68,20 @@ function maxPageAtZoom(z) {
     if (z === 17) return 20;
     if (z === 18) return 40;
     if (z > 18)   return 80;
+}
+
+
+function localeTimestamp(s) {
+    if (!s) return null;
+    var detected = utilDetect();
+    var options = {
+        day: 'numeric', month: 'short', year: 'numeric',
+        hour: 'numeric', minute: 'numeric', second: 'numeric',
+        timeZone: 'UTC'
+    };
+    var d = new Date(s);
+    if (isNaN(d.getTime())) return null;
+    return d.toLocaleString(detected.locale, options);
 }
 
 
@@ -121,7 +135,7 @@ function loadTiles(which, url, projection) {
 
 
 function loadNextTilePage(which, currZoom, url, tile) {
-    var cache = mapillaryCache[which],
+    var cache = _mlyCache[which],
         rect = tile.extent.rectangle(),
         maxPages = maxPageAtZoom(currZoom),
         nextPage = cache.nextPage[tile.id] || 0,
@@ -164,8 +178,19 @@ function loadNextTilePage(which, currZoom, url, tile) {
                         key: feature.properties.key,
                         ca: feature.properties.ca,
                         captured_at: feature.properties.captured_at,
+                        captured_by: feature.properties.username,
                         pano: feature.properties.pano
                     };
+                    cache.forImageKey[d.key] = d;     // cache imageKey -> image
+
+                } else if (which === 'sequences') {
+                    var sequenceKey = feature.properties.key;
+                    cache.lineString[sequenceKey] = feature;           // cache sequenceKey -> lineString
+                    feature.properties.coordinateProperties.image_keys.forEach(function(imageKey) {
+                        cache.forImageKey[imageKey] = sequenceKey;     // cache imageKey -> sequenceKey
+                    });
+                    return false;  // because no `d` data worth loading into an rbush
+
                 } else if (which === 'objects') {
                     d = {
                         loc: loc,
@@ -175,15 +200,15 @@ function loadNextTilePage(which, currZoom, url, tile) {
                         detections: feature.properties.detections
                     };
 
-                    // cache image_key -> detection_key
+                    // cache imageKey -> detectionKey
                     feature.properties.detections.forEach(function(detection) {
-                        var ik = detection.image_key;
-                        var dk = detection.detection_key;
-                        if (!mapillaryCache.detections[ik]) {
-                            mapillaryCache.detections[ik] = {};
+                        var imageKey = detection.image_key;
+                        var detectionKey = detection.detection_key;
+                        if (!_mlyCache.detections[imageKey]) {
+                            _mlyCache.detections[imageKey] = {};
                         }
-                        if (!mapillaryCache.detections[ik][dk]) {
-                            mapillaryCache.detections[ik][dk] = {};
+                        if (!_mlyCache.detections[imageKey][detectionKey]) {
+                            _mlyCache.detections[imageKey][detectionKey] = {};
                         }
                     });
                 }
@@ -191,11 +216,12 @@ function loadNextTilePage(which, currZoom, url, tile) {
                 return {
                     minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
                 };
-            });
+
+            }).filter(Boolean);
 
             cache.rtree.load(features);
 
-            if (which === 'images') {
+            if (which === 'images' || which === 'sequences') {
                 dispatch.call('loadedImages');
             } else if (which === 'objects') {
                 dispatch.call('loadedSigns');
@@ -287,7 +313,7 @@ function searchLimited(psize, limit, projection, rtree) {
 export default {
 
     init: function() {
-        if (!mapillaryCache) {
+        if (!_mlyCache) {
             this.reset();
         }
 
@@ -295,7 +321,7 @@ export default {
     },
 
     reset: function() {
-        var cache = mapillaryCache;
+        var cache = _mlyCache;
 
         if (cache) {
             if (cache.images && cache.images.inflight) {
@@ -304,28 +330,55 @@ export default {
             if (cache.objects && cache.objects.inflight) {
                 _forEach(cache.objects.inflight, abortRequest);
             }
+            if (cache.sequences && cache.sequences.inflight) {
+                _forEach(cache.sequences.inflight, abortRequest);
+            }
         }
 
-        mapillaryCache = {
-            images: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() },
-            objects:  { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() },
+        _mlyCache = {
+            images: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush(), forImageKey: {} },
+            objects: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush() },
+            sequences: { inflight: {}, loaded: {}, nextPage: {}, nextURL: {}, rtree: rbush(), forImageKey: {}, lineString: {} },
             detections: {}
         };
 
-        mapillaryImage = null;
-        mapillaryClicks = [];
+        _mlySelectedImage = null;
+        _mlyClicks = [];
     },
 
 
     images: function(projection) {
         var psize = 16, limit = 3;
-        return searchLimited(psize, limit, projection, mapillaryCache.images.rtree);
+        return searchLimited(psize, limit, projection, _mlyCache.images.rtree);
     },
 
 
     signs: function(projection) {
         var psize = 32, limit = 3;
-        return searchLimited(psize, limit, projection, mapillaryCache.objects.rtree);
+        return searchLimited(psize, limit, projection, _mlyCache.objects.rtree);
+    },
+
+
+    sequences: function(projection) {
+        var viewport = projection.clipExtent();
+        var min = [viewport[0][0], viewport[1][1]];
+        var max = [viewport[1][0], viewport[0][1]];
+        var bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
+        var sequenceKeys = {};
+
+        // all sequences for images in viewport
+        _mlyCache.images.rtree.search(bbox)
+            .forEach(function(d) {
+                var sequenceKey = _mlyCache.sequences.forImageKey[d.data.key];
+                if (sequenceKey) {
+                    sequenceKeys[sequenceKey] = true;
+                }
+            });
+
+        // Return lineStrings for the sequences
+        return Object.keys(sequenceKeys).map(function(sequenceKey) {
+            return _mlyCache.sequences.lineString[sequenceKey];
+        });
     },
 
 
@@ -338,11 +391,11 @@ export default {
 
 
     signHTML: function(d) {
-        if (!mapillarySignDefs || !mapillarySignSprite) return;
-        var position = mapillarySignDefs[d.value];
+        if (!_mlySignDefs || !_mlySignSprite) return;
+        var position = _mlySignDefs[d.value];
         if (!position) return '<div></div>';
         var iconStyle = [
-            'background-image:url(' + mapillarySignSprite + ')',
+            'background-image:url(' + _mlySignSprite + ')',
             'background-repeat:no-repeat',
             'height:' + position.height + 'px',
             'width:' + position.width + 'px',
@@ -355,50 +408,43 @@ export default {
 
 
     loadImages: function(projection) {
-        var url = apibase + 'images?';
-        loadTiles('images', url, projection);
+        loadTiles('images', apibase + 'images?', projection);
+        loadTiles('sequences', apibase + 'sequences?', projection);
     },
 
 
     loadSigns: function(context, projection) {
-        var url = apibase + 'objects?';
-        loadTiles('objects', url, projection);
+        // if we are looking at signs, we'll actually need to fetch images too
+        loadTiles('images', apibase + 'images?', projection);
+        loadTiles('objects', apibase + 'objects?', projection);
 
         // load traffic sign defs
-        if (!mapillarySignDefs) {
-            mapillarySignSprite = context.asset('img/traffic-signs/traffic-signs.png');
-            mapillarySignDefs = {};
+        if (!_mlySignDefs) {
+            _mlySignSprite = context.asset('img/traffic-signs/traffic-signs.png');
+            _mlySignDefs = {};
             d3_json(context.asset('img/traffic-signs/traffic-signs.json'), function(err, data) {
                 if (err) return;
-                mapillarySignDefs = data;
+                _mlySignDefs = data;
             });
         }
     },
 
 
     loadViewer: function(context) {
-        var that = this;
-        var wrap = d3_select('#content').selectAll('.mapillary-wrap')
+        // add mly-wrapper
+        var wrap = d3_select('#photoviewer').selectAll('.mly-wrapper')
             .data([0]);
 
-        var enter = wrap.enter()
-            .append('div')
-            .attr('class', 'mapillary-wrap')
-            .classed('al', true)       // 'al'=left,  'ar'=right
-            .classed('hidden', true);
-
-        enter
-            .append('button')
-            .attr('class', 'thumb-hide')
-            .on('click', function () { that.hideViewer(); })
-            .append('div')
-            .call(svgIcon('#icon-close'));
-
-        enter
+        var wrapEnter = wrap.enter()
             .append('div')
             .attr('id', 'mly')
-            .attr('class', 'mly-wrapper')
-            .classed('active', false);
+            .attr('class', 'photo-wrapper mly-wrapper')
+            .classed('hide', true);
+
+        wrapEnter
+            .append('div')
+            .attr('class', 'photo-attribution fillD');
+
 
         // load mapillary-viewercss
         d3_select('head').selectAll('#mapillary-viewercss')
@@ -420,28 +466,42 @@ export default {
 
 
     showViewer: function() {
-        d3_select('#content')
-            .selectAll('.mapillary-wrap')
-            .classed('hidden', false)
-            .selectAll('.mly-wrapper')
-            .classed('active', true);
+        var wrap = d3_select('#photoviewer')
+            .classed('hide', false);
+
+        var isHidden = wrap.selectAll('.photo-wrapper.mly-wrapper.hide').size();
+
+        if (isHidden) {
+            wrap
+                .selectAll('.photo-wrapper:not(.mly-wrapper)')
+                .classed('hide', true);
+
+            wrap
+                .selectAll('.photo-wrapper.mly-wrapper')
+                .classed('hide', false);
+
+            _mlyViewer.resize();
+        }
 
         return this;
     },
 
 
     hideViewer: function() {
-        d3_select('#content')
-            .selectAll('.mapillary-wrap')
-            .classed('hidden', true)
-            .selectAll('.mly-wrapper')
-            .classed('active', false);
+        _mlySelectedImage = null;
 
-        d3_selectAll('.layer-mapillary-images .viewfield-group, .layer-mapillary-signs .icon-sign')
+        var viewer = d3_select('#photoviewer');
+        if (!viewer.empty()) viewer.datum(null);
+
+        viewer
+            .classed('hide', true)
+            .selectAll('.photo-wrapper')
+            .classed('hide', true);
+
+        d3_selectAll('.viewfield-group, .sequence, .icon-sign')
             .classed('selected', false);
 
-        mapillaryImage = null;
-        return this;
+        return this.setStyles(null, true);
     },
 
 
@@ -449,12 +509,12 @@ export default {
 
 
     updateViewer: function(imageKey, context) {
-        if (!imageKey) return;
+        if (!imageKey) return this;
 
-        if (!mapillaryViewer) {
+        if (!_mlyViewer) {
             this.initViewer(imageKey, context);
         } else {
-            mapillaryViewer.moveToKey(imageKey);
+            _mlyViewer.moveToKey(imageKey);
         }
 
         return this;
@@ -473,51 +533,64 @@ export default {
                 }
             };
 
-            mapillaryViewer = new Mapillary.Viewer('mly', clientId, imageKey, opts);
-            mapillaryViewer.on('nodechanged', nodeChanged);
+            _mlyViewer = new Mapillary.Viewer('mly', clientId, imageKey, opts);
+            _mlyViewer.on('nodechanged', nodeChanged);
         }
 
         // nodeChanged: called after the viewer has changed images and is ready.
         //
-        // There is some logic here to batch up clicks into a mapillaryClicks array
+        // There is some logic here to batch up clicks into a _mlyClicks array
         // because the user might click on a lot of markers quickly and nodechanged
         // may be called out of order asychronously.
         //
         // Clicks are added to the array in `selectedImage` and removed here.
         //
         function nodeChanged(node) {
-            mapillaryViewer.getComponent('tag').removeAll();  // remove previous detections
+            _mlyViewer.getComponent('tag').removeAll();  // remove previous detections
 
-            var clicks = mapillaryClicks;
+            var clicks = _mlyClicks;
             var index = clicks.indexOf(node.key);
-            if (index > -1) {    // `nodechanged` initiated from clicking on a marker..
-                clicks.splice(index, 1);
-                // If `node.key` matches the current mapillaryImage, call `selectedImage()`
+            var selectedKey = _mlySelectedImage && _mlySelectedImage.key;
+
+            if (index > -1) {              // `nodechanged` initiated from clicking on a marker..
+                clicks.splice(index, 1);   // remove the click
+                // If `node.key` matches the current _mlySelectedImage, call `selectImage()`
                 // one more time to update the detections and attribution..
-                if (node.key === mapillaryImage) {
-                    that.selectedImage(node.key, false);
+                if (node.key === selectedKey) {
+                    that.selectImage(_mlySelectedImage, node.key, true);
                 }
             } else {             // `nodechanged` initiated from the Mapillary viewer controls..
                 var loc = node.computedLatLon ? [node.computedLatLon.lon, node.computedLatLon.lat] : [node.latLon.lon, node.latLon.lat];
                 context.map().centerEase(loc);
-                that.selectedImage(node.key, false);
+                that.selectImage(undefined, node.key, true);
             }
         }
     },
 
 
-    selectedImage: function(imageKey, fromClick) {
-        if (!arguments.length) return mapillaryImage;
-        mapillaryImage = imageKey;
-
-        if (fromClick) {
-            mapillaryClicks.push(imageKey);
+    // Pass the image datum itself in `d` or the `imageKey` string.
+    // This allows images to be selected from places that dont have access
+    // to the full image datum (like the street signs layer or the js viewer)
+    selectImage: function(d, imageKey, fromViewer) {
+        if (!d && imageKey) {
+            // If the user clicked on something that's not an image marker, we
+            // might get in here.. Cache lookup can fail, e.g. if the user
+            // clicked a streetsign, but images are loading slowly asynchronously.
+            // We'll try to carry on anyway if there is no datum.  There just
+            // might be a delay before user sees detections, captured_at, etc.
+            d = _mlyCache.images.forImageKey[imageKey];
         }
 
-        d3_selectAll('.layer-mapillary-images .viewfield-group')
-            .classed('selected', function(d) {
-                return d.key === imageKey;
-            });
+        _mlySelectedImage = d;
+        var viewer = d3_select('#photoviewer');
+        if (!viewer.empty()) viewer.datum(d);
+
+        imageKey = (d && d.key) || imageKey;
+        if (!fromViewer && imageKey) {
+            _mlyClicks.push(imageKey);
+        }
+
+        this.setStyles(null, true);
 
         d3_selectAll('.layer-mapillary-signs .icon-sign')
             .classed('selected', function(d) {
@@ -526,51 +599,113 @@ export default {
                 });
             });
 
-        if (!imageKey)  return this;
+        var wrap = d3_select('#photoviewer .mly-wrapper');
+        var attribution = wrap.selectAll('.photo-attribution').html('');
 
+        if (d) {
+            if (d.captured_by) {
+                attribution
+                    .append('a')
+                    .attr('class', 'captured_by')
+                    .attr('target', '_blank')
+                    .attr('href', 'https://www.mapillary.com/app/user/' + encodeURIComponent(d.captured_by))
+                    .text('@' + d.captured_by);
 
-        function localeTimestamp(s) {
-            if (!s) return null;
-            var d = new Date(s);
-            if (isNaN(d.getTime())) return null;
-            return d.toLocaleString(undefined, { timeZone: 'UTC' });
-        }
+                attribution
+                    .append('span')
+                    .text('|');
+            }
 
-        var selected = d3_selectAll('.layer-mapillary-images .viewfield-group.selected');
-        if (selected.empty()) return this;
+            if (d.captured_at) {
+                attribution
+                    .append('span')
+                    .attr('class', 'captured_at')
+                    .text(localeTimestamp(d.captured_at));
 
-        var datum = selected.datum();
-        var timestamp = localeTimestamp(datum.captured_at);
-        var attribution = d3_select('.mapillary-js-dom .Attribution');
-        var capturedAt = attribution.selectAll('.captured-at');
-        if (capturedAt.empty()) {
+                attribution
+                    .append('span')
+                    .text('|');
+            }
+
             attribution
-                .append('span')
-                .text('|');
-            capturedAt = attribution
-                .append('span')
-                .attr('class', 'captured-at');
-        }
-        capturedAt
-            .text(timestamp);
+                .append('a')
+                .attr('class', 'image_link')
+                .attr('target', '_blank')
+                .attr('href', 'https://www.mapillary.com/app/?pKey=' + encodeURIComponent(d.key) +
+                    '&focus=photo&lat=' + d.loc[1] + '&lng=' + d.loc[0] + '&z=17')
+                .text('mapillary.com');
 
-        this.updateDetections();
+            this.updateDetections(d);
+        }
 
         return this;
     },
 
 
-    updateDetections: function() {
-        if (!mapillaryViewer) return;
+    getSelectedImage: function() {
+        return _mlySelectedImage;
+    },
 
-        var detections = mapillaryCache.detections[mapillaryImage];
+
+    getSequenceKeyForImage: function(d) {
+        var imageKey = d && d.key;
+        return imageKey && _mlyCache.sequences.forImageKey[imageKey];
+    },
+
+
+    setStyles: function(hovered, reset) {
+        if (reset) {  // reset all layers
+            d3_selectAll('.viewfield-group')
+                .classed('highlighted', false)
+                .classed('hovered', false)
+                .classed('selected', false);
+
+            d3_selectAll('.sequence')
+                .classed('highlighted', false)
+                .classed('selected', false);
+        }
+
+        var hoveredImageKey = hovered && hovered.key;
+        var hoveredSequenceKey = this.getSequenceKeyForImage(hovered);
+        var hoveredLineString = hoveredSequenceKey && _mlyCache.sequences.lineString[hoveredSequenceKey];
+        var hoveredImageKeys = (hoveredLineString && hoveredLineString.properties.coordinateProperties.image_keys) || [];
+
+        var viewer = d3_select('#photoviewer');
+        var selected = viewer.empty() ? undefined : viewer.datum();
+        var selectedImageKey = selected && selected.key;
+        var selectedSequenceKey = this.getSequenceKeyForImage(selected);
+        var selectedLineString = selectedSequenceKey && _mlyCache.sequences.lineString[selectedSequenceKey];
+        var selectedImageKeys = (selectedLineString && selectedLineString.properties.coordinateProperties.image_keys) || [];
+
+        // highlight sibling viewfields on either the selected or the hovered sequences
+        var highlightedImageKeys = _union(hoveredImageKeys, selectedImageKeys);
+
+        d3_selectAll('.layer-mapillary-images .viewfield-group')
+            .classed('highlighted', function(d) { return highlightedImageKeys.indexOf(d.key) !== -1; })
+            .classed('hovered', function(d) { return d.key === hoveredImageKey; })
+            .classed('selected', function(d) { return d.key === selectedImageKey; });
+
+        d3_selectAll('.layer-mapillary-images .sequence')
+            .classed('highlighted', function(d) { return d.properties.key === hoveredSequenceKey; })
+            .classed('selected', function(d) { return d.properties.key === selectedSequenceKey; });
+
+        return this;
+    },
+
+
+    updateDetections: function(d) {
+        if (!_mlyViewer) return;
+
+        var imageKey = d && d.key;
+        var detections = (imageKey && _mlyCache.detections[imageKey]) || [];
+
         _forEach(detections, function(data, k) {
             if (_isEmpty(data)) {
                 loadDetection(k);
             } else {
                 var tag = makeTag(data);
                 if (tag) {
-                    var tagComponent = mapillaryViewer.getComponent('tag');
+                    var tagComponent = _mlyViewer.getComponent('tag');
                     tagComponent.add([tag]);
                 }
             }
@@ -591,13 +726,14 @@ export default {
                 .get(function(err, data) {
                     if (!data || !data.properties) return;
 
-                    var ik = data.properties.image_key;
-                    mapillaryCache.detections[ik][detectionKey] = data;
+                    var imageKey = data.properties.image_key;
+                    _mlyCache.detections[imageKey][detectionKey] = data;
 
-                    if (mapillaryImage === ik) {
+                    var selectedKey = _mlySelectedImage && _mlySelectedImage.key;
+                    if (imageKey === selectedKey) {
                         var tag = makeTag(data);
                         if (tag) {
-                            var tagComponent = mapillaryViewer.getComponent('tag');
+                            var tagComponent = _mlyViewer.getComponent('tag');
                             tagComponent.add([tag]);
                         }
                     }
@@ -652,16 +788,14 @@ export default {
     },
 
 
-    cache: function(_) {
-        if (!arguments.length) return mapillaryCache;
-        mapillaryCache = _;
-        return this;
+    cache: function() {
+        return _mlyCache;
     },
 
 
     signDefs: function(_) {
-        if (!arguments.length) return mapillarySignDefs;
-        mapillarySignDefs = _;
+        if (!arguments.length) return _mlySignDefs;
+        _mlySignDefs = _;
         return this;
     }
 

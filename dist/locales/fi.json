@@ -292,7 +292,6 @@
             "localized_translation_language": "Valitse kieli",
             "localized_translation_name": "Nimi"
         },
-        "zoom_in_edit": "Lähennä karttaa ennen muokkaamista",
         "login": "kirjaudu",
         "logout": "kirjaudu ulos",
         "loading_auth": "Yhdistetään OpenStreetMap-palveluun...",
@@ -568,8 +567,7 @@
         "splash": {
             "welcome": "Tervetuloa iD-kartanmuokkausohjelmaan",
             "text": "iD on tehokas ja helppokäyttöinen kartanmuokkausohjelma, jolla luodaan maailman tasokkain kartta. Tämä on versio {version}. Lisätietoja ohjelmasta on osoitteessa {website}, ja ohjelmistovirheistä voi ilmoittaa osoitteessa {github}.",
-            "walkthrough": "Aloitusopas",
-            "start": "Muokkaa heti"
+            "walkthrough": "Aloitusopas"
         },
         "source_switch": {
             "live": "suora lähetys",
@@ -595,10 +593,6 @@
             "many_deletions": "Olet poistamassa {n} karttakohdetta. Haluatko varmasti poistaa ne kaikkien julkisesti käyttämältä OpenStreetMap.org-kartalta?",
             "tag_suggests_area": "Ominaisuustiedon {tag} mukaan viiva on alue, vaikka se ei sitä ole.",
             "deprecated_tags": "Vanhentuneet ominaisuustiedot: {tags}"
-        },
-        "zoom": {
-            "in": "Lähennä",
-            "out": "Loitonna"
         },
         "cannot_zoom": "Nykyisessä tilassa ei voi loitontaa enempää.",
         "full_screen": "Koko näytön tila",
@@ -2806,17 +2800,11 @@
                 "craft/scaffolder": {
                     "name": "Rakennustelineliike"
                 },
-                "craft/sculpter": {
-                    "name": "Kuvanveistämö"
-                },
                 "craft/shoemaker": {
                     "name": "Suutari"
                 },
                 "craft/stonemason": {
                     "name": "Kivenhakkaamo"
-                },
-                "craft/sweep": {
-                    "name": "Nuohooja"
                 },
                 "craft/tailor": {
                     "name": "Räätäli"
@@ -2991,9 +2979,6 @@
                 },
                 "highway/path": {
                     "name": "Polku"
-                },
-                "highway/pedestrian": {
-                    "name": "Kävelykatu"
                 },
                 "highway/primary": {
                     "name": "Kantatie"
@@ -3584,16 +3569,9 @@
                 "office": {
                     "name": "Toimisto"
                 },
-                "office/accountant": {
-                    "name": "Tilintarkastustoimisto",
-                    "terms": "tilintarkastus, tilintarkastaja, kirjanpito, kirjanpitäjä, kirjanpitotoimisto"
-                },
                 "office/administrative": {
                     "name": "Kunnallishallinnon toimisto",
                     "terms": "kunta, paikkakunta, paikallinen, paikallis, seutu, seudullinen, kaupunki, kaupungin, kunnan, kunnallinen, toimisto, hallinto, hallitus"
-                },
-                "office/architect": {
-                    "name": "Arkkitehtitoimisto"
                 },
                 "office/company": {
                     "name": "Yritystoimisto"
@@ -3627,10 +3605,6 @@
                     "name": "Vakuutustoimisto",
                     "terms": "vakuutus, vakuutusyhtiö, vakuutukset, vakuutuksia"
                 },
-                "office/it": {
-                    "name": "Tietotekniikkatoimisto",
-                    "terms": "tietotalo, tietotekniikka, teknologia, tietoteknologia, IT-talo, IT-teknologia, IT-tekniikka, teknologiatalo"
-                },
                 "office/lawyer": {
                     "name": "Lakitoimisto",
                     "terms": "asianajotoimisto, asianajajatoimisto, asianajo, asianajaja, lakimies, juristi, toimisto, lakiasia, lakiasiaintoimisto"
@@ -3638,10 +3612,6 @@
                 "office/lawyer/notary": {
                     "name": "Asianajotoimisto",
                     "terms": "asianajaja, juristi, laki, lakimies, toimisto, konttori, yritys, firma, oikeus"
-                },
-                "office/newspaper": {
-                    "name": "Toimitus",
-                    "terms": "sanomalehti, sanomalehden, lehti, lehden, aikakauslehti, aikakauslehden, tv, tv-toimitus, media, mediatalo, sanomatalo, lehtitoimitus, toimisto"
                 },
                 "office/ngo": {
                     "name": "Kansalaisjärjestö",
@@ -3659,9 +3629,6 @@
                 },
                 "office/telecommunication": {
                     "name": "Tietoliikennetoimisto"
-                },
-                "office/therapist": {
-                    "name": "Terapialaitos"
                 },
                 "office/travel_agent": {
                     "name": "Matkatoimisto"
@@ -4236,9 +4203,6 @@
                 },
                 "tourism/caravan_site": {
                     "name": "Asuntoautopysäköinti"
-                },
-                "tourism/chalet": {
-                    "name": "Chalet-huoneisto"
                 },
                 "tourism/gallery": {
                     "name": "Taidegalleria"
