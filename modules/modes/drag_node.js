@@ -33,6 +33,7 @@ export function modeDragNode(context) {
     var _wasMidpoint = false;
     var _isCancelled = false;
     var _activeEntity;
+    var _startLoc;
     var _lastLoc;
 
 
@@ -85,6 +86,7 @@ export function modeDragNode(context) {
             var midpoint = entity;
             entity = osmNode();
             context.perform(actionAddMidpoint(midpoint, entity));
+            entity = context.entity(entity.id);  // get post-action entity
 
             var vertex = context.surface().selectAll('.' + entity.id);
             drag.target(vertex.node(), entity);
@@ -94,6 +96,8 @@ export function modeDragNode(context) {
         }
 
         _activeEntity = entity;
+        _startLoc = entity.loc;
+
         context.surface().selectAll('.' + _activeEntity.id)
             .classed('active', true);
 
@@ -167,9 +171,15 @@ export function modeDragNode(context) {
         if (_isCancelled) return;
 
         var d = datum();
-        var target = d && d.id && context.hasEntity(d.id);
+        var nope = d && d.id && /-nope$/.test(d.id);        // can't drag here
+        var target = d && d.id && context.hasEntity(d.id);   // entity to snap to
 
-        if (target && target.type === 'way') {
+        if (nope) {   // bounce back
+            context.perform(
+                _actionBounceBack(entity.id, _startLoc)
+            );
+
+        } else if (target && target.type === 'way') {
             var choice = geoChooseEdge(context.childNodes(target), context.mouse(), context.projection, entity.id);
             context.replace(
                 actionAddMidpoint({
@@ -207,6 +217,19 @@ export function modeDragNode(context) {
         } else {
             context.enter(modeBrowse(context));
         }
+    }
+
+
+    function _actionBounceBack(nodeID, toLoc) {
+        var moveNode = actionMoveNode(nodeID, toLoc);
+        var action = function(graph, t) {
+            // last time through, pop off the bounceback perform.
+            // it will then overwrite the initial perform with a moveNode that does nothing
+            if (t === 1) context.pop();
+            return moveNode(graph, t);
+        };
+        action.transitionable = true;
+        return action;
     }
 
 
