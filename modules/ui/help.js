@@ -170,7 +170,20 @@ export function uiHelp(context) {
             'tracing',
             'upload'
         ]],
-        ['geoservices', null]
+        ['geoservices', [
+            'title',
+            'intro',
+            'import_guidelines',
+            'sample_geoservices',
+            'editing_process_1',
+            'editing_process_2',
+            'editing_process_3',
+            'editing_process_4',
+            'editing_process_5',
+            'editing_process_6',
+            'editing_process_7',
+            'wat'
+        ]]
     ];
 
     var headings = {
