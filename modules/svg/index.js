@@ -1,4 +1,5 @@
 export { svgAreas } from './areas.js';
+export { svgBlocker } from './blocker.js';
 export { svgDebug } from './debug.js';
 export { svgDefs } from './defs.js';
 export { svgGpx } from './gpx.js';

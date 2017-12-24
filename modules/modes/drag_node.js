@@ -12,10 +12,23 @@ import {
     actionNoop
 } from '../actions';
 
-import { behaviorEdit, behaviorHover, behaviorDrag } from '../behavior';
-import { geoChooseEdge, geoVecSubtract, geoViewportEdge } from '../geo';
+import {
+    behaviorEdit,
+    behaviorHover,
+    behaviorDrag
+} from '../behavior';
+
+import {
+    geoChooseEdge,
+    geoLineIntersection,
+    geoVecEquals,
+    geoVecSubtract,
+    geoViewportEdge
+} from '../geo';
+
 import { modeBrowse, modeSelect } from './index';
 import { osmNode } from '../osm';
+import { svgBlocker } from '../svg';
 import { uiFlash } from '../ui';
 
 
@@ -27,6 +40,7 @@ export function modeDragNode(context) {
     var hover = behaviorHover(context).altDisables(true)
         .on('hover', context.ui().sidebar.hover);
     var edit = behaviorEdit(context);
+    var blocker = svgBlocker(context.projection, context);
 
     var _nudgeInterval;
     var _restoreSelectedIDs = [];
@@ -147,7 +161,60 @@ export function modeDragNode(context) {
             moveAnnotation(entity)
         );
 
+
+        checkGeometry(entity);
         _lastLoc = loc;
+    }
+
+
+    function checkGeometry(entity) {
+        var doBlock = false;
+        var graph = context.graph();
+        var parents = graph.parentWays(entity);
+
+        function checkSelfIntersections(way, activeID) {
+            // check active (dragged) segments against inactive segments
+            var actives = [];
+            var inactives = [];
+            var j, k;
+            for (j = 0; j < way.nodes.length - 1; j++) {
+                var n1 = graph.entity(way.nodes[j]);
+                var n2 = graph.entity(way.nodes[j+1]);
+                var segment = [n1.loc, n2.loc];
+                if (n1.id === activeID || n2.id === activeID) {
+                    actives.push(segment);
+                } else {
+                    inactives.push(segment);
+                }
+            }
+            for (j = 0; j < actives.length; j++) {
+                for (k = 0; k < inactives.length; k++) {
+                    var p = actives[j];
+                    var q = inactives[k];
+                    // skip if segments share an endpoint
+                    if (geoVecEquals(p[1], q[0]) || geoVecEquals(p[0], q[1]) ||
+                        geoVecEquals(p[0], q[0]) || geoVecEquals(p[1], q[1]) ) {
+                        continue;
+                    } else if (geoLineIntersection(p, q)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        for (var i = 0; i < parents.length; i++) {
+            var parent = parents[i];
+            if (parent.isClosed()) {   // check for self intersections
+                if (checkSelfIntersections(parent, entity.id)) {
+                    doBlock = true;
+                    break;
+                }
+            }
+        }
+
+        d3_select('.data-layer-osm')
+            .call(doBlock ? blocker : blocker.off);
     }
 
 
@@ -269,6 +336,9 @@ export function modeDragNode(context) {
             .on('drawn.drag-node', null);
 
         _activeEntity = null;
+
+        d3_select('.data-layer-osm')
+            .call(blocker.off);
 
         context.surface()
             .selectAll('.active')
