@@ -9,6 +9,11 @@ var POLAR_RADIUS = 6378137.0;
 
 
 // vector addition
+export function geoVecEquals(a, b) {
+    return (a[0] === b[0]) && (a[1] === b[1]);
+}
+
+// vector addition
 export function geoVecAdd(a, b) {
     return [ a[0] + b[0], a[1] + b[1] ];
 }

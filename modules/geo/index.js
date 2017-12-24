@@ -23,6 +23,7 @@ export { geoPolygonIntersectsPolygon } from './geo.js';
 export { geoScaleToZoom } from './geo.js';
 export { geoSphericalDistance } from './geo.js';
 export { geoVecAdd } from './geo.js';
+export { geoVecEquals } from './geo.js';
 export { geoVecFloor } from './geo.js';
 export { geoVecSubtract } from './geo.js';
 export { geoVecScale } from './geo.js';

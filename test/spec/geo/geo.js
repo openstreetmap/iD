@@ -1,5 +1,13 @@
 describe('iD.geo', function() {
 
+    describe('geoVecEquals', function() {
+        it('tests vectors for equality', function() {
+            expect(iD.geoVecEquals([1, 2], [1, 2])).to.be.true;
+            expect(iD.geoVecEquals([1, 2], [1, 0])).to.be.false;
+            expect(iD.geoVecEquals([1, 2], [2, 1])).to.be.false;
+        });
+    });
+
     describe('geoVecAdd', function() {
         it('adds vectors', function() {
             expect(iD.geoVecAdd([1, 2], [3, 4])).to.eql([4, 6]);
