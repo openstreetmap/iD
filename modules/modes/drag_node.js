@@ -144,9 +144,9 @@ export function modeDragNode(context) {
             var d = datum();
             var target = d && d.id && context.hasEntity(d.id);
 
-            if (target && target.type === 'node') {
-                loc = target.loc;
-            } else if (target && target.type === 'way') {
+            if (d.loc) {    // snap to node/vertex - a real entity or a nope target with a `loc`
+                loc = d.loc;
+            } else if (target && target.type === 'way') {   // snap to way
                 var choice = geoChooseEdge(
                     context.childNodes(target), context.mouse(), context.projection, entity.id
                 );

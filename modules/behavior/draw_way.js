@@ -41,7 +41,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
     function move(datum) {
         var loc;
         var target = datum && datum.id && context.hasEntity(datum.id);
-        if (target && target.type === 'node') {   // snap to node
+        if (datum.loc) {   // snap to node/vertex - a real entity or a nope target with a `loc`
             loc = datum.loc;
         } else if (target && target.type === 'way') {   // snap to way
             var choice = geoChooseEdge(
