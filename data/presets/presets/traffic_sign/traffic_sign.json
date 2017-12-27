@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-prohibit-long-time-stop",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic_sign"
+  },
+  "terms": [],
+  "name": "traffic sign"
+}

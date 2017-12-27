@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-speed-limit-20",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "speed-limit-20"
+  },
+  "terms": [],
+  "name": "speed limit 20km/h"
+}
