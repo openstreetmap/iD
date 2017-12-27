@@ -1,0 +1,13 @@
+{
+  "icon": "highway-lane-group",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "relation"
+  ],
+  "tags": {
+    "type": "lane_group"
+  },
+  "name": "lane group"
+}
