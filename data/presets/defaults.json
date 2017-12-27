@@ -24,6 +24,7 @@
             "line"
         ],
         "point": [
+            "category-traffic_sign",
             "category-natural-point",
             "leisure/park",
             "amenity/hospital",
@@ -51,6 +52,7 @@
         "relation": [
             "category-route",
             "category-restriction",
+            "type/lane_group",
             "public_transport/stop_area",
             "type/boundary",
             "type/waterway",

@@ -1,8 +1,7 @@
 {
   "icon": "highway-lane-white-solid",
   "fields": [
-    "name",
-    "lane"
+    "name"
   ],
   "geometry": [
     "line"

@@ -84,6 +84,7 @@
     "highway-residential":      { "viewBox": "600 20 60 60" },
     "highway-unclassified":     { "viewBox": "660 20 60 60" },
     "highway-service":          { "viewBox": "720 20 60 60" },
+    "highway-lane-group":               { "viewBox": "960 20 60 60" },
     "highway-lane-white-solid":         { "viewBox": "780 20 60 60" },
     "highway-lane-white-dash":          { "viewBox": "840 20 60 60" },
     "highway-lane-yellow-dash":         { "viewBox": "900 20 60 60" },
@@ -169,8 +170,6 @@
     "highway-lane-yellow-solid-dash-stroke1":           { "fill": "currentColor" },
     "highway-lane-yellow-dash-double-casing1":          { "fill": "inherit" },
     "highway-lane-yellow-dash-double-stroke1":          { "fill": "currentColor" },
-    "highway-lane-centerline-casing1":          { "fill": "inherit" },
-    "highway-lane-centerline-stroke1":          { "fill": "currentColor" },
 
     "highway-road-casing1":           { "fill": "inherit" },
     "highway-road-stroke1":           { "fill": "currentColor" },
@@ -487,5 +486,21 @@
 
     "walkthrough-mouse-shape":  { "fill": "#000000" },
     "walkthrough-mouse-left":   { "fill": "inherit" },
-    "walkthrough-mouse-right":  { "fill": "currentColor" }
+    "walkthrough-mouse-right":  { "fill": "currentColor" },
+
+    "traffic-sign-prohibit-long-time-stop":      {"viewBox":"0 560 60 60"},
+    "traffic-sign-speed-limit-5":          {"viewBox":"60 560 60 60"},
+    "traffic-sign-speed-limit-10":         {"viewBox":"120 560 60 60"},
+    "traffic-sign-speed-limit-20":         {"viewBox":"180 560 60 60"},
+    "traffic-sign-speed-limit-30":         {"viewBox":"240 560 60 60"},
+    "traffic-sign-speed-limit-40":         {"viewBox":"300 560 60 60"},
+    "traffic-sign-speed-limit-50":         {"viewBox":"360 560 60 60"},
+    "traffic-sign-speed-limit-60":         {"viewBox":"420 560 60 60"},
+    "traffic-sign-speed-limit-70":         {"viewBox":"480 560 60 60"},
+    "traffic-sign-speed-limit-80":         {"viewBox":"540 560 60 60"},
+    "traffic-sign-speed-limit-90":         {"viewBox":"600 560 60 60"},
+    "traffic-sign-speed-limit-100":        {"viewBox":"660 560 60 60"},
+    "traffic-sign-speed-limit-110":        {"viewBox":"720 560 60 60"},
+    "traffic-sign-speed-limit-120":        {"viewBox":"780 560 60 60"}
+
 }
