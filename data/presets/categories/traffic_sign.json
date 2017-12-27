@@ -1,0 +1,22 @@
+{
+  "icon": "traffic-sign-prohibit-long-time-stop",
+  "geometry": "point",
+  "name": "Traffic Signs",
+  "members": [
+    "traffic_sign/traffic_sign",
+    "traffic_sign/prohibit_long_time_stop",
+    "traffic_sign/speed_limit_5",
+    "traffic_sign/speed_limit_10",
+    "traffic_sign/speed_limit_20",
+    "traffic_sign/speed_limit_30",
+    "traffic_sign/speed_limit_40",
+    "traffic_sign/speed_limit_50",
+    "traffic_sign/speed_limit_60",
+    "traffic_sign/speed_limit_70",
+    "traffic_sign/speed_limit_80",
+    "traffic_sign/speed_limit_90",
+    "traffic_sign/speed_limit_100",
+    "traffic_sign/speed_limit_110",
+    "traffic_sign/speed_limit_120"
+  ]
+}
