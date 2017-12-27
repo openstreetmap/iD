@@ -221,9 +221,6 @@ export function uiCurtain() {
         }
 
         curtain.cut(box, options.duration);
-        
-        //remove any leftover .counter elements 
-        tooltip.selectAll('.counter').remove();
 
         return tooltip;
     };
