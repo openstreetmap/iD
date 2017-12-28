@@ -1,4 +1,4 @@
-describe('iD.geo vector', function() {
+describe('iD.geo - vector', function() {
 
     describe('geoVecEqual', function() {
         it('tests vectors for equality', function() {
