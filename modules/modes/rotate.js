@@ -13,7 +13,7 @@ import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import { t } from '../util/locale';
 import { actionRotate } from '../actions';
 import { behaviorEdit } from '../behavior';
-import { geoInterp } from '../geo';
+import { geoVecInterp } from '../geo';
 
 import {
     modeBrowse,
@@ -80,7 +80,7 @@ export function modeRotate(context, entityIDs) {
             if (points.length === 1) {  // degenerate case
                 _pivot = points[0];
             } else if (points.length === 2) {
-                _pivot = geoInterp(points[0], points[1], 0.5);
+                _pivot = geoVecInterp(points[0], points[1], 0.5);
             } else {
                 _pivot = d3_polygonCentroid(d3_polygonHull(points));
             }

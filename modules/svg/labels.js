@@ -10,11 +10,11 @@ import { textDirection } from '../util/locale';
 
 import {
     geoExtent,
-    geoEuclideanDistance,
-    geoInterp,
     geoPolygonIntersectsPolygon,
     geoPathLength,
-    geoScaleToZoom
+    geoScaleToZoom,
+    geoVecInterp,
+    geoVecLength
 } from '../geo';
 
 import { osmEntity } from '../osm';
@@ -489,10 +489,10 @@ export function svgLabels(projection, context) {
                     var b = sub[j + 1];
 
                     // split up the text into small collision boxes
-                    var num = Math.max(1, Math.floor(geoEuclideanDistance(a, b) / boxsize / 2));
+                    var num = Math.max(1, Math.floor(geoVecLength(a, b) / boxsize / 2));
 
                     for (var box = 0; box < num; box++) {
-                        var p = geoInterp(a, b, box / num);
+                        var p = geoVecInterp(a, b, box / num);
                         var x0 = p[0] - boxsize - padding;
                         var y0 = p[1] - boxsize - padding;
                         var x1 = p[0] + boxsize + padding;
@@ -532,7 +532,7 @@ export function svgLabels(projection, context) {
                 for (var i = 0; i < points.length - 1; i++) {
                     var a = points[i];
                     var b = points[i + 1];
-                    var current = geoEuclideanDistance(a, b);
+                    var current = geoVecLength(a, b);
                     var portion;
                     if (!start && sofar + current >= from) {
                         portion = (from - sofar) / current;

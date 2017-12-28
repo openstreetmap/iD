@@ -2,7 +2,7 @@ import { select as d3_select } from 'd3-selection';
 import { t } from '../util/locale';
 
 import { d3geoTile as d3_geoTile } from '../lib/d3.geo.tile';
-import { geoEuclideanDistance, geoScaleToZoom } from '../geo';
+import { geoScaleToZoom, geoVecLength } from '../geo';
 import { utilPrefixCSSProperty } from '../util';
 
 
@@ -187,7 +187,7 @@ export function rendererTileLayer(context) {
 
         requests.forEach(function(d) {
             var c = tileCenter(d);
-            var dist = geoEuclideanDistance(c, mapCenter);
+            var dist = geoVecLength(c, mapCenter);
             if (dist < minDist) {
                 minDist = dist;
                 nearCenter = d;

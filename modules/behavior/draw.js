@@ -14,7 +14,7 @@ import { behaviorTail } from './tail';
 
 import {
     geoChooseEdge,
-    geoEuclideanDistance,
+    geoVecLength,
     geoViewportEdge
 } from '../geo';
 
@@ -81,7 +81,7 @@ export function behaviorDraw(context) {
         d3_select(window).on('mouseup.draw', function() {
             var t2 = +new Date();
             var p2 = point();
-            var dist = geoEuclideanDistance(p1, p2);
+            var dist = geoVecLength(p1, p2);
 
             element.on('mousemove.draw', mousemove);
             d3_select(window).on('mouseup.draw', null);
@@ -157,7 +157,7 @@ export function behaviorDraw(context) {
 
         var currSpace = context.mouse();
         if (_disableSpace && _lastSpace) {
-            var dist = geoEuclideanDistance(_lastSpace, currSpace);
+            var dist = geoVecLength(_lastSpace, currSpace);
             if (dist > tolerance) {
                 _disableSpace = false;
             }

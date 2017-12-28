@@ -1,71 +1,20 @@
 import _every from 'lodash-es/every';
 import _some from 'lodash-es/some';
 
+import {
+    geoVecAngle,
+    geoVecCross,
+    geoVecDot,
+    geoVecInterp,
+    geoVecLength,
+    geoVecSubtract
+} from './vector.js';
+
 
 // constants
 var TAU = 2 * Math.PI;
 var EQUATORIAL_RADIUS = 6356752.314245179;
 var POLAR_RADIUS = 6378137.0;
-
-
-// vector addition
-export function geoVecEquals(a, b) {
-    return (a[0] === b[0]) && (a[1] === b[1]);
-}
-
-// vector addition
-export function geoVecAdd(a, b) {
-    return [ a[0] + b[0], a[1] + b[1] ];
-}
-
-// vector subtraction
-export function geoVecSubtract(a, b) {
-    return [ a[0] - b[0], a[1] - b[1] ];
-}
-
-// vector multiplication
-export function geoVecScale(a, b) {
-    return [ a[0] * b, a[1] * b ];
-}
-
-// vector rounding (was: geoRoundCoordinates)
-export function geoVecFloor(a) {
-    return [ Math.floor(a[0]), Math.floor(a[1]) ];
-}
-
-// linear interpolation
-export function geoInterp(p1, p2, t) {
-    return [
-        p1[0] + (p2[0] - p1[0]) * t,
-        p1[1] + (p2[1] - p1[1]) * t
-    ];
-}
-
-
-// dot product
-export function geoDot(a, b, origin) {
-    origin = origin || [0, 0];
-    return (a[0] - origin[0]) * (b[0] - origin[0]) +
-        (a[1] - origin[1]) * (b[1] - origin[1]);
-}
-
-
-// 2D cross product of OA and OB vectors, returns magnitude of Z vector
-// Returns a positive value, if OAB makes a counter-clockwise turn,
-// negative for clockwise turn, and zero if the points are collinear.
-export function geoCross(a, b, origin) {
-    origin = origin || [0, 0];
-    return (a[0] - origin[0]) * (b[1] - origin[1]) -
-        (a[1] - origin[1]) * (b[0] - origin[0]);
-}
-
-
-// http://jsperf.com/id-dist-optimization
-export function geoEuclideanDistance(a, b) {
-    var x = a[0] - b[0];
-    var y = a[1] - b[1];
-    return Math.sqrt((x * x) + (y * y));
-}
 
 
 export function geoLatToMeters(dLat) {
@@ -140,9 +89,7 @@ export function geoEdgeEqual(a, b) {
 // Return the counterclockwise angle in the range (-pi, pi)
 // between the positive X axis and the line intersecting a and b.
 export function geoAngle(a, b, projection) {
-    a = projection(a.loc);
-    b = projection(b.loc);
-    return Math.atan2(b[1] - a[1], b[0] - a[0]);
+    return geoVecAngle(projection(a.loc), projection(b.loc));
 }
 
 
@@ -163,7 +110,7 @@ export function geoRotate(points, angle, around) {
 // the closest vertex on that edge. Returns an object with the `index` of the
 // chosen edge, the chosen `loc` on that edge, and the `distance` to to it.
 export function geoChooseEdge(nodes, point, projection, skipID) {
-    var dist = geoEuclideanDistance;
+    var dist = geoVecLength;
     var points = nodes.map(function(n) { return projection(n.loc); });
     var ids = nodes.map(function(n) { return n.id; });
     var min = Infinity;
@@ -176,7 +123,7 @@ export function geoChooseEdge(nodes, point, projection, skipID) {
         var o = points[i];
         var s = geoVecSubtract(points[i + 1], o);
         var v = geoVecSubtract(point, o);
-        var proj = geoDot(v, s) / geoDot(s, s);
+        var proj = geoVecDot(v, s) / geoVecDot(s, s);
         var p;
 
         if (proj < 0) {
@@ -214,15 +161,15 @@ export function geoLineIntersection(a, b) {
     var q2 = [b[1][0], b[1][1]];
     var r = geoVecSubtract(p2, p);
     var s = geoVecSubtract(q2, q);
-    var uNumerator = geoCross(geoVecSubtract(q, p), r);
-    var denominator = geoCross(r, s);
+    var uNumerator = geoVecCross(geoVecSubtract(q, p), r);
+    var denominator = geoVecCross(r, s);
 
     if (uNumerator && denominator) {
         var u = uNumerator / denominator;
-        var t = geoCross(geoVecSubtract(q, p), s) / denominator;
+        var t = geoVecCross(geoVecSubtract(q, p), s) / denominator;
 
         if ((t >= 0) && (t <= 1) && (u >= 0) && (u <= 1)) {
-            return geoInterp(p, p2, t);
+            return geoVecInterp(p, p2, t);
         }
     }
 
@@ -284,7 +231,7 @@ export function geoPolygonIntersectsPolygon(outer, inner, checkSegments) {
     function testSegments(outer, inner) {
         for (var i = 0; i < outer.length - 1; i++) {
             for (var j = 0; j < inner.length - 1; j++) {
-                var a = [ outer[i], outer[i +1 ] ];
+                var a = [ outer[i], outer[i + 1] ];
                 var b = [ inner[j], inner[j + 1] ];
                 if (geoLineIntersection(a, b)) return true;
             }
@@ -305,7 +252,7 @@ export function geoPolygonIntersectsPolygon(outer, inner, checkSegments) {
 export function geoPathLength(path) {
     var length = 0;
     for (var i = 0; i < path.length - 1; i++) {
-        length += geoEuclideanDistance(path[i], path[i + 1]);
+        length += geoVecLength(path[i], path[i + 1]);
     }
     return length;
 }

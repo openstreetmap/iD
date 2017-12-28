@@ -21,7 +21,7 @@ import {
 import {
     geoChooseEdge,
     geoLineIntersection,
-    geoVecEquals,
+    geoVecEqual,
     geoVecSubtract,
     geoViewportEdge
 } from '../geo';
@@ -203,8 +203,8 @@ export function modeDragNode(context) {
                     var p = actives[j];
                     var q = inactives[k];
                     // skip if segments share an endpoint
-                    if (geoVecEquals(p[1], q[0]) || geoVecEquals(p[0], q[1]) ||
-                        geoVecEquals(p[0], q[0]) || geoVecEquals(p[1], q[1]) ) {
+                    if (geoVecEqual(p[1], q[0]) || geoVecEqual(p[0], q[1]) ||
+                        geoVecEqual(p[0], q[0]) || geoVecEqual(p[1], q[1]) ) {
                         continue;
                     } else if (geoLineIntersection(p, q)) {
                         return true;

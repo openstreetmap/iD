@@ -6,7 +6,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { geoEuclideanDistance } from '../geo';
+import { geoVecLength } from '../geo';
 
 import {
     modeBrowse,
@@ -103,7 +103,7 @@ export function behaviorSelect(context) {
 
         if (!p1) return;
         var p2 = point();
-        var dist = geoEuclideanDistance(p1, p2);
+        var dist = geoVecLength(p1, p2);
 
         p1 = null;
         if (dist > tolerance) {

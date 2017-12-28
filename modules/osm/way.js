@@ -4,7 +4,7 @@ import _uniq from 'lodash-es/uniq';
 
 import { geoArea as d3_geoArea } from 'd3-geo';
 
-import { geoExtent, geoCross } from '../geo';
+import { geoExtent, geoVecCross } from '../geo';
 import { osmEntity } from './entity';
 import { osmLanes } from './lanes';
 import { osmOneWayTags } from './tags';
@@ -142,7 +142,7 @@ _extend(osmWay.prototype, {
             var o = coords[(i+1) % coords.length];
             var a = coords[i];
             var b = coords[(i+2) % coords.length];
-            var res = geoCross(a, b, o);
+            var res = geoVecCross(a, b, o);
 
             curr = (res > 0) ? 1 : (res < 0) ? -1 : 0;
             if (curr === 0) {

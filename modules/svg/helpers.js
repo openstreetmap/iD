@@ -6,7 +6,7 @@ import {
     geoStream as d3_geoStream
 } from 'd3-geo';
 
-import { geoEuclideanDistance } from '../geo';
+import { geoVecLength } from '../geo';
 
 
 // Touch targets control which other vertices we can drag a vertex onto.
@@ -82,7 +82,7 @@ export function svgOneWaySegments(projection, graph, dt) {
                 b = [x, y];
 
                 if (a) {
-                    var span = geoEuclideanDistance(a, b) - offset;
+                    var span = geoVecLength(a, b) - offset;
 
                     if (span >= 0) {
                         var angle = Math.atan2(b[1] - a[1], b[0] - a[0]);

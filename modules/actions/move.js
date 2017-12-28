@@ -13,11 +13,11 @@ import { osmNode } from '../osm';
 import {
   geoAngle,
   geoChooseEdge,
-  geoInterp,
   geoPathIntersections,
   geoPathLength,
   geoSphericalDistance,
   geoVecAdd,
+  geoVecInterp,
   geoVecSubtract
 } from '../geo';
 
@@ -206,7 +206,7 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
         if (!isEP1 && !isEP2) {
             var epsilon = 1e-4, maxIter = 10;
             for (var i = 0; i < maxIter; i++) {
-                loc = geoInterp(edge1.loc, edge2.loc, 0.5);
+                loc = geoVecInterp(edge1.loc, edge2.loc, 0.5);
                 edge1 = geoChooseEdge(nodes1, projection(loc), projection);
                 edge2 = geoChooseEdge(nodes2, projection(loc), projection);
                 if (Math.abs(edge1.distance - edge2.distance) < epsilon) break;

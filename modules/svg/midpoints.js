@@ -7,9 +7,9 @@ import {
 
 import {
     geoAngle,
-    geoEuclideanDistance,
-    geoInterp,
-    geoLineIntersection
+    geoLineIntersection,
+    geoVecInterp,
+    geoVecLength
 } from '../geo';
 
 
@@ -73,8 +73,8 @@ export function svgMidpoints(projection, context) {
                 if (midpoints[id]) {
                     midpoints[id].parents.push(entity);
                 } else {
-                    if (geoEuclideanDistance(projection(a.loc), projection(b.loc)) > 40) {
-                        var point = geoInterp(a.loc, b.loc, 0.5);
+                    if (geoVecLength(projection(a.loc), projection(b.loc)) > 40) {
+                        var point = geoVecInterp(a.loc, b.loc, 0.5);
                         var loc = null;
 
                         if (extent.intersects(point)) {
@@ -83,8 +83,8 @@ export function svgMidpoints(projection, context) {
                             for (var k = 0; k < 4; k++) {
                                 point = geoLineIntersection([a.loc, b.loc], [poly[k], poly[k + 1]]);
                                 if (point &&
-                                    geoEuclideanDistance(projection(a.loc), projection(point)) > 20 &&
-                                    geoEuclideanDistance(projection(b.loc), projection(point)) > 20)
+                                    geoVecLength(projection(a.loc), projection(point)) > 20 &&
+                                    geoVecLength(projection(b.loc), projection(point)) > 20)
                                 {
                                     loc = point;
                                     break;
