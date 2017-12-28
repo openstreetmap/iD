@@ -1,5 +1,9 @@
 /* Cursors */
 
+.nope {
+    cursor: not-allowed !important;
+}
+
 .map-in-map,
 #map {
     cursor: auto; /* Opera */

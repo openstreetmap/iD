@@ -16,7 +16,6 @@
 
 /* `.target` objects are interactive */
 /* They can be picked up, clicked, hovered, or things can connect to them */
-.layer-blocker.target,
 .node.target {
     pointer-events: fill;
     fill-opacity: 0.8;
@@ -35,11 +34,11 @@
 }
 
 /* `.target-nope` objects are explicitly forbidden to join to */
-.layer-blocker.target.target-nope,
 .node.target.target-nope,
 .way.target.target-nope {
     cursor: not-allowed;
 }
+
 
 /* `.active` objects (currently being drawn or dragged) are not interactive */
 /* This is important to allow the events to drop through to whatever is */

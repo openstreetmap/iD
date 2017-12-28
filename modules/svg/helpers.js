@@ -180,14 +180,17 @@ export function svgRelationMemberTags(graph) {
 export function svgSegmentWay(way, graph, activeID) {
     var features = { passive: [], active: [] };
     var coordGroups = { passive: [], active: [] };
-    var segment = [];
+    var nodeGroups = { passive: [], active: [] };
+    var coords = [];
+    var nodes = [];
     var startType = null;   // 0 = active, 1 = passive, 2 = adjacent
     var currType = null;
     var node;
 
     for (var i = 0; i < way.nodes.length; i++) {
         if (way.nodes[i] === activeID) {    // vertex is the activeID
-            segment = [];                   // draw no segment here
+            coords = [];                   // draw no segment here
+            nodes = [];
             startType = null;
             continue;
         }
@@ -201,32 +204,41 @@ export function svgSegmentWay(way, graph, activeID) {
 
         if (currType !== startType) {    // line changes here - try to save a segment
 
-            if (segment.length > 0) {       // finish previous segment
-                segment.push(node.loc);
+            if (coords.length > 0) {       // finish previous segment
+                coords.push(node.loc);
+                nodes.push(node.id);
                 if (startType === 2 || currType === 2) {          // one adjacent vertex
-                    coordGroups.active.push(segment);
+                    coordGroups.active.push(coords);
+                    nodeGroups.active.push(nodes);
                 } else if (startType === 0 && currType === 0) {   // both active vertices
-                    coordGroups.active.push(segment);
+                    coordGroups.active.push(coords);
+                    nodeGroups.active.push(nodes);
                 } else {
-                    coordGroups.passive.push(segment);
+                    coordGroups.passive.push(coords);
+                    nodeGroups.passive.push(nodes);
                 }
             }
 
-            segment = [];
+            coords = [];
+            nodes = [];
             startType = currType;
         }
 
-        segment.push(node.loc);
+        coords.push(node.loc);
+        nodes.push(node.id);
     }
 
     // complete whatever segment we ended on
-    if (segment.length > 1) {
+    if (coords.length > 1) {
         if (startType === 2 || currType === 2) {          // one adjacent vertex
-            coordGroups.active.push(segment);
+            coordGroups.active.push(coords);
+            nodeGroups.active.push(nodes);
         } else if (startType === 0 && currType === 0) {   // both active vertices
-            coordGroups.active.push(segment);
+            coordGroups.active.push(coords);
+            nodeGroups.active.push(nodes);
         } else {
-            coordGroups.passive.push(segment);
+            coordGroups.passive.push(coords);
+            nodeGroups.passive.push(nodes);
         }
     }
 
@@ -234,6 +246,9 @@ export function svgSegmentWay(way, graph, activeID) {
         features.passive.push({
             'type': 'Feature',
             'id': way.id,
+            'properties': {
+                'nodes': nodeGroups.passive
+            },
             'geometry': {
                 'type': 'MultiLineString',
                 'coordinates': coordGroups.passive
@@ -246,7 +261,8 @@ export function svgSegmentWay(way, graph, activeID) {
             'type': 'Feature',
             'id': way.id + '-nope',   // break the ids on purpose
             'properties': {
-                'originalID': way.id
+                'originalID': way.id,
+                'nodes': nodeGroups.active
             },
             'geometry': {
                 'type': 'MultiLineString',

@@ -28,7 +28,6 @@ import {
 
 import { modeBrowse, modeSelect } from './index';
 import { osmNode } from '../osm';
-import { svgBlocker } from '../svg';
 import { uiFlash } from '../ui';
 
 
@@ -40,7 +39,6 @@ export function modeDragNode(context) {
     var hover = behaviorHover(context).altDisables(true)
         .on('hover', context.ui().sidebar.hover);
     var edit = behaviorEdit(context);
-    var blocker = svgBlocker(context.projection, context);
 
     var _nudgeInterval;
     var _restoreSelectedIDs = [];
@@ -135,6 +133,7 @@ export function modeDragNode(context) {
         var currPoint = (d3_event && d3_event.point) || context.projection(_lastLoc);
         var currMouse = geoVecSubtract(currPoint, nudge);
         var loc = context.projection.invert(currMouse);
+        var didSnap = false;
 
         if (!_nudgeInterval) {   // If not nudging at the edge of the viewport, try to snap..
             // related code
@@ -142,16 +141,22 @@ export function modeDragNode(context) {
             // - `behavior/draw.js`      `click()`
             // - `behavior/draw_way.js`  `move()`
             var d = datum();
-            var target = d && d.id && context.hasEntity(d.id);
+            var nodegroups = d && d.properties && d.properties.nodes;
 
             if (d.loc) {    // snap to node/vertex - a real entity or a nope target with a `loc`
                 loc = d.loc;
-            } else if (target && target.type === 'way') {   // snap to way
-                var choice = geoChooseEdge(
-                    context.childNodes(target), context.mouse(), context.projection, entity.id
-                );
-                if (choice) {
-                    loc = choice.loc;
+                didSnap = true;
+
+            } else if (nodegroups) {   // snap to way - a line touch target or nope target with nodes
+                var best = Infinity;
+                for (var i = 0; i < nodegroups.length; i++) {
+                    var childNodes = nodegroups[i].map(function(id) { return context.entity(id); });
+                    var choice = geoChooseEdge(childNodes, context.mouse(), context.projection, entity.id);
+                    if (choice && choice.distance < best) {
+                        best = choice.distance;
+                        loc = choice.loc;
+                        didSnap = true;
+                    }
                 }
             }
         }
@@ -162,17 +167,23 @@ export function modeDragNode(context) {
         );
 
 
-        checkGeometry(entity);
+        // check if this movement causes the geometry to break
+        var doBlock = false;
+        if (!didSnap) {
+            doBlock = invalidGeometry(entity, context.graph());
+        }
+
+        context.surface()
+            .classed('nope', doBlock);
+
         _lastLoc = loc;
     }
 
 
-    function checkGeometry(entity) {
-        var doBlock = false;
-        var graph = context.graph();
+    function invalidGeometry(entity, graph) {
         var parents = graph.parentWays(entity);
 
-        function checkSelfIntersections(way, activeID) {
+        function hasSelfIntersections(way, activeID) {
             // check active (dragged) segments against inactive segments
             var actives = [];
             var inactives = [];
@@ -206,15 +217,13 @@ export function modeDragNode(context) {
         for (var i = 0; i < parents.length; i++) {
             var parent = parents[i];
             if (parent.isClosed()) {   // check for self intersections
-                if (checkSelfIntersections(parent, entity.id)) {
-                    doBlock = true;
-                    break;
+                if (hasSelfIntersections(parent, entity.id)) {
+                    return true;
                 }
             }
         }
 
-        d3_select('.data-layer-osm')
-            .call(doBlock ? blocker : blocker.off);
+        return false;
     }
 
 
@@ -238,7 +247,7 @@ export function modeDragNode(context) {
         if (_isCancelled) return;
 
         var d = datum();
-        var nope = d && d.id && /-nope$/.test(d.id);        // can't drag here
+        var nope = (d && d.id && /-nope$/.test(d.id)) || context.surface().classed('nope');
         var target = d && d.id && context.hasEntity(d.id);   // entity to snap to
 
         if (nope) {   // bounce back
@@ -337,10 +346,8 @@ export function modeDragNode(context) {
 
         _activeEntity = null;
 
-        d3_select('.data-layer-osm')
-            .call(blocker.off);
-
         context.surface()
+            .classed('nope', false)
             .selectAll('.active')
             .classed('active', false);
 
