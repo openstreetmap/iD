@@ -10,3 +10,5 @@ export { operationReverse } from './reverse';
 export { operationRotate } from './rotate';
 export { operationSplit } from './split';
 export { operationStraighten } from './straighten';
+export { operationDrawCenterline } from './draw_centerline';
+export { operationJoinLanegroup } from './join_lanegroup';
