@@ -1,16 +1,3 @@
-import _every from 'lodash-es/every';
-import _some from 'lodash-es/some';
-
-import {
-    geoVecAngle,
-    geoVecCross,
-    geoVecDot,
-    geoVecInterp,
-    geoVecLength,
-    geoVecSubtract
-} from './vector.js';
-
-
 // constants
 var TAU = 2 * Math.PI;
 var EQUATORIAL_RADIUS = 6356752.314245179;
