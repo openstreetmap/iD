@@ -160,6 +160,127 @@ describe('iD.geo - geometry', function() {
         });
     });
 
+    describe('geoHasSelfIntersections', function() {
+        it('returns false for a degenerate way (no nodes)', function() {
+            expect(iD.geoHasSelfIntersections([], '')).to.be.false;
+        });
+
+        it('returns false if no activeID', function() {
+            var a = iD.osmNode({id: 'a', loc: [0, 0]});
+            var b = iD.osmNode({id: 'b', loc: [2, 0]});
+            var c = iD.osmNode({id: 'c', loc: [2, 2]});
+            var d = iD.osmNode({id: 'd', loc: [0, 2]});
+            var nodes = [a, b, c, d, a];
+            expect(iD.geoHasSelfIntersections(nodes, '')).to.be.false;
+        });
+
+        it('returns false if there are no self intersections (closed way)', function() {
+            //  a --- b
+            //  |     |
+            //  |     |
+            //  d --- c
+            var a = iD.osmNode({id: 'a', loc: [0, 0]});
+            var b = iD.osmNode({id: 'b', loc: [2, 0]});
+            var c = iD.osmNode({id: 'c', loc: [2, 2]});
+            var d = iD.osmNode({id: 'd', loc: [0, 2]});
+            var nodes = [a, b, c, d, a];
+            expect(iD.geoHasSelfIntersections(nodes, 'a')).to.be.false;
+            expect(iD.geoHasSelfIntersections(nodes, 'b')).to.be.false;
+            expect(iD.geoHasSelfIntersections(nodes, 'c')).to.be.false;
+            expect(iD.geoHasSelfIntersections(nodes, 'd')).to.be.false;
+        });
+
+        it('returns true if there are self intersections without a junction (closed way)', function() {
+            //  a     c
+            //  | \ / |
+            //  |  /  |
+            //  | / \ |
+            //  d     b
+            var a = iD.osmNode({id: 'a', loc: [0, 0]});
+            var b = iD.osmNode({id: 'b', loc: [2, 2]});
+            var c = iD.osmNode({id: 'c', loc: [2, 0]});
+            var d = iD.osmNode({id: 'd', loc: [0, 2]});
+            var nodes = [a, b, c, d, a];
+            expect(iD.geoHasSelfIntersections(nodes, 'a')).to.be.true;
+            expect(iD.geoHasSelfIntersections(nodes, 'b')).to.be.true;
+            expect(iD.geoHasSelfIntersections(nodes, 'c')).to.be.true;
+            expect(iD.geoHasSelfIntersections(nodes, 'd')).to.be.true;
+        });
+
+        it('returns false if there are self intersections with a junction (closed way)', function() {
+            //  a     c
+            //  | \ / |
+            //  |  x  |
+            //  | / \ |
+            //  d     b
+            var a = iD.osmNode({id: 'a', loc: [0, 0]});
+            var b = iD.osmNode({id: 'b', loc: [2, 2]});
+            var c = iD.osmNode({id: 'c', loc: [2, 0]});
+            var d = iD.osmNode({id: 'd', loc: [0, 2]});
+            var x = iD.osmNode({id: 'x', loc: [1, 1]});
+            var nodes = [a, x, b, c, x, d, a];
+            expect(iD.geoHasSelfIntersections(nodes, 'a')).to.be.false;
+            expect(iD.geoHasSelfIntersections(nodes, 'b')).to.be.false;
+            expect(iD.geoHasSelfIntersections(nodes, 'c')).to.be.false;
+            expect(iD.geoHasSelfIntersections(nodes, 'd')).to.be.false;
+            expect(iD.geoHasSelfIntersections(nodes, 'x')).to.be.false;
+        });
+
+        it('returns false if there are no self intersections (open way)', function() {
+            //  a --- b
+            //        |
+            //        |
+            //  d --- c
+            var a = iD.osmNode({id: 'a', loc: [0, 0]});
+            var b = iD.osmNode({id: 'b', loc: [2, 0]});
+            var c = iD.osmNode({id: 'c', loc: [2, 2]});
+            var d = iD.osmNode({id: 'd', loc: [0, 2]});
+            var nodes = [a, b, c, d];
+            expect(iD.geoHasSelfIntersections(nodes, 'a')).to.be.false;
+            expect(iD.geoHasSelfIntersections(nodes, 'b')).to.be.false;
+            expect(iD.geoHasSelfIntersections(nodes, 'c')).to.be.false;
+            expect(iD.geoHasSelfIntersections(nodes, 'd')).to.be.false;
+        });
+
+        it('returns true if there are self intersections without a junction (open way)', function() {
+            //  a     c
+            //    \ / |
+            //     /  |
+            //    / \ |
+            //  d     b
+            var a = iD.osmNode({id: 'a', loc: [0, 0]});
+            var b = iD.osmNode({id: 'b', loc: [2, 2]});
+            var c = iD.osmNode({id: 'c', loc: [2, 0]});
+            var d = iD.osmNode({id: 'd', loc: [0, 2]});
+            var nodes = [a, b, c, d];
+            expect(iD.geoHasSelfIntersections(nodes, 'a')).to.be.true;
+            expect(iD.geoHasSelfIntersections(nodes, 'b')).to.be.true;
+            expect(iD.geoHasSelfIntersections(nodes, 'c')).to.be.true;
+            expect(iD.geoHasSelfIntersections(nodes, 'd')).to.be.true;
+        });
+
+        it('returns false if there are self intersections with a junction (open way)', function() {
+            //  a     c
+            //    \ / |
+            //     x  |
+            //    / \ |
+            //  d     b
+            var a = iD.osmNode({id: 'a', loc: [0, 0]});
+            var b = iD.osmNode({id: 'b', loc: [2, 2]});
+            var c = iD.osmNode({id: 'c', loc: [2, 0]});
+            var d = iD.osmNode({id: 'd', loc: [0, 2]});
+            var x = iD.osmNode({id: 'x', loc: [1, 1]});
+            var nodes = [a, x, b, c, x, d];
+            expect(iD.geoHasSelfIntersections(nodes, 'a')).to.be.false;
+            expect(iD.geoHasSelfIntersections(nodes, 'b')).to.be.false;
+            expect(iD.geoHasSelfIntersections(nodes, 'c')).to.be.false;
+            expect(iD.geoHasSelfIntersections(nodes, 'd')).to.be.false;
+            expect(iD.geoHasSelfIntersections(nodes, 'x')).to.be.false;
+        });
+
+    });
+
+
     describe('geoLineIntersection', function() {
         it('returns null if lines are colinear with overlap', function() {
             var a = [[0, 0], [10, 0]];
