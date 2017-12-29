@@ -7,7 +7,7 @@ import {
 } from '../actions';
 
 import { behaviorDraw } from './draw';
-import { geoChooseEdge } from '../geo';
+import { geoChooseEdge, geoHasSelfIntersections } from '../geo';
 import { modeBrowse, modeSelect } from '../modes';
 import { osmNode } from '../osm';
 
@@ -39,25 +39,48 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
     // - `behavior/draw.js`      `click()`
     // - `behavior/draw_way.js`  `move()`
     function move(datum) {
-        var loc;
-        var target = datum && datum.id && context.hasEntity(datum.id);
+        var nodeGroups = datum && datum.properties && datum.properties.nodes;
+        var loc = context.map().mouseCoordinates();
+
         if (datum.loc) {   // snap to node/vertex - a real entity or a nope target with a `loc`
             loc = datum.loc;
-        } else if (target && target.type === 'way') {   // snap to way
-            var choice = geoChooseEdge(
-                context.childNodes(target), context.mouse(), context.projection, end.id
-            );
-            if (choice) {
-                loc = choice.loc;
-            }
-        }
 
-        if (!loc) {
-            loc = context.map().mouseCoordinates();
+        } else if (nodeGroups) {   // snap to way - a line touch target or nope target with nodes
+            var best = Infinity;
+            for (var i = 0; i < nodeGroups.length; i++) {
+                var childNodes = nodeGroups[i].map(function(id) { return context.entity(id); });
+                var choice = geoChooseEdge(childNodes, context.mouse(), context.projection, end.id);
+                if (choice && choice.distance < best) {
+                    best = choice.distance;
+                    loc = choice.loc;
+                }
+            }
         }
 
         context.replace(actionMoveNode(end.id, loc));
         end = context.entity(end.id);
+
+        // check if this movement causes the geometry to break
+        var doBlock = invalidGeometry(end, context.graph());
+        context.surface()
+            .classed('nope', doBlock);
+    }
+
+
+    function invalidGeometry(entity, graph) {
+        var parents = graph.parentWays(entity);
+
+        for (var i = 0; i < parents.length; i++) {
+            var parent = parents[i];
+            var nodes = parent.nodes.map(function(nodeID) { return graph.entity(nodeID); });
+            if (parent.isClosed()) {
+                if (geoHasSelfIntersections(nodes, entity.id)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
 
@@ -147,7 +170,10 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
 
     // Accept the current position of the drawing node and continue drawing.
     drawWay.add = function(loc, datum) {
-        if (datum && datum.id && /-nope/.test(datum.id)) return;   // can't click here
+        if ((datum && datum.id && /-nope$/.test(datum.id)) ||
+            context.surface().classed('nope')) {
+            return;   // can't click here
+        }
 
         context.pop(_tempEdits);
         _tempEdits = 0;
@@ -163,6 +189,10 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
 
     // Connect the way to an existing way.
     drawWay.addWay = function(loc, edge) {
+        if (context.surface().classed('nope')) {
+            return;   // can't click here
+        }
+
         context.pop(_tempEdits);
         _tempEdits = 0;
 
@@ -178,6 +208,10 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
 
     // Connect the way to an existing node and continue drawing.
     drawWay.addNode = function(node) {
+        if (context.surface().classed('nope')) {
+            return;   // can't click here
+        }
+
         context.pop(_tempEdits);
         _tempEdits = 0;
 
@@ -194,6 +228,10 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
     // If the way has enough nodes to be valid, it's selected.
     // Otherwise, delete everything and return to browse mode.
     drawWay.finish = function() {
+        if (context.surface().classed('nope')) {
+            return;   // can't click here
+        }
+
         context.pop(_tempEdits);
         _tempEdits = 0;
 
@@ -223,6 +261,9 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
         window.setTimeout(function() {
             context.map().dblclickEnable(true);
         }, 1000);
+
+        context.surface()
+            .classed('nope', false);
 
         context.enter(modeBrowse(context));
     };

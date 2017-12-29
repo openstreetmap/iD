@@ -5,6 +5,7 @@ import {
     geoVecAngle,
     geoVecCross,
     geoVecDot,
+    geoVecEqual,
     geoVecInterp,
     geoVecLength,
     geoVecSubtract
@@ -38,7 +39,7 @@ export function geoRotate(points, angle, around) {
 // projection onto that edge, if such a projection exists, or the distance to
 // the closest vertex on that edge. Returns an object with the `index` of the
 // chosen edge, the chosen `loc` on that edge, and the `distance` to to it.
-export function geoChooseEdge(nodes, point, projection, skipID) {
+export function geoChooseEdge(nodes, point, projection, activeID) {
     var dist = geoVecLength;
     var points = nodes.map(function(n) { return projection(n.loc); });
     var ids = nodes.map(function(n) { return n.id; });
@@ -47,7 +48,7 @@ export function geoChooseEdge(nodes, point, projection, skipID) {
     var loc;
 
     for (var i = 0; i < points.length - 1; i++) {
-        if (ids[i] === skipID || ids[i + 1] === skipID) continue;
+        if (ids[i] === activeID || ids[i + 1] === activeID) continue;
 
         var o = points[i];
         var s = geoVecSubtract(points[i + 1], o);
@@ -76,6 +77,41 @@ export function geoChooseEdge(nodes, point, projection, skipID) {
     } else {
         return null;
     }
+}
+
+
+// check active (dragged or drawing) segments against inactive segments
+export function geoHasSelfIntersections(nodes, activeID) {
+    var actives = [];
+    var inactives = [];
+    var j, k;
+
+    for (j = 0; j < nodes.length - 1; j++) {
+        var n1 = nodes[j];
+        var n2 = nodes[j+1];
+        var segment = [n1.loc, n2.loc];
+        if (n1.id === activeID || n2.id === activeID) {
+            actives.push(segment);
+        } else {
+            inactives.push(segment);
+        }
+    }
+
+    for (j = 0; j < actives.length; j++) {
+        for (k = 0; k < inactives.length; k++) {
+            var p = actives[j];
+            var q = inactives[k];
+            // skip if segments share an endpoint
+            if (geoVecEqual(p[1], q[0]) || geoVecEqual(p[0], q[1]) ||
+                geoVecEqual(p[0], q[0]) || geoVecEqual(p[1], q[1]) ) {
+                continue;
+            } else if (geoLineIntersection(p, q)) {
+                return true;
+            }
+        }
+    }
+
+    return false;
 }
 
 

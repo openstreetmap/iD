@@ -20,8 +20,7 @@ import {
 
 import {
     geoChooseEdge,
-    geoLineIntersection,
-    geoVecEqual,
+    geoHasSelfIntersections,
     geoVecSubtract,
     geoViewportEdge
 } from '../geo';
@@ -133,7 +132,6 @@ export function modeDragNode(context) {
         var currPoint = (d3_event && d3_event.point) || context.projection(_lastLoc);
         var currMouse = geoVecSubtract(currPoint, nudge);
         var loc = context.projection.invert(currMouse);
-        var didSnap = false;
 
         if (!_nudgeInterval) {   // If not nudging at the edge of the viewport, try to snap..
             // related code
@@ -141,21 +139,19 @@ export function modeDragNode(context) {
             // - `behavior/draw.js`      `click()`
             // - `behavior/draw_way.js`  `move()`
             var d = datum();
-            var nodegroups = d && d.properties && d.properties.nodes;
+            var nodeGroups = d && d.properties && d.properties.nodes;
 
             if (d.loc) {    // snap to node/vertex - a real entity or a nope target with a `loc`
                 loc = d.loc;
-                didSnap = true;
 
-            } else if (nodegroups) {   // snap to way - a line touch target or nope target with nodes
+            } else if (nodeGroups) {   // snap to way - a line touch target or nope target with nodes
                 var best = Infinity;
-                for (var i = 0; i < nodegroups.length; i++) {
-                    var childNodes = nodegroups[i].map(function(id) { return context.entity(id); });
+                for (var i = 0; i < nodeGroups.length; i++) {
+                    var childNodes = nodeGroups[i].map(function(id) { return context.entity(id); });
                     var choice = geoChooseEdge(childNodes, context.mouse(), context.projection, entity.id);
                     if (choice && choice.distance < best) {
                         best = choice.distance;
                         loc = choice.loc;
-                        didSnap = true;
                     }
                 }
             }
@@ -168,11 +164,7 @@ export function modeDragNode(context) {
 
 
         // check if this movement causes the geometry to break
-        var doBlock = false;
-        if (!didSnap) {
-            doBlock = invalidGeometry(entity, context.graph());
-        }
-
+        var doBlock = invalidGeometry(entity, context.graph());
         context.surface()
             .classed('nope', doBlock);
 
@@ -183,41 +175,11 @@ export function modeDragNode(context) {
     function invalidGeometry(entity, graph) {
         var parents = graph.parentWays(entity);
 
-        function hasSelfIntersections(way, activeID) {
-            // check active (dragged) segments against inactive segments
-            var actives = [];
-            var inactives = [];
-            var j, k;
-            for (j = 0; j < way.nodes.length - 1; j++) {
-                var n1 = graph.entity(way.nodes[j]);
-                var n2 = graph.entity(way.nodes[j+1]);
-                var segment = [n1.loc, n2.loc];
-                if (n1.id === activeID || n2.id === activeID) {
-                    actives.push(segment);
-                } else {
-                    inactives.push(segment);
-                }
-            }
-            for (j = 0; j < actives.length; j++) {
-                for (k = 0; k < inactives.length; k++) {
-                    var p = actives[j];
-                    var q = inactives[k];
-                    // skip if segments share an endpoint
-                    if (geoVecEqual(p[1], q[0]) || geoVecEqual(p[0], q[1]) ||
-                        geoVecEqual(p[0], q[0]) || geoVecEqual(p[1], q[1]) ) {
-                        continue;
-                    } else if (geoLineIntersection(p, q)) {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
         for (var i = 0; i < parents.length; i++) {
             var parent = parents[i];
-            if (parent.isClosed()) {   // check for self intersections
-                if (hasSelfIntersections(parent, entity.id)) {
+            var nodes = parent.nodes.map(function(nodeID) { return graph.entity(nodeID); });
+            if (parent.isClosed()) {
+                if (geoHasSelfIntersections(nodes, entity.id)) {
                     return true;
                 }
             }

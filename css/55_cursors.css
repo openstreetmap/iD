@@ -1,6 +1,7 @@
 /* Cursors */
 
-.nope {
+.nope,
+.nope * {
     cursor: not-allowed !important;
 }
 
