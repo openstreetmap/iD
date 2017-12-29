@@ -57,7 +57,7 @@ export function operationJoinLanegroup(selectedIDs, context) {
     };
 
 
-    operation.id = 'join_lane_group';
+    operation.id = 'join-lanegroup';
     operation.keys = 'Join_Lane_group';
     operation.title = 'Join_lanegroup';
     operation.behavior = behaviorOperation(context).which(operation);

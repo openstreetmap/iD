@@ -56,7 +56,7 @@ export function operationDrawCenterline(selectedIDs, context) {
     };
 
 
-    operation.id = 'liulwx';
+    operation.id = 'draw-centerline';
     operation.keys = [t('operations.circularize.key')];
     operation.title = t('operations.circularize.title');
     operation.behavior = behaviorOperation(context).which(operation);
