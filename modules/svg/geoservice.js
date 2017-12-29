@@ -4,8 +4,8 @@ import { osmNode, osmRelation, osmWay } from '../osm/index';
 
 import { actionAddEntity, actionChangeTags } from '../actions/index';
 
-import { utilDetect } from '../util/detect';
-import { t, textDirection } from '../util/locale';
+// import { utilDetect } from '../util/detect';
+import { t } from '../util/locale';
 
 import fromEsri from 'esri-to-geojson';
 
@@ -15,7 +15,7 @@ import polygonBuffer from 'turf-buffer';
 import pointInside from 'turf-inside';
 
 export function svgGeoService(projection, context, dispatch) {
-    var detected = utilDetect();
+    // var detected = utilDetect();
 
     function init() {
         if (svgGeoService.initialized) return;  // run once
@@ -23,8 +23,8 @@ export function svgGeoService(projection, context, dispatch) {
     }
 
     function drawGeoService() {
-        var geojson = drawGeoService.geojson(),
-            enabled = drawGeoService.enabled();
+        var geojson = drawGeoService.geojson();
+        // var enabled = drawGeoService.enabled();
 
         if (!geojson || !geojson.features) {
             return;
@@ -341,7 +341,7 @@ export function svgGeoService(projection, context, dispatch) {
                     if (coords.length > 1) {
                         // donut hole polygons (e.g. building with courtyard) must be a relation
                         // example data: Hartford, CT building footprints
-                        // TODO: rings within rings?
+                        // what about rings within rings?
 
                         // generate each ring
                         var componentRings = [];
@@ -524,12 +524,12 @@ export function svgGeoService(projection, context, dispatch) {
                         */
 
                         if (!mergeRoads.length) {
-                            // TODO: what if part or all of the MultiLineString does not have a place to merge to?
+                            // what if part or all of the MultiLineString does not have a place to merge to?
                         }
                     } else {
                         lines.push({
                             id: mapLine(d, d.geometry.coordinates[ln]).id,
-                            role: '' // todo roles: this empty string assumes the lines make up a route
+                            role: '' // roles: this empty string assumes the lines make up a route
                         });
                     }
                 }
@@ -542,7 +542,7 @@ export function svgGeoService(projection, context, dispatch) {
                 // generate a relation
                 rel = new osmRelation({
                     tags: {
-                        type: 'route' // todo multilinestring and multipolygon types
+                        type: 'route' // still need to tackle multilinestring and multipolygon types
                     },
                     members: lines
                 });
@@ -576,7 +576,7 @@ export function svgGeoService(projection, context, dispatch) {
                     'adding multiple Polygons as a Relation'
                 );
             } else {
-                console.log('Did not recognize Geometry Type: ' + d.geometry.type);
+                // console.log('Did not recognize Geometry Type: ' + d.geometry.type);
             }
         });
 
@@ -693,8 +693,8 @@ export function svgGeoService(projection, context, dispatch) {
         var that = this;
         d3.json(url, function(err, data) {
             if (err) {
-                console.log('GeoService URL did not load');
-                console.error(err);
+                // console.log('GeoService URL did not load');
+                // console.error(err);
             } else {
                 // convert EsriJSON text to GeoJSON object
                 var jsondl = (fmt === 'geojson') ? data : fromEsri.fromEsri(data);
