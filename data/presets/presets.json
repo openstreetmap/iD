@@ -170,7 +170,7 @@
         },
         "advertising/billboard": {
             "fields": [
-                "parallel_direction",
+                "direction",
                 "lit"
             ],
             "geometry": [
@@ -6896,7 +6896,7 @@
         "highway/give_way": {
             "icon": "poi-yield",
             "fields": [
-                "parallel_direction"
+                "direction_vertex"
             ],
             "geometry": [
                 "vertex"
@@ -6941,7 +6941,7 @@
                 "highway": "mini_roundabout"
             },
             "fields": [
-                "clock_direction"
+                "direction_clock"
             ],
             "name": "Mini-Roundabout"
         },
@@ -7474,6 +7474,7 @@
                 "vertex"
             ],
             "fields": [
+                "direction",
                 "ref"
             ],
             "tags": {
@@ -7508,7 +7509,7 @@
             "icon": "poi-stop",
             "fields": [
                 "stop",
-                "parallel_direction"
+                "direction_vertex"
             ],
             "geometry": [
                 "vertex"
@@ -7534,6 +7535,7 @@
             },
             "fields": [
                 "lamp_type",
+                "direction",
                 "ref"
             ],
             "terms": [
@@ -7645,6 +7647,9 @@
                 "point",
                 "vertex"
             ],
+            "fields": [
+                "direction"
+            ],
             "tags": {
                 "highway": "traffic_mirror"
             },
@@ -7670,7 +7675,8 @@
                 "highway": "traffic_signals"
             },
             "fields": [
-                "traffic_signals"
+                "traffic_signals",
+                "traffic_signals/direction"
             ],
             "terms": [
                 "light",
@@ -10468,7 +10474,8 @@
                 "area"
             ],
             "fields": [
-                "operator"
+                "operator",
+                "direction"
             ],
             "terms": [
                 "entrance",
@@ -10801,7 +10808,8 @@
             "fields": [
                 "surveillance",
                 "surveillance/type",
-                "surveillance/zone"
+                "surveillance/zone",
+                "direction"
             ],
             "terms": [
                 "anpr",
@@ -11128,7 +11136,8 @@
             ],
             "fields": [
                 "fee",
-                "access_simple"
+                "access_simple",
+                "direction"
             ],
             "tags": {
                 "natural": "cave_entrance"
@@ -15038,7 +15047,7 @@
                 "vertex"
             ],
             "fields": [
-                "milestone_position"
+                "railway/position"
             ],
             "tags": {
                 "railway": "milestone"
@@ -15133,6 +15142,11 @@
             "geometry": [
                 "point",
                 "vertex"
+            ],
+            "fields": [
+                "railway/position",
+                "railway/signal/direction",
+                "ref"
             ],
             "tags": {
                 "railway": "signal"
@@ -18134,7 +18148,8 @@
             "fields": [
                 "name",
                 "operator",
-                "board_type"
+                "board_type",
+                "direction"
             ],
             "geometry": [
                 "point",
@@ -18178,7 +18193,8 @@
             "fields": [
                 "operator",
                 "map_type",
-                "map_size"
+                "map_size",
+                "direction"
             ],
             "geometry": [
                 "point",
@@ -18312,6 +18328,9 @@
                 "point",
                 "vertex"
             ],
+            "fields": [
+                "direction"
+            ],
             "tags": {
                 "tourism": "viewpoint"
             },
@@ -18363,7 +18382,7 @@
             "icon": "poi-warning",
             "fields": [
                 "traffic_calming",
-                "parallel_direction"
+                "direction_vertex"
             ],
             "geometry": [
                 "vertex",
@@ -18384,7 +18403,7 @@
             "icon": "poi-warning",
             "fields": [
                 "surface",
-                "parallel_direction"
+                "direction_vertex"
             ],
             "geometry": [
                 "vertex",
@@ -18403,7 +18422,7 @@
         "traffic_calming/chicane": {
             "icon": "poi-warning",
             "fields": [
-                "parallel_direction"
+                "direction_vertex"
             ],
             "geometry": [
                 "vertex",
@@ -18422,7 +18441,7 @@
         "traffic_calming/choker": {
             "icon": "poi-warning",
             "fields": [
-                "parallel_direction"
+                "direction_vertex"
             ],
             "geometry": [
                 "vertex",
@@ -18441,7 +18460,7 @@
             "icon": "poi-warning",
             "fields": [
                 "surface",
-                "parallel_direction"
+                "direction_vertex"
             ],
             "geometry": [
                 "vertex",
@@ -18462,7 +18481,7 @@
             "icon": "poi-warning",
             "fields": [
                 "surface",
-                "parallel_direction"
+                "direction_vertex"
             ],
             "geometry": [
                 "vertex",
@@ -18481,7 +18500,7 @@
             "icon": "poi-warning",
             "fields": [
                 "surface",
-                "parallel_direction"
+                "direction_vertex"
             ],
             "geometry": [
                 "vertex",
@@ -18515,7 +18534,7 @@
         "traffic_calming/rumble_strip": {
             "icon": "poi-warning",
             "fields": [
-                "parallel_direction"
+                "direction_vertex"
             ],
             "geometry": [
                 "vertex",

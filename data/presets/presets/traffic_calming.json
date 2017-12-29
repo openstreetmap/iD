@@ -2,7 +2,7 @@
     "icon": "poi-warning",
     "fields": [
         "traffic_calming",
-        "parallel_direction"
+        "direction_vertex"
     ],
     "geometry": [
         "vertex",

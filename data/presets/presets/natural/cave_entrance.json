@@ -6,7 +6,8 @@
     ],
     "fields": [
         "fee",
-        "access_simple"
+        "access_simple",
+        "direction"
     ],
     "tags": {
         "natural": "cave_entrance"

@@ -1498,36 +1498,8 @@
                     "label": "Capacity",
                     "placeholder": "50, 100, 200..."
                 },
-                "cardinal_direction": {
-                    "label": "Direction",
-                    "options": {
-                        "N": "North",
-                        "E": "East",
-                        "S": "South",
-                        "W": "West",
-                        "NE": "Northeast",
-                        "SE": "Southeast",
-                        "SW": "Southwest",
-                        "NW": "Northwest",
-                        "NNE": "North-northeast",
-                        "ENE": "East-northeast",
-                        "ESE": "East-southeast",
-                        "SSE": "South-southeast",
-                        "SSW": "South-southwest",
-                        "WSW": "West-southwest",
-                        "WNW": "West-northwest",
-                        "NNW": "North-northwest"
-                    }
-                },
                 "castle_type": {
                     "label": "Type"
-                },
-                "clock_direction": {
-                    "label": "Direction",
-                    "options": {
-                        "clockwise": "Clockwise",
-                        "anticlockwise": "Counterclockwise"
-                    }
                 },
                 "clothes": {
                     "label": "Clothes"
@@ -1650,6 +1622,46 @@
                 },
                 "diaper": {
                     "label": "Diaper Changing Available"
+                },
+                "direction_cardinal": {
+                    "label": "Direction",
+                    "options": {
+                        "N": "North",
+                        "E": "East",
+                        "S": "South",
+                        "W": "West",
+                        "NE": "Northeast",
+                        "SE": "Southeast",
+                        "SW": "Southwest",
+                        "NW": "Northwest",
+                        "NNE": "North-northeast",
+                        "ENE": "East-northeast",
+                        "ESE": "East-southeast",
+                        "SSE": "South-southeast",
+                        "SSW": "South-southwest",
+                        "WSW": "West-southwest",
+                        "WNW": "West-northwest",
+                        "NNW": "North-northwest"
+                    }
+                },
+                "direction_clock": {
+                    "label": "Direction",
+                    "options": {
+                        "clockwise": "Clockwise",
+                        "anticlockwise": "Counterclockwise"
+                    }
+                },
+                "direction_vertex": {
+                    "label": "Direction",
+                    "options": {
+                        "forward": "Forward",
+                        "backward": "Backward",
+                        "both": "Both / All"
+                    }
+                },
+                "direction": {
+                    "label": "Direction (Degrees Clockwise)",
+                    "placeholder": "45, 90, 180, 270"
                 },
                 "display": {
                     "label": "Display"
@@ -1953,10 +1965,6 @@
                 "memorial": {
                     "label": "Type"
                 },
-                "milestone_position": {
-                    "label": "Milestone Position",
-                    "placeholder": "Distance to one decimal (123.4)"
-                },
                 "monitoring_multi": {
                     "label": "Monitoring"
                 },
@@ -2074,13 +2082,6 @@
                     "label": "Par",
                     "placeholder": "3, 4, 5..."
                 },
-                "parallel_direction": {
-                    "label": "Direction",
-                    "options": {
-                        "forward": "Forward",
-                        "backward": "Backward"
-                    }
-                },
                 "park_ride": {
                     "label": "Park and Ride"
                 },
@@ -2181,6 +2182,18 @@
                 },
                 "railway": {
                     "label": "Type"
+                },
+                "railway/position": {
+                    "label": "Milestone Position",
+                    "placeholder": "Distance to one decimal (123.4)"
+                },
+                "railway/signal/direction": {
+                    "label": "Direction",
+                    "options": {
+                        "forward": "Forward",
+                        "backward": "Backward",
+                        "both": "Both / All"
+                    }
                 },
                 "rating": {
                     "label": "Power Rating"
@@ -2483,6 +2496,14 @@
                 },
                 "traffic_signals": {
                     "label": "Type"
+                },
+                "traffic_signals/direction": {
+                    "label": "Direction",
+                    "options": {
+                        "forward": "Forward",
+                        "backward": "Backward",
+                        "both": "Both / All"
+                    }
                 },
                 "trail_visibility": {
                     "label": "Trail Visibility",

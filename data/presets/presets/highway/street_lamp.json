@@ -9,6 +9,7 @@
     },
     "fields": [
         "lamp_type",
+        "direction",
         "ref"
     ],
     "terms": [
