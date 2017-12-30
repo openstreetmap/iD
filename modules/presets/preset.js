@@ -100,6 +100,9 @@ export function presetPreset(id, preset, fields) {
 
         for (var f in preset.fields) {
             var field = preset.fields[f];
+            if (!field || !field.matchGeometry) {
+                continue;
+            }
             if (field.matchGeometry(geometry) && field.default === tags[field.key]) {
                 delete tags[field.key];
             }
@@ -148,6 +151,9 @@ export function presetPreset(id, preset, fields) {
 
         for (var f in preset.fields) {
             var field = preset.fields[f];
+            if (!field || !field.matchGeometry) {
+                continue;
+            }
             if (field.matchGeometry(geometry) && field.key && !tags[field.key] && field.default) {
                 tags[field.key] = field.default;
             }
