@@ -157,6 +157,20 @@ export function geoPathIntersections(path1, path2) {
     return intersections;
 }
 
+export function geoPathHasIntersections(path1, path2) {
+    for (var i = 0; i < path1.length - 1; i++) {
+        for (var j = 0; j < path2.length - 1; j++) {
+            var a = [ path1[i], path1[i+1] ];
+            var b = [ path2[j], path2[j+1] ];
+            var hit = geoLineIntersection(a, b);
+            if (hit) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 
 // Return whether point is contained in polygon.
 //
@@ -195,24 +209,13 @@ export function geoPolygonContainsPolygon(outer, inner) {
 
 
 export function geoPolygonIntersectsPolygon(outer, inner, checkSegments) {
-    function testSegments(outer, inner) {
-        for (var i = 0; i < outer.length - 1; i++) {
-            for (var j = 0; j < inner.length - 1; j++) {
-                var a = [ outer[i], outer[i + 1] ];
-                var b = [ inner[j], inner[j + 1] ];
-                if (geoLineIntersection(a, b)) return true;
-            }
-        }
-        return false;
-    }
-
     function testPoints(outer, inner) {
         return _some(inner, function(point) {
             return geoPointInPolygon(point, outer);
         });
     }
 
-   return testPoints(outer, inner) || (!!checkSegments && testSegments(outer, inner));
+   return testPoints(outer, inner) || (!!checkSegments && geoPathHasIntersections(outer, inner));
 }
 
 

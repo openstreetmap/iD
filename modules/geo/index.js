@@ -16,6 +16,7 @@ export { geoEdgeEqual } from './geom.js';
 export { geoHasSelfIntersections } from './geom.js';
 export { geoRotate } from './geom.js';
 export { geoLineIntersection } from './geom.js';
+export { geoPathHasIntersections } from './geom.js';
 export { geoPathIntersections } from './geom.js';
 export { geoPathLength } from './geom.js';
 export { geoPointInPolygon } from './geom.js';

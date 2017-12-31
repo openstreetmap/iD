@@ -1,3 +1,5 @@
+import _find from 'lodash-es/find';
+
 import {
     event as d3_event,
     select as d3_select
@@ -21,12 +23,13 @@ import {
 import {
     geoChooseEdge,
     geoHasSelfIntersections,
+    geoPathHasIntersections,
     geoVecSubtract,
     geoViewportEdge
 } from '../geo';
 
 import { modeBrowse, modeSelect } from './index';
-import { osmNode } from '../osm';
+import { osmJoinWays, osmNode } from '../osm';
 import { uiFlash } from '../ui';
 
 
@@ -174,15 +177,53 @@ export function modeDragNode(context) {
 
     function invalidGeometry(entity, graph) {
         var parents = graph.parentWays(entity);
+        var i, j, k;
 
-        for (var i = 0; i < parents.length; i++) {
+        for (i = 0; i < parents.length; i++) {
             var parent = parents[i];
-            var nodes = parent.nodes.map(function(nodeID) { return graph.entity(nodeID); });
-            if (parent.isClosed()) {
-                if (geoHasSelfIntersections(nodes, entity.id)) {
+            var nodes = [];
+            var activeIndex = null;    // which multipolygon ring contains node being dragged
+
+            // test any parent multipolygons for valid geometry
+            var relations = graph.parentRelations(parent);
+            for (j = 0; j < relations.length; j++) {
+                if (!relations[j].isMultipolygon()) continue;
+
+                var rings = osmJoinWays(relations[j].members, graph);
+
+                // find active ring and test it for self intersections
+                for (k = 0; k < rings.length; k++) {
+                    nodes = rings[k].nodes;
+                    if (_find(nodes, function(n) { return n.id === entity.id; })) {
+                        activeIndex = k;
+                        if (geoHasSelfIntersections(nodes, entity.id)) {
+                            return true;
+                        }
+                    }
+                    rings[k].coords = nodes.map(function(n) { return n.loc; });
+                }
+
+                // test active ring for intersections with other rings in the multipolygon
+                for (k = 0; k < rings.length; k++) {
+                    if (k === activeIndex) continue;
+
+                    // make sure active ring doesnt cross passive rings
+                    if (geoPathHasIntersections(rings[activeIndex].coords, rings[k].coords)) {
+                        return true;
+                    }
+                }
+            }
+
+
+            // If we still haven't tested this node's parent way for self-intersections.
+            // (because it's not a member of a multipolygon), test it now.
+            if (activeIndex !== null && parent.isClosed()) {
+                nodes = parent.nodes.map(function(nodeID) { return graph.entity(nodeID); });
+                if (nodes.length && geoHasSelfIntersections(nodes, entity.id)) {
                     return true;
                 }
             }
+
         }
 
         return false;

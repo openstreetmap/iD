@@ -342,6 +342,12 @@ describe('iD.geo - geometry', function() {
             expect(iD.geoPolygonIntersectsPolygon(outer, inner)).to.be.true;
         });
 
+        it('returns false when inner polygon fully contains outer', function() {
+            var inner = [[0, 0], [0, 3], [3, 3], [3, 0], [0, 0]];
+            var outer = [[1, 1], [1, 2], [2, 2], [2, 1], [1, 1]];
+            expect(iD.geoPolygonIntersectsPolygon(outer, inner)).to.be.false;
+        });
+
         it('returns true when outer polygon partially contains inner (some vertices contained)', function() {
             var outer = [[0, 0], [0, 3], [3, 3], [3, 0], [0, 0]];
             var inner = [[-1, -1], [1, 2], [2, 2], [2, 1], [1, 1]];
