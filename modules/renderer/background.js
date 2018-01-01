@@ -47,7 +47,7 @@ export function rendererBackground(context) {
 
         var b = background.baseLayerSource(),
             o = overlayLayers
-                .filter(function (d) { return !d.source().isLocatorOverlay(); })
+                .filter(function (d) { return !d.source().isLocatorOverlay() && !d.source().isHidden(); })
                 .map(function (d) { return d.source().id; })
                 .join(','),
             meters = geoOffsetToMeters(b.offset()),
@@ -86,12 +86,15 @@ export function rendererBackground(context) {
         var imageryUsed = [b.imageryUsed()];
 
         overlayLayers
-            .filter(function (d) { return !d.source().isLocatorOverlay(); })
+            .filter(function (d) { return !d.source().isLocatorOverlay() && !d.source().isHidden(); })
             .forEach(function (d) { imageryUsed.push(d.source().imageryUsed()); });
 
         var gpx = context.layers().layer('gpx');
         if (gpx && gpx.enabled() && gpx.hasGpx()) {
-            imageryUsed.push(gpx.getSrc());
+            // Include a string like '.gpx data file' or '.geojson data file'
+            var match = gpx.getSrc().match(/(kml|gpx|(?:geo)?json)$/i);
+            var extension = match ? ('.' + match[0].toLowerCase() + ' ') : '';
+            imageryUsed.push(extension + 'data file');
         }
 
         var mapillary_images = context.layers().layer('mapillary-images');
@@ -102,6 +105,11 @@ export function rendererBackground(context) {
         var mapillary_signs = context.layers().layer('mapillary-signs');
         if (mapillary_signs && mapillary_signs.enabled()) {
             imageryUsed.push('Mapillary Signs');
+        }
+
+        var openstreetcam_images = context.layers().layer('openstreetcam-images');
+        if (openstreetcam_images && openstreetcam_images.enabled()) {
+            imageryUsed.push('OpenStreetCam Images');
         }
 
         context.history().imageryUsed(imageryUsed);

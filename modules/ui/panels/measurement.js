@@ -113,11 +113,11 @@ export function uiPanelMeasurement(context) {
 
 
     function redraw(selection) {
-        var resolver = context.graph(),
-            selected = _filter(context.selectedIDs(), function(e) { return context.hasEntity(e); }),
-            singular = selected.length === 1 ? selected[0] : null,
-            extent = geoExtent(),
-            entity;
+        var resolver = context.graph();
+        var selected = _filter(context.selectedIDs(), function(e) { return context.hasEntity(e); });
+        var singular = selected.length === 1 ? selected[0] : null;
+        var extent = geoExtent();
+        var entity;
 
         selection.html('');
 
@@ -143,7 +143,9 @@ export function uiPanelMeasurement(context) {
         if (!singular) {
             list
                 .append('li')
-                .text(t('info_panels.measurement.center') + ': ' +
+                .text(t('info_panels.measurement.center') + ':')
+                .append('span')
+                .text(
                     center[1].toFixed(OSM_PRECISION) + ', ' + center[0].toFixed(OSM_PRECISION)
                 );
             return;
@@ -162,23 +164,32 @@ export function uiPanelMeasurement(context) {
 
             list
                 .append('li')
-                .text(t('info_panels.measurement.geometry') + ': ' +
-                    (closed ? t('info_panels.measurement.closed') + ' ' : '') + t('geometry.' + geometry) );
+                .text(t('info_panels.measurement.geometry') + ':')
+                .append('span')
+                .text(
+                    (closed ? t('info_panels.measurement.closed') + ' ' : '') + t('geometry.' + geometry)
+                );
 
             if (closed) {
                 var area = steradiansToSqmeters(entity.area(resolver));
                 list
                     .append('li')
-                    .text(t('info_panels.measurement.area') + ': ' + displayArea(area));
+                    .text(t('info_panels.measurement.area') + ':')
+                    .append('span')
+                    .text(displayArea(area));
             }
 
             list
                 .append('li')
-                .text(lengthLabel + ': ' + displayLength(length));
+                .text(lengthLabel + ':')
+                .append('span')
+                .text(displayLength(length));
 
             list
                 .append('li')
-                .text(t('info_panels.measurement.centroid') + ': ' +
+                .text(t('info_panels.measurement.centroid') + ':')
+                .append('span')
+                .text(
                     centroid[1].toFixed(OSM_PRECISION) + ', ' + centroid[0].toFixed(OSM_PRECISION)
                 );
 
@@ -201,11 +212,15 @@ export function uiPanelMeasurement(context) {
 
             list
                 .append('li')
-                .text(t('info_panels.measurement.geometry') + ': ' + t('geometry.' + geometry));
+                .text(t('info_panels.measurement.geometry') + ':')
+                .append('span')
+                .text(t('geometry.' + geometry));
 
             list
                 .append('li')
-                .text(centerLabel + ': ' +
+                .text(centerLabel + ':')
+                .append('span')
+                .text(
                     center[1].toFixed(OSM_PRECISION) + ', ' + center[0].toFixed(OSM_PRECISION)
                 );
         }

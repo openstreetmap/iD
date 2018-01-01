@@ -310,4 +310,66 @@ describe('iD.actionReverse', function () {
         expect(target.tags['traffic_sign:left']).to.eql('stop');
     });
 
+    // For issue #4595
+    it('reverses the direction of a forward facing traffic_signals on the way', function () {
+        var node1 = iD.Node();
+        var node2 = iD.Node({tags: { 'traffic_signals:direction': 'forward', 'highway': 'traffic_signals' }});
+        var node3 = iD.Node();
+        var way = iD.Way({nodes: [node1.id, node2.id, node3.id]});
+        var graph = iD.actionReverse(way.id)(iD.Graph([node1, node2, node3, way]));
+        var target = graph.entity(node2.id);
+        expect(target.tags['traffic_signals:direction']).to.eql('backward');
+    });
+
+    it('reverses the direction of a backward facing traffic_signals on the way', function () {
+        var node1 = iD.Node();
+        var node2 = iD.Node({tags: { 'traffic_signals:direction': 'backward', 'highway': 'traffic_signals' }});
+        var node3 = iD.Node();
+        var way = iD.Way({nodes: [node1.id, node2.id, node3.id]});
+        var graph = iD.actionReverse(way.id)(iD.Graph([node1, node2, node3, way]));
+        var target = graph.entity(node2.id);
+        expect(target.tags['traffic_signals:direction']).to.eql('forward');
+    });
+
+   it('reverses the direction of a left facing traffic_signals on the way', function () {
+        var node1 = iD.Node();
+        var node2 = iD.Node({tags: { 'traffic_signals:direction': 'left', 'highway': 'traffic_signals' }});
+        var node3 = iD.Node();
+        var way = iD.Way({nodes: [node1.id, node2.id, node3.id]});
+        var graph = iD.actionReverse(way.id)(iD.Graph([node1, node2, node3, way]));
+        var target = graph.entity(node2.id);
+        expect(target.tags['traffic_signals:direction']).to.eql('right');
+    });
+
+    it('reverses the direction of a right facing traffic_signals on the way', function () {
+        var node1 = iD.Node();
+        var node2 = iD.Node({tags: { 'traffic_signals:direction': 'right', 'highway': 'traffic_signals' }});
+        var node3 = iD.Node();
+        var way = iD.Way({nodes: [node1.id, node2.id, node3.id]});
+        var graph = iD.actionReverse(way.id)(iD.Graph([node1, node2, node3, way]));
+        var target = graph.entity(node2.id);
+        expect(target.tags['traffic_signals:direction']).to.eql('left');
+    });
+
+    it('does not assign a direction to a directionless traffic_signals on the way during a reverse', function () {
+        var node1 = iD.Node();
+        var node2 = iD.Node({tags: { 'highway': 'traffic_signals' }});
+        var node3 = iD.Node();
+        var way = iD.Way({nodes: [node1.id, node2.id, node3.id]});
+        var graph = iD.actionReverse(way.id)(iD.Graph([node1, node2, node3, way]));
+        var target = graph.entity(node2.id);
+        expect(target.tags['traffic_signals:direction']).to.be.undefined;
+    });
+
+    it('ignores directions other than forward or backward on attached traffic_signals during a reverse', function () {
+        var node1 = iD.Node();
+        var node2 = iD.Node({tags: { 'traffic_signals:direction': 'empty', 'highway': 'traffic_signals' }});
+        var node3 = iD.Node();
+        var way = iD.Way({nodes: [node1.id, node2.id, node3.id]});
+        var graph = iD.actionReverse(way.id)(iD.Graph([node1, node2, node3, way]));
+        var target = graph.entity(node2.id);
+        expect(target.tags['traffic_signals:direction']).to.eql('empty');
+    });
+
+
 });

@@ -16,7 +16,12 @@ export function uiStatus(context) {
                 selection.html('');
 
                 if (err) {
-                    if (apiStatus === 'rateLimited') {
+                    if (apiStatus === 'connectionSwitched') {
+                        // if the connection was just switched, we can't rely on
+                        // the status (we're getting the status of the previous api)
+                        return;
+
+                    } else if (apiStatus === 'rateLimited') {
                         selection
                             .text(t('status.rateLimit'))
                             .append('a')

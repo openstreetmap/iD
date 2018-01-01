@@ -310,7 +310,6 @@
             "localized_translation_language": "言語選択",
             "localized_translation_name": "名称"
         },
-        "zoom_in_edit": "編集するには地図を拡大してください",
         "login": "ログイン",
         "logout": "ログアウト",
         "loading_auth": "OpenStreetMapへ接続中...",
@@ -330,9 +329,11 @@
             "title": "OpenStreetMapへアップロード",
             "upload_explanation": "あなたがアップロードした編集内容は、OpenStreetMapを利用しているすべてのユーザが閲覧できるようになります。",
             "upload_explanation_with_user": "編集した内容を {user} アカウントでアップロードし、OpenStreetMapを利用しているすべてのユーザが閲覧できるようにします。",
+            "request_review": "編集のレビューを希望します。",
             "save": "アップロード",
             "cancel": "キャンセル",
             "changes": "{count} 個の変更",
+            "download_changes": "osmChangeファイルをダウンロード",
             "warnings": "注意",
             "modified": "変更した地物",
             "deleted": "削除した地物",
@@ -345,6 +346,32 @@
         "contributors": {
             "list": "{users} による編集",
             "truncated_list": "{users} とその他 {count} 人による編集"
+        },
+        "info_panels": {
+            "key": "I",
+            "background": {
+                "key": "B",
+                "title": "背景",
+                "zoom": "ズーム",
+                "show_tiles": "タイルを表示",
+                "hide_tiles": "タイルを非表示"
+            },
+            "history": {
+                "key": "H",
+                "title": "編集履歴",
+                "selected": "{n} 個を選択中",
+                "version": "バージョン",
+                "changeset": "変更セット"
+            },
+            "location": {
+                "key": "L"
+            },
+            "measurement": {
+                "key": "M",
+                "selected": "{n} 個を選択中",
+                "length": "長さ",
+                "area": "エリア"
+            }
         },
         "geometry": {
             "point": "ポイント",
@@ -548,8 +575,7 @@
         "splash": {
             "welcome": "iD 起動中",
             "text": "iDは、世界でもっとも優れた自由な世界地図を編集するためのツールで、馴染みやすく、かつ高機能です。現在のバージョンは {version} です。詳細は {website} で公開中です。バグ報告は {github} で受け付けています。",
-            "walkthrough": "チュートリアルを開始",
-            "start": "編集開始"
+            "walkthrough": "チュートリアルを開始"
         },
         "source_switch": {
             "live": "本番サーバ",
@@ -580,10 +606,6 @@
             "many_deletions": "あなたは{n}件の地物を削除しようとしています。本当に実行して宜しいですか？他の人からも見える地図から削除することになります。",
             "tag_suggests_area": "ラインに {tag} タグが付与されています。エリアで描かれるべきです",
             "deprecated_tags": "タグの重複: {tags}"
-        },
-        "zoom": {
-            "in": "ズームイン",
-            "out": "ズームアウト"
         },
         "cannot_zoom": "現在のモードでは、これ以上ズームアウトできません。",
         "full_screen": "フルスクリーンにする",
@@ -777,7 +799,25 @@
         "shortcuts": {
             "title": "ショートカットキー",
             "tooltip": "キーボードショートカット画面を表示",
+            "toggle": {
+                "key": "?"
+            },
             "key": {
+                "alt": "Alt",
+                "backspace": "Backspace",
+                "ctrl": "Ctrl",
+                "delete": "Delete",
+                "del": "Del",
+                "end": "End",
+                "enter": "Enter",
+                "esc": "Esc",
+                "home": "Home",
+                "option": "Option",
+                "pause": "Pause",
+                "pgdn": "PgDn",
+                "pgup": "PgUp",
+                "return": "Return",
+                "shift": "Shift",
                 "space": "スペース"
             },
             "gesture": {
@@ -2471,8 +2511,7 @@
                     "terms": "学校の敷地, 校庭"
                 },
                 "amenity/scrapyard": {
-                    "name": "自動車解体場",
-                    "terms": "自動車解体場, 解体, スクラップ, 解体屋"
+                    "name": "自動車解体場"
                 },
                 "amenity/shelter": {
                     "name": "（風雨をしのぐための）休憩所",
@@ -2615,6 +2654,10 @@
                 "attraction/roller_coaster": {
                     "name": "ローラーコースター",
                     "terms": "ジェットコースター"
+                },
+                "attraction/water_slide": {
+                    "name": "ウォータースライダー",
+                    "terms": "ウォータースライダー, 滑り台, ウォータースライド"
                 },
                 "barrier": {
                     "name": "障害物",
@@ -2985,10 +3028,6 @@
                     "name": "足場職人",
                     "terms": "足場職人, とび職"
                 },
-                "craft/sculpter": {
-                    "name": "彫刻家",
-                    "terms": "彫刻家"
-                },
                 "craft/shoemaker": {
                     "name": "製靴",
                     "terms": "製靴, 靴製造"
@@ -2996,10 +3035,6 @@
                 "craft/stonemason": {
                     "name": "石工",
                     "terms": "石工, 石材加工"
-                },
-                "craft/sweep": {
-                    "name": "煙突掃除",
-                    "terms": "煙突掃除"
                 },
                 "craft/tailor": {
                     "name": "仕立て屋"
@@ -3196,10 +3231,6 @@
                 "highway/path": {
                     "name": "小道",
                     "terms": "小道"
-                },
-                "highway/pedestrian": {
-                    "name": "歩行者天国",
-                    "terms": "歩行者天国"
                 },
                 "highway/primary": {
                     "name": "主要地方道",
@@ -3689,8 +3720,8 @@
                     "terms": "競技トラック"
                 },
                 "leisure/water_park": {
-                    "name": "親水公園",
-                    "terms": "公園, ウォーターパーク"
+                    "name": "ウォーターパーク",
+                    "terms": "テーマパーク, 遊園地, プール, ウォーターパーク"
                 },
                 "line": {
                     "name": "線",
@@ -3927,17 +3958,9 @@
                     "name": "オフィス",
                     "terms": "オフィス"
                 },
-                "office/accountant": {
-                    "name": "会計事務所",
-                    "terms": "会計事務所, 会計士"
-                },
                 "office/administrative": {
                     "name": "地方行政事務所",
                     "terms": "地方行政事務所"
-                },
-                "office/architect": {
-                    "name": "建築事務所",
-                    "terms": "建築事務所, 建設事務所"
                 },
                 "office/company": {
                     "name": "会社事務所",
@@ -3975,10 +3998,6 @@
                     "name": "保険代理店",
                     "terms": "保険代理店"
                 },
-                "office/it": {
-                    "name": "IT事務所",
-                    "terms": "ＩＴ事務所, システムベンダー"
-                },
                 "office/lawyer": {
                     "name": "法律事務所",
                     "terms": "法律事務所"
@@ -3986,10 +4005,6 @@
                 "office/lawyer/notary": {
                     "name": "公証人役場",
                     "terms": "公証人役場"
-                },
-                "office/newspaper": {
-                    "name": "新聞社",
-                    "terms": "新聞社"
                 },
                 "office/ngo": {
                     "name": "NGO事務所",
@@ -4009,10 +4024,6 @@
                 "office/telecommunication": {
                     "name": "通信会社事務所",
                     "terms": "通信会社事務所"
-                },
-                "office/therapist": {
-                    "name": "セラピスト",
-                    "terms": "セラピスト"
                 },
                 "office/travel_agent": {
                     "name": "旅行代理店"
@@ -4736,10 +4747,6 @@
                     "name": "オートキャンプ場",
                     "terms": "オートキャンプ場"
                 },
-                "tourism/chalet": {
-                    "name": "貸別荘",
-                    "terms": "貸別荘, コテージ"
-                },
                 "tourism/gallery": {
                     "name": "アートギャラリー",
                     "terms": "画廊"
@@ -4938,6 +4945,10 @@
                 "type/site": {
                     "name": "区域",
                     "terms": "区域"
+                },
+                "type/waterway": {
+                    "name": "水路",
+                    "terms": "水路"
                 },
                 "vertex": {
                     "name": "その他",

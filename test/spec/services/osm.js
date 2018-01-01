@@ -52,6 +52,21 @@ describe('iD.serviceOsm', function () {
         expect(connection.changesetURL(2)).to.match(/^https:/);
     });
 
+    describe('#getConnectionId', function() {
+        it('changes the connection id every time connection is reset', function() {
+            var cid1 = connection.getConnectionId();
+            connection.reset();
+            var cid2 = connection.getConnectionId();
+            expect(cid2).to.be.above(cid1);
+        });
+        it('changes the connection id every time connection is switched', function() {
+            var cid1 = connection.getConnectionId();
+            connection.switch({ urlroot: 'https://api06.dev.openstreetmap.org' });
+            var cid2 = connection.getConnectionId();
+            expect(cid2).to.be.above(cid1);
+        });
+    });
+
     describe('#changesetURL', function() {
         it('provides a changeset url', function() {
             expect(connection.changesetURL(2)).to.eql('http://www.openstreetmap.org/changeset/2');

@@ -28,6 +28,7 @@ import {
 import { geoChooseEdge } from '../geo';
 import { osmNode } from '../osm';
 import { utilEntitySelector } from '../util';
+import { uiFlash } from '../ui';
 
 
 export function modeDragNode(context) {
@@ -106,11 +107,14 @@ export function modeDragNode(context) {
 
     function start(entity) {
         wasMidpoint = entity.type === 'midpoint';
+        var hasHidden = context.features().hasHiddenConnections(entity, context.graph());
+        isCancelled = d3_event.sourceEvent.shiftKey || hasHidden;
 
-        isCancelled = d3_event.sourceEvent.shiftKey ||
-            context.features().hasHiddenConnections(entity, context.graph());
 
         if (isCancelled) {
+            if (hasHidden) {
+                uiFlash().text(t('modes.drag_node.connected_to_hidden'))();
+            }
             return behavior.cancel();
         }
 

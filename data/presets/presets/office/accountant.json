@@ -8,12 +8,11 @@
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {
         "office": "accountant"
     },
     "terms": [],
-    "name": "Accountant"
+    "name": "Accountant Office"
 }

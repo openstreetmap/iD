@@ -1,5 +1,6 @@
 import _compact from 'lodash-es/compact';
 import _map from 'lodash-es/map';
+import _throttle from 'lodash-es/throttle';
 import _values from 'lodash-es/values';
 
 import { set as d3_set } from 'd3-collection';
@@ -74,31 +75,33 @@ export function rendererMap(context) {
         mousemove;
 
     var zoom = d3_zoom()
-            .scaleExtent([ztok(2), ztok(24)])
-            .interpolate(d3_interpolate)
-            .filter(zoomEventFilter)
-            .on('zoom', zoomPan);
+        .scaleExtent([ztok(2), ztok(24)])
+        .interpolate(d3_interpolate)
+        .filter(zoomEventFilter)
+        .on('zoom', zoomPan);
 
     var _selection = d3_select(null);
-    var isRedrawScheduled = false;
-    var pendingRedrawCall;
 
-    function scheduleRedraw() {
-        // Only schedule the redraw if one has not already been set.
-        if (isRedrawScheduled) return;
-        isRedrawScheduled = true;
-        var that = this;
-        var args = arguments;
-        pendingRedrawCall = requestIdleCallback(function () {
-            // Reset the boolean so future redraws can be set.
-            isRedrawScheduled = false;
-            redraw.apply(that, args);
-        }, { timeout: 1400 });
-    }
+    var scheduleRedraw = _throttle(redraw, 750);
+    // var isRedrawScheduled = false;
+    // var pendingRedrawCall;
+    // function scheduleRedraw() {
+    //     // Only schedule the redraw if one has not already been set.
+    //     if (isRedrawScheduled) return;
+    //     isRedrawScheduled = true;
+    //     var that = this;
+    //     var args = arguments;
+    //     pendingRedrawCall = window.requestIdleCallback(function () {
+    //         // Reset the boolean so future redraws can be set.
+    //         isRedrawScheduled = false;
+    //         redraw.apply(that, args);
+    //     }, { timeout: 1400 });
+    // }
 
     function cancelPendingRedraw() {
-        isRedrawScheduled = false;
-        window.cancelIdleCallback(pendingRedrawCall);
+        scheduleRedraw.cancel();
+        // isRedrawScheduled = false;
+        // window.cancelIdleCallback(pendingRedrawCall);
     }
 
     function map(selection) {
@@ -356,7 +359,7 @@ export function rendererMap(context) {
 
         if (ktoz(eventTransform.k * 2 * Math.PI) < minzoom) {
             surface.interrupt();
-            uiFlash().text(t('cannot_zoom'));
+            uiFlash().text(t('cannot_zoom'))();
             setZoom(context.minEditableZoom(), true);
             scheduleRedraw();
             dispatch.call('move', this, map);
@@ -650,7 +653,7 @@ export function rendererMap(context) {
 
         if (z2 < minzoom) {
             surface.interrupt();
-            uiFlash().text(t('cannot_zoom'));
+            uiFlash().text(t('cannot_zoom'))();
             z2 = context.minEditableZoom();
         }
 

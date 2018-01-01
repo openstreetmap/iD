@@ -80,113 +80,65 @@ export function uiMapData(context) {
         }
 
 
-        function clickMapillaryImages() {
-            toggleLayer('mapillary-images');
-            if (!showsLayer('mapillary-images')) {
-                setLayer('mapillary-signs', false);
+        function drawPhotoItems(selection) {
+            var photoKeys = ['mapillary-images', 'mapillary-signs', 'openstreetcam-images'];
+            var photoLayers = layers.all().filter(function(obj) { return photoKeys.indexOf(obj.id) !== -1; });
+            var data = photoLayers.filter(function(obj) { return obj.layer.supported(); });
+
+            function layerSupported(d) {
+                return d.layer && d.layer.supported();
             }
-        }
+            function layerEnabled(d) {
+                return layerSupported(d) && d.layer.enabled();
+            }
 
-
-        function clickMapillarySigns() {
-            toggleLayer('mapillary-signs');
-        }
-
-
-        function drawMapillaryItems(selection) {
-            var mapillaryImages = layers.layer('mapillary-images'),
-                mapillarySigns = layers.layer('mapillary-signs'),
-                supportsMapillaryImages = mapillaryImages && mapillaryImages.supported(),
-                supportsMapillarySigns = mapillarySigns && mapillarySigns.supported(),
-                showsMapillaryImages = supportsMapillaryImages && mapillaryImages.enabled(),
-                showsMapillarySigns = supportsMapillarySigns && mapillarySigns.enabled();
-
-            var mapillaryList = selection
-                .selectAll('.layer-list-mapillary')
+            var ul = selection
+                .selectAll('.layer-list-photos')
                 .data([0]);
 
-            mapillaryList = mapillaryList.enter()
+            ul = ul.enter()
                 .append('ul')
-                .attr('class', 'layer-list layer-list-mapillary')
-                .merge(mapillaryList);
+                .attr('class', 'layer-list layer-list-photos')
+                .merge(ul);
 
+            var li = ul.selectAll('.list-item-photos')
+                .data(data);
 
-            var mapillaryImageLayerItem = mapillaryList
-                .selectAll('.list-item-mapillary-images')
-                .data(supportsMapillaryImages ? [0] : []);
-
-            mapillaryImageLayerItem.exit()
+            li.exit()
                 .remove();
 
-            var enterImages = mapillaryImageLayerItem.enter()
+            var liEnter = li.enter()
                 .append('li')
-                .attr('class', 'list-item-mapillary-images');
+                .attr('class', function(d) { return 'list-item-photos list-item-' + d.id; });
 
-            var labelImages = enterImages
+            var labelEnter = liEnter
                 .append('label')
-                .call(tooltip()
-                    .title(t('mapillary_images.tooltip'))
-                    .placement('top'));
+                .each(function(d) {
+                    d3_select(this)
+                        .call(tooltip()
+                            .title(t(d.id.replace('-', '_') + '.tooltip'))
+                            .placement('top')
+                        );
+                });
 
-            labelImages
+            labelEnter
                 .append('input')
                 .attr('type', 'checkbox')
-                .on('change', clickMapillaryImages);
+                .on('change', function(d) { toggleLayer(d.id); });
 
-            labelImages
+            labelEnter
                 .append('span')
-                .text(t('mapillary_images.title'));
+                .text(function(d) { return t(d.id.replace('-', '_') + '.title'); });
 
 
-            var mapillarySignLayerItem = mapillaryList
-                .selectAll('.list-item-mapillary-signs')
-                .data(supportsMapillarySigns ? [0] : []);
+            // Update
+            li = li
+                .merge(liEnter);
 
-            mapillarySignLayerItem.exit()
-                .remove();
-
-            var enterSigns = mapillarySignLayerItem.enter()
-                .append('li')
-                .attr('class', 'list-item-mapillary-signs');
-
-            var labelSigns = enterSigns
-                .append('label')
-                .call(tooltip()
-                    .title(t('mapillary_signs.tooltip'))
-                    .placement('top'));
-
-            labelSigns
-                .append('input')
-                .attr('type', 'checkbox')
-                .on('change', clickMapillarySigns);
-
-            labelSigns
-                .append('span')
-                .text(t('mapillary_signs.title'));
-
-
-            // Updates
-            mapillaryImageLayerItem = mapillaryImageLayerItem
-                .merge(enterImages);
-
-            mapillaryImageLayerItem
-                .classed('active', showsMapillaryImages)
+            li
+                .classed('active', layerEnabled)
                 .selectAll('input')
-                .property('checked', showsMapillaryImages);
-
-
-            mapillarySignLayerItem = mapillarySignLayerItem
-                .merge(enterSigns);
-
-            mapillarySignLayerItem
-                .classed('active', showsMapillarySigns)
-                .selectAll('input')
-                .property('disabled', !showsMapillaryImages)
-                .property('checked', showsMapillarySigns);
-
-            mapillarySignLayerItem
-                .selectAll('label')
-                .classed('deemphasize', !showsMapillaryImages);
+                .property('checked', layerEnabled);
         }
 
 
@@ -377,7 +329,7 @@ export function uiMapData(context) {
         function update() {
             dataLayerContainer
                 .call(drawOsmItem)
-                .call(drawMapillaryItems)
+                .call(drawPhotoItems)
                 .call(drawGpxItem);
 
             fillList
@@ -540,11 +492,7 @@ export function uiMapData(context) {
 
         d3_select(document)
             .call(keybinding);
-
-        context.surface().on('mousedown.map_data-outside', hidePanel);
-        context.container().on('mousedown.map_data-outside', hidePanel);
     }
-
 
     return map_data;
 }

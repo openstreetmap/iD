@@ -13,22 +13,28 @@ export function uiSourceSwitch(context) {
 
     function click() {
         d3_event.preventDefault();
+
+        var osm = context.connection();
+        if (!osm) return;
+
         if (context.inIntro()) return;
 
         if (context.history().hasChanges() &&
             !window.confirm(t('source_switch.lose_changes'))) return;
 
-        var live = d3_select(this)
+        var isLive = d3_select(this)
             .classed('live');
 
-        context.history().clearSaved();
-        context.connection().switch(live ? keys[1] : keys[0]);
+        isLive = !isLive;
         context.enter(modeBrowse(context));
-        context.flush();
+        context.history().clearSaved();          // remove saved history
+        context.flush();                         // remove stored data
 
         d3_select(this)
-            .text(live ? t('source_switch.dev') : t('source_switch.live'))
-            .classed('live', !live);
+            .text(isLive ? t('source_switch.live') : t('source_switch.dev'))
+            .classed('live', isLive);
+
+        osm.switch(isLive ? keys[0] : keys[1]);  // switch connection (warning: dispatches 'change' event)
     }
 
     var sourceSwitch = function(selection) {

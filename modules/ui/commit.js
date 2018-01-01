@@ -228,7 +228,8 @@ export function uiCommit(context) {
 
         buttonSection.selectAll('.cancel-button')
             .on('click.cancel', function() {
-                dispatch.call('cancel');
+                var selectedID = commitChanges.entityID();
+                dispatch.call('cancel', this, selectedID);
             });
 
         buttonSection.selectAll('.save-button')

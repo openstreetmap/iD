@@ -1,0 +1,13 @@
+{
+    "key": "switch",
+    "type": "combo",
+    "label": "Type",
+    "strings": {
+        "options": {
+            "mechanical": "Mechanical",
+            "circuit_breaker": "Circuit Breaker",
+            "disconnector": "Disconnector",
+            "earthing": "Earthing"
+        }
+    }
+}

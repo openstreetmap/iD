@@ -10,6 +10,6 @@
         "highway/footway",
         "highway/cycleway",
         "highway/bridleway",
-        "highway/pedestrian"
+        "highway/pedestrian_line"
     ]
 }

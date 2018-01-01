@@ -1,0 +1,35 @@
+{
+    "icon": "aerialway",
+    "fields": [
+        "name",
+        "ref_platform",
+        "network",
+        "operator",
+        "surface",
+        "lit",
+        "bench",
+        "shelter"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "public_transport": "platform",
+        "aerialway": "yes"
+    },
+    "reference": {
+        "key": "public_transport",
+        "value": "platform"
+    },
+    "terms": [
+        "aerialway",
+        "cable car",
+        "platform",
+        "public transit",
+        "public transportation",
+        "transit",
+        "transportation"
+    ],
+    "name": "Aerialway Stop / Platform"
+}

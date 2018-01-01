@@ -2613,12 +2613,26 @@ div.full-screen > button:hover {
 }
 
 .help-wrap .left-content .body p code {
-    padding:2px 4px;
-    background:#eee;
+    padding: 3px 4px;
+    font-size: 12px;
+    color: #555;
+    vertical-align: baseline;
+    background-color: #f6f6f6;
+    border: solid 1px #ccc;
+    margin: 0 2px;
+    border-bottom-color: #bbb;
+    border-radius: 3px;
+    box-shadow: inset 0 -1px 0 #bbb;
+}
+
+.help-wrap .left-content .icon.pre-text {
+    vertical-align: text-top;
+    margin-right: 0;
+    margin-left: 0;
+    display: inline-block;
 }
 
 .help-wrap .toc {
-    /* This is two columns, 41.66666 x .4 = 16.6666 */
     width:40%;
     float:right;
     margin-left: 20px;
@@ -2629,7 +2643,7 @@ div.full-screen > button:hover {
 .help-wrap .toc li a,
 .help-wrap .nav a {
     display: block;
-    border: 1px solid #CCC;
+    border: 1px solid #ccc;
     padding: 5px 10px;
 }
 
@@ -2643,7 +2657,7 @@ div.full-screen > button:hover {
 }
 
 .help-wrap .toc li a.selected {
-    background: #E8EBFF;
+    background: #e8ebff;
 }
 
 .help-wrap .toc li:first-child a {
@@ -2651,7 +2665,7 @@ div.full-screen > button:hover {
 }
 
 .help-wrap .toc li:nth-last-child(3) a {
-    border-bottom: 1px solid #CCC;
+    border-bottom: 1px solid #ccc;
     border-radius: 0 0 4px 4px
 }
 
@@ -2724,7 +2738,7 @@ img.tile {
     padding: 5px;
     border-radius: 3px;
     z-index: 2;
-    margin-left: -50px;
+    margin-left: -70px;
     margin-top: -20px;
 
     transform-origin:0 0;
@@ -2945,21 +2959,32 @@ img.tile-removing {
     position: relative;
 }
 
+.panel-content li span {
+    display: inline-block;
+    white-space: nowrap;
+    margin: 0 8px;
+}
+
 .panel-content .button {
     display: inline-block;
     background: #7092ff;
     border-radius: 2px;
     padding: 0 4px;
     margin-top: 10px;
+    margin-right: 10px;
     color: white;
+}
+[dir='rtl'] .panel-content .button {
+    margin-right: auto;
+    margin-left: 10px;
 }
 
 .panel-content-history .links a {
-    margin-left: 10px;
+    margin-left: 8px;
 }
 [dir='rtl'] .panel-content-history .links a {
     margin-left: auto;
-    margin-right: 10px;
+    margin-right: 8px;
 }
 
 .panel-content-history .view-history-on-osm {
@@ -3033,13 +3058,13 @@ img.tile-removing {
     margin: 0 3px;
 }
 
-
 #footer {
     pointer-events: all;
     display: block;
     height: 30px;
 }
 
+/* footer flash message */
 
 #flash-wrap {
     display: flex;
@@ -3052,7 +3077,7 @@ img.tile-removing {
     left: 0;
 }
 
-#flash-wrap .content {
+.flash-content {
     display: flex;
     flex: 1 0 auto;
     flex-flow: row nowrap;
@@ -3061,15 +3086,38 @@ img.tile-removing {
     height: 30px;
 }
 
-
-#flash-wrap svg.operation-icon {
+.flash-icon {
     flex: 0 0 auto;
     width: 20px;
     height: 20px;
     margin: 0 8px;
 }
 
-#flash-wrap div.operation-tip {
+.flash-icon circle {
+    fill: #eee;
+}
+.flash-icon.disabled circle {
+    cursor: auto;
+    fill: rgba(255,255,255,0.7);
+}
+
+.flash-icon use {
+    color: #222;
+}
+.flash-icon.disabled use {
+    color: rgba(32,32,32,0.7);
+}
+
+.flash-icon.operation use {
+    fill: #222;
+    color: #79f;
+}
+.flash-icon.operation.disabled use {
+    fill: rgba(32,32,32,0.7);
+    color: rgba(40,40,40,0.7);
+}
+
+.flash-text {
     flex: 1 1 auto;
 }
 
@@ -3098,6 +3146,8 @@ img.tile-removing {
     -webkit-transition: bottom 75ms linear;
 }
 
+
+/* footer scale */
 
 #scale-block {
     vertical-align: bottom;
@@ -3483,11 +3533,11 @@ img.tile-removing {
     box-shadow: inset 0 -1px 0 #bbb;
 }
 
-.modal-shortcuts .shortcut-keys svg.mouseclick use.left {
+svg.mouseclick use.left {
     fill: rgba(112, 146, 255, 1);
     color: rgba(112, 146, 255, 0);
 }
-.modal-shortcuts .shortcut-keys svg.mouseclick use.right {
+svg.mouseclick use.right {
     fill: rgba(112, 146, 255, 0);
     color: rgba(112, 146, 255, 1);
 }
@@ -3649,8 +3699,7 @@ img.tile-removing {
 
 .notice {
     position: absolute;
-    top: 50%;
-    bottom: 50%;
+    top: 45px;
     left: 0;
     right: 0;
     text-align: center;
@@ -3659,7 +3708,7 @@ img.tile-removing {
 .notice .zoom-to {
     margin: auto;
     width: 300px;
-    height: 80px;
+    height: 70px;
     font-size: 150%;
     border-radius: 8px;
 }

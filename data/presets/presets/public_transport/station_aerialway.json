@@ -1,0 +1,38 @@
+{
+    "icon": "aerialway",
+    "fields": [
+        "name",
+        "network",
+        "operator",
+        "aerialway/access",
+        "aerialway/summer/access",
+        "elevation",
+        "building_area",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "public_transport": "station",
+        "aerialway": "yes"
+    },
+    "reference": {
+        "key": "aerialway",
+        "value": "station"
+    },
+    "terms": [
+        "aerialway",
+        "cable car",
+        "public transit",
+        "public transportation",
+        "station",
+        "terminal",
+        "transit",
+        "transportation"
+    ],
+    "name": "Aerialway Station"
+}

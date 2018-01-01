@@ -1,0 +1,36 @@
+{
+    "icon": "highway-footway",
+    "fields": [
+        "name",
+        "ref_platform",
+        "network",
+        "operator",
+        "surface",
+        "lit",
+        "bench",
+        "shelter"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "public_transport": "platform",
+        "ferry": "yes"
+    },
+    "reference": {
+        "key": "public_transport",
+        "value": "platform"
+    },
+    "terms": [
+        "boat",
+        "dock",
+        "ferry",
+        "pier",
+        "platform",
+        "public transit",
+        "public transportation",
+        "transit",
+        "transportation"
+    ],
+    "name": "Ferry Stop / Platform"
+}

@@ -1,0 +1,44 @@
+{
+    "icon": "bus",
+    "fields": [
+        "name",
+        "ref_platform",
+        "network",
+        "operator",
+        "surface",
+        "lit",
+        "bench",
+        "shelter"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "public_transport": "platform",
+        "bus": "yes"
+    },
+    "addTags": {
+        "public_transport": "platform",
+        "bus": "yes",
+        "highway": "bus_stop"
+    },
+    "removeTags": {
+        "public_transport": "platform",
+        "bus": "yes",
+        "highway": "bus_stop"
+    },
+    "reference": {
+        "key": "public_transport",
+        "value": "platform"
+    },
+    "terms": [
+        "bus",
+        "platform",
+        "public transit",
+        "public transportation",
+        "transit",
+        "transportation"
+    ],
+    "name": "Bus Stop / Platform"
+}

@@ -1,7 +1,7 @@
 {
     "key": "transformer",
     "type": "combo",
-    "label": "Type of Transformer",
+    "label": "Type",
     "strings": {
         "options": {
             "distribution": "Distribution",

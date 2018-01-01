@@ -8,12 +8,11 @@
     ],
     "geometry": [
         "point",
-        "vertex",
         "area"
     ],
     "tags": {
         "office": "architect"
     },
     "terms": [],
-    "name": "Architect"
+    "name": "Architect Office"
 }

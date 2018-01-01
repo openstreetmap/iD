@@ -1,0 +1,22 @@
+{
+    "icon": "poi-tram",
+    "fields": [
+        "name",
+        "network",
+        "operator"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "railway": "tram_stop"
+    },
+    "terms": [
+        "light rail",
+        "streetcar",
+        "tram",
+        "trolley"
+    ],
+    "name": "Tram Stopping Position",
+    "searchable": false
+}

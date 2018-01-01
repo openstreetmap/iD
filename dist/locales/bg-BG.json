@@ -212,7 +212,6 @@
             "localized_translation_language": "Изберете език",
             "localized_translation_name": "Име"
         },
-        "zoom_in_edit": "Приближаване за редакция",
         "logout": "изход",
         "loading_auth": "Свързване с OpenStreetMap...",
         "report_a_bug": "Докладвай грешка",
@@ -399,8 +398,7 @@
         "splash": {
             "welcome": "Добре дошли в iD редактора за OpenStreetMap",
             "text": "iD e лесен, но мощен инструмент за попълване на най-добрата свободна карта на света. Това е версия {version}. За повече информация вижте {website} и докладвайте за бъгове в {github}.",
-            "walkthrough": "Започнете опознавателната обиколка",
-            "start": "Редактирайте сега"
+            "walkthrough": "Започнете опознавателната обиколка"
         },
         "source_switch": {
             "live": "live",
@@ -421,10 +419,6 @@
             "untagged_area_tooltip": "Изберете типът обект който описва каква е тази площ.",
             "tag_suggests_area": "Тагът {tag} предполага линията да е площен обект, но тя не е",
             "deprecated_tags": "Отхвърлени тагове: {tags}"
-        },
-        "zoom": {
-            "in": "Увеличи",
-            "out": "Намали"
         },
         "cannot_zoom": "Не можете да намалявате повече в текущия режим.",
         "full_screen": "Превключи на Цял Екран",
@@ -1541,9 +1535,6 @@
                 },
                 "tourism/caravan_site": {
                     "name": "Паркинг за каравани"
-                },
-                "tourism/chalet": {
-                    "name": "Бунгала"
                 },
                 "tourism/guest_house": {
                     "name": "Къща за гости"

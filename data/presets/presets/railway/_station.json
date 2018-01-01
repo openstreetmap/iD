@@ -1,0 +1,27 @@
+{
+    "icon": "rail",
+    "fields": [
+        "name",
+        "network",
+        "operator",
+        "address",
+        "building_area",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
+    ],
+    "geometry": [
+        "point",
+        "vertex",
+        "area"
+    ],
+    "tags": {
+        "railway": "station"
+    },
+    "terms": [
+        "train station",
+        "station"
+    ],
+    "name": "Train Station",
+    "searchable": false
+}

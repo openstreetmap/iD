@@ -13,6 +13,7 @@
         "landuse/meadow",
         "landuse/aquaculture",
         "landuse/cemetery",
-        "landuse/military"
+        "landuse/military",
+        "landuse/religious"
     ]
 }

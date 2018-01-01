@@ -1,0 +1,22 @@
+{
+    "icon": "garden",
+    "fields": [
+        "name",
+        "operator"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "terms": [
+        "flower",
+        "greenhouse",
+        "horticulture",
+        "grow",
+        "vivero"
+    ],
+    "tags": {
+        "landuse": "greenhouse_horticulture"
+    },
+    "matchScore": 0.9,
+    "name": "Greenhouse Horticulture"
+}
