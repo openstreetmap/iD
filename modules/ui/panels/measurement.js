@@ -42,6 +42,14 @@ export function uiPanelMeasurement(context) {
         return result;
     }
 
+    function nodeCount(feature) {
+      if (feature.type === 'LineString') return feature.coordinates.length;
+
+      if (feature.type === 'Polygon') {
+          return feature.coordinates[0].length - 1;
+      }
+    }
+
 
     function displayLength(m) {
         var d = m * (isImperial ? 3.28084 : 1),
@@ -170,6 +178,15 @@ export function uiPanelMeasurement(context) {
                     (closed ? t('info_panels.measurement.closed') + ' ' : '') + t('geometry.' + geometry)
                 );
 
+            if (entity.type !== 'relation') {
+                list
+                    .append('li')
+                    .text(t('info_panels.measurement.node_count') + ':')
+                    .append('span')
+                    .text(nodeCount(feature)
+                    );
+            }
+
             if (closed) {
                 var area = steradiansToSqmeters(entity.area(resolver));
                 list
@@ -178,6 +195,7 @@ export function uiPanelMeasurement(context) {
                     .append('span')
                     .text(displayArea(area));
             }
+
 
             list
                 .append('li')
@@ -192,7 +210,6 @@ export function uiPanelMeasurement(context) {
                 .text(
                     centroid[1].toFixed(OSM_PRECISION) + ', ' + centroid[0].toFixed(OSM_PRECISION)
                 );
-
 
             var toggle  = isImperial ? 'imperial' : 'metric';
 

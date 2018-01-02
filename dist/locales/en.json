@@ -397,7 +397,8 @@
                 "centroid": "Centroid",
                 "location": "Location",
                 "metric": "Metric",
-                "imperial": "Imperial"
+                "imperial": "Imperial",
+                "node_count": "Number of nodes"
             }
         },
         "geometry": {
