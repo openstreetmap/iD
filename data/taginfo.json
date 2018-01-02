@@ -361,6 +361,10 @@
         },
         {
             "key": "amenity",
+            "value": "love_hotel"
+        },
+        {
+            "key": "amenity",
             "value": "marketplace"
         },
         {

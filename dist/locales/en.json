@@ -2981,6 +2981,10 @@
                     "name": "Library",
                     "terms": "book"
                 },
+                "amenity/love_hotel": {
+                    "name": "Love Hotel",
+                    "terms": ""
+                },
                 "amenity/marketplace": {
                     "name": "Marketplace",
                     "terms": ""
