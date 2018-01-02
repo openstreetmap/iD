@@ -3,7 +3,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { geoRoundCoords } from '../geo';
+import { geoVecFloor } from '../geo';
 import { textDirection } from '../util/locale';
 import { uiTooltipHtml } from './tooltipHtml';
 
@@ -81,7 +81,7 @@ export function uiEditMenu(context, operations) {
             .attr('class', function (d) { return 'edit-menu-item edit-menu-item-' + d.id; })
             .classed('disabled', function (d) { return d.disabled(); })
             .attr('transform', function (d, i) {
-                return 'translate(' + geoRoundCoords([
+                return 'translate(' + geoVecFloor([
                     0,
                     m + i * buttonHeight
                 ]).join(',') + ')';

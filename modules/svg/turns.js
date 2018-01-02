@@ -18,7 +18,8 @@ export function svgTurns(projection) {
                 (!turn.indirect_restriction && /^only_/.test(restriction) ? 'only' : 'no') + u;
         }
 
-        var groups = selection.selectAll('.layer-hit').selectAll('g.turn')
+        var layer = selection.selectAll('.layer-points .layer-points-turns');
+        var groups = layer.selectAll('g.turn')
             .data(turns, key);
 
         groups.exit()

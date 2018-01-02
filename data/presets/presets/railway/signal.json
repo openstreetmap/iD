@@ -4,6 +4,11 @@
         "point",
         "vertex"
     ],
+    "fields": [
+        "railway/position",
+        "railway/signal/direction",
+        "ref"
+    ],
     "tags": {
         "railway": "signal"
     },

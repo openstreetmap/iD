@@ -394,46 +394,10 @@
             "label": "Capacity",
             "placeholder": "50, 100, 200..."
         },
-        "cardinal_direction": {
-            "key": "direction",
-            "type": "combo",
-            "label": "Direction",
-            "strings": {
-                "options": {
-                    "N": "North",
-                    "E": "East",
-                    "S": "South",
-                    "W": "West",
-                    "NE": "Northeast",
-                    "SE": "Southeast",
-                    "SW": "Southwest",
-                    "NW": "Northwest",
-                    "NNE": "North-northeast",
-                    "ENE": "East-northeast",
-                    "ESE": "East-southeast",
-                    "SSE": "South-southeast",
-                    "SSW": "South-southwest",
-                    "WSW": "West-southwest",
-                    "WNW": "West-northwest",
-                    "NNW": "North-northwest"
-                }
-            }
-        },
         "castle_type": {
             "key": "castle_type",
             "type": "combo",
             "label": "Type"
-        },
-        "clock_direction": {
-            "key": "direction",
-            "type": "combo",
-            "label": "Direction",
-            "strings": {
-                "options": {
-                    "clockwise": "Clockwise",
-                    "anticlockwise": "Counterclockwise"
-                }
-            }
         },
         "clothes": {
             "key": "clothes",
@@ -630,6 +594,60 @@
                 "4",
                 "5"
             ]
+        },
+        "direction_cardinal": {
+            "key": "direction",
+            "type": "combo",
+            "label": "Direction",
+            "strings": {
+                "options": {
+                    "N": "North",
+                    "E": "East",
+                    "S": "South",
+                    "W": "West",
+                    "NE": "Northeast",
+                    "SE": "Southeast",
+                    "SW": "Southwest",
+                    "NW": "Northwest",
+                    "NNE": "North-northeast",
+                    "ENE": "East-northeast",
+                    "ESE": "East-southeast",
+                    "SSE": "South-southeast",
+                    "SSW": "South-southwest",
+                    "WSW": "West-southwest",
+                    "WNW": "West-northwest",
+                    "NNW": "North-northwest"
+                }
+            }
+        },
+        "direction_clock": {
+            "key": "direction",
+            "type": "combo",
+            "label": "Direction",
+            "strings": {
+                "options": {
+                    "clockwise": "Clockwise",
+                    "anticlockwise": "Counterclockwise"
+                }
+            }
+        },
+        "direction_vertex": {
+            "key": "direction",
+            "type": "combo",
+            "label": "Direction",
+            "strings": {
+                "options": {
+                    "forward": "Forward",
+                    "backward": "Backward",
+                    "both": "Both / All"
+                }
+            }
+        },
+        "direction": {
+            "key": "direction",
+            "type": "number",
+            "label": "Direction (Degrees Clockwise)",
+            "placeholder": "45, 90, 180, 270"
         },
         "display": {
             "key": "display",
@@ -1140,12 +1158,6 @@
             "type": "typeCombo",
             "label": "Type"
         },
-        "milestone_position": {
-            "key": "railway:position",
-            "type": "text",
-            "placeholder": "Distance to one decimal (123.4)",
-            "label": "Milestone Position"
-        },
         "monitoring_multi": {
             "key": "monitoring:",
             "type": "multiCombo",
@@ -1321,17 +1333,6 @@
             "label": "Par",
             "placeholder": "3, 4, 5..."
         },
-        "parallel_direction": {
-            "key": "direction",
-            "type": "combo",
-            "label": "Direction",
-            "strings": {
-                "options": {
-                    "forward": "Forward",
-                    "backward": "Backward"
-                }
-            }
-        },
         "park_ride": {
             "key": "park_ride",
             "type": "check",
@@ -1482,6 +1483,24 @@
             "key": "railway",
             "type": "typeCombo",
             "label": "Type"
+        },
+        "railway/position": {
+            "key": "railway:position",
+            "type": "text",
+            "placeholder": "Distance to one decimal (123.4)",
+            "label": "Milestone Position"
+        },
+        "railway/signal/direction": {
+            "key": "railway:signal:direction",
+            "type": "combo",
+            "label": "Direction",
+            "strings": {
+                "options": {
+                    "forward": "Forward",
+                    "backward": "Backward",
+                    "both": "Both / All"
+                }
+            }
         },
         "rating": {
             "key": "rating",
@@ -2004,6 +2023,18 @@
             "type": "combo",
             "label": "Type",
             "default": "signal"
+        },
+        "traffic_signals/direction": {
+            "key": "traffic_signals:direction",
+            "type": "combo",
+            "label": "Direction",
+            "strings": {
+                "options": {
+                    "forward": "Forward",
+                    "backward": "Backward",
+                    "both": "Both / All"
+                }
+            }
         },
         "trail_visibility": {
             "key": "trail_visibility",

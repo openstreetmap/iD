@@ -1,12 +1,12 @@
 describe('iD.svgLayers', function () {
-    var context, container,
-        projection = d3.geoProjection(function(x, y) { return [x, -y]; })
-            .translate([0, 0])
-            .scale(180 / Math.PI)
-            .clipExtent([[0, 0], [Infinity, Infinity]]);
+    var context, container;
+    var projection = d3.geoProjection(function(x, y) { return [x, -y]; })
+        .translate([0, 0])
+        .scale(iD.geoZoomToScale(17))
+        .clipExtent([[0, 0], [Infinity, Infinity]]);
 
     beforeEach(function () {
-        context = iD.Context();
+        context = iD.coreContext();
         container = d3.select(document.createElement('div'));
     });
 

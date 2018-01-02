@@ -1,23 +1,39 @@
-export { geoAngle } from './geo.js';
-export { geoChooseEdge } from './geo.js';
-export { geoCross } from './geo.js';
-export { geoEdgeEqual } from './geo.js';
-export { geoEuclideanDistance } from './geo.js';
 export { geoExtent } from './extent.js';
-export { geoInterp } from './geo.js';
-export { geoRawMercator } from './raw_mercator.js';
-export { geoRoundCoords } from './geo.js';
-export { geoRotate } from './geo.js';
+
 export { geoLatToMeters } from './geo.js';
-export { geoLineIntersection } from './geo.js';
 export { geoLonToMeters } from './geo.js';
 export { geoMetersToLat } from './geo.js';
 export { geoMetersToLon } from './geo.js';
 export { geoMetersToOffset } from './geo.js';
 export { geoOffsetToMeters } from './geo.js';
-export { geoPathIntersections } from './geo.js';
-export { geoPathLength } from './geo.js';
-export { geoPointInPolygon } from './geo.js';
-export { geoPolygonContainsPolygon } from './geo.js';
-export { geoPolygonIntersectsPolygon } from './geo.js';
+export { geoScaleToZoom } from './geo.js';
 export { geoSphericalDistance } from './geo.js';
+export { geoZoomToScale } from './geo.js';
+
+export { geoAngle } from './geom.js';
+export { geoChooseEdge } from './geom.js';
+export { geoEdgeEqual } from './geom.js';
+export { geoHasSelfIntersections } from './geom.js';
+export { geoRotate } from './geom.js';
+export { geoLineIntersection } from './geom.js';
+export { geoPathHasIntersections } from './geom.js';
+export { geoPathIntersections } from './geom.js';
+export { geoPathLength } from './geom.js';
+export { geoPointInPolygon } from './geom.js';
+export { geoPolygonContainsPolygon } from './geom.js';
+export { geoPolygonIntersectsPolygon } from './geom.js';
+export { geoViewportEdge } from './geom.js';
+
+export { geoRawMercator } from './raw_mercator.js';
+
+export { geoVecAdd } from './vector.js';
+export { geoVecAngle } from './vector.js';
+export { geoVecCross } from './vector.js';
+export { geoVecDot } from './vector.js';
+export { geoVecEqual } from './vector.js';
+export { geoVecFloor } from './vector.js';
+export { geoVecInterp } from './vector.js';
+export { geoVecLength } from './vector.js';
+export { geoVecSubtract } from './vector.js';
+export { geoVecScale } from './vector.js';
+

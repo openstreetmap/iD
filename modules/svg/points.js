@@ -1,6 +1,5 @@
-import _filter from 'lodash-es/filter';
-
 import { dataFeatureIcons } from '../../data';
+import { geoScaleToZoom } from '../geo';
 import { osmEntity } from '../osm';
 import { svgPointTransform, svgTagClasses } from './index';
 
@@ -19,19 +18,77 @@ export function svgPoints(projection, context) {
     }
 
 
-    return function drawPoints(selection, graph, entities, filter) {
-        var wireframe = context.surface().classed('fill-wireframe'),
-            points = wireframe ? [] : _filter(entities, function(e) {
-                return e.geometry(graph) === 'point';
+    // Avoid exit/enter if we're just moving stuff around.
+    // The node will get a new version but we only need to run the update selection.
+    function fastEntityKey(d) {
+        var mode = context.mode();
+        var isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
+        return isMoving ? d.id : osmEntity.key(d);
+    }
+
+
+    function drawTargets(selection, graph, entities, filter) {
+        var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
+        var getTransform = svgPointTransform(projection).geojson;
+        var activeID = context.activeID();
+        var data = [];
+
+        entities.forEach(function(node) {
+            if (activeID === node.id) return;   // draw no target on the activeID
+
+            data.push({
+                type: 'Feature',
+                id: node.id,
+                properties: {
+                    target: true,
+                    entity: node
+                },
+                geometry: node.asGeoJSON()
             });
+        });
+
+        var targets = selection.selectAll('.point.target')
+            .filter(function(d) { return filter(d.properties.entity); })
+            .data(data, function key(d) { return d.id; });
+
+        // exit
+        targets.exit()
+            .remove();
+
+        // enter/update
+        targets.enter()
+            .append('rect')
+            .attr('x', -10)
+            .attr('y', -26)
+            .attr('width', 20)
+            .attr('height', 30)
+            .merge(targets)
+            .attr('class', function(d) { return 'node point target ' + fillClass + d.id; })
+            .attr('transform', getTransform);
+    }
+
+
+    function drawPoints(selection, graph, entities, filter) {
+        var wireframe = context.surface().classed('fill-wireframe');
+        var zoom = geoScaleToZoom(projection.scale());
+
+        // points with a direction will render as vertices at higher zooms
+        function renderAsPoint(entity) {
+            return entity.geometry(graph) === 'point' &&
+                !(zoom >= 18 && entity.directions(graph, projection).length);
+        }
+
+        // all points will render as vertices in wireframe mode too
+        var points = wireframe ? [] : entities.filter(renderAsPoint);
 
         points.sort(sortY);
 
-        var layer = selection.selectAll('.layer-hit');
+
+        var layer = selection.selectAll('.layer-points .layer-points-points');
 
         var groups = layer.selectAll('g.point')
             .filter(filter)
-            .data(points, osmEntity.key);
+            .data(points, fastEntityKey);
 
         groups.exit()
             .remove();
@@ -41,20 +98,24 @@ export function svgPoints(projection, context) {
             .attr('class', function(d) { return 'node point ' + d.id; })
             .order();
 
-        enter.append('path')
+        enter
+            .append('path')
             .call(markerPath, 'shadow');
 
-        enter.append('ellipse')
+        enter
+            .append('ellipse')
             .attr('cx', 0.5)
             .attr('cy', 1)
             .attr('rx', 6.5)
             .attr('ry', 3)
             .attr('class', 'stroke');
 
-        enter.append('path')
+        enter
+            .append('path')
             .call(markerPath, 'stroke');
 
-        enter.append('use')
+        enter
+            .append('use')
             .attr('transform', 'translate(-5, -19)')
             .attr('class', 'icon')
             .attr('width', '11px')
@@ -71,8 +132,8 @@ export function svgPoints(projection, context) {
         groups.select('.stroke');
         groups.select('.icon')
             .attr('xlink:href', function(entity) {
-                var preset = context.presets().match(entity, graph),
-                    picon = preset && preset.icon;
+                var preset = context.presets().match(entity, graph);
+                var picon = preset && preset.icon;
 
                 if (!picon)
                     return '';
@@ -81,5 +142,13 @@ export function svgPoints(projection, context) {
                     return '#' + picon + (isMaki ? '-11' : '');
                 }
             });
-    };
+
+
+        // touch targets
+        selection.selectAll('.layer-points .layer-points-targets')
+            .call(drawTargets, graph, points, filter);
+    }
+
+
+    return drawPoints;
 }

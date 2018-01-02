@@ -59,7 +59,8 @@ describe('iD.Context', function() {
                     collision: false,
                     imagery: false,
                     imperial: false,
-                    driveLeft: false
+                    driveLeft: false,
+                    target: false
                 };
 
             expect(context.debugFlags()).to.eql(flags);

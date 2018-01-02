@@ -1,6 +1,6 @@
 {
     "fields": [
-       "parallel_direction",
+       "direction",
        "lit"
     ],
     "geometry": [

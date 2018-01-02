@@ -183,33 +183,55 @@ export function rendererMap(context) {
                 if (map.editable() && !transformed) {
                     var hover = d3_event.target.__data__;
                     surface.selectAll('.data-layer-osm')
-                        .call(drawVertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
-                    dispatch.call('drawn', this, {full: false});
+                        .call(drawVertices.drawHover, context.graph(), hover, map.extent());
+                    dispatch.call('drawn', this, { full: false });
                 }
             })
             .on('mouseout.vertices', function() {
                 if (map.editable() && !transformed) {
                     var hover = d3_event.relatedTarget && d3_event.relatedTarget.__data__;
                     surface.selectAll('.data-layer-osm')
-                        .call(drawVertices.drawHover, context.graph(), hover, map.extent(), map.zoom());
-                    dispatch.call('drawn', this, {full: false});
+                        .call(drawVertices.drawHover, context.graph(), hover, map.extent());
+                    dispatch.call('drawn', this, { full: false });
                 }
             });
 
         supersurface
             .call(context.background());
 
-        context.on('enter.map', function() {
+        context.on('enter.map',  function() {
             if (map.editable() && !transformed) {
-                var all = context.intersects(map.extent()),
-                    filter = utilFunctor(true),
-                    graph = context.graph();
 
-                all = context.features().filter(all, graph);
+                // redraw immediately any objects affected by a change in selectedIDs.
+                var graph = context.graph();
+                var selectedAndParents = {};
+                context.selectedIDs().forEach(function(id) {
+                    var entity = graph.hasEntity(id);
+                    if (entity) {
+                        selectedAndParents[entity.id] = entity;
+                        if (entity.type === 'node') {
+                            graph.parentWays(entity).forEach(function(parent) {
+                                selectedAndParents[parent.id] = parent;
+                            });
+                        }
+                    }
+                });
+                var data = _values(selectedAndParents);
+                var filter = function(d) { return d.id in selectedAndParents; };
+
+                data = context.features().filter(data, graph);
+
                 surface.selectAll('.data-layer-osm')
-                    .call(drawVertices, graph, all, filter, map.extent(), map.zoom())
-                    .call(drawMidpoints, graph, all, filter, map.trimmedExtent());
-                dispatch.call('drawn', this, {full: false});
+                    .call(drawVertices.drawSelected, graph, map.extent())
+                    .call(drawLines, graph, data, filter)
+                    .call(drawAreas, graph, data, filter)
+                    .call(drawMidpoints, graph, data, filter, map.trimmedExtent());
+
+                dispatch.call('drawn', this, { full: false });
+
+
+                // redraw everything else later
+                scheduleRedraw();
             }
         });
 
@@ -265,10 +287,13 @@ export function rendererMap(context) {
 
 
     function drawVector(difference, extent) {
-        var graph = context.graph(),
-            features = context.features(),
-            all = context.intersects(map.extent()),
-            data, filter;
+        var mode = context.mode();
+        var graph = context.graph();
+        var features = context.features();
+        var all = context.intersects(map.extent());
+        var fullRedraw = false;
+        var data;
+        var filter;
 
         if (difference) {
             var complete = difference.complete(map.extent());
@@ -290,18 +315,26 @@ export function rendererMap(context) {
 
             } else {
                 data = all;
+                fullRedraw = true;
                 filter = utilFunctor(true);
             }
         }
 
         data = features.filter(data, graph);
 
+        if (mode && mode.id === 'select') {
+            // update selected vertices - the user might have just double-clicked a way,
+            // creating a new vertex, triggering a partial redraw without a mode change
+            surface.selectAll('.data-layer-osm')
+                .call(drawVertices.drawSelected, graph, map.extent());
+        }
+
         surface.selectAll('.data-layer-osm')
-            .call(drawVertices, graph, data, filter, map.extent(), map.zoom())
+            .call(drawVertices, graph, data, filter, map.extent(), fullRedraw)
             .call(drawLines, graph, data, filter)
             .call(drawAreas, graph, data, filter)
             .call(drawMidpoints, graph, data, filter, map.trimmedExtent())
-            .call(drawLabels, graph, data, filter, dimensions, !difference && !extent)
+            .call(drawLabels, graph, data, filter, dimensions, fullRedraw)
             .call(drawPoints, graph, data, filter);
 
         dispatch.call('drawn', this, {full: true});

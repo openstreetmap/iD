@@ -1,12 +1,8 @@
-import { geoPath as d3_geoPath } from 'd3-geo';
 import { select as d3_select } from 'd3-selection';
 
 import { geoPolygonIntersectsPolygon } from '../geo';
-import {
-    data,
-    dataImperial,
-    dataDriveLeft
-} from '../../data';
+import { data, dataImperial, dataDriveLeft } from '../../data';
+import { svgPath } from './index';
 
 
 export function svgDebug(projection, context) {
@@ -21,13 +17,12 @@ export function svgDebug(projection, context) {
     }
 
     function drawDebug(selection) {
-        var showsTile = context.getDebug('tile'),
-            showsCollision = context.getDebug('collision'),
-            showsImagery = context.getDebug('imagery'),
-            showsImperial = context.getDebug('imperial'),
-            showsDriveLeft = context.getDebug('driveLeft'),
-            path = d3_geoPath(projection);
-
+        var showsTile = context.getDebug('tile');
+        var showsCollision = context.getDebug('collision');
+        var showsImagery = context.getDebug('imagery');
+        var showsImperial = context.getDebug('imperial');
+        var showsDriveLeft = context.getDebug('driveLeft');
+        var showsTouchTargets = context.getDebug('target');
 
         var debugData = [];
         if (showsTile) {
@@ -44,6 +39,9 @@ export function svgDebug(projection, context) {
         }
         if (showsDriveLeft) {
             debugData.push({ class: 'green', label: 'driveLeft' });
+        }
+        if (showsTouchTargets) {
+            debugData.push({ class: 'pink', label: 'touchTargets' });
         }
 
 
@@ -84,14 +82,14 @@ export function svgDebug(projection, context) {
             .merge(layer);
 
 
-        var extent = context.map().extent(),
-            dataImagery = data.imagery || [],
-            availableImagery = showsImagery && multipolygons(dataImagery.filter(function(source) {
-                if (!source.polygon) return false;
-                return source.polygon.some(function(polygon) {
-                    return geoPolygonIntersectsPolygon(polygon, extent, true);
-                });
-            }));
+        var extent = context.map().extent();
+        var dataImagery = data.imagery || [];
+        var availableImagery = showsImagery && multipolygons(dataImagery.filter(function(source) {
+            if (!source.polygon) return false;
+            return source.polygon.some(function(polygon) {
+                return geoPolygonIntersectsPolygon(polygon, extent, true);
+            });
+        }));
 
         var imagery = layer.selectAll('path.debug-imagery')
             .data(showsImagery ? availableImagery : []);
@@ -130,7 +128,7 @@ export function svgDebug(projection, context) {
 
         // update
         layer.selectAll('path')
-            .attr('d', path);
+            .attr('d', svgPath(projection).geojson);
     }
 
 
@@ -142,7 +140,8 @@ export function svgDebug(projection, context) {
                 context.getDebug('collision') ||
                 context.getDebug('imagery') ||
                 context.getDebug('imperial') ||
-                context.getDebug('driveLeft');
+                context.getDebug('driveLeft') ||
+                context.getDebug('target');
         } else {
             return this;
         }

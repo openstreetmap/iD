@@ -1,25 +1,52 @@
-
-use { pointer-events: none; }
-
 /* base styles */
 .layer-osm path:not(.oneway) { fill: none; }     /* IE needs :not(.oneway) */
 
 /* the above fill: none rule affects paths in <use> shadow dom only in Firefox */
 .layer-osm use.icon path { fill: #333; }                       /* FF svg Maki icons */
 .layer-osm .turn use path { fill: #000; }                      /* FF turn restriction icons */
-#turn-only-shape2, #turn-only-u-shape2 { fill: #7092FF; }  /* FF turn-only, turn-only-u */
-#turn-no-shape2, #turn-no-u-shape2     { fill: #E06D5F; }  /* FF turn-no, turn-no-u */
-#turn-yes-shape2, #turn-yes-u-shape2   { fill: #8CD05F; }  /* FF turn-yes, turn-yes-u */
+#turn-only-shape2, #turn-only-u-shape2 { fill: #7092ff; }      /* FF turn-only, turn-only-u */
+#turn-no-shape2, #turn-no-u-shape2     { fill: #e06d5f; }      /* FF turn-no, turn-no-u */
+#turn-yes-shape2, #turn-yes-u-shape2   { fill: #8cd05f; }      /* FF turn-yes, turn-yes-u */
 
-g.point .shadow,
-g.vertex .shadow,
-g.midpoint .shadow {
-    pointer-events: all;
+
+/* No interactivity except what we specifically allow */
+.layer-osm * {
+    pointer-events: none;
 }
 
-path.shadow {
+/* `.target` objects are interactive */
+/* They can be picked up, clicked, hovered, or things can connect to them */
+.node.target {
+    pointer-events: fill;
+    fill-opacity: 0.8;
+    fill: currentColor;
+    stroke: none;
+}
+
+.way.target {
     pointer-events: stroke;
+    fill: none;
+    stroke-width: 12;
+    stroke-opacity: 0.8;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
+
+/* `.target-nope` objects are explicitly forbidden to join to */
+.node.target.target-nope,
+.way.target.target-nope {
+    cursor: not-allowed;
+}
+
+
+/* `.active` objects (currently being drawn or dragged) are not interactive */
+/* This is important to allow the events to drop through to whatever is */
+/* below them on the map, so you can still hover and connect to other things. */
+.layer-osm .active {
+    pointer-events: none !important;
+}
+
 
 /* points */
 
@@ -43,10 +70,6 @@ g.point.hover:not(.selected) .shadow {
 
 g.point.selected .shadow {
     stroke-opacity: 0.7;
-}
-
-g.point.active, g.point.active * {
-    pointer-events: none;
 }
 
 g.point ellipse.stroke {
@@ -88,28 +111,6 @@ g.midpoint .shadow {
     fill-opacity: 0;
 }
 
-g.vertex.vertex-hover {
-    display: none;
-}
-
-.mode-draw-area g.vertex.vertex-hover,
-.mode-draw-line g.vertex.vertex-hover,
-.mode-add-area  g.vertex.vertex-hover,
-.mode-add-line  g.vertex.vertex-hover,
-.mode-add-point g.vertex.vertex-hover,
-.mode-drag-node g.vertex.vertex-hover {
-    display: block;
-}
-
-.mode-draw-area .hover-disabled g.vertex.vertex-hover,
-.mode-draw-line .hover-disabled g.vertex.vertex-hover,
-.mode-add-area  .hover-disabled g.vertex.vertex-hover,
-.mode-add-line  .hover-disabled g.vertex.vertex-hover,
-.mode-add-point .hover-disabled g.vertex.vertex-hover,
-.mode-drag-node .hover-disabled g.vertex.vertex-hover {
-    display: none;
-}
-
 g.vertex.related:not(.selected) .shadow,
 g.vertex.hover:not(.selected) .shadow,
 g.midpoint.related:not(.selected) .shadow,
@@ -121,13 +122,6 @@ g.vertex.selected .shadow {
     fill-opacity: 0.7;
 }
 
-.mode-draw-area g.midpoint,
-.mode-draw-line g.midpoint,
-.mode-add-area g.midpoint,
-.mode-add-line g.midpoint,
-.mode-add-point g.midpoint {
-  display: none;
-}
 
 /* lines */
 
@@ -138,7 +132,7 @@ g.vertex.selected .shadow {
 
 path.line {
     stroke-linecap: round;
-    stroke-linejoin: bevel;
+    stroke-linejoin: round;
 }
 
 path.stroke {
@@ -170,8 +164,7 @@ path.line.stroke {
 /* Labels / Markers */
 
 text {
-    font-size:10px;
-    pointer-events: none;
+    font-size: 10px;
     color: #222;
     opacity: 1;
 }
@@ -180,10 +173,10 @@ text {
     fill: #002F35;
 }
 
-path.oneway {
+.onewaygroup path.oneway,
+.viewfieldgroup path.viewfield {
     stroke-width: 6px;
 }
-
 
 text.arealabel-halo,
 text.linelabel-halo,
@@ -196,7 +189,6 @@ text.pointlabel {
     font-size: 12px;
     font-weight: bold;
     fill: #333;
-    pointer-events: none;
     -webkit-transition: opacity 100ms linear;
     transition: opacity 100ms linear;
     -moz-transition: opacity 100ms linear;
@@ -210,14 +202,14 @@ text.pointlabel {
   dominant-baseline: auto;
 }
 
-.layer-halo text {
+.layer-labels-halo text {
     opacity: 0.7;
     stroke: #fff;
     stroke-width: 5px;
     stroke-miterlimit: 1;
 }
 
-text.proximate {
+text.nolabel {
     opacity: 0;
 }
 
@@ -247,8 +239,8 @@ g.turn circle {
 }
 
 .form-field-restrictions .vertex {
-    pointer-events: none;
     cursor: auto !important;
+    pointer-events: none;
 }
 
 .lasso #map {
@@ -262,11 +254,11 @@ g.turn circle {
 }
 
 path.gpx {
-    stroke: #FF26D4;
+    stroke: #ff26d4;
     stroke-width: 2;
     fill: none;
 }
 
 text.gpx {
-    fill: #FF26D4;
+    fill: #ff26d4;
 }

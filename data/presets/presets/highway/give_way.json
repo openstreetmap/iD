@@ -1,7 +1,7 @@
 {
     "icon": "poi-yield",
     "fields": [
-        "parallel_direction"
+        "direction_vertex"
     ],
     "geometry": [
         "vertex"

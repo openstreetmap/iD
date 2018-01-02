@@ -2,7 +2,7 @@
     "icon": "poi-stop",
     "fields": [
         "stop",
-        "parallel_direction"
+        "direction_vertex"
     ],
     "geometry": [
         "vertex"
