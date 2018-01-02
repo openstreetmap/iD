@@ -22,7 +22,7 @@ mocha.setup({
 
 expect = chai.expect;
 
-window.d3 = iD.d3;   // TODO: remove
+//window.d3 = iD.d3;   // TODO: remove
 
 
 // Array.find polyfill (For PhantomJS / IE11)
