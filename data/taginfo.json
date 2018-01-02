@@ -225,6 +225,10 @@
         },
         {
             "key": "amenity",
+            "value": "car_pooling"
+        },
+        {
+            "key": "amenity",
             "value": "car_rental"
         },
         {

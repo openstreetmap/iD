@@ -1078,6 +1078,22 @@
             },
             "name": "Cafe"
         },
+        "amenity/car_pooling": {
+            "icon": "car",
+            "fields": [
+                "name",
+                "operator",
+                "capacity"
+            ],
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "tags": {
+                "amenity": "car_pooling"
+            },
+            "name": "Car Pooling"
+        },
         "amenity/car_rental": {
             "icon": "car",
             "fields": [

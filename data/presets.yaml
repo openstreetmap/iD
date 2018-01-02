@@ -1822,6 +1822,10 @@ en:
         name: Cafe
         # 'terms: bistro,coffee,tea'
         terms: '<translate with synonyms or related terms for ''Cafe'', separated by commas>'
+      amenity/car_pooling:
+        # amenity=car_pooling
+        name: Car Pooling
+        terms: '<translate with synonyms or related terms for ''Car Pooling'', separated by commas>'
       amenity/car_rental:
         # amenity=car_rental
         name: Car Rental

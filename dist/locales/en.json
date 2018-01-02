@@ -2846,6 +2846,10 @@
                     "name": "Cafe",
                     "terms": "bistro,coffee,tea"
                 },
+                "amenity/car_pooling": {
+                    "name": "Car Pooling",
+                    "terms": ""
+                },
                 "amenity/car_rental": {
                     "name": "Car Rental",
                     "terms": ""
