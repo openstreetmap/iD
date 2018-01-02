@@ -5,8 +5,9 @@
         "operator",
         "address",
         "building_area",
+        "drive_through",
         "opening_hours",
-        "drive_through"
+        "payment_multi"
     ],
     "geometry": [
         "point",

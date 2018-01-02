@@ -4,8 +4,9 @@
         "name",
         "operator",
         "address",
+        "fuel_multi",
         "opening_hours",
-        "fuel_multi"
+        "payment_multi"
     ],
     "geometry": [
         "point",

@@ -1357,7 +1357,8 @@
         "payment_multi": {
             "key": "payment:",
             "type": "multiCombo",
-            "label": "Payment Types"
+            "label": "Payment Types",
+            "universal": true
         },
         "phases": {
             "key": "phases",
