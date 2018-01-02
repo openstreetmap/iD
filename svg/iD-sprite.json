@@ -421,9 +421,12 @@
     "operation-layers":         { "viewBox": "500 380 20 20" },
     "operation-copy":           { "viewBox": "520 380 20 20" },
     "operation-paste":          { "viewBox": "540 380 20 20" },
+    "operation-draw-centerline":{ "viewBox": "560 380 20 20" },
+    "operation-join-lanegroup": { "viewBox": "580 380 20 20" },
 
     "operation-delete-shape":         { "fill": "inherit" },
     "operation-circularize-shape":    { "fill": "inherit" },
+    "operation-draw-centerline-shape":    { "fill": "inherit" },
     "operation-circularize-shape2":   { "fill": "currentColor" },
     "operation-straighten-shape":     { "fill": "inherit" },
     "operation-straighten-shape2":    { "fill": "currentColor" },

@@ -43,24 +43,19 @@ export function operationJoinLanegroup(selectedIDs, context) {
 
 
     operation.tooltip = function() {
-        return 'AddAnota';
-        return t('operation.circularze.description.');
-        var disable = operation.disabled();
-        return disable ?
-            t('operations.circularize.' + disable) :
-            t('operations.circularize.description.' );
+        return t('operations.join-lanegroup.description' );
     };
 
 
     operation.annotation = function() {
-        return 'Hello';
+        return t('operations.join-lanegroup.annotation' );
     };
 
-
-    operation.id = 'join_lane_group';
-    operation.keys = 'Join_Lane_group';
-    operation.title = 'Join_lanegroup';
+    operation.id = 'join-lanegroup';
+    operation.keys = [t('operations.join-lanegroup.key')];
+    operation.title = t('operations.join-lanegroup.title');
     operation.behavior = behaviorOperation(context).which(operation);
+
 
 
 
