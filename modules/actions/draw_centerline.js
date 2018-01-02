@@ -77,7 +77,7 @@ export function actionDrawCenterline(wayId, projection, context, maxAngle) {
         var wayLongPoints = way1Points.length > way2Points.length ? way1Points : way2Points;
 
         var mids =[];
-        var longpoints = [];
+        var longpoints = [];    //used for debug, will be deleted later
         for (var i = 0; i < wayShortPoints.length; ++i){
             var mid = [];
             var distance = cloestPointonLine(wayShortPoints[i],wayLongPoints[0],wayLongPoints[1],true);
@@ -93,13 +93,7 @@ export function actionDrawCenterline(wayId, projection, context, maxAngle) {
             longpoints.push(snapped);
         }
 
-        var nodess = [],
-            nodes = [];
-        for (var i = 0; i < mids.length; i++) {
-            nodess.push(osmNode({loc : projection.invert(longpoints[i])}));
-            graph = graph.replace(nodess[i]);
-        }
-
+        var nodes = [];
 
         for (var i = 0; i < mids.length; i++) {
             nodes.push(osmNode({loc : projection.invert(mids[i])}));
