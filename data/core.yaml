@@ -318,6 +318,7 @@ en:
       location: Location
       metric: Metric
       imperial: Imperial
+      node_count: Number of nodes
   geometry:
     point: point
     vertex: vertex
