@@ -1991,6 +1991,10 @@ en:
         name: Library
         # 'terms: book'
         terms: '<translate with synonyms or related terms for ''Library'', separated by commas>'
+      amenity/love_hotel:
+        # amenity=love_hotel
+        name: Love Hotel
+        terms: '<translate with synonyms or related terms for ''Love Hotel'', separated by commas>'
       amenity/marketplace:
         # amenity=marketplace
         name: Marketplace
