@@ -326,7 +326,7 @@
     "poi-fountain":             { "viewBox": "445 335 15 15" },
     "poi-storage-tank":         { "viewBox": "460 335 15 15" },
     "poi-silo":                 { "viewBox": "475 335 15 15" },
-    "poi-street-lamp":          { "viewBox": "490 335 15 15" },
+    "poi-shower":               { "viewBox": "490 335 15 15" },
     "poi-tool":                 { "viewBox": "505 335 15 15" },
     "poi-tower":                { "viewBox": "520 335 15 15" },
     "poi-military":             { "viewBox": "535 335 15 15" },
@@ -339,6 +339,7 @@
     "poi-taoist":               { "viewBox": "640 335 15 15" },
     "poi-milestone":            { "viewBox": "655 335 15 15" },
     "poi-crane":                { "viewBox": "670 335 15 15" },
+    "poi-bulb":                 { "viewBox": "685 335 15 15" },
 
     "poi-vending-machine-shape":   { "fill": "currentColor" },
     "poi-dice-shape":              { "fill": "currentColor" },
@@ -346,7 +347,7 @@
     "poi-fountain-shape":          { "fill": "currentColor" },
     "poi-storage-tank-shape":      { "fill": "currentColor" },
     "poi-silo-shape":              { "fill": "currentColor" },
-    "poi-street-lamp-shape":       { "fill": "currentColor" },
+    "poi-shower-shape":            { "fill": "currentColor" },
     "poi-tool-shape":              { "fill": "currentColor" },
     "poi-tower-shape":             { "fill": "currentColor" },
     "poi-military-shape":          { "fill": "currentColor" },
@@ -359,6 +360,7 @@
     "poi-taoist-shape":            { "fill": "currentColor" },
     "poi-milestone-shape":         { "fill": "currentColor" },
     "poi-crane-shape":             { "fill": "currentColor" },
+    "poi-bulb-shape":              { "fill": "currentColor" },
 
     "poi-vertex":               { "viewBox": "400 350 15 15" },
 
