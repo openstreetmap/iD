@@ -2,16 +2,18 @@ describe('d3.combobox', function() {
     var body, container, content, input, combobox;
 
     var data = [
+        {title: 'foobar', value: 'foobar'},
         {title: 'foo', value: 'foo'},
         {title: 'bar', value: 'bar'},
-        {title: 'Baz', value: 'Baz'}
+        {title: 'Baz', value: 'Baz'},
+        {title: 'test', value: 'test'}
     ];
 
     function simulateKeypress(key) {
-        var keyCode = iD.lib.d3keybinding.keyCodes[key],
-            value = input.property('value'),
-            start = input.property('selectionStart'),
-            finis = input.property('selectionEnd');
+        var keyCode = iD.lib.d3keybinding.keyCodes[key];
+        var value = input.property('value');
+        var start = input.property('selectionStart');
+        var finis = input.property('selectionEnd');
 
         iD.d3.customEvent(happen.makeEvent({
             type: 'keydown',
@@ -101,36 +103,37 @@ describe('d3.combobox', function() {
     it('shows a menu of entries on focus', function() {
         input.call(combobox.data(data));
         focusTypeahead(input);
-        expect(body.selectAll('.combobox-option').nodes().length).to.equal(3);
-        expect(body.selectAll('.combobox-option').text()).to.equal('foo');
+        expect(body.selectAll('.combobox-option').nodes().length).to.equal(5);
+        expect(body.selectAll('.combobox-option').text()).to.equal('foobar');
     });
 
     it('filters entries to those matching the value', function() {
         input.property('value', 'b').call(combobox.data(data));
         focusTypeahead(input);
-        expect(body.selectAll('.combobox-option').size()).to.equal(2);
-        expect(body.selectAll('.combobox-option').nodes()[0].text).to.equal('bar');
-        expect(body.selectAll('.combobox-option').nodes()[1].text).to.equal('Baz');
+        expect(body.selectAll('.combobox-option').size()).to.equal(3);
+        expect(body.selectAll('.combobox-option').nodes()[0].text).to.equal('foobar');
+        expect(body.selectAll('.combobox-option').nodes()[1].text).to.equal('bar');
+        expect(body.selectAll('.combobox-option').nodes()[2].text).to.equal('Baz');
     });
 
     it('shows no menu on focus if it would contain only one item', function() {
-        input.property('value', 'f').call(combobox.data(data));
+        input.property('value', 't').call(combobox.data(data));
         focusTypeahead(input);
         expect(body.selectAll('.combobox-option').size()).to.equal(0);
     });
 
     it('shows menu on focus if it would contain at least minItems items', function() {
         combobox.minItems(1);
-        input.property('value', 'f').call(combobox.data(data));
+        input.property('value', 't').call(combobox.data(data));
         focusTypeahead(input);
         expect(body.selectAll('.combobox-option').size()).to.equal(1);
     });
 
     it('shows all entries when clicking on the caret', function() {
-        input.property('value', 'foo').call(combobox.data(data));
+        input.property('value', 'foobar').call(combobox.data(data));
         body.selectAll('.combobox-caret').dispatch('mousedown');
-        expect(body.selectAll('.combobox-option').size()).to.equal(3);
-        expect(body.selectAll('.combobox-option').text()).to.equal('foo');
+        expect(body.selectAll('.combobox-option').size()).to.equal(5);
+        expect(body.selectAll('.combobox-option').text()).to.equal('foobar');
     });
 
     it('is initially shown with no selection', function() {
@@ -139,12 +142,22 @@ describe('d3.combobox', function() {
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(0);
     });
 
-    it('selects the first option matching the input', function() {
+    it('selects the first option that matches the input', function() {
         input.call(combobox.data(data));
         focusTypeahead(input);
         simulateKeypress('b');
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(1);
         expect(body.selectAll('.combobox-option.selected').text()).to.equal('bar');
+    });
+
+    it('prefers an option that exactly matches the input over the first option', function() {
+        input.call(combobox.data(data));
+        focusTypeahead(input);
+        simulateKeypress('f');
+        simulateKeypress('o');
+        simulateKeypress('o');
+        expect(body.selectAll('.combobox-option.selected').size()).to.equal(1);
+        expect(body.selectAll('.combobox-option.selected').text()).to.equal('foo');  // skip foobar
     });
 
     it('selects the completed portion of the value', function() {
@@ -217,18 +230,18 @@ describe('d3.combobox', function() {
 
         simulateKeypress('↓');
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(1);
-        expect(body.selectAll('.combobox-option.selected').text()).to.equal('foo');
-        expect(input.property('value')).to.equal('foo');
+        expect(body.selectAll('.combobox-option.selected').text()).to.equal('foobar');
+        expect(input.property('value')).to.equal('foobar');
 
         simulateKeypress('↓');
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(1);
-        expect(body.selectAll('.combobox-option.selected').text()).to.equal('bar');
-        expect(input.property('value')).to.equal('bar');
+        expect(body.selectAll('.combobox-option.selected').text()).to.equal('foo');
+        expect(input.property('value')).to.equal('foo');
 
         simulateKeypress('↑');
         expect(body.selectAll('.combobox-option.selected').size()).to.equal(1);
-        expect(body.selectAll('.combobox-option.selected').text()).to.equal('foo');
-        expect(input.property('value')).to.equal('foo');
+        expect(body.selectAll('.combobox-option.selected').text()).to.equal('foobar');
+        expect(input.property('value')).to.equal('foobar');
     });
 
     it('emits accepted event with selected datum on ⇥', function(done) {
