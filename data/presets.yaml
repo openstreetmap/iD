@@ -2625,6 +2625,9 @@ en:
         name: Camp Pitch
         # 'terms: tent,rv'
         terms: '<translate with synonyms or related terms for ''Camp Pitch'', separated by commas>'
+      circular:
+        # junction=circular
+        name: Traffic Circle
       club:
         # club=*
         name: Club

@@ -299,6 +299,7 @@ describe('iD.osmWay', function() {
             expect(iD.Way({tags: { highway: 'motorway' }}).isOneWay(), 'motorway').to.be.true;
             expect(iD.Way({tags: { highway: 'motorway_link' }}).isOneWay(), 'motorway_link').to.be.true;
             expect(iD.Way({tags: { junction: 'roundabout' }}).isOneWay(), 'roundabout').to.be.true;
+            expect(iD.Way({tags: { junction: 'circular' }}).isOneWay(), 'circular').to.be.true;
         });
 
         it('returns false when the way does not have implied oneway tag', function() {
@@ -320,6 +321,7 @@ describe('iD.osmWay', function() {
 
         it('returns false when oneway=no overrides implied oneway tag', function() {
             expect(iD.Way({tags: { junction: 'roundabout', oneway: 'no' }}).isOneWay(), 'roundabout').to.be.false;
+            expect(iD.Way({tags: { junction: 'circular', oneway: 'no' }}).isOneWay(), 'circular').to.be.false;
             expect(iD.Way({tags: { highway: 'motorway', oneway: 'no' }}).isOneWay(), 'motorway').to.be.false;
         });
     });

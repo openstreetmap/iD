@@ -22,6 +22,10 @@
             "key": "amenity"
         },
         {
+            "key": "junction",
+            "value": "circular"
+        },
+        {
             "key": "highway"
         },
         {

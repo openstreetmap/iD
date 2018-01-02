@@ -52,6 +52,20 @@
             "searchable": false,
             "name": "Amenity"
         },
+        "circular": {
+            "geometry": [
+                "vertex",
+                "line"
+            ],
+            "fields": [
+                "name"
+            ],
+            "tags": {
+                "junction": "circular"
+            },
+            "name": "Traffic Circle",
+            "searchable": false
+        },
         "highway": {
             "fields": [
                 "name",

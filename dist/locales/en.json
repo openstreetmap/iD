@@ -2638,6 +2638,10 @@
                     "name": "Amenity",
                     "terms": ""
                 },
+                "circular": {
+                    "name": "Traffic Circle",
+                    "terms": ""
+                },
                 "highway": {
                     "name": "Highway",
                     "terms": ""

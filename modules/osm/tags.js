@@ -24,6 +24,7 @@ export var osmOneWayTags = {
         'motorway_link': true
     },
     'junction': {
+        'circular': true,
         'roundabout': true
     },
     'man_made': {
