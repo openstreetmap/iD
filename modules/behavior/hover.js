@@ -6,6 +6,7 @@ import {
 } from 'd3-selection';
 
 import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+import { osmEntity } from '../osm';
 import { utilRebind } from '../util/rebind';
 
 
@@ -106,9 +107,14 @@ export function behaviorHover(context) {
             _selection.selectAll('.hover-suppressed')
                 .classed('hover-suppressed', false);
 
-            var entity = datum && datum.properties && datum.properties.entity;
-            if (entity && entity.id !== _newId) {
+            var entity;
+            if (datum instanceof osmEntity) {
+                entity = datum;
+            } else {
+                entity = datum && datum.properties && datum.properties.entity;
+            }
 
+            if (entity && entity.id !== _newId) {
                 // If drawing a way, don't hover on a node that was just placed. #3974
                 var mode = context.mode() && context.mode().id;
                 if ((mode === 'draw-line' || mode === 'draw-area') && !_newId && entity.type === 'node') {
