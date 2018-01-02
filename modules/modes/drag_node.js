@@ -100,7 +100,7 @@ export function modeDragNode(context) {
             var midpoint = entity;
             entity = osmNode();
             context.perform(actionAddMidpoint(midpoint, entity));
-            entity = context.entity(entity.id);  // get post-action entity
+            entity = context.entity(entity.id);   // get post-action entity
 
             var vertex = context.surface().selectAll('.' + entity.id);
             drag.target(vertex.node(), entity);
@@ -119,12 +119,17 @@ export function modeDragNode(context) {
     }
 
 
+    // related code
+    // - `behavior/draw.js` `datum()`
     function datum() {
         var event = d3_event && d3_event.sourceEvent;
-        if (!event || event.altKey || !d3_select(event.target).classed('target')) {
+        if (!event || event.altKey) {
             return {};
         } else {
-            return event.target.__data__ || {};
+            // When dragging, snap only to touch targets..
+            // (this excludes area fills and active drawing elements)
+            var d = event.target.__data__;
+            return (d && d.properties && d.properties.target) ? d : {};
         }
     }
 
@@ -142,12 +147,13 @@ export function modeDragNode(context) {
             // - `behavior/draw.js`      `click()`
             // - `behavior/draw_way.js`  `move()`
             var d = datum();
+            var nodeLoc = d && d.properties && d.properties.entity && d.properties.entity.loc;
             var nodeGroups = d && d.properties && d.properties.nodes;
 
-            if (d.loc) {    // snap to node/vertex - a real entity or a nope target with a `loc`
-                loc = d.loc;
+            if (nodeLoc) {    // snap to node/vertex - a point target with `.loc`
+                loc = nodeLoc;
 
-            } else if (nodeGroups) {   // snap to way - a line touch target or nope target with nodes
+            } else if (nodeGroups) {   // snap to way - a line target with `.nodes`
                 var best = Infinity;
                 for (var i = 0; i < nodeGroups.length; i++) {
                     var childNodes = nodeGroups[i].map(function(id) { return context.entity(id); });
@@ -250,8 +256,8 @@ export function modeDragNode(context) {
         if (_isCancelled) return;
 
         var d = datum();
-        var nope = (d && d.id && /-nope$/.test(d.id)) || context.surface().classed('nope');
-        var target = d && d.id && context.hasEntity(d.id);   // entity to snap to
+        var nope = (d && d.properties && d.properties.nope) || context.surface().classed('nope');
+        var target = d && d.properties && d.properties.entity;   // entity to snap to
 
         if (nope) {   // bounce back
             context.perform(

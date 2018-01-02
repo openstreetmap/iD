@@ -184,20 +184,35 @@ export function svgVertices(projection, context) {
     function drawTargets(selection, graph, entities, filter) {
         var targetClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
         var nopeClass = context.getDebug('target') ? 'red ' : 'nocolor ';
+        var getTransform = svgPointTransform(projection).geojson;
         var activeID = context.activeID();
         var data = { targets: [], nopes: [] };
 
         entities.forEach(function(node) {
             if (activeID === node.id) return;   // draw no target on the activeID
 
-            var currType = svgPassiveVertex(node, graph, activeID);
-            if (currType !== 0) {
-                data.targets.push(node);     // passive or adjacent - allow to connect
+            var vertexType = svgPassiveVertex(node, graph, activeID);
+            if (vertexType !== 0) {              // passive or adjacent - allow to connect
+                data.targets.push({
+                    type: 'Feature',
+                    id: node.id,
+                    properties: {
+                        target: true,
+                        entity: node
+                    },
+                    geometry: node.asGeoJSON()
+                });
             } else {
                 data.nopes.push({
-                    id: node.id + '-nope',   // not a real osmNode, break the id on purpose
-                    originalID: node.id,
-                    loc: node.loc
+                    type: 'Feature',
+                    id: node.id + '-nope',   // break the ids on purpose
+                    properties: {
+                        target: true,
+                        entity: node,
+                        nope: true,
+                        originalID: node.id
+                    },
+                    geometry: node.asGeoJSON()
                 });
             }
         });
@@ -205,7 +220,7 @@ export function svgVertices(projection, context) {
 
         // Targets allow hover and vertex snapping
         var targets = selection.selectAll('.vertex.target-allowed')
-            .filter(filter)
+            .filter(function(d) { return filter(d.properties.entity); })
             .data(data.targets, function key(d) { return d.id; });
 
         // exit
@@ -218,12 +233,12 @@ export function svgVertices(projection, context) {
             .attr('r', function(d) { return (_radii[d.id] || radiuses.shadow[3]); })
             .merge(targets)
             .attr('class', function(d) { return 'node vertex target target-allowed ' + targetClass + d.id; })
-            .attr('transform', svgPointTransform(projection));
+            .attr('transform', getTransform);
 
 
         // NOPE
         var nopes = selection.selectAll('.vertex.target-nope')
-            .filter(function(d) { return filter({ id: d.originalID }); })
+            .filter(function(d) { return filter(d.properties.entity); })
             .data(data.nopes, function key(d) { return d.id; });
 
         // exit
@@ -233,10 +248,10 @@ export function svgVertices(projection, context) {
         // enter/update
         nopes.enter()
             .append('circle')
-            .attr('r', function(d) { return (_radii[d.id.replace('-nope','')] || radiuses.shadow[3]); })
+            .attr('r', function(d) { return (_radii[d.properties.originalID] || radiuses.shadow[3]); })
             .merge(nopes)
             .attr('class', function(d) { return 'node vertex target target-nope ' + nopeClass + d.id; })
-            .attr('transform', svgPointTransform(projection));
+            .attr('transform', getTransform);
     }
 
 

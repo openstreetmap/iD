@@ -59,7 +59,7 @@ export function svgAreas(projection, context) {
 
         // Targets allow hover and vertex snapping
         var targets = selection.selectAll('.area.target-allowed')
-            .filter(filter)
+            .filter(function(d) { return filter(d.properties.entity); })
             .data(data.targets, function key(d) { return d.id; });
 
         // exit
@@ -76,7 +76,7 @@ export function svgAreas(projection, context) {
 
         // NOPE
         var nopes = selection.selectAll('.area.target-nope')
-            .filter(function(d) { return filter({ id: d.properties.originalID }); })
+            .filter(function(d) { return filter(d.properties.entity); })
             .data(data.nopes, function key(d) { return d.id; });
 
         // exit

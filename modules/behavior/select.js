@@ -115,7 +115,7 @@ export function behaviorSelect(context) {
         var datum = d3_event.target.__data__ || (lastMouse && lastMouse.target.__data__);
         var mode = context.mode();
 
-        var entity = datum && datum.id && context.hasEntity(datum.id);
+        var entity = datum && datum.properties && datum.properties.entity;
         if (entity) datum = entity;
 
         if (datum && datum.type === 'midpoint') {

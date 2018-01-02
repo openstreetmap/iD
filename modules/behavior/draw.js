@@ -44,6 +44,8 @@ export function behaviorDraw(context) {
     var _lastMouse = null;
 
 
+    // related code
+    // - `mode/drag_node.js` `datum()`
     function datum() {
         if (d3_event.altKey) return {};
 
@@ -54,11 +56,10 @@ export function behaviorDraw(context) {
             element = d3_event.target;
         }
 
-        // When drawing, connect only to things classed as targets..
+        // When drawing, snap only to touch targets..
         // (this excludes area fills and active drawing elements)
-        var selection = d3_select(element);
-        if (!selection.classed('target')) return {};
-        return selection.datum();
+        var d = element.__data__;
+        return (d && d.properties && d.properties.target) ? d : {};
     }
 
 

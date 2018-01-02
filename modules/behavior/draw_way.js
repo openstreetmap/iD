@@ -39,13 +39,14 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
     // - `behavior/draw.js`      `click()`
     // - `behavior/draw_way.js`  `move()`
     function move(datum) {
+        var nodeLoc = datum && datum.properties && datum.properties.entity && datum.properties.entity.loc;
         var nodeGroups = datum && datum.properties && datum.properties.nodes;
         var loc = context.map().mouseCoordinates();
 
-        if (datum.loc) {   // snap to node/vertex - a real entity or a nope target with a `loc`
-            loc = datum.loc;
+        if (nodeLoc) {   // snap to node/vertex - a point target with `.loc`
+            loc = nodeLoc;
 
-        } else if (nodeGroups) {   // snap to way - a line touch target or nope target with nodes
+        } else if (nodeGroups) {   // snap to way - a line target with `.nodes`
             var best = Infinity;
             for (var i = 0; i < nodeGroups.length; i++) {
                 var childNodes = nodeGroups[i].map(function(id) { return context.entity(id); });
@@ -169,9 +170,8 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
 
 
     // Accept the current position of the drawing node and continue drawing.
-    drawWay.add = function(loc, datum) {
-        if ((datum && datum.id && /-nope$/.test(datum.id)) ||
-            context.surface().classed('nope')) {
+    drawWay.add = function(loc, d) {
+        if ((d && d.properties && d.properties.nope) || context.surface().classed('nope')) {
             return;   // can't click here
         }
 

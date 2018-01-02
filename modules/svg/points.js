@@ -29,13 +29,27 @@ export function svgPoints(projection, context) {
 
     function drawTargets(selection, graph, entities, filter) {
         var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
-        var passive = entities.filter(function(d) {
-            return d.id !== context.activeID();
+        var getTransform = svgPointTransform(projection).geojson;
+        var activeID = context.activeID();
+        var data = [];
+
+        entities.forEach(function(node) {
+            if (activeID === node.id) return;   // draw no target on the activeID
+
+            data.push({
+                type: 'Feature',
+                id: node.id,
+                properties: {
+                    target: true,
+                    entity: node
+                },
+                geometry: node.asGeoJSON()
+            });
         });
 
         var targets = selection.selectAll('.point.target')
-            .filter(filter)
-            .data(passive, function key(d) { return d.id; });
+            .filter(function(d) { return filter(d.properties.entity); })
+            .data(data, function key(d) { return d.id; });
 
         // exit
         targets.exit()
@@ -50,7 +64,7 @@ export function svgPoints(projection, context) {
             .attr('height', 30)
             .merge(targets)
             .attr('class', function(d) { return 'node point target ' + fillClass + d.id; })
-            .attr('transform', svgPointTransform(projection));
+            .attr('transform', getTransform);
     }
 
 

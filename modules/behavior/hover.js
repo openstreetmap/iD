@@ -71,15 +71,15 @@ export function behaviorHover(context) {
 
         function mouseover() {
             if (_buttonDown) return;
-            var _target = d3_event.target;
-            enter(_target ? _target.__data__ : null);
+            var target = d3_event.target;
+            enter(target ? target.__data__ : null);
         }
 
 
         function mouseout() {
             if (_buttonDown) return;
-            var _target = d3_event.relatedTarget;
-            enter(_target ? _target.__data__ : null);
+            var target = d3_event.relatedTarget;
+            enter(target ? target.__data__ : null);
         }
 
 
@@ -97,16 +97,16 @@ export function behaviorHover(context) {
         }
 
 
-        function enter(d) {
-            if (d === _target) return;
-            _target = d;
+        function enter(datum) {
+            if (datum === _target) return;
+            _target = datum;
 
             _selection.selectAll('.hover')
                 .classed('hover', false);
             _selection.selectAll('.hover-suppressed')
                 .classed('hover-suppressed', false);
 
-            var entity = _target && _target.id && context.hasEntity(_target.id);
+            var entity = datum && datum.properties && datum.properties.entity;
             if (entity && entity.id !== _newId) {
 
                 // If drawing a way, don't hover on a node that was just placed. #3974

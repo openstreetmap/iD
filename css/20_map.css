@@ -240,6 +240,7 @@ g.turn circle {
 
 .form-field-restrictions .vertex {
     cursor: auto !important;
+    pointer-events: none;
 }
 
 .lasso #map {

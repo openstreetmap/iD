@@ -155,11 +155,17 @@ export function svgPath(projection, graph, isArea) {
 
 
 export function svgPointTransform(projection) {
-    return function(entity) {
+    var svgpoint = function(entity) {
         // http://jsperf.com/short-array-join
         var pt = projection(entity.loc);
         return 'translate(' + pt[0] + ',' + pt[1] + ')';
     };
+
+    svgpoint.geojson = function(d) {
+        return svgpoint(d.properties.entity);
+    };
+
+    return svgpoint;
 }
 
 
@@ -184,7 +190,7 @@ export function svgSegmentWay(way, graph, activeID) {
     var coords = [];
     var nodes = [];
     var startType = null;   // 0 = active, 1 = passive, 2 = adjacent
-    var currType = null;
+    var currType = null;    // 0 = active, 1 = passive, 2 = adjacent
     var node;
 
     for (var i = 0; i < way.nodes.length; i++) {
@@ -244,29 +250,34 @@ export function svgSegmentWay(way, graph, activeID) {
 
     if (coordGroups.passive.length) {
         features.passive.push({
-            'type': 'Feature',
-            'id': way.id,
-            'properties': {
-                'nodes': nodeGroups.passive
+            type: 'Feature',
+            id: way.id,
+            properties: {
+                target: true,
+                entity: way,
+                nodes: nodeGroups.passive
             },
-            'geometry': {
-                'type': 'MultiLineString',
-                'coordinates': coordGroups.passive
+            geometry: {
+                type: 'MultiLineString',
+                coordinates: coordGroups.passive
             }
         });
     }
 
     if (coordGroups.active.length) {
         features.active.push({
-            'type': 'Feature',
-            'id': way.id + '-nope',   // break the ids on purpose
-            'properties': {
-                'originalID': way.id,
-                'nodes': nodeGroups.active
+            type: 'Feature',
+            id: way.id + '-nope',   // break the ids on purpose
+            properties: {
+                target: true,
+                entity: way,
+                nodes: nodeGroups.active,
+                nope: true,
+                originalID: way.id
             },
-            'geometry': {
-                'type': 'MultiLineString',
-                'coordinates': coordGroups.active
+            geometry: {
+                type: 'MultiLineString',
+                coordinates: coordGroups.active
             }
         });
     }

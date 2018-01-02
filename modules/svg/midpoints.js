@@ -18,9 +18,26 @@ export function svgMidpoints(projection, context) {
 
     function drawTargets(selection, graph, entities, filter) {
         var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
+        var getTransform = svgPointTransform(projection).geojson;
+
+        var data = entities.map(function(midpoint) {
+            return {
+                type: 'Feature',
+                id: midpoint.id,
+                properties: {
+                    target: true,
+                    entity: midpoint
+                },
+                geometry: {
+                    type: 'Point',
+                    coordinates: midpoint.loc
+                }
+            };
+        });
+
         var targets = selection.selectAll('.midpoint.target')
-            .filter(filter)
-            .data(entities, function key(d) { return d.id; });
+            .filter(function(d) { return filter(d.properties.entity); })
+            .data(data, function key(d) { return d.id; });
 
         // exit
         targets.exit()
@@ -32,7 +49,7 @@ export function svgMidpoints(projection, context) {
             .attr('r', targetRadius)
             .merge(targets)
             .attr('class', function(d) { return 'node midpoint target ' + fillClass + d.id; })
-            .attr('transform', svgPointTransform(projection));
+            .attr('transform', getTransform);
     }
 
 

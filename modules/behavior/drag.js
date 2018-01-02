@@ -36,7 +36,6 @@ export function behaviorDrag() {
     var dispatch = d3_dispatch('start', 'move', 'end');
     var _origin = null;
     var _selector = '';
-    var _filter = null;
     var _event;
     var _target;
     var _surface;
@@ -162,9 +161,10 @@ export function behaviorDrag() {
                 var root = this;
                 var target = d3_event.target;
                 for (; target && target !== root; target = target.parentNode) {
-                    if (target[matchesSelector](_selector) &&
-                            (!_filter || _filter(target.__data__))) {
-                        return dragstart.call(target, target.__data__);
+                    var datum = target.__data__;
+                    var entity = datum && datum.properties && datum.properties.entity;
+                    if (entity && target[matchesSelector](_selector)) {
+                        return dragstart.call(target, entity);
                     }
                 }
             };
@@ -186,13 +186,6 @@ export function behaviorDrag() {
     drag.selector = function(_) {
         if (!arguments.length) return _selector;
         _selector = _;
-        return drag;
-    };
-
-
-    drag.filter = function(_) {
-        if (!arguments.length) return _filter;
-        _filter = _;
         return drag;
     };
 

@@ -154,9 +154,13 @@ export function uiFieldRestrictions(field, context) {
                 .call(breathe);
 
             var datum = d3_event.target.__data__;
+            var entity = datum && datum.properties && datum.properties.entity;
+            if (entity) datum = entity;
+
             if (datum instanceof osmEntity) {
                 fromNodeID = intersection.adjacentNodeId(datum.id);
                 render();
+
             } else if (datum instanceof osmTurn) {
                 if (datum.restriction) {
                     context.perform(

@@ -55,7 +55,7 @@ export function svgLines(projection, context) {
 
         // Targets allow hover and vertex snapping
         var targets = selection.selectAll('.line.target-allowed')
-            .filter(filter)
+            .filter(function(d) { return filter(d.properties.entity); })
             .data(data.targets, function key(d) { return d.id; });
 
         // exit
@@ -72,7 +72,7 @@ export function svgLines(projection, context) {
 
         // NOPE
         var nopes = selection.selectAll('.line.target-nope')
-            .filter(function(d) { return filter({ id: d.properties.originalID }); })
+            .filter(function(d) { return filter(d.properties.entity); })
             .data(data.nopes, function key(d) { return d.id; });
 
         // exit
