@@ -18,12 +18,6 @@
         "key": "office",
         "value": "notary"
     },
-    "terms": [
-        "clerk",
-        "signature",
-        "wills",
-        "deeds",
-        "estate"
-    ],
+    "searchable": false,
     "name": "Notary Office"
 }
