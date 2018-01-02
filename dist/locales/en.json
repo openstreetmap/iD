@@ -4859,7 +4859,7 @@
                     "terms": "charitable organization"
                 },
                 "office/company": {
-                    "name": "Company Office",
+                    "name": "Corporate Office",
                     "terms": ""
                 },
                 "office/coworking": {
@@ -4924,7 +4924,7 @@
                 },
                 "office/lawyer/notary": {
                     "name": "Notary Office",
-                    "terms": "clerk,signature,wills,deeds,estate"
+                    "terms": ""
                 },
                 "office/moving_company": {
                     "name": "Moving Company Office",
@@ -4940,7 +4940,7 @@
                 },
                 "office/notary": {
                     "name": "Notary Office",
-                    "terms": ""
+                    "terms": "clerk,deeds,estate,signature,wills"
                 },
                 "office/political_party": {
                     "name": "Political Party",
@@ -4968,7 +4968,7 @@
                 },
                 "office/telecommunication": {
                     "name": "Telecom Office",
-                    "terms": ""
+                    "terms": "communication,internet,phone,voice"
                 },
                 "office/therapist": {
                     "name": "Therapist Office",

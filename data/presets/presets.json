@@ -11574,7 +11574,7 @@
             "name": "No Exit"
         },
         "office": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "office",
@@ -11595,7 +11595,7 @@
             "name": "Office"
         },
         "office/administrative": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -11614,7 +11614,7 @@
             "name": "Administrative Office"
         },
         "office/physician": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -11655,7 +11655,7 @@
             "searchable": false
         },
         "office/accountant": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -11673,7 +11673,7 @@
             "name": "Accountant Office"
         },
         "office/adoption_agency": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -11691,7 +11691,7 @@
             "name": "Adoption Agency"
         },
         "office/advertising_agency": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -11715,7 +11715,7 @@
             "name": "Advertising Agency"
         },
         "office/architect": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -11733,7 +11733,7 @@
             "name": "Architect Office"
         },
         "office/association": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -11757,7 +11757,7 @@
             "name": "Nonprofit Organization Office"
         },
         "office/charity": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -11777,7 +11777,7 @@
             "name": "Charity Office"
         },
         "office/company": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -11793,10 +11793,10 @@
                 "office": "company"
             },
             "terms": [],
-            "name": "Company Office"
+            "name": "Corporate Office"
         },
         "office/coworking": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -11824,7 +11824,7 @@
             "name": "Coworking Space"
         },
         "office/educational_institution": {
-            "icon": "commercial",
+            "icon": "school",
             "fields": [
                 "name",
                 "address",
@@ -11842,7 +11842,7 @@
             "name": "Educational Institution"
         },
         "office/employment_agency": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -11862,7 +11862,7 @@
             "name": "Employment Agency"
         },
         "office/energy_supplier": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -11885,7 +11885,7 @@
             "name": "Energy Supplier Office"
         },
         "office/estate_agent": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -11903,7 +11903,7 @@
             "name": "Real Estate Office"
         },
         "office/financial": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -11921,7 +11921,7 @@
             "name": "Financial Office"
         },
         "office/forestry": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -11942,7 +11942,7 @@
             "name": "Forestry Office"
         },
         "office/foundation": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -11960,7 +11960,7 @@
             "name": "Foundation Office"
         },
         "office/government": {
-            "icon": "commercial",
+            "icon": "town-hall",
             "fields": [
                 "name",
                 "government",
@@ -12037,7 +12037,7 @@
             "name": "Tax and Revenue Office"
         },
         "office/guide": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -12059,7 +12059,7 @@
             "name": "Tour Guide Office"
         },
         "office/insurance": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -12077,7 +12077,7 @@
             "name": "Insurance Office"
         },
         "office/it": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -12100,7 +12100,7 @@
             "name": "Information Technology Office"
         },
         "office/lawyer": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -12137,17 +12137,11 @@
                 "key": "office",
                 "value": "notary"
             },
-            "terms": [
-                "clerk",
-                "signature",
-                "wills",
-                "deeds",
-                "estate"
-            ],
+            "searchable": false,
             "name": "Notary Office"
         },
         "office/moving_company": {
-            "icon": "commercial",
+            "icon": "warehouse",
             "fields": [
                 "name",
                 "address",
@@ -12167,7 +12161,7 @@
             "name": "Moving Company Office"
         },
         "office/newspaper": {
-            "icon": "commercial",
+            "icon": "library",
             "fields": [
                 "name",
                 "address",
@@ -12185,7 +12179,7 @@
             "name": "Newspaper Office"
         },
         "office/ngo": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -12210,7 +12204,7 @@
             "name": "NGO Office"
         },
         "office/notary": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -12224,11 +12218,17 @@
             "tags": {
                 "office": "notary"
             },
-            "terms": [],
+            "terms": [
+                "clerk",
+                "deeds",
+                "estate",
+                "signature",
+                "wills"
+            ],
             "name": "Notary Office"
         },
         "office/political_party": {
-            "icon": "commercial",
+            "icon": "town-hall",
             "fields": [
                 "name",
                 "address",
@@ -12246,7 +12246,7 @@
             "name": "Political Party"
         },
         "office/private_investigator": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -12268,7 +12268,7 @@
             "name": "Private Investigator Office"
         },
         "office/quango": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -12294,7 +12294,7 @@
             "name": "Quasi-NGO Office"
         },
         "office/research": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -12312,7 +12312,7 @@
             "name": "Research Office"
         },
         "office/surveyor": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -12330,7 +12330,7 @@
             "name": "Surveyor Office"
         },
         "office/tax_advisor": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -12351,7 +12351,7 @@
             "name": "Tax Advisor Office"
         },
         "office/telecommunication": {
-            "icon": "commercial",
+            "icon": "telephone",
             "fields": [
                 "name",
                 "address",
@@ -12365,11 +12365,16 @@
             "tags": {
                 "office": "telecommunication"
             },
-            "terms": [],
+            "terms": [
+                "communication",
+                "internet",
+                "phone",
+                "voice"
+            ],
             "name": "Telecom Office"
         },
         "office/therapist": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",
@@ -12389,7 +12394,7 @@
             "name": "Therapist Office"
         },
         "office/water_utility": {
-            "icon": "commercial",
+            "icon": "suitcase",
             "fields": [
                 "name",
                 "address",

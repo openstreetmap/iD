@@ -4109,8 +4109,8 @@ en:
         terms: '<translate with synonyms or related terms for ''Charity Office'', separated by commas>'
       office/company:
         # office=company
-        name: Company Office
-        terms: '<translate with synonyms or related terms for ''Company Office'', separated by commas>'
+        name: Corporate Office
+        terms: '<translate with synonyms or related terms for ''Corporate Office'', separated by commas>'
       office/coworking:
         # office=coworking
         name: Coworking Space
@@ -4182,8 +4182,6 @@ en:
       office/lawyer/notary:
         # 'office=lawyer, lawyer=notary'
         name: Notary Office
-        # 'terms: clerk,signature,wills,deeds,estate'
-        terms: '<translate with synonyms or related terms for ''Notary Office'', separated by commas>'
       office/moving_company:
         # office=moving_company
         name: Moving Company Office
@@ -4201,6 +4199,7 @@ en:
       office/notary:
         # office=notary
         name: Notary Office
+        # 'terms: clerk,deeds,estate,signature,wills'
         terms: '<translate with synonyms or related terms for ''Notary Office'', separated by commas>'
       office/physician:
         # office=physician
@@ -4235,6 +4234,7 @@ en:
       office/telecommunication:
         # office=telecommunication
         name: Telecom Office
+        # 'terms: communication,internet,phone,voice'
         terms: '<translate with synonyms or related terms for ''Telecom Office'', separated by commas>'
       office/therapist:
         # office=therapist

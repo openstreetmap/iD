@@ -1,18 +1,24 @@
 {
-  "icon": "commercial",
-  "fields": [
-      "name",
-      "address",
-      "building_area",
-      "opening_hours"
-  ],
-  "geometry": [
-      "point",
-      "area"
-  ],
-  "tags": {
-      "office": "notary"
-  },
-  "terms": [],
-  "name": "Notary Office"
+    "icon": "suitcase",
+    "fields": [
+        "name",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "notary"
+    },
+    "terms": [
+        "clerk",
+        "deeds",
+        "estate",
+        "signature",
+        "wills"
+    ],
+    "name": "Notary Office"
 }
