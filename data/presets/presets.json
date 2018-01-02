@@ -2748,7 +2748,7 @@
             "name": "Shelter"
         },
         "amenity/shower": {
-            "icon": "water",
+            "icon": "poi-shower",
             "fields": [
                 "operator",
                 "opening_hours",
@@ -7550,7 +7550,7 @@
             "name": "Stop Sign"
         },
         "highway/street_lamp": {
-            "icon": "poi-street-lamp",
+            "icon": "poi-bulb",
             "geometry": [
                 "point",
                 "vertex"

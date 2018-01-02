@@ -1,5 +1,5 @@
 {
-    "icon": "poi-street-lamp",
+    "icon": "poi-bulb",
     "geometry": [
         "point",
         "vertex"
