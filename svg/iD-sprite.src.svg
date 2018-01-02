@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="960" height="620" viewBox="0, 0, 960, 620">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="1020" height="620" viewBox="0, 0, 1020, 620">
   <defs>
     <linearGradient id="Gradient_1" gradientUnits="userSpaceOnUse" x1="-360.5" y1="177.987" x2="-362" y2="172.362" gradientTransform="matrix(1, 0, 0, 1, 934, -132.362)">
       <stop offset="0" stop-color="#444444"/>
@@ -280,7 +280,7 @@
     </g>
     <g id="operation-draw-centerline">
       <path d="M560,384 L575,384" fill-opacity="0" stroke="#000000" stroke-width="1"/>
-      <path d="M560,389 L575,389" fill-opacity="0" stroke="#1B3BAF" stroke-width="2"/>
+      <path d="M560,389 L575,389" fill-opacity="0" stroke="#09D235" stroke-width="2"/>
       <path d="M560,394 L575,394" fill-opacity="0" stroke="#000000" stroke-width="1"/>
     </g>
     <g id="operation-join-lanegroup">
@@ -1434,6 +1434,13 @@
       <path d="M907,60 L953,60" fill-opacity="0" stroke="#000000" stroke-width="10"/>
       <path d="M907,60 L953,60" fill-opacity="0" stroke="#FFA703" stroke-width="2" stroke-dasharray="10"/>
       <path d="M922.5,35 L919.625,41 L918,41 L917,42 L917,44 L918.406,44 L918,45 L918,50 L918,51 L918,51 C918,51 918.608,51.608 919,52 L920,52 L924,52 L926,53 L934,53 L936,52 L940,52 L941,52 L942,51 L942,51 L942,50 L942,45 L941.594,44 L943,44 L943,42 L942,41 L940.375,41 L937.5,35 z M923.5,38 L936.5,38 L938,42 L937,43 L923,43 L922,42 z M921,46 L924,46 L925,48 L925,49 L921,49 L920,48 L920,47 z M936,46 L939,46 L940,47 L940,48 L939,49 L935,49 L935,48 z M919,53 L919,55 L920,56 L923,56 L924,55 L924,53 z M936,53 L936,55 L937,56 L940,56 L941,55 L941,53 z" fill="#989898" id="path23923"/>
+    </g>
+    <g id="highway-lane-group">
+      <path d="M967,50 L1013,50" fill-opacity="0" stroke="#000000" stroke-width="20"/>
+      <path d="M967,60 L1013,60" fill-opacity="0" stroke="#FFA703" stroke-width="2" stroke-dasharray="10"/>
+      <path d="M967,53 L1013,53" fill-opacity="0" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="10"/>
+      <path d="M967,47 L1013,47" fill-opacity="0" stroke="#03FF6F" stroke-width="2"/>
+      <path d="M967,42 L1013,42" fill-opacity="0" stroke="#FF0000" stroke-width="2" stroke-dasharray="10"/>
     </g>
   </g>
   <g id="icons">

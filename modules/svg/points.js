@@ -55,10 +55,10 @@ export function svgPoints(projection, context) {
             .call(markerPath, 'stroke');
 
         enter.append('use')
-            .attr('transform', 'translate(-5, -19)')
+            .attr('transform', 'translate(-10, -25)')
             .attr('class', 'icon')
-            .attr('width', '11px')
-            .attr('height', '11px');
+            .attr('width', '20px')
+            .attr('height', '20px');
 
         groups = groups
             .merge(enter)
