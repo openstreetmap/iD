@@ -1744,7 +1744,7 @@ en:
       amenity/animal_boarding:
         # amenity=animal_boarding
         name: Animal Boarding Facility
-        # 'terms: boarding,cat,dog,horse,kitten,pet boarding,pet care,pet hotel,puppy,reptile'
+        # 'terms: boarding,cat,cattery,dog,horse,kennel,kitten,pet,pet boarding,pet care,pet hotel,puppy,reptile'
         terms: '<translate with synonyms or related terms for ''Animal Boarding Facility'', separated by commas>'
       amenity/animal_breeding:
         # amenity=animal_breeding

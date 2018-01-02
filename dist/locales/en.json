@@ -2780,7 +2780,7 @@
                 },
                 "amenity/animal_boarding": {
                     "name": "Animal Boarding Facility",
-                    "terms": "boarding,cat,dog,horse,kitten,pet boarding,pet care,pet hotel,puppy,reptile"
+                    "terms": "boarding,cat,cattery,dog,horse,kennel,kitten,pet,pet boarding,pet care,pet hotel,puppy,reptile"
                 },
                 "amenity/animal_breeding": {
                     "name": "Animal Breeding Facility",
