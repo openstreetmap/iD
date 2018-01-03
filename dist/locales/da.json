@@ -5011,15 +5011,15 @@
                 },
                 "tourism/artwork": {
                     "name": "Kunstværk",
-                    "terms": "Kunstværk"
+                    "terms": "Kunstværk, Skulptur, Statue, Vægmaleri"
                 },
                 "tourism/attraction": {
                     "name": "Turistattraktion",
                     "terms": "Turistattraktion, Seværdighed"
                 },
                 "tourism/camp_site": {
-                    "name": "Campinggrund",
-                    "terms": "Campinggrund"
+                    "name": "Campingplads",
+                    "terms": "Campingplads, Lejrplads, Teltplads"
                 },
                 "tourism/caravan_site": {
                     "name": "Autocamperplads",
