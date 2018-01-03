@@ -2,6 +2,7 @@ export { uiInit } from './init';
 export { uiAccount } from './account';
 export { uiAttribution } from './attribution';
 export { uiBackground } from './background';
+export { uiBackgroundDisplayOptions } from './background_display_options';
 export { uiBackgroundOffset } from './background_offset';
 export { uiChangesetEditor } from './changeset_editor';
 export { uiCmd } from './cmd';

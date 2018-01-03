@@ -10,68 +10,35 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-
 import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 
 import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg';
+import { uiBackgroundDisplayOptions } from './background_display_options';
 import { uiBackgroundOffset } from './background_offset';
 import { uiCmd } from './cmd';
 import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
 import { uiMapData } from './map_data';
-import { uiMapInMap } from './map_in_map';
 import { uiTooltipHtml } from './tooltipHtml';
-import { utilDetect } from '../util/detect';
-import { utilSetTransform, utilCallWhenIdle } from '../util';
+import { utilCallWhenIdle } from '../util';
 import { tooltip } from '../util/tooltip';
 
 
 export function uiBackground(context) {
     var key = t('background.key');
-    var detected = utilDetect();
 
-    var _options = {
-        brightness: (context.storage('background-opacity') !== null) ?
-            (+context.storage('background-opacity')) : 1.0,
-        contrast: 1,
-        saturation: 1,
-        sharpness: 1
-    };
     var _customSource = context.background().findSource('custom');
     var _previousBackground;
     var _shown = false;
 
     var _backgroundList = d3_select(null);
     var _overlayList = d3_select(null);
-    var _displayOptions = d3_select(null);
+    var _displayOptionsContainer = d3_select(null);
     var _offsetContainer = d3_select(null);
 
+    var backgroundDisplayOptions = uiBackgroundDisplayOptions(context);
     var backgroundOffset = uiBackgroundOffset(context);
-
-    function clamp(x, min, max) { return Math.max(min, Math.min(x, max)); }
-
-
-    function setDisplayOption(d, val) {
-        if (!val && d3_event && d3_event.target) {
-            val = d3_event.target.value;
-        }
-
-        val = clamp(val, 0.25, 2);
-        _displayOptions.selectAll('.' + d + '-input')
-            .property('value', val);
-        _displayOptions.selectAll('.' + d + '-value')
-            .text(Math.floor(val * 100) + '%');
-        _displayOptions.selectAll('.' + d + '-reset')
-            .classed('disabled', val === 1);
-
-        _options[d] = val;
-        context.background()[d](val);
-
-        if (d === 'brightness') {
-            context.storage('background-opacity', val);
-        }
-    }
 
 
     function setTooltips(selection) {
@@ -247,90 +214,15 @@ export function uiBackground(context) {
     }
 
 
-    function renderDisplayOptions(selection) {
-        var container = selection.selectAll('display-options-container')
-            .data([0]);
-
-        var containerEnter = container.enter()
-            .append('div')
-            .attr('class', 'display-options-container controls-list');
-
-        var sliders = ['brightness', 'contrast', 'saturation', 'sharpness'];
-
-        var controls = containerEnter.selectAll('.display-control')
-            .data(sliders);
-
-        var controlsEnter = controls.enter()
-            .append('div')
-            .attr('class', function(d) { return 'display-control display-control-' + d; });
-
-        controlsEnter
-            .append('h5')
-            .text(function(d) { return t('background.' + d); })
-            .append('span')
-            .attr('class', function(d) { return d + '-value'; });
-
-        controlsEnter
-            .append('input')
-            .attr('class', function(d) { return d + '-input'; })
-            .attr('type', 'range')
-            .attr('min', '0.25')
-            .attr('max', '2')
-            .attr('step', '0.05')
-            .property('value', function(d) { return _options[d]; })
-            .on('input', function(d) {
-                var val = d3_select(this).property('value');
-                setDisplayOption(d, val);
-            });
-
-        controlsEnter
-            .append('button')
-            .attr('title', t('background.reset'))
-            .attr('class', function(d) { return d + '-reset disabled'; })
-            .on('click', function(d) {
-                if (d3_event.button !== 0) return;
-                setDisplayOption(d, 1);
-            })
-            .call(svgIcon('#icon-' + (textDirection === 'rtl' ? 'redo' : 'undo')));
-
-
-        // add minimap toggle
-        var minimapEnter = containerEnter
-            .append('div')
-            .attr('class', 'minimap-toggle-wrap');
-
-        var minimapLabelEnter = minimapEnter
-            .append('label')
-            .call(tooltip()
-                .html(true)
-                .title(uiTooltipHtml(t('background.minimap.tooltip'), t('background.minimap.key')))
-                .placement('top')
-            );
-
-        minimapLabelEnter
-            .classed('minimap-toggle', true)
-            .append('input')
-            .attr('type', 'checkbox')
-            .on('change', function() {
-                uiMapInMap.toggle();
-                d3_event.preventDefault();
-            });
-
-        minimapLabelEnter
-            .append('span')
-            .text(t('background.minimap.description'));
-
-        _displayOptions = containerEnter
-            .merge(container);
-    }
-
-
     function update() {
         _backgroundList
             .call(drawListItems, 'radio', chooseBackground, function(d) { return !d.isHidden() && !d.overlay; });
 
         _overlayList
             .call(drawListItems, 'checkbox', chooseOverlay, function(d) { return !d.isHidden() && d.overlay; });
+
+        _displayOptionsContainer
+            .call(backgroundDisplayOptions);
 
         _offsetContainer
             .call(backgroundOffset);
@@ -443,14 +335,10 @@ export function uiBackground(context) {
                 .content(renderOverlayList)
             );
 
-        // display settings
-        pane
+        // display options
+        _displayOptionsContainer = pane
             .append('div')
-            .attr('class', 'background-display-options-container')
-            .call(uiDisclosure(context, 'background_display_options', true)
-                .title(t('background.display_options'))
-                .content(renderDisplayOptions)
-            );
+            .attr('class', 'background-display-options');
 
         // offset controls
         _offsetContainer = pane
@@ -467,7 +355,6 @@ export function uiBackground(context) {
 
 
         update();
-        setDisplayOption('brightness', _options.brightness);
 
         var keybinding = d3_keybinding('background')
             .on(key, togglePane)
