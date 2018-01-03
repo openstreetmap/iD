@@ -62,6 +62,8 @@ export function uiBackground(context) {
             .property('value', val);
         _displayOptions.selectAll('.' + d + '-value')
             .text(Math.floor(val * 100) + '%');
+        _displayOptions.selectAll('.' + d + '-reset')
+            .classed('disabled', val === 1);
 
         _options[d] = val;
         context.background()[d](val);
@@ -280,6 +282,16 @@ export function uiBackground(context) {
                 var val = d3_select(this).property('value');
                 setDisplayOption(d, val);
             });
+
+        controlsEnter
+            .append('button')
+            .attr('title', t('background.reset'))
+            .attr('class', function(d) { return d + '-reset disabled'; })
+            .on('click', function(d) {
+                if (d3_event.button !== 0) return;
+                setDisplayOption(d, 1);
+            })
+            .call(svgIcon('#icon-' + (textDirection === 'rtl' ? 'redo' : 'undo')));
 
 
         // add minimap toggle
