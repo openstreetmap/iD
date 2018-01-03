@@ -2246,6 +2246,7 @@ div.full-screen > button:hover {
 
 .imagery-faq {
     margin-bottom: 10px;
+    white-space: nowrap;
 }
 
 .layer-list, .controls-list {

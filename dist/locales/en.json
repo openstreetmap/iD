@@ -468,7 +468,7 @@
             "custom_button": "Edit custom background",
             "custom_prompt": "Enter a tile URL template. Valid tokens are:\n   - {zoom}/{z}, {x}, {y} for Z/X/Y tile scheme\n   - {ty} for flipped TMS-style Y coordinates\n   - {u} for quadtile scheme\n   - {switch:a,b,c} for DNS server multiplexing\n\nExample:\n{example}",
             "overlays": "Overlays",
-            "imagery_source_faq": "Where does this imagery come from?",
+            "imagery_source_faq": "Imagery Info / Report a Problem",
             "reset": "reset",
             "display_options": "Display Options",
             "brightness": "Brightness",

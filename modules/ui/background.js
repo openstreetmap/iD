@@ -192,10 +192,11 @@ export function uiBackground(context) {
 
 
     function renderBackgroundList(selection) {
-        var container = selection.selectAll('layer-background-list')
-            .data([0]);
 
         // the background list
+        var container = selection.selectAll('.layer-background-list')
+            .data([0]);
+
         _backgroundList = container.enter()
             .append('ul')
             .attr('class', 'layer-list layer-background-list')
@@ -204,7 +205,7 @@ export function uiBackground(context) {
 
 
         // add minimap toggle below list
-        var minimapEnter = selection.selectAll('minimap-toggle-list')
+        var minimapEnter = selection.selectAll('.minimap-toggle-list')
             .data([0])
             .enter()
             .append('ul')
@@ -231,11 +232,26 @@ export function uiBackground(context) {
         minimapLabelEnter
             .append('span')
             .text(t('background.minimap.description'));
+
+
+        // "Info / Report a Problem" link
+        selection.selectAll('.imagery-faq')
+            .data([0])
+            .enter()
+            .append('div')
+            .attr('class', 'imagery-faq')
+            .append('a')
+            .attr('target', '_blank')
+            .attr('tabindex', -1)
+            .call(svgIcon('#icon-out-link', 'inline'))
+            .attr('href', 'https://github.com/openstreetmap/iD/blob/master/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
+            .append('span')
+            .text(t('background.imagery_source_faq'));
     }
 
 
     function renderOverlayList(selection) {
-        var container = selection.selectAll('layer-overlay-list')
+        var container = selection.selectAll('.layer-overlay-list')
             .data([0]);
 
         _overlayList = container.enter()
@@ -344,19 +360,6 @@ export function uiBackground(context) {
                 .title(t('background.backgrounds'))
                 .content(renderBackgroundList)
             );
-
-            // "Where does this imagery come from?"
-        // pane
-        //     .append('div')
-        //     .attr('class', 'imagery-faq')
-        //     .append('a')
-        //     .attr('target', '_blank')
-        //     .attr('tabindex', -1)
-        //     .call(svgIcon('#icon-out-link', 'inline'))
-        //     .attr('href', 'https://github.com/openstreetmap/iD/blob/master/FAQ.md#how-can-i-report-an-issue-with-background-imagery')
-        //     .append('span')
-        //     .text(t('background.imagery_source_faq'));
-
 
         // overlay list
         pane
