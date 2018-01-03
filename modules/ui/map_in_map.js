@@ -285,9 +285,10 @@ export function uiMapInMap(context) {
 
             isHidden = !isHidden;
 
-            var label = d3_select('.minimap-toggle');
-            label.classed('active', !isHidden)
-                .select('input').property('checked', !isHidden);
+            d3_select('.minimap-toggle-item')
+                .classed('active', !isHidden)
+                .select('input')
+                .property('checked', !isHidden);
 
             if (isHidden) {
                 wrap

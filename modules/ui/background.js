@@ -20,6 +20,7 @@ import { uiCmd } from './cmd';
 import { uiDisclosure } from './disclosure';
 import { uiHelp } from './help';
 import { uiMapData } from './map_data';
+import { uiMapInMap } from './map_in_map';
 import { uiTooltipHtml } from './tooltipHtml';
 import { utilCallWhenIdle } from '../util';
 import { tooltip } from '../util/tooltip';
@@ -43,11 +44,11 @@ export function uiBackground(context) {
 
     function setTooltips(selection) {
         selection.each(function(d, i, nodes) {
-            var item = d3_select(this).select('label'),
-                span = item.select('span'),
-                placement = (i < nodes.length / 2) ? 'bottom' : 'top',
-                description = d.description(),
-                isOverflowing = (span.property('clientWidth') !== span.property('scrollWidth'));
+            var item = d3_select(this).select('label');
+            var span = item.select('span');
+            var placement = (i < nodes.length / 2) ? 'bottom' : 'top';
+            var description = d.description();
+            var isOverflowing = (span.property('clientWidth') !== span.property('scrollWidth'));
 
             if (d === _previousBackground) {
                 item.call(tooltip()
@@ -194,11 +195,42 @@ export function uiBackground(context) {
         var container = selection.selectAll('layer-background-list')
             .data([0]);
 
+        // the background list
         _backgroundList = container.enter()
             .append('ul')
             .attr('class', 'layer-list layer-background-list')
             .attr('dir', 'auto')
             .merge(container);
+
+
+        // add minimap toggle below list
+        var minimapEnter = selection.selectAll('minimap-toggle-list')
+            .data([0])
+            .enter()
+            .append('ul')
+            .attr('class', 'layer-list minimap-toggle-list')
+            .append('li')
+            .attr('class', 'layer minimap-toggle-item');
+
+        var minimapLabelEnter = minimapEnter
+            .append('label')
+            .call(tooltip()
+                .html(true)
+                .title(uiTooltipHtml(t('background.minimap.tooltip'), t('background.minimap.key')))
+                .placement('top')
+            );
+
+        minimapLabelEnter
+            .append('input')
+            .attr('type', 'checkbox')
+            .on('change', function() {
+                d3_event.preventDefault();
+                uiMapInMap.toggle();
+            });
+
+        minimapLabelEnter
+            .append('span')
+            .text(t('background.minimap.description'));
     }
 
 

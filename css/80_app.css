@@ -2319,20 +2319,38 @@ div.full-screen > button:hover {
     text-overflow: ellipsis;
 }
 
-.minimap-toggle {
-    display: block;
-    padding: 5px 10px;
-    cursor: pointer;
-    color: #7092ff;
-    border-top: 1px solid #ccc;
+
+/* Background Display Options */
+
+.display-options-container {
+    padding: 10px;
 }
 
-.minimap-toggle.active {
-    background: #e8ebff;
+.display-control h5 {
+    padding-bottom: 0;
+    padding-top: 10px;
 }
 
-.minimap-toggle:hover {
-    background-color: #ececec;
+.display-control h5 span {
+    margin: 5px;
+}
+
+.display-control .display-option-input {
+    height: 20px;
+    width: 160px;
+}
+
+.display-control button {
+    height: 30px;
+    width: 30px;
+    margin-left: 5px;
+    margin-right: 0px;
+    vertical-align: text-bottom;
+    border-radius: 4px;
+}
+[dir='rtl'] .display-control button {
+    margin-left: 0px;
+    margin-right: 5px;
 }
 
 
@@ -2463,13 +2481,6 @@ div.full-screen > button:hover {
     border-top: 5px solid #222;
 }
 
-.display-options-container {
-    padding: 10px;
-}
-
-.display-options-container h5 span {
-    margin: 5px;
-}
 
 .map-data-control .layer-list button,
 .background-control .layer-list button {

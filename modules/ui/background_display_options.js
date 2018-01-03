@@ -7,18 +7,15 @@ import {
 import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg';
 import { uiDisclosure } from './disclosure';
-import { uiMapInMap } from './map_in_map';
-import { uiTooltipHtml } from './tooltipHtml';
-import { tooltip } from '../util/tooltip';
 
 
 export function uiBackgroundDisplayOptions(context) {
     var _selection = d3_select(null);
     var sliders = ['brightness', 'contrast', 'saturation', 'sharpness'];
+    var storedOpacity = context.storage('background-opacity');
 
     var _options = {
-        brightness: (context.storage('background-opacity') !== null) ?
-            (+context.storage('background-opacity')) : 1.0,
+        brightness: (storedOpacity !== null ? (+storedOpacity) : 1),
         contrast: 1,
         saturation: 1,
         sharpness: 1
@@ -93,33 +90,6 @@ export function uiBackgroundDisplayOptions(context) {
             .call(svgIcon('#icon-' + (textDirection === 'rtl' ? 'redo' : 'undo')));
 
 
-        // add minimap toggle
-        var minimapEnter = containerEnter
-            .append('div')
-            .attr('class', 'minimap-toggle-wrap');
-
-        var minimapLabelEnter = minimapEnter
-            .append('label')
-            .call(tooltip()
-                .html(true)
-                .title(uiTooltipHtml(t('background.minimap.tooltip'), t('background.minimap.key')))
-                .placement('top')
-            );
-
-        minimapLabelEnter
-            .classed('minimap-toggle', true)
-            .append('input')
-            .attr('type', 'checkbox')
-            .on('change', function() {
-                uiMapInMap.toggle();
-                d3_event.preventDefault();
-            });
-
-        minimapLabelEnter
-            .append('span')
-            .text(t('background.minimap.description'));
-
-
         // update
         container = containerEnter
             .merge(container);
@@ -132,6 +102,11 @@ export function uiBackgroundDisplayOptions(context) {
 
         container.selectAll('.display-option-reset')
             .classed('disabled', function(d) { return _options[d] === 1; });
+
+        // first time only, set brightness if needed
+        if (containerEnter.size() && _options.brightness !== 1) {
+            context.background().brightness(_options.brightness);
+        }
     }
 
 
@@ -144,8 +119,6 @@ export function uiBackgroundDisplayOptions(context) {
                 .content(render)
             );
     }
-
-    // setDisplayOption('brightness', _options.brightness);
 
 
     return backgroundDisplayOptions;
