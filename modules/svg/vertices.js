@@ -151,7 +151,7 @@ export function svgVertices(projection, context) {
         // Directional vertices get viewfields
         var dgroups = groups.filter(function(d) { return getDirections(d); })
             .selectAll('.viewfieldgroup')
-            .data(function data(d) { return zoom < 18 ? [] : [d]; }, osmEntity.key);
+            .data(function data(d) { return zoom >= 18 ? [d] : []; }, osmEntity.key);
 
         // exit
         dgroups.exit()
@@ -261,7 +261,7 @@ export function svgVertices(projection, context) {
     function renderAsVertex(entity, graph, wireframe, zoom) {
         var geometry = entity.geometry(graph);
         return geometry === 'vertex' || (geometry === 'point' && (
-            wireframe || (zoom > 18 && entity.directions(graph, projection).length)
+            wireframe || (zoom >= 18 && entity.directions(graph, projection).length)
         ));
     }
 
