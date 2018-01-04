@@ -1295,7 +1295,9 @@
                 "options": {
                     "undefined": "Assumed to be Yes",
                     "yes": "Yes",
-                    "no": "No"
+                    "no": "No",
+                    "reversible": "Reversible",
+                    "alternating": "Alternating"
                 }
             }
         },
@@ -1307,7 +1309,9 @@
                 "options": {
                     "undefined": "Assumed to be No",
                     "yes": "Yes",
-                    "no": "No"
+                    "no": "No",
+                    "reversible": "Reversible",
+                    "alternating": "Alternating"
                 }
             }
         },

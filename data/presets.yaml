@@ -953,8 +953,12 @@ en:
         # oneway=*
         label: One Way
         options:
+          # oneway=alternating
+          alternating: Alternating
           # oneway=no
           'no': 'No'
+          # oneway=reversible
+          reversible: Reversible
           # oneway=undefined
           undefined: Assumed to be No
           # oneway=yes
@@ -963,8 +967,12 @@ en:
         # oneway=*
         label: One Way
         options:
+          # oneway=alternating
+          alternating: Alternating
           # oneway=no
           'no': 'No'
+          # oneway=reversible
+          reversible: Reversible
           # oneway=undefined
           undefined: Assumed to be Yes
           # oneway=yes

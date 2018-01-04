@@ -2068,7 +2068,9 @@
                     "options": {
                         "undefined": "Assumed to be Yes",
                         "yes": "Yes",
-                        "no": "No"
+                        "no": "No",
+                        "reversible": "Reversible",
+                        "alternating": "Alternating"
                     }
                 },
                 "oneway": {
@@ -2076,7 +2078,9 @@
                     "options": {
                         "undefined": "Assumed to be No",
                         "yes": "Yes",
-                        "no": "No"
+                        "no": "No",
+                        "reversible": "Reversible",
+                        "alternating": "Alternating"
                     }
                 },
                 "opening_hours": {
