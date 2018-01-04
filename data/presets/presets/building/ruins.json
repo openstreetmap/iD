@@ -1,0 +1,16 @@
+{
+    "icon": "poi-ruins",
+    "fields": [
+        "name",
+        "address",
+        "levels"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "building": "ruins"
+    },
+    "matchScore": 0.5,
+    "name": "Building Ruins"
+}

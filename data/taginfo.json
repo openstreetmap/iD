@@ -790,6 +790,10 @@
         },
         {
             "key": "building",
+            "value": "bungalow"
+        },
+        {
+            "key": "building",
             "value": "cabin"
         },
         {
@@ -803,6 +807,10 @@
         {
             "key": "building",
             "value": "church"
+        },
+        {
+            "key": "building",
+            "value": "civic"
         },
         {
             "key": "building",
@@ -823,6 +831,10 @@
         {
             "key": "building",
             "value": "dormitory"
+        },
+        {
+            "key": "building",
+            "value": "farm"
         },
         {
             "key": "building",
@@ -882,11 +894,19 @@
         },
         {
             "key": "building",
+            "value": "ruins"
+        },
+        {
+            "key": "building",
             "value": "school"
         },
         {
             "key": "building",
             "value": "semidetached_house"
+        },
+        {
+            "key": "building",
+            "value": "service"
         },
         {
             "key": "building",
@@ -898,11 +918,23 @@
         },
         {
             "key": "building",
+            "value": "stadium"
+        },
+        {
+            "key": "building",
             "value": "static_caravan"
         },
         {
             "key": "building",
+            "value": "temple"
+        },
+        {
+            "key": "building",
             "value": "terrace"
+        },
+        {
+            "key": "building",
+            "value": "transportation"
         },
         {
             "key": "building",

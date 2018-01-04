@@ -2483,6 +2483,11 @@ en:
         # building=barn
         name: Barn
         terms: '<translate with synonyms or related terms for ''Barn'', separated by commas>'
+      building/bungalow:
+        # building=bungalow
+        name: Bungalow
+        # 'terms: home,detached'
+        terms: '<translate with synonyms or related terms for ''Bungalow'', separated by commas>'
       building/bunker:
         # building=bunker
         name: Bunker
@@ -2502,6 +2507,10 @@ en:
         # building=church
         name: Church Building
         terms: '<translate with synonyms or related terms for ''Church Building'', separated by commas>'
+      building/civic:
+        # building=civic
+        name: Civic Building
+        terms: '<translate with synonyms or related terms for ''Civic Building'', separated by commas>'
       building/college:
         # building=college
         name: College Building
@@ -2527,6 +2536,10 @@ en:
       building/entrance:
         # building=entrance
         name: Entrance/Exit
+      building/farm:
+        # building=farm
+        name: Farm Building
+        terms: '<translate with synonyms or related terms for ''Farm Building'', separated by commas>'
       building/garage:
         # building=garage
         name: Garage
@@ -2585,6 +2598,10 @@ en:
         # building=roof
         name: Roof
         terms: '<translate with synonyms or related terms for ''Roof'', separated by commas>'
+      building/ruins:
+        # building=ruins
+        name: Building Ruins
+        terms: '<translate with synonyms or related terms for ''Building Ruins'', separated by commas>'
       building/school:
         # building=school
         name: School Building
@@ -2595,6 +2612,10 @@ en:
         name: Semi-Detached House
         # 'terms: home,double,duplex,twin,family,residence,dwelling'
         terms: '<translate with synonyms or related terms for ''Semi-Detached House'', separated by commas>'
+      building/service:
+        # building=service
+        name: Service Building
+        terms: '<translate with synonyms or related terms for ''Service Building'', separated by commas>'
       building/shed:
         # building=shed
         name: Shed
@@ -2603,10 +2624,18 @@ en:
         # building=stable
         name: Stable
         terms: '<translate with synonyms or related terms for ''Stable'', separated by commas>'
+      building/stadium:
+        # building=stadium
+        name: Stadium Building
+        terms: '<translate with synonyms or related terms for ''Stadium Building'', separated by commas>'
       building/static_caravan:
         # building=static_caravan
         name: Static Mobile Home
         terms: '<translate with synonyms or related terms for ''Static Mobile Home'', separated by commas>'
+      building/temple:
+        # building=temple
+        name: Temple Building
+        terms: '<translate with synonyms or related terms for ''Temple Building'', separated by commas>'
       building/terrace:
         # building=terrace
         name: Row Houses
@@ -2615,6 +2644,10 @@ en:
       building/train_station:
         # building=train_station
         name: Train Station
+      building/transportation:
+        # building=transportation
+        name: Transportation Building
+        terms: '<translate with synonyms or related terms for ''Transportation Building'', separated by commas>'
       building/university:
         # building=university
         name: University Building

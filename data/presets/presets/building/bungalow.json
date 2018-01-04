@@ -1,0 +1,20 @@
+{
+    "icon": "home",
+    "fields": [
+        "name",
+        "address",
+        "levels"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "building": "bungalow"
+    },
+    "terms": [
+        "home",
+        "detached"
+    ],
+    "matchScore": 0.5,
+    "name": "Bungalow"
+}

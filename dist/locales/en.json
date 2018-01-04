@@ -3420,6 +3420,10 @@
                     "name": "Barn",
                     "terms": ""
                 },
+                "building/bungalow": {
+                    "name": "Bungalow",
+                    "terms": "home,detached"
+                },
                 "building/cabin": {
                     "name": "Cabin",
                     "terms": ""
@@ -3434,6 +3438,10 @@
                 },
                 "building/church": {
                     "name": "Church Building",
+                    "terms": ""
+                },
+                "building/civic": {
+                    "name": "Civic Building",
                     "terms": ""
                 },
                 "building/college": {
@@ -3454,6 +3462,10 @@
                 },
                 "building/dormitory": {
                     "name": "Dormitory",
+                    "terms": ""
+                },
+                "building/farm": {
+                    "name": "Farm Building",
                     "terms": ""
                 },
                 "building/garage": {
@@ -3512,6 +3524,10 @@
                     "name": "Roof",
                     "terms": ""
                 },
+                "building/ruins": {
+                    "name": "Building Ruins",
+                    "terms": ""
+                },
                 "building/school": {
                     "name": "School Building",
                     "terms": "academy,elementary school,middle school,high school"
@@ -3519,6 +3535,10 @@
                 "building/semidetached_house": {
                     "name": "Semi-Detached House",
                     "terms": "home,double,duplex,twin,family,residence,dwelling"
+                },
+                "building/service": {
+                    "name": "Service Building",
+                    "terms": ""
                 },
                 "building/shed": {
                     "name": "Shed",
@@ -3528,13 +3548,25 @@
                     "name": "Stable",
                     "terms": ""
                 },
+                "building/stadium": {
+                    "name": "Stadium Building",
+                    "terms": ""
+                },
                 "building/static_caravan": {
                     "name": "Static Mobile Home",
+                    "terms": ""
+                },
+                "building/temple": {
+                    "name": "Temple Building",
                     "terms": ""
                 },
                 "building/terrace": {
                     "name": "Row Houses",
                     "terms": "home,terrace,brownstone,family,residence,dwelling"
+                },
+                "building/transportation": {
+                    "name": "Transportation Building",
+                    "terms": ""
                 },
                 "building/university": {
                     "name": "University Building",
