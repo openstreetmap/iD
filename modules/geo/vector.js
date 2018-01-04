@@ -13,9 +13,9 @@ export function geoVecSubtract(a, b) {
     return [ a[0] - b[0], a[1] - b[1] ];
 }
 
-// vector multiplication
-export function geoVecScale(a, b) {
-    return [ a[0] * b, a[1] * b ];
+// vector scaling
+export function geoVecScale(a, mag) {
+    return [ a[0] * mag, a[1] * mag ];
 }
 
 // vector rounding (was: geoRoundCoordinates)

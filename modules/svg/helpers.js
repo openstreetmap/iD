@@ -6,7 +6,11 @@ import {
     geoStream as d3_geoStream
 } from 'd3-geo';
 
-import { geoVecLength } from '../geo';
+import {
+    geoVecAdd,
+    geoVecAngle,
+    geoVecLength
+} from '../geo';
 
 
 // Touch targets control which other vertices we can drag a vertex onto.
@@ -72,6 +76,8 @@ export function svgOneWaySegments(projection, graph, dt) {
             coordinates.reverse();
         }
 
+        var isReversible = (entity.tags.oneway === 'reversible' || entity.tags.oneway === 'alternating');
+
         d3_geoStream({
             type: 'LineString',
             coordinates: coordinates
@@ -85,27 +91,41 @@ export function svgOneWaySegments(projection, graph, dt) {
                     var span = geoVecLength(a, b) - offset;
 
                     if (span >= 0) {
-                        var angle = Math.atan2(b[1] - a[1], b[0] - a[0]);
-                        var dx = dt * Math.cos(angle);
-                        var dy = dt * Math.sin(angle);
+                        var heading = geoVecAngle(a, b);
+                        var dx = dt * Math.cos(heading);
+                        var dy = dt * Math.sin(heading);
                         var p = [
-                            a[0] + offset * Math.cos(angle),
-                            a[1] + offset * Math.sin(angle)
+                            a[0] + offset * Math.cos(heading),
+                            a[1] + offset * Math.sin(heading)
                         ];
-                        var segment = 'M' + a[0] + ',' + a[1] + 'L' + p[0] + ',' + p[1];
 
+                        // gather coordinates
+                        var coord = [a, p];
                         for (span -= dt; span >= 0; span -= dt) {
-                            p[0] += dx;
-                            p[1] += dy;
-                            segment += 'L' + p[0] + ',' + p[1];
+                            p = geoVecAdd(p, [dx, dy]);
+                            coord.push(p);
                         }
+                        coord.push(b);
 
-                        segment += 'L' + b[0] + ',' + b[1];
-                        segments.push({id: entity.id, index: i, d: segment});
+                        // generate svg paths
+                        var segment = '';
+                        var j;
+
+                        for (j = 0; j < coord.length; j++) {
+                            segment += (j === 0 ? 'M' : 'L') + coord[j][0] + ',' + coord[j][1];
+                        }
+                        segments.push({ id: entity.id, index: i++, d: segment });
+
+                        if (isReversible) {
+                            segment = '';
+                            for (j = coord.length - 1; j >= 0; j--) {
+                                segment += (j === coord.length - 1 ? 'M' : 'L') + coord[j][0] + ',' + coord[j][1];
+                            }
+                            segments.push({ id: entity.id, index: i++, d: segment });
+                        }
                     }
 
                     offset = -span;
-                    i++;
                 }
 
                 a = b;

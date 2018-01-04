@@ -108,8 +108,18 @@ _extend(osmWay.prototype, {
 
     isOneWay: function() {
         // explicit oneway tag..
-        if (['yes', '1', '-1'].indexOf(this.tags.oneway) !== -1) { return true; }
-        if (['no', '0'].indexOf(this.tags.oneway) !== -1) { return false; }
+        var values = {
+            'yes': true,
+            '1': true,
+            '-1': true,
+            'reversible': true,
+            'alternating': true,
+            'no': false,
+            '0': false
+        };
+        if (values[this.tags.oneway] !== undefined) {
+            return values[this.tags.oneway];
+        }
 
         // implied oneway tag..
         for (var key in this.tags) {

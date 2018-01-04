@@ -293,6 +293,14 @@ describe('iD.osmWay', function() {
             expect(iD.Way({tags: { oneway: '-1' }}).isOneWay(), 'oneway -1').to.be.true;
         });
 
+        it('returns true when the way has tag oneway=reversible', function() {
+            expect(iD.Way({tags: { oneway: 'reversible' }}).isOneWay(), 'oneway reversible').to.be.true;
+        });
+
+        it('returns true when the way has tag oneway=alternating', function() {
+            expect(iD.Way({tags: { oneway: 'alternating' }}).isOneWay(), 'oneway alternating').to.be.true;
+        });
+
         it('returns true when the way has implied oneway tag (waterway=river, waterway=stream, etc)', function() {
             expect(iD.Way({tags: { waterway: 'river' }}).isOneWay(), 'river').to.be.true;
             expect(iD.Way({tags: { waterway: 'stream' }}).isOneWay(), 'stream').to.be.true;

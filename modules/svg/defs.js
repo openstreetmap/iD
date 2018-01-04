@@ -31,7 +31,7 @@ export function svgDefs(context) {
             .append('marker')
             .attr('id', 'oneway-marker')
             .attr('viewBox', '0 0 10 5')
-            .attr('refX', 5)
+            .attr('refX', 2.5)
             .attr('refY', 2.5)
             .attr('markerWidth', 2)
             .attr('markerHeight', 2)
