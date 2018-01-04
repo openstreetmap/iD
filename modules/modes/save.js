@@ -67,18 +67,17 @@ export function modeSave(context) {
 
 
     function save(changeset, tryAgain) {
-
-        var osm = context.connection(),
-            loading = uiLoading(context).message(t('save.uploading')).blocking(true),
-            history = context.history(),
-            origChanges = history.changes(actionDiscardTags(history.difference())),
-            localGraph = context.graph(),
-            remoteGraph = coreGraph(history.base(), true),
-            modified = _filter(history.difference().summary(), {changeType: 'modified'}),
-            toCheck = _map(_map(modified, 'entity'), 'id'),
-            toLoad = withChildNodes(toCheck, localGraph),
-            conflicts = [],
-            errors = [];
+        var osm = context.connection();
+        var loading = uiLoading(context).message(t('save.uploading')).blocking(true);
+        var history = context.history();
+        var origChanges = history.changes(actionDiscardTags(history.difference()));
+        var localGraph = context.graph();
+        var remoteGraph = coreGraph(history.base(), true);
+        var modified = _filter(history.difference().summary(), {changeType: 'modified'});
+        var toCheck = _map(_map(modified, 'entity'), 'id');
+        var toLoad = withChildNodes(toCheck, localGraph);
+        var conflicts = [];
+        var errors = [];
 
         if (!osm) return;
 
@@ -100,8 +99,8 @@ export function modeSave(context) {
                 var entity = graph.entity(id);
                 if (entity.type === 'way') {
                     try {
-                        var cn = graph.childNodes(entity);
-                        result.push.apply(result, _map(_filter(cn, 'version'), 'id'));
+                        var children = graph.childNodes(entity);
+                        result.push.apply(result, _map(_filter(children, 'version'), 'id'));
                     } catch (err) {
                         /* eslint-disable no-console */
                         if (typeof console !== 'undefined') console.error(err);
@@ -172,8 +171,8 @@ export function modeSave(context) {
                     var children = _union(local.nodes, remote.nodes);
 
                     for (var i = 0; i < children.length; i++) {
-                        var a = localGraph.hasEntity(children[i]),
-                            b = remoteGraph.hasEntity(children[i]);
+                        var a = localGraph.hasEntity(children[i]);
+                        var b = remoteGraph.hasEntity(children[i]);
 
                         if (a && b && a.version !== b.version) return false;
                     }
@@ -183,23 +182,23 @@ export function modeSave(context) {
             }
 
             _each(toCheck, function(id) {
-                var local = localGraph.entity(id),
-                    remote = remoteGraph.entity(id);
+                var local = localGraph.entity(id);
+                var remote = remoteGraph.entity(id);
 
                 if (compareVersions(local, remote)) return;
 
-                var action = actionMergeRemoteChanges,
-                    merge = action(id, localGraph, remoteGraph, formatUser);
+                var action = actionMergeRemoteChanges;
+                var merge = action(id, localGraph, remoteGraph, formatUser);
 
                 history.replace(merge);
 
                 var mergeConflicts = merge.conflicts();
                 if (!mergeConflicts.length) return;  // merged safely
 
-                var forceLocal = action(id, localGraph, remoteGraph).withOption('force_local'),
-                    forceRemote = action(id, localGraph, remoteGraph).withOption('force_remote'),
-                    keepMine = t('save.conflict.' + (remote.visible ? 'keep_local' : 'restore')),
-                    keepTheirs = t('save.conflict.' + (remote.visible ? 'keep_remote' : 'delete'));
+                var forceLocal = action(id, localGraph, remoteGraph).withOption('force_local');
+                var forceRemote = action(id, localGraph, remoteGraph).withOption('force_remote');
+                var keepMine = t('save.conflict.' + (remote.visible ? 'keep_local' : 'restore'));
+                var keepTheirs = t('save.conflict.' + (remote.visible ? 'keep_remote' : 'delete'));
 
                 conflicts.push({
                     id: id,
@@ -328,9 +327,9 @@ export function modeSave(context) {
                 .classed('hide-toggle', true)
                 .text(function(d) { return d.msg || t('save.unknown_error_details'); })
                 .on('click', function() {
-                    var error = d3_select(this),
-                        detail = d3_select(this.nextElementSibling),
-                        exp = error.classed('expanded');
+                    var error = d3_select(this);
+                    var detail = d3_select(this.nextElementSibling);
+                    var exp = error.classed('expanded');
 
                     detail.style('display', exp ? 'none' : 'block');
                     error.classed('expanded', !exp);

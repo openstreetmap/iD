@@ -1,16 +1,17 @@
+import { select as d3_select } from 'd3-selection';
 import { uiModal } from './modal';
 
 
 export function uiLoading(context) {
-    var message = '',
-        blocking = false,
-        modalSelection;
+    var _modalSelection = d3_select(null);
+    var _message = '';
+    var _blocking = false;
 
 
     var loading = function(selection) {
-        modalSelection = uiModal(selection, blocking);
+        _modalSelection = uiModal(selection, _blocking);
 
-        var loadertext = modalSelection.select('.content')
+        var loadertext = _modalSelection.select('.content')
             .classed('loading-modal', true)
             .append('div')
             .attr('class', 'modal-section fillL');
@@ -22,9 +23,9 @@ export function uiLoading(context) {
 
         loadertext
             .append('h3')
-            .text(message);
+            .text(_message);
 
-        modalSelection.select('button.close')
+        _modalSelection.select('button.close')
             .attr('class', 'hide');
 
         return loading;
@@ -32,21 +33,21 @@ export function uiLoading(context) {
 
 
     loading.message = function(_) {
-        if (!arguments.length) return message;
-        message = _;
+        if (!arguments.length) return _message;
+        _message = _;
         return loading;
     };
 
 
     loading.blocking = function(_) {
-        if (!arguments.length) return blocking;
-        blocking = _;
+        if (!arguments.length) return _blocking;
+        _blocking = _;
         return loading;
     };
 
 
     loading.close = function() {
-        modalSelection.remove();
+        _modalSelection.remove();
     };
 
 
