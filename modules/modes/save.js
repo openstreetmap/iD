@@ -60,6 +60,9 @@ export function modeSave(context) {
 
     var _toCheck = [];
     var _toLoad = [];
+    var _toLoadCount = 0;
+    var _toLoadTotal = 0;
+
     var _conflicts = [];
     var _errors = [];
     var _origChanges;
@@ -76,13 +79,33 @@ export function modeSave(context) {
 
     function save(changeset, tryAgain, checkConflicts) {
         // Guard against accidentally entering save code twice - #4641
-        if (_isSaving && !tryAgain) return;
+        if (_isSaving && !tryAgain) {
+            return;
+        }
 
         var osm = context.connection();
-        if (!osm) return;
+        if (!osm) {
+            cancel();
+            return;
+        }
 
-        _isSaving = true;
-        context.container().call(loading);  // block input
+        // If user somehow got logged out mid-save, try to reauthenticate..
+        // This can happen if they were logged in from before, but the tokens are no longer valid.
+        if (!osm.authenticated()) {
+            osm.authenticate(function(err) {
+                if (err) {
+                    cancel();   // quit save mode..
+                } else {
+                    save(changeset, tryAgain, checkConflicts);  // continue where we left off..
+                }
+            });
+            return;
+        }
+
+        if (!_isSaving) {
+            context.container().call(loading);  // block input
+            _isSaving = true;
+        }
 
         var history = context.history();
         var localGraph = context.graph();
@@ -109,7 +132,11 @@ export function modeSave(context) {
             var modified = _filter(history.difference().summary(), { changeType: 'modified' });
             _toCheck = _map(_map(modified, 'entity'), 'id');
             _toLoad = withChildNodes(_toCheck, localGraph);
+            _toLoadCount = 0;
+            _toLoadTotal = _toLoad.length;
+
             if (_toCheck.length) {
+                showProgress(_toLoadCount, _toLoadTotal);
                 osm.loadMultiple(_toLoad, loaded);
             } else {
                 upload(changeset);
@@ -142,12 +169,13 @@ export function modeSave(context) {
 
             if (err) {
                 _errors.push({
-                    msg: err.responseText,
+                    msg: err.message || err.responseText,
                     details: [ t('save.status_code', { code: err.status }) ]
                 });
                 showErrors();
 
             } else {
+
                 var loadMore = [];
                 result.data.forEach(function(entity) {
                     remoteGraph.replace(entity);
@@ -164,6 +192,10 @@ export function modeSave(context) {
                             _difference(_map(entity.members, 'id'), _toCheck, _toLoad, loadMore));
                     }
                 });
+
+                _toLoadCount += result.data.length;
+                _toLoadTotal += loadMore.length;
+                showProgress(_toLoadCount, _toLoadTotal);
 
                 if (loadMore.length) {
                     _toLoad.push.apply(_toLoad, loadMore);
@@ -274,7 +306,7 @@ export function modeSave(context) {
                 save(changeset, true, true);   // tryAgain = true, checkConflicts = true
             } else {
                 _errors.push({
-                    msg: err.responseText,
+                    msg: err.message || err.responseText,
                     details: [ t('save.status_code', { code: err.status }) ]
                 });
                 showErrors();
@@ -291,6 +323,20 @@ export function modeSave(context) {
                 context.flush();
             }, 2500);
         }
+    }
+
+
+    function showProgress(num, total) {
+        var modal = context.container().select('.loading-modal .modal-section');
+        var progress = modal.selectAll('.progress')
+            .data([0]);
+
+        // enter/update
+        progress.enter()
+            .append('div')
+            .attr('class', 'progress')
+            .merge(progress)
+            .text(t('save.conflict_progress', { num: num, total: total }));
     }
 
 
@@ -425,7 +471,10 @@ export function modeSave(context) {
             .attr('class', 'inactive');
 
         var osm = context.connection();
-        if (!osm) return;
+        if (!osm) {
+            cancel();
+            return;
+        }
 
         if (osm.authenticated()) {
             done();
@@ -442,7 +491,6 @@ export function modeSave(context) {
 
 
     mode.exit = function() {
-        loading.close();
         _isSaving = false;
 
         keybinding.off();

@@ -253,8 +253,7 @@ export default {
 
             // 400 Bad Request, 401 Unauthorized, 403 Forbidden
             // Logout and retry the request..
-            if (isAuthenticated && err &&
-                    (err.status === 400 || err.status === 401 || err.status === 403)) {
+            if (isAuthenticated && err && (err.status === 400 || err.status === 401 || err.status === 403)) {
                 that.logout();
                 that.loadFromAPI(path, callback);
 
@@ -371,6 +370,10 @@ export default {
             _changeset.inflight = null;
 
             if (err) {
+                // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
+                if (err.status === 400 || err.status === 401 || err.status === 403) {
+                    that.logout();
+                }
                 return callback(err, changeset);
             }
             if (that.getConnectionId() !== cid) {
@@ -428,11 +431,16 @@ export default {
 
         function done(err, user_details) {
             if (err) {
+                // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
+                if (err.status === 400 || err.status === 401 || err.status === 403) {
+                    that.logout();
+                }
                 return callback(err);
             }
             if (that.getConnectionId() !== cid) {
                 return callback({ message: 'Connection Switched', status: -1 });
             }
+
 
             var u = user_details.getElementsByTagName('user')[0];
             var img = u.getElementsByTagName('img');
@@ -482,6 +490,10 @@ export default {
 
             function done(err, changesets) {
                 if (err) {
+                    // 400 Bad Request, 401 Unauthorized, 403 Forbidden..
+                    if (err.status === 400 || err.status === 401 || err.status === 403) {
+                        that.logout();
+                    }
                     return callback(err);
                 }
                 if (that.getConnectionId() !== cid) {
