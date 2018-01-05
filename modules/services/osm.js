@@ -349,7 +349,7 @@ export default {
 
     putChangeset: function(changeset, changes, callback) {
         if (_changeset.inflight) {
-            return callback({ message: 'Changeset already inflight', status: -2 });
+            return callback({ message: 'Changeset already inflight', status: -2 }, changeset);
         }
 
         var that = this;
@@ -371,10 +371,10 @@ export default {
             _changeset.inflight = null;
 
             if (err) {
-                return callback(err);
+                return callback(err, changeset);
             }
             if (that.getConnectionId() !== cid) {
-                return callback({ message: 'Connection Switched', status: -1 });
+                return callback({ message: 'Connection Switched', status: -1 }, changeset);
             }
 
             _changeset.open = changesetID;
@@ -393,7 +393,7 @@ export default {
         function uploadedChangeset(err) {
             _changeset.inflight = null;
 
-            if (err) return callback(err);
+            if (err) return callback(err, changeset);
 
             // Upload was successful, safe to call the callback.
             // Add delay to allow for postgres replication #1646 #2678
@@ -680,7 +680,7 @@ export default {
             _rateLimitError = undefined;
             dispatch.call('change');
             if (callback) callback(err, res);
-            that._userChangesets(function() {});  // eagerly load user details/changesets
+            that.userChangesets(function() {});  // eagerly load user details/changesets
         }
 
         return oauth.authenticate(done);

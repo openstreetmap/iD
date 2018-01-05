@@ -16,9 +16,9 @@ import { utilRebind } from '../util/rebind';
 
 
 export function uiConflicts(context) {
-    var dispatch = d3_dispatch('cancel', 'save'),
-        origChanges,
-        conflictList;
+    var dispatch = d3_dispatch('cancel', 'save');
+    var _origChanges;
+    var _conflictList;
 
 
     function conflicts(selection) {
@@ -47,14 +47,14 @@ export function uiConflicts(context) {
 
 
         // Download changes link
-        var detected = utilDetect(),
-            changeset = new osmChangeset();
+        var detected = utilDetect();
+        var changeset = new osmChangeset();
 
-        delete changeset.id;  // Export without chnageset_id
+        delete changeset.id;  // Export without changeset_id
 
-        var data = JXON.stringify(changeset.osmChangeJXON(origChanges)),
-            blob = new Blob([data], {type: 'text/xml;charset=utf-8;'}),
-            fileName = 'changes.osc';
+        var data = JXON.stringify(changeset.osmChangeJXON(_origChanges));
+        var blob = new Blob([data], { type: 'text/xml;charset=utf-8;' });
+        var fileName = 'changes.osc';
 
         var linkEnter = conflictsHelp.selectAll('.download-changes')
             .data([0])
@@ -99,7 +99,7 @@ export function uiConflicts(context) {
 
         buttons
             .append('button')
-            .attr('disabled', conflictList.length > 1)
+            .attr('disabled', _conflictList.length > 1)
             .attr('class', 'action conflicts-button col6')
             .text(t('save.title'))
             .on('click.try_again', function() { dispatch.call('save'); });
@@ -113,12 +113,12 @@ export function uiConflicts(context) {
 
 
     function showConflict(selection, index) {
-        if (index < 0 || index >= conflictList.length) return;
+        if (index < 0 || index >= _conflictList.length) return;
 
         var parent = d3_select(selection.node().parentNode);
 
         // enable save button if this is the last conflict being reviewed..
-        if (index === conflictList.length - 1) {
+        if (index === _conflictList.length - 1) {
             window.setTimeout(function() {
                 parent.select('.conflicts-button')
                     .attr('disabled', null);
@@ -132,7 +132,7 @@ export function uiConflicts(context) {
 
         var item = selection
             .selectAll('.conflict')
-            .data([conflictList[index]]);
+            .data([_conflictList[index]]);
 
         var enter = item.enter()
             .append('div')
@@ -141,7 +141,7 @@ export function uiConflicts(context) {
         enter
             .append('h4')
             .attr('class', 'conflict-count')
-            .text(t('save.conflict.count', { num: index + 1, total: conflictList.length }));
+            .text(t('save.conflict.count', { num: index + 1, total: _conflictList.length }));
 
         enter
             .append('a')
@@ -183,11 +183,11 @@ export function uiConflicts(context) {
             .attr('class', 'conflict-nav-button action col6')
             .attr('disabled', function(d, i) {
                 return (i === 0 && index === 0) ||
-                    (i === 1 && index === conflictList.length - 1) || null;
+                    (i === 1 && index === _conflictList.length - 1) || null;
             })
             .on('click', function(d, i) {
-                var container = parent.select('.conflict-container'),
-                sign = (i === 0 ? -1 : 1);
+                var container = parent.select('.conflict-container');
+                var sign = (i === 0 ? -1 : 1);
 
                 container
                     .selectAll('.conflict')
@@ -249,8 +249,8 @@ export function uiConflicts(context) {
             .selectAll('input')
             .property('checked', function(d) { return d === datum; });
 
-        var extent = geoExtent(),
-            entity;
+        var extent = geoExtent();
+        var entity;
 
         entity = context.graph().hasEntity(datum.id);
         if (entity) extent._extend(entity.extent(context.graph()));
@@ -275,8 +275,7 @@ export function uiConflicts(context) {
             } else {
                 context.map().zoomTo(entity);
             }
-            context.surface().selectAll(
-                utilEntityOrMemberSelector([entity.id], context.graph()))
+            context.surface().selectAll(utilEntityOrMemberSelector([entity.id], context.graph()))
                 .classed('hover', true);
         }
     }
@@ -293,16 +292,16 @@ export function uiConflicts(context) {
     //         choice(id, keepTheirs, forceRemote)
     //     ]
     // }
-    conflicts.list = function(_) {
-        if (!arguments.length) return conflictList;
-        conflictList = _;
+    conflicts.conflictList = function(_) {
+        if (!arguments.length) return _conflictList;
+        _conflictList = _;
         return conflicts;
     };
 
 
     conflicts.origChanges = function(_) {
-        if (!arguments.length) return origChanges;
-        origChanges = _;
+        if (!arguments.length) return _origChanges;
+        _origChanges = _;
         return conflicts;
     };
 

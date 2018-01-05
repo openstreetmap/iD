@@ -1,7 +1,6 @@
 import _clone from 'lodash-es/clone';
 import _difference from 'lodash-es/difference';
 import _filter from 'lodash-es/filter';
-import _each from 'lodash-es/each';
 import _map from 'lodash-es/map';
 import _reduce from 'lodash-es/reduce';
 import _union from 'lodash-es/union';
@@ -44,17 +43,26 @@ import {
 } from '../util';
 
 
+var _isSaving = false;
+
 
 export function modeSave(context) {
-    var mode = {
-        id: 'save'
-    };
-
+    var mode = { id: 'save' };
     var keybinding = d3_keybinding('select');
+
+    var loading = uiLoading(context)
+        .message(t('save.uploading'))
+        .blocking(true);
 
     var commit = uiCommit(context)
         .on('cancel', cancel)
         .on('save', save);
+
+    var _toCheck = [];
+    var _toLoad = [];
+    var _conflicts = [];
+    var _errors = [];
+    var _origChanges;
 
 
     function cancel(selectedID) {
@@ -66,32 +74,49 @@ export function modeSave(context) {
     }
 
 
-    function save(changeset, tryAgain) {
-        var osm = context.connection();
-        var loading = uiLoading(context).message(t('save.uploading')).blocking(true);
-        var history = context.history();
-        var origChanges = history.changes(actionDiscardTags(history.difference()));
-        var localGraph = context.graph();
-        var remoteGraph = coreGraph(history.base(), true);
-        var modified = _filter(history.difference().summary(), {changeType: 'modified'});
-        var toCheck = _map(_map(modified, 'entity'), 'id');
-        var toLoad = withChildNodes(toCheck, localGraph);
-        var conflicts = [];
-        var errors = [];
+    function save(changeset, tryAgain, checkConflicts) {
+        // Guard against accidentally entering save code twice - #4641
+        if (_isSaving && !tryAgain) return;
 
+        var osm = context.connection();
         if (!osm) return;
 
+        _isSaving = true;
+        context.container().call(loading);  // block input
+
+        var history = context.history();
+        var localGraph = context.graph();
+        var remoteGraph = coreGraph(history.base(), true);
+
+        _conflicts = [];
+        _errors = [];
+
+        // Store original changes, in case user wants to download them as an .osc file
+        _origChanges = history.changes(actionDiscardTags(history.difference()));
+
+        // First time, `history.perform` a no-op action.
+        // Any conflict resolutions will be done as `history.replace`
         if (!tryAgain) {
-            history.perform(actionNoop());  // checkpoint
+            history.perform(actionNoop());
         }
 
-        context.container().call(loading);
+        // Attempt a fast upload.. If there are conflicts, re-enter with `checkConflicts = true`
+        if (!checkConflicts) {
+            upload(changeset);
 
-        if (toCheck.length) {
-            osm.loadMultiple(toLoad, loaded);
+        // Do the full (slow) conflict check..
         } else {
-            upload();
+            var modified = _filter(history.difference().summary(), { changeType: 'modified' });
+            _toCheck = _map(_map(modified, 'entity'), 'id');
+            _toLoad = withChildNodes(_toCheck, localGraph);
+            if (_toCheck.length) {
+                osm.loadMultiple(_toLoad, loaded);
+            } else {
+                upload(changeset);
+            }
         }
+
+        return;
 
 
         function withChildNodes(ids, graph) {
@@ -111,13 +136,12 @@ export function modeSave(context) {
             }, _clone(ids)));
         }
 
-
         // Reload modified entities into an alternate graph and check for conflicts..
         function loaded(err, result) {
-            if (errors.length) return;
+            if (_errors.length) return;
 
             if (err) {
-                errors.push({
+                _errors.push({
                     msg: err.responseText,
                     details: [ t('save.status_code', { code: err.status }) ]
                 });
@@ -125,35 +149,35 @@ export function modeSave(context) {
 
             } else {
                 var loadMore = [];
-                _each(result.data, function(entity) {
+                result.data.forEach(function(entity) {
                     remoteGraph.replace(entity);
-                    toLoad = _without(toLoad, entity.id);
+                    _toLoad = _without(_toLoad, entity.id);
 
                     // Because loadMultiple doesn't download /full like loadEntity,
                     // need to also load children that aren't already being checked..
                     if (!entity.visible) return;
                     if (entity.type === 'way') {
                         loadMore.push.apply(loadMore,
-                            _difference(entity.nodes, toCheck, toLoad, loadMore));
+                            _difference(entity.nodes, _toCheck, _toLoad, loadMore));
                     } else if (entity.type === 'relation' && entity.isMultipolygon()) {
                         loadMore.push.apply(loadMore,
-                            _difference(_map(entity.members, 'id'), toCheck, toLoad, loadMore));
+                            _difference(_map(entity.members, 'id'), _toCheck, _toLoad, loadMore));
                     }
                 });
 
                 if (loadMore.length) {
-                    toLoad.push.apply(toLoad, loadMore);
+                    _toLoad.push.apply(_toLoad, loadMore);
                     osm.loadMultiple(loadMore, loaded);
                 }
 
-                if (!toLoad.length) {
-                    checkConflicts();
+                if (!_toLoad.length) {
+                    detectConflicts();
                 }
             }
         }
 
 
-        function checkConflicts() {
+        function detectConflicts() {
             function choice(id, text, action) {
                 return { id: id, text: text, action: function() { history.replace(action); } };
             }
@@ -164,16 +188,14 @@ export function modeSave(context) {
                 return utilDisplayName(entity) || (utilDisplayType(entity.id) + ' ' + entity.id);
             }
 
-            function compareVersions(local, remote) {
+            function sameVersions(local, remote) {
                 if (local.version !== remote.version) return false;
 
                 if (local.type === 'way') {
                     var children = _union(local.nodes, remote.nodes);
-
                     for (var i = 0; i < children.length; i++) {
                         var a = localGraph.hasEntity(children[i]);
                         var b = remoteGraph.hasEntity(children[i]);
-
                         if (a && b && a.version !== b.version) return false;
                     }
                 }
@@ -181,11 +203,11 @@ export function modeSave(context) {
                 return true;
             }
 
-            _each(toCheck, function(id) {
+            _toCheck.forEach(function(id) {
                 var local = localGraph.entity(id);
                 var remote = remoteGraph.entity(id);
 
-                if (compareVersions(local, remote)) return;
+                if (sameVersions(local, remote)) return;
 
                 var action = actionMergeRemoteChanges;
                 var merge = action(id, localGraph, remoteGraph, formatUser);
@@ -200,7 +222,7 @@ export function modeSave(context) {
                 var keepMine = t('save.conflict.' + (remote.visible ? 'keep_local' : 'restore'));
                 var keepTheirs = t('save.conflict.' + (remote.visible ? 'keep_remote' : 'delete'));
 
-                conflicts.push({
+                _conflicts.push({
                     id: id,
                     name: entityName(local),
                     details: mergeConflicts,
@@ -212,163 +234,179 @@ export function modeSave(context) {
                 });
             });
 
-            upload();
+            upload(changeset);
+        }
+    }
+
+
+    function upload(changeset) {
+        var osm = context.connection();
+        if (!osm) {
+            _errors.push({ msg: 'No OSM Service' });
         }
 
+        if (_conflicts.length) {
+            _conflicts.sort(function(a, b) { return b.id.localeCompare(a.id); });
+            showConflicts(changeset);
 
-        function upload() {
-            if (conflicts.length) {
-                conflicts.sort(function(a,b) { return b.id.localeCompare(a.id); });
-                showConflicts();
-            } else if (errors.length) {
-                showErrors();
-            } else {
-                var changes = history.changes(actionDiscardTags(history.difference()));
-                if (changes.modified.length || changes.created.length || changes.deleted.length) {
-                    osm.putChangeset(changeset, changes, uploadCallback);
-                } else {        // changes were insignificant or reverted by user
-                    d3_select('.inspector-wrap *').remove();
-                    loading.close();
-                    context.flush();
-                    cancel();
-                }
+        } else if (_errors.length) {
+            showErrors();
+
+        } else {
+            var history = context.history();
+            var changes = history.changes(actionDiscardTags(history.difference()));
+            if (changes.modified.length || changes.created.length || changes.deleted.length) {
+                osm.putChangeset(changeset, changes, uploadCallback);
+            } else {        // changes were insignificant or reverted by user
+                d3_select('.inspector-wrap *').remove();
+                loading.close();
+                _isSaving = false;
+                context.flush();
+                cancel();
             }
         }
+    }
 
 
-        function uploadCallback(err, changeset) {
-            if (err) {
-                errors.push({
+    function uploadCallback(err, changeset) {
+        if (err) {
+            if (err.status === 409) {          // 409 Conflict
+                save(changeset, true, true);   // tryAgain = true, checkConflicts = true
+            } else {
+                _errors.push({
                     msg: err.responseText,
                     details: [ t('save.status_code', { code: err.status }) ]
                 });
                 showErrors();
-            } else {
-                history.clearSaved();
-                success(changeset);
-                // Add delay to allow for postgres replication #1646 #2678
-                window.setTimeout(function() {
-                    d3_select('.inspector-wrap *').remove();
-                    loading.close();
-                    context.flush();
-                }, 2500);
             }
+
+        } else {
+            context.history().clearSaved();
+            success(changeset);
+            // Add delay to allow for postgres replication #1646 #2678
+            window.setTimeout(function() {
+                d3_select('.inspector-wrap *').remove();
+                loading.close();
+                _isSaving = false;
+                context.flush();
+            }, 2500);
         }
+    }
 
 
-        function showConflicts() {
-            var selection = context.container()
-                .select('#sidebar')
-                .append('div')
-                .attr('class','sidebar-component');
+    function showConflicts(changeset) {
+        var history = context.history();
+        var selection = context.container()
+            .select('#sidebar')
+            .append('div')
+            .attr('class','sidebar-component');
 
-            loading.close();
+        loading.close();
+        _isSaving = false;
 
-            selection.call(uiConflicts(context)
-                .list(conflicts)
-                .origChanges(origChanges)
-                .on('cancel', function() {
-                    history.pop();
-                    selection.remove();
-                })
-                .on('save', function() {
-                    for (var i = 0; i < conflicts.length; i++) {
-                        if (conflicts[i].chosen === 1) {  // user chose "keep theirs"
-                            var entity = context.hasEntity(conflicts[i].id);
-                            if (entity && entity.type === 'way') {
-                                var children = _uniq(entity.nodes);
-                                for (var j = 0; j < children.length; j++) {
-                                    history.replace(actionRevert(children[j]));
-                                }
+        var ui = uiConflicts(context)
+            .conflictList(_conflicts)
+            .origChanges(_origChanges)
+            .on('cancel', function() {
+                history.pop();
+                selection.remove();
+            })
+            .on('save', function() {
+                for (var i = 0; i < _conflicts.length; i++) {
+                    if (_conflicts[i].chosen === 1) {  // user chose "keep theirs"
+                        var entity = context.hasEntity(_conflicts[i].id);
+                        if (entity && entity.type === 'way') {
+                            var children = _uniq(entity.nodes);
+                            for (var j = 0; j < children.length; j++) {
+                                history.replace(actionRevert(children[j]));
                             }
-                            history.replace(actionRevert(conflicts[i].id));
                         }
+                        history.replace(actionRevert(_conflicts[i].id));
                     }
+                }
 
-                    selection.remove();
-                    save(changeset, true);
-                })
-            );
-        }
+                selection.remove();
+                save(changeset, true, false);  // tryAgain = true, checkConflicts = false
+            });
 
-
-        function showErrors() {
-            var selection = uiConfirm(context.container());
-
-            history.pop();
-            loading.close();
-
-            selection
-                .select('.modal-section.header')
-                .append('h3')
-                .text(t('save.error'));
-
-            addErrors(selection, errors);
-            selection.okButton();
-        }
+        selection.call(ui);
+    }
 
 
-        function addErrors(selection, data) {
-            var message = selection
-                .select('.modal-section.message-text');
+    function showErrors() {
+        var selection = uiConfirm(context.container());
 
-            var items = message
-                .selectAll('.error-container')
-                .data(data);
+        context.history().pop();
+        loading.close();
+        _isSaving = false;
 
-            var enter = items.enter()
-                .append('div')
-                .attr('class', 'error-container');
+        selection
+            .select('.modal-section.header')
+            .append('h3')
+            .text(t('save.error'));
 
-            enter
-                .append('a')
-                .attr('class', 'error-description')
-                .attr('href', '#')
-                .classed('hide-toggle', true)
-                .text(function(d) { return d.msg || t('save.unknown_error_details'); })
-                .on('click', function() {
-                    var error = d3_select(this);
-                    var detail = d3_select(this.nextElementSibling);
-                    var exp = error.classed('expanded');
+        addErrors(selection, _errors);
+        selection.okButton();
+    }
 
-                    detail.style('display', exp ? 'none' : 'block');
-                    error.classed('expanded', !exp);
 
-                    d3_event.preventDefault();
-                });
+    function addErrors(selection, data) {
+        var message = selection
+            .select('.modal-section.message-text');
 
-            var details = enter
-                .append('div')
-                .attr('class', 'error-detail-container')
-                .style('display', 'none');
+        var items = message
+            .selectAll('.error-container')
+            .data(data);
 
-            details
-                .append('ul')
-                .attr('class', 'error-detail-list')
-                .selectAll('li')
-                .data(function(d) { return d.details || []; })
-                .enter()
-                .append('li')
-                .attr('class', 'error-detail-item')
-                .text(function(d) { return d; });
+        var enter = items.enter()
+            .append('div')
+            .attr('class', 'error-container');
 
-            items.exit()
-                .remove();
-        }
+        enter
+            .append('a')
+            .attr('class', 'error-description')
+            .attr('href', '#')
+            .classed('hide-toggle', true)
+            .text(function(d) { return d.msg || t('save.unknown_error_details'); })
+            .on('click', function() {
+                d3_event.preventDefault();
 
+                var error = d3_select(this);
+                var detail = d3_select(this.nextElementSibling);
+                var exp = error.classed('expanded');
+
+                detail.style('display', exp ? 'none' : 'block');
+                error.classed('expanded', !exp);
+            });
+
+        var details = enter
+            .append('div')
+            .attr('class', 'error-detail-container')
+            .style('display', 'none');
+
+        details
+            .append('ul')
+            .attr('class', 'error-detail-list')
+            .selectAll('li')
+            .data(function(d) { return d.details || []; })
+            .enter()
+            .append('li')
+            .attr('class', 'error-detail-item')
+            .text(function(d) { return d; });
+
+        items.exit()
+            .remove();
     }
 
 
     function success(changeset) {
         commit.reset();
-        context.enter(modeBrowse(context)
-            .sidebar(uiSuccess(context)
-                .changeset(changeset)
-                .on('cancel', function() {
-                    context.ui().sidebar.hide();
-                })
-            )
-        );
+
+        var ui = uiSuccess(context)
+            .changeset(changeset)
+            .on('cancel', function() { context.ui().sidebar.hide(); });
+
+        context.enter(modeBrowse(context).sidebar(ui));
     }
 
 
@@ -404,6 +442,9 @@ export function modeSave(context) {
 
 
     mode.exit = function() {
+        loading.close();
+        _isSaving = false;
+
         keybinding.off();
 
         context.container().selectAll('#content')

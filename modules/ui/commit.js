@@ -238,6 +238,7 @@ export function uiCommit(context) {
                 return (n && n.value.length) ? null : true;
             })
             .on('click.save', function() {
+                this.blur();    // avoid keeping focus on the button - #4641
                 dispatch.call('save', this, _changeset);
             });
 
