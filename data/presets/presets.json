@@ -18152,6 +18152,54 @@
             },
             "name": "Wine Shop"
         },
+        "shop/wholesale/Costco": {
+            "tags": {
+                "name": "Costco Warehouse",
+                "shop": "wholesale"
+				"building": "commercial",
+				"access": "customers",
+				"wholesale": "supermarket",
+            },
+            "name": "Costco Warehouse",
+            "icon": "grocery",
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours",
+                "payment_multi"
+            ],
+            "suggestion": true
+        },
+        "shop/wholesale/Sam's Club": {
+            "tags": {
+                "name": "Sam's Club",
+                "shop": "wholesale"
+				"building": "commercial",
+				"access": "customers",
+				"wholesale": "supermarket",
+            },
+            "name": "Sam's Club",
+            "icon": "grocery",
+            "geometry": [
+                "point",
+                "area"
+            ],
+            "fields": [
+                "name",
+                "operator",
+                "address",
+                "building_area",
+                "opening_hours",
+                "payment_multi"
+            ],
+            "suggestion": true
+        },
         "tourism": {
             "icon": "attraction",
             "fields": [
@@ -38334,6 +38382,7 @@
             },
             "name": "Costco Gas",
             "icon": "fuel",
+            "access": "customers",
             "geometry": [
                 "point",
                 "area"
@@ -38355,6 +38404,7 @@
             },
             "name": "Costco Gasoline",
             "icon": "fuel",
+            "access": "customers",
             "geometry": [
                 "point",
                 "area"
@@ -86054,27 +86104,6 @@
             ],
             "suggestion": true
         },
-        "shop/supermarket/Costco": {
-            "tags": {
-                "name": "Costco",
-                "shop": "supermarket"
-            },
-            "name": "Costco",
-            "icon": "grocery",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours",
-                "payment_multi"
-            ],
-            "suggestion": true
-        },
         "shop/supermarket/Coto": {
             "tags": {
                 "name": "Coto",
@@ -89546,27 +89575,6 @@
                 "shop": "supermarket"
             },
             "name": "Sainsbury's Local",
-            "icon": "grocery",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours",
-                "payment_multi"
-            ],
-            "suggestion": true
-        },
-        "shop/supermarket/Sam's Club": {
-            "tags": {
-                "name": "Sam's Club",
-                "shop": "supermarket"
-            },
-            "name": "Sam's Club",
             "icon": "grocery",
             "geometry": [
                 "point",
