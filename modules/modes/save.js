@@ -1,5 +1,4 @@
 import _clone from 'lodash-es/clone';
-import _difference from 'lodash-es/difference';
 import _filter from 'lodash-es/filter';
 import _map from 'lodash-es/map';
 import _reduce from 'lodash-es/reduce';
@@ -60,6 +59,7 @@ export function modeSave(context) {
 
     var _toCheck = [];
     var _toLoad = [];
+    var _loaded = {};
     var _toLoadCount = 0;
     var _toLoadTotal = 0;
 
@@ -132,11 +132,13 @@ export function modeSave(context) {
             var modified = _filter(history.difference().summary(), { changeType: 'modified' });
             _toCheck = _map(_map(modified, 'entity'), 'id');
             _toLoad = withChildNodes(_toCheck, localGraph);
+            _loaded = {};
             _toLoadCount = 0;
             _toLoadTotal = _toLoad.length;
 
             if (_toCheck.length) {
                 showProgress(_toLoadCount, _toLoadTotal);
+                _toLoad.forEach(function(id) { _loaded[id] = false; });
                 osm.loadMultiple(_toLoad, loaded);
             } else {
                 upload(changeset);
@@ -163,6 +165,7 @@ export function modeSave(context) {
             }, _clone(ids)));
         }
 
+
         // Reload modified entities into an alternate graph and check for conflicts..
         function loaded(err, result) {
             if (_errors.length) return;
@@ -175,21 +178,34 @@ export function modeSave(context) {
                 showErrors();
 
             } else {
-
                 var loadMore = [];
+
                 result.data.forEach(function(entity) {
                     remoteGraph.replace(entity);
+                    _loaded[entity.id] = true;
                     _toLoad = _without(_toLoad, entity.id);
+
+                    if (!entity.visible) return;
 
                     // Because loadMultiple doesn't download /full like loadEntity,
                     // need to also load children that aren't already being checked..
-                    if (!entity.visible) return;
+                    var i, id;
                     if (entity.type === 'way') {
-                        loadMore.push.apply(loadMore,
-                            _difference(entity.nodes, _toCheck, _toLoad, loadMore));
+                        for (i = 0; i < entity.nodes.length; i++) {
+                            id = entity.nodes[i];
+                            if (_loaded[id] === undefined) {
+                                _loaded[id] = false;
+                                loadMore.push(id);
+                            }
+                        }
                     } else if (entity.type === 'relation' && entity.isMultipolygon()) {
-                        loadMore.push.apply(loadMore,
-                            _difference(_map(entity.members, 'id'), _toCheck, _toLoad, loadMore));
+                        for (i = 0; i < entity.members.length; i++) {
+                            id = entity.members[i].id;
+                            if (_loaded[id] === undefined) {
+                                _loaded[id] = false;
+                                loadMore.push(id);
+                            }
+                        }
                     }
                 });
 
