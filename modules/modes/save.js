@@ -47,7 +47,7 @@ var _isSaving = false;
 
 export function modeSave(context) {
     var mode = { id: 'save' };
-    var keybinding = d3_keybinding('select');
+    var keybinding = d3_keybinding('save');
 
     var loading = uiLoading(context)
         .message(t('save.uploading'))
@@ -103,6 +103,7 @@ export function modeSave(context) {
         }
 
         if (!_isSaving) {
+            keybindingOff();
             context.container().call(loading);  // block input
             _isSaving = true;
         }
@@ -372,6 +373,7 @@ export function modeSave(context) {
             .on('cancel', function() {
                 history.pop();
                 selection.remove();
+                keybindingOn();
             })
             .on('save', function() {
                 for (var i = 0; i < _conflicts.length; i++) {
@@ -396,12 +398,12 @@ export function modeSave(context) {
 
 
     function showErrors() {
-        var selection = uiConfirm(context.container());
-
+        keybindingOn();
         context.history().pop();
         loading.close();
         _isSaving = false;
 
+        var selection = uiConfirm(context.container());
         selection
             .select('.modal-section.header')
             .append('h3')
@@ -472,16 +474,24 @@ export function modeSave(context) {
     }
 
 
+    function keybindingOn() {
+        d3_select(document)
+            .call(keybinding.on('⎋', cancel, true));
+    }
+
+
+    function keybindingOff() {
+        d3_select(document)
+            .call(keybinding.off);
+    }
+
+
     mode.enter = function() {
         function done() {
             context.ui().sidebar.show(commit);
         }
 
-        keybinding
-            .on('⎋', cancel, true);
-
-        d3_select(document)
-            .call(keybinding);
+        keybindingOn();
 
         context.container().selectAll('#content')
             .attr('class', 'inactive');
@@ -509,7 +519,7 @@ export function modeSave(context) {
     mode.exit = function() {
         _isSaving = false;
 
-        keybinding.off();
+        keybindingOff();
 
         context.container().selectAll('#content')
             .attr('class', 'active');

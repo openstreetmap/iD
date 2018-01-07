@@ -5,6 +5,8 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+
 import { t } from '../util/locale';
 import { JXON } from '../util/jxon';
 import { geoExtent } from '../geo';
@@ -17,11 +19,35 @@ import { utilRebind } from '../util/rebind';
 
 export function uiConflicts(context) {
     var dispatch = d3_dispatch('cancel', 'save');
+    var keybinding = d3_keybinding('conflicts');
     var _origChanges;
     var _conflictList;
 
 
+    function keybindingOn() {
+        d3_select(document)
+            .call(keybinding.on('⎋', cancel, true));
+    }
+
+    function keybindingOff() {
+        d3_select(document)
+            .call(keybinding.off);
+    }
+
+    function tryAgain() {
+        keybindingOff();
+        dispatch.call('save');
+    }
+
+    function cancel() {
+        keybindingOff();
+        dispatch.call('cancel');
+    }
+
+
     function conflicts(selection) {
+        keybindingOn();
+
         var header = selection
             .append('div')
             .attr('class', 'header fillL');
@@ -29,7 +55,7 @@ export function uiConflicts(context) {
         header
             .append('button')
             .attr('class', 'fr')
-            .on('click', function() { dispatch.call('cancel'); })
+            .on('click', cancel)
             .call(svgIcon('#icon-close'));
 
         header
@@ -102,13 +128,13 @@ export function uiConflicts(context) {
             .attr('disabled', _conflictList.length > 1)
             .attr('class', 'action conflicts-button col6')
             .text(t('save.title'))
-            .on('click.try_again', function() { dispatch.call('save'); });
+            .on('click.try_again', tryAgain);
 
         buttons
             .append('button')
             .attr('class', 'secondary-action conflicts-button col6')
             .text(t('confirm.cancel'))
-            .on('click.cancel', function() { dispatch.call('cancel'); });
+            .on('click.cancel', cancel);
     }
 
 
@@ -149,8 +175,8 @@ export function uiConflicts(context) {
             .attr('href', '#')
             .text(function(d) { return d.name; })
             .on('click', function(d) {
-                zoomToEntity(d.id);
                 d3_event.preventDefault();
+                zoomToEntity(d.id);
             });
 
         var details = enter
@@ -186,6 +212,8 @@ export function uiConflicts(context) {
                     (i === 1 && index === _conflictList.length - 1) || null;
             })
             .on('click', function(d, i) {
+                d3_event.preventDefault();
+
                 var container = parent.select('.conflict-container');
                 var sign = (i === 0 ? -1 : 1);
 
@@ -195,8 +223,6 @@ export function uiConflicts(context) {
 
                 container
                     .call(showConflict, index + sign);
-
-                d3_event.preventDefault();
             });
 
         item.exit()
