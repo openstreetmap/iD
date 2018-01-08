@@ -53,7 +53,7 @@
         {
             "countryCodes": ["fr", "lu", "mo"],
             "format": [
-                ["unit","housenumber", "street"],
+                ["housenumber", "street"],
                 ["postcode", "city"]
             ]
         },
