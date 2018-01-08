@@ -137,7 +137,7 @@ export function uiIntroWelcome(context, reveal) {
         );
     }
 
-    
+
     chapter.enter = function() {
         welcome();
     };
@@ -145,7 +145,7 @@ export function uiIntroWelcome(context, reveal) {
 
     chapter.exit = function() {
         listener.off();
-        var tooltip = d3_select('.curtain-tooltip.intro-mouse')
+        d3_select('.curtain-tooltip.intro-mouse')
             .selectAll('.counter')
             .remove();
     };

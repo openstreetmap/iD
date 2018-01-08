@@ -470,6 +470,7 @@ en:
     status_code: "Server returned status code {code}"
     unknown_error_details: "Please ensure you are connected to the internet."
     uploading: Uploading changes to OpenStreetMap...
+    conflict_progress: "Checking for conflicts: {num} of {total}"
     unsaved_changes: You have unsaved changes
     conflict:
       header: Resolve conflicting edits

@@ -344,7 +344,12 @@ export function rendererMap(context) {
     function editOff() {
         context.features().resetStats();
         surface.selectAll('.layer-osm *').remove();
-        context.enter(modeBrowse(context));
+
+        var mode = context.mode();
+        if (mode && mode.id !== 'save') {
+            context.enter(modeBrowse(context));
+        }
+
         dispatch.call('drawn', this, {full: true});
     }
 

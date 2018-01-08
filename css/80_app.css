@@ -713,7 +713,7 @@ button.save.has-count .count::before {
     position: absolute;
     right: 0;
     top: 0;
-    height: 60px;
+    height: 59px;
     z-index: 50;
 }
 [dir='rtl'] .modal > button {
