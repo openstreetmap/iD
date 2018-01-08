@@ -1,10 +1,14 @@
 describe('iD.geo - vector', function() {
 
     describe('geoVecEqual', function() {
-        it('tests vectors for equality', function() {
+        it('tests vectors for exact equality', function() {
             expect(iD.geoVecEqual([1, 2], [1, 2])).to.be.true;
             expect(iD.geoVecEqual([1, 2], [1, 0])).to.be.false;
             expect(iD.geoVecEqual([1, 2], [2, 1])).to.be.false;
+        });
+        it('tests vectors for equality within epsilon', function() {
+            expect(iD.geoVecEqual([1, 2], [1.0000001, 2.0000001], 1e-5)).to.be.true;
+            expect(iD.geoVecEqual([1, 2], [1.0000001, 2.0000001], 1e-8)).to.be.false;
         });
     });
 
