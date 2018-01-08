@@ -1,6 +1,13 @@
 import { t } from '../util/locale';
 
 import {
+    event as d3_event,
+    select as d3_select
+} from 'd3-selection';
+
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+
+import {
     actionAddMidpoint,
     actionMoveNode,
     actionNoop
@@ -34,11 +41,40 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
     _tempEdits++;
 
 
+
+    function keydown() {
+        if (d3_event.keyCode === d3_keybinding.modifierCodes.alt) {
+            if (context.surface().classed('nope')) {
+                context.surface()
+                    .classed('nope-suppressed', true);
+            }
+            context.surface()
+                .classed('nope', false)
+                .classed('nope-disabled', true);
+        }
+    }
+
+
+    function keyup() {
+        if (d3_event.keyCode === d3_keybinding.modifierCodes.alt) {
+            if (context.surface().classed('nope-suppressed')) {
+                context.surface()
+                    .classed('nope', true);
+            }
+            context.surface()
+                .classed('nope-suppressed', false)
+                .classed('nope-disabled', false);
+        }
+    }
+
+
     // related code
     // - `mode/drag_node.js`     `doMode()`
     // - `behavior/draw.js`      `click()`
     // - `behavior/draw_way.js`  `move()`
     function move(datum) {
+        context.surface().classed('nope-disabled', d3_event.altKey);
+
         var nodeLoc = datum && datum.properties && datum.properties.entity && datum.properties.entity.loc;
         var nodeGroups = datum && datum.properties && datum.properties.nodes;
         var loc = context.map().mouseCoordinates();
@@ -68,9 +104,18 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
     // If so, class the surface with a nope cursor.
     // `skipLast` - include closing segment in the check, see #4655
     function checkGeometry(skipLast) {
-        var doBlock = isInvalidGeometry(end, context.graph(), skipLast);
-        context.surface()
-            .classed('nope', doBlock);
+        var nopeDisabled = context.surface().classed('nope-disabled');
+        var isInvalid = isInvalidGeometry(end, context.graph(), skipLast);
+
+        if (nopeDisabled) {
+            context.surface()
+                .classed('nope', false)
+                .classed('nope-suppressed', isInvalid);
+        } else {
+            context.surface()
+                .classed('nope', isInvalid)
+                .classed('nope-suppressed', false);
+        }
     }
 
 
@@ -122,6 +167,10 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
             .on('cancel', drawWay.cancel)
             .on('finish', drawWay.finish);
 
+        d3_select(window)
+            .on('keydown.drawWay', keydown)
+            .on('keyup.drawWay', keyup);
+
         context.map()
             .dblclickEnable(false)
             .on('drawn.draw', setActiveElements);
@@ -152,6 +201,15 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
         surface.call(behavior.off)
             .selectAll('.active')
             .classed('active', false);
+
+        surface
+            .classed('nope', false)
+            .classed('nope-suppressed', false)
+            .classed('nope-disabled', false);
+
+        d3_select(window)
+            .on('keydown.hover', null)
+            .on('keyup.hover', null);
 
         context.history()
             .on('undone.draw', null);
@@ -274,7 +332,9 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
         }, 1000);
 
         context.surface()
-            .classed('nope', false);
+            .classed('nope', false)
+            .classed('nope-disabled', false)
+            .classed('nope-suppressed', false);
 
         context.enter(modeBrowse(context));
     };

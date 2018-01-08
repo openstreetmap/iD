@@ -5,6 +5,8 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+
 import { t } from '../util/locale';
 
 import {
@@ -80,6 +82,32 @@ export function modeDragNode(context) {
 
     function origin(entity) {
         return context.projection(entity.loc);
+    }
+
+
+    function keydown() {
+        if (d3_event.keyCode === d3_keybinding.modifierCodes.alt) {
+            if (context.surface().classed('nope')) {
+                context.surface()
+                    .classed('nope-suppressed', true);
+            }
+            context.surface()
+                .classed('nope', false)
+                .classed('nope-disabled', true);
+        }
+    }
+
+
+    function keyup() {
+        if (d3_event.keyCode === d3_keybinding.modifierCodes.alt) {
+            if (context.surface().classed('nope-suppressed')) {
+                context.surface()
+                    .classed('nope', true);
+            }
+            context.surface()
+                .classed('nope-suppressed', false)
+                .classed('nope-disabled', false);
+        }
     }
 
 
@@ -173,15 +201,23 @@ export function modeDragNode(context) {
 
 
         // check if this movement causes the geometry to break
-        var doBlock = invalidGeometry(entity, context.graph());
-        context.surface()
-            .classed('nope', doBlock);
+        var nopeDisabled = context.surface().classed('nope-disabled');
+        var isInvalid = isInvalidGeometry(entity, context.graph());
+        if (nopeDisabled) {
+            context.surface()
+                .classed('nope', false)
+                .classed('nope-suppressed', isInvalid);
+        } else {
+            context.surface()
+                .classed('nope', isInvalid)
+                .classed('nope-suppressed', false);
+        }
 
         _lastLoc = loc;
     }
 
 
-    function invalidGeometry(entity, graph) {
+    function isInvalidGeometry(entity, graph) {
         var parents = graph.parentWays(entity);
         var i, j, k;
 
@@ -223,7 +259,7 @@ export function modeDragNode(context) {
 
             // If we still haven't tested this node's parent way for self-intersections.
             // (because it's not a member of a multipolygon), test it now.
-            if (activeIndex !== null && parent.isClosed()) {
+            if (activeIndex === null && parent.isClosed()) {
                 nodes = parent.nodes.map(function(nodeID) { return graph.entity(nodeID); });
                 if (nodes.length && geoHasSelfIntersections(nodes, entity.id)) {
                     return true;
@@ -238,8 +274,10 @@ export function modeDragNode(context) {
 
     function move(entity) {
         if (_isCancelled) return;
-
         d3_event.sourceEvent.stopPropagation();
+
+        context.surface().classed('nope-disabled', d3_event.sourceEvent.altKey);
+
         _lastLoc = context.projection.invert(d3_event.point);
 
         doMove(entity);
@@ -337,6 +375,10 @@ export function modeDragNode(context) {
         context.install(hover);
         context.install(edit);
 
+        d3_select(window)
+            .on('keydown.drawWay', keydown)
+            .on('keyup.drawWay', keyup);
+
         context.history()
             .on('undone.drag-node', cancel);
     };
@@ -346,6 +388,10 @@ export function modeDragNode(context) {
         context.ui().sidebar.hover.cancel();
         context.uninstall(hover);
         context.uninstall(edit);
+
+        d3_select(window)
+            .on('keydown.hover', null)
+            .on('keyup.hover', null);
 
         context.history()
             .on('undone.drag-node', null);
@@ -357,6 +403,8 @@ export function modeDragNode(context) {
 
         context.surface()
             .classed('nope', false)
+            .classed('nope-suppressed', false)
+            .classed('nope-disabled', false)
             .selectAll('.active')
             .classed('active', false);
 
