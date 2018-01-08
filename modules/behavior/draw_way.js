@@ -60,21 +60,28 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
 
         context.replace(actionMoveNode(end.id, loc));
         end = context.entity(end.id);
+        checkGeometry(true);    // skipLast = true
+    }
 
-        // check if this movement causes the geometry to break
-        var doBlock = invalidGeometry(end, context.graph());
+
+    // Check whether this edit causes the geometry to break.
+    // If so, class the surface with a nope cursor.
+    // `skipLast` - include closing segment in the check, see #4655
+    function checkGeometry(skipLast) {
+        var doBlock = isInvalidGeometry(end, context.graph(), skipLast);
         context.surface()
             .classed('nope', doBlock);
     }
 
 
-    function invalidGeometry(entity, graph) {
+    function isInvalidGeometry(entity, graph, skipLast) {
         var parents = graph.parentWays(entity);
 
         for (var i = 0; i < parents.length; i++) {
             var parent = parents[i];
             var nodes = parent.nodes.map(function(nodeID) { return graph.entity(nodeID); });
             if (parent.isClosed()) {
+                if (skipLast)  nodes.pop();   // disregard closing segment - #4655
                 if (geoHasSelfIntersections(nodes, entity.id)) {
                     return true;
                 }
@@ -183,6 +190,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
             annotation
         );
 
+        checkGeometry(false);   // skipLast = false
         context.enter(mode);
     };
 
@@ -202,6 +210,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
             annotation
         );
 
+        checkGeometry(false);   // skipLast = false
         context.enter(mode);
     };
 
@@ -220,6 +229,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
             annotation
         );
 
+        checkGeometry(false);   // skipLast = false
         context.enter(mode);
     };
 
@@ -228,6 +238,7 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
     // If the way has enough nodes to be valid, it's selected.
     // Otherwise, delete everything and return to browse mode.
     drawWay.finish = function() {
+        checkGeometry(false);   // skipLast = false
         if (context.surface().classed('nope')) {
             return;   // can't click here
         }
