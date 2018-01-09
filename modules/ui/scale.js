@@ -16,7 +16,7 @@ export function uiScale(context) {
             conversion = (isImperial ? 3.28084 : 1),
             dist = geoLonToMeters(loc2[0] - loc1[0], lat) * conversion,
             scale = { dist: 0, px: 0, text: '' },
-            buckets, i, val, dLon, textKey;
+            buckets, i, val, dLon, unit;
 
         if (isImperial) {
             buckets = [5280000, 528000, 52800, 5280, 500, 50, 5, 1];
@@ -41,19 +41,19 @@ export function uiScale(context) {
         if (isImperial) {
             if (scale.dist >= 5280) {
                 scale.dist /= 5280;
-                textKey = 'scale.miles';
+                unit = 'miles';
             } else {
-                textKey = 'scale.feet';
+                unit = 'feet';
             }
         } else {
             if (scale.dist >= 1000) {
                 scale.dist /= 1000;
-                textKey = 'scale.kilometers';
+                unit = 'kilometers';
             } else {
-                textKey = 'scale.meters';
+                unit = 'meters';
             }
         }
-        scale.text = t(textKey, { quantity: scale.dist.toLocaleString(locale) });
+        scale.text = t('units.' + unit, { quantity: scale.dist.toLocaleString(locale) });
 
         return scale;
     }

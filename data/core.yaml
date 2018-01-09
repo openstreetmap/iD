@@ -1055,7 +1055,7 @@ en:
         history: "Toggle history panel"
         location: "Toggle location panel"
         measurement: "Toggle measurement panel"
-  scale:
+  units:
     miles: "{quantity} mi"
     feet: "{quantity} ft"
     kilometers: "{quantity} km"

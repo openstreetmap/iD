@@ -1221,7 +1221,7 @@
                 }
             }
         },
-        "scale": {
+        "units": {
             "miles": "{quantity} mi",
             "feet": "{quantity} ft",
             "kilometers": "{quantity} km",
