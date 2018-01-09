@@ -2,7 +2,7 @@
     "dataAddressFormats": [
         {
             "format": [
-                ["housenumber", "street", "unit"],
+                ["housenumber", "street"],
                 ["city", "postcode"]
             ]
         },
