@@ -8,7 +8,7 @@ import {
 } from 'd3-geo';
 
 import { t } from '../../util/locale';
-import { displayArea, displayLength, displayCoordinatePair } from '../../util/units';
+import { displayArea, displayLength, decimalCoordinatePair, dmsCoordinatePair } from '../../util/units';
 import { geoExtent } from '../../geo';
 import { utilDetect } from '../../util/detect';
 
@@ -78,14 +78,17 @@ export function uiPanelMeasurement(context) {
 
         var list = selection
             .append('ul');
+        var coordItem;
 
         // multiple features, just display extent center..
         if (!singular) {
-            list
+            coordItem = list
                 .append('li')
-                .text(t('info_panels.measurement.center') + ':')
-                .append('span')
-                .text(displayCoordinatePair(center));
+                .text(t('info_panels.measurement.center') + ':');
+            coordItem.append('span')
+                .text(dmsCoordinatePair(center));
+            coordItem.append('span')
+                .text(decimalCoordinatePair(center));
             return;
         }
 
@@ -132,11 +135,13 @@ export function uiPanelMeasurement(context) {
                 .append('span')
                 .text(displayLength(length, isImperial));
 
-            list
+            coordItem = list
                 .append('li')
-                .text(t('info_panels.measurement.centroid') + ':')
-                .append('span')
-                .text(displayCoordinatePair(centroid));
+                .text(t('info_panels.measurement.centroid') + ':');
+            coordItem.append('span')
+                .text(dmsCoordinatePair(centroid));
+            coordItem.append('span')
+                .text(decimalCoordinatePair(centroid));
 
             var toggle  = isImperial ? 'imperial' : 'metric';
 
@@ -160,11 +165,13 @@ export function uiPanelMeasurement(context) {
                 .append('span')
                 .text(t('geometry.' + geometry));
 
-            list
+            coordItem = list
                 .append('li')
-                .text(centerLabel + ':')
-                .append('span')
-                .text(displayCoordinatePair(center));
+                .text(centerLabel + ':');
+            coordItem.append('span')
+                .text(dmsCoordinatePair(center));
+            coordItem.append('span')
+                .text(decimalCoordinatePair(center));
         }
     }
 

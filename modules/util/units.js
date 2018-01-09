@@ -99,13 +99,56 @@ function clamp(x, min, max) {
 	return Math.max(min, Math.min(x, max));
 }
 
+function displayCoordinate(deg, pos, neg) {
+	var min = (Math.abs(deg) - Math.floor(Math.abs(deg))) * 60,
+		sec = (min - Math.floor(min)) * 60,
+		displayDegrees = t('units.arcdegrees', {
+			quantity: Math.floor(Math.abs(deg)).toLocaleString(locale)
+		}),
+		displayCoordinate;
+
+	if (Math.floor(sec) > 0) {
+		displayCoordinate = displayDegrees +
+			t('units.arcminutes', { quantity: Math.floor(min).toLocaleString(locale) }) +
+			t('units.arcseconds', { quantity: Math.round(sec).toLocaleString(locale) });
+	} else if (Math.floor(min) > 0) {
+		displayCoordinate = displayDegrees +
+			t('units.arcminutes', { quantity: Math.round(min).toLocaleString(locale) });
+	} else {
+		displayCoordinate = t('units.arcdegrees', {
+			quantity: Math.round(Math.abs(deg)).toLocaleString(locale)
+		});
+	}
+
+	if (deg === 0) {
+		return displayCoordinate;
+	} else {
+		return t('units.coordinate', {
+			coordinate: displayCoordinate,
+			direction: t('units.' + (deg > 0 ? pos : neg))
+		});
+	}
+}
+
 /**
- * Returns a human-readable representation of the given coordinate pair.
+ * Returns given coordinate pair in degree-minute-second format.
  *
  * @param {Array<Number>} coord longitude and latitude
  */
-export function displayCoordinatePair(coord) {
-    return t('units.coordinate_pair', {
+export function dmsCoordinatePair(coord) {
+	return t('units.coordinate_pair', {
+		latitude: displayCoordinate(clamp(coord[1], -90, 90), 'north', 'south'),
+		longitude: displayCoordinate(wrap(coord[0], -180, 180), 'east', 'west')
+	});
+}
+
+/**
+ * Returns the given coordinate pair in decimal format.
+ *
+ * @param {Array<Number>} coord longitude and latitude
+ */
+export function decimalCoordinatePair(coord) {
+	return t('units.coordinate_pair', {
 		latitude: clamp(coord[1], -90, 90).toLocaleString(locale, { maximumFractionDigits: OSM_PRECISION }),
 		longitude: wrap(coord[0], -180, 180).toLocaleString(locale, { maximumFractionDigits: OSM_PRECISION })
 	});

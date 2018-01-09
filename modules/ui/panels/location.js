@@ -1,6 +1,6 @@
 import _debounce from 'lodash-es/debounce';
 
-import { displayCoordinatePair } from '../../util/units';
+import { decimalCoordinatePair, dmsCoordinatePair } from '../../util/units';
 import { t } from '../../util/locale';
 import { services } from '../../services';
 
@@ -21,11 +21,11 @@ export function uiPanelLocation(context) {
             coord = context.map().center();
         }
 
-        var coordStr = displayCoordinatePair(coord);
-
         list
             .append('li')
-            .text(coordStr);
+            .text(dmsCoordinatePair(coord))
+            .append('li')
+            .text(decimalCoordinatePair(coord));
 
         // Location Info
         selection

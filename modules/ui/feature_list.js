@@ -7,7 +7,7 @@ import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 
 import * as sexagesimal from '@mapbox/sexagesimal';
 import { t } from '../util/locale';
-import { displayCoordinatePair } from '../util/units';
+import { dmsCoordinatePair } from '../util/units';
 import { geoExtent, geoChooseEdge } from '../geo';
 import { modeSelect } from '../modes';
 import { osmEntity } from '../osm';
@@ -144,7 +144,7 @@ export function uiFeatureList(context) {
                     id: -1,
                     geometry: 'point',
                     type: t('inspector.location'),
-                    name: displayCoordinatePair([loc[1], loc[0]]),
+                    name: dmsCoordinatePair([loc[1], loc[0]]),
                     location: loc
                 });
             }
