@@ -398,7 +398,9 @@
                 "location": "Location",
                 "metric": "Metric",
                 "imperial": "Imperial",
-                "node_count": "Number of nodes"
+                "node_count": "Number of nodes",
+                "coordinate_pair": "{latitude}, {longitude}",
+                "area_pair": "{area1} ({area2})"
             }
         },
         "geometry": {
@@ -1222,10 +1224,16 @@
             }
         },
         "units": {
-            "miles": "{quantity} mi",
             "feet": "{quantity} ft",
+            "miles": "{quantity} mi",
+            "square_feet": "{quantity} sq ft",
+            "square_miles": "{quantity} sq mi",
+            "acres": "{quantity} ac",
+            "meters": "{quantity} m",
             "kilometers": "{quantity} km",
-            "meters": "{quantity} m"
+            "square_meters": "{quantity} m²",
+            "square_kilometers": "{quantity} km²",
+            "hectares": "{quantity} ha"
         },
         "presets": {
             "categories": {
