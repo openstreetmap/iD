@@ -4,6 +4,12 @@ import { utilDetect } from 'detect';
 var OSM_PRECISION = 7;
 var locale = utilDetect().locale;
 
+/**
+ * Returns a localized representation of the given length measurement.
+ *
+ * @param {Number} m area in meters
+ * @param {Boolean} isImperial true for U.S. customary units; false for metric
+ */
 export function displayLength(m, isImperial) {
 	var d = m * (isImperial ? 3.28084 : 1),
 		unit;
@@ -29,6 +35,12 @@ export function displayLength(m, isImperial) {
 	});
 }
 
+/**
+ * Returns a localized representation of the given area measurement.
+ *
+ * @param {Number} m2 area in square meters
+ * @param {Boolean} isImperial true for U.S. customary units; false for metric
+ */
 export function displayArea(m2, isImperial) {
 	var d = m2 * (isImperial ? 10.7639111056 : 1),
 		d1, d2, unit1, unit2, area;
@@ -87,6 +99,11 @@ function clamp(x, min, max) {
 	return Math.max(min, Math.min(x, max));
 }
 
+/**
+ * Returns a human-readable representation of the given coordinate pair.
+ *
+ * @param {Array<Number>} coord longitude and latitude
+ */
 export function displayCoordinatePair(coord) {
     return t('units.coordinate_pair', {
 		latitude: clamp(coord[1], -90, 90).toLocaleString(locale, { maximumFractionDigits: OSM_PRECISION }),
