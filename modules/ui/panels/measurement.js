@@ -108,7 +108,7 @@ export function uiPanelMeasurement(context) {
                 .text(t('info_panels.measurement.geometry') + ':')
                 .append('span')
                 .text(
-                    (closed ? t('info_panels.measurement.closed') + ' ' : '') + t('geometry.' + geometry)
+                    closed ? t('info_panels.measurement.closed_' + geometry) : t('geometry.' + geometry)
                 );
 
             if (entity.type !== 'relation') {

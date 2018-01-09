@@ -309,7 +309,8 @@ en:
       title: Measurement
       selected: "{n} selected"
       geometry: Geometry
-      closed: closed
+      closed_line: closed line
+      closed_area: closed area
       center: Center
       perimeter: Perimeter
       length: Length
