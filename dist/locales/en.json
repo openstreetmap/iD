@@ -1221,6 +1221,12 @@
                 }
             }
         },
+        "scale": {
+            "miles": "{quantity} mi",
+            "feet": "{quantity} ft",
+            "kilometers": "{quantity} km",
+            "meters": "{quantity} m"
+        },
         "presets": {
             "categories": {
                 "category-barrier": {
