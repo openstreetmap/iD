@@ -1,23 +1,12 @@
 import _debounce from 'lodash-es/debounce';
 
+import { displayCoordinatePair } from '../../util/units';
 import { t } from '../../util/locale';
 import { services } from '../../services';
 
 
 export function uiPanelLocation(context) {
     var currLocation = '';
-    var OSM_PRECISION = 7;
-
-
-    function wrap(x, min, max) {
-        var d = max - min;
-        return ((x - min) % d + d) % d + min;
-    }
-
-
-    function clamp(x, min, max) {
-        return Math.max(min, Math.min(x, max));
-    }
 
 
     function redraw(selection) {
@@ -32,9 +21,7 @@ export function uiPanelLocation(context) {
             coord = context.map().center();
         }
 
-        var coordStr =
-            clamp(coord[1], -90, 90).toFixed(OSM_PRECISION) + ', ' +
-            wrap(coord[0], -180, 180).toFixed(OSM_PRECISION);
+        var coordStr = displayCoordinatePair(coord);
 
         list
             .append('li')

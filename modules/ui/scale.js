@@ -1,12 +1,11 @@
+import { displayLength } from '../util/units';
 import { geoLonToMeters, geoMetersToLon } from '../geo';
-import { t } from '../util/locale';
 import { utilDetect } from '../util/detect';
 
 
 export function uiScale(context) {
     var projection = context.projection,
-        locale = utilDetect().locale,
-        isImperial = (locale.toLowerCase() === 'en-us'),
+        isImperial = (utilDetect().locale.toLowerCase() === 'en-us'),
         maxLength = 180,
         tickHeight = 8;
 
@@ -16,7 +15,7 @@ export function uiScale(context) {
             conversion = (isImperial ? 3.28084 : 1),
             dist = geoLonToMeters(loc2[0] - loc1[0], lat) * conversion,
             scale = { dist: 0, px: 0, text: '' },
-            buckets, i, val, dLon, unit;
+            buckets, i, val, dLon;
 
         if (isImperial) {
             buckets = [5280000, 528000, 52800, 5280, 500, 50, 5, 1];
@@ -38,22 +37,7 @@ export function uiScale(context) {
         dLon = geoMetersToLon(scale.dist / conversion, lat);
         scale.px = Math.round(projection([loc1[0] + dLon, loc1[1]])[0]);
 
-        if (isImperial) {
-            if (scale.dist >= 5280) {
-                scale.dist /= 5280;
-                unit = 'miles';
-            } else {
-                unit = 'feet';
-            }
-        } else {
-            if (scale.dist >= 1000) {
-                scale.dist /= 1000;
-                unit = 'kilometers';
-            } else {
-                unit = 'meters';
-            }
-        }
-        scale.text = t('units.' + unit, { quantity: scale.dist.toLocaleString(locale) });
+        scale.text = displayLength(scale.dist / conversion, isImperial);
 
         return scale;
     }
