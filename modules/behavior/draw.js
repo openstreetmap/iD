@@ -128,12 +128,12 @@ export function behaviorDraw(context) {
     // - `behavior/draw_way.js`  `move()`
     function click() {
         var d = datum();
-        var target = d && d.id && context.hasEntity(d.id);
-
+        var target = d && d.properties && d.properties.entity;
         var trySnap = geoViewportEdge(context.mouse(), context.map().dimensions()) === null;
+
         if (trySnap) {
             if (target && target.type === 'node') {   // Snap to a node
-                dispatch.call('clickNode', this, target);
+                dispatch.call('clickNode', this, target, d);
                 return;
 
             } else if (target && target.type === 'way') {   // Snap to a way
@@ -142,7 +142,7 @@ export function behaviorDraw(context) {
                 );
                 if (choice) {
                     var edge = [target.nodes[choice.index - 1], target.nodes[choice.index]];
-                    dispatch.call('clickWay', this, choice.loc, edge);
+                    dispatch.call('clickWay', this, choice.loc, edge, d);
                     return;
                 }
             }

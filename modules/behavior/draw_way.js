@@ -75,22 +75,17 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
     function move(datum) {
         context.surface().classed('nope-disabled', d3_event.altKey);
 
-        var nodeLoc = datum && datum.properties && datum.properties.entity && datum.properties.entity.loc;
-        var nodeGroups = datum && datum.properties && datum.properties.nodes;
+        var targetLoc = datum && datum.properties && datum.properties.entity && datum.properties.entity.loc;
+        var targetNodes = datum && datum.properties && datum.properties.nodes;
         var loc = context.map().mouseCoordinates();
 
-        if (nodeLoc) {   // snap to node/vertex - a point target with `.loc`
-            loc = nodeLoc;
+        if (targetLoc) {   // snap to node/vertex - a point target with `.loc`
+            loc = targetLoc;
 
-        } else if (nodeGroups) {   // snap to way - a line target with `.nodes`
-            var best = Infinity;
-            for (var i = 0; i < nodeGroups.length; i++) {
-                var childNodes = nodeGroups[i].map(function(id) { return context.entity(id); });
-                var choice = geoChooseEdge(childNodes, context.mouse(), context.projection, end.id);
-                if (choice && choice.distance < best) {
-                    best = choice.distance;
-                    loc = choice.loc;
-                }
+        } else if (targetNodes) {   // snap to way - a line target with `.nodes`
+            var choice = geoChooseEdge(targetNodes, context.mouse(), context.projection, end.id);
+            if (choice) {
+                loc = choice.loc;
             }
         }
 
@@ -252,8 +247,8 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
 
 
     // Connect the way to an existing way.
-    drawWay.addWay = function(loc, edge) {
-        if (context.surface().classed('nope')) {
+    drawWay.addWay = function(loc, edge, d) {
+        if ((d && d.properties && d.properties.nope) || context.surface().classed('nope')) {
             return;   // can't click here
         }
 
@@ -272,8 +267,8 @@ export function behaviorDrawWay(context, wayId, index, mode, startGraph) {
 
 
     // Connect the way to an existing node and continue drawing.
-    drawWay.addNode = function(node) {
-        if (context.surface().classed('nope')) {
+    drawWay.addNode = function(node, d) {
+        if ((d && d.properties && d.properties.nope) || context.surface().classed('nope')) {
             return;   // can't click here
         }
 

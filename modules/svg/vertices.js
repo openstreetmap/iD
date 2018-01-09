@@ -192,7 +192,7 @@ export function svgVertices(projection, context) {
             if (activeID === node.id) return;   // draw no target on the activeID
 
             var vertexType = svgPassiveVertex(node, graph, activeID);
-            if (vertexType !== 0) {              // passive or adjacent - allow to connect
+            if (vertexType !== 0) {     // passive or adjacent - allow to connect
                 data.targets.push({
                     type: 'Feature',
                     id: node.id,
@@ -205,12 +205,11 @@ export function svgVertices(projection, context) {
             } else {
                 data.nopes.push({
                     type: 'Feature',
-                    id: node.id + '-nope',   // break the ids on purpose
+                    id: node.id + '-nope',
                     properties: {
-                        target: true,
-                        entity: node,
                         nope: true,
-                        originalID: node.id
+                        target: true,
+                        entity: node
                     },
                     geometry: node.asGeoJSON()
                 });
@@ -248,7 +247,7 @@ export function svgVertices(projection, context) {
         // enter/update
         nopes.enter()
             .append('circle')
-            .attr('r', function(d) { return (_radii[d.properties.originalID] || radiuses.shadow[3]); })
+            .attr('r', function(d) { return (_radii[d.properties.entity.id] || radiuses.shadow[3]); })
             .merge(nopes)
             .attr('class', function(d) { return 'node vertex target target-nope ' + nopeClass + d.id; })
             .attr('transform', getTransform);

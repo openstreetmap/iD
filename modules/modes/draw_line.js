@@ -20,11 +20,11 @@ export function modeDrawLine(context, wayId, startGraph, affix) {
             .tail(t('modes.draw_line.tail'));
 
         var addNode = behavior.addNode;
-        behavior.addNode = function(node) {
+        behavior.addNode = function(node, d) {
             if (node.id === headId) {
                 behavior.finish();
             } else {
-                addNode(node);
+                addNode(node, d);
             }
         };
 

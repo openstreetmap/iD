@@ -175,21 +175,16 @@ export function modeDragNode(context) {
             // - `behavior/draw.js`      `click()`
             // - `behavior/draw_way.js`  `move()`
             var d = datum();
-            var nodeLoc = d && d.properties && d.properties.entity && d.properties.entity.loc;
-            var nodeGroups = d && d.properties && d.properties.nodes;
+            var targetLoc = d && d.properties && d.properties.entity && d.properties.entity.loc;
+            var targetNodes = d && d.properties && d.properties.nodes;
 
-            if (nodeLoc) {    // snap to node/vertex - a point target with `.loc`
-                loc = nodeLoc;
+            if (targetLoc) {   // snap to node/vertex - a point target with `.loc`
+                loc = targetLoc;
 
-            } else if (nodeGroups) {   // snap to way - a line target with `.nodes`
-                var best = Infinity;
-                for (var i = 0; i < nodeGroups.length; i++) {
-                    var childNodes = nodeGroups[i].map(function(id) { return context.entity(id); });
-                    var choice = geoChooseEdge(childNodes, context.mouse(), context.projection, entity.id);
-                    if (choice && choice.distance < best) {
-                        best = choice.distance;
-                        loc = choice.loc;
-                    }
+            } else if (targetNodes) {   // snap to way - a line target with `.nodes`
+                var choice = geoChooseEdge(targetNodes, context.mouse(), context.projection, end.id);
+                if (choice) {
+                    loc = choice.loc;
                 }
             }
         }
