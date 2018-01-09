@@ -130,7 +130,7 @@
             "countryCodes": ["ua"],
             "format": [
                 ["housenumber", "postcode"],
-                ["street", "unit"]
+                ["street"]
             ]
         },
         {
