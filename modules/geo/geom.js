@@ -105,8 +105,18 @@ export function geoHasSelfIntersections(nodes, activeID) {
             if (geoVecEqual(p[1], q[0]) || geoVecEqual(p[0], q[1]) ||
                 geoVecEqual(p[0], q[0]) || geoVecEqual(p[1], q[1]) ) {
                 continue;
-            } else if (geoLineIntersection(p, q)) {
-                return true;
+            }
+
+            var hit = geoLineIntersection(p, q);
+            if (hit) {
+                var epsilon = 1e-8;
+                // skip if the hit is at the segment's endpoint
+                if (geoVecEqual(p[1], hit, epsilon) || geoVecEqual(p[0], hit, epsilon) ||
+                    geoVecEqual(q[1], hit, epsilon) || geoVecEqual(q[0], hit, epsilon) ) {
+                    continue;
+                } else {
+                    return true;
+                }
             }
         }
     }
