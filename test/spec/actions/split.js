@@ -394,6 +394,68 @@ describe('iD.actionSplit', function () {
                 var ids = graph.entity('r').members.map(function(m) { return m.id; });
                 expect(ids).to.have.ordered.members(['~', '=', '-']);
             });
+
+            it('adds the new way to parent relations (unsplit way belongs multiple times)', function () {
+                // Situation:
+                //    a ---- b ---- c ~~~~ d
+                //    Relation: [~~~~, ----, ~~~~]
+                //
+                // Split at b.
+                //
+                // Expected result:
+                //    a ---- b ==== c ~~~~ d
+                //    Relation: [~~~~, ====, ----, ====, ~~~~]
+                //
+                var graph = iD.coreGraph([
+                    iD.osmNode({id: 'a'}),
+                    iD.osmNode({id: 'b'}),
+                    iD.osmNode({id: 'c'}),
+                    iD.osmNode({id: 'd'}),
+                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c']}),
+                    iD.osmWay({id: '~', nodes: ['c', 'd']}),
+                    iD.osmRelation({id: 'r', members: [
+                        {id: '~', type: 'way'},
+                        {id: '-', type: 'way'},
+                        {id: '~', type: 'way'}
+                    ]})
+                ]);
+
+                graph = iD.actionSplit('b', ['='])(graph);
+
+                var ids = graph.entity('r').members.map(function(m) { return m.id; });
+                expect(ids).to.have.ordered.members(['~', '=', '-', '=', '~']);
+            });
+
+            it('adds the new way to parent relations (split way belongs multiple times)', function () {
+                // Situation:
+                //    a ---- b ---- c ~~~~ d
+                //    Relation: [----, ~~~~, ----]
+                //
+                // Split at b.
+                //
+                // Expected result:
+                //    a ---- b ==== c ~~~~ d
+                //    Relation: [----, ====, ~~~~, ====, ----]
+                //
+                var graph = iD.coreGraph([
+                    iD.osmNode({id: 'a'}),
+                    iD.osmNode({id: 'b'}),
+                    iD.osmNode({id: 'c'}),
+                    iD.osmNode({id: 'd'}),
+                    iD.osmWay({id: '-', nodes: ['a', 'b', 'c']}),
+                    iD.osmWay({id: '~', nodes: ['c', 'd']}),
+                    iD.osmRelation({id: 'r', members: [
+                        {id: '-', type: 'way'},
+                        {id: '~', type: 'way'},
+                        {id: '-', type: 'way'}
+                    ]})
+                ]);
+
+                graph = iD.actionSplit('b', ['='])(graph);
+
+                var ids = graph.entity('r').members.map(function(m) { return m.id; });
+                expect(ids).to.have.ordered.members(['-', '=', '~', '=', '-']);
+            });
         });
 
 

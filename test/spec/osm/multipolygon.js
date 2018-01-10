@@ -210,4 +210,36 @@ describe('iD.osmJoinWays', function() {
         var graph = iD.coreGraph();
         expect(iD.osmJoinWays([member], graph)).to.eql([]);
     });
+
+    it('understands doubled-back relation members', function() {
+        //                  e
+        //                /   \
+        // a <=== b ---> c ~~~> d
+        var graph = iD.coreGraph([
+            iD.osmNode({id: 'a', loc: [0, 0]}),
+            iD.osmNode({id: 'b', loc: [0, 0]}),
+            iD.osmNode({id: 'c', loc: [0, 0]}),
+            iD.osmNode({id: 'd', loc: [0, 0]}),
+            iD.osmNode({id: 'e', loc: [0, 0]}),
+            iD.osmWay({id: '=', nodes: ['b', 'a']}),
+            iD.osmWay({id: '-', nodes: ['b', 'c']}),
+            iD.osmWay({id: '~', nodes: ['c', 'd']}),
+            iD.osmWay({id: '\\', nodes: ['d', 'e']}),
+            iD.osmWay({id: '/', nodes: ['c', 'e']}),
+            iD.osmRelation({id: 'r', members: [
+                {id: '=', type: 'way'},
+                {id: '-', type: 'way'},
+                {id: '~', type: 'way'},
+                {id: '\\', type: 'way'},
+                {id: '/', type: 'way'},
+                {id: '-', type: 'way'},
+                {id: '=', type: 'way'}
+            ]})
+        ]);
+
+        var result = iD.osmJoinWays(graph.entity('r').members, graph);
+        var ids = result[0].map(function (w) { return w.id; });
+        expect(ids).to.have.ordered.members(['=', '-', '~', '\\', '/', '-', '=']);
+    });
+
 });
