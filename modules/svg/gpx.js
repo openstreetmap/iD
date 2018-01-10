@@ -57,7 +57,6 @@ export function svgGpx(projection, context, dispatch) {
         svgGpx.initialized = true;
     }
 
-
     function drawGpx(selection) {
         var geojson = svgGpx.geojson,
             enabled = svgGpx.enabled;
@@ -93,16 +92,26 @@ export function svgGpx(projection, context, dispatch) {
             .attr('d', path);
 
 
-        var labels = layer.selectAll('text')
-            .data(showLabels && geojson.features ? geojson.features : []);
-
-        labels.exit()
-            .remove();
-
-        labels = labels.enter()
-            .append('text')
-            .attr('class', 'gpx')
-            .merge(labels);
+        function createLabels(layer, textClass, data) {
+            var labels = layer.selectAll('text.' + textClass)
+                .data(data);
+    
+            labels.exit()
+                .remove();
+    
+            labels = labels.enter()
+                .append('text')
+                .attr('class', textClass)
+                .merge(labels);
+    
+            return labels;
+        }
+        
+        var labelsData = showLabels && geojson.features ? geojson.features : [];
+        createLabels(layer, 'gpxlabel-halo', labelsData);
+        createLabels(layer, 'gpxlabel', labelsData);
+        
+        labels = layer.selectAll('text');
 
         labels
             .text(function(d) {
@@ -110,7 +119,7 @@ export function svgGpx(projection, context, dispatch) {
             })
             .attr('x', function(d) {
                 var centroid = path.centroid(d);
-                return centroid[0] + 7;
+                return centroid[0] + 11;
             })
             .attr('y', function(d) {
                 var centroid = path.centroid(d);
