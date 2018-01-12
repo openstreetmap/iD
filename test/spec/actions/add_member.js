@@ -23,8 +23,8 @@ describe('iD.actionAddMember', function() {
         });
 
         it('appends the member if the ways are not connecting', function() {
-            // Before:  --->
-            // After:   --->  ...  ===>
+            // Before:  a ---> b
+            // After:   a ---> b .. c ===> d
             var graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0, 0]}),
                 iD.osmNode({id: 'b', loc: [0, 0]}),
@@ -42,8 +42,8 @@ describe('iD.actionAddMember', function() {
         });
 
         it('appends the member if the way connects at end', function() {
-            // Before:   --->
-            // After:    --->  ===>
+            // Before:   a ---> b
+            // After:    a ---> b ===> c
             var graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0, 0]}),
                 iD.osmNode({id: 'b', loc: [0, 0]}),
@@ -60,8 +60,8 @@ describe('iD.actionAddMember', function() {
         });
 
         it('inserts the member if the way connects at beginning', function() {
-            // Before:         --->  ~~~>
-            // After:    ===>  --->  ~~~>
+            // Before:          b ---> c ~~~> d
+            // After:    a ===> b ---> c ~~~> d
             var graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0, 0]}),
                 iD.osmNode({id: 'b', loc: [0, 0]}),
@@ -81,8 +81,8 @@ describe('iD.actionAddMember', function() {
         });
 
         it('inserts the member if the way connects in middle', function() {
-            // Before:   --->        ~~~>
-            // After:    --->  ===>  ~~~>
+            // Before:  a ---> b  ..  c ~~~> d
+            // After:   a ---> b ===> c ~~~> d
             var graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0, 0]}),
                 iD.osmNode({id: 'b', loc: [0, 0]}),
@@ -102,8 +102,8 @@ describe('iD.actionAddMember', function() {
         });
 
         it('inserts the member multiple times if the way exists multiple times (middle)', function() {
-            // Before:   --->        ~~~>        --->
-            // After:    --->  ===>  ~~~>  ===>  --->
+            // Before:  a ---> b  ..  c ~~~> d <~~~ c  ..  b <--- a
+            // After:   a ---> b ===> c ~~~> d <~~~ c <=== b <--- a
             var graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0, 0]}),
                 iD.osmNode({id: 'b', loc: [0, 0]}),
@@ -115,17 +115,18 @@ describe('iD.actionAddMember', function() {
                 iD.osmRelation({id: 'r', members: [
                     {id: '-', type: 'way'},
                     {id: '~', type: 'way'},
+                    {id: '~', type: 'way'},
                     {id: '-', type: 'way'}
                 ]})
             ]);
 
             graph = iD.actionAddMember('r', {id: '=', type: 'way'})(graph);
-            expect(members(graph)).to.eql(['-', '=', '~', '=', '-']);
+            expect(members(graph)).to.eql(['-', '=', '~', '~', '=', '-']);
         });
 
         it('inserts the member multiple times if the way exists multiple times (beginning/end)', function() {
-            // Before:         ===>  ~~~>  ===>
-            // After:    --->  ===>  ~~~>  ===>  --->
+            // Before:         b ===> c ~~~> d <~~~ c <=== b
+            // After:   a ---> b ===> c ~~~> d <~~~ c <=== b <--- a
             var graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0, 0]}),
                 iD.osmNode({id: 'b', loc: [0, 0]}),
@@ -137,12 +138,13 @@ describe('iD.actionAddMember', function() {
                 iD.osmRelation({id: 'r', members: [
                     {id: '=', type: 'way'},
                     {id: '~', type: 'way'},
+                    {id: '~', type: 'way'},
                     {id: '=', type: 'way'}
                 ]})
             ]);
 
             graph = iD.actionAddMember('r', {id: '-', type: 'way'})(graph);
-            expect(members(graph)).to.eql(['-', '=', '~', '=', '-']);
+            expect(members(graph)).to.eql(['-', '=', '~', '~', '=', '-']);
         });
 
 
