@@ -82,13 +82,7 @@ export function osmSimpleMultipolygonOuterMember(entity, graph) {
 // Incomplete members (those for which `graph.hasEntity(element.id)` returns
 // false) and non-way members are ignored.
 //
-export function osmJoinWays(array, graph) {
-    var joined = [], member, current, nodes, first, last, i, how, what;
-
-    array = array.filter(function(member) {
-        return member.type === 'way' && graph.hasEntity(member.id);
-    });
-
+export function osmJoinWays(toJoin, graph) {
     function resolve(member) {
         return graph.childNodes(graph.entity(member.id));
     }
@@ -97,52 +91,141 @@ export function osmJoinWays(array, graph) {
         return member.tags ? actionReverse(member.id, { reverseOneway: true })(graph).entity(member.id) : member;
     }
 
-    while (array.length) {
-        member = array.shift();
-        current = [member];
-        current.nodes = nodes = resolve(member).slice();
-        joined.push(current);
 
-        while (array.length && nodes[0] !== nodes[nodes.length - 1]) {
-            first = nodes[0];
-            last  = nodes[nodes.length - 1];
+    // make a copy containing only the ways to join
+    toJoin = toJoin.filter(function(member) {
+        return member.type === 'way' && graph.hasEntity(member.id);
+    });
 
-            for (i = 0; i < array.length; i++) {
-                member = array[i];
-                what = resolve(member);
+    var sequences = [];
 
-                if (last === what[0]) {
-                    how  = nodes.push;
-                    what = what.slice(1);
+    while (toJoin.length) {
+        // start a new sequence
+        var way = toJoin.shift();
+        var currWays = [way];
+        var currNodes = resolve(way).slice();
+        var doneSequence = false;
+
+        // add to it
+        while (toJoin.length && !doneSequence) {
+            var start = currNodes[0];
+            var end = currNodes[currNodes.length - 1];
+            var fn = null;
+            var nodes = null;
+            var i;
+
+            // find the next way
+            for (i = 0; i < toJoin.length; i++) {
+                way = toJoin[i];
+                nodes = resolve(way);
+
+                // Strongly prefer to generate a forward path that preserves the order
+                // of the members array. For multipolygons and most relations, member
+                // order does not matter - but for routes, it does. If we started this
+                // sequence backwards (i.e. next member way attaches to the start node
+                // and not the end node), reverse the initial way before continuing.
+                if (currWays.length === 1 && nodes[0] !== end && nodes[nodes.length - 1] !== end &&
+                    (nodes[nodes.length - 1] === start || nodes[0] === start)
+                ) {
+                    currWays[0] = reverse(currWays[0]);
+                    currNodes.reverse();
+                    start = currNodes[0];
+                    end = currNodes[currNodes.length - 1];
+                }
+
+                if (nodes[0] === end) {
+                    fn = currNodes.push;               // join to end
+                    nodes = nodes.slice(1);
                     break;
-                } else if (last === what[what.length - 1]) {
-                    how  = nodes.push;
-                    what = what.slice(0, -1).reverse();
-                    member = reverse(member);
+                } else if (nodes[nodes.length - 1] === end) {
+                    fn = currNodes.push;               // join to end
+                    nodes = nodes.slice(0, -1).reverse();
+                    way = reverse(way);
                     break;
-                } else if (first === what[what.length - 1]) {
-                    how  = nodes.unshift;
-                    what = what.slice(0, -1);
+                } else if (nodes[nodes.length - 1] === start) {
+                    fn = currNodes.unshift;            // join to beginning
+                    nodes = nodes.slice(0, -1);
                     break;
-                } else if (first === what[0]) {
-                    how  = nodes.unshift;
-                    what = what.slice(1).reverse();
-                    member = reverse(member);
+                } else if (nodes[0] === start) {
+                    fn = currNodes.unshift;            // join to beginning
+                    nodes = nodes.slice(1).reverse();
+                    way = reverse(way);
                     break;
                 } else {
-                    what = how = null;
+                    fn = nodes = null;
                 }
             }
 
-            if (!what)
-                break; // No more joinable ways.
+            if (!nodes) {
+                doneSequence = true;     // couldn't find a joinable way
+                break;
+            }
 
-            how.apply(current, [member]);
-            how.apply(nodes, what);
+            fn.apply(currWays, [way]);
+            fn.apply(currNodes, nodes);
 
-            array.splice(i, 1);
+            toJoin.splice(i, 1);
         }
+
+
+        currWays.nodes = currNodes;
+        sequences.push(currWays);
     }
 
-    return joined;
+    return sequences;
+
+
+    // var joined = [];
+
+    // while (array.length) {
+    //     var member = array.shift();
+    //     var current = [member];
+    //     var nodes = resolve(member).slice();
+
+    //     current.nodes = nodes;
+    //     joined.push(current);
+
+    //     while (array.length && nodes[0] !== nodes[nodes.length - 1]) {
+    //         var first = nodes[0];
+    //         var last  = nodes[nodes.length - 1];
+    //         var how, what, i;
+
+    //         for (i = 0; i < array.length; i++) {
+    //             member = array[i];
+    //             what = resolve(member);
+
+    //             if (last === what[0]) {
+    //                 how  = nodes.push;
+    //                 what = what.slice(1);
+    //                 break;
+    //             } else if (last === what[what.length - 1]) {
+    //                 how  = nodes.push;
+    //                 what = what.slice(0, -1).reverse();
+    //                 member = reverse(member);
+    //                 break;
+    //             } else if (first === what[what.length - 1]) {
+    //                 how  = nodes.unshift;
+    //                 what = what.slice(0, -1);
+    //                 break;
+    //             } else if (first === what[0]) {
+    //                 how  = nodes.unshift;
+    //                 what = what.slice(1).reverse();
+    //                 member = reverse(member);
+    //                 break;
+    //             } else {
+    //                 what = how = null;
+    //             }
+    //         }
+
+    //         if (!what)
+    //             break; // No more joinable ways.
+
+    //         how.apply(current, [member]);
+    //         how.apply(nodes, what);
+
+    //         array.splice(i, 1);
+    //     }
+    // }
+
+    // return joined;
 }
