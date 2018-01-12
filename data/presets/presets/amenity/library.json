@@ -8,7 +8,8 @@
         "opening_hours",
         "internet_access",
         "internet_access/fee",
-        "internet_access/ssid"
+        "internet_access/ssid",
+        "ref/isil"
     ],
     "geometry": [
         "point",
