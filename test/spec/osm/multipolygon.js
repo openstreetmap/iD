@@ -158,6 +158,7 @@ describe('iD.osmJoinWays', function() {
         var result = iD.osmJoinWays([member], graph);
 
         expect(result.length).to.equal(1);
+        expect(result.actions).to.eql([]);
         expect(getIDs(result[0].nodes)).to.eql(['a']);
         expect(result[0].length).to.equal(1);
         expect(result[0][0]).to.eql(member);
@@ -176,6 +177,7 @@ describe('iD.osmJoinWays', function() {
 
         var result = iD.osmJoinWays([w1, w2], graph);
         expect(result.length).to.equal(1);
+        expect(result.actions).to.eql([]);
         expect(getIDs(result[0].nodes)).to.eql(['a', 'b', 'c']);
         expect(result[0].length).to.equal(2);
         expect(result[0][0]).to.eql(w1);
@@ -200,6 +202,7 @@ describe('iD.osmJoinWays', function() {
 
         var result = iD.osmJoinWays(r.members, graph);
         expect(result.length).to.equal(1);
+        expect(result.actions).to.eql([]);
         expect(getIDs(result[0].nodes)).to.eql(['a', 'b', 'c']);
         expect(result[0].length).to.equal(2);
         expect(result[0][0]).to.eql({id: '-', type: 'way'});
@@ -227,6 +230,7 @@ describe('iD.osmJoinWays', function() {
 
         var result = iD.osmJoinWays(r.members, graph);
         expect(result.length).to.equal(1);
+        expect(result.actions.length).to.equal(1);
         expect(getIDs(result[0].nodes)).to.eql(['a', 'b', 'c', 'd']);
         expect(result[0].length).to.equal(3);
         expect(result[0][0]).to.eql({id: '=', type: 'way'});
@@ -250,6 +254,7 @@ describe('iD.osmJoinWays', function() {
 
         var result = iD.osmJoinWays([w1, w2], graph);
         expect(result.length).to.equal(1);
+        expect(result.actions.length).to.equal(1);
         expect(getIDs(result[0].nodes)).to.eql(['a', 'b', 'c']);
         expect(result[0].length).to.equal(2);
         expect(result[0][0]).to.eql(w1);
@@ -274,6 +279,7 @@ describe('iD.osmJoinWays', function() {
 
         var result = iD.osmJoinWays([w1, w2], graph);
         expect(result.length).to.equal(1);
+        expect(result.actions.length).to.equal(1);
         expect(getIDs(result[0].nodes)).to.eql(['a', 'b', 'c']);
         expect(result[0].length).to.equal(2);
         expect(result[0][0]).to.be.an.instanceof(iD.osmWay);
@@ -317,6 +323,7 @@ describe('iD.osmJoinWays', function() {
         var result = iD.osmJoinWays([w1, w2, w3, w4], graph);
 
         expect(result.length).to.equal(2);
+        expect(result.actions).to.eql([]);
 
         expect(result[0].length).to.equal(2);
         expect(getIDs(result[0].nodes)).to.eql(['a', 'b', 'c']);
@@ -357,6 +364,7 @@ describe('iD.osmJoinWays', function() {
         var result = iD.osmJoinWays(r.members, graph);
 
         expect(result.length).to.equal(2);
+        expect(result.actions).to.eql([]);
 
         expect(result[0].length).to.equal(2);
         expect(getIDs(result[0].nodes)).to.eql(['a', 'b', 'c']);
@@ -399,7 +407,9 @@ describe('iD.osmJoinWays', function() {
         var graph = iD.coreGraph([a, b, c, d, e, w1, w2, w3, w4, w5, r]);
 
         var result = iD.osmJoinWays(r.members, graph);
-        expect(result.length).to.equal(1);
+        expect(result.length).to.equal(3);
+        expect(result.actions.length).to.equal(1);
+
         expect(getIDs(result[0].nodes)).to.eql(['a', 'b', 'c', 'd', 'e', 'c', 'b', 'a']);
         expect(result[0].length).to.equal(7);
         expect(result[0][0]).to.eql({id: '=', type: 'way'});

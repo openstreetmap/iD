@@ -1,5 +1,6 @@
 import { actionReverse } from '../actions/reverse';
 import { osmIsInterestingTag } from './tags';
+import { osmWay } from './way';
 
 
 // For fixing up rendering of multipolygons with tags on the outer member.
@@ -87,8 +88,10 @@ export function osmJoinWays(toJoin, graph) {
         return graph.childNodes(graph.entity(member.id));
     }
 
-    function reverse(member) {
-        return member.tags ? actionReverse(member.id, { reverseOneway: true })(graph).entity(member.id) : member;
+    function reverse(which) {
+        var action = actionReverse(which.id, { reverseOneway: true });
+        sequences.actions.push(action);
+        return (which instanceof osmWay) ? action(graph).entity(which.id) : which;
     }
 
 
@@ -98,6 +101,7 @@ export function osmJoinWays(toJoin, graph) {
     });
 
     var sequences = [];
+    sequences.actions = [];
 
     while (toJoin.length) {
         // start a new sequence
@@ -173,59 +177,4 @@ export function osmJoinWays(toJoin, graph) {
     }
 
     return sequences;
-
-
-    // var joined = [];
-
-    // while (array.length) {
-    //     var member = array.shift();
-    //     var current = [member];
-    //     var nodes = resolve(member).slice();
-
-    //     current.nodes = nodes;
-    //     joined.push(current);
-
-    //     while (array.length && nodes[0] !== nodes[nodes.length - 1]) {
-    //         var first = nodes[0];
-    //         var last  = nodes[nodes.length - 1];
-    //         var how, what, i;
-
-    //         for (i = 0; i < array.length; i++) {
-    //             member = array[i];
-    //             what = resolve(member);
-
-    //             if (last === what[0]) {
-    //                 how  = nodes.push;
-    //                 what = what.slice(1);
-    //                 break;
-    //             } else if (last === what[what.length - 1]) {
-    //                 how  = nodes.push;
-    //                 what = what.slice(0, -1).reverse();
-    //                 member = reverse(member);
-    //                 break;
-    //             } else if (first === what[what.length - 1]) {
-    //                 how  = nodes.unshift;
-    //                 what = what.slice(0, -1);
-    //                 break;
-    //             } else if (first === what[0]) {
-    //                 how  = nodes.unshift;
-    //                 what = what.slice(1).reverse();
-    //                 member = reverse(member);
-    //                 break;
-    //             } else {
-    //                 what = how = null;
-    //             }
-    //         }
-
-    //         if (!what)
-    //             break; // No more joinable ways.
-
-    //         how.apply(current, [member]);
-    //         how.apply(nodes, what);
-
-    //         array.splice(i, 1);
-    //     }
-    // }
-
-    // return joined;
 }
