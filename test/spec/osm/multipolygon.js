@@ -407,8 +407,8 @@ describe('iD.osmJoinWays', function() {
         var graph = iD.coreGraph([a, b, c, d, e, w1, w2, w3, w4, w5, r]);
 
         var result = iD.osmJoinWays(r.members, graph);
-        expect(result.length).to.equal(3);
-        expect(result.actions.length).to.equal(1);
+        expect(result.length).to.equal(1);
+        expect(result.actions.length).to.equal(3);
 
         expect(getIDs(result[0].nodes)).to.eql(['a', 'b', 'c', 'd', 'e', 'c', 'b', 'a']);
         expect(result[0].length).to.equal(7);

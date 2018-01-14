@@ -274,25 +274,25 @@ describe('iD.actionJoin', function () {
 
         graph = iD.actionJoin(['-', '='])(graph);
 
-        expect(graph.entity('-').nodes).to.eql(['c', 'b', 'a']);
+        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
         expect(graph.hasEntity('=')).to.be.undefined;
     });
 
     it('joins a <-- b ==> c', function () {
         // Expected result:
-        // a <-- b <-- c
-        // tags on === reversed
+        // a --> b --> c
+        // tags on --- reversed
         var graph = iD.Graph([
                 iD.Node({id: 'a'}),
                 iD.Node({id: 'b'}),
                 iD.Node({id: 'c'}),
-                iD.Way({id: '-', nodes: ['b', 'a']}),
-                iD.Way({id: '=', nodes: ['b', 'c'], tags: {'lanes:forward': 2}})
+                iD.Way({id: '-', nodes: ['b', 'a'], tags: {'lanes:forward': 2}}),
+                iD.Way({id: '=', nodes: ['b', 'c']})
             ]);
 
         graph = iD.actionJoin(['-', '='])(graph);
 
-        expect(graph.entity('-').nodes).to.eql(['c', 'b', 'a']);
+        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
         expect(graph.hasEntity('=')).to.be.undefined;
         expect(graph.entity('-').tags).to.eql({'lanes:backward': 2});
     });
