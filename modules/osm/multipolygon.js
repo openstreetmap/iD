@@ -63,21 +63,26 @@ export function osmSimpleMultipolygonOuterMember(entity, graph) {
 }
 
 
-// Join `array` into sequences of connecting ways.
-//
+// Join `toJoin` array into sequences of connecting ways.
+
 // Segments which share identical start/end nodes will, as much as possible,
 // be connected with each other.
 //
 // The return value is a nested array. Each constituent array contains elements
-// of `array` which have been determined to connect. Each consitituent array
-// also has a `nodes` property whose value is an ordered array of member nodes,
-// with appropriate order reversal and start/end coordinate de-duplication.
+// of `toJoin` which have been determined to connect.
 //
-// Members of `array` must have, at minimum, `type` and `id` properties.
-// Thus either an array of `osmWay`s or a relation member array may be
-// used.
+// Each consitituent array also has a `nodes` property whose value is an
+// ordered array of member nodes, with appropriate order reversal and
+// start/end coordinate de-duplication.
 //
-// If an member has a `tags` property, its tags will be reversed via
+// The returned sequences array also has an `actions` array property, containing
+// any reversal actions that should be applied to the graph, should the calling
+// code attempt to actually join the given ways.
+//
+// Members of `toJoin` must have, at minimum, `type` and `id` properties.
+// Thus either an array of `osmWay`s or a relation member array may be used.
+//
+// If an member is an `osmWay`, its tags and childnodes will be reversed via
 // `actionReverse` in the output.
 //
 // Incomplete members (those for which `graph.hasEntity(element.id)` returns
@@ -93,7 +98,6 @@ export function osmJoinWays(toJoin, graph) {
         sequences.actions.push(action);
         return (which instanceof osmWay) ? action(graph).entity(which.id) : which;
     }
-
 
     // make a copy containing only the ways to join
     toJoin = toJoin.filter(function(member) {
