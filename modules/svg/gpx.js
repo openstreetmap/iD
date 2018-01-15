@@ -111,7 +111,7 @@ export function svgGpx(projection, context, dispatch) {
         createLabels(layer, 'gpxlabel-halo', labelsData);
         createLabels(layer, 'gpxlabel', labelsData);
         
-        labels = layer.selectAll('text');
+        var labels = layer.selectAll('text');
 
         labels
             .text(function(d) {
