@@ -88,12 +88,12 @@ export function osmSimpleMultipolygonOuterMember(entity, graph) {
 // Incomplete members (those for which `graph.hasEntity(element.id)` returns
 // false) and non-way members are ignored.
 //
-// `tryInsert` is an optional object.
-// If supplied, insert the given way/member after an existing way/member:
-//   `{ item: wayOrMember, afterID: id }`
+// `insertHint` is an optional object.
+// If supplied, insert the given way/member next to an existing way/member:
+//   `{ item: wayOrMember, nextTo: id }`
 // (This feature is used by `actionSplit`)
 //
-export function osmJoinWays(toJoin, graph, tryInsert) {
+export function osmJoinWays(toJoin, graph, insertHint) {
     function resolve(member) {
         return graph.childNodes(graph.entity(member.id));
     }
@@ -132,8 +132,8 @@ export function osmJoinWays(toJoin, graph, tryInsert) {
             // If it is time to attempt an insert, try that item first.
             // Otherwise, search for a next item in `toJoin`
             var toCheck;
-            if (!isInserting && tryInsert && tryInsert.afterID === currWays[currWays.length - 1].id) {
-                toCheck = [tryInsert.item];
+            if (!isInserting && insertHint && insertHint.nextTo === currWays[currWays.length - 1].id) {
+                toCheck = [insertHint.item];
                 isInserting = true;
             } else {
                 toCheck = toJoin.slice();

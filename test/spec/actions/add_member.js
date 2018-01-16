@@ -101,7 +101,7 @@ describe('iD.actionAddMember', function() {
             expect(members(graph)).to.eql(['-', '=', '~']);
         });
 
-        it('inserts the member multiple times if the way exists multiple times (middle)', function() {
+        it('inserts the member multiple times if hint provided (middle)', function() {
             // Before:  a ---> b  ..  c ~~~> d <~~~ c  ..  b <--- a
             // After:   a ---> b ===> c ~~~> d <~~~ c <=== b <--- a
             var graph = iD.coreGraph([
@@ -120,11 +120,13 @@ describe('iD.actionAddMember', function() {
                 ]})
             ]);
 
-            graph = iD.actionAddMember('r', {id: '=', type: 'way'})(graph);
+            var member = { id: '=', type: 'way' };
+            var hint = { item: member, nextTo: '-' };
+            graph = iD.actionAddMember('r', member, undefined, hint)(graph);
             expect(members(graph)).to.eql(['-', '=', '~', '~', '=', '-']);
         });
 
-        it('inserts the member multiple times if the way exists multiple times (beginning/end)', function() {
+        it('inserts the member multiple times if hint provided (beginning/end)', function() {
             // Before:         b ===> c ~~~> d <~~~ c <=== b
             // After:   a ---> b ===> c ~~~> d <~~~ c <=== b <--- a
             var graph = iD.coreGraph([
@@ -143,7 +145,9 @@ describe('iD.actionAddMember', function() {
                 ]})
             ]);
 
-            graph = iD.actionAddMember('r', {id: '-', type: 'way'})(graph);
+            var member = { id: '-', type: 'way' };
+            var hint = { item: member, nextTo: '=' };
+            graph = iD.actionAddMember('r', member, undefined, hint)(graph);
             expect(members(graph)).to.eql(['-', '=', '~', '~', '=', '-']);
         });
 

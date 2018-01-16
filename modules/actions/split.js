@@ -134,14 +134,12 @@ export function actionSplit(nodeId, newWayIds) {
                     role: relation.memberById(wayA.id).role
                 };
 
-                // how many times should this member be inserted?
-                // var matches = relation.members.filter(function(member) {
-                //     return member.id === wayA.id;
-                // });
+                var insertHint = {
+                    item: member,
+                    nextTo: wayA.id
+                };
 
-                // matches.forEach(function() {
-                    graph = actionAddMember(relation.id, member)(graph);
-                // });
+                graph = actionAddMember(relation.id, member, undefined, insertHint)(graph);
             }
         });
 

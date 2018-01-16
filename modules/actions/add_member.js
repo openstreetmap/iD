@@ -1,18 +1,21 @@
 import { osmJoinWays } from '../osm';
 
 
-export function actionAddMember(relationId, member, memberIndex) {
-    return function(graph) {
+export function actionAddMember(relationId, member, memberIndex, insertHint) {
+
+    var action = function(graph) {
         var relation = graph.entity(relationId);
         var numAdded = 0;
 
         // If we weren't passed a memberIndex,
         // try to perform sensible inserts based on how the ways join together
-        if (isNaN(memberIndex) && member.type === 'way') {
+        if ((isNaN(memberIndex) || insertHint) && member.type === 'way') {
             var members = relation.indexedMembers();
-            members.push(member);
+            if (!insertHint) {
+                members.push(member);   // just push and let osmJoinWays sort it out
+            }
 
-            var joined = osmJoinWays(members, graph);
+            var joined = osmJoinWays(members, graph, insertHint);
 
             for (var i = 0; i < joined.length; i++) {
                 var segment = joined[i];
@@ -40,4 +43,7 @@ export function actionAddMember(relationId, member, memberIndex) {
 
         return graph.replace(relation);
     };
+
+
+    return action;
 }
