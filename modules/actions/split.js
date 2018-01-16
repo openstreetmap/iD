@@ -85,6 +85,7 @@ export function actionSplit(nodeId, newWayIds) {
 
     function split(graph, wayA, newWayId) {
         var wayB = osmWay({id: newWayId, tags: wayA.tags});
+        var origNodes = wayA.nodes.slice();
         var nodesA;
         var nodesB;
         var isArea = wayA.isArea();
@@ -134,12 +135,13 @@ export function actionSplit(nodeId, newWayIds) {
                     role: relation.memberById(wayA.id).role
                 };
 
-                var insertHint = {
-                    item: member,
-                    nextTo: wayA.id
+                var insertPair = {
+                    originalID: wayA.id,
+                    insertedID: wayB.id,
+                    nodes: origNodes
                 };
 
-                graph = actionAddMember(relation.id, member, undefined, insertHint)(graph);
+                graph = actionAddMember(relation.id, member, undefined, insertPair)(graph);
             }
         });
 

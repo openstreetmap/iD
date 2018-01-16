@@ -88,12 +88,7 @@ export function osmSimpleMultipolygonOuterMember(entity, graph) {
 // Incomplete members (those for which `graph.hasEntity(element.id)` returns
 // false) and non-way members are ignored.
 //
-// `insertHint` is an optional object.
-// If supplied, insert the given way/member next to an existing way/member:
-//   `{ item: wayOrMember, nextTo: id }`
-// (This feature is used by `actionSplit`)
-//
-export function osmJoinWays(toJoin, graph, insertHint) {
+export function osmJoinWays(toJoin, graph) {
     function resolve(member) {
         return graph.childNodes(graph.entity(member.id));
     }
@@ -109,6 +104,7 @@ export function osmJoinWays(toJoin, graph, insertHint) {
         return member.type === 'way' && graph.hasEntity(member.id);
     });
 
+
     var sequences = [];
     sequences.actions = [];
 
@@ -118,7 +114,6 @@ export function osmJoinWays(toJoin, graph, insertHint) {
         var currWays = [item];
         var currNodes = resolve(item).slice();
         var doneSequence = false;
-        var isInserting = false;
 
         // add to it
         while (toJoin.length && !doneSequence) {
@@ -129,19 +124,8 @@ export function osmJoinWays(toJoin, graph, insertHint) {
             var i;
 
             // Find the next way/member to join.
-            // If it is time to attempt an insert, try that item first.
-            // Otherwise, search for a next item in `toJoin`
-            var toCheck;
-            if (!isInserting && insertHint && insertHint.nextTo === currWays[currWays.length - 1].id) {
-                toCheck = [insertHint.item];
-                isInserting = true;
-            } else {
-                toCheck = toJoin.slice();
-                isInserting = false;
-            }
-
-            for (i = 0; i < toCheck.length; i++) {
-                item = toCheck[i];
+            for (i = 0; i < toJoin.length; i++) {
+                item = toJoin[i];
                 nodes = resolve(item);
 
                 // Strongly prefer to generate a forward path that preserves the order
@@ -181,22 +165,15 @@ export function osmJoinWays(toJoin, graph, insertHint) {
                 }
             }
 
-            if (nodes) {   // we found something to join
-                fn.apply(currWays, [item]);
-                fn.apply(currNodes, nodes);
-
-                if (!isInserting) {
-                    toJoin.splice(i, 1);
-                }
-
-            } else {    // couldn't find a joinable way/member
-                // if inserting, restart the loop and look in `toJoin` next time.
-                // if not inserting, there is nowhere else to look, mark as done.
-                if (!isInserting) {
-                    doneSequence = true;
-                    break;
-                }
+            if (!nodes) {     // couldn't find a joinable way/member
+                doneSequence = true;
+                break;
             }
+
+            fn.apply(currWays, [item]);
+            fn.apply(currNodes, nodes);
+
+            toJoin.splice(i, 1);
         }
 
         currWays.nodes = currNodes;
