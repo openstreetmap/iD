@@ -75,31 +75,36 @@ export function osmSimpleMultipolygonOuterMember(entity, graph) {
 // ordered array of member nodes, with appropriate order reversal and
 // start/end coordinate de-duplication.
 //
+// Members of `toJoin` must have, at minimum, `type` and `id` properties.
+// Thus either an array of `osmWay`s or a relation member array may be used.
+//
+// If an member is an `osmWay`, its tags and childnodes may be reversed via
+// `actionReverse` in the output.
+//
 // The returned sequences array also has an `actions` array property, containing
 // any reversal actions that should be applied to the graph, should the calling
 // code attempt to actually join the given ways.
 //
-// Members of `toJoin` must have, at minimum, `type` and `id` properties.
-// Thus either an array of `osmWay`s or a relation member array may be used.
-//
-// If an member is an `osmWay`, its tags and childnodes will be reversed via
-// `actionReverse` in the output.
-//
 // Incomplete members (those for which `graph.hasEntity(element.id)` returns
 // false) and non-way members are ignored.
 //
-export function osmJoinWays(toJoin, graph) {
+// `tryInsert` is an optional object.
+// If supplied, insert the given way/member after an existing way/member:
+//   `{ item: wayOrMember, afterID: id }`
+// (This feature is used by `actionSplit`)
+//
+export function osmJoinWays(toJoin, graph, tryInsert) {
     function resolve(member) {
         return graph.childNodes(graph.entity(member.id));
     }
 
-    function reverse(which) {
-        var action = actionReverse(which.id, { reverseOneway: true });
+    function reverse(item) {
+        var action = actionReverse(item.id, { reverseOneway: true });
         sequences.actions.push(action);
-        return (which instanceof osmWay) ? action(graph).entity(which.id) : which;
+        return (item instanceof osmWay) ? action(graph).entity(item.id) : item;
     }
 
-    // make a copy containing only the ways to join
+    // make a copy containing only the items to join
     toJoin = toJoin.filter(function(member) {
         return member.type === 'way' && graph.hasEntity(member.id);
     });
@@ -109,10 +114,11 @@ export function osmJoinWays(toJoin, graph) {
 
     while (toJoin.length) {
         // start a new sequence
-        var way = toJoin.shift();
-        var currWays = [way];
-        var currNodes = resolve(way).slice();
+        var item = toJoin.shift();
+        var currWays = [item];
+        var currNodes = resolve(item).slice();
         var doneSequence = false;
+        var isInserting = false;
 
         // add to it
         while (toJoin.length && !doneSequence) {
@@ -122,10 +128,21 @@ export function osmJoinWays(toJoin, graph) {
             var nodes = null;
             var i;
 
-            // find the next way
-            for (i = 0; i < toJoin.length; i++) {
-                way = toJoin[i];
-                nodes = resolve(way);
+            // Find the next way/member to join.
+            // If it is time to attempt an insert, try that item first.
+            // Otherwise, search for a next item in `toJoin`
+            var toCheck;
+            if (!isInserting && tryInsert && tryInsert.afterID === currWays[currWays.length - 1].id) {
+                toCheck = [tryInsert.item];
+                isInserting = true;
+            } else {
+                toCheck = toJoin.slice();
+                isInserting = false;
+            }
+
+            for (i = 0; i < toCheck.length; i++) {
+                item = toCheck[i];
+                nodes = resolve(item);
 
                 // Strongly prefer to generate a forward path that preserves the order
                 // of the members array. For multipolygons and most relations, member
@@ -148,7 +165,7 @@ export function osmJoinWays(toJoin, graph) {
                 } else if (nodes[nodes.length - 1] === end) {
                     fn = currNodes.push;               // join to end
                     nodes = nodes.slice(0, -1).reverse();
-                    way = reverse(way);
+                    item = reverse(item);
                     break;
                 } else if (nodes[nodes.length - 1] === start) {
                     fn = currNodes.unshift;            // join to beginning
@@ -157,24 +174,30 @@ export function osmJoinWays(toJoin, graph) {
                 } else if (nodes[0] === start) {
                     fn = currNodes.unshift;            // join to beginning
                     nodes = nodes.slice(1).reverse();
-                    way = reverse(way);
+                    item = reverse(item);
                     break;
                 } else {
                     fn = nodes = null;
                 }
             }
 
-            if (!nodes) {
-                doneSequence = true;     // couldn't find a joinable way
-                break;
+            if (nodes) {   // we found something to join
+                fn.apply(currWays, [item]);
+                fn.apply(currNodes, nodes);
+
+                if (!isInserting) {
+                    toJoin.splice(i, 1);
+                }
+
+            } else {    // couldn't find a joinable way/member
+                // if inserting, restart the loop and look in `toJoin` next time.
+                // if not inserting, there is nowhere else to look, mark as done.
+                if (!isInserting) {
+                    doneSequence = true;
+                    break;
+                }
             }
-
-            fn.apply(currWays, [way]);
-            fn.apply(currNodes, nodes);
-
-            toJoin.splice(i, 1);
         }
-
 
         currWays.nodes = currNodes;
         sequences.push(currWays);

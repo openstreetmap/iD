@@ -4,12 +4,16 @@ import { osmJoinWays } from '../osm';
 export function actionAddMember(relationId, member, memberIndex) {
     return function(graph) {
         var relation = graph.entity(relationId);
+        var numAdded = 0;
 
+        // If we weren't passed a memberIndex,
+        // try to perform sensible inserts based on how the ways join together
         if (isNaN(memberIndex) && member.type === 'way') {
             var members = relation.indexedMembers();
             members.push(member);
 
             var joined = osmJoinWays(members, graph);
+
             for (var i = 0; i < joined.length; i++) {
                 var segment = joined[i];
                 for (var j = 0; j < segment.length && segment.length >= 2; j++) {
@@ -23,10 +27,17 @@ export function actionAddMember(relationId, member, memberIndex) {
                     } else {
                         memberIndex = Math.min(segment[j - 1].index + 1, segment[j + 1].index + 1);
                     }
+
+                    relation = relation.addMember(member, memberIndex + (numAdded++));
                 }
             }
         }
 
-        return graph.replace(relation.addMember(member, memberIndex));
+        // By default, add at index (or append to end if index undefined)
+        if (!numAdded) {
+            relation = relation.addMember(member, memberIndex);
+        }
+
+        return graph.replace(relation);
     };
 }
