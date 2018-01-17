@@ -1571,6 +1571,11 @@
             "type": "text",
             "label": "Reference Code"
         },
+        "ref/isil": {
+            "key": "ref:isil",
+            "type": "text",
+            "label": "ISIL Code"
+        },
         "relation": {
             "key": "type",
             "type": "combo",

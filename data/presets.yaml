@@ -1145,6 +1145,9 @@ en:
       ref:
         # ref=*
         label: Reference Code
+      ref/isil:
+        # 'ref:isil=*'
+        label: ISIL Code
       ref_aeroway_gate:
         # ref=*
         label: Gate Number

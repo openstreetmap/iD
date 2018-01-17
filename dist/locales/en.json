@@ -2249,6 +2249,9 @@
                 "ref": {
                     "label": "Reference Code"
                 },
+                "ref/isil": {
+                    "label": "ISIL Code"
+                },
                 "relation": {
                     "label": "Type"
                 },

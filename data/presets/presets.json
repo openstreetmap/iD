@@ -1882,7 +1882,8 @@
                 "opening_hours",
                 "internet_access",
                 "internet_access/fee",
-                "internet_access/ssid"
+                "internet_access/ssid",
+                "ref/isil"
             ],
             "geometry": [
                 "point",
@@ -44431,7 +44432,8 @@
                 "opening_hours",
                 "internet_access",
                 "internet_access/fee",
-                "internet_access/ssid"
+                "internet_access/ssid",
+                "ref/isil"
             ],
             "suggestion": true
         },
@@ -44454,7 +44456,8 @@
                 "opening_hours",
                 "internet_access",
                 "internet_access/fee",
-                "internet_access/ssid"
+                "internet_access/ssid",
+                "ref/isil"
             ],
             "suggestion": true
         },
@@ -44477,7 +44480,8 @@
                 "opening_hours",
                 "internet_access",
                 "internet_access/fee",
-                "internet_access/ssid"
+                "internet_access/ssid",
+                "ref/isil"
             ],
             "suggestion": true
         },
@@ -44500,7 +44504,8 @@
                 "opening_hours",
                 "internet_access",
                 "internet_access/fee",
-                "internet_access/ssid"
+                "internet_access/ssid",
+                "ref/isil"
             ],
             "suggestion": true
         },
@@ -44523,7 +44528,8 @@
                 "opening_hours",
                 "internet_access",
                 "internet_access/fee",
-                "internet_access/ssid"
+                "internet_access/ssid",
+                "ref/isil"
             ],
             "suggestion": true
         },
@@ -44546,7 +44552,8 @@
                 "opening_hours",
                 "internet_access",
                 "internet_access/fee",
-                "internet_access/ssid"
+                "internet_access/ssid",
+                "ref/isil"
             ],
             "suggestion": true
         },
@@ -44569,7 +44576,8 @@
                 "opening_hours",
                 "internet_access",
                 "internet_access/fee",
-                "internet_access/ssid"
+                "internet_access/ssid",
+                "ref/isil"
             ],
             "suggestion": true
         },
@@ -44592,7 +44600,8 @@
                 "opening_hours",
                 "internet_access",
                 "internet_access/fee",
-                "internet_access/ssid"
+                "internet_access/ssid",
+                "ref/isil"
             ],
             "suggestion": true
         },
@@ -44615,7 +44624,8 @@
                 "opening_hours",
                 "internet_access",
                 "internet_access/fee",
-                "internet_access/ssid"
+                "internet_access/ssid",
+                "ref/isil"
             ],
             "suggestion": true
         },
@@ -44638,7 +44648,8 @@
                 "opening_hours",
                 "internet_access",
                 "internet_access/fee",
-                "internet_access/ssid"
+                "internet_access/ssid",
+                "ref/isil"
             ],
             "suggestion": true
         },
@@ -44661,7 +44672,8 @@
                 "opening_hours",
                 "internet_access",
                 "internet_access/fee",
-                "internet_access/ssid"
+                "internet_access/ssid",
+                "ref/isil"
             ],
             "suggestion": true
         },
@@ -44684,7 +44696,8 @@
                 "opening_hours",
                 "internet_access",
                 "internet_access/fee",
-                "internet_access/ssid"
+                "internet_access/ssid",
+                "ref/isil"
             ],
             "suggestion": true
         },
@@ -44707,7 +44720,8 @@
                 "opening_hours",
                 "internet_access",
                 "internet_access/fee",
-                "internet_access/ssid"
+                "internet_access/ssid",
+                "ref/isil"
             ],
             "suggestion": true
         },
@@ -44730,7 +44744,8 @@
                 "opening_hours",
                 "internet_access",
                 "internet_access/fee",
-                "internet_access/ssid"
+                "internet_access/ssid",
+                "ref/isil"
             ],
             "suggestion": true
         },
@@ -44753,7 +44768,8 @@
                 "opening_hours",
                 "internet_access",
                 "internet_access/fee",
-                "internet_access/ssid"
+                "internet_access/ssid",
+                "ref/isil"
             ],
             "suggestion": true
         },
@@ -44776,7 +44792,8 @@
                 "opening_hours",
                 "internet_access",
                 "internet_access/fee",
-                "internet_access/ssid"
+                "internet_access/ssid",
+                "ref/isil"
             ],
             "suggestion": true
         },
@@ -44799,7 +44816,8 @@
                 "opening_hours",
                 "internet_access",
                 "internet_access/fee",
-                "internet_access/ssid"
+                "internet_access/ssid",
+                "ref/isil"
             ],
             "suggestion": true
         },
@@ -44822,7 +44840,8 @@
                 "opening_hours",
                 "internet_access",
                 "internet_access/fee",
-                "internet_access/ssid"
+                "internet_access/ssid",
+                "ref/isil"
             ],
             "suggestion": true
         },
@@ -44845,7 +44864,8 @@
                 "opening_hours",
                 "internet_access",
                 "internet_access/fee",
-                "internet_access/ssid"
+                "internet_access/ssid",
+                "ref/isil"
             ],
             "suggestion": true
         },
@@ -44868,7 +44888,8 @@
                 "opening_hours",
                 "internet_access",
                 "internet_access/fee",
-                "internet_access/ssid"
+                "internet_access/ssid",
+                "ref/isil"
             ],
             "suggestion": true
         },
@@ -44891,7 +44912,8 @@
                 "opening_hours",
                 "internet_access",
                 "internet_access/fee",
-                "internet_access/ssid"
+                "internet_access/ssid",
+                "ref/isil"
             ],
             "suggestion": true
         },
@@ -44914,7 +44936,8 @@
                 "opening_hours",
                 "internet_access",
                 "internet_access/fee",
-                "internet_access/ssid"
+                "internet_access/ssid",
+                "ref/isil"
             ],
             "suggestion": true
         },
@@ -44937,7 +44960,8 @@
                 "opening_hours",
                 "internet_access",
                 "internet_access/fee",
-                "internet_access/ssid"
+                "internet_access/ssid",
+                "ref/isil"
             ],
             "suggestion": true
         },
