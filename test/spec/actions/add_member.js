@@ -10,6 +10,26 @@ describe('iD.actionAddMember', function() {
             return graph.entity('r').members.map(function (m) { return m.id; });
         }
 
+        it('handles incomplete relations', function () {
+            var graph = iD.coreGraph([
+                iD.osmNode({id: 'a', loc: [0, 0]}),
+                iD.osmNode({id: 'b', loc: [0, 0]}),
+                iD.osmNode({id: 'c', loc: [0, 0]}),
+                iD.osmNode({id: 'd', loc: [0, 0]}),
+                iD.osmWay({id: '-', nodes: ['a', 'b', 'c']}),
+                iD.osmWay({id: '=', nodes: ['c','d']}),
+                iD.osmRelation({id: 'r', members: [
+                    {id: '~', type: 'way'},
+                    {id: '-', type: 'way'}
+                ]})
+            ]);
+
+            graph = iD.actionAddMember('r', {id: '=', type: 'way'})(graph);
+
+            var ids = graph.entity('r').members.map(function(m) { return m.id; });
+            expect(members(graph)).to.eql(['~', '-', '=']);
+        });
+
         it('adds the member to a relation with no members', function() {
             var graph = iD.coreGraph([
                 iD.osmNode({id: 'a', loc: [0, 0]}),
