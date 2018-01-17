@@ -18514,6 +18514,8 @@
         "tourism/information/guidepost": {
             "icon": "information",
             "fields": [
+                "name",
+                "elevation",
                 "operator",
                 "ref"
             ],
