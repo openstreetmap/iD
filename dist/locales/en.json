@@ -3425,6 +3425,10 @@
                     "name": "Barn",
                     "terms": ""
                 },
+                "building/boathouse": {
+                    "name": "Boathouse",
+                    "terms": ""
+                },
                 "building/bungalow": {
                     "name": "Bungalow",
                     "terms": "home,detached"
