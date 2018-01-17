@@ -2491,6 +2491,10 @@ en:
         # building=barn
         name: Barn
         terms: '<translate with synonyms or related terms for ''Barn'', separated by commas>'
+      building/boathouse:
+        # building=boathouse
+        name: Boathouse
+        terms: '<translate with synonyms or related terms for ''Boathouse'', separated by commas>'
       building/bungalow:
         # building=bungalow
         name: Bungalow

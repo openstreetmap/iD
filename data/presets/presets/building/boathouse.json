@@ -1,0 +1,17 @@
+{
+    "icon": "harbor",
+    "fields": [
+        "name",
+        "levels",
+        "address"
+    ],
+    "geometry": [
+        "area"
+    ],
+    "tags": {
+        "building": "boathouse"
+    },
+    "matchScore": 0.5,
+    "terms": [],
+    "name": "Boathouse"
+}

@@ -4247,6 +4247,23 @@
             "matchScore": 0.5,
             "name": "Barn"
         },
+        "building/boathouse": {
+            "icon": "harbor",
+            "fields": [
+                "name",
+                "levels",
+                "address"
+            ],
+            "geometry": [
+                "area"
+            ],
+            "tags": {
+                "building": "boathouse"
+            },
+            "matchScore": 0.5,
+            "terms": [],
+            "name": "Boathouse"
+        },
         "building/bungalow": {
             "icon": "home",
             "fields": [

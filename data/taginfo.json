@@ -790,6 +790,10 @@
         },
         {
             "key": "building",
+            "value": "boathouse"
+        },
+        {
+            "key": "building",
             "value": "bungalow"
         },
         {
