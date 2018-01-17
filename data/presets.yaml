@@ -3413,8 +3413,8 @@ en:
         terms: '<translate with synonyms or related terms for ''Forest'', separated by commas>'
       landuse/garages:
         # landuse=garages
-        name: Garages
-        terms: '<translate with synonyms or related terms for ''Garages'', separated by commas>'
+        name: Garage Landuse
+        terms: '<translate with synonyms or related terms for ''Garage Landuse'', separated by commas>'
       landuse/grass:
         # landuse=grass
         name: Grass

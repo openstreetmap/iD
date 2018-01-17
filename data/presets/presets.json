@@ -8414,7 +8414,7 @@
                 "landuse": "garages"
             },
             "terms": [],
-            "name": "Garages"
+            "name": "Garage Landuse"
         },
         "landuse/grass": {
             "geometry": [

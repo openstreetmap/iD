@@ -4257,7 +4257,7 @@
                     "terms": "tree"
                 },
                 "landuse/garages": {
-                    "name": "Garages",
+                    "name": "Garage Landuse",
                     "terms": ""
                 },
                 "landuse/grass": {
