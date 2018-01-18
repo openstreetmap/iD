@@ -370,17 +370,17 @@ export function uiHelp(context) {
 
 
         var pane = selection.append('div')
-                .attr('class', 'help-wrap map-overlay fillL col5 content hide'),
-            tooltipBehavior = tooltip()
-                .placement((textDirection === 'rtl') ? 'right' : 'left')
-                .html(true)
-                .title(uiTooltipHtml(t('help.title'), key)),
-            button = selection.append('button')
-                .attr('tabindex', -1)
-                .on('click', togglePane)
-                .call(svgIcon('#icon-help', 'light'))
-                .call(tooltipBehavior),
-            shown = false;
+            .attr('class', 'help-wrap map-overlay fillL col6 content hide');
+        var tooltipBehavior = tooltip()
+            .placement((textDirection === 'rtl') ? 'right' : 'left')
+            .html(true)
+            .title(uiTooltipHtml(t('help.title'), key));
+        var button = selection.append('button')
+            .attr('tabindex', -1)
+            .on('click', togglePane)
+            .call(svgIcon('#icon-help', 'light'))
+            .call(tooltipBehavior);
+        var shown = false;
 
 
         var toc = pane
