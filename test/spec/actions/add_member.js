@@ -25,8 +25,6 @@ describe('iD.actionAddMember', function() {
             ]);
 
             graph = iD.actionAddMember('r', {id: '=', type: 'way'})(graph);
-
-            var ids = graph.entity('r').members.map(function(m) { return m.id; });
             expect(members(graph)).to.eql(['~', '-', '=']);
         });
 
