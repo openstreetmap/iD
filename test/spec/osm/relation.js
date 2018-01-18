@@ -258,24 +258,37 @@ describe('iD.osmRelation', function () {
 
         it('replaces a member which doesn\'t already exist', function () {
             var r = iD.Relation({members: [{id: 'a', role: 'a'}]});
-            expect(r.replaceMember({id: 'a'}, {id: 'b', type: 'node'}).members).to.eql([{id: 'b', role: 'a', type: 'node'}]);
+            expect(r.replaceMember({id: 'a'}, {id: 'b', type: 'node'}).members)
+                .to.eql([{id: 'b', role: 'a', type: 'node'}]);
         });
 
         it('preserves the existing role', function () {
             var r = iD.Relation({members: [{id: 'a', role: 'a', type: 'node'}]});
-            expect(r.replaceMember({id: 'a'}, {id: 'b', type: 'node'}).members).to.eql([{id: 'b', role: 'a', type: 'node'}]);
+            expect(r.replaceMember({id: 'a'}, {id: 'b', type: 'node'}).members)
+                .to.eql([{id: 'b', role: 'a', type: 'node'}]);
         });
 
         it('uses the replacement type', function () {
             var r = iD.Relation({members: [{id: 'a', role: 'a', type: 'node'}]});
-            expect(r.replaceMember({id: 'a'}, {id: 'b', type: 'way'}).members).to.eql([{id: 'b', role: 'a', type: 'way'}]);
+            expect(r.replaceMember({id: 'a'}, {id: 'b', type: 'way'}).members)
+                .to.eql([{id: 'b', role: 'a', type: 'way'}]);
         });
 
         it('removes members if replacing them would produce duplicates', function () {
             var r = iD.Relation({members: [
                 {id: 'a', role: 'b', type: 'node'},
-                {id: 'b', role: 'b', type: 'node'}]});
-            expect(r.replaceMember({id: 'a'}, {id: 'b', type: 'node'}).members).to.eql([{id: 'b', role: 'b', type: 'node'}]);
+                {id: 'b', role: 'b', type: 'node'}
+            ]});
+            expect(r.replaceMember({id: 'a'}, {id: 'b', type: 'node'}).members)
+                .to.eql([{id: 'b', role: 'b', type: 'node'}]);
+        });
+        it('keeps duplicate members if `keepDuplicates = true`', function () {
+            var r = iD.Relation({members: [
+                {id: 'a', role: 'b', type: 'node'},
+                {id: 'b', role: 'b', type: 'node'}
+            ]});
+            expect(r.replaceMember({id: 'a'}, {id: 'b', type: 'node'}, true).members)
+                .to.eql([{id: 'b', role: 'b', type: 'node'}, {id: 'b', role: 'b', type: 'node'}]);
         });
     });
 

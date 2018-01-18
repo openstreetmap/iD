@@ -29,7 +29,7 @@ import { utilWrap } from '../util';
 //   https://github.com/systemed/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/SplitWayAction.as
 //
 export function actionSplit(nodeId, newWayIds) {
-    var wayIds;
+    var _wayIDs;
 
     // if the way is closed, we need to search for a partner node
     // to split the way at.
@@ -42,11 +42,11 @@ export function actionSplit(nodeId, newWayIds) {
     // For example: bone-shaped areas get split across their waist
     // line, circles across the diameter.
     function splitArea(nodes, idxA, graph) {
-        var lengths = new Array(nodes.length),
-            length,
-            i,
-            best = 0,
-            idxB;
+        var lengths = new Array(nodes.length);
+        var length;
+        var i;
+        var best = 0;
+        var idxB;
 
         function wrap(index) {
             return utilWrap(index, nodes.length);
@@ -84,16 +84,17 @@ export function actionSplit(nodeId, newWayIds) {
 
 
     function split(graph, wayA, newWayId) {
-        var wayB = osmWay({id: newWayId, tags: wayA.tags}),
-            nodesA,
-            nodesB,
-            isArea = wayA.isArea(),
-            isOuter = osmIsSimpleMultipolygonOuterMember(wayA, graph);
+        var wayB = osmWay({id: newWayId, tags: wayA.tags});
+        var origNodes = wayA.nodes.slice();
+        var nodesA;
+        var nodesB;
+        var isArea = wayA.isArea();
+        var isOuter = osmIsSimpleMultipolygonOuterMember(wayA, graph);
 
         if (wayA.isClosed()) {
-            var nodes = wayA.nodes.slice(0, -1),
-                idxA = _indexOf(nodes, nodeId),
-                idxB = splitArea(nodes, idxA, graph);
+            var nodes = wayA.nodes.slice(0, -1);
+            var idxA = _indexOf(nodes, nodeId);
+            var idxB = splitArea(nodes, idxA, graph);
 
             if (idxB < idxA) {
                 nodesA = nodes.slice(idxA).concat(nodes.slice(0, idxB + 1));
@@ -134,7 +135,13 @@ export function actionSplit(nodeId, newWayIds) {
                     role: relation.memberById(wayA.id).role
                 };
 
-                graph = actionAddMember(relation.id, member)(graph);
+                var insertPair = {
+                    originalID: wayA.id,
+                    insertedID: wayB.id,
+                    nodes: origNodes
+                };
+
+                graph = actionAddMember(relation.id, member, undefined, insertPair)(graph);
             }
         });
 
@@ -144,7 +151,8 @@ export function actionSplit(nodeId, newWayIds) {
                 members: [
                     {id: wayA.id, role: 'outer', type: 'way'},
                     {id: wayB.id, role: 'outer', type: 'way'}
-                ]});
+                ]
+            });
 
             graph = graph.replace(multipolygon);
             graph = graph.replace(wayA.update({tags: {}}));
@@ -165,15 +173,15 @@ export function actionSplit(nodeId, newWayIds) {
 
 
     action.ways = function(graph) {
-        var node = graph.entity(nodeId),
-            parents = graph.parentWays(node),
-            hasLines = _some(parents, function(parent) { return parent.geometry(graph) === 'line'; });
+        var node = graph.entity(nodeId);
+        var parents = graph.parentWays(node);
+        var hasLines = _some(parents, function(parent) { return parent.geometry(graph) === 'line'; });
 
         return parents.filter(function(parent) {
-            if (wayIds && wayIds.indexOf(parent.id) === -1)
+            if (_wayIDs && _wayIDs.indexOf(parent.id) === -1)
                 return false;
 
-            if (!wayIds && hasLines && parent.geometry(graph) !== 'line')
+            if (!_wayIDs && hasLines && parent.geometry(graph) !== 'line')
                 return false;
 
             if (parent.isClosed()) {
@@ -193,14 +201,14 @@ export function actionSplit(nodeId, newWayIds) {
 
     action.disabled = function(graph) {
         var candidates = action.ways(graph);
-        if (candidates.length === 0 || (wayIds && wayIds.length !== candidates.length))
+        if (candidates.length === 0 || (_wayIDs && _wayIDs.length !== candidates.length))
             return 'not_eligible';
     };
 
 
     action.limitWays = function(_) {
-        if (!arguments.length) return wayIds;
-        wayIds = _;
+        if (!arguments.length) return _wayIDs;
+        _wayIDs = _;
         return action;
     };
 
