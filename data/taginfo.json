@@ -1333,6 +1333,10 @@
             "value": "bridleway"
         },
         {
+            "key": "bus",
+            "value": "designated"
+        },
+        {
             "key": "highway",
             "value": "corridor"
         },

@@ -3096,6 +3096,10 @@ en:
         name: Bridle Path
         # 'terms: bridleway,equestrian,horse'
         terms: '<translate with synonyms or related terms for ''Bridle Path'', separated by commas>'
+      highway/bus_guideway:
+        # 'highway=bus_guideway, access=no, bus=designated'
+        name: Bus Guideway
+        terms: '<translate with synonyms or related terms for ''Bus Guideway'', separated by commas>'
       highway/bus_stop:
         # highway=bus_stop
         name: Bus Stop / Platform

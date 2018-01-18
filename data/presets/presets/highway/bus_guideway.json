@@ -1,0 +1,17 @@
+{
+    "icon": "bus",
+    "fields": [
+        "name",
+        "operator"
+    ],
+    "geometry": [
+        "line"
+    ],
+    "tags": {
+        "highway": "bus_guideway",
+        "access": "no",
+        "bus": "designated"
+    },
+    "terms": [],
+    "name": "Bus Guideway"
+}
