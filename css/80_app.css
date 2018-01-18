@@ -3998,6 +3998,7 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
 
 .edit-menu-item rect {
     fill: #eee;
+    cursor: default;
 }
 
 .edit-menu-item rect:active,
@@ -4016,6 +4017,7 @@ li.hide + li.version .badge .tooltip .tooltip-arrow {
 .edit-menu-item use {
     fill: #222;
     color: #79f;
+    pointer-events: none;
 }
 
 .edit-menu-item.disabled use {
