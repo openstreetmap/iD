@@ -2249,6 +2249,9 @@
                 "ref": {
                     "label": "Reference Code"
                 },
+                "ref/isil": {
+                    "label": "ISIL Code"
+                },
                 "relation": {
                     "label": "Type"
                 },
@@ -4254,7 +4257,7 @@
                     "terms": "tree"
                 },
                 "landuse/garages": {
-                    "name": "Garages",
+                    "name": "Garage Landuse",
                     "terms": ""
                 },
                 "landuse/grass": {

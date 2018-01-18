@@ -248,13 +248,13 @@ export function modeSelect(context, selectedIDs) {
             var target = d3_select(d3_event.target);
 
             var datum = target.datum();
-            var entity = datum && datum.id && context.hasEntity(datum.id);
-            if (entity) datum = entity;
+            var entity = datum && datum.properties && datum.properties.entity;
+            if (!entity) return;
 
-            if (datum instanceof osmWay && target.classed('target')) {
-                var choice = geoChooseEdge(context.childNodes(datum), context.mouse(), context.projection);
-                var prev = datum.nodes[choice.index - 1];
-                var next = datum.nodes[choice.index];
+            if (entity instanceof osmWay && target.classed('target')) {
+                var choice = geoChooseEdge(context.childNodes(entity), context.mouse(), context.projection);
+                var prev = entity.nodes[choice.index - 1];
+                var next = entity.nodes[choice.index];
 
                 context.perform(
                     actionAddMidpoint({loc: choice.loc, edge: [prev, next]}, osmNode()),
@@ -264,9 +264,9 @@ export function modeSelect(context, selectedIDs) {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
 
-            } else if (datum.type === 'midpoint') {
+            } else if (entity.type === 'midpoint') {
                 context.perform(
-                    actionAddMidpoint({loc: datum.loc, edge: datum.edge}, osmNode()),
+                    actionAddMidpoint({loc: entity.loc, edge: entity.edge}, osmNode()),
                     t('operations.add.annotation.vertex'));
 
                 d3_event.preventDefault();
