@@ -161,9 +161,9 @@ _extend(osmRelation.prototype, {
 
     // Wherever a member appears with id `needle.id`, replace it with a member
     // with id `replacement.id`, type `replacement.type`, and the original role,
-    // unless a member already exists with that id and role. Return an updated
-    // relation.
-    replaceMember: function(needle, replacement) {
+    // By default, adding a duplicate member (by id and role) is prevented.
+    // Return an updated relation.
+    replaceMember: function(needle, replacement, keepDuplicates) {
         if (!this.memberById(needle.id))
             return this;
 
@@ -173,7 +173,7 @@ _extend(osmRelation.prototype, {
             var member = this.members[i];
             if (member.id !== needle.id) {
                 members.push(member);
-            } else if (!this.memberByIdAndRole(replacement.id, member.role)) {
+            } else if (keepDuplicates || !this.memberByIdAndRole(replacement.id, member.role)) {
                 members.push({id: replacement.id, type: replacement.type, role: member.role});
             }
         }

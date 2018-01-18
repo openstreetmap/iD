@@ -39,7 +39,7 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
             tempWay = osmWay({ id: 'wTemp', nodes: insertPair.nodes });
             graph = graph.replace(tempWay);
             var tempMember = { id: tempWay.id, type: 'way', role: member.role };
-            var tempRelation = replaceMemberAll(relation, insertPair.originalID, tempMember);
+            var tempRelation = relation.replaceMember({id: insertPair.originalID}, tempMember, true);
             groups = _groupBy(tempRelation.members, function(m) { return m.type; });
             groups.way = groups.way || [];
 
@@ -157,21 +157,6 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
             arr[i].index = -1;   // mark as dead
             item.index = toIndex;
             arr.splice(toIndex, 0, item);
-        }
-
-
-        // Relation.replaceMember() removes duplicates, and we don't want that.. #4696
-        function replaceMemberAll(relation, needleID, replacement) {
-            var members = [];
-            for (var i = 0; i < relation.members.length; i++) {
-                var member = relation.members[i];
-                if (member.id !== needleID) {
-                    members.push(member);
-                } else {
-                    members.push({id: replacement.id, type: replacement.type, role: member.role});
-                }
-            }
-            return relation.update({members: members});
         }
 
 
