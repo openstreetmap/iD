@@ -446,6 +446,31 @@ describe('iD.actionSplit', function () {
                 graph = iD.actionSplit('b', ['='])(graph);
                 expect(members(graph)).to.eql(['~', '=', '-']);
             });
+
+            it('reorders members as node, way, relation (for Public Transport routing)', function () {
+                var graph = iD.coreGraph([
+                    iD.osmNode({ id: 'a', loc: [0, 0] }),
+                    iD.osmNode({ id: 'b', loc: [1, 0] }),
+                    iD.osmNode({ id: 'c', loc: [2, 0] }),
+                    iD.osmWay({ id: '-', nodes: ['a', 'b', 'c'] }),
+                    iD.osmRelation({id: 'r', members: [
+                        { id: 'n1', type: 'node', role: 'forward' },
+                        { id: '-', type: 'way', role: 'forward' },
+                        { id: 'r1', type: 'relation', role: 'forward' },
+                        { id: 'n2', type: 'node', role: 'forward' }
+                    ]})
+                ]);
+
+                graph = iD.actionSplit('b', ['='])(graph);
+
+                expect(graph.entity('r').members).to.eql([
+                    { id: 'n1', type: 'node', role: 'forward' },
+                    { id: 'n2', type: 'node', role: 'forward' },
+                    { id: '-', type: 'way', role: 'forward' },
+                    { id: '=', type: 'way', role: 'forward' },
+                    { id: 'r1', type: 'relation', role: 'forward'}
+                ]);
+            });
         });
 
         describe('splitting out-and-back routes', function () {

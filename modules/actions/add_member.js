@@ -38,7 +38,7 @@ export function actionAddMember(relationId, member, memberIndex, insertPair) {
             // so that `osmJoinWays` can treat the pair like a single way.
             tempWay = osmWay({ id: 'wTemp', nodes: insertPair.nodes });
             graph = graph.replace(tempWay);
-            var tempMember = { id: tempWay.id, type: 'way', role: '' };
+            var tempMember = { id: tempWay.id, type: 'way', role: member.role };
             var tempRelation = replaceMemberAll(relation, insertPair.originalID, tempMember);
             groups = _groupBy(tempRelation.members, function(m) { return m.type; });
             groups.way = groups.way || [];
