@@ -3,6 +3,7 @@
     "fields": [
         "name",
         "sport",
+        "building",
         "address",
         "opening_hours"
     ],

@@ -10524,6 +10524,7 @@
             "fields": [
                 "name",
                 "sport",
+                "building",
                 "address",
                 "opening_hours"
             ],
@@ -60595,6 +60596,7 @@
             "fields": [
                 "name",
                 "sport",
+                "building",
                 "address",
                 "opening_hours"
             ],
@@ -60614,6 +60616,7 @@
             "fields": [
                 "name",
                 "sport",
+                "building",
                 "address",
                 "opening_hours"
             ],
@@ -60633,6 +60636,7 @@
             "fields": [
                 "name",
                 "sport",
+                "building",
                 "address",
                 "opening_hours"
             ],
@@ -60652,6 +60656,7 @@
             "fields": [
                 "name",
                 "sport",
+                "building",
                 "address",
                 "opening_hours"
             ],
@@ -60671,6 +60676,7 @@
             "fields": [
                 "name",
                 "sport",
+                "building",
                 "address",
                 "opening_hours"
             ],
@@ -60690,6 +60696,7 @@
             "fields": [
                 "name",
                 "sport",
+                "building",
                 "address",
                 "opening_hours"
             ],
@@ -60709,6 +60716,7 @@
             "fields": [
                 "name",
                 "sport",
+                "building",
                 "address",
                 "opening_hours"
             ],
@@ -60728,6 +60736,7 @@
             "fields": [
                 "name",
                 "sport",
+                "building",
                 "address",
                 "opening_hours"
             ],
@@ -60747,6 +60756,7 @@
             "fields": [
                 "name",
                 "sport",
+                "building",
                 "address",
                 "opening_hours"
             ],
@@ -60766,6 +60776,7 @@
             "fields": [
                 "name",
                 "sport",
+                "building",
                 "address",
                 "opening_hours"
             ],
@@ -60785,6 +60796,7 @@
             "fields": [
                 "name",
                 "sport",
+                "building",
                 "address",
                 "opening_hours"
             ],
@@ -60804,6 +60816,7 @@
             "fields": [
                 "name",
                 "sport",
+                "building",
                 "address",
                 "opening_hours"
             ],
@@ -60823,6 +60836,7 @@
             "fields": [
                 "name",
                 "sport",
+                "building",
                 "address",
                 "opening_hours"
             ],
@@ -60842,6 +60856,7 @@
             "fields": [
                 "name",
                 "sport",
+                "building",
                 "address",
                 "opening_hours"
             ],
@@ -60861,6 +60876,7 @@
             "fields": [
                 "name",
                 "sport",
+                "building",
                 "address",
                 "opening_hours"
             ],
@@ -60880,6 +60896,7 @@
             "fields": [
                 "name",
                 "sport",
+                "building",
                 "address",
                 "opening_hours"
             ],
@@ -60899,6 +60916,7 @@
             "fields": [
                 "name",
                 "sport",
+                "building",
                 "address",
                 "opening_hours"
             ],
@@ -60918,6 +60936,7 @@
             "fields": [
                 "name",
                 "sport",
+                "building",
                 "address",
                 "opening_hours"
             ],
@@ -60937,6 +60956,7 @@
             "fields": [
                 "name",
                 "sport",
+                "building",
                 "address",
                 "opening_hours"
             ],
@@ -60956,6 +60976,7 @@
             "fields": [
                 "name",
                 "sport",
+                "building",
                 "address",
                 "opening_hours"
             ],
