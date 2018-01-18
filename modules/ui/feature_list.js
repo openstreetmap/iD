@@ -174,7 +174,9 @@ export function uiFeatureList(context) {
 
             var visible = context.surface().selectAll('.point, .line, .area').nodes();
             for (var i = 0; i < visible.length && result.length <= 200; i++) {
-                addEntity(visible[i].__data__);
+                var datum = visible[i].__data__;
+                var entity = datum && datum.properties && datum.properties.entity;
+                if (entity) { addEntity(entity); }
             }
 
             (_geocodeResults || []).forEach(function(d) {
