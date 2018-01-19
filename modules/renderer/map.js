@@ -363,9 +363,9 @@ export function rendererMap(context) {
 
 
     function zoomPan(manualEvent) {
-        var event = (manualEvent || d3_event),
-            source = event.sourceEvent,
-            eventTransform = event.transform;
+        var event = (manualEvent || d3_event);
+        var source = event.sourceEvent;
+        var eventTransform = event.transform;
 
         if (transformStart.x === eventTransform.x &&
             transformStart.y === eventTransform.y &&
@@ -381,15 +381,15 @@ export function rendererMap(context) {
         //   https://github.com/basilfx/normalize-wheel/blob/master/src/normalizeWheel.js
         if (source && source.type === 'wheel' && source.deltaMode === 1 /* LINE */) {
             // pick sensible scroll amount if user scrolling fast or slow..
-            var lines = Math.abs(source.deltaY),
-                scroll = lines > 2 ? 40 : lines * 10;
+            var lines = Math.abs(source.deltaY);
+            var scroll = lines > 2 ? 40 : lines * 10;
 
-            var t0 = transformed ? transformLast : transformStart,
-                p0 = mouse(source),
-                p1 = t0.invert(p0),
-                k2 = t0.k * Math.pow(2, -source.deltaY * scroll / 500),
-                x2 = p0[0] - p1[0] * k2,
-                y2 = p0[1] - p1[1] * k2;
+            var t0 = transformed ? transformLast : transformStart;
+            var p0 = mouse(source);
+            var p1 = t0.invert(p0);
+            var k2 = t0.k * Math.pow(2, -source.deltaY * scroll / 500);
+            var x2 = p0[0] - p1[0] * k2;
+            var y2 = p0[1] - p1[1] * k2;
 
             eventTransform = d3_zoomIdentity.translate(x2,y2).scale(k2);
             _selection.node().__zoom = eventTransform;
@@ -406,9 +406,9 @@ export function rendererMap(context) {
 
         projection.transform(eventTransform);
 
-        var scale = eventTransform.k / transformStart.k,
-            tX = (eventTransform.x / scale - transformStart.x) * scale,
-            tY = (eventTransform.y / scale - transformStart.y) * scale;
+        var scale = eventTransform.k / transformStart.k;
+        var tX = (eventTransform.x / scale - transformStart.x) * scale;
+        var tY = (eventTransform.y / scale - transformStart.y) * scale;
 
         if (context.inIntro()) {
             curtainProjection.transform({
@@ -418,7 +418,7 @@ export function rendererMap(context) {
             });
         }
 
-        mousemove = event;
+        if (source) mousemove = event;
         transformed = true;
         transformLast = eventTransform;
         utilSetTransform(supersurface, tX, tY, scale);
