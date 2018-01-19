@@ -1,5 +1,5 @@
 {
-    "icon": "bus",
+    "icon": "highway-bus_guideway",
     "fields": [
         "name",
         "operator",

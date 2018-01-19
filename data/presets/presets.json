@@ -6932,7 +6932,7 @@
             "name": "Bridle Path"
         },
         "highway/bus_guideway": {
-            "icon": "bus",
+            "icon": "highway-bus_guideway",
             "fields": [
                 "name",
                 "operator",
