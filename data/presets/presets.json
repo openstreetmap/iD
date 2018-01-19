@@ -6942,6 +6942,14 @@
                 "line"
             ],
             "tags": {
+                "highway": "bus_guideway"
+            },
+            "addTags": {
+                "highway": "bus_guideway",
+                "access": "no",
+                "bus": "designated"
+            },
+            "removeTags": {
                 "highway": "bus_guideway",
                 "access": "no",
                 "bus": "designated"

@@ -1333,8 +1333,8 @@
             "value": "bridleway"
         },
         {
-            "key": "bus",
-            "value": "designated"
+            "key": "highway",
+            "value": "bus_guideway"
         },
         {
             "key": "highway",
