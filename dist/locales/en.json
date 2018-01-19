@@ -3058,7 +3058,7 @@
                 },
                 "amenity/place_of_worship/hindu": {
                     "name": "Hindu Temple",
-                    "terms": "garbhargriha,mandu,puja,shrine,temple"
+                    "terms": "kovil,devasthana,mandir,kshetram,alayam,shrine,temple"
                 },
                 "amenity/place_of_worship/jewish": {
                     "name": "Synagogue",

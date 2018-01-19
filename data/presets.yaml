@@ -2070,7 +2070,7 @@ en:
       amenity/place_of_worship/hindu:
         # 'amenity=place_of_worship, religion=hindu'
         name: Hindu Temple
-        # 'terms: garbhargriha,mandu,puja,shrine,temple'
+        # 'terms: kovil,devasthana,mandir,kshetram,alayam,shrine,temple'
         terms: '<translate with synonyms or related terms for ''Hindu Temple'', separated by commas>'
       amenity/place_of_worship/jewish:
         # 'amenity=place_of_worship, religion=jewish'
