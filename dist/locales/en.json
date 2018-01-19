@@ -3976,6 +3976,10 @@
                     "name": "Bridle Path",
                     "terms": "bridleway,equestrian,horse"
                 },
+                "highway/bus_guideway": {
+                    "name": "Bus Guideway",
+                    "terms": ""
+                },
                 "highway/corridor": {
                     "name": "Indoor Corridor",
                     "terms": "gallery,hall,hallway,indoor,passage,passageway"

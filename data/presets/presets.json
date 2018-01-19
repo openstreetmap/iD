@@ -6931,6 +6931,24 @@
             ],
             "name": "Bridle Path"
         },
+        "highway/bus_guideway": {
+            "icon": "bus",
+            "fields": [
+                "name",
+                "operator",
+                "oneway"
+            ],
+            "geometry": [
+                "line"
+            ],
+            "tags": {
+                "highway": "bus_guideway",
+                "access": "no",
+                "bus": "designated"
+            },
+            "terms": [],
+            "name": "Bus Guideway"
+        },
         "highway/corridor": {
             "icon": "highway-footway",
             "fields": [

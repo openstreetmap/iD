@@ -215,6 +215,27 @@ path.casing.tag-residential {
     stroke:#444;
 }
 
+.preset-icon .icon.highway-bus_guideway {
+    color: #fff;
+    fill: #444;
+}
+path.stroke.tag-highway-bus_guideway,
+path.stroke.tag-bus_guideway {
+    stroke:#fff;
+    stroke-linecap: butt;
+    stroke-dasharray: 8, 8;
+    stroke-width: 1;
+}
+
+.low-zoom path.stroke.tag-highway-bus_guideway,
+.low-zoom path.stroke.tag-bus_guideway {
+    stroke-dasharray: 4, 4;
+}
+path.casing.tag-highway-bus_guideway,
+path.casing.tag-bus_guideway {
+    stroke:#58a9ed;
+}
+
 .preset-icon .icon.highway-unclassified {
     color: #dcd9b9;
     fill: #444;
@@ -270,6 +291,7 @@ path.shadow.tag-highway-corridor,
 path.shadow.tag-highway-pedestrian,
 path.shadow.tag-highway-steps,
 path.shadow.tag-path,
+path.shadow.tag-highway-bus_guideway,
 path.shadow.tag-footway,
 path.shadow.tag-cycleway,
 path.shadow.tag-bridleway,
@@ -286,6 +308,7 @@ path.casing.tag-highway-corridor,
 path.casing.tag-highway-pedestrian,
 path.casing.tag-highway-steps,
 path.casing.tag-path,
+path.casing.tag-highway-bus_guideway,
 path.casing.tag-footway,
 path.casing.tag-cycleway,
 path.casing.tag-bridleway,
@@ -350,6 +373,7 @@ path.stroke.tag-steps {
 .low-zoom path.shadow.tag-highway-pedestrian,
 .low-zoom path.shadow.tag-highway-steps,
 .low-zoom path.shadow.tag-path,
+.low-zoom path.shadow.tag-highway-bus_guideway,
 .low-zoom path.shadow.tag-footway,
 .low-zoom path.shadow.tag-cycleway,
 .low-zoom path.shadow.tag-bridleway,
@@ -366,6 +390,7 @@ path.stroke.tag-steps {
 .low-zoom path.casing.tag-highway-pedestrian,
 .low-zoom path.casing.tag-highway-steps,
 .low-zoom path.casing.tag-path,
+.low-zoom path.casing.tag-highway-bus_guideway,
 .low-zoom path.casing.tag-footway,
 .low-zoom path.casing.tag-cycleway,
 .low-zoom path.casing.tag-bridleway,
@@ -382,6 +407,7 @@ path.stroke.tag-steps {
 .low-zoom path.stroke.tag-highway-pedestrian,
 .low-zoom path.stroke.tag-highway-steps,
 .low-zoom path.stroke.tag-path,
+.low-zoom path.stroke.tag-highway-bus_guideway,
 .low-zoom path.stroke.tag-footway,
 .low-zoom path.stroke.tag-cycleway,
 .low-zoom path.stroke.tag-bridleway,
