@@ -6933,7 +6933,8 @@
             "icon": "bus",
             "fields": [
                 "name",
-                "operator"
+                "operator",
+                "oneway"
             ],
             "geometry": [
                 "line"
