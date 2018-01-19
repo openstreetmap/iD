@@ -9,11 +9,13 @@ import { geoExtent, geoMetersToOffset, geoOffsetToMeters} from '../geo';
 import { rendererBackgroundSource } from './background_source';
 import { rendererTileLayer } from './tile_layer';
 import { utilQsString, utilStringQs } from '../util';
+import { utilDetect } from '../util/detect';
 import { utilRebind } from '../util/rebind';
 
 
 export function rendererBackground(context) {
     var dispatch = d3_dispatch('change');
+    var detected = utilDetect();
     var baseLayer = rendererTileLayer(context).projection(context.projection);
     var _overlayLayers = [];
     var _backgroundSources = [];
@@ -24,20 +26,22 @@ export function rendererBackground(context) {
 
 
     function background(selection) {
-        var baseFilter = '';
 
-        if (_brightness !== 1) {
-            baseFilter += 'brightness(' + _brightness + ')';
-        }
-        if (_contrast !== 1) {
-            baseFilter += 'contrast(' + _contrast + ')';
-        }
-        if (_saturation !== 1) {
-            baseFilter += 'saturate(' + _saturation + ')';
-        }
-        if (_sharpness < 1) {  // gaussian blur
-            var blur = d3_interpolateNumber(0.5, 5)(1 - _sharpness);
-            baseFilter += 'blur(' + blur + 'px)';
+        var baseFilter = '';
+        if (detected.cssfilters) {
+            if (_brightness !== 1) {
+                baseFilter += 'brightness(' + _brightness + ')';
+            }
+            if (_contrast !== 1) {
+                baseFilter += 'contrast(' + _contrast + ')';
+            }
+            if (_saturation !== 1) {
+                baseFilter += 'saturate(' + _saturation + ')';
+            }
+            if (_sharpness < 1) {  // gaussian blur
+                var blur = d3_interpolateNumber(0.5, 5)(1 - _sharpness);
+                baseFilter += 'blur(' + blur + 'px)';
+            }
         }
 
         var base = selection.selectAll('.layer-background')
@@ -46,8 +50,13 @@ export function rendererBackground(context) {
         base = base.enter()
             .insert('div', '.layer-data')
             .attr('class', 'layer layer-background')
-            .merge(base)
-            .style('filter', baseFilter || null);
+            .merge(base);
+
+        if (detected.cssfilters) {
+            base.style('filter', baseFilter || null);
+        } else {
+            base.style('opacity', _brightness);
+        }
 
 
         var imagery = base.selectAll('.layer-imagery')
@@ -62,7 +71,7 @@ export function rendererBackground(context) {
 
         var maskFilter = '';
         var mixBlendMode = '';
-        if (_sharpness > 1) {  // apply unsharp mask
+        if (detected.cssfilters && _sharpness > 1) {  // apply unsharp mask
             mixBlendMode = 'overlay';
             maskFilter = 'saturate(0) blur(3px) invert(1)';
 
@@ -74,7 +83,7 @@ export function rendererBackground(context) {
         }
 
         var mask = base.selectAll('.layer-unsharp-mask')
-            .data(_sharpness > 1 ? [0] : []);
+            .data(detected.cssfilters && _sharpness > 1 ? [0] : []);
 
         mask.exit()
             .remove();
