@@ -223,11 +223,17 @@ path.stroke.tag-highway-bus_guideway,
 path.stroke.tag-bus_guideway {
     stroke:#fff;
     stroke-linecap: butt;
-    stroke-dasharray: 12, 16;
+    stroke-dasharray: 8, 8;
+    stroke-width: 1;
+}
+
+.low-zoom path.stroke.tag-highway-bus_guideway,
+.low-zoom path.stroke.tag-bus_guideway {
+    stroke-dasharray: 4, 4;
 }
 path.casing.tag-highway-bus_guideway,
 path.casing.tag-bus_guideway {
-    stroke:#66a3ff;
+    stroke:#58a9ed;
 }
 
 .preset-icon .icon.highway-unclassified {
@@ -319,7 +325,6 @@ path.stroke.tag-highway-corridor,
 path.stroke.tag-highway-pedestrian,
 path.stroke.tag-highway-steps,
 path.stroke.tag-path,
-path.stroke.tag-highway-bus_guideway,
 path.stroke.tag-footway,
 path.stroke.tag-cycleway,
 path.stroke.tag-bridleway,
