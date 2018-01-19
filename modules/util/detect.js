@@ -112,6 +112,8 @@ export function utilDetect(force) {
 
     detected.download = !(detected.ie || detected.browser.toLowerCase() === 'edge');
 
+    detected.cssfilters = !(detected.ie || detected.browser.toLowerCase() === 'edge');
+
     function nav(x) {
         return navigator.userAgent.indexOf(x) !== -1;
     }

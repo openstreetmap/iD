@@ -3,16 +3,21 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-
 import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg';
 import { uiDisclosure } from './disclosure';
+import { utilDetect } from '../util/detect';
 
 
 export function uiBackgroundDisplayOptions(context) {
-    var _selection = d3_select(null);
-    var sliders = ['brightness', 'contrast', 'saturation', 'sharpness'];
+    var detected = utilDetect();
     var storedOpacity = context.storage('background-opacity');
+    var minVal = 0.25;
+    var maxVal = detected.cssfilters ? 2 : 1;
+
+    var sliders = detected.cssfilters
+        ? ['brightness', 'contrast', 'saturation', 'sharpness']
+        : ['brightness'];
 
     var _options = {
         brightness: (storedOpacity !== null ? (+storedOpacity) : 1),
@@ -20,6 +25,8 @@ export function uiBackgroundDisplayOptions(context) {
         saturation: 1,
         sharpness: 1
     };
+
+    var _selection = d3_select(null);
 
 
     function clamp(x, min, max) {
@@ -32,7 +39,7 @@ export function uiBackgroundDisplayOptions(context) {
             val = d3_event.target.value;
         }
 
-        val = clamp(val, 0.25, 2);
+        val = clamp(val, minVal, maxVal);
 
         _options[d] = val;
         context.background()[d](val);
@@ -71,8 +78,8 @@ export function uiBackgroundDisplayOptions(context) {
             .append('input')
             .attr('class', function(d) { return 'display-option-input display-option-input-' + d; })
             .attr('type', 'range')
-            .attr('min', '0.25')
-            .attr('max', '2')
+            .attr('min', minVal)
+            .attr('max', maxVal)
             .attr('step', '0.05')
             .on('input', function(d) {
                 var val = d3_select(this).property('value');
