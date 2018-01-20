@@ -8,6 +8,7 @@
         "barrier/ditch",
         "barrier/gate",
         "barrier/hedge",
+        "barrier/kerb",
         "barrier"
     ]
 }

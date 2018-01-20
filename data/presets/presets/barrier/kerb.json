@@ -1,0 +1,14 @@
+{
+    "icon": "wheelchair",
+    "fields": [
+        "access"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "tags": {
+        "barrier": "kerb"
+    },
+    "name": "Kerb"
+}
