@@ -204,6 +204,7 @@ export function svgRelationMemberTags(graph) {
 
 
 export function svgSegmentWay(way, graph, activeID) {
+    var isActiveWay = (way.nodes.indexOf(activeID) !== -1);
     var features = { passive: [], active: [] };
     var start = {};
     var end = {};
@@ -217,7 +218,7 @@ export function svgSegmentWay(way, graph, activeID) {
         if (start.type !== undefined) {
             if (start.node.id === activeID || end.node.id === activeID) {
                 // push nothing
-            } else if (start.type === 2 || end.type === 2) {   // one adjacent vertex
+            } else if (isActiveWay && (start.type === 2 || end.type === 2)) {   // one adjacent vertex
                 pushActive(start, end, i);
             } else if (start.type === 0 && end.type === 0) {   // both active vertices
                 pushActive(start, end, i);
