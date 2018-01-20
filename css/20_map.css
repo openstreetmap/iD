@@ -260,5 +260,13 @@ path.gpx {
 }
 
 text.gpx {
+    fill: #444;
+}
+
+rect.gpxtag {
+    fill: #ddd;
+}
+
+rect.gpxborder {
     fill: #ff26d4;
 }
