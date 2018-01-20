@@ -406,9 +406,10 @@ export function svgVertices(projection, context) {
 
         _prevHover = _currHover || {};
         _currHoverTarget = target;
+        var entity = target && target.properties && target.properties.entity;
 
-        if (_currHoverTarget) {
-            _currHover = getSiblingAndChildVertices([_currHoverTarget.id], graph, wireframe, zoom);
+        if (entity) {
+            _currHover = getSiblingAndChildVertices([entity.id], graph, wireframe, zoom);
         } else {
             _currHover = {};
         }
