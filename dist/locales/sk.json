@@ -340,8 +340,7 @@
             "created": "Vytvorené",
             "about_changeset_comments": "O popisoch súborov zmien",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
-            "google_warning": "V popise ste spomenuli Google: nezabúdajte, že kopírovanie z Google máp je prísne zakázané.",
-            "google_warning_link": "http://www.openstreetmap.org/copyright"
+            "google_warning": "V popise ste spomenuli Google: nezabúdajte, že kopírovanie z Google máp je prísne zakázané."
         },
         "contributors": {
             "list": "Úpravy od {users}",
@@ -457,22 +456,19 @@
             "title": "Pozadie",
             "description": "Nastavenia pozadia",
             "key": "B",
-            "percent_brightness": "{opacity}% jas",
             "none": "Žiadne",
             "best_imagery": "Najviac známy zdroj obrázkov pre túto polohu",
             "switch": "Prepnúť späť na toto pozadie",
             "custom": "Voliteľné",
             "custom_button": "Upraviť volitelné pozadie",
             "custom_prompt": "Vyplňte vzorovú URL pre mapové dlaždice. Platné polia sú: \n    - {zoom}/{z}, {x}, {y} pre Z/X/Y dlaždicovú schému \n    - {ty} pre TMS štýl s prevrátenými Y súradnicami\n    - {u} pre quadtile schému \n    - {switch:a,b,c} pre DNS server multiplexing\n\nPríklad:\n{example}",
-            "fix_misalignment": "Upraviť posun obrázkov",
-            "imagery_source_faq": "Odkiaľ pochádzajú tieto obrázky?",
             "reset": "vynulovať",
-            "offset": "Potiahnutím kdekoľvek v šedej ploche nižšie upravíte posun obrázkov, alebo zadajte hodnotu posunu v metroch.",
             "minimap": {
-                "description": "Náhľad mapy",
                 "tooltip": "Zobraziť oddialenú mapu pre ľahšie lokalizovanie práve zobrazenej oblasti.",
                 "key": "/"
-            }
+            },
+            "fix_misalignment": "Upraviť posun obrázkov",
+            "offset": "Potiahnutím kdekoľvek v šedej ploche nižšie upravíte posun obrázkov, alebo zadajte hodnotu posunu v metroch."
         },
         "map_data": {
             "title": "Mapové údaje",
@@ -664,12 +660,7 @@
         },
         "help": {
             "title": "Nápoveda",
-            "key": "H",
-            "help": "# Nápoveda\n\nToto je editor pre [OpenStreetMap](http://www.openstreetmap.org/), slobodnú a upravovateľnú mapu sveta. Môžete ho používať na pridávanie a aktualizovanie údajov vo vašom okolí a vylepšiť tak mapu sveta s otvoreným kódom a dátami pre všetkých.\n\nÚpravy, ktoré v tejto mape spravíte, budú viditeľné pre každého, kto používa OpenStreetMap. Na to, aby ste mohli upravovať, sa budete musieť prihlásiť [prihlásiť](https://www.openstreetmap.org/login).\n\n[iD editor](http://ideditor.com/) je kolaboratívny projekt so [zdrojovým kódom dostupným na GitHub](https://github.com/openstreetmap/iD).\n",
-            "gps": "# GPS\n\nzozbierané GPS údaje sú najcennejší zdroj dát pre OpenStreetMap. Tento editor\npodporuje stopy z lokálnych \".gpx\" súborov na vašom počítači. Tento typ GPS stôp\nmôžete zachytiť pomocou rôznych aplikácií pre smartfóny ako aj GPS\nprístrojmi.\n\nPre informácie, ako robiť GPS prieskum, si prečítajte\n[Mapovanie so smartfónom, GPS alebo papierom](http://learnosm.org/en/mobile-mapping/).\n\nPre použitie GPX stopy pre mapovanie, pretiahnite a pustite GPX súbor na mapový\neditor. Po rozpoznaní, bude pridaná na mapu ako jasná fialová\nčiara. Kliknite na ponuku \"Mapové údaje\" na pravej strane pre zapnutie,\nvypnutie alebo priblíženie na túto novú GPX vrstvu.\n\nGPX stopa nie je priamo nahraná na OpenStreetMap. Najlepší spôsob ako\nju využiť je, použiť ju ako predlohu pre zakreslovanie nových objektov\na potom ju [nahrať na OpenStreetMap](http://www.openstreetmap.org/trace/create)\npre ďalších uživateľov.\n",
-            "imagery": "# Snímky povrchu\n\nLetecké snímky sú dôležitým zdrojom pre mapovanie. Kombinácia leteckých fotografií, satelitných snímok a voľne skompilovaných zdrojov je v editore dostupná vpravo pod ponukou \"Nastavenia pozadia\".\n\nŠtandardne je v editore predvolená satelitná vrstva z [Bing Maps](http://www.bing.com/maps/), ale ako posuniete a priblížite mapu na nové geografické miesta, dostupnými sa stanú nové zdroje. Niektoré krajiny ako Spojené Štáty, Francúzsko, a Dánsko majú pre niektoré oblasti dostupné veľmi kvalitné snímky.\n\nSnímky môžu byť niekedy posunuté voči mapovým dátam, kvôli chybe na strane poskytovateľa snímkov. Ak uvidíte veľa ciest posunutých voči pozadiu, neposúvajte ich hneď všetky, aby ste ich zarovnali s pozadím. Namiesto toho môžete upraviť snímky, aby odpovedali existujúcim dátam tým, že kliknete na \"Oprav zarovnanie\" naspodku Nastavenia pozadia.\n",
-            "addresses": "# Adresy\n\nAdresy sú jedny z najužitočnejších informácií na mape.\n\nHoci sú adresy často znázorňované ako časti ulíc, v OpenStreetMap sú zaznamenávané ako atribúty budov a miest pozdĺž ulíc.\n\nInformáciu o adrese môžete pridať ku miestam znázornených ako obrysy budov, ale aj ku tým, ktoré boli zmapované ako jediný bod. Najvhodnejším zdrojom adresných údajov je miestny prieskum alebo znalosť lokality. Tak ako pri iných objektoch, kopírovanie z komerčných zdrojov ako Google Mapy je prísne zakázané.\n",
-            "inspector": "# Používanie Inšpektora\n\nInšpektor je sekcia na ľavej strane stránky, ktorá vám umožní\nupravovať detaily vybraného objektu.\n\n### Voľba typu objektu\n\nPo tom ako pridáte bod, čiaru alebo plochu, môžete vybrať aký je to typ objektu.\nNapríklad či je to diaľnica alebo obytná ulica, či supermarket alebo kaviareň.\nInšpektor zobrazí tlačítka pre bežné typy objektov a ďalšie môžete nájsť zadaním\ntoho, čo hľadáte do vyhľadávacieho poľa.\n\nKliknite na \"i\" v pravom dolnom rohu tlačítka pre výber typu objektu, ak sa chcete o ňom dozvedieť viac. Kliknutím na tlačítko vyberiete tento typ objektu.\n\n### Používanie formulárov a upravovanie označenia\n\nPo tom ako zvolíte typ objektu, alebo keď vyberiete objekt, ktorý už má\npridelený typ, inšpektor zobrazí polia s detailmi o objekte ako jeho\nmeno a adresa.\n\nPod poliami, ktoré vidíte, môžete kliknúť na \"Pridať pole\" a pridať ďalšie detaily\nako odkaz na Wikipédiu, prístup pre vozičkárov a ďalšie.\n\nNaspodku inšpektora kliknite na \"Dodatočné označenia\" pre pridanie ľubovoľných\noznačení pre daný element. [Taginfo](http://taginfo.openstreetmap.org/) je\nvýborný zdroj pre zistenie populárnych kombinácií označení.\n\nZmeny, ktoré spravíte v inšpektorovi, sú automaticky aplikované na mapu.\nVrátiť späť ich môžete kedykoľvek kliknutím na tlačítko \"Vrátiť\".\n"
+            "key": "H"
         },
         "intro": {
             "done": "hotovo",
@@ -847,7 +838,6 @@
             },
             "areas": {
                 "title": "Plochy",
-                "add_playground": "*Plochy* sa používajú na zobrazovanie hraníc objektov ako jazerá, budovy alebo rezidenčné zóny.{br}Môžu byť tiež použité na detailnejšie mapovanie objektov, ktoré by ste nomálne označili iba bodom. **Kliknite na {button} Plocha a pridajte novú plochu.** ",
                 "start_playground": "Poďme pridať do mapy ihrisko tým, že nakreslíme plochu. Plochy sa kreslia tak, že pridávate *uzly* pozdĺž vonkajšej hrany objektu. **Kliknite alebo stlačte medzerník pre umiestnenie počiatočného uzla na jeden z rohov ihriska.**",
                 "continue_playground": "Pokračujte v kreslení plochy pridávaním ďalších uzlov pozdĺž hrany ihriska. Je poriadku ak spojíte plochu s existujúcimi chodníkmi.{br}Tip: Podržaním klávesu \"{alt}\" zabránite uzlom v spájaní s ďalšími objektami. **Pokračujte v kreslní plochy inhriska.**",
                 "finish_playground": "Dokončite plochu tým, že stlačíte enter alebo kliknete na prvý alebo posledný uzol. **Dokončite kreslenie plochy ihriska.**",
@@ -1313,36 +1303,8 @@
                     "label": "Kapacita",
                     "placeholder": "50, 100, 200..."
                 },
-                "cardinal_direction": {
-                    "label": "Smer",
-                    "options": {
-                        "E": "Východ",
-                        "ENE": "Východo-severovýchod",
-                        "ESE": "Východo-juhovýchod",
-                        "N": "Sever",
-                        "NE": "Severtovýchod",
-                        "NNE": "Severo-severovýchod",
-                        "NNW": "Severo-severozápad",
-                        "NW": "Severozápad",
-                        "S": "Juh",
-                        "SE": "Juhovýchod",
-                        "SSE": "Juho-juhovýchod",
-                        "SSW": "Juho-juhozápad",
-                        "SW": "Juhozápad",
-                        "W": "Západ",
-                        "WNW": "Západo-severozápad",
-                        "WSW": "Západo-juhozápad"
-                    }
-                },
                 "castle_type": {
                     "label": "Typ"
-                },
-                "clock_direction": {
-                    "label": "Smer",
-                    "options": {
-                        "anticlockwise": "Proti smeru hodinových ručičiek",
-                        "clockwise": "V smere hodinových ručičiek"
-                    }
                 },
                 "clothes": {
                     "label": "Typ oblečenia"
@@ -1734,10 +1696,6 @@
                 "maxweight": {
                     "label": "Maximálna hmotnosť"
                 },
-                "milestone_position": {
-                    "label": "Pozícia mílnika",
-                    "placeholder": "Vzdialenosť na jedno desatinné miesto (123.4)"
-                },
                 "mtb/scale": {
                     "label": "Obtiažnosť pre horské bicykle",
                     "options": {
@@ -1852,13 +1810,6 @@
                     "label": "Par",
                     "placeholder": "3, 4, 5..."
                 },
-                "parallel_direction": {
-                    "label": "Smer",
-                    "options": {
-                        "backward": "Dozadu",
-                        "forward": "Dopredu"
-                    }
-                },
                 "park_ride": {
                     "label": "Odstavné parkovisko"
                 },
@@ -1949,13 +1900,6 @@
                 },
                 "recycling_accepts": {
                     "label": "Prijíma"
-                },
-                "recycling_type": {
-                    "label": "Typ recyklácie",
-                    "options": {
-                        "centre": "Recyklačné centrum",
-                        "container": "Kontajner"
-                    }
                 },
                 "ref": {
                     "label": "Referenčný kód"
@@ -2340,8 +2284,7 @@
                     "terms": "lanovy vlek"
                 },
                 "aerialway/station": {
-                    "name": "Stanica lanovky",
-                    "terms": "lanovkova stanica,lanovková stanica"
+                    "name": "Stanica lanovky"
                 },
                 "aerialway/t-bar": {
                     "name": "Vlek s dvojmiestnou kotvou",
@@ -2445,10 +2388,6 @@
                     "name": "Zmenáreň",
                     "terms": "zmenaren,valuty,cudzia mena, výmena peňazí,vymena penazi"
                 },
-                "amenity/bus_station": {
-                    "name": "Autobusová zastávka",
-                    "terms": "autobusova zastavka,zastávka,zastavka,stanica,autobus,mhd"
-                },
                 "amenity/cafe": {
                     "name": "Kaviareň",
                     "terms": "kaviareň,kaviaren"
@@ -2539,10 +2478,6 @@
                 "amenity/fast_food": {
                     "name": "Rýchle občerstvenie",
                     "terms": "rychle obcerstvenie,rýchle občerstvenie,fastfood, fast food"
-                },
-                "amenity/ferry_terminal": {
-                    "name": "Stanica trajektu",
-                    "terms": "trajekt,kompa,lod,autotrajekt"
                 },
                 "amenity/fire_station": {
                     "name": "Požiarna stanica",
@@ -2698,10 +2633,6 @@
                 "amenity/ranger_station": {
                     "name": "Stanica horskej služby",
                     "terms": "stanica horskej sluzby,sprava narodneho parku, správa národného parku,narodny park,národný park"
-                },
-                "amenity/recycling": {
-                    "name": "Recyklácia",
-                    "terms": "recyklacia, zber, recyklovanie"
                 },
                 "amenity/recycling_centre": {
                     "name": "Recyklačné centrum",
@@ -3336,10 +3267,6 @@
                     "name": "Jazdecká trať",
                     "terms": "jazdecká cesta, chodník pre kone,jazdecká trasa,jazdecka cesta,chodnik pre kone,jazdecka trasa,jazdecka trat"
                 },
-                "highway/bus_stop": {
-                    "name": "Autobusová zastávka",
-                    "terms": "Autobusova zastavka,nástupište,nastupiste,stanica"
-                },
                 "highway/corridor": {
                     "name": "Chodba v budove",
                     "terms": "chodba,hala"
@@ -3570,10 +3497,6 @@
                 "landuse/forest": {
                     "name": "Les",
                     "terms": "hora,stromy"
-                },
-                "landuse/garages": {
-                    "name": "Garáže",
-                    "terms": "garaze,parkovanie,kryte parkovanie,kryté parkovanie"
                 },
                 "landuse/grass": {
                     "name": "Tráva",
@@ -3953,12 +3876,7 @@
                     "terms": "urad"
                 },
                 "office/administrative": {
-                    "name": "Administratívny úrad",
-                    "terms": "administrativny urad"
-                },
-                "office/company": {
-                    "name": "Firma",
-                    "terms": "firmy,spoločnosť,spolocnost"
+                    "name": "Administratívny úrad"
                 },
                 "office/educational_institution": {
                     "name": "Vzdelávací inštitút",
@@ -4098,14 +4016,6 @@
                     "name": "Transformátor",
                     "terms": "Rozvodna stanica,Rozvodná stanica,transformator,trasformátor"
                 },
-                "public_transport/platform": {
-                    "name": "Nástupište",
-                    "terms": "nastupiste,zastávka,zastavka"
-                },
-                "public_transport/stop_position": {
-                    "name": "Miesto zastavenia",
-                    "terms": "zastávka,zastavka"
-                },
                 "railway": {
                     "name": "Železnica"
                 },
@@ -4121,10 +4031,6 @@
                     "name": "Lanová dráha",
                     "terms": "lanova zeleznica,lanova draha"
                 },
-                "railway/halt": {
-                    "name": "Železničná zastávka",
-                    "terms": "zeleznicna zastavka,zastavka,zástavka,vlak,vlaková zástavka,vlakova zastavka,stanica"
-                },
                 "railway/monorail": {
                     "name": "Jednokoľajnicová dráha",
                     "terms": "jednokolajnicova draha,jednokolajka,monorail"
@@ -4133,17 +4039,9 @@
                     "name": "Úzkorozchodná železnica",
                     "terms": "uzkorozchodna zeleznica,uzkokolajka,úzkoľajka"
                 },
-                "railway/platform": {
-                    "name": "Železničné nástupište",
-                    "terms": "zeleznicne nastupiste,nástupište,nastupiste,perón,peron"
-                },
                 "railway/rail": {
                     "name": "Železničná trať",
                     "terms": "zeleznicna trat,trat,trať,železnica,zeleznica"
-                },
-                "railway/station": {
-                    "name": "Železničná stanica",
-                    "terms": "zeleznicna stanica,stanica,zástavka,zastavka"
                 },
                 "railway/subway": {
                     "name": "Metro",
@@ -4406,10 +4304,6 @@
                 "shop/jewelry": {
                     "name": "Zlatníctvo",
                     "terms": "zlatnictvo,šperky,sperky,zlato,striebro"
-                },
-                "shop/kiosk": {
-                    "name": "Novinový stánok",
-                    "terms": "novinovy stanok,noviny,casopisy,časopisy"
                 },
                 "shop/kitchen": {
                     "name": "Kuchynské štúdio",
@@ -4935,33 +4829,18 @@
                 "name": "OSM Inspector: Označenia"
             },
             "Waymarked_Trails-Cycling": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, mapové údaje OpenStreetMap prispievatelia, ODbL 1.0"
-                },
                 "name": "Waymarked Trails: Cyklistika"
             },
             "Waymarked_Trails-Hiking": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, mapové údaje OpenStreetMap prispievatelia, ODbL 1.0"
-                },
                 "name": "Waymarked Trails: Turistika"
             },
             "Waymarked_Trails-MTB": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, mapové údaje OpenStreetMap prispievatelia, ODbL 1.0"
-                },
                 "name": "Waymarked Trails: Horské bicykle"
             },
             "Waymarked_Trails-Skating": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, mapové údaje OpenStreetMap prispievatelia, ODbL 1.0"
-                },
                 "name": "Waymarked Trails: Skating"
             },
             "Waymarked_Trails-Winter_Sports": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, mapové údaje OpenStreetMap prispievatelia, ODbL 1.0"
-                },
                 "name": "Waymarked Trails: Zimné športy"
             },
             "basemap.at": {

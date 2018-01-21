@@ -338,8 +338,7 @@
             "created": "Stvoreno",
             "about_changeset_comments": "O komentarima promjena",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
-            "google_warning": "Spomenuo/la si Google u ovom komentaru: molim te zapamti da je kopiranje s Google karata strogo zabranjeno.",
-            "google_warning_link": "http://www.openstreetmap.org/copyright"
+            "google_warning": "Spomenuo/la si Google u ovom komentaru: molim te zapamti da je kopiranje s Google karata strogo zabranjeno."
         },
         "contributors": {
             "list": "Uređivali {users}",
@@ -407,20 +406,17 @@
         "background": {
             "title": "Podloga",
             "description": "Postavke podloge",
-            "percent_brightness": "{opacity}% svjetline",
             "none": "Nijedna",
             "best_imagery": "Najpoznatiji izvornik snimaka za ovo područje",
             "switch": "Vrati nazad na ovu podlogu",
             "custom": "Podesivo",
             "custom_button": "Uredi prilagođenu podlogu",
-            "fix_misalignment": "Popravi odstupanje snimaka",
-            "imagery_source_faq": "Koji su izvornici ovih snimaka?",
             "reset": "resetiraj",
-            "offset": "Pomakni bilo gdje na donjem sivom području za usklađivanje snimaka, ili unesi iznose odstupanja u metrima.",
             "minimap": {
-                "description": "Mini karta",
                 "tooltip": "Prikaži udaljeni prikaz karte za lakše lociranje trenutno prikazanog područja."
-            }
+            },
+            "fix_misalignment": "Popravi odstupanje snimaka",
+            "offset": "Pomakni bilo gdje na donjem sivom području za usklađivanje snimaka, ili unesi iznose odstupanja u metrima."
         },
         "map_data": {
             "title": "Podaci karte",
@@ -599,12 +595,7 @@
             "view_on_mapillary": "Pogledaj ovu sliku na Mapillary"
         },
         "help": {
-            "title": "Pomoć",
-            "help": "# Pomoć\n\niD je mrežna aplikacija za uređivanje [OpenStreetMapa](http://www.openstreetmap.org/),\nbesplatne karte svijeta. Možeš ju koristiti za dodavanje\ni obnavljanje podataka u svojoj okolini, čime stvaraš bolju otvorenu kartu svijeta dostupnu svima, uključujući izvorne podatke karte.\n\nIspravke i sadržaj koji napraviš na karti biti će vidljive svakome tko koristi\nOpenStreetMap. Da bi mogao/la uređivati kartu, trebaš se\n[prijaviti](https://www.openstreetmap.org/login).\n\n[iD editor](http://ideditor.com/) je suradnički projekt sa [izvornim kôdom\ndostupnim na GitHubu](https://github.com/openstreetmap/iD).\n",
-            "gps": "# GNSS\n\nGNSS podaci su najpouzdaniji izvor podataka za OpenStreetMap. Ovaj uređivač\npodržava lokalne tragove - `.gpx` datoteteke s tvog računala. Takav oblik GNSS\ntraga možeš prikupiti s raznim aplikacijama za pametne telefone kao i s drugim\nGNSS/GPS uređajima.\n\nZa više informacija o postupku izmjere pomoću GNSS satelita, pročitaj članak\n[\"Kartiranje s pametnim telefonom, GPS-om ili papirom\"](http://learnosm.org/en/mobile-mapping/).\n\nKako bi koristio/la GPX tragove za kartiranje, povuci i ispusti GPX datoteku na uređivač\nkarte. Ako se datoteka ispravno učita, biti će dodana na kartu kao linija svjetlo ljubičaste\nboje. Klikni na izbornik \"Podaci karte\" s desne strane za uključivanje, isključivanje\nili približenje na taj novi GPX sloj.\n\nGPX trag nije direktno postavljen na OpenStreetMap, samo je prikazan na karti. Da bi ga\niskoristio/la na najbolji način, preko njega crtaj na karti koristeći ga kao vodilju za\ndodavanje novih elemenata. Trag možeš također [postaviti na OpenStreetMap](http://www.openstreetmap.org/trace/create)\nkako bi ga i drugi korisnici mogli koristiti.\n",
-            "imagery": "# Fotografski snimci\n\nZračni snimci su važan izvor za kartiranje. Kombinacija snimaka iz aviona,\nsatelitskih snimaka i drugih besplatno prikupljenih izvornika je dostupna s\ndesne strane u izborniku \"Postavke podloge\".\n\nPočetno je u pozadini kao podloga prikazan sloj satelitskih snimaka [karte Bing Maps](http://www.bing.com/maps/). Novi izvornici postaju dostupni pomicanjem\ni približenjem karte na novo geografsko područje. Neke države, poput SAD-a,\nFrancuske i Danske imaju dostupne vrlo kvalitetne snimke za određena\npodručja.\n\nSnimke su ponekad pomaknute u odnosu na podatke karte zbog pogreške\nna koordinatama izvornih snimaka. Ako vidiš puno cesta izmaknutih u\nodnosu na pozadinu, nemoj ih odmah pomicati da se poklope sa pozadinom.\nUmjesto toga, možeš podesiti snimke da odgovaraju postojećim podacima\ntako da klikneš \"Popravi odstupanje\" na dnu izbornika \"Postavke pozadine\".\n",
-            "addresses": "# Adrese\n\nAdrese spadaju u najkorisnije informacije na karti.\n\nIako su adrese često prikazane kao dio ulica, na OpenStreetMap karti su zapisane\nkao svojstva građevina i mjesta uzduž ulica.\n\nMožeš dodati informacije o adresi na mjesta kartirana kao rub građevine, ali i na\ngrađevine koje su kartirane kao točkasti objekt. Najbolji izvor podataka o adresama\nje prikupljanje podataka na terenu ili iz osobnog znanja - kao i svakog drugog\nelementa, kopiranje sa komercijalnih izvora poput Google Maps servisa je strogo\nzabranjeno.\n",
-            "inspector": "# Uređivač elemenata\n\nUređivač elemenata je dio korisničkog sučelja na lijevoj strani stranice koji se\npojavljuje nakon što se neki element karte odabere i on omogućava uređivanje detalja elementa.\n\n### Odabir vrste elementa karte\n\nNakon što dodaš točku, liniju ili područje, možeš odabrati koje je vrste taj element,\nnpr. je li to državna cesta ili ulica, veletrgovina ili kafić. Uređivač elemenata će prikazati\ntipke za često korištene vrste elemenata, a ostale možeš pronaći upisivanjem naziva vrste\nkoju tražiš u okvir za pretraživanje.\n\nKlikni na \"i\" na desnoj strani vrste elementa da saznaš više o tom elementu karte.\nKlikni na tipku sa imenom vrste da odabereš tu vrstu.\n\n### Korištenje obrazaca i oznaka\n\nNakon što odabereš vrstu elementa ili kada odabereš element koji već ima defeniranu\nvrstu, uređivač elemenata će ti prikazati polja sa detaljima o elementu, npr. njegovo ime i adresu.\n\nIspod polja možeš kliknuti na ikone za dodavanje drugih detalja, npr. poveznicu na\nWikipediju, pristup invalidskim kolicima i drugo.\n\nNa dnu uređivača elemenata, klikni na \"Sve oznake\" za dodavanje proizvoljnih drugih oznaka za\nelemente. [Taginfo](http://taginfo.openstreetmap.org/) je izvrstan izvornik za učenje\no popularnim kombinacijama oznaka koje se koriste.\n\nPromjene koje napraviš u uređivaču elemenata su automatski primijenjene na kartu.\nMožeš poništiti promjene u bilo kojem trenutku pritiskom na tipku \"Poništi\".\n"
+            "title": "Pomoć"
         },
         "intro": {
             "done": "gotovo",
@@ -782,7 +773,6 @@
             },
             "areas": {
                 "title": "Područja",
-                "add_playground": "*Područja* se koriste za prikaz granica elemenata karte kao što su npr.: jezera, zgrade i naseljena područja.{br}Također se mogu koristiti za detaljnije kartiranje mnogih elemenata karte koje bi inače kartirali kao točke. **Klikni na gumb {button} Područje za dodavanje novog područja.**",
                 "start_playground": "Idemo dodati ovo igralište na kartu crtajući područje. Područja se crtaju postavljanjem *čvorova* uzduž vanjske granice elementa. **Klikni ili pritisni razmaknicu za postavljanje početnog čvora na jedan od uglova igrališta.**",
                 "finish_playground": "Završi crtanje područja pritiskom tipke enter, ili tako da ponovno klikneš na početni ili posljednji čvor. **Završi crtanje područja igrališta.**",
                 "search_playground": "**Nađi '{preset}' pomoću tražilice.**",
@@ -1150,34 +1140,6 @@
                 "capacity": {
                     "label": "Kapacitet",
                     "placeholder": "50, 100, 200..."
-                },
-                "cardinal_direction": {
-                    "label": "Smijer",
-                    "options": {
-                        "E": "Istok",
-                        "ENE": "Istok-sjeveroistok",
-                        "ESE": "Istok-jugoistok",
-                        "N": "Sjever",
-                        "NE": "Sjeveroistok",
-                        "NNE": "Sjever-sjeveroistok",
-                        "NNW": "Sjever-sjeverozapad",
-                        "NW": "Sjeverozapad",
-                        "S": "Jug",
-                        "SE": "Jugoistok",
-                        "SSE": "Jug-jugoistok",
-                        "SSW": "Jug-jugozapad",
-                        "SW": "Jugozapad",
-                        "W": "Zapad",
-                        "WNW": "Zapad-sjeverozapad",
-                        "WSW": "Zapad-jugozapad"
-                    }
-                },
-                "clock_direction": {
-                    "label": "Smjer",
-                    "options": {
-                        "anticlockwise": "U suprotnom smijeru od kazaljke na satu",
-                        "clockwise": "U smijeru kazaljke za satu"
-                    }
                 },
                 "collection_times": {
                     "label": "Vrijeme preuzimanja"
@@ -1898,9 +1860,6 @@
                 "amenity/bureau_de_change": {
                     "name": "Mjenjačnica"
                 },
-                "amenity/bus_station": {
-                    "name": "Autobusni kolodvor"
-                },
                 "amenity/cafe": {
                     "name": "Kafić",
                     "terms": "kafić,cafe,caffee,kafeterija,caffe bar,kavana"
@@ -1972,9 +1931,6 @@
                 "amenity/fast_food": {
                     "name": "Brza hrana",
                     "terms": "brza hrana,restoran brze hrane,jela s roštilja,hamburger,pommes frites"
-                },
-                "amenity/ferry_terminal": {
-                    "name": "Trajektni terminal"
                 },
                 "amenity/fire_station": {
                     "name": "Vatrogasna postaja",
@@ -2075,9 +2031,6 @@
                 "amenity/ranger_station": {
                     "name": "Rendžerska postaja",
                     "terms": "rendžerska postaja,rendžerska služba,stanica rendžerske službe,rendžerska stanica,rendžer"
-                },
-                "amenity/recycling": {
-                    "name": "Recikliranje"
                 },
                 "amenity/register_office": {
                     "name": "Matični ured"
@@ -2539,10 +2492,6 @@
                 "highway/bridleway": {
                     "name": "Staza za konje"
                 },
-                "highway/bus_stop": {
-                    "name": "Autobusna stanica",
-                    "terms": "bus stanica,stanica za bus,autobusna stanica,busna stanica"
-                },
                 "highway/corridor": {
                     "name": "Hodnik"
                 },
@@ -2718,9 +2667,6 @@
                 "landuse/forest": {
                     "name": "Šuma",
                     "terms": "šuma,održavana šuma,šuma nasada,upravljana šuma"
-                },
-                "landuse/garages": {
-                    "name": "Garaže"
                 },
                 "landuse/grass": {
                     "name": "Travnjak"
@@ -3130,13 +3076,6 @@
                     "name": "Transformator",
                     "terms": "transformator, transformator el. energije,transformator struje"
                 },
-                "public_transport/platform": {
-                    "name": "Stajalište",
-                    "terms": "platforma"
-                },
-                "public_transport/stop_position": {
-                    "name": "Stop pozicija"
-                },
                 "railway": {
                     "name": "Željeznica"
                 },
@@ -3151,10 +3090,6 @@
                 "railway/funicular": {
                     "name": "Uspinjača"
                 },
-                "railway/halt": {
-                    "name": "Željeznička stanica",
-                    "terms": "željeznička stanica,željeznička postaja,stanica za vlak"
-                },
                 "railway/monorail": {
                     "name": "Jednotračna željeznička pruga",
                     "terms": "monorail željeznička pruga,pruga sa jednim kolosjekom"
@@ -3162,17 +3097,9 @@
                 "railway/narrow_gauge": {
                     "name": "Uskotračna željeznica"
                 },
-                "railway/platform": {
-                    "name": "Željeznički peron",
-                    "terms": "željeznički peron,peron,platforma,željeznička platforma"
-                },
                 "railway/rail": {
                     "name": "Željeznička pruga",
                     "terms": "željeznička pruga,pruga pune širine,željeznica pune veličine"
-                },
-                "railway/station": {
-                    "name": "Željeznički kolodvor",
-                    "terms": "željeznička stanica,stanica za vlak,željeznička postaja,kolodvor,željeznički kolodvor"
                 },
                 "railway/subway": {
                     "name": "Podzemna željeznica",
@@ -3391,9 +3318,6 @@
                 "shop/jewelry": {
                     "name": "Zlatarnica",
                     "terms": "zlatarna,zlatara,zlatar"
-                },
-                "shop/kiosk": {
-                    "name": "Kiosk za novine"
                 },
                 "shop/kitchen": {
                     "name": "Trgovina kuhinjskog namještaja",
@@ -3844,33 +3768,18 @@
                 "name": "OSM Inspector: Označavanje"
             },
             "Waymarked_Trails-Cycling": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, podaci karte OpenStreetMap doprinositelji, ODbL 1.0"
-                },
                 "name": "Waymarked Trails: Biciklizam"
             },
             "Waymarked_Trails-Hiking": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, podaci karte OpenStreetMap doprinositelji, ODbL 1.0"
-                },
                 "name": "Waymarked Trails: Planinarenje"
             },
             "Waymarked_Trails-MTB": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, podaci karte OpenStreetMap doprinositelji, ODbL 1.0"
-                },
                 "name": "Waymarked Trails: MTB"
             },
             "Waymarked_Trails-Skating": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, podaci karte OpenStreetMap doprinositelji, ODbL 1.0"
-                },
                 "name": "Waymarked Trails: Rolanje"
             },
             "Waymarked_Trails-Winter_Sports": {
-                "attribution": {
-                    "text": "© Michael Spreng, CC by-SA 3.0, podaci karte OpenStreetMap doprinositelji, ODbL 1.0"
-                },
                 "name": "Waymarked Trails: Zimski sportovi"
             },
             "basemap.at": {

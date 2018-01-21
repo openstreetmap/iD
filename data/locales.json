@@ -12,6 +12,9 @@
         "ast": {
             "rtl": false
         },
+        "be": {
+            "rtl": false
+        },
         "bg": {
             "rtl": false
         },

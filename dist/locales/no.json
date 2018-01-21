@@ -25,6 +25,9 @@
             },
             "draw_line": {
                 "tail": "Klikk for å legge til flere noder på linjen. Klikk på andre linjer for å sammenkoble dem, og dobbeltklikk for å avslutte linjen."
+            },
+            "drag_node": {
+                "connected_to_hidden": "Denne kan ikke redigeres fordi den er koblet til en skjult kartegenskap."
             }
         },
         "operations": {
@@ -310,6 +313,7 @@
             "localized_translation_language": "Velg språk",
             "localized_translation_name": "Navn"
         },
+        "zoom_in_edit": "Zoom inn for å redigere",
         "login": "logg inn",
         "logout": "logg ut",
         "loading_auth": "Kobler til OpenStreetMap...",
@@ -339,8 +343,7 @@
             "created": "Opprettet",
             "about_changeset_comments": "Angående kommentarer til endringssett",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
-            "google_warning": "Du nevnte Google i kommentaren: husk at det er strengt forbudt å kopiere fra Google Maps.",
-            "google_warning_link": "http://www.openstreetmap.org/copyright"
+            "google_warning": "Du nevnte Google i kommentaren: husk at det er strengt forbudt å kopiere fra Google Maps."
         },
         "contributors": {
             "list": "Redigeringer utført av {users}",
@@ -448,28 +451,31 @@
             "title": "Bakgrunn",
             "description": "Bakgrunnsinnstillinger",
             "key": "B",
-            "percent_brightness": "{opacity}% lysstyrke",
             "none": "Ingen",
             "best_imagery": "Den beste ortofotokilden til denne plasseringen",
             "switch": "Bytt tilbake til denne bakgrunnen",
             "custom": "Egendefinert",
             "custom_button": "Endre egendefinert bakgrunn",
             "custom_prompt": "Skriv inn en URL-mal. Gyldige symboler er:\n   - {zoom}/{z}, {x}, {y} for Z/X/Y flisordning\n   - {ty} for snudde Y-koordinater med TMS-stil\n   - {u} for quadtile-ordning\n   - {switch:a,b,c} for DNS server multiplexing\n\nEksempel:\n{example}",
-            "fix_misalignment": "Finjuster ortofotoet",
-            "imagery_source_faq": "Hvor kommer dette ortofotoet fra?",
             "reset": "tilbakestill",
-            "offset": "Dra hvor som helst i det grå feltet under for justere ortofotoet. Du kan også angi justeringsverdiene i meter.",
             "minimap": {
-                "description": "Mini-kart",
                 "tooltip": "Vis et kart som er zoomet ut for å hjelpe med å lokalisere området som vises.",
                 "key": "/"
-            }
+            },
+            "fix_misalignment": "Finjuster ortofotoet",
+            "offset": "Dra hvor som helst i det grå feltet under for justere ortofotoet. Du kan også angi justeringsverdiene i meter."
         },
         "map_data": {
             "title": "Kartdata",
             "description": "Kartdata",
             "key": "F",
             "data_layers": "Datalag",
+            "layers": {
+                "osm": {
+                    "tooltip": "Kartdata fra OpenStreetMap",
+                    "title": "OpenStreetMap-data"
+                }
+            },
             "fill_area": "Fyll områder",
             "map_features": "Kartegenskaper",
             "autohidden": "Disse kartegenskapene har blitt automatisk skjult fordi for mange ville blitt vist på skjermen. Du kan zoome inn for å redigere dem."
@@ -585,7 +591,8 @@
         "splash": {
             "welcome": "Velkommen til iD OpenStreetMap editor",
             "text": "iD er et brukervennlig, men kraftig verktøy for å bidra til verdens beste frie kart. Dette er versjon {version}. For mer informasjon, se {website} og meld om feil på {github}.",
-            "walkthrough": "Begynn Gjennomgangen"
+            "walkthrough": "Begynn Gjennomgangen",
+            "start": "Rediger nå"
         },
         "source_switch": {
             "live": "direkte",
@@ -615,6 +622,10 @@
             "tag_suggests_area": "Taggen {tag} anbefaler at linje bør være et areal, men dette er ikke et areal",
             "deprecated_tags": "Utgående tagger: {tags}"
         },
+        "zoom": {
+            "in": "Zoom inn",
+            "out": "Zoom ut"
+        },
         "cannot_zoom": "Kan ikke zoome ut lenger i gjeldende modus.",
         "full_screen": "Skru av/på fullskjerm.",
         "gpx": {
@@ -637,7 +648,13 @@
         "help": {
             "title": "Hjelp",
             "key": "H",
-            "help": "# Hjelp\n\nDette er et redigeringsverktøy for [OpenStreetMap](http://www.openstreetmap.org/),\ndet frie og redigerbare verdenskartet. Du kan bruke det til å legge til og oppdatere\ndata i ditt område, og gjøre et verdensomspennende kart med åpen kildekode og frie data\nbedre for alle.\n\nEndringer du gjør i dette kartet vil bli synlig for alle som bruker\nOpenStreetMap. For å gjøre en endring, må du\n[logge inn](https://www.openstreetmap.org/login).\n\n[Redigeringsverktøyet iD](http://ideditor.com/) er et samarbeidsprosjekt med [kildekode\ntilgjengelig på GitHub](https://github.com/openstreetmap/iD).\n"
+            "help": {
+                "title": "Hjelp"
+            },
+            "overview": {
+                "title": "Oversikt",
+                "navigation_h": "Navigasjon"
+            }
         },
         "intro": {
             "done": "ferdig",
@@ -717,7 +734,6 @@
             },
             "areas": {
                 "title": "Områder",
-                "add_playground": "*Områder* brukes for å avgrense kartegenskaper som innsjøer, bygninger og boligfelt.{br}De kan også brukes for detaljert kartlegging av kartegenskaper du vanligvis ville kartlagt som punkter. **Trykk på {button} Område-knappen for å lage et nytt område.**",
                 "start_playground": "La oss legge til denne lekeplassen i kartet ved å tegne et område. Områder tegnes ved å plassere *noder* langs ytterkanten av kartegenskapen. **Klikk eller trykk mellomromtasten for å plassere en startnode på et av hjørnene til lekeplassen.**",
                 "continue_playground": "Fortsett å tegne område ved å plassere flere noder langs lekeplassens ytterkant. Det er greit å koble området til eksisterende gangveier.{br}Tips: Du kan holde inne '{alt}'-tasten for å forhindre noder fra å kobles sammen med andre kartegenskaper. **Fortsett med å tegne et område for lekeplassen.**",
                 "finish_playground": "Avslutt området ved å trykke enter, eller å klikke igjen på den første eller siste noden. **Fullfør tegningen av området for lekeplassen.**",
@@ -1100,34 +1116,6 @@
                     "label": "Kapasitet",
                     "placeholder": "50, 100, 200..."
                 },
-                "cardinal_direction": {
-                    "label": "Retning",
-                    "options": {
-                        "E": "Øst",
-                        "ENE": "Øst-nordøst",
-                        "ESE": "Øst-sørøst",
-                        "N": "Nord",
-                        "NE": "Nordøst",
-                        "NNE": "Nord-nordøst",
-                        "NNW": "Nord-nordvest",
-                        "NW": "Nordvest",
-                        "S": "Sør",
-                        "SE": "Sørøst",
-                        "SSE": "Sør-sørøst",
-                        "SSW": "Sør-sørvest",
-                        "SW": "Sørvest",
-                        "W": "Vest",
-                        "WNW": "Vest-nordvest",
-                        "WSW": "Vest-sørvest"
-                    }
-                },
-                "clock_direction": {
-                    "label": "Retning",
-                    "options": {
-                        "anticlockwise": "Mot klokken",
-                        "clockwise": "Med klokken"
-                    }
-                },
                 "collection_times": {
                     "label": "Hentetider"
                 },
@@ -1469,13 +1457,6 @@
                 "par": {
                     "placeholder": "3, 4, 5..."
                 },
-                "parallel_direction": {
-                    "label": "Retning",
-                    "options": {
-                        "backward": "Bakover",
-                        "forward": "Fremover"
-                    }
-                },
                 "park_ride": {
                     "label": "Park & Ride"
                 },
@@ -1677,9 +1658,6 @@
                 "amenity/fast_food": {
                     "name": "Hurtigmat"
                 },
-                "amenity/ferry_terminal": {
-                    "name": "Fergeterminal"
-                },
                 "amenity/fire_station": {
                     "name": "Brannstasjon"
                 },
@@ -1748,9 +1726,6 @@
                 },
                 "amenity/pub": {
                     "name": "Pub"
-                },
-                "amenity/recycling": {
-                    "name": "Resirkulering"
                 },
                 "amenity/restaurant": {
                     "name": "Restaurant"
@@ -2097,9 +2072,6 @@
                 "highway/bridleway": {
                     "name": "Ridevei"
                 },
-                "highway/bus_stop": {
-                    "name": "Busstopp"
-                },
                 "highway/crossing": {
                     "name": "Fotgjengerovergang"
                 },
@@ -2210,9 +2182,6 @@
                 },
                 "landuse/forest": {
                     "name": "Skog"
-                },
-                "landuse/garages": {
-                    "name": "Garasjer"
                 },
                 "landuse/grass": {
                     "name": "Gress"
@@ -2532,9 +2501,6 @@
                 "power/transformer": {
                     "name": "Transformator"
                 },
-                "public_transport/platform": {
-                    "name": "Plattform"
-                },
                 "railway": {
                     "name": "Jernbane"
                 },
@@ -2544,23 +2510,14 @@
                 "railway/funicular": {
                     "name": "Kabelbane"
                 },
-                "railway/halt": {
-                    "name": "Jernbanestasjon"
-                },
                 "railway/monorail": {
                     "name": "Monorail"
                 },
                 "railway/narrow_gauge": {
                     "name": "Smalsporet jernbane"
                 },
-                "railway/platform": {
-                    "name": "Jernbaneplattform"
-                },
                 "railway/rail": {
                     "name": "Skinne"
-                },
-                "railway/station": {
-                    "name": "Jernbanestasjon"
                 },
                 "railway/subway": {
                     "name": "T-bane"
@@ -2756,9 +2713,6 @@
                 },
                 "shop/jewelry": {
                     "name": "Smykkeforhandler"
-                },
-                "shop/kiosk": {
-                    "name": "Aviskiosk"
                 },
                 "shop/kitchen": {
                     "name": "Kjøkkenbutikk"
