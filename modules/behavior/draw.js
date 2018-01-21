@@ -11,13 +11,7 @@ import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import { behaviorEdit } from './edit';
 import { behaviorHover } from './hover';
 import { behaviorTail } from './tail';
-
-import {
-    geoChooseEdge,
-    geoVecLength,
-    geoViewportEdge
-} from '../geo';
-
+import { geoChooseEdge, geoVecLength } from '../geo';
 import { utilRebind } from '../util/rebind';
 
 
@@ -129,22 +123,19 @@ export function behaviorDraw(context) {
     function click() {
         var d = datum();
         var target = d && d.properties && d.properties.entity;
-        var trySnap = geoViewportEdge(context.mouse(), context.map().dimensions()) === null;
 
-        if (trySnap) {
-            if (target && target.type === 'node') {   // Snap to a node
-                dispatch.call('clickNode', this, target, d);
+        if (target && target.type === 'node') {   // Snap to a node
+            dispatch.call('clickNode', this, target, d);
+            return;
+
+        } else if (target && target.type === 'way') {   // Snap to a way
+            var choice = geoChooseEdge(
+                context.childNodes(target), context.mouse(), context.projection, context.activeID()
+            );
+            if (choice) {
+                var edge = [target.nodes[choice.index - 1], target.nodes[choice.index]];
+                dispatch.call('clickWay', this, choice.loc, edge, d);
                 return;
-
-            } else if (target && target.type === 'way') {   // Snap to a way
-                var choice = geoChooseEdge(
-                    context.childNodes(target), context.mouse(), context.projection, context.activeID()
-                );
-                if (choice) {
-                    var edge = [target.nodes[choice.index - 1], target.nodes[choice.index]];
-                    dispatch.call('clickWay', this, choice.loc, edge, d);
-                    return;
-                }
             }
         }
 
