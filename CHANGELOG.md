@@ -174,6 +174,7 @@ _Check out the new help texts by opening the Help pane (shortcut <kbd>H</kbd>)._
 [#4620]: https://github.com/openstreetmap/iD/issues/4620
 [#4468]: https://github.com/openstreetmap/iD/issues/4468
 [#4018]: https://github.com/openstreetmap/iD/issues/4018
+[@SeanBarber]: https://github.com/SeanBarber
 [@manfredbrandl]: https://github.com/manfredbrandl
 [@1ec5]: https://github.com/1ec5
 
