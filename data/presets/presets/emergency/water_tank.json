@@ -1,0 +1,20 @@
+{
+    "icon": "poi-fire-hydrant",
+    "fields": [
+        "name",
+        "operator",
+        "ref"
+    ],
+    "geometry": [
+        "point",
+        "vertex"
+    ],
+    "terms": [
+        "cistern",
+        "reservoir"
+    ],
+    "tags": {
+        "emergency": "water_tank"
+    },
+    "name": "Water Tank"
+}

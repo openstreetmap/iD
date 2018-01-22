@@ -3840,6 +3840,10 @@
                     "name": "Emergency Phone",
                     "terms": ""
                 },
+                "emergency/water_tank": {
+                    "name": "Water Tank",
+                    "terms": "cistern,reservoir"
+                },
                 "entrance": {
                     "name": "Entrance/Exit",
                     "terms": ""
@@ -6403,31 +6407,31 @@
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
-                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
                 },
                 "name": "Waymarked Trails: Cycling"
             },
             "Waymarked_Trails-Hiking": {
                 "attribution": {
-                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
                 },
                 "name": "Waymarked Trails: Hiking"
             },
             "Waymarked_Trails-MTB": {
                 "attribution": {
-                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
                 },
                 "name": "Waymarked Trails: MTB"
             },
             "Waymarked_Trails-Skating": {
                 "attribution": {
-                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
                 },
                 "name": "Waymarked Trails: Skating"
             },
             "Waymarked_Trails-Winter_Sports": {
                 "attribution": {
-                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
+                    "text": "© Michael Spreng, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
                 },
                 "name": "Waymarked Trails: Winter Sports"
             },
