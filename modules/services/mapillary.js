@@ -31,7 +31,7 @@ import { utilQsString, utilRebind } from '../util';
 
 var apibase = 'https://a.mapillary.com/v3/',
     viewercss = 'mapillary-js/mapillary.min.css',
-    viewerjs = 'mapillary-js/mapillary.min.js',
+    viewerjs = 'mapillary-js/mapillary.js',
     clientId = 'NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzo1ZWYyMmYwNjdmNDdlNmVi',
     maxResults = 1000,
     tileZoom = 14,
@@ -408,7 +408,8 @@ export default {
 
 
     loadImages: function(projection) {
-        loadTiles('images', apibase + 'images?', projection);
+        loadTiles('images', 'http://127.0.0.1:5000/' + 'images?', projection);
+        // loadTiles('images', apibase + 'images?', projection);
         loadTiles('sequences', apibase + 'sequences?', projection);
     },
 
@@ -510,12 +511,12 @@ export default {
 
     updateViewer: function(imageKey, context) {
         if (!imageKey) return this;
-
-        if (!_mlyViewer) {
+        this.initViewer(imageKey, context);
+        /*if (!_mlyViewer) {
             this.initViewer(imageKey, context);
         } else {
             _mlyViewer.moveToKey(imageKey);
-        }
+        }*/
 
         return this;
     },
