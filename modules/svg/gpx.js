@@ -57,10 +57,15 @@ export function svgGpx(projection, context, dispatch) {
         svgGpx.initialized = true;
     }
 
+    function getBB(selection) {
+        selection.each(function(d){d.bbox = this.getBBox();})
+    }
 
     function drawGpx(selection) {
         var geojson = svgGpx.geojson,
             enabled = svgGpx.enabled;
+        var margin_size = 2; // margin between the text in the tag and the border of the tag
+        var border_size = 1; // pixel size of the tag's border
 
         layer = selection.selectAll('.layer-gpx')
             .data(enabled ? [0] : []);
@@ -95,8 +100,16 @@ export function svgGpx(projection, context, dispatch) {
 
         var labels = layer.selectAll('text')
             .data(showLabels && geojson.features ? geojson.features : []);
+        var labelTags = layer.selectAll('.gpxtag')
+            .data(showLabels && geojson.features ? geojson.features : []);
+        var labelBorders = layer.selectAll('.gpxborder')
+            .data(showLabels && geojson.features ? geojson.features : []);
 
         labels.exit()
+            .remove();
+        labelTags.exit()
+            .remove();
+        labelBorders.exit()
             .remove();
 
         labels = labels.enter()
@@ -107,7 +120,7 @@ export function svgGpx(projection, context, dispatch) {
         labels
             .text(function(d) {
                 return d.properties.desc || d.properties.name;
-            })
+            }).call(getBB)
             .attr('x', function(d) {
                 var centroid = path.centroid(d);
                 return centroid[0] + 7;
@@ -116,6 +129,41 @@ export function svgGpx(projection, context, dispatch) {
                 var centroid = path.centroid(d);
                 return centroid[1];
             });
+
+
+        labelBorders = labelBorders.enter()
+            .insert('rect', 'text')
+            .attr('class', 'gpxborder')
+            .merge(labelBorders);
+
+        labelBorders
+            .attr("width", function(d){return d.bbox.width + (2*margin_size + 2*border_size)})
+            .attr("height", function(d){return d.bbox.height + (2*margin_size + 2*border_size)})
+            .attr('x', function(d) {
+                var centroid = path.centroid(d);
+                return centroid[0] + 7 - margin_size - border_size;
+            })
+            .attr('y', function(d) {
+                var centroid = path.centroid(d);
+                return centroid[1] - d.bbox.height + margin_size - border_size;
+            })
+
+        labelTags = labelTags.enter()
+            .insert('rect', 'text')
+            .attr('class', 'gpxtag')
+            .merge(labelTags);
+
+        labelTags
+            .attr("width", function(d){return d.bbox.width + (2*margin_size)})
+            .attr("height", function(d){return d.bbox.height + (2*margin_size)})
+            .attr('x', function(d) {
+                var centroid = path.centroid(d);
+                return centroid[0] + 7 - margin_size;
+            })
+            .attr('y', function(d) {
+                var centroid = path.centroid(d);
+                return centroid[1] - d.bbox.height + margin_size;
+            })
 
     }
 
