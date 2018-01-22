@@ -234,6 +234,10 @@ describe('iD.osmWay', function() {
             expect(iD.Way({tags: { location: 'overground' }}).layer()).to.equal(1);
         });
 
+        it('returns -1 for covered=yes', function() {
+            expect(iD.Way({tags: { covered: 'yes' }}).layer()).to.equal(-1);
+        });
+
         it('returns -1 for location=underground', function() {
             expect(iD.Way({tags: { location: 'underground' }}).layer()).to.equal(-1);
         });

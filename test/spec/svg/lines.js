@@ -90,8 +90,8 @@ describe('iD.svgLines', function () {
             iD.osmNode({id: 'b', loc: [1, 1]}),
             iD.osmNode({id: 'c', loc: [0, 0]}),
             iD.osmNode({id: 'd', loc: [1, 1]}),
-            iD.osmWay({id: 'lo', tags: {highway: 'residential', tunnel: 'yes'}, nodes: ['a', 'b']}),
-            iD.osmWay({id: 'hi', tags: {highway: 'residential', bridge: 'yes'}, nodes: ['c', 'd']})
+            iD.osmWay({id: 'lo', tags: {highway: 'residential', layer: '0'}, nodes: ['a', 'b']}),
+            iD.osmWay({id: 'hi', tags: {highway: 'residential', layer: '1'}, nodes: ['c', 'd']})
         ]);
 
         it('stacks higher lines above lower ones in a single render', function () {

@@ -89,6 +89,7 @@ _extend(osmWay.prototype, {
         }
 
         // implied layer tag..
+        if (this.tags.covered === 'yes') return -1;
         if (this.tags.location === 'overground') return 1;
         if (this.tags.location === 'underground') return -1;
         if (this.tags.location === 'underwater') return -10;

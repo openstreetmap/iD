@@ -173,71 +173,73 @@ export function svgLines(projection, context) {
         });
 
 
-        var layer = selection.selectAll('.layer-lines .layer-lines-lines');
+        var covered = selection.selectAll('.layer-covered');                      // under areas
+        var uncovered = selection.selectAll('.layer-lines .layer-lines-lines');   // over areas
 
-        var layergroup = layer
-            .selectAll('g.layergroup')
-            .data(d3_range(-10, 11));
+        [covered, uncovered].forEach(function(selection) {
+            var range = (selection === covered ? d3_range(-10,0) : d3_range(0,11));
+            var layergroup = selection
+                .selectAll('g.layergroup')
+                .data(range);
 
-        layergroup = layergroup.enter()
-            .append('g')
-            .attr('class', function(d) { return 'layergroup layer' + String(d); })
-            .merge(layergroup);
+            layergroup = layergroup.enter()
+                .append('g')
+                .attr('class', function(d) { return 'layergroup layer' + String(d); })
+                .merge(layergroup);
 
-        layergroup
-            .selectAll('g.linegroup')
-            .data(['shadow', 'casing', 'stroke', 'shadow-highlighted', 'casing-highlighted', 'stroke-highlighted'])
-            .enter()
-            .append('g')
-            .attr('class', function(d) { return 'linegroup line-' + d; });
+            layergroup
+                .selectAll('g.linegroup')
+                .data(['shadow', 'casing', 'stroke', 'shadow-highlighted', 'casing-highlighted', 'stroke-highlighted'])
+                .enter()
+                .append('g')
+                .attr('class', function(d) { return 'linegroup line-' + d; });
+
+            layergroup.selectAll('g.line-shadow')
+                .call(drawLineGroup, 'shadow', false);
+            layergroup.selectAll('g.line-casing')
+                .call(drawLineGroup, 'casing', false);
+            layergroup.selectAll('g.line-stroke')
+                .call(drawLineGroup, 'stroke', false);
+
+            layergroup.selectAll('g.line-shadow-highlighted')
+                .call(drawLineGroup, 'shadow', true);
+            layergroup.selectAll('g.line-casing-highlighted')
+                .call(drawLineGroup, 'casing', true);
+            layergroup.selectAll('g.line-stroke-highlighted')
+                .call(drawLineGroup, 'stroke', true);
 
 
-        layergroup.selectAll('g.line-shadow')
-            .call(drawLineGroup, 'shadow', false);
-        layergroup.selectAll('g.line-casing')
-            .call(drawLineGroup, 'casing', false);
-        layergroup.selectAll('g.line-stroke')
-            .call(drawLineGroup, 'stroke', false);
+            var onewaygroup = layergroup
+                .selectAll('g.onewaygroup')
+                .data(['oneway']);
 
-        layergroup.selectAll('g.line-shadow-highlighted')
-            .call(drawLineGroup, 'shadow', true);
-        layergroup.selectAll('g.line-casing-highlighted')
-            .call(drawLineGroup, 'casing', true);
-        layergroup.selectAll('g.line-stroke-highlighted')
-            .call(drawLineGroup, 'stroke', true);
+            onewaygroup = onewaygroup.enter()
+                .append('g')
+                .attr('class', 'onewaygroup')
+                .merge(onewaygroup);
 
+            var oneways = onewaygroup
+                .selectAll('path')
+                .filter(filter)
+                .data(
+                    function data() { return onewaydata[this.parentNode.__data__] || []; },
+                    function key(d) { return [d.id, d.index]; }
+                );
 
-        var onewaygroup = layergroup
-            .selectAll('g.onewaygroup')
-            .data(['oneway']);
+            oneways.exit()
+                .remove();
 
-        onewaygroup = onewaygroup.enter()
-            .append('g')
-            .attr('class', 'onewaygroup')
-            .merge(onewaygroup);
+            oneways = oneways.enter()
+                .append('path')
+                .attr('class', 'oneway')
+                .attr('marker-mid', 'url(#oneway-marker)')
+                .merge(oneways)
+                .attr('d', function(d) { return d.d; });
 
-        var oneways = onewaygroup
-            .selectAll('path')
-            .filter(filter)
-            .data(
-                function data() { return onewaydata[this.parentNode.__data__] || []; },
-                function key(d) { return [d.id, d.index]; }
-            );
-
-        oneways.exit()
-            .remove();
-
-        oneways = oneways.enter()
-            .append('path')
-            .attr('class', 'oneway')
-            .attr('marker-mid', 'url(#oneway-marker)')
-            .merge(oneways)
-            .attr('d', function(d) { return d.d; });
-
-        if (detected.ie) {
-            oneways.each(function() { this.parentNode.insertBefore(this, this); });
-        }
-
+            if (detected.ie) {
+                oneways.each(function() { this.parentNode.insertBefore(this, this); });
+            }
+        });
 
         // touch targets
         selection.selectAll('.layer-lines .layer-lines-targets')
