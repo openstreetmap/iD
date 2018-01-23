@@ -1,10 +1,10 @@
 {
     "icon": "wheelchair",
     "fields": [
-        "access"
+        "tactile_paving",
+        "kerb"
     ],
     "geometry": [
-        "point",
         "vertex"
     ],
     "tags": {
