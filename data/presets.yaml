@@ -2183,6 +2183,10 @@ en:
         name: Shower
         # 'terms: rain closet'
         terms: '<translate with synonyms or related terms for ''Shower'', separated by commas>'
+      amenity/smoking_area:
+        # amenity=smoking_area
+        name: Smoking Area
+        terms: '<translate with synonyms or related terms for ''Smoking Area'', separated by commas>'
       amenity/social_facility:
         # amenity=social_facility
         name: Social Facility

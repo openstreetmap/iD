@@ -3144,6 +3144,10 @@
                     "name": "Shower",
                     "terms": "rain closet"
                 },
+                "amenity/smoking_area": {
+                    "name": "Smoking Area",
+                    "terms": ""
+                },
                 "amenity/social_facility": {
                     "name": "Social Facility",
                     "terms": ""
