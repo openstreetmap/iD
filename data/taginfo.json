@@ -509,6 +509,10 @@
         },
         {
             "key": "amenity",
+            "value": "smoking_area"
+        },
+        {
+            "key": "amenity",
             "value": "social_facility"
         },
         {
