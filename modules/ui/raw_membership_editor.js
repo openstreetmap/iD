@@ -1,5 +1,6 @@
 import _extend from 'lodash-es/extend';
 import _filter from 'lodash-es/filter';
+import _forEach from 'lodash-es/forEach';
 import _groupBy from 'lodash-es/groupBy';
 
 import {
@@ -113,6 +114,10 @@ export function uiRawMembershipEditor(context) {
             group.forEach(function(obj) {
                 obj.value += ' ' + obj.relation.id;
             });
+        });
+
+        _forEach(result, function(obj) {
+            obj.title = obj.value;
         });
 
         result.unshift(newRelation);
