@@ -6163,6 +6163,27 @@
             },
             "name": "Emergency Phone"
         },
+        "emergency/water_tank": {
+            "icon": "water",
+            "fields": [
+                "name",
+                "operator",
+                "ref"
+            ],
+            "geometry": [
+                "point",
+                "vertex"
+            ],
+            "terms": [
+                "water tank",
+                "cistern",
+                "reservoir"
+            ],
+            "tags": {
+                "emergency": "water_tank"
+            },
+            "name": "Emergency Water Tank"
+        },
         "entrance": {
             "icon": "entrance-alt1",
             "geometry": [

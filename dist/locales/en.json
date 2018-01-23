@@ -3840,6 +3840,10 @@
                     "name": "Emergency Phone",
                     "terms": ""
                 },
+                "emergency/water_tank": {
+                    "name": "Emergency Water Tank",
+                    "terms": "water tank,cistern,reservoir"
+                },
                 "entrance": {
                     "name": "Entrance/Exit",
                     "terms": ""
