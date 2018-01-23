@@ -386,6 +386,7 @@ export function rendererBackground(context) {
             background.baseLayerSource(
                 background.findSource(requested) ||
                 best ||
+                background.findSource(context.storage('background-last-used')) ||
                 background.findSource('Bing') ||
                 first ||
                 background.findSource('none')

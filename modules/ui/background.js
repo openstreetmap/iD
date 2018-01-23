@@ -30,7 +30,7 @@ export function uiBackground(context) {
     var key = t('background.key');
 
     var _customSource = context.background().findSource('custom');
-    var _previousBackground;
+    var _previousBackground = context.background().findSource(context.storage('background-previous-last-used'));
     var _shown = false;
 
     var _backgroundList = d3_select(null);
@@ -92,6 +92,8 @@ export function uiBackground(context) {
 
         d3_event.preventDefault();
         _previousBackground = context.background().baseLayerSource();
+        context.storage('background-previous-last-used', _previousBackground.id);
+        context.storage('background-last-used', d.id);
         context.background().baseLayerSource(d);
         _backgroundList.call(updateLayerSelections);
         document.activeElement.blur();
