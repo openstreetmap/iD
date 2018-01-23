@@ -1,0 +1,14 @@
+{
+    "icon": "wheelchair",
+    "fields": [
+        "tactile_paving",
+        "kerb"
+    ],
+    "geometry": [
+        "vertex"
+    ],
+    "tags": {
+        "barrier": "kerb"
+    },
+    "name": "Kerb"
+}
