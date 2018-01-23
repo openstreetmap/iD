@@ -21,7 +21,7 @@ export function uiMapData(context) {
     var fills = ['wireframe', 'partial', 'full'];
 
     var _fillDefault = context.storage('area-fill') || 'partial';
-    var _fillSelected = _fillDefault;
+    var _fillSelected = _fillDefault !== 'wireframe' ? _fillDefault : 'partial';
     var _shown = false;
     var _dataLayerContainer = d3_select(null);
     var _fillList = d3_select(null);
@@ -57,8 +57,8 @@ export function uiMapData(context) {
         _fillSelected = d;
         if (d !== 'wireframe') {
             _fillDefault = d;
-            context.storage('area-fill', d);
         }
+        context.storage('area-fill', d);
         update();
     }
 
