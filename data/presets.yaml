@@ -2458,6 +2458,10 @@ en:
         # barrier=hedge
         name: Hedge
         terms: '<translate with synonyms or related terms for ''Hedge'', separated by commas>'
+      barrier/kerb:
+        # barrier=kerb
+        name: Kerb
+        terms: '<translate with synonyms or related terms for ''Kerb'', separated by commas>'
       barrier/kissing_gate:
         # barrier=kissing_gate
         name: Kissing Gate

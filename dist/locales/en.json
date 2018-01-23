@@ -3380,6 +3380,10 @@
                     "name": "Hedge",
                     "terms": ""
                 },
+                "barrier/kerb": {
+                    "name": "Kerb",
+                    "terms": ""
+                },
                 "barrier/kissing_gate": {
                     "name": "Kissing Gate",
                     "terms": ""

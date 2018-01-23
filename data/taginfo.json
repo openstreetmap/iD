@@ -743,6 +743,10 @@
         },
         {
             "key": "barrier",
+            "value": "kerb"
+        },
+        {
+            "key": "barrier",
             "value": "kissing_gate"
         },
         {

@@ -4079,6 +4079,21 @@
             "name": "Hedge",
             "matchScore": 0.25
         },
+        "barrier/kerb": {
+            "icon": "wheelchair",
+            "fields": [
+                "kerb",
+                "tactile_paving"
+            ],
+            "geometry": [
+                "vertex",
+                "line"
+            ],
+            "tags": {
+                "barrier": "kerb"
+            },
+            "name": "Kerb"
+        },
         "barrier/kissing_gate": {
             "icon": "barrier",
             "fields": [

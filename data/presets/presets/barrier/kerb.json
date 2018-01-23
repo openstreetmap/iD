@@ -1,11 +1,12 @@
 {
     "icon": "wheelchair",
     "fields": [
-        "tactile_paving",
-        "kerb"
+        "kerb",
+        "tactile_paving"
     ],
     "geometry": [
-        "vertex"
+        "vertex",
+        "line"
     ],
     "tags": {
         "barrier": "kerb"
