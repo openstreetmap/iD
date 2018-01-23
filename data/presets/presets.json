@@ -31395,31 +31395,6 @@
             ],
             "suggestion": true
         },
-        "amenity/cafe/Coffee Shop": {
-            "tags": {
-                "name": "Coffee Shop",
-                "amenity": "cafe"
-            },
-            "name": "Coffee Shop",
-            "icon": "cafe",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "cuisine",
-                "address",
-                "building_area",
-                "opening_hours",
-                "internet_access",
-                "internet_access/fee",
-                "internet_access/ssid",
-                "smoking",
-                "outdoor_seating"
-            ],
-            "suggestion": true
-        },
         "amenity/cafe/Coffee Time": {
             "tags": {
                 "name": "Coffee Time",
@@ -33474,50 +33449,6 @@
             ],
             "suggestion": true
         },
-        "amenity/dentist/Consultorio Dental": {
-            "tags": {
-                "name": "Consultorio Dental",
-                "healthcare": "dentist",
-                "amenity": "dentist"
-            },
-            "name": "Consultorio Dental",
-            "icon": "dentist",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "healthcare/speciality",
-                "address",
-                "building_area",
-                "opening_hours"
-            ],
-            "suggestion": true
-        },
-        "amenity/dentist/Dentista": {
-            "tags": {
-                "name": "Dentista",
-                "healthcare": "dentist",
-                "amenity": "dentist"
-            },
-            "name": "Dentista",
-            "icon": "dentist",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "healthcare/speciality",
-                "address",
-                "building_area",
-                "opening_hours"
-            ],
-            "suggestion": true
-        },
         "amenity/dentist/Family Dentistry": {
             "tags": {
                 "name": "Family Dentistry",
@@ -34696,32 +34627,6 @@
                 "amenity": "fast_food"
             },
             "name": "Five Guys",
-            "icon": "fast-food",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "cuisine",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours",
-                "takeaway",
-                "delivery",
-                "drive_through",
-                "smoking",
-                "outdoor_seating"
-            ],
-            "suggestion": true
-        },
-        "amenity/fast_food/Food Court": {
-            "tags": {
-                "name": "Food Court",
-                "amenity": "fast_food"
-            },
-            "name": "Food Court",
             "icon": "fast-food",
             "geometry": [
                 "point",
@@ -38863,48 +38768,6 @@
                 "amenity": "fuel"
             },
             "name": "GALP",
-            "icon": "fuel",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "fuel_multi",
-                "opening_hours",
-                "payment_multi"
-            ],
-            "suggestion": true
-        },
-        "amenity/fuel/GNV": {
-            "tags": {
-                "name": "GNV",
-                "amenity": "fuel"
-            },
-            "name": "GNV",
-            "icon": "fuel",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "fuel_multi",
-                "opening_hours",
-                "payment_multi"
-            ],
-            "suggestion": true
-        },
-        "amenity/fuel/Gas": {
-            "tags": {
-                "name": "Gas",
-                "amenity": "fuel"
-            },
-            "name": "Gas",
             "icon": "fuel",
             "geometry": [
                 "point",
@@ -43581,24 +43444,6 @@
             ],
             "suggestion": true
         },
-        "amenity/kindergarten/Jardin Infantil": {
-            "tags": {
-                "name": "Jardin Infantil",
-                "amenity": "kindergarten"
-            },
-            "name": "Jardin Infantil",
-            "icon": "school",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address"
-            ],
-            "suggestion": true
-        },
         "amenity/kindergarten/Jean Piaget": {
             "tags": {
                 "name": "Jean Piaget",
@@ -44469,78 +44314,6 @@
                 "amenity": "library"
             },
             "name": "Biblioteca Comunale",
-            "icon": "library",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "building_area",
-                "address",
-                "opening_hours",
-                "internet_access",
-                "internet_access/fee",
-                "internet_access/ssid",
-                "ref/isil"
-            ],
-            "suggestion": true
-        },
-        "amenity/library/Biblioteca Municipal": {
-            "tags": {
-                "name": "Biblioteca Municipal",
-                "amenity": "library"
-            },
-            "name": "Biblioteca Municipal",
-            "icon": "library",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "building_area",
-                "address",
-                "opening_hours",
-                "internet_access",
-                "internet_access/fee",
-                "internet_access/ssid",
-                "ref/isil"
-            ],
-            "suggestion": true
-        },
-        "amenity/library/Biblioteca Pública": {
-            "tags": {
-                "name": "Biblioteca Pública",
-                "amenity": "library"
-            },
-            "name": "Biblioteca Pública",
-            "icon": "library",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "building_area",
-                "address",
-                "opening_hours",
-                "internet_access",
-                "internet_access/fee",
-                "internet_access/ssid",
-                "ref/isil"
-            ],
-            "suggestion": true
-        },
-        "amenity/library/Biblioteca Pública Municipal": {
-            "tags": {
-                "name": "Biblioteca Pública Municipal",
-                "amenity": "library"
-            },
-            "name": "Biblioteca Pública Municipal",
             "icon": "library",
             "geometry": [
                 "point",
@@ -46172,29 +45945,6 @@
                 "amenity": "pharmacy"
             },
             "name": "Farmatodo",
-            "icon": "pharmacy",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "drive_through",
-                "opening_hours",
-                "payment_multi"
-            ],
-            "suggestion": true
-        },
-        "amenity/pharmacy/Farmácia": {
-            "tags": {
-                "name": "Farmácia",
-                "healthcare": "pharmacy",
-                "amenity": "pharmacy"
-            },
-            "name": "Farmácia",
             "icon": "pharmacy",
             "geometry": [
                 "point",
@@ -50394,31 +50144,6 @@
                 "amenity": "restaurant"
             },
             "name": "Bella Napoli",
-            "icon": "restaurant",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "cuisine",
-                "address",
-                "building_area",
-                "opening_hours",
-                "capacity",
-                "takeaway",
-                "delivery",
-                "smoking",
-                "outdoor_seating"
-            ],
-            "suggestion": true
-        },
-        "amenity/restaurant/Belvedere": {
-            "tags": {
-                "name": "Belvedere",
-                "amenity": "restaurant"
-            },
-            "name": "Belvedere",
             "icon": "restaurant",
             "geometry": [
                 "point",
@@ -57226,42 +56951,6 @@
             ],
             "suggestion": true
         },
-        "amenity/school/Escola Estadual": {
-            "tags": {
-                "name": "Escola Estadual",
-                "amenity": "school"
-            },
-            "name": "Escola Estadual",
-            "icon": "school",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address"
-            ],
-            "suggestion": true
-        },
-        "amenity/school/Escola Municipal": {
-            "tags": {
-                "name": "Escola Municipal",
-                "amenity": "school"
-            },
-            "name": "Escola Municipal",
-            "icon": "school",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address"
-            ],
-            "suggestion": true
-        },
         "amenity/school/Fairview Elementary School": {
             "tags": {
                 "name": "Fairview Elementary School",
@@ -60412,25 +60101,6 @@
             ],
             "suggestion": true
         },
-        "amenity/theatre/Anfiteatro": {
-            "tags": {
-                "name": "Anfiteatro",
-                "amenity": "theatre"
-            },
-            "name": "Anfiteatro",
-            "icon": "theatre",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area"
-            ],
-            "suggestion": true
-        },
         "amenity/theatre/Freilichtbühne": {
             "tags": {
                 "name": "Freilichtbühne",
@@ -60466,65 +60136,6 @@
                 "operator",
                 "address",
                 "building_area"
-            ],
-            "suggestion": true
-        },
-        "amenity/theatre/Teatro Municipal": {
-            "tags": {
-                "name": "Teatro Municipal",
-                "amenity": "theatre"
-            },
-            "name": "Teatro Municipal",
-            "icon": "theatre",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area"
-            ],
-            "suggestion": true
-        },
-        "amenity/veterinary/Clinica Veterinaria": {
-            "tags": {
-                "name": "Clinica Veterinaria",
-                "amenity": "veterinary"
-            },
-            "name": "Clinica Veterinaria",
-            "icon": "veterinary",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours"
-            ],
-            "suggestion": true
-        },
-        "amenity/veterinary/Veterinaria": {
-            "tags": {
-                "name": "Veterinaria",
-                "amenity": "veterinary"
-            },
-            "name": "Veterinaria",
-            "icon": "veterinary",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours"
             ],
             "suggestion": true
         },
@@ -60876,26 +60487,6 @@
                 "leisure": "sports_centre"
             },
             "name": "Palestra Comunale",
-            "icon": "pitch",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "sport",
-                "building",
-                "address",
-                "opening_hours"
-            ],
-            "suggestion": true
-        },
-        "leisure/sports_centre/Polideportivo": {
-            "tags": {
-                "name": "Polideportivo",
-                "leisure": "sports_centre"
-            },
-            "name": "Polideportivo",
             "icon": "pitch",
             "geometry": [
                 "point",
@@ -62584,27 +62175,6 @@
                 "shop": "bakery"
             },
             "name": "Oebel",
-            "icon": "bakery",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours",
-                "payment_multi"
-            ],
-            "suggestion": true
-        },
-        "shop/bakery/Panaderia": {
-            "tags": {
-                "name": "Panaderia",
-                "shop": "bakery"
-            },
-            "name": "Panaderia",
             "icon": "bakery",
             "geometry": [
                 "point",
@@ -72173,27 +71743,6 @@
             ],
             "suggestion": true
         },
-        "shop/convenience/Minimarket": {
-            "tags": {
-                "name": "Minimarket",
-                "shop": "convenience"
-            },
-            "name": "Minimarket",
-            "icon": "shop",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours",
-                "payment_multi"
-            ],
-            "suggestion": true
-        },
         "shop/convenience/Minimercado": {
             "tags": {
                 "name": "Minimercado",
@@ -78269,27 +77818,6 @@
             ],
             "suggestion": true
         },
-        "shop/funeral_directors/Funeraria": {
-            "tags": {
-                "name": "Funeraria",
-                "shop": "funeral_directors"
-            },
-            "name": "Funeraria",
-            "icon": "cemetery",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "religion",
-                "denomination"
-            ],
-            "suggestion": true
-        },
         "shop/funeral_directors/The Co-operative Funeralcare": {
             "tags": {
                 "name": "The Co-operative Funeralcare",
@@ -78941,27 +78469,6 @@
             ],
             "suggestion": true
         },
-        "shop/hairdresser/Barbershop": {
-            "tags": {
-                "name": "Barbershop",
-                "shop": "hairdresser"
-            },
-            "name": "Barbershop",
-            "icon": "hairdresser",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours",
-                "payment_multi"
-            ],
-            "suggestion": true
-        },
         "shop/hairdresser/Berber": {
             "tags": {
                 "name": "Berber",
@@ -79346,27 +78853,6 @@
                 "shop": "hairdresser"
             },
             "name": "Peluquería",
-            "icon": "hairdresser",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours",
-                "payment_multi"
-            ],
-            "suggestion": true
-        },
-        "shop/hairdresser/Salon": {
-            "tags": {
-                "name": "Salon",
-                "shop": "hairdresser"
-            },
-            "name": "Salon",
             "icon": "hairdresser",
             "geometry": [
                 "point",
@@ -80432,27 +79918,6 @@
             ],
             "suggestion": true
         },
-        "shop/kiosk/Kiosco": {
-            "tags": {
-                "name": "Kiosco",
-                "shop": "kiosk"
-            },
-            "name": "Kiosco",
-            "icon": "shop",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours",
-                "payment_multi"
-            ],
-            "suggestion": true
-        },
         "shop/kiosk/Kiosko": {
             "tags": {
                 "name": "Kiosko",
@@ -80873,48 +80338,6 @@
             ],
             "suggestion": true
         },
-        "shop/kitchen/Kitchen": {
-            "tags": {
-                "name": "Kitchen",
-                "shop": "kitchen"
-            },
-            "name": "Kitchen",
-            "icon": "shop",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours",
-                "payment_multi"
-            ],
-            "suggestion": true
-        },
-        "shop/kitchen/kitchen": {
-            "tags": {
-                "name": "kitchen",
-                "shop": "kitchen"
-            },
-            "name": "kitchen",
-            "icon": "shop",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours",
-                "payment_multi"
-            ],
-            "suggestion": true
-        },
         "shop/laundry/Launderette": {
             "tags": {
                 "name": "Launderette",
@@ -81298,27 +80721,6 @@
                 "shop": "mobile_phone"
             },
             "name": "Claro",
-            "icon": "mobile-phone",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours",
-                "payment_multi"
-            ],
-            "suggestion": true
-        },
-        "shop/mobile_phone/Cricket": {
-            "tags": {
-                "name": "Cricket",
-                "shop": "mobile_phone"
-            },
-            "name": "Cricket",
             "icon": "mobile-phone",
             "geometry": [
                 "point",
@@ -82810,27 +82212,6 @@
                 "shop": "optician"
             },
             "name": "Optic 2000",
-            "icon": "shop",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours",
-                "payment_multi"
-            ],
-            "suggestion": true
-        },
-        "shop/optician/Optica": {
-            "tags": {
-                "name": "Optica",
-                "shop": "optician"
-            },
-            "name": "Optica",
             "icon": "shop",
             "geometry": [
                 "point",
@@ -84696,27 +84077,6 @@
             ],
             "suggestion": true
         },
-        "shop/sports/Stadium": {
-            "tags": {
-                "name": "Stadium",
-                "shop": "sports"
-            },
-            "name": "Stadium",
-            "icon": "shop",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours",
-                "payment_multi"
-            ],
-            "suggestion": true
-        },
         "shop/sports/Спортмастер": {
             "tags": {
                 "name": "Спортмастер",
@@ -85710,27 +85070,6 @@
                 "shop": "supermarket"
             },
             "name": "Carrefour Express",
-            "icon": "grocery",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours",
-                "payment_multi"
-            ],
-            "suggestion": true
-        },
-        "shop/supermarket/Casino": {
-            "tags": {
-                "name": "Casino",
-                "shop": "supermarket"
-            },
-            "name": "Casino",
             "icon": "grocery",
             "geometry": [
                 "point",
@@ -88377,27 +87716,6 @@
                 "shop": "supermarket"
             },
             "name": "Meny",
-            "icon": "grocery",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours",
-                "payment_multi"
-            ],
-            "suggestion": true
-        },
-        "shop/supermarket/Mercado": {
-            "tags": {
-                "name": "Mercado",
-                "shop": "supermarket"
-            },
-            "name": "Mercado",
             "icon": "grocery",
             "geometry": [
                 "point",
@@ -92109,27 +91427,6 @@
             ],
             "suggestion": true
         },
-        "shop/tattoo/Tattoo": {
-            "tags": {
-                "name": "Tattoo",
-                "shop": "tattoo"
-            },
-            "name": "Tattoo",
-            "icon": "shop",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours",
-                "payment_multi"
-            ],
-            "suggestion": true
-        },
         "shop/ticket/Boutique Grandes Lignes": {
             "tags": {
                 "name": "Boutique Grandes Lignes",
@@ -92766,27 +92063,6 @@
                 "shop": "tyres"
             },
             "name": "Vianor",
-            "icon": "shop",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours",
-                "payment_multi"
-            ],
-            "suggestion": true
-        },
-        "shop/tyres/Vulcanizing Shop": {
-            "tags": {
-                "name": "Vulcanizing Shop",
-                "shop": "tyres"
-            },
-            "name": "Vulcanizing Shop",
             "icon": "shop",
             "geometry": [
                 "point",
@@ -93474,25 +92750,6 @@
             ],
             "suggestion": true
         },
-        "tourism/attraction/Lavoir": {
-            "tags": {
-                "name": "Lavoir",
-                "tourism": "attraction"
-            },
-            "name": "Lavoir",
-            "icon": "star",
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address"
-            ],
-            "suggestion": true
-        },
         "tourism/attraction/Maibaum": {
             "tags": {
                 "name": "Maibaum",
@@ -93575,25 +92832,6 @@
                 "tourism": "attraction"
             },
             "name": "Sommerrodelbahn",
-            "icon": "star",
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address"
-            ],
-            "suggestion": true
-        },
-        "tourism/attraction/path continues": {
-            "tags": {
-                "name": "path continues",
-                "tourism": "attraction"
-            },
-            "name": "path continues",
             "icon": "star",
             "geometry": [
                 "point",
@@ -93820,54 +93058,6 @@
                 "address",
                 "capacity",
                 "fee",
-                "internet_access",
-                "internet_access/fee",
-                "internet_access/ssid"
-            ],
-            "suggestion": true
-        },
-        "tourism/camp_site/Campsite": {
-            "tags": {
-                "name": "Campsite",
-                "tourism": "camp_site"
-            },
-            "name": "Campsite",
-            "icon": "campsite",
-            "geometry": [
-                "point",
-                "vertex",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "capacity",
-                "fee",
-                "internet_access",
-                "internet_access/fee",
-                "internet_access/ssid"
-            ],
-            "suggestion": true
-        },
-        "tourism/guest_house/Guest House": {
-            "tags": {
-                "name": "Guest House",
-                "tourism": "guest_house"
-            },
-            "name": "Guest House",
-            "icon": "lodging",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "smoking",
-                "rooms",
                 "internet_access",
                 "internet_access/fee",
                 "internet_access/ssid"
@@ -95617,30 +94807,6 @@
             ],
             "suggestion": true
         },
-        "tourism/motel/Motel": {
-            "tags": {
-                "name": "Motel",
-                "tourism": "motel"
-            },
-            "name": "Motel",
-            "icon": "lodging",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "smoking",
-                "rooms",
-                "internet_access",
-                "internet_access/fee",
-                "internet_access/ssid"
-            ],
-            "suggestion": true
-        },
         "tourism/motel/Motel 6": {
             "tags": {
                 "name": "Motel 6",
@@ -95695,26 +94861,6 @@
                 "tourism": "museum"
             },
             "name": "Heimatmuseum",
-            "icon": "museum",
-            "geometry": [
-                "point",
-                "area"
-            ],
-            "fields": [
-                "name",
-                "operator",
-                "address",
-                "building_area",
-                "opening_hours"
-            ],
-            "suggestion": true
-        },
-        "tourism/museum/Museum": {
-            "tags": {
-                "name": "Museum",
-                "tourism": "museum"
-            },
-            "name": "Museum",
             "icon": "museum",
             "geometry": [
                 "point",
