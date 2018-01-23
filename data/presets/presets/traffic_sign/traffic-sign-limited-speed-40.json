@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-limited-speed-40",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-limited-speed-40"
+  },
+  "terms": [],
+  "name": "traffic-sign-limited-speed-40"
+}

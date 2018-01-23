@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-no-truck-and-tractor-entry",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-no-truck-and-tractor-entry"
+  },
+  "terms": [],
+  "name": "traffic-sign-no-truck-and-tractor-entry"
+}

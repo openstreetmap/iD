@@ -1,0 +1,466 @@
+{
+    "general": {
+        "prop_pass": true,
+        "tasktype": "trafficsign_type_v2",
+        "title": "交通牌类型v2.0-三角",
+        "prop_expand": true,
+        "prop_by_rect": true,
+        "frame": "property",
+        "property": {
+            "trafficsign_type_v2": [
+                {
+                    "display_name": "黑 1",
+                    "sub": [
+                        {
+                            "display_name": "道路 1.1",
+                            "sub": [
+                                {
+                                    "display_name": "交叉路口 1.1.1",
+                                    "sub": [
+                                        {
+                                            "display_name": "左右路口 1.1.1.1",
+                                            "sub": [
+                                                {
+                                                    "display_name": "交叉 1.1.1.1.1",
+                                                    "save_name": "tri.1.1.1.1.1"
+                                                },
+                                                {
+                                                    "display_name": "不交叉 1.1.1.1.2",
+                                                    "save_name": "tri.1.1.1.1.2"
+                                                }
+                                            ],
+                                        "save_name": "tri.1.1.1.1"
+                                        },
+                                        {
+                                            "display_name": "左边交叉 1.1.1.2",
+                                            "sub": [
+                                                {
+                                                    "display_name": "上 1.1.1.2.1",
+                                                    "save_name": "tri.1.1.1.2.1"
+                                                },
+                                                {
+                                                    "display_name": "下 1.1.1.2.2",
+                                                    "save_name": "tri.1.1.1.2.2"
+                                                }
+                                            ],
+                                            "save_name": "tri.1.1.1.2"
+                                        },
+                                        {
+                                            "display_name": "右边交叉 1.1.1.3",
+                                            "sub": [
+                                                {
+                                                    "display_name": "上 1.1.1.3.1",
+                                                    "save_name": "tri.1.1.1.3.1"
+                                                },
+                                                {
+                                                    "display_name": "下 1.1.1.3.2",
+                                                    "save_name": "tri.1.1.1.3.2"
+                                                }
+                                            ],
+                                            "save_name": "tri.1.1.1.3"
+                                        },
+                                        {
+                                            "display_name": "T型交叉 1.1.1.4",
+                                            "sub": [
+                                                {
+                                                    "display_name": "上 1.1.1.4.1",
+                                                    "save_name": "tri.1.1.1.4.1"
+                                                },
+                                                {
+                                                    "display_name": "左 1.1.1.4.2",
+                                                    "save_name": "tri.1.1.1.4.2"
+                                                },
+                                                {
+                                                    "display_name": "右 1.1.1.4.3",
+                                                    "save_name": "tri.1.1.1.4.3"
+                                                }
+                                            ],
+                                            "save_name": "tri.1.1.1.4"
+                                        }
+                                    ],
+                                    "save_name": "tri.1.1.1"
+                                },
+                                {
+                                    "display_name": "反向弯路-单Z字型 1.1.2",
+                                    "sub": [
+                                        {
+                                            "display_name": "正Z 1.1.2.1",
+                                            "save_name": "tri.1.1.2.1"
+                                        },
+                                        {
+                                            "display_name": "镜像Z 1.1.2.2",
+                                            "save_name": "tri.1.1.2.2"
+                                        }
+                                    ],
+                                    "save_name": "tri.1.1.2"
+                                },
+                                {
+                                    "display_name": "连续弯路-多Z字形 1.1.3",
+                                    "save_name": "tri.1.1.3"
+                                },
+                                {
+                                    "display_name": "变窄 1.1.4",
+                                    "sub": [
+                                        {
+                                            "display_name": "两侧 1.1.4.1",
+                                            "save_name": "tri.1.1.4.1"
+                                        },
+                                        {
+                                            "display_name": "左 1.1.4.2",
+                                            "save_name": "tri.1.1.4.2"
+                                        },
+                                        {
+                                            "display_name": "右 1.1.4.3",
+                                            "save_name": "tri.1.1.4.3"
+                                        },
+                                        {
+                                            "display_name": "窄桥-中心窄上下宽 1.1.4.4",
+                                            "save_name": "tri.1.1.4.4"
+                                        }
+                                    ],
+                                    "save_name": "tri.1.1.4"
+                                }
+                            ],
+                            "save_name": "tri.1.1"
+                        },
+                        {
+                            "display_name": "箭头 1.2",
+                            "sub": [
+                                {
+                                    "display_name": "双向交通 1.2.1",
+                                    "save_name": "tri.1.2.1"
+                                },
+                                {
+                                    "display_name": "陡坡 1.2.2",
+                                    "sub": [
+                                        {
+                                            "display_name": "向上 1.2.2.1",
+                                            "save_name": "tri.1.2.2.1"
+                                        },
+                                        {
+                                            "display_name": "向下-可含数字 1.2.2.2",
+                                            "save_name": "tri.1.2.2.2"
+                                        },
+                                        {
+                                            "display_name": "连续下-多级 1.2.2.3",
+                                            "save_name": "tri.1.2.2.3"
+                                        }
+                                    ],
+                                    "save_name": "tri.1.2.2"
+                                },
+                                {
+                                    "display_name": "急转路 1.2.3",
+                                    "sub": [
+                                        {
+                                            "display_name": "左 1.2.3.1",
+                                            "save_name": "tri.1.2.3.1"
+                                        },
+                                        {
+                                            "display_name": "右 1.2.3.2",
+                                            "save_name": "tri.1.2.3.2"
+                                        }
+                                    ],
+                                    "save_name": "tri.1.2.3"
+                                },
+                                {
+                                    "display_name": "潮汐车道-双向箭头两侧虚线 1.2.4",
+                                    "save_name": "tri.1.2.4"
+                                },
+                                {
+                                    "display_name": "平面交叉 1.2.5",
+                                    "sub": [
+                                        {
+                                            "display_name": "十字 1.2.6.1",
+                                            "save_name": "tri.1.2.6.1"
+                                        },
+                                        {
+                                            "display_name": "丁字 1.2.6.2",
+                                            "save_name": "tri.1.2.6.2"
+                                        }
+                                    ],
+                                    "save_name": "tri.1.2.5"
+                                },
+                                {
+                                    "display_name": "合流 1.2.6",
+                                    "sub": [
+                                        {
+                                            "display_name": "左边汇入 1.2.6.1",
+                                            "save_name": "tri.1.2.6.1"
+                                        },
+                                        {
+                                            "display_name": "右边汇入 1.2.6.2",
+                                            "save_name": "tri.1.2.6.2"
+                                        }
+                                    ],
+                                    "save_name": "tri.1.2.6"
+                                },
+                                {
+                                    "display_name": "障碍物 1.2.7",
+                                    "sub": [
+                                        {
+                                            "display_name": "两侧 1.2.7.1",
+                                            "save_name": "tri.1.2.7.1"
+                                        },
+                                        {
+                                            "display_name": "左 1.2.7.2",
+                                            "save_name": "tri.1.2.7.2"
+                                        },
+                                        {
+                                            "display_name": "右 1.2.7.3",
+                                            "save_name": "tri.1.2.7.3"
+                                        }
+                                    ],
+                                    "save_name": "tri.1.2.7"
+                                },
+                                {
+                                    "display_name": "环形 1.2.8",
+                                    "save_name": "tri.1.2.8"
+                                }
+                            ],
+                            "save_name": "tri.1.2"
+                        },
+                        {
+                            "display_name": "交通工具 1.3",
+                            "sub": [
+                                {
+                                    "display_name": "自行车 1.3.1",
+                                    "save_name": "tri.1.3.1"
+                                },
+                                {
+                                    "display_name": "轿车 1.3.2",
+                                    "sub": [
+                                        {
+                                            "display_name": "堤坝路 1.3.2.1",
+                                            "sub": [
+                                                {
+                                                    "display_name": "向左落 1.3.2.1.1",
+                                                    "save_name": "tri.1.3.2.1.1"
+                                                },
+                                                {
+                                                    "display_name": "向右落 1.3.2.1.2",
+                                                    "save_name": "tri.1.3.2.1.2"
+                                                }
+                                            ],
+                                            "save_name": "tri.1.3.2.1"
+                                        },
+                                        {
+                                            "display_name": "易滑 1.3.2.2",
+                                            "save_name": "tri.1.3.2.2"
+                                        },
+                                        {
+                                            "display_name": "渡口-船上有车 1.3.2.3",
+                                            "save_name": "tri.1.3.2.3"
+                                        },
+                                        {
+                                            "display_name": "过水路面 1.3.2.4",
+                                            "save_name": "tri.1.3.2.4"
+                                        },
+                                        {
+                                            "display_name": "事故易发路段-发生碰撞 1.3.2.5",
+                                            "save_name": "tri.1.3.2.5"
+                                        },
+                                        {
+                                            "display_name": "隧道开灯 1.3.2.6",
+                                            "save_name": "tri.1.3.2.6"
+                                        },
+                                        {
+                                            "display_name": "注意保持车距-车后两个箭头 1.3.2.7",
+                                            "save_name": "tri.1.3.2.7"
+                                        }
+                                    ],
+                                    "save_name": "tri.1.3.2"
+                                },
+                                {
+                                    "display_name": "火车 1.3.3",
+                                    "save_name": "tri.1.3.3"
+                                }
+                            ],
+                            "save_name": "tri.1.3"
+                        },
+                        {
+                            "display_name": "环境 1.4",
+                            "sub": [
+                                {
+                                    "display_name": "山 1.4.1",
+                                    "sub": [
+                                        {
+                                            "display_name": "傍山险路 1.4.1.1",
+                                            "sub": [
+                                                {
+                                                    "display_name": "左边山 1.4.1.1.1",
+                                                    "save_name": "tri.1.4.1.1.1"
+                                                },
+                                                {
+                                                    "display_name": "右边山 1.4.1.1.2",
+                                                    "save_name": "tri.1.4.1.1.2"
+                                                }
+                                            ],
+                                            "save_name": "tri.1.4.1.1"
+                                        },
+                                        {
+                                            "display_name": "落石 1.4.1.2",
+                                            "sub": [
+                                                {
+                                                    "display_name": "向左落 1.4.1.2.1",
+                                                    "save_name": "tri.1.4.1.2.1"
+                                                },
+                                                {
+                                                    "display_name": "向右落 1.4.1.2.2",
+                                                    "save_name": "tri.1.4.1.2.2"
+                                                }
+                                            ],
+                                            "save_name": "tri.1.4.1.2"
+                                        }
+                                    ],
+                                    "save_name": "tri.1.4.1"
+                                },
+                                {
+                                    "display_name": "村庄 1.4.2",
+                                    "save_name": "tri.1.4.2"
+                                }
+                            ],
+                            "save_name": "tri.1.4"
+                        },
+                        {
+                            "display_name": "人 1.5",
+                            "sub": [
+                                {
+                                    "display_name": "行人 1.5.1",
+                                    "save_name": "tri.1.5.1"
+                                },
+                                {
+                                    "display_name": "儿童 1.5.2",
+                                    "save_name": "tri.1.5.2"
+                                },
+                                {
+                                    "display_name": "施工 1.5.3",
+                                    "save_name": "tri.1.5.3"
+                                },
+                                {
+                                    "display_name": "残疾人 1.5.4",
+                                    "save_name": "tri.1.5.4"
+                                }
+                            ],
+                            "save_name": "tri.1.5"
+                        },
+                        {
+                            "display_name": "动物 1.6",
+                            "sub": [
+                                {
+                                    "display_name": "牛 1.6.1",
+                                    "save_name": "tri.1.6.1"
+                                },
+                                {
+                                    "display_name": "鹿 1.6.2",
+                                    "save_name": "tri.1.6.2"
+                                },
+                                {
+                                    "display_name": "熊猫 1.6.3",
+                                    "save_name": "tri.1.6.3"
+                                },
+                                {
+                                    "display_name": "其他 1.6.4",
+                                    "save_name": "tri.1.6.4"
+                                }
+                            ],
+                            "save_name": "tri.1.6"
+                        },
+                        {
+                            "display_name": "路面 1.7",
+                            "sub": [
+                                {
+                                    "display_name": "路面不平-两个突起 1.7.1",
+                                    "save_name": "tri.1.7.1"
+                                },
+                                {
+                                    "display_name": "凸高-一个突起 1.7.2",
+                                    "save_name": "tri.1.7.2"
+                                },
+                                {
+                                    "display_name": "低洼-一个下陷 1.7.3",
+                                    "save_name": "tri.1.7.3"
+                                }
+                            ],
+                            "save_name": "tri.1.7"
+                        },
+                        {
+                            "display_name": "隧道 1.8",
+                            "save_name": "tri.1.8"
+                        },
+                        {
+                            "display_name": "拱桥 1.9",
+                            "save_name": "tri.1.9"
+                        },
+                        {
+                            "display_name": "慢 1.10",
+                            "save_name": "tri.1.10"
+                        },
+                        {
+                            "display_name": "铁道-栅栏 1.11",
+                            "save_name": "tri.1.11"
+                        },
+                        {
+                            "display_name": "横风 1.12",
+                            "save_name": "tri.1.12"
+                        },
+                        {
+                            "display_name": "红绿灯 1.13",
+                            "save_name": "tri.1.13"
+                        },
+                        {
+                            "display_name": "叹号 1.14",
+                            "save_name": "tri.1.14"
+                        }
+                    ],
+                    "save_name": "tri.1"
+                },
+                {
+                    "display_name": "黄 2",
+                    "sub": [
+                        {
+                            "display_name": "雾天 2.1",
+                            "save_name": "tri.2.1"
+                        },
+                        {
+                            "display_name": "雨-雪天 2.2",
+                            "save_name": "tri.2.2"
+                        },
+                        {
+                            "display_name": "结冰-雪花 2.3",
+                            "save_name": "tri.2.3"
+                        },
+                        {
+                            "display_name": "云-闪电 2.4",
+                            "save_name": "tri.2.4"
+                        },
+                        {
+                            "display_name": "车辆排队 2.5",
+                            "save_name": "tri.2.5"
+                        }
+                    ],
+                    "save_name": "tri.2"
+                },
+                {
+                    "display_name": "红 3",
+                    "sub": [
+                        {
+                            "display_name": "让 3.1",
+                            "save_name": "tri.3.1"
+                        }
+                    ],
+                    "save_name": "tri.3"
+                },
+                {
+                    "display_name": "蓝 4",
+                    "sub": [
+                        {
+                            "display_name": "行人 4.1",
+                            "save_name": "tri.4.1"
+                        }
+                    ],
+                    "save_name": "tri.4"
+                }
+            ]
+        }
+    }
+}

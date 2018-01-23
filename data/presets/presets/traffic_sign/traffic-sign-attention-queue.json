@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-attention-queue",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-attention-queue"
+  },
+  "terms": [],
+  "name": "traffic-sign-attention-queue"
+}

@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-fork-symbol",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-fork-symbol"
+  },
+  "terms": [],
+  "name": "traffic-sign-fork-symbol"
+}

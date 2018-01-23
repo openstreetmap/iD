@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-tunnel-exit-notice-1",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-tunnel-exit-notice-1"
+  },
+  "terms": [],
+  "name": "traffic-sign-tunnel-exit-notice-1"
+}

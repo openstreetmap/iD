@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-no-bycycle-entry",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-no-bycycle-entry"
+  },
+  "terms": [],
+  "name": "traffic-sign-no-bycycle-entry"
+}

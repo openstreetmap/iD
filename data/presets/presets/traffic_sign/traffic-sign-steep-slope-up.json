@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-steep-slope-up",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-steep-slope-up"
+  },
+  "terms": [],
+  "name": "traffic-sign-steep-slope-up"
+}

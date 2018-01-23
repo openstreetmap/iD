@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-no-tricycle-entry",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-no-tricycle-entry"
+  },
+  "terms": [],
+  "name": "traffic-sign-no-tricycle-entry"
+}

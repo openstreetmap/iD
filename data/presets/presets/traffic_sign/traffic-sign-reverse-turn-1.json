@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-reverse-turn-1",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-reverse-turn-1"
+  },
+  "terms": [],
+  "name": "traffic-sign-reverse-turn-1"
+}

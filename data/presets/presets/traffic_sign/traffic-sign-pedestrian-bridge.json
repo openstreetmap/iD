@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-pedestrian-bridge",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-pedestrian-bridge"
+  },
+  "terms": [],
+  "name": "traffic-sign-pedestrian-bridge"
+}

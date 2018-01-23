@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-two-way-traffic",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-two-way-traffic"
+  },
+  "terms": [],
+  "name": "traffic-sign-two-way-traffic"
+}

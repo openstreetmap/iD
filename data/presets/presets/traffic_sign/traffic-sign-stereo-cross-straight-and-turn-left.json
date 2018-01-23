@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-stereo-cross-straight-and-turn-left",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-stereo-cross-straight-and-turn-left"
+  },
+  "terms": [],
+  "name": "traffic-sign-stereo-cross-straight-and-turn-left"
+}

@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-no-turn-left-of-car",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-no-turn-left-of-car"
+  },
+  "terms": [],
+  "name": "traffic-sign-no-turn-left-of-car"
+}

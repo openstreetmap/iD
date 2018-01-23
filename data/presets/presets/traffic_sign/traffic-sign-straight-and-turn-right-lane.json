@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-straight-and-turn-right-lane",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-straight-and-turn-right-lane"
+  },
+  "terms": [],
+  "name": "traffic-sign-straight-and-turn-right-lane"
+}

@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-emergency-shelter",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-emergency-shelter"
+  },
+  "terms": [],
+  "name": "traffic-sign-emergency-shelter"
+}

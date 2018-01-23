@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-attention-non-motor-vehicles",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-attention-non-motor-vehicles"
+  },
+  "terms": [],
+  "name": "traffic-sign-attention-non-motor-vehicles"
+}

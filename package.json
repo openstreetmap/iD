@@ -35,7 +35,9 @@
     "node-diff3": "bhousel/node-diff3.git#v0.1.0",
     "osm-auth": "1.0.2",
     "rbush": "2.0.1",
-    "wmf-sitematrix": "0.1.4"
+    "wmf-sitematrix": "0.1.4",
+    "xmldom": "^0.1.27",
+    "xpath.js": "^1.1.0"
   },
   "devDependencies": {
     "@mapbox/maki": "^4.0.0",
