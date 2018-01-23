@@ -20,8 +20,7 @@ export var osmOneWayTags = {
         'yes': true
     },
     'highway': {
-        'motorway': true,
-        'motorway_link': true
+        'motorway': true
     },
     'junction': {
         'circular': true,

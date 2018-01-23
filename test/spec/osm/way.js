@@ -309,12 +309,12 @@ describe('iD.osmWay', function() {
             expect(iD.Way({tags: { waterway: 'river' }}).isOneWay(), 'river').to.be.true;
             expect(iD.Way({tags: { waterway: 'stream' }}).isOneWay(), 'stream').to.be.true;
             expect(iD.Way({tags: { highway: 'motorway' }}).isOneWay(), 'motorway').to.be.true;
-            expect(iD.Way({tags: { highway: 'motorway_link' }}).isOneWay(), 'motorway_link').to.be.true;
             expect(iD.Way({tags: { junction: 'roundabout' }}).isOneWay(), 'roundabout').to.be.true;
             expect(iD.Way({tags: { junction: 'circular' }}).isOneWay(), 'circular').to.be.true;
         });
 
         it('returns false when the way does not have implied oneway tag', function() {
+            expect(iD.Way({tags: { highway: 'motorway_link' }}).isOneWay(), 'motorway_link').to.be.false;
             expect(iD.Way({tags: { highway: 'trunk' }}).isOneWay(), 'trunk').to.be.false;
             expect(iD.Way({tags: { highway: 'trunk_link' }}).isOneWay(), 'trunk_link').to.be.false;
             expect(iD.Way({tags: { highway: 'primary' }}).isOneWay(), 'primary').to.be.false;
