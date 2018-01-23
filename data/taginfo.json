@@ -22,6 +22,10 @@
             "key": "amenity"
         },
         {
+            "key": "junction",
+            "value": "circular"
+        },
+        {
             "key": "highway"
         },
         {
@@ -221,6 +225,10 @@
         },
         {
             "key": "amenity",
+            "value": "car_pooling"
+        },
+        {
+            "key": "amenity",
             "value": "car_rental"
         },
         {
@@ -361,6 +369,10 @@
         },
         {
             "key": "amenity",
+            "value": "love_hotel"
+        },
+        {
+            "key": "amenity",
             "value": "marketplace"
         },
         {
@@ -494,6 +506,10 @@
         {
             "key": "amenity",
             "value": "shower"
+        },
+        {
+            "key": "amenity",
+            "value": "smoking_area"
         },
         {
             "key": "amenity",
@@ -727,6 +743,10 @@
         },
         {
             "key": "barrier",
+            "value": "kerb"
+        },
+        {
+            "key": "barrier",
             "value": "kissing_gate"
         },
         {
@@ -778,6 +798,14 @@
         },
         {
             "key": "building",
+            "value": "boathouse"
+        },
+        {
+            "key": "building",
+            "value": "bungalow"
+        },
+        {
+            "key": "building",
             "value": "cabin"
         },
         {
@@ -791,6 +819,10 @@
         {
             "key": "building",
             "value": "church"
+        },
+        {
+            "key": "building",
+            "value": "civic"
         },
         {
             "key": "building",
@@ -811,6 +843,10 @@
         {
             "key": "building",
             "value": "dormitory"
+        },
+        {
+            "key": "building",
+            "value": "farm"
         },
         {
             "key": "building",
@@ -870,11 +906,19 @@
         },
         {
             "key": "building",
+            "value": "ruins"
+        },
+        {
+            "key": "building",
             "value": "school"
         },
         {
             "key": "building",
             "value": "semidetached_house"
+        },
+        {
+            "key": "building",
+            "value": "service"
         },
         {
             "key": "building",
@@ -886,11 +930,23 @@
         },
         {
             "key": "building",
+            "value": "stadium"
+        },
+        {
+            "key": "building",
             "value": "static_caravan"
         },
         {
             "key": "building",
+            "value": "temple"
+        },
+        {
+            "key": "building",
             "value": "terrace"
+        },
+        {
+            "key": "building",
+            "value": "transportation"
         },
         {
             "key": "building",
@@ -1151,6 +1207,10 @@
             "value": "phone"
         },
         {
+            "key": "emergency",
+            "value": "water_tank"
+        },
+        {
             "key": "entrance"
         },
         {
@@ -1283,6 +1343,10 @@
         {
             "key": "highway",
             "value": "bridleway"
+        },
+        {
+            "key": "highway",
+            "value": "bus_guideway"
         },
         {
             "key": "highway",

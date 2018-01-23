@@ -92,7 +92,7 @@
                 "connected_to_hidden": "لا يمكن جعلها مربعة لأنها مرتبطة بعنصر مخفي."
             },
             "straighten": {
-                "title": "مستقيم",
+                "title": "استقامة",
                 "description": "اجعل هذا الخط مستقيماً.",
                 "key": "س",
                 "annotation": "جعل الخط مستقيما.",
@@ -341,8 +341,7 @@
             "created": " تم إنشائها",
             "about_changeset_comments": "حول ملخص التغييرات التي قمت بها",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
-            "google_warning": "ذكرت جوجل في هذا التعليق: تذكر أن النسخ من خرائط جوجل ممنوع منعاً باتاً.",
-            "google_warning_link": "http://www.openstreetmap.org/copyright"
+            "google_warning": "ذكرت جوجل في هذا التعليق: تذكر أن النسخ من خرائط جوجل ممنوع منعاً باتاً."
         },
         "contributors": {
             "list": "حُرر بواسطة {users}",
@@ -449,21 +448,18 @@
             "title": "الخلفية",
             "description": "إعدادات الخلفية",
             "key": "خ",
-            "percent_brightness": "الوضوح {opacity}%",
             "none": "لا شيء",
             "best_imagery": "أفضل مصدر صور معروف لهذه المنطقة",
             "switch": "رجوع إلى هذه الخلفية.",
             "custom": "مخصص",
             "custom_button": "تحرير خلفية مخصصة",
-            "fix_misalignment": "ضبط إزاحة التصوير.",
-            "imagery_source_faq": "من أين أتت هذه الصورة؟",
             "reset": "إعادة الضبط",
-            "offset": "اسحب أي مكان في المنطقة الرمادية أدناه لضبط إزاحة الصورة، أو أدخل قيم الإزاحة بالمتر.",
             "minimap": {
-                "description": "خريطة مصغّرة",
                 "tooltip": "عرض الخريطة من بعيد للمساعدة في تحديد المنطقة المعروضة حاليا.",
                 "key": "/"
-            }
+            },
+            "fix_misalignment": "ضبط إزاحة التصوير.",
+            "offset": "اسحب أي مكان في المنطقة الرمادية أدناه لضبط إزاحة الصورة، أو أدخل قيم الإزاحة بالمتر."
         },
         "map_data": {
             "title": "بيانات الخريطة",
@@ -601,7 +597,8 @@
         "splash": {
             "welcome": "مرحبا بك في محرر iD لخريطة الشارع المفتوحة OpenStreetMap.",
             "text": "محرر الخرائط ID هو محرر سهل وجذاب ولكنه أيضًا أداة قوية جدا وفعالة للمساهمة في أفضل خرائط حُرة ومجانية في العالم. هذا هو الإصدار رقم {version}. لمزيد من المعلومات انظر {website} ، كما يمكنك الإبلاغ عن العلل والمشاكل على {github}.",
-            "walkthrough": "بدء جولة تعليم"
+            "walkthrough": "بدء جولة تعليم",
+            "start": " حرّر الآن "
         },
         "source_switch": {
             "live": "حي",
@@ -656,10 +653,7 @@
         },
         "help": {
             "title": "المساعدة",
-            "key": "م",
-            "help": "#المساعدة\nهذا محرر خرائط لخدمة الخرائط الحُرة [OpenStreetMap](http://www.openstreetmap.org/)\nالخرائط الحُرة والقابلة للتعديل للعالم، بامكانك استخدامها لإضافة أو تعديل معلومات تتعلق بمنطقتك, لتوفير خدمات مفتوحة المصدر وبيانات مفتوحة المصدر للعالم\n\nالإضافات التي تقوم بها ستكون ظاهرة للعالم لمستخدمي خدمة الخرائط مفتوحة المصدر OpenStreetMap. حتى تبدأ بتحرير الخرائط، يجب عليك [تسجيل الدخول](https://www.openstreetmap.org/login).\nهذا المحرر  [iD editor](http://ideditor.com/) هو عمل مشترك ومفتوح المصدر حيث يمكن الحصول على مصدر الكود عبر موقع [GitHub](https://github.com/openstreetmap/iD).\n",
-            "editing_saving": "#التحرير والحفظ:\nهذا المُحرر مصمم في الأساس للعمل أثناء الاتصال بالإنترنت، وأنت الآن تعمل عليه من خلال موقع الويب.\n\n###تحديد العناصر على الخريطة:\nلتحديد عنصر على الخريطة كطريق أو نقطة مثلا انقر عليه مباشرة بزر الفأرة الأيسر، سيؤدي ذلك لتحديدها وظهور لون بارز عليها أو على حدودها ويستمر في الوميض أثناء التحديد، ومن ثم ظهور التفاصيل الخاصة بالعنصر المُحدد في اللوحة الجانبية. ويمكنك النقر عليها مجددا بزر الفأرة الأيمن لتظهر قائمة بالعمليات التي يمكن تنفيذها على العنصر المُحدد.\n\nلتحديد عدد من العناصر في نفس الوقت, اضغط مع الاستمرار بالضغط على مفتاح \"Shift\". ثم انقر على العناصر التي ترغب بتحديدها, أو انقر بزر الفأرة الأيسر مع الاستمرار بالنقر والسحب على الخريطة لرسم مساحة حُرّة. سيقوم ذلك بتحديد جميع النقاط الواقعة داخل المساحة المرسومة.\n\n###حفظ التعديلات:\nعند قيامك بالتغييرات في الخرائط كتعديل الطُرق، والمباني، والأماكن، وغير ذلك. يتم تخزين وحفظ هذه التغييرات محليا (على جهازك) حتى تقوم بحفظ ورفع هذه التعديلات على الخادوم عبر الإنترنت. لا تقلق عند قيامك بتعديل أو إجراء خاطيء يمكنك التراجع عن الإجراءات والتغييرات التي قمت بها عن طريق الضغط على زر التراجع, أو العودة عن التراجع عن طريق زر الإعادة بجانب زر التراجع.\n\nانقر على 'حفظ' لإنهاء مجموعة من التعديلات - على سبيل المثال، إذا كنت قد انتهيت من التعديلات في منطقة في مدينة ما وترغب في البدء بتعديل منطقة جديدة. ستكون لديك الفرصة لمراجعة وحفظ ما أتممته، وسيقدم لك المحرر اقتراحات مفيدة وتحذيرات في حال أن هناك شيئا ما لا يبدو سليما حول تغييراتك التي قمت بها.\n\nإذا كان كل شيء يبدو جيدًا، يمكنك إدخال تعليق صغير تشرح فيه التغيير الذي قمت به، ثم أنقر على 'رفع' لنشر التغييرات على OpenStreetMap.org, حيث تصبح مرئية لجميع المستخدمين الآخرين، ومتاحة للآخرين لتعديلها أو تحسينها عند الحاجة.\n\nإذا لم تتمكن من إنهاء تعديلاتك في جلسة واحدة، يمكنك ترك نافذة المحرر والعودة فيما بعد (على نفس المتصفح والحاسوب), وسيعرض عليك تطبيق المحرر استعادة تعديلاتك الأخيرة الغير محفوظة.\n\n###استخدام المحرر:\n\nيمكنك عرض قائمة باختصارات لوحة المفاتيح عن طريق الضغط على مفتاح '؟'.\n",
-            "roads": "# الطرق:\n\nYou can create, fix, and delete roads with this editor. Roads can be all\nkinds: paths, highways, trails, cycleways, and more - any often-crossed\nsegment should be mappable.\n\n### التحديد والاختيار:\n\nClick on a road to select it. An outline should become visible, along\nwith a sidebar showing more information about the road. If you right-click\non it, you'll have a menu of actions you can apply on the road.\n\n### التعديل:\n\nOften you'll see roads that aren't aligned to the imagery behind them\nor to a GPS track. You can adjust these roads so they are in the correct\nplace.\n\nFirst click on the road you want to change. This will highlight it and show\ncontrol points along it that you can drag to better locations. If\nyou want to add new control points for more detail, double-click a part\nof the road without a node, and one will be added.\n\nIf the road connects to another road, but doesn't properly connect on\nthe map, you can drag one of its control points onto the other road in\norder to join them. Having roads connect is important for the map\nand essential for providing driving directions.\n\nYou can also right-click on it and select the 'Move' tool, or simply press\nthe `M` shortcut key, to move the entire road at one time, and then click\nagain to save that movement.\n\n### الحذف:\n\nIf a road is entirely incorrect - you can see that it doesn't exist in satellite\nimagery and ideally have confirmed locally that it's not present - you can delete\nit, which removes it from the map. Be cautious when deleting features -\nlike any other edit, the results are seen by everyone and satellite imagery\nis often out of date, so the road could simply be newly built.\n\nYou can delete a road by clicking on it to select it, then pressing the 'Delete'\nkey or right-clicking it and then clicking the trash can icon.\n\n### الإنشاء:\n\nFound somewhere there should be a road but there isn't? Click the 'Line'\nicon in the top-left of the editor or press the shortcut key `2` to start drawing\na line.\n\nClick on the start of the road on the map to start drawing. If the road\nbranches off from an existing road, start by clicking on the place where they connect.\n\nThen click on points along the road so that it follows the right path, according\nto satellite imagery or GPS. If the road you are drawing crosses another road, connect\nit by clicking on the intersection point. When you're done drawing, double-click\nor press 'Return' or 'Enter' on your keyboard.\n"
+            "key": "م"
         },
         "intro": {
             "done": "تم",
@@ -785,7 +779,6 @@
             },
             "areas": {
                 "title": "المساحات",
-                "add_playground": "تُستخدم *المساحات* لعرض حدود العناصر مثل البحيرات، والمباني، والمناطق السكنية.{br}ويمكن أيضا أن تستخدم لرسم خرائط أكثر تفصيلا للعديد من العناصر التي يمكن وصفها كنقاط على الخريطة. **انقر زر المساحة {button} لإضافة مساحة جديدة.**",
                 "start_playground": "دعنا نضيف هذا الملعب إلى الخريطة عن طريق رسم مساحة. تُرسم المساحة عن طريق وضع *نقاط تلاقي* على طول الحافة الخارجية للعنصر المراد رسمه. **انقر أو اضغط على مفتاح المسافة لوضع نقطة بدء رسم الملعب.**",
                 "continue_playground": "استمر في رسم المساحة عن طريق وضع مزيد من نقاط التلاقي على طول حافة الملعب. ولا بأس بوصل المساحة المرسومة بمسارات المشي الموجودة من قبل.{br}تلميح: يمكنك الضغط على مفتاح '{alt}' أثناء الرسم لمنع نقاط التلاقي من الاتصال بالعناصر الأخرى. **استمر برسم مساحة الملعب.**",
                 "finish_playground": "يمكنك إنهاء رسم المساحة عن طريق الضغط على مفتاح Enter، أو النقر بالفأرة على أول نقطة أو آخر نقطة في المساحة المرسومة. **قم بإنهاء رسم مساحة الملعب.**",
@@ -848,6 +841,8 @@
                 "enter": "Enter",
                 "esc": "Esc",
                 "home": "الرئيسية",
+                "option": "خيارات",
+                "pause": "إلباث",
                 "pgdn": "PgDn",
                 "pgup": "PgUp",
                 "return": "رجوع",
@@ -857,10 +852,47 @@
             "gesture": {
                 "drag": "سحب"
             },
+            "or": "-أو-",
             "browsing": {
+                "title": "التصفح",
+                "navigation": {
+                    "title": "التنقل",
+                    "pan": "تحريك الخريطة",
+                    "pan_more": "تحريك الخريطة بمقدار المعروض من الشاشة",
+                    "zoom": "تكبير / تصغير",
+                    "zoom_more": "تكبير وتصغير بمقدار كبير"
+                },
                 "help": {
                     "title": "المساعدة",
+                    "help": "عرض المساعدة",
                     "keyboard": "عرض اختصارات لوحة المفاتيح"
+                },
+                "display_options": {
+                    "title": "عرض الخيارات",
+                    "background": "عرض خيارات الخلفية",
+                    "background_switch": "عودة إلى آخر خلفية",
+                    "map_data": "عرض خيارات بيانات الخريطة",
+                    "fullscreen": "بدء وضع ملء الشاشة",
+                    "wireframe": "نمط الخطوط الرفيعة",
+                    "minimap": "عرض الخريطة المصغّرة"
+                },
+                "selecting": {
+                    "title": "اختيار العناصر",
+                    "select_one": "اختيار عنصر واحد",
+                    "select_multi": "اختيار عناصر متعددة",
+                    "lasso": "رسم مساحة تحديد حول العناصر",
+                    "search": "اعثر على عناصر تطابق نص البحث"
+                },
+                "with_selected": {
+                    "title": "مع العنصر المُختار",
+                    "edit_menu": "فتح قائمة التحرير"
+                },
+                "vertex_selected": {
+                    "title": "مع القعدة المختارة",
+                    "previous": "قفز إلى العقدة السابقة",
+                    "next": "قفز إلى القعدة التالية",
+                    "first": "قفز إلى العقدة الأولى",
+                    "last": "فز إلى العقدة الأخيرة"
                 }
             },
             "editing": {
@@ -873,6 +905,7 @@
                     "title": "عمليات",
                     "split": "افصل الخط إلى خطين عند نقطة التلاقي المُختارة",
                     "reverse": "عكس الخط",
+                    "orthogonalize": "جعله خط مستقيما / جعلها مساحة مربعة",
                     "delete": "حذف الميزات المحددة"
                 },
                 "commands": {
@@ -985,6 +1018,7 @@
                         "block_number": "رقم البلوك",
                         "block_number!jp": "رقم البلوك",
                         "city": "المدينة",
+                        "city!jp": "مدينة/بلدة/قرية/جناح طوكيو الخاص",
                         "city!vn": "المدينة / البلدة",
                         "conscriptionnumber": "123",
                         "country": "دولة",
@@ -1006,7 +1040,8 @@
                         "street": "شارع",
                         "subdistrict": "منطقة فرعية",
                         "suburb": "ضاحية",
-                        "suburb!jp": "جناح"
+                        "suburb!jp": "جناح",
+                        "unit": "وحدة"
                     }
                 },
                 "admin_level": {
@@ -1046,6 +1081,9 @@
                 },
                 "aeroway": {
                     "label": "النوع"
+                },
+                "agrarian": {
+                    "label": "المنتجات"
                 },
                 "amenity": {
                     "label": "النوع"
@@ -1093,14 +1131,18 @@
                     "label": "سلة النفايات"
                 },
                 "blood_components": {
+                    "label": "مكونات الدم",
                     "options": {
                         "plasma": "بلازما",
-                        "platelets": "الصفائح الدموية",
+                        "platelets": "صفائح الدموية",
                         "stemcells": "عينات خلايا جذعية",
-                        "whole": "الدم الكامل"
+                        "whole": "دم الكامل"
                     }
                 },
                 "board_type": {
+                    "label": "النوع"
+                },
+                "boules": {
                     "label": "النوع"
                 },
                 "boundary": {
@@ -1108,6 +1150,10 @@
                 },
                 "brand": {
                     "label": "العلامة التجارية"
+                },
+                "bridge": {
+                    "label": "النوع",
+                    "placeholder": "الافتراضي"
                 },
                 "building": {
                     "label": "المبنى"
@@ -1117,6 +1163,10 @@
                 },
                 "bunker_type": {
                     "label": "النوع"
+                },
+                "cables": {
+                    "label": "الكابلات",
+                    "placeholder": "1, 2, 3..."
                 },
                 "camera/direction": {
                     "label": "الاتجاه (الدرجات في اتجاه عقارب الساعة)",
@@ -1136,42 +1186,20 @@
                     "label": "السعة",
                     "placeholder": "50, 100, 200..."
                 },
-                "cardinal_direction": {
-                    "label": "الاتجاه",
-                    "options": {
-                        "E": "الشرق",
-                        "ENE": "شرقي - شمال شرقي",
-                        "ESE": "شرقي - جنوب شرقي",
-                        "N": "الشمال",
-                        "NE": "الشمال الشرقي",
-                        "NNE": "شمالي - شمالي شرقي",
-                        "NNW": "شمالي - شمالي غربي",
-                        "NW": "الشمال الغربي",
-                        "S": "الجنوب",
-                        "SE": "الجنوب الشرقي",
-                        "SSE": "جنوبي - جنوبي شرقي",
-                        "SSW": "جنوبي - جنوبي غربي",
-                        "SW": "الجنوب الغربي",
-                        "W": "الغرب",
-                        "WNW": "غربي - شمالي غربي",
-                        "WSW": "غربي - جنوبي غربي"
-                    }
-                },
                 "castle_type": {
                     "label": "النوع"
                 },
-                "clock_direction": {
-                    "label": "الاتجاه",
-                    "options": {
-                        "anticlockwise": "عكس عقارب الساعة",
-                        "clockwise": "باتجاه عقارب الساعة"
-                    }
+                "clothes": {
+                    "label": "ملابس"
                 },
                 "club": {
                     "label": "النوع"
                 },
                 "collection_times": {
                     "label": "وقت الاستلام"
+                },
+                "comment": {
+                    "label": "تعليق التغييرات"
                 },
                 "communication_multi": {
                     "label": "أنواع الاتصال"
@@ -1183,6 +1211,9 @@
                     "label": "رابط كاميرا الويب",
                     "placeholder": "http://example.com"
                 },
+                "content": {
+                    "label": "المحتوى"
+                },
                 "country": {
                     "label": "الدولة"
                 },
@@ -1191,6 +1222,12 @@
                 },
                 "craft": {
                     "label": "النوع"
+                },
+                "crane/type": {
+                    "label": "نوع الرافعة",
+                    "options": {
+                        "floor-mounted_crane": "رافعة مثبتة على الأرض"
+                    }
                 },
                 "crop": {
                     "label": "محاصيل"
@@ -1204,6 +1241,10 @@
                 "currency_multi": {
                     "label": "أنواع العملات"
                 },
+                "cutting": {
+                    "label": "النوع",
+                    "placeholder": "الافتراضي"
+                },
                 "cycle_network": {
                     "label": "الشبكة"
                 },
@@ -1211,7 +1252,7 @@
                     "label": "مسارات الدراجات",
                     "options": {
                         "lane": {
-                            "description": "مسار دراجات مفصول عن حركة السيارات بخط مطبوع",
+                            "description": "مسار دراجات مفصول عن السيارات بخط مطبوع",
                             "title": "مسار دراجات قياسي"
                         },
                         "none": {
@@ -1234,6 +1275,7 @@
                             "title": "مسار دراجات مشترك"
                         },
                         "track": {
+                            "description": "مسار دراجات منفصل عن السيارات بحاجز مادي",
                             "title": "مسار الدراجة"
                         }
                     },
@@ -1258,6 +1300,13 @@
                 "description": {
                     "label": "الوصف"
                 },
+                "devices": {
+                    "label": "الأجهزة",
+                    "placeholder": "1, 2, 3..."
+                },
+                "diaper": {
+                    "label": "تغيير حفاظات الطفل متاح"
+                },
                 "display": {
                     "label": "عرض"
                 },
@@ -1266,6 +1315,10 @@
                 },
                 "drive_through": {
                     "label": "يمكن القيادة من خلاله"
+                },
+                "duration": {
+                    "label": " المدة (دقائق) ",
+                    "placeholder": "00:00"
                 },
                 "electrified": {
                     "label": "الكهربية",
@@ -1283,6 +1336,10 @@
                 "email": {
                     "label": "البريد الإلكتروني",
                     "placeholder": "example@example.com"
+                },
+                "embankment": {
+                    "label": "النوع",
+                    "placeholder": "الافتراضي"
                 },
                 "emergency": {
                     "label": "طوارئ"
@@ -1323,6 +1380,10 @@
                 "fixme": {
                     "label": "أصلحني"
                 },
+                "ford": {
+                    "label": "النوع",
+                    "placeholder": "الافتراضي"
+                },
                 "fuel": {
                     "label": "وقود"
                 },
@@ -1344,10 +1405,17 @@
                 "generator/method": {
                     "label": "الطريقة"
                 },
+                "generator/output/electricity": {
+                    "label": "الطاقة الناتجة",
+                    "placeholder": "50 ميجا وات، 100 ميجا وات، 200 ميجا وات..."
+                },
                 "generator/source": {
                     "label": "المصدر"
                 },
                 "generator/type": {
+                    "label": "النوع"
+                },
+                "government": {
                     "label": "النوع"
                 },
                 "handicap": {
@@ -1356,6 +1424,10 @@
                 },
                 "handrail": {
                     "label": "سياج سلم (درابزين)"
+                },
+                "hashtags": {
+                    "label": "الهاشتاجات المقترحة",
+                    "placeholder": "#مثال"
                 },
                 "height": {
                     "label": "الارتفاع (بالأمتار)"
@@ -1484,8 +1556,14 @@
                     "label": "حدود السرعة",
                     "placeholder": "40, 50, 60..."
                 },
+                "maxstay": {
+                    "label": "أقصى فترة بقاء"
+                },
                 "maxweight": {
                     "label": "أقصى وزن"
+                },
+                "memorial": {
+                    "label": "النوع"
                 },
                 "mtb/scale": {
                     "placeholder": "0, 1, 2, 3..."
@@ -1504,7 +1582,7 @@
                     "placeholder": "الاسم شائع (إن وجد)"
                 },
                 "natural": {
-                    "label": "طبيعه"
+                    "label": "طبيعة"
                 },
                 "network": {
                     "label": "الشبكة"
@@ -1515,18 +1593,19 @@
                         "icn": "عالمي",
                         "lcn": "محلية",
                         "ncn": "وطني",
-                        "rcn": "جهوي"
-                    }
+                        "rcn": "إقليمي"
+                    },
+                    "placeholder": "محلي، إقليمي، وطني، عالمي"
                 },
                 "network_foot": {
                     "label": "نوع الشبكة",
                     "options": {
-                        "iwn": "دولي",
-                        "lwn": "محلي",
-                        "nwn": "وطني",
-                        "rwn": "إقليمي"
+                        "iwn": "دولية",
+                        "lwn": "محلية",
+                        "nwn": "وطنية",
+                        "rwn": "إقليمية"
                     },
-                    "placeholder": "محلي، إقليمي، وطني، دولي"
+                    "placeholder": "محلية، إقليمية، وطنية، دولية"
                 },
                 "network_horse": {
                     "label": "نوع الشبكة",
@@ -1575,9 +1654,6 @@
                 "par": {
                     "placeholder": "3، 4، 5 ..."
                 },
-                "parallel_direction": {
-                    "label": "الاتجاه"
-                },
                 "park_ride": {
                     "label": "اوقف واركب"
                 },
@@ -1585,7 +1661,7 @@
                     "label": "النوع",
                     "options": {
                         "multi-storey": "متعدد الطوابق",
-                        "surface": "السطحية",
+                        "surface": "سطحي",
                         "underground": "تحت الأرض"
                     }
                 },
@@ -1624,17 +1700,30 @@
                 "place": {
                     "label": "النوع"
                 },
+                "plant": {
+                    "label": "مصنع"
+                },
+                "plant/output/electricity": {
+                    "label": "الطاقة الناتجة",
+                    "placeholder": "500 ميجا وات، 1000 ميجا وات، 2000 ميجا وات..."
+                },
+                "playground/baby": {
+                    "label": "مقعد طفل"
+                },
                 "population": {
                     "label": "السكان"
                 },
                 "power": {
                     "label": "نوع"
                 },
+                "power_supply": {
+                    "label": "مولد طاقة"
+                },
+                "product": {
+                    "label": "المنتجات"
+                },
                 "railway": {
                     "label": "النوع"
-                },
-                "recycling_type": {
-                    "label": "نوع إعادة التدوير"
                 },
                 "ref": {
                     "label": "الرمز المرجعي"
@@ -1643,7 +1732,17 @@
                     "label": "رقم البوابة"
                 },
                 "ref_golf_hole": {
-                    "label": "رقم الحفرة"
+                    "label": "رقم الحفرة",
+                    "placeholder": "1-18"
+                },
+                "ref_platform": {
+                    "label": "رقم الرصيف"
+                },
+                "ref_road_number": {
+                    "label": "رقم الطريق"
+                },
+                "ref_runway": {
+                    "label": "رقم المدرج"
                 },
                 "relation": {
                     "label": "النوع"
@@ -1668,8 +1767,11 @@
                 },
                 "second_hand": {
                     "options": {
+                        "no": "لا",
+                        "only": "فقط",
                         "yes": "نعم"
-                    }
+                    },
+                    "placeholder": "نعم، لا، فقط"
                 },
                 "service": {
                     "label": "النوع"
@@ -1725,6 +1827,9 @@
                 "social_facility": {
                     "label": "النوع"
                 },
+                "source": {
+                    "label": "المصادر"
+                },
                 "sport": {
                     "label": "الرياضة"
                 },
@@ -1766,7 +1871,8 @@
                 "structure_waterway": {
                     "options": {
                         "tunnel": "نفق"
-                    }
+                    },
+                    "placeholder": "مجهول"
                 },
                 "studio": {
                     "label": "النوع"
@@ -1794,6 +1900,9 @@
                 "surveillance/zone": {
                     "label": "منطقة مراقبة"
                 },
+                "switch": {
+                    "label": "النوع"
+                },
                 "takeaway": {
                     "options": {
                         "no": "لا",
@@ -1809,11 +1918,17 @@
                 "tourism": {
                     "label": "النوع"
                 },
+                "tourism_attraction": {
+                    "label": "سياحة"
+                },
                 "tower/type": {
                     "label": "النوع"
                 },
                 "tracktype": {
                     "label": "صنف الدرب"
+                },
+                "trade": {
+                    "label": "النوع"
                 },
                 "traffic_calming": {
                     "label": "النوع"
@@ -1823,13 +1938,48 @@
                 },
                 "trail_visibility": {
                     "label": "وضوحية الطريق",
-                    "placeholder": "ممتاز، جيد، رديء ..."
+                    "options": {
+                        "bad": "سيء: لا علامات، المسار غير مرئي أو غير مرصوف",
+                        "excellent": "ممتاز: مسارات واضحة وعلامات في كل مكان",
+                        "good": "جيد: علامات واضحة ، قد تحتاج للبحث في بعض الأحيان",
+                        "horrible": "مخيف: غير مرصوف في الغالب، واتجاهات وصول قد تحتاج للمهارة",
+                        "intermediate": "متوسط: علامات قليلة: والمسار مرئي في الغالب",
+                        "no": "لا: غير مرصوف، والمهارة في معرفة اتجاهات الوصول مطلوبة"
+                    },
+                    "placeholder": "ممتاز، جيد، سيء..."
+                },
+                "transformer": {
+                    "label": "النوع",
+                    "options": {
+                        "yes": "مجهول"
+                    }
                 },
                 "trees": {
                     "label": "أشجار"
                 },
+                "tunnel": {
+                    "label": "النوع",
+                    "placeholder": "الافتراضي"
+                },
                 "vending": {
                     "label": "أنواع البضائع"
+                },
+                "visibility": {
+                    "label": "الرؤية",
+                    "options": {
+                        "area": "أكثر من 20 متر (65 قدم)",
+                        "house": "إلى 5 متر (16 قدم)",
+                        "street": "من 5 إلى 20 متر (16 إلى 65 قدم)"
+                    }
+                },
+                "volcano/status": {
+                    "label": "حالة البركان",
+                    "options": {
+                        "active": "نشط"
+                    }
+                },
+                "volcano/type": {
+                    "label": "نوع البركان"
                 },
                 "wall": {
                     "label": "النوع"
@@ -1862,9 +2012,23 @@
                     "name": "العنوان",
                     "terms": "عنوان"
                 },
+                "aerialway": {
+                    "name": "محطة النقل بالكابلات "
+                },
                 "aerialway/cable_car": {
                     "name": "تلفريك",
-                    "terms": "تلفريك، معبر هوائي"
+                    "terms": "تلفريك، معبر هوائي، مصعد هوائي"
+                },
+                "aerialway/chair_lift": {
+                    "name": "مصعد تزلج",
+                    "terms": "مصعد تزلج، تلسياج"
+                },
+                "aerialway/goods": {
+                    "name": "نقل البضائع بالكابلات ",
+                    "terms": "نقل البضائع بالكابلات "
+                },
+                "aerialway/station": {
+                    "name": "محطة النقل بالكابلات "
                 },
                 "aeroway": {
                     "name": "جوي"
@@ -1931,10 +2095,6 @@
                 "amenity/boat_rental": {
                     "name": "محل استئجار قوارب",
                     "terms": "تأجير القوارب، ساحة الزوارق، تأجير زوارق"
-                },
-                "amenity/bus_station": {
-                    "name": "محطة أتوبيس",
-                    "terms": "محطة أتوبيس, محطة باص, محطة حافلة"
                 },
                 "amenity/cafe": {
                     "name": "مقهى",
@@ -2102,9 +2262,6 @@
                     "name": "محطة الحراسة",
                     "terms": "محطة الحراسة"
                 },
-                "amenity/recycling": {
-                    "name": "إعادة تدوير"
-                },
                 "amenity/recycling_centre": {
                     "name": "مركز إعادة تدوير"
                 },
@@ -2175,6 +2332,10 @@
                 "area": {
                     "name": "منطقة",
                     "terms": "المساحة; مساحة; منطقة; المنطقة"
+                },
+                "area/highway": {
+                    "name": "سطح الطريق",
+                    "terms": "<translate with synonyms or related terms for 'Road Surface', separated by commas>"
                 },
                 "barrier": {
                     "name": "حاجز",
@@ -2471,10 +2632,6 @@
                     "name": "طريق الخيول",
                     "terms": "طريق الخيول, ممر للخيول"
                 },
-                "highway/bus_stop": {
-                    "name": "محطة باص",
-                    "terms": "موقف باصات, محطة باصات"
-                },
                 "highway/crossing": {
                     "name": "معبر طريق",
                     "terms": "معبر; عبور; عبور طريق; عبور شارع; معبر شارع; معبر طريق"
@@ -2685,10 +2842,6 @@
                     "name": "غابة",
                     "terms": "غابة"
                 },
-                "landuse/garages": {
-                    "name": "جراجات",
-                    "terms": "جراج; جراج سيارات; موقف; موقف سيارات; ركن; ركنة"
-                },
                 "landuse/grass": {
                     "name": "عشب",
                     "terms": "عشب, غطاء أخضر"
@@ -2727,6 +2880,10 @@
                     "name": "بستان",
                     "terms": " بستان, بيارة, أشجار البستان"
                 },
+                "landuse/plant_nursery": {
+                    "name": "مشتل",
+                    "terms": "مشتل"
+                },
                 "landuse/quarry": {
                     "name": "محجر",
                     "terms": "محجر"
@@ -2747,9 +2904,17 @@
                     "name": "الترفيه",
                     "terms": "الترفيه"
                 },
+                "leisure/bowling_alley": {
+                    "name": "بولينغ",
+                    "terms": "بولينغ، بولينج"
+                },
                 "leisure/common": {
-                    "name": "عام",
+                    "name": "أرض مشترك ",
                     "terms": "مشّاع، متعارف عليه، شعبي، شائع"
+                },
+                "leisure/dance": {
+                    "name": "قاعة الرقص",
+                    "terms": "قاعة الرقص"
                 },
                 "leisure/dog_park": {
                     "name": "حديقة كلاب",
@@ -3065,8 +3230,7 @@
                     "terms": " المحاسب القانوني، المدقق، الحسابات "
                 },
                 "office/administrative": {
-                    "name": "مكتب الإداري ",
-                    "terms": "إدارة، إدارة عامة، مكتب تنظيمي"
+                    "name": "مكتب الإداري "
                 },
                 "office/advertising_agency": {
                     "name": "وكالة إعلانية",
@@ -3083,10 +3247,6 @@
                 "office/charity": {
                     "name": "منظمة خيرية",
                     "terms": "منظمة خيرية"
-                },
-                "office/company": {
-                    "name": "مكتب شركة",
-                    "terms": "إدارة شركة، إدارة مؤسسة، إدارة عامة"
                 },
                 "office/educational_institution": {
                     "name": "مؤسسة تعليمية ",
@@ -3107,6 +3267,10 @@
                 "office/forestry": {
                     "name": "إدارة الغابات",
                     "terms": "إدارة الغابات"
+                },
+                "office/foundation": {
+                    "name": "مؤسسة",
+                    "terms": "مؤسسة"
                 },
                 "office/government": {
                     "name": "مكتب حكومي",
@@ -3129,8 +3293,7 @@
                     "terms": "مكتب محاماة، اﻹدارة القانونية، المحكمة،"
                 },
                 "office/lawyer/notary": {
-                    "name": "كاتب عدل / موثق",
-                    "terms": "كاتب عدل، موثق"
+                    "name": "كاتب عدل / موثق"
                 },
                 "office/newspaper": {
                     "name": "صحيفة",
@@ -3281,9 +3444,6 @@
                     "name": "محول كهربائي",
                     "terms": "محول الكهربائي"
                 },
-                "public_transport/platform": {
-                    "name": "منصة"
-                },
                 "railway": {
                     "name": "سكة حديد"
                 },
@@ -3307,10 +3467,6 @@
                     "name": "قطار جبلي مائل",
                     "terms": "قطار جبلي مائل"
                 },
-                "railway/halt": {
-                    "name": "موقف سكة حديد",
-                    "terms": "موقف إجباري خاص بسكك الحديد، موقف السكة الحديدية"
-                },
                 "railway/level_crossing": {
                     "name": "معبر سكة حديد (طريق)",
                     "terms": "معبر سكة حديد; معبر"
@@ -3319,17 +3475,9 @@
                     "name": "سكة حديدة مفردة",
                     "terms": "سكة حديدة مفردة"
                 },
-                "railway/platform": {
-                    "name": "رصيف سكة حديد",
-                    "terms": "رصيف سكة حديد"
-                },
                 "railway/rail": {
                     "name": "قطار",
                     "terms": "قطار"
-                },
-                "railway/station": {
-                    "name": "محطة سكة حديد",
-                    "terms": "محطة سكة حديد"
                 },
                 "railway/subway": {
                     "name": "مترو الأنفاق",

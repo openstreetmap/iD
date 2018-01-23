@@ -313,8 +313,7 @@
             "created": "Nilikha",
             "about_changeset_comments": "Tungkol changeset comments",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
-            "google_warning": "Nabanggit mo ang Google sa komentong ito: tandaan na pagkopya mula sa Google Maps ay mahigpit na ipinagbabawal.",
-            "google_warning_link": "http://www.openstreetmap.org/copyright"
+            "google_warning": "Nabanggit mo ang Google sa komentong ito: tandaan na pagkopya mula sa Google Maps ay mahigpit na ipinagbabawal."
         },
         "contributors": {
             "list": "Edits nina {users}",
@@ -371,18 +370,15 @@
         "background": {
             "title": "\"Background\" o \"imagery\"",
             "description": "Mga setting ng \"background\" o \"imagery\"",
-            "percent_brightness": "{opacity}% Pagkalinaw",
             "none": "Wala",
             "best_imagery": "Pinakakilalang pinagmulan ng imaheng ito para sa lokasyon na ito",
             "custom": "Custom",
             "custom_button": "I-edit ang custom na background",
-            "fix_misalignment": "Baguhin ang imagery offset",
-            "imagery_source_faq": "Saan nangagaling ang imaheng ito?",
             "reset": "I-reset",
             "minimap": {
-                "description": "minimap",
                 "tooltip": "Ipakita ang naka-zoom out na mapa upang makatulong na mahanap ang mga lugar na kasalukuyang ipinapakita."
-            }
+            },
+            "fix_misalignment": "Baguhin ang imagery offset"
         },
         "map_data": {
             "title": "Data ng mapa",
@@ -798,36 +794,8 @@
                     "label": "Kapasidad",
                     "placeholder": "50, 100, 200"
                 },
-                "cardinal_direction": {
-                    "label": "Direksyon",
-                    "options": {
-                        "E": "silangan",
-                        "ENE": "silangang-hilagang-silangan",
-                        "ESE": "silangang-timog-silangan",
-                        "N": "Hilaga",
-                        "NE": "Hilagang-silangan",
-                        "NNE": "hilagang-hiliagang-silangan",
-                        "NNW": "hilagang-hiliagang-kanluran",
-                        "NW": "Hilagang-kanluran",
-                        "S": "Timog",
-                        "SE": "Timog-silangan",
-                        "SSE": "timog-timog-silangan",
-                        "SSW": "Timog-timog-kanluran",
-                        "SW": "Timog-kanluran",
-                        "W": "Kanluran",
-                        "WNW": "Kanlurang-hilagang-kanluran",
-                        "WSW": "Kanlurang-timog-kanluran"
-                    }
-                },
                 "castle_type": {
                     "label": "uri"
-                },
-                "clock_direction": {
-                    "label": "direksyon",
-                    "options": {
-                        "anticlockwise": "paikot sa kaliwa",
-                        "clockwise": "paikot sa kanan"
-                    }
                 },
                 "collection_times": {
                     "label": "Mga oras ng koleksyon"

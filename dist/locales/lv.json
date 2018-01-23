@@ -194,7 +194,6 @@
         "background": {
             "title": "Fons",
             "description": "Fona iestatījumi",
-            "percent_brightness": "{opacity}% caurspīdīgums",
             "reset": "Atiestatīt"
         },
         "feature": {
@@ -345,9 +344,6 @@
                 },
                 "capacity": {
                     "label": "Ietilpība"
-                },
-                "cardinal_direction": {
-                    "label": "Virziens"
                 },
                 "construction": {
                     "label": "Tips"
@@ -647,9 +643,6 @@
                 "highway": {
                     "name": "Šoseja"
                 },
-                "highway/bus_stop": {
-                    "name": "Autobusa pietura"
-                },
                 "highway/cycleway": {
                     "name": "Veloceliņš"
                 },
@@ -883,9 +876,6 @@
                 },
                 "railway/rail": {
                     "name": "Sliedes"
-                },
-                "railway/station": {
-                    "name": "Dzelzceļa stacija"
                 },
                 "railway/subway": {
                     "name": "Metro"

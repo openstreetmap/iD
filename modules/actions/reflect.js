@@ -4,10 +4,10 @@ import {
 } from 'd3-polygon';
 
 import {
-    geoEuclideanDistance,
     geoExtent,
-    geoInterp,
-    geoRotate
+    geoRotate,
+    geoVecInterp,
+    geoVecLength
 } from '../geo';
 
 import { utilGetAllNodes } from '../util';
@@ -69,7 +69,7 @@ export function actionReflect(reflectIds, projection) {
             q2 = [(ssr.poly[1][0] + ssr.poly[2][0]) / 2, (ssr.poly[1][1] + ssr.poly[2][1]) / 2 ],
             p, q;
 
-        var isLong = (geoEuclideanDistance(p1, q1) > geoEuclideanDistance(p2, q2));
+        var isLong = (geoVecLength(p1, q1) > geoVecLength(p2, q2));
         if ((useLongAxis && isLong) || (!useLongAxis && !isLong)) {
             p = p1;
             q = q1;
@@ -92,7 +92,7 @@ export function actionReflect(reflectIds, projection) {
                 b * (c[0] - p[0]) - a * (c[1] - p[1]) + p[1]
             ];
             var loc2 = projection.invert(c2);
-            node = node.move(geoInterp(node.loc, loc2, t));
+            node = node.move(geoVecInterp(node.loc, loc2, t));
             graph = graph.replace(node);
         }
 

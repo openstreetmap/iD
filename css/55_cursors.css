@@ -1,5 +1,10 @@
 /* Cursors */
 
+.nope,
+.nope * {
+    cursor: not-allowed !important;
+}
+
 .map-in-map,
 #map {
     cursor: auto; /* Opera */
@@ -47,16 +52,6 @@
 .mode-select .behavior-multiselect .selected {
     cursor: pointer; /* Opera */
     cursor: url(img/cursor-select-remove.png), pointer; /* FF */
-}
-
-#map .point:active,
-#map .vertex:active,
-#map .line:active,
-#map .area:active,
-#map .midpoint:active,
-#map .mode-select .selected {
-    cursor: pointer; /* Opera */
-    cursor: url(img/cursor-select-acting.png), pointer; /* FF */
 }
 
 .mode-draw-line #map,

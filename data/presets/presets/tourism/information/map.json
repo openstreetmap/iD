@@ -3,7 +3,8 @@
     "fields": [
         "operator",
         "map_type",
-        "map_size"
+        "map_size",
+        "direction"
     ],
     "geometry": [
         "point",

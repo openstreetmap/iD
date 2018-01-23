@@ -1,6 +1,7 @@
 import _find from 'lodash-es/find';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
+import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
 import { select as d3_select } from 'd3-selection';
 
 import { data } from '../../data';
@@ -8,28 +9,96 @@ import { geoExtent, geoMetersToOffset, geoOffsetToMeters} from '../geo';
 import { rendererBackgroundSource } from './background_source';
 import { rendererTileLayer } from './tile_layer';
 import { utilQsString, utilStringQs } from '../util';
+import { utilDetect } from '../util/detect';
 import { utilRebind } from '../util/rebind';
 
 
 export function rendererBackground(context) {
-    var dispatch = d3_dispatch('change'),
-        baseLayer = rendererTileLayer(context).projection(context.projection),
-        overlayLayers = [],
-        backgroundSources;
+    var dispatch = d3_dispatch('change');
+    var detected = utilDetect();
+    var baseLayer = rendererTileLayer(context).projection(context.projection);
+    var _overlayLayers = [];
+    var _backgroundSources = [];
+    var _brightness = 1;
+    var _contrast = 1;
+    var _saturation = 1;
+    var _sharpness = 1;
 
 
     function background(selection) {
+
+        var baseFilter = '';
+        if (detected.cssfilters) {
+            if (_brightness !== 1) {
+                baseFilter += 'brightness(' + _brightness + ')';
+            }
+            if (_contrast !== 1) {
+                baseFilter += 'contrast(' + _contrast + ')';
+            }
+            if (_saturation !== 1) {
+                baseFilter += 'saturate(' + _saturation + ')';
+            }
+            if (_sharpness < 1) {  // gaussian blur
+                var blur = d3_interpolateNumber(0.5, 5)(1 - _sharpness);
+                baseFilter += 'blur(' + blur + 'px)';
+            }
+        }
+
         var base = selection.selectAll('.layer-background')
             .data([0]);
 
-        base.enter()
+        base = base.enter()
             .insert('div', '.layer-data')
             .attr('class', 'layer layer-background')
-            .merge(base)
+            .merge(base);
+
+        if (detected.cssfilters) {
+            base.style('filter', baseFilter || null);
+        } else {
+            base.style('opacity', _brightness);
+        }
+
+
+        var imagery = base.selectAll('.layer-imagery')
+            .data([0]);
+
+        imagery.enter()
+            .append('div')
+            .attr('class', 'layer layer-imagery')
+            .merge(imagery)
             .call(baseLayer);
 
+
+        var maskFilter = '';
+        var mixBlendMode = '';
+        if (detected.cssfilters && _sharpness > 1) {  // apply unsharp mask
+            mixBlendMode = 'overlay';
+            maskFilter = 'saturate(0) blur(3px) invert(1)';
+
+            var contrast = _sharpness - 1;
+            maskFilter += ' contrast(' + contrast + ')';
+
+            var brightness = d3_interpolateNumber(1, 0.85)(_sharpness - 1);
+            maskFilter += ' brightness(' + brightness + ')';
+        }
+
+        var mask = base.selectAll('.layer-unsharp-mask')
+            .data(detected.cssfilters && _sharpness > 1 ? [0] : []);
+
+        mask.exit()
+            .remove();
+
+        mask.enter()
+            .append('div')
+            .attr('class', 'layer layer-mask layer-unsharp-mask')
+            .merge(mask)
+            .call(baseLayer)
+            .style('filter', maskFilter || null)
+            .style('mix-blend-mode', mixBlendMode || null);
+
+
         var overlays = selection.selectAll('.layer-overlay')
-            .data(overlayLayers, function(d) { return d.source().name(); });
+            .data(_overlayLayers, function(d) { return d.source().name(); });
 
         overlays.exit()
             .remove();
@@ -46,7 +115,7 @@ export function rendererBackground(context) {
         if (context.inIntro()) return;
 
         var b = background.baseLayerSource(),
-            o = overlayLayers
+            o = _overlayLayers
                 .filter(function (d) { return !d.source().isLocatorOverlay() && !d.source().isHidden(); })
                 .map(function (d) { return d.source().id; })
                 .join(','),
@@ -85,7 +154,7 @@ export function rendererBackground(context) {
 
         var imageryUsed = [b.imageryUsed()];
 
-        overlayLayers
+        _overlayLayers
             .filter(function (d) { return !d.source().isLocatorOverlay() && !d.source().isHidden(); })
             .forEach(function (d) { imageryUsed.push(d.source().imageryUsed()); });
 
@@ -124,7 +193,7 @@ export function rendererBackground(context) {
 
 
     background.sources = function(extent) {
-        return backgroundSources.filter(function(source) {
+        return _backgroundSources.filter(function(source) {
             return source.intersects(extent);
         });
     };
@@ -134,7 +203,7 @@ export function rendererBackground(context) {
         if (!_) return;
         baseLayer.dimensions(_);
 
-        overlayLayers.forEach(function(layer) {
+        _overlayLayers.forEach(function(layer) {
             layer.dimensions(_);
         });
     };
@@ -179,7 +248,7 @@ export function rendererBackground(context) {
 
 
     background.findSource = function(id) {
-        return _find(backgroundSources, function(d) {
+        return _find(_backgroundSources, function(d) {
             return d.id && d.id === id;
         });
     };
@@ -192,22 +261,22 @@ export function rendererBackground(context) {
 
     background.showsLayer = function(d) {
         return d.id === baseLayer.source().id ||
-            overlayLayers.some(function(layer) { return d.id === layer.source().id; });
+            _overlayLayers.some(function(layer) { return d.id === layer.source().id; });
     };
 
 
     background.overlayLayerSources = function() {
-        return overlayLayers.map(function (l) { return l.source(); });
+        return _overlayLayers.map(function (l) { return l.source(); });
     };
 
 
     background.toggleOverlayLayer = function(d) {
         var layer;
 
-        for (var i = 0; i < overlayLayers.length; i++) {
-            layer = overlayLayers[i];
+        for (var i = 0; i < _overlayLayers.length; i++) {
+            layer = _overlayLayers[i];
             if (layer.source() === d) {
-                overlayLayers.splice(i, 1);
+                _overlayLayers.splice(i, 1);
                 dispatch.call('change');
                 background.updateImagery();
                 return;
@@ -217,9 +286,10 @@ export function rendererBackground(context) {
         layer = rendererTileLayer(context)
             .source(d)
             .projection(context.projection)
-            .dimensions(baseLayer.dimensions());
+            .dimensions(baseLayer.dimensions()
+        );
 
-        overlayLayers.push(layer);
+        _overlayLayers.push(layer);
         dispatch.call('change');
         background.updateImagery();
     };
@@ -242,6 +312,38 @@ export function rendererBackground(context) {
     };
 
 
+    background.brightness = function(d) {
+        if (!arguments.length) return _brightness;
+        _brightness = d;
+        if (context.mode()) dispatch.call('change');
+        return background;
+    };
+
+
+    background.contrast = function(d) {
+        if (!arguments.length) return _contrast;
+        _contrast = d;
+        if (context.mode()) dispatch.call('change');
+        return background;
+    };
+
+
+    background.saturation = function(d) {
+        if (!arguments.length) return _saturation;
+        _saturation = d;
+        if (context.mode()) dispatch.call('change');
+        return background;
+    };
+
+
+    background.sharpness = function(d) {
+        if (!arguments.length) return _sharpness;
+        _sharpness = d;
+        if (context.mode()) dispatch.call('change');
+        return background;
+    };
+
+
     background.init = function() {
         function parseMap(qmap) {
             if (!qmap) return false;
@@ -258,7 +360,7 @@ export function rendererBackground(context) {
             best;
 
         // Add all the available imagery sources
-        backgroundSources = dataImagery.map(function(source) {
+        _backgroundSources = dataImagery.map(function(source) {
             if (source.type === 'bing') {
                 return rendererBackgroundSource.Bing(source, dispatch);
             } else if (source.id === 'EsriWorldImagery') {
@@ -268,15 +370,15 @@ export function rendererBackground(context) {
             }
         });
 
-        first = backgroundSources.length && backgroundSources[0];
+        first = _backgroundSources.length && _backgroundSources[0];
 
         // Add 'None'
-        backgroundSources.unshift(rendererBackgroundSource.None());
+        _backgroundSources.unshift(rendererBackgroundSource.None());
 
         // Add 'Custom'
         var template = context.storage('background-custom-template') || '';
         var custom = rendererBackgroundSource.Custom(template);
-        backgroundSources.unshift(custom);
+        _backgroundSources.unshift(custom);
 
 
         // Decide which background layer to display
@@ -291,13 +393,14 @@ export function rendererBackground(context) {
             background.baseLayerSource(
                 background.findSource(requested) ||
                 best ||
+                background.findSource(context.storage('background-last-used')) ||
                 background.findSource('Bing') ||
                 first ||
                 background.findSource('none')
             );
         }
 
-        var locator = _find(backgroundSources, function(d) {
+        var locator = _find(_backgroundSources, function(d) {
             return d.overlay && d.default;
         });
 

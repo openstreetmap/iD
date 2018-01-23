@@ -160,8 +160,7 @@
             "no_changes": "އެއްވެސް ބަދަލެއް އަދި ނުގެނޭ"
         },
         "help": {
-            "title": "އެހީ ހޯއްދަވާ",
-            "help": "# އެހީ ހޯއްދަވާ\n\nމިއީ އޯޕަން ސްޓްރީޓް މެޕްގެ އެޑިޓަރެއް. އޯޕަން ސްޓްރީޓް މެޕަކީ ހިލޭ އަދި އެޑިޓްކުރެވޭ ދުނިޔޭގެ ޗާޓެއް\n\nތިސަރަޙައްދުގެ ހުރިހާ މައުލޫމާތެއް އޯޕަން ސްޓްރީޓް މެޕްގައި ހިމެނޭނެ، މިއީ، ހުރިހާ އެންމެނަށް ފަސޭހަވާނެހެން މުޅި ދުނިޔޭގެ ހުރިހާ ހިސާބެއްގައި ބޭނުންކުރަމުންދާ ޗާޓެއް\n\nމިޗާޓަށް ގެންނަވާ ބަދަލުތައް އޯޕަން ސްޓްރީޓް މެޕް ބޭނުންކުރާ ހުރިހާ ފަރާތްތަކަށް ފެންނާނެ\n\nIn order to make an edit, you'll need to\n[log in](https://www.openstreetmap.org/login).\n\nThe [iD editor](http://ideditor.com/) is a collaborative project with [sourcecode available on GitHub](https://github.com/openstreetmap/iD).\n"
+            "title": "އެހީ ހޯއްދަވާ"
         },
         "shortcuts": {
             "browsing": {
@@ -414,9 +413,6 @@
                 },
                 "highway": {
                     "name": "ހައިވޭ"
-                },
-                "highway/bus_stop": {
-                    "name": "ބަސް ހުއްޓި"
                 },
                 "highway/crosswalk": {
                     "name": "ކަަފިހި ހުރަސް"

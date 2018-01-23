@@ -3,7 +3,8 @@
     "fields": [
         "name",
         "operator",
-        "board_type"
+        "board_type",
+        "direction"
     ],
     "geometry": [
         "point",

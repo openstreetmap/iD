@@ -14,15 +14,15 @@ import {
 
 
 export function d3combobox() {
-    var dispatch = d3_dispatch('accept'),
-        container = d3_select(document.body),
-        data = [],
-        suggestions = [],
-        minItems = 2,
-        caseSensitive = false;
+    var dispatch = d3_dispatch('accept');
+    var _container = d3_select(document.body);
+    var _data = [];
+    var _suggestions = [];
+    var _minItems = 2;
+    var _caseSensitive = false;
 
-    var fetcher = function(val, cb) {
-        cb(data.filter(function(d) {
+    var _fetcher = function(val, cb) {
+        cb(_data.filter(function(d) {
             return d.value
                 .toString()
                 .toLowerCase()
@@ -31,11 +31,11 @@ export function d3combobox() {
     };
 
     var combobox = function(input, attachTo) {
-        var idx = -1,
-            wrapper = container
-                .selectAll('div.combobox')
-                .filter(function(d) { return d === input.node(); }),
-            shown = !wrapper.empty();
+        var idx = -1;
+        var wrapper = _container
+            .selectAll('div.combobox')
+            .filter(function(d) { return d === input.node(); });
+        var shown = !wrapper.empty();
 
         input
             .classed('combobox-input', true)
@@ -45,17 +45,17 @@ export function d3combobox() {
             .on('keyup.typeahead', keyup)
             .on('input.typeahead', change)
             .each(function() {
-                var parent = this.parentNode,
-                    sibling = this.nextSibling;
+                var parent = this.parentNode;
+                var sibling = this.nextSibling;
 
                 var caret = d3_select(parent).selectAll('.combobox-caret')
                     .filter(function(d) { return d === input.node(); })
                     .data([input.node()]);
 
                 caret = caret.enter()
-                  .insert('div', function() { return sibling; })
+                    .insert('div', function() { return sibling; })
                     .attr('class', 'combobox-caret')
-                  .merge(caret);
+                    .merge(caret);
 
                 caret
                     .on('mousedown', function () {
@@ -82,7 +82,7 @@ export function d3combobox() {
 
         function show() {
             if (!shown) {
-                wrapper = container
+                wrapper = _container
                     .insert('div', ':first-child')
                     .datum(input.node())
                     .attr('class', 'combobox')
@@ -177,17 +177,17 @@ export function d3combobox() {
         }
 
         function nav(dir) {
-            if (!suggestions.length) return;
-            idx = Math.max(Math.min(idx + dir, suggestions.length - 1), 0);
-            input.property('value', suggestions[idx].value);
+            if (!_suggestions.length) return;
+            idx = Math.max(Math.min(idx + dir, _suggestions.length - 1), 0);
+            input.property('value', _suggestions[idx].value);
             render();
             ensureVisible();
         }
 
         function value() {
-            var value = input.property('value'),
-                start = input.property('selectionStart'),
-                end = input.property('selectionEnd');
+            var value = input.property('value');
+            var start = input.property('selectionStart');
+            var end = input.property('selectionEnd');
 
             if (start && end) {
                 value = value.substring(0, start);
@@ -197,32 +197,45 @@ export function d3combobox() {
         }
 
         function fetch(v, cb) {
-            fetcher.call(input, v, function(_) {
-                suggestions = _;
+            _fetcher.call(input, v, function(_) {
+                _suggestions = _;
                 cb();
             });
         }
 
         function autocomplete() {
-            var v = caseSensitive ? value() : value().toLowerCase();
+            var v = _caseSensitive ? value() : value().toLowerCase();
             idx = -1;
             if (!v) return;
 
-            for (var i = 0; i < suggestions.length; i++) {
-                var suggestion = suggestions[i].value,
-                    compare = caseSensitive ? suggestion : suggestion.toLowerCase();
+            var best = -1;
+            var suggestion, compare;
 
-                if (compare.indexOf(v) === 0) {
-                    idx = i;
-                    input.property('value', suggestion);
-                    input.node().setSelectionRange(v.length, suggestion.length);
-                    return;
+            for (var i = 0; i < _suggestions.length; i++) {
+                suggestion = _suggestions[i].value;
+                compare = _caseSensitive ? suggestion : suggestion.toLowerCase();
+
+                // if search string matches suggestion exactly, pick it..
+                if (compare === v) {
+                    best = i;
+                    break;
+
+                // otherwise lock in the first result that starts with the search string..
+                } else if (best === -1 && compare.indexOf(v) === 0) {
+                    best = i;
                 }
+            }
+
+            if (best !== -1) {
+                idx = best;
+                suggestion = _suggestions[best].value;
+                input.property('value', suggestion);
+                input.node().setSelectionRange(v.length, suggestion.length);
             }
         }
 
         function render() {
-            if (suggestions.length >= minItems && document.activeElement === input.node()) {
+            if (_suggestions.length >= _minItems && document.activeElement === input.node()) {
                 show();
             } else {
                 hide();
@@ -231,7 +244,7 @@ export function d3combobox() {
 
             var options = wrapper
                 .selectAll('a.combobox-option')
-                .data(suggestions, function(d) { return d.value; });
+                .data(_suggestions, function(d) { return d.value; });
 
             options.exit()
                 .remove();
@@ -248,8 +261,8 @@ export function d3combobox() {
                 .order();
 
 
-            var node = attachTo ? attachTo.node() : input.node(),
-                rect = node.getBoundingClientRect();
+            var node = attachTo ? attachTo.node() : input.node();
+            var rect = node.getBoundingClientRect();
 
             wrapper
                 .style('left', rect.left + 'px')
@@ -277,32 +290,32 @@ export function d3combobox() {
     };
 
     combobox.fetcher = function(_) {
-        if (!arguments.length) return fetcher;
-        fetcher = _;
+        if (!arguments.length) return _fetcher;
+        _fetcher = _;
         return combobox;
     };
 
     combobox.data = function(_) {
-        if (!arguments.length) return data;
-        data = _;
+        if (!arguments.length) return _data;
+        _data = _;
         return combobox;
     };
 
     combobox.minItems = function(_) {
-        if (!arguments.length) return minItems;
-        minItems = _;
+        if (!arguments.length) return _minItems;
+        _minItems = _;
         return combobox;
     };
 
     combobox.caseSensitive = function(_) {
-        if (!arguments.length) return caseSensitive;
-        caseSensitive = _;
+        if (!arguments.length) return _caseSensitive;
+        _caseSensitive = _;
         return combobox;
     };
 
     combobox.container = function(_) {
-        if (!arguments.length) return container;
-        container = _;
+        if (!arguments.length) return _container;
+        _container = _;
         return combobox;
     };
 

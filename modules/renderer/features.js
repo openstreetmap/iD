@@ -72,13 +72,13 @@ export function rendererFeatures(context) {
             var q = utilStringQs(window.location.hash.substring(1));
             var disabled = features.disabled();
             if (disabled.length) {
-                q.disable_features = features.disabled().join(',');
+                q.disable_features = disabled.join(',');
             } else {
                 delete q.disable_features;
             }
             window.location.replace('#' + utilQsString(q, true));
+            context.storage('disabled-features', disabled.join(','));
         }
-
         _hidden = features.hidden();
         dispatch.call('change');
         dispatch.call('redraw');
@@ -483,11 +483,16 @@ export function rendererFeatures(context) {
 
 
     features.init = function() {
+        var storage = context.storage('disabled-features');
+        if (storage) {
+            var storageDisabled = storage.replace(/;/g, ',').split(',');
+            storageDisabled.forEach(features.disable);
+        }
+        
         var q = utilStringQs(window.location.hash.substring(1));
-
         if (q.disable_features) {
-            var disabled = q.disable_features.replace(/;/g, ',').split(',');
-            disabled.forEach(features.disable);
+            var hashDisabled = q.disable_features.replace(/;/g, ',').split(',');
+            hashDisabled.forEach(features.disable);
         }
     };
 

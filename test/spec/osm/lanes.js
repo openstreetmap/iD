@@ -16,18 +16,17 @@ describe('iD.Lanes', function() {
                     .to.eql(4);
             });
 
-            it('returns 1 lane for highway=motorway_link', function() {
+            it('returns 2 lanes for highway=motorway_link', function() {
                 expect(iD.Way({tags: { highway: 'motorway_link' }}).lanes().metadata.count, 'motorway_link lanes')
-                    .to.eql(1);
-                expect(iD.Way({tags: { highway: 'motorway_link', oneway: 'yes' }}).lanes().metadata.count, 'motorway_link lanes')
-                    .to.eql(1);
-            });
-
-            it('returns 2 lanes for highway=motorway_link and oneway=no', function() {
+                    .to.eql(2);
                 expect(iD.Way({tags: { highway: 'motorway_link', oneway: 'no' }}).lanes().metadata.count, 'motorway_link lanes')
                     .to.eql(2);
             });
 
+            it('returns 1 lane for highway=motorway_link and oneway=yes', function() {
+                expect(iD.Way({tags: { highway: 'motorway_link', oneway: 'yes' }}).lanes().metadata.count, 'motorway_link lanes')
+                    .to.eql(1);
+            });
         });
 
         describe('trunk', function() {

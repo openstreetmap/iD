@@ -20,8 +20,8 @@ import {
 
 
 export function uiRawMemberEditor(context) {
-    var id,
-        taginfo = services.taginfo;
+    var taginfo = services.taginfo,
+        _entityID;
 
 
     function selectMember(d) {
@@ -53,7 +53,7 @@ export function uiRawMemberEditor(context) {
 
 
     function rawMemberEditor(selection) {
-        var entity = context.entity(id),
+        var entity = context.entity(_entityID),
             memberships = [];
 
         entity.members.slice(0, 1000).forEach(function(member, index) {
@@ -68,19 +68,15 @@ export function uiRawMemberEditor(context) {
         });
 
         var gt = entity.members.length > 1000 ? '>' : '';
-        selection.call(uiDisclosure()
+        selection.call(uiDisclosure(context, 'raw_member_editor', true)
             .title(t('inspector.all_members') + ' (' + gt + memberships.length + ')')
             .expanded(true)
-            .on('toggled', toggled)
+            .updatePreference(false)
+            .on('toggled', function(expanded) {
+                if (expanded) { selection.node().parentNode.scrollTop += 200; }
+            })
             .content(content)
         );
-
-
-        function toggled(expanded) {
-            if (expanded) {
-                selection.node().parentNode.scrollTop += 200;
-            }
-        }
 
 
         function content(wrap) {
@@ -201,8 +197,8 @@ export function uiRawMemberEditor(context) {
 
 
     rawMemberEditor.entityID = function(_) {
-        if (!arguments.length) return id;
-        id = _;
+        if (!arguments.length) return _entityID;
+        _entityID = _;
         return rawMemberEditor;
     };
 

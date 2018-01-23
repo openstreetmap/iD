@@ -1,13 +1,8 @@
 import _extend from 'lodash-es/extend';
 import _groupBy from 'lodash-es/groupBy';
-import _map from 'lodash-es/map';
 
 import { actionDeleteWay } from './delete_way';
-
-import {
-    osmIsInterestingTag,
-    osmJoinWays
-} from '../osm';
+import { osmIsInterestingTag, osmJoinWays } from '../osm';
 
 
 // Join ways at the end node they share.
@@ -27,25 +22,30 @@ export function actionJoin(ids) {
 
 
     var action = function(graph) {
-        var ways = ids.map(graph.entity, graph),
-            survivor = ways[0];
+        var ways = ids.map(graph.entity, graph);
+        var survivorID = ways[0].id;
 
         // Prefer to keep an existing way.
         for (var i = 0; i < ways.length; i++) {
             if (!ways[i].isNew()) {
-                survivor = ways[i];
+                survivorID = ways[i].id;
                 break;
             }
         }
 
-        var joined = osmJoinWays(ways, graph)[0];
+        var sequences = osmJoinWays(ways, graph);
+        var joined = sequences[0];
 
-        survivor = survivor.update({nodes: _map(joined.nodes, 'id')});
+        // We might need to reverse some of these ways before joining them.  #4688
+        // `joined.actions` property will contain any actions we need to apply.
+        graph = sequences.actions.reduce(function(g, action) { return action(g); }, graph);
+
+        var survivor = graph.entity(survivorID);
+        survivor = survivor.update({ nodes: joined.nodes.map(function(n) { return n.id; }) });
         graph = graph.replace(survivor);
 
         joined.forEach(function(way) {
-            if (way.id === survivor.id)
-                return;
+            if (way.id === survivorID) return;
 
             graph.parentRelations(way).forEach(function(parent) {
                 graph = graph.replace(parent.replaceMember(way, survivor));
@@ -70,10 +70,10 @@ export function actionJoin(ids) {
         if (joined.length > 1)
             return 'not_adjacent';
 
-        var nodeIds = _map(joined[0].nodes, 'id').slice(1, -1),
-            relation,
-            tags = {},
-            conflicting = false;
+        var nodeIds = joined[0].nodes.map(function(n) { return n.id; }).slice(1, -1);
+        var relation;
+        var tags = {};
+        var conflicting = false;
 
         joined[0].forEach(function(way) {
             var parents = graph.parentRelations(way);

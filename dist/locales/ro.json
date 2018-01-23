@@ -228,8 +228,7 @@
             "warnings": "Atenționări",
             "modified": "Modificat",
             "deleted": "Șters",
-            "created": "Creat",
-            "google_warning_link": "http://www.openstreetmap.org/copyright"
+            "created": "Creat"
         },
         "contributors": {
             "list": "Editări făcute de {user}",
@@ -341,19 +340,16 @@
             "title": "Fundal",
             "description": "Setări fundal",
             "key": "B",
-            "percent_brightness": "{opacity}% luminozitate",
             "none": "Niciunul",
             "best_imagery": "Cea mai cunoscută sursă de imagine pentru această locație",
             "switch": "Schimbă înapoi la acest fundal",
             "custom": "Personalizat",
             "custom_button": "Editează fundalul customizat",
-            "fix_misalignment": "Ajustează ofset de imagine",
-            "imagery_source_faq": "De unde vine imaginea?",
             "reset": "resetează",
             "minimap": {
-                "description": "Minimap",
                 "key": "/"
-            }
+            },
+            "fix_misalignment": "Ajustează ofset de imagine"
         },
         "map_data": {
             "title": "Date de Hartă",
@@ -949,36 +945,8 @@
                     "label": "Capacitate",
                     "placeholder": "50, 100, 200..."
                 },
-                "cardinal_direction": {
-                    "label": "Direcție",
-                    "options": {
-                        "E": "Est",
-                        "ENE": "Est-nordest",
-                        "ESE": "Est-sudest",
-                        "N": "Nord",
-                        "NE": "Nordest",
-                        "NNE": "Nord-nordest",
-                        "NNW": "Nord-nordvest",
-                        "NW": "Nordvest",
-                        "S": "Sud",
-                        "SE": "Sudest",
-                        "SSE": "Sud-sudest",
-                        "SSW": "Sud-sudvest",
-                        "SW": "Sudvest",
-                        "W": "Vest",
-                        "WNW": "Vest-nordvest",
-                        "WSW": "Vest-sudvest"
-                    }
-                },
                 "castle_type": {
                     "label": "Tip"
-                },
-                "clock_direction": {
-                    "label": "Direcție",
-                    "options": {
-                        "anticlockwise": "În contra direcției ceasornicului",
-                        "clockwise": "În direcția ceasornicului"
-                    }
                 },
                 "clothes": {
                     "label": "Haine"
@@ -1335,13 +1303,6 @@
                 "par": {
                     "placeholder": "3, 4, 5..."
                 },
-                "parallel_direction": {
-                    "label": "Direcție",
-                    "options": {
-                        "backward": "Înapoi",
-                        "forward": "Înainte"
-                    }
-                },
                 "parking": {
                     "label": "Tip"
                 },
@@ -1383,11 +1344,6 @@
                 },
                 "railway": {
                     "label": "Tip"
-                },
-                "recycling_type": {
-                    "options": {
-                        "container": "Container"
-                    }
                 },
                 "ref_aeroway_gate": {
                     "label": "Număr de Poartă"
@@ -1636,9 +1592,6 @@
                 "aerialway/rope_tow": {
                     "terms": "<translate with synonyms or related terms for 'Rope Tow Lift', separated by commas>"
                 },
-                "aerialway/station": {
-                    "terms": "<translate with synonyms or related terms for 'Aerialway Station', separated by commas>"
-                },
                 "aerialway/t-bar": {
                     "terms": "<translate with synonyms or related terms for 'T-bar Lift', separated by commas>"
                 },
@@ -1725,10 +1678,6 @@
                     "name": "Schimbare Valută",
                     "terms": "<translate with synonyms or related terms for 'Currency Exchange', separated by commas>"
                 },
-                "amenity/bus_station": {
-                    "name": "Stație de autobuz",
-                    "terms": "<translate with synonyms or related terms for 'Bus Station', separated by commas>"
-                },
                 "amenity/cafe": {
                     "name": "Cafenea",
                     "terms": "<translate with synonyms or related terms for 'Cafe', separated by commas>"
@@ -1814,10 +1763,6 @@
                 "amenity/fast_food": {
                     "name": "Fast Food",
                     "terms": "<translate with synonyms or related terms for 'Fast Food', separated by commas>"
-                },
-                "amenity/ferry_terminal": {
-                    "name": "Terminal de Bac",
-                    "terms": "<translate with synonyms or related terms for 'Ferry Terminal', separated by commas>"
                 },
                 "amenity/fire_station": {
                     "name": "Pompieri",
@@ -1966,10 +1911,6 @@
                 },
                 "amenity/ranger_station": {
                     "terms": "<translate with synonyms or related terms for 'Ranger Station', separated by commas>"
-                },
-                "amenity/recycling": {
-                    "name": "Reciclare",
-                    "terms": "<translate with synonyms or related terms for 'Recycling', separated by commas>"
                 },
                 "amenity/recycling_centre": {
                     "name": "Centru de Reciclare",
@@ -2532,10 +2473,6 @@
                 "highway/bridleway": {
                     "terms": "<translate with synonyms or related terms for 'Bridle Path', separated by commas>"
                 },
-                "highway/bus_stop": {
-                    "name": "Stație de autobuz",
-                    "terms": "<translate with synonyms or related terms for 'Bus Stop', separated by commas>"
-                },
                 "highway/corridor": {
                     "name": "Coridor Interior",
                     "terms": "<translate with synonyms or related terms for 'Indoor Corridor', separated by commas>"
@@ -2782,10 +2719,6 @@
                 "landuse/forest": {
                     "name": "Pădure",
                     "terms": "<translate with synonyms or related terms for 'Forest', separated by commas>"
-                },
-                "landuse/garages": {
-                    "name": "Garaje",
-                    "terms": "<translate with synonyms or related terms for 'Garages', separated by commas>"
                 },
                 "landuse/grass": {
                     "name": "Iarbă",
@@ -3284,12 +3217,7 @@
                     "terms": "<translate with synonyms or related terms for 'Office', separated by commas>"
                 },
                 "office/administrative": {
-                    "name": "Oficiu Administrativ",
-                    "terms": "<translate with synonyms or related terms for 'Administrative Office', separated by commas>"
-                },
-                "office/company": {
-                    "name": "Oficiu de Companie",
-                    "terms": "<translate with synonyms or related terms for 'Company Office', separated by commas>"
+                    "name": "Oficiu Administrativ"
                 },
                 "office/coworking": {
                     "terms": "<translate with synonyms or related terms for 'Coworking Space', separated by commas>"
@@ -3326,8 +3254,7 @@
                     "terms": "<translate with synonyms or related terms for 'Law Office', separated by commas>"
                 },
                 "office/lawyer/notary": {
-                    "name": "Notar",
-                    "terms": "<translate with synonyms or related terms for 'Notary Office', separated by commas>"
+                    "name": "Notar"
                 },
                 "office/ngo": {
                     "name": "Oficiu NGO",
@@ -3453,14 +3380,6 @@
                     "name": "Transformator",
                     "terms": "<translate with synonyms or related terms for 'Transformer', separated by commas>"
                 },
-                "public_transport/platform": {
-                    "name": "Platformă",
-                    "terms": "<translate with synonyms or related terms for 'Platform', separated by commas>"
-                },
-                "public_transport/stop_position": {
-                    "name": "Poziție Stop",
-                    "terms": "<translate with synonyms or related terms for 'Stop Position', separated by commas>"
-                },
                 "railway": {
                     "name": "Cale Ferată"
                 },
@@ -3480,10 +3399,6 @@
                     "name": "Frânghie",
                     "terms": "<translate with synonyms or related terms for 'Funicular', separated by commas>"
                 },
-                "railway/halt": {
-                    "name": "Stație de Cale Ferată",
-                    "terms": "<translate with synonyms or related terms for 'Railway Halt', separated by commas>"
-                },
                 "railway/level_crossing": {
                     "name": "Traversare de Cale Ferată (Stradă)",
                     "terms": "<translate with synonyms or related terms for 'Railway Crossing (Road)', separated by commas>"
@@ -3496,17 +3411,9 @@
                     "name": "Cale Ferată Îngustă",
                     "terms": "<translate with synonyms or related terms for 'Narrow Gauge Rail', separated by commas>"
                 },
-                "railway/platform": {
-                    "name": "Platformă de Cale Ferată",
-                    "terms": "<translate with synonyms or related terms for 'Railway Platform', separated by commas>"
-                },
                 "railway/rail": {
                     "name": "Șină",
                     "terms": "<translate with synonyms or related terms for 'Rail', separated by commas>"
-                },
-                "railway/station": {
-                    "name": "Stație de Cale Ferată",
-                    "terms": "<translate with synonyms or related terms for 'Railway Station', separated by commas>"
                 },
                 "railway/subway": {
                     "name": "Metrou",
@@ -3519,10 +3426,6 @@
                 "railway/tram": {
                     "name": "Tranvai",
                     "terms": "<translate with synonyms or related terms for 'Tram', separated by commas>"
-                },
-                "railway/tram_stop": {
-                    "name": "Oprire de Tranvai",
-                    "terms": "<translate with synonyms or related terms for 'Tram Stop', separated by commas>"
                 },
                 "relation": {
                     "name": "Relație",
@@ -3779,10 +3682,6 @@
                 "shop/jewelry": {
                     "name": "Giuvaer",
                     "terms": "<translate with synonyms or related terms for 'Jeweler', separated by commas>"
-                },
-                "shop/kiosk": {
-                    "name": "Chioșc de Ziare",
-                    "terms": "<translate with synonyms or related terms for 'News Kiosk', separated by commas>"
                 },
                 "shop/kitchen": {
                     "name": "Magazin de Bucătărie",
@@ -4338,33 +4237,18 @@
                 "name": "Inspector OSM: Adăugare de taguri"
             },
             "Waymarked_Trails-Cycling": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, date de hartă contribuitori OpenStreetMap, ODbL 1.0"
-                },
                 "name": "Trasee Marcate: Bicicletă"
             },
             "Waymarked_Trails-Hiking": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, date de hartă contribuitori OpenStreetMap, ODbL 1.0"
-                },
                 "name": "Trasee Marcate: Drumeție"
             },
             "Waymarked_Trails-MTB": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, date de hartă contribuitori OpenStreetMap, ODbL 1.0"
-                },
                 "name": "Trasee Marcate: MTB"
             },
             "Waymarked_Trails-Skating": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, date de hartă contribuitori OpenStreetMap, ODbL 1.0"
-                },
                 "name": "Trasee Marcate: Skating"
             },
             "Waymarked_Trails-Winter_Sports": {
-                "attribution": {
-                    "text": "© Michael Spreng, CC by-SA 3.0, date de hartă contribuitori OpenStreetMap, ODbL 1.0"
-                },
                 "name": "Trasee Marcate: Sporturi de iarnă"
             },
             "basemap.at": {

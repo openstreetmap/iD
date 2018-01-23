@@ -25,6 +25,9 @@
             },
             "draw_line": {
                 "tail": " Cliquez pour ajouter des nœuds à la ligne. Cliquez sur d'autres lignes pour y connecter la ligne, et double-cliquez pour terminer la ligne."
+            },
+            "drag_node": {
+                "connected_to_hidden": "Ceci ne peut être édité parce que c'est connecté à un élément caché."
             }
         },
         "operations": {
@@ -273,7 +276,7 @@
                 },
                 "key": "X",
                 "annotation": {
-                    "line": "ligne coupée.",
+                    "line": "Couper une ligne.",
                     "area": "contour d'un polygone coupé.",
                     "multiple": "{n} lignes/contours de polygone coupés."
                 },
@@ -342,7 +345,7 @@
             "about_changeset_comments": "À propos des commentaires de groupe de modifications",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/FR:Bons_commentaires_de_groupe_de_modifications",
             "google_warning": "Vous avez mentionné Google dans ce commentaire : rappelez-vous que copier depuis Google Maps est strictement interdit.",
-            "google_warning_link": "http://www.openstreetmap.org/copyright"
+            "google_warning_link": "https://www.openstreetmap.org/copyright"
         },
         "contributors": {
             "list": "Modifications de {users}",
@@ -361,7 +364,9 @@
                 "accuracy": "Précision",
                 "unknown": "Inconnu",
                 "show_tiles": "Afficher la couche",
-                "hide_tiles": "Masquer le couche"
+                "hide_tiles": "Masquer le couche",
+                "show_vintage": "Afficher Vintage",
+                "hide_vintage": "Masquer Vintage"
             },
             "history": {
                 "key": "H",
@@ -392,7 +397,8 @@
                 "centroid": "Centroïde",
                 "location": "Emplacement",
                 "metric": "Métrique",
-                "imperial": "Anglo-saxon"
+                "imperial": "Anglo-saxon",
+                "node_count": "Nombre de points"
             }
         },
         "geometry": {
@@ -458,22 +464,28 @@
             "title": "Fond de carte",
             "description": "Paramètres du fond de carte",
             "key": "B",
-            "percent_brightness": "{opacity}% luminosité",
+            "backgrounds": "Fond de carte",
             "none": "Aucun",
             "best_imagery": "Meilleur fond de carte connu pour cet endroit",
             "switch": "Revenir à cet arrière-plan",
             "custom": "Personnalisé",
             "custom_button": "Modifier le fond personnalisé",
             "custom_prompt": "Entrez un modèle URL de tuile. Les symboles valide sont : \n - {zoom}/{z}, {x}, {y} pour schéma de tuile Z/X/Y\n- {ty} pour basculer vers le style de coordonées TMS Y\n- {u} pour le schéma quadri-tuiles\n- {switch:a,b,c} pour le multiplexage de serveur DNS\n\nExemple:\n{example}",
-            "fix_misalignment": "Ajuster le décalage du fond de carte",
-            "imagery_source_faq": "D'où provient ce fond de carte ?",
+            "overlays": "Calques",
+            "imagery_source_faq": "Info imagerie / Signaler un problème",
             "reset": "réinitialiser",
-            "offset": "«Glissez» partout dans la zone grise ci-dessous pour ajuster le décalage d'image, ou entrez les valeurs de décalage en mètres.",
+            "display_options": "Options d'affichage",
+            "brightness": "Luminosité",
+            "contrast": "Contraste",
+            "saturation": "Saturation",
+            "sharpness": "Finesse",
             "minimap": {
-                "description": "Minicarte",
+                "description": "Afficher la petite carte",
                 "tooltip": "Montre une carte de vue d'ensemble pour aider à localiser la zone actuellement affichée.",
                 "key": "/"
-            }
+            },
+            "fix_misalignment": "Ajuster le décalage du fond de carte",
+            "offset": "«Glissez» partout dans la zone grise ci-dessous pour ajuster le décalage d'image, ou entrez les valeurs de décalage en mètres."
         },
         "map_data": {
             "title": "Données cartographiques",
@@ -570,6 +582,7 @@
             "status_code": "Le serveur a renvoyé le code de statut {code}",
             "unknown_error_details": "Veuillez vérifier que votre ordinateur est connecté au réseau.",
             "uploading": "Envoi des modifications vers OpenStreetMap...",
+            "conflict_progress": "Détection des conflits: {num} de {total}",
             "unsaved_changes": "Vous avez des modifications non enregistrées",
             "conflict": {
                 "header": "Résoudre les modifications conflictuelles",
@@ -668,16 +681,102 @@
         "mapillary": {
             "view_on_mapillary": "Voir cette image sur Mapillary"
         },
+        "openstreetcam_images": {
+            "tooltip": "Photos de la rue issues d'OpenStreetCam",
+            "title": "Surcouche photo (OpenStreetCam)"
+        },
+        "openstreetcam": {
+            "view_on_openstreetcam": "Voir cette image sur OpenStreetCam"
+        },
         "help": {
             "title": "Aide",
             "key": "H",
-            "help": "# Aide\n\nCeci est un éditeur pour [OpenStreetMap](http://www.openstreetmap.org/), la\ncarte du monde libre et éditable. Vous pouvez l'utiliser pour ajouter ou mettre à jour\nles données dans votre zone, et participer ainsi à la réalisation d'une carte du monde libre et à données ouvertes\nmeilleure pour tout le monde.\n\nLes modifications que vous réaliserez sur cette carte seront visibles par tous les utilisateurs d'OpenStreetMap. Pour commencer à modifier, vous devez vous [connecter](https://www.openstreetmap.org/login).\n\nL'[éditeur iD](http://ideditor.com/) est un projet collaboratif dont le [code\nsource est disponible sur GitHub](https://github.com/openstreetmap/iD).\n",
-            "editing_saving": "# Modification et sauvegarde\n\nCet éditeur est conçu pour fonctionner essentiellement en ligne, et vous êtes en train d'y accéder depuis un site Web.\n\n### Sélection des éléments\n\nPour sélectionner un élément de la carte, comme une route ou un point\nd'intérêt, cliquez sur cet élément sur la carte. L'élément sélectionné\nest mis en surbrillance, et un panneau apparaît sur le côté avec des\ndétails sur l'élément. Si vous cliquez droit sur l'élément, un menu apparaît,\navec des actions que vous pouvez faire avec l'élément.\n\nPour sélectionner plusieurs éléments, maintenez la touche « Maj » enfoncée.\nPuis vous pouvez soit cliquer sur chaque élément que vous voulez sélectionner,\nsoit dessiner sur la carte un contour autour de ces éléments. Tous les\npoints dans le « lasso » dessiné seront sélectionnés.\n\n### Sauvegarde des modifications\n\nQuand vous faites des modifications comme changer des routes, des bâtiments,\net des places, ces modifications sont stockées localement jusqu'à ce que\nvous les sauvegardiez sur le serveur. Ne vous inquiétez pas si vous faites\nune erreur : vous pouvez annuler vos modifications en cliquant sur\nle bouton « Annuler », et les refaire en cliquant sur le bouton « Rétablir ».\n\nCliquez sur « Sauvegarder » pour terminer un groupe de modifications\n(par exemple, si vous avez complété une partie de la ville et si vous voulez\ncommencer une nouvelle zone). Vous aurez la possibilité de passer en revue\nce que vous avez fait, et l'éditeur fournit quelques suggestions utiles\nainsi que des avertissements si quelque chose semble être incorrect parmi\nvos modifications.\n\nSi tout semble correct, vous pouvez saisir un petit commentaire pour\nexpliquer vos modifications, et cliquer sur « Envoyer » pour envoyer les modifications\nà [OpenStreetMap.org](http://www.openstreetmap.org/), où elles seront\nvisibles par tous les utilisateurs, et disponibles pour que d'autres viennent\nles enrichir et les améliorer.\n\nSi vous ne pouvez pas terminer vos modifications en une fois, vous pouvez\nquitter la fenêtre de votre éditeur et revenir plus tard (sur le même ordinateur et\nle même navigateur) : l'éditeur vous proposera de restaurer votre travail.\n\n### Utilisation de l'éditeur\n\nVous pouvez afficher une liste des raccourcis clavier en appuyant sur la touche « ? ».\n",
-            "roads": "# Routes\n\nVous pouvez créer, mettre à jour et supprimer des routes à l'aide de l'éditeur. Il peut s'agir de tous types de routes : chemins, autoroutes, pistes cyclables, et plus encore : toute voie régulièrement fréquentée peut être cartographiée.\n\n### Sélection\n\nCliquez sur une route pour la sélectionner. Elle sera alors surlignée et un menu 'outils' apparaîtra sur la carte, ainsi qu'une barre d'état affichant des informations supplémentaires.\n\n### Modification\n\nIl est fréquent que les routes ne soient pas bien alignées avec l'imagerie satellite ou avec les traces GPS. Vous pouvez ajuster et corriger la position des routes.Cliquez d'abord sur la route à modifier. Elle est alors surlignée et des points de contrôle apparaissent qui permettent de corriger sa position. Pour ajouter des points de contrôle, double-cliquez sur un segment de la route sans nœuds.Si la route est connectée à une autre, mais que la connexion est incorrecte, vous pouvez déplacer un de ses points de contrôle sur la seconde route pour corriger la connexion. Des routes bien connectées sont essentielles pour la carte et pour fournir de bonnes informations d'itinéraire.Vous pouvez également cliquer sur l'outil 'Déplacer' ou appuyer sur le raccourci `M` pour déplacer l'ensemble de la route en une fois, puis cliquer de nouveau une fois pour sauvegarder le déplacement\n\n### Suppression\n\nSi une route est complètement fausse - c'est-à-dire qu'elle n'apparaît pas sur l'image satellite, et que dans l'idéal, vous avez confirmé qu'elle n'existe pas sur le terrain - vous pouvez la supprimer, ce qui l'enlèvera de la carte. Faites attention lorsque vous supprimez des éléments : comme n'importe quelle autre modification, le résultat sera visible par tout le monde sur la carte. Les photos aériennes sont souvent dépassées et la route est peut-être tout simplement récente.Pour supprimer une route, sélectionnez-la en cliquant dessus, puis cliquez sur l'icône 'Poubelle' ou appuyez sur la touche 'Suppr'.\n\n### Création\n\nVous avez constaté qu'une route de votre connaissance manque à la carte ? Cliquez sur l'icône 'Ligne' en haut à gauche de l'éditeur ou appuyez sur le raccourci `2` pour dessiner une route. Pour commencer le dessin, cliquez sur l'endroit où commence la route. Si elle commence à l'embranchement d'une autre route, commencez le dessin en cliquant à l'endroit de la connexion.Cliquez ensuite régulièrement le long de la route pour ajouter des points, en utilisant l'imagerie satellite comme référence. Si la route que vous dessinez croise une autre route, connectez les deux en cliquant à l'endroit de l'intersection. Lorsque vous avez terminé le dessin, double-cliquez ou appuyez sur 'Entrée'.\n",
-            "gps": "# GPS\n\nLe GPS est la source la plus fiable de données pour OpenStreetMap. Cet éditeur\nsupporte les traces en local - fichiers `.gpx` sur votre ordinateur. Vous pouvez collecter\nce genre de trace GPS à l'aide de nombreuses applications pour smartphones ainsi\nqu'avec du matériel GPS personnel.\n\nPour savoir comment effectuer un relevé GPS, lisez\n[Sur le terrain avec un GPS](http://learnosm.org/fr/beginner/using-gps/).\n\nPour utiliser un tracé GPX pour cartographier, effectuer un \"glissé-déposé\" du\nfichier GPX dans l'éditeur de cartes. S'il est reconnu, une ligne violette en\nsurbrillance apparaîtra sur la carte. Cliquez dans le menu \"Données de la carte\"\nsur le côté droit pour activer, désactiver, ou zoomer dans ce nouveau calque GPX.\n\nLe tracé GPX n'est pas directement envoyé sur OpenStreetMap - le meilleur moyen de\nl'utiliser est de dessiner sur la carte, en l'utilisant comme guide pour les\nnouveaux éléments que vous ajoutez, et aussi de le\n[charger dans OpenStreetMap](http://www.openstreetmap.org/trace/create) pour que\nles autres utilisateurs puissent s'en servir.\n",
-            "imagery": "# Fond de carte\n\nLes photos aériennes sont une source importante pour cartographier. Une\ncompilation de photos prises d'avion, imageries satellites, et autres sources\nlibre d'utilisation sont disponibles dans l'éditeur dans le menu \"Configuration\ndu fond de carte\" à gauche.\n\nPar défaut, l'imagerie aérienne de [Bing Maps](http://www.bing.com/maps/)\nest utilisée dans l'éditeur, mais lorsque vous zoomez sur la carte, d'autres sources sont parfois disponibles dans certaines zones. Certains pays tels que la France, les États-Unis ou le Danemark disposent d'images de très haute qualité sur certaines zones.\n\nCertaines images sont parfois décalées par rapport aux données, notamment\nà cause d'un mauvais calibrage. Si vous voyez de nombreux éléments tous décalés par rapport au fond de carte, ne déplacez pas immédiatement ces éléments. À la place, vous pouvez ajuster le fond de carte afin qu'il soit aligné aux données en cliquant sur \"Ajuster le décalage du fond de carte\" en bas de l'interface de configuration du fond de carte.\n",
-            "addresses": "# Adresses\n\nLes adresses sont parmis les informations les plus utiles pour la carte.\n\nAlors que les adresses sont souvent représentées comme faisant partie des rues, dans OpenStreetMap, les adresses sont enregistrées comme attributs des bâtiments le long des rues.\n\nVous pouvez ajouter une adresse sur les éléments modélisés avec un polygone\net sur ceux modélisés avec des points. La meilleure source de données afin\nde cartographier les adresses reste le relevé sur le terrain ou les connaissances personnelles, car comme pour tous les autres éléments, la copie de données à partir de contenu non libre de droits comme Google Maps est strictement interdite.\n",
-            "inspector": "# Utilisation de l'inspecteur\n\nL'inspecteur est l'élément de l'interface utilisateur qui apparaît à droite de\nla page quand un élément est sélectionné.\n\nIl permet de mettre à jour les détails concernant l'élément sélectionné.\n\n### Sélectionner un type d'élément\n\nAprès ajout d'un point, d'une ligne ou d'un polygone, vous pouvez indiquer de\nquel type d'élément il s'agit : une route principale ou résidentielle, un\nsupermarché, un café... L'inspecteur affiche des boutons pour les éléments les\nplus communs, et vous pouvez trouver les autres à l'aide du formulaire de recherche.\n\nCliquez sur 'i' dans le coin en bas à droite des boutons pour en savoir plus sur\nl'élément dont il s'agit. Cliquez sur le bouton pour choisir cet élément.\n\n### Utiliser les formulaires et les tags\n\nAprès avoir choisi le type d'élément, ou lorsque vous sélectionnez un élément\ndont la nature est déjà indiquée, l'inspecteur affiche des champs comprenant des\ndétails sur l'élément concerné - adresse, nom, etc.\n\nEn-dessous des champs, vous pouvez cliquer sur les icônes pour ajouter des\ndétails supplémentaires, comme des informations issues de [Wikipedia](http://www.wikipedia.org/),\ndes renseignements sur l'accès handicapé, ou plus encore.\n\nEn bas de l'inspecteur, cliquez sur 'Attributs Supplémentaires' pour ajouter des\nattributs arbitraires à l'élément. [Taginfo](http://taginfo.openstreetmap.org/) est\nune excellente ressource pour en savoir plus sur les combinaisons d'attributs les\nplus fréquentes.\n\nLes changements que vous effectuez dans l'inspecteur sont immédiatement visibles\nsur la carte. Vous pouvez les annulez dès que vous le souhaitez en cliquant sur 'annuler'.\n"
+            "help": {
+                "title": "Aide",
+                "welcome": "Bienvenue dans l'iD editor de [OpenStreetMap](https://www.openstreetmap.org/). Avec cet éditeur, vous pouvez mettre à jour OpenStreetMap directement depuis votre navigateur internet.",
+                "open_data_h": "Données libres",
+                "open_data": "Les modifications que vous faites sur cette carte seront visibles par tous les utilisateurs d'OpenStreetMap. Vos modification peuvent se baser sur vos connaissances personnelles, des enquêtes de terrain, des images aériennes ou des photos prises dans la rue. Copier des informations de sources commerciales telles que Google Maps [is strictly forbidden] (https://www.openstreetmap.org/copyright).",
+                "before_start_h": "Avant de commencer",
+                "before_start": "Vous devez maîtriser OpenStreetMap et cet éditeur avant de commencer à modifier. iD comprend un guide pour vous apprendre les bases de la modification d'OpenStreetMap. Cliquez sur « Commencer le tutoriel » sur cet écran pour suivre le guide - cela ne prend que 15 minutes environ.",
+                "open_source_h": "Open source",
+                "open_source": "L'éditeur iD est un projet collaboratif open source, et vous êtes en train d'utiliser la version {version}. Le code source est disponible [sur GitHub](https://github.com/openstreetmap/iD).",
+                "open_source_help": "Vous pouvez contribuer à iD en [traduisant](https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) ou en [déclarant des bugs](https://github.com/openstreetmap/iD/issues)."
+            },
+            "overview": {
+                "title": "Présentation",
+                "navigation_h": "Navigation",
+                "navigation_drag": "Vous pouvez vous déplacer sur la carte en laissant appuyé le {leftclick} bouton gauche de la souris et en la déplaçant. Vous pouvez aussi utiliser les flèches `↓`, `↑`, `←`, `→` de votre clavier.",
+                "navigation_zoom": "Vous pouvez zoomer et dézoomer en tournant la molette de la souris, ou en cliquant sur les boutons {plus} / {minus} sur le côté de la carte. Vous pouvez aussi utiliser les touches `+`, `-` de votre clavier.",
+                "features_h": "Éléments de la carte.",
+                "features": "Nous utilisons le mot *élément* pour décrire les objets qui apparaissent sur la carte, telles que les routes, batiments ou points d'intérêts. Quoi que ce soit dans le monde réel peut être représenté par un élément dans OpenStreetMap. Les éléments de la carte y sont représentés par des *point*, *lignes* ou *polygones*.",
+                "nodes_ways": "Dans OpenStreetMap, les points sont parfois appelés des *nœuds*, et les lignes et polygones des *chemins*."
+            },
+            "editing": {
+                "title": "Modifier et sauvegarder",
+                "select_h": "Selectionner",
+                "select_left_click": "{clic gauche} Cliquez avec le bouton gauche de la souris sur une fonctionnalité pour la sélectionner. Ceci le mettra en surbrillance, et la barre latérale affichera des détails de cette fonctionnalité, tels que son nom ou son adresse.",
+                "multiselect_h": "Sélection multiple",
+                "undo_redo_h": "Annuler & Rétablir",
+                "save_h": "Sauvegarder",
+                "save": "Cliquez sur {save} **Enregistrer** pour envoyer vos modifications à OpenStreetMap. Enregistrez fréquemment !",
+                "upload_h": "Téléverser",
+                "backups_h": "Sauvegarde automatique",
+                "backups": "Si vous ne pouvez pas terminer vos modifications tout de suite, par exemple si votre ordinateur s’éteint ou si vous fermez votre navigateur, votre travail est enregistré. Vous pouvez revenir plus tard (avec le même navigateur, sur la même ordinateur) et iD vous proposera de reprendre là où vous vous étiez arrêté.",
+                "keyboard_h": "Raccourcis clavier",
+                "keyboard": "Vous pouvez voir une liste de raccourcis clavier en pressant la touche '?'."
+            },
+            "feature_editor": {
+                "title": "Éditeur d'élément",
+                "intro": "*L'éditeur d'élément* apparaît à coté de la carte et permet de voir et d'éditer les informations relatives à l'élément sélectionne",
+                "definitions": "La première section indique le type d'élément. La seconde contient les *champs* qui indiquent les attributs de l'élément, comme son nom ou son adresse.",
+                "type_h": "Type d'élément",
+                "type": "Vous pouvez cliquer sur le type d'un élément pour le changer pour un autre type. Tout ce qui exist dans le monde réel peut être ajouter dans OpenStreetMap, Il y a donc de milliers de types possibles",
+                "type_picker": "Le sélectionneur de type affiche les types d'éléments les plus fréquents, tels que les parcs, hôpitaux, restaurants, routes et bâtiments. Vous pouvez tout cherchez en tapant ce que vous voulez dans le champs de recherche. Vous pouvez aussi cliquer sur l'icône {inspect} **Info** à côté du type de l'élément pour en apprendre plus.",
+                "fields_h": "Champs",
+                "fields_all_fields": "La section *Tous les champs* contient toutes les informations qui peuvent être éditées. Dans OpenStreetMap, tous les champs sont facultatifs. Vous pouvez toujours les laisser vides en cas de doute.",
+                "tags_h": "Tags"
+            },
+            "points": {
+                "title": "Points",
+                "add_point_h": "Ajouter des Points",
+                "move_point_h": "Déplacer des Points",
+                "delete_point_h": "Supprimer des Points "
+            },
+            "lines": {
+                "title": "Lignes",
+                "add_line_h": "Ajouter des Lignes",
+                "modify_line_h": "Modifier des Lignes",
+                "move_line_h": "Déplacer des Lignes",
+                "delete_line_h": "Supprimer des lignes"
+            },
+            "areas": {
+                "add_area_h": "Ajouter des polygones",
+                "square_area_h": "Donner une forme orthogonale.",
+                "modify_area_h": "Modifier des polyognes",
+                "delete_area_h": "Supprimer des polygones"
+            },
+            "relations": {
+                "title": "Relations",
+                "edit_relation_h": "Éditer des Relations",
+                "relation_types_h": "Types de Relation",
+                "turn_restriction_h": "Interdictions de tourner",
+                "route_h": "Chemins",
+                "boundary_h": "Frontières"
+            },
+            "imagery": {
+                "title": "Fond de carte",
+                "sources_h": "Sources des images",
+                "offsets_h": "Ajustement du fond de carte"
+            },
+            "streetlevel": {
+                "title": "Photos de la rue",
+                "using_h": "Utiliser des photos de la rue."
+            },
+            "gps": {
+                "title": "Traces GPS",
+                "using_h": "Utilisation des traces GPS",
+                "tracing": "La trace GPS n'est pas envoyée à OpenStreetMap. Le meilleur moyen de l'utiliser est de dessiner sur la carte en s'en servant de modèle."
+            }
         },
         "intro": {
             "done": "fait",
@@ -855,7 +954,6 @@
             },
             "areas": {
                 "title": "Polygones",
-                "add_playground": "Les *polygones* sont utilisés pour afficher les limites d’éléments comme les lacs, bâtiments et zones résidentielles.{br}Ils peuvent aussi servir à cartographier des éléments de façon plus détaillée qu'avec des points. **Cliquez sur le bouton {button} Polygone pour en ajouter un.**",
                 "start_playground": "Ajoutons une aire de jeu pour enfant sur la carte en dessinant un polygone. Les polygones sont dessinés en plaçant des *nœuds* pour définir les bords de l'élément. **Cliquez ou appuyez sur la barre d'espace pour placer le premier nœud sur l'un des angles de l'aire de jeu.**",
                 "continue_playground": "Continuez à dessiner le polygone en plaçant d'autres nœuds le long de l'aire de jeu. Vous pouvez connecter le polygone au chemin piéton existant. {br} Astuce : Vous pouvez maintenir la touche  {Alt} pour éviter aux nœuds de se connecter à d'autres éléments. ** continuez à dessiner le polygone de l'aire de jeux **",
                 "finish_playground": "Terminez le polygone avec la touche Entrée ou en cliquant une nouvelle fois sur son premier ou son dernier nœud. **Terminez le polygone d'aire de jeu.**",
@@ -984,7 +1082,8 @@
                     "title": "Sélection",
                     "select_one": "Sélectionner un seul élément",
                     "select_multi": "Sélectionner plusieurs éléments",
-                    "lasso": "Dessiner une sélection englobante autour des éléments"
+                    "lasso": "Dessiner une sélection englobante autour des éléments",
+                    "search": "Trouver des éléments correspondant à la recherche."
                 },
                 "with_selected": {
                     "title": "Avec l'élément sélectionné",
@@ -1295,6 +1394,9 @@
                 "brand": {
                     "label": "Marque"
                 },
+                "brewery": {
+                    "label": "Bières à la pression"
+                },
                 "bridge": {
                     "label": "Type",
                     "placeholder": "Défaut"
@@ -1331,36 +1433,8 @@
                     "label": "Capacité",
                     "placeholder": "50, 100, 200..."
                 },
-                "cardinal_direction": {
-                    "label": "Sens",
-                    "options": {
-                        "E": "Est",
-                        "ENE": "Est-Nord-Est",
-                        "ESE": "Est-Sud-Est",
-                        "N": "Nord",
-                        "NE": "Nord-Est",
-                        "NNE": "Nord-Nord-Est",
-                        "NNW": "Nord-Nord-Ouest",
-                        "NW": "Nord-Ouest",
-                        "S": "Sud",
-                        "SE": "Sud-Est",
-                        "SSE": "Sud-Sud-Est",
-                        "SSW": "Sud-Sud-Ouest",
-                        "SW": "Sud-Ouest",
-                        "W": "Ouest",
-                        "WNW": "Ouest-Nord-Ouest",
-                        "WSW": "Ouest-Sud-Ouest"
-                    }
-                },
                 "castle_type": {
                     "label": "Type"
-                },
-                "clock_direction": {
-                    "label": "Sens",
-                    "options": {
-                        "anticlockwise": "Sens anti-horaire",
-                        "clockwise": "Sens horaire"
-                    }
                 },
                 "clothes": {
                     "label": "Vêtements"
@@ -1483,6 +1557,42 @@
                 },
                 "diaper": {
                     "label": "Table à langer"
+                },
+                "direction_cardinal": {
+                    "label": "Direction",
+                    "options": {
+                        "E": "Est",
+                        "ENE": "Est-Nord-Est",
+                        "ESE": "Est-Sud-Est",
+                        "N": "Nord",
+                        "NE": "Nord-Est",
+                        "NNE": "Nord-Nord-Est",
+                        "NNW": "Nord-Nord-Ouest",
+                        "NW": "Nord-Ouest",
+                        "S": "Sud",
+                        "SE": "Sud-Est",
+                        "SSE": "Sud-Sud-Est",
+                        "SSW": "Sud-Sud-Ouest",
+                        "SW": "Sud-Ouest",
+                        "W": "Ouest",
+                        "WNW": "Ouest-Nord-Ouest",
+                        "WSW": "Ouest-Sud-Ouest"
+                    }
+                },
+                "direction_clock": {
+                    "label": "Direction",
+                    "options": {
+                        "anticlockwise": "Sens anti-horaire",
+                        "clockwise": "Sens horaire"
+                    }
+                },
+                "direction_vertex": {
+                    "label": "Direction",
+                    "options": {
+                        "backward": "Vers l'arrière",
+                        "both": "Les deux / Tous",
+                        "forward": "Vers l'avant"
+                    }
                 },
                 "display": {
                     "label": "Affichage"
@@ -1786,9 +1896,8 @@
                 "memorial": {
                     "label": "Type"
                 },
-                "milestone_position": {
-                    "label": "Position de la borne",
-                    "placeholder": "Distance à une décimale (123,4)"
+                "monitoring_multi": {
+                    "label": "Surveillance"
                 },
                 "mtb/scale": {
                     "label": "Difficulté VTT",
@@ -1878,7 +1987,9 @@
                 "oneway": {
                     "label": "Sens unique",
                     "options": {
+                        "alternating": "En alternance",
                         "no": "Non",
+                        "reversible": "Réversible",
                         "undefined": "Par défaut : Non",
                         "yes": "Oui"
                     }
@@ -1886,7 +1997,9 @@
                 "oneway_yes": {
                     "label": "Sens unique",
                     "options": {
+                        "alternating": "En alternance",
                         "no": "Non",
+                        "reversible": "Réversible",
                         "undefined": "Par défaut : Oui",
                         "yes": "Oui"
                     }
@@ -1903,13 +2016,6 @@
                 "par": {
                     "label": "Par",
                     "placeholder": "3, 4, 5..."
-                },
-                "parallel_direction": {
-                    "label": "Direction",
-                    "options": {
-                        "backward": "Vers l'arrière",
-                        "forward": "Vers l'avant"
-                    }
                 },
                 "park_ride": {
                     "label": "Parking-relais"
@@ -2012,21 +2118,29 @@
                 "railway": {
                     "label": "Type"
                 },
+                "railway/position": {
+                    "label": "Position de la borne",
+                    "placeholder": "Distance à une décimale (123,4)"
+                },
+                "railway/signal/direction": {
+                    "label": "Direction",
+                    "options": {
+                        "backward": "Vers l'arrière",
+                        "both": "Les deux / Tous",
+                        "forward": "Vers l'avant"
+                    }
+                },
                 "rating": {
                     "label": "Puissance"
                 },
                 "recycling_accepts": {
                     "label": "Accepte"
                 },
-                "recycling_type": {
-                    "label": "Type de recyclage",
-                    "options": {
-                        "centre": "Déchèterie",
-                        "container": "Conteneur de recyclage"
-                    }
-                },
                 "ref": {
                     "label": "Code d'identification"
+                },
+                "ref/isil": {
+                    "label": "Code ISIL"
                 },
                 "ref_aeroway_gate": {
                     "label": "Numéro de porte"
@@ -2321,6 +2435,14 @@
                 "traffic_signals": {
                     "label": "Feu de signalisation spécifique"
                 },
+                "traffic_signals/direction": {
+                    "label": "Direction",
+                    "options": {
+                        "backward": "Vers l'arrière",
+                        "both": "Les deux / Tous",
+                        "forward": "Vers l'avant"
+                    }
+                },
                 "trail_visibility": {
                     "label": "Visibilité du sentier",
                     "options": {
@@ -2490,8 +2612,7 @@
                     "terms": "télécorde, telecorde, téléski à câble bas, fil neige, téléski, tire-fesse, rope tow lift"
                 },
                 "aerialway/station": {
-                    "name": "Gare de remontée mécanique",
-                    "terms": "départ, arrivée, station, remontée mécanique, remontee mecanique, aerialway"
+                    "name": "Gare de remontée mécanique"
                 },
                 "aerialway/t-bar": {
                     "name": "Téléski bi-place",
@@ -2596,12 +2717,14 @@
                     "terms": "change, bureau de change, échange, devises, échange de devises, intermédiaire financier de change, banque de devises"
                 },
                 "amenity/bus_station": {
-                    "name": "Gare routière",
-                    "terms": "gare de bus, gare de cars, Gare, Arrêt, Arrêt de bus, bus station, bus, cars"
+                    "name": "Gare routière"
                 },
                 "amenity/cafe": {
                     "name": "Café",
                     "terms": "Café, bar, salon de thé, pub, brasserie, restaurant, cafe"
+                },
+                "amenity/car_pooling": {
+                    "name": "Covoiturage"
                 },
                 "amenity/car_rental": {
                     "name": "Location de voiture",
@@ -2699,8 +2822,7 @@
                     "terms": "fast food, restauration rapide, service au comptoir, vente à emporter, à emporter, a emporter, burger, sandwich, kebab"
                 },
                 "amenity/ferry_terminal": {
-                    "name": "Terminal ferry",
-                    "terms": "terminal des ferries, gare maritime, ferry, embarquement, traversée, transport maritime, transport en mer, port"
+                    "name": "Terminal ferry"
                 },
                 "amenity/fire_station": {
                     "name": "Caserne de pompiers",
@@ -2749,6 +2871,9 @@
                 "amenity/library": {
                     "name": "Bibliothèque",
                     "terms": "Bibliothèque, Médiathèque"
+                },
+                "amenity/love_hotel": {
+                    "name": "Love hôtel"
                 },
                 "amenity/marketplace": {
                     "name": "Marché",
@@ -2862,8 +2987,7 @@
                     "terms": "Services publics des parcs nationaux"
                 },
                 "amenity/recycling": {
-                    "name": "Recyclage",
-                    "terms": "déchèterie,déchetterie"
+                    "name": "Conteneur de recyclage"
                 },
                 "amenity/recycling_centre": {
                     "name": "Déchetterie",
@@ -3168,6 +3292,12 @@
                     "name": "Grange",
                     "terms": "grange, hangar agricole, bâtiment agricole, stockage, grenier, abri, remise, étable, ferme, barn"
                 },
+                "building/boathouse": {
+                    "name": "Hangar à bateaux"
+                },
+                "building/bungalow": {
+                    "name": "Bungalow"
+                },
                 "building/bunker": {
                     "name": "Bunker"
                 },
@@ -3201,7 +3331,7 @@
                 },
                 "building/detached": {
                     "name": "Maison individuelle",
-                    "terms": "maison individuelle, pavillon, maison indépendante, maison, building detached, detached house, villa"
+                    "terms": "maison individuelle, pavillon, maison indépendante, maison, building detached, detached house, villa, maison quatre façades"
                 },
                 "building/dormitory": {
                     "name": "Résidence étudiante",
@@ -3209,6 +3339,9 @@
                 },
                 "building/entrance": {
                     "name": "Entrée/Sortie"
+                },
+                "building/farm": {
+                    "name": "Corps de ferme"
                 },
                 "building/garage": {
                     "name": "Garage privé",
@@ -3246,6 +3379,9 @@
                     "name": "Bâtiment pré-scolaire - école maternelle, jardin d'enfants",
                     "terms": "école maternelle, école enfantine, jardin d'enfants, école primaire, école, écoliers,  petite section, moyenne section, grande section, PS-MS-GS, kindergarten, crèche, halte-garderie"
                 },
+                "building/mosque": {
+                    "name": "Mosquée"
+                },
                 "building/public": {
                     "name": "Bâtiment public",
                     "terms": "Bâtiment public"
@@ -3261,6 +3397,9 @@
                 "building/roof": {
                     "name": "Toit",
                     "terms": "Voûte, Toit ouvert, Marché couvert"
+                },
+                "building/ruins": {
+                    "name": "Ruines"
                 },
                 "building/school": {
                     "name": "Bâtiment scolaire - élémentaire ou secondaire",
@@ -3278,9 +3417,15 @@
                     "name": "Étable",
                     "terms": "Étable"
                 },
+                "building/stadium": {
+                    "name": "Stade"
+                },
                 "building/static_caravan": {
                     "name": "Mobil home fixe",
                     "terms": "Mobil home statique"
+                },
+                "building/temple": {
+                    "name": "Temple"
                 },
                 "building/terrace": {
                     "name": "Rangée de maisons",
@@ -3300,6 +3445,9 @@
                 "camp_site/camp_pitch": {
                     "name": "Terrain de camping",
                     "terms": "Emplacement de camping"
+                },
+                "circular": {
+                    "name": "Rond-point"
                 },
                 "club": {
                     "name": "Club",
@@ -3675,8 +3823,7 @@
                     "terms": "Piste cavalière, Sentier à chevaux, Sentier pour chevaux"
                 },
                 "highway/bus_stop": {
-                    "name": "Arrêt de bus",
-                    "terms": "Arrêt de bus, Gare, Gare routière"
+                    "name": "Arrêt de bus"
                 },
                 "highway/corridor": {
                     "name": "Couloir intérieur",
@@ -3957,10 +4104,6 @@
                     "name": "Forêt",
                     "terms": "Forêt"
                 },
-                "landuse/garages": {
-                    "name": "Garages",
-                    "terms": "Garages privés, boxes"
-                },
                 "landuse/grass": {
                     "name": "Herbe",
                     "terms": "Herbe"
@@ -3968,6 +4111,9 @@
                 "landuse/greenfield": {
                     "name": "Terrain vierge",
                     "terms": "Terrain vierge"
+                },
+                "landuse/greenhouse_horticulture": {
+                    "name": "Serre d'horticulture"
                 },
                 "landuse/harbour": {
                     "name": "Havre",
@@ -4368,6 +4514,10 @@
                     "name": "Mât",
                     "terms": "communication,antenne,radio,télécommunication,téléphonie"
                 },
+                "man_made/monitoring_station": {
+                    "name": "Station de surveillance",
+                    "terms": "Station de surveillance, météorologie, sismologie, séisme, climat, pression, atmosphère."
+                },
                 "man_made/observation": {
                     "name": "Tour d'observation",
                     "terms": "Tour d'observation, Mirador"
@@ -4573,8 +4723,7 @@
                     "terms": "Comptable, Expert-comptable."
                 },
                 "office/administrative": {
-                    "name": "Bureau administratif",
-                    "terms": "Bureau administratif"
+                    "name": "Bureau administratif"
                 },
                 "office/adoption_agency": {
                     "name": "Agence d'adoption",
@@ -4582,7 +4731,7 @@
                 },
                 "office/advertising_agency": {
                     "name": "Agence de publicité",
-                    "terms": "Agence de publicité, Agence publicitaire"
+                    "terms": "Agence de publicité, Agence publicitaire, Agence de communication."
                 },
                 "office/architect": {
                     "name": "Architecte",
@@ -4595,10 +4744,6 @@
                 "office/charity": {
                     "name": "Organisation de bienfaisance/charité",
                     "terms": "Organisation de bienfaisance, Organisation de charité"
-                },
-                "office/company": {
-                    "name": "Bureau d'entreprise",
-                    "terms": "Bureau d'entreprise, Siège social"
                 },
                 "office/coworking": {
                     "name": "Espace de coworking",
@@ -4661,8 +4806,7 @@
                     "terms": "Cabinet d'avocats"
                 },
                 "office/lawyer/notary": {
-                    "name": "Notaire",
-                    "terms": "Notaire"
+                    "name": "Notaire"
                 },
                 "office/moving_company": {
                     "name": "Entreprise de déménagement",
@@ -4693,7 +4837,7 @@
                 },
                 "office/quango": {
                     "name": "Autorité administrative indépendante ",
-                    "terms": "Autorité administrative indépendante, ONG quasi-autonome, QUANGO."
+                    "terms": "Autorité administrative indépendante, ONG quasi-autonome, AAI, QUANGO."
                 },
                 "office/research": {
                     "name": "Organisme de recherche",
@@ -4894,13 +5038,71 @@
                     "name": "Transformateur",
                     "terms": "Transformateur"
                 },
-                "public_transport/platform": {
-                    "name": "Plateforme d'attente",
-                    "terms": "Quai"
+                "public_transport/linear_platform_bus": {
+                    "name": "Arrêt de bus"
                 },
-                "public_transport/stop_position": {
-                    "name": "Position exacte d’arrêt du véhicule sur le « way » d’une route de transport en commun",
-                    "terms": "Arrêt"
+                "public_transport/linear_platform_ferry": {
+                    "name": "Quai pour ferry"
+                },
+                "public_transport/linear_platform_light_rail": {
+                    "name": "Station de tramway"
+                },
+                "public_transport/linear_platform_monorail": {
+                    "name": "Station de monorail"
+                },
+                "public_transport/linear_platform_subway": {
+                    "name": "Station de métro"
+                },
+                "public_transport/linear_platform_train": {
+                    "name": "Gare ferroviaire"
+                },
+                "public_transport/linear_platform_tram": {
+                    "name": "Station de tramway"
+                },
+                "public_transport/platform_bus": {
+                    "name": "Arrêt de bus"
+                },
+                "public_transport/platform_ferry": {
+                    "name": "Quai pour ferry"
+                },
+                "public_transport/platform_light_rail": {
+                    "name": "Station de tramway"
+                },
+                "public_transport/platform_monorail": {
+                    "name": "Station de monorail"
+                },
+                "public_transport/platform_subway": {
+                    "name": "Station de métro"
+                },
+                "public_transport/platform_train": {
+                    "name": "Gare ferroviaire"
+                },
+                "public_transport/platform_tram": {
+                    "name": "Station de tramway"
+                },
+                "public_transport/station_bus": {
+                    "name": "Gare routière"
+                },
+                "public_transport/station_ferry": {
+                    "name": "Terminal ferry"
+                },
+                "public_transport/station_light_rail": {
+                    "name": "Station de tramway"
+                },
+                "public_transport/station_monorail": {
+                    "name": "Station de monorail"
+                },
+                "public_transport/station_subway": {
+                    "name": "Station de métro"
+                },
+                "public_transport/station_train": {
+                    "name": "Gare ferroviaire"
+                },
+                "public_transport/station_train_halt": {
+                    "name": "Gare ferroviaire (arrêt à la demande)"
+                },
+                "public_transport/station_tram": {
+                    "name": "Station de tramway"
                 },
                 "railway": {
                     "name": "Ferroviaire"
@@ -4930,8 +5132,7 @@
                     "terms": "Funiculaire"
                 },
                 "railway/halt": {
-                    "name": "Halte ferroviaire",
-                    "terms": "Arrêt ferroviaire, Arrêt"
+                    "name": "Gare ferroviaire (arrêt à la demande)"
                 },
                 "railway/level_crossing": {
                     "name": "Passage à niveau (route)",
@@ -4954,8 +5155,7 @@
                     "terms": "Voie ferrée étroite"
                 },
                 "railway/platform": {
-                    "name": "Quai de gare ferroviaire",
-                    "terms": "Quai de gare, Quai"
+                    "name": "Gare ferroviaire"
                 },
                 "railway/rail": {
                     "name": "Voie ferrée",
@@ -4966,8 +5166,7 @@
                     "terms": "<translate with synonyms or related terms for 'Railway Signal', separated by commas>"
                 },
                 "railway/station": {
-                    "name": "Gare ferroviaire",
-                    "terms": "Gare ferroviaire, Gare, Arrêt"
+                    "name": "Gare ferroviaire"
                 },
                 "railway/subway": {
                     "name": "Métropolitain",
@@ -4988,10 +5187,6 @@
                 "railway/tram": {
                     "name": "Tramway",
                     "terms": "Tram, Tramway"
-                },
-                "railway/tram_stop": {
-                    "name": "Arrêt de tramway",
-                    "terms": "tram,tramway,station de tramway"
                 },
                 "relation": {
                     "name": "Relation",
@@ -5275,8 +5470,8 @@
                     "terms": "Bijoutier"
                 },
                 "shop/kiosk": {
-                    "name": "Kiosque à journaux",
-                    "terms": "Kiosque à journaux"
+                    "name": "Kiosque",
+                    "terms": "Kiosque"
                 },
                 "shop/kitchen": {
                     "name": "Cuisiniste",
@@ -5712,9 +5907,17 @@
                     "name": "Itinéraire équestre",
                     "terms": "Trajet équestre"
                 },
+                "type/route/light_rail": {
+                    "name": "Itinéraire de métro léger",
+                    "terms": "Itinéraire de métro léger"
+                },
                 "type/route/pipeline": {
                     "name": "Itinéraire de pipeline",
                     "terms": "Pipeline, gazoduc, oléoduc"
+                },
+                "type/route/piste": {
+                    "name": "Itinéraire de Ski",
+                    "terms": "Itinéraire de Ski"
                 },
                 "type/route/power": {
                     "name": "Itinéraire électrique",
@@ -5723,6 +5926,10 @@
                 "type/route/road": {
                     "name": "Itinéraire routier",
                     "terms": "Route, rue, chemin, sentier"
+                },
+                "type/route/subway": {
+                    "name": "Itinéraire de Métro",
+                    "terms": "Itinéraire de Métro"
                 },
                 "type/route/train": {
                     "name": "Itinéraire ferroviaire",
@@ -5825,12 +6032,26 @@
                 "description": "Images satellite DigitalGlobe premium",
                 "name": "Images DigitalGlobe premium"
             },
+            "DigitalGlobe-Premium-vintage": {
+                "attribution": {
+                    "text": "Termes & commentaires"
+                },
+                "description": "Limites et dates des images. Les textes sont visibles à partir du niveau de zoom 14",
+                "name": "Images DigitalGlobe Premium Vintage"
+            },
             "DigitalGlobe-Standard": {
                 "attribution": {
                     "text": "Termes & commentaires"
                 },
                 "description": "Images satellite DigitalGlobe standard",
                 "name": "Images DigitalGlobe standard"
+            },
+            "DigitalGlobe-Standard-vintage": {
+                "attribution": {
+                    "text": "Termes & commentaires"
+                },
+                "description": "Limites et dates des images. Les textes sont visibles à partir du niveau de zoom 14",
+                "name": "Images DigitalGlobe Standard Vintage"
             },
             "EsriWorldImagery": {
                 "attribution": {
@@ -5907,33 +6128,18 @@
                 "name": "Données géographiques et topologiques intégrées et encodées 2017"
             },
             "Waymarked_Trails-Cycling": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, données cartographiques des contributeurs OpenStreetMap, ODbL 1.0"
-                },
                 "name": "Waymarked Trails: Vélo"
             },
             "Waymarked_Trails-Hiking": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, données cartographiques des contributeurs OpenStreetMap, ODbL 1.0"
-                },
                 "name": "Waymarked Trails: Randonnée"
             },
             "Waymarked_Trails-MTB": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, données cartographiques des contributeurs OpenStreetMap, ODbL 1.0"
-                },
                 "name": "Waymarked Trails: MTB"
             },
             "Waymarked_Trails-Skating": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, données cartographiques des contributeurs OpenStreetMap, ODbL 1.0"
-                },
                 "name": "Waymarked Trails: Patinage"
             },
             "Waymarked_Trails-Winter_Sports": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, données cartographiques des contributeurs OpenStreetMap, ODbL 1.0"
-                },
                 "name": "Waymarked Trails: Sports d'hiver"
             },
             "basemap.at": {

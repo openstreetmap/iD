@@ -33,29 +33,9 @@
 .fill-partial path.area.fill {
     fill-opacity: 0;
     stroke-width: 60px;
+    pointer-events: none;
+}
+.mode-browse .fill-partial path.area.fill,
+.mode-select .fill-partial path.area.fill {
     pointer-events: visibleStroke;
-}
-
-/* Modes */
-
-.mode-draw-line .vertex.active,
-.mode-draw-area .vertex.active,
-.mode-drag-node .vertex.active {
-    display: none;
-}
-
-.mode-draw-line .way.active,
-.mode-draw-area .way.active,
-.mode-drag-node .active {
-    pointer-events: none;
-}
-
-/* Ensure drawing doesn't interact with area fills. */
-.mode-add-point path.area.fill,
-.mode-draw-line path.area.fill,
-.mode-draw-area path.area.fill,
-.mode-add-line path.area.fill,
-.mode-add-area path.area.fill,
-.mode-drag-node path.area.fill {
-    pointer-events: none;
 }

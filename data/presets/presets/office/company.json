@@ -1,5 +1,5 @@
 {
-    "icon": "commercial",
+    "icon": "suitcase",
     "fields": [
         "name",
         "address",
@@ -15,5 +15,5 @@
         "office": "company"
     },
     "terms": [],
-    "name": "Company Office"
+    "name": "Corporate Office"
 }

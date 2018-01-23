@@ -19,14 +19,14 @@ export function modeDrawArea(context, wayId, startGraph) {
 
         var addNode = behavior.addNode;
 
-        behavior.addNode = function(node) {
-            var length = way.nodes.length,
-                penultimate = length > 2 ? way.nodes[length - 2] : null;
+        behavior.addNode = function(node, d) {
+            var length = way.nodes.length;
+            var penultimate = length > 2 ? way.nodes[length - 2] : null;
 
             if (node.id === way.first() || node.id === penultimate) {
                 behavior.finish();
             } else {
-                addNode(node);
+                addNode(node, d);
             }
         };
 
@@ -41,6 +41,11 @@ export function modeDrawArea(context, wayId, startGraph) {
 
     mode.selectedIDs = function() {
         return [wayId];
+    };
+
+
+    mode.activeID = function() {
+        return (behavior && behavior.activeID()) || [];
     };
 
 

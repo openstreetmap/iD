@@ -281,7 +281,6 @@
         "background": {
             "title": "পটভূমি",
             "description": "পটভূমি নির্ধারণ",
-            "percent_brightness": "{opacity}% উজ্জ্বলতা",
             "none": "কিছুনা",
             "reset": "রিসেট",
             "minimap": {
@@ -494,23 +493,6 @@
                 "capacity": {
                     "label": "ধারণক্ষমতা",
                     "placeholder": "৫০, ১০০, ২০০..."
-                },
-                "cardinal_direction": {
-                    "label": "দিক",
-                    "options": {
-                        "E": "পূর্ব",
-                        "N": "উত্তর",
-                        "NE": "উত্তরপূর্ব",
-                        "S": "দক্ষিণ",
-                        "W": "পশ্চিম"
-                    }
-                },
-                "clock_direction": {
-                    "label": "দিক",
-                    "options": {
-                        "anticlockwise": "ঘড়ির কাটার উল্টো দিকে",
-                        "clockwise": "ঘড়ির কাটার দিকে"
-                    }
                 },
                 "collection_times": {
                     "label": "সংগ্রহের সময়"
@@ -892,9 +874,6 @@
                 "highway": {
                     "name": "রাজপথ"
                 },
-                "highway/bus_stop": {
-                    "name": "বাস স্টপ"
-                },
                 "highway/cycleway": {
                     "name": "সাইকেলের রাস্তা"
                 },
@@ -1132,14 +1111,8 @@
                 "railway/monorail": {
                     "name": "মনোরেল"
                 },
-                "railway/platform": {
-                    "name": "রেল প্লাটফর্ম"
-                },
                 "railway/rail": {
                     "name": "রেল"
-                },
-                "railway/station": {
-                    "name": "রেল স্টেশন"
                 },
                 "railway/subway": {
                     "name": "ভূতলপথ"

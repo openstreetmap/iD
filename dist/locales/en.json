@@ -397,7 +397,8 @@
                 "centroid": "Centroid",
                 "location": "Location",
                 "metric": "Metric",
-                "imperial": "Imperial"
+                "imperial": "Imperial",
+                "node_count": "Number of nodes"
             }
         },
         "geometry": {
@@ -463,22 +464,28 @@
             "title": "Background",
             "description": "Background settings",
             "key": "B",
-            "percent_brightness": "{opacity}% brightness",
+            "backgrounds": "Backgrounds",
             "none": "None",
             "best_imagery": "Best known imagery source for this location",
             "switch": "Switch back to this background",
             "custom": "Custom",
             "custom_button": "Edit custom background",
             "custom_prompt": "Enter a tile URL template. Valid tokens are:\n   - {zoom}/{z}, {x}, {y} for Z/X/Y tile scheme\n   - {ty} for flipped TMS-style Y coordinates\n   - {u} for quadtile scheme\n   - {switch:a,b,c} for DNS server multiplexing\n\nExample:\n{example}",
-            "fix_misalignment": "Adjust imagery offset",
-            "imagery_source_faq": "Where does this imagery come from?",
+            "overlays": "Overlays",
+            "imagery_source_faq": "Imagery Info / Report a Problem",
             "reset": "reset",
-            "offset": "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values in meters.",
+            "display_options": "Display Options",
+            "brightness": "Brightness",
+            "contrast": "Contrast",
+            "saturation": "Saturation",
+            "sharpness": "Sharpness",
             "minimap": {
-                "description": "Minimap",
+                "description": "Show Minimap",
                 "tooltip": "Show a zoomed out map to help locate the area currently displayed.",
                 "key": "/"
-            }
+            },
+            "fix_misalignment": "Adjust imagery offset",
+            "offset": "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values in meters."
         },
         "map_data": {
             "title": "Map Data",
@@ -575,6 +582,7 @@
             "status_code": "Server returned status code {code}",
             "unknown_error_details": "Please ensure you are connected to the internet.",
             "uploading": "Uploading changes to OpenStreetMap...",
+            "conflict_progress": "Checking for conflicts: {num} of {total}",
             "unsaved_changes": "You have unsaved changes",
             "conflict": {
                 "header": "Resolve conflicting edits",
@@ -1502,36 +1510,8 @@
                     "label": "Capacity",
                     "placeholder": "50, 100, 200..."
                 },
-                "cardinal_direction": {
-                    "label": "Direction",
-                    "options": {
-                        "N": "North",
-                        "E": "East",
-                        "S": "South",
-                        "W": "West",
-                        "NE": "Northeast",
-                        "SE": "Southeast",
-                        "SW": "Southwest",
-                        "NW": "Northwest",
-                        "NNE": "North-northeast",
-                        "ENE": "East-northeast",
-                        "ESE": "East-southeast",
-                        "SSE": "South-southeast",
-                        "SSW": "South-southwest",
-                        "WSW": "West-southwest",
-                        "WNW": "West-northwest",
-                        "NNW": "North-northwest"
-                    }
-                },
                 "castle_type": {
                     "label": "Type"
-                },
-                "clock_direction": {
-                    "label": "Direction",
-                    "options": {
-                        "clockwise": "Clockwise",
-                        "anticlockwise": "Counterclockwise"
-                    }
                 },
                 "clothes": {
                     "label": "Clothes"
@@ -1654,6 +1634,46 @@
                 },
                 "diaper": {
                     "label": "Diaper Changing Available"
+                },
+                "direction_cardinal": {
+                    "label": "Direction",
+                    "options": {
+                        "N": "North",
+                        "E": "East",
+                        "S": "South",
+                        "W": "West",
+                        "NE": "Northeast",
+                        "SE": "Southeast",
+                        "SW": "Southwest",
+                        "NW": "Northwest",
+                        "NNE": "North-northeast",
+                        "ENE": "East-northeast",
+                        "ESE": "East-southeast",
+                        "SSE": "South-southeast",
+                        "SSW": "South-southwest",
+                        "WSW": "West-southwest",
+                        "WNW": "West-northwest",
+                        "NNW": "North-northwest"
+                    }
+                },
+                "direction_clock": {
+                    "label": "Direction",
+                    "options": {
+                        "clockwise": "Clockwise",
+                        "anticlockwise": "Counterclockwise"
+                    }
+                },
+                "direction_vertex": {
+                    "label": "Direction",
+                    "options": {
+                        "forward": "Forward",
+                        "backward": "Backward",
+                        "both": "Both / All"
+                    }
+                },
+                "direction": {
+                    "label": "Direction (Degrees Clockwise)",
+                    "placeholder": "45, 90, 180, 270"
                 },
                 "display": {
                     "label": "Display"
@@ -1957,10 +1977,6 @@
                 "memorial": {
                     "label": "Type"
                 },
-                "milestone_position": {
-                    "label": "Milestone Position",
-                    "placeholder": "Distance to one decimal (123.4)"
-                },
                 "monitoring_multi": {
                     "label": "Monitoring"
                 },
@@ -2054,7 +2070,9 @@
                     "options": {
                         "undefined": "Assumed to be Yes",
                         "yes": "Yes",
-                        "no": "No"
+                        "no": "No",
+                        "reversible": "Reversible",
+                        "alternating": "Alternating"
                     }
                 },
                 "oneway": {
@@ -2062,7 +2080,9 @@
                     "options": {
                         "undefined": "Assumed to be No",
                         "yes": "Yes",
-                        "no": "No"
+                        "no": "No",
+                        "reversible": "Reversible",
+                        "alternating": "Alternating"
                     }
                 },
                 "opening_hours": {
@@ -2077,13 +2097,6 @@
                 "par": {
                     "label": "Par",
                     "placeholder": "3, 4, 5..."
-                },
-                "parallel_direction": {
-                    "label": "Direction",
-                    "options": {
-                        "forward": "Forward",
-                        "backward": "Backward"
-                    }
                 },
                 "park_ride": {
                     "label": "Park and Ride"
@@ -2186,6 +2199,18 @@
                 "railway": {
                     "label": "Type"
                 },
+                "railway/position": {
+                    "label": "Milestone Position",
+                    "placeholder": "Distance to one decimal (123.4)"
+                },
+                "railway/signal/direction": {
+                    "label": "Direction",
+                    "options": {
+                        "forward": "Forward",
+                        "backward": "Backward",
+                        "both": "Both / All"
+                    }
+                },
                 "rating": {
                     "label": "Power Rating"
                 },
@@ -2224,6 +2249,9 @@
                 },
                 "ref": {
                     "label": "Reference Code"
+                },
+                "ref/isil": {
+                    "label": "ISIL Code"
                 },
                 "relation": {
                     "label": "Type"
@@ -2488,6 +2516,14 @@
                 "traffic_signals": {
                     "label": "Type"
                 },
+                "traffic_signals/direction": {
+                    "label": "Direction",
+                    "options": {
+                        "forward": "Forward",
+                        "backward": "Backward",
+                        "both": "Both / All"
+                    }
+                },
                 "trail_visibility": {
                     "label": "Trail Visibility",
                     "placeholder": "Excellent, Good, Bad...",
@@ -2615,6 +2651,10 @@
                 },
                 "amenity": {
                     "name": "Amenity",
+                    "terms": ""
+                },
+                "circular": {
+                    "name": "Traffic Circle",
                     "terms": ""
                 },
                 "highway": {
@@ -2759,7 +2799,7 @@
                 },
                 "amenity/animal_boarding": {
                     "name": "Animal Boarding Facility",
-                    "terms": "boarding,cat,dog,horse,kitten,pet boarding,pet care,pet hotel,puppy,reptile"
+                    "terms": "boarding,cat,cattery,dog,horse,kennel,kitten,pet,pet boarding,pet care,pet hotel,puppy,reptile"
                 },
                 "amenity/animal_breeding": {
                     "name": "Animal Breeding Facility",
@@ -2820,6 +2860,10 @@
                 "amenity/cafe": {
                     "name": "Cafe",
                     "terms": "bistro,coffee,tea"
+                },
+                "amenity/car_pooling": {
+                    "name": "Car Pooling",
+                    "terms": ""
                 },
                 "amenity/car_rental": {
                     "name": "Car Rental",
@@ -2961,6 +3005,10 @@
                     "name": "Library",
                     "terms": "book"
                 },
+                "amenity/love_hotel": {
+                    "name": "Love Hotel",
+                    "terms": ""
+                },
                 "amenity/marketplace": {
                     "name": "Marketplace",
                     "terms": ""
@@ -3011,7 +3059,7 @@
                 },
                 "amenity/place_of_worship/hindu": {
                     "name": "Hindu Temple",
-                    "terms": "garbhargriha,mandu,puja,shrine,temple"
+                    "terms": "kovil,devasthana,mandir,kshetram,alayam,shrine,temple"
                 },
                 "amenity/place_of_worship/jewish": {
                     "name": "Synagogue",
@@ -3096,6 +3144,10 @@
                 "amenity/shower": {
                     "name": "Shower",
                     "terms": "rain closet"
+                },
+                "amenity/smoking_area": {
+                    "name": "Smoking Area",
+                    "terms": ""
                 },
                 "amenity/social_facility": {
                     "name": "Social Facility",
@@ -3329,6 +3381,10 @@
                     "name": "Hedge",
                     "terms": ""
                 },
+                "barrier/kerb": {
+                    "name": "Kerb",
+                    "terms": ""
+                },
                 "barrier/kissing_gate": {
                     "name": "Kissing Gate",
                     "terms": ""
@@ -3381,6 +3437,14 @@
                     "name": "Barn",
                     "terms": ""
                 },
+                "building/boathouse": {
+                    "name": "Boathouse",
+                    "terms": ""
+                },
+                "building/bungalow": {
+                    "name": "Bungalow",
+                    "terms": "home,detached"
+                },
                 "building/cabin": {
                     "name": "Cabin",
                     "terms": ""
@@ -3395,6 +3459,10 @@
                 },
                 "building/church": {
                     "name": "Church Building",
+                    "terms": ""
+                },
+                "building/civic": {
+                    "name": "Civic Building",
                     "terms": ""
                 },
                 "building/college": {
@@ -3415,6 +3483,10 @@
                 },
                 "building/dormitory": {
                     "name": "Dormitory",
+                    "terms": ""
+                },
+                "building/farm": {
+                    "name": "Farm Building",
                     "terms": ""
                 },
                 "building/garage": {
@@ -3473,6 +3545,10 @@
                     "name": "Roof",
                     "terms": ""
                 },
+                "building/ruins": {
+                    "name": "Building Ruins",
+                    "terms": ""
+                },
                 "building/school": {
                     "name": "School Building",
                     "terms": "academy,elementary school,middle school,high school"
@@ -3480,6 +3556,10 @@
                 "building/semidetached_house": {
                     "name": "Semi-Detached House",
                     "terms": "home,double,duplex,twin,family,residence,dwelling"
+                },
+                "building/service": {
+                    "name": "Service Building",
+                    "terms": ""
                 },
                 "building/shed": {
                     "name": "Shed",
@@ -3489,13 +3569,25 @@
                     "name": "Stable",
                     "terms": ""
                 },
+                "building/stadium": {
+                    "name": "Stadium Building",
+                    "terms": ""
+                },
                 "building/static_caravan": {
                     "name": "Static Mobile Home",
+                    "terms": ""
+                },
+                "building/temple": {
+                    "name": "Temple Building",
                     "terms": ""
                 },
                 "building/terrace": {
                     "name": "Row Houses",
                     "terms": "home,terrace,brownstone,family,residence,dwelling"
+                },
+                "building/transportation": {
+                    "name": "Transportation Building",
+                    "terms": ""
                 },
                 "building/university": {
                     "name": "University Building",
@@ -3757,6 +3849,10 @@
                     "name": "Emergency Phone",
                     "terms": ""
                 },
+                "emergency/water_tank": {
+                    "name": "Emergency Water Tank",
+                    "terms": "water tank,cistern,reservoir"
+                },
                 "entrance": {
                     "name": "Entrance/Exit",
                     "terms": ""
@@ -3892,6 +3988,10 @@
                 "highway/bridleway": {
                     "name": "Bridle Path",
                     "terms": "bridleway,equestrian,horse"
+                },
+                "highway/bus_guideway": {
+                    "name": "Bus Guideway",
+                    "terms": ""
                 },
                 "highway/corridor": {
                     "name": "Indoor Corridor",
@@ -4174,7 +4274,7 @@
                     "terms": "tree"
                 },
                 "landuse/garages": {
-                    "name": "Garages",
+                    "name": "Garage Landuse",
                     "terms": ""
                 },
                 "landuse/grass": {
@@ -4830,7 +4930,7 @@
                     "terms": "charitable organization"
                 },
                 "office/company": {
-                    "name": "Company Office",
+                    "name": "Corporate Office",
                     "terms": ""
                 },
                 "office/coworking": {
@@ -4895,7 +4995,7 @@
                 },
                 "office/lawyer/notary": {
                     "name": "Notary Office",
-                    "terms": "clerk,signature,wills,deeds,estate"
+                    "terms": ""
                 },
                 "office/moving_company": {
                     "name": "Moving Company Office",
@@ -4911,7 +5011,7 @@
                 },
                 "office/notary": {
                     "name": "Notary Office",
-                    "terms": ""
+                    "terms": "clerk,deeds,estate,signature,wills"
                 },
                 "office/political_party": {
                     "name": "Political Party",
@@ -4939,7 +5039,7 @@
                 },
                 "office/telecommunication": {
                     "name": "Telecom Office",
-                    "terms": ""
+                    "terms": "communication,internet,phone,voice"
                 },
                 "office/therapist": {
                     "name": "Therapist Office",
@@ -6316,31 +6416,31 @@
             },
             "Waymarked_Trails-Cycling": {
                 "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
                 },
                 "name": "Waymarked Trails: Cycling"
             },
             "Waymarked_Trails-Hiking": {
                 "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
                 },
                 "name": "Waymarked Trails: Hiking"
             },
             "Waymarked_Trails-MTB": {
                 "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
                 },
                 "name": "Waymarked Trails: MTB"
             },
             "Waymarked_Trails-Skating": {
                 "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
                 },
                 "name": "Waymarked Trails: Skating"
             },
             "Waymarked_Trails-Winter_Sports": {
                 "attribution": {
-                    "text": "© Michael Spreng, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
+                    "text": "© waymarkedtrails.org, OpenStreetMap contributors, CC by-SA 3.0"
                 },
                 "name": "Waymarked Trails: Winter Sports"
             },

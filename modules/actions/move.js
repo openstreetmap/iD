@@ -11,22 +11,21 @@ import _without from 'lodash-es/without';
 import { osmNode } from '../osm';
 
 import {
-  geoChooseEdge,
   geoAngle,
-  geoInterp,
+  geoChooseEdge,
   geoPathIntersections,
   geoPathLength,
-  geoSphericalDistance
+  geoSphericalDistance,
+  geoVecAdd,
+  geoVecInterp,
+  geoVecSubtract
 } from '../geo';
 
 
 // https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/command/MoveCommand.java
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MoveNodeAction.as
 export function actionMove(moveIds, tryDelta, projection, cache) {
-    var delta = tryDelta;
-
-    function vecAdd(a, b) { return [a[0] + b[0], a[1] + b[1]]; }
-    function vecSub(a, b) { return [a[0] - b[0], a[1] - b[1]]; }
+    var _delta = tryDelta;
 
     function setupCache(graph) {
         function canMove(nodeId) {
@@ -118,11 +117,11 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
 
 
     // Place a vertex where the moved vertex used to be, to preserve way shape..
-    function replaceMovedVertex(nodeId, wayId, graph, delta) {
-        var way = graph.entity(wayId),
-            moved = graph.entity(nodeId),
-            movedIndex = way.nodes.indexOf(nodeId),
-            len, prevIndex, nextIndex;
+    function replaceMovedVertex(nodeId, wayId, graph, _delta) {
+        var way = graph.entity(wayId);
+        var moved = graph.entity(nodeId);
+        var movedIndex = way.nodes.indexOf(nodeId);
+        var len, prevIndex, nextIndex;
 
         if (way.isClosed()) {
             len = way.nodes.length - 1;
@@ -134,14 +133,14 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
             nextIndex = movedIndex + 1;
         }
 
-        var prev = graph.hasEntity(way.nodes[prevIndex]),
-            next = graph.hasEntity(way.nodes[nextIndex]);
+        var prev = graph.hasEntity(way.nodes[prevIndex]);
+        var next = graph.hasEntity(way.nodes[nextIndex]);
 
         // Don't add orig vertex at endpoint..
         if (!prev || !next) return graph;
 
-        var key = wayId + '_' + nodeId,
-            orig = cache.replacedVertex[key];
+        var key = wayId + '_' + nodeId;
+        var orig = cache.replacedVertex[key];
         if (!orig) {
             orig = osmNode();
             cache.replacedVertex[key] = orig;
@@ -149,9 +148,9 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
         }
 
         var start, end;
-        if (delta) {
+        if (_delta) {
             start = projection(cache.startLoc[nodeId]);
-            end = projection.invert(vecAdd(start, delta));
+            end = projection.invert(geoVecAdd(start, _delta));
         } else {
             end = cache.startLoc[nodeId];
         }
@@ -184,30 +183,30 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
 
     // Reorder nodes around intersections that have moved..
     function unZorroIntersection(intersection, graph) {
-        var vertex = graph.entity(intersection.nodeId),
-            way1 = graph.entity(intersection.movedId),
-            way2 = graph.entity(intersection.unmovedId),
-            isEP1 = intersection.movedIsEP,
-            isEP2 = intersection.unmovedIsEP;
+        var vertex = graph.entity(intersection.nodeId);
+        var way1 = graph.entity(intersection.movedId);
+        var way2 = graph.entity(intersection.unmovedId);
+        var isEP1 = intersection.movedIsEP;
+        var isEP2 = intersection.unmovedIsEP;
 
         // don't move the vertex if it is the endpoint of both ways.
         if (isEP1 && isEP2) return graph;
 
-        var nodes1 = _without(graph.childNodes(way1), vertex),
-            nodes2 = _without(graph.childNodes(way2), vertex);
+        var nodes1 = _without(graph.childNodes(way1), vertex);
+        var nodes2 = _without(graph.childNodes(way2), vertex);
 
         if (way1.isClosed() && way1.first() === vertex.id) nodes1.push(nodes1[0]);
         if (way2.isClosed() && way2.first() === vertex.id) nodes2.push(nodes2[0]);
 
-        var edge1 = !isEP1 && geoChooseEdge(nodes1, projection(vertex.loc), projection),
-            edge2 = !isEP2 && geoChooseEdge(nodes2, projection(vertex.loc), projection),
-            loc;
+        var edge1 = !isEP1 && geoChooseEdge(nodes1, projection(vertex.loc), projection);
+        var edge2 = !isEP2 && geoChooseEdge(nodes2, projection(vertex.loc), projection);
+        var loc;
 
         // snap vertex to nearest edge (or some point between them)..
         if (!isEP1 && !isEP2) {
             var epsilon = 1e-4, maxIter = 10;
             for (var i = 0; i < maxIter; i++) {
-                loc = geoInterp(edge1.loc, edge2.loc, 0.5);
+                loc = geoVecInterp(edge1.loc, edge2.loc, 0.5);
                 edge1 = geoChooseEdge(nodes1, projection(loc), projection);
                 edge2 = geoChooseEdge(nodes2, projection(loc), projection);
                 if (Math.abs(edge1.distance - edge2.distance) < epsilon) break;
@@ -236,7 +235,7 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
 
     function cleanupIntersections(graph) {
         _each(cache.intersection, function(obj) {
-            graph = replaceMovedVertex(obj.nodeId, obj.movedId, graph, delta);
+            graph = replaceMovedVertex(obj.nodeId, obj.movedId, graph, _delta);
             graph = replaceMovedVertex(obj.nodeId, obj.unmovedId, graph, null);
             graph = unZorroIntersection(obj, graph);
         });
@@ -245,7 +244,7 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
     }
 
 
-    // check if moving way endpoint can cross an unmoved way, if so limit delta..
+    // check if moving way endpoint can cross an unmoved way, if so limit _delta..
     function limitDelta(graph) {
         _each(cache.intersection, function(obj) {
             // Don't limit movement if this is vertex joins 2 endpoints..
@@ -253,27 +252,28 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
             // Don't limit movement if this vertex is not an endpoint anyway..
             if (!obj.movedIsEP) return;
 
-            var node = graph.entity(obj.nodeId),
-                start = projection(node.loc),
-                end = vecAdd(start, delta),
-                movedNodes = graph.childNodes(graph.entity(obj.movedId)),
-                movedPath = _map(_map(movedNodes, 'loc'),
-                    function(loc) { return vecAdd(projection(loc), delta); }),
-                unmovedNodes = graph.childNodes(graph.entity(obj.unmovedId)),
-                unmovedPath = _map(_map(unmovedNodes, 'loc'), projection),
-                hits = geoPathIntersections(movedPath, unmovedPath);
+            var node = graph.entity(obj.nodeId);
+            var start = projection(node.loc);
+            var end = geoVecAdd(start, _delta);
+            var movedNodes = graph.childNodes(graph.entity(obj.movedId));
+            var movedPath = _map(_map(movedNodes, 'loc'), function(loc) {
+                return geoVecAdd(projection(loc), _delta);
+            });
+            var unmovedNodes = graph.childNodes(graph.entity(obj.unmovedId));
+            var unmovedPath = _map(_map(unmovedNodes, 'loc'), projection);
+            var hits = geoPathIntersections(movedPath, unmovedPath);
 
             for (var i = 0; i < hits.length; i++) {
                 if (_isEqual(hits[i], end)) continue;
                 var edge = geoChooseEdge(unmovedNodes, end, projection);
-                delta = vecSub(projection(edge.loc), start);
+                _delta = geoVecSubtract(projection(edge.loc), start);
             }
         });
     }
 
 
     var action = function(graph) {
-        if (delta[0] === 0 && delta[1] === 0) return graph;
+        if (_delta[0] === 0 && _delta[1] === 0) return graph;
 
         setupCache(graph);
 
@@ -282,9 +282,9 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
         }
 
         _each(cache.nodes, function(id) {
-            var node = graph.entity(id),
-                start = projection(node.loc),
-                end = vecAdd(start, delta);
+            var node = graph.entity(id);
+            var start = projection(node.loc);
+            var end = geoVecAdd(start, _delta);
             graph = graph.replace(node.move(projection.invert(end)));
         });
 
@@ -297,7 +297,7 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
 
 
     action.delta = function() {
-        return delta;
+        return _delta;
     };
 
 

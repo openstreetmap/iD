@@ -10,11 +10,7 @@ import {
     polygonCentroid as d3_polygonCentroid
 } from 'd3-polygon';
 
-import {
-    geoEuclideanDistance,
-    geoInterp
-} from '../geo';
-
+import { geoVecInterp, geoVecLength } from '../geo';
 import { osmNode } from '../osm';
 
 
@@ -41,8 +37,8 @@ export function actionCircularize(wayId, projection, maxAngle) {
             keyNodes = nodes.filter(function(n) { return graph.parentWays(n).length !== 1; }),
             points = nodes.map(function(n) { return projection(n.loc); }),
             keyPoints = keyNodes.map(function(n) { return projection(n.loc); }),
-            centroid = (points.length === 2) ? geoInterp(points[0], points[1], 0.5) : d3_polygonCentroid(points),
-            radius = d3_median(points, function(p) { return geoEuclideanDistance(centroid, p); }),
+            centroid = (points.length === 2) ? geoVecInterp(points[0], points[1], 0.5) : d3_polygonCentroid(points),
+            radius = d3_median(points, function(p) { return geoVecLength(centroid, p); }),
             sign = d3_polygonArea(points) > 0 ? 1 : -1,
             ids;
 
@@ -82,7 +78,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
             }
 
             // position this key node
-            var distance = geoEuclideanDistance(centroid, keyPoints[i]);
+            var distance = geoVecLength(centroid, keyPoints[i]);
             if (distance === 0) { distance = 1e-4; }
             keyPoints[i] = [
                 centroid[0] + (keyPoints[i][0] - centroid[0]) / distance * radius,
@@ -91,7 +87,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
             loc = projection.invert(keyPoints[i]);
             node = keyNodes[i];
             origNode = origNodes[node.id];
-            node = node.move(geoInterp(origNode.loc, loc, t));
+            node = node.move(geoVecInterp(origNode.loc, loc, t));
             graph = graph.replace(node);
 
             // figure out the between delta angle we want to match to
@@ -122,7 +118,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
                 origNode = origNodes[node.id];
                 nearNodes[node.id] = angle;
 
-                node = node.move(geoInterp(origNode.loc, loc, t));
+                node = node.move(geoVecInterp(origNode.loc, loc, t));
                 graph = graph.replace(node);
             }
 
@@ -145,7 +141,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
                     }
                 }
 
-                node = osmNode({ loc: geoInterp(origNode.loc, loc, t) });
+                node = osmNode({ loc: geoVecInterp(origNode.loc, loc, t) });
                 graph = graph.replace(node);
 
                 nodes.splice(endNodeIndex + j, 0, node);
@@ -220,7 +216,7 @@ export function actionCircularize(wayId, projection, maxAngle) {
 
             // move interior nodes to the surface of the convex hull..
             for (var j = 1; j < indexRange; j++) {
-                var point = geoInterp(hull[i], hull[i+1], j / indexRange),
+                var point = geoVecInterp(hull[i], hull[i+1], j / indexRange),
                     node = nodes[(j + startIndex) % nodes.length].move(projection.invert(point));
                 graph = graph.replace(node);
             }

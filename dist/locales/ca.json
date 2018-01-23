@@ -25,6 +25,9 @@
             },
             "draw_line": {
                 "tail": "Feu clic per afegir més nodes a la línia. Feu clic a altres línies per connectar amb elles, i feu doble clic per acabar la línia."
+            },
+            "drag_node": {
+                "connected_to_hidden": "Això no pot ser editat perquè és connectat a una característica amagada."
             }
         },
         "operations": {
@@ -310,6 +313,7 @@
             "localized_translation_language": "Trieu una llengua",
             "localized_translation_name": "Nom"
         },
+        "zoom_in_edit": "Apropeu-vos més per editar",
         "login": "inicia sessió",
         "logout": "Tancar la sessió",
         "loading_auth": "Connectant a OpenStreetMap...",
@@ -341,7 +345,7 @@
             "about_changeset_comments": "Quant als comentaris del conjunt de canvis",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
             "google_warning": "Has mencionat Google en aquest comentari: recorda que la còpia de Google Maps està estrictament prohibida.",
-            "google_warning_link": "http://www.openstreetmap.org/copyright"
+            "google_warning_link": "https://www.openstreetmap.org/copyright"
         },
         "contributors": {
             "list": "Edicions fetes per {users}",
@@ -360,7 +364,9 @@
                 "accuracy": "Precisió",
                 "unknown": "Desconegut",
                 "show_tiles": "Mostrar rajoles",
-                "hide_tiles": "Ocultar rajoles"
+                "hide_tiles": "Ocultar rajoles",
+                "show_vintage": "Mostra l'antic",
+                "hide_vintage": "Oculta l'antic"
             },
             "history": {
                 "key": "H",
@@ -391,7 +397,8 @@
                 "centroid": "Centroide",
                 "location": "Ubicació",
                 "metric": "Mètric",
-                "imperial": "Imperial"
+                "imperial": "Imperial",
+                "node_count": "Nombre de nodes"
             }
         },
         "geometry": {
@@ -457,21 +464,18 @@
             "title": "Fons",
             "description": "Paràmetres de configuració del fons",
             "key": "B",
-            "percent_brightness": "{opacity}% brillantor",
             "none": "Cap",
             "best_imagery": "Font d'imatgeria millor coneguda per a aquesta ubicació",
             "switch": "Senyals de trànsit ",
             "custom": "Personalitzar",
             "custom_button": "Editar el fons personalitzat",
-            "fix_misalignment": "Ajusta la alineació de la imatgeria",
-            "imagery_source_faq": "D'on prové aquesta imatgeria?",
             "reset": "reiniciar",
-            "offset": "Arrosega cap a qualsevol lloc de la zona gris de sota per ajustar la alineació de la imatgeria, o entra els valors de la alineació en metres.",
             "minimap": {
-                "description": "Miniatura del mapa",
                 "tooltip": "Mostra un mapa amb menys zoom per ajudar a localitzar l'àrea que es mostra actualment.",
                 "key": "/"
-            }
+            },
+            "fix_misalignment": "Ajusta la alineació de la imatgeria",
+            "offset": "Arrosega cap a qualsevol lloc de la zona gris de sota per ajustar la alineació de la imatgeria, o entra els valors de la alineació en metres."
         },
         "map_data": {
             "title": "Dades del mapa",
@@ -610,7 +614,8 @@
         "splash": {
             "welcome": "Benvinguts a l'editor iD per a l'OpenStreetMap",
             "text": "L'editor iD és una eina fàcil i potent per contribuir al millor mapa lliure del món. Aquesta és la versió {version}. Per obtenir més informació visiteu {website} i si voleu comunicar l'existència d'algun error feu-ho a {github}.",
-            "walkthrough": "Comenceu la visita guiada"
+            "walkthrough": "Comenceu la visita guiada",
+            "start": "Editeu-lo ara"
         },
         "source_switch": {
             "live": "directe",
@@ -628,6 +633,7 @@
         "validations": {
             "disconnected_highway": "Via desconnectada",
             "disconnected_highway_tooltip": "Les vies haurien de connectar altres vies o entrades d'edificis.",
+            "old_multipolygon": "Etiqueta Multipoligon en ",
             "untagged_point": "Punt sense etiquetar",
             "untagged_point_tooltip": "Seleccioneu un tipus d'objecte que descrigui el que és aquest punt.",
             "untagged_line": "Línia sense etiquetar",
@@ -639,6 +645,10 @@
             "many_deletions": "Esteu eliminant  {n} objectes. Segur que ho voleu fer? Això els eliminarà del mapa que tothom veu a openstreetmap.org",
             "tag_suggests_area": "L'etiqueta {tag} suggereix que la línia hauria de ser una àrea, però no és una àrea",
             "deprecated_tags": "Etiquetes obsoletes : {tags}"
+        },
+        "zoom": {
+            "in": "Apropa't",
+            "out": "Allunya't"
         },
         "cannot_zoom": "No es pot allunyar més la vista al mode actual.",
         "full_screen": "Passar a pantalla completa",
@@ -659,14 +669,89 @@
         "mapillary": {
             "view_on_mapillary": "Visualitzeu la imatge a Mapillary"
         },
+        "openstreetcam_images": {
+            "tooltip": "Fotografies a peu de carrer de OpenStreetCam",
+            "title": "Capa de fotografia (OpenStreetCam)"
+        },
+        "openstreetcam": {
+            "view_on_openstreetcam": "Visualitzeu la imatge a OpenStreetCam"
+        },
         "help": {
             "title": "Ajuda",
             "key": "H",
-            "help": "# Ajuda\n\nAixò és un editor per al [OpenStreetMap](http://www.openstreetmap.org/), el mapa lliure i editable del món. Podeu utilitzar-lo per afegir i actualitzar\nles dades a la vostra àrea, contibuint així a fer un mapa de codi obert i amb dades lliures del món\nmillor per a tothom.\n\nLes edicions que feu en aquest mapa seran visibles per tothom que faci servir OpenStreetMap. Per tal de començar a editar, necessitareu\n[iniciar sessió](https://www.openstreetmap.org/login).\n\nL'[Editor iD](http://ideditor.com/) és un projecte cooperatiu que té el [codi font\ndisponible a GitHub](https://github.com/openstreetmap/iD).\n",
-            "gps": "# GPS\n\nLes traces enregistrades amb GPS són una font fiable de dades per a l'OpenStreetMap. Aquest editor accepta les traces locals - fitxers `.gpx` del vostre ordinador. Podeu generar aquest tipus de traça GPS amb aplicacions per a mòbils o per dispositius personals de GPS.\n\nPer a més informació de com recollir dades amb GPS, llegiu [Recollir dades amb GPS](http://learnosm.org/en/mobile-mapping/).\n\nPer utilitzar una traça GPX en la edició del mapa arrossegueu el fitxer GPX i deixeu-lo a l'editor. En detectar-se, s'afegirà en el mapa com una línia lila llampant. Cliqueu al menú 'Dades del mapa', al cantó dret, per activar, desactivar, o ajustar la visió d'aquesta capa GPX.\n\nLa traça GPX no pujarà directament a OpenStreetMap - la millor manera d'utilitzar-la és que dibuixeu en el mapa els nous objectes, fent-la servir com a guia. De tota manera, també la podeu [pujar a l'OpenStreetMap] (http://www.openstreetmap.org/trace/create) perquè d'altres persones l'aprofitin.\n",
-            "imagery": "# Imatgeria\n\nLa imatgeria aèria és un recurs important per a l'edició de mapes. Una combinació de\nvols d'aeronaus, fotografies de satèl·lit, i d'altres fonts compilades gratuïtament\nestan disponibles a l'editor dins del menú de l'esquerra 'Paràmetres de configuració del fons'.\n\nPer defecte, l'editor mostra la capa de satèl·lit de [Bing Maps](http://www.bing.com/maps/), però a mesura que us moveu i ajusteu la vista del mapa a noves àrees geogràfiques, noves fonts estaran disponibles. En alguns països, com ara els Estats Units, França, i Dinamarca tenen\nuna imatgeria d'alta qualitat disponible per a determinades àrees.\n\nLa imatgeria a vegades no es correspon amb les dades del mapa, això és degut a un error\nper part del proveïdor de la imatge. Si observeu moltes carreteres mogudes del seu lloc a la imatge,\nno les mogueu per tal que encaixin amb aquesta. Ja que podeu ajustar la imatgeria per tal de que quadri amb les dades existents clicant a 'Corregeix la desalineació' al capdevall de la pestanya dels\n'Paràmetres de configuració del fons'.\n",
-            "addresses": "# Adreçes\n\nLes adreçes són una de les informacions més útils per al mapa.\n\nTot i que les adreces sovint es representen com a part del carrer, a l'OpenStreetMap\nes desen com a atributs dels edificis i llocs al llarg dels carrers\n\nPodeu afegir la informació de l'adreça a llocs cartografiats com a edificis com també\na aquells llocs cartografiats com a simples punts. La forma òptima d'obtenir dades\nde les adreces és a partir d'un estudi al carrer o bé el coneixement propi - com a qualsevol altre element, la còpia de fonts comercials com ara el Google Maps és estrictament prohibida.\n",
-            "inspector": "# Utilitzant l'inspector\n\nL'inspector és la secció de la interfície d'usuari que es troba al cantó esquerra de la pàgina i que us permet editar els detalls del objecte seleccionat.\n\n### Selecció del tipus d'objecte\n\nDesprés d'afegir un punt, línia, o àrea, podreu seleccionar el tipus d'objecte que es tracti, tant si és una autopista com un carrer residencial, un supermercat o un cafè. L'inspector mostrarà botons per els tipus d'objecte més comuns, i en podreu trobar d'altres escrivint el que estigueu buscant al quadre de cerca.\n\nCliqueu la 'i' al cantó inferior dret del botó del tipus d'objecte per saber-ne més. Cliqueu un botó per seleccionar el tipus.\n\n### Utilitzant formularis i etiquetes d'edició\n\nDesprés de seleccionar el tipus d'objecte, o quan en seleccioneu un que ja el tingui assignat, l'inspector mostrarà uns camps amb detalls de l'objecte, com el seu nom o la seva adreça.\n\nSota dels camps que es mostrin, podeu clicar el desplegable  'Afegir camp' per afegir altres detalls, com ara un enllaç a la Viquipèdia, si té accés per a cadires de rodes i altres camps.\n\nA la part inferior de l'inspector, cliqueu 'Etiquetes addicionals' per afegir altres etiquetes arbitràries a l'element. [Taginfo](http://taginfo.openstreetmap.org/) és una gran eina per aprendre'n més sobre les combinacions d'etiquetes més populars.\n\nEls canvis que feu a l'inspector s'aplicaran automàticament al mapa. Els podreu desfer en qualsevol moment clicant al botó 'Desfer'.\n"
+            "help": {
+                "title": "Ajuda",
+                "open_data_h": "Dades Obertes",
+                "before_start_h": "Abans de començar",
+                "open_source_h": "Font Oberta"
+            },
+            "overview": {
+                "title": "Visió general",
+                "navigation_h": "Navegació",
+                "features_h": "Característiques del mapa"
+            },
+            "editing": {
+                "title": "Editant i Salvant",
+                "select_h": "Selecciona",
+                "multiselect_h": "Selecció múltiple",
+                "undo_redo_h": "Desfer i Refer",
+                "save_h": "Desar",
+                "upload_h": "Puja",
+                "backups_h": "Copia de seguretat automàtica",
+                "keyboard_h": "Dreceres de teclat"
+            },
+            "feature_editor": {
+                "title": "Editor de característiques",
+                "type_h": "Tipus de característiques",
+                "fields_h": "Camps",
+                "tags_h": "Etiquetes"
+            },
+            "points": {
+                "title": "Punts",
+                "add_point_h": "Afegint punts",
+                "move_point_h": "Movent punts",
+                "delete_point_h": "Eliminant punts"
+            },
+            "lines": {
+                "title": "Línies",
+                "add_line_h": "Afegint línies",
+                "modify_line_h": "Modificant línies",
+                "connect_line_h": "Connectant línies",
+                "disconnect_line_h": "Desconnectant línies",
+                "move_line_h": "Movent línies",
+                "delete_line_h": "Eliminant línies"
+            },
+            "areas": {
+                "title": "Àrees",
+                "point_or_area_h": "Punts o àrees?",
+                "add_area_h": "Afegint àrees",
+                "square_area_h": "Quadra les cantonades",
+                "modify_area_h": "Modificant àrees",
+                "delete_area_h": "Eliminant àrees"
+            },
+            "relations": {
+                "title": "Relacions",
+                "edit_relation_h": "Editant relacions",
+                "maintain_relation_h": "Mantenint  les relacions",
+                "relation_types_h": "Tipus de relacions",
+                "multipolygon_h": "Multipolígon",
+                "turn_restriction_h": "Restriccions de gir",
+                "route_h": "Rutes",
+                "boundary_h": "Límits"
+            },
+            "imagery": {
+                "title": "Imatges de fons",
+                "sources_h": "Fonts d'imatges",
+                "offsets_h": "Ajusta la alineació de la imatgeria"
+            },
+            "streetlevel": {
+                "title": "Fotografies a peu de carrer",
+                "using_h": "Fent servir fotografies a peu de carrer"
+            },
+            "gps": {
+                "title": "Traces GPS",
+                "using_h": "Fent servir Traces GPS"
+            }
         },
         "intro": {
             "done": "Fet",
@@ -701,7 +786,12 @@
                     "adams-street": "Carrer Adams",
                     "andrews-elementary-school": "Escola de primària Andrews",
                     "andrews-street": "Carrer Andrews",
-                    "pizza-hut": "Pizza Hut"
+                    "armitage-street": "Carrer Armitage",
+                    "barrows-school": "Escola Barrows",
+                    "pizza-hut": "Pizza Hut",
+                    "river-drive": "Carrer del riu",
+                    "river-road": "Carretera del riu",
+                    "water-street": "Carrer de l'Aigua"
                 }
             },
             "welcome": {
@@ -752,7 +842,6 @@
             },
             "areas": {
                 "title": "Àrees",
-                "add_playground": "*Àrees* s'utilitza per definir els límits d'objectes com llacs, edificis o àrees residencials.{br}També es poden utilitzar per incloure més detalls al mapa de molts objectes que altrament deixaríeu com un punt. **Cliqueu el botó {button} Àrea per afegir una nova àrea.**",
                 "start_playground": "Afegim aquesta zona de joc al mapa dibuixant una àrea. Les àrees es dibuixen situant *nodes* seguint el límit extern de l'objecte. **Cliqueu o premeu la barra espaiadora per situar el primer node a una de les cantonades de la zona de joc.**",
                 "finish_playground": "Acabeu l'àrea prement la tecla de retorn o clicant altre cop el primer o el darrer node. **Acabeu de dibuixar una àrea per al parc.**",
                 "search_playground": "**Cerqueu «{preset}».**",
@@ -830,17 +919,41 @@
                 "enter": "Entrar",
                 "esc": "Esc",
                 "home": "Inicio",
+                "option": "Opció",
+                "pause": "Pausa",
                 "pgdn": "Av Pág",
-                "pgup": "Re Pág"
+                "pgup": "Re Pág",
+                "return": "Tornar",
+                "shift": "Majuscula",
+                "space": "Espai"
+            },
+            "gesture": {
+                "drag": "Arrossega"
             },
             "or": "-o-",
             "browsing": {
                 "title": "Cercant",
                 "navigation": {
-                    "title": "Navegació"
+                    "title": "Navegació",
+                    "pan": "Mapa panoràmic",
+                    "zoom": "Apropa't / Allunya't"
                 },
                 "help": {
                     "title": "Ajuda"
+                },
+                "display_options": {
+                    "title": "Opcions de pantalla",
+                    "fullscreen": "Introduïu mode de pantalla sencera",
+                    "minimap": "Canvia al minimap"
+                },
+                "with_selected": {
+                    "edit_menu": "Canvia al menú d'edició"
+                },
+                "vertex_selected": {
+                    "previous": "Salta al node anterior",
+                    "next": "Salta al següent node",
+                    "first": "Salta al primer node",
+                    "last": "Salta al node final"
                 }
             },
             "editing": {
@@ -849,13 +962,34 @@
                     "title": "Dibuixant",
                     "add_point": "Mode \"Afegir punt\"",
                     "add_line": "Mode \"Afegir línia\"",
-                    "add_area": "Mode \"Afegir Àrea\""
+                    "add_area": "Mode \"Afegir Àrea\"",
+                    "place_point": "Seleccioneu un punt"
+                },
+                "operations": {
+                    "title": "Operaccions",
+                    "reverse": "Reverteix una línia.",
+                    "move": "Mou característiques seleccionades",
+                    "rotate": "Gira característiques seleccionades",
+                    "delete": " Esborra característiques seleccionades"
+                },
+                "commands": {
+                    "title": "Ordres",
+                    "copy": "Copia característiques seleccionades",
+                    "paste": "Pega característiques seleccionades",
+                    "undo": "Desfeu l'ultima acció",
+                    "redo": "Refeu l'ultima acció",
+                    "save": "Salveu el canvis"
                 }
             },
             "tools": {
                 "title": "Ferramentes",
                 "info": {
-                    "title": "Informació"
+                    "title": "Informació",
+                    "all": "Canvia tots els panells d'informació",
+                    "background": "Canvia al panell de fons",
+                    "history": "Canvia al panell d'historial",
+                    "location": "Canvia al panell d'ubicació",
+                    "measurement": "Canvia al panell de mesura"
                 }
             }
         },
@@ -1028,6 +1162,9 @@
                 "aeroway": {
                     "label": "Tipus"
                 },
+                "agrarian": {
+                    "label": "Productes"
+                },
                 "amenity": {
                     "label": "Tipus"
                 },
@@ -1119,6 +1256,7 @@
                     "label": "Tipus"
                 },
                 "cables": {
+                    "label": "Cables",
                     "placeholder": "1, 2, 3..."
                 },
                 "camera/direction": {
@@ -1140,36 +1278,8 @@
                     "label": "Capacitat",
                     "placeholder": "50, 100, 200..."
                 },
-                "cardinal_direction": {
-                    "label": "Direcció",
-                    "options": {
-                        "E": "Est",
-                        "ENE": "Est-nord-est",
-                        "ESE": "Est-sud-est",
-                        "N": "Nord",
-                        "NE": "Nord-est",
-                        "NNE": "Nord-nord-est",
-                        "NNW": "Nord-nord-oest",
-                        "NW": "Nord-oest",
-                        "S": "Sud",
-                        "SE": "Sud-est",
-                        "SSE": "Sud-sud-est",
-                        "SSW": "Sud-sud-oest",
-                        "SW": "Sud-oest",
-                        "W": "Oest",
-                        "WNW": "Oest-nord-oest",
-                        "WSW": "Oest-sud-oest"
-                    }
-                },
                 "castle_type": {
                     "label": "Tipus"
-                },
-                "clock_direction": {
-                    "label": "Direcció",
-                    "options": {
-                        "anticlockwise": "en sentit contrari al de les agulles del rellotge",
-                        "clockwise": "en sentit de les agulles del rellotge"
-                    }
                 },
                 "clothes": {
                     "label": "Roba"
@@ -1405,6 +1515,9 @@
                     "label": "Font"
                 },
                 "generator/type": {
+                    "label": "Tipus"
+                },
+                "government": {
                     "label": "Tipus"
                 },
                 "grape_variety": {
@@ -1705,13 +1818,6 @@
                     "label": "Par",
                     "placeholder": "3, 4, 5..."
                 },
-                "parallel_direction": {
-                    "label": "Direcció",
-                    "options": {
-                        "backward": "Enrere",
-                        "forward": "Endavant"
-                    }
-                },
                 "park_ride": {
                     "label": "Aparca i viatja "
                 },
@@ -1815,13 +1921,6 @@
                 },
                 "recycling_accepts": {
                     "label": "N'accepta"
-                },
-                "recycling_type": {
-                    "label": "Tipus de reciclatge",
-                    "options": {
-                        "centre": "Centre de reciclatge",
-                        "container": "Contenidor"
-                    }
                 },
                 "ref": {
                     "label": "Codi de referència"
@@ -2361,9 +2460,6 @@
                 "amenity/bureau_de_change": {
                     "name": "Canvi de divisa"
                 },
-                "amenity/bus_station": {
-                    "name": "Estació d'autobusos"
-                },
                 "amenity/cafe": {
                     "name": "Cafè",
                     "terms": "Cafè, bar, cafeteria"
@@ -2448,9 +2544,6 @@
                 "amenity/fast_food": {
                     "name": "Local de menjar ràpid",
                     "terms": "Menjar ràpid, servei de menjar ràpid, restaurant de menjar ràpid, Local de menjar ràpid"
-                },
-                "amenity/ferry_terminal": {
-                    "name": "Terminal de Ferry"
                 },
                 "amenity/fire_station": {
                     "name": "Parc de bombers",
@@ -2589,9 +2682,6 @@
                 "amenity/ranger_station": {
                     "name": "Base d'Agents Rurals"
                 },
-                "amenity/recycling": {
-                    "name": "Reciclatge"
-                },
                 "amenity/recycling_centre": {
                     "name": "Centre de Reciclatge"
                 },
@@ -2721,6 +2811,9 @@
                 },
                 "area/highway": {
                     "name": "Superfície de la carretera"
+                },
+                "attraction/pirate_ship": {
+                    "name": "Vaixell pirata"
                 },
                 "barrier": {
                     "name": "Barrera",
@@ -2952,6 +3045,9 @@
                 "craft/clockmaker": {
                     "name": "Rellotger"
                 },
+                "craft/distillery": {
+                    "name": "Destil·leria"
+                },
                 "craft/dressmaker": {
                     "name": "Sastreria"
                 },
@@ -3024,6 +3120,9 @@
                 "craft/scaffolder": {
                     "name": "Muntador de bastides"
                 },
+                "craft/sculptor": {
+                    "name": "Escultor"
+                },
                 "craft/shoemaker": {
                     "name": "Sabater"
                 },
@@ -3055,7 +3154,8 @@
                     "name": "Terraplè "
                 },
                 "emergency/ambulance_station": {
-                    "name": "Parada d'ambulàncies"
+                    "name": "Parada d'ambulàncies",
+                    "terms": "Estació d'ambulàncies"
                 },
                 "emergency/defibrillator": {
                     "name": "Desfibril·lador"
@@ -3132,6 +3232,9 @@
                 "golf/water_hazard_line": {
                     "name": "Obstacle d'aigua"
                 },
+                "healthcare/alternative/chiropractic": {
+                    "name": "Quiropràctic"
+                },
                 "healthcare/blood_donation": {
                     "name": "Centre de donació de sang"
                 },
@@ -3141,10 +3244,6 @@
                 "highway/bridleway": {
                     "name": "Camí de ferradura",
                     "terms": "Camí de ferradura, cavall, camí eqüestre, via eqüestre, ferradura, via de ferradura"
-                },
-                "highway/bus_stop": {
-                    "name": "Parada d'autobús",
-                    "terms": "Parada de bus, Parada"
                 },
                 "highway/corridor": {
                     "name": "Corredor interior"
@@ -3359,9 +3458,6 @@
                 "landuse/forest": {
                     "name": "Bosc",
                     "terms": "Massa forestal,Bosc,Arbreda"
-                },
-                "landuse/garages": {
-                    "name": "Garatges"
                 },
                 "landuse/grass": {
                     "name": "Herba",
@@ -3741,11 +3837,7 @@
                     "terms": "Oficina, Oficines"
                 },
                 "office/administrative": {
-                    "name": "Oficina de tràmits locals",
-                    "terms": "Oficina administrativa"
-                },
-                "office/company": {
-                    "name": "Oficines de companyia"
+                    "name": "Oficina de tràmits locals"
                 },
                 "office/coworking": {
                     "name": "Espai de coworking"
@@ -3775,8 +3867,7 @@
                     "name": "Bufet d'advocats"
                 },
                 "office/lawyer/notary": {
-                    "name": "Notaria",
-                    "terms": "Oficina del notari"
+                    "name": "Notaria"
                 },
                 "office/ngo": {
                     "name": "Oficina d'ONG"
@@ -3866,12 +3957,6 @@
                     "name": "Transformador",
                     "terms": "Transformador"
                 },
-                "public_transport/platform": {
-                    "name": "Plataforma"
-                },
-                "public_transport/stop_position": {
-                    "name": "Posició d'aturada"
-                },
                 "railway": {
                     "name": "Ferrocarril"
                 },
@@ -3888,9 +3973,6 @@
                 "railway/funicular": {
                     "name": "Funicular"
                 },
-                "railway/halt": {
-                    "name": "Parada de Ferrocarril"
-                },
                 "railway/level_crossing": {
                     "name": "Pas a nivell (carretera)"
                 },
@@ -3901,14 +3983,8 @@
                 "railway/narrow_gauge": {
                     "name": "Ferrocarril de via estreta"
                 },
-                "railway/platform": {
-                    "name": "Andana "
-                },
                 "railway/rail": {
                     "name": "Via fèrria"
-                },
-                "railway/station": {
-                    "name": "Estació de tren"
                 },
                 "railway/subway": {
                     "name": "Metro",
@@ -3921,9 +3997,6 @@
                 "railway/tram": {
                     "name": "Tramvia ",
                     "terms": "Tranvia, Tram"
-                },
-                "railway/tram_stop": {
-                    "name": "Parada de tramvia"
                 },
                 "relation": {
                     "name": "Relació",
@@ -4151,9 +4224,6 @@
                 },
                 "shop/jewelry": {
                     "name": "Joieria"
-                },
-                "shop/kiosk": {
-                    "name": "Quiosc de diaris"
                 },
                 "shop/kitchen": {
                     "name": "Botiga de disseny de cuines"
@@ -4625,7 +4695,8 @@
                 "attribution": {
                     "text": "Termes i comentaris"
                 },
-                "description": "Imatges aèries i de satèl·lit."
+                "description": "Imatges aèries i de satèl·lit.",
+                "name": "Satèl·lit Mapbox "
             },
             "OSM_Inspector-Addresses": {
                 "attribution": {
@@ -4666,31 +4737,67 @@
             "OSM_Inspector-Tagging": {
                 "attribution": {
                     "text": "© Geofabrik GmbH, OpenStreetMap col·laboradors, CC-BY-SA"
-                }
+                },
+                "name": "Inspector OSM: Etiquetatge"
+            },
+            "US-TIGER-Roads-2012": {
+                "name": "Carreteres TIGER 2012"
+            },
+            "US-TIGER-Roads-2014": {
+                "description": "Al nivell de zoom 16+, les dades del mapa són del domini públic del US Census. A zooms més baixos, només canvis d'ençà de 2006, els canvis menors incorporats a OpenStreetMap",
+                "name": "Carreteres TIGER 2014"
+            },
+            "US-TIGER-Roads-2017": {
+                "description": "Groc = Dades de mapa del domini públic del US Census. Vermell = No es troben dades a OpenStreetMap",
+                "name": "Carreteres TIGER 2017"
+            },
+            "Waymarked_Trails-Cycling": {
+                "name": "Waymarked Trails: Ciclisme"
+            },
+            "Waymarked_Trails-Hiking": {
+                "name": "Waymarked Trails: Senderisme"
+            },
+            "Waymarked_Trails-MTB": {
+                "name": "Waymarked Trails: Ciclisme de Muntanya"
+            },
+            "Waymarked_Trails-Skating": {
+                "name": "Waymarked Trails: Patinatge"
+            },
+            "Waymarked_Trails-Winter_Sports": {
+                "name": "Waymarked Trails: Esports d'hivern"
             },
             "basemap.at": {
                 "attribution": {
                     "text": "basemap.at"
                 },
+                "description": "Mapa Base d'Austria, basat en dades governamentals.",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
                 "attribution": {
                     "text": "basemap.at"
-                }
+                },
+                "description": "Capa d'ortofoto proveïda per basemap.at. \"Successora\" de geoimage.at imagery.",
+                "name": "Ortofoto basemap.at "
             },
             "hike_n_bike": {
+                "attribution": {
+                    "text": "© OpenStreetMap col·laboradors"
+                },
                 "name": "Excursió i bicicleta"
             },
             "mapbox_locator_overlay": {
                 "attribution": {
                     "text": "Termes i comentaris"
-                }
+                },
+                "description": "Visualitza característiques importants per ajudar a orientar-te.",
+                "name": "Localitzador superposat"
             },
             "openpt_map": {
                 "attribution": {
                     "text": "© OpenStreetMap col·laboradors, CC-BY-SA"
-                }
+                },
+                "name": "OpenPT Map (superposat)"
             },
             "osm-gps": {
                 "attribution": {
@@ -4710,6 +4817,36 @@
                     "text": "© OpenStreetMap col·laboradors, CC-BY-SA"
                 },
                 "name": "OpenStreetMap (Estil alemany)"
+            },
+            "qa_no_address": {
+                "attribution": {
+                    "text": "Simon Poole, Dades ©OpenStreetMap col·laboradors"
+                },
+                "name": "QA Sense adreça"
+            },
+            "skobbler": {
+                "attribution": {
+                    "text": "© Quadrícules: skobbler Dades del mapa: OpenStreetMap col·laboradors"
+                },
+                "name": "skobbler"
+            },
+            "stamen-terrain-background": {
+                "attribution": {
+                    "text": "Quadricula de mapes de Stamen Design, sota CC BY 3.0"
+                },
+                "name": "Stamen Terrain"
+            },
+            "tf-cycle": {
+                "attribution": {
+                    "text": "Mapes © Thunderforest, Dades © OpenStreetMap col·laboradors"
+                },
+                "name": "Thunderforest OpenCycleMap"
+            },
+            "tf-landscape": {
+                "attribution": {
+                    "text": "Mapes © Thunderforest, Dades © OpenStreetMap col·laboradors"
+                },
+                "name": "Thunderforest Landscape"
             }
         }
     }

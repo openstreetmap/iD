@@ -145,6 +145,9 @@ export function uiIntroWelcome(context, reveal) {
 
     chapter.exit = function() {
         listener.off();
+        d3_select('.curtain-tooltip.intro-mouse')
+            .selectAll('.counter')
+            .remove();
     };
 
 

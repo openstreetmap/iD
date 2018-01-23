@@ -25,6 +25,9 @@
             },
             "draw_line": {
                 "tail": "برای افزودن گره های بیشتر به خط کلیک کنید. برای اتصال به سایر خطوط روی آنها کلیک کنید، و برای پایان دادن به خط دو بار کلیک کنید."
+            },
+            "drag_node": {
+                "connected_to_hidden": "این عنصر به دلیل متصل بودن به یک عنصر مخفی قابل تغییر نیست. "
             }
         },
         "operations": {
@@ -113,6 +116,10 @@
                     "relation": "رابطه حذف شد.",
                     "multiple": "{n} عنصر از نقشه حذف شد."
                 },
+                "too_large": {
+                    "single": "امکان حذف این عناصر وجود ندارد زیرا در حال حاضر مقدار کاقی از آن‌ها وجود ندارد.",
+                    "multiple": "امکان حذف این عناصر به دلیل متعلق بودن به یک رابطه بزرگتر وجود ندارد. لطفا ابتدا آن‌ها را از رابطه حذف کنید"
+                },
                 "incomplete_relation": {
                     "single": "این عنصر قابل حذف نیست زیرا کاملا دانلود نشده.",
                     "multiple": "این عناصر قابل حذف نیستند چون به صورت کامل دانلود نشده‌اند."
@@ -155,6 +162,7 @@
                 "key": "C",
                 "annotation": "{n} عنصر ادغام شده.",
                 "not_eligible": "این عناصر قابل ترکیب نیستند.",
+                "not_adjacent": "امکان ادغام این وبژگی‌ها وجود ندارد زیرا کانکشن آنها قطع است.",
                 "restriction": "امکان ادغام این عناصر وجود ندارد زیرا حداقل یکی از آن‌ها جزو رابطه \"{relation}\" می‌باشد.",
                 "incomplete_relation": "امکان ادغام این عناصر وجود ندارد زیرا حداقل یکی از آن‌ها کامل دانلود نشده است.",
                 "conflicting_tags": "امکان ادغام این عناصر وجود ندارد زیرا بعضی از آن‌ها دارای برچسب‌هایی با مقادیر مخالف یکدیگر هستند."
@@ -187,6 +195,10 @@
                 }
             },
             "reflect": {
+                "title": {
+                    "long": "بازتاب طولانی",
+                    "short": " بازتاب کوتاه"
+                },
                 "description": {
                     "long": {
                         "single": "بازتاب این عنصر حول قطر بزرگش.",
@@ -329,36 +341,53 @@
             "created": "ساخته شد",
             "about_changeset_comments": "درباره توضیحات تغییرات",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
-            "google_warning": "شما در توضیحات خود از گوگل نام بردید. لطفا توجه داشته باشید که کپی کردن از نقشه‌های گوگل، ممنوع است.",
-            "google_warning_link": "http://www.openstreetmap.org/copyright"
+            "google_warning": "شما در توضیحات خود از گوگل نام بردید. لطفا توجه داشته باشید که کپی کردن از نقشه‌های گوگل، ممنوع است."
         },
         "contributors": {
             "list": "ویرایش توسط {users}",
             "truncated_list": "ویرایش توسط  {users} و {count}  نفر دیگر"
         },
         "info_panels": {
+            "key": "I",
             "background": {
+                "key": "B",
                 "title": "پس زمینه",
                 "zoom": "بزرگنمایی",
+                "vintage": "حالت تاریک",
+                "source": "سورس",
                 "description": "توضیح",
                 "resolution": "وضوح",
                 "accuracy": "دقت",
-                "unknown": "نامعلوم"
+                "unknown": "نامعلوم",
+                "show_tiles": "نمایش قسمتها",
+                "hide_tiles": "پنهان کردن قسمتها"
             },
             "history": {
+                "key": "H",
                 "title": "تاریخچه",
+                "version": "ورژن",
                 "last_edit": "آخرین ویرایش",
+                "edited_by": "ویرایش شده توسط:",
                 "unknown": "نامعلوم",
                 "link_text": "سابقه در openstreetmap.org"
             },
             "location": {
-                "title": "مکان"
+                "key": "L",
+                "title": "مکان",
+                "unknown_location": "مکان ناشناخته"
             },
             "measurement": {
+                "key": "M",
                 "title": "اندازه",
+                "closed": "بسته شده",
+                "center": "مرکز",
+                "perimeter": "محیط",
                 "length": "درازا",
                 "area": "ناحیه",
-                "location": "مکان"
+                "centroid": "مرکز",
+                "location": "مکان",
+                "metric": "متریک",
+                "imperial": "امپراتوری"
             }
         },
         "geometry": {
@@ -402,10 +431,12 @@
             "edit": "ویرایش عنصر",
             "check": {
                 "yes": "بله",
-                "no": "خیر"
+                "no": "خیر",
+                "reverser": "تغییر مسیر"
             },
             "radio": {
                 "structure": {
+                    "type": "نوع",
                     "default": "پیش‌فرض",
                     "layer": "لایه"
                 }
@@ -421,24 +452,26 @@
         "background": {
             "title": "پس زمینه",
             "description": "تنظیمات پس زمینه",
-            "percent_brightness": "{opacity}% روشنایی",
+            "key": "B",
+            "backgrounds": "پس زمینه",
             "none": "هیچ",
             "best_imagery": "بهترین منبع تصویری شناخته شده برای این مکان",
             "switch": "بازگشت به این پس‌زمینه",
             "custom": "سفارشی",
             "custom_button": "ویرایش پشت زمینه سفارشی",
-            "fix_misalignment": "تنظیم فاصله تصویری",
-            "imagery_source_faq": "منبع این تصویر کجاست؟",
             "reset": "باز نشاندن",
-            "offset": "برای تنظیم افست تصاویر، محدوده خاکستری زیر را بکشید یا مقادیر را به متر در کادر زیر وارد کنید.",
+            "brightness": "روشنایی",
             "minimap": {
-                "description": "نقشه کوچک",
-                "tooltip": "برای پیدا کردن محل منطقه نشان داده شده، یک نقشه کوچک نمایی نشان بده"
-            }
+                "tooltip": "برای پیدا کردن محل منطقه نشان داده شده، یک نقشه کوچک نمایی نشان بده",
+                "key": "/"
+            },
+            "fix_misalignment": "تنظیم فاصله تصویری",
+            "offset": "برای تنظیم افست تصاویر، محدوده خاکستری زیر را بکشید یا مقادیر را به متر در کادر زیر وارد کنید."
         },
         "map_data": {
             "title": "نقشه داده",
             "description": "نقشه داده",
+            "key": "F",
             "data_layers": "لایها داده ها",
             "fill_area": "محدوده‌ها را پر کنید",
             "map_features": "عناصر نقشه",
@@ -497,7 +530,8 @@
         "area_fill": {
             "wireframe": {
                 "description": "بدون پر کردن (قاب سیمی)",
-                "tooltip": "فعال کردن قاب سیمی، مشاهده تصاویر پس‌زمینه را آسان می‌کند."
+                "tooltip": "فعال کردن قاب سیمی، مشاهده تصاویر پس‌زمینه را آسان می‌کند.",
+                "key": "W"
             },
             "partial": {
                 "description": "پر کردن جزئی",
@@ -554,6 +588,7 @@
             "help_link_url": "https://wiki.openstreetmap.org/wiki/Fa:FAQ#.D9.85.D9.86_.D8.AA.D8.BA.DB.8C.DB.8C.D8.B1.D8.A7.D8.AA.DB.8C_.D8.AF.D8.B1_.D9.86.D9.82.D8.B4.D9.87_.D8.A7.DB.8C.D8.AC.D8.A7.D8.AF_.DA.A9.D8.B1.D8.AF.D9.85.D8.8C_.DA.86.D8.B7.D9.88.D8.B1_.D9.85.DB.8C_.D8.AA.D9.88.D8.A7.D9.86.D9.85_.D9.88.DB.8C.D8.B1.D8.A7.DB.8C.D8.B4_.D9.87.D8.A7.DB.8C_.D8.AE.D9.88.D8.AF_.D8.B1.D8.A7_.D8.A8.D8.A8.DB.8C.D9.86.D9.85.D8.9F"
         },
         "confirm": {
+            "okay": "ok",
             "cancel": "لغو"
         },
         "splash": {
@@ -589,6 +624,9 @@
         },
         "cannot_zoom": "در حالت فعلی بیش از این نمیتوان کوچک نمایی کرد.",
         "full_screen": "تعویض صفحه‌نمایش کامل",
+        "gpx": {
+            "browse": "جستجو برای فایل"
+        },
         "mapillary_images": {
             "tooltip": "عکس‌های خیابانی از Mapillary",
             "title": "لایه پوشش عکس (Mapillary)"
@@ -602,14 +640,48 @@
         },
         "help": {
             "title": "راهنمایی",
-            "help": "#راهنمایی\n\nاین یک ویرایشگر برای  [OpenStreetMap](http://www.openstreetmap.org/) است،\nنقشه ای رایگان و قابل ویرایش از جهان. شما میتوانید از آن برای افزودن و بروزرسانی\nداده ها در ناحیه‌تان استفاده کنید، ساختن نقشه ی منبع‌باز و داده‌باز از جهان\nبرای همه بهتر است.\n\nویرایش هایی که شما در این نقشه می سازید برای هر کسی که از OpenStreetMap استفاده میکند قابل استفاده است. برای ایجاد یک ویرایش، شما نیاز دارید که یک\n[حساب رایگان OpenStreetMap](https://www.openstreetmap.org/user/new) داشته باشید.\n\n[ویرایشگر ID](http://ideditor.com/) یک پروژه مشترک است که [منبع کد در GitHub\nموجود است](https://github.com/systemed/iD).\n",
-            "gps": "# جی‌پی‌اس\n\nردیابی‌های جی‌پی‌اس جمع‌آوری شده یکی از منابع ارزشمند برای اوپن‌استریت‌مپ هستند.\nاین ویرایشگر از ردیابی‌های محلی (پرونده‌های `.gpx`) پشتیبانی می‌کند.\nشما می‌توانید این نوع ردیابی‌ها را با بعضی از نرم‌افزارهای تلفن‌های هوشمند یا سخت‌افزارهای GPS ضبط کنید.\n\nبرای اطلاعات بیشتر در این موارد و چگونگی اجرای این کار میتوانید آموزش [نقشه‌کشی با گوشی هوشمند، دستگاه GPS و یا نقشه کاغذی](http://learnosm.org/fa/mobile-mapping/) را بخوانید.\n\nبرای استفاده از یک ردیابی GPX، فایل را به داخل ویرایشگر بکشید.\nاگر فایل GPX شناسایی بشود، مسیرهای آن به شکل خطوط بنفشی روشن در نقشه نشان داده می‌شوند. در منوی سمت راست صفحه بر روی گذینه‌ی 'Map Data' کلیک کنید تا تنظیمات این لایه GPX را مشاهده کنید.\n\nردیابی‌های جی‌پی‌اکس مستقیما به او‌اس‌ام بارگذاری نمیشوند. بهترین راه برای تبدیل آن‌ها، استفاد از آن‌ها به عنوان راهنمایی برای ایجاد مسیر دستی است. همچنین میتوانید صفحه [بارگزاری به او‌اس‌ام](http://www.openstreetmap.org/trace/create) را مطالعه کنید.\n",
-            "imagery": "# تصاویر هوایی\n\nتصاویر هوایی یک منبع مهمبرای نقشه‌کشی هستند. یک مجموعه از تصاویر و نقشه‌های هوایی و ماهواره‌ای رایگان در منوی سمت راست و بخش the 'Background Settings'  وجود دارند.\n\nبه طور پیشفرض تصاویر ماهواره‌ای  [نقشه بینگ](http://www.bing.com/maps/) در پس‌زمینه قرار دارند، اما به محض زوم کردن و جابجایی در نقشه منابع دیگر نیز در دسترس خواهند بود. بعضی کشورها مانند ایالات متحده، فرانسه و دانمارک در بعضی ناحیه‌ها دارای تصاویر بسیار باکیفیت هوایی هستند.\n\nتصاویر گاهی اوقات  به علت خطا در سرور ارائه دهنده با موقعیت واقعی اختلاف دارند. اگر شما مسیر‌های بسیاری می‌بینید که با تصویر پس‌زمینه فاصله دارند، به هیچ عنوان بدون تحقیق آنها را با توجه به پس‌زمینه انتقال ندهید! به جای این کار می‌توانید پس از مطلع شدن از اختلاف تصاویر، آن‌ها را با کلیک بر روی دکمه‌ی 'Fix alignment' تنظیم کنید.\n",
-            "addresses": "# آدرس ها\n\nآدرس ها مقداری از اطلاعات بسیار سودمند برای نقشه هستند.\n\nاگرچه آدرس ها اغلب بعنوان بخش هایی از جاده نمایان میشوند، در OpenStreetMap\nآنها بعنوان ویژگی هایی از ساختمان ها و مکان ها در امتداد خیابان ها ثبت میشوند.\n\nشما میتوانید اطلاعات آدرس را به مکان های نقشه شده بعنوان خطوط اضافه ساخته شده و\nهمچنین آنهایی که بعنوان یک نقطه نقشه شده اند اضافه کنید. منبع مناسب برای داده های آدرس\nبررسی بر روی زمین و دانش شخصی است -مثل هر ویژگی دیگری،\nکپی برداری از منابع تجاری مثل نقشه های گوگل به شدت\nممنوع است.\n",
-            "inspector": "# Using the Inspector\n\nThe inspector is the section on the left side of the page that allows you to\nedit the details of the selected feature.\n\n### Selecting a Feature Type\n\nAfter you add a point, line, or area, you can choose what type of feature it\nis, like whether it's a highway or residential road, supermarket or cafe.\nThe inspector will display buttons for common feature types, and you can\nfind others by typing what you're looking for in the search box.\n\nClick the 'i' in the bottom-right-hand corner of a feature type button to\nlearn more about it. Click a button to choose that type.\n\n### Using Forms and Editing Tags\n\nAfter you choose a feature type, or when you select a feature that already\nhas a type assigned, the inspector will display fields with details about\nthe feature like its name and address.\n\nBelow the fields you see, you can click the 'Add field' dropdown to add\nother details, like a Wikipedia link, wheelchair access, and more.\n\nAt the bottom of the inspector, click 'Additional tags' to add arbitrary\nother tags to the element. [Taginfo](http://taginfo.openstreetmap.org/) is a\ngreat resource for learn more about popular tag combinations.\n\nChanges you make in the inspector are automatically applied to the map.\nYou can undo them at any time by clicking the 'Undo' button.\n"
+            "key": "H",
+            "help": {
+                "title": "کمک",
+                "before_start_h": "قبل از شروع",
+                "open_source_h": "سورس باز"
+            },
+            "overview": {
+                "navigation_h": "مسیریابی"
+            },
+            "editing": {
+                "select_h": "انتخاب",
+                "multiselect_h": "انتخاب چندتایی",
+                "save_h": "ذخیره کن",
+                "upload_h": "آپلود",
+                "backups_h": "بکآپ اتوماتیک",
+                "keyboard_h": "کلید میانبر"
+            },
+            "points": {
+                "title": "نقاط",
+                "add_point_h": "اضافه کردن نقاط",
+                "move_point_h": "جابجایی نقاط",
+                "delete_point_h": "حذف نقاط"
+            },
+            "lines": {
+                "title": "خطوط",
+                "add_line_h": "اصافه کردن خطوط",
+                "move_line_h": "جابجایی خطوط",
+                "delete_line_h": "پاک کردن خطوط"
+            },
+            "areas": {
+                "point_or_area_h": "نقاط یا نواحی ؟",
+                "add_area_h": "افزودن نواحی",
+                "square_area_h": "گوشه "
+            },
+            "relations": {
+                "edit_relation_h": "ویرایش روابط",
+                "multipolygon_h": "چند ضلعی"
+            }
         },
         "intro": {
             "done": "انجام شده",
+            "ok": "OK",
             "graph": {
                 "block_number": "<value for addr:block_number>",
                 "city": "سه رودخانه",
@@ -623,7 +695,19 @@
                 "state": "<value for addr:state>",
                 "subdistrict": "<value for addr:subdistrict>",
                 "suburb": "<value for addr:suburb>",
-                "countrycode": "ir"
+                "countrycode": "ir",
+                "name": {
+                    "east-street": "خیابان شرقی",
+                    "main-street": "خیابان اصلی",
+                    "south-street": "خیابان جنوبی",
+                    "washington-street": "خیابان واشینگتون",
+                    "water-street": "خیابان سازمان آب",
+                    "west-street": "خیابان غربی",
+                    "world-fare": "کرایه جهانی"
+                }
+            },
+            "welcome": {
+                "title": "خوش آمدید"
             },
             "navigation": {
                 "title": "ناوبری"
@@ -637,10 +721,72 @@
             "lines": {
                 "title": "خطوط"
             },
+            "buildings": {
+                "title": "ساختمانها"
+            },
             "startediting": {
                 "title": "شروع ویرایش",
                 "save": "فراموش نکنید که به طور منظم تغییرات را ذخیره کنید!",
                 "start": "نقشه‌کشی را شروع کنید!"
+            }
+        },
+        "shortcuts": {
+            "title": "کلیدهای میانبر",
+            "tooltip": "نمایش کلیدهای میانبر",
+            "toggle": {
+                "key": "?"
+            },
+            "key": {
+                "alt": "Alt",
+                "backspace": "Backspace",
+                "cmd": "Cmd",
+                "ctrl": "Ctrl",
+                "delete": "Delete",
+                "del": "Del",
+                "end": "End",
+                "enter": "Enter",
+                "esc": "Esc",
+                "home": "Home",
+                "pause": "Pause",
+                "pgdn": "PgDn",
+                "pgup": "PgUp",
+                "return": "Return",
+                "shift": "Shift",
+                "space": "Space"
+            },
+            "gesture": {
+                "drag": "بکش"
+            },
+            "or": "-یا-",
+            "browsing": {
+                "navigation": {
+                    "title": "مسیریابی"
+                },
+                "help": {
+                    "title": "کمک"
+                }
+            },
+            "editing": {
+                "title": "ویرایش",
+                "drawing": {
+                    "title": "نقشه برداری",
+                    "place_point": "ایجاد نقطه"
+                },
+                "operations": {
+                    "title": "عملیات",
+                    "move": "انتقال انتخاب شده ها",
+                    "delete": "حذف انتخاب شده ها"
+                },
+                "commands": {
+                    "title": "دستورات",
+                    "save": "ذخیره تغییرات"
+                }
+            },
+            "tools": {
+                "title": "ابزارها",
+                "info": {
+                    "title": "اطلاعات"
+                }
             }
         },
         "presets": {
@@ -751,16 +897,22 @@
                         "hamlet": "دهکده",
                         "housename": "نام خانه",
                         "housenumber": "123",
+                        "housenumber!jp": "شماره/بلوک ساختمان",
                         "neighbourhood": "محله",
+                        "neighbourhood!jp": "Chōme/Aza/Koaza",
                         "place": "مکان",
                         "postcode": "کدپستی",
                         "province": "استان",
                         "province!jp": "ساختمان ریاست جمهوری",
                         "quarter": "ربع",
+                        "quarter!jp": "Ōaza/Machi",
                         "state": "ایالت",
                         "street": "خيابان",
                         "subdistrict": "زیر منطقه",
-                        "suburb": "حومه شهر"
+                        "subdistrict!vn": "Ward/Commune/Townlet",
+                        "suburb": "حومه شهر",
+                        "suburb!jp": "نگهبانی",
+                        "unit": "واحد"
                     }
                 },
                 "admin_level": {
@@ -806,8 +958,17 @@
                 "aeroway": {
                     "label": "نوع"
                 },
+                "agrarian": {
+                    "label": "محصولات"
+                },
                 "amenity": {
                     "label": "نوع"
+                },
+                "animal_boarding": {
+                    "label": "برای حیوانات"
+                },
+                "animal_breeding": {
+                    "label": "برای حیوانات"
                 },
                 "animal_shelter": {
                     "label": "پناهگاه حیوانات"
@@ -868,11 +1029,21 @@
                 "board_type": {
                     "label": "نوع"
                 },
+                "boules": {
+                    "label": "نوع"
+                },
                 "boundary": {
                     "label": "نوع"
                 },
                 "brand": {
                     "label": "نام تجاری"
+                },
+                "brewery": {
+                    "label": "محل آماده سازی آبجو"
+                },
+                "bridge": {
+                    "label": "نوع",
+                    "placeholder": "پیش فرض"
                 },
                 "building": {
                     "label": "ساختمان"
@@ -882,6 +1053,10 @@
                 },
                 "bunker_type": {
                     "label": "نوع"
+                },
+                "cables": {
+                    "label": "کابل ها",
+                    "placeholder": "1, 2, 3..."
                 },
                 "camera/direction": {
                     "label": "جهت (درجه راستگرد)",
@@ -902,39 +1077,24 @@
                     "label": "ظرفيت",
                     "placeholder": "50, 100, 200..."
                 },
-                "cardinal_direction": {
-                    "label": "جهت",
-                    "options": {
-                        "E": "شرق",
-                        "ENE": "شرق-شمال‌شرق",
-                        "ESE": "شرق-جنوب‌شرق",
-                        "N": "شمال",
-                        "NE": "شمال‌شرق",
-                        "NNE": "شمال-شمال‌شرق",
-                        "NNW": "شمال-شمال‌غرب",
-                        "NW": "شمال‌غرب",
-                        "S": "جنوب",
-                        "SE": "جنوب‌شرق",
-                        "SSE": "جنوب-جنوب‌شرق",
-                        "SSW": "جنوب-جنوب‌غربی",
-                        "SW": "جنوب‌غربی",
-                        "W": "غرب",
-                        "WNW": "غرب-شمال‌غرب",
-                        "WSW": "غرب-جنوب‌غربی"
-                    }
-                },
                 "castle_type": {
                     "label": "نوع"
                 },
-                "clock_direction": {
-                    "label": "جهت",
-                    "options": {
-                        "anticlockwise": "پاد ساعتگرد",
-                        "clockwise": "ساعتگرد"
-                    }
+                "clothes": {
+                    "label": "لباس ها"
+                },
+                "club": {
+                    "label": "نوع"
                 },
                 "collection_times": {
                     "label": "مجموع دفعات"
+                },
+                "comment": {
+                    "label": "توضیح تغییرات",
+                    "placeholder": "شرح مختصری از مشارکت شما (لازم)"
+                },
+                "communication_multi": {
+                    "label": "انواع ارتباطات"
                 },
                 "construction": {
                     "label": "نوع"
@@ -942,6 +1102,9 @@
                 "contact/webcam": {
                     "label": "URL دوربین",
                     "placeholder": "http://example.com/"
+                },
+                "content": {
+                    "label": "محتوا"
                 },
                 "country": {
                     "label": "کشور"
@@ -952,11 +1115,29 @@
                 "craft": {
                     "label": "نوع"
                 },
+                "crane/type": {
+                    "label": "نوع جرثقیل",
+                    "options": {
+                        "floor-mounted_crane": "جرثقیل نصب شده در کف",
+                        "portal_crane": "جرثقیل دروازه ای",
+                        "travel_lift": "Travel Lift"
+                    }
+                },
+                "crop": {
+                    "label": "محصولات زراعی"
+                },
                 "crossing": {
                     "label": "نوع"
                 },
+                "cuisine": {
+                    "label": "آشپزی ها"
+                },
                 "currency_multi": {
                     "label": "انواع ارز"
+                },
+                "cutting": {
+                    "label": "نوع",
+                    "placeholder": "پیش فرض"
                 },
                 "cycle_network": {
                     "label": "شبکه"
@@ -1014,6 +1195,10 @@
                 "description": {
                     "label": "توضیحات"
                 },
+                "devices": {
+                    "label": "دستگاه ها",
+                    "placeholder": "1, 2, 3..."
+                },
                 "diaper": {
                     "label": "امکان تعویض پوشک"
                 },
@@ -1025,6 +1210,10 @@
                 },
                 "drive_through": {
                     "label": "رانندگی-از طریق"
+                },
+                "duration": {
+                    "label": "مدت زمان",
+                    "placeholder": "00:00"
                 },
                 "electrified": {
                     "label": "برق رسانی",
@@ -1042,6 +1231,10 @@
                 "email": {
                     "label": "ایمیل",
                     "placeholder": "example@example.com"
+                },
+                "embankment": {
+                    "label": "نوع",
+                    "placeholder": "پیش فرض"
                 },
                 "emergency": {
                     "label": "اورژانس"
@@ -1080,8 +1273,18 @@
                         "wall": "دیوار"
                     }
                 },
+                "fitness_station": {
+                    "label": "نوع تجهیزات"
+                },
                 "fixme": {
                     "label": "من رو درست کن"
+                },
+                "ford": {
+                    "label": "نوع",
+                    "placeholder": "پیش فرض"
+                },
+                "frequency": {
+                    "label": "تناوب کار"
                 },
                 "fuel": {
                     "label": "سوخت"
@@ -1104,11 +1307,21 @@
                 "generator/method": {
                     "label": "شیوه"
                 },
+                "generator/output/electricity": {
+                    "label": "توان خروجی",
+                    "placeholder": "50مگاوات، 100مگاوات، 200مگاوات..."
+                },
                 "generator/source": {
                     "label": "منبع"
                 },
                 "generator/type": {
                     "label": "نوع"
+                },
+                "government": {
+                    "label": "نوع"
+                },
+                "grape_variety": {
+                    "label": "انواع انگور"
                 },
                 "handicap": {
                     "label": "مانع",
@@ -1116,6 +1329,16 @@
                 },
                 "handrail": {
                     "label": "نرده راه پله"
+                },
+                "hashtags": {
+                    "label": "هشتگهای پیشنهادی",
+                    "placeholder": "#مثال"
+                },
+                "healthcare": {
+                    "label": "نوع"
+                },
+                "healthcare/speciality": {
+                    "label": "تخصصها"
                 },
                 "height": {
                     "label": "ارتفاع(متر)"
@@ -1125,6 +1348,9 @@
                 },
                 "historic": {
                     "label": "نوع"
+                },
+                "historic/civilization": {
+                    "label": "تمدن تاریخی"
                 },
                 "hoops": {
                     "label": "حلقه ها",
@@ -1152,6 +1378,12 @@
                 "information": {
                     "label": "نوع"
                 },
+                "inscription": {
+                    "label": "کتیبه"
+                },
+                "intermittent": {
+                    "label": "تناوب"
+                },
                 "internet_access": {
                     "label": "دسترسی اینترنت",
                     "options": {
@@ -1168,6 +1400,12 @@
                 "internet_access/ssid": {
                     "label": "SSID (نام شبکه)"
                 },
+                "kerb": {
+                    "label": "حاشیه پیاده رو"
+                },
+                "label": {
+                    "label": "برچسب"
+                },
                 "lamp_type": {
                     "label": "نوع"
                 },
@@ -1179,7 +1417,8 @@
                     "placeholder": "1, 2, 3..."
                 },
                 "layer": {
-                    "label": "لايه"
+                    "label": "لايه",
+                    "placeholder": "0"
                 },
                 "leaf_cycle": {
                     "label": "چرخه برگ",
@@ -1239,6 +1478,9 @@
                 "man_made": {
                     "label": "نوع"
                 },
+                "manhole": {
+                    "label": "نوع"
+                },
                 "map_size": {
                     "label": "پوشش"
                 },
@@ -1255,6 +1497,15 @@
                 },
                 "maxstay": {
                     "label": "حداکثر توقف"
+                },
+                "maxweight": {
+                    "label": "حداکثر وزن"
+                },
+                "memorial": {
+                    "label": "نوع"
+                },
+                "monitoring_multi": {
+                    "label": "دیده بانی"
                 },
                 "mtb/scale": {
                     "label": "دشواری دوچرخه‌سواری کوهستانی",
@@ -1370,13 +1621,6 @@
                     "label": "برابری",
                     "placeholder": "3, 4, 5..."
                 },
-                "parallel_direction": {
-                    "label": "جهت",
-                    "options": {
-                        "backward": "به عقب",
-                        "forward": "به جلو"
-                    }
-                },
                 "park_ride": {
                     "label": "پارک و سوار شدن"
                 },
@@ -1394,6 +1638,10 @@
                 },
                 "payment_multi": {
                     "label": "روش‌های پرداخت"
+                },
+                "phases": {
+                    "label": "فازها",
+                    "placeholder": "1, 2, 3..."
                 },
                 "phone": {
                     "label": "تلفن",
@@ -1443,6 +1691,19 @@
                 "plant": {
                     "label": "گیاه"
                 },
+                "plant/output/electricity": {
+                    "label": "توان خروجی",
+                    "placeholder": "500مگاوات، 1000مگاوات، 2000مگاوات..."
+                },
+                "playground/baby": {
+                    "label": "جایگاه کودک"
+                },
+                "playground/max_age": {
+                    "label": "حداکثر سن"
+                },
+                "playground/min_age": {
+                    "label": "حداقل سن"
+                },
                 "population": {
                     "label": "جمعیت"
                 },
@@ -1452,18 +1713,53 @@
                 "power_supply": {
                     "label": "منبع تأمین توان"
                 },
+                "produce": {
+                    "label": "محصول"
+                },
+                "product": {
+                    "label": "محصولات"
+                },
                 "railway": {
                     "label": "نوع"
+                },
+                "rating": {
+                    "label": "درجه قدرت"
                 },
                 "recycling_accepts": {
                     "label": "قبول"
                 },
-                "recycling_type": {
-                    "label": "نوع بازیافت",
-                    "options": {
-                        "centre": "مرکز بازیافت",
-                        "container": "ظرف بازیافت"
-                    }
+                "ref": {
+                    "label": "کد مرجع"
+                },
+                "ref_aeroway_gate": {
+                    "label": "شماره ورودی"
+                },
+                "ref_golf_hole": {
+                    "label": "شماره سوراخ",
+                    "placeholder": "1-18"
+                },
+                "ref_highway_junction": {
+                    "label": "شماره اتصال"
+                },
+                "ref_platform": {
+                    "label": "شماره سکو"
+                },
+                "ref_road_number": {
+                    "label": "شماره جاده"
+                },
+                "ref_route": {
+                    "label": "شماره مسیر"
+                },
+                "ref_runway": {
+                    "label": "شماره باند",
+                    "placeholder": "مثلا 01L/19R"
+                },
+                "ref_stop_position": {
+                    "label": "شماره توقفگاه"
+                },
+                "ref_taxiway": {
+                    "label": "نام مسیر تاکسی رو",
+                    "placeholder": "مثلا A5"
                 },
                 "relation": {
                     "label": "نوع"
@@ -1519,6 +1815,9 @@
                 "service/bicycle": {
                     "label": "خدمات"
                 },
+                "service/vehicle": {
+                    "label": "خدمات"
+                },
                 "service_rail": {
                     "label": "نوع خدمات",
                     "options": {
@@ -1527,6 +1826,9 @@
                         "spur": "خار",
                         "yard": "حیاط"
                     }
+                },
+                "service_times": {
+                    "label": "زمان های خدمت"
                 },
                 "shelter": {
                     "label": "پناه گاه"
@@ -1572,8 +1874,26 @@
                 "social_facility_for": {
                     "label": "ظرفیت"
                 },
+                "source": {
+                    "label": "منابع"
+                },
+                "sport": {
+                    "label": "ورزش ها"
+                },
+                "sport_ice": {
+                    "label": "ورزش ها"
+                },
+                "sport_racing_motor": {
+                    "label": "ورزش ها"
+                },
+                "sport_racing_nonmotor": {
+                    "label": "ورزش ها"
+                },
                 "stars": {
                     "label": "ستاره ها"
+                },
+                "start_date": {
+                    "label": "تاریخ شروع"
                 },
                 "step_count": {
                     "label": "تعداد قدم"
@@ -1596,8 +1916,18 @@
                     },
                     "placeholder": "ناشناخته"
                 },
+                "structure_waterway": {
+                    "label": "ساختار",
+                    "options": {
+                        "tunnel": "تونل"
+                    },
+                    "placeholder": "نامعلوم"
+                },
                 "studio": {
                     "label": "نوع"
+                },
+                "substance": {
+                    "label": "مواد"
                 },
                 "substation": {
                     "label": "نوع"
@@ -1625,6 +1955,15 @@
                 "surveillance/zone": {
                     "label": "بخش زیرنظر"
                 },
+                "switch": {
+                    "label": "نوع",
+                    "options": {
+                        "circuit_breaker": "فیوز",
+                        "disconnector": "قطع کننده",
+                        "earthing": "اتصال به زمین",
+                        "mechanical": "مکانیکی"
+                    }
+                },
                 "tactile_paving": {
                     "label": "سنگفرش لمسی -برای نابینایان"
                 },
@@ -1649,8 +1988,14 @@
                 "toll": {
                     "label": "باجه پرداخت"
                 },
+                "tomb": {
+                    "label": "نوع"
+                },
                 "tourism": {
                     "label": "نوع"
+                },
+                "tourism_attraction": {
+                    "label": "توریستی"
                 },
                 "tower/construction": {
                     "label": "ساخت و ساز",
@@ -1670,6 +2015,9 @@
                     },
                     "placeholder": "سخت، عمدتا سخت، نرم ..."
                 },
+                "trade": {
+                    "label": "نوع"
+                },
                 "traffic_calming": {
                     "label": "نوع"
                 },
@@ -1688,8 +2036,25 @@
                     },
                     "placeholder": "عالی، خوب، بد ..."
                 },
+                "transformer": {
+                    "label": "نوع",
+                    "options": {
+                        "auto": "مبدل خودکار",
+                        "auxiliary": "کمکی",
+                        "converter": "مبدل",
+                        "distribution": "توزیع",
+                        "generator": "ژنراتور",
+                        "phase_angle_regulator": "تنظیم کننده زاویه فاز",
+                        "traction": "انقباظی",
+                        "yes": "نامعلوم"
+                    }
+                },
                 "trees": {
                     "label": "درخت‌ها"
+                },
+                "tunnel": {
+                    "label": "نوع",
+                    "placeholder": "پیش فرض"
                 },
                 "vending": {
                     "label": "نوع محموله"
@@ -1701,6 +2066,34 @@
                         "house": "تا 5 متر دیده می‌شود (16فوت)",
                         "street": "از 5 تا 20 متر دیده می‌شود (16 تا 65 فوت)"
                     }
+                },
+                "volcano/status": {
+                    "label": "وضعیت آتشفشان",
+                    "options": {
+                        "active": "فعال",
+                        "dormant": "خاموش",
+                        "extinct": "از بین رفته"
+                    }
+                },
+                "volcano/type": {
+                    "label": "نوع آتشفشان",
+                    "options": {
+                        "scoria": "تفاله معدنی",
+                        "shield": "سپر",
+                        "stratovolcano": "آتشفشان چینه ای"
+                    }
+                },
+                "voltage": {
+                    "label": "ولتاژ"
+                },
+                "voltage/primary": {
+                    "label": "ولتاژ اصلی"
+                },
+                "voltage/secondary": {
+                    "label": "ولتاژ ثانویه"
+                },
+                "voltage/tertiary": {
+                    "label": "ولتاژ سوم"
                 },
                 "wall": {
                     "label": "نوع"
@@ -1729,6 +2122,22 @@
                 },
                 "wikipedia": {
                     "label": "ويکي پديا"
+                },
+                "windings": {
+                    "label": "سیم پیچ",
+                    "placeholder": "1, 2, 3..."
+                },
+                "windings/configuration": {
+                    "label": "پیکربندی سیم پیچ",
+                    "options": {
+                        "delta": "دلتا",
+                        "leblanc": "Leblanc",
+                        "open": "باز",
+                        "open-delta": "دلتا باز",
+                        "scott": "Scott",
+                        "star": "Star / Wye",
+                        "zigzag": "زیگزاگ"
+                    }
                 }
             },
             "presets": {
@@ -1758,6 +2167,9 @@
                     "name": "تله کابین",
                     "terms": "بلم, قایق"
                 },
+                "aerialway/goods": {
+                    "name": "محموله هوایی"
+                },
                 "aerialway/magic_carpet": {
                     "name": "آسانسور اسکی",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سطح شیب‌دار بالابر'، با کاما جدا می‌شوند>"
@@ -1778,8 +2190,7 @@
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بالابر بکسری'، با کاما جدا می‌شوند>"
                 },
                 "aerialway/station": {
-                    "name": "ایستگاه بالابر",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ایستگاه مسیر هوایی'، با کاما جدا می‌شوند>"
+                    "name": "ایستگاه بالابر"
                 },
                 "aerialway/t-bar": {
                     "name": "بالابر نوار T",
@@ -1862,10 +2273,6 @@
                 "amenity/bureau_de_change": {
                     "name": "تبدیل ارز / صرافی",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'تبدیل ارز / صرافی'، با کاما جدا می‌شوند>"
-                },
-                "amenity/bus_station": {
-                    "name": "ایستگاه پایانه اتوبوس",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ایستگاه پایانه اتوبوس'، با کاما جدا می‌شوند>"
                 },
                 "amenity/cafe": {
                     "name": "کافه",
@@ -1953,10 +2360,6 @@
                 "amenity/fast_food": {
                     "name": "غذای آماده",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'غذای آماده'، با کاما جدا می‌شوند>"
-                },
-                "amenity/ferry_terminal": {
-                    "name": "پایانه کشتی",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'پایانه کشتی'، با کاما جدا می‌شوند>"
                 },
                 "amenity/fire_station": {
                     "name": "ایستگاه آتش نشانی",
@@ -2090,10 +2493,6 @@
                     "name": "ایستگاه جنگلبانی",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ایستگاه جنگلبانی'، با کاما جدا می‌شوند>"
                 },
-                "amenity/recycling": {
-                    "name": "بازیافت مواد",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'بازیافت'، با کاما جدا می‌شوند>"
-                },
                 "amenity/recycling_centre": {
                     "name": "مرکز بازیافت",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'مرکز بازیافت'، با کاما جدا می‌شوند>"
@@ -2157,7 +2556,7 @@
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سرویس بهداشتی'، با کاما جدا می‌شوند>"
                 },
                 "amenity/townhall": {
-                    "name": "تالار شهر",
+                    "name": "شهرداری",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'تالار شهر'، با کاما جدا می‌شوند>"
                 },
                 "amenity/university": {
@@ -2727,10 +3126,6 @@
                     "name": "مسیر حیوانات اهلی",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای   'Bridle Path'، با کاما جدا می‌شوند>"
                 },
-                "highway/bus_stop": {
-                    "name": "ایستگاه اتوبوس",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ایستگاه اتوبوس'، با کاما جدا می‌شوند>"
-                },
                 "highway/corridor": {
                     "name": "راهروی داخلی",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'راهرو داخلی'، با کاما جدا می‌شوند>"
@@ -2812,8 +3207,8 @@
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'جاده خدماتی'، با کاما جدا می‌شوند>"
                 },
                 "highway/service/alley": {
-                    "name": "کوچه",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کوچه'، با کاما جدا می‌شوند>"
+                    "name": "پس کوچه",
+                    "terms": "<translate with synonyms or related terms for 'Alley', separated by commas><ترجمه با مترادف یا اصطلاحات مشابه برای 'پس کوچه'، با کاما جدا می‌شوند>"
                 },
                 "highway/service/drive-through": {
                     "name": "پرداخت سواره",
@@ -2969,10 +3364,6 @@
                 "landuse/forest": {
                     "name": "جنگل",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'جنگل'، با کاما جدا می‌شوند>"
-                },
-                "landuse/garages": {
-                    "name": "گاراژها",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'گاراژ'، با کاما جدا می‌شوند>"
                 },
                 "landuse/grass": {
                     "name": "علف زار",
@@ -3430,12 +3821,7 @@
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'اداره'، با کاما جدا می‌شوند>"
                 },
                 "office/administrative": {
-                    "name": "دفتر اداری",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دفتر اداری'، با کاما جدا می‌شوند>"
-                },
-                "office/company": {
-                    "name": "دفتر شرکت",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'دفتر شرکت'، با کاما جدا می‌شوند>"
+                    "name": "دفتر اداری"
                 },
                 "office/coworking": {
                     "name": "فضای کاری مشارکتی"
@@ -3532,7 +3918,7 @@
                     "name": "میدان"
                 },
                 "place/town": {
-                    "name": "شهر کوچک",
+                    "name": "شهرک",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'شهرک'، با کاما جدا می‌شوند>"
                 },
                 "place/village": {
@@ -3580,14 +3966,6 @@
                     "name": "مبدل برق",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'کاهنده جریان برق'، با کاما جدا می‌شوند>"
                 },
-                "public_transport/platform": {
-                    "name": "پلتفورم",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سامانه حمل و نقل'، با کاما جدا می‌شوند>"
-                },
-                "public_transport/stop_position": {
-                    "name": "موقعیت توقف",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'توقفگاه'، با کاما جدا می‌شوند>"
-                },
                 "railway": {
                     "name": "راه آهن"
                 },
@@ -3607,10 +3985,6 @@
                     "name": "کابلی",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'واگن کابلی'، با کاما جدا می‌شوند>"
                 },
-                "railway/halt": {
-                    "name": "توقف گاه راه آهن",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'توقفگاه راه آهن'، با کاما جدا می‌شوند>"
-                },
                 "railway/level_crossing": {
                     "name": "جاده گذرنده از راه‌آهن",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'جاده گذرنده از راه‌آهن'، با کاما جدا می‌شوند>"
@@ -3623,17 +3997,9 @@
                     "name": "راه آهن باریک کابلی",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'راه آهن باریک'، با کاما جدا می‌شوند>"
                 },
-                "railway/platform": {
-                    "name": "بستر راه آهن",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'سامانه راه آهن'، با کاما جدا می‌شوند>"
-                },
                 "railway/rail": {
                     "name": "ریل قطار",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'خط اهن'، با کاما جدا می‌شوند>"
-                },
-                "railway/station": {
-                    "name": "ایستگاه راه آهن",
-                    "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'ایستگاه راه آهن'، با کاما جدا می‌شوند>"
                 },
                 "railway/subway": {
                     "name": "مترو",
@@ -3915,10 +4281,6 @@
                 "shop/jewelry": {
                     "name": "جواهر فروشی",
                     "terms": "<ترجمه با مترادف یا اصطلاحات مشابه برای 'جواهرساز'، با کاما جدا می‌شوند>"
-                },
-                "shop/kiosk": {
-                    "name": "باجه روزنامه فروشی",
-                    "terms": "کیوسک روزنامه"
                 },
                 "shop/kitchen": {
                     "name": "فروشگاه تزئینات آشپزخانه",
@@ -4527,33 +4889,18 @@
                 "name": "جاده های TIGER 2017"
             },
             "Waymarked_Trails-Cycling": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
-                },
                 "name": "مسیرهای مشخص شده: دوچرخه سواری"
             },
             "Waymarked_Trails-Hiking": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
-                },
                 "name": "مسیرهای مشخص شده: پیاده روی"
             },
             "Waymarked_Trails-MTB": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
-                },
                 "name": "مسیرهای مشخص شده: MTB"
             },
             "Waymarked_Trails-Skating": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
-                },
                 "name": "مسیرهای مشخص شده: اسکیت"
             },
             "Waymarked_Trails-Winter_Sports": {
-                "attribution": {
-                    "text": "© Michael Spreng, CC by-SA 3.0, map data OpenStreetMap contributors, ODbL 1.0"
-                },
                 "name": "مسیرهای مشخص شده: ورزشهای زمستانی"
             },
             "basemap.at": {

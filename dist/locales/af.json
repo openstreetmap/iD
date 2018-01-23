@@ -171,7 +171,6 @@
         "background": {
             "title": "Agtergrond",
             "description": "Agtergrond stellings",
-            "percent_brightness": "{opacity}% helderheid",
             "reset": "begin van voor"
         },
         "restore": {
@@ -319,26 +318,6 @@
                 "capacity": {
                     "label": "Kapasiteit",
                     "placeholder": "50, 100, 200..."
-                },
-                "cardinal_direction": {
-                    "label": "Rigting",
-                    "options": {
-                        "E": "Oos",
-                        "N": "Noord",
-                        "NE": "Noordoos",
-                        "NW": "Noordwes",
-                        "S": "Suid",
-                        "SE": "Suidoos",
-                        "SW": "Suidwes",
-                        "W": "Wes"
-                    }
-                },
-                "clock_direction": {
-                    "label": "Rigting",
-                    "options": {
-                        "anticlockwise": "Antikloksgewys",
-                        "clockwise": "Kloksgewys"
-                    }
                 },
                 "collection_times": {
                     "label": "Afhaal tye"
@@ -758,9 +737,6 @@
                 "highway/bridleway": {
                     "name": "Perdepaaidjie"
                 },
-                "highway/bus_stop": {
-                    "name": "Busstop"
-                },
                 "highway/cycleway": {
                     "name": "Fietsrypad"
                 },
@@ -1125,14 +1101,8 @@
                 "railway/monorail": {
                     "name": "Enkelspoorbaan"
                 },
-                "railway/platform": {
-                    "name": "Spoorwegplatform"
-                },
                 "railway/rail": {
                     "name": "Treinspoor"
-                },
-                "railway/station": {
-                    "name": "Treinstasie"
                 },
                 "railway/subway": {
                     "name": "Metro"

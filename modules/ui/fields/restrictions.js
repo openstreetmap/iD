@@ -26,7 +26,8 @@ import {
 
 import {
     geoExtent,
-    geoRawMercator
+    geoRawMercator,
+    geoZoomToScale
 } from '../../geo';
 
 import {
@@ -46,12 +47,12 @@ import {
 
 
 export function uiFieldRestrictions(field, context) {
-    var dispatch = d3_dispatch('change'),
-        breathe = behaviorBreathe(context),
-        hover = behaviorHover(context),
-        initialized = false,
-        vertexID,
-        fromNodeID;
+    var dispatch = d3_dispatch('change');
+    var breathe = behaviorBreathe(context);
+    var hover = behaviorHover(context);
+    var initialized = false;
+    var vertexID;
+    var fromNodeID;
 
 
     function restrictions(selection) {
@@ -73,19 +74,18 @@ export function uiFieldRestrictions(field, context) {
             .attr('class', 'restriction-help');
 
 
-        var intersection = osmIntersection(context.graph(), vertexID),
-            graph = intersection.graph,
-            vertex = graph.entity(vertexID),
-            filter = utilFunctor(true),
-            extent = geoExtent(),
-            projection = geoRawMercator();
+        var intersection = osmIntersection(context.graph(), vertexID);
+        var graph = intersection.graph;
+        var vertex = graph.entity(vertexID);
+        var filter = utilFunctor(true);
+        var projection = geoRawMercator();
 
-        var d = utilGetDimensions(wrap.merge(enter)),
-            c = [d[0] / 2, d[1] / 2],
-            z = 24;
+        var d = utilGetDimensions(wrap.merge(enter));
+        var c = [d[0] / 2, d[1] / 2];
+        var z = 24;
 
         projection
-            .scale(256 * Math.pow(2, z) / (2 * Math.PI));
+            .scale(geoZoomToScale(z));
 
         var s = projection(vertex.loc);
 
@@ -93,10 +93,12 @@ export function uiFieldRestrictions(field, context) {
             .translate([c[0] - s[0], c[1] - s[1]])
             .clipExtent([[0, 0], d]);
 
-        var drawLayers = svgLayers(projection, context).only('osm').dimensions(d),
-            drawVertices = svgVertices(projection, context),
-            drawLines = svgLines(projection, context),
-            drawTurns = svgTurns(projection, context);
+        var extent = geoExtent(projection.invert([0, d[1]]), projection.invert([d[0], 0]));
+
+        var drawLayers = svgLayers(projection, context).only('osm').dimensions(d);
+        var drawVertices = svgVertices(projection, context);
+        var drawLines = svgLines(projection, context);
+        var drawTurns = svgTurns(projection, context);
 
         enter
             .call(drawLayers);
@@ -115,7 +117,7 @@ export function uiFieldRestrictions(field, context) {
 
         surface
             .call(utilSetDimensions, d)
-            .call(drawVertices, graph, [vertex], filter, extent, z)
+            .call(drawVertices, graph, [vertex], filter, extent, true)
             .call(drawLines, graph, intersection.ways, filter)
             .call(drawTurns, graph, intersection.turns(fromNodeID));
 
@@ -152,9 +154,13 @@ export function uiFieldRestrictions(field, context) {
                 .call(breathe);
 
             var datum = d3_event.target.__data__;
+            var entity = datum && datum.properties && datum.properties.entity;
+            if (entity) datum = entity;
+
             if (datum instanceof osmEntity) {
                 fromNodeID = intersection.adjacentNodeId(datum.id);
                 render();
+
             } else if (datum instanceof osmTurn) {
                 if (datum.restriction) {
                     context.perform(
@@ -174,9 +180,9 @@ export function uiFieldRestrictions(field, context) {
         function mouseover() {
             var datum = d3_event.target.__data__;
             if (datum instanceof osmTurn) {
-                var graph = context.graph(),
-                    presets = context.presets(),
-                    preset;
+                var graph = context.graph();
+                var presets = context.presets();
+                var preset;
 
                 if (datum.restriction) {
                     preset = presets.match(graph.entity(datum.restriction), graph);

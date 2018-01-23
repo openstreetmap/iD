@@ -5,10 +5,10 @@ import { services } from '../services';
 
 
 export function svgMapillarySigns(projection, context, dispatch) {
-    var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000),
-        minZoom = 12,
-        layer = d3_select(null),
-        _mapillary;
+    var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
+    var minZoom = 12;
+    var layer = d3_select(null);
+    var _mapillary;
 
 
     function init() {

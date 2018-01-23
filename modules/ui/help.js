@@ -9,7 +9,9 @@ import marked from 'marked';
 import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg';
 import { uiCmd } from './cmd';
+import { uiBackground } from './background';
 import { uiIntro } from './intro';
+import { uiMapData } from './map_data';
 import { uiShortcuts } from './shortcuts';
 import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
@@ -274,12 +276,12 @@ export function uiHelp(context) {
 
     function help(selection) {
 
-        function hide() {
+        function hidePane() {
             setVisible(false);
         }
 
 
-        function toggle() {
+        function togglePane() {
             if (d3_event) d3_event.preventDefault();
             tooltipBehavior.hide(button);
             setVisible(!button.classed('active'));
@@ -292,14 +294,15 @@ export function uiHelp(context) {
                 shown = show;
 
                 if (show) {
-                    selection.on('mousedown.help-inside', function() {
-                        return d3_event.stopPropagation();
-                    });
+                    uiBackground.hidePane();
+                    uiMapData.hidePane();
+
                     pane.style('display', 'block')
                         .style('right', '-500px')
                         .transition()
                         .duration(200)
                         .style('right', '0px');
+
                 } else {
                     pane.style('right', '0px')
                         .transition()
@@ -308,7 +311,6 @@ export function uiHelp(context) {
                         .on('end', function() {
                             d3_select(this).style('display', 'none');
                         });
-                    selection.on('mousedown.help-inside', null);
                 }
             }
         }
@@ -382,20 +384,21 @@ export function uiHelp(context) {
 
 
         var pane = selection.append('div')
-                .attr('class', 'help-wrap map-overlay fillL col5 content hide'),
-            tooltipBehavior = tooltip()
-                .placement((textDirection === 'rtl') ? 'right' : 'left')
-                .html(true)
-                .title(uiTooltipHtml(t('help.title'), key)),
-            button = selection.append('button')
-                .attr('tabindex', -1)
-                .on('click', toggle)
-                .call(svgIcon('#icon-help', 'light'))
-                .call(tooltipBehavior),
-            shown = false;
+            .attr('class', 'help-wrap map-overlay fillL col6 content hide');
+        var tooltipBehavior = tooltip()
+            .placement((textDirection === 'rtl') ? 'right' : 'left')
+            .html(true)
+            .title(uiTooltipHtml(t('help.title'), key));
+        var button = selection.append('button')
+            .attr('tabindex', -1)
+            .on('click', togglePane)
+            .call(svgIcon('#icon-help', 'light'))
+            .call(tooltipBehavior);
+        var shown = false;
 
 
-        var toc = pane.append('ul')
+        var toc = pane
+            .append('ul')
             .attr('class', 'toc');
 
         var menuItems = toc.selectAll('li')
@@ -438,26 +441,34 @@ export function uiHelp(context) {
             .text(t('splash.walkthrough'));
 
 
-        var content = pane.append('div')
+        var content = pane
+            .append('div')
             .attr('class', 'left-content');
 
-        var doctitle = content.append('h2')
+        var doctitle = content
+            .append('h2')
             .text(t('help.title'));
 
-        var body = content.append('div')
+        var body = content
+            .append('div')
             .attr('class', 'body');
 
-        var nav = content.append('div')
+        var nav = content
+            .append('div')
             .attr('class', 'nav');
 
         clickHelp(docs[0], 0);
 
         var keybinding = d3_keybinding('help')
-            .on(key, toggle)
-            .on([t('background.key'), t('map_data.key')], hide);
+            .on(key, togglePane)
+            .on([t('background.key'), t('map_data.key')], hidePane);
 
         d3_select(document)
             .call(keybinding);
+
+        uiHelp.hidePane = hidePane;
+        uiHelp.togglePane = togglePane;
+        uiHelp.setVisible = setVisible;
     }
 
     return help;

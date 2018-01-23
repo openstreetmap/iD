@@ -5,7 +5,7 @@
         "vertex"
     ],
     "fields": [
-        "milestone_position"
+        "railway/position"
     ],
     "tags": {
         "railway": "milestone"

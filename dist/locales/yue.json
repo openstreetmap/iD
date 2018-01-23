@@ -261,8 +261,7 @@
             "created": "開咗",
             "about_changeset_comments": "相關變更留言",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
-            "google_warning": "留言提及谷歌（Google）：留意，不得抄谷哥地圖（Google Maps）。",
-            "google_warning_link": "http://www.openstreetmap.org/copyright"
+            "google_warning": "留言提及谷歌（Google）：留意，不得抄谷哥地圖（Google Maps）。"
         },
         "contributors": {
             "list": "有{users}修改",
@@ -331,20 +330,17 @@
         "background": {
             "title": "背景",
             "description": "背景設定",
-            "percent_brightness": "{opacity}% 光",
             "none": "無",
             "best_imagery": "此地至出名相源",
             "switch": "轉返去爾個背景",
             "custom": "自訂",
             "custom_button": "改自訂背景",
-            "fix_misalignment": "校正背圖對位誤差",
-            "imagery_source_faq": "相邊度來？",
             "reset": "重設",
-            "offset": "下面灰帶內，拖到任何位，去校正背圖對位誤差，又或者，以米為單位，入返啲差額。",
             "minimap": {
-                "description": "細地圖",
                 "tooltip": "開個縮圖，幫手搵返家下睇到嘅範圍。"
-            }
+            },
+            "fix_misalignment": "校正背圖對位誤差",
+            "offset": "下面灰帶內，拖到任何位，去校正背圖對位誤差，又或者，以米為單位，入返啲差額。"
         },
         "map_data": {
             "title": "地圖資料",
@@ -503,12 +499,7 @@
             "view_on_mapillary": "去輿兵度睇張相"
         },
         "help": {
-            "title": "指南",
-            "help": "# 指南\n\n爾個程式，係爲 [公家街圖](http://www.openstreetmap.org/)而做。 有世界地圖，任用亦改得。你可以用佢，喺你處加嘢改嘢。如此一來，裏面嘅料，人人可以公開任用，人人得益。\n\n邊個用公家街圖，都見得到你整嘅地圖。要改得到，就要開定個\n[簽入戶口](https://www.openstreetmap.org/login).\n\n[iD editor](http://ideditor.com/) 係合作而成， [程式碼放喺 GitHub](https://github.com/openstreetmap/iD).\n",
-            "gps": "# 全球定位系統\n\n數據取自全球定位系統，係公家街圖至可靠來源。爾個造圖程式，用到本機行蹤，卽放你電腦嘅【.gpx】檔案。你收集全球定位系統行蹤，取自智能電話程式，或者個人全球定位系統儀。\n\n點去用全球定位系統測量，睇下 [製圖，用電話、用全球定位系統、用紙](http://learnosm.org/en/mobile-mapping/)。\n\n用GPX途徑製圖，拖GPX檔案落造圖程式。若然讀得明，佢會加入地圖，用鮮紫綫顯現。喺右邊，撳落【背景設定】選單。咁就開得，閂得，放大縮細新嘅GPX層。\n\n爾個GPX途徑，唔會直上公家街圖，最好用法，就係用佢製圖。按此加新地貌，亦可[傳上公家街圖](http://www.openstreetmap.org/trace/create)以作其他用途。\n",
-            "imagery": "# 相\n\n航空相係地圖要源。佢哋飛機飛過，衞星望落等組合。網上有任用來源，可供使用。就喺右邊，【背景設定】之內。\n\n程式預先已有 [兵地圖](http://www.bing.com/maps/) 䘙星相層。你放大縮細去某啲地方，就有其他可用。某幾國，如美國、法國、丹麥等，國內某啲地方，有極精細嘅相。\n\n相有時同地圖資料有差距，爾個係供相者出錯。若你睇到多多路與背景移咗位，就唔好郁住。將啲相校好個位，同地圖資料吻合。要咁做，就去背景設定，撳【校正對位誤差】校好咗先。\n",
-            "addresses": "# 地埗\n\n地埗，對地圖好有用嘅資料。\n\n雖則地埗通常係街嘅一部份，不過喺公家街圖入面，會記爲沿街屋宇及地方屬性。\n\n你可以加地埗落地方，畫成屋宇界圖，亦可以畫成單處。最好來源，就係視身街一轉，或者靠個人知識。之但係，同其他地貌一樣，禁止抄其他商用來源，包括谷歌地圖。\n",
-            "inspector": "# 用明細一覽\n\n明細一覽係全版左邊嘅部份，畀你改個地貌嘅詳細資料。\n\n### 揀地貌\n\n無論你加處、綫或者範圍，你要揀係乜地貌，如公路定住宅路，超級市場定茶座。明細一覽上面有掣，揀你要嘅地貌，同埋你亦可以格中，一邊打一邊搵。\n\n個個地貌製，右邊【i】字，撳落有細解。撳落個掣度就揀到地貌。\n\n### 用表及改籤\n\n你㨂完地貌，或者你㨂嘅，早已入咗地貌，咁明細一覽，就有一欄欄，講地貌詳細資料，例如名同地埗咁。\n\n欄下面，你會見到啲細公仔，係用來加其他明細，好似連去維基百科資料、行唔行到輪輢等等。\n\n明細一覽個底，撳【所有籤】，就可以隨意加其他籤落去。\n[籤料](http://taginfo.openstreetmap.org/) 係極有用嘅地方知道唔通籤嘅配搭。\n\n你喺明細一覽改嘅，都會自動送上地圖。你亦可以還原修改，只要咁下【還原】掣。\n"
+            "title": "指南"
         },
         "intro": {
             "done": "搞掂",
@@ -774,36 +765,8 @@
                     "label": "容納",
                     "placeholder": "50, 100, 200..."
                 },
-                "cardinal_direction": {
-                    "label": "方向",
-                    "options": {
-                        "E": "東",
-                        "ENE": "東北偏東",
-                        "ESE": "東南偏東",
-                        "N": "北",
-                        "NE": "東北",
-                        "NNE": "東北偏北",
-                        "NNW": "西北偏北",
-                        "NW": "西北",
-                        "S": "南",
-                        "SE": "東南",
-                        "SSE": "東南偏南",
-                        "SSW": "西南偏南",
-                        "SW": "西南",
-                        "W": "西",
-                        "WNW": "西北偏西",
-                        "WSW": "西南偏西"
-                    }
-                },
                 "castle_type": {
                     "label": "類"
-                },
-                "clock_direction": {
-                    "label": "方向",
-                    "options": {
-                        "anticlockwise": "逆時針",
-                        "clockwise": "順時針"
-                    }
                 },
                 "club": {
                     "label": "類"
@@ -1221,13 +1184,6 @@
                 "par": {
                     "label": "標準桿",
                     "placeholder": "3, 4, 5..."
-                },
-                "parallel_direction": {
-                    "label": "方向",
-                    "options": {
-                        "backward": "向後",
-                        "forward": "向前"
-                    }
                 },
                 "park_ride": {
                     "label": "泊車轉乖"
@@ -1741,10 +1697,6 @@
                     "name": "郊野訪客處",
                     "terms": "Ranger Station,郊野訪客處,野郊訪客處"
                 },
-                "amenity/recycling": {
-                    "name": "囘收桶",
-                    "terms": "Recycling,囘收桶,囘收箱,回收桶,回收箱"
-                },
                 "amenity/restaurant": {
                     "name": "餐廳",
                     "terms": "Restaurant,茶樓,酒家,酒樓,飯店,飯館,餐廳,餐館"
@@ -1941,10 +1893,6 @@
                 "highway/bridleway": {
                     "name": "馬徑",
                     "terms": "Bridle Path,馬徑,馬道"
-                },
-                "highway/bus_stop": {
-                    "name": "巴士站",
-                    "terms": "Bus Stop,公交車站,公共汽車站,巴士站"
                 },
                 "highway/cycleway": {
                     "name": "單車徑",
@@ -2362,12 +2310,7 @@
                     "terms": "Office,寫字樓,辦公室"
                 },
                 "office/administrative": {
-                    "name": "行政樓",
-                    "terms": "Administrative Office,行政樓"
-                },
-                "office/company": {
-                    "name": "公司寫字樓",
-                    "terms": "Company Office,公司,公司寫字樓"
+                    "name": "行政樓"
                 },
                 "office/educational_institution": {
                     "name": "敎育機構",
@@ -2487,14 +2430,6 @@
                     "name": "火牛房",
                     "terms": "Transformer,火牛房,變電所"
                 },
-                "public_transport/platform": {
-                    "name": "站頭",
-                    "terms": "Platform,平臺,站頭"
-                },
-                "public_transport/stop_position": {
-                    "name": "街中站",
-                    "terms": "Stop Position,停止位置,街中站"
-                },
                 "railway": {
                     "name": "鐵路"
                 },
@@ -2506,10 +2441,6 @@
                     "name": "停用鐵路",
                     "terms": "Disused Railway,停用鐵路,廢棄的鐵路"
                 },
-                "railway/halt": {
-                    "name": "火車細站",
-                    "terms": "Railway Halt,小火車站,火車站仔,火車細站"
-                },
                 "railway/monorail": {
                     "name": "單軌",
                     "terms": "Monorail,單軌,單軌鐵路,單軌電車"
@@ -2518,17 +2449,9 @@
                     "name": "窄軌火車",
                     "terms": "Narrow Gauge Rails,窄軌火車,窄軌,窄軌鐵路"
                 },
-                "railway/platform": {
-                    "name": "月臺",
-                    "terms": "Railway Platform,月臺,站臺,鐵道月台"
-                },
                 "railway/rail": {
                     "name": "路軌",
                     "terms": "Rail,火車軌,路軌,軌,鐵軌"
-                },
-                "railway/station": {
-                    "name": "火車站",
-                    "terms": "Railway Station,火車站,鐵路站"
                 },
                 "railway/subway": {
                     "name": "地下鐵路",

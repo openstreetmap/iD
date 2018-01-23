@@ -252,14 +252,6 @@
                 "building_area": {
                     "label": "इमारत"
                 },
-                "cardinal_direction": {
-                    "options": {
-                        "E": "पूर्व",
-                        "N": "उत्तर",
-                        "S": "दक्षिण",
-                        "W": "पश्चिम"
-                    }
-                },
                 "date": {
                     "label": "दिनॉंक"
                 },
@@ -289,9 +281,6 @@
                 },
                 "name": {
                     "label": "नाम"
-                },
-                "parallel_direction": {
-                    "label": "दिशा"
                 },
                 "plant": {
                     "label": "पौधा"

@@ -1,24 +1,24 @@
 {
-  "icon": "commercial",
-  "fields": [
-      "name",
-      "address",
-      "building_area",
-      "opening_hours"
-  ],
-  "geometry": [
-      "point",
-      "area"
-  ],
-  "tags": {
-      "office": "advertising_agency"
-  },
-  "terms": [
-      "ad",
-      "ad agency",
-      "advert agency",
-      "advertising",
-      "marketing"
-  ],
-  "name": "Advertising Agency"
+    "icon": "suitcase",
+    "fields": [
+        "name",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "advertising_agency"
+    },
+    "terms": [
+        "ad",
+        "ad agency",
+        "advert agency",
+        "advertising",
+        "marketing"
+    ],
+    "name": "Advertising Agency"
 }

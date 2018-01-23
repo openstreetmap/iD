@@ -1,13 +1,15 @@
 {
-  "geometry": [
-    "area"
-  ],
-  "fields": [
-    "name"
-  ],
-  "tags": {
-    "landuse": "religious"
-  },
-  "terms": [],
-  "name": "Religious Area"
+    "geometry": [
+        "area"
+    ],
+    "fields": [
+        "name",
+        "religion",
+        "denomination"
+    ],
+    "tags": {
+        "landuse": "religious"
+    },
+    "terms": [],
+    "name": "Religious Area"
 }

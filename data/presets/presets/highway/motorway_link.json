@@ -3,7 +3,7 @@
     "fields": [
         "name",
         "ref_road_number",
-        "oneway_yes",
+        "oneway",
         "maxspeed",
         "lanes",
         "surface",
@@ -25,6 +25,10 @@
         "highway": "motorway_link",
         "oneway": "yes"
     },
-    "terms": ["ramp", "on ramp", "off ramp"],
+    "terms": [
+        "ramp",
+        "on ramp",
+        "off ramp"
+    ],
     "name": "Motorway Link"
 }

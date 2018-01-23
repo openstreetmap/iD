@@ -1,5 +1,209 @@
 {
     "mg": {
+        "modes": {
+            "add_area": {
+                "title": "Faritra",
+                "description": "Hampiditra faritra maitso, trano, farihy na faritra hafa amin'ny sarintany.",
+                "tail": "Tsindrio eo amin'ny sarintany raha hanomboka hanoritra faritra, ohatra hoe faritra maitso, farihy, na trano."
+            },
+            "add_line": {
+                "title": "Tsipika",
+                "description": "Hampiditra làlana, arabe, làlan-tongotra, lakan-drano na endri-tsipika hafa amin'ny sarintany.",
+                "tail": "Tsindrio eo amin'ny sarintany raha hanomboka hanoritra làlana, làla-masaka na arabe."
+            },
+            "add_point": {
+                "title": "Teboka",
+                "tail": "Tsindrio eo amin'ny sarintany raha hanampy teboka."
+            },
+            "browse": {
+                "title": "Hisava.",
+                "description": "Akisaho ary hangezao ny sarintany."
+            },
+            "draw_area": {
+                "tail": "Tsindrio raha hampiditra vona eo faritra misy anao. Tsindrio ilay teboka voalohany raha hamarana ny fanoritana faritra."
+            },
+            "draw_line": {
+                "tail": "Tsindrio raha hanampy vona amin'ny tsipika. Manindria eo amin'ny tsipika hafa raha hampitohy amin'izy ireo, manaova tsindry in-droa raha hamarana ny tsipika."
+            },
+            "drag_node": {
+                "connected_to_hidden": "Tsy mety ovaina ity satria mifandray amina zavatra izay tsy miseho."
+            }
+        },
+        "operations": {
+            "add": {
+                "annotation": {
+                    "point": "Nanampy teboka.",
+                    "vertex": "Nanampy vona.",
+                    "relation": "Nanampy fifandraisana."
+                }
+            },
+            "start": {
+                "annotation": {
+                    "line": "Nanomboka tsipika.",
+                    "area": "Nanomboka nanoritra faritra."
+                }
+            },
+            "continue": {
+                "title": "Hanohy",
+                "description": "Hanohy ity tsipika ity.",
+                "not_eligible": "Tsy misy tsipika azo tohizana eto.",
+                "multiple": "Misy tsipika maromaro azo tohizana eto. Raha hisafidy tsipika iray dia tsindrio ny Shift ary tsindrio eo amin'ilay tsipika hofantenina.",
+                "annotation": {
+                    "line": "Nanohy tsipika.",
+                    "area": "Nanohy nanoritra faritra."
+                }
+            },
+            "cancel_draw": {
+                "annotation": "Nanafoana ny fanoritana."
+            },
+            "circularize": {
+                "title": "Hanaboribory.",
+                "description": {
+                    "line": "Hanaboribory ity tsipika ity.",
+                    "area": "Hanaboribory ity faritra ity."
+                },
+                "annotation": {
+                    "line": "Nanaboribory an'ilay tsipika.",
+                    "area": "Nanaboribory an'ilay faritra."
+                },
+                "not_closed": "Tsy mety atao boribory ity satria tsy mihodina tanteraka.",
+                "too_large": "Tsy mety atao boribory ity satria tsy ampy ny faritra miseho aminy.",
+                "connected_to_hidden": "Tsy mety atao boribory ity satria mifampitohy amina zavatra tsy miseho."
+            },
+            "orthogonalize": {
+                "title": "Efajoro",
+                "description": {
+                    "line": "Hampahitsy ny zoron'ito tsipika ito.",
+                    "area": "Hampahitsy ireo zoron'ito faritra ito."
+                },
+                "annotation": {
+                    "line": "Nampahitsy ny zoron'ilay tsipika.",
+                    "area": "Nampahitsy ireo zoron'ilay faritra."
+                },
+                "not_squarish": "Tsy mety atao efajoro mahitsy ito satria tsy manakaiky ny endrika efajoro.",
+                "too_large": "Tsy mety atao efajoro mahitsy ito satria tsy ampy ny faritra miseho aminy.",
+                "connected_to_hidden": "Tsy mety atao efajoro mahitsy ito satria mifampitohy amina zavatra tsy miseho."
+            },
+            "straighten": {
+                "title": "Hampahitsy",
+                "description": "Hampahitsy ito tsipika ito.",
+                "annotation": "Nampahitsy an'ilay tsipika.",
+                "too_bendy": "Tsy mety ampahitsiana ito satria miolaka loatra.",
+                "connected_to_hidden": "Tsy mety ampahitsiana ito tsipika ito satria mifampitohy amina zavatra tsy miseho."
+            },
+            "delete": {
+                "title": "Hamafa",
+                "description": {
+                    "single": "Hamafa tanteraka an'ito singa ito.",
+                    "multiple": "Hamafa tanteraka an'ireto singa ireto."
+                },
+                "annotation": {
+                    "point": "Namafa an'ilay teboka.",
+                    "vertex": "Namafa an'ilay vona tamin'ilay tsipika.",
+                    "line": "Namafa an'ilay tsipika.",
+                    "area": "Namafa an'ilay faritra.",
+                    "relation": "Namafa an'ilay fifandraisana.",
+                    "multiple": "Namafa singa {n}."
+                },
+                "too_large": {
+                    "single": "Tsy mety fafàna ito singa ito satria tsy ampy ny faritra miseho aminy.",
+                    "multiple": "Tsy mety fafàna ireo singa ireo satria tsy ampy ny faritra miseho aminy."
+                },
+                "incomplete_relation": {
+                    "single": "Tsy mety fafàna ito singa ito satria tsy azo manontolo tamin'ny nakàna azy.",
+                    "multiple": "Tsy mety fafàna ireo singa ireo satria tsy azo manontolo tamin'ny nakàna azy."
+                },
+                "connected_to_hidden": {
+                    "single": "Tsy mety fafàna ito singa ito satria mifampitohy amina zavatra tsy miseho.",
+                    "multiple": "Tsy mety fafàna ireo singa ireo satria mifampitohy amina zavatra tsy miseho ny sasany aminy."
+                }
+            },
+            "connect": {
+                "annotation": {
+                    "point": "Nampifandray an'ilay soritra tamin'ilay teboka.",
+                    "vertex": "Nampifandray an'ilay soritra tamin'ny anankiray hafa.",
+                    "line": "Nampifandray an'ilay soritra tamin'ilay tsipika.",
+                    "area": "Nampifandray an'ilay soritra tamin'ilay faritra."
+                }
+            },
+            "disconnect": {
+                "title": "Hanatsoaka",
+                "description": "Hanasaraka an'ireto tsipika/faritra ireto.",
+                "annotation": "Nanasaraka an'ireo tsipika/faritra.",
+                "not_connected": "Tsy ampy mba hosarahina ny tsipika/faritra misy.",
+                "connected_to_hidden": "Tsy mety tsoahina ito satria mifampitohy amina zavatra tsy miseho."
+            },
+            "merge": {
+                "title": "Hanambatra",
+                "description": "Hanambatra an'ireto singa ireto.",
+                "annotation": "Nanambatra singa {n}.",
+                "not_eligible": "Tsy mety atambatra ireto singa ireto.",
+                "not_adjacent": "Tsy mety atambatra ireto singa ireto satria tsy mifampitohy ny faran'izy ireo.",
+                "incomplete_relation": "Tsy mety atambatra ireto singa ireto satria misy tsy azo manontolo tamin'ny nakàna azy."
+            },
+            "move": {
+                "title": "Hamindra",
+                "description": {
+                    "single": "Hamindra an'ito singa ito amin'ny toerana hafa.",
+                    "multiple": "Hamindra an'ireto singa ireto amin'ny toerana hafa."
+                },
+                "annotation": {
+                    "point": "Namindra an'ilay teboka.",
+                    "vertex": "Namindra an'ilay vona tamin'ilay soritra.",
+                    "line": "Namindra an'ilay tsipika.",
+                    "area": "Namindra an'ilay faritra.",
+                    "multiple": "Namindra singa maromaro."
+                },
+                "incomplete_relation": {
+                    "single": "Tsy mety afindra ito singa ito satria tsy azo manontolo tamin'ny nakàna azy.",
+                    "multiple": "Tsy mety afindra ireo singa ireo satria tsy azo manontolo tamin'ny nakàna azy."
+                },
+                "too_large": {
+                    "single": "Tsy mety afindra ito singa ito satria tsy ampy ny faritra miseho aminy.",
+                    "multiple": "Tsy mety afindra ireo singa ireo satria tsy ampy ny faritra miseho aminy."
+                },
+                "connected_to_hidden": {
+                    "single": "Tsy mety afindra ito singa ito satria mifampitohy amina zavatra tsy miseho.",
+                    "multiple": "Tsy mety afindra ireo singa ireo satria mifampitohy amina zavatra tsy miseho ny sasany aminy."
+                }
+            },
+            "rotate": {
+                "title": "Hanodina",
+                "description": {
+                    "single": "Hanodina an'ito singa ito manodidina ny ivony.",
+                    "multiple": "Hanodina an'ireto singa ireto manodidina ny ivony."
+                },
+                "annotation": {
+                    "line": "Nanodina an'ilay tsipika.",
+                    "area": "Nanodina an'ilay faritra.",
+                    "multiple": "Nanodina singa maromaro."
+                },
+                "incomplete_relation": {
+                    "single": "Tsy mety ahodina ito singa ito satria tsy azo manontolo tamin'ny nakàna azy.",
+                    "multiple": "Tsy mety ahodina ireo singa ireo satria tsy azo manontolo tamin'ny nakàna azy."
+                },
+                "too_large": {
+                    "single": "Tsy mety ahodina ito singa ito satria tsy ampy ny faritra miseho aminy.",
+                    "multiple": "Tsy mety ahodina ireto singa ireto satria misy tsy miseho ny sasany aminy."
+                },
+                "connected_to_hidden": {
+                    "single": "Tsy mety ahodina ito singa ito satria mifampitohy amina zavatra tsy miseho.",
+                    "multiple": "Tsy mety ahodina ireo singa ireo satria mifampitohy amina zavatra tsy miseho ny sasany aminy."
+                }
+            },
+            "reverse": {
+                "title": "Hamototra",
+                "description": "Hamototra ny fizotran'ito tsipika ito.",
+                "annotation": "Namototra an'ilay tsipika."
+            },
+            "split": {
+                "title": "Hizara",
+                "description": {
+                    "line": "Hizara an'ito tsipika ito ho roa eto amin'ito vona ito.",
+                    "area": "Hizara ny sisin'ito faritra ito ho roa."
+                }
+            }
+        },
         "intro": {
             "graph": {
                 "block_number": "<value for addr:block_number>",

@@ -321,8 +321,7 @@
             "created": "Luotu",
             "about_changeset_comments": "Tietoja muutoskokoelman kommenteista",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
-            "google_warning": "Huomaathan, että karttatietojen kopioiminen Google-kartoista on ehdottomasti kielletty.",
-            "google_warning_link": "http://www.openstreetmap.org/copyright"
+            "google_warning": "Huomaathan, että karttatietojen kopioiminen Google-kartoista on ehdottomasti kielletty."
         },
         "contributors": {
             "list": "Muokkaajat {users}",
@@ -425,20 +424,17 @@
         "background": {
             "title": "Tausta",
             "description": "Taustan asetukset",
-            "percent_brightness": "{opacity}% kirkkaus",
             "none": "Ei taustaa",
             "best_imagery": "Paras ilmakuvalähde tälle sijainnille",
             "switch": "Vaihda takaisin tähän taustaan",
             "custom": "Mukautettu",
             "custom_button": "Muokkaa omaa taustaa",
-            "fix_misalignment": "Korjaa ilmakuvavirhe",
-            "imagery_source_faq": "Mikä tämän ilmakuvan lähde on?",
             "reset": "palauta",
-            "offset": "Korjaa ilmakuvan asemointivirhettä vetämällä hiiren osoitinta harmaan laatikon sisällä tai syöttämällä korjausluvut metreinä",
             "minimap": {
-                "description": "Pienoiskartta",
                 "tooltip": "Näytä pienoiskartta laajemmalta alueelta nykyisen muokkausnäkymän sijainnin havainnollistamiseksi."
-            }
+            },
+            "fix_misalignment": "Korjaa ilmakuvavirhe",
+            "offset": "Korjaa ilmakuvan asemointivirhettä vetämällä hiiren osoitinta harmaan laatikon sisällä tai syöttämällä korjausluvut metreinä"
         },
         "map_data": {
             "title": "Karttatiedot",
@@ -613,12 +609,7 @@
             "view_on_mapillary": "Näytä tämä kuva Mapillary-palvelussa"
         },
         "help": {
-            "title": "Ohje",
-            "help": "# Ohje\n\nTämä on ohjelma vapaasti muokattavan\n[OpenStreetMap](http://www.openstreetmap.org/)-kartan\nmuokkaamiseen. Voit käyttää sitä vapaasti alueesi muokkaamiseen ja osallistua ihmisten tekemän\nmaailmankartan luomiseen.\n\nKarttaan tehtävät muutokset ovat näkyvillä kaikille OpenStreetMapin käyttäjille.\nKartan muokkaaminen edellyttää ilmaista [OpenStreetMap-käyttäjätiliä](https://www.openstreetmap.org/login).\n\n[iD-muokkausohjelma](http://ideditor.com/) on yhteistyöprojekti, jonka\n[lähdekoodi on saatavilla GitHubista](https://github.com/openstreetmap/iD).\n\n\n",
-            "gps": "# GPS\n\nGPS-mittaukset ovat tärkein OpenStreetMapin aineiston lähde.\nTämä muokkausohjelma tukee omalta tietokoneeltasi ladattavia `.gpx`-tiedostoja.\nGPS-mittauksia voi tehdä useilla älypuhelinsovelluksilla ja tietysti myös erillisillä\nGPS-mittalaitteilla.\n\nLisätietoja GPS-mittausten tekemisestä on sivuilla [Mapping with a smartphone, GPS, or paper](http://learnosm.org/en/mobile-mapping/) (Karttatietojen kerääminen älypuhelimella, GPS-laitteella tai paperille) ja [Aloittelijan opas](http://wiki.openstreetmap.org/wiki/Fi:Beginners_Guide_1.1).\n\nKäytä GPX-tiedostoa kartoittamisen apuna vetämällä ja pudottamalla tiedosto kartanmuokkausohjelmaan. Jos se toimii, GPS-jälki ilmestyy karttapohjalle kirkkaanviolettina viivana. Piilota, näytä uudelleen tai muuta tämän GPX-tason lähennystasoa Karttatiedot-valikosta oikeasta reunasta.\n\nTällä tavalla kartoittamisen apuna käytettyä GPX-tiedostoa ei tallenneta OpenStreetMapiin - tiedosto tulee hyödynnettyä parhaiten tallentamalla tiedosto myös muiden [karttakehittäjien käyttöön](http://www.openstreetmap.org/trace/create).\n",
-            "imagery": "# Ilmakuvat\n\nIlmakuvat ovat tärkeä kartoittamisen apuväline. Lentokuvien,\nsatelliittikuvien ja vapaasti koottujen materiaalien kokoelma on\nkäytettävissä Taustan asetukset -valikosta oikean reunan sivupalkista.\n\nOletuksena taustalla näytetään [Bing-karttojen](http://www.bing.com/maps/) satelliittikuvat,\nmutta karttaa lähentämällä vaihtoehtoja tulee lisää.\nJoissakin maissa, kuten Suomessa, Ranskassa ja Tanskassa\non saatavilla korkealaatuisia lentokoneesta kuvattuja ilmakuvia.\n\nIlmakuva voi näyttää virheelliseltä palveluntarjoajan sivuston\nvirheen vuoksi. Jos tiestön sijainti heittää ilmakuvasta, älä ala heti\nsiirtämään niitä vastaamaan taustakuvaa, vaan siirrä ilmakuvataustaa\nvastaamaan tiestöä asetuksella \"Korjaa ilmakuvavirhe\"\nTaustan asetusten alaosassa.\n",
-            "addresses": "# Osoitteet\n\nOsoitteet ovat yksi tärkeimmistä kartalla olevasta tiedosta.\n\nSen lisäksi että osoitetiedot ovat myös katujen nimiä,\nOpenStreetMapissa ne ovat olennaisia myös rakennusten\nja muiden kadunvarsikohteiden tiedoissa.\n\nOsoitetietoja voi katujen lisäksi lisätä rakennuksien ulkoreunoille\nja paikkapisteille. Paras osoitetietojen lähde on jalkautuminen tai\noma paikallistuntemus. Kuten kaikessa muussakin muokkaamisessa,\ntietojen kopioiminen kaupallisista lähteistä kuten Google Kartoista\non ehdottomasti kielletty.\n",
-            "inspector": "# Kohdemuokkaimen käyttö\n\nKohdemuokkain on näytön vasemmassa reunassa oleva osio, jolla muutetaan valitun kohteen ominaisuuksia.\n\n### Kohteen tyypin valitseminen\n\nPisteen, viivan tai alueen lisäämisen jälkeen valitaan, millainen kohde on kyseessä - kuten kahvila, moottoritie, joki tai leikkipuisto. Kohdemuokkain näyttää heti pikapainikkeet suosituimmille kohteille. Jos kohde ei näy listalla, hae paikkaa hakusanalla ja valitse se sitten luettelosta. Haku ymmärtää myös synonyymit ja paikkaan liittyviä sanoja, joten kokeile sitä rohkeasti.\n\nTarkastele kohdetyypin lisätietoja tarkemmin napsauttamalla i-kirjainta sen oikeassa reunassa. Valitse kohdetyyppi muokattavalle kohteelle napsauttamalla sitä hakutuloslistassa.\n\n### Kohteen ominaisuustietojen muokkaaminen\n\nKun kohdetyyppi on valittu, kohdemuokkain näyttää tietokenttiä, joilla voidaan kuvailla kohteen ominaisuuksia, kuten nimi ja osoite.\n\nKenttäjoukon alapuolella pudotusvalikko, josta löytyy lisätietokenttiä, kuten [Wikipedia-sivu](http://fi.wikipedia.org/), esteettömyystiedot ja paljon muuta.\n\nKohdemuokkaimen alaosassa on Kaikki ominaisuustiedot -kohta, jossa voi lisätä kohteelle mitä tahansa tageja eli ominaisuustietoja. [Taginfosta](http://taginfo.openstreetmap.org/) löytää lisätietoja erilaisista tageista ja niiden käyttömahdollisuuksista.\n\nKohdemuokkaimella tehtävät muutokset päivittyvät muokkauskartalle automaattisesti. Muutoksen voi kuitenkin aina perua napsauttamalla Kumoa-painiketta.\n"
+            "title": "Ohje"
         },
         "intro": {
             "done": "valmis",
@@ -680,7 +671,6 @@
             },
             "areas": {
                 "title": "Alueet",
-                "add_playground": "*Alueilla* merkitään esimerkiksi järvien, rakennusten ja asuinalueiden rajoja.{br}Lisäksi paikkapisteet voi yleensä merkitä myös tarkemmin alueina. **Luo uusi alue napsauttamalla {button}-painiketta.**",
                 "start_playground": "Lisää tämä leikkipuisto kartalle piirtämällä alue. Alueet koostuvat alueen ulkoreunaa rajaavista *viivapisteistä*. **Osoita aloituspisteen paikka napsauttamalla kartalla tai painamalla välilyöntiä jossakin leikkipuiston nurkassa.**",
                 "search_playground": "**Etsi hakusanalla \"{preset}\".**",
                 "choose_playground": "**Valitse {preset} listalta.**",
@@ -1110,36 +1100,8 @@
                     "label": "Paikkamäärä",
                     "placeholder": "5, 10, 20, 100..."
                 },
-                "cardinal_direction": {
-                    "label": "Suunta",
-                    "options": {
-                        "E": "Itä",
-                        "ENE": "Itä-koillinen",
-                        "ESE": "Itä-kaakko",
-                        "N": "Pohjoinen",
-                        "NE": "Koillinen",
-                        "NNE": "Pohjois-koillinen",
-                        "NNW": "Pohjois-luode",
-                        "NW": "Luode",
-                        "S": "Etelä",
-                        "SE": "Kaakko",
-                        "SSE": "Etelä-kaakko",
-                        "SSW": "Etelä-lounas",
-                        "SW": "Lounas",
-                        "W": "Länsi",
-                        "WNW": "Länsiluode",
-                        "WSW": "Länsilounas"
-                    }
-                },
                 "castle_type": {
                     "label": "Tyyppi"
-                },
-                "clock_direction": {
-                    "label": "Suunta",
-                    "options": {
-                        "anticlockwise": "Vastapäivään",
-                        "clockwise": "Myötäpäivään"
-                    }
                 },
                 "club": {
                     "label": "Tyyppi"
@@ -1600,13 +1562,6 @@
                     "label": "Lyöntimääräsuositus",
                     "placeholder": "3, 4, 5..."
                 },
-                "parallel_direction": {
-                    "label": "Vaikuttaa kulkusuunnassa",
-                    "options": {
-                        "backward": "Taaksepäin",
-                        "forward": "Eteenpäin"
-                    }
-                },
                 "park_ride": {
                     "label": "Autoparkki"
                 },
@@ -1693,13 +1648,6 @@
                 },
                 "recycling_accepts": {
                     "label": "Keräys"
-                },
-                "recycling_type": {
-                    "label": "Kierrätyksen tyyppi",
-                    "options": {
-                        "centre": "Kierrätyskeskus",
-                        "container": "Säiliö"
-                    }
                 },
                 "ref_road_number": {
                     "label": "Tienumero"
@@ -2104,10 +2052,6 @@
                     "name": "Valuutanvaihtopiste",
                     "terms": "valuutta, raha, vaihto, vaihtaminen, valuutanvaihto, valuutanvaihtaminen, rahanvaihto, rahanvaihtaminen, Forex"
                 },
-                "amenity/bus_station": {
-                    "name": "Linja-autoasema",
-                    "terms": "linja, linja-auto, asema, pysäkki, keskus, matkakeskus, bussiasema, bussi, bussit, nysse, dösä, terminaali, linja-autoterminaali, bussiterminaali"
-                },
                 "amenity/cafe": {
                     "name": "Kahvila",
                     "terms": "Kahvila, Kahvitupa, Teehuone"
@@ -2190,9 +2134,6 @@
                 "amenity/fast_food": {
                     "name": "Pikaruokaravintola",
                     "terms": "Hesburger, mäkkäri, McDonald's, McDonalds, subi, subway, hamppari, hampurilainen, hampurilais, hampurilaisravintola, roska, roskaruoka, ruoka, ravintola, mättö, ranskalaiset, ranskikset"
-                },
-                "amenity/ferry_terminal": {
-                    "name": "Laivaterminaali"
                 },
                 "amenity/fire_station": {
                     "name": "Paloasema",
@@ -2324,10 +2265,6 @@
                 },
                 "amenity/ranger_station": {
                     "name": "Metsävartiosto"
-                },
-                "amenity/recycling": {
-                    "name": "Kierrätyspiste",
-                    "terms": "kierrättäminen, kierrätys, lajittelu, uudelleenkäyttö, uudelleenkäyttäminen, ympäristö, lajittelupiste, lajitteluasema, jäte, jätteet, roskat, roska, roskikset, roskis, säiliö, roskasäiliö"
                 },
                 "amenity/recycling_centre": {
                     "name": "Kierrätyskeskus"
@@ -2932,10 +2869,6 @@
                 "highway/bridleway": {
                     "name": "Ratsastuspolku"
                 },
-                "highway/bus_stop": {
-                    "name": "Linja-autopysäkki",
-                    "terms": "bussipysäkki, linja-autopysäkki, bussikatos, pysähtymispaikka, bussin pysähtymispaikka, linja-auton pysähtymispaikka, pysäkki, pysäkkisyvänne"
-                },
                 "highway/corridor": {
                     "name": "Sisäkäytävä",
                     "terms": "katettu, katos, käytävä, sisällä, sisätila, sisätiloissa"
@@ -3145,9 +3078,6 @@
                 },
                 "landuse/forest": {
                     "name": "Metsä"
-                },
-                "landuse/garages": {
-                    "name": "Iso autotalli"
                 },
                 "landuse/grass": {
                     "name": "Ruohokenttä"
@@ -3570,11 +3500,7 @@
                     "name": "Toimisto"
                 },
                 "office/administrative": {
-                    "name": "Kunnallishallinnon toimisto",
-                    "terms": "kunta, paikkakunta, paikallinen, paikallis, seutu, seudullinen, kaupunki, kaupungin, kunnan, kunnallinen, toimisto, hallinto, hallitus"
-                },
-                "office/company": {
-                    "name": "Yritystoimisto"
+                    "name": "Kunnallishallinnon toimisto"
                 },
                 "office/coworking": {
                     "name": "Yhteistyöskentelytila"
@@ -3610,8 +3536,7 @@
                     "terms": "asianajotoimisto, asianajajatoimisto, asianajo, asianajaja, lakimies, juristi, toimisto, lakiasia, lakiasiaintoimisto"
                 },
                 "office/lawyer/notary": {
-                    "name": "Asianajotoimisto",
-                    "terms": "asianajaja, juristi, laki, lakimies, toimisto, konttori, yritys, firma, oikeus"
+                    "name": "Asianajotoimisto"
                 },
                 "office/ngo": {
                     "name": "Kansalaisjärjestö",
@@ -3713,13 +3638,6 @@
                 "power/transformer": {
                     "name": "Muuntaja"
                 },
-                "public_transport/platform": {
-                    "name": "Laiturialue",
-                    "terms": "pysäkki, asema, pysäkkilaituri, laituri, odotus, odotusalue, odotuslaituri, odottaminen, katos, asemalaituri, asema"
-                },
-                "public_transport/stop_position": {
-                    "name": "Pysätyspaikka"
-                },
                 "railway": {
                     "name": "Rautatie"
                 },
@@ -3737,10 +3655,6 @@
                     "name": "Kiskoköysirata",
                     "terms": "funikulaari, köysihissi, gondoli, gondolihissi, hissi, rata, hissirata, köysirata"
                 },
-                "railway/halt": {
-                    "name": "Seisake",
-                    "terms": "rautatie, juna, junarata, pysäkki, asema, rautatieasema, VR"
-                },
                 "railway/level_crossing": {
                     "name": "Moottoriajoneuvoliikenteen tasoristeys",
                     "terms": "tasoristeys, ylityspaikka, rautatie, radanylitys, ajoneuvo, tie, katu, moottoriajoneuvo, ajoneuvo, auto"
@@ -3751,19 +3665,12 @@
                 "railway/narrow_gauge": {
                     "name": "Kapearaiteinen rautatie"
                 },
-                "railway/platform": {
-                    "name": "Rautatielaituri",
-                    "terms": "junalaituri, juna, rautatie, VR, asemalaituri, odotusalue, odotuslaituri"
-                },
                 "railway/rail": {
                     "name": "Rata"
                 },
                 "railway/signal": {
                     "name": "Rautatieopastin",
                     "terms": "rautatie, juna, opastin, liikennevalo, signaali"
-                },
-                "railway/station": {
-                    "name": "Rautatieasema"
                 },
                 "railway/subway": {
                     "name": "Metrorata"
@@ -3773,10 +3680,6 @@
                 },
                 "railway/tram": {
                     "name": "Raitiotie"
-                },
-                "railway/tram_stop": {
-                    "name": "Raitiotiepysäkki",
-                    "terms": "raitiotie, raitiovaunu, ratikka, pysäkki, asema, laituri, raide, katos"
                 },
                 "relation": {
                     "name": "Relaatio"
@@ -3998,9 +3901,6 @@
                 },
                 "shop/jewelry": {
                     "name": "Jalokiviliike"
-                },
-                "shop/kiosk": {
-                    "name": "Lehtikioski"
                 },
                 "shop/kitchen": {
                     "name": "Keittiöliike"

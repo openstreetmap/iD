@@ -2984,7 +2984,8 @@
       "loc": [-85.643097, 41.942575],
       "tags": {
         "highway": "traffic_signals",
-        "traffic_signals": "signal"
+        "traffic_signals": "signal",
+        "traffic_signals:direction": "both"
       }
     },
     "n1643": {
@@ -3840,7 +3841,8 @@
       "loc": [-85.63582, 41.942771],
       "tags": {
         "highway": "traffic_signals",
-        "traffic_signals": "emergency"
+        "traffic_signals": "emergency",
+        "traffic_signals:direction": "both"
       }
     },
     "n1835": {
@@ -8001,7 +8003,8 @@
       "loc": [-85.632793, 41.94405],
       "tags": {
         "highway": "traffic_signals",
-        "traffic_signals": "signal"
+        "traffic_signals": "signal",
+        "traffic_signals:direction": "both"
       }
     },
     "n2749": {
@@ -12872,7 +12875,7 @@
     },
     "n3858": {
       "id": "n3858",
-      "loc": [-85.616755, 41.952231]
+      "loc": [-85.616762, 41.952222]
     },
     "n3859": {
       "id": "n3859",
@@ -12908,11 +12911,11 @@
     },
     "n3866": {
       "id": "n3866",
-      "loc": [-85.616572, 41.951992]
+      "loc": [-85.616557, 41.951997]
     },
     "n3867": {
       "id": "n3867",
-      "loc": [-85.616583, 41.952076]
+      "loc": [-85.61658, 41.952093]
     },
     "n3868": {
       "id": "n3868",
@@ -12920,7 +12923,7 @@
     },
     "n3869": {
       "id": "n3869",
-      "loc": [-85.616916, 41.952279]
+      "loc": [-85.616918, 41.952276]
     },
     "n387": {
       "id": "n387",
@@ -12928,7 +12931,7 @@
     },
     "n3870": {
       "id": "n3870",
-      "loc": [-85.617088, 41.952254]
+      "loc": [-85.617098, 41.952235]
     },
     "n3871": {
       "id": "n3871",
@@ -13284,7 +13287,7 @@
     },
     "n3950": {
       "id": "n3950",
-      "loc": [-85.616494, 41.951959]
+      "loc": [-85.616502, 41.951946]
     },
     "n3951": {
       "id": "n3951",
@@ -13517,7 +13520,9 @@
       "id": "n4",
       "loc": [-85.622764, 41.950892],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n40": {
@@ -15769,7 +15774,8 @@
       "loc": [-85.628201, 41.954694],
       "tags": {
         "highway": "stop",
-        "stop": "all"
+        "stop": "all",
+        "direction": "forward"
       }
     },
     "n4501": {
@@ -15777,7 +15783,8 @@
       "loc": [-85.627921, 41.954783],
       "tags": {
         "highway": "stop",
-        "stop": "all"
+        "stop": "all",
+        "direction": "backward"
       }
     },
     "n4502": {
@@ -15785,7 +15792,8 @@
       "loc": [-85.62775, 41.954696],
       "tags": {
         "highway": "stop",
-        "stop": "all"
+        "stop": "all",
+        "direction": "backward"
       }
     },
     "n4503": {
@@ -15793,35 +15801,44 @@
       "loc": [-85.628046, 41.954591],
       "tags": {
         "highway": "stop",
-        "stop": "all"
+        "stop": "all",
+        "direction": "forward"
       }
     },
     "n4504": {
       "id": "n4504",
       "loc": [-85.631074, 41.957428],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "backward",
+        "stop": "minor"
       }
     },
     "n4505": {
       "id": "n4505",
       "loc": [-85.630768, 41.957429],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n4506": {
       "id": "n4506",
       "loc": [-85.629888, 41.957432],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "backward",
+        "stop": "minor"
       }
     },
     "n4507": {
       "id": "n4507",
       "loc": [-85.629565, 41.957433],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "stop": "minor",
+        "direction": "forward"
       }
     },
     "n4508": {
@@ -15931,7 +15948,9 @@
       "id": "n4528",
       "loc": [-85.631073, 41.955913],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "stop": "minor",
+        "direction": "backward"
       }
     },
     "n4529": {
@@ -15969,21 +15988,27 @@
       "id": "n4535",
       "loc": [-85.629675, 41.954564],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n4536": {
       "id": "n4536",
       "loc": [-85.630881, 41.954806],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "stop": "minor",
+        "direction": "backward"
       }
     },
     "n4537": {
       "id": "n4537",
       "loc": [-85.630879, 41.954564],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "stop": "minor",
+        "direction": "forward"
       }
     },
     "n4538": {
@@ -16023,49 +16048,61 @@
       "id": "n4543",
       "loc": [-85.631045, 41.959036],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "stop": "minor",
+        "direction": "backward"
       }
     },
     "n4544": {
       "id": "n4544",
       "loc": [-85.632071, 41.959029],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "stop": "minor",
+        "direction": "forward"
       }
     },
     "n4545": {
       "id": "n4545",
       "loc": [-85.632257, 41.959027],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "stop": "minor",
+        "direction": "backward"
       }
     },
     "n4546": {
       "id": "n4546",
       "loc": [-85.631966, 41.957427],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n4547": {
       "id": "n4547",
       "loc": [-85.632297, 41.957426],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "backward",
+        "stop": "minor"
       }
     },
     "n4548": {
       "id": "n4548",
       "loc": [-85.631976, 41.955911],
       "tags": {
-        "highway": "give_way"
+        "highway": "give_way",
+        "direction": "forward"
       }
     },
     "n4549": {
       "id": "n4549",
       "loc": [-85.632272, 41.955911],
       "tags": {
-        "highway": "give_way"
+        "highway": "give_way",
+        "direction": "backward"
       }
     },
     "n455": {
@@ -16076,14 +16113,18 @@
       "id": "n4550",
       "loc": [-85.632097, 41.954805],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "stop": "minor",
+        "direction": "backward"
       }
     },
     "n4551": {
       "id": "n4551",
       "loc": [-85.632094, 41.954566],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "stop": "minor",
+        "direction": "forward"
       }
     },
     "n4552": {
@@ -16126,7 +16167,9 @@
       "id": "n4560",
       "loc": [-85.622763, 41.95109],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "backward",
+        "stop": "minor"
       }
     },
     "n4561": {
@@ -16148,7 +16191,9 @@
       "id": "n4564",
       "loc": [-85.624599, 41.950984],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n4565": {
@@ -16250,7 +16295,9 @@
       "id": "n4583",
       "loc": [-85.617856, 41.954642],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n4584": {
@@ -16271,7 +16318,9 @@
       "id": "n4586",
       "loc": [-85.620352, 41.951894],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n4587": {
@@ -16285,14 +16334,18 @@
       "id": "n4588",
       "loc": [-85.620316, 41.950999],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "backward",
+        "stop": "minor"
       }
     },
     "n4589": {
       "id": "n4589",
       "loc": [-85.620311, 41.950131],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "backward",
+        "stop": "minor"
       }
     },
     "n459": {
@@ -16310,21 +16363,27 @@
       "id": "n4591",
       "loc": [-85.620301, 41.949239],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "backward",
+        "stop": "minor"
       }
     },
     "n4592": {
       "id": "n4592",
       "loc": [-85.620278, 41.947443],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "backward",
+        "stop": "minor"
       }
     },
     "n4593": {
       "id": "n4593",
       "loc": [-85.619844, 41.947444],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n4594": {
@@ -16345,14 +16404,18 @@
       "id": "n4596",
       "loc": [-85.622744, 41.947541],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "stop": "minor",
+        "direction": "backward"
       }
     },
     "n4597": {
       "id": "n4597",
       "loc": [-85.622739, 41.947316],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n4598": {
@@ -16388,14 +16451,18 @@
       "id": "n4601",
       "loc": [-85.622768, 41.949125],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n4602": {
       "id": "n4602",
       "loc": [-85.622769, 41.949325],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "stop": "minor",
+        "direction": "backward"
       }
     },
     "n4603": {
@@ -16409,14 +16476,17 @@
       "id": "n4604",
       "loc": [-85.622614, 41.950113],
       "tags": {
-        "highway": "give_way"
+        "highway": "give_way",
+        "direction": "forward"
       }
     },
     "n4605": {
       "id": "n4605",
       "loc": [-85.624777, 41.949219],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n4606": {
@@ -16462,7 +16532,9 @@
       "id": "n4611",
       "loc": [-85.62476, 41.947428],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "stop": "minor",
+        "direction": "forward"
       }
     },
     "n4612": {
@@ -16483,7 +16555,7 @@
     },
     "n4616": {
       "id": "n4616",
-      "loc": [-85.61823, 41.9499]
+      "loc": [-85.618232, 41.949913]
     },
     "n4617": {
       "id": "n4617",
@@ -16628,7 +16700,9 @@
       "id": "n4645",
       "loc": [-85.635815, 41.942638],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n4646": {
@@ -16863,14 +16937,18 @@
       "id": "n4684",
       "loc": [-85.635566, 41.940102],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n4685": {
       "id": "n4685",
       "loc": [-85.635961, 41.940125],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "stop": "minor",
+        "direction": "backward"
       }
     },
     "n4686": {
@@ -16934,14 +17012,18 @@
       "id": "n4694",
       "loc": [-85.637038, 41.942513],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n4695": {
       "id": "n4695",
       "loc": [-85.637174, 41.941354],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "backward",
+        "stop": "minor"
       }
     },
     "n4696": {
@@ -16955,14 +17037,16 @@
       "id": "n4697",
       "loc": [-85.638058, 41.941346],
       "tags": {
-        "highway": "give_way"
+        "highway": "give_way",
+        "direction": "forward"
       }
     },
     "n4698": {
       "id": "n4698",
       "loc": [-85.638359, 41.941344],
       "tags": {
-        "highway": "give_way"
+        "highway": "give_way",
+        "direction": "backward"
       }
     },
     "n4699": {
@@ -16991,14 +17075,16 @@
       "id": "n4701",
       "loc": [-85.639277, 41.941337],
       "tags": {
-        "highway": "give_way"
+        "highway": "give_way",
+        "direction": "forward"
       }
     },
     "n4702": {
       "id": "n4702",
       "loc": [-85.639548, 41.941334],
       "tags": {
-        "highway": "give_way"
+        "highway": "give_way",
+        "direction": "backward"
       }
     },
     "n4703": {
@@ -17016,28 +17102,36 @@
       "id": "n4705",
       "loc": [-85.64049, 41.941327],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n4706": {
       "id": "n4706",
       "loc": [-85.640803, 41.941324],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "backward",
+        "stop": "minor"
       }
     },
     "n4707": {
       "id": "n4707",
       "loc": [-85.641717, 41.941317],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "all"
       }
     },
     "n4708": {
       "id": "n4708",
       "loc": [-85.641846, 41.941415],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "backward",
+        "stop": "all"
       }
     },
     "n4709": {
@@ -17058,21 +17152,27 @@
       "id": "n4710",
       "loc": [-85.642014, 41.941313],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "all"
       }
     },
     "n4711": {
       "id": "n4711",
       "loc": [-85.641854, 41.942455],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n4712": {
       "id": "n4712",
       "loc": [-85.641859, 41.942739],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "backward",
+        "stop": "minor"
       }
     },
     "n4713": {
@@ -17086,14 +17186,18 @@
       "id": "n4714",
       "loc": [-85.640669, 41.942716],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "backward",
+        "stop": "minor"
       }
     },
     "n4715": {
       "id": "n4715",
       "loc": [-85.640664, 41.942478],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n4716": {
@@ -17107,14 +17211,18 @@
       "id": "n4717",
       "loc": [-85.639455, 41.942731],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "backward",
+        "stop": "minor"
       }
     },
     "n4718": {
       "id": "n4718",
       "loc": [-85.63945, 41.942492],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n4719": {
@@ -17132,14 +17240,18 @@
       "id": "n4720",
       "loc": [-85.638238, 41.942745],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "backward",
+        "stop": "minor"
       }
     },
     "n4721": {
       "id": "n4721",
       "loc": [-85.638233, 41.942511],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n4722": {
@@ -17167,21 +17279,27 @@
       "id": "n4725",
       "loc": [-85.63704, 41.942741],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n4726": {
       "id": "n4726",
       "loc": [-85.633467, 41.943818],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "stop": "minor",
+        "direction": "backward"
       }
     },
     "n4727": {
       "id": "n4727",
       "loc": [-85.633987, 41.943531],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n4728": {
@@ -17288,7 +17406,9 @@
       "id": "n4741",
       "loc": [-85.63481, 41.946056],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "stop": "minor",
+        "direction": "backward"
       }
     },
     "n4742": {
@@ -17313,14 +17433,18 @@
       "id": "n4745",
       "loc": [-85.639487, 41.945042],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n4746": {
       "id": "n4746",
       "loc": [-85.639635, 41.94387],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "stop": "minor",
+        "direction": "backward"
       }
     },
     "n4747": {
@@ -17334,14 +17458,18 @@
       "id": "n4748",
       "loc": [-85.64055, 41.943862],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n4749": {
       "id": "n4749",
       "loc": [-85.640864, 41.943859],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "stop": "minor",
+        "direction": "backward"
       }
     },
     "n475": {
@@ -17352,7 +17480,9 @@
       "id": "n4750",
       "loc": [-85.640718, 41.945022],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n4751": {
@@ -17366,7 +17496,9 @@
       "id": "n4752",
       "loc": [-85.641913, 41.94502],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "forward",
+        "stop": "minor"
       }
     },
     "n4753": {
@@ -17380,21 +17512,25 @@
       "id": "n4754",
       "loc": [-85.642045, 41.94385],
       "tags": {
-        "highway": "give_way"
+        "highway": "give_way",
+        "direction": "backward"
       }
     },
     "n4755": {
       "id": "n4755",
       "loc": [-85.641738, 41.943852],
       "tags": {
-        "highway": "give_way"
+        "highway": "give_way",
+        "direction": "forward"
       }
     },
     "n4756": {
       "id": "n4756",
       "loc": [-85.642928, 41.943843],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "stop": "minor",
+        "direction": "forward"
       }
     },
     "n4757": {
@@ -17408,14 +17544,18 @@
       "id": "n4758",
       "loc": [-85.642986, 41.945105],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "direction": "backward",
+        "stop": "all"
       }
     },
     "n4759": {
       "id": "n4759",
       "loc": [-85.643136, 41.94502],
       "tags": {
-        "highway": "stop"
+        "highway": "stop",
+        "stop": "all",
+        "direction": "forward"
       }
     },
     "n476": {
@@ -27090,7 +27230,25 @@
     },
     "w660": {
       "id": "w660",
-      "nodes": ["n3982", "n3842", "n3864", "n3865", "n3866", "n3867", "n3868", "n3858", "n3869", "n3870", "n3862"],
+      "nodes": [
+        "n3982",
+        "n3842",
+        "n3864",
+        "n3865",
+        "n2938",
+        "n3866",
+        "n2939",
+        "n3867",
+        "n3868",
+        "n3858",
+        "n2937",
+        "n3869",
+        "n2935",
+        "n2934",
+        "n3870",
+        "n3348",
+        "n3862"
+      ],
       "tags": {
         "highway": "service"
       }
@@ -27299,8 +27457,12 @@
         "n4002",
         "n4003",
         "n3949",
+        "n3351",
         "n3950",
+        "n3354",
+        "n3350",
         "n3951",
+        "n3349",
         "n3952",
         "n3953",
         "n3954",
@@ -29256,6 +29418,46 @@
       "tags": {
         "amenity": "parking"
       }
+    },
+    "n2934": {
+      "id": "n2934",
+      "loc": [-85.617051, 41.952263]
+    },
+    "n2935": {
+      "id": "n2935",
+      "loc": [-85.61699, 41.952276]
+    },
+    "n2937": {
+      "id": "n2937",
+      "loc": [-85.616847, 41.952262]
+    },
+    "n2938": {
+      "id": "n2938",
+      "loc": [-85.616577, 41.951956]
+    },
+    "n2939": {
+      "id": "n2939",
+      "loc": [-85.61656, 41.952044]
+    },
+    "n3348": {
+      "id": "n3348",
+      "loc": [-85.61714, 41.9522]
+    },
+    "n3349": {
+      "id": "n3349",
+      "loc": [-85.616517, 41.95212]
+    },
+    "n3350": {
+      "id": "n3350",
+      "loc": [-85.616489, 41.952033]
+    },
+    "n3351": {
+      "id": "n3351",
+      "loc": [-85.616529, 41.951907]
+    },
+    "n3354": {
+      "id": "n3354",
+      "loc": [-85.616488, 41.951994]
     }
   }
 }

@@ -1,22 +1,22 @@
 {
-  "icon": "commercial",
-  "fields": [
-      "name",
-      "address",
-      "building_area",
-      "opening_hours",
-      "operator"
-  ],
-  "geometry": [
-      "point",
-      "area"
-  ],
-  "tags": {
-      "office": "water_utility"
-  },
-  "terms": [
-      "water board",
-      "utility"
-  ],
-  "name": "Water Utility Office"
+    "icon": "suitcase",
+    "fields": [
+        "name",
+        "address",
+        "building_area",
+        "opening_hours",
+        "operator"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "water_utility"
+    },
+    "terms": [
+        "water board",
+        "utility"
+    ],
+    "name": "Water Utility Office"
 }

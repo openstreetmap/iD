@@ -5,6 +5,8 @@ Thanks to all our contributors, users, and the many people that make iD possible
 The iD map editor is an open source project. You can submit bug reports, help out,
 or learn more by visiting our project page on GitHub:  :octocat: https://github.com/openstreetmap/iD
 
+If you love iD, please star our project on GitHub to show your support! :star:
+
 _Breaking changes, which may affect downstream projects or sites that embed iD, are marked with a_ :warning:
 
 <!--
@@ -19,12 +21,259 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 #### :bug: Bugfixes
 #### :earth_asia: Localization
 #### :hourglass: Performance
-#### :mortar_board: Walkthrough
+#### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 
 [#xxxx]: https://github.com/openstreetmap/iD/issues/xxxx
 [@xxxx]: https://github.com/xxxx
 -->
+
+
+# 2.6.0
+##### January 21, 2018
+
+#### :mega: Release Highlights
+
+* :level_slider: You can now adjust imagery brightness, contrast, saturation, and sharpness. (Not currently available in Internet Explorer or Edge)<br/>
+_Try enhancing the background imagery by opening the Background pane (shortcut <kbd>B</kbd>) and
+adjusting the slider controls._
+
+* :no_entry_sign: iD will now prevent users from drawing many self-crossing lines and areas. See issue [#4646] for examples and more info. You can override these checks by holding down the <kbd>Alt</kbd>/<kbd>Option</kbd> key while drawing.
+
+* :arrow_up_down: Features with a direction-type tag will display view cones indicating the directions they face. This is useful for mapping features like street signs, traffic signals, billboards, security cameras, and more.
+
+* :tram: Transit-related presets have been updated to support Public Transport v2 tagging schema. Many presets have new icons too, to better match the mode of transport.<br/>
+_Try mapping some transit platforms, stations, stop positions, etc._
+
+* :book: We've completely refreshed the in-app Help content in iD. Huge thanks to Manfred Brandl [@manfredbrandl], Minh Nguyễn [@1ec5], and our many volunteers on Transifex for their work on this!<br/>
+_Check out the new help texts by opening the Help pane (shortcut <kbd>H</kbd>)._
+
+[#4646]: https://github.com/openstreetmap/iD/issues/4646
+[@manfredbrandl]: https://github.com/manfredbrandl
+[@1ec5]: https://github.com/1ec5
+
+#### :tada: New Features
+* Prevent self-intersecting lines and areas without a junction node ([#4646], [#4013], [#4602])
+* Add support for `oneway=alternating`, `oneway=reversible` ([#4291])
+* Allow checkbox field to display non-standard values (i.e. not 'yes' or 'no) in the field label
+* New Display Controls allow users to enhance background imagery ([#2211], [#4575])
+  * Sliders for Brightness, Contrast, Saturation, Sharpness
+  * Slider controls go from 25% up to 200%
+  * Not available on Internet Explorer / Edge (these browsers will see only a Brightness slider)
+  * This replaces the brightness buttons (which many people found confusing)
+* Add node count to Measurement info panel ([#4644], thanks [@willemarcel])
+* Draw directional cones on nodes that have a direction ([#3815], [#4602])
+* Add scroll zooming support to the OpenStreetCam viewer ([#4561])
+
+[#4646]: https://github.com/openstreetmap/iD/issues/4646
+[#4644]: https://github.com/openstreetmap/iD/issues/4644
+[#4602]: https://github.com/openstreetmap/iD/issues/4602
+[#4575]: https://github.com/openstreetmap/iD/issues/4575
+[#4561]: https://github.com/openstreetmap/iD/issues/4561
+[#4291]: https://github.com/openstreetmap/iD/issues/4291
+[#4013]: https://github.com/openstreetmap/iD/issues/4013
+[#3815]: https://github.com/openstreetmap/iD/issues/3815
+[#2211]: https://github.com/openstreetmap/iD/issues/2211
+[@willemarcel]: https://github.com/willemarcel
+
+#### :sparkles: Usability
+* Make Help pane slightly wider ([#4651])
+* In combo boxes, don't autocomplete a longer value if the user has typed a shorter value ([#4549])
+* Move link to imagery faq, reword as "Imagery Info / Report a Problem" ([#4546])
+* Side panes (Background, Map Data, Help) no longer auto-close, so that users can interact with the map
+* Style changeset comment field in red if comment is missing ([#4624], [#4613], thanks [@nnodot])
+* Improve label placement around tagged features ([#4271], [#3636])
+* Slight adjustment to improve rendering of icons on vertices
+* Display vertices (and points rendered as vertices in wireframe mode) when dragging ([#3003])
+* Use <kbd>⌘F</kbd>/<kbd>Ctrl+F</kbd> to focus the feature search box ([#4545])
+* Flash message if drag not allowed because of a hidden connection ([#4493])
+* Larger headings on Help, Map Data and Background panes
+* Restyle uiDisclosures, larger text, svg expand/contract icon
+* When deleting final nodes from a way, pan to final node's location ([#4541])
+
+[#4651]: https://github.com/openstreetmap/iD/issues/4651
+[#4624]: https://github.com/openstreetmap/iD/issues/4624
+[#4613]: https://github.com/openstreetmap/iD/issues/4613
+[#4549]: https://github.com/openstreetmap/iD/issues/4549
+[#4546]: https://github.com/openstreetmap/iD/issues/4546
+[#4545]: https://github.com/openstreetmap/iD/issues/4545
+[#4541]: https://github.com/openstreetmap/iD/issues/4541
+[#4493]: https://github.com/openstreetmap/iD/issues/4493
+[#4271]: https://github.com/openstreetmap/iD/issues/4271
+[#3636]: https://github.com/openstreetmap/iD/issues/3636
+[#3003]: https://github.com/openstreetmap/iD/issues/3003
+[@nnodot]: https://github.com/nnodot
+
+
+#### :bug: Bugfixes
+* Fix crash when user tried drawing during map panning to a new location ([#4706])
+* Allow `Relation.replaceMember` to optionally preserve duplicates ([#4696])
+* Fix joining ways to apply any necessary reversal actions ([#4688])
+* Fix bugs when editing route relations that double back over themselves ([#4589])
+* Fix bug causing duplicate uploads if user hits <kbd>enter</kbd> ([#4641], [#4658])
+* Fix bug that quit save mode if user zoomed out too far ([#4664])
+* Fix bug causing open/close of panels to mess up the url ([#4570])
+* Fix manual entry of offset values in the imagery offset control ([#4553])
+* Allow self connecting to a way when drawing ([#4455])
+* Fix bugs on conflict resolution screen ([#4351])
+* Draw streetview photo viewer close 'X' below keyboard shortcuts screen ([#4596], thanks [@briandaviddavidson])
+* Remove click counter if user skips to another step in walkthrough ([#4605], [#4630], thanks [@ajlomagno])
+* When reversing direction of a way, reverse `traffic_signals:direction` on children ([#4595])
+* Don't try to override capital letters entered in the `source=*` field  ([#4558])
+
+[#4706]: https://github.com/openstreetmap/iD/issues/4706
+[#4696]: https://github.com/openstreetmap/iD/issues/4696
+[#4688]: https://github.com/openstreetmap/iD/issues/4688
+[#4664]: https://github.com/openstreetmap/iD/issues/4664
+[#4658]: https://github.com/openstreetmap/iD/issues/4658
+[#4641]: https://github.com/openstreetmap/iD/issues/4641
+[#4630]: https://github.com/openstreetmap/iD/issues/4630
+[#4605]: https://github.com/openstreetmap/iD/issues/4605
+[#4596]: https://github.com/openstreetmap/iD/issues/4596
+[#4595]: https://github.com/openstreetmap/iD/issues/4595
+[#4589]: https://github.com/openstreetmap/iD/issues/4589
+[#4570]: https://github.com/openstreetmap/iD/issues/4570
+[#4558]: https://github.com/openstreetmap/iD/issues/4558
+[#4455]: https://github.com/openstreetmap/iD/issues/4455
+[#4553]: https://github.com/openstreetmap/iD/issues/4553
+[#4351]: https://github.com/openstreetmap/iD/issues/4351
+[@briandaviddavidson]: https://github.com/briandaviddavidson
+[@ajlomagno]: https://github.com/ajlomagno
+
+#### :earth_asia: Localization
+* Remove `addr:unit` from several local address formats:
+  * "default" format
+  * `gb`, `ie`, `si`, `tr` ([#4675], thanks [@althio])
+  * `ua` ([#4671], thanks [@Andygol])
+  * `fr`, `lu`, `mo` ([#4667], thanks [@althio])
+* Fix key shortcuts on non-Latin keyboard layouts (e.g. Cyrillic) ([#4618])
+* Improve int'l date/time strings on imagery and history tools ([#4594])
+
+[#4675]: https://github.com/openstreetmap/iD/issues/4675
+[#4671]: https://github.com/openstreetmap/iD/issues/4671
+[#4667]: https://github.com/openstreetmap/iD/issues/4667
+[#4618]: https://github.com/openstreetmap/iD/issues/4618
+[#4594]: https://github.com/openstreetmap/iD/issues/4594
+[@althio]: https://github.com/althio
+[@Andygol]: https://github.com/Andygol
+
+#### :hourglass: Performance
+* Faster uploading - only perform conflict check if the server returns "409 Conflict" ([#3056])
+* Avoid deferred fetching of OSM tiles at low zooms or with layer disabled ([#4572])
+* Optimise image files in `dist/` ([#4573], thanks [@grischard])
+
+[#4573]: https://github.com/openstreetmap/iD/issues/4573
+[#4572]: https://github.com/openstreetmap/iD/issues/4572
+[#3056]: https://github.com/openstreetmap/iD/issues/3056
+[@grischard]: https://github.com/grischard
+
+#### :mortar_board: Walkthrough / Help
+* Fixed typo in add playground walkthrough instruction: extra word "be" ([#4620], thanks [@SeanBarber])
+* Updated all the help content! ([#4468], [#4018], thanks [@manfredbrandl] and [@1ec5])
+
+[#4620]: https://github.com/openstreetmap/iD/issues/4620
+[#4468]: https://github.com/openstreetmap/iD/issues/4468
+[#4018]: https://github.com/openstreetmap/iD/issues/4018
+[@SeanBarber]: https://github.com/SeanBarber
+[@manfredbrandl]: https://github.com/manfredbrandl
+[@1ec5]: https://github.com/1ec5
+
+#### :rocket: Presets
+* Add preset for `highway=bus_guideway` ([#4638], [#4709], thanks [@bencostamagna])
+* Improve search terms for Hindu Temple preset ([#4708], thanks [@planemad])
+* Changed sports_centre preset to not default to `building=yes` ([#4682], [#4705], thanks [@bencostamagna])
+* Rename `landuse=garage` preset ([#4697], thanks [@JamesKingdom])
+* Add `name` and `elevation` fields to Guidepost preset ([#4700], thanks [@JamesKingdom])
+* Added a Boathouse preset ([#4661], [#4699], thanks [@bencostamagna])
+* Add `ref:isil` field to Library preset ([#4684], thanks [@ltog])
+* Add several common building presets ([#4505])
+* Add Car Pooling preset ([#4623])
+* Set Payment Type as universal field, add it to many presets ([#4437])
+* Allow fallback presets (area, line, point) to appear in the recent list ([#4612])
+* Use "suitcase" icon for most offices/commercial presets
+* Remove duplicate Notary Office preset ([#4634])
+* Add support for `junction=circular` (same as `junction=roundabout`) ([#4637])
+* Add search terms "kennel" "cattery" "pet" to Animal Boarding preset ([#4647])
+* Add light bulb icon for `highway=street_lamp` preset ([#4609])
+* Add preset for `amenity=love_hotel` ([#4643], thanks [@willemarcel])
+* Add a field for Draft Beers `brewery=*` tag, add to Bar, Biergarten, Pub presets ([#4598], thanks [@nlehuby])
+* Add direction-style field to several presets ([#3815], [#4602]):
+  * Signals: Traffic Signals, Railway Signals
+  * Info: Billboard, Information, Map, Railway Milestone
+  * Traffic: Stop Sign, Give Way, Traffic Calmings, Traffic Mirror
+  * Cameras: Speed Camera, Surveillance
+  * Natural: Adit, Cave Entrance, Viewpoint
+  * Others:  Street Lamp
+* Add preset for `landuse=greenhouse_horticulture` ([#4571])
+* Don't show `building=mosque` with a house icon ([#4586])
+* Recycling Center / Recycling Container preset cleanups ([#4569])
+* Add Retail Building to buildings, switch Commercial icon to suitcase ([#4590])
+* Change tourist attraction icon from monument to star ([#4563], [#4584], thanks [@lucymk])
+* Add preset for `man_made=monitoring_station` ([#4581], thanks [@abdeldjalil09])
+* Deprectate (i.e. make non-searchable) `office=administrative` ([#4578])
+* Update transit-related presets for Public Transport v2 schema ([#3041], [#3508], [#4566], [#4585])
+* Changed Marketplace preset to not default to `building=yes` ([#4559], [#4568], thanks [@tastrax])
+* Add preset for `railway=miniature` ([#4555], thanks [@tastrax])
+* Add preset for `route=subway` relation ([#4548])
+* Add a few icons for route presets, including `route=piste`, `route=subway` ([#4355])
+* Add preset for piste route relation
+* Add `route=light_rail` relation route preset ([#4538])
+* Rename "News Kiosk" preset to simply "Kiosk" ([#4539], thanks [@tohaklim])
+* Add common fields to Telephone preset (operator, phone, fee, etc) ([#4535], thanks [@Vonter])
+
+[#4709]: https://github.com/openstreetmap/iD/issues/4709
+[#4708]: https://github.com/openstreetmap/iD/issues/4708
+[#4705]: https://github.com/openstreetmap/iD/issues/4705
+[#4700]: https://github.com/openstreetmap/iD/issues/4700
+[#4699]: https://github.com/openstreetmap/iD/issues/4699
+[#4697]: https://github.com/openstreetmap/iD/issues/4697
+[#4684]: https://github.com/openstreetmap/iD/issues/4684
+[#4682]: https://github.com/openstreetmap/iD/issues/4682
+[#4661]: https://github.com/openstreetmap/iD/issues/4661
+[#4647]: https://github.com/openstreetmap/iD/issues/4647
+[#4643]: https://github.com/openstreetmap/iD/issues/4643
+[#4638]: https://github.com/openstreetmap/iD/issues/4638
+[#4637]: https://github.com/openstreetmap/iD/issues/4637
+[#4634]: https://github.com/openstreetmap/iD/issues/4634
+[#4623]: https://github.com/openstreetmap/iD/issues/4623
+[#4612]: https://github.com/openstreetmap/iD/issues/4612
+[#4609]: https://github.com/openstreetmap/iD/issues/4609
+[#4602]: https://github.com/openstreetmap/iD/issues/4602
+[#4598]: https://github.com/openstreetmap/iD/issues/4598
+[#4590]: https://github.com/openstreetmap/iD/issues/4590
+[#4586]: https://github.com/openstreetmap/iD/issues/4586
+[#4585]: https://github.com/openstreetmap/iD/issues/4585
+[#4584]: https://github.com/openstreetmap/iD/issues/4584
+[#4581]: https://github.com/openstreetmap/iD/issues/4581
+[#4578]: https://github.com/openstreetmap/iD/issues/4578
+[#4571]: https://github.com/openstreetmap/iD/issues/4571
+[#4569]: https://github.com/openstreetmap/iD/issues/4569
+[#4568]: https://github.com/openstreetmap/iD/issues/4568
+[#4566]: https://github.com/openstreetmap/iD/issues/4566
+[#4563]: https://github.com/openstreetmap/iD/issues/4563
+[#4559]: https://github.com/openstreetmap/iD/issues/4559
+[#4555]: https://github.com/openstreetmap/iD/issues/4555
+[#4548]: https://github.com/openstreetmap/iD/issues/4548
+[#4539]: https://github.com/openstreetmap/iD/issues/4539
+[#4538]: https://github.com/openstreetmap/iD/issues/4538
+[#4535]: https://github.com/openstreetmap/iD/issues/4535
+[#4505]: https://github.com/openstreetmap/iD/issues/4505
+[#4437]: https://github.com/openstreetmap/iD/issues/4437
+[#4355]: https://github.com/openstreetmap/iD/issues/4355
+[#3815]: https://github.com/openstreetmap/iD/issues/3815
+[#3508]: https://github.com/openstreetmap/iD/issues/3508
+[#3041]: https://github.com/openstreetmap/iD/issues/3041
+[@bencostamagna]: https://github.com/bencostamagna
+[@planemad]: https://github.com/planemad
+[@JamesKingdom]: https://github.com/JamesKingdom
+[@ltog]: https://github.com/ltog
+[@willemarcel]: https://github.com/willemarcel
+[@nlehuby]: https://github.com/nlehuby
+[@lucymk]: https://github.com/lucymk
+[@abdeldjalil09]: https://github.com/abdeldjalil09
+[@tastrax]: https://github.com/tastrax
+[@tohaklim]: https://github.com/tohaklim
+[@Vonter]: https://github.com/Vonter
 
 
 # 2.5.1
@@ -244,7 +493,7 @@ _Check out what streetlevel photo coverage is available by opening the Map Data 
 [#4398]: https://github.com/openstreetmap/iD/issues/4398
 [@mojodna]: https://github.com/mojodna
 
-#### :mortar_board: Walkthrough
+#### :mortar_board: Walkthrough / Help
 
 * Make sure "Add Field" scrolls into view during "Area" chapter of walkthrough ([#4417])
 
@@ -685,7 +934,7 @@ _Check out the new imagery by opening the Background pane (shortcut <kbd>B</kbd>
 [#4081]: https://github.com/openstreetmap/iD/issues/4081
 [#4034]: https://github.com/openstreetmap/iD/issues/4034
 
-#### :mortar_board: Walkthrough
+#### :mortar_board: Walkthrough / Help
 
 * Add `walkthrough=true` url parameter to auto-start the walkthrough ([#4111])
 * Mention keyboard shortcuts <kbd>?</kbd> at the end of the walkthrough ([#4107])
@@ -948,7 +1197,7 @@ _Map traffic signals, stop signs, benches, crossings, street lamps, fountains, t
 [#3955]: https://github.com/openstreetmap/iD/issues/3955
 [#3975]: https://github.com/openstreetmap/iD/issues/3975
 
-#### :mortar_board: Walkthrough - major updates! ([#3921])
+#### :mortar_board: Walkthrough / Help - major updates! ([#3921])
 * Add training for modifiying geometry, moving nodes, reshaping ways ([#2381])
 * Add training for new right-click context menu
 * Allow user to freeform play and explore ([#3067])

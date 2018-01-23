@@ -396,17 +396,15 @@
         "background": {
             "title": "Taust",
             "description": "Tausta seaded",
-            "percent_brightness": "heledus {opacity}%",
             "none": "Puudub",
             "custom": "Kohandatud",
             "custom_button": "Muuda kohandatud tausta",
-            "fix_misalignment": "Korrigeeri kattekaardi nihet",
             "reset": "lähtesta",
-            "offset": "Lohista alumist halli kasti, et sättida kattekaardi nihet või siseta nihe meetrites.",
             "minimap": {
-                "description": "Pisikaart",
                 "tooltip": "Näita väljasuumitud kaarti, et aidata tuvastada kuvatud ala."
-            }
+            },
+            "fix_misalignment": "Korrigeeri kattekaardi nihet",
+            "offset": "Lohista alumist halli kasti, et sättida kattekaardi nihet või siseta nihe meetrites."
         },
         "map_data": {
             "title": "Kaardi andmed",
@@ -589,8 +587,7 @@
             "view_on_mapillary": "Vaata seda fotot Mapillary's"
         },
         "help": {
-            "title": "Abi",
-            "imagery": "# Aerofoto\n\nAerofotod on kaardistamisel oluliseks algallikaks. Valik aerofotosid on kättesaadavad paremal asuva redaktori taustaseadete menüü kaudu, vaikimisi on taustaks [Bing Maps](http://www.bing.com/maps/) satelliitfoto.\n\nEesti puhul on reeglina kõige täpsemaks ning ajakohasemaks aerofotoks Maa-ameti ortokaart. Selleks, et avada OSM ID-redaktor vaikimisi Maa-ameti ortofoto taustaga, kasuta veebibrauseris aadressi http://www.openstreetmap.org/edit#background=custom:http://kaart.maakaart.ee/orto/{z}/{x}/{y}.jpeg&map=@zoom/@lon/@lat, milles @zoom/@lon/@lat asenda reaalsete väärtustega (näit. 15/59.3438/24.5892).\n\nMõnikord on aerofoto kaardiandmete suhtes nihkes. Kui märkad, et massiliselt objekte on nihkes siis ära asu kohe nende asukohti muutma vaid võrdle erinevaid aerofotosid ja vajadusel kohanda vastavalt aerofoto asendit taustaseadete menüü valiku 'Korrigeeri nihet' abil.\n"
+            "title": "Abi"
         },
         "intro": {
             "graph": {
@@ -798,18 +795,8 @@
                 "capacity": {
                     "label": "Mahtutavus"
                 },
-                "cardinal_direction": {
-                    "label": "Suund"
-                },
                 "castle_type": {
                     "label": "Tüüp"
-                },
-                "clock_direction": {
-                    "label": "Suund",
-                    "options": {
-                        "anticlockwise": "Vastupäeva",
-                        "clockwise": "Päripäeva"
-                    }
                 },
                 "club": {
                     "label": "Tüüp"
@@ -1072,13 +1059,6 @@
                 "operator": {
                     "label": "Operaator"
                 },
-                "parallel_direction": {
-                    "label": "Suund",
-                    "options": {
-                        "backward": "Taha",
-                        "forward": "Ette"
-                    }
-                },
                 "park_ride": {
                     "label": "Pargi ja Reisi"
                 },
@@ -1112,13 +1092,6 @@
                 },
                 "recycling_accepts": {
                     "label": "Võtab vastu"
-                },
-                "recycling_type": {
-                    "label": "Ümbertöötluse tüüp",
-                    "options": {
-                        "centre": "Ümbertöötluskeskus",
-                        "container": "Konteiner"
-                    }
                 },
                 "relation": {
                     "label": "Tüüp"
@@ -1373,9 +1346,6 @@
                     "name": "Valuutavahetus",
                     "terms": "rahavahetus"
                 },
-                "amenity/bus_station": {
-                    "name": "Bussijaam"
-                },
                 "amenity/cafe": {
                     "name": "Kohvik"
                 },
@@ -1459,10 +1429,6 @@
                 },
                 "amenity/fast_food": {
                     "name": "Kiirtoitlustus"
-                },
-                "amenity/ferry_terminal": {
-                    "name": "Praamiterminal",
-                    "terms": "Praamisadam, sadam"
                 },
                 "amenity/fire_station": {
                     "name": "Tuletõrjedepoo",
@@ -1580,10 +1546,6 @@
                 "amenity/ranger_station": {
                     "name": "Looduskeskus",
                     "terms": "külastuskeskus"
-                },
-                "amenity/recycling": {
-                    "name": "Taaskasutus",
-                    "terms": "Taara,taaraautomaat,jäätmed,prügi,pudelid,klaas,purgid,praht,konteiner"
                 },
                 "amenity/recycling_centre": {
                     "name": "Jäätmejaam",
@@ -2081,9 +2043,6 @@
                 "highway/bridleway": {
                     "name": "Ratsutamisrada"
                 },
-                "highway/bus_stop": {
-                    "name": "Bussipeatus"
-                },
                 "highway/corridor": {
                     "name": "Sisekoridor",
                     "terms": "koridor"
@@ -2312,10 +2271,6 @@
                 },
                 "landuse/forest": {
                     "name": "Metsamaa"
-                },
-                "landuse/garages": {
-                    "name": "Garaažid",
-                    "terms": "Garaazid"
                 },
                 "landuse/grass": {
                     "name": "Muru"
@@ -2779,12 +2734,6 @@
                     "name": "Trafo",
                     "terms": "Transformaator"
                 },
-                "public_transport/platform": {
-                    "name": "Platvorm"
-                },
-                "public_transport/stop_position": {
-                    "name": "Peatuskoht"
-                },
                 "railway": {
                     "name": "Raudtee"
                 },
@@ -2802,10 +2751,6 @@
                 "railway/funicular": {
                     "name": "Köisraudtee"
                 },
-                "railway/halt": {
-                    "name": "Peatuskoht",
-                    "terms": "pooljaam"
-                },
                 "railway/level_crossing": {
                     "name": "Raudtee-ülesõidukoht",
                     "terms": "ülesõit,ristumine,rongi"
@@ -2817,17 +2762,9 @@
                 "railway/narrow_gauge": {
                     "name": "Kitsarööpaline raudtee"
                 },
-                "railway/platform": {
-                    "name": "Raudteeplatvorm",
-                    "terms": "platvorm,perroon,raudteeperroon"
-                },
                 "railway/rail": {
                     "name": "Raudtee",
                     "terms": "rongitee"
-                },
-                "railway/station": {
-                    "name": "Raudteejaam",
-                    "terms": "jaam,rongijaam"
                 },
                 "railway/subway": {
                     "name": "Metroo"
@@ -2838,9 +2775,6 @@
                 },
                 "railway/tram": {
                     "name": "Tramm"
-                },
-                "railway/tram_stop": {
-                    "name": "Trammipeatus"
                 },
                 "relation": {
                     "name": "Seos",
@@ -3089,10 +3023,6 @@
                 "shop/jewelry": {
                     "name": "Ehtepood",
                     "terms": "ehted,kalliskivid"
-                },
-                "shop/kiosk": {
-                    "name": "Kiosk",
-                    "terms": "putka,ajalehekiosk"
                 },
                 "shop/kitchen": {
                     "name": "Köögimööblikauplus",
