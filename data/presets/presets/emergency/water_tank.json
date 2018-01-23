@@ -1,5 +1,5 @@
 {
-    "icon": "poi-fire-hydrant",
+    "icon": "water",
     "fields": [
         "name",
         "operator",
