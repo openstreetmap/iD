@@ -239,7 +239,6 @@
         "background": {
             "title": "Pozadina",
             "description": "Podešavanja pozadine",
-            "percent_brightness": "prozirnost {opacity}% ",
             "none": "Ništa",
             "custom": "Prilagođena pozadina",
             "reset": "ponovo postavite"
@@ -285,9 +284,7 @@
         },
         "cannot_zoom": "Ne može se umanjiti više u trenutnom načinu.",
         "help": {
-            "title": "Pomoć",
-            "imagery": "# Satelitske slike\n\nSatelitske slike su važan resurs za mapiranje. Kombinacija\npreleta avionom, satelitski pogledi i slobodno sastavljeni izvorisu dostupni\nu uređivaču pod menijem 'Podešavanja pozadine' na desnoj strani.\n\nU početnik postavkama satelitski sloj [Bing Maps] (http://www.bing.com/maps/) je\nprezentiran u uređivaču, ali kako pomičete i uvećavate kartu na nova geografska\npodručja, novi će izvori postati dostupni. Neke zemlje, poput Sjedinjenih\nDržava, Francuske i Danske imaju slike vrlo visoke kvalitete na raspolaganju za neka područja.\n\nSatelitske slike ponekad odstupaju od podataka karte, zbog greške na\nstrani davatelja satelitskih slika. Ako vidite puno cesta pomjerenih u pozadini.\nnemojte ih odmah sve premještati kako bi se slagale sa pozadinom. Umjesto toga možete podesiti\nsatelitske slike tako da odgovaraju postojećim podacima klikom na 'Popravljanje poravnanja', na\ndnu interfejsa Podešavanja pozadine.\n",
-            "addresses": "# Addrese\n\nAddrese su neke od najkorisnijih informacija na karti.\n\nIako su adrese često predstavljene kao dijelovi ulica, na karti OpenStreetMap\nsu one spremljene kao atributi građevina i mjesta uz ulice.\n\nMožete dodati informaciju o adresama mjesta koja su ucrtana kao i vanjske linije građevina takođe\nkao i onih koja su ucrtana kao obične tačke. Optimalni izvor podataka adresa\nse dobija iz istraživanja na licu mjesta ili ličnim znanjem- kao što je slučaj sam bilo kojom drugom značajkom,\nkopiranje iz komercijalnih izvora kao što je Google Maps je striktno\nzabranjeno.\n"
+            "title": "Pomoć"
         },
         "intro": {
             "graph": {
@@ -430,16 +427,6 @@
                 "capacity": {
                     "label": "Kapacitet",
                     "placeholder": "50, 100, 200..."
-                },
-                "cardinal_direction": {
-                    "label": "Pravac"
-                },
-                "clock_direction": {
-                    "label": "Pravac",
-                    "options": {
-                        "anticlockwise": "U smjeru suprotnom od kazaljke na satu",
-                        "clockwise": "U smjeru kazaljke na satu"
-                    }
                 },
                 "collection_times": {
                     "label": "Vremena skupljanja"
@@ -876,10 +863,6 @@
                     "name": "Stanica rendžerske službe",
                     "terms": "rendžerska služba,stanica rendžerske službe,rendžerska stanica"
                 },
-                "amenity/recycling": {
-                    "name": "Recikliranje",
-                    "terms": "recikliranje,ponovna obrada,reciklaža"
-                },
                 "amenity/restaurant": {
                     "name": "Restoran",
                     "terms": "restoran,gostionica"
@@ -1149,10 +1132,6 @@
                 "highway/bridleway": {
                     "name": "Konjska staza",
                     "terms": "konjska staza,konjička staza,konjski trag"
-                },
-                "highway/bus_stop": {
-                    "name": "Bus stanica",
-                    "terms": "autobuska stanica,autobusko stajalište"
                 },
                 "highway/cycleway": {
                     "name": "Biciklistička staza",
@@ -1558,12 +1537,7 @@
                     "terms": "ured,uslužni ured"
                 },
                 "office/administrative": {
-                    "name": "Administrativni ured",
-                    "terms": "administracija,administrativni ured,ured upravljanja"
-                },
-                "office/company": {
-                    "name": "Ured kompanije",
-                    "terms": "ured kompanije,ured firme,korporativni ured"
+                    "name": "Administrativni ured"
                 },
                 "office/educational_institution": {
                     "name": "Obrazovna institucija",
@@ -1680,14 +1654,6 @@
                     "name": "Transformator",
                     "terms": "transformator,transformator el. energije"
                 },
-                "public_transport/platform": {
-                    "name": "Platforma",
-                    "terms": "platforma"
-                },
-                "public_transport/stop_position": {
-                    "name": "Stop pozicija",
-                    "terms": "pozicija zaustavljanja,stop,stop pozicija"
-                },
                 "railway": {
                     "name": "Željeznička pruga"
                 },
@@ -1699,25 +1665,13 @@
                     "name": "Nekorištena željeznica",
                     "terms": "nekorištena željeznička pruga,nekorištena željeznica"
                 },
-                "railway/halt": {
-                    "name": "Željeznička ustava",
-                    "terms": "željeznička ustava,željezničko zaustavljanje,željeznički zastoj"
-                },
                 "railway/monorail": {
                     "name": "Pruga sa jednim kolosijekom",
                     "terms": "pruga sa jednim kolosijekom,jednošinska pruga"
                 },
-                "railway/platform": {
-                    "name": "Željeznička platforma",
-                    "terms": "željeznička platforma,željezničko stajalište"
-                },
                 "railway/rail": {
                     "name": "Šina",
                     "terms": "šine,šinski put"
-                },
-                "railway/station": {
-                    "name": "Željeznička stanica",
-                    "terms": "željeznička stanica,željeznička postaja"
                 },
                 "railway/subway": {
                     "name": "Podzemna željeznica",

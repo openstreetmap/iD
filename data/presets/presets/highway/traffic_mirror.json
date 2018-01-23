@@ -3,6 +3,9 @@
         "point",
         "vertex"
     ],
+    "fields": [
+        "direction"
+     ],
     "tags": {
         "highway": "traffic_mirror"
     },

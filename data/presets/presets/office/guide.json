@@ -1,22 +1,22 @@
 {
-  "icon": "commercial",
-  "fields": [
-      "name",
-      "address",
-      "building_area",
-      "opening_hours"
-  ],
-  "geometry": [
-      "point",
-      "area"
-  ],
-  "tags": {
-      "office": "guide"
-  },
-  "terms": [
-      "dive guide",
-      "mountain guide",
-      "tour guide"
-  ],
-  "name": "Tour Guide Office"
+    "icon": "suitcase",
+    "fields": [
+        "name",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "guide"
+    },
+    "terms": [
+        "dive guide",
+        "mountain guide",
+        "tour guide"
+    ],
+    "name": "Tour Guide Office"
 }

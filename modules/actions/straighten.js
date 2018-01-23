@@ -1,8 +1,8 @@
 import { actionDeleteNode } from './delete_node';
 
 import {
-    geoEuclideanDistance,
-    geoInterp
+    geoVecInterp,
+    geoVecLength
 } from '../geo';
 
 
@@ -44,7 +44,7 @@ export function actionStraighten(wayId, projection) {
                     ],
                     loc2 = projection.invert(p);
 
-                graph = graph.replace(node.move(geoInterp(node.loc, loc2, t)));
+                graph = graph.replace(node.move(geoVecInterp(node.loc, loc2, t)));
 
             } else {
                 // safe to delete
@@ -69,7 +69,7 @@ export function actionStraighten(wayId, projection) {
             points = nodes.map(function(n) { return projection(n.loc); }),
             startPoint = points[0],
             endPoint = points[points.length-1],
-            threshold = 0.2 * geoEuclideanDistance(startPoint, endPoint),
+            threshold = 0.2 * geoVecLength(startPoint, endPoint),
             i;
 
         if (threshold === 0) {

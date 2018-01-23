@@ -292,20 +292,17 @@
         "background": {
             "title": "Latar",
             "description": "Pengaturan Latar",
-            "percent_brightness": "{opacity}% kecerahan",
             "none": "Tidak ada",
             "best_imagery": "Sumber citra terbaik yang diketahui untuk lokasi ini",
             "switch": "Beralih ke latar belakang ini",
             "custom": "Custom",
             "custom_button": "Ubah tampilan latar kustom",
-            "fix_misalignment": "Setel offset citra",
-            "imagery_source_faq": "Dari mana citra ini diperoleh?",
             "reset": "ulang",
-            "offset": "Seret di mana pun dalam area abu-abu untuk menyetel offset citra, atau masukkan nilai offset dalam meter.",
             "minimap": {
-                "description": "Peta mini",
                 "tooltip": "Menampilkan peta diperkecil untuk membantu penentuan letak area yang sedang dilihat."
-            }
+            },
+            "fix_misalignment": "Setel offset citra",
+            "offset": "Seret di mana pun dalam area abu-abu untuk menyetel offset citra, atau masukkan nilai offset dalam meter."
         },
         "map_data": {
             "title": "Data Peta",
@@ -448,10 +445,7 @@
             "view_on_mapillary": "Lihat gambar ini di Mapillary"
         },
         "help": {
-            "title": "Bantuan",
-            "help": "# Bantuan\n\nIni adalah penyunting untuk [OpenStreetMap](http://www.openstreetmap.org/),\npeta dunia yang gratis dan dapat disunting. Anda dapat menggunakannya\nuntuk menambah dan memperbarui data di area Anda, membuat peta dunia\nbersumber dan berdata terbuka lebih baik untuk semua orang.\n\nSuntingan yang Anda buat di peta ini akan terlihat oleh semua pengguna\nOpenStreetMap. Untuk membuat suntingan, Anda perlu\n[log in](https://www.openstreetmap.org/login).\n\n[iD editor](http://ideditor.com/) adalah proyek kerja sama dengan [source\ncode available on GitHub](https://github.com/openstreetmap/iD).\n",
-            "imagery": "# Citra\n\nCitra foto udara merupakan sumber penting untuk pemetaan. Gabungan dari\npemotretan pesawat, pandangan satelit, dan sumber terhimpun lain tersedia\ndi penyunting pada menu 'Pengaturan Latar' di sebelah kanan.\n\nBiasanya lapisan satelit [Bing Maps](http://www.bing.com/maps/) ditampilkan\ndi penyunting ini, tetapi ketika Anda geser atau perbesar tampilan di suatu wilayah baru,\nsumber baru lain akan tersedia. Di beberapa negara, seperti Amerika Serikat,\nPerancis, dan Denmark memiliki citra berkualitas tinggi yang tersedia di beberapa area.\n\nCitra kadang melenceng dari data peta karena ada kesalahan pada\npenyedia data citra. Jika Anda melihat banyak jalan yang bergeser dari latarnya,\njangan serta-merta memindahkan semuanya untuk mencocokkan latar. Justru Anda bisa menyesuaikan\ncitranya agar pas dengan data yang ada dengan mengeklik 'Perbaiki perataan' pada\nbagian bawah Pengaturan Latar.\n",
-            "addresses": "# Alamat\n\nAlamat adalah informasi yang paling penting dalam suatu peta.\n\nMeski alamat sering ditampilkan sebagai bagian dari jalan, OpenStreetMap menampilkan alamat sebagai bagian dari bangunan dan tempat-tempat di pinggir jalan.\n\nAnda dapat menambahkan alamat ke tempat-tempat berbentuk garis bangunan atau titik. Data alamat yang tepercaya diperoleh dari survei lapangan atau pengetahuan sendiri - seperti fitur lainnya, Anda tidak diperbolehkan menyalin alamat dari sumber-sumber komersial seperti Google Maps.\n"
+            "title": "Bantuan"
         },
         "intro": {
             "done": "selesai",
@@ -625,34 +619,6 @@
                 "capacity": {
                     "label": "Kapasitas",
                     "placeholder": "50, 100, 200..."
-                },
-                "cardinal_direction": {
-                    "label": "Arah",
-                    "options": {
-                        "E": "Timur",
-                        "ENE": "Timur-timur laut",
-                        "ESE": "Timur-tenggara",
-                        "N": "Utara",
-                        "NE": "Timur Laut",
-                        "NNE": "Utara-timur laut",
-                        "NNW": "Timur-barat laut",
-                        "NW": "Barat Laut",
-                        "S": "Selatan",
-                        "SE": "Tenggara",
-                        "SSE": "Selatan-tenggara",
-                        "SSW": "Selatan-barat daya",
-                        "SW": "Barat Daya",
-                        "W": "Barat",
-                        "WNW": "Barat-barat laut",
-                        "WSW": "Barat-barat daya"
-                    }
-                },
-                "clock_direction": {
-                    "label": "Arah",
-                    "options": {
-                        "anticlockwise": "Berlawanan Jarum Jam",
-                        "clockwise": "Searah Jarum Jam"
-                    }
                 },
                 "collection_times": {
                     "label": "Waktu Pengumpulan"
@@ -1151,9 +1117,6 @@
                 "amenity/bureau_de_change": {
                     "name": "Penukaran Mata Uang"
                 },
-                "amenity/bus_station": {
-                    "name": "Terminal Bus"
-                },
                 "amenity/cafe": {
                     "name": "Kafe",
                     "terms": "Warung Kopi"
@@ -1287,9 +1250,6 @@
                 },
                 "amenity/pub": {
                     "name": "Pub"
-                },
-                "amenity/recycling": {
-                    "name": "Daur Ulang"
                 },
                 "amenity/register_office": {
                     "name": "Dinas Catatan Sipil"
@@ -1615,9 +1575,6 @@
                 "highway": {
                     "name": "Jalan Raya"
                 },
-                "highway/bus_stop": {
-                    "name": "Pemberhentian Bus"
-                },
                 "highway/corridor": {
                     "name": "Lorong dalam"
                 },
@@ -1811,10 +1768,6 @@
                 "landuse/forest": {
                     "name": "Hutan",
                     "terms": "Hutan Produksi"
-                },
-                "landuse/garages": {
-                    "name": "Garasi",
-                    "terms": "Garasi"
                 },
                 "landuse/grass": {
                     "name": "Rumput",
@@ -2076,9 +2029,6 @@
                 "office/administrative": {
                     "name": "Kantor Administrasi"
                 },
-                "office/company": {
-                    "name": "Kantor Perusahaan"
-                },
                 "office/educational_institution": {
                     "name": "Institusi Pendidikan"
                 },
@@ -2173,9 +2123,6 @@
                 "power/transformer": {
                     "name": "Trafo"
                 },
-                "public_transport/stop_position": {
-                    "name": "Hentikan petisi"
-                },
                 "railway": {
                     "name": "Jalur Rel"
                 },
@@ -2192,14 +2139,8 @@
                     "name": "Sepur Sempit",
                     "terms": "Narrow Gauge Rail, Trek, Trak, Lebar Jalur Kereta Api"
                 },
-                "railway/platform": {
-                    "name": "Peron Kereta Api"
-                },
                 "railway/rail": {
                     "name": "Rel Kereta"
-                },
-                "railway/station": {
-                    "name": "Stasiun Kereta"
                 },
                 "railway/subway": {
                     "name": "Jalur Bawah Tanah"
@@ -2390,9 +2331,6 @@
                 },
                 "shop/jewelry": {
                     "name": "Toko Perhiasan"
-                },
-                "shop/kiosk": {
-                    "name": "Kios Berita"
                 },
                 "shop/kitchen": {
                     "name": "Toko Desain Interior Dapur"

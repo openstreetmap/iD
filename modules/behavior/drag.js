@@ -33,17 +33,18 @@ import {
  */
 
 export function behaviorDrag() {
-    var event = d3_dispatch('start', 'move', 'end'),
-        origin = null,
-        selector = '',
-        filter = null,
-        event_, target, surface;
+    var dispatch = d3_dispatch('start', 'move', 'end');
+    var _origin = null;
+    var _selector = '';
+    var _event;
+    var _target;
+    var _surface;
 
 
-    var d3_event_userSelectProperty = utilPrefixCSSProperty('UserSelect'),
-        d3_event_userSelectSuppress = function() {
-            var selection = d3_selection(),
-                select = selection.style(d3_event_userSelectProperty);
+    var d3_event_userSelectProperty = utilPrefixCSSProperty('UserSelect');
+    var d3_event_userSelectSuppress = function() {
+            var selection = d3_selection();
+            var select = selection.style(d3_event_userSelectProperty);
             selection.style(d3_event_userSelectProperty, 'none');
             return function() {
                 selection.style(d3_event_userSelectProperty, select);
@@ -60,29 +61,29 @@ export function behaviorDrag() {
     function eventOf(thiz, argumentz) {
         return function(e1) {
             e1.target = drag;
-            d3_customEvent(e1, event.apply, event, [e1.type, thiz, argumentz]);
+            d3_customEvent(e1, dispatch.apply, dispatch, [e1.type, thiz, argumentz]);
         };
     }
 
 
     function dragstart() {
-        target = this;
-        event_ = eventOf(target, arguments);
+        _target = this;
+        _event = eventOf(_target, arguments);
 
-        var eventTarget = d3_event.target,
-            touchId = d3_event.touches ? d3_event.changedTouches[0].identifier : null,
-            offset,
-            origin_ = point(),
-            started = false,
-            selectEnable = d3_event_userSelectSuppress(touchId !== null ? 'drag-' + touchId : 'drag');
+        var eventTarget = d3_event.target;
+        var touchId = d3_event.touches ? d3_event.changedTouches[0].identifier : null;
+        var offset;
+        var startOrigin = point();
+        var started = false;
+        var selectEnable = d3_event_userSelectSuppress(touchId !== null ? 'drag-' + touchId : 'drag');
 
         d3_select(window)
             .on(touchId !== null ? 'touchmove.drag-' + touchId : 'mousemove.drag', dragmove)
             .on(touchId !== null ? 'touchend.drag-' + touchId : 'mouseup.drag', dragend, true);
 
-        if (origin) {
-            offset = origin.apply(target, arguments);
-            offset = [offset[0] - origin_[0], offset[1] - origin_[1]];
+        if (_origin) {
+            offset = _origin.apply(_target, arguments);
+            offset = [offset[0] - startOrigin[0], offset[1] - startOrigin[1]];
         } else {
             offset = [0, 0];
         }
@@ -93,7 +94,7 @@ export function behaviorDrag() {
 
 
         function point() {
-            var p = surface || target.parentNode;
+            var p = _surface || _target.parentNode;
             return touchId !== null ? d3_touches(p).filter(function(p) {
                 return p.identifier === touchId;
             })[0] : d3_mouse(p);
@@ -101,32 +102,32 @@ export function behaviorDrag() {
 
 
         function dragmove() {
-            var p = point(),
-                dx = p[0] - origin_[0],
-                dy = p[1] - origin_[1];
+            var p = point();
+            var dx = p[0] - startOrigin[0];
+            var dy = p[1] - startOrigin[1];
 
             if (dx === 0 && dy === 0)
                 return;
 
-            if (!started) {
-                started = true;
-                event_({ type: 'start' });
-            }
-
-            origin_ = p;
+            startOrigin = p;
             d3_eventCancel();
 
-            event_({
-                type: 'move',
-                point: [p[0] + offset[0],  p[1] + offset[1]],
-                delta: [dx, dy]
-            });
+            if (!started) {
+                started = true;
+                _event({ type: 'start' });
+            } else {
+                _event({
+                    type: 'move',
+                    point: [p[0] + offset[0],  p[1] + offset[1]],
+                    delta: [dx, dy]
+                });
+            }
         }
 
 
         function dragend() {
             if (started) {
-                event_({ type: 'end' });
+                _event({ type: 'end' });
 
                 d3_eventCancel();
                 if (d3_event.target === eventTarget) {
@@ -152,52 +153,46 @@ export function behaviorDrag() {
 
 
     function drag(selection) {
-        var matchesSelector = utilPrefixDOMProperty('matchesSelector'),
-            delegate = dragstart;
+        var matchesSelector = utilPrefixDOMProperty('matchesSelector');
+        var delegate = dragstart;
 
-        if (selector) {
+        if (_selector) {
             delegate = function() {
-                var root = this,
-                    target = d3_event.target;
+                var root = this;
+                var target = d3_event.target;
                 for (; target && target !== root; target = target.parentNode) {
-                    if (target[matchesSelector](selector) &&
-                            (!filter || filter(target.__data__))) {
-                        return dragstart.call(target, target.__data__);
+                    var datum = target.__data__;
+                    var entity = datum && datum.properties && datum.properties.entity;
+                    if (entity && target[matchesSelector](_selector)) {
+                        return dragstart.call(target, entity);
                     }
                 }
             };
         }
 
         selection
-            .on('mousedown.drag' + selector, delegate)
-            .on('touchstart.drag' + selector, delegate);
+            .on('mousedown.drag' + _selector, delegate)
+            .on('touchstart.drag' + _selector, delegate);
     }
 
 
     drag.off = function(selection) {
         selection
-            .on('mousedown.drag' + selector, null)
-            .on('touchstart.drag' + selector, null);
+            .on('mousedown.drag' + _selector, null)
+            .on('touchstart.drag' + _selector, null);
     };
 
 
     drag.selector = function(_) {
-        if (!arguments.length) return selector;
-        selector = _;
-        return drag;
-    };
-
-
-    drag.filter = function(_) {
-        if (!arguments.length) return origin;
-        filter = _;
+        if (!arguments.length) return _selector;
+        _selector = _;
         return drag;
     };
 
 
     drag.origin = function (_) {
-        if (!arguments.length) return origin;
-        origin = _;
+        if (!arguments.length) return _origin;
+        _origin = _;
         return drag;
     };
 
@@ -211,19 +206,19 @@ export function behaviorDrag() {
 
 
     drag.target = function() {
-        if (!arguments.length) return target;
-        target = arguments[0];
-        event_ = eventOf(target, Array.prototype.slice.call(arguments, 1));
+        if (!arguments.length) return _target;
+        _target = arguments[0];
+        _event = eventOf(_target, Array.prototype.slice.call(arguments, 1));
         return drag;
     };
 
 
     drag.surface = function() {
-        if (!arguments.length) return surface;
-        surface = arguments[0];
+        if (!arguments.length) return _surface;
+        _surface = arguments[0];
         return drag;
     };
 
 
-    return utilRebind(drag, event, 'on');
+    return utilRebind(drag, dispatch, 'on');
 }

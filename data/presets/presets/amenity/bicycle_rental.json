@@ -3,7 +3,8 @@
     "fields": [
         "capacity",
         "network",
-        "operator"
+        "operator",
+        "payment_multi"
     ],
     "geometry": [
         "point",

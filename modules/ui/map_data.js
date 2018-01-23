@@ -7,20 +7,28 @@ import {
 import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
 import { t, textDirection } from '../util/locale';
 import { svgIcon } from '../svg';
-import { uiTooltipHtml } from './tooltipHtml';
 import { tooltip } from '../util/tooltip';
 import { d3combobox } from '../lib/d3.combobox.js';
+import { uiBackground } from './background';
+import { uiDisclosure } from './disclosure';
+import { uiHelp } from './help';
+import { uiTooltipHtml } from './tooltipHtml';
+
 
 export function uiMapData(context) {
-    var key = t('map_data.key'),
-        features = context.features().keys(),
-        layers = context.layers(),
-        fills = ['wireframe', 'partial', 'full'],
-        fillDefault = context.storage('area-fill') || 'partial',
-        fillSelected = fillDefault;
+    var key = t('map_data.key');
+    var features = context.features().keys();
+    var layers = context.layers();
+    var fills = ['wireframe', 'partial', 'full'];
 
+    var _fillDefault = context.storage('area-fill') || 'partial';
+    var _fillSelected = _fillDefault !== 'wireframe' ? _fillDefault : 'partial';
+    var _shown = false;
+    var _dataLayerContainer = d3_select(null);
+    var _fillList = d3_select(null);
+    var _featureList = d3_select(null);
 
-    function map_data(selection) {
+    function mapData(selection) {
         function getFetcher() {
             var geoserviceLayer = context.layers().layer('geoservice');
             return function(value, cb) {
@@ -43,7 +51,7 @@ export function uiMapData(context) {
                 }));
             };
         }
-
+        
         function showsFeature(d) {
             return context.features().enabled(d);
         }
@@ -59,9 +67,8 @@ export function uiMapData(context) {
             update();
         }
 
-
         function showsFill(d) {
-            return fillSelected === d;
+            return _fillSelected === d;
         }
 
 
@@ -70,11 +77,11 @@ export function uiMapData(context) {
                 context.surface().classed('fill-' + opt, Boolean(opt === d));
             });
 
-            fillSelected = d;
+            _fillSelected = d;
             if (d !== 'wireframe') {
-                fillDefault = d;
-                context.storage('area-fill', d);
+                _fillDefault = d;
             }
+            context.storage('area-fill', d);
             update();
         }
 
@@ -101,9 +108,6 @@ export function uiMapData(context) {
             setLayer(which, !showsLayer(which));
         }
 
-        function clickGpx() {
-            toggleLayer('gpx');
-        }
 
         function drawPhotoItems(selection) {
             var photoKeys = ['mapillary-images', 'mapillary-signs', 'openstreetcam-images'];
@@ -155,6 +159,10 @@ export function uiMapData(context) {
                 .append('span')
                 .text(function(d) { return t(d.id.replace('-', '_') + '.title'); });
 
+
+            function clickGpx() {
+                toggleLayer('gpx');
+            }
 
             // Update
             li = li
@@ -256,7 +264,7 @@ export function uiMapData(context) {
                 .on('click', (function() {
                     // clear the UI
                     d3.selectAll('.geoservice-all-opt, .geoservice-osm-opt, .geoservice-import-opt, .clear-geoservice')
-                       .style('display', 'none');
+                    .style('display', 'none');
                     d3.select('.geoservice-button-label').text('Add GeoService Layer');
                     hoverGeoService.title(t('geoservice.enter_url'));
                     // clear the map
@@ -738,7 +746,7 @@ export function uiMapData(context) {
                     var importFields = geoserviceLayer.fields();
                     var importedAtLeastOneField = false;
                     if (geoserviceLayer.preset()) {
-                      importedAtLeastOneField = true;
+                    importedAtLeastOneField = true;
                     }
                     var hideFields = [];
                     _.map(Object.keys(importFields), function (field) {
@@ -778,7 +786,7 @@ export function uiMapData(context) {
                         .text(t('geoservice.view_import'));
                     hoverGeoService.title('View GeoService Import Details');
                     d3.selectAll('.list-item-geoservice label, .clear-geoservice')
-                       .style('display', 'block');
+                    .style('display', 'block');
                     d3.selectAll('.layer-counted')
                         .classed('hide', true);
                     setGeoService(d3.select('.topurl input.geoservice').property('value'));
@@ -925,7 +933,8 @@ export function uiMapData(context) {
                 .attr('class', 'list-item-gpx-extent')
                 .call(tooltip()
                     .title(t('gpx.zoom'))
-                    .placement((textDirection === 'rtl') ? 'right' : 'left'))
+                    .placement((textDirection === 'rtl') ? 'right' : 'left')
+                )
                 .on('click', function() {
                     d3_event.preventDefault();
                     d3_event.stopPropagation();
@@ -980,7 +989,7 @@ export function uiMapData(context) {
         }
 
 
-        function drawList(selection, data, type, name, change, active) {
+        function drawListItems(selection, data, type, name, change, active) {
             var items = selection.selectAll('li')
                 .data(data);
 
@@ -1034,60 +1043,91 @@ export function uiMapData(context) {
         }
 
 
+        function renderDataLayers(selection) {
+            var container = selection.selectAll('data-layer-container')
+                .data([0]);
+
+            _dataLayerContainer = container.enter()
+                .append('div')
+                .attr('class', 'data-layer-container')
+                .merge(container);
+        }
+
+        function renderFillList(selection) {
+            var container = selection.selectAll('layer-fill-list')
+                .data([0]);
+
+            _fillList = container.enter()
+                .append('ul')
+                .attr('class', 'layer-list layer-fill-list')
+                .merge(container);
+        }
+
+
+        function renderFeatureList(selection) {
+            var container = selection.selectAll('layer-feature-list')
+                .data([0]);
+
+            _featureList = container.enter()
+                .append('ul')
+                .attr('class', 'layer-list layer-feature-list')
+                .merge(container);
+        }
+
         function update() {
-            dataLayerContainer
+            _dataLayerContainer
                 .call(drawOsmItem)
                 .call(drawPhotoItems)
-                .call(drawGeoServiceItem)
-                .call(drawGpxItem);
+                .call(drawGpxItem)
+                .call(drawGeoServiceItem);
 
-            fillList
-                .call(drawList, fills, 'radio', 'area_fill', setFill, showsFill);
+            _fillList
+                .call(drawListItems, fills, 'radio', 'area_fill', setFill, showsFill);
 
-            featureList
-                .call(drawList, features, 'checkbox', 'feature', clickFeature, showsFeature);
+            _featureList
+                .call(drawListItems, features, 'checkbox', 'feature', clickFeature, showsFeature);
+            
         }
-
-
-        function hidePanel() {
-            setVisible(false);
-        }
-
-
-        function togglePanel() {
-            if (d3_event) d3_event.preventDefault();
-            tooltipBehavior.hide(button);
-            setVisible(!button.classed('active'));
-        }
-
 
         function toggleWireframe() {
             if (d3_event) {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
             }
-            setFill((fillSelected === 'wireframe' ? fillDefault : 'wireframe'));
+            setFill((_fillSelected === 'wireframe' ? _fillDefault : 'wireframe'));
             context.map().pan([0,0]);  // trigger a redraw
         }
 
+        function hidePane() {
+            setVisible(false);
+        }
+
+        function togglePane() {
+            if (d3_event) d3_event.preventDefault();
+            paneTooltip.hide(button);
+            setVisible(!button.classed('active'));
+        }
 
         function setVisible(show) {
-            if (show !== shown) {
+            if (show !== _shown) {
                 button.classed('active', show);
-                shown = show;
+                _shown = show;
 
                 if (show) {
+                    uiBackground.hidePane();
+                    uiHelp.hidePane();
                     update();
-                    selection.on('mousedown.map_data-inside', function() {
-                        return d3_event.stopPropagation();
-                    });
-                    content.style('display', 'block')
+
+                    pane
+                        .style('display', 'block')
                         .style('right', '-300px')
                         .transition()
                         .duration(200)
                         .style('right', '0px');
+
                 } else {
-                    content.style('display', 'block')
+                    pane
+                        .style('display', 'block')
                         .style('right', '0px')
                         .transition()
                         .duration(200)
@@ -1095,113 +1135,80 @@ export function uiMapData(context) {
                         .on('end', function() {
                             d3_select(this).style('display', 'none');
                         });
-                    selection.on('mousedown.map_data-inside', null);
                 }
             }
         }
 
+        var pane = selection
+            .append('div')
+            .attr('class', 'fillL map-overlay col3 content hide');
 
-        var content = selection
-                .append('div')
-                .attr('class', 'fillL map-overlay col3 content hide'),
-            tooltipBehavior = tooltip()
-                .placement((textDirection === 'rtl') ? 'right' : 'left')
-                .html(true)
-                .title(uiTooltipHtml(t('map_data.description'), key)),
-            button = selection
-                .append('button')
-                .attr('tabindex', -1)
-                .on('click', togglePanel)
-                .call(svgIcon('#icon-data', 'light'))
-                .call(tooltipBehavior),
-            shown = false;
+        var paneTooltip = tooltip()
+            .placement((textDirection === 'rtl') ? 'right' : 'left')
+            .html(true)
+            .title(uiTooltipHtml(t('map_data.description'), key));
 
-        content
-            .append('h4')
+        var button = selection
+            .append('button')
+            .attr('tabindex', -1)
+            .on('click', togglePane)
+            .call(svgIcon('#icon-data', 'light'))
+            .call(paneTooltip);
+
+
+        pane
+            .append('h2')
             .text(t('map_data.title'));
 
 
         // data layers
-        content
-            .append('a')
-            .text(t('map_data.data_layers'))
-            .attr('href', '#')
-            .classed('hide-toggle', true)
-            .classed('expanded', true)
-            .on('click', function() {
-                var exp = d3_select(this).classed('expanded');
-                dataLayerContainer.style('display', exp ? 'none' : 'block');
-                d3_select(this).classed('expanded', !exp);
-                d3_event.preventDefault();
-            });
-
-        var dataLayerContainer = content
+        pane
             .append('div')
-            .attr('class', 'data-data-layers')
-            .style('display', 'block');
-
+            .attr('class', 'map-data-data-layers')
+            .call(uiDisclosure(context, 'data_layers', true)
+                .title(t('map_data.data_layers'))
+                .content(renderDataLayers)
+            );
 
         // area fills
-        content
-            .append('a')
-            .text(t('map_data.fill_area'))
-            .attr('href', '#')
-            .classed('hide-toggle', true)
-            .classed('expanded', false)
-            .on('click', function() {
-                var exp = d3_select(this).classed('expanded');
-                fillContainer.style('display', exp ? 'none' : 'block');
-                d3_select(this).classed('expanded', !exp);
-                d3_event.preventDefault();
-            });
-
-        var fillContainer = content
+        pane
             .append('div')
-            .attr('class', 'data-area-fills')
-            .style('display', 'none');
-
-        var fillList = fillContainer
-            .append('ul')
-            .attr('class', 'layer-list layer-fill-list');
-
+            .attr('class', 'map-data-area-fills')
+            .call(uiDisclosure(context, 'fill_area', false)
+                .title(t('map_data.fill_area'))
+                .content(renderFillList)
+            );
 
         // feature filters
-        content
-            .append('a')
-            .text(t('map_data.map_features'))
-            .attr('href', '#')
-            .classed('hide-toggle', true)
-            .classed('expanded', false)
-            .on('click', function() {
-                var exp = d3_select(this).classed('expanded');
-                featureContainer.style('display', exp ? 'none' : 'block');
-                d3_select(this).classed('expanded', !exp);
-                d3_event.preventDefault();
-            });
-
-        var featureContainer = content
+        pane
             .append('div')
-            .attr('class', 'data-feature-filters')
-            .style('display', 'none');
+            .attr('class', 'map-data-feature-filters')
+            .call(uiDisclosure(context, 'map_features', false)
+                .title(t('map_data.map_features'))
+                .content(renderFeatureList)
+            );
 
-        var featureList = featureContainer
-            .append('ul')
-            .attr('class', 'layer-list layer-feature-list');
 
-
+        // add listeners
         context.features()
             .on('change.map_data-update', update);
 
-        setFill(fillDefault);
+        update();
+        setFill(_fillDefault);
 
         var keybinding = d3_keybinding('features')
-            .on(key, togglePanel)
+            .on(key, togglePane)
             .on(t('area_fill.wireframe.key'), toggleWireframe)
-            .on([t('background.key'), t('help.key')], hidePanel);
+            .on([t('background.key'), t('help.key')], hidePane);
 
         d3_select(document)
             .call(keybinding);
+
+        uiMapData.hidePane = hidePane;
+        uiMapData.togglePane = togglePane;
+        uiMapData.setVisible = setVisible;         
+            
     }
 
-    return map_data;
+    return mapData;
 }

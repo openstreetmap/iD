@@ -7,7 +7,7 @@
         "highway": "mini_roundabout"
     },
     "fields": [
-        "clock_direction"
+        "direction_clock"
     ],
     "name": "Mini-Roundabout"
 }

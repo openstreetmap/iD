@@ -342,7 +342,7 @@
             "about_changeset_comments": "O povzetkih sprememb",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments",
             "google_warning": "V opombi je omenjeno podjetje Google: kopiranje podatkov iz zemljevida Google je strogo prepovedano!",
-            "google_warning_link": "http://www.openstreetmap.org/copyright"
+            "google_warning_link": "https://www.openstreetmap.org/copyright"
         },
         "contributors": {
             "list": "Spremembe uporabnikov {users}",
@@ -392,7 +392,8 @@
                 "centroid": "Središčna točka",
                 "location": "Mesto",
                 "metric": "Metrične enote",
-                "imperial": "Imperialne enote"
+                "imperial": "Imperialne enote",
+                "node_count": "Število vozlišč"
             }
         },
         "geometry": {
@@ -458,22 +459,26 @@
             "title": "Ozadje",
             "description": "Nastavitve ozadja",
             "key": "B",
-            "percent_brightness": "{opacity}% svetlost",
+            "backgrounds": "Ozadja",
             "none": "Brez",
             "best_imagery": "Najbolj znan slikovni vir ozadja za to območje",
             "switch": "Preklopi nazaj na to ozadje.",
             "custom": "Po meri",
             "custom_button": "Uredi ozadje po meri",
             "custom_prompt": "Vpišite naslov url predloge sličic. Veljavni žetoni so:\n   - {zoom}/{z}, {x}, {y} za Z/X/Y sheme sličic\n   - {ty} za koordinate v zapisu TMS\n   - {u} za shemo četverjenja – quadtile\n   - {switch:a,b,c} za zvijanje pretoka prek strežnika DNS\n\nPrimer:\n{example}",
-            "fix_misalignment": "Popravi zamik ozadja",
-            "imagery_source_faq": "Od kod so ozadja zemljevida?",
             "reset": "ponastavi",
-            "offset": "Povlecite spodnje temnejše sivo področju za prilagoditev zamika ali pa vnesite zamik številčno v metrih.",
+            "display_options": "Možnosti prikaza",
+            "brightness": "Svetlost",
+            "contrast": "Kontrast",
+            "saturation": "Nasičenost",
+            "sharpness": "Ostrina",
             "minimap": {
-                "description": "Mini zemljevid",
+                "description": "Pokaži mini-zemljevid",
                 "tooltip": "Pokaži oddaljen zemljevid za pomoč pri določanju trenutno prikazanega mesta.",
                 "key": "/"
-            }
+            },
+            "fix_misalignment": "Popravi zamik ozadja",
+            "offset": "Povlecite spodnje temnejše sivo področju za prilagoditev zamika ali pa vnesite zamik številčno v metrih."
         },
         "map_data": {
             "title": "Prikaz zemljevida",
@@ -488,7 +493,8 @@
             },
             "fill_area": "Zapolnjevanje polj",
             "map_features": "Predmeti zemljevida",
-            "autohidden": "Nekateri predmeti so samodejno skriti, da jih na zaslonu ni prikazanih preveč. Za urejanje je treba zemljevid približati."
+            "autohidden": "Nekateri predmeti so samodejno skriti, da jih na zaslonu ni prikazanih preveč. Za urejanje je treba zemljevid približati.",
+            "osmhidden": "Nekateri predmeti so samodejno skriti, ker je plast OpenStreetMap skrita."
         },
         "feature": {
             "points": {
@@ -667,14 +673,20 @@
         "mapillary": {
             "view_on_mapillary": "Pokaži sliko na spletišču Mapillary"
         },
+        "openstreetcam_images": {
+            "tooltip": "Ulične fotografije z OpenStreetCama",
+            "title": "Plast s fotografijami (OpenStreetCam)"
+        },
+        "openstreetcam": {
+            "view_on_openstreetcam": "Pokaži sliko na spletišču OpenStreetCam"
+        },
         "help": {
             "title": "Pomoč",
             "key": "H",
-            "help": "# Pomoč\n\nUrejevalnik ID je orodje za urejanje [OpenStreetMap](http://www.openstreetmap.org/), brezplačnih in prostih zemljevidov sveta. Uporabljate ga lahko za posodabljanje podatkov in s tem izboljševanje odprto-kodnega in odprto-podatkovnega zemljevida za vse uporabnike.\n\nSpremembe, ki jih naredite na zemljevidu, bodo na voljo vsem uporabnikom, ki uporabljajo OpenStreetMap. Za urejanje se je treba najprej [prijaviti](https://www.openstreetmap.org/login).\n\nUrejevalnik [iD editor](http://ideditor.com/) je zasnovan kot odprt projekt s prosto dostopno kodo na [GitHub](https://github.com/openstreetmap/iD).\n",
-            "gps": "# GPS\n\nSledi GPS so pomemben vir podatkov za zemljevide OpenStreetMap. Urejevalnik podpira datoteke sledi *.gpx*. Sledi je mogoče zbirati s pomočjo posebnih programov na pametnih telefonih ali pa s posebnimi navigacijskimi napravami.\n\nZa večč podrobnosti o sledeh GPS si oglejte dokumentacijo o [Kartografiji s pametnimi telefoni, z napravami GPS in zdrugimi načini](http://learnosm.org/en/mobile-mapping/).\n\nZa uporabo sledi GPX, datoteko s podatki enostavno povlecite v okno urejevalnika. Če so podatki v datoteki ustrezni in brez napak, bo sled kot svetla rožnata črta dodana na zemljevid. S klikom na meni »Podatki zemljevida« omogočite oziroma skrijete plast s potjo.\n\nSled GPX ni samodejno poslana na strežnik OpenStreetMap. Najboljši način je podatke vrisati na zemljevid, dodati predmete in urediti obstoječe, to pa nato objaviti na [OpenStreetMap](http://www.openstreetmap.org/trace/create)\nza druge uporabnike.\n",
-            "imagery": "# Slikovni posnetki\n\nSatelitski posnetki in fotografije iz zraka so pomemben vir za kartiranje. Različne slike letalskih in satelitskih posnetkov ter drugi slikovni viri so v urejevalniku na voljo prek »Nastavitev ozadja« v meniju.\nPrivzeto so uporabljeni satelitski posnetki prek iskalnika [Bing Maps](http://www.bing.com/maps/), pri približevanju zemljevida pa so prikazani tudi drugi razpoložljivi viri.\nV nekaterih državah, kot so ZDA, Francija ali Danska, so za posamezna območja na voljo tudi posnetki z zelo visoko ločljivostjo.\nSlikovni posnetki so zaradi napak na strani ponudnika včasih zamaknjeni glede na zemljevid.\nČe opazite, da je več cest zamaknjenih glede na posnetek v ozadju, cest ne premikajte. V tem primeru lahko premaknete sliko v ozadju tako, da se prekriva z že narisanimi predmeti zemljevidu. To storite s klikom na »Premakni podlogo zemljevida« na dnu uporabniškega vmesnika »Nastavitev ozadja«.\n\n",
-            "addresses": "# Naslovi\n\nNaslovi so **najbolj uporabna** podrobnost zemljevida!\n\nČeprav so naslovi pogosto opredeljeni kot deli ulic, so na zemljevidu OpenStreetMap zabeležni kot lastnost stavb in točk ob ulicah.\n\nNaslove je mogoče dodeliti točkovnim predmetom in obrisom stavb.\nNajustreznejši vir naslova je seveda poznavanje mesta oziroma lastno zbiranje podatkov. Tako kot za vse podatke, tudi za naslove velja, da je kopiranje iz različnih tržno orientiranih virov, kot je na primer Googlov zemljevid, **strogo prepovedano**.\n\n",
-            "inspector": "# Uporaba urejevalnika predmetov\n\nUrejevalnik predmetov je polje na levem delu zaslona, ki omogoča urejanje podrobnosti – oznak – izbranega predmeta.\n\n### Izbira vrste predmeta\n\nKo na zemljevid dodate točko, črto ali mnogokotnik, je treba najprej izbrati vrsto predmeta, ki ga ti opredeljujejo; na primer, ali je črta avtocesta oziroma stanovanjska ulica, ali je polje veleblagovnica oziroma točka gostilna v njej. V urejevalniku predmetov so najprej pokazane možnosti za najpogosteje uporabljene predmete, vse ostale pa je mogoče odbrati prek iskalnega polja.\n\nZa več podrobnosti o posameznem predmetu, kliknite na črko »*i*« na desnem robu opisa. S klikom na izbran gumb, se potrdi vrsta predmeta.\n\n### Uporaba vnosnih polj in urejanje oznak\n\nKo je predmet, katerega vrsta je že določena, izbran, se pokažejo vpisna polja z oznakami o predmetu, kot so naziv, naslov, položaj in druga.\n\nOznake lahko dodate s klikom na spustni meni »Dodaj polje«, na primer povezavo na Wikipedijo, dostopnost za invalidske vozičke in podobno.\n\nNa dnu urejevalnika predmetov lahko s klikom na gumb »Dodatne oznake« opredelite tudi številne druge oznake. Spletišče [Taginfo](http://taginfo.openstreetmap.org/) je odličen vir podrobnosti o najpogosteje uporabljanih oznakah in njihova raba.\n\nSpremembe, ki jih ustvarite, se krajevno shranjujejo samodejno in jih lahko kadarkoli razveljavite s klikom na gumb »Razveljavi«.\n\nVse spremembe se objavijo na zemljevid skupaj s podatki zemljevida.\n"
+            "help": {
+                "title": "Pomoč",
+                "welcome": "Dobrodošli v urejevalniku iD za [OpenStreetMap](https://www.openstreetmap.org/). S tem urejevalnikom lahko OpenStreetMap posodobite neposredno iz svojega brskalnika."
+            }
         },
         "intro": {
             "done": "končano",
@@ -852,7 +864,6 @@
             },
             "areas": {
                 "title": "Mnogokotniki",
-                "add_playground": "Z *mnogokotniki* so opredeljeni predmeti z natančno določenimi mejami, kot so zgradbe, parki, jezera ali stanovanjske soseske.{br}Uporabiti jih je mogoče tudi za bolj natančno izrisovanje predmetov, ki bi jih sicer določili s točko. **Kliknite na gumb {button} za dodajanje območja.**",
                 "start_playground": "Z mnogokotnikom lahko izrišemo na primer otroško igrišče. Mnogokotniki se izrisujejo z *vozlišči* po zunanjem robu predmeta. **Kliknite na rob igrišča za dodajanje prve točke.**",
                 "continue_playground": "Nadaljujte z risanjem mnogokotnika z dodajanjem vozlišč po robu otroškega igrišča. Seveda lahko povežete polje z obstoječo pohodno potjo.{br}Namig: če pritisnete tipko »{alt}« se onemogoči samodejno povezovanje vozlišč z drugimi točkami na zemljevidu. **Nadaljujte z risanjem igrišča.**",
                 "finish_playground": "Mnogokotnik se *zaključi* kot ponovno kliknete na prvo ali zadnje narisano vozlišče. **Končajte z risanjem igrišča.**",
@@ -1279,6 +1290,9 @@
                 "board_type": {
                     "label": "Vrsta"
                 },
+                "boules": {
+                    "label": "Vrsta"
+                },
                 "boundary": {
                     "label": "Vrsta"
                 },
@@ -1317,36 +1331,8 @@
                     "label": "Kapaciteta",
                     "placeholder": "50, 100, 200..."
                 },
-                "cardinal_direction": {
-                    "label": "Smer",
-                    "options": {
-                        "E": "Vzhod",
-                        "ENE": "Vzhod-severovzhod",
-                        "ESE": "Vzhod-jugovzhod",
-                        "N": "Sever",
-                        "NE": "Severovzhod",
-                        "NNE": "Sever-severovzhod",
-                        "NNW": "Sever-severozahod",
-                        "NW": "Severozahod",
-                        "S": "Jug",
-                        "SE": "Jugovzhod",
-                        "SSE": "Jug-jugovzhod",
-                        "SSW": "Jug-jugozahod",
-                        "SW": "Jugozahod",
-                        "W": "Zahod",
-                        "WNW": "Zahod-severozahod",
-                        "WSW": "Zahod-jugozahod"
-                    }
-                },
                 "castle_type": {
                     "label": "Vrsta"
-                },
-                "clock_direction": {
-                    "label": "Smer",
-                    "options": {
-                        "anticlockwise": "Proti smeri urinega kazalca",
-                        "clockwise": "V smeri urinega kazalca"
-                    }
                 },
                 "clothes": {
                     "label": "Oblačila"
@@ -1356,6 +1342,10 @@
                 },
                 "collection_times": {
                     "label": "Ure zbiranja"
+                },
+                "comment": {
+                    "label": "Povzetek sprememb",
+                    "placeholder": "Kratek opis sprememb (zahtevan vpis)"
                 },
                 "communication_multi": {
                     "label": "Vrste komunikacij"
@@ -1379,6 +1369,14 @@
                 "craft": {
                     "label": "Vrsta"
                 },
+                "crane/type": {
+                    "label": "Vrsta žerjava",
+                    "options": {
+                        "floor-mounted_crane": "Nepremični žerjav",
+                        "portal_crane": "Tirni žerjav",
+                        "travel_lift": "Premični žerjav"
+                    }
+                },
                 "crop": {
                     "label": "Poljščine"
                 },
@@ -1390,6 +1388,10 @@
                 },
                 "currency_multi": {
                     "label": "Vrste valut"
+                },
+                "cutting": {
+                    "label": "Vrsta",
+                    "placeholder": "Privzeto"
                 },
                 "cycle_network": {
                     "label": "Omrežje"
@@ -1821,13 +1823,6 @@
                     "label": "Par",
                     "placeholder": "3, 4, 5 ..."
                 },
-                "parallel_direction": {
-                    "label": "Smer",
-                    "options": {
-                        "backward": "Nazaj",
-                        "forward": "Naprej"
-                    }
-                },
                 "park_ride": {
                     "label": "Parkiraj in se odpelji"
                 },
@@ -1917,13 +1912,6 @@
                 },
                 "recycling_accepts": {
                     "label": "Sprejme"
-                },
-                "recycling_type": {
-                    "label": "Vrsta recikliranja",
-                    "options": {
-                        "centre": "Središče za predelavo odpadkov",
-                        "container": "Vrsta zabojnika"
-                    }
                 },
                 "ref": {
                     "label": "Sklicna številka"
@@ -2273,8 +2261,7 @@
                     "terms": "vlečnica"
                 },
                 "aerialway/station": {
-                    "name": "Postaja žičnice",
-                    "terms": "Žičniška postaja,postaja gondole"
+                    "name": "Postaja žičnice"
                 },
                 "aerialway/t-bar": {
                     "name": "Sidra",
@@ -2378,10 +2365,6 @@
                     "name": "Menjalnica",
                     "terms": "menjalnica,menjava,devize"
                 },
-                "amenity/bus_station": {
-                    "name": "Avtobusna postaja",
-                    "terms": "AP,bus,štacjon,postajališče"
-                },
                 "amenity/cafe": {
                     "name": "Kavarna",
                     "terms": "bife,kava,bar,kavarna"
@@ -2471,9 +2454,6 @@
                 "amenity/fast_food": {
                     "name": "Hitra prehrana",
                     "terms": "hitra hrana"
-                },
-                "amenity/ferry_terminal": {
-                    "name": "Pristanišče za trajekt"
                 },
                 "amenity/fire_station": {
                     "name": "Gasilska postaja",
@@ -2613,10 +2593,6 @@
                 "amenity/ranger_station": {
                     "name": "Čuvaj parka",
                     "terms": "center za obiskovalce,nadzornik parka,uprava parka,čuvaj parka"
-                },
-                "amenity/recycling": {
-                    "name": "Reciklaža",
-                    "terms": "recikliranje,ekološki otok"
                 },
                 "amenity/recycling_centre": {
                     "name": "Center za recikliranje"
@@ -3254,10 +3230,6 @@
                     "name": "Mulatjera",
                     "terms": "jahalna pot,mulatiera"
                 },
-                "highway/bus_stop": {
-                    "name": "Avtobusno postajališče",
-                    "terms": "avtobusna postaja"
-                },
                 "highway/corridor": {
                     "name": "Notranji hodnik"
                 },
@@ -3503,9 +3475,6 @@
                 "landuse/forest": {
                     "name": "Gozd",
                     "terms": "gozdne površine,gozdič,gozdiček"
-                },
-                "landuse/garages": {
-                    "name": "Garaže"
                 },
                 "landuse/grass": {
                     "name": "Travnata površina",
@@ -3994,12 +3963,7 @@
                     "terms": "pisarna"
                 },
                 "office/administrative": {
-                    "name": "Upravna enota",
-                    "terms": "Upravni urad,upravna pisarna"
-                },
-                "office/company": {
-                    "name": "Podjetje",
-                    "terms": "firma,sedež podjetja,podjetnik"
+                    "name": "Upravna enota"
                 },
                 "office/coworking": {
                     "name": "Prostor za sodelo"
@@ -4156,14 +4120,6 @@
                     "name": "Transformator",
                     "terms": "pretvornik,trafo postaja"
                 },
-                "public_transport/platform": {
-                    "name": "Peron",
-                    "terms": "ploščad"
-                },
-                "public_transport/stop_position": {
-                    "name": "Postajališče",
-                    "terms": "avtobusna postaja,postaja"
-                },
                 "railway": {
                     "name": "Železnica"
                 },
@@ -4182,10 +4138,6 @@
                     "name": "Vzpenjača",
                     "terms": "tirna vzpenjača"
                 },
-                "railway/halt": {
-                    "name": "Železniško postajališče",
-                    "terms": "postaja brez perona in objektov"
-                },
                 "railway/level_crossing": {
                     "name": "Železniški prehod (cesta)"
                 },
@@ -4197,17 +4149,9 @@
                     "name": "Ozkotirna železnica",
                     "terms": "železnica z ozkimi tiri"
                 },
-                "railway/platform": {
-                    "name": "Železniški peron",
-                    "terms": "ploščad"
-                },
                 "railway/rail": {
                     "name": "Železniški tir",
                     "terms": "železnica,železniški tir,tirnica"
-                },
-                "railway/station": {
-                    "name": "Železniška postaja",
-                    "terms": "kolodvor"
                 },
                 "railway/subway": {
                     "name": "Podzemna železnica",
@@ -4223,9 +4167,6 @@
                 "railway/tram": {
                     "name": "Tramvaj",
                     "terms": "tramvaj"
-                },
-                "railway/tram_stop": {
-                    "name": "Postajališče tramvaja"
                 },
                 "relation": {
                     "name": "Zveza",
@@ -4459,9 +4400,6 @@
                 "shop/jewelry": {
                     "name": "Draguljarna",
                     "terms": "bižuterija,nakit,zlatarna"
-                },
-                "shop/kiosk": {
-                    "name": "Kiosk prodajalna"
                 },
                 "shop/laundry": {
                     "name": "Pralnica",
@@ -4911,12 +4849,31 @@
                 "description": "Satelitski posnetki DigitalGlobe Premium",
                 "name": "Posnetki DigitalGlobe Premium"
             },
+            "DigitalGlobe-Premium-vintage": {
+                "attribution": {
+                    "text": "Pogoji uporabe in odziv"
+                },
+                "description": "Meje posnetkov in datumi zajema. Oznake se pojavijo na ravni povečave 14 in višjih."
+            },
             "DigitalGlobe-Standard": {
                 "attribution": {
                     "text": "Pogoji uporabe in odziv"
                 },
                 "description": "Satelitski posnetki DigitalGlobe Standard",
                 "name": "Posnetki DigitalGlobe Standard"
+            },
+            "DigitalGlobe-Standard-vintage": {
+                "attribution": {
+                    "text": "Pogoji uporabe in odziv"
+                },
+                "description": "Meje posnetkov in datumi zajema. Oznake se pojavijo na ravni povečave 14 in višjih."
+            },
+            "EsriWorldImagery": {
+                "attribution": {
+                    "text": "Pogoji uporabe in odziv"
+                },
+                "description": "Posnetki sveta Esri",
+                "name": "Posnetki sveta Esri"
             },
             "MAPNIK": {
                 "attribution": {
@@ -4975,33 +4932,18 @@
                 "name": "OSM Inspector: oznake"
             },
             "Waymarked_Trails-Cycling": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann z dovoljenjem CC BY-SA 3.0, podatki zemljevida skupnost © OpenStreetMap  z dovoljenjem ODbL 1.0"
-                },
                 "name": "Waymarked Trails: kolesarjenje"
             },
             "Waymarked_Trails-Hiking": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann z dovoljenjem CC BY-SA 3.0, podatki zemljevida skupnost © OpenStreetMap z dovoljenjem ODbL 1.0"
-                },
                 "name": "Waymarked Trails: pohodništvo"
             },
             "Waymarked_Trails-MTB": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann z dovoljenjem CC BY-SA 3.0, podatki zemljevida skupnost © OpenStreetMap z dovoljenjem ODbL 1.0"
-                },
                 "name": "Waymarked Trails: MTB"
             },
             "Waymarked_Trails-Skating": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann z dovoljenjem CC BY-SA 3.0, podatki zemljevida skupnost © OpenStreetMap z dovoljenjem ODbL 1.0"
-                },
                 "name": "Waymarked Trails: rolkanje in rolanje"
             },
             "Waymarked_Trails-Winter_Sports": {
-                "attribution": {
-                    "text": "© Michael Spreng z dovoljenjem CC BY-SA 3.0, podatki zemljevida skupnost © OpenStreetMap z dovoljenjem ODbL 1.0"
-                },
                 "name": "Waymarked Trails: zimski športi"
             },
             "basemap.at": {

@@ -337,8 +337,7 @@
             "created": "ರಚಿಸಲಾಯಿತು",
             "about_changeset_comments": "ಬದಲಾವಣೆಗಳ ಸಾರಾಂಶದ ಬಗ್ಗೆ",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/Good_changeset_comments\n\nಯಾವುದಾದರೂ ಬದಲಾದ ಗುಂಪಿಗೆ ನಿಮ್ಮ ಅಭಿಪ್ರಾಯ ತಿಳಿಸಬೇಕಾದಲ್ಲಿ ಈ ದಾಖಲೆ ನಿಮ್ಮ ಸಹಾಯಕ್ಕಿದೆ.  ",
-            "google_warning": "ನೀವು ಈ ಹೇಳಿಕೆಯಲ್ಲಿ ಗೂಗಲ್ ಅನ್ನು ಉಲ್ಲೇಖಿಸಿದ್ದೀರ. ಗೂಗಲ್ ಮಾಪ್ಸ್ ನಿಂದ ಮಾಹಿತಿ ಪಡೆಯುವುದು ನಿಷೇಧಿಸಿದೆ. ",
-            "google_warning_link": "http://www.openstreetmap.org/copyright\n\nಓಪನ್ಸ್ಟ್ರೀಟ್ಮ್ಯಾಪ್ ಕೃತಿಸ್ವಾಮ್ಯ ವಿವರಗಳ ಬಗ್ಗೆ ಮಾಹಿತಿ ಇಲ್ಲಿ ದೊರೆಯುತ್ತದೆ.  "
+            "google_warning": "ನೀವು ಈ ಹೇಳಿಕೆಯಲ್ಲಿ ಗೂಗಲ್ ಅನ್ನು ಉಲ್ಲೇಖಿಸಿದ್ದೀರ. ಗೂಗಲ್ ಮಾಪ್ಸ್ ನಿಂದ ಮಾಹಿತಿ ಪಡೆಯುವುದು ನಿಷೇಧಿಸಿದೆ. "
         },
         "contributors": {
             "list": "ಸಂಪಾದನೆಗಳು {ಬಳಕೆದಾರ ಮೂಲಕ}",
@@ -426,18 +425,13 @@
             "title": "ಹಿನ್ನೆಲೆ",
             "description": "ಹಿನ್ನಲೆ ವ್ಯವಸ್ತೆಗಳು",
             "key": "B",
-            "percent_brightness": "{opacity} % ಉಜ್ಜ್ವಲತೆ",
             "none": "‍‍ಯಾವುದೂ ಇಲ್ಲ",
             "best_imagery": "ಈ ಪ್ರದೇಶಕ್ಕೆ ಅಪ್ರತಿಮ ಉಪಗ್ರಹ ಚಿತ್ರಣ  ",
             "switch": "ಈ ಹಿನ್ನಲೆಗೆ ಹಿಂತಿರುಗಿ ",
             "custom": "ಅನುಸರಣ",
             "custom_button": "ಅನುಸರಣ ಹಿನ್ನಲೆಯನ್ನು ಸಂಪಾದಿಸಿ",
-            "fix_misalignment": "ಉಪಗ್ರಹ ಚಿತ್ರಣ ಸರಿಹೊಂದಿಸುವುದು.",
-            "imagery_source_faq": "‍ಈ ಉಪಗ್ರಹ ಚಿತ್ರಣ ಎಲ್ಲಿಂದ ದೊರೆತಿರುವುದು?",
             "reset": "ಮರುಹೊಂದಿಸು",
-            "minimap": {
-                "description": "ಚಿಕ್ಕ ನಕ್ಷೆ"
-            }
+            "fix_misalignment": "ಉಪಗ್ರಹ ಚಿತ್ರಣ ಸರಿಹೊಂದಿಸುವುದು."
         },
         "map_data": {
             "title": "ನಕ್ಷೆ ಮಾಹಿತಿ.",
@@ -920,34 +914,6 @@
                     "label": "ಸಾಮರ್ಥ್ಯ",
                     "placeholder": "50, 100, 200..."
                 },
-                "cardinal_direction": {
-                    "label": "ದಿಕ್ಕು",
-                    "options": {
-                        "E": "ಪೂರ್ವ",
-                        "ENE": "ಪೂರ್ವ - ಈಶಾನ್ಯ",
-                        "ESE": "ಪೂರ್ವ - ಆಗ್ನೇಯ",
-                        "N": "ಉತ್ತರ",
-                        "NE": "ಈಶಾನ್ಯ",
-                        "NNE": "ಉತ್ತರ - ಈಶಾನ್ಯ",
-                        "NNW": "ಉತ್ತರ - ವಾಯುವ್ಯ",
-                        "NW": "ವಾಯವ್ಯ",
-                        "S": "ದಕ್ಷಿಣ",
-                        "SE": "ಆಗ್ನೇಯ",
-                        "SSE": "ದಕ್ಷಿಣ - ಆಗ್ನೇಯ",
-                        "SSW": "ದಕ್ಷಿಣ - ನೈಋತ್ಯ",
-                        "SW": "ನೈಋತ್ಯ",
-                        "W": "ಪಶ್ಚಿಮ",
-                        "WNW": "ಪಶ್ಚಿಮ - ವಾಯುವ್ಯ",
-                        "WSW": "ಪಶ್ಚಿಮ - ನೈಋತ್ಯ"
-                    }
-                },
-                "clock_direction": {
-                    "label": "ದಿಕ್ಕು",
-                    "options": {
-                        "anticlockwise": "ಅಪ್ರದಕ್ಷಿಣವಾಗಿ",
-                        "clockwise": "ಪ್ರದಕ್ಷಿಣವಾಗಿ"
-                    }
-                },
                 "collection_times": {
                     "label": "ಸಂಗ್ರಹ ವೇಳೆ"
                 },
@@ -1283,9 +1249,6 @@
                     "label": "Par",
                     "placeholder": "೩, ೪, ೫..."
                 },
-                "parallel_direction": {
-                    "label": "ದಿಕ್ಕು"
-                },
                 "park_ride": {
                     "label": "ನಿಲ್ಲಿಸು ಮತ್ತು ಸವಾರಿ ಮಾಡು"
                 },
@@ -1501,9 +1464,6 @@
                 "amenity/bicycle_parking": {
                     "terms": "<translate with synonyms or related terms for 'Bicycle Parking', separated by commas>"
                 },
-                "amenity/bus_station": {
-                    "name": "ಬಸ್ ನಿಲ್ದಾಣ"
-                },
                 "amenity/cinema": {
                     "name": "ಸಿನಿಮಾ"
                 },
@@ -1691,9 +1651,6 @@
                 "ford": {
                     "name": "‍ಕಾಲ್ಗಡ"
                 },
-                "highway/bus_stop": {
-                    "name": "ಬಸ್ ನಿಲ್ದಾಣ"
-                },
                 "highway/steps": {
                     "name": "ಮೆಟ್ಟಿಲು"
                 },
@@ -1702,9 +1659,6 @@
                 },
                 "landuse/forest": {
                     "name": "ಅರಣ್ಯ"
-                },
-                "landuse/garages": {
-                    "name": "ಮೋಟಾರುಖಾನೆ‍ಗಳ್"
                 },
                 "landuse/grass": {
                     "name": "ಹುಲ್ಲು"
@@ -1798,9 +1752,6 @@
                 },
                 "place/village": {
                     "name": "ಹಳ್ಳಿ"
-                },
-                "railway/station": {
-                    "name": "ರೈಲು ನಿಲ್ದಾಣ"
                 },
                 "shop": {
                     "name": "ಅಂಗಡಿ"

@@ -310,6 +310,7 @@
             "localized_translation_language": "Dil seç",
             "localized_translation_name": "İsim"
         },
+        "zoom_in_edit": "Düzenlemek için yakınlaştırın",
         "login": "giriş yap",
         "logout": "çıkış yap",
         "loading_auth": "OpenStreetMap'e bağlanıyor...",
@@ -329,9 +330,11 @@
             "title": "OpenStreetMap'e Yükle",
             "upload_explanation": "Yüklediğin değişiklikler OpenStreetMap verilerini kullanan bütün haritalarda görülebilecek. ",
             "upload_explanation_with_user": "{user} olarak yüklediğin değişiklikler OpenStreetMap verilerini kullanan bütün haritalarda görülebilecek. ",
+            "request_review": "Birisinin yaptığım düzenlemeleri gözden geçirmesini isterim.",
             "save": "Yükle",
             "cancel": "İptal",
             "changes": "{count} Değişiklik",
+            "download_changes": "osmChange dosyasını indirin",
             "warnings": "Uyarılar",
             "modified": "Değiştirildi",
             "deleted": "Silindi",
@@ -339,7 +342,7 @@
             "about_changeset_comments": "Değişiklikler hakkındaki yorumlar",
             "about_changeset_comments_link": "Yapılan değişikliklere eklenen yorumlara dair detaylı bilgiyi şu adreste bulabilirsin - İngilizce: //wiki.openstreetmap.org/wiki/Good_changeset_comments",
             "google_warning": "Yorumunda Google kelimesini kullanmışsın. Unutma Google Maps'ten veri kopyalamak kesinlikle yasaktır.",
-            "google_warning_link": "http://www.openstreetmap.org/copyright"
+            "google_warning_link": "https://www.openstreetmap.org/copyright"
         },
         "contributors": {
             "list": "{users} tarafından yapılmış değişiklikler",
@@ -347,20 +350,47 @@
         },
         "info_panels": {
             "background": {
+                "title": "Arkaplan",
                 "zoom": "Yakınlaştırma",
+                "vintage": "Görüntü Yılı",
                 "source": "Kaynak",
                 "description": "Açıklama",
                 "resolution": "Çözüm",
                 "accuracy": "Doğruluk",
-                "unknown": "Bilinmeyen"
+                "unknown": "Bilinmeyen",
+                "show_tiles": "Kılavuz Çizgilerini Göster",
+                "hide_tiles": "Kılavuz Çizgilerini Gizle",
+                "show_vintage": "Görüntü Yılını Göster",
+                "hide_vintage": "Görüntü Yılını Gizle"
             },
             "history": {
+                "title": "Geçmiş",
+                "selected": "{n} seçildi",
                 "version": "Versiyon",
-                "changeset": "Değişiklik Kümesi"
+                "last_edit": "Son Düzenleme",
+                "edited_by": "Düzenleyen",
+                "changeset": "Değişiklik Kümesi",
+                "unknown": "Bilinmeyen",
+                "link_text": "openstreetmap.org üzerindeki geçmiş"
+            },
+            "location": {
+                "title": "Konum",
+                "unknown_location": "Bilinmeyen Konum"
             },
             "measurement": {
                 "title": "Ölçüm",
-                "length": "Uzunluk"
+                "selected": "{n} seçildi",
+                "geometry": "Geometri",
+                "closed": "kapalı",
+                "center": "Merkez",
+                "perimeter": "Çevre",
+                "length": "Uzunluk",
+                "area": "Alan",
+                "centroid": "Ağırlık merkezi",
+                "location": "Konum",
+                "metric": "Metrik",
+                "imperial": "Emperyal",
+                "node_count": "Düğüm sayısı"
             }
         },
         "geometry": {
@@ -426,30 +456,41 @@
             "title": "Arka Plan",
             "description": "Arka plan ayarları",
             "key": "B",
-            "percent_brightness": "{opacity}% parlaklık",
+            "backgrounds": "Arkaplanlar",
             "none": "Yok",
             "best_imagery": "Bu yer için bilinen en iyi uydu görüntüsü",
             "switch": "Bu arka plana geçiş yap",
             "custom": "Özel",
             "custom_button": "Özel arka planı düzenle",
-            "fix_misalignment": "Uydu görüntüsünü ayarla",
-            "imagery_source_faq": "Bu uydu görüntüsünün kaynağı ne?",
+            "custom_prompt": "Bir URL şablonu girin. Geçerli simgeler:\n   - Z/X/Y tile scheme için {zoom}/{z}, {x}, {y}\n   - çevrik TMS-stili Y koordinatları için {ty}\n   - quadtile scheme için {u}\n   - DNS sunucu multiplexing için {switch:a,b,c}\n\nÖrnek:\n{example}",
+            "overlays": "Katmanlar",
             "reset": "sıfırla",
-            "offset": "Uydu görüntüsünü ayarlamak için gri kısımda herhangi bir yere taşı ya da göreceli konum değerlerini metre cinsinden gir.",
+            "brightness": "Parlaklık",
+            "contrast": "Karşıtlık",
+            "saturation": "Doygunluk",
+            "sharpness": "Keskinlik",
             "minimap": {
-                "description": "Küçük Harita",
                 "tooltip": "Şu an ekrandaki bölgeden uzaklaşarak üzerinde çalıştığın alanı haritada bul.",
                 "key": "/"
-            }
+            },
+            "fix_misalignment": "Uydu görüntüsünü ayarla",
+            "offset": "Uydu görüntüsünü ayarlamak için gri kısımda herhangi bir yere taşı ya da göreceli konum değerlerini metre cinsinden gir."
         },
         "map_data": {
             "title": "Harita Verileri",
             "description": "Harita Verileri",
             "key": "F",
             "data_layers": "Veri Katmanları",
+            "layers": {
+                "osm": {
+                    "tooltip": "OpenStreetMap'ten harita verisi",
+                    "title": "OpenStreetMap verisi"
+                }
+            },
             "fill_area": "Alanları Doldur",
             "map_features": "Nesneler",
-            "autohidden": "Bu nesnelerin tamamını ekranda göstermek zor olacağı için nesneler otomatik olarak gizlendi. Düzenlemek için haritanın belli bir bölgesine yakınlaşabilirsin."
+            "autohidden": "Bu nesnelerin tamamını ekranda göstermek zor olacağı için nesneler otomatik olarak gizlendi. Düzenlemek için haritanın belli bir bölgesine yakınlaşabilirsin.",
+            "osmhidden": "Bu nesneler OpenStreetMap katmanı gizli olduğu için otomatik olarak gizlenmiştir"
         },
         "feature": {
             "points": {
@@ -518,7 +559,9 @@
         },
         "restore": {
             "heading": "Kaydedilmemiş değişikliklerin var",
-            "description": "Daha önceki oturumdan kaydedilmemiş değişiklikleri geri getirmek ister misin?"
+            "description": "Daha önceki oturumdan kaydedilmemiş değişiklikleri geri getirmek ister misin?",
+            "restore": "Değişikliklerimi geri yükle",
+            "reset": "Değişiklikleri iptal et"
         },
         "save": {
             "title": "Kaydet",
@@ -538,6 +581,7 @@
                 "keep_remote": "Diğerini kullan",
                 "restore": "Geri Getir",
                 "delete": "Silinmiş Kalsın",
+                "download_changes": "Ya da osmChange dosyasını indir",
                 "done": "Bütün çelişkili değişiklikler düzeltildi!",
                 "help": "Bir başka kullanıcı senin düzenlediğin nesneleri değiştirmiş.\nAşağıdaki her nesneye tıklayarak detaylara gözat ve\nsenin ya da diğer kullanıcının yaptığı değişiklikleri seç.\n"
             }
@@ -569,7 +613,8 @@
         "splash": {
             "welcome": "OpenStreetMap Editörü iD'ye Hoşgeldin",
             "text": "iD, dünyanın en iyi ve bedava haritasına katkıda bulunmak için, kullanılması kolay ve güçlü bir araç. Bu sürüm {version}. Daha çok bilgi için {website} sayfasına git ve hataları {github} aracılığıyla bildir.",
-            "walkthrough": "Eğitime Başla"
+            "walkthrough": "Eğitime Başla",
+            "start": "Şimdi düzenle"
         },
         "source_switch": {
             "live": "canlı",
@@ -587,6 +632,8 @@
         "validations": {
             "disconnected_highway": "Kopuk yol",
             "disconnected_highway_tooltip": "Yollar, başka yollara veya bina girişlerine bağlı olmalıdır.",
+            "old_multipolygon": "Dış yolda çoklu poligon etiketleri",
+            "old_multipolygon_tooltip": "Bu çoklu poligon stili yenisiyle değiştirilecektir. Lütfen etiketleri dış taraf yerine ana çoklu poligonla ilişkilendiriniz. ",
             "untagged_point": "Etiketlenmemiş nokta",
             "untagged_point_tooltip": "Bu noktanın ne olduğunu belirten bir tür seç.",
             "untagged_line": "Etiketlenmemiş çizgi",
@@ -598,6 +645,10 @@
             "many_deletions": "Şu an {n} adet nesneyi siliyorsun. Bunu yapmak istediğinden emin misin? Bu, ilgili tüm nesneleri openstreetmap.org haritasından silecektir.",
             "tag_suggests_area": "{tag} etiketi buranın alan olmasını ima ediyor, ama burası alan değil.",
             "deprecated_tags": "Kullanımdan kaldırılmış etiketler: {tags}"
+        },
+        "zoom": {
+            "in": "Yakınlaştır",
+            "out": "Uzaklaştır"
         },
         "cannot_zoom": "Bu modda daha fazla uzaklaşılamaz.",
         "full_screen": "Tam Ekran",
@@ -618,14 +669,113 @@
         "mapillary": {
             "view_on_mapillary": "Bu resmi Mapillary'de görüntüle"
         },
+        "openstreetcam_images": {
+            "tooltip": "OpenStreetCam'den sokak düzeyinde fotoğraflar",
+            "title": "Fotoğraf katmanı (OpenStreetCam)"
+        },
+        "openstreetcam": {
+            "view_on_openstreetcam": "Bu imajı OpenStreetCam'de görüntüleyin"
+        },
         "help": {
             "title": "Yardım",
             "key": "H",
-            "help": "# Yardım\n\n[OpenStreetMap](http://www.openstreetmap.org/) bedava ve düzenlenebilir\nbir dünya haritasıdır. Bu, bir harita düzenleme aracıdır. Bu aracı kullanarak\nharitaya yeni veriler ekleyebilir, mevcut verileri düzenleyebilirsin.\n\nYaptığın değişiklikler OpenStreetMap kullanan herkesin erişimine açık olacak\nve herkes tarafından görülebilecektir. Haritada\ndeğişiklikler, iyileştirmeler yapmak için [giriş yap](https://www.openstreetmap.org/login)\nman gerekmektedi.\n\n[iD editor](http://ideditor.com/) ortak bir çalışma ürünü olup [kaynak kodu\nGitHub'da yer almaktadır](https://github.com/openstreetmap/iD).\n",
-            "gps": "# GPS\n\nKullanıcılar tarafından toplanan GPS (küresel konumlandırma sistemi) verileri\nOpenStreetMap için en önemli veri kaynaklarından biridir. Bu düzenleyici makinanda\nyer alan `.gpx` formatındaki dosyaları destekler. GPS verilerini kişisel GPS aleti\nile ya da akıllı telefon uygulamalarını kullanarak toplayabilirsin.\n\nGPS verileri toplama konusunda daha fazla bilgi almak için,\n[Mapping with a smartphone, GPS başlığındaki İngilizce](http://learnosm.org/en/mobile-mapping/) dokümana gözatabilirsin.\n\nGPX verilerini kullanarak haritayı düzenlemek için, GPX dosyasını haritaya\nsürükle ve bırak. Eğer veriler sistem tarafından tanınabilirse, haritaya parlak mor\nrenkte çizgi şeklinde eklenecektir. Sağ tarafta yer alan 'Harita Verileri' menüsünü\nkullanarak verilerini gizleyebilir, tekrar aktif hale getirebilir ya da verilere yakınlaşabilirsin.\n\nGPX verileri OpenStreetMap'e yüklenerek sunucuya kaydedilmeyecektir. Bu\nverileri kullanmanın en iyi yolu haritada göstermektir. Bu sayede yeni nesneler\noluşturulabilir, mevcut nesneler güncellenebilir. Sana ait GPX verilerini başkalarının\nda kullanabilmesini istiyorsan, [şuradan](http://www.openstreetmap.org/trace/create)\nOpenStreetMap'e yükleyebilirsin.\n",
-            "imagery": "# Uygu Görüntüsü\n\nUydu görüntüsü harita düzenleme işlemi için en önemli kaynaklardan biridir. Sağda\ngösterilen 'Arka Plan Ayaları' menüsü altında birçok kaynaktan toplanan uydu görüntüleri\nyer almaktadır.\n\n[Bing Maps](http://www.bing.com/maps/) katmanı varsayılan uydu\ngörüntü katmanıdır. Haritanın belli bölgelerine yakınlaştığında diğer uydu görüntüleri\nde kullanılabilir olacaktır. ABD, Fransa ve Danimarka gibi ülkelerin bazı bölgeleri için\nyüksek kalitede uydu görüntüleri mevcuttur.\n\nUydu görüntüleri, görüntüyü sağlayanların hataları sebebiyle, bazen haritaya göre\nkısmen kaymış olabilir. Eğer harita üzerindeki yolların birçoğu, arka plandaki uydu\ngörüntüsü üzerindeki yollara göre kısmen kaymış olduğunu fark edersen, hemen\nharitadaki yolları arka plandaki yollarla eşleştirmek için uğraşma. Onun yerine\nuydu görüntüsünü 'Hizalamayı Düzelt' buttonuna tıklayarak harita ile uydu görüntüsünü\nhizala.\n",
-            "addresses": "# Adresler\n\nAdresler haritadaki en önemli bilgilerden biridir.\n\nAdresler genelde cadde ve sokakların, yani yolların, bir parçası olarak\ngösterilmektedir. Fakat, OpenStreetMap'te adresler yolların yanı sıra mekanlara\nda eklenebilir.\n\nAdres nokta ya da alan olarak eklenmiş binalara da eklenebilir. Adres bilgisinin\nen uygun ve en iyi kaynağı kişisel bilgi ya da bizzat toplanmış verilerdir.\nDiğer harita bilgilerinde olduğu gibi adresler için de Google Maps gibi ticari kaynakların kullanılması kesinlikle yasaktır.\n",
-            "inspector": "# Detay Düzenleyicisini Kullanmak\n\nDetay Düzenleyicisi seçilen bir nesnenin detaylarını düzenlemeye yarar ve\nsol tarafta yer alır.\n\n### Tür Seçmek\n\nBir nokta, çizgi veya alan ekledikten sonra bu nesnenin otoyol,\nsüpermarket ya da kafe gibi ne tür olduğunu seçebilirsin. Düzenleyici ilk başta\nyaygın nesne türlerini gösterecektir. Dilersen kullanacağın türü arama yaparak\nbulman da mümkün.\n\nEğer bir tür hakkında daha fazla bilgi almak istiyorsan, nesne adı yazan\ntuşun sağındaki 'i' yazısına basabilirsin. Tür seçmek için türün adının yazılı\nolduğu tuşa tıklaman yeterli.\n\n### Etiketleri Düzenleme\n\nBir nesne türünü seçtikten sonra ya da türü belli olan bir nesne seçildiğinde,\ndüzenleyici nesnenin adı, adresi gibi detayları gösterecektir.\n\nDetayların altında yer alan 'Detay Ekle' kısmında nesne hakkında şu gibi yeni detaylar\nekleyebilirsin: Wikipedia adresi, tekerlekli sandalye erişimi vb.\n\nDüzenleyicinin en altında 'İlave Etiketler' kısmına dilediğin etiketleri\nekleyebilirsin. [Taginfo](http://taginfo.openstreetmap.org/) sitesi bu konuda iyi bir kaynaktır.\n\nDetaylar üzerinde yaptığın değişiklikler haritada otomatik olarak güncellenir. Dilersen\nbu değişiklikleri 'Geri Al' tuşu ile geri alabilirsin.\n"
+            "help": {
+                "title": "Yardım",
+                "welcome": "[OpenStreetMap](https://www.openstreetmap.org/) için iD düzenleyicisine hoşgeldiniz. Bu düzenleyici ile OpenStreetMap'i web tarayıcınızdan güncelleyebilirsiniz.",
+                "open_data_h": "Açık Veri",
+                "open_data": "Bu haritada yapacağınız düzenelemeler OpenStreetMap'i kullanan herkese görünür olacaktır. Düzenlemeleriniz kişisel bilgi, saha taraması veya havadan ya da sokak düzeyindeki fotoğraflardan elde edilen görüntülere dayalı olabilir. Google Maps gibi ticari kaynaklardan kopyalamak [is strictly forbidden](https://www.openstreetmap.org/copyright).",
+                "before_start_h": "Başlamadan önce",
+                "before_start": "Düzenlemeye başlamadan önce OpenStreetMap ve bu düzenleyiciye aşina olmanız gerekir. iD, OpenStreetMap'i düzenlemenin temellerini size öğretmej için bir gezinti içerir. Bu ekrandaki \"Gezintiyi Başlatınız\" tuşuna basarak öğreticiyi başlatabilirsiniz, sadece 15 dakika sürmektedir.",
+                "open_source_h": "Açık Kaynak",
+                "open_source": "iD düzenleyicisi işbirliğine dayalı bir açık kaynak projesidir ve şu anda  versiyon {version} kullanmaktasınız. Kaynak kodlar [on GitHub](https://github.com/openstreetmap/iD) erişime açıktır.",
+                "open_source_help": "iD'ye [translating] ile yardımcı olabilirsiniz (https://github.com/openstreetmap/iD/blob/master/CONTRIBUTING.md#translating) or [reporting bugs](https://github.com/openstreetmap/iD/issues)."
+            },
+            "overview": {
+                "title": "Genel Bakış",
+                "navigation_h": "Gezinti",
+                "navigation_drag": "Haritayı farenin sol tuşuna {leftclick} basılı tutarak ve fareyi etrafında hareket ettirerek çekebiliriniz.  Ayrıca  klavyenizdeki `↓`, `↑`, `←`, `→` yön tuşlarını kullanabilirsiniz.",
+                "navigation_zoom": "Farenin tekeri veya trackpad aracılığıyla ya da haritanın kenarındaki {plus} / {minus} tuşlarına basarak yakınlaştırma ya da uzaklaştırma yapabilirsiniz. Ayrıca klavyenizdeki `+`, `-` tuşlarını kullanabilirsiniz.",
+                "features_h": "Harita Nesneleri",
+                "features": "Biz \"nesneler\" kelimesini haritada görünen yol, bina veya görülecek yerler gibi şeyler için kullanıyoruz. Gerçek dünyadaki her şey OpenStreetMap'te bir nesne olarak haritalanabilir. Harita nesneleri haritada *points*, *lines*, veya *areas* kullanılarak temsil edilir.",
+                "nodes_ways": "OpenStreetmap'te noktalar bazen *nodes* olarak, çizgi ve alanlar ise bazen  *ways* olarak kullanılır."
+            },
+            "editing": {
+                "title": "Düzenleme ve Kaydetme",
+                "select_h": "Seçiniz",
+                "select_left_click": "Bir nesneyi seçmek için sol tuşa {leftclick} tıklayınız. Bu durumda özellik çarpıcı bir parlaklıkla vurgulanacaktır ve yan menü çubuğunda adı veya adresi gibi özellik hakkındaki ayrıntılar görüntülenecektir.",
+                "select_right_click": "Düzenleme menüsünü görüntülemek için bir özelliğin üzerinde sağ tuşa {rightclick} basınız. Bu durumda döndürme, hareket ettirme veya silme gibi kullanılabilir komutlar görüntülenecektir.",
+                "multiselect_h": "Çoklu seçim",
+                "multiselect_shift_click": "Farklı nesneleri birlikte seçmek için `{shift}`+{leftclick}. Bu, çoklu öğeleri seçerek hareket ettirmeyi ya da silmeyi daha kolay hale getirir.",
+                "multiselect_lasso": "Çoklu nesneleri seçmek için bir başka yol da {shift}` tuşuna ve farenizin sol tuşuna {leftclick} basılı tutarak fareyi bir serbest şekil seçimi çizmek için çekmektir.",
+                "undo_redo_h": "Geri al ve Yinele",
+                "undo_redo": "Düzenlemeleriniz siz onları OpenStreetMap sunucusuna kaydetmeyi tercih edene kadar yerel olarak tarayıcınızda saklanmaktadır.  Düzenlemeleri **geri al** {undo} tuşuna basarak geri alabilir ve **yinele** {redo}  tuşuna basarak yineleyebilirsiniz.",
+                "save_h": "Kaydet",
+                "save": "**Kaydet** {save}  tuşuna basıp düzenlemelerinizi kaydedin ve OpenStreetMap'e gönderin. Çalışmanızı sık sık kaydetmeyi unutmamalısınız! ",
+                "save_validation": "Kaydet ekranında yapmış olduklarınızı gözden geçirmek için bir şansınız olacak. Ayrıca iD kayıp veriler için bazı temel kontroller yapacaktır ve bazı şeyler doğru görünmüyorsa size yardımcı olacak öneriler ve uyarılar sunacaktır.",
+                "upload_h": "Yükle",
+                "backups_h": "Otomatik yedekleme",
+                "keyboard_h": "Klavye Kısayolları",
+                "keyboard": "`?` tuşuna basarak klavye kısayollarının bir listesini görüntüleyebilirsiniz."
+            },
+            "feature_editor": {
+                "title": "Nesne Düzenleyicisi",
+                "intro": "\"Nesne düzenleyicisi\" haritanın yanında görünür ve seçilen nesne ile ilgili tüm bilgiyi görüntülemenizi ve düzenlemenizi sağlar.",
+                "definitions": "Üst kısım nesnenin tipini gösterir. Orta kısım nesnenin isim veya adres gibi öznitelikleri gösteren \"bilgi alanlarını\" içerir.",
+                "type_h": "Özellik Tipi",
+                "fields_h": "Bilgi alanları",
+                "tags_h": "Etiketler"
+            },
+            "points": {
+                "title": "Noktalar",
+                "add_point_h": "Noktaların eklenmesi",
+                "move_point_h": "Noktaların hareket ettirilmesi",
+                "delete_point_h": "Noktaların silinmesi"
+            },
+            "lines": {
+                "title": "Çizgiler",
+                "add_line_h": "Çizgilerin eklenmesi",
+                "add_line_finish": "Bir çizgiyi bitirmek için `{return}` tuşuna tıklayınız veya en son düğüme tekrar tıklayınız.",
+                "modify_line_h": "Çizgilerin değiştirilmesi",
+                "connect_line_h": "Çizgilerin birleştirilmesi",
+                "connect_line": "Yolların düzgün bir şekilde birbirine bağlanmış olması harita için önemlidir ve sürüş güzergahları oluşturmak için gereklidir.",
+                "connect_line_display": "Yollar arasındaki bağlantılar gri çemberlerle gösterilir. Eğer hiçbir şeye bağlanmıyorsa bir çizginin bitiş noktası daha büyük beyaz çemberlerle gösterilir.",
+                "disconnect_line_h": "Çizgilerin birbirinden ayrılması",
+                "move_line_h": "Çizgilerin hareket ettirilmesi",
+                "delete_line_h": "Çizgilerin silinmesi"
+            },
+            "areas": {
+                "title": "Alanlar",
+                "point_or_area_h": "Noktalar mı yoksa Alanlar mı?",
+                "add_area_h": "Alanların Eklenmesi",
+                "add_area_finish": "Bir alanı tamamlamak için `{return}` tuşuna basınız veya ilk ya da son düğüme tekrar tıklayınız.",
+                "square_area_h": "Kare Köşeler",
+                "modify_area_h": "Alanların Değiştirilmesi",
+                "delete_area_h": "Alanların Silinmesi"
+            },
+            "relations": {
+                "title": "İlişkiler",
+                "edit_relation_h": "İlişkilerin Düzenlenmesi",
+                "maintain_relation_h": "İlişkilerin Bakımı",
+                "relation_types_h": "İlişki Tipleri",
+                "multipolygon_h": "Çoklu poligonlar",
+                "turn_restriction_h": "Dönüş kısıtlaması",
+                "route_h": "Güzergah",
+                "boundary_h": "Sınırlar"
+            },
+            "imagery": {
+                "title": "Arkaplan görüntüsü",
+                "sources_h": "Görüntü kaynakları",
+                "offsets_h": "Uydu görüntüsünü ayarla"
+            },
+            "streetlevel": {
+                "title": "Sokak fotoğrafları",
+                "using_h": "Sokak fotoğraflarını kullanmak"
+            },
+            "gps": {
+                "title": "GPS İzleri",
+                "using_h": "GPS İzlerini Kullanmak",
+                "upload": "Diğer kullanıcıların kullanması için ayrıca şunu yapabilirsiniz: [upload your GPS data to OpenStreetMap](https://www.openstreetmap.org/trace/create)"
+            }
         },
         "intro": {
             "done": "tamamlandı",
@@ -759,13 +909,15 @@
                 "title": "Merhaba",
                 "welcome": "Merhaba! Bu eğitim sana OpenStreetMap'i düzenleme konusunda temel bilgileri öğretecek.",
                 "practice": "Eğitimde yer alan bütün veriler alıştırma yapmak içindir. Yaptığın herhangi bir değişiklik kaydedilmeyecektir.",
-                "words": "Bu eğitimde yeni kavramlar tanıtılacaktır. Bu kavramlar *italik* yazı biçimi ile gösterilecektir."
+                "words": "Bu eğitimde yeni kavramlar tanıtılacaktır. Bu kavramlar *italik* yazı biçimi ile gösterilecektir.",
+                "chapters": "Buraya kadar gayet iyi! Konuları geçmek ya da tıkanırsanız bir konuya yeniden başlamak için her zaman aşağıdaki tuşları kullanabilirsiniz. Haydi başlayalım! ** devam etmek için '{next}' tuşuna basın.**"
             },
             "navigation": {
                 "title": "Navigasyon",
                 "zoom": "Farenin tekerleğini veya izleme dörtgenini kullanarak yada {plus} / {minus} tuşlarını kullanarak yakınlaştırabilir veya uzaklaştırabilirsiniz. ** Haritayı yakınlaştırın ! **",
                 "points_lines_areas": "Haritadaki nesneler *nokta, çizgi veya alan* ile gösterilir.",
                 "nodes_ways": "OpenStreetMap'te noktalar bazen *bağlantı noktası* olarak ifade edilir. Benzer şekilde çizgi ve alanlar da *yol* şeklinde ifade edilebilir.",
+                "click_townhall": "Haritadaki tüm nesneler üzerine tıklanarak seçilebilir. **Seçmek için noktaya basınız**",
                 "selected_townhall": "Harika! Nokta seçildi. Seçilen özellikler parlayan bir parıltı ile çizilir.",
                 "editor_townhall": "Bir özellik seçildiğinde, harita yanında * özellik editörü * görüntülenir.",
                 "choose_street": "**{name} ismini listeden seç.**",
@@ -807,6 +959,8 @@
             },
             "startediting": {
                 "title": "Düzenlemeye Başla",
+                "help": "OpenStreetMap'i düzenlemek için şimdi hazırsınız.!{br}Bu gezintiyi yeniden oynatmak ya da daha fazla belge görüntülemek için {button} tuşuna basabilirsiniz. Yardım tuşu veya '{key}' tuşuna basınız. ",
+                "shortcuts": "'{key}' tuşuna basarak klavye kısayollarıyla birlikte bir komutlar listesi görüntüleyebilirsiniz",
                 "save": "Belli aralıklarla değişikliklerini kaydetmeyi unutma!",
                 "start": "Haritayı düzenlemeye başla!"
             }
@@ -814,6 +968,9 @@
         "shortcuts": {
             "title": "Klavye kısayolları",
             "tooltip": "Klavye kısayolları ekranını gösterin.",
+            "toggle": {
+                "key": "?"
+            },
             "key": {
                 "alt": "Alt",
                 "backspace": "Backspace",
@@ -830,7 +987,8 @@
                 "pgdn": "PgDn",
                 "pgup": "PgUp",
                 "return": "Enter",
-                "shift": "Shift"
+                "shift": "Shift",
+                "space": "Boşluk"
             },
             "gesture": {
                 "drag": "sürükle"
@@ -856,6 +1014,7 @@
                     "background_switch": "Önceki arka plana geç",
                     "map_data": "Harita veri ayarları",
                     "fullscreen": "Tam ekran moduna gir",
+                    "wireframe": "Tel örgü moduna geçiniz",
                     "minimap": "Küçük haritayı aç/kapa"
                 },
                 "selecting": {
@@ -885,6 +1044,7 @@
                     "add_line": "'Çizgi ekle' modu",
                     "add_area": "'Alan ekle' modu",
                     "place_point": "Bir nokta yerleştir",
+                    "disable_snap": "Nokta bitiştirmeyi iptal etmek için basılı tutun",
                     "stop_line": "Çizgi ya da alan çizimini tamamla"
                 },
                 "operations": {
@@ -909,6 +1069,17 @@
                     "undo": "Son işlemi geri al",
                     "redo": "Son işlemi tekrar uygula",
                     "save": "Değişiklikleri Kaydet"
+                }
+            },
+            "tools": {
+                "title": "Araçlar",
+                "info": {
+                    "title": "Bilgi",
+                    "all": "Tüm bilgi panellerini açın",
+                    "background": "Arkaplan panelini açın",
+                    "history": "Geçmiş panelini açın",
+                    "location": "Konum panelini açın",
+                    "measurement": "Ölçüm panelini açın"
                 }
             }
         },
@@ -1081,6 +1252,9 @@
                 "aeroway": {
                     "label": "Tür"
                 },
+                "agrarian": {
+                    "label": "Ürünler"
+                },
                 "amenity": {
                     "label": "Tür"
                 },
@@ -1149,11 +1323,17 @@
                 "board_type": {
                     "label": "Tür"
                 },
+                "boules": {
+                    "label": "Tür"
+                },
                 "boundary": {
                     "label": "Tür"
                 },
                 "brand": {
                     "label": "Marka"
+                },
+                "brewery": {
+                    "label": "Fıçı Bira"
                 },
                 "bridge": {
                     "label": "Tür",
@@ -1167,6 +1347,10 @@
                 },
                 "bunker_type": {
                     "label": "Tür"
+                },
+                "cables": {
+                    "label": "Kablo",
+                    "placeholder": "1, 2, 3..."
                 },
                 "camera/direction": {
                     "label": "Yön (saat yönünde derece cinsinden)",
@@ -1187,36 +1371,8 @@
                     "label": "Kapasite",
                     "placeholder": "50, 100, 200..."
                 },
-                "cardinal_direction": {
-                    "label": "Yön",
-                    "options": {
-                        "E": "Doğu",
-                        "ENE": "Doğu-kuzeydoğu",
-                        "ESE": "Doğu-güneydoğu",
-                        "N": "Kuzey",
-                        "NE": "Kuzeydoğu",
-                        "NNE": "Kuzey-kuzeydoğu",
-                        "NNW": "Kuzey-kuzeybatı",
-                        "NW": "Kuzeybatı",
-                        "S": "Güney",
-                        "SE": "Güneydoğu",
-                        "SSE": "Güney-güneydoğu",
-                        "SSW": "Güney-güneybatı",
-                        "SW": "Güneybatı",
-                        "W": "Batı",
-                        "WNW": "Batı-kuzeybatı",
-                        "WSW": "Batı-güneybatı"
-                    }
-                },
                 "castle_type": {
                     "label": "Tür"
-                },
-                "clock_direction": {
-                    "label": "Yön",
-                    "options": {
-                        "anticlockwise": "Saat Yönünün Tersine",
-                        "clockwise": "Saat Yönünde"
-                    }
                 },
                 "clothes": {
                     "label": "Çamaşırlar"
@@ -1252,6 +1408,9 @@
                 },
                 "craft": {
                     "label": "Tür"
+                },
+                "crane/type": {
+                    "label": "Vinç Türü"
                 },
                 "crop": {
                     "label": "Tahıl"
@@ -1325,8 +1484,52 @@
                 "description": {
                     "label": "Açıklama"
                 },
+                "devices": {
+                    "label": "Aygıtlar",
+                    "placeholder": "1, 2, 3..."
+                },
                 "diaper": {
                     "label": "Bebek Bezi Değiştirmek Mümkün"
+                },
+                "direction": {
+                    "label": "Yön (Saat Yönünde Derece)",
+                    "placeholder": "45, 90, 180, 270"
+                },
+                "direction_cardinal": {
+                    "label": "Yön",
+                    "options": {
+                        "E": "Doğu",
+                        "ENE": "Doğu-kuzeydoğu",
+                        "ESE": "Doğu-güneydoğu",
+                        "N": "Kuzey",
+                        "NE": "Kuzeydoğu",
+                        "NNE": "Kuzey-kuzeydoğu",
+                        "NNW": "Kuzey-kuzeybatı",
+                        "NW": "Kuzeybatı",
+                        "S": "Güney",
+                        "SE": "Güneydoğu",
+                        "SSE": "Güney-güneydoğu",
+                        "SSW": "Güney-güneybatı",
+                        "SW": "Güneybatı",
+                        "W": "Batı",
+                        "WNW": "Batı-kuzeybatı",
+                        "WSW": "Batı-güneybatı"
+                    }
+                },
+                "direction_clock": {
+                    "label": "Yön",
+                    "options": {
+                        "anticlockwise": "Saat Yönünün Tersine",
+                        "clockwise": "Saat Yönünde"
+                    }
+                },
+                "direction_vertex": {
+                    "label": "Yön",
+                    "options": {
+                        "backward": "Geri",
+                        "both": "İleri ve Geri",
+                        "forward": "İleri"
+                    }
                 },
                 "display": {
                     "label": "Görüntü"
@@ -1399,12 +1602,18 @@
                         "wall": "Duvar"
                     }
                 },
+                "fitness_station": {
+                    "label": "Ekipman Türü"
+                },
                 "fixme": {
                     "label": "Düzeltme Notu"
                 },
                 "ford": {
                     "label": "Tür",
                     "placeholder": "Varsayılan"
+                },
+                "frequency": {
+                    "label": "Çalışma Sıklığı"
                 },
                 "fuel": {
                     "label": "Benzin İstasyonu"
@@ -1437,6 +1646,9 @@
                 "generator/type": {
                     "label": "Tür"
                 },
+                "government": {
+                    "label": "Hükümet"
+                },
                 "grape_variety": {
                     "label": "Meyve Çeşitleri"
                 },
@@ -1448,6 +1660,7 @@
                     "label": "Merdiven Korkuluğu"
                 },
                 "hashtags": {
+                    "label": "Önerilen Etiketler",
                     "placeholder": "#örnek"
                 },
                 "healthcare": {
@@ -1734,13 +1947,6 @@
                     "label": "İtibar",
                     "placeholder": "3, 4, 5..."
                 },
-                "parallel_direction": {
-                    "label": "Yön",
-                    "options": {
-                        "backward": "Geri",
-                        "forward": "İleri"
-                    }
-                },
                 "park_ride": {
                     "label": "Park ve Devam Et"
                 },
@@ -1758,6 +1964,9 @@
                 },
                 "payment_multi": {
                     "label": "Ödeme Türleri"
+                },
+                "phases": {
+                    "placeholder": "1, 2, 3..."
                 },
                 "phone": {
                     "label": "Telefon",
@@ -1829,15 +2038,16 @@
                 "railway": {
                     "label": "Tür"
                 },
+                "railway/signal/direction": {
+                    "label": "Yön",
+                    "options": {
+                        "backward": "Geri",
+                        "both": "İleri ve Geri",
+                        "forward": "İleri"
+                    }
+                },
                 "recycling_accepts": {
                     "label": "Kabul Ediyor"
-                },
-                "recycling_type": {
-                    "label": "Geri Dönüşüm Türleri",
-                    "options": {
-                        "centre": "Geri Dönüşüm Merkezi",
-                        "container": "Konteyner"
-                    }
                 },
                 "ref": {
                     "label": "Referans Kodu"
@@ -2030,7 +2240,8 @@
                 "structure_waterway": {
                     "options": {
                         "tunnel": "Tünel"
-                    }
+                    },
+                    "placeholder": "Bilinmiyor"
                 },
                 "studio": {
                     "label": "Tür"
@@ -2112,11 +2323,22 @@
                     },
                     "placeholder": "Sağlam, Yarı Sağlam, Yumuşak..."
                 },
+                "trade": {
+                    "label": "Tür"
+                },
                 "traffic_calming": {
                     "label": "Tür"
                 },
                 "traffic_signals": {
                     "label": "Tür"
+                },
+                "traffic_signals/direction": {
+                    "label": "Yön",
+                    "options": {
+                        "backward": "Geri",
+                        "both": "İkisi / Hepsi",
+                        "forward": "İleri"
+                    }
                 },
                 "trail_visibility": {
                     "label": "Görüş Durumu",
@@ -2129,6 +2351,16 @@
                         "no": "Hayır: patika yok, çok iyi yön bulma becerisi gerektirir"
                     },
                     "placeholder": "Çok iyi, İyi, Kötü"
+                },
+                "transformer": {
+                    "label": "Tür",
+                    "options": {
+                        "auto": "Otomatik dönüştürücü",
+                        "auxiliary": "Yardımcı",
+                        "converter": "Dönüştürücü",
+                        "distribution": "Dağıtım",
+                        "yes": "Bilinmeyen"
+                    }
                 },
                 "trees": {
                     "label": "Ağaçlar"
@@ -2147,6 +2379,23 @@
                         "house": "5m (16ft)'den az",
                         "street": "5m ile 20m (16 - 65ft) arası"
                     }
+                },
+                "volcano/status": {
+                    "label": "Yanardağ Durumu",
+                    "options": {
+                        "active": "Etkin",
+                        "dormant": "Sönmüş",
+                        "extinct": "Sönük"
+                    }
+                },
+                "volcano/type": {
+                    "label": "Yanardağ Türü",
+                    "options": {
+                        "scoria": "Lav külü"
+                    }
+                },
+                "voltage": {
+                    "label": "Gerilim"
                 },
                 "wall": {
                     "label": "Tür"
@@ -2175,6 +2424,14 @@
                 },
                 "wikipedia": {
                     "label": "Vikipedi"
+                },
+                "windings": {
+                    "placeholder": "1, 2, 3..."
+                },
+                "windings/configuration": {
+                    "options": {
+                        "zigzag": "Zikzak"
+                    }
                 }
             },
             "presets": {
@@ -2230,8 +2487,7 @@
                     "terms": "Çekme Halat Teleferik"
                 },
                 "aerialway/station": {
-                    "name": "Teleferik İstasyonu",
-                    "terms": "Teleferik İstasyonu"
+                    "name": "Teleferik İstasyonu"
                 },
                 "aerialway/t-bar": {
                     "name": "Çubuklu Teleferik",
@@ -2336,12 +2592,15 @@
                     "terms": "Döviz Bürosu"
                 },
                 "amenity/bus_station": {
-                    "name": "Otogar",
-                    "terms": "Otogar, Otobüs Durağı"
+                    "name": "Otobüs Durağı / Terminali"
                 },
                 "amenity/cafe": {
                     "name": "Kafe",
                     "terms": "Kafe, Kafeterya"
+                },
+                "amenity/car_pooling": {
+                    "name": "Araba Paylaşım Yeri",
+                    "terms": "Araç İmece Yeri"
                 },
                 "amenity/car_rental": {
                     "name": "Araç Kiralama",
@@ -2439,8 +2698,7 @@
                     "terms": "Fast Food, Hazır Yiyecek"
                 },
                 "amenity/ferry_terminal": {
-                    "name": "Vapur İskelesi",
-                    "terms": "Vapur İskelesi, Feribot İskelesi, Feribot Terminali"
+                    "name": "Feribot Terminali"
                 },
                 "amenity/fire_station": {
                     "name": "İtfaiye",
@@ -2490,6 +2748,10 @@
                     "name": "Kütüphane",
                     "terms": "Kütüphane"
                 },
+                "amenity/love_hotel": {
+                    "name": "Aşk Oteli",
+                    "terms": "Cinsel İlişki Oteli, Sevişme Oteli"
+                },
                 "amenity/marketplace": {
                     "name": "Çarşı",
                     "terms": "Çarşı, Pazar Yeri"
@@ -2497,6 +2759,10 @@
                 "amenity/motorcycle_parking": {
                     "name": "Motosiklet Parkı",
                     "terms": "Motosiklet Parkı, Motosiklet Park Yeri"
+                },
+                "amenity/music_school": {
+                    "name": "Müzik Okulu",
+                    "terms": "Müzik Merkezi"
                 },
                 "amenity/nightclub": {
                     "name": "Gece Kulübü",
@@ -2598,8 +2864,8 @@
                     "terms": "Korucu İstasyonu, Korucu Evi"
                 },
                 "amenity/recycling": {
-                    "name": "Geri Dönüşüm",
-                    "terms": "Geri Dönüşüm, Geri Dönüşüm Kutusu"
+                    "name": "Geri Dönüşüm Kutusu",
+                    "terms": "Geri Dönüşüm Konteyneri"
                 },
                 "amenity/recycling_centre": {
                     "name": "Geri Dönüşüm Merkezi",
@@ -2702,6 +2968,10 @@
                     "name": "Dışkı Toplama Poşet Otomatı",
                     "terms": "Dışkı Toplama Poşet Otomatı"
                 },
+                "amenity/vending_machine/feminine_hygiene": {
+                    "name": "Kadın Sağlık Otomatı",
+                    "terms": "Kadın Sağlık Otomatik Satış Makinası"
+                },
                 "amenity/vending_machine/news_papers": {
                     "name": "Gazete Otomatı"
                 },
@@ -2728,6 +2998,10 @@
                 "amenity/veterinary": {
                     "name": "Veteriner",
                     "terms": "Veteriner"
+                },
+                "amenity/waste/dog_excrement": {
+                    "name": "Köpek Dışkı Çöpü",
+                    "terms": "Köpek Dışkı Kutusu"
                 },
                 "amenity/waste_basket": {
                     "name": "Çöp Kutusu",
@@ -2756,6 +3030,10 @@
                 "area/highway": {
                     "name": "Yol Durumu",
                     "terms": "Yol Durumu"
+                },
+                "attraction/amusement_ride": {
+                    "name": "Eğlence Yolculuğu",
+                    "terms": "<translate with synonyms or related terms for 'Amusement Ride', separated by commas>"
                 },
                 "attraction/animal": {
                     "name": "Hayvan",
@@ -2874,15 +3152,19 @@
                 },
                 "building": {
                     "name": "Bina",
-                    "terms": "Bina"
+                    "terms": "Yapı"
                 },
                 "building/apartments": {
-                    "name": "Apartmanlar",
-                    "terms": "Apartmanlar"
+                    "name": "Apartman",
+                    "terms": "Apartman"
                 },
                 "building/barn": {
                     "name": "Samanlık",
                     "terms": "Samanlık"
+                },
+                "building/bungalow": {
+                    "name": "Tek Katlı Müstakil Ev",
+                    "terms": "Tek Katlı Müstakil Ev"
                 },
                 "building/bunker": {
                     "name": "Depo"
@@ -2893,46 +3175,54 @@
                 },
                 "building/cathedral": {
                     "name": "Katedral",
-                    "terms": "Katedral, Büyük Kilisi, Başkilise, İbadet Yeri"
+                    "terms": "Büyük Kilisi, Başkilise, İbadet Yeri"
                 },
                 "building/chapel": {
                     "name": "Şapel",
-                    "terms": "Şapel, Küçük Kilise, İbadet Yeri"
+                    "terms": "Küçük Kilise, İbadet Yeri"
                 },
                 "building/church": {
                     "name": "Kilise",
                     "terms": "Kilise"
                 },
+                "building/civic": {
+                    "name": "Kamu Binası",
+                    "terms": "Kamu Binası"
+                },
                 "building/college": {
-                    "name": "Üniversite",
-                    "terms": "Üniversite, Yüksekokul"
+                    "name": "Yüksekokul",
+                    "terms": "Yüksekokul"
                 },
                 "building/commercial": {
                     "name": "Ticari Bina",
-                    "terms": "Ticari Bina, Alışveriş Yeri"
+                    "terms": "Alışveriş Yeri"
                 },
                 "building/construction": {
                     "name": "Bina İnşaatı",
-                    "terms": "Bina İnşaatı"
+                    "terms": "İnşaat"
                 },
                 "building/detached": {
-                    "name": "Müstakil",
-                    "terms": "Müstakil"
+                    "name": "Müstakil Ev",
+                    "terms": "Müstakil Ev"
                 },
                 "building/dormitory": {
                     "name": "Yurt",
-                    "terms": "Yurt, Öğrenci Yurdu"
+                    "terms": "Öğrenci Yurdu"
                 },
                 "building/entrance": {
                     "name": "Giriş/Çıkış"
+                },
+                "building/farm": {
+                    "name": "Çiftlik",
+                    "terms": "Çiftlik"
                 },
                 "building/garage": {
                     "name": "Garaj",
                     "terms": "Garaj"
                 },
                 "building/garages": {
-                    "name": "Garaj",
-                    "terms": "Garaj"
+                    "name": "Garajlar",
+                    "terms": "Garajlar"
                 },
                 "building/greenhouse": {
                     "name": "Sera",
@@ -2952,31 +3242,39 @@
                 },
                 "building/hut": {
                     "name": "Kulübe",
-                    "terms": "Kulübe, Baraka"
+                    "terms": "Baraka"
                 },
                 "building/industrial": {
-                    "name": "Endüstriyel Bina",
-                    "terms": "Endüstriyel Bina, Sanayi"
+                    "name": "Sanayi",
+                    "terms": "Endüstriyel Bina"
                 },
                 "building/kindergarten": {
                     "name": "Anaokulu",
-                    "terms": "Anaokulu, Kreş"
+                    "terms": "Kreş"
+                },
+                "building/mosque": {
+                    "name": "Camii",
+                    "terms": "Camii"
                 },
                 "building/public": {
                     "name": "Devlet Binası",
                     "terms": "Devlet Binası"
                 },
                 "building/residential": {
-                    "name": "Yerleşim Yeri",
-                    "terms": "Yerleşim Yeri, Yaşam Kompleksi"
+                    "name": "Konut",
+                    "terms": "Konut"
                 },
                 "building/retail": {
-                    "name": "Alışveriş Merkezi",
-                    "terms": "Alışveriş Merkezi, Çarşı"
+                    "name": "Satış Mağazası",
+                    "terms": "Satış Mağazası"
                 },
                 "building/roof": {
                     "name": "Çatı",
                     "terms": "Çatı"
+                },
+                "building/ruins": {
+                    "name": "Bina Kalıntısı",
+                    "terms": "Bina Kalıntısı"
                 },
                 "building/school": {
                     "name": "Okul",
@@ -2986,17 +3284,29 @@
                     "name": "Bitişik Nizam Ev",
                     "terms": "Bitişik Nizam Ev"
                 },
+                "building/service": {
+                    "name": "Servis Binası",
+                    "terms": "Servis Binası"
+                },
                 "building/shed": {
                     "name": "Kulübe",
-                    "terms": "Kulübe, Küçük Kulübe, Baraka"
+                    "terms": "Küçük Kulübe, Baraka"
                 },
                 "building/stable": {
                     "name": "Ahır",
                     "terms": "Ahır"
                 },
+                "building/stadium": {
+                    "name": "Stadyum",
+                    "terms": "Stadyum"
+                },
                 "building/static_caravan": {
                     "name": "Karavan",
                     "terms": "Karavan"
+                },
+                "building/temple": {
+                    "name": "Tapınak",
+                    "terms": "Tapınak"
                 },
                 "building/terrace": {
                     "name": "Sıra Evler",
@@ -3005,13 +3315,17 @@
                 "building/train_station": {
                     "name": "Tren İstasyonu"
                 },
+                "building/transportation": {
+                    "name": "Terminal",
+                    "terms": "Terminal"
+                },
                 "building/university": {
                     "name": "Üniversite",
                     "terms": "Üniversite"
                 },
                 "building/warehouse": {
                     "name": "Depo",
-                    "terms": "Depo, Ambar"
+                    "terms": "Ambar"
                 },
                 "camp_site/camp_pitch": {
                     "name": "Kamp Ateş Alanı",
@@ -3307,9 +3621,57 @@
                     "name": "Alternatif Tıp",
                     "terms": "Alternatif Tıp"
                 },
+                "healthcare/alternative/chiropractic": {
+                    "name": "Masör",
+                    "terms": "Masaj Uzmanı"
+                },
+                "healthcare/audiologist": {
+                    "name": "Ses Uzmanı",
+                    "terms": "Odyolog"
+                },
+                "healthcare/birthing_center": {
+                    "name": "Doğum Merkezi",
+                    "terms": "Bebek Merkezi"
+                },
                 "healthcare/blood_donation": {
                     "name": "Kan Bağış Merkezi",
                     "terms": "Kan Bağış Merkezi"
+                },
+                "healthcare/hospice": {
+                    "name": "Darülaceze",
+                    "terms": "Düşkünlerevi"
+                },
+                "healthcare/midwife": {
+                    "name": "Ebe",
+                    "terms": "Hemşire"
+                },
+                "healthcare/occupational_therapist": {
+                    "name": "Tedavi Uzmanı",
+                    "terms": "Tedavi Sorumlusu"
+                },
+                "healthcare/optometrist": {
+                    "name": "Göz Doktoru",
+                    "terms": "Optometri Uzmanı"
+                },
+                "healthcare/physiotherapist": {
+                    "name": "Fizik Tedavi Uzmanı",
+                    "terms": "Fizyoterapist"
+                },
+                "healthcare/podiatrist": {
+                    "name": "Ayak Hastalıkları Uzmanı",
+                    "terms": "Podiyatri Uzmanı"
+                },
+                "healthcare/psychotherapist": {
+                    "name": "Ruh Sağlıkları Uzmanı",
+                    "terms": "Psikoterapist"
+                },
+                "healthcare/rehabilitation": {
+                    "name": "Rehabilitasyon Merkezi, İyileştirme Merkezi",
+                    "terms": "Rehabilitasyon Tesisi"
+                },
+                "healthcare/speech_therapist": {
+                    "name": "Konuşma Terapisti",
+                    "terms": "Konuşma Uzmanı"
                 },
                 "highway": {
                     "name": "Yol"
@@ -3317,10 +3679,6 @@
                 "highway/bridleway": {
                     "name": "At Yolu",
                     "terms": "At Yolu, At Yürüyüş Yolu"
-                },
-                "highway/bus_stop": {
-                    "name": "Otobüs Durağı",
-                    "terms": "Otobüs Durağı, Durak"
                 },
                 "highway/corridor": {
                     "name": "Koridor",
@@ -3373,6 +3731,9 @@
                 "highway/path": {
                     "name": "Patika",
                     "terms": "Patika, Yol"
+                },
+                "highway/pedestrian_line": {
+                    "name": "Yaya Yolu"
                 },
                 "highway/primary": {
                     "name": "Anayol",
@@ -3581,10 +3942,6 @@
                     "name": "Orman",
                     "terms": "Orman"
                 },
-                "landuse/garages": {
-                    "name": "Park Yeri",
-                    "terms": "Park Yeri, Garaj "
-                },
                 "landuse/grass": {
                     "name": "Çimenlik",
                     "terms": "Çimenlik, Yeşil Alan"
@@ -3596,6 +3953,9 @@
                 "landuse/industrial": {
                     "name": "Sanayi Bölgesi",
                     "terms": "Sanayi Bölgesi, Sanayi Alanı"
+                },
+                "landuse/industrial/slaughterhouse": {
+                    "name": "Kesimevi"
                 },
                 "landuse/landfill": {
                     "name": "Çöp Sahası",
@@ -4102,77 +4462,159 @@
                 },
                 "office": {
                     "name": "Ofis",
-                    "terms": "Ofis, Büro"
+                    "terms": "Büro"
+                },
+                "office/accountant": {
+                    "name": "Muhasebeci",
+                    "terms": "Muhasebe Ofisi"
                 },
                 "office/administrative": {
-                    "name": "İdari Ofis",
-                    "terms": "İdari Ofis"
+                    "name": "İdari Ofis"
+                },
+                "office/adoption_agency": {
+                    "name": "Evlat Edinme Ajansı",
+                    "terms": "Evlat Edinme Ofisi"
+                },
+                "office/advertising_agency": {
+                    "name": "Reklam Ajansı",
+                    "terms": "Reklam Ofisi"
+                },
+                "office/architect": {
+                    "name": "Mimarlık Ofisi",
+                    "terms": "Mimar"
+                },
+                "office/association": {
+                    "name": "Yardım Kuruluşu",
+                    "terms": "Yardım Kuruluşu Merkezi"
+                },
+                "office/charity": {
+                    "name": "Hayır Kurumu",
+                    "terms": "Hayır Kurumu Şubesi"
                 },
                 "office/company": {
                     "name": "Şirket",
-                    "terms": "Şirket"
+                    "terms": "Şirket Ofisi, Şirket Şubesi"
                 },
                 "office/coworking": {
                     "name": "Ortak Çalışma Alanı",
-                    "terms": "Ortak Çalışma Alanı"
+                    "terms": "Ortak Çalışma Yeri"
                 },
                 "office/educational_institution": {
                     "name": "Eğitim Kurumu",
-                    "terms": "Eğitim Kurumu, Okul"
+                    "terms": "Okul"
                 },
                 "office/employment_agency": {
                     "name": "İş ve İşçi Bulma Kurumu",
-                    "terms": "İş ve İşçi Bulma Kurumu"
+                    "terms": "İş ve İşçi Bulma Şubesi"
+                },
+                "office/energy_supplier": {
+                    "name": "Enerji Kurumu Şubesi",
+                    "terms": "Enerji Kurumu Ofisi"
                 },
                 "office/estate_agent": {
                     "name": "Gayrimenkul Ofisi",
-                    "terms": "Gayrimenkul Ofisi, Emlak Ofisi"
+                    "terms": "Emlak Ofisi"
                 },
                 "office/financial": {
                     "name": "Finans Ofisi",
-                    "terms": "Finans Ofisi"
+                    "terms": "Finans Şubesi"
+                },
+                "office/forestry": {
+                    "name": "Ormancılık Şubesi",
+                    "terms": "Ormancılık Merkezi"
+                },
+                "office/foundation": {
+                    "name": "Vakıf",
+                    "terms": "Vakıf Şubesi"
                 },
                 "office/government": {
                     "name": "Devlet Dairesi",
-                    "terms": "Devlet Dairesi"
+                    "terms": "Devlet Kurumu"
                 },
                 "office/government/register_office": {
                     "name": "Nüfus Dairesi",
-                    "terms": "Nüfus Dairesi"
+                    "terms": "Nüfus İdaresi"
+                },
+                "office/government/tax": {
+                    "name": "Vergi Dairesi",
+                    "terms": "Vergi İdaresi"
+                },
+                "office/guide": {
+                    "name": "Tur Rehberi",
+                    "terms": "Tur Rehber Merkezi"
                 },
                 "office/insurance": {
                     "name": "Sigorta Acentesi",
-                    "terms": "Sigorta Acentesi"
+                    "terms": "Sigorta Şirket Şubesi"
+                },
+                "office/it": {
+                    "name": "Bilişim Teknoloji Ofisi",
+                    "terms": "Bilişim Teknoloji Merkezi"
                 },
                 "office/lawyer": {
                     "name": "Hukuk Bürosu",
-                    "terms": "Hukuk Bürosu"
+                    "terms": "Hukuk Şirketi Şubesi"
                 },
                 "office/lawyer/notary": {
-                    "name": "Noter",
-                    "terms": "Noter"
+                    "name": "Noter"
+                },
+                "office/moving_company": {
+                    "name": "Taşıma Şirketi Ofisi",
+                    "terms": "Nakliye Şubesi"
+                },
+                "office/newspaper": {
+                    "name": "Gazete Şubesi",
+                    "terms": "Gazete Ofisi"
                 },
                 "office/ngo": {
                     "name": "Sivil Toplum Örgütü",
-                    "terms": "Sivil Toplum Örgütü"
+                    "terms": "Sivil Toplum Kuruluşu"
+                },
+                "office/notary": {
+                    "name": "Noter",
+                    "terms": "Noter Şubesi"
                 },
                 "office/physician": {
                     "name": "Hekim"
                 },
                 "office/political_party": {
                     "name": "Siyasi Parti",
-                    "terms": "Siyasi Parti"
+                    "terms": "Parti Şubesi"
+                },
+                "office/private_investigator": {
+                    "name": "Dedektif",
+                    "terms": "Dedektif Şubesi"
+                },
+                "office/quango": {
+                    "name": "Yarı Özel Sivil Toplum Örgütü",
+                    "terms": "Yarı Özel Sivil Toplum Kuruluşu"
                 },
                 "office/research": {
-                    "name": "Araştırma Ofisi",
-                    "terms": "Araştırma Ofisi"
+                    "name": "Araştırma Kurumu",
+                    "terms": "Araştırma Şubesi"
+                },
+                "office/surveyor": {
+                    "name": "Harita Mühendisliği",
+                    "terms": "Harita Etüt Mühendisliği"
+                },
+                "office/tax_advisor": {
+                    "name": "Vergi Danışmanlığı",
+                    "terms": "Vergi Danışmanlığı Şubesi"
                 },
                 "office/telecommunication": {
                     "name": "Haberleşme Bürosu",
-                    "terms": "Haberleşme Bürosu, Telekomünikasyon Bürosu, Telekom Bürosu"
+                    "terms": "Telekomünikasyon Bürosu, Telekom Bürosu"
+                },
+                "office/therapist": {
+                    "name": "Terapist",
+                    "terms": "Terapi Uzmanı"
                 },
                 "office/travel_agent": {
                     "name": "Seyahat Acentesi"
+                },
+                "office/water_utility": {
+                    "name": "Su Müdürlüğü",
+                    "terms": "Su ve Kanalizasyon Müdürlüğü"
                 },
                 "piste": {
                     "name": "Kayak Pisti",
@@ -4270,13 +4712,173 @@
                     "name": "Transformatör",
                     "terms": "Transformatör"
                 },
+                "public_transport/linear_platform": {
+                    "name": "Toplu Taşıma Durağı",
+                    "terms": "Toplu Taşıma Yolcu İndirme/Bindirme Platformu"
+                },
+                "public_transport/linear_platform_aerialway": {
+                    "name": "Havayolu Durağı",
+                    "terms": "Havayolu ile Taşıma Yolcu İndirme/Bindirme Platformu"
+                },
+                "public_transport/linear_platform_bus": {
+                    "name": "Otobüs Durağı",
+                    "terms": "Durak, Otobüs Yolcu İndirme/Bindirme Platformu"
+                },
+                "public_transport/linear_platform_ferry": {
+                    "name": "Feribot Terminali",
+                    "terms": "Feribot Yolcu İndirme/Bindirme Platformu"
+                },
+                "public_transport/linear_platform_light_rail": {
+                    "name": "Raybüs Durağı",
+                    "terms": "Raybüs, Hafif Raylı Taşıt Yolcu İndirme/Bindirme Platformu"
+                },
+                "public_transport/linear_platform_monorail": {
+                    "name": "Tek Raylı Tren İstasyonu",
+                    "terms": "Tek Raylı Tren Yolcu İndirme/Bindirme Platformu"
+                },
+                "public_transport/linear_platform_subway": {
+                    "name": "Metro Durağı",
+                    "terms": "Metro Yolcu İndirme/Bindirme Platformu"
+                },
+                "public_transport/linear_platform_train": {
+                    "name": "Tren Durağı",
+                    "terms": "Tren Yolcu İndirme/Bindirme Platformu"
+                },
+                "public_transport/linear_platform_tram": {
+                    "name": "Tramvay Durağı",
+                    "terms": "Tramvay Yolcu İndirme/Bindirme Platformu"
+                },
+                "public_transport/linear_platform_trolleybus": {
+                    "name": "Troleybüs Durağı",
+                    "terms": "Troleybüs, Raysız Tramvay Yolcu İndirme/Bindirme Platformu"
+                },
                 "public_transport/platform": {
-                    "name": "Peron",
-                    "terms": "Peron"
+                    "name": "Toplu Taşıma Durağı",
+                    "terms": "Toplu Taşıma Yolcu İndirme/Bindirme Platformu"
+                },
+                "public_transport/platform_aerialway": {
+                    "name": "Havayolu Durağı",
+                    "terms": "Havayolu ile Taşıma Yolcu İndirme/Bindirme Platformu"
+                },
+                "public_transport/platform_bus": {
+                    "name": "Otobüs Durağı",
+                    "terms": "Durak, Otobüs Yolcu İndirme/Bindirme Platformu"
+                },
+                "public_transport/platform_ferry": {
+                    "name": "Feribot Terminali",
+                    "terms": "Feribot Yolcu İndirme/Bindirme Platformu"
+                },
+                "public_transport/platform_light_rail": {
+                    "name": "Raybüs Durağı",
+                    "terms": "Raybüs, Hafif Raylı Taşıt Yolcu İndirme/Bindirme Platformu"
+                },
+                "public_transport/platform_monorail": {
+                    "name": "Tek Raylı Tren İstasyonu",
+                    "terms": "Tek Raylı Tren Yolcu İndirme/Bindirme Platformu"
+                },
+                "public_transport/platform_subway": {
+                    "name": "Metro Durağı",
+                    "terms": "Metro Yolcu İndirme/Bindirme Platformu"
+                },
+                "public_transport/platform_train": {
+                    "name": "Tren Durağı",
+                    "terms": "Tren Yolcu İndirme/Bindirme Platformu"
+                },
+                "public_transport/platform_tram": {
+                    "name": "Tramvay Durağı",
+                    "terms": "Tramvay Yolcu İndirme/Bindirme Platformu"
+                },
+                "public_transport/platform_trolleybus": {
+                    "name": "Troleybüs Durağı",
+                    "terms": "Troleybüs, Raysız Tramvay Yolcu İndirme/Bindirme Platformu"
+                },
+                "public_transport/station": {
+                    "name": "Toplu Taşıma Terminali",
+                    "terms": "Toplu Taşıma İstasyonu"
+                },
+                "public_transport/station_aerialway": {
+                    "name": "Havayolu İstasyonu",
+                    "terms": "Havayolu ile Taşıma İstasyonu, Havayolu ile Taşıma Terminali"
+                },
+                "public_transport/station_bus": {
+                    "name": "Otobüs Terminali",
+                    "terms": "Otobüs İstasyonu"
+                },
+                "public_transport/station_ferry": {
+                    "name": "Feribot Terminali",
+                    "terms": "Feribot İstasyonu"
+                },
+                "public_transport/station_light_rail": {
+                    "name": "Raybüs İstasyonu",
+                    "terms": "Raybüs Terminali, Hafif Raylı Taşıma İstasyonu"
+                },
+                "public_transport/station_monorail": {
+                    "name": "Tek Raylı Tren İstasyonu",
+                    "terms": "Tek Raylı Tren Terminali"
+                },
+                "public_transport/station_subway": {
+                    "name": "Metro İstasyonu",
+                    "terms": "Metro Terminali"
+                },
+                "public_transport/station_train": {
+                    "name": "Gar",
+                    "terms": "Tren İstasyonu"
+                },
+                "public_transport/station_train_halt": {
+                    "name": "Tren Durma Yeri (Dur/Kalk)",
+                    "terms": "Tren Yolcu İndirme/Birdirme Yeri (Dur/Kalk)"
+                },
+                "public_transport/station_tram": {
+                    "name": "Tramvay İstasyonu",
+                    "terms": "Tramvay Terminali"
+                },
+                "public_transport/station_trolleybus": {
+                    "name": "Troleybüs Terminali",
+                    "terms": "Raysız Tramvay Terminali"
+                },
+                "public_transport/stop_area": {
+                    "name": "Toplu Taşıma Yolcu İndirme/Bindirme Yeri",
+                    "terms": "Toplu Taşıma Yolcu İndirme/Bindirme Alanı"
                 },
                 "public_transport/stop_position": {
-                    "name": "Otobüs Durma Yeri",
-                    "terms": "Otobüs Durma Yeri"
+                    "name": "Toplu Taşıma Yolcu İndirme/Bindirme Noktası",
+                    "terms": "Toplu Taşıma Yol Üstü İndirme/Bindirme Noktası"
+                },
+                "public_transport/stop_position_aerialway": {
+                    "name": "Havayolu Yolcu İndirme/Bindirme Noktası",
+                    "terms": "Havayolu Yol Üstü İndirme/Bindirme Noktası"
+                },
+                "public_transport/stop_position_bus": {
+                    "name": "Otobüs Yolcu İndirme/Bindirme Noktası",
+                    "terms": "Otobüs Yol Üstü İndirme/Bindirme Noktası"
+                },
+                "public_transport/stop_position_ferry": {
+                    "name": "Feribot Yolcu İndirme/Bindirme Noktası",
+                    "terms": "Vapur Yolcu İndirme/Bindirme Noktası"
+                },
+                "public_transport/stop_position_light_rail": {
+                    "name": "Raybüs Yolcu İndirme/Bindirme Noktası",
+                    "terms": "Raybüs, Hafif Raylı Yol Üstü İndirme/Bindirme Noktası"
+                },
+                "public_transport/stop_position_monorail": {
+                    "name": "Tek Raylı Tren Yolcu İndirme/Bindirme Noktası",
+                    "terms": "Tek Raylı Yol Üstü İndirme/Bindirme Noktası"
+                },
+                "public_transport/stop_position_subway": {
+                    "name": "Metro Yolcu İndirme/Bindirme Noktası",
+                    "terms": "Metro Yol Üstü İndirme/Bindirme Noktası"
+                },
+                "public_transport/stop_position_train": {
+                    "name": "Tren Yolcu İndirme/Bindirme Noktası",
+                    "terms": "Tren Yol Üstü İndirme/Bindirme Noktası"
+                },
+                "public_transport/stop_position_tram": {
+                    "name": "Tramvay Yolcu İndirme/Bindirme Noktası",
+                    "terms": "Tramvay Yol Üstü İndirme/Bindirme Noktası"
+                },
+                "public_transport/stop_position_trolleybus": {
+                    "name": "Troleybüs Yolcu İndirme/Bindirme Noktası",
+                    "terms": "Raysız Tramvay Yol Üstü İndirme/Bindirme Noktası"
                 },
                 "railway": {
                     "name": "Demiryolu"
@@ -4297,10 +4899,6 @@
                     "name": "Kablolu Tren",
                     "terms": "Kablolu Tren, Füniküler"
                 },
-                "railway/halt": {
-                    "name": "Demiryolu Durağı",
-                    "terms": "Demiryolu Durağı"
-                },
                 "railway/level_crossing": {
                     "name": "Hemzemin Geçit (Yol ile Kesişim)",
                     "terms": "Hemzemin Geçit (Yol ile Kesişim)"
@@ -4313,17 +4911,9 @@
                     "name": "Dar Demiryolu Geçidi",
                     "terms": "Dar Demiryolu Geçidi"
                 },
-                "railway/platform": {
-                    "name": "Demiryolu Platformu",
-                    "terms": "Demiryolu Platformu"
-                },
                 "railway/rail": {
                     "name": "Demiryolu",
                     "terms": "Demiryolu"
-                },
-                "railway/station": {
-                    "name": "Tren İstasyonu",
-                    "terms": "Tren İstasyonu"
                 },
                 "railway/subway": {
                     "name": "Metro",
@@ -4336,10 +4926,6 @@
                 "railway/tram": {
                     "name": "Tramvay",
                     "terms": "Tramvay"
-                },
-                "railway/tram_stop": {
-                    "name": "Tramvay Durağı",
-                    "terms": "Tramvay Durağı"
                 },
                 "relation": {
                     "name": "İlişki",
@@ -4617,10 +5203,6 @@
                 "shop/jewelry": {
                     "name": "Kuyumcu",
                     "terms": "Kuyumcu"
-                },
-                "shop/kiosk": {
-                    "name": "Büfe",
-                    "terms": "Büfe"
                 },
                 "shop/kitchen": {
                     "name": "Mutfak Eşyaları Mağazası",
@@ -5149,16 +5731,30 @@
                 "description": "DigitalGlobe Uydu Görüntüleri",
                 "name": "DigitalGlobe Uydu Görüntüleri"
             },
+            "DigitalGlobe-Premium-vintage": {
+                "attribution": {
+                    "text": "Şartlar ve Geri Bildirim"
+                },
+                "description": "Görüntü sınırları ve çekilme tarihleri. Etiketler yakınlaştırma düzeyi 14 veya daha üstünde gösterilir.",
+                "name": "DigitalGlobe Özel Görüntü Dönemi Ürünü"
+            },
             "DigitalGlobe-Standard": {
                 "attribution": {
-                    "text": "Şartlar & Geri Bildirim"
+                    "text": "Şartlar ve Geri Bildirim"
                 },
                 "description": "Standart DigitalGlobe Uydu Görüntüleri",
                 "name": "Standart DigitalGlobe Uydu Görüntüleri"
             },
+            "DigitalGlobe-Standard-vintage": {
+                "attribution": {
+                    "text": "Şartlar ve Geri Bildirim"
+                },
+                "description": "Görüntü sınırları ve çekilme tarihleri. Etiketler yakınlaştırma düzeyi 14 veya daha üstünde gösterilir.",
+                "name": "DigitalGlobe Standard Görüntü Dönemi Ürünü"
+            },
             "EsriWorldImagery": {
                 "attribution": {
-                    "text": "Şartlar & Geri Bildirim"
+                    "text": "Şartlar ve Geri Bildirim"
                 },
                 "description": "Esri Uydu Görüntüleri",
                 "name": "Esri Uydu Görüntüleri"
@@ -5199,80 +5795,91 @@
                 "attribution": {
                     "text": "© Geofabrik GmbH, OpenStreetMap destekçileri, CC-BY-SA"
                 },
-                "name": "OSM Müfettiş: Alan"
+                "name": "OSM Müfettişi: Alan"
             },
             "OSM_Inspector-Places": {
                 "attribution": {
                     "text": "© Geofabrik GmbH, OpenStreetMap destekçileri, CC-BY-SA"
-                }
+                },
+                "name": "OSM Müfettişi: Yerler"
             },
             "OSM_Inspector-Routing": {
                 "attribution": {
                     "text": "© Geofabrik GmbH, OpenStreetMap destekçileri, CC-BY-SA"
-                }
+                },
+                "name": "OSM Müfettişi: Rota"
             },
             "OSM_Inspector-Tagging": {
                 "attribution": {
                     "text": "© Geofabrik GmbH, OpenStreetMap destekçileri, CC-BY-SA"
-                }
+                },
+                "name": "OSM Müfettişi: Etiketleme"
+            },
+            "US-TIGER-Roads-2012": {
+                "name": "TIGER Roads 2012"
+            },
+            "US-TIGER-Roads-2014": {
+                "description": "16'dan büyük ölçekte, US Census verileri. Daha küçük ölçeklerde, 2006'dan bu yana yapılmış güncellemeler - OpenStreetMap güncellemeleri hariç",
+                "name": "TIGER Roads 2014"
+            },
+            "US-TIGER-Roads-2017": {
+                "description": "Sarı = US Census harita verileri. Kırmızı = OpenStreetMap'te yer almayan veriler.",
+                "name": "TIGER Roads 2017"
             },
             "Waymarked_Trails-Cycling": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, harita verileri OpenStreetMap destekçileri, ODbL 1.0"
-                }
+                "name": "Waymarked Trails: Bisiklet"
             },
             "Waymarked_Trails-Hiking": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, harita verileri OpenStreetMap destekçileri, ODbL 1.0"
-                }
+                "name": "Waymarked Trails: Yürüyüş"
             },
             "Waymarked_Trails-MTB": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, harita verileri OpenStreetMap destekçileri, ODbL 1.0"
-                }
+                "name": "Waymarked Trails: Dağ Bisikleti"
             },
             "Waymarked_Trails-Skating": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, harita verileri OpenStreetMap destekçileri, ODbL 1.0"
-                }
+                "name": "Waymarked Trails: Kaykay"
             },
             "Waymarked_Trails-Winter_Sports": {
-                "attribution": {
-                    "text": "© Michael Spreng, CC by-SA 3.0, harita verileri OpenStreetMap destekçileri, ODbL 1.0"
-                }
+                "name": "Waymarked Trails: Kış Sporları"
             },
             "basemap.at": {
                 "attribution": {
                     "text": "basemap.at"
                 },
+                "description": "Hükümet verilerinden oluşturulmuş Avusturya haritası",
                 "name": "basemap.at"
             },
             "basemap.at-orthofoto": {
                 "attribution": {
                     "text": "basemap.at"
                 },
+                "description": "basemap.at - daha önce geoimage.at - tarafından sağlanan Orthofoto katmanı.",
                 "name": "basemap.at Orthofoto"
             },
             "hike_n_bike": {
                 "attribution": {
                     "text": "© OpenStreetMap destekçileri"
-                }
+                },
+                "name": "Yürüyüş & Bisiklet"
             },
             "mapbox_locator_overlay": {
                 "attribution": {
                     "text": "Şartlar & Geri Bildirim"
                 },
+                "description": "Sadece önemli özellikler gösteriliyor.",
                 "name": "Yer Belirleyici Yerleşimi"
             },
             "openpt_map": {
                 "attribution": {
                     "text": "© OpenStreetMap katkıda bulunan kullanıcılar, CC-BY-SA"
-                }
+                },
+                "name": "OpenPT Map (katman)"
             },
             "osm-gps": {
                 "attribution": {
                     "text": "© OpenStreetMap destekçileri"
-                }
+                },
+                "description": "OpenStreetMap'e yüklenmiş GPS rotaları",
+                "name": "OpenStreetMap GPS rotaları"
             },
             "osm-mapnik-black_and_white": {
                 "attribution": {
@@ -5283,7 +5890,38 @@
             "osm-mapnik-german_style": {
                 "attribution": {
                     "text": "© OpenStreetMap destekçileri, CC-BY-SA"
-                }
+                },
+                "name": "OpenStreetMap (Alman Stil)"
+            },
+            "qa_no_address": {
+                "attribution": {
+                    "text": "Simon Poole, Veriler © OpenStreetMap destekçileri"
+                },
+                "name": "Adres Yok"
+            },
+            "skobbler": {
+                "attribution": {
+                    "text": "Harita © skobbler, Veriler © OpenStreetMap destekçileri"
+                },
+                "name": "skobbler"
+            },
+            "stamen-terrain-background": {
+                "attribution": {
+                    "text": "Harita Stamen Design, CC BY 3.0"
+                },
+                "name": "Stamen Arazi"
+            },
+            "tf-cycle": {
+                "attribution": {
+                    "text": "Harita © Thunderforest, Veriler © OpenStreetMap destekçileri"
+                },
+                "name": "Thunderforest OpenCycleMap"
+            },
+            "tf-landscape": {
+                "attribution": {
+                    "text": "Harita © Thunderforest, Veriler © OpenStreetMap destekçileri"
+                },
+                "name": "Thunderforest Arazi"
             }
         }
     }

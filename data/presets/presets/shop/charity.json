@@ -5,8 +5,9 @@
         "operator",
         "address",
         "building_area",
+        "second_hand",
         "opening_hours",
-        "second_hand"
+        "payment_multi"
     ],
     "geometry": [
         "point",

@@ -1,26 +1,27 @@
 describe('iD.svgLines', function () {
-    var context, surface,
-        projection = d3.geoProjection(function(x, y) { return [x, -y]; })
-            .translate([0, 0])
-            .scale(180 / Math.PI)
-            .clipExtent([[0, 0], [Infinity, Infinity]]),
-        all = function() { return true; },
-        none = function() { return false; };
+    var context, surface;
+    var all = function() { return true; };
+    var none = function() { return false; };
+    var projection = d3.geoProjection(function(x, y) { return [x, -y]; })
+        .translate([0, 0])
+        .scale(iD.geoZoomToScale(17))
+        .clipExtent([[0, 0], [Infinity, Infinity]]);
+
 
     beforeEach(function () {
-        context = iD.Context();
+        context = iD.coreContext();
         d3.select(document.createElement('div'))
             .attr('id', 'map')
-            .call(context.map());
+            .call(context.map().centerZoom([0, 0], 17));
         surface = context.surface();
     });
 
 
     it('adds way and line classes', function () {
-        var a = iD.Node({loc: [0, 0]}),
-            b = iD.Node({loc: [1, 1]}),
-            line = iD.Way({nodes: [a.id, b.id]}),
-            graph = iD.Graph([a, b, line]);
+        var a = iD.osmNode({loc: [0, 0]});
+        var b = iD.osmNode({loc: [1, 1]});
+        var line = iD.osmWay({nodes: [a.id, b.id]});
+        var graph = iD.coreGraph([a, b, line]);
 
         surface.call(iD.svgLines(projection, context), graph, [line], all);
 
@@ -29,10 +30,10 @@ describe('iD.svgLines', function () {
     });
 
     it('adds tag classes', function () {
-        var a = iD.Node({loc: [0, 0]}),
-            b = iD.Node({loc: [1, 1]}),
-            line = iD.Way({nodes: [a.id, b.id], tags: {highway: 'residential'}}),
-            graph = iD.Graph([a, b, line]);
+        var a = iD.osmNode({loc: [0, 0]});
+        var b = iD.osmNode({loc: [1, 1]});
+        var line = iD.osmWay({nodes: [a.id, b.id], tags: {highway: 'residential'}});
+        var graph = iD.coreGraph([a, b, line]);
 
         surface.call(iD.svgLines(projection, context), graph, [line], all);
 
@@ -41,11 +42,11 @@ describe('iD.svgLines', function () {
     });
 
     it('adds stroke classes for the tags of the parent relation of multipolygon members', function() {
-        var a = iD.Node({loc: [0, 0]}),
-            b = iD.Node({loc: [1, 1]}),
-            line = iD.Way({nodes: [a.id, b.id]}),
-            relation = iD.Relation({members: [{id: line.id}], tags: {type: 'multipolygon', natural: 'wood'}}),
-            graph = iD.Graph([a, b, line, relation]);
+        var a = iD.osmNode({loc: [0, 0]});
+        var b = iD.osmNode({loc: [1, 1]});
+        var line = iD.osmWay({nodes: [a.id, b.id]});
+        var relation = iD.osmRelation({members: [{id: line.id}], tags: {type: 'multipolygon', natural: 'wood'}});
+        var graph = iD.coreGraph([a, b, line, relation]);
 
         surface.call(iD.svgLines(projection, context), graph, [line], all);
 
@@ -53,12 +54,12 @@ describe('iD.svgLines', function () {
     });
 
     it('renders stroke for outer way of multipolygon with tags on the outer way', function() {
-        var a = iD.Node({loc: [1, 1]}),
-            b = iD.Node({loc: [2, 2]}),
-            c = iD.Node({loc: [3, 3]}),
-            w = iD.Way({id: 'w-1', tags: {natural: 'wood'}, nodes: [a.id, b.id, c.id, a.id]}),
-            r = iD.Relation({members: [{id: w.id}], tags: {type: 'multipolygon'}}),
-            graph = iD.Graph([a, b, c, w, r]);
+        var a = iD.osmNode({loc: [1, 1]});
+        var b = iD.osmNode({loc: [2, 2]});
+        var c = iD.osmNode({loc: [3, 3]});
+        var w = iD.osmWay({id: 'w-1', tags: {natural: 'wood'}, nodes: [a.id, b.id, c.id, a.id]});
+        var r = iD.osmRelation({members: [{id: w.id}], tags: {type: 'multipolygon'}});
+        var graph = iD.coreGraph([a, b, c, w, r]);
 
         surface.call(iD.svgLines(projection, context), graph, [w], all);
 
@@ -67,13 +68,13 @@ describe('iD.svgLines', function () {
     });
 
     it('adds stroke classes for the tags of the outer way of multipolygon with tags on the outer way', function() {
-        var a = iD.Node({loc: [1, 1]}),
-            b = iD.Node({loc: [2, 2]}),
-            c = iD.Node({loc: [3, 3]}),
-            o = iD.Way({id: 'w-1', nodes: [a.id, b.id, c.id, a.id], tags: {natural: 'wood'}}),
-            i = iD.Way({id: 'w-2', nodes: [a.id, b.id, c.id, a.id]}),
-            r = iD.Relation({members: [{id: o.id, role: 'outer'}, {id: i.id, role: 'inner'}], tags: {type: 'multipolygon'}}),
-            graph = iD.Graph([a, b, c, o, i, r]);
+        var a = iD.osmNode({loc: [1, 1]});
+        var b = iD.osmNode({loc: [2, 2]});
+        var c = iD.osmNode({loc: [3, 3]});
+        var o = iD.osmWay({id: 'w-1', nodes: [a.id, b.id, c.id, a.id], tags: {natural: 'wood'}});
+        var i = iD.osmWay({id: 'w-2', nodes: [a.id, b.id, c.id, a.id]});
+        var r = iD.osmRelation({members: [{id: o.id, role: 'outer'}, {id: i.id, role: 'inner'}], tags: {type: 'multipolygon'}});
+        var graph = iD.coreGraph([a, b, c, o, i, r]);
 
         surface.call(iD.svgLines(projection, context), graph, [i, o], all);
 
@@ -84,14 +85,14 @@ describe('iD.svgLines', function () {
     });
 
     describe('z-indexing', function() {
-        var graph = iD.Graph([
-                iD.Node({id: 'a', loc: [0, 0]}),
-                iD.Node({id: 'b', loc: [1, 1]}),
-                iD.Node({id: 'c', loc: [0, 0]}),
-                iD.Node({id: 'd', loc: [1, 1]}),
-                iD.Way({id: 'lo', tags: {highway: 'residential', tunnel: 'yes'}, nodes: ['a', 'b']}),
-                iD.Way({id: 'hi', tags: {highway: 'residential', bridge: 'yes'}, nodes: ['c', 'd']})
-            ]);
+        var graph = iD.coreGraph([
+            iD.osmNode({id: 'a', loc: [0, 0]}),
+            iD.osmNode({id: 'b', loc: [1, 1]}),
+            iD.osmNode({id: 'c', loc: [0, 0]}),
+            iD.osmNode({id: 'd', loc: [1, 1]}),
+            iD.osmWay({id: 'lo', tags: {highway: 'residential', layer: '0'}, nodes: ['a', 'b']}),
+            iD.osmWay({id: 'hi', tags: {highway: 'residential', layer: '1'}, nodes: ['c', 'd']})
+        ]);
 
         it('stacks higher lines above lower ones in a single render', function () {
             surface.call(iD.svgLines(projection, context), graph, [graph.entity('lo'), graph.entity('hi')], none);

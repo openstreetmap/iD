@@ -4,6 +4,9 @@
         "point",
         "vertex"
     ],
+    "fields": [
+        "direction"
+    ],
     "tags": {
         "tourism": "viewpoint"
     },

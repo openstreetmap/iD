@@ -200,6 +200,7 @@
             "localized_translation_language": "Veldu tungumál",
             "localized_translation_name": "Nafn"
         },
+        "login": "innskrá",
         "logout": "útskrá",
         "loading_auth": "Tengist við OpenStreetMap...",
         "status": {
@@ -259,7 +260,6 @@
         "background": {
             "title": "Bakgrunnur",
             "description": "Bakgrunnsstillingar",
-            "percent_brightness": "{opacity}% birta",
             "none": "Ekkert",
             "reset": "endurstilla"
         },
@@ -344,8 +344,7 @@
             "view_on_mapillary": "Skoða þessa mynd á Mapillary"
         },
         "help": {
-            "title": "Hjálp",
-            "addresses": "# Heimilisföng\n\nHeimilisföng eru einhverjar nytsömustu upplýsingarnar sem hægt er að setja á kort.\n\nÞó að heimilisföng tilheyri yfirleitt götum, þá tilheyra þau húsunum sjálfum í\nOpenStreetMap, merkt inn á byggingar og staði meðfram götum.\n\nÞú getur bætt heimimlisföngum við bæði byggingar sem eru merktar inn sem svæði\nsem og byggingar sem eru merktar inn sem punktar. Best er að heimilisföngin\nséu sett inn af þeim sem þekkja staðhætti vel - eins og með annað þá er ekki\nleyfilegt að afrita heimilisföng af öðrum vefjum, til að mynda er bannað að\nafrita af Google Maps.\n"
+            "title": "Hjálp"
         },
         "intro": {
             "graph": {
@@ -485,19 +484,6 @@
                 "capacity": {
                     "label": "Áhorfendafjöldi/Rýmd",
                     "placeholder": "50, 100, 200..."
-                },
-                "cardinal_direction": {
-                    "label": "Átt",
-                    "options": {
-                        "NW": "Norðvestur"
-                    }
-                },
-                "clock_direction": {
-                    "label": "Átt",
-                    "options": {
-                        "anticlockwise": "Rangsælis",
-                        "clockwise": "Réttsælis"
-                    }
                 },
                 "collection_times": {
                     "label": "Losunartímar"
@@ -1132,9 +1118,6 @@
                 "highway/bridleway": {
                     "name": "Reiðleið"
                 },
-                "highway/bus_stop": {
-                    "name": "Stoppistöð"
-                },
                 "highway/cycleway": {
                     "name": "Hjólastígur"
                 },
@@ -1511,14 +1494,8 @@
                 "railway/monorail": {
                     "name": "Monorail"
                 },
-                "railway/platform": {
-                    "name": "Lestarpallur"
-                },
                 "railway/rail": {
                     "name": "Lestarteinar"
-                },
-                "railway/station": {
-                    "name": "Lestarstöð"
                 },
                 "railway/subway": {
                     "name": "Neðanjarðarlest"

@@ -5,9 +5,10 @@
         "operator",
         "address",
         "building_area",
-        "opening_hours",
         "second_hand",
-        "service/vehicle"
+        "service/vehicle",
+        "opening_hours",
+        "payment_multi"
     ],
     "geometry": [
         "point",

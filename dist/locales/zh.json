@@ -209,7 +209,6 @@
         "background": {
             "title": "背景",
             "description": "设置背景",
-            "percent_brightness": "{opacity}% 亮度",
             "reset": "重置"
         },
         "restore": {
@@ -355,16 +354,6 @@
                 "capacity": {
                     "label": "容量",
                     "placeholder": "50, 100, 200..."
-                },
-                "cardinal_direction": {
-                    "label": "方向"
-                },
-                "clock_direction": {
-                    "label": "方向",
-                    "options": {
-                        "anticlockwise": "逆时针",
-                        "clockwise": "顺时针"
-                    }
                 },
                 "collection_times": {
                     "label": "收集时间"
@@ -765,9 +754,6 @@
                 "highway/bridleway": {
                     "name": "马道"
                 },
-                "highway/bus_stop": {
-                    "name": "公交车站"
-                },
                 "highway/cycleway": {
                     "name": "自行车道"
                 },
@@ -1101,14 +1087,8 @@
                 "railway/monorail": {
                     "name": "单轨铁路"
                 },
-                "railway/platform": {
-                    "name": "站台"
-                },
                 "railway/rail": {
                     "name": "铁轨"
-                },
-                "railway/station": {
-                    "name": "火车站"
                 },
                 "railway/subway": {
                     "name": "地铁"

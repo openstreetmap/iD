@@ -16,17 +16,19 @@ export { uiFieldCheck as uiFieldOnewayCheck };
 
 
 export function uiFieldCheck(field, context) {
-    var dispatch = d3_dispatch('change'),
-        options = field.strings && field.strings.options,
-        values = [],
-        texts = [],
-        input = d3_select(null),
-        text = d3_select(null),
-        label = d3_select(null),
-        reverser = d3_select(null),
-        impliedYes,
-        entityId,
-        value;
+    var dispatch = d3_dispatch('change');
+    var options = field.strings && field.strings.options;
+    var values = [];
+    var texts = [];
+
+    var input = d3_select(null);
+    var text = d3_select(null);
+    var label = d3_select(null);
+    var reverser = d3_select(null);
+
+    var _impliedYes;
+    var _entityID;
+    var _value;
 
 
     if (options) {
@@ -46,15 +48,15 @@ export function uiFieldCheck(field, context) {
 
     // Checks tags to see whether an undefined value is "Assumed to be Yes"
     function checkImpliedYes() {
-        impliedYes = (field.id === 'oneway_yes');
+        _impliedYes = (field.id === 'oneway_yes');
 
         // hack: pretend `oneway` field is a `oneway_yes` field
         // where implied oneway tag exists (e.g. `junction=roundabout`) #2220, #1841
         if (field.id === 'oneway') {
-            var entity = context.entity(entityId);
+            var entity = context.entity(_entityID);
             for (var key in entity.tags) {
                 if (key in osmOneWayTags && (entity.tags[key] in osmOneWayTags[key])) {
-                    impliedYes = true;
+                    _impliedYes = true;
                     texts[0] = t('presets.fields.oneway_yes.options.undefined');
                     break;
                 }
@@ -65,18 +67,18 @@ export function uiFieldCheck(field, context) {
 
     function reverserHidden() {
         if (!d3_select('div.inspector-hover').empty()) return true;
-        return !(value === 'yes' || (impliedYes && !value));
+        return !(_value === 'yes' || (_impliedYes && !_value));
     }
 
 
     function reverserSetText(selection) {
-        var entity = context.hasEntity(entityId);
+        var entity = context.hasEntity(_entityID);
         if (reverserHidden() || !entity) return selection;
 
-        var first = entity.first(),
-            last = entity.isClosed() ? entity.nodes[entity.nodes.length - 2] : entity.last(),
-            pseudoDirection = first < last,
-            icon = pseudoDirection ? '#icon-forward' : '#icon-backward';
+        var first = entity.first();
+        var last = entity.isClosed() ? entity.nodes[entity.nodes.length - 2] : entity.last();
+        var pseudoDirection = first < last;
+        var icon = pseudoDirection ? '#icon-forward' : '#icon-backward';
 
         selection.selectAll('.reverser-span')
             .text(t('inspector.check.reverser'))
@@ -125,7 +127,7 @@ export function uiFieldCheck(field, context) {
         input
             .on('click', function() {
                 var t = {};
-                t[field.key] = values[(values.indexOf(value) + 1) % values.length];
+                t[field.key] = values[(values.indexOf(_value) + 1) % values.length];
                 dispatch.call('change', this, t);
                 d3_event.stopPropagation();
             });
@@ -139,7 +141,7 @@ export function uiFieldCheck(field, context) {
                     d3_event.preventDefault();
                     d3_event.stopPropagation();
                     context.perform(
-                        actionReverse(entityId),
+                        actionReverse(_entityID),
                         t('operations.reverse.annotation')
                     );
                     d3_select(this)
@@ -150,29 +152,40 @@ export function uiFieldCheck(field, context) {
 
 
     check.entity = function(_) {
-        if (!arguments.length) return context.hasEntity(entityId);
-        entityId = _.id;
+        if (!arguments.length) return context.hasEntity(_entityID);
+        _entityID = _.id;
         return check;
     };
 
 
     check.tags = function(tags) {
-        checkImpliedYes();
-        value = tags[field.key] && tags[field.key].toLowerCase();
 
-        if (field.type === 'onewayCheck' && (value === '1' || value === '-1')) {
-            value = 'yes';
+        function isChecked(val) {
+            return val !== 'no' && val !== '' && val !== undefined && val !== null;
+        }
+
+        function textFor(val) {
+            if (val === '') val = undefined;
+            var index = values.indexOf(val);
+            return (index !== -1 ? texts[index] : ('"' + val + '"'));
+        }
+
+        checkImpliedYes();
+        _value = tags[field.key] && tags[field.key].toLowerCase();
+
+        if (field.type === 'onewayCheck' && (_value === '1' || _value === '-1')) {
+            _value = 'yes';
         }
 
         input
-            .property('indeterminate', field.type !== 'defaultCheck' && !value)
-            .property('checked', value === 'yes');
+            .property('indeterminate', field.type !== 'defaultCheck' && !_value)
+            .property('checked', isChecked(_value));
 
         text
-            .text(texts[values.indexOf(value)]);
+            .text(textFor(_value));
 
         label
-            .classed('set', !!value);
+            .classed('set', !!_value);
 
         if (field.type === 'onewayCheck') {
             reverser

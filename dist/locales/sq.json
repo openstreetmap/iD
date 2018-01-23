@@ -270,13 +270,11 @@
         "background": {
             "title": "Sfond",
             "description": "Parametrat e sfondit",
-            "percent_brightness": "{opacity}% duksmëri",
             "none": "Asnjë",
             "custom": "E personalizuar",
             "custom_button": "Redakto sfondin të personalizuar",
             "reset": "Rikthe vlerat",
             "minimap": {
-                "description": "Minihartë",
                 "tooltip": "Shfaq një hartë të zvogluar për të treguar vendosjen e zonës të dukshme."
             }
         },
@@ -344,34 +342,6 @@
                 "capacity": {
                     "label": "Kapaciteti",
                     "placeholder": "50, 100, 200..."
-                },
-                "cardinal_direction": {
-                    "label": "Drejtimi",
-                    "options": {
-                        "E": "Lindje",
-                        "ENE": "Lindje-verilindje",
-                        "ESE": "Lindje-juglindje",
-                        "N": "Veri",
-                        "NE": "Verilindje",
-                        "NNE": "Veri-verilindje",
-                        "NNW": "Veri-veriperëndim",
-                        "NW": "Variperëndim",
-                        "S": "Jug",
-                        "SE": "Juglindje",
-                        "SSE": "Jug-juglindje",
-                        "SSW": "Jug-jugperëndim",
-                        "SW": "Jugperëndim",
-                        "W": "Perëndim",
-                        "WNW": "Perëndim-veriperëndim",
-                        "WSW": "Perëndim-jugperëndim"
-                    }
-                },
-                "clock_direction": {
-                    "label": "Drejtimi",
-                    "options": {
-                        "anticlockwise": "Rotullimi antiorar",
-                        "clockwise": "Rotullimi orar"
-                    }
                 },
                 "country": {
                     "label": "Vendi"

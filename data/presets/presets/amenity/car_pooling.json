@@ -1,0 +1,16 @@
+{
+    "icon": "car",
+    "fields": [
+        "name",
+        "operator",
+        "capacity"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "car_pooling"
+    },
+    "name": "Car Pooling"
+}

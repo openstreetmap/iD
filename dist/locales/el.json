@@ -301,8 +301,7 @@
             "created": "Δημιουργήθηκε",
             "about_changeset_comments": "Σχετικά με τα σχόλια αλλαγών",
             "about_changeset_comments_link": "//wiki.openstreetmap.org/wiki/El:Good_changeset_comments",
-            "google_warning": "Αναφέρατε την Google σε αυτό το σχόλιο: θυμηθείτε πως η αντιγραφή από τους Χάρτες Google απαγορεύεται αυστηρά.",
-            "google_warning_link": "http://www.openstreetmap.org/copyright/el"
+            "google_warning": "Αναφέρατε την Google σε αυτό το σχόλιο: θυμηθείτε πως η αντιγραφή από τους Χάρτες Google απαγορεύεται αυστηρά."
         },
         "contributors": {
             "list": "Επεξεργασίες από {users}",
@@ -390,21 +389,18 @@
         "background": {
             "title": "Παρασκήνιο",
             "description": "Ρυθμίσεις παρασκηνίου",
-            "percent_brightness": "{opacity}% φωτεινότητα",
             "none": "Κανένα",
             "best_imagery": "Η καλύτερη γνωστή πηγή εικόνας για αυτήν την τοποθεσία",
             "switch": "Επέστρεψε σε αυτό το παρασκήνιο",
             "custom": "Εξατομικευμένο",
             "custom_button": "Επεξεργασία εξατομικευμένου παρασκηνίου",
-            "fix_misalignment": "Προσαρμόστε την απόκλιση της εικόνας",
-            "imagery_source_faq": "Από πού προέρχεται αυτή η εικόνα;",
             "reset": "Μηδενισμός",
-            "offset": "Σύρετε οπουδήποτε στην γκρίζα περιοχή παρακάτω για να προσαρμόσετε την απόκλιση της εικόνας ή εισαγάγετε τις τιμές της απόκλισης σε μέτρα.",
             "minimap": {
-                "description": "Μικροχάρτης",
                 "tooltip": "Προβολή ενός χάρτη σε σμίκρυνση, για να σας βοηθήσει να εντοπίσετε την περιοχή που εμφανίζεται αυτή τη στιγμή.",
                 "key": "/"
-            }
+            },
+            "fix_misalignment": "Προσαρμόστε την απόκλιση της εικόνας",
+            "offset": "Σύρετε οπουδήποτε στην γκρίζα περιοχή παρακάτω για να προσαρμόσετε την απόκλιση της εικόνας ή εισαγάγετε τις τιμές της απόκλισης σε μέτρα."
         },
         "map_data": {
             "title": "Δεδομένα Χάρτη",
@@ -864,36 +860,8 @@
                     "label": "Χωρητικότητα",
                     "placeholder": "50, 100, 200..."
                 },
-                "cardinal_direction": {
-                    "label": "Κατεύθυνση",
-                    "options": {
-                        "E": "Ανατολικά",
-                        "ENE": "Ανατολικά-βορειοανατολικά",
-                        "ESE": "Ανατολικά-νοτιοανατολικά",
-                        "N": "Βόρεια",
-                        "NE": "Βορειοανατολικά",
-                        "NNE": "Βόρεια-βορειοανατολικά",
-                        "NNW": "Βόρεια-βορειοδυτικά",
-                        "NW": "Βορειοδυτικά",
-                        "S": "Νότια",
-                        "SE": "Νοτιοανατολικά",
-                        "SSE": "Νότια-νοτιοανατολικά",
-                        "SSW": "Νότια-νοτιοδυτικά",
-                        "SW": "Νοτιοδυτικά",
-                        "W": "Δυτικά",
-                        "WNW": "Δυτικά-βορειοδυτικά",
-                        "WSW": "Δυτικά-νοτιοδυτικά"
-                    }
-                },
                 "castle_type": {
                     "label": "Είδος"
-                },
-                "clock_direction": {
-                    "label": "Κατεύθυνση",
-                    "options": {
-                        "anticlockwise": "Αριστερόστροφα",
-                        "clockwise": "Δεξιόστροφα"
-                    }
                 },
                 "club": {
                     "label": "Είδος"
@@ -1321,9 +1289,6 @@
                 "par": {
                     "placeholder": "3, 4, 5..."
                 },
-                "parallel_direction": {
-                    "label": "Κατεύθυνση"
-                },
                 "park_ride": {
                     "label": "Σταθμός Μετεπιβίβασης"
                 },
@@ -1371,12 +1336,6 @@
                 },
                 "railway": {
                     "label": "Είδος"
-                },
-                "recycling_type": {
-                    "label": "Είδος Ανακύκλωσης",
-                    "options": {
-                        "centre": "Κέντρο Ανακύκλωσης"
-                    }
                 },
                 "ref_aeroway_gate": {
                     "label": "Αριθμός Πύλης"
@@ -1729,10 +1688,6 @@
                 "amenity/bureau_de_change": {
                     "name": "Ανταλλακτήριο Συναλλάγματος"
                 },
-                "amenity/bus_station": {
-                    "name": "Σταθμός Λεωφορείων",
-                    "terms": "Σταθμός Λεωφορείων"
-                },
                 "amenity/cafe": {
                     "name": "Καφετέρια",
                     "terms": "Καφετέρια, Καφενείο, Μπιστρό, Καφέ"
@@ -1808,9 +1763,6 @@
                 "amenity/fast_food": {
                     "name": "Ταχυφαγείο",
                     "terms": "Γρήγορο φαγητό, Πρόχειρο φαγητό, Φαστφουντάδικο"
-                },
-                "amenity/ferry_terminal": {
-                    "name": "Τερματικό Φέρυ Μποτ"
                 },
                 "amenity/fire_station": {
                     "name": "Πυροσβεστικός Σταθμός",
@@ -1923,9 +1875,6 @@
                 "amenity/public_bookcase": {
                     "name": "Δημόσια Ανταλλακτική Βιβλιοθήκη",
                     "terms": "Δημόσια βιβλιοθήκη"
-                },
-                "amenity/recycling": {
-                    "name": "Ανακύκλωση"
                 },
                 "amenity/recycling_centre": {
                     "name": "Κέντρο Ανακύκλωσης",
@@ -2368,10 +2317,6 @@
                     "name": "Μονοπάτι Αλόγων",
                     "terms": "Μονοπάτι για άλογα"
                 },
-                "highway/bus_stop": {
-                    "name": "Στάση Λεωφορείων",
-                    "terms": "Στάση Λεωφορείου"
-                },
                 "highway/crossing": {
                     "name": "Διάβαση"
                 },
@@ -2571,10 +2516,6 @@
                 "landuse/forest": {
                     "name": "Δάσος",
                     "terms": "Δάσος, δασική έκταση"
-                },
-                "landuse/garages": {
-                    "name": "Γκαράζ",
-                    "terms": "Γκαράζ"
                 },
                 "landuse/grass": {
                     "name": "Γρασίδι",
@@ -2967,12 +2908,7 @@
                     "terms": "Γραφείο"
                 },
                 "office/administrative": {
-                    "name": "Διοικητικό γραφείο",
-                    "terms": "Γραφείο διοίκησης"
-                },
-                "office/company": {
-                    "name": "Εταιρικό Γραφείο",
-                    "terms": "Γραφείο Εταιρείας"
+                    "name": "Διοικητικό γραφείο"
                 },
                 "office/educational_institution": {
                     "name": "Εκπαιδευτικό Ίδρυμα"
@@ -3092,9 +3028,6 @@
                     "name": "Μετασχηματιστής",
                     "terms": "Μετασχηματιστής"
                 },
-                "public_transport/stop_position": {
-                    "name": "Σημείο Στάσης"
-                },
                 "railway": {
                     "name": "Σιδηροδρομικός Διάδρομος"
                 },
@@ -3108,17 +3041,9 @@
                 "railway/narrow_gauge": {
                     "name": "Σιδηροτροχιά Στενού Εύρους"
                 },
-                "railway/platform": {
-                    "name": "Σιδηροδρομική Αποβάθρα",
-                    "terms": "Σιδηροδρομική αποβάθρα"
-                },
                 "railway/rail": {
                     "name": "Σιδηροδρομική Γραμμή",
                     "terms": "Σιδηροτροχιά, Ράγα"
-                },
-                "railway/station": {
-                    "name": "Σιδηροδρομικός Σταθμός",
-                    "terms": "Σιδηροδρομικός σταθμός"
                 },
                 "railway/subway": {
                     "name": "Μετρό",
@@ -3319,9 +3244,6 @@
                 "shop/jewelry": {
                     "name": "Κοσμηματοπωλείο",
                     "terms": "Χρυσοχοείο, Κοσμηματοπώλης, Κοσμηματοπωλείο"
-                },
-                "shop/kiosk": {
-                    "name": "Περίπτερο"
                 },
                 "shop/laundry": {
                     "name": "Καθαριστήριο",
@@ -3707,31 +3629,6 @@
             "OSM_Inspector-Tagging": {
                 "attribution": {
                     "text": "© Geofabrik GmbH, OpenStreetMap contributors, CC-BY-SA"
-                }
-            },
-            "Waymarked_Trails-Cycling": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, δεδομένα χάρτη OpenStreetMap contributors, ODbL 1.0"
-                }
-            },
-            "Waymarked_Trails-Hiking": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, δεδομένα χάρτη OpenStreetMap contributors, ODbL 1.0"
-                }
-            },
-            "Waymarked_Trails-MTB": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, δεδομένα χάρτη OpenStreetMap contributors, ODbL 1.0"
-                }
-            },
-            "Waymarked_Trails-Skating": {
-                "attribution": {
-                    "text": "© Sarah Hoffmann, CC by-SA 3.0, δεδομένα χάρτη OpenStreetMap contributors, ODbL 1.0"
-                }
-            },
-            "Waymarked_Trails-Winter_Sports": {
-                "attribution": {
-                    "text": "© Michael Spreng, CC by-SA 3.0, δεδομένα χάρτη OpenStreetMap contributors, ODbL 1.0"
                 }
             },
             "basemap.at": {

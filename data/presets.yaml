@@ -295,53 +295,9 @@ en:
         label: Capacity
         # capacity field placeholder
         placeholder: '50, 100, 200...'
-      cardinal_direction:
-        # direction=*
-        label: Direction
-        options:
-          # direction=E
-          E: East
-          # direction=ENE
-          ENE: East-northeast
-          # direction=ESE
-          ESE: East-southeast
-          # direction=N
-          'N': North
-          # direction=NE
-          NE: Northeast
-          # direction=NNE
-          NNE: North-northeast
-          # direction=NNW
-          NNW: North-northwest
-          # direction=NW
-          NW: Northwest
-          # direction=S
-          S: South
-          # direction=SE
-          SE: Southeast
-          # direction=SSE
-          SSE: South-southeast
-          # direction=SSW
-          SSW: South-southwest
-          # direction=SW
-          SW: Southwest
-          # direction=W
-          W: West
-          # direction=WNW
-          WNW: West-northwest
-          # direction=WSW
-          WSW: West-southwest
       castle_type:
         # castle_type=*
         label: Type
-      clock_direction:
-        # direction=*
-        label: Direction
-        options:
-          # direction=anticlockwise
-          anticlockwise: Counterclockwise
-          # direction=clockwise
-          clockwise: Clockwise
       clothes:
         # clothes=*
         label: Clothes
@@ -469,6 +425,65 @@ en:
       diaper:
         # diaper=*
         label: Diaper Changing Available
+      direction:
+        # direction=*
+        label: Direction (Degrees Clockwise)
+        # direction field placeholder
+        placeholder: '45, 90, 180, 270'
+      direction_cardinal:
+        # direction=*
+        label: Direction
+        options:
+          # direction=E
+          E: East
+          # direction=ENE
+          ENE: East-northeast
+          # direction=ESE
+          ESE: East-southeast
+          # direction=N
+          'N': North
+          # direction=NE
+          NE: Northeast
+          # direction=NNE
+          NNE: North-northeast
+          # direction=NNW
+          NNW: North-northwest
+          # direction=NW
+          NW: Northwest
+          # direction=S
+          S: South
+          # direction=SE
+          SE: Southeast
+          # direction=SSE
+          SSE: South-southeast
+          # direction=SSW
+          SSW: South-southwest
+          # direction=SW
+          SW: Southwest
+          # direction=W
+          W: West
+          # direction=WNW
+          WNW: West-northwest
+          # direction=WSW
+          WSW: West-southwest
+      direction_clock:
+        # direction=*
+        label: Direction
+        options:
+          # direction=anticlockwise
+          anticlockwise: Counterclockwise
+          # direction=clockwise
+          clockwise: Clockwise
+      direction_vertex:
+        # direction=*
+        label: Direction
+        options:
+          # direction=backward
+          backward: Backward
+          # direction=both
+          both: Both / All
+          # direction=forward
+          forward: Forward
       display:
         # display=*
         label: Display
@@ -815,11 +830,6 @@ en:
       memorial:
         # memorial=*
         label: Type
-      milestone_position:
-        # 'railway:position=*'
-        label: Milestone Position
-        # milestone_position field placeholder
-        placeholder: Distance to one decimal (123.4)
       monitoring_multi:
         # 'monitoring:=*'
         label: Monitoring
@@ -943,8 +953,12 @@ en:
         # oneway=*
         label: One Way
         options:
+          # oneway=alternating
+          alternating: Alternating
           # oneway=no
           'no': 'No'
+          # oneway=reversible
+          reversible: Reversible
           # oneway=undefined
           undefined: Assumed to be No
           # oneway=yes
@@ -953,8 +967,12 @@ en:
         # oneway=*
         label: One Way
         options:
+          # oneway=alternating
+          alternating: Alternating
           # oneway=no
           'no': 'No'
+          # oneway=reversible
+          reversible: Reversible
           # oneway=undefined
           undefined: Assumed to be Yes
           # oneway=yes
@@ -973,14 +991,6 @@ en:
         label: Par
         # par field placeholder
         placeholder: '3, 4, 5...'
-      parallel_direction:
-        # direction=*
-        label: Direction
-        options:
-          # direction=backward
-          backward: Backward
-          # direction=forward
-          forward: Forward
       park_ride:
         # park_ride=*
         label: Park and Ride
@@ -1111,6 +1121,21 @@ en:
       railway:
         # railway=*
         label: Type
+      railway/position:
+        # 'railway:position=*'
+        label: Milestone Position
+        # railway/position field placeholder
+        placeholder: Distance to one decimal (123.4)
+      railway/signal/direction:
+        # 'railway:signal:direction=*'
+        label: Direction
+        options:
+          # 'railway:signal:direction=backward'
+          backward: Backward
+          # 'railway:signal:direction=both'
+          both: Both / All
+          # 'railway:signal:direction=forward'
+          forward: Forward
       rating:
         # rating=*
         label: Power Rating
@@ -1120,6 +1145,9 @@ en:
       ref:
         # ref=*
         label: Reference Code
+      ref/isil:
+        # 'ref:isil=*'
+        label: ISIL Code
       ref_aeroway_gate:
         # ref=*
         label: Gate Number
@@ -1465,6 +1493,16 @@ en:
       traffic_signals:
         # traffic_signals=*
         label: Type
+      traffic_signals/direction:
+        # 'traffic_signals:direction=*'
+        label: Direction
+        options:
+          # 'traffic_signals:direction=backward'
+          backward: Backward
+          # 'traffic_signals:direction=both'
+          both: Both / All
+          # 'traffic_signals:direction=forward'
+          forward: Forward
       trail_visibility:
         # trail_visibility=*
         label: Trail Visibility
@@ -1717,7 +1755,7 @@ en:
       amenity/animal_boarding:
         # amenity=animal_boarding
         name: Animal Boarding Facility
-        # 'terms: boarding,cat,dog,horse,kitten,pet boarding,pet care,pet hotel,puppy,reptile'
+        # 'terms: boarding,cat,cattery,dog,horse,kennel,kitten,pet,pet boarding,pet care,pet hotel,puppy,reptile'
         terms: '<translate with synonyms or related terms for ''Animal Boarding Facility'', separated by commas>'
       amenity/animal_breeding:
         # amenity=animal_breeding
@@ -1795,6 +1833,10 @@ en:
         name: Cafe
         # 'terms: bistro,coffee,tea'
         terms: '<translate with synonyms or related terms for ''Cafe'', separated by commas>'
+      amenity/car_pooling:
+        # amenity=car_pooling
+        name: Car Pooling
+        terms: '<translate with synonyms or related terms for ''Car Pooling'', separated by commas>'
       amenity/car_rental:
         # amenity=car_rental
         name: Car Rental
@@ -1964,6 +2006,10 @@ en:
         name: Library
         # 'terms: book'
         terms: '<translate with synonyms or related terms for ''Library'', separated by commas>'
+      amenity/love_hotel:
+        # amenity=love_hotel
+        name: Love Hotel
+        terms: '<translate with synonyms or related terms for ''Love Hotel'', separated by commas>'
       amenity/marketplace:
         # amenity=marketplace
         name: Marketplace
@@ -2024,7 +2070,7 @@ en:
       amenity/place_of_worship/hindu:
         # 'amenity=place_of_worship, religion=hindu'
         name: Hindu Temple
-        # 'terms: garbhargriha,mandu,puja,shrine,temple'
+        # 'terms: kovil,devasthana,mandir,kshetram,alayam,shrine,temple'
         terms: '<translate with synonyms or related terms for ''Hindu Temple'', separated by commas>'
       amenity/place_of_worship/jewish:
         # 'amenity=place_of_worship, religion=jewish'
@@ -2137,6 +2183,10 @@ en:
         name: Shower
         # 'terms: rain closet'
         terms: '<translate with synonyms or related terms for ''Shower'', separated by commas>'
+      amenity/smoking_area:
+        # amenity=smoking_area
+        name: Smoking Area
+        terms: '<translate with synonyms or related terms for ''Smoking Area'', separated by commas>'
       amenity/social_facility:
         # amenity=social_facility
         name: Social Facility
@@ -2408,6 +2458,10 @@ en:
         # barrier=hedge
         name: Hedge
         terms: '<translate with synonyms or related terms for ''Hedge'', separated by commas>'
+      barrier/kerb:
+        # barrier=kerb
+        name: Kerb
+        terms: '<translate with synonyms or related terms for ''Kerb'', separated by commas>'
       barrier/kissing_gate:
         # barrier=kissing_gate
         name: Kissing Gate
@@ -2448,6 +2502,15 @@ en:
         # building=barn
         name: Barn
         terms: '<translate with synonyms or related terms for ''Barn'', separated by commas>'
+      building/boathouse:
+        # building=boathouse
+        name: Boathouse
+        terms: '<translate with synonyms or related terms for ''Boathouse'', separated by commas>'
+      building/bungalow:
+        # building=bungalow
+        name: Bungalow
+        # 'terms: home,detached'
+        terms: '<translate with synonyms or related terms for ''Bungalow'', separated by commas>'
       building/bunker:
         # building=bunker
         name: Bunker
@@ -2467,6 +2530,10 @@ en:
         # building=church
         name: Church Building
         terms: '<translate with synonyms or related terms for ''Church Building'', separated by commas>'
+      building/civic:
+        # building=civic
+        name: Civic Building
+        terms: '<translate with synonyms or related terms for ''Civic Building'', separated by commas>'
       building/college:
         # building=college
         name: College Building
@@ -2492,6 +2559,10 @@ en:
       building/entrance:
         # building=entrance
         name: Entrance/Exit
+      building/farm:
+        # building=farm
+        name: Farm Building
+        terms: '<translate with synonyms or related terms for ''Farm Building'', separated by commas>'
       building/garage:
         # building=garage
         name: Garage
@@ -2550,6 +2621,10 @@ en:
         # building=roof
         name: Roof
         terms: '<translate with synonyms or related terms for ''Roof'', separated by commas>'
+      building/ruins:
+        # building=ruins
+        name: Building Ruins
+        terms: '<translate with synonyms or related terms for ''Building Ruins'', separated by commas>'
       building/school:
         # building=school
         name: School Building
@@ -2560,6 +2635,10 @@ en:
         name: Semi-Detached House
         # 'terms: home,double,duplex,twin,family,residence,dwelling'
         terms: '<translate with synonyms or related terms for ''Semi-Detached House'', separated by commas>'
+      building/service:
+        # building=service
+        name: Service Building
+        terms: '<translate with synonyms or related terms for ''Service Building'', separated by commas>'
       building/shed:
         # building=shed
         name: Shed
@@ -2568,10 +2647,18 @@ en:
         # building=stable
         name: Stable
         terms: '<translate with synonyms or related terms for ''Stable'', separated by commas>'
+      building/stadium:
+        # building=stadium
+        name: Stadium Building
+        terms: '<translate with synonyms or related terms for ''Stadium Building'', separated by commas>'
       building/static_caravan:
         # building=static_caravan
         name: Static Mobile Home
         terms: '<translate with synonyms or related terms for ''Static Mobile Home'', separated by commas>'
+      building/temple:
+        # building=temple
+        name: Temple Building
+        terms: '<translate with synonyms or related terms for ''Temple Building'', separated by commas>'
       building/terrace:
         # building=terrace
         name: Row Houses
@@ -2580,6 +2667,10 @@ en:
       building/train_station:
         # building=train_station
         name: Train Station
+      building/transportation:
+        # building=transportation
+        name: Transportation Building
+        terms: '<translate with synonyms or related terms for ''Transportation Building'', separated by commas>'
       building/university:
         # building=university
         name: University Building
@@ -2594,6 +2685,9 @@ en:
         name: Camp Pitch
         # 'terms: tent,rv'
         terms: '<translate with synonyms or related terms for ''Camp Pitch'', separated by commas>'
+      circular:
+        # junction=circular
+        name: Traffic Circle
       club:
         # club=*
         name: Club
@@ -2851,6 +2945,11 @@ en:
       emergency/private:
         # emergency=private
         name: Emergency Access Private
+      emergency/water_tank:
+        # emergency=water_tank
+        name: Emergency Water Tank
+        # 'terms: water tank,cistern,reservoir'
+        terms: '<translate with synonyms or related terms for ''Emergency Water Tank'', separated by commas>'
       emergency/yes:
         # emergency=yes
         name: Emergency Access Yes
@@ -3010,6 +3109,10 @@ en:
         name: Bridle Path
         # 'terms: bridleway,equestrian,horse'
         terms: '<translate with synonyms or related terms for ''Bridle Path'', separated by commas>'
+      highway/bus_guideway:
+        # highway=bus_guideway
+        name: Bus Guideway
+        terms: '<translate with synonyms or related terms for ''Bus Guideway'', separated by commas>'
       highway/bus_stop:
         # highway=bus_stop
         name: Bus Stop / Platform
@@ -3327,8 +3430,8 @@ en:
         terms: '<translate with synonyms or related terms for ''Forest'', separated by commas>'
       landuse/garages:
         # landuse=garages
-        name: Garages
-        terms: '<translate with synonyms or related terms for ''Garages'', separated by commas>'
+        name: Garage Landuse
+        terms: '<translate with synonyms or related terms for ''Garage Landuse'', separated by commas>'
       landuse/grass:
         # landuse=grass
         name: Grass
@@ -4075,8 +4178,8 @@ en:
         terms: '<translate with synonyms or related terms for ''Charity Office'', separated by commas>'
       office/company:
         # office=company
-        name: Company Office
-        terms: '<translate with synonyms or related terms for ''Company Office'', separated by commas>'
+        name: Corporate Office
+        terms: '<translate with synonyms or related terms for ''Corporate Office'', separated by commas>'
       office/coworking:
         # office=coworking
         name: Coworking Space
@@ -4148,8 +4251,6 @@ en:
       office/lawyer/notary:
         # 'office=lawyer, lawyer=notary'
         name: Notary Office
-        # 'terms: clerk,signature,wills,deeds,estate'
-        terms: '<translate with synonyms or related terms for ''Notary Office'', separated by commas>'
       office/moving_company:
         # office=moving_company
         name: Moving Company Office
@@ -4167,6 +4268,7 @@ en:
       office/notary:
         # office=notary
         name: Notary Office
+        # 'terms: clerk,deeds,estate,signature,wills'
         terms: '<translate with synonyms or related terms for ''Notary Office'', separated by commas>'
       office/physician:
         # office=physician
@@ -4201,6 +4303,7 @@ en:
       office/telecommunication:
         # office=telecommunication
         name: Telecom Office
+        # 'terms: communication,internet,phone,voice'
         terms: '<translate with synonyms or related terms for ''Telecom Office'', separated by commas>'
       office/therapist:
         # office=therapist

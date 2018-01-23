@@ -1,22 +1,22 @@
 {
-  "icon": "commercial",
-  "fields": [
-      "name",
-      "address",
-      "building_area",
-      "opening_hours"
-  ],
-  "geometry": [
-      "point",
-      "area"
-  ],
-  "tags": {
-      "office": "private_investigator"
-  },
-  "terms": [
-      "PI",
-      "private eye",
-      "private detective"
-  ],
-  "name": "Private Investigator Office"
+    "icon": "suitcase",
+    "fields": [
+        "name",
+        "address",
+        "building_area",
+        "opening_hours"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "office": "private_investigator"
+    },
+    "terms": [
+        "PI",
+        "private eye",
+        "private detective"
+    ],
+    "name": "Private Investigator Office"
 }

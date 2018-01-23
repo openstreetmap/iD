@@ -270,7 +270,6 @@
         "background": {
             "title": "පසුබිම",
             "description": "පසුබිම් සැකසුම්",
-            "percent_brightness": "දීප්තිමත් බාවය {opacity} % ",
             "none": "කිසිවක් නැත",
             "custom": "රිසි පරදී සැකසු",
             "custom_button": "පසුතලය රිසි පරිදි සැකසීම සදහා",

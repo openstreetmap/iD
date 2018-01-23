@@ -1,0 +1,22 @@
+{
+    "icon": "heart",
+    "fields": [
+        "name",
+        "operator",
+        "address",
+        "building_area",
+        "smoking",
+        "rooms",
+        "internet_access",
+        "internet_access/fee",
+        "internet_access/ssid"
+    ],
+    "geometry": [
+        "point",
+        "area"
+    ],
+    "tags": {
+        "amenity": "love_hotel"
+    },
+    "name": "Love Hotel"
+}

@@ -53,7 +53,7 @@ export function setAreaKeys(value) {
 
 export function coreContext() {
     var context = {};
-    context.version = '2.5.1';
+    context.version = '2.6.0';
 
     // create a special translation that contains the keys in place of the strings
     var tkeys = _cloneDeep(dataEn);
@@ -255,6 +255,9 @@ export function coreContext() {
             return [];
         }
     };
+    context.activeID = function() {
+        return mode && mode.activeID && mode.activeID();
+    };
 
 
     /* Behaviors */
@@ -310,11 +313,12 @@ export function coreContext() {
 
     /* Debug */
     var debugFlags = {
-        tile: false,
-        collision: false,
-        imagery: false,
-        imperial: false,
-        driveLeft: false
+        tile: false,        // tile boundaries
+        collision: false,   // label collision bounding boxes
+        imagery: false,     // imagery bounding polygons
+        imperial: false,    // imperial (not metric) bounding polygons
+        driveLeft: false,   // driveLeft bounding polygons
+        target: false       // touch targets
     };
     context.debugFlags = function() {
         return debugFlags;

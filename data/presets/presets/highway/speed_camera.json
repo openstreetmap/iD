@@ -5,6 +5,7 @@
         "vertex"
     ],
     "fields": [
+        "direction",
         "ref"
      ],
     "tags": {

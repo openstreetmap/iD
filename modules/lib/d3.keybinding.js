@@ -51,21 +51,33 @@ export function d3keybinding(namespace) {
 
         function matches(binding, testShift) {
             var event = d3_event;
+            var isMatch = false;
+            var tryKeyCode = true;
+
+            // Prefer a match on `KeyboardEvent.key`
             if (event.key !== undefined) {
+                tryKeyCode = (event.key.charCodeAt(0) > 255);  // outside ISO-Latin-1
+                isMatch = true;
+
                 if (binding.event.key === undefined) {
-                    return false;
+                    isMatch = false;
                 } else if (Array.isArray(binding.event.key)) {
                     if (binding.event.key.map(function(s) { return s.toLowerCase(); }).indexOf(event.key.toLowerCase()) === -1)
-                        return false;
+                        isMatch = false;
                 } else {
                     if (event.key.toLowerCase() !== binding.event.key.toLowerCase())
-                        return false;
+                        isMatch = false;
                 }
-            } else {
-                // check keycodes if browser doesn't support KeyboardEvent.key
-                if (event.keyCode !== binding.event.keyCode)
-                    return false;
             }
+
+            // Fallback match on `KeyboardEvent.keyCode`, can happen if:
+            // - browser doesn't support `KeyboardEvent.key`
+            // - `KeyboardEvent.key` is outside ISO-Latin-1 range (cyrillic?)
+            if (!isMatch && tryKeyCode) {
+                isMatch = (event.keyCode === binding.event.keyCode);
+            }
+
+            if (!isMatch) return false;
 
             // test modifier keys
             if (!(event.ctrlKey && event.altKey)) {  // if both are set, assume AltGr and skip it - #4096
@@ -117,8 +129,8 @@ export function d3keybinding(namespace) {
             var code = arr[i];
             var binding = {
                 event: {
-                    key: undefined,
-                    keyCode: 0, // only for browsers that don't support KeyboardEvent.key
+                    key: undefined,  // preferred
+                    keyCode: 0,      // fallback
                     modifiers: {
                         shiftKey: false,
                         ctrlKey: false,

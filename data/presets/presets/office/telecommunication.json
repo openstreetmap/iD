@@ -1,5 +1,5 @@
 {
-    "icon": "commercial",
+    "icon": "telephone",
     "fields": [
         "name",
         "address",
@@ -13,6 +13,11 @@
     "tags": {
         "office": "telecommunication"
     },
-    "terms": [],
+    "terms": [
+        "communication",
+        "internet",
+        "phone",
+        "voice"
+    ],
     "name": "Telecom Office"
 }

@@ -1,23 +1,16 @@
 import _throttle from 'lodash-es/throttle';
-
-import {
-    geoIdentity as d3_geoIdentity,
-    geoPath as d3_geoPath
-} from 'd3-geo';
-
 import { select as d3_select } from 'd3-selection';
-
-import { svgPointTransform } from './point_transform';
+import { svgPath, svgPointTransform } from './index';
 import { services } from '../services';
 
 
 export function svgOpenstreetcamImages(projection, context, dispatch) {
-    var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000),
-        minZoom = 12,
-        minMarkerZoom = 16,
-        minViewfieldZoom = 18,
-        layer = d3_select(null),
-        _openstreetcam;
+    var throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
+    var minZoom = 12;
+    var minMarkerZoom = 16;
+    var minViewfieldZoom = 18;
+    var layer = d3_select(null);
+    var _openstreetcam;
 
 
     function init() {
@@ -128,25 +121,19 @@ export function svgOpenstreetcamImages(projection, context, dispatch) {
         var sequences = (service ? service.sequences(projection) : []);
         var images = (service && showMarkers ? service.images(projection) : []);
 
-        var clip = d3_geoIdentity().clipExtent(projection.clipExtent()).stream;
-        var project = projection.stream;
-        var makePath = d3_geoPath().projection({ stream: function(output) {
-            return project(clip(output));
-        }});
-
         var traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.properties.key; });
 
+        // exit
         traces.exit()
             .remove();
 
+        // enter/update
         traces = traces.enter()
             .append('path')
             .attr('class', 'sequence')
-            .merge(traces);
-
-        traces
-            .attr('d', makePath);
+            .merge(traces)
+            .attr('d', svgPath(projection).geojson);
 
 
         var groups = layer.selectAll('.markers').selectAll('.viewfield-group')

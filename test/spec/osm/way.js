@@ -234,6 +234,10 @@ describe('iD.osmWay', function() {
             expect(iD.Way({tags: { location: 'overground' }}).layer()).to.equal(1);
         });
 
+        it('returns -1 for covered=yes', function() {
+            expect(iD.Way({tags: { covered: 'yes' }}).layer()).to.equal(-1);
+        });
+
         it('returns -1 for location=underground', function() {
             expect(iD.Way({tags: { location: 'underground' }}).layer()).to.equal(-1);
         });
@@ -293,15 +297,24 @@ describe('iD.osmWay', function() {
             expect(iD.Way({tags: { oneway: '-1' }}).isOneWay(), 'oneway -1').to.be.true;
         });
 
+        it('returns true when the way has tag oneway=reversible', function() {
+            expect(iD.Way({tags: { oneway: 'reversible' }}).isOneWay(), 'oneway reversible').to.be.true;
+        });
+
+        it('returns true when the way has tag oneway=alternating', function() {
+            expect(iD.Way({tags: { oneway: 'alternating' }}).isOneWay(), 'oneway alternating').to.be.true;
+        });
+
         it('returns true when the way has implied oneway tag (waterway=river, waterway=stream, etc)', function() {
             expect(iD.Way({tags: { waterway: 'river' }}).isOneWay(), 'river').to.be.true;
             expect(iD.Way({tags: { waterway: 'stream' }}).isOneWay(), 'stream').to.be.true;
             expect(iD.Way({tags: { highway: 'motorway' }}).isOneWay(), 'motorway').to.be.true;
-            expect(iD.Way({tags: { highway: 'motorway_link' }}).isOneWay(), 'motorway_link').to.be.true;
             expect(iD.Way({tags: { junction: 'roundabout' }}).isOneWay(), 'roundabout').to.be.true;
+            expect(iD.Way({tags: { junction: 'circular' }}).isOneWay(), 'circular').to.be.true;
         });
 
         it('returns false when the way does not have implied oneway tag', function() {
+            expect(iD.Way({tags: { highway: 'motorway_link' }}).isOneWay(), 'motorway_link').to.be.false;
             expect(iD.Way({tags: { highway: 'trunk' }}).isOneWay(), 'trunk').to.be.false;
             expect(iD.Way({tags: { highway: 'trunk_link' }}).isOneWay(), 'trunk_link').to.be.false;
             expect(iD.Way({tags: { highway: 'primary' }}).isOneWay(), 'primary').to.be.false;
@@ -320,6 +333,7 @@ describe('iD.osmWay', function() {
 
         it('returns false when oneway=no overrides implied oneway tag', function() {
             expect(iD.Way({tags: { junction: 'roundabout', oneway: 'no' }}).isOneWay(), 'roundabout').to.be.false;
+            expect(iD.Way({tags: { junction: 'circular', oneway: 'no' }}).isOneWay(), 'circular').to.be.false;
             expect(iD.Way({tags: { highway: 'motorway', oneway: 'no' }}).isOneWay(), 'motorway').to.be.false;
         });
     });

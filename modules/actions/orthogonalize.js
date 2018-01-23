@@ -2,10 +2,7 @@ import _clone from 'lodash-es/clone';
 import _uniq from 'lodash-es/uniq';
 
 import { actionDeleteNode } from './delete_node';
-import {
-    geoEuclideanDistance,
-    geoInterp
-} from '../geo';
+import { geoVecInterp, geoVecLength } from '../geo';
 
 
 /*
@@ -40,7 +37,7 @@ export function actionOrthogonalize(wayId, projection) {
 
             node = graph.entity(nodes[corner.i].id);
             loc = projection.invert(points[corner.i]);
-            graph = graph.replace(node.move(geoInterp(node.loc, loc, t)));
+            graph = graph.replace(node.move(geoVecInterp(node.loc, loc, t)));
 
         } else {
             var best,
@@ -69,7 +66,7 @@ export function actionOrthogonalize(wayId, projection) {
                 if (originalPoints[i][0] !== points[i][0] || originalPoints[i][1] !== points[i][1]) {
                     loc = projection.invert(points[i]);
                     node = graph.entity(nodes[i].id);
-                    graph = graph.replace(node.move(geoInterp(node.loc, loc, t)));
+                    graph = graph.replace(node.move(geoVecInterp(node.loc, loc, t)));
                 }
             }
 
@@ -100,7 +97,7 @@ export function actionOrthogonalize(wayId, projection) {
                 q = subtractPoints(c, b),
                 scale, dotp;
 
-            scale = 2 * Math.min(geoEuclideanDistance(p, [0, 0]), geoEuclideanDistance(q, [0, 0]));
+            scale = 2 * Math.min(geoVecLength(p, [0, 0]), geoVecLength(q, [0, 0]));
             p = normalizePoint(p, 1.0);
             q = normalizePoint(q, 1.0);
 

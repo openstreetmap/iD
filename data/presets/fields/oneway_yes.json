@@ -6,7 +6,9 @@
         "options": {
             "undefined": "Assumed to be Yes",
             "yes": "Yes",
-            "no": "No"
+            "no": "No",
+            "reversible": "Reversible",
+            "alternating": "Alternating"
         }
     }
 }

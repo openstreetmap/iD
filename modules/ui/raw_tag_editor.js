@@ -25,34 +25,36 @@ import {
 export function uiRawTagEditor(context) {
     var taginfo = services.taginfo,
         dispatch = d3_dispatch('change'),
-        expandedPreference = (context.storage('raw_tag_editor.expanded') === 'true'),
-        expandedCurrent = expandedPreference,
-        updatePreference = true,
-        readOnlyTags = [],
-        showBlank = false,
-        newRow,
-        state,
-        preset,
-        tags,
-        id;
+        _readOnlyTags = [],
+        _showBlank = false,
+        _updatePreference = true,
+        _expanded = false,
+        _newRow,
+        _state,
+        _preset,
+        _tags,
+        _entityID;
 
 
     function rawTagEditor(selection) {
-        var count = Object.keys(tags).filter(function(d) { return d; }).length;
+        var count = Object.keys(_tags).filter(function(d) { return d; }).length;
 
-        selection.call(uiDisclosure()
+        var disclosure = uiDisclosure(context, 'raw_tag_editor', false)
             .title(t('inspector.all_tags') + ' (' + count + ')')
-            .expanded(expandedCurrent)
             .on('toggled', toggled)
-            .content(content)
-        );
+            .updatePreference(_updatePreference)
+            .content(content);
+
+        // Sometimes we want to force the raw_tag_editor to be opened/closed..
+        // When undefined, uiDisclosure will use the user's stored preference.
+        if (_expanded !== undefined) {
+            disclosure.expanded(_expanded);
+        }
+
+        selection.call(disclosure);
 
         function toggled(expanded) {
-            expandedCurrent = expanded;
-            if (updatePreference) {
-                expandedPreference = expanded;
-                context.storage('raw_tag_editor.expanded', expanded);
-            }
+            _expanded = expanded;
             if (expanded) {
                 selection.node().parentNode.scrollTop += 200;
             }
@@ -61,14 +63,14 @@ export function uiRawTagEditor(context) {
 
 
     function content(wrap) {
-        var entries = _map(tags, function(v, k) {
+        var entries = _map(_tags, function(v, k) {
             return { key: k, value: v };
         });
 
-        if (!entries.length || showBlank) {
-            showBlank = false;
+        if (!entries.length || _showBlank) {
+            _showBlank = false;
             entries.push({key: '', value: ''});
-            newRow = '';
+            _newRow = '';
         }
 
         var list = wrap.selectAll('.tag-list')
@@ -138,8 +140,8 @@ export function uiRawTagEditor(context) {
         items = items
             .merge(enter)
             .sort(function(a, b) {
-                return (a.key === newRow && b.key !== newRow) ? 1
-                    : (a.key !== newRow && b.key === newRow) ? -1
+                return (a.key === _newRow && b.key !== _newRow) ? 1
+                    : (a.key !== _newRow && b.key === _newRow) ? -1
                     : d3_ascending(a.key, b.key);
             });
 
@@ -149,11 +151,11 @@ export function uiRawTagEditor(context) {
                     key = row.select('input.key'),      // propagate bound data to child
                     value = row.select('input.value');  // propagate bound data to child
 
-                if (id && taginfo) {
+                if (_entityID && taginfo) {
                     bindTypeahead(key, value);
                 }
 
-                var isRelation = (id && context.entity(id).type === 'relation'),
+                var isRelation = (_entityID && context.entity(_entityID).type === 'relation'),
                     reference;
 
                 if (isRelation && tag.key === 'type') {
@@ -162,7 +164,7 @@ export function uiRawTagEditor(context) {
                     reference = uiTagReference({ key: tag.key, value: tag.value }, context);
                 }
 
-                if (state === 'hover') {
+                if (_state === 'hover') {
                     reference.showing(false);
                 }
 
@@ -187,8 +189,8 @@ export function uiRawTagEditor(context) {
 
 
         function isReadOnly(d) {
-            for (var i = 0; i < readOnlyTags.length; i++) {
-                if (d.key.match(readOnlyTags[i]) !== null) {
+            for (var i = 0; i < _readOnlyTags.length; i++) {
+                if (d.key.match(_readOnlyTags[i]) !== null) {
                     return true;
                 }
             }
@@ -206,7 +208,7 @@ export function uiRawTagEditor(context) {
 
         function bindTypeahead(key, value) {
             if (isReadOnly({ key: key })) return;
-            var geometry = context.geometry(id);
+            var geometry = context.geometry(_entityID);
 
             key.call(d3_combobox()
                 .container(context.container())
@@ -275,7 +277,7 @@ export function uiRawTagEditor(context) {
                 var match = kNew.match(/^(.*?)(?:_(\d+))?$/),
                     base = match[1],
                     suffix = +(match[2] || 1);
-                while (tags[kNew]) {  // rename key if already in use
+                while (_tags[kNew]) {  // rename key if already in use
                     kNew = base + '_' + suffix++;
                 }
             }
@@ -284,8 +286,8 @@ export function uiRawTagEditor(context) {
 
             d.key = kNew; // Maintain DOM identity through the subsequent update.
 
-            if (newRow === kOld) {  // see if this row is still a new row
-                newRow = ((d.value === '' || kNew === '') ? kNew : undefined);
+            if (_newRow === kOld) {  // see if this row is still a new row
+                _newRow = ((d.value === '' || kNew === '') ? kNew : undefined);
             }
 
             this.value = kNew;
@@ -298,8 +300,8 @@ export function uiRawTagEditor(context) {
             var tag = {};
             tag[d.key] = this.value;
 
-            if (newRow === d.key && d.key !== '' && d.value !== '') {   // not a new row anymore
-                newRow = undefined;
+            if (_newRow === d.key && d.key !== '' && d.value !== '') {   // not a new row anymore
+                _newRow = undefined;
             }
 
             dispatch.call('change', this, tag);
@@ -320,7 +322,7 @@ export function uiRawTagEditor(context) {
             // handler. Without the setTimeout, the call to `content` would
             // wipe out the pending value change.
             setTimeout(function() {
-                showBlank = true;
+                _showBlank = true;
                 content(wrap);
                 list.selectAll('li:last-child input.key').node().focus();
             }, 0);
@@ -329,51 +331,51 @@ export function uiRawTagEditor(context) {
 
 
     rawTagEditor.state = function(_) {
-        if (!arguments.length) return state;
-        state = _;
+        if (!arguments.length) return _state;
+        _state = _;
         return rawTagEditor;
     };
 
 
     rawTagEditor.preset = function(_) {
-        if (!arguments.length) return preset;
-        preset = _;
-        if (preset.isFallback()) {
-            expandedCurrent = true;
-            updatePreference = false;
+        if (!arguments.length) return _preset;
+        _preset = _;
+        if (_preset.isFallback()) {
+            _expanded = true;
+            _updatePreference = false;
         } else {
-            expandedCurrent = expandedPreference;
-            updatePreference = true;
+            _expanded = undefined;
+            _updatePreference = true;
         }
         return rawTagEditor;
     };
 
 
     rawTagEditor.tags = function(_) {
-        if (!arguments.length) return tags;
-        tags = _;
+        if (!arguments.length) return _tags;
+        _tags = _;
         return rawTagEditor;
     };
 
 
     rawTagEditor.entityID = function(_) {
-        if (!arguments.length) return id;
-        id = _;
+        if (!arguments.length) return _entityID;
+        _entityID = _;
         return rawTagEditor;
     };
 
 
     rawTagEditor.expanded = function(_) {
-        if (!arguments.length) return expandedCurrent;
-        expandedCurrent = _;
-        updatePreference = false;
+        if (!arguments.length) return _expanded;
+        _expanded = _;
+        _updatePreference = false;
         return rawTagEditor;
     };
 
 
     rawTagEditor.readOnlyTags = function(_) {
-        if (!arguments.length) return readOnlyTags;
-        readOnlyTags = _;
+        if (!arguments.length) return _readOnlyTags;
+        _readOnlyTags = _;
         return rawTagEditor;
     };
 

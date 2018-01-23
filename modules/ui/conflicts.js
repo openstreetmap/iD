@@ -5,60 +5,92 @@ import {
     select as d3_select
 } from 'd3-selection';
 
+import { d3keybinding as d3_keybinding } from '../lib/d3.keybinding.js';
+
 import { t } from '../util/locale';
 import { JXON } from '../util/jxon';
 import { geoExtent } from '../geo';
 import { osmChangeset } from '../osm';
 import { svgIcon } from '../svg';
 import { utilDetect } from '../util/detect';
-import { utilEntityOrMemberSelector } from '../util';
-import { utilRebind } from '../util/rebind';
+
+import {
+    utilEntityOrMemberSelector,
+    utilRebind,
+    utilWrap
+} from '../util';
 
 
 export function uiConflicts(context) {
-    var dispatch = d3_dispatch('cancel', 'save'),
-        origChanges,
-        conflictList;
+    var dispatch = d3_dispatch('cancel', 'save');
+    var keybinding = d3_keybinding('conflicts');
+    var _origChanges;
+    var _conflictList;
+
+
+    function keybindingOn() {
+        d3_select(document)
+            .call(keybinding.on('⎋', cancel, true));
+    }
+
+    function keybindingOff() {
+        d3_select(document)
+            .call(keybinding.off);
+    }
+
+    function tryAgain() {
+        keybindingOff();
+        dispatch.call('save');
+    }
+
+    function cancel() {
+        keybindingOff();
+        dispatch.call('cancel');
+    }
 
 
     function conflicts(selection) {
-        var header = selection
+        keybindingOn();
+
+        var headerEnter = selection.selectAll('.header')
+            .data([0])
+            .enter()
             .append('div')
             .attr('class', 'header fillL');
 
-        header
+        headerEnter
             .append('button')
             .attr('class', 'fr')
-            .on('click', function() { dispatch.call('cancel'); })
+            .on('click', cancel)
             .call(svgIcon('#icon-close'));
 
-        header
+        headerEnter
             .append('h3')
             .text(t('save.conflict.header'));
 
-        var body = selection
+        var bodyEnter = selection.selectAll('.body')
+            .data([0])
+            .enter()
             .append('div')
             .attr('class', 'body fillL');
 
-        var conflictsHelp = body
+        var conflictsHelpEnter = bodyEnter
             .append('div')
             .attr('class', 'conflicts-help')
             .text(t('save.conflict.help'));
 
 
         // Download changes link
-        var detected = utilDetect(),
-            changeset = new osmChangeset();
+        var detected = utilDetect();
+        var changeset = new osmChangeset();
 
-        delete changeset.id;  // Export without chnageset_id
+        delete changeset.id;  // Export without changeset_id
 
-        var data = JXON.stringify(changeset.osmChangeJXON(origChanges)),
-            blob = new Blob([data], {type: 'text/xml;charset=utf-8;'}),
-            fileName = 'changes.osc';
+        var data = JXON.stringify(changeset.osmChangeJXON(_origChanges));
+        var blob = new Blob([data], { type: 'text/xml;charset=utf-8;' });
+        var fileName = 'changes.osc';
 
-        var linkEnter = conflictsHelp.selectAll('.download-changes')
-            .data([0])
-            .enter()
+        var linkEnter = conflictsHelpEnter.selectAll('.download-changes')
             .append('a')
             .attr('class', 'download-changes');
 
@@ -81,44 +113,44 @@ export function uiConflicts(context) {
             .text(t('save.conflict.download_changes'));
 
 
-        body
+        bodyEnter
             .append('div')
             .attr('class', 'conflict-container fillL3')
             .call(showConflict, 0);
 
-        body
+        bodyEnter
             .append('div')
             .attr('class', 'conflicts-done')
             .attr('opacity', 0)
             .style('display', 'none')
             .text(t('save.conflict.done'));
 
-        var buttons = body
+        var buttonsEnter = bodyEnter
             .append('div')
             .attr('class','buttons col12 joined conflicts-buttons');
 
-        buttons
+        buttonsEnter
             .append('button')
-            .attr('disabled', conflictList.length > 1)
+            .attr('disabled', _conflictList.length > 1)
             .attr('class', 'action conflicts-button col6')
             .text(t('save.title'))
-            .on('click.try_again', function() { dispatch.call('save'); });
+            .on('click.try_again', tryAgain);
 
-        buttons
+        buttonsEnter
             .append('button')
             .attr('class', 'secondary-action conflicts-button col6')
             .text(t('confirm.cancel'))
-            .on('click.cancel', function() { dispatch.call('cancel'); });
+            .on('click.cancel', cancel);
     }
 
 
     function showConflict(selection, index) {
-        if (index < 0 || index >= conflictList.length) return;
+        index = utilWrap(index, _conflictList.length);
 
         var parent = d3_select(selection.node().parentNode);
 
         // enable save button if this is the last conflict being reviewed..
-        if (index === conflictList.length - 1) {
+        if (index === _conflictList.length - 1) {
             window.setTimeout(function() {
                 parent.select('.conflicts-button')
                     .attr('disabled', null);
@@ -130,30 +162,33 @@ export function uiConflicts(context) {
             }, 250);
         }
 
-        var item = selection
+        var conflict = selection
             .selectAll('.conflict')
-            .data([conflictList[index]]);
+            .data([_conflictList[index]]);
 
-        var enter = item.enter()
+        conflict.exit()
+            .remove();
+
+        var conflictEnter = conflict.enter()
             .append('div')
             .attr('class', 'conflict');
 
-        enter
+        conflictEnter
             .append('h4')
             .attr('class', 'conflict-count')
-            .text(t('save.conflict.count', { num: index + 1, total: conflictList.length }));
+            .text(t('save.conflict.count', { num: index + 1, total: _conflictList.length }));
 
-        enter
+        conflictEnter
             .append('a')
             .attr('class', 'conflict-description')
             .attr('href', '#')
             .text(function(d) { return d.name; })
             .on('click', function(d) {
-                zoomToEntity(d.id);
                 d3_event.preventDefault();
+                zoomToEntity(d.id);
             });
 
-        var details = enter
+        var details = conflictEnter
             .append('div')
             .attr('class', 'conflict-detail-container');
 
@@ -183,11 +218,13 @@ export function uiConflicts(context) {
             .attr('class', 'conflict-nav-button action col6')
             .attr('disabled', function(d, i) {
                 return (i === 0 && index === 0) ||
-                    (i === 1 && index === conflictList.length - 1) || null;
+                    (i === 1 && index === _conflictList.length - 1) || null;
             })
             .on('click', function(d, i) {
-                var container = parent.select('.conflict-container'),
-                sign = (i === 0 ? -1 : 1);
+                d3_event.preventDefault();
+
+                var container = parent.selectAll('.conflict-container');
+                var sign = (i === 0 ? -1 : 1);
 
                 container
                     .selectAll('.conflict')
@@ -195,12 +232,8 @@ export function uiConflicts(context) {
 
                 container
                     .call(showConflict, index + sign);
-
-                d3_event.preventDefault();
             });
 
-        item.exit()
-            .remove();
     }
 
 
@@ -211,14 +244,15 @@ export function uiConflicts(context) {
             .selectAll('li')
             .data(function(d) { return d.choices || []; });
 
-        var enter = choices.enter()
+        // enter
+        var choicesEnter = choices.enter()
             .append('li')
             .attr('class', 'layer');
 
-        var label = enter
+        var labelEnter = choicesEnter
             .append('label');
 
-        label
+        labelEnter
             .append('input')
             .attr('type', 'radio')
             .attr('name', function(d) { return d.id; })
@@ -228,14 +262,18 @@ export function uiConflicts(context) {
                 choose(ul, d);
             });
 
-        label
+        labelEnter
             .append('span')
             .text(function(d) { return d.text; });
 
-        choices
+        // update
+        choicesEnter
+            .merge(choices)
             .each(function(d, i) {
                 var ul = this.parentNode;
-                if (ul.__data__.chosen === i) choose(ul, d);
+                if (ul.__data__.chosen === i) {
+                    choose(ul, d);
+                }
             });
     }
 
@@ -249,8 +287,8 @@ export function uiConflicts(context) {
             .selectAll('input')
             .property('checked', function(d) { return d === datum; });
 
-        var extent = geoExtent(),
-            entity;
+        var extent = geoExtent();
+        var entity;
 
         entity = context.graph().hasEntity(datum.id);
         if (entity) extent._extend(entity.extent(context.graph()));
@@ -275,8 +313,7 @@ export function uiConflicts(context) {
             } else {
                 context.map().zoomTo(entity);
             }
-            context.surface().selectAll(
-                utilEntityOrMemberSelector([entity.id], context.graph()))
+            context.surface().selectAll(utilEntityOrMemberSelector([entity.id], context.graph()))
                 .classed('hover', true);
         }
     }
@@ -293,16 +330,16 @@ export function uiConflicts(context) {
     //         choice(id, keepTheirs, forceRemote)
     //     ]
     // }
-    conflicts.list = function(_) {
-        if (!arguments.length) return conflictList;
-        conflictList = _;
+    conflicts.conflictList = function(_) {
+        if (!arguments.length) return _conflictList;
+        _conflictList = _;
         return conflicts;
     };
 
 
     conflicts.origChanges = function(_) {
-        if (!arguments.length) return origChanges;
-        origChanges = _;
+        if (!arguments.length) return _origChanges;
+        _origChanges = _;
         return conflicts;
     };
 

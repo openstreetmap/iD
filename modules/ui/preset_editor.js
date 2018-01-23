@@ -16,7 +16,6 @@ import { utilRebind } from '../util';
 export function uiPresetEditor(context) {
     var dispatch = d3_dispatch('change'),
         formFields = uiFormFields(context),
-        expandedPreference = (context.storage('preset_fields.expanded') !== 'false'),
         state,
         fieldsArr,
         preset,
@@ -25,17 +24,10 @@ export function uiPresetEditor(context) {
 
 
     function presetEditor(selection) {
-        selection.call(uiDisclosure()
+        selection.call(uiDisclosure(context, 'preset_fields', true)
             .title(t('inspector.all_fields'))
-            .expanded(expandedPreference)
-            .on('toggled', toggled)
             .content(render)
         );
-
-        function toggled(expanded) {
-            expandedPreference = expanded;
-            context.storage('preset_fields.expanded', expanded);
-        }
     }
 
 
