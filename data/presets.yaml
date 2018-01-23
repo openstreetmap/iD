@@ -2939,9 +2939,9 @@ en:
         name: Emergency Access Private
       emergency/water_tank:
         # emergency=water_tank
-        name: Water Tank
-        # 'terms: cistern,reservoir'
-        terms: '<translate with synonyms or related terms for ''Water Tank'', separated by commas>'
+        name: Emergency Water Tank
+        # 'terms: water tank,cistern,reservoir'
+        terms: '<translate with synonyms or related terms for ''Emergency Water Tank'', separated by commas>'
       emergency/yes:
         # emergency=yes
         name: Emergency Access Yes

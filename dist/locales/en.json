@@ -3841,8 +3841,8 @@
                     "terms": ""
                 },
                 "emergency/water_tank": {
-                    "name": "Water Tank",
-                    "terms": "cistern,reservoir"
+                    "name": "Emergency Water Tank",
+                    "terms": "water tank,cistern,reservoir"
                 },
                 "entrance": {
                     "name": "Entrance/Exit",
