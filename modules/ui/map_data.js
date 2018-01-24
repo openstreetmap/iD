@@ -20,8 +20,7 @@ export function uiMapData(context) {
     var layers = context.layers();
     var fills = ['wireframe', 'partial', 'full'];
 
-    var _fillDefault = context.storage('area-fill') || 'partial';
-    var _fillSelected = _fillDefault !== 'wireframe' ? _fillDefault : 'partial';
+    var _fillSelected = context.storage('area-fill') || 'partial';
     var _shown = false;
     var _dataLayerContainer = d3_select(null);
     var _fillList = d3_select(null);
@@ -55,10 +54,10 @@ export function uiMapData(context) {
         });
 
         _fillSelected = d;
-        if (d !== 'wireframe') {
-            _fillDefault = d;
-        }
         context.storage('area-fill', d);
+        if (d !== 'wireframe') {
+            context.storage('area-fill-toggle', d);
+        }
         update();
     }
 
@@ -385,7 +384,14 @@ export function uiMapData(context) {
             d3_event.preventDefault();
             d3_event.stopPropagation();
         }
-        setFill((_fillSelected === 'wireframe' ? _fillDefault : 'wireframe'));
+
+        if (_fillSelected === 'wireframe') {
+            _fillSelected = context.storage('area-fill-toggle') || 'partial';
+        } else {
+            _fillSelected = 'wireframe';
+        }
+
+        setFill(_fillSelected);
         context.map().pan([0,0]);  // trigger a redraw
     }
 
@@ -489,7 +495,7 @@ export function uiMapData(context) {
             .on('change.map_data-update', update);
 
         update();
-        setFill(_fillDefault);
+        setFill(_fillSelected);
 
         var keybinding = d3_keybinding('features')
             .on(key, togglePane)
