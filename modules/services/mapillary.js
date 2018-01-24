@@ -408,7 +408,8 @@ export default {
 
 
     loadImages: function(projection) {
-        loadTiles('images', apibase + 'images?', projection);
+        loadTiles('images', 'http://127.0.0.1:5123/' + 'images?', projection);
+        // loadTiles('images', apibase + 'images?', projection);
         loadTiles('sequences', apibase + 'sequences?', projection);
     },
 
