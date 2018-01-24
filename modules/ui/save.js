@@ -16,12 +16,13 @@ import { tooltip } from '../util/tooltip';
 
 
 export function uiSave(context) {
-    var history = context.history(),
-        key = uiCmd('⌘S');
+    var history = context.history();
+    var key = uiCmd('⌘S');
 
 
     function saving() {
-        return context.mode().id === 'save';
+        var mode = context.mode();
+        return mode && mode.id === 'save';
     }
 
 
@@ -100,7 +101,7 @@ export function uiSave(context) {
         updateCount();
 
 
-        var keybinding = d3_keybinding('save')
+        var keybinding = d3_keybinding('uiSave')
             .on(key, save, true);
 
         d3_select(document)

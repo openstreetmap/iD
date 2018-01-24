@@ -47,7 +47,7 @@ var _isSaving = false;
 
 export function modeSave(context) {
     var mode = { id: 'save' };
-    var keybinding = d3_keybinding('save');
+    var keybinding = d3_keybinding('modeSave');
 
     var loading = uiLoading(context)
         .message(t('save.uploading'))
