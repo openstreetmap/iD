@@ -22,6 +22,7 @@
 }
 
 .fill-wireframe .point,
+.fill-wireframe .vertex.active,
 .fill-wireframe .areaicon,
 .fill-wireframe .areaicon-halo,
 .fill-wireframe path.casing,
