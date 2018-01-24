@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-no-whistle",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-no-whistle"
+  },
+  "terms": [],
+  "name": "traffic-sign-no-whistle"
+}

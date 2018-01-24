@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-no-entry",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-no-entry"
+  },
+  "terms": [],
+  "name": "traffic-sign-no-entry"
+}

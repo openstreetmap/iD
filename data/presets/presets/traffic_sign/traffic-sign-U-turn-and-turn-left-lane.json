@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-U-turn-and-turn-left-lane",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-U-turn-and-turn-left-lane"
+  },
+  "terms": [],
+  "name": "traffic-sign-U-turn-and-turn-left-lane"
+}

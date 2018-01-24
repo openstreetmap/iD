@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-Emergency-call",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-Emergency-call"
+  },
+  "terms": [],
+  "name": "traffic-sign-Emergency-call"
+}

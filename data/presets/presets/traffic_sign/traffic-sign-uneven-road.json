@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-uneven-road",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-uneven-road"
+  },
+  "terms": [],
+  "name": "traffic-sign-uneven-road"
+}

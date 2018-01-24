@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-guarded-railroad-cross",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-guarded-railroad-cross"
+  },
+  "terms": [],
+  "name": "traffic-sign-guarded-railroad-cross"
+}

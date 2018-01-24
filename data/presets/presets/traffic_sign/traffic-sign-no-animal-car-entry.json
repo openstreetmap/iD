@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-no-animal-car-entry",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-no-animal-car-entry"
+  },
+  "terms": [],
+  "name": "traffic-sign-no-animal-car-entry"
+}

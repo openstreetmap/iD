@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-meet-priority",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-meet-priority"
+  },
+  "terms": [],
+  "name": "traffic-sign-meet-priority"
+}

@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-detour-around",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-detour-around"
+  },
+  "terms": [],
+  "name": "traffic-sign-detour-around"
+}

@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-detached-road-1",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-detached-road-1"
+  },
+  "terms": [],
+  "name": "traffic-sign-detached-road-1"
+}

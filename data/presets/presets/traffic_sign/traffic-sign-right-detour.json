@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-right-detour",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-right-detour"
+  },
+  "terms": [],
+  "name": "traffic-sign-right-detour"
+}

@@ -1,0 +1,14 @@
+{
+  "icon": "traffic-sign-crossroad-9",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "traffic_sign": "traffic-sign-crossroad-9"
+  },
+  "terms": [],
+  "name": "traffic-sign-crossroad-9"
+}
