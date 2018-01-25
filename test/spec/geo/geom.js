@@ -160,6 +160,79 @@ describe('iD.geo - geometry', function() {
         });
     });
 
+    describe('geoHasLineIntersections', function() {
+        it('returns false for a degenerate way (no nodes)', function() {
+            expect(iD.geoHasLineIntersections([], '')).to.be.false;
+        });
+
+        it('returns false if no activeID', function() {
+            var a = iD.osmNode({id: 'a', loc: [2, 2]});
+            var b = iD.osmNode({id: 'b', loc: [4, 2]});
+            var c = iD.osmNode({id: 'c', loc: [4, 4]});
+            var d = iD.osmNode({id: 'd', loc: [2, 4]});
+            var nodes = [a, b, c, d, a];
+            expect(iD.geoHasLineIntersections(nodes, '')).to.be.false;
+        });
+
+        it('returns false if there are no intersections', function() {
+            //  e --------- f
+            //  |           |
+            //  |  a --- b  |
+            //  |  |     |  |
+            //  |  |     |  |
+            //  |  d --- c  |
+            //  |           |
+            //  h --------- g
+            var a = iD.osmNode({id: 'a', loc: [2, 2]});
+            var b = iD.osmNode({id: 'b', loc: [4, 2]});
+            var c = iD.osmNode({id: 'c', loc: [4, 4]});
+            var d = iD.osmNode({id: 'd', loc: [2, 4]});
+            var e = iD.osmNode({id: 'e', loc: [0, 0]});
+            var f = iD.osmNode({id: 'f', loc: [8, 0]});
+            var g = iD.osmNode({id: 'g', loc: [8, 8]});
+            var h = iD.osmNode({id: 'h', loc: [0, 8]});
+            var inner = [a, b, c, d, a];
+            var outer = [e, f, g, h, e];
+            expect(iD.geoHasLineIntersections(inner, outer, 'a')).to.be.false;
+            expect(iD.geoHasLineIntersections(inner, outer, 'b')).to.be.false;
+            expect(iD.geoHasLineIntersections(inner, outer, 'c')).to.be.false;
+            expect(iD.geoHasLineIntersections(inner, outer, 'd')).to.be.false;
+            expect(iD.geoHasLineIntersections(outer, inner, 'e')).to.be.false;
+            expect(iD.geoHasLineIntersections(outer, inner, 'f')).to.be.false;
+            expect(iD.geoHasLineIntersections(outer, inner, 'g')).to.be.false;
+            expect(iD.geoHasLineIntersections(outer, inner, 'h')).to.be.false;
+        });
+
+        it('returns true if the activeID is causing intersections', function() {
+            //  e --------- f
+            //  |           |
+            //  |  a --------- b
+            //  |  |        |/
+            //  |  |       /|
+            //  |  d --- c  |
+            //  |           |
+            //  h --------- g
+            var a = iD.osmNode({id: 'a', loc: [2, 2]});
+            var b = iD.osmNode({id: 'b', loc: [10, 2]});
+            var c = iD.osmNode({id: 'c', loc: [4, 4]});
+            var d = iD.osmNode({id: 'd', loc: [2, 4]});
+            var e = iD.osmNode({id: 'e', loc: [0, 0]});
+            var f = iD.osmNode({id: 'f', loc: [8, 0]});
+            var g = iD.osmNode({id: 'g', loc: [8, 8]});
+            var h = iD.osmNode({id: 'h', loc: [0, 8]});
+            var inner = [a, b, c, d, a];
+            var outer = [e, f, g, h, e];
+            expect(iD.geoHasLineIntersections(inner, outer, 'a')).to.be.true;
+            expect(iD.geoHasLineIntersections(inner, outer, 'b')).to.be.true;
+            expect(iD.geoHasLineIntersections(inner, outer, 'c')).to.be.true;
+            expect(iD.geoHasLineIntersections(inner, outer, 'd')).to.be.false;
+            expect(iD.geoHasLineIntersections(outer, inner, 'e')).to.be.false;
+            expect(iD.geoHasLineIntersections(outer, inner, 'f')).to.be.true;
+            expect(iD.geoHasLineIntersections(outer, inner, 'g')).to.be.true;
+            expect(iD.geoHasLineIntersections(outer, inner, 'h')).to.be.false;
+        });
+    });
+
     describe('geoHasSelfIntersections', function() {
         it('returns false for a degenerate way (no nodes)', function() {
             expect(iD.geoHasSelfIntersections([], '')).to.be.false;
