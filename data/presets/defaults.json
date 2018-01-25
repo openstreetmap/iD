@@ -13,6 +13,7 @@
             "area"
         ],
         "line": [
+            "category-momenta-line",
             "category-road",
             "category-lane",
             "category-rail",
@@ -26,6 +27,7 @@
         "point": [
             "category-traffic_sign",
             "category-natural-point",
+            "category-momenta-point",
             "leisure/park",
             "amenity/hospital",
             "amenity/place_of_worship",

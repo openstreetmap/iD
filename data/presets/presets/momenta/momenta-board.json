@@ -1,0 +1,13 @@
+{
+  "icon": "momenta-board",
+  "fields": [
+    "name"
+  ],
+  "geometry": [
+    "point"
+  ],
+  "tags": {
+    "momenta": "board"
+  },
+  "name": "momenta boards"
+}

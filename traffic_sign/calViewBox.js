@@ -10,4 +10,4 @@ function cal(svgIds) {
     }
     console.log(result);
 }
-cal(svgIDs);
+cal(['momenta-icon','momenta-pole','momenta-board']);
