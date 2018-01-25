@@ -22,7 +22,8 @@
     "start": "node development_server.js develop",
     "test": "npm-run-all -s lint build test:**",
     "test:phantom": "phantomjs --web-security=no node_modules/mocha-phantomjs-core/mocha-phantomjs-core.js test/index.html spec",
-    "translations": "node data/update_locales"
+    "translations": "node data/update_locales",
+    "tariD": "mkdir -p iDtar/iD && cp -r dist/* iDtar/iD && mv iDtar/iD/iD.* iDtar && rm iDtar/iD/*.html && tar -cf iD.tar iDtar/* && rm -rf iDtar"
   },
   "dependencies": {
     "@mapbox/sexagesimal": "1.1.0",

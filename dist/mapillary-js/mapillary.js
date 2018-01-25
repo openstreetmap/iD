@@ -23714,7 +23714,7 @@ var CoverComponent = /** @class */ (function (_super) {
             "url(" + conf.src + ")" :
             "url(https://d1cuyjsrcm0gby.cloudfront.net/" + conf.key + "/thumb-640.jpg)";
         // url = `url(https://d1cuyjsrcm0gby.cloudfront.net/${conf.key}/thumb-640.jpg)`;
-        url = "url(http://localhost:5000/imagekey?imagekey=" + conf.key + ")";
+        url = "url(http://mapeditor.momenta.works:5123/imagekey?imagekey=" + conf.key + ")";
         var properties = { style: { backgroundImage: url } };
         var children = [];
         if (conf.state === Component_1.CoverState.Loading) {

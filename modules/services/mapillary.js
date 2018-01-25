@@ -408,7 +408,7 @@ export default {
 
 
     loadImages: function(projection) {
-        loadTiles('images', 'http://127.0.0.1:5123/' + 'images?', projection);
+        loadTiles('images', 'http://mapeditor.momenta.works:5123/' + 'images?', projection);
         // loadTiles('images', apibase + 'images?', projection);
         loadTiles('sequences', apibase + 'sequences?', projection);
     },
@@ -511,12 +511,12 @@ export default {
 
     updateViewer: function(imageKey, context) {
         if (!imageKey) return this;
-
-        if (!_mlyViewer) {
+        this.initViewer(imageKey, context);
+        /*if (!_mlyViewer) {
             this.initViewer(imageKey, context);
         } else {
             _mlyViewer.moveToKey(imageKey);
-        }
+        }*/
 
         return this;
     },
