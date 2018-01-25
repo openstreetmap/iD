@@ -382,7 +382,7 @@ en:
     switch: Switch back to this background
     custom: Custom
     custom_button: Edit custom background
-    custom_prompt: "Enter a tile URL template. Valid tokens are:\n   - {zoom}/{z}, {x}, {y} for Z/X/Y tile scheme\n   - {ty} for flipped TMS-style Y coordinates\n   - {u} for quadtile scheme\n   - {switch:a,b,c} for DNS server multiplexing\n\nExample:\n{example}"
+    custom_prompt: "Enter a tile URL template. Valid tokens are:\n   - {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme\n   - {-y} or {ty} for flipped TMS-style Y coordinates\n   - {u} for quadtile scheme\n   - {switch:a,b,c} for DNS server multiplexing\n\nExample:\n{example}"
     overlays: Overlays
     imagery_source_faq: Imagery Info / Report a Problem
     reset: reset
