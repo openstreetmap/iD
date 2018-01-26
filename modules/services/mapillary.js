@@ -514,7 +514,8 @@ export default {
         if (!_mlyViewer) {
             this.initViewer(imageKey, context);
         } else {
-            _mlyViewer.moveToKey(imageKey);
+            _mlyViewer.moveToKey(imageKey)
+                .catch(function(e) { console.error('mly3', e); });  // eslint-disable-line no-console
         }
 
         return this;
@@ -533,8 +534,10 @@ export default {
                 }
             };
 
-            _mlyViewer = new Mapillary.Viewer('mly', clientId, imageKey, opts);
+            _mlyViewer = new Mapillary.Viewer('mly', clientId, null, opts);
             _mlyViewer.on('nodechanged', nodeChanged);
+            _mlyViewer.moveToKey(imageKey)
+                .catch(function(e) { console.error('mly3', e); });  // eslint-disable-line no-console
         }
 
         // nodeChanged: called after the viewer has changed images and is ready.
