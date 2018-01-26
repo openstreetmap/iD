@@ -491,6 +491,10 @@ export default {
     hideViewer: function() {
         _mlySelectedImage = null;
 
+        if (!_mlyFallback) {
+            _mlyViewer.getComponent('sequence').stop();
+        }
+
         var viewer = d3_select('#photoviewer');
         if (!viewer.empty()) viewer.datum(null);
 
