@@ -36,6 +36,7 @@ var apibase = 'https://a.mapillary.com/v3/',
     maxResults = 1000,
     tileZoom = 14,
     dispatch = d3_dispatch('loadedImages', 'loadedSigns'),
+    _mlyFallback = false,
     _mlyCache,
     _mlyClicks,
     _mlySelectedImage,
@@ -534,6 +535,22 @@ export default {
                 }
             };
 
+            // Disable components requiring WebGL support
+            if (!Mapillary.isSupported() && Mapillary.isFallbackSupported()) {
+                _mlyFallback = true;
+                opts.component = {
+                    cover: false,
+                    direction: false,
+                    imagePlane: false,
+                    keyboard: false,
+                    mouse: false,
+                    sequence: false,
+                    tag: false,
+                    image: true,        // fallback
+                    navigation: true    // fallback
+                };
+            }
+
             _mlyViewer = new Mapillary.Viewer('mly', clientId, null, opts);
             _mlyViewer.on('nodechanged', nodeChanged);
             _mlyViewer.moveToKey(imageKey)
@@ -549,7 +566,9 @@ export default {
         // Clicks are added to the array in `selectedImage` and removed here.
         //
         function nodeChanged(node) {
-            _mlyViewer.getComponent('tag').removeAll();  // remove previous detections
+            if (!_mlyFallback) {
+                _mlyViewer.getComponent('tag').removeAll();  // remove previous detections
+            }
 
             var clicks = _mlyClicks;
             var index = clicks.indexOf(node.key);
@@ -697,7 +716,7 @@ export default {
 
 
     updateDetections: function(d) {
-        if (!_mlyViewer) return;
+        if (!_mlyViewer || _mlyFallback) return;
 
         var imageKey = d && d.key;
         var detections = (imageKey && _mlyCache.detections[imageKey]) || [];
