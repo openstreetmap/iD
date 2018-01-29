@@ -12,8 +12,8 @@ import {
   geoChooseEdge,
   geoPathIntersections,
   geoPathLength,
-  geoSphericalDistance,
   geoVecAdd,
+  geoVecEqual,
   geoVecInterp,
   geoVecSubtract
 } from '../geo';
@@ -126,6 +126,21 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
 
 
     // Place a vertex where the moved vertex used to be, to preserve way shape..
+    //
+    //  Start:
+    //      b ---- e
+    //     / \
+    //    /   \
+    //   /     \
+    //  a       c
+    //
+    //      *               node '*' added to preserve shape
+    //     / \
+    //    /   b ---- e      way `b,e` moved here:
+    //   /     \
+    //  a       c
+    //
+    //
     function replaceMovedVertex(nodeId, wayId, graph, delta) {
         var way = graph.entity(wayId);
         var moved = graph.entity(nodeId);
@@ -171,10 +186,6 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
         // Don't add orig vertex if it would just make a straight line..
         if (angle > 175 && angle < 185) return graph;
 
-        // // Don't add orig vertex if another point is already nearby (within 10m)
-        // if (geoSphericalDistance(prev.loc, orig.loc) < 10 ||
-        //     geoSphericalDistance(orig.loc, next.loc) < 10) return graph;
-
         // moving forward or backward along way?
         var p1 = [prev.loc, orig.loc, moved.loc, next.loc].map(projection);
         var p2 = [prev.loc, moved.loc, orig.loc, next.loc].map(projection);
@@ -187,6 +198,39 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
 
         way = way.addNode(orig.id, insertAt);
         return graph.replace(orig).replace(way);
+    }
+
+
+    // Remove duplicate vertex that might have been added by
+    // replaceMovedVertex.  This is done after the unzorro checks.
+    function removeDuplicateVertices(wayId, graph) {
+        var way = graph.entity(wayId);
+        var epsilon = 1e-6;
+        var prev, curr;
+
+        function isInteresting(node, graph) {
+            return graph.parentWays(node).length > 1 ||
+                graph.parentRelations(node).length ||
+                node.hasInterestingTags();
+        }
+
+        for (var i = 0; i < way.nodes.length; i++) {
+            curr = graph.entity(way.nodes[i]);
+
+            if (prev && curr && geoVecEqual(prev.loc, curr.loc, epsilon)) {
+                if (!isInteresting(prev, graph)) {
+                    way = way.removeNode(prev.id);
+                    graph = graph.replace(way).remove(prev);
+                } else if (!isInteresting(curr, graph)) {
+                    way = way.removeNode(curr.id);
+                    graph = graph.replace(way).remove(curr);
+                }
+            }
+
+            prev = curr;
+        }
+
+        return graph;
     }
 
 
@@ -264,6 +308,8 @@ export function actionMove(moveIds, tryDelta, projection, cache) {
             graph = replaceMovedVertex(obj.nodeId, obj.movedId, graph, _delta);
             graph = replaceMovedVertex(obj.nodeId, obj.unmovedId, graph, null);
             graph = unZorroIntersection(obj, graph);
+            graph = removeDuplicateVertices(obj.movedId, graph);
+            graph = removeDuplicateVertices(obj.unmovedId, graph);
         }
 
         return graph;
