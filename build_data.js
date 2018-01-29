@@ -1,12 +1,11 @@
 /* eslint-disable no-console */
-require = require('@std/esm')(module, { esm: 'js' }); // eslint-disable-line no-global-assign
-
-const _cloneDeep = require('lodash-es/cloneDeep').default;
-const _extend = require('lodash-es/extend').default;
-const _forEach = require('lodash-es/forEach').default;
-const _isEmpty = require('lodash-es/isEmpty').default;
-const _merge = require('lodash-es/merge').default;
-const _toPairs = require('lodash-es/toPairs').default;
+const requireESM = require('@std/esm')(module, { esm: 'js' });
+const _cloneDeep = requireESM('lodash-es/cloneDeep').default;
+const _extend = requireESM('lodash-es/extend').default;
+const _forEach = requireESM('lodash-es/forEach').default;
+const _isEmpty = requireESM('lodash-es/isEmpty').default;
+const _merge = requireESM('lodash-es/merge').default;
+const _toPairs = requireESM('lodash-es/toPairs').default;
 
 const fs = require('fs');
 const glob = require('glob');
