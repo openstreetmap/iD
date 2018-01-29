@@ -1,6 +1,7 @@
 import _extend from 'lodash-es/extend';
 import _map from 'lodash-es/map';
 import _some from 'lodash-es/some';
+import _uniq from 'lodash-es/uniq';
 
 import { osmEntity } from './entity';
 import { geoAngle, geoExtent } from '../geo';
@@ -73,7 +74,8 @@ _extend(osmNode.prototype, {
             }
         }
 
-        // swap cardinal for numeric directions
+        if (val === '') return [];
+
         var cardinal = {
             north: 0,               n: 0,
             northnortheast: 22,     nne: 22,
@@ -92,41 +94,56 @@ _extend(osmNode.prototype, {
             northwest: 315,         nw: 315,
             northnorthwest: 337,    nnw: 337
         };
-        if (cardinal[val] !== undefined) {
-            val = cardinal[val];
-        }
 
-        // if direction is numeric, return early
-        if (val !== '' && !isNaN(+val)) {
-            return [(+val)];
-        }
 
-        var lookBackward =
-            (this.tags['traffic_sign:backward'] || val === 'backward' || val === 'both' || val === 'all');
-        var lookForward =
-            (this.tags['traffic_sign:forward'] || val === 'forward' || val === 'both' || val === 'all');
+        var values = val.split(';');
+        var results = [];
 
-        if (!lookForward && !lookBackward) return [];
+        values.forEach(function(v) {
+            // swap cardinal for numeric directions
+            if (cardinal[v] !== undefined) {
+                v = cardinal[v];
+            }
 
-        var nodeIds = {};
-        resolver.parentWays(this).forEach(function(parent) {
-            var nodes = parent.nodes;
-            for (i = 0; i < nodes.length; i++) {
-                if (nodes[i] === this.id) {  // match current entity
-                    if (lookForward && i > 0) {
-                        nodeIds[nodes[i - 1]] = true;  // look back to prev node
-                    }
-                    if (lookBackward && i < nodes.length - 1) {
-                        nodeIds[nodes[i + 1]] = true;  // look ahead to next node
+            // numeric direction - just add to results
+            if (v !== '' && !isNaN(+v)) {
+                results.push(+v);
+                return;
+            }
+
+            // string direction - inspect parent ways
+            var lookBackward =
+                (this.tags['traffic_sign:backward'] || v === 'backward' || v === 'both' || v === 'all');
+            var lookForward =
+                (this.tags['traffic_sign:forward'] || v === 'forward' || v === 'both' || v === 'all');
+
+            if (!lookForward && !lookBackward) return;
+
+            var nodeIds = {};
+            resolver.parentWays(this).forEach(function(parent) {
+                var nodes = parent.nodes;
+                for (i = 0; i < nodes.length; i++) {
+                    if (nodes[i] === this.id) {  // match current entity
+                        if (lookForward && i > 0) {
+                            nodeIds[nodes[i - 1]] = true;  // look back to prev node
+                        }
+                        if (lookBackward && i < nodes.length - 1) {
+                            nodeIds[nodes[i + 1]] = true;  // look ahead to next node
+                        }
                     }
                 }
-            }
+            }, this);
+
+            Object.keys(nodeIds).forEach(function(nodeId) {
+                // +90 because geoAngle returns angle from X axis, not Y (north)
+                results.push(
+                    (geoAngle(this, resolver.entity(nodeId), projection) * (180 / Math.PI)) + 90
+                );
+            }, this);
+
         }, this);
 
-        return Object.keys(nodeIds).map(function(nodeId) {
-            // +90 because geoAngle returns angle from X axis, not Y (north)
-            return (geoAngle(this, resolver.entity(nodeId), projection) * (180 / Math.PI)) + 90;
-        }, this);
+        return _uniq(results);
     },
 
 
