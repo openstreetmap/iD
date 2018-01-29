@@ -655,7 +655,7 @@
             "untagged_area_tooltip": "Select a feature type that describes what this area is.",
             "untagged_relation": "Untagged relation",
             "untagged_relation_tooltip": "Select a feature type that describes what this relation is.",
-            "many_deletions": "You're deleting {n} features. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
+            "many_deletions": "You're deleting {n} features: {p} nodes, {l} lines, {a} areas, {r} relations. Are you sure you want to do this? This will delete them from the map that everyone else sees on openstreetmap.org.",
             "tag_suggests_area": "The tag {tag} suggests line should be area, but it is not an area",
             "deprecated_tags": "Deprecated tags: {tags}"
         },
