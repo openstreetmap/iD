@@ -9,9 +9,9 @@ export function validationManyDeletions() {
         var nodes=0, ways=0, relations=0;
 
         changes.deleted.forEach(function(c) {
-            if (c.type == 'relation') {relations++}
-            if (c.type == 'way') {ways++}
             if (c.type == 'node') {nodes++}
+            else if (c.type == 'way') {ways++}
+            else if (c.type == 'relation') {relations++}
         });
         if (changes.deleted.length > threshold) {
             warnings.push({
