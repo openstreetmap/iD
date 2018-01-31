@@ -1042,8 +1042,8 @@ en:
         delete: "Delete selected features"
       commands:
         title: "Commands"
-        copy: "Copy selected features"
-        paste: "Paste copied features"
+        copy: "Copy selected features and tags"
+        paste: "Paste copied features or tags"
         undo: "Undo last action"
         redo: "Redo last action"
         save: "Save changes"
