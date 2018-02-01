@@ -28,6 +28,93 @@ _Breaking changes, which may affect downstream projects or sites that embed iD, 
 [@xxxx]: https://github.com/xxxx
 -->
 
+# 2.6.1
+##### February 1, 2018
+
+#### :tada: New Features
+* Add Esri World Imagery (Clarity) layer ([editor-layer-index#391], thanks [@jgravois])
+* Support multiple semicolon delimited direction values ([#4755])
+* No longer imply `oneway=yes` for `highway=motorway_link` without a `oneway` tag ([#4727])
+
+[editor-layer-index#391]: https://github.com/osmlab/editor-layer-index/pull/391
+[#4755]: https://github.com/openstreetmap/iD/issues/4755
+[#4727]: https://github.com/openstreetmap/iD/issues/4727
+[@jgravois]: https://github.com/jgravois
+
+#### :sparkles: Usability
+* Replace help icon ([#4650])
+* Improve details of delete summary warning ([#4666], [#4751], thanks [@bencostamagna])
+* Support fallback mode for Mapillary viewer when WebGL disabled ([#3804])
+* Hide the active vertex while drawing in wireframe mode ([#4739])
+* Describe relation in tooltip in add membership list ([#4694], thanks [@1ec5])
+* Persist more user preferences to browser storage ([#2864], [#4720], [#4738], thanks [@bagage])
+  * wireframe area fill
+  * recently used background imagery
+  * selected feature filters
+* Increase GPX labels readability ([#4617], [#4678], thanks [@nnodot])
+* Draw covered/underground lines beneath areas ([#4718])
+
+[#4751]: https://github.com/openstreetmap/iD/issues/4751
+[#4739]: https://github.com/openstreetmap/iD/issues/4739
+[#4738]: https://github.com/openstreetmap/iD/issues/4738
+[#4720]: https://github.com/openstreetmap/iD/issues/4720
+[#4718]: https://github.com/openstreetmap/iD/issues/4718
+[#4694]: https://github.com/openstreetmap/iD/issues/4694
+[#4678]: https://github.com/openstreetmap/iD/issues/4678
+[#4666]: https://github.com/openstreetmap/iD/issues/4666
+[#4650]: https://github.com/openstreetmap/iD/issues/4650
+[#4617]: https://github.com/openstreetmap/iD/issues/4617
+[#3804]: https://github.com/openstreetmap/iD/issues/3804
+[#2864]: https://github.com/openstreetmap/iD/issues/2864
+[@bencostamagna]: https://github.com/bencostamagna
+[@1ec5]: https://github.com/1ec5
+[@bagage]: https://github.com/bagage
+[@nnodot]: https://github.com/nnodot
+
+#### :bug: Bugfixes
+* Remove any duplicate vertex created when moving a way ([#4433], [#3797])
+* Fix way shape deformation when moving ([#4146])
+* Stop sequence from playing when the Mapillary viewer is hidden ([#4707])
+* Graceful fallback when clicking on a Mapillary marker along a sequence not yet processed ([#4536])
+* Fix bug making nodes undraggable along a degenerate multipolygon ([#4741])
+* Fix <kbd>⌘S</kbd>/<kbd>Ctrl+S</kbd> keybinding ([#4728])
+
+[#4741]: https://github.com/openstreetmap/iD/issues/4741
+[#4728]: https://github.com/openstreetmap/iD/issues/4728
+[#4707]: https://github.com/openstreetmap/iD/issues/4707
+[#4536]: https://github.com/openstreetmap/iD/issues/4536
+[#4433]: https://github.com/openstreetmap/iD/issues/4433
+[#4146]: https://github.com/openstreetmap/iD/issues/4146
+[#3797]: https://github.com/openstreetmap/iD/issues/3797
+
+#### :earth_asia: Localization
+* Localize nominatim search results ([#4725])
+* Localize numbers, units in scale, info panels ([#4672], thanks [@1ec5])
+
+[#4725]: https://github.com/openstreetmap/iD/issues/4725
+[#4672]: https://github.com/openstreetmap/iD/issues/4672
+[@1ec5]: https://github.com/1ec5
+
+#### :rocket: Presets
+* Remove address field from parking preset ([#4748], [#4756], thanks [@bencostamagna])
+* Add preset for `barrier=kerb` ([#4702], [#4715], thanks [@jay-manday])
+* Add preset for `amenity=smoking_area` ([#4701], [#4737], thanks [@bencostamagna])
+* Add preset for `emergency=water_tank` ([#4736], thanks [@bencostamagna])
+* Add religion, denomination fields to school preset ([#4722])
+* Add religion, denomination fields to religious landuse preset ([#4721])
+
+[#4756]: https://github.com/openstreetmap/iD/issues/4756
+[#4748]: https://github.com/openstreetmap/iD/issues/4748
+[#4737]: https://github.com/openstreetmap/iD/issues/4737
+[#4736]: https://github.com/openstreetmap/iD/issues/4736
+[#4722]: https://github.com/openstreetmap/iD/issues/4722
+[#4721]: https://github.com/openstreetmap/iD/issues/4721
+[#4715]: https://github.com/openstreetmap/iD/issues/4715
+[#4702]: https://github.com/openstreetmap/iD/issues/4702
+[#4701]: https://github.com/openstreetmap/iD/issues/4701
+[@bencostamagna]: https://github.com/bencostamagna
+[@jay-manday]: https://github.com/jay-manday
+
 
 # 2.6.0
 ##### January 21, 2018
